@@ -35,35 +35,46 @@
 
 import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { act, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementContent } from "./TagManagement.content";
 import {
+  useCreateTagMutation,
   useRemoveTagMutation,
+  useUpdateTag,
   useUpdateTagNameMutation,
 } from "./hooks/useTagsQuery";
-import { TAGS_QUERY_KEY } from "./TagManagement.constants";
+import {
+  TAG_RENAME_MUTATION_KEY,
+  TAGS_QUERY_KEY,
+} from "./TagManagement.constants";
 import type { AccessTagManagement } from "./TagManagement.types";
 
-const { addTagsToRoom, removeTagsFromRoom, updateTagName, removeTagRequest } =
-  vi.hoisted(() => ({
-    addTagsToRoom: vi.fn(() => Promise.resolve()),
-    removeTagsFromRoom: vi.fn(() => Promise.resolve()),
-    updateTagName: vi.fn(() => Promise.resolve()),
-    removeTagRequest: vi.fn(() => Promise.resolve()),
-  }));
+const {
+  addTagsToRoom,
+  removeTagsFromRoom,
+  updateTagName,
+  removeTagRequest,
+  getTags,
+} = vi.hoisted(() => ({
+  addTagsToRoom: vi.fn(() => Promise.resolve()),
+  removeTagsFromRoom: vi.fn(() => Promise.resolve()),
+  updateTagName: vi.fn(() => Promise.resolve()),
+  removeTagRequest: vi.fn(() => Promise.resolve()),
+  // The query is the source of truth for which tags exist, so refetching must
+  // return the same list the cache is seeded with.
+  getTags: vi.fn(() => Promise.resolve(["boundTag", "freeTag"])),
+}));
 
 vi.mock("../../api/rooms", () => ({
   addTagsToRoom,
   removeTagsFromRoom,
   updateTagName,
   removeTagRequest,
-  // The query is the source of truth for which tags exist, so refetching must
-  // return the same list the cache is seeded with.
-  getTags: vi.fn(() => Promise.resolve(["boundTag", "freeTag"])),
+  getTags,
 }));
 
 vi.mock("@docspace/ui-kit/hooks/use-is-mobile", () => ({
@@ -123,8 +134,10 @@ const renderContent = (
   );
 
 type MutationHandlers = {
-  rename: VoidFunction;
+  rename: (oldLabel?: string, newLabel?: string) => void;
   remove: (label?: string) => void;
+  create: (label: string) => Promise<unknown>;
+  bind: (label: string, checked: boolean) => Promise<unknown>;
 };
 
 // Stands in for the room row that owns the rename/delete mutations: it starts
@@ -136,17 +149,28 @@ const MutationStarter = ({
 }) => {
   const rename = useUpdateTagNameMutation();
   const remove = useRemoveTagMutation();
+  const create = useCreateTagMutation(ROOM_ID);
+  const bind = useUpdateTag(ROOM_ID);
 
   onReady({
-    rename: () => rename.mutate({ oldLabel: "freeTag", newLabel: "renamed" }),
+    rename: (oldLabel = "freeTag", newLabel = "renamed") =>
+      rename.mutate({ oldLabel, newLabel }),
     remove: (label = "boundTag") => remove.mutate(label),
+    create: (label: string) => create.mutateAsync(label),
+    bind: (label: string, checked: boolean) =>
+      bind.mutateAsync({ label, checked }),
   });
 
   return null;
 };
 
 const renderMutationStarter = (queryClient: QueryClient) => {
-  const handlers: MutationHandlers = { rename: () => {}, remove: () => {} };
+  const handlers: MutationHandlers = {
+    rename: () => {},
+    remove: () => {},
+    create: () => Promise.resolve(),
+    bind: () => Promise.resolve(),
+  };
 
   const view = render(
     <QueryClientProvider client={queryClient}>
@@ -154,6 +178,8 @@ const renderMutationStarter = (queryClient: QueryClient) => {
         onReady={(next) => {
           handlers.rename = next.rename;
           handlers.remove = next.remove;
+          handlers.create = next.create;
+          handlers.bind = next.bind;
         }}
       />
     </QueryClientProvider>,
@@ -162,13 +188,22 @@ const renderMutationStarter = (queryClient: QueryClient) => {
   return { handlers, unmount: view.unmount };
 };
 
+// The labels of the rows, top to bottom.
+const rowLabels = () =>
+  screen
+    .getAllByTestId(/^tag_row_/)
+    .map((row) => row.getAttribute("data-testid")?.replace("tag_row_", ""));
+
 // The test id sits on the wrapper, the checked state on the input inside it.
 const getCheckbox = (label: string) =>
   within(screen.getByTestId(`tag_row_${label}`)).getByRole("checkbox");
 
 describe("<TagManagementContent />", () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    // reset, not clear: a test that installs a deferred implementation with
+    // mockImplementation would otherwise leave it in place and hang every
+    // request the tests after it make.
+    vi.resetAllMocks();
   });
 
   it("binds the tag to the room when the row is clicked", async () => {
@@ -589,5 +624,166 @@ describe("<TagManagementContent />", () => {
 
     list.unmount();
     starter.unmount();
+  });
+  it("keeps a freshly created tag unbound once it is unchecked", async () => {
+    const queryClient = createQueryClient();
+    const starter = renderMutationStarter(queryClient);
+    const list = renderContent(fullAccess, queryClient);
+
+    await act(async () => {
+      await starter.handlers.create("fresh");
+    });
+
+    await waitFor(() => expect(getCheckbox("fresh")).toBeChecked());
+
+    // The create record says "bound", the later unbind says otherwise - and it
+    // is the newer statement about the same label.
+    await act(async () => {
+      await starter.handlers.bind("fresh", false);
+    });
+
+    await waitFor(() => expect(removeTagsFromRoom).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(getCheckbox("fresh")).not.toBeChecked());
+
+    list.unmount();
+    starter.unmount();
+  });
+
+  it("lists a tag under its own name again after it is renamed back", async () => {
+    const queryClient = createQueryClient();
+    const starter = renderMutationStarter(queryClient);
+
+    starter.handlers.rename("freeTag", "renamed");
+    await waitFor(() =>
+      expect(queryClient.getQueryData(TAGS_QUERY_KEY)).toContain("renamed"),
+    );
+
+    starter.handlers.rename("renamed", "freeTag");
+    await waitFor(() =>
+      expect(queryClient.getQueryData(TAGS_QUERY_KEY)).toContain("freeTag"),
+    );
+
+    // Both rename records are still in the cache. The first one no longer
+    // describes anything: the query calls the tag "freeTag" again.
+    const list = renderContent(fullAccess, queryClient);
+
+    expect(await screen.findByTestId("tag_item_freeTag")).toBeInTheDocument();
+    expect(screen.queryByTestId("tag_item_renamed")).not.toBeInTheDocument();
+
+    list.unmount();
+    starter.unmount();
+  });
+
+  it("shows a deleted tag again when a tag of that name is created anew", async () => {
+    const queryClient = createQueryClient();
+    const starter = renderMutationStarter(queryClient);
+
+    starter.handlers.remove("freeTag");
+
+    await waitFor(() =>
+      expect(queryClient.getQueryData(TAGS_QUERY_KEY)).not.toContain("freeTag"),
+    );
+
+    // Another room creates a tag of the same name, so the query has it back.
+    // The delete record is stale from here on and must not hide it.
+    act(() => {
+      queryClient.setQueryData(TAGS_QUERY_KEY, ["boundTag", "freeTag"]);
+    });
+
+    const list = renderContent(fullAccess, queryClient);
+
+    expect(await screen.findByTestId("tag_item_freeTag")).toBeInTheDocument();
+
+    list.unmount();
+    starter.unmount();
+  });
+  it("keeps the row in place when the tag is unbound and the host catches up", async () => {
+    const queryClient = createQueryClient();
+    // The room carries the tag the query lists last, so the two sources
+    // disagree about the order - which is what makes the row move. The refetch
+    // on mount has to answer with that same order.
+    getTags.mockResolvedValue(["freeTag", "boundTag"]);
+    queryClient.setQueryData(TAGS_QUERY_KEY, ["freeTag", "boundTag"]);
+
+    const { rerender } = render(
+      <QueryClientProvider client={queryClient}>
+        <TagList access={fullAccess} roomTags={["boundTag"]} />
+      </QueryClientProvider>,
+    );
+
+    await screen.findByTestId("tag_item_boundTag");
+    expect(rowLabels()).toEqual(["boundTag", "freeTag"]);
+
+    await userEvent.click(screen.getByTestId("tag_row_boundTag"));
+    await waitFor(() => expect(removeTagsFromRoom).toHaveBeenCalledTimes(1));
+
+    // The host reloads the room, which no longer reports the tag.
+    rerender(
+      <QueryClientProvider client={queryClient}>
+        <TagList access={fullAccess} roomTags={[]} />
+      </QueryClientProvider>,
+    );
+
+    await waitFor(() => expect(getCheckbox("boundTag")).not.toBeChecked());
+    expect(rowLabels()).toEqual(["boundTag", "freeTag"]);
+  });
+
+  it("keeps the row in place when the tag is renamed", async () => {
+    const queryClient = createQueryClient();
+    // Same disagreement as above: the room lists its tag first, the query lists
+    // it last, so a row that loses its position would visibly move.
+    getTags.mockResolvedValue(["freeTag", "boundTag"]);
+    queryClient.setQueryData(TAGS_QUERY_KEY, ["freeTag", "boundTag"]);
+
+    const starter = renderMutationStarter(queryClient);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <TagList access={fullAccess} roomTags={["boundTag"]} />
+      </QueryClientProvider>,
+    );
+
+    await screen.findByTestId("tag_item_boundTag");
+    expect(rowLabels()).toEqual(["boundTag", "freeTag"]);
+
+    starter.handlers.rename("boundTag", "renamed");
+
+    await waitFor(() => expect(rowLabels()).toEqual(["renamed", "freeTag"]));
+
+    starter.unmount();
+  });
+  it("keeps the rename record past the default gc window", async () => {
+    // The record is the only thing that can tell the list the name the room
+    // still reports and the one the query already has are the same tag, and the
+    // host is free never to reload the room - the client passes no
+    // onTagsChanged. If the record is collected on the default five-minute
+    // schedule, the tag starts being listed twice, under both names.
+    vi.useFakeTimers();
+
+    try {
+      const queryClient = createQueryClient();
+      const starter = renderMutationStarter(queryClient);
+
+      starter.handlers.rename("freeTag", "renamed");
+
+      // Settles on microtasks, which fake timers do not hold up.
+      await act(async () => {});
+
+      expect(queryClient.getQueryData(TAGS_QUERY_KEY)).toContain("renamed");
+
+      starter.unmount();
+
+      await act(async () => {
+        vi.advanceTimersByTime(6 * 60 * 1000);
+      });
+
+      expect(
+        queryClient
+          .getMutationCache()
+          .find({ mutationKey: TAG_RENAME_MUTATION_KEY }),
+      ).toBeDefined();
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });

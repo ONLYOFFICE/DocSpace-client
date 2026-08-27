@@ -123,19 +123,16 @@ export const TagManagement: FC<TagManagementProps> = ({
 
       if (!confirmed) return;
 
-      try {
-        await updateTagName.mutateAsync({
-          oldLabel,
-          newLabel,
-        });
-        // Only the global tag list is updated optimistically. Without reloading
-        // the room, its own tags keep the old label and unionTagsData shows it
-        // again next to the new one the next time the list is opened.
-        onTagsChanged?.();
-      } catch (error) {
-        console.error("Failed to update tag name:", error);
-        throw error;
-      }
+      // Rejects to the caller, which reports it - nothing to catch here.
+      await updateTagName.mutateAsync({
+        oldLabel,
+        newLabel,
+      });
+
+      // Only the global tag list is updated optimistically. Without reloading
+      // the room, its own tags keep the old label and unionTagsData shows it
+      // again next to the new one the next time the list is opened.
+      onTagsChanged?.();
     },
     [requestConfirmation, updateTagName, onTagsChanged],
   );
@@ -148,28 +145,25 @@ export const TagManagement: FC<TagManagementProps> = ({
 
       if (!confirmed) return;
 
-      try {
-        await removeTag.mutateAsync(tag);
-        // Same reason as in confirmEditTag: the room still carries the tag that
-        // no longer exists until it is reloaded.
-        onTagsChanged?.();
-        toastr.success(
-          <Trans
-            t={t}
-            i18nKey="RemoveTag"
-            ns="Common"
-            components={{
-              1: <strong key="removed-tag" />,
-            }}
-            values={{
-              tag,
-            }}
-          />,
-        );
-      } catch (error) {
-        console.error("Failed to delete tag:", error);
-        throw error;
-      }
+      await removeTag.mutateAsync(tag);
+
+      // Same reason as in confirmEditTag: the room still carries the tag that
+      // no longer exists until it is reloaded.
+      onTagsChanged?.();
+
+      toastr.success(
+        <Trans
+          t={t}
+          i18nKey="RemoveTag"
+          ns="Common"
+          components={{
+            1: <strong key="removed-tag" />,
+          }}
+          values={{
+            tag,
+          }}
+        />,
+      );
     },
     [requestDeleteConfirmation, removeTag, onTagsChanged, t],
   );

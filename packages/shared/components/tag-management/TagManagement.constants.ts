@@ -57,11 +57,14 @@ export const getTagBindMutationKey = (roomId: string | number) => [
 ];
 
 // How long a settled rename or delete is kept in the mutation cache. That
-// record is the only thing linking the name the room still reports to the one
-// the tags query already has, so it has to outlive the host's stale copy - the
-// default five minutes turned out to be shorter than that, and the tag showed
-// up twice once the record expired. Bounded on purpose: after this the list
-// falls back to whatever the two sources say.
+// record is the only thing that can tell the list the name the room still
+// reports and the one the tags query already has are the same tag - the two
+// sources cannot work it out on their own, and the host is not required to
+// reload the room at all (the client passes no onTagsChanged), so the stale
+// copy can outlive any short window. The default five minutes is shorter than
+// that, and once the record expires the tag is listed twice, under both names.
+// Bounded anyway rather than kept forever, which useRoomTagList can afford:
+// it ignores a record that no longer matches what the query says.
 export const TAG_MUTATION_RECORD_GC_TIME = 30 * 60 * 1000;
 
 // Creating a tag also binds it to the room it was created from.
@@ -81,3 +84,10 @@ export const EDIT_TAG_MODAL_ID = "edit-tag-modal";
 export const DELETE_TAG_DONT_SHOW_AGAIN_KEY = "delete-tag-dont-show-again";
 export const DELETE_TAG_MODAL_ID = "delete-tag-modal";
 export const EDIT_TAG_FORM_NAME = "edit-tag-form";
+
+// Separators for the key the room tags are hashed into. Control characters are
+// used because a tag label can contain anything printable: with a space or a
+// comma, ["a b"] and ["a", "b"] would produce the same key. Written as escapes
+// on purpose - a raw byte here makes the file binary to git and grep.
+export const KEY_FIELD_SEPARATOR = "\u0001";
+export const KEY_ENTRY_SEPARATOR = "\u0000";

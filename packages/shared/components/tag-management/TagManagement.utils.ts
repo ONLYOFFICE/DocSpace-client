@@ -37,7 +37,15 @@ import isString from "lodash/isString";
 
 import type { TagType } from "@docspace/ui-kit/components/tag";
 
-import type { TTag } from "./TagManagement.types";
+import type {
+  MutationSnapshot,
+  TTag,
+  UpdateTagNameParams,
+} from "./TagManagement.types";
+import {
+  KEY_ENTRY_SEPARATOR,
+  KEY_FIELD_SEPARATOR,
+} from "./TagManagement.constants";
 
 export function transformTagsData(
   roomTags: Array<TagType | string | TTag>,
@@ -118,3 +126,50 @@ export const promiseWithResolvers = <T>() => {
     reject: reject!,
   };
 };
+
+export const isTag = (variables: unknown): variables is TTag =>
+  typeof variables === "object" &&
+  variables !== null &&
+  "label" in variables &&
+  typeof variables.label === "string" &&
+  "checked" in variables &&
+  typeof variables.checked === "boolean";
+
+export const isUpdateTagNameParams = (
+  variables: unknown,
+): variables is UpdateTagNameParams =>
+  typeof variables === "object" &&
+  variables !== null &&
+  "oldLabel" in variables &&
+  typeof variables.oldLabel === "string" &&
+  "newLabel" in variables &&
+  typeof variables.newLabel === "string";
+
+export const selectSnapshot = (mutation: {
+  state: { variables: unknown; status: string };
+}): MutationSnapshot => ({
+  variables: mutation.state.variables,
+  isPending: mutation.state.status === "pending",
+});
+
+// A mutation counts towards the overlay while it runs and after it succeeded:
+// its effect is real from the moment it is sent, and it stays true until the
+// server data catches up. Failed ones drop out, which is the rollback.
+export const isApplied = (mutation: { state: { status: string } }) =>
+  mutation.state.status === "pending" || mutation.state.status === "success";
+
+/**
+ * The room tags flattened into a string.
+ *
+ * `roomTags` comes from the host's store and can be an array that is mutated in
+ * place, so its identity is not a reliable signal that it changed. This is what
+ * a derivation over it can be keyed on instead.
+ */
+export const roomTagsToKey = (roomTags: Array<TagType | string>) =>
+  roomTags
+    .map((tag) =>
+      typeof tag === "string"
+        ? tag
+        : `${tag.label}${KEY_FIELD_SEPARATOR}${tag.isDefault ? 1 : 0}`,
+    )
+    .join(KEY_ENTRY_SEPARATOR);

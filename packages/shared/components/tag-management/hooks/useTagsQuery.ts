@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import {
   useQuery,
   useMutation,
@@ -51,8 +51,21 @@ import {
 
 import type { TagType } from "@docspace/ui-kit/components/tag";
 
-import type { TTag, UpdateTagNameParams } from "../TagManagement.types";
-import { unionTagsData } from "../TagManagement.utils";
+import type {
+  RoomTagList,
+  TagMutationOverlay,
+  TagRename,
+  TTag,
+  UpdateTagNameParams,
+} from "../TagManagement.types";
+import {
+  isApplied,
+  isTag,
+  isUpdateTagNameParams,
+  roomTagsToKey,
+  selectSnapshot,
+  unionTagsData,
+} from "../TagManagement.utils";
 import {
   TAGS_QUERY_KEY,
   TAG_RENAME_MUTATION_KEY,
@@ -75,8 +88,10 @@ export function useUpdateTagNameMutation() {
 
   return useMutation({
     mutationKey: TAG_RENAME_MUTATION_KEY,
+
     // This record is what tells the list that the room's old name and the
-    // query's new one are the same tag - see the constant.
+    // query's new one are the same tag, so it has to outlive the host's stale
+    // copy of the room - see the constant.
     gcTime: TAG_MUTATION_RECORD_GC_TIME,
 
     mutationFn: ({ oldLabel, newLabel }: UpdateTagNameParams) =>
@@ -133,9 +148,9 @@ export function useRemoveTagMutation() {
   return useMutation({
     mutationKey: TAG_REMOVE_MUTATION_KEY,
 
-    // Same reason as the rename: the deleted tag stays in the room's own data
-    // until the host reloads it, and this record is what keeps it out of the
-    // list in the meantime.
+    // Same as the rename: the deleted tag stays in the room's own data until
+    // the host reloads it, and this record is what keeps it out of the list in
+    // the meantime.
     gcTime: TAG_MUTATION_RECORD_GC_TIME,
 
     mutationFn: (removeTag: string) => removeTagRequest([removeTag]),
@@ -170,55 +185,6 @@ export function useUpdateTag(roomId: string | number) {
     },
   });
 }
-
-const isTag = (variables: unknown): variables is TTag =>
-  typeof variables === "object" &&
-  variables !== null &&
-  "label" in variables &&
-  typeof variables.label === "string" &&
-  "checked" in variables &&
-  typeof variables.checked === "boolean";
-
-const isUpdateTagNameParams = (
-  variables: unknown,
-): variables is UpdateTagNameParams =>
-  typeof variables === "object" &&
-  variables !== null &&
-  "oldLabel" in variables &&
-  typeof variables.oldLabel === "string" &&
-  "newLabel" in variables &&
-  typeof variables.newLabel === "string";
-
-type MutationSnapshot = {
-  variables: unknown;
-  isPending: boolean;
-};
-
-const selectSnapshot = (mutation: {
-  state: { variables: unknown; status: string };
-}): MutationSnapshot => ({
-  variables: mutation.state.variables,
-  isPending: mutation.state.status === "pending",
-});
-
-// A mutation counts towards the overlay while it runs and after it succeeded:
-// its effect is real from the moment it is sent, and it stays true until the
-// server data catches up. Failed ones drop out, which is the rollback.
-const isApplied = (mutation: { state: { status: string } }) =>
-  mutation.state.status === "pending" || mutation.state.status === "success";
-
-export type TagMutationOverlay = {
-  /** Tags being created here, newest first, in the order they were started. */
-  created: readonly string[];
-  /** Tags a delete is running for or has already removed. */
-  removed: ReadonlySet<string>;
-  /** Old label -> new label for renames. */
-  renamed: ReadonlyMap<string, string>;
-  /** Label -> the room membership a bind is applying. */
-  bound: ReadonlyMap<string, boolean>;
-  /** Labels with an operation still in flight, under both their names. */
-  pending: ReadonlySet<string>;
-};
 
 /**
  * What the running (and just finished) mutations say about the tags, read from
@@ -264,14 +230,14 @@ export function useTagMutationOverlay(
   return useMemo(() => {
     const created: string[] = [];
     const removed = new Set<string>();
-    const renamed = new Map<string, string>();
+    const renamed = new Map<string, TagRename>();
     const bound = new Map<string, boolean>();
     const pending = new Set<string>();
 
     renaming.forEach(({ variables, isPending }) => {
       if (!isUpdateTagNameParams(variables)) return;
 
-      renamed.set(variables.oldLabel, variables.newLabel);
+      renamed.set(variables.oldLabel, { to: variables.newLabel, isPending });
 
       // Both names count as busy: until the room data catches up, the list can
       // still be showing either one.
@@ -304,18 +270,16 @@ export function useTagMutationOverlay(
       if (typeof variables !== "string") return;
 
       created.unshift(variables);
-      bound.set(variables, true);
+      // Only if no bind has spoken since: unbinding a tag right after creating
+      // it is a later decision about the same label, and a create record lives
+      // long enough to outlast it.
+      if (!bound.has(variables)) bound.set(variables, true);
       if (isPending) pending.add(variables);
     });
 
     return { created, removed, renamed, bound, pending };
   }, [renaming, removing, binding, creating]);
 }
-
-export type RoomTagList = {
-  tags: TTag[];
-  pendingLabels: ReadonlySet<string>;
-};
 
 /**
  * The tags of a room, derived - never stored.
@@ -337,57 +301,98 @@ export function useRoomTagList(
   const { created, removed, renamed, bound, pending } =
     useTagMutationOverlay(roomId);
 
-  // `roomTags` comes from the host's store and can be an array that is mutated
-  // in place, so its identity is not a reliable signal that it changed. Key the
-  // derivation on what it actually holds instead.
-  const roomTagsKey = roomTags
-    .map((tag) =>
-      typeof tag === "string"
-        ? tag
-        : `${tag.label}${tag.isDefault ? 1 : 0}`,
-    )
-    .join(" ");
+  // The position every label was first listed at, for as long as this list is
+  // open. Binding a tag moves it between the two sources - the room reports it
+  // or it does not - and unionTagsData lists the room's own tags first, so
+  // without this the row would jump the moment the host reloads the room after
+  // a toggle. Labels created here keep leading the list, under negative
+  // positions, even after they arrive through the query.
+  const orderRef = useRef({
+    positions: new Map<string, number>(),
+    nextTail: 0,
+    nextLead: 0,
+  });
+
+  // Keyed on what roomTags holds, not on its identity - see roomTagsToKey.
+  const roomTagsKey = roomTagsToKey(roomTags);
 
   const tags = useMemo(() => {
+    const order = orderRef.current;
     const result: TTag[] = [];
     const seen = new Set<string>();
+
+    const place = (label: string, lead: boolean) => {
+      if (order.positions.has(label)) return;
+
+      order.positions.set(
+        label,
+        lead ? (order.nextLead -= 1) : (order.nextTail += 1),
+      );
+    };
+
+    // What the query says exists right now. A rename or a delete record is only
+    // there to mask the room's stale copy of a tag, so it may be applied only
+    // while the query and the room actually disagree - see below.
+    const exists = new Set(fetchedTags);
+
+    // Placed oldest first, so that the newest create takes the smallest
+    // position and leads the list.
+    for (let i = created.length - 1; i >= 0; i -= 1) place(created[i], true);
 
     // A tag this room is creating leads the list before the server knows it.
     created.forEach((label) => {
       if (seen.has(label)) return;
 
       seen.add(label);
-      result.push({ label, checked: true });
+      // Created means bound, unless a bind has said otherwise since.
+      result.push({ label, checked: bound.get(label) ?? true });
     });
 
     unionTagsData(roomTags, fetchedTags).forEach((tag) => {
-      if (removed.has(tag.label)) return;
+      // A delete counts only while the query has already dropped the tag: if
+      // the label is back in the query it belongs to a tag created after this
+      // one was deleted, and hiding it would make a live tag invisible.
+      if (removed.has(tag.label) && !exists.has(tag.label)) return;
 
       // The room keeps the old name until the host reloads it, so the same tag
-      // would otherwise be listed twice - under both names. The overlay says
-      // which one won.
-      const label = renamed.get(tag.label) ?? tag.label;
+      // would otherwise be listed twice - under both names. A running rename is
+      // shown right away, under the name it is applying. A finished one counts
+      // only while the query has moved on and the room has not: once the tag is
+      // called by its old name again - renamed back, or recreated under it -
+      // the record describes something that is no longer true.
+      const rename = renamed.get(tag.label);
+      const label =
+        rename !== undefined &&
+        (rename.isPending ||
+          (!exists.has(tag.label) && exists.has(rename.to)))
+          ? rename.to
+          : tag.label;
 
       if (seen.has(label)) return;
       seen.add(label);
+
+      // A rename keeps the row where it was: it is the same tag under a new
+      // name, and the new name is a position of its own otherwise.
+      const previous = order.positions.get(tag.label);
+
+      if (label !== tag.label && previous !== undefined) {
+        if (!order.positions.has(label)) order.positions.set(label, previous);
+      } else {
+        place(label, false);
+      }
 
       const checked = bound.get(label) ?? bound.get(tag.label) ?? tag.checked;
 
       result.push({ label, checked });
     });
 
-    return result;
+    return result.sort(
+      (a, b) =>
+        (order.positions.get(a.label) ?? 0) -
+        (order.positions.get(b.label) ?? 0),
+    );
     // roomTagsKey stands in for roomTags: see above.
-  }, [
-    roomTagsKey,
-    roomTags,
-    fetchedTags,
-    created,
-    removed,
-    renamed,
-    bound,
-    pending,
-  ]);
+  }, [roomTagsKey, roomTags, fetchedTags, created, removed, renamed, bound]);
 
   return { tags, pendingLabels: pending };
 }

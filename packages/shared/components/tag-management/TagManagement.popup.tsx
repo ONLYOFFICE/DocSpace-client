@@ -155,6 +155,11 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
         .with("pending", () => <TagManagementLoader />)
         .with("success", () => (
           <TagManagementProvider
+            // Keyed by the room: the mutation-cache filters the list reads are
+            // built from `roomId`, and react-query only re-evaluates them on
+            // the next cache event - remounting keeps a reused popup from
+            // showing another room's progress until then.
+            key={roomId}
             roomTags={roomTags}
             roomId={roomId}
             access={access}

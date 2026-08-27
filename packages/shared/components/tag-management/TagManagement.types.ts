@@ -132,3 +132,33 @@ export interface FormValues {
   [EDIT_TAG_FORM_NAME]: string;
 }
 
+/** One mutation as the tag list reads it out of the mutation cache. */
+export type MutationSnapshot = {
+  variables: unknown;
+  isPending: boolean;
+};
+
+/** A rename, and whether its request is still running. */
+export type TagRename = {
+  to: string;
+  isPending: boolean;
+};
+
+/** What the running (and just finished) mutations say about the tags. */
+export type TagMutationOverlay = {
+  /** Tags being created here, the most recently started one first. */
+  created: readonly string[];
+  /** Tags a delete has already gone through for. */
+  removed: ReadonlySet<string>;
+  /** Old label -> the rename applying to it. */
+  renamed: ReadonlyMap<string, TagRename>;
+  /** Label -> the room membership a bind is applying. */
+  bound: ReadonlyMap<string, boolean>;
+  /** Labels with an operation still in flight, under both their names. */
+  pending: ReadonlySet<string>;
+};
+
+export type RoomTagList = {
+  tags: TTag[];
+  pendingLabels: ReadonlySet<string>;
+};

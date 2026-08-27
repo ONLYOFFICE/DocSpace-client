@@ -117,8 +117,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   );
 
   const handleEdit = useCallback(
-    (event: React.MouseEvent<HTMLDivElement, MouseEvent>, label: string) => {
-      stopPropagation(event);
+    (label: string) => {
       setEditingLabel(label);
 
       setValue(EDIT_TAG_FORM_NAME, label);
@@ -149,15 +148,15 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
 
       const flow = onEditTag?.(oldLabel, newLabel);
 
-      if (flow) {
-        // Step one of the flow only settles the confirmation dialog, before
-        // anything is sent - so a declined rename is a value, not an error.
-        const { value: confirmed } = await flow.next();
-
-        if (!confirmed) return;
-      }
-
       try {
+        if (flow) {
+          // Step one of the flow only settles the confirmation dialog, before
+          // anything is sent - so a declined rename is a value, not an error.
+          const { value: confirmed } = await flow.next();
+
+          if (!confirmed) return;
+        }
+
         cancelEdit();
         await flow?.next();
       } catch (error) {
@@ -169,21 +168,16 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   );
 
   const deleteTag = useCallback(
-    async (
-      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-      tag: string,
-    ) => {
-      stopPropagation(event);
-
+    async (tag: string) => {
       const flow = onDeleteTag?.(tag);
 
-      if (flow) {
-        const { value: confirmed } = await flow.next();
-
-        if (!confirmed) return;
-      }
-
       try {
+        if (flow) {
+          const { value: confirmed } = await flow.next();
+
+          if (!confirmed) return;
+        }
+
         await flow?.next();
       } catch (error) {
         console.error("Failed to remove room tag:", error);
@@ -249,6 +243,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                 {isPending ? (
                   <span
                     className={styles.checkboxLoader}
+                    style={{ width: LOADER_SIZE, height: LOADER_SIZE }}
                     data-testid={`tag_loader_${tag.label}`}
                   >
                     <Loader
@@ -326,7 +321,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                       onClick={(event) => {
                         stopPropagation(event);
                         if (isPending) return;
-                        handleEdit(event, tag.label);
+                        handleEdit(tag.label);
                       }}
                       dataTestId={`edit_tag_button_${tag.label}`}
                     />
@@ -339,7 +334,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                       onClick={(event) => {
                         stopPropagation(event);
                         if (isPending) return;
-                        deleteTag(event, tag.label);
+                        deleteTag(tag.label);
                       }}
                       dataTestId={`delete_tag_button_${tag.label}`}
                     />

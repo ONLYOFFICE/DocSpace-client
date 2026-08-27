@@ -218,6 +218,12 @@ const SAAS_PLANS: Plan[] = [
   },
 ];
 
+/**
+ * The standalone editions whose frames duplicate the Enterprise ones — they
+ * keep a single canary screenshot instead of a full set.
+ */
+const STANDALONE_CANARY_ONLY = ["community", "developer"];
+
 const STANDALONE_PLANS: Plan[] = [
   {
     // No licence: the open-source build, which sits on the free plan.
@@ -537,6 +543,20 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       await expect(planLine(page)).toHaveCount(0);
     }
 
+    // The apps subtitle follows the same rule as the plan line: it names the
+    // plan for a SaaS admin and stays neutral for everyone else, a standalone
+    // portal included. Both wordings share "includes apps for", so the same
+    // locator reads whichever one is on the page.
+    await expect(
+      page.locator(APPS_SECTION).getByText(/includes apps for/),
+    ).toHaveText(
+      role.isAdminOrOwner && !edition.standalone
+        ? new RegExp(
+            `Your ${plan.isPaid ? "Business" : "Startup"} plan includes`,
+          )
+        : /Your workspace includes/,
+    );
+
     // Developer Tools, and the integrations card that advertises Docs Connect
     // inside it, appear together - the second asks the same question as the
     // first. Docs Connect is SaaS-only on top of that, whoever is asking, and
@@ -636,14 +656,17 @@ for (const edition of EDITIONS) {
               ai,
               devToolsLimited: false,
               viewport: DESKTOP,
-              // Developer is Enterprise plus a flag this page never reads, so
-              // its frames are the Enterprise ones pixel for pixel. One of them
-              // is kept as a canary - the day the page starts telling the two
-              // apart, it fails and the rest of the audience gets its own
-              // baselines then. The assertions above run for every case either
-              // way.
+              // A standalone portal is offered no billing at all, so its three
+              // editions render pixel for pixel alike - the plan line and the
+              // plan-named subtitle, the only things that could tell them
+              // apart, are both dropped there. Enterprise carries the full set
+              // of frames and the other two keep one canary each; the day the
+              // page starts telling them apart, the canary fails and the rest
+              // of the audience gets its own baselines then. Every case runs
+              // every assertion above either way.
               withScreenshot:
-                plan.key !== "developer" || (ai.enabled && role === ROLES[0]),
+                !STANDALONE_CANARY_ONLY.includes(plan.key) ||
+                (ai.enabled && role === ROLES[0]),
               screenshot: `${edition.key}-${plan.key}-ai-${ai.key}-${role.key}.png`,
             });
           }

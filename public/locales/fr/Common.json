@@ -650,7 +650,7 @@
   "DisconnectCloudTitle": "Déconnecter le cloud",
   "DiscoverApps": "Découvrez les applications",
   "DiscoverAppsDescription": "Votre plan tarifaire {{planName}} comprend des applications de stockage, de gestion et d'automatisation des documents. Découvrez le rôle de chaque application ou lancez-vous directement.",
-  "DiscoverAppsWorkspaceDescription": "Votre espace de travail comprend des applications de stockage et de gestion des documents ainsi que d'automatisation des flux de travail documentaires. Découvrez ce que chaque application peut faire ou cliquez sur « Ouvrir » pour commencer à travailler.",
+  "DiscoverAppsWorkspaceDescription": "Votre espace de travail comprend des applications de stockage et de gestion des documents ainsi que d'automatisation des flux de travail documentaires. Découvrez ce que chaque application peut faire ou lancez-vous directement.",
   "DisplayFileExtension": "Afficher l'extension du fichier à côté du nom du fichier",
   "DisplaySettings": "Paramètres d'affichage",
   "DocsApiReference": "API {{organizationName}} {{docsName}}",

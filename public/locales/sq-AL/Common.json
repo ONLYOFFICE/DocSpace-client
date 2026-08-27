@@ -650,7 +650,7 @@
   "DisconnectCloudTitle": "Shkëputni renë",
   "DiscoverApps": "Zbuloni aplikacionet",
   "DiscoverAppsDescription": "Plani juaj {{planName}} përfshin aplikacione për ruajtjen, administrimin dhe automatizimin e dokumenteve. Shihni se çfarë bën secili aplikacion, ose filloni punën menjëherë.",
-  "DiscoverAppsWorkspaceDescription": "Hapësira juaj e punës përfshin aplikacione për ruajtjen, administrimin dhe automatizimin e rrjedhave të punës me dokumente. Shihni se çfarë mund të bëjë secili aplikacion ose klikoni «Hapni» për të filluar punën.",
+  "DiscoverAppsWorkspaceDescription": "Hapësira juaj e punës përfshin aplikacione për ruajtjen, administrimin dhe automatizimin e rrjedhave të punës me dokumente. Shihni se çfarë mund të bëjë secili aplikacion, ose filloni punën menjëherë.",
   "DisplayFileExtension": "Shfaqni zgjerimin e skedarit pranë emrit të skedarit\"",
   "DisplaySettings": "Cilësimet e ekranit",
   "DocsApiReference": "API e {{organizationName}} {{docsName}}",

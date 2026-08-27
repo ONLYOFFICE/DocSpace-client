@@ -650,7 +650,7 @@
   "DisconnectCloudTitle": "Isključi cloud",
   "DiscoverApps": "Otkrijte aplikacije",
   "DiscoverAppsDescription": "Vaš {{planName}} plan obuhvata aplikacije za čuvanje dokumenata, upravljanje njima i automatizaciju. Pogledajte šta svaka aplikacija radi ili odmah počnite sa radom.",
-  "DiscoverAppsWorkspaceDescription": "Vaš radni prostor obuhvata aplikacije za čuvanje dokumenata, upravljanje njima i automatizaciju tokova rada sa dokumentima. Pogledajte šta svaka aplikacija može da radi ili kliknite na „Otvori“ da biste počeli sa radom.",
+  "DiscoverAppsWorkspaceDescription": "Vaš radni prostor obuhvata aplikacije za čuvanje dokumenata, upravljanje njima i automatizaciju tokova rada sa dokumentima. Pogledajte šta svaka aplikacija može da radi ili odmah počnite sa radom.",
   "DisplayFileExtension": "Prikaz ekstenzije fajla pored imena fajla",
   "DisplaySettings": "Podešavanja Ekrana",
   "DocsApiReference": "{{organizationName}} {{docsName}} API",

@@ -650,7 +650,7 @@
   "DisconnectCloudTitle": "Odpojení cloudu",
   "DiscoverApps": "Prozkoumejte aplikace",
   "DiscoverAppsDescription": "Váš plán {{planName}} obsahuje aplikace pro ukládání, správu a automatizaci dokumentů. Podívejte se, co jednotlivé aplikace umí, nebo se do práce pusťte hned.",
-  "DiscoverAppsWorkspaceDescription": "Váš pracovní prostor obsahuje aplikace pro ukládání, správu a automatizaci dokumentových pracovních postupů. Podívejte se, co jednotlivé aplikace umí, nebo klikněte na „Otevřít“ a začněte pracovat.",
+  "DiscoverAppsWorkspaceDescription": "Váš pracovní prostor obsahuje aplikace pro ukládání, správu a automatizaci dokumentových pracovních postupů. Podívejte se, co jednotlivé aplikace umí, nebo se do práce pusťte hned.",
   "DisplayFileExtension": "Zobrazení přípony souboru vedle názvu souboru",
   "DisplaySettings": "Nastavení displeje",
   "DocsApiReference": "API {{organizationName}} {{docsName}}",

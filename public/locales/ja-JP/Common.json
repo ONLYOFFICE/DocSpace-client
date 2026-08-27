@@ -650,7 +650,7 @@
   "DisconnectCloudTitle": "クラウドの接続解除",
   "DiscoverApps": "アプリを見る",
   "DiscoverAppsDescription": "{{planName}}プランには、文書の保存、管理、自動化のためのアプリが含まれています。各アプリの機能をご確認いただくか、そのままご利用を開始してください。",
-  "DiscoverAppsWorkspaceDescription": "ワークスペースには、文書の保存、管理、および文書ワークフローの自動化のためのアプリが含まれています。各アプリの機能をご確認いただくか、「開く」をクリックして作業を開始してください。",
+  "DiscoverAppsWorkspaceDescription": "ワークスペースには、文書の保存、管理、および文書ワークフローの自動化のためのアプリが含まれています。各アプリの機能をご確認いただくか、そのままご利用を開始してください。",
   "DisplayFileExtension": "ファイル名の隣にファイル拡張子を表示する",
   "DisplaySettings": "表示設定",
   "DocsApiReference": "{{organizationName}} {{docsName}} API",

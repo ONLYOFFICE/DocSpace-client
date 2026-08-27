@@ -650,7 +650,7 @@
   "DisconnectCloudTitle": "Cloud-Verbindung trennen",
   "DiscoverApps": "Anwendungen entdecken",
   "DiscoverAppsDescription": "Ihr {{planName}}-Plan umfasst Anwendungen für die Speicherung, Verwaltung und Automatisierung von Dokumenten. Sehen Sie, was jede Anwendung kann, oder legen Sie direkt los.",
-  "DiscoverAppsWorkspaceDescription": "Ihr Arbeitsbereich umfasst Anwendungen für die Speicherung und Verwaltung von Dokumenten sowie die Automatisierung von Dokumenten-Workflows. Sehen Sie, was jede Anwendung kann, oder klicken Sie auf „Öffnen“, um mit der Arbeit zu beginnen.",
+  "DiscoverAppsWorkspaceDescription": "Ihr Arbeitsbereich umfasst Anwendungen für die Speicherung und Verwaltung von Dokumenten sowie die Automatisierung von Dokumenten-Workflows. Sehen Sie, was jede Anwendung kann, oder legen Sie direkt los.",
   "DisplayFileExtension": "Dateierweiterung neben dem Dateinamen anzeigen",
   "DisplaySettings": "Anzeigeeinstellungen",
   "DocsApiReference": "{{organizationName}} {{docsName}} API",

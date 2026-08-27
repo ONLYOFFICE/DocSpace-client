@@ -650,7 +650,7 @@
   "DisconnectCloudTitle": "Scollegare il cloud",
   "DiscoverApps": "Scopri le applicazioni",
   "DiscoverAppsDescription": "Il tuo piano {{planName}} include applicazioni per l'archiviazione, la gestione e l'automazione dei documenti. Scopri cosa fa ogni applicazione o inizia subito a lavorare.",
-  "DiscoverAppsWorkspaceDescription": "Il tuo spazio di lavoro include applicazioni per l'archiviazione, la gestione e l'automazione dei flussi di lavoro documentali. Scopri cosa può fare ogni applicazione o fai clic su «Apri» per iniziare a lavorare.",
+  "DiscoverAppsWorkspaceDescription": "Il tuo spazio di lavoro include applicazioni per l'archiviazione, la gestione e l'automazione dei flussi di lavoro documentali. Scopri cosa può fare ogni applicazione o inizia subito a lavorare.",
   "DisplayFileExtension": "Mostra l’estensione del file vicino al nome del file",
   "DisplaySettings": "Impostazioni di visualizzazione",
   "DocsApiReference": "API {{organizationName}} {{docsName}}",

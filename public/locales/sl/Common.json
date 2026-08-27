@@ -650,7 +650,7 @@
   "DisconnectCloudTitle": "Prekini povezavo z oblakom",
   "DiscoverApps": "Odkrijte aplikacije",
   "DiscoverAppsDescription": "Vaš paket {{planName}} vključuje aplikacije za shranjevanje dokumentov, njihovo upravljanje in avtomatizacijo. Oglejte si, kaj počne posamezna aplikacija, ali pa se dela lotite takoj.",
-  "DiscoverAppsWorkspaceDescription": "Vaš delovni prostor vključuje aplikacije za shranjevanje dokumentov, njihovo upravljanje in avtomatizacijo dokumentnih delovnih tokov. Oglejte si, kaj zmore posamezna aplikacija, ali kliknite »Odpri« in začnite delati.",
+  "DiscoverAppsWorkspaceDescription": "Vaš delovni prostor vključuje aplikacije za shranjevanje dokumentov, njihovo upravljanje in avtomatizacijo dokumentnih delovnih tokov. Oglejte si, kaj zmore posamezna aplikacija, ali pa se dela lotite takoj.",
   "DisplayFileExtension": "Prikaži pripono datoteke poleg imena datoteke",
   "DisplaySettings": "Nastavitve zaslona",
   "DocsApiReference": "API {{organizationName}} {{docsName}}",

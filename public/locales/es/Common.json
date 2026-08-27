@@ -650,7 +650,7 @@
   "DisconnectCloudTitle": "Desconectar nube",
   "DiscoverApps": "Descubra las aplicaciones",
   "DiscoverAppsDescription": "Su plan {{planName}} incluye aplicaciones para el almacenamiento, la gestión y la automatización de documentos. Vea qué hace cada aplicación o empiece a trabajar directamente.",
-  "DiscoverAppsWorkspaceDescription": "Su espacio de trabajo incluye aplicaciones para el almacenamiento, la gestión y la automatización de los flujos de trabajo con documentos. Vea qué puede hacer cada aplicación o haga clic en «Abrir» para empezar a trabajar.",
+  "DiscoverAppsWorkspaceDescription": "Su espacio de trabajo incluye aplicaciones para el almacenamiento, la gestión y la automatización de los flujos de trabajo con documentos. Vea qué puede hacer cada aplicación o empiece a trabajar directamente.",
   "DisplayFileExtension": "Mostrar la extensión del archivo junto al nombre del archivo",
   "DisplaySettings": "Ajustes de visualización",
   "DocsApiReference": "API de {{organizationName}} {{docsName}}",

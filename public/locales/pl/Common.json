@@ -650,7 +650,7 @@
   "DisconnectCloudTitle": "Odłącz chmurę",
   "DiscoverApps": "Poznaj aplikacje",
   "DiscoverAppsDescription": "Twój plan {{planName}} obejmuje aplikacje do przechowywania dokumentów, zarządzania nimi i automatyzacji. Sprawdź, co robi każda aplikacja, lub od razu zacznij pracę.",
-  "DiscoverAppsWorkspaceDescription": "Twoja przestrzeń robocza obejmuje aplikacje do przechowywania dokumentów, zarządzania nimi i automatyzacji obiegu dokumentów. Sprawdź, co potrafi każda aplikacja, lub kliknij „Otwórz”, aby rozpocząć pracę.",
+  "DiscoverAppsWorkspaceDescription": "Twoja przestrzeń robocza obejmuje aplikacje do przechowywania dokumentów, zarządzania nimi i automatyzacji obiegu dokumentów. Sprawdź, co potrafi każda aplikacja, lub od razu zacznij pracę.",
   "DisplayFileExtension": "Wyświetlaj rozszerzenie pliku obok nazwy pliku",
   "DisplaySettings": "Ustawienia wyświetlania",
   "DocsApiReference": "API {{organizationName}} {{docsName}}",

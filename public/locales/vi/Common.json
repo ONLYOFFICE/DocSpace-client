@@ -650,7 +650,7 @@
   "DisconnectCloudTitle": "Ngắt kết nối đám mây",
   "DiscoverApps": "Khám phá các ứng dụng",
   "DiscoverAppsDescription": "Gói {{planName}} của bạn bao gồm các ứng dụng để lưu trữ, quản lý và tự động hóa tài liệu. Xem từng ứng dụng làm được gì, hoặc bắt đầu sử dụng ngay.",
-  "DiscoverAppsWorkspaceDescription": "Không gian làm việc của bạn bao gồm các ứng dụng để lưu trữ, quản lý và tự động hóa quy trình làm việc với tài liệu. Xem từng ứng dụng có thể làm gì hoặc nhấp vào “Mở” để bắt đầu làm việc.",
+  "DiscoverAppsWorkspaceDescription": "Không gian làm việc của bạn bao gồm các ứng dụng để lưu trữ, quản lý và tự động hóa quy trình làm việc với tài liệu. Xem từng ứng dụng có thể làm gì, hoặc bắt đầu sử dụng ngay.",
   "DisplayFileExtension": "Hiển thị phần mở rộng tập tin bên cạnh tên tập tin",
   "DisplaySettings": "Cài đặt hiển thị",
   "DocsApiReference": "API {{organizationName}} {{docsName}}",

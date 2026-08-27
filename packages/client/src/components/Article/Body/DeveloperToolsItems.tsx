@@ -40,7 +40,7 @@ import { useLocation, Link } from "react-router";
 
 import { DeviceType, PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
-import { hasDocsConnectAccess } from "@docspace/shared/utils/devToolsAccess";
+import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 
 import { ArticleItem } from "@docspace/ui-kit/components/article/item";
 
@@ -174,10 +174,11 @@ export default inject(({ settingsStore, authStore, userStore }: TStore) => {
     showText,
     identityServerEnabled,
     // Docs Connect is SaaS-only and admin/owner-only - see
-    // `hasDocsConnectAccess`.
-    canOpenDocsConnect: hasDocsConnectAccess(
+    // `canOpenDocsConnect`.
+    canOpenDocsConnect: canOpenDocsConnect(
       userStore?.user,
       settingsStore?.standalone,
+      settingsStore?.limitedAccessDevToolsForUsers,
     ),
     toggleArticleOpen,
     currentDeviceType,

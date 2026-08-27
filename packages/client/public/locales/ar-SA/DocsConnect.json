@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "تحكم في عناوين IP أو النطاقات أو المضيفين التي يمكنها الوصول إلى {{service}}",
   "AdditionalUsers": "مستخدمون إضافيون",
   "AddRule": "إضافة قاعدة",
+  "AdminAccessDescription": "يمكن للمسؤولين فقط تكوين {{service}}. لا يزال بإمكانك عرض وثائق API.",
   "AnonymousNoHint": "(يمكن فقط للمستخدمين الموثقين الوصول إلى المستندات)",
   "AnonymousSupport": "الدعم المجهول",
   "AnonymousSupportDescription": "السماح للمستخدمين بالوصول إلى المستندات دون مصادقة",

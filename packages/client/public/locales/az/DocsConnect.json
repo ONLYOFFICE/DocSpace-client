@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "Hansı IP ünvanlarının, diapazonların və ya hostların {{service}}-ə giriş əldə edə biləcəyini idarə edin",
   "AdditionalUsers": "Əlavə istifadəçilər",
   "AddRule": "Qayda əlavə et",
+  "AdminAccessDescription": "{{service}} yalnız adminlər tərəfindən konfiqurasiya edilə bilər. API sənədlərinə baxmağa davam edə bilərsiniz.",
   "AnonymousNoHint": "(Yalnız autentifikasiya olunmuş istifadəçilər sənədlərə giriş əldə edə bilər)",
   "AnonymousSupport": "Anonim dəstək",
   "AnonymousSupportDescription": "Autentifikasiyasız istifadəçilərə sənədlərə giriş icazəsi verin",

@@ -49,6 +49,26 @@
   line-height: 24px;
 }
 
+// Says why the configure action below is refused. A plain notice rather than a
+// warning: nothing has gone wrong, the page is simply read-only for this
+// reader, and everything else on it still works.
+.accessNotice {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background-color: var(--dev-tools-card-bg);
+}
+
+.accessNoticeTitle {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--dev-tools-text);
+}
+
 .description {
   font-size: 13px;
   line-height: 20px;

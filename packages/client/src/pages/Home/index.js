@@ -606,6 +606,13 @@ const PureHome = observer((props) => {
   sectionProps.setIsChatPanelVisible = (visible) => {
     if (!visible) aiChatPanel.closeChatPanel();
   };
+  // Edge resizer for the docked panel: desktop only, and off in fullscreen,
+  // where the width is owned by the `ai-fullscreen` layout rules instead. The
+  // width itself is session state on AiChatStore (reset to 400px on every
+  // open), so nothing is persisted here.
+  sectionProps.isChatPanelResizable = !isAiChatFullscreen;
+  sectionProps.chatPanelWidth = aiChatPanel.chatPanelWidth;
+  sectionProps.setChatPanelWidth = aiChatPanel.setChatPanelWidth;
   // In fullscreen the #section is collapsed to zero width but stays mounted, so
   // mark it inert (drops its content from tab order / pointer interaction).
   sectionProps.inert = isAiChatFullscreen;

@@ -3,7 +3,7 @@
   "content": "Feedback & Support",
   "content_en_sha1_hash": "7714e1a8a44cee405d24cfadd08ff22d9fc4f6b9",
   "created_at": "2025-05-19T21:30:45.233Z",
-  "updated_at": "2026-07-07T08:59:21.925Z",
+  "updated_at": "2026-08-27T15:37:55.775Z",
   "comment": {
     "text": "This is a button label in the user menu. It opens a link to the feedback and support page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
-      "line_number": 595,
+      "line_number": 598,
       "context": "},\n liveChat,\n feedbackAndSupportEnabled && {\n key: \"user-menu-support\",\n icon: EmailReactSvgUrl,\n label: t(\"Common:FeedbackAndSupport\"),\n onClick: this.onSupportClick,\n url: this.settingsStore.feedbackAndSupportUrl || \"#\",\n preventNewTab: true,\n },\n feedbackAndSupportEnabled && {",
       "module": "/packages/client"
     }

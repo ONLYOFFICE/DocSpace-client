@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-08-26T16:06:02.250Z",
+  "updated_at": "2026-08-27T15:37:55.665Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -31,8 +31,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 119,
-      "context": "const docsConnect: DevTool[] = canOpenDocsConnect\n ? [\n {\n id: \"docs-connect\",\n title: t(\"DocsConnect:DocsConnect\"),\n description: t(\"DocsConnect:CardDescription\", {\n productName: docsName,\n }),\n path: \"/developer-tools/docs-connect\",\n featured: true,",
+      "line_number": 126,
+      "context": "const docsConnect: DevTool[] = !isStandalone\n ? [\n {\n id: \"docs-connect\",\n title: t(\"DocsConnect:DocsConnect\"),\n description: t(\"DocsConnect:CardDescription\", {\n productName: docsName,\n }),\n path: \"/developer-tools/docs-connect\",\n featured: true,",
       "module": "/packages/client"
     },
     {
@@ -80,13 +80,19 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
       "line_number": 89,
-      "context": "};\n \n return (\n <div className={styles.promo} data-testid=\"docs_connect_promo\">\n <Heading level={HeadingLevel.h1} className={styles.title}>\n {t(\"DocsConnect:DocsConnect\")}\n </Heading>\n \n {canceled ? (\n <div className={styles.canceledText}>\n <Text as=\"p\" className={styles.canceledTitle}>",
+      "context": "};\n \n return (\n <div className={styles.promo} data-testid=\"docs_connect_promo\">\n <Heading level={HeadingLevel.h1} className={styles.title}>\n {t(\"DocsConnect:DocsConnect\")}\n </Heading>\n \n {/* The page opens for anyone the Developer Tools section opens for, but\n connecting an instance is a portal-wide operation and stays with\n admins. Rather than close the page, it says so once and refuses the",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
       "line_number": 89,
-      "context": "};\n \n return (\n <div className={styles.promo} data-testid=\"docs_connect_promo\">\n <Heading level={HeadingLevel.h1} className={styles.title}>\n {t(\"DocsConnect:DocsConnect\")}\n </Heading>\n \n {canceled ? (\n <div className={styles.canceledText}>\n <Text as=\"p\" className={styles.canceledTitle}>",
+      "context": "};\n \n return (\n <div className={styles.promo} data-testid=\"docs_connect_promo\">\n <Heading level={HeadingLevel.h1} className={styles.title}>\n {t(\"DocsConnect:DocsConnect\")}\n </Heading>\n \n {/* The page opens for anyone the Developer Tools section opens for, but\n connecting an instance is a portal-wide operation and stays with\n admins. Rather than close the page, it says so once and refuses the",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
+      "line_number": 89,
+      "context": "};\n \n return (\n <div className={styles.promo} data-testid=\"docs_connect_promo\">\n <Heading level={HeadingLevel.h1} className={styles.title}>\n {t(\"DocsConnect:DocsConnect\")}\n </Heading>\n \n {/* The page opens for anyone the Developer Tools section opens for, but\n connecting an instance is a portal-wide operation and stays with\n admins. Rather than close the page, it says so once and refuses the",
       "module": "/packages/client"
     },
     {

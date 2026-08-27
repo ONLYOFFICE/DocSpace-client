@@ -3,13 +3,21 @@
   "content": "This feature is available to admins only.",
   "content_en_sha1_hash": "dad3676d522c652d97a2f7a7b754297332fc2608",
   "created_at": "2026-08-27T12:02:33.487Z",
-  "updated_at": "2026-08-27T12:02:33.487Z",
+  "updated_at": "2026-08-27T15:40:28.228Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Warning toast message displayed when a user attempts to access a dashboard tile restricted to administrators.",
+    "is_auto": true,
+    "updated_at": "2026-08-27T15:40:28.228Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 278,
+      "context": "// Says why a tile leads nowhere, in place of the 403 that following it used\n // to produce. Shared by every tile, so the wording is stated once.\n const showAdminOnlyToast = () => {\n toastr.warning(\n t(\"Common:AdminOnlyFeature\"),\n t(\"Common:AdminAccessRequired\"),\n );\n };\n \n // The dashboard tour reads its anchors from the DOM, so the dev-tools step",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

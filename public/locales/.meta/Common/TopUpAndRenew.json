@@ -3,7 +3,7 @@
   "content": "Top up & Renew",
   "content_en_sha1_hash": "8dd4787548a226b9236b332c2f3b9277d5d48bc0",
   "created_at": "2026-07-27T13:07:39.125Z",
-  "updated_at": "2026-08-24T22:30:00.693Z",
+  "updated_at": "2026-08-27T15:37:55.744Z",
   "comment": {
     "text": "Button label and clickable link text used to initiate the process of adding funds or extending an expired subscription.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
+      "line_number": 119,
+      "context": "<Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n label={\n isGracePeriod\n ? isBalanceInsufficient\n ? t(\"TopUpAndRenew\")\n : t(\"PayNow\")\n : t(\"UpgradePlan\")\n }\n onClick={isGracePeriod ? onRenewPlan : onEditPlan}\n isDisabled={isGracePeriod && isCardMissingOrInactive}",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 378,

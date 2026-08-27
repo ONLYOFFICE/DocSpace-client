@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2026-08-26T16:06:02.249Z",
+  "updated_at": "2026-08-27T15:37:55.663Z",
   "comment": {
     "text": "This is a link label that, when clicked, directs the user to a help page or settings page for more information about the current feature or setting.",
     "is_auto": true,
@@ -25,31 +25,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 147,
+      "line_number": 154,
       "context": "{\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),\n path: \"/developer-tools/javascript-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"plugins-sdk\",\n title: t(\"WebPlugins:PluginSDK\"),\n description: t(\"Settings:PluginDescription\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 147,
+      "line_number": 154,
       "context": "{\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),\n path: \"/developer-tools/javascript-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"plugins-sdk\",\n title: t(\"WebPlugins:PluginSDK\"),\n description: t(\"Settings:PluginDescription\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 147,
+      "line_number": 154,
       "context": "{\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),\n path: \"/developer-tools/javascript-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"plugins-sdk\",\n title: t(\"WebPlugins:PluginSDK\"),\n description: t(\"Settings:PluginDescription\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 147,
+      "line_number": 154,
       "context": "{\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),\n path: \"/developer-tools/javascript-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"plugins-sdk\",\n title: t(\"WebPlugins:PluginSDK\"),\n description: t(\"Settings:PluginDescription\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 147,
+      "line_number": 154,
       "context": "{\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),\n path: \"/developer-tools/javascript-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"plugins-sdk\",\n title: t(\"WebPlugins:PluginSDK\"),\n description: t(\"Settings:PluginDescription\"),",
       "module": "/packages/client"
     },

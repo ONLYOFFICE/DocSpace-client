@@ -137,7 +137,7 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
         productName,
       }),
       url: apiBasicLink,
-      linkTitle: t("Common:LearnMore"),
+      linkTitle: t("Common:ReadApiDocumentation"),
     },
     {
       id: "embed-sdk",

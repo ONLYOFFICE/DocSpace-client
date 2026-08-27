@@ -3,7 +3,7 @@
   "content": "You can later delete or enable the disabled users if needed. Note that you can’t disable users such as the owner and yourself.",
   "content_en_sha1_hash": "960e67986134d4be8ab0719be3ddba3a368c02c2",
   "created_at": "2026-08-13T14:37:19.508Z",
-  "updated_at": "2026-08-14T14:58:32.693Z",
+  "updated_at": "2026-08-26T14:08:32.984Z",
   "comment": {
     "text": "Body text in the ChangeUserStatusDialog that informs users about managing disabled accounts and restrictions on disabling certain roles.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 188,
+      "line_number": 190,
       "context": "? t(\"DisableGuestsDescription\")\n : t(\"DisableUsersDescription\");\n \n bodyText += isGuests\n ? t(\"DisableGuestsGeneralDescription\")\n : t(\"DisableGeneralDescription\");\n \n buttonLabelSave = isGuests\n ? t(\"Common:Disable\")\n : t(\"PeopleTranslations:DisableUserButton\");\n } else {",
       "module": "/packages/client"
     }

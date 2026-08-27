@@ -109,6 +109,8 @@ const ChangeUserStatusDialogComponent = ({
 				toastr.error(
 					<PaidQuotaLimitError
 						isRoomAdmin={undefined}
+						isCommunity={undefined}
+						standalone={undefined}
 						setInvitePanelOptions={undefined}
 						invitePanelVisible={undefined}
 					/>,

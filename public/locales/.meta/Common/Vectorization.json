@@ -3,7 +3,7 @@
   "content": "Vectorization",
   "content_en_sha1_hash": "7931aa02a8abd743ba5a4eb62663710441cb75ec",
   "created_at": "2025-10-27T16:14:30.919Z",
-  "updated_at": "2026-08-17T17:23:21.774Z",
+  "updated_at": "2026-08-26T14:08:33.079Z",
   "comment": {
     "text": "This is a button label in the file context menu and header, allowing users to retry the vectorization process for a selected file.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 510,
+      "line_number": 506,
       "context": "};\n case \"vectorization\":\n if (!this.isAvailableOption(\"vectorization\")) return null;\n return {\n id: \"menu-vectorization\",\n label: t(\"Common:Vectorization\"),\n iconUrl: RefreshReactSvgUrl,\n onClick: this.retryVectorization,\n };\n default:\n break;",
       "module": "/packages/client"
     },

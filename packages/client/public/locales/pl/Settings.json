@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "Sekcja narzędzi dla programistów",
   "DeveloperToolsAccessDescription": "To ustawienie pozwala udostępnić sekcję Narzędzia programistyczne wszystkim użytkownikom z wyjątkiem gości. Jeśli chcesz ograniczyć dostęp do tej sekcji, tak aby była dostępna tylko dla właściciela i superadministratorów, wybierz Wyłącz i kliknij przycisk <strong>Zapisz</strong>.",
   "DeveloperToolsAccessMobileDescription": "To ustawienie umożliwia udostępnienie sekcji Narzędzia programistyczne wszystkim użytkownikom z wyjątkiem gości.",
+  "DeveloperToolsDescription": "Integruj, rozszerzaj i automatyzuj {{organizationName}} {{editorsName}} oraz {{productName}} za pomocą narzędzi programistycznych — od Docs Connect i SDK osadzania po webhooki i aplikacje OAuth. Wybierz narzędzie poniżej, aby rozpocząć.",
   "DisableAiServices": "Wyłącz {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} zostanie ukryte dla wszystkich użytkowników (historia interakcji zostanie zachowana).",
   "DisableAiServicesConfirm": "Możesz ponownie włączyć {{aiServices}} w dowolnym momencie. Czy na pewno chcesz kontynuować?",

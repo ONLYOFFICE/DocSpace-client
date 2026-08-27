@@ -60,6 +60,7 @@
   "PrivacyPolicyURLHelpButton": "Zorg voor een URL link naar uw Privacybeleid dat moet voldoen aan de toepasselijke wet- en regelgeving en dat duidelijk maakt hoe u persoonsgegevens verzamelt, gebruikt, deelt, bewaart en anderszins verwerkt.",
   "ProfileDescription": "Hier kunt u de info van de apps controleren waaraan u auth-toegang hebt verleend, en indien nodig de toestemming intrekken.",
   "Read": "Lezen",
+  "ReadOAuthGuide": "Lees de OAuth 2.0-handleiding",
   "RedirectsURLS": "URLS doorverwijzen",
   "RedirectsURLSHelpButton": "Nadat een gebruiker een toepassing succesvol heeft geautoriseerd, verwijst de autorisatieserver de gebruiker terug naar de toepassing met gevoelige informatie.",
   "RegisterNewApp": "Een nieuwe toepassing registreren",

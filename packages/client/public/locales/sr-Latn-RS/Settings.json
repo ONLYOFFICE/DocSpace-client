@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "Odeljak sa alatima za programere",
   "DeveloperToolsAccessDescription": "Ovo podešavanje vam omogućava da odeljak Alati programera učinite vidljivim svim korisnicima osim gostima. Ako želite da ograničite pristup ovom odeljku, tako da bude dostupan samo vlasniku i superadministratorima, izaberite Onemogući i kliknite na dugme <strong>Sačuvaj</strong>.",
   "DeveloperToolsAccessMobileDescription": "Ovo podešavanje vam omogućava da odeljak Alatke za programere učinite vidljivim svim korisnicima osim gostima.",
+  "DeveloperToolsDescription": "Integrišite, proširite i automatizujte {{organizationName}} {{editorsName}} i {{productName}} pomoću alata programera — od Docs Connect-a i SDK-a za ugradnju do webhookova i OAuth aplikacija. Izaberite alat ispod da biste počeli.",
   "DisableAiServices": "Deaktivirati {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} će biti skriveno za sve korisnike (istorija interakcija će ostati sačuvana).",
   "DisableAiServicesConfirm": "Možete ponovo omogućiti {{aiServices}} u bilo kojem trenutku. Da li ste sigurni da želite da nastavite?",

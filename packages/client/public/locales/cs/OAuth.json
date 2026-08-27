@@ -60,6 +60,7 @@
   "PrivacyPolicyURLHelpButton": "Uveďte URL odkaz na vaše zásady ochrany osobních údajů, které musí být v souladu s platnými zákony a předpisy a které jasně ukazují, jak shromažďujete, používáte, sdílíte, uchováváte a jinak zpracováváte osobní údaje.",
   "ProfileDescription": "Zde můžete zkontrolovat informace o aplikacích, kterým jste udělili přístup k autorizaci, a v případě potřeby souhlas odvolat.",
   "Read": "Přečtěte si",
+  "ReadOAuthGuide": "Přečtěte si průvodce OAuth 2.0",
   "RedirectsURLS": "Přesměrování adres URL",
   "RedirectsURLSHelpButton": "Poté, co uživatel úspěšně autorizuje aplikaci, přesměruje autorizační server uživatele zpět na aplikaci s citlivými informacemi.",
   "RegisterNewApp": "Registrace nové aplikace",

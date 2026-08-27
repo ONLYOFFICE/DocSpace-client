@@ -3,7 +3,7 @@
   "content": "Groups",
   "content_en_sha1_hash": "ae9629f4ebb82c6331c0809fa9a0e54b00e578e6",
   "created_at": "2025-05-19T21:30:45.668Z",
-  "updated_at": "2026-08-24T22:30:00.600Z",
+  "updated_at": "2026-08-26T14:08:32.920Z",
   "comment": {
     "text": "This is a label for a section or category within the application, referring to collections of users. It appears in selectors for filtering or organizing users, and as a title for a dedicated \"Groups\" page.",
     "is_auto": true,
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 581,
+      "line_number": 688,
       "context": "subjectType === MembersSubjectType.Group\n ) {\n if (groups.length === 0) {\n groups.push({\n id: \"groups\",\n displayName: t(\"Common:Groups\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n groups.push({ ...member, isGroup: true });",
       "module": "/packages/shared"
     }

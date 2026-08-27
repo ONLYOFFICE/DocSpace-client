@@ -14,5 +14,7 @@
   "PluginLoadedSuccessfully": "Wtyczka załadowana pomyślnie",
   "PluginSamples": "Próbki wtyczek",
   "PluginSDK": "Zestaw SDK do tworzenia wtyczek",
+  "PluginSDKDescription": "Użyj zestawu SDK do tworzenia wtyczek, aby dodać nowe funkcje, połączyć usługi zewnętrzne lub ulepszyć istniejące działanie. Przejrzyj przykładowe wtyczki poniżej, ich kod źródłowy jest dostępny na GitHubie. Przejdź na stronę <1>Wtyczki</1>, aby włączyć je w swoim obszarze roboczym.",
+  "PluginSDKInstruction": "<1>Przeczytaj instrukcje</1>, aby tworzyć własne wtyczki.",
   "UploadDescription": "Możesz dodawać wtyczki, aby poszerzyć funkcjonalność przestrzeni roboczej o dodatkowe funkcje. Kliknij Prześlij wtyczkę lub upuść plik w archiwum ZIP."
 }

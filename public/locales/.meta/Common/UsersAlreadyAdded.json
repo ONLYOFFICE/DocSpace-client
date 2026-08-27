@@ -3,7 +3,7 @@
   "content": "Some users have already been added",
   "content_en_sha1_hash": "11ba705efbb4050c93a4d4827ad25f4eb90bb39d",
   "created_at": "2025-05-19T21:30:54.741Z",
-  "updated_at": "2026-08-14T14:58:32.699Z",
+  "updated_at": "2026-08-26T14:08:32.992Z",
   "comment": {
     "text": "This is a toast message that appears when a user attempts to add individuals who are already members of a group or have already been invited.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 641,
+      "line_number": 657,
       "context": "isUnique && unique.push(current);\n \n return unique;\n }, []);\n \n if (items.length > filtered.length) toastr.warning(t(\"Common:UsersAlreadyAdded\"));\n \n return filtered;\n };\n \n const onCloseLinkSettingsPanel = () => {",
       "module": "/packages/client"
     },

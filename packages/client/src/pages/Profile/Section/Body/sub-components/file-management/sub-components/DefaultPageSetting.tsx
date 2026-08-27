@@ -71,6 +71,10 @@ const StartPageSettingComponent = ({
 
     const options = [
       {
+        label: t("Common:Home"),
+        key: FolderType.DEFAULT,
+      },
+      {
         label: t("Common:AIAgents"),
         key: FolderType.AIAgents,
       },

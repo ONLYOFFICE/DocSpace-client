@@ -249,6 +249,8 @@ export const getCategoryUrl = (categoryType, folderId) => {
 };
 
 export const getUrlByDefaultFolderType = (folderType) => {
+  if (folderType === FolderType.DEFAULT) return "/dashboard";
+
   const categoryType = getCategoryTypeByFolderType(folderType);
   return getCategoryUrl(categoryType);
 };

@@ -52,7 +52,7 @@ const DefaultPageRedirectComponent = ({ defaultFolderType, userId }: Props) => {
   const val = localStorage.getItem("useDocSpace");
 
   const defaultUrl = getUrlByDefaultFolderType(
-    defaultFolderType || FolderType.Rooms,
+    defaultFolderType ?? FolderType.DEFAULT,
   );
 
   if (val === "old" || isOAuthFrame()) {

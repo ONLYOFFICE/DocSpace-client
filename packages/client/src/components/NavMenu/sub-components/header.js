@@ -57,7 +57,7 @@ const HeaderComponent = ({
   defaultFolderType,
 }) => {
   const defaultUrl = getUrlByDefaultFolderType(
-    defaultFolderType || FolderType.Rooms,
+    defaultFolderType ?? FolderType.DEFAULT,
   );
   const [isDesktopView, setIsDesktopView] = useState(isDesktop());
 

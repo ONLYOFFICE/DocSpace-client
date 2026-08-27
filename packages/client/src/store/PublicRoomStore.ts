@@ -289,6 +289,12 @@ class PublicRoomStore {
    * the room title resolve the active section from the pathname -- a form room
    * would highlight Rooms and return the user to Rooms. The room type is only
    * known from the room itself, so read it before choosing the section.
+   *
+   * A form room maps to `CategoryType.Form` (`/forms/{id}`), never to
+   * `CategoryType.Forms` (`/forms`): the header title, the plus-button caption
+   * and the quick-actions tiles tell the forms LIST from a room opened inside
+   * it by that id segment alone, so `/forms/filter?folder={id}` would render
+   * the section list chrome -- the "Forms" label in place of the room title.
    */
   getRoomCategoryType = async (roomId: string) => {
     try {
@@ -298,7 +304,7 @@ class PublicRoomStore {
         room?.roomType === RoomsType.FormRoom ||
         room?.parentRoomType === FolderType.FormRoom;
 
-      return isFormRoom ? CategoryType.Forms : CategoryType.Shared;
+      return isFormRoom ? CategoryType.Form : CategoryType.Shared;
     } catch (error) {
       console.error(error);
 
@@ -354,10 +360,10 @@ class PublicRoomStore {
 
     const subFolder = new URLSearchParams(window.location.search).get("folder");
 
-    const url = getCategoryUrl(categoryType);
-
     filter.folder = subFolder || res.id;
     filter.key = publicRoomKey;
+
+    const url = getCategoryUrl(categoryType, filter.folder);
 
     window.location.replace(`${url}?${filter.toUrlParams()}`);
   };

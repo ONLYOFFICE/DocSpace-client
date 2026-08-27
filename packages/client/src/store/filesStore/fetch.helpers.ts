@@ -300,6 +300,15 @@ export function fetchFilesImpl(
               data.current.rootFolderType === Archive ||
               data.current.rootFolderType === AIAgents);
 
+          // Form rooms live in the VirtualRooms tree, so the server names the
+          // root path part "Rooms". On the /forms route that crumb already
+          // navigates to the Forms list (see onClickFolder -> moveToRoomsPage),
+          // so it must be labelled Forms to match where it leads.
+          const crumbTitle =
+            isRootRoom && window.location.pathname.startsWith("/forms")
+              ? i18n.t("Common:Forms")
+              : title;
+
           let shared: boolean | undefined;
           let quotaLimit: number | undefined;
           let usedSpace: number | undefined;
@@ -341,7 +350,7 @@ export function fetchFilesImpl(
 
           return {
             id: folder.id,
-            title,
+            title: crumbTitle,
             isRoom: !!roomType,
             roomType,
             isRootRoom,

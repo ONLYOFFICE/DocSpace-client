@@ -14,7 +14,7 @@
   "PluginLoadedSuccessfully": "Lisäosa ladattu onnistuneesti",
   "PluginSamples": "Laajennusmallit",
   "PluginSDK": "SDK-laajennus",
-  "PluginSDKDescription": "Käyttämällä SDK-laajennusta voit laajentaa työtilasi toiminnallisuutta, yhdistää kolmansien osapuolien palveluihin tai parantaa olemassaolevaa käyttäjäkokemusta. Täältä löydät GitHubissa saatavilla olevat laajennusmallit lähdekoodin kera.",
-  "PluginSDKInstruction": "Klikkaa painiketta saadaksesi yksityiskohtaiset ohjeet omien laajennusten luomiseen.",
+  "PluginSDKDescription": "Käytä SDK-laajennusta lisätäksesi uusia toimintoja, yhdistääksesi kolmannen osapuolen palveluita tai parantaaksesi nykyistä käyttökokemusta. Selaa alla olevia esimerkkilisäosia, joiden lähdekoodi on saatavilla GitHubissa. Siirry <1>Lisäosat</1>-sivulle ottaaksesi ne käyttöön työtilassasi.",
+  "PluginSDKInstruction": "<1>Lue ohjeet</1> luodaksesi omia lisäosia.",
   "UploadDescription": "Voit lisätä lisäosia laajentaaksesi työtilan toiminnallisuutta lisätoiminnoilla. Klikkaa Lataa lisäosa tai pudota ZIP-arkisto."
 }

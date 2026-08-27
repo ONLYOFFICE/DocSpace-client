@@ -1,27 +1,21 @@
 {
-  "key_path": "Guide",
-  "content": "Guide",
-  "content_en_sha1_hash": "bf073fae640ded81eeb7a4cee70faff4a623c16c",
-  "created_at": "2025-05-19T21:30:45.723Z",
-  "updated_at": "2026-05-15T14:00:06.824Z",
+  "key_path": "RoleForLinkNotAvailable",
+  "content": "This role is no longer available for this item. Select another role to save the link.",
+  "content_en_sha1_hash": "31b9bc589ee12fd0d87ea02fec73b77468065a6d",
+  "created_at": "2026-08-26T14:08:15.865Z",
+  "updated_at": "2026-08-26T14:08:59.707Z",
   "comment": {
-    "text": "This is a link label that appears on the OAuth settings page, directing users to a guide for OAuth integration.",
+    "text": "Warning text in the Edit Link panel that appears when the previously assigned role is no longer valid, instructing the user to choose a new one.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:51:21.598Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T14:08:59.707Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/EmptyScreen.tsx",
-      "line_number": 103,
-      "context": "tag=\"a\"\n style={{ marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n </p>\n \n <RegisterNewButton />",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/index.tsx",
-      "line_number": 111,
-      "context": "tag=\"a\"\n style={isError ? undefined : { marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n \n {isError ? (\n <EmptyServerErrorContainer />",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
+      "line_number": 546,
+      "context": "selectedOption={selectedAccessOption}\n currentDeviceType={currentDeviceType}\n onSelect={handleSelectAccessOption}\n warningText={\n isRevokedAccess\n ? t(\"Common:RoleForLinkNotAvailable\")\n : undefined\n }\n />\n ) : null}\n <LinkBlock",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -155,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,0 +1,29 @@
+{
+  "key_path": "PromoDevPackNote",
+  "content": "Get the Dev Pack unlocks the <1>Automation API</1> and <2>branding options</2>.",
+  "content_en_sha1_hash": "9ae5551bed24dd7bf9153fd5e7d3d50eccc8de09",
+  "created_at": "2026-08-26T14:08:29.874Z",
+  "updated_at": "2026-08-26T14:10:45.823Z",
+  "comment": {
+    "text": "A descriptive note on the Dev Pack promotion page explaining the benefits of upgrading. It contains two links: `<1>` for the Automation API and `<2>` for branding options.",
+    "is_auto": true,
+    "updated_at": "2026-08-26T14:10:45.823Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
+      "line_number": 128,
+      "context": "<div className={styles.devPackNote}>\n <Text as=\"p\" className={styles.description}>\n <Trans\n t={t}\n i18nKey=\"PromoDevPackNote\"\n ns=\"DocsConnect\"\n components={{\n 1: (\n <Link\n className={styles.link}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

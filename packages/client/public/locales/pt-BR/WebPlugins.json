@@ -14,7 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin carregado com sucesso",
   "PluginSamples": "Amostras de plug-ins",
   "PluginSDK": "SDK de plug-in",
-  "PluginSDKDescription": "Usando o Plugin SDK você pode estender a funcionalidade do seu espaço de trabalho, conectar serviços de terceiros ou aprimorar a experiência do usuário existente. Aqui você pode encontrar os exemplos de plugins com código-fonte disponíveis no GitHub.",
-  "PluginSDKInstruction": "Clique no botão para obter instruções detalhadas sobre como criar seus próprios plug-ins.",
+  "PluginSDKDescription": "Use o SDK de plug-in para adicionar novas funcionalidades, conectar serviços de terceiros ou melhorar a experiência existente. Confira os exemplos de plugins abaixo, com o código-fonte disponível no GitHub. Acesse a página <1>Plugins</1> para habilitá-los no seu espaço de trabalho.",
+  "PluginSDKInstruction": "<1>Leia as instruções</1> para criar seus próprios plugins.",
   "UploadDescription": "Você pode adicionar plug-ins para estender a funcionalidade do espaço de trabalho com recursos extras. Clique em Carregar plugin ou solte o arquivo no arquivo ZIP."
 }

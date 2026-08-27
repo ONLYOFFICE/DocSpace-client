@@ -14,7 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin succesvol geladen",
   "PluginSamples": "Plugin-voorbeelden",
   "PluginSDK": "Plugin SDK",
-  "PluginSDKDescription": "Met behulp van Plugin SDK kunt u de functionaliteit van uw werkruimte uitbreiden, services van derden aansluiten of de bestaande gebruikerservaring verbeteren. Hier vindt u de plug-ins met broncode die beschikbaar is op GitHub.",
-  "PluginSDKInstruction": "Klik op de knop voor de gedetailleerde instructies om uw eigen plug-ins te maken.",
+  "PluginSDKDescription": "Gebruik de Plugin SDK om nieuwe functionaliteit toe te voegen, services van derden te koppelen of de bestaande ervaring te verbeteren. Bekijk hieronder de voorbeeldplugins, waarvan de broncode beschikbaar is op GitHub. Ga naar de pagina <1>Plugins</1> om ze te activeren voor uw werkruimte.",
+  "PluginSDKInstruction": "<1>Lees de instructies</1> om uw eigen plugins te bouwen.",
   "UploadDescription": "U kunt plug-ins toevoegen om de functionaliteit van de werkruimte uit te breiden met extra functies. Klik op Plug-in uploaden of plaats een bestand in het ZIP-archief."
 }

@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "Sekcia nástrojov pre vývojárov",
   "DeveloperToolsAccessDescription": "Toto nastavenie umožňuje zobraziť sekciu Nástroje pre vývojárov všetkým používateľom okrem hostí. Ak chcete prístup do tejto sekcie obmedziť tak, aby bola dostupná iba majiteľovi a supersprávcom, vyberte Vypnúť a kliknite na tlačidlo <strong>Uložiť</strong>.",
   "DeveloperToolsAccessMobileDescription": "Toto nastavenie vám umožňuje sprístupniť sekciu Vývojárske nástroje všetkým používateľom okrem hostí.",
+  "DeveloperToolsDescription": "Integrujte, rozširujte a automatizujte {{organizationName}} {{editorsName}} a {{productName}} pomocou nástrojov pre vývojárov — od Docs Connect a SDK pre vloženie až po webhooky a aplikácie OAuth. Začnite výberom nástroja nižšie.",
   "DisableAiServices": "Vypnúť {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} bude skryté pre všetkých používateľov (interakčná história zostane zachovaná).",
   "DisableAiServicesConfirm": "Moholate {{aiServices}} kedykoľvek reaktívizovať. Ste si istí, že chcete pokračovať?",

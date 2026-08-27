@@ -3,7 +3,7 @@
   "content": "Remove",
   "content_en_sha1_hash": "e963907dac5cd5c017869b4c96c18021c9bd058b",
   "created_at": "2025-05-19T21:30:47.809Z",
-  "updated_at": "2026-08-24T22:30:00.641Z",
+  "updated_at": "2026-08-26T14:08:33.001Z",
   "comment": {
     "text": "This is a button label that confirms the removal of an item, such as a guest from a room, a user, or a subscription.",
     "is_auto": true,
@@ -103,13 +103,13 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 861,
+      "line_number": 968,
       "context": "access: ShareAccessRights.None,\n },\n {\n access: ShareAccessRights.None,\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ]\n : [],\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 861,
+      "line_number": 968,
       "context": "access: ShareAccessRights.None,\n },\n {\n access: ShareAccessRights.None,\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ]\n : [],\n };",
       "module": "/packages/shared"
     },

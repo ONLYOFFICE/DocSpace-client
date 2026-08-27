@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "開発者ツールセクション",
   "DeveloperToolsAccessDescription": "この設定では、ゲストを除くすべてのユーザーに開発者ツールセクションを表示できます。このセクションへのアクセスを制限し、所有者とスーパー管理者のみがアクセスできるようにする場合は、「無効」を選択して<strong>保存</strong>ボタンをクリックしてください。",
   "DeveloperToolsAccessMobileDescription": "この設定により、ゲストを除くすべてのユーザーに「開発者ツール」セクションを表示することができます。",
+  "DeveloperToolsDescription": "開発者ツールを使って、{{organizationName}} {{editorsName}}と{{productName}}を統合・拡張・自動化しましょう — Docs Connectや埋め込みSDKから、ウェブフックやOAuthアプリまで。下からツールを選んで始めてください。",
   "DisableAiServices": "{{aiServices}}を無効にする",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} はすべてのユーザーから非表示になります（対話履歴は保持されます）。",
   "DisableAiServicesConfirm": "{{aiServices}}はいつでも再度有効にできます。続行しますか？",

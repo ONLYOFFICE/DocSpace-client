@@ -286,9 +286,6 @@ const Statistics = ({
                     count: daysLeft,
                   })}
                 </Text>
-                <Text fontSize="12px" className={styles.muted}>
-                  {t("DocsConnect:TrialBannerDescriptionSecond")}
-                </Text>
               </>
             )}
           </div>
@@ -296,7 +293,7 @@ const Statistics = ({
             primary
             className={styles.bannerButton}
             size={ButtonSize.small}
-            label={t("Common:Upgrade")}
+            label={t("Common:Subscribe")}
             onClick={() => openBuyPlan?.("trial")}
             testId="docs_connect_trial_upgrade_button"
           />

@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-08-24T22:30:00.620Z",
+  "updated_at": "2026-08-26T16:06:02.250Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -79,13 +79,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
-      "line_number": 98,
+      "line_number": 89,
       "context": "};\n \n return (\n <div className={styles.promo} data-testid=\"docs_connect_promo\">\n <Heading level={HeadingLevel.h1} className={styles.title}>\n {t(\"DocsConnect:DocsConnect\")}\n </Heading>\n \n {canceled ? (\n <div className={styles.canceledText}>\n <Text as=\"p\" className={styles.canceledTitle}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
-      "line_number": 98,
+      "line_number": 89,
       "context": "};\n \n return (\n <div className={styles.promo} data-testid=\"docs_connect_promo\">\n <Heading level={HeadingLevel.h1} className={styles.title}>\n {t(\"DocsConnect:DocsConnect\")}\n </Heading>\n \n {canceled ? (\n <div className={styles.canceledText}>\n <Text as=\"p\" className={styles.canceledTitle}>",
       "module": "/packages/client"
     },
@@ -115,7 +115,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 313,
+      "line_number": 310,
       "context": "title={scheduledChangeTitle}\n body={\n isCancellation\n ? t(\"Common:PlanCancellationBillingPeriodNote\", {\n date: scheduledChangeDate,\n service: t(\"DocsConnect:DocsConnect\"),\n })\n : t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: scheduledChangeDate,\n })\n }",
       "module": "/packages/client"
     },
@@ -139,7 +139,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 112,
+      "line_number": 113,
       "context": "<div className={styles.grid}>\n {canOpenDocsConnect ? (\n <Card\n className={styles.featured}\n icon={<DocsConnectSvg />}\n title={t(\"DocsConnect:DocsConnect\")}\n description={t(\"DocsConnect:CardDescription\", {\n productName: docsName,\n })}\n url=\"/developer-tools/docs-connect\"\n color={globalColors.docsConnectAccent}",
       "module": "/packages/client"
     },

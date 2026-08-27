@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "Secțiunea Instrumente pentru dezvoltatori",
   "DeveloperToolsAccessDescription": "Această setare vă permite să faceți secțiunea Instrumente pentru dezvoltatori vizibilă pentru toți utilizatorii, cu excepția invitaților. Dacă doriți să restricționați accesul la această secțiune, astfel încât să fie accesibilă doar proprietarului și superadministratorilor, selectați Dezactivare și faceți clic pe butonul <strong>Salvare</strong>.",
   "DeveloperToolsAccessMobileDescription": "Această setare vă permite să faceți secțiunea Instrumente pentru dezvoltatori vizibilă pentru toți utilizatorii, cu excepția Invitaților.",
+  "DeveloperToolsDescription": "Integrați, extindeți și automatizați {{organizationName}} {{editorsName}} și {{productName}} cu instrumente pentru dezvoltatori — de la Docs Connect și SDK de încorporare până la webhook-uri și aplicații OAuth. Alegeți un instrument mai jos pentru a începe.",
   "DisableAiServices": "Dezactivare {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} va fi ascuns pentru toți utilizatorii (istoria interacțiunilor va rămâne păstrată).",
   "DisableAiServicesConfirm": "Puteți reactiva {{aiServices}} în orice moment. Sunteți sigur că doriți să continuați?",

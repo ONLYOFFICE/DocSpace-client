@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "Section des outils de développement",
   "DeveloperToolsAccessDescription": "Ce paramètre vous permet de rendre la section Outils de développement visible pour tous les utilisateurs, à l'exception des invités. Si vous souhaitez restreindre l'accès à cette section, en la rendant accessible uniquement au propriétaire et aux super-administrateurs, sélectionnez Désactiver et cliquez sur le bouton <strong>Enregistrer</strong>.",
   "DeveloperToolsAccessMobileDescription": "Ce paramètre vous permet de rendre la section Outils de développement visible à tous les utilisateurs, à l'exception des invités.",
+  "DeveloperToolsDescription": "Intégrez, étendez et automatisez {{organizationName}} {{editorsName}} et {{productName}} à l'aide des outils de développement — de Docs Connect et du SDK d'intégration aux webhooks et applications OAuth. Choisissez un outil ci-dessous pour commencer.",
   "DisableAiServices": "Désactiver {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} sera masqué pour tous les utilisateurs (l'historique des interactions sera conservé).",
   "DisableAiServicesConfirm": "Vous pouvez réactiver {{aiServices}} à tout moment. Êtes-vous sûr de vouloir continuer ?",

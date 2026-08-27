@@ -1,14 +1,14 @@
 {
   "key_path": "WebhooksInfo",
-  "content": "Use webhooks to perform custom actions on the side of any application or website you are using based on various events in {{organizationName}} {{productName}}.\nHere, you can create and manage all your webhooks, configure them, and browse history of every webhook to audit their performance.",
-  "content_en_sha1_hash": "750432e6ab1214b46a206263443e9af320afcacf",
-  "created_at": "2025-05-19T21:30:49.892Z",
-  "updated_at": "2026-05-15T15:37:40.271Z",
+  "content": "Use webhooks to trigger custom actions in other apps or websites whenever specific events happen in {{organizationName}} {{productName}}.\nCreate and manage your webhooks here, configure them as needed, and check the history log to track how each one is performing.",
+  "content_en_sha1_hash": "d23d0bd5dd9b523a43212c981540bb249ba36f1a",
+  "created_at": "2026-08-26T16:05:55.274Z",
+  "updated_at": "2026-08-26T16:13:13.477Z",
   "comment": {
-    "text": "This is an informational text paragraph explaining what webhooks are and how to manage them within the application. It appears on the Webhooks settings page and includes `{{organizationName}}` (the name of the user's organization) and `{{productName}}` (the name of the product, e.g., DocSpace).",
+    "text": "Informational paragraph in the Webhooks settings section explaining the feature's purpose; includes variables for the organization name and product name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:28:02.307Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T16:13:13.477Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -14,7 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin loaded successfully",
   "PluginSamples": "Plugin samples",
   "PluginSDK": "Plugin SDK",
-  "PluginSDKDescription": "Using Plugin SDK you can extend your workspace functionality, connect the third-party services or enhance the existing user experience. Here you can find the plugin samples with code source available on GitHub.",
-  "PluginSDKInstruction": "Click the button for the detailed instructions on how to create your own plugins.",
+  "PluginSDKDescription": "Use the Plugin SDK to add new functionality, connect third-party services, or improve the existing experience. Browse sample plugins below, with source code available on GitHub. Go to the <1>Plugins</1> page to enable them for your workspace.",
+  "PluginSDKInstruction": "<1>Read instructions</1> to build your own plugins.",
   "UploadDescription": "You can add plugins to extend the functionality of the workspace with extra features. Click Upload plugin or drop file in the ZIP archive."
 }

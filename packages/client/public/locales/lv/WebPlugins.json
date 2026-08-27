@@ -14,7 +14,7 @@
   "PluginLoadedSuccessfully": "Papildinājums ielādēts veiksmīgi",
   "PluginSamples": "Spraudņu paraugi",
   "PluginSDK": "Pievienotājprogrammas SDK",
-  "PluginSDKDescription": "Izmantojot spraudņa SDK, varat paplašināt savas darbvietas funkcionalitāti, savienot trešās puses pakalpojumus vai uzlabot esošo lietotāja pieredzi. Šeit jūs varat atrast spraudņu paraugus ar koda avotu, kas pieejams GitHub.",
-  "PluginSDKInstruction": "Noklikšķiniet uz pogas, lai iegūtu detalizētus norādījumus par to, kā izveidot savus spraudņus.",
+  "PluginSDKDescription": "Izmantojiet spraudņu SDK, lai pievienotu jaunas funkcijas, savienotu trešo pušu pakalpojumus vai uzlabotu esošo pieredzi. Zemāk apskatiet spraudņu paraugus, kuru pirmkods ir pieejams GitHub. Dodieties uz lapu <1>Spraudņi</1>, lai iespējotu tos savā darbvietā.",
+  "PluginSDKInstruction": "<1>Izlasiet norādījumus</1>, lai izveidotu savus spraudņus.",
   "UploadDescription": "Varat pievienot spraudņus, lai paplašinātu darbvietas funkcionalitāti ar papildu funkcijām. Noklikšķiniet uz Augšupielādēt spraudni vai nometiet failu ZIP arhīvā."
 }

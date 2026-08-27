@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "Izstrādātāja rīku sadaļa",
   "DeveloperToolsAccessDescription": "Šis iestatījums ļauj padarīt sadaļu Izstrādātāja rīki redzamu visiem lietotājiem, izņemot viesus. Ja vēlaties ierobežot piekļuvi šai sadaļai, padarot to pieejamu tikai īpašniekam un superadministratoriem, atlasiet Atspējot un noklikšķiniet uz pogas <strong>Saglabāt</strong>.",
   "DeveloperToolsAccessMobileDescription": "Šis iestatījums ļauj padarīt sadaļu Izstrādātāja rīki redzamu visiem lietotājiem, izņemot viesus.",
+  "DeveloperToolsDescription": "Integrējiet, papildiniet un automatizējiet {{organizationName}} {{editorsName}} un {{productName}}, izmantojot izstrādātāja rīkus — no Docs Connect un iegulšanas SDK līdz tīmekļa aizķerēm un OAuth lietotnēm. Lai sāktu, izvēlieties rīku zemāk.",
   "DisableAiServices": "Atslēgt {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} tiks paslēpts visiem lietotājiem (interakciju vēsture tiks saglabāta).",
   "DisableAiServicesConfirm": "Jūs varat atjaunot {{aiServices}} jebkurā laikā. Vai esat droši, ka vēlaties turpināt?",

@@ -3,7 +3,7 @@
   "content": "Turn off",
   "content_en_sha1_hash": "8807c2b3fd0fb52c4791bd1199d1bbc43da10e41",
   "created_at": "2026-08-21T15:04:26.324Z",
-  "updated_at": "2026-08-21T15:06:49.534Z",
+  "updated_at": "2026-08-26T14:08:33.082Z",
   "comment": {
     "text": "Button label used to confirm the deactivation of an AI model within a modal dialog.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/TurnOffModelDialog.tsx",
-      "line_number": 103,
+      "line_number": 104,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:TurnOff\")}\n scale\n onClick={() => onConfirm(dontShowAgain)}\n isLoading={isLoading}\n testId=\"turn-off-ai-model-button\"\n />",
       "module": "/packages/client"
     }

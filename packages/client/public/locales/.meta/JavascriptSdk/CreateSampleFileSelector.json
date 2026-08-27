@@ -1,14 +1,14 @@
 {
   "key_path": "CreateSampleFileSelector",
-  "content": "Create sample File selector embed",
-  "content_en_sha1_hash": "5ba48846ae9eaf4617845a4869d758bcbf6a1c50",
-  "created_at": "2025-05-19T21:30:54.397Z",
-  "updated_at": "2026-05-15T14:00:06.800Z",
+  "content": "Try a File selector embed",
+  "content_en_sha1_hash": "c4d7981b1d7806c393e4c7b2a90e767dc8758578",
+  "created_at": "2026-08-26T16:05:57.712Z",
+  "updated_at": "2026-08-26T16:09:56.902Z",
   "comment": {
-    "text": "This is the header for a section in the developer tools settings that allows users to create a sample file selector embed.",
+    "text": "Heading for a developer tools preset component that introduces a sample implementation of the File selector embed.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:16:07.765Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T16:09:56.902Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

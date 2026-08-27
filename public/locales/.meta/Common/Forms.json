@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-08-24T22:30:00.606Z",
+  "updated_at": "2026-08-26T16:06:02.226Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 408,
+      "line_number": 413,
       "context": "// Active rooms listing), so the item points at the dedicated /forms route\n // scoped to that search area.\n if (roomsFolder) {\n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n ...nav(searchAreaUrl(\"/forms/filter\", RoomSearchArea.Forms)),\n children: [\n {\n id: \"forms-recent\",",
       "module": "/packages/client"
     },
@@ -73,7 +73,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 167,
+      "line_number": 176,
       "context": "),\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n installed: true,\n href: \"/forms/filter\",\n // A form set is a form-filling room, so it goes through the same\n // create-room dialog, opened on the FormRoom type.",
       "module": "/packages/client"
     },
@@ -97,7 +97,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
-      "line_number": 120,
+      "line_number": 135,
       "context": "const activeSubfolder = completedFolder ?? inProgressFolder;\n \n const getSectionTitle = React.useCallback(() => {\n switch (activeSection) {\n case FormsSection.MyForms:\n return t(\"Common:Forms\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:",
       "module": "/packages/sdk"
     },

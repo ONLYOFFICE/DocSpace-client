@@ -77,7 +77,7 @@ import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { hasDocsConnectAccess } from "@docspace/shared/utils/devToolsAccess";
+import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
@@ -542,10 +542,11 @@ const DashboardConnected = inject((stores: TStore) => {
     isAdminOrOwner:
       (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
     // Stricter still: Docs Connect is a SaaS-only service, so a standalone
-    // portal is not offered the link at all — see `hasDocsConnectAccess`.
-    canOpenDocsConnect: hasDocsConnectAccess(
+    // portal is not offered the link at all — see `canOpenDocsConnect`.
+    canOpenDocsConnect: canOpenDocsConnect(
       userStore.user,
       settingsStore.standalone,
+      settingsStore.limitedAccessDevToolsForUsers,
     ),
     aiReady: settingsStore.aiConfig?.aiReady ?? false,
     // The portal's own AI switch, which is a stronger statement than `aiReady`:

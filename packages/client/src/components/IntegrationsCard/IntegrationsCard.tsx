@@ -68,8 +68,8 @@ import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import {
-  hasDevToolsAccess,
-  hasDocsConnectAccess,
+  isDevToolsOffered,
+  canManageDocsConnect,
 } from "@docspace/shared/utils/devToolsAccess";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
@@ -183,11 +183,11 @@ interface IntegrationsCardProps {
   /** Standalone portals have no Docs Connect; the card is not rendered there. */
   isStandalone?: boolean;
   /**
-   * Whether the reader may reach Developer Tools at all, which is where Docs
-   * Connect lives — guests never may, and neither do room admins and users on a
-   * portal that limits the section to admins. The card advertises that section,
-   * so it asks the same question the section's own card does rather than
-   * offering an integration its reader cannot start.
+   * Whether the portal offers Developer Tools, where Docs Connect lives, to
+   * this reader at all — it stops offering it to room admins and users once the
+   * section is limited to admins. Not the same as having the rights to use it:
+   * the card is informational, and the action inside its dialogs is refused
+   * separately (`isAdminOrOwner`).
    */
   showIntegrations?: boolean;
   isAdminOrOwner?: boolean;
@@ -310,15 +310,16 @@ export const IntegrationsCard = inject<TStore>(
     // answer 403 on the Docs Connect page. The same rule the route guard and
     // the sidebar item ask, so nothing here offers a link that cannot open or
     // asks the server about an instance the reader may not see.
-    isAdminOrOwner: hasDocsConnectAccess(
+    isAdminOrOwner: canManageDocsConnect(
       userStore.user,
       settingsStore.standalone,
     ),
     isStandalone: settingsStore.standalone,
     // The same gate the dashboard's Developer Tools card uses, so the two cards
-    // agree on who is offered the section: guests never, and room admins and
-    // users only while the portal does not limit it to admins.
-    showIntegrations: hasDevToolsAccess(
+    // agree on who is offered the section: everyone, until the portal limits it
+    // to admins. Lacking the rights to configure an instance does not take the
+    // card away - it only refuses the action inside its dialogs.
+    showIntegrations: isDevToolsOffered(
       userStore.user,
       settingsStore.limitedAccessDevToolsForUsers,
     ),

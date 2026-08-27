@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "{{service}}にアクセスできるIPアドレス、範囲、またはホストを制御します",
   "AdditionalUsers": "追加ユーザー",
   "AddRule": "ルールを追加",
+  "AdminAccessDescription": "{{service}} を設定できるのは管理者のみです。API ドキュメントは引き続き閲覧できます。",
   "AnonymousNoHint": "（認証済みユーザーのみがドキュメントにアクセスできます）",
   "AnonymousSupport": "匿名サポート",
   "AnonymousSupportDescription": "認証なしでユーザーがドキュメントにアクセスできるようにします",

@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "Kontrolloni cilat adresa IP, intervale, ose hoste mund të aksesojnë {{service}}",
   "AdditionalUsers": "Përdorues shtesë",
   "AddRule": "Shtoni Rregull",
+  "AdminAccessDescription": "Vetëm administratorët mund të konfigurojnë {{service}}. Ju mund të shihni ende dokumentacionin e API-t.",
   "AnonymousNoHint": "(Vetëm përdoruesit e vërtetuar mund të kenë akses te dokumentet)",
   "AnonymousSupport": "Mbështetje anonime",
   "AnonymousSupportDescription": "Lejoni përdoruesit pa vërtetim të kenë akses te dokumentet",

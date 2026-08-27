@@ -3,7 +3,7 @@
   "content": "Custom room",
   "content_en_sha1_hash": "0839c4e1eb680a458fad43d77aa71faffff6d7c4",
   "created_at": "2025-05-19T21:30:44.386Z",
-  "updated_at": "2026-07-28T07:30:59.872Z",
+  "updated_at": "2026-08-20T12:26:01.718Z",
   "comment": {
     "text": "This is a label for a type of room in DocSpace, indicating a user-defined or custom room. It appears in dropdown menus and lists where users select a room type.",
     "is_auto": true,
@@ -18,9 +18,21 @@
       "module": "/libs/ui-kit"
     },
     {
+      "file_path": "/packages/client/src/components/RoomsTour/index.tsx",
+      "line_number": 203,
+      "context": "{\n roomType: RoomsType.VirtualDataRoom,\n title: t(\"Common:VirtualDataRoom\"),\n },\n { roomType: RoomsType.PublicRoom, title: t(\"Common:PublicRoom\") },\n { roomType: RoomsType.CustomRoom, title: t(\"Common:CustomRoomTitle\") },\n ],\n owner: user as unknown as TCreatedBy,\n // What the members step is about: a room is people with different\n // reaches into it.\n memberAccess: [ShareAccessRights.Editing, ShareAccessRights.ReadOnly],",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 155,
+      "context": "// tooltip and the tiles under the spotlight never drift apart.\n t(\"RoomsTour:RoomsTypes\", {\n collaboration: t(\"Common:CollaborationRoomTitle\"),\n vdr: t(\"Common:VirtualDataRoom\"),\n publicRoom: t(\"Common:PublicRoom\"),\n custom: t(\"Common:CustomRoomTitle\"),\n }),\n callbacks,\n LOG_LABEL,\n 6,\n expandQuickActions,",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 261,
-      "context": "dispatchCreateRoom(currentFolderId, RoomsType.PublicRoom),\n },\n {\n id: \"quick-custom-room\",\n icon: <QuickCustomRoomIcon />,\n label: t(\"Common:CustomRoomTitle\"),\n onClick: () =>\n dispatchCreateRoom(currentFolderId, RoomsType.CustomRoom),\n },\n // Opens the Templates list (sidebar Rooms → Templates).\n {",
+      "line_number": 275,
+      "context": "},\n {\n id: \"quick-custom-room\",\n dataTestId: \"quick-custom-room\",\n icon: <QuickCustomRoomIcon />,\n label: t(\"Common:CustomRoomTitle\"),\n onClick: () =>\n dispatchCreateRoom(currentFolderId, RoomsType.CustomRoom),\n },\n // Opens the create-room dialog on its template picker, so a room can be\n // created from a template without leaving the Rooms list.",
       "module": "/packages/client"
     },
     {

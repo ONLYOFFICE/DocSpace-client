@@ -95,6 +95,7 @@ import { size as deviceSize, getDeviceTypeByWidth, isTablet } from "../utils";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import {
   frameCallEvent,
+  getFrameInitialTheme,
   getShowText,
   insertDataLayer,
   insertTagManager,
@@ -104,6 +105,7 @@ import {
 } from "../utils/common";
 import { applyCustomStyles } from "../utils/customStyles";
 import FirebaseHelper from "../utils/firebase";
+import { claimPortalNotFoundRedirect } from "../utils/portalNotFound";
 
 const themes = {
   Dark,
@@ -112,6 +114,11 @@ const themes = {
 
 const isDesktopEditors = window.AscDesktopEditor !== undefined;
 const systemTheme = getSystemTheme();
+const frameInitialTheme = getFrameInitialTheme();
+const initialTheme =
+  frameInitialTheme && frameInitialTheme !== ThemeKeys.SystemStr
+    ? (frameInitialTheme as ThemeKeys.BaseStr | ThemeKeys.DarkStr)
+    : systemTheme;
 
 class SettingsStore {
   isFirstLoaded = false;
@@ -136,7 +143,7 @@ class SettingsStore {
 
   cultures: string[] = [];
 
-  theme = themes[systemTheme];
+  theme = themes[initialTheme];
 
   trustedDomains: string[] = [];
 
@@ -365,6 +372,13 @@ class SettingsStore {
   abortControllerArr: Nullable<AbortController>[] = [];
 
   aiConfig: Nullable<TAIConfig> = null;
+
+  /** Comes from the settings response, so a missed socket event is recovered. */
+  walletLowBalance = false;
+
+  setWalletLowBalance = (walletLowBalance: boolean) => {
+    this.walletLowBalance = walletLowBalance;
+  };
 
   externalDbEnabled: boolean = false;
 
@@ -1094,6 +1108,12 @@ class SettingsStore {
         const url = new URL(wrongportalname);
         url.searchParams.append("url", window.location.hostname);
         url.searchParams.append("ref", window.location.href);
+
+        // Claim the navigation before it starts: PrivateRoute and the request
+        // layer both react to the same deletion by redirecting to the login
+        // page, which would cancel it.
+        claimPortalNotFoundRedirect();
+
         return window.location.replace(url);
       }
 
@@ -1736,7 +1756,10 @@ class SettingsStore {
     this.setAIConfig(res);
   };
 
-  setAIConfig = (config: TAIConfig) => {
+  // `null` is accepted so a caller that borrowed the config can hand back
+  // exactly what it found, including "nothing was loaded yet" — the field's own
+  // starting value, and the one state a non-null setter could not restore.
+  setAIConfig = (config: Nullable<TAIConfig>) => {
     this.aiConfig = config;
   };
 

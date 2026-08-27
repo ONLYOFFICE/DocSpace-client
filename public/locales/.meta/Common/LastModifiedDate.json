@@ -3,7 +3,7 @@
   "content": "Last modified date",
   "content_en_sha1_hash": "db142287f88a07da18a28455cfab95c90749ca33",
   "created_at": "2025-05-19T21:30:46.056Z",
-  "updated_at": "2026-07-27T13:07:50.610Z",
+  "updated_at": "2026-08-19T13:26:37.678Z",
   "comment": {
     "text": "This is a label for a sorting option, indicating the date when an item was most recently changed.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 130,
+      "line_number": 129,
       "context": "const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Common:ByCreation\") },\n { key: \"Author\", label: t(\"Common:ByAuthor\") },",
       "module": "/packages/client"
     },

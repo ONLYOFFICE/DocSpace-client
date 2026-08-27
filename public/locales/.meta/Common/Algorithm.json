@@ -3,7 +3,7 @@
   "content": "Algorithm",
   "content_en_sha1_hash": "02f02485ab679a9031f461bdbd3edab48ea42a79",
   "created_at": "2026-05-24T17:27:17.639Z",
-  "updated_at": "2026-07-27T13:07:50.842Z",
+  "updated_at": "2026-08-13T10:58:03.275Z",
   "comment": {
     "text": "Field label in the key details section that precedes the specific cryptographic algorithm name.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
-      "line_number": 202,
-      "context": "{keyData.id}\n </Text>\n </>\n ) : null}\n <Text fontSize=\"13px\" className={styles.detailsLabel}>\n {t(\"Common:Algorithm\")}\n </Text>\n <Text fontSize=\"13px\">X25519</Text>\n </div>\n </CollapsibleCard>\n </div>",
+      "line_number": 198,
+      "context": "{keyData.id}\n </Text>\n </>\n ) : null}\n <Text fontSize=\"13px\" className={styles.detailsLabel}>\n {t(\"Common:Algorithm\")}\n </Text>\n <Text fontSize=\"13px\">X25519</Text>\n </div>\n </div>\n {isCurrentlyDeleting && (",
       "module": "/packages/client"
     }
   ],

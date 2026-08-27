@@ -52,11 +52,9 @@ import { FileTileProvider } from "./FileTile.provider";
 import { elementResizeDetector } from "./FileTile.utils";
 
 import InfiniteGrid from "./sub-components/InfiniteGrid";
-import withContainer from "../../../../../HOCs/withContainer";
 
 const FilesTileContainer = ({
   list,
-  isTutorialEnabled,
   isDesc,
   selectedFolderTitle,
   setDropTargetPreview,
@@ -159,7 +157,7 @@ const FilesTileContainer = ({
         />
       );
     });
-  }, [list, onSetTileRef, sectionWidth, isTutorialEnabled]);
+  }, [list, onSetTileRef, sectionWidth]);
 
   return (
     <FileTileProvider columnCount={columnCount} thumbSize={thumbSize}>
@@ -192,7 +190,7 @@ export default inject(
       selectedFolderStore;
 
     return {
-      filesList,
+      list: filesList,
       isDesc,
       withContentSelection,
       setDropTargetPreview,
@@ -201,4 +199,4 @@ export default inject(
       canCreateSecurity,
     };
   },
-)(withContainer(observer(FilesTileContainer)));
+)(observer(FilesTileContainer));

@@ -1,25 +1,25 @@
 {
   "key_path": "ThirdPartyResourceDescription",
-  "content": "Backup can be saved to your third-party account (Dropbox, Box.com, OneDrive or Google Drive). You need to connect your third-party account (Dropbox, Box.com, OneDrive or Google Drive) before you will be able to save your backup there.",
-  "content_en_sha1_hash": "c0e812cbda982e696e4ea4d91c8c7d55b6033146",
-  "created_at": "2025-05-26T07:15:48.804Z",
-  "updated_at": "2026-05-15T14:00:06.960Z",
+  "content": "Backup can be saved to your third-party account (Dropbox, Box, OneDrive or Google Drive). You need to connect your third-party account (Dropbox, Box, OneDrive or Google Drive) before you will be able to save your backup there.",
+  "content_en_sha1_hash": "4f1bf038301a80b473f28870a20c9fb5ba6f29c6",
+  "created_at": "2026-08-12T11:00:40.968Z",
+  "updated_at": "2026-08-14T14:58:32.903Z",
   "comment": {
-    "text": "This is a descriptive text that explains how to save a backup to a third-party cloud storage service. It appears below the option to select a third-party account for backup.",
+    "text": "Informational text in the auto-backup and manual-backup configuration pages explaining how to use third-party cloud storage and the requirement to connect an account first.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:41:08.153Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:01:43.329Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 566,
+      "line_number": 565,
       "context": "className={classNames(\n styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:ThirdPartyResourceDescription\")}\n </Text>\n {isCheckedThirdParty ? (\n <ThirdPartyModule\n {...(setDefaultFolderId && { setDefaultFolderId })}\n setSelectedFolder={setSelectedFolder}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 604,
+      "line_number": 683,
       "context": "testId=\"third_party_resource_radio_button\"\n />\n <Text\n className={classNames(styles.backupDescription, \"backup-description\")}\n >\n {t(\"Common:ThirdPartyResourceDescription\")}\n </Text>\n {isCheckedThirdParty ? (\n <ThirdPartyModule\n newPath={newPath}\n accounts={accounts}",
       "module": "/packages/shared"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

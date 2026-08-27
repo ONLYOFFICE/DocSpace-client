@@ -1,0 +1,29 @@
+{
+  "key_path": "DocsConnectReadyDescription",
+  "content": "Connect them to this {{organizationName}} {{editorsName}} in one click. All required settings will be filled in and saved automatically",
+  "content_en_sha1_hash": "8e16a30c141ba3996291e776da82d3c5a1133a28",
+  "created_at": "2026-07-30T16:14:06.992Z",
+  "updated_at": "2026-08-10T12:23:10.668Z",
+  "comment": {
+    "text": "Promotional description text within an integration settings block that informs users about one-click connection capabilities. It includes placeholders for {{organizationName}} (the organization's name) and {{editorsName}} (the product editors' names).",
+    "is_auto": true,
+    "updated_at": "2026-07-30T16:20:25.365Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
+      "line_number": 348,
+      "context": "<div className={styles.docsConnectPromoText}>\n <Text className={styles.docsConnectPromoTitle}>\n {t(\"Settings:DocsConnectReadyTitle\")}\n </Text>\n <Text className={styles.docsConnectPromoDescription}>\n {t(\"Settings:DocsConnectReadyDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n })}\n </Text>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

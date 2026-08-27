@@ -45,33 +45,46 @@ import {
 
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
+import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
 
 import Header from "./sub-components/Header";
 import Info from "./sub-components/Info";
 import Footer from "./sub-components/Footer";
 import { SettingsPluginDialogProps } from "./SettingsPluginDialog.types";
+import { BoxGroup } from "@onlyoffice/docspace-plugin-sdk";
 
 const SettingsPluginDialog = ({
   plugin,
   withDelete,
 
   pluginSettings,
+  reactSettingsSaveButtonState,
 
   settingsPluginDialogVisible,
 
   onClose,
   onDelete,
-  updatePlugin,
 }: SettingsPluginDialogProps) => {
   const { t } = useTranslation(["WebPlugins", "Common", "Files", "People"]);
 
-  const { saveButton, settings, onLoad } = pluginSettings ? pluginSettings : {};
+  const { saveButton, settings, onLoad, component } = pluginSettings
+    ? pluginSettings
+    : {};
 
   const [customSettingsProps, setCustomSettingsProps] = useState(settings);
 
   const [saveButtonProps, setSaveButtonProps] = useState(saveButton);
 
   const [modalRequestRunning, setModalRequestRunning] = useState(false);
+
+  const reactSaveButton =
+    reactSettingsSaveButtonState?.pluginName === plugin?.name
+      ? reactSettingsSaveButtonState.button
+      : null;
+
+  const effectiveSaveButtonProps = component
+    ? (reactSaveButton ?? saveButtonProps)
+    : saveButtonProps;
 
   const onLoadAction = useCallback(async () => {
     if (!onLoad) return;
@@ -118,22 +131,31 @@ const SettingsPluginDialog = ({
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div style={{ marginTop: "16px" }}>
-          <WrappedComponent
-            pluginName={plugin.name}
-            component={{
-              component: PluginComponents.box,
-              props: customSettingsProps,
-            }}
-            saveButton={saveButtonProps}
-            setSaveButtonProps={setSaveButtonProps}
-            setModalRequestRunning={setModalRequestRunning}
-            modalRequestRunning={modalRequestRunning}
-          />
+          {component ? (
+            <PluginWrappedComponent
+              pluginName={plugin.name}
+              component={component}
+            />
+          ) : customSettingsProps ? (
+            <WrappedComponent
+              pluginName={plugin.name}
+              component={
+                {
+                  component: PluginComponents.box,
+                  props: customSettingsProps,
+                } satisfies BoxGroup
+              }
+              saveButton={saveButtonProps}
+              setSaveButtonProps={setSaveButtonProps}
+              setModalRequestRunning={setModalRequestRunning}
+              modalRequestRunning={modalRequestRunning}
+            />
+          ) : null}
           <Info
             t={t}
             plugin={plugin}
             withDelete={withDelete}
-            withSeparator={!!customSettingsProps?.children}
+            withSeparator={!!component || !!customSettingsProps?.children}
           />
           {withDelete ? (
             <Button
@@ -150,11 +172,10 @@ const SettingsPluginDialog = ({
         <Footer
           t={t}
           pluginName={plugin.name}
-          saveButtonProps={saveButtonProps}
+          saveButtonProps={effectiveSaveButtonProps}
           setModalRequestRunning={setModalRequestRunning}
           onCloseAction={onCloseAction}
           modalRequestRunning={modalRequestRunning}
-          updatePlugin={updatePlugin}
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -170,7 +191,7 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
     setCurrentSettingsDialogPlugin,
     setDeletePluginDialogVisible,
     setDeletePluginDialogProps,
-    updatePlugin,
+    reactSettingsSaveButtonState,
   } = pluginStore;
 
   const { pluginOptions, standalone } = settingsStore;
@@ -203,8 +224,8 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
     plugin,
     withDelete,
     pluginSettings,
+    reactSettingsSaveButtonState,
     settingsPluginDialogVisible,
-    updatePlugin,
 
     onClose,
     onDelete,

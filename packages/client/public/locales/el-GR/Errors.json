@@ -1,4 +1,4 @@
 {
   "ErrorEmptyResponse": "Κενή απάντηση",
-  "ErrorUnavailableText": "{{productName}} μη διαθέσιμο"
+  "ErrorUnavailableText": "Ο χώρος εργασίας δεν είναι διαθέσιμος"
 }

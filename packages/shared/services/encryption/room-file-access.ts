@@ -38,12 +38,14 @@
 // embedded in the wrap blob and resolved against roomMemberKeys at unwrap.
 
 import { unwrapDEK, wrapDEK, inspectWrap } from "./hpke";
+import { wipeDek } from "./file-keys";
 import { NoAccessError, AuthenticationError } from "./errors";
 import {
   getKeyMismatchHandler,
   getTofuStore,
   type KeyMismatchResolver,
 } from "./tofu-store";
+import type { TofuKeyEntry } from "./tofu-store";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "./types";
 
 export type RoomMemberPublicKey = {
@@ -62,6 +64,7 @@ export async function unwrapDekForCurrentUser(params: {
   fileId: number;
   onKeyChange?: KeyMismatchResolver;
   senderDisplayName?: string;
+  currentPublicKeyId?: string;
 }): Promise<Uint8Array> {
   const {
     fileKeys,
@@ -71,6 +74,7 @@ export async function unwrapDekForCurrentUser(params: {
     fileId,
     onKeyChange,
     senderDisplayName,
+    currentPublicKeyId,
   } = params;
 
   if (!Number.isFinite(fileId) || fileId <= 0) {
@@ -86,53 +90,108 @@ export async function unwrapDekForCurrentUser(params: {
     throw new NoAccessError(currentUserId);
   }
 
+  const ordered = currentPublicKeyId
+    ? [...myEntries].sort(
+        (a, b) =>
+          Number(b.publicKeyId === currentPublicKeyId) -
+          Number(a.publicKeyId === currentPublicKeyId),
+      )
+    : myEntries;
+
   let lastError: unknown = null;
-  for (const myEntry of myEntries) {
+
+  const tryCandidates = async (
+    myEntry: ServerAccessKeyDto,
+    senderUserId: string,
+    candidates: RoomMemberPublicKey[],
+  ): Promise<Uint8Array | null> => {
+    for (const candidate of candidates) {
+      const senderPubBytes = decodeBase64(candidate.publicKey);
+
+      let dek: Uint8Array;
+      try {
+        dek = await unwrapDEK({
+          wrapped: myEntry.privateKeyEnc,
+          recipientPrivateKey: currentIdentity.privateKey,
+          recipientUserId: currentUserId,
+          expectedSenderPublicKey: senderPubBytes,
+          expectedSenderUserId: senderUserId,
+          fileId,
+        });
+      } catch (e) {
+        lastError = e;
+        continue;
+      }
+
+      try {
+        await verifySenderKeyAgainstTofu(
+          currentUserId,
+          senderUserId,
+          candidate.publicKey,
+          onKeyChange,
+          senderDisplayName,
+        );
+      } catch (e) {
+        wipeDek(dek);
+        lastError = e;
+        continue;
+      }
+
+      return dek;
+    }
+    return null;
+  };
+
+  for (const myEntry of ordered) {
     const inspection = inspectWrap(myEntry.privateKeyEnc);
     const senderUserId = inspection.senderUserId;
 
-    const senderEntry = roomMemberKeys.find(
+    const liveCandidates = roomMemberKeys.filter(
       (k) => String(k.userId) === String(senderUserId),
     );
-    if (!senderEntry) {
+
+    const dek = await tryCandidates(myEntry, senderUserId, liveCandidates);
+    if (dek) return dek;
+
+    // A sender who left the room disappears from both live key sources while
+    // their wraps stay valid; keys this device already trusts still apply.
+    const tofuCandidates = await loadTofuSenderCandidates(
+      currentUserId,
+      senderUserId,
+      liveCandidates,
+    );
+    if (liveCandidates.length === 0 && tofuCandidates.length === 0) {
       lastError = new AuthenticationError(
         `wrap claims sender ${senderUserId} but no public key was provided`,
       );
       continue;
     }
 
-    try {
-      await verifySenderKeyAgainstTofu(
-        currentUserId,
-        senderUserId,
-        senderEntry.publicKey,
-        onKeyChange,
-        senderDisplayName,
-      );
-    } catch (e) {
-      lastError = e;
-      continue;
-    }
-
-    const senderPubBytes = decodeBase64(senderEntry.publicKey);
-
-    try {
-      return await unwrapDEK({
-        wrapped: myEntry.privateKeyEnc,
-        recipientPrivateKey: currentIdentity.privateKey,
-        recipientUserId: currentUserId,
-        expectedSenderPublicKey: senderPubBytes,
-        expectedSenderUserId: senderUserId,
-        fileId,
-      });
-    } catch (e) {
-      lastError = e;
-    }
+    const tofuDek = await tryCandidates(myEntry, senderUserId, tofuCandidates);
+    if (tofuDek) return tofuDek;
   }
 
   throw lastError instanceof Error
     ? lastError
     : new AuthenticationError("unwrap failed for all matching fileKeys");
+}
+
+async function loadTofuSenderCandidates(
+  scopeUserId: string,
+  senderUserId: string,
+  alreadyTried: RoomMemberPublicKey[],
+): Promise<RoomMemberPublicKey[]> {
+  let keys: TofuKeyEntry[];
+  try {
+    keys = await getTofuStore(scopeUserId).getKeys(senderUserId);
+  } catch {
+    return [];
+  }
+  const tried = new Set(alreadyTried.map((c) => c.publicKey));
+  return keys
+    .filter((k) => !tried.has(k.publicKey))
+    .sort((a, b) => b.lastSeenAt - a.lastSeenAt)
+    .map((k) => ({ userId: senderUserId, publicKey: k.publicKey }));
 }
 
 async function verifySenderKeyAgainstTofu(

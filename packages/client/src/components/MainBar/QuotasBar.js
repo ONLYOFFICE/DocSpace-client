@@ -39,8 +39,8 @@ import { withTranslation, Trans } from "react-i18next";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 
 import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const QuotasBar = ({
   t,
@@ -53,6 +53,9 @@ const QuotasBar = ({
   onLoad,
   currentColorScheme,
   isAdmin,
+  isPayer,
+  walletCustomerEmail,
+  walletCustomerDisplayName,
 }) => {
   const onClickAction = (e) => {
     onClick && onClick(type, e);
@@ -64,9 +67,7 @@ const QuotasBar = ({
 
   const getTenantCustomQuota = () => {
     if (!isAdmin)
-      return t("RemoveFilesOrContactToUpgradeQuota", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("RemoveFilesOrContactToUpgradeQuota");
 
     return (
       <Trans
@@ -88,9 +89,7 @@ const QuotasBar = ({
 
   const getUserTariffAlmostLimit = () => {
     if (!isAdmin)
-      return t("UserTariffAlmostReached", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("UserTariffAlmostReached");
 
     return (
       <Trans
@@ -113,15 +112,12 @@ const QuotasBar = ({
 
   const getUserTariffLimit = () => {
     if (!isAdmin)
-      return t("UserTariffReached", { productName: getBrandName("ProductName") });
+      return t("UserTariffReached");
 
     return (
       <Trans
         t={t}
         i18nKey="UserTariffReachedForAdmins"
-        values={{
-          productName: getBrandName("ProductName"),
-        }}
         components={{
           1: (
             <Link
@@ -139,9 +135,7 @@ const QuotasBar = ({
 
   const getStorageTariffDescription = () => {
     if (!isAdmin)
-      return t("RemoveFilesOrContactToUpgrade", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("RemoveFilesOrContactToUpgrade");
 
     return (
       <Trans
@@ -164,9 +158,7 @@ const QuotasBar = ({
 
   const getPersonalQuotaDescription = () => {
     if (!isAdmin)
-      return t("PersonalUserQuotaDescription", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("PersonalUserQuotaDescription");
 
     return (
       <Trans
@@ -194,9 +186,7 @@ const QuotasBar = ({
 
   const getUpgradeTariffDescription = () => {
     if (!isAdmin)
-      return t("ContactToUpgradeTariff", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("ContactToUpgradeTariff");
 
     return (
       <Trans
@@ -219,17 +209,12 @@ const QuotasBar = ({
 
   const getRoomsTariffDescription = () => {
     if (!isAdmin)
-      return t("ArchivedRoomsOrContact", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("ArchivedRoomsOrContact");
 
     return (
       <Trans
         t={t}
         i18nKey="RoomQuotaDescription"
-        values={{
-          productName: getBrandName("ProductName"),
-        }}
         components={{
           1: (
             <Link
@@ -244,8 +229,64 @@ const QuotasBar = ({
       />
     );
   };
+  const getWalletLowBalanceDescription = () => {
+    if (!isPayer) {
+      const payerContact = walletCustomerDisplayName || walletCustomerEmail;
+
+      // The phrasing puts the contact in brackets, so without one it would read
+      // "Contact the Payer () to ...". The header alone still states the problem.
+      if (!payerContact) return null;
+
+      return (
+        <Trans
+          t={t}
+          i18nKey="WalletLowBalanceContactPayer"
+          values={{
+            payerContact,
+          }}
+          components={{
+            1:
+              walletCustomerEmail && !walletCustomerDisplayName ? (
+                <Link
+                  fontSize="12px"
+                  fontWeight="400"
+                  color={currentColorScheme?.main?.accent}
+                  href={`mailto:${walletCustomerEmail}`}
+                />
+              ) : (
+                <Text as="span" fontSize="12px" fontWeight={600} />
+              ),
+          }}
+        />
+      );
+    }
+
+    return (
+      <Trans
+        t={t}
+        i18nKey="WalletLowBalanceDescription"
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
+
   const getQuotaInfo = () => {
     switch (type) {
+      case QuotaBarTypes.WalletLowBalance:
+        return {
+          header: t("WalletLowBalanceHeader", { balance: currentValue }),
+          description: getWalletLowBalanceDescription(),
+        };
       case QuotaBarTypes.RoomsTariff:
         return {
           header: t("RoomQuotaHeader", { currentValue, maxValue }),

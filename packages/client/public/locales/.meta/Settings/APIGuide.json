@@ -1,19 +1,19 @@
 {
   "key_path": "APIGuide",
-  "content": "API Guide",
-  "content_en_sha1_hash": "95bf0e870e2f1145571690754754b56cb523c59b",
-  "created_at": "2025-05-19T21:30:50.490Z",
-  "updated_at": "2026-05-15T14:00:06.791Z",
+  "content": "Read the API guide",
+  "content_en_sha1_hash": "9c0f1adc63afde76f483309429e1ff101f5fd032",
+  "created_at": "2026-08-26T14:08:26.195Z",
+  "updated_at": "2026-08-26T14:13:23.132Z",
   "comment": {
-    "text": "This is the label for a link that opens the API Guide in a new browser tab.",
+    "text": "A clickable link label in the developer tools section that provides access to the API documentation.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:47.744Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T14:13:23.132Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 196,
+      "line_number": 188,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n onClick={() => window.open(apiKeysUrl, \"_blank\")}\n dataTestId=\"api_guide_link\"\n >\n {t(\"Settings:APIGuide\")}\n </Link>\n ) : null}\n </div>\n <div>\n {error ? (",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

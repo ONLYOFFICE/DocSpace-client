@@ -34,7 +34,7 @@
  */
 
 import { inject, observer } from "mobx-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
@@ -53,6 +53,8 @@ import type { TDocsConnectPageState } from "@docspace/ui-kit/billing/types";
 import config from "PACKAGE_FILE";
 
 import {
+  getDocsConnectPricePerUser,
+  getDocsConnectScheduledState,
   getDocsConnectTrialState,
   isDocsConnectCanceled,
 } from "../../../developer-tools/DocsConnect/utils";
@@ -97,6 +99,7 @@ const ServicePage = (props: ServicePageProps) => {
     cancelScheduledChange,
   } = props;
   useTranslation(["DocsConnect", "Common"]);
+  const [isCancelChangeLoading, setIsCancelChangeLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -133,14 +136,8 @@ const ServicePage = (props: ServicePageProps) => {
     } = getDocsConnectTrialState(docsConnectInfo);
 
     const planUsers = docsConnectInfo.tenant?.payment?.quantity ?? 0;
-    const pricePerUser =
-      (docsConnectInfo.prices?.pricePerUser ?? 0) +
-      (docsConnectInfo.devPackEnabled
-        ? (docsConnectInfo.prices?.devPackPrice ?? 0)
-        : 0);
-    const scheduledChange = isPaid
-      ? (docsConnectInfo.scheduledChange ?? null)
-      : null;
+    const pricePerUser = getDocsConnectPricePerUser(docsConnectInfo);
+    const scheduled = getDocsConnectScheduledState(docsConnectInfo, isPaid);
 
     const state: TDocsConnectPageState = {
       isPaid,
@@ -156,21 +153,29 @@ const ServicePage = (props: ServicePageProps) => {
       basePricePerUser: docsConnectInfo.prices?.pricePerUser ?? 0,
       devPackEnabled: docsConnectInfo.devPackEnabled ?? false,
       monthlyCharge: planUsers * pricePerUser,
-      scheduledChange: scheduledChange
-        ? {
-            nextUsers: scheduledChange.nextUsers,
-            dueDate: scheduledChange.dueDate,
-          }
-        : null,
+      scheduledChange:
+        scheduled.scheduledUsers == null
+          ? null
+          : {
+              nextUsers: scheduled.scheduledUsers,
+              dueDate: scheduled.scheduledDate,
+              nextDevPackEnabled: scheduled.nextDevPackEnabled,
+              scheduledOnDevPack: scheduled.scheduledOnDevPack,
+            },
       deactivated: isPaid && (docsConnectInfo.deactivated ?? false),
       canceled: isDocsConnectCanceled(docsConnectInfo),
     };
 
     const onCancelChange = async () => {
+      if (isCancelChangeLoading) return;
+
+      setIsCancelChangeLoading(true);
       try {
         await cancelScheduledChange?.();
       } catch (e) {
         toastr.error(e as Error);
+      } finally {
+        setIsCancelChangeLoading(false);
       }
     };
 
@@ -187,6 +192,7 @@ const ServicePage = (props: ServicePageProps) => {
           onCancelPlan={() => openCancelPlanDialog?.()}
           onRemovePlan={() => openRemoveSubscriptionDialog?.()}
           onCancelChange={onCancelChange}
+          isCancelChangeLoading={isCancelChangeLoading}
         />
         {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
         {cancelPlanDialogVisible ? <CancelPlanDialog /> : null}

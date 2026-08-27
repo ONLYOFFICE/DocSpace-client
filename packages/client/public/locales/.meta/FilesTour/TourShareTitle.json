@@ -1,0 +1,29 @@
+{
+  "key_path": "TourShareTitle",
+  "content": "Share and collaborate",
+  "content_en_sha1_hash": "a49d2bff4146ff4bb121f4aa0955c03dc5a67dd9",
+  "created_at": "2026-08-06T14:20:53.794Z",
+  "updated_at": "2026-08-07T15:05:26.423Z",
+  "comment": {
+    "text": "Title of an instructional popover during the Files tour, appearing when highlighting the share button.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:32:31.210Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 299,
+      "context": "// 5. The share button on a row — the per-item action users hunt for most.\n hasItems &&\n hoverRevealStep(\n SHARE_ICON_SELECTOR,\n t(\"FilesTour:TourShareTitle\"),\n t(\"FilesTour:TourShare\"),\n callbacks,\n LOG_LABEL,\n 4,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

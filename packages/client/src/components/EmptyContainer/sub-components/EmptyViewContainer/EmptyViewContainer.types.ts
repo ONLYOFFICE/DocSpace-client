@@ -39,6 +39,7 @@ import type {
   FilesSelectorFilterTypes,
   FilterType,
   FolderType,
+  RoomSearchArea,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -117,23 +118,17 @@ export interface InjectedEmptyViewContainerProps
   isKnowledgeTab?: boolean;
   isResultsTab?: boolean;
   isAIRoom?: boolean;
+  filterFolderType: Nullable<number[]>;
+  roomsFilterSearchArea: RoomSearchArea | string;
   isPortalAdmin: AuthStore["isAdmin"];
   aiReady?: boolean;
   standalone: SettingsStore["standalone"];
   isCardLinkedToPortal?: boolean;
-  isPayer?: boolean;
-  walletCustomerEmail?: string | null;
-  walletCustomerDisplayName?: string | null;
   enableAIService?: (onSuccess?: () => void | Promise<void>) => Promise<void>;
   getAIConfig?: () => Promise<void>;
   refreshCurrentFolder?: () => Promise<void>;
   refreshPaymentInfo?: () => Promise<void>;
   language?: string;
-  socialAuthWelcomeVisible: boolean;
-  onSocialAuthWelcomeClose: () => void;
-  tenantAlias: string;
-  baseDomain: string | null;
-  socialAuthUser: TStore["userStore"]["user"];
   isGracePeriod: boolean;
   knowledgeId: number | null;
   startUpload: TStore["uploadDataStore"]["startUpload"];
@@ -168,6 +163,8 @@ export type OptionActions = {
   onGoToForms: () => LinkProps;
   onGoToAgents: () => LinkProps;
   onCreateAIAgent: VoidFunction;
+  onOpenAiChat: VoidFunction;
+  onStartNewChat: VoidFunction;
   onGoToServices: VoidFunction;
   onGoToAIProviderSettings: VoidFunction;
   onTopUpAndActivateAI: VoidFunction;

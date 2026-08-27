@@ -38,7 +38,22 @@
 
 import { base64ToUint8Array } from "./utils";
 
+export type TofuKeySource = "first-seen" | "accepted" | "migrated-v1";
+
+export type TofuKeyEntry = {
+  publicKey: string;
+  firstSeenAt: number;
+  lastSeenAt: number;
+  verifiedAt: number | null;
+  source: TofuKeySource;
+};
+
 export type TofuRecord = {
+  userId: string;
+  keys: TofuKeyEntry[];
+};
+
+type LegacyTofuRecordV1 = {
   userId: string;
   publicKey: string;
   firstSeenAt: number;
@@ -48,12 +63,54 @@ export type TofuRecord = {
 
 export type TofuCheckResult =
   | { kind: "first-seen" }
-  | { kind: "match"; record: TofuRecord }
-  | { kind: "mismatch"; known: TofuRecord; submitted: string };
+  | { kind: "match"; record: TofuRecord; matchedKey: TofuKeyEntry }
+  | {
+      kind: "mismatch";
+      known: TofuKeyEntry;
+      knownKeys: TofuKeyEntry[];
+      submitted: string;
+    };
 
 const DB_NAME_PREFIX = "docspace-tofu-";
 const STORE_NAME = "known_keys";
-const DB_VERSION = 1;
+const DB_VERSION = 2;
+
+function isLegacyRecord(row: unknown): row is LegacyTofuRecordV1 {
+  if (!row || typeof row !== "object") return false;
+  const r = row as Record<string, unknown>;
+  return typeof r.publicKey === "string" && !Array.isArray(r.keys);
+}
+
+function migrateLegacyRecord(row: LegacyTofuRecordV1): TofuRecord {
+  return {
+    userId: row.userId,
+    keys: [
+      {
+        publicKey: row.publicKey,
+        firstSeenAt: row.firstSeenAt,
+        lastSeenAt: row.lastSeenAt,
+        verifiedAt: row.verifiedAt,
+        source: "migrated-v1",
+      },
+    ],
+  };
+}
+
+function normalizeRecord(row: unknown): TofuRecord | null {
+  if (!row || typeof row !== "object") return null;
+  if (isLegacyRecord(row)) return migrateLegacyRecord(row);
+  const r = row as TofuRecord;
+  if (!Array.isArray(r.keys) || r.keys.length === 0) return null;
+  return r;
+}
+
+function mostRecentKey(keys: TofuKeyEntry[]): TofuKeyEntry {
+  let best = keys[0];
+  for (const k of keys) {
+    if (k.lastSeenAt >= best.lastSeenAt) best = k;
+  }
+  return best;
+}
 
 function getIDB(): IDBFactory | null {
   if (typeof indexedDB === "undefined") return null;
@@ -119,14 +176,42 @@ export class TofuStore {
     }
     this.dbPromise = new Promise<IDBDatabase | null>((resolve) => {
       const req = factory.open(`${DB_NAME_PREFIX}${this.scopeId}`, DB_VERSION);
-      req.onupgradeneeded = () => {
+      req.onupgradeneeded = (event) => {
         const db = req.result;
         if (!db.objectStoreNames.contains(STORE_NAME)) {
           db.createObjectStore(STORE_NAME, { keyPath: "userId" });
         }
+        const oldVersion = event?.oldVersion ?? 0;
+        if (oldVersion > 0 && oldVersion < 2) {
+          try {
+            const store = req.transaction?.objectStore(STORE_NAME);
+            const getAllReq = store?.getAll();
+            if (getAllReq && store) {
+              getAllReq.onsuccess = () => {
+                for (const row of getAllReq.result ?? []) {
+                  if (isLegacyRecord(row)) {
+                    store.put(migrateLegacyRecord(row));
+                  }
+                }
+              };
+              getAllReq.onerror = () => {
+                if (typeof console !== "undefined") {
+                  // biome-ignore lint/suspicious/noConsole: diagnostic-only on migration read failure.
+                  console.warn("TofuStore: v1→v2 bulk migration read failed");
+                }
+              };
+            }
+          } catch {
+          }
+        }
       };
       req.onsuccess = () => {
-        resolve(req.result);
+        const db = req.result;
+        db.onversionchange = () => {
+          db.close();
+          this.dbPromise = null;
+        };
+        resolve(db);
       };
       req.onerror = () => {
         if (typeof console !== "undefined") {
@@ -151,7 +236,7 @@ export class TofuStore {
   private async getRecord(userId: string): Promise<TofuRecord | null> {
     const db = await this.openDB();
     if (!db) {
-      return this.getMemoryStore().get(userId) ?? null;
+      return normalizeRecord(this.getMemoryStore().get(userId));
     }
     return new Promise<TofuRecord | null>((resolve) => {
       try {
@@ -159,8 +244,7 @@ export class TofuStore {
         const store = tx.objectStore(STORE_NAME);
         const req = store.get(userId);
         req.onsuccess = () => {
-          const result = req.result as TofuRecord | undefined;
-          resolve(result ?? null);
+          resolve(normalizeRecord(req.result));
         };
         req.onerror = () => resolve(null);
       } catch {
@@ -221,46 +305,121 @@ export class TofuStore {
     if (!existing) {
       const record: TofuRecord = {
         userId,
-        publicKey,
-        firstSeenAt: now,
-        lastSeenAt: now,
-        verifiedAt: null,
+        keys: [
+          {
+            publicKey,
+            firstSeenAt: now,
+            lastSeenAt: now,
+            verifiedAt: null,
+            source: "first-seen",
+          },
+        ],
       };
       await this.putRecord(record);
       return { kind: "first-seen" };
     }
 
-    if (keysEqual(existing.publicKey, publicKey)) {
-      const updated: TofuRecord = { ...existing, lastSeenAt: now };
+    const matchIndex = existing.keys.findIndex((k) =>
+      keysEqual(k.publicKey, publicKey),
+    );
+    if (matchIndex > -1) {
+      const matchedKey: TofuKeyEntry = {
+        ...existing.keys[matchIndex],
+        lastSeenAt: now,
+      };
+      const updated: TofuRecord = {
+        ...existing,
+        keys: existing.keys.map((k, i) => (i === matchIndex ? matchedKey : k)),
+      };
       await this.putRecord(updated);
-      return { kind: "match", record: updated };
+      return { kind: "match", record: updated, matchedKey };
     }
 
-    return { kind: "mismatch", known: existing, submitted: publicKey };
+    return {
+      kind: "mismatch",
+      known: mostRecentKey(existing.keys),
+      knownKeys: existing.keys,
+      submitted: publicKey,
+    };
   }
 
-  /** Overwrite the entry; resets verifiedAt. */
   async acceptKey(userId: string, publicKey: string): Promise<void> {
     if (!userId || !publicKey) {
       throw new Error("TofuStore.acceptKey: userId and publicKey are required");
     }
     const existing = await this.getRecord(userId);
     const now = Date.now();
-    const record: TofuRecord = {
-      userId,
-      publicKey,
-      firstSeenAt: existing?.firstSeenAt ?? now,
-      lastSeenAt: now,
-      verifiedAt: null,
-    };
-    await this.putRecord(record);
+    if (!existing) {
+      await this.putRecord({
+        userId,
+        keys: [
+          {
+            publicKey,
+            firstSeenAt: now,
+            lastSeenAt: now,
+            verifiedAt: null,
+            source: "accepted",
+          },
+        ],
+      });
+      return;
+    }
+    const idx = existing.keys.findIndex((k) =>
+      keysEqual(k.publicKey, publicKey),
+    );
+    const keys =
+      idx > -1
+        ? existing.keys.map((k, i) =>
+            i === idx ? { ...k, lastSeenAt: now } : k,
+          )
+        : [
+            ...existing.keys,
+            {
+              publicKey,
+              firstSeenAt: now,
+              lastSeenAt: now,
+              verifiedAt: null,
+              source: "accepted" as const,
+            },
+          ];
+    await this.putRecord({ ...existing, keys });
   }
 
-  /** Mark the current key as out-of-band verified; no-op if unknown. */
-  async markVerified(userId: string): Promise<void> {
+  async getKeys(userId: string): Promise<TofuKeyEntry[]> {
+    if (!userId) return [];
+    const existing = await this.getRecord(userId);
+    return existing ? [...existing.keys] : [];
+  }
+
+  async forgetKey(userId: string, publicKey: string): Promise<void> {
+    if (!userId || !publicKey) {
+      throw new Error("TofuStore.forgetKey: userId and publicKey are required");
+    }
     const existing = await this.getRecord(userId);
     if (!existing) return;
-    await this.putRecord({ ...existing, verifiedAt: Date.now() });
+    const keys = existing.keys.filter((k) => !keysEqual(k.publicKey, publicKey));
+    if (keys.length === existing.keys.length) return;
+    if (keys.length === 0) {
+      await this.deleteRecord(userId);
+      return;
+    }
+    await this.putRecord({ ...existing, keys });
+  }
+
+  async markVerified(userId: string, publicKey?: string): Promise<void> {
+    const existing = await this.getRecord(userId);
+    if (!existing) return;
+    const target = publicKey
+      ? existing.keys.find((k) => keysEqual(k.publicKey, publicKey))
+      : mostRecentKey(existing.keys);
+    if (!target) return;
+    const now = Date.now();
+    await this.putRecord({
+      ...existing,
+      keys: existing.keys.map((k) =>
+        k === target ? { ...k, verifiedAt: now } : k,
+      ),
+    });
   }
 
   async forget(userId: string): Promise<void> {
@@ -277,7 +436,12 @@ export class TofuStore {
         const tx = db.transaction(STORE_NAME, "readonly");
         const store = tx.objectStore(STORE_NAME);
         const req = store.getAll();
-        req.onsuccess = () => resolve((req.result as TofuRecord[]) ?? []);
+        req.onsuccess = () =>
+          resolve(
+            ((req.result as unknown[]) ?? [])
+              .map(normalizeRecord)
+              .filter((r): r is TofuRecord => r !== null),
+          );
         req.onerror = () => resolve([]);
       } catch {
         resolve([]);

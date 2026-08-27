@@ -1,9 +1,9 @@
 {
   "key_path": "LimitTimeBlockFormRoomDescription",
-  "content": "In a Form Filling room, the main link is valid for an unlimited time period.",
-  "content_en_sha1_hash": "a03b622671c86c517f663bdce63318868e8f0750",
+  "content": "In a Form Filling space, the main link is valid for an unlimited time period.",
+  "content_en_sha1_hash": "407d0e5b7463f55778f528ade6fba7e4f1a6f3f0",
   "created_at": "2025-08-26T11:15:03.468Z",
-  "updated_at": "2026-06-09T09:43:10.962Z",
+  "updated_at": "2026-08-26T14:08:33.185Z",
   "comment": {
     "text": "This is a descriptive text displayed in a dialog. It informs the user that the main link for a Form Filling room has no time limit.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 431,
+      "line_number": 419,
       "context": "const isParentPublicRoom =\n !isRoom(item) && item.parentRoomType === FolderType.PublicRoom;\n \n if (isFormRoom || isParentFormRoom)\n return t(\"Common:LimitTimeBlockFormRoomDescription\");\n if (isPublic || isParentPublicRoom)\n return t(\"Common:LimitTimeBlockPublicRoomDescription\");\n \n return \"\";\n }",
       "module": "/packages/shared"
     }

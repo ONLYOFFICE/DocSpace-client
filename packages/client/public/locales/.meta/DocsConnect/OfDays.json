@@ -3,7 +3,7 @@
   "content": "of {{count}} days",
   "content_en_sha1_hash": "ce9b10bb860fb9097c1759de03862e4680b0bc91",
   "created_at": "2026-07-27T13:07:48.486Z",
-  "updated_at": "2026-07-27T14:10:48.226Z",
+  "updated_at": "2026-08-06T08:04:20.058Z",
   "comment": {
     "text": "Part of a text label in the trial status section, following the number of remaining days; {{count}} represents the total duration of the trial period.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 382,
+      "line_number": 402,
       "context": "<Text className={styles.trialLabel}>\n {t(\"DocsConnect:DaysLeft\")}\n </Text>\n <Text className={styles.trialDays}>{daysLeft}</Text>\n <Text className={styles.trialTotal}>\n {t(\"DocsConnect:OfDays\", { count: totalDays })}\n </Text>\n <div\n className={`${styles.progress} ${\n expired\n ? styles.progressExpired",
       "module": "/libs/ui-kit"
     }

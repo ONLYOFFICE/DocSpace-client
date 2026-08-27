@@ -78,6 +78,8 @@ type PassphraseModalProps = {
   showRememberDevice?: boolean;
   onPasskeyUnlock?: () => void;
   isPasskeyUnlocking?: boolean;
+  title?: string;
+  description?: string;
 };
 
 const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
@@ -111,6 +113,8 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   showRememberDevice = false,
   onPasskeyUnlock,
   isPasskeyUnlocking = false,
+  title,
+  description,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
   const inputRef = useRef<PasswordInputHandle>(null);
@@ -188,6 +192,15 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
 
   const isDisabled = !isValid || isLoading;
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key !== "Enter" || isDisabled) return;
+      e.preventDefault();
+      handleSubmit();
+    },
+    [handleSubmit, isDisabled],
+  );
+
   const displayedError = externalError || error;
 
   const passphraseHasError =
@@ -204,15 +217,17 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {isNew ? t("Common:CreatePassphrase") : t("Common:EnterPassphrase")}
+        {title ??
+          (isNew ? t("Common:CreatePassphrase") : t("Common:EnterPassphrase"))}
       </ModalDialog.Header>
 
       <ModalDialog.Body>
         <div className={styles.container}>
           <Text className={styles.description}>
-            {isNew
-              ? t("Common:CreatePassphraseHint")
-              : t("Common:PassphraseHint")}
+            {description ??
+              (isNew
+                ? t("Common:CreatePassphraseHint")
+                : t("Common:PassphraseHint"))}
           </Text>
 
           <div className={styles.passphraseField}>
@@ -270,6 +285,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 hasError={passphraseHasError}
                 isAutoFocussed
                 autoComplete="new-password"
+                onKeyDown={handleKeyDown}
                 tabIndex={2}
               />
             </FieldContainer>
@@ -374,6 +390,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   !!confirmPassphrase && passphrase !== confirmPassphrase
                 }
                 autoComplete="new-password"
+                onKeyDown={handleKeyDown}
                 tabIndex={3}
               />
             </FieldContainer>

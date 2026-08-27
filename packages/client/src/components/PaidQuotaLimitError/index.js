@@ -42,6 +42,8 @@ import { Link } from "@docspace/ui-kit/components/link";
 
 const PaidQuotaLimitError = ({
 	isRoomAdmin,
+	isCommunity,
+	standalone,
 	setInvitePanelOptions,
 	invitePanelVisible,
 }) => {
@@ -67,21 +69,25 @@ const PaidQuotaLimitError = ({
 	return (
 		<>
 			<Text>{t("Common:QuotaPaidUserLimitError")}</Text>
-			{!isRoomAdmin ? (
+			{!isRoomAdmin && !isCommunity ? (
 				<Link isHovered onClick={onClickPayments} color="accent">
-					{t("Common:Billing")}
+					{standalone ? t("Common:PaymentsTitle") : t("Common:Billing")}
 				</Link>
 			) : null}
 		</>
 	);
 };
 
-export default inject(({ authStore, dialogsStore }) => {
-	const { isRoomAdmin } = authStore;
-	const { setInvitePanelOptions, invitePanelOptions } = dialogsStore;
-	return {
-		isRoomAdmin,
-		setInvitePanelOptions,
-		invitePanelVisible: invitePanelOptions.visible,
-	};
-})(observer(PaidQuotaLimitError));
+export default inject(
+	({ authStore, dialogsStore, settingsStore, currentTariffStatusStore }) => {
+		const { isRoomAdmin } = authStore;
+		const { setInvitePanelOptions, invitePanelOptions } = dialogsStore;
+		return {
+			isRoomAdmin,
+			isCommunity: currentTariffStatusStore.isCommunity,
+			standalone: settingsStore.standalone,
+			setInvitePanelOptions,
+			invitePanelVisible: invitePanelOptions.visible,
+		};
+	},
+)(observer(PaidQuotaLimitError));

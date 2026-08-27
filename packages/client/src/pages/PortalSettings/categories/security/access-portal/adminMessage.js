@@ -51,7 +51,6 @@ import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStor
 
 import { LearnMoreWrapper } from "../StyledSecurity";
 import styles from "./adminMessage.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const AdminMessage = (props) => {
   const {
@@ -163,9 +162,7 @@ const AdminMessage = (props) => {
     <div className={styles.container}>
       <LearnMoreWrapper withoutExternalLink={!administratorMessageSettingsUrl}>
         <Text>
-          {t("AdminsMessageSettingDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("AdminsMessageSettingDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
           <Trans t={t} i18nKey="SaveToApply" />

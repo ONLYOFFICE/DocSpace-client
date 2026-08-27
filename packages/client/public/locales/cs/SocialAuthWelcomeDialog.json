@@ -1,11 +1,9 @@
 {
   "ChangeData": "Změna dat a hesla",
   "ClickButtonBelow": "Pokud si přejete přihlásit se pomocí e-mailu, nastavte si prosím vlastní heslo. <br/> Jakmile budete připraveni, klikněte prosím na tlačítko níže.",
-  "ContinueToProduct": "Pokračujte k {{productName}}",
+  "ContinueToProduct": "Pokračujte do pracovního prostoru",
   "GeneratedPassword": "Vygenerované heslo",
-  "ProductNameDetail": "{{productName}} název",
+  "ProductNameDetail": "Název pracovního prostoru",
   "ReviewAccountDetails": "Prosím, věnujte chvíli zhodnocení Vašich údajů účtu:",
-  "SetEmailPassword": "Nastavit heslo",
-  "WelcomeSubtitle": "Váš prostor byl úspěšně vytvořen. Zkontrolujte podrobnosti svého profilu a začněte pracovat.",
   "YourProfileDetails": "Podrobnosti profilu"
 }

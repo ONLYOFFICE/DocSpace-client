@@ -1,9 +1,9 @@
 {
-  "ActionsWithFilesDescription": "Badges zeigen die Dateiakтивность – Uploads, Bearbeitungen oder Freigaben – in den Bereichen {{rooms}}, {{shared}}, {{documents}} und {{aiAgents}} an.",
+  "ActionsWithFilesDescription": "Abzeichen zeigen Dateiaktivitäten – Uploads, Bearbeitungen oder Freigaben – in den Bereichen {{rooms}}, {{shared}}, {{documents}} und {{aiAgents}} an.",
   "AdminSetupRequired": "Administrator-Einrichtung erforderlich",
   "Badges": "Abzeichen",
-  "DailyFeed": "Täglicher {{productName}}-Feed",
-  "DailyFeedDescription": "Lesen Sie Nachrichten und Ereignisse aus Ihrem {{productName}} in einer täglichen Zusammenfassung.",
+  "DailyFeed": "Täglicher {{organizationName}} {{productName}}-Feed",
+  "DailyFeedDescription": "Lesen Sie Nachrichten und Ereignisse aus Ihrem {{organizationName}} {{productName}} in einer täglichen Zusammenfassung.",
   "FileActivityNotify": "Benachrichtigungen zu Dateiaktivitäten",
   "IsNotValid": "Ungültig",
   "LdapEmailTooltip": "Dieses Benutzerkonto wird aus LDAP geladen. Die E-Mail-Adresse des Benutzers wurde nicht angegeben. Die aktuelle Adresse wurde automatisch generiert und kann nicht zum Senden von Benachrichtigungen verwendet werden.",
@@ -14,6 +14,6 @@
   "SettingUpNotifications": "Benachrichtigungen einrichten",
   "SuccessConnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal verbunden. Sie erhalten nun Updates darüber.",
   "SuccessDisconnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal getrennt. Benachrichtigungen werden dort nicht mehr gesendet.",
-  "UsefulTips": "Nützliche {{productName}}-Tipps",
-  "UsefulTipsDescription": "Erhalten Sie nützliche Anleitungen zu {{productName}}"
+  "UsefulTips": "Nützliche {{organizationName}} {{productName}}-Tipps",
+  "UsefulTipsDescription": "Erhalten Sie nützliche Anleitungen zu {{organizationName}} {{productName}}"
 }

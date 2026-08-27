@@ -3,7 +3,7 @@
   "content": "Storage added",
   "content_en_sha1_hash": "94e826d1eeb044c53234c0272d25c13ceff7a879",
   "created_at": "2026-06-25T11:54:58.256Z",
-  "updated_at": "2026-06-30T07:32:49.211Z",
+  "updated_at": "2026-08-13T14:37:21.819Z",
   "comment": {
     "text": "Label in a summary card on the additional storage page, serving as a heading for the current storage plan's total capacity.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 331,
-      "context": "})}\n </Text>\n </div>\n \n <div className={styles.summaryCard}>\n <Text className={styles.cardLabel}>{t(\"StorageAdded\")}</Text>\n <Text className={styles.cardValue}>\n {`${currentStoragePlanSize} ${t(\"Gigabyte\")}`}\n </Text>\n <Text className={styles.cardCaption}>\n {t(\"AdditionalDiskSpace\")}",
+      "line_number": 364,
+      "context": "})}\n </Text>\n </div>\n \n <div className={styles.summaryCard}>\n <Text className={styles.cardLabel}>{t(\"StorageAdded\")}</Text>\n <Text className={styles.cardValue}>\n {`${planSize} ${t(\"Gigabyte\")}`}\n </Text>\n <Text className={styles.cardCaption}>\n {t(\"AdditionalDiskSpace\")}",
       "module": "/libs/ui-kit"
     }
   ],

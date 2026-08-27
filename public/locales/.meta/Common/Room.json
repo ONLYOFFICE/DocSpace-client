@@ -3,7 +3,7 @@
   "content": "Room",
   "content_en_sha1_hash": "90e2fca9e9906b8390346daa20885b3a71a7a70e",
   "created_at": "2025-05-19T21:30:48.160Z",
-  "updated_at": "2026-07-27T13:07:50.728Z",
+  "updated_at": "2026-08-19T13:26:37.736Z",
   "comment": {
     "text": "This is a label for a \"Room\" in DocSpace, referring to a collaborative workspace or folder. It appears in filter options and as a label in developer tools settings.",
     "is_auto": true,

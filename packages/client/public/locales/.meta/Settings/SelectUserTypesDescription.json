@@ -1,44 +1,44 @@
 {
   "key_path": "SelectUserTypesDescription",
-  "content": "Select {{productName}} roles for the imported users: <1>{{productName}} admin</1>, <1>Room admin</1> or <1>User</1>. By default, User role is selected for each user. You can manage the roles after the import.",
-  "content_en_sha1_hash": "e90aa9f2a0e200f361dff9163df3131462ddc07f",
-  "created_at": "2025-05-19T21:30:52.598Z",
-  "updated_at": "2026-05-15T14:00:06.779Z",
+  "content": "Select workspace roles for the imported users: <1>Full admin</1>, <1>Room admin</1> or <1>User</1>. By default, User role is selected for each user. You can manage the roles after the import.",
+  "content_en_sha1_hash": "a959290f9ba1ab0c1648cfc0111269c96ccac9d1",
+  "created_at": "2026-08-13T14:37:16.526Z",
+  "updated_at": "2026-08-14T14:58:32.784Z",
   "comment": {
-    "text": "This is a descriptive text that appears during the user import process, explaining how to assign roles to imported users. It includes `{{productName}}` for the product name and `<1>` tags to bold specific role names.",
+    "text": "Instructional text within a step of the workspace import wizard explaining how to assign roles to imported users; use <1> tags to bold specific role names.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:22:18.498Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:15:28.624Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 92,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 90,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n components={{\n 1: <b />,\n }}\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 103,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 101,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n components={{\n 1: <b />,\n }}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 97,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 94,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n components={{\n 1: <b />,\n }}\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 66,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 64,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n components={{\n 1: <b />,\n }}\n />\n {renderTooltip}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 66,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 64,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n components={{\n 1: <b />,\n }}\n />\n {renderTooltip}",
       "module": "/packages/client"
     }
   ],
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -188,6 +188,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -224,12 +230,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

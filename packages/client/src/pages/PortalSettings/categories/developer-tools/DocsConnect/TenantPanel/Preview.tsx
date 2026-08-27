@@ -38,7 +38,6 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
-import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import { EmptyView } from "@docspace/ui-kit/components/empty-view";
@@ -49,6 +48,8 @@ import DocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.r
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copyTo.react.svg";
 import DesktopOnlyIcon from "PUBLIC_DIR/images/emptyview/empty.desktop.only.svg";
+
+import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 
 import { DeviceType } from "@docspace/shared/enums";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
@@ -77,7 +78,11 @@ const Preview = ({
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const [view, setView] = useState<"editor" | "code">("editor");
   const [token, setToken] = useState<string | null>(null);
-  const [editorError, setEditorError] = useState(false);
+  // "load" — the tenant api.js could not be fetched (typically blocked by CSP
+  // until the page is reloaded), so offering a reload makes sense.
+  // "sign" — the config could not be signed with the tenant secret; a reload
+  // changes nothing, the address or the secret key has to be fixed.
+  const [editorError, setEditorError] = useState<"load" | "sign" | null>(null);
   const [documentReady, setDocumentReady] = useState(false);
   const [previewKey] = useState(
     () => `docs-connect-preview-${Math.random().toString(36).slice(2, 10)}`,
@@ -117,7 +122,7 @@ const Preview = ({
         if (!cancelled) setToken(value);
       })
       .catch(() => {
-        if (!cancelled) setEditorError(true);
+        if (!cancelled) setEditorError("sign");
       });
 
     return () => {
@@ -174,34 +179,45 @@ const Preview = ({
         ) : null
       ) : (
         <div
-          className={`${styles.previewEditor} ${
-            view === "editor" ? "" : styles.previewHidden
+          className={`${styles.previewEditorSlot} ${
+            view === "editor" ? "" : styles.previewEditorSlotHidden
           }`}
+          // The editor stays mounted and laid out while another tab is active
+          // so it keeps loading; `inert` takes it out of the tab order and the
+          // accessibility tree meanwhile.
+          inert={view !== "editor"}
         >
-          {editorError ? (
-            <Text className={styles.muted}>
-              {t("DocsConnect:EditorPreviewFailed")}
-            </Text>
-          ) : (
-            <>
-              {!documentReady ? (
-                <div className={styles.previewLoader}>
-                  <Loader type={LoaderTypes.rombs} size="40px" />
-                </div>
-              ) : null}
-              {token ? (
-                <DocumentEditor
-                  id="docs-connect-preview-editor"
-                  documentServerUrl={`${serverUrl}/`}
-                  config={{ ...config, token }}
-                  width="100%"
-                  height="100%"
-                  onLoadComponentError={() => setEditorError(true)}
-                  events_onDocumentReady={() => setDocumentReady(true)}
-                />
-              ) : null}
-            </>
-          )}
+          <div className={styles.previewEditor}>
+            {editorError ? (
+              <EmptyServerErrorContainer
+                withReload={editorError === "load"}
+                description={
+                  editorError === "sign"
+                    ? t("DocsConnect:EditorPreviewFailed")
+                    : undefined
+                }
+              />
+            ) : (
+              <>
+                {!documentReady ? (
+                  <div className={styles.previewLoader}>
+                    <Loader type={LoaderTypes.rombs} size="40px" />
+                  </div>
+                ) : null}
+                {token ? (
+                  <DocumentEditor
+                    id="docs-connect-preview-editor"
+                    documentServerUrl={`${serverUrl}/`}
+                    config={{ ...config, token }}
+                    width="100%"
+                    height="100%"
+                    onLoadComponentError={() => setEditorError("load")}
+                    events_onDocumentReady={() => setDocumentReady(true)}
+                  />
+                ) : null}
+              </>
+            )}
+          </div>
         </div>
       )}
 
@@ -229,4 +245,3 @@ export default inject(
     currentDeviceType: settingsStore.currentDeviceType,
   }),
 )(observer(Preview));
-

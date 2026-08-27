@@ -33,24 +33,31 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
+import axios from "axios";
+
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
+import CheckRoundReactSvgUrl from "PUBLIC_DIR/images/icons/16/check.round.react.svg?url";
 
 import type {
   TDocsConnectInfo,
@@ -59,6 +66,8 @@ import type {
 import type { TTranslation } from "@docspace/shared/types";
 
 import AddRuleDialog from "./sub-components/AddRuleDialog";
+import ApplyToPortalDialog from "./sub-components/ApplyToPortalDialog";
+import ResetRulesDialog from "./sub-components/ResetRulesDialog";
 
 import styles from "./TenantPanel.module.scss";
 
@@ -79,12 +88,83 @@ interface SettingsProps {
   info?: TDocsConnectInfo;
   copyToClipboard?: (value: string, t: TTranslation) => void;
   updateConfig?: (data: TDocsConnectConfigUpdate) => Promise<void>;
+  applyToDocumentService?: () => Promise<void>;
+  resetDocumentService?: () => Promise<void>;
+  fetchDocumentService?: () => Promise<void>;
+  isConnectedToPortal?: boolean;
+  isPortalConnectionAvailable?: boolean;
 }
 
 const onlyDigits = (value: string) => value.replace(/\D/g, "");
 
-const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
+const DEFAULT_MAX_FILE_SIZE_LIMIT = 209715200;
+
+const FILE_SIZE_LIMIT_FIELD = "Server.FileSizeLimit";
+
+const getValidationErrors = (error: unknown) => {
+  if (!axios.isAxiosError(error)) return undefined;
+
+  const errors = error.response?.data?.response?.errors;
+
+  return errors && typeof errors === "object"
+    ? (errors as Record<string, string[] | string>)
+    : undefined;
+};
+
+const getFieldErrorText = (
+  errors: Record<string, string[] | string> | undefined,
+  field: string,
+) => {
+  const value = errors?.[field];
+  const text = Array.isArray(value) ? value.join(" ") : value;
+
+  return typeof text === "string" && text !== "" ? text : undefined;
+};
+
+const getValidationErrorText = (
+  errors: Record<string, string[] | string> | undefined,
+) => {
+  if (!errors) return undefined;
+
+  const text = Object.keys(errors)
+    .map((field) => getFieldErrorText(errors, field))
+    .filter(Boolean)
+    .join(" ");
+
+  return text === "" ? undefined : text;
+};
+
+const getFileSizeLimitFromError = (
+  errors: Record<string, string[] | string> | undefined,
+) => {
+  const text = getFieldErrorText(errors, FILE_SIZE_LIMIT_FIELD);
+
+  if (!text) return undefined;
+
+  const max = /\d+\s+and\s+(\d+)/.exec(text)?.[1];
+
+  return max ? Number(max) : undefined;
+};
+
+// `-webkit-text-security` is non-standard and missing in browsers older than
+// Firefox 114, where it would silently render the secret key in clear text.
+const SUPPORTS_TEXT_SECURITY =
+  typeof CSS !== "undefined" &&
+  typeof CSS.supports === "function" &&
+  CSS.supports("-webkit-text-security", "disc");
+
+const Settings = ({
+  info,
+  copyToClipboard,
+  updateConfig,
+  applyToDocumentService,
+  resetDocumentService,
+  fetchDocumentService,
+  isConnectedToPortal,
+  isPortalConnectionAvailable,
+}: SettingsProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
+  const navigate = useNavigate();
 
   const [baseline, setBaseline] = useState<TGeneralState>(() => ({
     header: info?.config.security.header ?? "",
@@ -104,6 +184,8 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
     })),
   );
   const [addRuleDialogVisible, setAddRuleDialogVisible] = useState(false);
+  const [resetRulesDialogVisible, setResetRulesDialogVisible] =
+    useState(false);
 
   const [savedMaxDownload, setSavedMaxDownload] = useState(() =>
     info?.config.server.fileSizeLimit != null
@@ -111,11 +193,52 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
       : "",
   );
   const [maxDownloadBytes, setMaxDownloadBytes] = useState(savedMaxDownload);
+  const [maxFileSizeLimit, setMaxFileSizeLimit] = useState(
+    DEFAULT_MAX_FILE_SIZE_LIMIT,
+  );
   const [isSavingRules, setIsSavingRules] = useState(false);
+
+  const [applyDialogVisible, setApplyDialogVisible] = useState(false);
+  const [isApplying, setIsApplying] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
+
+  useEffect(() => {
+    if (isPortalConnectionAvailable) fetchDocumentService?.();
+  }, [fetchDocumentService, isPortalConnectionAvailable]);
 
   if (!info) return null;
 
   const isBusy = isSavingGeneral || isSavingRules;
+
+  const canApplyToPortal =
+    !!info.tenant.address &&
+    !!info.config.security.secret &&
+    !!info.config.security.header;
+
+  const onApplyToPortal = async () => {
+    setIsApplying(true);
+    try {
+      await applyToDocumentService?.();
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+      setApplyDialogVisible(false);
+    } catch (e) {
+      toastr.error(e as Error);
+    } finally {
+      setIsApplying(false);
+    }
+  };
+
+  const onResetPortal = async () => {
+    setIsResetting(true);
+    try {
+      await resetDocumentService?.();
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+    } catch (e) {
+      toastr.error(e as Error);
+    } finally {
+      setIsResetting(false);
+    }
+  };
 
   const hasChangesGeneral =
     general.header !== baseline.header ||
@@ -132,7 +255,18 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
     fileSizeLimit: Number(maxDownload) || 0,
   });
 
+  const fileSizeLimitError = (limit: number) =>
+    t("DocsConnect:FileSizeLimitExceeded", {
+      limit,
+      size: getConvertedSize(t, limit),
+    });
+
   const onSaveGeneral = async () => {
+    if (Number(maxDownloadBytes) > maxFileSizeLimit) {
+      toastr.error(fileSizeLimitError(maxFileSizeLimit));
+      return;
+    }
+
     setIsSavingGeneral(true);
     try {
       await updateConfig?.({
@@ -144,7 +278,16 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
       setSavedMaxDownload(maxDownloadBytes);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
-      toastr.error(e as Error);
+      const errors = getValidationErrors(e);
+      const serverLimit = getFileSizeLimitFromError(errors);
+
+      if (serverLimit !== undefined) {
+        setMaxFileSizeLimit(serverLimit);
+        toastr.error(fileSizeLimitError(serverLimit));
+      } else {
+        const validationText = getValidationErrorText(errors);
+        toastr.error(validationText ?? (e as Error));
+      }
     } finally {
       setIsSavingGeneral(false);
     }
@@ -156,8 +299,6 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
   };
 
   const persistRules = async (next: TAccessRule[]) => {
-    const prev = rules;
-    setRules(next);
     setIsSavingRules(true);
     try {
       await updateConfig?.({
@@ -168,17 +309,18 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
           })),
         },
       });
+      setRules(next);
+      return true;
     } catch (e) {
-      setRules(prev);
       toastr.error(e as Error);
+      return false;
     } finally {
       setIsSavingRules(false);
     }
   };
 
-  const onAddRule = (type: "allow" | "deny", value: string) => {
+  const onAddRule = (type: "allow" | "deny", value: string) =>
     persistRules([...rules, { key: `${Date.now()}`, type, value }]);
-  };
 
   const onDeleteRule = (key: string) => {
     persistRules(rules.filter((rule) => rule.key !== key));
@@ -186,6 +328,100 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
 
   return (
     <div className={styles.settings}>
+      {isPortalConnectionAvailable ? (
+        <>
+          <Text fontSize="16px" fontWeight={700}>
+            {t("DocsConnect:DocsConnectionTitle", {
+              organizationName: getBrandName("OrganizationName"),
+              editorsName: getBrandName("ProductEditorsName"),
+            })}
+          </Text>
+
+          {isConnectedToPortal ? (
+            <div className={styles.connectionGroup}>
+              <div className={styles.connectedBanner}>
+                <img
+                  src={CheckRoundReactSvgUrl}
+                  alt=""
+                  className={styles.connectedBannerIcon}
+                />
+                <Text fontSize="13px">
+                  <Trans
+                    ns="DocsConnect"
+                    i18nKey="ConnectedBanner"
+                    values={{
+                      organizationName: getBrandName("OrganizationName"),
+                      editorsName: getBrandName("ProductEditorsName"),
+                      service: t("DocsConnect:DocsConnect"),
+                    }}
+                    components={{ 1: <Text as="span" fontWeight={600} /> }}
+                  />
+                </Text>
+              </div>
+              <div className={styles.addRuleAction}>
+                <Button
+                  primary
+                  size={ButtonSize.small}
+                  label={t("DocsConnect:OpenDocsSettings", {
+                    editorsName: getBrandName("ProductEditorsName"),
+                  })}
+                  isDisabled={isBusy || isResetting}
+                  onClick={() =>
+                    navigate("/portal-settings/integration/document-service")
+                  }
+                  testId="docs_connect_open_docs_settings"
+                />
+                <Button
+                  size={ButtonSize.small}
+                  label={t("Common:Reset")}
+                  isDisabled={isBusy || isResetting}
+                  isLoading={isResetting}
+                  onClick={onResetPortal}
+                  testId="docs_connect_reset_portal"
+                />
+              </div>
+            </div>
+          ) : (
+            <div className={styles.connectionGroup}>
+              <div className={styles.settingsGroup}>
+                <Text fontWeight={600}>
+                  {t("DocsConnect:UseEditorsInProduct", {
+                    organizationName: getBrandName("OrganizationName"),
+                    editorsName: getBrandName("ProductEditorsName"),
+                  })}
+                </Text>
+                <Text fontSize="13px" className={styles.settingsHint}>
+                  {t("DocsConnect:DocsConnectionDescription", {
+                    service: t("DocsConnect:DocsConnect"),
+                    organizationName: getBrandName("OrganizationName"),
+                    editorsName: getBrandName("ProductEditorsName"),
+                  })}
+                </Text>
+              </div>
+              <div className={styles.addRuleAction}>
+                <Button
+                  primary
+                  size={ButtonSize.small}
+                  label={t("DocsConnect:ConnectToDocs", {
+                    organizationName: getBrandName("OrganizationName"),
+                    editorsName: getBrandName("ProductEditorsName"),
+                  })}
+                  isDisabled={isBusy || isResetting || !canApplyToPortal}
+                  onClick={() => setApplyDialogVisible(true)}
+                  testId="docs_connect_apply_to_portal"
+                />
+                <Button
+                  size={ButtonSize.small}
+                  label={t("Common:Reset")}
+                  isDisabled
+                  testId="docs_connect_reset_portal"
+                />
+              </div>
+            </div>
+          )}
+        </>
+      ) : null}
+
       <Text fontSize="16px" fontWeight={700}>
         {t("Common:SettingsGeneral")}
       </Text>
@@ -216,7 +452,14 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
         >
           <div className={styles.secretField}>
             <TextInput
-              type={secretRevealed ? InputType.text : InputType.password}
+              // A text input avoids the browser password-manager prompt, and the
+              // value is masked with CSS instead. Where that CSS is unsupported
+              // we fall back to a real password input rather than leak the key.
+              type={
+                secretRevealed || SUPPORTS_TEXT_SECURITY
+                  ? InputType.text
+                  : InputType.password
+              }
               value={general.secret}
               onChange={(e) =>
                 setGeneral((prev) => ({ ...prev, secret: e.target.value }))
@@ -224,7 +467,13 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
               isDisabled={isBusy}
               scale
               withBorder={false}
-              className={styles.secretInput}
+              autoComplete="off"
+              spellCheck={false}
+              className={`${styles.secretInput} ${
+                !secretRevealed && SUPPORTS_TEXT_SECURITY
+                  ? styles.secretMasked
+                  : ""
+              }`}
               testId="docs_connect_settings_secret_input"
             />
             <div className={styles.secretIcons}>
@@ -315,7 +564,17 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
       </div>
 
       <div className={styles.settingsGroup}>
-        <Text fontWeight={600}>{t("DocsConnect:FileSizeLimits")}</Text>
+        <div className={styles.groupTitle}>
+          <Text fontWeight={600}>{t("DocsConnect:FileSizeLimits")}</Text>
+          <HelpButton
+            size={12}
+            tooltipContent={t("DocsConnect:FileSizeLimitsTooltip", {
+              limit: maxFileSizeLimit,
+              size: getConvertedSize(t, maxFileSizeLimit),
+            })}
+            tooltipMaxWidth="320px"
+          />
+        </div>
         <Text fontSize="13px" className={styles.settingsHint}>
           {t("DocsConnect:FileSizeLimitsDescription")}
         </Text>
@@ -398,15 +657,37 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
           size={ButtonSize.small}
           label={t("Common:Reset")}
           isDisabled={isBusy || rules.length === 0}
-          onClick={() => persistRules([])}
+          onClick={() => setResetRulesDialogVisible(true)}
         />
       </div>
 
       {addRuleDialogVisible ? (
         <AddRuleDialog
           visible
+          existingAddresses={rules.map((rule) => rule.value)}
           onClose={() => setAddRuleDialogVisible(false)}
           onAdd={onAddRule}
+        />
+      ) : null}
+
+      {applyDialogVisible ? (
+        <ApplyToPortalDialog
+          visible
+          isSaving={isApplying}
+          onApply={onApplyToPortal}
+          onClose={() => setApplyDialogVisible(false)}
+        />
+      ) : null}
+
+      {resetRulesDialogVisible ? (
+        <ResetRulesDialog
+          visible
+          isSaving={isSavingRules}
+          onReset={async () => {
+            const ok = await persistRules([]);
+            if (ok) setResetRulesDialogVisible(false);
+          }}
+          onClose={() => setResetRulesDialogVisible(false)}
         />
       ) : null}
     </div>
@@ -417,5 +698,10 @@ export default inject(({ docsConnectStore }: TStore) => ({
   info: docsConnectStore.info,
   copyToClipboard: docsConnectStore.copyToClipboard,
   updateConfig: docsConnectStore.updateConfig,
+  applyToDocumentService: docsConnectStore.applyToDocumentService,
+  resetDocumentService: docsConnectStore.resetDocumentService,
+  fetchDocumentService: docsConnectStore.fetchDocumentService,
+  isConnectedToPortal: docsConnectStore.isConnectedToPortal,
+  isPortalConnectionAvailable: docsConnectStore.isPortalConnectionAvailable,
 }))(observer(Settings));
 

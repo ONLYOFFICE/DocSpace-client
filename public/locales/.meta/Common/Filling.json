@@ -3,7 +3,7 @@
   "content": "Filling",
   "content_en_sha1_hash": "98325be45e57b01ea42841fb2dc63e31875877c1",
   "created_at": "2025-08-26T11:14:56.341Z",
-  "updated_at": "2026-05-15T14:00:06.933Z",
+  "updated_at": "2026-08-26T14:08:33.174Z",
   "comment": {
     "text": "This is a label for a sharing permission option. It indicates that the user with this permission can fill out forms.",
     "is_auto": true,
@@ -13,26 +13,26 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 161,
-      "context": "title: t(\"Common:ReadOnly\"),\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n },\n };\n \n return linkAccess",
+      "line_number": 152,
+      "context": "title: t(\"Common:ReadOnly\"),\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n },\n };\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 161,
-      "context": "title: t(\"Common:ReadOnly\"),\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n },\n };\n \n return linkAccess",
+      "line_number": 152,
+      "context": "title: t(\"Common:ReadOnly\"),\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n },\n };\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 161,
-      "context": "title: t(\"Common:ReadOnly\"),\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n },\n };\n \n return linkAccess",
+      "line_number": 152,
+      "context": "title: t(\"Common:ReadOnly\"),\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n },\n };\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 161,
-      "context": "title: t(\"Common:ReadOnly\"),\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n },\n };\n \n return linkAccess",
+      "line_number": 152,
+      "context": "title: t(\"Common:ReadOnly\"),\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n },\n };\n };",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Add the website URL for embedding to the <1>allow list</1>.",
   "content_en_sha1_hash": "74a4a58edf7147b1aace227876881032aba6a2bb",
   "created_at": "2026-06-09T09:42:41.878Z",
-  "updated_at": "2026-06-09T10:16:48.671Z",
+  "updated_at": "2026-08-14T14:58:32.728Z",
   "comment": {
     "text": "Instructional text in the Embedding Panel informing administrators how to permit websites for embedding, where <1> is a clickable link to the allow list configuration.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 428,
+      "line_number": 427,
       "context": "<Text fontSize=\"12px\" fontWeight={400}>\n {isAdmin ? (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"EmbeddingBarAllowList\"\n components={{\n 1: (\n <Link\n onClick={onOpenDevTools}\n color={currentColorScheme?.main?.accent ?? undefined}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/sub-components/EmbeddingPanel/index.tsx",
-      "line_number": 390,
+      "line_number": 389,
       "context": "<Text fontSize=\"12px\" fontWeight={400}>\n {isAdmin ? (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"EmbeddingBarAllowList\"\n components={{\n 1: (\n <Link\n onClick={onOpenDevTools}\n color=\"accent\"",
       "module": "/packages/sdk"
     }

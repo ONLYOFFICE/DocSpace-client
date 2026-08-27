@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   colorThemeHandler,
   settingsHandler,
@@ -93,7 +94,7 @@ const freezeTime = async (context: BrowserContext, frozenNowMs: number) => {
 
 const usePreset = (mockRequest: WorkerFixture, preset: DocsConnectPreset) => {
   mockRequest.use(
-    settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+    settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
     colorThemeHandler(TEST_PORT),
     ...docsConnectHandlers(TEST_PORT, preset),
   );
@@ -116,7 +117,7 @@ test.describe("Docs Connect addons card", () => {
     const card = page.getByTestId("storage_service_docscloud");
     await expect(card).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "desktop",
       "docs-connect",
       "addons-card-not-subscribed.png",
@@ -138,7 +139,7 @@ test.describe("Docs Connect addons card", () => {
     await expect(card).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
     await expect(card.getByTestId("storage_service_docscloud_toggle")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "desktop",
       "docs-connect",
       "addons-card-trial.png",
@@ -196,7 +197,7 @@ test.describe("Docs Connect service page", () => {
       timeout: FIRST_RENDER_TIMEOUT,
     });
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "desktop",
       "docs-connect",
       "service-page-paid.png",

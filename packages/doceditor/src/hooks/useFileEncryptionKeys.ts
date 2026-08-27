@@ -50,7 +50,7 @@ import {
   decryptFileNameRaw,
   parseDSE3Header,
 } from "@docspace/shared/services/encryption/streaming-encryption";
-import { loadRoomMemberKeysSafe } from "@docspace/shared/services/private-room/room-member-keys";
+import { loadFileSenderKeysSafe } from "@docspace/shared/services/private-room/room-member-keys";
 import type { TUser } from "@docspace/shared/api/people/types";
 
 import { useEncryptionKeysReady } from "@/components/EncryptionProviderWrapper";
@@ -120,12 +120,13 @@ const useFileEncryptionKeys = (
   const fileViewUrl = config?.file?.viewUrl;
   const userId = user?.id;
 
+  // folderId is deliberately not a fallback here: for a file in a subfolder it
+  // is not the room id, and asking the room roster for it answers 400 (bug 82882)
   const roomId =
     config?.document?.referenceData?.roomId ||
     (config?.file?.originRoomId != null
       ? String(config.file.originRoomId)
-      : "") ||
-    (config?.file?.folderId != null ? String(config.file.folderId) : "");
+      : "");
 
   const encryption = useEncryptionOptional();
   const requireIdentity = encryption?.requireIdentity;
@@ -176,7 +177,10 @@ const useFileEncryptionKeys = (
         }
         if (cancelled) return;
 
-        const roomMemberKeys = await loadRoomMemberKeysSafe(roomId);
+        const roomMemberKeys = await loadFileSenderKeysSafe(
+          numericFileId,
+          roomId,
+        );
 
         dek = await unwrapDekForCurrentUser({
           fileKeys: info.fileKeys,

@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   colorThemeHandler,
   settingsHandler,
@@ -48,12 +49,18 @@ import {
 } from "@docspace/shared/__mocks__/handlers";
 import type { BrowserContext } from "@playwright/test";
 import type { DocsConnectPreset } from "@docspace/shared/__mocks__/handlers";
+import { selfByTypeHandler } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 
 test.use({ timezoneId: "UTC" });
 
-const DOCS_CONNECT_ROUTE = "/portal-settings/developer-tools/docs-connect";
+// Docs Connect is sold and hosted by us, so it exists in SaaS only: the route
+// guard sends a standalone portal to /error/403 (`hasDocsConnectAccess`). Every
+// preset below therefore mocks a SaaS portal - `TypeSettings.Authenticated` is
+// standalone.
+
+const DOCS_CONNECT_ROUTE = "/developer-tools/docs-connect";
 const FROZEN_NOW_MS = new Date(DOCS_CONNECT_FROZEN_NOW).getTime();
 const FIRST_RENDER_TIMEOUT = 15_000;
 
@@ -98,7 +105,7 @@ const freezeTime = async (context: BrowserContext, frozenNowMs: number) => {
 
 const usePreset = (mockRequest: WorkerFixture, preset: DocsConnectPreset) => {
   mockRequest.use(
-    settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+    settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
     colorThemeHandler(TEST_PORT),
     ...docsConnectHandlers(TEST_PORT, preset),
   );
@@ -126,7 +133,7 @@ test.describe("Docs Connect", () => {
         page.getByTestId("docs_connect_create_tenant_button"),
       ).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "promo.png",
@@ -139,7 +146,7 @@ test.describe("Docs Connect", () => {
       mockRequest,
     }) => {
       mockRequest.use(
-        settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+        settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
         colorThemeHandler(TEST_PORT),
         ...docsConnectTrialActivationHandlers(TEST_PORT),
       );
@@ -179,7 +186,7 @@ test.describe("Docs Connect", () => {
       });
       await expect(page.getByTestId("docs_connect_buy_button")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "canceled.png",
@@ -204,12 +211,28 @@ test.describe("Docs Connect", () => {
         "20 Free days left",
       );
       await expect(page.getByTestId("docs_connect_trial_banner")).toBeVisible();
+      // The integrations block is the Overview's card, shared verbatim.
+      await expect(page.getByTestId("collapsible-card")).toBeVisible();
+      await expect(
+        page.getByTestId("dashboard-integration-nextcloud"),
+      ).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "trial.png",
       ]);
+
+      // With an instance already running, step 1 of every integration is done
+      // and the button that would create one is dropped — on this page it could
+      // only point back here.
+      await page.getByTestId("dashboard-integration-nextcloud").click();
+      await expect(
+        page.getByTestId("integration-create-instance-nextcloud"),
+      ).toBeHidden();
+      await expect(
+        page.locator('[data-testid="integration-step"][data-done="true"]'),
+      ).toHaveCount(1);
     });
 
     test("renders trial ending soon state", async ({
@@ -226,7 +249,7 @@ test.describe("Docs Connect", () => {
         { timeout: FIRST_RENDER_TIMEOUT },
       );
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "trial-low.png",
@@ -247,7 +270,7 @@ test.describe("Docs Connect", () => {
         { timeout: FIRST_RENDER_TIMEOUT },
       );
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "trial-expired.png",
@@ -273,7 +296,7 @@ test.describe("Docs Connect", () => {
       ).toBeHidden();
       await expect(page.getByText("$100.00")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "paid.png",
@@ -294,7 +317,7 @@ test.describe("Docs Connect", () => {
       });
       await expect(page.getByText("$250.00")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "paid-devpack.png",
@@ -319,7 +342,7 @@ test.describe("Docs Connect", () => {
       const cancelChangeLink = page.getByText("Cancel change");
       await expect(cancelChangeLink).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "scheduled.png",
@@ -342,6 +365,74 @@ test.describe("Docs Connect", () => {
       expect(body.productQuantityType).toBe(0);
     });
 
+    test("renders scheduled Dev Pack disable and cancels it", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      usePreset(mockRequest, "scheduledDevPackDisable");
+
+      await page.goto(`${baseUrl}${DOCS_CONNECT_ROUTE}`);
+
+      await expect(page.getByTestId("docs_connect_panel")).toBeVisible({
+        timeout: FIRST_RENDER_TIMEOUT,
+      });
+
+      await expect(
+        page.getByText("Change scheduled: Dev Pack will be disabled"),
+      ).toBeVisible();
+      await expect(page.getByText("$100.00/month")).toBeVisible();
+      await expect(page.getByText("Renews on 21 Jul 2026")).toBeVisible();
+
+      await expectScreenshot(page, [
+        "desktop",
+        "docs-connect",
+        "scheduled-devpack-disable.png",
+      ]);
+
+      const updateWalletRequest = page.waitForRequest(
+        (request) =>
+          request.method() === "PUT" &&
+          request.url().includes(PATH_UPDATE_WALLET),
+      );
+
+      await page.getByText("Cancel change").click();
+
+      const body = (await updateWalletRequest).postDataJSON() as {
+        quantity: Record<string, number | null>;
+        productQuantityType: number;
+      };
+
+      expect(body.quantity).toEqual({ docsclouddevpack: null });
+      expect(body.productQuantityType).toBe(0);
+    });
+
+    test("renders scheduled Dev Pack disable with a user adjustment", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      usePreset(mockRequest, "scheduledDevPackDisableWithUsers");
+
+      await page.goto(`${baseUrl}${DOCS_CONNECT_ROUTE}`);
+
+      await expect(page.getByTestId("docs_connect_panel")).toBeVisible({
+        timeout: FIRST_RENDER_TIMEOUT,
+      });
+
+      await expect(
+        page.getByText("Change scheduled: Users 50 → 40"),
+      ).toBeVisible();
+      await expect(page.getByText("Dev Pack will be disabled")).toBeVisible();
+      await expect(page.getByText("$80.00/month")).toBeVisible();
+
+      await expectScreenshot(page, [
+        "desktop",
+        "docs-connect",
+        "scheduled-devpack-disable-users.png",
+      ]);
+    });
+
     test("renders scheduled cancellation state", async ({
       page,
       baseUrl,
@@ -358,7 +449,7 @@ test.describe("Docs Connect", () => {
         page.getByText("Subscription cancellation").first(),
       ).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "scheduled-cancellation.png",
@@ -379,7 +470,7 @@ test.describe("Docs Connect", () => {
       const banner = page.getByTestId("docs_connect_deactivated_banner");
       await expect(banner).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "deactivated.png",
@@ -441,6 +532,52 @@ test.describe("Docs Connect", () => {
       await expect(page.getByText("Something went wrong.")).toBeVisible({
         timeout: FIRST_RENDER_TIMEOUT,
       });
+    });
+  });
+
+  test.describe("standalone", () => {
+    test("hides every Docs Connect surface", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      // `TypeSettings.Authenticated` is a standalone portal - the one place in
+      // this file that wants it.
+      mockRequest.use(
+        settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+        colorThemeHandler(TEST_PORT),
+        selfByTypeHandler(TEST_PORT, "admin"),
+        ...docsConnectHandlers(TEST_PORT, "trial"),
+      );
+
+      // Nothing may ask the server about an instance that cannot exist.
+      const tenantRequests: string[] = [];
+      page.on("request", (request) => {
+        if (request.url().includes("settings/docscloud/tenant"))
+          tenantRequests.push(request.url());
+      });
+
+      await page.goto(`${baseUrl}/dashboard`);
+
+      // The dev-tools card is not a Docs Connect surface, so it still renders -
+      // waiting for it means the Overview has settled before absence is read.
+      await expect(page.getByTestId("collapsible-card").first()).toBeVisible({
+        timeout: FIRST_RENDER_TIMEOUT,
+      });
+      await expect(
+        page.getByTestId("dashboard-integration-nextcloud"),
+      ).toHaveCount(0);
+      await expect(
+        page.locator(`a[href*="${DOCS_CONNECT_ROUTE}"]`),
+      ).toHaveCount(0);
+
+      // And a guessed URL is bounced by the route guard.
+      await page.goto(`${baseUrl}${DOCS_CONNECT_ROUTE}`);
+      await expect(page).toHaveURL(/error\/403/, {
+        timeout: FIRST_RENDER_TIMEOUT,
+      });
+
+      expect(tenantRequests).toHaveLength(0);
     });
   });
 });

@@ -3,7 +3,7 @@
   "content": "Change passphrase",
   "content_en_sha1_hash": "dd00d696eac10614ed8799191cde06e01e4ca3cd",
   "created_at": "2026-05-24T17:27:20.625Z",
-  "updated_at": "2026-07-27T13:07:50.841Z",
+  "updated_at": "2026-08-13T10:58:03.274Z",
   "comment": {
     "text": "Tooltip for an action button and a title for a dialog used when initiating the passphrase rotation process in keys management.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
-      "line_number": 150,
-      "context": "className={styles.actionButton}\n iconName={RefreshReactSvgUrl}\n size={16}\n onClick={handleRotate}\n isDisabled={isDeleting}\n title={t(\"Common:ChangePassphrase\")}\n />\n <IconButton\n className={styles.actionButton}\n iconName={DownloadReactSvgUrl}\n size={16}",
+      "line_number": 153,
+      "context": "className={styles.actionButton}\n iconName={PencilReactSvgUrl}\n size={16}\n onClick={handleRotate}\n isDisabled={isDeleting}\n title={t(\"Common:ChangePassphrase\")}\n />\n <IconButton\n className={styles.actionButton}\n iconName={DownloadReactSvgUrl}\n size={16}",
       "module": "/packages/client"
     },
     {

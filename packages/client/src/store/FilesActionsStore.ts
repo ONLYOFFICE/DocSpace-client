@@ -236,6 +236,7 @@ export type TActionItem = {
   isAIAgent?: boolean;
   isTemplate?: boolean;
   encrypted?: boolean;
+  private?: boolean;
   external?: boolean;
   isLinkExpired?: boolean;
   requestToken?: string;
@@ -344,6 +345,9 @@ type TFilesStore = {
     clearFilter?: boolean,
   ) => Promise<unknown>;
   fetchFavoritesFolder: (folderId: number | string) => Promise<unknown>;
+  setPendingClientSearch: (
+    pending: Nullable<{ folderId: number | string; query: string }>,
+  ) => void;
   scrollToTop: () => void;
   setSelected: (selected: string, clearBuffer?: boolean) => void;
   setSelection: (selection: TActionItem[]) => void;
@@ -666,6 +670,7 @@ class FilesActionStore {
     isAIAgent?: boolean;
     title?: string;
     rootFolderType?: FolderType;
+    roomType?: RoomsType;
   })=> openLocationActionImpl(this, item);
 
   nameWithoutExtension = (title?: string) => {

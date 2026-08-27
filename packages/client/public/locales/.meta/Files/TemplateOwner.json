@@ -3,7 +3,7 @@
   "content": "Template owner",
   "content_en_sha1_hash": "d9ae8457d753942fe67ef8711f4c568a3a2860aa",
   "created_at": "2025-05-19T21:30:56.237Z",
-  "updated_at": "2026-07-27T13:07:50.727Z",
+  "updated_at": "2026-08-19T13:26:37.736Z",
   "comment": {
     "text": "This is a filter option label. It appears in the filter dropdown for templates, allowing users to filter templates by their owner.",
     "is_auto": true,

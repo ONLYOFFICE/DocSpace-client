@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Spustite AI chat a pýtajte sa, zhrňte dokumenty, generujte texty a nechajte si pomôcť s prácou — priamo v sekcii {{sectionName}}.",
+  "TourAiAssistantTitle": "Váš AI asistent",
+  "TourBringFiles": "Nahrajte súbory z počítača alebo ich jednoducho pretiahnite kamkoľvek v tomto okne.",
+  "TourBringFilesTitle": "Prineste svoje súbory",
+  "TourCreateAnything": "Vytvárajte dokumenty, tabuľky, prezentácie a PDF formuláre priamo v prehliadači — bez akéhokoľvek softvéru.",
+  "TourCreateAnythingTitle": "Vytvorte čokoľvek",
+  "TourFindFast": "Vyhľadávajte podľa názvu, filtrujte podľa typu alebo autora, zoraďte zoznam a prepínajte medzi zobrazením v zozname a v dlaždiciach.",
+  "TourFindFastTitle": "Nájdite čokoľvek rýchlo",
+  "TourPlacesFavorites": "{{sectionName}} — súbory označené hviezdičkou.",
+  "TourPlacesRecent": "{{sectionName}} — na čom ste pracovali v poslednom čase.",
+  "TourPlacesShared": "{{sectionName}} — súbory, ktoré s vami zdieľali ostatní.",
+  "TourPlacesTitle": "Všetko na svojom mieste",
+  "TourPlacesTrash": "{{sectionName}} — zmazané súbory, ktoré ešte môžete obnoviť.",
+  "TourShare": "Prejdite myšou na ľubovoľný súbor a uvidíte rýchle akcie. Kliknite na ikonu zdieľania a udeľte prístup kontaktom svojho pracovného priestoru s rôznymi úrovňami oprávnení — alebo vytvorte externý odkaz pre kohokoľvek ďalšieho.",
+  "TourSharedAccess": "{{sharedBy}} hovorí, od koho súbor prišiel, {{accessLevel}} hovorí, čo s ním smiete robiť — prezerať, komentovať alebo upravovať. Zmeniť to môže len vlastník.",
+  "TourSharedAccessTitle": "Kto ho zdieľal a čo smiete robiť",
+  "TourSharedEmpty": "Zatiaľ s vami nikto nič nezdieľal. Súbory a priečinky sa tu objavia hneď, ako vám k nim niekto dá prístup.",
+  "TourSharedEmptyTitle": "Váš zoznam je zatiaľ prázdny",
+  "TourSharedList": "Všetko, k čomu vám ostatní dajú prístup, pristane v sekcii {{sectionName}}. Otvorte súbor a pracujte na ňom v prehliadači — originál zostáva tam, kde je, takže všetci vždy vidia rovnakú verziu.",
+  "TourSharedListTitle": "Zdieľané s vami",
+  "TourShareTitle": "Zdieľajte a spolupracujte"
+}

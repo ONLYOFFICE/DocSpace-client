@@ -3,7 +3,7 @@
   "content": "Choose from list",
   "content_en_sha1_hash": "e284f61fe00c23c301b217153f5427eb75cab3eb",
   "created_at": "2025-05-19T21:30:49.956Z",
-  "updated_at": "2026-07-27T13:07:50.627Z",
+  "updated_at": "2026-08-19T13:26:37.685Z",
   "comment": {
     "text": "This is a button label that, when clicked, opens a list of options for the user to select from.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 228,
+      "line_number": 221,
       "context": ") : (\n <div className={styles.peopleSelector}>\n <AddButton\n className=\"selector-add-button\"\n onClick={onTogglePeopleSelector}\n label={t(\"Common:ChooseFromList\")}\n noSelect\n titleText={t(\"Common:ChooseFromList\")}\n testId=\"change_portal_owner_choose_from_list_button\"\n />\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 228,
+      "line_number": 221,
       "context": ") : (\n <div className={styles.peopleSelector}>\n <AddButton\n className=\"selector-add-button\"\n onClick={onTogglePeopleSelector}\n label={t(\"Common:ChooseFromList\")}\n noSelect\n titleText={t(\"Common:ChooseFromList\")}\n testId=\"change_portal_owner_choose_from_list_button\"\n />\n </div>",
       "module": "/packages/client"
     },
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 662,
+      "line_number": 661,
       "context": "type=\"action\"\n isHovered\n onClick={openUsersPanel}\n dataTestId=\"invite_panel_choose_from_list_link\"\n >\n {t(\"Common:ChooseFromList\")}\n </Link>\n ) : null}\n </Heading>\n <Text\n className={classNames(styles.description, {",
       "module": "/packages/client"
     },
@@ -49,19 +49,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 998,
+      "line_number": 995,
       "context": "{\n id: \"filter_author-user-button\",\n key: FilterKeys.user,\n group: FilterGroups.filterSharedBy,\n displaySelectorType: \"button\",\n label: t(\"Common:ChooseFromList\"),\n },\n ];\n }, [t, isSharedWithMeFolder, isVisitor, isCollaborator]);\n \n const getAuthorFilter = React.useCallback(() => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 998,
+      "line_number": 995,
       "context": "{\n id: \"filter_author-user-button\",\n key: FilterKeys.user,\n group: FilterGroups.filterSharedBy,\n displaySelectorType: \"button\",\n label: t(\"Common:ChooseFromList\"),\n },\n ];\n }, [t, isSharedWithMeFolder, isVisitor, isCollaborator]);\n \n const getAuthorFilter = React.useCallback(() => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteInput.tsx",
-      "line_number": 608,
+      "line_number": 607,
       "context": "type={LinkType.action}\n isHovered\n onClick={openUsersPanel}\n dataTestId=\"invite_panel_choose_from_list_link\"\n >\n {t(\"Common:ChooseFromList\")}\n </Link>\n ) : null}\n </Heading>\n <Text\n className={classNames(styles.description, {",
       "module": "/packages/sdk"
     }

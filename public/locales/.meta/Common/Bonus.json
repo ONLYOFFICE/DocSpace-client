@@ -3,7 +3,7 @@
   "content": "Bonus",
   "content_en_sha1_hash": "4d963cfab70d8c850b1221649bcc7b4d96d558d3",
   "created_at": "2025-05-19T21:30:43.309Z",
-  "updated_at": "2026-07-28T11:44:10.595Z",
+  "updated_at": "2026-08-21T15:04:37.031Z",
   "comment": {
     "text": "This is a label for a menu item or section title, referring to a bonus or reward feature within the application.",
     "is_auto": true,
@@ -19,14 +19,14 @@
     },
     {
       "file_path": "/packages/client/src/components/PortalSettingsSidebar/index.tsx",
-      "line_number": 137,
-      "context": "return t(\"Settings:PortalDeletion\", {\n productName: getBrandName(\"ProductName\"),\n });\n case \"Common:PaymentsTitle\":\n return standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n default:\n return tKey;\n }\n };",
+      "line_number": 135,
+      "context": "return t(\"Settings:AISettings\");\n case \"PortalDeletion\":\n return t(\"Settings:PortalDeletion\");\n case \"Common:PaymentsTitle\":\n return standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n default:\n return tKey;\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 238,
-      "context": "return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", {\n productName: getBrandName(\"ProductName\"),\n });\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");",
+      "line_number": 235,
+      "context": "return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");",
       "module": "/packages/client"
     },
     {

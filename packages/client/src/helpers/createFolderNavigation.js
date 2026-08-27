@@ -44,7 +44,7 @@ import {
 
 import { CategoryType } from "@docspace/shared/constants";
 
-import { getCategoryUrl, getCategoryTypeByFolderType } from "./utils";
+import { getCategoryUrl, getCategoryTypeByFolderTypeInSection } from "./utils";
 
 export const createFolderNavigation = async (
   item,
@@ -74,17 +74,19 @@ export const createFolderNavigation = async (
     ? CategoryType.Chat
     : CategoryType.AIAgent;
 
-  const isFormsContext = window.location.pathname.startsWith("/forms");
-  const baseCategory = getCategoryTypeByFolderType(rootFolderType, id);
+  // Keys on the room type as well as the route: a form room reached from
+  // another section (Files -> "Form data collection" -> "Share in the room")
+  // has no `/forms` prefix yet, and routing it by rootFolderType alone would
+  // open it under /rooms/shared and highlight Rooms in the sidebar.
+  const baseCategory = getCategoryTypeByFolderTypeInSection(
+    rootFolderType,
+    id,
+    { roomType: itemRoomType },
+  );
 
-  let path;
-  if (isAiRoom) {
-    path = getCategoryUrl(aiAgentStartCategory, id);
-  } else if (isFormsContext && baseCategory === CategoryType.SharedRoom) {
-    path = getCategoryUrl(CategoryType.Form, id);
-  } else {
-    path = getCategoryUrl(baseCategory, id);
-  }
+  const path = isAiRoom
+    ? getCategoryUrl(aiAgentStartCategory, id)
+    : getCategoryUrl(baseCategory, id);
   const filter = FilesFilter.getDefault();
   const filterObj = FilesFilter.getFilter(window.location);
 

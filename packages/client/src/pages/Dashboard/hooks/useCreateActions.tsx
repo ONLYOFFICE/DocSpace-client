@@ -62,9 +62,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
 import { getConstName } from "@docspace/shared/constants/consts";
 import {
+  AIChatIcon,
   BlankPdfIcon,
   CreateDocumentIcon,
   CreatePresentationIcon,
@@ -81,8 +83,15 @@ import { makeCreateUrl, NEW_FILE_NAMES } from "../utils";
 export const useCreateActions = (
   myFolderId: number | null,
   isGuest: boolean,
+  // Host-computed AI chat availability (Shell → AiAgentProviders context): false
+  // when the portal has AI services switched off in settings, among the other
+  // reasons the chat isn't offered. Passed in rather than read here so the tile
+  // and the panel the dashboard hosts gate on one and the same value.
+  isAiChatAvailable: boolean,
 ): QuickActionItem[] => {
   const { t } = useTranslation(["Common"]);
+
+  const openChat = useOpenAiChat();
 
   const disabledProps = React.useMemo(
     () =>
@@ -135,8 +144,23 @@ export const useCreateActions = (
           window.open(makeCreateUrl(NEW_FILE_NAMES.pdf, myFolderId), "_blank"),
         ...disabledProps,
       },
+      // Hidden rather than disabled when the chat isn't on offer: guests can
+      // never hold a chat-capable role (AiAgentProviders sets `canUseAi` to
+      // false for them) and the guest tooltip only covers create/upload
+      // restrictions, while a portal with AI services off has no chat to open
+      // at all.
+      ...(isGuest || !isAiChatAvailable
+        ? []
+        : [
+            {
+              id: "quick-ai-chat",
+              icon: <AIChatIcon />,
+              label: t("Common:AIChat"),
+              onClick: openChat,
+            },
+          ]),
     ],
-    [t, myFolderId, disabledProps],
+    [t, myFolderId, disabledProps, isGuest, isAiChatAvailable, openChat],
   );
 };
 

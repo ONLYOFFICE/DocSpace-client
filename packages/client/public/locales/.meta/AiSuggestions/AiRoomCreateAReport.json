@@ -1,0 +1,29 @@
+{
+  "key_path": "AiRoomCreateAReport",
+  "content": "Create a report",
+  "content_en_sha1_hash": "98ffece81569d5864158da578151ec9ebf2ab9aa",
+  "created_at": "2026-08-04T09:58:55.094Z",
+  "updated_at": "2026-08-05T18:32:24.863Z",
+  "comment": {
+    "text": "Button label in the AI suggestions menu used to initiate report generation.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:32:24.863Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 600,
+      "context": "{\n name: t(\"AiSuggestions:AiRoomFindContradictions\"),\n prompt: t(\"AiSuggestions:AiRoomFindContradictionsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomCreateAReport\"),\n prompt: t(\"AiSuggestions:AiRoomCreateAReportPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomCreateAPresentation\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

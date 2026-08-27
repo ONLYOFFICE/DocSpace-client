@@ -74,6 +74,7 @@ const RoomsModule = ({
   isErrorPath,
   newPath,
   currentDeviceType,
+  disabledCreatePublicRoom,
 
   // ScheduleComponent
   hoursArray,
@@ -156,6 +157,7 @@ const RoomsModule = ({
           formProps={formProps}
           withoutInitPath={!isDocumentsDefault}
           currentDeviceType={currentDeviceType}
+          disabledCreatePublicRoom={disabledCreatePublicRoom}
           filesSelectorSettings={settingsFileSelector}
           toDefault={toDefault}
           setNewPath={setNewPath}

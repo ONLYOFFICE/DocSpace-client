@@ -1,19 +1,19 @@
 {
   "key_path": "PortalSecurityTitle",
-  "content": "This subsection allows you to provide users with secure and convenient ways to access the portal.",
-  "content_en_sha1_hash": "0f3b230f6983fda1db2a358a7aa46ce3c5840a0f",
-  "created_at": "2025-05-19T21:30:52.300Z",
-  "updated_at": "2026-06-02T08:43:27.531Z",
+  "content": "This subsection allows you to provide users with secure and convenient ways to access the workspace.",
+  "content_en_sha1_hash": "85d874432e321a168ce9e73ac7c2b15ff69dce01",
+  "created_at": "2026-08-12T11:00:46.234Z",
+  "updated_at": "2026-08-14T14:58:32.831Z",
   "comment": {
-    "text": "This is a subtitle for the \"Security\" section of the portal settings, introducing options related to user access.",
+    "text": "Subtitle text describing the purpose of the Access Control subsection within the Portal Security settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:22:51.423Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T12:05:42.335Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 151,
+      "line_number": 150,
       "context": "return (\n <MainContainer\n className=\"desktop-view\"\n withoutExternalLink={!helpCenterDomain}\n >\n <Text className=\"subtitle\">{t(\"PortalSecurityTitle\")}</Text>\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"Settings:AccessControl\")}\n </Text>\n <AccessControlSection />",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

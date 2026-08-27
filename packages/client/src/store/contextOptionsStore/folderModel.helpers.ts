@@ -49,30 +49,31 @@ import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
-import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
+import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.template.react.svg?url";
 import { isMobile, isTablet } from "react-device-detect";
-import type {
-  ContextMenuModel,
-} from "@docspace/ui-kit/components/context-menu";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TOformFile } from "@docspace/shared/api/oforms/types";
-import { RoomsType, FolderType, FilterType } from "@docspace/shared/enums";
+import {
+  RoomsType,
+  FolderType,
+  FilterType,
+  SearchArea,
+} from "@docspace/shared/enums";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import { onSuggestOformChanges, onUploadAction } from "./helpers";
 import type { TContextItem, TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
 
 export const getFormGalleryContextOptionsImpl = (
-self: ContextOptionsStore,
+  self: ContextOptionsStore,
   item: TOformFile | { attributes: { name_form: string } } | null,
   t: TTranslation,
   navigate?: unknown,
-
-): ContextMenuModel[]=> {
+): ContextMenuModel[] => {
   return [
     {
       key: "create",
@@ -96,13 +97,11 @@ self: ContextOptionsStore,
   ];
 };
 
-
 export const getRoomsRootContextOptionsImpl = (
-self: ContextOptionsStore,
+  self: ContextOptionsStore,
   item: TContextItem,
   t: TTranslation,
-
-): { pinOptions: TContextOption[]; muteOptions: TContextOption[] }=> {
+): { pinOptions: TContextOption[]; muteOptions: TContextOption[] } => {
   const { id, rootFolderId } = self.selectedFolderStore;
   const isRootRoom = item.isRoom && rootFolderId === id;
 
@@ -156,9 +155,8 @@ self: ContextOptionsStore,
   return { pinOptions, muteOptions };
 };
 
-
 export const getContextOptionsPlusFormRoomImpl = (
-self: ContextOptionsStore,
+  self: ContextOptionsStore,
   t: TTranslation,
   {
     formActions,
@@ -169,8 +167,7 @@ self: ContextOptionsStore,
     templateGallery: TContextOption[];
     createNewFolder: TContextOption;
   },
-
-)=> {
+) => {
   const uploadReadyPDFFrom: TContextOption = {
     id: "personal_upload-ready-Pdf-from",
     className: "main-button_drop-down_sub",
@@ -182,12 +179,9 @@ self: ContextOptionsStore,
         id: "personal_upload-from-docspace",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromPortal", {
-          productName: getBrandName("ProductName"),
-        }),
+        label: t("Common:FromPortal"),
         key: "personal_upload-from-docspace",
-        onClick: () =>
-          self.onShowFormRoomSelectFileDialog(FilterType.PDFForm),
+        onClick: () => self.onShowFormRoomSelectFileDialog(FilterType.PDFForm),
       },
       {
         id: "personal_upload-from-device",
@@ -212,10 +206,11 @@ self: ContextOptionsStore,
   ];
 };
 
-
 export const getFolderModelImpl = (
-self: ContextOptionsStore,t: TTranslation, isSectionMenu?: boolean
-)=> {
+  self: ContextOptionsStore,
+  t: TTranslation,
+  isSectionMenu?: boolean,
+) => {
   const { isLoading } = self.clientLoadingStore;
   const { security, roomType, parentRoomType, isFolder, isAIRoom } =
     self.selectedFolderStore;
@@ -230,8 +225,7 @@ self: ContextOptionsStore,t: TTranslation, isSectionMenu?: boolean
     window?.DocSpace?.location.pathname.includes("/settings");
 
   const currentCanCreate =
-    isLoading &&
-    hasOwnProperty(window?.DocSpace?.location?.state, "canCreate")
+    isLoading && hasOwnProperty(window?.DocSpace?.location?.state, "canCreate")
       ? stateCanCreate
       : security?.Create;
 
@@ -358,14 +352,22 @@ self: ContextOptionsStore,t: TTranslation, isSectionMenu?: boolean
   }
 
   if (isAIRoom) {
+    // The upload options below feed the agent's knowledge base, so they
+    // belong to the Knowledge tab only. Result Storage holds AI-generated
+    // results — manual uploads there are rejected by the server, and the
+    // "+ New" button rendered from this model only produced an error
+    // (Bug 83436). Coerced comparison: a filter parsed from the URL keeps
+    // searchArea as the raw query string ("6"), not a number.
+    const searchArea = self.filesStore.filter?.searchArea;
+    if (searchArea != null && Number(searchArea) === SearchArea.ResultStorage) {
+      return null;
+    }
     return [
       {
         id: "actions_upload-files-product",
         className: "main-button_drop-down",
         icon: MoveReactSvgUrl,
-        label: t("EmptyView:UploadFromPortalTitle", {
-          productName: getBrandName("ProductName"),
-        }),
+        label: t("EmptyView:UploadFromPortalTitle"),
         onClick: self.onShowAiKnowledgeSelectFileDialog,
         key: "upload-files-product",
       },
@@ -394,7 +396,12 @@ self: ContextOptionsStore,t: TTranslation, isSectionMenu?: boolean
 
   const privateFolderActions = [
     ...(canCreateEncrypted
-      ? [createNewDoc, createNewSpreadsheet, createNewPresentation, createNewPdfForm]
+      ? [
+          createNewDoc,
+          createNewSpreadsheet,
+          createNewPresentation,
+          createNewPdfForm,
+        ]
       : []),
     createNewFolder,
     { key: "separator", isSeparator: true },

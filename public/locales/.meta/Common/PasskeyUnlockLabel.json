@@ -3,7 +3,7 @@
   "content": "Passkey unlock",
   "content_en_sha1_hash": "029007b25e7a5219d48a7296d5e81ff4962ad816",
   "created_at": "2026-07-27T13:07:25.625Z",
-  "updated_at": "2026-07-27T13:26:02.714Z",
+  "updated_at": "2026-08-13T10:58:03.280Z",
   "comment": {
     "text": "Label for a toggle switch in the keys management settings used to enable or disable unlocking via passkey.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 362,
+      "line_number": 385,
       "context": "if (passkeyEnrolled) handleRemovePasskey();\n else void handleEnrollPasskey();\n }}\n dataTestId=\"passkey_unlock_toggle\"\n />\n <Text>{t(\"Common:PasskeyUnlockLabel\")}</Text>\n </div>\n ) : null}\n {deviceRemembered ? (\n <div className={styles.deviceRow}>\n <Text fontSize=\"13px\">{t(\"Common:RememberDeviceLabel\")}</Text>",
       "module": "/packages/client"
     }

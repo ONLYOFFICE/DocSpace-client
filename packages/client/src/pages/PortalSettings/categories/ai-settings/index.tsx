@@ -76,6 +76,8 @@ import {
 
 import { DeviceType } from "@docspace/shared/enums";
 
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import type PaymentStore from "SRC_DIR/store/PaymentStore";
 
@@ -110,6 +112,7 @@ type TAISettingsProps = {
   currentDeviceType?: DeviceType;
   standalone?: boolean;
   isAiToolsServiceOn?: PaymentStore["isAiToolsServiceOn"];
+  isAiSearchServiceOn?: PaymentStore["isAiSearchServiceOn"];
   isCardLinkedToPortal?: PaymentStore["isCardLinkedToPortal"];
 };
 
@@ -118,11 +121,16 @@ const AISettings = ({
   currentDeviceType,
   standalone,
   isAiToolsServiceOn,
+  isAiSearchServiceOn,
   isCardLinkedToPortal,
 }: TAISettingsProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useTranslation(["Common"]);
+  const { t, ready } = useTranslation(["Common", "Settings"]);
+
+  React.useEffect(() => {
+    if (ready) setDocumentTitle(t("Settings:AISettings"));
+  }, [ready, t]);
 
   const initKnowledge = React.useCallback(async () => {
     await fetchKnowledge?.();
@@ -231,7 +239,9 @@ const AISettings = ({
             <AIFeaturesBanner
               currentDeviceType={currentDeviceType}
               isAiToolsServiceOn={isAiToolsServiceOn}
+              isAiSearchServiceOn={isAiSearchServiceOn}
               isCardLinkedToPortal={isCardLinkedToPortal}
+              isWebSearchTab={currentTabId === TAB_IDS.WEB_SEARCH}
             />
           )
         }
@@ -244,13 +254,15 @@ export const Component = inject(
   ({ aiSettingsStore, settingsStore, paymentStore }: TStore) => {
     const { fetchKnowledge } = aiSettingsStore;
     const { currentDeviceType, standalone } = settingsStore;
-    const { isAiToolsServiceOn, isCardLinkedToPortal } = paymentStore;
+    const { isAiToolsServiceOn, isAiSearchServiceOn, isCardLinkedToPortal } =
+      paymentStore;
 
     return {
       fetchKnowledge,
       currentDeviceType,
       standalone,
       isAiToolsServiceOn,
+      isAiSearchServiceOn,
       isCardLinkedToPortal,
     };
   },

@@ -3,7 +3,7 @@
   "content": "AI agents",
   "content_en_sha1_hash": "2b51b10f658502a5ad4e50a7005f9bddf67f44c0",
   "created_at": "2025-09-26T15:20:53.940Z",
-  "updated_at": "2026-07-28T07:30:59.798Z",
+  "updated_at": "2026-08-26T14:08:32.934Z",
   "comment": {
     "text": "This is a label for a feature or service related to artificial intelligence. It appears in billing panels and selectors.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 150,
-      "context": "})\n // standalone user\n .with([true, false], () =>\n t(\"EmptyAIAgentsAIDisabledDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"AIAgents\"),\n }),\n )\n // saas user\n .otherwise(() =>\n t(\"EmptyAIDisabledContactAdminDesc\", {",
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
+      "line_number": 94,
+      "context": "</>\n ))\n // standalone user\n .with([true, false], () =>\n t(\"EmptyAIAgentsAIDisabledDescription\", {\n aiAgents: t(\"AIAgents\"),\n }),\n )\n // saas user\n .otherwise(() => t(\"EmptyAIDisabledContactAdminDesc\"));",
       "module": "/libs/ui-kit"
     },
     {
@@ -24,63 +24,51 @@
       "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
-      "line_number": 58,
-      "context": "const t = useCommonTranslation();\n \n const serviceOptions: ServiceOption[] = [\n {\n id: \"ai-tools\",\n title: t(\"AIAgents\"),\n description: t(\"AIAgentsDescription\", {\n mcpServer: t(\"MCPServer\"),\n }),\n icon: <AIAgentsIcon />,\n },",
-      "module": "/libs/ui-kit"
-    },
-    {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 221,
+      "line_number": 226,
       "context": "}, [items]);\n \n const headerSelectorProps: TSelectorHeader = {\n withHeader: true,\n headerProps: {\n headerLabel: t(\"AIAgents\"),\n onCloseClick: onClose,\n isCloseable: true,\n },\n };",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 221,
+      "line_number": 226,
       "context": "}, [items]);\n \n const headerSelectorProps: TSelectorHeader = {\n withHeader: true,\n headerProps: {\n headerLabel: t(\"AIAgents\"),\n onCloseClick: onClose,\n isCloseable: true,\n },\n };",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 221,
+      "line_number": 226,
       "context": "}, [items]);\n \n const headerSelectorProps: TSelectorHeader = {\n withHeader: true,\n headerProps: {\n headerLabel: t(\"AIAgents\"),\n onCloseClick: onClose,\n isCloseable: true,\n },\n };",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
-      "line_number": 177,
+      "line_number": 184,
       "context": "break;\n case FolderType.VirtualRooms:\n title = t(\"Rooms\");\n break;\n case FolderType.AiAgents:\n title = t(\"AIAgents\");\n break;\n default:\n break;\n }",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 248,
+      "line_number": 253,
       "context": "const emptyScreenDescription = isEmptyFilesRootScreen\n ? \"\"\n : isEmptyAgentsRootScreen\n ? t(\"EmptyRoomsDescriptionTextAgent\", {\n sectionName: t(\"AIAgents\"),\n })\n : t(\"EmptyRoomsDescriptionText\", {\n sectionName: t(\"Rooms\"),\n });",
       "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 199,
-      "context": "openLabel: t(\"Common:Open\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-agents\": {\n title: t(\"Common:AIAgents\"),\n subtitle: t(\"Common:AIAgentsPromoSubtitle\"),\n description: t(\"Common:AIAgentsPromoDescription\"),\n features: [\n {\n Icon: GenerateIcon,",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
-      "line_number": 64,
-      "context": "const effectVars = {\n productName: getBrandName(\"ProductName\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),\n t(\"DisableAiServicesServicesDisabled\", effectVars),",
+      "line_number": 61,
+      "context": "const effectVars = {\n productName: getBrandName(\"ProductName\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIFeatures\"),\n aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),\n t(\"DisableAiServicesServicesDisabled\", effectVars),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
-      "line_number": 104,
-      "context": "if (standalone) {\n titleRoomNoAccess = t(\"Common:KnowledgeUnavailable\");\n descriptionRoomNoAccess = isAdmin\n ? t(\"Common:KnowledgeUnavailableDescription\", {\n productName,\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:KnowledgeUnavailableDescriptionUser\", {\n productName,\n aiAgents: t(\"Common:AIAgents\"),\n });",
+      "line_number": 96,
+      "context": "if (standalone) {\n titleRoomNoAccess = t(\"Common:KnowledgeUnavailable\");\n descriptionRoomNoAccess = isAdmin\n ? t(\"Common:KnowledgeUnavailableDescription\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:KnowledgeUnavailableDescriptionUser\", {\n aiAgents: t(\"Common:AIAgents\"),\n });\n } else if (isAdmin) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
-      "line_number": 104,
-      "context": "if (standalone) {\n titleRoomNoAccess = t(\"Common:KnowledgeUnavailable\");\n descriptionRoomNoAccess = isAdmin\n ? t(\"Common:KnowledgeUnavailableDescription\", {\n productName,\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:KnowledgeUnavailableDescriptionUser\", {\n productName,\n aiAgents: t(\"Common:AIAgents\"),\n });",
+      "line_number": 96,
+      "context": "if (standalone) {\n titleRoomNoAccess = t(\"Common:KnowledgeUnavailable\");\n descriptionRoomNoAccess = isAdmin\n ? t(\"Common:KnowledgeUnavailableDescription\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:KnowledgeUnavailableDescriptionUser\", {\n aiAgents: t(\"Common:AIAgents\"),\n });\n } else if (isAdmin) {",
       "module": "/packages/client"
     },
     {
@@ -97,32 +85,68 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 616,
+      "line_number": 628,
       "context": "sectionName: t(\"Common:Forms\"),\n },\n agents: {\n link: actions.onGoToAgents(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:AIAgents\"),\n },\n personal: {\n link: actions.onGoToPersonal(),\n icon: <PersonIcon />,\n sectionName: t(\"Common:Files\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 199,
-      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
+      "line_number": 211,
+      "context": "export const getSectionAppName = (\n t: TTranslation,\n filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isAgentsSectionScope(filterFolderType)) return t(\"Common:AIAgents\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 199,
-      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
+      "line_number": 211,
+      "context": "export const getSectionAppName = (\n t: TTranslation,\n filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isAgentsSectionScope(filterFolderType)) return t(\"Common:AIAgents\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 199,
-      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
+      "line_number": 211,
+      "context": "export const getSectionAppName = (\n t: TTranslation,\n filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isAgentsSectionScope(filterFolderType)) return t(\"Common:AIAgents\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 199,
-      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
+      "line_number": 211,
+      "context": "export const getSectionAppName = (\n t: TTranslation,\n filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isAgentsSectionScope(filterFolderType)) return t(\"Common:AIAgents\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 211,
+      "context": "export const getSectionAppName = (\n t: TTranslation,\n filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isAgentsSectionScope(filterFolderType)) return t(\"Common:AIAgents\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 443,
+      "context": "}\n };\n \n const aiAgentsItem: NavMenuItem = {\n id: AI_AGENTS_ID,\n label: t(\"Common:AIAgents\"),\n icon: CatalogAiAgentsReactSvgUrl,\n onClick: handleAiAgentsClick,\n children: aiAgentsEnabled && canManageAgents\n ? [\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
+      "line_number": 126,
+      "context": "alwaysOn: false,\n },\n {\n id: \"ai-agents\",\n icon: <AiAgentsIcon />,\n title: t(\"Common:AIAgents\"),\n description: t(\"Common:DashboardAIChatAgentsDescription\"),\n href: \"/agents\",\n supported: true,\n alwaysOn: false,\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiAgents/index.tsx",
+      "line_number": 151,
+      "context": "theme?: TTheme;\n };\n \n const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:AIAgents\");\n const [searchParams, setSearchParams] = useSearchParams();\n const navigate = useNavigate();\n const lastSdkKeyRef = React.useRef<string | null>(null);\n \n const searchParamsRef = React.useRef(searchParams);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiAgents/index.tsx",
+      "line_number": 151,
+      "context": "theme?: TTheme;\n };\n \n const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:AIAgents\");\n const [searchParams, setSearchParams] = useSearchParams();\n const navigate = useNavigate();\n const lastSdkKeyRef = React.useRef<string | null>(null);\n \n const searchParamsRef = React.useRef(searchParams);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 197,
+      "context": "...(aiServicesEnabled\n ? [\n {\n id: \"ai-agents\",\n icon: <AiAgentsIcon />,\n title: t(\"Common:AIAgents\"),\n description: t(\"Common:DashboardAIChatAgentsDescription\"),\n installed: true,\n href: \"/ai-agents/filter\",\n ...createOrOpen(\n canCreateAgents,",
       "module": "/packages/client"
     },
     {
@@ -133,13 +157,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 275,
+      "line_number": 280,
       "context": "}\n >\n <Text className={generalStyles.description}>\n {t(\"Common:KnowledgeSettingsDescription\", {\n modelName: aiConfig?.embeddingModel || \"text-embedding-3-small\",\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n {knowledgeSettingsUrl ? (\n <Link\n className={generalStyles.learnMoreLink}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 126,
+      "line_number": 124,
       "context": "})}\n subtitle={t(\"AiServicesManagementDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: getBrandName(\"OrganizationName\"),\n aiSettings: t(\"AISettings\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiServices: t(\"Common:AIServices\"),\n })}\n url=\"/portal-settings/customization/general/ai-services-management\"\n onClickLink={onClickLink}\n />",
       "module": "/packages/client"
     },
@@ -157,14 +181,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 83,
-      "context": "})}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n isDisabled={isDisabled}\n />\n </div>",
+      "line_number": 78,
+      "context": "aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n isDisabled={isDisabled}\n />\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 77,
-      "context": "isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={3}\n dataTestId=\"quota_ai_agent\"\n toggleDescription={t(\"SetDefaultAIAgentQuota\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n />\n );\n };",
+      "line_number": 79,
+      "context": "{...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={3}\n dataTestId=\"quota_ai_agent\"\n toggleDescription={t(\"SetDefaultAIAgentQuota\", {\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n />\n );\n };",
       "module": "/packages/client"
     },
     {
@@ -247,20 +271,32 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
-      "line_number": 117,
-      "context": "<AgentsHeader\n title={aiRoomStore.title}\n navigationItems={[\n {\n id: \"ai-agents\",\n title: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n isRootRoom: true,\n },\n ]}\n onBackToParentFolder={goToList}\n onClickFolder={() => goToList()}",
+      "line_number": 123,
+      "context": "title={aiRoomStore.title}\n getContextOptions={getContextOptions}\n navigationItems={[\n {\n id: \"ai-agents\",\n title: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n isRootRoom: true,\n },\n ]}\n onBackToParentFolder={goToList}\n onClickFolder={() => goToList()}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
-      "line_number": 117,
-      "context": "<AgentsHeader\n title={aiRoomStore.title}\n navigationItems={[\n {\n id: \"ai-agents\",\n title: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n isRootRoom: true,\n },\n ]}\n onBackToParentFolder={goToList}\n onClickFolder={() => goToList()}",
+      "line_number": 123,
+      "context": "title={aiRoomStore.title}\n getContextOptions={getContextOptions}\n navigationItems={[\n {\n id: \"ai-agents\",\n title: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n isRootRoom: true,\n },\n ]}\n onBackToParentFolder={goToList}\n onClickFolder={() => goToList()}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-section-empty-view/index.tsx",
+      "line_number": 157,
+      "context": "title={t(\"Common:NoItemsHereYet\", {\n defaultValue: \"No items here yet\",\n })}\n description={t(\"Common:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n appName: t(\"Common:AIAgents\"),\n defaultValue:\n \"All deleted items from {{appName}} are moved here. Restore items deleted by mistake or delete them permanently. Items in '{{sectionName}}' are automatically deleted after 30 days. Please note, that the items deleted from the '{{sectionName}}' cannot be restored any longer.\",\n })}\n options={null}\n />",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
-      "line_number": 295,
+      "line_number": 300,
       "context": "}\n >\n <Text className={generalStyles.description}>\n {t(\"Common:KnowledgeSettingsDescription\", {\n modelName: aiConfig?.embeddingModel || \"text-embedding-3-small\",\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n {knowledgeSettingsUrl ? (\n <Link\n className={generalStyles.learnMoreLink}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/EmptyView.helpers.tsx",
+      "line_number": 153,
+      "context": "case FolderType.Recent:\n return t(\"Common:EmptyRecentAgentsDescription\");\n case FolderType.TRASH:\n return t(\"Common:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n appName: t(\"Common:AIAgents\"),\n });\n case FolderType.USER:\n return t(\"Common:DefaultFolderDescription\");\n default:\n return (",
       "module": "/packages/sdk"
     },
     {
@@ -295,38 +331,38 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 81,
+      "line_number": 80,
       "context": "components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string;\n default:\n return t(\"Common:RoleRoomManagerDescription\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 81,
+      "line_number": 80,
       "context": "components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string;\n default:\n return t(\"Common:RoleRoomManagerDescription\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 81,
+      "line_number": 80,
       "context": "components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string;\n default:\n return t(\"Common:RoleRoomManagerDescription\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 62,
-      "context": "1: <strong></strong>,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n );\n \n if (isRoomAdmin)",
+      "line_number": 60,
+      "context": "components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n );\n \n if (isRoomAdmin)",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 62,
-      "context": "1: <strong></strong>,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n );\n \n if (isRoomAdmin)",
+      "line_number": 60,
+      "context": "components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n );\n \n if (isRoomAdmin)",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 62,
-      "context": "1: <strong></strong>,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n );\n \n if (isRoomAdmin)",
+      "line_number": 60,
+      "context": "components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n );\n \n if (isRoomAdmin)",
       "module": "/packages/shared"
     }
   ],

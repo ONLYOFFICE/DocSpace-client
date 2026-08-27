@@ -3,7 +3,7 @@
   "content": "Template gallery",
   "content_en_sha1_hash": "6dfaa7588cf9181537129654e857881bc2647de2",
   "created_at": "2025-12-22T09:40:11.793Z",
-  "updated_at": "2026-07-28T11:44:10.596Z",
+  "updated_at": "2026-08-26T16:06:02.219Z",
   "comment": {
     "text": "This is the title for the template gallery, a collection of pre-designed document templates. It appears as a button label to open the gallery and as the header text within the gallery itself.",
     "is_auto": true,
@@ -19,31 +19,37 @@
     },
     {
       "file_path": "/packages/client/src/components/TemplateGallery/index.tsx",
-      "line_number": 267,
+      "line_number": 270,
       "context": "const renderHeader = useMemo(\n () => (\n <div className={styles.header}>\n <div className={styles.headerContent}>\n <div className={styles.headerText}>{t(\"Common:TemplateGallery\")}</div>\n {!oformsLoadError && !oformsNetworkError ? (\n <Button\n className={styles.headerButton}\n onClick={onOpenSubmitToGalleryDialog}\n label={t(\"Common:SubmitToTemplateGallery\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/TemplateGallery/index.tsx",
-      "line_number": 267,
+      "line_number": 270,
       "context": "const renderHeader = useMemo(\n () => (\n <div className={styles.header}>\n <div className={styles.headerContent}>\n <div className={styles.headerText}>{t(\"Common:TemplateGallery\")}</div>\n {!oformsLoadError && !oformsNetworkError ? (\n <Button\n className={styles.headerButton}\n onClick={onOpenSubmitToGalleryDialog}\n label={t(\"Common:SubmitToTemplateGallery\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 317,
-      "context": "if (templateGalleryAvailable) {\n items.push({\n id: \"quick-form-template\",\n icon: <CreateFromTemplateIcon />,\n label: t(\"Common:TemplateGallery\"),\n onClick: () => {\n setTemplateGalleryVisible?.(true);\n setOformFromFolderId?.(currentFolderId);\n },\n });",
+      "line_number": 325,
+      "context": "if (templateGalleryAvailable) {\n items.push({\n id: \"quick-form-gallery\",\n dataTestId: \"quick-form-gallery\",\n icon: <CreateFromTemplateIcon />,\n label: t(\"Common:TemplateGallery\"),\n onClick: () => {\n setCreateRoomFromTemplate?.(true);\n setTemplateGalleryVisible?.(true);\n setOformFromFolderId?.(currentFolderId);\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
+      "line_number": 325,
+      "context": "if (templateGalleryAvailable) {\n items.push({\n id: \"quick-form-gallery\",\n dataTestId: \"quick-form-gallery\",\n icon: <CreateFromTemplateIcon />,\n label: t(\"Common:TemplateGallery\"),\n onClick: () => {\n setCreateRoomFromTemplate?.(true);\n setTemplateGalleryVisible?.(true);\n setOformFromFolderId?.(currentFolderId);\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 335,
+      "line_number": 329,
       "context": "const templateGallery: TContextOption[] = templateGalleryAvailable\n ? [\n { key: \"separator\", isSeparator: true },\n {\n key: \"template-gallery\",\n label: t(\"Common:TemplateGallery\"),\n onClick: () => self.onShowTemplateGallery(),\n icon: TemplateGalleryReactSvgUrl,\n },\n ]\n : [];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 335,
+      "line_number": 329,
       "context": "const templateGallery: TContextOption[] = templateGalleryAvailable\n ? [\n { key: \"separator\", isSeparator: true },\n {\n key: \"template-gallery\",\n label: t(\"Common:TemplateGallery\"),\n onClick: () => self.onShowTemplateGallery(),\n icon: TemplateGalleryReactSvgUrl,\n },\n ]\n : [];",
       "module": "/packages/client"
     }

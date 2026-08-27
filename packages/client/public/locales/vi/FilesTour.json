@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Bắt đầu trò chuyện AI để đặt câu hỏi, tóm tắt tài liệu, tạo văn bản và nhận trợ giúp cho công việc — ngay trong {{sectionName}}.",
+  "TourAiAssistantTitle": "Trợ lý AI của bạn",
+  "TourBringFiles": "Tải tệp lên từ máy tính của bạn hoặc chỉ cần kéo và thả chúng vào bất kỳ đâu trong cửa sổ này.",
+  "TourBringFilesTitle": "Mang tệp của bạn vào đây",
+  "TourCreateAnything": "Tạo tài liệu, bảng tính, bản trình bày và biểu mẫu PDF ngay trong trình duyệt — không cần cài phần mềm nào.",
+  "TourCreateAnythingTitle": "Tạo bất cứ thứ gì",
+  "TourFindFast": "Tìm theo tên, lọc theo loại hoặc tác giả, sắp xếp danh sách và chuyển giữa chế độ xem danh sách và ô.",
+  "TourFindFastTitle": "Tìm nhanh mọi thứ",
+  "TourPlacesFavorites": "{{sectionName}} — các tệp đã gắn sao.",
+  "TourPlacesRecent": "{{sectionName}} — những gì bạn làm việc gần đây.",
+  "TourPlacesShared": "{{sectionName}} — các tệp người khác đã chia sẻ với bạn.",
+  "TourPlacesTitle": "Mọi thứ đúng chỗ của nó",
+  "TourPlacesTrash": "{{sectionName}} — các tệp đã xóa mà bạn vẫn có thể khôi phục.",
+  "TourShare": "Di chuột lên bất kỳ tệp nào để thấy các thao tác nhanh. Nhấp vào biểu tượng chia sẻ để cấp quyền truy cập cho các liên hệ trong không gian làm việc của bạn với những mức quyền khác nhau — hoặc tạo liên kết bên ngoài cho bất kỳ ai khác.",
+  "TourSharedAccess": "{{sharedBy}} cho biết tệp đến từ ai, {{accessLevel}} cho biết bạn có thể làm gì với nó — xem, bình luận hay chỉnh sửa. Chỉ chủ sở hữu mới thay đổi được điều đó.",
+  "TourSharedAccessTitle": "Ai đã chia sẻ và bạn có thể làm gì",
+  "TourSharedEmpty": "Chưa có gì được chia sẻ với bạn. Tệp và thư mục sẽ hiện ra ở đây ngay khi có người cấp quyền truy cập cho bạn.",
+  "TourSharedEmptyTitle": "Danh sách của bạn hiện đang trống",
+  "TourSharedList": "Mọi thứ mà người khác cấp quyền cho bạn đều đổ về {{sectionName}}. Mở một tệp để làm việc ngay trong trình duyệt — bản gốc vẫn nằm nguyên chỗ cũ, nên ai cũng luôn thấy cùng một phiên bản.",
+  "TourSharedListTitle": "Đã chia sẻ với bạn",
+  "TourShareTitle": "Chia sẻ và cộng tác"
+}

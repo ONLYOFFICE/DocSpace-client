@@ -1,0 +1,7 @@
+{
+  "_comment": "Files that still mix tab and space indentation. Both live in the libs/ui-kit submodule, so they must be fixed in the docspace-ui-kit-react repository, not here. This list must only ever shrink -- never add to it.",
+  "mixedIndentation": [
+    "libs/ui-kit/.storybook/main.ts",
+    "libs/ui-kit/components/operations-progress-button/ProgressBar.tsx"
+  ]
+}

@@ -3,7 +3,7 @@
   "content": "System overview",
   "content_en_sha1_hash": "09b853dc38a24d6293ef1085cdeecde0769a88ce",
   "created_at": "2026-07-27T13:07:48.482Z",
-  "updated_at": "2026-07-27T13:55:23.203Z",
+  "updated_at": "2026-08-26T16:06:02.317Z",
   "comment": {
     "text": "Section heading (H2) for the system overview part of the DocsConnect statistics panel.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 303,
+      "line_number": 327,
       "context": "level={HeadingLevel.h2}\n className={styles.sectionTitle}\n fontSize=\"18px\"\n fontWeight={700}\n >\n {t(\"DocsConnect:SystemOverview\")}\n </Heading>\n <div className={styles.overviewGrid}>\n <InfoField\n label={t(\"Common:Address\")}\n value={tenant.address ?? \"\"}",
       "module": "/packages/client"
     }

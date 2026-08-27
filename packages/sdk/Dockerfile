@@ -23,7 +23,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install PNPM
-RUN npm install -g pnpm@10.33.0
+RUN npm install -g pnpm@11.19.0
 
 WORKDIR /app
 
@@ -57,4 +57,5 @@ RUN pnpm --filter @docspace/sdk run build:translations
 WORKDIR /app/packages/sdk
 
 # Run test:build
-RUN pnpm --filter @docspace/sdk run test:build
+RUN NODE_OPTIONS="--max-old-space-size=8192" \
+    pnpm --filter @docspace/sdk run test:build

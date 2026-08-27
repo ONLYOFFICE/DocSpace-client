@@ -3,7 +3,7 @@
   "content": "Remove",
   "content_en_sha1_hash": "e963907dac5cd5c017869b4c96c18021c9bd058b",
   "created_at": "2025-05-19T21:30:47.809Z",
-  "updated_at": "2026-07-27T13:07:50.649Z",
+  "updated_at": "2026-08-26T14:08:33.001Z",
   "comment": {
     "text": "This is a button label that confirms the removal of an item, such as a guest from a room, a user, or a subscription.",
     "is_auto": true,
@@ -12,8 +12,14 @@
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
+      "line_number": 87,
+      "context": "<ModalDialog.Footer>\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Remove\")}\n onClick={onRemove}\n testId=\"remove_storage_subscription_button\"\n />\n <Button\n scale",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 206,
+      "line_number": 208,
       "context": "if (isRecycleBinFolder) return t(\"Common:DeleteForeverButton\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:MoveTo\");\n };\n \n const getDialogTitle = () => {",
       "module": "/packages/client"
     },
@@ -31,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 123,
+      "line_number": 116,
       "context": "const deleteOption = canChangeUserRole\n ? [\n { key: \"s2\", isSeparator: true },\n {\n key: \"remove\",\n label: this.t(\"Common:Remove\"),\n access: ShareAccessRights.None,\n },\n ]\n : [];",
       "module": "/packages/client"
     },
@@ -43,19 +49,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 205,
+      "line_number": 252,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n textDecoration=\"underline dashed\"\n onClick={openRemoveSubscriptionDialog}\n >\n {t(\"Common:Remove\")}\n </Link>\n </div>\n </div>\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 329,
+      "line_number": 328,
       "context": "};\n case \"remove-guest\":\n return {\n id: \"option_remove-guests\",\n key: option,\n label: t(\"Common:Remove\"),\n onClick: () => this.dialogStore.setRemoveGuestDialogVisible(true),\n icon: DisableReactSvgUrl,\n };\n default:\n break;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 329,
+      "line_number": 328,
       "context": "};\n case \"remove-guest\":\n return {\n id: \"option_remove-guests\",\n key: option,\n label: t(\"Common:Remove\"),\n onClick: () => this.dialogStore.setRemoveGuestDialogVisible(true),\n icon: DisableReactSvgUrl,\n };\n default:\n break;",
       "module": "/packages/client"
     },
@@ -67,7 +73,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/Members.utils.ts",
-      "line_number": 123,
+      "line_number": 116,
       "context": "const deleteOption = canChangeUserRole\n ? [\n { key: \"s2\", isSeparator: true },\n {\n key: \"remove\",\n label: this.t(\"Common:Remove\"),\n access: ShareAccessRights.None,\n },\n ]\n : [];",
       "module": "/packages/sdk"
     },
@@ -97,19 +103,19 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 866,
+      "line_number": 968,
       "context": "access: ShareAccessRights.None,\n },\n {\n access: ShareAccessRights.None,\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ]\n : [],\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 866,
+      "line_number": 968,
       "context": "access: ShareAccessRights.None,\n },\n {\n access: ShareAccessRights.None,\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ]\n : [],\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 363,
+      "line_number": 355,
       "context": "key: \"s2\",\n isSeparator: true,\n },\n {\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ];\n \n return withRemove ? [...options, ...removeOption] : options;\n };",
       "module": "/packages/shared"
     },

@@ -39,6 +39,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation, useNavigate } from "react-router";
 
 import { getCategoryType } from "@docspace/shared/utils/common";
+import componentLoader from "@docspace/shared/utils/component-loader";
 import { CategoryType } from "@docspace/shared/constants";
 import { Consumer } from "@docspace/ui-kit/utils";
 import type { Nullable } from "@docspace/shared/types";
@@ -64,7 +65,6 @@ import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { AIAgentView } from "SRC_DIR/pages/Home/View/AIAgentView";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";
@@ -75,6 +75,22 @@ import useProfileBody, {
 import useContacts, { type UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { type UseFilesProps } from "../Hooks/useFiles";
 import OformsStore from "SRC_DIR/store/OformsStore";
+
+// Loaded on demand: AIAgentView statically pulls in the whole
+// @onlyoffice/ai-chat UI (assistant-ui runtime, markdown pipeline, …), and
+// this file itself sits in the entry graph — routes/client.js imports
+// ViewComponent statically — so a static import here would put all of that
+// on the initial-load critical path. The chunk is fetched only when the
+// chat view actually renders.
+// componentLoader, not a bare import: a stale chunk hash after a deploy (or
+// an aborted request in a throttled background tab) rejects the import, and
+// with nothing catching it the chat view just never renders. The loader
+// reloads the page once to pick up the new manifest.
+const AIAgentView = React.lazy(() =>
+  componentLoader(() => import("SRC_DIR/pages/Home/View/AIAgentView")).then(
+    (m) => ({ default: m.AIAgentView }),
+  ),
+);
 
 type ViewProps = UseContactsProps &
   UseFilesProps &
@@ -568,7 +584,11 @@ const View = ({
               currentView={currentView}
             />
           ) : currentView === "chat" || selectedFolderStore.isAIRoom ? (
-            <AIAgentView currentView={currentView} />
+            // No fallback: LoaderWrapper above already covers loading states,
+            // and the chat shows its own skeleton once mounted.
+            <React.Suspense fallback={null}>
+              <AIAgentView currentView={currentView} />
+            </React.Suspense>
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
           ) : (

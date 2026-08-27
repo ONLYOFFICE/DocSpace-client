@@ -72,11 +72,11 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export interface UsersContentProps {
   isUserTariffLimit: boolean;
   isPaymentPageAvailable: boolean;
+  isCommunity?: boolean;
   addedManagersCount: number;
   maxCountManagersByQuota: number;
 }
@@ -84,19 +84,23 @@ export interface UsersContentProps {
 const UsersContent = ({
   isUserTariffLimit,
   isPaymentPageAvailable,
+  isCommunity,
   addedManagersCount,
   maxCountManagersByQuota,
 }: UsersContentProps) => {
   const { t } = useTranslation(["Payments", "Common", "MainBar"]);
 
-  const chooseNewPlan = (
-    <Text>
-      {isPaymentPageAvailable
-        ? t("ChooseNewPlan")
-        : t("MainBar:ContactToUpgradeTariff", {
-            productName: getBrandName("ProductName"),
-          })}
-    </Text>
+  // Community has no plan to switch to and nobody to ask for one, so the
+  // dialog stops at the limit itself.
+  const chooseNewPlan = isCommunity ? null : (
+    <>
+      <br />
+      <Text>
+        {isPaymentPageAvailable
+          ? t("ChooseNewPlan")
+          : t("MainBar:ContactToUpgradeTariff")}
+      </Text>
+    </>
   );
 
   if (isUserTariffLimit)
@@ -105,7 +109,6 @@ const UsersContent = ({
         <Text fontWeight={600}>{t("CannotCreatePaidUsers")}</Text>
         <br />
         <Text>{t("NewUsersWillExceedMembersLimit")}</Text>
-        <br />
         {chooseNewPlan}
       </>
     );
@@ -120,25 +123,27 @@ const UsersContent = ({
           maxValue: maxCountManagersByQuota,
         })}
       </Text>
-      <br />
       {chooseNewPlan}
     </>
   );
 };
 
-export default inject(({ currentQuotaStore, authStore }: TStore) => {
-  const {
-    isUserTariffLimit,
+export default inject(
+  ({ currentQuotaStore, authStore, currentTariffStatusStore }: TStore) => {
+    const {
+      isUserTariffLimit,
 
-    addedManagersCount,
-    maxCountManagersByQuota,
-  } = currentQuotaStore;
-  const { isPaymentPageAvailable } = authStore;
+      addedManagersCount,
+      maxCountManagersByQuota,
+    } = currentQuotaStore;
+    const { isPaymentPageAvailable } = authStore;
 
-  return {
-    isUserTariffLimit,
-    isPaymentPageAvailable,
-    addedManagersCount,
-    maxCountManagersByQuota,
-  };
-})(observer(UsersContent));
+    return {
+      isUserTariffLimit,
+      isPaymentPageAvailable,
+      isCommunity: currentTariffStatusStore.isCommunity,
+      addedManagersCount,
+      maxCountManagersByQuota,
+    };
+  },
+)(observer(UsersContent));

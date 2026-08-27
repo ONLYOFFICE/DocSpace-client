@@ -3,7 +3,7 @@
   "content": "{{aiProvider}} is not available yet",
   "content_en_sha1_hash": "504a112d4df23df7699214be2942748918b9356f",
   "created_at": "2025-12-18T11:15:10.656Z",
-  "updated_at": "2026-07-28T07:30:59.803Z",
+  "updated_at": "2026-08-21T15:04:37.049Z",
   "comment": {
     "text": "This is a title displayed when AI agents are disabled. It appears for standalone portal administrators and includes a variable `{{aiProvider}}` for the name of the AI provider.",
     "is_auto": true,
@@ -12,15 +12,15 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 91,
-      "context": ");\n \n const title = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"AIProvider\"),\n }),\n )\n // saas (admin + user)\n .with([false, P._], () => t(\"EmptyAIAgentsNotActiveYetTitle\"))",
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
+      "line_number": 66,
+      "context": "t,\n }: Omit<NoAccessCopyProps, \"isAgents\">): NoAccessCopy => {\n const title = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"AIProvider\"),\n }),\n )\n // saas (admin + user)\n .with([false, P._], () => t(\"EmptyAIAgentsNotActiveYetTitle\"))",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 213,
-      "context": "standalone: boolean,\n isPortalAdmin: boolean,\n ) => {\n return match([standalone, isPortalAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n )\n .with([false, true], () => t(\"Common:EmptyAIAgentsNotActiveYetTitle\"))\n // standalone user",
+      "line_number": 287,
+      "context": "isPortalAdmin: boolean,\n ) => {\n return (\n match([standalone, isPortalAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n )\n .with([false, true], () => t(\"Common:EmptyAIAgentsNotActiveYetTitle\"))\n // standalone user",
       "module": "/packages/client"
     },
     {

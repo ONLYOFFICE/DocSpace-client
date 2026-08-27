@@ -3,7 +3,7 @@
   "content": "You don't have enough permission",
   "content_en_sha1_hash": "0100053d13b47532703554baf465379a9dc4dc52",
   "created_at": "2025-08-04T07:29:37.418Z",
-  "updated_at": "2026-05-15T14:00:06.792Z",
+  "updated_at": "2026-08-24T22:30:00.619Z",
   "comment": {
     "text": "This is a tooltip message indicating that the user lacks the necessary permissions to perform an action. It appears when hovering over a disabled UI element.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/IntegrationsCard/IntegrationDialog.tsx",
+      "line_number": 140,
+      "context": "anchorSelect={`#${CREATE_INSTANCE_ANCHOR}`}\n place=\"top\"\n getContent={() => (\n <div className={styles.restrictionTooltip}>\n <Text fontWeight={700} fontSize=\"12px\">\n {t(\"Common:YouDontHaveEnoughPermission\")}\n </Text>\n <Text fontSize=\"12px\">\n {t(\"Common:ContactAdminForPermissions\")}\n </Text>\n </div>",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
       "line_number": 177,

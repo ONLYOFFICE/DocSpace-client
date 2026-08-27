@@ -1,14 +1,14 @@
 {
   "key_path": "OAuthAppDescription",
-  "content": "Use OAuth 2.0 to access the {{organizationName}} {{productName}} API for authorization and further actions such as accessing files, etc. Here, you can register a new application, manage your created apps in the list, disable and enable them.",
-  "content_en_sha1_hash": "5b917a805367d09bce154eafce70cd6d2f77cc74",
-  "created_at": "2025-05-19T21:30:53.948Z",
-  "updated_at": "2026-05-15T14:00:06.824Z",
+  "content": "Use OAuth 2.0 to authorize access to the {{organizationName}} {{productName}} API and perform actions like accessing files. Register new applications here, and manage, enable, or disable them from the list.",
+  "content_en_sha1_hash": "491b4eb19133e7badbe05327a925bdea499ff640",
+  "created_at": "2026-08-26T16:05:57.276Z",
+  "updated_at": "2026-08-26T16:11:48.608Z",
   "comment": {
-    "text": "This is a descriptive text appearing on the OAuth application management page. It explains the purpose of OAuth 2.0 integration within {{organizationName}} {{productName}} and outlines the actions users can perform, such as registering, managing, enabling, and disabling applications.",
+    "text": "Description text for the empty state screen and OAuth application list explaining API authorization and app management. It includes variables for the organization name and product name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:18:40.218Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T16:11:48.608Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

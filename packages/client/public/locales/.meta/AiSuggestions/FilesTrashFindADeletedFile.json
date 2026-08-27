@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesTrashFindADeletedFile",
+  "content": "Find a deleted file",
+  "content_en_sha1_hash": "4b2a5bffebbdc84ab0e8f1049dc88b10db9505a8",
+  "created_at": "2026-08-04T09:58:55.138Z",
+  "updated_at": "2026-08-05T17:53:46.588Z",
+  "comment": {
+    "text": "Label for an AI suggestion option that allows users to request help locating a specific file in the Trash.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:53:46.588Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 333,
+      "context": "{\n name: t(\"AiSuggestions:FilesTrashWhatSInTrash\"),\n prompt: t(\"AiSuggestions:FilesTrashWhatSInTrashPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesTrashFindADeletedFile\"),\n prompt: t(\"AiSuggestions:FilesTrashFindADeletedFilePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesTrashRestoreSelectedItems\"),\n prompt: t(\"AiSuggestions:FilesTrashRestoreSelectedItemsPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

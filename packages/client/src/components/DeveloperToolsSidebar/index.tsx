@@ -67,11 +67,13 @@ import { useTranslation } from "react-i18next";
 import type { NavMenuGroup, NavMenuItem } from "@docspace/ui-kit/components/nav-menu";
 import { PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
+import { hasDocsConnectAccess } from "@docspace/shared/utils/devToolsAccess";
 
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 
 type DeveloperToolsSidebarProps = {
   identityServerEnabled: boolean;
+  canOpenDocsConnect: boolean;
 };
 
 const ITEMS = [
@@ -86,6 +88,7 @@ const ITEMS = [
     path: "/developer-tools/docs-connect",
     pageType: PageType.devToolsDocsConnect,
     translationKey: "DocsConnect:DocsConnect" as const,
+    conditionalOnDocsConnect: true,
   },
   {
     id: "devtools-javascript-sdk",
@@ -122,6 +125,7 @@ const ITEMS = [
 
 const DeveloperToolsSidebar = ({
   identityServerEnabled,
+  canOpenDocsConnect,
 }: DeveloperToolsSidebarProps) => {
   const { t } = useTranslation([
     "Common",
@@ -134,9 +138,11 @@ const DeveloperToolsSidebar = ({
   const location = useLocation();
   const navigate = useNavigate();
 
-  const visibleItems = ITEMS.filter(
-    (item) => !item.conditionalOnOAuth || identityServerEnabled,
-  );
+  const visibleItems = ITEMS.filter((item) => {
+    if (item.conditionalOnOAuth && !identityServerEnabled) return false;
+    if (item.conditionalOnDocsConnect && !canOpenDocsConnect) return false;
+    return true;
+  });
 
   const activeId = React.useMemo(() => {
     const { pathname } = location;
@@ -153,6 +159,9 @@ const DeveloperToolsSidebar = ({
       // biome-ignore lint/plugin/no-dynamic-i18n-key: literals captured by locales scanner
       label: t(item.translationKey),
       icon: getCatalogIconUrlByType(item.pageType),
+      // linkData renders the item as a real router link, so right-click /
+      // Ctrl-click / middle-click can open the section in a new tab.
+      linkData: { path: item.path },
       onClick: () => navigate(item.path),
     }));
     return [{ id: "developer-tools", items }];
@@ -163,7 +172,13 @@ const DeveloperToolsSidebar = ({
   );
 };
 
-export default inject(({ authStore }: TStore) => ({
+export default inject(({ authStore, userStore, settingsStore }: TStore) => ({
   identityServerEnabled:
     authStore?.capabilities?.identityServerEnabled ?? false,
+  // Docs Connect is SaaS-only and admin/owner-only - see
+  // `hasDocsConnectAccess`.
+  canOpenDocsConnect: hasDocsConnectAccess(
+    userStore?.user,
+    settingsStore?.standalone,
+  ),
 }))(observer(DeveloperToolsSidebar));

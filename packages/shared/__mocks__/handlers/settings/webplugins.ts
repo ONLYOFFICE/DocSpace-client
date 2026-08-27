@@ -52,7 +52,7 @@ export const mockPlugin1: TAPIPlugin = {
   homePage: "https://github.com/ONLYOFFICE/docspace-plugins",
   pluginName: "Testpluginone",
   scopes: "ContextMenu,InfoPanel,MainButton",
-  image: "icon.png",
+  image: "",
   createBy: {
     id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
     displayName: " Administrator",
@@ -95,22 +95,336 @@ export const mockPlugin3: TAPIPlugin = {
   enabled: false,
 };
 
-export const mockLocalePlugin: TAPIPlugin = {
+export const mockLocaleSamplePlugin: TAPIPlugin = {
   ...mockPlugin1,
-  version: "1.1.0",
+  name: "locale-sample",
+  version: "1.0.0",
   minDocSpaceVersion: "3.5.0",
-  name: "archives.zip",
+  description: "Sample plugin demonstrating plugin localization for DocSpace",
   nameLocale: {
-    de: "archive.zip",
-    az: "arxivlər.zip",
+    de: "Locale-Beispiel",
+    az: "Lokal nümunəsi",
   },
-  description: "Plugin for working with archives",
   descriptionLocale: {
-    de: "Plugin für die Verwendung von Archiven",
-    az: "Arxivlərlə işləmək üçün plagin",
+    de: "Beispiel-Plugin zur Demonstration der Plugin-Lokalisierung für DocSpace",
+    az: "DocSpace üçün plagin lokalizasiyasını nümayiş etdirən nümunə plagin",
   },
-  pluginName: "Testlocaleplugin",
-  url: "/plugins/test-locale-plugin/plugin.js",
+  pluginName: "LocaleSample",
+  scopes: "Settings,ContextMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/locale-sample/plugin.js",
+  settings: "",
+};
+
+export const mockContextMenuPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "context-menu-sample",
+  version: "1.0.1",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating context menu integration for DocSpace",
+  pluginName: "ContextMenuSample",
+  scopes: "ContextMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/context-menu/plugin.js",
+  settings: "",
+};
+
+export const mockInfoPanelPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "info-panel",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating info panel integration for DocSpace",
+  pluginName: "InfoPanelSample",
+  scopes: "InfoPanel",
+  image: "docspace-icon.svg",
+  url: "/plugins/info-panel/plugin.js",
+  settings: "",
+};
+
+export const mockSelectorPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "selector",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description: "Sample plugin demonstrating all DocSpace selector types",
+  pluginName: "SelectorSample",
+  scopes: "ContextMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/selector/plugin.js",
+  settings: "",
+};
+
+export const mockMainButtonPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "main-button",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating main button menu integration for DocSpace",
+  pluginName: "MainButtonSample",
+  scopes: "MainButton",
+  image: "docspace-icon.svg",
+  url: "/plugins/main-button/plugin.js",
+  settings: "",
+};
+
+export const mockArticleButtonPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "article-button",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating article button sidebar integration for DocSpace",
+  pluginName: "ArticleButtonSample",
+  scopes: "ArticleButton",
+  image: "docspace-icon.svg",
+  url: "/plugins/article-button/plugin.js",
+  settings: "",
+};
+
+export const mockArticleNavigationPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "article-navigation",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin adding two sidebar entries with React section pages",
+  pluginName: "ArticleNavigationSample",
+  scopes: "ArticleNavigation",
+  image: "docspace-icon.svg",
+  url: "/plugins/article-navigation/plugin.js",
+  // The sample is an ES module bundle, so it has to be imported rather than
+  // dropped into a <script> tag: without this the plugin dies on load with
+  // "Cannot use import statement outside a module".
+  runtime: "module",
+  settings: "",
+};
+
+export const mockFileItemPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "file-item",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating file item click interception for DocSpace",
+  pluginName: "FileItemSample",
+  scopes: "File",
+  image: "docspace-icon.svg",
+  url: "/plugins/file-item/plugin.js",
+  settings: "",
+};
+
+export const mockProfileMenuPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "profile-menu",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating profile menu integration for DocSpace",
+  pluginName: "ProfileMenuSample",
+  scopes: "ProfileMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/profile-menu/plugin.js",
+  settings: "",
+};
+
+export const mockEventListenerPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "event-listener",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating event listener integration for DocSpace",
+  pluginName: "EventListenerSample",
+  scopes: "EventListener",
+  image: "docspace-icon.svg",
+  url: "/plugins/event-listener/plugin.js",
+  settings: "",
+};
+
+export const mockMediaViewerPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "media-viewer",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating media viewer integration for DocSpace",
+  pluginName: "MediaViewerSample",
+  scopes: "File",
+  image: "docspace-icon.svg",
+  url: "/plugins/media-viewer/plugin.js",
+  settings: "",
+};
+
+export const mockApiPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "api-sample",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating IApiPlugin usage — creates a room via the DocSpace REST API",
+  pluginName: "Apiplugin",
+  scopes: "API,ProfileMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/api-sample/plugin.js",
+  settings: "",
+};
+
+export const mockCreateDialogPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "create-dialog-sample",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating ICreateDialog usage — opens the native DocSpace create-item dialog from a main-button item",
+  pluginName: "CreateDialogPlugin",
+  scopes: "MainButton",
+  image: "docspace-icon.svg",
+  url: "/plugins/create-dialog-sample/plugin.js",
+  settings: "",
+};
+
+export const mockModalDialogPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "modal-dialog-sample",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating IModalDialog usage — opens a modal from a profile-menu item",
+  pluginName: "ModalDialogPlugin",
+  scopes: "ProfileMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/modal-dialog-sample/plugin.js",
+  settings: "",
+};
+
+// Plugins list with modal dialog sample plugin
+export const webPluginsWithModalDialogPlugin = {
+  response: [mockModalDialogPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const mockFloatingOperationsPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "floating-operations",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating IFloatingOperationsButton — shows a floating progress button for long-running operations triggered from the context menu",
+  pluginName: "FloatingOperationsPlugin",
+  scopes: "ContextMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/floating-operations/plugin.js",
+  settings: "",
+};
+
+// Plugins list with floating operations plugin
+export const webPluginsWithFloatingOperationsPlugin = {
+  response: [mockFloatingOperationsPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const mockSettingsPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "settings",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating ISettingsPlugin — provides administrator-configurable settings (API endpoint and notifications toggle)",
+  pluginName: "SettingsPlugin",
+  scopes: "Settings",
+  image: "docspace-icon.svg",
+  url: "/plugins/settings/plugin.js",
+  settings: "",
+};
+
+export const mockNavigationPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "navigation-sample",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating Actions.navigate and Actions.openInfoPanel for DocSpace",
+  pluginName: "NavigationSample",
+  scopes: "ContextMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/navigation-sample/plugin.js",
+  settings: "",
+};
+
+export const mockPostMessagePlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "post-message",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating IPostMessagePlugin — listens for postMessage events from an embedded iframe and triggers portal-side toast notifications",
+  pluginName: "PostMessagePlugin",
+  scopes: "ProfileMenu,PostMessage",
+  image: "docspace-icon.svg",
+  url: "/plugins/post-message/plugin.js",
+  settings: "",
+};
+
+// Plugins list with settings plugin
+export const webPluginsWithSettingsPlugin = {
+  response: [mockSettingsPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with navigation sample plugin
+export const webPluginsWithNavigationPlugin = {
+  response: [mockNavigationPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with post-message plugin
+export const webPluginsWithPostMessagePlugin = {
+  response: [mockPostMessagePlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
 // Empty plugins list
@@ -141,9 +455,177 @@ export const webPluginsWithData = {
   statusCode: 200,
 };
 
-// Plugins list with locale plugin
-export const webPluginsWithLocale = {
-  response: [mockLocalePlugin],
+// Plugins list with context menu sample plugin
+export const webPluginsWithContextMenuPlugin = {
+  response: [mockContextMenuPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with info panel sample plugin
+export const webPluginsWithInfoPanelPlugin = {
+  response: [mockInfoPanelPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with selector sample plugin
+export const webPluginsWithSelectorPlugin = {
+  response: [mockSelectorPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with main button sample plugin
+export const webPluginsWithMainButtonPlugin = {
+  response: [mockMainButtonPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with article button sample plugin
+export const webPluginsWithArticleButtonPlugin = {
+  response: [mockArticleButtonPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with article navigation sample plugin
+export const webPluginsWithArticleNavigationPlugin = {
+  response: [mockArticleNavigationPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with file item sample plugin
+export const webPluginsWithFileItemPlugin = {
+  response: [mockFileItemPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with profile menu sample plugin
+export const webPluginsWithProfileMenuPlugin = {
+  response: [mockProfileMenuPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with event listener sample plugin
+export const webPluginsWithEventListenerPlugin = {
+  response: [mockEventListenerPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with media viewer sample plugin
+export const webPluginsWithMediaViewerPlugin = {
+  response: [mockMediaViewerPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with create dialog sample plugin
+export const webPluginsWithCreateDialogPlugin = {
+  response: [mockCreateDialogPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with API sample plugin
+export const webPluginsWithApiPlugin = {
+  response: [mockApiPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with locale-sample plugin
+export const webPluginsWithLocaleSample = {
+  response: [mockLocaleSamplePlugin],
   count: 1,
   links: [
     {
@@ -195,18 +677,89 @@ export const webPluginsDeleteResponse = {
   statusCode: 200,
 };
 
+type TWebPluginType =
+  | "empty"
+  | "withData"
+  | "withLocaleSample"
+  | "withContextMenuPlugin"
+  | "withInfoPanelPlugin"
+  | "withSelectorPlugin"
+  | "withMainButtonPlugin"
+  | "withArticleButtonPlugin"
+  | "withArticleNavigationPlugin"
+  | "withFileItemPlugin"
+  | "withProfileMenuPlugin"
+  | "withEventListenerPlugin"
+  | "withMediaViewerPlugin"
+  | "withApiPlugin"
+  | "withCreateDialogPlugin"
+  | "withModalDialogPlugin"
+  | "withFloatingOperationsPlugin"
+  | "withPostMessagePlugin"
+  | "withSettingsPlugin"
+  | "withNavigationPlugin";
+
 // Resolvers
-export const webPluginsResolver = (
-  type: "empty" | "withData" | "withLocale" = "empty",
-) => {
+export const webPluginsResolver = (type: TWebPluginType = "empty") => {
   let data;
 
   switch (type) {
-    case "withLocale":
-      data = webPluginsWithLocale;
+    case "withLocaleSample":
+      data = webPluginsWithLocaleSample;
       break;
     case "withData":
       data = webPluginsWithData;
+      break;
+    case "withContextMenuPlugin":
+      data = webPluginsWithContextMenuPlugin;
+      break;
+    case "withInfoPanelPlugin":
+      data = webPluginsWithInfoPanelPlugin;
+      break;
+    case "withSelectorPlugin":
+      data = webPluginsWithSelectorPlugin;
+      break;
+    case "withMainButtonPlugin":
+      data = webPluginsWithMainButtonPlugin;
+      break;
+    case "withArticleButtonPlugin":
+      data = webPluginsWithArticleButtonPlugin;
+      break;
+    case "withArticleNavigationPlugin":
+      data = webPluginsWithArticleNavigationPlugin;
+      break;
+    case "withFileItemPlugin":
+      data = webPluginsWithFileItemPlugin;
+      break;
+    case "withProfileMenuPlugin":
+      data = webPluginsWithProfileMenuPlugin;
+      break;
+    case "withEventListenerPlugin":
+      data = webPluginsWithEventListenerPlugin;
+      break;
+    case "withMediaViewerPlugin":
+      data = webPluginsWithMediaViewerPlugin;
+      break;
+    case "withApiPlugin":
+      data = webPluginsWithApiPlugin;
+      break;
+    case "withCreateDialogPlugin":
+      data = webPluginsWithCreateDialogPlugin;
+      break;
+    case "withModalDialogPlugin":
+      data = webPluginsWithModalDialogPlugin;
+      break;
+    case "withFloatingOperationsPlugin":
+      data = webPluginsWithFloatingOperationsPlugin;
+      break;
+    case "withPostMessagePlugin":
+      data = webPluginsWithPostMessagePlugin;
+      break;
+    case "withSettingsPlugin":
+      data = webPluginsWithSettingsPlugin;
+      break;
+    case "withNavigationPlugin":
+      data = webPluginsWithNavigationPlugin;
       break;
     default:
       data = webPluginsEmpty;
@@ -231,7 +784,7 @@ export const webPluginsDeleteResolver = () => {
 // Handlers
 export const webPluginsHandler = (
   port: string,
-  type: "empty" | "withData" | "withLocale" = "empty",
+  type: TWebPluginType = "empty",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,

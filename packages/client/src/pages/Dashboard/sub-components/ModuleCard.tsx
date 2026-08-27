@@ -60,8 +60,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+
+import TickSvg from "PUBLIC_DIR/images/icons/12/tick.svg";
+import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 
 import styles from "../Dashboard.module.scss";
 
@@ -71,29 +77,79 @@ export type ModuleItem = {
   title: string;
   description: string;
   installed: boolean;
-  href?: string;
+  /** Label of the card's action button — each app words its own. */
+  buttonLabel: string;
+  /**
+   * The app's section. Not what the action button does (see `onAction`) — it is
+   * where the tour has to run, so taking the tour navigates here regardless of
+   * whether the button creates something or opens the section.
+   */
+  href: string;
+  /**
+   * The card's primary action, worded by `buttonLabel`: opening the section for
+   * Files, or the create dialog for an app whose entry point is creation. Falls
+   * back to navigating to `href` for a user without the create right, in which
+   * case `buttonLabel` reads "Open" instead.
+   */
+  onAction: () => void;
 };
 
 type ModuleCardProps = {
   mod: ModuleItem;
-  onClick: () => void;
+  /**
+   * Starts the app's onboarding tour, which used to be offered by the promo
+   * modal's "Take a tour" button. Left out for an app that has no tour — the
+   * help icon is then not rendered at all.
+   */
+  onTakeTour?: () => void;
 };
 
-export const ModuleCard = ({ mod, onClick }: ModuleCardProps) => {
+export const ModuleCard = ({ mod, onTakeTour }: ModuleCardProps) => {
+  const { t } = useTranslation(["Common"]);
+
   return (
-    <button type="button" className={styles.moduleCard} onClick={onClick}>
+    <div
+      data-tour-id={`dashboard-app-card-${mod.id}`}
+      className={styles.moduleCard}
+    >
       <div className={styles.moduleHeader}>
-        <span className={styles.moduleIcon} data-installed={mod.installed}>
-          {mod.icon}
-        </span>
+        <span className={styles.moduleIcon}>{mod.icon}</span>
         <Text as="p" className={styles.moduleTitle}>
           {mod.title}
         </Text>
+        {mod.installed ? (
+          <Text as="span" className={styles.moduleInstalledBadge}>
+            <TickSvg />
+            {t("Common:Installed")}
+          </Text>
+        ) : null}
       </div>
+
       <Text as="p" className={styles.moduleDescription}>
         {mod.description}
       </Text>
-    </button>
+
+      <div className={styles.moduleFooter}>
+        <Button
+          size={ButtonSize.small}
+          label={mod.buttonLabel}
+          onClick={mod.onAction}
+          scale
+          testId={`dashboard-app-open-${mod.id}`}
+        />
+        {onTakeTour ? (
+          <IconButton
+            className={styles.moduleTourButton}
+            iconName={QuestionReactSvgUrl}
+            size={16}
+            isClickable
+            title={t("Common:WelcomeStartTour")}
+            onClick={onTakeTour}
+            dataTestId={`dashboard-app-tour-${mod.id}`}
+          />
+        ) : null}
+      </div>
+    </div>
   );
 };
 

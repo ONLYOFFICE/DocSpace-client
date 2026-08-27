@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "移除插件",
-  "DeletePluginDescription": "此插件将不再可供{{productName}}用户使用。您确定您要继续吗？",
+  "DeletePluginDescription": "此插件将不再可供工作区用户使用。您确定您要继续吗？",
   "DeletePluginTitle": "移除插件？",
   "ExpandFunctionality": "使用插件SDK扩展功能",
   "GoToRepo": "转到仓库",
@@ -10,11 +10,11 @@
   "NotNeedSettings": "无需输入设置",
   "PluginCacheWarningDescription": "插件是根据其版本号进行缓存的。为了确保您的更改生效，请在上传之前，将您的 <1>package.json</1> 文件中的版本号递增。如果版本号保持不变，系统将不会更新插件。",
   "PluginDeletedSuccessfully": "插件删除成功",
-  "PluginIsNotCompatible": "插件 SDK 版本与{{productName}}版本不兼容，请更新到兼容版本。",
+  "PluginIsNotCompatible": "插件 SDK 版本与{{organizationName}} {{productName}}版本不兼容，请更新到兼容版本。",
   "PluginLoadedSuccessfully": "插件加载成功",
   "PluginSamples": "插件示例",
   "PluginSDK": "插件SDK",
-  "PluginSDKDescription": "使用插件 SDK，您可以扩展{{productName}}功能、连接第三方服务或增强现有用户体验。您可以在此处找到 GitHub 上提供的带有代码源的插件示例。",
-  "PluginSDKInstruction": "单击该按钮了解如何创建您自己的插件。",
-  "UploadDescription": "您可以添加插件以使用额外功能扩展{{productName}}的功能。单击“上传插件”或将文件拖放到 ZIP 存档中。"
+  "PluginSDKDescription": "使用插件SDK添加新功能、连接第三方服务或改进现有体验。请浏览下方的示例插件，其源代码可在GitHub上获取。前往<1>插件</1>页面，即可为您的工作区启用这些插件。",
+  "PluginSDKInstruction": "<1>阅读说明</1>，以构建您自己的插件。",
+  "UploadDescription": "您可以添加插件以使用额外功能扩展工作区的功能。单击“上传插件”或将文件拖放到 ZIP 存档中。"
 }

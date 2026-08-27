@@ -3,7 +3,7 @@
   "content": "Once AI search is used, transaction history and charges will appear here.",
   "content_en_sha1_hash": "3aabbecfe710d02e82d61d15db86ec9cd84c31c3",
   "created_at": "2026-07-04T11:29:59.452Z",
-  "updated_at": "2026-07-27T13:07:51.055Z",
+  "updated_at": "2026-08-21T15:04:37.430Z",
   "comment": {
     "text": "Empty state description for the transaction history list on the AI Search page, shown when no usage has been recorded yet.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
-      "line_number": 336,
+      "line_number": 373,
       "context": "<TransactionHistory\n serviceName={AI_SEARCH}\n withoutRoleFilter\n hideTypeFilter\n emptyTitle={t(\"NoAISearchTransactions\")}\n emptyDescription={t(\"NoAISearchTransactionsDescription\")}\n />\n </div>\n \n {isEnableAIToolsDialogVisible ? (\n <ConfirmationDialog",
       "module": "/libs/ui-kit"
     }

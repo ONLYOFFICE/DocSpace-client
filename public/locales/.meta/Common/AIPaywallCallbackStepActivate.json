@@ -3,7 +3,7 @@
   "content": "Activating AI features",
   "content_en_sha1_hash": "260634f6b08f499cc06a569e05181447941f6901",
   "created_at": "2026-05-15T13:59:45.971Z",
-  "updated_at": "2026-07-27T13:07:51.056Z",
+  "updated_at": "2026-08-13T14:37:21.814Z",
   "comment": {
     "text": "A step label in a progress sequence on the AI paywall completion page, representing the stage where AI features are being enabled.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 184,
-      "context": "const activateWalletService =\n service && !isDocsConnect ? resolveWalletService(service) : null;\n \n const getActivateStepLabel = () =>\n isAIService(service)\n ? t(\"AIPaywallCallbackStepActivate\")\n : isDocsConnect\n ? t(\"DocsConnectCallbackStepActivate\")\n : \"\";\n \n const isWalletOnly = type === \"wallet\" && !isDocsConnect;",
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 188,
+      "context": "};\n case PaymentFlavor.Ai:\n return {\n processingTitle: t(\"Common:WalletTopUpCallbackProcessingTitle\"),\n processingHint: t(\"Common:WalletTopUpCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:AIPaywallCallbackStepActivate\"),\n successTitle: t(\"Common:AIPaywallCallbackActivated\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:GoToAddon\"),\n redirectUrl: service.includes(AI_SEARCH)\n ? AI_SEARCH_REDIRECT_URL",
       "module": "/libs/ui-kit"
     }
   ],

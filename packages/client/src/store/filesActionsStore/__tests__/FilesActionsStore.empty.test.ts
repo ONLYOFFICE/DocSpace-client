@@ -8,9 +8,22 @@ vi.mock("@docspace/shared/api/files", async (io) => ({
   removeFiles: vi.fn(async () => [{}]),
 }));
 
+import { emptyTrash } from "@docspace/shared/api/files";
+import { FolderType } from "@docspace/shared/enums";
+
 import { createTestFilesActionsStore, t } from "./testHarness";
 
 const translations = { deleteOperation: "del" } as never;
+
+const inertUploadDataStore = () => ({
+  loopFilesOperations: vi.fn(async () => {}),
+  clearActiveOperations: vi.fn(),
+  secondaryProgressDataStore: {
+    setSecondaryProgressBarData: vi.fn(),
+    clearSecondaryProgressData: vi.fn(),
+    isOperationStopped: vi.fn(() => false),
+  },
+});
 
 describe("FilesActionsStore — empty operations (batch 7)", () => {
   it("emptyTrash drives the progress bar and loops the file operation", async () => {
@@ -30,12 +43,55 @@ describe("FilesActionsStore — empty operations (batch 7)", () => {
         secondaryProgressDataStore: {
           setSecondaryProgressBarData,
           clearSecondaryProgressData: vi.fn(),
+          isOperationStopped: vi.fn(() => false),
         },
       },
     });
     await store.emptyTrash(translations);
     expect(setSecondaryProgressBarData).toHaveBeenCalled();
     expect(loopFilesOperations).toHaveBeenCalledTimes(1);
+  });
+
+  it("emptyTrash sends the section scope of the trash view (bug 82588)", async () => {
+    const folderType = [
+      FolderType.EditingRoom,
+      FolderType.CustomRoom,
+      FolderType.PublicRoom,
+      FolderType.VirtualDataRoom,
+    ];
+    const store = createTestFilesActionsStore({
+      treeFoldersStore: { isRecycleBinFolder: true },
+      filesStore: {
+        files: [],
+        folders: [],
+        filter: { folderType },
+        addActiveItems: vi.fn(),
+        getIsEmptyTrash: vi.fn(),
+      },
+      uploadDataStore: inertUploadDataStore(),
+    });
+
+    await store.emptyTrash(translations);
+
+    expect(emptyTrash).toHaveBeenCalledWith(folderType);
+  });
+
+  it("emptyTrash clears the whole trash when the view has no scope", async () => {
+    const store = createTestFilesActionsStore({
+      treeFoldersStore: { isRecycleBinFolder: true },
+      filesStore: {
+        files: [],
+        folders: [],
+        filter: {},
+        addActiveItems: vi.fn(),
+        getIsEmptyTrash: vi.fn(),
+      },
+      uploadDataStore: inertUploadDataStore(),
+    });
+
+    await store.emptyTrash(translations);
+
+    expect(emptyTrash).toHaveBeenCalledWith(null);
   });
 
   it("emptyArchive removes folders and loops the operation", async () => {
@@ -49,6 +105,7 @@ describe("FilesActionsStore — empty operations (batch 7)", () => {
         secondaryProgressDataStore: {
           setSecondaryProgressBarData,
           clearSecondaryProgressData: vi.fn(),
+          isOperationStopped: vi.fn(() => false),
         },
       },
     });

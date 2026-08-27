@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallCallbackActivated",
+  "content": "AI features activated",
+  "content_en_sha1_hash": "34aa38b842e3fdec2e32b3ebe60a68d8f7683ede",
+  "created_at": "2026-08-13T14:36:37.950Z",
+  "updated_at": "2026-08-13T14:56:35.324Z",
+  "comment": {
+    "text": "Title of the success screen displayed after an AI add-on payment is successfully processed.",
+    "is_auto": true,
+    "updated_at": "2026-08-13T14:56:35.324Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 189,
+      "context": "case PaymentFlavor.Ai:\n return {\n processingTitle: t(\"Common:WalletTopUpCallbackProcessingTitle\"),\n processingHint: t(\"Common:WalletTopUpCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:AIPaywallCallbackStepActivate\"),\n successTitle: t(\"Common:AIPaywallCallbackActivated\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:GoToAddon\"),\n redirectUrl: service.includes(AI_SEARCH)\n ? AI_SEARCH_REDIRECT_URL\n : AI_SERVICES_REDIRECT_URL,",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -42,7 +42,7 @@ import { FolderType, RoomsType } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 
 import type { Nullable } from "@docspace/shared/types";
-import type { TFile, TGetFolder } from "@docspace/shared/api/files/types";
+import type { TFile } from "@docspace/shared/api/files/types";
 
 import { THUMBNAILS_CACHE } from "./constants";
 
@@ -126,14 +126,16 @@ export async function fetchFavoritesFolderImpl(
   self: FilesStore,
   folderId: number | string,
 ) {
-  // api.files.getFolder is typed with a mandatory filter
-  // param but the old JS calls it with the folder id only; the erased
-  // function cast keeps the reduced call arity.
-  const favoritesFolder = await (
-    api.files.getFolder as unknown as (
-      folderIdParam: number | string,
-    ) => Promise<TGetFolder>
-  )(folderId);
+  // The live filter carries the section scope (folderType: Rooms/Forms/AI/
+  // MyDocs) along with sort and paging. It must be passed on: calling
+  // getFolder with the id alone skips the query string entirely, so the
+  // refreshed listing comes back unscoped and shows favorites belonging to
+  // every other section.
+  const requestFilter = self.filter.clone();
+  requestFilter.folder = folderId as string;
+
+  const favoritesFolder = await api.files.getFolder(folderId, requestFilter);
+
   self.setFolders(favoritesFolder.folders);
   self.setFiles(favoritesFolder.files);
 

@@ -114,6 +114,7 @@ const InvitePanel = ({
   isOwner,
   isAdmin,
   standalone,
+  isCommunity,
   hideSelector,
   isUserTariffLimit,
 
@@ -402,11 +403,26 @@ const InvitePanel = ({
       />
     );
 
+    // Community has no tariff to upgrade, but lowering the invited roles is
+    // still a way out - keep that half of the sentence.
+    const getHint = () => {
+      if (isRoomAdmin) return null;
+      if (isCommunity) return t("Common:ChangeUserPermissionsOnly");
+
+      return paymentLink;
+    };
+
+    const hint = getHint();
+
     return (
       <>
         {error}
-        &nbsp;
-        {!isRoomAdmin ? paymentLink : null}
+        {hint ? (
+          <>
+            &nbsp;
+            {hint}
+          </>
+        ) : null}
       </>
     );
   };
@@ -1173,6 +1189,7 @@ export default inject(
     infoPanelStore,
     authStore,
     currentQuotaStore,
+    currentTariffStatusStore,
     userStore,
     peopleStore,
     uploadDataStore,
@@ -1221,6 +1238,7 @@ export default inject(
       setIsNewUserByCurrentUser,
       isOwner,
       standalone,
+      isCommunity: currentTariffStatusStore.isCommunity,
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
       isAdmin,

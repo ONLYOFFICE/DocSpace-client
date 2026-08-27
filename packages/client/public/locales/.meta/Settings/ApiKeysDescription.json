@@ -1,20 +1,20 @@
 {
   "key_path": "ApiKeysDescription",
-  "content": "As an owner/admin you can view and manage all API keys in this {{productName}}.",
-  "content_en_sha1_hash": "5593ee7bc8d8372051b5728cbe1f5f45794ca38f",
-  "created_at": "2025-05-19T21:30:50.545Z",
-  "updated_at": "2026-05-15T14:00:06.791Z",
+  "content": "As an owner or admin, you can view and manage all API keys for this workspace.",
+  "content_en_sha1_hash": "f82a0abfc4fbb95c3301037685b1121cf4069c2b",
+  "created_at": "2026-08-26T14:08:26.248Z",
+  "updated_at": "2026-08-26T14:12:46.468Z",
   "comment": {
-    "text": "This is a descriptive text displayed on the API Keys settings page. It informs the user that they can manage API keys within the product, with `{{productName}}` being replaced by the brand name.",
+    "text": "Informational text in the API Keys settings section explaining the management permissions for owners and admins.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:40.474Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T14:12:46.468Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 169,
-      "context": "className={classNames(styles.apiKeysDescription, {\n withEmptyScreen: !!error,\n })}\n >\n <Text lineHeight=\"20px\" className={styles.apiKeysText}>\n {t(\"Settings:ApiKeysDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text\n className={classNames(",
+      "line_number": 168,
+      "context": "className={classNames(styles.apiKeysDescription, {\n withEmptyScreen: !!error,\n })}\n >\n <Text lineHeight=\"20px\" className={styles.apiKeysText}>\n {t(\"Settings:ApiKeysDescription\")}\n </Text>\n <Text\n className={classNames(\n styles.apiKeysText,\n styles.apiKeysDescriptionText,",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

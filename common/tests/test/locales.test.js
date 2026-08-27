@@ -45,6 +45,56 @@ const {
   moduleWorkspaces,
 } = require("../utils/files");
 
+// Groups of English keys that already share one value inside a namespace.
+// This baseline freezes pre-existing debt so the test only catches NEW
+// collisions; it must only ever shrink. An entry is
+// "Namespace: KeyA, KeyB" — the keys sorted alphabetically — so a third key
+// joining an allowlisted pair changes the signature and fails the test.
+const duplicateValuesAllowlist = new Set(
+  JSON.parse(
+    fs.readFileSync(
+      path.resolve(__dirname, "duplicate-en-values-allowlist.json"),
+      "utf8",
+    ),
+  ),
+);
+
+// Two keys in one namespace holding the same English text mean the UI offers
+// the same wording under two names and every translator pays for it twice.
+const collectEnValueCollisions = (files) => {
+  const byNamespace = new Map();
+
+  files
+    .filter((file) => file.language === "en" && file.namespace !== "BrandNames")
+    .forEach((file) => {
+      if (!byNamespace.has(file.namespace)) {
+        byNamespace.set(file.namespace, new Map());
+      }
+      const values = byNamespace.get(file.namespace);
+
+      file.translations.forEach(({ key, value }) => {
+        // empty values are EmptyValueKeysTest's business, not a collision
+        if (typeof value !== "string" || value.trim() === "") return;
+        if (!values.has(value)) values.set(value, new Set());
+        values.get(value).add(key);
+      });
+    });
+
+  const collisions = [];
+
+  byNamespace.forEach((values, namespace) => {
+    values.forEach((keys, value) => {
+      if (keys.size < 2) return;
+      collisions.push({
+        signature: `${namespace}: ${[...keys].sort().join(", ")}`,
+        value,
+      });
+    });
+  });
+
+  return collisions.sort((a, b) => a.signature.localeCompare(b.signature));
+};
+
 let workspaces = [];
 let translationFiles = [];
 let javascriptFiles = [];
@@ -528,6 +578,46 @@ describe("Locales Tests", () => {
       .join("\r\n")}`;
 
     expect(duplicatesArray.length, message).toBe(0);
+  });
+
+  it("DuplicateEnValuesTest: Verify that no two English keys inside one namespace carry the same value.", () => {
+    const collisions = collectEnValueCollisions(translationFiles);
+    const offenders = collisions.filter(
+      (collision) => !duplicateValuesAllowlist.has(collision.signature),
+    );
+
+    const message =
+      `These English keys hold the same value inside one namespace, so the ` +
+      `same wording ships under two names and every language pays to ` +
+      `translate it twice. It usually means a renamed key was kept next to ` +
+      `its replacement.\r\n` +
+      `Keep one key, point its callers at it and delete the rest. Only when ` +
+      `both keys must stay (different UI concepts that happen to read the ` +
+      `same) add the signature to duplicate-en-values-allowlist.json — the ` +
+      `baseline must only shrink.\r\n\r\n` +
+      `${offenders
+        .map((c, i) => `${i + 1}. ${c.signature}\r\n     = "${c.value}"`)
+        .join("\r\n")}`;
+
+    expect(offenders.length, message).toBe(0);
+  });
+
+  it("StaleDuplicateEnValuesAllowlist: the duplicate-value baseline only lists collisions that still exist.", () => {
+    const current = new Set(
+      collectEnValueCollisions(translationFiles).map((c) => c.signature),
+    );
+    const stale = [...duplicateValuesAllowlist].filter(
+      (signature) => !current.has(signature),
+    );
+
+    const message =
+      `These entries in duplicate-en-values-allowlist.json no longer ` +
+      `collide — the keys were merged, deleted or reworded, or another key ` +
+      `joined the group and changed its signature. Delete them from the ` +
+      `baseline (it must only shrink).\r\n\r\n` +
+      `${stale.map((signature, i) => `${i + 1}. ${signature}`).join("\r\n")}`;
+
+    expect(stale.length, message).toBe(0);
   });
 
   it("NotFoundKeysTest: Verify that all translation keys used in the JavaScript files are present in the English translation files.", () => {
@@ -1330,6 +1420,139 @@ describe("Locales Tests", () => {
 
         message += notFoundKeys.join("\r\n") + "\r\n\r\n";
       }
+
+      expect(exists, message).toBe(false);
+    },
+  );
+
+  /**
+   * Group the English translation files by their `public/locales` root, and list
+   * every language folder that sits next to `en` in that root.
+   *
+   * Language folders are read from disk instead of being derived from
+   * `translationFiles` so that a namespace file which is missing entirely for a
+   * language is still detected.
+   *
+   * Note: `libs/ui-kit/locales` is intentionally out of scope — it lives in the
+   * docspace-ui-kit-react submodule and cannot be fixed from this repository.
+   *
+   * @returns {Array<{localesDir: string, languages: string[], namespaces: object[]}>}
+   */
+  const getLocaleRoots = () => {
+    const roots = new Map();
+
+    translationFiles
+      .filter((file) => file.language === "en")
+      .forEach((file) => {
+        const localesDir = path.dirname(path.dirname(file.path));
+
+        if (!roots.has(localesDir)) {
+          const languages = fs
+            .readdirSync(localesDir, { withFileTypes: true })
+            .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
+            .map((entry) => entry.name)
+            .filter((language) => language !== "en")
+            .sort();
+
+          roots.set(localesDir, { localesDir, languages, namespaces: [] });
+        }
+
+        roots.get(localesDir).namespaces.push(file);
+      });
+
+    return [...roots.values()];
+  };
+
+  // Both this and NotTranslatedOnAllLanguages report pending translation work
+  // rather than a code defect, so they are skipped on pre-push (see
+  // `test:lefthook`) — the same way NotTranslatedOnBaseLanguages is.
+  const skipAllLanguagesTest = process.env.SKIP_ALL_LANGUAGES_TEST === "true";
+
+  (skipAllLanguagesTest ? it.skip : it)("MissingLocaleFilesTest: Verify that every namespace file present for 'en' also exists for all other languages.", () => {
+    const missingFiles = [];
+
+    getLocaleRoots().forEach(({ localesDir, languages, namespaces }) => {
+      languages.forEach((lng) => {
+        namespaces.forEach((file) => {
+          const expectedPath = path.join(localesDir, lng, file.fileName);
+
+          if (fs.existsSync(expectedPath)) return;
+
+          missingFiles.push({
+            language: lng,
+            namespace: file.namespace,
+            keysCount: file.translations.length,
+            expectedPath,
+          });
+        });
+      });
+    });
+
+    let message =
+      `Next namespace files exist for 'en' but are missing for other languages:\r\n\r\n`;
+
+    missingFiles.forEach((f, index) => {
+      message +=
+        `${index + 1}. Language '${f.language}', namespace '${f.namespace}' ` +
+        `(Count: ${f.keysCount}). Expected path '${f.expectedPath}'\r\n`;
+    });
+
+    expect(missingFiles.length === 0, message).toBe(true);
+  });
+
+  // Unlike NotTranslatedOnBaseLanguages, this covers every language folder, not
+  // only BASE_LANGUAGES.
+  (skipAllLanguagesTest ? it.skip : it)(
+    "NotTranslatedOnAllLanguages: Verify that all English translation keys are present in every supported language, not only in the base ones.",
+    () => {
+      let message = `Next keys are not translated in all supported languages:\r\n\r\n`;
+
+      let exists = false;
+      let i = 0;
+
+      getLocaleRoots().forEach(({ localesDir, languages, namespaces }) => {
+        // namespace → keys expected from the English source
+        const expectedKeys = namespaces.map((file) => ({
+          namespace: file.namespace,
+          keys: file.translations
+            .filter((t) => !brandNameKeys.has(t.key))
+            .map((t) => t.key),
+        }));
+
+        languages.forEach((lng) => {
+          const notFoundKeys = [];
+
+          expectedKeys.forEach(({ namespace, keys }) => {
+            const lngFile = translationFiles.find(
+              (file) =>
+                file.language === lng &&
+                file.namespace === namespace &&
+                path.dirname(path.dirname(file.path)) === localesDir,
+            );
+
+            const translatedKeys = new Set(
+              (lngFile?.translations ?? [])
+                .filter((t) => t.value !== "")
+                .map((t) => t.key),
+            );
+
+            keys.forEach((key) => {
+              if (translatedKeys.has(key)) return;
+              notFoundKeys.push(`${namespace}:${key}`);
+            });
+          });
+
+          if (!notFoundKeys.length) return;
+
+          exists = true;
+
+          message +=
+            `${++i}. Language '${lng}' (Count: ${notFoundKeys.length}). ` +
+            `Path '${path.join(localesDir, lng)}' Keys:\r\n\r\n`;
+
+          message += notFoundKeys.sort().join("\r\n") + "\r\n\r\n";
+        });
+      });
 
       expect(exists, message).toBe(false);
     },
@@ -2324,6 +2547,40 @@ describe("Locales Tests", () => {
       "sr-Cyrl-RS":  [[0x0400, 0x04FF]], // Cyrillic
     };
 
+    // Latin-script languages need no native ranges beyond commonAllowed,
+    // except a few extras: Vietnamese diacritics and Azerbaijani schwa.
+    // Anything else (e.g. Cyrillic inside a German string) is contamination.
+    const latinExtraRanges = [
+      [0x0250, 0x02AF], // IPA Extensions (Azerbaijani schwa, U+0259)
+      [0x02B0, 0x02FF], // Spacing Modifier Letters
+      [0x1E00, 0x1EFF], // Latin Extended Additional (Vietnamese)
+    ];
+    const latinLanguages = [
+      "en",
+      "az",
+      "cs",
+      "de",
+      "es",
+      "fi",
+      "fr",
+      "it",
+      "lv",
+      "nl",
+      "pl",
+      "pt",
+      "pt-BR",
+      "ro",
+      "sk",
+      "sl",
+      "sq-AL",
+      "sr-Latn-RS",
+      "tr",
+      "vi",
+    ];
+    for (const lang of latinLanguages) {
+      scriptRanges[lang] = latinExtraRanges;
+    }
+
     // Common ranges allowed for ALL languages (Latin for markup/brands, general punctuation, etc.)
     const commonAllowed = [
       [0x0000, 0x007F],   // Basic Latin (ASCII)
@@ -3028,6 +3285,293 @@ describe("Locales Tests", () => {
     });
 
     expect(violations.length, message).toBe(0);
+  });
+
+  // ---------------------------------------------------------------------------
+  // Structural integrity of translated values.
+  //
+  // These checks exist because a bulk term rename ({{productName}} -> a plain
+  // noun) silently damaged values in ways no earlier test noticed: paragraph
+  // breaks were dropped, the space that had preceded a placeholder was left
+  // stranded before the punctuation, and machine-translation output reached the
+  // JSON with its markdown wrapper still attached.
+  // ---------------------------------------------------------------------------
+
+  /**
+   * Map "namespace:key" -> English value, for checks that compare against the source.
+   */
+  const buildEnValues = () => {
+    const enValues = new Map();
+    translationFiles
+      .filter((file) => file.language === "en")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          if (typeof t.value === "string") {
+            enValues.set(`${file.namespace}:${t.key}`, t.value);
+          }
+        });
+      });
+    return enValues;
+  };
+
+  /**
+   * Neutralise spans that legitimately contain the punctuation we look for:
+   * {{variables}}, URLs, ellipses and file extensions (".zip", ".xlsx").
+   *
+   * Each is replaced by a lowercase letter pair rather than removed. Removing
+   * them would manufacture the very defects we look for ("a .xlsx." collapsing
+   * to "a ."), and an upper-case stand-in would suppress real ones, because the
+   * sentence checks treat a capital before a period as an abbreviation.
+   */
+  const NEUTRAL = "zz";
+  const neutralise = (value) =>
+    value
+      .replace(/\{\{[^}]+\}\}/g, NEUTRAL)
+      .replace(/https?:\/\/\S+/g, NEUTRAL)
+      .replace(/\.{2,}/g, NEUTRAL)
+      // a file extension, including one that opens the string (".DOCX file")
+      .replace(/(^|[^\S\n])\.[a-z0-9]{2,5}(?![a-z0-9])/gi, `$1${NEUTRAL}`);
+
+  it("NewlineConsistencyTest: Verify that translations keep the same number of line breaks as the English source.", () => {
+    // A \n in a value is deliberate paragraph structure: the UI renders each
+    // segment on its own line. A translation that loses it collapses two
+    // paragraphs into one block; one that gains it splits a sentence in half.
+    const enValues = buildEnValues();
+    const mismatches = [];
+
+    translationFiles.forEach((file) => {
+      if (file.language === "en") return;
+      file.translations.forEach((t) => {
+        if (typeof t.value !== "string") return;
+        const enValue = enValues.get(`${file.namespace}:${t.key}`);
+        if (typeof enValue !== "string") return;
+
+        const expected = (enValue.match(/\n/g) || []).length;
+        const actual = (t.value.match(/\n/g) || []).length;
+        if (expected === actual) return;
+
+        mismatches.push({
+          language: file.language,
+          key: `${file.namespace}:${t.key}`,
+          path: file.path,
+          expected,
+          actual,
+        });
+      });
+    });
+
+    let message =
+      "Next translations have a different number of line breaks than the English source.\r\n" +
+      "Place the break at the same sentence boundary as English, or remove the extra one:\r\n\r\n";
+    mismatches.forEach((m, i) => {
+      message += `${i + 1}. Language '${m.language}' key '${m.key}' — English has ${m.expected}, translation has ${m.actual} (Path '${m.path}')\r\n`;
+    });
+
+    expect(mismatches.length, message).toBe(0);
+  });
+
+  it("LlmArtefactsTest: Verify that translation values carry no machine-translation wrappers.", () => {
+    // Values pasted straight out of a model keep their markdown fence, their
+    // surrounding JSON quotes, or a refusal sentence. All of them reach the UI
+    // verbatim: users saw literal ``` in the Czech interface.
+    const artefacts = [
+      { name: "markdown code fence", re: /```/ },
+      { name: "value wrapped in quotes", re: /^"[\s\S]*"$/ },
+      { name: "raw JSON object or array", re: /^\s*[[{]\s*"/ },
+      { name: "model refusal or preamble", re: /\bAs an (?:AI|artificial intelligence)\b|\bI'm sorry, (?:but )?I\b|\bI (?:cannot|can't) (?:assist|help|provide)\b/i },
+    ];
+
+    const found = [];
+    translationFiles.forEach((file) => {
+      file.translations.forEach((t) => {
+        if (typeof t.value !== "string" || !t.value.length) return;
+        const hit = artefacts.find((a) => a.re.test(t.value));
+        if (!hit) return;
+        found.push({
+          language: file.language,
+          key: `${file.namespace}:${t.key}`,
+          path: file.path,
+          why: hit.name,
+          value: t.value,
+        });
+      });
+    });
+
+    let message =
+      "Next translation values contain machine-translation wrappers that render verbatim:\r\n\r\n";
+    found.forEach((f, i) => {
+      message += `${i + 1}. Language '${f.language}' key '${f.key}' — ${f.why} (Path '${f.path}')\r\n  Value: ${JSON.stringify(f.value.slice(0, 160))}\r\n\r\n`;
+    });
+
+    expect(found.length, message).toBe(0);
+  });
+
+  it("DoubleSpaceTest: Verify that translations contain no repeated spaces.", () => {
+    // Removing a {{placeholder}} without removing the space beside it leaves a
+    // double space, which the UI collapses inconsistently across components.
+    const found = [];
+
+    translationFiles.forEach((file) => {
+      file.translations.forEach((t) => {
+        if (typeof t.value !== "string" || !t.value.length) return;
+        // "  |  " is the deliberate separator in the tariff strings
+        if (t.value.includes("  |  ")) return;
+        const matches = t.value.match(/\S {2,}\S/g);
+        if (!matches) return;
+        found.push({
+          language: file.language,
+          key: `${file.namespace}:${t.key}`,
+          path: file.path,
+          fragments: matches,
+        });
+      });
+    });
+
+    let message = "Next translation values contain repeated spaces:\r\n\r\n";
+    found.forEach((f, i) => {
+      message += `${i + 1}. Language '${f.language}' key '${f.key}' (Path '${f.path}')\r\n  Around: ${JSON.stringify(f.fragments.join(" / "))}\r\n\r\n`;
+    });
+
+    expect(found.length, message).toBe(0);
+  });
+
+  it("SpaceBeforePunctuationTest: Verify that translations add no space before punctuation absent from the English source.", () => {
+    // A stranded space before a period is the tell-tale of a placeholder that
+    // was deleted while the space in front of it stayed: "superadmins ." Where
+    // English has the same spacing (".DOCX file"), the translation may keep it.
+    // French legitimately spaces ':', ';', '!' and '?'.
+    const enValues = buildEnValues();
+    const found = [];
+
+    translationFiles.forEach((file) => {
+      const pattern =
+        file.language === "fr" ? /[^\S\n]+[.,)]/g : /[^\S\n]+[.,:;!?)]/g;
+
+      file.translations.forEach((t) => {
+        if (typeof t.value !== "string" || !t.value.length) return;
+        const id = `${file.language} ${file.namespace}:${t.key}`;
+        const actual = (neutralise(t.value).match(pattern) || []).length;
+        if (!actual) return;
+
+        const enValue = enValues.get(`${file.namespace}:${t.key}`);
+        const expected =
+          file.language === "en" || typeof enValue !== "string"
+            ? 0
+            : (neutralise(enValue).match(pattern) || []).length;
+        if (actual <= expected) return;
+
+        found.push({ id, path: file.path, value: t.value });
+      });
+    });
+
+    let message =
+      "Next translations put a space before punctuation where English does not.\r\n" +
+      "This usually means a placeholder was removed but the space beside it was kept:\r\n\r\n";
+    found.forEach((f, i) => {
+      message += `${i + 1}. ${f.id} (Path '${f.path}')\r\n  Value: ${JSON.stringify(f.value.slice(0, 160))}\r\n\r\n`;
+    });
+
+    expect(found.length, message).toBe(0);
+  });
+
+  it("MissingSpaceAfterSentenceTest: Verify that translations do not glue a sentence to the next one.", () => {
+    // The mirror image of the check above: the space vanished together with the
+    // placeholder, leaving "urovnya.Oni mogut". Scripts that do not separate
+    // sentences with a space are excluded.
+    const noSpaceScripts = new Set([
+      "zh-CN",
+      "ja-JP",
+      "ko-KR",
+      "lo-LA",
+      "si",
+      "ar-SA",
+    ]);
+    const enValues = buildEnValues();
+    // A terminator followed straight by a capital. An upper-case letter or digit
+    // in front of it means an abbreviation or a version number, not a sentence —
+    // and the class has to be Unicode-aware, or Cyrillic "В.{{version}}" reads
+    // as a sentence break while Latin "V.{{version}}" does not.
+    // A capital that is itself followed by a period is an abbreviation, not a
+    // new sentence ("z.B. UsersQuotaLimit").
+    const glued = /(?<![\p{Lu}0-9])[.!?](\p{Lu})(?!\.)/gu;
+
+    // Tags that render a break already separate the sentences, and so does a
+    // closing tag butted against the next opening one — those become a space.
+    // Purely inline markup is dropped, so `</1>Text` still reads as glued.
+    const strip = (value) =>
+      neutralise(value)
+        .replace(/<br\s*\/?>|<\/?(?:p|div|li)\b[^>]*>/gi, " ")
+        .replace(/<\/[^>]+><[^/][^>]*>/g, " ")
+        .replace(/<[^>]+>/g, "");
+    const found = [];
+
+    translationFiles.forEach((file) => {
+      if (noSpaceScripts.has(file.language)) return;
+
+      file.translations.forEach((t) => {
+        if (typeof t.value !== "string" || !t.value.length) return;
+        const id = `${file.language} ${file.namespace}:${t.key}`;
+        const actual = (strip(t.value).match(glued) || []).length;
+        if (!actual) return;
+
+        const enValue = enValues.get(`${file.namespace}:${t.key}`);
+        const expected =
+          file.language === "en" || typeof enValue !== "string"
+            ? 0
+            : (strip(enValue).match(glued) || []).length;
+        if (actual <= expected) return;
+
+        found.push({ id, path: file.path, value: t.value });
+      });
+    });
+
+    let message =
+      "Next translations run one sentence straight into the next with no space:\r\n\r\n";
+    found.forEach((f, i) => {
+      message += `${i + 1}. ${f.id} (Path '${f.path}')\r\n  Value: ${JSON.stringify(f.value.slice(0, 160))}\r\n\r\n`;
+    });
+
+    expect(found.length, message).toBe(0);
+  });
+
+  it("FinnishCaseSuffixTest: Verify that Finnish colon case endings follow an abbreviation, not an ordinary word.", () => {
+    // Finnish attaches a case ending to a NAME or abbreviation with a colon
+    // ("LDAP:n", "AI:lla"). Once a bulk rename puts an ordinary noun there the
+    // convention no longer applies: "{{productName}} :ssa" became
+    // "tyotilassa :ssa", marking the inessive twice.
+    const endings =
+      "een|ssa|ssä|sta|stä|lle|lla|llä|hen|iin|ksi|ttä|na|nä|n";
+    // A word that is lowercase from its very start is an ordinary noun, not an
+    // abbreviation or a name — the lookbehind keeps "Edition:n" out of scope.
+    const dangling = new RegExp(
+      `(?<!\\p{L})\\p{Ll}{4,}\\s*:(?:${endings})(?!\\p{L})`,
+      "gu",
+    );
+    const found = [];
+
+    translationFiles
+      .filter((file) => file.language === "fi")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          if (typeof t.value !== "string" || !t.value.length) return;
+          const matches = t.value.match(dangling);
+          if (!matches) return;
+          found.push({
+            key: `${file.namespace}:${t.key}`,
+            path: file.path,
+            fragments: matches,
+          });
+        });
+      });
+
+    let message =
+      "Next Finnish translations attach a colon case ending to an ordinary word.\r\n" +
+      "Inflect the word itself instead (\"tyotila :een\" -> \"tyotilaan\"):\r\n\r\n";
+    found.forEach((f, i) => {
+      message += `${i + 1}. Key '${f.key}' (Path '${f.path}')\r\n  Around: ${JSON.stringify(f.fragments.join(" "))}\r\n\r\n`;
+    });
+
+    expect(found.length, message).toBe(0);
   });
 });
 

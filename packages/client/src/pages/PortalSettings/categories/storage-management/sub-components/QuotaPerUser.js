@@ -37,30 +37,30 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import QuotaPerItemComponent from "./QuotaPerItem";
-import { getBrandName } from "@docspace/shared/constants/brands";
+import { NO_QUOTA } from "@docspace/shared/constants";
 
 const QuotaPerUserComponent = (props) => {
   const { setUserQuota, isDefaultUsersQuotaSet, defaultUsersQuota } = props;
 
   const { t } = useTranslation("Settings");
 
-  const initialSizeProp = isDefaultUsersQuotaSet
-    ? { initialSize: defaultUsersQuota }
-    : {};
+  const initialSizeProp =
+    isDefaultUsersQuotaSet && defaultUsersQuota >= 0
+      ? { initialSize: defaultUsersQuota }
+      : {};
 
   return (
     <QuotaPerItemComponent
       type="user"
       formLabel={t("QuotaPerUser")}
       toggleLabel={t("DefineQuotaPerUser")}
-      disableQuota={() => setUserQuota(-1, t)}
+      disableQuota={() => setUserQuota(NO_QUOTA, t)}
       saveQuota={(size) => setUserQuota(size, t)}
       {...initialSizeProp}
       isQuotaSet={isDefaultUsersQuotaSet}
       tabIndex={2}
       dataTestId="quota_user"
       toggleDescription={t("UserDefaultQuotaDescription", {
-        productName: getBrandName("ProductName"),
         sectionName: t("Common:Files"),
       })}
     />

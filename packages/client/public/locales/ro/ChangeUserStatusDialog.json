@@ -1,20 +1,20 @@
 {
   "DisableGeneralDescription": "Puteți șterge sau activa ulterior utilizatorii dezactivați, dacă este cazul. Rețineți că nu puteți dezactiva utilizatorii cu rol Proprietar sau dumneavoastră înșivă.",
   "DisableGuest": "Dezactivare invitat",
-  "DisableGuestDescription": "Dacă dezactivați un invitat, acesta nu va putea conecta la {{productName}}.",
+  "DisableGuestDescription": "Dacă dezactivați un invitat, acesta nu va putea conecta la spațiul de lucru.",
   "DisableGuests": "Dezactivare invitați",
-  "DisableGuestsDescription": "Dacă dezactivați invitații, aceștii nu vor putea conecta la {{productName}}.",
+  "DisableGuestsDescription": "Dacă dezactivați invitații, aceștii nu vor putea conecta la spațiul de lucru.",
   "DisableGuestsGeneralDescription": "Puteți șterge sau activa ulterior invitații dezactivați, dacă este cazul.",
   "DisableUser": "Dezactivare utilizator",
-  "DisableUserDescription": "Dacă dezactivați acești utilizatori, acesta nu va putea să se conecteze la spațiul {{productName}}, în timp ce documentele și datele asociate vor rămâne intacte.",
+  "DisableUserDescription": "Dacă dezactivați acești utilizatori, acesta nu va putea să se conecteze la spațiul de lucru, în timp ce documentele și datele asociate vor rămâne intacte.",
   "DisableUsers": "Dezactivare utilizatori",
-  "DisableUsersDescription": "Dacă dezactivați acești utilizatori, acesta nu va putea să se conecteze la spațiul  {{productName}}, în timp ce documentele și datele asociate vor rămâne intacte.",
+  "DisableUsersDescription": "Dacă dezactivați acești utilizatori, acesta nu va putea să se conecteze la spațiul de lucru, în timp ce documentele și datele asociate vor rămâne intacte.",
   "EnableGuest": "Activare invitat",
-  "EnableGuestDescription": "Dacă activați un invitat, acesta va putea conecta din nou la {{productName}}.",
+  "EnableGuestDescription": "Dacă activați un invitat, acesta va putea conecta din nou la spațiul de lucru.",
   "EnableGuests": "Activare invitați",
-  "EnableGuestsDescription": "Dacă activați invitații, aceștii vor putea conecta din nou la {{productName}}.",
+  "EnableGuestsDescription": "Dacă activați invitații, aceștii vor putea conecta din nou la spațiul de lucru.",
   "EnableUser": "Activare utilizator",
-  "EnableUserDescription": "Dacă activați acest utilizator, acesta se va putea conecta din nou la spațiu {{productName}} și va putea accesa documentele și datele.",
+  "EnableUserDescription": "Dacă activați acest utilizator, acesta se va putea conecta din nou la spațiul de lucru și va putea accesa documentele și datele.",
   "EnableUsers": "Activare utilizatori",
-  "EnableUsersDescription": "Dacă activați acest utilizator, acesta se va putea conecta din nou la spațiu {{productName}} și va putea accesa documentele și datele."
+  "EnableUsersDescription": "Dacă activați acest utilizator, acesta se va putea conecta din nou la spațiul de lucru și va putea accesa documentele și datele."
 }

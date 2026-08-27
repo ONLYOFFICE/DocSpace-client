@@ -3,7 +3,7 @@
   "content": "Deny",
   "content_en_sha1_hash": "53577bb5df0ee9b6376e87f4896b6957a25d7a43",
   "created_at": "2026-07-27T13:07:48.541Z",
-  "updated_at": "2026-07-27T13:57:30.458Z",
+  "updated_at": "2026-08-24T22:30:00.692Z",
   "comment": {
     "text": "Label for a rule type option in a selection menu and a status badge in the rules list, indicating a restrictive rule.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 374,
+      "line_number": 633,
       "context": "rule.type === \"deny\" ? styles.ruleBadgeDeny : \"\"\n }`}\n >\n {rule.type === \"allow\"\n ? t(\"DocsConnect:RuleAllow\")\n : t(\"DocsConnect:RuleDeny\")}\n </span>\n <Text className={styles.ruleValue}>{rule.value}</Text>\n <IconButton\n iconName={TrashReactSvgUrl}\n size={16}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/AddRuleDialog.tsx",
-      "line_number": 62,
-      "context": "const [ruleType, setRuleType] = useState<\"allow\" | \"deny\">(\"allow\");\n const [address, setAddress] = useState(\"\");\n \n const ruleTypeOptions = [\n { key: \"allow\", label: t(\"DocsConnect:RuleAllow\") },\n { key: \"deny\", label: t(\"DocsConnect:RuleDeny\") },\n ];\n \n const onSubmit = () => {\n const value = address.trim();\n if (!value) return;",
+      "line_number": 71,
+      "context": "const [address, setAddress] = useState(\"\");\n const [isSaving, setIsSaving] = useState(false);\n \n const ruleTypeOptions = [\n { key: \"allow\", label: t(\"DocsConnect:RuleAllow\") },\n { key: \"deny\", label: t(\"DocsConnect:RuleDeny\") },\n ];\n \n const trimmedAddress = address.trim();\n const isDuplicate =\n trimmedAddress !== \"\" &&",
       "module": "/packages/client"
     }
   ],

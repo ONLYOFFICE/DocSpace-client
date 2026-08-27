@@ -44,6 +44,8 @@ export type DocsConnectPreset =
   | "paid"
   | "paidDevPack"
   | "scheduled"
+  | "scheduledDevPackDisable"
+  | "scheduledDevPackDisableWithUsers"
   | "scheduledCancel"
   | "deactivated"
   | "canceled";
@@ -160,7 +162,20 @@ export const docsConnectWalletServicesSuccess = () => [
     id: DOCS_CONNECT_DEVPACK_SERVICE_ID,
     serviceName: "docscloud-devpack",
     price: { value: DOCS_CONNECT_DEVPACK_FULL_PRICE },
-    features: [],
+    // The client picks the Dev Pack service out of the wallet services by its
+    // `docsclouddevpack` feature, not by the service name (see
+    // `findDocsConnectServices`) - without it the Dev Pack price reads as 0
+    // and every "with Dev Pack" total collapses onto the base price.
+    features: [
+      {
+        id: "docsclouddevpack",
+        title: "Dev Pack",
+        priceTitle: "White label and mobile editors",
+        image: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><rect width="24" height="24" rx="4" fill="#4781D1"/></svg>',
+        value: false,
+        type: "flag",
+      },
+    ],
   },
   {
     id: DOCS_CONNECT_STORAGE_SERVICE_ID,
@@ -177,13 +192,16 @@ export const docsConnectWalletBalanceSuccess = (
 });
 
 export const docsConnectDevPackEnabled = (preset: DocsConnectPreset) =>
-  preset === "paidDevPack";
+  preset === "paidDevPack" ||
+  preset === "scheduledDevPackDisable" ||
+  preset === "scheduledDevPackDisableWithUsers";
 
 type TWalletQuotaMock = {
   id: number;
   quantity: number;
   wallet: boolean;
   nextQuantity?: number | null;
+  nextQuota?: number | null;
   dueDate?: string | null;
   state?: number;
 };
@@ -212,6 +230,28 @@ const walletQuotas = (preset: DocsConnectPreset): TWalletQuotaMock[] => {
           id: DOCS_CONNECT_SERVICE_ID,
           quantity: DOCS_CONNECT_PLAN_USERS,
           nextQuantity: 30,
+          dueDate: DOCS_CONNECT_PAID_END,
+          wallet: true,
+        },
+      ];
+    case "scheduledDevPackDisable":
+      return [
+        {
+          id: DOCS_CONNECT_DEVPACK_SERVICE_ID,
+          quantity: DOCS_CONNECT_PLAN_USERS,
+          nextQuantity: DOCS_CONNECT_PLAN_USERS,
+          nextQuota: DOCS_CONNECT_SERVICE_ID,
+          dueDate: DOCS_CONNECT_PAID_END,
+          wallet: true,
+        },
+      ];
+    case "scheduledDevPackDisableWithUsers":
+      return [
+        {
+          id: DOCS_CONNECT_DEVPACK_SERVICE_ID,
+          quantity: DOCS_CONNECT_PLAN_USERS,
+          nextQuantity: 40,
+          nextQuota: DOCS_CONNECT_SERVICE_ID,
           dueDate: DOCS_CONNECT_PAID_END,
           wallet: true,
         },

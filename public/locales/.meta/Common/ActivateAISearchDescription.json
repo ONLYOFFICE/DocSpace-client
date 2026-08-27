@@ -1,0 +1,29 @@
+{
+  "key_path": "ActivateAISearchDescription",
+  "content": "Enable AI Search to use web search and web crawling in AI chats.",
+  "content_en_sha1_hash": "3fe2b27652838abc0aff1a294be08b4f643f73b6",
+  "created_at": "2026-08-21T15:03:48.534Z",
+  "updated_at": "2026-08-24T22:30:00.679Z",
+  "comment": {
+    "text": "Description text in a feature banner within the AI settings, explaining the functionality of enabling AI Search.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T15:14:35.468Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
+      "line_number": 128,
+      "context": "const getBannerTexts = (t, isWebSearchTab) =>\n isWebSearchTab\n ? {\n activateTitle: t(\"Common:ActivateAISearchToGetStarted\"),\n activateDescription: t(\"Common:ActivateAISearchDescription\"),\n activateLabel: t(\"Common:ActivateAISearch\"),\n enabledTitle: t(\"Common:AISearchEnabledTitle\"),\n enabledDescription: t(\"Common:AISearchEnabledDescription\"),\n }\n : {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

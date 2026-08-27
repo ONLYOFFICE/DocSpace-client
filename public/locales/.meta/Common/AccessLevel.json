@@ -3,7 +3,7 @@
   "content": "Access level",
   "content_en_sha1_hash": "b125f10821825256f5c288cc1daf7dfe19f6281b",
   "created_at": "2026-06-03T09:30:00.087Z",
-  "updated_at": "2026-06-03T09:35:30.811Z",
+  "updated_at": "2026-08-07T15:05:26.424Z",
   "comment": {
     "text": "Column header in table views and a label in the info panel details, indicating the level of permissions or access rights for a file.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 351,
+      "context": "TABLE_HEADER_SELECTOR,\n SHARED_COLUMN_SELECTORS,\n t(\"FilesTour:TourSharedAccessTitle\"),\n t(\"FilesTour:TourSharedAccess\", {\n sharedBy: t(\"Common:SharedBy\"),\n accessLevel: t(\"Common:AccessLevel\"),\n }),\n callbacks,\n LOG_LABEL,\n ),",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
       "line_number": 274,

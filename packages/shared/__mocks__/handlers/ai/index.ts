@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { aiAgentsHandler } from "./agents";
+import { aiAgentGetByIdHandler, aiAgentsHandler } from "./agents";
 import { aiConfigHandler } from "./config";
 import { aiModelsHandler } from "./models";
 import { aiChatDeleteHandler } from "./chat";
@@ -43,8 +43,25 @@ import {
   aiVectorizationPutHandler,
 } from "./vectorization";
 import { aiProvidersDefaultHandler } from "./providersDefault";
+import {
+  aiChatAssignmentsHandler,
+  aiChatCustomServersHandler,
+  aiChatDeepModeHandler,
+  aiChatDisabledToolsHandler,
+  aiChatEmptyStoreHandlers,
+  aiChatProfilesListHandler,
+  aiChatPromptsFoldersHandler,
+  aiChatReadMessagesHandler,
+  aiChatThreadGetByIdHandler,
+  aiChatPromptsListHandler,
+  aiChatStoreHandlers,
+  aiChatSystemToolsHandler,
+  aiChatThreadsListHandler,
+  aiChatWebSearchConfiguredHandler,
+} from "./chatStores";
 
 export {
+  aiAgentGetByIdHandler,
   aiAgentsHandler,
   aiConfigHandler,
   aiModelsHandler,
@@ -54,7 +71,29 @@ export {
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
   aiProvidersDefaultHandler,
+  aiChatAssignmentsHandler,
+  aiChatCustomServersHandler,
+  aiChatDeepModeHandler,
+  aiChatDisabledToolsHandler,
+  aiChatEmptyStoreHandlers,
+  aiChatProfilesListHandler,
+  aiChatPromptsFoldersHandler,
+  aiChatReadMessagesHandler,
+  aiChatThreadGetByIdHandler,
+  aiChatPromptsListHandler,
+  aiChatStoreHandlers,
+  aiChatSystemToolsHandler,
+  aiChatThreadsListHandler,
+  aiChatWebSearchConfiguredHandler,
 };
+
+export {
+  AI_CHAT_ASSIGNED,
+  AI_CHAT_AUTO_PICKED,
+  AI_CHAT_PROFILES,
+  AiActionType,
+} from "./chatStores";
+export type { AiChatProfile, AssignmentMap } from "./chatStores";
 
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),
@@ -65,4 +104,5 @@ export const aiHandlers = (port: string) => [
   aiRoomsChatsStreamHandler(port),
   aiVectorizationGetHandler(port),
   aiVectorizationPutHandler(port),
+  ...aiChatEmptyStoreHandlers(port),
 ];

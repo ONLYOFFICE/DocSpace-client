@@ -97,6 +97,7 @@ export type TUser = {
   groups?: TUserGroup[];
   shared?: boolean;
   loginEventId?: number;
+  authCookieLifetime?: number;
   notes?: string;
   isCustomQuota?: string;
   title?: string;

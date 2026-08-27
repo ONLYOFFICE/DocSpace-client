@@ -1,9 +1,9 @@
 {
   "key_path": "CreateFormSet",
-  "content": "Create Form Set",
-  "content_en_sha1_hash": "5c266be0e2451747828508884538e488e1806f2d",
+  "content": "Create Form space",
+  "content_en_sha1_hash": "b679d4de30f3c393f4e118ba46859749b669de76",
   "created_at": "2026-06-25T19:30:28.607Z",
-  "updated_at": "2026-07-28T11:44:10.651Z",
+  "updated_at": "2026-08-26T16:06:02.292Z",
   "comment": {
     "text": "Button label in the Forms section header used to initiate the creation of a new collection of forms.",
     "is_auto": true,
@@ -12,14 +12,20 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 185,
+      "context": "// A form set is a form-filling room, so it goes through the same\n // create-room dialog, opened on the FormRoom type.\n ...createOrOpen(\n canCreateRooms,\n \"/forms/filter\",\n t(\"Common:CreateFormSet\"),\n withQuotaCheck(() => dispatchCreateRoom(RoomsType.FormRoom)),\n ),\n },\n // Dropped outright on a portal with AI switched off - see\n // `aiServicesEnabled`. The sidebar drops its AI Agents item under the",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 1070,
+      "line_number": 1047,
       "context": "warningText,\n warningIcon: isRoomStorageQuotaExceeded\n ? WarningQuotaExceededUrl\n : undefined,\n actions: isFormsSection\n ? t(\"Common:CreateFormSet\")\n : isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Common:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 417,
+      "line_number": 424,
       "context": "]\n : isFormsFolder\n ? [\n {\n key: \"create-form-set\",\n label: t(\"Common:CreateFormSet\"),\n onClick: self.onCreateRoom,\n icon: CatalogRoomsReactSvgUrl,\n },\n {\n key: \"template-gallery\",",
       "module": "/packages/client"
     }

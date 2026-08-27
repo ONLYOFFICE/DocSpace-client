@@ -36,7 +36,7 @@
 import React from "react";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { RoomsTypeValues } from "@docspace/shared/utils/common";
+import { getCreateRoomTypes } from "@docspace/shared/utils/rooms";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { RoomsType } from "@docspace/shared/enums";
@@ -72,7 +72,7 @@ const DropdownMobile = ({
             <div
               className={`${styles.dropdownMobile}${open ? ` ${styles.isOpen}` : ""} dropdown-mobile`}
             >
-              {RoomsTypeValues.map((roomType) => (
+              {getCreateRoomTypes().map((roomType) => (
                 <RoomType
                   id={roomType.toString()}
                   key={roomType}

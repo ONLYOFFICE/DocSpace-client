@@ -58,6 +58,15 @@ describe("QuotaForm", () => {
     expect(defaultProps.onSetQuotaBytesSize).toHaveBeenCalled();
   });
 
+  it("keeps a typed zero visible but blocks saving it", async () => {
+    render(<QuotaForm {...defaultProps} isButtonsEnable />);
+    const input = screen.getByTestId("quota-text-input");
+    await userEvent.clear(input);
+    await userEvent.type(input, "0");
+    expect(input).toHaveValue("0");
+    expect(screen.getByTestId("quota-save-button")).toBeDisabled();
+  });
+
   it("calls onSetQuotaBytesSize with -1 when unlimited checkbox is checked", async () => {
     const onSetQuotaBytesSize = vi.fn();
     render(
@@ -139,6 +148,16 @@ describe("QuotaForm", () => {
       which: 13,
     });
     expect(onSave).not.toHaveBeenCalled();
+  });
+
+  it("starts empty for an unset quota and enables save once a value is typed", async () => {
+    const { initialSize: _unused, ...propsWithoutInitial } = defaultProps;
+    render(<QuotaForm {...propsWithoutInitial} isButtonsEnable />);
+    const input = screen.getByTestId("quota-text-input");
+    expect(input).toHaveValue("");
+    expect(screen.getByTestId("quota-save-button")).toBeDisabled();
+    await userEvent.type(input, "5");
+    expect(screen.getByTestId("quota-save-button")).not.toBeDisabled();
   });
 
   it("disables save button when values are unchanged", async () => {

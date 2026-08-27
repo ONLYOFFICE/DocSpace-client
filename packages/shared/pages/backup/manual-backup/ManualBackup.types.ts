@@ -74,6 +74,7 @@ export interface ManualBackupProps {
 	isInitialLoading: boolean;
 	settingsFileSelector: FilesSelectorSettings;
 	isEmptyContentBeforeLoader: boolean;
+	disabledCreatePublicRoom?: boolean;
 
 	// backup store
 	isValidForm?: boolean;
@@ -180,4 +181,9 @@ export interface ManualBackupProps {
 
 	isThirdPartyAvailable?: boolean;
 	backupServicePrice?: number;
+	walletBalance?: number;
+	walletCodeCurrency?: string;
+	isCardLinked?: boolean;
+	onOpenTopUpDialog?: () => void;
+	fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
 }

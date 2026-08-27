@@ -3,7 +3,7 @@
   "content": "<1>Exa pricing</1> + 20% service fee applies to usage",
   "content_en_sha1_hash": "dfc946297b5c32ccf40d6160cbcae88e8ddf28c2",
   "created_at": "2026-07-04T11:29:34.902Z",
-  "updated_at": "2026-07-27T13:07:51.047Z",
+  "updated_at": "2026-08-21T15:04:37.426Z",
   "comment": {
     "text": "Informational text label within pricing rows or service items explaining an additional 20% service fee, where the `<1>` tag wraps a clickable link.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
-      "line_number": 313,
+      "line_number": 350,
       "context": "</div>\n </div>\n \n <Text as=\"span\" fontSize=\"13px\" className={styles.pricingRow}>\n <CommonTrans\n i18nKey=\"AIExaPricingNote\"\n components={{\n 1: (\n <Link\n fontSize=\"13px\"\n fontWeight={600}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 290,
+      "line_number": 291,
       "context": "/>\n );\n case AI_SEARCH_ENUM:\n return (\n <CommonTrans\n i18nKey=\"AIExaPricingNote\"\n components={{\n 1: (\n <Link\n fontSize=\"13px\"\n fontWeight={600}",
       "module": "/libs/ui-kit"
     }

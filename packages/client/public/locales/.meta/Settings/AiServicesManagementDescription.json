@@ -3,7 +3,7 @@
   "content": "Control the activation of AI features across {{productName}} and {{organizationName}} editors. When disabled, the {{aiSettings}} section will be hidden, {{aiAgents}} will be unavailable to all users (with history preserved), and the paid {{organizationName}} {{aiServices}} will no longer be accessible. However, all interaction history with the AI will be securely saved and fully restored upon re-enabling {{aiServices}}.",
   "content_en_sha1_hash": "804862e60d57ab10abceb8ef36877c2a3d804896",
   "created_at": "2026-03-26T08:26:46.818Z",
-  "updated_at": "2026-05-15T15:37:40.233Z",
+  "updated_at": "2026-08-19T13:26:37.742Z",
   "comment": {
     "text": "This is a descriptive text that appears below the \"AI Services Management\" setting. It explains the consequences of disabling AI features, including hiding the {{aiSettings}} section, making {{aiAgents}} unavailable, and restricting access to paid {{aiServices}} for {{organizationName}}. It also clarifies that interaction history will be preserved and restored upon re-enabling {{aiServices}}.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 122,
+      "line_number": 120,
       "context": ") : null}\n <CategoryItem\n title={t(\"AiServicesManagement\", {\n aiServices: t(\"Common:AIServices\"),\n })}\n subtitle={t(\"AiServicesManagementDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: getBrandName(\"OrganizationName\"),\n aiSettings: t(\"AISettings\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiServices: t(\"Common:AIServices\"),",
       "module": "/packages/client"
     },

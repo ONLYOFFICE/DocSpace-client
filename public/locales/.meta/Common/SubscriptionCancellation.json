@@ -3,7 +3,7 @@
   "content": "Subscription cancellation",
   "content_en_sha1_hash": "456f00501390f0982cec7b46a28f73039329035f",
   "created_at": "2026-04-10T13:53:43.513Z",
-  "updated_at": "2026-07-27T13:07:50.767Z",
+  "updated_at": "2026-08-24T22:30:00.689Z",
   "comment": {
     "text": "This is the title of a modal dialog that appears when a user initiates the process of canceling their subscription.",
     "is_auto": true,
@@ -13,20 +13,14 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 212,
-      "context": "{scheduledChange ? (\n <StorageWarning\n title={\n isCancellation\n ? t(\"Common:SubscriptionCancellation\")\n : t(\"Common:TariffUserAdjustmentScheduled\", {\n fromCount: planUsers,\n toCount: scheduledChange.nextUsers,\n })\n }",
+      "line_number": 149,
+      "context": "(devPackDisabling ? basePricePerUser : pricePerUser),\n 2,\n );\n \n const getScheduledChangeTitle = () => {\n if (isCancellation) return t(\"Common:SubscriptionCancellation\");\n \n if (devPackDisabling) {\n return usersAdjusting\n ? t(\"Common:TariffUserAdjustmentDevPackDisableScheduledWithPrice\", {\n fromCount: planUsers,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanCancel.tsx",
       "line_number": 133,
       "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n isLarge\n >\n <ModalDialog.Header>{t(\"SubscriptionCancellation\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.cancelDialog}>\n <Text>{t(\"WantToCancelStoragePlan\")}</Text>\n <br />\n <Text as=\"span\">",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 474,
-      "context": "const scheduledTooltip = hasScheduledChange ? (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {isCancellation\n ? t(\"SubscriptionCancellation\")\n : t(\"UserAdjustment\", {\n fromCount: docsConnectState?.tariffUsers ?? 0,\n toCount: scheduledUsers,\n })}\n </Text>",
       "module": "/libs/ui-kit"
     },
     {
@@ -37,8 +31,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 263,
-      "context": "{scheduledChange ? (\n <StorageWarning\n title={\n isCancellation\n ? t(\"Common:SubscriptionCancellation\")\n : t(\"Common:TariffUserAdjustmentScheduledWithPrice\", {\n fromCount: planUsers,\n toCount: scheduledChange.nextUsers,\n price: formatCurrencyValue(\n i18n.language,",
+      "line_number": 144,
+      "context": "\"DATE_MED\",\n { locale: i18n.language },\n );\n \n const getScheduledChangeTitle = () => {\n if (isCancellation) return t(\"Common:SubscriptionCancellation\");\n \n if (devPackDisabling)\n return usersAdjusting\n ? t(\"Common:TariffUserAdjustmentDevPackDisableScheduledWithPrice\", {\n fromCount: planUsers,",
       "module": "/packages/client"
     }
   ],

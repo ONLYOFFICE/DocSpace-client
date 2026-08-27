@@ -76,8 +76,6 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import type { TAccessControlSettings } from "@docspace/shared/api/files";
 
-import { getBrandName } from "@docspace/shared/constants/brands";
-
 import AccessControlLoader from "../sub-components/loaders/access-control-loader";
 import { MainContainer } from "../StyledSecurity";
 import styles from "./AccessControl.module.scss";
@@ -280,9 +278,7 @@ const AccessControl = ({
       },
       {
         id: "external-sharing-restricted",
-        label: t("Settings:ExternalSharingRestricted", {
-          productName: getBrandName("ProductName"),
-        }),
+        label: t("Settings:ExternalSharingRestricted"),
         value: "false",
         dataTestId: "external_sharing_restricted",
       },
@@ -300,9 +296,7 @@ const AccessControl = ({
       },
       {
         id: "default-link-type-docspace",
-        label: t("Settings:DefaultLinkTypeInternal", {
-          productName: getBrandName("ProductName"),
-        }),
+        label: t("Settings:DefaultLinkTypeInternal"),
         value: "true",
         dataTestId: "default_link_type_docspace",
       },
@@ -421,7 +415,6 @@ const AccessControl = ({
                   <Text fontSize="13px" fontWeight="400" lineHeight="20px">
                     {t("Settings:AppliesToDocumentsDescription", {
                       myDocuments: t("Common:Files"),
-                      productName: getBrandName("ProductName"),
                     })}
                   </Text>
                   <Text fontSize="13px" fontWeight="400" lineHeight="20px">
@@ -445,7 +438,6 @@ const AccessControl = ({
                   <Text fontSize="13px" fontWeight="400" lineHeight="20px">
                     {t("Settings:AppliesToRoomsDescription", {
                       rooms: t("Common:Rooms"),
-                      productName: getBrandName("ProductName"),
                     })}
                   </Text>
                   <Text fontSize="13px" fontWeight="400" lineHeight="20px">

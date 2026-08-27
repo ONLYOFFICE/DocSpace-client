@@ -3,7 +3,7 @@
   "content": "Buy",
   "content_en_sha1_hash": "7ceca51fcafe42567c1c49ed6ab3604d7c962875",
   "created_at": "2026-07-27T13:07:48.519Z",
-  "updated_at": "2026-07-27T14:34:00.862Z",
+  "updated_at": "2026-08-12T11:00:51.654Z",
   "comment": {
     "text": "Button label used to initiate the purchase or upgrade process of a DocsConnect plan.",
     "is_auto": true,
@@ -13,15 +13,9 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 299,
+      "line_number": 319,
       "context": "</Text>\n <Button\n primary\n scale\n size={ButtonSize.small}\n label={t(\"DocsConnect:Buy\")}\n onClick={onEditPlan}\n />\n </div>\n </>\n ) : (",
       "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
-      "line_number": 130,
-      "context": "<div className={styles.actions}>\n {canceled ? (\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"DocsConnect:Buy\")}\n onClick={() => openBuyPlan?.(\"edit\")}\n isDisabled={!canManage}\n className={styles.buyButton}\n testId=\"docs_connect_buy_button\"\n />",
-      "module": "/packages/client"
     }
   ],
   "languages": {

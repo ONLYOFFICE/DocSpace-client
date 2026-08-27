@@ -33,6 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import {
+  checkIsAuthenticatedErrorHandler,
+  checkIsAuthenticatedHandler,
+  checkIsAuthenticatedNetworkErrorHandler,
+} from "./checkIsAuthenticated";
 import { confirmHandler, ErrorConfirm } from "./confirm";
 import { loginHandler } from "./login";
 import { loginWithTfaCodeHandler } from "./loginWithTfaCode";
@@ -44,6 +49,9 @@ import { createDeleteBackupHandler, createStartBackupHandler } from "./backup";
 import { createStartRestoreHandler } from "./restore";
 
 export {
+  checkIsAuthenticatedErrorHandler,
+  checkIsAuthenticatedHandler,
+  checkIsAuthenticatedNetworkErrorHandler,
   confirmHandler,
   loginHandler,
   loginWithTfaCodeHandler,
@@ -56,6 +64,7 @@ export {
 };
 
 export const authenticationHandlers = (port: string) => [
+  checkIsAuthenticatedHandler(port),
   loginHandler(port),
   confirmHandler(port),
   loginWithTfaCodeHandler(port),

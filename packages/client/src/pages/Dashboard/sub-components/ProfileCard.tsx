@@ -67,7 +67,6 @@ import { useNavigate } from "react-router";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import { DeviceType } from "@docspace/shared/enums";
 
 import ChangePasswordDialog from "SRC_DIR/components/dialogs/ChangePasswordDialog";
@@ -84,6 +83,11 @@ interface ProfileCardProps {
   displayName?: string;
   email?: string;
   currentDeviceType?: DeviceType;
+  /**
+   * Portal admins and the owner. The card itself is everyone's — the details on
+   * it are the reader's own — but renaming the workspace is a portal-wide
+   * operation, so only they are offered the pencil next to its name.
+   */
   isAdmin?: boolean;
   isOwner?: boolean;
 }
@@ -104,10 +108,6 @@ const ProfileCardComponent = ({
   );
   const [changePasswordVisible, setChangePasswordVisible] =
     React.useState(false);
-
-  // The card lets the user jump to portal settings (renaming, etc.),
-  // which only admins and the owner can access — hide it for everyone else.
-  if (!isAdmin && !isOwner) return null;
 
   if (hidden) return null;
 
@@ -131,7 +131,11 @@ const ProfileCardComponent = ({
 
   return (
     <>
-      <div className={styles.profileCard}>
+      {/* Anchor for the dashboard tour's first step. On the card's own root, so
+          it is present exactly when the card is — the tour reads the DOM to
+          decide whether that step exists at all, and this card is
+          dismissable. */}
+      <div data-tour-id="dashboard-profile" className={styles.profileCard}>
         <IconButton
           className={styles.profileCardClose}
           iconName={CrossReactSvgUrl}
@@ -147,21 +151,25 @@ const ProfileCardComponent = ({
         <div className={styles.profileCardGrid}>
           <div className={styles.profileCardField}>
             <Text as="span" className={styles.profileCardLabel}>
-              {t("SocialAuthWelcomeDialog:ProductNameDetail", {
-                productName: getBrandName("ProductName"),
-              })}
+              {t("SocialAuthWelcomeDialog:ProductNameDetail")}
             </Text>
             <span className={styles.profileCardValueRow}>
               <Text as="span" className={styles.profileCardValue}>
                 {portalName}
               </Text>
-              <IconButton
-                className={styles.profileCardEdit}
-                iconName={PencilReactSvgUrl}
-                size={12}
-                onClick={handleEditPortalName}
-                title={t("Common:EditButton")}
-              />
+              {/* Renaming happens in portal settings, which room admins, users
+                  and guests cannot open — offering them the pencil would only
+                  send them to a 403. The name itself is theirs to read. */}
+              {isAdmin || isOwner ? (
+                <IconButton
+                  className={styles.profileCardEdit}
+                  iconName={PencilReactSvgUrl}
+                  size={12}
+                  onClick={handleEditPortalName}
+                  title={t("Common:EditButton")}
+                  dataTestId="dashboard-profile-rename"
+                />
+              ) : null}
             </span>
           </div>
 

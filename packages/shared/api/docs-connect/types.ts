@@ -65,17 +65,6 @@ export type TDocsConnectStat = {
   criticalRemaining: boolean;
 };
 
-export type TDocsConnectReportStatus = {
-  id: string;
-  error: string;
-  percentage: number;
-  isCompleted: boolean;
-  status: number;
-  resultFileId: number;
-  resultFileName: string;
-  resultFileUrl: string;
-};
-
 export type TDocsConnectTenantInfo = {
   license: { valid: string; trial: boolean; buildDate: string };
   server: { version: string; packageType: string; date: string };
@@ -107,11 +96,30 @@ export type TDocsConnectDevPackCalculation = {
 export type TDocsConnectScheduledChange = {
   nextUsers: number;
   dueDate: string;
+  nextDevPackEnabled: boolean;
+  scheduledOnDevPack: boolean;
+};
+
+export type TDocsConnectPreviousPlan = {
+  users: number;
+  devPackEnabled: boolean;
 };
 
 export type TDocsConnectTariffState = {
   scheduledChange: TDocsConnectScheduledChange | null;
   deactivated: boolean;
+  previousPlan: TDocsConnectPreviousPlan | null;
+};
+
+export type TDocsConnectServiceIds = {
+  baseId?: number;
+  devpackId?: number;
+};
+
+export type TDocsConnectStatistics = TDocsConnectTariffState & {
+  tenant: TDocsConnectTenant | null;
+  tenantInfo: TDocsConnectTenantInfo | null;
+  devPackEnabled: boolean;
 };
 
 export type TDocsConnectInfo = {
@@ -123,6 +131,8 @@ export type TDocsConnectInfo = {
   devPackEnabled: boolean;
   scheduledChange: TDocsConnectScheduledChange | null;
   deactivated: boolean;
+  previousPlan?: TDocsConnectPreviousPlan | null;
+  serviceIds: TDocsConnectServiceIds;
 };
 
 export type TDocsConnectConfigUpdate = {

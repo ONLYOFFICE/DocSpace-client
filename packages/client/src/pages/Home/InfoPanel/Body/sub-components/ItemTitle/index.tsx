@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import { SearchProps } from "../Search";
 
 import { TSelection } from "./ContextButton";
@@ -80,19 +79,13 @@ const ItemTitle = ({
   if (isRoomMembersPanel)
     return (
       <RoomsItemHeader
-        roomsView={InfoPanelView.infoMembers}
-        searchProps={searchProps}
         selection={infoPanelSelection}
         isRoomMembersPanel={isRoomMembersPanel}
+        searchProps={searchProps}
       />
     );
 
-  return (
-    <RoomsItemHeader
-      selection={infoPanelSelection}
-      isRoomMembersPanel={isRoomMembersPanel}
-    />
-  );
+  return <RoomsItemHeader selection={infoPanelSelection} />;
 };
 
 export default ItemTitle;

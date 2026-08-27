@@ -3,7 +3,7 @@
   "content": "Get started",
   "content_en_sha1_hash": "90e40d504340834d9e79a4d800e45283591c5927",
   "created_at": "2026-07-27T13:07:48.472Z",
-  "updated_at": "2026-07-27T14:17:48.375Z",
+  "updated_at": "2026-08-26T14:08:33.047Z",
   "comment": {
     "text": "Call-to-action link text on a feature card used to navigate to the DocsConnect setup page.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 111,
-      "context": "id: \"docs-connect\",\n title: t(\"DocsConnect:DocsConnect\"),\n description: t(\"DocsConnect:CardDescription\", { productName: docsName }),\n path: \"/developer-tools/docs-connect\",\n featured: true,\n linkTitle: t(\"DocsConnect:GetStarted\"),\n },\n {\n id: \"rest-api\",\n title: t(\"Settings:RestAPI\"),\n description: t(\"Settings:RestAPIDescription\", {",
+      "line_number": 125,
+      "context": "description: t(\"DocsConnect:CardDescription\", {\n productName: docsName,\n }),\n path: \"/developer-tools/docs-connect\",\n featured: true,\n linkTitle: t(\"DocsConnect:GetStarted\"),\n },\n ]\n : [];\n \n return [",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 113,
-      "context": "description={t(\"DocsConnect:CardDescription\", {\n productName: docsName,\n })}\n url=\"/developer-tools/docs-connect\"\n color={globalColors.docsConnectAccent}\n linkTitle={t(\"DocsConnect:GetStarted\")}\n />\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}\n description={t(\"Settings:RestAPIDescription\", {",
+      "line_number": 119,
+      "context": "description={t(\"DocsConnect:CardDescription\", {\n productName: docsName,\n })}\n url=\"/developer-tools/docs-connect\"\n color={globalColors.docsConnectAccent}\n linkTitle={t(\"DocsConnect:GetStarted\")}\n />\n ) : null}\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
       "module": "/packages/client"
     }
   ],

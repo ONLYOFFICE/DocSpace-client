@@ -41,6 +41,9 @@ import { useTranslation } from "react-i18next";
 import { usePathname, useRouter } from "next/navigation";
 
 import Navigation from "@docspace/ui-kit/components/navigation";
+import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { useAiChatStoreOptional } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
 import api from "@docspace/shared/api";
 import { DeviceType } from "@docspace/shared/enums";
 
@@ -107,6 +110,18 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
   const isLibrary = activeSection === FormsSection.Library;
   const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
+  const aiChatStore = useAiChatStoreOptional();
+  const openAiChat = useOpenAiChat();
+  const isAiChatAvailable = useIsAiChatAvailable();
+  const chatNavProps = {
+    toggleChatPanel: () => {
+      if (aiChatStore?.isVisible) aiChatStore.close();
+      else openAiChat();
+    },
+    isChatPanelVisible: !!aiChatStore?.isVisible,
+    hideChatButton: !isAiChatAvailable || isSettings || isEditing,
+    titles: { aiChat: t("Common:AIChatButton") },
+  };
   const isInsideCompletedFolder =
     activeSection === FormsSection.CompletedForms && !!completedFolder;
   const isInsideInProgressFolder =
@@ -117,7 +132,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
   const getSectionTitle = React.useCallback(() => {
     switch (activeSection) {
       case FormsSection.MyForms:
-        return t("Common:DashboardFormsTitle");
+        return t("Common:Forms");
       case FormsSection.Library:
         return t("Common:Library");
       case FormsSection.InProgress:
@@ -357,6 +372,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             isPublicRoom={false}
             isRoom={false}
             isInfoPanelVisible={false}
+            {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
             hideInfoPanel={() => {}}
@@ -399,6 +415,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
         isPublicRoom={false}
         isRoom={false}
         isInfoPanelVisible={false}
+        {...chatNavProps}
         toggleInfoPanel={() => {}}
         onLogoClick={() => {}}
         hideInfoPanel={() => {}}
@@ -454,6 +471,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             isPublicRoom={false}
             isRoom={false}
             isInfoPanelVisible={false}
+            {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
             hideInfoPanel={() => {}}
@@ -501,6 +519,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             isPublicRoom={false}
             isRoom={false}
             isInfoPanelVisible={false}
+            {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
             hideInfoPanel={() => {}}
@@ -563,6 +582,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             isPublicRoom={false}
             isRoom={false}
             isInfoPanelVisible={false}
+            {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
             hideInfoPanel={() => {}}
@@ -613,6 +633,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
           isPublicRoom={false}
           isRoom={false}
           isInfoPanelVisible={false}
+          {...chatNavProps}
           toggleInfoPanel={() => {}}
           onLogoClick={() => {}}
           hideInfoPanel={() => {}}

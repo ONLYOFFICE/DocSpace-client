@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Inicie um chat de IA para fazer perguntas, resumir documentos, gerar textos e obter ajuda no seu trabalho — direto em {{sectionName}}.",
+  "TourAiAssistantTitle": "Seu assistente de IA",
+  "TourBringFiles": "Carregue arquivos do seu computador ou simplesmente arraste e solte em qualquer ponto desta janela.",
+  "TourBringFilesTitle": "Traga seus arquivos",
+  "TourCreateAnything": "Crie documentos, planilhas, apresentações e formulários PDF direto no navegador — sem precisar de nenhum programa.",
+  "TourCreateAnythingTitle": "Crie qualquer coisa",
+  "TourFindFast": "Pesquise por nome, filtre por tipo ou autor, ordene a lista e alterne entre a visualização em lista e em blocos.",
+  "TourFindFastTitle": "Encontre tudo rapidamente",
+  "TourPlacesFavorites": "{{sectionName}} — arquivos marcados com estrela.",
+  "TourPlacesRecent": "{{sectionName}} — o que você trabalhou recentemente.",
+  "TourPlacesShared": "{{sectionName}} — arquivos que outras pessoas compartilharam com você.",
+  "TourPlacesTitle": "Cada coisa em seu lugar",
+  "TourPlacesTrash": "{{sectionName}} — arquivos excluídos que você ainda pode restaurar.",
+  "TourShare": "Passe o cursor sobre qualquer arquivo para ver as ações rápidas. Clique no ícone de compartilhamento para conceder acesso aos contatos do seu espaço de trabalho com diferentes níveis de permissão — ou crie um link externo para qualquer outra pessoa.",
+  "TourSharedAccess": "{{sharedBy}} indica de quem veio o arquivo, {{accessLevel}} indica o que você pode fazer com ele — visualizar, comentar ou editar. Só o proprietário pode alterar isso.",
+  "TourSharedAccessTitle": "Quem compartilhou e o que você pode fazer",
+  "TourSharedEmpty": "Nada foi compartilhado com você ainda. Arquivos e pastas aparecerão aqui assim que alguém lhe der acesso a eles.",
+  "TourSharedEmptyTitle": "Sua lista está vazia por enquanto",
+  "TourSharedList": "Tudo a que outras pessoas lhe dão acesso chega em {{sectionName}}. Abra um arquivo para trabalhar nele no navegador — o original continua onde está, então todos veem sempre a mesma versão.",
+  "TourSharedListTitle": "Compartilhados com você",
+  "TourShareTitle": "Compartilhe e colabore"
+}

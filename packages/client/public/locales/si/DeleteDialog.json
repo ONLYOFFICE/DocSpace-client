@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "තෝරාගත් සමූහ ඉවත් කරනු ලැබේ. එම සමූහවල සිටින පරිශීලකයින් {{productName}} වෙතින් ඉවත් කරනු නොලැබේ. ඔබට ඉදිරියට යාමට අවශ්‍යද?",
+  "DeleteAllGroupDescription": "තෝරාගත් සමූහ ඉවත් කරනු ලැබේ. එම සමූහවල සිටින පරිශීලකයින් වැඩ අවකාශයෙන් ඉවත් කරනු නොලැබේ. ඔබට ඉදිරියට යාමට අවශ්‍යද?",
   "DeleteAllGroupsTitle": "ප්‍රජාව ඉවත් කරන්න",
   "DeleteFiles": "ඔබ <strong>ගොනු ({{filesCount}})</strong> {{trashSection}} වෙත ගෙන යාමට ආසන්නයි.",
   "DeleteFilesAndFolders": "ඔබ <strong>ගොනු ({{filesCount}})</strong> සහ <strong>ෆෝල්ඩර ({{foldersCount}})</strong> {{trashSection}} වෙත මකා දැමීමට සූදානම් වේ.",
@@ -7,7 +7,7 @@
   "DeleteFilesForever": "ඔබ <strong>ගොනු ({{filesCount}})</strong> මකා දැමීමට ආසන්නයි.",
   "DeleteFolders": "ඔබ <strong>ෆෝල්ඩර ({{foldersCount}})</strong> {{trashSection}} වෙත ගෙන යාමට ආසන්නයි.",
   "DeleteFoldersForever": "ඔබ <strong>ෆෝල්ඩර ({{foldersCount}})</strong> මකා දැමීමට ආසන්නයි.",
-  "DeleteGroupDescription": "{{groupName}} කණ්ඩායම මකා දමනු ලැබේ. {{productName}} හි කණ්ඩායමේ සිටින පරිශීලකයින් ඉවත් කරනු නොලැබේ. ඔබට ඉදිරියට යාමට අවශ්‍යද?",
+  "DeleteGroupDescription": "{{groupName}} කණ්ඩායම මකා දමනු ලැබේ. කණ්ඩායමේ සිටින පරිශීලකයින් වැඩ අවකාශයෙන් ඉවත් කරනු නොලැබේ. ඔබට ඉදිරියට යාමට අවශ්‍යද?",
   "DeleteGroupTitle": "ප්‍රජාව ඉවත් කරන්න",
   "DeleteItem": "ඔබ <strong>{{name}}</strong> {{trashSection}} වෙත ගෙන යාමට ආසන්නයි.",
   "DeleteItemForeverConfirm": "ඔබ <strong>{{name}}</strong> මකා දැමීමට ආසන්නයි.",

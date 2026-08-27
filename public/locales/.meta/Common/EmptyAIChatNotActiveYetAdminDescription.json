@@ -1,0 +1,29 @@
+{
+  "key_path": "EmptyAIChatNotActiveYetAdminDescription",
+  "content": "Activate {{aiChat}} to start conversations in this section.",
+  "content_en_sha1_hash": "9ab5115f20124a7a3515fca7b0ff287eee1c3d63",
+  "created_at": "2026-08-19T13:26:03.977Z",
+  "updated_at": "2026-08-20T12:26:01.848Z",
+  "comment": {
+    "text": "Instructional text on an empty state screen for admins, prompting them to enable the AI chat feature. The {{aiChat}} variable represents the name of the AI chat feature.",
+    "is_auto": true,
+    "updated_at": "2026-08-19T13:29:59.444Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
+      "line_number": 125,
+      "context": ".with([true, false], () =>\n t(\"EmptyAIChatNotAvailableYetUserDescription\", { aiChat }),\n )\n // saas admin: activation is one click (or a top-up) away\n .with([false, true], () =>\n t(\"EmptyAIChatNotActiveYetAdminDescription\", { aiChat }),\n )\n // saas user\n .otherwise(() => t(\"EmptyAIChatNotActiveYetUserDescription\", { aiChat }));\n \n // The OpenRouter models / pricing / wallet rows only describe the SaaS",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-07-27T13:07:50.684Z",
+  "updated_at": "2026-08-26T16:06:02.215Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -13,73 +13,67 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
-      "line_number": 104,
+      "line_number": 103,
       "context": "return <PaymentMethodLoader />;\n \n const goToStripePortal = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(toAbsoluteUrl(cardLinked), \"_top\")",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
-      "line_number": 104,
+      "line_number": 103,
       "context": "return <PaymentMethodLoader />;\n \n const goToStripePortal = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(toAbsoluteUrl(cardLinked), \"_top\")",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 357,
+      "line_number": 281,
       "context": ") {\n changeServiceState(AI_SEARCH_ENUM);\n }\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 357,
+      "line_number": 281,
       "context": ") {\n changeServiceState(AI_SEARCH_ENUM);\n }\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 357,
+      "line_number": 281,
       "context": ") {\n changeServiceState(AI_SEARCH_ENUM);\n }\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 182,
+      "line_number": 186,
       "context": "quantity: { storage: null },\n productQuantityType: 0,\n },\n });\n const res = walletRes?.data?.response;\n if (res === false) throw new Error(t(\"UnexpectedError\"));\n \n await Promise.all([fetchPortalTariff?.(), fetchBalance?.()]);\n \n toastr.success(t(\"StorageCapacityUpdated\"));\n } catch (e) {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
-      "line_number": 158,
+      "line_number": 168,
       "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: { service: walletService, enabled },\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(enumId);\n return false;\n }\n \n if (enabled && enumId === AI_SEARCH_ENUM)",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
-      "line_number": 158,
+      "line_number": 168,
       "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: { service: walletService, enabled },\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(enumId);\n return false;\n }\n \n if (enabled && enumId === AI_SEARCH_ENUM)",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 176,
+      "line_number": 165,
       "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: raw,\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(AI_ENUM);\n return;\n }\n \n if (!isAiToolsServiceOn) toastr.success(t(\"AIToolsEnabled\"));",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 176,
+      "line_number": 165,
       "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: raw,\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(AI_ENUM);\n return;\n }\n \n if (!isAiToolsServiceOn) toastr.success(t(\"AIToolsEnabled\"));",
       "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallPage.tsx",
-      "line_number": 246,
-      "context": "onCompleted?.();\n } catch (e) {\n console.error(\"[ai-paywall] onEnableAI flow failed\", e);\n if (isMountedRef.current) {\n toastr.error(t(\"UnexpectedError\"));\n setWaitingPhase(\"idle\");\n }\n }\n };",
-      "module": "/libs/ui-kit"
-    },
-    {
       "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
-      "line_number": 140,
+      "line_number": 142,
       "context": "await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: raw,\n });\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(BACKUP_SERVICE);\n } finally {\n setIsLoading(false);\n }\n };",
       "module": "/libs/ui-kit"
     },
@@ -103,25 +97,25 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 322,
+      "line_number": 341,
       "context": "},\n });\n const res = walletRes?.data?.response;\n \n if (res === false) {\n throw new Error(t(\"UnexpectedError\"));\n }\n \n if (isNewSubscription) {\n await fetchPortalTariff!(true);",
       "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AiSimpleTopUpDialog.tsx",
-      "line_number": 154,
-      "context": "toastr.success(t(\"AIServiceTopUpSuccess\"));\n \n onClose();\n } catch (e) {\n console.error(\"[ai-simple-topup] failed\", e);\n toastr.error(t(\"UnexpectedError\"));\n } finally {\n setIsLoading(false);\n }\n };",
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "line_number": 341,
+      "context": "},\n });\n const res = walletRes?.data?.response;\n \n if (res === false) {\n throw new Error(t(\"UnexpectedError\"));\n }\n \n if (isNewSubscription) {\n await fetchPortalTariff!(true);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
-      "line_number": 73,
+      "line_number": 72,
       "context": "const [isDisabled, setDisabled] = useState(false);\n const goToStripePortal = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const onRefreshData = async () => {\n setDisabled(true);\n try {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
-      "line_number": 73,
+      "line_number": 72,
       "context": "const [isDisabled, setDisabled] = useState(false);\n const goToStripePortal = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const onRefreshData = async () => {\n setDisabled(true);\n try {",
       "module": "/libs/ui-kit"
     },
@@ -157,13 +151,13 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 377,
+      "line_number": 380,
       "context": "const checkRes = await paymentApi.getCustomerOperationsReport();\n const response = checkRes?.data\n ?.response as unknown as TransactionHistoryReportResponse;\n \n if (!response) {\n reject(new Error(t(\"UnexpectedError\")));\n return;\n }\n \n if (response.error) {\n reject(new Error(response.error));",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 377,
+      "line_number": 380,
       "context": "const checkRes = await paymentApi.getCustomerOperationsReport();\n const response = checkRes?.data\n ?.response as unknown as TransactionHistoryReportResponse;\n \n if (!response) {\n reject(new Error(t(\"UnexpectedError\")));\n return;\n }\n \n if (response.error) {\n reject(new Error(response.error));",
       "module": "/libs/ui-kit"
     },
@@ -175,43 +169,37 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1214,
+      "line_number": 1308,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1214,
+      "line_number": 1308,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1214,
+      "line_number": 1308,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/ServicesStore.ts",
-      "line_number": 620,
-      "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n aiPaywallInit = async (t: TTranslation) => {\n const { initWalletPayerAndBalance } = this.paymentStore;",
+      "line_number": 539,
+      "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n } finally {\n if (this.pendingServiceName === serviceName)\n this.loadedServiceName = serviceName;\n }\n };",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/ServicesStore.ts",
-      "line_number": 620,
-      "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n aiPaywallInit = async (t: TTranslation) => {\n const { initWalletPayerAndBalance } = this.paymentStore;",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/libs/ui-kit/billing/store/ServicesStore.ts",
-      "line_number": 620,
-      "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n aiPaywallInit = async (t: TTranslation) => {\n const { initWalletPayerAndBalance } = this.paymentStore;",
+      "line_number": 539,
+      "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n } finally {\n if (this.pendingServiceName === serviceName)\n this.loadedServiceName = serviceName;\n }\n };",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/usage/index.tsx",
-      "line_number": 214,
+      "line_number": 274,
       "context": "error?: string;\n }\n | undefined;\n \n if (!response) {\n reject(new Error(t(\"UnexpectedError\")));\n return;\n }\n if (response.error) {\n reject(new Error(response.error));\n return;",
       "module": "/libs/ui-kit"
     },
@@ -223,7 +211,7 @@
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 135,
+      "line_number": 138,
       "context": "return null;\n }\n };\n \n export const getUnexpectedErrorText = () => {\n return i18n.t(\"Common:UnexpectedError\");\n };\n \n export const connectedCloudsTitleTranslation = (key, t) => {\n switch (key) {\n case \"Box\":",
       "module": "/packages/client"
     },
@@ -240,6 +228,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/Shell.jsx",
+      "line_number": 916,
+      "context": "// with the status only in the message (`HTTP <status>`), not as a\n // property, so the message is checked alongside the axios-style shape.\n const status = error?.response?.status ?? error?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(error?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/LdapFormStore.ts",
       "line_number": 745,
       "context": ") {\n status = {\n completed: true,\n percents: 100,\n certificateConfirmRequest: null,\n error: t(\"Common:UnexpectedError\"),\n };\n }\n \n this.setProgress(status);",
@@ -247,13 +241,13 @@
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 298,
+      "line_number": 321,
       "context": "try {\n await getPaymentInfo();\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n \n return;\n }\n \n this.setIsUpdatingBasicSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 298,
+      "line_number": 321,
       "context": "try {\n await getPaymentInfo();\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n \n return;\n }\n \n this.setIsUpdatingBasicSettings(false);",
       "module": "/packages/client"
     },
@@ -262,6 +256,12 @@
       "line_number": 369,
       "context": "combineUrl(window.ClientConfig?.proxy?.url, ssoLogoutUrl || \"/login\"),\n );\n } catch (e) {\n if (axios.isCancel(e)) return;\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n onDebugClick = () => {\n this.setIsDebugDialogVisible(true);",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-agent-providers/index.tsx",
+      "line_number": 174,
+      "context": "| { response?: { status?: number }; status?: number; message?: string }\n | undefined;\n const status = err?.response?.status ?? err?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(err?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/sub-components/LinkRow.tsx",
@@ -300,9 +300,15 @@
       "module": "/packages/sdk"
     },
     {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-providers/index.tsx",
+      "line_number": 98,
+      "context": "| { response?: { status?: number }; status?: number; message?: string }\n | undefined;\n const status = err?.response?.status ?? err?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(err?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/BillingForm.tsx",
-      "line_number": 93,
-      "context": "setRenderTarget(\"paywall\");\n }\n } catch (e) {\n console.error(\"[ai-billing-content] bootstrap failed\", e);\n if (!cancelled) {\n toastr.error(t(\"Common:UnexpectedError\"));\n setRenderTarget(\"paywall\");\n }\n }\n })();",
+      "line_number": 77,
+      "context": "AI_ENUM,\n integrationUrl,\n );\n } catch (e) {\n console.error(\"[ai-billing-content] bootstrap failed\", e);\n if (!cancelled) toastr.error(t(\"Common:UnexpectedError\"));\n } finally {\n if (!cancelled) setIsLoading(false);\n }\n })();",
       "module": "/packages/sdk"
     },
     {
@@ -355,14 +361,14 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 1500,
-      "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n export const getCategoryType = (location: { pathname: string }) => {",
+      "line_number": 1517,
+      "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n /**",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 1500,
-      "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n export const getCategoryType = (location: { pathname: string }) => {",
+      "line_number": 1517,
+      "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n /**",
       "module": "/packages/shared"
     }
   ],

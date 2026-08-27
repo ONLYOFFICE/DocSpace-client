@@ -43,7 +43,6 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import classnames from "classnames";
 import styles from "./ToggleLDAP.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ToggleLDAP = ({
   theme,
@@ -106,9 +105,7 @@ const ToggleLDAP = ({
           lineHeight="16px"
           className="settings_unavailable"
         >
-          {t("LdapToggleDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("LdapToggleDescription")}
         </Text>
       </div>
     </div>

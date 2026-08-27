@@ -49,8 +49,11 @@ type Store = Map<string, unknown>;
 
 class MockOpenRequest {
   result: MockDB | null = null;
+  transaction: MockTransaction | null = null;
   error: Error | null = null;
-  onupgradeneeded: (() => void) | null = null;
+  onupgradeneeded:
+    | ((event: { oldVersion: number; newVersion: number | null }) => void)
+    | null = null;
   onsuccess: (() => void) | null = null;
   onerror: (() => void) | null = null;
   onblocked: (() => void) | null = null;
@@ -142,28 +145,44 @@ class MockDB {
   }
 }
 
-const dbs = new Map<string, { store: Store; storeNames: Set<string> }>();
+const dbs = new Map<
+  string,
+  { store: Store; storeNames: Set<string>; version: number }
+>();
 
 function resetMockIDB(): void {
   dbs.clear();
 }
 
+function seedMockIDB(
+  name: string,
+  version: number,
+  storeName: string,
+  records: ({ userId: string } & Record<string, unknown>)[],
+): void {
+  const store: Store = new Map();
+  for (const r of records) store.set(r.userId, r);
+  dbs.set(name, { store, storeNames: new Set([storeName]), version });
+}
+
 const mockIDB = {
-  open(name: string, _version: number): MockOpenRequest {
+  open(name: string, version = 1): MockOpenRequest {
     const req = new MockOpenRequest();
     let entry = dbs.get(name);
-    const isFresh = !entry;
     if (!entry) {
-      entry = { store: new Map(), storeNames: new Set() };
+      entry = { store: new Map(), storeNames: new Set(), version: 0 };
       dbs.set(name, entry);
     }
+    const upgradeFrom = entry.version < version ? entry.version : null;
     const db = new MockDB(entry.store, entry.storeNames);
     queueMicrotask(() => {
-      if (isFresh) {
-        req.result = db;
-        req.onupgradeneeded?.();
-      }
       req.result = db;
+      if (upgradeFrom !== null) {
+        req.transaction = new MockTransaction(entry.store);
+        req.onupgradeneeded?.({ oldVersion: upgradeFrom, newVersion: version });
+        req.transaction = null;
+        entry.version = version;
+      }
       req.onsuccess?.();
     });
     return req;
@@ -190,9 +209,11 @@ describe("TofuStore", () => {
     const list = await tofu.list();
     expect(list).toHaveLength(1);
     expect(list[0].userId).toBe("bob");
-    expect(list[0].publicKey).toBe("PKBOBABCDEFGHIJK");
-    expect(list[0].verifiedAt).toBeNull();
-    expect(list[0].firstSeenAt).toBe(list[0].lastSeenAt);
+    expect(list[0].keys).toHaveLength(1);
+    expect(list[0].keys[0].publicKey).toBe("PKBOBABCDEFGHIJK");
+    expect(list[0].keys[0].verifiedAt).toBeNull();
+    expect(list[0].keys[0].source).toBe("first-seen");
+    expect(list[0].keys[0].firstSeenAt).toBe(list[0].keys[0].lastSeenAt);
   });
 
   it("returns match + bumps lastSeenAt on identical key", async () => {
@@ -201,7 +222,7 @@ describe("TofuStore", () => {
     expect(before.kind).toBe("first-seen");
 
     const t0 = await tofu.list();
-    const firstSeenAt = t0[0].firstSeenAt;
+    const firstSeenAt = t0[0].keys[0].firstSeenAt;
 
     // small delay so lastSeenAt advances
     await new Promise((r) => setTimeout(r, 5));
@@ -209,8 +230,8 @@ describe("TofuStore", () => {
     const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(result.kind).toBe("match");
     if (result.kind !== "match") return;
-    expect(result.record.firstSeenAt).toBe(firstSeenAt);
-    expect(result.record.lastSeenAt).toBeGreaterThanOrEqual(firstSeenAt);
+    expect(result.matchedKey.firstSeenAt).toBe(firstSeenAt);
+    expect(result.matchedKey.lastSeenAt).toBeGreaterThanOrEqual(firstSeenAt);
   });
 
   it("returns mismatch without overwriting when key changes", async () => {
@@ -221,32 +242,130 @@ describe("TofuStore", () => {
     expect(result.kind).toBe("mismatch");
     if (result.kind !== "mismatch") return;
     expect(result.known.publicKey).toBe("PKBOBABCDEFGHIJK");
+    expect(result.knownKeys).toHaveLength(1);
     expect(result.submitted).toBe("PKBOBABCDEFGHIJL");
 
     // Stored record is still the original key.
     const list = await tofu.list();
-    expect(list[0].publicKey).toBe("PKBOBABCDEFGHIJK");
+    expect(list[0].keys).toHaveLength(1);
+    expect(list[0].keys[0].publicKey).toBe("PKBOBABCDEFGHIJK");
   });
 
-  it("acceptKey overwrites the record and resets verifiedAt", async () => {
+  it("acceptKey appends; previously trusted keys stay trusted", async () => {
     const tofu = new TofuStore("alice");
     await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     await tofu.markVerified("bob");
-    const verifiedRecord = (await tofu.list())[0];
-    expect(verifiedRecord.verifiedAt).not.toBeNull();
-    const originalFirstSeen = verifiedRecord.firstSeenAt;
 
     await tofu.acceptKey("bob", "PKBOBABCDEFGHIJL");
 
     const list = await tofu.list();
-    expect(list[0].publicKey).toBe("PKBOBABCDEFGHIJL");
-    expect(list[0].verifiedAt).toBeNull();
-    // firstSeenAt is preserved across an acceptKey.
-    expect(list[0].firstSeenAt).toBe(originalFirstSeen);
+    expect(list[0].keys).toHaveLength(2);
+    const oldEntry = list[0].keys.find(
+      (k) => k.publicKey === "PKBOBABCDEFGHIJK",
+    );
+    const newEntry = list[0].keys.find(
+      (k) => k.publicKey === "PKBOBABCDEFGHIJL",
+    );
+    expect(oldEntry?.verifiedAt).not.toBeNull();
+    expect(newEntry?.verifiedAt).toBeNull();
+    expect(newEntry?.source).toBe("accepted");
 
-    // Subsequent check with the new key now matches.
-    const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJL");
+    expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJK")).kind).toBe("match");
+    expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJL")).kind).toBe("match");
+  });
+
+  it("acceptKey on an already-trusted key only bumps lastSeenAt", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
+    const list = await tofu.list();
+    expect(list[0].keys).toHaveLength(1);
+  });
+
+  it("getKeys returns every recorded key and [] for unknown or empty userId", async () => {
+    const tofu = new TofuStore("alice");
+    expect(await tofu.getKeys("bob")).toEqual([]);
+    expect(await tofu.getKeys("")).toEqual([]);
+
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJL");
+
+    const keys = await tofu.getKeys("bob");
+    expect(keys.map((k) => k.publicKey).sort()).toEqual([
+      "PKBOBABCDEFGHIJK",
+      "PKBOBABCDEFGHIJL",
+    ]);
+  });
+
+  it("getKeys is read-only — it never creates a record", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.getKeys("bob");
+    expect(await tofu.list()).toHaveLength(0);
+  });
+
+  it("forgetKey removes exactly one key and keeps the rest trusted", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJL");
+
+    await tofu.forgetKey("bob", "PKBOBABCDEFGHIJK");
+
+    const list = await tofu.list();
+    expect(list[0].keys).toHaveLength(1);
+    expect(list[0].keys[0].publicKey).toBe("PKBOBABCDEFGHIJL");
+    expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJK")).kind).toBe(
+      "mismatch",
+    );
+    expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJL")).kind).toBe("match");
+  });
+
+  it("forgetKey on the last key drops the record entirely", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
+    await tofu.forgetKey("bob", "PKBOBABCDEFGHIJK");
+    expect(await tofu.list()).toHaveLength(0);
+    expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJK")).kind).toBe(
+      "first-seen",
+    );
+  });
+
+  it("markVerified targets a specific key when publicKey is given", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJL");
+
+    await tofu.markVerified("bob", "PKBOBABCDEFGHIJK");
+
+    const keys = (await tofu.list())[0].keys;
+    expect(
+      keys.find((k) => k.publicKey === "PKBOBABCDEFGHIJK")?.verifiedAt,
+    ).not.toBeNull();
+    expect(
+      keys.find((k) => k.publicKey === "PKBOBABCDEFGHIJL")?.verifiedAt,
+    ).toBeNull();
+  });
+
+  it("migrates a v1 single-key record to the multi-key shape", async () => {
+    seedMockIDB("docspace-tofu-alice", 1, "known_keys", [
+      {
+        userId: "bob",
+        publicKey: "PKBOBABCDEFGHIJK",
+        firstSeenAt: 1000,
+        lastSeenAt: 2000,
+        verifiedAt: 1500,
+      },
+    ]);
+
+    const tofu = new TofuStore("alice");
+    const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(result.kind).toBe("match");
+
+    const list = await tofu.list();
+    expect(list[0].keys).toHaveLength(1);
+    expect(list[0].keys[0].publicKey).toBe("PKBOBABCDEFGHIJK");
+    expect(list[0].keys[0].firstSeenAt).toBe(1000);
+    expect(list[0].keys[0].verifiedAt).toBe(1500);
+    expect(list[0].keys[0].source).toBe("migrated-v1");
   });
 
   it("markVerified is a no-op for unknown userId", async () => {
@@ -289,7 +408,7 @@ describe("TofuStore", () => {
 
     // Alice's record is untouched by Eve's session.
     const aliceList = await aliceStore.list();
-    expect(aliceList[0].publicKey).toBe("PKBOBABCDEFGHIJK");
+    expect(aliceList[0].keys[0].publicKey).toBe("PKBOBABCDEFGHIJK");
   });
 
   it("getTofuStore reuses the same instance for one scopeId", () => {
@@ -340,9 +459,9 @@ describe("TofuStore — IndexedDB unavailable (in-memory fallback)", () => {
     await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
     const after = await tofu.list();
     expect(after).toHaveLength(1);
-    expect(after[0].publicKey).toBe("PKBOBABCDEFGHIJK");
+    expect(after[0].keys[0].publicKey).toBe("PKBOBABCDEFGHIJK");
     await tofu.markVerified("bob");
-    expect((await tofu.list())[0].verifiedAt).not.toBeNull();
+    expect((await tofu.list())[0].keys[0].verifiedAt).not.toBeNull();
     await tofu.forget("bob");
     expect(await tofu.list()).toEqual([]);
     await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");

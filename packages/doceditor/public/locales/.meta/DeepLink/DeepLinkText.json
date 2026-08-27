@@ -1,14 +1,14 @@
 {
   "key_path": "DeepLinkText",
-  "content": "You can open the document on the portal or in the mobile application",
-  "content_en_sha1_hash": "56d7d86fe4eaefe22b74bf7fe71b0fb2c86ea739",
-  "created_at": "2025-05-19T21:30:57.138Z",
-  "updated_at": "2026-07-28T11:25:41.898Z",
+  "content": "You can open the document on the workspace or in the mobile application",
+  "content_en_sha1_hash": "39516698eeecfe5c7e06550509b7871df27470c0",
+  "created_at": "2026-08-12T11:00:50.610Z",
+  "updated_at": "2026-08-12T13:39:37.337Z",
   "comment": {
-    "text": "This is a descriptive text displayed below a deep link. It informs the user that a document can be opened either on the portal or in the mobile application.",
+    "text": "Informational text within the deep link component explaining that the document is accessible via both the web workspace and the mobile application.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:29:49.359Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T13:39:37.337Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.611151Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

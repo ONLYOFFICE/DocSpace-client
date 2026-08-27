@@ -42,6 +42,8 @@ import { SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
 import { publicPreviewLoader } from "SRC_DIR/pages/PublicPreview/PublicPreview.helpers";
 import { DefaultPageRedirect } from "SRC_DIR/pages/Home/DefaultPageRedirect";
+import { Section } from "SRC_DIR/helpers/plugins/enums";
+import { getPluginSectionRoute } from "SRC_DIR/helpers/plugins/navigation";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
@@ -427,10 +429,16 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
+          // Every AI Agents view sits behind the portal's AI switch
+          // (`requireAIServices` -> Route.private): with AI services off the
+          // section has nothing to serve, and the UI drops every way into it -
+          // the sidebar item and the dashboard card. A bookmark or a link from
+          // an old email is the one way left in, and it must answer 404 rather
+          // than open a section the portal no longer has.
           {
             path: "ai-agents",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -438,7 +446,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/filter",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -446,7 +454,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/recent",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -454,7 +462,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/recent/filter",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -462,7 +470,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/favorites",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -470,7 +478,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/favorites/filter",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -478,7 +486,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/trash",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -486,7 +494,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/trash/filter",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -494,7 +502,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/:id",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -502,7 +510,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/:id/filter",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -510,10 +518,26 @@ const ClientRoutes = [
           {
             path: "ai-agents/:id/chat",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
+          },
+          {
+            path: getPluginSectionRoute(Section.Files),
+            async lazy() {
+              const { Component } = await componentLoader(
+                () => import("SRC_DIR/components/PluginSection"),
+              );
+
+              const WrappedComponent = () => (
+                <PrivateRoute>
+                  <Component />
+                </PrivateRoute>
+              );
+
+              return { Component: WrappedComponent };
+            },
           },
           ...contactsRoutes,
           ...profileClientRoutes,
@@ -596,7 +620,7 @@ const ClientRoutes = [
           );
 
           const Component = () => (
-            <PrivateRoute>
+            <PrivateRoute requireAIServices>
               <ErrorBoundary>
                 <AiAgents />
               </ErrorBoundary>
@@ -1005,4 +1029,3 @@ const ClientRoutes = [
 ];
 
 export default ClientRoutes;
-

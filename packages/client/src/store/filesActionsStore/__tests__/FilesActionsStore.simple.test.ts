@@ -78,13 +78,13 @@ describe("FilesActionsStore — simple methods (batch 3)", () => {
     dispatchEvent.mockRestore();
   });
 
-  it("askAIAction opens the AI agent selector dialog", () => {
-    const setAiAgentSelectorDialogProps = vi.fn();
+  it("askAIAction records the file for the AI chat bridge", () => {
+    const setAskAIFile = vi.fn();
     const store = createTestFilesActionsStore({
-      dialogsStore: { setAiAgentSelectorDialogProps },
+      dialogsStore: { setAskAIFile },
     });
     store.askAIAction({ id: 1 } as never);
-    expect(setAiAgentSelectorDialogProps.mock.calls[0][0]).toBe(true);
+    expect(setAskAIFile).toHaveBeenCalledWith({ id: 1 });
   });
 
   it("setThirdpartyInfo opens the connect dialog with the matched provider", () => {

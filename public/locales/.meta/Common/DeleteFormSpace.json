@@ -1,0 +1,29 @@
+{
+  "key_path": "DeleteFormSpace",
+  "content": "Delete space",
+  "content_en_sha1_hash": "6dac23cd3264ab494d2cbeb9417bcdcae84829b3",
+  "created_at": "2026-08-17T17:22:45.058Z",
+  "updated_at": "2026-08-17T17:29:34.011Z",
+  "comment": {
+    "text": "Action label in a context menu for deleting a Form Space.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:29:34.011Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 958,
+      "context": "? t(\"Common:DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? isFormSpace\n ? t(\"Common:DeleteFormSpace\")\n : t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon:\n item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => self.onDelete(item, t),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

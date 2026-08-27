@@ -432,18 +432,12 @@ class DialogsStore {
     onClose: null,
   };
 
-  aiAgentSelectorDialogProps: { visible: boolean; file: Nullable<TFile> } = {
-    visible: false,
-    file: null,
-  };
+  // File waiting to be attached to the AI chat composer ("Ask AI"). The
+  // attaching itself needs React hooks from the ai-chat providers, so the
+  // store only records the request and AskAIChatBridge consumes it.
+  askAIFile: Nullable<TFile> = null;
 
   newFilesPanelFolderId: Nullable<number | string> = null;
-
-  formFillingTipsVisible = false;
-
-  welcomeFormFillingTipsVisible = false;
-
-  guidAnimationVisible = false;
 
   sortedDownloadFiles: TSortedDownloadFiles = {
     other: [],
@@ -499,7 +493,7 @@ class DialogsStore {
 
   editRoomGroupsDialogVisible = false;
 
-  createGroupFromRoomIds: Nullable<number[]> = null;
+  createGroupFromRoomIds: Nullable<(string | number)[]> = null;
 
   openInCreateMode = false;
 
@@ -561,15 +555,17 @@ class DialogsStore {
     this.newFilesPanelFolderId = folderId;
   };
 
-  setAiAgentSelectorDialogProps = (
-    visible: boolean,
-    file?: Nullable<TFile>,
-  ) => {
-    this.aiAgentSelectorDialogProps = {
-      visible,
-      file:
-        file === null ? null : (file ?? this.aiAgentSelectorDialogProps.file),
-    };
+  setAskAIFile = (file: Nullable<TFile>) => {
+    this.askAIFile = file;
+  };
+
+  // Read-and-clear: the same file can be asked about twice in a row (the
+  // observable has to change back to null in between), and a double-invoked
+  // effect must attach only once.
+  consumeAskAIFile = () => {
+    const file = this.askAIFile;
+    this.askAIFile = null;
+    return file;
   };
 
   setEditRoomDialogProps = (props: TEditRoomDialogProps) => {
@@ -1183,20 +1179,8 @@ class DialogsStore {
     this.closeEditIndexDialogVisible = visible;
   };
 
-  setFormFillingTipsDialog = (visible: boolean) => {
-    this.formFillingTipsVisible = visible;
-  };
-
-  setWelcomeFormFillingTipsVisible = (visible: boolean) => {
-    this.welcomeFormFillingTipsVisible = visible;
-  };
-
   setCovers = (covers: Nullable<ICover[]>) => {
     this.covers = covers;
-  };
-
-  setGuidAnimationVisible = (animation: boolean) => {
-    this.guidAnimationVisible = animation;
   };
 
   setRoomCoverDialogProps = (props: IRoomCoverDialogProps) => {
@@ -1346,7 +1330,7 @@ class DialogsStore {
 
   setEditRoomGroupsDialogVisible = (
     visible: boolean,
-    roomIds: Nullable<number[]> = null,
+    roomIds: Nullable<(string | number)[]> = null,
     openInCreateMode = false,
   ) => {
     this.editRoomGroupsDialogVisible = visible;

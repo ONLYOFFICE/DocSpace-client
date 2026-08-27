@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardOverviewTitle",
+  "content": "Coming back here",
+  "content_en_sha1_hash": "892b4310e067fae98bed2cbb5fd0fd6598584ebb",
+  "created_at": "2026-08-07T10:52:39.928Z",
+  "updated_at": "2026-08-21T08:01:33.701Z",
+  "comment": {
+    "text": "Heading for an interactive onboarding tour step that directs users back to the Dashboard Overview page.",
+    "is_auto": true,
+    "updated_at": "2026-08-07T10:56:20.743Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
+      "line_number": 209,
+      "context": "// to return to, and the Overview item is how — worth a step of its own\n // because a page reached from a sidebar item is easy to think of as a\n // landing screen shown once.\n navItemStep(\n OVERVIEW_ITEM_SELECTOR,\n t(\"DashboardTour:DashboardOverviewTitle\"),\n t(\"DashboardTour:DashboardOverview\", { overview: t(\"Common:Home\") }),\n callbacks,\n LOG_LABEL,\n ),\n ].filter(Boolean) as Step[];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

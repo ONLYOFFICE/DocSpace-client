@@ -34,17 +34,22 @@
  */
 
 import React from "react";
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { RecomendedModel } from "@docspace/ui-kit/ai-agent/recomended-model";
+import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 
 type ProfileSettingsProps = {
   agentParams: TAgentParams;
+  isAdmin?: boolean;
+  recommendedModelForForms?: string;
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
@@ -54,39 +59,64 @@ type ProfileSettingsProps = {
 // `profileId` and binds the profile to the created agent server-side.
 const ProfileSettings = ({
   agentParams,
+  isAdmin,
+  recommendedModelForForms,
   setAgentParams,
 }: ProfileSettingsProps) => {
   const { t } = useTranslation(["Common"]);
+  const navigate = useNavigate();
   const { useProfilesStore } = useStores();
 
   const profiles = useProfilesStore((s) => s.profiles);
   const chatProfile = useProfilesStore((s) => s.chatProfile);
   const defaultProfile = useProfilesStore((s) => s.defaultProfile);
+  const initialized = useProfilesStore((s) => s.initialized);
 
   const selectedProfileId = agentParams.profileId;
+
+  // Agents chat with their model, so image-only gateway profiles (Nano
+  // Banana & co) are not offered — every send through them dies with an
+  // upstream model_not_found (Bug 82663). Same filter the chat lib applies
+  // in its own model pickers. A profile already saved on the agent is kept
+  // as the selection even when filtered out, so opening the edit dialog
+  // never reassigns the model silently.
+  const chatProfiles = React.useMemo(
+    () => profiles.filter(isChatCapableProfile),
+    [profiles],
+  );
 
   // Preselect the chat (or default, or first) profile once profiles arrive.
   // Only write to agentParams when the value actually changes — an
   // unconditional set produces a fresh state object every run and can
   // ping-pong with other agentParams effects into an infinite update loop.
   React.useEffect(() => {
-    if (!profiles.length) return;
+    if (!chatProfiles.length) return;
     if (selectedProfileId && profiles.some((p) => p.id === selectedProfileId))
       return;
 
-    const preferred = chatProfile ?? defaultProfile ?? profiles[0];
+    const preferred =
+      [chatProfile, defaultProfile].find(
+        (p) => p && isChatCapableProfile(p),
+      ) ?? chatProfiles[0];
     if (preferred && preferred.id !== selectedProfileId)
       setAgentParams({ profileId: preferred.id });
-  }, [profiles, chatProfile, defaultProfile, selectedProfileId, setAgentParams]);
+  }, [
+    profiles,
+    chatProfiles,
+    chatProfile,
+    defaultProfile,
+    selectedProfileId,
+    setAgentParams,
+  ]);
 
   const options = React.useMemo<TOption[]>(
     () =>
-      profiles.map((profile) => ({
+      chatProfiles.map((profile) => ({
         key: profile.id,
         value: profile.id,
         label: profile.name,
       })),
-    [profiles],
+    [chatProfiles],
   );
 
   const selectedProfile = profiles.find((p) => p.id === selectedProfileId);
@@ -101,9 +131,9 @@ const ProfileSettings = ({
           }
         : {
             key: "empty-selected-option",
-            label: profiles.length ? "" : t("Common:NoModelsFound"),
+            label: chatProfiles.length ? "" : t("Common:NoModelsFound"),
           },
-    [selectedProfile, profiles.length, t],
+    [selectedProfile, chatProfiles.length, t],
   );
 
   const onSelectProfile = React.useCallback(
@@ -114,6 +144,12 @@ const ProfileSettings = ({
     },
     [profiles, setAgentParams],
   );
+
+  const recommendedModel = recommendedModelForForms ?? "";
+
+  const onOpenSettings = React.useCallback(() => {
+    navigate("/portal-settings/ai-settings/ai-models");
+  }, [navigate]);
 
   return (
     <StyledParam increaseGap>
@@ -138,6 +174,22 @@ const ProfileSettings = ({
             })}
           </Text>
         </div>
+
+        {/* Hidden until profiles are loaded (avoids flashing a wrong state)
+            and while the selected profile is already on the recommended
+            model. Profiles replaced the provider/model comboboxes, so the
+            "select model" branch is gone: the banner always renders the
+            not-available state, pointing admins to AI settings. */}
+        {initialized && recommendedModel ? (
+          <RecomendedModel
+            isAdmin={!!isAdmin}
+            isChat={false}
+            selectedModel={selectedProfile?.modelId ?? ""}
+            recomendedModel={recommendedModel}
+            onOpenSettings={onOpenSettings}
+          />
+        ) : null}
+
         <ComboBox
           options={options}
           selectedOption={selectedOption}
@@ -148,7 +200,7 @@ const ProfileSettings = ({
           isDefaultMode
           className="ai-combobox"
           displaySelectedOption
-          isDisabled={!profiles.length}
+          isDisabled={!chatProfiles.length}
           dataTestId="create_agent_profile_combobox"
         />
       </div>

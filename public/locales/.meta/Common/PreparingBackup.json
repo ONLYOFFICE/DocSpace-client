@@ -3,7 +3,7 @@
   "content": "Preparing backup",
   "content_en_sha1_hash": "f35ddbcec9c65837f3811de3b81fc5dcd00e1d93",
   "created_at": "2025-05-26T07:15:46.295Z",
-  "updated_at": "2026-06-15T19:31:56.211Z",
+  "updated_at": "2026-08-14T14:58:32.903Z",
   "comment": {
     "text": "This is a button label that appears when a backup operation is initiated but the download/preparation process has not yet started.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 695,
+      "line_number": 694,
       "context": "operations={[\n {\n label: operationsCompleted\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 693,
-      "context": "{\n label:\n downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,",
+      "line_number": 776,
+      "context": "operationName: t(\"Common:Backup\"),\n })\n : downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,",
       "module": "/packages/shared"
     },
     {

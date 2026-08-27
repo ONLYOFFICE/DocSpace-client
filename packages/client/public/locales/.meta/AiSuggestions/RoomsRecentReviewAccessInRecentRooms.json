@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsRecentReviewAccessInRecentRooms",
+  "content": "Review access in recent rooms",
+  "content_en_sha1_hash": "f2420c5a379611b604f05cff0f1d98ebaf19ff86",
+  "created_at": "2026-08-04T09:58:55.207Z",
+  "updated_at": "2026-08-05T16:55:39.777Z",
+  "comment": {
+    "text": "A label for an AI-generated suggestion item presented to room administrators, prompting them to check access permissions in recently visited rooms.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:55:39.777Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 469,
+      "context": "{\n name: t(\"AiSuggestions:RoomsRecentWhereMyActionIsNeeded\"),\n prompt: t(\"AiSuggestions:RoomsRecentWhereMyActionIsNeededPrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsRecentReviewAccessInRecentRooms\"),\n prompt: t(\"AiSuggestions:RoomsRecentReviewAccessInRecentRoomsPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsRecentArchiveInactiveRooms\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

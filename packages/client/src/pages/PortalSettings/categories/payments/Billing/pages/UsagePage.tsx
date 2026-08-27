@@ -53,9 +53,12 @@ const UsagePage = () => {
 
   return (
     <Usage
+      onTariffPlanClick={() => navigateToRoute(PAYMENT_ROUTES.portalPayments)}
       onDiskStorageClick={() => navigateToRoute(PAYMENT_ROUTES.diskStorage)}
       onBackupClick={() => navigateToRoute(PAYMENT_ROUTES.backup)}
       onAIServicesClick={() => navigateToRoute(PAYMENT_ROUTES.aiServices)}
+      onAISearchClick={() => navigateToRoute(PAYMENT_ROUTES.aiSearch)}
+      onDocsConnectClick={() => navigateToRoute(PAYMENT_ROUTES.docsConnect)}
     />
   );
 };

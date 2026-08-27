@@ -355,9 +355,7 @@ export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
     case EmployeeType.Owner:
       return t("Common:Owner");
     case EmployeeType.Admin:
-      return t("Common:PortalAdmin", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("Common:PortalAdmin");
     case EmployeeType.RoomAdmin:
       return t("Common:RoomAdmin");
     case EmployeeType.User:
@@ -652,6 +650,27 @@ const FRAME_NAME = "frameDocSpace";
 
 export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
+};
+
+export const getFrameInitialTheme = (): ThemeKeys | null => {
+  if (typeof window === "undefined" || !window.name.includes(FRAME_NAME))
+    return null;
+
+  const param = new URLSearchParams(window.location.search).get("theme");
+
+  switch (param) {
+    case ThemeKeys.Base:
+    case ThemeKeys.BaseStr:
+      return ThemeKeys.BaseStr;
+    case ThemeKeys.Dark:
+    case ThemeKeys.DarkStr:
+      return ThemeKeys.DarkStr;
+    case ThemeKeys.System:
+    case ThemeKeys.SystemStr:
+      return ThemeKeys.SystemStr;
+    default:
+      return ThemeKeys.BaseStr;
+  }
 };
 
 export const frameCallbackData = (
@@ -1240,9 +1259,7 @@ export const getUserTypeName = (
   if (isOwner) return t("Common:Owner");
 
   if (isPortalAdmin)
-    return t("Common:PortalAdmin", {
-      productName: getBrandName("ProductName"),
-    });
+    return t("Common:PortalAdmin");
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 
@@ -1502,12 +1519,28 @@ export const getErrorInfo = (
   return message ?? t("Common:UnexpectedError");
 };
 
+/**
+ * A room or agent id in a route.
+ *
+ * Negative ids are matched on purpose. A section tour can walk the user into a
+ * stand-in room whose id is negative by design (client's `api/tourDemo`, where
+ * the sign is what keeps a demo id from ever addressing a real room), and a
+ * `\d+` here reads `/forms/-1000` as the section list rather than as a room —
+ * which leaves the list's own title, create button and quick-actions on a page
+ * that is standing inside a room.
+ *
+ * Only the forms tour walks into a stand-in room today; the rooms and agents
+ * patterns are written the same way so that adding such a step there is not a
+ * silent trap.
+ */
+const ROUTE_ID = "-?\\d+";
+
 export const getCategoryType = (location: { pathname: string }) => {
   let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
   const { pathname } = location;
 
   if (pathname.startsWith("/forms")) {
-    const formRoomRegexp = /(forms)\/(\d+)/;
+    const formRoomRegexp = new RegExp(`(forms)/(${ROUTE_ID})`);
 
     if (formRoomRegexp.test(pathname)) {
       categoryType = CategoryType.Form;
@@ -1530,7 +1563,7 @@ export const getCategoryType = (location: { pathname: string }) => {
     } else if (pathname.indexOf("trash") > -1) {
       categoryType = CategoryType.Trash;
     } else if (pathname.indexOf("shared") > -1) {
-      const regexp = /(rooms)\/shared\/(\d+)/;
+      const regexp = new RegExp(`(rooms)/shared/(${ROUTE_ID})`);
 
       categoryType = !regexp.test(location.pathname)
         ? CategoryType.Shared
@@ -1555,8 +1588,8 @@ export const getCategoryType = (location: { pathname: string }) => {
   } else if (pathname.startsWith("/shared-with-me")) {
     categoryType = CategoryType.SharedWithMe;
   } else if (pathname.startsWith("/ai-agents")) {
-    const agentRegexp = /(ai-agents)\/(\d+)/;
-    const chatRegexp = /(ai-agents)\/(\d+)\/chat/;
+    const agentRegexp = new RegExp(`(ai-agents)/(${ROUTE_ID})`);
+    const chatRegexp = new RegExp(`(ai-agents)/(${ROUTE_ID})/chat`);
 
     // Agent-scoped alias sections reuse the file recent/favorites/trash data
     // (same as the global sections), but live under /ai-agents/* so the

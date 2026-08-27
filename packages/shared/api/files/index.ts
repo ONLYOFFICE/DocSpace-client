@@ -51,6 +51,7 @@ import {
   decodeDisplayName,
   getFolderClassNameByType,
   sortInDisplayOrder,
+  toUrlParams,
 } from "../../utils/common";
 
 import type { RoomMember, TGetRoomMembers, TNewFiles } from "../rooms/types";
@@ -87,6 +88,8 @@ import type {
   TShareToUser,
   TDefaultTemplate,
   UpdateXlsxResponse,
+  TDocumentBuilderTask,
+  TFolderLogReportDateRange,
 } from "./types";
 
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
@@ -417,6 +420,33 @@ export async function createFolder(
   return res;
 }
 
+export async function startFolderLogReport(
+  folderId: number | string,
+  dateRange?: TFolderLogReportDateRange,
+) {
+  const params = dateRange ? `?${toUrlParams(dateRange, false)}` : "";
+
+  const options: AxiosRequestConfig = {
+    method: "post",
+    url: `/files/folder/${folderId}/log/report${params}`,
+  };
+
+  const res = (await request(options)) as TDocumentBuilderTask;
+
+  return res;
+}
+
+export async function getFolderLogReportStatus(folderId: number | string) {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    url: `/files/folder/${folderId}/log/report`,
+  };
+
+  const res = (await request(options)) as TDocumentBuilderTask | null;
+
+  return res;
+}
+
 export async function renameFolder(folderId: number, title: string) {
   const data = { title };
   const options: AxiosRequestConfig = {
@@ -606,10 +636,21 @@ export async function deleteFile(
   return res;
 }
 
-export async function emptyTrash() {
+/**
+ * Empty the trash. Each root section (Files/Rooms/Forms/AI Agents) shows the
+ * same trash folder scoped by the `folderType` filter, so the same scope must
+ * be sent here — otherwise the whole trash is cleared and the other sections
+ * lose their items too. Without a scope the server keeps clearing everything.
+ */
+export async function emptyTrash(folderType?: FolderType[] | null) {
+  const scope =
+    folderType && folderType.length > 0
+      ? `&${toUrlParams({ folderType }, true)}`
+      : "";
+
   const res = (await request({
     method: "put",
-    url: "/files/fileops/emptytrash?single=true",
+    url: `/files/fileops/emptytrash?single=true${scope}`,
   })) as TOperation[];
   return res;
 }
@@ -1613,11 +1654,11 @@ export async function getDocumentServiceLocation(
 }
 
 export async function changeDocumentServiceLocation(
-  docServiceUrl: string,
-  secretKey: string,
-  authHeader: string,
-  internalUrl: string,
-  portalUrl: string,
+  docServiceUrl: string | null,
+  secretKey: string | null,
+  authHeader: string | null,
+  internalUrl: string | null,
+  portalUrl: string | null,
   sslVerification: boolean,
 ) {
   const res = (await request({

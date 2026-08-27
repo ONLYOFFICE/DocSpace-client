@@ -50,7 +50,8 @@ import("./logger.mjs").then(({ logger }) => {
   };
 
   const port = (argv("app.port") || process.env.PORT) ?? 5011;
-  const hostname = (argv("app.hostname") || config.HOSTNAME) ?? "0.0.0.0";
+  const listenHostname = argv("app.hostname") || undefined;
+  const hostname = (listenHostname || config.HOSTNAME) ?? "0.0.0.0";
 
   // when using middleware `hostname` and `port` must be provided below
   const app = next({ dev, hostname, port });
@@ -71,7 +72,7 @@ import("./logger.mjs").then(({ logger }) => {
         logger.error(`error: ${err} Server error`);
         process.exit(1);
       })
-      .listen(port, () => {
+      .listen(port, listenHostname, () => {
         logger.info(`Server is listening on port ${port}`);
       });
 

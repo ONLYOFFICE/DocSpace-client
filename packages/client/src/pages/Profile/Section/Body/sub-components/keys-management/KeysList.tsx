@@ -39,7 +39,6 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
@@ -47,9 +46,8 @@ import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/ui-kit/constants";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
-import { useEncryption } from "@docspace/shared/context/encryption";
 import { getPublicKeyFingerprint } from "@docspace/shared/services/encryption/identity";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -78,7 +76,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
   isCurrentDevice,
   canSwitchActive,
 }) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "People"]);
   const [fingerprint, setFingerprint] = useState<string>("");
 
   useEffect(() => {
@@ -118,92 +116,89 @@ const KeyItem: React.FC<KeyItemProps> = ({
 
   return (
     <div className={styles.keyItem}>
-      <div className={styles.keyItemHeader}>
-        <div className={styles.keyItemBadges}>
-          <Badge
-            label={t("Common:Active")}
-            backgroundColor={globalColors.secondGreen}
-            maxWidth="none"
-          />
-          {isCurrentDevice ? (
-            <Badge
-              label={t("Common:ThisDevice")}
-              backgroundColor={globalColors.lightBlueMain}
-              maxWidth="none"
-            />
-          ) : canSwitchActive ? (
-            <Button
-              size={ButtonSize.extraSmall}
-              label={t("Common:UseOnThisDevice")}
-              onClick={handleSelectActive}
-              isDisabled={isDeleting}
-            />
-          ) : null}
-        </div>
-        <div className={styles.keyItemActions}>
-          <IconButton
-            className={styles.actionButton}
-            iconName={RefreshReactSvgUrl}
-            size={16}
-            onClick={handleRotate}
-            isDisabled={isDeleting}
-            title={t("Common:ChangePassphrase")}
-          />
-          <IconButton
-            className={styles.actionButton}
-            iconName={DownloadReactSvgUrl}
-            size={16}
-            onClick={handleExport}
-            isDisabled={isDeleting}
-            title={t("Common:ExportKey")}
-          />
-          <IconButton
-            className={styles.actionButton}
-            iconName={TrashReactSvgUrl}
-            size={16}
-            onClick={handleDelete}
-            isDisabled={isDeleting}
-            title={t("Common:Delete")}
-          />
-        </div>
-      </div>
       <div className={styles.keyItemContent}>
-        {createdDate && (
-          <div className={styles.detailsGrid}>
-            <Text fontSize="13px" className={styles.detailsLabel}>
-              {t("Common:KeyCreatedOn")}
-            </Text>
-            <Text fontSize="13px">{createdDate}</Text>
+        <div className={styles.detailsGrid} data-testid="key_details">
+          <Text fontSize="13px" className={styles.detailsLabel}>
+            {t("People:UserStatus")}
+          </Text>
+          <div className={styles.statusRow}>
+            <div className={styles.keyItemBadges}>
+              <Badge
+                label={t("Common:Active")}
+                backgroundColor={globalColors.secondGreen}
+                maxWidth="none"
+              />
+              {isCurrentDevice ? (
+                <Badge
+                  label={t("Common:ThisDevice")}
+                  backgroundColor={globalColors.lightBlueMain}
+                  maxWidth="none"
+                />
+              ) : canSwitchActive ? (
+                <Button
+                  size={ButtonSize.extraSmall}
+                  label={t("Common:UseOnThisDevice")}
+                  onClick={handleSelectActive}
+                  isDisabled={isDeleting}
+                />
+              ) : null}
+            </div>
+            <div className={styles.keyItemActions}>
+              <IconButton
+                className={styles.actionButton}
+                iconName={PencilReactSvgUrl}
+                size={16}
+                onClick={handleRotate}
+                isDisabled={isDeleting}
+                title={t("Common:ChangePassphrase")}
+              />
+              <IconButton
+                className={styles.actionButton}
+                iconName={DownloadReactSvgUrl}
+                size={16}
+                onClick={handleExport}
+                isDisabled={isDeleting}
+                title={t("Common:ExportKey")}
+              />
+              <IconButton
+                className={styles.actionButton}
+                iconName={TrashReactSvgUrl}
+                size={16}
+                onClick={handleDelete}
+                isDisabled={isDeleting}
+                title={t("Common:Delete")}
+              />
+            </div>
           </div>
-        )}
-        <CollapsibleCard
-          title={t("Common:Details")}
-          className={styles.keyDetails}
-          dataTestId="key_details_collapsible"
-        >
-          <div className={styles.detailsGrid}>
-            <Text fontSize="13px" className={styles.detailsLabel}>
-              {t("Common:KeyFingerprint")}
-            </Text>
-            <Text fontSize="13px" className={styles.fingerprint}>
-              {fingerprint || "..."}
-            </Text>
-            {keyData.id ? (
-              <>
-                <Text fontSize="13px" className={styles.detailsLabel}>
-                  {t("Common:KeyId")}
-                </Text>
-                <Text fontSize="13px" className={styles.keyIdText}>
-                  {keyData.id}
-                </Text>
-              </>
-            ) : null}
-            <Text fontSize="13px" className={styles.detailsLabel}>
-              {t("Common:Algorithm")}
-            </Text>
-            <Text fontSize="13px">X25519</Text>
-          </div>
-        </CollapsibleCard>
+          {createdDate ? (
+            <>
+              <Text fontSize="13px" className={styles.detailsLabel}>
+                {t("Common:KeyCreatedOn")}
+              </Text>
+              <Text fontSize="13px">{createdDate}</Text>
+            </>
+          ) : null}
+          <Text fontSize="13px" className={styles.detailsLabel}>
+            {t("Common:KeyFingerprint")}
+          </Text>
+          <Text fontSize="13px" className={styles.monoValue}>
+            {fingerprint || "..."}
+          </Text>
+          {keyData.id ? (
+            <>
+              <Text fontSize="13px" className={styles.detailsLabel}>
+                {t("Common:KeyId")}
+              </Text>
+              <Text fontSize="13px" className={styles.monoValue}>
+                {keyData.id}
+              </Text>
+            </>
+          ) : null}
+          <Text fontSize="13px" className={styles.detailsLabel}>
+            {t("Common:Algorithm")}
+          </Text>
+          <Text fontSize="13px">X25519</Text>
+        </div>
       </div>
       {isCurrentlyDeleting && (
         <div className={styles.keyItemOverlay}>
@@ -222,6 +217,8 @@ type KeysListProps = {
   onSelectActive: (keyId: string) => void;
   isDeleting: boolean;
   deletingKeyId: string | null;
+  /** Key id this device has adopted, from the per-device preference. */
+  activeKeyId?: string | null;
 };
 
 export const KeysList: React.FC<KeysListProps> = ({
@@ -232,9 +229,9 @@ export const KeysList: React.FC<KeysListProps> = ({
   onSelectActive,
   isDeleting,
   deletingKeyId,
+  activeKeyId,
 }) => {
   const { t } = useTranslation(["Common"]);
-  const { publicKey: currentPublicKey } = useEncryption();
 
   if (!keys || keys.length === 0) {
     return (
@@ -257,22 +254,28 @@ export const KeysList: React.FC<KeysListProps> = ({
         {t("Common:EncryptionKeys")} ({keys.length})
       </Text>
       <div className={styles.keysListItems}>
-        {keys.map((key) => (
-          <KeyItem
-            key={key.id}
-            keyData={key}
-            onDelete={onDelete}
-            onExport={onExport}
-            onRotate={onRotate}
-            onSelectActive={onSelectActive}
-            isDeleting={isDeleting}
-            deletingKeyId={deletingKeyId}
-            isCurrentDevice={
-              !!currentPublicKey && key.publicKey === currentPublicKey
-            }
-            canSwitchActive={keys.length > 1}
-          />
-        ))}
+        {keys.map((key) => {
+          // Adoption is recorded per device (active-key-preference), so only
+          // the device holding the key may claim it. Every other key can be
+          // adopted here, a single key on a fresh device included.
+          const isCurrentDevice =
+            !!activeKeyId && String(key.id) === String(activeKeyId);
+
+          return (
+            <KeyItem
+              key={key.id}
+              keyData={key}
+              onDelete={onDelete}
+              onExport={onExport}
+              onRotate={onRotate}
+              onSelectActive={onSelectActive}
+              isDeleting={isDeleting}
+              deletingKeyId={deletingKeyId}
+              isCurrentDevice={isCurrentDevice}
+              canSwitchActive={!isCurrentDevice}
+            />
+          );
+        })}
       </div>
     </div>
   );

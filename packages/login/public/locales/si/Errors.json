@@ -8,7 +8,7 @@
   "LoginWithAccountNotFound": "ආශ්‍රිත තෙවන පාර්ශ්ව ගිණුමක් හමු නොවිණි. ඔබ මුලින්ම පැතිකඩ සංස්කරණ පිටුව හරහා සමාජ ජාල ගිණුම් සම්බන්ධ කළ යුතුය.",
   "LoginWithBruteForce": "බලයදීම තාවකාලිකව අවහිර කර ඇත.",
   "LoginWithBruteForceCaptcha": "ඔබ රොබෝවෙක් නොවන බව තහවුරු කරන්න",
-  "OAuthApplicationDisabled": "This application is disabled",
+  "OAuthApplicationDisabled": "මෙම යෙදුම අක්‍රිය කර ඇත",
   "OAuthApplicationEmpty": "යෙදුම සොයා ගැනීමට නොහැකි විය",
   "OAuthClientEmpty": "සේවාලාභී ID සොයා ගැනීමට නොහැකි විය",
   "RecaptchaInvalid": "වැරදි විසඳුමකි",

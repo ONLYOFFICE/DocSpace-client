@@ -34,10 +34,12 @@
  */
 
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 import copy from "copy-to-clipboard";
 
 import {
   getDocsConnectInfo,
+  getDocsConnectStatistics,
   startDocsConnectTrial,
   buyDocsConnectPlan,
   calculateDocsConnectDevPack,
@@ -47,7 +49,16 @@ import {
   updateDocsConnectConfig,
   startDocsConnectReport,
   getDocsConnectReportStatus,
+  getDocsConnectConnection,
+  hasDocsConnectTenant,
 } from "@docspace/shared/api/docs-connect";
+import type { TDocsConnectConnection } from "@docspace/shared/api/docs-connect";
+import { saveDeposite } from "@docspace/shared/api/portal";
+import {
+  changeDocumentServiceLocation,
+  getDocumentServiceLocation,
+} from "@docspace/shared/api/files";
+import type { TDocServiceLocation } from "@docspace/shared/api/files/types";
 import type {
   TDocsConnectInfo,
   TDocsConnectConfigUpdate,
@@ -66,7 +77,8 @@ import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { isDocsConnectPaid } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
 
-import i18n from "../i18n";
+import type DocumentBuilderReportStore from "./DocumentBuilderReportStore";
+import { ReportType } from "./DocumentBuilderReportStore";
 
 export type BuyPlanMode = "trial" | "edit";
 
@@ -78,6 +90,16 @@ class DocsConnectStore {
   currentQuotaStore: Nullable<CurrentQuotasStore> = null;
 
   info: Nullable<TDocsConnectInfo> = null;
+
+  /**
+   * Whether this portal has an instance, for callers outside this page (the
+   * integrations card on the Overview) that must not pay for the full `info`
+   * request. `null` until asked — see {@link checkInstance}.
+   */
+  hasInstance: Nullable<boolean> = null;
+
+  /** In-flight {@link checkInstance} request, shared by concurrent callers. */
+  instanceCheck: Nullable<Promise<boolean>> = null;
 
   isLoading: boolean = true;
 
@@ -93,20 +115,33 @@ class DocsConnectStore {
 
   removeSubscriptionDialogVisible: boolean = false;
 
-  isReportGenerating: boolean = false;
+  documentService: Nullable<TDocServiceLocation> = null;
 
-  reportPageLeft: boolean = false;
+  connection: Nullable<TDocsConnectConnection> = null;
+
+  depositedTopUp: number = 0;
+
+  isPortalConnectionAvailable: boolean = false;
+
+  isStatisticsRefreshing: boolean = false;
+
+  statisticsRefreshController: Nullable<AbortController> = null;
+
+  private documentBuilderReportStore: DocumentBuilderReportStore;
 
   constructor(
     settingsStore: SettingsStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
     currentQuotaStore: CurrentQuotasStore,
+    documentBuilderReportStore: DocumentBuilderReportStore,
   ) {
     this.settingsStore = settingsStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
+    this.documentBuilderReportStore = documentBuilderReportStore;
     makeAutoObservable(this, {
-      reportPageLeft: false,
+      statisticsRefreshController: false,
+      instanceCheck: false,
     });
   }
 
@@ -131,6 +166,9 @@ class DocsConnectStore {
       const info = await getDocsConnectInfo();
       runInAction(() => {
         this.info = info;
+        // The page's own request answers the question too, so a card rendered
+        // next to it never has to ask again.
+        this.hasInstance = info != null;
       });
     } catch (error) {
       toastr.error(error as Error);
@@ -140,6 +178,72 @@ class DocsConnectStore {
     } finally {
       if (initialLoad) this.setIsLoading(false);
     }
+  };
+
+  /**
+   * Resolves `hasInstance` once per session. Concurrent callers share the same
+   * request, and a resolved answer is reused — the set of portals that gain an
+   * instance while the Overview is open is served by `fetchInfo` on the Docs
+   * Connect page itself.
+   */
+  checkInstance = async () => {
+    if (this.hasInstance != null) return this.hasInstance;
+    if (!this.instanceCheck) {
+      this.instanceCheck = hasDocsConnectTenant().finally(() => {
+        this.instanceCheck = null;
+      });
+    }
+    const hasInstance = await this.instanceCheck;
+    runInAction(() => {
+      this.hasInstance = hasInstance;
+    });
+    return hasInstance;
+  };
+
+  refreshStatistics = async () => {
+    if (!this.info) return;
+
+    this.abortStatisticsRefresh();
+
+    const controller = new AbortController();
+    this.statisticsRefreshController = controller;
+    this.isStatisticsRefreshing = true;
+
+    try {
+      const patch = await getDocsConnectStatistics(this.info.serviceIds, {
+        signal: controller.signal,
+      });
+
+      runInAction(() => {
+        const { info } = this;
+
+        if (this.statisticsRefreshController !== controller || !info) return;
+
+        this.info = {
+          ...info,
+          ...patch,
+          tenant: patch.tenant ?? info.tenant,
+          tenantInfo: patch.tenantInfo ?? info.tenantInfo,
+        };
+      });
+    } catch (error) {
+      if (!axios.isCancel(error)) toastr.error(error as Error);
+    } finally {
+      if (this.statisticsRefreshController === controller) {
+        this.statisticsRefreshController = null;
+        runInAction(() => {
+          this.isStatisticsRefreshing = false;
+        });
+      }
+    }
+  };
+
+  abortStatisticsRefresh = () => {
+    if (!this.statisticsRefreshController) return;
+
+    this.statisticsRefreshController.abort();
+    this.statisticsRefreshController = null;
+    this.isStatisticsRefreshing = false;
   };
 
   openBuyPlan = (mode: BuyPlanMode) => {
@@ -176,10 +280,42 @@ class DocsConnectStore {
   };
 
   startTrial = async () => {
-    const info = await startDocsConnectTrial();
+    await startDocsConnectTrial();
+    runInAction(() => {
+      this.hasInstance = true;
+    });
+    this.refreshPortalState();
+  };
+
+  private setInfo = (info: Nullable<TDocsConnectInfo>) => {
+    if (!info) return;
+
     runInAction(() => {
       this.info = info;
     });
+  };
+
+  private refreshInfo = () =>
+    getDocsConnectInfo(true)
+      .then(this.setInfo)
+      .catch(() => {});
+
+  private topUpWallet = async (topUp?: number) => {
+    const amount = Math.round(((topUp ?? 0) - this.depositedTopUp) * 100) / 100;
+    if (amount <= 0) return;
+
+    await saveDeposite(amount, this.info?.wallet?.currency ?? "USD");
+    runInAction(() => {
+      this.depositedTopUp += amount;
+    });
+  };
+
+  private applyPurchase = (info: Nullable<TDocsConnectInfo>) => {
+    runInAction(() => {
+      this.info = info;
+      this.depositedTopUp = 0;
+    });
+    this.closeBuyPlan();
     this.refreshPortalState();
   };
 
@@ -193,25 +329,28 @@ class DocsConnectStore {
     topUp?: number;
   }) => {
     const isPaid = this.info ? isDocsConnectPaid(this.info) : false;
+    const currentUsers =
+      !isPaid || this.info?.deactivated
+        ? 0
+        : (this.info?.tenant.payment?.quantity ?? 0);
+    const currentDevPackEnabled = isPaid
+      ? (this.info?.devPackEnabled ?? false)
+      : false;
 
-    const info = await buyDocsConnectPlan({
-      users,
-      devPackEnabled: devPack,
-      topUp,
-      currentUsers:
-        !isPaid || this.info?.deactivated
-          ? 0
-          : (this.info?.tenant.payment?.quantity ?? 0),
-      currentDevPackEnabled: isPaid
-        ? (this.info?.devPackEnabled ?? false)
-        : false,
-      currency: this.info?.wallet?.currency ?? "USD",
-    });
-    runInAction(() => {
-      this.info = info;
-    });
-    this.closeBuyPlan();
-    this.refreshPortalState();
+    try {
+      await this.topUpWallet(topUp);
+
+      const info = await buyDocsConnectPlan({
+        users,
+        devPackEnabled: devPack,
+        currentUsers,
+        currentDevPackEnabled,
+      });
+      this.applyPurchase(info);
+    } catch (error) {
+      await this.refreshInfo();
+      throw error;
+    }
   };
 
   buyPlanViaStripe = async ({
@@ -297,16 +436,15 @@ class DocsConnectStore {
     quantity: number;
     topUp?: number;
   }) => {
-    const info = await switchDocsConnectToDevPack({
-      quantity,
-      topUp,
-      currency: this.info?.wallet?.currency ?? "USD",
-    });
-    runInAction(() => {
-      this.info = info;
-    });
-    this.closeBuyPlan();
-    this.refreshPortalState();
+    try {
+      await this.topUpWallet(topUp);
+
+      const info = await switchDocsConnectToDevPack({ quantity });
+      this.applyPurchase(info);
+    } catch (error) {
+      await this.refreshInfo();
+      throw error;
+    }
   };
 
   cancelPlan = async () => {
@@ -321,7 +459,9 @@ class DocsConnectStore {
 
   cancelScheduledChange = async () => {
     const info = await cancelDocsConnectScheduledChange(
-      this.info?.devPackEnabled ?? false,
+      this.info?.scheduledChange?.scheduledOnDevPack ??
+        this.info?.devPackEnabled ??
+        false,
     );
     runInAction(() => {
       this.info = info;
@@ -338,67 +478,105 @@ class DocsConnectStore {
     });
   };
 
-  private resetReportState = () => {
-    this.reportPageLeft = false;
-    runInAction(() => {
-      this.isReportGenerating = false;
-    });
-  };
-
-  private finishReport = (resultFileUrl?: string) => {
-    toastr.success(
-      i18n.t("Common:ReportSaveLocation", {
-        sectionName: i18n.t("Common:Files"),
-      }),
+  get isReportGenerating() {
+    return this.documentBuilderReportStore.isReportBuilding(
+      ReportType.DocsConnect,
     );
-    if (!this.reportPageLeft && resultFileUrl) {
-      setTimeout(() => window.open(resultFileUrl, "_blank"), 100); // hack for ios
-    }
-    this.resetReportState();
-  };
+  }
 
-  markReportPageLeft = () => {
-    if (this.isReportGenerating) this.reportPageLeft = true;
-  };
-
-  downloadReport = async () => {
-    if (this.isReportGenerating) return;
-
-    this.reportPageLeft = false;
-    runInAction(() => {
-      this.isReportGenerating = true;
+  downloadReport = () =>
+    this.documentBuilderReportStore.buildReport(ReportType.DocsConnect, {
+      start: startDocsConnectReport,
+      getStatus: getDocsConnectReportStatus,
     });
-
-    const controller = new AbortController();
-
-    try {
-      let status = await startDocsConnectReport();
-
-      if (!status?.isCompleted && !status?.error) {
-        await pollUntil(async () => {
-          status = await getDocsConnectReportStatus();
-          return !!status?.isCompleted || !!status?.error;
-        }, controller.signal);
-      }
-
-      if (status?.error) {
-        toastr.error(status.error);
-        this.resetReportState();
-        return;
-      }
-
-      this.finishReport(status?.resultFileUrl);
-    } catch (error) {
-      toastr.error(error as Error);
-      this.resetReportState();
-    }
-  };
 
   copyToClipboard = (value: string, t: TTranslation) => {
     if (!value) return;
 
     copy(value);
     toastr.success(t("Common:Copied"));
+  };
+
+  fetchDocumentService = async () => {
+    try {
+      const result = await getDocumentServiceLocation();
+      runInAction(() => {
+        this.documentService = result;
+      });
+    } catch {
+      // ignore: absence of doc service info only affects the Reset button state
+    }
+  };
+
+  fetchConnection = async () => {
+    try {
+      const result = await getDocsConnectConnection();
+      runInAction(() => {
+        this.connection = result;
+      });
+    } catch {
+      // ignore: absence of connection data only hides the "connect editors" banner
+    }
+  };
+
+  get connectionData(): Nullable<TDocsConnectConnection> {
+    const address = this.info?.tenant.address ?? this.connection?.address;
+    const secret = this.info?.config.security.secret ?? this.connection?.secret;
+    const header = this.info?.config.security.header ?? this.connection?.header;
+    if (!address || !secret || !header) return null;
+
+    return { address, secret, header };
+  }
+
+  get isConnectedToPortal() {
+    const address = this.connectionData?.address;
+    const current = this.documentService?.docServiceUrl;
+    if (!address || !current) return false;
+
+    const normalize = (value: string) =>
+      value
+        .replace(/^https?:\/\//i, "")
+        .replace(/\/+$/, "")
+        .toLowerCase();
+
+    return normalize(current) === normalize(address);
+  }
+
+  applyToDocumentService = async () => {
+    const data = this.connectionData;
+    if (!data) throw new Error("DocsConnect connection data is incomplete");
+
+    const url = /^https?:\/\//i.test(data.address)
+      ? data.address
+      : `https://${data.address}`;
+    const portalUrl = window.location.origin;
+
+    const result = await changeDocumentServiceLocation(
+      url,
+      data.secret,
+      data.header,
+      url,
+      portalUrl,
+      true,
+    );
+    runInAction(() => {
+      this.documentService = result;
+    });
+    return result;
+  };
+
+  resetDocumentService = async () => {
+    const result = await changeDocumentServiceLocation(
+      null,
+      null,
+      null,
+      null,
+      null,
+      true,
+    );
+    runInAction(() => {
+      this.documentService = result;
+    });
   };
 
   copySecretKey = (t: TTranslation) => {

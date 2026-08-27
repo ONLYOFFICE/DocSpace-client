@@ -36,6 +36,7 @@
 import equal from "fast-deep-equal";
 import React, { useMemo, useState } from "react";
 import { isMobile as isMobileDevice } from "react-device-detect";
+import { useIsomorphicLayoutEffect } from "@docspace/ui-kit/hooks/useIsomorphicLayoutEffect";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
@@ -172,11 +173,15 @@ const Badges = ({
   const countVersions =
     versionGroup && versionGroup > 999 ? "999+" : versionGroup;
 
-  const isLargeTabletDevice =
-    isMobileDevice && window.innerWidth >= size.desktop;
+  const [mounted, setMounted] = useState(false);
+  useIsomorphicLayoutEffect(() => setMounted(true), []);
 
-  const tabletViewBadge = !isTile && (isTablet() || isLargeTabletDevice);
-  const desktopView = !isTile && isDesktop();
+  const isLargeTabletDevice =
+    mounted && isMobileDevice && window.innerWidth >= size.desktop;
+
+  const tabletViewBadge =
+    mounted && !isTile && (isTablet() || isLargeTabletDevice);
+  const desktopView = mounted && !isTile && isDesktop();
 
   const sizeBadge =
     isTile || tabletViewBadge ? IconSizeType.medium : IconSizeType.small;

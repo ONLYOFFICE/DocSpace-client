@@ -52,7 +52,6 @@ import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
 import { usePublic, useSDK } from "../Home/Hooks";
 import styles from "./PublicRoom.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PUBLIC_SIGN_IN_TOAST = "showPublicSignInToast";
 
@@ -81,11 +80,12 @@ const PublicRoomPage = (props) => {
     onOpenSignInWindow,
     windowIsOpen,
     isAuthenticated,
+    culture,
   } = props;
 
   const location = useLocation();
 
-  const { t, ready } = useTranslation(["Common"]);
+  const { t, i18n, ready } = useTranslation(["Common"]);
 
   useSDK({ frameConfig, setFrameConfig, isLoading });
 
@@ -113,11 +113,25 @@ const PublicRoomPage = (props) => {
     }
   };
 
+  // Anonymous visits boot i18n in the browser language and only switch to the
+  // portal culture once settings arrive (AuthStore.init). The toast below is a
+  // one-shot snapshot handed to toastr, so building it before that switch
+  // lands leaves it in the browser language for good, while the rest of the
+  // page re-renders in the portal culture.
+  const isPortalCultureApplied = !culture || i18n.language === culture;
+
   useEffect(() => {
     const toastIsDisabled =
       sessionStorage.getItem(PUBLIC_SIGN_IN_TOAST) === access?.toString();
 
-    if (!access || !ready || toastIsDisabled || isFrame || isAuthenticated)
+    if (
+      !access ||
+      !ready ||
+      !isPortalCultureApplied ||
+      toastIsDisabled ||
+      isFrame ||
+      isAuthenticated
+    )
       return;
 
     const roomMode = getAccessTranslation().toLowerCase();
@@ -129,11 +143,11 @@ const PublicRoomPage = (props) => {
         t={t}
         ns="Common"
         i18nKey="PublicAuthorizeToast"
-        values={{ roomMode, productName: getBrandName("ProductName") }}
+        values={{ roomMode }}
         components={{
           1: (
             <Text
-              key="productName"
+              key="roomMode"
               as="span"
               fontSize="12px"
               fontWeight={700}
@@ -160,7 +174,14 @@ const PublicRoomPage = (props) => {
     );
 
     toastr.info(toastText);
-  }, [access, ready, roomType, parentRoomType, isAuthenticated]);
+  }, [
+    access,
+    ready,
+    isPortalCultureApplied,
+    roomType,
+    parentRoomType,
+    isAuthenticated,
+  ]);
 
   const sectionProps = {
     isSecondaryProgressVisbile,
@@ -222,7 +243,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
   }) => {
-    const { frameConfig, setFrameConfig, isFrame } = settingsStore;
+    const { frameConfig, setFrameConfig, isFrame, culture } = settingsStore;
     const {
       isLoaded,
       roomStatus,
@@ -274,6 +295,7 @@ export default inject(
       frameConfig,
       setFrameConfig,
       isFrame,
+      culture,
       access,
       roomType,
       parentRoomType,

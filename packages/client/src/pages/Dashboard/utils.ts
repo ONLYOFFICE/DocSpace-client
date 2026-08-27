@@ -59,6 +59,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { CSSProperties } from "react";
+
+/**
+ * Columns the apps grid uses at its widest.
+ *
+ * The grid stretches its cards across the whole row however many there are -
+ * the quick actions above it do the same - so the column count follows the
+ * number of cards instead of being fixed at four: a portal with AI services off
+ * has three apps and no reason to leave a fourth column's worth of empty space.
+ * Past four the cards wrap onto a second row rather than getting narrower.
+ */
+export const MODULES_GRID_MAX_COLUMNS = 4;
+
+/**
+ * Feeds `--modules-columns`, which `.modulesGrid` builds its columns from. The
+ * narrower container widths override the count with their own (two columns,
+ * then one), so this only decides the widest layout.
+ */
+export const modulesGridStyle = (moduleCount: number): CSSProperties =>
+  ({
+    "--modules-columns": Math.min(moduleCount, MODULES_GRID_MAX_COLUMNS),
+  }) as CSSProperties;
+
 export const getGreetingKey = (): string => {
   const hour = new Date().getHours();
   if (hour >= 5 && hour < 12) return "GoodMorning";

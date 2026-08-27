@@ -3,7 +3,7 @@
   "content": "Filling form",
   "content_en_sha1_hash": "7d83d7eca125edcf45bdc6c74e4efc3a8e517850",
   "created_at": "2025-05-19T21:30:45.351Z",
-  "updated_at": "2026-07-27T13:07:50.682Z",
+  "updated_at": "2026-08-19T13:26:37.717Z",
   "comment": {
     "text": "This is a label for a room type, indicating a space dedicated to filling out forms. It appears in filters and as a room title.",
     "is_auto": true,

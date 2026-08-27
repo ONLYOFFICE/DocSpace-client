@@ -1,5 +1,5 @@
 {
-  "Desc": "Lütfən, {{productName}} qeydiyyat məlumatlarını qeyd edin.",
+  "Desc": "Lütfən, iş sahəsi qeydiyyat məlumatlarını qeyd edin.",
   "ErrorEmail": "Etibarsız e-poçt ünvanı",
   "ErrorInstanceId": "Etibarsız ID nümunəsi",
   "ErrorLicenseBody": "Lisenziya etibarlı deyil. Düzgün faylı seçdiyinizə əmin olun.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Lisenziya razılaşmalarınız",
   "PlaceholderLicense": "Lisenziya faylınız",
   "Timezone": "Saat qurşağı:",
-  "WelcomeTitle": "{{productName}}-ə xoş gəlmisiniz!"
+  "WelcomeTitle": "İş sahənizə xoş gəlmisiniz!"
 }

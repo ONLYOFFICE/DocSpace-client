@@ -122,6 +122,9 @@ const BillingSidebar = ({ isNotPaidPeriod }: BillingSidebarProps) => {
       // biome-ignore lint/plugin/no-dynamic-i18n-key: literals captured by locales scanner
       label: t(item.translationKey),
       icon: item.icon,
+      // linkData renders the item as a real router link, so right-click /
+      // Ctrl-click / middle-click can open the section in a new tab.
+      linkData: { path: item.path },
       onClick: () => navigate(item.path),
     }));
     return [{ id: "billing", items }];
@@ -139,6 +142,7 @@ const BillingSidebar = ({ isNotPaidPeriod }: BillingSidebarProps) => {
       variant="secondary"
       onBack={onBack}
       backLabel={backLabel}
+      withDevTools
     />
   );
 };

@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   colorThemeHandler,
   settingsHandler,
@@ -54,7 +55,7 @@ import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 
 test.use({ timezoneId: "UTC" });
 
-const DOCS_CONNECT_ROUTE = "/portal-settings/developer-tools/docs-connect";
+const DOCS_CONNECT_ROUTE = "/developer-tools/docs-connect";
 const FROZEN_NOW_MS = new Date(DOCS_CONNECT_FROZEN_NOW).getTime();
 const FIRST_RENDER_TIMEOUT = 15_000;
 
@@ -103,7 +104,7 @@ const usePreset = (
   options?: DocsConnectHandlersOptions,
 ) => {
   mockRequest.use(
-    settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+    settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
     colorThemeHandler(TEST_PORT),
     ...docsConnectHandlers(TEST_PORT, preset, options),
   );
@@ -159,7 +160,7 @@ test.describe("Docs Connect buy plan panel", () => {
       await expect(page.getByText("Total monthly")).toBeVisible();
       await expect(page.getByText("$100.00")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "buy-plan-new.png",
@@ -179,7 +180,7 @@ test.describe("Docs Connect buy plan panel", () => {
 
       await expect(page.getByText("$250.00").first()).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "buy-plan-devpack.png",
@@ -228,7 +229,7 @@ test.describe("Docs Connect buy plan panel", () => {
         page.getByTestId("docs_connect_buy_plan_submit"),
       ).toHaveText("Top up & Buy");
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "buy-plan-insufficient.png",
@@ -310,6 +311,10 @@ test.describe("Docs Connect buy plan panel", () => {
 
       await page.getByTestId("docs_connect_devpack_toggle").click();
 
+      await expect(page.getByText("Order Summary")).toBeVisible();
+      await expect(page.getByText("New monthly price")).toBeVisible();
+      await expect(page.getByText("Effective date")).toBeVisible();
+      await expect(page.getByText("User adjustment")).toBeHidden();
       await expect(
         page.getByTestId("docs_connect_buy_plan_submit"),
       ).toHaveText("Schedule change");
@@ -323,12 +328,43 @@ test.describe("Docs Connect buy plan panel", () => {
         productQuantityType: number;
       };
 
-      expect(body.quantity).toEqual({ docsclouddevpack: 0 });
+      expect(body.quantity).toEqual({ docscloud: 50 });
       expect(body.productQuantityType).toBe(0);
 
       await expect(
         page.getByText("The change has been scheduled"),
       ).toBeVisible();
+    });
+
+    test("schedules Dev Pack disable with a user change", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      usePreset(mockRequest, "paidDevPack");
+
+      await openFromPaid(page, baseUrl);
+
+      await page.getByTestId("docs_connect_devpack_toggle").click();
+      await setUsers(page, "40");
+
+      await expect(page.getByText("User adjustment")).toBeVisible();
+      await expect(page.getByText("Effective date")).toBeVisible();
+      await expect(
+        page.getByTestId("docs_connect_buy_plan_submit"),
+      ).toHaveText("Schedule change");
+
+      const updateWalletRequest = waitForUpdateWallet(page);
+
+      await page.getByTestId("docs_connect_buy_plan_submit").click();
+
+      const body = (await updateWalletRequest).postDataJSON() as {
+        quantity: Record<string, number | null>;
+        productQuantityType: number;
+      };
+
+      expect(body.quantity).toEqual({ docscloud: 40 });
+      expect(body.productQuantityType).toBe(0);
     });
 
     test("upgrades to Dev Pack with server-side calculation", async ({
@@ -352,7 +388,7 @@ test.describe("Docs Connect buy plan panel", () => {
       await expect(page.getByText("$90.00")).toBeVisible();
       await expect(page.getByText("$160.00")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "buy-plan-devpack-upgrade.png",

@@ -1,20 +1,20 @@
 {
   "key_path": "PersonalDataDeletionInfo",
-  "content": "Personal data, all personal files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections* of the selected users will be permanently deleted. Files and folders of the selected users kept in common sections* such as rooms will remain in {{productName}}.",
-  "content_en_sha1_hash": "82efe26f171e64da1f9a5952e525fc023af5ef30",
-  "created_at": "2025-05-19T21:30:56.673Z",
-  "updated_at": "2026-06-25T19:31:02.925Z",
+  "content": "Personal data, all personal files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections* of the selected users will be permanently deleted. Files and folders of the selected users kept in common sections* such as rooms will remain in the workspace.",
+  "content_en_sha1_hash": "ab7a549072c7a12eda207db04777df6e1e012dbe",
+  "created_at": "2026-08-13T22:44:32.635Z",
+  "updated_at": "2026-08-14T15:25:26.986Z",
   "comment": {
-    "text": "This is a descriptive text within a dialog box, informing users about the consequences of deleting a profile. It explains that personal data and files from \"My Documents\" and \"Trash\" will be permanently deleted, while files in shared sections like rooms will remain. `{{productName}}` is the application's name, and `{{sectionNameFirst}}` and `{{sectionNameSecond}}` are names of specific document sections.",
+    "text": "Body text in a confirmation dialog explaining the consequences of deleting user profiles. It includes variables {{sectionNameFirst}} and {{sectionNameSecond}} representing specific UI section names.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:05:59.844Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:25:26.986Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 131,
-      "context": "productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text className=\"text-warning\">{t(\"PleaseNote\")}</Text>\n <Text className=\"text-delete-description\">\n {t(\"PersonalDataDeletionInfo\", {\n productName: getBrandName(\"ProductName\"),\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n })}\n </Text>",
+      "line_number": 126,
+      "context": "? t(\"ActionCannotBeUndoneGuests\")\n : t(\"ActionCannotBeUndoneUsers\")}\n </Text>\n <Text className=\"text-warning\">{t(\"PleaseNote\")}</Text>\n <Text className=\"text-delete-description\">\n {t(\"PersonalDataDeletionInfo\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n })}\n </Text>\n <Text className=\"text-delete-description\">",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

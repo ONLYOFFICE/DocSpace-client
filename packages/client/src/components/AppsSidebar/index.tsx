@@ -61,9 +61,9 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
@@ -79,6 +79,7 @@ import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
 import { DeviceType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
+import { hasDevToolsAccess } from "@docspace/shared/utils/devToolsAccess";
 import type { ArticleProfileProps } from "@docspace/ui-kit/components/article";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
@@ -86,11 +87,16 @@ import BackButton from "@docspace/ui-kit/components/article/sub-components/BackB
 import ArticleDevToolsBar from "@docspace/ui-kit/components/article/sub-components/DevToolsBar";
 import { ArticleProfileLoader } from "@docspace/ui-kit/components/article/skeletons";
 import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
+import type { Section } from "SRC_DIR/helpers/plugins/enums";
 import CollapseButton from "./CollapseButton";
 import ProfileBlock from "./ProfileBlock";
 import AppsPluginItems from "./AppsPluginItems/AppsPluginItems";
 import { BackButtonLoader, HeaderLoader, NavMenuLoader } from "./SidebarLoader";
 import { useSidebarShowText } from "./useSidebarShowText";
+import {
+  usePluginNavGroup,
+  type PluginNavigationItems,
+} from "./usePluginNavGroup";
 import styles from "./AppsSidebar.module.scss";
 import type { AppsPluginsItems } from "./AppsPluginItems/AppsPluginItems.types";
 
@@ -112,6 +118,10 @@ export type AppsSidebarProps = {
   onBack?: () => void;
   /** Overrides the section "Back" button caption (secondary variant). */
   backLabel?: string;
+  /** Shows the Developer Tools banner on a secondary sidebar (hidden there by default). */
+  withDevTools?: boolean;
+  /** Portal section this sidebar stands for — plugins add their navigation items to it. */
+  pluginSection?: Section;
 };
 
 type AppsSidebarViewProps = AppsSidebarProps & {
@@ -122,6 +132,7 @@ type AppsSidebarViewProps = AppsSidebarProps & {
   isNotPaidPeriod?: boolean;
   articleOpen?: boolean;
   articleButtonItems?: AppsPluginsItems | null;
+  articleNavigationItems?: PluginNavigationItems | null;
   toggleArticleOpen?: () => void;
   onBack?: () => void;
   backLabel?: string;
@@ -142,8 +153,11 @@ export const AppsSidebarView = ({
   hideBack,
   backLabel,
   articleButtonItems,
+  articleNavigationItems,
+  pluginSection,
   isNavLoading,
   limitedAccessDevToolsForUsers,
+  withDevTools,
 }: AppsSidebarViewProps) => {
   const showBackButton = variant === "secondary" && !hideBack;
   const hideFooter = variant === "secondary";
@@ -172,15 +186,25 @@ export const AppsSidebarView = ({
     true,
   );
 
-  const isAdmin = user?.isAdmin ?? false;
-  const isOwner = user?.isOwner ?? false;
-  // Developer Tools banner mirrors the route guard in Route.private.tsx: hidden
-  // for guests, and for non-admins when access is limited. Hidden entirely on
-  // the secondary sidebars (accounts/dev-tools/settings) via `hideFooter`.
-  const showDevTools =
-    !user?.isVisitor &&
-    (isAdmin || isOwner || !limitedAccessDevToolsForUsers);
-  const showDevToolsBar = showDevTools && !hideFooter;
+  // The expanded and collapsed headers render mutually exclusive <img> tags, so
+  // the variant that is currently hidden is only requested at the moment the
+  // user toggles - leaving an empty logo box until it arrives. Warm both into
+  // the browser cache up front so either state paints immediately. Re-runs when
+  // the theme flips or whitelabel timestamp changes, since both alter the URLs.
+  useEffect(() => {
+    [fullLogo, burgerLogo].forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, [fullLogo, burgerLogo]);
+
+  // Developer Tools banner follows the same rule as the route guard in
+  // Route.private.tsx (`hasDevToolsAccess`): hidden for guests, and for
+  // non-admins when access is limited. On the secondary sidebars
+  // (accounts/dev-tools/settings) it is hidden via `hideFooter` unless the
+  // section opts in with `withDevTools` (portal-settings, billing).
+  const showDevTools = hasDevToolsAccess(user, limitedAccessDevToolsForUsers);
+  const showDevToolsBar = showDevTools && (!hideFooter || !!withDevTools);
   // While the nav skeleton is up, the footer (plugin slots + banner) stays
   // hidden so it doesn't appear ahead of the navigation it sits under.
   const showFooter = !isNavLoading && (hasPluginItems || showDevToolsBar);
@@ -189,12 +213,22 @@ export const AppsSidebarView = ({
     toggleArticleOpen?.();
   };
 
+  const { pluginGroup, activePluginItemId } = usePluginNavGroup({
+    section: pluginSection,
+    items: articleNavigationItems,
+  });
+
+  const navGroups = useMemo(
+    () => (pluginGroup ? [...groups, pluginGroup] : groups),
+    [groups, pluginGroup],
+  );
+
   // On mobile the article overlays the content, so it must close itself after a
   // navigation click. Wrap every item/sub-item onClick to run its own handler
   // first (navigate) and then close the article. Off mobile the article is
   // pinned, so handlers pass through untouched.
   const mobileGroups = useMemo(() => {
-    if (!isMobile) return groups;
+    if (!isMobile) return navGroups;
 
     const closeAfter =
       <T,>(handler?: (item: T) => void) =>
@@ -203,7 +237,7 @@ export const AppsSidebarView = ({
         toggleArticleOpen?.();
       };
 
-    return groups.map((group) => ({
+    return navGroups.map((group) => ({
       ...group,
       items: group.items.map((item: NavMenuItem) => ({
         ...item,
@@ -214,7 +248,7 @@ export const AppsSidebarView = ({
         })),
       })),
     }));
-  }, [groups, isMobile, toggleArticleOpen]);
+  }, [navGroups, isMobile, toggleArticleOpen]);
 
   const articleContent = (
     <>
@@ -304,10 +338,14 @@ export const AppsSidebarView = ({
           ) : (
             <NavMenu
               groups={mobileGroups}
-              activeItemId={activeId}
+              activeItemId={activePluginItemId ?? activeId}
               iconOnly={!showText}
               withExpandControl={isMobile}
               withAnimation
+              // Items that carry `linkData` render as real router links, so
+              // middle-click / Ctrl-click / "Open link in new tab" work on the
+              // navigation the same way they did in the old article.
+              LinkRouter={Link}
             />
           )}
 
@@ -385,6 +423,7 @@ type AppsSidebarConnectedProps = AppsSidebarProps & {
   articleOpen?: boolean;
   toggleArticleOpen?: () => void;
   articleButtonItems?: AppsPluginsItems | null;
+  articleNavigationItems?: PluginNavigationItems | null;
   limitedAccessDevToolsForUsers?: boolean;
 };
 
@@ -425,6 +464,7 @@ export default inject<TStore>(
     toggleArticleOpen: settingsStore.toggleArticleOpen,
     isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
     articleButtonItems: pluginStore?.articleButtonItemsList,
+    articleNavigationItems: pluginStore?.articleNavigationItemsList,
     limitedAccessDevToolsForUsers: settingsStore.limitedAccessDevToolsForUsers,
   }),
 )(observer(AppsSidebar));

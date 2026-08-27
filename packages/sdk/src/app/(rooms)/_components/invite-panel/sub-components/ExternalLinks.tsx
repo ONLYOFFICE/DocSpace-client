@@ -89,7 +89,6 @@ import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOn
 import api from "@docspace/shared/api";
 import { RoomsType } from "@docspace/shared/enums";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import type { ShareLink } from "../index";
 import AccessSelector from "./AccessSelector";
@@ -220,14 +219,10 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
     roomType === RoomsType.AIRoom
       ? allowInvitingGuests
         ? t("Common:InviteViaLinkDescriptionAgentGuest")
-        : t("Common:InviteViaLinkDescriptionAgentMembers", {
-            productName: getBrandName("ProductName"),
-          })
+        : t("Common:InviteViaLinkDescriptionAgentMembers")
       : allowInvitingGuests
         ? t("Common:InviteViaLinkDescriptionRoomGuest")
-        : t("Common:InviteViaLinkDescriptionRoomMembers", {
-            productName: getBrandName("ProductName"),
-          });
+        : t("Common:InviteViaLinkDescriptionRoomMembers");
 
   return (
     <div className={styles.externalLink} ref={inputsRef}>

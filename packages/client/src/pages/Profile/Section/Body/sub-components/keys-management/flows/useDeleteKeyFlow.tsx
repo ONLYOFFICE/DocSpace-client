@@ -45,6 +45,7 @@ import {
 } from "@docspace/shared/services/encryption/active-key-preference";
 import { unlockWithPassphrase } from "@docspace/shared/services/encryption/identity";
 import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
+import { getTofuStore } from "@docspace/shared/services/encryption/tofu-store";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -107,6 +108,9 @@ export function useDeleteKeyFlow({
         await deleteEncryptionKey(verifying.id);
         if (getActiveKeyId(userId) === verifying.id) {
           clearActiveKeyId(userId);
+        }
+        if (userId) {
+          await getTofuStore(userId).forgetKey(userId, verifying.publicKey);
         }
         SecretStorage.lock();
         await refreshKeysFromServer();

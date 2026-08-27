@@ -3,7 +3,7 @@
   "content": "From {{price}} per user / month",
   "content_en_sha1_hash": "97476b6b4863d99a67c3a0c10fd3e7ad1fc74e99",
   "created_at": "2026-07-27T13:07:15.722Z",
-  "updated_at": "2026-07-27T13:30:16.894Z",
+  "updated_at": "2026-08-05T16:32:00.369Z",
   "comment": {
     "text": "Informational text label in the billing section indicating the starting subscription cost, where {{price}} represents a formatted currency value.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 524,
+      "line_number": 556,
       "context": "count: trialDaysLeft,\n });\n } else if (deactivated) {\n docsConnectPrice = t(\"SubscriptionDeactivatedNonPayment\");\n } else if (canceled) {\n docsConnectPrice = t(\"FromPricePerUserMonth\", {\n price: formatWalletCurrency(item.price.value, 0),\n });\n } else if (hasScheduledChange) {\n docsConnectPrice = t(\"ChangeShedule\");\n } else {",
       "module": "/libs/ui-kit"
     }

@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndoneGuests": "Los invitados desactivados seleccionados se eliminarán de {{productName}}. Esta acción no se puede deshacer.",
-  "ActionCannotBeUndoneUsers": "Los usuarios desactivados seleccionados se eliminarán de {{productName}}. Esta acción no se puede deshacer.",
+  "ActionCannotBeUndoneGuests": "Los invitados desactivados seleccionados se eliminarán del espacio de trabajo. Esta acción no se puede deshacer.",
+  "ActionCannotBeUndoneUsers": "Los usuarios desactivados seleccionados se eliminarán del espacio de trabajo. Esta acción no se puede deshacer.",
   "CannotReassignFiles": "Si elimina varios usuarios a la vez, no podrá reasignar sus archivos a otros usuarios.",
   "DeleteGroupGuestsSuccessMessage": "Los invitados se han eliminado correctamente.",
   "DeleteGroupUsersSuccessMessage": "Los usuarios se han eliminado correctamente.",
@@ -12,7 +12,7 @@
   "DeleteUser": "Eliminar el usuario",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> se eliminará. Esta acción no se puede deshacer.",
   "DeletingUsers": "Eliminando usuarios",
-  "PersonalDataDeletionInfo": "Los datos personales, así como todos los archivos y carpetas personales en las secciones* {{sectionNameFirst}} y {{sectionNameSecond}}* de los usuarios seleccionados, se eliminarán permanentemente. Los archivos y carpetas de los usuarios seleccionados que se guarden en las secciones comunes*, como las salas, permanecerán en {{productName}}.",
+  "PersonalDataDeletionInfo": "Los datos personales, así como todos los archivos y carpetas personales en las secciones* {{sectionNameFirst}} y {{sectionNameSecond}}* de los usuarios seleccionados, se eliminarán permanentemente. Los archivos y carpetas de los usuarios seleccionados que se guarden en las secciones comunes*, como las salas, permanecerán en el espacio de trabajo.",
   "PleaseNote": "Por favor, tenga en cuenta:",
   "ReassignDataToAnotherUser": "Reasignar datos a otro usuario",
   "SuccessfullyDeleteGuestInfoMessage": "El invitado se ha eliminado correctamente",

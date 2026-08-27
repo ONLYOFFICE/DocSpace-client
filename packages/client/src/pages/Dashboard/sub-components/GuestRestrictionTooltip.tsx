@@ -63,7 +63,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import styles from "../Dashboard.module.scss";
 
@@ -73,14 +72,12 @@ export const GuestRestrictionTooltip = () => {
   const { t } = useTranslation(["Common"]);
 
   return (
-    <div className={styles.guestRestrictionTooltip}>
+    <div className={styles.restrictionTooltip}>
       <Text fontWeight={700} fontSize="12px">
         {t("Common:GuestCantCreateOrUploadTitle")}
       </Text>
       <Text fontSize="12px">
-        {t("Common:GuestCantCreateOrUploadDescription", {
-          productName: getBrandName("ProductName"),
-        })}
+        {t("Common:GuestCantCreateOrUploadDescription")}
       </Text>
     </div>
   );

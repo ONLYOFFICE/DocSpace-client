@@ -55,6 +55,25 @@
   color: var(--dev-tools-text);
 }
 
+.devPackNote {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.canceledText {
+  display: flex;
+  flex-direction: column;
+}
+
+.canceledTitle {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--dev-tools-text);
+}
+
 .trialNote {
   font-size: 13px;
   line-height: 20px;
@@ -77,10 +96,4 @@
   --link-text-decoration: underline;
   --link-hover-text-decoration: underline dashed;
   --link-hover-page-text-decoration: underline dashed;
-}
-
-.tooltipBox {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }

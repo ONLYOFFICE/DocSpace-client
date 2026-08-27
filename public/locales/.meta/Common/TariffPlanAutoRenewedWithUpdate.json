@@ -3,7 +3,7 @@
   "content": "Tariff plan will be automatically renewed on {{date}} with updated pricing and specifications",
   "content_en_sha1_hash": "16d9fbdec8936e50d17bc8e41ca8a1f177969461",
   "created_at": "2026-07-27T13:07:38.228Z",
-  "updated_at": "2026-07-27T13:12:30.684Z",
+  "updated_at": "2026-08-05T16:32:00.368Z",
   "comment": {
     "text": "Informational text label within a service item description notifying the user of an upcoming automatic renewal. The {{date}} placeholder represents a localized date.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 485,
-      "context": "<Text fontSize=\"12px\">\n {isCancellation\n ? t(\"SubscriptionAutoCancellation\", {\n finalDate: scheduledDateLocalized,\n })\n : t(\"TariffPlanAutoRenewedWithUpdate\", {\n date: scheduledDateLocalized,\n })}\n </Text>\n </>\n ) : undefined;",
+      "line_number": 509,
+      "context": "})\n : devPackDisabling\n ? t(\"SubscriptionAutoRenewed\", {\n finalDate: scheduledDateLocalized,\n })\n : t(\"TariffPlanAutoRenewedWithUpdate\", {\n date: scheduledDateLocalized,\n });\n \n const scheduledTooltip = hasScheduledChange ? (\n <>",
       "module": "/libs/ui-kit"
     }
   ],

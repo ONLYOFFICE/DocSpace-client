@@ -117,6 +117,8 @@ export default async function AiAgentsServerLayout({ children }: SlotProps) {
     if (roomId) returnParams.set("roomId", roomId);
     const showMenu = filterParams.get("showMenu");
     if (showMenu) returnParams.set("showMenu", showMenu);
+    const tab = filterParams.get("tab");
+    if (tab) returnParams.set("tab", tab);
     const returnQs = returnParams.toString();
     const successRedirectURL = `${proto}://${host}/sdk${returnPath}${returnQs ? `?${returnQs}` : ""}`;
 

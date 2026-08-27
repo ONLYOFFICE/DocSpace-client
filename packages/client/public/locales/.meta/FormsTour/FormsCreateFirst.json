@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsCreateFirst",
+  "content": "Create a form space, drop your PDF form into it and send the link out. The first answers can be in before the end of the day.",
+  "content_en_sha1_hash": "fdfb2160f1c16e993a00edbffe49314a6fc150b7",
+  "created_at": "2026-08-06T14:20:53.751Z",
+  "updated_at": "2026-08-13T10:58:03.050Z",
+  "comment": {
+    "text": "Description text for a step in the Forms onboarding tour that explains the initial workflow of creating and using form spaces.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:46:57.274Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 287,
+      "context": "demoHooks &&\n (canCreate\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"FormsTour:FormsCreateFirstTitle\"),\n t(\"FormsTour:FormsCreateFirst\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )\n : revealStep(",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

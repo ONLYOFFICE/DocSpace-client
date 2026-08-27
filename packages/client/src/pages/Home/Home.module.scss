@@ -79,6 +79,7 @@
     flex: 1 1 auto !important;
     max-width: 100% !important;
     border-inline-start: none;
+    z-index: 204;
 
     @include mixins.not-mobile {
       width: calc(100% - var(--ai-sidebar-width, 0px)) !important;
@@ -99,6 +100,12 @@
     :global(#article-container[data-show-text="false"])
   ) {
     --ai-sidebar-width: var(--article-tablet-width-collapsed, 60px);
+  }
+}
+
+@include mixins.tablet {
+  :global(.main-container):has(:global(#article-container)) {
+    --ai-sidebar-width: var(--article-tablet-width, 243px);
   }
 }
 

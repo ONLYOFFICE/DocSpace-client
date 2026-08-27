@@ -1,11 +1,9 @@
 {
   "ChangeData": "Ndryshoni të dhënat dhe fjalëkalimin",
   "ClickButtonBelow": "Nëse dëshironi identifikoheni duke përdorur email-in tuaj, ju lutemi caktoni fjalëkalimin tuaj. <br/> Pasi të jeni gati, ju lutemi klikoni butonin më poshtë.",
-  "ContinueToProduct": "Vazhdoni te {{productName}}",
+  "ContinueToProduct": "Vazhdoni te hapësira e punës",
   "GeneratedPassword": "Fjalëkalimi i gjeneruar",
-  "ProductNameDetail": "Emri i {{productName}}",
+  "ProductNameDetail": "Emri i hapësirës së punës",
   "ReviewAccountDetails": "Ju lutemi, merrni një moment për të rishikuar detajet e llogarisë suaj:",
-  "SetEmailPassword": "Vendos fjalëkalimin",
-  "WelcomeSubtitle": "Hapësira juaj u krijua me sukses. Rishikoni detajet e profilit tuaj dhe filloni të punoni.",
   "YourProfileDetails": "Detajet e profilit tuaj"
 }

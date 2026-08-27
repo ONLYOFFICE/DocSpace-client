@@ -2,8 +2,8 @@
   "ActionsWithFilesDescription": "Бейджі підсвічуватимуть активність файлів — завантаження, редагування чи поширення — у розділах {{rooms}}, {{shared}}, {{documents}} та {{aiAgents}}.",
   "AdminSetupRequired": "Необхідне налаштування адміністратора",
   "Badges": "Значки",
-  "DailyFeed": "Щоденна стрічка {{productName}}",
-  "DailyFeedDescription": "Читайте новини та події свого {{productName}} у щоденному дайджесті.",
+  "DailyFeed": "Щоденна стрічка {{organizationName}} {{productName}}",
+  "DailyFeedDescription": "Читайте новини та події свого {{organizationName}} {{productName}} у щоденному дайджесті.",
   "FileActivityNotify": "Сповіщення про активність файлів",
   "IsNotValid": "Не є дійсним",
   "LdapEmailTooltip": "Цей обліковий запис користувача завантажено з LDAP. Адреса електронної пошти користувача не була вказана, і поточна була згенерована автоматично та не може бути використана для надсилання сповіщень.",
@@ -14,6 +14,6 @@
   "SettingUpNotifications": "Налаштування сповіщень",
   "SuccessConnected": "{{serviceName}} успішно підключено як канал сповіщень. Ви тепер отримуватимете оновлення там.",
   "SuccessDisconnected": "{{serviceName}} було успішно від’єднано як канал сповіщень. Сповіщення туди більше не надсилатимуться.",
-  "UsefulTips": "Корисні поради щодо {{productName}}",
-  "UsefulTipsDescription": "Отримати корисні посібники з {{productName}}"
+  "UsefulTips": "Корисні поради щодо {{organizationName}} {{productName}}",
+  "UsefulTipsDescription": "Отримати корисні посібники з {{organizationName}} {{productName}}"
 }

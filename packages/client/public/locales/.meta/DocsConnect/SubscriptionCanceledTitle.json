@@ -1,0 +1,29 @@
+{
+  "key_path": "SubscriptionCanceledTitle",
+  "content": "Your paid {{service}} subscription was canceled by an administrator.",
+  "content_en_sha1_hash": "afa11b65f3625c9e2649af043e58e8eab13dd332",
+  "created_at": "2026-08-12T11:00:48.828Z",
+  "updated_at": "2026-08-26T14:08:33.098Z",
+  "comment": {
+    "text": "A title text displayed on the PromoPage when an administrator cancels a user's paid subscription. The {{service}} variable represents the name of the specific service.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T11:36:08.646Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
+      "line_number": 95,
+      "context": "</Heading>\n \n {canceled ? (\n <div className={styles.canceledText}>\n <Text as=\"p\" className={styles.canceledTitle}>\n {t(\"DocsConnect:SubscriptionCanceledTitle\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n <Text as=\"p\" className={styles.description}>\n {t(\"DocsConnect:SubscriptionCanceledDescription\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

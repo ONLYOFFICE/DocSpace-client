@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   colorThemeHandler,
   settingsHandler,
@@ -50,9 +51,8 @@ import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 
 test.use({ timezoneId: "UTC" });
 
-const SETTINGS_ROUTE =
-  "/portal-settings/developer-tools/docs-connect/settings";
-const PREVIEW_ROUTE = "/portal-settings/developer-tools/docs-connect/preview";
+const SETTINGS_ROUTE = "/developer-tools/docs-connect/settings";
+const PREVIEW_ROUTE = "/developer-tools/docs-connect/preview";
 const FROZEN_NOW_MS = new Date(DOCS_CONNECT_FROZEN_NOW).getTime();
 const FIRST_RENDER_TIMEOUT = 15_000;
 
@@ -98,7 +98,7 @@ const freezeTime = async (context: BrowserContext, frozenNowMs: number) => {
 
 const usePaidPreset = (mockRequest: WorkerFixture) => {
   mockRequest.use(
-    settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+    settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
     colorThemeHandler(TEST_PORT),
     ...docsConnectHandlers(TEST_PORT, "paid"),
   );
@@ -124,7 +124,7 @@ test.describe("Docs Connect settings tab", () => {
       page.getByTestId("docs_connect_settings_header_input"),
     ).toHaveValue("AuthorizationJwt", { timeout: FIRST_RENDER_TIMEOUT });
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "desktop",
       "docs-connect",
       "settings.png",
@@ -266,7 +266,7 @@ test.describe("Docs Connect preview tab", () => {
 
     await page.mouse.move(0, 0);
 
-    await expect(page).toHaveScreenshot(
+    await expectScreenshot(page, 
       ["desktop", "docs-connect", "preview-code.png"],
       {
         mask: [
@@ -291,10 +291,35 @@ test.describe("Docs Connect preview tab", () => {
 
     await page.goto(`${baseUrl}${PREVIEW_ROUTE}`);
 
+    // api.js is blocked, so the editor cannot load: the empty view offers a
+    // page reload, which is what unblocks the tenant script.
+    await expect(page.getByText("Something went wrong")).toBeVisible({
+      timeout: FIRST_RENDER_TIMEOUT,
+    });
+    // The option renders "Reload page" as both its title and its description.
+    await expect(page.getByText("Reload page").first()).toBeVisible();
+  });
+
+  test("shows a configuration hint when the preview token cannot be signed", async ({
+    page,
+    baseUrl,
+  }) => {
+    // Break the HMAC signing of the preview config the same way an unusable
+    // secret key would: a reload cannot fix this, so no reload action is shown.
+    await page.addInitScript(() => {
+      if (!crypto?.subtle) return;
+      crypto.subtle.importKey = () =>
+        Promise.reject(new Error("importKey disabled for test"));
+    });
+
+    await page.goto(`${baseUrl}${PREVIEW_ROUTE}`);
+
     await expect(
       page.getByText(
-        "Failed to load the editor preview. Check the tenant address and secret key.",
+        "Failed to load the editor preview. Check the instance address and secret key.",
       ),
     ).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
+
+    await expect(page.getByText("Reload page")).toBeHidden();
   });
 });

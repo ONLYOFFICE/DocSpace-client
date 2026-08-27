@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentWhatIsTitle",
+  "content": "An agent, not a chat",
+  "content_en_sha1_hash": "4c2773c484ba6814cbe685389d19367247df5efe",
+  "created_at": "2026-08-06T14:20:56.254Z",
+  "updated_at": "2026-08-07T15:05:26.408Z",
+  "comment": {
+    "text": "Title of a step in the AI Agents onboarding tour, used to explain the fundamental distinction between an agent and a chat.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:21:20.334Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 181,
+      "context": "// three tabs live inside an agent, so they can only be described here — the\n // tour never opens one.\n aiAgentsId &&\n navItemStep(\n sidebarSelector(aiAgentsId),\n t(\"AiAgentsTour:AgentWhatIsTitle\"),\n // The same mental model either way — but somebody who cannot add to the\n // list is told where the list they are looking at comes from instead of\n // what an agent keeps for them.\n isAdmin\n ? t(\"AiAgentsTour:AgentWhatIs\")",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,26 +1,26 @@
 {
   "key_path": "BrandingSectionDescription",
-  "content": "Specify your company information, add links to external resources and email addresses displayed within the {{productName}} interface.",
-  "content_en_sha1_hash": "d799aef730dd0a79a451093abbc8378f23c3c2f2",
-  "created_at": "2025-05-26T07:15:40.974Z",
-  "updated_at": "2026-05-15T14:00:06.951Z",
+  "content": "Specify your company information, add links to external resources and email addresses displayed within the workspace interface.",
+  "content_en_sha1_hash": "38121235df2b3e1a208f04fac38d3e87c1895832",
+  "created_at": "2026-08-13T22:43:55.412Z",
+  "updated_at": "2026-08-14T15:14:09.221Z",
   "comment": {
-    "text": "This is a section description explaining where to customize company information and external links within the {{productName}} interface.",
+    "text": "Section description or subtitle for the Company Info settings, explaining the purpose of this configuration area.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:58:10.768Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:14:09.221Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 154,
-      "context": "className={classNames(\n styles.sectionDescription,\n \"section-description\",\n )}\n >\n {t(\"BrandingSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </div>\n <div className={classNames(styles.header, \"header\")}>\n {t(\"CompanyInfoSettings\")}",
+      "line_number": 153,
+      "context": "className={classNames(\n styles.sectionDescription,\n \"section-description\",\n )}\n >\n {t(\"BrandingSectionDescription\")}\n </div>\n <div className={classNames(styles.header, \"header\")}>\n {t(\"CompanyInfoSettings\")}\n </div>\n <div className={classNames(styles.description, \"description\")}>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 80,
-      "context": "onClickLink={onClickLink}\n />\n {displayAbout ? (\n <CategoryItem\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}",
+      "line_number": 79,
+      "context": "onClickLink={onClickLink}\n />\n {displayAbout ? (\n <CategoryItem\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\")}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />",
       "module": "/packages/shared"
     }
   ],
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -61,7 +61,6 @@ const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
   share: undefined,
   editorType: undefined,
   withoutGoBackText: undefined,
-  withTool: undefined,
 };
 
 async function Page(props: RootPageProps) {
@@ -83,7 +82,6 @@ async function Page(props: RootPageProps) {
     returnUrl,
     withoutGoBackText,
     isSDK,
-    withTool,
   } = searchParams ?? initialSearchParams;
 
   const baseSdkConfig: TFrameConfig & {
@@ -141,7 +139,6 @@ async function Page(props: RootPageProps) {
     action,
     share,
     type,
-    withTool,
   );
 
   const isOAuth =

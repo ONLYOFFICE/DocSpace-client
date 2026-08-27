@@ -37,13 +37,13 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export interface RoomsContentProps {
   isRoomsTariffLimit: boolean;
   maxCountRoomsByQuota: number;
   usedRoomsCount: number;
   isPaymentPageAvailable: boolean;
+  isCommunity?: boolean;
   isArchiveFolderRoot: boolean;
 }
 
@@ -52,18 +52,22 @@ const RoomsContent = ({
   maxCountRoomsByQuota,
   usedRoomsCount,
   isPaymentPageAvailable,
+  isCommunity,
   isArchiveFolderRoot,
 }: RoomsContentProps) => {
   const { t } = useTranslation(["Payments", "Common", "MainBar"]);
 
-  const chooseNewPlan = (
-    <Text>
-      {isPaymentPageAvailable
-        ? t("ChooseNewPlan")
-        : t("MainBar:ContactToUpgradeTariff", {
-            productName: getBrandName("ProductName"),
-          })}
-    </Text>
+  // Community has no plan to switch to and nobody to ask for one, so the
+  // dialog stops at the limit itself.
+  const chooseNewPlan = isCommunity ? null : (
+    <>
+      <br />
+      <Text>
+        {isPaymentPageAvailable
+          ? t("ChooseNewPlan")
+          : t("MainBar:ContactToUpgradeTariff")}
+      </Text>
+    </>
   );
 
   if (isRoomsTariffLimit)
@@ -80,7 +84,6 @@ const RoomsContent = ({
             ? t("NotPossibleRoomRestoring")
             : t("NewRoomWillExceedLimit")}
         </Text>
-        <br />
         {chooseNewPlan}
       </>
     );
@@ -95,14 +98,18 @@ const RoomsContent = ({
           maxValue: maxCountRoomsByQuota,
         })}
       </Text>
-      <br />
       {chooseNewPlan}
     </>
   );
 };
 
 export default inject(
-  ({ currentQuotaStore, authStore, treeFoldersStore }: TStore) => {
+  ({
+    currentQuotaStore,
+    authStore,
+    treeFoldersStore,
+    currentTariffStatusStore,
+  }: TStore) => {
     const { isRoomsTariffLimit, maxCountRoomsByQuota, usedRoomsCount } =
       currentQuotaStore;
 
@@ -115,6 +122,7 @@ export default inject(
       maxCountRoomsByQuota,
       usedRoomsCount,
       isPaymentPageAvailable,
+      isCommunity: currentTariffStatusStore.isCommunity,
       isArchiveFolderRoot,
     };
   },

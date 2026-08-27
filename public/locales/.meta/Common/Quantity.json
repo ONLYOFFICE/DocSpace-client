@@ -3,7 +3,7 @@
   "content": "Quantity",
   "content_en_sha1_hash": "44f6af6945544c0bab016a9160df6abb0cefcb60",
   "created_at": "2026-03-20T09:07:38.532Z",
-  "updated_at": "2026-07-27T13:07:50.782Z",
+  "updated_at": "2026-08-06T08:04:19.968Z",
   "comment": {
     "text": "Table header or section header for a numerical value. It indicates a count or amount of items.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 399,
+      "line_number": 419,
       "context": "</div>\n </div>\n )}\n \n <div className={styles.summaryCard}>\n <Text className={styles.cardLabel}>{t(\"Common:Quantity\")}</Text>\n <Text className={styles.quantityValue}>{planUsers}</Text>\n <Text className={styles.cardCaption}>\n {t(\"DocsConnect:PlanUsers\")}\n </Text>\n </div>",
       "module": "/libs/ui-kit"
     },

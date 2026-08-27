@@ -33,8 +33,24 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export const DOCS_CONNECT_ROUTE =
-  "/portal-settings/developer-tools/docs-connect";
+// Re-exported so the route lives in a single place: ui-kit redirects to it from
+// the payment completion page.
+export { DOCS_CONNECT_ROUTE } from "@docspace/ui-kit/billing/constants";
+
+export type TDocsConnectTab = "statistics" | "settings" | "preview";
+
+// Connectors we do not show as tiles but that exist in the public catalog the
+// "View all" link points to. Only a handful of connectors get their own tile,
+// so this count cannot be derived from the rendered list.
+export const MORE_CONNECTORS_COUNT = 20;
+
+export const DOCS_CONNECT_LINKS = {
+  connectors: "https://www.onlyoffice.com/marketplace",
+  automationApi: "https://www.onlyoffice.com/automation-api",
+  branding: "https://www.onlyoffice.com/white-label",
+  apiDocs:
+    "https://api.onlyoffice.com/docs/docs-api/get-started/basic-concepts/",
+} as const;
 
 export const DOCS_CONNECT_PREVIEW = {
   editorType: "word",

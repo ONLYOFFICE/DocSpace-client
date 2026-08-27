@@ -3,7 +3,7 @@
   "content": "Media",
   "content_en_sha1_hash": "0c77aeece8c258113148c6fb487946bf97b34672",
   "created_at": "2025-05-19T21:30:46.398Z",
-  "updated_at": "2026-07-27T13:07:50.727Z",
+  "updated_at": "2026-08-19T13:26:37.735Z",
   "comment": {
     "text": "This is a filter option label. It appears in the file filter dropdown to show only media files (audio, video).",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 880,
+      "line_number": 877,
       "context": "break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 880,
+      "line_number": 877,
       "context": "break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():",
       "module": "/packages/client"
     },
@@ -61,13 +61,13 @@
     },
     {
       "file_path": "/packages/shared/utils/getSelectFormatTranslation.ts",
-      "line_number": 78,
+      "line_number": 79,
       "context": "case FilterType.FoldersOnly:\n return getTranslatedType(\"Common:Folders\");\n \n case FilterType.MediaOnly:\n return t(\"Common:SelectExtensionFiles\", {\n extension: t(\"Common:Media\").toLowerCase(),\n });\n \n case FilterType.Pdf:\n return getTranslatedType(getManyPDFTitle(t, false));",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 326,
+      "line_number": 322,
       "context": "case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n case FilterType.DiagramsOnly:",
       "module": "/packages/shared"
     }

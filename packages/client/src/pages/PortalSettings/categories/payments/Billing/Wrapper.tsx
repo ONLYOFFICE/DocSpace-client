@@ -36,19 +36,25 @@
 import { useEffect, useMemo } from "react";
 import { Outlet, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import Section from "@docspace/ui-kit/components/section";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { BillingRoot } from "@docspace/ui-kit/billing";
+import { DeviceType } from "@docspace/shared/enums";
 
 import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
 import ErrorBoundary from "SRC_DIR/components/ErrorBoundaryWrapper";
 import SectionWrapper from "SRC_DIR/components/Section";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import type { TPaymentUser } from "@docspace/ui-kit/billing/types";
 
 import BillingHeader from "./BillingHeader";
-import { PAYMENT_ROUTES } from "../utils";
+import PayerOnlyWarning from "./PayerOnlyWarning";
+import { PAYMENT_ROUTES, getBillingPageTitle } from "../utils";
+
+import styles from "./Wrapper.module.scss";
 
 interface WrapperProps {
   language?: string;
@@ -57,6 +63,10 @@ interface WrapperProps {
   openOnNewPage?: boolean;
   user?: TPaymentUser;
   fetchDocsConnectInfo?: () => Promise<unknown>;
+  isPayer?: boolean;
+  isPayerInfoLoaded?: boolean;
+  isCardLinkedToPortal?: boolean;
+  currentDeviceType?: DeviceType;
 }
 
 const BillingWrapperComponent = ({
@@ -66,8 +76,26 @@ const BillingWrapperComponent = ({
   openOnNewPage,
   user,
   fetchDocsConnectInfo,
+  isPayer,
+  isPayerInfoLoaded,
+  isCardLinkedToPortal,
+  currentDeviceType,
 }: WrapperProps) => {
   const location = useLocation();
+  const { t, ready } = useTranslation(["Common", "DocsConnect"]);
+
+  useEffect(() => {
+    if (ready) setDocumentTitle(getBillingPageTitle(location.pathname, t));
+  }, [location.pathname, ready, t]);
+
+  const isPayerManagedPage =
+    location.pathname.includes("/billing/wallet") ||
+    location.pathname.includes("/billing/tariff-plan");
+
+  const showPayerOnlyWarning =
+    isPayerManagedPage && isPayerInfoLoaded && !isPayer && isCardLinkedToPortal;
+
+  const isDesktop = currentDeviceType === DeviceType.desktop;
 
   const paymentConfig = useMemo(
     () => ({
@@ -101,10 +129,18 @@ const BillingWrapperComponent = ({
       <ErrorBoundary>
         <SectionWrapper withBodyScroll viewAs="settings" settingsStudio>
           <Section.SectionHeader>
-            <BillingHeader />
+            <BillingHeader
+              withPayerOnlyWarning={showPayerOnlyWarning && isDesktop}
+            />
           </Section.SectionHeader>
 
           <Section.SectionBody>
+            {showPayerOnlyWarning && !isDesktop ? (
+              <div className={styles.payerWarning}>
+                <PayerOnlyWarning />
+              </div>
+            ) : null}
+
             <BillingRoot config={paymentConfig}>
               <Outlet />
             </BillingRoot>
@@ -122,12 +158,18 @@ export const Component = inject(
     userStore,
     filesSettingsStore,
     docsConnectStore,
+    paymentStore,
+    currentTariffStatusStore,
   }: TStore) => {
     const { logoText, walletHelpUrl } = settingsStore;
     const { user } = userStore;
     const { openOnNewPage } = filesSettingsStore;
 
     return {
+      isPayer: paymentStore.isPayer,
+      isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
+      isPayerInfoLoaded: currentTariffStatusStore.isPayerInfoLoaded,
+      currentDeviceType: settingsStore.currentDeviceType,
       logoText,
       walletHelpUrl,
       openOnNewPage,
@@ -143,3 +185,4 @@ export const Component = inject(
     };
   },
 )(observer(BillingWrapperComponent));
+

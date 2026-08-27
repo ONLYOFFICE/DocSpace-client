@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardIntegrations",
+  "content": "Already working in another platform? Connect it here and keep the editors you have just seen, right inside the tools your team already uses — no custom code and nothing to move over.",
+  "content_en_sha1_hash": "26910020d4be4b85bc61a56a819e1c8f7f0bd4c1",
+  "created_at": "2026-08-07T00:00:00.000Z",
+  "updated_at": "2026-08-12T11:00:51.485Z",
+  "comment": {
+    "text": "Description text for an onboarding tour step about the integrations card on the dashboard: the editors can be connected to a platform the team already uses, with no custom code and no data migration.",
+    "is_auto": false,
+    "updated_at": "2026-08-07T00:00:00.000Z",
+    "model": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
+      "line_number": 181,
+      "context": "// user may already be running, without moving anything into this one.\n hasIntegrations &&\n elementStep(\n INTEGRATIONS_SELECTOR,\n t(\"DashboardTour:DashboardIntegrationsTitle\"),\n t(\"DashboardTour:DashboardIntegrations\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 5. The developer tools, which is the one card on the page whose audience",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

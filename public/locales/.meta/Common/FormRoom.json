@@ -1,11 +1,11 @@
 {
   "key_path": "FormRoom",
-  "content": "Form room",
-  "content_en_sha1_hash": "d52d36abd86c722b352cf2a1f855ae5a1408dd21",
+  "content": "Form space",
+  "content_en_sha1_hash": "2af4816ae230a7824763f4d460131bf0855a5be4",
   "created_at": "2025-05-19T21:30:45.520Z",
-  "updated_at": "2026-07-27T13:07:50.683Z",
+  "updated_at": "2026-08-19T13:26:37.718Z",
   "comment": {
-    "text": "This is a short label identifying a specific type of room within the application, used in filters and room type displays.",
+    "text": "This is a short label identifying a specific type of space within the application, used in filters and type displays.",
     "is_auto": true,
     "updated_at": "2026-04-11T20:52:02.310Z",
     "model": "google/gemini-2.5-flash"
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 340,
+      "line_number": 336,
       "context": "return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");\n \n case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.AIRoom}`:\n return \"AI Room\";\n \n case `room-${RoomsType.PublicRoom}`:",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Agent <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
   "content_en_sha1_hash": "59183043f5e7482f22944eecac72d5e38b0faf57",
   "created_at": "2025-11-03T12:10:31.580Z",
-  "updated_at": "2026-07-07T08:59:21.808Z",
+  "updated_at": "2026-08-17T17:23:21.763Z",
   "comment": {
     "text": "This is a history feed message indicating that an agent (a room or a person) has been renamed. It appears in the InfoPanel and includes the old name (`{{oldRoomTitle}}`) and the new name (`{{roomTitle}}`) of the agent.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 181,
+      "line_number": 192,
       "context": "case FeedActionKeys.AgentRenamed:\n return (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"AgentRenamed\"\n values={{\n oldRoomTitle: (feed.data as TFeedData).oldTitle,\n roomTitle: (feed.data as TFeedData).newTitle,\n }}\n components={{",
       "module": "/packages/client"
     },

@@ -72,7 +72,7 @@ interface AiServicesManagementProps {
   currentColorScheme?: SettingsStore["currentColorScheme"];
   fetchTreeFolders: TreeFoldersStore["fetchTreeFolders"];
   handleServiceQuota: (serviceName?: string) => Promise<unknown>;
-  fetchAiServiceBalance: () => Promise<void>;
+  standalone: boolean;
   defaultFolderType: SettingsStore["defaultFolderType"];
   updateDefaultFolderType: SettingsStore["updateDefaultFolderType"];
 }
@@ -90,7 +90,7 @@ const AiServicesManagementComponent = ({
   currentColorScheme,
   fetchTreeFolders,
   handleServiceQuota,
-  fetchAiServiceBalance,
+  standalone,
   defaultFolderType,
   updateDefaultFolderType,
 }: AiServicesManagementProps) => {
@@ -166,10 +166,10 @@ const AiServicesManagementComponent = ({
   const onSave = async () => {
     if (type === false) {
       try {
-        await Promise.all([
-          handleServiceQuota(AI_ENUM),
-          fetchAiServiceBalance(),
-        ]);
+        // The AI service quota lives in the SaaS wallet/billing API, which
+        // does not exist on standalone portals - skip the request there and
+        // go straight to the confirmation dialog.
+        if (!standalone) await handleServiceQuota(AI_ENUM);
         setShowDisableDialog(true);
       } catch (e) {
         toastr.error(e as string);
@@ -320,11 +320,12 @@ export const AiServicesManagement = inject<TStore>(
       aiServicesManagementUrl,
       defaultFolderType,
       updateDefaultFolderType,
+      standalone,
     } = settingsStore;
     const { isLoaded, initSettings, setIsLoadedAiServicesManagement } = common;
     const { fetchTreeFolders } = treeFoldersStore;
     const { handleServiceQuota } = paymentStore;
-    const { fetchAiServiceBalance } = servicesStore;
+
     const isMobileView = deviceType === DeviceType.mobile;
     return {
       isMobileView,
@@ -340,7 +341,7 @@ export const AiServicesManagement = inject<TStore>(
       common,
       fetchTreeFolders,
       handleServiceQuota,
-      fetchAiServiceBalance,
+      standalone,
       defaultFolderType,
       updateDefaultFolderType,
     };

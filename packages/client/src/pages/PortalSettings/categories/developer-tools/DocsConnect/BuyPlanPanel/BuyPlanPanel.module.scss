@@ -47,15 +47,6 @@
   --payment-backgroud-color-warning: var(--dev-tools-card-bg);
 }
 
-.scheduledNote {
-  margin-top: auto;
-  --text-size: 12px;
-}
-
-.bodyScheduled {
-  padding-bottom: 4px;
-}
-
 .footerHint {
   color: var(--text-color);
   margin-bottom: 8px;
@@ -231,6 +222,14 @@
 
 .creditValue {
   color: var(--dev-tools-status-positive);
+}
+
+.tooltipAmount {
+  margin: 12px 0;
+}
+
+.uponRequestNote {
+  color: var(--text-color);
 }
 
 .summaryDivider {

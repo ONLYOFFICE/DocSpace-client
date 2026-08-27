@@ -47,9 +47,36 @@ export const PAYMENT_ROUTES = {
   backup: `/billing/addons/backup`,
   diskStorage: `/billing/addons/disk-storage`,
   docsConnect: `/billing/addons/docs-connect`,
+  paymentMethod: `/billing/payment-method`,
   wallet: `/portal-settings/payments/wallet`,
   usage: `/portal-settings/payments/usage`,
 } as const;
+
+/**
+ * Title of the billing page the pathname points at. Shared by the section
+ * header and the browser document title so they never diverge.
+ */
+export const getBillingPageTitle = (
+  pathname: string,
+  t: (key: string) => string,
+): string => {
+  if (pathname.includes("/billing/wallet")) return t("Common:Wallet");
+  if (pathname.includes("/billing/tariff-plan")) return t("Common:TariffPlan");
+  if (pathname.includes("/billing/payment-method"))
+    return t("Common:PaymentMethod");
+  if (pathname.includes("/billing/usage")) return t("Common:Usage");
+  if (pathname.includes("/billing/addons/ai-services"))
+    return t("Common:AIFeatures");
+  if (pathname.includes("/billing/addons/ai-search"))
+    return t("Common:AISearch");
+  if (pathname.includes("/billing/addons/backup")) return t("Common:Backup");
+  if (pathname.includes("/billing/addons/disk-storage"))
+    return t("Common:Storage");
+  if (pathname.includes("/billing/addons/docs-connect"))
+    return t("DocsConnect:DocsConnect");
+  if (pathname.includes("/billing/addons")) return t("Common:Addons");
+  return t("Common:Billing");
+};
 
 export function getTwoDotsReplacing(translation: string) {
   const newTranslation = translation;

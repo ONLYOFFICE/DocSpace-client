@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
+import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -43,12 +43,11 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
-import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
+import { getDocsConnectScheduleFlags } from "@docspace/ui-kit/billing/utils/docs-connect";
 import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
 
-import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
 import AlertIcon from "@docspace/ui-kit/assets/plugin.incompatible.react.svg";
 
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
@@ -56,14 +55,20 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
 
-import { formatDocsConnectDate, getDocsConnectTrialState } from "../utils";
+import { useReportPageLeft } from "SRC_DIR/Hooks/useReportPageLeft";
+import { ReportType } from "SRC_DIR/store/DocumentBuilderReportStore";
+import { IntegrationsCard } from "SRC_DIR/components/IntegrationsCard";
+
+import {
+  formatDocsConnectDate,
+  getDocsConnectPricePerUser,
+  getDocsConnectTrialState,
+} from "../utils";
 
 import InfoField from "./sub-components/InfoField";
 import UsageBlock from "./sub-components/UsageBlock";
 
 import styles from "./TenantPanel.module.scss";
-
-type Connector = { key: string; label: string; url?: string };
 
 interface StatisticsProps {
   info?: TDocsConnectInfo;
@@ -72,15 +77,7 @@ interface StatisticsProps {
   cancelScheduledChange?: () => Promise<void>;
   copyToClipboard?: (value: string, t: TTranslation) => void;
   downloadReport?: () => void;
-  markReportPageLeft?: () => void;
   isReportGenerating?: boolean;
-  nextcloudUrl?: string;
-  owncloudUrl?: string;
-  confluenceUrl?: string;
-  alfrescoUrl?: string;
-  moodleUrl?: string;
-  odooUrl?: string;
-  allConnectorsUrl?: string;
 }
 
 const Statistics = ({
@@ -90,27 +87,16 @@ const Statistics = ({
   cancelScheduledChange,
   copyToClipboard,
   downloadReport,
-  markReportPageLeft,
   isReportGenerating,
-  nextcloudUrl,
-  owncloudUrl,
-  confluenceUrl,
-  alfrescoUrl,
-  moodleUrl,
-  odooUrl,
-  allConnectorsUrl,
 }: StatisticsProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
+  const [isCancelChangeLoading, setIsCancelChangeLoading] = useState(false);
 
-  useEffect(() => {
-    return () => {
-      markReportPageLeft?.();
-    };
-  }, [markReportPageLeft]);
+  useReportPageLeft(ReportType.DocsConnect);
 
   if (!info) return null;
 
-  const { tenant, config, tenantInfo, prices, wallet } = info;
+  const { tenant, config, tenantInfo, wallet } = info;
   const {
     isTrial,
     startDate: trialStart,
@@ -122,35 +108,96 @@ const Statistics = ({
   } = getDocsConnectTrialState(info);
   const trialLow = !expired && totalDays > 0 && daysLeft / totalDays < 0.5;
 
-  const connectors: Connector[] = [
-    { key: "nextcloud", label: "Nextcloud", url: nextcloudUrl },
-    { key: "owncloud", label: "ownCloud", url: owncloudUrl },
-    { key: "confluence", label: "Confluence", url: confluenceUrl },
-    { key: "alfresco", label: "Alfresco", url: alfrescoUrl },
-    { key: "moodle", label: "Moodle", url: moodleUrl },
-    { key: "seafile", label: "Seafile", url: allConnectorsUrl },
-    { key: "odoo", label: "Odoo", url: odooUrl },
-  ];
-
   const currency = wallet?.currency ?? "USD";
   const { devPackEnabled } = info;
-  const pricePerUser =
-    (prices?.pricePerUser ?? 0) +
-    (devPackEnabled ? (prices?.devPackPrice ?? 0) : 0);
+  const pricePerUser = getDocsConnectPricePerUser(info);
   const planUsers = tenant.payment?.quantity ?? 0;
   const monthlyCharge = planUsers * pricePerUser;
   const scheduledChange = isTrial ? null : (info.scheduledChange ?? null);
-  const isCancellation =
-    scheduledChange != null && scheduledChange.nextUsers === 0;
   const deactivated = !isTrial && (info.deactivated ?? false);
+
+  const nextDevPackEnabled =
+    scheduledChange?.nextDevPackEnabled ?? devPackEnabled;
+  const nextPricePerUser = getDocsConnectPricePerUser(info, nextDevPackEnabled);
+  const { isCancellation, devPackDisabling, usersAdjusting } =
+    getDocsConnectScheduleFlags({
+      hasSubscription: !isTrial,
+      currentUsers: planUsers,
+      scheduledUsers: scheduledChange?.nextUsers ?? null,
+      scheduledOnDevPack: scheduledChange?.scheduledOnDevPack ?? false,
+      nextDevPackEnabled,
+    });
+
+  const nextMonthlyPrice = formatCurrencyValue(
+    i18n.language,
+    (scheduledChange?.nextUsers ?? 0) * nextPricePerUser,
+    currency,
+    2,
+  );
+  const scheduledChangeDate = formatDateLocalized(
+    scheduledChange?.dueDate ?? "",
+    "DATE_MED",
+    { locale: i18n.language },
+  );
+
+  const getScheduledChangeTitle = () => {
+    if (isCancellation) return t("Common:SubscriptionCancellation");
+
+    if (devPackDisabling)
+      return usersAdjusting
+        ? t("Common:TariffUserAdjustmentDevPackDisableScheduledWithPrice", {
+            fromCount: planUsers,
+            toCount: scheduledChange?.nextUsers,
+            price: nextMonthlyPrice,
+          })
+        : t("Common:TariffDevPackDisableScheduledWithPrice", {
+            price: nextMonthlyPrice,
+          });
+
+    if (!usersAdjusting) return t("Common:ChangeShedule");
+
+    return t("Common:TariffUserAdjustmentScheduledWithPrice", {
+      fromCount: planUsers,
+      toCount: scheduledChange?.nextUsers,
+      price: nextMonthlyPrice,
+    });
+  };
+
+  const scheduledChangeTitle = getScheduledChangeTitle();
+
+  const getSubscriptionNote = () => {
+    if (!scheduledChange)
+      return t("Common:RenewsOnDate", {
+        date: formatDocsConnectDate(tenant.endDate),
+      });
+
+    if (isCancellation)
+      return t("DocsConnect:CancellationOn", { date: scheduledChangeDate });
+
+    if (devPackDisabling)
+      return t("Common:RenewsOnDate", { date: scheduledChangeDate });
+
+    return t("DocsConnect:RenewsOnWithUpdate", {
+      date: scheduledChangeDate,
+      price: nextMonthlyPrice,
+      count: scheduledChange.nextUsers,
+    });
+  };
+
+  const subscriptionNote = getSubscriptionNote();
 
   const onCopy = (value: string) => copyToClipboard?.(value, t);
 
   const onCancelChange = async () => {
+    if (isCancelChangeLoading) return;
+
+    setIsCancelChangeLoading(true);
     try {
       await cancelScheduledChange?.();
     } catch (e) {
       toastr.error(e as Error);
+    } finally {
+      setIsCancelChangeLoading(false);
     }
   };
 
@@ -239,9 +286,6 @@ const Statistics = ({
                     count: daysLeft,
                   })}
                 </Text>
-                <Text fontSize="12px" className={styles.muted}>
-                  {t("DocsConnect:TrialBannerDescriptionSecond")}
-                </Text>
               </>
             )}
           </div>
@@ -249,7 +293,7 @@ const Statistics = ({
             primary
             className={styles.bannerButton}
             size={ButtonSize.small}
-            label={t("Common:Upgrade")}
+            label={t("Common:Subscribe")}
             onClick={() => openBuyPlan?.("trial")}
             testId="docs_connect_trial_upgrade_button"
           />
@@ -258,39 +302,19 @@ const Statistics = ({
 
       {scheduledChange ? (
         <StorageWarning
-          title={
-            isCancellation
-              ? t("Common:SubscriptionCancellation")
-              : t("Common:TariffUserAdjustmentScheduledWithPrice", {
-                  fromCount: planUsers,
-                  toCount: scheduledChange.nextUsers,
-                  price: formatCurrencyValue(
-                    i18n.language,
-                    scheduledChange.nextUsers * pricePerUser,
-                    currency,
-                    2,
-                  ),
-                })
-          }
+          title={scheduledChangeTitle}
           body={
             isCancellation
               ? t("Common:PlanCancellationBillingPeriodNote", {
-                  date: formatDateLocalized(
-                    scheduledChange.dueDate,
-                    "DATE_MED",
-                    { locale: i18n.language },
-                  ),
+                  date: scheduledChangeDate,
                   service: t("DocsConnect:DocsConnect"),
                 })
               : t("Common:ScheduledChangeBillingPeriodNote", {
-                  date: formatDateLocalized(
-                    scheduledChange.dueDate,
-                    "DATE_MED",
-                    { locale: i18n.language },
-                  ),
+                  date: scheduledChangeDate,
                 })
           }
           onCancelChange={onCancelChange}
+          isCancelLoading={isCancelChangeLoading}
         />
       ) : null}
 
@@ -386,32 +410,7 @@ const Statistics = ({
                     fontWeight={400}
                     className={styles.tariffNote}
                   >
-                    {scheduledChange
-                      ? isCancellation
-                        ? t("DocsConnect:CancellationOn", {
-                            date: formatDateLocalized(
-                              scheduledChange.dueDate,
-                              "DATE_MED",
-                              { locale: i18n.language },
-                            ),
-                          })
-                        : t("DocsConnect:RenewsOnWithUpdate", {
-                            date: formatDateLocalized(
-                              scheduledChange.dueDate,
-                              "DATE_MED",
-                              { locale: i18n.language },
-                            ),
-                            price: formatCurrencyValue(
-                              i18n.language,
-                              scheduledChange.nextUsers * pricePerUser,
-                              currency,
-                              2,
-                            ),
-                            count: scheduledChange.nextUsers,
-                          })
-                      : t("Common:RenewsOnDate", {
-                          date: formatDocsConnectDate(tenant.endDate),
-                        })}
+                    {subscriptionNote}
                   </Text>
                 </Text>
               )}
@@ -567,63 +566,17 @@ const Statistics = ({
         ) : null}
       </div>
 
-      <CollapsibleCard
-        title={t("DocsConnect:IntegrationOptions")}
-        description={t("DocsConnect:IntegrationOptionsSubtitle")}
-        defaultOpen
-      >
-        <div className={styles.integrationsGrid}>
-          {connectors.map((connector) => (
-            <a
-              key={connector.key}
-              className={styles.integrationTile}
-              href={connector.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Text as="p" className={styles.integrationName}>
-                {connector.label}
-              </Text>
-              <span className={styles.integrationLink}>
-                {t("Common:Connect")}
-                <ArrowSvg aria-hidden className={styles.integrationArrow} />
-              </span>
-            </a>
-          ))}
-          <a
-            className={`${styles.integrationTile} ${styles.integrationTileMore}`}
-            href={allConnectorsUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Text as="p" className={styles.integrationName}>
-              {t("Common:PlusMore", { count: 20 })}
-            </Text>
-            <span className={styles.integrationLink}>
-              {t("Common:ViewAll")}
-              <ArrowSvg aria-hidden className={styles.integrationArrow} />
-            </span>
-          </a>
-        </div>
-      </CollapsibleCard>
+      <IntegrationsCard hideInstanceAction />
     </div>
   );
 };
 
-export default inject(({ docsConnectStore, settingsStore }: TStore) => ({
+export default inject(({ docsConnectStore }: TStore) => ({
   info: docsConnectStore.info,
   openBuyPlan: docsConnectStore.openBuyPlan,
   openRemoveSubscriptionDialog: docsConnectStore.openRemoveSubscriptionDialog,
   cancelScheduledChange: docsConnectStore.cancelScheduledChange,
   copyToClipboard: docsConnectStore.copyToClipboard,
   downloadReport: docsConnectStore.downloadReport,
-  markReportPageLeft: docsConnectStore.markReportPageLeft,
   isReportGenerating: docsConnectStore.isReportGenerating,
-  nextcloudUrl: settingsStore.nextcloudUrl,
-  owncloudUrl: settingsStore.owncloudUrl,
-  confluenceUrl: settingsStore.confluenceUrl,
-  alfrescoUrl: settingsStore.alfrescoUrl,
-  moodleUrl: settingsStore.moodleUrl,
-  odooUrl: settingsStore.odooUrl,
-  allConnectorsUrl: settingsStore.allConnectorsUrl,
 }))(observer(Statistics));

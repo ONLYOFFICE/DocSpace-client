@@ -40,12 +40,14 @@ import { useLocation, Link } from "react-router";
 
 import { DeviceType, PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
+import { hasDocsConnectAccess } from "@docspace/shared/utils/devToolsAccess";
 
 import { ArticleItem } from "@docspace/ui-kit/components/article/item";
 
 interface IDeveloperToolsItem {
   showText: boolean;
   identityServerEnabled: boolean;
+  canOpenDocsConnect: boolean;
   toggleArticleOpen: () => void;
   currentDeviceType: string;
 }
@@ -63,6 +65,7 @@ const items = [
     path: "/developer-tools/docs-connect",
     pageType: PageType.devToolsDocsConnect,
     translationKey: "DocsConnect:DocsConnect",
+    conditionalOnDocsConnect: true,
   },
   {
     id: "devtools-javascript-sdk",
@@ -100,6 +103,7 @@ const items = [
 const DeveloperToolsItems = ({
   showText,
   identityServerEnabled,
+  canOpenDocsConnect,
   toggleArticleOpen,
   currentDeviceType,
 }: IDeveloperToolsItem) => {
@@ -117,9 +121,11 @@ const DeveloperToolsItems = ({
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
-  const visibleItems = items.filter(
-    (item) => !item.conditionalOnOAuth || identityServerEnabled,
-  );
+  const visibleItems = items.filter((item) => {
+    if (item.conditionalOnOAuth && !identityServerEnabled) return false;
+    if (item.conditionalOnDocsConnect && !canOpenDocsConnect) return false;
+    return true;
+  });
 
   const onSelect = () => {
     if (isMobileView) {
@@ -159,7 +165,7 @@ const DeveloperToolsItems = ({
   );
 };
 
-export default inject(({ settingsStore, authStore }: TStore) => {
+export default inject(({ settingsStore, authStore, userStore }: TStore) => {
   const { showText, toggleArticleOpen, currentDeviceType } = settingsStore;
   const identityServerEnabled =
     authStore?.capabilities?.identityServerEnabled ?? false;
@@ -167,6 +173,12 @@ export default inject(({ settingsStore, authStore }: TStore) => {
   return {
     showText,
     identityServerEnabled,
+    // Docs Connect is SaaS-only and admin/owner-only - see
+    // `hasDocsConnectAccess`.
+    canOpenDocsConnect: hasDocsConnectAccess(
+      userStore?.user,
+      settingsStore?.standalone,
+    ),
     toggleArticleOpen,
     currentDeviceType,
   };

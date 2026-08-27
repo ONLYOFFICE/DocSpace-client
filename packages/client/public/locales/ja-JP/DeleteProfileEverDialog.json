@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndoneGuests": "選択された障害のあるゲストは、{{productName}}から削除されます。この操作は元に戻すことはできません。",
-  "ActionCannotBeUndoneUsers": "選択された無効なユーザーは{{productName}}から削除されます。この操作は取り消すことができません。",
+  "ActionCannotBeUndoneGuests": "選択された無効なゲストは、ワークスペースから削除されます。この操作は元に戻すことはできません。",
+  "ActionCannotBeUndoneUsers": "選択された無効なユーザーはワークスペースから削除されます。この操作は取り消すことができません。",
   "CannotReassignFiles": "複数のユーザーを一度に削除した場合、そのユーザーのファイルを他のユーザーに再割り当てすることはできません。",
   "DeleteGroupGuestsSuccessMessage": "ゲストは正常に削除されました。",
   "DeleteGroupUsersSuccessMessage": "ユーザーが正常に削除されました。",
@@ -12,7 +12,7 @@
   "DeleteUser": "ユーザーを削除します",
   "DeleteUserMessage": "{{userCaption}}<1>{{user}}</1>は削除されます。このアクションは元に戻せません。",
   "DeletingUsers": "ユーザーの削除",
-  "PersonalDataDeletionInfo": "選択したユーザーの個人データ、{{sectionNameFirst}} および {{sectionNameSecond}} セクション内のすべての個人ファイルとフォルダは完全に削除されます。ルームなどの共通セクションに保存されているユーザーのファイルとフォルダは {{productName}} に残ります。",
+  "PersonalDataDeletionInfo": "選択したユーザーの個人データ、{{sectionNameFirst}} および {{sectionNameSecond}} セクション内のすべての個人ファイルとフォルダは完全に削除されます。ルームなどの共通セクションに保存されているユーザーのファイルとフォルダは ワークスペース に残ります。",
   "PleaseNote": "ご注意ください：",
   "ReassignDataToAnotherUser": "データを別のユーザーに再割り当てする",
   "SuccessfullyDeleteGuestInfoMessage": "ゲストは正常に削除されました",

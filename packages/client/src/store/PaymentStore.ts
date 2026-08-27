@@ -66,8 +66,13 @@ import {
   TLicenseQuota,
 } from "@docspace/shared/api/portal/types";
 
-import { AI_ENUM, BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
+import {
+  AI_ENUM,
+  AI_SEARCH_ENUM,
+  BACKUP_SERVICE,
+} from "@docspace/ui-kit/billing/constants";
 import { applyServiceQuotaToMap } from "@docspace/ui-kit/billing/utils/parsers";
+import { formatCurrencyValue } from "@docspace/ui-kit/billing/utils/common";
 import {
   getCardLinkedOnFreeTariff,
   getCardLinkedOnNonProfit,
@@ -119,6 +124,14 @@ class PaymentStore {
     if (res) this.walletBalanceData = res;
     return this.walletBalance;
   };
+
+  formatWalletCurrency = (item: number | null = null, fractionDigits = 2) =>
+    formatCurrencyValue(
+      authStore.language ?? "en",
+      item ?? this.walletBalance,
+      this.walletCodeCurrency || "USD",
+      fractionDigits,
+    );
 
   salesEmail = "";
 
@@ -212,6 +225,10 @@ class PaymentStore {
     });
   }
 
+  get isStripeCheckoutRequired() {
+    return this.isCardMissingOrInactive;
+  }
+
   get storageSizeIncrement() {
     return (
       (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
@@ -240,6 +257,10 @@ class PaymentStore {
 
   get isAiToolsServiceOn() {
     return this.servicesQuotasFeatures.get(AI_ENUM)?.value;
+  }
+
+  get isAiSearchServiceOn() {
+    return this.servicesQuotasFeatures.get(AI_SEARCH_ENUM)?.value;
   }
 
   get isAIReady() {
@@ -277,6 +298,8 @@ class PaymentStore {
     }
     try {
       await setServiceState({ service: AI_ENUM, enabled: true });
+
+      await setServiceState({ service: AI_SEARCH_ENUM, enabled: true });
       await onSuccess?.();
     } catch (e) {
       if (feature) {

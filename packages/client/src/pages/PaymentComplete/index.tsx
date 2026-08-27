@@ -38,15 +38,19 @@ import { inject, observer } from "mobx-react";
 
 import { getBgPattern } from "@docspace/shared/utils/common";
 import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
-import AiPaywallCompletePage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage";
+import PaymentCompletePage from "@docspace/ui-kit/billing/payment-complete/PaymentCompletePage";
 
 import styles from "./PaymentComplete.module.scss";
 
 type PaymentCompleteProps = {
   currentColorScheme?: TColorScheme;
+  docsConnectUrl?: string;
 };
 
-const PaymentComplete = ({ currentColorScheme }: PaymentCompleteProps) => {
+const PaymentComplete = ({
+  currentColorScheme,
+  docsConnectUrl,
+}: PaymentCompleteProps) => {
   const bgPattern = getBgPattern(currentColorScheme?.id);
 
   return (
@@ -54,7 +58,7 @@ const PaymentComplete = ({ currentColorScheme }: PaymentCompleteProps) => {
       className={styles.wrapper}
       style={{ "--bg-pattern": bgPattern } as React.CSSProperties}
     >
-      <AiPaywallCompletePage />
+      <PaymentCompletePage docsConnectUrl={docsConnectUrl} />
     </div>
   );
 };
@@ -63,9 +67,13 @@ export const Component = inject(
   ({
     settingsStore,
   }: {
-    settingsStore: { currentColorScheme?: TColorScheme };
+    settingsStore: {
+      currentColorScheme?: TColorScheme;
+      docsConnectUrl?: string;
+    };
   }) => ({
     currentColorScheme: settingsStore.currentColorScheme,
+    docsConnectUrl: settingsStore.docsConnectUrl,
   }),
 )(observer(PaymentComplete));
 

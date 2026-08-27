@@ -1,20 +1,20 @@
 {
   "key_path": "AdministratorDescription",
-  "content": "{{productName}} configuration, room creation and administration, ability to invite and manage users in {{productName}} and in virtual rooms, ability to manage access rights.",
-  "content_en_sha1_hash": "fb75adc08ce94edbe31a57607ff6d19a3e2d996d",
-  "created_at": "2026-04-10T13:53:41.804Z",
-  "updated_at": "2026-07-03T11:08:02.938Z",
+  "content": "Workspace configuration, room creation and administration, ability to invite and manage users in the workspace and in virtual rooms, ability to manage access rights.",
+  "content_en_sha1_hash": "c2b25f75691b32beabfaf60f47cc963361c5e8f9",
+  "created_at": "2026-08-13T23:02:56.140Z",
+  "updated_at": "2026-08-14T15:16:32.415Z",
   "comment": {
-    "text": "This is a description of the Administrator role's permissions, appearing on a billing or user management page. It lists the administrative capabilities within the product, with `{{productName}}` being replaced by the product's brand name.",
+    "text": "Descriptive text in the billing/tariff section detailing the features and permissions of the Portal Administrator role.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:00:51.677Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:16:32.415Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
-      "line_number": 156,
-      "context": "{t(\"PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text>\n {t(\"AdministratorDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <br />\n <Text isBold>{t(\"RoomAdmin\")}</Text>",
+      "line_number": 153,
+      "context": "<br />\n <Text isBold>\n {t(\"PortalAdmin\")}\n </Text>\n <Text>\n {t(\"AdministratorDescription\")}\n </Text>\n <br />\n <Text isBold>{t(\"RoomAdmin\")}</Text>\n <Text>{t(\"RoomManagerDescription\")}</Text>\n </>",
       "module": "/libs/ui-kit"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Top up",
   "content_en_sha1_hash": "91d42a8b742abdae628f62177ef45374076d645e",
   "created_at": "2026-04-10T13:53:43.578Z",
-  "updated_at": "2026-07-27T13:07:51.042Z",
+  "updated_at": "2026-08-17T17:23:21.856Z",
   "comment": {
     "text": "This is a button label that allows users to add funds to their account or balance.",
     "is_auto": true,
@@ -13,26 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
-      "line_number": 124,
-      "context": "/>\n <div className={styles.cardButtons}>\n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n primary\n label={t(\"TopUp\")}\n onClick={() => setIsTopUpDialogVisible(true)}\n isDisabled={!canUpdateTariff || isNotPaidPeriod}\n className={styles.cardButton}\n testId=\"overview_top_up_button\"\n />",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 277,
-      "context": "</Text>\n </div>\n </div>\n <Button\n size={ButtonSize.small}\n label={t(\"Common:TopUp\")}\n onClick={() => setIsTopUpDialogVisible(true)}\n />\n </div>\n \n {isPaid && canceled ? (",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AiSimpleTopUpDialog.tsx",
-      "line_number": 251,
-      "context": "<ModalDialog.Footer>\n <div className={styles.footerButtons}>\n <Button\n key=\"OkButton\"\n label={t(\"TopUp\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onConfirm}\n isLoading={isLoading}",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
-      "line_number": 372,
-      "context": "{withoutFooter ? null : (\n <ModalDialog.Footer>\n <div className={styles.closeFooter}>\n <Button\n key=\"OkButton\"\n label={t(\"TopUp\")}\n size={ButtonSize.normal}\n primary\n scale\n isDisabled={false}\n onClick={onTopUpClick}",
+      "line_number": 145,
+      "context": "{isPayer ? (\n <div className={styles.cardButtons}>\n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n primary\n label={t(\"TopUp\")}\n onClick={() => setIsTopUpDialogVisible(true)}\n isDisabled={isNotPaidPeriod}\n className={styles.cardButton}\n testId=\"overview_top_up_button\"\n />",
       "module": "/libs/ui-kit"
     },
     {
@@ -55,7 +37,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 248,
+      "line_number": 256,
       "context": "<div className={styles.cardButtons}>\n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n primary\n label={t(\"TopUp\")}\n onClick={onOpen}\n isDisabled={!canUpdateTariff || isNotPaidPeriod}\n className={styles.cardButton}\n testId=\"top_up_balance_button\"\n />",
       "module": "/libs/ui-kit"
     }

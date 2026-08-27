@@ -8,8 +8,10 @@
   },
   "scripts": {
     "test": "vitest run",
-    "test:lefthook": "cross-env SKIP_BASE_LANGUAGES_TEST=true vitest run",
+    "test:lefthook": "cross-env SKIP_BASE_LANGUAGES_TEST=true SKIP_ALL_LANGUAGES_TEST=true vitest run",
     "test:only-base-languages": "vitest run locales.test.js --testNamePattern=\"NotTranslatedOnBaseLanguages\"",
+    "test:only-all-languages": "vitest run locales.test.js --testNamePattern=\"NotTranslatedOnAllLanguages\"",
+    "test:only-missing-keys": "vitest run locales.test.js --testNamePattern=\"NotTranslatedOnAllLanguages|MissingLocaleFilesTest\"",
     "test:skip-base-languages": "cross-env SKIP_BASE_LANGUAGES_TEST=true vitest run locales.test.js",
     "test:locales": "vitest run locales.test.js",
     "test:images": "vitest run images.test.js",
@@ -17,6 +19,7 @@
     "test:ascii": "vitest run ascii.test.js",
     "test:license": "vitest run license.test.js",
     "test:dependencies": "vitest run dependencies.test.js",
+    "test:indentation": "vitest run indentation.test.js",
     "open-report": "open-cli reports/tests-report.html"
   },
   "devDependencies": {
@@ -27,6 +30,8 @@
     "open-cli": "^9.0.0"
   },
   "overrides": {
-    "undici": "^7.28.0"
+    "undici": "^7.29.0",
+    "postcss": "^8.5.23",
+    "nanoid": "^3.3.18"
   }
 }

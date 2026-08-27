@@ -3,7 +3,7 @@
   "content": "Pay-as-you-go from Wallet",
   "content_en_sha1_hash": "c3ea58250046b344fca24746a953f9ab6c9d9f8b",
   "created_at": "2026-07-03T11:07:44.202Z",
-  "updated_at": "2026-07-03T11:09:17.496Z",
+  "updated_at": "2026-08-24T22:30:00.680Z",
   "comment": {
     "text": "A short label in the AI features banner describing a payment method where costs are deducted from the user's wallet balance.",
     "is_auto": true,
@@ -12,9 +12,15 @@
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-ai-benefits/index.tsx",
+      "line_number": 99,
+      "context": "</li>\n \n <li className={styles.item}>\n <WalletIcon className={styles.icon} />\n <Text as=\"span\" fontSize=\"12px\" fontWeight=\"600\" lineHeight=\"16px\">\n {t(\"PayAsYouGoFromWallet\")}\n </Text>\n </li>\n </ul>\n </div>\n );",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
-      "line_number": 133,
-      "context": "{openRouterPricingNote}\n </div>\n <div className={styles.featureRow}>\n <WalletIcon className={styles.payIcon} />\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"Common:PayAsYouGoFromWallet\")}\n </Text>\n </div>\n </>\n )}\n </div>",
+      "line_number": 267,
+      "context": "{pricingNote}\n </div>\n <div className={styles.featureRow}>\n <WalletIcon className={styles.payIcon} />\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"Common:PayAsYouGoFromWallet\")}\n </Text>\n </div>\n </>\n )}\n </div>",
       "module": "/packages/client"
     }
   ],

@@ -24,17 +24,115 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/ui-kit/styles/mixins";
 @use "@docspace/ui-kit/styles/variables/colors" as *;
+
+// Dashboard content + the AI chat panel side by side. The panel (ui-kit
+// `ChatPanel`, 400px, flex-shrink: 0) renders inline on desktop and as a
+// fixed full-screen overlay on tablet/mobile via its own CSS.
+.dashboardLayout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+// Tablet/mobile: the panel's own CSS switches it to `position: fixed; inset: 0`
+// (the full viewport), which would put its left edge under the article
+// sidebar. Pin it to the inline end instead and leave the sidebar edge
+// visible — same geometry as the Home page (see Home.module.scss).
+@include mixins.tablet-and-below {
+  .dashboardLayout :global(.chat-panel) {
+    inset-inline-start: auto;
+    max-width: calc(100vw - 69px);
+  }
+}
+
+@include mixins.mobile {
+  .dashboardLayout :global(.chat-panel) {
+    inset-inline-start: 0;
+    max-width: 100vw;
+  }
+}
+
+// Chat fullscreen: collapse the dashboard content (it stays mounted, marked
+// `inert` by the host) and let the panel fill the section, leaving the
+// article sidebar visible. Mirrors the Home page's `ai-fullscreen` layout
+// mode (see Home.module.scss).
+.dashboardLayout[data-layout-mode="ai-fullscreen"] {
+  .dashboard {
+    flex: 0 0 0;
+    min-width: 0;
+    width: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+
+  :global(.chat-panel) {
+    flex: 1 1 auto;
+    max-width: 100%;
+    border-inline-start: none;
+    z-index: 204;
+
+    @include mixins.not-mobile {
+      width: calc(100% - var(--ai-sidebar-width, 0px));
+    }
+  }
+}
+
+// Width of the article sidebar the fullscreen chat leaves visible. A copy of
+// the Home page's rules (Home.module.scss): they target the global
+// `.main-container`, but live in the lazily-loaded Home chunk, which is not
+// necessarily loaded when the dashboard is opened directly.
+@include mixins.not-mobile {
+  :global(.main-container) {
+    --ai-sidebar-width: 0px;
+  }
+
+  :global(.main-container):has(:global(#article-container)) {
+    --ai-sidebar-width: var(--article-desktop-width, 252px);
+  }
+
+  :global(.main-container):has(
+    :global(#article-container[data-show-text="false"])
+  ) {
+    --ai-sidebar-width: var(--article-tablet-width-collapsed, 60px);
+  }
+}
+
+@include mixins.tablet {
+  :global(.main-container):has(:global(#article-container)) {
+    --ai-sidebar-width: var(--article-tablet-width, 243px);
+  }
+}
 
 .dashboard {
   position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
   width: 100%;
   height: 100%;
+  // Scrolling is owned by the ui-kit Scrollbar inside (same thin auto-hiding
+  // thumb as Section bodies, with its own edge padding) — a native scrollbar
+  // here would sit flush against the chat panel border. The DashboardLoader
+  // shares this class without the inner Scrollbar, so keep the native
+  // fallback: it only engages when content actually overflows.
   overflow-y: auto;
   box-sizing: border-box;
 }
 
+// Sizes the inner Scrollbar holder; the custom scrollbar needs explicit
+// dimensions (it doesn't grow from content).
+.dashboardScrollbar {
+  width: 100%;
+  height: 100%;
+}
+
+// Query container for the grids inside: their column counts must react to the
+// space the dashboard content actually gets, not to the viewport — the AI chat
+// panel takes 400px out of the row without changing the viewport width.
 .dashboardInner {
+  container: dashboard-content / inline-size;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -44,11 +142,45 @@
   box-sizing: border-box;
 }
 
-// Plan header
+// Reopens the welcome modal (the dashboard tour). Sits at the far edge of the
+// header row, opposite the greeting.
+//
+// Hidden on mobile: the tours walk through desktop layouts (article sidebar,
+// table headers, info panel) that a phone either collapses or does not render,
+// so the entry point is left out where the walkthrough has nothing to point at.
+.helpButton {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-sizing: border-box;
+
+  &:hover {
+    background: var(--dropdown-item-hover-background-color);
+  }
+
+  @include mixins.mobile {
+    display: none;
+  }
+}
+
+// Plan header: greeting + plan line on the left, tour button pushed to the
+// opposite edge.
 .planHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.planHeaderText {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
 }
 
 .planTitle {
@@ -193,28 +325,87 @@
   margin: 0;
 }
 
+// Title plus its subtitle read as one block, so they sit closer to each other
+// than the section's own 20px gap to the content below.
+.sectionHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sectionSubtitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+
+  :global(.light) & {
+    color: $gray-text;
+  }
+
+  :global(.dark) & {
+    color: $gray-dark-text;
+  }
+}
+
+// The docs-connect link inherits the subtitle's size and weight so the two
+// sentences read as one line.
+.createSubtitleLink {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
 .sectionTitleLink {
   font-size: 16px;
   font-weight: 700;
   line-height: 22px;
 }
 
+// The create tiles fill the whole content width here instead of stopping at the
+// ui-kit tile cap (184px) — the dashboard has a fixed 1180px content column, so
+// capped tiles left a gap at the end of the row. Height is unchanged.
 .quickActions {
+  --quick-actions-tile-max-width: none;
+
   justify-content: flex-start;
 }
 
-// Modules grid
+// Modules grid. Breakpoints are on the `dashboard-content` container
+// (`.dashboardInner`), not the viewport, so opening the chat panel re-flows the
+// cards instead of squeezing four of them into the leftover width. The widths
+// are the old viewport breakpoints minus the article sidebar and the 40px of
+// inner padding.
 .modulesGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
+  // A column per card rather than a fixed four, so a row that has fewer cards
+  // than that stretches them to fill it instead of leaving an empty column -
+  // the quick actions above lay themselves out the same way. The count comes
+  // from `modulesGridStyle` (../utils) and is capped there; the narrower widths
+  // below override it with their own.
+  grid-template-columns: repeat(var(--modules-columns, 4), minmax(0, 1fr));
+  gap: 16px;
 
-  @media (max-width: 1100px) {
+  @container dashboard-content (max-width: 900px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    // An odd number of cards leaves the last one alone on its row; it takes the
+    // whole width rather than half of it, which is what the quick actions' own
+    // partial last row does. `:last-child:nth-child(odd)` is exactly "alone on
+    // the last row" for a two-column grid - the wider layout above needs no
+    // counterpart, since it gives every card a column of its own.
+    > :last-child:nth-child(odd) {
+      grid-column: span 2;
+    }
   }
 
-  @media (max-width: 600px) {
+  @container dashboard-content (max-width: 460px) {
     grid-template-columns: 1fr;
+
+    // One column: nothing to span, and spanning two would conjure an implicit
+    // second one.
+    > :last-child:nth-child(odd) {
+      grid-column: auto;
+    }
   }
 }
 
@@ -225,37 +416,15 @@
   padding: 16px;
   border-radius: 12px;
   background: transparent;
-  cursor: pointer;
   text-align: start;
-  font: inherit;
   color: inherit;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease;
 
   :global(.light) & {
     border: 1px solid $gray-light-mid;
-
-    &:hover {
-      background-color: $gray-light;
-    }
   }
 
   :global(.dark) & {
     border: 1px solid $light-dark-gray-hover;
-
-    &:hover {
-      background-color: $dark-gray-light;
-    }
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
   }
 }
 
@@ -263,6 +432,66 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.moduleInstalledBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  white-space: nowrap;
+
+  :global(.light) & {
+    background-color: $gray-light;
+    color: $light-gray-dark;
+  }
+
+  :global(.dark) & {
+    background-color: $dark-gray-light;
+    color: $gray-dark;
+  }
+
+  svg {
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+  }
+}
+
+// Action row, pinned to the bottom of the card so buttons line up across a row
+// of cards whose descriptions differ in length (`margin-block-start: auto`
+// needs the description above not to grow, hence the `flex: 1` there).
+.moduleFooter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-block-start: auto;
+}
+
+// Per-app tour entry point. Hidden on mobile for the same reason as
+// `.helpButton` above — the section tours target desktop-only chrome.
+.moduleTourButton {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-sizing: border-box;
+
+  &:hover {
+    background: var(--dropdown-item-hover-background-color);
+  }
+
+  @include mixins.mobile {
+    display: none;
+  }
 }
 
 .moduleIcon {
@@ -285,13 +514,15 @@
   svg {
     width: 16px;
     height: 16px;
-  }
 
-  &[data-installed="true"] {
-    background-color: color-mix(in srgb, var(--accent-main) 15%, transparent);
+    path {
+      :global(.light) & {
+        fill: $light-gray-dark;
+      }
 
-    svg path {
-      fill: var(--accent-main);
+      :global(.dark) & {
+        fill: $dark-gray-dark;
+      }
     }
   }
 }
@@ -310,6 +541,7 @@
   font-weight: 400;
   line-height: 16px;
   margin: 0;
+  flex: 1;
 
   :global(.light) & {
     color: $light-gray-dark;
@@ -320,105 +552,14 @@
   }
 }
 
-// Integrations grid (inside CollapsibleCard)
-.integrationsGrid {
+.devToolsGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 
-  @media (max-width: 1100px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.integrationTile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 20px;
-  border-radius: 12px;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-
-  :global(.light) & {
-    background-color: $white;
-    border: 1px solid $gray-light-mid;
-
-    &:hover {
-      border-color: var(--accent-main);
-    }
-  }
-
-  :global(.dark) & {
-    background-color: $dark-gray-light;
-    border: 1px solid $light-dark-gray-hover;
-
-    &:hover {
-      border-color: var(--accent-main);
-    }
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--accent-main);
-    outline-offset: -2px;
-  }
-}
-
-.integrationTileMore {
-  :global(.light) & {
-    background-color: $gray-light;
-  }
-
-  :global(.dark) & {
-    background-color: $gray-dark-mid;
-  }
-}
-
-.integrationName {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 16px;
-  margin: 0;
-}
-
-.integrationLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 15px;
-  color: var(--accent-main);
-  text-decoration: underline;
-}
-
-.integrationArrow {
-  width: 8px;
-  height: 9px;
-  flex-shrink: 0;
-
-  path {
-    fill: var(--accent-main);
-  }
-}
-
-// Dev tools grid (inside CollapsibleCard)
-.devToolsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
 
   @media (max-width: 900px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -499,6 +640,18 @@
   }
 }
 
+// Trailing arrow inside `.devToolLink`, matching the one on the integration
+// tiles (see components/IntegrationsCard).
+.devToolArrow {
+  width: 8px;
+  height: 9px;
+  flex-shrink: 0;
+
+  path {
+    fill: var(--accent-main);
+  }
+}
+
 .devToolLink {
   display: inline-flex;
   align-items: center;
@@ -512,9 +665,9 @@
   padding-top: 12px;
 }
 
-// Tooltip shown to guests over disabled create/upload actions: bold title,
-// then the explanation below with a gap.
-.guestRestrictionTooltip {
+// Two-line tooltip body — bold reason, then what to do about it. Used by the
+// guest create/upload restriction tooltip on the Overview.
+.restrictionTooltip {
   display: flex;
   flex-direction: column;
 }
@@ -541,6 +694,19 @@
   display: flex;
   align-items: center;
   gap: 12px;
+
+  // Pushes the "Installed" chip placeholder to the end of the row, matching the
+  // real header where the title takes the slack.
+  > :last-child {
+    margin-inline-start: auto;
+  }
+}
+
+.loaderModuleFooter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-block-start: auto;
 }
 
 .loaderCollapsibleCard {

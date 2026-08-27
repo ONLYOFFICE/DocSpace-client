@@ -3,7 +3,7 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2026-07-28T07:30:59.889Z",
+  "updated_at": "2026-08-19T13:26:37.679Z",
   "comment": {
     "text": "Button label. Navigates the user to the previous screen or step in a process.",
     "is_auto": true,
@@ -24,6 +24,12 @@
       "module": "/libs/ui-kit"
     },
     {
+      "file_path": "/packages/client/src/components/Tour/useTour.ts",
+      "line_number": 177,
+      "context": "skipScroll: true,\n zIndex: 10000,\n ...JOYRIDE_TIMEOUTS,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n },\n });",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/index.tsx",
       "line_number": 123,
       "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={handleStepIncrement}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n showReminder\n displaySettings\n saveButtonDisabled={areCheckedUsersEmpty}\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}",
@@ -31,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 306,
+      "line_number": 305,
       "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={incrementStep}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />",
       "module": "/packages/client"
     },
@@ -67,7 +73,7 @@
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
-      "line_number": 107,
+      "line_number": 106,
       "context": "<Text\n fontWeight={600}\n onClick={onClickBack}\n dataTestId=\"email_invitation_back_text\"\n >\n {t(\"Common:Back\")}\n </Text>\n </div>\n <Text fontWeight={600} fontSize=\"16px\">\n {t(\"Common:LoginButton\")}\n </Text>",
       "module": "/packages/login"
     },
@@ -82,12 +88,6 @@
       "line_number": 144,
       "context": "zIndex: 10000,\n beforeTimeout: 15000,\n targetWaitTimeout: 15000,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },",
       "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/shared/components/guidance/sub-components/Guid.tsx",
-      "line_number": 396,
-      "context": "<div className=\"button-container\">\n {currentStep !== 0 ? (\n <Button\n id=\"form-filling_tips_back\"\n key=\"TipsBack\"\n label={t(\"Common:Back\")}\n size={ButtonSize.extraSmall}\n onClick={onPrev}\n />\n ) : null}\n <Button",
-      "module": "/packages/shared"
     }
   ],
   "languages": {

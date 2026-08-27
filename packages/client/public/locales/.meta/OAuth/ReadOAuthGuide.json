@@ -1,0 +1,35 @@
+{
+  "key_path": "ReadOAuthGuide",
+  "content": "Read the OAuth 2.0 guide",
+  "content_en_sha1_hash": "aabdf8493aa44d6ded2e3a67f261a825242d6bb5",
+  "created_at": "2026-08-26T16:05:57.291Z",
+  "updated_at": "2026-08-26T16:11:07.234Z",
+  "comment": {
+    "text": "Hyperlink text in the OAuth settings section that directs users to the OAuth 2.0 documentation.",
+    "is_auto": true,
+    "updated_at": "2026-08-26T16:11:07.234Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/EmptyScreen.tsx",
+      "line_number": 103,
+      "context": "tag=\"a\"\n style={{ marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:ReadOAuthGuide\")}\n </Link>\n ) : null}\n </p>\n \n <RegisterNewButton />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/index.tsx",
+      "line_number": 111,
+      "context": "tag=\"a\"\n style={isError ? undefined : { marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:ReadOAuthGuide\")}\n </Link>\n ) : null}\n \n {isError ? (\n <EmptyServerErrorContainer />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

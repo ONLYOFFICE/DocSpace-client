@@ -3,7 +3,7 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2026-07-27T13:07:50.639Z",
+  "updated_at": "2026-08-26T14:08:32.993Z",
   "comment": {
     "text": "This is a button label or dialog title. It appears on buttons that create a new room, or as the title of a dialog for creating a room.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 324,
-      "context": "const isTemplate = !roomParams.type && !isTemplateSelected;\n \n const dialogHeader = !roomParams.type\n ? t(\"ChooseRoomType\")\n : t(\"Common:CreateRoom\");\n \n return (\n <>\n <ConfirmationModal\n visible={keyConfirmVisible}",
+      "line_number": 345,
+      "context": "const dialogHeader = !roomParams.type\n ? chooseTypeHeader\n : roomParams.type === RoomsType.FormRoom\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\");\n \n return (\n <>\n <ConfirmationModal\n visible={keyConfirmVisible}",
       "module": "/packages/client"
     },
     {
@@ -24,33 +24,33 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/SharePDFFormDialog/SharePDFFormDialog.tsx",
-      "line_number": 109,
-      "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:CreateRoom\")}\n onClick={onSubmit}\n />\n <Button\n scale\n tabIndex={0}",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/CreationBlock.js",
       "line_number": 82,
       "context": "</>\n </Row>\n \n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"Common:CreateRoom\")}</Text>\n <Text {...keyTextStyles}>Shift + r</Text>\n </>\n </Row>\n \n <Row className={styles.hotkeysRow}>",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 168,
+      "context": "installed: true,\n href: \"/rooms/shared/filter\",\n ...createOrOpen(\n canCreateRooms,\n \"/rooms/shared/filter\",\n t(\"Common:CreateRoom\"),\n // No preset type: the dialog opens on its room-type chooser.\n withQuotaCheck(() => dispatchCreateRoom()),\n ),\n },\n {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
-      "line_number": 253,
-      "context": "className={styles.roomTemplateText}\n >\n {t(\"Files:RoomTemplateDescription\")}\n </Text>\n <Button\n label={t(\"Common:CreateRoom\")}\n className={styles.roomTemplateButton}\n onClick={onCreateRoom}\n size={ButtonSize.extraSmall}\n primary\n testId=\"info_panel_details_create_room_button\"",
+      "line_number": 259,
+      "context": "</Text>\n <Button\n label={\n isFormSpaceTemplate\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\")\n }\n className={styles.roomTemplateButton}\n onClick={onCreateRoom}\n size={ButtonSize.extraSmall}\n primary",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 554,
-      "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
+      "line_number": 550,
+      "context": "{\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: isFormSpace\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 554,
-      "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
+      "line_number": 550,
+      "context": "{\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: isFormSpace\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 294,
+      "line_number": 290,
       "context": "case \"create-room\":\n if (!this.isAvailableOption(\"create-room\")) return null;\n return {\n id: \"menu-create-room\",\n label: t(\"Common:CreateRoom\"),\n onClick: this.onClickCreateRoom,\n iconUrl: CatalogRoomsReactSvgUrl,\n };\n \n case \"download\":",
       "module": "/packages/client"
     },
@@ -73,13 +73,13 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 621,
+      "line_number": 626,
       "context": "styles.iconBadge,\n \"badge tablet-row-create-room icons-group  tablet-badge\",\n )}\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n title={t(\"Common:CreateRoom\")}\n hoverColor=\"accent\"\n />\n ) : null}\n {showNew && !isTile ? newFilesBadge : null}\n {showNew && isTile && isRoom ? (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 261,
+      "line_number": 265,
       "context": "className=\"badge create-room icons-group\"\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CreateRoom\")}\n />\n ) : null}\n {showCopyLinkIcon ? (\n <IconButton\n iconName={TabletLinkReactSvgUrl}",
       "module": "/packages/shared"
     }

@@ -107,6 +107,10 @@
 	);
 }
 
+.root[data-no-filter] {
+	--section-filter-height: 0px;
+}
+
 .quickActions {
 	margin: 4px auto 16px;
 	justify-content: center;

@@ -3,7 +3,7 @@
   "content": "Payment method saved",
   "content_en_sha1_hash": "d555ea1360e8db121e1b4d53478b3103ae4c3527",
   "created_at": "2026-06-02T15:02:53.809Z",
-  "updated_at": "2026-07-27T13:07:51.057Z",
+  "updated_at": "2026-08-13T14:37:21.815Z",
   "comment": {
     "text": "A step label in a sequence of completed actions on the AI paywall completion page, appearing after a user successfully saves a payment method.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 316,
-      "context": "</Text>\n </span>\n ) : null;\n \n const steps: { key: string; label: React.ReactNode }[] = [\n { key: \"card\", label: t(\"WalletTopUpStepCardSaved\") },\n {\n key: \"topup\",\n label: t(\"WalletTopUpCallbackStep\", { price: formattedAmount }),\n },\n ...(tariffStep",
+      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
+      "line_number": 96,
+      "context": "const steps: {\n key: string;\n label: React.ReactNode;\n doneLabel?: React.ReactNode;\n }[] = [\n { key: \"card\", label: t(\"WalletTopUpStepCardSaved\") },\n {\n key: \"topup\",\n label: t(\"WalletTopUpCallbackStep\", { price: topUpPrice }),\n doneLabel: t(\"WalletTopUpCallbackStepDone\", { price: topUpPrice }),\n },",
       "module": "/libs/ui-kit"
     }
   ],

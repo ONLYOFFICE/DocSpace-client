@@ -3,7 +3,7 @@
   "content": "Active add-ons",
   "content_en_sha1_hash": "fafb3481ec85e31a0233466c4bb549c36b70a5f9",
   "created_at": "2026-07-07T08:58:32.920Z",
-  "updated_at": "2026-07-07T09:03:56.706Z",
+  "updated_at": "2026-08-14T14:58:32.934Z",
   "comment": {
     "text": "Card header label in the billing overview section used to identify currently enabled add-ons.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/overview/sub-components/ActiveAddons.tsx",
-      "line_number": 78,
-      "context": "return (\n <div className={styles.card}>\n <div className={styles.cardHeader}>\n <Text fontSize=\"16px\" fontWeight={600}>\n {t(\"ActiveAddons\")}\n </Text>\n {onManageAddons ? (\n <Link\n onClick={onManageAddons}\n textDecoration=\"underline\"",
+      "line_number": 72,
+      "context": "return (\n <div className={styles.card}>\n <div className={styles.cardHeader}>\n <Text fontSize=\"14px\" fontWeight={700}>\n {t(\"ActiveAddons\")}\n </Text>\n {onManageAddons ? (\n <Link\n onClick={onManageAddons}\n textDecoration=\"underline\"",
       "module": "/libs/ui-kit"
     }
   ],

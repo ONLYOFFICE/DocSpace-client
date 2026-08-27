@@ -43,6 +43,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 
+import { useTurnOffModelConfirmation } from "../TurnOffModelDialog";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import styles from "./ModelSettingsTable.module.scss";
@@ -75,10 +76,18 @@ const TableView = (props: ModelSettingsTableViewProps) => {
 
   const { t } = useTranslation(["Common"]);
 
-  const models = aiToolsPrices?.chat ?? [];
+  const models = [
+    ...(aiToolsPrices?.chat ?? []),
+    ...(aiToolsPrices?.image ?? []),
+  ];
 
-  const onToggle = async (modelId: string, enabled: boolean) => {
-    await setAiModelAvailability?.(modelId, enabled);
+  const { requestToggle, turnOffModelDialog } =
+    useTurnOffModelConfirmation(setAiModelAvailability);
+
+  const onToggle = (modelId: string, enabled: boolean) => {
+    const model = models.find((m) => m.id === modelId);
+
+    requestToggle({ id: modelId, title: model?.alias ?? modelId }, enabled);
   };
 
   const ref = useRef<HTMLDivElement>(null);
@@ -118,8 +127,18 @@ const TableView = (props: ModelSettingsTableViewProps) => {
               key={m.id}
               modelId={m.id}
               title={m.alias}
-              inputPrice={formatAiModelsCurrency?.(m.price.prompt) ?? ""}
-              outputPrice={formatAiModelsCurrency?.(m.price.completion) ?? ""}
+              inputPrice={
+                m.price?.prompt != null
+                  ? (formatAiModelsCurrency?.(m.price.prompt) ?? "")
+                  : ""
+              }
+              outputPrice={(() => {
+                const outputValue = m.price?.completion;
+
+                return outputValue != null
+                  ? (formatAiModelsCurrency?.(outputValue) ?? "")
+                  : "";
+              })()}
               enabled={aiModelAvailabilityMap?.get(m.id) ?? true}
               isUpdating={aiModelAvailabilityUpdatingSet?.has(m.id) ?? false}
               onToggle={onToggle}
@@ -129,6 +148,8 @@ const TableView = (props: ModelSettingsTableViewProps) => {
           ))}
         </TableBody>
       </TableContainer>
+
+      {turnOffModelDialog}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Fshini shtojcën",
-  "DeletePluginDescription": "Kjo shtojcë nuk do të jetë më e disponueshme për përdoruesit e {{productName}}. Je i sigurt që dëshiron të vazhdosh?",
+  "DeletePluginDescription": "Kjo shtojcë nuk do të jetë më e disponueshme për përdoruesit e hapësirës së punës. Je i sigurt që dëshiron të vazhdosh?",
   "DeletePluginTitle": "Fshini shtojcën?",
   "ExpandFunctionality": "Zgjeroni funksionalitetin duke përdorur Plugin SDK",
   "GoToRepo": "Shkoni te depoja",
@@ -10,11 +10,11 @@
   "NotNeedSettings": "Not need enter settings",
   "PluginCacheWarningDescription": "Pluginët ruhen në memorje bazuar në numrin e versionit të tyre. Për të siguruar që ndryshimet tuaja të aplikohen, ju lutemi rrisni numrin e versionit në file-in tuaj <1>package.json</1> para ngarkimit. Sistemi nuk do të përditësojë një plugin nëse versioni mbetet i njëjtë.",
   "PluginDeletedSuccessfully": "Plugin u fshi me sukses",
-  "PluginIsNotCompatible": "Versioni i SDK-së së shtojcës nuk përputhet me versionin e {{productName}}. Ju lutemi, përditësoni në një version të përputhshëm.",
+  "PluginIsNotCompatible": "Versioni i SDK-së së shtojcës nuk përputhet me versionin e {{organizationName}} {{productName}}. Ju lutemi, përditësoni në një version të përputhshëm.",
   "PluginLoadedSuccessfully": "Shtojca u ngarkua me sukses",
   "PluginSamples": "Mostrat e shtojcave",
   "PluginSDK": "Shtojca SDK",
-  "PluginSDKDescription": "Duke përdorur Plugin SDK, mund të zgjeroni funksionalitetin tuaj të {{productName}}, të lidhni shërbimet e palëve të treta ose të përmirësoni përvojën ekzistuese të përdoruesit. Këtu mund të gjeni mostrat e shtojcave me burim kodi të disponueshëm në GitHub.",
-  "PluginSDKInstruction": "Klikoni butonin për udhëzime të hollësishme se si të krijoni shtojcat tuaja.",
-  "UploadDescription": "Mund të shtoni shtojca për të zgjeruar funksionalitetin e {{productName}} me veçori shtesë. Klikoni Ngarkoni shtojcën ose hidhni skedarin në arkivin ZIP."
+  "PluginSDKDescription": "Përdorni Shtojca SDK për të shtuar funksionalitete të reja, për të lidhur shërbime të palëve të treta ose për të përmirësuar përvojën ekzistuese. Shfletoni shtojcat e shembullit më poshtë, me kodin burimor të disponueshëm në GitHub. Shkoni te faqja <1>Shtojcat</1> për t'i aktivizuar për hapësirën tuaj të punës.",
+  "PluginSDKInstruction": "<1>Lexoni udhëzimet</1> për të ndërtuar shtojcat tuaja.",
+  "UploadDescription": "Mund të shtoni shtojca për të zgjeruar funksionalitetin e hapësirës së punës me veçori shtesë. Klikoni Ngarkoni shtojcën ose hidhni skedarin në arkivin ZIP."
 }

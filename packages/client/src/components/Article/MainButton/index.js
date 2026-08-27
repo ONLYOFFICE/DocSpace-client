@@ -43,7 +43,7 @@ import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url"
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
-import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
+import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.template.react.svg?url";
 // import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 // import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 // import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
@@ -84,7 +84,6 @@ import ActivateAIDialog from "../../dialogs/ActivateAIDialog";
 import ClientSimpleTopUpDialog from "../../EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 
 import styles from "./main-button.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ArticleMainButtonContent = (props) => {
   const {
@@ -144,7 +143,6 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     contactsTab,
-    setRefMap,
     setTemplateGalleryVisible,
     templateGalleryAvailable,
 
@@ -158,6 +156,7 @@ const ArticleMainButtonContent = (props) => {
     aiConfig,
     isGracePeriod,
 
+    standalone,
     isAIReady,
     isCardLinkedToPortal,
     enableAIService,
@@ -287,13 +286,18 @@ const ArticleMainButtonContent = (props) => {
   }, [isCardLinkedToPortal, enableAIService, onAIActivated, currentFolderId]);
 
   const onMainButtonAgentClick = React.useCallback(() => {
-    if (showActivateAIDialog) {
+    // The activation dialog offers a SaaS service to switch on and a wallet to
+    // top up, neither of which a standalone portal has. There the create-agent
+    // event decides instead (GlobalEvents): it reads readiness from the chat
+    // profiles rather than the lagging /ai/config flag, and sends a portal
+    // admin to the AI settings while telling everyone else to ask one.
+    if (showActivateAIDialog && !standalone) {
       setAiFeaturesDialogVisible(true);
       return;
     }
 
     onCreateAgent();
-  }, [showActivateAIDialog, onCreateAgent]);
+  }, [showActivateAIDialog, standalone, onCreateAgent]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
@@ -382,9 +386,7 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-from-docspace",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromPortal", {
-          productName: getBrandName("ProductName"),
-        }),
+        label: t("Common:FromPortal"),
         key: "actions_upload-from-docspace",
         disabled: false,
         onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
@@ -477,9 +479,7 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-files-product",
         className: "main-button_drop-down",
         icon: MoveReactSvgUrl,
-        label: t("EmptyView:UploadFromPortalTitle", {
-          productName: getBrandName("ProductName"),
-        }),
+        label: t("EmptyView:UploadFromPortalTitle"),
         onClick: onShowAiKnowledgeSelectFileDialog,
         key: "upload-files-product",
       };
@@ -835,7 +835,6 @@ const ArticleMainButtonContent = (props) => {
           text={mainButtonText}
           model={model}
           title={mainButtonText}
-          setRefMap={setRefMap}
         />
       )}
 
@@ -905,7 +904,6 @@ export default inject(
     filesActionsStore,
     currentQuotaStore,
     peopleStore,
-    guidanceStore,
     aiRoomStore,
     filesSettingsStore,
     currentTariffStatusStore,
@@ -914,7 +912,6 @@ export default inject(
   }) => {
     const { isChatTab, isResultTab, isKnowledgeTab } = aiRoomStore;
     const { showArticleLoader } = clientLoadingStore;
-    const { setRefMap } = guidanceStore;
     const {
       isPrivacyFolder,
       isFavoritesFolder,
@@ -1040,7 +1037,6 @@ export default inject(
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
       contactsTab: peopleStore.usersStore.contactsTab,
-      setRefMap,
       setTemplateGalleryVisible,
       templateGalleryAvailable,
 
@@ -1055,6 +1051,7 @@ export default inject(
 
       isGracePeriod,
 
+      standalone: settingsStore.standalone,
       isAIReady: paymentStore.isAIReady,
       isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
       enableAIService: paymentStore.enableAIService,

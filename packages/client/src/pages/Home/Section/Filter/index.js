@@ -154,8 +154,6 @@ const SectionFilterContent = ({
   isOwner,
   currentFolderId,
 
-  currentClientView,
-
   getSelectedFolder,
   selectedFolderId,
 
@@ -200,8 +198,7 @@ const SectionFilterContent = ({
     [isFormsSection],
   );
 
-  const isContactsPage =
-    currentClientView === "users" || currentClientView === "groups";
+  const isContactsPage = location.pathname.includes("accounts");
   const isContactsPeoplePage = contactsTab === "people";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isContactsGroupsPage = contactsTab === "groups";
@@ -1107,7 +1104,10 @@ const SectionFilterContent = ({
       connectedThirdParty.push(item.provider_key);
     });
 
-    const isLastTypeOptionsRooms = !connectedThirdParty.length && !tags?.length;
+    const showThirdPartyFilter =
+      connectedThirdParty.length > 0 && !isTemplatesFolder && !isFormsSection;
+
+    const isLastTypeOptionsRooms = !showThirdPartyFilter && !tags?.length;
 
     const folders = !isRecentFolder
       ? [
@@ -1415,7 +1415,7 @@ const SectionFilterContent = ({
           isMultiSelect: true,
         }));
 
-        const isLast = connectedThirdParty.length === 0;
+        const isLast = !showThirdPartyFilter;
 
         filterOptions.push({
           key: FilterGroups.roomFilterTags,
@@ -1428,7 +1428,7 @@ const SectionFilterContent = ({
         filterOptions.push(...tagsOptions);
       }
 
-      if (connectedThirdParty.length > 0 && !isTemplatesFolder) {
+      if (showThirdPartyFilter) {
         const thirdPartyOptions = connectedThirdParty.map((thirdParty) => {
           const key = Object.entries(RoomsProviderType).find(
             (item) => item[0] === thirdParty,
@@ -1810,7 +1810,9 @@ const SectionFilterContent = ({
       }
 
       if (isTemplatesFolder) {
-        newFilter.searchArea = RoomSearchArea.Templates;
+        newFilter.searchArea = isFormsSection
+          ? RoomSearchArea.FormTemplates
+          : RoomSearchArea.Templates;
       }
 
       if (isFormsFolder) {
@@ -2084,8 +2086,6 @@ export default inject(
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,
-
-      currentClientView: clientLoadingStore.currentClientView,
 
       fetchTags,
       setViewAs,

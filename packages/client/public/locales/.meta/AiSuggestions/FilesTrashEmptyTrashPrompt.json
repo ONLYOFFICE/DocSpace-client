@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesTrashEmptyTrashPrompt",
+  "content": "Permanently delete all items in Trash only after showing the impact and requesting confirmation. If this information is not provided, ask me for the exact items and confirmation before any destructive action.",
+  "content_en_sha1_hash": "2be32258b14156414cc857614d11ed3b536c3247",
+  "created_at": "2026-08-04T09:58:55.138Z",
+  "updated_at": "2026-08-05T17:54:28.064Z",
+  "comment": {
+    "text": "Instructional prompt for an AI assistant defining the mandatory safety procedures and confirmation steps it must follow when handling requests to empty the trash folder.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:54:28.064Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 346,
+      "context": "name: t(\"AiSuggestions:FilesTrashWhatCanBeDeletedPermanently\"),\n prompt: t(\"AiSuggestions:FilesTrashWhatCanBeDeletedPermanentlyPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesTrashEmptyTrash\"),\n prompt: t(\"AiSuggestions:FilesTrashEmptyTrashPrompt\"),\n },\n ],\n \n // +\n filesFolder: [",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

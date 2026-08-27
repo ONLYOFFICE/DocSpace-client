@@ -35,11 +35,17 @@
 
 import { describe, it, expect, vi } from "vitest";
 
-vi.mock("@docspace/shared/components/guidance/configs", () => ({
-  getGuidanceConfig: vi.fn(() => ({ id: "cfg" })),
-}));
+import { RoomsType } from "@docspace/ui-kit/enums";
+import { Events } from "@docspace/shared/enums";
 
 import { createTestContextOptionsStore, t } from "./testHarness";
+
+vi.mock("@docspace/shared/api/files", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  createFile: vi.fn(async () => ({ id: 42, title: "Form.pdf" })),
+}));
+
+const { createFile } = await import("@docspace/shared/api/files");
 
 describe("ContextOptionsStore — action handler delegation (batch 8)", () => {
   it("onRemoveRoomsFromGroup no-ops without a current group", async () => {
@@ -68,16 +74,66 @@ describe("ContextOptionsStore — action handler delegation (batch 8)", () => {
     dispatchEvent.mockRestore();
   });
 
-  it("onEnableFormFillingGuid -> guidanceStore.setConfig + tips dialog", () => {
-    const setConfig = vi.fn();
-    const setWelcomeFormFillingTipsVisible = vi.fn();
+  it("onCreateTemplate in room-from-template mode opens the FormRoom dialog with no request", async () => {
+    const setTemplateGalleryVisible = vi.fn();
+    const setFormTemplateForNewRoom = vi.fn();
+    const setGallerySelected = vi.fn();
+    const dispatchEvent = vi.spyOn(window, "dispatchEvent");
+
     const store = createTestContextOptionsStore({
-      guidanceStore: { setConfig },
-      dialogsStore: { setWelcomeFormFillingTipsVisible },
+      oformsStore: {
+        setIsVisibleInfoPanelTemplateGallery: vi.fn(),
+        setTemplateGalleryVisible,
+        setFormTemplateForNewRoom,
+        setGallerySelected,
+        createRoomFromTemplate: true,
+        currentExtensionGallery: ".pdf",
+        gallerySelected: { id: 7, attributes: { name_form: "Form" } },
+      },
     });
-    store.onEnableFormFillingGuid(t);
-    expect(setConfig).toHaveBeenCalledTimes(1);
-    expect(setWelcomeFormFillingTipsVisible).toHaveBeenCalledWith(true);
+
+    await store.onCreateTemplate();
+
+    // Nothing is requested up front -- the dialog opens immediately.
+    expect(createFile).not.toHaveBeenCalled();
+
+    // The pick is recorded for CreateEditRoomStore to create inside the room.
+    expect(setFormTemplateForNewRoom).toHaveBeenCalledWith({
+      id: 7,
+      title: "Form",
+      extension: "pdf",
+    });
+    // ...and consumed, so a stray create cannot pop the file naming dialog.
+    expect(setGallerySelected).toHaveBeenCalledWith(null);
+    expect(setTemplateGalleryVisible).toHaveBeenCalledWith(false);
+
+    const event = dispatchEvent.mock.calls[0][0] as CustomEvent & {
+      title?: string;
+      payload?: { startRoomType?: number };
+    };
+    expect(event.type).toBe(Events.ROOM_CREATE);
+    expect(event.payload?.startRoomType).toBe(RoomsType.FormRoom);
+    // The room name is prefilled with the template's name.
+    expect(event.title).toBe("Form");
+    dispatchEvent.mockRestore();
+  });
+
+  it("onCreateTemplate no-ops once the gallery selection has been consumed", async () => {
+    const dispatchEvent = vi.spyOn(window, "dispatchEvent");
+    const store = createTestContextOptionsStore({
+      oformsStore: {
+        setIsVisibleInfoPanelTemplateGallery: vi.fn(),
+        createRoomFromTemplate: false,
+        currentExtensionGallery: ".pdf",
+        gallerySelected: null,
+      },
+    });
+
+    await store.onCreateTemplate();
+
+    // No "New PDF form" dialog on top of the freshly created room.
+    expect(dispatchEvent).not.toHaveBeenCalled();
+    dispatchEvent.mockRestore();
   });
 
   it("onClickMakeForm -> uploadDataStore.copyAsAction (make-form conversion)", () => {

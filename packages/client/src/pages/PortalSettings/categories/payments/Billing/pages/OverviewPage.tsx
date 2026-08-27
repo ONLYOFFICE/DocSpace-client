@@ -64,13 +64,15 @@ const OverviewPage = () => {
   }, []);
 
   return (
-    <ConfirmWrapper height="100%">
+    <ConfirmWrapper height="100%" hideBackground>
       <BillingOverview
         onEditPlan={() => navigateToRoute(PAYMENT_ROUTES.portalPayments)}
         onViewUsage={() => navigateToRoute("/billing/usage")}
         onManageAddons={() => navigateToRoute(PAYMENT_ROUTES.services)}
         onManagePaymentMethod={() => navigateToRoute("/billing/payment-method")}
-        onUpcomingDetails={() => navigateToRoute("/billing/wallet")}
+        onUpcomingDetails={() =>
+          navigateToRoute("/billing/wallet?tab=upcoming-payments")
+        }
       />
     </ConfirmWrapper>
   );

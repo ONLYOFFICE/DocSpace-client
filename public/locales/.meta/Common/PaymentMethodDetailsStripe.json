@@ -1,0 +1,29 @@
+{
+  "key_path": "PaymentMethodDetailsStripe",
+  "content": "Payment details are stored securely with Stripe",
+  "content_en_sha1_hash": "7da88bd0d09d8740b8e4ca9a128ed5dd89179d7e",
+  "created_at": "2026-08-01T16:24:58.336Z",
+  "updated_at": "2026-08-14T14:58:32.936Z",
+  "comment": {
+    "text": "Informational subtext in the billing overview providing security context for the linked payment method.",
+    "is_auto": true,
+    "updated_at": "2026-08-01T16:30:21.755Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/PaymentMethod.tsx",
+      "line_number": 153,
+      "context": "{isInactive\n ? t(\"PaymentMethodUnlinked\")\n : t(\"PaymentMethodLinked\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>\n {t(\"PaymentMethodDetailsStripe\")}\n </Text>\n </div>\n {isInactive ? (\n <AlertIcon className={styles.pmStatusIcon} />\n ) : (",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

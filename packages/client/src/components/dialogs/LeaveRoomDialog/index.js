@@ -39,7 +39,7 @@ import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
 const LeaveRoomDialog = (props) => {
   const {
@@ -50,6 +50,7 @@ const LeaveRoomDialog = (props) => {
     setChangeRoomOwnerIsVisible,
     isRoomOwner,
     isAIAgent,
+    isFormSpace,
     isFormFiller,
     onLeaveRoomAction,
   } = props;
@@ -85,7 +86,9 @@ const LeaveRoomDialog = (props) => {
 
   const titleText = isAIAgent
     ? t("Common:LeaveTheAgent")
-    : t("Common:LeaveTheRoom");
+    : isFormSpace
+      ? t("Common:LeaveTheFormSpace")
+      : t("Common:LeaveTheRoom");
 
   const roomDescription = isRoomOwner
     ? t("Common:LeaveRoomDescription")
@@ -168,6 +171,7 @@ export default inject(
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
     const isAIAgent = folderItem?.isAIAgent;
+    const isFormSpace = folderItem?.roomType === RoomsType.FormRoom;
     const isFormFiller = folderItem?.access === ShareAccessRights.FormFilling;
 
     return {
@@ -176,6 +180,7 @@ export default inject(
       setChangeRoomOwnerIsVisible,
       isRoomOwner,
       isAIAgent,
+      isFormSpace,
       isFormFiller,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,
     };

@@ -1,32 +1,32 @@
 {
   "key_path": "TypesAndPrivileges",
-  "content": "<1>Admin account types and their privileges</1> <br> <br> <2>{{productName}} admin</2> <br> {{productName}} configuration, room creation and administration, ability to invite and manage users in {{productName}} and in virtual rooms, ability to manage access rights. <br> <br> <3>Room admin</3> <br> Room administration and archiving, user invitation and management. Several admins can be assigned to a room. <br> <br> <4>User</4> <br> Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
-  "content_en_sha1_hash": "a5f8e3f05414f4551551d409b8f3a24e8f1a73bc",
-  "created_at": "2025-05-19T21:30:53.036Z",
-  "updated_at": "2026-05-15T14:00:06.779Z",
+  "content": "<1>Admin account types and their privileges</1> <br> <br> <2>Full admin</2> <br> Workspace configuration, room creation and administration, ability to invite and manage users in the workspace and in virtual rooms, ability to manage access rights. <br> <br> <3>Room admin</3> <br> Room administration and archiving, user invitation and management. Several admins can be assigned to a room. <br> <br> <4>User</4> <br> Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
+  "content_en_sha1_hash": "bf7d3966b7fc9152ea6ee601c9a4e4f8be794a21",
+  "created_at": "2026-08-13T22:44:30.209Z",
+  "updated_at": "2026-08-14T15:32:17.485Z",
   "comment": {
-    "text": "This is a tooltip that appears when hovering over an information icon, explaining the different account types and their privileges within ONLYOFFICE DocSpace. It uses `{{productName}}` for the product's brand name and `<1>`, `<2>`, `<3>`, `<4>` for bolding and line breaks.",
+    "text": "Tooltip in the data import stepper that describes different admin account types and their permissions. Tags <1> through <4> are used to bold the title and role names.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:21:35.100Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:32:17.485Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 106,
-      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: getBrandName(\"ProductName\") }}\n components={{\n 1: <b />,",
+      "line_number": 101,
+      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n components={{\n 1: <b />,\n 2: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 118,
-      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: getBrandName(\"ProductName\") }}\n components={{\n 1: <b />,",
+      "line_number": 113,
+      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n components={{\n 1: <b />,\n 2: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 111,
-      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: getBrandName(\"ProductName\") }}\n components={{\n 1: <b />,",
+      "line_number": 105,
+      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n components={{\n 1: <b />,\n 2: <b />,",
       "module": "/packages/client"
     }
   ],
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -212,12 +218,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

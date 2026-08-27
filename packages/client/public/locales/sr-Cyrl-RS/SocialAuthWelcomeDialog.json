@@ -1,11 +1,9 @@
 {
   "ChangeData": "Промени податке и лозинку",
   "ClickButtonBelow": "Ако желите да се пријавите помоћу своје имејл адресе, поставите сопствену лозинку. <br/> Када будете спремни, кликните на дугме испод.",
-  "ContinueToProduct": "Настави на {{productName}}",
+  "ContinueToProduct": "Настави на радни простор",
   "GeneratedPassword": "Генерисана лозинка",
-  "ProductNameDetail": "Име {{productName}}",
+  "ProductNameDetail": "Име радног простора",
   "ReviewAccountDetails": "Молимо вас да одвојите тренутак да прегледате детаље свог налога:",
-  "SetEmailPassword": "Поставите лозинку",
-  "WelcomeSubtitle": "Ваш простор је успешно креиран. Прегледајте детаље вашег профила и почните да радите.",
   "YourProfileDetails": "Детаљи вашег профила"
 }

@@ -1,0 +1,29 @@
+{
+  "key_path": "FormSpaceResultsCompareGroupsOrPeriodsPrompt",
+  "content": "Compare groups or periods across completed submissions in the current Form Space and highlight the most meaningful similarities and differences. If this information is not provided, ask me for the items, groups, or periods to compare and the comparison criteria.",
+  "content_en_sha1_hash": "d939c00adee73e3e5ac3b9ea1122e0d4032b25d9",
+  "created_at": "2026-08-04T09:58:55.149Z",
+  "updated_at": "2026-08-05T17:45:43.261Z",
+  "comment": {
+    "text": "Instructional prompt for an AI suggestion feature that directs the model to compare specific groups or time periods within FormSpace submissions and identify key similarities and differences.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:45:43.261Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 173,
+      "context": "name: t(\"AiSuggestions:FormSpaceResultsSummarizeResults\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsSummarizeResultsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsCompareGroupsOrPeriods\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCompareGroupsOrPeriodsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsCreateAResultsReport\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCreateAResultsReportPrompt\"),\n requires: \"create\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

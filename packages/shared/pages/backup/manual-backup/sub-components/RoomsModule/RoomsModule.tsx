@@ -76,6 +76,10 @@ export interface RoomsModuleProps {
 
   isBackupPaid?: boolean;
   isFreeBackupsLimitReached?: boolean;
+  copyButtonLabel?: string;
+  isToppingUp?: boolean;
+  isCopyBlocked?: boolean;
+  disabledCreatePublicRoom?: boolean;
 
   toDefault: VoidFunction;
   setBasePath: (folders: TBreadCrumb[]) => void;
@@ -103,6 +107,10 @@ const RoomsModule = ({
   settingsFileSelector,
   isBackupPaid,
   isFreeBackupsLimitReached,
+  copyButtonLabel,
+  isToppingUp,
+  isCopyBlocked,
+  disabledCreatePublicRoom,
 }: RoomsModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -162,7 +170,7 @@ const RoomsModule = ({
     }
   };
 
-  const isModuleDisabled = !isMaxProgress || isStartCopy;
+  const isModuleDisabled = !isMaxProgress || isStartCopy || isCopyBlocked;
 
   const formProps = useMemo(
     () => ({
@@ -196,6 +204,7 @@ const RoomsModule = ({
           onSelectFolder={onSelectFolder}
           withoutInitPath={!selectedFolder}
           currentDeviceType={currentDeviceType}
+          disabledCreatePublicRoom={disabledCreatePublicRoom}
           filesSelectorSettings={settingsFileSelector}
           setBackupToPublicRoomVisible={setBackupToPublicRoomVisible}
           {...(selectedFolder ? { id: selectedFolder } : { openRoot: true })}
@@ -221,8 +230,9 @@ const RoomsModule = ({
           id="create-copy"
           size={buttonSize}
           onClick={handleMakeCopy}
-          label={t("Common:CreateCopy")}
-          isDisabled={isModuleDisabled || !selectedFolder}
+          label={copyButtonLabel ?? t("Common:CreateCopy")}
+          isDisabled={isModuleDisabled || !selectedFolder || isToppingUp}
+          isLoading={isToppingUp}
           testId="create_backup_room_button"
         />
       </div>

@@ -43,10 +43,11 @@ import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-c
 
 import EmptyScreenRecentUrl from "PUBLIC_DIR/images/emptyview/empty.history.light.svg?url";
 import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/emptyview/empty.history.dark.svg?url";
+import { ReportType } from "SRC_DIR/store/DocumentBuilderReportStore";
+import { useReportPageLeft } from "SRC_DIR/Hooks/useReportPageLeft";
 import { Table } from "./TableView/TableView";
 import AuditRowContainer from "./RowView/AuditRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const AuditTrail = (props) => {
   const {
@@ -58,9 +59,11 @@ const AuditTrail = (props) => {
     getAuditTrailReport,
     securityLifetime,
     isAuditAvailable,
-    isLoadingDownloadReport,
+    isAuditTrailReportBuilding,
     resetIsInit,
   } = props;
+
+  useReportPageLeft(ReportType.AuditTrail);
 
   useEffect(() => {
     setDocumentTitle(t("AuditTrailNav"));
@@ -95,9 +98,7 @@ const AuditTrail = (props) => {
   if (auditTrailUsers.length === 0) {
     return (
       <EmptyScreenContainer
-        descriptionText={t("AuditSubheader", {
-          productName: getBrandName("ProductName"),
-        })}
+        descriptionText={t("AuditSubheader")}
         imageSrc={
           theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl
         }
@@ -111,9 +112,7 @@ const AuditTrail = (props) => {
     securityLifetime.auditTrailLifeTime && (
       <HistoryMainContent
         t={t}
-        subHeader={t("AuditSubheader", {
-          productName: getBrandName("ProductName"),
-        })}
+        subHeader={t("AuditSubheader")}
         latestText={t("LoginLatestText")}
         storagePeriod={t("StoragePeriod")}
         saveButtonLabel={t("Common:SaveButton")}
@@ -128,7 +127,7 @@ const AuditTrail = (props) => {
         })}
         getReport={getAuditTrailReport}
         isSettingNotPaid={!isAuditAvailable}
-        isLoadingDownloadReport={isLoadingDownloadReport}
+        isLoadingDownloadReport={isAuditTrailReportBuilding}
       />
     )
   );
@@ -141,7 +140,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     setLifetimeAuditSettings,
     getAuditTrailReport,
     securityLifetime,
-    isLoadingDownloadReport,
+    isAuditTrailReportBuilding,
     resetIsInit,
   } = setup;
 
@@ -155,7 +154,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     getAuditTrailReport,
     securityLifetime,
     isAuditAvailable,
-    isLoadingDownloadReport,
+    isAuditTrailReportBuilding,
     resetIsInit,
   };
 })(withTranslation("Settings")(AuditTrail));

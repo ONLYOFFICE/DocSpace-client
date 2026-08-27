@@ -38,7 +38,9 @@ import axios from "axios";
 
 import api from "@docspace/shared/api";
 import { formatDate, parseToDateTime } from "@docspace/ui-kit/utils/date";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { RoomsType } from "@docspace/shared/enums";
+import type { Nullable } from "@docspace/shared/types";
 import {
   TFile,
   TFileLink,
@@ -86,6 +88,19 @@ const addLinksToHistory = (fetchedHistory: TFeed, links: RoomMember[]) => {
   return { ...fetchedHistory, items: historyWithLinks };
 };
 
+const getDayFilter = (day: Nullable<string>) => {
+  const toDate = parseToDateTime(day)?.endOf("day").toUTC().toISO();
+
+  return toDate ? { toDate } : {};
+};
+
+const countFeedEntries = <T,>(feedActions: TFeedAction<T>[]) =>
+  feedActions.reduce((count, feed) => count + 1 + feed.related.length, 0);
+
+const getSupportedFeeds = <T extends TFeedData | RoomMember>(
+  feedActions: TFeedAction<T>[],
+) => feedActions.filter((feed) => Boolean(getFeedInfo(feed)));
+
 const parseHistory = (feedActions: TFeedAction<TFeedData | RoomMember>[]) => {
   const parsedFeeds: TSelectionHistory[] = [];
 
@@ -110,12 +125,20 @@ export type UseHistoryProps = {
   selection: TRoom | TFile | TFolder;
 
   setExternalLinks: PublicRoomStore["setExternalLinks"];
+
+  scrollToTop: () => void;
+};
+
+type TDayFilter = {
+  selectionId: Nullable<number | string>;
+  day: Nullable<string>;
 };
 
 export const useHistory = ({
   selection,
 
   setExternalLinks,
+  scrollToTop,
 }: UseHistoryProps) => {
   const [filter, setFilter] = React.useState({
     page: 0,
@@ -124,14 +147,27 @@ export const useHistory = ({
 
   const [total, setTotal] = React.useState(0);
 
+  const [dayFilter, setDayFilter] = React.useState<TDayFilter>({
+    selectionId: null,
+    day: null,
+  });
+
+  const selectionId = selection?.id ?? null;
+
+  // The picked day belongs to the item it was picked for, so switching the
+  // selection drops the filter instead of carrying it over to the new history
+  const historyDay =
+    dayFilter.selectionId === selectionId ? dayFilter.day : null;
+
   const [history, setHistory] = React.useState<TSelectionHistory[]>([]);
 
   const [isFirstLoading, setIsFirstLoading] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
 
   const abortController = React.useRef<AbortController>(null);
+  const skippedFeedsCount = React.useRef(0);
 
-  const fetchHistory = React.useCallback(async () => {
+  const fetchHistory = React.useCallback(async (day?: Nullable<string>) => {
     if (!selection?.id) return;
 
     setIsFirstLoading(true);
@@ -156,18 +192,27 @@ export const useHistory = ({
         roomType,
       );
 
+    const dayFilter = getDayFilter(day === undefined ? historyDay : day);
+
     try {
       const response = await api.rooms.getHistory(
         selectionType,
         selection.id,
-        { page: 0, startIndex: 0, count: PAGE_COUNT },
+        { page: 0, startIndex: 0, count: PAGE_COUNT, ...dayFilter },
         abortController.current.signal,
         selectionRequestToken,
       );
 
       abortController.current = null;
 
-      setTotal(response.total);
+      const supportedItems = getSupportedFeeds(response.items);
+
+      skippedFeedsCount.current =
+        countFeedEntries(response.items) - countFeedEntries(supportedItems);
+
+      const feed = { ...response, items: supportedItems };
+
+      setTotal(response.total - skippedFeedsCount.current);
       setFilter({
         page: 0,
         startIndex: 0,
@@ -180,7 +225,7 @@ export const useHistory = ({
           })
           .then((res) => res.items);
 
-        const historyWithLinks = addLinksToHistory(response, links);
+        const historyWithLinks = addLinksToHistory(feed, links);
 
         // getRoomMembers with filterType 2 (external links)
         // returns link-shaped items, but its return type is RoomMember[].
@@ -192,7 +237,7 @@ export const useHistory = ({
       }
 
       setExternalLinks([]);
-      setHistory(parseHistory(response.items));
+      setHistory(parseHistory(feed.items));
     } catch (error) {
       if (axios.isCancel(error)) return;
       throw error;
@@ -205,8 +250,21 @@ export const useHistory = ({
     "isRoom" in selection && selection.isRoom,
     "roomType" in selection && selection.roomType,
     "requestToken" in selection && selection.requestToken,
+    historyDay,
     setExternalLinks,
   ]);
+
+  const selectHistoryDay = useEventCallback((day: Nullable<string>) => {
+    setDayFilter({ selectionId, day });
+
+    fetchHistory(day)
+      .then(() => scrollToTop())
+      .catch((error) => console.log(error));
+  });
+
+  const resetHistoryDay = useEventCallback(() =>
+    setDayFilter({ selectionId: null, day: null }),
+  );
 
   const fetchMoreHistory = async () => {
     if (!selection?.id) return;
@@ -239,14 +297,21 @@ export const useHistory = ({
       const data = await api.rooms.getHistory(
         selectionType,
         selection.id,
-        { page, startIndex, count: PAGE_COUNT },
+        { page, startIndex, count: PAGE_COUNT, ...getDayFilter(historyDay) },
         abortController.current.signal,
         requestToken,
       );
 
       abortController.current = null;
 
-      let feedWithLinks: ReturnType<typeof addLinksToHistory> = data;
+      const supportedItems = getSupportedFeeds(data.items);
+
+      skippedFeedsCount.current +=
+        countFeedEntries(data.items) - countFeedEntries(supportedItems);
+
+      const feed = { ...data, items: supportedItems };
+
+      let feedWithLinks: ReturnType<typeof addLinksToHistory> = feed;
 
       if (withLinks) {
         const links = await api.rooms
@@ -255,7 +320,7 @@ export const useHistory = ({
           })
           .then((res) => res.items);
 
-        feedWithLinks = addLinksToHistory(data, links);
+        feedWithLinks = addLinksToHistory(feed, links);
 
         // getRoomMembers with filterType 2 (external links)
         // returns link-shaped items, but its return type is RoomMember[].
@@ -280,7 +345,7 @@ export const useHistory = ({
       }
 
       setHistory(mergedHistory);
-      setTotal(data.total);
+      setTotal(data.total - skippedFeedsCount.current);
     } catch (e) {
       if (axios.isCancel(e)) return;
       console.log(e);
@@ -302,6 +367,10 @@ export const useHistory = ({
     isFirstLoading,
     fetchHistory,
     fetchMoreHistory,
+
+    historyDay,
+    selectHistoryDay,
+    resetHistoryDay,
 
     abortController,
   };

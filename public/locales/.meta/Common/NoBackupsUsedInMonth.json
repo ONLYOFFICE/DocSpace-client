@@ -3,7 +3,7 @@
   "content": "No backups used in {{month}}",
   "content_en_sha1_hash": "14dab3700a5cc073d3617931d835b97275c2b827",
   "created_at": "2026-06-25T11:54:53.551Z",
-  "updated_at": "2026-07-03T11:08:02.949Z",
+  "updated_at": "2026-08-20T12:26:01.863Z",
   "comment": {
     "text": "Card caption indicating that no backups were utilized during a specific period. The {{month}} variable represents the name of the month.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
-      "line_number": 327,
+      "line_number": 378,
       "context": ": t(\"BilledBackups\", { count: paidBackupsUsed })}\n </Text>\n </>\n ) : (\n <Text className={styles.cardCaption}>\n {t(\"NoBackupsUsedInMonth\", { month: monthLabel })}\n </Text>\n )}\n </div>\n </div>\n </div>",
       "module": "/libs/ui-kit"
     }

@@ -50,7 +50,6 @@ import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import { TChangeUserStatusDialogData } from "SRC_DIR/helpers/contacts";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type ChangeUserStatusDialogComponentProps = {
 	getPeopleListItem: UsersStore["getPeopleListItem"];
@@ -110,6 +109,8 @@ const ChangeUserStatusDialogComponent = ({
 				toastr.error(
 					<PaidQuotaLimitError
 						isRoomAdmin={undefined}
+						isCommunity={undefined}
+						standalone={undefined}
 						setInvitePanelOptions={undefined}
 						invitePanelVisible={undefined}
 					/>,
@@ -178,15 +179,11 @@ const ChangeUserStatusDialogComponent = ({
 
 		bodyText = onlyOneUser
 			? isGuests
-				? t("DisableGuestDescription", { productName: getBrandName("ProductName") })
-				: t("DisableUserDescription", { productName: getBrandName("ProductName") })
+				? t("DisableGuestDescription")
+				: t("DisableUserDescription")
 			: isGuests
-				? t("DisableGuestsDescription", {
-						productName: getBrandName("ProductName"),
-					})
-				: t("DisableUsersDescription", {
-						productName: getBrandName("ProductName"),
-					});
+				? t("DisableGuestsDescription")
+				: t("DisableUsersDescription");
 
 		bodyText += isGuests
 			? t("DisableGuestsGeneralDescription")
@@ -206,11 +203,11 @@ const ChangeUserStatusDialogComponent = ({
 
 		bodyText = onlyOneUser
 			? isGuests
-				? t("EnableGuestDescription", { productName: getBrandName("ProductName") })
-				: t("EnableUserDescription", { productName: getBrandName("ProductName") })
+				? t("EnableGuestDescription")
+				: t("EnableUserDescription")
 			: isGuests
-				? t("EnableGuestsDescription", { productName: getBrandName("ProductName") })
-				: t("EnableUsersDescription", { productName: getBrandName("ProductName") });
+				? t("EnableGuestsDescription")
+				: t("EnableUsersDescription");
 
 		buttonLabelSave = t("Common:Enable");
 	}

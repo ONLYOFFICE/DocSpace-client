@@ -3,7 +3,7 @@
   "content": "Cancellation on {{date}}",
   "content_en_sha1_hash": "b08d2f74b9b23ac77cc366c9f6344559622bc713",
   "created_at": "2026-07-27T13:07:48.489Z",
-  "updated_at": "2026-07-27T14:32:57.887Z",
+  "updated_at": "2026-08-24T22:30:00.693Z",
   "comment": {
     "text": "Informational note in the Statistics panel that displays the scheduled date for a service cancellation, including a formatted {{date}}.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 391,
-      "context": "fontWeight={400}\n className={styles.tariffNote}\n >\n {scheduledChange\n ? isCancellation\n ? t(\"DocsConnect:CancellationOn\", {\n date: formatDateLocalized(\n scheduledChange.dueDate,\n \"DATE_MED\",\n { locale: i18n.language },\n ),",
+      "line_number": 175,
+      "context": "return t(\"Common:RenewsOnDate\", {\n date: formatDocsConnectDate(tenant.endDate),\n });\n \n if (isCancellation)\n return t(\"DocsConnect:CancellationOn\", { date: scheduledChangeDate });\n \n if (devPackDisabling)\n return t(\"Common:RenewsOnDate\", { date: scheduledChangeDate });\n \n return t(\"DocsConnect:RenewsOnWithUpdate\", {",
       "module": "/packages/client"
     }
   ],

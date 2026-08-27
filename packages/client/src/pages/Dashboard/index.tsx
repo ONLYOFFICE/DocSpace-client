@@ -61,7 +61,12 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { Navigate, useLocation, useNavigate, useSearchParams } from "react-router";
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router";
 import { useTranslation, Trans } from "react-i18next";
 
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
@@ -69,40 +74,110 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
+import { getBrandName } from "@docspace/shared/constants/brands";
+import { hasDocsConnectAccess } from "@docspace/shared/utils/devToolsAccess";
+import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
-
-import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
-import CatalogFolderIcon from "@docspace/ui-kit/assets/icons/16/catalog.folder.react.svg";
-import CatalogDocumentsIcon from "@docspace/ui-kit/assets/icons/16/catalog.documents.react.svg";
-import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
+import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
+import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
+import ChatPanelView from "@docspace/ui-kit/components/section/sub-components/ChatPanel";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
-import { useAppPromo } from "SRC_DIR/components/dialogs/AppPromoDialog";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
+import { setDashboardVisited } from "SRC_DIR/helpers/dashboardVisited";
+import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
+import { IntegrationsCard } from "SRC_DIR/components/IntegrationsCard";
+import {
+  useChatNoAccess,
+  mapChatNoAccessStores,
+  type ChatNoAccessStoreProps,
+} from "SRC_DIR/Hooks/useChatNoAccess";
 
-import { ModuleCard, type ModuleItem } from "./sub-components/ModuleCard";
+import { WelcomeDialog } from "./WelcomeDialog";
+import { DashboardTourHost } from "./DashboardTourHost";
+import { ModuleCard } from "./sub-components/ModuleCard";
 import { ProfileCard } from "./sub-components/ProfileCard";
-import { IntegrationsCard } from "./sub-components/IntegrationsCard";
 import { DevToolsCard } from "./sub-components/DevToolsCard";
 import { Header } from "./sub-components/Header";
 import { DashboardLoader } from "./sub-components/DashboardLoader";
 import { GuestRestrictionTooltip } from "./sub-components/GuestRestrictionTooltip";
 import { useUploadToMyDocuments } from "./hooks/useUploadToMyDocuments";
 import { useCreateActions } from "./hooks/useCreateActions";
+import { useModuleItems } from "./hooks/useModuleItems";
 import { useMyFolderId } from "./hooks/useMyFolderId";
+import { modulesGridStyle } from "./utils";
 import styles from "./Dashboard.module.scss";
 
-interface DashboardProps {
+type DashboardProps = ChatNoAccessStoreProps & {
   isGuest: boolean;
   showLoader: boolean;
-}
+  currentDeviceType?: TStore["settingsStore"]["currentDeviceType"];
+  requestAppTour: (appId: AppId) => void;
+  userId?: string;
+  /** False until the welcome has been shown to this user (and dismissed). */
+  isWelcomeSeen: boolean;
+  /** Reads `isWelcomeSeen` back for `userId` — the flag is per-user. */
+  hydrateWelcome: (userId?: string) => void;
+  /** Marks the welcome as shown, whether the tour was taken from it or not. */
+  dismissWelcome: (userId?: string) => void;
+  /** Arms the dashboard's own tour, which `DashboardTour` then starts. */
+  requestDashboardTour: () => void;
+  /** Admins / owners / room admins — the set allowed to create rooms. */
+  canCreateRooms: boolean;
+  /** Portal admins and the owner, which the apps subtitle wording follows. */
+  isAdminOrOwner: boolean;
+  /** Whether Docs Connect can be offered at all — SaaS, admin or owner. */
+  canOpenDocsConnect: boolean;
+  /** Whether the portal's AI is set up, which agent creation also needs. */
+  aiReady: boolean;
+  /** The portal-wide AI switch: with it off the AI Agents card is dropped. */
+  aiServicesEnabled: boolean;
+  /** Names the plan in the apps subtitle: Startup when free, Business when paid. */
+  isFreeTariff: boolean;
+  /** Startup and Business are SaaS tariffs; standalone gets the neutral copy. */
+  standalone: boolean;
+  /** Rooms quota exhausted or portal in its grace period. */
+  isWarningRoomsDialog: boolean;
+  setQuotaWarningDialogVisible: (visible: boolean) => void;
+};
 
 const UPLOAD_LINK_ID = "dashboard-upload-link";
+const DOCS_CONNECT_PATH = "/developer-tools/docs-connect";
 
-const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
-  const { t } = useTranslation(["Common", "OAuth"]);
-  useDocumentTitle("Common:Overview");
+const Dashboard = (props: DashboardProps) => {
+  const {
+    isGuest,
+    showLoader,
+    currentDeviceType,
+    requestAppTour,
+    userId,
+    isWelcomeSeen,
+    hydrateWelcome,
+    dismissWelcome,
+    requestDashboardTour,
+    canCreateRooms,
+    isAdminOrOwner,
+    canOpenDocsConnect,
+    aiReady,
+    aiServicesEnabled,
+    isFreeTariff,
+    standalone,
+    isWarningRoomsDialog,
+    setQuotaWarningDialogVisible,
+  } = props;
+  const { t } = useTranslation(["Common"]);
+  useDocumentTitle("Common:Home");
+
+  // Gates every tour entry point on this page. The tours walk through desktop
+  // chrome (`useTour` refuses to run on mobile outright), so on a phone the
+  // welcome is not offered and neither help icon is rendered — the CSS in
+  // `Dashboard.module.scss` hides them too, but a button that cannot do
+  // anything should not be in the tree to begin with.
+  const isMobile = currentDeviceType === DeviceType.mobile;
+
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -111,24 +186,123 @@ const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
   const openFiles = React.useCallback(() => {
     navigate("/rooms/personal/filter");
   }, [navigate]);
+  const openDocsConnect = React.useCallback(() => {
+    navigate(DOCS_CONNECT_PATH);
+  }, [navigate]);
   const { openUploadDialog, progress, clearProgress } = useUploadToMyDocuments(
     myFolderId,
     openFiles,
   );
-  const createItems = useCreateActions(myFolderId, isGuest);
+  // Availability is computed once by the host (Shell) — it already accounts for
+  // the portal's AI services being switched off in settings — and shared
+  // through AiAgentProviders' context, the same signal Home reads.
+  const isAiChatAvailable = useIsAiChatAvailable();
 
-  // First-run "introduce this app" promo. The clicked card's href is stashed in
-  // a ref so the promo's confirm callback can navigate to it after the user
-  // sees the promo. Apps without promo content fall straight through to navigate.
-  const promoHrefRef = React.useRef<string | undefined>(undefined);
-  const { maybeShowPromo, promoDialog } = useAppPromo(() => {
-    if (promoHrefRef.current) navigate(promoHrefRef.current);
+  const createItems = useCreateActions(myFolderId, isGuest, isAiChatAvailable);
+
+  // Agent creation needs AI to be set up on top of the create right. `aiReady`
+  // (portal /ai/config) can lag behind the chat-lib profiles, so existing
+  // profiles count as ready too — the same signal Home and the agents EmptyView
+  // use to decide whether to offer agent creation.
+  const hasAiProfiles = useHasAiProfiles();
+  const moduleItems = useModuleItems({
+    isGuest,
+    canCreateRooms,
+    canCreateAgents: (aiReady || hasAiProfiles) && canCreateRooms,
+    aiServicesEnabled,
+    isWarningRoomsDialog,
+    setQuotaWarningDialogVisible,
   });
 
   // The dashboard renders its own content (no SDK iframe). Tell the
   // persistent host to drop the previous app's frame so it doesn't linger
   // behind the dashboard.
   useSdkFrame({ appId: "dashboard", enabled: false });
+
+  // The welcome flag is per-user and lives in storage, so it has to be read
+  // back once the signed-in user is known. Keyed on `userId` rather than run
+  // once: the same page survives a user switch on this route.
+  React.useEffect(() => {
+    hydrateWelcome(userId);
+  }, [hydrateWelcome, userId]);
+
+  // Spends this user's one first-load Overview: from the next sign-in on, the
+  // entry redirect sends them to their Default Homepage instead. Recorded from
+  // the page rather than from the redirect so that only reaching the Overview
+  // for real counts, and only past the loader so a load abandoned on the
+  // skeleton doesn't.
+  React.useEffect(() => {
+    if (showLoader) return;
+    setDashboardVisited(userId);
+  }, [showLoader, userId]);
+
+  /**
+   * Whether the welcome is on screen, which two different things can ask for:
+   * the first visit (the stored flag) and the help button (this state). Local
+   * rather than derived from the store alone, because reopening it deliberately
+   * must not depend on un-dismissing a flag that means "has been offered once".
+   */
+  const [isWelcomeOpen, setIsWelcomeOpen] = React.useState(false);
+
+  /**
+   * The first-visit offer, made once to a user who can actually be walked
+   * through the page afterwards.
+   *
+   * Not on mobile, where no tour runs at all (`useTour` refuses to) — and the
+   * flag is deliberately left unspent there rather than dismissed, so somebody
+   * whose first visit was on a phone still gets the offer on their desktop.
+   * Behind the loader for the same reason the tour is: the modal introduces the
+   * page, and the page is a skeleton until then.
+   */
+  const isFirstVisit = !isWelcomeSeen && !showLoader && !isMobile;
+
+  const showWelcome = isFirstVisit || isWelcomeOpen;
+
+  const onWelcomeClose = React.useCallback(() => {
+    setIsWelcomeOpen(false);
+    // Spends the first-visit offer. A no-op once already spent, so closing a
+    // modal reopened from the help button costs nothing.
+    dismissWelcome(userId);
+  }, [dismissWelcome, userId]);
+
+  // Both buttons dismiss; this one arms the tour on the way out. The host below
+  // is what starts it, once the page has settled.
+  const onWelcomeTakeTour = React.useCallback(() => {
+    setIsWelcomeOpen(false);
+    dismissWelcome(userId);
+    requestDashboardTour();
+  }, [dismissWelcome, userId, requestDashboardTour]);
+
+  // AI chat panel, mirroring the Home page: the "AI Chat" quick action opens
+  // the shared panel (AiChatStore), which the dashboard hosts itself since it
+  // doesn't render inside a Section.
+  const {
+    aiReady: aiChatReady,
+    noAccessProps: aiChatNoAccessProps,
+    topUpDialog: aiChatTopUpDialog,
+  } = useChatNoAccess(props);
+
+  const aiChatPanel = useAiChatPanel(true, {
+    aiReady: aiChatReady,
+    noAccessProps: aiChatNoAccessProps,
+  });
+
+  // The panel is shared state, so a portal that turns AI services off while a
+  // chat is open must not leave it on screen. Home does the same in
+  // `usePanelExclusivity`; the dashboard has no Info Panel to coordinate with,
+  // so only this half of that hook applies here. `useAiChatPanel` returns a new
+  // object each render, so the effect keys on its two reactive values rather
+  // than on the bindings themselves.
+  const { isChatPanelVisible, closeChatPanel } = aiChatPanel;
+  React.useEffect(() => {
+    if (!isAiChatAvailable && isChatPanelVisible) closeChatPanel();
+  }, [isAiChatAvailable, isChatPanelVisible, closeChatPanel]);
+
+  const isDesktop = useIsDesktop();
+  const isAiChatFullscreen =
+    isAiChatAvailable &&
+    aiChatPanel.isChatPanelVisible &&
+    (aiChatPanel.isChatPanelFullscreen || !isDesktop);
 
   // The dashboard has no async content to load, so finish the sidebar's
   // Overview item progress animation immediately (other pages dispatch this
@@ -154,128 +328,240 @@ const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
   // ahead of the navigation it sits next to.
   if (showLoader) return <DashboardLoader />;
 
-  const moduleItems: ModuleItem[] = [
-    {
-      id: "ai-files",
-      icon: <CatalogFolderIcon />,
-      title: t("Common:DashboardFilesTitle"),
-      description: t("Common:DashboardFilesDescription"),
-      installed: true,
-      href: isGuest ? "/shared-with-me/filter" : "/rooms/personal/filter",
-    },
-    {
-      id: "ai-rooms",
-      icon: <CatalogRoomsIcon />,
-      title: t("Common:DashboardRoomsTitle"),
-      description: t("Common:DashboardRoomsDescription"),
-      installed: true,
-      href: "/rooms/shared/filter",
-    },
-    {
-      id: "ai-forms",
-      icon: <CatalogDocumentsIcon />,
-      title: t("Common:DashboardFormsTitle"),
-      description: t("Common:DashboardFormsDescription"),
-      installed: true,
-      href: "/forms/filter",
-    },
-    {
-      id: "ai-agents",
-      icon: <AiAgentsIcon />,
-      title: t("Common:DashboardAIChatAgentsTitle"),
-      description: t("Common:DashboardAIChatAgentsDescription"),
-      installed: true,
-      href: "/ai-agents/filter",
-    },
-  ].filter((mod) => mod.installed);
-
   return (
-    <div className={styles.dashboard}>
-      <div className={styles.dashboardInner}>
-        <Header />
-        <ProfileCard />
+    <div
+      className={styles.dashboardLayout}
+      data-layout-mode={isAiChatFullscreen ? "ai-fullscreen" : undefined}
+    >
+      <div className={styles.dashboard} inert={isAiChatFullscreen}>
+        <Scrollbar className={styles.dashboardScrollbar}>
+          <div className={styles.dashboardInner}>
+            <Header
+              onOpenTour={isMobile ? undefined : () => setIsWelcomeOpen(true)}
+            />
+            <ProfileCard />
 
-        <section className={styles.section}>
-          <Text fontSize="18px" fontWeight={700} lineHeight="24px">
-            <Trans
-              t={t}
-              ns="Common"
-              i18nKey="CreateNewOrUpload"
-              components={{
-                1: (
-                  <Link
-                    id={UPLOAD_LINK_ID}
-                    type={LinkType.action}
-                    color="accent"
-                    isHovered
-                    isSemitransparent={isGuest}
-                    fontSize="18px"
-                    fontWeight={700}
-                    lineHeight="24px"
-                    onClick={isGuest ? undefined : openUploadDialog}
+            <section data-tour-id="dashboard-create" className={styles.section}>
+              <div className={styles.sectionHeading}>
+                <Text fontSize="18px" fontWeight={700} lineHeight="24px">
+                  <Trans
+                    t={t}
+                    ns="Common"
+                    i18nKey="CreateNewOrUpload"
+                    components={{
+                      1: (
+                        <Link
+                          id={UPLOAD_LINK_ID}
+                          type={LinkType.action}
+                          color="accent"
+                          isHovered
+                          isSemitransparent={isGuest}
+                          fontSize="18px"
+                          fontWeight={700}
+                          lineHeight="24px"
+                          onClick={isGuest ? undefined : openUploadDialog}
+                        />
+                      ),
+                    }}
                   />
-                ),
-              }}
-            />
-          </Text>
-          {isGuest ? (
-            <Tooltip
-              id={`${UPLOAD_LINK_ID}-tooltip`}
-              anchorSelect={`#${UPLOAD_LINK_ID}`}
-              place="bottom"
-              getContent={() => <GuestRestrictionTooltip />}
-            />
-          ) : null}
-          <QuickActions items={createItems} className={styles.quickActions} />
-        </section>
-
-        {moduleItems.length > 0 ? (
-          <section className={styles.section}>
-            <Text className={styles.sectionTitle}>{t("OAuth:Apps")}</Text>
-            <div className={styles.modulesGrid}>
-              {moduleItems.map((mod) => (
-                <ModuleCard
-                  key={mod.id}
-                  mod={mod}
-                  onClick={() => {
-                    promoHrefRef.current = mod.href;
-                    // Show the app's promo on first open; it navigates on
-                    // confirm. Already-seen / no-promo apps navigate directly.
-                    if (maybeShowPromo(mod.id as AppId)) return;
-                    if (mod.href) navigate(mod.href);
-                  }}
+                </Text>
+                <Text as="p" className={styles.sectionSubtitle}>
+                  {t("Common:NewFilesDefaultPlace", {
+                    sectionName: t("Common:Files"),
+                  })}
+                  {canOpenDocsConnect ? (
+                    <>
+                      {" - "}
+                      <Trans
+                        t={t}
+                        ns="Common"
+                        i18nKey="OrConnectDocs"
+                        values={{
+                          docsName: getBrandName("ProductEditorsName"),
+                        }}
+                        components={{
+                          1: (
+                            <Link
+                              type={LinkType.page}
+                              color="accent"
+                              isHovered
+                              className={styles.createSubtitleLink}
+                              onClick={openDocsConnect}
+                            />
+                          ),
+                        }}
+                      />
+                      {"."}
+                    </>
+                  ) : null}
+                </Text>
+              </div>
+              {isGuest ? (
+                <Tooltip
+                  id={`${UPLOAD_LINK_ID}-tooltip`}
+                  anchorSelect={`#${UPLOAD_LINK_ID}`}
+                  place="bottom"
+                  getContent={() => <GuestRestrictionTooltip />}
                 />
-              ))}
-            </div>
-          </section>
+              ) : null}
+              <QuickActions
+                items={createItems}
+                className={styles.quickActions}
+              />
+            </section>
+
+            {moduleItems.length > 0 ? (
+              <section data-tour-id="dashboard-apps" className={styles.section}>
+                <div className={styles.sectionHeading}>
+                  <Text className={styles.sectionTitle}>
+                    {t("Common:DiscoverApps")}
+                  </Text>
+                  <Text className={styles.sectionSubtitle}>
+                    {isAdminOrOwner && !standalone
+                      ? t("Common:DiscoverAppsDescription", {
+                          planName: isFreeTariff
+                            ? t("Common:StartupPlan")
+                            : t("Common:BusinessPlan"),
+                        })
+                      : t("Common:DiscoverAppsWorkspaceDescription")}
+                  </Text>
+                </div>
+                <div
+                  className={styles.modulesGrid}
+                  style={modulesGridStyle(moduleItems.length)}
+                >
+                  {moduleItems.map((mod) => (
+                    <ModuleCard
+                      key={mod.id}
+                      mod={mod}
+                      onTakeTour={
+                        isMobile
+                          ? undefined
+                          : () => {
+                              requestAppTour(mod.id as AppId);
+                              // The tour runs inside the app's section, so this
+                              // navigates even when the button next to it
+                              // creates.
+                              navigate(mod.href);
+                            }
+                      }
+                    />
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
+            <IntegrationsCard dataTourId="dashboard-integrations" />
+            <DevToolsCard />
+          </div>
+        </Scrollbar>
+
+        {progress.isUploading ? (
+          <FloatingButton
+            icon="upload"
+            percent={progress.percent}
+            completed={progress.completed}
+            alert={progress.alert}
+            showCancelButton={progress.completed || progress.alert}
+            clearUploadedFilesHistory={clearProgress}
+          />
         ) : null}
 
-        <IntegrationsCard />
-        <DevToolsCard />
+        {showWelcome ? (
+          <WelcomeDialog
+            onTakeTour={onWelcomeTakeTour}
+            onClose={onWelcomeClose}
+          />
+        ) : null}
+
+        <DashboardTourHost />
       </div>
 
-      {progress.isUploading ? (
-        <FloatingButton
-          icon="upload"
-          percent={progress.percent}
-          completed={progress.completed}
-          alert={progress.alert}
-          showCancelButton={progress.completed || progress.alert}
-          clearUploadedFilesHistory={clearProgress}
-        />
+      {isAiChatAvailable ? (
+        <ChatPanelView
+          isVisible={aiChatPanel.isChatPanelVisible}
+          setIsVisible={(visible) => {
+            if (!visible) aiChatPanel.closeChatPanel();
+          }}
+          currentDeviceType={currentDeviceType}
+          isResizable={!isAiChatFullscreen}
+          width={aiChatPanel.chatPanelWidth}
+          onResize={aiChatPanel.setChatPanelWidth}
+        >
+          {aiChatPanel.chatPanelContent}
+        </ChatPanelView>
       ) : null}
 
-      {promoDialog}
+      {isAiChatAvailable ? aiChatTopUpDialog : null}
     </div>
   );
 };
 
-const DashboardConnected = inject<TStore>(
-  ({ userStore, clientLoadingStore }) => ({
+const DashboardConnected = inject((stores: TStore) => {
+  const {
+    authStore,
+    userStore,
+    clientLoadingStore,
+    settingsStore,
+    currentQuotaStore,
+    dialogsStore,
+    filesTourStore,
+    roomsTourStore,
+    formsTourStore,
+    aiAgentsTourStore,
+    dashboardTourStore,
+  } = stores;
+
+  // The app cards an onboarding tour can be started from. An app that isn't
+  // here simply gets no "Take a tour" button on its card.
+  const appTourStores = {
+    "ai-files": filesTourStore,
+    "ai-rooms": roomsTourStore,
+    "ai-forms": formsTourStore,
+    "ai-agents": aiAgentsTourStore,
+  } as const;
+
+  return {
+    ...mapChatNoAccessStores(stores),
     isGuest: userStore.user?.isVisitor ?? false,
     showLoader: clientLoadingStore.showArticleLoader,
-  }),
-)(observer(Dashboard));
+    currentDeviceType: settingsStore.currentDeviceType,
+    requestAppTour: (appId: AppId) => {
+      if (appId in appTourStores)
+        appTourStores[appId as keyof typeof appTourStores].requestTour();
+    },
+    // The welcome flag is per-user, so the id is passed through rather than read
+    // inside the store — which has no view of who is signed in.
+    userId: userStore.user?.id,
+    isWelcomeSeen: dashboardTourStore.isWelcomeSeen,
+    hydrateWelcome: dashboardTourStore.hydrateWelcome,
+    dismissWelcome: dashboardTourStore.dismissWelcome,
+    requestDashboardTour: dashboardTourStore.requestTour,
+    // Same set the Home quick actions and the agents header button gate on.
+    canCreateRooms: authStore.isAdmin || authStore.isRoomAdmin,
+    // Room admins are excluded here: the apps subtitle names the portal's plan,
+    // which only admins and the owner see. Same flags the Header and
+    // ProfileCard gate on.
+    isAdminOrOwner:
+      (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
+    // Stricter still: Docs Connect is a SaaS-only service, so a standalone
+    // portal is not offered the link at all — see `hasDocsConnectAccess`.
+    canOpenDocsConnect: hasDocsConnectAccess(
+      userStore.user,
+      settingsStore.standalone,
+    ),
+    aiReady: settingsStore.aiConfig?.aiReady ?? false,
+    // The portal's own AI switch, which is a stronger statement than `aiReady`:
+    // AI that is off is not "not set up yet", it is not on offer at all.
+    aiServicesEnabled: settingsStore.aiServicesEnabled,
+    // Undefined until the tariff loads; the plan is free by default, matching
+    // the header's own fallback.
+    isFreeTariff: currentQuotaStore.isFreeTariff ?? true,
+    standalone: settingsStore.standalone,
+    isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,
+    setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
+  };
+})(observer(Dashboard));
 
 export { DashboardConnected as Dashboard };
 

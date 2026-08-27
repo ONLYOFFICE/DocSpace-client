@@ -1,0 +1,29 @@
+{
+  "key_path": "ViewExaPricing",
+  "content": "View Exa pricing",
+  "content_en_sha1_hash": "deb83c9908b32191a6f6d47019f1a2cb6e74f086",
+  "created_at": "2026-08-21T15:04:28.173Z",
+  "updated_at": "2026-08-21T15:05:39.116Z",
+  "comment": {
+    "text": "Tooltip text for an external link icon that directs users to the Exa pricing page.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T15:05:39.116Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/WebSearchSaas.tsx",
+      "line_number": 160,
+      "context": "<Link\n href={ws.link}\n target={LinkTarget.blank}\n className={styles.detailsLink}\n data-tooltip-id=\"ws-pricing-tooltip\"\n data-tooltip-content={t(\"Common:ViewExaPricing\")}\n >\n <ExternalLinkIcon />\n </Link>\n ) : null}\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

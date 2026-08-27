@@ -208,6 +208,10 @@ const AutoBackup = ({
 			settingsFileSelector={{
 				filesSettings: filesSettings as unknown as FilesSettingsDto,
 			}}
+			disabledCreatePublicRoom={
+				!filesSettings?.externalShare &&
+				!!filesSettings?.externalShareApplyToRooms
+			}
 			removeItem={selectedThirdPartyAccount as ThirdPartyAccountType}
 			language={language}
 			// backup

@@ -1,0 +1,400 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Events } from "@docspace/shared/enums";
+
+import config from "PACKAGE_FILE";
+
+import { PluginActions, PluginToastType } from "./enums";
+import { CategoryType } from "@docspace/shared/constants";
+import { getCategoryType } from "@docspace/shared/utils/common";
+import { IBox } from "@onlyoffice/docspace-plugin-sdk";
+
+import {
+  showInfoPanel,
+  openMembersTab,
+  openShareTab,
+  setView,
+  InfoPanelView,
+  setFileView,
+  setRoomsView,
+} from "../info-panel";
+import { isPluginSectionPath } from "./navigation";
+
+import { TMessageActionsParams } from "./types";
+
+export const messageActions = ({
+  message,
+  setElementProps,
+  pluginName,
+  setSettingsPluginDialogVisible,
+  updatePluginStatus,
+  updatePropsContext,
+  setPluginDialogVisible,
+  setPluginDialogProps,
+  setPluginSelectorVisible,
+  setPluginSelectorProps,
+  addPluginFloatingOperations,
+  removePluginFloatingOperations,
+  updatePluginFloatingOperations,
+  updateContextMenuItems,
+  updateInfoPanelItems,
+  updateMainButtonItems,
+  updateProfileMenuItems,
+  updateEventListenerItems,
+  updateArticleButtonItems,
+  updateArticleNavigationItems,
+  updateFileItems,
+  updateCreateDialogProps,
+  updatePlugin,
+  setPluginMediaViewerVisible,
+  setPluginMediaViewerProps,
+  setReactPluginModalState,
+  reactPluginCurrentFile,
+}: TMessageActionsParams): void => {
+  if (!message || !message.actions || message.actions.length === 0) return;
+
+  message.actions.forEach((action) => {
+    switch (action) {
+      case PluginActions.updateProps:
+        if (message.newProps) {
+          setElementProps?.({ ...message.newProps });
+        }
+
+        break;
+
+      case PluginActions.updateContext:
+        if (message?.contextProps) {
+          updatePropsContext?.(message.contextProps);
+        }
+        break;
+
+      case PluginActions.updateStatus:
+        updatePluginStatus?.(pluginName);
+
+        break;
+
+      case PluginActions.showToast:
+        if (message.toastProps) {
+          message.toastProps.forEach((toast) => {
+            switch (toast.type) {
+              case PluginToastType.success:
+                toastr.success(toast.title);
+                break;
+              case PluginToastType.info:
+                toastr.info(toast.title);
+                break;
+              case PluginToastType.error:
+                toastr.error(toast.title);
+                break;
+              case PluginToastType.warning:
+                toastr.warning(toast.title);
+                break;
+              default:
+                break;
+            }
+          });
+        }
+
+        break;
+      case PluginActions.showSelector:
+        {
+          if (!message.selectorProps) return;
+
+          setPluginSelectorVisible?.(true);
+          setPluginSelectorProps?.({
+            ...message.selectorProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.closeSelector:
+        setPluginSelectorVisible?.(false);
+        setPluginSelectorProps?.(null);
+        break;
+
+      case PluginActions.updateSelector:
+        {
+          if (!message.selectorProps) return;
+
+          setPluginSelectorProps?.({
+            ...message.selectorProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.addFloatingOperationsButton:
+        {
+          if (!message.floatingOperationsButtonProps) return;
+          addPluginFloatingOperations?.({
+            ...message.floatingOperationsButtonProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.removeFloatingOperationsButton: {
+        if (!message.floatingOperationsButtonPropsId) return;
+        removePluginFloatingOperations?.(
+          message.floatingOperationsButtonPropsId,
+        );
+        break;
+      }
+
+      case PluginActions.updateFloatingOperationsButton:
+        {
+          if (!message.floatingOperationsButtonProps) return;
+
+          updatePluginFloatingOperations?.({
+            ...message.floatingOperationsButtonProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.showCreateDialogModal:
+        if (message.createDialogProps) {
+          const payload = {
+            ...message.createDialogProps,
+            pluginName,
+          };
+
+          const event = Object.assign(new Event(Events.CREATE_PLUGIN_FILE), {
+            payload,
+          });
+
+          window.dispatchEvent(event);
+        }
+        break;
+
+      case PluginActions.updateCreateDialogModal:
+        if (message.createDialogProps) {
+          updateCreateDialogProps?.(message.createDialogProps);
+        }
+        break;
+
+      case PluginActions.showModal:
+        if (message.modalDialogProps) {
+          if (message.modalDialogProps.dialogBodyComponent) {
+            setReactPluginModalState?.({
+              pluginName,
+              component: message.modalDialogProps.dialogBodyComponent,
+              options: message.modalDialogProps,
+              currentFile: reactPluginCurrentFile ?? null,
+            });
+          } else {
+            setPluginDialogVisible?.(true);
+            setPluginDialogProps?.({ ...message.modalDialogProps, pluginName });
+          }
+        }
+        break;
+
+      case PluginActions.closeModal:
+        setPluginDialogVisible?.(false);
+        setPluginDialogProps?.(null);
+        setReactPluginModalState?.(null);
+        break;
+
+      case PluginActions.updateContextMenuItems:
+        updateContextMenuItems?.(pluginName);
+
+        break;
+      case PluginActions.updateInfoPanelItems:
+        updateInfoPanelItems?.(pluginName);
+
+        break;
+      case PluginActions.updateMainButtonItems:
+        updateMainButtonItems?.(pluginName);
+
+        break;
+      case PluginActions.updateProfileMenuItems:
+        updateProfileMenuItems?.(pluginName);
+
+        break;
+      case PluginActions.updateEventListenerItems:
+        updateEventListenerItems?.(pluginName);
+
+        break;
+      case PluginActions.updateArticleButtonItems:
+        updateArticleButtonItems?.(pluginName);
+
+        break;
+      case PluginActions.updateArticleNavigationItems:
+        updateArticleNavigationItems?.(pluginName);
+
+        break;
+      case PluginActions.updateFileItems:
+        updateFileItems?.(pluginName);
+
+        break;
+
+      case PluginActions.sendPostMessage: {
+        if (!message.postMessage) return;
+
+        const { postMessage } = message;
+
+        const frame = document.getElementById(`${postMessage.frameId}`);
+
+        if (frame) {
+          (frame as HTMLIFrameElement).contentWindow?.postMessage(
+            JSON.stringify(postMessage.message),
+            "*",
+          );
+        }
+
+        break;
+      }
+      case PluginActions.saveSettings:
+        if (message.settings !== undefined) {
+          updatePlugin?.(pluginName, null, message.settings);
+        }
+        break;
+
+      case PluginActions.navigate:
+        if (!message.navigatePath) return;
+
+        window.DocSpace.navigate(message.navigatePath);
+
+        break;
+
+      case PluginActions.openInfoPanel:
+        setPluginDialogVisible?.(false);
+        setPluginDialogProps?.(null);
+        setReactPluginModalState?.(null);
+        setSettingsPluginDialogVisible?.(false);
+        setPluginSelectorVisible?.(false);
+        showInfoPanel();
+
+        switch (message.infoPanelTab) {
+          case InfoPanelView.infoShare:
+            openShareTab();
+            break;
+          case InfoPanelView.infoMembers:
+            openMembersTab();
+            break;
+          case InfoPanelView.infoDetails:
+          case InfoPanelView.infoHistory:
+            setView(message.infoPanelTab);
+            break;
+          default:
+            setView(`info_plugin-${message.infoPanelTab}`);
+            setFileView(`info_plugin-${message.infoPanelTab}`);
+            setRoomsView(`info_plugin-${message.infoPanelTab}`);
+        }
+
+        break;
+
+      case PluginActions.showMediaViewer:
+        if (message.mediaViewerProps) {
+          setPluginMediaViewerVisible?.(true);
+          setPluginMediaViewerProps?.({
+            ...message.mediaViewerProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.closeMediaViewer:
+        setPluginMediaViewerVisible?.(false);
+        setPluginMediaViewerProps?.(null);
+        break;
+
+      case PluginActions.updateMediaViewer:
+        if (message.mediaViewerProps) {
+          setPluginMediaViewerProps?.({
+            ...message.mediaViewerProps,
+            pluginName,
+          });
+        }
+        break;
+      default:
+        break;
+    }
+  });
+};
+
+export const isPluginPage = (): boolean =>
+  isPluginSectionPath(window.location.pathname);
+
+export const getPluginUrl = (url: string, file: string): string => {
+  const splittedURL = url.split("/");
+
+  splittedURL.pop();
+
+  const path = splittedURL.join("/");
+
+  return combineUrl(
+    window.ClientConfig?.proxy?.url,
+    config.homepage,
+    path,
+    file,
+  );
+};
+
+export const isAIAgents = (): boolean => {
+  const categoryType = getCategoryType(window.location);
+
+  return (
+    categoryType === CategoryType.Chat ||
+    categoryType === CategoryType.AIAgent ||
+    categoryType === CategoryType.AIAgents ||
+    window.location.pathname.startsWith("/ai-agents")
+  );
+};
+
+export function borderToStyle(border: IBox["borderProp"]): {
+  border?: string;
+  borderRadius?: string;
+} {
+  if (!border) return {};
+
+  if (typeof border === "string") {
+    return { border };
+  }
+
+  const { width, style, color, radius } = border;
+
+  const borderValue = [width, style, color].filter(Boolean).join(" ");
+
+  return {
+    ...(borderValue ? { border: borderValue } : {}),
+    ...(radius ? { borderRadius: radius } : {}),
+  };
+}
+

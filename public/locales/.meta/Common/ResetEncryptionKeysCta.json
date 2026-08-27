@@ -3,7 +3,7 @@
   "content": "Lost your passphrase? Reset encryption keys",
   "content_en_sha1_hash": "bfa279eed2631e4b1f0ff78bf3ec3e350b3421b0",
   "created_at": "2026-05-24T17:27:37.145Z",
-  "updated_at": "2026-07-27T13:07:50.846Z",
+  "updated_at": "2026-08-13T10:58:03.281Z",
   "comment": {
     "text": "Button label for a call to action that allows users to initiate the encryption key reset process if they have lost their passphrase.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 412,
+      "line_number": 435,
       "context": "</span>\n <Button\n className={styles.resetButton}\n size={ButtonSize.small}\n onClick={reset.request}\n label={t(\"Common:ResetEncryptionKeysCta\")}\n isLoading={reset.isPending}\n isDisabled={busy}\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     }

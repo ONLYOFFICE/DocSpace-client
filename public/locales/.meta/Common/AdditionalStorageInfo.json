@@ -3,7 +3,7 @@
   "content": "Additional storage",
   "content_en_sha1_hash": "c7e67ca3c948a879eb2ca52406b825f02a356705",
   "created_at": "2026-04-10T13:53:44.159Z",
-  "updated_at": "2026-06-30T11:38:22.660Z",
+  "updated_at": "2026-08-20T12:26:01.865Z",
   "comment": {
     "text": "This is a label in the order summary for a billing plan, indicating the cost of extra storage. It appears when a user is upgrading their storage plan.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
-      "line_number": 152,
+      "line_number": 169,
       "context": "})}`;\n \n // const getServiceTitle = (service: string) => {\n //   switch (service) {\n //     case DISK_STORAGE:\n //       return t(\"AdditionalStorageInfo\");\n //     case BACKUP_SERVICE:\n //       return t(\"Backups\");\n //     case AI_TOOLS:\n //       return t(\"AIFeatures\");\n //     default:",
       "module": "/libs/ui-kit"
     }

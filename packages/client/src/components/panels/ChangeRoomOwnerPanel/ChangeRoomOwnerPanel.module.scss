@@ -53,19 +53,5 @@
     :global(.arrow-button) {
       display: none;
     }
-
-    :global(.selector_body) {
-      height: calc(((100% - 16px) - 111px) - 54px);
-    }
-
-    :global(.selector_footer) {
-      height: 110px;
-      min-height: 110px;
-      max-height: 110px;
-    }
-
-    :global(.selector_footer-checkbox) {
-      padding: 17px 0 1px 0;
-    }
   }
 }

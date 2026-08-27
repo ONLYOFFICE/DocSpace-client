@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { findDocsConnectServices } from "@docspace/ui-kit/billing/utils/docs-connect";
 import { request } from "../client";
-import { saveDeposite } from "../portal";
 import type {
   TDocsConnectInfo,
   TDocsConnectTenant,
@@ -42,16 +42,18 @@ import type {
   TDocsConnectTenantInfo,
   TDocsConnectPrices,
   TDocsConnectTariffState,
+  TDocsConnectPreviousPlan,
+  TDocsConnectServiceIds,
+  TDocsConnectStatistics,
   TDocsConnectWallet,
   TDocsConnectConfigUpdate,
   TDocsConnectDevPackCalculation,
-  TDocsConnectReportStatus,
 } from "./types";
+import type { TDocumentBuilderTask } from "../files/types";
 
 const BASE = "/settings/docscloud";
 
 const DOCS_CLOUD_PRODUCT = "docscloud";
-const DOCS_CLOUD_DEVPACK_SERVICE = "docscloud-devpack";
 const DOCS_CLOUD_DEVPACK_PRODUCT = "docsclouddevpack";
 const QUANTITY_TYPE_SET = 0;
 const QUANTITY_TYPE_ADD = 1;
@@ -59,16 +61,15 @@ const QUANTITY_TYPE_ADD = 1;
 export type BuyDocsConnectPlanData = {
   users: number;
   devPackEnabled: boolean;
-  topUp?: number;
   currentUsers: number;
   currentDevPackEnabled: boolean;
-  currency: string;
 };
 
 type TWalletService = {
   id?: number;
   serviceName?: string;
   price?: { value?: number };
+  features?: { id?: string }[];
 };
 type TWalletServicesResponse = TWalletService[] | null;
 type TBalanceResponse = {
@@ -84,16 +85,28 @@ const fetchWalletServices = async (): Promise<TWalletServicesResponse> =>
 const extractPrices = (
   services: TWalletServicesResponse,
 ): TDocsConnectPrices | null => {
-  const priceOf = (name: string) =>
-    services?.find((service) => service.serviceName === name)?.price?.value;
+  const { base: baseService, devPack: devPackService } =
+    findDocsConnectServices(services);
 
-  const base = priceOf(DOCS_CLOUD_PRODUCT);
+  const base = baseService?.price?.value;
   if (base == null) return null;
 
-  const devpack = priceOf(DOCS_CLOUD_DEVPACK_SERVICE);
+  const devpack = devPackService?.price?.value;
   return {
     pricePerUser: base,
     devPackPrice: devpack == null ? 0 : Math.max(0, devpack - base),
+  };
+};
+
+const extractServiceIds = (
+  services: TWalletServicesResponse,
+): TDocsConnectServiceIds => {
+  const { base: baseService, devPack: devPackService } =
+    findDocsConnectServices(services);
+
+  return {
+    baseId: baseService?.id,
+    devpackId: devPackService?.id,
   };
 };
 
@@ -101,6 +114,7 @@ type TTariffQuota = {
   id?: number;
   quantity?: number;
   nextQuantity?: number | null;
+  nextQuota?: number | null;
   dueDate?: string | null;
   wallet?: boolean;
   state?: number;
@@ -112,17 +126,57 @@ const QUOTA_STATE_OVERDUE = 1;
 const EMPTY_TARIFF_STATE: TDocsConnectTariffState = {
   scheduledChange: null,
   deactivated: false,
+  previousPlan: null,
 };
 
-const fetchTariffState = async (
-  services: TWalletServicesResponse,
-  refresh?: boolean,
-): Promise<TDocsConnectTariffState> => {
-  const serviceId = (name: string) =>
-    (services ?? []).find((service) => service.serviceName === name)?.id;
+const quotaDueTime = (quota?: TTariffQuota): number => {
+  const ms = quota?.dueDate ? new Date(quota.dueDate).getTime() : Number.NaN;
+  return Number.isNaN(ms) ? 0 : ms;
+};
 
-  const baseId = serviceId(DOCS_CLOUD_PRODUCT);
-  const devpackId = serviceId(DOCS_CLOUD_DEVPACK_SERVICE);
+const resolvePreviousPlan = (
+  baseQuota?: TTariffQuota,
+  devpackQuota?: TTariffQuota,
+): TDocsConnectPreviousPlan | null => {
+  const paid = [devpackQuota, baseQuota].filter(
+    (quota): quota is TTariffQuota => (quota?.quantity ?? 0) > 0,
+  );
+
+  if (paid.length === 0) return null;
+
+  const latest = paid.reduce((acc, quota) =>
+    quotaDueTime(quota) > quotaDueTime(acc) ? quota : acc,
+  );
+
+  return {
+    users: latest.quantity ?? 0,
+    devPackEnabled: latest === devpackQuota,
+  };
+};
+
+const resolveNextDevPack = ({
+  nextQuota,
+  baseId,
+  devpackId,
+  fallback,
+}: {
+  nextQuota?: number | null;
+  baseId?: number;
+  devpackId?: number;
+  fallback: boolean;
+}): boolean => {
+  if (nextQuota == null) return fallback;
+  if (devpackId != null && nextQuota === devpackId) return true;
+  if (baseId != null && nextQuota === baseId) return false;
+  return fallback;
+};
+
+const getDocsConnectTariffState = async (
+  serviceIds?: TDocsConnectServiceIds,
+  refresh?: boolean,
+  signal?: AbortSignal,
+): Promise<TDocsConnectTariffState> => {
+  const { baseId, devpackId } = serviceIds ?? {};
 
   if (baseId == null && devpackId == null) return EMPTY_TARIFF_STATE;
 
@@ -130,6 +184,7 @@ const fetchTariffState = async (
     method: "get",
     url: "/portal/tariff",
     params: refresh ? { refresh: true } : {},
+    signal,
   })) as TTariffResponse;
 
   const quotaOf = (id?: number) =>
@@ -139,29 +194,40 @@ const fetchTariffState = async (
 
   const baseQuota = quotaOf(baseId);
   const devpackQuota = quotaOf(devpackId);
+  const previousPlan = resolvePreviousPlan(baseQuota, devpackQuota);
 
   if (
     baseQuota?.state === QUOTA_STATE_OVERDUE ||
     devpackQuota?.state === QUOTA_STATE_OVERDUE
   ) {
-    return { scheduledChange: null, deactivated: true };
+    return { scheduledChange: null, deactivated: true, previousPlan };
   }
 
-  const quotaWithChange = [devpackQuota, baseQuota].find(
+  const scheduleQuota = [devpackQuota, baseQuota].find(
     (q) => q && (q.nextQuantity ?? -1) >= 0,
   );
 
-  if (quotaWithChange) {
+  if (scheduleQuota) {
+    const scheduledOnDevPack = scheduleQuota === devpackQuota;
+
     return {
       scheduledChange: {
-        nextUsers: quotaWithChange.nextQuantity ?? 0,
-        dueDate: quotaWithChange.dueDate ?? "",
+        nextUsers: scheduleQuota.nextQuantity ?? 0,
+        dueDate: scheduleQuota.dueDate ?? "",
+        nextDevPackEnabled: resolveNextDevPack({
+          nextQuota: scheduleQuota.nextQuota,
+          baseId,
+          devpackId,
+          fallback: scheduledOnDevPack,
+        }),
+        scheduledOnDevPack,
       },
       deactivated: false,
+      previousPlan,
     };
   }
 
-  return EMPTY_TARIFF_STATE;
+  return { ...EMPTY_TARIFF_STATE, previousPlan };
 };
 
 const fetchWallet = async (
@@ -186,11 +252,15 @@ type TPaymentQuotaResponse = {
   features?: { id?: string; value?: unknown }[];
 } | null;
 
-const fetchDevPackEnabled = async (refresh?: boolean): Promise<boolean> => {
+const getDocsConnectDevPackEnabled = async (
+  refresh?: boolean,
+  signal?: AbortSignal,
+): Promise<boolean> => {
   const quota = (await request({
     method: "get",
     url: "/portal/payment/quota",
     params: refresh ? { refresh: true } : {},
+    signal,
   })) as TPaymentQuotaResponse;
 
   return (quota?.features ?? []).some(
@@ -199,18 +269,87 @@ const fetchDevPackEnabled = async (refresh?: boolean): Promise<boolean> => {
   );
 };
 
+const getDocsConnectTenant = async (
+  refresh?: boolean,
+  signal?: AbortSignal,
+): Promise<TDocsConnectTenant | null> =>
+  (await request({
+    method: "get",
+    url: `${BASE}/tenant`,
+    params: refresh ? { refresh: true } : {},
+    signal,
+  })) as TDocsConnectTenant | null;
+
+/**
+ * Whether this portal has a Docs Connect instance at all — the cheapest such
+ * check there is (one request, no wallet, config or statistics), for callers
+ * that only need to know if one exists rather than its whole state.
+ */
+export const hasDocsConnectTenant = async (): Promise<boolean> => {
+  try {
+    return (await getDocsConnectTenant()) != null;
+  } catch {
+    return false;
+  }
+};
+
+const getDocsConnectTenantConfig = async (
+  signal?: AbortSignal,
+): Promise<TDocsConnectConfig | null> =>
+  (await request({
+    method: "get",
+    url: `${BASE}/tenant/config`,
+    signal,
+  })) as TDocsConnectConfig | null;
+
+const getDocsConnectTenantInfo = async (
+  refresh?: boolean,
+  signal?: AbortSignal,
+): Promise<TDocsConnectTenantInfo | null> =>
+  (await request({
+    method: "get",
+    url: `${BASE}/tenant/info`,
+    params: refresh ? { refresh: true } : {},
+    signal,
+  })) as TDocsConnectTenantInfo | null;
+
+export type TDocsConnectStatisticsOptions = {
+  refresh?: boolean;
+  signal?: AbortSignal;
+  tenant?: TDocsConnectTenant | null;
+};
+
+export const getDocsConnectStatistics = async (
+  serviceIds?: TDocsConnectServiceIds,
+  { refresh, signal, tenant }: TDocsConnectStatisticsOptions = {},
+): Promise<TDocsConnectStatistics> => {
+  const [currentTenant, tenantInfo, devPackEnabled, tariffState] =
+    await Promise.all([
+      tenant ?? getDocsConnectTenant(refresh, signal),
+      getDocsConnectTenantInfo(refresh, signal),
+      getDocsConnectDevPackEnabled(refresh, signal),
+      getDocsConnectTariffState(serviceIds, refresh, signal),
+    ]);
+
+  return {
+    tenant: currentTenant,
+    tenantInfo,
+    devPackEnabled,
+    scheduledChange: tariffState.scheduledChange,
+    deactivated: tariffState.deactivated,
+    previousPlan:
+      (currentTenant?.payment?.quantity ?? 0) > 0
+        ? null
+        : tariffState.previousPlan,
+  };
+};
+
 export const getDocsConnectInfo = async (
   refresh?: boolean,
 ): Promise<TDocsConnectInfo | null> => {
-  const refreshParams = refresh ? { refresh: true } : {};
-
   let tenant: TDocsConnectTenant | null = null;
   try {
-    tenant = (await request({
-      method: "get",
-      url: `${BASE}/tenant`,
-      params: refreshParams,
-    })) as TDocsConnectTenant | null;
+    tenant = await getDocsConnectTenant(refresh);
   } catch {
     tenant = null;
   }
@@ -219,34 +358,63 @@ export const getDocsConnectInfo = async (
     return null;
   }
 
-  const [config, tenantInfo] = (await Promise.all([
-    request({ method: "get", url: `${BASE}/tenant/config` }),
-    request({
-      method: "get",
-      url: `${BASE}/tenant/info`,
-      params: refreshParams,
-    }),
-  ])) as [TDocsConnectConfig, TDocsConnectTenantInfo];
+  const [config, services] = (await Promise.all([
+    getDocsConnectTenantConfig(),
+    fetchWalletServices(),
+  ])) as [TDocsConnectConfig, TWalletServicesResponse];
 
-  const services = await fetchWalletServices();
+  const serviceIds = extractServiceIds(services);
 
-  const [wallet, devPackEnabled, tariffState] = await Promise.all([
+  const [wallet, statistics] = await Promise.all([
     fetchWallet(refresh),
-    fetchDevPackEnabled(refresh),
-    fetchTariffState(services, refresh),
+    getDocsConnectStatistics(serviceIds, { refresh, tenant }),
   ]);
 
   return {
+    ...statistics,
     tenant,
     config,
-    tenantInfo,
+    tenantInfo: statistics.tenantInfo as TDocsConnectTenantInfo,
     prices: extractPrices(services),
     wallet,
-    devPackEnabled,
-    scheduledChange: tariffState.scheduledChange,
-    deactivated: tariffState.deactivated,
+    serviceIds,
   };
 };
+
+export type TDocsConnectConnection = {
+  address: string;
+  secret: string;
+  header: string;
+};
+
+export const getDocsConnectConnection =
+  async (): Promise<TDocsConnectConnection | null> => {
+    let tenant: TDocsConnectTenant | null = null;
+    try {
+      tenant = await getDocsConnectTenant();
+    } catch {
+      tenant = null;
+    }
+
+    if (!tenant?.address) {
+      return null;
+    }
+
+    let config: TDocsConnectConfig | null = null;
+    try {
+      config = await getDocsConnectTenantConfig();
+    } catch {
+      config = null;
+    }
+
+    const secret = config?.security.secret;
+    const header = config?.security.header;
+    if (!secret || !header) {
+      return null;
+    }
+
+    return { address: tenant.address, secret, header };
+  };
 
 export const startDocsConnectTrial =
   async (): Promise<TDocsConnectInfo | null> => {
@@ -265,19 +433,19 @@ export const updateDocsConnectConfig = async (
 };
 
 export const startDocsConnectReport =
-  async (): Promise<TDocsConnectReportStatus | null> => {
+  async (): Promise<TDocumentBuilderTask | null> => {
     return (await request({
       method: "post",
       url: `${BASE}/tenant/quota/report`,
-    })) as TDocsConnectReportStatus | null;
+    })) as TDocumentBuilderTask | null;
   };
 
 export const getDocsConnectReportStatus =
-  async (): Promise<TDocsConnectReportStatus | null> => {
+  async (): Promise<TDocumentBuilderTask | null> => {
     return (await request({
       method: "get",
       url: `${BASE}/tenant/quota/report`,
-    })) as TDocsConnectReportStatus | null;
+    })) as TDocumentBuilderTask | null;
   };
 
 export const cancelDocsConnectPlan = async (
@@ -304,9 +472,9 @@ export const cancelDocsConnectPlan = async (
 };
 
 export const cancelDocsConnectScheduledChange = async (
-  devPackEnabled: boolean,
+  scheduledOnDevPack: boolean,
 ): Promise<TDocsConnectInfo | null> => {
-  const product = devPackEnabled
+  const product = scheduledOnDevPack
     ? DOCS_CLOUD_DEVPACK_PRODUCT
     : DOCS_CLOUD_PRODUCT;
 
@@ -332,15 +500,9 @@ export const buyDocsConnectPlan = async (
   const {
     users,
     devPackEnabled,
-    topUp,
     currentUsers: prevUsers,
     currentDevPackEnabled,
-    currency,
   } = data;
-
-  if (topUp && topUp > 0) {
-    await saveDeposite(topUp, currency);
-  }
 
   const disablingDevPack = currentDevPackEnabled && !devPackEnabled;
 
@@ -354,7 +516,7 @@ export const buyDocsConnectPlan = async (
   const isDecrease = users < currentUsers;
 
   const quantity = disablingDevPack
-    ? { [DOCS_CLOUD_DEVPACK_PRODUCT]: 0 }
+    ? { [DOCS_CLOUD_PRODUCT]: users }
     : { [product]: isDecrease ? users : users - currentUsers };
 
   const productQuantityType =
@@ -387,17 +549,9 @@ export const calculateDocsConnectDevPack = async (
 
 export const switchDocsConnectToDevPack = async ({
   quantity,
-  topUp,
-  currency,
 }: {
   quantity: number;
-  topUp?: number;
-  currency: string;
 }): Promise<TDocsConnectInfo | null> => {
-  if (topUp && topUp > 0) {
-    await saveDeposite(topUp, currency);
-  }
-
   const ok = (await request({
     method: "post",
     url: `${BASE}/switchtodevpack`,

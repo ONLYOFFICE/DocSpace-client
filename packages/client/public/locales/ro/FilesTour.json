@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Începeți un chat cu IA ca să puneți întrebări, să rezumați documente, să generați texte și să primiți ajutor în munca dumneavoastră — chiar în {{sectionName}}.",
+  "TourAiAssistantTitle": "Asistentul dumneavoastră IA",
+  "TourBringFiles": "Încărcați fișiere de pe computer sau pur și simplu trageți-le oriunde în această fereastră.",
+  "TourBringFilesTitle": "Aduceți-vă fișierele",
+  "TourCreateAnything": "Creați documente, foi de calcul, prezentări și formulare PDF direct în browser — fără niciun program instalat.",
+  "TourCreateAnythingTitle": "Creați orice",
+  "TourFindFast": "Căutați după nume, filtrați după tip sau autor, sortați lista și comutați între vizualizarea ca listă și cea sub formă de dale.",
+  "TourFindFastTitle": "Găsiți rapid orice",
+  "TourPlacesFavorites": "{{sectionName}} — fișierele marcate cu stea.",
+  "TourPlacesRecent": "{{sectionName}} — la ce ați lucrat în ultima vreme.",
+  "TourPlacesShared": "{{sectionName}} — fișierele pe care alții le-au partajat cu dumneavoastră.",
+  "TourPlacesTitle": "Fiecare lucru la locul lui",
+  "TourPlacesTrash": "{{sectionName}} — fișierele șterse pe care încă le puteți restaura.",
+  "TourShare": "Treceți cu mouse-ul peste orice fișier pentru a vedea acțiunile rapide. Faceți clic pe pictograma de partajare pentru a acorda acces contactelor din spațiul de lucru cu diferite niveluri de permisiune — sau creați un link extern pentru oricine altcineva.",
+  "TourSharedAccess": "{{sharedBy}} arată de la cine a venit fișierul, {{accessLevel}} arată ce puteți face cu el — vizualizare, comentare sau editare. Doar proprietarul poate schimba acest lucru.",
+  "TourSharedAccessTitle": "Cine l-a partajat și ce puteți face",
+  "TourSharedEmpty": "Nu s-a partajat încă nimic cu dumneavoastră. Fișierele și folderele vor apărea aici imediat ce cineva vă dă acces la ele.",
+  "TourSharedEmptyTitle": "Lista dumneavoastră este goală deocamdată",
+  "TourSharedList": "Tot ceea ce alte persoane vă dau acces ajunge în {{sectionName}}. Deschideți un fișier ca să lucrați la el în browser — originalul rămâne unde este, așa că toată lumea vede mereu aceeași versiune.",
+  "TourSharedListTitle": "Partajate cu dumneavoastră",
+  "TourShareTitle": "Partajați și colaborați"
+}

@@ -43,6 +43,7 @@ import type {
   TNavigationItem,
   TOnNavigationItemClick,
 } from "@docspace/ui-kit/components/navigation/Navigation.types";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 
 import useDeviceType from "@/hooks/useDeviceType";
@@ -68,7 +69,10 @@ type AgentsHeaderProps = {
   navigationItems?: TNavigationItem[];
   onBackToParentFolder?: () => void;
   onClickFolder?: TOnNavigationItemClick;
+  getContextOptions?: () => ContextMenuModel[];
 };
+
+const noOptions = () => [];
 
 const AgentsHeader = ({
   title,
@@ -76,6 +80,7 @@ const AgentsHeader = ({
   navigationItems = [],
   onBackToParentFolder,
   onClickFolder,
+  getContextOptions,
 }: AgentsHeaderProps) => {
   const { currentDeviceType } = useDeviceType();
   const { headerOffset } = useFrameHeaderConfig();
@@ -129,14 +134,15 @@ const AgentsHeader = ({
           isDesktop={false}
           navigationItems={navigationItems}
           getContextOptionsPlus={() => []}
-          getContextOptionsFolder={() => []}
+          getContextOptionsFolder={getContextOptions ?? noOptions}
           onClickFolder={handleClickFolder}
           isTrashFolder={false}
           isEmptyPage={isEmptyList}
           isEmptyFilesList={isEmptyList}
           onBackToParentFolder={handleBack}
           showRootFolderTitle={false}
-          withMenu={false}
+          withMenu={!!getContextOptions}
+          isContextButtonVisible={!!getContextOptions}
           currentDeviceType={currentDeviceType}
           titleIcon=""
           titleIconTooltip=""

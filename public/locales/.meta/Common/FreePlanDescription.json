@@ -3,7 +3,7 @@
   "content": "You are on the free {{planName}} plan.",
   "content_en_sha1_hash": "e564225dded8baa0ce1b9e19d7ffdc309174eb2c",
   "created_at": "2026-08-20T20:04:44.643Z",
-  "updated_at": "2026-08-21T08:13:45.591Z",
+  "updated_at": "2026-08-26T14:08:33.049Z",
   "comment": {
     "text": "Subline text in the Dashboard Header indicating the user's current free subscription status, including the {{planName}} variable for the plan name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/Header.tsx",
-      "line_number": 127,
+      "line_number": 123,
       "context": "<div className={styles.planSubline}>\n <Text as=\"span\" className={styles.planSublineText}>\n {/* Two sentences on a paid plan, but each key keeps its own\n punctuation so the join isn't hardcoded to a period. */}\n {isFreeTariff\n ? t(\"Common:FreePlanDescription\", {\n planName: t(\"Common:StartupPlan\"),\n })\n : paymentDate\n ? t(\"Common:PaidPlanDescription\", {\n planName: businessPlan,",
       "module": "/packages/client"
     }

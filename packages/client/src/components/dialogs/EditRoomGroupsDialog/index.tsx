@@ -94,10 +94,8 @@ const EditRoomGroupsDialog = ({
     () => !!createGroupFromRoomIds && createGroupFromRoomIds.length > 0,
   );
 
-  const [arrIdsRooms, setArrIdsRooms] = useState<string[] | null>(() =>
-    createGroupFromRoomIds
-      ? createGroupFromRoomIds.map((id) => String(id))
-      : null,
+  const [arrIdsRooms, setArrIdsRooms] = useState<(string | number)[] | null>(
+    () => (createGroupFromRoomIds ? [...createGroupFromRoomIds] : null),
   );
   const [selectedGroup, setSelectedGroup] = useState<{
     id: string;
@@ -261,9 +259,9 @@ const EditRoomGroupsDialog = ({
       return;
     }
 
-    const arrIds: string[] = [];
+    const arrIds: (string | number)[] = [];
     items.forEach((item) => {
-      if (item.id) arrIds.push(String(item.id));
+      if (item.id) arrIds.push(item.id);
     });
 
     setArrIdsRooms(arrIds);

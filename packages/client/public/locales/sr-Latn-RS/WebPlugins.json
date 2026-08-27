@@ -14,7 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin uspešno učitan",
   "PluginSamples": "Primeri dodataka",
   "PluginSDK": "Plugin SDK (SDK za dodatke)",
-  "PluginSDKDescription": "Pomoću Plugin SDK-a (SDK za dodatke) možete proširiti funkcionalnost vašeg radnog prostora, povezati treće strane usluge ili unaprediti postojeće korisničko iskustvo. Ovde možete pronaći uzorke dodataka sa dostupnim izvornim kodom na GitHub-u.",
-  "PluginSDKInstruction": "Kliknite na dugme za detaljne instrukcije kako da kreirate sopstvene dodatke.",
+  "PluginSDKDescription": "Koristite Plugin SDK da dodate nove funkcionalnosti, povežete usluge trećih strana ili unapredite postojeće iskustvo. Pregledajte primere dodataka ispod, čiji je izvorni kod dostupan na GitHub-u. Idite na stranicu <1>Dodaci</1> da ih omogućite za svoj radni prostor.",
+  "PluginSDKInstruction": "<1>Pročitajte uputstva</1> da napravite sopstvene dodatke.",
   "UploadDescription": "Možete dodati dodatke da biste proširili funkcionalnost radnog prostora sa dodatnim mogućnostima. Kliknite na \"Postavi dodatak\" ili prevucite datoteku u ZIP arhivi."
 }

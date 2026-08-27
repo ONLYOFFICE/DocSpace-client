@@ -77,7 +77,7 @@ import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { hasDocsConnectAccess } from "@docspace/shared/utils/devToolsAccess";
+import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
@@ -108,6 +108,7 @@ import { useUploadToMyDocuments } from "./hooks/useUploadToMyDocuments";
 import { useCreateActions } from "./hooks/useCreateActions";
 import { useModuleItems } from "./hooks/useModuleItems";
 import { useMyFolderId } from "./hooks/useMyFolderId";
+import { modulesGridStyle } from "./utils";
 import styles from "./Dashboard.module.scss";
 
 type DashboardProps = ChatNoAccessStoreProps & {
@@ -132,8 +133,12 @@ type DashboardProps = ChatNoAccessStoreProps & {
   canOpenDocsConnect: boolean;
   /** Whether the portal's AI is set up, which agent creation also needs. */
   aiReady: boolean;
+  /** The portal-wide AI switch: with it off the AI Agents card is dropped. */
+  aiServicesEnabled: boolean;
   /** Names the plan in the apps subtitle: Startup when free, Business when paid. */
   isFreeTariff: boolean;
+  /** Startup and Business are SaaS tariffs; standalone gets the neutral copy. */
+  standalone: boolean;
   /** Rooms quota exhausted or portal in its grace period. */
   isWarningRoomsDialog: boolean;
   setQuotaWarningDialogVisible: (visible: boolean) => void;
@@ -157,7 +162,9 @@ const Dashboard = (props: DashboardProps) => {
     isAdminOrOwner,
     canOpenDocsConnect,
     aiReady,
+    aiServicesEnabled,
     isFreeTariff,
+    standalone,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
   } = props;
@@ -202,6 +209,7 @@ const Dashboard = (props: DashboardProps) => {
     isGuest,
     canCreateRooms,
     canCreateAgents: (aiReady || hasAiProfiles) && canCreateRooms,
+    aiServicesEnabled,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
   });
@@ -409,7 +417,7 @@ const Dashboard = (props: DashboardProps) => {
                     {t("Common:DiscoverApps")}
                   </Text>
                   <Text className={styles.sectionSubtitle}>
-                    {isAdminOrOwner
+                    {isAdminOrOwner && !standalone
                       ? t("Common:DiscoverAppsDescription", {
                           planName: isFreeTariff
                             ? t("Common:StartupPlan")
@@ -418,7 +426,10 @@ const Dashboard = (props: DashboardProps) => {
                       : t("Common:DiscoverAppsWorkspaceDescription")}
                   </Text>
                 </div>
-                <div className={styles.modulesGrid}>
+                <div
+                  className={styles.modulesGrid}
+                  style={modulesGridStyle(moduleItems.length)}
+                >
                   {moduleItems.map((mod) => (
                     <ModuleCard
                       key={mod.id}
@@ -473,6 +484,9 @@ const Dashboard = (props: DashboardProps) => {
             if (!visible) aiChatPanel.closeChatPanel();
           }}
           currentDeviceType={currentDeviceType}
+          isResizable={!isAiChatFullscreen}
+          width={aiChatPanel.chatPanelWidth}
+          onResize={aiChatPanel.setChatPanelWidth}
         >
           {aiChatPanel.chatPanelContent}
         </ChatPanelView>
@@ -531,15 +545,20 @@ const DashboardConnected = inject((stores: TStore) => {
     isAdminOrOwner:
       (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
     // Stricter still: Docs Connect is a SaaS-only service, so a standalone
-    // portal is not offered the link at all — see `hasDocsConnectAccess`.
-    canOpenDocsConnect: hasDocsConnectAccess(
+    // portal is not offered the link at all — see `canOpenDocsConnect`.
+    canOpenDocsConnect: canOpenDocsConnect(
       userStore.user,
       settingsStore.standalone,
+      settingsStore.limitedAccessDevToolsForUsers,
     ),
     aiReady: settingsStore.aiConfig?.aiReady ?? false,
+    // The portal's own AI switch, which is a stronger statement than `aiReady`:
+    // AI that is off is not "not set up yet", it is not on offer at all.
+    aiServicesEnabled: settingsStore.aiServicesEnabled,
     // Undefined until the tariff loads; the plan is free by default, matching
     // the header's own fallback.
     isFreeTariff: currentQuotaStore.isFreeTariff ?? true,
+    standalone: settingsStore.standalone,
     isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,
     setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
   };

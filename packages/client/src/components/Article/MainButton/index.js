@@ -156,6 +156,7 @@ const ArticleMainButtonContent = (props) => {
     aiConfig,
     isGracePeriod,
 
+    standalone,
     isAIReady,
     isCardLinkedToPortal,
     enableAIService,
@@ -285,13 +286,18 @@ const ArticleMainButtonContent = (props) => {
   }, [isCardLinkedToPortal, enableAIService, onAIActivated, currentFolderId]);
 
   const onMainButtonAgentClick = React.useCallback(() => {
-    if (showActivateAIDialog) {
+    // The activation dialog offers a SaaS service to switch on and a wallet to
+    // top up, neither of which a standalone portal has. There the create-agent
+    // event decides instead (GlobalEvents): it reads readiness from the chat
+    // profiles rather than the lagging /ai/config flag, and sends a portal
+    // admin to the AI settings while telling everyone else to ask one.
+    if (showActivateAIDialog && !standalone) {
       setAiFeaturesDialogVisible(true);
       return;
     }
 
     onCreateAgent();
-  }, [showActivateAIDialog, onCreateAgent]);
+  }, [showActivateAIDialog, standalone, onCreateAgent]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
@@ -1045,6 +1051,7 @@ export default inject(
 
       isGracePeriod,
 
+      standalone: settingsStore.standalone,
       isAIReady: paymentStore.isAIReady,
       isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
       enableAIService: paymentStore.enableAIService,

@@ -54,7 +54,12 @@ import { isMobile, isTablet } from "react-device-detect";
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TOformFile } from "@docspace/shared/api/oforms/types";
-import { RoomsType, FolderType, FilterType } from "@docspace/shared/enums";
+import {
+  RoomsType,
+  FolderType,
+  FilterType,
+  SearchArea,
+} from "@docspace/shared/enums";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
@@ -347,6 +352,16 @@ export const getFolderModelImpl = (
   }
 
   if (isAIRoom) {
+    // The upload options below feed the agent's knowledge base, so they
+    // belong to the Knowledge tab only. Result Storage holds AI-generated
+    // results — manual uploads there are rejected by the server, and the
+    // "+ New" button rendered from this model only produced an error
+    // (Bug 83436). Coerced comparison: a filter parsed from the URL keeps
+    // searchArea as the raw query string ("6"), not a number.
+    const searchArea = self.filesStore.filter?.searchArea;
+    if (searchArea != null && Number(searchArea) === SearchArea.ResultStorage) {
+      return null;
+    }
     return [
       {
         id: "actions_upload-files-product",

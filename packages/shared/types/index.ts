@@ -218,6 +218,7 @@ export type TShareLinkAccessRightOption = {
   access: ShareAccessRights;
   description?: string;
   title?: string;
+  disabled?: boolean;
 };
 
 export type TShareToUserAccessRightOption = {

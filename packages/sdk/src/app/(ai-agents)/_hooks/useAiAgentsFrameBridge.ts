@@ -65,6 +65,7 @@ import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {
+  frameCallCommand,
   frameCallEvent,
   frameCallbackData,
   frameHandlePing,
@@ -99,6 +100,7 @@ export const useAiAgentsFrameBridge = (isReady: boolean) => {
         event: "onAppReady",
         data: { frameId: getFrameId() },
       });
+      frameCallCommand("setIsLoaded");
     }
   }, [isReady]);
 

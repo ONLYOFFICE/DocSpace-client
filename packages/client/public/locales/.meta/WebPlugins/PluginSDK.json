@@ -3,7 +3,7 @@
   "content": "Plugin SDK",
   "content_en_sha1_hash": "db5137721d3c3c4eeffdfb6c023f6c7d28a1ca04",
   "created_at": "2025-05-19T21:30:49.920Z",
-  "updated_at": "2026-08-21T15:49:57.221Z",
+  "updated_at": "2026-08-26T16:06:02.293Z",
   "comment": {
     "text": "This is a title for a section within the developer tools settings, referring to the Plugin Software Development Kit. It appears as a heading on the page and as a card title in the main developer tools overview.",
     "is_auto": true,
@@ -25,14 +25,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 143,
+      "line_number": 144,
       "context": "color={globalColors.mainOrange}\n linkTitle={t(\"Settings:StartEmbedding\")}\n />\n <Card\n icon={<PluginSvg />}\n title={t(\"WebPlugins:PluginSDK\")}\n description={t(\"Settings:PluginDescription\")}\n url=\"/developer-tools/plugin-sdk\"\n color={globalColors.secondGreen}\n linkTitle={t(\"Common:ReadInstructions\")}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/PluginSDK/index.js",
-      "line_number": 61,
-      "context": "apiPluginSDKLink,\n }) => {\n const { t, ready } = useTranslation([\"WebPlugins\", \"Common\"]);\n \n React.useEffect(() => {\n if (ready) setDocumentTitle(t(\"WebPlugins:PluginSDK\"));\n }, [ready]);\n \n const isMobile = currentDeviceType === \"mobile\";\n \n const icon = theme.isBase ? <GithubLight /> : <GithubDark />;",
+      "line_number": 65,
+      "context": "}) => {\n const { t, ready } = useTranslation([\"WebPlugins\", \"Common\"]);\n const navigate = useNavigate();\n \n React.useEffect(() => {\n if (ready) setDocumentTitle(t(\"WebPlugins:PluginSDK\"));\n }, [ready]);\n \n const icon = theme.isBase ? <GithubLight /> : <GithubDark />;\n \n const getPluginList = () => {",
       "module": "/packages/client"
     }
   ],

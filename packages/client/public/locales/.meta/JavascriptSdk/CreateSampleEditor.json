@@ -1,14 +1,14 @@
 {
   "key_path": "CreateSampleEditor",
-  "content": "Create sample Editor embed",
-  "content_en_sha1_hash": "6275f4c2aaf8b2179793a98c49222a86f56c560e",
-  "created_at": "2025-05-19T21:30:54.394Z",
-  "updated_at": "2026-05-15T14:00:06.799Z",
+  "content": "Try an Editor embed",
+  "content_en_sha1_hash": "ced932f1978dd1a9e291656fe0eed97c2df88fc6",
+  "created_at": "2026-08-26T16:05:57.706Z",
+  "updated_at": "2026-08-26T16:10:22.307Z",
   "comment": {
-    "text": "This is the header text for a section that allows users to create an example of an embedded document editor.",
+    "text": "Heading for a preset card in the developer tools section, introducing a demo for the Editor embed feature.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:16:08.785Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T16:10:22.307Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

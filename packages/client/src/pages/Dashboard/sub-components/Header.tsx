@@ -74,8 +74,6 @@ import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments
 
 import styles from "../Dashboard.module.scss";
 
-const STANDALONE_PAYMENTS_ROUTE = "/portal-settings/payments/portal-payments";
-
 type HeaderProps = {
   /**
    * Opens the welcome modal, whose only offer is the dashboard tour. Left out
@@ -101,10 +99,7 @@ const Header = ({
 
   const businessPlan = t("Common:BusinessPlan");
 
-  const openPayments = () =>
-    navigate(
-      standalone ? STANDALONE_PAYMENTS_ROUTE : PAYMENT_ROUTES.portalPayments,
-    );
+  const openPayments = () => navigate(PAYMENT_ROUTES.portalPayments);
 
   return (
     <header className={styles.planHeader}>
@@ -117,8 +112,9 @@ const Header = ({
 
         {/* Only the plan line is billing-scoped: everyone gets the greeting,
             but a link into the payments settings is of no use to a user who
-            cannot open them. */}
-        {isAdminOrOwner ? (
+            cannot open them, and Startup/Business are SaaS tariffs a
+            standalone portal has no counterpart for. */}
+        {isAdminOrOwner && !standalone ? (
           <div className={styles.planSubline}>
             <Text as="span" className={styles.planSublineText}>
               {/* Two sentences on a paid plan, but each key keeps its own

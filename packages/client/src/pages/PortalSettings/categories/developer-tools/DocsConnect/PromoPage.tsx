@@ -41,24 +41,19 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType, LinkTarget } from "@docspace/ui-kit/components/link";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import config from "PACKAGE_FILE";
 
-import { DOCS_CONNECT_ROUTE } from "./constants";
+import { DOCS_CONNECT_LINKS, DOCS_CONNECT_ROUTE } from "./constants";
 
 import styles from "./PromoPage.module.scss";
-
-const AUTOMATION_API_ANCHOR = "docs-connect-automation-api";
 
 interface PromoPageProps {
   canceled?: boolean;
   startTrial?: () => Promise<void>;
   openBuyPlan?: (mode: "trial" | "edit") => void;
-  docsConnectUrl?: string;
-  allConnectorsUrl?: string;
   canManage?: boolean;
 }
 
@@ -66,15 +61,11 @@ const PromoPage = ({
   canceled,
   startTrial,
   openBuyPlan,
-  docsConnectUrl,
-  allConnectorsUrl,
   canManage,
 }: PromoPageProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
 
   const [submitting, setSubmitting] = useState(false);
-
-  const onReadApiDocs = () => window.open(docsConnectUrl, "_blank");
 
   const onCreateTenant = async () => {
     if (submitting || !canManage) return;
@@ -97,6 +88,27 @@ const PromoPage = ({
       <Heading level={HeadingLevel.h1} className={styles.title}>
         {t("DocsConnect:DocsConnect")}
       </Heading>
+
+      {/* The page opens for anyone the Developer Tools section opens for, but
+          connecting an instance is a portal-wide operation and stays with
+          admins. Rather than close the page, it says so once and refuses the
+          one action below - the description, the links and the API
+          documentation are the point of reading it. */}
+      {canManage ? null : (
+        <div
+          className={styles.accessNotice}
+          data-testid="docs_connect_access_notice"
+        >
+          <Text as="p" className={styles.accessNoticeTitle}>
+            {t("Common:AdminAccessRequired")}
+          </Text>
+          <Text as="p" className={styles.description}>
+            {t("DocsConnect:AdminAccessDescription", {
+              service: t("DocsConnect:DocsConnect"),
+            })}
+          </Text>
+        </div>
+      )}
 
       {canceled ? (
         <div className={styles.canceledText}>
@@ -121,22 +133,55 @@ const PromoPage = ({
                   <Link
                     className={styles.link}
                     type={LinkType.page}
-                    href={allConnectorsUrl}
+                    href={DOCS_CONNECT_LINKS.connectors}
                     target={LinkTarget.blank}
-                    color="accent"
-                  />
-                ),
-                2: (
-                  <Link
-                    className={styles.link}
-                    id={AUTOMATION_API_ANCHOR}
-                    type={LinkType.action}
                     color="accent"
                   />
                 ),
               }}
             />
           </Text>
+
+          <div className={styles.devPackNote}>
+            <Text as="p" className={styles.description}>
+              <Trans
+                t={t}
+                i18nKey="PromoDevPackNote"
+                ns="DocsConnect"
+                components={{
+                  1: (
+                    <Link
+                      className={styles.link}
+                      type={LinkType.page}
+                      href={DOCS_CONNECT_LINKS.automationApi}
+                      target={LinkTarget.blank}
+                      color="accent"
+                    />
+                  ),
+                  2: (
+                    <Link
+                      className={styles.link}
+                      type={LinkType.page}
+                      href={DOCS_CONNECT_LINKS.branding}
+                      target={LinkTarget.blank}
+                      color="accent"
+                    />
+                  ),
+                }}
+              />
+            </Text>
+            <Link
+              className={styles.link}
+              type={LinkType.page}
+              href={DOCS_CONNECT_LINKS.apiDocs}
+              target={LinkTarget.blank}
+              color="accent"
+              fontSize="13px"
+              fontWeight={600}
+            >
+              {t("Common:ReadApiDocumentation")}
+            </Link>
+          </div>
 
           <Text as="p" className={styles.trialNote}>
             {t("DocsConnect:TrialAvailable")}
@@ -146,78 +191,50 @@ const PromoPage = ({
 
       <div className={styles.actions}>
         {canceled ? (
-          <Button
-            primary
-            size={ButtonSize.small}
-            label={t("Common:RenewSubscription")}
-            onClick={() => openBuyPlan?.("edit")}
-            isDisabled={!canManage}
-            className={styles.buyButton}
-            testId="docs_connect_buy_button"
-          />
+          <>
+            <Button
+              primary
+              size={ButtonSize.small}
+              label={t("Common:RenewSubscription")}
+              onClick={() => openBuyPlan?.("edit")}
+              isDisabled={!canManage}
+              className={styles.buyButton}
+              testId="docs_connect_buy_button"
+            />
+            <Link
+              className={styles.link}
+              type={LinkType.page}
+              href={DOCS_CONNECT_LINKS.apiDocs}
+              target={LinkTarget.blank}
+              color="accent"
+              fontSize="13px"
+              fontWeight={600}
+            >
+              {t("Common:ReadApiDocumentation")}
+            </Link>
+          </>
         ) : (
           <Button
             primary
             size={ButtonSize.small}
-            label={t("Common:CreateInstance")}
+            label={t("DocsConnect:StartFreeTrial")}
             onClick={onCreateTenant}
             isLoading={submitting}
             isDisabled={submitting || !canManage}
             testId="docs_connect_create_tenant_button"
           />
         )}
-        <Link
-          className={styles.link}
-          type={LinkType.action}
-          color="accent"
-          fontSize="13px"
-          fontWeight={600}
-          onClick={onReadApiDocs}
-        >
-          {t("Common:ReadApiDocumentation")}
-        </Link>
       </div>
-
-      {canceled ? null : (
-        <Tooltip
-          anchorSelect={`#${AUTOMATION_API_ANCHOR}`}
-          place="bottom-start"
-          clickable
-          maxWidth="280px"
-        >
-          <div className={styles.tooltipBox}>
-            <Text fontSize="12px" lineHeight="16px">
-              {t("DocsConnect:AutomationApiTooltip")}
-            </Text>
-            <Link
-              type={LinkType.page}
-              href={docsConnectUrl}
-              target={LinkTarget.blank}
-              color="accent"
-              fontSize="13px"
-              fontWeight={600}
-              isHovered
-            >
-              {t("DocsConnect:CheckExamples")}
-            </Link>
-          </div>
-        </Tooltip>
-      )}
     </div>
   );
 };
 
-export default inject(
-  ({ docsConnectStore, settingsStore, userStore }: TStore) => {
-    const { user } = userStore;
+export default inject(({ docsConnectStore, userStore }: TStore) => {
+  const { user } = userStore;
 
-    return {
-      startTrial: docsConnectStore.startTrial,
-      openBuyPlan: docsConnectStore.openBuyPlan,
-      docsConnectUrl: settingsStore.docsConnectUrl,
-      allConnectorsUrl: settingsStore.allConnectorsUrl,
-      canManage: (user?.isAdmin || user?.isOwner) ?? false,
-    };
-  },
-)(observer(PromoPage));
-
+  return {
+    startTrial: docsConnectStore.startTrial,
+    openBuyPlan: docsConnectStore.openBuyPlan,
+    canManage: (user?.isAdmin || user?.isOwner) ?? false,
+  };
+})(observer(PromoPage));

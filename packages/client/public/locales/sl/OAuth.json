@@ -60,6 +60,7 @@
   "PrivacyPolicyURLHelpButton": "Navedite URL povezavo do vaše Politike zasebnosti, ki mora biti v skladu z veljavno zakonodajo in predpisi ter pojasnjuje, kako zbirate, uporabljate, delite, hranite in kako drugače obdelujete osebne podatke.",
   "ProfileDescription": "Tukaj lahko preverite informacije o aplikacijah, ki ste jim odobrili avtorizirani dostop, in po potrebi prekličete soglasje.",
   "Read": "Beri",
+  "ReadOAuthGuide": "Preberite vodnik za OAuth 2.0",
   "RedirectsURLS": "Preusmeritveni URL-ji",
   "RedirectsURLSHelpButton": "Ko uporabnik uspešno avtorizira aplikacijo, bo avtorizacijski strežnik uporabnika preusmeril nazaj v aplikacijo z občutljivimi informacijami.",
   "RegisterNewApp": "Registriraj novo aplikacijo",

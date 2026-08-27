@@ -3,7 +3,7 @@
   "content": "AI agents",
   "content_en_sha1_hash": "2b51b10f658502a5ad4e50a7005f9bddf67f44c0",
   "created_at": "2025-09-26T15:20:53.940Z",
-  "updated_at": "2026-08-24T22:30:00.608Z",
+  "updated_at": "2026-08-26T14:08:32.934Z",
   "comment": {
     "text": "This is a label for a feature or service related to artificial intelligence. It appears in billing panels and selectors.",
     "is_auto": true,
@@ -133,20 +133,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/AiAgents/index.tsx",
-      "line_number": 150,
+      "line_number": 151,
       "context": "theme?: TTheme;\n };\n \n const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:AIAgents\");\n const [searchParams, setSearchParams] = useSearchParams();\n const navigate = useNavigate();\n const lastSdkKeyRef = React.useRef<string | null>(null);\n \n const searchParamsRef = React.useRef(searchParams);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/AiAgents/index.tsx",
-      "line_number": 150,
+      "line_number": 151,
       "context": "theme?: TTheme;\n };\n \n const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:AIAgents\");\n const [searchParams, setSearchParams] = useSearchParams();\n const navigate = useNavigate();\n const lastSdkKeyRef = React.useRef<string | null>(null);\n \n const searchParamsRef = React.useRef(searchParams);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 183,
-      "context": "),\n },\n {\n id: \"ai-agents\",\n icon: <AiAgentsIcon />,\n title: t(\"Common:AIAgents\"),\n description: t(\"Common:DashboardAIChatAgentsDescription\"),\n installed: true,\n href: \"/ai-agents/filter\",\n ...createOrOpen(\n canCreateAgents,",
+      "line_number": 197,
+      "context": "...(aiServicesEnabled\n ? [\n {\n id: \"ai-agents\",\n icon: <AiAgentsIcon />,\n title: t(\"Common:AIAgents\"),\n description: t(\"Common:DashboardAIChatAgentsDescription\"),\n installed: true,\n href: \"/ai-agents/filter\",\n ...createOrOpen(\n canCreateAgents,",
       "module": "/packages/client"
     },
     {
@@ -187,7 +187,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 75,
+      "line_number": 79,
       "context": "{...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={3}\n dataTestId=\"quota_ai_agent\"\n toggleDescription={t(\"SetDefaultAIAgentQuota\", {\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n />\n );\n };",
       "module": "/packages/client"
     },
@@ -271,14 +271,14 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
-      "line_number": 116,
-      "context": "<AgentsHeader\n title={aiRoomStore.title}\n navigationItems={[\n {\n id: \"ai-agents\",\n title: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n isRootRoom: true,\n },\n ]}\n onBackToParentFolder={goToList}\n onClickFolder={() => goToList()}",
+      "line_number": 123,
+      "context": "title={aiRoomStore.title}\n getContextOptions={getContextOptions}\n navigationItems={[\n {\n id: \"ai-agents\",\n title: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n isRootRoom: true,\n },\n ]}\n onBackToParentFolder={goToList}\n onClickFolder={() => goToList()}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
-      "line_number": 116,
-      "context": "<AgentsHeader\n title={aiRoomStore.title}\n navigationItems={[\n {\n id: \"ai-agents\",\n title: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n isRootRoom: true,\n },\n ]}\n onBackToParentFolder={goToList}\n onClickFolder={() => goToList()}",
+      "line_number": 123,
+      "context": "title={aiRoomStore.title}\n getContextOptions={getContextOptions}\n navigationItems={[\n {\n id: \"ai-agents\",\n title: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n isRootRoom: true,\n },\n ]}\n onBackToParentFolder={goToList}\n onClickFolder={() => goToList()}",
       "module": "/packages/sdk"
     },
     {

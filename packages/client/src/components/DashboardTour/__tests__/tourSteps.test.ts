@@ -41,7 +41,7 @@ describe("dashboard tour steps", () => {
   });
 
   it("drops the profile step when the card is not on the page", () => {
-    // Non-admins never get the card, and admins can dismiss it for good.
+    // Everyone is shown the card, but anyone can dismiss it for good.
     const flags = { ...fullFlags, hasProfileCard: false };
 
     expect(titles(flags)).not.toContain("DashboardTour:DashboardProfileTitle");

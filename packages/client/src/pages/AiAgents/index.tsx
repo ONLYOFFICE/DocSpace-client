@@ -72,6 +72,7 @@ import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
+import { AI_SETTINGS_URL } from "SRC_DIR/helpers/constants";
 
 // Sub-sections inside the iframe that the host URL exposes via
 // `?section=...`. Agent detail lives under `?agentId=N&tab=T` instead.
@@ -80,8 +81,8 @@ const VALID_SECTIONS = new Set(["recent", "favorites", "trash", "settings"]);
 // The AI Agents settings section was moved out of the (iframe-bound) SDK app
 // into DocSpace portal settings. Any navigation that resolves to the agents
 // "settings" section — host deep link, sidebar, or an "Open settings" action
-// the SDK reports back — is redirected here instead of rendered in the frame.
-const AI_SETTINGS_URL = "/portal-settings/ai-settings";
+// the SDK reports back — is redirected to AI_SETTINGS_URL instead of rendered
+// in the frame.
 const SETTINGS_NAV_KEY = "section:settings";
 
 // Translate the parent's query string into the SDK navigation key the

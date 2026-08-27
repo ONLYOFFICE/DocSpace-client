@@ -47,15 +47,18 @@ import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import BackupSvgUrl from "PUBLIC_DIR/images/icons/16/backup.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import SpreadsheetSvgUrl from "PUBLIC_DIR/images/icons/16/spreadsheet.svg?url";
+import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { frameCallEvent } from "@docspace/shared/utils/common";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
 
 import { FormsSection } from "@/types/forms";
 import type { CustomContextMenuAction } from "@/types/forms";
 
 import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import useFormsActions from "./useFormsActions";
+import useAskAI from "./useAskAI";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
 type ContextMenuItem = {
@@ -131,6 +134,8 @@ export default function useFormsContextMenu() {
     downloadFolder,
     deleteFolderFromList,
   } = useFormsActions({ t });
+  const askAI = useAskAI();
+  const isAiChatAvailable = useIsAiChatAvailable();
   const { fileActions, folderActions } = useFormsCustomActionsStore();
 
   const buildCustomItems = useCallback(
@@ -241,6 +246,16 @@ export default function useFormsContextMenu() {
           onClick: () => openForm(file, "view"),
           disabled: false,
         },
+        "ask-ai": isAiChatAvailable
+          ? {
+              id: "option_ask-ai",
+              key: "ask-ai",
+              label: t("Common:AskAI"),
+              icon: AISvgUrl,
+              onClick: () => askAI(file),
+              disabled: false,
+            }
+          : null,
         separator1: makeSeparator("separator1"),
         download: canDownload
           ? {
@@ -286,6 +301,7 @@ export default function useFormsContextMenu() {
           "separator-after-xlsx",
           "start-filling",
           "reset-filling",
+          "ask-ai",
           "separator1",
           "download",
           "separator5",
@@ -299,6 +315,7 @@ export default function useFormsContextMenu() {
           "view",
           "separator0",
           "update-xlsx-data",
+          "ask-ai",
           "separator1",
           "download",
           "separator5",
@@ -308,6 +325,7 @@ export default function useFormsContextMenu() {
         ],
         [FormsSection.CompletedForms]: [
           "view",
+          "ask-ai",
           "separator1",
           "download",
           "separator5",

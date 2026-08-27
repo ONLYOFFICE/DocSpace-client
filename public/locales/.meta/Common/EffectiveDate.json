@@ -3,7 +3,7 @@
   "content": "Effective date",
   "content_en_sha1_hash": "153c9b215753daae6275e067c18ee6e9c92da512",
   "created_at": "2026-04-10T13:53:45.082Z",
-  "updated_at": "2026-08-12T14:02:21.320Z",
+  "updated_at": "2026-08-26T14:08:33.098Z",
   "comment": {
     "text": "This is a label in the order summary for billing, indicating the date when a change to a subscription plan (like a downgrade) will take effect.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
-      "line_number": 165,
+      "line_number": 166,
       "context": "t(\"NewMonthlyPrice\"),\n formatPaymentCurrency(newAdmins * pricePerAdmin),\n )\n : null}\n {isDowngradePlan\n ? renderRow(t(\"EffectiveDate\"), initialPaymentDate)\n : renderRow(\n t(\"RemainingPeriod\"),\n <>\n {`${daysDisplay} `}\n <Text as=\"span\" fontSize=\"14px\" className={styles.muted}>",
       "module": "/libs/ui-kit"
     },

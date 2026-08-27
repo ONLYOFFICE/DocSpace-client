@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2026-08-19T13:26:37.682Z",
+  "updated_at": "2026-08-26T16:06:02.259Z",
   "comment": {
     "text": "This is a button label or tooltip text. It allows users to remove a selected item, such as a chat or an image.",
     "is_auto": true,
@@ -199,19 +199,19 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 477,
+      "line_number": 473,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete-agent\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 477,
+      "line_number": 473,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete-agent\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 477,
+      "line_number": 473,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete-agent\":",
       "module": "/packages/client"
     },
@@ -283,13 +283,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 261,
+      "line_number": 276,
       "context": "\"separator-after-custom\": makeSeparator(\"separator-after-custom\"),\n delete: canDelete\n ? {\n id: \"option_delete\",\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => deleteFromList(file.id),\n disabled: false,\n }\n : null,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 261,
+      "line_number": 276,
       "context": "\"separator-after-custom\": makeSeparator(\"separator-after-custom\"),\n delete: canDelete\n ? {\n id: \"option_delete\",\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => deleteFromList(file.id),\n disabled: false,\n }\n : null,",
       "module": "/packages/sdk"
     },

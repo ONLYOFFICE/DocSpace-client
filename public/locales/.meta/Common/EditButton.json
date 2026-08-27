@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2026-08-24T22:30:00.646Z",
+  "updated_at": "2026-08-26T16:06:02.274Z",
   "comment": {
     "text": "This is a button label. It allows users to edit settings, such as auto-payments or submission configurations.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx",
-      "line_number": 164,
-      "context": "<IconButton\n className={styles.profileCardEdit}\n iconName={PencilReactSvgUrl}\n size={12}\n onClick={handleEditPortalName}\n title={t(\"Common:EditButton\")}\n />\n </span>\n </div>\n \n <div className={styles.profileCardField}>",
+      "line_number": 169,
+      "context": "<IconButton\n className={styles.profileCardEdit}\n iconName={PencilReactSvgUrl}\n size={12}\n onClick={handleEditPortalName}\n title={t(\"Common:EditButton\")}\n dataTestId=\"dashboard-profile-rename\"\n />\n ) : null}\n </span>\n </div>",
       "module": "/packages/client"
     },
     {
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 430,
+      "line_number": 427,
       "context": "fontWeight={600}\n textDecoration=\"underline dashed\"\n onClick={() => openBuyPlan?.(\"edit\")}\n dataTestId=\"docs_connect_edit_subscription_link\"\n >\n {t(\"Common:EditButton\")}\n </Link>\n )}\n </div>\n <div className={styles.detailRows}>\n <div className={styles.detailRow}>",
       "module": "/packages/client"
     },
@@ -103,7 +103,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 198,
+      "line_number": 203,
       "context": ": null,\n edit: canEdit\n ? {\n id: \"option_edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: PencilReactSvgUrl,\n onClick: () => openForm(file, \"edit\"),\n disabled: false,\n }\n : null,",
       "module": "/packages/sdk"
     },
@@ -115,13 +115,13 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 337,
+      "line_number": 444,
       "context": "};\n \n export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {\n switch (access) {\n case ShareAccessRights.Editing:\n return t(\"Common:EditButton\");\n case ShareAccessRights.CustomFilter:\n return t(\"Common:UseCustomFilter\");\n case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 337,
+      "line_number": 444,
       "context": "};\n \n export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {\n switch (access) {\n case ShareAccessRights.Editing:\n return t(\"Common:EditButton\");\n case ShareAccessRights.CustomFilter:\n return t(\"Common:UseCustomFilter\");\n case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:",
       "module": "/packages/shared"
     }

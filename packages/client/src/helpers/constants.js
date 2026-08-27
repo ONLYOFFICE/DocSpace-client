@@ -178,6 +178,8 @@ export const ThirdPartyServicesUrlName = Object.freeze({
   WebDav: "webdav",
 });
 
+export const AI_SETTINGS_URL = "/portal-settings/ai-settings";
+
 export const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 export const TABLE_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
 export const TABLE_AI_AGENTS_COLUMNS = `aiAgentsTableColumns_ver-${TableVersions.AIAgents}`;

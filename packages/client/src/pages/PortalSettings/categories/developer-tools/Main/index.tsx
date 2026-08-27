@@ -47,7 +47,7 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { globalColors } from "@docspace/ui-kit/providers";
-import { hasDocsConnectAccess } from "@docspace/shared/utils/devToolsAccess";
+import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 
 import ConfirmWrapper from "SRC_DIR/components/ConfirmWrapper";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -100,6 +100,7 @@ const Main = (props: {
           <Text fontSize="13px" fontWeight={400} lineHeight="20px">
             {t("Settings:DeveloperToolsDescription", {
               organizationName: getBrandName("OrganizationName"),
+              editorsName: getBrandName("ProductEditorsName"),
               productName: getBrandName("ProductName"),
             })}
           </Text>
@@ -127,7 +128,7 @@ const Main = (props: {
             })}
             url={apiBasicLink}
             color={globalColors.lightBlueMain}
-            linkTitle={t("Common:LearnMore")}
+            linkTitle={t("Common:ReadApiDocumentation")}
             isBlank
           />
           <Card
@@ -194,10 +195,11 @@ export default inject(({ settingsStore, userStore }: TStore) => {
   return {
     apiBasicLink,
     // Docs Connect is SaaS-only and admin/owner-only - see
-    // `hasDocsConnectAccess`.
-    canOpenDocsConnect: hasDocsConnectAccess(
+    // `canOpenDocsConnect`.
+    canOpenDocsConnect: canOpenDocsConnect(
       userStore?.user,
       settingsStore?.standalone,
+      settingsStore?.limitedAccessDevToolsForUsers,
     ),
   };
 })(observer(Main));

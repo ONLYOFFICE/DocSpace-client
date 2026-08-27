@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "ගැලරියට යොමන්න",
   "SubmitToGalleryBlockBody": "ඔබේ සැකිලි {{organizationName}} ප්‍රජාව සමඟ බෙදා ගැනීමට ඉදිරිපත් කරන්න.",
   "SubmitToTemplateGallery": "සැකිලි ගැලරියට ඉදිරිපත් කරන්න",
+  "Subscribe": "දායක වන්න",
   "SubscriptionAutoCancellation": "සබස්ක්‍රිප්ෂන් {{finalDate}} දිනවලදී ස්වයංක්‍රියව අවලංගු කරනු ලැබේ.",
   "SubscriptionAutoRenewed": "සබස්ක්‍රිප්ෂන් {{finalDate}} දිනදී යාවත්කාලීන මිල සහ විශේෂතා සමඟ ස්වයංක්‍රියව පුනරුත්ථානය කරනු ලැබේ.",
   "SubscriptionAutoRenewedOn": "දායකත්වය {{finalDate}} දිනදී ස්වයංක්‍රීයව අලුත් කරනු ඇත",

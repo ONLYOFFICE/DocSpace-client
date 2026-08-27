@@ -14,5 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin erfolgreich geladen",
   "PluginSamples": "Plugin-Beispiele",
   "PluginSDK": "Plugin SDK",
+  "PluginSDKDescription": "Verwenden Sie das Plugin SDK, um neue Funktionen hinzuzufügen, Dienste von Drittanbietern anzubinden oder das bestehende Erlebnis zu verbessern. Sehen Sie sich unten die Beispiel-Plugins an, deren Quellcode auf GitHub verfügbar ist. Gehen Sie zur Seite <1>Plugins</1>, um sie für Ihren Arbeitsbereich zu aktivieren.",
+  "PluginSDKInstruction": "<1>Lesen Sie die Anleitung</1>, um eigene Plugins zu erstellen.",
   "UploadDescription": "Sie können Plugins hinzufügen, um die Funktionalität des Arbeitsbereichs um zusätzliche Funktionen zu erweitern. Klicken Sie auf Plugin hochladen oder legen Sie die Datei im ZIP-Archiv ab."
 }

@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Υποβολή στη Συλλογή",
   "SubmitToGalleryBlockBody": "Υποβάλετε τα πρότυπά σας για να τα μοιραστείτε με την κοινότητα του {{organizationName}}.",
   "SubmitToTemplateGallery": "Υποβολή στη Βιβλιοθήκη Πρότυπων",
+  "Subscribe": "Εγγραφή",
   "SubscriptionAutoCancellation": "Η συνδρομή θα ακυρωθεί αυτόματα στις {{finalDate}}.",
   "SubscriptionAutoRenewed": "Η συνδρομή θα ανανεωθεί αυτόματα στις {{finalDate}} με ενημερωμένες τιμές και προδιαγραφές.",
   "SubscriptionAutoRenewedOn": "Η συνδρομή θα ανανεωθεί αυτόματα στις {{finalDate}}",

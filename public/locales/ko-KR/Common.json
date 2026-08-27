@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "갤러리에 제출",
   "SubmitToGalleryBlockBody": "{{organizationName}} 커뮤니티와 공유할 템플릿을 제출해 주세요.",
   "SubmitToTemplateGallery": "템플릿 갤러리에 제출",
+  "Subscribe": "구독하기",
   "SubscriptionAutoCancellation": "구독은 {{finalDate}}에 자동으로 해지됩니다.",
   "SubscriptionAutoRenewed": "구독은 {{finalDate}}에 업데이트된 가격 및 사양으로 자동으로 갱신됩니다.",
   "SubscriptionAutoRenewedOn": "구독은 {{finalDate}}에 자동으로 갱신됩니다.",

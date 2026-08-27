@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Soumettre à la galerie",
   "SubmitToGalleryBlockBody": "Soumettez vos modèles pour les partager avec la communauté {{organizationName}}.",
   "SubmitToTemplateGallery": "Soumettre à la galerie de modèles",
+  "Subscribe": "S'abonner",
   "SubscriptionAutoCancellation": "L'abonnement sera automatiquement annulé le {{finalDate}}",
   "SubscriptionAutoRenewed": "L'abonnement sera automatiquement renouvelé le {{finalDate}} avec une mise à jour des prix et des spécifications.",
   "SubscriptionAutoRenewedOn": "L'abonnement sera automatiquement renouvelé le {{finalDate}}",

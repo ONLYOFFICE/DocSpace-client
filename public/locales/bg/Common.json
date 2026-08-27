@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Изпрати до Галерия",
   "SubmitToGalleryBlockBody": "Изпратете вашите шаблони, за да ги споделите с {{organizationName}} общността.",
   "SubmitToTemplateGallery": "Изпрати към галерията с шаблони",
+  "Subscribe": "Абонирайте се",
   "SubscriptionAutoCancellation": "Абонаментът ще бъде автоматично прекратен на {{finalDate}}.",
   "SubscriptionAutoRenewed": "Абонаментът ще бъде автоматично подновен на {{finalDate}} с обновени цени и спецификации.",
   "SubscriptionAutoRenewedOn": "Абонаментът ще бъде автоматично подновен на {{finalDate}}",

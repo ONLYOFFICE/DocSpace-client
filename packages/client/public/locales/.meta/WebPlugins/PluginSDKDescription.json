@@ -1,31 +1,25 @@
 {
   "key_path": "PluginSDKDescription",
-  "content": "Using Plugin SDK you can extend your workspace functionality, connect the third-party services or enhance the existing user experience. Here you can find the plugin samples with code source available on GitHub.",
-  "content_en_sha1_hash": "6c7dfa3c33e9542e8613db33bd4f5e1832502e70",
-  "created_at": "2026-08-12T11:00:45.074Z",
-  "updated_at": "2026-08-14T14:58:32.815Z",
+  "content": "Use the Plugin SDK to add new functionality, connect third-party services, or improve the existing experience. Browse sample plugins below, with source code available on GitHub. Go to the <1>Plugins</1> page to enable them for your workspace.",
+  "content_en_sha1_hash": "3b5cb1451d9c4ccdf4ed0c38e8b1e8244f1386cd",
+  "created_at": "2026-08-26T16:05:55.303Z",
+  "updated_at": "2026-08-26T16:12:42.847Z",
   "comment": {
-    "text": "Description text in the Plugin SDK section under Developer Tools in Portal Settings, explaining the purpose of the SDK and where to find code samples on GitHub.",
+    "text": "Description text in the Developer Tools section of Portal Settings explaining the Plugin SDK's purpose and how to use it. The `<1>` tag is a link to the Plugins page.",
     "is_auto": true,
-    "updated_at": "2026-08-12T13:38:30.932Z",
+    "updated_at": "2026-08-26T16:12:42.847Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/PluginSDK/index.js",
-      "line_number": 137,
-      "context": "className={styles.description}\n fontSize=\"13px\"\n fontWeight={400}\n lineHeight=\"20px\"\n >\n {t(\"PluginSDKDescription\")}\n </Text>\n <Text\n className={styles.description}\n fontSize=\"13px\"\n fontWeight={400}",
+      "line_number": 142,
+      "context": "lineHeight=\"20px\"\n >\n <Trans\n ns=\"WebPlugins\"\n t={t}\n i18nKey=\"PluginSDKDescription\"\n components={{\n 1: (\n <Link\n type={LinkType.page}\n color=\"accent\"",
       "module": "/packages/client"
     }
   ],
   "languages": {
     "en": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

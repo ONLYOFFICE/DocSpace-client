@@ -3,7 +3,7 @@
   "content": "Your trial ends in {{count}} days — subscribe to keep uninterrupted access.",
   "content_en_sha1_hash": "b579cca1f844a1d1243c6d50c72b6c2350ef00c4",
   "created_at": "2026-08-26T14:08:29.986Z",
-  "updated_at": "2026-08-26T14:10:27.090Z",
+  "updated_at": "2026-08-26T16:06:02.317Z",
   "comment": {
     "text": "Description text in a trial banner informing users of the remaining trial period. The {{count}} variable represents the number of days left.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
       "line_number": 285,
-      "context": "{t(\"DocsConnect:TrialBannerTitle\", {\n organizationName: getBrandName(\"OrganizationName\"),\n })}\n </Text>\n <Text fontSize=\"12px\" className={styles.muted}>\n {t(\"DocsConnect:TrialBannerDescription\", {\n count: daysLeft,\n })}\n </Text>\n <Text fontSize=\"12px\" className={styles.muted}>\n {t(\"DocsConnect:TrialBannerDescriptionSecond\")}",
+      "context": "{t(\"DocsConnect:TrialBannerTitle\", {\n organizationName: getBrandName(\"OrganizationName\"),\n })}\n </Text>\n <Text fontSize=\"12px\" className={styles.muted}>\n {t(\"DocsConnect:TrialBannerDescription\", {\n count: daysLeft,\n })}\n </Text>\n </>\n )}",
       "module": "/packages/client"
     }
   ],

@@ -14,5 +14,7 @@
   "PluginLoadedSuccessfully": "Vtičnik je bil uspešno naložen.",
   "PluginSamples": "Primeri dodatkov",
   "PluginSDK": "Vtičnik SDK",
+  "PluginSDKDescription": "Uporabite vtičnik SDK za dodajanje novih funkcionalnosti, povezovanje storitev tretjih oseb ali izboljšanje obstoječe izkušnje. Spodaj si oglejte vzorčne vtičnike, katerih izvorna koda je na voljo na GitHubu. Pojdite na stran <1>Vtičniki</1> in jih omogočite za svoj delovni prostor.",
+  "PluginSDKInstruction": "<1>Preberite navodila</1> in ustvarite svoje vtičnike.",
   "UploadDescription": "Lahko dodate vtičnike, da razširite funkcionalnost delovnega prostora z dodatnimi funkcijami. Kliknite Naloži vtičnik ali dodajte datoteko v arhiv ZIP."
 }

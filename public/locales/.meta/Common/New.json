@@ -3,7 +3,7 @@
   "content": "New",
   "content_en_sha1_hash": "6403f2b7eb2aaafe6de34cbf2a029b01afebc512",
   "created_at": "2025-05-19T21:30:46.723Z",
-  "updated_at": "2026-08-20T12:26:01.755Z",
+  "updated_at": "2026-08-26T16:06:02.290Z",
   "comment": {
     "text": "This is a short label displayed on a badge, indicating a new feature or item.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/forms/layout.client.tsx",
-      "line_number": 517,
+      "line_number": 527,
       "context": "() =>\n showFilterMainButton\n ? {\n isDropdown: true,\n model: filterMenuModel,\n text: t(\"Common:New\"),\n }\n : undefined,\n [showFilterMainButton, filterMenuModel, t],\n );",
       "module": "/packages/sdk"
     },

@@ -60,6 +60,7 @@
   "PrivacyPolicyURLHelpButton": "Məxfilik Siyasətinizə müvafiq qanun və qaydalara uyğun gəlməlidir və şəxsi məlumatı necə topladığınızı, istifadə etdiyinizi, paylaşdığınızı, saxladığınızı və başqa üsullarla emal etdiyinizi aydın şəkildə ifadə edən URL linki təqdim edin.",
   "ProfileDescription": "Burada siz autentifikasiya girişi verdiyiniz tətbiqlərin məlumatlarını yoxlaya və lazım olduqda icazəni ləğv edə bilərsiniz.",
   "Read": "Oxuyun",
+  "ReadOAuthGuide": "OAuth 2.0 təlimatını oxuyun",
   "RedirectsURLS": "URL-ləri yönləndirir",
   "RedirectsURLSHelpButton": "İstifadəçi tətbiqə müvəffəqiyyətlə icazə verdikdən sonra avtorizasiya serveri istifadəçini həssas məlumatı olan tətbiqə yenidən yönləndirəcək.",
   "RegisterNewApp": "Yeni tətbiqi qeydiyyatdan keçirin",

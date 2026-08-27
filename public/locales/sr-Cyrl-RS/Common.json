@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Пошаљи у Галерију",
   "SubmitToGalleryBlockBody": "Поднесите своје шаблоне да их делите са {{organizationName}} заједницом.",
   "SubmitToTemplateGallery": "Пошаљи у Галерију предлога",
+  "Subscribe": "Претплати се",
   "SubscriptionAutoCancellation": "Преплата ће бити автоматски отказана {{finalDate}}",
   "SubscriptionAutoRenewed": "Преуплата ће бити аутоматски обновљена на {{finalDate}} са ажурираним ценама и спецификацијама.",
   "SubscriptionAutoRenewedOn": "Абонплата ће се аутоматски обновити {{finalDate}}",

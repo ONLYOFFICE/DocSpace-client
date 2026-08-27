@@ -60,6 +60,7 @@
   "PrivacyPolicyURLHelpButton": "Forneça um link de URL para sua Política de Privacidade, que deve estar em conformidade com as leis e regulamentações aplicáveis e que deixe claro como você coleta, usa, compartilha, retém e processa informações pessoais.",
   "ProfileDescription": "Aqui você pode verificar as informações dos aplicativos para os quais concedeu o acesso de autenticação e revogar o consentimento, se necessário.",
   "Read": "Ler",
+  "ReadOAuthGuide": "Leia o guia do OAuth 2.0",
   "RedirectsURLS": "Redirecionamentos de URLS",
   "RedirectsURLSHelpButton": "Depois que um usuário autorizar um aplicativo com êxito, o servidor de autorização redirecionará o usuário de volta ao aplicativo com informações confidenciais.",
   "RegisterNewApp": "Registre um novo aplicativo",

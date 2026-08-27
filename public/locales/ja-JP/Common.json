@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "ギャラリーに投稿",
   "SubmitToGalleryBlockBody": "{{organizationName}}コミュニティで共有するためにテンプレートを投稿してください。",
   "SubmitToTemplateGallery": "テンプレートギャラリーに登録",
+  "Subscribe": "申し込む",
   "SubscriptionAutoCancellation": "{{finalDate}} にサブスクリプションは自動的にキャンセルされます。",
   "SubscriptionAutoRenewed": "サブスクリプションは、{{finalDate}} に、更新された価格および仕様で自動的に更新されます。",
   "SubscriptionAutoRenewedOn": "サブスクリプションは{{finalDate}}に自動更新されます",

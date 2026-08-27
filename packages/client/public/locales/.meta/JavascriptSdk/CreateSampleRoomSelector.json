@@ -1,14 +1,14 @@
 {
   "key_path": "CreateSampleRoomSelector",
-  "content": "Create sample Room selector embed",
-  "content_en_sha1_hash": "93d831166dcad24892ee84ef09c7ee51f7c5531b",
-  "created_at": "2025-05-19T21:30:54.405Z",
-  "updated_at": "2026-05-15T14:00:06.804Z",
+  "content": "Try a Room selector embed",
+  "content_en_sha1_hash": "f46a4838abf70c92408a5809d13af1f85a1c5198",
+  "created_at": "2026-08-26T16:05:57.722Z",
+  "updated_at": "2026-08-26T16:08:40.818Z",
   "comment": {
-    "text": "This is the header for a section in the developer tools settings, indicating the creation of a sample Room selector embed.",
+    "text": "Header for a developer tool preset section that introduces a preview of the Room selector embed.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:16:05.215Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T16:08:40.818Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

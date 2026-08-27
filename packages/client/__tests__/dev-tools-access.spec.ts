@@ -44,6 +44,8 @@ import {
   type UserType,
 } from "@docspace/shared/__mocks__/handlers";
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 /**
@@ -59,10 +61,22 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
  *  - rights decide only whether it opens. The cards, the descriptions and the
  *    documentation stay; the ways in say why they lead nowhere.
  *
- * Functional only - no screenshots - so this holds on a local run too.
+ * Mostly functional, so it holds on a local run too; the one frame it pins is
+ * the refusal itself, which is a piece of UI rather than a fact about the DOM.
  */
 
 const DASHBOARD_URL = "/dashboard";
+/**
+ * The clock every frame is taken at.
+ *
+ * The tariff and Docs Connect mocks answer with fixed calendar dates, so
+ * whether the portal reads as paid-up depends on where the real clock sits
+ * relative to them - pinning "now" keeps these frames from quietly turning into
+ * expired-subscription ones the day a date passes. Same instant the matrix in
+ * dashboard-appearance.spec.ts uses.
+ */
+const FIXED_NOW = new Date("2026-02-10T12:00:00.000Z");
+
 const DOCS_CONNECT_URL = "/developer-tools/docs-connect";
 
 const DEVTOOLS_CARD = '[data-tour-id="dashboard-devtools"]';
@@ -73,6 +87,17 @@ const EMBED_SDK_TILE = '[data-testid="dashboard-devtool-embed-sdk"]';
 const REST_API_TILE = '[data-testid="dashboard-devtool-rest-api"]';
 
 const ACCESS_NOTICE = '[data-testid="docs_connect_access_notice"]';
+/**
+ * The toast itself, which is what a refused tile produces.
+ *
+ * By react-toastify's own class rather than a test id: ui-kit passes
+ * `data-testid` to `ToastContainer` (Toast.tsx), which does not forward unknown
+ * props to the DOM, so nothing carrying it ever reaches the page. This class is
+ * what ui-kit queries for itself.
+ */
+const TOAST = ".Toastify__toast";
+/** The Docs Connect tile, the one this refusal is most often met on. */
+const DOCS_CONNECT_TILE = '[data-testid="dashboard-devtool-docs-connect"]';
 const CREATE_INSTANCE_BUTTON =
   '[data-testid="docs_connect_create_tenant_button"]';
 
@@ -85,6 +110,7 @@ const openDashboard = async (
   baseUrl: string,
   userType: UserType,
 ) => {
+  await page.clock.setSystemTime(FIXED_NOW);
   await page.addInitScript((key: string) => {
     window.localStorage.setItem(key, "true");
   }, welcomeKey(usersByType[userType].id));
@@ -122,6 +148,52 @@ test.describe("Developer Tools without the rights", () => {
       page.getByText("This feature is available to admins only."),
     ).toBeVisible();
     expect(new URL(page.url()).pathname).toBe(DASHBOARD_URL);
+  });
+
+  test("the refusal reads as a toast", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(...mockPortal("visitor"));
+
+    await openDashboard(page, baseUrl, "visitor");
+    await page.locator(DOCS_CONNECT_TILE).click();
+
+    const toast = page.locator(TOAST);
+    await expect(toast).toBeVisible();
+
+    // Reaching the tile scrolled the page down to it; wind it back so the frame
+    // shows the toast over the top of the dashboard, the way the design does.
+    // The page scrolls inside its own container rather than the window, so this
+    // goes through the scroller rather than `window.scrollTo`.
+    await page.evaluate(() => {
+      document
+        .querySelectorAll(".scroller")
+        .forEach((scroller) => scroller.scrollTo({ top: 0 }));
+    });
+
+    // The toast slides in from the edge; let that finish before capturing.
+    await page.waitForTimeout(600);
+
+    // Hovering pauses react-toastify's own dismissal timer, so the frame is
+    // taken against a toast that is not halfway through disappearing.
+    await toast.hover();
+    await expect(toast).toBeVisible();
+
+    // A page frame rather than the element alone: the toast is `position:
+    // fixed`, and asking Playwright for an element screenshot makes it scroll
+    // the element into view over and over without ever getting two identical
+    // frames.
+    await expectScreenshot(
+      page,
+      ["desktop", "dev-tools-access", "refused-toast.png"],
+      // `animations: "allow"`, against the suite's habit: the toast arrives on
+      // a react-toastify transition, and disabling animations rewinds it to its
+      // off-screen start - the toast is then in the DOM, and the assertions
+      // above see it, but the frame comes back without it.
+      { animations: "allow" },
+    );
   });
 
   test("the documentation tile is still a link for a guest", async ({

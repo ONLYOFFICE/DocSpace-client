@@ -36,6 +36,7 @@
 "use client";
 
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
@@ -43,11 +44,13 @@ import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import {
   attachFilesToChat,
   getOnlyofficeFileType,
+  selectNewAttachmentIndices,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 import { FileType } from "@docspace/shared/enums";
 import type { TFile } from "@docspace/shared/api/files/types";
 
 export default function useAskAI() {
+  const { t } = useTranslation(["Common"]);
   const { useAttachmentsStore } = useStores();
   const openChat = useOpenAiChat();
 
@@ -65,10 +68,24 @@ export default function useAskAI() {
       const imageIndices =
         file.fileType === FileType.Image ? new Set([0]) : new Set<number>();
 
+      // A file already on the composer must not get a second chip — say so
+      // instead of letting the action look like it did nothing.
+      if (
+        selectNewAttachmentIndices(useAttachmentsStore, [input]).length === 0
+      ) {
+        toastr.info(
+          t("Common:AttachFilesAlreadyAttached_one", {
+            count: 1,
+            defaultValue: "This file is already attached",
+          }),
+        );
+        return;
+      }
+
       attachFilesToChat(useAttachmentsStore, [input], imageIndices).catch((e) =>
         toastr.error(e as string),
       );
     },
-    [openChat, useAttachmentsStore],
+    [openChat, useAttachmentsStore, t],
   );
 }

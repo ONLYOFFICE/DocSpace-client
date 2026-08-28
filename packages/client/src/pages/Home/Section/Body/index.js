@@ -358,12 +358,27 @@ const SectionBodyContent = (props) => {
       // panel is not a `.droppable`, so the move path below must not run either.
       if (isDragActive && draggedFiles.length > 0) {
         attachFilesToChat(draggedFiles)
-          .then(({ skipped }) => {
+          .then(({ skipped, duplicates }) => {
             // The composer caps attachments, so say what did not fit instead
             // of letting the extra files disappear without a word.
             if (skipped > 0) {
               toastr.warning(
                 t("Common:AttachFilesLimit", { limit: CHAT_ATTACHMENT_LIMIT }),
+              );
+            }
+            // Same for files the composer already holds: a drop that adds no
+            // chip must not look like it did nothing.
+            if (duplicates > 0) {
+              toastr.info(
+                duplicates === 1
+                  ? t("Common:AttachFilesAlreadyAttached_one", {
+                      count: duplicates,
+                      defaultValue: "This file is already attached",
+                    })
+                  : t("Common:AttachFilesAlreadyAttached_other", {
+                      count: duplicates,
+                      defaultValue: "{{count}} files are already attached",
+                    }),
               );
             }
           })

@@ -82,12 +82,27 @@ const AskAIChatBridgeComponent = () => {
     setCurrentPage("chat");
 
     attachFilesToChat([file])
-      .then(({ skipped }) => {
+      .then(({ skipped, duplicates }) => {
         // The composer caps attachments; say what did not fit instead of
         // letting the file disappear without a word.
         if (skipped > 0) {
           toastr.warning(
             t("Common:AttachFilesLimit", { limit: CHAT_ATTACHMENT_LIMIT }),
+          );
+        }
+        // Same reasoning for a file that is already on the composer: the
+        // action must not look like it did nothing.
+        if (duplicates > 0) {
+          toastr.info(
+            duplicates === 1
+              ? t("Common:AttachFilesAlreadyAttached_one", {
+                  count: duplicates,
+                  defaultValue: "This file is already attached",
+                })
+              : t("Common:AttachFilesAlreadyAttached_other", {
+                  count: duplicates,
+                  defaultValue: "{{count}} files are already attached",
+                }),
           );
         }
       })
@@ -111,3 +126,4 @@ const AskAIChatBridgeComponent = () => {
 export const AskAIChatBridge = observer(AskAIChatBridgeComponent);
 
 export default AskAIChatBridge;
+

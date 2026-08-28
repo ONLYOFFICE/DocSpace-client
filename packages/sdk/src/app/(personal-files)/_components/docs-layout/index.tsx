@@ -154,6 +154,7 @@ import { usePanelExclusivity } from "@/app/(docspace)/_hooks/usePanelExclusivity
 import {
   getOnlyofficeFileType,
   attachFilesToChat,
+  selectNewAttachmentIndices,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 
 import styles from "./DocsLayout.module.scss";
@@ -942,6 +943,7 @@ const DocsLayoutCore = observer(
 );
 
 const DocsLayoutAi = observer((props: DocsLayoutProps) => {
+  const { t } = useTranslation(["Common"]);
   const { useAttachmentsStore } = useStores();
   const openChat = useOpenAiChat();
 
@@ -968,11 +970,25 @@ const DocsLayoutAi = observer((props: DocsLayoutProps) => {
       const imageIndices =
         item.fileType === FileType.Image ? new Set([0]) : new Set<number>();
 
+      // A file already on the composer must not get a second chip — say so
+      // instead of letting the action look like it did nothing.
+      if (
+        selectNewAttachmentIndices(useAttachmentsStore, [input]).length === 0
+      ) {
+        toastr.info(
+          t("Common:AttachFilesAlreadyAttached_one", {
+            count: 1,
+            defaultValue: "This file is already attached",
+          }),
+        );
+        return;
+      }
+
       attachFilesToChat(useAttachmentsStore, [input], imageIndices).catch((e) =>
         toastr.error(e as string),
       );
     },
-    [openChat, useAttachmentsStore],
+    [openChat, useAttachmentsStore, t],
   );
 
   const ai: DocsLayoutAiBindings = {

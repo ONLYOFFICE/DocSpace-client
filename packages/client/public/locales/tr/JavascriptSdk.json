@@ -61,8 +61,6 @@
   "HtmlCodeDescription": "<script> etiketini kullanarak çalışma alanını veya bir parçasını gömme. Aşağıdaki HTML kodunu kopyalayın ve HTML dosyanıza ekleyin.",
   "InitializeSDK": "Önerilen modlardan birini seçin veya tüm parametreleri manuel olarak yapılandırmak için Özel seçeneğini kullanın.",
   "InLeftPanel": "sol panelde",
-  "IntegrationDescription": "Kullanıma hazır çalışma alanı entegrasyonlarını kontrol edin",
-  "IntegrationExamples": "Entegrasyon örnekleri",
   "ItemsCount": "Bir sayfadaki öğe sayısı",
   "ItemsCountDescription": "Bir sayfada görüntülenen dosya / klasör sayısını ve ayrıca hangi sayfanın görüntülenmeye başlayacağını belirleyebilirsiniz.",
   "JavaScriptCodeDescription": "Çalışma alanını veya bir bölümünü JavaScript kullanarak gömme. Aşağıdaki JavaScript kodunu kopyalayın.",

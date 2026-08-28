@@ -61,8 +61,6 @@
   "HtmlCodeDescription": "使用 <script> 标签嵌入工作区或其部分。复制以下 HTML 代码并将其插入到您的 HTML 文件中。",
   "InitializeSDK": "在建议的模式中选择一项，或使用“自定义”手动配置所有参数。",
   "InLeftPanel": "在左侧面板中",
-  "IntegrationDescription": "查看现成的工作区集成",
-  "IntegrationExamples": "集成示例",
   "ItemsCount": "一页上的项目数",
   "ItemsCountDescription": "可指定一页上显示的文件/文件夹的数量，以及指定从哪一页开始显示",
   "JavaScriptCodeDescription": "使用 JavaScript 嵌入工作区或其部分。复制以下 JavaScript 代码。",

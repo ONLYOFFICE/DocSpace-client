@@ -61,8 +61,6 @@
   "HtmlCodeDescription": "Intégrez l'espace de travail ou une partie de celui-ci à l'aide de la balise <script>. Copiez le code HTML ci-dessous et insérez-le dans votre fichier HTML.",
   "InitializeSDK": "Choisissez l'une des suggestions de mode ou utilisez le mode Personnalisé afin de configurer manuellement tous les paramètres.",
   "InLeftPanel": "dans le panneau de gauche",
-  "IntegrationDescription": "Vérifiez les intégrations de l'espace de travail prêtes à l'emploi",
-  "IntegrationExamples": "Exemples d'intégration",
   "ItemsCount": "Nombre d'éléments sur une page",
   "ItemsCountDescription": "Vous pouvez spécifier le nombre de fichiers/dossiers affichés sur une page, ainsi que la page à partir de laquelle l'affichage doit commencer",
   "JavaScriptCodeDescription": "Intégrez l'espace de travail ou une partie de celui-ci en utilisant JavaScript. Copiez le code JavaScript ci-dessous.",

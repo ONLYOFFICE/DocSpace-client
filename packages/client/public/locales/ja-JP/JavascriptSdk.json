@@ -61,8 +61,6 @@
   "HtmlCodeDescription": "<script>タグを使用して、ワークスペースまたはその一部を埋め込みます。以下のHTMLコードをコピーして、HTMLファイルに挿入してください。",
   "InitializeSDK": "推奨されるモードを1つ選択するか、「カスタム」を使用してすべてのパラメーターを手動で設定します。",
   "InLeftPanel": "左パネルで",
-  "IntegrationDescription": "すぐに使えるワークスペースの統合機能を確認する",
-  "IntegrationExamples": "統合の例",
   "ItemsCount": "1ページの項目数",
   "ItemsCountDescription": "1ページに表示するファイル/フォルダの数を指定したり、表示を開始するページを指定することもできます。",
   "JavaScriptCodeDescription": "JavaScriptを使用してワークスペースまたはその一部を埋め込みます。以下のJavaScriptコードをコピーしてください。",

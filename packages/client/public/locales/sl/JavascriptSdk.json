@@ -61,8 +61,6 @@
   "HtmlCodeDescription": "Vdelava delovnega prostora ali njegovega dela z oznako <script>. Kopirajte spodnjo kodo HTML in jo vstavite v svojo datoteko HTML.",
   "InitializeSDK": "Izberite enega od predlaganih načinov ali uporabite Po meri, da ročno konfigurirate vse parametre.",
   "InLeftPanel": "na levem panelu",
-  "IntegrationDescription": "Preverite integracije delovnega prostora, ki so že pripravljene za uporabo",
-  "IntegrationExamples": "Primeri integracij",
   "ItemsCount": "Število predmetov na eno stran",
   "ItemsCountDescription": "Specificirate lahko število datotek / map, prikazanih na eni strani, kot tudi to, katera stran naj se začne prikazovati",
   "JavaScriptCodeDescription": "Vdelava delovnega prostora ali njegovega dela z uporabo JavaScripta. Kopirajte spodnjo JavaScript kodo.",

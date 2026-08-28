@@ -465,6 +465,10 @@ class SettingsStore {
     return this.externalResources?.site?.entries;
   }
 
+  get integrationsEntries() {
+    return this.externalResources?.integrations?.entries;
+  }
+
   get feedbackAndSupportUrl() {
     return this.externalResources?.support?.domain;
   }

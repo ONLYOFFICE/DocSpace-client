@@ -61,8 +61,6 @@
   "HtmlCodeDescription": "Vloženie pracovného priestoru alebo jeho časti pomocou tagu <script>. Skopírujte nižšie uvedený kód HTML a vložte ho do svojho súboru HTML.",
   "InitializeSDK": "Vyberte jeden z navrhovaných režimov alebo použite Vlastný, aby ste všetky parametre nakonfigurovali sami.",
   "InLeftPanel": "na ľavom paneli",
-  "IntegrationDescription": "Pozrite si integrácie pracovného priestoru pripravené na použitie",
-  "IntegrationExamples": "Príklady integrácie",
   "ItemsCount": "Počet položiek na jednej strane",
   "ItemsCountDescription": "Môžete zadať počet súborov/priečinkov zobrazených na jednej stránke, ako aj určiť, od ktorej stránky sa má začať zobrazovanie",
   "JavaScriptCodeDescription": "Vloženie pracovného priestoru alebo jeho časti pomocou JavaScriptu. Skopírujte nižšie uvedený kód JavaScript.",

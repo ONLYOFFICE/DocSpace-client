@@ -61,8 +61,6 @@
   "HtmlCodeDescription": "Incorporação do espaço de trabalho ou parte dele usando a tag <script>. Copie o código HTML abaixo e insira-o no seu ficheiro HTML.",
   "InitializeSDK": "Selecione um dos modos sugeridos ou use Personalizado para configurar todos os parâmetros manualmente.",
   "InLeftPanel": "no painel esquerdo",
-  "IntegrationDescription": "Verifique as integrações do espaço de trabalho prontas a usar",
-  "IntegrationExamples": "Exemplos de integração",
   "ItemsCount": "Contagem de itens numa página",
   "ItemsCountDescription": "Pode especificar o número de ficheiros / pastas apresentados numa página, bem como especificar a página que deve começar a ser apresentada",
   "JavaScriptCodeDescription": "Incorporação do espaço de trabalho ou de parte dele usando JavaScript. Copie o código JavaScript abaixo.",

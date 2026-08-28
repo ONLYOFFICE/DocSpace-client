@@ -39,6 +39,18 @@
 
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
+
+    &:not([data-compact]) .integrationTile[data-span="2"] {
+      grid-column: auto;
+    }
+  }
+
+  &[data-compact] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .integrationArrow {
+      display: none;
+    }
   }
 }
 
@@ -48,6 +60,8 @@
   align-items: center;
   gap: 12px;
   min-width: 0;
+  box-sizing: border-box;
+  min-height: 82px;
   padding: 16px;
   border-radius: 12px;
   text-align: start;
@@ -86,7 +100,11 @@
     outline-offset: -2px;
   }
 
-  &[data-variant="no-icon"] {
+  &[data-span="2"] {
+    grid-column: span 2;
+  }
+
+  &[data-variant="muted"] {
     flex-direction: column;
     align-items: center;
     justify-content: center;

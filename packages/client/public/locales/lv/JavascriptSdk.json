@@ -61,8 +61,6 @@
   "HtmlCodeDescription": "Darbvietas vai tās daļas iegulšana, izmantojot tagu <script>. Nokopējiet zemāk esošo HTML kodu un ievietojiet to savā HTML failā.",
   "InitializeSDK": "Altasiet vienu no ieteiktajiem režīmiem vai izmantojiet Pielāgots, lai manuāli konfigurētu visus parametrus.",
   "InLeftPanel": "kreisajā panelī",
-  "IntegrationDescription": "Pārbaudīt lietošanai gatavas darbvietas integrācijas",
-  "IntegrationExamples": "Integrācijas piemēri",
   "ItemsCount": "Vienumu skaits vienā lapā",
   "ItemsCountDescription": "Jūs varat norādīt vienā lapā parādīto failu / mapju skaitu, kā arī norādīt, kuru lapu sākt rādīt",
   "JavaScriptCodeDescription": "Darbvietas vai tās daļas iegulšana, izmantojot JavaScript. Nokopējiet tālāk norādīto JavaScript kodu.",

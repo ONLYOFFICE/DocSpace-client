@@ -61,8 +61,6 @@
   "HtmlCodeDescription": "Nhúng không gian làm việc hoặc một phần của nó bằng thẻ <script>. Hãy sao chép mã HTML bên dưới và chèn nó vào tập tin HTML của bạn.",
   "InitializeSDK": "Chọn một trong các chế độ được đề xuất hoặc sử dụng Tùy chỉnh để định cấu hình tất cả các tham số một cách thủ công.",
   "InLeftPanel": "trong bảng điều khiển bên trái",
-  "IntegrationDescription": "Kiểm tra các tích hợp không gian làm việc có sẵn để sử dụng",
-  "IntegrationExamples": "Ví dụ tích hợp",
   "ItemsCount": "Số mục trên một trang",
   "ItemsCountDescription": "Bạn có thể chỉ định số lượng tập tin / thư mục được hiển thị trên một trang, cũng như chỉ định trang nào sẽ bắt đầu hiển thị",
   "JavaScriptCodeDescription": "Nhúng không gian làm việc hoặc một phần của nó bằng JavaScript. Hãy sao chép mã JavaScript bên dưới.",

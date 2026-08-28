@@ -61,8 +61,6 @@
   "HtmlCodeDescription": "Ugrađivanje radnog prostora ili njegovog dela pomoću <script> taga. Kopirajte HTML kod ispod i umetnite ga u svoju HTML datoteku.",
   "InitializeSDK": "Izaberite jedan od predloženih režima ili koristite Prilagođeni da biste ručno konfigurisali sve parametre.",
   "InLeftPanel": "u levom panelu",
-  "IntegrationDescription": "Proverite gotove integracije radnog prostora",
-  "IntegrationExamples": "Primeri integracija",
   "ItemsCount": "Broj stavki na jednoj stranici",
   "ItemsCountDescription": "Možete da odredite broj datoteka / foldera prikazanih na jednoj stranici, kao i da odredite koja stranica će početi da se prikazuje",
   "JavaScriptCodeDescription": "Ugrađivanje radnog prostora ili njegovog dela pomoću JavaScript. Kopirajte JavaScript kod ispod.",

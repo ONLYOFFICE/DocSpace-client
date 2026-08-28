@@ -262,7 +262,7 @@
   "AssignRecipientsDescription": "Formularz został pomyślnie wysłany do {{roomName}}. Przypisz uprawnienia odbiorcy wybranym użytkownikom, aby umożliwić im wypełnianie formularza. Czy chcesz kontynuować teraz, czy wrócić do tego później?",
   "AssignToRecipient": "Przypisz do odbiorcy",
   "AttachFilesAlreadyAttached_one": "Ten plik jest już załączony",
-  "AttachFilesAlreadyAttached_other": "{{count}} plików jest już załączonych",
+  "AttachFilesAlreadyAttached_other": "Już załączonych plików: {{count}}",
   "AttachFilesLimit": "Możesz załączyć maksymalnie {{limit}} plików",
   "Attention": "Uwaga",
   "Audio": "Audio",

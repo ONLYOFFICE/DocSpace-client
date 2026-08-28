@@ -262,7 +262,7 @@
   "AssignRecipientsDescription": "Форма успішно надіслана до {{roomName}}. Призначте ролі отримувача обраним користувачам, щоб дозволити заповнення форми. Ви хочете продовжити зараз чи повернутися до цього пізніше?",
   "AssignToRecipient": "Призначити одержувачу",
   "AttachFilesAlreadyAttached_one": "Цей файл уже прикріплено",
-  "AttachFilesAlreadyAttached_other": "{{count}} файлів уже прикріплено",
+  "AttachFilesAlreadyAttached_other": "Уже прикріплено файлів: {{count}}",
   "AttachFilesLimit": "Можна прикріпити не більше {{limit}} файлів",
   "Attention": "Увагу",
   "Audio": "Аудіо",

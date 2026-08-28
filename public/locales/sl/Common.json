@@ -262,7 +262,7 @@
   "AssignRecipientsDescription": "Obrazec je bil uspešno poslan v {{roomName}}. Dodelite uporabnikom, ki ste jih izbrali, vloge za prejemnika, da omogočite izpolnjevanje obrazca. Želite zdaj nadaljevati ali se k temu vrniti kasneje?",
   "AssignToRecipient": "Nameniti prejemniku",
   "AttachFilesAlreadyAttached_one": "Ta datoteka je že pripeta",
-  "AttachFilesAlreadyAttached_other": "{{count}} datotek je že pripetih",
+  "AttachFilesAlreadyAttached_other": "Že pripetih datotek: {{count}}",
   "AttachFilesLimit": "Pripnete lahko največ {{limit}} datotek",
   "Attention": "Pozornost",
   "Audio": "Audio",

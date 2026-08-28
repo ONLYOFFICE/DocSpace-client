@@ -262,7 +262,7 @@
   "AssignRecipientsDescription": "ແບບຟອມໄດ້ຖືກສົ່ງໃຫ້ {{roomName}} ສຳເລັດແລ້ວ. ກໍານົດບົດບາດຜູ້ຮັບໃຫ້ກັບຜູ້ໃຊ້ທີ່ເລືອກເພື່ອເປີດໃຊ້ການຕື່ມແບບຟອມ. ທ່ານຕ້ອງການດຳເນີນການຕໍ່ດຽວນີ້ ຫຼືກັບຄືນຫາມັນໃນພາຍຫຼັງບໍ?",
   "AssignToRecipient": "ມອບໝາຍໃຫ້ຜູ້ຮັບ",
   "AttachFilesAlreadyAttached_one": "ໄຟລ໌ນີ້ຖືກແນບໄວ້ແລ້ວ",
-  "AttachFilesAlreadyAttached_other": "{{count}} ໄຟລ໌ຖືກແນບໄວ້ແລ້ວ",
+  "AttachFilesAlreadyAttached_other": "ຈຳນວນໄຟລ໌ທີ່ແນບໄວ້ແລ້ວ: {{count}}",
   "AttachFilesLimit": "ທ່ານສາມາດແນບໄຟລ໌ໄດ້ສູງສຸດ {{limit}} ໄຟລ໌",
   "Attention": "ເອົາໃຈໃສ່",
   "Audio": "ສຽງ",

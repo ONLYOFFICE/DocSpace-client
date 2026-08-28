@@ -262,7 +262,7 @@
   "AssignRecipientsDescription": "Formulář byl úspěšně odeslán do {{roomName}}. Přiřaďte uživatelům vybrané role příjemce, abyste umožnili vyplňování formuláře. Chcete pokračovat nyní nebo se k němu později vrátit?",
   "AssignToRecipient": "Přiřadit příjemci",
   "AttachFilesAlreadyAttached_one": "Tento soubor je již přiložen",
-  "AttachFilesAlreadyAttached_other": "{{count}} souborů je již přiloženo",
+  "AttachFilesAlreadyAttached_other": "Již přiložených souborů: {{count}}",
   "AttachFilesLimit": "Můžete přiložit až {{limit}} souborů",
   "Attention": "Pozornost",
   "Audio": "Audio",

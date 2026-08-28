@@ -262,7 +262,7 @@
   "AssignRecipientsDescription": "تم إرسال النموذج بنجاح إلى {{roomName}}. عينوا أدوار المستلمين للمستخدمين المختارين لتمكينهم من ملء النموذج. هل ترغبون في المتابعة الآن أم العودة لاحقًا؟",
   "AssignToRecipient": "التعيين إلى المستلم",
   "AttachFilesAlreadyAttached_one": "هذا الملف مرفق بالفعل",
-  "AttachFilesAlreadyAttached_other": "{{count}} ملفات مرفقة بالفعل",
+  "AttachFilesAlreadyAttached_other": "عدد الملفات المرفقة بالفعل: {{count}}",
   "AttachFilesLimit": "يمكنك إرفاق ما يصل إلى {{limit}} ملف",
   "Attention": "انتباه",
   "Audio": "الصوت",

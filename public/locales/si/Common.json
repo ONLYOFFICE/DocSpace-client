@@ -262,7 +262,7 @@
   "AssignRecipientsDescription": "පෝරමය {{roomName}} වෙත සාර්ථකව ඉදිරිපත් කරන ලදී. පෝරමය පිරවීම සක්‍රීය කිරීම සඳහා තෝරාගත් පරිශීලකයින්ට ලබන්නාගේ භූමිකාවන් පවරන්න. ඔබට දැන් ඉදිරියට යාමට අවශ්‍යද නැතහොත් පසුව එයට ආපසු යාමට අවශ්‍යද?",
   "AssignToRecipient": "ලබන්නාට පවරන්න",
   "AttachFilesAlreadyAttached_one": "මෙම ගොනුව දැනටමත් අමුණා ඇත",
-  "AttachFilesAlreadyAttached_other": "ගොනු {{count}} ක් දැනටමත් අමුණා ඇත",
+  "AttachFilesAlreadyAttached_other": "දැනටමත් අමුණා ඇති ගොනු ගණන: {{count}}",
   "AttachFilesLimit": "ඔබට ගොනු {{limit}} ක් දක්වා අමුණා ගත හැක",
   "Attention": "අවධානය",
   "Audio": "ශ්‍රව්‍ය",

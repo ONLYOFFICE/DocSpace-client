@@ -262,7 +262,7 @@
   "AssignRecipientsDescription": "Forma ir veiksmīgi iesniegta {{roomName}}. Piešķiriet lietotājiem atbilstošās piekļuves tiesības, lai iespējotu formas aizpildīšanu. Vai vēlaties turpināt tūlīt vai atgriezties pie tā vēlāk?",
   "AssignToRecipient": "Assignēt saņēmējam",
   "AttachFilesAlreadyAttached_one": "Šis fails jau ir pievienots",
-  "AttachFilesAlreadyAttached_other": "{{count}} faili jau ir pievienoti",
+  "AttachFilesAlreadyAttached_other": "Jau pievienoto failu skaits: {{count}}",
   "AttachFilesLimit": "Jūs varat pievienot ne vairāk kā {{limit}} failus",
   "Attention": "Uzmanību",
   "Audio": "Audio",

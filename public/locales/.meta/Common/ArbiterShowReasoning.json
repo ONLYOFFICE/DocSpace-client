@@ -3,7 +3,7 @@
   "content": "Show reasoning",
   "content_en_sha1_hash": "3ff5cb089fdf64c17a52475161eee0178eea5ecb",
   "created_at": "2026-05-24T17:27:18.615Z",
-  "updated_at": "2026-05-24T18:42:59.469Z",
+  "updated_at": "2026-08-28T12:19:49.751Z",
   "comment": {
     "text": "Button label that toggles the visibility of the AI's reasoning text in the Arbiter panel.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/PanelView.tsx",
-      "line_number": 101,
-      "context": "type=\"button\"\n onClick={() => setShowReasoning((s) => !s)}\n >\n {showReasoning\n ? t(\"Common:ArbiterHideReasoning\")\n : t(\"Common:ArbiterShowReasoning\")}\n </button>\n {showReasoning && (\n <MarkdownField chatMessage={panel.reasoningText} />\n )}\n </div>",
+      "line_number": 125,
+      "context": "isHovered\n onClick={() => setShowReasoning((s) => !s)}\n >\n {showReasoning\n ? t(\"Common:ArbiterHideReasoning\")\n : t(\"Common:ArbiterShowReasoning\")}\n </Link>\n {showReasoning ? (\n <MarkdownField chatMessage={panel.reasoningText} />\n ) : null}\n </div>",
       "module": "/packages/sdk"
     }
   ],

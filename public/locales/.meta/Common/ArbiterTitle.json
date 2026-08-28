@@ -3,7 +3,7 @@
   "content": "AI Arbiter",
   "content_en_sha1_hash": "542571c512268a0755f7361f633efe00b416b5cf",
   "created_at": "2026-05-24T17:27:18.729Z",
-  "updated_at": "2026-05-24T18:40:45.799Z",
+  "updated_at": "2026-08-28T12:19:49.749Z",
   "comment": {
     "text": "Heading/title for the AI Arbiter feature page and its introduction screen.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/IntroBackdrop.tsx",
-      "line_number": 60,
-      "context": "return (\n <div className={styles.introBackdrop}>\n <div className={styles.introIllustration} aria-hidden=\"true\">\n {isBase ? <AiAgentsLightIllustration /> : <AiAgentsDarkIllustration />}\n </div>\n <p className={styles.introTitle}>{t(\"Common:ArbiterTitle\")}</p>\n <p className={styles.introDescription}>\n {t(\"Common:ArbiterIntroDescription\")}\n </p>\n {onStart ? (\n <button",
+      "line_number": 68,
+      "context": "<div className={styles.introBackdrop}>\n <div className={styles.introIllustration} aria-hidden=\"true\">\n {isBase ? <AiAgentsLightIllustration /> : <AiAgentsDarkIllustration />}\n </div>\n <Heading level={HeadingLevel.h1} size={HeadingSize.medium}>\n {t(\"Common:ArbiterTitle\")}\n </Heading>\n <Text\n className={styles.introDescription}\n fontSize=\"14px\"\n lineHeight=\"20px\"",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
-      "line_number": 206,
-      "context": ">\n {t(\"Common:ArbiterResetConfiguration\")}\n </button>\n \n <div className={styles.pageHeader}>\n <p className={styles.pageTitle}>{t(\"Common:ArbiterTitle\")}</p>\n <p className={styles.pageDescription}>\n {t(\"Common:ArbiterPageDescription\")}\n </p>\n </div>",
+      "line_number": 208,
+      "context": "return (\n <div className={styles.layout}>\n <div className={styles.pageHeader}>\n <div className={styles.pageHeaderText}>\n <Heading level={HeadingLevel.h1} size={HeadingSize.small}>\n {t(\"Common:ArbiterTitle\")}\n </Heading>\n <Text fontSize=\"12px\" lineHeight=\"16px\" color=\"var(--arbiter-muted)\">\n {t(\"Common:ArbiterPageDescription\")}\n </Text>\n </div>",
       "module": "/packages/sdk"
     }
   ],

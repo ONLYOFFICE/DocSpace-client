@@ -3,7 +3,7 @@
   "content": "Stopped",
   "content_en_sha1_hash": "51e9111b87116e60566740d13ba1c1eddb042333",
   "created_at": "2026-05-24T17:27:18.686Z",
-  "updated_at": "2026-05-24T18:41:25.733Z",
+  "updated_at": "2026-08-28T12:19:49.750Z",
   "comment": {
     "text": "Status label in the AI Arbiter panel that appears when the process is aborted.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/PanelView.tsx",
-      "line_number": 69,
-      "context": "const statusLabels: Record<PanelState[\"status\"], string> = {\n idle: \"\",\n streaming: t(\"Common:ArbiterRunning\"),\n done: t(\"Common:Done\"),\n error: t(\"Common:Error\"),\n aborted: t(\"Common:ArbiterStopped\"),\n };\n const label = statusLabels[status];\n const headerClass = isArbiter\n ? styles.panelHeaderArbiter\n : styles.panelHeader;",
+      "line_number": 84,
+      "context": "const statusLabels: Record<PanelState[\"status\"], string> = {\n idle: \"\",\n streaming: t(\"Common:ArbiterRunning\"),\n done: t(\"Common:Done\"),\n error: t(\"Common:Error\"),\n aborted: t(\"Common:ArbiterStopped\"),\n };\n const label = statusLabels[status];\n const collapsible = !isArbiter && !!onToggleCollapse;\n \n const displayText =",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
-      "line_number": 281,
-      "context": "{runStatus !== \"idle\" && (\n <span className={styles.statusText}>\n {runStatus === \"running\" && t(\"Common:ArbiterRunning\")}\n {runStatus === \"done\" && t(\"Common:Done\")}\n {runStatus === \"error\" && t(\"Common:Error\")}\n {runStatus === \"aborted\" && t(\"Common:ArbiterStopped\")}\n </span>\n )}\n </div>\n </div>\n </div>",
+      "line_number": 294,
+      "context": "{runStatus !== \"idle\" ? (\n <Text fontSize=\"12px\" color=\"var(--arbiter-muted)\" noSelect>\n {runStatus === \"running\" && t(\"Common:ArbiterRunning\")}\n {runStatus === \"done\" && t(\"Common:Done\")}\n {runStatus === \"error\" && t(\"Common:Error\")}\n {runStatus === \"aborted\" && t(\"Common:ArbiterStopped\")}\n </Text>\n ) : null}\n </div>\n </div>\n </div>",
       "module": "/packages/sdk"
     }
   ],

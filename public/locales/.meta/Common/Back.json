@@ -3,7 +3,7 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2026-08-19T13:26:37.679Z",
+  "updated_at": "2026-08-28T12:19:49.499Z",
   "comment": {
     "text": "Button label. Navigates the user to the previous screen or step in a process.",
     "is_auto": true,
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 603,
+      "line_number": 587,
       "context": "onClick={handleProceed}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:Back\")}\n onClick={handleBackToChat}\n />\n </>\n );\n case \"provisioning\":",
       "module": "/packages/sdk"
     },

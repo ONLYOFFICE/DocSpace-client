@@ -34,7 +34,6 @@
  */
 
 @use "@docspace/ui-kit/styles/mixins";
-@use "@docspace/ui-kit/styles/variables/colors" as colors;
 
 .sdkContainer {
   box-sizing: border-box;
@@ -95,67 +94,16 @@
   }
 }
 
-.integrationContainer {
-  :global(.integration-header) {
-    margin-bottom: 8px;
-    margin-top: 36px;
-  }
+.connectors {
+  box-sizing: border-box;
 
-  :global(.icons) {
-    display: flex;
-    gap: 8px;
-    margin: 16px 0;
-  }
-
-  :global(.icons .icon:hover) {
-    cursor: pointer;
-  }
-
-  :global(.link-container) {
-    display: flex;
-    gap: 4px;
-  }
-
-  :global(.link-container .link) {
-    text-decoration: underline;
-    font-weight: 600;
-    line-height: 15px;
-  }
-
-  :global(.link-container .icon-arrow:hover) {
-    cursor: pointer;
-  }
-
-  :global(.link-container .icon-arrow rect) {
-    fill: unset;
-  }
-
-  :global(.link-container .icon-arrow path) {
-    fill: var(--icon-arrow-color);
+  .categoryHeader {
+    margin-bottom: 4px;
   }
 }
 
-.integrationContainer.dark {
-  :global(.icons .icon svg rect) {
-    fill: #{colors.$white};
-    fill-opacity: 0.1;
-  }
-
-  :global(.icons .icon .icon-zoom path) {
-    fill: #{colors.$white};
-  }
-
-  :global(.icons .icon .icon-wordpress path:not(:last-child)) {
-    fill: #{colors.$white};
-  }
-
-  :global(.icons .icon .icon-drupal path:first-child) {
-    fill: #{colors.$white};
-  }
-
-  :global(.icons .icon .icon-drupal path:nth-child(4)),
-  :global(.icons .icon .icon-drupal path:nth-child(5)),
-  :global(.icons .icon .icon-drupal path:nth-child(6)) {
-    fill: #{colors.$light-dark-gray-hover};
-  }
+.connectorsDescription {
+  max-width: 700px;
+  margin-bottom: 16px;
+  color: var(--settings-common-description-color);
 }

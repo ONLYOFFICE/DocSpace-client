@@ -3,7 +3,7 @@
   "content": "Open AI Arbiter",
   "content_en_sha1_hash": "e39da1143f64fdb7e1ed124a8883eafb11e30fbc",
   "created_at": "2026-05-24T17:27:18.276Z",
-  "updated_at": "2026-05-24T18:52:31.694Z",
+  "updated_at": "2026-08-28T12:19:49.755Z",
   "comment": {
     "text": "Button label for launching the Open AI Arbiter feature.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 623,
+      "line_number": 607,
       "context": "return (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:ArbiterOpenAiArbiter\")}\n onClick={handleOpen}\n />\n );\n case \"failed\":\n return (",
       "module": "/packages/sdk"
     }

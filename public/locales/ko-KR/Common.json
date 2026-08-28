@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "질문을 입력하세요... (Ctrl+Enter로 실행)",
   "ArbiterReadyTitle": "AI 중재자 준비 완료",
   "ArbiterRemoveExpert": "{{name}} 제거",
-  "ArbiterRemoveFile": "파일 제거",
   "ArbiterRemovingAgents": "에이전트를 제거하는 중...",
   "ArbiterResetConfiguration": "구성 초기화",
   "ArbiterResetConfigurationTitle": "AI 중재자 구성 초기화",

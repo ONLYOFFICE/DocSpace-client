@@ -34,12 +34,9 @@
  */
 
 import {
-  createAIAgent,
+  createAIAgentWithProfile,
   deleteAIAgent,
-  deleteChat,
-  editAIAgent,
   getAIAgents,
-  getChats,
 } from "@docspace/shared/api/ai";
 import type { TAgent } from "@docspace/shared/api/ai/types";
 import type { AgentSummary } from "@/types/arbiter";
@@ -49,6 +46,7 @@ import { RoomSearchArea } from "@docspace/shared/enums";
 import type { AgentConfig } from "./agentConfig";
 import { buildArbiterAgentPrompt } from "./buildArbiterAgentPrompt";
 import { buildExpertPrompt } from "./buildExpertPrompt";
+import type { ProfileRef } from "./profiles";
 import {
   TAG_ARBITER,
   TAG_EXPERT,
@@ -70,20 +68,14 @@ import {
 const WIZARD_TITLE = "AI Arbiter Setup Wizard";
 const TITLE_MAX = 170;
 
-export type DefaultProviderRef = {
-  providerId: number;
-  modelId: string;
-  modelAlias?: string;
-};
-
-export type AgentModelRef = DefaultProviderRef;
+export type { ProfileRef };
 
 export type ProvisionContext = {
   userId: string;
-  defaultProvider: DefaultProviderRef;
-  availableModels?: ReadonlyArray<WizardPromptModel>;
-  expertModels?: AgentModelRef[];
-  arbiterModel?: AgentModelRef;
+  defaultProfile: ProfileRef;
+  availableProfiles?: ReadonlyArray<WizardPromptModel>;
+  expertProfiles?: ProfileRef[];
+  arbiterProfile?: ProfileRef;
   signal?: AbortSignal;
   onProgress?: (progress: ProvisionProgress) => void;
 };
@@ -165,50 +157,27 @@ export async function ensureWizardAgent(
 ): Promise<TAgent> {
   const existing = await findWizardAgent(ctx.userId);
 
-  const effectivePrompt = ctx.availableModels
-    ? buildWizardSystemPrompt(ctx.availableModels)
+  const effectivePrompt = ctx.availableProfiles
+    ? buildWizardSystemPrompt(ctx.availableProfiles)
     : WIZARD_SYSTEM_PROMPT;
 
   if (existing) {
-    if (existing.chatSettings?.prompt !== effectivePrompt) {
-      try {
-        const updated = await editAIAgent(existing.id, {
-          chatSettings: {
-            providerId: ctx.defaultProvider.providerId,
-            modelId: ctx.defaultProvider.modelId,
-            prompt: effectivePrompt,
-          },
-        });
-        await clearWizardChats(updated.id);
-        return updated;
-      } catch (err) {
-        console.warn("Failed to refresh wizard prompt", err);
-        return existing;
-      }
+    if (existing.chatSettings?.prompt === effectivePrompt) return existing;
+    try {
+      await deleteAIAgent(existing.id);
+    } catch (err) {
+      console.warn("Failed to replace the wizard agent", err);
+      return existing;
     }
-    return existing;
   }
 
-  return createAIAgent({
+  return createAIAgentWithProfile({
     title: WIZARD_TITLE,
     tags: wizardTags(),
     attachDefaultTools: false,
-    chatSettings: {
-      providerId: ctx.defaultProvider.providerId,
-      modelId: ctx.defaultProvider.modelId,
-      prompt: effectivePrompt,
-    },
+    profileId: ctx.defaultProfile.profileId,
+    prompt: effectivePrompt,
   });
-}
-
-async function clearWizardChats(wizardAgentId: number): Promise<void> {
-  try {
-    const list = await getChats(wizardAgentId, 0, 100);
-    if (!list?.items?.length) return;
-    await Promise.allSettled(list.items.map((c) => deleteChat(c.id)));
-  } catch (err) {
-    console.warn("Failed to clear wizard chat history", err);
-  }
 }
 
 export async function provisionPanel(
@@ -231,22 +200,19 @@ export async function provisionPanel(
     for (let i = 0; i < config.experts.length; i++) {
       checkAborted();
       const expert = config.experts[i];
-      const expertModel = ctx.expertModels?.[i] ?? ctx.defaultProvider;
+      const expertProfile = ctx.expertProfiles?.[i] ?? ctx.defaultProfile;
       ctx.onProgress?.({
         type: "create_expert",
         index: i,
         total: config.experts.length,
         title: expert.role_title,
       });
-      const agent = await createAIAgent({
+      const agent = await createAIAgentWithProfile({
         title: truncateTitle(expert.role_title),
         tags: expertTags(sessionId),
         attachDefaultTools: false,
-        chatSettings: {
-          providerId: expertModel.providerId,
-          modelId: expertModel.modelId,
-          prompt: buildExpertPrompt(expert, buildCtx),
-        },
+        profileId: expertProfile.profileId,
+        prompt: buildExpertPrompt(expert, buildCtx),
       });
       created.push(agent.id);
       expertIds.push(agent.id);
@@ -256,16 +222,13 @@ export async function provisionPanel(
     checkAborted();
     const arbiterTitle = truncateTitle(`Arbiter — ${config.domain}`);
     ctx.onProgress?.({ type: "create_arbiter", title: arbiterTitle });
-    const arbiterModel = ctx.arbiterModel ?? ctx.defaultProvider;
-    const arbiter = await createAIAgent({
+    const arbiterProfile = ctx.arbiterProfile ?? ctx.defaultProfile;
+    const arbiter = await createAIAgentWithProfile({
       title: arbiterTitle,
       tags: arbiterTags(sessionId),
       attachDefaultTools: true,
-      chatSettings: {
-        providerId: arbiterModel.providerId,
-        modelId: arbiterModel.modelId,
-        prompt: buildArbiterAgentPrompt(config.arbiter, buildCtx),
-      },
+      profileId: arbiterProfile.profileId,
+      prompt: buildArbiterAgentPrompt(config.arbiter, buildCtx),
     });
     created.push(arbiter.id);
     ctx.onProgress?.({ type: "arbiter_created", agentId: arbiter.id });
@@ -303,15 +266,18 @@ export async function cleanupOrphanAgents(userId: string): Promise<number> {
   return orphans.length;
 }
 
-export function toAgentSummary(a: TAgent): AgentSummary {
+export function toAgentSummary(
+  a: TAgent,
+  profileName?: string,
+): AgentSummary {
   return {
     id: a.id,
     title: a.title ?? "",
-    modelAlias: a.chatSettings?.modelAlias ?? "",
-    modelId: a.chatSettings?.modelId ?? "",
+    modelAlias: profileName ?? "",
+    profileId: a.profileId ?? null,
     prompt: a.chatSettings?.prompt ?? "",
-    providerId: a.chatSettings?.providerId ?? 0,
     tags: a.tags,
+    logoColor: a.logo?.color,
   };
 }
 

@@ -33,20 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { http } from "msw";
-import { API_PREFIX, BASE_URL } from "../../e2e/utils";
+export const ARBITER_FLAG_KEY = "arbiter";
 
-export const PATH_AI_CHAT = "ai/chats/*";
+export const isArbiterEnabled = (): boolean => {
+  if (typeof window === "undefined") return false;
 
-export const aiChatDeleteResolver = () => {
-  return new Response(null, { status: 204 });
-};
-
-export const aiChatDeleteHandler = (port: string) => {
-  return http.delete(
-    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CHAT}`,
-    () => {
-      return aiChatDeleteResolver();
-    },
-  );
+  try {
+    return Boolean(window.localStorage.getItem(ARBITER_FLAG_KEY));
+  } catch {
+    return false;
+  }
 };

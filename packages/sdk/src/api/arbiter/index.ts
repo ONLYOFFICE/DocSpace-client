@@ -42,10 +42,9 @@ type AgentFolder = {
   id: number;
   title?: string;
   tags?: string[];
+  profileId?: string;
+  logo?: { color?: string };
   chatSettings?: {
-    providerId?: number;
-    modelId?: string;
-    modelAlias?: string;
     prompt?: string;
   };
 };
@@ -75,11 +74,11 @@ export async function getAiAgents(subjectId?: string): Promise<AgentSummary[]> {
     return folders.map((f) => ({
       id: f.id,
       title: f.title ?? "",
-      modelAlias: f.chatSettings?.modelAlias ?? "",
-      modelId: f.chatSettings?.modelId ?? "",
+      modelAlias: "",
+      profileId: f.profileId ?? null,
       prompt: f.chatSettings?.prompt ?? "",
-      providerId: f.chatSettings?.providerId ?? 0,
       tags: f.tags,
+      logoColor: f.logo?.color,
     }));
   } catch (error) {
     logger.error(`Error in getAiAgents: ${error}`);

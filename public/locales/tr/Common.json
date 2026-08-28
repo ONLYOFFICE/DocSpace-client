@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Soru sorun... (çalıştırmak için Ctrl+Enter)",
   "ArbiterReadyTitle": "Yapay Zeka Hakemi hazır",
   "ArbiterRemoveExpert": "{{name}} kaldır",
-  "ArbiterRemoveFile": "Dosyayı kaldır",
   "ArbiterRemovingAgents": "Ajanlar kaldırılıyor...",
   "ArbiterResetConfiguration": "Yapılandırmayı sıfırla",
   "ArbiterResetConfigurationTitle": "Yapay Zeka Hakemi yapılandırmasını sıfırla",

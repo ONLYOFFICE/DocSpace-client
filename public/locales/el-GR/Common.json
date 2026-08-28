@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Υποβάλετε ερώτηση... (Ctrl+Enter για εκτέλεση)",
   "ArbiterReadyTitle": "Ο Διαιτητής ΤΝ είναι έτοιμος",
   "ArbiterRemoveExpert": "Αφαίρεση {{name}}",
-  "ArbiterRemoveFile": "Αφαίρεση αρχείου",
   "ArbiterRemovingAgents": "Αφαίρεση πρακτόρων...",
   "ArbiterResetConfiguration": "Επαναφορά ρύθμισης",
   "ArbiterResetConfigurationTitle": "Επαναφορά ρύθμισης Διαιτητή ΤΝ",

@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Uzdodiet jautājumu... (Ctrl+Enter, lai palaistu)",
   "ArbiterReadyTitle": "MI Arbitrs ir gatavs",
   "ArbiterRemoveExpert": "Noņemt {{name}}",
-  "ArbiterRemoveFile": "Noņemt failu",
   "ArbiterRemovingAgents": "Aģenti tiek noņemti...",
   "ArbiterResetConfiguration": "Atiestatīt konfigurāciju",
   "ArbiterResetConfigurationTitle": "Atiestatīt MI Arbitru konfigurāciju",

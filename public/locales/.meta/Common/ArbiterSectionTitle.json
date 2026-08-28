@@ -3,7 +3,7 @@
   "content": "Arbiter",
   "content_en_sha1_hash": "28f6b23f9995eb419f8cde85c71f5522abe66f70",
   "created_at": "2026-05-24T17:27:18.558Z",
-  "updated_at": "2026-05-24T18:44:39.929Z",
+  "updated_at": "2026-08-28T14:38:40.319Z",
   "comment": {
     "text": "Section heading for the AI feature, appearing in a wizard overlay list and a dedicated panel.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 494,
+      "line_number": 478,
       "context": "))}\n <li\n className={`${styles.previewItem} ${styles.previewItemArbiter}`}\n >\n <div className={styles.previewItemBody}>\n <span className={styles.previewItemTitle}>{t(\"Common:ArbiterSectionTitle\")}</span>\n <span className={styles.previewItemMeta}>\n {t(\"Common:ArbiterSynthesizesAnswers\")}\n </span>\n </div>\n <div className={styles.previewItemModel}>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
-      "line_number": 332,
-      "context": "</div>\n )}\n \n {arbiterPanel && (\n <div className={styles.arbiterSection}>\n <p className={styles.arbiterSectionTitle}>{t(\"Common:ArbiterSectionTitle\")}</p>\n <PanelView panel={arbiterPanel} isArbiter key={ARBITER_PANEL_ID} />\n </div>\n )}\n </div>",
+      "line_number": 364,
+      "context": "fontSize=\"12px\"\n fontWeight={600}\n color=\"var(--arbiter-muted)\"\n noSelect\n >\n {t(\"Common:ArbiterSectionTitle\")}\n </Text>\n <PanelView panel={arbiterPanel} isArbiter key={ARBITER_PANEL_ID} />\n </div>\n )}\n </div>",
       "module": "/packages/sdk"
     }
   ],

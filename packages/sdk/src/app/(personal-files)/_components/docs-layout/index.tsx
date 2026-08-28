@@ -152,10 +152,9 @@ import {
 } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import { usePanelExclusivity } from "@/app/(docspace)/_hooks/usePanelExclusivity";
 import {
-  getOnlyofficeFileType,
-  attachFilesToChat,
-  selectNewAttachmentIndices,
+  useAttachHostFilesToChat,
   notifyAlreadyAttached,
+  notifyAttachmentLimit,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 
 import styles from "./DocsLayout.module.scss";
@@ -945,7 +944,7 @@ const DocsLayoutCore = observer(
 
 const DocsLayoutAi = observer((props: DocsLayoutProps) => {
   const { t } = useTranslation(["Common"]);
-  const { useAttachmentsStore } = useStores();
+  const attachToChat = useAttachHostFilesToChat();
   const openChat = useOpenAiChat();
 
   // No `chatProps`: without an AI profile the panel shows the chat widget's own
@@ -961,30 +960,24 @@ const DocsLayoutAi = observer((props: DocsLayoutProps) => {
     (item: TFileItem) => {
       openChat();
 
-      const input = {
-        path: String(item.id),
-        title: item.title,
-        type: getOnlyofficeFileType(item.fileExst || item.title),
-        content: "",
-      };
-
-      const imageIndices =
-        item.fileType === FileType.Image ? new Set([0]) : new Set<number>();
-
-      // A file already on the composer must not get a second chip — say so
-      // instead of letting the action look like it did nothing.
-      if (
-        selectNewAttachmentIndices(useAttachmentsStore, [input]).length === 0
-      ) {
-        notifyAlreadyAttached(t, 1);
-        return;
-      }
-
-      attachFilesToChat(useAttachmentsStore, [input], imageIndices).catch((e) =>
-        toastr.error(e as string),
-      );
+      // The shared hook owns the whole attach contract — duplicate filter,
+      // attachment cap, loading chip, image bucket — so this action only has
+      // to report what it left out.
+      attachToChat([
+        {
+          id: item.id,
+          title: item.title,
+          fileExst: item.fileExst,
+          fileType: item.fileType,
+        },
+      ])
+        .then(({ duplicates, skipped }) => {
+          notifyAlreadyAttached(t, duplicates);
+          notifyAttachmentLimit(t, skipped);
+        })
+        .catch((e: unknown) => toastr.error(e as string));
     },
-    [openChat, useAttachmentsStore, t],
+    [openChat, attachToChat, t],
   );
 
   const ai: DocsLayoutAiBindings = {

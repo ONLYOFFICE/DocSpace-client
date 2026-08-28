@@ -44,7 +44,11 @@ import AiAgentProviders, {
   useApi,
   useStores,
 } from "@docspace/ui-kit/ai-agent/providers";
-import { useAttachHostFilesToChat } from "@docspace/ui-kit/ai-agent/providers/files";
+import {
+  useAttachHostFilesToChat,
+  notifyAlreadyAttached,
+  notifyAttachmentLimit,
+} from "@docspace/ui-kit/ai-agent/providers/files";
 import { ChatToolbar } from "@docspace/ui-kit/ai-agent/chat-toolbar";
 import {
   PORTAL_BASE_THEME_ID,
@@ -71,6 +75,7 @@ type ChatParamsBridgeProps = {
 };
 
 const ChatParamsBridge = ({ fileId, threadId }: ChatParamsBridgeProps) => {
+  const { t } = useTranslation(["Common"]);
   const api = useApi();
   const stores = useStores();
   const attachFilesToChat = useAttachHostFilesToChat();
@@ -105,13 +110,20 @@ const ChatParamsBridge = ({ fileId, threadId }: ChatParamsBridgeProps) => {
           },
         ]),
       )
+      .then(({ duplicates, skipped }) => {
+        // Resuming a thread can land on a composer that already holds this
+        // file, and the cap applies here as anywhere else — both drop the
+        // chip silently, so say which one happened.
+        notifyAlreadyAttached(t, duplicates);
+        notifyAttachmentLimit(t, skipped);
+      })
       .catch((error: unknown) => {
         frameCallEvent({
           event: "onAppError",
           data: error instanceof Error ? error.message : String(error),
         });
       });
-  }, [api, attachFilesToChat, fileId, switchToThread, threadId]);
+  }, [api, attachFilesToChat, fileId, switchToThread, threadId, t]);
 
   return null;
 };

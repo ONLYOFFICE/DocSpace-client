@@ -394,7 +394,6 @@
   "ChangeUserPermissions": "Vaihda käyttäjäoikeudet kutsutuille ihmisille tai <1>päivitä tilauksesi</1>.",
   "ChangeUserPermissionsOnly": "Vaihda käyttäjäoikeudet kutsutuille ihmisille.",
   "ChargeAmount": "Summa <1>{{price}}</1> veloitetaan tallennetusta maksutavastasi.",
-  "ChatAttachmentLimitReached": "Tiedostoja ohitettiin — liitetiedostojen raja saavutettu: {{count}}",
   "ChatHistory": "Chat-historia",
   "ChooseAIAgent": "Valitse {{aiAgent}}",
   "ChooseAIAgentDescription": "Valitse agentti, jossa haluat keskustella valitun tiedoston kanssa tekoälyn kanssa. Voit valita olemassa olevan agentin.",

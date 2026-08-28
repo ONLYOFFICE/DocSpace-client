@@ -394,7 +394,6 @@
   "ChangeUserPermissions": "Mainiet lietotāju atļaujas uzaicinātajām personām vai <1>jauniniet savu tarifu plānu</1>.",
   "ChangeUserPermissionsOnly": "Mainiet lietotāju atļaujas uzaicinātajām personām.",
   "ChargeAmount": "Par saglabāto maksājuma veidu tiks noņemta summa <1>{{price}}</1>.",
-  "ChatAttachmentLimitReached": "Faili izlaisti — sasniegts pielikumu ierobežojums: {{count}}",
   "ChatHistory": "Čata vēsture",
   "ChooseAIAgent": "Izvēlieties {{aiAgent}}",
   "ChooseAIAgentDescription": "Izvēlieties aģentu, kurā vēlaties saņemt MI sarunu par atlasīto failu. Jūs varat izvēlēties esošu aģentu.",

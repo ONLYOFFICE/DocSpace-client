@@ -394,7 +394,6 @@
   "ChangeUserPermissions": "Změňte uživatelská oprávnění na pozvané osoby nebo <1>upgradujte svůj tarifní plán</1>.",
   "ChangeUserPermissionsOnly": "Změňte uživatelská oprávnění na pozvané osoby.",
   "ChargeAmount": "Bude strženo <1>{{price}}</1> z vaší uložené platební metody.",
-  "ChatAttachmentLimitReached": "Soubory byly přeskočeny — byl dosažen limit příloh: {{count}}",
   "ChatHistory": "Historie chatu",
   "ChooseAIAgent": "Vyberte {{aiAgent}}.",
   "ChooseAIAgentDescription": "Vyberte agenta, se kterým chcete chatovat s AI o vybraném souboru. Můžete si vybrat existujícího agenta.",

@@ -394,7 +394,6 @@
   "ChangeUserPermissions": "Zmień uprawnienia użytkownika dla zaproszonych osób lub <1>uaktualnij swój plan cenowy</1>.",
   "ChangeUserPermissionsOnly": "Zmień uprawnienia użytkownika dla zaproszonych osób.",
   "ChargeAmount": "Opłat zostanie dokonana w wysokości <1>{{price}}</1> z użycia zapisanego sposobu płatności.",
-  "ChatAttachmentLimitReached": "Pominięto pliki — osiągnięto limit załączników: {{count}}",
   "ChatHistory": "Historia czatu",
   "ChooseAIAgent": "Wybierz {{aiAgent}}",
   "ChooseAIAgentDescription": "Wybierz agenta, z którym chcesz porozmawiać o wybranym pliku. Możesz wybrać istniejącego agenta.",

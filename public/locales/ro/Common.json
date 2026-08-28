@@ -394,7 +394,6 @@
   "ChangeUserPermissions": "Schimbaţi permisiuni de acces acordate invitaților sau <1>selectaţi un alt plan tarifar</1>.",
   "ChangeUserPermissionsOnly": "Schimbaţi permisiuni de acces acordate invitaților.",
   "ChargeAmount": "Suma de <1>{{price}}</1> va fi facturată conform metodei de plată pe care ați indicat-o.",
-  "ChatAttachmentLimitReached": "Fișiere omise — limita de atașamente a fost atinsă: {{count}}",
   "ChatHistory": "Istoric chat",
   "ChooseAIAgent": "Alege un {{aiAgent}}",
   "ChooseAIAgentDescription": "Selectează agentul cu care dorești să discuți cu IA despre fișierul selectat. Poți alege un agent existent.",

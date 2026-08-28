@@ -394,7 +394,6 @@
   "ChangeUserPermissions": "修改受邀人员的用户权限或<1>升级您的套餐方案</1>。",
   "ChangeUserPermissionsOnly": "修改受邀人员的用户权限。",
   "ChargeAmount": "将从您保存的支付方式中扣除<1>{{price}}</1>的金额。",
-  "ChatAttachmentLimitReached": "已跳过文件 — 已达到附件数量上限：{{count}}",
   "ChatHistory": "历史对话",
   "ChooseAIAgent": "选择一个 {{aiAgent}}",
   "ChooseAIAgentDescription": "选择您希望与 AI 讨论所选文件的代理。您可以选择一个已存在的代理。",

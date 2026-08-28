@@ -394,7 +394,6 @@
   "ChangeUserPermissions": "Change user permissions to the invited people or <1>upgrade your tariff plan</1>.",
   "ChangeUserPermissionsOnly": "Change user permissions to the invited people.",
   "ChargeAmount": "An amount of <1>{{price}}</1> will be charged to your saved payment method.",
-  "ChatAttachmentLimitReached": "Files skipped — attachment limit reached: {{count}}",
   "ChatHistory": "Chat history",
   "ChooseAIAgent": "Choose an {{aiAgent}}",
   "ChooseAIAgentDescription": "Select the agent where you want to chat with AI about the selected file. You can pick an existing agent.",

@@ -394,7 +394,6 @@
   "ChangeUserPermissions": "Wijzig de gebruikersrechten voor de uitgenodigde personen of <1>upgrade uw tariefplan</1>.",
   "ChangeUserPermissionsOnly": "Wijzig de gebruikersrechten voor de uitgenodigde personen.",
   "ChargeAmount": "Een bedrag van <1>{{price}}</1> wordt belast op uw opgeslagen betaalmethode.",
-  "ChatAttachmentLimitReached": "Bestanden overgeslagen — bijlagelimiet bereikt: {{count}}",
   "ChatHistory": "Chatgeschiedenis",
   "ChooseAIAgent": "Kies een {{aiAgent}}",
   "ChooseAIAgentDescription": "Selecteer de agent waar u een gesprek met AI wilt voeren over het geselecteerde bestand. U kunt een bestaande agent kiezen.",

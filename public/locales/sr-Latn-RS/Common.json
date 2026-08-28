@@ -394,7 +394,6 @@
   "ChangeUserPermissions": "Promenite dozvole korisnicima koje ste pozvali ili <1>nadogradite svoj tarifni plan</1>.",
   "ChangeUserPermissionsOnly": "Promenite dozvole korisnicima koje ste pozvali.",
   "ChargeAmount": "Iznos od <1>{{price}}</1> biće naplaćen sa sačuvanog načina plaćanja.",
-  "ChatAttachmentLimitReached": "Datoteke su preskočene — dostignut je limit priloga: {{count}}",
   "ChatHistory": "Istorija chata",
   "ChooseAIAgent": "Izaberite {{aiAgent}}",
   "ChooseAIAgentDescription": "Izaberite agenta sa kojim želite da razgovarate sa AI o odabranom fajlu. Možete izabrati postojećeg agenta.",

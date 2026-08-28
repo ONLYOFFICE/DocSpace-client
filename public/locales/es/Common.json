@@ -394,7 +394,6 @@
   "ChangeUserPermissions": "Cambie los permisos de usuario para las personas invitadas o <1>actualice su plan de tarifas</1>.",
   "ChangeUserPermissionsOnly": "Cambie los permisos de usuario para las personas invitadas.",
   "ChargeAmount": "Se cargará un importe de <1>{{price}}</1> a su método de pago guardado.",
-  "ChatAttachmentLimitReached": "Archivos omitidos — se ha alcanzado el límite de archivos adjuntos: {{count}}",
   "ChatHistory": "Historial del chat",
   "ChooseAIAgent": "Elige un {{aiAgent}}",
   "ChooseAIAgentDescription": "Seleccione el agente con el que desea chatear con la IA sobre el archivo seleccionado. Puede elegir un agente existente.",

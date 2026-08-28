@@ -394,7 +394,6 @@
   "ChangeUserPermissions": "Dəvət olunan şəxslərin istifadəçi icazələrini dəyişdirin və ya <1>tarif planınızı təkmilləşdirin</1>.",
   "ChangeUserPermissionsOnly": "Dəvət olunan şəxslərin istifadəçi icazələrini dəyişdirin.",
   "ChargeAmount": "Sizə əvvəlki ödəniş vasitənizlə <1>{{price}}</1> məbləği hesablanacaq.",
-  "ChatAttachmentLimitReached": "Fayllar ötürüldü — qoşma limitinə çatıldı: {{count}}",
   "ChatHistory": "Söhbət tarixçəsi",
   "ChooseAIAgent": "{{aiAgent}} seçim edin",
   "ChooseAIAgentDescription": "Seçilmiş fayl haqqında süni intellektlə söhbət etmək istədiyiniz agenti seçin. Mövcud agentlərdən birini seçə bilərsiniz.",

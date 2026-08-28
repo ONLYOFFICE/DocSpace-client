@@ -261,6 +261,8 @@
   "AssignRecipients": "Phân công người nhận",
   "AssignRecipientsDescription": "Đã gửi biểu mẫu thành công đến {{roomName}}. Chỉ định vai trò người nhận cho những người dùng đã chọn để cho phép điền vào biểu mẫu. Bạn có muốn tiến hành ngay bây giờ hay quay lại sau?",
   "AssignToRecipient": "Gán cho người nhận",
+  "AttachFilesAlreadyAttached_one": "Tệp này đã được đính kèm",
+  "AttachFilesAlreadyAttached_other": "{{count}} tệp đã được đính kèm",
   "AttachFilesLimit": "Bạn có thể đính kèm tối đa {{limit}} tệp",
   "Attention": "Chú ý",
   "Audio": "Âm thanh",

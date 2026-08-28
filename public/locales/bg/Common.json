@@ -261,6 +261,8 @@
   "AssignRecipients": "Присвояване на получатели",
   "AssignRecipientsDescription": "Формата беше успешно изпратена към {{roomName}}. Присвоете роли на получатели на избраните потребители, за да позволите попълване на формата. Искате ли да продължите сега или да се върнете по-късно?",
   "AssignToRecipient": "Присвояване на получател",
+  "AttachFilesAlreadyAttached_one": "Този файл вече е прикачен",
+  "AttachFilesAlreadyAttached_other": "{{count}} файла вече са прикачени",
   "AttachFilesLimit": "Можете да прикачите до {{limit}} файла",
   "Attention": "Внимание",
   "Audio": "Аудио",

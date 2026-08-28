@@ -261,6 +261,8 @@
   "AssignRecipients": "Assegna destinatari",
   "AssignRecipientsDescription": "Il modulo è stato inviato con successo a {{roomName}}. Assegna i ruoli dei destinatari agli utenti selezionati per abilitare la compilazione del modulo. Vuoi procedere ora o tornare più tardi?",
   "AssignToRecipient": "Assegna al destinatario",
+  "AttachFilesAlreadyAttached_one": "Questo file è già allegato",
+  "AttachFilesAlreadyAttached_other": "{{count}} file sono già allegati",
   "AttachFilesLimit": "Puoi allegare fino a {{limit}} file",
   "Attention": "Attenzione",
   "Audio": "Audio",

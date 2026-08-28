@@ -261,6 +261,8 @@
   "AssignRecipients": "Ανάθεση παραληπτών",
   "AssignRecipientsDescription": "Η φόρμα υποβλήθηκε επιτυχώς στο {{roomName}}. Ανάθετε ρόλους παραλήπτη στους επιλεγμένους χρήστες για να επιτρέψετε τη συμπλήρωση της φόρμας. Θέλετε να προχωρήσετε τώρα ή να επιστρέψετε σε αυτήν αργότερα;",
   "AssignToRecipient": "Αναθέτηση στον παραλήπτη",
+  "AttachFilesAlreadyAttached_one": "Αυτό το αρχείο έχει ήδη επισυναφθεί",
+  "AttachFilesAlreadyAttached_other": "{{count}} αρχεία έχουν ήδη επισυναφθεί",
   "AttachFilesLimit": "Μπορείτε να επισυνάψετε έως και {{limit}} αρχεία",
   "Attention": "Προσοχή",
   "Audio": "Ήχος",

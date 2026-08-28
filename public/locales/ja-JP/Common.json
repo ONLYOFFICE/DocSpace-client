@@ -261,6 +261,8 @@
   "AssignRecipients": "宛先を割り当てる",
   "AssignRecipientsDescription": "フォームは{{roomName}}に正常に送信されました。選択したユーザーに受信者ロールを割り当てて、フォームへの入力が可能です。今すぐ続行しますか、後で戻りますか？",
   "AssignToRecipient": "宛先を割り当てる",
+  "AttachFilesAlreadyAttached_one": "このファイルは既に添付されています",
+  "AttachFilesAlreadyAttached_other": "{{count}} 件のファイルは既に添付されています",
   "AttachFilesLimit": "添付できるファイルは最大 {{limit}} 件です",
   "Attention": "注意",
   "Audio": "オーディオ",

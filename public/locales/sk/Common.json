@@ -261,6 +261,8 @@
   "AssignRecipients": "Prideliť príjemcov",
   "AssignRecipientsDescription": "Úspešne ste odoslali formulár do {{roomName}}. Priraďte používateľom, ktorých ste vybrali, role príjemcu, aby ste umožnili vyplňovanie formulára. Chcete teraz pokračovať alebo sa k nemu vrátiť neskôr?",
   "AssignToRecipient": "Prideliť príjemcovi",
+  "AttachFilesAlreadyAttached_one": "Tento súbor je už priložený",
+  "AttachFilesAlreadyAttached_other": "{{count}} súborov je už priložených",
   "AttachFilesLimit": "Môžete priložiť najviac {{limit}} súborov",
   "Attention": "Pozor",
   "Audio": "Audio",

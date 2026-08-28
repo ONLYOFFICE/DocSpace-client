@@ -261,6 +261,8 @@
   "AssignRecipients": "Desemnare destinatari",
   "AssignRecipientsDescription": "Formularul a fost remis cu succes la {{roomName}}. Atribuiți rolul de destinatar utilizatorilor selectați pentru a activa completarea formularului. Doriți să continuați acum sau să reveniți mai târziu?",
   "AssignToRecipient": "Desemnare destinatar",
+  "AttachFilesAlreadyAttached_one": "Acest fișier este deja atașat",
+  "AttachFilesAlreadyAttached_other": "{{count}} fișiere sunt deja atașate",
   "AttachFilesLimit": "Puteți atașa cel mult {{limit}} fișiere",
   "Attention": "Atenție",
   "Audio": "Audio",

@@ -261,6 +261,8 @@
   "AssignRecipients": "Attribuer les destinataires",
   "AssignRecipientsDescription": "Le formulaire a été soumis avec succès à {{roomName}}. Attribuez les rôles de destinataire aux utilisateurs sélectionnés pour permettre le remplissage du formulaire. Souhaitez-vous procéder maintenant ou y revenir plus tard ?",
   "AssignToRecipient": "Attribuer au destinataire",
+  "AttachFilesAlreadyAttached_one": "Ce fichier est déjà joint",
+  "AttachFilesAlreadyAttached_other": "{{count}} fichiers sont déjà joints",
   "AttachFilesLimit": "Vous pouvez joindre jusqu'à {{limit}} fichiers",
   "Attention": "Attention",
   "Audio": "Audio",

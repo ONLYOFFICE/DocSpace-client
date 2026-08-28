@@ -261,6 +261,8 @@
   "AssignRecipients": "Додели примаоце",
   "AssignRecipientsDescription": "Форма је успешно послата у {{roomName}}. Доделите улоге прималаца изабраним корисницима да бисте омогућили попуњавање форме. Да ли желите да то урадите сада или касније?",
   "AssignToRecipient": "Додели примаоцу",
+  "AttachFilesAlreadyAttached_one": "Ова датотека је већ приложена",
+  "AttachFilesAlreadyAttached_other": "{{count}} датотека је већ приложено",
   "AttachFilesLimit": "Можете приложити највише {{limit}} датотека",
   "Attention": "Пажња",
   "Audio": "Аудио",

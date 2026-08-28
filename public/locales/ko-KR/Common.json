@@ -261,6 +261,8 @@
   "AssignRecipients": "수신자 지정",
   "AssignRecipientsDescription": "{{roomName}}에 양식이 성공적으로 제출되었습니다. 선택한 사용자에게 수신자 역할을 할당하여 양식 작성을 활성화하세요. 지금 진행하시겠습니까, 아니면 나중에 다시 하시겠습니까?",
   "AssignToRecipient": "수신인에게 할당",
+  "AttachFilesAlreadyAttached_one": "이 파일은 이미 첨부되어 있습니다",
+  "AttachFilesAlreadyAttached_other": "{{count}}개의 파일이 이미 첨부되어 있습니다",
   "AttachFilesLimit": "최대 {{limit}}개의 파일을 첨부할 수 있습니다",
   "Attention": "주의",
   "Audio": "오디오",

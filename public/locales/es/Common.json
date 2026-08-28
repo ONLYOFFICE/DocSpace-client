@@ -261,6 +261,8 @@
   "AssignRecipients": "Asignar destinatarios",
   "AssignRecipientsDescription": "El formulario se ha enviado correctamente a {{roomName}}. Asigne roles de destinatario a los usuarios elegidos para habilitar el rellenado del formulario. ¿Desea continuar ahora o volver a ello más tarde?",
   "AssignToRecipient": "Asignar a destinatario",
+  "AttachFilesAlreadyAttached_one": "Este archivo ya está adjunto",
+  "AttachFilesAlreadyAttached_other": "{{count}} archivos ya están adjuntos",
   "AttachFilesLimit": "Puede adjuntar hasta {{limit}} archivos",
   "Attention": "¡Atención!",
   "Audio": "Audio",

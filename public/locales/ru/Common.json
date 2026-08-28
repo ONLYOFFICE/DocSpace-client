@@ -261,6 +261,8 @@
   "AssignRecipients": "Назначить получателей",
   "AssignRecipientsDescription": "Форма успешно отправлена ​​в {{roomName}}. Назначьте роли получателей выбранным пользователям, чтобы разрешить заполнение формы. Продолжить сейчас или вернуться позже?",
   "AssignToRecipient": "Назначить получателю",
+  "AttachFilesAlreadyAttached_one": "Этот файл уже прикреплён",
+  "AttachFilesAlreadyAttached_other": "{{count}} файлов уже прикреплено",
   "AttachFilesLimit": "Можно прикрепить не более {{limit}} файлов",
   "Attention": "Внимание",
   "Audio": "Аудио",

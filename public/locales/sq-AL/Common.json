@@ -261,6 +261,8 @@
   "AssignRecipients": "Caktoni marrësit",
   "AssignRecipientsDescription": "Formulari u dërgua me sukses në {{roomName}}. Caktoni rolet e marrësve për përdoruesit e përzgjedhur që të mund të plotësojnë formularin. Doni të vazhdoni tani apo të ktheheni më vonë?",
   "AssignToRecipient": "Caktoni tek marrësi",
+  "AttachFilesAlreadyAttached_one": "Ky skedar është tashmë i bashkëngjitur",
+  "AttachFilesAlreadyAttached_other": "{{count}} skedarë janë tashmë të bashkëngjitur",
   "AttachFilesLimit": "Mund të bashkëngjitni deri në {{limit}} skedarë",
   "Attention": "Kujdes",
   "Audio": "Audio",

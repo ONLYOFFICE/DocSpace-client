@@ -261,6 +261,8 @@
   "AssignRecipients": "Assign recipients",
   "AssignRecipientsDescription": "The form was successfully submitted to {{roomName}}. Assign recipient roles to the chosen users to enable form filling. Do you want to proceed now or get back to it later?",
   "AssignToRecipient": "Assign to recipient",
+  "AttachFilesAlreadyAttached_one": "This file is already attached",
+  "AttachFilesAlreadyAttached_other": "{{count}} files are already attached",
   "AttachFilesLimit": "You can attach up to {{limit}} files",
   "Attention": "Attention",
   "Audio": "Audio",

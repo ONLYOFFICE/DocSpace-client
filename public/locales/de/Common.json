@@ -261,6 +261,8 @@
   "AssignRecipients": "Empfänger zuweisen",
   "AssignRecipientsDescription": "Das Formular wurde erfolgreich an {{roomName}} gesendet. Weisen Sie die Empfängerrollen den ausgewählten Benutzern zu, um das Ausfüllen des Formulars zu ermöglichen. Möchten Sie jetzt fortfahren oder später darauf zurückkommen?",
   "AssignToRecipient": "Empfänger zuweisen",
+  "AttachFilesAlreadyAttached_one": "Diese Datei ist bereits angehängt",
+  "AttachFilesAlreadyAttached_other": "{{count}} Dateien sind bereits angehängt",
   "AttachFilesLimit": "Sie können bis zu {{limit}} Dateien anhängen",
   "Attention": "Achtung",
   "Audio": "Audio",

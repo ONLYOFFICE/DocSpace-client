@@ -261,6 +261,8 @@
   "AssignRecipients": "Dodeli primaoca",
   "AssignRecipientsDescription": "Forma je uspešno poslata u {{roomName}}. Dodelite uloge primalaca izabranim korisnicima da biste omogućili popunjavanje forme. Da li želite da to uradite sada ili kasnije?",
   "AssignToRecipient": "Dodeli primaocu",
+  "AttachFilesAlreadyAttached_one": "Ova datoteka je već priložena",
+  "AttachFilesAlreadyAttached_other": "{{count}} datoteka je već priloženo",
   "AttachFilesLimit": "Možete priložiti najviše {{limit}} datoteka",
   "Attention": "Pažnja",
   "Audio": "Audio",

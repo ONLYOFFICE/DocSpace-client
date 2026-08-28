@@ -261,6 +261,8 @@
   "AssignRecipients": "Ontvangers toewijzen",
   "AssignRecipientsDescription": "Het formulier is succesvol ingediend naar {{roomName}}. Wijs ontvangersrollen toe aan de gekozen gebruikers om het invullen van het formulier mogelijk te maken. Wilt u nu verdergaan of het later nog eens bekijken?",
   "AssignToRecipient": "Toewijzen aan ontvanger",
+  "AttachFilesAlreadyAttached_one": "Dit bestand is al bijgevoegd",
+  "AttachFilesAlreadyAttached_other": "{{count}} bestanden zijn al bijgevoegd",
   "AttachFilesLimit": "U kunt maximaal {{limit}} bestanden bijvoegen",
   "Attention": "Attentie",
   "Audio": "Audio",

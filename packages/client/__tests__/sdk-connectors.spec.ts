@@ -50,21 +50,15 @@ const ALL_CONNECTORS_URL = `${SITE_DOMAIN}/all-connectors.aspx`;
 const ZOOM_URL = "https://marketplace.zoom.us/apps/OW6rOq-nRgCihG5eps_p-g";
 const ZAPIER_URL = "https://zapier.com/apps/onlyoffice-docspace/integrations";
 
-// The connectors the Docs Connect card on Home carries lead, in its order; the
-// ones only the SDK page offers follow.
 const CONNECTORS = [
-  { id: "nextcloud", name: "Nextcloud" },
-  { id: "owncloud", name: "ownCloud" },
-  { id: "confluence", name: "Confluence" },
-  { id: "alfresco", name: "Alfresco" },
-  { id: "moodle", name: "Moodle" },
   { id: "n8n", name: "n8n" },
-  { id: "drupal", name: "Drupal" },
-  { id: "monday", name: "monday.com" },
-  { id: "pipedrive", name: "Pipedrive" },
-  { id: "wordpress", name: "WordPress" },
   { id: "zapier", name: "Zapier" },
+  { id: "pipedrive", name: "Pipedrive" },
   { id: "zoom", name: "Zoom" },
+  { id: "monday", name: "monday.com" },
+  { id: "moodle", name: "Moodle" },
+  { id: "drupal", name: "Drupal" },
+  { id: "wordpress", name: "WordPress" },
 ];
 
 test.beforeEach(async ({ mockRequest }) => {

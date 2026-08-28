@@ -54,12 +54,12 @@ export function useArbiterPersistence(): void {
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prevSessionIdRef = useRef<string | null>(null);
 
-  // Load persisted state when sessionId first becomes available
   useEffect(() => {
     const disposeLoad = reaction(
       () => agentsStore.sessionId,
       (sessionId) => {
         if (!sessionId || prevSessionIdRef.current === sessionId) return;
+        if (prevSessionIdRef.current !== null) runStore.clearRun();
         prevSessionIdRef.current = sessionId;
 
         loadArbiterSession(sessionId)
@@ -88,7 +88,6 @@ export function useArbiterPersistence(): void {
     return () => disposeLoad();
   }, [agentsStore, runStore]);
 
-  // Auto-save on state changes; skip mid-run to avoid per-token writes
   useEffect(() => {
     const schedSave = (data: PersistedSession) => {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
@@ -107,14 +106,12 @@ export function useArbiterPersistence(): void {
         return {
           sessionId,
           question: runStore.question,
-          // Spread to create a plain snapshot MobX can diff
           attachedFile: runStore.attachedFile
             ? toJS(runStore.attachedFile)
             : null,
           runStatus,
           collapsedPanels: Array.from(runStore.collapsedPanels),
           experts: agentsStore.experts.map((e) => toJS(e)),
-          // Don't subscribe to panel map while streaming; subscribe once done
           panels: !isRunning
             ? Array.from(runStore.panels.entries()).map(
                 ([id, p]) => [id, toJS(p)] as [string, typeof p],
@@ -124,7 +121,6 @@ export function useArbiterPersistence(): void {
       },
       (data) => {
         if (!data.sessionId) {
-          // Panel was reset/reconfigured — remove the saved record
           if (prevSessionIdRef.current) {
             clearArbiterSession(prevSessionIdRef.current).catch(() => {});
             prevSessionIdRef.current = null;
@@ -136,9 +132,6 @@ export function useArbiterPersistence(): void {
           return;
         }
 
-        // Skip saving while a run is in progress; the reaction will fire
-        // again when runStatus transitions to done/error/aborted and panels
-        // will be included at that point.
         if (data.runStatus === "running") return;
 
         schedSave({

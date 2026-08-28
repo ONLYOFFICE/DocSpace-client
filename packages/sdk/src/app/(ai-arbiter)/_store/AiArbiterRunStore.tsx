@@ -40,7 +40,6 @@ import { makeAutoObservable, observable, action, computed } from "mobx";
 
 import {
   ARBITER_PANEL_ID,
-  ARBITER_PENDING_FILE_KEY,
   type PanelState,
   type AttachedFile,
   type SseEvent,
@@ -61,7 +60,6 @@ class AiArbiterRunStore {
       expertPanels: computed,
       arbiterPanel: computed,
     });
-    this.consumePendingAttachedFile();
   }
 
   setQuestion = action((q: string) => {
@@ -70,23 +68,6 @@ class AiArbiterRunStore {
 
   setAttachedFile = action((file: AttachedFile | null) => {
     this.attachedFile = file;
-  });
-
-  consumePendingAttachedFile = action(() => {
-    if (typeof window === "undefined") return;
-    try {
-      const raw = sessionStorage.getItem(ARBITER_PENDING_FILE_KEY);
-      if (!raw) return;
-      sessionStorage.removeItem(ARBITER_PENDING_FILE_KEY);
-      const parsed = JSON.parse(raw) as { id?: unknown; name?: unknown };
-      if (
-        typeof parsed.id === "number" &&
-        typeof parsed.name === "string"
-      ) {
-        this.attachedFile = { id: parsed.id, name: parsed.name };
-      }
-    } catch {
-    }
   });
 
   initPanels = action(

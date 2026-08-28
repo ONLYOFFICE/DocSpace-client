@@ -33,20 +33,26 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { http } from "msw";
-import { API_PREFIX, BASE_URL } from "../../e2e/utils";
-
-export const PATH_AI_CHAT = "ai/chats/*";
-
-export const aiChatDeleteResolver = () => {
-  return new Response(null, { status: 204 });
+export type ProfileRef = {
+  profileId: string;
+  name: string;
 };
 
-export const aiChatDeleteHandler = (port: string) => {
-  return http.delete(
-    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CHAT}`,
-    () => {
-      return aiChatDeleteResolver();
-    },
-  );
-};
+const CHAT_CAPABILITY = 1;
+
+export const isChatCapableProfile = (profile: {
+  capabilities?: number | null;
+}): boolean =>
+  typeof profile.capabilities !== "number" ||
+  (profile.capabilities & CHAT_CAPABILITY) !== 0;
+
+export const toProfileRefs = (
+  profiles: ReadonlyArray<{
+    id: string;
+    name: string;
+    capabilities?: number | null;
+  }>,
+): ProfileRef[] =>
+  profiles
+    .filter(isChatCapableProfile)
+    .map((p) => ({ profileId: p.id, name: p.name }));

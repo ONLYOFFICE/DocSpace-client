@@ -43,7 +43,7 @@ import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/use
 import {
   useAttachHostFilesToChat,
   notifyAlreadyAttached,
-  CHAT_ATTACHMENT_LIMIT,
+  notifyAttachmentLimit,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 
 import { useStore } from "SRC_DIR/store/useStore";
@@ -84,16 +84,10 @@ const AskAIChatBridgeComponent = () => {
 
     attachFilesToChat([file])
       .then(({ skipped, duplicates }) => {
-        // The composer caps attachments; say what did not fit instead of
-        // letting the file disappear without a word.
-        if (skipped > 0) {
-          toastr.warning(
-            t("Common:AttachFilesLimit", { limit: CHAT_ATTACHMENT_LIMIT }),
-          );
-        }
-        // Same reasoning for a file that is already on the composer: the
-        // action must not look like it did nothing.
+        // A file that did not make it onto the composer — capped or
+        // already there — must not disappear without a word.
         notifyAlreadyAttached(t, duplicates);
+        notifyAttachmentLimit(t, skipped);
       })
       .catch((error: unknown) => {
         toastr.error(

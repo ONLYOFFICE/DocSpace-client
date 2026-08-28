@@ -45,7 +45,7 @@ import type {
 } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TPathParts } from "@docspace/shared/types";
-import { FolderType, DeviceType, FileType } from "@docspace/shared/enums";
+import { FolderType, DeviceType } from "@docspace/shared/enums";
 import { RoomsType } from "@docspace/shared/enums";
 import FilesSelector from "@docspace/ui-kit/selectors/Files";
 import type {
@@ -122,7 +122,6 @@ import useRenameActions from "../../_hooks/useRenameActions";
 import useConvertActions from "../../_hooks/useConvertActions";
 import { useDocsSettingsStore } from "../../_store/DocsSettingsStore";
 import { useDocsUserStore } from "../../_store/DocsUserStore";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 

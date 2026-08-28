@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { describe, it, expect } from "vitest";
 import { renderHook } from "@testing-library/react";
 import type { TFunction } from "i18next";
 

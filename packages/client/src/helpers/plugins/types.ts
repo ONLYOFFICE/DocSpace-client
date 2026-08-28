@@ -168,8 +168,8 @@ export interface IInfoPanelItemClient extends Omit<IInfoPanelItem, "subMenu"> {
 
 export interface IFileItemClient extends Omit<IFileItem, "onClick"> {
   onClick: (item: TFile) => Promise<IMessage> | Promise<void> | void | IMessage;
-  fileIcon: string;
-  fileIconTile: string;
+  fileIcon?: string;
+  fileIconTile?: string;
   pluginName: string;
 }
 

@@ -3,7 +3,7 @@
   "content": "ARBITER:",
   "content_en_sha1_hash": "1550ec0dbd98678da48ab431dbcf3f373e968bf6",
   "created_at": "2026-05-24T17:27:18.247Z",
-  "updated_at": "2026-05-24T18:53:45.320Z",
+  "updated_at": "2026-08-28T12:19:49.749Z",
   "comment": {
     "text": "A label in the agent picker that precedes the arbiter's name or value.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/AgentList.tsx",
-      "line_number": 124,
-      "context": "{t(\"Common:ArbiterAddExpert\")}\n </button>\n )}\n \n <span className={styles.pickerLabel} style={{ marginLeft: 8 }}>\n {t(\"Common:ArbiterLabel\")}\n </span>\n \n <span className={styles.agentTagArbiter}>\n <span\n className={styles.agentAvatar}",
+      "line_number": 158,
+      "context": "fontSize=\"12px\"\n fontWeight={600}\n color=\"var(--arbiter-muted)\"\n noSelect\n >\n {t(\"Common:ArbiterLabel\")}\n </Text>\n \n <AgentItem agent={arbiter} isArbiter />\n </div>\n );",
       "module": "/packages/sdk"
     }
   ],

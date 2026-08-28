@@ -3,7 +3,7 @@
   "content": "Creating your agents...",
   "content_en_sha1_hash": "f6eee1b731089a4611f5b6dc1825db8266ce91e6",
   "created_at": "2026-05-24T17:27:18.110Z",
-  "updated_at": "2026-05-24T18:57:43.271Z",
+  "updated_at": "2026-08-28T12:19:49.754Z",
   "comment": {
     "text": "Introductory status text in a wizard overlay that appears during the agent provisioning process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 513,
+      "line_number": 497,
       "context": "};\n \n const renderProvisioning = () => (\n <div className={styles.provisioningBody}>\n <Text as=\"p\" className={styles.provisioningIntro}>\n {t(\"Common:ArbiterCreatingAgents\")}\n </Text>\n <ol className={styles.provisioningList}>\n {provisioningItems.map((it) => (\n <li\n key={it.label}",
       "module": "/packages/sdk"
     }

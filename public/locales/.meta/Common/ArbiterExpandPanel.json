@@ -3,7 +3,7 @@
   "content": "Expand",
   "content_en_sha1_hash": "9869e506c38f643f1fe985347c015deace6baa22",
   "created_at": "2026-05-24T17:27:18.192Z",
-  "updated_at": "2026-05-24T18:56:12.899Z",
+  "updated_at": "2026-08-28T12:19:49.751Z",
   "comment": {
     "text": "Button label and tooltip used to expand the AI Arbiter panel view into a modal window.",
     "is_auto": true,
@@ -13,14 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/PanelView.tsx",
-      "line_number": 152,
-      "context": ")}\n \n <button\n type=\"button\"\n className={styles.expandBtn}\n aria-label={t(\"Common:ArbiterExpandPanel\")}\n title={t(\"Common:ArbiterExpandPanel\")}\n onClick={(e) => {\n e.stopPropagation();\n setModalOpen(true);\n }}",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/PanelView.tsx",
-      "line_number": 152,
-      "context": ")}\n \n <button\n type=\"button\"\n className={styles.expandBtn}\n aria-label={t(\"Common:ArbiterExpandPanel\")}\n title={t(\"Common:ArbiterExpandPanel\")}\n onClick={(e) => {\n e.stopPropagation();\n setModalOpen(true);\n }}",
+      "line_number": 198,
+      "context": "<IconButton\n iconNode={<ZoomPlusIcon />}\n size={16}\n isClickable\n isFill\n title={t(\"Common:ArbiterExpandPanel\")}\n onClick={(e) => {\n e.stopPropagation();\n setFullscreen(true);\n }}\n />",
       "module": "/packages/sdk"
     }
   ],

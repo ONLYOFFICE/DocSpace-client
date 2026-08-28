@@ -3,7 +3,7 @@
   "content": "Proceed",
   "content_en_sha1_hash": "02ed4a4a3934497e053d4f45efed1a1437aa1d91",
   "created_at": "2026-05-24T17:27:18.362Z",
-  "updated_at": "2026-05-24T18:49:59.401Z",
+  "updated_at": "2026-08-28T12:19:49.754Z",
   "comment": {
     "text": "Button label in the AI Arbiter wizard used to continue the process or move to the next step.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 597,
+      "line_number": 581,
       "context": "<>\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:ArbiterProceed\")}\n onClick={handleProceed}\n />\n <Button\n scale\n size={ButtonSize.normal}",
       "module": "/packages/sdk"
     }

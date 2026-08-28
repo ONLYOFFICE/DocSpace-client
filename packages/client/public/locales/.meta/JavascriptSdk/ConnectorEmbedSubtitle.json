@@ -1,0 +1,29 @@
+{
+  "key_path": "ConnectorEmbedSubtitle",
+  "content": "Embed your {{organizationName}} {{productName}} rooms and files directly in {{serviceName}}",
+  "content_en_sha1_hash": "1728fdd31a681fc228b3853690fe08fe2a7ee647",
+  "created_at": "2026-08-28T12:19:44.847Z",
+  "updated_at": "2026-08-28T12:23:14.391Z",
+  "comment": {
+    "text": "Subtitle for a connector item in the SDK catalog describing the embedding capability. It includes placeholders for the organization name, the product name, and the target service name.",
+    "is_auto": true,
+    "updated_at": "2026-08-28T12:23:14.391Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/sdk-connectors-catalog.ts",
+      "line_number": 117,
+      "context": "): IntegrationPlatform => ({\n id,\n name,\n iconUrl,\n url,\n subtitle: t(\"JavascriptSdk:ConnectorEmbedSubtitle\", {\n organizationName,\n productName,\n serviceName: name,\n }),\n steps: embedStepsFor(name),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

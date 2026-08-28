@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-08-27T15:37:55.661Z",
+  "updated_at": "2026-08-28T12:19:49.484Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -1111,13 +1111,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 613,
+      "line_number": 597,
       "context": "case \"provisioning\":\n return (\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={handleCancelProvisioning}\n />\n );\n case \"done\":\n return (",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
-      "line_number": 365,
+      "line_number": 398,
       "context": "withCancelButton\n withCreate={false}\n withFooterInput={false}\n withFooterCheckbox={false}\n submitButtonLabel={t(\"Common:SelectAction\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n footerCheckboxLabel=\"\"\n footerInputHeader=\"\"\n currentFooterInputValue=\"\"\n descriptionText=\"\"\n getFilesArchiveError={() => \"\"}",
       "module": "/packages/sdk"
     },

@@ -3,7 +3,7 @@
   "content": "I'll create {{count}} expert agents and 1 arbiter for the domain",
   "content_en_sha1_hash": "9abf5e127a62d0514d6b7797e612dc8bbdee91e4",
   "created_at": "2026-05-24T17:27:18.348Z",
-  "updated_at": "2026-05-24T18:50:33.492Z",
+  "updated_at": "2026-08-28T12:19:49.753Z",
   "comment": {
     "text": "Paragraph text in a wizard preview overlay summarizing the configuration; {{count}} represents the number of expert agents, and the string is followed by a domain name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 456,
+      "line_number": 440,
       "context": "return (\n <div className={styles.previewBody}>\n <Text as=\"p\" className={styles.previewIntro}>\n {pendingConfig.experts.length === 1\n ? t(\"Common:ArbiterPreviewIntro_one\", { count: pendingConfig.experts.length })\n : t(\"Common:ArbiterPreviewIntro_other\", { count: pendingConfig.experts.length })}{\" \"}\n <strong>{pendingConfig.domain}</strong>.\n </Text>\n \n <Scrollbar\n className={styles.previewScroll}",
       "module": "/packages/sdk"
     }

@@ -331,7 +331,7 @@ const RoomSelector = (props) => {
             />
           </ControlsSection>
 
-          <Integration className="integration-examples" />
+          <Integration compact className="integration-examples" />
         </Controls>
       </Container>
 

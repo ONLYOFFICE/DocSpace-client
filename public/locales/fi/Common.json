@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Esitä kysymys... (Ctrl+Enter suorittaaksesi)",
   "ArbiterReadyTitle": "AI-välimies valmis",
   "ArbiterRemoveExpert": "Poista {{name}}",
-  "ArbiterRemoveFile": "Poista tiedosto",
   "ArbiterRemovingAgents": "Poistetaan agentteja...",
   "ArbiterResetConfiguration": "Nollaa kokoonpano",
   "ArbiterResetConfigurationTitle": "Nollaa AI-välimiehen kokoonpano",

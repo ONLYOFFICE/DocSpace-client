@@ -38,6 +38,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import {
+  Heading,
+  HeadingLevel,
+  HeadingSize,
+} from "@docspace/ui-kit/components/heading";
+import { Text } from "@docspace/ui-kit/components/text";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import AiAgentsLightIllustration from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
@@ -57,18 +64,26 @@ export function IntroBackdrop({ onStart }: IntroBackdropProps) {
       <div className={styles.introIllustration} aria-hidden="true">
         {isBase ? <AiAgentsLightIllustration /> : <AiAgentsDarkIllustration />}
       </div>
-      <p className={styles.introTitle}>{t("Common:ArbiterTitle")}</p>
-      <p className={styles.introDescription}>
+      <Heading level={HeadingLevel.h1} size={HeadingSize.medium}>
+        {t("Common:ArbiterTitle")}
+      </Heading>
+      <Text
+        className={styles.introDescription}
+        fontSize="14px"
+        lineHeight="20px"
+        textAlign="center"
+        color="var(--arbiter-muted)"
+      >
         {t("Common:ArbiterIntroDescription")}
-      </p>
+      </Text>
       {onStart ? (
-        <button
-          type="button"
+        <Button
           className={styles.startBtn}
+          primary
+          size={ButtonSize.normal}
+          label={t("Common:ArbiterStartSetupWizard")}
           onClick={onStart}
-        >
-          {t("Common:ArbiterStartSetupWizard")}
-        </button>
+        />
       ) : null}
     </div>
   );

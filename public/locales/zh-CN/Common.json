@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "提出问题...（Ctrl+Enter 运行）",
   "ArbiterReadyTitle": "AI 仲裁者已就绪",
   "ArbiterRemoveExpert": "移除 {{name}}",
-  "ArbiterRemoveFile": "移除文件",
   "ArbiterRemovingAgents": "正在移除代理...",
   "ArbiterResetConfiguration": "重置配置",
   "ArbiterResetConfigurationTitle": "重置 AI 仲裁者配置",

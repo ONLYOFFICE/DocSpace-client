@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Položte otázku... (Ctrl+Enter pro spuštění)",
   "ArbiterReadyTitle": "AI Arbitr je připraven",
   "ArbiterRemoveExpert": "Odebrat {{name}}",
-  "ArbiterRemoveFile": "Odebrat soubor",
   "ArbiterRemovingAgents": "Odebírají se agenti...",
   "ArbiterResetConfiguration": "Resetovat konfiguraci",
   "ArbiterResetConfigurationTitle": "Resetovat konfiguraci AI Arbitra",

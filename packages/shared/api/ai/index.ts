@@ -50,7 +50,6 @@ import RoomsFilter from "../rooms/filter";
 
 import type {
   TAiProvider,
-  TModelList,
   TChat,
   TVectorizeOperation,
   KnowledgeConfig,
@@ -60,7 +59,6 @@ import type {
   TCreateAgentWithProfileData,
   TEditAgentData,
   TGetAgents,
-  TDefaultProvider,
   TAIUserConfig,
   TProfilesList,
 } from "./types";
@@ -74,28 +72,6 @@ const baseUrl = "/ai";
 // fire one (Bug 83181). Callers that self-toast skip it for 403 via this check.
 const isForbiddenError = (e: unknown): boolean =>
   (e as { response?: { status?: number } })?.response?.status === 403;
-
-export const getModels = async (
-  providerId?: TAiProvider["id"],
-  abortController?: AbortController | null,
-) => {
-  const searchParams = new URLSearchParams();
-  if (providerId) {
-    searchParams.append("provider", providerId.toString());
-  }
-
-  const strSearch = providerId ? `?${searchParams.toString()}` : "";
-
-  const res = (await request({
-    method: "get",
-    url: `${baseUrl}/chats/models${strSearch}`,
-    signal: abortController?.signal,
-  })) as TModelList;
-
-  return res.map((m) => ({
-    ...m,
-  })) as TModelList;
-};
 
 const getAuthHeaders = async (): Promise<Record<string, string>> => {
   if (typeof window === "undefined") return {};
@@ -152,68 +128,6 @@ const authFetch = async (
   }
 
   return response;
-};
-
-export const startNewChat = async (
-  roomId: number | string,
-  message: string,
-  files: string[],
-  abortController?: AbortController,
-) => {
-  const response = await authFetch(`/api/2.0${baseUrl}/rooms/${roomId}/chats`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    signal: abortController?.signal,
-    body: JSON.stringify({ message, files }),
-  });
-
-  return response.body;
-};
-
-export const sendMessageToChat = async (
-  chatId: string,
-  message: string,
-  files: string[],
-  abortController?: AbortController,
-) => {
-  const response = await authFetch(
-    `/api/2.0${baseUrl}/chats/${chatId}/messages`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      signal: abortController?.signal,
-      body: JSON.stringify({ message, files }),
-    },
-  );
-
-  return response.body;
-};
-
-export const getChats = async (
-  roomId: number | string,
-  startIndex: number = 0,
-  count: number = 100,
-) => {
-  const searchParams = new URLSearchParams();
-  searchParams.append("startIndex", startIndex.toString());
-  searchParams.append("count", count.toString());
-  const res = await request({
-    method: "GET",
-    url: `${baseUrl}/rooms/${roomId}/chats?${searchParams.toString()}`,
-  });
-
-  return res as { items: TChat[]; total: number };
-};
-
-export const deleteChat = async (chatId: string) => {
-  await request({
-    method: "DELETE",
-    url: `${baseUrl}/chats/${chatId}`,
-  });
 };
 
 export const retryVectorization = async (fileIds: TFile["id"][]) => {
@@ -365,17 +279,6 @@ export function setCustomAIAgentQuota(
 
   return request(options);
 }
-
-export const getDefaultProvider = async () => {
-  const options = {
-    method: "get",
-    url: `${baseUrl}/providers/default`,
-  };
-
-  const res = await request(options);
-
-  return res as TDefaultProvider;
-};
 
 export const getProfilesList = async () => {
   const response = await authFetch(`/api/2.0/ai/profiles/list`, {

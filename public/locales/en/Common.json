@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Ask a question... (Ctrl+Enter to run)",
   "ArbiterReadyTitle": "AI Arbiter ready",
   "ArbiterRemoveExpert": "Remove {{name}}",
-  "ArbiterRemoveFile": "Remove file",
   "ArbiterRemovingAgents": "Removing agents...",
   "ArbiterResetConfiguration": "Reset configuration",
   "ArbiterResetConfigurationTitle": "Reset AI Arbiter configuration",

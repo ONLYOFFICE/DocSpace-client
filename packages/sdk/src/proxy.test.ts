@@ -66,6 +66,27 @@ describe("proxy — /chat", () => {
   });
 });
 
+describe("proxy — /ai-arbiter", () => {
+  test("matcher includes the arbiter route", () => {
+    expect(config.matcher).toContain("/ai-arbiter");
+  });
+
+  test("forwards the query as filter and the shared theme/locale headers", async () => {
+    const response = await proxy(
+      makeRequest("/ai-arbiter?theme=dark&locale=fr&showMenu=false"),
+    );
+
+    expect(requestHeader(response!, "x-sdk-config-theme")).toBe("Dark");
+    expect(requestHeader(response!, "x-sdk-config-locale")).toBe("fr");
+
+    const filter = new URLSearchParams(
+      requestHeader(response!, FILTER_HEADER) ?? "",
+    );
+    expect(filter.get("showMenu")).toBe("false");
+    expect(requestHeader(response!, AGENT_ID_HEADER)).toBeNull();
+  });
+});
+
 describe("proxy — /ai-agents", () => {
   test("matcher includes the agents routes", () => {
     expect(config.matcher).toContain("/ai-agents");

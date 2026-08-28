@@ -494,6 +494,8 @@ const SetAgentParams = ({
         agentParams={agentParams}
         isAdmin={!!isUserAdmin}
         recommendedModelForForms={recommendedModelForForms}
+        openedFromChat={openContext === AgentDialogContext.Chat}
+        standalone={standalone}
         setAgentParams={setAgentParams}
       />
 

@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Posez une question... (Ctrl+Entrée pour exécuter)",
   "ArbiterReadyTitle": "Arbitre IA prêt",
   "ArbiterRemoveExpert": "Supprimer {{name}}",
-  "ArbiterRemoveFile": "Supprimer le fichier",
   "ArbiterRemovingAgents": "Suppression des agents en cours...",
   "ArbiterResetConfiguration": "Réinitialiser la configuration",
   "ArbiterResetConfigurationTitle": "Réinitialiser la configuration de l'arbitre IA",

@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Задайте въпрос... (Ctrl+Enter за изпълнение)",
   "ArbiterReadyTitle": "ИИ Арбитърът е готов",
   "ArbiterRemoveExpert": "Премахни {{name}}",
-  "ArbiterRemoveFile": "Премахни файла",
   "ArbiterRemovingAgents": "Премахват се агентите...",
   "ArbiterResetConfiguration": "Нулирай конфигурацията",
   "ArbiterResetConfigurationTitle": "Нулирай конфигурацията на ИИ Арбитъра",

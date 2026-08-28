@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Задайте вопрос... (Ctrl+Enter для запуска)",
   "ArbiterReadyTitle": "AI Arbiter готов",
   "ArbiterRemoveExpert": "Удалить {{name}}",
-  "ArbiterRemoveFile": "Удалить файл",
   "ArbiterRemovingAgents": "Удаление агентов...",
   "ArbiterResetConfiguration": "Сбросить конфигурацию",
   "ArbiterResetConfigurationTitle": "Сбросить конфигурацию AI Arbiter",

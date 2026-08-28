@@ -69,9 +69,10 @@ const ROOMS_URL = "/rooms/shared/";
 /** Desktop: the button lives in Navigation's right-hand button row. */
 const DESKTOP = { width: 1440, height: 1024 };
 /**
- * Below 1024 the row is dropped and the button joins the control buttons. At
- * this width the header is also out of room, so the button is collapsed - the
- * two things the tablet screenshot is here to pin.
+ * Below 1024 the trailing button row is dropped and the button joins the
+ * control buttons instead. The header still has room for the label at this
+ * width - measured: 807px of row for 807px of content - so what the tablet
+ * frame pins is the move into the control buttons, not a collapse.
  */
 const TABLET = { width: 900, height: 800 };
 /**
@@ -291,10 +292,12 @@ test.describe("AI chat header button", () => {
       `button sits ${Math.round(trailingGap)}px from the header's trailing edge`,
     ).toBeLessThanOrEqual(4);
 
-    // At this width the header has also run out of room, so this pins the
-    // collapsed look and the flush trailing edge in one image.
-    expect(await isCollapsed(page)).toBe(true);
-    await shootHeader(page, "tablet-collapsed.png");
+    // 900px is not the limit: the row fits its content exactly here, so the
+    // label stays. Where the limit actually is depends on the room name and the
+    // language, which is what the narrowing test above measures rather than
+    // pinning a breakpoint.
+    expect(await isCollapsed(page)).toBe(false);
+    await shootHeader(page, "tablet-expanded.png");
   });
 
   test("brings the label back once the mobile header frees up room", async ({

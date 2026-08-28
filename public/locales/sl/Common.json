@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Zastavite vprašanje... (Ctrl+Enter za zagon)",
   "ArbiterReadyTitle": "AI Arbitr je pripravljen",
   "ArbiterRemoveExpert": "Odstrani {{name}}",
-  "ArbiterRemoveFile": "Odstrani datoteko",
   "ArbiterRemovingAgents": "Odstranjevanje agentov...",
   "ArbiterResetConfiguration": "Ponastavi konfiguracijo",
   "ArbiterResetConfigurationTitle": "Ponastavi konfiguracijo AI Arbitra",

@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Bëni një pyetje... (Ctrl+Enter për ekzekutim)",
   "ArbiterReadyTitle": "Arbitri i IA është gati",
   "ArbiterRemoveExpert": "Hiq {{name}}",
-  "ArbiterRemoveFile": "Hiq skedarin",
   "ArbiterRemovingAgents": "Po hiqen agjentët...",
   "ArbiterResetConfiguration": "Rivendos konfigurimin",
   "ArbiterResetConfigurationTitle": "Rivendos konfigurimin e Arbitrit të IA",

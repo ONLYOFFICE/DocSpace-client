@@ -34,7 +34,6 @@
  */
 
 import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
 
 import { selectActivePanel } from "@/utils/ai-arbiter";
 
@@ -49,20 +48,11 @@ import AiArbiterShell from "./layout.client";
 
 export const dynamic = "force-dynamic";
 
-// Temporarily unpublished: the arbiter still drives the removed C# AI
-// endpoints (chat streaming, providers, models), which the Node AI service
-// does not serve. Flip to false once the product is migrated or removed.
-// Typed as boolean (not literal true) so the code below stays reachable
-// for the compiler and keeps typechecking.
-const AI_ARBITER_TEMPORARILY_DISABLED: boolean = true;
-
 export default async function AiArbiterServerLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  if (AI_ARBITER_TEMPORARILY_DISABLED) notFound();
-
   const cookieStore = await cookies();
   const authToken = cookieStore.get("asc_auth_key")?.value ?? "";
 

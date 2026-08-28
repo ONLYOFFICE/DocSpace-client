@@ -3,7 +3,7 @@
   "content": "Workspaces",
   "content_en_sha1_hash": "205b4561ed36923d5a51de1b34c70044bf82e111",
   "created_at": "2026-08-12T11:00:39.325Z",
-  "updated_at": "2026-08-12T11:02:02.576Z",
+  "updated_at": "2026-08-27T15:37:55.775Z",
   "comment": {
     "text": "Navigation menu label and page header used to access the section for managing various workspaces.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
-      "line_number": 437,
+      "line_number": 440,
       "context": "isAdmin && standalone && !limitedAccessSpace\n ? {\n key: \"spaces-management-settings\",\n id: \"spaces\",\n icon: SpacesReactSvgUrl,\n label: t(\"Common:Spaces\"),\n onClick: this.onSpacesClick,\n url: SPACES_URL,\n preventNewTab: true,\n items:\n baseDomain && baseDomain !== \"localhost\"",
       "module": "/packages/client"
     },

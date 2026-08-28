@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "{{service}} වෙත ප්‍රවේශ විය හැකි IP ලිපින, පරාස, හෝ සත්කාරකයන් පාලනය කරන්න",
   "AdditionalUsers": "අමතර පරිශීලකයින්",
   "AddRule": "නීතියක් එක් කරන්න",
+  "AdminAccessDescription": "{{service}} වින්‍යාස කළ හැක්කේ පරිපාලකයින්ට පමණි. ඔබට තවමත් API ලේඛන බැලිය හැකිය.",
   "AnonymousNoHint": "(සත්‍යාපිත පරිශීලකයින්ට පමණක් ලේඛනවලට ප්‍රවේශ විය හැක)",
   "AnonymousSupport": "නිර්නාමික සහාය",
   "AnonymousSupportDescription": "සත්‍යාපනයකින් තොරව පරිශීලකයින්ට ලේඛනවලට ප්‍රවේශ වීමට ඉඩ දෙන්න",

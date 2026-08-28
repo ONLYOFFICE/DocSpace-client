@@ -90,6 +90,7 @@ import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext"
 import type { Section } from "SRC_DIR/helpers/plugins/enums";
 import CollapseButton from "./CollapseButton";
 import ProfileBlock from "./ProfileBlock";
+import LiveChatBlock from "./LiveChatBlock";
 import AppsPluginItems from "./AppsPluginItems/AppsPluginItems";
 import { BackButtonLoader, HeaderLoader, NavMenuLoader } from "./SidebarLoader";
 import { useSidebarShowText } from "./useSidebarShowText";
@@ -445,14 +446,20 @@ const AppsSidebar = ({
   const handleBack = rest.onBack ?? (isSecondary ? navigateBack : undefined);
 
   return (
-    <AppsSidebarView
-      {...rest}
-      variant={variant}
-      currentDeviceType={currentDeviceType}
-      showText={showText}
-      toggleShowText={toggleShowText}
-      onBack={handleBack}
-    />
+    <>
+      <AppsSidebarView
+        {...rest}
+        variant={variant}
+        currentDeviceType={currentDeviceType}
+        showText={showText}
+        toggleShowText={toggleShowText}
+        onBack={handleBack}
+      />
+      {/* Sits outside the view so it is never moved into the mobile portal -
+          it renders no markup, it only keeps the Zendesk widget loaded for the
+          profile menu "Live chat" switch. */}
+      <LiveChatBlock />
+    </>
   );
 };
 

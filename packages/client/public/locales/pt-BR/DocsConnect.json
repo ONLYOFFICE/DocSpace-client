@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "Controle quais endereços IP, intervalos ou hosts podem acessar o {{service}}",
   "AdditionalUsers": "Usuários adicionais",
   "AddRule": "Adicionar regra",
+  "AdminAccessDescription": "Apenas os administradores podem configurar o {{service}}. Você ainda pode consultar a documentação da API.",
   "AnonymousNoHint": "(Somente usuários autenticados podem acessar documentos)",
   "AnonymousSupport": "Suporte anônimo",
   "AnonymousSupportDescription": "Permitir que usuários sem autenticação acessem documentos",

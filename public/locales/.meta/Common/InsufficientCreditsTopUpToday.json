@@ -1,0 +1,29 @@
+{
+  "key_path": "InsufficientCreditsTopUpToday",
+  "content": "Insufficient credits. Top up {{amount}} today to avoid portal blocking after {{date}}.",
+  "content_en_sha1_hash": "abf59ad029535418043cecab844a430c87a3625f",
+  "created_at": "2026-08-27T15:37:27.430Z",
+  "updated_at": "2026-08-27T15:40:11.257Z",
+  "comment": {
+    "text": "Warning text in the billing overview component that appears when credits are insufficient. It includes a formatted currency amount and a date representing the end of the grace period.",
+    "is_auto": true,
+    "updated_at": "2026-08-27T15:40:11.257Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
+      "line_number": 152,
+      "context": "fontSize=\"12px\"\n fontWeight={600}\n lineHeight=\"16px\"\n className={styles.topUpWarningText}\n >\n {t(\"InsufficientCreditsTopUpToday\", {\n amount: formatPaymentCurrency(graceShortfall, 2),\n date: gracePeriodEndDate,\n })}\n </Text>\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

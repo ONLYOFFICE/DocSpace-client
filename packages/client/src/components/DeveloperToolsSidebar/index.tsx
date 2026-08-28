@@ -67,7 +67,7 @@ import { useTranslation } from "react-i18next";
 import type { NavMenuGroup, NavMenuItem } from "@docspace/ui-kit/components/nav-menu";
 import { PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
-import { hasDocsConnectAccess } from "@docspace/shared/utils/devToolsAccess";
+import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 
@@ -176,9 +176,10 @@ export default inject(({ authStore, userStore, settingsStore }: TStore) => ({
   identityServerEnabled:
     authStore?.capabilities?.identityServerEnabled ?? false,
   // Docs Connect is SaaS-only and admin/owner-only - see
-  // `hasDocsConnectAccess`.
-  canOpenDocsConnect: hasDocsConnectAccess(
+  // `canOpenDocsConnect`.
+  canOpenDocsConnect: canOpenDocsConnect(
     userStore?.user,
     settingsStore?.standalone,
+    settingsStore?.limitedAccessDevToolsForUsers,
   ),
 }))(observer(DeveloperToolsSidebar));

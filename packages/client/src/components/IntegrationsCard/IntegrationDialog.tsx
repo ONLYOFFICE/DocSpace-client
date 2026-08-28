@@ -180,6 +180,7 @@ export const IntegrationDialog = ({
       className={styles.integrationDialog}
       isLarge
       autoMaxHeight
+      dataTestId={`integration-dialog-${platform.id}`}
     >
       <ModalDialog.Header>{name}</ModalDialog.Header>
 

@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "控制哪些 IP 地址、范围或主机可以访问{{service}}",
   "AdditionalUsers": "额外用户",
   "AddRule": "添加规则",
+  "AdminAccessDescription": "仅管理员可以配置 {{service}}。您仍然可以查看 API 文档。",
   "AnonymousNoHint": "（仅已验证身份的用户可访问文档）",
   "AnonymousSupport": "匿名支持",
   "AnonymousSupportDescription": "允许未经身份验证的用户访问文档",

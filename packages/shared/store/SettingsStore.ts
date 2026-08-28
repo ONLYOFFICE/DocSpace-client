@@ -849,12 +849,6 @@ class SettingsStore {
       : this.siteDomain;
   }
 
-  get zoomUrl() {
-    return this.siteDomain && this.siteEntries?.officeforzoom
-      ? `${this.siteDomain}${this.siteEntries.officeforzoom}`
-      : this.siteDomain;
-  }
-
   get nextcloudUrl() {
     return this.siteDomain && this.siteEntries?.nextcloud
       ? `${this.siteDomain}${this.siteEntries.nextcloud}`
@@ -888,18 +882,6 @@ class SettingsStore {
   get odooUrl() {
     return this.siteDomain && this.siteEntries?.odoo
       ? `${this.siteDomain}${this.siteEntries.odoo}`
-      : this.siteDomain;
-  }
-
-  get wordPressUrl() {
-    return this.siteDomain && this.siteEntries?.officeforwordpress
-      ? `${this.siteDomain}${this.siteEntries.officeforwordpress}`
-      : this.siteDomain;
-  }
-
-  get drupalUrl() {
-    return this.siteDomain && this.siteEntries?.officefordrupal
-      ? `${this.siteDomain}${this.siteEntries.officefordrupal}`
       : this.siteDomain;
   }
 

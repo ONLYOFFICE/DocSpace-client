@@ -58,6 +58,10 @@ type IntegrationProps = {
   className?: string;
   compact?: boolean;
   integrationsEntries?: TIntegrationsEntries;
+  nextcloudUrl?: string;
+  owncloudUrl?: string;
+  confluenceUrl?: string;
+  alfrescoUrl?: string;
   moodleUrl?: string;
   allConnectorsUrl?: string;
 };
@@ -122,7 +126,23 @@ const Integration = ({ className, compact, ...urls }: IntegrationProps) => {
 };
 
 export default inject<TStore>(({ settingsStore }) => {
-  const { integrationsEntries, moodleUrl, allConnectorsUrl } = settingsStore;
+  const {
+    integrationsEntries,
+    nextcloudUrl,
+    owncloudUrl,
+    confluenceUrl,
+    alfrescoUrl,
+    moodleUrl,
+    allConnectorsUrl,
+  } = settingsStore;
 
-  return { integrationsEntries, moodleUrl, allConnectorsUrl };
+  return {
+    integrationsEntries,
+    nextcloudUrl,
+    owncloudUrl,
+    confluenceUrl,
+    alfrescoUrl,
+    moodleUrl,
+    allConnectorsUrl,
+  };
 })(observer(Integration));

@@ -56,11 +56,19 @@ const INTEGRATIONS_ENTRIES = {
   zoom: "https://zoom.example/onlyoffice",
 } as unknown as TIntegrationsEntries;
 
+const NEXTCLOUD_URL = "https://site.example/nextcloud";
+const OWNCLOUD_URL = "https://site.example/owncloud";
+const CONFLUENCE_URL = "https://site.example/confluence";
+const ALFRESCO_URL = "https://site.example/alfresco";
 const MOODLE_URL = "https://site.example/moodle";
 const ALL_CONNECTORS_URL = "https://site.example/all-connectors";
 
 const URLS = {
   integrationsEntries: INTEGRATIONS_ENTRIES,
+  nextcloudUrl: NEXTCLOUD_URL,
+  owncloudUrl: OWNCLOUD_URL,
+  confluenceUrl: CONFLUENCE_URL,
+  alfrescoUrl: ALFRESCO_URL,
   moodleUrl: MOODLE_URL,
   allConnectorsUrl: ALL_CONNECTORS_URL,
 };
@@ -77,25 +85,33 @@ describe("useSdkConnectors", () => {
     const { result } = renderCatalog();
 
     expect(result.current.map((connector) => connector.id)).toEqual([
-      "zoom",
-      "wordpress",
-      "drupal",
+      "nextcloud",
+      "owncloud",
+      "confluence",
+      "alfresco",
       "moodle",
-      "pipedrive",
-      "monday",
-      "zapier",
       "n8n",
+      "drupal",
+      "monday",
+      "pipedrive",
+      "wordpress",
+      "zapier",
+      "zoom",
     ]);
 
     expect(result.current.map((connector) => connector.name)).toEqual([
-      "Zoom",
-      "WordPress",
-      "Drupal",
+      "Nextcloud",
+      "ownCloud",
+      "Confluence",
+      "Alfresco",
       "Moodle",
-      "Pipedrive",
-      "monday.com",
-      "Zapier",
       "n8n",
+      "Drupal",
+      "monday.com",
+      "Pipedrive",
+      "WordPress",
+      "Zapier",
+      "Zoom",
     ]);
   });
 
@@ -112,6 +128,10 @@ describe("useSdkConnectors", () => {
       drupal: INTEGRATIONS_ENTRIES.drupal,
       pipedrive: INTEGRATIONS_ENTRIES.pipedrive,
       zapier: INTEGRATIONS_ENTRIES.zapier,
+      nextcloud: NEXTCLOUD_URL,
+      owncloud: OWNCLOUD_URL,
+      confluence: CONFLUENCE_URL,
+      alfresco: ALFRESCO_URL,
       moodle: MOODLE_URL,
     });
   });
@@ -135,14 +155,18 @@ describe("useSdkConnectors", () => {
       .map((connector) => connector.id);
 
     expect(withoutUrl).toEqual([
-      "zoom",
-      "wordpress",
-      "drupal",
+      "nextcloud",
+      "owncloud",
+      "confluence",
+      "alfresco",
       "moodle",
-      "pipedrive",
-      "monday",
-      "zapier",
       "n8n",
+      "drupal",
+      "monday",
+      "pipedrive",
+      "wordpress",
+      "zapier",
+      "zoom",
     ]);
   });
 

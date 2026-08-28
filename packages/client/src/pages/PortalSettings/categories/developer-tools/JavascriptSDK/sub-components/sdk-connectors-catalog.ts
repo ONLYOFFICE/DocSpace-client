@@ -41,6 +41,10 @@ import type { TIntegrationsEntries } from "@docspace/shared/api/settings/types";
 
 import type { IntegrationPlatform } from "SRC_DIR/components/IntegrationsCard/integrations-catalog";
 
+import NextcloudLogoUrl from "PUBLIC_DIR/images/logo_nextcloud.svg?url";
+import OwnCloudLogoUrl from "PUBLIC_DIR/images/logo_ownCloud.svg?url";
+import ConfluenceLogoUrl from "PUBLIC_DIR/images/logo_confluence.svg?url";
+import AlfrescoLogoUrl from "PUBLIC_DIR/images/logo_alfresco.svg?url";
 import ZoomLogoUrl from "PUBLIC_DIR/images/logo_zoom.svg?url";
 import WordpressLogoUrl from "PUBLIC_DIR/images/logo_wordpress.svg?url";
 import DrupalLogoUrl from "PUBLIC_DIR/images/logo_drupal.svg?url";
@@ -52,15 +56,12 @@ import N8nLogoUrl from "PUBLIC_DIR/images/logo_n8n.svg?url";
 
 const GITHUB_URL = "https://github.com/ONLYOFFICE";
 
-const ZOOM = "Zoom";
-const WORDPRESS = "WordPress";
-const DRUPAL = "Drupal";
-const PIPEDRIVE = "Pipedrive";
-const MONDAY = "monday.com";
-const ZAPIER = "Zapier";
-
 type CatalogUrls = {
   integrationsEntries?: TIntegrationsEntries;
+  nextcloudUrl?: string;
+  owncloudUrl?: string;
+  confluenceUrl?: string;
+  alfrescoUrl?: string;
   moodleUrl?: string;
   allConnectorsUrl?: string;
 };
@@ -69,7 +70,15 @@ export const useSdkConnectors = (
   t: TFunction,
   urls: CatalogUrls,
 ): IntegrationPlatform[] => {
-  const { integrationsEntries, moodleUrl, allConnectorsUrl } = urls;
+  const {
+    integrationsEntries,
+    nextcloudUrl,
+    owncloudUrl,
+    confluenceUrl,
+    alfrescoUrl,
+    moodleUrl,
+    allConnectorsUrl,
+  } = urls;
 
   return React.useMemo(() => {
     const organizationName = getBrandName("OrganizationName");
@@ -143,26 +152,79 @@ export const useSdkConnectors = (
     });
 
     return [
-      embed("zoom", ZOOM, ZoomLogoUrl, integrationsEntries?.zoom),
       embed(
-        "wordpress",
-        WORDPRESS,
-        WordpressLogoUrl,
-        integrationsEntries?.wordpress,
+        "nextcloud",
+        getBrandName("Nextcloud"),
+        NextcloudLogoUrl,
+        nextcloudUrl,
       ),
-      embed("drupal", DRUPAL, DrupalLogoUrl, integrationsEntries?.drupal),
+      embed(
+        "owncloud",
+        getBrandName("OwnCloud"),
+        OwnCloudLogoUrl,
+        owncloudUrl,
+      ),
+      embed(
+        "confluence",
+        getBrandName("Confluence"),
+        ConfluenceLogoUrl,
+        confluenceUrl,
+      ),
+      embed(
+        "alfresco",
+        getBrandName("Alfresco"),
+        AlfrescoLogoUrl,
+        alfrescoUrl,
+      ),
       embed("moodle", getBrandName("Moodle"), MoodleLogoUrl, moodleUrl),
+      automate("n8n", getBrandName("N8n"), N8nLogoUrl, allConnectorsUrl),
+      embed(
+        "drupal",
+        getBrandName("Drupal"),
+        DrupalLogoUrl,
+        integrationsEntries?.drupal,
+      ),
+      embed(
+        "monday",
+        getBrandName("MondayCom"),
+        MondayLogoUrl,
+        allConnectorsUrl,
+      ),
       embed(
         "pipedrive",
-        PIPEDRIVE,
+        getBrandName("Pipedrive"),
         PipedriveLogoUrl,
         integrationsEntries?.pipedrive,
       ),
-      embed("monday", MONDAY, MondayLogoUrl, allConnectorsUrl),
-      automate("zapier", ZAPIER, ZapierLogoUrl, integrationsEntries?.zapier),
-      automate("n8n", getBrandName("N8n"), N8nLogoUrl, allConnectorsUrl),
+      embed(
+        "wordpress",
+        getBrandName("WordPress"),
+        WordpressLogoUrl,
+        integrationsEntries?.wordpress,
+      ),
+      automate(
+        "zapier",
+        getBrandName("Zapier"),
+        ZapierLogoUrl,
+        integrationsEntries?.zapier,
+      ),
+      embed(
+        "zoom",
+        getBrandName("ProviderZoom"),
+        ZoomLogoUrl,
+        integrationsEntries?.zoom,
+      ),
     ];
-  }, [t, integrationsEntries, moodleUrl, allConnectorsUrl]);
+  }, [
+    t,
+    integrationsEntries,
+    nextcloudUrl,
+    owncloudUrl,
+    confluenceUrl,
+    alfrescoUrl,
+    moodleUrl,
+    allConnectorsUrl,
+  ]);
 };
 
 export default useSdkConnectors;

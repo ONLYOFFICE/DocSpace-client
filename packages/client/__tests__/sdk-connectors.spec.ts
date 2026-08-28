@@ -50,15 +50,21 @@ const ALL_CONNECTORS_URL = `${SITE_DOMAIN}/all-connectors.aspx`;
 const ZOOM_URL = "https://marketplace.zoom.us/apps/OW6rOq-nRgCihG5eps_p-g";
 const ZAPIER_URL = "https://zapier.com/apps/onlyoffice-docspace/integrations";
 
+// The connectors the Docs Connect card on Home carries lead, in its order; the
+// ones only the SDK page offers follow.
 const CONNECTORS = [
-  { id: "zoom", name: "Zoom" },
-  { id: "wordpress", name: "WordPress" },
-  { id: "drupal", name: "Drupal" },
+  { id: "nextcloud", name: "Nextcloud" },
+  { id: "owncloud", name: "ownCloud" },
+  { id: "confluence", name: "Confluence" },
+  { id: "alfresco", name: "Alfresco" },
   { id: "moodle", name: "Moodle" },
-  { id: "pipedrive", name: "Pipedrive" },
-  { id: "monday", name: "monday.com" },
-  { id: "zapier", name: "Zapier" },
   { id: "n8n", name: "n8n" },
+  { id: "drupal", name: "Drupal" },
+  { id: "monday", name: "monday.com" },
+  { id: "pipedrive", name: "Pipedrive" },
+  { id: "wordpress", name: "WordPress" },
+  { id: "zapier", name: "Zapier" },
+  { id: "zoom", name: "Zoom" },
 ];
 
 test.beforeEach(async ({ mockRequest }) => {
@@ -82,6 +88,17 @@ test.describe("JavaScript SDK connectors", () => {
       await expect(tile).toBeVisible();
       await expect(tile).toContainText(connector.name);
     }
+
+    const renderedOrder = await page
+      .locator('[data-testid^="sdk-connector-"]')
+      .evaluateAll((tiles) =>
+        tiles.map((tile) => tile.getAttribute("data-testid")),
+      );
+
+    expect(renderedOrder).toEqual([
+      ...CONNECTORS.map((connector) => `sdk-connector-${connector.id}`),
+      "sdk-connector-all",
+    ]);
 
     // The section closes the page, below the presets grid.
     const connectorsBox = await page
@@ -195,7 +212,9 @@ test.describe("JavaScript SDK preset connectors", () => {
   }) => {
     await page.goto(`${baseUrl}${PRESET_ROUTE}`);
 
-    const sidebarTile = page.getByTestId("sdk-connector-compact-zoom");
+    const sidebarTile = page.getByTestId(
+      `sdk-connector-compact-${CONNECTORS[0].id}`,
+    );
     await expect(sidebarTile).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
 
     // Both instances are mounted on a preset page; each id must resolve to a
@@ -220,7 +239,7 @@ test.describe("JavaScript SDK preset connectors", () => {
 
     const firstBox = await sidebarTile.boundingBox();
     const secondBox = await page
-      .getByTestId("sdk-connector-compact-wordpress")
+      .getByTestId(`sdk-connector-compact-${CONNECTORS[1].id}`)
       .boundingBox();
 
     // Side by side, not stacked: the second tile starts further along the row

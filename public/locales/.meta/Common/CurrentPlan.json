@@ -3,7 +3,7 @@
   "content": "Current plan",
   "content_en_sha1_hash": "ec5cfba8f01bfc81eb9a037f81ddf40ce465282c",
   "created_at": "2026-07-07T08:58:42.998Z",
-  "updated_at": "2026-08-01T16:25:17.902Z",
+  "updated_at": "2026-08-27T15:37:55.813Z",
   "comment": {
     "text": "A small label in the billing overview card that serves as a header for the user's active subscription details.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
-      "line_number": 72,
-      "context": "return (\n <div className={`${styles.card} ${styles.planCard}`}>\n <div className={styles.planInfo}>\n <Text fontSize=\"14px\" fontWeight={700}>\n {t(\"CurrentPlan\")}\n </Text>\n <Text fontSize=\"18px\" fontWeight={700}>\n {currentTariffPlanTitle}\n </Text>\n <Text fontSize=\"12px\">",
+      "line_number": 106,
+      "context": "return (\n <div className={`${styles.card} ${styles.planCard}`}>\n <div className={styles.planInfo}>\n <Text fontSize=\"14px\" fontWeight={700}>\n {t(\"CurrentPlan\")}\n </Text>\n <Text fontSize=\"18px\" fontWeight={700}>\n {currentTariffPlanTitle}\n </Text>\n <Text fontSize=\"12px\">{planDetails}</Text>",
       "module": "/libs/ui-kit"
     }
   ],

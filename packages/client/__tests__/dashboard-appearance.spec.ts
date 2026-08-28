@@ -218,6 +218,12 @@ const SAAS_PLANS: Plan[] = [
   },
 ];
 
+/**
+ * The standalone editions whose frames duplicate the Enterprise ones — they
+ * keep a single canary screenshot instead of a full set.
+ */
+const STANDALONE_CANARY_ONLY = ["community", "developer"];
+
 const STANDALONE_PLANS: Plan[] = [
   {
     // No licence: the open-source build, which sits on the free plan.
@@ -493,12 +499,14 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     screenshot,
   } = testCase;
 
-  // Who may open Developer Tools, which is the rule the section's own card and
-  // the integrations card that advertises Docs Connect both follow: guests
-  // never, and everyone below a full admin only while the portal does not
-  // limit the section.
-  const canOpenDevTools =
-    !role.isGuest && (!devToolsLimited || role.isAdminOrOwner);
+  // Two different questions, and the split is the whole point. The portal
+  // switch decides whether the section is *offered* at all - once it is limited
+  // to admins, everyone below one stops being shown it. Rights decide only
+  // whether it *opens*: a guest is shown the same cards and told why they lead
+  // nowhere. A feature that is switched off is absent; a feature that is not
+  // yours is visible but closed.
+  const isDevToolsOffered = !devToolsLimited || role.isAdminOrOwner;
+  const canOpenDevTools = isDevToolsOffered && !role.isGuest;
 
   test(name, async ({ page, baseUrl, mockRequest }) => {
     mockRequest.use(
@@ -537,19 +545,34 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       await expect(planLine(page)).toHaveCount(0);
     }
 
+    // The apps subtitle follows the same rule as the plan line: it names the
+    // plan for a SaaS admin and stays neutral for everyone else, a standalone
+    // portal included. Both wordings share "includes apps for", so the same
+    // locator reads whichever one is on the page.
+    await expect(
+      page.locator(APPS_SECTION).getByText(/includes apps for/),
+    ).toHaveText(
+      role.isAdminOrOwner && !edition.standalone
+        ? new RegExp(
+            `Your ${plan.isPaid ? "Business" : "Startup"} plan includes`,
+          )
+        : /Your workspace includes/,
+    );
+
     // Developer Tools, and the integrations card that advertises Docs Connect
-    // inside it, appear together - the second asks the same question as the
-    // first. Docs Connect is SaaS-only on top of that, whoever is asking, and
-    // the "or connect Docs" link is stricter still: it opens the page itself,
-    // so admins and the owner only.
+    // inside it, appear together - both are offered on the portal switch alone,
+    // so a guest is shown them and finds out on the way in. Docs Connect is
+    // SaaS-only on top of that, whoever is asking, and the "or connect Docs"
+    // link is a navigation rather than a description, so it needs the section
+    // to actually open for its reader.
     await expect(page.locator(DEVTOOLS_CARD)).toHaveCount(
-      canOpenDevTools ? 1 : 0,
+      isDevToolsOffered ? 1 : 0,
     );
     await expect(page.locator(INTEGRATIONS_CARD)).toHaveCount(
-      !edition.standalone && canOpenDevTools ? 1 : 0,
+      !edition.standalone && isDevToolsOffered ? 1 : 0,
     );
     await expect(page.getByText(/or connect Docs/)).toHaveCount(
-      !edition.standalone && role.isAdminOrOwner ? 1 : 0,
+      !edition.standalone && canOpenDevTools ? 1 : 0,
     );
 
     // The chat is hidden rather than disabled where it cannot be held: a portal
@@ -636,14 +659,17 @@ for (const edition of EDITIONS) {
               ai,
               devToolsLimited: false,
               viewport: DESKTOP,
-              // Developer is Enterprise plus a flag this page never reads, so
-              // its frames are the Enterprise ones pixel for pixel. One of them
-              // is kept as a canary - the day the page starts telling the two
-              // apart, it fails and the rest of the audience gets its own
-              // baselines then. The assertions above run for every case either
-              // way.
+              // A standalone portal is offered no billing at all, so its three
+              // editions render pixel for pixel alike - the plan line and the
+              // plan-named subtitle, the only things that could tell them
+              // apart, are both dropped there. Enterprise carries the full set
+              // of frames and the other two keep one canary each; the day the
+              // page starts telling them apart, the canary fails and the rest
+              // of the audience gets its own baselines then. Every case runs
+              // every assertion above either way.
               withScreenshot:
-                plan.key !== "developer" || (ai.enabled && role === ROLES[0]),
+                !STANDALONE_CANARY_ONLY.includes(plan.key) ||
+                (ai.enabled && role === ROLES[0]),
               screenshot: `${edition.key}-${plan.key}-ai-${ai.key}-${role.key}.png`,
             });
           }

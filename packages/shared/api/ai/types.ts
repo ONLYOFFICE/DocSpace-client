@@ -76,7 +76,6 @@ export type TModel = {
   };
 };
 
-export type TModelList = TModel[];
 
 export type TProfile = {
   id: string;
@@ -167,14 +166,6 @@ export type TCreateAgentWithProfileData = Omit<
 > & {
   profileId: string;
   prompt: string;
-};
-
-export type TDefaultProvider = {
-  providerId: TAiProvider["id"];
-  providerTitle: TAiProvider["title"];
-  providerType?: ProviderType;
-  defaultModel: TModel["modelId"];
-  defaultModelAlias?: string;
 };
 
 export type TAIUserConfig = {

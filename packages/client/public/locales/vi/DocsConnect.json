@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "Kiểm soát địa chỉ IP, dải IP hoặc host nào có thể truy cập {{service}}",
   "AdditionalUsers": "Người dùng bổ sung",
   "AddRule": "Thêm quy tắc",
+  "AdminAccessDescription": "Chỉ quản trị viên mới có thể cấu hình {{service}}. Bạn vẫn có thể xem tài liệu API.",
   "AnonymousNoHint": "(Chỉ người dùng đã xác thực mới có thể truy cập tài liệu)",
   "AnonymousSupport": "Hỗ trợ ẩn danh",
   "AnonymousSupportDescription": "Cho phép người dùng chưa xác thực truy cập tài liệu",

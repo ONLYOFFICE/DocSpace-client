@@ -34,15 +34,16 @@
  */
 
 import { aiAgentGetByIdHandler, aiAgentsHandler } from "./agents";
+import {
+  AI_ARBITER_PANEL_FOLDERS,
+  AI_ARBITER_SESSION_ID,
+  aiArbiterPanelHandler,
+} from "./arbiter";
 import { aiConfigHandler } from "./config";
-import { aiModelsHandler } from "./models";
-import { aiChatDeleteHandler } from "./chat";
-import { aiRoomsChatsHandler, aiRoomsChatsStreamHandler } from "./roomsChats";
 import {
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
 } from "./vectorization";
-import { aiProvidersDefaultHandler } from "./providersDefault";
 import {
   aiChatAssignmentsHandler,
   aiChatCustomServersHandler,
@@ -63,14 +64,12 @@ import {
 export {
   aiAgentGetByIdHandler,
   aiAgentsHandler,
+  aiArbiterPanelHandler,
+  AI_ARBITER_PANEL_FOLDERS,
+  AI_ARBITER_SESSION_ID,
   aiConfigHandler,
-  aiModelsHandler,
-  aiChatDeleteHandler,
-  aiRoomsChatsHandler,
-  aiRoomsChatsStreamHandler,
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
-  aiProvidersDefaultHandler,
   aiChatAssignmentsHandler,
   aiChatCustomServersHandler,
   aiChatDeepModeHandler,
@@ -98,10 +97,6 @@ export type { AiChatProfile, AssignmentMap } from "./chatStores";
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),
   aiConfigHandler(port),
-  aiModelsHandler(port),
-  aiChatDeleteHandler(port),
-  aiRoomsChatsHandler(port),
-  aiRoomsChatsStreamHandler(port),
   aiVectorizationGetHandler(port),
   aiVectorizationPutHandler(port),
   ...aiChatEmptyStoreHandlers(port),

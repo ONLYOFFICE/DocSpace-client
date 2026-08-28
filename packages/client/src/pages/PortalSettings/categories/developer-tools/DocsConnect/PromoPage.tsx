@@ -89,6 +89,27 @@ const PromoPage = ({
         {t("DocsConnect:DocsConnect")}
       </Heading>
 
+      {/* The page opens for anyone the Developer Tools section opens for, but
+          connecting an instance is a portal-wide operation and stays with
+          admins. Rather than close the page, it says so once and refuses the
+          one action below - the description, the links and the API
+          documentation are the point of reading it. */}
+      {canManage ? null : (
+        <div
+          className={styles.accessNotice}
+          data-testid="docs_connect_access_notice"
+        >
+          <Text as="p" className={styles.accessNoticeTitle}>
+            {t("Common:AdminAccessRequired")}
+          </Text>
+          <Text as="p" className={styles.description}>
+            {t("DocsConnect:AdminAccessDescription", {
+              service: t("DocsConnect:DocsConnect"),
+            })}
+          </Text>
+        </div>
+      )}
+
       {canceled ? (
         <div className={styles.canceledText}>
           <Text as="p" className={styles.canceledTitle}>
@@ -217,4 +238,3 @@ export default inject(({ docsConnectStore, userStore }: TStore) => {
     canManage: (user?.isAdmin || user?.isOwner) ?? false,
   };
 })(observer(PromoPage));
-

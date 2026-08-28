@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "Kontrolējiet, kuras IP adreses, diapazoni vai hosti var piekļūt {{service}}",
   "AdditionalUsers": "Papildu lietotāji",
   "AddRule": "Pievienot noteikumu",
+  "AdminAccessDescription": "{{service}} var konfigurēt tikai administratori. Jūs joprojām varat skatīt API dokumentāciju.",
   "AnonymousNoHint": "(Dokumentiem var piekļūt tikai autentificēti lietotāji)",
   "AnonymousSupport": "Anonīms atbalsts",
   "AnonymousSupportDescription": "Atļaut lietotājiem piekļūt dokumentiem bez autentifikācijas",

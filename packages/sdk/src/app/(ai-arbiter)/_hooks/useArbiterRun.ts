@@ -37,25 +37,48 @@
 
 import { useCallback, useRef } from "react";
 
-import type { AgentSummary } from "@/types/arbiter";
+import { useApi } from "@docspace/ui-kit/ai-agent/providers";
+
+import type { AgentSummary, AttachedFile, SseEvent } from "@/types/arbiter";
+import {
+  type AgentApi,
+  createAgentThread,
+  streamAgentChat,
+} from "@/utils/ai-arbiter";
 import {
   buildArbiterPrompt,
   type ExpertAnswer,
 } from "../_utils/arbiterPrompts";
-import { streamArbiterChat } from "../_utils/parseArbiterStream";
 import { useAiArbiterAgentsStore } from "../_store/AiArbiterAgentsStore";
 import { useAiArbiterRunStore } from "../_store/AiArbiterRunStore";
 
-type OnEventFn = (
-  panelId: string,
-  ev: import("@/types/arbiter").SseEvent,
-) => void;
+type OnEventFn = (panelId: string, ev: SseEvent) => void;
+
+const THREAD_TITLE_MAX = 120;
+
+const threadTitle = (question: string) =>
+  question.length <= THREAD_TITLE_MAX
+    ? question
+    : `${question.slice(0, THREAD_TITLE_MAX - 1)}...`;
+
+async function* streamInNewThread(
+  api: AgentApi,
+  agentId: number,
+  message: string,
+  title: string,
+  file: AttachedFile | undefined,
+  signal: AbortSignal,
+): AsyncGenerator<SseEvent> {
+  const threadId = await createAgentThread(api, agentId, title);
+  yield* streamAgentChat(api, { agentId, message, threadId, file, signal });
+}
 
 async function consumeExpert(
+  api: AgentApi,
   panelId: string,
   expert: AgentSummary,
   question: string,
-  fileIds: number[] | undefined,
+  file: AttachedFile | undefined,
   signal: AbortSignal,
   onEvent: OnEventFn,
 ): Promise<ExpertAnswer> {
@@ -63,11 +86,13 @@ async function consumeExpert(
   let errored = false;
 
   try {
-    for await (const ev of streamArbiterChat(
+    for await (const ev of streamInNewThread(
+      api,
       expert.id,
       question,
+      threadTitle(question),
+      file,
       signal,
-      fileIds,
     )) {
       onEvent(panelId, ev);
       if (ev.type === "new_token") {
@@ -88,6 +113,7 @@ async function consumeExpert(
 }
 
 export default function useArbiterRun() {
+  const api = useApi();
   const agentsStore = useAiArbiterAgentsStore();
   const runStore = useAiArbiterRunStore();
   const abortRef = useRef<AbortController | null>(null);
@@ -99,9 +125,7 @@ export default function useArbiterRun() {
     const question = runStore.question.trim();
     if (!question) return;
 
-    const fileIds = runStore.attachedFile
-      ? [runStore.attachedFile.id]
-      : undefined;
+    const file = runStore.attachedFile ?? undefined;
 
     runStore.initPanels(experts, arbiter);
     runStore.setRunStatus("running");
@@ -115,10 +139,11 @@ export default function useArbiterRun() {
       const expertAnswers = await Promise.all(
         experts.map((expert, i) =>
           consumeExpert(
+            api,
             `expert-${i}`,
             expert,
             question,
-            fileIds,
+            file,
             signal,
             onEvent,
           ),
@@ -130,14 +155,16 @@ export default function useArbiterRun() {
       const arbiterPrompt = buildArbiterPrompt(
         question,
         expertAnswers,
-        runStore.attachedFile ?? undefined,
+        file,
       );
 
-      for await (const ev of streamArbiterChat(
+      for await (const ev of streamInNewThread(
+        api,
         arbiter.id,
         arbiterPrompt,
+        threadTitle(question),
+        file,
         signal,
-        fileIds,
       )) {
         if (signal.aborted) break;
         runStore.applyEvent("arbiter", ev);
@@ -154,7 +181,7 @@ export default function useArbiterRun() {
     } finally {
       abortRef.current = null;
     }
-  }, [agentsStore, runStore]);
+  }, [api, agentsStore, runStore]);
 
   const stop = useCallback(() => {
     abortRef.current?.abort();

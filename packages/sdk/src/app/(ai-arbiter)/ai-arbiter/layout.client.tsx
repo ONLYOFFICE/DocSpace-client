@@ -36,8 +36,16 @@
 "use client";
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
+import { useTheme } from "@docspace/ui-kit";
+import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
 import {
+  PORTAL_BASE_THEME_ID,
+  PORTAL_DARK_THEME_ID,
+} from "@docspace/ui-kit/ai-agent/providers/themes";
+import {
+  frameCallCommand,
   frameCallEvent,
   getFrameId,
 } from "@docspace/shared/utils/common";
@@ -45,6 +53,7 @@ import {
 import type { ArbiterCommonData } from "@/types/arbiter";
 
 import useInitArbiterStores from "../_hooks/useInitArbiterStores";
+import styles from "../_components/ArbiterApp.module.scss";
 
 type AiArbiterShellProps = {
   commonData: ArbiterCommonData;
@@ -53,18 +62,31 @@ type AiArbiterShellProps = {
 
 const AiArbiterShell = ({ commonData, children }: AiArbiterShellProps) => {
   const isReady = useInitArbiterStores(commonData);
+  const { i18n } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
 
   const appReadySent = React.useRef(false);
   React.useEffect(() => {
     if (isReady && !appReadySent.current) {
       appReadySent.current = true;
       frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
+      frameCallCommand("setIsLoaded");
     }
   }, [isReady]);
 
   if (!isReady) return null;
 
-  return <>{children}</>;
+  return (
+    <div className={styles.shell}>
+      <AiAgentProviders
+        theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
+        locale={i18n.language}
+        canUseAi={!!commonData.userId}
+      >
+        {children}
+      </AiAgentProviders>
+    </div>
+  );
 };
 
 export default AiArbiterShell;

@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Frage stellen... (Strg+Eingabe zum Ausführen)",
   "ArbiterReadyTitle": "KI Arbiter bereit",
   "ArbiterRemoveExpert": "{{name}} entfernen",
-  "ArbiterRemoveFile": "Datei entfernen",
   "ArbiterRemovingAgents": "Agenten werden entfernt...",
   "ArbiterResetConfiguration": "Konfiguration zurücksetzen",
   "ArbiterResetConfigurationTitle": "KI Arbiter-Konfiguration zurücksetzen",

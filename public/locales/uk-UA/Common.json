@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Поставте запитання... (Ctrl+Enter для запуску)",
   "ArbiterReadyTitle": "ШІ Арбітр готовий",
   "ArbiterRemoveExpert": "Видалити {{name}}",
-  "ArbiterRemoveFile": "Видалити файл",
   "ArbiterRemovingAgents": "Видалення агентів...",
   "ArbiterResetConfiguration": "Скинути конфігурацію",
   "ArbiterResetConfigurationTitle": "Скинути конфігурацію ШІ Арбітра",

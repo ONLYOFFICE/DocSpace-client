@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "اطرح سؤالاً... (Ctrl+Enter للتشغيل)",
   "ArbiterReadyTitle": "محكّم الذكاء الاصطناعي جاهز",
   "ArbiterRemoveExpert": "إزالة {{name}}",
-  "ArbiterRemoveFile": "إزالة الملف",
   "ArbiterRemovingAgents": "جارٍ إزالة الوكلاء...",
   "ArbiterResetConfiguration": "إعادة تعيين التكوين",
   "ArbiterResetConfigurationTitle": "إعادة تعيين تكوين محكّم الذكاء الاصطناعي",

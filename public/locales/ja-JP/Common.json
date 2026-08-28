@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "質問を入力してください... (Ctrl+Enterで実行)",
   "ArbiterReadyTitle": "AIアービター準備完了",
   "ArbiterRemoveExpert": "{{name}} を削除",
-  "ArbiterRemoveFile": "ファイルを削除",
   "ArbiterRemovingAgents": "エージェントを削除中...",
   "ArbiterResetConfiguration": "設定をリセット",
   "ArbiterResetConfigurationTitle": "AIアービターの設定をリセット",

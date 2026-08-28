@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "ຖາມຄຳຖາມ... (Ctrl+Enter ເພື່ອດຳເນີນການ)",
   "ArbiterReadyTitle": "ຜູ້ຕັດສິນ AI ພ້ອມແລ້ວ",
   "ArbiterRemoveExpert": "ລຶບ {{name}}",
-  "ArbiterRemoveFile": "ລຶບໄຟລ໌",
   "ArbiterRemovingAgents": "ກຳລັງລຶບຕົວແທນ...",
   "ArbiterResetConfiguration": "ຣີເຊັດການຕັ້ງຄ່າ",
   "ArbiterResetConfigurationTitle": "ຣີເຊັດການຕັ້ງຄ່າຜູ້ຕັດສິນ AI",

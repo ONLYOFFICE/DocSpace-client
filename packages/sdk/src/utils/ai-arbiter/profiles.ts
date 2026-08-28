@@ -33,22 +33,26 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export type SseEvent =
-  | { type: "message_start"; chatId: string; error?: string | null }
-  | { type: "new_token"; text: string }
-  | { type: "reasoning"; text: string }
-  | {
-      type: "tool_call";
-      callId: string;
-      name: string;
-      arguments: unknown;
-      managed?: boolean;
-    }
-  | { type: "tool_result"; callId: string; result: unknown }
-  | { type: "message_stop"; messageId: number }
-  | {
-      type: "error";
-      message: string;
-      errorCode?: string;
-      details?: unknown;
-    };
+export type ProfileRef = {
+  profileId: string;
+  name: string;
+};
+
+const CHAT_CAPABILITY = 1;
+
+export const isChatCapableProfile = (profile: {
+  capabilities?: number | null;
+}): boolean =>
+  typeof profile.capabilities !== "number" ||
+  (profile.capabilities & CHAT_CAPABILITY) !== 0;
+
+export const toProfileRefs = (
+  profiles: ReadonlyArray<{
+    id: string;
+    name: string;
+    capabilities?: number | null;
+  }>,
+): ProfileRef[] =>
+  profiles
+    .filter(isChatCapableProfile)
+    .map((p) => ({ profileId: p.id, name: p.name }));

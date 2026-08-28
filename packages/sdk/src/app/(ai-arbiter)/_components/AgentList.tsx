@@ -38,34 +38,25 @@
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { Text } from "@docspace/ui-kit/components/text";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
+import CrossIcon from "@docspace/ui-kit/assets/icons/12/cross.react.svg";
+
 import type { AgentSummary } from "@/types/arbiter";
 
 import styles from "./ArbiterApp.module.scss";
 
-const AVATAR_COLORS = [
-  "rgb(78, 157, 245)",
-  "rgb(82, 196, 26)",
-  "rgb(250, 140, 22)",
-  "rgb(114, 46, 209)",
-  "rgb(235, 47, 150)",
-  "rgb(19, 194, 194)",
-  "rgb(245, 34, 45)",
-  "rgb(9, 109, 217)",
-];
-
-function agentColor(title: string): string {
-  let h = 0;
+const fallbackLogoColor = (title: string): string => {
+  let hash = 0;
   for (let i = 0; i < title.length; i++) {
-    h = title.charCodeAt(i) + ((h << 5) - h);
+    hash = (hash * 31 + title.charCodeAt(i)) | 0;
   }
-  return AVATAR_COLORS[Math.abs(h) % AVATAR_COLORS.length];
-}
-
-function agentInitials(title: string): string {
-  const words = title.trim().split(/\s+/);
-  if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
-  return title.slice(0, 2).toUpperCase();
-}
+  const palette = globalColors.logoColors;
+  return palette[Math.abs(hash) % palette.length].replace("#", "");
+};
 
 type AgentListProps = {
   experts: AgentSummary[];
@@ -74,6 +65,43 @@ type AgentListProps = {
   onRemoveExpert?: (id: number) => void;
   onAddExpert?: () => void;
 };
+
+type AgentItemProps = {
+  agent: AgentSummary;
+  isArbiter?: boolean;
+  onRemove?: () => void;
+  removeLabel?: string;
+};
+
+const AgentItem = ({
+  agent,
+  isArbiter = false,
+  onRemove,
+  removeLabel,
+}: AgentItemProps) => (
+  <div className={isArbiter ? styles.agentItemArbiter : styles.agentItem}>
+    <RoomIcon
+      title={agent.title}
+      color={agent.logoColor ?? fallbackLogoColor(agent.title)}
+      size="24px"
+      radius="6px"
+      showDefault
+    />
+    <Text fontSize="13px" truncate title={agent.title} noSelect>
+      {agent.title}
+    </Text>
+    {onRemove ? (
+      <IconButton
+        iconNode={<CrossIcon />}
+        size={12}
+        isClickable
+        isFill
+        title={removeLabel}
+        onClick={onRemove}
+      />
+    ) : null}
+  </div>
+);
 
 export const AgentList = observer(
   ({
@@ -84,55 +112,53 @@ export const AgentList = observer(
     onAddExpert,
   }: AgentListProps) => {
     const { t } = useTranslation(["Common"]);
+    const canEdit = !isRunning;
+
     return (
       <div className={styles.pickerBar}>
-        <span className={styles.pickerLabel}>{t("Common:ArbiterExpertsLabel")}</span>
+        <Text
+          className={styles.pickerLabel}
+          fontSize="12px"
+          fontWeight={600}
+          color="var(--arbiter-muted)"
+          noSelect
+        >
+          {t("Common:ArbiterExpertsLabel")}
+        </Text>
 
         {experts.map((a) => (
-          <span key={a.id} className={styles.agentTag}>
-            <span
-              className={styles.agentAvatar}
-              style={{ background: agentColor(a.title) }}
-            >
-              {agentInitials(a.title)}
-            </span>
-            {a.title}
-            {onRemoveExpert && !isRunning && (
-              <button
-                type="button"
-                className={styles.agentTagRemove}
-                onClick={() => onRemoveExpert(a.id)}
-                aria-label={t("Common:ArbiterRemoveExpert", { name: a.title })}
-              >
-                x
-              </button>
-            )}
-          </span>
+          <AgentItem
+            key={a.id}
+            agent={a}
+            onRemove={
+              onRemoveExpert && canEdit ? () => onRemoveExpert(a.id) : undefined
+            }
+            removeLabel={t("Common:ArbiterRemoveExpert", { name: a.title })}
+          />
         ))}
 
-        {onAddExpert && !isRunning && (
-          <button
-            type="button"
-            className={styles.addExpertBtn}
+        {onAddExpert && canEdit ? (
+          <Link
+            type={LinkType.action}
+            fontSize="13px"
+            isHovered
             onClick={onAddExpert}
           >
             {t("Common:ArbiterAddExpert")}
-          </button>
-        )}
+          </Link>
+        ) : null}
 
-        <span className={styles.pickerLabel} style={{ marginLeft: 8 }}>
+        <Text
+          className={styles.pickerLabel}
+          fontSize="12px"
+          fontWeight={600}
+          color="var(--arbiter-muted)"
+          noSelect
+        >
           {t("Common:ArbiterLabel")}
-        </span>
+        </Text>
 
-        <span className={styles.agentTagArbiter}>
-          <span
-            className={styles.agentAvatar}
-            style={{ background: agentColor(arbiter.title) }}
-          >
-            {agentInitials(arbiter.title)}
-          </span>
-          {arbiter.title}
-        </span>
+        <AgentItem agent={arbiter} isArbiter />
       </div>
     );
   },

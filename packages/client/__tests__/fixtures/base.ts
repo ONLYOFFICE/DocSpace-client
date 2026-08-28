@@ -41,6 +41,7 @@ import {
   BASE_URL,
 } from "@docspace/shared/__mocks__/e2e";
 import { allHandlers } from "@docspace/shared/__mocks__/handlers";
+import { ARBITER_FLAG_KEY } from "@docspace/shared/utils/arbiter";
 import { PRIVATE_ROOMS_FLAG_KEY } from "@docspace/shared/utils/privateRooms";
 
 export const TEST_PORT = process.env.PORT || "5110";
@@ -64,13 +65,14 @@ export const test = base.extend<
       auto: true,
     },
   ],
-  // Private rooms are hidden behind a localStorage opt-in until they ship (see
-  // @docspace/shared/utils/privateRooms). The suite covers the released
-  // behaviour of the feature, so every spec runs with the flag on.
+  // Private rooms and the AI Arbiter are hidden behind localStorage opt-ins
+  // until they ship (see @docspace/shared/utils/privateRooms and
+  // @docspace/shared/utils/arbiter). The suite covers the released behaviour
+  // of the features, so every spec runs with the flags on.
   page: async ({ page }, use) => {
-    await page.addInitScript((key: string) => {
-      window.localStorage.setItem(key, "true");
-    }, PRIVATE_ROOMS_FLAG_KEY);
+    await page.addInitScript((keys: string[]) => {
+      for (const key of keys) window.localStorage.setItem(key, "true");
+    }, [PRIVATE_ROOMS_FLAG_KEY, ARBITER_FLAG_KEY]);
 
     await use(page);
   },

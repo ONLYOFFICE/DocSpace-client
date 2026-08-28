@@ -217,7 +217,6 @@
   "ArbiterQuestionPlaceholder": "Zadaj pytanie... (Ctrl+Enter, aby uruchomić)",
   "ArbiterReadyTitle": "Arbiter AI gotowy",
   "ArbiterRemoveExpert": "Usuń {{name}}",
-  "ArbiterRemoveFile": "Usuń plik",
   "ArbiterRemovingAgents": "Usuwanie agentów...",
   "ArbiterResetConfiguration": "Zresetuj konfigurację",
   "ArbiterResetConfigurationTitle": "Zresetuj konfigurację Arbitra AI",

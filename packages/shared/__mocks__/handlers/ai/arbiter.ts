@@ -33,65 +33,50 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { SseEvent } from "./sseEvent";
+import { http, HttpResponse } from "msw";
 
-export async function* parseSseStream(
-  stream: ReadableStream<Uint8Array>,
-): AsyncGenerator<SseEvent> {
-  const reader = stream.getReader();
-  const decoder = new TextDecoder();
-  let buffer = "";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-  try {
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
+import { PATH_AI_AGENTS } from "./agents";
 
-      buffer += decoder.decode(value, { stream: true });
+export const AI_ARBITER_SESSION_ID = "e2e-session";
 
-      const blocks = buffer.split(/\r?\n\r?\n/);
-      buffer = blocks.pop() ?? "";
+const arbiterAgent = (
+  id: number,
+  title: string,
+  role: "expert" | "arbiter",
+) => ({
+  id,
+  title,
+  rootFolderType: 24,
+  parentId: 0,
+  filesCount: 0,
+  foldersCount: 0,
+  fileEntryType: 1,
+  profileId: "p-auto",
+  tags: [`ai-arbiter:${role}`, `ai-arbiter:session:${AI_ARBITER_SESSION_ID}`],
+  chatSettings: { prompt: `${title} role prompt` },
+  security: { Read: true, Delete: true, EditRoom: true },
+});
 
-      for (const block of blocks) {
-        const ev = parseEventBlock(block);
-        if (!ev) continue;
-        yield ev;
-        if (ev.type === "message_stop") {
-          return;
-        }
-      }
-    }
+export const AI_ARBITER_PANEL_FOLDERS = [
+  arbiterAgent(9101, "Tax lawyer", "expert"),
+  arbiterAgent(9102, "Accountant", "expert"),
+  arbiterAgent(9103, "Arbiter - Taxes", "arbiter"),
+];
 
-    if (buffer.trim()) {
-      const ev = parseEventBlock(buffer);
-      if (ev) yield ev;
-    }
-  } finally {
-    reader.releaseLock();
-  }
-}
-
-function parseEventBlock(block: string): SseEvent | null {
-  let eventType = "";
-  const dataLines: string[] = [];
-
-  for (const line of block.split(/\r?\n/)) {
-    if (!line || line.startsWith(":")) {
-      continue;
-    }
-    if (line.startsWith("event:")) {
-      eventType = line.slice(6).trim();
-    } else if (line.startsWith("data:")) {
-      dataLines.push(line.slice(5).trim());
-    }
-  }
-
-  if (!eventType || dataLines.length === 0) return null;
-
-  try {
-    const payload = JSON.parse(dataLines.join("\n")) as Record<string, unknown>;
-    return { type: eventType, ...payload } as SseEvent;
-  } catch {
-    return null;
-  }
-}
+export const aiArbiterPanelHandler = (port: string) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_AGENTS}`, () =>
+    HttpResponse.json({
+      response: {
+        files: [],
+        folders: AI_ARBITER_PANEL_FOLDERS,
+        current: { id: 0, security: { Read: true, Create: true } },
+        total: AI_ARBITER_PANEL_FOLDERS.length,
+        count: AI_ARBITER_PANEL_FOLDERS.length,
+      },
+      count: 1,
+      status: 0,
+      statusCode: 200,
+    }),
+  );

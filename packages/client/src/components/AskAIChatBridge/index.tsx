@@ -83,11 +83,11 @@ const AskAIChatBridgeComponent = () => {
     setCurrentPage("chat");
 
     attachFilesToChat([file])
-      .then(({ skipped, duplicates }) => {
+      .then(({ skippedOverLimit, duplicates }) => {
         // A file that did not make it onto the composer — capped or
         // already there — must not disappear without a word.
         notifyAlreadyAttached(t, duplicates);
-        notifyAttachmentLimit(t, skipped);
+        notifyAttachmentLimit(t, skippedOverLimit);
       })
       .catch((error: unknown) => {
         toastr.error(
@@ -109,4 +109,3 @@ const AskAIChatBridgeComponent = () => {
 export const AskAIChatBridge = observer(AskAIChatBridgeComponent);
 
 export default AskAIChatBridge;
-

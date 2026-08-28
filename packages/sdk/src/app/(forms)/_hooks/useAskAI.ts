@@ -65,11 +65,15 @@ export default function useAskAI() {
           title: file.title,
           fileExst: file.fileExst,
           fileType: file.fileType,
+          // Carry the form metadata: the hook reads it to decide whether
+          // the chat offers the form-specific hints.
+          isForm: file.isForm,
+          externalDbTableName: file.externalDbTableName,
         },
       ])
-        .then(({ duplicates, skipped }) => {
+        .then(({ duplicates, skippedOverLimit }) => {
           notifyAlreadyAttached(t, duplicates);
-          notifyAttachmentLimit(t, skipped);
+          notifyAttachmentLimit(t, skippedOverLimit);
         })
         .catch((e: unknown) => toastr.error(e as string));
     },

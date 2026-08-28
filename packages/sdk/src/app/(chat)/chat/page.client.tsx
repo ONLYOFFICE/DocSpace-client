@@ -107,15 +107,19 @@ const ChatParamsBridge = ({ fileId, threadId }: ChatParamsBridgeProps) => {
             title: file.title,
             fileExst: file.fileExst,
             fileType: file.fileType,
+            // Carry the form metadata: the hook reads it to decide whether
+            // the chat offers the form-specific hints.
+            isForm: file.isForm,
+            externalDbTableName: file.externalDbTableName,
           },
         ]),
       )
-      .then(({ duplicates, skipped }) => {
+      .then(({ duplicates, skippedOverLimit }) => {
         // Resuming a thread can land on a composer that already holds this
         // file, and the cap applies here as anywhere else — both drop the
         // chip silently, so say which one happened.
         notifyAlreadyAttached(t, duplicates);
-        notifyAttachmentLimit(t, skipped);
+        notifyAttachmentLimit(t, skippedOverLimit);
       })
       .catch((error: unknown) => {
         frameCallEvent({

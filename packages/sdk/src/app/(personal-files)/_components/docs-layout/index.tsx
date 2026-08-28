@@ -968,11 +968,15 @@ const DocsLayoutAi = observer((props: DocsLayoutProps) => {
           title: item.title,
           fileExst: item.fileExst,
           fileType: item.fileType,
+          // Carry the form metadata: the hook reads it to decide whether
+          // the chat offers the form-specific hints.
+          isForm: item.isForm,
+          externalDbTableName: item.externalDbTableName,
         },
       ])
-        .then(({ duplicates, skipped }) => {
+        .then(({ duplicates, skippedOverLimit }) => {
           notifyAlreadyAttached(t, duplicates);
-          notifyAttachmentLimit(t, skipped);
+          notifyAttachmentLimit(t, skippedOverLimit);
         })
         .catch((e: unknown) => toastr.error(e as string));
     },

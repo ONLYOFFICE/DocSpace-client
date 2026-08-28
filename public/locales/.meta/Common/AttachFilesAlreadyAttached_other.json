@@ -1,20 +1,20 @@
 {
-  "key_path": "OpenAISettings",
-  "content": "Open AI settings",
-  "content_en_sha1_hash": "0712392d662742cb07261d0ec9b60caf1660783f",
-  "created_at": "2026-06-09T09:42:52.515Z",
-  "updated_at": "2026-08-28T14:38:40.337Z",
+  "key_path": "AttachFilesAlreadyAttached_other",
+  "content": "{{count}} files are already attached",
+  "content_en_sha1_hash": "9f1595758b76f8f10340d1de42c26d303a76b557",
+  "created_at": "2026-08-28T14:37:57.366Z",
+  "updated_at": "2026-08-28T14:39:21.499Z",
   "comment": {
-    "text": "Clickable link label that opens the OpenAI configuration settings.",
+    "text": "A notification message appearing when a user attempts to attach files that are already present in the attachment list. The {{count}} variable represents the number of duplicate files.",
     "is_auto": true,
-    "updated_at": "2026-06-09T10:02:53.344Z",
+    "updated_at": "2026-08-28T14:39:21.499Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/recomended-model/index.tsx",
-      "line_number": 191,
-      "context": "fontSize=\"12px\"\n lineHeight=\"16px\"\n isHovered\n onClick={onOpenSettings}\n >\n {t(\"OpenAISettings\")}\n </Link>\n ) : null}\n </div>\n );\n };",
+      "file_path": "/libs/ui-kit/ai-agent/providers/files/notices.ts",
+      "line_number": 57,
+      "context": "count === 1\n ? t(\"Common:AttachFilesAlreadyAttached_one\", {\n count,\n defaultValue: \"This file is already attached\",\n })\n : t(\"Common:AttachFilesAlreadyAttached_other\", {\n count,\n defaultValue: \"{{count}} files are already attached\",\n }),\n );\n };",
       "module": "/libs/ui-kit"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "AI Arbiter ready",
   "content_en_sha1_hash": "136de95fe63c01137ce5758c282600a5f83f2ef7",
   "created_at": "2026-05-24T17:27:18.391Z",
-  "updated_at": "2026-08-28T12:19:49.755Z",
+  "updated_at": "2026-08-28T14:38:40.321Z",
   "comment": {
     "text": "Header title in the wizard overlay that appears when the AI Arbiter setup process is successfully completed.",
     "is_auto": true,

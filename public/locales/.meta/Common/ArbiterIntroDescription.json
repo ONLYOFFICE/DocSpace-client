@@ -3,7 +3,7 @@
   "content": "Multiple AI experts answer your question in parallel; an arbiter synthesises their answers into a single weighted reply.",
   "content_en_sha1_hash": "6b91fbb79f574788f9d847fdfccba364e9d4c2c7",
   "created_at": "2026-05-24T17:27:18.233Z",
-  "updated_at": "2026-08-28T12:19:49.749Z",
+  "updated_at": "2026-08-28T14:38:40.313Z",
   "comment": {
     "text": "Description text on the AI Arbiter introduction screen, explaining the process of how multiple AI agents and an arbiter work together.",
     "is_auto": true,

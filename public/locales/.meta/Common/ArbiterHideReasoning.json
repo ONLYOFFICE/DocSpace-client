@@ -3,7 +3,7 @@
   "content": "Hide reasoning",
   "content_en_sha1_hash": "7e483a49ed6befe4518bb642443766e1a6fc4544",
   "created_at": "2026-05-24T17:27:18.219Z",
-  "updated_at": "2026-08-28T12:19:49.751Z",
+  "updated_at": "2026-08-28T14:38:40.314Z",
   "comment": {
     "text": "Button label used to collapse the AI's reasoning section in the panel.",
     "is_auto": true,

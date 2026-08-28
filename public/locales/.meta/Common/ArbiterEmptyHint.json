@@ -3,7 +3,7 @@
   "content": "Enter a question above and click Run.",
   "content_en_sha1_hash": "f7b3eda255127db52a813bb82badff6cd400367a",
   "created_at": "2026-05-24T17:27:18.151Z",
-  "updated_at": "2026-08-28T12:19:49.757Z",
+  "updated_at": "2026-08-28T14:38:40.324Z",
   "comment": {
     "text": "Instructional hint displayed in the main area when no panels are present and no process is currently running.",
     "is_auto": true,

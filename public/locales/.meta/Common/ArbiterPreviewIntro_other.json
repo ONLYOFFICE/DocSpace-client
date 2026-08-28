@@ -3,7 +3,7 @@
   "content": "I'll create {{count}} expert agents and 1 arbiter for the domain",
   "content_en_sha1_hash": "9abf5e127a62d0514d6b7797e612dc8bbdee91e4",
   "created_at": "2026-05-24T17:27:18.348Z",
-  "updated_at": "2026-08-28T12:19:49.753Z",
+  "updated_at": "2026-08-28T14:38:40.319Z",
   "comment": {
     "text": "Paragraph text in a wizard preview overlay summarizing the configuration; {{count}} represents the number of expert agents, and the string is followed by a domain name.",
     "is_auto": true,

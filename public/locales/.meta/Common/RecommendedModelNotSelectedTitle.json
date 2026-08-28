@@ -3,7 +3,7 @@
   "content": "Tested model for form processing is not selected",
   "content_en_sha1_hash": "97f72ebd428e2515a89eec847ebeb84881879234",
   "created_at": "2026-06-09T09:42:55.504Z",
-  "updated_at": "2026-06-09T09:51:23.813Z",
+  "updated_at": "2026-08-28T14:38:40.335Z",
   "comment": {
     "text": "Title for the recommended model section, appearing when a specific model for form processing has not yet been chosen.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/recomended-model/index.tsx",
-      "line_number": 106,
+      "line_number": 98,
       "context": "const isNotAvailableUserState = !isChat && !isRecomendedAvailable && !isAdmin;\n \n let title = t(\"RecommendedModelNotAvailableTitle\");\n if (isChatAdminState) title = t(\"RecommendedModelChatTitle\");\n else if (isChatUserState) title = t(\"RecommendedModelChatNotSelectedTitle\");\n else if (isSelectModelState) title = t(\"RecommendedModelNotSelectedTitle\");\n \n return (\n <div className=\"recomendedModel\">\n <div className=\"recomendedModel-header\">\n <div className=\"recomendedModel-header-title\">",
       "module": "/libs/ui-kit"
     }

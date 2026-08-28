@@ -3,7 +3,7 @@
   "content": "Set up AI Arbiter",
   "content_en_sha1_hash": "e51a2db83c720d51330313dafab0cea1dcc2ced0",
   "created_at": "2026-05-24T17:27:18.600Z",
-  "updated_at": "2026-08-28T12:19:49.756Z",
+  "updated_at": "2026-08-28T14:38:40.321Z",
   "comment": {
     "text": "Dialog title for the AI Arbiter configuration wizard.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "For better discussion of submitted form data, we recommend using <strong>{{model}}</strong> — a model we tested for form-related tasks.",
   "content_en_sha1_hash": "f3adbddd9b521909dced3b5b79c10a99649957fd",
   "created_at": "2026-06-09T09:42:55.394Z",
-  "updated_at": "2026-06-09T09:54:16.228Z",
+  "updated_at": "2026-08-28T14:38:40.335Z",
   "comment": {
     "text": "Descriptive text shown to chat admins recommending a specific AI model; includes an HTML <strong> tag and a {{model}} variable representing the model name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/recomended-model/index.tsx",
-      "line_number": 125,
+      "line_number": 117,
       "context": "</div>\n \n {isChatAdminState ? (\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n <CommonTrans\n i18nKey=\"RecommendedModelChatAdminDescription\"\n values={{ model: recomendedModel }}\n />\n </Text>\n ) : null}",
       "module": "/libs/ui-kit"
     }

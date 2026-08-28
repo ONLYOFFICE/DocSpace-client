@@ -3,7 +3,7 @@
   "content": "No AI provider is configured for this workspace.",
   "content_en_sha1_hash": "109ba9c77ecb3d7b4a9e71f97ed2ed6308a0c25c",
   "created_at": "2026-05-24T17:27:18.262Z",
-  "updated_at": "2026-08-28T12:19:49.753Z",
+  "updated_at": "2026-08-28T14:38:40.317Z",
   "comment": {
     "text": "Error message displayed in the AI arbiter wizard when no AI provider has been configured for the workspace.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Select model",
   "content_en_sha1_hash": "426e995abe3623e65f3e32db24603c22937d5162",
   "created_at": "2026-06-09T09:42:59.138Z",
-  "updated_at": "2026-06-09T09:44:04.746Z",
+  "updated_at": "2026-08-28T14:38:40.337Z",
   "comment": {
     "text": "Clickable link label in the AI agent recommendation section used to trigger the model selection process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/recomended-model/index.tsx",
-      "line_number": 187,
+      "line_number": 179,
       "context": "fontSize=\"12px\"\n lineHeight=\"16px\"\n isHovered\n onClick={onSelectModel}\n >\n {t(\"SelectModel\")}\n </Link>\n ) : null}\n \n {isNotAvailableAdminState ? (\n <Link",
       "module": "/libs/ui-kit"
     }

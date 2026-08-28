@@ -50,7 +50,8 @@ import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   useAttachHostFilesToChat,
-  CHAT_ATTACHMENT_LIMIT,
+  notifyAlreadyAttached,
+  notifyAttachmentLimit,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
@@ -358,14 +359,11 @@ const SectionBodyContent = (props) => {
       // panel is not a `.droppable`, so the move path below must not run either.
       if (isDragActive && draggedFiles.length > 0) {
         attachFilesToChat(draggedFiles)
-          .then(({ skipped }) => {
-            // The composer caps attachments, so say what did not fit instead
-            // of letting the extra files disappear without a word.
-            if (skipped > 0) {
-              toastr.warning(
-                t("Common:AttachFilesLimit", { limit: CHAT_ATTACHMENT_LIMIT }),
-              );
-            }
+          .then(({ skippedOverLimit, duplicates }) => {
+            // Files that did not make it onto the composer — capped, or
+            // already there — must not vanish without a word.
+            notifyAlreadyAttached(t, duplicates);
+            notifyAttachmentLimit(t, skippedOverLimit);
           })
           .catch((error) => toastr.error(error));
       }

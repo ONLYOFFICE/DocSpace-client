@@ -3,7 +3,7 @@
   "content": "ARBITER:",
   "content_en_sha1_hash": "1550ec0dbd98678da48ab431dbcf3f373e968bf6",
   "created_at": "2026-05-24T17:27:18.247Z",
-  "updated_at": "2026-08-28T12:19:49.749Z",
+  "updated_at": "2026-08-28T14:38:40.313Z",
   "comment": {
     "text": "A label in the agent picker that precedes the arbiter's name or value.",
     "is_auto": true,

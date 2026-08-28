@@ -3,7 +3,7 @@
   "content": "Error",
   "content_en_sha1_hash": "7f2f6a15cf8da2b27e5a4af47b58e7ad71c0b3d9",
   "created_at": "2025-05-19T21:30:45.027Z",
-  "updated_at": "2026-08-28T12:19:49.623Z",
+  "updated_at": "2026-08-28T14:38:40.259Z",
   "comment": {
     "text": "This is a general error message displayed in toast notifications or as part of a larger error message when an unexpected issue occurs.",
     "is_auto": true,

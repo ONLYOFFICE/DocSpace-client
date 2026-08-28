@@ -3,7 +3,7 @@
   "content": "Installed",
   "content_en_sha1_hash": "7bb4405cdfc9a15a3759bb0a3bbc05c3aadb95d3",
   "created_at": "2026-08-20T15:38:18.642Z",
-  "updated_at": "2026-08-28T12:19:49.568Z",
+  "updated_at": "2026-08-28T14:38:40.232Z",
   "comment": {
     "text": "Badge shown on a module card in the apps catalog when the module is already installed, displayed next to the module title with a tick icon.",
     "is_auto": false,

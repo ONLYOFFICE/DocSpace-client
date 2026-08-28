@@ -155,6 +155,7 @@ import {
   getOnlyofficeFileType,
   attachFilesToChat,
   selectNewAttachmentIndices,
+  notifyAlreadyAttached,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 
 import styles from "./DocsLayout.module.scss";
@@ -975,12 +976,7 @@ const DocsLayoutAi = observer((props: DocsLayoutProps) => {
       if (
         selectNewAttachmentIndices(useAttachmentsStore, [input]).length === 0
       ) {
-        toastr.info(
-          t("Common:AttachFilesAlreadyAttached_one", {
-            count: 1,
-            defaultValue: "This file is already attached",
-          }),
-        );
+        notifyAlreadyAttached(t, 1);
         return;
       }
 

@@ -45,6 +45,7 @@ import {
   attachFilesToChat,
   getOnlyofficeFileType,
   selectNewAttachmentIndices,
+  notifyAlreadyAttached,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 import { FileType } from "@docspace/shared/enums";
 import type { TFile } from "@docspace/shared/api/files/types";
@@ -73,12 +74,7 @@ export default function useAskAI() {
       if (
         selectNewAttachmentIndices(useAttachmentsStore, [input]).length === 0
       ) {
-        toastr.info(
-          t("Common:AttachFilesAlreadyAttached_one", {
-            count: 1,
-            defaultValue: "This file is already attached",
-          }),
-        );
+        notifyAlreadyAttached(t, 1);
         return;
       }
 

@@ -42,6 +42,7 @@ import { useStores as useAiChatStores } from "@docspace/ui-kit/ai-agent/provider
 import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import {
   useAttachHostFilesToChat,
+  notifyAlreadyAttached,
   CHAT_ATTACHMENT_LIMIT,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 
@@ -92,19 +93,7 @@ const AskAIChatBridgeComponent = () => {
         }
         // Same reasoning for a file that is already on the composer: the
         // action must not look like it did nothing.
-        if (duplicates > 0) {
-          toastr.info(
-            duplicates === 1
-              ? t("Common:AttachFilesAlreadyAttached_one", {
-                  count: duplicates,
-                  defaultValue: "This file is already attached",
-                })
-              : t("Common:AttachFilesAlreadyAttached_other", {
-                  count: duplicates,
-                  defaultValue: "{{count}} files are already attached",
-                }),
-          );
-        }
+        notifyAlreadyAttached(t, duplicates);
       })
       .catch((error: unknown) => {
         toastr.error(

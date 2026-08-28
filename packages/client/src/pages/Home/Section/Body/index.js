@@ -50,6 +50,7 @@ import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   useAttachHostFilesToChat,
+  notifyAlreadyAttached,
   CHAT_ATTACHMENT_LIMIT,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
@@ -368,19 +369,7 @@ const SectionBodyContent = (props) => {
             }
             // Same for files the composer already holds: a drop that adds no
             // chip must not look like it did nothing.
-            if (duplicates > 0) {
-              toastr.info(
-                duplicates === 1
-                  ? t("Common:AttachFilesAlreadyAttached_one", {
-                      count: duplicates,
-                      defaultValue: "This file is already attached",
-                    })
-                  : t("Common:AttachFilesAlreadyAttached_other", {
-                      count: duplicates,
-                      defaultValue: "{{count}} files are already attached",
-                    }),
-              );
-            }
+            notifyAlreadyAttached(t, duplicates);
           })
           .catch((error) => toastr.error(error));
       }

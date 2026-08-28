@@ -33,26 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { isArbiterEnabled } from "@docspace/shared/utils/arbiter";
-import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
+export const ARBITER_FLAG_KEY = "arbiter";
 
-import type { AppId } from "./apps-catalog";
+export const isArbiterEnabled = (): boolean => {
+  if (typeof window === "undefined") return false;
 
-const TEMPORARILY_DISABLED_APPS: ReadonlySet<string> = new Set<AppId>();
-
-// Apps that are built but not released yet, each hidden behind its own opt-in
-// flag so testers can still reach them. Private rooms ("e2e-rooms") wait on the
-// editors side of the feature, see @docspace/shared/utils/privateRooms.
-const UNRELEASED_APPS: ReadonlyMap<AppId, () => boolean> = new Map([
-  ["e2e-rooms" as AppId, isPrivateRoomsEnabled],
-  ["ai-arbiter" as AppId, isArbiterEnabled],
-]);
-
-const isAppUnreleased = (id: string): boolean => {
-  const isFeatureEnabled = UNRELEASED_APPS.get(id as AppId);
-
-  return isFeatureEnabled ? !isFeatureEnabled() : false;
+  try {
+    return Boolean(window.localStorage.getItem(ARBITER_FLAG_KEY));
+  } catch {
+    return false;
+  }
 };
-
-export const isAppTemporarilyDisabled = (id: string): boolean =>
-  TEMPORARILY_DISABLED_APPS.has(id) || isAppUnreleased(id);

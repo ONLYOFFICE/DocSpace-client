@@ -3,7 +3,7 @@
   "content": "For better discussion of submitted form data, ask the agent admin to switch this agent to <strong>{{model}}</strong> — a model we tested for form-related tasks.",
   "content_en_sha1_hash": "90f4d91f79a168c78d8e721f6332e9988be32a56",
   "created_at": "2026-06-09T09:42:55.441Z",
-  "updated_at": "2026-06-09T09:53:15.533Z",
+  "updated_at": "2026-08-28T14:38:40.335Z",
   "comment": {
     "text": "A text message in the chat interface suggesting a model switch for better form-related tasks; includes an HTML `<strong>` tag wrapping the `{{model}}` variable, which represents the name of the recommended AI model.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/recomended-model/index.tsx",
-      "line_number": 134,
+      "line_number": 126,
       "context": ") : null}\n \n {isChatUserState ? (\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n <CommonTrans\n i18nKey=\"RecommendedModelChatUserDescription\"\n values={{ model: recomendedModel }}\n />\n </Text>\n ) : null}",
       "module": "/libs/ui-kit"
     }

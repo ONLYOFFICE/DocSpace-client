@@ -3,7 +3,7 @@
   "content": "Synthesizes expert answers",
   "content_en_sha1_hash": "b3cef7ea7e3c810277cd6b447f35d953ad25ac95",
   "created_at": "2026-05-24T17:27:18.699Z",
-  "updated_at": "2026-05-24T18:41:08.742Z",
+  "updated_at": "2026-08-28T14:38:40.319Z",
   "comment": {
     "text": "Subtitle for the Arbiter feature item in the wizard overlay, describing the agent's capability.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 496,
+      "line_number": 480,
       "context": "className={`${styles.previewItem} ${styles.previewItemArbiter}`}\n >\n <div className={styles.previewItemBody}>\n <span className={styles.previewItemTitle}>{t(\"Common:ArbiterSectionTitle\")}</span>\n <span className={styles.previewItemMeta}>\n {t(\"Common:ArbiterSynthesizesAnswers\")}\n </span>\n </div>\n <div className={styles.previewItemModel}>\n <span className={styles.previewModelLabel}>{t(\"Common:AIAgentModel\")}</span>\n {renderModelControl(arbiterModelId, setArbiterModelId)}",
       "module": "/packages/sdk"
     }

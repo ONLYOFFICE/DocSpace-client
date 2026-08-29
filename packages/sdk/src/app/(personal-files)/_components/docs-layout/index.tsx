@@ -45,7 +45,7 @@ import type {
 } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TPathParts } from "@docspace/shared/types";
-import { FolderType, DeviceType, FileType } from "@docspace/shared/enums";
+import { FolderType, DeviceType } from "@docspace/shared/enums";
 import { RoomsType } from "@docspace/shared/enums";
 import FilesSelector from "@docspace/ui-kit/selectors/Files";
 import type {
@@ -122,7 +122,6 @@ import useRenameActions from "../../_hooks/useRenameActions";
 import useConvertActions from "../../_hooks/useConvertActions";
 import { useDocsSettingsStore } from "../../_store/DocsSettingsStore";
 import { useDocsUserStore } from "../../_store/DocsUserStore";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 
@@ -152,8 +151,9 @@ import {
 } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import { usePanelExclusivity } from "@/app/(docspace)/_hooks/usePanelExclusivity";
 import {
-  getOnlyofficeFileType,
-  attachFilesToChat,
+  useAttachHostFilesToChat,
+  notifyAlreadyAttached,
+  notifyAttachmentLimit,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 
 import styles from "./DocsLayout.module.scss";
@@ -942,7 +942,8 @@ const DocsLayoutCore = observer(
 );
 
 const DocsLayoutAi = observer((props: DocsLayoutProps) => {
-  const { useAttachmentsStore } = useStores();
+  const { t } = useTranslation(["Common"]);
+  const attachToChat = useAttachHostFilesToChat();
   const openChat = useOpenAiChat();
 
   // No `chatProps`: without an AI profile the panel shows the chat widget's own
@@ -958,21 +959,28 @@ const DocsLayoutAi = observer((props: DocsLayoutProps) => {
     (item: TFileItem) => {
       openChat();
 
-      const input = {
-        path: String(item.id),
-        title: item.title,
-        type: getOnlyofficeFileType(item.fileExst || item.title),
-        content: "",
-      };
-
-      const imageIndices =
-        item.fileType === FileType.Image ? new Set([0]) : new Set<number>();
-
-      attachFilesToChat(useAttachmentsStore, [input], imageIndices).catch((e) =>
-        toastr.error(e as string),
-      );
+      // The shared hook owns the whole attach contract — duplicate filter,
+      // attachment cap, loading chip, image bucket — so this action only has
+      // to report what it left out.
+      attachToChat([
+        {
+          id: item.id,
+          title: item.title,
+          fileExst: item.fileExst,
+          fileType: item.fileType,
+          // Carry the form metadata: the hook reads it to decide whether
+          // the chat offers the form-specific hints.
+          isForm: item.isForm,
+          externalDbTableName: item.externalDbTableName,
+        },
+      ])
+        .then(({ duplicates, skippedOverLimit }) => {
+          notifyAlreadyAttached(t, duplicates);
+          notifyAttachmentLimit(t, skippedOverLimit);
+        })
+        .catch((e: unknown) => toastr.error(e as string));
     },
-    [openChat, useAttachmentsStore],
+    [openChat, attachToChat, t],
   );
 
   const ai: DocsLayoutAiBindings = {

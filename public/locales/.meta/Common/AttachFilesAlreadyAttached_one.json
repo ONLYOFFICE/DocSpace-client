@@ -1,21 +1,21 @@
 {
-  "key_path": "IntegrationExamples",
-  "content": "Integration examples",
-  "content_en_sha1_hash": "60297aa2a3ac5f89baf109d372361add038feaa4",
-  "created_at": "2025-05-19T21:30:54.533Z",
-  "updated_at": "2026-08-14T14:58:32.808Z",
+  "key_path": "AttachFilesAlreadyAttached_one",
+  "content": "This file is already attached",
+  "content_en_sha1_hash": "ddff8c6d89cedbd4953bb01c416848b55d7bfbc8",
+  "created_at": "2026-08-28T14:37:57.348Z",
+  "updated_at": "2026-08-28T14:39:49.879Z",
   "comment": {
-    "text": "This is a section header in the Developer Tools settings. It introduces a list of examples demonstrating how to integrate ONLYOFFICE DocSpace with other applications.",
+    "text": "An info toast message appearing when a user attempts to attach a file that is already present.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:15:29.027Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-28T14:39:49.879Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/Integration.tsx",
-      "line_number": 81,
-      "context": "<div\n className={classNames(styles.integrationContainer, { [styles.dark]: !theme.isBase }, className)}\n style={{ \"--icon-arrow-color\": currentColorScheme?.main?.accent ?? \"\" } as React.CSSProperties}\n >\n <div className={classNames(styles.categoryHeader, { [styles.isMobile]: isMobile() }, \"integration-header\")}>\n {t(\"IntegrationExamples\")}\n </div>\n <Text lineHeight=\"20px\" color={theme.sdkPresets.secondaryColor}>\n {t(\"IntegrationDescription\")}\n </Text>\n <div className=\"icons\">",
-      "module": "/packages/client"
+      "file_path": "/libs/ui-kit/ai-agent/providers/files/notices.ts",
+      "line_number": 53,
+      "context": "*/\n export const notifyAlreadyAttached = (t: TFunction, count: number) => {\n if (count <= 0) return;\n toastr.info(\n count === 1\n ? t(\"Common:AttachFilesAlreadyAttached_one\", {\n count,\n defaultValue: \"This file is already attached\",\n })\n : t(\"Common:AttachFilesAlreadyAttached_other\", {\n count,",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

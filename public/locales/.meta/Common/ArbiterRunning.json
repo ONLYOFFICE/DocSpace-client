@@ -3,7 +3,7 @@
   "content": "Running...",
   "content_en_sha1_hash": "126eda8b2162832be2aa58128b67e9ae26d221c0",
   "created_at": "2026-05-24T17:27:18.544Z",
-  "updated_at": "2026-05-24T18:44:58.715Z",
+  "updated_at": "2026-08-28T14:38:40.313Z",
   "comment": {
     "text": "Status label indicating that the AI arbiter is currently active or streaming.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/PanelView.tsx",
-      "line_number": 66,
+      "line_number": 81,
       "context": "}: PanelViewProps) => {\n const { t } = useTranslation([\"Common\"]);\n const { status } = panel;\n const statusLabels: Record<PanelState[\"status\"], string> = {\n idle: \"\",\n streaming: t(\"Common:ArbiterRunning\"),\n done: t(\"Common:Done\"),\n error: t(\"Common:Error\"),\n aborted: t(\"Common:ArbiterStopped\"),\n };\n const label = statusLabels[status];",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
-      "line_number": 278,
-      "context": "{t(\"Common:ArbiterClear\")}\n </button>\n )}\n {runStatus !== \"idle\" && (\n <span className={styles.statusText}>\n {runStatus === \"running\" && t(\"Common:ArbiterRunning\")}\n {runStatus === \"done\" && t(\"Common:Done\")}\n {runStatus === \"error\" && t(\"Common:Error\")}\n {runStatus === \"aborted\" && t(\"Common:ArbiterStopped\")}\n </span>\n )}",
+      "line_number": 291,
+      "context": "{t(\"Common:ArbiterClear\")}\n </Link>\n ) : null}\n {runStatus !== \"idle\" ? (\n <Text fontSize=\"12px\" color=\"var(--arbiter-muted)\" noSelect>\n {runStatus === \"running\" && t(\"Common:ArbiterRunning\")}\n {runStatus === \"done\" && t(\"Common:Done\")}\n {runStatus === \"error\" && t(\"Common:Error\")}\n {runStatus === \"aborted\" && t(\"Common:ArbiterStopped\")}\n </Text>\n ) : null}",
       "module": "/packages/sdk"
     }
   ],

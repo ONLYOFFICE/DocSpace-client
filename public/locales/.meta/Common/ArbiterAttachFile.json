@@ -3,7 +3,7 @@
   "content": "Attach file",
   "content_en_sha1_hash": "0c431f4969959dd3463afd487244f98660be5ae0",
   "created_at": "2026-05-24T17:27:18.054Z",
-  "updated_at": "2026-08-28T12:19:49.756Z",
+  "updated_at": "2026-08-28T14:38:40.323Z",
   "comment": {
     "text": "Button label that opens a file selection dialog to upload a file to the AI Arbiter.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Unable to identify current user.",
   "content_en_sha1_hash": "0562f9c70c495127794a6758ea127a2e488e4fac",
   "created_at": "2026-05-24T17:27:18.757Z",
-  "updated_at": "2026-08-28T12:19:49.753Z",
+  "updated_at": "2026-08-28T14:38:40.316Z",
   "comment": {
     "text": "Error text in the AI Arbiter wizard overlay that appears during the bootstrap phase if the user ID cannot be identified.",
     "is_auto": true,

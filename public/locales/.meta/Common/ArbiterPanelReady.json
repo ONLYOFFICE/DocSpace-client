@@ -3,7 +3,7 @@
   "content": "Your AI Arbiter panel is ready.",
   "content_en_sha1_hash": "7e6048167c6389e95de1839ff92292b601a617c7",
   "created_at": "2026-05-24T17:27:18.304Z",
-  "updated_at": "2026-08-28T12:19:49.754Z",
+  "updated_at": "2026-08-28T14:38:40.320Z",
   "comment": {
     "text": "Status text within a wizard overlay that appears when the AI Arbiter panel initialization is complete.",
     "is_auto": true,

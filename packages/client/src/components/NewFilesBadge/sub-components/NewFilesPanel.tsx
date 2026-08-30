@@ -50,7 +50,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import type { Nullable } from "@docspace/shared/types";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
-import { ButtonKeys } from "@docspace/shared/enums";
+import { ButtonKeys, RoomsType } from "@docspace/shared/enums";
 
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import type {
@@ -64,6 +64,18 @@ import { NewFilesPanelItem } from "./NewFilesPanelItem";
 import styles from "../new-files-panel.module.scss";
 
 const MIN_LOADER_TIMER = 500;
+
+const filterRoomGroups = (groups: TNewFiles[], formsOnly: boolean) =>
+  groups
+    .map(({ date, items }) => ({
+      date,
+      items: items.filter(
+        (item) =>
+          !("room" in item) ||
+          (item.room.roomType === RoomsType.FormRoom) === formsOnly,
+      ),
+    }))
+    .filter(({ items }) => items.length > 0);
 
 export const NewFilesPanelComponent = ({
   position,
@@ -84,7 +96,8 @@ export const NewFilesPanelComponent = ({
   const dataFetched = React.useRef<boolean>(false);
   const timerRef = React.useRef<Nullable<NodeJS.Timeout>>(null);
 
-  const isRooms = folderId === "rooms";
+  const isForms = folderId === "forms";
+  const isRooms = folderId === "rooms" || isForms;
   const isAgents = folderId === "agents";
 
   const markAsReadAction = React.useCallback(async () => {
@@ -134,7 +147,7 @@ export const NewFilesPanelComponent = ({
         const startLoaderTime = new Date();
 
         const newFiles = isRooms
-          ? await api.files.getNewFiles(folderId)
+          ? await api.files.getNewFiles("rooms")
           : isAgents
             ? await api.files.getNewFilesAgents()
             : await api.files.getNewFolderFiles(folderId);
@@ -142,7 +155,7 @@ export const NewFilesPanelComponent = ({
         dataFetched.current = true;
         requestRunning.current = false;
 
-        setData(newFiles);
+        setData(isRooms ? filterRoomGroups(newFiles, isForms) : newFiles);
         const currentDate = new Date();
 
         const ms = currentDate.getTime() - startLoaderTime.getTime();
@@ -166,7 +179,7 @@ export const NewFilesPanelComponent = ({
     requestRunning.current = true;
 
     getData();
-  }, [folderId, isRooms, onClose, setIsLoading]);
+  }, [folderId, isRooms, isForms, isAgents, onClose, setIsLoading]);
 
   React.useEffect(() => {
     const onKeyUp = (e: KeyboardEvent) => {

@@ -3,7 +3,7 @@
   "content": "Synthesizes expert answers",
   "content_en_sha1_hash": "b3cef7ea7e3c810277cd6b447f35d953ad25ac95",
   "created_at": "2026-05-24T17:27:18.699Z",
-  "updated_at": "2026-08-28T12:19:49.754Z",
+  "updated_at": "2026-08-28T14:38:40.319Z",
   "comment": {
     "text": "Subtitle for the Arbiter feature item in the wizard overlay, describing the agent's capability.",
     "is_auto": true,

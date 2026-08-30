@@ -228,7 +228,7 @@ const PluginComponentBase = inject(
             const { onChange, ...restProps } = elementProps as ICheckbox;
 
             const onChangeAction = () => {
-              const message = onChange();
+              const message = onChange?.();
               dispatch(message);
             };
 
@@ -239,7 +239,7 @@ const PluginComponentBase = inject(
             const { onChange, ...restProps } = elementProps as IToggleButton;
 
             const onChangeAction = () => {
-              const message = onChange();
+              const message = onChange?.();
               dispatch(message);
             };
 
@@ -253,7 +253,7 @@ const PluginComponentBase = inject(
             const onChangeAction = (
               e: React.ChangeEvent<HTMLTextAreaElement>,
             ) => {
-              const message = onChange(e.target.value);
+              const message = onChange?.(e.target.value);
               dispatch(message);
             };
 
@@ -285,8 +285,7 @@ const PluginComponentBase = inject(
                   | React.ChangeEvent<HTMLInputElement>
                   | React.FocusEvent<HTMLInputElement>,
               ) => {
-                if (!eventHandler) return;
-                dispatch(eventHandler(e.target.value));
+                dispatch(eventHandler?.(e.target.value));
               };
 
             return (
@@ -322,7 +321,7 @@ const PluginComponentBase = inject(
                 if (isSaveButton) setSettingsModalRequestRunning?.(true);
               }
 
-              const message = await onClick();
+              const message = await onClick?.();
               dispatch(message);
 
               setIsRequestRunning?.(false);
@@ -362,8 +361,7 @@ const PluginComponentBase = inject(
             const onSelectAction = async (
               option: React.ComponentProps<typeof ComboBox>["options"][number],
             ) => {
-              if (!onSelect) return;
-              const message = await onSelect(
+              const message = await onSelect?.(
                 option as IComboBox["options"][number],
               );
               dispatch(message);
@@ -415,8 +413,7 @@ const PluginComponentBase = inject(
               elementProps as IIconButton;
 
             const onClickAction = async () => {
-              if (!onClick) return;
-              const message = await onClick();
+              const message = await onClick?.();
               dispatch(message);
             };
 
@@ -445,8 +442,7 @@ const PluginComponentBase = inject(
             const { text, onClick, ...restProps } = elementProps as ILink;
 
             const onClickAction = async () => {
-              if (!onClick) return;
-              const message = await onClick();
+              const message = await onClick?.();
               dispatch(message);
             };
 
@@ -486,7 +482,7 @@ const WrappedComponent = ({
 
   const updatePropsContext = React.useCallback(
     (newContextProps: NonNullable<IMessage["contextProps"]>) => {
-      newContextProps.forEach(({ name, props }) => {
+      newContextProps?.forEach(({ name, props }) => {
         if (saveButton && name === saveButton.contextName) {
           setSaveButtonProps?.((val) => ({ ...val, props }) as ButtonGroup);
           return;

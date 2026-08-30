@@ -3,7 +3,7 @@
   "content": "Expert panels",
   "content_en_sha1_hash": "233f0c3def7cabe3aea5b5518c9baedf03fb1641",
   "created_at": "2026-05-24T17:27:18.165Z",
-  "updated_at": "2026-08-28T12:19:49.757Z",
+  "updated_at": "2026-08-28T14:38:40.324Z",
   "comment": {
     "text": "Section title for the area displaying a grid of available expert panels in the AI Arbiter interface.",
     "is_auto": true,

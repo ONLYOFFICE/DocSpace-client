@@ -3,7 +3,7 @@
   "content": "Setup cancelled.",
   "content_en_sha1_hash": "832cb4611f9e73aec2535851c85629b48686f5a7",
   "created_at": "2026-05-24T17:27:18.572Z",
-  "updated_at": "2026-08-28T12:19:49.753Z",
+  "updated_at": "2026-08-28T14:38:40.317Z",
   "comment": {
     "text": "An informational toast message that appears when the AI Arbiter setup process is aborted.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Creating your agents...",
   "content_en_sha1_hash": "f6eee1b731089a4611f5b6dc1825db8266ce91e6",
   "created_at": "2026-05-24T17:27:18.110Z",
-  "updated_at": "2026-08-28T12:19:49.754Z",
+  "updated_at": "2026-08-28T14:38:40.319Z",
   "comment": {
     "text": "Introductory status text in a wizard overlay that appears during the agent provisioning process.",
     "is_auto": true,

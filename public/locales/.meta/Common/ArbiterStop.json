@@ -3,7 +3,7 @@
   "content": "Stop",
   "content_en_sha1_hash": "9e253470c876ee6d5c720eb777aeb82d4c26e28f",
   "created_at": "2026-05-24T17:27:18.671Z",
-  "updated_at": "2026-08-28T12:19:49.752Z",
+  "updated_at": "2026-08-28T14:38:40.316Z",
   "comment": {
     "text": "Button label used to interrupt an ongoing AI generation or process.",
     "is_auto": true,

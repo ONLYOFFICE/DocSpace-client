@@ -3,7 +3,7 @@
   "content": "Reset AI Arbiter configuration",
   "content_en_sha1_hash": "abd8dba2da54d635cc993fb533cb1cf784695528",
   "created_at": "2026-05-24T17:27:18.460Z",
-  "updated_at": "2026-08-28T12:19:49.751Z",
+  "updated_at": "2026-08-28T14:38:40.315Z",
   "comment": {
     "text": "Dialog title and button tooltip for the action of resetting the AI Arbiter configuration.",
     "is_auto": true,

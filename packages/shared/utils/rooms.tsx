@@ -88,6 +88,20 @@ export const getCreateRoomTypes = () =>
     ? RoomsTypeValues
     : RoomsTypeValues.filter((type) => type !== RoomsTypePrivate);
 
+const getRoomCreationAdditionalParams = (roomType: RoomsType) => {
+  const additionalParams = {
+    indexing: roomType === RoomsType.VirtualDataRoom ? true : undefined,
+    denyDownload: roomType === RoomsType.VirtualDataRoom ? true : undefined,
+    lifetime: undefined, // Skip lifetime for now
+    watermark:
+      roomType === RoomsType.VirtualDataRoom
+        ? { rotate: -45, additions: 1 }
+        : undefined,
+  };
+
+  return additionalParams;
+};
+
 const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
   const startRoomParams = {
     type: startRoomType,
@@ -112,6 +126,7 @@ const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
     previewIcon: null,
     saveFormAsXLSX: true,
     sendFormToExternalDB: true,
+    ...getRoomCreationAdditionalParams(startRoomType),
   };
 
   return startRoomParams;
@@ -223,20 +238,6 @@ const getFetchedRoomParams = (
     logo: item.logo,
   };
   return fetchedRoomParams;
-};
-
-const getRoomCreationAdditionalParams = (roomType: RoomsType) => {
-  const additionalParams = {
-    indexing: roomType === RoomsType.VirtualDataRoom ? true : undefined,
-    denyDownload: roomType === RoomsType.VirtualDataRoom ? true : undefined,
-    lifetime: undefined, // Skip lifetime for now
-    watermark:
-      roomType === RoomsType.VirtualDataRoom
-        ? { rotate: -45, additions: 1 }
-        : undefined,
-  };
-
-  return additionalParams;
 };
 
 export {

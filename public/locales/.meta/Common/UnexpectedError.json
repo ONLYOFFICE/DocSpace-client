@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-08-27T15:37:55.638Z",
+  "updated_at": "2026-08-28T14:38:40.177Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -229,7 +229,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 916,
+      "line_number": 930,
       "context": "// with the status only in the message (`HTTP <status>`), not as a\n // property, so the message is checked alongside the axios-style shape.\n const status = error?.response?.status ?? error?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(error?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
       "module": "/packages/client"
     },

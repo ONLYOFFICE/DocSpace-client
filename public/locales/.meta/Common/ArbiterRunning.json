@@ -3,7 +3,7 @@
   "content": "Running...",
   "content_en_sha1_hash": "126eda8b2162832be2aa58128b67e9ae26d221c0",
   "created_at": "2026-05-24T17:27:18.544Z",
-  "updated_at": "2026-08-28T12:19:49.750Z",
+  "updated_at": "2026-08-28T14:38:40.313Z",
   "comment": {
     "text": "Status label indicating that the AI arbiter is currently active or streaming.",
     "is_auto": true,

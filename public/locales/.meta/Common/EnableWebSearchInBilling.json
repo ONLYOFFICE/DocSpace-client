@@ -3,7 +3,7 @@
   "content": "Enable web search in Billing",
   "content_en_sha1_hash": "d55653238ae22818c1e4bc2e365ec90048e1439d",
   "created_at": "2026-08-26T14:07:59.069Z",
-  "updated_at": "2026-08-26T14:09:15.713Z",
+  "updated_at": "2026-08-28T14:38:40.333Z",
   "comment": {
     "text": "A setting label for a toggle or checkbox that activates web search functionality within the Billing section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/providers/index.tsx",
-      "line_number": 485,
+      "line_number": 496,
       "context": "// a host-translated string there.\n const aiChatTranslations = useMemo(\n () =>\n isStandalone\n ? undefined\n : { EnableWebSearch: t(\"Common:EnableWebSearchInBilling\") },\n [isStandalone, t],\n );\n \n // Ids of attached files the backend flagged as analyzable. The attachments\n // store keeps only `{id, title, kind, path, type}` per ref, so `canAnalyze`",
       "module": "/libs/ui-kit"
     }

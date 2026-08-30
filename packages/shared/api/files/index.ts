@@ -246,6 +246,8 @@ export async function getFoldersTree() {
 
     const name = getFolderClassNameByType(type);
 
+    const newCount = type === FolderType.Forms ? current.new : newItems;
+
     return {
       ...current,
       id,
@@ -258,9 +260,9 @@ export async function getFoldersTree() {
       pathParts,
       foldersCount,
       filesCount,
-      newItems,
+      newItems: newCount,
       security,
-      new: newItems,
+      new: newCount,
     } as TFolder;
   });
 }

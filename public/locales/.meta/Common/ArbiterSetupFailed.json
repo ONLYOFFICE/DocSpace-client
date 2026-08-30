@@ -3,7 +3,7 @@
   "content": "Setup failed",
   "content_en_sha1_hash": "6a5df03125b9dc30e1995ebaf45f941e983e7774",
   "created_at": "2026-05-24T17:27:18.585Z",
-  "updated_at": "2026-08-28T12:19:49.755Z",
+  "updated_at": "2026-08-28T14:38:40.321Z",
   "comment": {
     "text": "Header in the wizard overlay that appears when the AI Arbiter setup process fails.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Retry",
   "content_en_sha1_hash": "9f5cd8a2e8807d73efa02c844bfbca9fe552b283",
   "created_at": "2026-05-24T17:27:18.516Z",
-  "updated_at": "2026-08-28T12:19:49.755Z",
+  "updated_at": "2026-08-28T14:38:40.320Z",
   "comment": {
     "text": "Button label used to restart the AI arbiter process after an error or interruption.",
     "is_auto": true,

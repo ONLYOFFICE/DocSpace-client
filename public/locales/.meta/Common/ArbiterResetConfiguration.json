@@ -3,7 +3,7 @@
   "content": "Reset configuration",
   "content_en_sha1_hash": "1d7c76d34a5f676f0c4ae7099ecae62255f24167",
   "created_at": "2026-05-24T17:27:18.446Z",
-  "updated_at": "2026-05-24T18:47:59.495Z",
+  "updated_at": "2026-08-28T12:19:49.756Z",
   "comment": {
     "text": "Button label for a floating action button used to initiate the AI Arbiter configuration reset process.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
-      "line_number": 202,
-      "context": "type=\"button\"\n className={styles.resetFab}\n onClick={() => setResetDialogVisible(true)}\n title={t(\"Common:ArbiterResetConfigurationTitle\")}\n >\n {t(\"Common:ArbiterResetConfiguration\")}\n </button>\n \n <div className={styles.pageHeader}>\n <p className={styles.pageTitle}>{t(\"Common:ArbiterTitle\")}</p>\n <p className={styles.pageDescription}>",
+      "line_number": 217,
+      "context": "</Text>\n </div>\n <div className={styles.pageHeaderActions}>\n <Button\n size={ButtonSize.small}\n label={t(\"Common:ArbiterResetConfiguration\")}\n title={t(\"Common:ArbiterResetConfigurationTitle\")}\n isDisabled={isRunning}\n onClick={() => setResetDialogVisible(true)}\n />\n </div>",
       "module": "/packages/sdk"
     }
   ],

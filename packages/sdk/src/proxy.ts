@@ -110,6 +110,16 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
+  if (request.nextUrl.pathname === "/ai-arbiter") {
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
+
   if (request.nextUrl.pathname === "/chat") {
     requestHeaders.set(AGENT_ID_HEADER, searchParams.get("agentId") ?? "");
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
@@ -295,6 +305,7 @@ export const config = {
     "/personal-files",
     "/personal-files/:path*",
     "/chat",
+    "/ai-arbiter",
     "/ai-agents",
     "/ai-agents/:path*",
     "/rooms",

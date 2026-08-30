@@ -474,7 +474,7 @@ const SimpleRoom = (props) => {
             </CheckboxGroup>
           </ControlsSection>
 
-          <Integration className="integration-examples" />
+          <Integration compact className="integration-examples" />
         </Controls>
       </Container>
 

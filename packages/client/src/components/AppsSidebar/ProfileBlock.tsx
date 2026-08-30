@@ -70,11 +70,25 @@ import { DeviceType } from "@docspace/shared/enums";
 
 type ProfileBlockInjectedProps = Pick<ArticleProfileProps, "user" | "showText">;
 
+// `isShowLiveChat` is not an ArticleProfile prop - it is injected only so this
+// wrapper observes it. The menu model is built inside ArticleProfile by calling
+// `getActions`, which `makeAutoObservable` turns into a MobX action, and actions
+// run untracked: the `checked` flag it reads there can never subscribe anyone.
+// Observing the flag here is what re-renders ArticleProfile, and with it the
+// "Live chat" switch, when the store flips.
+type ProfileBlockOwnProps = ArticleProfileProps & {
+  isShowLiveChat?: boolean;
+};
+
 // ArticleProfile switches to compact (tablet) mode based on currentDeviceType.
 // We mirror that: when the sidebar is collapsed (showText=false) pass tablet,
 // so the avatar shrinks and avatar-click opens the context menu instead of navigating.
 const ProfileBlockInner = observer(
-  ({ showText, ...rest }: ArticleProfileProps) => (
+  ({
+    showText,
+    isShowLiveChat: _isShowLiveChat,
+    ...rest
+  }: ProfileBlockOwnProps) => (
     <ArticleProfile
       {...rest}
       showText={showText}
@@ -90,6 +104,7 @@ const ProfileBlockConnected = inject<TStore>(
     currentDeviceType: settingsStore.currentDeviceType,
     getActions: profileActionsStore.getActions,
     onProfileClick: profileActionsStore.onProfileClick,
+    isShowLiveChat: profileActionsStore.isShowLiveChat,
   }),
 )(ProfileBlockInner) as unknown as React.ComponentType<ProfileBlockInjectedProps>;
 

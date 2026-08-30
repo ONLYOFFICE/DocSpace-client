@@ -371,6 +371,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       "@anthropic-ai/sdk",
       "@assistant-ui/react-markdown",
       "@codemirror/lang-json",
+      "codemirror",
       "@google/genai",
       "@mistralai/mistralai",
       "@radix-ui/react-dialog",

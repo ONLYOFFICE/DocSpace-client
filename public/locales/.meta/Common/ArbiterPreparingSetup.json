@@ -3,7 +3,7 @@
   "content": "Preparing your setup wizard...",
   "content_en_sha1_hash": "6037d603e463069d360e522e3e8d490e15cf7b40",
   "created_at": "2026-05-24T17:27:18.319Z",
-  "updated_at": "2026-05-24T18:51:23.706Z",
+  "updated_at": "2026-08-28T12:19:49.753Z",
   "comment": {
     "text": "Status message displayed in a loading overlay with a spinner during the initialization of the setup wizard.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 401,
+      "line_number": 388,
       "context": "const renderBootstrap = () => (\n <div className={styles.bootstrapBody}>\n <div className={styles.spinner} aria-hidden=\"true\" />\n <Text as=\"p\" className={styles.bootstrapText}>\n {t(\"Common:ArbiterPreparingSetup\")}\n </Text>\n </div>\n );\n \n const renderPreview = () => {",
       "module": "/packages/sdk"
     }

@@ -4,7 +4,7 @@
   "DashboardCreate": "Kies een tekstdocument, spreadsheet, presentatie, PDF-formulier, of start een AI-chat. Nieuwe documenten worden opgeslagen in {{files}}, klaar wanneer u ze nodig heeft.",
   "DashboardCreateTitle": "Begin met maken",
   "DashboardDevTools": "Dit is uw ontwikkelaarshub: API's, SDK's, plug-ins, webhooks en meer. Klik op een kaart voor meer informatie of om te beginnen.",
-  "DashboardDevToolsTitle": "Voor ontwikkelaars",
+  "DashboardDevToolsTitle": "Bouwen met {{organizationName}}",
   "DashboardIntegrations": "Gebruikt u al een ander platform? Koppel het en breng editors en apps rechtstreeks naar de tools die uw team al gebruikt — zonder code, zonder te migreren.",
   "DashboardIntegrationsTitle": "Koppel uw platform",
   "DashboardOverview": "Deze pagina is maar één klik verwijderd — open {{overview}} in het zijpaneel wanneer u hem nodig hebt.",

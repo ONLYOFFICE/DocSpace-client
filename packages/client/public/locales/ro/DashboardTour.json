@@ -4,7 +4,7 @@
   "DashboardCreate": "Alegeți un document text, o foaie de calcul, o prezentare, un formular PDF sau porniți un chat IA. Documentele noi sunt salvate în {{files}}, gata oricând aveți nevoie de ele.",
   "DashboardCreateTitle": "Începeți să creați",
   "DashboardDevTools": "Acesta este centrul dumneavoastră pentru dezvoltatori: API-uri, SDK-uri, plugin-uri, webhook-uri și multe altele. Faceți clic pe orice card pentru a afla mai multe sau pentru a începe.",
-  "DashboardDevToolsTitle": "Pentru dezvoltatori",
+  "DashboardDevToolsTitle": "Dezvoltați cu {{organizationName}}",
   "DashboardIntegrations": "Utilizați deja o altă platformă? Conectați-o și aduceți editoarele și aplicațiile direct în instrumentele pe care echipa dumneavoastră le folosește deja — fără cod, fără nimic de migrat.",
   "DashboardIntegrationsTitle": "Conectați-vă platforma",
   "DashboardOverview": "Această pagină este mereu la un clic distanță — deschideți {{overview}} în bara laterală ori de câte ori vreți să reveniți la ea.",

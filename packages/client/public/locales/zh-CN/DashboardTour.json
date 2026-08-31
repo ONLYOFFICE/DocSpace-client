@@ -4,7 +4,7 @@
   "DashboardCreate": "选择文本文档、电子表格、演示文稿、PDF 表单，或开始一段 AI 对话。新建的文件会保存到 {{files}}，随时可用。",
   "DashboardCreateTitle": "现在就动手创建",
   "DashboardDevTools": "这里是你的开发者中心：API、SDK、插件、Webhook 等等。点击任意卡片即可了解详情或立即开始使用。",
-  "DashboardDevToolsTitle": "面向开发者",
+  "DashboardDevToolsTitle": "使用{{organizationName}}构建",
   "DashboardIntegrations": "已经在使用其他平台？在这里接入，把编辑器和应用直接接入团队现有的工具——无需代码，也不用迁移数据。",
   "DashboardIntegrationsTitle": "连接你的平台",
   "DashboardOverview": "这个页面永远只有一次点击之遥——想回到这里时，打开侧边栏中的 {{overview}} 即可。",

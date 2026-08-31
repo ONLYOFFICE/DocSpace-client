@@ -4,7 +4,7 @@
   "DashboardCreate": "Izaberite tekstualni dokument, tabelu, prezentaciju, PDF obrazac ili pokrenite AI razgovor. Novi dokumenti se čuvaju u {{files}}, spremni kad god vam zatrebaju.",
   "DashboardCreateTitle": "Počnite da stvarate",
   "DashboardDevTools": "Ovo je vaš centar za programere: API-ji, SDK-ovi, dodaci, webhooks i još mnogo toga. Kliknite na bilo koju karticu da saznate više ili počnete.",
-  "DashboardDevToolsTitle": "Za programere",
+  "DashboardDevToolsTitle": "Razvijajte uz {{organizationName}}",
   "DashboardIntegrations": "Već koristite drugu platformu? Povežite je i unesite uređivače i aplikacije direktno u alatke koje vaš tim već koristi — bez koda, bez migracije.",
   "DashboardIntegrationsTitle": "Povežite svoju platformu",
   "DashboardOverview": "Ova stranica je uvek udaljena jedan klik — otvorite {{overview}} u bočnoj traci kad god poželite da joj se vratite.",

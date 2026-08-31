@@ -4,7 +4,7 @@
   "DashboardCreate": "Wählen Sie ein Textdokument, eine Tabelle, eine Präsentation, ein PDF-Formular oder starten Sie einen KI-Chat. Neue Dokumente werden in {{files}} gespeichert und stehen dort jederzeit bereit.",
   "DashboardCreateTitle": "Beginnen Sie mit dem Erstellen",
   "DashboardDevTools": "Das ist Ihre Entwickler-Zentrale: APIs, SDKs, Plugins, Webhooks und mehr. Klicken Sie auf eine Karte, um mehr zu erfahren oder loszulegen.",
-  "DashboardDevToolsTitle": "Für Entwickler",
+  "DashboardDevToolsTitle": "Entwickeln mit {{organizationName}}",
   "DashboardIntegrations": "Nutzen Sie bereits eine andere Plattform? Binden Sie sie ein und holen Sie Editoren und Apps direkt in die Tools, die Ihr Team schon verwendet – kein Code, kein Umzug nötig.",
   "DashboardIntegrationsTitle": "Verbinden Sie Ihre Plattform",
   "DashboardOverview": "Diese Seite ist nur einen Klick entfernt – öffnen Sie {{overview}} in der Seitenleiste, wann immer Sie sie brauchen.",

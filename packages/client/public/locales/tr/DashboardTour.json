@@ -4,7 +4,7 @@
   "DashboardCreate": "Bir metin belgesi, elektronik tablo, sunum, PDF formu seçin veya bir yapay zeka sohbeti başlatın. Yeni belgeler {{files}} bölümüne kaydedilir ve ihtiyaç duyduğunuzda hazır olur.",
   "DashboardCreateTitle": "Oluşturmaya başlayın",
   "DashboardDevTools": "Burası geliştirici merkeziniz: API'ler, SDK'lar, eklentiler, webhook'lar ve daha fazlası. Daha fazla bilgi almak veya başlamak için herhangi bir karta tıklayın.",
-  "DashboardDevToolsTitle": "Geliştiriciler için",
+  "DashboardDevToolsTitle": "{{organizationName}} ile geliştirin",
   "DashboardIntegrations": "Zaten başka bir platform mu kullanıyorsunuz? Onu bağlayın; düzenleyicileri ve uygulamaları doğrudan ekibinizin hâlihazırda kullandığı araçların içine taşıyın — kod yazmadan, taşınacak hiçbir şey olmadan.",
   "DashboardIntegrationsTitle": "Platformunuzu bağlayın",
   "DashboardOverview": "Bu sayfa yalnızca bir tık uzağınızda — ihtiyaç duyduğunuzda kenar çubuğundaki {{overview}} bölümünü açın.",

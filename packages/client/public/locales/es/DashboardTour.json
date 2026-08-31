@@ -4,7 +4,7 @@
   "DashboardCreate": "Elija un documento de texto, una hoja de cálculo, una presentación, un formulario PDF, o inicie un chat de IA. Los nuevos documentos se guardan en {{files}}, listos siempre que los necesite.",
   "DashboardCreateTitle": "Empiece a crear",
   "DashboardDevTools": "Este es su centro para desarrolladores: API, SDK, plugins, webhooks y más. Haga clic en cualquier tarjeta para obtener más información o empezar.",
-  "DashboardDevToolsTitle": "Para desarrolladores",
+  "DashboardDevToolsTitle": "Desarrolle con {{organizationName}}",
   "DashboardIntegrations": "¿Ya usa otra plataforma? Conéctela y lleve los editores y aplicaciones directamente a las herramientas que su equipo ya utiliza: sin código, sin nada que migrar.",
   "DashboardIntegrationsTitle": "Conecte su plataforma",
   "DashboardOverview": "Esta página está a solo un clic: abra {{overview}} en la barra lateral siempre que la necesite.",

@@ -4,7 +4,7 @@
   "DashboardCreate": "Chọn tài liệu văn bản, bảng tính, bản trình bày, biểu mẫu PDF, hoặc bắt đầu trò chuyện AI. Tài liệu mới sẽ được lưu vào {{files}}, sẵn sàng bất cứ khi nào bạn cần.",
   "DashboardCreateTitle": "Bắt đầu tạo",
   "DashboardDevTools": "Đây là trung tâm dành cho nhà phát triển của bạn: API, SDK, plugin, webhook và nhiều hơn nữa. Nhấp vào bất kỳ thẻ nào để tìm hiểu thêm hoặc bắt đầu.",
-  "DashboardDevToolsTitle": "Dành cho nhà phát triển",
+  "DashboardDevToolsTitle": "Xây dựng với {{organizationName}}",
   "DashboardIntegrations": "Bạn đang dùng một nền tảng khác? Hãy kết nối nó và mang các trình soạn thảo cùng ứng dụng vào ngay trong những công cụ mà nhóm của bạn đang sử dụng — không cần viết mã, không phải di chuyển gì cả.",
   "DashboardIntegrationsTitle": "Kết nối nền tảng của bạn",
   "DashboardOverview": "Trang này luôn chỉ cách một cú nhấp — mở {{overview}} ở thanh bên bất cứ khi nào bạn muốn quay lại đây.",

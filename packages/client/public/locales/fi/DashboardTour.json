@@ -4,7 +4,7 @@
   "DashboardCreate": "Valitse tekstiasiakirja, laskentataulukko, esitys, PDF-lomake tai aloita tekoälykeskustelu. Uudet asiakirjat tallentuvat osioon {{files}}, josta löydät ne aina tarvittaessa.",
   "DashboardCreateTitle": "Ala luoda",
   "DashboardDevTools": "Tämä on kehittäjien keskuksesi: API:t, SDK:t, lisäosat, webhookit ja paljon muuta. Napsauta mitä tahansa korttia saadaksesi lisätietoa tai päästäksesi alkuun.",
-  "DashboardDevToolsTitle": "Kehittäjille",
+  "DashboardDevToolsTitle": "Kehitä {{organizationName}}-palvelulla",
   "DashboardIntegrations": "Käytätkö jo toista alustaa? Yhdistä se, niin saat editorit ja sovellukset suoraan niihin työkaluihin, joita tiimisi jo käyttää – ei koodia, ei mitään siirrettävää.",
   "DashboardIntegrationsTitle": "Yhdistä alustasi",
   "DashboardOverview": "Tämä sivu on aina vain yhden klikkauksen päässä — avaa {{overview}} sivupalkista aina, kun tarvitset sitä.",

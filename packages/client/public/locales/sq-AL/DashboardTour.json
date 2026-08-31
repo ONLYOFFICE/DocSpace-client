@@ -4,7 +4,7 @@
   "DashboardCreate": "Zgjidhni një dokument teksti, një fletëllogaritëse, një prezantim, një formular PDF, ose filloni një bisedë IA. Dokumentet e reja ruhen te {{files}}, gati sa herë që ju duhen.",
   "DashboardCreateTitle": "Filloni të krijoni",
   "DashboardDevTools": "Ky është qendra juaj për zhvilluesit: API-të, SDK-të, shtojcat, webhook-ët dhe më shumë. Klikoni në çdo kartë për të mësuar më shumë ose për të filluar.",
-  "DashboardDevToolsTitle": "Për zhvilluesit",
+  "DashboardDevToolsTitle": "Ndërtoni me {{organizationName}}",
   "DashboardIntegrations": "Përdorni tashmë një platformë tjetër? Lidheni dhe sillni redaktorët e aplikacionet direkt në mjetet që ekipi juaj përdor tashmë — pa kod, asgjë për të migruar.",
   "DashboardIntegrationsTitle": "Lidhni platformën tuaj",
   "DashboardOverview": "Kjo faqe është vetëm një klikim larg — hapni {{overview}} në shiritin anësor sa herë që keni nevojë për të.",

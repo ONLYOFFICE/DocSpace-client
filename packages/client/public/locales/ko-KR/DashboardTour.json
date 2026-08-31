@@ -4,7 +4,7 @@
   "DashboardCreate": "텍스트 문서, 스프레드시트, 프레젠테이션, PDF 양식 중에서 선택하거나 AI 채팅을 시작하세요. 새 문서는 {{files}}에 저장되어 필요할 때 언제든지 찾을 수 있습니다.",
   "DashboardCreateTitle": "만들기 시작하기",
   "DashboardDevTools": "여기는 개발자 허브입니다: API, SDK, 플러그인, 웹훅 등. 카드를 클릭하면 자세히 알아보거나 바로 시작할 수 있습니다.",
-  "DashboardDevToolsTitle": "개발자용",
+  "DashboardDevToolsTitle": "{{organizationName}} 기반으로 개발하기",
   "DashboardIntegrations": "이미 다른 플랫폼을 사용하고 계신가요? 연결하면 편집기와 앱을 팀이 이미 사용 중인 도구 안으로 그대로 가져올 수 있습니다. 별도의 코드도, 데이터 이전도 필요 없습니다.",
   "DashboardIntegrationsTitle": "플랫폼 연결하기",
   "DashboardOverview": "이 페이지는 언제나 클릭 한 번이면 열립니다. 다시 돌아오고 싶을 때는 사이드바에서 {{overview}}를 여세요.",

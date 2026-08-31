@@ -4,7 +4,7 @@
   "DashboardCreate": "テキスト文書、スプレッドシート、プレゼンテーション、PDFフォームを選ぶか、AIチャットを始めましょう。新しく作成したものは{{files}}に保存され、いつでも利用できます。",
   "DashboardCreateTitle": "作成を始めましょう",
   "DashboardDevTools": "ここは開発者向けのハブです。API、SDK、プラグイン、Webhookなど、さまざまなツールが揃っています。カードをクリックすると、詳細を確認したり、すぐに使い始めたりできます。",
-  "DashboardDevToolsTitle": "開発者向け",
+  "DashboardDevToolsTitle": "{{organizationName}}で開発する",
   "DashboardIntegrations": "すでに他のプラットフォームをお使いですか？接続すれば、エディターやアプリを、チームがすでに使っているツールの中でそのまま利用できます。コードの記述も移行も不要です。",
   "DashboardIntegrationsTitle": "プラットフォームを接続",
   "DashboardOverview": "このページはいつでもワンクリックで開けます。戻りたくなったら、サイドバーの{{overview}}を開いてください。",

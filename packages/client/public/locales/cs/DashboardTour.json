@@ -4,7 +4,7 @@
   "DashboardCreate": "Vyberte textový dokument, tabulku, prezentaci, PDF formulář, nebo zahajte AI chat. Nové dokumenty se ukládají do {{files}}, kde je najdete, kdykoli je budete potřebovat.",
   "DashboardCreateTitle": "Začněte tvořit",
   "DashboardDevTools": "Toto je vaše centrum pro vývojáře: API, SDK, pluginy, webhooky a další. Kliknutím na libovolnou kartu se dozvíte více nebo začnete.",
-  "DashboardDevToolsTitle": "Pro vývojáře",
+  "DashboardDevToolsTitle": "Vyvíjejte s {{organizationName}}",
   "DashboardIntegrations": "Používáte už jinou platformu? Připojte ji a přineste editory i aplikace přímo do nástrojů, které váš tým už používá — žádný kód, nic k migraci.",
   "DashboardIntegrationsTitle": "Připojte svou platformu",
   "DashboardOverview": "Tato stránka je vždy na jedno kliknutí — kdykoli se sem budete chtít vrátit, otevřete v postranním panelu {{overview}}.",

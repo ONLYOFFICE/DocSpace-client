@@ -4,7 +4,7 @@
   "DashboardCreate": "Choose a text document, spreadsheet, presentation, PDF form, or start an AI chat. New documents are saved to {{files}}, ready whenever you need them.",
   "DashboardCreateTitle": "Start creating",
   "DashboardDevTools": "This is your developer hub: APIs, SDKs, plugins, webhooks, and more. Click into any card to learn more or get started.",
-  "DashboardDevToolsTitle": "For developers",
+  "DashboardDevToolsTitle": "Build with {{organizationName}}",
   "DashboardIntegrations": "Already using another platform? Connect it and bring editors and apps right into the tools your team already uses — no code, nothing to migrate.",
   "DashboardIntegrationsTitle": "Connect your platform",
   "DashboardOverview": "This page is just one click away — open {{overview}} in the sidebar whenever you need it.",

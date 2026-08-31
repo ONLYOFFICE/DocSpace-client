@@ -4,7 +4,7 @@
   "DashboardCreate": "Mətn sənədi, cədvəl, təqdimat, PDF forması seçin və ya süni intellekt söhbəti başladın. Yeni sənədlər {{files}} bölməsində saxlanılır və ehtiyacınız olanda hazır olur.",
   "DashboardCreateTitle": "Yaratmağa başlayın",
   "DashboardDevTools": "Bura tərtibatçı mərkəzinizdir: API-lar, SDK-lar, plaginlər, webhooklar və daha çoxu. Ətraflı məlumat almaq və ya başlamaq üçün istənilən karta klikləyin.",
-  "DashboardDevToolsTitle": "Tərtibatçılar üçün",
+  "DashboardDevToolsTitle": "{{organizationName}} ilə yaradın",
   "DashboardIntegrations": "Artıq başqa platformadan istifadə edirsiniz? Onu qoşun və redaktorları və tətbiqləri komandanızın onsuz da istifadə etdiyi alətlərin içinə gətirin — kod yazmadan, heç nəyi köçürmədən.",
   "DashboardIntegrationsTitle": "Platformanızı qoşun",
   "DashboardOverview": "Bu səhifə həmişə bir kliklik məsafədədir — bura qayıtmaq istədiyiniz zaman yan paneldə {{overview}} bölməsini açın.",

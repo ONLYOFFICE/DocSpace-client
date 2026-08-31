@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "{{service}} hizmetine hangi IP adreslerinin, aralıklarının veya host'ların erişebileceğini denetleyin",
   "AdditionalUsers": "Ek kullanıcılar",
   "AddRule": "Kural Ekle",
+  "AdminAccessDescription": "{{service}} yalnızca yöneticiler tarafından yapılandırılabilir. API belgelerini görüntülemeye devam edebilirsiniz.",
   "AnonymousNoHint": "(Yalnızca kimliği doğrulanmış kullanıcılar belgelere erişebilir)",
   "AnonymousSupport": "Anonim destek",
   "AnonymousSupportDescription": "Kimlik doğrulaması olmayan kullanıcıların belgelere erişmesine izin ver",

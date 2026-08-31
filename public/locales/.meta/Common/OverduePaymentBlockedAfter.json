@@ -1,0 +1,29 @@
+{
+  "key_path": "OverduePaymentBlockedAfter",
+  "content": "Overdue payment: {{price}} | Blocked after {{date}}",
+  "content_en_sha1_hash": "3bd304578e0a1943216430ab3b2715d6102d40cd",
+  "created_at": "2026-08-27T15:37:34.059Z",
+  "updated_at": "2026-08-27T15:39:43.637Z",
+  "comment": {
+    "text": "Information text in the billing overview component shown during a grace period, displaying the overdue amount and the deadline for service blockage. Includes {{price}} and {{date}} variables.",
+    "is_auto": true,
+    "updated_at": "2026-08-27T15:39:43.637Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
+      "line_number": 96,
+      "context": "admins: limitValue(MANAGER),\n rooms: limitValue(ROOM),\n storage: getConvertedSize(t, limitValue(TOTAL_SIZE)),\n })\n : isGracePeriod\n ? t(\"OverduePaymentBlockedAfter\", {\n price: planPrice,\n date: gracePeriodEndDate,\n })\n : t(\"PlanCost\", { admins: limitValue(MANAGER), price: planPrice });",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

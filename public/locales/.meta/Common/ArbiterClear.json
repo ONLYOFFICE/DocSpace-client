@@ -3,7 +3,7 @@
   "content": "Clear",
   "content_en_sha1_hash": "719ea396ad92e01b4757ec2b93bb1e5f270f771d",
   "created_at": "2026-05-24T17:27:18.069Z",
-  "updated_at": "2026-05-24T18:58:37.013Z",
+  "updated_at": "2026-08-28T14:38:40.324Z",
   "comment": {
     "text": "Button label used to clear the AI Arbiter results.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
-      "line_number": 273,
-      "context": "<button\n type=\"button\"\n className={styles.clearResultsBtn}\n onClick={handleClearResults}\n >\n {t(\"Common:ArbiterClear\")}\n </button>\n )}\n {runStatus !== \"idle\" && (\n <span className={styles.statusText}>\n {runStatus === \"running\" && t(\"Common:ArbiterRunning\")}",
+      "line_number": 286,
+      "context": "type={LinkType.action}\n fontSize=\"12px\"\n isHovered\n onClick={handleClearResults}\n >\n {t(\"Common:ArbiterClear\")}\n </Link>\n ) : null}\n {runStatus !== \"idle\" ? (\n <Text fontSize=\"12px\" color=\"var(--arbiter-muted)\" noSelect>\n {runStatus === \"running\" && t(\"Common:ArbiterRunning\")}",
       "module": "/packages/sdk"
     }
   ],

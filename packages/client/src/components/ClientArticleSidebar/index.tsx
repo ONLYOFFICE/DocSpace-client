@@ -225,6 +225,7 @@ const ClientArticleSidebar = ({
     const panelFolderId = (folder: TTreeFolder): string | number => {
       if (folder.rootFolderType === FolderType.Rooms) return "rooms";
       if (folder.rootFolderType === FolderType.AIAgents) return "agents";
+      if (folder.rootFolderType === FolderType.Forms) return "forms";
       return folder.id;
     };
 
@@ -274,6 +275,7 @@ const ClientArticleSidebar = ({
     const favFolder = find(FolderType.Favorites);
     const trashFolder = find(FolderType.TRASH);
     const aiAgentsFolder = find(FolderType.AIAgents);
+    const formsFolder = find(FolderType.Forms);
 
     const mainItems: NavMenuItem[] = [];
 
@@ -413,6 +415,9 @@ const ClientArticleSidebar = ({
         label: t("Common:Forms"),
         icon: getCatalogIconUrlByType(FolderType.FormRoom),
         ...nav(searchAreaUrl("/forms/filter", RoomSearchArea.Forms)),
+        ...(formsFolder
+          ? sectionBadge(panelFolderId(formsFolder), newCount(formsFolder))
+          : {}),
         children: [
           {
             id: "forms-recent",

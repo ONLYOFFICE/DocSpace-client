@@ -3,7 +3,7 @@
   "content": "If you Disable this user, they won’t be able to log in to the workspace, while their documents and data will remain intact.",
   "content_en_sha1_hash": "441a5de5465c4b54c7310260478483c99adcd285",
   "created_at": "2026-08-13T22:44:32.885Z",
-  "updated_at": "2026-08-14T15:22:46.389Z",
+  "updated_at": "2026-08-26T14:08:32.983Z",
   "comment": {
     "text": "Body text in a dialog that appears when disabling a single user, explaining the consequences for their access and data.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 181,
+      "line_number": 183,
       "context": ": t(\"DisableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"DisableGuestDescription\")\n : t(\"DisableUserDescription\")\n : isGuests\n ? t(\"DisableGuestsDescription\")\n : t(\"DisableUsersDescription\");\n \n bodyText += isGuests",
       "module": "/packages/client"
     }

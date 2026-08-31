@@ -182,6 +182,75 @@ const ROLES: Role[] = [
   },
 ];
 
+/**
+ * What the portal is paid for, which is a different question per edition.
+ *
+ * SaaS is on Startup until it is paid for and on Business after. A standalone
+ * portal instead runs in one of three editions, told apart by its tariff:
+ * Community is the licence-free open-source build, Enterprise is licensed, and
+ * Developer is Enterprise plus the developer flag.
+ */
+type Plan = {
+  key: string;
+  title: string;
+  /** True once the portal is paid for — the plan reads Business, not Startup. */
+  isPaid: boolean;
+  /** The /portal/tariff answer, which carries the edition flags. */
+  tariff: () => ReturnType<typeof tariffHandler>;
+  /** `quota.free` is the flag `currentQuotaStore.isFreeTariff` reads. */
+  quota: () => ReturnType<typeof quotaHandler>;
+};
+
+const SAAS_PLANS: Plan[] = [
+  {
+    key: "paid",
+    title: "paid",
+    isPaid: true,
+    tariff: () => tariffHandler(TEST_PORT),
+    quota: () => quotaHandler(TEST_PORT),
+  },
+  {
+    key: "free",
+    title: "unpaid",
+    isPaid: false,
+    tariff: () => tariffHandler(TEST_PORT),
+    quota: () => freeQuotaHandler(TEST_PORT),
+  },
+];
+
+/**
+ * The standalone editions whose frames duplicate the Enterprise ones — they
+ * keep a single canary screenshot instead of a full set.
+ */
+const STANDALONE_CANARY_ONLY = ["community", "developer"];
+
+const STANDALONE_PLANS: Plan[] = [
+  {
+    // No licence: the open-source build, which sits on the free plan.
+    key: "community",
+    title: "Community",
+    isPaid: false,
+    tariff: () => tariffHandler(TEST_PORT, true),
+    quota: () => freeQuotaHandler(TEST_PORT),
+  },
+  {
+    key: "enterprise",
+    title: "Enterprise",
+    isPaid: true,
+    tariff: () => tariffHandler(TEST_PORT, false, false, true),
+    quota: () => quotaHandler(TEST_PORT),
+  },
+  {
+    // Enterprise plus the developer flag (`isDeveloper` is `isEnterprise &&
+    // developer`), which is what the payments page words itself from.
+    key: "developer",
+    title: "Developer",
+    isPaid: true,
+    tariff: () => tariffHandler(TEST_PORT, false, false, true, true),
+    quota: () => quotaHandler(TEST_PORT),
+  },
+];
+
 type Edition = {
   key: string;
   title: string;
@@ -193,6 +262,8 @@ type Edition = {
    * to the edition and to each other.
    */
   settings: TypeSettings;
+  /** The plans this edition can be on — see `Plan`. */
+  plans: Plan[];
 };
 
 const EDITIONS: Edition[] = [
@@ -201,44 +272,14 @@ const EDITIONS: Edition[] = [
     title: "SaaS",
     standalone: false,
     settings: TypeSettings.AuthenticatedNoStandalone,
+    plans: SAAS_PLANS,
   },
   {
     key: "standalone",
     title: "standalone",
     standalone: true,
     settings: TypeSettings.Authenticated,
-  },
-];
-
-type Billing = {
-  key: string;
-  title: string;
-  /** True once the portal is paid for — the plan reads Business, not Startup. */
-  isPaid: boolean;
-  /**
-   * The tariff differs per edition: a standalone portal is paid for with a
-   * license (`enterprise`) and runs as open source without one, while a SaaS
-   * portal is on the same tariff either way and is told apart by its quota.
-   */
-  tariff: (standalone: boolean) => ReturnType<typeof tariffHandler>;
-  /** `quota.free` is the flag `currentQuotaStore.isFreeTariff` reads. */
-  quota: () => ReturnType<typeof quotaHandler>;
-};
-
-const BILLINGS: Billing[] = [
-  {
-    key: "paid",
-    title: "paid",
-    isPaid: true,
-    tariff: (standalone) => tariffHandler(TEST_PORT, false, false, standalone),
-    quota: () => quotaHandler(TEST_PORT),
-  },
-  {
-    key: "free",
-    title: "unpaid",
-    isPaid: false,
-    tariff: (standalone) => tariffHandler(TEST_PORT, standalone),
-    quota: () => freeQuotaHandler(TEST_PORT),
+    plans: STANDALONE_PLANS,
   },
 ];
 
@@ -417,7 +458,7 @@ const expectFilledRows = async (page: Page, columns: number) => {
 type DashboardCase = {
   role: Role;
   edition: Edition;
-  billing: Billing;
+  plan: Plan;
   ai: AiState;
   /**
    * Developer Tools limited to the owner and full admins (Settings -> Security
@@ -427,6 +468,14 @@ type DashboardCase = {
   devToolsLimited: boolean;
   /** The width the page is rendered at. */
   viewport: Viewport;
+  /**
+   * Whether this case pins a reference screenshot on top of its assertions.
+   *
+   * Off where the case is known to render exactly like one that is already
+   * pinned - a second baseline of the same frame costs a file and a
+   * regeneration on every unrelated change, and signals nothing.
+   */
+  withScreenshot: boolean;
   /**
    * File name of this case's reference screenshot. It is filed under the
    * viewport's own folder, so the same name at two widths does not collide.
@@ -439,15 +488,25 @@ type DashboardCase = {
  * pins both the elements that case is about and the whole page.
  */
 const dashboardCase = (name: string, testCase: DashboardCase) => {
-  const { role, edition, billing, ai, devToolsLimited, viewport, screenshot } =
-    testCase;
+  const {
+    role,
+    edition,
+    plan,
+    ai,
+    devToolsLimited,
+    viewport,
+    withScreenshot,
+    screenshot,
+  } = testCase;
 
-  // Who may open Developer Tools, which is the rule the section's own card and
-  // the integrations card that advertises Docs Connect both follow: guests
-  // never, and everyone below a full admin only while the portal does not
-  // limit the section.
-  const canOpenDevTools =
-    !role.isGuest && (!devToolsLimited || role.isAdminOrOwner);
+  // Two different questions, and the split is the whole point. The portal
+  // switch decides whether the section is *offered* at all - once it is limited
+  // to admins, everyone below one stops being shown it. Rights decide only
+  // whether it *opens*: a guest is shown the same cards and told why they lead
+  // nowhere. A feature that is switched off is absent; a feature that is not
+  // yours is visible but closed.
+  const isDevToolsOffered = !devToolsLimited || role.isAdminOrOwner;
+  const canOpenDevTools = isDevToolsOffered && !role.isGuest;
 
   test(name, async ({ page, baseUrl, mockRequest }) => {
     mockRequest.use(
@@ -457,8 +516,8 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       }),
       selfByTypeHandler(TEST_PORT, role.userType),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
-      billing.tariff(edition.standalone),
-      billing.quota(),
+      plan.tariff(),
+      plan.quota(),
       aiConfigHandler(TEST_PORT, !ai.enabled),
     );
 
@@ -473,29 +532,47 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     );
 
     // The plan line is the admin/owner-only part of the header, and it names
-    // the plan the portal is actually on.
-    if (role.isAdminOrOwner) {
+    // the plan the portal is actually on. Startup and Business are SaaS
+    // tariffs, so a standalone portal - which is paid for with a license and
+    // has no payments page to send anyone to - has no plan line at all,
+    // whoever is signed in.
+    if (role.isAdminOrOwner && !edition.standalone) {
       await expect(planLine(page)).toBeVisible();
       await expect(planLine(page)).toContainText(
-        billing.isPaid ? "Business" : "Startup",
+        plan.isPaid ? "Business" : "Startup",
       );
     } else {
       await expect(planLine(page)).toHaveCount(0);
     }
 
+    // The apps subtitle follows the same rule as the plan line: it names the
+    // plan for a SaaS admin and stays neutral for everyone else, a standalone
+    // portal included. Both wordings share "includes apps for", so the same
+    // locator reads whichever one is on the page.
+    await expect(
+      page.locator(APPS_SECTION).getByText(/includes apps for/),
+    ).toHaveText(
+      role.isAdminOrOwner && !edition.standalone
+        ? new RegExp(
+            `Your ${plan.isPaid ? "Business" : "Startup"} plan includes`,
+          )
+        : /Your workspace includes/,
+    );
+
     // Developer Tools, and the integrations card that advertises Docs Connect
-    // inside it, appear together - the second asks the same question as the
-    // first. Docs Connect is SaaS-only on top of that, whoever is asking, and
-    // the "or connect Docs" link is stricter still: it opens the page itself,
-    // so admins and the owner only.
+    // inside it, appear together - both are offered on the portal switch alone,
+    // so a guest is shown them and finds out on the way in. Docs Connect is
+    // SaaS-only on top of that, whoever is asking, and the "or connect Docs"
+    // link is a navigation rather than a description, so it needs the section
+    // to actually open for its reader.
     await expect(page.locator(DEVTOOLS_CARD)).toHaveCount(
-      canOpenDevTools ? 1 : 0,
+      isDevToolsOffered ? 1 : 0,
     );
     await expect(page.locator(INTEGRATIONS_CARD)).toHaveCount(
-      !edition.standalone && canOpenDevTools ? 1 : 0,
+      !edition.standalone && isDevToolsOffered ? 1 : 0,
     );
     await expect(page.getByText(/or connect Docs/)).toHaveCount(
-      !edition.standalone && role.isAdminOrOwner ? 1 : 0,
+      !edition.standalone && canOpenDevTools ? 1 : 0,
     );
 
     // The chat is hidden rather than disabled where it cannot be held: a portal
@@ -522,6 +599,8 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
 
     await expect(page.locator(APP_CARDS)).toHaveCount(ai.enabled ? 4 : 3);
     await expectFilledRows(page, viewport.columns);
+
+    if (!withScreenshot) return;
 
     const shotPath = ["desktop", "dashboard", viewport.key];
 
@@ -555,10 +634,11 @@ for (const viewport of NARROW_VIEWPORTS) {
         dashboardCase(`${role.key}, ${ai.title}`, {
           role,
           edition: EDITIONS[0],
-          billing: BILLINGS[0],
+          plan: SAAS_PLANS[0],
           ai,
           devToolsLimited: false,
           viewport,
+          withScreenshot: true,
           screenshot: `ai-${ai.key}-${role.key}.png`,
         });
       }
@@ -568,18 +648,29 @@ for (const viewport of NARROW_VIEWPORTS) {
 
 for (const edition of EDITIONS) {
   test.describe(`Dashboard on a ${edition.title} portal`, () => {
-    for (const billing of BILLINGS) {
-      test.describe(billing.title, () => {
+    for (const plan of edition.plans) {
+      test.describe(plan.title, () => {
         for (const ai of AI_STATES) {
           for (const role of ROLES) {
             dashboardCase(`${role.key}, ${ai.title}`, {
               role,
               edition,
-              billing,
+              plan,
               ai,
               devToolsLimited: false,
               viewport: DESKTOP,
-              screenshot: `${edition.key}-${billing.key}-ai-${ai.key}-${role.key}.png`,
+              // A standalone portal is offered no billing at all, so its three
+              // editions render pixel for pixel alike - the plan line and the
+              // plan-named subtitle, the only things that could tell them
+              // apart, are both dropped there. Enterprise carries the full set
+              // of frames and the other two keep one canary each; the day the
+              // page starts telling them apart, the canary fails and the rest
+              // of the audience gets its own baselines then. Every case runs
+              // every assertion above either way.
+              withScreenshot:
+                !STANDALONE_CANARY_ONLY.includes(plan.key) ||
+                (ai.enabled && role === ROLES[0]),
+              screenshot: `${edition.key}-${plan.key}-ai-${ai.key}-${role.key}.png`,
             });
           }
         }
@@ -603,10 +694,11 @@ for (const edition of EDITIONS) {
       dashboardCase(role.key, {
         role,
         edition,
-        billing: BILLINGS[0],
+        plan: edition.plans[0],
         ai: AI_STATES[0],
         devToolsLimited: true,
         viewport: DESKTOP,
+        withScreenshot: true,
         screenshot: `${edition.key}-devtools-limited-${role.key}.png`,
       });
     }

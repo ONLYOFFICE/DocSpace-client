@@ -64,11 +64,12 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import {
   hasDevToolsAccess,
-  hasDocsConnectAccess,
+  isDevToolsOffered,
 } from "@docspace/shared/utils/devToolsAccess";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
@@ -87,17 +88,23 @@ type DevTool = {
 
 interface DevToolsCardProps {
   apiBasicLink?: string;
-  // The card's tiles lead into /developer-tools, which the route guard closes
-  // for guests and - when the portal limits access - for room admins and users.
-  // Hide the whole card for them rather than show links that answer with a 403.
+  // Whether the portal offers the section at all. It stops offering it to
+  // room admins and users once Developer Tools is limited to admins, and the
+  // card goes with it - a switched-off feature is absent rather than closed.
   showDevTools?: boolean;
-  // Docs Connect is stricter still - admin/owner only - so its tile drops out
-  // for room admins and users even when the rest of the card stays.
-  canOpenDocsConnect?: boolean;
+  /**
+   * Whether the section actually opens for this reader. False for a guest,
+   * whose tiles explain themselves with a toast instead of navigating into a
+   * 403 - the card itself stays, since the portal has the section switched on.
+   */
+  canOpenDevTools?: boolean;
+  // Docs Connect is sold and hosted by us, so its tile exists in SaaS only.
+  // Who may configure it is a separate question, answered by the page itself.
+  isStandalone?: boolean;
 }
 
 const useDevTools = (props: DevToolsCardProps): DevTool[] => {
-  const { apiBasicLink, canOpenDocsConnect } = props;
+  const { apiBasicLink, isStandalone } = props;
 
   const { t } = useTranslation([
     "Settings",
@@ -112,7 +119,7 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
   const organizationName = getBrandName("OrganizationName");
   const docsName = `${organizationName} ${getBrandName("ProductEditorsName")}`;
 
-  const docsConnect: DevTool[] = canOpenDocsConnect
+  const docsConnect: DevTool[] = !isStandalone
     ? [
         {
           id: "docs-connect",
@@ -137,7 +144,7 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
         productName,
       }),
       url: apiBasicLink,
-      linkTitle: t("Common:LearnMore"),
+      linkTitle: t("Common:ReadApiDocumentation"),
     },
     {
       id: "embed-sdk",
@@ -186,7 +193,16 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
   ];
 };
 
-const DevToolTile = ({ tool }: { tool: DevTool }) => {
+const DevToolTile = ({
+  tool,
+  canOpen,
+  onRefused,
+}: {
+  tool: DevTool;
+  /** Whether following this tile leads anywhere for the current reader. */
+  canOpen: boolean;
+  onRefused: () => void;
+}) => {
   const className = tool.featured
     ? `${styles.devToolTile} ${styles.devToolTileFeatured}`
     : styles.devToolTile;
@@ -207,8 +223,29 @@ const DevToolTile = ({ tool }: { tool: DevTool }) => {
   );
 
   if (tool.path) {
+    // A reader the section does not open for still gets the tile - it is what
+    // tells them the feature exists - but following it would land on /error/403,
+    // so it says why instead. Rendered as a button rather than a dead link so
+    // it is still reachable from the keyboard.
+    if (!canOpen) {
+      return (
+        <button
+          type="button"
+          className={className}
+          onClick={onRefused}
+          data-testid={`dashboard-devtool-${tool.id}`}
+        >
+          {content}
+        </button>
+      );
+    }
+
     return (
-      <Link className={className} to={tool.path}>
+      <Link
+        className={className}
+        to={tool.path}
+        data-testid={`dashboard-devtool-${tool.id}`}
+      >
         {content}
       </Link>
     );
@@ -221,6 +258,7 @@ const DevToolTile = ({ tool }: { tool: DevTool }) => {
       target="_blank"
       rel="noopener noreferrer"
       aria-disabled={!tool.url}
+      data-testid={`dashboard-devtool-${tool.id}`}
     >
       {content}
     </a>
@@ -228,10 +266,19 @@ const DevToolTile = ({ tool }: { tool: DevTool }) => {
 };
 
 const DevToolsCardComponent = (props: DevToolsCardProps) => {
-  const { showDevTools } = props;
+  const { showDevTools, canOpenDevTools = true } = props;
   const { t } = useTranslation(["Common"]);
   const tools = useDevTools(props);
   const organizationName = getBrandName("OrganizationName");
+
+  // Says why a tile leads nowhere, in place of the 403 that following it used
+  // to produce. Shared by every tile, so the wording is stated once.
+  const showAdminOnlyToast = () => {
+    toastr.warning(
+      t("Common:AdminOnlyFeature"),
+      t("Common:AdminAccessRequired"),
+    );
+  };
 
   // The dashboard tour reads its anchors from the DOM, so the dev-tools step
   // drops itself once this returns nothing - no tour change needed here.
@@ -251,7 +298,12 @@ const DevToolsCardComponent = (props: DevToolsCardProps) => {
       >
         <div className={styles.devToolsGrid}>
           {tools.map((tool) => (
-            <DevToolTile key={tool.id} tool={tool} />
+            <DevToolTile
+              key={tool.id}
+              tool={tool}
+              canOpen={canOpenDevTools}
+              onRefused={showAdminOnlyToast}
+            />
           ))}
         </div>
       </CollapsibleCard>
@@ -261,15 +313,17 @@ const DevToolsCardComponent = (props: DevToolsCardProps) => {
 
 export const DevToolsCard = inject<TStore>(({ settingsStore, userStore }) => ({
   apiBasicLink: settingsStore.apiBasicLink,
-  showDevTools: hasDevToolsAccess(
+  // Shown whenever the portal offers the section at all; whether it opens for
+  // this reader is a separate question, asked below.
+  showDevTools: isDevToolsOffered(
     userStore.user,
     settingsStore.limitedAccessDevToolsForUsers,
   ),
-  canOpenDocsConnect: hasDocsConnectAccess(
+  canOpenDevTools: hasDevToolsAccess(
     userStore.user,
-    settingsStore.standalone,
+    settingsStore.limitedAccessDevToolsForUsers,
   ),
+  isStandalone: settingsStore.standalone,
 }))(observer(DevToolsCardComponent));
 
 export default DevToolsCard;
-

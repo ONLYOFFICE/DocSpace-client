@@ -53,20 +53,18 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import CheckIcon from "@docspace/ui-kit/assets/check.react.svg";
 import DangerIcon from "@docspace/ui-kit/assets/danger.toast.react.svg";
 
-import { getDefaultProvider, getModels } from "@docspace/shared/api/ai";
-import type { TAgent, TModel } from "@docspace/shared/api/ai/types";
+import { useApi, useStores } from "@docspace/ui-kit/ai-agent/providers";
 import {
   cleanupOrphanAgents,
   ensureWizardAgent,
   findActivePanel,
   provisionPanel,
+  toAgentSummary,
+  toProfileRefs,
   type AgentConfig,
-  type AgentModelRef,
-  type DefaultProviderRef,
+  type ProfileRef,
   type ProvisionProgress,
 } from "@/utils/ai-arbiter";
-
-import type { AgentSummary } from "@/types/arbiter";
 
 import SEEDS_RAW from "./seeds.json";
 
@@ -105,17 +103,6 @@ function buildSeedMessage(language: string | undefined): string {
   return SEEDS.en;
 }
 
-function toAgentSummary(a: TAgent): AgentSummary {
-  return {
-    id: a.id,
-    title: a.title ?? "",
-    modelAlias: a.chatSettings?.modelAlias ?? "",
-    modelId: a.chatSettings?.modelId ?? "",
-    prompt: a.chatSettings?.prompt ?? "",
-    providerId: a.chatSettings?.providerId ?? 0,
-    tags: a.tags,
-  };
-}
 
 function updateProgressItems(
   prev: ProvisioningItem[],
@@ -155,12 +142,16 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
 
   const agentsStore = useAiArbiterAgentsStore();
   const userId = agentsStore.userId;
+  const api = useApi();
+  const { useProfilesStore } = useStores();
 
   const [phase, setPhase] = React.useState<Phase>("bootstrap");
   const [wizardAgentId, setWizardAgentId] = React.useState<number | null>(null);
   const [defaultProvider, setDefaultProvider] =
-    React.useState<DefaultProviderRef | null>(null);
-  const [availableModels, setAvailableModels] = React.useState<TModel[]>([]);
+    React.useState<ProfileRef | null>(null);
+  const [availableModels, setAvailableModels] = React.useState<ProfileRef[]>(
+    [],
+  );
   const [expertModelIds, setExpertModelIds] = React.useState<string[]>([]);
   const [arbiterModelId, setArbiterModelId] = React.useState<string>("");
   const [pendingConfig, setPendingConfig] = React.useState<AgentConfig | null>(
@@ -177,8 +168,8 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
   const handleConfigDetected = React.useCallback(
     (config: AgentConfig) => {
       setPendingConfig(config);
-      const knownIds = new Set(availableModels.map((m) => m.modelId));
-      const fallback = defaultProvider?.modelId ?? "";
+      const knownIds = new Set(availableModels.map((m) => m.profileId));
+      const fallback = defaultProvider?.profileId ?? "";
       setExpertModelIds(
         config.experts.map((e) =>
           e.model && knownIds.has(e.model) ? e.model : fallback,
@@ -224,40 +215,30 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
         }
         if (cancelled) return;
 
-        const provider = await getDefaultProvider();
+        const profiles = await api.profiles.list();
         if (cancelled) return;
-        if (!provider) {
+        const models = toProfileRefs(profiles);
+        const preferredId = useProfilesStore.getState().defaultProfile?.id;
+        const providerRef =
+          models.find((m) => m.profileId === preferredId) ?? models[0];
+        if (!providerRef) {
           setErrorMessage(t("Common:ArbiterNoAIProvider"));
           setPhase("failed");
           return;
         }
 
-        const providerRef: DefaultProviderRef = {
-          providerId: provider.providerId,
-          modelId: provider.defaultModel,
-          modelAlias: provider.defaultModelAlias,
-        };
-
-        let models: TModel[] = [];
-        try {
-          models = await getModels(providerRef.providerId);
-        } catch (err) {
-          console.warn("[ai-arbiter] failed to fetch model list", err);
-        }
-        if (cancelled) return;
-
         const wizard = await ensureWizardAgent({
           userId,
-          defaultProvider: providerRef,
-          availableModels: models.map((m) => ({
-            id: m.modelId,
-            alias: m.alias,
+          defaultProfile: providerRef,
+          availableProfiles: models.map((m) => ({
+            id: m.profileId,
+            alias: m.name,
           })),
         });
         if (cancelled) return;
 
         setDefaultProvider(providerRef);
-        setArbiterModelId(providerRef.modelId);
+        setArbiterModelId(providerRef.profileId);
         setAvailableModels(models);
 
         setWizardAgentId(wizard.id);
@@ -273,7 +254,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     return () => {
       cancelled = true;
     };
-  }, [visible, phase, userId]);
+  }, [visible, phase, userId, api, useProfilesStore, t]);
 
   React.useEffect(() => {
     if (phase !== "chat") return;
@@ -319,14 +300,9 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     const ac = new AbortController();
     provisionAbortRef.current = ac;
 
-    const buildModelRef = (modelId: string): AgentModelRef => {
-      const found = availableModels.find((m) => m.modelId === modelId);
-      return {
-        providerId: defaultProvider.providerId,
-        modelId: modelId || defaultProvider.modelId,
-        modelAlias: found?.alias ?? defaultProvider.modelAlias,
-      };
-    };
+    const buildModelRef = (profileId: string): ProfileRef =>
+      availableModels.find((m) => m.profileId === profileId) ??
+      defaultProvider;
 
     const expertModels = pendingConfig.experts.map((_, i) =>
       buildModelRef(expertModelIds[i] ?? ""),
@@ -334,23 +310,34 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     const arbiterModel = buildModelRef(arbiterModelId);
 
     try {
-      await provisionPanel(pendingConfig, {
+      const result = await provisionPanel(pendingConfig, {
         userId,
-        defaultProvider,
-        expertModels,
-        arbiterModel,
+        defaultProfile: defaultProvider,
+        expertProfiles: expertModels,
+        arbiterProfile: arbiterModel,
         signal: ac.signal,
         onProgress: (p) => {
           setProvisioningItems((prev) => updateProgressItems(prev, p));
         },
       });
 
+      const profileNames = new Map<number, string>();
+      result.expertIds.forEach((id, i) => {
+        profileNames.set(id, expertModels[i]?.name ?? defaultProvider.name);
+      });
+      profileNames.set(result.arbiterAgentId, arbiterModel.name);
+
       const refetched = await findActivePanel(userId);
       if (refetched) {
         agentsStore.setActivePanel({
           sessionId: refetched.sessionId,
-          arbiter: toAgentSummary(refetched.arbiter),
-          experts: refetched.experts.map(toAgentSummary),
+          arbiter: toAgentSummary(
+            refetched.arbiter,
+            profileNames.get(refetched.arbiter.id),
+          ),
+          experts: refetched.experts.map((a) =>
+            toAgentSummary(a, profileNames.get(a.id)),
+          ),
         });
       }
       setPhase("done");
@@ -408,15 +395,15 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     const hasModelOptions = availableModels.length > 1;
 
     const modelOptions: TOption[] = availableModels.map((m) => ({
-      key: m.modelId,
-      label: m.alias ?? m.modelId,
+      key: m.profileId,
+      label: m.name,
     }));
 
-    const optionFor = (modelId: string): TOption => {
-      const found = availableModels.find((m) => m.modelId === modelId);
+    const optionFor = (profileId: string): TOption => {
+      const found = availableModels.find((m) => m.profileId === profileId);
       return {
-        key: modelId,
-        label: found?.alias ?? modelId,
+        key: profileId,
+        label: found?.name ?? profileId,
       };
     };
 
@@ -427,10 +414,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
       if (!hasModelOptions) {
         return (
           <span className={styles.previewModelStatic}>
-            {availableModels[0]?.alias ??
-              defaultProvider?.modelAlias ??
-              defaultProvider?.modelId ??
-              "default"}
+            {availableModels[0]?.name ?? defaultProvider?.name ?? "default"}
           </span>
         );
       }

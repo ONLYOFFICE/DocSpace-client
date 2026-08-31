@@ -41,7 +41,17 @@ import { useTranslation } from "react-i18next";
 
 import AIAgentSelector from "@docspace/ui-kit/selectors/AIAgent";
 import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import {
+  Heading,
+  HeadingLevel,
+  HeadingSize,
+} from "@docspace/ui-kit/components/heading";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import { Tag } from "@docspace/ui-kit/components/tag";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import useGetIcon from "@docspace/ui-kit/ai-agent/hooks/useGetIcon";
 import {
@@ -109,7 +119,6 @@ const AiArbiterPage = observer(() => {
     try {
       await deleteAIAgent(id);
     } catch {
-      // ignore — agent may already be gone
     }
     agentsStore.removeExpert(id);
   };
@@ -122,7 +131,6 @@ const AiArbiterPage = observer(() => {
       const agent = await getAIAgent(Number(item.id));
       agentsStore.addExpert(toAgentSummary(agent));
     } catch {
-      // ignore
     }
   };
 
@@ -167,6 +175,7 @@ const AiArbiterPage = observer(() => {
   const handleResetConfirm = async () => {
     if (!sessionId || !userId) return;
     await tearDownPanel(sessionId, userId);
+    runStore.clearRun();
     agentsStore.clearActivePanel();
     setResetDialogVisible(false);
     toastr.success(t("Common:ArbiterConfigurationReset"));
@@ -193,94 +202,98 @@ const AiArbiterPage = observer(() => {
 
   return (
     <div className={styles.layout}>
-      <button
-        type="button"
-        className={styles.resetFab}
-        onClick={() => setResetDialogVisible(true)}
-        title={t("Common:ArbiterResetConfigurationTitle")}
-      >
-        {t("Common:ArbiterResetConfiguration")}
-      </button>
-
       <div className={styles.pageHeader}>
-        <p className={styles.pageTitle}>{t("Common:ArbiterTitle")}</p>
-        <p className={styles.pageDescription}>
-          {t("Common:ArbiterPageDescription")}
-        </p>
+        <div className={styles.pageHeaderText}>
+          <Heading level={HeadingLevel.h1} size={HeadingSize.small}>
+            {t("Common:ArbiterTitle")}
+          </Heading>
+          <Text fontSize="12px" lineHeight="16px" color="var(--arbiter-muted)">
+            {t("Common:ArbiterPageDescription")}
+          </Text>
+        </div>
+        <div className={styles.pageHeaderActions}>
+          <Button
+            size={ButtonSize.small}
+            label={t("Common:ArbiterResetConfiguration")}
+            title={t("Common:ArbiterResetConfigurationTitle")}
+            isDisabled={isRunning}
+            onClick={() => setResetDialogVisible(true)}
+          />
+        </div>
       </div>
 
-      {/* Question input */}
       <div className={styles.inputArea}>
         <div className={styles.questionRow}>
-          <textarea
-            className={styles.textarea}
+          <Textarea
+            wrapperClassName={styles.questionField}
             value={question}
             onChange={(e) => runStore.setQuestion(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={t("Common:ArbiterQuestionPlaceholder")}
-            disabled={isRunning}
-            rows={3}
+            isDisabled={isRunning}
+            heightTextArea={72}
+            fontSize={13}
           />
-          {isRunning ? (
-            <button className={styles.stopBtn} type="button" onClick={stop}>
-              {t("Common:ArbiterStop")}
-            </button>
-          ) : (
-            <button
-              className={styles.runBtn}
-              type="button"
-              onClick={run}
-              disabled={!canRun || !question.trim()}
-            >
-              {t("Common:ArbiterRun")}
-            </button>
-          )}
+          <div className={styles.runButton}>
+            {isRunning ? (
+              <Button
+                size={ButtonSize.normal}
+                label={t("Common:ArbiterStop")}
+                onClick={() => stop()}
+              />
+            ) : (
+              <Button
+                primary
+                size={ButtonSize.normal}
+                label={t("Common:ArbiterRun")}
+                isDisabled={!canRun || !question.trim()}
+                onClick={() => run()}
+              />
+            )}
+          </div>
         </div>
 
         <div className={styles.metaRow}>
-          <button
-            type="button"
-            className={styles.attachFileBtn}
-            disabled={isRunning}
-            onClick={() => setFileSelectorOpen(true)}
-          >
-            {t("Common:ArbiterAttachFile")}
-          </button>
+          {!isRunning ? (
+            <Link
+              type={LinkType.action}
+              fontSize="12px"
+              isHovered
+              onClick={() => setFileSelectorOpen(true)}
+            >
+              {t("Common:ArbiterAttachFile")}
+            </Link>
+          ) : null}
 
-          {attachedFile && (
-            <span className={styles.fileChip}>
-              {attachedFile.name}
-              {!isRunning && (
-                <button
-                  className={styles.fileChipRemove}
-                  type="button"
-                  onClick={() => runStore.setAttachedFile(null)}
-                  aria-label={t("Common:ArbiterRemoveFile")}
-                >
-                  x
-                </button>
-              )}
-            </span>
-          )}
+          {attachedFile ? (
+            <Tag
+              tag={String(attachedFile.id)}
+              label={attachedFile.name}
+              isNewTag={!isRunning}
+              onDelete={() => runStore.setAttachedFile(null)}
+              tagMaxWidth="320px"
+            />
+          ) : null}
 
           <div className={styles.metaRight}>
-            {!isRunning && (hasPanels || !!question || !!attachedFile) && (
-              <button
-                type="button"
-                className={styles.clearResultsBtn}
+            {!isRunning && (hasPanels || !!question || !!attachedFile) ? (
+              <Link
+                type={LinkType.action}
+                fontSize="12px"
+                isHovered
                 onClick={handleClearResults}
               >
                 {t("Common:ArbiterClear")}
-              </button>
-            )}
-            {runStatus !== "idle" && (
-              <span className={styles.statusText}>
+              </Link>
+            ) : null}
+            {runStatus !== "idle" ? (
+              <Text fontSize="12px" color="var(--arbiter-muted)" noSelect>
                 {runStatus === "running" && t("Common:ArbiterRunning")}
                 {runStatus === "done" && t("Common:Done")}
                 {runStatus === "error" && t("Common:Error")}
                 {runStatus === "aborted" && t("Common:ArbiterStopped")}
-              </span>
-            )}
+              </Text>
+            ) : null}
           </div>
         </div>
       </div>
@@ -301,17 +314,29 @@ const AiArbiterPage = observer(() => {
         />
       )}
 
-      {/* Panels */}
       <div className={styles.panelsArea}>
         {!hasPanels && !isRunning && (
-          <p className={styles.emptyHint}>
+          <Text
+            className={styles.emptyHint}
+            fontSize="14px"
+            textAlign="center"
+            color="var(--arbiter-muted)"
+          >
             {t("Common:ArbiterEmptyHint")}
-          </p>
+          </Text>
         )}
 
         {expertPanels.length > 0 && (
           <div className={styles.expertSection}>
-            <p className={styles.arbiterSectionTitle}>{t("Common:ArbiterExpertPanels")}</p>
+            <Text
+              className={styles.sectionTitle}
+              fontSize="12px"
+              fontWeight={600}
+              color="var(--arbiter-muted)"
+              noSelect
+            >
+              {t("Common:ArbiterExpertPanels")}
+            </Text>
             <div className={styles.expertsGrid}>
               {expertPanels.map((panel) => (
                 <PanelView
@@ -329,7 +354,15 @@ const AiArbiterPage = observer(() => {
 
         {arbiterPanel && (
           <div className={styles.arbiterSection}>
-            <p className={styles.arbiterSectionTitle}>{t("Common:ArbiterSectionTitle")}</p>
+            <Text
+              className={styles.sectionTitle}
+              fontSize="12px"
+              fontWeight={600}
+              color="var(--arbiter-muted)"
+              noSelect
+            >
+              {t("Common:ArbiterSectionTitle")}
+            </Text>
             <PanelView panel={arbiterPanel} isArbiter key={ARBITER_PANEL_ID} />
           </div>
         )}

@@ -3,7 +3,7 @@
   "content": "Recent files",
   "content_en_sha1_hash": "95c6a85a61ec3f4fefa80882adb555d78ef45199",
   "created_at": "2025-08-27T10:14:14.891Z",
-  "updated_at": "2026-08-21T15:04:37.030Z",
+  "updated_at": "2026-08-28T14:38:40.177Z",
   "comment": {
     "text": "This is a label for a folder or category in the file management system. It refers to recently accessed files or documents.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/utils/index.ts",
-      "line_number": 301,
+      "line_number": 306,
       "context": "items.push(\n build(\n \"recent\",\n recentFolder,\n CatalogRecentSvg,\n t(\"Recent\"),\n FolderType.Recent,\n ),\n );\n \n if (withFavorites && favoritesFolder)",
       "module": "/libs/ui-kit"
     },
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 337,
+      "line_number": 342,
       "context": "children: [\n // Recent/Favorites under Rooms reuse the @recent/@favorites files\n // view, scoped to room content via the room folder types.\n {\n id: \"rooms-recent\",\n label: t(\"Common:Recent\"),\n icon: getCatalogIconUrlByType(FolderType.Recent),\n ...nav(\n scopedUrl(\n CategoryType.Recent,\n \"/rooms/recent\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 337,
+      "line_number": 342,
       "context": "children: [\n // Recent/Favorites under Rooms reuse the @recent/@favorites files\n // view, scoped to room content via the room folder types.\n {\n id: \"rooms-recent\",\n label: t(\"Common:Recent\"),\n icon: getCatalogIconUrlByType(FolderType.Recent),\n ...nav(\n scopedUrl(\n CategoryType.Recent,\n \"/rooms/recent\",",
       "module": "/packages/client"
     },
@@ -85,7 +85,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
-      "line_number": 145,
+      "line_number": 152,
       "context": "// Root / Recent / Favorites all derive the \"empty\" badge from the agents\n // list store — mirrors the pre-refactor per-route slot pages.\n const isEmpty = !listStore.isLoading && listStore.agents.length === 0;\n \n if (route === \"recent\") {\n return <AgentsHeader title={t(\"Common:Recent\")} isEmptyList={isEmpty} />;\n }\n if (route === \"favorites\") {\n return <AgentsHeader title={t(\"Common:Favorites\")} isEmptyList={isEmpty} />;\n }\n if (route === \"root\") {",
       "module": "/packages/sdk"
     }

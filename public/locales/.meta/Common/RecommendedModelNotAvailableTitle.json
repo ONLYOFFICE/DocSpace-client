@@ -3,7 +3,7 @@
   "content": "Tested model for form processing is not available",
   "content_en_sha1_hash": "9e2c3e8bd9dfa270c3011fd47952b1eef02ad0e2",
   "created_at": "2026-06-09T09:42:55.472Z",
-  "updated_at": "2026-06-09T09:52:19.970Z",
+  "updated_at": "2026-08-28T14:38:40.334Z",
   "comment": {
     "text": "Title for a UI section or card displayed when the recommended model for form processing is unavailable outside of chat mode.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/recomended-model/index.tsx",
-      "line_number": 103,
+      "line_number": 95,
       "context": "// Non-chat states.\n const isSelectModelState = !isChat && isRecomendedAvailable;\n const isNotAvailableAdminState = !isChat && !isRecomendedAvailable && isAdmin;\n const isNotAvailableUserState = !isChat && !isRecomendedAvailable && !isAdmin;\n \n let title = t(\"RecommendedModelNotAvailableTitle\");\n if (isChatAdminState) title = t(\"RecommendedModelChatTitle\");\n else if (isChatUserState) title = t(\"RecommendedModelChatNotSelectedTitle\");\n else if (isSelectModelState) title = t(\"RecommendedModelNotSelectedTitle\");\n \n return (",
       "module": "/libs/ui-kit"
     }

@@ -1,0 +1,29 @@
+{
+  "key_path": "TopUpCoverOverdueDescription",
+  "content": "Add credits to cover the overdue payment. On the next step, you'll attach a payment method securely via Stripe.",
+  "content_en_sha1_hash": "ffd9dd6f95872efb49ec72977edf55bd41f4a052",
+  "created_at": "2026-08-27T15:37:45.185Z",
+  "updated_at": "2026-08-27T15:38:52.892Z",
+  "comment": {
+    "text": "Description text in a top-up dialog that appears when a user is in a grace period for an overdue payment, explaining how to resolve the debt using Stripe.",
+    "is_auto": true,
+    "updated_at": "2026-08-27T15:38:52.892Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
+      "line_number": 244,
+      "context": "visible={isTopUpDialogVisible}\n onClose={() => setIsTopUpDialogVisible(false)}\n recommendedAmount={recommendedAmount}\n minValue={isGracePeriod ? String(overduePlanCost) : undefined}\n descriptionText={\n isGracePeriod ? t(\"TopUpCoverOverdueDescription\") : undefined\n }\n helperText={\n isGracePeriod ? (\n <CommonTrans\n i18nKey=\"TopUpCoverOverdueHint\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

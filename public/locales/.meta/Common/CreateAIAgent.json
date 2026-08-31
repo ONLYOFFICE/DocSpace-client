@@ -3,7 +3,7 @@
   "content": "Create {{aiAgent}}",
   "content_en_sha1_hash": "74733d2016c5a4d27915866f0ff5ea73be78cd87",
   "created_at": "2026-06-01T21:20:13.618Z",
-  "updated_at": "2026-08-24T22:30:00.651Z",
+  "updated_at": "2026-08-26T14:08:33.021Z",
   "comment": {
     "text": "Button label or hotkey panel text used to initiate the creation of an AI agent. The {{aiAgent}} variable represents the specific agent's name or type.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 190,
-      "context": "installed: true,\n href: \"/ai-agents/filter\",\n ...createOrOpen(\n canCreateAgents,\n \"/ai-agents/filter\",\n t(\"Common:CreateAIAgent\", { aiAgent: t(\"Common:AIAgent\") }),\n dispatchCreateAgent,\n ),\n },\n ];",
+      "line_number": 204,
+      "context": "installed: true,\n href: \"/ai-agents/filter\",\n ...createOrOpen(\n canCreateAgents,\n \"/ai-agents/filter\",\n t(\"Common:CreateAIAgent\", { aiAgent: t(\"Common:AIAgent\") }),\n dispatchCreateAgent,\n ),\n },\n ]\n : []),",
       "module": "/packages/client"
     }
   ],

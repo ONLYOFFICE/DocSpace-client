@@ -3,7 +3,7 @@
   "content": "Favorite files",
   "content_en_sha1_hash": "2c3e71c8bc44fde8dff5efc87b140e933c09d30e",
   "created_at": "2025-08-29T14:33:19.030Z",
-  "updated_at": "2026-08-21T15:04:37.030Z",
+  "updated_at": "2026-08-28T14:38:40.177Z",
   "comment": {
     "text": "This is a label for a folder or section in the file management interface, indicating items that have been marked as favorites. It appears in navigation menus and settings for default page display.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/utils/index.ts",
-      "line_number": 312,
+      "line_number": 317,
       "context": "items.push(\n build(\n \"favorites\",\n favoritesFolder,\n CatalogFavoritesSvg,\n t(\"Favorites\"),\n FolderType.Favorites,\n ),\n );\n \n if (items.length && withSeparator)",
       "module": "/libs/ui-kit"
     },
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 350,
+      "line_number": 355,
       "context": "),\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n ...nav(\n scopedUrl(\n CategoryType.Favorite,\n \"/rooms/favorite\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 350,
+      "line_number": 355,
       "context": "),\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n ...nav(\n scopedUrl(\n CategoryType.Favorite,\n \"/rooms/favorite\",",
       "module": "/packages/client"
     },
@@ -85,7 +85,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
-      "line_number": 148,
+      "line_number": 155,
       "context": "if (route === \"recent\") {\n return <AgentsHeader title={t(\"Common:Recent\")} isEmptyList={isEmpty} />;\n }\n if (route === \"favorites\") {\n return <AgentsHeader title={t(\"Common:Favorites\")} isEmptyList={isEmpty} />;\n }\n if (route === \"root\") {\n return (\n <AgentsHeader\n title={t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" })}",
       "module": "/packages/sdk"
     },

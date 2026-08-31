@@ -3,7 +3,7 @@
   "content": "Inactive",
   "content_en_sha1_hash": "09af574c7f20770e2ba62ab519196e2d4d08efa4",
   "created_at": "2026-07-27T13:07:17.247Z",
-  "updated_at": "2026-08-24T22:30:00.694Z",
+  "updated_at": "2026-08-26T16:06:02.318Z",
   "comment": {
     "text": "Status badge used to indicate that a previous subscription is no longer active.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 404,
+      "line_number": 401,
       "context": "<div className={styles.subscriptionTitleRow}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:PreviousSubscription\")}\n </Text>\n <span className={styles.inactiveBadge}>\n {t(\"Common:Inactive\")}\n </span>\n </div>\n ) : (\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"DocsConnect:Subscription\")}{\" \"}",
       "module": "/packages/client"
     }

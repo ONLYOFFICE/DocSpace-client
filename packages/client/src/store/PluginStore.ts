@@ -1478,8 +1478,12 @@ class PluginStore {
 
       if (!correctUserType) return;
 
-      const fileIcon = `${plugin.iconUrl}/assets/${value.fileRowIcon}?hash=${plugin.version}`;
-      const fileIconTile = `${plugin.iconUrl}/assets/${value.fileTileIcon}?hash=${plugin.version}`;
+      const fileIcon = value.fileRowIcon
+        ? `${plugin.iconUrl}/assets/${value.fileRowIcon}?hash=${plugin.version}`
+        : undefined;
+      const fileIconTile = value.fileTileIcon
+        ? `${plugin.iconUrl}/assets/${value.fileTileIcon}?hash=${plugin.version}`
+        : fileIcon;
 
       const onClick = async (item: TFile) => {
         const device = this.getCurrentDevice();

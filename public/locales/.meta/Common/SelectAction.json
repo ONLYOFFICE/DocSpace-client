@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2026-08-24T22:30:00.615Z",
+  "updated_at": "2026-08-28T14:38:40.186Z",
   "comment": {
     "text": "This is a button label. It appears on various selectors (people, AI agents, files) to confirm the user's selection.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/providers/files/attach-dialog.tsx",
-      "line_number": 188,
+      "line_number": 214,
       "context": "getIsDisabled={getIsDisabled}\n currentFolderId=\"\"\n rootFolderType={FolderType.USER}\n disabledItems={[]}\n filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SelectAction\", { defaultValue: \"Select\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader=\"\"\n currentFooterInputValue=\"\"",
       "module": "/libs/ui-kit"
     },
@@ -181,7 +181,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
-      "line_number": 168,
+      "line_number": 184,
       "context": "// 1. Select\n items.push({\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\", { defaultValue: \"Select\" }),\n icon: CheckBoxReactSvgUrl,\n onClick: () => listStore.toggleAgentSelection(agent),\n });\n \n // 2. Open",
       "module": "/packages/sdk"
     },
@@ -199,7 +199,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
-      "line_number": 364,
+      "line_number": 397,
       "context": "withoutBackButton\n withCancelButton\n withCreate={false}\n withFooterInput={false}\n withFooterCheckbox={false}\n submitButtonLabel={t(\"Common:SelectAction\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n footerCheckboxLabel=\"\"\n footerInputHeader=\"\"\n currentFooterInputValue=\"\"\n descriptionText=\"\"",
       "module": "/packages/sdk"
     },

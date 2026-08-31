@@ -3,7 +3,7 @@
   "content": "Contact your Payer to top up the wallet",
   "content_en_sha1_hash": "7f981afe5d3e28e5921c2c6e0b7ea23f9a8a8ed6",
   "created_at": "2026-08-06T08:03:51.805Z",
-  "updated_at": "2026-08-24T22:30:00.599Z",
+  "updated_at": "2026-08-28T14:38:40.176Z",
   "comment": {
     "text": "Error toast message displayed to non-payer users when an action fails due to insufficient funds.",
     "is_auto": true,
@@ -25,9 +25,21 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 881,
+      "line_number": 897,
       "context": "return {\n title: t(\"Common:WalletBalanceTooLow\"),\n description: isPayer\n ? t(\"Common:TopUpWalletToContinue\")\n : t(\"Common:InsufficientFundsContactPayerShort\"),\n action: isPayer\n ? {\n text: t(\"Common:TopUpWallet\"),\n onClick: () => navigate(\"/portal-settings/payments/wallet\"),\n }",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-agent-providers/index.tsx",
+      "line_number": 155,
+      "context": "(payload) => {\n if (payload?.code !== \"insufficient_funds\") return null;\n \n return {\n title: t(\"Common:WalletBalanceTooLow\"),\n description: t(\"Common:InsufficientFundsContactPayerShort\"),\n action: null,\n };\n },\n [t],\n );",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-providers/index.tsx",
+      "line_number": 79,
+      "context": "(payload) => {\n if (payload?.code !== \"insufficient_funds\") return null;\n \n return {\n title: t(\"Common:WalletBalanceTooLow\"),\n description: t(\"Common:InsufficientFundsContactPayerShort\"),\n action: null,\n };\n },\n [t],\n );",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

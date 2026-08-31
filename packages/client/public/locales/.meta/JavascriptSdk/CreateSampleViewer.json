@@ -1,14 +1,14 @@
 {
   "key_path": "CreateSampleViewer",
-  "content": "Create sample Viewer embed",
-  "content_en_sha1_hash": "77e46f467ad0af7310c64afe014ff7ce67b032fe",
-  "created_at": "2025-05-19T21:30:54.408Z",
-  "updated_at": "2026-05-15T14:00:06.808Z",
+  "content": "Try a Viewer embed",
+  "content_en_sha1_hash": "7293b51682d4ef8eb141ebe1dc253140babcc251",
+  "created_at": "2026-08-26T16:05:57.727Z",
+  "updated_at": "2026-08-26T16:07:55.975Z",
   "comment": {
-    "text": "This is a header for a section that allows users to create a sample embed for the Viewer.",
+    "text": "Section header in the Developer Tools settings that introduces a demonstration of the Viewer embed feature.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:16:03.630Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T16:07:55.975Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

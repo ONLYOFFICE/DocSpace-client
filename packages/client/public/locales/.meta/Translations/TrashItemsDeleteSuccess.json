@@ -3,7 +3,7 @@
   "content": "Selected elements were successfully deleted from {{sectionName}}",
   "content_en_sha1_hash": "34001013ab8ad0b2c793c6ef5b07cc520c8c155d",
   "created_at": "2025-06-02T10:19:18.540Z",
-  "updated_at": "2026-08-17T17:23:21.645Z",
+  "updated_at": "2026-08-26T14:08:32.914Z",
   "comment": {
     "text": "This is a toast message confirming that selected items have been successfully deleted. The `{{sectionName}}` variable will be replaced with the name of the section from which the items were deleted (e.g., \"Trash\").",
     "is_auto": true,
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 244,
+      "line_number": 240,
       "context": "if (confirmDelete) {\n this.dialogsStore.setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: this.t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: this.t(\"Common:TrashSection\"),\n }),\n };\n \n this.filesActionsStore",
       "module": "/packages/client"
     }

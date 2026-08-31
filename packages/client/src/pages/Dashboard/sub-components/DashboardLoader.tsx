@@ -65,7 +65,7 @@ import { inject, observer } from "mobx-react";
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import { DeviceType } from "@docspace/shared/enums";
-import { hasDevToolsAccess } from "@docspace/shared/utils/devToolsAccess";
+import { isDevToolsOffered } from "@docspace/shared/utils/devToolsAccess";
 
 import integrationStyles from "SRC_DIR/components/IntegrationsCard/IntegrationsCard.module.scss";
 
@@ -285,7 +285,7 @@ export const DashboardLoader = inject<TStore>(
     aiServicesEnabled: settingsStore.aiServicesEnabled,
     standalone: settingsStore.standalone,
     currentDeviceType: settingsStore.currentDeviceType,
-    showDevTools: hasDevToolsAccess(
+    showDevTools: isDevToolsOffered(
       userStore.user,
       settingsStore.limitedAccessDevToolsForUsers,
     ),

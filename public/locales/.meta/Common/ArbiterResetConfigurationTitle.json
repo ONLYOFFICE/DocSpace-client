@@ -3,7 +3,7 @@
   "content": "Reset AI Arbiter configuration",
   "content_en_sha1_hash": "abd8dba2da54d635cc993fb533cb1cf784695528",
   "created_at": "2026-05-24T17:27:18.460Z",
-  "updated_at": "2026-05-24T18:47:37.380Z",
+  "updated_at": "2026-08-28T14:38:40.315Z",
   "comment": {
     "text": "Dialog title and button tooltip for the action of resetting the AI Arbiter configuration.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
-      "line_number": 200,
-      "context": "<div className={styles.layout}>\n <button\n type=\"button\"\n className={styles.resetFab}\n onClick={() => setResetDialogVisible(true)}\n title={t(\"Common:ArbiterResetConfigurationTitle\")}\n >\n {t(\"Common:ArbiterResetConfiguration\")}\n </button>\n \n <div className={styles.pageHeader}>",
+      "line_number": 218,
+      "context": "</div>\n <div className={styles.pageHeaderActions}>\n <Button\n size={ButtonSize.small}\n label={t(\"Common:ArbiterResetConfiguration\")}\n title={t(\"Common:ArbiterResetConfigurationTitle\")}\n isDisabled={isRunning}\n onClick={() => setResetDialogVisible(true)}\n />\n </div>\n </div>",
       "module": "/packages/sdk"
     }
   ],

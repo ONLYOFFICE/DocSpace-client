@@ -3,7 +3,7 @@
   "content": "Upgrade plan",
   "content_en_sha1_hash": "e80fe7c8f56aeba1c9594500c8faf418c36a8fe5",
   "created_at": "2026-04-10T13:53:43.834Z",
-  "updated_at": "2026-08-14T14:58:32.718Z",
+  "updated_at": "2026-08-27T15:37:55.695Z",
   "comment": {
     "text": "Button label. This button navigates the user to the payment page to upgrade their subscription plan.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
-      "line_number": 93,
-      "context": "</Text>\n </div>\n {onEditPlan ? (\n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n label={t(\"UpgradePlan\")}\n onClick={onEditPlan}\n className={styles.planButton}\n testId=\"overview_edit_plan_button\"\n />\n ) : null}",
+      "line_number": 121,
+      "context": "label={\n isGracePeriod\n ? isBalanceInsufficient\n ? t(\"TopUpAndRenew\")\n : t(\"PayNow\")\n : t(\"UpgradePlan\")\n }\n onClick={isGracePeriod ? onRenewPlan : onEditPlan}\n isDisabled={isGracePeriod && isCardMissingOrInactive}\n isLoading={isLoading}\n className={styles.planButton}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 188,
-      "context": "<ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={\n isPaymentPageAvailable\n ? t(\"Common:UpgradePlan\")\n : t(\"Common:OKButton\")\n }\n size=\"normal\"\n primary\n onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}",
+      "line_number": 191,
+      "context": ")}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={canUpgrade ? t(\"Common:UpgradePlan\") : t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n onClick={canUpgrade ? onUpgradePlan : onClose}\n scale\n />",
       "module": "/packages/client"
     },
     {

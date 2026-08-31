@@ -96,6 +96,7 @@ import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 import { ModelUpdatedBanner } from "SRC_DIR/pages/Home/View/ModelUpdatedBanner";
 import { useAiAgentsPickerActions } from "SRC_DIR/Hooks/useAiAgentsPickerActions";
+import { useFormsRecommendation } from "SRC_DIR/Hooks/useFormsRecommendation";
 
 import config from "PACKAGE_FILE";
 
@@ -144,6 +145,7 @@ const Shell = ({ page = "home", ...rest }) => {
     setLogoText,
     standalone,
     isGuest,
+    isNotPaidPeriod,
     isAdmin,
     isPayer,
     isRoomAdmin,
@@ -157,6 +159,7 @@ const Shell = ({ page = "home", ...rest }) => {
     agentEntityId,
     isInsideAgentRoom,
     canEditAgentRoom,
+    recommendedModelForForms,
     getAgentRoomId,
     openResultFile,
     closeEditorPanel,
@@ -792,8 +795,8 @@ const Shell = ({ page = "home", ...rest }) => {
   // Anonymous sessions (public room / public preview via a share link) and
   // guests must never issue AI calls: they answer 401, and the shared axios
   // client reacts to a 401 with logout + redirect to the login page, killing
-  // the public link view.
-  const canUseAi = isAuthenticated && !isGuest;
+  // the public link view. An unpaid portal skips AI boot requests entirely.
+  const canUseAi = isAuthenticated && !isGuest && !isNotPaidPeriod;
 
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.
@@ -863,6 +866,18 @@ const Shell = ({ page = "home", ...rest }) => {
     [isInsideAgentRoom, pickedAgent],
   );
 
+  // The in-chat notice recommending the model tested for form results. Only
+  // inside an AI agent room, as the legacy chat had it: elsewhere the chat
+  // answers with the portal default and there is no agent to re-point.
+  const formsRecommendation = useFormsRecommendation({
+    // `agentEntityId` is dropped for an agent room opened without the UseChat
+    // right (the pane is a view-only stub there) — no chat, nothing to notice.
+    enabled: !!isInsideAgentRoom && !!agentEntityId,
+    agentRoomId: agentEntityId,
+    canEditAgent: !!canEditAgentRoom,
+    recommendedModel: recommendedModelForForms,
+  });
+
   // Chat error box override (Bug 83207): the wallet 402 must read as a
   // human message with a way to top up instead of the raw provider text.
   // Only the Payer can actually top the wallet up, so the button to
@@ -872,7 +887,9 @@ const Shell = ({ page = "home", ...rest }) => {
   // (localized text + Retry).
   const formatChatError = useCallback(
     (payload) => {
-      if (payload?.code !== "insufficient_funds") return null;
+      // Standalone pays its AI provider directly: no wallet, nothing to top up,
+      // so the library default (localized text + Retry) stands.
+      if (payload?.code !== "insufficient_funds" || standalone) return null;
 
       return {
         title: t("Common:WalletBalanceTooLow"),
@@ -887,7 +904,7 @@ const Shell = ({ page = "home", ...rest }) => {
           : null,
       };
     },
-    [t, isPayer, navigate],
+    [t, isPayer, navigate, standalone],
   );
 
   // AI chat host callbacks. Web Search settings save on an explicit button
@@ -938,6 +955,7 @@ const Shell = ({ page = "home", ...rest }) => {
           // UI are switched off. Viewer-role gating inside agent rooms is
           // handled by `accessRightsStore.canUseChat` in AIAgentView.
           canUseAi={canUseAi}
+          formsRecommendation={formsRecommendation}
           callbacks={aiChatCallbacks}
           entityId={agentEntityId}
           contextEntityId={chatContextEntityId}
@@ -1105,6 +1123,7 @@ const ShellWrapper = inject(
       setConvertPasswordDialogVisible,
       version,
       pagesWithoutNavMenu,
+      isNotPaidPeriod,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
       logoText,
@@ -1151,6 +1170,7 @@ const ShellWrapper = inject(
       // profile. It is shown in the composer as a read-only label, or — for
       // users who may edit the room — an interactive picker to change it.
       isInsideAgentRoom: selectedFolderStore.isAIRoom,
+      recommendedModelForForms: settingsStore.aiConfig?.recommendedModelForForms,
       // EditRoom is the room-manager right; viewers (EditRoom === false, or
       // security not resolved yet) get the read-only label. Both room and
       // sub-folder security view-models carry EditRoom.

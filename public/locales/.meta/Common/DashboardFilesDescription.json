@@ -3,7 +3,7 @@
   "content": "Store, organize, and share files — for yourself or your team.",
   "content_en_sha1_hash": "8396c29c0d009bac29da890fd1b14f4b3ed6f1ec",
   "created_at": "2026-06-01T21:20:14.439Z",
-  "updated_at": "2026-08-21T08:01:33.817Z",
+  "updated_at": "2026-08-26T14:08:33.037Z",
   "comment": {
     "text": "Subtext for an application card in the apps catalog, describing the functionality of the file management feature.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 143,
+      "line_number": 152,
       "context": "const items: ModuleItem[] = [\n {\n id: \"ai-files\",\n icon: <CatalogFolderIcon />,\n title: t(\"Common:Files\"),\n description: t(\"Common:DashboardFilesDescription\"),\n installed: true,\n href: filesHref,\n buttonLabel: t(\"Common:Open\"),\n onAction: () => navigate(filesHref),\n },",
       "module": "/packages/client"
     }

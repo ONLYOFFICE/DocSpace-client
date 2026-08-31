@@ -3,7 +3,7 @@
   "content": "Ask a question... (Ctrl+Enter to run)",
   "content_en_sha1_hash": "eb4ebaa3ccf97f0cd84ecb15fed370a7dfd761df",
   "created_at": "2026-05-24T17:27:18.376Z",
-  "updated_at": "2026-05-24T18:49:43.223Z",
+  "updated_at": "2026-08-28T14:38:40.322Z",
   "comment": {
     "text": "Placeholder for a textarea in the AI Arbiter interface, prompting the user to enter a question and indicating the keyboard shortcut for submission.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
-      "line_number": 220,
-      "context": "<textarea\n className={styles.textarea}\n value={question}\n onChange={(e) => runStore.setQuestion(e.target.value)}\n onKeyDown={handleKeyDown}\n placeholder={t(\"Common:ArbiterQuestionPlaceholder\")}\n disabled={isRunning}\n rows={3}\n />\n {isRunning ? (\n <button className={styles.stopBtn} type=\"button\" onClick={stop}>",
+      "line_number": 232,
+      "context": "<Textarea\n wrapperClassName={styles.questionField}\n value={question}\n onChange={(e) => runStore.setQuestion(e.target.value)}\n onKeyDown={handleKeyDown}\n placeholder={t(\"Common:ArbiterQuestionPlaceholder\")}\n isDisabled={isRunning}\n heightTextArea={72}\n fontSize={13}\n />\n <div className={styles.runButton}>",
       "module": "/packages/sdk"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Use the tested model for form results",
   "content_en_sha1_hash": "3a7efad8f90893c3c48314b0f0602b8e6931bb0a",
   "created_at": "2026-06-09T09:42:55.425Z",
-  "updated_at": "2026-06-09T09:53:34.025Z",
+  "updated_at": "2026-08-28T14:38:40.334Z",
   "comment": {
     "text": "Title for the AI agent chat window, appearing when an administrator uses a verified model to process form results.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/recomended-model/index.tsx",
-      "line_number": 104,
+      "line_number": 96,
       "context": "const isSelectModelState = !isChat && isRecomendedAvailable;\n const isNotAvailableAdminState = !isChat && !isRecomendedAvailable && isAdmin;\n const isNotAvailableUserState = !isChat && !isRecomendedAvailable && !isAdmin;\n \n let title = t(\"RecommendedModelNotAvailableTitle\");\n if (isChatAdminState) title = t(\"RecommendedModelChatTitle\");\n else if (isChatUserState) title = t(\"RecommendedModelChatNotSelectedTitle\");\n else if (isSelectModelState) title = t(\"RecommendedModelNotSelectedTitle\");\n \n return (\n <div className=\"recomendedModel\">",
       "module": "/libs/ui-kit"
     }

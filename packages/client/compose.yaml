@@ -46,6 +46,10 @@ services:
       - ../../packages/shared/enums:/app/packages/shared/enums
       - ../../packages/shared/hooks:/app/packages/shared/hooks
       - ../../packages/shared/pages:/app/packages/shared/pages
+      # Route guards live here and import from shared/utils, which is mounted
+      # below - without this the container builds a stale guard against fresh
+      # helpers and fails on a missing export.
+      - ../../packages/shared/routes:/app/packages/shared/routes
       - ../../packages/shared/selectors:/app/packages/shared/selectors
       - ../../packages/shared/services:/app/packages/shared/services
       - ../../packages/shared/skeletons:/app/packages/shared/skeletons

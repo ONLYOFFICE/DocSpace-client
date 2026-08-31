@@ -3,7 +3,7 @@
   "content": "Enable notifications",
   "content_en_sha1_hash": "da3967d004ec4b3493b04e53997991851767517e",
   "created_at": "2025-05-19T21:30:55.594Z",
-  "updated_at": "2026-08-24T22:30:00.725Z",
+  "updated_at": "2026-08-26T16:06:02.352Z",
   "comment": {
     "text": "This is a button label that allows users to re-enable notifications for a specific room or conversation.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 135,
+      "line_number": 140,
       "context": "const muteOptions = [\n {\n id: \"option_unmute-room\",\n key: \"unmute-room\",\n label: t(\"Common:EnableNotifications\"),\n icon: UnmuteReactSvgUrl,\n onClick: () => self.onClickMute(\"unmute\", item, t),\n disabled: !canMute,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
-      "line_number": 209,
+      "line_number": 225,
       "context": "const isMuted = !!agent.mute;\n items.push({\n id: isMuted ? \"option_unmute-room\" : \"option_mute-room\",\n key: isMuted ? \"unmute-room\" : \"mute-room\",\n label: isMuted\n ? t(\"Common:EnableNotifications\", {\n defaultValue: \"Enable notifications\",\n })\n : t(\"Common:DisableNotifications\", {\n defaultValue: \"Disable notifications\",\n }),",
       "module": "/packages/sdk"
     },

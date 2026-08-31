@@ -33,65 +33,20 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export { WIZARD_SYSTEM_PROMPT } from "./wizardPrompt";
-
-export type {
-  AgentConfig,
-  ArbiterConfig,
-  ExpertConfig,
-  Tone,
-  ValidationIssue,
-  ValidationResult,
-} from "./agentConfig";
-export { TONES, validateAgentConfig } from "./agentConfig";
-
-export type { ExtractResult } from "./extractWizardConfig";
+export type { AgentConfig } from "./agentConfig";
 export { extractWizardConfig } from "./extractWizardConfig";
-
-export type { ChipParseResult } from "./parseChips";
 export { parseChips } from "./parseChips";
-
-export type { BuildContext } from "./buildExpertPrompt";
-export { buildExpertPrompt } from "./buildExpertPrompt";
-export { buildArbiterAgentPrompt } from "./buildArbiterAgentPrompt";
-
-export {
-  TAG_ARBITER,
-  TAG_EXPERT,
-  TAG_NAMESPACE,
-  TAG_WIZARD,
-  arbiterTags,
-  expertTags,
-  extractSessionId,
-  isArbiterTag,
-  isExpertTag,
-  isSessionTag,
-  isWizardTag,
-  sessionTag,
-  wizardTags,
-} from "./tags";
-
-export type {
-  ActivePanel,
-  ActivePanelOf,
-  AgentModelRef,
-  DefaultProviderRef,
-  ProvisionContext,
-  ProvisionProgress,
-  ProvisionResult,
-} from "./provision";
+export { extractSessionId } from "./tags";
+export type { ProfileRef, ProvisionProgress } from "./provision";
 export {
   cleanupOrphanAgents,
   ensureWizardAgent,
-  fetchUserAgents,
   findActivePanel,
-  findWizardAgent,
   provisionPanel,
   selectActivePanel,
   tearDownPanel,
   toAgentSummary,
 } from "./provision";
-
-export type { SseEvent } from "./sseEvent";
-export { parseSseStream } from "./parseSseStream";
-export { streamContinueChat, streamStartChat } from "./streamingChat";
+export type { AgentApi } from "./agentStream";
+export { createAgentThread, streamAgentChat } from "./agentStream";
+export { toProfileRefs } from "./profiles";

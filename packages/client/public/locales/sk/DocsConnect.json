@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "Určte, ktoré IP adresy, rozsahy alebo hostitelia môžu pristupovať k {{service}}",
   "AdditionalUsers": "Pridaní používatelia",
   "AddRule": "Pridať pravidlo",
+  "AdminAccessDescription": "{{service}} môžu konfigurovať iba správcovia. Dokumentáciu API si môžete naďalej prezerať.",
   "AnonymousNoHint": "(K dokumentom majú prístup iba overení používatelia)",
   "AnonymousSupport": "Anonymná podpora",
   "AnonymousSupportDescription": "Umožniť prístup k dokumentom používateľom bez overenia",

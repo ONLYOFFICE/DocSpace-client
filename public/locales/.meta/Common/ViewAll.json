@@ -3,7 +3,7 @@
   "content": "View all",
   "content_en_sha1_hash": "931e1a4b152ad9d10b855bd058727fe6a05a903b",
   "created_at": "2026-06-01T21:20:38.463Z",
-  "updated_at": "2026-08-24T22:30:00.620Z",
+  "updated_at": "2026-08-28T12:19:49.486Z",
   "comment": {
     "text": "Link label in the Integrations card that navigates to a complete list of integrations.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/IntegrationsCard/IntegrationsCard.tsx",
-      "line_number": 275,
-      "context": "))}\n <PlatformTile\n hideIcon\n isBold\n name={t(\"Common:PlusMore\", { count: MORE_CONNECTORS_COUNT })}\n linkLabel={t(\"Common:ViewAll\")}\n href={allConnectorsUrl}\n testId=\"dashboard-integration-more\"\n />\n </div>\n </CollapsibleCard>",
+      "line_number": 201,
+      "context": "<PlatformTile\n hideIcon\n muted\n isBold\n name={t(\"Common:PlusMore\", { count: MORE_CONNECTORS_COUNT })}\n linkLabel={t(\"Common:ViewAll\")}\n href={allConnectorsUrl}\n testId=\"dashboard-integration-more\"\n />\n </PlatformTileGrid>\n </CollapsibleCard>",
       "module": "/packages/client"
     }
   ],

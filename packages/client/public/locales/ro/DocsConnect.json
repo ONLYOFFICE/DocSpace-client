@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "Controlați ce adrese IP, intervale sau gazde pot accesa {{service}}",
   "AdditionalUsers": "Utilizatori suplimentari",
   "AddRule": "Adaugă regulă",
+  "AdminAccessDescription": "Doar administratorii pot configura {{service}}. Puteți consulta în continuare documentația API.",
   "AnonymousNoHint": "(Doar utilizatorii autentificați pot accesa documentele)",
   "AnonymousSupport": "Suport anonim",
   "AnonymousSupportDescription": "Permiteți utilizatorilor fără autentificare să acceseze documentele",

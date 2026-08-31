@@ -3,7 +3,7 @@
   "content": "The link will expire <1>{{date}}</1>",
   "content_en_sha1_hash": "63d96a2e07ed56dd44d5d336a0581f8168e94aad",
   "created_at": "2026-02-18T14:56:01.209Z",
-  "updated_at": "2026-08-14T14:58:32.733Z",
+  "updated_at": "2026-08-26T14:08:33.025Z",
   "comment": {
     "text": "This is a toast message or part of a sentence indicating when a shared link will become inactive. The variable `{{date}}` will be replaced with a specific date.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 673,
+      "line_number": 689,
       "context": "const toastTranslation = date ? (\n <Trans\n t={t}\n ns=\"Common\"\n values={{ date }}\n i18nKey=\"LinkExpireAfter\"\n components={{ 1: <strong key=\"strong-expire-after\" /> }}\n />\n ) : (\n <Trans\n t={t}",
       "module": "/packages/client"
     },
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 385,
+      "line_number": 492,
       "context": "return (\n <Trans\n t={t}\n ns=\"Common\"\n values={{ date }}\n i18nKey=\"LinkExpireAfter\"\n components={{ 1: <strong key=\"strong-expire-after\" /> }}\n />\n );\n }",
       "module": "/packages/shared"
     },

@@ -1,14 +1,14 @@
 {
   "key_path": "WebhooksGuide",
-  "content": "Webhooks Guide",
-  "content_en_sha1_hash": "426d1aa73a91fb4aa937d1af4f1bdc8b411b5146",
-  "created_at": "2025-05-19T21:30:49.890Z",
-  "updated_at": "2026-05-15T15:37:40.271Z",
+  "content": "Read the Webhooks guide to learn more.",
+  "content_en_sha1_hash": "38a0719f64880374a6ee373d2d5afccf8c9a505f",
+  "created_at": "2026-08-26T16:05:55.271Z",
+  "updated_at": "2026-08-26T16:13:37.684Z",
   "comment": {
-    "text": "This is a link label that, when clicked, opens a guide about webhooks.",
+    "text": "Clickable link text in the Webhooks information section that directs users to the documentation.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:28:03.173Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T16:13:37.684Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

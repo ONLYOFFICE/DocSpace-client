@@ -3,7 +3,7 @@
   "content": "Wallet balance is too low",
   "content_en_sha1_hash": "390f5fdf8cc1ea74d0c3b3789f098b3dcf710eb7",
   "created_at": "2026-08-21T15:04:28.378Z",
-  "updated_at": "2026-08-24T22:30:00.598Z",
+  "updated_at": "2026-08-28T14:38:40.176Z",
   "comment": {
     "text": "Error title in a notification or dialog that appears when a transaction fails due to insufficient funds.",
     "is_auto": true,
@@ -13,9 +13,21 @@
   "usage": [
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 878,
-      "context": "const formatChatError = useCallback(\n (payload) => {\n if (payload?.code !== \"insufficient_funds\") return null;\n \n return {\n title: t(\"Common:WalletBalanceTooLow\"),\n description: isPayer\n ? t(\"Common:TopUpWalletToContinue\")\n : t(\"Common:InsufficientFundsContactPayerShort\"),\n action: isPayer\n ? {",
+      "line_number": 894,
+      "context": "// Standalone pays its AI provider directly: no wallet, nothing to top up,\n // so the library default (localized text + Retry) stands.\n if (payload?.code !== \"insufficient_funds\" || standalone) return null;\n \n return {\n title: t(\"Common:WalletBalanceTooLow\"),\n description: isPayer\n ? t(\"Common:TopUpWalletToContinue\")\n : t(\"Common:InsufficientFundsContactPayerShort\"),\n action: isPayer\n ? {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-agent-providers/index.tsx",
+      "line_number": 154,
+      "context": ">(\n (payload) => {\n if (payload?.code !== \"insufficient_funds\") return null;\n \n return {\n title: t(\"Common:WalletBalanceTooLow\"),\n description: t(\"Common:InsufficientFundsContactPayerShort\"),\n action: null,\n };\n },\n [t],",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-providers/index.tsx",
+      "line_number": 78,
+      "context": ">(\n (payload) => {\n if (payload?.code !== \"insufficient_funds\") return null;\n \n return {\n title: t(\"Common:WalletBalanceTooLow\"),\n description: t(\"Common:InsufficientFundsContactPayerShort\"),\n action: null,\n };\n },\n [t],",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

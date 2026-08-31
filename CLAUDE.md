@@ -162,6 +162,8 @@ editing locale files. For translation work use the `translate-locales`,
 | `.claude/rules/i18n.md` | `public/locales/**`, `common/tests/**` |
 | `.claude/rules/bulk-locale-edits.md` | `public/locales/**`, `packages/*/public/locales/**`, `common/scripts/**` |
 | `.claude/rules/e2e-tests.md` | `packages/client/__tests__/**`, `packages/shared/__mocks__/**` |
+| `.claude/rules/access-matrix.md` | access rules for user types and room roles, and their specs |
+| `.claude/rules/dashboard-matrix.md` | `packages/client/src/pages/Dashboard/**`, `dashboard-appearance.spec.ts`, its screenshots |
 | `.claude/rules/pnpm.md` | `package.json`, `pnpm-workspace.yaml`, Dockerfiles, CI workflows |
 | `.claude/rules/claude-settings.md` | `.claude/settings*.json` |
 | `.claude/rules/vscode-tasks.md` | `.vscode/**`, `frontend.code-workspace` |

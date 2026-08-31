@@ -9,7 +9,7 @@
   "LdapEmailTooltip": "Tento uživatelský účet je načten z LDAP. Uživatelova e-mailová adresa nebyla zadána a aktuální byla vygenerována automaticky a nelze ji použít k odesílání oznámení.",
   "NotConfigured": "Není nakonfigurováno",
   "Notifications": "Oznámení",
-  "RoomsActivityDescription": "Získejte okamžité e-mailové upozornění na nové sdílené soubory/složky a aktivitu uvnitř vašich {{rooms}} a {{aiAgents}}.",
+  "RoomsActivityDescription": "Získejte okamžitá e-mailová upozornění na nové sdílené soubory a složky a na aktivitu v {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}.",
   "RoomUpdateNotify": "Aktivita v {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}",
   "SettingUpNotifications": "Nastavení upozornění",
   "SuccessConnected": "{{serviceName}} bylo úspěšně připojeno jako notifikační kanál. Nyní tam budete dostávat aktualizace.",

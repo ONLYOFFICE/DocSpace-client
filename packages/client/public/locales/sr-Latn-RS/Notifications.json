@@ -9,7 +9,7 @@
   "LdapEmailTooltip": "Ovaj korisnički nalog je učitan sa LDAP-a. Email adresa korisnika nije navedena i trenutna je generisana automatski i ne može se koristiti za slanje obaveštenja.",
   "NotConfigured": "Nije konfigurisano",
   "Notifications": "Obaveštenja",
-  "RoomsActivityDescription": "Pristupite trenutnim e-mail obaveštenjima o novim podeljenim fajlovima/foldereima i aktivnosti unutar vaših {{rooms}} i {{aiAgents}}.",
+  "RoomsActivityDescription": "Primajte trenutna obaveštenja e-poštom o novim deljenim fajlovima i folderima i o aktivnostima u {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}.",
   "RoomUpdateNotify": "Aktivnosti u {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}",
   "SettingUpNotifications": "Podešavanja obaveštenja",
   "SuccessConnected": "{{serviceName}} je uspešno povezan kao kanal za obaveštenja. Sada ćeš tamo primati ažuriranja.",

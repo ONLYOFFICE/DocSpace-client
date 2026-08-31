@@ -9,7 +9,7 @@
   "LdapEmailTooltip": "此用户帐户通过 LDAP 加载。用户的邮箱地址未指定，当前的为自动生成，无法用于发送通知。",
   "NotConfigured": "未配置",
   "Notifications": "消息通知",
-  "RoomsActivityDescription": "获取关于您在 {{rooms}} 和 {{aiAgents}} 中新共享文件/文件夹和活动的的即时电子邮件通知。",
+  "RoomsActivityDescription": "即时接收有关新共享文件和文件夹以及 {{files}}、{{rooms}}、{{forms}} 和 {{aiAgents}} 中活动的电子邮件通知。",
   "RoomUpdateNotify": "{{files}}、{{rooms}}、{{forms}} 和 {{aiAgents}} 活动",
   "SettingUpNotifications": "通知设置",
   "SuccessConnected": "{{serviceName}} 已成功关联为通知渠道，您将通过该渠道接收更新。",

@@ -9,7 +9,7 @@
   "LdapEmailTooltip": "Ta uporabniški račun je naložen iz LDAP. Uporabnikova e-poštna naslov ni bila navedena in trenutna je bila ustvarjena samodejno ter je ni mogoče uporabiti za pošiljanje obvestil.",
   "NotConfigured": "Ni konfigurirano",
   "Notifications": "Obvestila",
-  "RoomsActivityDescription": "Prejemajte takojšnje e-poštovne obvestila o novih deljenih datotekah/mapah in aktivnosti v vaših {{rooms}} in {{aiAgents}}.",
+  "RoomsActivityDescription": "Prejemajte takojšnja e-poštna obvestila o novih deljenih datotekah in mapah ter o dejavnosti v {{files}}, {{rooms}}, {{forms}} in {{aiAgents}}.",
   "RoomUpdateNotify": "Dejavnost v {{files}}, {{rooms}}, {{forms}} in {{aiAgents}}",
   "SettingUpNotifications": "Nastavitve obvestil",
   "SuccessConnected": "{{serviceName}} je bil uspešno povezan kot kanal za obveščanje. Sedaj boste prejemali posodobitve tam.",

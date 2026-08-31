@@ -9,7 +9,7 @@
   "LdapEmailTooltip": "Deze gebruikersaccount wordt geladen vanuit LDAP. Het e-mailadres van de gebruiker is niet gespecificeerd, en het huidige adres is automatisch gegenereerd en kan niet worden gebruikt om notificaties te verzenden.",
   "NotConfigured": "Niet geconfigureerd",
   "Notifications": "Meldingen",
-  "RoomsActivityDescription": "Ontvang onmiddellijke e-mailmeldingen over nieuwe gedeelde bestanden/mappen en activiteiten binnen uw {{rooms}} en {{aiAgents}}.",
+  "RoomsActivityDescription": "Ontvang direct e-mailmeldingen over nieuw gedeelde bestanden en mappen en over activiteit in {{files}}, {{rooms}}, {{forms}} en {{aiAgents}}.",
   "RoomUpdateNotify": "Activiteit in {{files}}, {{rooms}}, {{forms}} en {{aiAgents}}",
   "SettingUpNotifications": "Meldingsinstellingen",
   "SuccessConnected": "{{serviceName}} is succesvol verbonden als notificatiekanaal. U ontvangt nu updates daar.",

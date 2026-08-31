@@ -9,7 +9,7 @@
   "LdapEmailTooltip": "Tämä käyttäjätili ladataan LDAP:sta. Käyttäjän sähköpostiosoitetta ei ole määritetty, ja nykyinen osoite on luotu automaattisesti eikä sitä voi käyttää ilmoitusten lähettämiseen.",
   "NotConfigured": "Ei määritetty",
   "Notifications": "Ilmoitukset",
-  "RoomsActivityDescription": "Saat välittömästi sähköposti-ilmoituksia uusista jaetuista tiedostoista/kansioista ja aktiviteetista {{rooms}}:ssa ja {{aiAgents}}:ssä.",
+  "RoomsActivityDescription": "Saat välittömät sähköposti-ilmoitukset uusista jaetuista tiedostoista ja kansioista sekä toiminnasta osioissa {{files}}, {{rooms}}, {{forms}} ja {{aiAgents}}.",
   "RoomUpdateNotify": "Toiminta osioissa {{files}}, {{rooms}}, {{forms}} ja {{aiAgents}}",
   "SettingUpNotifications": "Ilmoitusasetukset",
   "SuccessConnected": "{{serviceName}} on yhdistetty onnistuneesti ilmoituskanavana. Saat sieltä nyt päivityksiä.",

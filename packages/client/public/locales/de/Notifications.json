@@ -9,7 +9,7 @@
   "LdapEmailTooltip": "Dieses Benutzerkonto wird aus LDAP geladen. Die E-Mail-Adresse des Benutzers wurde nicht angegeben. Die aktuelle Adresse wurde automatisch generiert und kann nicht zum Senden von Benachrichtigungen verwendet werden.",
   "NotConfigured": "Nicht konfiguriert",
   "Notifications": "Benachrichtigungen",
-  "RoomsActivityDescription": "Erhalten Sie sofortige E-Mail-Benachrichtigungen über neue freigegebene Dateien/Ordner und Aktivitäten innerhalb Ihrer {{rooms}} und {{aiAgents}}.",
+  "RoomsActivityDescription": "Erhalten Sie sofortige E-Mail-Benachrichtigungen über neu freigegebene Dateien und Ordner sowie über Aktivitäten in {{files}}, {{rooms}}, {{forms}} und {{aiAgents}}.",
   "RoomUpdateNotify": "Aktivität in {{files}}, {{rooms}}, {{forms}} und {{aiAgents}}",
   "SettingUpNotifications": "Benachrichtigungseinstellungen",
   "SuccessConnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal verbunden. Sie erhalten nun Updates darüber.",

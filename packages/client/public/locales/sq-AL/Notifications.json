@@ -9,7 +9,7 @@
   "LdapEmailTooltip": "Kjo llogari është e ngarkuar nga LDAP. Email-i nuk është specifikuar dhe është gjeneruar automatikisht, nuk mund të përdoret për të dërguar njoftime.",
   "NotConfigured": "Nuk është konfiguruar",
   "Notifications": "Njoftimet",
-  "RoomsActivityDescription": "Merr njoftime e menjëhershme me email për skedarë/dosje të reja të ndara dhe aktivitet brenda {{rooms}} dhe {{aiAgents}} tuaj.",
+  "RoomsActivityDescription": "Merrni njoftime të menjëhershme me email për skedarët dhe dosjet e reja të ndara dhe për aktivitetin në {{files}}, {{rooms}}, {{forms}} dhe {{aiAgents}}.",
   "RoomUpdateNotify": "Aktiviteti në {{files}}, {{rooms}}, {{forms}} dhe {{aiAgents}}",
   "SettingUpNotifications": "Cilësimet e njoftimeve",
   "SuccessConnected": "{{serviceName}} është lidhur me sukses si kanal njoftimi. Tani do të merrni përditësime atje.",

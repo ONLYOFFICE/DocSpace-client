@@ -9,7 +9,7 @@
   "LdapEmailTooltip": "Šis lietotāja konts tiek ielādēts no LDAP. Lietotāja e-pasta adrese nav norādīta, un pašreizējā tika ģenerēta automātiski un nevar tikt izmantota, lai sūtītu paziņojumus.",
   "NotConfigured": "Nav konfigurēts",
   "Notifications": "Paziņojumi",
-  "RoomsActivityDescription": "Saņemiet instant e-pasta paziņojumus par jauni dalītie faili/karaktēri un aktivitāti savā {{rooms}} un {{aiAgents}} iekšpusē.",
+  "RoomsActivityDescription": "Saņemiet tūlītējus e-pasta paziņojumus par jauniem koplietotiem failiem un mapēm, kā arī par aktivitāti sadaļās {{files}}, {{rooms}}, {{forms}} un {{aiAgents}}.",
   "RoomUpdateNotify": "Aktivitāte sadaļās {{files}}, {{rooms}}, {{forms}} un {{aiAgents}}",
   "SettingUpNotifications": "Paziņojumu iestatījumi",
   "SuccessConnected": "{{serviceName}} ir veiksmīgi pievienots kā paziņojumu kanāls. Jūs tagad saņemsiet atjauninājumus tur.",

@@ -9,7 +9,7 @@
   "LdapEmailTooltip": "Esta conta de utilizador é carregada a partir do LDAP. O endereço de e-mail do utilizador não foi especificado, e o atual foi gerado automaticamente e não pode ser usado para enviar notificações.",
   "NotConfigured": "Não configurado",
   "Notifications": "Notificações",
-  "RoomsActivityDescription": "Receba notificações instantâneas por e-mail sobre novos arquivos/pastas compartilhados e atividades dentro dos seus {{rooms}} e {{aiAgents}}.",
+  "RoomsActivityDescription": "Receba notificações instantâneas por e-mail sobre novos ficheiros e pastas partilhados e sobre a atividade em {{files}}, {{rooms}}, {{forms}} e {{aiAgents}}.",
   "RoomUpdateNotify": "Atividade em {{files}}, {{rooms}}, {{forms}} e {{aiAgents}}",
   "SettingUpNotifications": "Definições de notificações",
   "SuccessConnected": "{{serviceName}} foi conectado com sucesso como um canal de notificação. Você agora receberá atualizações lá.",

@@ -9,7 +9,7 @@
   "LdapEmailTooltip": "Tài khoản người dùng này được tải từ LDAP. Địa chỉ email của người dùng không được chỉ định, và địa chỉ hiện tại được tạo tự động và không thể sử dụng để gửi thông báo.",
   "NotConfigured": "Chưa được cấu hình",
   "Notifications": "Thông báo",
-  "RoomsActivityDescription": "Nhận thông báo email tức thì về các tệp/thư mục được chia sẻ mới và hoạt động bên trong {{rooms}} và {{aiAgents}} của bạn.",
+  "RoomsActivityDescription": "Nhận thông báo email tức thì về các tệp và thư mục mới được chia sẻ và về hoạt động trong {{files}}, {{rooms}}, {{forms}} và {{aiAgents}}.",
   "RoomUpdateNotify": "Hoạt động trong {{files}}, {{rooms}}, {{forms}} và {{aiAgents}}",
   "SettingUpNotifications": "Cài đặt thông báo",
   "SuccessConnected": "{{serviceName}} đã được kết nối thành công như một kênh thông báo. Bạn sẽ nhận được thông báo ở đó từ bây giờ.",

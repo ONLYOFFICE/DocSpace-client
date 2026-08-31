@@ -66,6 +66,7 @@
   "CheckPeriod": "Doba kontroly (s)",
   "CheckUnsupportedFiles": "Kontrola nepodporovaných souborů",
   "ChooseBackupFile": "Výběr záložního souboru",
+  "ColorDescription": "Vyberte barvu pro prvky rozhraní svého pracovního prostoru: tlačítka, odkazy a další zvýraznění ji budou používat všude.",
   "CommonFilesDescription": "Pro soubory v sekci Společné soubory bude vytvořena samostatná místnost (místnost Společné soubory). Přístup do této místnosti budou mít pouze supersprávci. Vlastníkem místnosti bude standardně uživatel, který import zahájil: {{user}} (Vy).",
   "ConfigureDeepLink": "Hluboký odkaz",
   "ConfigureDeepLinkDescription": "Při otevírání dokumentů v mobilním prohlížeči zvolte, zda uživatelům nabídnout možnost otevřít soubor místo toho v aplikaci.",

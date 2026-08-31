@@ -66,6 +66,7 @@
   "CheckPeriod": "Period provere (sek)",
   "CheckUnsupportedFiles": "Proveri nepodržane datoteke",
   "ChooseBackupFile": "Izaberi rezervnu datoteku",
+  "ColorDescription": "Izaberite boju za elemente interfejsa svog radnog prostora: dugmad, veze i druga isticanja koristiće je svuda.",
   "CommonFilesDescription": "Za datoteke u odeljku Zajedničke datoteke biće kreirana posebna soba (soba Zajedničke datoteke). Samo superadministratori imaće pristup ovoj sobi. Podrazumevano, vlasnik sobe biće korisnik koji započinje uvoz: {{user}} (Vi).",
   "ConfigureDeepLink": "Duboki link",
   "ConfigureDeepLinkDescription": "Prilikom otvaranja dokumenata u mobilnom pregledaču, izaberite da li ćete korisnicima ponuditi mogućnost da fajl otvore u aplikaciji umesto toga.",

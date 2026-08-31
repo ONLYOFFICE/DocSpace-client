@@ -66,6 +66,7 @@
   "CheckPeriod": "Čas overovania (s.)",
   "CheckUnsupportedFiles": "Skontrolovať nepodporované súbory",
   "ChooseBackupFile": "Vyberte záložný súbor",
+  "ColorDescription": "Vyberte farbu pre prvky rozhrania svojho pracovného priestoru: tlačidlá, odkazy a ďalšie zvýraznenia ju budú používať všade.",
   "CommonFilesDescription": "Pre súbory v sekcii Spoločné súbory bude vytvorená samostatná miestnosť (miestnosť Spoločné súbory). Prístup do tejto miestnosti budú mať iba supersprávcovia. Majiteľom miestnosti bude štandardne používateľ, ktorý import spustil: {{user}} (Vy).",
   "ConfigureDeepLink": "Deep link",
   "ConfigureDeepLinkDescription": "Pri spracovaní dokumentov v mobile môžete používateľom ponúknuť (alebo neponúknuť) možnosť otvoriť súbor v prehliadači alebo v mobilnej aplikácii.",

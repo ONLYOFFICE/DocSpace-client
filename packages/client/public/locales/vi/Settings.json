@@ -66,6 +66,7 @@
   "CheckPeriod": "Thời gian kiểm tra (giây)",
   "CheckUnsupportedFiles": "Kiểm tra các tập tin không được hỗ trợ",
   "ChooseBackupFile": "Chọn tập tin sao lưu",
+  "ColorDescription": "Chọn màu cho các thành phần giao diện của không gian làm việc của bạn: các nút, liên kết và các điểm nhấn khác sẽ dùng màu này ở mọi nơi.",
   "CommonFilesDescription": "Đối với các tệp trong mục Các tập tin chung, một phòng riêng sẽ được tạo (phòng Các tập tin chung). Chỉ siêu quản trị viên có quyền truy cập vào phòng này. Theo mặc định, chủ sở hữu của phòng sẽ là người dùng khởi tạo việc nhập: {{user}} (Bạn).",
   "ConfigureDeepLink": "Liên kết sâu",
   "ConfigureDeepLinkDescription": "Khi mở tài liệu trong trình duyệt di động, hãy chọn có cho phép người dùng tùy chọn mở tệp trong ứng dụng di động thay vì trình duyệt hay không.",

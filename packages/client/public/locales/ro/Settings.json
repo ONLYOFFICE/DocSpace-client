@@ -66,6 +66,7 @@
   "CheckPeriod": "Perioada de verificare (s)",
   "CheckUnsupportedFiles": "Verificarea fișierelor care nu sunt acceptate",
   "ChooseBackupFile": "Alegeți fișierul de rezervă",
+  "ColorDescription": "Alegeți o culoare pentru elementele de interfață ale spațiului dvs. de lucru: butoanele, linkurile și alte accente o vor folosi peste tot.",
   "CommonFilesDescription": "Pentru fișierele din secțiunea Fișiere comune va fi creată o sală separată (sala Fișiere comune). Doar superadministratorii vor avea acces la această sală. În mod implicit, proprietarul sălii va fi utilizatorul care inițiază importul: {{user}} (dvs.).",
   "ConfigureDeepLink": "Deep link",
   "ConfigureDeepLinkDescription": "Când documentele sunt deschise într-un browser de pe dispozitivul mobil, alegeți dacă doriți să oferiți utilizatorilor opțiunea de a deschide fișierul în aplicație.",

@@ -66,6 +66,7 @@
   "CheckPeriod": "Okres sprawdzania (sek.)",
   "CheckUnsupportedFiles": "Sprawdź nieobsługiwane pliki",
   "ChooseBackupFile": "Wybierz plik kopii zapasowej",
+  "ColorDescription": "Wybierz kolor dla elementów interfejsu swojej przestrzeni roboczej: przyciski, linki i inne akcenty będą go używać wszędzie.",
   "CommonFilesDescription": "Dla plików w sekcji Wspólne pliki zostanie utworzony osobny pokój (pokój Wspólne pliki). Dostęp do tego pokoju będą mieli tylko superadministratorzy. Domyślnie właścicielem pokoju będzie użytkownik inicjujący import: {{user}} (Ty).",
   "ConfigureDeepLink": "Deep link",
   "ConfigureDeepLinkDescription": "Podczas otwierania dokumentów w przeglądarce mobilnej wybierz, czy dać użytkownikom możliwość otwarcia pliku w aplikacji zamiast w przeglądarce.",

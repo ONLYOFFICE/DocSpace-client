@@ -66,6 +66,7 @@
   "CheckPeriod": "Prüfdauer (Sek.)",
   "CheckUnsupportedFiles": "Nicht unterstützte Dateien prüfen",
   "ChooseBackupFile": "Sicherungsdatei wählen",
+  "ColorDescription": "Wählen Sie eine Farbe für die Oberflächenelemente Ihres Arbeitsbereichs: Schaltflächen, Links und andere Akzente verwenden sie überall.",
   "CommonFilesDescription": "Für die Dateien im Abschnitt Gemeinsame Dateien wird ein separater Raum erstellt (Raum Gemeinsame Dateien). Nur Super-Administratoren haben Zugriff auf diesen Raum. Standardmäßig ist der Besitzer des Raums der Benutzer, der den Import initiiert: {{user}} (Sie).",
   "ConfigureDeepLink": "Deep Link",
   "ConfigureDeepLinkDescription": "Legen Sie fest, ob Nutzer beim Öffnen von Dokumenten in einem mobilen Browser stattdessen die Möglichkeit erhalten sollen, die Datei in der App zu öffnen.",

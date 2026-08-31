@@ -66,6 +66,7 @@
   "CheckPeriod": "Kontrol süresi (sn)",
   "CheckUnsupportedFiles": "Desteklenmeyen dosyaları kontrol et",
   "ChooseBackupFile": "Yedekleme dosyasını seç",
+  "ColorDescription": "Çalışma alanınızın arayüz öğeleri için bir renk seçin: düğmeler, bağlantılar ve diğer vurgular bu rengi her yerde kullanır.",
   "CommonFilesDescription": "Ortak dosyalar bölümündeki dosyalar için ayrı bir oda oluşturulacaktır (Ortak dosyalar odası). Bu odaya yalnızca süper yöneticiler erişebilir. Varsayılan olarak odanın sahibi, içe aktarmayı başlatan kullanıcı olacaktır: {{user}} (Siz).",
   "ConfigureDeepLink": "Derin bağlantı",
   "ConfigureDeepLinkDescription": "Belgeler mobil tarayıcıda açılırken, kullanıcılara dosyayı bunun yerine uygulamada açma seçeneği sunulup sunulmayacağını seçin.",

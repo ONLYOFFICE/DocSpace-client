@@ -66,6 +66,7 @@
   "CheckPeriod": "Pārbaudes periods (s)",
   "CheckUnsupportedFiles": "Pārbaudīt neatbalstītos failus",
   "ChooseBackupFile": "Atlasīt dublējuma failu",
+  "ColorDescription": "Izvēlieties krāsu savas darbvietas saskarnes elementiem: pogas, saites un citi izcēlumi to izmantos visur.",
   "CommonFilesDescription": "Failiem sadaļā Kopīgi faili tiks izveidota atsevišķa telpa (telpa Kopīgi faili). Piekļuve šai telpai būs tikai superadministratoriem. Pēc noklusējuma telpas īpašnieks būs lietotājs, kas sāk importēšanu: {{user}} (Jūs).",
   "ConfigureDeepLink": "Dziļā saite",
   "ConfigureDeepLinkDescription": "Atverot dokumentus mobilajā pārlūkprogrammā, izvēlieties, vai lietotājiem piedāvāt iespēju failu tā vietā atvērt lietotnē.",

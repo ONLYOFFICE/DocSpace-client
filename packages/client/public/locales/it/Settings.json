@@ -66,6 +66,7 @@
   "CheckPeriod": "Periodo di controllo (sec)",
   "CheckUnsupportedFiles": "Controlla i file non supportati",
   "ChooseBackupFile": "Scegli il file di backup",
+  "ColorDescription": "Scegli un colore per gli elementi dell'interfaccia del tuo spazio di lavoro: pulsanti, link e altri accenti lo useranno ovunque.",
   "CommonFilesDescription": "Per i file nella sezione File comuni verrà creata una stanza separata (stanza File comuni). Solo i superamministratori avranno accesso a questa stanza. Per impostazione predefinita, il proprietario della stanza sarà l'utente che avvia l'importazione: {{user}} (tu).",
   "ConfigureDeepLink": "Deep link",
   "ConfigureDeepLinkDescription": "Quando i documenti vengono aperti in un browser mobile, scegli se offrire agli utenti la possibilità di aprire il file nell'app anziché nel browser.",

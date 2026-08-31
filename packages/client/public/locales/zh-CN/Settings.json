@@ -66,6 +66,7 @@
   "CheckPeriod": "检查周期（秒）",
   "CheckUnsupportedFiles": "检查不受支持的文件",
   "ChooseBackupFile": "选择备份文件",
+  "ColorDescription": "为工作区的界面元素选择一种颜色：按钮、链接和其他强调元素将在各处使用该颜色。",
   "CommonFilesDescription": "系统将为“公共文件”部分中的文件创建一个单独的房间（公共文件房间）。只有超级管理员可以访问此房间。默认情况下，房间的所有者为发起导入的用户：{{user}}（您）。",
   "ConfigureDeepLink": "深度链接",
   "ConfigureDeepLinkDescription": "移动端浏览器处理文档时，可以设置是否向用户提供“在浏览器打开”或“在移动应用打开”的选项。",

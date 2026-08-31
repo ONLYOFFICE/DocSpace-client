@@ -66,6 +66,7 @@
   "CheckPeriod": "Obdobje preverjanja (s)",
   "CheckUnsupportedFiles": "Preveri nepodprte datoteke",
   "ChooseBackupFile": "Izberi datoteko varnostne kopije",
+  "ColorDescription": "Izberite barvo za elemente vmesnika svojega delovnega prostora: gumbi, povezave in drugi poudarki jo bodo uporabljali povsod.",
   "CommonFilesDescription": "Za datoteke v razdelku Skupne datoteke bo ustvarjena ločena soba (soba Skupne datoteke). Dostop do te sobe bodo imeli samo superskrbniki. Privzeto bo lastnik sobe uporabnik, ki začne uvoz: {{user}} (Vi).",
   "ConfigureDeepLink": "Globoka povezava",
   "ConfigureDeepLinkDescription": "Ko uporabniki v mobilnem brskalniku odpirajo dokumente, izberite, ali jim boste namesto tega ponudili možnost odpiranja datoteke v aplikaciji.",

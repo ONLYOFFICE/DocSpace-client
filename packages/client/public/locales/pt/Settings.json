@@ -66,6 +66,7 @@
   "CheckPeriod": "Período de verificação (seg)",
   "CheckUnsupportedFiles": "Verifique os arquivos não suportados",
   "ChooseBackupFile": "Escolha o arquivo de backup",
+  "ColorDescription": "Escolha uma cor para os elementos de interface do seu espaço de trabalho: botões, links e outros destaques irão utilizá-la em todo o lado.",
   "CommonFilesDescription": "Para os ficheiros na secção Arquivos comuns, será criada uma sala separada (sala Arquivos comuns). Apenas os superadministradores terão acesso a esta sala. Por predefinição, o proprietário da sala será o utilizador que inicia a importação: {{user}} (você).",
   "ConfigureDeepLink": "Deep link",
   "ConfigureDeepLinkDescription": "Ao abrir documentos num browser móvel, escolha se quer dar aos utilizadores a opção de abrir o ficheiro na aplicação em vez do browser.",

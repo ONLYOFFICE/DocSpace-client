@@ -66,6 +66,7 @@
   "CheckPeriod": "Periudha e kontrollit (sek)",
   "CheckUnsupportedFiles": "Kontrolloni skedarët e pambështetur",
   "ChooseBackupFile": "Zgjidhni skedarin rezervë",
+  "ColorDescription": "Zgjidhni një ngjyrë për elementet e ndërfaqes së hapësirës suaj të punës: butonat, lidhjet dhe theksimet e tjera do ta përdorin atë kudo.",
   "CommonFilesDescription": "Për skedarët në seksionin Skedarët e përbashkët do të krijohet një dhomë e veçantë (dhoma Skedarët e përbashkët). Vetëm superadministratorët do të kenë akses në këtë dhomë. Si parazgjedhje, pronari i dhomës do të jetë përdoruesi që fillon importimin: {{user}} (Ju).",
   "ConfigureDeepLink": "Lidhje e thellë",
   "ConfigureDeepLinkDescription": "Kur hapni dokumente në një shfletues mobil, zgjidhni nëse dëshironi t'u jepni përdoruesve mundësinë për ta hapur skedarin në aplikacion në vend të tij.",

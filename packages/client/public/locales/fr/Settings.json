@@ -66,6 +66,7 @@
   "CheckPeriod": "Période de contrôle (sec)",
   "CheckUnsupportedFiles": "Vérifiez les fichiers non pris en charge",
   "ChooseBackupFile": "Choisissez le fichier de sauvegarde",
+  "ColorDescription": "Choisissez une couleur pour les éléments d'interface de votre espace de travail : les boutons, les liens et les autres accents l'utiliseront partout.",
   "CommonFilesDescription": "Pour les fichiers de la section Fichiers communs, une salle distincte sera créée (salle Fichiers communs). Seuls les super-administrateurs auront accès à cette salle. Par défaut, le propriétaire de la salle sera l'utilisateur à l'origine de l'importation : {{user}} (vous).",
   "ConfigureDeepLink": "Lien direct",
   "ConfigureDeepLinkDescription": "Lors de l'ouverture de documents dans un navigateur mobile, choisissez si vous souhaitez proposer aux utilisateurs la possibilité d'ouvrir le fichier dans l'application à la place.",

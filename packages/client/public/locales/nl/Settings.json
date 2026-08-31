@@ -66,6 +66,7 @@
   "CheckPeriod": "Controleperiode (sec)",
   "CheckUnsupportedFiles": "Controleer niet-ondersteunde bestanden",
   "ChooseBackupFile": "Kies het back-up bestand",
+  "ColorDescription": "Kies een kleur voor de interface-elementen van uw werkruimte: knoppen, links en andere accenten gebruiken deze overal.",
   "CommonFilesDescription": "Voor de bestanden in de sectie Algemene bestanden wordt een aparte kamer aangemaakt (kamer Algemene bestanden). Alleen superbeheerders hebben toegang tot deze kamer. Standaard is de eigenaar van de kamer de gebruiker die de import start: {{user}} (u).",
   "ConfigureDeepLink": "Deep link",
   "ConfigureDeepLinkDescription": "Kies bij het openen van documenten in een mobiele browser of gebruikers de optie krijgen om het bestand in plaats daarvan in de app te openen.",

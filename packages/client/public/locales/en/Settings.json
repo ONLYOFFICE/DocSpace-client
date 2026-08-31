@@ -66,6 +66,7 @@
   "CheckPeriod": "Check period (sec)",
   "CheckUnsupportedFiles": "Check unsupported files",
   "ChooseBackupFile": "Choose the backup file",
+  "ColorDescription": "Pick a color for your workspace interface elements: buttons, links, and other highlights will use it throughout.",
   "CommonFilesDescription": "For the files in the Common section, a separate room will be created (Common room). Only Full admins will have access to this room. By default, the owner of the room will be the user initiating the import: {{user}} (You).",
   "ConfigureDeepLink": "Deep link",
   "ConfigureDeepLinkDescription": "When opening documents in a mobile browser, choose whether to give users the option to open the file in the app instead.",

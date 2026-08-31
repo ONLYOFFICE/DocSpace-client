@@ -66,6 +66,7 @@
   "CheckPeriod": "Nəzarət vaxtı (san)",
   "CheckUnsupportedFiles": "Dəstəklənməyən faylları yoxlayın",
   "ChooseBackupFile": "Ehtiyat faylı seçin",
+  "ColorDescription": "İş sahənizin interfeys elementləri üçün rəng seçin: düymələr, keçidlər və digər vurğular onu hər yerdə istifadə edəcək.",
   "CommonFilesDescription": "Ümumi fayllar bölməsindəki fayllar üçün ayrıca otaq yaradılacaq (Ümumi fayllar otağı). Bu otağa yalnız super administratorlar daxil ola biləcək. Susmaya görə otağın sahibi idxalı başladan istifadəçi olacaq: {{user}} (Siz).",
   "ConfigureDeepLink": "Dərin link",
   "ConfigureDeepLinkDescription": "Mobil brauzerdə sənədləri açarkən, istifadəçilərə faylı əvəzinə tətbiqdə açmaq seçimini verib-verməməyi seçin.",

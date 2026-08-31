@@ -66,6 +66,7 @@
   "CheckPeriod": "Tarkistusaika (sek)",
   "CheckUnsupportedFiles": "Tarkista tiedostot, joita ei tueta",
   "ChooseBackupFile": "Valitse varmuuskopiotiedosto",
+  "ColorDescription": "Valitse väri työtilasi käyttöliittymäelementeille: painikkeet, linkit ja muut korostukset käyttävät sitä kaikkialla.",
   "CommonFilesDescription": "Yleiset tiedostot -osion tiedostoille luodaan erillinen huone (Yleiset tiedostot -huone). Vain pääjärjestelmänvalvojilla on pääsy tähän huoneeseen. Oletuksena huoneen omistaja on tuonnin aloittava käyttäjä: {{user}} (Sinä).",
   "ConfigureDeepLink": "Syvälinkki",
   "ConfigureDeepLinkDescription": "Kun asiakirjoja avataan mobiiliselaimessa, valitse, tarjotaanko käyttäjille mahdollisuus avata tiedosto sen sijaan sovelluksessa.",

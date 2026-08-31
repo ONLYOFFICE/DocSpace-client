@@ -3,7 +3,7 @@
   "content": "Add a full-featured document editing engine to your ecosystem. Create an instance to connect storage-independent editors for documents, spreadsheets, presentations, and PDFs — using <1>50+ ready-made connectors</1> for the platforms you already use, or connect to your own platform via API. You can connect one instance to multiple platforms.",
   "content_en_sha1_hash": "5a877bc8853643f7f4a92bb2af90e57741efb3b2",
   "created_at": "2026-08-26T14:08:29.869Z",
-  "updated_at": "2026-08-26T14:11:04.643Z",
+  "updated_at": "2026-08-27T15:37:55.742Z",
   "comment": {
     "text": "Promotional paragraph text on the DocsConnect page explaining the service's features and integration options. The <1> tag wraps a clickable link within the text.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
-      "line_number": 108,
+      "line_number": 129,
       "context": ") : (\n <>\n <Text as=\"p\" className={styles.description}>\n <Trans\n t={t}\n i18nKey=\"PromoDescription\"\n ns=\"DocsConnect\"\n components={{\n 1: (\n <Link\n className={styles.link}",
       "module": "/packages/client"
     }

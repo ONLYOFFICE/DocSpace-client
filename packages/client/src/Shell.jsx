@@ -96,6 +96,7 @@ import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 import { ModelUpdatedBanner } from "SRC_DIR/pages/Home/View/ModelUpdatedBanner";
 import { useAiAgentsPickerActions } from "SRC_DIR/Hooks/useAiAgentsPickerActions";
+import { useFormsRecommendation } from "SRC_DIR/Hooks/useFormsRecommendation";
 
 import config from "PACKAGE_FILE";
 
@@ -158,6 +159,7 @@ const Shell = ({ page = "home", ...rest }) => {
     agentEntityId,
     isInsideAgentRoom,
     canEditAgentRoom,
+    recommendedModelForForms,
     getAgentRoomId,
     openResultFile,
     closeEditorPanel,
@@ -864,6 +866,18 @@ const Shell = ({ page = "home", ...rest }) => {
     [isInsideAgentRoom, pickedAgent],
   );
 
+  // The in-chat notice recommending the model tested for form results. Only
+  // inside an AI agent room, as the legacy chat had it: elsewhere the chat
+  // answers with the portal default and there is no agent to re-point.
+  const formsRecommendation = useFormsRecommendation({
+    // `agentEntityId` is dropped for an agent room opened without the UseChat
+    // right (the pane is a view-only stub there) — no chat, nothing to notice.
+    enabled: !!isInsideAgentRoom && !!agentEntityId,
+    agentRoomId: agentEntityId,
+    canEditAgent: !!canEditAgentRoom,
+    recommendedModel: recommendedModelForForms,
+  });
+
   // Chat error box override (Bug 83207): the wallet 402 must read as a
   // human message with a way to top up instead of the raw provider text.
   // Only the Payer can actually top the wallet up, so the button to
@@ -941,6 +955,7 @@ const Shell = ({ page = "home", ...rest }) => {
           // UI are switched off. Viewer-role gating inside agent rooms is
           // handled by `accessRightsStore.canUseChat` in AIAgentView.
           canUseAi={canUseAi}
+          formsRecommendation={formsRecommendation}
           callbacks={aiChatCallbacks}
           entityId={agentEntityId}
           contextEntityId={chatContextEntityId}
@@ -1155,6 +1170,7 @@ const ShellWrapper = inject(
       // profile. It is shown in the composer as a read-only label, or — for
       // users who may edit the room — an interactive picker to change it.
       isInsideAgentRoom: selectedFolderStore.isAIRoom,
+      recommendedModelForForms: settingsStore.aiConfig?.recommendedModelForForms,
       // EditRoom is the room-manager right; viewers (EditRoom === false, or
       // security not resolved yet) get the read-only label. Both room and
       // sub-folder security view-models carry EditRoom.

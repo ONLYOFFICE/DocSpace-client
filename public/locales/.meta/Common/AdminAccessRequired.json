@@ -3,13 +3,27 @@
   "content": "Admin access required",
   "content_en_sha1_hash": "737b16b6a8b5e59740d0eb0922274d2238fddd9e",
   "created_at": "2026-08-27T12:02:33.438Z",
-  "updated_at": "2026-08-27T12:02:33.438Z",
+  "updated_at": "2026-08-27T15:40:48.953Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Title for a warning toast and an access notice heading, appearing when a user lacks the necessary administrative permissions to access a feature.",
+    "is_auto": true,
+    "updated_at": "2026-08-27T15:40:48.953Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 279,
+      "context": "// Says why a tile leads nowhere, in place of the 403 that following it used\n // to produce. Shared by every tile, so the wording is stated once.\n const showAdminOnlyToast = () => {\n toastr.warning(\n t(\"Common:AdminOnlyFeature\"),\n t(\"Common:AdminAccessRequired\"),\n );\n };\n \n // The dashboard tour reads its anchors from the DOM, so the dev-tools step\n // drops itself once this returns nothing - no tour change needed here.",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
+      "line_number": 103,
+      "context": "<div\n className={styles.accessNotice}\n data-testid=\"docs_connect_access_notice\"\n >\n <Text as=\"p\" className={styles.accessNoticeTitle}>\n {t(\"Common:AdminAccessRequired\")}\n </Text>\n <Text as=\"p\" className={styles.description}>\n {t(\"DocsConnect:AdminAccessDescription\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

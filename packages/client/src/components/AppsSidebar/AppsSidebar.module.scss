@@ -59,10 +59,23 @@
   }
 }
 
+// Takes every pixel the logo itself does not need, so the collapse button next
+// to it is pinned to the header's trailing edge by the logo block rather than
+// by `justify-content`. `.header` asks for `space-between`, but ui-kit's
+// `.articleHeader[data-show-text="true"]` re-states `flex-start` inside its
+// tablet media query and outranks it on specificity - the button would sit
+// wherever the logo happens to end. It used to look right only because the
+// wordmark was almost exactly as wide as the row; a narrower logo left it
+// stranded mid-header.
+//
+// `min-width: 0` lets a wide white-label logo shrink here (`.logoFull` is
+// capped at `max-width: 100%`) instead of pushing the button out of the row.
 .logoWrapper {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .logoFull {

@@ -1,0 +1,29 @@
+{
+  "key_path": "ConnectorsTitle",
+  "content": "Discover ready-to-use connectors",
+  "content_en_sha1_hash": "e8e2c79b10554865d1b47039eb25cef92514ae76",
+  "created_at": "2026-08-28T12:19:44.855Z",
+  "updated_at": "2026-08-28T12:20:29.427Z",
+  "comment": {
+    "text": "Section header in the Javascript SDK integration settings that introduces available pre-built connectors.",
+    "is_auto": true,
+    "updated_at": "2026-08-28T12:20:29.427Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/Integration.tsx",
+      "line_number": 86,
+      "context": "styles.categoryHeader,\n { [styles.isMobile]: isMobile() },\n \"integration-header\",\n )}\n >\n {t(\"JavascriptSdk:ConnectorsTitle\")}\n </div>\n <Text lineHeight=\"20px\" className={styles.connectorsDescription}>\n {t(\"JavascriptSdk:ConnectorsDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n })}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

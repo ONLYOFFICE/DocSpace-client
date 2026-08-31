@@ -114,15 +114,24 @@ export const ModuleCard = ({ mod, onTakeTour }: ModuleCardProps) => {
     >
       <div className={styles.moduleHeader}>
         <span className={styles.moduleIcon}>{mod.icon}</span>
-        <Text as="p" className={styles.moduleTitle}>
-          {mod.title}
-        </Text>
-        {mod.installed ? (
-          <Text as="span" className={styles.moduleInstalledBadge}>
-            <TickSvg />
-            {t("Common:Installed")}
+        {/*
+         * Title and badge share a wrapping flex line of their own rather than
+         * sitting in the header next to the icon: in a language whose app name
+         * and "Installed" together outgrow a quarter of the grid, the badge
+         * drops under the title instead of overlapping it, and stays aligned
+         * with the title rather than with the icon.
+         */}
+        <div className={styles.moduleHeadings}>
+          <Text as="p" className={styles.moduleTitle}>
+            {mod.title}
           </Text>
-        ) : null}
+          {mod.installed ? (
+            <Text as="span" className={styles.moduleInstalledBadge}>
+              <TickSvg />
+              {t("Common:Installed")}
+            </Text>
+          ) : null}
+        </div>
       </div>
 
       <Text as="p" className={styles.moduleDescription}>

@@ -33,24 +33,19 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { isArbiterEnabled } from "@docspace/shared/utils/arbiter";
 import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
 
 import type { AppId } from "./apps-catalog";
 
-// Temporary kill switch for apps that cannot run on the new AI stack yet.
-// The AI Arbiter still drives the removed C# AI endpoints (chat streaming,
-// providers, models), which the Node AI service does not serve, so the
-// product is hidden everywhere until it is migrated or removed. Remove the
-// id from this set to bring the app back.
-const TEMPORARILY_DISABLED_APPS: ReadonlySet<string> = new Set<AppId>([
-  "ai-arbiter",
-]);
+const TEMPORARILY_DISABLED_APPS: ReadonlySet<string> = new Set<AppId>();
 
 // Apps that are built but not released yet, each hidden behind its own opt-in
 // flag so testers can still reach them. Private rooms ("e2e-rooms") wait on the
 // editors side of the feature, see @docspace/shared/utils/privateRooms.
 const UNRELEASED_APPS: ReadonlyMap<AppId, () => boolean> = new Map([
   ["e2e-rooms" as AppId, isPrivateRoomsEnabled],
+  ["ai-arbiter" as AppId, isArbiterEnabled],
 ]);
 
 const isAppUnreleased = (id: string): boolean => {

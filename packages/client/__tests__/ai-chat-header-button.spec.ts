@@ -69,9 +69,11 @@ const ROOMS_URL = "/rooms/shared/";
 /** Desktop: the button lives in Navigation's right-hand button row. */
 const DESKTOP = { width: 1440, height: 1024 };
 /**
- * Below 1024 the row is dropped and the button joins the control buttons. At
- * this width the header is also out of room, so the button is collapsed - the
- * two things the tablet screenshot is here to pin.
+ * Below 1024 the trailing button row is dropped and the button joins the
+ * control buttons instead - a container the grid never widens past its 90px
+ * `min-width`, which is less than the labelled button needs. So the tablet
+ * frame pins both the move into the control buttons and the collapse it
+ * forces; see the test itself for the arithmetic.
  */
 const TABLET = { width: 900, height: 800 };
 /**
@@ -290,10 +292,20 @@ test.describe("AI chat header button", () => {
       trailingGap,
       `button sits ${Math.round(trailingGap)}px from the header's trailing edge`,
     ).toBeLessThanOrEqual(4);
+    // Flush is not the same as hanging off the end: a negative gap means the
+    // header is clipping the button, which used to pass this test unnoticed.
+    expect(trailingGap).toBeGreaterThanOrEqual(0);
 
-    // At this width the header has also run out of room, so this pins the
-    // collapsed look and the flush trailing edge in one image.
+    // Collapsed, and it has to be. From 1024px down the button moves into
+    // `.controlButtonContainer`, whose grid track is pinned at that container's
+    // 90px `min-width` with 16px of it spent on a gap - so ~74px reach the slot
+    // and the labelled button needs 91px. It used to stay expanded here and be
+    // sliced down its leading edge instead, because the slot hides its overflow
+    // (see top-row-fit.spec.ts). The label is what the header gives up first by
+    // design, so losing it is the correct answer to that deficit.
     expect(await isCollapsed(page)).toBe(true);
+    await expect(label(page)).toBeHidden();
+    await expect(button(page)).toHaveAttribute("aria-label", "AI Chat");
     await shootHeader(page, "tablet-collapsed.png");
   });
 

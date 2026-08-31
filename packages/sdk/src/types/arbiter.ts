@@ -37,10 +37,10 @@ export type AgentSummary = {
   id: number;
   title: string;
   modelAlias: string;
-  modelId: string;
+  profileId: string | null;
   prompt: string;
-  providerId: number;
   tags?: string[];
+  logoColor?: string;
 };
 
 export type ActivePanelSummary = {
@@ -76,7 +76,7 @@ export type AttachedFile = {
 };
 
 export type SseEvent =
-  | { type: "message_start"; chatId: string; error?: string | null }
+  | { type: "message_start"; chatId: string }
   | { type: "new_token"; text: string }
   | { type: "reasoning"; text: string }
   | {
@@ -84,15 +84,11 @@ export type SseEvent =
       callId: string;
       name: string;
       arguments: unknown;
-      managed?: boolean;
     }
-  | { type: "tool_result"; callId: string; result: unknown }
-  | { type: "message_stop"; messageId: number }
+  | { type: "message_stop"; messageId: string }
   | {
       type: "error";
       message: string;
-      errorCode?: string;
-      details?: unknown;
     };
 
 export type ArbiterCommonData = {
@@ -102,4 +98,3 @@ export type ArbiterCommonData = {
 };
 
 export const ARBITER_PANEL_ID = "arbiter";
-export const ARBITER_PENDING_FILE_KEY = "aiarbiter-pending-file";

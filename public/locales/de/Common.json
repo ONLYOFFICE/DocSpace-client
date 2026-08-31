@@ -1330,7 +1330,7 @@
   "MaximumNumberOfExternalLinksCreated": "Maximale Anzahl der erstellten externen Links",
   "MaxLengthExceeded": "Die maximale Länge für den Benutzernamen oder anderen lokalen Teil beträgt 64 Symbole.",
   "MaxNumber": "Maximale Anzahl <1>(bis zu {{usersCount}} Benutzer)</1>",
-  "MCP": "MCP-Tools für diesen Raum",
+  "MCP": "MCP-Tools für diesen Agenten",
   "MCPDescriptionServers": "Nutzen Sie {{mcpServers}}, die vom Administrator verbunden wurden, um das Chat-Erlebnis mit KI zu verbessern. {{mcpServers}} kann bei Datenextraktion, Zusammenfassungen, intelligenten Vorschlägen usw. unterstützen.",
   "MCPServer": "MCP Server",
   "MCPServers": "MCP-Server",

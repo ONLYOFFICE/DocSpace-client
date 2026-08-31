@@ -1330,7 +1330,7 @@
   "MaximumNumberOfExternalLinksCreated": "Maksimālais izveidoto ārējo saišu skaits",
   "MaxLengthExceeded": "Maksimālais lietotājvārda vai citas vietējās daļas garums ir 64 rakstzīmes.",
   "MaxNumber": "Maksimais skaitlis <1>(līdz {{usersCount}} lietotājiem)</1>",
-  "MCP": "MCP rīki šai telpai",
+  "MCP": "MCP rīki šim aģentam",
   "MCPDescriptionServers": "Izmantojiet {{mcpServers}}, ko ir pievienojis administratoris, lai uzlabotu čata pieredzi ar MI. {{mcpServers}} var palīdzēt ar datu ekstrakciju, kopsavilkumus, inteligentes ieteikumus utt.",
   "MCPServer": "MCP server",
   "MCPServers": "MCP serveri",

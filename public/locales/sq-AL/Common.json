@@ -1330,7 +1330,7 @@
   "MaximumNumberOfExternalLinksCreated": "Numri maksimal i lidhjeve të jashtme të krijuara",
   "MaxLengthExceeded": "Gjatësia maksimale e një emri përdoruesi ose një pjese tjetër lokale është 64 karaktere.",
   "MaxNumber": "Numri maksimal <1>(deri në {{usersCount}} përdorues)</1>",
-  "MCP": "Mjetet MCP për këtë dhomë",
+  "MCP": "Mjetet MCP për këtë agjent",
   "MCPDescriptionServers": "Përdorni {{mcpServers}} të lidhur nga administratorit për të përmirësuar përvojën e bisedës me IA. {{mcpServers}} mund të ndihmojnë me nxjerrjen e të dhënave, përmbledhjet, sugjerimet e inteligjencës, etj.",
   "MCPServer": "MCP server",
   "MCPServers": "Serverë MCP",

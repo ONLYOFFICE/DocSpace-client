@@ -1330,7 +1330,7 @@
   "MaximumNumberOfExternalLinksCreated": "作成される外部リンクの最大数",
   "MaxLengthExceeded": "ユーザー名などのローカルパートの最大長は64文字です。",
   "MaxNumber": "最大ユーザー数 <1>（{{usersCount}}ユーザーまで）</1>",
-  "MCP": "このルーム用のMCPツール",
+  "MCP": "このエージェント用のMCPツール",
   "MCPDescriptionServers": "管理者によって接続された{{mcpServers}}を使用して、AIによるチャット体験を強化します。{{mcpServers}}は、データ抽出、要約、スマートな提案などで役立ちます。",
   "MCPServer": "MCP サーバー",
   "MCPServers": "MCP サーバー",

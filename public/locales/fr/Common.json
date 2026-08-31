@@ -1330,7 +1330,7 @@
   "MaximumNumberOfExternalLinksCreated": "Nombre maximum de liens externes créés",
   "MaxLengthExceeded": "La longueur maximale d'un nom d'utilisateur ou d'une autre partie locale est de 64 caractères.",
   "MaxNumber": "Nombre maximum <1>(jusqu'à {{usersCount}} utilisateurs)</1>",
-  "MCP": "Outils MCP pour cette salle",
+  "MCP": "Outils MCP pour cet agent",
   "MCPDescriptionServers": "Utilisez {{mcpServers}} connecté par l'administrateur pour améliorer l'expérience de chat avec l'IA. {{mcpServers}} peut aider avec l'extraction de données, les résumés, les suggestions intelligentes, etc.",
   "MCPServer": "Serveur MCP",
   "MCPServers": "Serveurs MCP",

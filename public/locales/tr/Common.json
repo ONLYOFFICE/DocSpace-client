@@ -1330,7 +1330,7 @@
   "MaximumNumberOfExternalLinksCreated": "Oluşturulabilecek maksimum harici bağlantı sayısı",
   "MaxLengthExceeded": "Bir kullanıcı adının veya başka bir yerel bölümün maksimum uzunluğu 64 karakterdir.",
   "MaxNumber": "Maks. kullanıcı sayısı <1>({{usersCount}} kullanıcıya kadar)</1>",
-  "MCP": "Bu oda için MCP araçları",
+  "MCP": "Bu ajan için MCP araçları",
   "MCPDescriptionServers": "Yönetici tarafından bağlanan {{mcpServers}} ile yapay zeka desteğiyle sohbet deneyiminizi geliştirin. {{mcpServers}} veri çıkarma, özetler, akıllı öneriler vb. konularında yardımcı olabilir.",
   "MCPServer": "MCP sunucu",
   "MCPServers": "MCP sunucuları",

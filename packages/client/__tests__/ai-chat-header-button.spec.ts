@@ -70,9 +70,10 @@ const ROOMS_URL = "/rooms/shared/";
 const DESKTOP = { width: 1440, height: 1024 };
 /**
  * Below 1024 the trailing button row is dropped and the button joins the
- * control buttons instead. The header still has room for the label at this
- * width - measured: 807px of row for 807px of content - so what the tablet
- * frame pins is the move into the control buttons, not a collapse.
+ * control buttons instead - a container the grid never widens past its 90px
+ * `min-width`, which is less than the labelled button needs. So the tablet
+ * frame pins both the move into the control buttons and the collapse it
+ * forces; see the test itself for the arithmetic.
  */
 const TABLET = { width: 900, height: 800 };
 /**
@@ -291,13 +292,21 @@ test.describe("AI chat header button", () => {
       trailingGap,
       `button sits ${Math.round(trailingGap)}px from the header's trailing edge`,
     ).toBeLessThanOrEqual(4);
+    // Flush is not the same as hanging off the end: a negative gap means the
+    // header is clipping the button, which used to pass this test unnoticed.
+    expect(trailingGap).toBeGreaterThanOrEqual(0);
 
-    // 900px is not the limit: the row fits its content exactly here, so the
-    // label stays. Where the limit actually is depends on the room name and the
-    // language, which is what the narrowing test above measures rather than
-    // pinning a breakpoint.
-    expect(await isCollapsed(page)).toBe(false);
-    await shootHeader(page, "tablet-expanded.png");
+    // Collapsed, and it has to be. From 1024px down the button moves into
+    // `.controlButtonContainer`, whose grid track is pinned at that container's
+    // 90px `min-width` with 16px of it spent on a gap - so ~74px reach the slot
+    // and the labelled button needs 91px. It used to stay expanded here and be
+    // sliced down its leading edge instead, because the slot hides its overflow
+    // (see top-row-fit.spec.ts). The label is what the header gives up first by
+    // design, so losing it is the correct answer to that deficit.
+    expect(await isCollapsed(page)).toBe(true);
+    await expect(label(page)).toBeHidden();
+    await expect(button(page)).toHaveAttribute("aria-label", "AI Chat");
+    await shootHeader(page, "tablet-collapsed.png");
   });
 
   test("brings the label back once the mobile header frees up room", async ({

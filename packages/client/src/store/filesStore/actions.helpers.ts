@@ -37,7 +37,10 @@ import api from "@docspace/shared/api";
 import { isMobile, isSystemFolder } from "@docspace/shared/utils";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { thumbnailStatuses } from "@docspace/shared/constants";
-import { frameCallEvent, updateTempContent } from "@docspace/shared/utils/common";
+import {
+  frameCallEvent,
+  updateTempContent,
+} from "@docspace/shared/utils/common";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 
@@ -75,34 +78,39 @@ export function initFilesImpl(self: FilesStore) {
   }
   updateTempContent(isAuthenticated);
 
+  const isNotPaidPeriod = self.currentTariffStatusStore?.isNotPaidPeriod;
+
   if (!self.isEditor) {
-    requests.push(
-      getPortalCultures(),
-      getInvitationSettings(),
-      self.treeFoldersStore.fetchTreeFolders().then((treeFolders) => {
-        if (!treeFolders || !treeFolders.length) return;
+    requests.push(getPortalCultures());
 
-        const trashFolder = treeFolders.find(
-          (f) => f.rootFolderType == FolderType.TRASH,
-        );
+    if (!isNotPaidPeriod) {
+      requests.push(
+        getInvitationSettings(),
+        self.treeFoldersStore.fetchTreeFolders().then((treeFolders) => {
+          if (!treeFolders || !treeFolders.length) return;
 
-        if (!trashFolder) return;
+          const trashFolder = treeFolders.find(
+            (f) => f.rootFolderType == FolderType.TRASH,
+          );
 
-        const isEmpty = !trashFolder.foldersCount && !trashFolder.filesCount;
+          if (!trashFolder) return;
 
-        self.setTrashIsEmpty(isEmpty);
-      }),
-    );
+          const isEmpty = !trashFolder.foldersCount && !trashFolder.filesCount;
 
-    if (isDesktopClient) {
-      requests.push(getLegacyEncryptionKeys());
-    }
+          self.setTrashIsEmpty(isEmpty);
+        }),
+      );
 
-    if (self.userStore?.getEncryptionKeys) {
-      requests.push(self.userStore.getEncryptionKeys().catch(() => {}));
+      if (isDesktopClient) {
+        requests.push(getLegacyEncryptionKeys());
+      }
+
+      if (self.userStore?.getEncryptionKeys) {
+        requests.push(self.userStore.getEncryptionKeys().catch(() => {}));
+      }
     }
   }
-  requests.push(getFilesSettings());
+  if (!isNotPaidPeriod) requests.push(getFilesSettings());
 
   return Promise.all(requests).then(() => {
     self.clientLoadingStore.setIsArticleLoading(false);
@@ -272,3 +280,4 @@ export async function getIsEmptyTrashImpl(self: FilesStore) {
   const items = [...res.files, ...res.folders];
   self.setTrashIsEmpty(items.length === 0);
 }
+

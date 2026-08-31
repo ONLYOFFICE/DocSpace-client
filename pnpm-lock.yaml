@@ -166,6 +166,9 @@ importers:
       cnbuilder:
         specifier: 3.1.0
         version: 3.1.0
+      codemirror:
+        specifier: 6.0.2
+        version: 6.0.2
       copy-to-clipboard:
         specifier: 3.3.3
         version: 3.3.3

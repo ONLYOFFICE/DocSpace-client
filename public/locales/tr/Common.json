@@ -804,6 +804,7 @@
   "EmptyTemplatesRoomsHeader": "Şablon bulunamadı",
   "EmptyTrash": "Çöpü boşalt",
   "Enable": "Etkinleştir",
+  "Enabled": "Etkinleştirildi",
   "EnableAIFeatures": "AI özelliklerini etkinleştir",
   "EnableAIFeaturesDescription": "AI kullanımı mevcut kredilerinizden faturalandırılır. Mevcut krediler çok düşerse, AI istekleri işlenmez.",
   "EnableAiRoomsDescription": "Dosyaları düzenlemek ve ekipler veya müşterilerle iş birliği yapmak için özelleştirilebilir çalışma alanları. Her proje için özel erişim hakları ve ortamları belirleyin.",

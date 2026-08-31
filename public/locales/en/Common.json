@@ -804,6 +804,7 @@
   "EmptyTemplatesRoomsHeader": "No templates found",
   "EmptyTrash": "Empty trash",
   "Enable": "Enable",
+  "Enabled": "Enabled",
   "EnableAIFeatures": "Enable AI features",
   "EnableAIFeaturesDescription": "AI usage is billed from your available credits. If available credits run too low, AI requests will not be processed.",
   "EnableAiRoomsDescription": "Customizable workspaces for organizing files and collaborating with teams or clients. Set tailored access rights and environments for each project.",

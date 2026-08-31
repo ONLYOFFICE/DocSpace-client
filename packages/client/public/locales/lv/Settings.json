@@ -133,7 +133,7 @@
   "DocumentServiceAdvancedSettings": "Papildu servera iestatījumi",
   "DocumentServiceAuthHeader": "Autorizācijas galvene",
   "DocumentServiceAuthHeaderSubtitle": "Atstāt tukšu, lai izmantotu noklusējuma galveni",
-  "DocumentServiceDisableCertificat": "Atspēgt sertifikāta verifikāciju (nedrošs)",
+  "DocumentServiceDisableCertificat": "Atspējot sertifikāta verifikāciju (nedrošs)",
   "DocumentServiceHide": "Paslēpt",
   "DocumentServiceLocationHeaderHelp": "Pārbaudiet Docs pakalpojuma iestatījumus, kas pēc noklusējuma tiek izmantots jūsu mākoņa darbvietā failu rediģēšanai un konvertēšanai OfficeOpen XML formātā. Lai savienotu Docs ar savu platformu, izmantojiet Docs Connect.",
   "DocumentServiceLocationUrlApi": "Dokumentu rediģēšanas servisa adrese",

@@ -804,6 +804,7 @@
   "EmptyTemplatesRoomsHeader": "テンプレートが見つかりません",
   "EmptyTrash": "ごみ箱を空にする",
   "Enable": "有効にする",
+  "Enabled": "有効",
   "EnableAIFeatures": "AI機能を有効にする",
   "EnableAIFeaturesDescription": "AIの利用料は利用可能なクレジットから請求されます。利用可能なクレジットが少なくなりすぎると、AIリクエストは処理されません。",
   "EnableAiRoomsDescription": "ファイルを整理し、チームやクライアントと共同作業できるカスタマイズ可能なワークスペースです。プロジェクトごとに最適なアクセス権限と環境を設定できます。",

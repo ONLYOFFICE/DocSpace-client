@@ -199,7 +199,7 @@ const AdminMessage = (props) => {
           },
           {
             id: "admin-message-enable",
-            label: t("Common:Enable"),
+            label: t("Common:Enabled"),
             value: "enable",
             dataTestId: "administrator_message_enabled",
           },

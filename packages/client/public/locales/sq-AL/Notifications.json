@@ -3,7 +3,7 @@
   "AdminSetupRequired": "Kërkohet konfigurim nga administratori",
   "Badges": "Distinktivët",
   "DailyFeed": "Furnizimi ditor i {{organizationName}} {{productName}}",
-  "DailyFeedDescription": "Lexoni lajmet dhe ngjarjet nga {{organizationName}} {{productName}} në një përmbledhje të përditshme.",
+  "DailyFeedDescription": "Merrni një përmbledhje ditore me lajme dhe ngjarje nga {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Njoftime për aktivitetet në skedarë",
   "IsNotValid": "Nuk është i vlefshëm",
   "LdapEmailTooltip": "Kjo llogari është e ngarkuar nga LDAP. Email-i nuk është specifikuar dhe është gjeneruar automatikisht, nuk mund të përdoret për të dërguar njoftime.",
@@ -11,9 +11,9 @@
   "Notifications": "Njoftimet",
   "RoomsActivityDescription": "Merr njoftime e menjëhershme me email për skedarë/dosje të reja të ndara dhe aktivitet brenda {{rooms}} dhe {{aiAgents}} tuaj.",
   "RoomUpdateNotify": "Përmbajtja e përbashkët, aktiviteti në seksionet {{rooms}} dhe {{aiAgents}}",
-  "SettingUpNotifications": "Konfiguroni njoftimet",
+  "SettingUpNotifications": "Cilësimet e njoftimeve",
   "SuccessConnected": "{{serviceName}} është lidhur me sukses si kanal njoftimi. Tani do të merrni përditësime atje.",
   "SuccessDisconnected": "{{serviceName}} është shkëputur me sukses. Njoftimet nuk do të dërgohen më atje.",
   "UsefulTips": "Këshilla të dobishme për {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Merrni udhëzues të dobishëm rreth {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Zbuloni këshilla dhe udhëzues të dobishëm për përdorimin e {{organizationName}} {{productName}}."
 }

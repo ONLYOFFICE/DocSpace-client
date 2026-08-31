@@ -15,5 +15,5 @@
   "SuccessConnected": "{{serviceName}} は通知チャネルとして正常に接続されました。これで、そちらで更新情報を受け取ることができます。",
   "SuccessDisconnected": "{{serviceName}}は通知チャネルとして正常に切断されました。通知はそこに送信されなくなります。",
   "UsefulTips": "{{organizationName}} {{productName}}の使い方やヒント",
-  "UsefulTipsDescription": "{{organizationName}} {{productName}}に関するお役立ちガイドをゲット"
+  "UsefulTipsDescription": "{{organizationName}} {{productName}}の使い方に関する便利なヒントやガイドを見つけましょう。"
 }

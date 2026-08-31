@@ -3,7 +3,7 @@
   "AdminSetupRequired": "Требуется настройка администратора",
   "Badges": "Бейджи",
   "DailyFeed": "Ежедневная лента {{organizationName}} {{productName}}",
-  "DailyFeedDescription": "Читайте новости и события из {{organizationName}} {{productName}} в ежедневной ленте.",
+  "DailyFeedDescription": "Получайте ежедневную сводку новостей и событий от {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Уведомления об активности файлов",
   "IsNotValid": "Недопустимо",
   "LdapEmailTooltip": "Эта учетная запись пользователя загружена из LDAP. Адрес электронной почты пользователя не указан, а текущий адрес был сгенерирован автоматически и не может использоваться для отправки уведомлений.",
@@ -11,9 +11,9 @@
   "Notifications": "Уведомления",
   "RoomsActivityDescription": "Получайте мгновенные уведомления по электронной почте о новых общих файлах и папках, а также о действиях в ваших {{rooms}} и {{aiAgents}}.",
   "RoomUpdateNotify": "Общий контент, деятельность в {{rooms}} и {{aiAgents}}",
-  "SettingUpNotifications": "Настройка уведомлений",
+  "SettingUpNotifications": "Настройки уведомлений",
   "SuccessConnected": "Канал уведомлений {{serviceName}} успешно подключен. Теперь вы будете получать обновления через него.",
   "SuccessDisconnected": "Канал уведомлений {{serviceName}} успешно отключен. Уведомления больше не будут отправляться на него.",
   "UsefulTips": "Полезные советы {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Получите полезные руководства о {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Узнайте полезные советы и рекомендации по использованию {{organizationName}} {{productName}}"
 }

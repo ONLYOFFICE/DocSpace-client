@@ -11,9 +11,9 @@
   "Notifications": "Bildirişlər",
   "RoomsActivityDescription": "Sizin {{rooms}} və {{aiAgents}} daxilindəki yeni paylaşılmış fayllar/qovluqlar və fəaliyyət haqqında anında e-poçt bildirişləri alın.",
   "RoomUpdateNotify": "Ümumi məzmun, {{rooms}} və {{aiAgents}} bölmələrindəki fəaliyyət",
-  "SettingUpNotifications": "Bildirişləri təyin etmək",
+  "SettingUpNotifications": "Bildiriş parametrləri",
   "SuccessConnected": "{{serviceName}} bildiriş kanalı kimi uğurla qoşulub. İndidən buraya yeniliklər gələcək.",
   "SuccessDisconnected": "{{serviceName}} bildiriş kanalı kimi uğurla əlaqədən kəsilmişdir. Bildirişlər oraya göndərilməyəcəkdir.",
   "UsefulTips": "Faydalı {{organizationName}} {{productName}} məsləhətləri",
-  "UsefulTipsDescription": "{{organizationName}} {{productName}}-də faydalı təlimatlar əldə edin"
+  "UsefulTipsDescription": "{{organizationName}} {{productName}}-dən istifadə üçün faydalı məsləhətlər və təlimatlar kəşf edin."
 }

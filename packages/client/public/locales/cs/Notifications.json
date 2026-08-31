@@ -3,7 +3,7 @@
   "AdminSetupRequired": "Požadovaná konfigurace administrace",
   "Badges": "Odznaky",
   "DailyFeed": "Denní kanál {{organizationName}} {{productName}}",
-  "DailyFeedDescription": "Přečtěte si novinky a události z vašeho {{organizationName}} {{productName}} v denním přehledu.",
+  "DailyFeedDescription": "Dostávejte denní přehled novinek a událostí z {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Upozornění na aktivitu souborů",
   "IsNotValid": "Není platné",
   "LdapEmailTooltip": "Tento uživatelský účet je načten z LDAP. Uživatelova e-mailová adresa nebyla zadána a aktuální byla vygenerována automaticky a nelze ji použít k odesílání oznámení.",
@@ -15,5 +15,5 @@
   "SuccessConnected": "{{serviceName}} bylo úspěšně připojeno jako notifikační kanál. Nyní tam budete dostávat aktualizace.",
   "SuccessDisconnected": "{{serviceName}} bylo úspěšně odpojeno jako notifikační kanál. Tam nebudou odesílány žádné další notifikace.",
   "UsefulTips": "Užitečné tipy pro {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Získejte užitečné příručky o {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Objevte užitečné tipy a příručky pro používání {{organizationName}} {{productName}}"
 }

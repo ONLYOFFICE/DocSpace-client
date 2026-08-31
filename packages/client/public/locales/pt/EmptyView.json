@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Pode criar um templates a partir de um espaço de formulários na secção Espaços de formulários",
   "EmptyGroupAddedUserOptionDescription": "Adicionar membros do grupo e atribuir o cabeçalho",
   "EmptyGroupDeleteOptionDescription": "Se você não precisa mais deste grupo",
-  "EmptyGroupsCreateGroupOptionDescription": "Criar um grupo para adicioná-los à sala",
+  "EmptyGroupsCreateGroupOptionDescription": "Crie um grupo para convidar todos os seus membros para uma sala, ou partilhar um ficheiro com eles de uma só vez",
   "EmptyRootFormsDescription": "Por favor, crie o primeiro espaço de formulários.",
   "EmptyRootFormsTitle": "Ainda não há espaços de formulários aqui",
   "EmptyRootFormsUserDescription": "O espaço de formulários compartilhado aparecerá aqui.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Bem-vindo ao espaço de preenchimento de formulários",
   "InviteNewUsers": "Convidar novos utilizadores",
   "InviteRootRoomDescription": "Enviar um convite para adicionar novos membros ao espaço de trabalho",
-  "InviteUsersOptionDescription": "Adicione membros para edição conjunta na sala",
+  "InviteUsersOptionDescription": "Adicione membros para trabalharem em conjunto na sala",
   "ManageAccess": "Gerenciar acesso",
   "MigrationDataDescription": "Transfira seus dados para o {{productName}} a partir do Workspace {{organizationName}}, Google Workspace ou Nextcloud.",
   "MigrationDataTitle": "Importar dados",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Carregar do seu dispositivo",
   "UploadDevicePDFFormOptionDescription": "Carregue um formulário PDF pronto para o espaço a partir do seu dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
-  "UploadFromPortalTitle": "Fazer upload do espaço de trabalho",
+  "UploadFromPortalTitle": "Fazer upload do armazenamento",
   "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível no espaço de trabalho e carregue-o no espaço.",
   "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual"
 }

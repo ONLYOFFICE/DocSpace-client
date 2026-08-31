@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Ju mund të krijoni një model nga një hapësirë formularësh në seksionin Hapësirat e formularëve.",
   "EmptyGroupAddedUserOptionDescription": "Shtoni anëtarët e grupit dhe caktoni kreun",
   "EmptyGroupDeleteOptionDescription": "Në qoftë se nuk ju nevojitet më ky grup",
-  "EmptyGroupsCreateGroupOptionDescription": "Krijoni një grup për t'i shtuar ato në dhomë",
+  "EmptyGroupsCreateGroupOptionDescription": "Krijoni një grup për të ftuar të gjithë anëtarët e tij në një dhomë, ose për të ndarë një skedar me ta menjëherë",
   "EmptyRootFormsDescription": "Ju lutemi krijoni hapësirën e parë të formularëve.",
   "EmptyRootFormsTitle": "Nuk ka ende hapësira formularësh këtu",
   "EmptyRootFormsUserDescription": "Hapësira e përbashkët e formularëve do të shfaqet këtu.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Mirë se vini në hapësirën e plotësimit të formularëve",
   "InviteNewUsers": "Ftoni përdorues të rinj",
   "InviteRootRoomDescription": "Dërgoni një ftesë për të shtuar anëtarë të rinj në hapësirën e punës",
-  "InviteUsersOptionDescription": "Shtoni anëtarë për redaktim të përbashkët në dhomë",
+  "InviteUsersOptionDescription": "Shtoni anëtarë për të punuar së bashku në dhomë",
   "ManageAccess": "Menaxhoni aksesin",
   "MigrationDataDescription": "Transferoni të dhënat tuaja në {{productName}} nga {{organizationName}} Workspace, Google Workspace ose Nextcloud.",
   "MigrationDataTitle": "Importoni të dhëna",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Ngarkoni nga pajisja juaj",
   "UploadDevicePDFFormOptionDescription": "Ngarkoni një formular PDF të gatshëm në hapësirë nga pajisja juaj.",
   "UploadDevicePDFFormOptionTitle": "Ngarkoni nga pajisja",
-  "UploadFromPortalTitle": "Ngarkoni nga hapësira e punës",
+  "UploadFromPortalTitle": "Ngarkoni nga Ruajtja",
   "UploadPDFFormOptionDescription": "Zgjidhni një formular PDF të gatshëm të disponueshëm në hapësirën e punës dhe ngarkoni atë në hapësirë.",
   "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale"
 }

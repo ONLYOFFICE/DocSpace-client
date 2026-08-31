@@ -3,7 +3,7 @@
   "AdminSetupRequired": "Este necesară configurarea de către administrator",
   "Badges": "Ecusoane",
   "DailyFeed": "Fluxul zilnic {{organizationName}} {{productName}}",
-  "DailyFeedDescription": "Citiţi ştirile şi evenimentele din spațiul dvs {{organizationName}} {{productName}} într-un rezumat zilnic.",
+  "DailyFeedDescription": "Primiți un rezumat zilnic cu știri și evenimente de la {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Notificări de activitate în fișiere",
   "IsNotValid": "Nu este valabil",
   "LdapEmailTooltip": "Contul acestui utilizator este încărcat din LDAP. Adresa de email a utilizatorului nu a fost indicată, iar cea curentă a fost generată automat și nu poate fi folosită pentru a trimite notificări.",
@@ -11,9 +11,9 @@
   "Notifications": "Notificări",
   "RoomsActivityDescription": "Primiți notificări instantanee prin e-mail despre fișierele/folderelor noi partajate și activitatea din {{rooms}} și {{aiAgents}} ale dumneavoastră.",
   "RoomUpdateNotify": "Conținut partajat, activitatea în {{rooms}} și {{aiAgents}}",
-  "SettingUpNotifications": "Setare Notificări",
+  "SettingUpNotifications": "Setări notificări",
   "SuccessConnected": "{{serviceName}} a fost conectat cu succes ca modul de notificare. Veți primi acum actualizări în acest mod.",
   "SuccessDisconnected": "{{serviceName}} a fost deconectat cu succes ca modul de notificare. Notificările nu vor mai fi trimise în acest mod.",
   "UsefulTips": "Sfaturi utile {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Obţineţi instrucţiuni utile privind {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Descoperiți sfaturi și ghiduri utile pentru utilizarea {{organizationName}} {{productName}}."
 }

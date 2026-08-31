@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Form alanları bölümünde bir form alanından şablon oluşturabilirsiniz",
   "EmptyGroupAddedUserOptionDescription": "Grup üyelerini ekleyin ve başkan atayın",
   "EmptyGroupDeleteOptionDescription": "Eğer artık bu gruba ihtiyacınız yoksa",
-  "EmptyGroupsCreateGroupOptionDescription": "Onları odaya eklemek için bir grup oluşturun",
+  "EmptyGroupsCreateGroupOptionDescription": "Tüm üyelerini bir odaya davet etmek veya onlarla anında bir dosya paylaşmak için bir grup oluşturun",
   "EmptyRootFormsDescription": "Lütfen ilk form alanını oluşturun.",
   "EmptyRootFormsTitle": "Burada henüz form alanı yok",
   "EmptyRootFormsUserDescription": "Paylaşılan form alanı burada görünecektir.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Form doldurma alanına hoş geldiniz",
   "InviteNewUsers": "Yeni kullanıcıları davet edin",
   "InviteRootRoomDescription": "Çalışma alanına yeni üyeler eklemek için bir davetiye gönderin",
-  "InviteUsersOptionDescription": "Odada ortak düzenleme için üyeleri ekleyin",
+  "InviteUsersOptionDescription": "Odada birlikte çalışmak için üyeler ekleyin",
   "ManageAccess": "İzini Yönet",
   "MigrationDataDescription": "{{productName}}'e {{organizationName}} Workspace, Google Workspace veya Nextcloud'dan verilerinizi aktarın.",
   "MigrationDataTitle": "Veri aktarımı",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Cihazınızdan Yükleme",
   "UploadDevicePDFFormOptionDescription": "Cihazınızdan hazır bir PDF formunu alana yükleyin.",
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükleyin",
-  "UploadFromPortalTitle": "Çalışma alanından yükleyin",
+  "UploadFromPortalTitle": "Depolamadan yükleyin",
   "UploadPDFFormOptionDescription": "Çalışma alanında bulunan hazır bir PDF formunu seçin ve alana yükleyin.",
   "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz"
 }

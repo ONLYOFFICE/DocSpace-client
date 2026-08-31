@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Puede crear una plantilla a partir de un espacio de formularios en la sección Espacios de formularios",
   "EmptyGroupAddedUserOptionDescription": "Añada miembros al grupo y asigne el jefe",
   "EmptyGroupDeleteOptionDescription": "Si ya no necesita este grupo",
-  "EmptyGroupsCreateGroupOptionDescription": "Cree un grupo para añadirlos a la sala",
+  "EmptyGroupsCreateGroupOptionDescription": "Cree un grupo para invitar a todos sus miembros a una sala, o compartir un archivo con ellos a la vez",
   "EmptyRootFormsDescription": "Por favor, cree el primer espacio de formularios.",
   "EmptyRootFormsTitle": "Todavía no hay espacios de formularios aquí",
   "EmptyRootFormsUserDescription": "El espacio de formularios compartido aparecerá aquí.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Bienvenido/a al Espacio de relleno de formularios",
   "InviteNewUsers": "Invitar nuevos usuarios",
   "InviteRootRoomDescription": "Envíe una invitación para añadir nuevos miembros al espacio de trabajo",
-  "InviteUsersOptionDescription": "Añada miembros del portal para la edición colaborativa en la sala",
+  "InviteUsersOptionDescription": "Añada miembros para trabajar juntos en la sala",
   "ManageAccess": "Gestionar acceso",
   "MigrationDataDescription": "Transfiera sus datos a {{productName}} desde {{organizationName}} Workspace, Google Workspace o Nextcloud.",
   "MigrationDataTitle": "Importar datos",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Sube desde tu dispositivo",
   "UploadDevicePDFFormOptionDescription": "Cargue un formulario PDF listo en el espacio desde su dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Subir desde el dispositivo",
-  "UploadFromPortalTitle": "Subir desde el espacio de trabajo",
+  "UploadFromPortalTitle": "Subir desde el almacenamiento",
   "UploadPDFFormOptionDescription": "Seleccione un formulario PDF listo disponible en el espacio de trabajo y cárguelo en el espacio.",
   "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales"
 }

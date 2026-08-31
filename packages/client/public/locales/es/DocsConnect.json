@@ -92,6 +92,8 @@
   "PricePerUserDevPackShortRich": "{{price}} por usuario <1>(incl. Dev Pack)</1>",
   "PricePerUserMonthDevPackNote": "{{price}} por usuario/mes",
   "PricePerUserShort": "{{price}} por usuario",
+  "PromoDescription": "Añada un motor de edición de documentos con todas las funciones a su ecosistema. Cree una instancia para conectar editores independientes del almacenamiento para documentos, hojas de cálculo, presentaciones y PDF, usando <1>más de 50 conectores listos para usar</1> para las plataformas que ya utiliza, o conéctese a su propia plataforma mediante la API. Puede conectar una instancia a varias plataformas.",
+  "PromoDevPackNote": "Obtener el Dev Pack desbloquea la <1>Automation API</1> y las <2>opciones de personalización de marca</2>.",
   "RealtimeCollaborationDescription": "Coedite con comentarios, menciones, revisión, historial de versiones y un chat integrado.",
   "RealtimeCollaborationTitle": "Colaboración en tiempo real",
   "Rebranding": "Opciones de personalización de marca",

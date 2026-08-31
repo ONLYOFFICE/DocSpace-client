@@ -3,7 +3,7 @@
   "AdminSetupRequired": "Administrator-Einrichtung erforderlich",
   "Badges": "Abzeichen",
   "DailyFeed": "Täglicher {{organizationName}} {{productName}}-Feed",
-  "DailyFeedDescription": "Lesen Sie Nachrichten und Ereignisse aus Ihrem {{organizationName}} {{productName}} in einer täglichen Zusammenfassung.",
+  "DailyFeedDescription": "Erhalten Sie eine tägliche Zusammenfassung mit Neuigkeiten und Ereignissen aus {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Benachrichtigungen zu Dateiaktivitäten",
   "IsNotValid": "Ungültig",
   "LdapEmailTooltip": "Dieses Benutzerkonto wird aus LDAP geladen. Die E-Mail-Adresse des Benutzers wurde nicht angegeben. Die aktuelle Adresse wurde automatisch generiert und kann nicht zum Senden von Benachrichtigungen verwendet werden.",
@@ -11,9 +11,9 @@
   "Notifications": "Benachrichtigungen",
   "RoomsActivityDescription": "Erhalten Sie sofortige E-Mail-Benachrichtigungen über neue freigegebene Dateien/Ordner und Aktivitäten innerhalb Ihrer {{rooms}} und {{aiAgents}}.",
   "RoomUpdateNotify": "Geteilte Inhalte, {{rooms}} und {{aiAgents}}-Aktivität",
-  "SettingUpNotifications": "Benachrichtigungen einrichten",
+  "SettingUpNotifications": "Benachrichtigungseinstellungen",
   "SuccessConnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal verbunden. Sie erhalten nun Updates darüber.",
   "SuccessDisconnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal getrennt. Benachrichtigungen werden dort nicht mehr gesendet.",
   "UsefulTips": "Nützliche {{organizationName}} {{productName}}-Tipps",
-  "UsefulTipsDescription": "Erhalten Sie nützliche Anleitungen zu {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Entdecken Sie nützliche Tipps und Anleitungen für die Nutzung von {{organizationName}} {{productName}}."
 }

@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Šablónu môžete vytvoriť z priestoru pre formuláre v časti Priestory pre formuláre",
   "EmptyGroupAddedUserOptionDescription": "Pridajte členov skupiny a priraďte vedúceho",
   "EmptyGroupDeleteOptionDescription": "Ak už túto skupinu nepotrebujete",
-  "EmptyGroupsCreateGroupOptionDescription": "Vytvorte skupinu, aby ste ich mohli pridať do miestnosti",
+  "EmptyGroupsCreateGroupOptionDescription": "Vytvorte skupinu, aby ste naraz pozvali všetkých jej členov do miestnosti alebo im zdieľali súbor",
   "EmptyRootFormsDescription": "Prosím vytvorte prvý priestor pre formuláre.",
   "EmptyRootFormsTitle": "Zatiaľ tu nie sú žiadne priestory pre formuláre",
   "EmptyRootFormsUserDescription": "Tu sa zobrazí zdieľaný priestor pre formuláre.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Vitajte v priestore na vypĺňanie formulárov",
   "InviteNewUsers": "Pozvať nových používateľov",
   "InviteRootRoomDescription": "Pošlite pozvánku a pridajte nových členov do pracovného priestoru",
-  "InviteUsersOptionDescription": "Pridávajte členov na spoločné úpravy v miestnosti",
+  "InviteUsersOptionDescription": "Pridajte členov, aby ste mohli spolupracovať v miestnosti",
   "ManageAccess": "Spravovať prístup",
   "MigrationDataDescription": "Preneste svoje dáta do {{productName}} z pracovného priestoru {{organizationName}}, Google Workspace alebo Nextcloud.",
   "MigrationDataTitle": "Import údajov",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Nahrať zo zariadenia",
   "UploadDevicePDFFormOptionDescription": "Nahrajte do priestoru hotový PDF formulár zo svojho zariadenia.",
   "UploadDevicePDFFormOptionTitle": "Nahrať zo zariadenia",
-  "UploadFromPortalTitle": "Nahrať z pracovného priestoru",
+  "UploadFromPortalTitle": "Nahrať z úložiska",
   "UploadPDFFormOptionDescription": "Vyberte hotový PDF formulár dostupný v pracovnom priestore a nahrajte ho do priestoru.",
   "VirtualDataRoomEmptyTitle": "Vitajte vo Virtuálnej dátovej miestnosti"
 }

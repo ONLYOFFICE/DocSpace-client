@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "你可以在“表单空间”板块中从现有表单空间创建一个模板",
   "EmptyGroupAddedUserOptionDescription": "添加组成员并指定负责人",
   "EmptyGroupDeleteOptionDescription": "如果您不再需要此组",
-  "EmptyGroupsCreateGroupOptionDescription": "新建群组以将它们添加到此房间",
+  "EmptyGroupsCreateGroupOptionDescription": "创建群组，即可邀请其所有成员加入房间，或一次性与他们共享文件",
   "EmptyRootFormsDescription": "请创建首个表单空间。",
   "EmptyRootFormsTitle": "这里还没有表单空间",
   "EmptyRootFormsUserDescription": "已共享的表单空间将显示在此处",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "欢迎来到表单填写空间",
   "InviteNewUsers": "邀请新用户",
   "InviteRootRoomDescription": "发送邀请以添加新成员到工作区",
-  "InviteUsersOptionDescription": "添加成员以在房间中共同编辑。",
+  "InviteUsersOptionDescription": "添加成员，以便在房间中协作。",
   "ManageAccess": "管理访问权限",
   "MigrationDataDescription": "将数据从{{organizationName}}的工作区、Google Workspace 或 Nextcloud 迁移到{{productName}}。",
   "MigrationDataTitle": "导入数据",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "从您的设备上传",
   "UploadDevicePDFFormOptionDescription": "从您的设备将现成的 PDF 表单上传到该空间。",
   "UploadDevicePDFFormOptionTitle": "从设备上传",
-  "UploadFromPortalTitle": "从工作区上传",
+  "UploadFromPortalTitle": "从存储上传",
   "UploadPDFFormOptionDescription": "选择工作区中现有的 PDF 表单并将其上传到该空间。",
   "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间"
 }

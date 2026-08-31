@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Դուք կարող եք ձևերի տարածքից ստեղծել կաղապար «Ձևերի տարածքներ» բաժնում։",
   "EmptyGroupAddedUserOptionDescription": "Ավելացնել խմբի անդամներ և նշանակել ղեկավարին",
   "EmptyGroupDeleteOptionDescription": "Եթե ձեզ այլևս այս խումբն անհրաժեշտ չէ",
-  "EmptyGroupsCreateGroupOptionDescription": "Ստեղծեք խումբ՝ սենյակում ավելացնելու համար",
+  "EmptyGroupsCreateGroupOptionDescription": "Ստեղծեք խումբ՝ նրա բոլոր անդամներին սենյակ հրավիրելու կամ նրանց հետ ֆայլ միանգամից համօգտագործելու համար",
   "EmptyRootFormsDescription": "Խնդրում եմ ստեղծեք առաջին ձևերի տարածքը:",
   "EmptyRootFormsTitle": "Այստեղ դեռ ձևերի տարածքներ չկան",
   "EmptyRootFormsUserDescription": "Կիսված ձևերի տարածքը կհայտնվի այստեղ:",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Բարի գալուստ ձևերի լրացման տարածք",
   "InviteNewUsers": "Հրավիրեք նոր օգտատերերի",
   "InviteRootRoomDescription": "Ուղարկեք հրավեր՝ աշխատանքային տարածքին նոր անդամներ ավելացնելու համար",
-  "InviteUsersOptionDescription": "Ավելացնել պորտալի անդամներ սենյակում համատեղ խմբագրման համար",
+  "InviteUsersOptionDescription": "Ավելացրեք անդամներ սենյակում համատեղ աշխատելու համար",
   "ManageAccess": "Կառավարել մուտքը",
   "MigrationDataDescription": "Փոխանցեք ձեր տվյալները {{productName}} {{organizationName}} Workspace-ից, Google Workspace-ից կամ Nextcloud-ից։",
   "MigrationDataTitle": "Ներմուծել տվյալներ",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Վերբեռնեք ձեր Սարքից",
   "UploadDevicePDFFormOptionDescription": "Վերբեռնեք պատրաստ PDF ձևը տարածք ձեր սարքից։",
   "UploadDevicePDFFormOptionTitle": "Վերբեռնել սարքից",
-  "UploadFromPortalTitle": "Վերբեռնում աշխատանքային տարածքից",
+  "UploadFromPortalTitle": "Վերբեռնում պահեստից",
   "UploadPDFFormOptionDescription": "Ընտրեք աշխատանքային տարածքում առկա պատրաստ PDF ձևը և վերբեռնեք այն տարածք։",
   "VirtualDataRoomEmptyTitle": "Բարի գալուստ Վիրտուալ Տվյալների Սենյակ"
 }

@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Você pode criar um modelo de um espaço de formulários na seção Espaços de formulários",
   "EmptyGroupAddedUserOptionDescription": "Adicione membros do grupo e atribua o chefe",
   "EmptyGroupDeleteOptionDescription": "Se você não precisar mais desse grupo",
-  "EmptyGroupsCreateGroupOptionDescription": "Crie um grupo para adicioná-lo à sala",
+  "EmptyGroupsCreateGroupOptionDescription": "Crie um grupo para convidar todos os seus membros para uma sala, ou compartilhar um arquivo com eles de uma só vez",
   "EmptyRootFormsDescription": "Crie o primeiro espaço de formulários.",
   "EmptyRootFormsTitle": "Ainda não há espaços de formulários aqui",
   "EmptyRootFormsUserDescription": "O espaço de formulários compartilhado aparecerá aqui.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Bem-vindo ao espaço de preenchimento de formulários",
   "InviteNewUsers": "Convidar novos usuários",
   "InviteRootRoomDescription": "Envie um convite para adicionar novos membros ao espaço de trabalho",
-  "InviteUsersOptionDescription": "Adicione membros do portal para edição conjunta na sala",
+  "InviteUsersOptionDescription": "Adicione membros para trabalhar juntos na sala",
   "ManageAccess": "Gerenciar acesso",
   "MigrationDataDescription": "Transfira seus dados para {{productName}} do {{organizationName}} Workspace, Google Workspace ou Nextcloud.",
   "MigrationDataTitle": "Importar dados",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Carregar do seu dispositivo",
   "UploadDevicePDFFormOptionDescription": "Carregue um formulário PDF pronto para o espaço do seu dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
-  "UploadFromPortalTitle": "Fazer upload do espaço de trabalho",
+  "UploadFromPortalTitle": "Fazer upload do armazenamento",
   "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível no espaço de trabalho e carregue-o no espaço.",
   "VirtualDataRoomEmptyTitle": "Bem-vindo à Sala de Dados Virtual"
 }

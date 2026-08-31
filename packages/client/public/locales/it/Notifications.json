@@ -15,5 +15,5 @@
   "SuccessConnected": "{{serviceName}} è stato collegato con successo come canale di notifica. Riceverai ora gli aggiornamenti lì.",
   "SuccessDisconnected": "{{serviceName}} è stato scollegato con successo come canale di notifica. Le notifiche non saranno più inviate lì.",
   "UsefulTips": "Suggerimenti utili per {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Ottieni guide utili su {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Scopri consigli e guide utili per utilizzare {{organizationName}} {{productName}}."
 }

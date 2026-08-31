@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "U kunt een sjabloon maken van een formulierruimte in de sectie Formulierruimtes",
   "EmptyGroupAddedUserOptionDescription": "Voeg groepsleden toe en wijs het groepshoofd toe",
   "EmptyGroupDeleteOptionDescription": "Als u deze groep niet meer nodig heeft",
-  "EmptyGroupsCreateGroupOptionDescription": "Maak een groep om ze aan de kamer toe te voegen",
+  "EmptyGroupsCreateGroupOptionDescription": "Maak een groep om alle leden in één keer uit te nodigen voor een kamer, of deel een bestand met hen",
   "EmptyRootFormsDescription": "Maak de eerste formulierruimte aan.",
   "EmptyRootFormsTitle": "Er zijn hier nog geen formulierruimtes",
   "EmptyRootFormsUserDescription": "De gedeelde formulierruimte wordt hier weergegeven.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Welkom in de ruimte voor het invullen van formulieren",
   "InviteNewUsers": "Nodig nieuwe gebruikers uit",
   "InviteRootRoomDescription": "Stuur een uitnodiging om nieuwe leden toe te voegen aan de werkruimte",
-  "InviteUsersOptionDescription": "Voeg deelnemers toe om samen te bewerken in een ruimte",
+  "InviteUsersOptionDescription": "Voeg leden toe om samen te werken in de kamer",
   "ManageAccess": "Beheer toegang",
   "MigrationDataDescription": "Verplaats uw gegevens naar {{productName}} vanuit {{organizationName}} Workspace, Google Workspace of Nextcloud.",
   "MigrationDataTitle": "Importeer data",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Uploaden vanaf uw Apparaat",
   "UploadDevicePDFFormOptionDescription": "Upload een kant-en-klaar PDF-formulier vanaf uw apparaat naar de ruimte.",
   "UploadDevicePDFFormOptionTitle": "Uploaden vanaf apparaat",
-  "UploadFromPortalTitle": "Uploaden uit de werkruimte",
+  "UploadFromPortalTitle": "Uploaden vanuit opslag",
   "UploadPDFFormOptionDescription": "Selecteer een kant-en-klaar PDF-formulier dat beschikbaar is in de werkruimte en upload het naar de ruimte.",
   "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer"
 }

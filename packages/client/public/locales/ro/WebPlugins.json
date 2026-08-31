@@ -14,5 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin-ul a fost încărcat cu succes.",
   "PluginSamples": "Exemple de plugin-uri",
   "PluginSDK": "Kit de dezvoltare a plugin-urilor",
-  "UploadDescription": "Puteți adăuga plugin-uri pentru a extinde funcționalitatea spațiului de lucru și pentru a adăuga caracteristici suplimentare. Faceți clic pe Încărcare plugin sau glisați și fixați fișierul în arhiva Zip."
+  "PluginSDKDescription": "Utilizați kit-ul de dezvoltare a plugin-urilor pentru a adăuga funcționalități noi, a conecta servicii terțe sau a îmbunătăți experiența existentă. Consultați exemplele de pluginuri de mai jos, al căror cod sursă este disponibil pe GitHub. Accesați pagina <1>Pluginuri</1> pentru a le activa în spațiul dumneavoastră de lucru.",
+  "PluginSDKInstruction": "<1>Citiți instrucțiunile</1> pentru a vă crea propriile pluginuri.",
+  "UploadDescription": "Adăugați plugin-uri pentru a extinde spațiul de lucru cu funcții suplimentare. Activați unul din lista de mai jos sau faceți clic pe Încărcare plugin (ori glisați un fișier ZIP) pentru a adăuga propriul plugin."
 }

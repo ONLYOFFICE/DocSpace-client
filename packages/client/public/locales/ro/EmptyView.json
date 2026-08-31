@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Puteți crea șablonul dintr-un spațiu formulare în secțiunea Spații formulare",
   "EmptyGroupAddedUserOptionDescription": "Adăugați membrii de grup și desemnați șeful",
   "EmptyGroupDeleteOptionDescription": "Dacă nu mai aveți nevoie de acest grup",
-  "EmptyGroupsCreateGroupOptionDescription": "Creați un grup pentru a le adăuga la sala",
+  "EmptyGroupsCreateGroupOptionDescription": "Creați un grup pentru a invita toți membrii într-o sală sau pentru a partaja un fișier cu ei deodată",
   "EmptyRootFormsDescription": "Creați primul spațiu formulare.",
   "EmptyRootFormsTitle": "Niciun spațiu de formulare deocamdată aici",
   "EmptyRootFormsUserDescription": "Spațiul de formulare partajat va apărea aici.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Bun venit în Spațiul de completare formulare",
   "InviteNewUsers": "Invitați utilizatori noi",
   "InviteRootRoomDescription": "Trimiteți o invitație pentru a adăuga noi membri la spațiul de lucru",
-  "InviteUsersOptionDescription": "Adăugați membrii pentru editarea colaborativă în sală.",
+  "InviteUsersOptionDescription": "Adăugați membri pentru a lucra împreună în sală.",
   "ManageAccess": "Gestionare acces",
   "MigrationDataDescription": "Transferați datele spre {{productName}} din {{organizationName}} Workspace, Google Workspace sau Nextcloud.",
   "MigrationDataTitle": "Importul de date",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Încărcare de pe dispozitivul dvs",
   "UploadDevicePDFFormOptionDescription": "Încărcați în spațiu un formular PDF gata de pe dispozitivul dvs.",
   "UploadDevicePDFFormOptionTitle": "Încărcare de pe dispozitivul",
-  "UploadFromPortalTitle": "Încărcare din spațiul de lucru",
+  "UploadFromPortalTitle": "Încărcare din stocare",
   "UploadPDFFormOptionDescription": "Selectați un formular PDF gata disponibil în spațiul de lucru și încărcați-l în spațiu.",
   "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date"
 }

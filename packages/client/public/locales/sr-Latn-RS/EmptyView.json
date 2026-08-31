@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Možete kreirati šablon iz prostora obrazaca u odeljku Prostori obrazaca.",
   "EmptyGroupAddedUserOptionDescription": "Dodajte članove grupe i postavite voditelja",
   "EmptyGroupDeleteOptionDescription": "Ako vam ova grupa više nije potrebna",
-  "EmptyGroupsCreateGroupOptionDescription": "Kreirajte grupu da biste ih dodali u sobu",
+  "EmptyGroupsCreateGroupOptionDescription": "Kreirajte grupu kako biste odjednom pozvali sve njene članove u sobu ili sa njima podelili datoteku",
   "EmptyRootFormsDescription": "Molimo vas kreirajte prvi prostor obrazaca.",
   "EmptyRootFormsTitle": "Ovde još uvek nema prostora obrazaca",
   "EmptyRootFormsUserDescription": "Deljeni prostor obrazaca će se ovde pojaviti.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Dobrodošli u prostor za popunjavanje obrazaca",
   "InviteNewUsers": "Pozovite nove korisnike",
   "InviteRootRoomDescription": "Pošaljite poziv za dodavanje novih članova u radni prostor",
-  "InviteUsersOptionDescription": "Dodaj članove za zajedničko uređivanje u prostoriji",
+  "InviteUsersOptionDescription": "Dodaj članove za zajednički rad u prostoriji",
   "ManageAccess": "Upravljanje pristupom",
   "MigrationDataDescription": "Prebacite svoje podatke u {{productName}} iz {{organizationName}} Workspace, Google Workspace ili Nextclouda.",
   "MigrationDataTitle": "Uvezite podatke",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Otpremi sa svog Uređaja",
   "UploadDevicePDFFormOptionDescription": "Otpremi gotov PDF obrazac u prostor sa svog uređaja.",
   "UploadDevicePDFFormOptionTitle": "Otpremi sa uređaja",
-  "UploadFromPortalTitle": "Otpremi iz radnog prostora",
+  "UploadFromPortalTitle": "Otpremi iz skladišta",
   "UploadPDFFormOptionDescription": "Izaberi gotov PDF obrazac dostupan u radnom prostoru i otpremi ga u prostor.",
   "VirtualDataRoomEmptyTitle": "Dobrodošli u Virtuelnu sobu za podatke"
 }

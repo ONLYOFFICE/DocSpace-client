@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "ທ່ານສາມາດສ້າງແມ່ແບບຈາກສະເປສແບບຟອມໃນພື້ນທີ່ສະເປສແບບຟອມໄດ້",
   "EmptyGroupAddedUserOptionDescription": "ເພີ່ມສະມາຊິກກຸ່ມ ແລະ ແຊ່ງຕັ້ງຫົວໜ້າ",
   "EmptyGroupDeleteOptionDescription": "ຖ້າທ່ານບໍ່ຕ້ອງການກຸ່ມນີ້ອີກຕໍ່ໄປ",
-  "EmptyGroupsCreateGroupOptionDescription": "ສ້າງກຸ່ມເພື່ອກໍານົດໃຫ້ເຂົາເຈົ້າເຂົ້າຫ້ອງ",
+  "EmptyGroupsCreateGroupOptionDescription": "ສ້າງກຸ່ມເພື່ອເຊີນສະມາຊິກທັງໝົດເຂົ້າຫ້ອງ, ຫຼືແບ່ງປັນໄຟລ໌ກັບພວກເຂົາໄດ້ໃນເທື່ອດຽວ",
   "EmptyRootFormsDescription": "ກະລຸນາສ້າງສະເປສແບບຟອມທໍາອິດ.",
   "EmptyRootFormsTitle": "ບໍ່ມີສະເປສແບບຟອມຢູ່ທີ່ນີ້ເທື່ອ",
   "EmptyRootFormsUserDescription": "ສະເປສແບບຟອມທີ່ແບ່ງປັນຈະປະກົດຢູ່ທີ່ນີ້.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ສະເປສຕື່ມຂໍ້ມູນແບບຟອມ",
   "InviteNewUsers": "ເຊີນຜູ້ໃຊ້​ໃໝ່",
   "InviteRootRoomDescription": "ສົ່ງຄຳເຊີນເພື່ອເພີ່ມສະມາຊິກໃໝ່ເຂົ້າສູ່ພື້ນທີ່ເຮັດວຽກ",
-  "InviteUsersOptionDescription": "ເພີ່ມສະມາຊິກເຂົ້າຮ່ວມກວດແກ້ຮ່ວມກັນໃນຫ້ອງ",
+  "InviteUsersOptionDescription": "ເພີ່ມສະມາຊິກເພື່ອຮ່ວມງານກັນໃນຫ້ອງ",
   "ManageAccess": "ຈັດການການເຂົ້າເຖິງ",
   "MigrationDataDescription": "ໂອນຂໍ້ມູນຂອງທ່ານໄປຍັງ {{productName}} ຈາກ {{organizationName}} Workspace, Google Workspace, ຫຼື Nextcloud.",
   "MigrationDataTitle": "ນຳເຂົ້າຂໍ້ມູນ",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "ອັບໂຫຼດຈາກອຸປະກອນຂອງທ່ານ",
   "UploadDevicePDFFormOptionDescription": "ອັບໂຫຼດແບບຟອມ PDF ທີ່ພ້ອມແລ້ວເຂົ້າສະເປສຈາກອຸປະກອນຂອງທ່ານ.",
   "UploadDevicePDFFormOptionTitle": "ອັບໂຫຼດຈາກເຄື່ອງມື",
-  "UploadFromPortalTitle": "ອັບໂຫຼດຈາກພື້ນທີ່ເຮັດວຽກ",
+  "UploadFromPortalTitle": "ອັບໂຫຼດຈາກເກັບມ້ຽນ",
   "UploadPDFFormOptionDescription": "ເລືອກແບບຟອມ PDF ທີ່ພ້ອມແລ້ວທີ່ມີຢູ່ໃນພື້ນທີ່ເຮັດວຽກ ແລະອັບໂຫຼດມັນເຂົ້າສະເປສ.",
   "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ"
 }

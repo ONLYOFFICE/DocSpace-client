@@ -3,7 +3,7 @@
   "AdminSetupRequired": "Потребно подешавање од стране администратора",
   "Badges": "Значке",
   "DailyFeed": "Дневни садржај {{organizationName}} {{productName}}-а",
-  "DailyFeedDescription": "Читајте вести и догађаје из вашег {{organizationName}} {{productName}}-а у дневном прегледу.",
+  "DailyFeedDescription": "Примајте дневни преглед вести и догађаја из {{organizationName}} {{productName}}-а.",
   "FileActivityNotify": "Обавештења о активностима фајла",
   "IsNotValid": "Није валидно",
   "LdapEmailTooltip": "Овај кориснички налог је учитан са LDAP-а. Емаил адреса корисника није наведена и тренутна је генерисана аутоматски и не може се користити за слање обавештења.",
@@ -15,5 +15,5 @@
   "SuccessConnected": "{{serviceName}} је успешно повезан као канал за обавештења. Сада ћеш тамо примати ажурирања.",
   "SuccessDisconnected": "{{serviceName}} је успешно искључен као канал за обавештења. Обавештења више неће бити слана тамо.",
   "UsefulTips": "Корисни {{organizationName}} {{productName}} савети",
-  "UsefulTipsDescription": "Добиј корисне водиче о {{organizationName}} {{productName}}-у"
+  "UsefulTipsDescription": "Откријте корисне савете и водиче за коришћење {{organizationName}} {{productName}}-а."
 }

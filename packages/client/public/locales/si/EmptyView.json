@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "ඔබට පෝරම අවකාශ කොටසෙහි පෝරම අවකාශයකින් අච්චුවක් නිර්මාණය කළ හැකිය.",
   "EmptyGroupAddedUserOptionDescription": "ප්‍රජාභවයන් එක්කරන්න සහ ප්‍රධානියා පත් කරන්න",
   "EmptyGroupDeleteOptionDescription": "ඔබට මේ සමූහය තවදුරටත් අවශ්‍ය නොවනවා නම්",
-  "EmptyGroupsCreateGroupOptionDescription": "කාණ්ඩයක් සාදා ඔවුන්ව කාමරයට එක් කරන්න.",
+  "EmptyGroupsCreateGroupOptionDescription": "කණ්ඩායමක් සාදා, එහි සියලුම සාමාජිකයින් කාමරයකට ආරාධනා කරන්න, නැතහොත් ඔවුන් සියල්ලන්ටම එකවර ගොනුවක් බෙදාගන්න.",
   "EmptyRootFormsDescription": "පළමු පෝරම අවකාශය සාදන්න.",
   "EmptyRootFormsTitle": "මෙහි තවම පෝරම අවකාශ නොමැත",
   "EmptyRootFormsUserDescription": "බෙදාගත් පෝරම අවකාශය මෙහි දිස්වනු ඇත.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "පෝරම පිරවීමේ අවකාශයට සාදරයෙන් පිළිගන්නවා!",
   "InviteNewUsers": "නව පරිශීලකයින් ආරාධනා කරන්න",
   "InviteRootRoomDescription": "වැඩ අවකාශය වෙත නව සාමාජිකයන් එක් කිරීමට ආරාධනාවක් යවන්න.",
-  "InviteUsersOptionDescription": "කාමරයේ ඒකාබද්ධ සංස්කරණය සඳහා සාමාජිකයන් එක් කරන්න",
+  "InviteUsersOptionDescription": "කාමරයේ එකට වැඩ කිරීමට සාමාජිකයන් එක් කරන්න",
   "ManageAccess": "ප්‍රවේශය කළමනාකරණය කරන්න",
   "MigrationDataDescription": "{{organizationName}} Workspace, Google Workspace, හෝ Nextcloud වෙතින් ඔබේ දත්ත {{productName}} වෙත මාරු කරන්න.",
   "MigrationDataTitle": "දත්ත ආයාත කරන්න",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "ඔබේ උපකරණයෙන් උඩුගත කරන්න",
   "UploadDevicePDFFormOptionDescription": "ඔබේ උපාංගයෙන් සූදානම් PDF පෝරමයක් අවකාශයට උඩුගත කරන්න.",
   "UploadDevicePDFFormOptionTitle": "උපාංගයෙන් උඩුගත කරන්න",
-  "UploadFromPortalTitle": "වැඩ අවකාශයෙන් උඩුගත කරන්න",
+  "UploadFromPortalTitle": "ගබඩාවෙන් උඩුගත කරන්න",
   "UploadPDFFormOptionDescription": "වැඩ අවකාශයේ ඇති සූදානම් PDF පෝරමයක් තෝරා එය අවකාශයට උඩුගත කරන්න.",
   "VirtualDataRoomEmptyTitle": "ආදරයෙන් පිළිගන්නවා, අන්තර්ජාල දත්ත කාමරයට!"
 }

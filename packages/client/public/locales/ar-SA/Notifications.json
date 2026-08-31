@@ -11,9 +11,9 @@
   "Notifications": "الإشعارات",
   "RoomsActivityDescription": "احصل على إشعارات بريد إلكتروني فورية حول الملفات/المجلدات المشتركة الجديدة والنشاط داخل {{rooms}} و {{aiAgents}}.",
   "RoomUpdateNotify": "المحتوى المشترك، و {{rooms}} ونشاط {{aiAgents}}",
-  "SettingUpNotifications": "إعداد الإشعارات",
+  "SettingUpNotifications": "إعدادات الإشعارات",
   "SuccessConnected": "تم توصيل {{serviceName}} بنجاح كقناة إشعارات. ستتلقون الآن التحديثات هناك.",
   "SuccessDisconnected": "تم فصل {{serviceName}} بنجاح كقناة إشعارات. لن يتم إرسال الإشعارات إلى هناك بعد الآن.",
   "UsefulTips": "نصائح مفيدة حول {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "احصل على دليل مفيد حول {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "اكتشف نصائح وأدلة مفيدة لاستخدام {{organizationName}} {{productName}}."
 }

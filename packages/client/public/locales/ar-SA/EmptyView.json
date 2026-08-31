@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "يمكنكم إنشاء قالب من مساحة نماذج ضمن قسم مساحات النماذج",
   "EmptyGroupAddedUserOptionDescription": "إضافة أعضاء المجموعة وتعيين رئيس المجموعة",
   "EmptyGroupDeleteOptionDescription": "إذا لم تعد بحاجة إلى هذه المجموعة",
-  "EmptyGroupsCreateGroupOptionDescription": "إنشاء مجموعة لإضافتهم إلى الغرفة",
+  "EmptyGroupsCreateGroupOptionDescription": "أنشئ مجموعة لدعوة جميع أعضائها إلى غرفة، أو مشاركة ملف معهم دفعة واحدة",
   "EmptyRootFormsDescription": "الرجاء إنشاء مساحة النماذج الأولى.",
   "EmptyRootFormsTitle": "لا توجد مساحات نماذج هنا حتى الآن",
   "EmptyRootFormsUserDescription": "ستظهر مساحة النماذج المشتركة هنا.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "مرحبًا بك في مساحة تعبئة النماذج",
   "InviteNewUsers": "دعوة مستخدمين جدد",
   "InviteRootRoomDescription": "إرسال دعوة لإضافة أعضاء جدد إلى مساحة العمل",
-  "InviteUsersOptionDescription": "إضافة أعضاء للتحرير المشترك في الغرفة.",
+  "InviteUsersOptionDescription": "أضف أعضاء للعمل معًا في الغرفة",
   "ManageAccess": "إدارة الوصول",
   "MigrationDataDescription": "نقلوا بياناتكم إلى {{productName}} من {{organizationName}} Workspace أو Google Workspace أو Nextcloud.",
   "MigrationDataTitle": "ستيراد البيانات",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "تحميل من جهازك",
   "UploadDevicePDFFormOptionDescription": "قوموا بتحميل نموذج PDF جاهز إلى المساحة من جهازكم.",
   "UploadDevicePDFFormOptionTitle": "تحميل من الجهاز",
-  "UploadFromPortalTitle": "تحميل من مساحة العمل",
+  "UploadFromPortalTitle": "تحميل من التخزين",
   "UploadPDFFormOptionDescription": "اختاروا نموذج PDF جاهزًا متاحًا في مساحة العمل وقوموا بتحميله إلى المساحة.",
   "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية"
 }

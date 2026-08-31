@@ -14,5 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin bol úspešne načítaný.",
   "PluginSamples": "Ukážky pluginov",
   "PluginSDK": "Plugin SDK",
-  "UploadDescription": "Môžete pridať pluginy, ktoré rozšíria funkčnosť pracovného priestoru o ďalšie možnosti. Kliknite na Nahrať plugin alebo vložte súbor do archívu ZIP."
+  "PluginSDKDescription": "Použite Plugin SDK na pridanie novej funkčnosti, pripojenie služieb tretích strán alebo zlepšenie existujúceho prostredia. Prezrite si ukážkové pluginy nižšie, ktorých zdrojový kód je dostupný na GitHube. Prejdite na stránku <1>Pluginy</1> a povoľte ich pre svoj pracovný priestor.",
+  "PluginSDKInstruction": "<1>Prečítajte si pokyny</1> a vytvorte si vlastné pluginy.",
+  "UploadDescription": "Pridajte pluginy, ktoré rozšíria váš pracovný priestor o ďalšie funkcie. Zapnite niektorý zo zoznamu nižšie, alebo kliknutím na „Nahrať plugin“ (alebo pretiahnutím súboru ZIP) pridajte svoj vlastný."
 }

@@ -1,8 +1,8 @@
 {
   "BackupCodesDescription": "Use backup codes to sign in when you don't have access to your phone.",
-  "BackupCodesSecondDescription": "Each code can be used once. You can get new codes anytime. Only codes which were generated last are valid.",
+  "BackupCodesSecondDescription": "Each code can be used only once. You can get new codes at any time. Only the most recently generated code is valid.",
   "BackupCodesTitle": "Backup codes",
-  "CodesCounter": "codes:",
+  "CodesCounter": "backup codes:",
   "PrintButton": "Print",
   "RequestNewButton": "Request new"
 }

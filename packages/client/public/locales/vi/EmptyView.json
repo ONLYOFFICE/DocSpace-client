@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Bạn có thể tạo mẫu từ một không gian biểu mẫu trong phần Không gian biểu mẫu",
   "EmptyGroupAddedUserOptionDescription": "Thêm thành viên nhóm và chỉ định trưởng nhóm",
   "EmptyGroupDeleteOptionDescription": "Nếu bạn không cần nhóm này nữa",
-  "EmptyGroupsCreateGroupOptionDescription": "Tạo một nhóm để thêm họ vào phòng",
+  "EmptyGroupsCreateGroupOptionDescription": "Tạo một nhóm để mời tất cả thành viên của nhóm vào phòng, hoặc chia sẻ tệp với họ cùng một lúc",
   "EmptyRootFormsDescription": "Xin vui lòng tạo không gian biểu mẫu đầu tiên.",
   "EmptyRootFormsTitle": "Chưa có không gian biểu mẫu nào ở đây",
   "EmptyRootFormsUserDescription": "Không gian biểu mẫu chung sẽ xuất hiện ở đây.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Chào mừng bạn đến với không gian điền biểu mẫu",
   "InviteNewUsers": "Mời người dùng mới",
   "InviteRootRoomDescription": "Gửi lời mời để thêm thành viên mới vào không gian làm việc",
-  "InviteUsersOptionDescription": "Thêm thành viên để cùng chỉnh sửa trong phòng",
+  "InviteUsersOptionDescription": "Thêm thành viên để cùng làm việc trong phòng",
   "ManageAccess": "Quản lý quyền truy cập",
   "MigrationDataDescription": "Chuyển dữ liệu của bạn vào {{productName}} từ Workspace của {{organizationName}}, Google Workspace hoặc Nextcloud.",
   "MigrationDataTitle": "Nhập dữ liệu",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Tải lên từ Thiết bị của bạn",
   "UploadDevicePDFFormOptionDescription": "Tải lên một biểu mẫu PDF đã sẵn sàng vào không gian từ thiết bị của bạn.",
   "UploadDevicePDFFormOptionTitle": "Tải lên từ thiết bị",
-  "UploadFromPortalTitle": "Tải lên từ không gian làm việc",
+  "UploadFromPortalTitle": "Tải lên từ Lưu trữ",
   "UploadPDFFormOptionDescription": "Chọn một biểu mẫu PDF đã sẵn sàng có trong không gian làm việc và tải nó lên không gian.",
   "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo"
 }

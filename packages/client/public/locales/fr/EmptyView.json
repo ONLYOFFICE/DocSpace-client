@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Vous pouvez créer un modèle à partir d'un espace de formulaires dans la section Espaces de formulaires",
   "EmptyGroupAddedUserOptionDescription": "Ajoutez les membres du groupe et attribuez le responsable",
   "EmptyGroupDeleteOptionDescription": "Si vous n'avez plus besoin de ce groupe",
-  "EmptyGroupsCreateGroupOptionDescription": "Créez un groupe pour ajouter ses membres à la salle",
+  "EmptyGroupsCreateGroupOptionDescription": "Créez un groupe pour inviter tous ses membres dans une salle ou partager un fichier avec eux en une seule fois",
   "EmptyRootFormsDescription": "Veuillez créer le premier espace de formulaires.",
   "EmptyRootFormsTitle": "Il n’y a pas encore d’espaces de formulaires ici",
   "EmptyRootFormsUserDescription": "L'espace de formulaires partagé apparaîtra ici.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Bienvenue dans l'espace de remplissage de formulaires",
   "InviteNewUsers": "Inviter de nouveaux utilisateurs",
   "InviteRootRoomDescription": "Envoyez une invitation pour ajouter de nouveaux membres à l'espace de travail",
-  "InviteUsersOptionDescription": "Ajoutez des membres de l'espace pour l'édition conjointe dans la salle",
+  "InviteUsersOptionDescription": "Ajoutez des membres pour collaborer dans la salle",
   "ManageAccess": "Gérer l'accès",
   "MigrationDataDescription": "Transférez vos données vers {{productName}} depuis {{organizationName}} Workspace, Google Workspace ou Nextcloud.",
   "MigrationDataTitle": "Importer des données",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Télécharger depuis votre appareil",
   "UploadDevicePDFFormOptionDescription": "Téléchargez un formulaire PDF prêt à l'emploi depuis votre appareil vers l'espace.",
   "UploadDevicePDFFormOptionTitle": "Télécharger depuis l'appareil",
-  "UploadFromPortalTitle": "Télécharger depuis l'espace de travail",
+  "UploadFromPortalTitle": "Télécharger depuis le stockage",
   "UploadPDFFormOptionDescription": "Sélectionnez un formulaire PDF prêt à l'emploi disponible dans l'espace de travail et téléchargez-le dans l'espace.",
   "VirtualDataRoomEmptyTitle": "Bienvenue dans la salle de données virtuelle"
 }

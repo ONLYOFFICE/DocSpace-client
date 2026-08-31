@@ -14,5 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin chargé avec succès",
   "PluginSamples": "Exemples de plugins",
   "PluginSDK": "Plugin SDK",
-  "UploadDescription": "Vous pouvez ajouter des plugins pour étendre la fonctionnalité de l'espace de travail avec des fonctions supplémentaires. Cliquez sur « Télécharger le plugin » ou déposez le fichier dans l’archive ZIP."
+  "PluginSDKDescription": "Utilisez le plugin SDK pour ajouter de nouvelles fonctionnalités, connecter des services tiers ou améliorer l'expérience existante. Parcourez les exemples de plugins ci-dessous, dont le code source est disponible sur GitHub. Accédez à la page <1>Modules complémentaires</1> pour les activer dans votre espace de travail.",
+  "PluginSDKInstruction": "<1>Lisez les instructions</1> pour créer vos propres plugins.",
+  "UploadDescription": "Ajoutez des plugins pour étendre votre espace de travail avec des fonctionnalités supplémentaires. Activez-en un dans la liste ci-dessous, ou cliquez sur « Télécharger le plugin » (ou déposez un fichier ZIP) pour ajouter le vôtre."
 }

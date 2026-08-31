@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Predlogo lahko ustvarite iz prostora za obrazce v razdelku Prostori za obrazce",
   "EmptyGroupAddedUserOptionDescription": "Dodajte člane skupine in dodelite vodjo",
   "EmptyGroupDeleteOptionDescription": "Če te skupine ne potrebujete več",
-  "EmptyGroupsCreateGroupOptionDescription": "Ustvarite skupino, da jih dodate v sobo",
+  "EmptyGroupsCreateGroupOptionDescription": "Ustvarite skupino, da povabite vse njene člane v sobo ali z njimi hkrati delite datoteko",
   "EmptyRootFormsDescription": "Prosimo, ustvarite prvi prostor za obrazce.",
   "EmptyRootFormsTitle": "Tukaj še ni prostorov za obrazce",
   "EmptyRootFormsUserDescription": "Tukaj se bo prikazal skupni prostor za obrazce.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Dobrodošli v prostoru za izpolnjevanje obrazcev",
   "InviteNewUsers": "Povabite nove uporabnike",
   "InviteRootRoomDescription": "Pošljite povabilo za dodajanje novih članov v delovni prostor",
-  "InviteUsersOptionDescription": "Dodaj člane za skupno urejanje v sobi",
+  "InviteUsersOptionDescription": "Dodajte člane za skupno delo v sobi",
   "ManageAccess": "Upravljanje dostopa",
   "MigrationDataDescription": "Prenesite svoje podatke v {{productName}} iz Workspace {{organizationName}}, Google Workspace ali Nextcloud.",
   "MigrationDataTitle": "Uvozi podatke",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Naloži iz svoje naprave",
   "UploadDevicePDFFormOptionDescription": "Naložite pripravljen obrazec PDF v prostor iz svoje naprave.",
   "UploadDevicePDFFormOptionTitle": "Naloži iz naprave",
-  "UploadFromPortalTitle": "Naloži iz delovnega prostora",
+  "UploadFromPortalTitle": "Naloži iz shrambe",
   "UploadPDFFormOptionDescription": "Izberite pripravljen obrazec PDF, ki je na voljo v delovnem prostoru, in ga naložite v prostor.",
   "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi"
 }

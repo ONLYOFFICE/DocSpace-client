@@ -60,6 +60,7 @@
   "PrivacyPolicyURLHelpButton": "提供一个指向您隐私政策的 URL 链接，该政策必须符合适用的法律法规，并明确说明您如何收集、使用、共享、保留和处理个人信息。",
   "ProfileDescription": "在此您可以查看已授权访问的应用信息，并在需要时撤销同意。",
   "Read": "阅读",
+  "ReadOAuthGuide": "阅读 OAuth 2.0 指南",
   "RedirectsURLS": "重定向 URL",
   "RedirectsURLSHelpButton": "用户成功授权应用后，授权服务器将把用户重定向回应用，并附带敏感信息。",
   "RegisterNewApp": "注册新应用",

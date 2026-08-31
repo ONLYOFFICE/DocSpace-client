@@ -3,7 +3,7 @@
   "AdminSetupRequired": "Απαιτείται ρύθμιση διαχειριστή",
   "Badges": "Εμβλήματα",
   "DailyFeed": "Καθημερινή τροφοδοσία {{organizationName}} {{productName}}",
-  "DailyFeedDescription": "Διαβάστε ειδήσεις και γεγονότα από το {{organizationName}} {{productName}} σας σε μια καθημερινή σύνοψη.",
+  "DailyFeedDescription": "Λάβετε μια καθημερινή σύνοψη ειδήσεων και γεγονότων από το {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Ειδοποιήσεις δραστηριότητας αρχείου",
   "IsNotValid": "Δεν είναι έγκυρο",
   "LdapEmailTooltip": "Αυτός ο λογαριασμός χρήστη φορτώνεται από το LDAP. Η διεύθυνση email του χρήστη δεν έχει καθοριστεί και η τρέχουσα δημιουργήθηκε αυτόματα και δεν μπορεί να χρησιμοποιηθεί για την αποστολή ειδοποιήσεων.",
@@ -11,9 +11,9 @@
   "Notifications": "Ειδοποιήσεις",
   "RoomsActivityDescription": "Λάβετε άμεσες ειδοποιήσεις μέσω email για νέα κοινόχρηστα αρχεία/φάκελες και δραστηριότητα μέσα στους {{rooms}} και {{aiAgents}} σας.",
   "RoomUpdateNotify": "Κοινό περιεχόμενο, δραστηριότητα στις ενότητες {{rooms}} και {{aiAgents}}",
-  "SettingUpNotifications": "Ρύθμιση ειδοποιήσεων",
+  "SettingUpNotifications": "Ρυθμίσεις ειδοποιήσεων",
   "SuccessConnected": "{{serviceName}} συνδέθηκε επιτυχώς ως κανάλι ειδοποιήσεων. Θα λαμβάνετε πλέον ενημερώσεις εκεί.",
   "SuccessDisconnected": "Το {{serviceName}} έχει αποσυνδεθεί επιτυχώς ως κανάλι ειδοποιήσεων. Οι ειδοποιήσεις δεν θα αποστέλλονται εκεί πλέον.",
   "UsefulTips": "Χρήσιμες συμβουλές {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Αποκτήστε χρήσιμους οδηγούς σχετικά με το {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Ανακαλύψτε χρήσιμες συμβουλές και οδηγούς για τη χρήση του {{organizationName}} {{productName}}."
 }

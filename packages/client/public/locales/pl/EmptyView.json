@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "Możesz utworzyć szablon z obszaru formularzy w sekcji Obszary formularzy",
   "EmptyGroupAddedUserOptionDescription": "Dodaj do grupy członków i przypisz jej lidera",
   "EmptyGroupDeleteOptionDescription": "Jeśli nie potrzebujesz już tej grupy,",
-  "EmptyGroupsCreateGroupOptionDescription": "Utwórz grupę, aby dodać jej członków do pokoju",
+  "EmptyGroupsCreateGroupOptionDescription": "Utwórz grupę, aby zaprosić wszystkich jej członków do pokoju lub udostępnić im plik jednocześnie",
   "EmptyRootFormsDescription": "Utwórz pierwszy obszar formularzy.",
   "EmptyRootFormsTitle": "Brak obszarów formularzy",
   "EmptyRootFormsUserDescription": "Współdzielony obszar formularzy pojawi się tutaj.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "Witaj w obszarze wypełniania formularzy",
   "InviteNewUsers": "Zaproś nowych użytkowników",
   "InviteRootRoomDescription": "Wyślij zaproszenia, aby dodać nowych członków do przestrzeni roboczej",
-  "InviteUsersOptionDescription": "Dodaj członków do wspólnej edycji w pokoju",
+  "InviteUsersOptionDescription": "Dodaj członków, aby wspólnie pracować w pokoju",
   "ManageAccess": "Zarządzaj dostępem",
   "MigrationDataDescription": "Przenieś swoje dane do {{productName}} z Workspace {{organizationName}}, Google Workspace lub Nextcloud.",
   "MigrationDataTitle": "Importuj dane",
@@ -52,7 +52,7 @@
   "UploadDeviceOptionTitle": "Prześlij ze swojego urządzenia",
   "UploadDevicePDFFormOptionDescription": "Prześlij gotowy formularz PDF do obszaru ze swojego urządzenia.",
   "UploadDevicePDFFormOptionTitle": "Prześlij z urządzenia",
-  "UploadFromPortalTitle": "Prześlij z przestrzeni roboczej",
+  "UploadFromPortalTitle": "Prześlij z pamięci masowej",
   "UploadPDFFormOptionDescription": "Wybierz gotowy formularz PDF dostępny w przestrzeni roboczej i prześlij go do obszaru.",
   "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych"
 }

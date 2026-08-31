@@ -14,5 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin načten úspěšně",
   "PluginSamples": "Ukázky pluginů",
   "PluginSDK": "Plugin SDK",
-  "UploadDescription": "Můžete přidat zásuvné moduly a rozšířit tak funkčnost pracovního prostoru o další funkce. Klepněte na tlačítko Nahrát zásuvný modul nebo vhoďte soubor do archivu ZIP."
+  "PluginSDKDescription": "Použijte Plugin SDK k přidání nových funkcí, propojení služeb třetích stran nebo vylepšení existujícího prostředí. Prohlédněte si ukázkové pluginy níže, jejichž zdrojový kód je dostupný na GitHubu. Přejděte na stránku <1>Zásuvné moduly</1> a povolte je pro svůj pracovní prostor.",
+  "PluginSDKInstruction": "<1>Přečtěte si pokyny</1> a vytvořte si vlastní pluginy.",
+  "UploadDescription": "Přidejte zásuvné moduly a rozšiřte tak svůj pracovní prostor o další funkce. Povolte některý ze seznamu níže, nebo klikněte na „Nahrát zásuvný modul“ (případně přetáhněte soubor ZIP) a přidejte svůj vlastní."
 }

@@ -3,7 +3,7 @@
   "AdminSetupRequired": "Необхідне налаштування адміністратора",
   "Badges": "Значки",
   "DailyFeed": "Щоденна стрічка {{organizationName}} {{productName}}",
-  "DailyFeedDescription": "Читайте новини та події свого {{organizationName}} {{productName}} у щоденному дайджесті.",
+  "DailyFeedDescription": "Отримуйте щоденний дайджест новин і подій {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Сповіщення про активність файлів",
   "IsNotValid": "Не є дійсним",
   "LdapEmailTooltip": "Цей обліковий запис користувача завантажено з LDAP. Адреса електронної пошти користувача не була вказана, і поточна була згенерована автоматично та не може бути використана для надсилання сповіщень.",
@@ -15,5 +15,5 @@
   "SuccessConnected": "{{serviceName}} успішно підключено як канал сповіщень. Ви тепер отримуватимете оновлення там.",
   "SuccessDisconnected": "{{serviceName}} було успішно від’єднано як канал сповіщень. Сповіщення туди більше не надсилатимуться.",
   "UsefulTips": "Корисні поради щодо {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Отримати корисні посібники з {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Дізнавайтеся корисні поради та посібники з використання {{organizationName}} {{productName}}."
 }

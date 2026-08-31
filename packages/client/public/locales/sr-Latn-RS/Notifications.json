@@ -11,9 +11,9 @@
   "Notifications": "Obaveštenja",
   "RoomsActivityDescription": "Pristupite trenutnim e-mail obaveštenjima o novim podeljenim fajlovima/foldereima i aktivnosti unutar vaših {{rooms}} i {{aiAgents}}.",
   "RoomUpdateNotify": "Podeljeni sadržaj, aktivnosti u odeljcima {{rooms}} i {{aiAgents}}",
-  "SettingUpNotifications": "Podešavanje obaveštenja",
+  "SettingUpNotifications": "Podešavanja obaveštenja",
   "SuccessConnected": "{{serviceName}} je uspešno povezan kao kanal za obaveštenja. Sada ćeš tamo primati ažuriranja.",
   "SuccessDisconnected": "{{serviceName}} je uspešno isključen kao kanal za obaveštenja. Obaveštenja više neće biti slana tamo.",
   "UsefulTips": "Korisni {{organizationName}} {{productName}} saveti",
-  "UsefulTipsDescription": "Dobij korisne vodiče o {{organizationName}} {{productName}}-u"
+  "UsefulTipsDescription": "Otkrijte korisne savete i vodiče za korišćenje {{organizationName}} {{productName}}-a."
 }

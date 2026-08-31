@@ -35,15 +35,21 @@
 
 import type { Page } from "@playwright/test";
 
+import { http } from "msw";
+
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { BASE_URL, API_PREFIX } from "@docspace/shared/__mocks__/e2e/utils";
 import {
   settingsHandler,
   TypeSettings,
   selfActivationStatusHandler,
   selfByTypeHandler,
+  selfHandlerWithCulture,
   aiConfigHandler,
   roomListHandler,
   TypeRoomList,
+  tariffHandler,
+  freeQuotaHandler,
 } from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
@@ -309,6 +315,175 @@ test.describe("Top row fit - frames", () => {
           height: frame.clipHeight,
         },
       });
+    });
+  }
+});
+
+/**
+ * The tariff line, which the same grid starved a second way.
+ *
+ * It lives in `.controlButtonContainer` alongside the chat and option buttons,
+ * so it inherited that column's 90px ceiling: on a 1023px header it rendered
+ * 40px wide - "Try the Bus..." - with three quarters of the row empty next to
+ * a seven-character page title. Inside a room it was fine all along, because
+ * that layout is the one rule in Navigation.module.scss that already put the
+ * flexible track on the controls instead of the title.
+ *
+ * Both halves matter and are asserted together: an uncut tariff line proves
+ * nothing on its own (it is allowed to disappear when the row is genuinely
+ * full), so each test first establishes that the title is not truncating -
+ * that is what makes "the header had room" a fact rather than an assumption.
+ */
+const ROOM_ID = 4242;
+
+/**
+ * `CopySharedLink` is what puts the "Share room" button in the header, and
+ * that in turn switches the grid to `[data-show-navigation-button="true"]` -
+ * the rule that was already correct. Turning it off is how the second broken
+ * rule (`49px 1fr auto`, every non-root folder) becomes reachable.
+ */
+const roomFolderHandler = (port: string, title: string, canShare: boolean) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/:id(\\d+)`, () => {
+    const current = {
+      parentId: 14,
+      filesCount: 0,
+      foldersCount: 0,
+      new: 0,
+      mute: false,
+      tags: [],
+      logo: { original: "", large: "", medium: "", small: "", color: "4781D1" },
+      pinned: false,
+      roomType: 6, // RoomsType.PublicRoom
+      isRoom: true,
+      private: false,
+      indexing: false,
+      denyDownload: false,
+      inRoom: true,
+      usedSpace: 0,
+      fileEntryType: 1,
+      id: ROOM_ID,
+      rootFolderId: 14,
+      canShare: true,
+      security: {
+        Read: true,
+        Create: true,
+        Delete: true,
+        EditRoom: true,
+        Rename: true,
+        CopySharedLink: canShare,
+      },
+      title,
+      access: 0,
+      shared: true,
+      created: "2026-01-15T12:00:00.000Z",
+      updated: "2026-01-15T12:00:00.000Z",
+      rootFolderType: 14, // FolderType.Rooms
+      parentRoomType: 14,
+    };
+
+    return new Response(
+      JSON.stringify({
+        response: {
+          files: [],
+          folders: [],
+          current,
+          pathParts: [
+            { id: 14, title: "Rooms" },
+            { id: ROOM_ID, title },
+          ],
+          startIndex: 0,
+          count: 0,
+          total: 0,
+          new: 0,
+        },
+      }),
+    );
+  });
+
+/** The width the truncation was reported at - the top of the tablet band. */
+const TARIFF_WIDTH = 1023;
+
+const tariffText = (page: Page) => page.locator("#tariff-bar-text");
+const roomName = (page: Page) => page.locator(".title-block-text");
+
+const isTruncated = (locator: ReturnType<typeof tariffText>) =>
+  locator.evaluate((el) => {
+    const node = el as HTMLElement;
+    return node.scrollWidth > node.clientWidth + 1;
+  });
+
+/**
+ * Land wide, then narrow. `checkBar()` runs on mount only (a known gap, see
+ * room-header-crowding.spec.ts), so arriving at the width directly can have
+ * the line hide itself and there would be nothing left to measure. Resizing
+ * into it is also how the report was produced.
+ */
+const narrowInto = async (page: Page, baseUrl: string, url: string) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(`${baseUrl}${url}`);
+  await expect(chatButton(page)).toBeVisible();
+  await page.waitForTimeout(600);
+
+  await page.setViewportSize({ width: TARIFF_WIDTH, height: 900 });
+  await page.waitForTimeout(600);
+};
+
+test.describe("Top row fit - tariff line", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      // SaaS on the free plan, so the tariff line renders its longest wording.
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      selfHandlerWithCulture(TEST_PORT, "ru-RU"),
+      aiConfigHandler(TEST_PORT),
+      tariffHandler(TEST_PORT),
+      freeQuotaHandler(TEST_PORT),
+      roomListHandler(TEST_PORT, TypeRoomList.ContextMenu),
+      roomFolderHandler(TEST_PORT, "Public", false),
+    );
+  });
+
+  const CASES = [
+    {
+      key: "on the rooms root",
+      url: ROOMS_URL,
+      // `[data-is-root-folder="true"][data-with-logo="false"]`, the rule the
+      // report came from.
+    },
+    {
+      key: "in a folder with no share button",
+      url: `/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`,
+      // The generic `49px 1fr auto` rule - same defect, different rule, and it
+      // cut the line down to 7px rather than 40.
+    },
+  ];
+
+  for (const testCase of CASES) {
+    test(`is not cut while the header has room ${testCase.key}`, async ({
+      page,
+      baseUrl,
+    }) => {
+      await narrowInto(page, baseUrl, testCase.url);
+
+      if ((await tariffText(page).count()) === 0) return;
+      if (!(await tariffText(page).isVisible())) return;
+
+      // The header is not crowded: the title is showing in full. Without this
+      // the assertion below would also pass on a header that has legitimately
+      // run out of space and truncated everything.
+      expect(
+        await isTruncated(roomName(page)),
+        "the title is truncating, so the header is genuinely full and this case proves nothing",
+      ).toBe(false);
+
+      expect(
+        await isTruncated(tariffText(page)),
+        `the tariff line is cut to ${Math.round(
+          (await tariffText(page).boundingBox())?.width ?? 0,
+        )}px of the ${await tariffText(page).evaluate(
+          (el) => (el as HTMLElement).scrollWidth,
+        )}px it needs`,
+      ).toBe(false);
     });
   }
 });

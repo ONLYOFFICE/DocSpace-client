@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Etiketët do të nxjerrin në pah aktivitetin e skedarëve — ngarkimet, redaktimet ose ndarjet — në seksionet {{rooms}}, {{shared}}, {{documents}}, dhe {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Distinktivët theksojnë aktivitetet e skedarëve, si ngarkimet, redaktimet dhe ndarjet, në aplikacionet {{files}}, {{rooms}}, {{forms}} dhe {{aiAgents}}.",
   "AdminSetupRequired": "Kërkohet konfigurim nga administratori",
   "Badges": "Distinktivët",
   "DailyFeed": "Furnizimi ditor i {{organizationName}} {{productName}}",

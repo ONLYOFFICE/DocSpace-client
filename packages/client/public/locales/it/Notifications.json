@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "I badge evidenzieranno l'attività sui file — caricamenti, modifiche o condivisioni — nelle sezioni {{rooms}}, {{shared}}, {{documents}} e {{aiAgents}}.",
+  "ActionsWithFilesDescription": "I badge evidenziano le attività sui file, come caricamenti, modifiche e condivisioni, nelle app {{files}}, {{rooms}}, {{forms}} e {{aiAgents}}.",
   "AdminSetupRequired": "È necessaria la configurazione dell’amministratore",
   "Badges": "Badge",
   "DailyFeed": "Feed giornaliero di {{organizationName}} {{productName}}",

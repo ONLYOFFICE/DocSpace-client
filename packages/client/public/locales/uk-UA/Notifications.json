@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Бейджі підсвічуватимуть активність файлів — завантаження, редагування чи поширення — у розділах {{rooms}}, {{shared}}, {{documents}} та {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Значки виділяють дії з файлами, такі як завантаження, редагування та надання доступу, у застосунках {{files}}, {{rooms}}, {{forms}} та {{aiAgents}}.",
   "AdminSetupRequired": "Необхідне налаштування адміністратора",
   "Badges": "Значки",
   "DailyFeed": "Щоденна стрічка {{organizationName}} {{productName}}",

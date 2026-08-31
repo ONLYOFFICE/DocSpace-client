@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Odznaki uwydatnią aktywność plików — przesłania, edycje lub udostępnienia — w sekcjach {{rooms}}, {{shared}}, {{documents}} i {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Etykiety wyróżniają aktywność plików, taką jak przesłania, edycje i udostępnienia, w aplikacjach {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}.",
   "AdminSetupRequired": "Wymagane skonfigurowanie administratora",
   "Badges": "Etykiety",
   "DailyFeed": "Codzienne aktualności {{organizationName}} {{productName}}",

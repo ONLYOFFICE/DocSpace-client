@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "ປ້າຍຈະເນັ້ນກິດຈະກໍາຂອງໄຟລ໌ — ການອັບໂຫຼດ, ການແກ້ໄຂ, ຫຼື ການແບ່ງປັນ — ໃນພາກສ່ວນ {{rooms}}, {{shared}}, {{documents}}, ແລະ {{aiAgents}}.",
+  "ActionsWithFilesDescription": "ປ້າຍເນັ້ນກິດຈະກໍາຂອງໄຟລ໌ ເຊັ່ນ ການອັບໂຫຼດ, ການແກ້ໄຂ ແລະ ການແບ່ງປັນ ໃນແອັບ {{files}}, {{rooms}}, {{forms}} ແລະ {{aiAgents}}.",
   "AdminSetupRequired": "ຕ້ອງຕັ້ງຄ່າຜູ້ເບິ່ງແຍງລະບົບ",
   "Badges": "ປ້າຍ",
   "DailyFeed": "ຟີດ {{organizationName}} {{productName}} ປະຈໍາວັນ",

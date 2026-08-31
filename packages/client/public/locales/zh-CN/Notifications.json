@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "徽章将高亮显示 {{rooms}}、{{shared}}、{{documents}} 和 {{aiAgents}} 部分中的文件活动——包括上传、编辑或分享。",
+  "ActionsWithFilesDescription": "徽章会在 {{files}}、{{rooms}}、{{forms}} 和 {{aiAgents}} 应用中高亮显示上传、编辑和共享等文件活动。",
   "AdminSetupRequired": "需要管理员设置",
   "Badges": "弹窗",
   "DailyFeed": "{{organizationName}} {{productName}}每日动态",

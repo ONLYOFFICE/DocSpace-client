@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Znacení zvýrazní aktivitu souborů — nahrání, úpravy nebo sdílení — v sekcích {{rooms}}, {{shared}}, {{documents}} a {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Odznaky zvýrazňují aktivitu souborů, jako je nahrávání, úpravy a sdílení, v aplikacích {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}.",
   "AdminSetupRequired": "Požadovaná konfigurace administrace",
   "Badges": "Odznaky",
   "DailyFeed": "Denní kanál {{organizationName}} {{productName}}",

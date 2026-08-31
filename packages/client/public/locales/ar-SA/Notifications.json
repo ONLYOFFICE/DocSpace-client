@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "ستُبرز الشارات نشاط الملفات — التحميلات، أو التعديلات، أو المشاركات — عبر أقسام {{rooms}}، {{shared}}، {{documents}}، و {{aiAgents}}.",
+  "ActionsWithFilesDescription": "تُبرز الشارات أنشطة الملفات مثل التحميلات والتعديلات والمشاركات في تطبيقات {{files}} و{{rooms}} و{{forms}} و{{aiAgents}}.",
   "AdminSetupRequired": "مطلوب إعداد من المسؤول",
   "Badges": "شارات",
   "DailyFeed": "أخبار {{organizationName}} {{productName}} اليومية",

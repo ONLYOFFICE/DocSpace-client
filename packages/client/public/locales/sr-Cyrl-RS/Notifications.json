@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Значици ће истакнути активност датотека — отпремања, уређивања или дељења — у секцијама {{rooms}}, {{shared}}, {{documents}} и {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Значке истичу активности над датотекама, као што су отпремања, уређивања и дељења, у апликацијама {{files}}, {{rooms}}, {{forms}} и {{aiAgents}}.",
   "AdminSetupRequired": "Потребно подешавање од стране администратора",
   "Badges": "Значке",
   "DailyFeed": "Дневни садржај {{organizationName}} {{productName}}-а",

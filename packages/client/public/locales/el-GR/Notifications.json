@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Τα Badges θα τονίζουν την δραστηριότητα των αρχείων — αναρτήσεις, επεξεργασίες ή κοινοποιήσεις — σε όλες τις ενότητες {{rooms}}, {{shared}}, {{documents}}, και {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Τα εμβλήματα επισημαίνουν τις δραστηριότητες αρχείων, όπως μεταφορτώσεις, επεξεργασίες και κοινοποιήσεις, στις εφαρμογές {{files}}, {{rooms}}, {{forms}} και {{aiAgents}}.",
   "AdminSetupRequired": "Απαιτείται ρύθμιση διαχειριστή",
   "Badges": "Εμβλήματα",
   "DailyFeed": "Καθημερινή τροφοδοσία {{organizationName}} {{productName}}",

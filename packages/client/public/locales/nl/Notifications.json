@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Badges markeren de activiteit van bestanden — uploads, bewerkingen of deelacties — in de secties {{rooms}}, {{shared}}, {{documents}} en {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Badges markeren bestandsactiviteit zoals uploads, bewerkingen en gedeelde bestanden in de apps {{files}}, {{rooms}}, {{forms}} en {{aiAgents}}.",
   "AdminSetupRequired": "Admin setup vereist",
   "Badges": "Badges",
   "DailyFeed": "Dagelijkse {{organizationName}} {{productName}} feed",

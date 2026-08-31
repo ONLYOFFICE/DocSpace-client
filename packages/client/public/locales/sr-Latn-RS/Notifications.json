@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Badge će istaknuti aktivnosti fajlova — otpremanje, uređivanje ili deljenje — u sekcijama {{rooms}}, {{shared}}, {{documents}} i {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Značke ističu aktivnosti nad fajlovima, kao što su otpremanja, uređivanja i deljenja, u aplikacijama {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}.",
   "AdminSetupRequired": "Potrebno podešavanje od strane administratora",
   "Badges": "Značke",
   "DailyFeed": "Dnevni sadržaj {{organizationName}} {{productName}}-a",

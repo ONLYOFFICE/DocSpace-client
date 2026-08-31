@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "배지에는 {{rooms}}, {{shared}}, {{documents}}, 및 {{aiAgents}} 섹션 전반의 파일 활동(업로드, 편집 또는 공유)이 강조 표시됩니다.",
+  "ActionsWithFilesDescription": "배지는 {{files}}, {{rooms}}, {{forms}}, {{aiAgents}} 앱 전반에서 업로드, 편집, 공유와 같은 파일 활동을 강조 표시합니다.",
   "AdminSetupRequired": "관리자 설정 필요",
   "Badges": "뱃지",
   "DailyFeed": "{{organizationName}} {{productName}} 일일 피드",

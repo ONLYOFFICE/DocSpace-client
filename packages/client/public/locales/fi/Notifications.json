@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Tunnisteet korostavat tiedostojen toimintaa — lataukset, muokkaukset tai jaetut tiedostot — kaikilla {{rooms}}, {{shared}}, {{documents}} ja {{aiAgents}} -osioilla.",
+  "ActionsWithFilesDescription": "Merkit korostavat tiedostotoimintoja, kuten latauksia, muokkauksia ja jakoja, sovelluksissa {{files}}, {{rooms}}, {{forms}} ja {{aiAgents}}.",
   "AdminSetupRequired": "Adminin asennus vaaditaan",
   "Badges": "Merkit",
   "DailyFeed": "Päivittäinen {{organizationName}} {{productName}}-syöte",

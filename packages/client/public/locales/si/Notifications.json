@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "ලාංඡන මගින් {{rooms}}, {{shared}}, {{documents}}, සහ {{aiAgents}} යන කොටස් පුරා ගොනු ක්‍රියාකාරකම් — උඩුගත කිරීම්, සංස්කරණ හෝ බෙදාගැනීම් — ඉස්මතු කරනු ඇත.",
+  "ActionsWithFilesDescription": "චිහ්න මගින් {{files}}, {{rooms}}, {{forms}} සහ {{aiAgents}} යෙදුම් හරහා උඩුගත කිරීම්, සංස්කරණ සහ බෙදාගැනීම් වැනි ගොනු ක්‍රියාකාරකම් ඉස්මතු කරයි.",
   "AdminSetupRequired": "පරිපාලක සැකසුම අවශ්‍යයි",
   "Badges": "චිහ්න",
   "DailyFeed": "දෛනික {{organizationName}} {{productName}} සංග්‍රහය",

@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Las insignias resaltarán la actividad de archivos — subidas, ediciones o comparticiones — en las secciones de {{rooms}}, {{shared}}, {{documents}}, y {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Los distintivos resaltan las actividades de archivos, como subidas, ediciones y comparticiones, en las aplicaciones {{files}}, {{rooms}}, {{forms}} y {{aiAgents}}.",
   "AdminSetupRequired": "Se requiere configuración administrativa",
   "Badges": "Distintivos",
   "DailyFeed": "Fuente diaria de {{organizationName}} {{productName}}",

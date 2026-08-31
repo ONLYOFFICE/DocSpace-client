@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "As etiquetas destacarão a atividade do arquivo — uploads, edições ou compartilhamentos — nas seções {{rooms}}, {{shared}}, {{documents}} e {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Os distintivos destacam as atividades de ficheiros, como carregamentos, edições e partilhas, nas aplicações {{files}}, {{rooms}}, {{forms}} e {{aiAgents}}.",
   "AdminSetupRequired": "Configuração de administrador necessária",
   "Badges": "Distintivos",
   "DailyFeed": "Feed diário do {{organizationName}} {{productName}}",

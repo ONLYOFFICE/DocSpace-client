@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Бейджве ще показват активността на файловете — качвания, редактиране или споделяния — в секциите {{rooms}}, {{shared}}, {{documents}} и {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Баджовете открояват активността по файловете, като качвания, редакции и споделяния, в приложенията {{files}}, {{rooms}}, {{forms}} и {{aiAgents}}.",
   "AdminSetupRequired": "Необходима е административна настройка",
   "Badges": "Баджове",
   "DailyFeed": "Ежедневен {{organizationName}} {{productName}} фийд",

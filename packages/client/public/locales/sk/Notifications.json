@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Nákupné značky zvýraznia aktivitu súborov — nahrávanie, úpravy alebo zdieľanie — v sekciách {{rooms}}, {{shared}}, {{documents}} a {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Menovky zvýrazňujú aktivitu súborov, ako sú nahrávania, úpravy a zdieľania, v aplikáciách {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}.",
   "AdminSetupRequired": "Vyžaduje sa nastavenie administrátora",
   "Badges": "Menovky",
   "DailyFeed": "Denný informačný kanál {{organizationName}} {{productName}}",

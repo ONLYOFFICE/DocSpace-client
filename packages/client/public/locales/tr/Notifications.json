@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Rozetler, {{rooms}}, {{shared}}, {{documents}} ve {{aiAgents}} bölümlerindeki dosya etkinliklerini — yüklemeler, düzenlemeler veya paylaşmalar — vurgulayacaktır.",
+  "ActionsWithFilesDescription": "Rozetler, {{files}}, {{rooms}}, {{forms}} ve {{aiAgents}} uygulamalarında yüklemeler, düzenlemeler ve paylaşımlar gibi dosya etkinliklerini vurgular.",
   "AdminSetupRequired": "Yönetici kurulumu gerekiyor",
   "Badges": "Rozetler",
   "DailyFeed": "Günlük {{organizationName}} {{productName}} akışı",

@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Žetje bodo poudarila dejavnost oziroma spletne strani — nalopi, ureditve ali deljenje — v razdelkih {{rooms}}, {{shared}}, {{documents}} in {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Značke poudarjajo dejavnosti datotek, kot so nalaganja, urejanja in deljenja, v aplikacijah {{files}}, {{rooms}}, {{forms}} in {{aiAgents}}.",
   "AdminSetupRequired": "Potrebna je nastavitev administratorja",
   "Badges": "Značke",
   "DailyFeed": "Dnevni vir {{organizationName}} {{productName}}",

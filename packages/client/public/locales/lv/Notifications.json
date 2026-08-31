@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Badges papildinās failu aktivitāti — auglošanu, rediēšanu vai dalīšanos — visās {{rooms}}, {{shared}}, {{documents}} un {{aiAgents}} sadaļās.",
+  "ActionsWithFilesDescription": "Žetoni izceļ failu darbības, piemēram, augšupielādes, rediģēšanu un koplietošanu, lietotnēs {{files}}, {{rooms}}, {{forms}} un {{aiAgents}}.",
   "AdminSetupRequired": "Admin iestatīšana nepieciešama",
   "Badges": "Žetoni",
   "DailyFeed": "Ikdienas {{organizationName}} {{productName}} plūsma",

@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Etichetele vor evidenția activitatea fișierelor — încărcări, modificări sau distribuiri — în secțiunile {{rooms}}, {{shared}}, {{documents}} și {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Ecusoanele evidențiază activitățile fișierelor, precum încărcări, modificări și partajări, în aplicațiile {{files}}, {{rooms}}, {{forms}} și {{aiAgents}}.",
   "AdminSetupRequired": "Este necesară configurarea de către administrator",
   "Badges": "Ecusoane",
   "DailyFeed": "Fluxul zilnic {{organizationName}} {{productName}}",

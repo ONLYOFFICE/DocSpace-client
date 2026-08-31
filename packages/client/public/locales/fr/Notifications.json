@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Les badges mettront en évidence l'activité des fichiers — téléchargements, modifications ou partages — dans les sections {{rooms}}, {{shared}}, {{documents}} et {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Les badges mettent en évidence les activités sur les fichiers, comme les téléversements, les modifications et les partages, dans les applications {{files}}, {{rooms}}, {{forms}} et {{aiAgents}}.",
   "AdminSetupRequired": "Configuration administrateur requise",
   "Badges": "Badges",
   "DailyFeed": "Flux quotidien de {{organizationName}} {{productName}}",

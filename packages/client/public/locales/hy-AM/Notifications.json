@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Պիտակները կընդգծեն ֆայլի գործունեությունը՝ վերբեռնումները, խմբագրումները կամ կիսումները՝ {{rooms}}, {{shared}}, {{documents}}, և {{aiAgents}} բաժիններում։",
+  "ActionsWithFilesDescription": "Տեղեկաքարտերն ընդգծում են ֆայլերի գործողությունները՝ վերբեռնումները, խմբագրումները և կիսումները, {{files}}, {{rooms}}, {{forms}} և {{aiAgents}} հավելվածներում։",
   "AdminSetupRequired": "Անհրաժեշտ է ադմինիստրատորի կարգավորում",
   "Badges": "Տեղեկաքարտ",
   "DailyFeed": "{{organizationName}} {{productName}}-ի ամենօրյա թարմացում",

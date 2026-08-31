@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Nişanlar fayl fəaliyyətini — yükləmələr, redaktələr və ya paylaşmalar — {{rooms}}, {{shared}}, {{documents}}, və {{aiAgents}} bölmələri boyunca vurğulayacaq.",
+  "ActionsWithFilesDescription": "Beyclər {{files}}, {{rooms}}, {{forms}} və {{aiAgents}} tətbiqlərində yükləmə, redaktə və paylaşma kimi fayl fəaliyyətlərini vurğulayır.",
   "AdminSetupRequired": "İdarəçi təyinatı tələb olunur",
   "Badges": "Beyclər",
   "DailyFeed": "Gündəlik {{organizationName}} {{productName}} axını",

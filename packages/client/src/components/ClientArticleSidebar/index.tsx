@@ -250,11 +250,20 @@ const ClientArticleSidebar = ({
         newCount(parent) +
         children.reduce((sum, child) => sum + newCount(child), 0);
       if (total <= 0 || !parent) return {};
+      // The count is an aggregate, but the panel loads a single folder's
+      // news — pointing it at a parent with none shows an empty panel while
+      // the badge says otherwise (Bug 83456: a file shared with the user
+      // counts on the collapsed Files item but lives under Share with me).
+      // Fall back to the child that actually holds the new items.
+      const source =
+        newCount(parent) > 0
+          ? parent
+          : (children.find((child) => newCount(child) > 0) ?? parent);
       return {
         collapsedBadgeComponent: (
           <NewFilesBadge
             newFilesCount={total}
-            folderId={panelFolderId(parent)}
+            folderId={panelFolderId(source)}
           />
         ),
       };

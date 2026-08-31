@@ -144,6 +144,7 @@ const Shell = ({ page = "home", ...rest }) => {
     setLogoText,
     standalone,
     isGuest,
+    isNotPaidPeriod,
     isAdmin,
     isPayer,
     isRoomAdmin,
@@ -792,8 +793,8 @@ const Shell = ({ page = "home", ...rest }) => {
   // Anonymous sessions (public room / public preview via a share link) and
   // guests must never issue AI calls: they answer 401, and the shared axios
   // client reacts to a 401 with logout + redirect to the login page, killing
-  // the public link view.
-  const canUseAi = isAuthenticated && !isGuest;
+  // the public link view. An unpaid portal skips AI boot requests entirely.
+  const canUseAi = isAuthenticated && !isGuest && !isNotPaidPeriod;
 
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.
@@ -1107,6 +1108,7 @@ const ShellWrapper = inject(
       setConvertPasswordDialogVisible,
       version,
       pagesWithoutNavMenu,
+      isNotPaidPeriod,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
       logoText,

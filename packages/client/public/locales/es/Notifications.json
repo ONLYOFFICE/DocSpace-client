@@ -10,7 +10,7 @@
   "NotConfigured": "No configurado",
   "Notifications": "Notificaciones",
   "RoomsActivityDescription": "Reciba notificaciones instantáneas por correo electrónico sobre archivos/carpetas compartidos nuevos y actividad dentro de sus {{rooms}} y {{aiAgents}}.",
-  "RoomUpdateNotify": "Contenido compartido, {{rooms}} y actividad de {{aiAgents}}",
+  "RoomUpdateNotify": "Actividad en {{files}}, {{rooms}}, {{forms}} y {{aiAgents}}",
   "SettingUpNotifications": "Configuración de notificaciones",
   "SuccessConnected": "{{serviceName}} se ha conectado correctamente como canal de notificaciones. Ahora podrá recibir actualizaciones en ese canal.",
   "SuccessDisconnected": "{{serviceName}} se ha desconectado correctamente como canal de notificaciones. Ya no se enviarán notificaciones a ese canal.",

@@ -10,7 +10,7 @@
   "NotConfigured": "設定されていません",
   "Notifications": "通知",
   "RoomsActivityDescription": "{{rooms}} および {{aiAgents}} 内の新しい共有ファイル/フォルダやアクティビティに関するメール通知を即座に受け取れます。",
-  "RoomUpdateNotify": "共有コンテンツ、{{rooms}} および {{aiAgents}} のアクティビティ",
+  "RoomUpdateNotify": "{{files}}、{{rooms}}、{{forms}}、{{aiAgents}}のアクティビティ",
   "SettingUpNotifications": "通知の設定",
   "SuccessConnected": "{{serviceName}} は通知チャネルとして正常に接続されました。これで、そちらで更新情報を受け取ることができます。",
   "SuccessDisconnected": "{{serviceName}}は通知チャネルとして正常に切断されました。通知はそこに送信されなくなります。",

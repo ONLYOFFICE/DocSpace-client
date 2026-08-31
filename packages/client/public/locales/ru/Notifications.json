@@ -10,7 +10,7 @@
   "NotConfigured": "Не настроено",
   "Notifications": "Уведомления",
   "RoomsActivityDescription": "Получайте мгновенные уведомления по электронной почте о новых общих файлах и папках, а также о действиях в ваших {{rooms}} и {{aiAgents}}.",
-  "RoomUpdateNotify": "Общий контент, деятельность в {{rooms}} и {{aiAgents}}",
+  "RoomUpdateNotify": "Активность в {{files}}, {{rooms}}, {{forms}} и {{aiAgents}}",
   "SettingUpNotifications": "Настройки уведомлений",
   "SuccessConnected": "Канал уведомлений {{serviceName}} успешно подключен. Теперь вы будете получать обновления через него.",
   "SuccessDisconnected": "Канал уведомлений {{serviceName}} успешно отключен. Уведомления больше не будут отправляться на него.",

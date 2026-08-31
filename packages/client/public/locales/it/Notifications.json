@@ -10,7 +10,7 @@
   "NotConfigured": "Non configurato",
   "Notifications": "Notifiche",
   "RoomsActivityDescription": "Ricevi notifiche email istantanee su nuovi file/cartelle condivisi e attività all'interno dei tuoi {{rooms}} e {{aiAgents}}.",
-  "RoomUpdateNotify": "Contenuti condivisi, attività di {{rooms}} e {{aiAgents}}",
+  "RoomUpdateNotify": "Attività in {{files}}, {{rooms}}, {{forms}} e {{aiAgents}}",
   "SettingUpNotifications": "Configurazione notifiche",
   "SuccessConnected": "{{serviceName}} è stato collegato con successo come canale di notifica. Riceverai ora gli aggiornamenti lì.",
   "SuccessDisconnected": "{{serviceName}} è stato scollegato con successo come canale di notifica. Le notifiche non saranno più inviate lì.",

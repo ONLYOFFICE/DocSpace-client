@@ -10,7 +10,7 @@
   "NotConfigured": "ບໍ່ໄດ້ຕັ້ງຄ່າ",
   "Notifications": "ການແຈ້ງເຕືອນ",
   "RoomsActivityDescription": "ຮັບການແຈ້ງເຕືອນທາງອີເມວທັນທີກ່ຽວກັບໄຟລ໌/ໂຟນເດີທີ່ແບ່ງປັນໃໝ່ ແລະກິດຈະກໍາພາຍໃນ {{rooms}} ແລະ {{aiAgents}} ຂອງທ່ານ.",
-  "RoomUpdateNotify": "ເນື້ອຫາທີ່ແບ່ງປັນ, ກິດຈະກໍາຂອງ {{rooms}} ແລະ {{aiAgents}}",
+  "RoomUpdateNotify": "ກິດຈະກໍາໃນ {{files}}, {{rooms}}, {{forms}} ແລະ {{aiAgents}}",
   "SettingUpNotifications": "ການ​ຕັ້ງ​ຄ່າ​ການ​ແຈ້ງ​ເຕືອນ",
   "SuccessConnected": "{{serviceName}} ໄດ້ຖືກເຊື່ອມຕໍ່ສຳເລັດເປັນຊ່ອງການແຈ້ງເຕືອນແລ້ວ. ໃນປັດຈຸບັນທ່ານຈະໄດ້ຮັບການປັບປຸງຢູ່ທີ່ນັ້ນ.",
   "SuccessDisconnected": "{{serviceName}} ຖືກຕັດການເຊື່ອມຕໍ່ເປັນຊ່ອງທາງການແຈ້ງເຕືອນສຳເລັດແລ້ວ. ການແຈ້ງເຕືອນຈະບໍ່ຖືກສົ່ງໄປບ່ອນນັ້ນອີກຕໍ່ໄປ.",

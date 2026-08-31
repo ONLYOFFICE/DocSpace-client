@@ -1,0 +1,29 @@
+{
+  "key_path": "ConnectorAutomateBuildStep",
+  "content": "Build workflows that create rooms, upload files, and share links automatically.",
+  "content_en_sha1_hash": "708214ff1141bd06ef59eb46c5776f5069cd32d0",
+  "created_at": "2026-08-28T12:19:44.831Z",
+  "updated_at": "2026-08-28T12:30:56.039Z",
+  "comment": {
+    "text": "A descriptive text for the \"Build\" step in the Javascript SDK connectors catalog, explaining the automation capabilities of this step.",
+    "is_auto": true,
+    "updated_at": "2026-08-28T12:30:56.039Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/sdk-connectors-catalog.ts",
+      "line_number": 104,
+      "context": "},\n {\n id: \"credentials\",\n text: t(\"JavascriptSdk:ConnectorAutomateCredentialsStep\"),\n },\n { id: \"build\", text: t(\"JavascriptSdk:ConnectorAutomateBuildStep\") },\n ];\n \n const embed = (\n id: string,\n name: string,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

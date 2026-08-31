@@ -1,0 +1,29 @@
+{
+  "key_path": "ConnectorsDescription",
+  "content": "Connect {{organizationName}} to your business platform using ready-made integrations, or use the samples as a starting point for building your own.",
+  "content_en_sha1_hash": "c55726bc2b29b6ac648ba2f8c85c774ad150d0e8",
+  "created_at": "2026-08-28T12:19:44.852Z",
+  "updated_at": "2026-08-28T12:21:10.721Z",
+  "comment": {
+    "text": "Description text in the Javascript SDK developer tools section explaining how to use integrations and samples; includes the {{organizationName}} variable representing the organization's name.",
+    "is_auto": true,
+    "updated_at": "2026-08-28T12:21:10.721Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/Integration.tsx",
+      "line_number": 89,
+      "context": ")}\n >\n {t(\"JavascriptSdk:ConnectorsTitle\")}\n </div>\n <Text lineHeight=\"20px\" className={styles.connectorsDescription}>\n {t(\"JavascriptSdk:ConnectorsDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n })}\n </Text>\n \n <PlatformTileGrid compact={compact}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

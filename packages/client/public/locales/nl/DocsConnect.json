@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "Bepaal welke IP-adressen, bereiken of hosts toegang hebben tot {{service}}",
   "AdditionalUsers": "Extra gebruikers",
   "AddRule": "Regel toevoegen",
+  "AdminAccessDescription": "Alleen beheerders kunnen {{service}} configureren. U kunt de API-documentatie nog steeds bekijken.",
   "AnonymousNoHint": "(Alleen geauthenticeerde gebruikers hebben toegang tot documenten)",
   "AnonymousSupport": "Anonieme ondersteuning",
   "AnonymousSupportDescription": "Sta gebruikers zonder authenticatie toe om toegang te krijgen tot documenten",

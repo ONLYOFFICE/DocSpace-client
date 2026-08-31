@@ -35,12 +35,16 @@
 
 import { useCallback, useRef, useState } from "react";
 
+import { useApi } from "@docspace/ui-kit/ai-agent/providers";
+
 import {
+  createAgentThread,
   extractWizardConfig,
-  streamContinueChat,
-  streamStartChat,
+  streamAgentChat,
   type AgentConfig,
 } from "@/utils/ai-arbiter";
+
+const WIZARD_THREAD_TITLE = "AI Arbiter Setup";
 
 export type ChatMessage = {
   id: string;
@@ -84,6 +88,7 @@ function looksLikeFinalConfig(text: string): boolean {
 
 export function useWizardChat(params: UseWizardChatParams): UseWizardChat {
   const { wizardAgentId } = params;
+  const api = useApi();
 
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
@@ -125,9 +130,20 @@ export function useWizardChat(params: UseWizardChatParams): UseWizardChat {
       let accumulated = "";
 
       try {
-        const stream = chatIdRef.current
-          ? streamContinueChat(chatIdRef.current, text, [], ac.signal)
-          : streamStartChat(wizardAgentId, text, [], ac.signal);
+        if (!chatIdRef.current) {
+          chatIdRef.current = await createAgentThread(
+            api,
+            wizardAgentId,
+            WIZARD_THREAD_TITLE,
+          );
+        }
+
+        const stream = streamAgentChat(api, {
+          agentId: wizardAgentId,
+          message: text,
+          threadId: chatIdRef.current,
+          signal: ac.signal,
+        });
 
         for await (const ev of stream) {
           if (ac.signal.aborted) break;
@@ -197,7 +213,7 @@ export function useWizardChat(params: UseWizardChatParams): UseWizardChat {
         setIsStreaming(false);
       }
     },
-    [wizardAgentId],
+    [api, wizardAgentId],
   );
 
   const abort = useCallback(() => {

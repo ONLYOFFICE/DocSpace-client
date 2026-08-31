@@ -3,7 +3,7 @@
   "content": "EXPERTS:",
   "content_en_sha1_hash": "c018c889b95fd78a10cdd0ea7362fa9f3fdbf04b",
   "created_at": "2026-05-24T17:27:18.178Z",
-  "updated_at": "2026-05-24T18:55:21.804Z",
+  "updated_at": "2026-08-28T14:38:40.312Z",
   "comment": {
     "text": "A label in the agent selection bar that precedes the list of available experts.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/AgentList.tsx",
-      "line_number": 89,
-      "context": "onAddExpert,\n }: AgentListProps) => {\n const { t } = useTranslation([\"Common\"]);\n return (\n <div className={styles.pickerBar}>\n <span className={styles.pickerLabel}>{t(\"Common:ArbiterExpertsLabel\")}</span>\n \n {experts.map((a) => (\n <span key={a.id} className={styles.agentTag}>\n <span\n className={styles.agentAvatar}",
+      "line_number": 126,
+      "context": "fontSize=\"12px\"\n fontWeight={600}\n color=\"var(--arbiter-muted)\"\n noSelect\n >\n {t(\"Common:ArbiterExpertsLabel\")}\n </Text>\n \n {experts.map((a) => (\n <AgentItem\n key={a.id}",
       "module": "/packages/sdk"
     }
   ],

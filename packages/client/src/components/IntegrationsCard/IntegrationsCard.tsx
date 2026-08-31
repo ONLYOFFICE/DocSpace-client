@@ -65,110 +65,22 @@ import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
-import { Text } from "@docspace/ui-kit/components/text";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import {
-  hasDevToolsAccess,
-  hasDocsConnectAccess,
+  isDevToolsOffered,
+  canManageDocsConnect,
 } from "@docspace/shared/utils/devToolsAccess";
-
-import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
-import PluginIcon from "PUBLIC_DIR/images/icons/20/catalog.devtools-plugin-sdk.react.svg";
 
 import { MORE_CONNECTORS_COUNT } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/constants";
 
 import { IntegrationDialog } from "./IntegrationDialog";
+import { PlatformTile, PlatformTileGrid } from "./PlatformTile";
 import {
   useIntegrationPlatforms,
   type IntegrationPlatform,
 } from "./integrations-catalog";
-import styles from "./IntegrationsCard.module.scss";
 
 const DOCS_CONNECT_PATH = "/developer-tools/docs-connect";
-
-type PlatformTileProps = {
-  name: string;
-  iconUrl?: string;
-  iconAlt?: string;
-  hideIcon?: boolean;
-  isBold?: boolean;
-  linkLabel?: string;
-  href?: string;
-  onClick?: () => void;
-  testId?: string;
-};
-
-const PlatformTile = ({
-  name,
-  iconUrl,
-  iconAlt,
-  hideIcon = false,
-  isBold = false,
-  linkLabel,
-  href,
-  onClick,
-  testId,
-}: PlatformTileProps) => {
-  const content = (
-    <>
-      {hideIcon ? null : (
-        <span
-          className={styles.integrationIcon}
-          data-fallback={iconUrl ? undefined : "true"}
-        >
-          {iconUrl ? (
-            <img src={iconUrl} alt={iconAlt ?? ""} />
-          ) : (
-            <PluginIcon aria-hidden="true" />
-          )}
-        </span>
-      )}
-      <Text
-        as="span"
-        className={styles.integrationName}
-        isBold={isBold}
-        truncate
-        title={name}
-      >
-        {name}
-      </Text>
-      {linkLabel ? (
-        <span className={styles.integrationLink}>
-          {linkLabel}
-          <ArrowIcon aria-hidden="true" className={styles.integrationArrow} />
-        </span>
-      ) : (
-        <ArrowIcon aria-hidden="true" className={styles.integrationArrow} />
-      )}
-    </>
-  );
-
-  if (href)
-    return (
-      <a
-        className={styles.integrationTile}
-        data-variant={hideIcon ? "no-icon" : undefined}
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        data-testid={testId}
-      >
-        {content}
-      </a>
-    );
-
-  return (
-    <button
-      type="button"
-      className={styles.integrationTile}
-      data-variant={hideIcon ? "no-icon" : undefined}
-      onClick={onClick}
-      data-testid={testId}
-    >
-      {content}
-    </button>
-  );
-};
 
 interface IntegrationsCardProps {
   /** Wrapper class, for pages that need their own spacing around the card. */
@@ -183,11 +95,11 @@ interface IntegrationsCardProps {
   /** Standalone portals have no Docs Connect; the card is not rendered there. */
   isStandalone?: boolean;
   /**
-   * Whether the reader may reach Developer Tools at all, which is where Docs
-   * Connect lives — guests never may, and neither do room admins and users on a
-   * portal that limits the section to admins. The card advertises that section,
-   * so it asks the same question the section's own card does rather than
-   * offering an integration its reader cannot start.
+   * Whether the portal offers Developer Tools, where Docs Connect lives, to
+   * this reader at all — it stops offering it to room admins and users once the
+   * section is limited to admins. Not the same as having the rights to use it:
+   * the card is informational, and the action inside its dialogs is refused
+   * separately (`isAdminOrOwner`).
    */
   showIntegrations?: boolean;
   isAdminOrOwner?: boolean;
@@ -270,7 +182,7 @@ const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
         }
         defaultOpen
       >
-        <div className={styles.integrationsGrid}>
+        <PlatformTileGrid>
           {platforms.map((platform) => (
             <PlatformTile
               key={platform.id}
@@ -283,13 +195,14 @@ const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
           ))}
           <PlatformTile
             hideIcon
+            muted
             isBold
             name={t("Common:PlusMore", { count: MORE_CONNECTORS_COUNT })}
             linkLabel={t("Common:ViewAll")}
             href={allConnectorsUrl}
             testId="dashboard-integration-more"
           />
-        </div>
+        </PlatformTileGrid>
       </CollapsibleCard>
 
       <IntegrationDialog
@@ -310,15 +223,16 @@ export const IntegrationsCard = inject<TStore>(
     // answer 403 on the Docs Connect page. The same rule the route guard and
     // the sidebar item ask, so nothing here offers a link that cannot open or
     // asks the server about an instance the reader may not see.
-    isAdminOrOwner: hasDocsConnectAccess(
+    isAdminOrOwner: canManageDocsConnect(
       userStore.user,
       settingsStore.standalone,
     ),
     isStandalone: settingsStore.standalone,
     // The same gate the dashboard's Developer Tools card uses, so the two cards
-    // agree on who is offered the section: guests never, and room admins and
-    // users only while the portal does not limit it to admins.
-    showIntegrations: hasDevToolsAccess(
+    // agree on who is offered the section: everyone, until the portal limits it
+    // to admins. Lacking the rights to configure an instance does not take the
+    // card away - it only refuses the action inside its dialogs.
+    showIntegrations: isDevToolsOffered(
       userStore.user,
       settingsStore.limitedAccessDevToolsForUsers,
     ),

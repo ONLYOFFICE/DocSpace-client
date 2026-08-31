@@ -1,0 +1,29 @@
+{
+  "key_path": "ConnectorAutomateInstallStep",
+  "content": "Add the {{organizationName}} {{productName}} connector in {{serviceName}} from its app directory.",
+  "content_en_sha1_hash": "b274adb0587a62c603324af760c5eeea0f9a909a",
+  "created_at": "2026-08-28T12:19:44.837Z",
+  "updated_at": "2026-08-28T12:28:36.891Z",
+  "comment": {
+    "text": "An instruction step in a list describing how to add a connector, containing placeholders for the organization name, product name, and target service name.",
+    "is_auto": true,
+    "updated_at": "2026-08-28T12:28:36.891Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/sdk-connectors-catalog.ts",
+      "line_number": 94,
+      "context": "];\n \n const automateStepsFor = (serviceName: string) => [\n {\n id: \"install\",\n text: t(\"JavascriptSdk:ConnectorAutomateInstallStep\", {\n organizationName,\n productName,\n serviceName,\n }),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

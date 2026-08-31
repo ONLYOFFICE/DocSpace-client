@@ -61,7 +61,7 @@ const CREATE_INSTANCE_ANCHOR = "integration-create-instance-anchor";
 type IntegrationDialogProps = {
   platform: IntegrationPlatform | null;
   onClose: () => void;
-  onInstanceAction: () => void;
+  onInstanceAction?: () => void;
   // Docs Connect sits under the portal's developer tools, so only admins and
   // the owner can act on this button — everyone else sees it disabled.
   isInstanceActionDisabled?: boolean;
@@ -180,6 +180,7 @@ export const IntegrationDialog = ({
       className={styles.integrationDialog}
       isLarge
       autoMaxHeight
+      dataTestId={`integration-dialog-${platform.id}`}
     >
       <ModalDialog.Header>{name}</ModalDialog.Header>
 

@@ -3,7 +3,7 @@
   "content": "Already using another platform?",
   "content_en_sha1_hash": "9bc92e06e67e70296909e7be11e1dd49d0d23d47",
   "created_at": "2026-06-01T21:20:38.418Z",
-  "updated_at": "2026-08-26T14:08:32.958Z",
+  "updated_at": "2026-08-28T12:19:49.485Z",
   "comment": {
     "text": "Title of a collapsible card in the Integrations section of the Dashboard.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/IntegrationsCard/IntegrationsCard.tsx",
-      "line_number": 258,
+      "line_number": 170,
       "context": "if (isStandalone || !showIntegrations) return null;\n \n return (\n <div className={className} data-tour-id={dataTourId}>\n <CollapsibleCard\n title={t(\"Common:AlreadyUsingAnotherPlatform\")}\n description={\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"IntegrationsDescription\"",
       "module": "/packages/client"
     }

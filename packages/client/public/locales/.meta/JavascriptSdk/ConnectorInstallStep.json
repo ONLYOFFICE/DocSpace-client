@@ -1,0 +1,29 @@
+{
+  "key_path": "ConnectorInstallStep",
+  "content": "Install the {{organizationName}} {{productName}} app for {{serviceName}} from its marketplace.",
+  "content_en_sha1_hash": "ec5e0584efa47e412b2020718f0c1aab24f79834",
+  "created_at": "2026-08-28T12:19:44.850Z",
+  "updated_at": "2026-08-28T12:22:09.298Z",
+  "comment": {
+    "text": "Instruction text within a list of steps describing how to install an app. It includes variables for the organization name, product name, and the target service.",
+    "is_auto": true,
+    "updated_at": "2026-08-28T12:22:09.298Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/sdk-connectors-catalog.ts",
+      "line_number": 81,
+      "context": "const productName = getBrandName(\"ProductName\");\n \n const embedStepsFor = (serviceName: string) => [\n {\n id: \"install\",\n text: t(\"JavascriptSdk:ConnectorInstallStep\", {\n organizationName,\n productName,\n serviceName,\n }),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

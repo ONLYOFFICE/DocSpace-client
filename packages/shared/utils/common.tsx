@@ -841,6 +841,12 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   );
   if (shareRoom) sorted.push(shareRoom);
 
+  const formsFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Forms,
+  );
+  if (formsFolder) sorted.push(formsFolder);
+
   const sharedWithMeFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.SHARE,

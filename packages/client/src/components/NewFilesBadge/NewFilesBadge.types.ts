@@ -46,6 +46,7 @@ import type FilesStore from "SRC_DIR/store/FilesStore";
 export type NewFilesBadgeProps = {
   newFilesCount: number;
   folderId: string | number;
+  folderIds?: (string | number)[];
 
   isRoom?: boolean;
   mute?: boolean;
@@ -76,6 +77,7 @@ export type NewFilesPanelInjectStore = {
 export type NewFilesPanelProps = {
   position: TPanelPosition;
   folderId: string | number;
+  folderIds?: (string | number)[];
 
   isRoom?: boolean;
 

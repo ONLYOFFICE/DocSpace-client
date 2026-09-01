@@ -1372,6 +1372,7 @@
   "MobileWin": "Descarcă {{organizationName}} Desktop Editors pentru Windows",
   "Model": "Model",
   "ModelAssignment": "Atribuire model",
+  "ModelAssignmentDescription": "Setați un model implicit pentru toate sarcinile sau atribuiți modele diferite unor sarcini specifice pentru a ajusta performanța și costurile.",
   "ModelDetails": "Detalii model",
   "MonthlyCharge": "Taxă lunară",
   "Months": "Luni",

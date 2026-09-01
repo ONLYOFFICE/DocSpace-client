@@ -1372,6 +1372,7 @@
   "MobileWin": "Lataa {{organizationName}} Desktop Editors Windowsille",
   "Model": "Malli",
   "ModelAssignment": "Mallin määritys",
+  "ModelAssignmentDescription": "Aseta oletusmalli kaikille tehtäville tai määritä eri malleja tietyille tehtäville suorituskyvyn ja kustannusten hienosäätöä varten.",
   "ModelDetails": "Mallin tiedot",
   "MonthlyCharge": "Kuukausimaksu",
   "Months": "Kuukaudet",

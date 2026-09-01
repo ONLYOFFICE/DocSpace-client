@@ -1372,6 +1372,7 @@
   "MobileWin": "Windows用の{{organizationName}}デスクトップエディタをダウンロードする",
   "Model": "モデル",
   "ModelAssignment": "モデルの割り当て",
+  "ModelAssignmentDescription": "すべてのタスクに既定のモデルを設定するか、特定のタスクに異なるモデルを割り当てて、パフォーマンスとコストを調整します。",
   "ModelDetails": "モデルの詳細",
   "MonthlyCharge": "月額料金",
   "Months": "月",

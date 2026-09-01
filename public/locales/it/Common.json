@@ -1372,6 +1372,7 @@
   "MobileWin": "Scarica {{organizationName}} Desktop Editors per Windows",
   "Model": "Modello",
   "ModelAssignment": "Assegnazione del modello",
+  "ModelAssignmentDescription": "Imposta un modello predefinito per tutte le attività oppure assegna modelli diversi ad attività specifiche per ottimizzare prestazioni e costi.",
   "ModelDetails": "Dettagli del modello",
   "MonthlyCharge": "Addebito mensile",
   "Months": "Mesi",

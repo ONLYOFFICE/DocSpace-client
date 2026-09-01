@@ -1372,6 +1372,7 @@
   "MobileWin": "حمّل {{organizationName}} Desktop Editors لنظام ويندوز",
   "Model": "نموذج",
   "ModelAssignment": "تعيين النموذج",
+  "ModelAssignmentDescription": "حدد نموذجًا افتراضيًا لجميع المهام أو عيّن نماذج مختلفة لمهام محددة لضبط الأداء والتكلفة.",
   "ModelDetails": "تفاصيل النموذج",
   "MonthlyCharge": "الرسوم الشهرية",
   "Months": "الأشهر",

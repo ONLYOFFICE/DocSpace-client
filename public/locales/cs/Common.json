@@ -1372,6 +1372,7 @@
   "MobileWin": "Stáhnout {{organizationName}} Desktop Editors pro Windows",
   "Model": "Model",
   "ModelAssignment": "Přiřazení modelu",
+  "ModelAssignmentDescription": "Nastavte výchozí model pro všechny úlohy nebo přiřaďte konkrétním úlohám různé modely a dolaďte tak výkon a náklady.",
   "ModelDetails": "Podrobnosti o modelu",
   "MonthlyCharge": "Měsíční poplatek",
   "Months": "Měsíce",

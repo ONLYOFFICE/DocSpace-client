@@ -1372,6 +1372,7 @@
   "MobileWin": "Laden Sie {{organizationName}} Desktop Editors für Windows herunter",
   "Model": "Modell",
   "ModelAssignment": "Modellzuweisung",
+  "ModelAssignmentDescription": "Legen Sie ein Standardmodell für alle Aufgaben fest oder weisen Sie bestimmten Aufgaben unterschiedliche Modelle zu, um Leistung und Kosten fein abzustimmen.",
   "ModelDetails": "Modelldetails",
   "MonthlyCharge": "Monatliche Gebühr",
   "Months": "Monate",

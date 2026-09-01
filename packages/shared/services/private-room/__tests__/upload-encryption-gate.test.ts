@@ -36,8 +36,13 @@
 import { describe, it, expect } from "vitest";
 
 import { RoomsType } from "../../../enums";
+import { encryptFile } from "../../encryption/file-keys";
 import {
+  EncryptedReimportError,
+  makeOpaqueUploadName,
+  prepareEncryptedUpload,
   resolveItemRoomContext,
+  sniffDse3Upload,
   willEncryptUploadItem,
 } from "../encrypted-upload";
 
@@ -130,5 +135,88 @@ describe("willEncryptUploadItem", () => {
         { isPrivacyFolder: false, selectedRoomType: null },
       ),
     ).toBe(false);
+  });
+});
+
+describe("makeOpaqueUploadName", () => {
+  it("produces a uuid name that keeps the lowercased extension", () => {
+    const name = makeOpaqueUploadName("Report FINAL.DOCX");
+    expect(name).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.docx$/,
+    );
+  });
+
+  it("produces a bare uuid for a name without extension", () => {
+    const name = makeOpaqueUploadName("README");
+    expect(name).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/,
+    );
+  });
+});
+
+describe("sniffDse3Upload", () => {
+  it("returns null for a regular file", async () => {
+    const file = new File([new Uint8Array(1024)], "plain.docx");
+    await expect(sniffDse3Upload(file)).resolves.toBeNull();
+  });
+
+  it("returns null for an empty file", async () => {
+    await expect(sniffDse3Upload(new File([], "empty.docx"))).resolves.toBeNull();
+  });
+
+  it("returns the parsed header for a DSE3 blob", async () => {
+    const { encryptedBlob } = await encryptFile(
+      new TextEncoder().encode("secret"),
+      { fileName: "secret.docx" },
+    );
+    const file = new File([encryptedBlob], "uuid.docx");
+
+    const header = await sniffDse3Upload(file);
+    expect(header).not.toBeNull();
+    expect(header!.encryptedName).toBeInstanceOf(Uint8Array);
+    expect(header!.fileNonce).toBeInstanceOf(Uint8Array);
+  });
+
+  it("throws EncryptedReimportError for DSE3 magic with a truncated header", async () => {
+    const { encryptedBlob } = await encryptFile(
+      new TextEncoder().encode("secret"),
+      { fileName: "secret.docx" },
+    );
+    const truncated = new File([encryptedBlob.slice(0, 10)], "broken.docx");
+
+    await expect(sniffDse3Upload(truncated)).rejects.toBeInstanceOf(
+      EncryptedReimportError,
+    );
+  });
+});
+
+describe("prepareEncryptedUpload — DSE3 double-encryption guard", () => {
+  it("refuses to encrypt a blob that is already DSE3", async () => {
+    const { encryptedBlob } = await encryptFile(
+      new TextEncoder().encode("secret"),
+      { fileName: "secret.docx" },
+    );
+    const file = new File([encryptedBlob], "uuid.docx");
+
+    await expect(
+      prepareEncryptedUpload({
+        file,
+        folderId: 1,
+        roomType: RoomsType.CustomRoom,
+        isPrivate: true,
+      }),
+    ).rejects.toBeInstanceOf(EncryptedReimportError);
+  });
+
+  it("still passes a regular file through untouched when encryption is off", async () => {
+    const file = new File([new Uint8Array(16)], "plain.docx");
+    const prepared = await prepareEncryptedUpload({
+      file,
+      folderId: 1,
+      roomType: RoomsType.PublicRoom,
+      isPrivate: false,
+    });
+    expect(prepared.encrypted).toBe(false);
+    expect(prepared.data).toBe(file);
   });
 });

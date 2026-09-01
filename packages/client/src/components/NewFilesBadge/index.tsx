@@ -59,6 +59,7 @@ const PANEL_HEIGHT = 500;
 const NewFilesBadge = ({
   newFilesCount,
   folderId,
+  folderIds,
 
   isRoom,
   mute,
@@ -416,6 +417,7 @@ const NewFilesBadge = ({
         <NewFilesPanel
           position={panelPosition}
           folderId={folderId}
+          folderIds={folderIds}
           isRoom={isRoom}
           onClose={onPanelHide}
         />

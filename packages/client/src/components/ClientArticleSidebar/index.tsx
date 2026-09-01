@@ -246,15 +246,26 @@ const ClientArticleSidebar = ({
       parent: TTreeFolder | undefined,
       children: (TTreeFolder | undefined)[],
     ): Pick<NavMenuItem, "collapsedBadgeComponent"> => {
-      const total =
-        newCount(parent) +
-        children.reduce((sum, child) => sum + newCount(child), 0);
-      if (total <= 0 || !parent) return {};
+      if (!parent) return {};
+
+      const counted = [parent, ...children].filter(
+        (folder): folder is TTreeFolder => newCount(folder) > 0,
+      );
+      const total = counted.reduce((sum, folder) => sum + newCount(folder), 0);
+      if (total <= 0) return {};
+
+      const folderId = panelFolderId(parent);
+      const folderIds =
+        folderId === parent.id
+          ? counted.map((folder) => folder.id)
+          : undefined;
+
       return {
         collapsedBadgeComponent: (
           <NewFilesBadge
             newFilesCount={total}
-            folderId={panelFolderId(parent)}
+            folderId={folderId}
+            folderIds={folderIds}
           />
         ),
       };

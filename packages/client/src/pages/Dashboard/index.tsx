@@ -487,6 +487,7 @@ const Dashboard = (props: DashboardProps) => {
           isResizable={!isAiChatFullscreen}
           width={aiChatPanel.chatPanelWidth}
           onResize={aiChatPanel.setChatPanelWidth}
+          onRequestFullscreen={aiChatPanel.setChatPanelFullscreen}
         >
           {aiChatPanel.chatPanelContent}
         </ChatPanelView>

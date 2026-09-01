@@ -613,6 +613,9 @@ const PureHome = observer((props) => {
   sectionProps.isChatPanelResizable = !isAiChatFullscreen;
   sectionProps.chatPanelWidth = aiChatPanel.chatPanelWidth;
   sectionProps.setChatPanelWidth = aiChatPanel.setChatPanelWidth;
+  // Dragging the resizer past the widest docked width asks for fullscreen —
+  // the same state the panel header's button produces.
+  sectionProps.setChatPanelFullscreen = aiChatPanel.setChatPanelFullscreen;
   // In fullscreen the #section is collapsed to zero width but stays mounted, so
   // mark it inert (drops its content from tab order / pointer interaction).
   sectionProps.inert = isAiChatFullscreen;

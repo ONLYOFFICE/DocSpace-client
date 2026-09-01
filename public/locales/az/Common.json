@@ -852,6 +852,7 @@
   "EncryptionPortalSubtitle": "Proses başa çatdıqdan sonra iş sahəsi məlumatları istifadəyə hazır olacaq.",
   "EncryptionPortalTitle": "Şifrələmə prosesi davam edir",
   "EncryptionPrepareFailed": "Faylı yükləməzdən əvvəl şifrələmək alınmadı. Fayl göndərilmədi. Yenidən cəhd edin və ya dəstək xidmətinə müraciət edin.",
+  "EncryptionReimportFailed": "Bu fayl şəxsi otaqdan endirilmiş şifrələnmiş surətdir. Onu yükləmək üçün orijinal fayl hələ də bu otaqda olmalıdır ki, giriş açarlarını bərpa etmək mümkün olsun. Fayl göndərilmədi.",
   "EncryptionRequiresHttps": "Şifrələmə əlçatan deyil: bu funksiya təhlükəsiz HTTPS bağlantısı tələb edir.",
   "EncryptionUnlockRequired": "Şifrələmənin kilidinin açılması tələb olunur",
   "EncryptionUnsupportedKeyVersion": "Bu şifrələmə açarı dəstəklənməyən versiyadan istifadə edir. Davam etmək üçün tətbiqi yeniləyin.",

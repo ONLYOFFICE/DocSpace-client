@@ -852,6 +852,7 @@
   "EncryptionPortalSubtitle": "Assim que o processo terminar, os dados do espaço de trabalho estarão disponíveis para trabalho.",
   "EncryptionPortalTitle": "O processo de criptografia em andamento",
   "EncryptionPrepareFailed": "Não foi possível criptografar o arquivo antes do upload. O arquivo não foi enviado. Tente novamente ou entre em contato com o suporte.",
+  "EncryptionReimportFailed": "Este arquivo é uma cópia criptografada baixada de uma sala privada. Para fazer o upload, o arquivo original ainda deve estar nesta sala para que as chaves de acesso possam ser restauradas. O arquivo não foi enviado.",
   "EncryptionRequiresHttps": "A criptografia não está disponível: este recurso requer uma conexão HTTPS segura.",
   "EncryptionUnlockRequired": "É necessário desbloquear a criptografia",
   "EncryptionUnsupportedKeyVersion": "Esta chave de criptografia utiliza uma versão não suportada. Atualize o aplicativo para continuar.",

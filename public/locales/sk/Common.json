@@ -852,6 +852,7 @@
   "EncryptionPortalSubtitle": "Hneď po ukončení procesu budú údaje pracovného priestoru prístupné na prácu.",
   "EncryptionPortalTitle": "Prebieha proces šifrovania",
   "EncryptionPrepareFailed": "Súbor sa pred nahraním nepodarilo zašifrovať. Súbor nebol odoslaný. Skúste to znova alebo kontaktujte podporu.",
+  "EncryptionReimportFailed": "Tento súbor je šifrovaná kópia stiahnutá zo súkromnej miestnosti. Nahrať ho možno len vtedy, ak sa pôvodný súbor stále nachádza v tejto miestnosti a prístupové kľúče možno obnoviť. Súbor nebol odoslaný.",
   "EncryptionRequiresHttps": "Šifrovanie nie je k dispozícii: táto funkcia vyžaduje zabezpečené pripojenie HTTPS.",
   "EncryptionUnlockRequired": "Vyžaduje sa odomknutie šifrovania",
   "EncryptionUnsupportedKeyVersion": "Tento šifrovací kľúč používa nepodporovanú verziu. Pre pokračovanie aktualizujte aplikáciu.",

@@ -852,6 +852,7 @@
   "EncryptionPortalSubtitle": "Non appena il processo sarà terminato, i dati dello spazio di lavoro saranno disponibili per l'uso.",
   "EncryptionPortalTitle": "Processo di crittografia in corso",
   "EncryptionPrepareFailed": "Impossibile cifrare il file prima del caricamento. Il file non è stato inviato. Riprova o contatta l'assistenza.",
+  "EncryptionReimportFailed": "Questo file è una copia cifrata scaricata da una stanza privata. Per caricarlo, il file originale deve essere ancora presente in questa stanza affinché sia possibile ripristinare le chiavi di accesso. Il file non è stato inviato.",
   "EncryptionRequiresHttps": "La cifratura non è disponibile: questa funzionalità richiede una connessione HTTPS sicura.",
   "EncryptionUnlockRequired": "È richiesto lo sblocco della crittografia",
   "EncryptionUnsupportedKeyVersion": "Questa chiave di cifratura utilizza una versione non supportata. Aggiorna l'applicazione per continuare.",

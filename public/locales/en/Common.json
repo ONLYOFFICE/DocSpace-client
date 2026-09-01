@@ -852,6 +852,7 @@
   "EncryptionPortalSubtitle": "As soon as the process is over, the workspace data will be available for work.",
   "EncryptionPortalTitle": "The encryption process in progress",
   "EncryptionPrepareFailed": "Could not encrypt the file before upload. The file was not sent. Please try again or contact support.",
+  "EncryptionReimportFailed": "This file is an encrypted copy downloaded from a private room. To upload it, the original file must still be in this room so that access keys can be restored. The file was not sent.",
   "EncryptionRequiresHttps": "Encryption is unavailable: this feature requires a secure HTTPS connection.",
   "EncryptionUnlockRequired": "Encryption unlock required",
   "EncryptionUnsupportedKeyVersion": "This encryption key uses an unsupported version. Please update the application to continue.",

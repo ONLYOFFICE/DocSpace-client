@@ -852,6 +852,7 @@
   "EncryptionPortalSubtitle": "プロセスが終了次第、ワークスペースのデータは作業に利用可能になります。",
   "EncryptionPortalTitle": "暗号化プロセスが進行中です",
   "EncryptionPrepareFailed": "アップロード前にファイルを暗号化できませんでした。ファイルは送信されていません。もう一度お試しいただくか、サポートにお問い合わせください。",
+  "EncryptionReimportFailed": "このファイルはプライベートルームからダウンロードされた暗号化コピーです。アップロードするには、アクセスキーを復元できるよう、元のファイルがこのルームに残っている必要があります。ファイルは送信されていません。",
   "EncryptionRequiresHttps": "暗号化は利用できません：この機能には安全なHTTPS接続が必要です。",
   "EncryptionUnlockRequired": "暗号化のロック解除が必要です",
   "EncryptionUnsupportedKeyVersion": "この暗号化キーはサポートされていないバージョンを使用しています。続行するにはアプリケーションを更新してください。",

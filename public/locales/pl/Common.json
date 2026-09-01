@@ -852,6 +852,7 @@
   "EncryptionPortalSubtitle": "Po zakończeniu procesu dane przestrzeni roboczej będą dostępne do pracy.",
   "EncryptionPortalTitle": "Trwa proces szyfrowania",
   "EncryptionPrepareFailed": "Nie udało się zaszyfrować pliku przed wysłaniem. Plik nie został wysłany. Spróbuj ponownie lub skontaktuj się z pomocą techniczną.",
+  "EncryptionReimportFailed": "Ten plik jest zaszyfrowaną kopią pobraną z pokoju prywatnego. Aby go przesłać, oryginalny plik musi nadal znajdować się w tym pokoju — tylko wtedy można odzyskać klucze dostępu. Plik nie został wysłany.",
   "EncryptionRequiresHttps": "Szyfrowanie jest niedostępne: ta funkcja wymaga bezpiecznego połączenia HTTPS.",
   "EncryptionUnlockRequired": "Wymagane odblokowanie szyfrowania",
   "EncryptionUnsupportedKeyVersion": "Ten klucz szyfrowania używa nieobsługiwanej wersji. Aby kontynuować, zaktualizuj aplikację.",

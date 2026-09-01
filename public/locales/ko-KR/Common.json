@@ -852,6 +852,7 @@
   "EncryptionPortalSubtitle": "프로세스가 끝나면 워크스페이스 데이터를 작업에 사용할 수 있습니다.",
   "EncryptionPortalTitle": "암호화 프로세스가 진행 중입니다",
   "EncryptionPrepareFailed": "업로드하기 전에 파일을 암호화할 수 없습니다. 파일이 전송되지 않았습니다. 다시 시도하거나 지원팀에 문의하세요.",
+  "EncryptionReimportFailed": "이 파일은 비공개 룸에서 다운로드한 암호화된 사본입니다. 업로드하려면 액세스 키를 복원할 수 있도록 원본 파일이 이 룸에 남아 있어야 합니다. 파일이 전송되지 않았습니다.",
   "EncryptionRequiresHttps": "암호화를 사용할 수 없습니다: 이 기능은 안전한 HTTPS 연결이 필요합니다.",
   "EncryptionUnlockRequired": "암호화 잠금 해제 필요",
   "EncryptionUnsupportedKeyVersion": "이 암호화 키는 지원되지 않는 버전을 사용합니다. 계속하려면 응용 프로그램을 업데이트하십시오.",

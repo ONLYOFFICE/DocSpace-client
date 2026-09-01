@@ -1016,7 +1016,7 @@ const ClientRoutes = [
       );
 
       const Component = () => (
-        <PrivateRoute>
+        <PrivateRoute restricted>
           <ErrorBoundary>
             <PaymentComplete />
           </ErrorBoundary>

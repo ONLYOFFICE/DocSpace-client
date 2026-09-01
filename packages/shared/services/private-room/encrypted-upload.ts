@@ -45,6 +45,7 @@ import {
   isDSE3Format,
   parseDSE3HeaderFromBlob,
 } from "../encryption/streaming-encryption";
+import { sniffPdfFormBlob } from "./pdf-form-signature";
 import { loadFileSenderKeysSafe } from "./room-member-keys";
 
 import type { DSE3Header, IdentityKeyPair } from "../encryption/types";
@@ -260,8 +261,12 @@ export async function prepareEncryptedUpload(
     );
   }
 
+  const isForm =
+    getFileExtension(file.name) === ".pdf" && (await sniffPdfFormBlob(file));
+
   const { encryptedBlob, dek } = await encryptFile(file, {
     fileName: file.name,
+    isForm,
     onProgress,
   });
 

@@ -1372,6 +1372,7 @@
   "MobileWin": "ດາວໂຫລດ {{organizationName}} Desktop Editors ສໍາລັບ Windows",
   "Model": "ຮຸ່ນ",
   "ModelAssignment": "ການກຳນົດຮູບແບບ",
+  "ModelAssignmentDescription": "ກຳນົດຮຸ່ນເລີ່ມຕົ້ນສຳລັບທຸກໜ້າວຽກ ຫຼື ກຳນົດຮຸ່ນທີ່ແຕກຕ່າງກັນໃຫ້ແຕ່ລະໜ້າວຽກ ເພື່ອປັບປະສິດທິພາບ ແລະ ຄ່າໃຊ້ຈ່າຍ.",
   "ModelDetails": "ລາຍລະອຽດຮຸ່ນ",
   "MonthlyCharge": "ຄ່າບໍລິການຕໍ່ເດືອນ",
   "Months": "ເດືອນ",

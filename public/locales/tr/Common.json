@@ -1372,6 +1372,7 @@
   "MobileWin": "Windows için {{organizationName}} Masaüstü Düzenleyicilerini İndirin",
   "Model": "Model",
   "ModelAssignment": "Model atama",
+  "ModelAssignmentDescription": "Tüm görevler için varsayılan bir model belirleyin veya performans ve maliyeti ince ayarlamak üzere belirli görevlere farklı modeller atayın.",
   "ModelDetails": "Model ayrıntıları",
   "MonthlyCharge": "Aylık ücret",
   "Months": "Aylar",

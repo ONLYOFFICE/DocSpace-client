@@ -1372,6 +1372,7 @@
   "MobileWin": "Pobierz {{organizationName}} Desktop Editors dla Windows",
   "Model": "Model",
   "ModelAssignment": "Przypisanie modelu",
+  "ModelAssignmentDescription": "Ustaw domyślny model dla wszystkich zadań lub przypisz różne modele do konkretnych zadań, aby precyzyjnie dostroić wydajność i koszty.",
   "ModelDetails": "Szczegóły modelu",
   "MonthlyCharge": "Opłata miesięczna",
   "Months": "Miesiące",

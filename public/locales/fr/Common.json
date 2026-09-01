@@ -1372,6 +1372,7 @@
   "MobileWin": "Télécharger les applications de bureau {{organizationName}} pour Windows",
   "Model": "Modèle",
   "ModelAssignment": "Attribution de modèle",
+  "ModelAssignmentDescription": "Définissez un modèle par défaut pour toutes les tâches ou attribuez des modèles différents à des tâches spécifiques afin d'ajuster les performances et les coûts.",
   "ModelDetails": "Détails du modèle",
   "MonthlyCharge": "Frais mensuels",
   "Months": "Mois",

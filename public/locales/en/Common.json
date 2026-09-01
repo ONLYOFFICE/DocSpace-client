@@ -1372,6 +1372,7 @@
   "MobileWin": "Download {{organizationName}} Desktop Editors for Windows",
   "Model": "Model",
   "ModelAssignment": "Model assignment",
+  "ModelAssignmentDescription": "Set a default model for all tasks or assign different models to specific tasks to fine-tune performance and cost.",
   "ModelDetails": "Model details",
   "MonthlyCharge": "Monthly charge",
   "Months": "Months",

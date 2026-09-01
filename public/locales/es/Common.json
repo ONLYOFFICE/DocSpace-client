@@ -1372,6 +1372,7 @@
   "MobileWin": "Descargar los editores de escritorio {{organizationName}} para Windows",
   "Model": "Modelo",
   "ModelAssignment": "Asignación de modelos",
+  "ModelAssignmentDescription": "Establezca un modelo predeterminado para todas las tareas o asigne modelos diferentes a tareas específicas para ajustar el rendimiento y el coste.",
   "ModelDetails": "Detalles del modelo",
   "MonthlyCharge": "Cargo mensual",
   "Months": "Meses",

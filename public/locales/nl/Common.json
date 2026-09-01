@@ -1372,6 +1372,7 @@
   "MobileWin": "Download {{organizationName}} Desktop Editors voor Windows",
   "Model": "Model",
   "ModelAssignment": "Modeltoewijzing",
+  "ModelAssignmentDescription": "Stel een standaardmodel in voor alle taken of wijs verschillende modellen toe aan specifieke taken om prestaties en kosten nauwkeurig af te stemmen.",
   "ModelDetails": "Modeldetails",
   "MonthlyCharge": "Maandelijkse kosten",
   "Months": "Maanden",

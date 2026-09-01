@@ -1372,6 +1372,7 @@
   "MobileWin": "Prenesi {{organizationName}} namizne urejevalnike za Windows",
   "Model": "Model",
   "ModelAssignment": "Dodelitev modela",
+  "ModelAssignmentDescription": "Nastavite privzeti model za vsa opravila ali dodelite različne modele posameznim opravilom in tako natančno uravnajte zmogljivost in stroške.",
   "ModelDetails": "Podrobnosti o modelu",
   "MonthlyCharge": "Mesečni strošek",
   "Months": "Meseci",

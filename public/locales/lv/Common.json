@@ -1372,6 +1372,7 @@
   "MobileWin": "Lejupielādēt {{organizationName}} darbvirsmas redaktorus operētājsistēmai Windows",
   "Model": "Modelis",
   "ModelAssignment": "Modeļa piešķiršana",
+  "ModelAssignmentDescription": "Iestatiet noklusējuma modeli visiem uzdevumiem vai piešķiriet dažādus modeļus konkrētiem uzdevumiem, lai precīzi pielāgotu veiktspēju un izmaksas.",
   "ModelDetails": "Modeļa informācija",
   "MonthlyCharge": "Ikmēneša maksa",
   "Months": "Mēneši",

@@ -1372,6 +1372,7 @@
   "MobileWin": "Tải xuống Trình chỉnh sửa {{organizationName}} cho máy tính Windows",
   "Model": "Mô hình",
   "ModelAssignment": "Phân công mô hình",
+  "ModelAssignmentDescription": "Đặt mô hình mặc định cho tất cả tác vụ hoặc gán các mô hình khác nhau cho từng tác vụ cụ thể để tinh chỉnh hiệu suất và chi phí.",
   "ModelDetails": "Chi tiết mô hình",
   "MonthlyCharge": "Phí hàng tháng",
   "Months": "Tháng",

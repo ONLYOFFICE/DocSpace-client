@@ -1372,6 +1372,7 @@
   "MobileWin": "Shkarkoni {{organizationName}} Redaktuesit e Desktopit për Windows",
   "Model": "Model",
   "ModelAssignment": "Caktimi i modelit",
+  "ModelAssignmentDescription": "Caktoni një model të parazgjedhur për të gjitha detyrat ose caktoni modele të ndryshme për detyra specifike, për të rregulluar me saktësi performancën dhe koston.",
   "ModelDetails": "Detajet e modelit",
   "MonthlyCharge": "Tarifa mujore",
   "Months": "Muajt",

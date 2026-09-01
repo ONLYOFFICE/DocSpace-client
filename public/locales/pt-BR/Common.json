@@ -1372,6 +1372,7 @@
   "MobileWin": "Baixar {{organizationName}} Desktop Editors para Windows",
   "Model": "Modelo",
   "ModelAssignment": "Atribuição de modelo",
+  "ModelAssignmentDescription": "Defina um modelo padrão para todas as tarefas ou atribua modelos diferentes a tarefas específicas para ajustar o desempenho e os custos.",
   "ModelDetails": "Detalhes do modelo",
   "MonthlyCharge": "Cobrança mensal",
   "Months": "Meses",

@@ -851,6 +851,7 @@
   "EncryptionPortalSubtitle": "Sobald der Vorgang abgeschlossen ist, stehen die Daten des Arbeitsbereichs für die Arbeit zur Verfügung.",
   "EncryptionPortalTitle": "Der Verschlüsselungsprozess läuft",
   "EncryptionPrepareFailed": "Die Datei konnte vor dem Hochladen nicht verschlüsselt werden. Die Datei wurde nicht gesendet. Bitte versuchen Sie es erneut oder wenden Sie sich an den Support.",
+  "EncryptionReimportFailed": "Diese Datei ist eine verschlüsselte Kopie, die aus einem privaten Raum heruntergeladen wurde. Zum Hochladen muss sich die Originaldatei noch in diesem Raum befinden, damit die Zugriffsschlüssel wiederhergestellt werden können. Die Datei wurde nicht gesendet.",
   "EncryptionRequiresHttps": "Verschlüsselung ist nicht verfügbar: Diese Funktion erfordert eine sichere HTTPS-Verbindung.",
   "EncryptionUnlockRequired": "Entsperrung der Verschlüsselung erforderlich",
   "EncryptionUnsupportedKeyVersion": "Dieser Verschlüsselungsschlüssel verwendet eine nicht unterstützte Version. Bitte aktualisieren Sie die Anwendung, um fortzufahren.",

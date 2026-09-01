@@ -851,6 +851,7 @@
   "EncryptionPortalSubtitle": "Zodra het proces is voltooid, zijn de gegevens van de werkruimte beschikbaar om mee te werken.",
   "EncryptionPortalTitle": "Het versleutelingsproces in uitvoering",
   "EncryptionPrepareFailed": "Het bestand kon vóór het uploaden niet worden versleuteld. Het bestand is niet verzonden. Probeer het opnieuw of neem contact op met ondersteuning.",
+  "EncryptionReimportFailed": "Dit bestand is een versleutelde kopie die uit een privékamer is gedownload. Om het te uploaden moet het oorspronkelijke bestand zich nog in deze kamer bevinden, zodat de toegangssleutels kunnen worden hersteld. Het bestand is niet verzonden.",
   "EncryptionRequiresHttps": "Versleuteling is niet beschikbaar: voor deze functie is een beveiligde HTTPS-verbinding vereist.",
   "EncryptionUnlockRequired": "Ontgrendelen van versleuteling vereist",
   "EncryptionUnsupportedKeyVersion": "Deze versleutelingssleutel gebruikt een niet-ondersteunde versie. Werk de applicatie bij om door te gaan.",

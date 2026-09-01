@@ -851,6 +851,7 @@
   "EncryptionPortalSubtitle": "Ngay sau khi quá trình kết thúc, dữ liệu của không gian làm việc sẽ khả dụng để làm việc.",
   "EncryptionPortalTitle": "Quá trình mã hóa đang được thực hiện",
   "EncryptionPrepareFailed": "Không thể mã hóa tệp trước khi tải lên. Tệp chưa được gửi. Vui lòng thử lại hoặc liên hệ với bộ phận hỗ trợ.",
+  "EncryptionReimportFailed": "Tệp này là bản sao đã mã hóa được tải xuống từ phòng riêng tư. Để tải lên, tệp gốc phải vẫn còn trong phòng này thì mới có thể khôi phục khóa truy cập. Tệp chưa được gửi.",
   "EncryptionRequiresHttps": "Mã hóa không khả dụng: tính năng này yêu cầu kết nối HTTPS an toàn.",
   "EncryptionUnlockRequired": "Cần mở khoá mã hoá",
   "EncryptionUnsupportedKeyVersion": "Khóa mã hóa này sử dụng phiên bản không được hỗ trợ. Vui lòng cập nhật ứng dụng để tiếp tục.",

@@ -851,6 +851,7 @@
   "EncryptionPortalSubtitle": "Assim que o processo estiver concluído, os dados do espaço de trabalho estarão disponíveis para trabalhar.",
   "EncryptionPortalTitle": "O processo de encriptação em curso",
   "EncryptionPrepareFailed": "Não foi possível encriptar o ficheiro antes do carregamento. O ficheiro não foi enviado. Tente novamente ou contacte o suporte.",
+  "EncryptionReimportFailed": "Este ficheiro é uma cópia encriptada transferida de uma sala privada. Para o carregar, o ficheiro original tem de continuar nesta sala para que as chaves de acesso possam ser restauradas. O ficheiro não foi enviado.",
   "EncryptionRequiresHttps": "A encriptação não está disponível: esta funcionalidade requer uma ligação HTTPS segura.",
   "EncryptionUnlockRequired": "É necessário desbloquear a encriptação",
   "EncryptionUnsupportedKeyVersion": "Esta chave de encriptação utiliza uma versão não suportada. Atualize a aplicação para continuar.",

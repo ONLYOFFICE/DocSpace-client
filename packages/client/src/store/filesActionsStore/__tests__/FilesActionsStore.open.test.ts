@@ -1,7 +1,15 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect, vi, beforeEach } from "vitest";
+
+vi.mock("@docspace/shared/api/files", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  markAsRead: vi.fn(() => new Promise<never>(() => {})),
+}));
+
 import api from "@docspace/shared/api";
+import { markAsRead } from "@docspace/shared/api/files";
+import { FileStatus } from "@docspace/shared/enums";
 import { createTestFilesActionsStore, t } from "./testHarness";
 
 beforeEach(() => {
@@ -135,6 +143,31 @@ describe("FilesActionsStore — plugin file items vs encrypted files", () => {
     await setup(onClick, openDocEditor).openItemAction(docx(true), t);
 
     expect(onClick).not.toHaveBeenCalled();
+    expect(openDocEditor).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("FilesActionsStore — opening a file marked as new (bug 83454)", () => {
+  it("opens the editor without waiting for mark-as-read to finish", async () => {
+    const openDocEditor = vi.fn();
+    const store = createTestFilesActionsStore({
+      filesStore: { openDocEditor, setSelection: vi.fn(), categoryType: 0 },
+    });
+    await store.openItemAction(
+      {
+        id: 3,
+        fileExst: ".docx",
+        isFolder: false,
+        viewUrl: "http://x/3",
+        webUrl: "",
+        fileStatus: FileStatus.IsNew,
+        security: { Download: true },
+        viewAccessibility: { WebEdit: true },
+      } as never,
+      t,
+    );
+
+    expect(vi.mocked(markAsRead)).toHaveBeenCalledTimes(1);
     expect(openDocEditor).toHaveBeenCalledTimes(1);
   });
 });

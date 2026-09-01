@@ -851,6 +851,7 @@
   "EncryptionPortalSubtitle": "İşlem tamamlanır tamamlanmaz çalışma alanı verileri kullanıma hazır olacaktır.",
   "EncryptionPortalTitle": "Şifreleme işlemi devam ediyor",
   "EncryptionPrepareFailed": "Dosya yüklemeden önce şifrelenemedi. Dosya gönderilmedi. Lütfen tekrar deneyin veya destek ile iletişime geçin.",
+  "EncryptionReimportFailed": "Bu dosya, özel bir odadan indirilmiş şifrelenmiş bir kopyadır. Yüklenebilmesi için orijinal dosyanın hâlâ bu odada bulunması gerekir; ancak bu şekilde erişim anahtarları geri yüklenebilir. Dosya gönderilmedi.",
   "EncryptionRequiresHttps": "Şifreleme kullanılamıyor: bu özellik güvenli bir HTTPS bağlantısı gerektirir.",
   "EncryptionUnlockRequired": "Şifrelemenin kilidinin açılması gerekiyor",
   "EncryptionUnsupportedKeyVersion": "Bu şifreleme anahtarı desteklenmeyen bir sürüm kullanıyor. Devam etmek için lütfen uygulamayı güncelleyin.",

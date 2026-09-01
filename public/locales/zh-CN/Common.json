@@ -851,6 +851,7 @@
   "EncryptionPortalSubtitle": "进程结束后，工作区数据将可供使用。",
   "EncryptionPortalTitle": "加密正在进行中",
   "EncryptionPrepareFailed": "上传前无法加密文件。文件未发送。请重试或联系技术支持。",
+  "EncryptionReimportFailed": "此文件是从私密房间下载的加密副本。要上传该文件，原始文件必须仍在此房间中，以便恢复访问密钥。文件未发送。",
   "EncryptionRequiresHttps": "加密不可用：此功能需要安全的 HTTPS 连接。",
   "EncryptionUnlockRequired": "需要解锁加密",
   "EncryptionUnsupportedKeyVersion": "此加密密钥使用了不受支持的版本。请更新应用程序以继续。",

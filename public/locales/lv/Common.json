@@ -851,6 +851,7 @@
   "EncryptionPortalSubtitle": "Tiklīdz process būs pabeigts, darbvietas dati būs pieejami darbam.",
   "EncryptionPortalTitle": "Notiek šifrēšanas process",
   "EncryptionPrepareFailed": "Neizdevās šifrēt failu pirms augšupielādes. Fails netika nosūtīts. Lūdzu, mēģiniet vēlreiz vai sazinieties ar atbalsta dienestu.",
+  "EncryptionReimportFailed": "Šis fails ir šifrēta kopija, kas lejupielādēta no privātas istabas. To var augšupielādēt tikai tad, ja sākotnējais fails joprojām atrodas šajā istabā un piekļuves atslēgas var atjaunot. Fails netika nosūtīts.",
   "EncryptionRequiresHttps": "Šifrēšana nav pieejama: šai funkcijai nepieciešams drošs HTTPS savienojums.",
   "EncryptionUnlockRequired": "Nepieciešama šifrēšanas atbloķēšana",
   "EncryptionUnsupportedKeyVersion": "Šī šifrēšanas atslēga izmanto neatbalstītu versiju. Lai turpinātu, atjauniniet lietojumprogrammu.",

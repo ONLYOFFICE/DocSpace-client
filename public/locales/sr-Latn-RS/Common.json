@@ -851,6 +851,7 @@
   "EncryptionPortalSubtitle": "Čim proces završi, podaci radnog prostora biće dostupni za rad.",
   "EncryptionPortalTitle": "Proces enkripcije u toku",
   "EncryptionPrepareFailed": "Nije moguće šifrovati datoteku pre otpremanja. Datoteka nije poslata. Pokušajte ponovo ili kontaktirajte podršku.",
+  "EncryptionReimportFailed": "Ova datoteka je šifrovana kopija preuzeta iz privatne sobe. Da biste je otpremili, izvorna datoteka mora i dalje da se nalazi u ovoj sobi kako bi ključevi za pristup mogli da budu vraćeni. Datoteka nije poslata.",
   "EncryptionRequiresHttps": "Šifrovanje nije dostupno: ova funkcija zahteva bezbednu HTTPS vezu.",
   "EncryptionUnlockRequired": "Potrebno je otključavanje šifrovanja",
   "EncryptionUnsupportedKeyVersion": "Ovaj ključ za šifrovanje koristi nepodržanu verziju. Ažurirajte aplikaciju da biste nastavili.",

@@ -1331,7 +1331,7 @@
   "MaximumNumberOfExternalLinksCreated": "Maksimalno število ustvarjenih zunanjih povezav",
   "MaxLengthExceeded": "Največja dolžina uporabniškega imena ali drugega lokalnega dela je 64 znakov.",
   "MaxNumber": "Največji število <1>(do {{usersCount}} uporabnikov)</1>",
-  "MCP": "MCP orodja za to sobo",
+  "MCP": "MCP orodja za tega agenta",
   "MCPDescriptionServers": "Uporabite {{mcpServers}}, ki jih je povezal administrator, za izboljšanje izkušnje pogovorov z umetno inteligenco. {{mcpServers}} lahko pomaga pri izvzetju podatkov, povzetkih, inteligentnih predlogih itd.",
   "MCPServer": "MCP server",
   "MCPServers": "MCP strežniki",

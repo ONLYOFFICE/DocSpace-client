@@ -1331,7 +1331,7 @@
   "MaximumNumberOfExternalLinksCreated": "Maksymalna liczba utworzonych linków zewnętrznych",
   "MaxLengthExceeded": "Maksymalna długość nazwy użytkownika lub innego elementu lokalnego wynosi 64 znaki.",
   "MaxNumber": "Maksymalna liczba <1>(do {{usersCount}} użytkowników)</1>",
-  "MCP": "Narzędzia MCP do tego pomieszczenia",
+  "MCP": "Narzędzia MCP dla tego agenta",
   "MCPDescriptionServers": "Wykorzystaj {{mcpServers}} podłączone przez administratora, aby ulepszyć doświadczenie czatu z AI. {{mcpServers}} może pomóc w ekstrakcji danych, podsumowaniach, inteligentnych sugestiach itp.",
   "MCPServer": "Serwer MCP",
   "MCPServers": "MCP serwery",

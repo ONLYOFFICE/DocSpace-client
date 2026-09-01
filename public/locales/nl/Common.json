@@ -1331,7 +1331,7 @@
   "MaximumNumberOfExternalLinksCreated": "Maximum aantal gemaakte externe links",
   "MaxLengthExceeded": "De maximale lengte van een gebruikersnaam of ander lokaal deel is 64 tekens.",
   "MaxNumber": "Max. aantal <1>(tot {{usersCount}} gebruikers)</1>",
-  "MCP": "MCP tools voor deze kamer",
+  "MCP": "MCP tools voor deze agent",
   "MCPDescriptionServers": "Gebruik {{mcpServers}} verbonden door de beheerder om de chatervaring met AI te verbeteren. {{mcpServers}} kan helpen met data-extractie, samenvattingen, slimme suggesties, enz.",
   "MCPServer": "MCP server",
   "MCPServers": "MCP servers",

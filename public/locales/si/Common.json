@@ -1331,7 +1331,7 @@
   "MaximumNumberOfExternalLinksCreated": "උපරිම බාහිර සබැඳි ගණන සාදා ඇත",
   "MaxLengthExceeded": "පරිශීලක නාමයක හෝ වෙනත් ස්ථානීය කොටසක උපරිම දිග අකුරු 64 කි.",
   "MaxNumber": "උපරිම සංඛ්‍යාව <1>({{usersCount}} පරිශීලකයන් දක්වා)</1>",
-  "MCP": "මෙම කාමරය සඳහා MCP මෙවලම්",
+  "MCP": "මෙම නියෝජිතයා සඳහා MCP මෙවලම්",
   "MCPDescriptionServers": "{{mcpServers}} මගින් පරිපාලකයා විසින් සම්බන්ධ කර ඇති chat අත්දැකීම AI සමඟ වැඩිදියුණු කරන්න. {{mcpServers}} දත්ත උකහා ගැනීම, සාරාංශ, ස්මාර්ට් යෝජනා වැනි දේ සමඟ උපකාර කළ හැකිය.",
   "MCPServer": "MCP server",
   "MCPServers": "MCP සේවාදායකයන්",

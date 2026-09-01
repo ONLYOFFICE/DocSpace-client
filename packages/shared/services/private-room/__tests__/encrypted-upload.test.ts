@@ -45,6 +45,7 @@ import {
   prepareMultipleEncryptedUploads,
   shouldEncryptUpload,
 } from "../encrypted-upload";
+import { encryptFile } from "../../encryption/file-keys";
 import { AES_KEY_SIZE_BYTES } from "../../encryption/types";
 
 // Mocked to bypass jsdom's broken Blob.slice().arrayBuffer().
@@ -71,6 +72,13 @@ const makeFile = (
 ): File => {
   return new File([new Uint8Array(bytes).fill(0x42)], name, { type });
 };
+
+const latin1Bytes = (s: string): Uint8Array =>
+  Uint8Array.from(s, (c) => c.charCodeAt(0) & 0xff);
+
+const FORM_PDF_PREFIX =
+  "%PDF-1.7\x0A%\xCD\xCA\xD2\xA9\x0D1 0 obj\x0A<<\x0A" +
+  "/ONLYOFFICEFORM 12 0 R\x0A>>\x0Astream\x0D\x0A";
 
 describe("encryptedUpload", () => {
   beforeEach(() => {
@@ -224,6 +232,59 @@ describe("encryptedUpload", () => {
         onProgress: (p) => progress.push(p),
       });
       expect(progress).toEqual([0.5, 1]);
+    });
+
+    it("passes isForm=true to encryptFile for a PDF carrying the form marker", async () => {
+      const formPdf = new File(
+        [latin1Bytes(FORM_PDF_PREFIX) as BlobPart],
+        "contract.pdf",
+        { type: "application/pdf" },
+      );
+      await prepareEncryptedUpload({
+        file: formPdf,
+        folderId: 0,
+        roomType: RoomsType.CustomRoom,
+        isPrivate: true,
+      });
+      expect(vi.mocked(encryptFile)).toHaveBeenCalledWith(
+        formPdf,
+        expect.objectContaining({ isForm: true }),
+      );
+    });
+
+    it("passes isForm=false to encryptFile for a plain PDF", async () => {
+      const plainPdf = new File(
+        [latin1Bytes("%PDF-1.7\x0Aplain body") as BlobPart],
+        "doc.pdf",
+        { type: "application/pdf" },
+      );
+      await prepareEncryptedUpload({
+        file: plainPdf,
+        folderId: 0,
+        roomType: RoomsType.CustomRoom,
+        isPrivate: true,
+      });
+      expect(vi.mocked(encryptFile)).toHaveBeenCalledWith(
+        plainPdf,
+        expect.objectContaining({ isForm: false }),
+      );
+    });
+
+    it("does not sniff the form marker in non-PDF files", async () => {
+      const decoy = new File(
+        [latin1Bytes(FORM_PDF_PREFIX) as BlobPart],
+        "decoy.docx",
+      );
+      await prepareEncryptedUpload({
+        file: decoy,
+        folderId: 0,
+        roomType: RoomsType.CustomRoom,
+        isPrivate: true,
+      });
+      expect(vi.mocked(encryptFile)).toHaveBeenCalledWith(
+        decoy,
+        expect.objectContaining({ isForm: false }),
+      );
     });
   });
 

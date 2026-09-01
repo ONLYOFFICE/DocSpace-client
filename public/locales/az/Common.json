@@ -1331,7 +1331,7 @@
   "MaximumNumberOfExternalLinksCreated": "Yaradılan xarici keçidlərin maksimum sayı",
   "MaxLengthExceeded": "İstifadəçi adının və ya digər lokal hissənin maksimum uzunluğu 64 simvoldur.",
   "MaxNumber": "Maksimum sayı <1>({{usersCount}} istifadəçiyə qədər)</1>",
-  "MCP": "Bu otaq üçün MCP alətləri",
+  "MCP": "Bu agent üçün MCP alətləri",
   "MCPDescriptionServers": "Administrator tərəfindən qoşulmuş {{mcpServers}} istifadə edərək AI ilə çat təcrübəsini yaxşılaşdırın. {{mcpServers}} məlumat çıxarılması, xülasələr, aqıllı təkliflər və s. ilə kömək edə bilər.",
   "MCPServer": "MCP server",
   "MCPServers": "MCP serverlər",

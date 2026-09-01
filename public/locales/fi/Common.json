@@ -1331,7 +1331,7 @@
   "MaximumNumberOfExternalLinksCreated": "Enimmäismäärä ulkoisia linkkejä luotu",
   "MaxLengthExceeded": "Käyttäjänimen tai muun paikallisen osan enimmäispituus on 64 merkkiä.",
   "MaxNumber": "Enimmäismäärä <1>(jopa {{usersCount}} käyttäjää)</1>",
-  "MCP": "MCP työkalut tähän huoneeseen",
+  "MCP": "MCP työkalut tälle agentille",
   "MCPDescriptionServers": "Käytä ylläpitäjän yhdistämiä {{mcpServers}} parantamaan chat-kokemusta tekoälyn (AI) avulla. {{mcpServers}} voi auttaa tietojen poiminnassa, yhteenvetoissa, älyehdotuksissa jne.",
   "MCPServer": "MCP server",
   "MCPServers": "MCP palvelimet",

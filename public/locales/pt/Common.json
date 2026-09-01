@@ -1331,7 +1331,7 @@
   "MaximumNumberOfExternalLinksCreated": "Número máximo de links externos criados",
   "MaxLengthExceeded": "O comprimento máximo de um nome de utilizador ou outra parte local é de 64 caracteres.",
   "MaxNumber": "Máx. número <1>(até {{usersCount}} usuários)</1>",
-  "MCP": "Ferramentas MCP para este quarto",
+  "MCP": "Ferramentas MCP para este agente",
   "MCPDescriptionServers": "Use {{mcpServers}} conectado pelo administrador para aprimorar a experiência de chat com IA. {{mcpServers}} pode ajudar com extração de dados, resumos, sugestões inteligentes, etc.",
   "MCPServer": "Servidor MCP",
   "MCPServers": "Servidores MCP",

@@ -1331,7 +1331,7 @@
   "MaximumNumberOfExternalLinksCreated": "创建外部链接的最大数量",
   "MaxLengthExceeded": "用户名或其他本地部分最长为64个字符。",
   "MaxNumber": "最多 <1>(最多 {{usersCount}} 个用户)</1>",
-  "MCP": "此房间的 MCP 工具",
+  "MCP": "此代理的 MCP 工具",
   "MCPDescriptionServers": "使用管理员连接的{{mcpServers}}来增强聊天体验，并集成AI功能。{{mcpServers}}可协助进行数据提取、总结、智能建议等。",
   "MCPServer": "MCP 服务器",
   "MCPServers": "MCP 服务器",

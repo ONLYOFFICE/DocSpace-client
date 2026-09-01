@@ -1331,7 +1331,7 @@
   "MaximumNumberOfExternalLinksCreated": "Maximální počet vytvořených externích odkazů",
   "MaxLengthExceeded": "Maximální délka uživatelského jména nebo jiné místní části je 64 znaků.",
   "MaxNumber": "Max. počet <1>(až {{usersCount}} uživatelů)</1>",
-  "MCP": "MCP nástroje pro tuto místnost",
+  "MCP": "MCP nástroje pro tohoto agenta",
   "MCPDescriptionServers": "Použijte {{mcpServers}}, které nastavil administrátor, k vylepšení chatového zážitku s AI. {{mcpServers}} může pomoci s extrakcí dat, shrnutími, chytrými návrhy a dalšími funkcemi.",
   "MCPServer": "MCP server",
   "MCPServers": "MCP servery",

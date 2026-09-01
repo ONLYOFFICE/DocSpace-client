@@ -1331,7 +1331,7 @@
   "MaximumNumberOfExternalLinksCreated": "Numărul maxim de link-uri externe create",
   "MaxLengthExceeded": "Lungimea maximă a numelui de utilizator sau a unei alte părți locale este de 64 caractere.",
   "MaxNumber": "Max. număr <1>(până la {{usersCount}} utilizatori)</1>",
-  "MCP": "Instrumente MCP în această sală",
+  "MCP": "Instrumente MCP pentru acest agent",
   "MCPDescriptionServers": "Folosiți {{mcpServers}} conectate de administrator pentru a îmbunătăți experiența de chat cu IA. {{mcpServers}} pot ajuta cu extracția de date, rezumate, sugestii inteligente etc.",
   "MCPServer": "MCP server",
   "MCPServers": "Servere MCP",

@@ -1,13 +1,13 @@
 {
   "key_path": "AuthorizationKeysInfo",
-  "content": "With Authorization keys, you can connect third-party services to your workspace. Sign in easily with Facebook, Google, or LinkedIn. Add Dropbox, OneDrive, and other accounts to work with files stored there.",
-  "content_en_sha1_hash": "4ba97ed208c310e4acba093af3f320ca861324c6",
-  "created_at": "2026-08-12T15:15:00.207Z",
-  "updated_at": "2026-08-12T15:28:31.596Z",
+  "content": "Enable third-party services for your workspace.",
+  "content_en_sha1_hash": "90e80d073115bef88c9b306e1dc089f573c8a5ca",
+  "created_at": "2026-08-31T18:23:40.452Z",
+  "updated_at": "2026-08-31T20:46:01.714Z",
   "comment": {
-    "text": "Description text in the Third-Party Services integration settings explaining how Authorization keys enable connections to social logins and cloud storage accounts.",
+    "text": "Instructional description text located in the Third-party services section of the Portal Settings.",
     "is_auto": true,
-    "updated_at": "2026-08-12T15:28:31.596Z",
+    "updated_at": "2026-08-31T20:46:01.714Z",
     "model": "gemma4:26b"
   },
   "usage": [

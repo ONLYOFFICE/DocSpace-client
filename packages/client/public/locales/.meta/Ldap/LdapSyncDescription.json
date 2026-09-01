@@ -1,13 +1,13 @@
 {
   "key_path": "LdapSyncDescription",
-  "content": "Sync LDAP data is a way to synchronize data changes between your workspace and the LDAP server. Enable the ‘Auto Sync’ option and set a time period to automatically update the information.",
-  "content_en_sha1_hash": "b586ac92ac86535944dcc069ddbed6b6a0a91822",
-  "created_at": "2026-08-12T11:00:47.282Z",
-  "updated_at": "2026-08-12T11:55:00.706Z",
+  "content": "Keep your data up to date with changes from your LDAP server. Turn on 'Auto sync' and set a schedule to update automatically.",
+  "content_en_sha1_hash": "1271e8c8ffb9b802541182e3a3ee48a291c9f264",
+  "created_at": "2026-08-31T18:23:43.869Z",
+  "updated_at": "2026-08-31T20:01:14.049Z",
   "comment": {
-    "text": "Informational text in the LDAP integration settings explaining the data synchronization process and how to configure automatic updates using the ‘Auto Sync’ option.",
+    "text": "Description text in the LDAP integration settings explaining the LDAP synchronization process and the auto-sync scheduling feature.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:55:00.706Z",
+    "updated_at": "2026-08-31T20:01:14.049Z",
     "model": "gemma4:26b"
   },
   "usage": [

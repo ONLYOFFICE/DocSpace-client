@@ -1,14 +1,14 @@
 {
   "key_path": "SpMetadata",
-  "content": "{{organizationName}} SP Metadata",
-  "content_en_sha1_hash": "e10f705fc5ab78e95d83d6b7504bfb479ac5118a",
-  "created_at": "2025-05-19T21:30:50.167Z",
-  "updated_at": "2026-06-02T22:18:05.080Z",
+  "content": "{{organizationName}} service provider metadata",
+  "content_en_sha1_hash": "6aa751e43dea0ae4033a5a4f1d8af7b517a5af23",
+  "created_at": "2026-08-31T18:23:40.152Z",
+  "updated_at": "2026-08-31T20:58:42.443Z",
   "comment": {
-    "text": "This is a title for a section or item related to Single Sign-On (SSO) settings. It refers to the Service Provider (SP) metadata for the organization, with `{{organizationName}}` being the name of the organization.",
+    "text": "Button label and category title in the Single Sign-On settings that identifies the service provider's metadata, using {{organizationName}} to represent the organization's name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:22.778Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:58:42.443Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -212,12 +218,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

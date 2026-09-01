@@ -1,13 +1,13 @@
 {
   "key_path": "InstructionsDescriptionAgent",
-  "content": "Describe how the AI agent should behave and respond. Define its role, tone, and main tasks.",
-  "content_en_sha1_hash": "75769932c89e32287717d442d92b2e658cf34699",
-  "created_at": "2026-05-25T18:26:21.377Z",
-  "updated_at": "2026-07-07T08:59:21.725Z",
+  "content": "Tell the agent how to behave: its role, tone, and main tasks",
+  "content_en_sha1_hash": "12564965e6f37751c486714125f3c5e69bc39b0d",
+  "created_at": "2026-08-31T18:23:10.986Z",
+  "updated_at": "2026-08-31T19:01:31.487Z",
   "comment": {
-    "text": "Instructional description text in the Create/Edit AI Agent dialog that guides the user on defining the agent's behavior, role, and tasks.",
+    "text": "Description text for a textarea field in the agent creation/editing dialog, providing guidance on defining the agent's behavior. It includes the `aiAgent` variable, which represents the AI agent's name or type.",
     "is_auto": true,
-    "updated_at": "2026-05-25T18:35:20.712Z",
+    "updated_at": "2026-08-31T19:01:31.487Z",
     "model": "gemma4:26b"
   },
   "usage": [
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

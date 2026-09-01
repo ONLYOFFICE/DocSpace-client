@@ -3,7 +3,7 @@
   "content": "Your wallet balance will be used first. If there are insufficient funds, the remaining amount will be charged to your default payment method.",
   "content_en_sha1_hash": "7470d56bc2d40babdbf32651848751b944053e7e",
   "created_at": "2026-08-24T22:29:41.982Z",
-  "updated_at": "2026-08-24T22:31:07.463Z",
+  "updated_at": "2026-08-31T18:23:50.993Z",
   "comment": {
     "text": "Tooltip for a help button in the billing section that explains the priority of payment sources used during a renewal charge.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
-      "line_number": 295,
+      "line_number": 294,
       "context": "<HelpButton\n className=\"payment-tooltip\"\n offsetRight={0}\n iconNode={<HelpReactSvg />}\n style={{ display: \"inline-block\", verticalAlign: \"middle\" }}\n tooltipContent={<Text>{t(\"RenewalChargeOrderTooltip\")}</Text>}\n dataTestId=\"renewal_charge_order_help_button\"\n />\n </Text>\n );\n };",
       "module": "/libs/ui-kit"
     }

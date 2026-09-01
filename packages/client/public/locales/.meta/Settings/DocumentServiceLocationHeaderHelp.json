@@ -1,14 +1,14 @@
 {
   "key_path": "DocumentServiceLocationHeaderHelp",
-  "content": "Document Service is the server service which allows to perform the document editing and allows to convert the document file into the appropriate OfficeOpen XML format. Document service location specifies the address of the server with the document services installed.",
-  "content_en_sha1_hash": "cfefeceae1cc9f8ec4067b4e8fafd1c0a13a9378",
-  "created_at": "2025-05-19T21:30:51.377Z",
-  "updated_at": "2026-08-10T12:23:10.667Z",
+  "content": "Check the settings of the Docs service used by default in your cloud workspace to edit and convert files into OfficeOpen XML format. To connect Docs to your own platform, use Docs Connect.",
+  "content_en_sha1_hash": "22c1dd801b6741a18e5d003da2091fbafdae9efa",
+  "created_at": "2026-08-31T18:23:41.115Z",
+  "updated_at": "2026-08-31T20:34:18.416Z",
   "comment": {
-    "text": "This is a help text displayed in the Document Service settings. It explains what the Document Service is and what the \"Document service location\" setting refers to.",
+    "text": "Instructional help text located under the Document Service header in the integration settings. It explains how to configure the default Docs service and use Docs Connect.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:24:21.238Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:34:18.416Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

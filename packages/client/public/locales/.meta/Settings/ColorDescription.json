@@ -1,20 +1,20 @@
 {
-  "key_path": "LdapIntegrationDescription",
-  "content": "Import users and groups via LDAP, and let users sign in with their LDAP credentials. Users are imported as soon as you save these settings — anyone added later is imported the first time they sign in. To allow LDAP sign-in only, turn off inviting new members via {{sectionName}}: <1>{{link}}</1>",
-  "content_en_sha1_hash": "938c8039c8a4edb769e4083670caa4febb714ea4",
-  "created_at": "2026-08-31T18:23:43.762Z",
-  "updated_at": "2026-08-31T20:02:18.383Z",
+  "key_path": "ColorDescription",
+  "content": "Pick a color for your workspace interface elements: buttons, links, and other highlights will use it throughout.",
+  "content_en_sha1_hash": "c481cd72ce37e3352e276928f3a999bb2e1f297c",
+  "created_at": "2026-08-31T18:23:40.638Z",
+  "updated_at": "2026-08-31T20:44:14.688Z",
   "comment": {
-    "text": "Introductory text on the LDAP integration settings page explaining user/group import and sign-in behavior. It includes a variable `sectionName` for a section title and a `<1>` tag containing a clickable link.",
+    "text": "Instructional text in the Appearance settings explaining how the chosen color affects workspace elements like buttons and links.",
     "is_auto": true,
-    "updated_at": "2026-08-31T20:02:18.383Z",
+    "updated_at": "2026-08-31T20:44:14.688Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 101,
-      "context": "return (\n <StyledLdapPage isSmallWindow={isSmallWindow}>\n <Text className=\"intro-text settings_unavailable\">\n <Trans\n t={t}\n i18nKey=\"LdapIntegrationDescription\"\n ns=\"Ldap\"\n values={{\n sectionName: t(\"Common:Contacts\"),\n link,\n }}",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 679,
+      "context": "style={{ \"--check-img-color\": colorCheckImg }}\n >\n <div className={appearanceStyles.header}>{t(\"Common:Color\")}</div>\n \n <div className={appearanceStyles.colorDescription}>\n {t(\"Settings:ColorDescription\")}\n </div>\n \n <div className={appearanceStyles.themeStandardContainer}>\n <div className={appearanceStyles.themeName}>{t(\"Common:Standard\")}</div>",
       "module": "/packages/client"
     }
   ],

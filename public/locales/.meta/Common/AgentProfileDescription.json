@@ -1,13 +1,13 @@
 {
   "key_path": "AgentProfileDescription",
-  "content": "Select the AI model to be used in this agent's chats.",
-  "content_en_sha1_hash": "5122ab1da4316afcdb891916fdeff8cc1d19b0d0",
-  "created_at": "2026-06-25T19:30:21.410Z",
-  "updated_at": "2026-08-28T14:38:40.203Z",
+  "content": "Choose the AI model this agent will use in chats",
+  "content_en_sha1_hash": "857bd5a13623c418100aa06f9f73a9a1c7bd13cc",
+  "created_at": "2026-08-31T18:22:47.968Z",
+  "updated_at": "2026-08-31T19:31:17.961Z",
   "comment": {
-    "text": "Informational description text within the Profile section of the Create or Edit Agent dialog, instructing users to choose an AI model for the agent's chats.",
+    "text": "Info description text in the Create/Edit Agent dialog, explaining the purpose of the AI model selection setting.",
     "is_auto": true,
-    "updated_at": "2026-06-25T19:45:16.260Z",
+    "updated_at": "2026-08-31T19:31:17.961Z",
     "model": "gemma4:26b"
   },
   "usage": [

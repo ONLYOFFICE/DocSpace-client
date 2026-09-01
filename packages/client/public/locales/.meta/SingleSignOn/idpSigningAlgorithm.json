@@ -1,14 +1,14 @@
 {
   "key_path": "idpSigningAlgorithm",
-  "content": "Default Sign Verifying Algorithm",
-  "content_en_sha1_hash": "4efdddea5f21717488ef95e4e69bbf2ef43a5df9",
-  "created_at": "2025-05-19T21:30:50.101Z",
-  "updated_at": "2026-05-15T15:37:40.280Z",
+  "content": "Default sign verifying algorithm",
+  "content_en_sha1_hash": "93b5bb677e5d38c59ff2ebbe9c62c5975a58c389",
+  "created_at": "2026-08-31T18:23:40.016Z",
+  "updated_at": "2026-08-31T20:53:04.112Z",
   "comment": {
-    "text": "This is a combo box label in the Single Sign-On settings, prompting the user to select the algorithm used to verify signatures from the Identity Provider.",
+    "text": "Label for a combo box in the Single Sign-On (SSO) certificate settings, used to select the default algorithm for signature verification.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:45.834Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:53:04.112Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

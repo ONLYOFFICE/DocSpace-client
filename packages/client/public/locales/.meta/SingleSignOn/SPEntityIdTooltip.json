@@ -1,14 +1,14 @@
 {
   "key_path": "SPEntityIdTooltip",
-  "content": "The Service provider XML URL address which can be downloaded and used by the Identity provider to unequivocally identify the SP",
-  "content_en_sha1_hash": "7e16034dafb05ab76e9dff0e286b4ab633a7939f",
-  "created_at": "2025-05-19T21:30:50.165Z",
-  "updated_at": "2026-05-15T15:37:40.282Z",
+  "content": "The Service provider XML URL address which can be downloaded and used by the Identity provider to unequivocally identify the Service provider",
+  "content_en_sha1_hash": "d23d8581767d47cdc2bd263649e20b447bc061a1",
+  "created_at": "2026-08-31T18:23:40.146Z",
+  "updated_at": "2026-08-31T21:01:10.094Z",
   "comment": {
-    "text": "This is a tooltip that appears when hovering over the \"SP Entity ID\" field. It explains what the Service Provider XML URL address is used for in the context of Single Sign-On.",
+    "text": "Tooltip explaining the purpose of the Service provider XML URL address used for identification by the Identity provider.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:23.678Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T21:01:10.094Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

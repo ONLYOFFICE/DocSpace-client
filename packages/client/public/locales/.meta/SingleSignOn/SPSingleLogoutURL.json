@@ -1,14 +1,14 @@
 {
   "key_path": "SPSingleLogoutURL",
-  "content": "SP Single Logout URL (support POST and Redirect binding):",
-  "content_en_sha1_hash": "bbcacaf910ad331ef2d63b42e6cbc9b2fcf51fe8",
-  "created_at": "2025-05-19T21:30:50.180Z",
-  "updated_at": "2026-05-15T15:37:40.282Z",
+  "content": "Service provider single logout URL (support POST and Redirect binding):",
+  "content_en_sha1_hash": "da6f9a6993b64314bf373f4fefe69bfa55398ce0",
+  "created_at": "2026-08-31T18:23:40.168Z",
+  "updated_at": "2026-08-31T21:00:31.322Z",
   "comment": {
-    "text": "This is a label for an input field where the user enters the URL for Single Logout (SLO) for a Service Provider (SP), supporting both POST and Redirect bindings.",
+    "text": "Field label for the Service Provider single logout URL input within the SSO integration settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:18.194Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T21:00:31.322Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -34,15 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \":\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:48:32.654Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -102,15 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \":\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:48:34.228Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -165,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -180,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,15 +196,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \":\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:48:35.903Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -224,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

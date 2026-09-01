@@ -1,14 +1,14 @@
 {
   "key_path": "SectionsUploadDescription",
-  "content": "Upload any type files from {{sectionNameFirst}} or {{sectionNameSecond}}",
-  "content_en_sha1_hash": "974a0a3d9577e73f116074ba794d679184f55d13",
-  "created_at": "2025-05-19T21:30:56.530Z",
-  "updated_at": "2026-08-20T12:26:01.700Z",
+  "content": "Upload any file types from {{sectionNameFirst}} or {{sectionNameSecond}}",
+  "content_en_sha1_hash": "6e7a297336c82008fb3cf504cf12ae1644ac458a",
+  "created_at": "2026-08-31T18:23:45.831Z",
+  "updated_at": "2026-08-31T19:57:35.355Z",
   "comment": {
-    "text": "This is a descriptive text appearing in an empty file list, prompting the user to upload files. It includes two variables, `{{sectionNameFirst}}` and `{{sectionNameSecond}}`, which will be replaced by names of file storage sections (e.g., \"My Documents\" and \"Rooms\").",
+    "text": "Description text for an empty state view informing users they can upload files from specific application areas. The {{sectionNameFirst}} and {{sectionNameSecond}} variables represent the names of these areas.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:06:41.832Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:57:35.355Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

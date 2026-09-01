@@ -1,14 +1,14 @@
 {
   "key_path": "TurnOnSSO",
-  "content": "Enable Single Sign-on Authentication",
-  "content_en_sha1_hash": "6d72c77415fb19a9ef6ab7954c952ed693af686f",
-  "created_at": "2025-05-19T21:30:50.190Z",
-  "updated_at": "2026-05-15T15:37:40.284Z",
+  "content": "Enable single sign-on authentication",
+  "content_en_sha1_hash": "73bc7f6b21e2f027ac08df7323d29237d2f66bbb",
+  "created_at": "2026-08-31T18:23:40.179Z",
+  "updated_at": "2026-08-31T20:56:53.112Z",
   "comment": {
-    "text": "This is a button label that enables Single Sign-on (SSO) authentication for the DocSpace portal. It appears within the integration settings.",
+    "text": "Label for a toggle switch in the Single Sign-On integration settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:14.384Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:56:53.112Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,13 +1,13 @@
 {
   "key_path": "WelcomeDashboardTitle",
-  "content": "Welcome to {{organizationName}} {{productName}}",
-  "content_en_sha1_hash": "9f2cde777cb0e1488aaeb2cdbc2e4d83a3f9529c",
-  "created_at": "2026-08-13T22:44:32.748Z",
-  "updated_at": "2026-08-21T15:49:57.209Z",
+  "content": "Welcome to {{organizationName}}",
+  "content_en_sha1_hash": "91de837532d2aa12da937100fbffbc02b0e5a4bb",
+  "created_at": "2026-08-31T18:23:46.780Z",
+  "updated_at": "2026-08-31T19:40:55.795Z",
   "comment": {
-    "text": "Title of the welcome dialog shown during the dashboard tour, containing the organization name and product name as variables.",
+    "text": "Dialog title for the welcome modal appearing upon dashboard entry, containing the organization's name in the {{organizationName}} variable.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:24:26.568Z",
+    "updated_at": "2026-08-31T19:40:55.795Z",
     "model": "gemma4:26b"
   },
   "usage": [

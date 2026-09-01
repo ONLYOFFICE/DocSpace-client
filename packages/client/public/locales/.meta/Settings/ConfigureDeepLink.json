@@ -1,14 +1,14 @@
 {
   "key_path": "ConfigureDeepLink",
-  "content": "Configure deep link",
-  "content_en_sha1_hash": "edfb8002794be0c3c97a60c2efb077b54207446d",
-  "created_at": "2025-05-19T21:30:50.950Z",
-  "updated_at": "2026-05-15T15:37:40.234Z",
+  "content": "Deep link",
+  "content_en_sha1_hash": "75ef0eb0d7336caebda719456d1650646f68ba6c",
+  "created_at": "2026-08-31T18:23:40.652Z",
+  "updated_at": "2026-08-31T20:43:40.128Z",
   "comment": {
-    "text": "This is a menu item label in the portal settings. It links to a page where users can set up a deep link for their ONLYOFFICE DocSpace.",
+    "text": "Title for a navigation menu item and a section header in the Portal Settings customization menu, used to access deep link configuration settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:16.979Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:43:40.128Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -212,12 +218,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,14 +1,14 @@
 {
   "key_path": "InviteContacts",
-  "content": "Invite contacts",
-  "content_en_sha1_hash": "43f0bde391682834922b0b6b0e4c82714e94586e",
-  "created_at": "2025-05-19T21:30:45.983Z",
-  "updated_at": "2026-08-20T12:26:01.700Z",
+  "content": "Invite people",
+  "content_en_sha1_hash": "e1eb97afa7ac563e4e26cd26d812294d4e04782c",
+  "created_at": "2026-08-31T18:23:11.871Z",
+  "updated_at": "2026-08-31T18:59:27.909Z",
   "comment": {
-    "text": "This is a button label or menu item for inviting users to a room or sharing content. It appears in various contexts, such as an empty view or an info panel.",
+    "text": "Label for a menu option or a title used to initiate the process of inviting users to a room or folder.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:50:33.401Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:59:27.909Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -188,6 +188,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -224,12 +230,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

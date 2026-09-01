@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2026-08-26T16:06:02.218Z",
+  "updated_at": "2026-08-31T18:23:50.558Z",
   "comment": {
     "text": "This is a button label or menu item for creating a new spreadsheet, or a label within a conversion dialog. It refers to the file type.",
     "is_auto": true,
@@ -57,6 +57,12 @@
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
       "line_number": 67,
       "context": "case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.Diagram:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 263,
+      "context": "};\n \n const createNewSpreadsheet = {\n id: \"personal_new-spreadsheet\",\n key: \"new-spreadsheet\",\n label: t(\"Common:Spreadsheet\"),\n onClick: () => self.onCreate(\"xlsx\"),\n icon: SpreadsheetReactSvgUrl,\n };\n \n const createNewPresentation = {",
       "module": "/packages/client"
     },
     {

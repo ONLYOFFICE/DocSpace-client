@@ -1,14 +1,14 @@
 {
   "key_path": "TrashMoveConfirmation",
-  "content": "Display notification when moving items to {{sectionName}}",
-  "content_en_sha1_hash": "b42767b732c4005a1996d81998ef7f3c1c631f8c",
-  "created_at": "2026-04-03T21:51:34.707Z",
-  "updated_at": "2026-05-15T14:00:06.877Z",
+  "content": "Show a notification when moving items to {{sectionName}}",
+  "content_en_sha1_hash": "e0d2850a41c7bf0d3a17844ae2301ac888f13d87",
+  "created_at": "2026-08-31T18:23:35.032Z",
+  "updated_at": "2026-08-31T18:30:22.496Z",
   "comment": {
-    "text": "This is a label for a toggle switch in user settings. It controls whether a notification appears when files are moved to the trash. `{{sectionName}}` will always be \"Trash\".",
+    "text": "Label for a toggle switch in settings that controls whether a notification is shown when moving items to a specific section. The {{sectionName}} variable represents the name of the destination section.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:40:26.127Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:30:22.496Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

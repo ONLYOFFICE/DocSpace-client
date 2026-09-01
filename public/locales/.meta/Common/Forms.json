@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-08-27T11:03:46.254Z",
+  "updated_at": "2026-08-31T18:23:50.562Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -37,8 +37,8 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 413,
-      "context": "// Active rooms listing), so the item points at the dedicated /forms route\n // scoped to that search area.\n if (roomsFolder) {\n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n ...nav(searchAreaUrl(\"/forms/filter\", RoomSearchArea.Forms)),\n children: [\n {\n id: \"forms-recent\",",
+      "line_number": 415,
+      "context": "// Active rooms listing), so the item points at the dedicated /forms route\n // scoped to that search area.\n if (roomsFolder) {\n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n ...nav(searchAreaUrl(\"/forms/filter\", RoomSearchArea.Forms)),\n ...(formsFolder\n ? sectionBadge(panelFolderId(formsFolder), newCount(formsFolder))\n : {}),",
       "module": "/packages/client"
     },
     {
@@ -93,6 +93,24 @@
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
       "line_number": 86,
       "context": "{\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,\n },\n {\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,\n },\n ];\n \n return options.filter((option) => !unavailableOptions.includes(option.key));",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
+      "line_number": 98,
+      "context": "</div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n </div>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
+      "line_number": 80,
+      "context": "<div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
+      "line_number": 80,
+      "context": "<div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"",
       "module": "/packages/client"
     },
     {

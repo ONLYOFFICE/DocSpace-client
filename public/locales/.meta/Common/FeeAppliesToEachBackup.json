@@ -1,14 +1,14 @@
 {
   "key_path": "FeeAppliesToEachBackup",
-  "content": "Please note: A fee applies to each backup",
-  "content_en_sha1_hash": "512c44b45a36ce7fbdcc312908a8cfdf8e540e36",
-  "created_at": "2025-10-01T15:17:17.999Z",
-  "updated_at": "2026-05-15T14:00:06.963Z",
+  "content": "Please note: a fee applies to each backup.",
+  "content_en_sha1_hash": "7f8784ea4e72121f03a19852de97fdfcf6e4d62a",
+  "created_at": "2026-08-31T18:23:06.468Z",
+  "updated_at": "2026-08-31T19:04:48.293Z",
   "comment": {
-    "text": "This is a note displayed to the user, informing them that each backup incurs a separate fee. It appears within a `NoteComponent`.",
+    "text": "Informational note in the backup section notifying users that each backup incurs a fee.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:52:54.965Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:04:48.293Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

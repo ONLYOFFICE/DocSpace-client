@@ -2261,7 +2261,7 @@
   "Uploader": "Încărcător",
   "UploadFiles": "Încarcă fișiere",
   "UploadFilesDevice": "Adăugați fișiere de pe computer sau telefon",
-  "UploadFilesPortal": "Încărcați fișierele din {{sectionNameFirst}} sau {{sectionNameSecond}}",
+  "UploadFilesPortal": "Adăugați fișiere din {{files}}, {{rooms}}, {{forms}} sau din alți {{aiAgents}}",
   "UploadFolder": "Încarcă folderul",
   "UploadFromDevice": "Adăugați fișiere de pe dispozitiv",
   "Uploading": "Încărcare",

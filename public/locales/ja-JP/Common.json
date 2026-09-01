@@ -2261,7 +2261,7 @@
   "Uploader": "アップロードした人",
   "UploadFiles": "ファイルのアップロード",
   "UploadFilesDevice": "パソコンやスマートフォンからファイルを追加する",
-  "UploadFilesPortal": "{{sectionNameFirst}}または{{sectionNameSecond}}からファイルをアップロードする",
+  "UploadFilesPortal": "{{files}}、{{rooms}}、{{forms}}、他の{{aiAgents}}からファイルを追加できます",
   "UploadFolder": "フォルダのアップロード",
   "UploadFromDevice": "デバイスからファイルを追加",
   "Uploading": "アップロード中",

@@ -2261,7 +2261,7 @@
   "Uploader": "Người tải lên",
   "UploadFiles": "Tải tệp lên",
   "UploadFilesDevice": "Thêm tệp từ máy tính hoặc điện thoại của bạn",
-  "UploadFilesPortal": "Tải lên tệp từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}",
+  "UploadFilesPortal": "Thêm tệp từ {{files}}, {{rooms}}, {{forms}} hoặc {{aiAgents}} khác",
   "UploadFolder": "Tải thư mục lên",
   "UploadFromDevice": "Thêm tệp từ thiết bị",
   "Uploading": "Đang tải lên",

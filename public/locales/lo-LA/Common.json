@@ -2261,7 +2261,7 @@
   "Uploader": "ຜູ້ໂຫລດ",
   "UploadFiles": "ອັບໂຫລດຟາຍ",
   "UploadFilesDevice": "ເພີ່ມໄຟລ໌ຈາກຄອມພິວເຕີ ຫຼື ໂທລະສັບຂອງທ່ານ",
-  "UploadFilesPortal": "ອັບໂຫຼດໄຟລ໌ຈາກ {{sectionNameFirst}} ຫຼື {{sectionNameSecond}}",
+  "UploadFilesPortal": "ເພີ່ມໄຟລ໌ຈາກ {{files}}, {{rooms}}, {{forms}} ຫຼື {{aiAgents}} ອື່ນໆ",
   "UploadFolder": "ອັບໂຫລດ ໂຟຣເດີ",
   "UploadFromDevice": "ເພີ່ມໄຟລ໌ຈາກອຸປະກອນ",
   "Uploading": "ການອັບໂຫຼດ",

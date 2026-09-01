@@ -2261,7 +2261,7 @@
   "Uploader": "Uploader",
   "UploadFiles": "Upload bestanden",
   "UploadFilesDevice": "Voeg bestanden toe vanaf uw computer of telefoon",
-  "UploadFilesPortal": "Upload bestanden vanuit {{sectionNameFirst}} of {{sectionNameSecond}}",
+  "UploadFilesPortal": "Voeg bestanden toe vanuit {{files}}, {{rooms}}, {{forms}} of andere {{aiAgents}}",
   "UploadFolder": "Upload map",
   "UploadFromDevice": "Bestanden toevoegen vanaf apparaat",
   "Uploading": "Uploaden",

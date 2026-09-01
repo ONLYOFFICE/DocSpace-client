@@ -2261,7 +2261,7 @@
   "Uploader": "Chi carica",
   "UploadFiles": "Carica file",
   "UploadFilesDevice": "Aggiungi file dal computer o dal telefono",
-  "UploadFilesPortal": "Carica file da {{sectionNameFirst}} o {{sectionNameSecond}}",
+  "UploadFilesPortal": "Aggiungi file da {{files}}, {{rooms}}, {{forms}} o da altri {{aiAgents}}",
   "UploadFolder": "Caricare cartella",
   "UploadFromDevice": "Aggiungi file dal dispositivo",
   "Uploading": "Caricamento in corso",

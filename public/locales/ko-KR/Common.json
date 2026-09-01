@@ -2261,7 +2261,7 @@
   "Uploader": "업로더",
   "UploadFiles": "파일 업로드",
   "UploadFilesDevice": "컴퓨터 또는 휴대폰에서 파일 추가",
-  "UploadFilesPortal": "{{sectionNameFirst}} 또는 {{sectionNameSecond}}에서 파일을 업로드하세요.",
+  "UploadFilesPortal": "{{files}}, {{rooms}}, {{forms}} 또는 다른 {{aiAgents}}에서 파일을 추가하세요",
   "UploadFolder": "폴더 업로드",
   "UploadFromDevice": "장치에서 파일 추가",
   "Uploading": "업로드 중",

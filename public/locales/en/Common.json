@@ -2261,7 +2261,7 @@
   "Uploader": "Uploader",
   "UploadFiles": "Upload files",
   "UploadFilesDevice": "Add files from your computer or phone",
-  "UploadFilesPortal": "Upload files from {{sectionNameFirst}} or {{sectionNameSecond}}",
+  "UploadFilesPortal": "Add files from {{files}}, {{rooms}}, {{forms}}, or other {{aiAgents}}",
   "UploadFolder": "Upload folder",
   "UploadFromDevice": "Add files from device",
   "Uploading": "Uploading",

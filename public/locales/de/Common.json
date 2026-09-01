@@ -2261,7 +2261,7 @@
   "Uploader": "Uploader",
   "UploadFiles": "Dateien hochladen",
   "UploadFilesDevice": "Fügen Sie Dateien von Ihrem Computer oder Telefon hinzu",
-  "UploadFilesPortal": "Laden Sie Dateien von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch",
+  "UploadFilesPortal": "Fügen Sie Dateien aus {{files}}, {{rooms}}, {{forms}} oder anderen {{aiAgents}} hinzu",
   "UploadFolder": "Ordner hochladen",
   "UploadFromDevice": "Dateien vom Gerät hinzufügen",
   "Uploading": "Hochladen",

@@ -2261,7 +2261,7 @@
   "Uploader": "上传者",
   "UploadFiles": "上传文件",
   "UploadFilesDevice": "从电脑或手机添加文件",
-  "UploadFilesPortal": "从{{sectionNameFirst}}或{{sectionNameSecond}}上传文件",
+  "UploadFilesPortal": "从{{files}}、{{rooms}}、{{forms}}或其他{{aiAgents}}添加文件",
   "UploadFolder": "上传文件夹",
   "UploadFromDevice": "从设备添加文件",
   "Uploading": "上传中",

@@ -2261,7 +2261,7 @@
   "Uploader": "Особа која је отпремила",
   "UploadFiles": "Отпреми датотеке",
   "UploadFilesDevice": "Додајте датотеке са рачунара или телефона",
-  "UploadFilesPortal": "Отпремите датотеке са {{sectionNameFirst}} или {{sectionNameSecond}}",
+  "UploadFilesPortal": "Додајте датотеке из {{files}}, {{rooms}}, {{forms}} или из других {{aiAgents}}",
   "UploadFolder": "Отпреми фолдер",
   "UploadFromDevice": "Додај датотеке са уређаја",
   "Uploading": "Отпремање",

@@ -2261,7 +2261,7 @@
   "Uploader": "Nahrávateľ",
   "UploadFiles": "Nahrať súbory",
   "UploadFilesDevice": "Pridať súbory z počítača alebo telefónu",
-  "UploadFilesPortal": "Nahrať súbory z {{sectionNameFirst}} alebo {{sectionNameSecond}}",
+  "UploadFilesPortal": "Pridajte súbory z {{files}}, {{rooms}}, {{forms}} alebo z ďalších {{aiAgents}}",
   "UploadFolder": "Nahrať priečinok",
   "UploadFromDevice": "Pridať súbory zo zariadenia",
   "Uploading": "Nahrávanie",

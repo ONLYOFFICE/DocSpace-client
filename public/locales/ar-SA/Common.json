@@ -2261,7 +2261,7 @@
   "Uploader": "المُحمِّل",
   "UploadFiles": "رفع الملفات",
   "UploadFilesDevice": "أضف ملفات من حاسوبك أو هاتفك",
-  "UploadFilesPortal": "تحميل الملفات من {{sectionNameFirst}} أو {{sectionNameSecond}}",
+  "UploadFilesPortal": "أضف ملفات من {{files}} أو {{rooms}} أو {{forms}} أو من {{aiAgents}} أخرى",
   "UploadFolder": "رفع مجلد",
   "UploadFromDevice": "أضف ملفات من الجهاز",
   "Uploading": "جارٍ التحميل",

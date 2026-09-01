@@ -2261,7 +2261,7 @@
   "Uploader": "Wgrywający",
   "UploadFiles": "Wgraj pliki",
   "UploadFilesDevice": "Dodaj pliki z komputera lub telefonu.",
-  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}",
+  "UploadFilesPortal": "Dodaj pliki z {{files}}, {{rooms}}, {{forms}} lub innych {{aiAgents}}",
   "UploadFolder": "Wgraj folder",
   "UploadFromDevice": "Dodaj pliki z urządzenia",
   "Uploading": "Wysyłanie",

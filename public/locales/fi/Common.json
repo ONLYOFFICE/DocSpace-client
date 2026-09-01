@@ -2261,7 +2261,7 @@
   "Uploader": "Lataaja",
   "UploadFiles": "Lataa tiedostoja",
   "UploadFilesDevice": "Lisää tiedostoja tietokoneeltasi tai puhelimestasi",
-  "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}",
+  "UploadFilesPortal": "Lisää tiedostoja osioista {{files}}, {{rooms}}, {{forms}} tai muista {{aiAgents}}",
   "UploadFolder": "Lataa kansio ylös",
   "UploadFromDevice": "Lisää tiedostoja laitteesta",
   "Uploading": "Ladataan",

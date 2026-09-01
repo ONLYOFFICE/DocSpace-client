@@ -2261,7 +2261,7 @@
   "Uploader": "Ngarkuesi",
   "UploadFiles": "Ngarkoni skedarët",
   "UploadFilesDevice": "Shto skedarë nga kompjuteri ose telefoni yt",
-  "UploadFilesPortal": "Ngarko skedarë nga {{sectionNameFirst}} ose {{sectionNameSecond}}",
+  "UploadFilesPortal": "Shtoni skedarë nga {{files}}, {{rooms}}, {{forms}} ose nga {{aiAgents}} të tjerë",
   "UploadFolder": "Ngarkoni dosjen",
   "UploadFromDevice": "Shto skedarë nga pajisja",
   "Uploading": "Ngarkimi",

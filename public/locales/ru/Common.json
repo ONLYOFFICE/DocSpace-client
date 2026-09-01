@@ -2261,7 +2261,7 @@
   "Uploader": "Инструмент загрузки",
   "UploadFiles": "Загрузить файлы",
   "UploadFilesDevice": "Добавить файлы с компьютера или телефона",
-  "UploadFilesPortal": "Загрузить файлы из {{sectionNameFirst}} или {{sectionNameSecond}}",
+  "UploadFilesPortal": "Добавьте файлы из разделов {{files}}, {{rooms}}, {{forms}} или из других {{aiAgents}}",
   "UploadFolder": "Загрузить папку",
   "UploadFromDevice": "Добавить файлы с устройства",
   "Uploading": "Загрузка",

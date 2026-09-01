@@ -49,9 +49,8 @@
   "SharePublicRoomOptionTitle": "Jaa huone kaikkien käyttäjien kesken",
   "TemplateAccessDescription": "Hallitse, kuka voi käyttää tätä mallipohjaa.",
   "UploadDeviceOptionDescription": "Lataa minkä tahansa tyyppisiä tiedostoja henkilökohtaisesta laitteestasi",
-  "UploadDeviceOptionTitle": "Lataa laitteestasi",
+  "UploadDeviceOptionTitle": "Lataa laitteesta",
   "UploadDevicePDFFormOptionDescription": "Lataa valmis PDF-lomake tilaan laitteeltasi.",
-  "UploadDevicePDFFormOptionTitle": "Lataa laitteesta",
   "UploadFromPortalTitle": "Lataa tallennustilasta",
   "UploadPDFFormOptionDescription": "Valitse työtilassa saatavilla oleva valmis PDF-lomake ja lataa se tilaan.",
   "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen."

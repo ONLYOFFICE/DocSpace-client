@@ -2261,7 +2261,7 @@
   "Uploader": "Վերբեռնող",
   "UploadFiles": "Վերբեռնել ֆայլեր",
   "UploadFilesDevice": "Ավելացրեք ֆայլեր Ձեր համակարգչից կամ հեռախոսից",
-  "UploadFilesPortal": "Բեռնեք ֆայլեր {{sectionNameFirst}} կամ {{sectionNameSecond}} կայքերից",
+  "UploadFilesPortal": "Ավելացրեք ֆայլեր {{files}}, {{rooms}}, {{forms}} կամ այլ {{aiAgents}} բաժիններից",
   "UploadFolder": "Վերբեռնման պանակ",
   "UploadFromDevice": "Ավելացնել ֆայլեր սարքից",
   "Uploading": "Վերբեռնում",

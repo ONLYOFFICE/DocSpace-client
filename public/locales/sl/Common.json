@@ -2261,7 +2261,7 @@
   "Uploader": "Nalagalec",
   "UploadFiles": "Naloži datoteke",
   "UploadFilesDevice": "Dodajte datoteke iz svojega računalnika ali telefona",
-  "UploadFilesPortal": "Naložite datoteke iz {{sectionNameFirst}} ali {{sectionNameSecond}}",
+  "UploadFilesPortal": "Dodajte datoteke iz {{files}}, {{rooms}}, {{forms}} ali iz drugih {{aiAgents}}",
   "UploadFolder": "Naloži mapo",
   "UploadFromDevice": "Dodaj datoteke iz naprave",
   "Uploading": "Nalaganje",

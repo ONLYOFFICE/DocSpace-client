@@ -2261,7 +2261,7 @@
   "Uploader": "උඩුගත කරන්නා",
   "UploadFiles": "ගොනු උඩුගත කරන්න",
   "UploadFilesDevice": "ඔබේ පරිගණකයෙන් හෝ දුරකථනයෙන් ගොනු එක් කරන්න",
-  "UploadFilesPortal": "{{sectionNameFirst}} හෝ {{sectionNameSecond}} වෙතින් ගොනු උඩුගත කරන්න",
+  "UploadFilesPortal": "{{files}}, {{rooms}}, {{forms}} හෝ වෙනත් {{aiAgents}} වෙතින් ගොනු එක් කරන්න",
   "UploadFolder": "ෆෝල්ඩරයක් උඩුගත කරන්න",
   "UploadFromDevice": "උපාංගයෙන් ගොනු එක් කරන්න",
   "Uploading": "ඉහල් කිරීම",

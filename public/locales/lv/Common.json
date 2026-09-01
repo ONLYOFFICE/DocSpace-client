@@ -2261,7 +2261,7 @@
   "Uploader": "Augšupielādētājs",
   "UploadFiles": "Augšupielādējiet failus",
   "UploadFilesDevice": "Pievienojiet failus no sava datora vai tālruņa",
-  "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}.",
+  "UploadFilesPortal": "Pievienojiet failus no {{files}}, {{rooms}}, {{forms}} vai citiem {{aiAgents}}",
   "UploadFolder": "Augšupielādēt mapi",
   "UploadFromDevice": "Pievienot failus no ierīces",
   "Uploading": "Augšupielādē",

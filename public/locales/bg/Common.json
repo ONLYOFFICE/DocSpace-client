@@ -2261,7 +2261,7 @@
   "Uploader": "Качващ",
   "UploadFiles": "Качи файлове",
   "UploadFilesDevice": "Добавете файлове от компютъра или телефона си.",
-  "UploadFilesPortal": "Качете файлове от {{sectionNameFirst}} или {{sectionNameSecond}}",
+  "UploadFilesPortal": "Добавяйте файлове от {{files}}, {{rooms}}, {{forms}} или от други {{aiAgents}}",
   "UploadFolder": "Качи папка",
   "UploadFromDevice": "Добавяне на файлове от устройство",
   "Uploading": "Качване",

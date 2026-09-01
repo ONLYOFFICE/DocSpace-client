@@ -2261,7 +2261,7 @@
   "Uploader": "Πρόγραμμα μεταφόρτωσης",
   "UploadFiles": "Μεταφόρτωση αρχείων",
   "UploadFilesDevice": "Προσθήκη αρχείων από τον υπολογιστή ή το τηλέφωνό σας",
-  "UploadFilesPortal": "Ανεβάστε αρχεία από το {{sectionNameFirst}} ή το {{sectionNameSecond}}",
+  "UploadFilesPortal": "Προσθέστε αρχεία από {{files}}, {{rooms}}, {{forms}} ή από άλλους {{aiAgents}}",
   "UploadFolder": "Μεταφόρτωση φακέλου",
   "UploadFromDevice": "Προσθήκη αρχείων από συσκευή",
   "Uploading": "Γίνεται μεταφόρτωση",

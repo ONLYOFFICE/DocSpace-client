@@ -2261,7 +2261,7 @@
   "Uploader": "Téléchargeur",
   "UploadFiles": "Télécharger les fichiers",
   "UploadFilesDevice": "Ajouter des fichiers depuis votre ordinateur ou votre téléphone",
-  "UploadFilesPortal": "Télécharger des fichiers depuis {{sectionNameFirst}} ou {{sectionNameSecond}}",
+  "UploadFilesPortal": "Ajoutez des fichiers depuis {{files}}, {{rooms}}, {{forms}} ou d'autres {{aiAgents}}",
   "UploadFolder": "Télécharger le dossier",
   "UploadFromDevice": "Ajouter des fichiers depuis l'appareil",
   "Uploading": "Téléchargement",

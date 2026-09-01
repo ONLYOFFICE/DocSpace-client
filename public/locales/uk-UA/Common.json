@@ -2261,7 +2261,7 @@
   "Uploader": "Завантажувач",
   "UploadFiles": "Завантажити файли",
   "UploadFilesDevice": "Додайте файли з комп'ютера або телефону",
-  "UploadFilesPortal": "Завантажте файли з {{sectionNameFirst}} або {{sectionNameSecond}}",
+  "UploadFilesPortal": "Додайте файли з розділів {{files}}, {{rooms}}, {{forms}} або з інших {{aiAgents}}",
   "UploadFolder": "Завантажити папку",
   "UploadFromDevice": "Додати файли з пристрою",
   "Uploading": "Передавання",

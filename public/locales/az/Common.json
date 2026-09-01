@@ -2261,7 +2261,7 @@
   "Uploader": "Yükləyici",
   "UploadFiles": "Faylları yüklə",
   "UploadFilesDevice": "Kompüterinizdən və ya telefonunuzdan fayllar əlavə edin",
-  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin",
+  "UploadFilesPortal": "{{files}}, {{rooms}}, {{forms}} və ya digər {{aiAgents}} bölmələrindən fayl əlavə edin",
   "UploadFolder": "Qovluğu yüklə",
   "UploadFromDevice": "Cihazdan fayllar əlavə et",
   "Uploading": "Yüklənir",

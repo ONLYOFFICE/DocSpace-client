@@ -2261,7 +2261,7 @@
   "Uploader": "Yükleyen",
   "UploadFiles": "Dosya yükle",
   "UploadFilesDevice": "Bilgisayarınızdan veya telefonunuzdan dosya ekleyin",
-  "UploadFilesPortal": "{{sectionNameFirst}} veya {{sectionNameSecond}}'den dosyalar yükleyin",
+  "UploadFilesPortal": "{{files}}, {{rooms}}, {{forms}} veya diğer {{aiAgents}} bölümlerinden dosya ekleyin",
   "UploadFolder": "Klasör yükle",
   "UploadFromDevice": "Cihazdan dosya ekle",
   "Uploading": "Yükleniyor",

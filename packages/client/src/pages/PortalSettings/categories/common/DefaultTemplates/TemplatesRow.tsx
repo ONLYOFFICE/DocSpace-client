@@ -104,7 +104,7 @@ const TemplatesRow = ({
       },
       {
         key: "upload-from-device",
-        label: t("EmptyView:UploadDevicePDFFormOptionTitle"),
+        label: t("EmptyView:UploadDeviceOptionTitle"),
         onClick: () => {
           setTimeout(() => {
             fileInputRef.current?.click();

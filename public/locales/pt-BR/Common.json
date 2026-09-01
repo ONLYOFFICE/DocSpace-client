@@ -2261,7 +2261,7 @@
   "Uploader": "Uploadador",
   "UploadFiles": "Carregar arquivos",
   "UploadFilesDevice": "Adicione arquivos do seu computador ou celular",
-  "UploadFilesPortal": "Carregue arquivos de {{sectionNameFirst}} ou {{sectionNameSecond}}",
+  "UploadFilesPortal": "Adicione arquivos de {{files}}, {{rooms}}, {{forms}} ou de outros {{aiAgents}}",
   "UploadFolder": "Carregar pasta",
   "UploadFromDevice": "Adicionar arquivos do dispositivo",
   "Uploading": "Enviando",

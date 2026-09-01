@@ -49,9 +49,8 @@
   "SharePublicRoomOptionTitle": "Предоставить доступ к комнате всем пользователям",
   "TemplateAccessDescription": "Проконтролируйте, кто может использовать этот шаблон",
   "UploadDeviceOptionDescription": "Загружайте файлы любого типа со своего устройства",
-  "UploadDeviceOptionTitle": "Загрузить с вашего устройства",
+  "UploadDeviceOptionTitle": "Загрузить с устройства",
   "UploadDevicePDFFormOptionDescription": "Загрузите готовую PDF-форму в пространство со своего устройства.",
-  "UploadDevicePDFFormOptionTitle": "Загрузить с устройства",
   "UploadFromPortalTitle": "Загрузить из хранилища",
   "UploadPDFFormOptionDescription": "Выберите готовую PDF-форму, доступную в рабочем пространстве, и загрузите ее в пространство.",
   "VirtualDataRoomEmptyTitle": "Добро пожаловать в виртуальную комнату данных!"

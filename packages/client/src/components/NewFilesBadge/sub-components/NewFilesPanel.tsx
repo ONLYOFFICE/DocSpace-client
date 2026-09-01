@@ -77,9 +77,32 @@ const filterRoomGroups = (groups: TNewFiles[], formsOnly: boolean) =>
     }))
     .filter(({ items }) => items.length > 0);
 
+const mergeFolderGroups = (folderGroups: TNewFiles[][]) => {
+  if (folderGroups.length === 1) return folderGroups[0];
+
+  const groupsByDay = new Map<number, TNewFiles>();
+
+  folderGroups.flat().forEach(({ date, items }) => {
+    const day = new Date(date).setHours(0, 0, 0, 0);
+    const group = groupsByDay.get(day);
+
+    if (group) {
+      group.items = [...group.items, ...items];
+      return;
+    }
+
+    groupsByDay.set(day, { date, items: [...items] });
+  });
+
+  return [...groupsByDay.entries()]
+    .sort(([dayA], [dayB]) => dayB - dayA)
+    .map(([, group]) => group);
+};
+
 export const NewFilesPanelComponent = ({
   position,
   folderId,
+  folderIds,
   onClose,
 
   isRoom,
@@ -100,6 +123,11 @@ export const NewFilesPanelComponent = ({
   const isRooms = folderId === "rooms" || isForms;
   const isAgents = folderId === "agents";
 
+  const fetchFolderIds = React.useMemo(
+    () => (folderIds?.length ? folderIds : [folderId]),
+    [folderIds, folderId],
+  );
+
   const markAsReadAction = React.useCallback(async () => {
     if (isMarkAsReadRunning) return;
 
@@ -115,7 +143,7 @@ export const NewFilesPanelComponent = ({
         });
       });
     } else {
-      folderIDs.push(folderId);
+      folderIDs.push(...fetchFolderIds);
     }
 
     await markAsRead?.(folderIDs, []);
@@ -123,7 +151,7 @@ export const NewFilesPanelComponent = ({
 
     onClose();
   }, [
-    folderId,
+    fetchFolderIds,
     isMarkAsReadRunning,
     isRooms,
     isAgents,
@@ -150,7 +178,11 @@ export const NewFilesPanelComponent = ({
           ? await api.files.getNewFiles("rooms")
           : isAgents
             ? await api.files.getNewFilesAgents()
-            : await api.files.getNewFolderFiles(folderId);
+            : mergeFolderGroups(
+                await Promise.all(
+                  fetchFolderIds.map((id) => api.files.getNewFolderFiles(id)),
+                ),
+              );
 
         dataFetched.current = true;
         requestRunning.current = false;
@@ -179,7 +211,15 @@ export const NewFilesPanelComponent = ({
     requestRunning.current = true;
 
     getData();
-  }, [folderId, isRooms, isForms, isAgents, onClose, setIsLoading]);
+  }, [
+    folderId,
+    fetchFolderIds,
+    isRooms,
+    isForms,
+    isAgents,
+    onClose,
+    setIsLoading,
+  ]);
 
   React.useEffect(() => {
     const onKeyUp = (e: KeyboardEvent) => {

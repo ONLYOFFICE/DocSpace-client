@@ -48,10 +48,9 @@
   "SharePublicRoomOptionDescription": "Toegang tot externe links voor andere gebruikers inschakelen.",
   "SharePublicRoomOptionTitle": "Deel de kamer met alle gebruikers",
   "TemplateAccessDescription": "Controleer wie dit sjabloon mag gebruiken.",
-  "UploadDeviceOptionDescription": "Upload elk type bestand vanaf uw persoonlijke apparaat",
-  "UploadDeviceOptionTitle": "Uploaden vanaf uw Apparaat",
+  "UploadDeviceOptionDescription": "Upload bestanden van elk type vanaf uw persoonlijke apparaat",
+  "UploadDeviceOptionTitle": "Uploaden vanaf apparaat",
   "UploadDevicePDFFormOptionDescription": "Upload een kant-en-klaar PDF-formulier vanaf uw apparaat naar de ruimte.",
-  "UploadDevicePDFFormOptionTitle": "Uploaden vanaf apparaat",
   "UploadFromPortalTitle": "Uploaden vanuit opslag",
   "UploadPDFFormOptionDescription": "Selecteer een kant-en-klaar PDF-formulier dat beschikbaar is in de werkruimte en upload het naar de ruimte.",
   "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer"

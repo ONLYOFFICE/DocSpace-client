@@ -5,7 +5,7 @@
   "LdapAttributeMapping": "属性のマッピング",
   "LdapAuthenticationTooltip": "現在のユーザーに LDAP サーバー からの読み取り権限がない場合は、このオプションを有効にし、読み取り権限を持つ別のユーザーの資格情報を入力してください。",
   "LdapAutoSyncToggle": "自動同期",
-  "LdapAutoSyncToggleDescription": "同期により、ワークスペースからすべてのデータをアップロードし、設定変更後に新しいデータを更新することができます。ワークスペースのユーザーの新しいデータがあるたびに同期してください。",
+  "LdapAutoSyncToggleDescription": "同期を行うと、ワークスペースにすべてのデータが取り込まれ、設定が変更されるたびに最新の状態に保たれます。取り込みたい新しいユーザーデータがあるときはいつでも実行してください。",
   "LdapAvatar": "プロフィール写真",
   "LdapCertificateConfirm": "証明書の確認",
   "LdapConnectionType": "接続タイプ",

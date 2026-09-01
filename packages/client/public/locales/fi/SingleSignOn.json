@@ -53,7 +53,7 @@
   "SsoIntro": "Ota käyttöön kolmannen osapuolen todennus SAML:n avulla – näin käyttäjät pääsevät työtilaan nopeammin, helpommin ja turvallisemmin.",
   "StandardDecryptionAlgorithm": "Oletuspurkualgoritmi",
   "TurnOnSSO": "Ota käyttöön kertakirjautuminen",
-  "TurnOnSSOCaption": "Salli tämä vaihtoehto, jos haluat automaattisesti lisätä käyttäjiä SSO-palvelusta työtilaasi.",
+  "TurnOnSSOCaption": "Ota tämä käyttöön lisätäksesi käyttäjiä SSO-palvelusta työtilaan automaattisesti.",
   "UploadXML": "Lataa metadata XML:stä täyttääksesi vaaditut kentät automaattisesti.",
   "UploadXMLPlaceholder": "URL identiteetintarjoajan metadata-XML:ään",
   "UsedFor": "Käyttötarkoitus"

@@ -279,7 +279,7 @@
   "SessionLifetimeMobileDescription": "Oturum Ömrü, çalışma alanı kullanıcılarının çalışma alanına tekrar erişebilmeleri için kimlik bilgilerini yeniden girmeleri gereken süreyi (dakika bazında) ayarlamanıza olanak tanır.",
   "SessionLifetimeSettingDescription": "Kullanıcıların otomatik olarak oturumunun kapatılmasından önce ne kadar süre oturum açık kalacağını ayarlayın. Bunu kaydetmek herkesin oturumunu kapatacaktır.",
   "SetDefaultAIAgentQuota": "{{aiAgents}} için varsayılan bir depolama kotası ayarlayın - bunu daha sonra değiştirebilir veya her ajan oluşturulduğunda ayrı ayrı özelleştirebilirsiniz.",
-  "SetDefaultRoomQuota": "Bu çalışma alanındaki odalar için varsayılan depolama kotasını ayarlayın. Bu, daha sonra oda yöneticisi tarafından her oda için ayrı ayrı ayarlanabilir.",
+  "SetDefaultRoomQuota": "Bu çalışma alanındaki odalar için varsayılan bir depolama kotası ayarlayın - oda yöneticileri bunu daha sonra tek tek odalar için değiştirebilir.",
   "SettingPasswordDescription": "Hesapları daha güvenli ve kırılması daha zor hale getirmek için şifre gereksinimlerini ayarlayın.",
   "SettingPasswordStrengthMobileDescription": "Parola Gücü Ayarları, bir parolanın tahmin etme ve brute force saldırılarına karşı direncini belirlemenin bir yoludur.",
   "SettingPasswordTittle": "Şifre gücü",

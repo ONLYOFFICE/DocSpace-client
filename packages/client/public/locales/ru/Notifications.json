@@ -15,5 +15,5 @@
   "SuccessConnected": "Канал уведомлений {{serviceName}} успешно подключен. Теперь вы будете получать обновления через него.",
   "SuccessDisconnected": "Канал уведомлений {{serviceName}} успешно отключен. Уведомления больше не будут отправляться на него.",
   "UsefulTips": "Полезные советы {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Узнайте полезные советы и рекомендации по использованию {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Узнайте полезные советы и рекомендации по использованию {{organizationName}} {{productName}}."
 }

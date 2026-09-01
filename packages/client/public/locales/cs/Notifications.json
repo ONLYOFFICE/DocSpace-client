@@ -15,5 +15,5 @@
   "SuccessConnected": "{{serviceName}} bylo úspěšně připojeno jako notifikační kanál. Nyní tam budete dostávat aktualizace.",
   "SuccessDisconnected": "{{serviceName}} bylo úspěšně odpojeno jako notifikační kanál. Tam nebudou odesílány žádné další notifikace.",
   "UsefulTips": "Užitečné tipy pro {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Objevte užitečné tipy a příručky pro používání {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Objevte užitečné tipy a příručky pro používání {{organizationName}} {{productName}}."
 }

@@ -48,10 +48,9 @@
   "SharePublicRoomOptionDescription": "Povolení přístupu k externím odkazům ostatním uživatelům.",
   "SharePublicRoomOptionTitle": "Sdílení místnosti se všemi uživateli",
   "TemplateAccessDescription": "Ovládejte, kdo může tento šablonu používat.",
-  "UploadDeviceOptionDescription": "Nahrávání souborů libovolného typu z osobního zařízení",
-  "UploadDeviceOptionTitle": "Nahrávání ze zařízení",
+  "UploadDeviceOptionDescription": "Nahrát jakékoli typy souborů z osobního zařízení",
+  "UploadDeviceOptionTitle": "Nahrát ze zařízení",
   "UploadDevicePDFFormOptionDescription": "Nahrajte do prostoru hotový PDF formulář ze svého zařízení.",
-  "UploadDevicePDFFormOptionTitle": "Nahrávání ze zařízení",
   "UploadFromPortalTitle": "Nahrát z úložiště",
   "UploadPDFFormOptionDescription": "Vyberte hotový PDF formulář dostupný v pracovním prostoru a nahrajte jej do prostoru.",
   "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti"

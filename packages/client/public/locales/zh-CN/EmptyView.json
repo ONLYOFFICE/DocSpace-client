@@ -49,9 +49,8 @@
   "SharePublicRoomOptionTitle": "与所有用户共享房间",
   "TemplateAccessDescription": "管理谁可以使用此模板",
   "UploadDeviceOptionDescription": "从您的个人设备上传任何类型的文件",
-  "UploadDeviceOptionTitle": "从您的设备上传",
+  "UploadDeviceOptionTitle": "从设备上传",
   "UploadDevicePDFFormOptionDescription": "从您的设备将现成的 PDF 表单上传到该空间。",
-  "UploadDevicePDFFormOptionTitle": "从设备上传",
   "UploadFromPortalTitle": "从存储上传",
   "UploadPDFFormOptionDescription": "选择工作区中现有的 PDF 表单并将其上传到该空间。",
   "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间"

@@ -41,8 +41,15 @@ import {
   uploadChunkParallel,
   finalizeUploadSession,
 } from "@docspace/shared/api/files";
-import { shouldEncryptUpload } from "@docspace/shared/services/private-room/encrypted-upload";
+import {
+  EncryptedReimportError,
+  makeOpaqueUploadName,
+  recoverDekForReimport,
+  shouldEncryptUpload,
+  sniffDse3Upload,
+} from "@docspace/shared/services/private-room/encrypted-upload";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isQuotaError } from "@docspace/shared/utils/uploadErrors";
@@ -154,8 +161,10 @@ export function checkChunkUploadImpl(
 
     const currentFileData = self.files[indexOfFile];
     if (currentFileData?.encrypted && hasFileDek(currentFileData)) {
-      if (currentFileData.file?.name) {
-        rememberEncryptedFilename(fileId, currentFileData.file.name);
+      const displayName =
+        currentFileData.reimportRealName || currentFileData.file?.name;
+      if (displayName) {
+        rememberEncryptedFilename(fileId, displayName);
       }
 
       const { publicKey, userId, publicKeyId } = self.getUserEncryptionKeys();
@@ -562,39 +571,72 @@ export async function startSessionFuncImpl(
 
   if (shouldEncrypt && !isEncrypted) {
     try {
-      const prepared = await self.prepareFileForEncryptedUpload(
-        file,
-        toFolderId,
-        (progress) => {
-          const fileIndex = self.uploadedFilesHistory.findIndex(
-            (f) => f.uniqueId === self.files[indexOfFile].uniqueId,
+      const dse3Header = await sniffDse3Upload(file);
+      if (dse3Header) {
+        const identity = await requireUnlock(String(userId));
+        if (!identity) {
+          throw new EncryptedReimportError(
+            "encryption identity is locked — cannot recover the DEK",
           );
-          if (fileIndex > -1) {
-            self.uploadedFilesHistory[fileIndex].percent = Math.floor(
-              progress * 20,
-            );
-          }
-          const newPercent = self.getFilesPercent();
-          self.percent = newPercent;
-          self.primaryProgressDataStore.setPrimaryProgressBarData({
-            operation: OPERATIONS_NAME.upload,
-            percent: newPercent,
-            label: i18n.t("Files:Encrypting"),
-          });
-        },
-      );
-
-      if (prepared.encrypted) {
-        fileName = prepared.uploadFileName;
-        fileToUpload = new File([prepared.data], prepared.uploadFileName, {
-          type: "application/octet-stream",
-          lastModified: file.lastModified,
+        }
+        const roomId = item.encryptionRoomId;
+        if (roomId === null || roomId === undefined) {
+          throw new EncryptedReimportError(
+            "upload item carries no room context for re-import",
+          );
+        }
+        const recovery = await recoverDekForReimport({
+          file,
+          header: dse3Header,
+          roomId,
+          userId: String(userId),
+          identity,
         });
-        uploadDEK = prepared.dek;
+
+        fileName = makeOpaqueUploadName(file.name);
+        uploadDEK = recovery.dek;
         isEncrypted = true;
 
         setFileDek(self.files[indexOfFile], uploadDEK);
-        self.files[indexOfFile].encrypted = true;
+        runInAction(() => {
+          self.files[indexOfFile].encrypted = true;
+          self.files[indexOfFile].reimportRealName = recovery.realName;
+        });
+      } else {
+        const prepared = await self.prepareFileForEncryptedUpload(
+          file,
+          toFolderId,
+          (progress) => {
+            const fileIndex = self.uploadedFilesHistory.findIndex(
+              (f) => f.uniqueId === self.files[indexOfFile].uniqueId,
+            );
+            if (fileIndex > -1) {
+              self.uploadedFilesHistory[fileIndex].percent = Math.floor(
+                progress * 20,
+              );
+            }
+            const newPercent = self.getFilesPercent();
+            self.percent = newPercent;
+            self.primaryProgressDataStore.setPrimaryProgressBarData({
+              operation: OPERATIONS_NAME.upload,
+              percent: newPercent,
+              label: i18n.t("Files:Encrypting"),
+            });
+          },
+        );
+
+        if (prepared.encrypted) {
+          fileName = prepared.uploadFileName;
+          fileToUpload = new File([prepared.data], prepared.uploadFileName, {
+            type: "application/octet-stream",
+            lastModified: file.lastModified,
+          });
+          uploadDEK = prepared.dek;
+          isEncrypted = true;
+
+          setFileDek(self.files[indexOfFile], uploadDEK);
+          self.files[indexOfFile].encrypted = true;
+        }
       }
     } catch (error) {
       console.error("[ENCRYPTION] prepareFileForEncryptedUpload failed", {
@@ -603,7 +645,10 @@ export async function startSessionFuncImpl(
       });
       const orphanDek = takeFileDek(self.files[indexOfFile]);
       if (orphanDek) wipeDek(orphanDek);
-      const errorMessage = i18n.t("Common:EncryptionPrepareFailed");
+      const errorMessage =
+        error instanceof EncryptedReimportError
+          ? i18n.t("Common:EncryptionReimportFailed")
+          : i18n.t("Common:EncryptionPrepareFailed");
       runInAction(() => {
         if (self.files[indexOfFile]) {
           self.files[indexOfFile].error = errorMessage;
@@ -617,10 +662,6 @@ export async function startSessionFuncImpl(
           self.uploadedFilesHistory[historyIndex].percent = 0;
         }
       });
-      try {
-        toastr.error(errorMessage);
-      } catch {
-      }
       const newPercent = self.getFilesPercent();
       self.percent = newPercent;
       self.primaryProgressDataStore.setPrimaryProgressBarData({

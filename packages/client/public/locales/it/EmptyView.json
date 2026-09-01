@@ -48,10 +48,9 @@
   "SharePublicRoomOptionDescription": "Abilita l'accesso ai link esterni per gli altri utenti.",
   "SharePublicRoomOptionTitle": "Condividi la stanza con tutti gli utenti",
   "TemplateAccessDescription": "Controlla chi può utilizzare questo modello",
-  "UploadDeviceOptionDescription": "Carica file di qualsiasi tipo dal tuo dispositivo personale",
-  "UploadDeviceOptionTitle": "Carica dal tuo dispositivo",
+  "UploadDeviceOptionDescription": "Carica qualsiasi tipo di file dal tuo dispositivo personale",
+  "UploadDeviceOptionTitle": "Carica dal dispositivo",
   "UploadDevicePDFFormOptionDescription": "Carica nello spazio un modulo PDF pronto dal tuo dispositivo.",
-  "UploadDevicePDFFormOptionTitle": "Carica dal dispositivo",
   "UploadFromPortalTitle": "Carica dall'archivio",
   "UploadPDFFormOptionDescription": "Seleziona un modulo PDF pronto disponibile nello spazio di lavoro e caricalo nello spazio.",
   "VirtualDataRoomEmptyTitle": "Benvenuto nella Virtual Data Room"

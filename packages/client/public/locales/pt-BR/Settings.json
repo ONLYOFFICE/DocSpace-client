@@ -156,7 +156,7 @@
   "ErrorsWereFound": "{{errors}} erros foram encontrados",
   "ExternalSharingAllowed": "Permitido",
   "ExternalSharingLinks": "Links de Compartilhamento Externo",
-  "ExternalSharingLinksDescription": "Controle se os usuários podem criar links públicos.",
+  "ExternalSharingLinksDescription": "Escolha se os usuários podem criar links públicos.",
   "ExternalSharingRestricted": "Restrito (somente usuários do espaço de trabalho)",
   "GoogleDriveFiles": "Arquivos do Google Drive",
   "GotAnyProblems": "Tem algum problema? Contate nossa <1>equipe de suporte</1>",

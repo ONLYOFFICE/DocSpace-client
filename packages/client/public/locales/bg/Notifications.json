@@ -3,7 +3,7 @@
   "AdminSetupRequired": "Необходима е административна настройка",
   "Badges": "Баджове",
   "DailyFeed": "Ежедневен {{organizationName}} {{productName}} фийд",
-  "DailyFeedDescription": "Четете новини и събития от вашия {{organizationName}} {{productName}} в ежедневен бюлетин.",
+  "DailyFeedDescription": "Получавайте ежедневен обзор на новини и събития от {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Уведомявания за активност на файлове",
   "IsNotValid": "Не е валидно",
   "LdapEmailTooltip": "Този потребителски акаунт е зареден от LDAP. Имейл адресът на потребителя не е посочен и текущият е генериран автоматично и не може да се използва за изпращане на известия.",

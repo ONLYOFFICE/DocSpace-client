@@ -48,10 +48,9 @@
   "SharePublicRoomOptionDescription": "他のユーザーへの外部リンクへのアクセスを許可します。",
   "SharePublicRoomOptionTitle": "他のユーザーへの外部リンクへのアクセスを許可します。",
   "TemplateAccessDescription": "このテンプレートを使用できるユーザーを制限します。",
-  "UploadDeviceOptionDescription": "個人デバイスからのファイルアップロード",
+  "UploadDeviceOptionDescription": "個人デバイスから任意のタイプのファイルをアップロード",
   "UploadDeviceOptionTitle": "デバイスからのアップロード",
   "UploadDevicePDFFormOptionDescription": "デバイスから完成したPDFフォームをスペースにアップロードします。",
-  "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
   "UploadFromPortalTitle": "ストレージからアップロード",
   "UploadPDFFormOptionDescription": "ワークスペースで利用可能な完成したPDFフォームを選択し、スペースにアップロードします。",
   "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ"

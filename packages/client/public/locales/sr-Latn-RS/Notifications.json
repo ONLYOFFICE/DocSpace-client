@@ -3,7 +3,7 @@
   "AdminSetupRequired": "Potrebno podešavanje od strane administratora",
   "Badges": "Značke",
   "DailyFeed": "Dnevni sadržaj {{organizationName}} {{productName}}-a",
-  "DailyFeedDescription": "Čitajte vesti i događaje iz vašeg {{organizationName}} {{productName}}-a u dnevnom pregledu.",
+  "DailyFeedDescription": "Primajte dnevni pregled vesti i događaja iz {{organizationName}} {{productName}}-a.",
   "FileActivityNotify": "Obaveštenja o aktivnostima fajla",
   "IsNotValid": "Nije validno",
   "LdapEmailTooltip": "Ovaj korisnički nalog je učitan sa LDAP-a. Email adresa korisnika nije navedena i trenutna je generisana automatski i ne može se koristiti za slanje obaveštenja.",

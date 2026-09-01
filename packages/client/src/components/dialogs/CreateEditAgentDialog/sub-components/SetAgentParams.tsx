@@ -330,9 +330,15 @@ const SetAgentParams = ({
     }
   };
 
-  const onSaveAvatar = () => {
+  // The editor dialog hands the cropped image out only through this callback
+  // (`onSave(image, preview)` in @docspace/ui-kit AvatarEditorDialog) — the
+  // `setPreview` prop below is not a live channel — so dropping `preview`
+  // here leaves the dialog without a cover until the agent is saved
+  // (Bug 83476).
+  const onSaveAvatar = (_image: unknown, preview?: string) => {
     setAvatarEditorDialogVisible?.(false);
     setCover?.();
+    if (preview) setPreviewIcon(preview);
   };
 
   const onDeleteAvatar = () => {

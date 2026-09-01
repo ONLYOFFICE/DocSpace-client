@@ -59,6 +59,7 @@ export type TUploadFile = {
   needConvert?: boolean;
   encrypted?: boolean;
   encryptionRoomId?: number | string | null;
+  reimportRealName?: string | null;
   percent: number;
   inAction?: boolean;
   inConversion?: boolean;

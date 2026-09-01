@@ -44,6 +44,8 @@ import {
   aiConfigHandler,
   roomListHandler,
   TypeRoomList,
+  tariffHandler,
+  freeQuotaHandler,
 } from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
@@ -71,8 +73,8 @@ const DESKTOP = { width: 1440, height: 1024 };
 /**
  * Below 1024 the trailing button row is dropped and the button joins the
  * control buttons instead. The header still has room for the label at this
- * width - measured: 807px of row for 807px of content - so what the tablet
- * frame pins is the move into the control buttons, not a collapse.
+ * width, so what the tablet frame pins is the move into the control buttons,
+ * not a collapse.
  */
 const TABLET = { width: 900, height: 800 };
 /**
@@ -207,41 +209,49 @@ test.describe("AI chat header button", () => {
     }
   });
 
-  test("collapses to the icon only when the row runs out of space", async ({
+  test("never collapses on a header that still has room", async ({
     page,
     baseUrl,
+    mockRequest,
   }) => {
+    // A free SaaS portal, so the tariff line is in the row too - this is the
+    // fullest the rooms root header ever gets.
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+      tariffHandler(TEST_PORT),
+      freeQuotaHandler(TEST_PORT),
+    );
+
     await page.setViewportSize(DESKTOP);
     await page.goto(`${baseUrl}${ROOMS_URL}`);
     await expect(label(page)).toBeVisible();
 
-    // Narrow until it gives up the label; it must happen, and only once the
-    // header is genuinely cramped.
-    let collapsedAt = 0;
+    // The whole range, in one sweep: the label has to survive all of it. This
+    // is the guard against a collapse driven by a breakpoint instead of by
+    // fit - any fixed width in the CSS or the component would show up as the
+    // label vanishing at one of these steps while the row is still half empty.
+    //
+    // That the rooms root never runs out is not a weakness of the test, it is
+    // the point: one short title, a 72px tariff line and ~110px of buttons fit
+    // inside 328px. The other half of the contract - that the button DOES give
+    // the label up once a row genuinely cannot hold it - needs a header under
+    // real pressure and is pinned in room-header-crowding.spec.ts ("the chat
+    // button gives up its label before its neighbours are cut"), against a
+    // long room name in Russian with the info panel open.
     for (let width = 1400; width >= 360; width -= 40) {
       await resize(page, width);
-      if (await isCollapsed(page)) {
-        collapsedAt = width;
-        break;
-      }
+      // The slot is briefly unmounted while the header swaps to its mobile
+      // layout; a missing slot is not a collapsed one.
+      if ((await slot(page).count()) === 0) continue;
+
+      expect(
+        await isCollapsed(page),
+        `the label went away at ${width}px, where the header still has room for it`,
+      ).toBe(false);
     }
 
-    expect(collapsedAt, "the button must collapse at some width").toBeGreaterThan(0);
-    expect(
-      collapsedAt,
-      "collapsing this early means it is not driven by available space",
-    ).toBeLessThan(1100);
-
-    // Collapsed means label gone, icon and accessible name kept.
-    await expect(label(page)).toBeHidden();
-    await expect(button(page)).toBeVisible();
-    await expect(button(page).locator("svg")).toBeVisible();
-    await expect(button(page)).toHaveAttribute("aria-label", "AI Chat");
-
-    // Widening puts the label back - the collapse is not a one-way trip.
-    await resize(page, 1440);
-    expect(await isCollapsed(page)).toBe(false);
     await expect(label(page)).toBeVisible();
+    await expect(button(page)).toHaveAttribute("aria-label", "AI Chat");
   });
 
   test("settles instead of flickering while collapsed", async ({
@@ -291,11 +301,17 @@ test.describe("AI chat header button", () => {
       trailingGap,
       `button sits ${Math.round(trailingGap)}px from the header's trailing edge`,
     ).toBeLessThanOrEqual(4);
+    // Flush is not the same as hanging off the end: a negative gap means the
+    // header is clipping the button, which used to pass this test unnoticed.
+    expect(trailingGap).toBeGreaterThanOrEqual(0);
 
-    // 900px is not the limit: the row fits its content exactly here, so the
-    // label stays. Where the limit actually is depends on the room name and the
-    // language, which is what the narrowing test above measures rather than
-    // pinning a breakpoint.
+    // 900px is not the limit: the header has room to spare here, so the label
+    // stays. It only genuinely has that room since the tablet grid stopped
+    // handing the title every spare pixel - before that the control column sat
+    // at its 90px minimum, the slot was squeezed to ~74px and the button was
+    // sliced down its leading edge (see top-row-fit.spec.ts). Where the limit
+    // actually is depends on the room name and the language, which is what the
+    // narrowing test above measures rather than pinning a breakpoint.
     expect(await isCollapsed(page)).toBe(false);
     await shootHeader(page, "tablet-expanded.png");
   });

@@ -484,10 +484,12 @@ const Dashboard = (props: DashboardProps) => {
             if (!visible) aiChatPanel.closeChatPanel();
           }}
           currentDeviceType={currentDeviceType}
-          isResizable={!isAiChatFullscreen}
+          isResizable
+          isFullscreen={isAiChatFullscreen}
           width={aiChatPanel.chatPanelWidth}
           onResize={aiChatPanel.setChatPanelWidth}
           onRequestFullscreen={aiChatPanel.setChatPanelFullscreen}
+          onExitFullscreen={aiChatPanel.unsetChatPanelFullscreen}
         >
           {aiChatPanel.chatPanelContent}
         </ChatPanelView>

@@ -852,6 +852,7 @@
   "EncryptionPortalSubtitle": "Dès que le processus est terminé, les données de l'espace de travail sont disponibles pour travailler.",
   "EncryptionPortalTitle": "Le processus de chiffrement en cours",
   "EncryptionPrepareFailed": "Impossible de chiffrer le fichier avant le téléversement. Le fichier n'a pas été envoyé. Veuillez réessayer ou contacter l'assistance.",
+  "EncryptionReimportFailed": "Ce fichier est une copie chiffrée téléchargée depuis une salle privée. Pour le téléverser, le fichier d'origine doit toujours se trouver dans cette salle afin que les clés d'accès puissent être restaurées. Le fichier n'a pas été envoyé.",
   "EncryptionRequiresHttps": "Le chiffrement n'est pas disponible : cette fonctionnalité nécessite une connexion HTTPS sécurisée.",
   "EncryptionUnlockRequired": "Déverrouillage du chiffrement requis",
   "EncryptionUnsupportedKeyVersion": "Cette clé de chiffrement utilise une version non prise en charge. Veuillez mettre à jour l'application pour continuer.",

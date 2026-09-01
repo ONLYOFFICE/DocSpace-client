@@ -852,6 +852,7 @@
   "EncryptionPortalSubtitle": "Tan pronto como finalice el proceso, los datos del espacio de trabajo estarán disponibles para trabajar.",
   "EncryptionPortalTitle": "Proceso de cifrado en curso",
   "EncryptionPrepareFailed": "No se pudo cifrar el archivo antes de la carga. El archivo no se ha enviado. Vuelva a intentarlo o póngase en contacto con el servicio de soporte.",
+  "EncryptionReimportFailed": "Este archivo es una copia cifrada descargada de una sala privada. Para cargarlo, el archivo original debe seguir estando en esta sala para poder restaurar las claves de acceso. El archivo no se ha enviado.",
   "EncryptionRequiresHttps": "El cifrado no está disponible: esta función requiere una conexión HTTPS segura.",
   "EncryptionUnlockRequired": "Se requiere desbloquear el cifrado",
   "EncryptionUnsupportedKeyVersion": "Esta clave de cifrado utiliza una versión no compatible. Actualice la aplicación para continuar.",

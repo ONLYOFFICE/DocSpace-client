@@ -33,10 +33,21 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { getFolder, getFileEncryptionAccess } from "../../api/files";
+import FilesFilter from "../../api/files/filter";
 import { RoomsType } from "../../enums";
 import { getFileExtension } from "../../utils/common";
-import { encryptFile } from "../encryption/file-keys";
-import { estimateEncryptedSize } from "../encryption/streaming-encryption";
+import { encryptFile, wipeDek } from "../encryption/file-keys";
+import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
+import {
+  decryptFileNameRaw,
+  estimateEncryptedSize,
+  isDSE3Format,
+  parseDSE3HeaderFromBlob,
+} from "../encryption/streaming-encryption";
+import { loadFileSenderKeysSafe } from "./room-member-keys";
+
+import type { DSE3Header, IdentityKeyPair } from "../encryption/types";
 
 export type UploadConfig = {
   file: File;
@@ -128,6 +139,103 @@ export function assertEncryptedUploadName(name: string): void {
   }
 }
 
+export function makeOpaqueUploadName(originalName: string): string {
+  const name = `${newUuid()}${getFileExtension(originalName)}`;
+  assertEncryptedUploadName(name);
+  return name;
+}
+
+export class EncryptedReimportError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "EncryptedReimportError";
+  }
+}
+
+const DSE3_MAGIC_PROBE_BYTES = 8;
+
+export async function sniffDse3Upload(file: Blob): Promise<DSE3Header | null> {
+  const magic = new Uint8Array(
+    await file.slice(0, DSE3_MAGIC_PROBE_BYTES).arrayBuffer(),
+  );
+  if (!isDSE3Format(magic)) return null;
+  try {
+    const { header } = await parseDSE3HeaderFromBlob(file);
+    return header;
+  } catch (error) {
+    throw new EncryptedReimportError(
+      `DSE3 magic with unreadable header: ${(error as Error)?.message}`,
+    );
+  }
+}
+
+const UUID_IN_NAME_RE =
+  /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
+
+export type ReimportRecovery = {
+  dek: Uint8Array;
+  realName: string;
+  sourceFileId: number;
+};
+
+export async function recoverDekForReimport(params: {
+  file: File;
+  header: DSE3Header;
+  roomId: number | string;
+  userId: string;
+  identity: IdentityKeyPair;
+}): Promise<ReimportRecovery> {
+  const { file, header, roomId, userId, identity } = params;
+
+  if (!header.encryptedName) {
+    throw new EncryptedReimportError(
+      "uploaded DSE3 blob has no embedded name to verify a DEK against",
+    );
+  }
+  const encryptedName = header.encryptedName;
+
+  const uuidMatch = file.name.toLowerCase().match(UUID_IN_NAME_RE);
+  if (!uuidMatch) {
+    throw new EncryptedReimportError(
+      `uploaded DSE3 blob name carries no source uuid: ${JSON.stringify(file.name)}`,
+    );
+  }
+
+  const filter = FilesFilter.getDefault();
+  filter.search = uuidMatch[0];
+  filter.withSubfolders = true;
+  const { files } = await getFolder(roomId, filter);
+
+  for (const candidate of files) {
+    if (!candidate.encrypted) continue;
+    let dek: Uint8Array | null = null;
+    try {
+      const info = await getFileEncryptionAccess(candidate.id);
+      if (!info?.fileKeys?.length) continue;
+      const roomMemberKeys = await loadFileSenderKeysSafe(candidate.id, roomId);
+      dek = await unwrapDekForCurrentUser({
+        fileKeys: info.fileKeys,
+        roomMemberKeys,
+        currentUserId: userId,
+        currentIdentity: identity,
+        fileId: candidate.id,
+      });
+      const realName = await decryptFileNameRaw(
+        encryptedName,
+        dek,
+        header.fileNonce,
+      );
+      return { dek, realName, sourceFileId: candidate.id };
+    } catch {
+      if (dek) wipeDek(dek);
+    }
+  }
+
+  throw new EncryptedReimportError(
+    "no source file in the room decrypts the uploaded blob",
+  );
+}
+
 export async function prepareEncryptedUpload(
   config: UploadConfig,
 ): Promise<PreparedUpload> {
@@ -146,14 +254,18 @@ export async function prepareEncryptedUpload(
     };
   }
 
+  if ((await sniffDse3Upload(file)) !== null) {
+    throw new EncryptedReimportError(
+      "upload is already a DSE3 blob — refusing to encrypt it again",
+    );
+  }
+
   const { encryptedBlob, dek } = await encryptFile(file, {
     fileName: file.name,
     onProgress,
   });
 
-  const ext = getFileExtension(file.name);
-  const uploadFileName = `${newUuid()}${ext}`;
-  assertEncryptedUploadName(uploadFileName);
+  const uploadFileName = makeOpaqueUploadName(file.name);
 
   return {
     data: encryptedBlob,

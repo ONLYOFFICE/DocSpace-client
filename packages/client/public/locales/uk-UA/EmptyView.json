@@ -41,7 +41,7 @@
   "MigrationDataDescription": "Перенесіть ваші дані до {{productName}} з Workspace {{organizationName}}, Google Workspace або Nextcloud.",
   "MigrationDataTitle": "Імпортувати дані",
   "PublicRoomEmptyTitle": "Ласкаво просимо до публічної кімнати",
-  "SectionsUploadDescription": "Завантажити файли будь-якого типу з {{sectionNameFirst}} або {{sectionNameSecond}}",
+  "SectionsUploadDescription": "Передайте файли будь-якого типу з {{sectionNameFirst}} або {{sectionNameSecond}}",
   "SendInvitationLetter": "Надішліть лист-запрошення, щоб додати нових учасників до робочого простору",
   "ShareOptionDescription": "Скопіюйте посилання публічного доступу або запросіть інших користувачів до простору, щоб розпочати процес заповнення форм.",
   "ShareOptionTitle": "Поділитися простором",

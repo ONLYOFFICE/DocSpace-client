@@ -3,7 +3,7 @@
   "AdminSetupRequired": "පරිපාලක සැකසුම අවශ්‍යයි",
   "Badges": "චිහ්න",
   "DailyFeed": "දෛනික {{organizationName}} {{productName}} සංග්‍රහය",
-  "DailyFeedDescription": "ඔබගේ {{organizationName}} {{productName}} වෙතින් පුවත් සහ සිදුවීම් දිනපතා සඟරාවකින් කියවන්න.",
+  "DailyFeedDescription": "{{organizationName}} {{productName}} වෙතින් පුවත් සහ සිදුවීම් දිනපතා සඟරාවක් ලබා ගන්න.",
   "FileActivityNotify": "ගොනු ක්‍රියාකාරකම් දැනුම්දීම්",
   "IsNotValid": "වලංගු නොවේ",
   "LdapEmailTooltip": "මෙම පරිශීලක ගිණුම LDAP වෙතින් පූරණය කර ඇත. පරිශීලකයාගේ විද්‍යුත් තැපැල් ලිපිනය නිශ්චිතව දක්වා නොමැති අතර, වත්මන් එක ස්වයංක්‍රීයව ජනනය කර ඇති අතර දැනුම්දීම් යැවීමට භාවිතා කළ නොහැක.",

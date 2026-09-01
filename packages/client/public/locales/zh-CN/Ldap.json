@@ -5,7 +5,7 @@
   "LdapAttributeMapping": "属性映射",
   "LdapAuthenticationTooltip": "如果当前用户无权从 LDAP 服务器 读取，请启用此选项，并输入具有读取权限的其他用户的凭据。",
   "LdapAutoSyncToggle": "自动同步",
-  "LdapAutoSyncToggleDescription": "同步将允许从工作区上传所有数据并在更改设置后更新新数据。每次工作区中有新用户数据时都将进行同步。",
+  "LdapAutoSyncToggleDescription": "同步会拉取您工作区的所有数据，并在设置发生更改时保持更新——只要有新的用户数据需要导入，随时运行同步即可。",
   "LdapAvatar": "个人资料照片",
   "LdapCertificateConfirm": "确认证书",
   "LdapConnectionType": "连接类型",

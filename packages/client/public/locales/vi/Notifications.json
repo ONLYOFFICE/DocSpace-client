@@ -15,5 +15,5 @@
   "SuccessConnected": "{{serviceName}} đã được kết nối thành công như một kênh thông báo. Bạn sẽ nhận được thông báo ở đó từ bây giờ.",
   "SuccessDisconnected": "{{serviceName}} đã được hủy kết nối thành công như một kênh thông báo. Thông báo sẽ không còn được gửi đến đó.",
   "UsefulTips": "Các mẹo hữu ích sử dụng {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Khám phá các mẹo và hướng dẫn hữu ích để sử dụng {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Khám phá các mẹo và hướng dẫn hữu ích để sử dụng {{organizationName}} {{productName}}."
 }

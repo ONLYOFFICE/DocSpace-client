@@ -53,7 +53,7 @@
   "SsoIntro": "SAML vasitəsilə üçüncü tərəf doğrulamasını aktivləşdirin və istifadəçilərə iş sahəsinə daxil olmaq üçün daha sürətli, asan və təhlükəsiz yol təqdim edin.",
   "StandardDecryptionAlgorithm": "Defolt Şifrə Açma Alqoritmi",
   "TurnOnSSO": "Birdəfəlik Girişli Doğrulamanı aktivləşdirin",
-  "TurnOnSSOCaption": "SSO xidmətindən istifadəçiləri avtomatik olaraq iş sahənizə əlavə etmək istəyirsinizsə, bu seçimi aktiv edin.",
+  "TurnOnSSOCaption": "Bunu aktivləşdirərək SSO xidmətinizdəki istifadəçiləri avtomatik olaraq əlavə edin.",
   "UploadXML": "Tələb olunan sahələri avtomatik doldurmaq üçün XML-dən metadata yükləyin.",
   "UploadXMLPlaceholder": "İdentifikasiya provayderi Metadata XML üçün URL",
   "UsedFor": "İstifadə etmək üçün"

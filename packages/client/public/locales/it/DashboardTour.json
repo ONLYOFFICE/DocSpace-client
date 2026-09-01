@@ -7,11 +7,11 @@
   "DashboardDevToolsTitle": "Sviluppate con {{organizationName}}",
   "DashboardIntegrations": "Utilizzate già un'altra piattaforma? Collegatela e portate editor e app direttamente negli strumenti che il vostro team utilizza già: senza codice, senza nulla da migrare.",
   "DashboardIntegrationsTitle": "Collegate la vostra piattaforma",
-  "DashboardOverview": "Questa pagina è sempre a un clic di distanza: aprite {{overview}} nella barra laterale ogni volta che volete tornarci.",
+  "DashboardOverview": "Questa pagina è sempre a un clic di distanza — aprite {{overview}} nella barra laterale ogni volta che ne avete bisogno.",
   "DashboardOverviewTitle": "Tornate quando volete",
   "DashboardProfile": "Qui trovate il nome del vostro spazio di lavoro e il riepilogo del profilo: nome, e-mail e password. Da qui potete rinominare lo spazio di lavoro o aggiornare la password in qualsiasi momento. Per modificare altre impostazioni, andate alla pagina Profilo.",
   "DashboardProfileTitle": "Controllate i dati del vostro profilo",
-  "WelcomeDashboardSubtitle": "Tutto comincia da questa pagina",
+  "WelcomeDashboardSubtitle": "Tutto inizia qui",
   "WelcomeDashboardTitle": "Benvenuti in {{organizationName}}",
   "WelcomeDescription": "Create documenti, collaborate nelle stanze, raccogliete dati con i moduli e lasciate che sia l'IA a occuparsi del lavoro ripetitivo, tutto in un unico posto. Pronti per un tour veloce?",
   "WelcomeLater": "Forse più tardi"

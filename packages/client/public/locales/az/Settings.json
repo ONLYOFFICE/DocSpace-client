@@ -18,7 +18,7 @@
   "Admins": "Adminlər",
   "AdminsMessage": "Administrator mesajı",
   "AdminsMessageMobileDescription": "Admin Mesaj Parametrləri super administrator ilə əlaqə qurmağın bir yoludur.",
-  "AdminsMessageSettingDescription": "Giriş səhifəsində super administrator ilə əlaqə formasını göstərmək üçün bu seçimi aktivləşdirin.",
+  "AdminsMessageSettingDescription": "Giriş səhifəsində istifadəçilərin tam adminlərinizlə əlaqə saxlaya bilməsi üçün forma göstərin.",
   "AIAgentQuotaDisabled": "AI agenti kvotası uğurla deaktiv edildi.",
   "AIAgentQuotaEnabled": "AI agenti kvotası uğurla aktiv edildi.",
   "AiServicesManagement": "{{aiServices}}",

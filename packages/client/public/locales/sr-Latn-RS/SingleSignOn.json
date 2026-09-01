@@ -50,7 +50,7 @@
   "spSignResponseRequest": "Potpisivanje odgovora na odjavljivanje",
   "SPSingleLogoutURL": "URL pružaoca usluga za jednostrano odjavljivanje (podrška za POST i Redirect vezivanje):",
   "SPSingleLogoutURLTooltip": "URL koji se koristi za jednostrano odjavljivanje na strani Identitetskog pružaoca",
-  "SsoIntro": "Odeljak za Jednokratnu prijavu omogućava vam da omogućite/onemogućite autentifikaciju treće strane korišćenjem SAML-a, čime se korisnicima pruža brži, jednostavniji i sigurniji način pristupa radnom prostoru.",
+  "SsoIntro": "Omogućite autentifikaciju treće strane putem SAML-a i pružite korisnicima brži, jednostavniji i bezbedniji način pristupa radnom prostoru.",
   "StandardDecryptionAlgorithm": "Podrazumevani Algoritam za dekripciju",
   "TurnOnSSO": "Omogući jednokratnu prijavu (Single Sign-on) autentifikaciju",
   "TurnOnSSOCaption": "Omogućite ovu opciju ako želite da automatski dodate korisnike iz SSO servisa u vaš radni prostor.",

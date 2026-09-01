@@ -53,7 +53,7 @@
   "SsoIntro": "Activez l'authentification tierce via SAML pour offrir aux utilisateurs un moyen plus rapide, plus facile et plus sûr d'accéder à l'espace de travail.",
   "StandardDecryptionAlgorithm": "Algorithme de déchiffrement par défaut",
   "TurnOnSSO": "Activer l’authentification unique",
-  "TurnOnSSOCaption": "Activez cette option si vous souhaitez ajouter automatiquement des utilisateurs du service SSO à votre espace de travail.",
+  "TurnOnSSOCaption": "Activez cette option pour ajouter automatiquement les utilisateurs de votre service SSO.",
   "UploadXML": "Charger des métadonnées à partir de XML pour remplir automatiquement les champs obligatoires.",
   "UploadXMLPlaceholder": "URL vers les métadonnées XML du fournisseur d'identité",
   "UsedFor": "Utiliser pour"

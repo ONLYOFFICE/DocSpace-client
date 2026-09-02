@@ -193,7 +193,7 @@ const PortalIntegration = (props) => {
           />
         ))}
       </div>
-      <Integration />
+      <Integration narrow />
     </div>
   );
 };

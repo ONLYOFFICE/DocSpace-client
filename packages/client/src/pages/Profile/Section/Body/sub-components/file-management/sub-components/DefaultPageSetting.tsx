@@ -47,12 +47,14 @@ import { isMobile } from "@docspace/shared/utils";
 type Props = {
   defaultFolderType?: SettingsStore["defaultFolderType"];
   updateDefaultFolderType?: SettingsStore["updateDefaultFolderType"];
+  aiServicesEnabled?: SettingsStore["aiServicesEnabled"];
   userType?: UserStore["userType"];
 };
 
 const StartPageSettingComponent = ({
   defaultFolderType,
   updateDefaultFolderType,
+  aiServicesEnabled,
   userType,
 }: Props) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
@@ -67,6 +69,10 @@ const StartPageSettingComponent = ({
 
     if (isGuest) {
       unavailableOptions.push(FolderType.USER);
+    }
+
+    if (!aiServicesEnabled) {
+      unavailableOptions.push(FolderType.AIAgents);
     }
 
     const options = [
@@ -135,11 +141,17 @@ const StartPageSettingComponent = ({
 
 export const DefaultPageSetting = inject(
   ({ settingsStore, userStore }: TStore) => {
-    const { defaultFolderType, updateDefaultFolderType } = settingsStore;
+    const { defaultFolderType, updateDefaultFolderType, aiServicesEnabled } =
+      settingsStore;
 
     const { userType } = userStore;
 
-    return { defaultFolderType, updateDefaultFolderType, userType };
+    return {
+      defaultFolderType,
+      updateDefaultFolderType,
+      aiServicesEnabled,
+      userType,
+    };
   },
 )(observer(StartPageSettingComponent));
 

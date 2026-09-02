@@ -45,13 +45,14 @@ import {
 import { setupServer } from "../../../__mocks__/e2e/msw-compat";
 import {
   encryptedFilesHandlers,
+  privacyroomAccessHandlers,
   type EncryptedFilesHandlerHandle,
 } from "../../../__mocks__/handlers";
 
 import { startUploadSession } from "../../../api/files";
 
 import { generateIdentityKeyPair } from "../../encryption/identity";
-import { encryptFile } from "../../encryption/file-keys";
+import { decryptFile, encryptFile } from "../../encryption/file-keys";
 import { wrapDekForRecipients } from "../../encryption/room-file-access";
 import { isDSE3Format } from "../../encryption/streaming-encryption";
 import { resetTofuStores } from "../../encryption/tofu-store";
@@ -59,6 +60,11 @@ import { arrayBufferToBase64 } from "../../encryption/utils";
 import type { IdentityKeyPair } from "../../encryption/types";
 
 import { downloadAndDecryptFile } from "../encrypted-download";
+import {
+  EncryptedReimportError,
+  recoverDekForReimport,
+  sniffDse3Upload,
+} from "../encrypted-upload";
 
 const PORT = "3000";
 const ROOM_ID = 5500;
@@ -78,6 +84,7 @@ const server = setupServer(
     ownerId: ALICE_ID,
     handle: filesHandle,
   }),
+  ...privacyroomAccessHandlers(PORT),
 );
 
 class MockOpenRequest {
@@ -255,5 +262,158 @@ describe("encrypted download — integration via MSW", () => {
 
     expect(result.success).toBe(false);
     expect(result.error).toMatch(/404|not found/i);
+  });
+});
+
+describe("encrypted re-import — integration via MSW", () => {
+  const SOURCE_UUID = "9f8b7c6d-1a2b-4c3d-8e4f-556677889900";
+  const SOURCE_TITLE = `${SOURCE_UUID}.txt`;
+  const SOURCE_ID = 4242;
+
+  const seedSourceFile = async (alice: IdentityKeyPair, wrapDek?: Uint8Array) => {
+    const originalText = "Re-imported private content.";
+    const plainBytes = new TextEncoder().encode(originalText);
+    const { encryptedBlob, dek } = await encryptFile(plainBytes, {
+      fileName: "report.txt",
+    });
+    const wrapped = await wrapDekForRecipients({
+      dek: wrapDek ?? dek,
+      senderIdentity: alice,
+      senderUserId: ALICE_ID,
+      recipients: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+      fileId: SOURCE_ID,
+    });
+    const encryptedBytes = await blobToUint8Array(encryptedBlob);
+
+    filesHandle.current!.setFiles([
+      {
+        id: SOURCE_ID,
+        title: SOURCE_TITLE,
+        serverTitle: SOURCE_TITLE,
+        size: plainBytes.byteLength,
+        encrypted: true,
+        fileKeys: wrapped,
+        bytes: encryptedBytes,
+      },
+    ]);
+    filesHandle.current!.setRoomUserKeys([
+      {
+        id: "1",
+        userId: ALICE_ID,
+        publicKey: pubB64(alice),
+        privateKeyEnc: "",
+        date: "2026-01-01T00:00:00.000Z",
+        cryptoEngineId: "",
+      },
+    ]);
+
+    return { encryptedBytes, originalText };
+  };
+
+  it("recovers the source DEK and the real name from the uploaded blob", async () => {
+    const alice = await generateIdentityKeyPair();
+    const { encryptedBytes, originalText } = await seedSourceFile(alice);
+
+    const rawFile = new File([encryptedBytes as BlobPart], SOURCE_TITLE);
+    const header = await sniffDse3Upload(rawFile);
+    expect(header).not.toBeNull();
+
+    const recovery = await recoverDekForReimport({
+      file: rawFile,
+      header: header!,
+      roomId: ROOM_ID,
+      userId: ALICE_ID,
+      identity: alice,
+    });
+
+    expect(recovery.sourceFileId).toBe(SOURCE_ID);
+    expect(recovery.realName).toBe("report.txt");
+
+    const { data } = await decryptFile(encryptedBytes, recovery.dek);
+    const decrypted = new TextDecoder().decode(await blobToUint8Array(data));
+    expect(decrypted).toBe(originalText);
+  });
+
+  it("recovers via the uuid even when the browser deduplicated the download name", async () => {
+    const alice = await generateIdentityKeyPair();
+    const { encryptedBytes } = await seedSourceFile(alice);
+
+    const rawFile = new File(
+      [encryptedBytes as BlobPart],
+      `${SOURCE_UUID} (1).txt`,
+    );
+    const header = await sniffDse3Upload(rawFile);
+
+    const recovery = await recoverDekForReimport({
+      file: rawFile,
+      header: header!,
+      roomId: ROOM_ID,
+      userId: ALICE_ID,
+      identity: alice,
+    });
+    expect(recovery.realName).toBe("report.txt");
+  });
+
+  it("rejects when the uploaded name carries no source uuid", async () => {
+    const alice = await generateIdentityKeyPair();
+    const { encryptedBytes } = await seedSourceFile(alice);
+
+    const renamed = new File([encryptedBytes as BlobPart], "renamed.txt");
+    const header = await sniffDse3Upload(renamed);
+
+    await expect(
+      recoverDekForReimport({
+        file: renamed,
+        header: header!,
+        roomId: ROOM_ID,
+        userId: ALICE_ID,
+        identity: alice,
+      }),
+    ).rejects.toBeInstanceOf(EncryptedReimportError);
+  });
+
+  it("rejects when the room has no source file for the blob", async () => {
+    const alice = await generateIdentityKeyPair();
+    const { encryptedBlob } = await encryptFile(
+      new TextEncoder().encode("orphan"),
+      { fileName: "orphan.txt" },
+    );
+    const encryptedBytes = await blobToUint8Array(encryptedBlob);
+    filesHandle.current!.setFiles([]);
+
+    const rawFile = new File([encryptedBytes as BlobPart], SOURCE_TITLE);
+    const header = await sniffDse3Upload(rawFile);
+
+    await expect(
+      recoverDekForReimport({
+        file: rawFile,
+        header: header!,
+        roomId: ROOM_ID,
+        userId: ALICE_ID,
+        identity: alice,
+      }),
+    ).rejects.toBeInstanceOf(EncryptedReimportError);
+  });
+
+  it("rejects when the source file's DEK does not decrypt the blob", async () => {
+    const alice = await generateIdentityKeyPair();
+    const { dek: foreignDek } = await encryptFile(
+      new TextEncoder().encode("other file"),
+      { fileName: "other.txt" },
+    );
+    const { encryptedBytes } = await seedSourceFile(alice, foreignDek);
+
+    const rawFile = new File([encryptedBytes as BlobPart], SOURCE_TITLE);
+    const header = await sniffDse3Upload(rawFile);
+
+    await expect(
+      recoverDekForReimport({
+        file: rawFile,
+        header: header!,
+        roomId: ROOM_ID,
+        userId: ALICE_ID,
+        identity: alice,
+      }),
+    ).rejects.toBeInstanceOf(EncryptedReimportError);
   });
 });

@@ -1,0 +1,29 @@
+{
+  "key_path": "PayNow",
+  "content": "Pay now",
+  "content_en_sha1_hash": "748c323563fa6fbdd11c83ad179d271f720fa73a",
+  "created_at": "2026-08-27T15:37:35.205Z",
+  "updated_at": "2026-08-27T15:39:15.783Z",
+  "comment": {
+    "text": "Button label in the billing overview that appears when a user is in a grace period and needs to process a payment to maintain their plan.",
+    "is_auto": true,
+    "updated_at": "2026-08-27T15:39:15.783Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
+      "line_number": 120,
+      "context": "size={isMobile ? ButtonSize.normal : ButtonSize.small}\n label={\n isGracePeriod\n ? isBalanceInsufficient\n ? t(\"TopUpAndRenew\")\n : t(\"PayNow\")\n : t(\"UpgradePlan\")\n }\n onClick={isGracePeriod ? onRenewPlan : onEditPlan}\n isDisabled={isGracePeriod && isCardMissingOrInactive}\n isLoading={isLoading}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

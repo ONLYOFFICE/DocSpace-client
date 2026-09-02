@@ -43,6 +43,13 @@ export { ProviderType, ServerType };
 // at a call site would not fail typechecking.
 export const SYSTEM_AI_PROFILE_PROVIDER_TYPE = "onlyoffice";
 
+// The chat-lib profile `providerType` of OpenRouter — the only gateway a
+// standalone portal can reach the models we recommend through (the system
+// provider above is hidden there; on SaaS it is the other way round, the
+// models come with the portal's own AI). Same typing caveat as the constant
+// above.
+export const OPENROUTER_AI_PROFILE_PROVIDER_TYPE = "openrouter";
+
 // Bit flags of the chat-lib profile `capabilities` field. Must match
 // `CapabilitiesUI` in @onlyoffice/ai-chat and the C# `Capabilities` enum in
 // ASC.AI.Integration — the field travels end-to-end as a plain number.

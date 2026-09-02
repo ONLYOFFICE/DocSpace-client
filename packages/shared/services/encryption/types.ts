@@ -65,6 +65,7 @@ export const DSE3_FILE_NONCE_SIZE = 16;
 export const DSE3_CHUNK_OVERHEAD = AES_GCM_IV_SIZE + AES_GCM_TAG_SIZE;
 export const DSE3_MAX_CHUNK_COUNT = 0x40000000;
 export const DSE3_FLAG_HAS_ENCRYPTED_NAME = 0x01;
+export const DSE3_FLAG_IS_FORM = 0x02;
 export const CHUNKED_ENCRYPTION_THRESHOLD = 5 * 1024 * 1024;
 
 export const USER_ID_BYTES = 16;
@@ -104,6 +105,7 @@ export type DSE3Header = {
   version: number;
   suite: number;
   flags: number;
+  isForm: boolean;
   chunkPlaintextSize: number;
   chunkCount: number;
   fileNonce: Uint8Array;

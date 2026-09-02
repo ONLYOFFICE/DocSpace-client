@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "Nadzirajte, kateri IP naslovi, obsegi ali gostitelji imajo dostop do {{service}}",
   "AdditionalUsers": "Dodatni uporabniki",
   "AddRule": "Dodaj pravilo",
+  "AdminAccessDescription": "{{service}} lahko konfigurirajo samo skrbniki. Dokumentacijo API si lahko še vedno ogledate.",
   "AnonymousNoHint": "(Do dokumentov lahko dostopajo samo avtenticirani uporabniki)",
   "AnonymousSupport": "Anonimna podpora",
   "AnonymousSupportDescription": "Dovoli dostop do dokumentov uporabnikom brez avtentikacije",

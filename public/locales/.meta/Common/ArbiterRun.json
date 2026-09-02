@@ -3,7 +3,7 @@
   "content": "Run",
   "content_en_sha1_hash": "b1b392607deaf29a7e81453e069b7c07a32a6b18",
   "created_at": "2026-05-24T17:27:18.530Z",
-  "updated_at": "2026-05-24T18:45:17.230Z",
+  "updated_at": "2026-08-28T14:38:40.323Z",
   "comment": {
     "text": "Button label used to initiate the AI Arbiter process.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
-      "line_number": 235,
-      "context": "className={styles.runBtn}\n type=\"button\"\n onClick={run}\n disabled={!canRun || !question.trim()}\n >\n {t(\"Common:ArbiterRun\")}\n </button>\n )}\n </div>\n \n <div className={styles.metaRow}>",
+      "line_number": 248,
+      "context": "/>\n ) : (\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:ArbiterRun\")}\n isDisabled={!canRun || !question.trim()}\n onClick={() => run()}\n />\n )}\n </div>",
       "module": "/packages/sdk"
     }
   ],

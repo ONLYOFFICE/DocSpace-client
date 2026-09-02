@@ -6,6 +6,7 @@
   "AddAccessRuleDescription": "Hallitse, mitkä IP-osoitteet, alueet tai isännät voivat käyttää palvelua {{service}}",
   "AdditionalUsers": "Lisäkäyttäjät",
   "AddRule": "Lisää sääntö",
+  "AdminAccessDescription": "Vain järjestelmänvalvojat voivat määrittää {{service}}-palvelun asetukset. Voit edelleen tarkastella API-dokumentaatiota.",
   "AnonymousNoHint": "(Vain todennetut käyttäjät voivat käyttää asiakirjoja)",
   "AnonymousSupport": "Anonyymin käytön tuki",
   "AnonymousSupportDescription": "Salli käyttäjien käyttää asiakirjoja ilman todennusta",

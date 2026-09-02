@@ -249,7 +249,11 @@ class AuthStore {
         const user = this.userStore?.user;
 
         // Load encryption keys for the authenticated user (needed for private rooms)
-        if (user?.id && this.isAuthenticated) {
+        if (
+          user?.id &&
+          this.isAuthenticated &&
+          !this.currentTariffStatusStore?.isNotPaidPeriod
+        ) {
           requests.push(
             this.userStore?.getEncryptionKeys().catch(() => {
               // Encryption keys not available — not critical for app init

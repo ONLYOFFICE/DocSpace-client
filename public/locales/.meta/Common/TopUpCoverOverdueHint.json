@@ -1,0 +1,29 @@
+{
+  "key_path": "TopUpCoverOverdueHint",
+  "content": "The minimum amount required to cover the overdue payment is <1>{{price}}</1>. The entered amount will be charged after you attach your payment method.",
+  "content_en_sha1_hash": "dab06a499b5281c8458a8e8940e3ffc023e79dd0",
+  "created_at": "2026-08-27T15:37:45.202Z",
+  "updated_at": "2026-08-27T15:38:32.437Z",
+  "comment": {
+    "text": "Helper text for a billing input field appearing during a grace period for overdue payments. The `{{price}}` variable represents the required amount to cover the debt and is styled as bold text.",
+    "is_auto": true,
+    "updated_at": "2026-08-27T15:38:32.437Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
+      "line_number": 249,
+      "context": "isGracePeriod ? t(\"TopUpCoverOverdueDescription\") : undefined\n }\n helperText={\n isGracePeriod ? (\n <CommonTrans\n i18nKey=\"TopUpCoverOverdueHint\"\n values={{ price: formatPaymentCurrency(overduePlanCost, 2) }}\n components={{ 1: <Text as=\"span\" fontWeight={600} /> }}\n />\n ) : undefined\n }",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

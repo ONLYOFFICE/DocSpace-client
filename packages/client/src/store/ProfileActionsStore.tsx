@@ -60,7 +60,10 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isMobile } from "react-device-detect";
 import axios from "axios";
 
-import { zendeskAPI } from "@docspace/shared/components/zendesk/Zendesk.utils";
+// Must be the very singleton the mounted widget flushes its queue from
+// (AppsSidebar/LiveChatBlock renders the ui-kit Zendesk) - shared has a second,
+// unrelated copy whose queued commands nobody ever delivers.
+import { zendeskAPI } from "@docspace/ui-kit/components/article/zendesk/Zendesk.utils";
 import { CategoryType } from "@docspace/shared/constants";
 
 import type { AuthStore } from "@docspace/shared/store/AuthStore";

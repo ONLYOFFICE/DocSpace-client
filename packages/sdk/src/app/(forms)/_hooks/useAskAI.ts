@@ -36,39 +36,47 @@
 "use client";
 
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import {
-  attachFilesToChat,
-  getOnlyofficeFileType,
+  useAttachHostFilesToChat,
+  notifyAlreadyAttached,
+  notifyAttachmentLimit,
 } from "@docspace/ui-kit/ai-agent/providers/files";
-import { FileType } from "@docspace/shared/enums";
 import type { TFile } from "@docspace/shared/api/files/types";
 
 export default function useAskAI() {
-  const { useAttachmentsStore } = useStores();
+  const { t } = useTranslation(["Common"]);
+  const attachToChat = useAttachHostFilesToChat();
   const openChat = useOpenAiChat();
 
   return useCallback(
     (file: TFile) => {
       openChat();
 
-      const input = {
-        path: String(file.id),
-        title: file.title,
-        type: getOnlyofficeFileType(file.fileExst || file.title),
-        content: "",
-      };
-
-      const imageIndices =
-        file.fileType === FileType.Image ? new Set([0]) : new Set<number>();
-
-      attachFilesToChat(useAttachmentsStore, [input], imageIndices).catch((e) =>
-        toastr.error(e as string),
-      );
+      // The shared hook owns the whole attach contract — duplicate filter,
+      // attachment cap, loading chip, image bucket — so this action only has
+      // to report what it left out.
+      attachToChat([
+        {
+          id: file.id,
+          title: file.title,
+          fileExst: file.fileExst,
+          fileType: file.fileType,
+          // Carry the form metadata: the hook reads it to decide whether
+          // the chat offers the form-specific hints.
+          isForm: file.isForm,
+          externalDbTableName: file.externalDbTableName,
+        },
+      ])
+        .then(({ duplicates, skippedOverLimit }) => {
+          notifyAlreadyAttached(t, duplicates);
+          notifyAttachmentLimit(t, skippedOverLimit);
+        })
+        .catch((e: unknown) => toastr.error(e as string));
     },
-    [openChat, useAttachmentsStore],
+    [openChat, attachToChat, t],
   );
 }

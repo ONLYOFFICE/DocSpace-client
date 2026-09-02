@@ -48,6 +48,7 @@ import {
   DSE3_FILE_NONCE_SIZE,
   DSE3_FIXED_HEADER_SIZE,
   DSE3_FLAG_HAS_ENCRYPTED_NAME,
+  DSE3_FLAG_IS_FORM,
   DSE3_MAX_CHUNK_COUNT,
   DSE3_MAX_CHUNK_SIZE,
   MAGIC_DSE3_FILE,
@@ -78,6 +79,7 @@ export function writeDSE3Header(
   chunkCount: number,
   fileNonce: Uint8Array,
   encryptedName: Uint8Array | null,
+  isForm: boolean = false,
 ): Uint8Array {
   if (chunkCount < 1 || chunkCount > DSE3_MAX_CHUNK_COUNT) {
     throw new InvalidFormatError(`invalid chunkCount: ${chunkCount}`);
@@ -91,7 +93,9 @@ export function writeDSE3Header(
   if (nameLen > 0xffff) {
     throw new InvalidFormatError("encryptedName length exceeds u16");
   }
-  const flags = encryptedName ? DSE3_FLAG_HAS_ENCRYPTED_NAME : 0;
+  const flags =
+    (encryptedName ? DSE3_FLAG_HAS_ENCRYPTED_NAME : 0) |
+    (isForm ? DSE3_FLAG_IS_FORM : 0);
 
   return concatBuffers(
     MAGIC_DSE3_FILE,
@@ -158,6 +162,7 @@ export function parseDSE3Header(
     version,
     suite,
     flags,
+    isForm: (flags & DSE3_FLAG_IS_FORM) !== 0,
     chunkPlaintextSize,
     chunkCount,
     fileNonce,
@@ -281,6 +286,7 @@ export async function encryptChunked(
    * Callers that need to encrypt the filename under the same nonce should
    * supply it here. */
   fileNonceIn?: Uint8Array,
+  isForm: boolean = false,
 ): Promise<Blob> {
   const subtle = getCrypto();
   const aesKey = await importDek(dek, ["encrypt"]);
@@ -313,7 +319,7 @@ export async function encryptChunked(
       `fileNonce must be ${DSE3_FILE_NONCE_SIZE} bytes`,
     );
   }
-  const header = writeDSE3Header(chunkCount, fileNonce, encryptedName);
+  const header = writeDSE3Header(chunkCount, fileNonce, encryptedName, isForm);
   const parts: BlobPart[] = [header as BlobPart];
 
   for (let i = 0; i < chunkCount; i++) {

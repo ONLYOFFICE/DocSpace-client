@@ -90,12 +90,14 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 
 import "@docspace/shared/styles/theme.scss";
 
+import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { setFileView } from "SRC_DIR/helpers/info-panel";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 import { ModelUpdatedBanner } from "SRC_DIR/pages/Home/View/ModelUpdatedBanner";
 import { useAiAgentsPickerActions } from "SRC_DIR/Hooks/useAiAgentsPickerActions";
+import { useFormsRecommendation } from "SRC_DIR/Hooks/useFormsRecommendation";
 
 import config from "PACKAGE_FILE";
 
@@ -144,6 +146,7 @@ const Shell = ({ page = "home", ...rest }) => {
     setLogoText,
     standalone,
     isGuest,
+    isNotPaidPeriod,
     isAdmin,
     isPayer,
     isRoomAdmin,
@@ -157,6 +160,7 @@ const Shell = ({ page = "home", ...rest }) => {
     agentEntityId,
     isInsideAgentRoom,
     canEditAgentRoom,
+    recommendedModelForForms,
     getAgentRoomId,
     openResultFile,
     closeEditorPanel,
@@ -792,8 +796,8 @@ const Shell = ({ page = "home", ...rest }) => {
   // Anonymous sessions (public room / public preview via a share link) and
   // guests must never issue AI calls: they answer 401, and the shared axios
   // client reacts to a 401 with logout + redirect to the login page, killing
-  // the public link view.
-  const canUseAi = isAuthenticated && !isGuest;
+  // the public link view. An unpaid portal skips AI boot requests entirely.
+  const canUseAi = isAuthenticated && !isGuest && !isNotPaidPeriod;
 
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.
@@ -862,6 +866,18 @@ const Shell = ({ page = "home", ...rest }) => {
         : null,
     [isInsideAgentRoom, pickedAgent],
   );
+
+  // The in-chat notice recommending the model tested for form results. Only
+  // inside an AI agent room, as the legacy chat had it: elsewhere the chat
+  // answers with the portal default and there is no agent to re-point.
+  const formsRecommendation = useFormsRecommendation({
+    // `agentEntityId` is dropped for an agent room opened without the UseChat
+    // right (the pane is a view-only stub there) — no chat, nothing to notice.
+    enabled: !!isInsideAgentRoom && !!agentEntityId,
+    agentRoomId: agentEntityId,
+    canEditAgent: !!canEditAgentRoom,
+    recommendedModel: recommendedModelForForms,
+  });
 
   // Chat error box override (Bug 83207): the wallet 402 must read as a
   // human message with a way to top up instead of the raw provider text.
@@ -940,6 +956,7 @@ const Shell = ({ page = "home", ...rest }) => {
           // UI are switched off. Viewer-role gating inside agent rooms is
           // handled by `accessRightsStore.canUseChat` in AIAgentView.
           canUseAi={canUseAi}
+          formsRecommendation={formsRecommendation}
           callbacks={aiChatCallbacks}
           entityId={agentEntityId}
           contextEntityId={chatContextEntityId}
@@ -1051,6 +1068,11 @@ const ShellWrapper = inject(
     } = dialogsStore;
     const { user } = userStore;
 
+    // What the chat would be scoped to at the current location, before the
+    // exceptions below decide whether it may be scoped there at all.
+    const chatScopeId =
+      selectedFolderStore.rootRoomId || selectedFolderStore.id;
+
     const pagesWithoutNavMenu =
       clientError ||
       isPortalDeactivate ||
@@ -1107,6 +1129,7 @@ const ShellWrapper = inject(
       setConvertPasswordDialogVisible,
       version,
       pagesWithoutNavMenu,
+      isNotPaidPeriod,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
       logoText,
@@ -1143,16 +1166,21 @@ const ShellWrapper = inject(
       // unhandled error (Bug 83230). Stay on the global scope instead: the
       // chat pane itself is already replaced by the view-only stub
       // (AIAgentView gates on the same accessRightsStore.canUseChat).
+      // And the same for a tour standing inside a stand-in space: that is a
+      // room the server has never heard of, so every scoped AI request made
+      // for it comes back 404 ("Entity not found") — the demo answers what the
+      // section asks about the space, and the AI service is no part of that.
       agentEntityId:
-        selectedFolderStore.isAIRoom && !accessRightsStore.canUseChat
+        (selectedFolderStore.isAIRoom && !accessRightsStore.canUseChat) ||
+        !chatScopeId ||
+        isTourDemoId(chatScopeId)
           ? undefined
-          : selectedFolderStore.rootRoomId || selectedFolderStore.id
-            ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
-            : undefined,
+          : String(chatScopeId),
       // Inside AI agent rooms the model is fixed by the agent's assigned
       // profile. It is shown in the composer as a read-only label, or — for
       // users who may edit the room — an interactive picker to change it.
       isInsideAgentRoom: selectedFolderStore.isAIRoom,
+      recommendedModelForForms: settingsStore.aiConfig?.recommendedModelForForms,
       // EditRoom is the room-manager right; viewers (EditRoom === false, or
       // security not resolved yet) get the read-only label. Both room and
       // sub-folder security view-models carry EditRoom.

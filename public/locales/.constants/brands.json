@@ -50,6 +50,11 @@
   "MoodleModuleName": "mod/onlyofficeeditor",
   "N8n": "n8n",
   "N8nPackageName": "@onlyoffice/n8n-nodes-docs",
+  "WordPress": "WordPress",
+  "Drupal": "Drupal",
+  "Pipedrive": "Pipedrive",
+  "MondayCom": "monday.com",
+  "Zapier": "Zapier",
   "GitHub": "GitHub",
 
   "TypeTitleBoxNet": "Box",

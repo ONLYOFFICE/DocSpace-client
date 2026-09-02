@@ -206,7 +206,7 @@
   }
 
   :global(.dark) & {
-    color: $gray-dark;
+    color: $dark-gray-dark;
   }
 }
 
@@ -343,7 +343,7 @@
   }
 
   :global(.dark) & {
-    color: $gray-dark-text;
+    color: $dark-gray-dark;
   }
 }
 
@@ -434,6 +434,21 @@
   gap: 12px;
 }
 
+// Title and "Installed" badge. `flex-basis: auto` on the title (below) makes
+// the wrap decision read the title's own width, so the badge stays on the
+// title's right while both fit and drops to a line of its own - still indented
+// past the icon - once they do not. A quarter of the grid is not enough for
+// "KI-Agenten" + "Installiert", nor for the Russian pair of the same two
+// words.
+.moduleHeadings {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+
 .moduleInstalledBadge {
   display: inline-flex;
   align-items: center;
@@ -453,7 +468,7 @@
 
   :global(.dark) & {
     background-color: $dark-gray-light;
-    color: $gray-dark;
+    color: $dark-gray-dark;
   }
 
   svg {
@@ -471,6 +486,36 @@
   align-items: center;
   gap: 12px;
   margin-block-start: auto;
+
+  // The ui-kit Button keeps its label on one line and clips the overflow with
+  // `overflow: hidden` on the <button>; the label span has no `min-width: 0`,
+  // so a long label loses characters at *both* ends and never gets an
+  // ellipsis. `size=small` also spends 56px of the column on horizontal
+  // padding. A localised create label ("Créer un espace de formulaires",
+  // "Formularbereich erstellen") never fits a quarter of the grid, so here the
+  // label wraps and the button grows with it instead. Remove once the Button
+  // handles this itself in the ui-kit repo.
+  //
+  // `[data-size]`, which the Button sets from its `size` prop, is only here to
+  // outweigh the ui-kit's own `.button.small` - a plain `button` selector
+  // loses to it on specificity and the padding would stay at 28px.
+  // `padding-block` stays under what `min-height` reserves, so a one-line label
+  // keeps the Button's own 32px height exactly - 6px here made every card's
+  // button 34px and pushed the whole page down by 2px. A wrapped label outgrows
+  // the floor on its own.
+  button[data-size] {
+    height: auto;
+    min-height: var(--button-height-sm, 32px);
+    padding-block: 4px;
+    padding-inline: 12px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  // `button-content` is the Button's own global class, not a module class.
+  :global(.button-content) {
+    min-width: 0;
+  }
 }
 
 // Per-app tour entry point. Hidden on mobile for the same reason as
@@ -532,8 +577,14 @@
   font-weight: 600;
   line-height: 16px;
   margin: 0;
-  flex: 1;
+  // `1 1 auto`, not `1`: the shorthand's `0%` basis would make every title
+  // claim the whole line and the badge always wrap. With an auto basis the
+  // title only grows into the space the badge leaves.
+  flex: 1 1 auto;
   min-width: 0;
+  // A single app name too long for the column breaks rather than spilling out
+  // of the card (German compounds).
+  overflow-wrap: anywhere;
 }
 
 .moduleDescription {
@@ -548,7 +599,7 @@
   }
 
   :global(.dark) & {
-    color: $gray-dark;
+    color: $dark-gray-dark;
   }
 }
 
@@ -636,7 +687,7 @@
   }
 
   :global(.dark) & {
-    color: $gray-dark;
+    color: $dark-gray-dark;
   }
 }
 

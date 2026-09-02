@@ -3,7 +3,7 @@
   "content": "The entered amount will be charged after you attach your payment method",
   "content_en_sha1_hash": "d9994e0b1091d2aa899dbeb572a897d4e4f3fb29",
   "created_at": "2026-05-27T14:11:43.015Z",
-  "updated_at": "2026-07-27T13:07:51.082Z",
+  "updated_at": "2026-08-27T15:37:55.820Z",
   "comment": {
     "text": "Helper text in the First Top Up dialog explaining when the transaction will be processed.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
-      "line_number": 238,
-      "context": "withoutCustomerCheck\n />\n \n {isStripeFlow ? (\n <Text fontSize=\"12px\" className={styles.helperText}>\n {t(\"TopUpCreditsChargeHint\")}\n </Text>\n ) : (\n <Text fontSize=\"12px\" className={styles.helperText}>\n {t(\"TopUpTakeSomeTimeToComplete\")}\n </Text>",
+      "line_number": 246,
+      "context": "/>\n \n <Text fontSize=\"12px\" className={styles.helperText}>\n {helperText ??\n (isStripeFlow\n ? t(\"TopUpCreditsChargeHint\")\n : t(\"TopUpTakeSomeTimeToComplete\"))}\n </Text>\n </div>\n </ModalDialog.Body>",
       "module": "/libs/ui-kit"
     }
   ],

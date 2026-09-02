@@ -34,17 +34,21 @@
  */
 
 /**
- * Who may reach the Developer Tools section.
+ * Who may *open* the Developer Tools section.
  *
  * The single source of truth for the rule enforced by the route guard in
  * `routes/Route.private.tsx`: guests never get in, and room admins / users are
  * kept out too when the portal turns on "limit access to developer tools"
- * (Settings -> Security -> Access portal). Everything that merely *advertises*
- * the section - the sidebar banner, the dashboard card - must ask this too,
- * so we don't offer a link that answers with 403.
+ * (Settings -> Security -> Workspace access).
+ *
+ * This answers "will the page open", not "may the reader be told the section
+ * exists" - see `isDevToolsOffered` for the second question. Anything that
+ * navigates must ask this one, so we never send someone into a 403.
  */
 export const hasDevToolsAccess = (
-  user: { isVisitor?: boolean; isAdmin?: boolean; isOwner?: boolean } | null
+  user:
+    | { isVisitor?: boolean; isAdmin?: boolean; isOwner?: boolean }
+    | null
     | undefined,
   limitedAccessDevToolsForUsers: boolean | undefined,
 ) => {
@@ -54,22 +58,51 @@ export const hasDevToolsAccess = (
 };
 
 /**
- * Who may reach Docs Connect inside Developer Tools.
+ * Whether the Developer Tools content is offered to this reader at all.
  *
- * Stricter than `hasDevToolsAccess` on two counts. The service is sold and
- * hosted by us, so it exists in SaaS only - a standalone portal has no Docs
- * Connect at all, whoever is asking. And connecting an editors instance is a
- * portal-wide operation, so only portal admins and the owner get the page -
- * room admins and users are kept out even when the rest of the section is open
- * to them.
+ * Deliberately weaker than `hasDevToolsAccess`, and the difference is the whole
+ * point: a portal that has switched the section off for everyone below a full
+ * admin hides it outright, but a reader who simply lacks the rights still gets
+ * the cards, the descriptions and the documentation links - only the actions
+ * behind them are refused, with a toast that says why. A feature that is turned
+ * off is absent; a feature that is not yours is visible but closed.
  *
- * Enforced by the route guard in `routes/Route.private.tsx`; everything that
- * merely advertises the service - the sidebar item, the dashboard cards, the
- * "or connect Docs" link, the integration dialogs - must ask this too, so we
- * never offer a link that answers with 403 and never ask the server about an
- * instance that cannot exist.
+ * Guests are on the second side of that line: the section is switched on for
+ * the portal, so they are shown what it is, and every way into it answers with
+ * the explanation instead of a 403.
  */
-export const hasDocsConnectAccess = (
+export const isDevToolsOffered = (
+  user: { isAdmin?: boolean; isOwner?: boolean } | null | undefined,
+  limitedAccessDevToolsForUsers: boolean | undefined,
+) => !limitedAccessDevToolsForUsers || !!user?.isAdmin || !!user?.isOwner;
+
+/**
+ * Who may open the Docs Connect page.
+ *
+ * The service is sold and hosted by us, so it exists in SaaS only - a
+ * standalone portal has no Docs Connect at all, whoever is asking. Beyond that
+ * it is a page of the Developer Tools section and opens for whoever the section
+ * opens for; what an admin has and a room admin has not is the right to
+ * *configure* it, which the page itself refuses (see `canManageDocsConnect`).
+ */
+export const canOpenDocsConnect = (
+  user:
+    | { isVisitor?: boolean; isAdmin?: boolean; isOwner?: boolean }
+    | null
+    | undefined,
+  standalone?: boolean,
+  limitedAccessDevToolsForUsers?: boolean,
+) => !standalone && hasDevToolsAccess(user, limitedAccessDevToolsForUsers);
+
+/**
+ * Who may connect an editors instance.
+ *
+ * Connecting one is a portal-wide operation, so it stays with portal admins and
+ * the owner. Everyone else reads the same page with the action disabled and an
+ * explanation above it, which is why this is a separate question from
+ * `canOpenDocsConnect` rather than a stricter version of it.
+ */
+export const canManageDocsConnect = (
   user: { isAdmin?: boolean; isOwner?: boolean } | null | undefined,
   standalone?: boolean,
 ) => !standalone && !!user && (!!user.isAdmin || !!user.isOwner);

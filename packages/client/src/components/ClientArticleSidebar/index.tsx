@@ -225,6 +225,7 @@ const ClientArticleSidebar = ({
     const panelFolderId = (folder: TTreeFolder): string | number => {
       if (folder.rootFolderType === FolderType.Rooms) return "rooms";
       if (folder.rootFolderType === FolderType.AIAgents) return "agents";
+      if (folder.rootFolderType === FolderType.Forms) return "forms";
       return folder.id;
     };
 
@@ -245,15 +246,26 @@ const ClientArticleSidebar = ({
       parent: TTreeFolder | undefined,
       children: (TTreeFolder | undefined)[],
     ): Pick<NavMenuItem, "collapsedBadgeComponent"> => {
-      const total =
-        newCount(parent) +
-        children.reduce((sum, child) => sum + newCount(child), 0);
-      if (total <= 0 || !parent) return {};
+      if (!parent) return {};
+
+      const counted = [parent, ...children].filter(
+        (folder): folder is TTreeFolder => newCount(folder) > 0,
+      );
+      const total = counted.reduce((sum, folder) => sum + newCount(folder), 0);
+      if (total <= 0) return {};
+
+      const folderId = panelFolderId(parent);
+      const folderIds =
+        folderId === parent.id
+          ? counted.map((folder) => folder.id)
+          : undefined;
+
       return {
         collapsedBadgeComponent: (
           <NewFilesBadge
             newFilesCount={total}
-            folderId={panelFolderId(parent)}
+            folderId={folderId}
+            folderIds={folderIds}
           />
         ),
       };
@@ -274,6 +286,7 @@ const ClientArticleSidebar = ({
     const favFolder = find(FolderType.Favorites);
     const trashFolder = find(FolderType.TRASH);
     const aiAgentsFolder = find(FolderType.AIAgents);
+    const formsFolder = find(FolderType.Forms);
 
     const mainItems: NavMenuItem[] = [];
 
@@ -413,6 +426,9 @@ const ClientArticleSidebar = ({
         label: t("Common:Forms"),
         icon: getCatalogIconUrlByType(FolderType.FormRoom),
         ...nav(searchAreaUrl("/forms/filter", RoomSearchArea.Forms)),
+        ...(formsFolder
+          ? sectionBadge(panelFolderId(formsFolder), newCount(formsFolder))
+          : {}),
         children: [
           {
             id: "forms-recent",

@@ -141,4 +141,28 @@ describe("PrivateRoute on the payments section", () => {
     expect(view.pathname()).toBe("/billing/addons");
     expect(view.rendered()).toBe(true);
   });
+
+  it("keeps restricted SaaS billing open for an admin", () => {
+    const view = renderAt("/billing/addons", {
+      standalone: false,
+      restricted: true,
+      isAdmin: true,
+      user: admin,
+    });
+
+    expect(view.pathname()).toBe("/billing/addons");
+    expect(view.rendered()).toBe(true);
+  });
+
+  it("bounces a member off restricted SaaS billing to 401", () => {
+    const view = renderAt("/billing/wallet", {
+      standalone: false,
+      restricted: true,
+      isAdmin: false,
+      user: member,
+    });
+
+    expect(view.pathname()).toBe("/error/401");
+    expect(view.rendered()).toBe(false);
+  });
 });

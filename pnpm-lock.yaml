@@ -122,8 +122,8 @@ importers:
         specifier: 1.15.1
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:onlyoffice-ai-chat-0.5.67.tgz
-        version: file:libs/ui-kit/onlyoffice-ai-chat-0.5.67.tgz(82fb0e21172122521981bd59436394b1)
+        specifier: file:onlyoffice-ai-chat-0.5.82.tgz
+        version: file:libs/ui-kit/onlyoffice-ai-chat-0.5.82.tgz(82fb0e21172122521981bd59436394b1)
       '@onlyoffice/docspace-api-sdk':
         specifier: file:onlyoffice-docspace-api-sdk-3.7.0.tgz
         version: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -166,6 +166,9 @@ importers:
       cnbuilder:
         specifier: 3.1.0
         version: 3.1.0
+      codemirror:
+        specifier: 6.0.2
+        version: 6.0.2
       copy-to-clipboard:
         specifier: 3.3.3
         version: 3.3.3
@@ -3403,9 +3406,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.67.tgz':
-    resolution: {integrity: sha512-GR2Ou0jlLXv7GJzxj3Nkp2b6gt87gzGJpjOC1n1vTFfSFHKSVwfu3esz0ufSKNc61jZuFl867we2TfHzK+DU+Q==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.5.67.tgz}
-    version: 0.5.67
+  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.82.tgz':
+    resolution: {integrity: sha512-QzwG83ytpXnKr2w5rkQ2tdn+XnVMcd7q6/fC8/ROitI6jVGsZw013B7tSdgW3G8IUGSK48QcIwNV6kYj/L4B+Q==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.5.82.tgz}
+    version: 0.5.82
     peerDependencies:
       '@anthropic-ai/sdk': ^0.60.0
       '@assistant-ui/react': ^0.11.0
@@ -12261,7 +12264,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@23.1.1':
     optional: true
 
-  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.67.tgz(82fb0e21172122521981bd59436394b1)':
+  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.82.tgz(82fb0e21172122521981bd59436394b1)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
       assistant-stream: 0.2.47

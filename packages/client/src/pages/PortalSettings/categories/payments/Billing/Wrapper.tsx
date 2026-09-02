@@ -124,7 +124,7 @@ const BillingWrapperComponent = ({
   }, [location.pathname]);
 
   return (
-    <PrivateRoute>
+    <PrivateRoute restricted>
       {/* @ts-expect-error ErrorBoundary props are injected from MobX stores */}
       <ErrorBoundary>
         <SectionWrapper withBodyScroll viewAs="settings" settingsStudio>

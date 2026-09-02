@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import {
   useQuery,
   useMutation,
@@ -92,7 +92,7 @@ export function useUpdateTagNameMutation() {
     // This record is what tells the list that the room's old name and the
     // query's new one are the same tag, so it has to outlive the host's stale
     // copy of the room - see the constant.
-    gcTime: TAG_MUTATION_RECORD_GC_TIME,
+    // gcTime: TAG_MUTATION_RECORD_GC_TIME,
 
     mutationFn: ({ oldLabel, newLabel }: UpdateTagNameParams) =>
       updateTagName(oldLabel, newLabel),
@@ -151,7 +151,7 @@ export function useRemoveTagMutation() {
     // Same as the rename: the deleted tag stays in the room's own data until
     // the host reloads it, and this record is what keeps it out of the list in
     // the meantime.
-    gcTime: TAG_MUTATION_RECORD_GC_TIME,
+    // gcTime: TAG_MUTATION_RECORD_GC_TIME,
 
     mutationFn: (removeTag: string) => removeTagRequest([removeTag]),
 
@@ -297,16 +297,19 @@ export function useRoomTagList(
   // Straight from the query, not through a prop: a snapshot taken by a parent
   // would miss the optimistic writes the mutations make into the same cache.
   const { data: fetchedTags } = useTagsQuery();
+  const queryClient = useQueryClient();
 
   const { created, removed, renamed, bound, pending } =
     useTagMutationOverlay(roomId);
 
   // The position every label was first listed at, for as long as this list is
-  // open. Binding a tag moves it between the two sources - the room reports it
-  // or it does not - and unionTagsData lists the room's own tags first, so
-  // without this the row would jump the moment the host reloads the room after
-  // a toggle. Labels created here keep leading the list, under negative
-  // positions, even after they arrive through the query.
+  // open. The order it freezes is the one the two sources give: unionTagsData
+  // lists the tags the room carries - the selected ones - before the rest of
+  // the shared list. Binding a tag then moves it between those sources, the
+  // room reports it or it does not, so without this the row would jump under
+  // the cursor as soon as the host reloads the room after a toggle. Labels
+  // created here keep leading the list, under negative positions, even after
+  // they arrive through the query.
   const orderRef = useRef({
     positions: new Map<string, number>(),
     nextTail: 0,
@@ -315,6 +318,22 @@ export function useRoomTagList(
 
   // Keyed on what roomTags holds, not on its identity - see roomTagsToKey.
   const roomTagsKey = roomTagsToKey(roomTags);
+
+  // A rename or a delete made from another session reaches this list through
+  // the room only: the mutation cache is per tab, so there is no record here to
+  // mask the query's stale copy of the tag, and it would be listed next to the
+  // room's new name as a second tag. The room changing is therefore taken as a
+  // signal that the shared list may have moved too. For anything done in this
+  // tab the mutations have already written that cache themselves, so the
+  // refetch only confirms what is on screen.
+  const invalidatedFor = useRef(roomTagsKey);
+
+  useEffect(() => {
+    if (invalidatedFor.current === roomTagsKey) return;
+
+    invalidatedFor.current = roomTagsKey;
+    queryClient.invalidateQueries({ queryKey: TAGS_QUERY_KEY });
+  }, [roomTagsKey, queryClient]);
 
   const tags = useMemo(() => {
     const order = orderRef.current;
@@ -363,8 +382,7 @@ export function useRoomTagList(
       const rename = renamed.get(tag.label);
       const label =
         rename !== undefined &&
-        (rename.isPending ||
-          (!exists.has(tag.label) && exists.has(rename.to)))
+        (rename.isPending || (!exists.has(tag.label) && exists.has(rename.to)))
           ? rename.to
           : tag.label;
 
@@ -393,6 +411,7 @@ export function useRoomTagList(
     );
     // roomTagsKey stands in for roomTags: see above.
   }, [roomTagsKey, roomTags, fetchedTags, created, removed, renamed, bound]);
+
 
   return { tags, pendingLabels: pending };
 }

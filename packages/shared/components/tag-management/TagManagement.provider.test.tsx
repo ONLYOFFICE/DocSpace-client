@@ -45,6 +45,7 @@ import {
   TagManagementProvider,
   useTagManagement,
 } from "./TagManagement.provider";
+import { getTags } from "../../api/rooms";
 import { TAGS_QUERY_KEY } from "./TagManagement.constants";
 import type { AccessTagManagement } from "./TagManagement.types";
 
@@ -290,5 +291,42 @@ describe("TagManagementProvider", () => {
     expect(list.textContent).toContain("tag1");
     expect(list.textContent).toContain("tag2");
     expect(list.textContent).toContain("tag3");
+  });
+
+  // A rename or a delete from another session arrives here as the room's tags
+  // changing under a query that still lists the tag under its old name - the
+  // mutation cache of this tab knows nothing about it. See useRoomTagList.
+  it("refetches the shared list when the room's tags change under it", async () => {
+    vi.mocked(getTags).mockResolvedValue(["old"]);
+
+    const queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+    });
+
+    queryClient.setQueryData(TAGS_QUERY_KEY, ["old"]);
+
+    const tree = (roomTags: string[]) => (
+      <QueryClientProvider client={queryClient}>
+        <TagManagementProvider roomId="room-1" roomTags={roomTags} access={{}}>
+          <TestComponent />
+        </TagManagementProvider>
+      </QueryClientProvider>
+    );
+
+    const { rerender } = render(tree(["old"]));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("tags-count")).toHaveTextContent("1");
+    });
+
+    vi.mocked(getTags).mockResolvedValue(["new"]);
+    rerender(tree(["new"]));
+
+    // Without the refetch the query's copy of the old name would be listed
+    // next to the room's new one, as a second tag, and would stay there.
+    await waitFor(() => {
+      expect(screen.getByTestId("tags-count")).toHaveTextContent("1");
+    });
+    expect(screen.getByTestId("filtered-list")).not.toHaveTextContent("old");
   });
 });

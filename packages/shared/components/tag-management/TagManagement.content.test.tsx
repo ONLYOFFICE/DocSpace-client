@@ -260,6 +260,32 @@ describe("<TagManagementContent />", () => {
     expect(removeTagsFromRoom).not.toHaveBeenCalled();
   });
 
+  it("does not rename a tag to a name that is already taken", async () => {
+    renderContent();
+
+    await userEvent.click(screen.getByTestId("edit_tag_button_freeTag"));
+
+    const input = await screen.findByTestId("edit_tag_input");
+
+    // Differs from the existing tag in case only, which is the same name as far
+    // as the list is concerned.
+    await userEvent.clear(input);
+    await userEvent.type(input, "BoundTag{Enter}");
+
+    // Nothing is sent and the row stays in edit mode, with the name kept.
+    expect(screen.getByTestId("edit_tag_input")).toHaveValue("BoundTag");
+    expect(updateTagName).not.toHaveBeenCalled();
+
+    // A free name is what closes the editor, so it is the collision that held
+    // it open above.
+    await userEvent.clear(input);
+    await userEvent.type(input, "brandNewTag{Enter}");
+
+    await waitFor(() =>
+      expect(screen.queryByTestId("edit_tag_input")).not.toBeInTheDocument(),
+    );
+  });
+
   it("does not toggle the tag when binding is not allowed", async () => {
     renderContent({ ...fullAccess, canBindTag: false });
 
@@ -752,6 +778,35 @@ describe("<TagManagementContent />", () => {
 
     starter.unmount();
   });
+  it("lists a tag bound in this session where its source has it", async () => {
+    const queryClient = createQueryClient();
+    // The room reports nothing yet, so the only thing saying the tag is
+    // selected is the bind in the mutation cache. The order comes from the
+    // sources, so the row opens where the query lists it - it only turns
+    // checked - and it keeps that place for as long as the list is open.
+    getTags.mockResolvedValue(["freeTag", "boundTag"]);
+    queryClient.setQueryData(TAGS_QUERY_KEY, ["freeTag", "boundTag"]);
+
+    const starter = renderMutationStarter(queryClient);
+
+    await act(async () => {
+      await starter.handlers.bind("boundTag", true);
+    });
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <TagList access={fullAccess} roomTags={[]} />
+      </QueryClientProvider>,
+    );
+
+    await screen.findByTestId("tag_item_boundTag");
+
+    expect(getCheckbox("boundTag")).toBeChecked();
+    expect(rowLabels()).toEqual(["freeTag", "boundTag"]);
+
+    starter.unmount();
+  });
+
   it("keeps the rename record past the default gc window", async () => {
     // The record is the only thing that can tell the list the name the room
     // still reports and the one the query already has are the same tag, and the

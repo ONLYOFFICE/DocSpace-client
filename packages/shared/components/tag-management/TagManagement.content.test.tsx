@@ -868,6 +868,62 @@ describe("<TagManagementContent />", () => {
     starter.unmount();
   });
 
+  it("drops the row when the tag is deleted after being renamed", async () => {
+    const queryClient = createQueryClient();
+    getTags.mockResolvedValue(["boundTag", "freeTag"]);
+    queryClient.setQueryData(TAGS_QUERY_KEY, ["boundTag", "freeTag"]);
+
+    const starter = renderMutationStarter(queryClient);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <TagList access={fullAccess} roomTags={["boundTag"]} />
+      </QueryClientProvider>,
+    );
+
+    await screen.findByTestId("tag_item_boundTag");
+
+    starter.handlers.rename("boundTag", "renamed");
+
+    await waitFor(() => expect(rowLabels()).toEqual(["renamed", "freeTag"]));
+
+    // The delete record carries the new name, while the room still reports the
+    // old one - so the row has to be matched under the name it is listed by,
+    // not under the one the room has.
+    starter.handlers.remove("renamed");
+
+    await waitFor(() => expect(rowLabels()).toEqual(["freeTag"]));
+
+    starter.unmount();
+  });
+
+  it("drops the row when a tag created here is deleted", async () => {
+    const queryClient = createQueryClient();
+    const starter = renderMutationStarter(queryClient);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <TagList access={fullAccess} roomTags={[]} />
+      </QueryClientProvider>,
+    );
+
+    await screen.findByTestId("tag_item_freeTag");
+
+    await act(async () => {
+      await starter.handlers.create("fresh");
+    });
+
+    await waitFor(() => expect(rowLabels()).toContain("fresh"));
+
+    // Neither the room nor the query lists it any more, so the create record
+    // is the only thing left that could.
+    starter.handlers.remove("fresh");
+
+    await waitFor(() => expect(rowLabels()).not.toContain("fresh"));
+
+    starter.unmount();
+  });
+
   it("keeps the rename record for as long as the session lasts", async () => {
     // The record is the only thing that can tell the list the name the room
     // still reports and the one the query already has are the same tag, and the

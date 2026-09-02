@@ -355,6 +355,16 @@ export function useRoomTagList(
     const exists = new Set(fetchedTags);
 
     /**
+     * Whether a delete has taken the tag away.
+     *
+     * A delete counts only while the query has already dropped the label: if
+     * it is back in the query it belongs to a tag created after this one was
+     * deleted, and hiding it would make a live tag invisible.
+     */
+    const isDeleted = (label: string) =>
+      removed.has(label) && !exists.has(label);
+
+    /**
      * The name to list the room's copy of a tag under.
      *
      * The room keeps the old name until the host reloads it, so the same tag
@@ -401,18 +411,25 @@ export function useRoomTagList(
     created.forEach((label) => {
       if (seen.has(label)) return;
 
+      // Created and then deleted here: the create record still carries the
+      // label, and it is the only thing that would keep listing it - the tag
+      // reaches neither the room nor the query.
+      if (isDeleted(label)) return;
+
       seen.add(label);
       // Created means bound, unless a bind has said otherwise since.
       result.push({ label, checked: bound.get(label) ?? true });
     });
 
     unionTagsData(roomTags, fetchedTags).forEach((tag) => {
-      // A delete counts only while the query has already dropped the tag: if
-      // the label is back in the query it belongs to a tag created after this
-      // one was deleted, and hiding it would make a live tag invisible.
-      if (removed.has(tag.label) && !exists.has(tag.label)) return;
+      if (isDeleted(tag.label)) return;
 
       const label = resolveLabel(tag.label);
+
+      // Under either name: a delete record is written for the name the tag had
+      // when it was deleted, and the room can still be reporting the one it
+      // had before a rename.
+      if (isDeleted(label)) return;
 
       if (seen.has(label)) return;
       seen.add(label);
@@ -439,7 +456,6 @@ export function useRoomTagList(
     );
     // roomTagsKey stands in for roomTags: see above.
   }, [roomTagsKey, roomTags, fetchedTags, created, removed, renamed, bound]);
-
 
   return { tags, pendingLabels: pending };
 }

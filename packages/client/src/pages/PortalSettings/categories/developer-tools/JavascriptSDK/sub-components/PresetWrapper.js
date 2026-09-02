@@ -39,6 +39,9 @@ import {
   CategoryHeader,
   CategoryDescription,
 } from "../presets/StyledPresets";
+import Integration from "./Integration";
+
+import styles from "../presets/StyledPresets.module.scss";
 
 export const PresetWrapper = (props) => {
   const { children, description, header } = props;
@@ -50,6 +53,8 @@ export const PresetWrapper = (props) => {
       </CategoryDescription>
       <CategoryHeader>{header}</CategoryHeader>
       {children}
+
+      <Integration className={styles.presetConnectors} />
     </SDKContainer>
   );
 };

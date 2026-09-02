@@ -71,7 +71,6 @@ import {
 import { CancelTextInput } from "../sub-components/CancelTextInput";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
-import Integration from "../sub-components/Integration";
 import { MainElementParameter } from "../sub-components/MainElementParameter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
@@ -530,12 +529,8 @@ const FileSelector = (props) => {
               />
             ) : null}
           </ControlsSection>
-
-          <Integration compact className="integration-examples" />
         </Controls>
       </Container>
-
-      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };

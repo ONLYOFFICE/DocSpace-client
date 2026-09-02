@@ -35,22 +35,16 @@
 
 @use "@docspace/ui-kit/styles/mixins";
 
+$controls-width: 350px;
+$container-gap: 48px;
+$preview-width: 800px;
+$preview-height: calc(100lvh - 260px);
+
 .sdkContainer {
   box-sizing: border-box;
 
-  :global(.integration-examples-bottom) {
-    display: none;
-  }
-
   @include mixins.tablet {
     width: 100%;
-
-    @media (min-width: 720px) {
-      :global(.integration-examples-bottom) {
-        display: block;
-        margin-top: 40px;
-      }
-    }
   }
 
   &.isMobile {
@@ -61,7 +55,7 @@
     display: block;
 
     @include mixins.desktop {
-      height: calc(100lvh - 260px);
+      min-height: $preview-height;
     }
   }
 
@@ -71,10 +65,16 @@
   }
 }
 
+.presetConnectors {
+  width: 100%;
+  max-width: $controls-width + $container-gap + $preview-width;
+  margin-top: 40px;
+}
+
 .controls {
   box-sizing: border-box;
-  max-width: 350px;
-  min-width: 350px;
+  max-width: $controls-width;
+  min-width: $controls-width;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -95,20 +95,6 @@
 
   :global(.checkbox) {
     max-width: fit-content;
-  }
-
-  :global(.integration-examples) {
-    :global(.integration-header) {
-      margin-top: 0px;
-    }
-  }
-
-  @include mixins.tablet {
-    @media (min-width: 720px) {
-      :global(.integration-examples) {
-        display: none;
-      }
-    }
   }
 }
 
@@ -223,15 +209,15 @@
   }
 
   &.noWidth {
-    max-width: 800px;
+    max-width: $preview-width;
   }
 
   &.noHeight {
     min-height: 400px;
     max-height: 600px;
 
-    @include mixins.tablet {
-      height: calc(-260px + 100lvh);
+    @include mixins.not-mobile {
+      height: $preview-height;
     }
   }
 
@@ -246,16 +232,16 @@
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  gap: 48px;
+  gap: $container-gap;
 
   @include mixins.tablet {
     flex-direction: column-reverse;
-    gap: 48px;
+    gap: $container-gap;
   }
 
   &.isMobile {
     flex-direction: column-reverse;
-    gap: 48px;
+    gap: $container-gap;
   }
 }
 
@@ -350,6 +336,6 @@
   gap: 16px;
   margin-top: 16px;
   width: 100%;
-  max-width: 800px;
+  max-width: $preview-width;
   height: calc(var(--code-wrapper-height, 400px) + 2px);
 }

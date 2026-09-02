@@ -111,6 +111,27 @@ export function searchFilter(list: TTag[], query: string) {
 export const stopPropagation = (event: React.MouseEvent) =>
   event.stopPropagation();
 
+/**
+ * Whether `name` already belongs to a listed tag.
+ *
+ * The one rule every caller compares names by: case-insensitively and ignoring
+ * surrounding whitespace - two tags telling apart only by case read as the
+ * same name. `exceptLabel` excludes the tag being renamed itself.
+ */
+export const isTagNameTaken = (
+  tags: readonly TTag[],
+  name: string,
+  exceptLabel?: string,
+) => {
+  const searched = name.trim().toLowerCase();
+
+  return tags.some(
+    (tag) =>
+      tag.label !== exceptLabel &&
+      tag.label.trim().toLowerCase() === searched,
+  );
+};
+
 export const isTag = (variables: unknown): variables is TTag =>
   typeof variables === "object" &&
   variables !== null &&

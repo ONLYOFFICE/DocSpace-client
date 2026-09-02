@@ -46,7 +46,7 @@ import type {
   TagManagementProviderProps,
   ITagManagementStateContext,
 } from "./TagManagement.types";
-import { searchFilter } from "./TagManagement.utils";
+import { isTagNameTaken, searchFilter } from "./TagManagement.utils";
 import { useRoomTagList } from "./hooks/useTagsQuery";
 
 const TagManagementStateContext =
@@ -75,16 +75,9 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
 
     const filtered = searchFilter(tags, search);
 
-    // Compared the way the rename check compares - case-insensitively, and
-    // against the whole list rather than the filtered one: "boundtag" and
-    // "BoundTag" are the same name, and a tag the search is hiding still
-    // occupies it.
-    const searched = search.toLowerCase();
-
-    const showCreateTag = Boolean(
-      canCreate &&
-        tags.every((tag) => tag.label.trim().toLowerCase() !== searched),
-    );
+    // Against the whole list rather than the filtered one: a tag the search is
+    // hiding still occupies its name.
+    const showCreateTag = Boolean(canCreate && !isTagNameTaken(tags, search));
 
     return [filtered, showCreateTag];
   }, [tags, deferredSearchValue, canCreate]);

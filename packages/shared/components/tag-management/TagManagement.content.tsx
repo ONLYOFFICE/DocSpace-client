@@ -60,7 +60,7 @@ import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 
 import { useTagManagement } from "./TagManagement.provider";
 import { useUpdateTag } from "./hooks/useTagsQuery";
-import { stopPropagation } from "./TagManagement.utils";
+import { isTagNameTaken, stopPropagation } from "./TagManagement.utils";
 import styles from "./TagManagement.module.scss";
 import {
   ROW_HEIGHT,
@@ -149,15 +149,8 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
       }
 
       // The whole list, not the filtered one: a tag the search is hiding is
-      // still a tag the rename would collide with. Compared case-insensitively,
-      // because two tags that differ in case only read as the same name.
-      const isTaken = tags.some(
-        (tag) =>
-          tag.label !== oldLabel &&
-          tag.label.toLowerCase() === newLabel.toLowerCase(),
-      );
-
-      if (isTaken) {
+      // still a tag the rename would collide with.
+      if (isTagNameTaken(tags, newLabel, oldLabel)) {
         // Nothing is sent and the row stays in edit mode, so the name can be
         // corrected instead of retyped.
         toastr.error(t("Common:TagAlreadyExists", { tagName: newLabel }));

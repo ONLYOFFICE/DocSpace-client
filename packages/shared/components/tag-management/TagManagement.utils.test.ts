@@ -45,6 +45,7 @@ import {
   isApplied,
   selectSnapshot,
   roomTagsToKey,
+  isTagNameTaken,
 } from "./TagManagement.utils";
 import type { TTag } from "./TagManagement.types";
 
@@ -288,6 +289,27 @@ describe("TagManagement.utils", () => {
       expect(
         selectSnapshot({ state: { variables: "a", status: "success" } }),
       ).toEqual({ variables: "a", isPending: false });
+    });
+  });
+
+  describe("isTagNameTaken", () => {
+    const tags = [
+      { label: "BoundTag", checked: true },
+      { label: " padded ", checked: false },
+    ];
+
+    it("matches case-insensitively and ignores surrounding whitespace", () => {
+      expect(isTagNameTaken(tags, "boundtag")).toBe(true);
+      expect(isTagNameTaken(tags, "  BOUNDTAG  ")).toBe(true);
+      expect(isTagNameTaken(tags, "padded")).toBe(true);
+      expect(isTagNameTaken(tags, "other")).toBe(false);
+    });
+
+    it("excludes the tag being renamed itself", () => {
+      expect(isTagNameTaken(tags, "BoundTag", "BoundTag")).toBe(false);
+      // Only the exact row is excluded: a different tag under the same name in
+      // another case still counts.
+      expect(isTagNameTaken(tags, "boundtag", "boundtag")).toBe(true);
     });
   });
 

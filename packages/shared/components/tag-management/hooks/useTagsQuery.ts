@@ -335,10 +335,17 @@ export function useRoomTagList(
     queryClient.invalidateQueries({ queryKey: TAGS_QUERY_KEY });
   }, [roomTagsKey, queryClient]);
 
+  // The names the room itself claims right now, after renames are resolved -
+  // what the bind-record sweep below compares the records against. Rebuilt by
+  // the memo on every recompute; idempotent, so writing it during render is
+  // safe.
+  const roomOwnLabelsRef = useRef<ReadonlySet<string>>(new Set());
+
   const tags = useMemo(() => {
     const order = orderRef.current;
     const result: TTag[] = [];
     const seen = new Set<string>();
+    const roomOwnLabels = new Set<string>();
 
     const place = (label: string, lead: boolean) => {
       if (order.positions.has(label)) return;
@@ -444,10 +451,16 @@ export function useRoomTagList(
         place(label, false);
       }
 
+      // True exactly when the row came from roomTags - what the room claims,
+      // as opposed to what the bind overlay is applying.
+      if (tag.checked) roomOwnLabels.add(label);
+
       const checked = bound.get(label) ?? bound.get(tag.label) ?? tag.checked;
 
       result.push({ label, checked });
     });
+
+    roomOwnLabelsRef.current = roomOwnLabels;
 
     return result.sort(
       (a, b) =>
@@ -456,6 +469,32 @@ export function useRoomTagList(
     );
     // roomTagsKey stands in for roomTags: see above.
   }, [roomTagsKey, roomTags, fetchedTags, created, removed, renamed, bound]);
+
+  // A settled bind record is a bridge: it says what the room is about to
+  // report. Once the room reports it, the record has nothing left to add - it
+  // can only mask a later change made from another session - so it is dropped
+  // and the room becomes authoritative for the tag again. A pending record and
+  // one the room has not confirmed yet stay: without the room ever catching
+  // up, the record is the only thing keeping the toggle on screen.
+  useEffect(() => {
+    const cache = queryClient.getMutationCache();
+
+    cache
+      .findAll({ mutationKey: getTagBindMutationKey(roomId) })
+      .forEach((mutation) => {
+        if (mutation.state.status !== "success") return;
+
+        const { variables } = mutation.state;
+
+        if (!isTag(variables)) return;
+
+        const roomClaims = roomOwnLabelsRef.current.has(variables.label);
+
+        if (roomClaims === variables.checked) cache.remove(mutation);
+      });
+    // `tags` carries every input of the ref - the room, the query and the
+    // mutation records - so a change in any of them re-runs the sweep.
+  }, [tags, roomId, queryClient]);
 
   return { tags, pendingLabels: pending };
 }

@@ -56,6 +56,7 @@ import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 import { removeEmojiCharacters } from "../../utils/removeEmojiCharacters";
 
 import { useTagManagement } from "./TagManagement.provider";
+import { isTagNameTaken } from "./TagManagement.utils";
 import { useCreateTagMutation } from "./hooks/useTagsQuery";
 import type { TagManagementFilterProps } from "./TagManagement.types";
 import styles from "./TagManagement.module.scss";
@@ -68,13 +69,14 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   const { t } = useTranslation("Common");
   const isMobile = useIsMobile();
   const {
+    tags,
     searchValue,
     deferredSearchValue,
     showCreateTag,
     setSearchValue,
     clearSearch,
     filteredTags,
-    access: { canSearch },
+    access: { canSearch, canCreate },
   } = useTagManagement();
   const createTag = useCreateTagMutation(roomId);
 
@@ -98,8 +100,14 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   );
 
   const handleCreateTag = useCallback(async () => {
-    const trimmedValue = searchValue.trim();
-    if (trimmedValue.length === 0 || !showCreateTag) return;
+    // The input's own value, and the taken-name rule recomputed over it:
+    // searchValue and showCreateTag are both updated through a transition, so
+    // an Enter right after the last keystroke can still see the previous text.
+    const trimmedValue = inputValue.trim();
+
+    if (trimmedValue.length === 0 || !canCreate) return;
+
+    if (isTagNameTaken(tags, trimmedValue)) return;
 
     clearSearch();
     setInputValue("");
@@ -117,7 +125,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
       console.error("Failed to create tag:", error);
       toastr.error(error instanceof Error ? error : new Error(String(error)));
     }
-  }, [searchValue, clearSearch, createTag, showCreateTag, onTagsChanged]);
+  }, [inputValue, canCreate, tags, clearSearch, createTag, onTagsChanged]);
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {

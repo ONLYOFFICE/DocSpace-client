@@ -924,6 +924,42 @@ describe("<TagManagementContent />", () => {
     starter.unmount();
   });
 
+  it("lets another session's unbind through once the room has caught up", async () => {
+    const queryClient = createQueryClient();
+    const starter = renderMutationStarter(queryClient);
+
+    const tree = (roomTags: string[]) => (
+      <QueryClientProvider client={queryClient}>
+        <TagList access={fullAccess} roomTags={roomTags} />
+      </QueryClientProvider>
+    );
+
+    const { rerender } = render(tree([]));
+
+    await screen.findByTestId("tag_item_freeTag");
+
+    await act(async () => {
+      await starter.handlers.bind("freeTag", true);
+    });
+
+    await waitFor(() => expect(getCheckbox("freeTag")).toBeChecked());
+
+    // The host reloads the room, which now reports the tag: the bind record
+    // has said everything it had to say.
+    rerender(tree(["freeTag"]));
+
+    await waitFor(() => expect(getCheckbox("freeTag")).toBeChecked());
+
+    // Someone else unbinds the tag and the room reports that too. With the
+    // spent record still in the cache, the row would stay checked until the
+    // record is collected.
+    rerender(tree([]));
+
+    await waitFor(() => expect(getCheckbox("freeTag")).not.toBeChecked());
+
+    starter.unmount();
+  });
+
   it("keeps the rename record for as long as the session lasts", async () => {
     // The record is the only thing that can tell the list the name the room
     // still reports and the one the query already has are the same tag, and the

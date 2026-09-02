@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { Locator } from "@playwright/test";
+
 import {
   settingsHandler,
   TypeSettings,
@@ -42,6 +44,19 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
 const SDK_ROUTE = "/developer-tools/javascript-sdk";
 const PRESET_ROUTE = "/developer-tools/javascript-sdk/docspace";
 const FIRST_RENDER_TIMEOUT = 15_000;
+// max-width of the SDK page content: two 342px preset tiles plus their gutter.
+const CONTENT_WIDTH = 700;
+
+// boundingBox() answers null for anything that did not render, and null boxes
+// read as zeros in comparisons - which is how a geometry assertion turns green
+// on a page that never drew the element.
+const boxOf = async (locator: Locator) => {
+  const box = await locator.boundingBox();
+
+  expect(box, `${locator} has no box`).not.toBeNull();
+
+  return box!;
+};
 
 // Mirrors externalResources in the settings mock: five connectors carry their
 // own integrations entry, the rest fall back to the connectors catalog.
@@ -94,15 +109,26 @@ test.describe("JavaScript SDK connectors", () => {
       "sdk-connector-all",
     ]);
 
-    // The section closes the page, below the presets grid.
-    const connectorsBox = await page
-      .getByTestId("sdk-connector-zoom")
-      .boundingBox();
-    const presetBox = await page
-      .getByTestId("sdk_preset_Editor_container")
-      .boundingBox();
+    // The section closes the page, below the presets grid, and keeps the width
+    // of the page content: two columns of the same tile as the presets above.
+    const connectorsBox = await boxOf(page.getByTestId("sdk-connector-zoom"));
+    const presetBox = await boxOf(
+      page.getByTestId("sdk_preset_Editor_container"),
+    );
+    const gridBox = await boxOf(page.getByTestId("sdk-connectors-grid"));
 
-    expect(connectorsBox?.y ?? 0).toBeGreaterThan(presetBox?.y ?? 0);
+    expect(connectorsBox.y).toBeGreaterThan(presetBox.y);
+    expect(gridBox.width).toBe(CONTENT_WIDTH);
+
+    const [first, second, third] = await Promise.all(
+      CONNECTORS.slice(0, 3).map((connector) =>
+        boxOf(page.getByTestId(`sdk-connector-${connector.id}`)),
+      ),
+    );
+
+    expect(second.y).toBe(first.y);
+    expect(third.y).toBeGreaterThan(first.y);
+    expect(third.x).toBe(first.x);
   });
 
   test("links the catalog tile to the connectors page", async ({
@@ -117,8 +143,6 @@ test.describe("JavaScript SDK connectors", () => {
     await expect(seeAll).toContainText("See all connectors");
     await expect(seeAll).toHaveAttribute("href", ALL_CONNECTORS_URL);
     await expect(seeAll).toHaveAttribute("target", "_blank");
-    // Full width is a compact-layout affordance only.
-    await expect(seeAll).not.toHaveAttribute("data-span", "2");
   });
 
   test("opens embedding instructions for a marketplace connector", async ({
@@ -200,59 +224,61 @@ test.describe("JavaScript SDK connectors", () => {
 });
 
 test.describe("JavaScript SDK preset connectors", () => {
-  test("renders the sidebar and bottom catalogs without colliding test ids", async ({
+  test("closes the page below the preview and the controls column", async ({
     page,
     baseUrl,
   }) => {
     await page.goto(`${baseUrl}${PRESET_ROUTE}`);
 
-    const sidebarTile = page.getByTestId(
-      `sdk-connector-compact-${CONNECTORS[0].id}`,
-    );
-    await expect(sidebarTile).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
+    const tile = page.getByTestId(`sdk-connector-${CONNECTORS[0].id}`);
+    await expect(tile).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
 
-    // Both instances are mounted on a preset page; each id must resolve to a
-    // single element or every locator here turns into a strict-mode violation.
+    // A preset page mounts the catalog once, so no id can resolve twice and
+    // turn every locator here into a strict-mode violation.
     for (const connector of CONNECTORS) {
-      await expect(
-        page.getByTestId(`sdk-connector-compact-${connector.id}`),
-      ).toHaveCount(1);
       await expect(
         page.getByTestId(`sdk-connector-${connector.id}`),
       ).toHaveCount(1);
     }
+    await expect(page.getByTestId("sdk-connector-all")).toHaveCount(1);
 
-    // The sidebar is a fixed 350px column: two tiles per row, arrows dropped,
-    // and the catalog tile spans the full width so its label stays readable.
-    const seeAllCompact = page.getByTestId("sdk-connector-compact-all");
-    await expect(seeAllCompact).toHaveAttribute("data-span", "2");
-    await expect(page.getByTestId("sdk-connector-all")).not.toHaveAttribute(
-      "data-span",
-      "2",
-    );
+    const tileBox = await boxOf(tile);
+    const gridBox = await boxOf(page.getByTestId("sdk-connectors-grid"));
+    // The frame itself, not the column around it: the column runs to the
+    // section's right edge while the preview is capped at 800px.
+    const previewBox = await boxOf(page.getByTestId("sdk_preview_frame"));
+    const eventLogBox = await boxOf(page.getByTestId("sdk_event_log"));
+    const controlsBox = await boxOf(page.getByTestId("sdk_preset_controls"));
 
-    const firstBox = await sidebarTile.boundingBox();
-    const secondBox = await page
-      .getByTestId(`sdk-connector-compact-${CONNECTORS[1].id}`)
-      .boundingBox();
+    // A block of its own under everything: it starts at the section's left
+    // edge, next to the controls column rather than inside it, and clears the
+    // whole preview - the event log included, which used to overflow the
+    // fixed-height tab body and land on top of these tiles.
+    expect(tileBox.x).toBeLessThan(previewBox.x);
+    expect(tileBox.y).toBeGreaterThan(previewBox.y + previewBox.height);
+    expect(tileBox.y).toBeGreaterThan(eventLogBox.y + eventLogBox.height);
+    expect(tileBox.y).toBeGreaterThan(controlsBox.y + controlsBox.height);
 
-    // Side by side, not stacked: the second tile starts further along the row
-    // and still overlaps the first one vertically.
-    expect(secondBox?.x ?? 0).toBeGreaterThan(firstBox?.x ?? 0);
-    expect(secondBox?.y ?? 0).toBeLessThan(
-      (firstBox?.y ?? 0) + (firstBox?.height ?? 0),
-    );
+    // Full width, and no wider: the grid ends where the preview ends. The
+    // frame draws a 1px border of its own outside the 800px, and overhangs
+    // its column by that much when the section is too narrow to reach 800 -
+    // hence the 2px, which is the border and nothing else.
+    const gridRight = gridBox.x + gridBox.width;
+    const previewRight = previewBox.x + previewBox.width;
+
+    expect(gridRight).toBeGreaterThanOrEqual(previewRight - 2);
+    expect(gridRight).toBeLessThanOrEqual(previewRight);
   });
 
-  test("opens the instructions dialog from the sidebar catalog", async ({
+  test("opens the instructions dialog from a preset page", async ({
     page,
     baseUrl,
   }) => {
     await page.goto(`${baseUrl}${PRESET_ROUTE}`);
 
-    const sidebarTile = page.getByTestId("sdk-connector-compact-drupal");
-    await expect(sidebarTile).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
-    await sidebarTile.click();
+    const tile = page.getByTestId("sdk-connector-drupal");
+    await expect(tile).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
+    await tile.click();
 
     const dialog = page.getByRole("dialog");
 

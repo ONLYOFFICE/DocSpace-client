@@ -92,7 +92,7 @@ export function useUpdateTagNameMutation() {
     // This record is what tells the list that the room's old name and the
     // query's new one are the same tag, so it has to outlive the host's stale
     // copy of the room - see the constant.
-    // gcTime: TAG_MUTATION_RECORD_GC_TIME,
+    gcTime: TAG_MUTATION_RECORD_GC_TIME,
 
     mutationFn: ({ oldLabel, newLabel }: UpdateTagNameParams) =>
       updateTagName(oldLabel, newLabel),
@@ -151,7 +151,7 @@ export function useRemoveTagMutation() {
     // Same as the rename: the deleted tag stays in the room's own data until
     // the host reloads it, and this record is what keeps it out of the list in
     // the meantime.
-    // gcTime: TAG_MUTATION_RECORD_GC_TIME,
+    gcTime: TAG_MUTATION_RECORD_GC_TIME,
 
     mutationFn: (removeTag: string) => removeTagRequest([removeTag]),
 

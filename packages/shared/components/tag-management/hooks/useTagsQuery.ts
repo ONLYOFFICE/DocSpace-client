@@ -488,13 +488,19 @@ export function useRoomTagList(
 
         if (!isTag(variables)) return;
 
+        // A label a create record still sustains answers to that record, not
+        // to the room: "created means bound, unless a bind has said otherwise"
+        // makes the bind the only thing holding an untick, whatever the room
+        // reports - sweeping it would flip the box back.
+        if (created.includes(variables.label)) return;
+
         const roomClaims = roomOwnLabelsRef.current.has(variables.label);
 
         if (roomClaims === variables.checked) cache.remove(mutation);
       });
-    // `tags` carries every input of the ref - the room, the query and the
-    // mutation records - so a change in any of them re-runs the sweep.
-  }, [tags, roomId, queryClient]);
+    // `tags` carries every other input of the ref - the room, the query and
+    // the mutation records - so a change in any of them re-runs the sweep.
+  }, [tags, created, roomId, queryClient]);
 
   return { tags, pendingLabels: pending };
 }

@@ -701,6 +701,13 @@ describe("<TagManagementContent />", () => {
     await waitFor(() => expect(removeTagsFromRoom).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(getCheckbox("fresh")).not.toBeChecked());
 
+    // And it stays unbound once effects settle: the record sweep must not eat
+    // the unbind while the create record is what keeps the row on screen -
+    // with the unbind gone, "created means bound" would flip the box back.
+    await act(async () => {});
+
+    expect(getCheckbox("fresh")).not.toBeChecked();
+
     list.unmount();
     starter.unmount();
   });

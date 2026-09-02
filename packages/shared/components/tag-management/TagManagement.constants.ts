@@ -92,3 +92,4 @@ export const EDIT_TAG_FORM_NAME = "edit-tag-form";
 // on purpose - a raw byte here makes the file binary to git and grep.
 export const KEY_FIELD_SEPARATOR = "\u0001";
 export const KEY_ENTRY_SEPARATOR = "\u0000";
+

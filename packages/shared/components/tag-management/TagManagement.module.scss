@@ -198,15 +198,16 @@
 
   // Keeps the spinner in the checkbox slot so swapping them does not move the
   // rest of the row. The box is sized inline from LOADER_SIZE, the single
-  // source of truth it shares with the spinner itself.
+  // source of truth it shares with the spinner itself - so the spinner is
+  // pinned to the box, never to a number of its own.
   .checkboxLoader {
     display: flex;
     align-items: center;
     justify-content: center;
 
     > * {
-      width: 16px;
-      height: 16px;
+      width: 100%;
+      height: 100%;
     }
   }
 

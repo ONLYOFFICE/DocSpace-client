@@ -2119,6 +2119,7 @@
   "SystemTheme": "Использовать системную тему",
   "SystemThemeDescription": "Автоматически переключайтесь между светлой и темной темами, когда это делает система.",
   "TableSettingsTitle": "Управление отображаемыми столбцами",
+  "TagAlreadyExists": "Тег «{{tagName}}» уже существует",
   "Tags": "Тэги",
   "TagsPlaceholder": "Добавить тэг",
   "TariffActivationDetails": "Администраторы: {{admins}} | Хранилище: {{storage}}",

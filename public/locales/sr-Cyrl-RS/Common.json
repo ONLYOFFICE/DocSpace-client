@@ -2119,6 +2119,7 @@
   "SystemTheme": "Користи тему система",
   "SystemThemeDescription": "Аутоматски мењај између светлих и тамних тема када твој систем то ради.",
   "TableSettingsTitle": "Управљај приказаним колонама",
+  "TagAlreadyExists": "Таг \"{{tagName}}\" већ постоји",
   "Tags": "Тагови",
   "TagsPlaceholder": "Додај таг",
   "TariffActivationDetails": "Администратори: {{admins}} | Складиште: {{storage}}",

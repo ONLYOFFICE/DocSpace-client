@@ -2119,6 +2119,7 @@
   "SystemTheme": "استخدم قالب النظام",
   "SystemThemeDescription": "قم بالتبديل تلقائيًا بين السمات الفاتحة والداكنة عندما يقوم نظامك بذلك.",
   "TableSettingsTitle": "إدارة الأعمدة المعروضة",
+  "TagAlreadyExists": "الوسم \"{{tagName}}\" موجود بالفعل",
   "Tags": "وسوم",
   "TagsPlaceholder": "أضف وسم",
   "TariffActivationDetails": "المسؤولون: {{admins}} | التخزين: {{storage}}",

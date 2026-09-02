@@ -2119,6 +2119,7 @@
   "SystemTheme": "Käytä järjestelmän teemaa",
   "SystemThemeDescription": "Vaihda automaattisesti vaalean ja tumman teeman välillä, kun systeemisi tekee niin.",
   "TableSettingsTitle": "Hallitse näytettyjä kolumneja",
+  "TagAlreadyExists": "Tunniste \"{{tagName}}\" on jo olemassa",
   "Tags": "Tunnisteet",
   "TagsPlaceholder": "Lisää tunniste",
   "TariffActivationDetails": "Ylläpitäjät: {{admins}} | Tallennustila: {{storage}}",

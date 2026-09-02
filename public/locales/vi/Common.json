@@ -2119,6 +2119,7 @@
   "SystemTheme": "Sử dụng chủ đề hệ thống",
   "SystemThemeDescription": "Tự động chuyển đổi giữa chế độ sáng và tối theo cài đặt của hệ thống.",
   "TableSettingsTitle": "Quản lý các cột được hiển thị",
+  "TagAlreadyExists": "Thẻ \"{{tagName}}\" đã tồn tại",
   "Tags": "Thẻ",
   "TagsPlaceholder": "Thêm thẻ",
   "TariffActivationDetails": "Quản trị viên: {{admins}} | Lưu trữ: {{storage}}",

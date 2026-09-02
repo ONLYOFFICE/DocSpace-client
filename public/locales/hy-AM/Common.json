@@ -2119,6 +2119,7 @@
   "SystemTheme": "Օգտագործեք համակարգի ոճը",
   "SystemThemeDescription": "Ավտոմատ կերպով անցեք բաց և մուգ ոճերի միջև, երբ ձեր համակարգը դա անում է:",
   "TableSettingsTitle": "Կառավարեք ցուցադրված սյունակները",
+  "TagAlreadyExists": "\"{{tagName}}\" պիտակն արդեն գոյություն ունի",
   "Tags": "Պիտակներ",
   "TagsPlaceholder": "Ավելացնել պիտակ",
   "TariffActivationDetails": "Ադմիններ՝ {{admins}} | Պահեստ՝ {{storage}}",

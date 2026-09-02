@@ -2119,6 +2119,7 @@
   "SystemTheme": "시스템 테마 사용",
   "SystemThemeDescription": "시스템이 전환할 때 라이트 테마와 다크 테마 간에 자동으로 전환됩니다.",
   "TableSettingsTitle": "표시된 열 관리",
+  "TagAlreadyExists": "\"{{tagName}}\" 태그가 이미 존재합니다",
   "Tags": "Tags",
   "TagsPlaceholder": "태그 추가",
   "TariffActivationDetails": "관리자: {{admins}}명 | 스토리지: {{storage}}",

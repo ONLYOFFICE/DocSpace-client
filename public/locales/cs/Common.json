@@ -2119,6 +2119,7 @@
   "SystemTheme": "Použít systémový motiv",
   "SystemThemeDescription": "Automatické přepínání mezi světlými a tmavými motivy v souladu s vaším systémem.",
   "TableSettingsTitle": "Správa zobrazených sloupců",
+  "TagAlreadyExists": "Značka \"{{tagName}}\" již existuje",
   "Tags": "Tagy",
   "TagsPlaceholder": "Přidat značku",
   "TariffActivationDetails": "Administrátoři: {{admins}} | Úložiště: {{storage}}",

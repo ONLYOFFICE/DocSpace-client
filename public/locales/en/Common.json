@@ -2119,6 +2119,7 @@
   "SystemTheme": "Use system theme",
   "SystemThemeDescription": "Automatically switch between light and dark themes when your system does.",
   "TableSettingsTitle": "Manage displayed columns",
+  "TagAlreadyExists": "Tag \"{{tagName}}\" already exists",
   "Tags": "Tags",
   "TagsPlaceholder": "Add a tag",
   "TariffActivationDetails": "Admins: {{admins}} | Storage: {{storage}}",

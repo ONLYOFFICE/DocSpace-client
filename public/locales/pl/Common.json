@@ -2119,6 +2119,7 @@
   "SystemTheme": "Użyj motywu systemowego",
   "SystemThemeDescription": "Automatycznie przełączaj się między jasnym i ciemnym motywem, kiedy robi to Twój system.",
   "TableSettingsTitle": "Zarządzaj wyświetlanymi kolumnami",
+  "TagAlreadyExists": "Tag \"{{tagName}}\" już istnieje",
   "Tags": "Tagi",
   "TagsPlaceholder": "Dodaj znacznik",
   "TariffActivationDetails": "Administratorzy: {{admins}} | Pamięć masowa: {{storage}}",

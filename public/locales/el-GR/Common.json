@@ -2119,6 +2119,7 @@
   "SystemTheme": "Χρήση θέματος συστήματος",
   "SystemThemeDescription": "Αυτόματη εναλλαγή μεταξύ φωτεινών και σκοτεινών θεμάτων όταν το σύστημά σας το κάνει.",
   "TableSettingsTitle": "Διαχείριση εμφανιζόμενων στηλών",
+  "TagAlreadyExists": "Η ετικέτα \"{{tagName}}\" υπάρχει ήδη",
   "Tags": "Ετικέτες",
   "TagsPlaceholder": "Προσθήκη ετικέτας",
   "TariffActivationDetails": "Διαχειριστές: {{admins}} | Αποθηκευτικός χώρος: {{storage}}",

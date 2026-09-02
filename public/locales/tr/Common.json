@@ -2119,6 +2119,7 @@
   "SystemTheme": "Sistem temasını kullan",
   "SystemThemeDescription": "Sisteminiz geçiş yaptığında açık ve koyu temalar arasında otomatik olarak geçiş yapar.",
   "TableSettingsTitle": "Görüntülenen sütunları yönet",
+  "TagAlreadyExists": "\"{{tagName}}\" etiketi zaten mevcut",
   "Tags": "Etiketler",
   "TagsPlaceholder": "Etiket ekle",
   "TariffActivationDetails": "Yöneticiler: {{admins}} | Depolama: {{storage}}",

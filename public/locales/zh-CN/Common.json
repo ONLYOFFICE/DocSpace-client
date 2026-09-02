@@ -2119,6 +2119,7 @@
   "SystemTheme": "使用系统主题",
   "SystemThemeDescription": "当系统主题发生变化时，自动在浅色和深色主题之间切换。",
   "TableSettingsTitle": "管理显示的列",
+  "TagAlreadyExists": "标签“{{tagName}}”已存在",
   "Tags": "标签",
   "TagsPlaceholder": "添加标签",
   "TariffActivationDetails": "管理员：{{admins}} | 存储：{{storage}}",

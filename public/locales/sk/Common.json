@@ -2119,6 +2119,7 @@
   "SystemTheme": "Použiť tému systému",
   "SystemThemeDescription": "Prepínajte medzi svetlými a tmavými témami automaticky, keď tak urobí váš systém.",
   "TableSettingsTitle": "Spravovať zobrazené stĺpce",
+  "TagAlreadyExists": "Tag \"{{tagName}}\" už existuje",
   "Tags": "Tagy",
   "TagsPlaceholder": "Pridať tag",
   "TariffActivationDetails": "Administrátori: {{admins}} | Úložisko: {{storage}}",

@@ -2119,6 +2119,7 @@
   "SystemTheme": "Uporabi sistemsko temo",
   "SystemThemeDescription": "Samodejno preklapljajte med svetlimi in temnimi temami, ko to počne vaš sistem.",
   "TableSettingsTitle": "Upravljanje prikazanih stolpcev",
+  "TagAlreadyExists": "Oznaka \"{{tagName}}\" že obstaja",
   "Tags": "Oznake",
   "TagsPlaceholder": "Dodaj oznak",
   "TariffActivationDetails": "Skrbniki: {{admins}} | Shramba: {{storage}}",

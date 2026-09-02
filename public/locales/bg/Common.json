@@ -2119,6 +2119,7 @@
   "SystemTheme": "Използвайте системна тема",
   "SystemThemeDescription": "Автоматично превключване между светли и тъмни теми, в съответствие със системата ви.",
   "TableSettingsTitle": "Управлявай показаните колони",
+  "TagAlreadyExists": "Етикетът \"{{tagName}}\" вече съществува",
   "Tags": "Етикети",
   "TagsPlaceholder": "Добавяне на таг",
   "TariffActivationDetails": "Администратори: {{admins}} | Съхранение: {{storage}}",

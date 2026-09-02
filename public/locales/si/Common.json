@@ -2119,6 +2119,7 @@
   "SystemTheme": "පද්ධතියේ තේමාව යොදාගන්න",
   "SystemThemeDescription": "ඔබගේ පද්ධතියේ වෙනස් වන පරිදි දීප්ත සහ අඳුරු තේමා අතර ස්වයංක්‍රීයව මාරු වන්න.",
   "TableSettingsTitle": "දිස්වන තීරු කළමනාකරණය",
+  "TagAlreadyExists": "\"{{tagName}}\" ටැගය දැනටමත් පවතී",
   "Tags": "ටැග්",
   "TagsPlaceholder": "අනන්‍යනයක් යොදන්න",
   "TariffActivationDetails": "පරිපාලකයින්: {{admins}} | ආචයනය: {{storage}}",

@@ -2119,6 +2119,7 @@
   "SystemTheme": "Përdorni temën e sistemit",
   "SystemThemeDescription": "Kaloni automatikisht midis temave të lehta dhe të errëta kur sistemi juaj e bën këtë.",
   "TableSettingsTitle": "Menaxhoni kolonat e shfaqura",
+  "TagAlreadyExists": "Etiketa \"{{tagName}}\" ekziston tashmë",
   "Tags": "Etiketa",
   "TagsPlaceholder": "Shtoni një etiketë",
   "TariffActivationDetails": "Administratorë: {{admins}} | Ruajtje: {{storage}}",

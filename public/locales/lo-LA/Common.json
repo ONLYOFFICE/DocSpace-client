@@ -2119,6 +2119,7 @@
   "SystemTheme": "ໃຊ້ຮູບແບບລະບົບ",
   "SystemThemeDescription": "ສະຫຼັບລະຫວ່າງຮູບແບບສີສັນແຈ້ງ ແລະມືດໂດຍອັດຕະໂນມັດເມື່ອລະບົບຂອງເຈົ້າປ່ຽນ.",
   "TableSettingsTitle": "ຈັດການຖັນທີ່ສະແດງ",
+  "TagAlreadyExists": "ປ້າຍກຳກັບ \"{{tagName}}\" ມີຢູ່ແລ້ວ",
   "Tags": "ປ້າຍກຳກັບ",
   "TagsPlaceholder": "ເພີ່ມແທັກ",
   "TariffActivationDetails": "ຜູ້ເບິ່ງແຍງ: {{admins}} | ເກັບມ້ຽນ: {{storage}}",

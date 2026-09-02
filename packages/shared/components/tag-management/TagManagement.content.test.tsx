@@ -316,6 +316,57 @@ describe("<TagManagementContent />", () => {
     );
   });
 
+  it("keeps the editor and its text when the rename request fails", async () => {
+    const failingEditFlow = (_oldLabel: string, _newLabel: string) =>
+      (async function* () {
+        yield true;
+        throw new Error("rename failed");
+      })();
+
+    render(
+      <QueryClientProvider client={createQueryClient()}>
+        <TagManagementProvider
+          roomTags={["boundTag"]}
+          roomId={ROOM_ID}
+          access={fullAccess}
+        >
+          <TagManagementContent roomId={ROOM_ID} onEditTag={failingEditFlow} />
+        </TagManagementProvider>
+      </QueryClientProvider>,
+    );
+
+    await userEvent.click(screen.getByTestId("edit_tag_button_freeTag"));
+
+    const input = await screen.findByTestId("edit_tag_input");
+
+    await userEvent.clear(input);
+    await userEvent.type(input, "renamed{Enter}");
+
+    // The request failed, so the row stays in edit mode with the typed name -
+    // there is something to correct and retry instead of retyping.
+    await waitFor(() =>
+      expect(screen.getByTestId("edit_tag_input")).toHaveValue("renamed"),
+    );
+  });
+
+  it("keeps an open editor when another row is toggled", async () => {
+    renderContent();
+
+    await userEvent.click(screen.getByTestId("edit_tag_button_freeTag"));
+
+    const input = await screen.findByTestId("edit_tag_input");
+
+    await userEvent.clear(input);
+    await userEvent.type(input, "half-typed");
+
+    await userEvent.click(screen.getByTestId("tag_row_boundTag"));
+
+    await waitFor(() => expect(removeTagsFromRoom).toHaveBeenCalledTimes(1));
+
+    // The toggle was about another tag: the unsaved name survives it.
+    expect(screen.getByTestId("edit_tag_input")).toHaveValue("half-typed");
+  });
+
   it("does not toggle the tag when binding is not allowed", async () => {
     renderContent({ ...fullAccess, canBindTag: false });
 

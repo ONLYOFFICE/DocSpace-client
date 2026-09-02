@@ -105,7 +105,10 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   const toggleChecked = useCallback(
     async (tag: TTag) => {
       try {
-        setEditingLabel(null);
+        // Toggling the row that is being renamed is the one case where the
+        // editor must close - its unsaved name is about the row's old state.
+        // A toggle on any other row leaves an open editor alone.
+        setEditingLabel((current) => (current === tag.label ? null : current));
 
         await updateTag.mutateAsync({ ...tag, checked: !tag.checked });
 
@@ -168,8 +171,12 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
           if (!confirmed) return;
         }
 
-        cancelEdit();
         await flow?.next();
+
+        // Only now that the rename went through: closing the editor earlier
+        // resets the form, and a failed request would leave nothing to retry
+        // or correct - the typed name would have to be entered again.
+        cancelEdit();
       } catch (error) {
         console.error("Failed to update tag name:", error);
         toastr.error(error instanceof Error ? error : new Error(String(error)));

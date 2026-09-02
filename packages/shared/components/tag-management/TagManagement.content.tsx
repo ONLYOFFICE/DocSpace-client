@@ -147,7 +147,14 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         return;
       }
 
-      const isTaken = tags.some((tag) => tag.label !== oldLabel);
+      // The whole list, not the filtered one: a tag the search is hiding is
+      // still a tag the rename would collide with. Compared case-insensitively,
+      // because two tags that differ in case only read as the same name.
+      const isTaken = tags.some(
+        (tag) =>
+          tag.label !== oldLabel &&
+          tag.label.toLowerCase() === newLabel.toLowerCase(),
+      );
 
       if (isTaken) {
         // Nothing is sent and the row stays in edit mode, so the name can be

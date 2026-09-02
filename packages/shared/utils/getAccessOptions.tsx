@@ -67,7 +67,6 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
 		case None:
 			return t("Common:RoleRoomAdminDescription", {
 				sectionName: t("Common:Files"),
-				agentSection: t("Common:AIAgents"),
 			});
 		default:
 			return t("Common:RoleRoomManagerDescription");
@@ -82,8 +81,7 @@ const getUserDescription = (roomType: RoomsType, t: TTranslation) => {
 			return t("Common:RoleAIAgentContentCreatorDescription");
 		case None:
 			return t("Common:RoleNewUserDescription", {
-				aiAgent: t("Common:AIAgent"),
-				aiChats: t("Common:AIChats"),
+				sectionName: t("Common:Files"),
 			});
 		default:
 			return t("Common:RoleContentCreatorDescription");
@@ -117,7 +115,6 @@ export const getAccessOptions = (
 			label: getUserTypeTranslation(EmployeeType.Admin, t),
 			description: t("Common:RolePortalAdminDescription", {
 				sectionName: t("Common:Files"),
-				agentSection: t("Common:AIAgents"),
 			}),
 			...(!standalone && isNone && { quota: t("Common:Paid") }),
 			color: globalColors.favoritesStatus,

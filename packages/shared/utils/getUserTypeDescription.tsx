@@ -48,22 +48,17 @@ export const getUserTypeDescriptionByType = (
     case EmployeeType.Admin:
       return t("Common:RolePortalAdminDescription", {
         sectionName: t("Common:Files"),
-        agentSection: t("Common:AIAgents"),
       });
     case EmployeeType.RoomAdmin:
       return t("Common:RoleRoomAdminDescription", {
         sectionName: t("Common:Files"),
-        agentSection: t("Common:AIAgents"),
       });
     case EmployeeType.User:
       return t("Common:RoleNewUserDescription", {
-        aiAgent: t("Common:AIAgent"),
-        aiChats: t("Common:AIChats"),
-      });
-    case EmployeeType.Guest:
-      return t("Common:RoleGuestDescription", {
         sectionName: t("Common:Files"),
       });
+    case EmployeeType.Guest:
+      return t("Common:RoleGuestDescription");
     default:
       return undefined;
   }

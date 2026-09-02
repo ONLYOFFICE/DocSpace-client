@@ -99,7 +99,7 @@ export const mockLocaleSamplePlugin: TAPIPlugin = {
   ...mockPlugin1,
   name: "locale-sample",
   version: "1.0.0",
-  minDocSpaceVersion: "3.5.0",
+  minDocSpaceVersion: "4.0.0",
   description: "Sample plugin demonstrating plugin localization for DocSpace",
   nameLocale: {
     de: "Locale-Beispiel",
@@ -194,7 +194,7 @@ export const mockArticleNavigationPlugin: TAPIPlugin = {
     "Sample plugin adding two sidebar entries with React section pages",
   pluginName: "ArticleNavigationSample",
   scopes: "ArticleNavigation",
-  image: "docspace-icon.svg",
+  image: "plugin-icon.svg",
   url: "/plugins/article-navigation/plugin.js",
   // The sample is an ES module bundle, so it has to be imported rather than
   // dropped into a <script> tag: without this the plugin dies on load with

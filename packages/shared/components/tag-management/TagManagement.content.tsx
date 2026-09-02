@@ -272,7 +272,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                     <Loader
                       primary
                       size={`${LOADER_SIZE}px`}
-                      type={LoaderTypes.oval}
+                      type={LoaderTypes.track}
                     />
                   </span>
                 ) : (
@@ -374,3 +374,4 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     </div>
   );
 };
+

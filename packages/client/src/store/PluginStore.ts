@@ -103,13 +103,17 @@ import type {
   TMessageActionsParams,
 } from "SRC_DIR/helpers/plugins/types";
 
-import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
+import {
+  getPluginUrl,
+  matchesUserRole,
+  messageActions,
+} from "../helpers/plugins/utils";
 import { createPluginApi } from "../helpers/plugins/react/api";
 import { toCurrentUser } from "../helpers/plugins/react/utils";
 import {
   PluginFileType,
   PluginScopes,
-  PluginUsersType,
+  PluginUserRole,
   PluginStatus,
   type PluginDevices,
 } from "../helpers/plugins/enums";
@@ -888,19 +892,19 @@ class PluginStore {
   getUserRole = () => {
     const { user } = this.userStore;
 
-    if (!user) return PluginUsersType.user;
+    if (!user) return PluginUserRole.guest;
 
     const { isOwner, isAdmin, isCollaborator, isVisitor } = user;
 
     const userRole = isOwner
-      ? PluginUsersType.owner
+      ? PluginUserRole.owner
       : isAdmin
-        ? PluginUsersType.docSpaceAdmin
+        ? PluginUserRole.fullAdmin
         : isCollaborator
-          ? PluginUsersType.collaborator
+          ? PluginUserRole.user
           : isVisitor
-            ? PluginUsersType.user
-            : PluginUsersType.roomAdmin;
+            ? PluginUserRole.guest
+            : PluginUserRole.roomAdmin;
 
     return userRole;
   };
@@ -923,8 +927,7 @@ class PluginStore {
 
     if (fileExst && item.fileExt && !item.fileExt.includes(fileExst)) return;
 
-    if (userRole && item.usersTypes && !item.usersTypes.includes(userRole))
-      return;
+    if (userRole && !matchesUserRole(item.usersTypes, userRole)) return;
 
     if (device && item.devices && !item.devices.includes(device)) return;
 
@@ -1199,9 +1202,7 @@ class PluginStore {
     const actualKeys = new Set<string>();
 
     Array.from(items).forEach(([key, value]: [string, IInfoPanelItem]) => {
-      const correctUserType = value.usersTypes
-        ? value.usersTypes.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersTypes, userRole);
 
       const correctDevice = value.devices
         ? value.devices.includes(device)
@@ -1260,9 +1261,7 @@ class PluginStore {
     const actualKeys = new Set<string>();
 
     Array.from(items).forEach(([key, value]) => {
-      const correctUserType = value.usersType
-        ? value.usersType.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersType, userRole);
 
       const correctDevice = value.devices
         ? value.devices.includes(device)
@@ -1358,9 +1357,7 @@ class PluginStore {
     const actualKeys = new Set<string>();
 
     Array.from(items).forEach(([key, value]) => {
-      const correctUserType = value.usersType
-        ? value.usersType.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersType, userRole);
 
       const correctDevice = value.devices
         ? value.devices.includes(device)
@@ -1417,9 +1414,7 @@ class PluginStore {
     const actualKeys = new Set<string>();
 
     Array.from(items).forEach(([key, value]) => {
-      const correctUserType = value.usersTypes
-        ? value.usersTypes.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersTypes, userRole);
 
       const correctDevice = value.devices
         ? value.devices.includes(device)
@@ -1472,9 +1467,7 @@ class PluginStore {
     const actualKeys = new Set<string>();
 
     Array.from(items).forEach(([key, value]) => {
-      const correctUserType = value.usersType
-        ? value.usersType.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersType, userRole);
 
       if (!correctUserType) return;
 
@@ -1567,9 +1560,7 @@ class PluginStore {
     const actualKeys = new Set<string>();
 
     for (const [key, value] of Array.from(items)) {
-      const correctUserType = value.usersTypes
-        ? value.usersTypes.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersTypes, userRole);
 
       const correctDevice = value.devices
         ? value.devices.includes(device)
@@ -1603,9 +1594,7 @@ class PluginStore {
     const actualItems = new Map<string, IArticleNavigationItemClient>();
 
     for (const [key, value] of Array.from(items)) {
-      const correctUserType = value.usersTypes
-        ? value.usersTypes.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersTypes, userRole);
 
       const correctDevice = value.devices
         ? value.devices.includes(device)

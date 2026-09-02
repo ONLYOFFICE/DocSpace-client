@@ -39,7 +39,12 @@ import { Events } from "@docspace/shared/enums";
 
 import config from "PACKAGE_FILE";
 
-import { PluginActions, PluginToastType } from "./enums";
+import {
+  PluginActions,
+  PluginToastType,
+  PluginUserRole,
+  PluginUsersType,
+} from "./enums";
 import { CategoryType } from "@docspace/shared/constants";
 import { getCategoryType } from "@docspace/shared/utils/common";
 import { IBox } from "@onlyoffice/docspace-plugin-sdk";
@@ -347,6 +352,32 @@ export const messageActions = ({
         break;
     }
   });
+};
+
+// Values a plugin item may still list for a role the SDK renamed in `UserRole`.
+// A plugin built against an older SDK inlined the `UsersType` value into its
+// bundle, so every renamed role has to match that value too — which is why the
+// deprecated enum is referenced here on purpose. `owner` and `roomAdmin` kept
+// their values and need no entry.
+const LEGACY_USER_ROLES: Partial<Record<PluginUserRole, PluginUsersType[]>> = {
+  [PluginUserRole.fullAdmin]: [PluginUsersType.docSpaceAdmin],
+  [PluginUserRole.user]: [PluginUsersType.collaborator],
+  [PluginUserRole.guest]: [PluginUsersType.user],
+};
+
+// `true` when the item is open to every user type, or lists the role the
+// portal computed — under its current name or a deprecated one.
+export const matchesUserRole = (
+  usersTypes: (PluginUserRole | PluginUsersType)[] | undefined,
+  userRole: PluginUserRole,
+): boolean => {
+  if (!usersTypes) return true;
+
+  if (usersTypes.includes(userRole)) return true;
+
+  const legacy = LEGACY_USER_ROLES[userRole];
+
+  return !!legacy && legacy.some((type) => usersTypes.includes(type));
 };
 
 export const isPluginPage = (): boolean =>

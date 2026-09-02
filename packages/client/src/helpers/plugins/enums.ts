@@ -40,6 +40,7 @@ import {
   PluginStatus,
   ToastType,
   Components,
+  UserRole,
   UsersType,
   Devices,
   Section,
@@ -68,6 +69,9 @@ export {
   PluginStatus,
   ToastType as PluginToastType,
   Components as PluginComponents,
+  UserRole as PluginUserRole,
+  // Kept for the deprecated values a plugin built against an older SDK
+  // still lists; new code uses PluginUserRole.
   UsersType as PluginUsersType,
   Devices as PluginDevices,
 };

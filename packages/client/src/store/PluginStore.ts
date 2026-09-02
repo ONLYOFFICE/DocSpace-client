@@ -1781,7 +1781,7 @@ class PluginStore {
     user: TUser | null,
   ): PluginRuntime => {
     // Bare redraw requests: the plugin has already mutated its own item, and the
-    // message only tells DocSpace to re-read the collection.
+    // message only tells the portal to re-read the collection.
     const redraw = (action: Actions) => () =>
       this.dispatchMessage({ message: { actions: [action] }, pluginName });
 

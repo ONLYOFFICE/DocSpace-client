@@ -109,9 +109,9 @@ describe("rewritePluginImports", () => {
   it.each([
     ['import { debounce } from "lodash-es";', "a static import"],
     ['const { z } = await import("zod");', "a dynamic import"],
-  ])("refuses a package DocSpace does not provide (%s)", (code) => {
+  ])("refuses a package the portal does not provide (%s)", (code) => {
     expect(() => rewritePluginImports(code)).toThrow(
-      /which DocSpace does not provide/,
+      /which the portal does not provide/,
     );
   });
 
@@ -187,10 +187,10 @@ describe("rewritePluginImports", () => {
     }
 
     expect(thrown).toContain('shims only its');
-    expect(thrown).toContain('"lodash-es", which DocSpace does not provide');
+    expect(thrown).toContain('"lodash-es", which the portal does not provide');
     // The root must not be repeated as an unprovided package.
     expect(thrown).not.toContain(
-      '"@onlyoffice/docspace-plugin-sdk", which DocSpace does not provide',
+      '"@onlyoffice/docspace-plugin-sdk", which the portal does not provide',
     );
   });
 

@@ -34,6 +34,7 @@
  */
 
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 import { useForm, Controller } from "react-hook-form";
 import React, { useCallback, useMemo, useState } from "react";
 
@@ -87,8 +88,10 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     shouldUnregister: true,
   });
 
+  const { t } = useTranslation("Common");
   const isMobile = useIsMobile();
   const {
+    tags,
     filteredTags,
     pendingLabels,
     access: { canEdit, canRemove, canBindTag },
@@ -101,10 +104,8 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   const toggleChecked = useCallback(
     async (tag: TTag) => {
       try {
-        // The list picks the new value up from the mutation itself and drops
-        // it again if this rejects, so there is nothing to apply or roll back
-        // here. mutateAsync, not mutate: a second toggle detaches the mutation
-        // still in flight and its per-call callbacks never run.
+        setEditingLabel(null);
+
         await updateTag.mutateAsync({ ...tag, checked: !tag.checked });
 
         onTagsChanged?.();
@@ -146,6 +147,15 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         return;
       }
 
+      const isTaken = tags.some((tag) => tag.label !== oldLabel);
+
+      if (isTaken) {
+        // Nothing is sent and the row stays in edit mode, so the name can be
+        // corrected instead of retyped.
+        toastr.error(t("Common:TagAlreadyExists", { tagName: newLabel }));
+        return;
+      }
+
       const flow = onEditTag?.(oldLabel, newLabel);
 
       try {
@@ -164,7 +174,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         toastr.error(error instanceof Error ? error : new Error(String(error)));
       }
     },
-    [editingLabel, cancelEdit, onEditTag],
+    [editingLabel, cancelEdit, onEditTag, tags, t],
   );
 
   const deleteTag = useCallback(

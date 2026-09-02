@@ -61,12 +61,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import {
-  Navigate,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useTranslation, Trans } from "react-i18next";
 
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
@@ -87,7 +82,6 @@ import ChatPanelView from "@docspace/ui-kit/components/section/sub-components/Ch
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
-import { setDashboardVisited } from "SRC_DIR/helpers/dashboardVisited";
 import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 import { IntegrationsCard } from "SRC_DIR/components/IntegrationsCard";
 import {
@@ -178,7 +172,6 @@ const Dashboard = (props: DashboardProps) => {
   // anything should not be in the tree to begin with.
   const isMobile = currentDeviceType === DeviceType.mobile;
 
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -225,16 +218,6 @@ const Dashboard = (props: DashboardProps) => {
   React.useEffect(() => {
     hydrateWelcome(userId);
   }, [hydrateWelcome, userId]);
-
-  // Spends this user's one first-load Overview: from the next sign-in on, the
-  // entry redirect sends them to their Default Homepage instead. Recorded from
-  // the page rather than from the redirect so that only reaching the Overview
-  // for real counts, and only past the loader so a load abandoned on the
-  // skeleton doesn't.
-  React.useEffect(() => {
-    if (showLoader) return;
-    setDashboardVisited(userId);
-  }, [showLoader, userId]);
 
   /**
    * Whether the welcome is on screen, which two different things can ask for:
@@ -312,16 +295,6 @@ const Dashboard = (props: DashboardProps) => {
   React.useEffect(() => {
     window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
   }, [location.key]);
-
-  const design = searchParams.get("design");
-  if (design === "old") {
-    localStorage.setItem("useDocSpace", "old");
-    return <Navigate to="/" replace />;
-  }
-  if (design === "new") {
-    localStorage.setItem("useDocSpace", "new");
-    return <Navigate to="/dashboard" replace />;
-  }
 
   // On first app load the sidebar shows its nav skeleton until initFiles
   // resolves; render the matching body skeleton so the Overview doesn't pop in

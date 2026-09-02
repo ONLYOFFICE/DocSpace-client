@@ -37,22 +37,32 @@ import { inject, observer } from "mobx-react";
 import { Navigate } from "react-router";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { FolderType } from "@docspace/shared/enums";
 
-import { getUrlByDefaultFolderType } from "SRC_DIR/helpers/utils";
+import { getDefaultStartPageUrl } from "SRC_DIR/helpers/defaultStartPage";
 
 type Props = {
   defaultFolderType?: SettingsStore["defaultFolderType"];
+  aiServicesEnabled?: SettingsStore["aiServicesEnabled"];
+  isGuest?: boolean;
 };
 
-const DefaultPageRedirectComponent = ({ defaultFolderType }: Props) => {
-  const defaultUrl = getUrlByDefaultFolderType(
-    defaultFolderType ?? FolderType.DEFAULT,
-  );
+const DefaultPageRedirectComponent = ({
+  defaultFolderType,
+  aiServicesEnabled,
+  isGuest,
+}: Props) => {
+  const defaultUrl = getDefaultStartPageUrl(defaultFolderType, {
+    aiServicesEnabled,
+    isGuest,
+  });
 
   return <Navigate to={defaultUrl} replace />;
 };
 
-export const DefaultPageRedirect = inject(({ settingsStore }: TStore) => ({
-  defaultFolderType: settingsStore.defaultFolderType,
-}))(observer(DefaultPageRedirectComponent));
+export const DefaultPageRedirect = inject(
+  ({ settingsStore, userStore }: TStore) => ({
+    defaultFolderType: settingsStore.defaultFolderType,
+    aiServicesEnabled: settingsStore.aiServicesEnabled,
+    isGuest: userStore.user?.isVisitor ?? false,
+  }),
+)(observer(DefaultPageRedirectComponent));

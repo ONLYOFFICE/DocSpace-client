@@ -255,9 +255,6 @@ export const getUrlByDefaultFolderType = (folderType) => {
   return getCategoryUrl(categoryType);
 };
 
-export const isNewProductView = () =>
-  localStorage.getItem("useDocSpace") !== "old";
-
 export const getNewViewUrlByFolderType = (folderType) => {
   switch (folderType) {
     case FolderType.SHARE:

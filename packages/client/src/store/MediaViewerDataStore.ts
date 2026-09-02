@@ -48,6 +48,7 @@ import type { PlaylistType } from "@docspace/shared/components/media-viewer/Medi
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { matchesUserRole } from "SRC_DIR/helpers/plugins/utils";
 
 import {
   findNearestIndex,
@@ -388,8 +389,7 @@ class MediaViewerDataStore {
 
       // Check user type
       if (usersTypes && usersTypes.length > 0) {
-        const currentUserType = getUserRole();
-        if (!usersTypes.includes(currentUserType)) {
+        if (!matchesUserRole(usersTypes, getUserRole())) {
           return false;
         }
       }

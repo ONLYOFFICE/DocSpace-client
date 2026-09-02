@@ -61,11 +61,12 @@ export const getTagBindMutationKey = (roomId: string | number) => [
 // reports and the one the tags query already has are the same tag - the two
 // sources cannot work it out on their own, and the host is not required to
 // reload the room at all (the client passes no onTagsChanged), so the stale
-// copy can outlive any short window. The default five minutes is shorter than
-// that, and once the record expires the tag is listed twice, under both names.
-// Bounded anyway rather than kept forever, which useRoomTagList can afford:
-// it ignores a record that no longer matches what the query says.
-export const TAG_MUTATION_RECORD_GC_TIME = 30 * 60 * 1000;
+// copy outlives any window that can be picked here. Kept for the session:
+// under any deadline the tag starts being listed twice, under both names, the
+// moment the record expires. It costs one small object per rename or delete,
+// and useRoomTagList ignores a record that no longer matches what the query
+// says - see resolveLabel.
+export const TAG_MUTATION_RECORD_GC_TIME = Number.POSITIVE_INFINITY;
 
 // Creating a tag also binds it to the room it was created from.
 export const getTagCreateMutationKey = (roomId: string | number) => [

@@ -286,6 +286,36 @@ describe("<TagManagementContent />", () => {
     );
   });
 
+  it("does not bind the tag while its row is being renamed", async () => {
+    renderContent();
+
+    await userEvent.click(screen.getByTestId("edit_tag_button_freeTag"));
+    await screen.findByTestId("edit_tag_input");
+
+    const checkbox = getCheckbox("freeTag");
+
+    expect(checkbox).toBeDisabled();
+
+    // Binding clears the editor, so the name typed into it would be lost.
+    await userEvent.click(checkbox, { pointerEventsCheck: 0 });
+
+    expect(screen.getByTestId("edit_tag_input")).toBeInTheDocument();
+    expect(addTagsToRoom).not.toHaveBeenCalled();
+  });
+
+  it("binds the tag when the row is activated from the keyboard", async () => {
+    renderContent();
+
+    await screen.findByTestId("tag_item_freeTag");
+
+    screen.getByTestId("tag_row_freeTag").focus();
+    await userEvent.keyboard("{Enter}");
+
+    await waitFor(() =>
+      expect(addTagsToRoom).toHaveBeenCalledWith(ROOM_ID, ["freeTag"]),
+    );
+  });
+
   it("does not toggle the tag when binding is not allowed", async () => {
     renderContent({ ...fullAccess, canBindTag: false });
 
@@ -807,7 +837,38 @@ describe("<TagManagementContent />", () => {
     starter.unmount();
   });
 
-  it("keeps the rename record past the default gc window", async () => {
+  it("lists the tag once after two renames without a room reload", async () => {
+    const queryClient = createQueryClient();
+    // Same order in the cache and in the refetch, so the row order says
+    // something about the rename records rather than about the sources.
+    getTags.mockResolvedValue(["boundTag", "freeTag"]);
+    queryClient.setQueryData(TAGS_QUERY_KEY, ["boundTag", "freeTag"]);
+
+    const starter = renderMutationStarter(queryClient);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <TagList access={fullAccess} roomTags={["boundTag"]} />
+      </QueryClientProvider>,
+    );
+
+    await screen.findByTestId("tag_item_boundTag");
+
+    starter.handlers.rename("boundTag", "first");
+
+    await waitFor(() => expect(rowLabels()).toEqual(["first", "freeTag"]));
+
+    starter.handlers.rename("first", "second");
+
+    // The room still reports "boundTag", so both records have to be crossed to
+    // reach the name the query now has. Following only the first one lists the
+    // tag under "boundTag" - a name nothing knows any more - next to "second".
+    await waitFor(() => expect(rowLabels()).toEqual(["second", "freeTag"]));
+
+    starter.unmount();
+  });
+
+  it("keeps the rename record for as long as the session lasts", async () => {
     // The record is the only thing that can tell the list the name the room
     // still reports and the one the query already has are the same tag, and the
     // host is free never to reload the room - the client passes no
@@ -829,7 +890,7 @@ describe("<TagManagementContent />", () => {
       starter.unmount();
 
       await act(async () => {
-        vi.advanceTimersByTime(6 * 60 * 1000);
+        vi.advanceTimersByTime(24 * 60 * 60 * 1000);
       });
 
       expect(

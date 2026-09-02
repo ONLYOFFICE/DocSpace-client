@@ -75,8 +75,15 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
 
     const filtered = searchFilter(tags, search);
 
+    // Compared the way the rename check compares - case-insensitively, and
+    // against the whole list rather than the filtered one: "boundtag" and
+    // "BoundTag" are the same name, and a tag the search is hiding still
+    // occupies it.
+    const searched = search.toLowerCase();
+
     const showCreateTag = Boolean(
-      canCreate && filtered.every((tag) => tag.label.trim() !== search),
+      canCreate &&
+        tags.every((tag) => tag.label.trim().toLowerCase() !== searched),
     );
 
     return [filtered, showCreateTag];

@@ -354,6 +354,45 @@ export function useRoomTagList(
     // while the query and the room actually disagree - see below.
     const exists = new Set(fetchedTags);
 
+    /**
+     * The name to list the room's copy of a tag under.
+     *
+     * The room keeps the old name until the host reloads it, so the same tag
+     * would otherwise be listed twice - under both names. A rename record is
+     * the bridge between the two, and renaming the same tag again leaves a
+     * second record to cross: the walk follows them until the query agrees
+     * with the name. Stopping after the first record listed the tag under a
+     * name nothing knows any more, next to the live one from the query.
+     *
+     * A record whose source name the query still has describes something that
+     * is no longer true - the tag was renamed back, or recreated under the old
+     * name - so the walk does not start at all.
+     */
+    const resolveLabel = (start: string) => {
+      // A rename in flight is shown right away, under the name it is applying:
+      // the query cannot have moved yet, and only one rename at a time can be
+      // running for a tag.
+      const running = renamed.get(start);
+
+      if (running?.isPending) return running.to;
+
+      const walked = new Set([start]);
+      let label = start;
+
+      while (!exists.has(label)) {
+        const rename = renamed.get(label);
+
+        // Nothing more to follow, or the chain leads back to a name already
+        // walked - a rename undone by a later one.
+        if (!rename || walked.has(rename.to)) break;
+
+        label = rename.to;
+        walked.add(label);
+      }
+
+      return label;
+    };
+
     // Placed oldest first, so that the newest create takes the smallest
     // position and leads the list.
     for (let i = created.length - 1; i >= 0; i -= 1) place(created[i], true);
@@ -373,18 +412,7 @@ export function useRoomTagList(
       // one was deleted, and hiding it would make a live tag invisible.
       if (removed.has(tag.label) && !exists.has(tag.label)) return;
 
-      // The room keeps the old name until the host reloads it, so the same tag
-      // would otherwise be listed twice - under both names. A running rename is
-      // shown right away, under the name it is applying. A finished one counts
-      // only while the query has moved on and the room has not: once the tag is
-      // called by its old name again - renamed back, or recreated under it -
-      // the record describes something that is no longer true.
-      const rename = renamed.get(tag.label);
-      const label =
-        rename !== undefined &&
-        (rename.isPending || (!exists.has(tag.label) && exists.has(rename.to)))
-          ? rename.to
-          : tag.label;
+      const label = resolveLabel(tag.label);
 
       if (seen.has(label)) return;
       seen.add(label);

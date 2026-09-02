@@ -111,22 +111,6 @@ export function searchFilter(list: TTag[], query: string) {
 export const stopPropagation = (event: React.MouseEvent) =>
   event.stopPropagation();
 
-export const promiseWithResolvers = <T>() => {
-  let resolve: (value: T | PromiseLike<T>) => void;
-  let reject: (reason?: unknown) => void;
-
-  const promise = new Promise<T>((res, rej) => {
-    resolve = res;
-    reject = rej;
-  });
-
-  return {
-    promise,
-    resolve: resolve!,
-    reject: reject!,
-  };
-};
-
 export const isTag = (variables: unknown): variables is TTag =>
   typeof variables === "object" &&
   variables !== null &&

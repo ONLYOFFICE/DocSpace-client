@@ -43,6 +43,7 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
+import { ButtonKeys } from "@docspace/ui-kit/enums";
 import { Tag } from "@docspace/ui-kit/components/tag";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
@@ -249,6 +250,18 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                 [styles.rowPending]: isPending,
               })}
               onClick={isRowClickable ? () => toggleChecked(tag) : undefined}
+              onKeyDown={
+                isRowClickable
+                  ? (event) => {
+                      if (event.key !== ButtonKeys.enter) return;
+
+                      event.preventDefault();
+                      toggleChecked(tag);
+                    }
+                  : undefined
+              }
+              role={isRowClickable ? "button" : undefined}
+              tabIndex={isRowClickable ? 0 : undefined}
               data-testid={`tag_row_${tag.label}`}
             >
               {/* The checkbox toggles through its own onChange, so its click
@@ -272,7 +285,10 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                 ) : (
                   <Checkbox
                     isChecked={tag.checked}
-                    isDisabled={!canBindTag}
+                    // Disabled while the row is being renamed: binding clears
+                    // the editor, and the name typed into it would be thrown
+                    // away without a word.
+                    isDisabled={!canBindTag || isEditing}
                     className={styles.checkbox}
                     onChange={() => toggleChecked(tag)}
                     dataTestId={`tag_checkbox_${tag.label}`}
@@ -365,4 +381,3 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     </div>
   );
 };
-

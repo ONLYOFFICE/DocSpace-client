@@ -214,6 +214,24 @@ describe("TagManagementProvider", () => {
     });
   });
 
+  it("does not offer to create a tag that exists in another case", async () => {
+    const user = userEvent.setup();
+
+    renderProvider({
+      roomTags: ["BoundTag"],
+      fetchedTags: [],
+      access: { canCreate: true },
+    });
+
+    // The rename check treats the two as the same name, so creating one next
+    // to the other has to be refused as well.
+    await user.type(screen.getByTestId("search-input"), "boundtag");
+
+    await waitFor(() => {
+      expect(screen.getByTestId("show-create")).toHaveTextContent("false");
+    });
+  });
+
   it("does not show create tag option when exact match exists", async () => {
     const user = userEvent.setup();
     const roomTags = ["test", "testing"];

@@ -57,7 +57,7 @@ import { removeEmojiCharacters } from "../../utils/removeEmojiCharacters";
 
 import { useTagManagement } from "./TagManagement.provider";
 import { useCreateTagMutation } from "./hooks/useTagsQuery";
-import type { TagManagementFilterProps, TTag } from "./TagManagement.types";
+import type { TagManagementFilterProps } from "./TagManagement.types";
 import styles from "./TagManagement.module.scss";
 
 export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({

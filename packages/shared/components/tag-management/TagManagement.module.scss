@@ -218,6 +218,18 @@
     }
   }
 
+  // The two action icons as one flex item: the row's gap separates the icons
+  // from the tag, not the icons from each other.
+  .rowActions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+    gap: 4px;
+    height: 100%;
+    width: 36px;
+  }
+
   .editIcon,
   .deleteIcon {
     flex-shrink: 0;
@@ -324,3 +336,4 @@
   line-height: 16px;
   letter-spacing: 0px;
 }
+

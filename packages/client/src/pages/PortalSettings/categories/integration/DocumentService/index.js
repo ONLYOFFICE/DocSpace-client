@@ -36,7 +36,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { Link } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";

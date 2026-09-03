@@ -49,35 +49,47 @@ import type {
   TagManagementWrapperProps,
 } from "./TagManagement.types";
 
+// The one place the tag permissions are derived from the room access. The
+// info panel asks it too, to decide whether an empty room still gets a Tags
+// row with the add button.
+export const getTagManagementAccess = (
+  roomAccess: ShareAccessRights,
+  isAdmin: boolean | undefined,
+  isArchiveFolder: boolean | undefined,
+): AccessTagManagement => {
+  const isRoomManager = roomAccess === ShareAccessRights.RoomManager;
+  const isRoomOwner =
+    roomAccess === ShareAccessRights.None ||
+    roomAccess === ShareAccessRights.FullAccess;
+
+  const canEdit = isAdmin && !isArchiveFolder;
+  const canRemove = isAdmin && !isArchiveFolder;
+
+  const canCreate =
+    (isAdmin || isRoomOwner || isRoomManager) && !isArchiveFolder;
+
+  const canBindTag = canCreate;
+  const canSearch = canCreate;
+
+  return {
+    canEdit,
+    canRemove,
+    canCreate,
+    canBindTag,
+    canSearch,
+  } satisfies AccessTagManagement;
+};
+
 const TagManagement: FC<TagManagementWrapperProps> = ({
   access: roomAccess,
   isAdmin,
   isArchiveFolder,
   ...props
 }) => {
-  const access = useMemo(() => {
-    const isRoomManager = roomAccess === ShareAccessRights.RoomManager;
-    const isRoomOwner =
-      roomAccess === ShareAccessRights.None ||
-      roomAccess === ShareAccessRights.FullAccess;
-
-    const canEdit = isAdmin && !isArchiveFolder;
-    const canRemove = isAdmin && !isArchiveFolder;
-
-    const canCreate =
-      (isAdmin || isRoomOwner || isRoomManager) && !isArchiveFolder;
-
-    const canBindTag = canCreate;
-    const canSearch = canCreate;
-
-    return {
-      canEdit,
-      canRemove,
-      canCreate,
-      canBindTag,
-      canSearch,
-    } satisfies AccessTagManagement;
-  }, [roomAccess, isAdmin, isArchiveFolder]);
+  const access = useMemo(
+    () => getTagManagementAccess(roomAccess, isAdmin, isArchiveFolder),
+    [roomAccess, isAdmin, isArchiveFolder],
+  );
 
   return <TagManagementShared {...props} access={access} />;
 };

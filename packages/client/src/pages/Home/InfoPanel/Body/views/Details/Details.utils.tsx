@@ -54,7 +54,10 @@ import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
   getRoomTypeName,
 } from "SRC_DIR/helpers/filesUtils";
-import { TagManagement } from "SRC_DIR/components/TagManagement";
+import {
+  TagManagement,
+  getTagManagementAccess,
+} from "SRC_DIR/components/TagManagement";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
@@ -119,6 +122,8 @@ type DetailsHelperProps = {
   isDefaultRoomsQuotaSet: boolean;
   isDefaultAIAgentsQuotaSet: boolean;
   isAIAgentsFolder: boolean;
+  isAdmin: boolean;
+  isArchiveFolder: boolean;
   roomLifetime: TRoomLifetime;
 };
 
@@ -141,6 +146,10 @@ class DetailsHelper {
 
   isAIAgentsFolder: boolean;
 
+  isAdmin: boolean;
+
+  isArchiveFolder: boolean;
+
   roomLifetime: TRoomLifetime;
 
   constructor(props: DetailsHelperProps) {
@@ -153,6 +162,8 @@ class DetailsHelper {
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
     this.isDefaultAIAgentsQuotaSet = props.isDefaultAIAgentsQuotaSet;
     this.isAIAgentsFolder = props.isAIAgentsFolder;
+    this.isAdmin = props.isAdmin;
+    this.isArchiveFolder = props.isArchiveFolder;
     this.roomLifetime = props.roomLifetime;
   }
 
@@ -176,7 +187,16 @@ class DetailsHelper {
             "Date modified",
             "Last modified by",
             "Creation date",
-            (this.item as TRoom).tags?.length && "Tags",
+            // Also for a room with no tags yet, as long as the user could
+            // add one - otherwise the info panel has no way to attach the
+            // first tag at all.
+            ((this.item as TRoom).tags?.length ||
+              getTagManagementAccess(
+                this.item.access,
+                this.isAdmin,
+                this.isArchiveFolder,
+              ).canCreate) &&
+              "Tags",
             "Storage",
           ]
         : "isFolder" in this.item && this.item.isFolder

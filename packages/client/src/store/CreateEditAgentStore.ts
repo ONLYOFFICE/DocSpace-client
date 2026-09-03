@@ -325,7 +325,11 @@ class CreateEditRoomStore {
 
     const agentParams = this.agentParams!;
 
-    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
+    // The quota block in the create dialog is shown for the AI-agents quota,
+    // not the rooms one — gating on the rooms flag dropped the user's
+    // "Disable quota for this agent" (-1) whenever no rooms quota was set
+    // (Bug 83574).
+    const { isDefaultAIAgentsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
 
     const { tags, title, icon, logo, prompt, profileId, quota } = agentParams;
@@ -337,7 +341,7 @@ class CreateEditRoomStore {
       return;
     }
 
-    const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
+    const quotaLimit = isDefaultAIAgentsQuotaSet ? quota : null;
 
     const tagsToAddList = tags.map((tag) => tag.name);
 

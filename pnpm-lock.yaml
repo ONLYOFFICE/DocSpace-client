@@ -3407,7 +3407,7 @@ packages:
     os: [win32]
 
   '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.82.tgz':
-    resolution: {integrity: sha512-QzwG83ytpXnKr2w5rkQ2tdn+XnVMcd7q6/fC8/ROitI6jVGsZw013B7tSdgW3G8IUGSK48QcIwNV6kYj/L4B+Q==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.5.82.tgz}
+    resolution: {integrity: sha512-cWofDy359+bZxU2XBQxRi8U7een3jKqRTDgWxavjG5bp7n/5E0JVyAR1qPSp8LZpAQHwBHKIT8l8mPOAKAZtlA==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.5.82.tgz}
     version: 0.5.82
     peerDependencies:
       '@anthropic-ai/sdk': ^0.60.0

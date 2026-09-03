@@ -347,6 +347,39 @@ export const getEntityMcpServers = async (entityId?: string) => {
   return (await response.json()) as Record<string, unknown>;
 };
 
+/**
+ * The `tools/list-system-tools` answer: the legacy flat `serverType -> tools`
+ * map, or `{ groups, errors, system }` where `groups` also carries the
+ * registered custom servers' tools and `system` names the host-configured
+ * servers among them.
+ */
+export type TSystemToolsListing =
+  | Record<string, unknown>
+  | {
+      groups?: Record<string, unknown>;
+      errors?: Record<string, string>;
+      system?: string[];
+    };
+
+/**
+ * Names of the system (host-configured) MCP servers from a
+ * `list-system-tools` answer. `groups` mixes in the registered custom
+ * servers, so the explicit `system` list is authoritative; the key fallback
+ * is for a service that predates it.
+ */
+export const systemMcpServerNamesOf = (listing: TSystemToolsListing) => {
+  if (!listing || typeof listing !== "object") return [] as string[];
+  const groups = (listing as { groups?: unknown }).groups;
+  if (groups && typeof groups === "object" && !Array.isArray(groups)) {
+    const system = (listing as { system?: unknown }).system;
+    if (Array.isArray(system)) {
+      return system.filter((name): name is string => typeof name === "string");
+    }
+    return Object.keys(groups as Record<string, unknown>);
+  }
+  return Object.keys(listing as Record<string, unknown>);
+};
+
 /** Names of the system MCP servers configured on the Node AI service. */
 export const getSystemMcpServerNames = async () => {
   const response = await authFetch(`/api/2.0/ai/tools/list-system-tools`, {
@@ -356,8 +389,7 @@ export const getSystemMcpServerNames = async () => {
 
   if (!response.ok) return [] as string[];
 
-  const grouped = (await response.json()) as Record<string, unknown>;
-  return Object.keys(grouped);
+  return systemMcpServerNamesOf((await response.json()) as TSystemToolsListing);
 };
 
 /** Enable an MCP server (by name) for an entity. The config is resolved

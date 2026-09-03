@@ -1,21 +1,21 @@
 {
-  "key_path": "RoleGuestDescriprion",
-  "content": "Guests can access the rooms they have been invited to, as well as create and edit documents if they have been assigned the appropriate roles in the room.",
-  "content_en_sha1_hash": "b91549ed2598a81dcae1328a0ba18a24e2e5e876",
-  "created_at": "2025-05-19T21:30:50.001Z",
-  "updated_at": "2026-08-14T14:58:32.911Z",
+  "key_path": "ModelAssignmentDescription",
+  "content": "Set a default model for all tasks or assign different models to specific tasks to fine-tune performance and cost.",
+  "content_en_sha1_hash": "33562bdb7349a7be969f5a7b804d1486ab5bb936",
+  "created_at": "2026-09-01T08:06:45.000Z",
+  "updated_at": "2026-09-01T15:54:19.000Z",
   "comment": {
-    "text": "This is a description of the \"Guest\" user role, displayed in a tooltip or information panel. It explains the permissions guests have within rooms.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:27:24.934Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "Description under the Model assignment settings heading, explaining that AI models can be assigned per task. Overrides the ai-chat library string of the same name.",
+    "is_auto": false,
+    "updated_at": "2026-09-01T08:06:45.000Z",
+    "model": null
   },
   "usage": [
     {
-      "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 97,
-      "context": "aiAgent: t(\"Common:AIAgent\"),\n }}\n />\n );\n \n return t(\"Translations:RoleGuestDescriprion\");\n };",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/providers/index.tsx",
+      "line_number": 493,
+      "context": "const aiChatTranslations = useMemo(\n () => ({\n ModelAssignmentDescription: t(\"Common:ModelAssignmentDescription\"),\n ...(isStandalone\n ? null\n : { EnableWebSearch: t(\"Common:EnableWebSearchInBilling\") }),\n }),\n [isStandalone, t],\n );",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -203,20 +209,6 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \"\"\"",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:48:29.435Z",
-          "checked_by": "deterministic"
-        }
-      ],
       "approved_at": null
     }
   }

@@ -1,14 +1,14 @@
 {
   "key_path": "ExportResultsToDatabaseDescription",
-  "content": "Set up automatic submission of completed forms from this space to an external database. A table will be created in the database for each standard form immediately after a copy is filled out or on a schedule.",
-  "content_en_sha1_hash": "b4443e2bce03349def6aa89d0f40c694d6cadb95",
-  "created_at": "2026-03-20T09:07:28.257Z",
-  "updated_at": "2026-08-17T00:00:00.000Z",
+  "content": "Set up automatic submission of completed forms from this space to an external database. A table will be created in the database for each standard form after a copy is filled out or on a schedule.",
+  "content_en_sha1_hash": "35579cdf55362383297760bebb4cbe29347991c9",
+  "created_at": "2026-08-31T18:23:06.320Z",
+  "updated_at": "2026-08-31T19:05:50.378Z",
   "comment": {
-    "text": "Description for a toggle switch. It explains that enabling this option will automatically send completed forms from the current space to an external database, either immediately or on a schedule.",
+    "text": "Description text for a toggle setting that explains the automatic submission of completed forms to an external database.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:53:00.087Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:05:50.378Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

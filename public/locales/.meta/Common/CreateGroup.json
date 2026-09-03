@@ -1,14 +1,14 @@
 {
   "key_path": "CreateGroup",
-  "content": "Create group",
-  "content_en_sha1_hash": "5a0b1c170fd55ab07e5656625be963d20baa107a",
-  "created_at": "2026-02-19T13:36:07.022Z",
-  "updated_at": "2026-08-19T13:26:37.690Z",
+  "content": "Add group",
+  "content_en_sha1_hash": "2fca464f9c8925cc89e35205360e2f82ff3ec122",
+  "created_at": "2026-08-31T18:22:56.954Z",
+  "updated_at": "2026-08-31T19:25:12.421Z",
   "comment": {
-    "text": "This is a button label and dialog title. It allows users to create a new group.",
+    "text": "Label for a menu item and a title for the group creation dialog. It appears when initiating the process of creating a new group.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:56:02.437Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:25:12.421Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

@@ -1,14 +1,14 @@
 {
   "key_path": "ProfileDescription",
-  "content": "Here you can check the apps info to which you have granted the auth access, and revoke consent if needed.",
-  "content_en_sha1_hash": "dcca0e452a98870510105db47286029b6900db85",
-  "created_at": "2025-05-19T21:30:53.978Z",
-  "updated_at": "2026-07-07T08:59:21.887Z",
+  "content": "View the apps you have authorized to access your account and revoke access if needed.",
+  "content_en_sha1_hash": "d5bc96fb1f8706184d06c53357bf572c70f87052",
+  "created_at": "2026-08-31T18:23:43.319Z",
+  "updated_at": "2026-08-31T20:06:51.607Z",
   "comment": {
-    "text": "This is a descriptive text displayed in the \"Authorized Apps\" section of the user's profile. It explains that users can review and revoke authorization for connected applications.",
+    "text": "Instructional text in the Authorized Apps section of the Profile page, appearing as a subtitle or within an empty state screen.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:18:35.228Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:06:51.607Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

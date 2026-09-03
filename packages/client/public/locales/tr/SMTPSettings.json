@@ -8,7 +8,7 @@
   "HostLogin": "Sunucu girişi",
   "HostPassword": "Sunucu Şifresi",
   "Port": "Bağlantı noktası",
-  "SenderDisplayName": "Gönderici Ekran İsmi",
-  "SenderEmailAddress": "Gönderici Eposta Adresi",
-  "SendTestMail": "Test Postası Gönder"
+  "SenderDisplayName": "Gönderici ekran ismi",
+  "SenderEmailAddress": "Gönderici e-posta adresi",
+  "SendTestMail": "Test postası gönder"
 }

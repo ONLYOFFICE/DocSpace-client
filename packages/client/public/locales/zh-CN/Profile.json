@@ -2,7 +2,7 @@
   "ActiveSessions": "活动会话",
   "AutoDeleteTitle": "所有超过 60 天的会话将被自动删除。",
   "ChangePasswordAfterLoggingOut": "登出后变更密码",
-  "ConnectSocialNetworks": "连接您的社交媒体",
+  "ConnectSocialNetworks": "连接您的帐户",
   "DescriptionForSecurity": "如需进一步的安全性，您需要更改密码。",
   "DesktopTheme": "与桌面编辑器的设置同步",
   "DesktopThemeDescription": "根据桌面编辑器的当前主题，自动在浅色和深色主题之间切换。",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "邮件未验证",
   "ErrorAccountAlreadyUse": "关联帐户已被其他用户使用",
   "LogoutActiveConnection": "从活动连接中注销",
-  "LogoutAllActiveSessionsDescription": "由于此连接当前正在使用，故除此之外的所有活动连接都将被注销。",
+  "LogoutAllActiveSessionsDescription": "除当前会话外，所有活动会话都将被终止。当前会话将保持活动状态。",
   "LogoutBtn": "注销",
-  "LogoutDescription": "注意，由于此连接当前正在使用，故除此之外的所有活动连接都将被注销。",
+  "LogoutDescription": "注意。除当前会话外，所有活动会话都将被终止。当前会话将保持活动状态。",
   "LogoutFrom": "从 {{platform}} {{browser}} 中注销？",
   "MyProfile": "我的档案",
   "NotificationsChannels": "通知渠道",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "展示备用代码",
   "SuccessLogout": "活动连接已登出：{{platform}}，{{browser}}",
   "TelegramAccount": "Telegram 帐户",
-  "TelegramAccountDescription": "要将 Telegram 机器人关联到您的帐户，请访问私密链接并点击“连接 Telegram”按钮。",
+  "TelegramAccountDescription": "要通过 Telegram 接收您帐户的通知，请点击下方链接，或点击“连接”。",
   "TelegramAccountDisconnect": "取消 Telegram 关联",
   "TelegramAccountDisconnectDescription": "您的 @{{username}} 帐户已启用 Telegram 通知。您可以随时取消关联，届时将不再接收通知。",
   "TerminateAllSessions": "终止除当前会话之外的所有会话",
-  "TwoFactorDescription": "管理员为所有用户启用了通过代码生成应用进行的双因素身份认证功能。"
+  "TwoFactorDescription": "管理员已为所有用户启用通过身份验证器应用进行的双因素身份验证。"
 }

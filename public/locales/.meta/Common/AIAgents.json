@@ -3,7 +3,7 @@
   "content": "AI agents",
   "content_en_sha1_hash": "2b51b10f658502a5ad4e50a7005f9bddf67f44c0",
   "created_at": "2025-09-26T15:20:53.940Z",
-  "updated_at": "2026-08-26T14:08:32.934Z",
+  "updated_at": "2026-08-31T18:23:50.569Z",
   "comment": {
     "text": "This is a label for a feature or service related to artificial intelligence. It appears in billing panels and selectors.",
     "is_auto": true,
@@ -200,19 +200,19 @@
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
       "line_number": 99,
-      "context": "<Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n rooms: t(\"Common:Rooms\"),\n shared: t(\"Common:SharedWithMe\"),\n documents: t(\"Common:Files\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n </div>\n );\n };",
+      "context": "<Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
-      "line_number": 79,
-      "context": "<div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n rooms: t(\"Common:Rooms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
+      "line_number": 81,
+      "context": "<Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
-      "line_number": 79,
-      "context": "<div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n rooms: t(\"Common:Rooms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
+      "line_number": 81,
+      "context": "<Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
       "module": "/packages/client"
     },
     {

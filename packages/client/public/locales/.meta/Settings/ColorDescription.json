@@ -1,26 +1,20 @@
 {
-  "key_path": "UploadDevicePDFFormOptionTitle",
-  "content": "Upload from device",
-  "content_en_sha1_hash": "37ea5a59d00e13d5967bc95d080fc94a3db0eb2a",
-  "created_at": "2025-05-19T21:30:56.550Z",
-  "updated_at": "2026-08-20T12:26:01.700Z",
+  "key_path": "ColorDescription",
+  "content": "Pick a color for your workspace interface elements: buttons, links, and other highlights will use it throughout.",
+  "content_en_sha1_hash": "c481cd72ce37e3352e276928f3a999bb2e1f297c",
+  "created_at": "2026-08-31T18:23:40.638Z",
+  "updated_at": "2026-08-31T20:44:14.688Z",
   "comment": {
-    "text": "This is a button label. It allows users to upload a PDF file from their local device.",
+    "text": "Instructional text in the Appearance settings explaining how the chosen color affects workspace elements like buttons and links.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:06:32.784Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:44:14.688Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 334,
-      "context": "// TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );\n \n const uploadFromDevicePDF = createUploadFromDeviceOption(\n t(\"EmptyView:UploadDevicePDFFormOptionTitle\"),\n t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUserOption = createInviteOption(",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
-      "line_number": 107,
-      "context": "disabled: false,\n icon: UploadIcon,\n },\n {\n key: \"upload-from-device\",\n label: t(\"EmptyView:UploadDevicePDFFormOptionTitle\"),\n onClick: () => {\n setTimeout(() => {\n fileInputRef.current?.click();\n }, 100);\n },",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 679,
+      "context": "style={{ \"--check-img-color\": colorCheckImg }}\n >\n <div className={appearanceStyles.header}>{t(\"Common:Color\")}</div>\n \n <div className={appearanceStyles.colorDescription}>\n {t(\"Settings:ColorDescription\")}\n </div>\n \n <div className={appearanceStyles.themeStandardContainer}>\n <div className={appearanceStyles.themeName}>{t(\"Common:Standard\")}</div>",
       "module": "/packages/client"
     }
   ],
@@ -155,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

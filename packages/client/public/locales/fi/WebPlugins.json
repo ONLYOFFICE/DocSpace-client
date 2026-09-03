@@ -16,5 +16,5 @@
   "PluginSDK": "SDK-laajennus",
   "PluginSDKDescription": "Käytä SDK-laajennusta lisätäksesi uusia toimintoja, yhdistääksesi kolmannen osapuolen palveluita tai parantaaksesi nykyistä käyttökokemusta. Selaa alla olevia esimerkkilisäosia, joiden lähdekoodi on saatavilla GitHubissa. Siirry <1>Lisäosat</1>-sivulle ottaaksesi ne käyttöön työtilassasi.",
   "PluginSDKInstruction": "<1>Lue ohjeet</1> luodaksesi omia lisäosia.",
-  "UploadDescription": "Voit lisätä lisäosia laajentaaksesi työtilan toiminnallisuutta lisätoiminnoilla. Klikkaa Lataa lisäosa tai pudota ZIP-arkisto."
+  "UploadDescription": "Lisää lisäosia laajentaaksesi työtilaasi lisätoiminnoilla. Ota käyttöön jokin alla olevasta listasta tai klikkaa Lataa lisäosa (tai pudota ZIP-tiedosto) lisätäksesi oman."
 }

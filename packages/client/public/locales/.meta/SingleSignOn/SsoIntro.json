@@ -1,13 +1,13 @@
 {
   "key_path": "SsoIntro",
-  "content": "The Single Sign-On section allows you to enable/disable third-party authentication using SAML, thereby providing a quicker, easier and more secure way to access the workspace for users.",
-  "content_en_sha1_hash": "1e86e7e897b4a60538b3cbd4b531301c45d50f78",
-  "created_at": "2026-08-12T11:00:45.254Z",
-  "updated_at": "2026-08-12T13:36:17.197Z",
+  "content": "Enable third-party authentication via SAML giving users a faster, easier, and more secure way to access the workspace.",
+  "content_en_sha1_hash": "97d54cde1e785072056fe44bef1f777028e036d0",
+  "created_at": "2026-08-31T18:23:40.173Z",
+  "updated_at": "2026-08-31T20:57:41.376Z",
   "comment": {
-    "text": "Introductory text describing the functionality and benefits of the Single Sign-On configuration section.",
+    "text": "Introductory text in the Single Sign-On settings section describing the benefits of enabling SAML-based authentication.",
     "is_auto": true,
-    "updated_at": "2026-08-12T13:36:17.197Z",
+    "updated_at": "2026-08-31T20:57:41.376Z",
     "model": "gemma4:26b"
   },
   "usage": [

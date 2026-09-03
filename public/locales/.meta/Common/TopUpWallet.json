@@ -3,7 +3,7 @@
   "content": "Top up wallet",
   "content_en_sha1_hash": "155fb560e348142a6331187a877f862f8cc8df81",
   "created_at": "2026-04-10T13:53:43.673Z",
-  "updated_at": "2026-08-28T14:38:40.176Z",
+  "updated_at": "2026-08-31T18:23:50.551Z",
   "comment": {
     "text": "Dialog title for a modal window where users can add funds to their wallet.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 900,
+      "line_number": 901,
       "context": "description: isPayer\n ? t(\"Common:TopUpWalletToContinue\")\n : t(\"Common:InsufficientFundsContactPayerShort\"),\n action: isPayer\n ? {\n text: t(\"Common:TopUpWallet\"),\n onClick: () => navigate(\"/portal-settings/payments/wallet\"),\n }\n : null,\n };\n },",
       "module": "/packages/client"
     }

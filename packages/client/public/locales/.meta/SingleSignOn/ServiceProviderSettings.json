@@ -1,14 +1,14 @@
 {
   "key_path": "ServiceProviderSettings",
-  "content": "{{organizationName}} SP Settings",
-  "content_en_sha1_hash": "bfbd7d95c8767887e77950d3041a33ab5f3eecd8",
-  "created_at": "2025-05-19T21:30:50.127Z",
-  "updated_at": "2026-06-02T22:18:05.080Z",
+  "content": "{{organizationName}} service provider settings",
+  "content_en_sha1_hash": "899059b35af11c8ca39f86632747330e35ddf70c",
+  "created_at": "2026-08-31T18:23:40.074Z",
+  "updated_at": "2026-08-31T21:00:08.941Z",
   "comment": {
-    "text": "This is a title for a section or category related to Single Sign-On (SSO) settings. It appears in the portal settings and refers to the configuration options for the Service Provider (SP). `{{organizationName}}` will be replaced with the name of the organization.",
+    "text": "Button label and category title in the settings menu that identifies the service provider settings for the organization represented by {{organizationName}}.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:36.416Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T21:00:08.941Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -212,12 +218,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

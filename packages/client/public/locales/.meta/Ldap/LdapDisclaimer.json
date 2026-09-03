@@ -1,13 +1,13 @@
 {
   "key_path": "LdapDisclaimer",
-  "content": "Please, keep in mind: the workspace user email will be taken from the 'Mail Attribute' setting. If it is missing, it will be formed in the following way: 'Login Attribute + @ + LDAP Domain'. In case such an email does not exist, the user will not receive any workspace notification.",
-  "content_en_sha1_hash": "08acdd1eccf757a1e0f3ebc6ef2df41b2922d5a6",
-  "created_at": "2026-08-12T15:15:02.341Z",
-  "updated_at": "2026-08-12T15:23:11.876Z",
+  "content": "Note: the user's email comes from the \"Mail Attribute\" setting. If that's missing, it's built as \"Login Attribute + @ + LDAP Domain.\" If neither produces a valid email, the user won't receive notifications.",
+  "content_en_sha1_hash": "19bfa2d3c2a21ae34e703471d754a0dc579e37da",
+  "created_at": "2026-08-31T18:23:43.712Z",
+  "updated_at": "2026-08-31T20:02:42.306Z",
   "comment": {
-    "text": "Informational disclaimer text within the LDAP integration settings section that explains how user emails are constructed from LDAP attributes.",
+    "text": "Informational text in the LDAP integration settings explaining how user email addresses are constructed for notifications.",
     "is_auto": true,
-    "updated_at": "2026-08-12T15:23:11.876Z",
+    "updated_at": "2026-08-31T20:02:42.306Z",
     "model": "gemma4:26b"
   },
   "usage": [

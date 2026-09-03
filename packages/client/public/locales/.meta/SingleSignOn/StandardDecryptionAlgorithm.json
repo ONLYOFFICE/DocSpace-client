@@ -1,14 +1,14 @@
 {
   "key_path": "StandardDecryptionAlgorithm",
-  "content": "Default Decrypt Algorithm",
-  "content_en_sha1_hash": "619446c4bdadbe754814d7355bf5c6666d7bac32",
-  "created_at": "2025-05-19T21:30:50.187Z",
-  "updated_at": "2026-05-15T15:37:40.280Z",
+  "content": "Default decrypt algorithm",
+  "content_en_sha1_hash": "56894add3b564a0b3ab2169390676a033f51d264",
+  "created_at": "2026-08-31T18:23:40.176Z",
+  "updated_at": "2026-08-31T20:57:13.947Z",
   "comment": {
-    "text": "This is a label for a dropdown menu in the Single Sign-On settings. It allows users to select the default algorithm used for decrypting data.",
+    "text": "Label for a combo box in the SSO certificate settings used to select the default decryption algorithm.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:15.155Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:57:13.947Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

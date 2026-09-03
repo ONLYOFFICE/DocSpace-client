@@ -1,14 +1,14 @@
 {
   "key_path": "EmptyKnowledgeDescription",
-  "content": "Files uploaded here will be indexed and used as context in the {{aiChat}} tab. Add files (up to 10 MB each) to ask AI questions, generate content, or collaborate on information.",
-  "content_en_sha1_hash": "5cc5a06750e5349942b4cf64e2ea3bd33a121851",
-  "created_at": "2025-12-22T14:24:56.530Z",
-  "updated_at": "2026-08-20T12:26:01.698Z",
+  "content": "Files you upload here are indexed and used as context in {{aiChat}}. Add files (up to 10 MB each) to ask questions, generate content, or work with your information.",
+  "content_en_sha1_hash": "502042c5fb107129978278757e2692c31df0bce2",
+  "created_at": "2026-08-31T18:23:03.631Z",
+  "updated_at": "2026-08-31T19:17:09.538Z",
   "comment": {
-    "text": "This is a descriptive text displayed in an empty \"Knowledge\" tab within an AI Room. It explains that uploaded files will be indexed for AI context and provides instructions for adding files, with `{{aiChat}}` being a variable for the \"AI Chat\" tab name.",
+    "text": "Empty state description text for the Knowledge tab, appearing when no files are present. The {{aiChat}} variable refers to the AI Chat feature.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:02:05.337Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:17:09.538Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

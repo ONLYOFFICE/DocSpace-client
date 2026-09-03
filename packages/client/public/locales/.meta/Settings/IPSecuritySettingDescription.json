@@ -1,13 +1,13 @@
 {
   "key_path": "IPSecuritySettingDescription",
-  "content": "Configure IP Security to restrict login possibility to select IP addresses. Use either exact IP addresses in the IPv4 format, IP range or CIDR masking. The IP security does not work for owners, they can access the workspace from any IP address.",
-  "content_en_sha1_hash": "0688a09da6e8d01b6ab04c1175ecb53bba1f7edd",
-  "created_at": "2026-08-13T14:37:16.113Z",
-  "updated_at": "2026-08-14T14:58:32.832Z",
+  "content": "Restrict login access to specific IP addresses. You can enter exact IPv4 addresses, IP ranges, or CIDR notation. Note: owners can always access the workspace from any IP address, regardless of these restrictions.",
+  "content_en_sha1_hash": "f1c205166530ac597b8528f8571ab1fbcecfd057",
+  "created_at": "2026-08-31T18:23:41.491Z",
+  "updated_at": "2026-08-31T20:30:56.274Z",
   "comment": {
-    "text": "Subtitle for the IP Security setting in the Portal Settings security category, explaining how to restrict access via IPv4, ranges, or CIDR and noting that owners are exempt from these restrictions.",
+    "text": "A descriptive subtitle for the IP security setting in the Portal Settings, explaining how to configure IP restrictions and noting that owners are exempt.",
     "is_auto": true,
-    "updated_at": "2026-08-13T15:17:46.245Z",
+    "updated_at": "2026-08-31T20:30:56.274Z",
     "model": "gemma4:26b"
   },
   "usage": [

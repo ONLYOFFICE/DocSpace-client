@@ -3,7 +3,7 @@
   "content": "GB",
   "content_en_sha1_hash": "505a44facaa3e758845f6e101f4e21f9d99acf63",
   "created_at": "2025-05-19T21:30:45.623Z",
-  "updated_at": "2026-08-13T14:37:21.742Z",
+  "updated_at": "2026-08-31T18:23:50.783Z",
   "comment": {
     "text": "This is a unit of measurement for storage size, \"Gigabyte\", used in billing-related dialogs and pages. It appears as a short label, often alongside a numerical value (e.g., \"10 GB\").",
     "is_auto": true,
@@ -19,37 +19,37 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 163,
+      "line_number": 164,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 163,
+      "line_number": 164,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 163,
+      "line_number": 164,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 163,
+      "line_number": 164,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 163,
+      "line_number": 164,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 163,
+      "line_number": 164,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
       "module": "/libs/ui-kit"
     },

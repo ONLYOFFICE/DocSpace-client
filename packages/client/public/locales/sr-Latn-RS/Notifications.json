@@ -1,19 +1,19 @@
 {
-  "ActionsWithFilesDescription": "Badge će istaknuti aktivnosti fajlova — otpremanje, uređivanje ili deljenje — u sekcijama {{rooms}}, {{shared}}, {{documents}} i {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Značke ističu aktivnosti nad fajlovima, kao što su otpremanja, uređivanja i deljenja, u aplikacijama {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}.",
   "AdminSetupRequired": "Potrebno podešavanje od strane administratora",
   "Badges": "Značke",
   "DailyFeed": "Dnevni sadržaj {{organizationName}} {{productName}}-a",
-  "DailyFeedDescription": "Čitajte vesti i događaje iz vašeg {{organizationName}} {{productName}}-a u dnevnom pregledu.",
+  "DailyFeedDescription": "Primajte dnevni pregled vesti i događaja iz {{organizationName}} {{productName}}-a.",
   "FileActivityNotify": "Obaveštenja o aktivnostima fajla",
   "IsNotValid": "Nije validno",
   "LdapEmailTooltip": "Ovaj korisnički nalog je učitan sa LDAP-a. Email adresa korisnika nije navedena i trenutna je generisana automatski i ne može se koristiti za slanje obaveštenja.",
   "NotConfigured": "Nije konfigurisano",
   "Notifications": "Obaveštenja",
-  "RoomsActivityDescription": "Pristupite trenutnim e-mail obaveštenjima o novim podeljenim fajlovima/foldereima i aktivnosti unutar vaših {{rooms}} i {{aiAgents}}.",
-  "RoomUpdateNotify": "Podeljeni sadržaj, aktivnosti u odeljcima {{rooms}} i {{aiAgents}}",
-  "SettingUpNotifications": "Podešavanje obaveštenja",
+  "RoomsActivityDescription": "Primajte trenutna obaveštenja e-poštom o novim deljenim fajlovima i folderima i o aktivnostima u {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}.",
+  "RoomUpdateNotify": "Aktivnosti u {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}",
+  "SettingUpNotifications": "Podešavanja obaveštenja",
   "SuccessConnected": "{{serviceName}} je uspešno povezan kao kanal za obaveštenja. Sada ćeš tamo primati ažuriranja.",
   "SuccessDisconnected": "{{serviceName}} je uspešno isključen kao kanal za obaveštenja. Obaveštenja više neće biti slana tamo.",
   "UsefulTips": "Korisni {{organizationName}} {{productName}} saveti",
-  "UsefulTipsDescription": "Dobij korisne vodiče o {{organizationName}} {{productName}}-u"
+  "UsefulTipsDescription": "Otkrijte korisne savete i vodiče za korišćenje {{organizationName}} {{productName}}-a."
 }

@@ -26,6 +26,6 @@
     "nodemon": "^3.1.14"
   },
   "overrides": {
-    "fast-uri": "^3.1.2"
+    "fast-uri": "^3.1.7"
   }
 }

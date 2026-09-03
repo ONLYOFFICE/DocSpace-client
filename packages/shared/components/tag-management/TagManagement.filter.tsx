@@ -56,8 +56,7 @@ import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 import { removeEmojiCharacters } from "../../utils/removeEmojiCharacters";
 
 import { useTagManagement } from "./TagManagement.provider";
-import { isTagNameTaken } from "./TagManagement.utils";
-import { useCreateTagMutation } from "./hooks/useTagsQuery";
+import { useCreateTagMutation, useUpdateTag } from "./hooks/useTagsQuery";
 import type { TagManagementFilterProps } from "./TagManagement.types";
 import styles from "./TagManagement.module.scss";
 
@@ -75,9 +74,11 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     setSearchValue,
     clearSearch,
     filteredTags,
-    access: { canSearch, canCreate },
+    pendingLabels,
+    access: { canSearch, canCreate, canBindTag },
   } = useTagManagement();
   const createTag = useCreateTagMutation(roomId);
+  const updateTag = useUpdateTag(roomId);
 
   const [inputValue, setInputValue] = useState("");
 
@@ -99,22 +100,41 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   );
 
   const handleCreateTag = useCallback(async () => {
-    // The input's own value, and the taken-name rule recomputed over it:
-    // searchValue and showCreateTag are both updated through a transition, so
-    // an Enter right after the last keystroke can still see the previous text.
+    // The input's own value, and every rule recomputed over it: searchValue
+    // and showCreateTag are both updated through a transition, so an Enter
+    // right after the last keystroke can still see the previous text.
     const trimmedValue = inputValue.trim();
 
     if (trimmedValue.length === 0 || !canCreate) return;
 
-    if (isTagNameTaken(tags, trimmedValue)) {
-      // The same answer the rename gives: silence here reads as a broken
-      // button.
-      toastr.error(t("Common:TagAlreadyExists", { tagName: trimmedValue }));
-      return;
-    }
+    // The name of an existing tag is not a mistake: Enter on it binds that
+    // tag to the room instead of creating a duplicate. Matched the way names
+    // are compared everywhere here - case-insensitively - and bound under the
+    // tag's own spelling.
+    const existing = tags.find(
+      (tag) => tag.label.trim().toLowerCase() === trimmedValue.toLowerCase(),
+    );
 
     clearSearch();
     setInputValue("");
+
+    if (existing) {
+      // Already bound, mid-operation, or not allowed to bind: the search is
+      // cleared and the list shows the tag - nothing to send.
+      if (existing.checked || !canBindTag || pendingLabels.has(existing.label))
+        return;
+
+      try {
+        await updateTag.mutateAsync({ ...existing, checked: true });
+
+        onTagsChanged?.();
+      } catch (error) {
+        console.error("Failed to update room tags:", error);
+        toastr.error(error instanceof Error ? error : new Error(String(error)));
+      }
+
+      return;
+    }
 
     try {
       // mutateAsync, not mutate: the hook holds a single observer, and every
@@ -129,7 +149,17 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
       console.error("Failed to create tag:", error);
       toastr.error(error instanceof Error ? error : new Error(String(error)));
     }
-  }, [inputValue, canCreate, tags, clearSearch, createTag, onTagsChanged]);
+  }, [
+    inputValue,
+    canCreate,
+    canBindTag,
+    tags,
+    pendingLabels,
+    clearSearch,
+    createTag,
+    updateTag,
+    onTagsChanged,
+  ]);
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {

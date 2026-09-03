@@ -43,11 +43,13 @@ import { TAGS_QUERY_KEY } from "./TagManagement.constants";
 
 import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementFilter } from "./TagManagement.filter";
+import { getTagCreateMutationKey } from "./TagManagement.constants";
 import { TagManagementContent } from "./TagManagement.content";
 import type { AccessTagManagement } from "./TagManagement.types";
 
-const { addTagsToRoom } = vi.hoisted(() => ({
+const { addTagsToRoom, getTags } = vi.hoisted(() => ({
   addTagsToRoom: vi.fn(() => Promise.resolve()),
+  getTags: vi.fn(() => Promise.resolve<string[]>([])),
 }));
 
 vi.mock("../../api/rooms", () => ({
@@ -55,7 +57,7 @@ vi.mock("../../api/rooms", () => ({
   removeTagsFromRoom: vi.fn(() => Promise.resolve()),
   updateTagName: vi.fn(() => Promise.resolve()),
   removeTagRequest: vi.fn(() => Promise.resolve()),
-  getTags: vi.fn(() => Promise.resolve([])),
+  getTags,
 }));
 
 vi.mock("@docspace/ui-kit/hooks/use-is-mobile", () => ({
@@ -109,6 +111,92 @@ const createTag = async (label: string) => {
 describe("<TagManagementFilter /> creating tags", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+  });
+
+  it("binds the existing tag instead of creating a duplicate", async () => {
+    // The refetch on mount must answer with the same list the cache is seeded
+    // with, or it wipes the seed before Enter is pressed.
+    getTags.mockResolvedValue(["freeTag"]);
+
+    const queryClient = new QueryClient({
+      defaultOptions: {
+        queries: { retry: false },
+        mutations: { retry: false },
+      },
+    });
+
+    queryClient.setQueryData(TAGS_QUERY_KEY, ["freeTag"]);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <TagManagementProvider
+          roomTags={[]}
+          roomId={ROOM_ID}
+          access={fullAccess}
+        >
+          <TagManagementFilter roomId={ROOM_ID} roomName="Room" />
+          <TagManagementContent roomId={ROOM_ID} />
+        </TagManagementProvider>
+      </QueryClientProvider>,
+    );
+
+    const input = screen.getByRole("searchbox");
+
+    // Another case on purpose: names are matched the way they are compared
+    // everywhere here, and the bind goes out under the tag's own spelling.
+    await userEvent.type(input, "FREETAG");
+    await userEvent.keyboard("{Enter}");
+
+    await waitFor(() =>
+      expect(addTagsToRoom).toHaveBeenCalledWith(ROOM_ID, ["freeTag"]),
+    );
+
+    // Bound, not created: a create request would also write the label into
+    // the shared list a second time.
+    expect(
+      queryClient
+        .getMutationCache()
+        .find({ mutationKey: getTagCreateMutationKey(ROOM_ID) }),
+    ).toBeUndefined();
+
+    const checkbox = screen
+      .getByTestId("tag_row_freeTag")
+      .querySelector("input");
+
+    await waitFor(() => expect(checkbox).toBeChecked());
+    expect(input).toHaveValue("");
+  });
+
+  it("only clears the search when the entered name is already bound", async () => {
+    const queryClient = new QueryClient({
+      defaultOptions: {
+        queries: { retry: false },
+        mutations: { retry: false },
+      },
+    });
+
+    queryClient.setQueryData(TAGS_QUERY_KEY, ["boundTag"]);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <TagManagementProvider
+          roomTags={["boundTag"]}
+          roomId={ROOM_ID}
+          access={fullAccess}
+        >
+          <TagManagementFilter roomId={ROOM_ID} roomName="Room" />
+          <TagManagementContent roomId={ROOM_ID} />
+        </TagManagementProvider>
+      </QueryClientProvider>,
+    );
+
+    const input = screen.getByRole("searchbox");
+
+    await userEvent.type(input, "boundTag");
+    await userEvent.keyboard("{Enter}");
+
+    expect(input).toHaveValue("");
+    expect(addTagsToRoom).not.toHaveBeenCalled();
   });
 
   it("adds the created tag to the list", async () => {

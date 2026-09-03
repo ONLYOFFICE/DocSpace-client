@@ -1018,6 +1018,44 @@ describe("<TagManagementContent />", () => {
     starter.unmount();
   });
 
+  it("does not resurrect the old name when the server answers a rename with a stale list", async () => {
+    const queryClient = createQueryClient();
+    // The server keeps answering with the list from before the rename - a
+    // cache in front of it is free to do that for a while.
+    getTags.mockResolvedValue(["boundTag", "freeTag"]);
+    queryClient.setQueryData(TAGS_QUERY_KEY, ["boundTag", "freeTag"]);
+
+    const starter = renderMutationStarter(queryClient);
+
+    const tree = (roomTags: string[]) => (
+      <QueryClientProvider client={queryClient}>
+        <TagList access={fullAccess} roomTags={roomTags} />
+      </QueryClientProvider>
+    );
+
+    const { rerender } = render(tree(["boundTag"]));
+
+    await screen.findByTestId("tag_item_boundTag");
+    getTags.mockClear();
+
+    starter.handlers.rename("boundTag", "renamed");
+
+    await waitFor(() => expect(rowLabels()).toEqual(["renamed", "freeTag"]));
+
+    // The host catches up. The change is fully explained by this tab's own
+    // rename, so it must not be answered with a refetch: the stale response
+    // would put "boundTag" back into the cache, next to "renamed" - the same
+    // tag listed twice.
+    rerender(tree(["renamed"]));
+
+    await act(async () => {});
+
+    expect(rowLabels()).toEqual(["renamed", "freeTag"]);
+    expect(getTags).not.toHaveBeenCalled();
+
+    starter.unmount();
+  });
+
   it("keeps the rename record for as long as the session lasts", async () => {
     // The record is the only thing that can tell the list the name the room
     // still reports and the one the query already has are the same tag, and the

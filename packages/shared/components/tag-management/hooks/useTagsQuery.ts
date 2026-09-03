@@ -322,18 +322,50 @@ export function useRoomTagList(
   // A rename or a delete made from another session reaches this list through
   // the room only: the mutation cache is per tab, so there is no record here to
   // mask the query's stale copy of the tag, and it would be listed next to the
-  // room's new name as a second tag. The room changing is therefore taken as a
-  // signal that the shared list may have moved too. For anything done in this
-  // tab the mutations have already written that cache themselves, so the
-  // refetch only confirms what is on screen.
+  // room's new name as a second tag. A room change nothing here can explain is
+  // therefore the signal that the shared list has moved too.
+  //
+  // Only the unexplained ones: refetching over a change this tab made itself
+  // is not just wasted - right after a rename the server can still answer with
+  // the list from before it, and that answer would resurrect the old name in
+  // the cache next to the new one the room already reports. The names this
+  // tab's own mutations account for are already in the cache, written by their
+  // onSuccess.
   const invalidatedFor = useRef(roomTagsKey);
+  const previousRoomLabelsRef = useRef<ReadonlySet<string>>(
+    new Set(
+      roomTags.map((tag) => (typeof tag === "string" ? tag : tag.label)),
+    ),
+  );
 
   useEffect(() => {
     if (invalidatedFor.current === roomTagsKey) return;
 
     invalidatedFor.current = roomTagsKey;
+
+    const current = new Set(
+      roomTags.map((tag) => (typeof tag === "string" ? tag : tag.label)),
+    );
+    const previous = previousRoomLabelsRef.current;
+
+    previousRoomLabelsRef.current = current;
+
+    // A label the room stopped reporting is explained by a delete, a rename
+    // away from it, or an unbind made here; one it started reporting is
+    // explained by the memo below (see roomReportsUnknownRef). Anything else
+    // came from outside this tab.
+    const unexplainedLoss = [...previous].some(
+      (label) =>
+        !current.has(label) &&
+        !removed.has(label) &&
+        !renamed.has(label) &&
+        bound.get(label) !== false,
+    );
+
+    if (!unexplainedLoss && !roomReportsUnknownRef.current) return;
+
     queryClient.invalidateQueries({ queryKey: TAGS_QUERY_KEY });
-  }, [roomTagsKey, queryClient]);
+  }, [roomTagsKey, roomTags, removed, renamed, bound, queryClient]);
 
   // The names the room itself claims right now, after renames are resolved -
   // what the bind-record sweep below compares the records against. Rebuilt by
@@ -341,11 +373,17 @@ export function useRoomTagList(
   // safe.
   const roomOwnLabelsRef = useRef<ReadonlySet<string>>(new Set());
 
+  // Whether the room reports a name neither the query nor a record of this tab
+  // knows - the mark of a change made from another session.
+  const roomReportsUnknownRef = useRef(false);
+
   const tags = useMemo(() => {
     const order = orderRef.current;
     const result: TTag[] = [];
     const seen = new Set<string>();
     const roomOwnLabels = new Set<string>();
+
+    let roomReportsUnknown = false;
 
     const place = (label: string, lead: boolean) => {
       if (order.positions.has(label)) return;
@@ -438,6 +476,9 @@ export function useRoomTagList(
       // had before a rename.
       if (isDeleted(label)) return;
 
+      if (tag.checked && !exists.has(label) && !created.includes(label))
+        roomReportsUnknown = true;
+
       if (seen.has(label)) return;
       seen.add(label);
 
@@ -461,6 +502,7 @@ export function useRoomTagList(
     });
 
     roomOwnLabelsRef.current = roomOwnLabels;
+    roomReportsUnknownRef.current = roomReportsUnknown;
 
     return result.sort(
       (a, b) =>

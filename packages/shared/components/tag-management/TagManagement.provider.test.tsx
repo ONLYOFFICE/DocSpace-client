@@ -48,6 +48,12 @@ import {
 import { getTags } from "../../api/rooms";
 import { TAGS_QUERY_KEY } from "./TagManagement.constants";
 import type { AccessTagManagement } from "./TagManagement.types";
+import {
+  useCreateTagMutation,
+  useRemoveTagMutation,
+  useUpdateTag,
+  useUpdateTagNameMutation,
+} from "./hooks/useTagsQuery";
 
 vi.mock("../../api/rooms", () => ({
   getTags: vi.fn(() => Promise.resolve([])),
@@ -113,6 +119,13 @@ const TestComponent = () => {
         {filteredTags.map((tag) => (
           <li key={tag.label}>{tag.label}</li>
         ))}
+      </ul>
+      <ul data-testid="checked-list">
+        {tags
+          .filter((tag) => tag.checked)
+          .map((tag) => (
+            <li key={tag.label}>{tag.label}</li>
+          ))}
       </ul>
     </div>
   );
@@ -346,5 +359,245 @@ describe("TagManagementProvider", () => {
       expect(screen.getByTestId("tags-count")).toHaveTextContent("1");
     });
     expect(screen.getByTestId("filtered-list")).not.toHaveTextContent("old");
+  });
+
+  // The create record keeps the name the tag was created under, and the room
+  // has not reported the tag at all yet - so the rename has to be followed
+  // from the record too, not only from the room's own copy of the tag.
+  it("lists a tag created and then renamed under its new name only", async () => {
+    const user = userEvent.setup();
+
+    // Nothing to fetch: both names reach the query only through the mutations'
+    // own writes, which is exactly the window the bug lived in.
+    vi.mocked(getTags).mockResolvedValue([]);
+
+    const queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+    });
+
+    queryClient.setQueryData(TAGS_QUERY_KEY, []);
+
+    // Outside the provider on purpose: the mutations write to the query client,
+    // which is what the list reads - nothing is handed to it directly.
+    const Actions = () => {
+      const createTag = useCreateTagMutation("room-1");
+      const renameTag = useUpdateTagNameMutation();
+
+      return (
+        <div>
+          <button
+            data-testid="create-tag"
+            onClick={() => createTag.mutate("created")}
+          >
+            create
+          </button>
+          <button
+            data-testid="rename-tag"
+            onClick={() =>
+              renameTag.mutate({ oldLabel: "created", newLabel: "renamed" })
+            }
+          >
+            rename
+          </button>
+        </div>
+      );
+    };
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Actions />
+        {/* The room does not report the tag: the host has not reloaded it. */}
+        <TagManagementProvider roomId="room-1" roomTags={[]} access={{}}>
+          <TestComponent />
+        </TagManagementProvider>
+      </QueryClientProvider>,
+    );
+
+    await user.click(screen.getByTestId("create-tag"));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("filtered-list")).toHaveTextContent("created");
+    });
+
+    await user.click(screen.getByTestId("rename-tag"));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("filtered-list")).toHaveTextContent("renamed");
+    });
+
+    // Both names at once is the bug: the create record carries the old one and
+    // the query already reports the new one.
+    expect(screen.getByTestId("tags-count")).toHaveTextContent("1");
+    expect(screen.getByTestId("filtered-list")).not.toHaveTextContent("created");
+  });
+
+  // The bind record is written under the name the tag had when the box was
+  // clicked, and the sweep matches records against what the room claims -
+  // which the list reports under the name the tag has now.
+  it("keeps a created tag unticked after it is renamed", async () => {
+    const user = userEvent.setup();
+
+    vi.mocked(getTags).mockResolvedValue([]);
+
+    const queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+    });
+
+    queryClient.setQueryData(TAGS_QUERY_KEY, []);
+
+    const Actions = () => {
+      const createTag = useCreateTagMutation("room-1");
+      const bindTag = useUpdateTag("room-1");
+      const renameTag = useUpdateTagNameMutation();
+
+      return (
+        <div>
+          <button
+            data-testid="create-tag"
+            onClick={() => createTag.mutate("created")}
+          >
+            create
+          </button>
+          <button
+            data-testid="unbind-tag"
+            onClick={() => bindTag.mutate({ label: "created", checked: false })}
+          >
+            unbind
+          </button>
+          <button
+            data-testid="rename-tag"
+            onClick={() =>
+              renameTag.mutate({ oldLabel: "created", newLabel: "renamed" })
+            }
+          >
+            rename
+          </button>
+        </div>
+      );
+    };
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Actions />
+        <TagManagementProvider roomId="room-1" roomTags={[]} access={{}}>
+          <TestComponent />
+        </TagManagementProvider>
+      </QueryClientProvider>,
+    );
+
+    await user.click(screen.getByTestId("create-tag"));
+
+    // Creating binds it: the same request attaches the tag to the room.
+    await waitFor(() => {
+      expect(screen.getByTestId("checked-list")).toHaveTextContent("created");
+    });
+
+    await user.click(screen.getByTestId("unbind-tag"));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("checked-list")).not.toHaveTextContent(
+        "created",
+      );
+    });
+
+    await user.click(screen.getByTestId("rename-tag"));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("filtered-list")).toHaveTextContent("renamed");
+    });
+
+    // The rename must not resurrect the bind: nothing has confirmed the tag is
+    // attached to the room, so the box has to stay where the user put it.
+    expect(screen.getByTestId("checked-list")).not.toHaveTextContent("renamed");
+  });
+
+  // Renaming and then deleting frees the name, and creating it again makes a
+  // different tag that happens to carry it. The bind record of the first one
+  // still addresses the name, and the query cannot tell it is stale - the name
+  // exists again.
+  it("binds a tag recreated under a name an unbound tag used to carry", async () => {
+    const user = userEvent.setup();
+
+    vi.mocked(getTags).mockResolvedValue([]);
+
+    const queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+    });
+
+    queryClient.setQueryData(TAGS_QUERY_KEY, []);
+
+    const Actions = () => {
+      const createTag = useCreateTagMutation("room-1");
+      const bindTag = useUpdateTag("room-1");
+      const renameTag = useUpdateTagNameMutation();
+      const removeTag = useRemoveTagMutation();
+
+      return (
+        <div>
+          <button
+            data-testid="create-tag"
+            onClick={() => createTag.mutate("reused")}
+          >
+            create
+          </button>
+          <button
+            data-testid="unbind-tag"
+            onClick={() => bindTag.mutate({ label: "reused", checked: false })}
+          >
+            unbind
+          </button>
+          <button
+            data-testid="rename-tag"
+            onClick={() =>
+              renameTag.mutate({ oldLabel: "reused", newLabel: "renamed" })
+            }
+          >
+            rename
+          </button>
+          <button
+            data-testid="remove-tag"
+            onClick={() => removeTag.mutate("renamed")}
+          >
+            remove
+          </button>
+        </div>
+      );
+    };
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Actions />
+        <TagManagementProvider roomId="room-1" roomTags={[]} access={{}}>
+          <TestComponent />
+        </TagManagementProvider>
+      </QueryClientProvider>,
+    );
+
+    await user.click(screen.getByTestId("create-tag"));
+    await user.click(screen.getByTestId("unbind-tag"));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("checked-list")).not.toHaveTextContent("reused");
+    });
+
+    await user.click(screen.getByTestId("rename-tag"));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("filtered-list")).toHaveTextContent("renamed");
+    });
+
+    await user.click(screen.getByTestId("remove-tag"));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("tags-count")).toHaveTextContent("0");
+    });
+
+    // The name is free again, and this is a new tag under it - created here,
+    // so bound here, whatever the record of the tag that carried it says.
+    await user.click(screen.getByTestId("create-tag"));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("checked-list")).toHaveTextContent("reused");
+    });
   });
 });

@@ -271,24 +271,40 @@ export function useTagMutationOverlay(
       else removed.add(variables);
     });
 
-    binding.forEach(({ variables, isPending }) => {
+    // When each label was last spoken about by a bind - see the create walk
+    // below, which is the only thing that has to tell two of them apart.
+    const boundAt = new Map<string, number>();
+
+    binding.forEach(({ variables, isPending, submittedAt }) => {
       if (!isTag(variables)) return;
 
       bound.set(variables.label, variables.checked);
+      boundAt.set(variables.label, submittedAt);
       if (isPending) pending.add(variables.label);
     });
 
     // A tag created here is bound to this room by the same request. It reaches
     // the tags query only once the server confirms it, so until then this is
     // the only thing that knows about it.
-    creating.forEach(({ variables, isPending }) => {
+    creating.forEach(({ variables, isPending, submittedAt }) => {
       if (typeof variables !== "string") return;
 
       created.unshift(variables);
+
       // Only if no bind has spoken since: unbinding a tag right after creating
       // it is a later decision about the same label, and a create record lives
       // long enough to outlast it.
-      if (!bound.has(variables)) bound.set(variables, true);
+      //
+      // A bind from before this request is about a different tag: the name it
+      // was written for was freed - renamed away, or deleted - and taken again
+      // by this one, while the record still addresses the name. Unlike a stale
+      // rename or delete record, this one cannot be recognised by asking the
+      // query whether the name exists, because it does again.
+      const decidedAt = boundAt.get(variables);
+
+      if (decidedAt === undefined || decidedAt < submittedAt)
+        bound.set(variables, true);
+
       if (isPending) pending.add(variables);
     });
 
@@ -390,6 +406,20 @@ export function useRoomTagList(
   // knows - the mark of a change made from another session.
   const roomReportsUnknownRef = useRef(false);
 
+  // What each create record's label has become after the renames made since:
+  // the record carries the name the tag was created under, the room will
+  // report the current one. Rebuilt by the memo, like the refs above.
+  const createdResolvedRef = useRef<ReadonlyMap<string, string>>(new Map());
+
+  // The names the create records sustain right now - the values of the map
+  // above, which is what everything outside the records has to match against.
+  const createdLabelsRef = useRef<ReadonlySet<string>>(new Set());
+
+  // The same for the bind records: one is written under the name the tag had
+  // when the box was clicked, and a rename since leaves it addressing a name
+  // nothing reports any more.
+  const boundResolvedRef = useRef<ReadonlyMap<string, string>>(new Map());
+
   const tags = useMemo(() => {
     const order = orderRef.current;
     const result: TTag[] = [];
@@ -461,22 +491,67 @@ export function useRoomTagList(
       return label;
     };
 
+    // A create record carries the name the tag was created under, and renaming
+    // it afterwards moves the tag on without touching the record. Resolved
+    // here, at the one place that can see both the records and the query:
+    // otherwise the created name is listed next to the new one the query
+    // already reports, as a second tag.
+    const createdTags = created.map((raw) => ({
+      raw,
+      label: resolveLabel(raw),
+    }));
+
+    const createdResolved = new Map(
+      createdTags.map(({ raw, label }): [string, string] => [raw, label]),
+    );
+    const createdLabels = new Set(createdResolved.values());
+
+    // A bind record is addressed the same way: written under the name the tag
+    // had when the box was clicked, matched by the sweep against what the room
+    // claims - and the room's claims are listed under the resolved name.
+    const boundResolved = new Map<string, string>();
+
+    bound.forEach((_checked, label) =>
+      boundResolved.set(label, resolveLabel(label)),
+    );
+
     // Placed oldest first, so that the newest create takes the smallest
     // position and leads the list.
-    for (let i = created.length - 1; i >= 0; i -= 1) place(created[i], true);
+    for (let i = createdTags.length - 1; i >= 0; i -= 1) {
+      const { raw, label } = createdTags[i];
+      const previous = order.positions.get(raw);
+
+      // A rename keeps the row where it was, exactly as in the walk below -
+      // the tag was placed under the name it was created with.
+      if (label !== raw && previous !== undefined) {
+        if (!order.positions.has(label)) order.positions.set(label, previous);
+      } else {
+        place(label, true);
+      }
+    }
 
     // A tag this room is creating leads the list before the server knows it.
-    created.forEach((label) => {
+    createdTags.forEach(({ raw, label }) => {
       if (seen.has(label)) return;
 
       // Created and then deleted here: the create record still carries the
       // label, and it is the only thing that would keep listing it - the tag
-      // reaches neither the room nor the query.
+      // reaches neither the room nor the query. Under the resolved name only:
+      // a delete record for the name it was created under describes an older
+      // tag that carried that name, not this one.
       if (isDeleted(label)) return;
 
       seen.add(label);
-      // Created means bound, unless a bind has said otherwise since.
-      result.push({ label, checked: bound.get(label) ?? true });
+
+      console.debug({ label, bound });
+
+      // Created means bound, unless a bind has said otherwise since - under
+      // either name, since a bind made before the rename was recorded under
+      // the name the tag had then.
+      result.push({
+        label,
+        checked: bound.get(label) ?? bound.get(raw) ?? false,
+      });
     });
 
     unionTagsData(roomTags, fetchedTags).forEach((tag) => {
@@ -489,7 +564,7 @@ export function useRoomTagList(
       // had before a rename.
       if (isDeleted(label)) return;
 
-      if (tag.checked && !exists.has(label) && !created.includes(label))
+      if (tag.checked && !exists.has(label) && !createdLabels.has(label))
         roomReportsUnknown = true;
 
       if (seen.has(label)) return;
@@ -516,6 +591,9 @@ export function useRoomTagList(
 
     roomOwnLabelsRef.current = roomOwnLabels;
     roomReportsUnknownRef.current = roomReportsUnknown;
+    createdResolvedRef.current = createdResolved;
+    createdLabelsRef.current = createdLabels;
+    boundResolvedRef.current = boundResolved;
 
     return result.sort(
       (a, b) =>
@@ -546,7 +624,12 @@ export function useRoomTagList(
 
         if (typeof variables !== "string") return;
 
-        if (roomOwnLabelsRef.current.has(variables)) cache.remove(mutation);
+        // Against the name the tag has now, not the one it was created under:
+        // after a rename the room reports the new name and would never match
+        // the record, which would then sit unretired until it is collected.
+        const label = createdResolvedRef.current.get(variables) ?? variables;
+
+        if (roomOwnLabelsRef.current.has(label)) cache.remove(mutation);
       });
 
     cache
@@ -558,20 +641,38 @@ export function useRoomTagList(
 
         if (!isTag(variables)) return;
 
+        // Under the name the tag has now, not the one the box was clicked
+        // under: the room lists its claims resolved, so a record left behind
+        // by a rename would match nothing, read as "the room has dropped the
+        // tag", and be swept - putting the room's stale claim back on screen
+        // and undoing the untick in front of the user.
+        const label =
+          boundResolvedRef.current.get(variables.label) ?? variables.label;
+
         // A label a create record still sustains answers to that record, not
         // to the room: "created means bound, unless a bind has said otherwise"
         // makes the bind the only thing holding an untick, whatever the room
         // reports - sweeping it would flip the box back.
-        if (created.includes(variables.label)) return;
+        if (createdLabelsRef.current.has(label)) return;
 
-        const roomClaims = roomOwnLabelsRef.current.has(variables.label);
+        const roomClaims = roomOwnLabelsRef.current.has(label);
 
         if (roomClaims === variables.checked) cache.remove(mutation);
       });
-    // `tags` carries every other input of the ref - the room, the query and
-    // the mutation records - so a change in any of them re-runs the sweep.
-  }, [tags, created, roomId, queryClient]);
+    // `tags` carries every input of the refs - the room, the query and the
+    // mutation records - so a change in any of them re-runs the sweep.
+  }, [tags, roomId, queryClient]);
+
+  console.debug({
+    tags,
+    roomTags,
+    fetchedTags,
+    created,
+    removed,
+    renamed,
+    bound,
+    pending,
+  });
 
   return { tags, pendingLabels: pending };
 }
-

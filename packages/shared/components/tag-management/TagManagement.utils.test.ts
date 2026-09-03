@@ -281,14 +281,18 @@ describe("TagManagement.utils", () => {
   });
 
   describe("selectSnapshot", () => {
-    it("keeps the variables and whether the request is still running", () => {
+    it("keeps the variables, whether the request is still running, and when it was sent", () => {
       expect(
-        selectSnapshot({ state: { variables: "a", status: "pending" } }),
-      ).toEqual({ variables: "a", isPending: true });
+        selectSnapshot({
+          state: { variables: "a", status: "pending", submittedAt: 1 },
+        }),
+      ).toEqual({ variables: "a", isPending: true, submittedAt: 1 });
 
       expect(
-        selectSnapshot({ state: { variables: "a", status: "success" } }),
-      ).toEqual({ variables: "a", isPending: false });
+        selectSnapshot({
+          state: { variables: "a", status: "success", submittedAt: 2 },
+        }),
+      ).toEqual({ variables: "a", isPending: false, submittedAt: 2 });
     });
   });
 

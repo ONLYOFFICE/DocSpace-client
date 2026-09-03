@@ -136,6 +136,15 @@ export interface FormValues {
 export type MutationSnapshot = {
   variables: unknown;
   isPending: boolean;
+  /**
+   * When the request was sent.
+   *
+   * A tag name can be freed and taken again, so two records can address the
+   * same name while describing different tags. Which one is still speaking
+   * about the tag on screen is a question of order, and nothing else in the
+   * record answers it.
+   */
+  submittedAt: number;
 };
 
 /** A rename, and whether its request is still running. */

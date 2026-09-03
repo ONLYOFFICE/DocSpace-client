@@ -151,10 +151,11 @@ export const isUpdateTagNameParams = (
   typeof variables.newLabel === "string";
 
 export const selectSnapshot = (mutation: {
-  state: { variables: unknown; status: string };
+  state: { variables: unknown; status: string; submittedAt: number };
 }): MutationSnapshot => ({
   variables: mutation.state.variables,
   isPending: mutation.state.status === "pending",
+  submittedAt: mutation.state.submittedAt,
 });
 
 // A mutation counts towards the overlay while it runs and after it succeeded:

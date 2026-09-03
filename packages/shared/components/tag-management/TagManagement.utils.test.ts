@@ -298,18 +298,18 @@ describe("TagManagement.utils", () => {
       { label: " padded ", checked: false },
     ];
 
-    it("matches case-insensitively and ignores surrounding whitespace", () => {
-      expect(isTagNameTaken(tags, "boundtag")).toBe(true);
-      expect(isTagNameTaken(tags, "  BOUNDTAG  ")).toBe(true);
+    it("matches exactly and ignores surrounding whitespace only", () => {
+      expect(isTagNameTaken(tags, "BoundTag")).toBe(true);
+      expect(isTagNameTaken(tags, "  BoundTag  ")).toBe(true);
       expect(isTagNameTaken(tags, "padded")).toBe(true);
+      // Tags are case-sensitive: a different case is a different name.
+      expect(isTagNameTaken(tags, "boundtag")).toBe(false);
+      expect(isTagNameTaken(tags, "BOUNDTAG")).toBe(false);
       expect(isTagNameTaken(tags, "other")).toBe(false);
     });
 
     it("excludes the tag being renamed itself", () => {
       expect(isTagNameTaken(tags, "BoundTag", "BoundTag")).toBe(false);
-      // Only the exact row is excluded: a different tag under the same name in
-      // another case still counts.
-      expect(isTagNameTaken(tags, "boundtag", "boundtag")).toBe(true);
     });
   });
 

@@ -114,21 +114,19 @@ export const stopPropagation = (event: React.MouseEvent) =>
 /**
  * Whether `name` already belongs to a listed tag.
  *
- * The one rule every caller compares names by: case-insensitively and ignoring
- * surrounding whitespace - two tags telling apart only by case read as the
- * same name. `exceptLabel` excludes the tag being renamed itself.
+ * The one rule every caller compares names by: exact, ignoring surrounding
+ * whitespace only - tags are case-sensitive, so "tag" and "Tag" are two
+ * different names. `exceptLabel` excludes the tag being renamed itself.
  */
 export const isTagNameTaken = (
   tags: readonly TTag[],
   name: string,
   exceptLabel?: string,
 ) => {
-  const searched = name.trim().toLowerCase();
+  const searched = name.trim();
 
   return tags.some(
-    (tag) =>
-      tag.label !== exceptLabel &&
-      tag.label.trim().toLowerCase() === searched,
+    (tag) => tag.label !== exceptLabel && tag.label.trim() === searched,
   );
 };
 

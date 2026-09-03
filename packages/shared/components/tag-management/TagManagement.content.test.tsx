@@ -267,19 +267,18 @@ describe("<TagManagementContent />", () => {
 
     const input = await screen.findByTestId("edit_tag_input");
 
-    // Differs from the existing tag in case only, which is the same name as far
-    // as the list is concerned.
+    // The exact name of another tag.
     await userEvent.clear(input);
-    await userEvent.type(input, "BoundTag{Enter}");
+    await userEvent.type(input, "boundTag{Enter}");
 
     // Nothing is sent and the row stays in edit mode, with the name kept.
-    expect(screen.getByTestId("edit_tag_input")).toHaveValue("BoundTag");
+    expect(screen.getByTestId("edit_tag_input")).toHaveValue("boundTag");
     expect(updateTagName).not.toHaveBeenCalled();
 
-    // A free name is what closes the editor, so it is the collision that held
-    // it open above.
+    // Tags are case-sensitive: a name that only differs in case is free, and a
+    // free name closes the editor - so it was the collision holding it open.
     await userEvent.clear(input);
-    await userEvent.type(input, "brandNewTag{Enter}");
+    await userEvent.type(input, "BoundTag{Enter}");
 
     await waitFor(() =>
       expect(screen.queryByTestId("edit_tag_input")).not.toBeInTheDocument(),

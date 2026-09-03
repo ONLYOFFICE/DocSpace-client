@@ -109,11 +109,9 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
 
     // The name of an existing tag is not a mistake: Enter on it binds that
     // tag to the room instead of creating a duplicate. Matched the way names
-    // are compared everywhere here - case-insensitively - and bound under the
-    // tag's own spelling.
-    const existing = tags.find(
-      (tag) => tag.label.trim().toLowerCase() === trimmedValue.toLowerCase(),
-    );
+    // are compared everywhere here - exactly, tags are case-sensitive - so a
+    // different case creates a new tag.
+    const existing = tags.find((tag) => tag.label.trim() === trimmedValue);
 
     clearSearch();
     setInputValue("");

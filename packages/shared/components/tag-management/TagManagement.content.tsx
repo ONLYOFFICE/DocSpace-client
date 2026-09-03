@@ -168,7 +168,11 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
           // anything is sent - so a declined rename is a value, not an error.
           const { value: confirmed } = await flow.next();
 
-          if (!confirmed) return;
+          if (!confirmed) {
+            // Settle the generator instead of leaving it parked on its yield.
+            await flow.return();
+            return;
+          }
         }
 
         await flow?.next();
@@ -178,11 +182,17 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         // or correct - the typed name would have to be entered again.
         cancelEdit();
       } catch (error) {
+        // While the request ran, the row was listed under the pending new name
+        // and the editor was unmounted with it - which is when shouldUnregister
+        // wiped the field. Put the name back, so the reopened editor has
+        // something to correct and retry.
+        setValue(EDIT_TAG_FORM_NAME, newLabel);
+
         console.error("Failed to update tag name:", error);
         toastr.error(error instanceof Error ? error : new Error(String(error)));
       }
     },
-    [editingLabel, cancelEdit, onEditTag, tags, t],
+    [editingLabel, cancelEdit, onEditTag, tags, t, setValue],
   );
 
   const deleteTag = useCallback(
@@ -193,7 +203,11 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         if (flow) {
           const { value: confirmed } = await flow.next();
 
-          if (!confirmed) return;
+          if (!confirmed) {
+            // Settle the generator instead of leaving it parked on its yield.
+            await flow.return();
+            return;
+          }
         }
 
         await flow?.next();
@@ -358,10 +372,8 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                           size={ICON_SIZE}
                           className={styles.editIcon}
                           iconName={AccessEditReactSvgUrl}
-                          onClick={() => {
-                            if (isPending) return;
-                            handleEdit(tag.label);
-                          }}
+                          isDisabled={isPending}
+                          onClick={() => handleEdit(tag.label)}
                           dataTestId={`edit_tag_button_${tag.label}`}
                         />
                       ) : null}
@@ -370,10 +382,8 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                           size={ICON_SIZE}
                           iconName={TrashReactSvgUrl}
                           className={styles.deleteIcon}
-                          onClick={() => {
-                            if (isPending) return;
-                            deleteTag(tag.label);
-                          }}
+                          isDisabled={isPending}
+                          onClick={() => deleteTag(tag.label)}
                           dataTestId={`delete_tag_button_${tag.label}`}
                         />
                       ) : null}
@@ -388,4 +398,3 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     </div>
   );
 };
-

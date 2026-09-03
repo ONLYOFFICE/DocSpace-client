@@ -228,7 +228,7 @@
     flex-grow: 0;
     gap: 4px;
     height: 100%;
-    width: 36px;
+    width: fit-content;
   }
 
   .editIcon,
@@ -337,4 +337,3 @@
   line-height: 16px;
   letter-spacing: 0px;
 }
-

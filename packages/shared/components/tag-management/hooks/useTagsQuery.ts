@@ -121,6 +121,13 @@ export function useCreateTagMutation(roomId: string | number) {
 
   return useMutation({
     mutationKey: getTagCreateMutationKey(roomId),
+
+    // Same lifetime as the rename record: until the room reports the tag, this
+    // record is the only thing binding it to the room, and the host may never
+    // reload the room at all. The sweep in useRoomTagList retires it the
+    // moment the room confirms.
+    gcTime: TAG_MUTATION_RECORD_GC_TIME,
+
     mutationFn: (newTag: string) => addTagsToRoom(roomId, [newTag]),
     // Added to the shared list on success only: until the server has it, the
     // tag does not exist for anybody else, and putting it in the tags query
@@ -178,6 +185,14 @@ export function useRemoveTagMutation() {
 export function useUpdateTag(roomId: string | number) {
   return useMutation({
     mutationKey: getTagBindMutationKey(roomId),
+
+    // Until the room reports the toggle, this record is what keeps the
+    // checkbox where the user put it - and the host may never reload the room.
+    // On the default five-minute schedule the row falls back to the room's
+    // stale value in front of the user. The sweep in useRoomTagList retires
+    // the record as soon as the room confirms it.
+    gcTime: TAG_MUTATION_RECORD_GC_TIME,
+
     mutationFn: (tag: TTag) => {
       const requestApi = tag.checked ? addTagsToRoom : removeTagsFromRoom;
 
@@ -333,9 +348,7 @@ export function useRoomTagList(
   // onSuccess.
   const invalidatedFor = useRef(roomTagsKey);
   const previousRoomLabelsRef = useRef<ReadonlySet<string>>(
-    new Set(
-      roomTags.map((tag) => (typeof tag === "string" ? tag : tag.label)),
-    ),
+    new Set(roomTags.map((tag) => (typeof tag === "string" ? tag : tag.label))),
   );
 
   useEffect(() => {
@@ -520,6 +533,21 @@ export function useRoomTagList(
   // up, the record is the only thing keeping the toggle on screen.
   useEffect(() => {
     const cache = queryClient.getMutationCache();
+
+    // A create record is spent the same way: the room reporting the tag is
+    // everything the record still promised. Retiring it also frees the label's
+    // bind records below.
+    cache
+      .findAll({ mutationKey: getTagCreateMutationKey(roomId) })
+      .forEach((mutation) => {
+        if (mutation.state.status !== "success") return;
+
+        const { variables } = mutation.state;
+
+        if (typeof variables !== "string") return;
+
+        if (roomOwnLabelsRef.current.has(variables)) cache.remove(mutation);
+      });
 
     cache
       .findAll({ mutationKey: getTagBindMutationKey(roomId) })

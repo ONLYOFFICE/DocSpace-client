@@ -71,7 +71,6 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   const {
     tags,
     searchValue,
-    deferredSearchValue,
     showCreateTag,
     setSearchValue,
     clearSearch,
@@ -107,7 +106,12 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
 
     if (trimmedValue.length === 0 || !canCreate) return;
 
-    if (isTagNameTaken(tags, trimmedValue)) return;
+    if (isTagNameTaken(tags, trimmedValue)) {
+      // The same answer the rename gives: silence here reads as a broken
+      // button.
+      toastr.error(t("Common:TagAlreadyExists", { tagName: trimmedValue }));
+      return;
+    }
 
     clearSearch();
     setInputValue("");
@@ -194,8 +198,8 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
             icon={PlusIcon}
             className={styles.createTag}
             iconClassName={styles.createTagIcon}
-            tag={deferredSearchValue}
-            label={deferredSearchValue}
+            tag={inputValue}
+            label={inputValue}
             onClick={handleCreateTag}
             dataTestId="create_tag_button"
           />

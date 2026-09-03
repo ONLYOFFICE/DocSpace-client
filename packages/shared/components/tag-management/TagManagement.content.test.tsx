@@ -317,21 +317,43 @@ describe("<TagManagementContent />", () => {
   });
 
   it("keeps the editor and its text when the rename request fails", async () => {
-    const failingEditFlow = (_oldLabel: string, _newLabel: string) =>
-      (async function* () {
-        yield true;
-        throw new Error("rename failed");
-      })();
+    // A real mutation, not a fake flow: only a pending rename record relists
+    // the row under the new name, unmounting the editor - which is where the
+    // typed name used to be lost.
+    let rejectRename: (reason?: unknown) => void = () => {};
 
-    render(
-      <QueryClientProvider client={createQueryClient()}>
+    updateTagName.mockImplementationOnce(
+      () =>
+        new Promise<void>((_resolve, reject) => {
+          rejectRename = reject;
+        }),
+    );
+
+    const RealRenameContent = () => {
+      const rename = useUpdateTagNameMutation();
+
+      return (
         <TagManagementProvider
           roomTags={["boundTag"]}
           roomId={ROOM_ID}
           access={fullAccess}
         >
-          <TagManagementContent roomId={ROOM_ID} onEditTag={failingEditFlow} />
+          <TagManagementContent
+            roomId={ROOM_ID}
+            onEditTag={(oldLabel, newLabel) =>
+              (async function* () {
+                yield true;
+                await rename.mutateAsync({ oldLabel, newLabel });
+              })()
+            }
+          />
         </TagManagementProvider>
+      );
+    };
+
+    render(
+      <QueryClientProvider client={createQueryClient()}>
+        <RealRenameContent />
       </QueryClientProvider>,
     );
 
@@ -342,8 +364,18 @@ describe("<TagManagementContent />", () => {
     await userEvent.clear(input);
     await userEvent.type(input, "renamed{Enter}");
 
-    // The request failed, so the row stays in edit mode with the typed name -
-    // there is something to correct and retry instead of retyping.
+    // Mid-flight the row is listed under the pending new name, so the editor
+    // is unmounted - and shouldUnregister wipes the field with it.
+    await waitFor(() =>
+      expect(screen.queryByTestId("edit_tag_input")).not.toBeInTheDocument(),
+    );
+
+    await act(async () => {
+      rejectRename(new Error("rename failed"));
+    });
+
+    // The row is back under its old name and the editor reopens with the
+    // typed name - something to correct and retry instead of retyping.
     await waitFor(() =>
       expect(screen.getByTestId("edit_tag_input")).toHaveValue("renamed"),
     );
@@ -1054,6 +1086,67 @@ describe("<TagManagementContent />", () => {
     expect(getTags).not.toHaveBeenCalled();
 
     starter.unmount();
+  });
+
+  it("keeps an untick after the default mutation gc window", async () => {
+    const queryClient = createQueryClient();
+    const starter = renderMutationStarter(queryClient);
+
+    renderContent(fullAccess, queryClient);
+
+    await screen.findByTestId("tag_item_boundTag");
+
+    await act(async () => {
+      await starter.handlers.bind("boundTag", false);
+    });
+
+    await waitFor(() => expect(getCheckbox("boundTag")).not.toBeChecked());
+
+    // The room never catches up - the client passes no onTagsChanged - so the
+    // bind record is the only thing keeping the checkbox where the user put
+    // it. On the default five-minute schedule it flips back on its own.
+    vi.useFakeTimers();
+
+    try {
+      starter.unmount();
+
+      await act(async () => {
+        vi.advanceTimersByTime(6 * 60 * 1000);
+      });
+    } finally {
+      vi.useRealTimers();
+    }
+
+    expect(getCheckbox("boundTag")).not.toBeChecked();
+  });
+
+  it("keeps a created tag bound after the default mutation gc window", async () => {
+    const queryClient = createQueryClient();
+    const starter = renderMutationStarter(queryClient);
+
+    renderContent(fullAccess, queryClient);
+
+    await act(async () => {
+      await starter.handlers.create("fresh");
+    });
+
+    await waitFor(() => expect(getCheckbox("fresh")).toBeChecked());
+
+    // Same as the untick: the create record is what binds the tag to the room
+    // until the room reports it, and the room may never do that.
+    vi.useFakeTimers();
+
+    try {
+      starter.unmount();
+
+      await act(async () => {
+        vi.advanceTimersByTime(6 * 60 * 1000);
+      });
+    } finally {
+      vi.useRealTimers();
+    }
+
+    expect(getCheckbox("fresh")).toBeChecked();
   });
 
   it("keeps the rename record for as long as the session lasts", async () => {

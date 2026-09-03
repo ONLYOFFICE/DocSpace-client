@@ -172,9 +172,12 @@ export const isApplied = (mutation: { state: { status: string } }) =>
  */
 export const roomTagsToKey = (roomTags: Array<TagType | string>) =>
   roomTags
-    .map((tag) =>
-      typeof tag === "string"
-        ? tag
-        : `${tag.label}${KEY_FIELD_SEPARATOR}${tag.isDefault ? 1 : 0}`,
-    )
+    .map((tag) => {
+      // A bare string is a plain tag: the same thing as an object without the
+      // default flag, so it has to produce the same key.
+      const label = typeof tag === "string" ? tag : tag.label;
+      const isDefault = typeof tag === "string" ? false : Boolean(tag.isDefault);
+
+      return `${label}${KEY_FIELD_SEPARATOR}${isDefault ? 1 : 0}`;
+    })
     .join(KEY_ENTRY_SEPARATOR);

@@ -260,6 +260,24 @@ describe("<TagManagementContent />", () => {
     expect(removeTagsFromRoom).not.toHaveBeenCalled();
   });
 
+  it("closes the editor without a request on a case-only rename", async () => {
+    renderContent();
+
+    await userEvent.click(screen.getByTestId("edit_tag_button_freeTag"));
+
+    const input = await screen.findByTestId("edit_tag_input");
+
+    // The server's collation is case-insensitive, so "FreeTag" is the same
+    // name as "freeTag" and a rename to it would be refused as a duplicate.
+    await userEvent.clear(input);
+    await userEvent.type(input, "FreeTag{Enter}");
+
+    await waitFor(() =>
+      expect(screen.queryByTestId("edit_tag_input")).not.toBeInTheDocument(),
+    );
+    expect(updateTagName).not.toHaveBeenCalled();
+  });
+
   it("does not rename a tag to a name that is already taken", async () => {
     renderContent();
 
@@ -267,18 +285,19 @@ describe("<TagManagementContent />", () => {
 
     const input = await screen.findByTestId("edit_tag_input");
 
-    // The exact name of another tag.
-    await userEvent.clear(input);
-    await userEvent.type(input, "boundTag{Enter}");
-
-    // Nothing is sent and the row stays in edit mode, with the name kept.
-    expect(screen.getByTestId("edit_tag_input")).toHaveValue("boundTag");
-    expect(updateTagName).not.toHaveBeenCalled();
-
-    // Tags are case-sensitive: a name that only differs in case is free, and a
-    // free name closes the editor - so it was the collision holding it open.
+    // Differs from the existing tag in case only, which is the same name as far
+    // as the list is concerned.
     await userEvent.clear(input);
     await userEvent.type(input, "BoundTag{Enter}");
+
+    // Nothing is sent and the row stays in edit mode, with the name kept.
+    expect(screen.getByTestId("edit_tag_input")).toHaveValue("BoundTag");
+    expect(updateTagName).not.toHaveBeenCalled();
+
+    // A free name is what closes the editor, so it is the collision that held
+    // it open above.
+    await userEvent.clear(input);
+    await userEvent.type(input, "brandNewTag{Enter}");
 
     await waitFor(() =>
       expect(screen.queryByTestId("edit_tag_input")).not.toBeInTheDocument(),

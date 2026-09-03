@@ -214,7 +214,7 @@ describe("TagManagementProvider", () => {
     });
   });
 
-  it("offers to create a tag that differs in case only", async () => {
+  it("does not offer to create a tag that exists in another case", async () => {
     const user = userEvent.setup();
 
     renderProvider({
@@ -223,24 +223,9 @@ describe("TagManagementProvider", () => {
       access: { canCreate: true },
     });
 
-    // Tags are case-sensitive: "boundtag" is a name of its own.
+    // The rename check treats the two as the same name, so creating one next
+    // to the other has to be refused as well.
     await user.type(screen.getByTestId("search-input"), "boundtag");
-
-    await waitFor(() => {
-      expect(screen.getByTestId("show-create")).toHaveTextContent("true");
-    });
-  });
-
-  it("does not offer to create a tag whose exact name exists", async () => {
-    const user = userEvent.setup();
-
-    renderProvider({
-      roomTags: ["BoundTag"],
-      fetchedTags: [],
-      access: { canCreate: true },
-    });
-
-    await user.type(screen.getByTestId("search-input"), "BoundTag");
 
     await waitFor(() => {
       expect(screen.getByTestId("show-create")).toHaveTextContent("false");

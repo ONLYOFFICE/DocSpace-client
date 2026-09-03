@@ -142,7 +142,9 @@ describe("<TagManagementFilter /> creating tags", () => {
 
     const input = screen.getByRole("searchbox");
 
-    await userEvent.type(input, "freeTag");
+    // Another case on purpose: names are matched the way they are compared
+    // everywhere here, and the bind goes out under the tag's own spelling.
+    await userEvent.type(input, "FREETAG");
     await userEvent.keyboard("{Enter}");
 
     await waitFor(() =>
@@ -163,49 +165,6 @@ describe("<TagManagementFilter /> creating tags", () => {
 
     await waitFor(() => expect(checkbox).toBeChecked());
     expect(input).toHaveValue("");
-  });
-
-  it("creates a new tag when the name differs in case", async () => {
-    // Tags are case-sensitive: "FREETAG" is not "freeTag", so Enter creates a
-    // tag of its own instead of binding the existing one.
-    getTags.mockResolvedValue(["freeTag"]);
-
-    const queryClient = new QueryClient({
-      defaultOptions: {
-        queries: { retry: false },
-        mutations: { retry: false },
-      },
-    });
-
-    queryClient.setQueryData(TAGS_QUERY_KEY, ["freeTag"]);
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <TagManagementProvider
-          roomTags={[]}
-          roomId={ROOM_ID}
-          access={fullAccess}
-        >
-          <TagManagementFilter roomId={ROOM_ID} roomName="Room" />
-          <TagManagementContent roomId={ROOM_ID} />
-        </TagManagementProvider>
-      </QueryClientProvider>,
-    );
-
-    await userEvent.type(screen.getByRole("searchbox"), "FREETAG");
-    await userEvent.keyboard("{Enter}");
-
-    await waitFor(() =>
-      expect(addTagsToRoom).toHaveBeenCalledWith(ROOM_ID, ["FREETAG"]),
-    );
-
-    expect(
-      queryClient
-        .getMutationCache()
-        .find({ mutationKey: getTagCreateMutationKey(ROOM_ID) }),
-    ).toBeDefined();
-
-    expect(await screen.findByTestId("tag_item_FREETAG")).toBeInTheDocument();
   });
 
   it("only clears the search when the entered name is already bound", async () => {

@@ -142,7 +142,11 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
       const newLabel = submitValue[EDIT_TAG_FORM_NAME].trim();
       const oldLabel = editingLabel;
 
-      if (newLabel === oldLabel) {
+      // Case-insensitively, like the server: files_tag.name lives under a
+      // ci collation, so a case-only change of the tag's own name is "the
+      // same name" to it and would be refused as a duplicate. The same name
+      // is nothing to send - the editor just closes.
+      if (newLabel.toLowerCase() === oldLabel.toLowerCase()) {
         return cancelEdit();
       }
 

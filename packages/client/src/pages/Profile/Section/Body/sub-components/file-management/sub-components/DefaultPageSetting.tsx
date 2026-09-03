@@ -44,15 +44,19 @@ import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { isMobile } from "@docspace/shared/utils";
 
+import { isStartPageAvailable } from "SRC_DIR/helpers/defaultStartPage";
+
 type Props = {
   defaultFolderType?: SettingsStore["defaultFolderType"];
   updateDefaultFolderType?: SettingsStore["updateDefaultFolderType"];
+  aiServicesEnabled?: SettingsStore["aiServicesEnabled"];
   userType?: UserStore["userType"];
 };
 
 const StartPageSettingComponent = ({
   defaultFolderType,
   updateDefaultFolderType,
+  aiServicesEnabled,
   userType,
 }: Props) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
@@ -63,13 +67,11 @@ const StartPageSettingComponent = ({
   const getStartPageOptions = () => {
     const isGuest = userType === EmployeeType.Guest;
 
-    const unavailableOptions: FolderType[] = [];
-
-    if (isGuest) {
-      unavailableOptions.push(FolderType.USER);
-    }
-
     const options = [
+      {
+        label: t("Common:Home"),
+        key: FolderType.DEFAULT,
+      },
       {
         label: t("Common:AIAgents"),
         key: FolderType.AIAgents,
@@ -88,7 +90,9 @@ const StartPageSettingComponent = ({
       },
     ];
 
-    return options.filter((option) => !unavailableOptions.includes(option.key));
+    return options.filter((option) =>
+      isStartPageAvailable(option.key, { aiServicesEnabled, isGuest }),
+    );
   };
 
   const startPageOptions = getStartPageOptions();
@@ -131,11 +135,17 @@ const StartPageSettingComponent = ({
 
 export const DefaultPageSetting = inject(
   ({ settingsStore, userStore }: TStore) => {
-    const { defaultFolderType, updateDefaultFolderType } = settingsStore;
+    const { defaultFolderType, updateDefaultFolderType, aiServicesEnabled } =
+      settingsStore;
 
     const { userType } = userStore;
 
-    return { defaultFolderType, updateDefaultFolderType, userType };
+    return {
+      defaultFolderType,
+      updateDefaultFolderType,
+      aiServicesEnabled,
+      userType,
+    };
   },
 )(observer(StartPageSettingComponent));
 

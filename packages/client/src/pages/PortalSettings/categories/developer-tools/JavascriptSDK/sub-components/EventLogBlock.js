@@ -121,7 +121,7 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
   const hasHidden = hiddenEvents.size > 0;
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="sdk_event_log">
       <div className={styles.header}>
         <div className={styles.headerActions}>
           <span className={styles.headerTitle}>{t("EventLog")}</span>

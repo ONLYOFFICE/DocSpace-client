@@ -75,11 +75,11 @@
 
 .pluginItem {
   width: 100%;
-  height: 135px;
-  max-height: 135px;
+  min-height: 135px;
   display: grid;
-  grid-template-rows: 1fr;
+  grid-template-rows: auto;
   grid-template-columns: 48px 1fr;
+  align-items: start;
   gap: 20px;
   border: 1px solid var(--plugins-border-color);
   border-radius: 12px;
@@ -94,44 +94,59 @@
 
   .pluginInfo {
     width: 100%;
+    min-width: 0;
     height: auto;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 8px;
+
+    .pluginBadge {
+      margin-top: 4px;
+    }
 
     .pluginDescription {
       width: 100%;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-    }
-  }
+      overflow-wrap: anywhere;
 
-  &.noDescription {
-    @media (max-width: 600px) {
-      max-height: 112px;
+      &.collapsed {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+    }
+
+    .pluginDescriptionToggle {
+      padding: 0;
+      border: none;
+      background: none;
+      font-family: inherit;
+      font-weight: 600;
     }
   }
 }
 
 .pluginHeader {
   width: 100%;
-  height: 22px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 16px;
 
   .pluginName {
     margin: 0;
     padding: 0;
+    min-width: 0;
     font-weight: 700 !important;
     font-size: 16px !important;
     line-height: 22px;
+    overflow-wrap: anywhere;
   }
 
   .pluginControls {
-    height: 100%;
+    min-height: 22px;
+    flex-shrink: 0;
     display: flex;
     gap: 16px;
     align-items: center;

@@ -34,9 +34,8 @@
  */
 
 import classNames from "classnames";
-import { useTranslation } from "react-i18next";
-import { useForm, Controller } from "react-hook-form";
-import React, { useCallback, useMemo, useState } from "react";
+import { Controller } from "react-hook-form";
+import React, { useMemo } from "react";
 
 import CheckIconURL from "PUBLIC_DIR/images/check.edit.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
@@ -44,7 +43,7 @@ import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
 import { Tag } from "@docspace/ui-kit/components/tag";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
@@ -57,179 +56,48 @@ import {
 import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 
 import { useTagManagement } from "./TagManagement.provider";
-import { useUpdateTag } from "./hooks/useTagsQuery";
+import { useTagManagementService } from "./TagManagement.service";
 import { stopPropagation } from "./TagManagement.utils";
 import styles from "./TagManagement.module.scss";
 import {
   ROW_HEIGHT,
   ICON_SIZE,
+  LOADER_SIZE,
   MAX_BODY_HEIGHT,
   MARGIN_BOTTOM,
-  EDIT_CANCELLED,
-  DELETE_CANCELLED,
   EDIT_TAG_FORM_NAME,
 } from "./TagManagement.constants";
-import type {
-  FormValues,
-  TagManagementContentProps,
-} from "./TagManagement.types";
+import type { TagManagementContentProps } from "./TagManagement.types";
 
 export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   roomId,
-  onDeleteTag,
-  onEditTag,
+  confirmDeleteTag,
+  confirmEditTag,
   onTagsChanged,
 }) => {
-  const { control, handleSubmit, setValue, resetField } = useForm({
-    defaultValues: {
-      [EDIT_TAG_FORM_NAME]: "",
-    },
-    shouldUnregister: true,
-  });
-
-  const { t } = useTranslation("Common");
   const isMobile = useIsMobile();
   const {
     filteredTags,
-    tags,
-    setTags,
     access: { canEdit, canRemove, canBindTag },
   } = useTagManagement();
 
-  const updateTag = useUpdateTag(roomId);
-
-  const [editingLabel, setEditingLabel] = useState<string | null>(null);
-
-  const toggleChecked = useCallback(
-    (label: string) => {
-      const originalTags = [...tags];
-      const updatedTags = [...tags];
-      const tagIndex = updatedTags.findIndex((tag) => tag.label === label);
-
-      if (tagIndex === -1) return;
-
-      updatedTags[tagIndex] = {
-        ...updatedTags[tagIndex],
-        checked: !updatedTags[tagIndex].checked,
-      };
-
-      updateTag.mutate(updatedTags[tagIndex], {
-        onSuccess: () => {
-          setTags(updatedTags);
-          onTagsChanged?.();
-        },
-        onError: (error) => {
-          toastr.error(error);
-          console.error("Failed to update room tags:", error);
-          setTags(originalTags);
-        },
-      });
-    },
-    [tags, updateTag, onTagsChanged],
-  );
-
-  const handleEdit = useCallback(
-    (event: React.MouseEvent<HTMLDivElement, MouseEvent>, label: string) => {
-      stopPropagation(event);
-      setEditingLabel(label);
-
-      setValue(EDIT_TAG_FORM_NAME, label);
-    },
-    [tags, setValue],
-  );
-
-  const cancelEdit = useCallback(() => {
-    setEditingLabel(null);
-    resetField(EDIT_TAG_FORM_NAME);
-  }, [resetField]);
-
-  const confirmEdit = useCallback(
-    async (submitValue: FormValues) => {
-      if (editingLabel === null) return;
-
-      const newLabel = submitValue[EDIT_TAG_FORM_NAME].trim();
-      const oldLabel = editingLabel;
-
-      if (newLabel === oldLabel) {
-        return cancelEdit();
-      }
-
-      if (newLabel.length === 0) {
-        console.error("Tag name cannot be empty");
-        return;
-      }
-
-      // The whole list, not the filtered one: a tag the search is hiding is
-      // still a tag the rename would collide with. Compared case-insensitively,
-      // because two tags that differ in case only read as the same name.
-      const isTaken = tags.some(
-        (tag) =>
-          tag.label !== oldLabel &&
-          tag.label.trim().toLowerCase() === newLabel.toLowerCase(),
-      );
-
-      if (isTaken) {
-        // Nothing is sent and the row stays in edit mode, so the name can be
-        // corrected instead of retyped.
-        toastr.error(t("Common:TagAlreadyExists", { tagName: newLabel }));
-        return;
-      }
-
-      try {
-        await onEditTag?.(oldLabel, newLabel);
-        setTags((prev) =>
-          prev.map((tag) =>
-            tag.label === oldLabel ? { ...tag, label: newLabel } : tag,
-          ),
-        );
-        cancelEdit();
-      } catch (error) {
-        if (error === EDIT_CANCELLED) return;
-
-        toastr.error(error as Error);
-        console.error("Failed to update tag name:", error);
-      }
-    },
-    [editingLabel, tags, cancelEdit, onEditTag, t],
-  );
-
-  const deleteTag = useCallback(
-    async (
-      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-      tag: string,
-    ) => {
-      stopPropagation(event);
-
-      try {
-        await onDeleteTag?.(tag);
-
-        const updatedTags = tags.filter((t) => t.label !== tag);
-        setTags(updatedTags);
-      } catch (error) {
-        if (error === DELETE_CANCELLED) return;
-
-        toastr.error(error as Error);
-        console.error("Failed to remove room tag:", error);
-      }
-    },
-    [tags, onDeleteTag],
-  );
-
-  const editTagHandleKey = useCallback(
-    (event: React.KeyboardEvent<HTMLInputElement>) => {
-      switch (event.key) {
-        case "Enter":
-          handleSubmit(confirmEdit)(event);
-          break;
-        case "Escape":
-          cancelEdit();
-          break;
-        default:
-          break;
-      }
-    },
-    [confirmEdit, cancelEdit],
-  );
+  const {
+    control,
+    handleSubmit,
+    editingLabel,
+    pendingLabel,
+    toggleChecked,
+    handleEdit,
+    cancelEdit,
+    confirmEdit,
+    deleteTag,
+    editTagHandleKey,
+  } = useTagManagementService({
+    roomId,
+    confirmDeleteTag,
+    confirmEditTag,
+    onTagsChanged,
+  });
 
   const style = useMemo(() => {
     return {
@@ -247,13 +115,15 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
       <Scrollbar fixedSize className={styles.scrollbar}>
         {filteredTags.map((tag) => {
           const isEditing = editingLabel === tag.label;
-          const isRowClickable = canBindTag && !isEditing;
+          const isPending = pendingLabel === tag.label;
+          const isRowClickable = canBindTag && !isEditing && !isPending;
 
           return (
             <div
               key={tag.label}
               className={classNames(styles.row, {
                 [styles.rowClickable]: isRowClickable,
+                [styles.rowPending]: isPending,
               })}
               onClick={
                 isRowClickable ? () => toggleChecked(tag.label) : undefined
@@ -266,13 +136,27 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                 onClick={stopPropagation}
                 className={styles.checkboxWrapper}
               >
-                <Checkbox
-                  isChecked={tag.checked}
-                  isDisabled={!canBindTag}
-                  className={styles.checkbox}
-                  onChange={() => toggleChecked(tag.label)}
-                  dataTestId={`tag_checkbox_${tag.label}`}
-                />
+                {isPending ? (
+                  <span
+                    className={styles.checkboxLoader}
+                    style={{ width: LOADER_SIZE, height: LOADER_SIZE }}
+                    data-testid={`tag_loader_${tag.label}`}
+                  >
+                    <Loader
+                      primary
+                      size={`${LOADER_SIZE}px`}
+                      type={LoaderTypes.track}
+                    />
+                  </span>
+                ) : (
+                  <Checkbox
+                    isChecked={tag.checked}
+                    isDisabled={!canBindTag || isEditing}
+                    className={styles.checkbox}
+                    onChange={() => toggleChecked(tag.label)}
+                    dataTestId={`tag_checkbox_${tag.label}`}
+                  />
+                )}
               </span>
               {isEditing ? (
                 <>
@@ -334,6 +218,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                         handleEdit(event, tag.label);
                       }}
                       dataTestId={`edit_tag_button_${tag.label}`}
+                      isDisabled={isPending}
                     />
                   ) : null}
                   {canRemove && (
@@ -345,6 +230,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                         deleteTag(event, tag.label);
                       }}
                       dataTestId={`delete_tag_button_${tag.label}`}
+                      isDisabled={isPending}
                     />
                   )}
                 </>

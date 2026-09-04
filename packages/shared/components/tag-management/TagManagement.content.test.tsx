@@ -43,22 +43,32 @@ import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementContent } from "./TagManagement.content";
 import type { AccessTagManagement } from "./TagManagement.types";
 
-const { addTagsToRoom, removeTagsFromRoom, toastError } = vi.hoisted(() => ({
+const {
+  addTagsToRoom,
+  removeTagsFromRoom,
+  removeTagRequest,
+  updateTagName,
+  toastError,
+  toastSuccess,
+} = vi.hoisted(() => ({
   addTagsToRoom: vi.fn(() => Promise.resolve()),
   removeTagsFromRoom: vi.fn(() => Promise.resolve()),
+  removeTagRequest: vi.fn(() => Promise.resolve()),
+  updateTagName: vi.fn(() => Promise.resolve()),
   toastError: vi.fn(),
+  toastSuccess: vi.fn(),
 }));
 
 vi.mock("@docspace/ui-kit/components/toast", () => ({
-  toastr: { error: toastError, success: vi.fn() },
+  toastr: { error: toastError, success: toastSuccess },
 }));
 
 vi.mock("../../api/rooms", () => ({
   addTagsToRoom,
   removeTagsFromRoom,
+  removeTagRequest,
+  updateTagName,
   getTags: vi.fn(() => Promise.resolve([])),
-  updateTagName: vi.fn(() => Promise.resolve()),
-  removeTagRequest: vi.fn(() => Promise.resolve()),
 }));
 
 vi.mock("@docspace/ui-kit/hooks/use-is-mobile", () => ({
@@ -81,9 +91,13 @@ const fullAccess: AccessTagManagement = {
   canRemove: true,
 };
 
+// Both confirmations say yes by default: the tests that care about a refusal
+// hand in one that answers false.
 const renderContent = (
   access: AccessTagManagement = fullAccess,
-  onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>,
+  confirmEditTag: () => Promise<boolean> = () => Promise.resolve(true),
+  confirmDeleteTag: (label: string) => Promise<boolean> = () =>
+    Promise.resolve(true),
 ) => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
@@ -96,7 +110,11 @@ const renderContent = (
         fetchedTags={["boundTag", "freeTag"]}
         access={access}
       >
-        <TagManagementContent roomId={ROOM_ID} onEditTag={onEditTag} />
+        <TagManagementContent
+          roomId={ROOM_ID}
+          confirmEditTag={confirmEditTag}
+          confirmDeleteTag={confirmDeleteTag}
+        />
       </TagManagementProvider>
     </QueryClientProvider>,
   );
@@ -181,56 +199,186 @@ describe("<TagManagementContent />", () => {
     expect(removeTagsFromRoom).not.toHaveBeenCalled();
   });
 
-  describe("renaming onto a name another tag already carries", () => {
-    it("reports it and keeps the row in edit mode", async () => {
-      const onEditTag = vi.fn(() => Promise.resolve());
+  it("shows a loader on the row while its request is in flight", async () => {
+    let answer: () => void = () => {};
 
-      renderContent(fullAccess, onEditTag);
+    addTagsToRoom.mockImplementation(
+      () =>
+        new Promise<void>((resolve) => {
+          answer = resolve;
+        }),
+    );
 
-      await renameTo("freeTag", "boundTag");
+    renderContent();
 
-      expect(toastError).toHaveBeenCalledWith("Common:TagAlreadyExists");
-      expect(onEditTag).not.toHaveBeenCalled();
-      // Still editable, so the name can be corrected instead of retyped.
-      expect(screen.getByTestId("edit_tag_input")).toHaveValue("boundTag");
+    await userEvent.click(screen.getByTestId("tag_row_freeTag"));
+
+    // In place of the checkbox, and only on the row that was clicked.
+    expect(await screen.findByTestId("tag_loader_freeTag")).toBeInTheDocument();
+    expect(
+      screen.queryByTestId("tag_checkbox_freeTag"),
+    ).not.toBeInTheDocument();
+    expect(screen.getByTestId("tag_checkbox_boundTag")).toBeInTheDocument();
+
+    answer();
+
+    await waitFor(() => {
+      expect(
+        screen.queryByTestId("tag_loader_freeTag"),
+      ).not.toBeInTheDocument();
+    });
+    expect(screen.getByTestId("tag_checkbox_freeTag")).toBeInTheDocument();
+  });
+
+  it("starts nothing else while a request is out", async () => {
+    let answer: () => void = () => {};
+
+    addTagsToRoom.mockImplementation(
+      () =>
+        new Promise<void>((resolve) => {
+          answer = resolve;
+        }),
+    );
+
+    renderContent();
+
+    await userEvent.click(screen.getByTestId("tag_row_freeTag"));
+    await screen.findByTestId("tag_loader_freeTag");
+
+    // Another row, and the buttons on the busy one: none of them may send a
+    // second request while the first is still out.
+    await userEvent.click(screen.getByTestId("tag_row_boundTag"));
+    await userEvent.click(screen.getByTestId("edit_tag_button_freeTag"));
+    await userEvent.click(screen.getByTestId("delete_tag_button_freeTag"));
+
+    expect(addTagsToRoom).toHaveBeenCalledTimes(1);
+    expect(removeTagsFromRoom).not.toHaveBeenCalled();
+    expect(removeTagRequest).not.toHaveBeenCalled();
+    expect(screen.queryByTestId("edit_tag_input")).not.toBeInTheDocument();
+
+    answer();
+
+    // And it works again once the answer is in.
+    await waitFor(() => {
+      expect(screen.getByTestId("tag_checkbox_freeTag")).toBeInTheDocument();
     });
 
-    it("reports it whatever the case, since the two read as the same name", async () => {
-      const onEditTag = vi.fn(() => Promise.resolve());
+    await userEvent.click(screen.getByTestId("tag_row_boundTag"));
 
-      renderContent(fullAccess, onEditTag);
+    await waitFor(() => {
+      expect(removeTagsFromRoom).toHaveBeenCalledWith(ROOM_ID, ["boundTag"]);
+    });
+  });
 
-      await renameTo("freeTag", "BOUNDTAG");
+  describe("deleting a tag", () => {
+    it("sends the delete once the user has confirmed, and says so", async () => {
+      const confirmDeleteTag = vi.fn(() => Promise.resolve(true));
 
-      expect(toastError).toHaveBeenCalledWith("Common:TagAlreadyExists");
-      expect(onEditTag).not.toHaveBeenCalled();
+      renderContent(fullAccess, undefined, confirmDeleteTag);
+
+      await userEvent.click(screen.getByTestId("delete_tag_button_freeTag"));
+
+      await waitFor(() => {
+        expect(removeTagRequest).toHaveBeenCalledWith(["freeTag"]);
+      });
+      // Asked about the tag whose button was clicked.
+      expect(confirmDeleteTag).toHaveBeenCalledWith("freeTag");
+      expect(toastSuccess).toHaveBeenCalled();
+
+      // Gone from the list, without waiting for the room to be reloaded.
+      await waitFor(() => {
+        expect(
+          screen.queryByTestId("tag_item_freeTag"),
+        ).not.toBeInTheDocument();
+      });
     });
 
-    it("sends a name no other tag carries", async () => {
-      const onEditTag = vi.fn(() => Promise.resolve());
+    it("sends nothing when the user refuses", async () => {
+      const confirmDeleteTag = vi.fn(() => Promise.resolve(false));
 
-      renderContent(fullAccess, onEditTag);
+      renderContent(fullAccess, undefined, confirmDeleteTag);
+
+      await userEvent.click(screen.getByTestId("delete_tag_button_freeTag"));
+
+      await waitFor(() => {
+        expect(confirmDeleteTag).toHaveBeenCalled();
+      });
+      expect(removeTagRequest).not.toHaveBeenCalled();
+      expect(toastSuccess).not.toHaveBeenCalled();
+      // The row is still there, and no error was reported either.
+      expect(screen.getByTestId("tag_item_freeTag")).toBeInTheDocument();
+      expect(toastError).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("renaming a tag", () => {
+    it("sends the rename once the user has confirmed", async () => {
+      const confirmEditTag = vi.fn(() => Promise.resolve(true));
+
+      renderContent(fullAccess, confirmEditTag);
 
       await renameTo("freeTag", "renamedTag");
 
       await waitFor(() => {
-        expect(onEditTag).toHaveBeenCalledWith("freeTag", "renamedTag");
+        expect(updateTagName).toHaveBeenCalledWith("freeTag", "renamedTag");
       });
+      expect(confirmEditTag).toHaveBeenCalled();
+      expect(toastError).not.toHaveBeenCalled();
+    });
+
+    it("sends nothing when the user refuses", async () => {
+      const confirmEditTag = vi.fn(() => Promise.resolve(false));
+
+      renderContent(fullAccess, confirmEditTag);
+
+      await renameTo("freeTag", "renamedTag");
+
+      await waitFor(() => {
+        expect(confirmEditTag).toHaveBeenCalled();
+      });
+      expect(updateTagName).not.toHaveBeenCalled();
       expect(toastError).not.toHaveBeenCalled();
     });
 
     it("lets a tag be respelled in another case", async () => {
-      const onEditTag = vi.fn(() => Promise.resolve());
-
-      renderContent(fullAccess, onEditTag);
+      renderContent();
 
       // The only tag carrying this name is the one being renamed.
       await renameTo("freeTag", "FreeTag");
 
       await waitFor(() => {
-        expect(onEditTag).toHaveBeenCalledWith("freeTag", "FreeTag");
+        expect(updateTagName).toHaveBeenCalledWith("freeTag", "FreeTag");
       });
       expect(toastError).not.toHaveBeenCalled();
+    });
+
+    describe("onto a name another tag already carries", () => {
+      it("reports it and keeps the row in edit mode", async () => {
+        const confirmEditTag = vi.fn(() => Promise.resolve(true));
+
+        renderContent(fullAccess, confirmEditTag);
+
+        await renameTo("freeTag", "boundTag");
+
+        expect(toastError).toHaveBeenCalledWith("Common:TagAlreadyExists");
+        // Not even asked: there is nothing to confirm.
+        expect(confirmEditTag).not.toHaveBeenCalled();
+        expect(updateTagName).not.toHaveBeenCalled();
+        // Still editable, so the name can be corrected instead of retyped.
+        expect(screen.getByTestId("edit_tag_input")).toHaveValue("boundTag");
+      });
+
+      it("reports it whatever the case, since the two read as the same name", async () => {
+        const confirmEditTag = vi.fn(() => Promise.resolve(true));
+
+        renderContent(fullAccess, confirmEditTag);
+
+        await renameTo("freeTag", "BOUNDTAG");
+
+        expect(toastError).toHaveBeenCalledWith("Common:TagAlreadyExists");
+        expect(confirmEditTag).not.toHaveBeenCalled();
+        expect(updateTagName).not.toHaveBeenCalled();
+      });
     });
   });
 });

@@ -101,7 +101,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   );
 
   const handleCreateTag = useCallback(async () => {
-    const trimmedValue = searchValue.trim();
+    const trimmedValue = searchValue.trim().replace(/\s+/g, " ");
     if (trimmedValue.length === 0) return;
 
     // The name of an existing tag is not a mistake: it means that tag, so

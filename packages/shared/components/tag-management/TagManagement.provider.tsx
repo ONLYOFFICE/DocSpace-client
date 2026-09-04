@@ -68,7 +68,7 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
   });
 
   const [filteredTags, showCreateTag] = useMemo(() => {
-    const search = deferredSearchValue.trim();
+    const search = deferredSearchValue.trim().replace(/\s+/g, " ");
 
     if (!search) return [tags, false];
 

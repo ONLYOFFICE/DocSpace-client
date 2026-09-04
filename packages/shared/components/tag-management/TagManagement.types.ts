@@ -49,8 +49,10 @@ export interface TagManagementPopupProps {
   onClose: VoidFunction;
   anchor: React.RefObject<HTMLElement | null>;
 
-  onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>;
-  onDeleteTag?: (label: string) => Promise<void>;
+  /** Asks the user to confirm the rename. False means they refused. */
+  confirmEditTag: () => Promise<boolean>;
+  /** The same for a delete. */
+  confirmDeleteTag: (label: string) => Promise<boolean>;
   onTagsChanged?: VoidFunction;
 
   roomName: string;
@@ -81,7 +83,7 @@ export interface ITagManagementStateContext {
   access: AccessTagManagement;
 }
 
-export type TagManagementContextValue = ITagManagementStateContext
+export type TagManagementContextValue = ITagManagementStateContext;
 
 export interface UpdateTagNameParams {
   oldLabel: string;
@@ -91,8 +93,8 @@ export interface UpdateTagNameParams {
 export interface TagManagementContentProps {
   roomId: string | number;
 
-  onDeleteTag?: (label: string) => Promise<void>;
-  onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>;
+  confirmDeleteTag: (label: string) => Promise<boolean>;
+  confirmEditTag: () => Promise<boolean>;
   onTagsChanged?: VoidFunction;
 }
 

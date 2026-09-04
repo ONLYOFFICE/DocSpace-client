@@ -192,6 +192,19 @@
     flex-shrink: 0;
   }
 
+  // Takes the checkbox's place while the row waits for its request, so the
+  // row keeps its layout instead of shifting under the cursor.
+  .checkboxLoader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > * {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
   .checkbox svg {
     margin: 0;
   }
@@ -202,6 +215,20 @@
   }
   .tag {
     margin-inline-end: auto;
+  }
+
+  // While the row waits for its answer nothing on it can be used, so it says
+  // so: dimmed, and the cursor refuses rather than inviting another click.
+  // The loader keeps its own weight - it is the one thing still speaking.
+  &.rowPending {
+    cursor: not-allowed;
+
+    .tag,
+    .editIcon,
+    .deleteIcon {
+      opacity: 0.5;
+      pointer-events: none;
+    }
   }
 
   @media (hover: hover) {
@@ -215,6 +242,14 @@
     }
 
     &:hover {
+      .editIcon,
+      .deleteIcon {
+        visibility: visible;
+      }
+    }
+
+    // Kept in view, so the row does not look empty while it is busy.
+    &.rowPending:hover {
       .editIcon,
       .deleteIcon {
         visibility: visible;

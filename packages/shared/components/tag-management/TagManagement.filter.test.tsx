@@ -156,3 +156,4 @@ describe("<TagManagementFilter /> submitting the search", () => {
     expect(addTagsToRoom).not.toHaveBeenCalled();
   });
 });
+

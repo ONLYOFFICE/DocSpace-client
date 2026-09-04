@@ -67,6 +67,8 @@ const defaultProps: TagManagementPopupProps = {
   anchor: { current: document.createElement("div") },
   access: { canCreate: false, canSearch: true },
   roomName: "Test Room",
+  confirmEditTag: vi.fn(() => Promise.resolve(true)),
+  confirmDeleteTag: vi.fn(() => Promise.resolve(true)),
 };
 
 const renderWithQueryClient = (

@@ -745,34 +745,66 @@ describe("the quick-actions carousel helpers", () => {
   };
 
   describe("revealQuickActionTile", () => {
-    it("scrolls the tile along the strip, leaving the vertical axis alone", () => {
+    // jsdom performs no scrolling, so `scrollLeft` is a constant 0 with an
+    // inert setter. Recording the writes is the only way to see where the
+    // strip was sent.
+    const recordScrollLeft = () => {
+      const writes: number[] = [];
+
+      Object.defineProperty(HTMLElement.prototype, "scrollLeft", {
+        configurable: true,
+        get: () => 0,
+        set: (value: number) => {
+          writes.push(value);
+        },
+      });
+
+      return writes;
+    };
+
+    it("centres the tile by scrolling the strip itself", () => {
       // The banner is a carousel: a tile past the fold is mounted and
       // measurable but out of sight, so joyride would spotlight bare strip.
-      // `block: "nearest"` keeps this off the vertical axis, which is
-      // `scrollTargetIntoView`'s to move.
+      mountBanner();
+      withRect('[data-testid="quick-ai-chat"]', {
+        top: 0,
+        left: 900,
+        width: 184,
+        height: 147,
+      });
+      withRect(".track", { top: 0, left: 0, width: 600, height: 147 });
+
+      const writes = recordScrollLeft();
+
+      revealQuickActionTile('[data-testid="quick-ai-chat"]')();
+
+      // Tile centre 992 less track centre 300.
+      expect(writes).toEqual([692]);
+    });
+
+    it("never scrolls anything but the strip", () => {
+      // `scrollIntoView` walks every scrollable ancestor, and the section body
+      // gives up its inline inset to satisfy the request: the list ends up
+      // flush against the article and the screenshot guard refuses to
+      // photograph the shifted page. Three tour specs failed exactly that way.
       mountBanner();
       const scrollIntoView = vi.spyOn(Element.prototype, "scrollIntoView");
 
       revealQuickActionTile('[data-testid="quick-ai-chat"]')();
 
-      expect(scrollIntoView).toHaveBeenCalledWith(
-        expect.objectContaining({ inline: "center", block: "nearest" }),
-      );
-      expect(scrollIntoView.mock.instances[0]).toBe(
-        document.querySelector('[data-testid="quick-ai-chat"]'),
-      );
+      expect(scrollIntoView).not.toHaveBeenCalled();
     });
 
     it("does nothing when the tile is not on the page", () => {
       // The banner is hidden for anyone who turned quick actions off, and the
       // step that wanted it must not throw on the way past.
       mount("");
-      const scrollIntoView = vi.spyOn(Element.prototype, "scrollIntoView");
+      const writes = recordScrollLeft();
 
       expect(() =>
         revealQuickActionTile('[data-testid="quick-ai-chat"]')(),
       ).not.toThrow();
-      expect(scrollIntoView).not.toHaveBeenCalled();
+      expect(writes).toHaveLength(0);
     });
   });
 

@@ -741,22 +741,33 @@ const QUICK_ACTIONS_SELECTOR = '[data-testid="quick-actions"]';
  *
  * The banner is a carousel, so a tile past the fold is mounted and measurable
  * but scrolled out of sight — joyride would spotlight an empty patch of the
- * strip. `block: "nearest"` keeps this to the horizontal axis: the vertical
- * position is `scrollTargetIntoView`'s job, and moving both here would fight it.
+ * strip.
  *
- * Instant rather than smooth, for the same reason as `scrollTargetIntoView`:
- * joyride measures as soon as the hook resolves, and a smooth scroll cannot be
- * awaited.
+ * The track's own `scrollLeft` is moved rather than calling `scrollIntoView`:
+ * that walks every scrollable ancestor, and the section body will happily give
+ * up a few pixels of its inline inset to satisfy the request. The list then
+ * sits flush against the article and the whole page is captured shifted
+ * sideways, which is exactly what the screenshot helper's alignment guard
+ * refuses to photograph. Confining the scroll to the strip cannot move
+ * anything else.
  */
 export function revealQuickActionTile(selector: string) {
   return () => {
     const tile = document.querySelector(selector);
+    const track = tile?.closest(QUICK_ACTIONS_SELECTOR)?.firstElementChild;
 
-    tile?.scrollIntoView({
-      inline: "center",
-      block: "nearest",
-      behavior: "instant",
-    });
+    if (!tile || !track) return;
+
+    const tileBox = tile.getBoundingClientRect();
+    const trackBox = track.getBoundingClientRect();
+
+    const tileCentre = tileBox.left + tileBox.width / 2;
+    const trackCentre = trackBox.left + trackBox.width / 2;
+
+    // Assignment rather than `scrollTo`, so the jump is instant: joyride
+    // measures as soon as this hook resolves and a smooth scroll cannot be
+    // awaited. Out-of-range values are clamped by the browser.
+    track.scrollLeft += tileCentre - trackCentre;
   };
 }
 

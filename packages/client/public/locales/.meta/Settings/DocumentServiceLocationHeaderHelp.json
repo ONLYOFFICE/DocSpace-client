@@ -1,20 +1,19 @@
 {
   "key_path": "DocumentServiceLocationHeaderHelp",
-  "content": "Check the settings of the Docs service used by default in your cloud workspace to edit and convert files into OfficeOpen XML format. To connect Docs to your own platform, use Docs Connect.",
-  "content_en_sha1_hash": "22c1dd801b6741a18e5d003da2091fbafdae9efa",
-  "created_at": "2026-08-31T18:23:41.115Z",
-  "updated_at": "2026-08-31T20:34:18.416Z",
+  "content": "Check the settings of the Docs service used by default in your cloud workspace to edit and convert files into OfficeOpen XML format.",
+  "content_en_sha1_hash": "67040fbcbe2606abb6fe838faa503cca0f10a3d9",
+  "created_at": "2026-09-04T07:59:35.672Z",
+  "updated_at": "2026-09-04T07:59:41.682Z",
   "comment": {
-    "text": "Instructional help text located under the Document Service header in the integration settings. It explains how to configure the default Docs service and use Docs Connect.",
-    "is_auto": true,
-    "updated_at": "2026-08-31T20:34:18.416Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 324,
-      "context": "return (\n <Styled.Location>\n <Styled.LocationHeader>\n <div className={styles.main}>\n {t(\"Settings:DocumentServiceLocationHeaderHelp\")}\n </div>\n {documentServiceSettingsUrl ? (\n <Link\n className={styles.thirdPartyLink}\n color={currentColorScheme.main?.accent}",
+      "line_number": 330,
+      "context": "return (\n <Styled.Location>\n <Styled.LocationHeader>\n <div className={styles.main}>\n {t(\"Settings:DocumentServiceLocationHeaderHelp\")}\n {/* Docs Connect is SaaS-only: a standalone portal has nothing to\n connect to, so the sentence that points at it is dropped rather\n than left as a link nobody here can follow. */}\n {showDocsConnectHint ? (\n <>",
       "module": "/packages/client"
     }
   ],

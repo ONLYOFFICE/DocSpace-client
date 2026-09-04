@@ -3,7 +3,7 @@
   "content": "Manually configure the parameters for embedding your workspace.",
   "content_en_sha1_hash": "59e0d6cf929dd697c1ffb551d000085eab47dad4",
   "created_at": "2026-08-12T11:00:47.386Z",
-  "updated_at": "2026-08-14T14:58:32.799Z",
+  "updated_at": "2026-09-04T07:59:41.648Z",
   "comment": {
     "text": "Description text for a menu item or preset card explaining how to manually configure workspace embedding parameters.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 448,
+      "line_number": 447,
       "context": "</>\n );\n \n return (\n <PresetWrapper\n description={t(\"CustomDescription\")}\n header={t(\"CreateSamplePortal\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}",
       "module": "/packages/client"
     }

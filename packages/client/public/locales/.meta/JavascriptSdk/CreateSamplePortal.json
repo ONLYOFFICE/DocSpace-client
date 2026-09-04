@@ -3,7 +3,7 @@
   "content": "Try a workspace embed",
   "content_en_sha1_hash": "5da7a4e4e6f42e0769df5781a4e86c05acffdb3f",
   "created_at": "2026-08-26T16:05:57.716Z",
-  "updated_at": "2026-08-26T16:09:27.044Z",
+  "updated_at": "2026-09-04T07:59:41.649Z",
   "comment": {
     "text": "Header for a preset section in the developer tools that introduces the workspace embed feature.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace.js",
-      "line_number": 203,
+      "line_number": 202,
       "context": ");\n \n return (\n <PresetWrapper\n description={t(\"PortalDescription\")}\n header={t(\"CreateSamplePortal\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 449,
+      "line_number": 448,
       "context": ");\n \n return (\n <PresetWrapper\n description={t(\"CustomDescription\")}\n header={t(\"CreateSamplePortal\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     }

@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "推論を非表示",
   "ArbiterIntroDescription": "複数のAIエキスパートが並行してご質問に回答し、アービターがその回答を1つの重み付けされた回答に合成します。",
   "ArbiterLabel": "アービター：",
-  "ArbiterNoAIProvider": "このワークスペースにはAIプロバイダーが設定されていません。",
+  "ArbiterNoModels": "このワークスペースにはAIモデルが設定されていません。",
   "ArbiterNonAdminDescription": "AIアービターは管理者のみ利用できます。設定するにはスーパー管理者にご依頼ください。",
   "ArbiterOpenAiArbiter": "AI Arbiter を開く",
   "ArbiterPageDescription": "質問をして複数のAIエキスパートから独立した回答を受け取り、アービターが1つの根拠ある判定に評価します。",

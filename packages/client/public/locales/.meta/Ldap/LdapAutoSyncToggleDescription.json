@@ -1,13 +1,13 @@
 {
   "key_path": "LdapAutoSyncToggleDescription",
-  "content": "Syncing pulls in all your workspace data and keeps it updated whenever settings change - run it anytime you have new user data to bring in.",
-  "content_en_sha1_hash": "bbf80dd8da78ee2572a1bd506f5f02701b7ed79b",
-  "created_at": "2026-08-31T18:23:43.677Z",
-  "updated_at": "2026-08-31T20:03:10.536Z",
+  "content": "Syncing pulls in all your workspace data and keeps it updated whenever settings change — run it anytime you have new user data to bring in.",
+  "content_en_sha1_hash": "bc0c79dc4fc603e3b4efd5c62d41e261e4ce83a2",
+  "created_at": "2026-09-04T07:59:37.184Z",
+  "updated_at": "2026-09-04T08:05:33.978Z",
   "comment": {
-    "text": "Description text for the LDAP auto-sync toggle switch in the integration settings, explaining the functionality of the synchronization feature.",
+    "text": "Descriptive subtext for the LDAP Auto Sync toggle switch in the integration settings, explaining the functionality and purpose of the synchronization feature.",
     "is_auto": true,
-    "updated_at": "2026-08-31T20:03:10.536Z",
+    "updated_at": "2026-09-04T08:05:33.978Z",
     "model": "gemma4:26b"
   },
   "usage": [

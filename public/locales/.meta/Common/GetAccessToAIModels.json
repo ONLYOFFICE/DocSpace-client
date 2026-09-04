@@ -3,7 +3,7 @@
   "content": "Get access to a wide range of AI models, web search, and knowledge base tools through OpenRouter and Exa integrations.",
   "content_en_sha1_hash": "e9e7d51e681804991bc14672db99959b6206cf8b",
   "created_at": "2026-08-31T18:23:09.557Z",
-  "updated_at": "2026-08-31T19:02:35.991Z",
+  "updated_at": "2026-09-04T07:59:41.636Z",
   "comment": {
     "text": "Descriptive text in the AI features banner explaining the benefits of enabling AI tools and integrations.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
       "line_number": 137,
-      "context": "activateLabel: t(\"Common:ActivateAISearch\"),\n enabledTitle: t(\"Common:AISearchEnabledTitle\"),\n enabledDescription: t(\"Common:AISearchEnabledDescription\"),\n }\n : {\n activateDescription: t(\"Common:GetAccessToAIModels\"),\n activateLabel: t(\"Common:ActivateAIFeatures\"),\n enabledTitle: t(\"Common:AIFeaturesEnabled\"),\n enabledDescription: t(\"Common:AIFeaturesEnabledDescription\"),\n }),\n });",
+      "context": "activateDescription: t(\"Common:ActivateAISearchDescription\"),\n enabledTitle: t(\"Common:AISearchEnabledTitle\"),\n enabledDescription: t(\"Common:AISearchEnabledDescription\"),\n }\n : {\n activateDescription: t(\"Common:GetAccessToAIModels\"),\n enabledTitle: t(\"Common:AIFeaturesEnabled\"),\n enabledDescription: t(\"Common:AIFeaturesEnabledDescription\"),\n }),\n });",
       "module": "/packages/client"
     }
   ],

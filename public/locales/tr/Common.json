@@ -675,7 +675,7 @@
   "DomainAlreadyAdded": "Bu alan zaten eklenmiş.",
   "DomainIpAddress": "IP adresi olarak alan adları desteklenmez",
   "Done": "Tamam",
-  "DontAskAgain": "Dosya oluştururken dosya adını tekrar sorma",
+  "DontAskAgain": "Dosya oluştururken dosya adını tekrar sorma.",
   "DontShowAgain": "Tekrar gösterme",
   "DontShowMessage": "Bu mesajı bir daha gösterme",
   "DowngradeScheduled": "Planlanmış değişiklik: Depolama ayarı, {{fromSize}} → {{toSize}}",

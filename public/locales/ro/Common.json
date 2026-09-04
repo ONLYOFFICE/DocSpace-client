@@ -675,7 +675,7 @@
   "DomainAlreadyAdded": "Acest domeniu a fost deja adăugat.",
   "DomainIpAddress": "Domenii sub forma unei adrese IP nu sunt acceptate",
   "Done": "Gata",
-  "DontAskAgain": "Nu cere din nou numele fișierului la crearea unui fișier",
+  "DontAskAgain": "Nu cere din nou numele fișierului la crearea unui fișier.",
   "DontShowAgain": "Nu mai afișa din nou",
   "DontShowMessage": "Nu mai afișa acest mesaj",
   "DowngradeScheduled": "Schimbare programată: Ajustarea stocului, {{fromSize}} → {{toSize}}",

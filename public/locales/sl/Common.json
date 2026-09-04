@@ -675,7 +675,7 @@
   "DomainAlreadyAdded": "Ta domena je že bila dodana.",
   "DomainIpAddress": "Domene kot IP naslov niso podprte",
   "Done": "Končano",
-  "DontAskAgain": "Pri ustvarjanju ne sprašuj znova po imenu datoteke",
+  "DontAskAgain": "Pri ustvarjanju ne sprašuj znova po imenu datoteke.",
   "DontShowAgain": "Ne prikazuj več",
   "DontShowMessage": "Ne pokaži več tega sporočila",
   "DowngradeScheduled": "Zasebna sprememba: Pomenje storitve, {{fromSize}} → {{toSize}}",

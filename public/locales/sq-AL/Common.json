@@ -675,7 +675,7 @@
   "DomainAlreadyAdded": "Ky domain është tashmë shtuar.",
   "DomainIpAddress": "Domenet si adresa IP nuk mbështeten",
   "Done": "U krye",
-  "DontAskAgain": "Mos pyet më emrin e skedarit gjatë krijimit",
+  "DontAskAgain": "Mos pyet më emrin e skedarit gjatë krijimit.",
   "DontShowAgain": "Mos shfaq më",
   "DontShowMessage": "Mos e shfaq më këtë mesazh",
   "DowngradeScheduled": "Ndryshimi i planifikuar: Kujdesi i ruajtjes, {{fromSize}} → {{toSize}}",

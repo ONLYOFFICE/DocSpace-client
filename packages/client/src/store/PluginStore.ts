@@ -103,11 +103,8 @@ import type {
   TMessageActionsParams,
 } from "SRC_DIR/helpers/plugins/types";
 
-import {
-  getPluginUrl,
-  matchesUserRole,
-  messageActions,
-} from "../helpers/plugins/utils";
+import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
+import { matchesUserRole } from "../helpers/plugins/roles";
 import { createPluginApi } from "../helpers/plugins/react/api";
 import { toCurrentUser } from "../helpers/plugins/react/utils";
 import {

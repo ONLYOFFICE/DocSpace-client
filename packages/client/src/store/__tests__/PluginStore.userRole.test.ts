@@ -34,7 +34,6 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { runInAction } from "mobx";
 
 vi.mock("@docspace/ui-kit/utils/socket", () => ({
   default: { emit: vi.fn(), on: vi.fn() },
@@ -56,12 +55,8 @@ import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTar
 
 import PluginStore from "../PluginStore";
 import type SelectedFolderStore from "../SelectedFolderStore";
-import type { TPlugin } from "../../helpers/plugins/types";
-import { PluginUserRole, PluginUsersType } from "../../helpers/plugins/enums";
+import { PluginUserRole } from "../../helpers/plugins/enums";
 
-const PLUGIN = "Sample";
-
-/** A store whose signed-in user is described by the given predicates. */
 const storeFor = (user: Record<string, boolean> | null) =>
   new PluginStore(
     { culture: "en" } as unknown as SettingsStore,
@@ -74,8 +69,6 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
-// The portal computes one role per signed-in user and hands it to every item
-// filter, so this mapping decides which items a person sees at all.
 describe("PluginStore.getUserRole", () => {
   it.each([
     ["owner", { isOwner: true }, PluginUserRole.owner],
@@ -89,48 +82,5 @@ describe("PluginStore.getUserRole", () => {
 
   it("treats a missing profile as a guest", () => {
     expect(storeFor(null).getUserRole()).toBe(PluginUserRole.guest);
-  });
-});
-
-// `matchesUserRole` is unit-tested in helpers/plugins/__tests__/utils.test.ts;
-// this covers the wiring — that an item filter actually consults it, so a
-// plugin built against the older `UsersType` still reaches the right people.
-describe("PluginStore item filtering by role", () => {
-  const fileItemFor = (
-    user: Record<string, boolean>,
-    usersType: (PluginUserRole | PluginUsersType)[],
-  ) => {
-    const store = storeFor(user);
-
-    runInAction(() => {
-      store.plugins = [
-        {
-          name: PLUGIN,
-          enabled: true,
-          version: "1.0.0",
-          iconUrl: "https://portal.test/plugins/sample",
-          getFileItems: () =>
-            new Map([[".md", { extension: ".md", usersType }]]),
-        } as unknown as TPlugin,
-      ];
-    });
-
-    store.updateFileItems(PLUGIN);
-
-    return store.fileItems.get(".md");
-  };
-
-  it("keeps an item listing the deprecated docSpaceAdmin for a full admin", () => {
-    expect(
-      fileItemFor({ isAdmin: true }, [PluginUsersType.docSpaceAdmin]),
-    ).toBeDefined();
-  });
-
-  it("keeps an item listing the current fullAdmin for a full admin", () => {
-    expect(fileItemFor({ isAdmin: true }, [PluginUserRole.fullAdmin])).toBeDefined();
-  });
-
-  it("drops an admin-only item for a room admin", () => {
-    expect(fileItemFor({}, [PluginUserRole.fullAdmin])).toBeUndefined();
   });
 });

@@ -48,7 +48,7 @@ import type { PlaylistType } from "@docspace/shared/components/media-viewer/Medi
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { matchesUserRole } from "SRC_DIR/helpers/plugins/utils";
+import { matchesUserRole } from "SRC_DIR/helpers/plugins/roles";
 
 import {
   findNearestIndex,

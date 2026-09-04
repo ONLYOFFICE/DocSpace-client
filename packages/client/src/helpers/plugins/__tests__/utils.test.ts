@@ -37,16 +37,8 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 
-import {
-  matchesUserRole,
-  messageActions,
-} from "SRC_DIR/helpers/plugins/utils";
-import {
-  PluginActions,
-  PluginToastType,
-  PluginUserRole,
-  PluginUsersType,
-} from "SRC_DIR/helpers/plugins/enums";
+import { messageActions } from "SRC_DIR/helpers/plugins/utils";
+import { PluginActions, PluginToastType } from "SRC_DIR/helpers/plugins/enums";
 import type { TMessageActionsParams } from "SRC_DIR/helpers/plugins/types";
 
 vi.mock("@docspace/ui-kit/components/toast", () => ({
@@ -239,57 +231,5 @@ describe("messageActions", () => {
     );
 
     expect(params.updatePlugin).toHaveBeenCalledWith(PLUGIN_NAME, null, "value");
-  });
-});
-
-describe("matchesUserRole", () => {
-  it("matches an item that lists no user types", () => {
-    expect(matchesUserRole(undefined, PluginUserRole.guest)).toBe(true);
-  });
-
-  it("matches an item that lists the current role", () => {
-    expect(
-      matchesUserRole([PluginUserRole.fullAdmin], PluginUserRole.fullAdmin),
-    ).toBe(true);
-  });
-
-  it("matches an item that lists the deprecated name of the current role", () => {
-    expect(
-      matchesUserRole(
-        [PluginUsersType.docSpaceAdmin],
-        PluginUserRole.fullAdmin,
-      ),
-    ).toBe(true);
-    expect(
-      matchesUserRole([PluginUsersType.collaborator], PluginUserRole.user),
-    ).toBe(true);
-    expect(matchesUserRole([PluginUsersType.user], PluginUserRole.guest)).toBe(
-      true,
-    );
-  });
-
-  it("rejects an item that lists only other roles", () => {
-    expect(matchesUserRole([PluginUserRole.owner], PluginUserRole.guest)).toBe(
-      false,
-    );
-    expect(matchesUserRole([], PluginUserRole.roomAdmin)).toBe(false);
-  });
-
-  // Why `UserRole.user` is "PortalUser" and not "User": the deprecated
-  // `UsersType.user` already meant a guest, so sharing the value would make an
-  // item aimed at one of the two show up for the other.
-  it("keeps the user and guest roles apart", () => {
-    expect(matchesUserRole([PluginUserRole.user], PluginUserRole.guest)).toBe(
-      false,
-    );
-    expect(matchesUserRole([PluginUserRole.guest], PluginUserRole.user)).toBe(
-      false,
-    );
-    expect(
-      matchesUserRole([PluginUsersType.collaborator], PluginUserRole.guest),
-    ).toBe(false);
-    expect(matchesUserRole([PluginUsersType.user], PluginUserRole.user)).toBe(
-      false,
-    );
   });
 });

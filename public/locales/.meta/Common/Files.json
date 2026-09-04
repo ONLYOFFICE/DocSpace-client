@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-08-31T18:23:50.561Z",
+  "updated_at": "2026-09-04T07:59:41.551Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 320,
+      "line_number": 331,
       "context": "const childFolders = [sharedFolder, recentFolder, favFolder];\n if (!isVisitor && myDocsFolder) childFolders.push(trashFolder);\n \n mainItems.push({\n id: myDocsFolder ? String(myDocsFolder.id) : \"files\",\n label: myDocsFolder ? myDocsFolder.title : t(\"Common:Files\"),\n icon: getCatalogIconUrlByType(FolderType.USER),\n ...(primaryFolder\n ? nav(folderUrl(primaryFolder.id, primaryFolder.rootFolderType))\n : {}),\n ...sectionBadge(",
       "module": "/packages/client"
     },
@@ -163,7 +163,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 370,
+      "line_number": 343,
       "context": "}}\n />\n </Text>\n <Text as=\"p\" className={styles.sectionSubtitle}>\n {t(\"Common:NewFilesDefaultPlace\", {\n sectionName: t(\"Common:Files\"),\n })}\n {canOpenDocsConnect ? (\n <>\n {\" - \"}\n <Trans",
       "module": "/packages/client"
     },
@@ -229,13 +229,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 174,
+      "line_number": 173,
       "context": "key: FilterType.MediaOnly,\n label: t(\"Common:Media\"),\n },\n {\n key: FilterType.FilesOnly,\n label: t(\"Common:Files\"),\n },\n ];\n \n const [version, onSetVersion] = useState(sdkVersion[220]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 142,
+      "line_number": 141,
       "context": "const uploadModeOptions = [\n {\n value: \"files\",\n label: (\n <LabelGroup>\n {t(\"Common:Files\")}\n <HelpButton\n offsetRight={0}\n size={12}\n place=\"right\"\n tooltipContent={",
       "module": "/packages/client"
     },
@@ -283,7 +283,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
-      "line_number": 78,
+      "line_number": 80,
       "context": "{\n label: t(\"Common:AIAgents\"),\n key: FolderType.AIAgents,\n },\n {\n label: t(\"Common:Files\"),\n key: FolderType.USER,\n },\n {\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,",
       "module": "/packages/client"
     },
@@ -338,7 +338,7 @@
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
       "line_number": 173,
-      "context": "title: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n defaultValue:\n \"Pick files from {{sectionNameFirst}} or {{sectionNameSecond}}.\",\n }),\n icon: <UploadPDFFormIcon />,",
+      "context": "title: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n defaultValue:\n \"Add files from {{files}}, {{rooms}}, {{forms}}, or other {{aiAgents}}\",",
       "module": "/packages/sdk"
     },
     {
@@ -411,6 +411,42 @@
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/hooks/useUserStatisticsDialog.ts",
       "line_number": 73,
       "context": "t,\n texts: {\n // the endpoint answers with a URL only, so the report is named after\n // the dialog it was requested from\n fileName: t(\"Common:EditUserStatistics\"),\n sectionName: t(\"Common:Files\"),\n },\n });\n } catch (error) {\n toastr.error(error!);\n } finally {",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
+      "line_number": 69,
+      "context": "return t(\"Common:RoleAIAgentManagerDescription\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }\n };",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
+      "line_number": 69,
+      "context": "return t(\"Common:RoleAIAgentManagerDescription\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }\n };",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
+      "line_number": 69,
+      "context": "return t(\"Common:RoleAIAgentManagerDescription\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }\n };",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
+      "line_number": 50,
+      "context": "t: TTranslation,\n ) => {\n switch (type) {\n case EmployeeType.Admin:\n return t(\"Common:RolePortalAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
+      "line_number": 50,
+      "context": "t: TTranslation,\n ) => {\n switch (type) {\n case EmployeeType.Admin:\n return t(\"Common:RolePortalAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
+      "line_number": 50,
+      "context": "t: TTranslation,\n ) => {\n switch (type) {\n case EmployeeType.Admin:\n return t(\"Common:RolePortalAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });",
       "module": "/packages/shared"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Commenter",
   "content_en_sha1_hash": "bf4df9c00c605d80b4491471e60b45b6eaaca147",
   "created_at": "2025-05-19T21:30:47.984Z",
-  "updated_at": "2026-08-14T14:58:32.766Z",
+  "updated_at": "2026-09-04T07:59:41.627Z",
   "comment": {
     "text": "This is a label for a user role. It identifies a user who has \"Comment\" access rights, meaning they can add comments to documents but not edit content.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 229,
+      "line_number": 194,
       "context": "access: ShareAccessRights.Review,\n type: EmployeeType.User,\n },\n commentator: {\n key: \"commentator\",\n label: t(\"Common:RoleCommentator\"),\n description: t(\"Common:RoleCommentatorDescription\"),\n access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n viewer: {",
       "module": "/packages/shared"
     },

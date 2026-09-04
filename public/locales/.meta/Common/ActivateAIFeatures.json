@@ -3,7 +3,7 @@
   "content": "Activate AI features",
   "content_en_sha1_hash": "406d90bd245ac6c7ef1842efe59322147640e1ca",
   "created_at": "2026-06-25T11:54:42.846Z",
-  "updated_at": "2026-08-31T18:23:50.742Z",
+  "updated_at": "2026-09-04T07:59:41.746Z",
   "comment": {
     "text": "Button label used in the AI service dialog footer and the AI settings banner to trigger the activation of AI capabilities.",
     "is_auto": true,
@@ -28,12 +28,6 @@
       "line_number": 198,
       "context": "<ModalDialog.Footer>\n <Button\n label={\n !isCardLinkedToPortal\n ? t(\"TopUpAndActivate\")\n : t(\"ActivateAIFeatures\")\n }\n size={ButtonSize.normal}\n onClick={onActivate}\n primary\n isLoading={isActivating}",
       "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
-      "line_number": 138,
-      "context": "enabledTitle: t(\"Common:AISearchEnabledTitle\"),\n enabledDescription: t(\"Common:AISearchEnabledDescription\"),\n }\n : {\n activateDescription: t(\"Common:GetAccessToAIModels\"),\n activateLabel: t(\"Common:ActivateAIFeatures\"),\n enabledTitle: t(\"Common:AIFeaturesEnabled\"),\n enabledDescription: t(\"Common:AIFeaturesEnabledDescription\"),\n }),\n });",
-      "module": "/packages/client"
     }
   ],
   "languages": {

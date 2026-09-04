@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-08-31T18:23:50.562Z",
+  "updated_at": "2026-09-04T07:59:41.551Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -37,8 +37,14 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 415,
+      "line_number": 426,
       "context": "// Active rooms listing), so the item points at the dedicated /forms route\n // scoped to that search area.\n if (roomsFolder) {\n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n ...nav(searchAreaUrl(\"/forms/filter\", RoomSearchArea.Forms)),\n ...(formsFolder\n ? sectionBadge(panelFolderId(formsFolder), newCount(formsFolder))\n : {}),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 623,
+      "context": "sectionName: t(\"Common:Rooms\"),\n },\n forms: {\n link: actions.onGoToForms(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:Forms\"),\n },\n agents: {\n link: actions.onGoToAgents(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:AIAgents\"),",
       "module": "/packages/client"
     },
     {
@@ -91,8 +97,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
-      "line_number": 86,
-      "context": "{\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,\n },\n {\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,\n },\n ];\n \n return options.filter((option) => !unavailableOptions.includes(option.key));",
+      "line_number": 88,
+      "context": "{\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,\n },\n {\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,\n },\n ];\n \n return options.filter((option) =>",
       "module": "/packages/client"
     },
     {
@@ -118,6 +124,12 @@
       "line_number": 309,
       "context": "// root path part \"Rooms\". On the /forms route that crumb already\n // navigates to the Forms list (see onClickFolder -> moveToRoomsPage),\n // so it must be labelled Forms to match where it leads.\n const crumbTitle =\n isRootRoom && window.location.pathname.startsWith(\"/forms\")\n ? i18n.t(\"Common:Forms\")\n : title;\n \n let shared: boolean | undefined;\n let quotaLimit: number | undefined;\n let usedSpace: number | undefined;",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
+      "line_number": 175,
+      "context": "defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n defaultValue:\n \"Add files from {{files}}, {{rooms}}, {{forms}}, or other {{aiAgents}}\",\n }),\n icon: <UploadPDFFormIcon />,",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",

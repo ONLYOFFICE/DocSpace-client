@@ -3,7 +3,7 @@
   "content": "Encryption sealing failed for the uploaded file. It may not be openable; please remove it and re-upload.",
   "content_en_sha1_hash": "919d8dc4ecf3817fe7dad6bc0acf21f2c0ae6767",
   "created_at": "2026-05-24T17:27:26.755Z",
-  "updated_at": "2026-07-27T13:07:50.882Z",
+  "updated_at": "2026-09-04T07:59:41.709Z",
   "comment": {
     "text": "Error message appearing in a notification or alert when the encryption process for an uploaded file fails, advising the user to remove and re-upload the file.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts",
-      "line_number": 179,
+      "line_number": 188,
       "context": "publicKey,\n publicKeyId || \"\",\n dekForWrap!,\n roomIdForWrap,\n ).catch((error: TAxiosLikeError) => {\n const wrapMessage = i18n.t(\"Common:EncryptionUploadWrapFailed\");\n console.error(\"[ENCRYPTION] Failed to set file encryption keys\", {\n fileId,\n status: error?.response?.status,\n message: error?.message,\n });",
       "module": "/packages/client"
     }

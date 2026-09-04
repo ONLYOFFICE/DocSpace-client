@@ -1,26 +1,26 @@
 {
   "key_path": "RolePortalAdminDescription",
-  "content": "Full admins can access workspace settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create, configure and manage {{agentSection}}, including their knowledge base and access settings.",
-  "content_en_sha1_hash": "dd386c853ec89c14b5295c3bdcabd0b06e889d87",
-  "created_at": "2026-08-13T22:44:19.172Z",
-  "updated_at": "2026-08-14T15:03:02.941Z",
+  "content": "Manage the workspace: create/archive rooms, invite users, configure AI agents, assign lower roles. Full {{sectionName}} access.",
+  "content_en_sha1_hash": "8b491043ab1b7dd792a3bc028adf4d10f41ad2e1",
+  "created_at": "2026-09-04T07:59:24.718Z",
+  "updated_at": "2026-09-04T08:01:29.938Z",
   "comment": {
-    "text": "Description text for the Portal Admin role in user management or access settings. It includes variables for the main section name (`{{sectionName}}`) and the agent section (`{{agentSection}}`), with the latter wrapped in a bold tag.",
+    "text": "Subtext for the Portal Admin role in user access or role selection menus. It details the role's permissions and includes the {{sectionName}} variable, which represents a specific module or section name.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:03:02.941Z",
+    "updated_at": "2026-09-04T08:01:29.938Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 144,
-      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),",
+      "line_number": 116,
+      "context": "const isNone = roomType === None;\n const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n }),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 54,
-      "context": "if (isPortalAdmin)\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),",
+      "line_number": 49,
+      "context": "type: EmployeeType,\n t: TTranslation,\n ) => {\n switch (type) {\n case EmployeeType.Admin:\n return t(\"Common:RolePortalAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:Files\"),",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Recent files",
   "content_en_sha1_hash": "95c6a85a61ec3f4fefa80882adb555d78ef45199",
   "created_at": "2025-08-27T10:14:14.891Z",
-  "updated_at": "2026-08-31T18:23:50.553Z",
+  "updated_at": "2026-09-04T07:59:41.546Z",
   "comment": {
     "text": "This is a label for a folder or category in the file management system. It refers to recently accessed files or documents.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 344,
+      "line_number": 355,
       "context": "children: [\n // Recent/Favorites under Rooms reuse the @recent/@favorites files\n // view, scoped to room content via the room folder types.\n {\n id: \"rooms-recent\",\n label: t(\"Common:Recent\"),\n icon: getCatalogIconUrlByType(FolderType.Recent),\n ...nav(\n scopedUrl(\n CategoryType.Recent,\n \"/rooms/recent\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 344,
+      "line_number": 355,
       "context": "children: [\n // Recent/Favorites under Rooms reuse the @recent/@favorites files\n // view, scoped to room content via the room folder types.\n {\n id: \"rooms-recent\",\n label: t(\"Common:Recent\"),\n icon: getCatalogIconUrlByType(FolderType.Recent),\n ...nav(\n scopedUrl(\n CategoryType.Recent,\n \"/rooms/recent\",",
       "module": "/packages/client"
     },

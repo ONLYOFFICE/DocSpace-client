@@ -3,7 +3,7 @@
   "content": "GB",
   "content_en_sha1_hash": "505a44facaa3e758845f6e101f4e21f9d99acf63",
   "created_at": "2025-05-19T21:30:45.623Z",
-  "updated_at": "2026-08-31T18:23:50.783Z",
+  "updated_at": "2026-09-04T07:59:41.666Z",
   "comment": {
     "text": "This is a unit of measurement for storage size, \"Gigabyte\", used in billing-related dialogs and pages. It appears as a short label, often alongside a numerical value (e.g., \"10 GB\").",
     "is_auto": true,
@@ -199,7 +199,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 113,
+      "line_number": 112,
       "context": "const [perFileSize, setPerFileSize] = useState({ value: \"25\", unit: \"mb\" });\n const [totalSize, setTotalSize] = useState({ value: \"100\", unit: \"mb\" });\n const fileSizeUnits = [\n { key: \"kb\", label: t(\"Common:Kilobyte\") },\n { key: \"mb\", label: t(\"Common:Megabyte\") },\n { key: \"gb\", label: t(\"Common:Gigabyte\") },\n ];\n \n const defaultSizeUnit = fileSizeUnits[1];\n \n const toBytes = (value, unit) => {",
       "module": "/packages/client"
     },

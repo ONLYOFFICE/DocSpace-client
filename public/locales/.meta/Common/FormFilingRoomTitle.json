@@ -3,7 +3,7 @@
   "content": "Form Filling Space",
   "content_en_sha1_hash": "3d6a10533724f64d81d51bdfb0b0d9480d6c3ef2",
   "created_at": "2025-05-19T21:30:45.511Z",
-  "updated_at": "2026-08-17T00:00:00.000Z",
+  "updated_at": "2026-09-04T07:59:41.664Z",
   "comment": {
     "text": "This is a type label. It identifies a space specifically designed for filling out forms.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 113,
+      "line_number": 112,
       "context": "roomType: RoomsType.PublicRoom,\n // dataTestId: \"room_type_public_option\",\n },\n {\n key: \"room-filling-form-collaboration\",\n label: t(\"Common:FormFilingRoomTitle\"),\n roomType: RoomsType.FormRoom,\n // dataTestId: \"room_type_form_option\",\n },\n {\n key: \"room-type-collaboration\",",
       "module": "/packages/client"
     },

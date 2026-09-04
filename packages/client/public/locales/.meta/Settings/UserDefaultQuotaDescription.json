@@ -1,13 +1,13 @@
 {
   "key_path": "UserDefaultQuotaDescription",
-  "content": "Set a storage quota for users - this limits how much space each user's {{sectionName}} folder can use.",
-  "content_en_sha1_hash": "771382cdac5dad51c8f0b821286125baa3e9361c",
-  "created_at": "2026-08-31T18:23:42.473Z",
-  "updated_at": "2026-08-31T20:11:42.370Z",
+  "content": "Set a storage quota for users — this limits how much space each user's {{sectionName}} folder can use.",
+  "content_en_sha1_hash": "8a3539e73d55b9f0e21e0b019f618c036539108e",
+  "created_at": "2026-09-04T07:59:36.526Z",
+  "updated_at": "2026-09-04T08:05:57.519Z",
   "comment": {
-    "text": "Subtitle for a category item and a toggle description explaining the purpose of the user storage quota setting. The {{sectionName}} variable represents a specific folder type, such as \"Files\".",
+    "text": "Subtitle for a settings category item that explains the purpose of the user storage quota; includes a variable {{sectionName}} representing the folder type.",
     "is_auto": true,
-    "updated_at": "2026-08-31T20:11:42.370Z",
+    "updated_at": "2026-09-04T08:05:57.519Z",
     "model": "gemma4:26b"
   },
   "usage": [

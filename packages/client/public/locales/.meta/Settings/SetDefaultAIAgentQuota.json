@@ -1,13 +1,13 @@
 {
   "key_path": "SetDefaultAIAgentQuota",
-  "content": "Set a default storage quota for {{aiAgents}} - you can adjust it later or customize it for each agent when it's created.",
-  "content_en_sha1_hash": "5b0a2ba018bb65b57fed6b0a8836104fcc3619cc",
-  "created_at": "2026-08-31T18:23:42.166Z",
-  "updated_at": "2026-08-31T20:19:05.859Z",
+  "content": "Set a default storage quota for {{aiAgents}} — you can adjust it later or customize it for each agent when it's created.",
+  "content_en_sha1_hash": "86fdd1cde7c4dca79f4e0c773c574351eb0a29a5",
+  "created_at": "2026-09-04T07:59:36.294Z",
+  "updated_at": "2026-09-04T08:06:44.084Z",
   "comment": {
-    "text": "Subtitle or description text in storage management settings explaining the default storage quota for {{aiAgents}} (plural of AI agents).",
+    "text": "Subtitle for a storage management setting describing the default quota for AI agents. The {{aiAgents}} variable represents the plural form of AI agents.",
     "is_auto": true,
-    "updated_at": "2026-08-31T20:19:05.859Z",
+    "updated_at": "2026-09-04T08:06:44.084Z",
     "model": "gemma4:26b"
   },
   "usage": [

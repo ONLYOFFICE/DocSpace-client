@@ -3,7 +3,7 @@
   "content": "Folders",
   "content_en_sha1_hash": "19adc47be34bed86af37b8e8dc882af424402561",
   "created_at": "2025-05-19T21:30:45.434Z",
-  "updated_at": "2026-08-19T13:26:37.727Z",
+  "updated_at": "2026-09-04T07:59:41.622Z",
   "comment": {
     "text": "This is a label for a count of folders or a filter option. It appears in the file list view to indicate the number of folders or as a filter to show only folders.",
     "is_auto": true,
@@ -37,13 +37,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 134,
+      "line_number": 133,
       "context": "];\n \n const fileOptions = [\n {\n key: FilterType.FoldersOnly,\n label: t(\"Common:Folders\"),\n },\n {\n key: FilterType.DocumentsOnly,\n label: t(\"Common:Documents\"),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 159,
+      "line_number": 158,
       "context": "},\n {\n value: \"folders\",\n label: (\n <LabelGroup>\n {t(\"Common:Folders\")}\n <HelpButton\n offsetRight={0}\n size={12}\n place=\"right\"\n tooltipContent={",
       "module": "/packages/client"
     },

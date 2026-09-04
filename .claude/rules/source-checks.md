@@ -45,9 +45,10 @@ re-indenting it would change what the code produces. Any script that fixes
 indentation in bulk must skip those lines too, and verify that every template
 literal is byte-identical afterwards.
 
-`common/tests/test/indentation-allowlist.json` holds the two remaining
-offenders, both in the `libs/ui-kit` submodule — fix them in
-`docspace-ui-kit-react`. The list must only ever shrink.
+`common/tests/test/indentation-allowlist.json` is now **empty** — the last two
+offenders (both in `libs/ui-kit`) were fixed in `docspace-ui-kit-react`. The
+list must only ever shrink, so it stays empty: a new mixed-indentation file
+fails the push rather than being added to it.
 
 ## Images (images.test.js)
 

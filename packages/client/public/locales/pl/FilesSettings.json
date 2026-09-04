@@ -2,5 +2,6 @@
   "CancellaionNotification": "Nie wyświetlaj ponownie powiadomienia o anulowaniu",
   "DefaultHomepage": "Domyślna strona główna",
   "GroupByRooms": "Grupuj według pokoi",
-  "OpenSameTab": "Otwieraj edytory w tej samej karcie"
+  "OpenSameTab": "Otwieraj edytory w tej samej karcie",
+  "ShowQuickActions": "Pokaż szybkie działania"
 }

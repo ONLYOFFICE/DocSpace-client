@@ -2,5 +2,6 @@
   "CancellaionNotification": "Non mostrare più la notifica di annullamento",
   "DefaultHomepage": "Homepage predefinita",
   "GroupByRooms": "Raggruppa per stanze",
-  "OpenSameTab": "Apri gli editor nella stessa scheda"
+  "OpenSameTab": "Apri gli editor nella stessa scheda",
+  "ShowQuickActions": "Mostra le azioni rapide"
 }

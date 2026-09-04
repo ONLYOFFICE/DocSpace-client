@@ -2,5 +2,6 @@
   "CancellaionNotification": "Não volte a apresentar a notificação de cancelamento",
   "DefaultHomepage": "Página inicial padrão",
   "GroupByRooms": "Agrupar por salas",
-  "OpenSameTab": "Abrir editores no mesmo separador"
+  "OpenSameTab": "Abrir editores no mesmo separador",
+  "ShowQuickActions": "Mostrar ações rápidas"
 }

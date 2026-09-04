@@ -43,8 +43,7 @@ import type { TTranslation } from "@docspace/shared/types";
 
 type UseHideQuickActionsProps = {
   t: TTranslation;
-  userId?: string;
-  setShowQuickActions?: (value: boolean, userId?: string) => void;
+  setShowQuickActions?: (value: boolean) => void;
 };
 
 /**
@@ -57,13 +56,15 @@ type UseHideQuickActionsProps = {
  */
 export const useHideQuickActions = ({
   t,
-  userId,
   setShowQuickActions,
 }: UseHideQuickActionsProps) => {
   return React.useCallback(() => {
-    setShowQuickActions?.(false, userId);
+    setShowQuickActions?.(false);
 
-    toastr.success(
+    // The Undo handler runs long after this call returns, so it can read the id
+    // it is nested in: it dismisses this toast alone and leaves any other
+    // notification standing.
+    const toastId = toastr.success(
       <Trans
         t={t as TTranslation & TFunction}
         i18nKey="Common:QuickActionsHiddenDescription"
@@ -74,8 +75,8 @@ export const useHideQuickActions = ({
             isHovered
             color="accent"
             onClick={() => {
-              toastr.clear();
-              setShowQuickActions?.(true, userId);
+              toastr.clear(toastId);
+              setShowQuickActions?.(true);
             }}
           />,
         ]}
@@ -86,7 +87,7 @@ export const useHideQuickActions = ({
       // link would be swallowed by the dismissal before its handler ran.
       true,
     );
-  }, [t, userId, setShowQuickActions]);
+  }, [t, setShowQuickActions]);
 };
 
 export default useHideQuickActions;

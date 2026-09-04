@@ -734,10 +734,17 @@ describe("the quick-actions carousel helpers", () => {
     vi.restoreAllMocks();
   });
 
+  const TRACK = '[data-testid="quick-actions-track"]';
+
+  // The controls layer sits before the strip on purpose: the helpers must find
+  // the strip by the name the ui-kit gives it, not by its position among the
+  // banner's children, so a change to the banner's DOM cannot silently turn
+  // them into no-ops.
   const mountBanner = () => {
     mount(
       '<div data-testid="quick-actions">' +
-        '<div class="track">' +
+        '<div class="controls"><button data-testid="quick-actions-next"></button></div>' +
+        '<div data-testid="quick-actions-track">' +
         '<button data-testid="quick-ai-chat"></button>' +
         "</div>" +
         "</div>",
@@ -772,7 +779,7 @@ describe("the quick-actions carousel helpers", () => {
         width: 184,
         height: 147,
       });
-      withRect(".track", { top: 0, left: 0, width: 600, height: 147 });
+      withRect(TRACK, { top: 0, left: 0, width: 600, height: 147 });
 
       const writes = recordScrollLeft();
 
@@ -830,11 +837,9 @@ describe("the quick-actions carousel helpers", () => {
       expect(scrollTo).toHaveBeenCalledWith(
         expect.objectContaining({ left: 0 }),
       );
-      // The track is the banner's first child, not the banner itself: the
-      // wrapper does not scroll, the strip inside it does.
-      expect(scrollTo.mock.instances[0]).toBe(
-        document.querySelector(".track"),
-      );
+      // The strip is what scrolls, not the banner wrapper and not the controls
+      // layer that happens to precede it.
+      expect(scrollTo.mock.instances[0]).toBe(document.querySelector(TRACK));
     });
 
     it("does nothing when the banner is not on the page", () => {

@@ -734,7 +734,9 @@ export function fileItemStep(
   };
 }
 
-const QUICK_ACTIONS_SELECTOR = '[data-testid="quick-actions"]';
+// The scroll port inside the banner, named by the ui-kit component itself so
+// the tour does not depend on where in the banner's DOM the strip sits.
+const QUICK_ACTIONS_TRACK_SELECTOR = '[data-testid="quick-actions-track"]';
 
 /**
  * Bring a quick-action tile into the banner's scroll port.
@@ -754,7 +756,7 @@ const QUICK_ACTIONS_SELECTOR = '[data-testid="quick-actions"]';
 export function revealQuickActionTile(selector: string) {
   return () => {
     const tile = document.querySelector(selector);
-    const track = tile?.closest(QUICK_ACTIONS_SELECTOR)?.firstElementChild;
+    const track = tile?.closest(QUICK_ACTIONS_TRACK_SELECTOR);
 
     if (!tile || !track) return;
 
@@ -776,8 +778,7 @@ export function revealQuickActionTile(selector: string) {
  * a group spanning the start of the strip rather than one tile.
  */
 export function rewindQuickActions() {
-  const track = document.querySelector(QUICK_ACTIONS_SELECTOR)
-    ?.firstElementChild;
-
-  track?.scrollTo({ left: 0, behavior: "instant" });
+  document
+    .querySelector(QUICK_ACTIONS_TRACK_SELECTOR)
+    ?.scrollTo({ left: 0, behavior: "instant" });
 }

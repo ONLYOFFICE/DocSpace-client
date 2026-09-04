@@ -49,7 +49,7 @@ import type {
 } from "@docspace/shared/api/files/types";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, reaction } from "mobx";
 import { presentInArray } from "@docspace/shared/utils";
 import {
   iconSize24,
@@ -194,8 +194,8 @@ class FilesSettingsStore {
 
   // Shown unless this user has turned it off. Defaulting to `true` rather than
   // to "unknown" is deliberate: it is the right value for everyone who has
-  // never hidden the banner, and hydration lands on user load, long before the
-  // folder contents that the banner renders above.
+  // never hidden the banner, and the reaction in the constructor hydrates it
+  // the moment the user is known, long before any page renders the banner.
   showQuickActions = true;
 
   extsFilesVectorized: string[] = [];
@@ -231,6 +231,17 @@ class FilesSettingsStore {
     this.pluginStore = pluginStore;
     this.authStore = authStore;
     this.settingsStore = settingsStore;
+
+    // The banner's visibility is per user and lives in localStorage, so it is
+    // read here, the moment the signed-in user is known, rather than by
+    // whichever page happens to render first: every consumer of
+    // `showQuickActions` then sees the right value from its first render, and
+    // a different account signing in on the same browser gets its own.
+    reaction(
+      () => this.authStore.userStore?.user?.id,
+      () => this.hydrateShowQuickActions(),
+      { fireImmediately: true },
+    );
 
     SocketHelper?.on(
       SocketEvents.UpdateExternalShareSettings,
@@ -432,7 +443,9 @@ class FilesSettingsStore {
   // `setFilesSetting("showQuickActions", res)`, exactly as
   // `setOrganizeRoomsGrouping` below does, and the field then arrives with
   // `getFilesSettings` and hydration goes away.
-  hydrateShowQuickActions = (userId?: string) => {
+  hydrateShowQuickActions = () => {
+    const userId = this.authStore.userStore?.user?.id;
+
     if (!userId) return;
 
     // Absent key means the banner has never been hidden, so anything that is
@@ -440,8 +453,10 @@ class FilesSettingsStore {
     this.showQuickActions = safeGet(showQuickActionsKey(userId)) !== "false";
   };
 
-  setShowQuickActions = (data: boolean, userId?: string) => {
+  setShowQuickActions = (data: boolean) => {
     this.showQuickActions = data;
+
+    const userId = this.authStore.userStore?.user?.id;
 
     if (userId) safeSet(showQuickActionsKey(userId), String(data));
   };

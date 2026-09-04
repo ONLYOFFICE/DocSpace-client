@@ -197,7 +197,6 @@ const PureHome = observer((props) => {
     hideConfirmCancelOperation,
     quickActionsEnabled,
     setShowQuickActions,
-    hydrateShowQuickActions,
     chatFiles,
 
     allowInvitingGuests,
@@ -368,18 +367,10 @@ const PureHome = observer((props) => {
     isProfile,
     isSettingsPage,
   });
-  React.useEffect(() => {
-    hydrateShowQuickActions(userId);
-  }, [hydrateShowQuickActions, userId]);
-
   const showQuickActions =
     quickActionsEnabled && quickActions.show && !isChat && !isEmptyPage;
 
-  const onHideQuickActions = useHideQuickActions({
-    t,
-    userId,
-    setShowQuickActions,
-  });
+  const onHideQuickActions = useHideQuickActions({ t, setShowQuickActions });
 
   const onDrop = useEventCallback((f, uploadToFolder) => {
     if (isContactsPage || isProfile) return;
@@ -958,7 +949,6 @@ export const Component = inject(
       hideConfirmCancelOperation,
       showQuickActions: quickActionsEnabled,
       setShowQuickActions,
-      hydrateShowQuickActions,
     } = filesSettingsStore;
     const { setOperationCancelVisible } = dialogsStore;
     const {
@@ -1135,7 +1125,6 @@ export const Component = inject(
       hideConfirmCancelOperation,
       quickActionsEnabled,
       setShowQuickActions,
-      hydrateShowQuickActions,
 
       removeActiveItem,
       allowInvitingGuests,

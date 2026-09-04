@@ -72,7 +72,6 @@ type FileManagementProps = {
 
   showQuickActions?: boolean;
   setShowQuickActions?: FilesSettingsStore["setShowQuickActions"];
-  userId?: string;
 };
 
 const FileManagement = ({
@@ -101,7 +100,6 @@ const FileManagement = ({
 
   showQuickActions,
   setShowQuickActions,
-  userId,
 }: FileManagementProps) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
 
@@ -135,8 +133,8 @@ const FileManagement = ({
   }, [setOpenEditorInSameTab, openEditorInSameTab]);
 
   const onChangeShowQuickActions = React.useCallback(() => {
-    setShowQuickActions?.(!showQuickActions, userId);
-  }, [setShowQuickActions, showQuickActions, userId]);
+    setShowQuickActions?.(!showQuickActions);
+  }, [setShowQuickActions, showQuickActions]);
 
   return (
     <div className={styles.styledWrapper} data-testid="profile-file-management">
@@ -239,7 +237,6 @@ export default inject(
     filesSettingsStore,
     treeFoldersStore,
     settingsStore,
-    userStore,
   }: TStore) => {
     const {
       storeOriginalFiles,
@@ -300,7 +297,6 @@ export default inject(
       setOrganizeRoomsGrouping,
       showQuickActions,
       setShowQuickActions,
-      userId: userStore?.user?.id,
     };
   },
 )(observer(FileManagement));

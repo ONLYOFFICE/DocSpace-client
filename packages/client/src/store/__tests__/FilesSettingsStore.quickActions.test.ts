@@ -34,6 +34,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { observable, runInAction } from "mobx";
 
 vi.mock("@docspace/ui-kit/utils/socket", async (io) => ({
   ...((await io()) as Record<string, unknown>),
@@ -64,15 +65,35 @@ const USER = "user-1";
 const OTHER_USER = "user-2";
 const KEY = `show_quick_actions_${USER}`;
 
-const createStore = () =>
-  new FilesSettingsStore(
+// Only the slice of AuthStore the store reads: the signed-in user's id, made
+// observable so the tests can sign users in and out the way the app does.
+const createAuthStore = (userId?: string) =>
+  observable({
+    userStore: { user: userId ? { id: userId } : null },
+  });
+
+const signIn = (
+  authStore: ReturnType<typeof createAuthStore>,
+  userId: string | null,
+) => {
+  runInAction(() => {
+    authStore.userStore.user = userId ? { id: userId } : null;
+  });
+};
+
+const createStore = (userId?: string) => {
+  const authStore = createAuthStore(userId);
+  const store = new FilesSettingsStore(
     {} as unknown as ThirdPartyStore,
     {} as unknown as TreeFoldersStore,
     {} as unknown as PublicRoomStore,
     {} as unknown as PluginStore,
-    {} as unknown as AuthStore,
+    authStore as unknown as AuthStore,
     {} as unknown as SettingsStore,
   );
+
+  return { store, authStore };
+};
 
 describe("FilesSettingsStore quick-actions visibility", () => {
   beforeEach(() => {
@@ -84,83 +105,98 @@ describe("FilesSettingsStore quick-actions visibility", () => {
   });
 
   it("starts shown, which is right for everyone who has never hidden it", () => {
-    expect(createStore().showQuickActions).toBe(true);
+    expect(createStore().store.showQuickActions).toBe(true);
   });
 
   it("stays shown for a user with nothing stored", () => {
-    const store = createStore();
-
-    store.hydrateShowQuickActions(USER);
-
-    expect(store.showQuickActions).toBe(true);
+    expect(createStore(USER).store.showQuickActions).toBe(true);
   });
 
-  it("is hidden for a user who turned it off", () => {
+  it("is hidden from the first read for a user who turned it off", () => {
+    // No page has to ask for it: the store reads the choice as soon as it
+    // knows who is signed in, so the banner never renders before hiding.
     localStorage.setItem(KEY, "false");
-    const store = createStore();
 
-    store.hydrateShowQuickActions(USER);
+    expect(createStore(USER).store.showQuickActions).toBe(false);
+  });
+
+  it("is tracked per user, because a browser is shared", () => {
+    createStore(USER).store.setShowQuickActions(false);
+
+    expect(createStore(OTHER_USER).store.showQuickActions).toBe(true);
+  });
+
+  it("picks the choice up when the user signs in later", () => {
+    localStorage.setItem(KEY, "false");
+    const { store, authStore } = createStore();
+
+    expect(store.showQuickActions).toBe(true);
+
+    signIn(authStore, USER);
 
     expect(store.showQuickActions).toBe(false);
   });
 
-  it("is tracked per user, because a browser is shared", () => {
-    const store = createStore();
-    store.setShowQuickActions(false, USER);
+  it("switches with the account on the same store", () => {
+    const { store, authStore } = createStore(USER);
+    store.setShowQuickActions(false);
 
-    store.hydrateShowQuickActions(OTHER_USER);
-
+    signIn(authStore, OTHER_USER);
     expect(store.showQuickActions).toBe(true);
+
+    signIn(authStore, USER);
+    expect(store.showQuickActions).toBe(false);
   });
 
-  it("is left alone until a user id is known", () => {
-    const store = createStore();
-    store.setShowQuickActions(false, USER);
+  it("is left alone while no user is signed in", () => {
+    const { store, authStore } = createStore(USER);
+    store.setShowQuickActions(false);
 
-    store.hydrateShowQuickActions(undefined);
+    signIn(authStore, null);
 
     expect(store.showQuickActions).toBe(false);
   });
 
   it("persists both directions", () => {
-    const store = createStore();
+    const { store } = createStore(USER);
 
-    store.setShowQuickActions(false, USER);
+    store.setShowQuickActions(false);
     expect(localStorage.getItem(KEY)).toBe("false");
 
-    store.setShowQuickActions(true, USER);
+    store.setShowQuickActions(true);
     expect(localStorage.getItem(KEY)).toBe("true");
     expect(store.showQuickActions).toBe(true);
   });
 
   it("holds in memory when storage cannot be written", () => {
-    const store = createStore();
+    const { store } = createStore(USER);
     vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
       throw new Error("nope");
     });
 
-    expect(() => store.setShowQuickActions(false, USER)).not.toThrow();
+    expect(() => store.setShowQuickActions(false)).not.toThrow();
     expect(store.showQuickActions).toBe(false);
   });
 
   it("survives storage that cannot be read", () => {
-    const store = createStore();
     vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
       throw new Error("nope");
     });
 
-    expect(() => store.hydrateShowQuickActions(USER)).not.toThrow();
+    const { store } = createStore(USER);
+
+    expect(() => store.hydrateShowQuickActions()).not.toThrow();
     // Unreadable storage reads as shown, which is the safer of the two: the
     // banner appearing for someone who hid it beats it vanishing for everyone.
     expect(store.showQuickActions).toBe(true);
   });
 
-  it("takes no user id from the profile toggle without one", () => {
-    const store = createStore();
+  it("writes nothing while no user is signed in", () => {
+    const { store } = createStore();
 
     store.setShowQuickActions(false);
 
     expect(store.showQuickActions).toBe(false);
-    expect(localStorage.getItem(KEY)).toBeNull();
+    expect(localStorage.length).toBe(0);
   });
 });

@@ -34,6 +34,7 @@
  */
 
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 import { useForm, Controller } from "react-hook-form";
 import React, { useCallback, useMemo, useState } from "react";
 
@@ -86,6 +87,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     shouldUnregister: true,
   });
 
+  const { t } = useTranslation("Common");
   const isMobile = useIsMobile();
   const {
     filteredTags,
@@ -157,6 +159,22 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         return;
       }
 
+      // The whole list, not the filtered one: a tag the search is hiding is
+      // still a tag the rename would collide with. Compared case-insensitively,
+      // because two tags that differ in case only read as the same name.
+      const isTaken = tags.some(
+        (tag) =>
+          tag.label !== oldLabel &&
+          tag.label.trim().toLowerCase() === newLabel.toLowerCase(),
+      );
+
+      if (isTaken) {
+        // Nothing is sent and the row stays in edit mode, so the name can be
+        // corrected instead of retyped.
+        toastr.error(t("Common:TagAlreadyExists", { tagName: newLabel }));
+        return;
+      }
+
       try {
         await onEditTag?.(oldLabel, newLabel);
         setTags((prev) =>
@@ -172,7 +190,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         console.error("Failed to update tag name:", error);
       }
     },
-    [editingLabel, tags, cancelEdit, onEditTag],
+    [editingLabel, tags, cancelEdit, onEditTag, t],
   );
 
   const deleteTag = useCallback(

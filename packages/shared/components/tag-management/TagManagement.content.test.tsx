@@ -43,9 +43,14 @@ import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementContent } from "./TagManagement.content";
 import type { AccessTagManagement } from "./TagManagement.types";
 
-const { addTagsToRoom, removeTagsFromRoom } = vi.hoisted(() => ({
+const { addTagsToRoom, removeTagsFromRoom, toastError } = vi.hoisted(() => ({
   addTagsToRoom: vi.fn(() => Promise.resolve()),
   removeTagsFromRoom: vi.fn(() => Promise.resolve()),
+  toastError: vi.fn(),
+}));
+
+vi.mock("@docspace/ui-kit/components/toast", () => ({
+  toastr: { error: toastError, success: vi.fn() },
 }));
 
 vi.mock("../../api/rooms", () => ({
@@ -76,7 +81,10 @@ const fullAccess: AccessTagManagement = {
   canRemove: true,
 };
 
-const renderContent = (access: AccessTagManagement = fullAccess) => {
+const renderContent = (
+  access: AccessTagManagement = fullAccess,
+  onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>,
+) => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
   });
@@ -88,10 +96,21 @@ const renderContent = (access: AccessTagManagement = fullAccess) => {
         fetchedTags={["boundTag", "freeTag"]}
         access={access}
       >
-        <TagManagementContent roomId={ROOM_ID} />
+        <TagManagementContent roomId={ROOM_ID} onEditTag={onEditTag} />
       </TagManagementProvider>
     </QueryClientProvider>,
   );
+};
+
+// Opens the inline editor on a row and submits a new name.
+const renameTo = async (label: string, newLabel: string) => {
+  await userEvent.click(screen.getByTestId(`edit_tag_button_${label}`));
+
+  const input = await screen.findByTestId("edit_tag_input");
+
+  await userEvent.clear(input);
+  await userEvent.type(input, newLabel);
+  await userEvent.click(screen.getByTestId("confirm_edit_button"));
 };
 
 describe("<TagManagementContent />", () => {
@@ -160,5 +179,58 @@ describe("<TagManagementContent />", () => {
 
     expect(addTagsToRoom).not.toHaveBeenCalled();
     expect(removeTagsFromRoom).not.toHaveBeenCalled();
+  });
+
+  describe("renaming onto a name another tag already carries", () => {
+    it("reports it and keeps the row in edit mode", async () => {
+      const onEditTag = vi.fn(() => Promise.resolve());
+
+      renderContent(fullAccess, onEditTag);
+
+      await renameTo("freeTag", "boundTag");
+
+      expect(toastError).toHaveBeenCalledWith("Common:TagAlreadyExists");
+      expect(onEditTag).not.toHaveBeenCalled();
+      // Still editable, so the name can be corrected instead of retyped.
+      expect(screen.getByTestId("edit_tag_input")).toHaveValue("boundTag");
+    });
+
+    it("reports it whatever the case, since the two read as the same name", async () => {
+      const onEditTag = vi.fn(() => Promise.resolve());
+
+      renderContent(fullAccess, onEditTag);
+
+      await renameTo("freeTag", "BOUNDTAG");
+
+      expect(toastError).toHaveBeenCalledWith("Common:TagAlreadyExists");
+      expect(onEditTag).not.toHaveBeenCalled();
+    });
+
+    it("sends a name no other tag carries", async () => {
+      const onEditTag = vi.fn(() => Promise.resolve());
+
+      renderContent(fullAccess, onEditTag);
+
+      await renameTo("freeTag", "renamedTag");
+
+      await waitFor(() => {
+        expect(onEditTag).toHaveBeenCalledWith("freeTag", "renamedTag");
+      });
+      expect(toastError).not.toHaveBeenCalled();
+    });
+
+    it("lets a tag be respelled in another case", async () => {
+      const onEditTag = vi.fn(() => Promise.resolve());
+
+      renderContent(fullAccess, onEditTag);
+
+      // The only tag carrying this name is the one being renamed.
+      await renameTo("freeTag", "FreeTag");
+
+      await waitFor(() => {
+        expect(onEditTag).toHaveBeenCalledWith("freeTag", "FreeTag");
+      });
+      expect(toastError).not.toHaveBeenCalled();
+    });
   });
 });

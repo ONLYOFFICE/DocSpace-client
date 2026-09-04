@@ -1,14 +1,14 @@
 {
   "key_path": "idpCertificatesTooltip",
-  "content": "The Identity provider public certificates used for either verification or decryption (or both) of the requests and responses from the IdP.",
-  "content_en_sha1_hash": "7846c6461388c273f52adc2c6ee4a3e2120da395",
-  "created_at": "2025-05-19T21:30:50.096Z",
-  "updated_at": "2026-05-15T15:37:40.280Z",
+  "content": "The Identity provider public certificates used for either verification or decryption (or both) of the requests and responses from the Identity provider.",
+  "content_en_sha1_hash": "a53b1f0941be08aa00aea75c967cda1a4ffee78b",
+  "created_at": "2026-08-31T18:23:40.001Z",
+  "updated_at": "2026-08-31T20:54:31.769Z",
   "comment": {
-    "text": "This is a tooltip that appears when hovering over the \"IdP Certificates\" field. It explains the purpose of these certificates in verifying or decrypting requests and responses from the Identity Provider.",
+    "text": "Tooltip for a help button in the Single Sign-On certificates settings, explaining the purpose of Identity provider public certificates.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:49.410Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:54:31.769Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

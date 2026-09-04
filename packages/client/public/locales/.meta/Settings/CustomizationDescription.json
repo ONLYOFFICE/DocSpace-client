@@ -1,13 +1,13 @@
 {
   "key_path": "CustomizationDescription",
-  "content": "This subsection allows you to change the look and feel of your workspace. You can use your own company logo, name and text to match your organization brand.",
-  "content_en_sha1_hash": "f3a9e4c4d72589587d57144000a43a2d8d85c78e",
-  "created_at": "2026-08-12T11:00:45.595Z",
-  "updated_at": "2026-08-12T13:32:46.131Z",
+  "content": "Customize the look of your workspace with your own logo, name, and text to match your brand.",
+  "content_en_sha1_hash": "12feb1e4e740e83d66caa65ce68a8c22daa11dfd",
+  "created_at": "2026-08-31T18:23:40.726Z",
+  "updated_at": "2026-08-31T20:40:19.946Z",
   "comment": {
-    "text": "Description text for the Customization settings category, explaining how to apply company branding to the workspace.",
+    "text": "Description text within the customization category of the Portal Settings page, explaining how to personalize the workspace branding.",
     "is_auto": true,
-    "updated_at": "2026-08-12T13:32:46.131Z",
+    "updated_at": "2026-08-31T20:40:19.946Z",
     "model": "gemma4:26b"
   },
   "usage": [

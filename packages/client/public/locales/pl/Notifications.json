@@ -1,19 +1,19 @@
 {
-  "ActionsWithFilesDescription": "Odznaki uwydatnią aktywność plików — przesłania, edycje lub udostępnienia — w sekcjach {{rooms}}, {{shared}}, {{documents}} i {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Etykiety wyróżniają aktywność plików, taką jak przesłania, edycje i udostępnienia, w aplikacjach {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}.",
   "AdminSetupRequired": "Wymagane skonfigurowanie administratora",
   "Badges": "Etykiety",
   "DailyFeed": "Codzienne aktualności {{organizationName}} {{productName}}",
-  "DailyFeedDescription": "Czytaj wiadomości i wydarzenia z {{organizationName}} {{productName}} w codziennym przeglądzie.",
+  "DailyFeedDescription": "Otrzymuj codzienny przegląd wiadomości i wydarzeń z {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Powiadomienia o aktywności plików",
   "IsNotValid": "Nie jest prawidłowe",
   "LdapEmailTooltip": "To konto użytkownika jest ładowane z LDAP. Adres e-mail użytkownika nie został określony, a aktualny został wygenerowany automatycznie i nie można go użyć do wysyłania powiadomień.",
   "NotConfigured": "Nie skonfigurowano",
   "Notifications": "Powiadomienia",
-  "RoomsActivityDescription": "Otrzymuj natychmiastowe powiadomienia e-mail o nowych udostępnionych plikach/folderach i aktywności w swoich {{rooms}} i {{aiAgents}}.",
-  "RoomUpdateNotify": "Udostępniana zawartość, aktywność w sekcjach {{rooms}} i {{aiAgents}}",
-  "SettingUpNotifications": "Konfigurowanie powiadomień",
+  "RoomsActivityDescription": "Otrzymuj natychmiastowe powiadomienia e-mail o nowo udostępnionych plikach i folderach oraz o aktywności w {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}.",
+  "RoomUpdateNotify": "Aktywność w {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}",
+  "SettingUpNotifications": "Ustawienia powiadomień",
   "SuccessConnected": "{{serviceName}} zostało pomyślnie podłączone jako kanał powiadomień. Teraz będziesz tam otrzymywać aktualizacje.",
   "SuccessDisconnected": "{{serviceName}} zostało pomyślnie odłączone jako kanał powiadomień. Powiadomienia nie będą już tam wysyłane.",
   "UsefulTips": "Przydatne wskazówki {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Uzyskaj przydatne przewodniki na temat {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Odkryj przydatne wskazówki i przewodniki dotyczące korzystania z {{organizationName}} {{productName}}."
 }

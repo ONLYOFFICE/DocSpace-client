@@ -96,3 +96,11 @@ cd packages/client && pnpm exec vitest run src/store/filesStore   # single path
 ```
 
 Both suites are part of the blocking lefthook pre-push gate.
+
+## Snapshots
+
+Snapshot files live in `__snapshots__/` next to the spec, and the store
+harness mocks `t` as an identity function — so menu snapshots freeze **i18n
+keys**, and changing a `t()` key in a menu helper fails `test:client` without
+any test file being edited. Which snapshot covers which helper, and how to
+update one safely, is in `.claude/rules/source-checks.md`.

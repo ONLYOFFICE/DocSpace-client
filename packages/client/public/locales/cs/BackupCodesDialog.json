@@ -1,8 +1,8 @@
 {
   "BackupCodesDescription": "Pokud nemáte přístup k telefonu, použijte záložní kódy pro přihlášení.",
-  "BackupCodesSecondDescription": "Každý kód lze použít pouze jednou. Nové kódy můžete získat kdykoli. Platné jsou pouze kódy, které byly vygenerovány jako poslední.",
+  "BackupCodesSecondDescription": "Každý kód lze použít pouze jednou. Nové kódy můžete získat kdykoli. Platný je pouze kód, který byl vygenerován jako poslední.",
   "BackupCodesTitle": "Záložní kódy",
-  "CodesCounter": "kódy:",
+  "CodesCounter": "záložní kódy:",
   "PrintButton": "Tisk",
   "RequestNewButton": "Vyžádat si nový"
 }

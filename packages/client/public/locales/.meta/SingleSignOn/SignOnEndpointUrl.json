@@ -1,14 +1,14 @@
 {
   "key_path": "SignOnEndpointUrl",
-  "content": "IdP Single Sign-On Endpoint URL",
-  "content_en_sha1_hash": "a1e3d72c09933def1425afc0eedb3892df293ce0",
-  "created_at": "2025-05-19T21:30:50.145Z",
-  "updated_at": "2026-05-15T15:37:40.281Z",
+  "content": "Identity provider single sign-on endpoint URL",
+  "content_en_sha1_hash": "635ae8addbf0535800bf7a718e6612c5954b6050",
+  "created_at": "2026-08-31T18:23:40.099Z",
+  "updated_at": "2026-08-31T20:59:04.839Z",
   "comment": {
-    "text": "This is a label for a text input field where the user enters the URL for the Identity Provider's Single Sign-On endpoint.",
+    "text": "Form field label in the SSO integration settings for the identity provider's single sign-on endpoint URL.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:31.436Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:59:04.839Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -58,15 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_script",
-          "description": "Translation for el-GR contains only Latin/ASCII characters — likely untranslated",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:48:37.301Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -157,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -172,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -208,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

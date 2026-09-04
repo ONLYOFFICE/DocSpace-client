@@ -3,7 +3,7 @@
   "content": "Select folder",
   "content_en_sha1_hash": "20e97c9844509f09cc9df74473a387bfe234b56e",
   "created_at": "2025-05-19T21:30:48.430Z",
-  "updated_at": "2026-08-14T14:58:32.658Z",
+  "updated_at": "2026-09-04T07:59:41.561Z",
   "comment": {
     "text": "This is a button label or tooltip text that prompts the user to choose a folder. It appears when selecting a destination for files or when configuring a folder input.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 448,
+      "line_number": 447,
       "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"DestinationFolderId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFolder\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n place=\"right-end\"\n tooltipContent={",
       "module": "/packages/client"
     },

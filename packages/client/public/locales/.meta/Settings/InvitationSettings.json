@@ -1,14 +1,14 @@
 {
   "key_path": "InvitationSettings",
-  "content": "Invitation Settings",
-  "content_en_sha1_hash": "8a0e33d62c6b19c6f0e574b7a75348dbf29f66a4",
-  "created_at": "2025-05-26T07:15:51.069Z",
-  "updated_at": "2026-08-14T14:58:32.819Z",
+  "content": "Invitations",
+  "content_en_sha1_hash": "9b69a35ab52450fb70bf29cfd08bf16692f7278b",
+  "created_at": "2026-08-31T18:23:41.419Z",
+  "updated_at": "2026-08-31T20:30:10.039Z",
   "comment": {
-    "text": "This is a section title within the portal settings, referring to configurations related to user invitations.",
+    "text": "Section header and breadcrumb label for the invitation configuration settings within the Portal Settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:23:47.964Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:30:10.039Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

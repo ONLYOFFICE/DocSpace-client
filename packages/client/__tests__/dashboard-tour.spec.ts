@@ -75,12 +75,12 @@ const HELP_BUTTON = '[data-testid="dashboard-open-welcome"]';
 // steps a run can have rather than reading them off the tooltip.
 const PROFILE_CARD = '[data-tour-id="dashboard-profile"]';
 
-// Step titles, from public/locales/en/DashboardTour.json. By title rather than
+// Step titles, from packages/client/public/locales/en/DashboardTour.json. By title rather than
 // by index: the profile step is dropped whenever its card is absent, so an
 // index would quietly point at a different step for half of these runs.
-const PROFILE_STEP = "Your profile details";
-const CREATE_STEP = "Create something now";
-const OVERVIEW_STEP = "Coming back here";
+const PROFILE_STEP = "Check your profile details";
+const CREATE_STEP = "Start creating";
+const OVERVIEW_STEP = "Come back anytime";
 
 /** The welcome modal, addressed by either of its two buttons. */
 const welcomeDialog = (page: Page) => page.locator(WELCOME_TAKE_TOUR);
@@ -146,14 +146,48 @@ const markWelcomeSeen = async (page: Page) => {
     .toBe(true);
 };
 
-/** Walks forward with the keyboard until the step titled `title` is up. */
-const goToStep = async (page: Page, title: string, maxSteps = 8) => {
+/**
+ * Walks forward with the tour's own Next button until the step titled `title`
+ * is up. Expects to be called at the start of a run, which is what both call
+ * sites do.
+ *
+ * Deliberately not a keyboard walk probed with `isVisible()`. joyride keeps the
+ * same dialog mounted between steps and swaps its body, so `toBeVisible()`
+ * resolves instantly after a press and a one-shot read of the title can still
+ * be looking at the step before — or, on the first step, at a tooltip that is
+ * mounted but not yet painted. Each such miss costs an extra press, and a press
+ * past the last step is not a no-op: `useTour`'s `controls.next()` completes the
+ * tour and unmounts the tooltip, which then surfaces as a missing dialog rather
+ * than as the overshoot it is.
+ */
+const goToStep = async (page: Page, title: string) => {
   const tooltip = tourTooltip(page);
+  const progress = tooltip.locator('[role="progressbar"]');
+  const step = tooltip.getByText(title, { exact: true });
 
-  for (let i = 0; i < maxSteps; i += 1) {
-    if (await tooltip.getByText(title, { exact: true }).isVisible()) return;
-    await page.keyboard.press("ArrowRight");
-    await expect(tooltip).toBeVisible();
+  await expect(tooltip).toBeVisible();
+
+  // The run's real length, off the progress bar, rather than a guess that can
+  // outrun it.
+  const size = Number(await progress.getAttribute("aria-valuemax"));
+
+
+  for (let index = 1; index <= size; index += 1) {
+    // The one real synchronisation point: TourTooltip renders the counter and
+    // the title in the same commit, so once the counter has settled on this
+    // step the read below is looking at that step's body.
+    await expect(progress).toHaveAttribute("aria-valuenow", String(index));
+
+    if ((await step.count()) > 0) {
+      await expect(step).toBeVisible();
+      return;
+    }
+
+    // Advance the way walkTour does. The last step offers Done rather than
+    // Next, so there is nothing left to walk to.
+    const next = tooltip.getByRole("button", { name: "Next" });
+    if ((await next.count()) === 0) break;
+    await next.click();
   }
 
   throw new Error(`step "${title}" never came up`);

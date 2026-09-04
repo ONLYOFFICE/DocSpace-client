@@ -3,7 +3,7 @@
   "content": "Embed the whole workspace to allow users to interact with all rooms, files, and settings.",
   "content_en_sha1_hash": "0cd42a54ecc2c3bac44eca10bc296f4e467cf318",
   "created_at": "2026-08-12T11:00:47.557Z",
-  "updated_at": "2026-08-14T14:58:32.798Z",
+  "updated_at": "2026-09-04T07:59:41.647Z",
   "comment": {
     "text": "Description text for a preset item in the Javascript SDK settings, explaining the functionality of embedding the entire workspace.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace.js",
-      "line_number": 202,
+      "line_number": 201,
       "context": "</>\n );\n \n return (\n <PresetWrapper\n description={t(\"PortalDescription\")}\n header={t(\"CreateSamplePortal\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}",
       "module": "/packages/client"
     }

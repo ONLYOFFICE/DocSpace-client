@@ -1,14 +1,14 @@
 {
   "key_path": "SendTestMail",
-  "content": "Send Test Mail",
-  "content_en_sha1_hash": "9cc6d411269baaf5e4d72721b6423d33917cbfc8",
-  "created_at": "2025-05-19T21:30:53.311Z",
-  "updated_at": "2026-05-15T14:00:06.853Z",
+  "content": "Send test mail",
+  "content_en_sha1_hash": "b724b0a254a00d8f2878c7c0251ae66bdaddeb55",
+  "created_at": "2026-08-31T18:23:42.602Z",
+  "updated_at": "2026-08-31T20:11:08.100Z",
   "comment": {
-    "text": "This is a button label that, when clicked, initiates sending a test email to verify SMTP server settings.",
+    "text": "Button label in the SMTP settings used to trigger a test email for verifying the mail server configuration.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:21:02.613Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:11:08.100Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

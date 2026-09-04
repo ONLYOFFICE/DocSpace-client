@@ -58,7 +58,7 @@
   "PrivacyPolicy": "Gizlilik politikası",
   "PrivacyPolicyURL": "Gizlilik politikası URL’si",
   "PrivacyPolicyURLHelpButton": "Geçerli yasalara ve düzenlemelere uyması gereken ve kişisel bilgileri nasıl topladığınızı, kullandığınızı, paylaştığınızı, sakladığınızı ve başka şekillerde işlediğinizi açıkça belirten Gizlilik Politikanıza bir URL bağlantısı sağlayın.",
-  "ProfileDescription": "Burada, yetkilendirme erişimi verdiğiniz uygulama bilgilerini kontrol edebilir ve gerekirse onayı iptal edebilirsiniz.",
+  "ProfileDescription": "Hesabınıza erişim izni verdiğiniz uygulamaları görüntüleyin ve gerekirse erişimi iptal edin.",
   "Read": "Oku",
   "ReadOAuthGuide": "OAuth 2.0 kılavuzunu okuyun",
   "RedirectsURLS": "Yönlendirme URL'leri",

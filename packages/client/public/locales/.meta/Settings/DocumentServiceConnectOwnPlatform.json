@@ -1,21 +1,21 @@
 {
-  "key_path": "RoleGuestDescriprion",
-  "content": "Guests can access the rooms they have been invited to, as well as create and edit documents if they have been assigned the appropriate roles in the room.",
-  "content_en_sha1_hash": "b91549ed2598a81dcae1328a0ba18a24e2e5e876",
-  "created_at": "2025-05-19T21:30:50.001Z",
-  "updated_at": "2026-08-14T14:58:32.911Z",
+  "key_path": "DocumentServiceConnectOwnPlatform",
+  "content": "To connect Docs to your own platform, use <1>Docs Connect</1>.",
+  "content_en_sha1_hash": "80d675b4fb3a46e4d3206b5ec88cc1239aa54841",
+  "created_at": "2026-09-04T07:59:35.667Z",
+  "updated_at": "2026-09-04T08:07:17.661Z",
   "comment": {
-    "text": "This is a description of the \"Guest\" user role, displayed in a tooltip or information panel. It explains the permissions guests have within rooms.",
+    "text": "Instructional text in the Document Service settings providing instructions for connecting Docs to a custom platform, where the <1> tag represents a clickable link to \"Docs Connect\".",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:27:24.934Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-09-04T08:07:17.661Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 97,
-      "context": "aiAgent: t(\"Common:AIAgent\"),\n }}\n />\n );\n \n return t(\"Translations:RoleGuestDescriprion\");\n };",
-      "module": "/packages/shared"
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
+      "line_number": 340,
+      "context": "<>\n {\" \"}\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"DocumentServiceConnectOwnPlatform\"\n components={{\n 1: (\n <Link\n color={currentColorScheme.main?.accent}\n isHovered",
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -203,20 +209,6 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \"\"\"",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:48:29.435Z",
-          "checked_by": "deterministic"
-        }
-      ],
       "approved_at": null
     }
   }

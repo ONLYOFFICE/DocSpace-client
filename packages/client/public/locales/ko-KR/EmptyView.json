@@ -20,7 +20,7 @@
   "EmptyFormTemplatesDescription": "양식 공간 섹션의 양식 공간에서 템플릿을 생성할 수 있습니다",
   "EmptyGroupAddedUserOptionDescription": "그룹 구성원을 추가하고 책임자를 할당하세요",
   "EmptyGroupDeleteOptionDescription": "이 그룹이 더 이상 필요하지 않은 경우",
-  "EmptyGroupsCreateGroupOptionDescription": "그룹을 만들어 룸에 추가하세요",
+  "EmptyGroupsCreateGroupOptionDescription": "그룹을 만들어 모든 멤버를 룸에 한 번에 초대하거나 파일을 공유하세요",
   "EmptyRootFormsDescription": "첫 번째 양식 공간을 만드세요.",
   "EmptyRootFormsTitle": "여기에 아직 양식 공간이 없습니다",
   "EmptyRootFormsUserDescription": "공유 양식 공간이 여기에 표시됩니다.",
@@ -36,7 +36,7 @@
   "FormRoomEmptyTitle": "양식 작성 공간에 오신 것을 환영합니다",
   "InviteNewUsers": "새 사용자 초대",
   "InviteRootRoomDescription": "워크스페이스에 새 구성원을 추가하기 위해 초대장을 보내세요",
-  "InviteUsersOptionDescription": "룸에서 공동 편집을 하기 위해 멤버 추가하세요",
+  "InviteUsersOptionDescription": "룸에서 함께 작업할 멤버를 추가하세요",
   "ManageAccess": "접근 권한 관리",
   "MigrationDataDescription": "{{organizationName}} Workspace, Google Workspace 또는 Nextcloud에서 {{productName}}으로 데이터를 이전하세요.",
   "MigrationDataTitle": "데이터 가져오기",
@@ -51,8 +51,7 @@
   "UploadDeviceOptionDescription": "개인 장치에서 모든 유형의 파일 업로드",
   "UploadDeviceOptionTitle": "장치에서 업로드",
   "UploadDevicePDFFormOptionDescription": "기기에서 완성된 PDF 양식을 공간에 업로드하세요.",
-  "UploadDevicePDFFormOptionTitle": "장치에서 업로드",
-  "UploadFromPortalTitle": "워크스페이스에서 업로드",
+  "UploadFromPortalTitle": "저장소에서 업로드",
   "UploadPDFFormOptionDescription": "워크스페이스에서 이용 가능한 완성된 PDF 양식을 선택하여 공간에 업로드하세요.",
   "VirtualDataRoomEmptyTitle": "가상 데이터 룸에 오신 것을 환영합니다"
 }

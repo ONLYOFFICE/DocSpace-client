@@ -1,0 +1,215 @@
+{
+  "key_path": "ArbiterNoModels",
+  "content": "No AI model is configured for this workspace.",
+  "content_en_sha1_hash": "b6ffbdf7ff41ff7f3d60b38daa94b0fa8b400647",
+  "created_at": "2026-09-04T00:00:00.000Z",
+  "updated_at": "2026-09-04T00:00:00.000Z",
+  "comment": {
+    "text": "Message shown in the AI Arbiter setup wizard when the workspace has no AI model configured yet. It is a missing precondition rather than a failure, so the wizard keeps its own header and offers Retry. Replaces the former ArbiterNoAIProvider, which said \"provider\" after the panel moved to AI profiles.",
+    "is_auto": false,
+    "updated_at": "2026-09-04T00:00:00.000Z",
+    "model": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
+      "line_number": 229,
+      "context": "const modelRef =\n models.find((m) => m.profileId === preferredId) ?? models[0];\n if (!modelRef) {\n // A workspace with no AI model configured is a missing precondition,\n // not a failed setup: it keeps the wizard's own header and still\n // offers Retry, which re-runs the bootstrap once a model is added.\n setErrorMessage(t(\"Common:ArbiterNoModels\"));\n setPhase(\"no-models\");\n return;\n }\n \n const wizard = await ensureWizardAgent({\n userId,",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": true,
+      "ai_model": "claude-opus-5",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,14 +1,14 @@
 {
   "key_path": "CustomTitlesWelcome",
-  "content": "Welcome Page Settings",
-  "content_en_sha1_hash": "087c1337487e8e7c3390215fdbb3d1c85858045c",
-  "created_at": "2025-05-19T21:30:51.034Z",
-  "updated_at": "2026-08-14T14:58:32.775Z",
+  "content": "Welcome page",
+  "content_en_sha1_hash": "2dcbd6608a5fde2a5e9f76d94a71704b8b9f4b80",
+  "created_at": "2026-08-31T18:23:40.756Z",
+  "updated_at": "2026-08-31T20:40:55.580Z",
   "comment": {
-    "text": "This is a page title and a navigation item label. It refers to the settings section where administrators can customize the welcome page of ONLYOFFICE DocSpace.",
+    "text": "Navigation item title in the customization settings menu and the document title for the welcome page settings page.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:04.136Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:40:55.580Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -188,6 +188,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -224,12 +230,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

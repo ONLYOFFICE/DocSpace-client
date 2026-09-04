@@ -675,6 +675,10 @@ const Appearance = (props) => {
       >
         <div className={appearanceStyles.header}>{t("Common:Color")}</div>
 
+        <div className={appearanceStyles.colorDescription}>
+          {t("Settings:ColorDescription")}
+        </div>
+
         <div className={appearanceStyles.themeStandardContainer}>
           <div className={appearanceStyles.themeName}>{t("Common:Standard")}</div>
 

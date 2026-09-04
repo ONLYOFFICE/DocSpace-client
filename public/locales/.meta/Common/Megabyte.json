@@ -3,7 +3,7 @@
   "content": "MB",
   "content_en_sha1_hash": "6e979f426b676955f4896002085eb834b93326b1",
   "created_at": "2025-05-19T21:30:46.418Z",
-  "updated_at": "2026-06-30T07:32:49.147Z",
+  "updated_at": "2026-09-04T07:59:41.666Z",
   "comment": {
     "text": "This is a short label for the unit of digital information, \"Megabyte\", used in various contexts such as file size displays, quota settings, and upload limits.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 112,
+      "line_number": 111,
       "context": "const [uploadQuantity, setUploadQuantity] = useState(\"single\");\n const [perFileSize, setPerFileSize] = useState({ value: \"25\", unit: \"mb\" });\n const [totalSize, setTotalSize] = useState({ value: \"100\", unit: \"mb\" });\n const fileSizeUnits = [\n { key: \"kb\", label: t(\"Common:Kilobyte\") },\n { key: \"mb\", label: t(\"Common:Megabyte\") },\n { key: \"gb\", label: t(\"Common:Gigabyte\") },\n ];\n \n const defaultSizeUnit = fileSizeUnits[1];",
       "module": "/packages/client"
     },

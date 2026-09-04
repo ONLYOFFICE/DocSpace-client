@@ -1,14 +1,14 @@
 {
   "key_path": "BackupCodesSecondDescription",
-  "content": "Each code can be used once. You can get new codes anytime. Only codes which were generated last are valid.",
-  "content_en_sha1_hash": "fbb4ee162a45e47df6c0367b76595ee590514885",
-  "created_at": "2025-05-19T21:30:57.032Z",
-  "updated_at": "2026-05-15T14:00:06.636Z",
+  "content": "Each code can be used only once. You can get new codes at any time. Only the most recently generated code is valid.",
+  "content_en_sha1_hash": "46087a2868402084f111dbe9e19a9349339c6230",
+  "created_at": "2026-08-31T18:23:47.171Z",
+  "updated_at": "2026-08-31T19:39:19.325Z",
   "comment": {
-    "text": "This is a descriptive text within the \"Backup Codes\" dialog, providing instructions on how to use the generated backup codes for account access.",
+    "text": "Informational text in the Backup Codes dialog explaining the usage rules and validity of the generated codes.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:03:18.380Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:39:19.325Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

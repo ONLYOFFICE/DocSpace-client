@@ -58,7 +58,7 @@
   "PrivacyPolicy": "Zásady ochrany osobných údajov",
   "PrivacyPolicyURL": "URL adresa pre Zásady ochrany osobných údajov",
   "PrivacyPolicyURLHelpButton": "Uveďte URL odkaz na vaše Zásady ochrany osobných údajov, ktoré musia byť v súlade s platnými zákonmi a predpismi a ktoré objasňujú, ako zhromažďujete, používate, zdieľate, uchovávate a inak spracúvate osobné údaje.",
-  "ProfileDescription": "Tu môžete skontrolovať informácie o aplikáciách, ktorým ste udelili autorizačný prístup, a v prípade potreby súhlas odvolať.",
+  "ProfileDescription": "Pozrite si aplikácie, ktorým ste povolili prístup k svojmu účtu, a v prípade potreby tento prístup odvolajte.",
   "Read": "Čítať",
   "ReadOAuthGuide": "Prečítajte si príručku OAuth 2.0",
   "RedirectsURLS": "Adresy URL na presmerovanie",

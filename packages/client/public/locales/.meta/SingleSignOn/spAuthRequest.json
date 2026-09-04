@@ -1,14 +1,14 @@
 {
   "key_path": "spAuthRequest",
-  "content": "Sign Auth Requests",
-  "content_en_sha1_hash": "519ab04085d6e6c56d91eedea8dcd822ebb6d3cf",
-  "created_at": "2025-05-19T21:30:50.153Z",
-  "updated_at": "2026-05-15T15:37:40.283Z",
+  "content": "Sign auth requests",
+  "content_en_sha1_hash": "dc3cb5d4d4495345ddc64b9c6da396027cc101c6",
+  "created_at": "2026-08-31T18:23:40.120Z",
+  "updated_at": "2026-08-31T20:52:37.255Z",
   "comment": {
-    "text": "This is a checkbox label in the portal settings for Single Sign-On (SSO) configuration. It allows administrators to enable or disable the signing of authentication requests by the Service Provider.",
+    "text": "Checkbox label in the Single Sign-On integration settings that indicates whether authentication requests should be signed.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:28.158Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:52:37.255Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,14 +1,14 @@
 {
   "key_path": "LogoutDescription",
-  "content": "Note. All active connections except this connection will be logged out, as it is currently in use.",
-  "content_en_sha1_hash": "20e853f73fa6e4fe2c68afd99e55c4ce5099c204",
-  "created_at": "2025-05-19T21:30:53.368Z",
-  "updated_at": "2026-05-15T14:00:06.690Z",
+  "content": "Note. All active sessions except the current one will be terminated. The current session will remain active.",
+  "content_en_sha1_hash": "30e54606eaa3d45eb6fb693f1f1da7c38857ecfb",
+  "created_at": "2026-08-31T18:23:42.759Z",
+  "updated_at": "2026-08-31T20:08:34.082Z",
   "comment": {
-    "text": "This is a descriptive text within a modal dialog. It informs the user that logging out will terminate all other active sessions except the current one.",
+    "text": "Informational text in a modal dialog body that appears when logging out of all sessions, explaining the impact on other active sessions.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:20:43.393Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:08:34.082Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,14 +1,14 @@
 {
   "key_path": "spCertificatesTooltip",
-  "content": "The Service provider certificates used to sign and encrypt the requests and responses from the SP",
-  "content_en_sha1_hash": "1e5d8b6931596c260395a4c8c3dc9e23e6e18228",
-  "created_at": "2025-05-19T21:30:50.158Z",
-  "updated_at": "2026-05-15T15:37:40.280Z",
+  "content": "The Service provider certificates used to sign and encrypt the requests and responses from the Service provider",
+  "content_en_sha1_hash": "12221000d60b9d46ddc952a3998f2879bae8958d",
+  "created_at": "2026-08-31T18:23:40.131Z",
+  "updated_at": "2026-08-31T20:51:43.604Z",
   "comment": {
-    "text": "This is a tooltip that appears when hovering over the \"Service provider certificates\" label. It explains the purpose of these certificates in signing and encrypting requests and responses from the Service Provider (SP).",
+    "text": "Tooltip providing information about the Service provider certificates used for signing and encryption in the SSO configuration.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:26.306Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:51:43.604Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

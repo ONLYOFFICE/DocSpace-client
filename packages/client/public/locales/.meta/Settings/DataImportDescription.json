@@ -1,14 +1,14 @@
 {
   "key_path": "DataImportDescription",
-  "content": "Import data from a third party service to {{organizationName}} {{productName}}. Data import allows transferring data such as all users, their personal and shared documents.",
-  "content_en_sha1_hash": "d3eff090b70a55f1d87037e6d061a57396691184",
-  "created_at": "2025-05-19T21:30:51.065Z",
-  "updated_at": "2026-05-15T15:37:40.244Z",
+  "content": "Import data from another service into {{organizationName}} {{productName}} including all users and their personal and shared documents.",
+  "content_en_sha1_hash": "defd15772a4b9428b81c6b9882812f489f342847",
+  "created_at": "2026-08-31T18:23:40.780Z",
+  "updated_at": "2026-08-31T20:38:49.977Z",
   "comment": {
-    "text": "This is a descriptive text explaining the Data Import feature. It appears on the Data Import settings page and informs the user about transferring data from a third-party service. `{{organizationName}}` is the name of the user's organization, and `{{productName}}` is the name of the ONLYOFFICE product.",
+    "text": "Descriptive text on the Data Import settings page explaining the scope of the import process. It includes variables for the organization name and product name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:00.676Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:38:49.977Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

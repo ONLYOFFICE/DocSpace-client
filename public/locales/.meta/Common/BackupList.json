@@ -1,14 +1,14 @@
 {
   "key_path": "BackupList",
-  "content": "Backup List",
-  "content_en_sha1_hash": "104eab22b64bfdd7ac57f7948dadb9a22f16bc6c",
-  "created_at": "2025-05-26T07:15:40.738Z",
-  "updated_at": "2026-08-14T14:58:32.905Z",
+  "content": "Backup list",
+  "content_en_sha1_hash": "98b1ceabeb6d14fa20a075269a5b3b3135b838b9",
+  "created_at": "2026-08-31T18:22:52.452Z",
+  "updated_at": "2026-08-31T19:29:08.982Z",
   "comment": {
-    "text": "This is the title for a dialog window that displays a list of available backups. It also appears as the label for a button that opens this dialog.",
+    "text": "Button label and dialog title for the list of available backups.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:58:40.941Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:29:08.982Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,13 +1,13 @@
 {
   "key_path": "LdapToggleDescription",
-  "content": "Enable this option if you want to add users from LDAP server to the workspace automatically. The added users will be able to authorize using their LDAP server credentials. The workspace does not save the user passwords locally and will authenticate users sending their login and password to LDAP server.",
-  "content_en_sha1_hash": "a33ef81c01d9b9eeb941fb5791197417efb54637",
-  "created_at": "2026-08-13T22:44:30.959Z",
-  "updated_at": "2026-08-14T15:28:30.206Z",
+  "content": "Turn this on to automatically add users from your LDAP server to the workspace. They'll be able to sign in using their LDAP credentials: passwords aren't stored locally, and sign-ins are verified directly with the LDAP server.",
+  "content_en_sha1_hash": "d287bd395be34d1f5f180e7b0ca5c96266adc9aa",
+  "created_at": "2026-08-31T18:23:43.878Z",
+  "updated_at": "2026-08-31T20:00:45.024Z",
   "comment": {
-    "text": "Help text for the LDAP integration toggle switch, explaining the automatic user synchronization and authentication process.",
+    "text": "Explanatory subtext for the LDAP integration toggle switch in the portal settings, describing the automatic user synchronization and authentication process.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:28:30.206Z",
+    "updated_at": "2026-08-31T20:00:45.024Z",
     "model": "gemma4:26b"
   },
   "usage": [

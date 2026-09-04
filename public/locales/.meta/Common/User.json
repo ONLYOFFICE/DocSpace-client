@@ -3,7 +3,7 @@
   "content": "User",
   "content_en_sha1_hash": "9f8a2389a20ca0752aa9e95093515517e90e194c",
   "created_at": "2025-05-19T21:30:49.454Z",
-  "updated_at": "2026-08-19T13:26:37.696Z",
+  "updated_at": "2026-09-04T07:59:41.594Z",
   "comment": {
     "text": "This is a label for a user type, appearing in tables, dropdowns, and dialogs. It refers to a standard user account.",
     "is_auto": true,
@@ -37,8 +37,8 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 711,
-      "context": "{\n id: \"accounts-add_collaborator\",\n className: \"main-button_drop-down\",\n icon: PersonDefaultReactSvgUrl,\n label: t(\"Common:User\"),\n onClick: () => this.inviteUser(EmployeeType.User),\n \"data-type\": EmployeeType.User,\n action: EmployeeType.User,\n key: \"collaborator\",\n },",
+      "line_number": 724,
+      "context": "{\n id: \"accounts-add_collaborator\",\n className: \"main-button_drop-down\",\n icon: PersonDefaultReactSvgUrl,\n label: t(\"Common:User\"),\n onClick: () => this.inviteUser(EmployeeType.User),\n description: getDescription(EmployeeType.User),\n \"data-type\": EmployeeType.User,\n action: EmployeeType.User,\n key: \"collaborator\",",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Erasure",
   "content_en_sha1_hash": "e5eaa5fb5b757374407ffad2c33964c599e1aee8",
   "created_at": "2026-06-03T09:30:00.132Z",
-  "updated_at": "2026-08-19T13:26:37.733Z",
+  "updated_at": "2026-09-04T07:59:41.629Z",
   "comment": {
     "text": "A label for a table column header or a sorting option in the filter menu, representing a specific sorting criterion.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1588,
+      "line_number": 1601,
       "context": "default: true,\n };\n const erasure = {\n id: \"sort-by_erasure\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:ByErasure\"),\n default: true,\n };\n const tags = {\n id: \"sort-by_tags\",\n key: SortByFieldName.Tags,",
       "module": "/packages/client"
     },

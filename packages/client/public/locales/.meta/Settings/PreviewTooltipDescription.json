@@ -3,7 +3,7 @@
   "content": "Preview the interface with the selected color applied",
   "content_en_sha1_hash": "ee3c7ae56f3025dbadbb15a8246faddd52503ee7",
   "created_at": "2025-05-19T21:30:52.316Z",
-  "updated_at": "2026-05-15T15:37:40.238Z",
+  "updated_at": "2026-08-31T18:23:50.750Z",
   "comment": {
     "text": "Tooltip content for a button that previews the interface with a chosen color scheme.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 775,
+      "line_number": 779,
       "context": "place=\"right\"\n dataTestId=\"appearance_preview_help_button\"\n tooltipContent={\n <div>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Settings:PreviewTooltipDescription\")}\n </Text>\n <Link\n isHovered\n type=\"page\"\n href={appearanceBlockHelpUrl}",
       "module": "/packages/client"
     }

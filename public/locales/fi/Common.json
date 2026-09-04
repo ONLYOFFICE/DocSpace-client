@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "Piilota perustelu",
   "ArbiterIntroDescription": "Useat AI-asiantuntijat vastaavat kysymykseesi rinnakkain; välimies syntetisoi heidän vastauksensa yhdeksi painotetuksi vastaukseksi.",
   "ArbiterLabel": "VÄLIMIES:",
-  "ArbiterNoAIProvider": "Tälle työtilalle ei ole määritetty AI-palveluntarjoajaa.",
+  "ArbiterNoModels": "Tälle työtilalle ei ole määritetty AI-mallia.",
   "ArbiterNonAdminDescription": "AI-välimies on käytettävissä vain järjestelmänvalvojille. Pyydä pääjärjestelmänvalvojaa asettamaan se.",
   "ArbiterOpenAiArbiter": "Avaa AI-välimies",
   "ArbiterPageDescription": "Esitä kysymys, saa riippumattomia vastauksia usealta AI-asiantuntijalta ja anna välimiehen punnita ne yhdeksi perustelluksi tuomioksi.",

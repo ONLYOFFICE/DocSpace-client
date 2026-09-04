@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "Əsaslandırmanı gizlət",
   "ArbiterIntroDescription": "Bir neçə AI eksperti sualınıza paralel olaraq cavab verir; arbitr onların cavablarını bir çəkili cavabda sintez edir.",
   "ArbiterLabel": "ARBİTR:",
-  "ArbiterNoAIProvider": "Bu iş sahəsi üçün heç bir AI provayderi konfiqurasiya edilməyib.",
+  "ArbiterNoModels": "Bu iş sahəsi üçün heç bir AI modeli konfiqurasiya edilməyib.",
   "ArbiterNonAdminDescription": "AI Arbitri yalnız administratorlar üçün mövcuddur. Qurmaq üçün super administratora müraciət edin.",
   "ArbiterOpenAiArbiter": "AI Arbitri aç",
   "ArbiterPageDescription": "Sual verin, bir neçə AI ekspertindən müstəqil cavablar alın və arbitrə onları bir əsaslandırılmış qərara çevirməyə imkan verin.",

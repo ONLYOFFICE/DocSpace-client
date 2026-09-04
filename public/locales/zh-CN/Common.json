@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "隐藏推理",
   "ArbiterIntroDescription": "多位 AI 专家并行回答您的问题；仲裁者将他们的回答综合成一个单一的加权回复。",
   "ArbiterLabel": "仲裁者：",
-  "ArbiterNoAIProvider": "此工作区未配置 AI 提供商。",
+  "ArbiterNoModels": "此工作区未配置 AI 模型。",
   "ArbiterNonAdminDescription": "AI 仲裁者仅供管理员使用。请联系超级管理员进行设置。",
   "ArbiterOpenAiArbiter": "打开 AI Arbiter",
   "ArbiterPageDescription": "提出问题，从多位 AI 专家处获取独立答案，让仲裁者将其权衡为单一合理的判决。",

@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "Ascunde raționamentul",
   "ArbiterIntroDescription": "Mai mulți experți IA răspund la întrebarea dvs. în paralel; un arbitru sintetizează răspunsurile lor într-un singur răspuns ponderat.",
   "ArbiterLabel": "ARBITRU:",
-  "ArbiterNoAIProvider": "Nu este configurat niciun furnizor IA pentru acest spațiu de lucru.",
+  "ArbiterNoModels": "Nu este configurat niciun model IA pentru acest spațiu de lucru.",
   "ArbiterNonAdminDescription": "Arbitrul IA este disponibil numai pentru administratori. Rugați un superadministrator să îl configureze.",
   "ArbiterOpenAiArbiter": "Deschide AI Arbiter",
   "ArbiterPageDescription": "Puneți o întrebare, primiți răspunsuri independente de la mai mulți experți IA și lăsați arbitrul să le cântărească pentru a obține un verdict unic și motivat.",

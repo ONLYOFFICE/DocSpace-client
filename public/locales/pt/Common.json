@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "Ocultar raciocínio",
   "ArbiterIntroDescription": "Vários especialistas de IA respondem à sua pergunta em paralelo; um árbitro sintetiza as respostas numa única resposta ponderada.",
   "ArbiterLabel": "ÁRBITRO:",
-  "ArbiterNoAIProvider": "Não existe nenhum fornecedor de IA configurado para este espaço de trabalho.",
+  "ArbiterNoModels": "Não existe nenhum modelo de IA configurado para este espaço de trabalho.",
   "ArbiterNonAdminDescription": "O Árbitro de IA está disponível apenas para administradores. Peça a um superadministrador para o configurar.",
   "ArbiterOpenAiArbiter": "Abrir Árbitro de IA",
   "ArbiterPageDescription": "Coloque uma pergunta, obtenha respostas independentes de vários especialistas de IA e deixe o árbitro avaliá-las para chegar a um único veredicto fundamentado.",

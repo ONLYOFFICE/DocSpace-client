@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "Fshih arsyetimin",
   "ArbiterIntroDescription": "Disa ekspertë të IA u përgjigjen pyetjes suaj paralelisht; një arbitër sintetizon përgjigjet e tyre në një përgjigje të vetme të peshuar.",
   "ArbiterLabel": "ARBITRI:",
-  "ArbiterNoAIProvider": "Nuk është konfiguruar asnjë ofrues IA për këtë hapësirë pune.",
+  "ArbiterNoModels": "Nuk është konfiguruar asnjë model IA për këtë hapësirë pune.",
   "ArbiterNonAdminDescription": "Arbitri i IA është i disponueshëm vetëm për administratorët. Kërkojini superadministratorit ta konfigurojë.",
   "ArbiterOpenAiArbiter": "Hap Arbitrin e IA",
   "ArbiterPageDescription": "Bëni një pyetje, merrni përgjigje të pavarura nga disa ekspertë të IA dhe lëreni arbitrin t'i peshojë ato për një verdict të vetëm të arsyetuar.",

@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "Redenering verbergen",
   "ArbiterIntroDescription": "Meerdere AI-experts beantwoorden uw vraag parallel; een arbiter synthetiseert hun antwoorden tot één gewogen antwoord.",
   "ArbiterLabel": "ARBITER:",
-  "ArbiterNoAIProvider": "Er is geen AI-provider geconfigureerd voor deze werkruimte.",
+  "ArbiterNoModels": "Er is geen AI-model geconfigureerd voor deze werkruimte.",
   "ArbiterNonAdminDescription": "AI-arbiter is alleen beschikbaar voor beheerders. Vraag een superbeheerder om het in te stellen.",
   "ArbiterOpenAiArbiter": "AI-arbiter openen",
   "ArbiterPageDescription": "Stel een vraag, ontvang onafhankelijke antwoorden van meerdere AI-experts en laat de arbiter ze afwegen tot één beredeneerd oordeel.",

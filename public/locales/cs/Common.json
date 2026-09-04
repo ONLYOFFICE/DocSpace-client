@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "Skrýt zdůvodnění",
   "ArbiterIntroDescription": "Více AI expertů odpovídá na vaši otázku paralelně; arbitr syntetizuje jejich odpovědi do jediné vážené odpovědi.",
   "ArbiterLabel": "ARBITR:",
-  "ArbiterNoAIProvider": "Pro tento pracovní prostor není nakonfigurován žádný poskytovatel AI.",
+  "ArbiterNoModels": "Pro tento pracovní prostor není nakonfigurován žádný model AI.",
   "ArbiterNonAdminDescription": "AI Arbitr je dostupný pouze pro správce. Požádejte supersprávce, aby ho nastavil.",
   "ArbiterOpenAiArbiter": "Otevřít AI Arbitra",
   "ArbiterPageDescription": "Položte otázku, získejte nezávislé odpovědi od více AI expertů a nechte arbitra je zvážit pro jediný zdůvodněný verdikt.",

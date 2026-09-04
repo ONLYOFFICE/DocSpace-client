@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "Sakrij obrazloženje",
   "ArbiterIntroDescription": "Više AI stručnjaka odgovara na vaše pitanje paralelno; arbitar sintetiše njihove odgovore u jedan ponderisani odgovor.",
   "ArbiterLabel": "ARBITAR:",
-  "ArbiterNoAIProvider": "Za ovaj radni prostor nije konfigurisan nijedan AI provajder.",
+  "ArbiterNoModels": "Za ovaj radni prostor nije konfigurisan nijedan AI model.",
   "ArbiterNonAdminDescription": "AI Arbitar je dostupan samo za administratore. Zamolite superadministratora da ga postavi.",
   "ArbiterOpenAiArbiter": "Otvori AI Arbiter",
   "ArbiterPageDescription": "Postavite pitanje, dobijte nezavisne odgovore od više AI stručnjaka i pustite arbitara da ih odmeri u jedinstven obrazložen verdikt.",

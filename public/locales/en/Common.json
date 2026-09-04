@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "Hide reasoning",
   "ArbiterIntroDescription": "Multiple AI experts answer your question in parallel; an arbiter synthesises their answers into a single weighted reply.",
   "ArbiterLabel": "ARBITER:",
-  "ArbiterNoAIProvider": "No AI provider is configured for this workspace.",
+  "ArbiterNoModels": "No AI model is configured for this workspace.",
   "ArbiterNonAdminDescription": "AI Arbiter is available for administrators only. Ask the Full admin to set it up.",
   "ArbiterOpenAiArbiter": "Open AI Arbiter",
   "ArbiterPageDescription": "Ask a question, get independent answers from multiple AI experts, and let the arbiter weigh them into a single reasoned verdict.",

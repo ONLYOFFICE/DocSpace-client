@@ -45,7 +45,8 @@ import {
   elementGroupStep,
   revealStep,
   sidebarSelector,
-  expandQuickActions,
+  revealQuickActionTile,
+  rewindQuickActions,
 } from "SRC_DIR/components/Tour/stepBuilders";
 
 const LOG_LABEL = "rooms tour";
@@ -137,8 +138,8 @@ export function getTourSteps(
   return [
     // 1. The room types, named by what each one is for. Picking the right type
     // up front matters: the type fixes what members can do and cannot be
-    // changed afterwards. With six tiles the banner clips to its first row, so
-    // every tile step expands it before measuring anything.
+    // changed afterwards. The banner is a carousel, so every tile step scrolls
+    // its target into the strip before measuring anything.
     canCreate &&
       showFilter &&
       elementGroupStep(
@@ -157,7 +158,7 @@ export function getTourSteps(
         callbacks,
         LOG_LABEL,
         6,
-        expandQuickActions,
+        rewindQuickActions,
       ),
 
     // 2. Templates — the fastest path for teams that spin up similar rooms
@@ -172,7 +173,7 @@ export function getTourSteps(
         callbacks,
         LOG_LABEL,
         6,
-        expandQuickActions,
+        revealQuickActionTile('[data-testid="quick-use-template"]'),
       ),
 
     // 3. AI chat — the same tile, and the same thing to say about it, as in the
@@ -185,7 +186,7 @@ export function getTourSteps(
         callbacks,
         LOG_LABEL,
         6,
-        expandQuickActions,
+        revealQuickActionTile('[data-testid="quick-ai-chat"]'),
       ),
 
     // 4. Room groups — the row of chips above the list.

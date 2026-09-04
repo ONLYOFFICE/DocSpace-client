@@ -100,6 +100,7 @@ import {
   usePanelExclusivity,
 } from "./Hooks";
 import { useQuickActions } from "./Hooks/useQuickActions";
+import { useHideQuickActions } from "./Hooks/useHideQuickActions";
 
 import styles from "./Home.module.scss";
 
@@ -194,6 +195,9 @@ const PureHome = observer((props) => {
     isErrorChecking,
     setOperationCancelVisible,
     hideConfirmCancelOperation,
+    quickActionsEnabled,
+    setShowQuickActions,
+    hydrateShowQuickActions,
     chatFiles,
 
     allowInvitingGuests,
@@ -223,6 +227,7 @@ const PureHome = observer((props) => {
     isDocumentsFolder,
     isRoom,
     isRoomsFolder,
+    isFormsFolder,
     isPrivacyFolder,
     isArchiveFolder,
     isTemplatesFolder,
@@ -305,7 +310,16 @@ const PureHome = observer((props) => {
 
   // The "Forms" section root gets its own quick-actions tile set (collect
   // forms + from template), resolved by the hook below.
-  const isFormsSection = getCategoryType(location) === CategoryType.Forms;
+  //
+  // Taken from the selected folder rather than the URL, unlike `isFormRoom`
+  // below, because this flag has to fall in step with the flags for the
+  // sections one navigates *to*, all of which are folder-derived. Reading it
+  // from the route made it the only one that dropped the instant the URL
+  // changed, while the destination's flag was still false and its folder still
+  // loading: for that gap no section resolved at all, so the banner unmounted,
+  // the Section left its scrollable-banner mode, and the list jumped up and
+  // back down again. That showed on every navigation out of Forms.
+  const isFormsSection = isFormsFolder;
 
   // Inside a Form Filling room (or its subfolders) we offer the form-only tile
   // set. Derive this from the URL (CategoryType.Form ⇔ `/forms/{id}`) rather
@@ -354,7 +368,18 @@ const PureHome = observer((props) => {
     isProfile,
     isSettingsPage,
   });
-  const showQuickActions = quickActions.show && !isChat && !isEmptyPage;
+  React.useEffect(() => {
+    hydrateShowQuickActions(userId);
+  }, [hydrateShowQuickActions, userId]);
+
+  const showQuickActions =
+    quickActionsEnabled && quickActions.show && !isChat && !isEmptyPage;
+
+  const onHideQuickActions = useHideQuickActions({
+    t,
+    userId,
+    setShowQuickActions,
+  });
 
   const onDrop = useEventCallback((f, uploadToFolder) => {
     if (isContactsPage || isProfile) return;
@@ -726,6 +751,10 @@ const PureHome = observer((props) => {
                 items={quickActions.items}
                 className={styles.quickActions}
                 isLoading={showFilterLoader}
+                onClose={onHideQuickActions}
+                closeLabel={t("Common:DisableQuickActionsOnAllPages")}
+                prevLabel={t("Common:Previous")}
+                nextLabel={t("Common:Next")}
                 dataTestId="quick-actions"
               />
             </Section.SectionBanner>
@@ -925,7 +954,12 @@ export const Component = inject(
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
-    const { hideConfirmCancelOperation } = filesSettingsStore;
+    const {
+      hideConfirmCancelOperation,
+      showQuickActions: quickActionsEnabled,
+      setShowQuickActions,
+      hydrateShowQuickActions,
+    } = filesSettingsStore;
     const { setOperationCancelVisible } = dialogsStore;
     const {
       setFrameConfig,
@@ -1099,6 +1133,9 @@ export const Component = inject(
       isErrorChecking,
       setOperationCancelVisible,
       hideConfirmCancelOperation,
+      quickActionsEnabled,
+      setShowQuickActions,
+      hydrateShowQuickActions,
 
       removeActiveItem,
       allowInvitingGuests,

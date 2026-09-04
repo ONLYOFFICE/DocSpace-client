@@ -46,6 +46,8 @@ import {
   fileItemStep,
   revealStep,
   scrollTargetIntoView,
+  revealQuickActionTile,
+  rewindQuickActions,
   NAVIGATION_TARGET_TIMEOUT,
   STEP_TARGET_TIMEOUT,
 } from "../stepBuilders";
@@ -724,5 +726,91 @@ describe("scrollTargetIntoView", () => {
     );
 
     expect(scrollIntoView).toHaveBeenCalled();
+  });
+});
+
+describe("the quick-actions carousel helpers", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  const mountBanner = () => {
+    mount(
+      '<div data-testid="quick-actions">' +
+        '<div class="track">' +
+        '<button data-testid="quick-ai-chat"></button>' +
+        "</div>" +
+        "</div>",
+    );
+  };
+
+  describe("revealQuickActionTile", () => {
+    it("scrolls the tile along the strip, leaving the vertical axis alone", () => {
+      // The banner is a carousel: a tile past the fold is mounted and
+      // measurable but out of sight, so joyride would spotlight bare strip.
+      // `block: "nearest"` keeps this off the vertical axis, which is
+      // `scrollTargetIntoView`'s to move.
+      mountBanner();
+      const scrollIntoView = vi.spyOn(Element.prototype, "scrollIntoView");
+
+      revealQuickActionTile('[data-testid="quick-ai-chat"]')();
+
+      expect(scrollIntoView).toHaveBeenCalledWith(
+        expect.objectContaining({ inline: "center", block: "nearest" }),
+      );
+      expect(scrollIntoView.mock.instances[0]).toBe(
+        document.querySelector('[data-testid="quick-ai-chat"]'),
+      );
+    });
+
+    it("does nothing when the tile is not on the page", () => {
+      // The banner is hidden for anyone who turned quick actions off, and the
+      // step that wanted it must not throw on the way past.
+      mount("");
+      const scrollIntoView = vi.spyOn(Element.prototype, "scrollIntoView");
+
+      expect(() =>
+        revealQuickActionTile('[data-testid="quick-ai-chat"]')(),
+      ).not.toThrow();
+      expect(scrollIntoView).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("rewindQuickActions", () => {
+    // jsdom implements no scrolling at all, so `Element.scrollTo` is missing
+    // rather than a no-op and there is nothing to spy on until it is defined.
+    const spyOnScrollTo = () => {
+      Object.defineProperty(Element.prototype, "scrollTo", {
+        configurable: true,
+        writable: true,
+        value: () => {},
+      });
+
+      return vi.spyOn(Element.prototype, "scrollTo");
+    };
+
+    it("returns the strip to its first tile", () => {
+      mountBanner();
+      const scrollTo = spyOnScrollTo();
+
+      rewindQuickActions();
+
+      expect(scrollTo).toHaveBeenCalledWith(
+        expect.objectContaining({ left: 0 }),
+      );
+      // The track is the banner's first child, not the banner itself: the
+      // wrapper does not scroll, the strip inside it does.
+      expect(scrollTo.mock.instances[0]).toBe(
+        document.querySelector(".track"),
+      );
+    });
+
+    it("does nothing when the banner is not on the page", () => {
+      mount("");
+      const scrollTo = spyOnScrollTo();
+
+      expect(() => rewindQuickActions()).not.toThrow();
+      expect(scrollTo).not.toHaveBeenCalled();
+    });
   });
 });

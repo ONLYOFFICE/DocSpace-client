@@ -49,7 +49,7 @@ import {
   hoverRevealStep,
   revealStep,
   sidebarSelector,
-  expandQuickActions,
+  revealQuickActionTile,
   type RevealHooks,
 } from "SRC_DIR/components/Tour/stepBuilders";
 
@@ -250,8 +250,8 @@ function getPersonalSteps(
       ),
 
     // 2. AI chat tile — the least discoverable, most differentiating feature.
-    // It is the fifth tile, so it may sit in the clipped second row; expand the
-    // banner first so the spotlight lands on something visible.
+    // It is the last tile, so on a narrow banner it sits past the fold; scroll
+    // the carousel to it first so the spotlight lands on something visible.
     canOwnFiles &&
       canCreate &&
       showFilter &&
@@ -262,7 +262,7 @@ function getPersonalSteps(
         callbacks,
         LOG_LABEL,
         6,
-        expandQuickActions,
+        revealQuickActionTile('[data-testid="quick-ai-chat"]'),
       ),
 
     // 3. Uploading, which lives in the "New" menu — so the step opens it and

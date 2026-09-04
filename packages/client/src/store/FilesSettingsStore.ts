@@ -72,6 +72,7 @@ import i18n from "../i18n";
 import type PluginStore from "./PluginStore";
 import type PublicRoomStore from "./PublicRoomStore";
 import type { ThirdPartyStore } from "./ThirdPartyStore";
+import { safeGet, safeSet } from "./TourStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
 import type { TTreeFolder } from "./TreeFoldersStore";
 
@@ -79,6 +80,10 @@ type TFilesApiWithForceSave = typeof api.files & {
   storeForceSave: (data: boolean) => Promise<boolean>;
   forceSave: (data: boolean) => Promise<boolean>;
 };
+
+// Per user, because a browser is shared: one person hiding the banner says
+// nothing about the next person to sign in on the same machine.
+const showQuickActionsKey = (userId: string) => `show_quick_actions_${userId}`;
 
 class FilesSettingsStore {
   thirdPartyStore: ThirdPartyStore;
@@ -186,6 +191,12 @@ class FilesSettingsStore {
   hideConfirmCancelOperation = false;
 
   organizeRoomsGrouping = false;
+
+  // Shown unless this user has turned it off. Defaulting to `true` rather than
+  // to "unknown" is deliberate: it is the right value for everyone who has
+  // never hidden the banner, and hydration lands on user load, long before the
+  // folder contents that the banner renders above.
+  showQuickActions = true;
 
   extsFilesVectorized: string[] = [];
 
@@ -413,6 +424,26 @@ class FilesSettingsStore {
       .changeOpenEditorInSameTab(data)
       .then((res) => this.setFilesSetting("openEditorInSameTab", res))
       .catch((e) => toastr.error(e as string));
+  };
+
+  // Kept in localStorage until the portal grows a setting for it. Both methods
+  // are the whole of the client-side story, so the server migration is their
+  // two bodies: `api.files.setShowQuickActions(data)` here plus
+  // `setFilesSetting("showQuickActions", res)`, exactly as
+  // `setOrganizeRoomsGrouping` below does, and the field then arrives with
+  // `getFilesSettings` and hydration goes away.
+  hydrateShowQuickActions = (userId?: string) => {
+    if (!userId) return;
+
+    // Absent key means the banner has never been hidden, so anything that is
+    // not an explicit "false" reads as shown.
+    this.showQuickActions = safeGet(showQuickActionsKey(userId)) !== "false";
+  };
+
+  setShowQuickActions = (data: boolean, userId?: string) => {
+    this.showQuickActions = data;
+
+    if (userId) safeSet(showQuickActionsKey(userId), String(data));
   };
 
   setOrganizeRoomsGrouping = async (data: boolean) => {

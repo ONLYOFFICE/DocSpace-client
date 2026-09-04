@@ -734,15 +734,39 @@ export function fileItemStep(
   };
 }
 
+const QUICK_ACTIONS_SELECTOR = '[data-testid="quick-actions"]';
+
 /**
- * Reveal all quick-action tiles by clicking the banner's "Show more" overlay.
- * With more than four tiles the grid is clipped to the first row, so a tile in
- * the second row would be spotlighted while visually hidden. No-op when the
- * banner isn't collapsed.
+ * Bring a quick-action tile into the banner's scroll port.
+ *
+ * The banner is a carousel, so a tile past the fold is mounted and measurable
+ * but scrolled out of sight — joyride would spotlight an empty patch of the
+ * strip. `block: "nearest"` keeps this to the horizontal axis: the vertical
+ * position is `scrollTargetIntoView`'s job, and moving both here would fight it.
+ *
+ * Instant rather than smooth, for the same reason as `scrollTargetIntoView`:
+ * joyride measures as soon as the hook resolves, and a smooth scroll cannot be
+ * awaited.
  */
-export function expandQuickActions() {
-  const showMore = document.querySelector<HTMLButtonElement>(
-    '[data-testid="quick-actions-show-more"]',
-  );
-  showMore?.click();
+export function revealQuickActionTile(selector: string) {
+  return () => {
+    const tile = document.querySelector(selector);
+
+    tile?.scrollIntoView({
+      inline: "center",
+      block: "nearest",
+      behavior: "instant",
+    });
+  };
+}
+
+/**
+ * Rewind the quick-actions carousel to its first tile, for steps that spotlight
+ * a group spanning the start of the strip rather than one tile.
+ */
+export function rewindQuickActions() {
+  const track = document.querySelector(QUICK_ACTIONS_SELECTOR)
+    ?.firstElementChild;
+
+  track?.scrollTo({ left: 0, behavior: "instant" });
 }

@@ -210,30 +210,41 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                     className={styles.tag}
                     dataTestId={`tag_item_${tag.label}`}
                   />
-                  {canEdit ? (
-                    <IconButton
-                      size={ICON_SIZE}
-                      className={styles.editIcon}
-                      iconName={AccessEditReactSvgUrl}
-                      onClick={(event) => {
-                        handleEdit(event, tag.label);
-                      }}
-                      dataTestId={`edit_tag_button_${tag.label}`}
-                      isDisabled={isPending}
-                    />
+                  {canEdit || canRemove ? (
+                    // One flex item for both icons, so the row's own gap
+                    // separates them from the tag rather than from each other.
+                    // The click never reaches the row: the gap between them is
+                    // part of this box, not of the row.
+                    <div
+                      className={styles.rowActions}
+                      onClick={stopPropagation}
+                    >
+                      {canEdit ? (
+                        <IconButton
+                          size={ICON_SIZE}
+                          className={styles.editIcon}
+                          iconName={AccessEditReactSvgUrl}
+                          onClick={(event) => {
+                            handleEdit(event, tag.label);
+                          }}
+                          dataTestId={`edit_tag_button_${tag.label}`}
+                          isDisabled={isPending}
+                        />
+                      ) : null}
+                      {canRemove ? (
+                        <IconButton
+                          size={ICON_SIZE}
+                          iconName={TrashReactSvgUrl}
+                          className={styles.deleteIcon}
+                          onClick={(event) => {
+                            deleteTag(event, tag.label);
+                          }}
+                          dataTestId={`delete_tag_button_${tag.label}`}
+                          isDisabled={isPending}
+                        />
+                      ) : null}
+                    </div>
                   ) : null}
-                  {canRemove && (
-                    <IconButton
-                      size={ICON_SIZE}
-                      iconName={TrashReactSvgUrl}
-                      className={styles.deleteIcon}
-                      onClick={(event) => {
-                        deleteTag(event, tag.label);
-                      }}
-                      dataTestId={`delete_tag_button_${tag.label}`}
-                      isDisabled={isPending}
-                    />
-                  )}
                 </>
               )}
             </div>

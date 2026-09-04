@@ -213,6 +213,22 @@
   .deleteIcon {
     flex-shrink: 0;
   }
+
+  // The two action icons as one flex item: the row's gap separates the icons
+  // from the tag, not the icons from each other. Two 16px icons and the 4px
+  // between them - the width is held whether or not they are on screen, so
+  // the tag does not shift when they appear on hover.
+  .rowActions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+
+    gap: 4px;
+    height: 100%;
+    width: 36px;
+  }
+
   .tag {
     margin-inline-end: auto;
   }

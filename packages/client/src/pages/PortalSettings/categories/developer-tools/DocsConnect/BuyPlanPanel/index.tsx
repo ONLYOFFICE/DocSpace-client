@@ -325,9 +325,12 @@ const BuyPlanPanel = ({
   );
 
   const fetchCardLinked = async (backUrl?: string, successUrl?: string) => {
+    const resolvedBackUrl = backUrl ?? window.location.href;
     const res = await paymentApi.getCheckoutSetupUrl(
-      { backUrl: backUrl ?? window.location.href },
-      { params: { successUrl } } as never,
+      // successUrl is required by the API SDK, so a caller that omits it gets
+      // the same destination as backUrl -- the page it started from.
+      { backUrl: resolvedBackUrl, successUrl: successUrl ?? resolvedBackUrl },
+      {},
     );
     return res?.data?.response as string | undefined;
   };

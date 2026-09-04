@@ -56,7 +56,7 @@ import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 import { removeEmojiCharacters } from "../../utils/removeEmojiCharacters";
 
 import { useTagManagement } from "./TagManagement.provider";
-import { useCreateTagMutation } from "./hooks/useTagsQuery";
+import { useCreateTagMutation, useUpdateTag } from "./hooks/useTagsQuery";
 import type { TagManagementFilterProps, TTag } from "./TagManagement.types";
 import styles from "./TagManagement.module.scss";
 
@@ -76,9 +76,10 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     tags,
     setTags,
     filteredTags,
-    access: { canSearch },
+    access: { canSearch, canBindTag },
   } = useTagManagement();
   const createTag = useCreateTagMutation(roomId);
+  const updateTag = useUpdateTag(roomId);
 
   const [inputValue, setInputValue] = useState("");
 
@@ -101,7 +102,46 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
 
   const handleCreateTag = useCallback(async () => {
     const trimmedValue = searchValue.trim();
-    if (trimmedValue.length === 0 || !showCreateTag) return;
+    if (trimmedValue.length === 0) return;
+
+    // The name of an existing tag is not a mistake: it means that tag, so
+    // Enter on it adds it to the room instead of doing nothing. Matched the
+    // way names are compared everywhere here - case-insensitively - and the
+    // tag keeps its own spelling.
+    const existing = tags.find(
+      (tag) => tag.label.trim().toLowerCase() === trimmedValue.toLowerCase(),
+    );
+
+    if (existing) {
+      clearSearch();
+      setInputValue("");
+
+      // Already in the room, or not allowed to add: the search is cleared and
+      // the list shows the tag - there is nothing to send.
+      if (existing.checked || !canBindTag) return;
+
+      const originalTags = [...tags];
+      const boundTag: TTag = { ...existing, checked: true };
+      const updatedTags = tags.map((tag) =>
+        tag.label === existing.label ? boundTag : tag,
+      );
+
+      updateTag.mutate(boundTag, {
+        onSuccess: () => {
+          setTags(updatedTags);
+          onTagsChanged?.();
+        },
+        onError: (error) => {
+          console.error("Failed to update room tags:", error);
+          toastr.error(error);
+          setTags(originalTags);
+        },
+      });
+
+      return;
+    }
+
+    if (!showCreateTag) return;
 
     const newTag: TTag = { label: trimmedValue, checked: true };
     const updatedTags = [newTag, ...tags];
@@ -123,6 +163,8 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     tags,
     clearSearch,
     createTag,
+    updateTag,
+    canBindTag,
     setTags,
     showCreateTag,
     onTagsChanged,

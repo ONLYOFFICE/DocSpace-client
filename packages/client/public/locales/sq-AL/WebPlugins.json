@@ -16,5 +16,5 @@
   "PluginSDK": "Shtojca SDK",
   "PluginSDKDescription": "Përdorni Shtojca SDK për të shtuar funksionalitete të reja, për të lidhur shërbime të palëve të treta ose për të përmirësuar përvojën ekzistuese. Shfletoni shtojcat e shembullit më poshtë, me kodin burimor të disponueshëm në GitHub. Shkoni te faqja <1>Shtojcat</1> për t'i aktivizuar për hapësirën tuaj të punës.",
   "PluginSDKInstruction": "<1>Lexoni udhëzimet</1> për të ndërtuar shtojcat tuaja.",
-  "UploadDescription": "Mund të shtoni shtojca për të zgjeruar funksionalitetin e hapësirës së punës me veçori shtesë. Klikoni Ngarkoni shtojcën ose hidhni skedarin në arkivin ZIP."
+  "UploadDescription": "Shtoni shtojca për të zgjeruar hapësirën tuaj të punës me veçori shtesë. Aktivizoni një nga lista më poshtë, ose klikoni \"Ngarko shtojcën\" (ose hidhni një skedar ZIP) për të shtuar tuajën."
 }

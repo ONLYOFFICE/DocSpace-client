@@ -80,6 +80,7 @@ type Phase =
   | "preview"
   | "provisioning"
   | "done"
+  | "no-models"
   | "failed";
 
 type ProvisioningItem = {
@@ -147,8 +148,9 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
 
   const [phase, setPhase] = React.useState<Phase>("bootstrap");
   const [wizardAgentId, setWizardAgentId] = React.useState<number | null>(null);
-  const [defaultProvider, setDefaultProvider] =
-    React.useState<ProfileRef | null>(null);
+  const [defaultModel, setDefaultModel] = React.useState<ProfileRef | null>(
+    null,
+  );
   const [availableModels, setAvailableModels] = React.useState<ProfileRef[]>(
     [],
   );
@@ -169,7 +171,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     (config: AgentConfig) => {
       setPendingConfig(config);
       const knownIds = new Set(availableModels.map((m) => m.profileId));
-      const fallback = defaultProvider?.profileId ?? "";
+      const fallback = defaultModel?.profileId ?? "";
       setExpertModelIds(
         config.experts.map((e) =>
           e.model && knownIds.has(e.model) ? e.model : fallback,
@@ -182,7 +184,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
       );
       setPhase("preview");
     },
-    [defaultProvider, availableModels],
+    [defaultModel, availableModels],
   );
 
   const wizardChat = useWizardChat({
@@ -219,17 +221,20 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
         if (cancelled) return;
         const models = toProfileRefs(profiles);
         const preferredId = useProfilesStore.getState().defaultProfile?.id;
-        const providerRef =
+        const modelRef =
           models.find((m) => m.profileId === preferredId) ?? models[0];
-        if (!providerRef) {
-          setErrorMessage(t("Common:ArbiterNoAIProvider"));
-          setPhase("failed");
+        if (!modelRef) {
+          // A workspace with no AI model configured is a missing precondition,
+          // not a failed setup: it keeps the wizard's own header and still
+          // offers Retry, which re-runs the bootstrap once a model is added.
+          setErrorMessage(t("Common:ArbiterNoModels"));
+          setPhase("no-models");
           return;
         }
 
         const wizard = await ensureWizardAgent({
           userId,
-          defaultProfile: providerRef,
+          defaultProfile: modelRef,
           availableProfiles: models.map((m) => ({
             id: m.profileId,
             alias: m.name,
@@ -237,8 +242,8 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
         });
         if (cancelled) return;
 
-        setDefaultProvider(providerRef);
-        setArbiterModelId(providerRef.profileId);
+        setDefaultModel(modelRef);
+        setArbiterModelId(modelRef.profileId);
         setAvailableModels(models);
 
         setWizardAgentId(wizard.id);
@@ -268,7 +273,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     if (visible) return;
     setPhase("bootstrap");
     setWizardAgentId(null);
-    setDefaultProvider(null);
+    setDefaultModel(null);
     setAvailableModels([]);
     setExpertModelIds([]);
     setArbiterModelId("");
@@ -282,7 +287,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
   }, [visible, resetChat]);
 
   const handleProceed = React.useCallback(async () => {
-    if (!pendingConfig || !defaultProvider || !userId) return;
+    if (!pendingConfig || !defaultModel || !userId) return;
 
     const items: ProvisioningItem[] = [
       ...pendingConfig.experts.map((e) => ({
@@ -301,8 +306,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     provisionAbortRef.current = ac;
 
     const buildModelRef = (profileId: string): ProfileRef =>
-      availableModels.find((m) => m.profileId === profileId) ??
-      defaultProvider;
+      availableModels.find((m) => m.profileId === profileId) ?? defaultModel;
 
     const expertModels = pendingConfig.experts.map((_, i) =>
       buildModelRef(expertModelIds[i] ?? ""),
@@ -312,7 +316,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     try {
       const result = await provisionPanel(pendingConfig, {
         userId,
-        defaultProfile: defaultProvider,
+        defaultProfile: defaultModel,
         expertProfiles: expertModels,
         arbiterProfile: arbiterModel,
         signal: ac.signal,
@@ -323,7 +327,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
 
       const profileNames = new Map<number, string>();
       result.expertIds.forEach((id, i) => {
-        profileNames.set(id, expertModels[i]?.name ?? defaultProvider.name);
+        profileNames.set(id, expertModels[i]?.name ?? defaultModel.name);
       });
       profileNames.set(result.arbiterAgentId, arbiterModel.name);
 
@@ -355,7 +359,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     }
   }, [
     pendingConfig,
-    defaultProvider,
+    defaultModel,
     userId,
     agentsStore,
     availableModels,
@@ -414,7 +418,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
       if (!hasModelOptions) {
         return (
           <span className={styles.previewModelStatic}>
-            {availableModels[0]?.name ?? defaultProvider?.name ?? "default"}
+            {availableModels[0]?.name ?? defaultModel?.name ?? "default"}
           </span>
         );
       }
@@ -562,6 +566,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
         return renderProvisioning();
       case "done":
         return renderDone();
+      case "no-models":
       case "failed":
         return renderFailed();
       default:
@@ -608,6 +613,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
             onClick={handleOpen}
           />
         );
+      case "no-models":
       case "failed":
         return (
           <>

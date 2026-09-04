@@ -2,7 +2,7 @@
   "ActiveSessions": "Sesionet aktive",
   "AutoDeleteTitle": "Të gjitha sesionet më të vjetra se 60 ditë do të fshihen automatikisht.",
   "ChangePasswordAfterLoggingOut": "Ndryshoni fjalëkalimin pasi të dilni",
-  "ConnectSocialNetworks": "Konektoni rrjetet tuaja sociale",
+  "ConnectSocialNetworks": "Lidhni llogaritë tuaja",
   "DescriptionForSecurity": "Për më shumë siguri, duhet të ndryshoni fjalëkalimin tuaj.",
   "DesktopTheme": "Sinkronizoni me cilësimet e redaktuesit të desktopit",
   "DesktopThemeDescription": "Kaloni automatikisht midis temave të lehta dhe të errëta në varësi të temës aktuale të Redaktuesve të Desktopit.",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "Email-i nuk është i verifikuar",
   "ErrorAccountAlreadyUse": "Llogaria e lidhur tashmë është në përdorim nga një përdorues tjetër",
   "LogoutActiveConnection": "Dilni nga lidhja aktive",
-  "LogoutAllActiveSessionsDescription": "Të gjitha lidhjet aktive përveç kësaj lidhjeje do të dalin jashtë, pasi ajo është aktualisht në përdorim.",
+  "LogoutAllActiveSessionsDescription": "Të gjitha sesionet aktive përveç sesionit aktual do të përfundojnë. Sesioni aktual do të mbetet aktiv.",
   "LogoutBtn": "Dilni",
-  "LogoutDescription": "Shënim. Të gjitha lidhjet aktive përveç kësaj lidhjeje do të dalin jashtë, pasi ajo është aktualisht në përdorim.",
+  "LogoutDescription": "Shënim. Të gjitha sesionet aktive përveç sesionit aktual do të përfundojnë. Sesioni aktual do të mbetet aktiv.",
   "LogoutFrom": "Dilni nga {{platform}} {{browser}}?",
   "MyProfile": "Profili im",
   "NotificationsChannels": "Kanale njoftimi",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Shfaq kodet rezervë",
   "SuccessLogout": "Lidhja aktive doli nga: {{platform}}, {{browser}}",
   "TelegramAccount": "Llogari Telegrami",
-  "TelegramAccountDescription": "Për të lidhur TelegramBot me llogarinë tuaj, ndiqni lidhjen sekrete dhe klikoni butonin “Lidhu me Telegram”.",
+  "TelegramAccountDescription": "Për të marrë njoftime nga llogaria juaj në Telegram, ndiqni lidhjen më poshtë ose klikoni Lidhu.",
   "TelegramAccountDisconnect": "Shkëput Telegram",
   "TelegramAccountDisconnectDescription": "Llogaria juaj @{{username}} është lidhur për njoftime në Telegram. Mund të shkëputeni nga kjo llogari. Në atë rast, nuk do të merrni më njoftime.",
   "TerminateAllSessions": "Përfundoni të gjitha sesionet përveç asaj aktuale",
-  "TwoFactorDescription": "Autentifikimi me dy faktorë nëpërmjet një aplikacioni që gjeneron kode u aktivizua për të gjithë përdoruesit nga administratori."
+  "TwoFactorDescription": "Autentifikimi me dy faktorë duke përdorur një aplikacion autentifikimi u aktivizua për të gjithë përdoruesit nga administratori."
 }

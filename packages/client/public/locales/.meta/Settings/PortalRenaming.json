@@ -1,13 +1,13 @@
 {
   "key_path": "PortalRenaming",
-  "content": "Workspace renaming",
-  "content_en_sha1_hash": "2bea68058c5d7a88f6e30292ac60ccfc8707076a",
-  "created_at": "2026-08-13T22:44:29.817Z",
-  "updated_at": "2026-08-14T15:33:04.016Z",
+  "content": "Custom name",
+  "content_en_sha1_hash": "6af17c24b419d7ba33d00f75f28cd72968d1cce2",
+  "created_at": "2026-08-31T18:23:41.770Z",
+  "updated_at": "2026-08-31T20:23:28.487Z",
   "comment": {
-    "text": "Dialog title, navigation menu item, and browser tab title for the feature that allows changing the workspace name.",
+    "text": "Dialog title, navigation menu item label, and browser tab title for the portal renaming feature.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:33:04.016Z",
+    "updated_at": "2026-08-31T20:23:28.487Z",
     "model": "gemma4:26b"
   },
   "usage": [

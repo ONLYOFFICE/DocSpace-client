@@ -1,13 +1,13 @@
 {
   "key_path": "CustomTitlesDescription",
-  "content": "Adjust the default workspace title displayed on the Welcome Page and in the From field of the email notifications.",
-  "content_en_sha1_hash": "a8540ded96bf1af44d31b33ce5e0a5fae5b9ab01",
-  "created_at": "2026-08-12T15:15:00.375Z",
-  "updated_at": "2026-08-12T15:27:31.114Z",
+  "content": "Set the default title shown on the Welcome page and in the From field of email notifications.",
+  "content_en_sha1_hash": "317644890452807d6c369421f14a53bb41aa40ba",
+  "created_at": "2026-08-31T18:23:40.733Z",
+  "updated_at": "2026-08-31T20:41:48.786Z",
   "comment": {
-    "text": "Description text for a configuration option in the Portal Settings customization section, explaining how to modify the workspace title used on the Welcome Page and in email notifications.",
+    "text": "Description text for a configuration setting in the Portal Settings customization menu, explaining the purpose of the custom title option.",
     "is_auto": true,
-    "updated_at": "2026-08-12T15:27:31.114Z",
+    "updated_at": "2026-08-31T20:41:48.786Z",
     "model": "gemma4:26b"
   },
   "usage": [

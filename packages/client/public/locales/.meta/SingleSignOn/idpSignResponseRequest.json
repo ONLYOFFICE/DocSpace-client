@@ -1,14 +1,14 @@
 {
   "key_path": "idpSignResponseRequest",
-  "content": "Verify Logout Responses Sign",
-  "content_en_sha1_hash": "7d58f1ce1d37735efcc621d9ffa4a144a42d3297",
-  "created_at": "2025-05-19T21:30:50.103Z",
-  "updated_at": "2026-05-15T15:37:40.283Z",
+  "content": "Verify logout responses sign",
+  "content_en_sha1_hash": "7c0e3f6af066964c72d2f794b5180de354b11869",
+  "created_at": "2026-08-31T18:23:40.022Z",
+  "updated_at": "2026-08-31T20:53:34.327Z",
   "comment": {
-    "text": "This is a checkbox label in the Single Sign-On settings. It allows administrators to enable or disable the verification of digital signatures on logout responses received from an Identity Provider (IdP).",
+    "text": "Checkbox label in the Single Sign-On integration settings used to enable the verification of signatures in logout responses from the Identity Provider.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:44.985Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:53:34.327Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,14 +1,14 @@
 {
   "key_path": "TelegramAccountDescription",
-  "content": "To connect TelegramBot to your account follow secret link click to “Connect Telegram” button.",
-  "content_en_sha1_hash": "22bcd9263501c5e978f1ad0e65a2ee16c3df793a",
-  "created_at": "2025-09-10T09:59:16.168Z",
-  "updated_at": "2026-05-15T14:00:06.652Z",
+  "content": "To receive notifications of your account in Telegram, follow the link below or click Connect.",
+  "content_en_sha1_hash": "e9b1c392e56fe5d5ae317c6fb687d8389f1f7d8c",
+  "created_at": "2026-08-31T18:23:42.802Z",
+  "updated_at": "2026-08-31T20:07:56.424Z",
   "comment": {
-    "text": "This is a descriptive text in a dialog explaining how to connect a Telegram bot to the user's account.",
+    "text": "Description text in the ConnectAccountDialog providing instructions on how to link a Telegram account to receive notifications.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:20:34.275Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:07:56.424Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

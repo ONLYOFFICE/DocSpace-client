@@ -3,7 +3,7 @@
   "content": "Try an Editor embed",
   "content_en_sha1_hash": "ced932f1978dd1a9e291656fe0eed97c2df88fc6",
   "created_at": "2026-08-26T16:05:57.706Z",
-  "updated_at": "2026-08-26T16:10:22.307Z",
+  "updated_at": "2026-09-04T07:59:41.649Z",
   "comment": {
     "text": "Heading for a preset card in the developer tools section, introducing a demo for the Editor embed feature.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 226,
+      "line_number": 225,
       "context": ");\n \n return (\n <PresetWrapper\n description={t(\"EditorPresetDescription\")}\n header={t(\"CreateSampleEditor\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     }

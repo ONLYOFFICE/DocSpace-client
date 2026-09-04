@@ -3,7 +3,7 @@
   "content": "Room manager",
   "content_en_sha1_hash": "609082b01c00bb9850dc11687f7204de4f4b10da",
   "created_at": "2025-05-19T21:30:48.209Z",
-  "updated_at": "2026-08-14T14:58:32.765Z",
+  "updated_at": "2026-09-04T07:59:41.626Z",
   "comment": {
     "text": "This is a label for a user role. It identifies a user who has full management rights over a room, such as inviting or removing members and changing room settings.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 170,
+      "line_number": 135,
       "context": "access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,\n },\n roomManager: {\n key: \"roomManager\",\n label: t(\"Common:RoomManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"Common:UserMaxAvailableRoleWarning\"),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,",
       "module": "/packages/shared"
     }

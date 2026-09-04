@@ -1,14 +1,14 @@
 {
   "key_path": "UploadDeviceOptionDescription",
-  "content": "Upload any type files from your personal device",
-  "content_en_sha1_hash": "668f73764cc99938a3a442a47ee4a5d6a62e4d50",
-  "created_at": "2025-05-19T21:30:56.543Z",
-  "updated_at": "2026-08-20T12:26:01.695Z",
+  "content": "Upload any file types from your personal device",
+  "content_en_sha1_hash": "5a550e3da3236feb33525df9c979f22108806a7d",
+  "created_at": "2026-08-31T18:23:45.859Z",
+  "updated_at": "2026-08-31T19:56:50.945Z",
   "comment": {
-    "text": "This is the descriptive text for an option to upload files. It appears below the title \"Upload from device\" in an empty container view, explaining that users can upload any file type from their personal device.",
+    "text": "Subtext for an upload option in an empty state view, describing the ability to select files from a local device.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:06:35.248Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:56:50.945Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

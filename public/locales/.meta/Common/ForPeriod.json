@@ -3,7 +3,7 @@
   "content": "For {{period}}",
   "content_en_sha1_hash": "6fa271e32aa734f72825fb69453a3519528879e0",
   "created_at": "2026-06-25T11:54:50.691Z",
-  "updated_at": "2026-08-20T12:26:01.857Z",
+  "updated_at": "2026-08-31T18:23:51.039Z",
   "comment": {
     "text": "Caption for billing cards and usage summaries specifying the timeframe for displayed data; {{period}} represents a specific month or time range name.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 295,
+      "line_number": 293,
       "context": "fractionFontSize=\"12px\"\n withoutMargin\n className={styles.spendAmount}\n />\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"ForPeriod\", { period: monthLabel })}\n </Text>\n {onViewUsage ? (\n <Link\n onClick={onViewUsage}\n textDecoration=\"underline\"",
       "module": "/libs/ui-kit"
     }

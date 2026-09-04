@@ -58,7 +58,7 @@
   "PrivacyPolicy": "Politique de confidentialité",
   "PrivacyPolicyURL": "URL de la politique de confidentialité",
   "PrivacyPolicyURLHelpButton": "Fournissez le lien URL vers votre politique de confidentialité qui doit être conforme aux lois et réglementations applicables et qui explique clairement comment vous recueillez, utilisez, partagez, conservez et traitez les informations personnelles.",
-  "ProfileDescription": "Ici, vous pouvez vérifier les informations sur les applications auxquelles vous avez accordé l'accès d'authentification, et révoquer le consentement si nécessaire.",
+  "ProfileDescription": "Consultez les applications que vous avez autorisées à accéder à votre compte et révoquez l'accès si nécessaire.",
   "Read": "Lire",
   "ReadOAuthGuide": "Lire le guide OAuth 2.0",
   "RedirectsURLS": "Redirige les URLs",

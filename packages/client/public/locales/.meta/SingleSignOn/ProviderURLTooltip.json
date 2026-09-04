@@ -1,14 +1,14 @@
 {
   "key_path": "ProviderURLTooltip",
-  "content": "Identity Provider Entity Id (Issuer URL)",
-  "content_en_sha1_hash": "76ee57556703e4be7173bf6ab9458305b3c58297",
-  "created_at": "2025-05-19T21:30:50.125Z",
-  "updated_at": "2026-05-15T15:37:40.281Z",
+  "content": "Identity provider entity ID (issuer URL)",
+  "content_en_sha1_hash": "7d6f7970a43c5453f49725fd20770779402c4f27",
+  "created_at": "2026-08-31T18:23:40.068Z",
+  "updated_at": "2026-08-31T21:02:30.818Z",
   "comment": {
-    "text": "This is a tooltip that appears when hovering over the \"Identity Provider Entity Id\" field in the Single Sign-On settings. It provides a clarifying example of what an \"Entity ID\" is.",
+    "text": "Tooltip text for the Identity Provider entity ID field within the Single Sign-On integration settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:37.365Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T21:02:30.818Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

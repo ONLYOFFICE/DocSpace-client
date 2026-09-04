@@ -1,14 +1,14 @@
 {
   "key_path": "LoginSubheaderTitle",
-  "content": "This subsection is used to monitor the latest user login activity including successful logins and failed attempts with an indication of reasons.",
-  "content_en_sha1_hash": "b34e2be66de68cff67840aca5ca9d1eb6bf3fd38",
-  "created_at": "2025-05-19T21:30:51.843Z",
-  "updated_at": "2026-08-06T14:20:57.648Z",
+  "content": "Monitor recent login activity, including successful logins and failed attempts, along with the reasons for each failure.",
+  "content_en_sha1_hash": "eea4040c6948fe4cb8a113efa9a15b2af0db3037",
+  "created_at": "2026-08-31T18:23:41.599Z",
+  "updated_at": "2026-08-31T20:26:26.117Z",
   "comment": {
-    "text": "This is a subheader title for the Login History section within Portal Settings. It describes the purpose of this section, which is to display user login activity.",
+    "text": "Subheader text for the Login History section in the security settings, describing the purpose of the feature.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:23:23.998Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:26:26.117Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

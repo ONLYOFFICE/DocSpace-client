@@ -2,7 +2,7 @@
   "ActiveSessions": "Sessões ativas",
   "AutoDeleteTitle": "Todas as sessões com mais de 60 dias serão excluídas automaticamente.",
   "ChangePasswordAfterLoggingOut": "Alterar a senha após sair",
-  "ConnectSocialNetworks": "Conecte suas redes sociais",
+  "ConnectSocialNetworks": "Conecte suas contas",
   "DescriptionForSecurity": "Para maior segurança, você precisa alterar sua senha.",
   "DesktopTheme": "Sincronizar com as configurações do editor de desktop",
   "DesktopThemeDescription": "Alterne automaticamente entre temas claros e escuros dependendo do tema atual dos editores de desktop.",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "E-mail não verificado",
   "ErrorAccountAlreadyUse": "Conta vinculada já em uso por outro usuário",
   "LogoutActiveConnection": "Sair da conexão ativa",
-  "LogoutAllActiveSessionsDescription": "Todas as conexões ativas, exceto esta conexão, serão desconectadas, pois estão em uso no momento.",
+  "LogoutAllActiveSessionsDescription": "Todas as sessões ativas, exceto a atual, serão encerradas. A sessão atual permanecerá ativa.",
   "LogoutBtn": "Sair",
-  "LogoutDescription": "Observação. Todas as conexões ativas, exceto esta conexão, serão desconectadas, pois estão em uso no momento.",
+  "LogoutDescription": "Observação. Todas as sessões ativas, exceto a atual, serão encerradas. A sessão atual permanecerá ativa.",
   "LogoutFrom": "Sair de {{platform}} {{browser}}?",
   "MyProfile": "Meu perfil",
   "NotificationsChannels": "Canais de notificação",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Mostrar códigos de backup",
   "SuccessLogout": "A conexão ativa foi desconectada: {{platform}}, {{browser}}",
   "TelegramAccount": "Conta do Telegram",
-  "TelegramAccountDescription": "Para conectar o TelegramBot à sua conta, siga o link secreto e clique no botão “Conectar Telegram”.",
+  "TelegramAccountDescription": "Para receber notificações da sua conta no Telegram, siga o link abaixo ou clique em Conectar.",
   "TelegramAccountDisconnect": "Desconectar Telegram",
   "TelegramAccountDisconnectDescription": "Sua conta @{{username}} está conectada para receber notificações do Telegram. Você pode se desconectar desta conta. Nesse caso, você não receberá notificações.",
   "TerminateAllSessions": "Encerre todas as sessões, exceto a atual",
-  "TwoFactorDescription": "A autenticação de dois fatores por meio de um aplicativo de geração de código foi habilitada para todos os usuários pelo administrador."
+  "TwoFactorDescription": "A autenticação de dois fatores usando um aplicativo autenticador foi habilitada para todos os usuários pelo administrador."
 }

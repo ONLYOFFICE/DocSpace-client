@@ -3,7 +3,7 @@
   "content": "Activate",
   "content_en_sha1_hash": "92ef08325a4813563a3110359906076374683282",
   "created_at": "2025-05-19T21:30:42.888Z",
-  "updated_at": "2026-08-21T15:04:37.042Z",
+  "updated_at": "2026-09-04T07:59:41.554Z",
   "comment": {
     "text": "This is the label for a button. Clicking it activates a license after a file has been uploaded.",
     "is_auto": true,
@@ -51,6 +51,12 @@
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 468,
       "context": "} as const;\n \n const activateOrTopUpAI = isCardLinkedToPortal\n ? ({\n type: \"button\",\n title: t(\"Common:Activate\"),\n key: \"activate-ai\",\n onClick: actions.onActivateAI,\n isLoading: isActivating,\n } as const)\n : ({",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
+      "line_number": 129,
+      "context": "// Heading and button are deliberately the same on both tabs: together they say\n // what the page as a whole switches on, without repeating each other. What each\n // tab adds is said between them, by the description.\n const getBannerTexts = (t, isWebSearchTab) => ({\n activateTitle: t(\"Common:ActivateAIFeaturesToGetStarted\"),\n activateLabel: t(\"Common:Activate\"),\n ...(isWebSearchTab\n ? {\n activateDescription: t(\"Common:ActivateAISearchDescription\"),\n enabledTitle: t(\"Common:AISearchEnabledTitle\"),\n enabledDescription: t(\"Common:AISearchEnabledDescription\"),",
       "module": "/packages/client"
     },
     {

@@ -1,13 +1,13 @@
 {
   "key_path": "EmptyRecentDescription",
-  "content": "Files you recently opened appear here and remain in the list for 90 days.",
-  "content_en_sha1_hash": "fe647bfc96484832235f3893abda2034634b5fa2",
-  "created_at": "2026-08-21T15:04:01.859Z",
-  "updated_at": "2026-08-21T15:09:20.534Z",
+  "content": "Files you've recently opened show up here and stick around for 90 days.",
+  "content_en_sha1_hash": "a172a77b5d7340ac4f43dd8c45eafd3b8a2c0672",
+  "created_at": "2026-08-31T18:23:03.765Z",
+  "updated_at": "2026-08-31T19:13:42.263Z",
   "comment": {
-    "text": "Description text for an empty state view in the \"Recent\" section, explaining the behavior and 90-day retention period for recently opened files.",
+    "text": "Description text in an empty state view for the \"Recent\" section. It informs users that recently accessed files will appear here and remain for 90 days.",
     "is_auto": true,
-    "updated_at": "2026-08-21T15:09:20.534Z",
+    "updated_at": "2026-08-31T19:13:42.263Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -1,14 +1,14 @@
 {
   "key_path": "AdminsMessage",
-  "content": "Administrator Message Settings",
-  "content_en_sha1_hash": "accdf6092b6a057074bd1eada900a50effd27962",
-  "created_at": "2025-05-19T21:30:50.388Z",
-  "updated_at": "2026-08-14T14:58:32.832Z",
+  "content": "Administrator message",
+  "content_en_sha1_hash": "54f2dc02b2e58e2c2025d4950fae4658dbac7d95",
+  "created_at": "2026-08-31T18:23:40.285Z",
+  "updated_at": "2026-08-31T20:48:52.467Z",
   "comment": {
-    "text": "This is a section title in the portal settings, indicating where administrators can configure messages displayed to users.",
+    "text": "Section title in the Portal Settings menu that labels the configuration area for the administrator's message.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:55.627Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:48:52.467Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -212,12 +218,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

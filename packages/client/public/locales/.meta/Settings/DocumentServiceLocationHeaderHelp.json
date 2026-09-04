@@ -1,20 +1,19 @@
 {
   "key_path": "DocumentServiceLocationHeaderHelp",
-  "content": "Document Service is the server service which allows to perform the document editing and allows to convert the document file into the appropriate OfficeOpen XML format. Document service location specifies the address of the server with the document services installed.",
-  "content_en_sha1_hash": "cfefeceae1cc9f8ec4067b4e8fafd1c0a13a9378",
-  "created_at": "2025-05-19T21:30:51.377Z",
-  "updated_at": "2026-08-10T12:23:10.667Z",
+  "content": "Check the settings of the Docs service used by default in your cloud workspace to edit and convert files into OfficeOpen XML format.",
+  "content_en_sha1_hash": "67040fbcbe2606abb6fe838faa503cca0f10a3d9",
+  "created_at": "2026-09-04T07:59:35.672Z",
+  "updated_at": "2026-09-04T07:59:41.682Z",
   "comment": {
-    "text": "This is a help text displayed in the Document Service settings. It explains what the Document Service is and what the \"Document service location\" setting refers to.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:24:21.238Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 324,
-      "context": "return (\n <Styled.Location>\n <Styled.LocationHeader>\n <div className={styles.main}>\n {t(\"Settings:DocumentServiceLocationHeaderHelp\")}\n </div>\n {documentServiceSettingsUrl ? (\n <Link\n className={styles.thirdPartyLink}\n color={currentColorScheme.main?.accent}",
+      "line_number": 330,
+      "context": "return (\n <Styled.Location>\n <Styled.LocationHeader>\n <div className={styles.main}>\n {t(\"Settings:DocumentServiceLocationHeaderHelp\")}\n {/* Docs Connect is SaaS-only: a standalone portal has nothing to\n connect to, so the sentence that points at it is dropped rather\n than left as a link nobody here can follow. */}\n {showDocsConnectHint ? (\n <>",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +148,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +205,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,14 +1,14 @@
 {
   "key_path": "NoGroupsHere",
-  "content": "No groups here",
-  "content_en_sha1_hash": "791d7de61cae4792089d8aaef6c71b9af1483ff3",
-  "created_at": "2025-05-19T21:30:46.836Z",
-  "updated_at": "2026-06-01T21:20:44.450Z",
+  "content": "No groups yet",
+  "content_en_sha1_hash": "3a638d4444860a3779fd5f54cc127ed1c16602db",
+  "created_at": "2026-08-31T18:23:18.184Z",
+  "updated_at": "2026-08-31T18:52:15.267Z",
   "comment": {
-    "text": "This is a message displayed when no contact groups are found in the user's contacts list. It appears on an empty screen.",
+    "text": "Title for an empty state screen in the Contacts section, shown when no groups have been created.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:47:57.395Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:52:15.267Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

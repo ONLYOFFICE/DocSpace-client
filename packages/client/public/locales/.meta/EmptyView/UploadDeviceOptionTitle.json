@@ -1,14 +1,14 @@
 {
   "key_path": "UploadDeviceOptionTitle",
-  "content": "Upload from your Device",
-  "content_en_sha1_hash": "c766735fe84df9f06fa3ff2fbe6daa4d88c8afe4",
-  "created_at": "2025-05-19T21:30:56.546Z",
-  "updated_at": "2026-08-26T16:06:02.217Z",
+  "content": "Upload from device",
+  "content_en_sha1_hash": "37ea5a59d00e13d5967bc95d080fc94a3db0eb2a",
+  "created_at": "2026-09-04T07:59:38.597Z",
+  "updated_at": "2026-09-04T08:05:14.335Z",
   "comment": {
-    "text": "This is the title for an option that allows users to upload files from their local device. It appears in menus or dialogs where file upload options are presented.",
+    "text": "Label for a dropdown menu option or action item used to initiate file uploads from the user's local device.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:06:34.426Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-09-04T08:05:14.335Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -25,20 +25,32 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 491,
-      "context": "//   onClick: actions.onShowAIBenefits,\n // } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),",
+      "line_number": 334,
+      "context": "// TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );\n \n const uploadFromDevicePDF = createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUserOption = createInviteOption(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 491,
-      "context": "//   onClick: actions.onShowAIBenefits,\n // } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),",
+      "line_number": 334,
+      "context": "// TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );\n \n const uploadFromDevicePDF = createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUserOption = createInviteOption(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 491,
-      "context": "//   onClick: actions.onShowAIBenefits,\n // } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),",
+      "line_number": 334,
+      "context": "// TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );\n \n const uploadFromDevicePDF = createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUserOption = createInviteOption(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 334,
+      "context": "// TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );\n \n const uploadFromDevicePDF = createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUserOption = createInviteOption(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
+      "line_number": 107,
+      "context": "disabled: false,\n icon: UploadIcon,\n },\n {\n key: \"upload-from-device\",\n label: t(\"EmptyView:UploadDeviceOptionTitle\"),\n onClick: () => {\n setTimeout(() => {\n fileInputRef.current?.click();\n }, 100);\n },",
       "module": "/packages/client"
     },
     {
@@ -49,7 +61,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
-      "line_number": 183,
+      "line_number": 185,
       "context": "icon: <UploadPDFFormIcon />,\n onClick: onUploadFromDocSpace,\n },\n {\n key: \"knowledge-empty-upload-from-device\",\n title: t(\"EmptyView:UploadDeviceOptionTitle\", {\n defaultValue: \"Upload from device\",\n }),\n description: t(\"Common:UploadFilesDevice\", {\n defaultValue: \"Pick files from your device.\",\n }),",
       "module": "/packages/sdk"
     }
@@ -185,7 +197,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -200,6 +212,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

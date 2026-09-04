@@ -1,14 +1,14 @@
 {
   "key_path": "LoginHistoryCampaignText",
-  "content": "Safeguard your data and protect yourself and your team from potential hacking threats.",
-  "content_en_sha1_hash": "77bcb1a67be1509eac99a9664f722db921ef85b2",
-  "created_at": "2025-08-04T07:29:46.212Z",
-  "updated_at": "2026-08-14T14:58:32.896Z",
+  "content": "Protect your data and accounts from unauthorized access.",
+  "content_en_sha1_hash": "404d5dd5d7aa1dad7ce29e63af6c06566fa368d5",
+  "created_at": "2026-08-31T18:23:41.576Z",
+  "updated_at": "2026-08-31T20:27:22.831Z",
   "comment": {
-    "text": "This is a sentence in a banner promoting two-factor authentication. It explains the benefit of enabling 2FA for data security and protection against hacking.",
+    "text": "Body text in a security campaign banner used to encourage users to enable two-factor authentication.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:23:28.176Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:27:22.831Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -24,12 +24,6 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
-    },
-    "ru": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "ar-SA": {
       "ai_translated": false,
@@ -146,6 +140,12 @@
       "approved_at": null
     },
     "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

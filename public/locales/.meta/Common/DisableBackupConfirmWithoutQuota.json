@@ -3,7 +3,7 @@
   "content": "Disabling the Backup service will prevent Full admins from creating backups. If Auto Backup is enabled, it will be deactivated. Are you sure you want to continue?",
   "content_en_sha1_hash": "a2221c0fe60ba6977c6e5aec9e29e9fffc2804be",
   "created_at": "2026-08-13T14:36:46.437Z",
-  "updated_at": "2026-08-20T12:26:01.858Z",
+  "updated_at": "2026-08-31T18:23:51.041Z",
   "comment": {
     "text": "Confirmation dialog body text shown when disabling the Backup service on a free tariff, warning about the consequences for Full admins and Auto Backup settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
-      "line_number": 155,
+      "line_number": 156,
       "context": "title: t(\"Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"EnableBackupConfirm\")\n : isFreeTariff\n ? t(\"DisableBackupConfirmWithoutQuota\")\n : t(\"DisableBackupConfirm\"),\n };\n \n const onTopUp = () => {\n setIsTopUpVisible(true);",
       "module": "/libs/ui-kit"
     }

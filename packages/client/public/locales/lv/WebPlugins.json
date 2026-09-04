@@ -16,5 +16,5 @@
   "PluginSDK": "Pievienotājprogrammas SDK",
   "PluginSDKDescription": "Izmantojiet spraudņu SDK, lai pievienotu jaunas funkcijas, savienotu trešo pušu pakalpojumus vai uzlabotu esošo pieredzi. Zemāk apskatiet spraudņu paraugus, kuru pirmkods ir pieejams GitHub. Dodieties uz lapu <1>Spraudņi</1>, lai iespējotu tos savā darbvietā.",
   "PluginSDKInstruction": "<1>Izlasiet norādījumus</1>, lai izveidotu savus spraudņus.",
-  "UploadDescription": "Varat pievienot spraudņus, lai paplašinātu darbvietas funkcionalitāti ar papildu funkcijām. Noklikšķiniet uz Augšupielādēt spraudni vai nometiet failu ZIP arhīvā."
+  "UploadDescription": "Pievienojiet spraudņus, lai paplašinātu savu darbvietu ar papildu funkcijām. Iespējojiet kādu no saraksta zemāk vai noklikšķiniet uz \"Augšupielādēt spraudni\" (vai nometiet ZIP failu), lai pievienotu savu."
 }

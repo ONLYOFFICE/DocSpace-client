@@ -1,20 +1,20 @@
 {
   "key_path": "ActionsWithFilesDescription",
-  "content": "Badges will highlight file activity — uploads, edits, or shares — across the {{rooms}}, {{shared}}, {{documents}}, and {{aiAgents}} sections.",
-  "content_en_sha1_hash": "68ac712154af968e3b57abc3d744505a1701f1d2",
-  "created_at": "2025-11-27T11:56:59.096Z",
-  "updated_at": "2026-06-25T19:31:03.004Z",
+  "content": "Badges highlight file activities like uploads, edits, and shares across {{files}}, {{rooms}}, {{forms}}, and {{aiAgents}} apps.",
+  "content_en_sha1_hash": "316bd0c00a30dc7eac770fd5dd5d973e40a5b86e",
+  "created_at": "2026-08-31T18:23:43.429Z",
+  "updated_at": "2026-08-31T20:06:21.098Z",
   "comment": {
-    "text": "This is a description of the \"Badges\" notification setting. It explains that badges will highlight file activity (uploads, edits, shares) in various sections of the application. The variables `{{rooms}}`, `{{shared}}`, `{{documents}}`, and `{{aiAgents}}` are placeholders for the localized names of these sections.",
+    "text": "Informational text explaining that badges highlight file activity across various application modules, including {{files}}, {{rooms}}, {{forms}}, and {{aiAgents}}.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:18:06.985Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:06:21.098Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
       "line_number": 95,
-      "context": "isChecked={badgesSubscription}\n dataTestId=\"actions_rooms_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n rooms: t(\"Common:Rooms\"),\n shared: t(\"Common:SharedWithMe\"),\n documents: t(\"Common:Files\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}",
+      "context": "isChecked={badgesSubscription}\n dataTestId=\"actions_rooms_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

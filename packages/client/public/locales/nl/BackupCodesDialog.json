@@ -1,8 +1,8 @@
 {
   "BackupCodesDescription": "Gebruik back-up codes om in te loggen als u geen toegang hebt tot uw telefoon.",
-  "BackupCodesSecondDescription": "Elke code kan één keer gebruikt worden. U kunt op elk moment nieuwe codes krijgen. Alleen de laatst gegenereerde codes zijn geldig.",
+  "BackupCodesSecondDescription": "Elke code kan slechts één keer gebruikt worden. U kunt op elk moment nieuwe codes krijgen. Alleen de meest recent gegenereerde code is geldig.",
   "BackupCodesTitle": "Back-up codes",
-  "CodesCounter": "codes:",
+  "CodesCounter": "back-up codes:",
   "PrintButton": "Printen",
   "RequestNewButton": "Nieuw aanvragen"
 }

@@ -1,14 +1,14 @@
 {
   "key_path": "DNSSettings",
-  "content": "DNS Settings",
-  "content_en_sha1_hash": "7f2a7680272773297fb8efa578de3f25d6399c36",
-  "created_at": "2025-05-19T21:30:51.213Z",
-  "updated_at": "2026-06-01T21:20:44.461Z",
+  "content": "DNS",
+  "content_en_sha1_hash": "3ddc21b1eaa5ad6e57bb26bc517091c9b2d2e86d",
+  "created_at": "2026-08-31T18:23:40.984Z",
+  "updated_at": "2026-08-31T20:39:48.135Z",
   "comment": {
-    "text": "This is the title for a section in the portal settings where users can configure DNS settings. It appears as a clickable link in the navigation menu and as the heading of the DNS settings page.",
+    "text": "Navigation item title and page title for the DNS configuration section within the customization settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:24:31.100Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:39:48.135Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -182,6 +182,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -218,12 +224,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

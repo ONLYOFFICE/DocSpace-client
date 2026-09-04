@@ -58,7 +58,7 @@
   "PrivacyPolicy": "Politika e privatësisë",
   "PrivacyPolicyURL": "URL e politikës së privatësisë",
   "PrivacyPolicyURLHelpButton": "Jepni një lidhje URL në Politikën tuaj të Privatësisë që duhet të jetë në përputhje me ligjet dhe rregulloret në fuqi dhe që të bëjë të qartë se si ju mbledhni, përdorni, ndani, ruani dhe përpunoni ndryshe informacionin personal.",
-  "ProfileDescription": "Këtu mund të kontrolloni informacionet e aplikacioneve të cilave u keni dhënë aksesin e autorizimit dhe të anuloni pëlqimin nëse është e nevojshme.",
+  "ProfileDescription": "Shikoni aplikacionet që keni autorizuar të aksesojnë llogarinë tuaj dhe anuloni aksesin nëse është e nevojshme.",
   "Read": "Lexoni",
   "ReadOAuthGuide": "Lexoni udhëzuesin e OAuth 2.0",
   "RedirectsURLS": "Ridrejton URL-të",

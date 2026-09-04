@@ -1,19 +1,19 @@
 {
-  "ActionsWithFilesDescription": "Các huy hiệu sẽ làm nổi bật hoạt động tệp — tải lên, chỉnh sửa hoặc chia sẻ — trên các mục {{rooms}}, {{shared}}, {{documents}} và {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Danh hiệu làm nổi bật các hoạt động tệp như tải lên, chỉnh sửa và chia sẻ trong các ứng dụng {{files}}, {{rooms}}, {{forms}} và {{aiAgents}}.",
   "AdminSetupRequired": "Thiết lập quản trị viên cần thiết",
   "Badges": "Danh hiệu",
   "DailyFeed": "Nguồn cấp dữ liệu {{organizationName}} {{productName}} hàng ngày",
-  "DailyFeedDescription": "Đọc tin và sự kiện từ {{organizationName}} {{productName}} của bạn trong một bản tóm tắt hàng ngày.",
+  "DailyFeedDescription": "Nhận bản tóm tắt hàng ngày về tin tức và sự kiện từ {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Thông báo hoạt động tệp",
   "IsNotValid": "Không hợp lệ",
   "LdapEmailTooltip": "Tài khoản người dùng này được tải từ LDAP. Địa chỉ email của người dùng không được chỉ định, và địa chỉ hiện tại được tạo tự động và không thể sử dụng để gửi thông báo.",
   "NotConfigured": "Chưa được cấu hình",
   "Notifications": "Thông báo",
-  "RoomsActivityDescription": "Nhận thông báo email tức thì về các tệp/thư mục được chia sẻ mới và hoạt động bên trong {{rooms}} và {{aiAgents}} của bạn.",
-  "RoomUpdateNotify": "Nội dung được chia sẻ, hoạt động của {{rooms}} và {{aiAgents}}",
-  "SettingUpNotifications": "Thiết lập thông báo",
+  "RoomsActivityDescription": "Nhận thông báo email tức thì về các tệp và thư mục mới được chia sẻ và về hoạt động trong {{files}}, {{rooms}}, {{forms}} và {{aiAgents}}.",
+  "RoomUpdateNotify": "Hoạt động trong {{files}}, {{rooms}}, {{forms}} và {{aiAgents}}",
+  "SettingUpNotifications": "Cài đặt thông báo",
   "SuccessConnected": "{{serviceName}} đã được kết nối thành công như một kênh thông báo. Bạn sẽ nhận được thông báo ở đó từ bây giờ.",
   "SuccessDisconnected": "{{serviceName}} đã được hủy kết nối thành công như một kênh thông báo. Thông báo sẽ không còn được gửi đến đó.",
   "UsefulTips": "Các mẹo hữu ích sử dụng {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Nhận hướng dẫn hữu ích về {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Khám phá các mẹo và hướng dẫn hữu ích để sử dụng {{organizationName}} {{productName}}."
 }

@@ -121,22 +121,24 @@ const useAnimatedHeight = (ref, key) => {
   });
 };
 
-const getBannerTexts = (t, isWebSearchTab) =>
-  isWebSearchTab
+// Heading and button are deliberately the same on both tabs: together they say
+// what the page as a whole switches on, without repeating each other. What each
+// tab adds is said between them, by the description.
+const getBannerTexts = (t, isWebSearchTab) => ({
+  activateTitle: t("Common:ActivateAIFeaturesToGetStarted"),
+  activateLabel: t("Common:Activate"),
+  ...(isWebSearchTab
     ? {
-        activateTitle: t("Common:ActivateAISearchToGetStarted"),
         activateDescription: t("Common:ActivateAISearchDescription"),
-        activateLabel: t("Common:ActivateAISearch"),
         enabledTitle: t("Common:AISearchEnabledTitle"),
         enabledDescription: t("Common:AISearchEnabledDescription"),
       }
     : {
-        activateTitle: t("Common:ActivateAIFeaturesToGetStarted"),
         activateDescription: t("Common:GetAccessToAIModels"),
-        activateLabel: t("Common:ActivateAIFeatures"),
         enabledTitle: t("Common:AIFeaturesEnabled"),
         enabledDescription: t("Common:AIFeaturesEnabledDescription"),
-      };
+      }),
+});
 
 const AIFeaturesBanner = ({
   currentDeviceType,

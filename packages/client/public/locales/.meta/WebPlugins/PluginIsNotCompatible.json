@@ -3,7 +3,7 @@
   "content": "The plugin SDK version doesn’t match the {{organizationName}} {{productName}} version. Please update to a compatible version.",
   "content_en_sha1_hash": "5db0c3cddcf79db6e5fd973b5b0020934208a0f2",
   "created_at": "2026-08-13T22:44:28.592Z",
-  "updated_at": "2026-08-20T12:26:01.740Z",
+  "updated_at": "2026-09-04T07:59:41.599Z",
   "comment": {
     "text": "Error toast and tooltip message appearing when the plugin SDK version is incompatible with the current product version. Includes {{organizationName}} and {{productName}} variables.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginItem.tsx",
-      "line_number": 87,
-      "context": "const onOpenSettingsDialog = () => {\n openSettingsDialog?.(name);\n };\n \n const incompatibleTooltip = t(\"WebPlugins:PluginIsNotCompatible\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n });\n \n const badgeId = `plugin_version_${name}_badge`;",
+      "line_number": 123,
+      "context": "const onToggleDescription = () => {\n setIsDescriptionExpanded((value) => !value);\n };\n \n const incompatibleTooltip = t(\"WebPlugins:PluginIsNotCompatible\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n });\n \n const badgeId = `plugin_version_${name}_badge`;",
       "module": "/packages/client"
     }
   ],

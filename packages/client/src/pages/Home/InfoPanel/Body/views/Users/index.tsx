@@ -57,7 +57,11 @@ import { UserStore } from "@docspace/shared/store/UserStore";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
-import { getContactsUrl, TPeopleListItem } from "SRC_DIR/helpers/contacts";
+import {
+	getContactsUrl,
+	USER_TYPE_DROPDOWN_WIDTH,
+	TPeopleListItem,
+} from "SRC_DIR/helpers/contacts";
 import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOptionsStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
@@ -207,7 +211,7 @@ const Users = ({
 				displaySelectedOption
 				modernView
 				fillIcon
-				manualWidth="auto"
+				manualWidth={USER_TYPE_DROPDOWN_WIDTH}
 				isLoading={isLoading}
 			/>
 		);

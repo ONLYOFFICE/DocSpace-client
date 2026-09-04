@@ -1,13 +1,13 @@
 {
   "key_path": "DefaultLinkTypeInternal",
-  "content": "workspace users only",
-  "content_en_sha1_hash": "e5c524b006a5e9c08b1a543ab14a02b1d0d47095",
-  "created_at": "2026-08-13T22:44:29.204Z",
-  "updated_at": "2026-08-14T15:38:49.752Z",
+  "content": "Workspace users only",
+  "content_en_sha1_hash": "1f0413a0cabd7d35b1a0f07a502594b854c97168",
+  "created_at": "2026-08-31T18:23:40.796Z",
+  "updated_at": "2026-08-31T20:38:15.516Z",
   "comment": {
-    "text": "Label for a selection option in the portal security settings that restricts link access to members of the current workspace.",
+    "text": "Label for a selection option in the Portal Settings security section, indicating that default links are restricted to members of the workspace.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:38:49.752Z",
+    "updated_at": "2026-08-31T20:38:15.516Z",
     "model": "gemma4:26b"
   },
   "usage": [

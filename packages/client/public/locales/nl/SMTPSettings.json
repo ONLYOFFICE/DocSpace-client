@@ -8,7 +8,7 @@
   "HostLogin": "Host login",
   "HostPassword": "Host Wachtwoord",
   "Port": "Poort",
-  "SenderDisplayName": "Zender Weergave Naam",
-  "SenderEmailAddress": "E-mailadres Zender",
-  "SendTestMail": "Testmail Sturen"
+  "SenderDisplayName": "Zender weergavenaam",
+  "SenderEmailAddress": "E-mailadres zender",
+  "SendTestMail": "Testmail sturen"
 }

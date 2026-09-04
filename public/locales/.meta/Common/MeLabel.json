@@ -3,7 +3,7 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2026-08-24T22:30:00.596Z",
+  "updated_at": "2026-09-04T07:59:41.537Z",
   "comment": {
     "text": "This label appears next to a user's name to indicate that the user is the current user. It is displayed in parentheses.",
     "is_auto": true,
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/Users/TableView/TableRow.tsx",
-      "line_number": 336,
+      "line_number": 337,
       "context": ": displayName?.trim()\n ? displayName\n : email}\n {isMe?.(id) ? (\n <Text className=\"me-label\" fontWeight=\"600\" fontSize=\"13px\">\n ({t(\"Common:MeLabel\")})\n </Text>\n ) : null}\n </Text>\n <Badges\n statusType={statusType}",
       "module": "/packages/client"
     },

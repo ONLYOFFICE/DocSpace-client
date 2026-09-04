@@ -3,7 +3,7 @@
   "content": "Document",
   "content_en_sha1_hash": "e214b8a29923056887b7edf6635d90dcbb2abe88",
   "created_at": "2025-05-19T21:30:44.571Z",
-  "updated_at": "2026-08-26T16:06:02.217Z",
+  "updated_at": "2026-08-31T18:23:50.558Z",
   "comment": {
     "text": "This is a button label or option label for creating or converting a document. It appears in menus and dialogs where users can choose to create a new document or convert a file to a document format.",
     "is_auto": true,
@@ -57,6 +57,12 @@
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
       "line_number": 71,
       "context": "case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.OForm:\n case FileType.OFormTemplate:\n case FileType.PDF: {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 255,
+      "context": "(parentRoomType === FolderType.FormRoom && isFolder);\n \n const createNewDoc: TContextOption = {\n id: \"personal_new-document\",\n key: \"new-document\",\n label: t(\"Common:Document\"),\n onClick: () => self.onCreate(\"docx\"),\n icon: ActionsDocumentsReactSvgUrl,\n };\n \n const createNewSpreadsheet = {",
       "module": "/packages/client"
     },
     {

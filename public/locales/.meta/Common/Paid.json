@@ -3,7 +3,7 @@
   "content": "Paid",
   "content_en_sha1_hash": "dc9d4584a55464cd571719ee0066acb16d411f86",
   "created_at": "2025-05-19T21:30:47.223Z",
-  "updated_at": "2026-08-19T13:26:37.702Z",
+  "updated_at": "2026-09-04T07:59:41.600Z",
   "comment": {
     "text": "This is a short label indicating a paid status. It appears on a badge or as part of a user's status description.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/drop-down-item/index.tsx",
-      "line_number": 161,
-      "context": "const t = useCommonTranslation();\n const { isRTL } = useInterfaceDirection();\n const { isBase } = useTheme();\n \n const resolvedBetaLabel = betaLabel || getConstName(\"BetaLabel\") || \"\";\n const resolvedPaidLabel = paidLabel || t(\"Paid\") || \"\";\n \n const withDisabledTooltip = disabled && tooltip;\n \n const handleMouseDown = (e: React.MouseEvent<HTMLElement>) => {\n // Stop propagation to prevent click-outside detection from closing dropdown",
+      "line_number": 162,
+      "context": "const t = useCommonTranslation();\n const { isRTL } = useInterfaceDirection();\n const { isBase } = useTheme();\n \n const resolvedBetaLabel = betaLabel || getConstName(\"BetaLabel\") || \"\";\n const resolvedPaidLabel = paidLabel || t(\"Paid\") || \"\";\n \n const withDisabledTooltip = disabled && tooltip;\n const hasDescription = Boolean(description);\n \n const labelNode = (",
       "module": "/libs/ui-kit"
     },
     {
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 234,
+      "line_number": 238,
       "context": "const typeData = renderTypeData();\n \n const { isVisitor, isCollaborator } = userSelection;\n \n const statusText =\n isVisitor || isCollaborator ? t(\"Common:Free\") : t(\"Common:Paid\");\n \n if (!ready) return <InfoPanelViewLoader view=\"users\" />;\n \n return (\n <>",
       "module": "/packages/client"
     },
@@ -145,14 +145,14 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 365,
-      "context": "id: \"menu_change-user_administrator\",\n className: \"group-menu_drop-down\",\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n title: getUserTypeTranslation(EmployeeType.Admin, t),\n icon: PersonAdminReactSvgUrl,\n badgeLabel: isGuests && !standalone ? t(\"Common:Paid\") : undefined,\n isPaidBadge: !standalone,\n onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),\n \"data-action\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: EmployeeType.Admin,",
+      "line_number": 370,
+      "context": "className: \"group-menu_drop-down\",\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n title: getUserTypeTranslation(EmployeeType.Admin, t),\n description: getDescription(EmployeeType.Admin),\n icon: PersonAdminReactSvgUrl,\n badgeLabel: isGuests && !standalone ? t(\"Common:Paid\") : undefined,\n isPaidBadge: !standalone,\n onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),\n \"data-action\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: EmployeeType.Admin,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 365,
-      "context": "id: \"menu_change-user_administrator\",\n className: \"group-menu_drop-down\",\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n title: getUserTypeTranslation(EmployeeType.Admin, t),\n icon: PersonAdminReactSvgUrl,\n badgeLabel: isGuests && !standalone ? t(\"Common:Paid\") : undefined,\n isPaidBadge: !standalone,\n onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),\n \"data-action\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: EmployeeType.Admin,",
+      "line_number": 370,
+      "context": "className: \"group-menu_drop-down\",\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n title: getUserTypeTranslation(EmployeeType.Admin, t),\n description: getDescription(EmployeeType.Admin),\n icon: PersonAdminReactSvgUrl,\n badgeLabel: isGuests && !standalone ? t(\"Common:Paid\") : undefined,\n isPaidBadge: !standalone,\n onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),\n \"data-action\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: EmployeeType.Admin,",
       "module": "/packages/client"
     },
     {
@@ -199,26 +199,26 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 154,
-      "context": "sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },\n roomAdmin: {",
+      "line_number": 119,
+      "context": "key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n }),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },\n roomAdmin: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 154,
-      "context": "sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },\n roomAdmin: {",
+      "line_number": 119,
+      "context": "key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n }),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },\n roomAdmin: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 154,
-      "context": "sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },\n roomAdmin: {",
+      "line_number": 119,
+      "context": "key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n }),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },\n roomAdmin: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 154,
-      "context": "sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },\n roomAdmin: {",
+      "line_number": 119,
+      "context": "key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n }),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },\n roomAdmin: {",
       "module": "/packages/shared"
     }
   ],

@@ -1,14 +1,14 @@
 {
   "key_path": "PortalRenamingNote",
-  "content": "<strong>Note:</strong> Your old space address will become unavailable to new users once you click the Save button.",
-  "content_en_sha1_hash": "2c9edfd2e118ab897a57d7d5168c0a41b4ae4d12",
-  "created_at": "2025-05-19T21:30:52.293Z",
-  "updated_at": "2026-08-14T14:58:32.782Z",
+  "content": "<strong>Note:</strong> Once you click Save, your old address will stop working for new users.",
+  "content_en_sha1_hash": "d62f1d4d2573012aff827aaca27396a3d6b32ff8",
+  "created_at": "2026-08-31T18:23:41.819Z",
+  "updated_at": "2026-08-31T20:22:13.794Z",
   "comment": {
-    "text": "This is a note displayed below the portal renaming input field. It informs the user about the consequence of changing their space address.",
+    "text": "A warning note within the portal renaming settings description; includes an `<strong>` tag for the \"Note:\" prefix.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:22:52.295Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:22:13.794Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

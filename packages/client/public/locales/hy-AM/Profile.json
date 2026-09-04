@@ -2,7 +2,7 @@
   "ActiveSessions": "Ակտիվ սեսիաներ",
   "AutoDeleteTitle": "60 օրից բոլոր հին սեանսները ինքնաբերաբար կջնջվեն։",
   "ChangePasswordAfterLoggingOut": "Դուրս գալուց հետո փոխեք գաղտնաբառը",
-  "ConnectSocialNetworks": "Միացրեք ձեր սոցիալական ցանցերը",
+  "ConnectSocialNetworks": "Միացրեք ձեր հաշիվները",
   "DescriptionForSecurity": "Ավելի լավ անվտանգության համար դուք պետք է փոխեք ձեր գաղտնաբառը:",
   "DesktopTheme": "Համաժամեցրեք աշխատասեղանի խմբագրիչի կարգավորումների հետ",
   "DesktopThemeDescription": "Ավտոմատ կերպով անցում կատարեք բաց և մուգ թեմաների միջև՝ կախված աշխատասեղանի խմբագիրների ընթացիկ թեմայից:",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "Էլփոստը հաստատված չէ",
   "ErrorAccountAlreadyUse": "Կապված հաշիվն արդեն օգտագործվում է մեկ այլ օգտվողի կողմից",
   "LogoutActiveConnection": "Դուրս եկեք ակտիվ կապից",
-  "LogoutAllActiveSessionsDescription": "Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",
+  "LogoutAllActiveSessionsDescription": "Բոլոր ակտիվ սեսիաները, բացի ընթացիկից, կդադարեցվեն: Ընթացիկ սեսիան կմնա ակտիվ:",
   "LogoutBtn": "Դուրս գալ",
-  "LogoutDescription": "Նշում. Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",
+  "LogoutDescription": "Նշում. Բոլոր ակտիվ սեսիաները, բացի ընթացիկից, կդադարեցվեն: Ընթացիկ սեսիան կմնա ակտիվ:",
   "LogoutFrom": "Դուրս գալ {{platform}} {{browser}}-ից՞",
   "MyProfile": "Իմ էջը",
   "NotificationsChannels": "Ծանուցումների ալիքներ",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Ցույց տալ պահուստային կոդերը",
   "SuccessLogout": "Ակտիվ կապը դուրս է եկել՝ {{platform}}, {{browser}}",
   "TelegramAccount": "Telegram հաշիվ",
-  "TelegramAccountDescription": "Ձեր հաշիվը TelegramBot-ին միացնելու համար հետևեք գաղտնի հղմանը և սեղմեք «Միացնել Telegram» կոճակը։",
+  "TelegramAccountDescription": "Telegram-ում Ձեր հաշվի ծանուցումներ ստանալու համար հետևեք ստորև նշված հղմանը կամ սեղմեք «Միացնել» կոճակը։",
   "TelegramAccountDisconnect": "Անջատել Telegram-ը",
   "TelegramAccountDisconnectDescription": "Ձեր @{{username}} հաշիվը միացված է Telegram ծանուցումների համար։ Կարող եք անջատել այս հաշվից։ Այդ դեպքում այլևս ծանուցումներ չեք ստանա։",
   "TerminateAllSessions": "Դադարեցնել բոլոր սեանսները, բացի ընթացիկից",
-  "TwoFactorDescription": "Ադմինիստրատորի կողմից բոլոր օգտատերերի համար միացվել է երկփուլային նույնականացումը կոդ ստեղծող հավելվածի միջոցով:"
+  "TwoFactorDescription": "Հաստատող հավելվածով երկգործոն նույնականացումը միացվել է բոլոր օգտատերերի համար ադմինիստրատորի կողմից:"
 }

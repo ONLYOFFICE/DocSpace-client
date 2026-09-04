@@ -125,8 +125,8 @@ importers:
         specifier: file:onlyoffice-ai-chat-0.5.82.tgz
         version: file:libs/ui-kit/onlyoffice-ai-chat-0.5.82.tgz(df0f92bb32183b734d32af4b491fc1b6)
       '@onlyoffice/docspace-api-sdk':
-        specifier: file:onlyoffice-docspace-api-sdk-3.7.0.tgz
-        version: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
+        specifier: ^3.7.0
+        version: 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
       '@onlyoffice/document-editor-react':
         specifier: 2.1.1
         version: 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -3497,9 +3497,8 @@ packages:
       zustand:
         optional: true
 
-  '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz':
-    resolution: {integrity: sha512-QllfkKJOZzgVmN+VMD9+r/vCwY2xHmxdFIZN9TNpg7Ea7fi9Q3UNAZQPmnTMu6DlEuBb0Ztc188Bca2RK0nhrg==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz}
-    version: 3.7.0
+  '@onlyoffice/docspace-api-sdk@3.7.0':
+    resolution: {integrity: sha512-zzhvkBZj7RelLDxGg/OnonG2vFwurlI2FaPSSHPiYXosu5y4lopQnSkoxoZ1uXgnWAKREjt1d0p+nkdtTH5xkA==}
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz':
     resolution: {integrity: sha512-XPBkxQmInpMBYzcerhpk/UqeAl4HQDADgkYuHMu+bjoIa8cTgSPiGqw6OBXk5Ft0XZvZi/w5Lc+fSVdYfpgLvA==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz}
@@ -12302,7 +12301,7 @@ snapshots:
       tailwind-merge: 3.6.0
       zustand: 5.0.15(@types/react@19.2.10)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
 
-  '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)':
+  '@onlyoffice/docspace-api-sdk@3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
       axios: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
     transitivePeerDependencies:

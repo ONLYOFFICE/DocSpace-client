@@ -36,18 +36,6 @@
 import type { TagClickEvent, TagType } from "@docspace/ui-kit/components/tag";
 import type { EDIT_TAG_FORM_NAME } from "./TagManagement.constants";
 
-/**
- * A tag action that runs in two observable steps.
- *
- * The first `next()` resolves once the user has answered the confirmation
- * dialog and yields that answer, so the caller knows whether a request is
- * about to be sent. The second `next()` performs it and settles when it is
- * done - it rejects if the request failed. A declined confirmation is a
- * `false` value, not an error.
- */
-
-export type TagActionFlow = AsyncGenerator<boolean, void, void>;
-
 export type AccessTagManagement = {
   canRemove?: boolean;
   canCreate?: boolean;
@@ -61,8 +49,8 @@ export interface TagManagementPopupProps {
   onClose: VoidFunction;
   anchor: React.RefObject<HTMLElement | null>;
 
-  onEditTag?: (oldLabel: string, newLabel: string) => TagActionFlow;
-  onDeleteTag?: (label: string) => TagActionFlow;
+  onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>;
+  onDeleteTag?: (label: string) => Promise<void>;
   onTagsChanged?: VoidFunction;
 
   roomName: string;
@@ -76,15 +64,13 @@ export type TTag = {
 
 export interface TagManagementProviderProps {
   children: React.ReactNode;
+  fetchedTags: string[];
   roomTags: Array<TagType | string>;
-  roomId: string | number;
   access: AccessTagManagement;
 }
 export interface ITagManagementStateContext {
-  /** Derived from the tags query, the room and the running mutations. */
   tags: TTag[];
-  /** Labels with an operation still in flight, for the per-row loaders. */
-  pendingLabels: ReadonlySet<string>;
+  setTags: React.Dispatch<React.SetStateAction<TTag[]>>;
   searchValue: string;
   deferredSearchValue: string;
   filteredTags: TTag[];
@@ -95,7 +81,7 @@ export interface ITagManagementStateContext {
   access: AccessTagManagement;
 }
 
-export type TagManagementContextValue = ITagManagementStateContext;
+export type TagManagementContextValue = ITagManagementStateContext
 
 export interface UpdateTagNameParams {
   oldLabel: string;
@@ -105,8 +91,8 @@ export interface UpdateTagNameParams {
 export interface TagManagementContentProps {
   roomId: string | number;
 
-  onDeleteTag?: (label: string) => TagActionFlow;
-  onEditTag?: (oldLabel: string, newLabel: string) => TagActionFlow;
+  onDeleteTag?: (label: string) => Promise<void>;
+  onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>;
   onTagsChanged?: VoidFunction;
 }
 
@@ -131,43 +117,3 @@ export interface TagManagementProps {
 export interface FormValues {
   [EDIT_TAG_FORM_NAME]: string;
 }
-
-/** One mutation as the tag list reads it out of the mutation cache. */
-export type MutationSnapshot = {
-  variables: unknown;
-  isPending: boolean;
-  /**
-   * When the request was sent.
-   *
-   * A tag name can be freed and taken again, so two records can address the
-   * same name while describing different tags. Which one is still speaking
-   * about the tag on screen is a question of order, and nothing else in the
-   * record answers it.
-   */
-  submittedAt: number;
-};
-
-/** A rename, and whether its request is still running. */
-export type TagRename = {
-  to: string;
-  isPending: boolean;
-};
-
-/** What the running (and just finished) mutations say about the tags. */
-export type TagMutationOverlay = {
-  /** Tags being created here, the most recently started one first. */
-  created: readonly string[];
-  /** Tags a delete has already gone through for. */
-  removed: ReadonlySet<string>;
-  /** Old label -> the rename applying to it. */
-  renamed: ReadonlyMap<string, TagRename>;
-  /** Label -> the room membership a bind is applying. */
-  bound: ReadonlyMap<string, boolean>;
-  /** Labels with an operation still in flight, under both their names. */
-  pending: ReadonlySet<string>;
-};
-
-export type RoomTagList = {
-  tags: TTag[];
-  pendingLabels: ReadonlySet<string>;
-};

@@ -34,7 +34,6 @@
  */
 
 import classNames from "classnames";
-import { useTranslation } from "react-i18next";
 import { useForm, Controller } from "react-hook-form";
 import React, { useCallback, useMemo, useState } from "react";
 
@@ -43,11 +42,9 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
-import { ButtonKeys } from "@docspace/ui-kit/enums";
 import { Tag } from "@docspace/ui-kit/components/tag";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import {
@@ -60,20 +57,20 @@ import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 
 import { useTagManagement } from "./TagManagement.provider";
 import { useUpdateTag } from "./hooks/useTagsQuery";
-import { isTagNameTaken, stopPropagation } from "./TagManagement.utils";
+import { stopPropagation } from "./TagManagement.utils";
 import styles from "./TagManagement.module.scss";
 import {
   ROW_HEIGHT,
   ICON_SIZE,
-  LOADER_SIZE,
   MAX_BODY_HEIGHT,
   MARGIN_BOTTOM,
+  EDIT_CANCELLED,
+  DELETE_CANCELLED,
   EDIT_TAG_FORM_NAME,
 } from "./TagManagement.constants";
 import type {
   FormValues,
   TagManagementContentProps,
-  TTag,
 } from "./TagManagement.types";
 
 export const TagManagementContent: React.FC<TagManagementContentProps> = ({
@@ -89,12 +86,11 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     shouldUnregister: true,
   });
 
-  const { t } = useTranslation("Common");
   const isMobile = useIsMobile();
   const {
-    tags,
     filteredTags,
-    pendingLabels,
+    tags,
+    setTags,
     access: { canEdit, canRemove, canBindTag },
   } = useTagManagement();
 
@@ -103,31 +99,41 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   const [editingLabel, setEditingLabel] = useState<string | null>(null);
 
   const toggleChecked = useCallback(
-    async (tag: TTag) => {
-      try {
-        // Toggling the row that is being renamed is the one case where the
-        // editor must close - its unsaved name is about the row's old state.
-        // A toggle on any other row leaves an open editor alone.
-        setEditingLabel((current) => (current === tag.label ? null : current));
+    (label: string) => {
+      const originalTags = [...tags];
+      const updatedTags = [...tags];
+      const tagIndex = updatedTags.findIndex((tag) => tag.label === label);
 
-        await updateTag.mutateAsync({ ...tag, checked: !tag.checked });
+      if (tagIndex === -1) return;
 
-        onTagsChanged?.();
-      } catch (error) {
-        console.error("Failed to update room tags:", error);
-        toastr.error(error instanceof Error ? error : new Error(String(error)));
-      }
+      updatedTags[tagIndex] = {
+        ...updatedTags[tagIndex],
+        checked: !updatedTags[tagIndex].checked,
+      };
+
+      updateTag.mutate(updatedTags[tagIndex], {
+        onSuccess: () => {
+          setTags(updatedTags);
+          onTagsChanged?.();
+        },
+        onError: (error) => {
+          toastr.error(error);
+          console.error("Failed to update room tags:", error);
+          setTags(originalTags);
+        },
+      });
     },
-    [updateTag, onTagsChanged],
+    [tags, updateTag, onTagsChanged],
   );
 
   const handleEdit = useCallback(
-    (label: string) => {
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>, label: string) => {
+      stopPropagation(event);
       setEditingLabel(label);
 
       setValue(EDIT_TAG_FORM_NAME, label);
     },
-    [setValue],
+    [tags, setValue],
   );
 
   const cancelEdit = useCallback(() => {
@@ -142,11 +148,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
       const newLabel = submitValue[EDIT_TAG_FORM_NAME].trim();
       const oldLabel = editingLabel;
 
-      // Case-insensitively, like the server: files_tag.name lives under a
-      // ci collation, so a case-only change of the tag's own name is "the
-      // same name" to it and would be refused as a duplicate. The same name
-      // is nothing to send - the editor just closes.
-      if (newLabel.toLowerCase() === oldLabel.toLowerCase()) {
+      if (newLabel === oldLabel) {
         return cancelEdit();
       }
 
@@ -155,72 +157,44 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         return;
       }
 
-      // The whole list, not the filtered one: a tag the search is hiding is
-      // still a tag the rename would collide with.
-      if (isTagNameTaken(tags, newLabel, oldLabel)) {
-        // Nothing is sent and the row stays in edit mode, so the name can be
-        // corrected instead of retyped.
-        toastr.error(t("Common:TagAlreadyExists", { tagName: newLabel }));
-        return;
-      }
-
-      const flow = onEditTag?.(oldLabel, newLabel);
-
       try {
-        if (flow) {
-          // Step one of the flow only settles the confirmation dialog, before
-          // anything is sent - so a declined rename is a value, not an error.
-          const { value: confirmed } = await flow.next();
-
-          if (!confirmed) {
-            // Settle the generator instead of leaving it parked on its yield.
-            await flow.return();
-            return;
-          }
-        }
-
-        await flow?.next();
-
-        // Only now that the rename went through: closing the editor earlier
-        // resets the form, and a failed request would leave nothing to retry
-        // or correct - the typed name would have to be entered again.
+        await onEditTag?.(oldLabel, newLabel);
+        setTags((prev) =>
+          prev.map((tag) =>
+            tag.label === oldLabel ? { ...tag, label: newLabel } : tag,
+          ),
+        );
         cancelEdit();
       } catch (error) {
-        // While the request ran, the row was listed under the pending new name
-        // and the editor was unmounted with it - which is when shouldUnregister
-        // wiped the field. Put the name back, so the reopened editor has
-        // something to correct and retry.
-        setValue(EDIT_TAG_FORM_NAME, newLabel);
+        if (error === EDIT_CANCELLED) return;
 
+        toastr.error(error as Error);
         console.error("Failed to update tag name:", error);
-        toastr.error(error instanceof Error ? error : new Error(String(error)));
       }
     },
-    [editingLabel, cancelEdit, onEditTag, tags, t, setValue],
+    [editingLabel, tags, cancelEdit, onEditTag],
   );
 
   const deleteTag = useCallback(
-    async (tag: string) => {
-      const flow = onDeleteTag?.(tag);
+    async (
+      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+      tag: string,
+    ) => {
+      stopPropagation(event);
 
       try {
-        if (flow) {
-          const { value: confirmed } = await flow.next();
+        await onDeleteTag?.(tag);
 
-          if (!confirmed) {
-            // Settle the generator instead of leaving it parked on its yield.
-            await flow.return();
-            return;
-          }
-        }
-
-        await flow?.next();
+        const updatedTags = tags.filter((t) => t.label !== tag);
+        setTags(updatedTags);
       } catch (error) {
+        if (error === DELETE_CANCELLED) return;
+
+        toastr.error(error as Error);
         console.error("Failed to remove room tag:", error);
-        toastr.error(error instanceof Error ? error : new Error(String(error)));
       }
     },
-    [onDeleteTag],
+    [tags, onDeleteTag],
   );
 
   const editTagHandleKey = useCallback(
@@ -255,31 +229,17 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
       <Scrollbar fixedSize className={styles.scrollbar}>
         {filteredTags.map((tag) => {
           const isEditing = editingLabel === tag.label;
-          // A tag being renamed, deleted or bound cannot take another operation
-          // until the running one is done.
-          const isPending = pendingLabels.has(tag.label);
-          const isRowClickable = canBindTag && !isEditing && !isPending;
+          const isRowClickable = canBindTag && !isEditing;
 
           return (
             <div
               key={tag.label}
               className={classNames(styles.row, {
                 [styles.rowClickable]: isRowClickable,
-                [styles.rowPending]: isPending,
               })}
-              onClick={isRowClickable ? () => toggleChecked(tag) : undefined}
-              onKeyDown={
-                isRowClickable
-                  ? (event) => {
-                      if (event.key !== ButtonKeys.enter) return;
-
-                      event.preventDefault();
-                      toggleChecked(tag);
-                    }
-                  : undefined
+              onClick={
+                isRowClickable ? () => toggleChecked(tag.label) : undefined
               }
-              role={isRowClickable ? "button" : undefined}
-              tabIndex={isRowClickable ? 0 : undefined}
               data-testid={`tag_row_${tag.label}`}
             >
               {/* The checkbox toggles through its own onChange, so its click
@@ -288,30 +248,13 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                 onClick={stopPropagation}
                 className={styles.checkboxWrapper}
               >
-                {isPending ? (
-                  <span
-                    className={styles.checkboxLoader}
-                    style={{ width: LOADER_SIZE, height: LOADER_SIZE }}
-                    data-testid={`tag_loader_${tag.label}`}
-                  >
-                    <Loader
-                      primary
-                      size={`${LOADER_SIZE}px`}
-                      type={LoaderTypes.track}
-                    />
-                  </span>
-                ) : (
-                  <Checkbox
-                    isChecked={tag.checked}
-                    // Disabled while the row is being renamed: binding clears
-                    // the editor, and the name typed into it would be thrown
-                    // away without a word.
-                    isDisabled={!canBindTag || isEditing}
-                    className={styles.checkbox}
-                    onChange={() => toggleChecked(tag)}
-                    dataTestId={`tag_checkbox_${tag.label}`}
-                  />
-                )}
+                <Checkbox
+                  isChecked={tag.checked}
+                  isDisabled={!canBindTag}
+                  className={styles.checkbox}
+                  onChange={() => toggleChecked(tag.label)}
+                  dataTestId={`tag_checkbox_${tag.label}`}
+                />
               </span>
               {isEditing ? (
                 <>
@@ -364,35 +307,28 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                     className={styles.tag}
                     dataTestId={`tag_item_${tag.label}`}
                   />
-                  {canEdit || canRemove ? (
-                    // One flex item for both action icons, so the row's own
-                    // gap does not spread them apart.
-                    <div
-                      className={styles.rowActions}
-                      onClick={stopPropagation}
-                    >
-                      {canEdit ? (
-                        <IconButton
-                          size={ICON_SIZE}
-                          className={styles.editIcon}
-                          iconName={AccessEditReactSvgUrl}
-                          isDisabled={isPending}
-                          onClick={() => handleEdit(tag.label)}
-                          dataTestId={`edit_tag_button_${tag.label}`}
-                        />
-                      ) : null}
-                      {canRemove ? (
-                        <IconButton
-                          size={ICON_SIZE}
-                          iconName={TrashReactSvgUrl}
-                          className={styles.deleteIcon}
-                          isDisabled={isPending}
-                          onClick={() => deleteTag(tag.label)}
-                          dataTestId={`delete_tag_button_${tag.label}`}
-                        />
-                      ) : null}
-                    </div>
+                  {canEdit ? (
+                    <IconButton
+                      size={ICON_SIZE}
+                      className={styles.editIcon}
+                      iconName={AccessEditReactSvgUrl}
+                      onClick={(event) => {
+                        handleEdit(event, tag.label);
+                      }}
+                      dataTestId={`edit_tag_button_${tag.label}`}
+                    />
                   ) : null}
+                  {canRemove && (
+                    <IconButton
+                      size={ICON_SIZE}
+                      iconName={TrashReactSvgUrl}
+                      className={styles.deleteIcon}
+                      onClick={(event) => {
+                        deleteTag(event, tag.label);
+                      }}
+                      dataTestId={`delete_tag_button_${tag.label}`}
+                    />
+                  )}
                 </>
               )}
             </div>

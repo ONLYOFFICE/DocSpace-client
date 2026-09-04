@@ -40,12 +40,6 @@ import {
   transformTagsData,
   unionTagsData,
   searchFilter,
-  isTag,
-  isUpdateTagNameParams,
-  isApplied,
-  selectSnapshot,
-  roomTagsToKey,
-  isTagNameTaken,
 } from "./TagManagement.utils";
 import type { TTag } from "./TagManagement.types";
 
@@ -250,93 +244,6 @@ describe("TagManagement.utils", () => {
       const result = searchFilter(tagsWithChecked, "test");
       expect(result[0].checked).toBe(true);
       expect(result[1].checked).toBe(false);
-    });
-  });
-  describe("isTag", () => {
-    it("accepts a tag and rejects anything else", () => {
-      expect(isTag({ label: "a", checked: true })).toBe(true);
-      expect(isTag({ label: "a" })).toBe(false);
-      expect(isTag({ label: 1, checked: true })).toBe(false);
-      expect(isTag("a")).toBe(false);
-      expect(isTag(null)).toBe(false);
-    });
-  });
-
-  describe("isUpdateTagNameParams", () => {
-    it("accepts a rename and rejects anything else", () => {
-      expect(isUpdateTagNameParams({ oldLabel: "a", newLabel: "b" })).toBe(true);
-      expect(isUpdateTagNameParams({ oldLabel: "a" })).toBe(false);
-      expect(isUpdateTagNameParams("a")).toBe(false);
-      expect(isUpdateTagNameParams(null)).toBe(false);
-    });
-  });
-
-  describe("isApplied", () => {
-    it("counts a mutation that is running or has succeeded", () => {
-      expect(isApplied({ state: { status: "pending" } })).toBe(true);
-      expect(isApplied({ state: { status: "success" } })).toBe(true);
-      expect(isApplied({ state: { status: "error" } })).toBe(false);
-      expect(isApplied({ state: { status: "idle" } })).toBe(false);
-    });
-  });
-
-  describe("selectSnapshot", () => {
-    it("keeps the variables, whether the request is still running, and when it was sent", () => {
-      expect(
-        selectSnapshot({
-          state: { variables: "a", status: "pending", submittedAt: 1 },
-        }),
-      ).toEqual({ variables: "a", isPending: true, submittedAt: 1 });
-
-      expect(
-        selectSnapshot({
-          state: { variables: "a", status: "success", submittedAt: 2 },
-        }),
-      ).toEqual({ variables: "a", isPending: false, submittedAt: 2 });
-    });
-  });
-
-  describe("isTagNameTaken", () => {
-    const tags = [
-      { label: "BoundTag", checked: true },
-      { label: " padded ", checked: false },
-    ];
-
-    it("matches case-insensitively and ignores surrounding whitespace", () => {
-      expect(isTagNameTaken(tags, "boundtag")).toBe(true);
-      expect(isTagNameTaken(tags, "  BOUNDTAG  ")).toBe(true);
-      expect(isTagNameTaken(tags, "padded")).toBe(true);
-      expect(isTagNameTaken(tags, "other")).toBe(false);
-    });
-
-    it("excludes the tag being renamed itself", () => {
-      expect(isTagNameTaken(tags, "BoundTag", "BoundTag")).toBe(false);
-      // Only the exact row is excluded: a different tag under the same name in
-      // another case still counts.
-      expect(isTagNameTaken(tags, "boundtag", "boundtag")).toBe(true);
-    });
-  });
-
-  describe("roomTagsToKey", () => {
-    it("changes when the tags change", () => {
-      expect(roomTagsToKey(["a"])).not.toBe(roomTagsToKey(["a", "b"]));
-      expect(roomTagsToKey(["a", "b"])).not.toBe(roomTagsToKey(["b", "a"]));
-    });
-
-    it("does not depend on the array identity", () => {
-      expect(roomTagsToKey(["a", "b"])).toBe(roomTagsToKey(["a", "b"]));
-    });
-
-    it("tells lists apart that a printable separator would collide", () => {
-      // ["a b"] and ["a", "b"] must not produce the same key.
-      expect(roomTagsToKey(["a b"])).not.toBe(roomTagsToKey(["a", "b"]));
-    });
-
-    it("takes the default flag into account", () => {
-      const tag: TagType = { label: "a" };
-      const defaultTag: TagType = { label: "a", isDefault: true };
-
-      expect(roomTagsToKey([tag])).not.toBe(roomTagsToKey([defaultTag]));
     });
   });
 });

@@ -95,9 +95,7 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   // handles `position: fixed` against the visual viewport itself.
   useKeyboardAwareSheet(sheetRef, isMobile && isReliableAndroidViewport());
 
-  // The list reads the tags from the query itself; the popup only needs to
-  // know whether the first load is done.
-  const { status } = useTagsQuery();
+  const { data: fetchedTags, status } = useTagsQuery();
 
   useLayoutEffect(() => {
     if (isMobile) return;
@@ -155,13 +153,8 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
         .with("pending", () => <TagManagementLoader />)
         .with("success", () => (
           <TagManagementProvider
-            // Keyed by the room: the mutation-cache filters the list reads are
-            // built from `roomId`, and react-query only re-evaluates them on
-            // the next cache event - remounting keeps a reused popup from
-            // showing another room's progress until then.
-            key={roomId}
+            fetchedTags={fetchedTags ?? []}
             roomTags={roomTags}
-            roomId={roomId}
             access={access}
           >
             <TagManagementFilter

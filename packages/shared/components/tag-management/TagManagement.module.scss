@@ -196,41 +196,6 @@
     margin: 0;
   }
 
-  // Keeps the spinner in the checkbox slot so swapping them does not move the
-  // rest of the row. The box is sized inline from LOADER_SIZE, the single
-  // source of truth it shares with the spinner itself - so the spinner is
-  // pinned to the box, never to a number of its own.
-  .checkboxLoader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    > * {
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  &.rowPending {
-    .tag,
-    .editIcon,
-    .deleteIcon {
-      opacity: 0.6;
-    }
-  }
-
-  // The two action icons as one flex item: the row's gap separates the icons
-  // from the tag, not the icons from each other.
-  .rowActions {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    flex-grow: 0;
-    gap: 4px;
-    height: 100%;
-    width: fit-content;
-  }
-
   .editIcon,
   .deleteIcon {
     flex-shrink: 0;

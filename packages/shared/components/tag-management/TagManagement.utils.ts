@@ -37,15 +37,7 @@ import isString from "lodash/isString";
 
 import type { TagType } from "@docspace/ui-kit/components/tag";
 
-import type {
-  MutationSnapshot,
-  TTag,
-  UpdateTagNameParams,
-} from "./TagManagement.types";
-import {
-  KEY_ENTRY_SEPARATOR,
-  KEY_FIELD_SEPARATOR,
-} from "./TagManagement.constants";
+import type { TTag } from "./TagManagement.types";
 
 export function transformTagsData(
   roomTags: Array<TagType | string | TTag>,
@@ -111,74 +103,18 @@ export function searchFilter(list: TTag[], query: string) {
 export const stopPropagation = (event: React.MouseEvent) =>
   event.stopPropagation();
 
-/**
- * Whether `name` already belongs to a listed tag.
- *
- * The one rule every caller compares names by: case-insensitively and ignoring
- * surrounding whitespace - two tags telling apart only by case read as the
- * same name. `exceptLabel` excludes the tag being renamed itself.
- */
-export const isTagNameTaken = (
-  tags: readonly TTag[],
-  name: string,
-  exceptLabel?: string,
-) => {
-  const searched = name.trim().toLowerCase();
+export const promiseWithResolvers = <T>() => {
+  let resolve: (value: T | PromiseLike<T>) => void;
+  let reject: (reason?: unknown) => void;
 
-  return tags.some(
-    (tag) =>
-      tag.label !== exceptLabel &&
-      tag.label.trim().toLowerCase() === searched,
-  );
+  const promise = new Promise<T>((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+
+  return {
+    promise,
+    resolve: resolve!,
+    reject: reject!,
+  };
 };
-
-export const isTag = (variables: unknown): variables is TTag =>
-  typeof variables === "object" &&
-  variables !== null &&
-  "label" in variables &&
-  typeof variables.label === "string" &&
-  "checked" in variables &&
-  typeof variables.checked === "boolean";
-
-export const isUpdateTagNameParams = (
-  variables: unknown,
-): variables is UpdateTagNameParams =>
-  typeof variables === "object" &&
-  variables !== null &&
-  "oldLabel" in variables &&
-  typeof variables.oldLabel === "string" &&
-  "newLabel" in variables &&
-  typeof variables.newLabel === "string";
-
-export const selectSnapshot = (mutation: {
-  state: { variables: unknown; status: string; submittedAt: number };
-}): MutationSnapshot => ({
-  variables: mutation.state.variables,
-  isPending: mutation.state.status === "pending",
-  submittedAt: mutation.state.submittedAt,
-});
-
-// A mutation counts towards the overlay while it runs and after it succeeded:
-// its effect is real from the moment it is sent, and it stays true until the
-// server data catches up. Failed ones drop out, which is the rollback.
-export const isApplied = (mutation: { state: { status: string } }) =>
-  mutation.state.status === "pending" || mutation.state.status === "success";
-
-/**
- * The room tags flattened into a string.
- *
- * `roomTags` comes from the host's store and can be an array that is mutated in
- * place, so its identity is not a reliable signal that it changed. This is what
- * a derivation over it can be keyed on instead.
- */
-export const roomTagsToKey = (roomTags: Array<TagType | string>) =>
-  roomTags
-    .map((tag) => {
-      // A bare string is a plain tag: the same thing as an object without the
-      // default flag, so it has to produce the same key.
-      const label = typeof tag === "string" ? tag : tag.label;
-      const isDefault = typeof tag === "string" ? false : Boolean(tag.isDefault);
-
-      return `${label}${KEY_FIELD_SEPARATOR}${isDefault ? 1 : 0}`;
-    })
-    .join(KEY_ENTRY_SEPARATOR);

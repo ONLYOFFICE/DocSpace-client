@@ -33,13 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useMemo, useRef } from "react";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  useMutationState,
-} from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import {
   getTags,
@@ -49,31 +43,8 @@ import {
   removeTagsFromRoom,
 } from "../../../api/rooms";
 
-import type { TagType } from "@docspace/ui-kit/components/tag";
-
-import type {
-  RoomTagList,
-  TagMutationOverlay,
-  TagRename,
-  TTag,
-  UpdateTagNameParams,
-} from "../TagManagement.types";
-import {
-  isApplied,
-  isTag,
-  isUpdateTagNameParams,
-  roomTagsToKey,
-  selectSnapshot,
-  unionTagsData,
-} from "../TagManagement.utils";
-import {
-  TAGS_QUERY_KEY,
-  TAG_RENAME_MUTATION_KEY,
-  TAG_REMOVE_MUTATION_KEY,
-  getTagBindMutationKey,
-  getTagCreateMutationKey,
-  TAG_MUTATION_RECORD_GC_TIME,
-} from "../TagManagement.constants";
+import type { TTag, UpdateTagNameParams } from "../TagManagement.types";
+import { TAGS_QUERY_KEY } from "../TagManagement.constants";
 
 export function useTagsQuery() {
   return useQuery({
@@ -87,31 +58,25 @@ export function useUpdateTagNameMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: TAG_RENAME_MUTATION_KEY,
-
-    // This record is what tells the list that the room's old name and the
-    // query's new one are the same tag, so it has to outlive the host's stale
-    // copy of the room - see the constant.
-    gcTime: TAG_MUTATION_RECORD_GC_TIME,
-
     mutationFn: ({ oldLabel, newLabel }: UpdateTagNameParams) =>
       updateTagName(oldLabel, newLabel),
 
-    // Renamed in the shared list on success only, like creating and deleting:
-    // applying it up front puts the new name in front of every other room while
-    // the request may still fail, and leaves nothing showing the old one.
-    onSuccess: async (_data, { oldLabel, newLabel }) => {
+    onMutate: async ({ oldLabel, newLabel }: UpdateTagNameParams) => {
       await queryClient.cancelQueries({ queryKey: TAGS_QUERY_KEY });
 
       const previousData: string[] | undefined =
         queryClient.getQueryData(TAGS_QUERY_KEY);
 
-      if (!previousData) return;
-
-      queryClient.setQueryData(
-        TAGS_QUERY_KEY,
-        previousData.map((tag) => (tag === oldLabel ? newLabel : tag)),
+      const optimisticTags = previousData?.map((tag) =>
+        tag === oldLabel ? newLabel : tag,
       );
+
+      queryClient.setQueryData(TAGS_QUERY_KEY, optimisticTags);
+
+      return { previousData };
+    },
+    onError: (_, __, context) => {
+      queryClient.setQueryData(TAGS_QUERY_KEY, context?.previousData);
     },
   });
 }
@@ -120,31 +85,23 @@ export function useCreateTagMutation(roomId: string | number) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: getTagCreateMutationKey(roomId),
-
-    // Same lifetime as the rename record: until the room reports the tag, this
-    // record is the only thing binding it to the room, and the host may never
-    // reload the room at all. The sweep in useRoomTagList retires it the
-    // moment the room confirms.
-    gcTime: TAG_MUTATION_RECORD_GC_TIME,
-
     mutationFn: (newTag: string) => addTagsToRoom(roomId, [newTag]),
-    // Added to the shared list on success only: until the server has it, the
-    // tag does not exist for anybody else, and putting it in the tags query
-    // would show it in every other room's list right away. The room creating
-    // it still sees it immediately - see useRoomTagList.
-    onSuccess: async (_data, newTag) => {
+
+    onMutate: async (newTag: string) => {
       await queryClient.cancelQueries({ queryKey: TAGS_QUERY_KEY });
 
       const previousData: string[] | undefined =
         queryClient.getQueryData(TAGS_QUERY_KEY);
 
-      if (previousData?.includes(newTag)) return;
-
       queryClient.setQueryData(TAGS_QUERY_KEY, [
         newTag,
-        ...(previousData ?? []),
+        ...(previousData || []),
       ]);
+
+      return { previousData };
+    },
+    onError: (_, __, context) => {
+      queryClient.setQueryData(TAGS_QUERY_KEY, context?.previousData);
     },
   });
 }
@@ -153,526 +110,35 @@ export function useRemoveTagMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: TAG_REMOVE_MUTATION_KEY,
-
-    // Same as the rename: the deleted tag stays in the room's own data until
-    // the host reloads it, and this record is what keeps it out of the list in
-    // the meantime.
-    gcTime: TAG_MUTATION_RECORD_GC_TIME,
-
     mutationFn: (removeTag: string) => removeTagRequest([removeTag]),
 
-    // Dropped on success, not optimistically: removing the tag up front makes
-    // it vanish from every other list the moment the request is sent, leaving
-    // nothing to carry the loader while the delete is still running. Nothing
-    // is changed before the answer, so there is also nothing to roll back.
-    onSuccess: async (_data, removeTag) => {
+    onMutate: async (removeTag: string) => {
       await queryClient.cancelQueries({ queryKey: TAGS_QUERY_KEY });
 
       const previousData: string[] | undefined =
         queryClient.getQueryData(TAGS_QUERY_KEY);
 
-      if (!previousData) return;
+      if (previousData) {
+        queryClient.setQueryData(
+          TAGS_QUERY_KEY,
+          previousData.filter((tag) => removeTag !== tag),
+        );
+      }
 
-      queryClient.setQueryData(
-        TAGS_QUERY_KEY,
-        previousData.filter((tag) => removeTag !== tag),
-      );
+      return { previousData };
+    },
+    onError: (_, __, context) => {
+      queryClient.setQueryData(TAGS_QUERY_KEY, context?.previousData);
     },
   });
 }
 
 export function useUpdateTag(roomId: string | number) {
   return useMutation({
-    mutationKey: getTagBindMutationKey(roomId),
-
-    // Until the room reports the toggle, this record is what keeps the
-    // checkbox where the user put it - and the host may never reload the room.
-    // On the default five-minute schedule the row falls back to the room's
-    // stale value in front of the user. The sweep in useRoomTagList retires
-    // the record as soon as the room confirms it.
-    gcTime: TAG_MUTATION_RECORD_GC_TIME,
-
     mutationFn: (tag: TTag) => {
       const requestApi = tag.checked ? addTagsToRoom : removeTagsFromRoom;
 
       return requestApi(roomId, [tag.label]);
     },
   });
-}
-
-/**
- * What the running (and just finished) mutations say about the tags, read from
- * the mutation cache.
- *
- * The cache belongs to the QueryClient, so this outlives the popup that started
- * an operation: progress and optimistic values show up in every list opened
- * afterwards, and no component has to keep a copy of them.
- *
- * Renaming and deleting a tag change it everywhere and count for every room.
- * Binding is scoped to `roomId` - the same tag can be bound in one room and not
- * in another.
- */
-export function useTagMutationOverlay(
-  roomId: string | number,
-): TagMutationOverlay {
-  const renaming = useMutationState({
-    filters: { mutationKey: TAG_RENAME_MUTATION_KEY, predicate: isApplied },
-    select: selectSnapshot,
-  });
-
-  const removing = useMutationState({
-    filters: { mutationKey: TAG_REMOVE_MUTATION_KEY, predicate: isApplied },
-    select: selectSnapshot,
-  });
-
-  const binding = useMutationState({
-    filters: {
-      mutationKey: getTagBindMutationKey(roomId),
-      predicate: isApplied,
-    },
-    select: selectSnapshot,
-  });
-
-  const creating = useMutationState({
-    filters: {
-      mutationKey: getTagCreateMutationKey(roomId),
-      predicate: isApplied,
-    },
-    select: selectSnapshot,
-  });
-
-  return useMemo(() => {
-    const created: string[] = [];
-    const removed = new Set<string>();
-    const renamed = new Map<string, TagRename>();
-    const bound = new Map<string, boolean>();
-    const pending = new Set<string>();
-
-    renaming.forEach(({ variables, isPending }) => {
-      if (!isUpdateTagNameParams(variables)) return;
-
-      renamed.set(variables.oldLabel, { to: variables.newLabel, isPending });
-
-      // Both names count as busy: until the room data catches up, the list can
-      // still be showing either one.
-      if (isPending) {
-        pending.add(variables.oldLabel);
-        pending.add(variables.newLabel);
-      }
-    });
-
-    removing.forEach(({ variables, isPending }) => {
-      if (typeof variables !== "string") return;
-
-      // Only drop the row once the delete went through: while it is running the
-      // tag has to stay visible to carry its loader.
-      if (isPending) pending.add(variables);
-      else removed.add(variables);
-    });
-
-    // When each label was last spoken about by a bind - see the create walk
-    // below, which is the only thing that has to tell two of them apart.
-    const boundAt = new Map<string, number>();
-
-    binding.forEach(({ variables, isPending, submittedAt }) => {
-      if (!isTag(variables)) return;
-
-      bound.set(variables.label, variables.checked);
-      boundAt.set(variables.label, submittedAt);
-      if (isPending) pending.add(variables.label);
-    });
-
-    // A tag created here is bound to this room by the same request. It reaches
-    // the tags query only once the server confirms it, so until then this is
-    // the only thing that knows about it.
-    creating.forEach(({ variables, isPending, submittedAt }) => {
-      if (typeof variables !== "string") return;
-
-      created.unshift(variables);
-
-      // Only if no bind has spoken since: unbinding a tag right after creating
-      // it is a later decision about the same label, and a create record lives
-      // long enough to outlast it.
-      //
-      // A bind from before this request is about a different tag: the name it
-      // was written for was freed - renamed away, or deleted - and taken again
-      // by this one, while the record still addresses the name. Unlike a stale
-      // rename or delete record, this one cannot be recognised by asking the
-      // query whether the name exists, because it does again.
-      const decidedAt = boundAt.get(variables);
-
-      if (decidedAt === undefined || decidedAt < submittedAt)
-        bound.set(variables, true);
-
-      if (isPending) pending.add(variables);
-    });
-
-    return { created, removed, renamed, bound, pending };
-  }, [renaming, removing, binding, creating]);
-}
-
-/**
- * The tags of a room, derived - never stored.
- *
- * Two sources feed it, each authoritative for one thing: the tags query knows
- * which tags exist and what they are called, the room knows which of them it
- * carries. Everything the user has just done is layered on top from the
- * mutation cache, so there is no second copy of the list to keep in sync and
- * nothing to roll back by hand.
- */
-export function useRoomTagList(
-  roomId: string | number,
-  roomTags: Array<TagType | string>,
-): RoomTagList {
-  // Straight from the query, not through a prop: a snapshot taken by a parent
-  // would miss the optimistic writes the mutations make into the same cache.
-  const { data: fetchedTags } = useTagsQuery();
-  const queryClient = useQueryClient();
-
-  const { created, removed, renamed, bound, pending } =
-    useTagMutationOverlay(roomId);
-
-  // The position every label was first listed at, for as long as this list is
-  // open. The order it freezes is the one the two sources give: unionTagsData
-  // lists the tags the room carries - the selected ones - before the rest of
-  // the shared list. Binding a tag then moves it between those sources, the
-  // room reports it or it does not, so without this the row would jump under
-  // the cursor as soon as the host reloads the room after a toggle. Labels
-  // created here keep leading the list, under negative positions, even after
-  // they arrive through the query.
-  const orderRef = useRef({
-    positions: new Map<string, number>(),
-    nextTail: 0,
-    nextLead: 0,
-  });
-
-  // Keyed on what roomTags holds, not on its identity - see roomTagsToKey.
-  const roomTagsKey = roomTagsToKey(roomTags);
-
-  // A rename or a delete made from another session reaches this list through
-  // the room only: the mutation cache is per tab, so there is no record here to
-  // mask the query's stale copy of the tag, and it would be listed next to the
-  // room's new name as a second tag. A room change nothing here can explain is
-  // therefore the signal that the shared list has moved too.
-  //
-  // Only the unexplained ones: refetching over a change this tab made itself
-  // is not just wasted - right after a rename the server can still answer with
-  // the list from before it, and that answer would resurrect the old name in
-  // the cache next to the new one the room already reports. The names this
-  // tab's own mutations account for are already in the cache, written by their
-  // onSuccess.
-  const invalidatedFor = useRef(roomTagsKey);
-  const previousRoomLabelsRef = useRef<ReadonlySet<string>>(
-    new Set(roomTags.map((tag) => (typeof tag === "string" ? tag : tag.label))),
-  );
-
-  useEffect(() => {
-    if (invalidatedFor.current === roomTagsKey) return;
-
-    invalidatedFor.current = roomTagsKey;
-
-    const current = new Set(
-      roomTags.map((tag) => (typeof tag === "string" ? tag : tag.label)),
-    );
-    const previous = previousRoomLabelsRef.current;
-
-    previousRoomLabelsRef.current = current;
-
-    // A label the room stopped reporting is explained by a delete, a rename
-    // away from it, or an unbind made here; one it started reporting is
-    // explained by the memo below (see roomReportsUnknownRef). Anything else
-    // came from outside this tab.
-    const unexplainedLoss = [...previous].some(
-      (label) =>
-        !current.has(label) &&
-        !removed.has(label) &&
-        !renamed.has(label) &&
-        bound.get(label) !== false,
-    );
-
-    if (!unexplainedLoss && !roomReportsUnknownRef.current) return;
-
-    queryClient.invalidateQueries({ queryKey: TAGS_QUERY_KEY });
-  }, [roomTagsKey, roomTags, removed, renamed, bound, queryClient]);
-
-  // The names the room itself claims right now, after renames are resolved -
-  // what the bind-record sweep below compares the records against. Rebuilt by
-  // the memo on every recompute; idempotent, so writing it during render is
-  // safe.
-  const roomOwnLabelsRef = useRef<ReadonlySet<string>>(new Set());
-
-  // Whether the room reports a name neither the query nor a record of this tab
-  // knows - the mark of a change made from another session.
-  const roomReportsUnknownRef = useRef(false);
-
-  // What each create record's label has become after the renames made since:
-  // the record carries the name the tag was created under, the room will
-  // report the current one. Rebuilt by the memo, like the refs above.
-  const createdResolvedRef = useRef<ReadonlyMap<string, string>>(new Map());
-
-  // The names the create records sustain right now - the values of the map
-  // above, which is what everything outside the records has to match against.
-  const createdLabelsRef = useRef<ReadonlySet<string>>(new Set());
-
-  // The same for the bind records: one is written under the name the tag had
-  // when the box was clicked, and a rename since leaves it addressing a name
-  // nothing reports any more.
-  const boundResolvedRef = useRef<ReadonlyMap<string, string>>(new Map());
-
-  const tags = useMemo(() => {
-    const order = orderRef.current;
-    const result: TTag[] = [];
-    const seen = new Set<string>();
-    const roomOwnLabels = new Set<string>();
-
-    let roomReportsUnknown = false;
-
-    const place = (label: string, lead: boolean) => {
-      if (order.positions.has(label)) return;
-
-      order.positions.set(
-        label,
-        lead ? (order.nextLead -= 1) : (order.nextTail += 1),
-      );
-    };
-
-    // What the query says exists right now. A rename or a delete record is only
-    // there to mask the room's stale copy of a tag, so it may be applied only
-    // while the query and the room actually disagree - see below.
-    const exists = new Set(fetchedTags);
-
-    /**
-     * Whether a delete has taken the tag away.
-     *
-     * A delete counts only while the query has already dropped the label: if
-     * it is back in the query it belongs to a tag created after this one was
-     * deleted, and hiding it would make a live tag invisible.
-     */
-    const isDeleted = (label: string) =>
-      removed.has(label) && !exists.has(label);
-
-    /**
-     * The name to list the room's copy of a tag under.
-     *
-     * The room keeps the old name until the host reloads it, so the same tag
-     * would otherwise be listed twice - under both names. A rename record is
-     * the bridge between the two, and renaming the same tag again leaves a
-     * second record to cross: the walk follows them until the query agrees
-     * with the name. Stopping after the first record listed the tag under a
-     * name nothing knows any more, next to the live one from the query.
-     *
-     * A record whose source name the query still has describes something that
-     * is no longer true - the tag was renamed back, or recreated under the old
-     * name - so the walk does not start at all.
-     */
-    const resolveLabel = (start: string) => {
-      // A rename in flight is shown right away, under the name it is applying:
-      // the query cannot have moved yet, and only one rename at a time can be
-      // running for a tag.
-      const running = renamed.get(start);
-
-      if (running?.isPending) return running.to;
-
-      const walked = new Set([start]);
-      let label = start;
-
-      while (!exists.has(label)) {
-        const rename = renamed.get(label);
-
-        // Nothing more to follow, or the chain leads back to a name already
-        // walked - a rename undone by a later one.
-        if (!rename || walked.has(rename.to)) break;
-
-        label = rename.to;
-        walked.add(label);
-      }
-
-      return label;
-    };
-
-    // A create record carries the name the tag was created under, and renaming
-    // it afterwards moves the tag on without touching the record. Resolved
-    // here, at the one place that can see both the records and the query:
-    // otherwise the created name is listed next to the new one the query
-    // already reports, as a second tag.
-    const createdTags = created.map((raw) => ({
-      raw,
-      label: resolveLabel(raw),
-    }));
-
-    const createdResolved = new Map(
-      createdTags.map(({ raw, label }): [string, string] => [raw, label]),
-    );
-    const createdLabels = new Set(createdResolved.values());
-
-    // A bind record is addressed the same way: written under the name the tag
-    // had when the box was clicked, matched by the sweep against what the room
-    // claims - and the room's claims are listed under the resolved name.
-    const boundResolved = new Map<string, string>();
-
-    bound.forEach((_checked, label) =>
-      boundResolved.set(label, resolveLabel(label)),
-    );
-
-    // Placed oldest first, so that the newest create takes the smallest
-    // position and leads the list.
-    for (let i = createdTags.length - 1; i >= 0; i -= 1) {
-      const { raw, label } = createdTags[i];
-      const previous = order.positions.get(raw);
-
-      // A rename keeps the row where it was, exactly as in the walk below -
-      // the tag was placed under the name it was created with.
-      if (label !== raw && previous !== undefined) {
-        if (!order.positions.has(label)) order.positions.set(label, previous);
-      } else {
-        place(label, true);
-      }
-    }
-
-    // A tag this room is creating leads the list before the server knows it.
-    createdTags.forEach(({ raw, label }) => {
-      if (seen.has(label)) return;
-
-      // Created and then deleted here: the create record still carries the
-      // label, and it is the only thing that would keep listing it - the tag
-      // reaches neither the room nor the query. Under the resolved name only:
-      // a delete record for the name it was created under describes an older
-      // tag that carried that name, not this one.
-      if (isDeleted(label)) return;
-
-      seen.add(label);
-
-      console.debug({ label, bound });
-
-      // Created means bound, unless a bind has said otherwise since - under
-      // either name, since a bind made before the rename was recorded under
-      // the name the tag had then.
-      result.push({
-        label,
-        checked: bound.get(label) ?? bound.get(raw) ?? false,
-      });
-    });
-
-    unionTagsData(roomTags, fetchedTags).forEach((tag) => {
-      if (isDeleted(tag.label)) return;
-
-      const label = resolveLabel(tag.label);
-
-      // Under either name: a delete record is written for the name the tag had
-      // when it was deleted, and the room can still be reporting the one it
-      // had before a rename.
-      if (isDeleted(label)) return;
-
-      if (tag.checked && !exists.has(label) && !createdLabels.has(label))
-        roomReportsUnknown = true;
-
-      if (seen.has(label)) return;
-      seen.add(label);
-
-      // A rename keeps the row where it was: it is the same tag under a new
-      // name, and the new name is a position of its own otherwise.
-      const previous = order.positions.get(tag.label);
-
-      if (label !== tag.label && previous !== undefined) {
-        if (!order.positions.has(label)) order.positions.set(label, previous);
-      } else {
-        place(label, false);
-      }
-
-      // True exactly when the row came from roomTags - what the room claims,
-      // as opposed to what the bind overlay is applying.
-      if (tag.checked) roomOwnLabels.add(label);
-
-      const checked = bound.get(label) ?? bound.get(tag.label) ?? tag.checked;
-
-      result.push({ label, checked });
-    });
-
-    roomOwnLabelsRef.current = roomOwnLabels;
-    roomReportsUnknownRef.current = roomReportsUnknown;
-    createdResolvedRef.current = createdResolved;
-    createdLabelsRef.current = createdLabels;
-    boundResolvedRef.current = boundResolved;
-
-    return result.sort(
-      (a, b) =>
-        (order.positions.get(a.label) ?? 0) -
-        (order.positions.get(b.label) ?? 0),
-    );
-    // roomTagsKey stands in for roomTags: see above.
-  }, [roomTagsKey, roomTags, fetchedTags, created, removed, renamed, bound]);
-
-  // A settled bind record is a bridge: it says what the room is about to
-  // report. Once the room reports it, the record has nothing left to add - it
-  // can only mask a later change made from another session - so it is dropped
-  // and the room becomes authoritative for the tag again. A pending record and
-  // one the room has not confirmed yet stay: without the room ever catching
-  // up, the record is the only thing keeping the toggle on screen.
-  useEffect(() => {
-    const cache = queryClient.getMutationCache();
-
-    // A create record is spent the same way: the room reporting the tag is
-    // everything the record still promised. Retiring it also frees the label's
-    // bind records below.
-    cache
-      .findAll({ mutationKey: getTagCreateMutationKey(roomId) })
-      .forEach((mutation) => {
-        if (mutation.state.status !== "success") return;
-
-        const { variables } = mutation.state;
-
-        if (typeof variables !== "string") return;
-
-        // Against the name the tag has now, not the one it was created under:
-        // after a rename the room reports the new name and would never match
-        // the record, which would then sit unretired until it is collected.
-        const label = createdResolvedRef.current.get(variables) ?? variables;
-
-        if (roomOwnLabelsRef.current.has(label)) cache.remove(mutation);
-      });
-
-    cache
-      .findAll({ mutationKey: getTagBindMutationKey(roomId) })
-      .forEach((mutation) => {
-        if (mutation.state.status !== "success") return;
-
-        const { variables } = mutation.state;
-
-        if (!isTag(variables)) return;
-
-        // Under the name the tag has now, not the one the box was clicked
-        // under: the room lists its claims resolved, so a record left behind
-        // by a rename would match nothing, read as "the room has dropped the
-        // tag", and be swept - putting the room's stale claim back on screen
-        // and undoing the untick in front of the user.
-        const label =
-          boundResolvedRef.current.get(variables.label) ?? variables.label;
-
-        // A label a create record still sustains answers to that record, not
-        // to the room: "created means bound, unless a bind has said otherwise"
-        // makes the bind the only thing holding an untick, whatever the room
-        // reports - sweeping it would flip the box back.
-        if (createdLabelsRef.current.has(label)) return;
-
-        const roomClaims = roomOwnLabelsRef.current.has(label);
-
-        if (roomClaims === variables.checked) cache.remove(mutation);
-      });
-    // `tags` carries every input of the refs - the room, the query and the
-    // mutation records - so a change in any of them re-runs the sweep.
-  }, [tags, roomId, queryClient]);
-
-  console.debug({
-    tags,
-    roomTags,
-    fetchedTags,
-    created,
-    removed,
-    renamed,
-    bound,
-    pending,
-  });
-
-  return { tags, pendingLabels: pending };
 }

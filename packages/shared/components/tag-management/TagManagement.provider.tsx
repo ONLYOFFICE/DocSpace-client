@@ -42,12 +42,12 @@ import React, {
 } from "react";
 
 import type {
+  TTag,
   TagManagementContextValue,
   TagManagementProviderProps,
   ITagManagementStateContext,
 } from "./TagManagement.types";
-import { isTagNameTaken, searchFilter } from "./TagManagement.utils";
-import { useRoomTagList } from "./hooks/useTagsQuery";
+import { searchFilter, unionTagsData } from "./TagManagement.utils";
 
 const TagManagementStateContext =
   createContext<ITagManagementStateContext | null>(null);
@@ -55,7 +55,7 @@ const TagManagementStateContext =
 export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
   children,
   roomTags,
-  roomId,
+  fetchedTags,
   access,
 }) => {
   const canCreate = access.canCreate || false;
@@ -63,10 +63,9 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
   const [searchValue, setSearchValue] = useState("");
   const deferredSearchValue = useDeferredValue(searchValue);
 
-  // Derived, not stored: keeping a copy here is what used to let the list
-  // drift away from the server once a refetch, another popup or an overlapping
-  // request changed something.
-  const { tags, pendingLabels } = useRoomTagList(roomId, roomTags);
+  const [tags, setTags] = useState<TTag[]>(() => {
+    return unionTagsData(roomTags, fetchedTags);
+  });
 
   const [filteredTags, showCreateTag] = useMemo(() => {
     const search = deferredSearchValue.trim();
@@ -75,9 +74,9 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
 
     const filtered = searchFilter(tags, search);
 
-    // Against the whole list rather than the filtered one: a tag the search is
-    // hiding still occupies its name.
-    const showCreateTag = Boolean(canCreate && !isTagNameTaken(tags, search));
+    const showCreateTag = Boolean(
+      canCreate && filtered.every((tag) => tag.label.trim() !== search),
+    );
 
     return [filtered, showCreateTag];
   }, [tags, deferredSearchValue, canCreate]);
@@ -89,7 +88,7 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
   const value = useMemo<ITagManagementStateContext>(
     () => ({
       tags,
-      pendingLabels,
+      setTags,
       searchValue,
       deferredSearchValue,
       filteredTags,
@@ -106,7 +105,6 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
       clearSearch,
       access,
       tags,
-      pendingLabels,
     ],
   );
 

@@ -46,6 +46,7 @@ import { useCloseOnAnchorCovered } from "@docspace/ui-kit/hooks/useCloseOnAnchor
 import { useIsTable } from "../../hooks/useIsTable";
 
 import { TagManagementPopup } from "./TagManagement.popup";
+import { EDIT_CANCELLED, DELETE_CANCELLED } from "./TagManagement.constants";
 
 import type { TagManagementProps } from "./TagManagement.types";
 import { EditTagModal, DeleteTagModal } from "./modals";
@@ -114,58 +115,55 @@ export const TagManagement: FC<TagManagementProps> = ({
   useUnmount(onClose);
 
   const confirmEditTag = useCallback(
-    async function* editTagFlow(oldLabel: string, newLabel: string) {
+    async (oldLabel: string, newLabel: string) => {
       const confirmed = await requestConfirmation();
 
-      // Hand the answer to the caller before anything is sent, so it can tell
-      // a declined dialog from a failed request.
-      yield confirmed;
+      if (!confirmed) {
+        return Promise.reject(EDIT_CANCELLED);
+      }
 
-      if (!confirmed) return;
-
-      // Rejects to the caller, which reports it - nothing to catch here.
-      await updateTagName.mutateAsync({
-        oldLabel,
-        newLabel,
-      });
-
-      // Only the global tag list is updated optimistically. Without reloading
-      // the room, its own tags keep the old label and unionTagsData shows it
-      // again next to the new one the next time the list is opened.
-      onTagsChanged?.();
+      try {
+        await updateTagName.mutateAsync({
+          oldLabel,
+          newLabel,
+        });
+      } catch (error) {
+        console.error("Failed to update tag name:", error);
+        throw error;
+      }
     },
-    [requestConfirmation, updateTagName, onTagsChanged],
+    [requestConfirmation, updateTagName],
   );
 
   const confirmDeleteTag = useCallback(
-    async function* deleteTagFlow(tag: string) {
+    async (tag: string) => {
       const confirmed = await requestDeleteConfirmation(tag);
 
-      yield confirmed;
+      if (!confirmed) {
+        return Promise.reject(DELETE_CANCELLED);
+      }
 
-      if (!confirmed) return;
-
-      await removeTag.mutateAsync(tag);
-
-      // Same reason as in confirmEditTag: the room still carries the tag that
-      // no longer exists until it is reloaded.
-      onTagsChanged?.();
-
-      toastr.success(
-        <Trans
-          t={t}
-          i18nKey="RemoveTag"
-          ns="Common"
-          components={{
-            1: <strong key="removed-tag" />,
-          }}
-          values={{
-            tag,
-          }}
-        />,
-      );
+      try {
+        await removeTag.mutateAsync(tag);
+        toastr.success(
+          <Trans
+            t={t}
+            i18nKey="RemoveTag"
+            ns="Common"
+            components={{
+              1: <strong key="removed-tag" />,
+            }}
+            values={{
+              tag,
+            }}
+          />,
+        );
+      } catch (error) {
+        console.error("Failed to delete tag:", error);
+        throw error;
+      }
     },
-    [requestDeleteConfirmation, removeTag, onTagsChanged, t],
+    [requestDeleteConfirmation, removeTag, t],
   );
 
   const isTableView = useIsTable();

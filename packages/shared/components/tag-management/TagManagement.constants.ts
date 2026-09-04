@@ -37,43 +37,8 @@ export const ROW_HEIGHT = 30;
 export const MARGIN_BOTTOM = 10;
 export const MAX_BODY_HEIGHT = 220;
 export const ICON_SIZE = 16;
-export const LOADER_SIZE = 16;
 
 export const TAGS_QUERY_KEY = ["tags"];
-
-// Stable keys so the pending state of these mutations can be read from the
-// mutation cache by any mounted tag list, not only by the component that
-// started them. Renaming and deleting a tag change it everywhere, so the
-// progress has to outlive the popup that triggered it.
-export const TAG_RENAME_MUTATION_KEY = ["tags", "rename"];
-export const TAG_REMOVE_MUTATION_KEY = ["tags", "remove"];
-
-// Binding a tag only changes one room, so its key carries the room and the
-// progress stays inside that room's lists.
-export const getTagBindMutationKey = (roomId: string | number) => [
-  "tags",
-  "bind",
-  roomId,
-];
-
-// How long a settled rename or delete is kept in the mutation cache. That
-// record is the only thing that can tell the list the name the room still
-// reports and the one the tags query already has are the same tag - the two
-// sources cannot work it out on their own, and the host is not required to
-// reload the room at all (the client passes no onTagsChanged), so the stale
-// copy outlives any window that can be picked here. Kept for the session:
-// under any deadline the tag starts being listed twice, under both names, the
-// moment the record expires. It costs one small object per rename or delete,
-// and useRoomTagList ignores a record that no longer matches what the query
-// says - see resolveLabel.
-export const TAG_MUTATION_RECORD_GC_TIME = Number.POSITIVE_INFINITY;
-
-// Creating a tag also binds it to the room it was created from.
-export const getTagCreateMutationKey = (roomId: string | number) => [
-  "tags",
-  "create",
-  roomId,
-];
 
 export const EVENT_OPTIONS: AddEventListenerOptions = {
   capture: true,
@@ -84,12 +49,7 @@ export const EDIT_TAG_MODAL_ID = "edit-tag-modal";
 
 export const DELETE_TAG_DONT_SHOW_AGAIN_KEY = "delete-tag-dont-show-again";
 export const DELETE_TAG_MODAL_ID = "delete-tag-modal";
+
+export const EDIT_CANCELLED = Symbol("EDIT_CANCELLED");
+export const DELETE_CANCELLED = Symbol("DELETE_CANCELLED");
 export const EDIT_TAG_FORM_NAME = "edit-tag-form";
-
-// Separators for the key the room tags are hashed into. Control characters are
-// used because a tag label can contain anything printable: with a space or a
-// comma, ["a b"] and ["a", "b"] would produce the same key. Written as escapes
-// on purpose - a raw byte here makes the file binary to git and grep.
-export const KEY_FIELD_SEPARATOR = "\u0001";
-export const KEY_ENTRY_SEPARATOR = "\u0000";
-

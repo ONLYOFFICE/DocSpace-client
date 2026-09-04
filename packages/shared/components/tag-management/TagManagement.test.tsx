@@ -47,16 +47,6 @@ vi.mock("../../utils/useClickOutside", () => ({
   useClickOutside: vi.fn(),
 }));
 
-// The popup's provider reads the tags query itself; without this, the suite
-// sends a real request to /files/tags.
-vi.mock("../../api/rooms", () => ({
-  getTags: vi.fn(() => Promise.resolve([])),
-  addTagsToRoom: vi.fn(() => Promise.resolve()),
-  removeTagsFromRoom: vi.fn(() => Promise.resolve()),
-  updateTagName: vi.fn(() => Promise.resolve()),
-  removeTagRequest: vi.fn(() => Promise.resolve()),
-}));
-
 vi.mock("@docspace/ui-kit/hooks/use-is-mobile", () => ({
   useIsMobile: vi.fn(() => false),
 }));

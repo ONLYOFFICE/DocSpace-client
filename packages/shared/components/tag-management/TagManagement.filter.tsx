@@ -56,8 +56,8 @@ import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 import { removeEmojiCharacters } from "../../utils/removeEmojiCharacters";
 
 import { useTagManagement } from "./TagManagement.provider";
-import { useCreateTagMutation, useUpdateTag } from "./hooks/useTagsQuery";
-import type { TagManagementFilterProps } from "./TagManagement.types";
+import { useCreateTagMutation } from "./hooks/useTagsQuery";
+import type { TagManagementFilterProps, TTag } from "./TagManagement.types";
 import styles from "./TagManagement.module.scss";
 
 export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
@@ -68,17 +68,17 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   const { t } = useTranslation("Common");
   const isMobile = useIsMobile();
   const {
-    tags,
     searchValue,
+    deferredSearchValue,
     showCreateTag,
     setSearchValue,
     clearSearch,
+    tags,
+    setTags,
     filteredTags,
-    pendingLabels,
-    access: { canSearch, canCreate, canBindTag },
+    access: { canSearch },
   } = useTagManagement();
   const createTag = useCreateTagMutation(roomId);
-  const updateTag = useUpdateTag(roomId);
 
   const [inputValue, setInputValue] = useState("");
 
@@ -100,64 +100,31 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   );
 
   const handleCreateTag = useCallback(async () => {
-    // The input's own value, and every rule recomputed over it: searchValue
-    // and showCreateTag are both updated through a transition, so an Enter
-    // right after the last keystroke can still see the previous text.
-    const trimmedValue = inputValue.trim();
+    const trimmedValue = searchValue.trim();
+    if (trimmedValue.length === 0 || !showCreateTag) return;
 
-    if (trimmedValue.length === 0 || !canCreate) return;
-
-    // The name of an existing tag is not a mistake: Enter on it binds that
-    // tag to the room instead of creating a duplicate. Matched the way names
-    // are compared everywhere here - case-insensitively - and bound under the
-    // tag's own spelling.
-    const existing = tags.find(
-      (tag) => tag.label.trim().toLowerCase() === trimmedValue.toLowerCase(),
-    );
-
+    const newTag: TTag = { label: trimmedValue, checked: true };
+    const updatedTags = [newTag, ...tags];
     clearSearch();
     setInputValue("");
 
-    if (existing) {
-      // Already bound, mid-operation, or not allowed to bind: the search is
-      // cleared and the list shows the tag - nothing to send.
-      if (existing.checked || !canBindTag || pendingLabels.has(existing.label))
-        return;
-
-      try {
-        await updateTag.mutateAsync({ ...existing, checked: true });
-
+    createTag.mutate(trimmedValue, {
+      onSuccess: () => {
+        setTags(updatedTags);
         onTagsChanged?.();
-      } catch (error) {
-        console.error("Failed to update room tags:", error);
-        toastr.error(error instanceof Error ? error : new Error(String(error)));
-      }
-
-      return;
-    }
-
-    try {
-      // mutateAsync, not mutate: the hook holds a single observer, and every
-      // mutate() replaces its callbacks and detaches the mutation still in
-      // flight (MutationObserver.mutate), so creating a second tag before the
-      // first one lands swallows the first onSuccess. The returned promise
-      // belongs to its own mutation and is not affected.
-      await createTag.mutateAsync(trimmedValue);
-
-      onTagsChanged?.();
-    } catch (error) {
-      console.error("Failed to create tag:", error);
-      toastr.error(error instanceof Error ? error : new Error(String(error)));
-    }
+      },
+      onError: (error) => {
+        console.error("Failed to create tag:", error);
+        toastr.error(error);
+      },
+    });
   }, [
-    inputValue,
-    canCreate,
-    canBindTag,
+    searchValue,
     tags,
-    pendingLabels,
     clearSearch,
     createTag,
-    updateTag,
+    setTags,
+    showCreateTag,
     onTagsChanged,
   ]);
 
@@ -228,8 +195,8 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
             icon={PlusIcon}
             className={styles.createTag}
             iconClassName={styles.createTagIcon}
-            tag={inputValue}
-            label={inputValue}
+            tag={deferredSearchValue}
+            label={deferredSearchValue}
             onClick={handleCreateTag}
             dataTestId="create_tag_button"
           />

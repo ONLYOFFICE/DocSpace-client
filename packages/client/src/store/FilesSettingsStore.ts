@@ -49,7 +49,7 @@ import type {
 } from "@docspace/shared/api/files/types";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
-import { makeAutoObservable, reaction } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { presentInArray } from "@docspace/shared/utils";
 import {
   iconSize24,
@@ -72,7 +72,6 @@ import i18n from "../i18n";
 import type PluginStore from "./PluginStore";
 import type PublicRoomStore from "./PublicRoomStore";
 import type { ThirdPartyStore } from "./ThirdPartyStore";
-import { safeGet, safeSet } from "./TourStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
 import type { TTreeFolder } from "./TreeFoldersStore";
 
@@ -80,10 +79,6 @@ type TFilesApiWithForceSave = typeof api.files & {
   storeForceSave: (data: boolean) => Promise<boolean>;
   forceSave: (data: boolean) => Promise<boolean>;
 };
-
-// Per user, because a browser is shared: one person hiding the banner says
-// nothing about the next person to sign in on the same machine.
-const showQuickActionsKey = (userId: string) => `show_quick_actions_${userId}`;
 
 class FilesSettingsStore {
   thirdPartyStore: ThirdPartyStore;
@@ -194,8 +189,8 @@ class FilesSettingsStore {
 
   // Shown unless this user has turned it off. Defaulting to `true` rather than
   // to "unknown" is deliberate: it is the right value for everyone who has
-  // never hidden the banner, and the reaction in the constructor hydrates it
-  // the moment the user is known, long before any page renders the banner.
+  // never hidden the banner, and it stands only until `getFilesSettings`
+  // resolves and overwrites it with the stored one.
   showQuickActions = true;
 
   extsFilesVectorized: string[] = [];
@@ -231,17 +226,6 @@ class FilesSettingsStore {
     this.pluginStore = pluginStore;
     this.authStore = authStore;
     this.settingsStore = settingsStore;
-
-    // The banner's visibility is per user and lives in localStorage, so it is
-    // read here, the moment the signed-in user is known, rather than by
-    // whichever page happens to render first: every consumer of
-    // `showQuickActions` then sees the right value from its first render, and
-    // a different account signing in on the same browser gets its own.
-    reaction(
-      () => this.authStore.userStore?.user?.id,
-      () => this.hydrateShowQuickActions(),
-      { fireImmediately: true },
-    );
 
     SocketHelper?.on(
       SocketEvents.UpdateExternalShareSettings,
@@ -437,28 +421,21 @@ class FilesSettingsStore {
       .catch((e) => toastr.error(e as string));
   };
 
-  // Kept in localStorage until the portal grows a setting for it. Both methods
-  // are the whole of the client-side story, so the server migration is their
-  // two bodies: `api.files.setShowQuickActions(data)` here plus
-  // `setFilesSetting("showQuickActions", res)`, exactly as
-  // `setOrganizeRoomsGrouping` below does, and the field then arrives with
-  // `getFilesSettings` and hydration goes away.
-  hydrateShowQuickActions = () => {
-    const userId = this.authStore.userStore?.user?.id;
-
-    if (!userId) return;
-
-    // Absent key means the banner has never been hidden, so anything that is
-    // not an explicit "false" reads as shown.
-    this.showQuickActions = safeGet(showQuickActionsKey(userId)) !== "false";
-  };
-
-  setShowQuickActions = (data: boolean) => {
+  // Applied before the request resolves: the caller hides the banner and
+  // raises its toast in the same gesture, so waiting for the round trip would
+  // leave the tiles on screen under a toast announcing they are gone. A
+  // rejected request puts the previous value back.
+  setShowQuickActions = async (data: boolean) => {
+    const previous = this.showQuickActions;
     this.showQuickActions = data;
 
-    const userId = this.authStore.userStore?.user?.id;
-
-    if (userId) safeSet(showQuickActionsKey(userId), String(data));
+    try {
+      const res = await api.files.changeShowQuickActions(data);
+      this.setFilesSetting("showQuickActions", res);
+    } catch (e) {
+      this.showQuickActions = previous;
+      toastr.error(e as string);
+    }
   };
 
   setOrganizeRoomsGrouping = async (data: boolean) => {

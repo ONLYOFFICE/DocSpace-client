@@ -33,8 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { observable, runInAction } from "mobx";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 
 vi.mock("@docspace/ui-kit/utils/socket", async (io) => ({
   ...((await io()) as Record<string, unknown>),
@@ -52,8 +51,15 @@ vi.mock("@docspace/ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn() },
 }));
 
+vi.mock("@docspace/shared/api", () => ({
+  default: { files: { changeShowQuickActions: vi.fn() } },
+}));
+
+import api from "@docspace/shared/api";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { TFilesSettings } from "@docspace/shared/api/files/types";
 
 import FilesSettingsStore from "../FilesSettingsStore";
 import type PluginStore from "../PluginStore";
@@ -61,142 +67,103 @@ import type PublicRoomStore from "../PublicRoomStore";
 import type { ThirdPartyStore } from "../ThirdPartyStore";
 import type TreeFoldersStore from "../TreeFoldersStore";
 
-const USER = "user-1";
-const OTHER_USER = "user-2";
-const KEY = `show_quick_actions_${USER}`;
+const changeShowQuickActions = vi.mocked(api.files.changeShowQuickActions);
 
-// Only the slice of AuthStore the store reads: the signed-in user's id, made
-// observable so the tests can sign users in and out the way the app does.
-const createAuthStore = (userId?: string) =>
-  observable({
-    userStore: { user: userId ? { id: userId } : null },
-  });
-
-const signIn = (
-  authStore: ReturnType<typeof createAuthStore>,
-  userId: string | null,
-) => {
-  runInAction(() => {
-    authStore.userStore.user = userId ? { id: userId } : null;
-  });
-};
-
-const createStore = (userId?: string) => {
-  const authStore = createAuthStore(userId);
-  const store = new FilesSettingsStore(
+const createStore = () =>
+  new FilesSettingsStore(
     {} as unknown as ThirdPartyStore,
     {} as unknown as TreeFoldersStore,
     {} as unknown as PublicRoomStore,
     {} as unknown as PluginStore,
-    authStore as unknown as AuthStore,
+    {} as unknown as AuthStore,
     {} as unknown as SettingsStore,
   );
 
-  return { store, authStore };
-};
-
 describe("FilesSettingsStore quick-actions visibility", () => {
   beforeEach(() => {
-    localStorage.clear();
-  });
-
-  afterEach(() => {
-    vi.restoreAllMocks();
+    changeShowQuickActions.mockResolvedValue(true);
   });
 
   it("starts shown, which is right for everyone who has never hidden it", () => {
-    expect(createStore().store.showQuickActions).toBe(true);
+    expect(createStore().showQuickActions).toBe(true);
   });
 
-  it("stays shown for a user with nothing stored", () => {
-    expect(createStore(USER).store.showQuickActions).toBe(true);
-  });
+  it("takes the stored value from the portal settings", () => {
+    const store = createStore();
 
-  it("is hidden from the first read for a user who turned it off", () => {
-    // No page has to ask for it: the store reads the choice as soon as it
-    // knows who is signed in, so the banner never renders before hiding.
-    localStorage.setItem(KEY, "false");
-
-    expect(createStore(USER).store.showQuickActions).toBe(false);
-  });
-
-  it("is tracked per user, because a browser is shared", () => {
-    createStore(USER).store.setShowQuickActions(false);
-
-    expect(createStore(OTHER_USER).store.showQuickActions).toBe(true);
-  });
-
-  it("picks the choice up when the user signs in later", () => {
-    localStorage.setItem(KEY, "false");
-    const { store, authStore } = createStore();
-
-    expect(store.showQuickActions).toBe(true);
-
-    signIn(authStore, USER);
+    store.setFilesSettings({ showQuickActions: false } as TFilesSettings);
 
     expect(store.showQuickActions).toBe(false);
   });
 
-  it("switches with the account on the same store", () => {
-    const { store, authStore } = createStore(USER);
-    store.setShowQuickActions(false);
-
-    signIn(authStore, OTHER_USER);
-    expect(store.showQuickActions).toBe(true);
-
-    signIn(authStore, USER);
-    expect(store.showQuickActions).toBe(false);
-  });
-
-  it("is left alone while no user is signed in", () => {
-    const { store, authStore } = createStore(USER);
-    store.setShowQuickActions(false);
-
-    signIn(authStore, null);
-
-    expect(store.showQuickActions).toBe(false);
-  });
-
-  it("persists both directions", () => {
-    const { store } = createStore(USER);
-
-    store.setShowQuickActions(false);
-    expect(localStorage.getItem(KEY)).toBe("false");
-
-    store.setShowQuickActions(true);
-    expect(localStorage.getItem(KEY)).toBe("true");
-    expect(store.showQuickActions).toBe(true);
-  });
-
-  it("holds in memory when storage cannot be written", () => {
-    const { store } = createStore(USER);
-    vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
-      throw new Error("nope");
-    });
-
-    expect(() => store.setShowQuickActions(false)).not.toThrow();
-    expect(store.showQuickActions).toBe(false);
-  });
-
-  it("survives storage that cannot be read", () => {
-    vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
-      throw new Error("nope");
-    });
-
-    const { store } = createStore(USER);
-
-    expect(() => store.hydrateShowQuickActions()).not.toThrow();
-    // Unreadable storage reads as shown, which is the safer of the two: the
-    // banner appearing for someone who hid it beats it vanishing for everyone.
-    expect(store.showQuickActions).toBe(true);
-  });
-
-  it("writes nothing while no user is signed in", () => {
-    const { store } = createStore();
+  it("hides before the request resolves", () => {
+    const store = createStore();
+    changeShowQuickActions.mockReturnValue(new Promise(() => {}));
 
     store.setShowQuickActions(false);
 
+    // The caller raises its "hidden" toast in the same gesture, so the tiles
+    // have to be gone by then rather than one round trip later.
     expect(store.showQuickActions).toBe(false);
-    expect(localStorage.length).toBe(0);
+  });
+
+  it("sends the new value to the portal", async () => {
+    const store = createStore();
+    changeShowQuickActions.mockResolvedValue(false);
+
+    await store.setShowQuickActions(false);
+
+    expect(changeShowQuickActions).toHaveBeenCalledWith(false);
+    expect(store.showQuickActions).toBe(false);
+  });
+
+  it("restores both directions", async () => {
+    const store = createStore();
+
+    changeShowQuickActions.mockResolvedValue(false);
+    await store.setShowQuickActions(false);
+    expect(store.showQuickActions).toBe(false);
+
+    changeShowQuickActions.mockResolvedValue(true);
+    await store.setShowQuickActions(true);
+    expect(store.showQuickActions).toBe(true);
+  });
+
+  it("settles on what the portal answers, not on what was asked", async () => {
+    const store = createStore();
+    changeShowQuickActions.mockResolvedValue(true);
+
+    await store.setShowQuickActions(false);
+
+    expect(store.showQuickActions).toBe(true);
+  });
+
+  it("puts the banner back when the request fails", async () => {
+    const store = createStore();
+    changeShowQuickActions.mockRejectedValue(new Error("nope"));
+
+    await store.setShowQuickActions(false);
+
+    // Leaving it hidden would look saved while the portal still has it shown,
+    // and the next reload would bring the banner back unexplained.
+    expect(store.showQuickActions).toBe(true);
+    expect(toastr.error).toHaveBeenCalled();
+  });
+
+  it("reverts to the previous value, not to the default", async () => {
+    const store = createStore();
+    store.setFilesSettings({ showQuickActions: false } as TFilesSettings);
+    changeShowQuickActions.mockRejectedValue(new Error("nope"));
+
+    await store.setShowQuickActions(true);
+
+    expect(store.showQuickActions).toBe(false);
+  });
+
+  it("does not reject when the request fails", async () => {
+    const store = createStore();
+    changeShowQuickActions.mockRejectedValue(new Error("nope"));
+
+    await expect(store.setShowQuickActions(false)).resolves.toBeUndefined();
   });
 });

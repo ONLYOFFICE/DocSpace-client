@@ -1173,6 +1173,7 @@ const getFilesSettings = (): TFilesSettings => {
     chunkUploadSize: 10485760,
     openEditorInSameTab: false,
     organizeRoomsGrouping: false,
+    showQuickActions: true,
   };
 };
 

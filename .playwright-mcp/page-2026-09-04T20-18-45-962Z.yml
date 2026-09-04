@@ -1,0 +1,31 @@
+- generic [ref=f2e3]:
+  - generic [ref=f2e4]:
+    - banner [ref=f2e6]:
+      - heading "Storybook" [level=1] [ref=f2e7]
+      - generic [ref=f2e11]:
+        - generic [ref=f2e13]:
+          - link "Skip to content" [ref=f2e14] [cursor=pointer]:
+            - /url: "#storybook-preview-wrapper"
+          - link "DocSpace UI Kit" [ref=f2e16] [cursor=pointer]:
+            - /url: https://www.onlyoffice.com/docspace.aspx
+          - switch "Settings" [ref=f2e17] [cursor=pointer]
+        - generic [ref=f2e21]: Search for components
+        - search [ref=f2e22]:
+          - combobox [ref=f2e23]:
+            - searchbox "Search for components" [ref=f2e24]
+            - code:
+              - generic: ⌘
+              - text: K
+        - navigation [ref=f2e26]:
+          - heading "Stories" [level=2] [ref=f2e27]
+    - separator "Sidebar resize handle" [ref=f2e47]
+  - generic [ref=f2e49]:
+    - region [ref=f2e50]:
+      - heading "Toolbar" [level=2] [ref=f2e51]
+      - toolbar [ref=f2e52]:
+        - button "API Config Default" [ref=f2e54] [cursor=pointer]: Default
+    - main [ref=f2e58]:
+      - heading "Main preview area" [level=2] [ref=f2e59]
+      - generic [ref=f2e60]:
+        - progressbar "Content is loading..." [ref=f2e62]
+        - iframe [ref=f2e67]

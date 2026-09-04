@@ -52,3 +52,5 @@ export const DELETE_TAG_DONT_SHOW_AGAIN_KEY = "delete-tag-dont-show-again";
 export const DELETE_TAG_MODAL_ID = "delete-tag-modal";
 
 export const EDIT_TAG_FORM_NAME = "edit-tag-form";
+
+export const REGEX_TAG_NAME_PATTERN = /^(?!.*\s{2,}).+$/; // No double spaces allowed, but leading/trailing spaces are fine.

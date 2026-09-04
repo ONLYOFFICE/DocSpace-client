@@ -365,7 +365,9 @@ describe("<TagManagementContent />", () => {
         expect(confirmEditTag).not.toHaveBeenCalled();
         expect(updateTagName).not.toHaveBeenCalled();
         // Still editable, so the name can be corrected instead of retyped.
-        expect(screen.getByTestId("edit_tag_input")).toHaveValue("boundTag");
+        expect(
+          screen.getByTestId<HTMLInputElement>("edit_tag_input").value,
+        ).toBe("boundTag");
       });
 
       it("reports it whatever the case, since the two read as the same name", async () => {

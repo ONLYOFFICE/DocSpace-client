@@ -88,8 +88,11 @@ const renderFilter = (access: AccessTagManagement = fullAccess) => {
   );
 };
 
+const searchInput = () =>
+  screen.getByTestId<HTMLInputElement>("add_tag_input");
+
 const typeAndSubmit = async (value: string) => {
-  const input = screen.getByTestId("add_tag_input");
+  const input = searchInput();
 
   await userEvent.type(input, value);
   await userEvent.type(input, "{Enter}");
@@ -120,7 +123,40 @@ describe("<TagManagementFilter /> submitting the search", () => {
     await waitFor(() => {
       expect(addTagsToRoom).toHaveBeenCalledWith(ROOM_ID, ["freeTag"]);
     });
-    expect(screen.getByTestId("add_tag_input")).toHaveValue("");
+    expect(searchInput().value).toBe("");
+  });
+
+  // A name is typed, so it arrives with whatever spacing the typing left in
+  // it, and " a  b " and "a b" are the same name to a reader.
+  it("collapses the runs of spaces inside a new name", async () => {
+    renderFilter();
+
+    await typeAndSubmit("brand   new    tag");
+
+    await waitFor(() => {
+      expect(addTagsToRoom).toHaveBeenCalledWith(ROOM_ID, ["brand new tag"]);
+    });
+  });
+
+  it("ignores the spaces around an existing name", async () => {
+    renderFilter();
+
+    await typeAndSubmit("  freeTag  ");
+
+    await waitFor(() => {
+      expect(addTagsToRoom).toHaveBeenCalledWith(ROOM_ID, ["freeTag"]);
+    });
+  });
+
+  it("sends nothing when the name is only spaces", async () => {
+    renderFilter();
+
+    await typeAndSubmit("   ");
+
+    await waitFor(() => {
+      expect(searchInput().value).toBe("   ");
+    });
+    expect(addTagsToRoom).not.toHaveBeenCalled();
   });
 
   it("matches the name whatever its case, and keeps the tag's own spelling", async () => {
@@ -139,7 +175,7 @@ describe("<TagManagementFilter /> submitting the search", () => {
     await typeAndSubmit("boundTag");
 
     await waitFor(() => {
-      expect(screen.getByTestId("add_tag_input")).toHaveValue("");
+      expect(searchInput().value).toBe("");
     });
     expect(addTagsToRoom).not.toHaveBeenCalled();
     expect(removeTagsFromRoom).not.toHaveBeenCalled();
@@ -151,7 +187,7 @@ describe("<TagManagementFilter /> submitting the search", () => {
     await typeAndSubmit("freeTag");
 
     await waitFor(() => {
-      expect(screen.getByTestId("add_tag_input")).toHaveValue("");
+      expect(searchInput().value).toBe("");
     });
     expect(addTagsToRoom).not.toHaveBeenCalled();
   });

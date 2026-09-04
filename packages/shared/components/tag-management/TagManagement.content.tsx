@@ -66,6 +66,7 @@ import {
   MAX_BODY_HEIGHT,
   MARGIN_BOTTOM,
   EDIT_TAG_FORM_NAME,
+  REGEX_TAG_NAME_PATTERN,
 } from "./TagManagement.constants";
 import type { TagManagementContentProps } from "./TagManagement.types";
 
@@ -163,7 +164,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                   <Controller
                     name={EDIT_TAG_FORM_NAME}
                     control={control}
-                    rules={{ required: true }}
+                    rules={{ required: true, pattern: REGEX_TAG_NAME_PATTERN }}
                     render={({
                       field: { value, onChange, ref, disabled },
                       fieldState,

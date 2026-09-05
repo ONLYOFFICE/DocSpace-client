@@ -35,21 +35,16 @@
 
 import { TFunction } from "i18next";
 
-export interface Category {
-  id: string;
-  attributes: {
-    name: string;
-    categoryId: string;
-  };
-}
+import type {
+  TOformCategory,
+  TOformParentCategory,
+  TOformPurpose,
+} from "@docspace/shared/api/oforms/types";
 
-export interface MenuItem {
-  key: string;
-  label: string;
-  categories: Category[];
-}
 export interface OformsFilter {
-  locale: string;
+  locale: string | null;
+  purpose: string;
+  extension: string;
   sortBy: string;
   sortOrder: string;
 }
@@ -57,8 +52,9 @@ export interface OformsFilter {
 export interface CategoryFilterProps {
   oformsFilter: OformsFilter;
   noLocales: boolean;
-  fetchCategoryTypes: () => Promise<Category[]>;
-  fetchCategoriesOfCategoryType: (categoryId: string) => Promise<Category[]>;
+  /** Category groups of the selected purpose, or of both when none is set. */
+  menuItems: TOformParentCategory[];
+  fetchPurposes: () => Promise<TOformPurpose[] | null>;
   filterOformsByLocaleIsLoading: boolean;
   setFilterOformsByLocaleIsLoading: (loading: boolean) => void;
   setCategoryFilterLoaded: (loaded: boolean) => void;
@@ -71,41 +67,34 @@ export interface CategoryFilterProps {
 
 export interface CategoryFilterDesktopProps {
   t: TFunction;
-  menuItems: MenuItem[];
-  currentCategory: Category | null;
-  getCategoryTitle: (category: Category | null) => string;
-  filterOformsByCategory: (categoryType: string, categoryId: string) => void;
+  menuItems: TOformParentCategory[];
+  currentCategory: TOformCategory | null;
+  filterOformsByCategory: (category: TOformCategory | null) => void;
   isLanguageFilterChange: boolean;
 }
 
 export interface SubListProps {
   t: TFunction;
-  categoryType: string;
-  categories: Category[];
+  parentCategoryId: number;
+  categories: TOformCategory[];
   isDropdownOpen: boolean;
   isSubHovered: boolean;
   marginTop: string;
   onCloseDropdown: () => void;
-  getCategoryTitle: (category: Category) => string;
-  filterOformsByCategory: (categoryType: string, categoryId: string) => void;
-  setOformsCurrentCategory: (category: Category) => void;
+  filterOformsByCategory: (category: TOformCategory | null) => void;
 }
 
 export interface CategoryFilterMobileProps {
   t: TFunction;
-  menuItems: MenuItem[];
-  currentCategory: Category | null;
-  getCategoryTitle: (category: Category | null) => string;
-  filterOformsByCategory: (categoryType: string, categoryId: string) => void;
-  setOformsCurrentCategory: (category: Category) => void;
+  menuItems: TOformParentCategory[];
+  currentCategory: TOformCategory | null;
+  filterOformsByCategory: (category: TOformCategory | null) => void;
   isLanguageFilterChange: boolean;
 }
 
 export interface InjectedProps {
   oformsStore: {
-    currentCategory: Category | null;
-    getCategoryTitle: (category: Category | null) => string;
-    filterOformsByCategory: (categoryType: string, categoryId: string) => void;
-    setOformsCurrentCategory: (category: Category) => void;
+    currentCategory: TOformCategory | null;
+    filterOformsByCategory: (category: TOformCategory | null) => void;
   };
 }

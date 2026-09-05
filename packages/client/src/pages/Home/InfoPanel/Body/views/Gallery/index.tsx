@@ -51,50 +51,7 @@ import styles from "./Gallery.module.scss";
 import ItemTitle from "./ItemTitle";
 
 type GalleryProps = {
-  gallerySelected?:
-    | OformsStore["gallerySelected"]
-    | {
-        attributes: {
-          card_prewiew: {
-            data: {
-              id: number;
-              attributes: {
-                url: string;
-              };
-            };
-          };
-          name_form: string;
-          template_desc: string;
-          description_card: string;
-          updatedAt: string;
-          template_image: {
-            data: {
-              id: number;
-              attributes: {
-                formats: {
-                  thumbnail: {
-                    ext: string;
-                    url: string;
-                    hash: string;
-                    mime: string;
-                    name: string;
-                    path: string | null;
-                    size: number;
-                    width: number;
-                    height: number;
-                  };
-                };
-              };
-            };
-          };
-          file_oform: {
-            data: {
-              id: number;
-              attributes: { size: number };
-            }[];
-          };
-        };
-      };
+  gallerySelected?: OformsStore["gallerySelected"];
   culture?: string;
 };
 
@@ -108,10 +65,9 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
 
   if (!gallerySelected) return <NoItem isGallery />;
 
-  const thumbnailUrl =
-    gallerySelected.attributes.card_prewiew.data.attributes.url;
-  const formTitle = gallerySelected.attributes.name_form;
-  const size = gallerySelected.attributes.file_oform.data[0].attributes.size;
+  const thumbnailUrl = gallerySelected.preview?.url;
+  const formTitle = gallerySelected.title;
+  const size = gallerySelected.file?.size ?? 0;
   const sizeWithExtra =
     size < 1024 ? `${size.toFixed(0)} KB` : `${(size / 1024).toFixed(0)} MB`;
 
@@ -161,8 +117,7 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
         lineHeight="20px"
         data-testid="info_panel_gallery_description_text"
       >
-        {gallerySelected.attributes.template_desc ||
-          gallerySelected.attributes.description_card}
+        {gallerySelected.description}
       </Text>
       <div
         className={classNames(styles.select, commonStyles.subtitle)}
@@ -184,10 +139,7 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
             {t("InfoPanel:LastUpdateInfo")}
           </Text>
           <Text className={classNames(styles.select, "property-content")}>
-            {getCorrectDate(
-              culture ?? "en",
-              gallerySelected.attributes.updatedAt,
-            )}
+            {getCorrectDate(culture ?? "en", gallerySelected.updatedAt)}
           </Text>
         </div>
         <div

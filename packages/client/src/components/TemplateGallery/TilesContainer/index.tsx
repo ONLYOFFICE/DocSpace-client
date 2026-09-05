@@ -36,6 +36,7 @@
 import { useState, useEffect, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import classNames from "classnames";
 import type { FC } from "react";
 import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.light.svg?url";
 import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.dark.svg?url";
@@ -52,7 +53,10 @@ import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-c
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import type OformsFilter from "@docspace/shared/api/oforms/filter";
-import type { Category } from "../Filter/CategoryFilter/CategoryFilter.types";
+import type {
+  TOformParentCategory,
+  TOformPurpose,
+} from "@docspace/shared/api/oforms/types";
 import styles from "../TemplateGallery.module.scss";
 import FilterContent from "../Filter";
 import Tiles from "../Tiles";
@@ -67,8 +71,8 @@ interface TilesContainerOwnProps {
 interface FilterProps {
   oformsFilter: OformsFilter;
   noLocales: boolean;
-  fetchCategoryTypes: () => Promise<Category[]>;
-  fetchCategoriesOfCategoryType: (categoryId: string) => Promise<Category[]>;
+  menuItems: TOformParentCategory[];
+  fetchPurposes: () => Promise<TOformPurpose[] | null>;
   filterOformsByLocaleIsLoading: boolean;
   setFilterOformsByLocaleIsLoading: (isLoading: boolean) => void;
   setCategoryFilterLoaded: (isLoaded: boolean) => void;
@@ -87,6 +91,7 @@ interface TilesContainerInjectedProps extends FilterProps {
   resetFilters: (ext: string) => Promise<void>;
   t: TTranslation;
   isFormsOnlyGallery: boolean;
+  oformsIsLoading: boolean;
 }
 
 interface TilesContainerProps
@@ -101,6 +106,7 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
     resetFilters,
     t,
     isFormsOnlyGallery,
+    oformsIsLoading,
     ...filterProps
   } = props;
 
@@ -195,7 +201,15 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
         viewMobile={isMobileView}
         isShowInitSkeleton={isShowInitSkeleton}
       />
-      {renderContent()}
+      {/* A filter change keeps the current tiles on screen and dims them
+          until the new page arrives, so the request is visible. */}
+      <div
+        className={classNames(styles.galleryContent, {
+          [styles.dimmed]: oformsIsLoading && !isShowInitSkeleton,
+        })}
+      >
+        {renderContent()}
+      </div>
     </div>
   );
 };
@@ -205,8 +219,8 @@ export default inject<TStore>(({ oformsStore }) => {
     hasGalleryFiles,
     resetFilters,
     oformsFilter,
-    fetchCategoryTypes,
-    fetchCategoriesOfCategoryType,
+    parentCategories,
+    fetchPurposes,
     setCategoryFilterLoaded,
     categoryFilterLoaded,
     filterOformsByLocale,
@@ -217,6 +231,7 @@ export default inject<TStore>(({ oformsStore }) => {
     filterOformsBySearch,
     sortOforms,
     isFormsOnlyGallery,
+    oformsIsLoading,
   } = oformsStore;
 
   const oformLocales = oformsStore.oformLocales as string[] | null;
@@ -224,12 +239,12 @@ export default inject<TStore>(({ oformsStore }) => {
   return {
     noLocales: !oformLocales || oformLocales.length === 0,
     oformLocales,
-    oformsLocal: oformsStore.oformsFilter.locale,
+    oformsLocal: oformsStore.oformsFilter.locale ?? "",
     hasGalleryFiles,
     resetFilters,
     oformsFilter,
-    fetchCategoryTypes,
-    fetchCategoriesOfCategoryType,
+    menuItems: parentCategories,
+    fetchPurposes,
     setCategoryFilterLoaded,
     categoryFilterLoaded,
     filterOformsByLocale,
@@ -240,6 +255,7 @@ export default inject<TStore>(({ oformsStore }) => {
     filterOformsBySearch,
     sortOforms,
     isFormsOnlyGallery,
+    oformsIsLoading,
   };
 })(
   withTranslation("Common")(observer(TilesContainer)),

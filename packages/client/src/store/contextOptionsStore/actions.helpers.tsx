@@ -635,7 +635,7 @@ const onCreateRoomFromTemplateImpl = (self: ContextOptionsStore) => {
   if (!gallerySelected) return;
 
   const extension = self.oformsStore.currentExtensionGallery.replace(".", "");
-  const title = gallerySelected.attributes.name_form;
+  const title = gallerySelected.title;
 
   setFormTemplateForNewRoom({ id: gallerySelected.id, title, extension });
 
@@ -687,7 +687,7 @@ export const onCreateTemplateImpl = async (
     extension,
     id: -1,
     fromTemplate: true,
-    title: gallerySelected.attributes.name_form,
+    title: gallerySelected.title,
     openEditor: true,
     edit: true,
   };

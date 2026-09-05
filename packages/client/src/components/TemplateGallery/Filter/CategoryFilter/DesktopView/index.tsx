@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { inject, observer } from "mobx-react";
@@ -41,21 +41,58 @@ import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import styles from "./DesktopView.module.scss";
 import SubList from "./SubList";
+import type { TOformParentCategory } from "@docspace/shared/api/oforms/types";
 import type {
   CategoryFilterDesktopProps,
   InjectedProps,
 } from "../CategoryFilter.types";
 
+// Geometry of a sublist, mirrored from DesktopView.module.scss.
+const SUBLIST_ITEM_HEIGHT = 36;
+const SUBLIST_PADDING = 8;
+const SUBLIST_MAX_HEIGHT = 296;
+const VIEWPORT_MARGIN = 16;
+
 const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
   t,
   menuItems,
   currentCategory,
-  getCategoryTitle,
   filterOformsByCategory,
   isLanguageFilterChange,
 }) => {
+  const rootRef = useRef<HTMLDivElement>(null);
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [hoveredSub, setHoveredSub] = useState<string | null>(null);
+  const [hoveredSub, setHoveredSub] = useState<number | null>(null);
+  const [hoveredSubTop, setHoveredSubTop] = useState(0);
+
+  // A sublist is placed by hand next to the item it belongs to, so it has to
+  // follow that item wherever the dropdown ends up: the list is long enough to
+  // be opened upwards, and an offset guessed from the item index would leave
+  // the sublist out of the pointer's reach.
+  const onItemHover = (
+    e: React.MouseEvent<HTMLDivElement>,
+    item: TOformParentCategory,
+  ) => {
+    setHoveredSub(item.id);
+
+    const rootRect = rootRef.current?.getBoundingClientRect();
+    if (!rootRect) return;
+
+    const itemTop = e.currentTarget.getBoundingClientRect().top;
+    const height = Math.min(
+      item.subcategories.length * SUBLIST_ITEM_HEIGHT,
+      SUBLIST_MAX_HEIGHT,
+    );
+    // A sublist of the last groups would hang below the window; pull it up
+    // just enough to stay reachable, never above the dropdown itself.
+    const maxTop = Math.max(
+      rootRect.top,
+      window.innerHeight - height - SUBLIST_PADDING - VIEWPORT_MARGIN,
+    );
+
+    setHoveredSubTop(Math.min(itemTop, maxTop) - rootRect.top);
+  };
 
   const onOpenDropdown = () => {
     setIsOpen((prev) => !prev);
@@ -75,10 +112,10 @@ const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
       onCloseDropdown();
   };
 
-  const onViewAllTemplates = () => filterOformsByCategory("", "");
+  const onViewAllTemplates = () => filterOformsByCategory(null);
 
   return (
-    <>
+    <div ref={rootRef} className={styles.categoryFilterRoot}>
       <ComboBox
         className={styles.categoryFilter}
         id="comboBoxLanguage"
@@ -105,8 +142,7 @@ const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
         advancedOptionsCount={5}
         selectedOption={{
           key: currentCategory?.id || "categories-combobox",
-          label:
-            getCategoryTitle(currentCategory) || t("FormGallery:Categories"),
+          label: currentCategory?.name || t("FormGallery:Categories"),
         }}
         advancedOptions={
           <>
@@ -126,14 +162,14 @@ const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
             </div>
             <DropDownItem isSeparator />
             {menuItems?.map((item) => (
-              <div onMouseEnter={() => setHoveredSub(item.key)} key={item.key}>
+              <div onMouseEnter={(e) => onItemHover(e, item)} key={item.id}>
                 <DropDownItem
-                  id={item.key}
+                  id={String(item.id)}
                   className={classNames(
-                    `item-by-${item.key} item-by-first-level`,
+                    `item-by-${item.slug} item-by-first-level`,
                     styles.categoryFilterItem,
                   )}
-                  label={item.label}
+                  label={item.name}
                   isSubMenu
                 />
               </div>
@@ -142,23 +178,22 @@ const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
         }
       />
 
-      {menuItems?.map((item, index) => (
+      {menuItems?.map((item) => (
         <SubList
-          key={item.key}
-          categoryType={item.key}
-          categories={item.categories || []}
+          key={item.id}
+          parentCategoryId={item.id}
+          categories={item.subcategories || []}
           isDropdownOpen={isOpen}
-          isSubHovered={hoveredSub === item.key}
-          marginTop={`${83 + index * 32}px`}
+          isSubHovered={hoveredSub === item.id}
+          marginTop={`${hoveredSubTop}px`}
           onCloseDropdown={onCloseDropdown}
         />
       ))}
-    </>
+    </div>
   );
 };
 
 export default inject(({ oformsStore }: InjectedProps) => ({
   currentCategory: oformsStore.currentCategory,
-  getCategoryTitle: oformsStore.getCategoryTitle,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
 }))(withTranslation(["FormGallery"])(observer(CategoryFilterDesktop)));

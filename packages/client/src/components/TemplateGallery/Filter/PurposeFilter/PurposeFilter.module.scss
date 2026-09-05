@@ -35,13 +35,9 @@
 
 @use "@docspace/ui-kit/styles/mixins";
 
-.categoryFilterRoot {
-  position: relative;
-  width: 100%;
-}
-
-.categoryFilter {
-  width: 247px !important;
+.purposeFilter {
+  width: 160px !important;
+  min-width: 160px;
 
   :global(.combo-button-label) {
     font-weight: 400;
@@ -52,74 +48,18 @@
   :global(.dropdown-container) {
     margin-top: 4px;
   }
+
+  @include mixins.mobile {
+    width: 112px !important;
+    min-width: 112px;
+  }
 }
 
-.categoryFilterItem {
-  width: 247px;
+.skeleton {
+  width: 160px;
   height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding: 8px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16px;
 
-  span {
-    width: 160px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: left;
+  @include mixins.mobile {
+    width: 112px;
   }
-
-  :global(.submenu-arrow) {
-    margin: 0;
-
-    svg {
-      height: 12px;
-      width: 12px;
-    }
-  }
-}
-
-.categoryFilterSubList {
-  position: absolute;
-  top: 0;
-  padding: 4px 0;
-  margin-top: var(--margin-top);
-  inset-inline-start: calc(100% + 4px) !important;
-  max-height: 296px;
-  max-width: auto;
-  visibility: hidden;
-
-  &:before {
-    content: "";
-    position: absolute;
-    inset-inline-start: -4px;
-    top: 0;
-    width: 6px;
-    height: 100%;
-  }
-
-  &.open {
-    &:hover {
-      visibility: visible;
-    }
-  }
-
-  &.open.isSubHovered {
-    visibility: visible;
-  }
-}
-
-.categoryFilterSubListItem {
-  width: 208px;
-  height: 36px;
-  box-sizing: border-box;
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 20px;
 }

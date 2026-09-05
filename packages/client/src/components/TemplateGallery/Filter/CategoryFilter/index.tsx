@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import classNames from "classnames";
@@ -41,17 +41,13 @@ import classNames from "classnames";
 import CategoryFilterDesktop from "./DesktopView";
 import CategoryFilterMobile from "./MobileView";
 import styles from "./CategoryFilter.module.scss";
-import type {
-  CategoryFilterProps,
-  MenuItem,
-  Category,
-} from "./CategoryFilter.types";
+import type { CategoryFilterProps } from "./CategoryFilter.types";
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({
   oformsFilter,
   noLocales,
-  fetchCategoryTypes,
-  fetchCategoriesOfCategoryType,
+  menuItems,
+  fetchPurposes,
   filterOformsByLocaleIsLoading,
   setFilterOformsByLocaleIsLoading,
   setCategoryFilterLoaded,
@@ -61,62 +57,30 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   viewMobile,
   isLanguageFilterChange,
 }) => {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-
+  // The whole taxonomy arrives in one request, localized by the gallery locale
+  // and counted per file type: both the names and which categories are worth
+  // offering change with the locale and the open tab.
   useEffect(() => {
     (async () => {
       if (!oformsFilter.locale) return;
-      const categoryData = await fetchCategoryTypes();
-      if (!categoryData) {
-        filterOformsByLocaleIsLoading &&
-          setFilterOformsByLocaleIsLoading(false);
 
-        return;
-      }
+      await fetchPurposes();
 
-      const categoryPromises = categoryData.map(
-        (item: Category) =>
-          new Promise<Category[]>((resolve) => {
-            resolve(fetchCategoriesOfCategoryType(item.attributes.categoryId));
-          }),
-      );
+      // Loaded means the taxonomy request settled, not that it brought
+      // categories: an empty answer must not keep the whole filter row -- and
+      // with it the gallery header -- in a skeleton state forever.
+      setCategoryFilterLoaded(true);
 
-      Promise.all(categoryPromises)
-        .then((results) => {
-          const menuItems: MenuItem[] = categoryData.map(
-            (item: Category, index: number) => ({
-              key: item.attributes.categoryId,
-              label: item.attributes.name,
-              categories: results[index],
-            }),
-          );
-          setMenuItems(menuItems);
-        })
-        .catch((err) => {
-          console.error(err);
-          const menuItems: MenuItem[] = categoryData.map((item: Category) => ({
-            key: item.attributes.categoryId,
-            label: item.attributes.name,
-            categories: [],
-          }));
-          setMenuItems(menuItems);
-        })
-        .finally(() => {
-          filterOformsByLocaleIsLoading &&
-            setFilterOformsByLocaleIsLoading(false);
-        });
+      if (filterOformsByLocaleIsLoading) setFilterOformsByLocaleIsLoading(false);
     })();
   }, [
     oformsFilter.locale,
-    fetchCategoryTypes,
-    fetchCategoriesOfCategoryType,
+    oformsFilter.extension,
+    fetchPurposes,
+    setCategoryFilterLoaded,
     filterOformsByLocaleIsLoading,
     setFilterOformsByLocaleIsLoading,
   ]);
-
-  useEffect(() => {
-    setCategoryFilterLoaded(menuItems.length !== 0);
-  }, [menuItems.length, setCategoryFilterLoaded]);
 
   if (
     (isShowInitSkeleton ||

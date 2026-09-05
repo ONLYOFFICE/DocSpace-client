@@ -40,36 +40,30 @@ import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import classNames from "classnames";
 import styles from "./DesktopView.module.scss";
-import type {
-  SubListProps,
-  Category,
-  InjectedProps,
-} from "../CategoryFilter.types";
+import type { TOformCategory } from "@docspace/shared/api/oforms/types";
+import type { SubListProps, InjectedProps } from "../CategoryFilter.types";
 
 const SubList: React.FC<SubListProps> = ({
-  categoryType,
+  parentCategoryId,
   categories,
   isDropdownOpen,
   isSubHovered,
   marginTop,
   onCloseDropdown,
-  getCategoryTitle,
   filterOformsByCategory,
-  setOformsCurrentCategory,
 }) => {
   const onPreventDefault = (e: React.MouseEvent) => e.preventDefault();
 
-  const onFilterByCategory = (category: Category) => {
+  const onFilterByCategory = (category: TOformCategory) => {
     onCloseDropdown();
-    setOformsCurrentCategory(category);
-    filterOformsByCategory(categoryType, category.id);
+    filterOformsByCategory(category);
   };
 
   return (
     <DropDown
       open={isDropdownOpen}
       className={classNames(
-        `dropdown-sub sub-by-${categoryType}`,
+        `dropdown-sub sub-by-${parentCategoryId}`,
         styles.categoryFilterSubList,
         {
           [styles.open]: isDropdownOpen,
@@ -77,7 +71,7 @@ const SubList: React.FC<SubListProps> = ({
         },
       )}
       style={{ "--margin-top": marginTop } as React.CSSProperties}
-      id={`category-sub-list-${categoryType}`}
+      id={`category-sub-list-${parentCategoryId}`}
       directionX="right"
       directionY="bottom"
       manualY="0px"
@@ -93,7 +87,7 @@ const SubList: React.FC<SubListProps> = ({
       isNoFixedHeightOptions={false}
     >
       {categories.map((category) => {
-        const categoryTitle = getCategoryTitle(category);
+        const categoryTitle = category.name;
         const onCategoryClick = () => onFilterByCategory(category);
         return (
           <DropDownItem
@@ -127,7 +121,5 @@ const SubList: React.FC<SubListProps> = ({
 };
 
 export default inject(({ oformsStore }: InjectedProps) => ({
-  getCategoryTitle: oformsStore.getCategoryTitle,
-  setOformsCurrentCategory: oformsStore.setOformsCurrentCategory,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
 }))(withTranslation(["FormGallery", "Common"])(SubList));

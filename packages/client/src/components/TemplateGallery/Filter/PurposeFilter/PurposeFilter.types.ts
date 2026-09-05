@@ -33,41 +33,20 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// @ts-nocheck
+import { TFunction } from "i18next";
 
-import axios from "axios";
+import type { TOformPurpose } from "@docspace/shared/api/oforms/types";
 
-export function getOforms(url) {
-  return axios.get(url);
-}
-
-export const getOformLocales = async (url) => {
-  const res = await axios.get(url);
-  return res?.data;
-};
-
-export const getCategoryById = async (url, categorizeBy, id, locale) => {
-  const res = await axios.get(
-    `${url}/${categorizeBy}/${id}?populate=*&locale=${locale}`,
-  );
-  return res?.data?.data;
-};
-
-export const getCategoryTypes = async (url, locale = "en") => {
-  const res = await axios.get(`${url}?populate=*&locale=${locale}`);
-  return res?.data?.data;
-};
-
-export const getCategoriesOfCategoryType = async (url, locale = "en") => {
-  const res = await axios.get(`${url}?populate=*&locale=${locale}`);
-  return res?.data?.data;
-};
-
-export function submitToGallery(url, file, formName, language, signal) {
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("formName", formName);
-  formData.append("language", language);
-
-  return axios.post(url, formData, { signal });
+export interface PurposeFilterProps {
+  t: TFunction;
+  /** Business and Personal, as the CMS names them in the gallery locale. */
+  purposes: TOformPurpose[];
+  /** Key of the selected purpose; empty means both. */
+  currentPurpose: string;
+  filterOformsByPurpose: (purpose: string) => void;
+  filterOformsByLocaleIsLoading: boolean;
+  categoryFilterLoaded: boolean;
+  languageFilterLoaded: boolean;
+  isShowInitSkeleton: boolean;
+  isLanguageFilterChange: boolean;
 }

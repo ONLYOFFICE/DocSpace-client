@@ -36,64 +36,41 @@
 import type OformsFilter from "./filter";
 
 /**
- * Types of the ONLYOFFICE form gallery (oforms) Strapi API responses.
+ * Types of the ONLYOFFICE template gallery (oforms) CMS.
  *
- * The API client in `./index.js` is still untyped (`@ts-nocheck`);
- * these shapes are derived from the fields actually consumed by the
- * client (OformsStore and the TemplateGallery components).
+ * The CMS is Strapi v5: entities are flat (no `attributes` envelope), carry
+ * both a numeric `id` and a string `documentId`, and relations are plain
+ * arrays. The `TOformRaw*` types describe what the API answers with; the
+ * client never passes them further than the normalizers in `./index.ts`,
+ * which map them to the `TOform*` model the gallery is built on.
  */
 
-/** One image format entry of a Strapi media field (`formats.thumbnail`). */
-export type TOformImageFormat = {
-  ext: string;
-  url: string;
-  hash: string;
-  mime: string;
-  name: string;
-  path: string | null;
-  size: number;
-  width: number;
-  height: number;
-};
-
-/** A form template entity returned by the forms list endpoint. */
-export type TOformFile = {
+/** A media entry (image or template file) as the gallery requests it. */
+export type TOformRawMedia = {
   id: number;
-  attributes: {
-    name_form: string;
-    updatedAt: string;
-    description_card: string;
-    template_desc: string;
-    card_prewiew: {
-      data: {
-        id: number;
-        attributes: {
-          url: string;
-        };
-      };
-    };
-    template_image: {
-      data: {
-        id: number;
-        attributes: {
-          formats: {
-            thumbnail: TOformImageFormat;
-          };
-        };
-      };
-    };
-    file_oform: {
-      data: {
-        id: number;
-        attributes: {
-          size: number;
-        };
-      }[];
-    };
-  };
+  documentId: string;
+  url?: string | null;
+  name?: string | null;
+  ext?: string | null;
+  size?: number | null;
+  width?: number | null;
+  height?: number | null;
 };
 
-/** Strapi pagination block of a list response (`meta.pagination`). */
+/** A template entity of the `/oforms` collection. */
+export type TOformRawTemplate = {
+  id: number;
+  documentId: string;
+  name_form?: string | null;
+  description_card?: string | null;
+  template_desc?: string | null;
+  url?: string | null;
+  updatedAt?: string | null;
+  card_prewiew?: TOformRawMedia | null;
+  file_oform?: TOformRawMedia[] | null;
+};
+
+/** Pagination block of a list response (`meta.pagination`). */
 export type TOformsPagination = {
   page: number;
   pageSize: number;
@@ -101,64 +78,121 @@ export type TOformsPagination = {
   total: number;
 };
 
-/** Body of the forms list response (`response.data`). */
-export type TOformsListResponse = {
-  data: TOformFile[];
-  meta: {
-    pagination: TOformsPagination;
-  };
+/** Body of the templates list response. */
+export type TOformsRawListResponse = {
+  data?: TOformRawTemplate[] | null;
+  meta?: {
+    pagination?: TOformsPagination;
+  } | null;
 };
 
-/** A localized variant of a category (`attributes.localizations.data[n]`). */
-export type TOformCategoryLocalization = {
-  id?: number;
-  attributes: {
-    /**
-     * The localized category title lives under a dynamic key named after
-     * the category type (e.g. `categorie`, `types`, `compilations`).
-     */
-    [key: string]: unknown;
-    locale?: string;
-  };
+/** A taxonomy entity: a subcategory, or a parent category without children. */
+export type TOformRawCategory = {
+  id: number;
+  documentId: string;
+  name?: string | null;
+  urlReq?: string | null;
+  /** How many templates of the requested type the category holds. */
+  oforms?: { count?: number | null } | null;
 };
 
-/**
- * A category entity. Besides `localizations`, the category title is stored
- * under a dynamic attribute key named after its category type.
- */
-export type TOformCategory = {
-  id: number | string;
-  attributes: {
-    [key: string]: unknown;
-    localizations?: {
-      data: TOformCategoryLocalization[] | null;
-    } | null;
-  };
+/** A parent category with the subcategories it groups. */
+export type TOformRawParentCategory = TOformRawCategory & {
+  subcategories?: TOformRawCategory[] | null;
 };
 
-/** A category type (menu) entity of the `/menu-translations` endpoint. */
-export type TOformCategoryType = {
-  id: number | string;
-  attributes: {
-    [key: string]: unknown;
-    categoryTitle: string;
-    categoryId: string;
-  };
+/** The top level of the taxonomy: Business or Personal. */
+export type TOformRawPurpose = {
+  id: number;
+  documentId: string;
+  key?: string | null;
+  name?: string | null;
+  parent_categories?: TOformRawParentCategory[] | null;
 };
 
-/** One locale entry of the `/i18n/locales` endpoint. */
-export type TOformLocale = {
+/** Body of the `/purposes` response. */
+export type TOformRawPurposesResponse = {
+  data?: TOformRawPurpose[] | null;
+};
+
+/** One entry of the `/i18n/locales` response. */
+export type TOformRawLocale = {
   code: string;
 };
 
+/** The card image of a template, with the dimensions the tile lays out by. */
+export type TOformPreview = {
+  url: string;
+  width: number;
+  height: number;
+};
+
+/** The downloadable template file behind a gallery card. */
+export type TOformSource = {
+  url: string;
+  name: string;
+  /** Extension with the leading dot, as the CMS stores it (`.docx`). */
+  ext: string;
+  /** Size in kilobytes, as the CMS stores it. */
+  size: number;
+};
+
 /**
- * Instance shape of `OformsFilter` as the client actually uses it:
- * `locale` starts as `null` but is reassigned to a string, and `icon`
- * is an ad-hoc property attached by `OformsStore.filterOformsByLocale`.
- * (`./filter.js` is still `@ts-nocheck`, so its inferred `locale: null`
- * type is narrower than the runtime values.)
+ * A gallery template in client terms. Field names of the CMS stop here: every
+ * consumer (tiles, info panel, create-file flow) reads this shape.
+ */
+export type TOformFile = {
+  /** Numeric CMS id. Travels to the backend as `formId`. */
+  id: number;
+  documentId: string;
+  title: string;
+  /** Slug of the template page on the templates site. */
+  slug: string;
+  description: string;
+  updatedAt: string;
+  preview: TOformPreview | null;
+  file: TOformSource | null;
+};
+
+/** A normalized templates list with its pagination. */
+export type TOformsList = {
+  templates: TOformFile[];
+  pagination: TOformsPagination;
+};
+
+/** A leaf of the taxonomy the category filter selects by. */
+export type TOformCategory = {
+  id: number;
+  documentId: string;
+  name: string;
+  slug: string;
+  /**
+   * Templates of the currently filtered extension behind this category. The
+   * CMS keeps categories that hold nothing at all, and the gallery has no use
+   * for a filter that can only end in an empty screen.
+   */
+  templatesCount: number;
+};
+
+/** A category group: one first-level item of the category filter. */
+export type TOformParentCategory = TOformCategory & {
+  subcategories: TOformCategory[];
+};
+
+/** Business or Personal, with the category tree it owns. */
+export type TOformPurpose = {
+  id: number;
+  documentId: string;
+  /** Machine key (`business` / `personal`), used as the filter value. */
+  key: string;
+  name: string;
+  parentCategories: TOformParentCategory[];
+};
+
+/**
+ * Instance shape of `OformsFilter` as the client actually uses it: `locale`
+ * starts as `null` but is reassigned to a string before the first request.
  */
 export type TOformsFilter = Omit<OformsFilter, "locale"> & {
   locale: string | null;
-  icon?: string;
 };

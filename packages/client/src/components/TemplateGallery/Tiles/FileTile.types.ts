@@ -33,42 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Key } from "react";
+import type { TOformFile } from "@docspace/shared/api/oforms/types";
 
 export interface FileTileProps {
-  item: {
-    id: Key | null | undefined;
-    attributes: {
-      template_image: {
-        data: {
-          id: number;
-          attributes: {
-            formats: {
-              thumbnail: {
-                ext: string;
-                url: string;
-                hash: string;
-                mime: string;
-                name: string;
-                path: string | null;
-                size: number;
-                width: number;
-                height: number;
-              };
-            };
-          };
-        };
-      };
-      name_form: string;
-      card_prewiew: {
-        data?: {
-          attributes: {
-            url: string;
-          };
-        };
-      };
-    };
-  };
+  item: TOformFile;
   smallPreview: boolean;
   onClickInfo: (e: React.MouseEvent) => void;
   onClick: () => void;

@@ -47,18 +47,13 @@ const FileTile: FC<FileTileProps> = ({
   onClick,
   isFocused = false,
 }) => {
-  const previewSrc = item?.attributes.card_prewiew.data?.attributes.url;
-  let nonStandardHorizontalTile = false;
+  const preview = item?.preview;
+  const previewSrc = preview?.url;
 
-  if (!smallPreview) {
-    const thumbnail =
-      item?.attributes.template_image.data.attributes.formats.thumbnail;
-
-    const width = thumbnail.width;
-    const height = thumbnail.height;
-
-    nonStandardHorizontalTile = width > height;
-  }
+  // Landscape previews are laid out differently; the small-preview tabs
+  // (spreadsheets, presentations) keep one fixed layout.
+  const nonStandardHorizontalTile =
+    !smallPreview && !!preview && preview.width > preview.height;
 
   const handleInfoClick = (e: React.MouseEvent): void => {
     e.stopPropagation();
@@ -89,8 +84,8 @@ const FileTile: FC<FileTileProps> = ({
         />
       </div>
       <div className={styles.name}>
-        <div className={styles.nameText} title={item.attributes.name_form}>
-          {item.attributes.name_form}
+        <div className={styles.nameText} title={item.title}>
+          {item.title}
         </div>
       </div>
 

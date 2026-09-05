@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Key, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { observer, inject } from "mobx-react";
 
 import { withTranslation } from "react-i18next";
@@ -70,7 +70,7 @@ const Tiles: FC<TilesProps> = ({
   }, [tReady, oformFiles]);
 
   const onClickInfo = useCallback(
-    (item: { id: Key | null | undefined }) => {
+    (item: TFile) => {
       if (!item) return;
       setIsVisibleInfoPanelTemplateGallery(true);
       setGallerySelected(item);
@@ -79,7 +79,7 @@ const Tiles: FC<TilesProps> = ({
   );
 
   const onClick = useCallback(
-    (item: { id: Key | null | undefined }) => {
+    (item: TFile) => {
       setGallerySelected(item);
       onCreateTemplate();
       setSubmitToGalleryDialogVisible(false);

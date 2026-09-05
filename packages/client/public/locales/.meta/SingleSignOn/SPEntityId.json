@@ -1,14 +1,14 @@
 {
   "key_path": "SPEntityId",
-  "content": "SP Entity Id (link to metadata XML)",
-  "content_en_sha1_hash": "4f511e076ad748fe91c1e8f019f742f025d91a46",
-  "created_at": "2025-05-19T21:30:50.162Z",
-  "updated_at": "2026-05-15T15:37:40.282Z",
+  "content": "Service provider entity ID (link to metadata XML)",
+  "content_en_sha1_hash": "4e5f3500a786655989f86055cdc2b64393d40275",
+  "created_at": "2026-08-31T18:23:40.141Z",
+  "updated_at": "2026-08-31T21:01:36.538Z",
   "comment": {
-    "text": "This is a label for an input field where the user enters the Service Provider Entity ID, which is a URL pointing to the metadata XML for Single Sign-On configuration.",
+    "text": "Form field label for the Service Provider entity ID in the Single Sign-On integration settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:24.574Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T21:01:36.538Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

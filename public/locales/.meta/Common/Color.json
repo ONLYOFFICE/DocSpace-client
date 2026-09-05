@@ -3,7 +3,7 @@
   "content": "Color",
   "content_en_sha1_hash": "1d0c8304baedcf8e3a78982c2e7c0b04622bf2a0",
   "created_at": "2025-05-19T21:30:43.522Z",
-  "updated_at": "2026-05-24T17:27:49.147Z",
+  "updated_at": "2026-08-31T18:23:50.749Z",
   "comment": {
     "text": "This is a label for a color selection option, used in dialogs for customizing room logos or portal appearance settings.",
     "is_auto": true,
@@ -20,7 +20,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
       "line_number": 676,
-      "context": "className={classnames(appearanceStyles.styledComponent, {\n [appearanceStyles.showDeleteButton]: isShowDeleteButton,\n })}\n style={{ \"--check-img-color\": colorCheckImg }}\n >\n <div className={appearanceStyles.header}>{t(\"Common:Color\")}</div>\n \n <div className={appearanceStyles.themeStandardContainer}>\n <div className={appearanceStyles.themeName}>{t(\"Common:Standard\")}</div>\n \n <div className={appearanceStyles.themeContainer}>",
+      "context": "className={classnames(appearanceStyles.styledComponent, {\n [appearanceStyles.showDeleteButton]: isShowDeleteButton,\n })}\n style={{ \"--check-img-color\": colorCheckImg }}\n >\n <div className={appearanceStyles.header}>{t(\"Common:Color\")}</div>\n \n <div className={appearanceStyles.colorDescription}>\n {t(\"Settings:ColorDescription\")}\n </div>",
       "module": "/packages/client"
     }
   ],

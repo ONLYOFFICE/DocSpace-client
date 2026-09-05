@@ -1,14 +1,14 @@
 {
   "key_path": "LogoutAllActiveSessionsDescription",
-  "content": "All active connections except this connection will be logged out, as it is currently in use.",
-  "content_en_sha1_hash": "ec8e94564c39b0ee1d6bd137e96ec673dbbc3160",
-  "created_at": "2025-05-19T21:30:53.364Z",
-  "updated_at": "2026-05-15T14:00:06.878Z",
+  "content": "All active sessions except the current one will be terminated. The current session will remain active.",
+  "content_en_sha1_hash": "99724f01825d1e33db1438415a606ee6948625d5",
+  "created_at": "2026-08-31T18:23:42.748Z",
+  "updated_at": "2026-08-31T20:08:57.814Z",
   "comment": {
-    "text": "This is a tooltip that appears when hovering over the \"Log out all active sessions\" button. It explains the consequence of clicking the button: all other active sessions will be terminated, except for the current one.",
+    "text": "Tooltip text explaining the consequence of terminating all active sessions except the current one.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:20:45.058Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:08:57.814Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

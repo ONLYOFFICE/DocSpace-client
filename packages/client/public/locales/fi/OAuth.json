@@ -58,7 +58,7 @@
   "PrivacyPolicy": "Tietosuojakäytäntö",
   "PrivacyPolicyURL": "Tietosuojakäytäntö URL",
   "PrivacyPolicyURLHelpButton": "Anna URL-linkki tietosuojakäytäntöön, jonka on oltava sovellettavien lakien ja määräysten mukainen ja josta käy selvästi ilmi kuinka keräätte, käytät, jaat, säilytät ja muuten käsittelet henkilötietoja.",
-  "ProfileDescription": "Tässä voit tarkistaa sovellusten tiedot, joille olet myöntänyt käyttöoikeudet ja tarvittaessa peruuttaa suostumuksen.",
+  "ProfileDescription": "Tarkastele sovelluksia, joille olet myöntänyt käyttöoikeuden tiliisi, ja peruuta käyttöoikeus tarvittaessa.",
   "Read": "Lue",
   "ReadOAuthGuide": "Lue OAuth 2.0 -opas",
   "RedirectsURLS": "Uudelleenohjaa URL:eja",

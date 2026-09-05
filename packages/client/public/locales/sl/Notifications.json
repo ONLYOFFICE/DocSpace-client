@@ -1,19 +1,19 @@
 {
-  "ActionsWithFilesDescription": "Žetje bodo poudarila dejavnost oziroma spletne strani — nalopi, ureditve ali deljenje — v razdelkih {{rooms}}, {{shared}}, {{documents}} in {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Značke poudarjajo dejavnosti datotek, kot so nalaganja, urejanja in deljenja, v aplikacijah {{files}}, {{rooms}}, {{forms}} in {{aiAgents}}.",
   "AdminSetupRequired": "Potrebna je nastavitev administratorja",
   "Badges": "Značke",
   "DailyFeed": "Dnevni vir {{organizationName}} {{productName}}",
-  "DailyFeedDescription": "Preberi novice in dogodke iz svojega prostora {{organizationName}} {{productName}} v dnevnem povzetku.",
+  "DailyFeedDescription": "Prejemajte dnevni povzetek novic in dogodkov iz {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Obvestila o dejavnosti datotek",
   "IsNotValid": "Ni veljavno",
   "LdapEmailTooltip": "Ta uporabniški račun je naložen iz LDAP. Uporabnikova e-poštna naslov ni bila navedena in trenutna je bila ustvarjena samodejno ter je ni mogoče uporabiti za pošiljanje obvestil.",
   "NotConfigured": "Ni konfigurirano",
   "Notifications": "Obvestila",
-  "RoomsActivityDescription": "Prejemajte takojšnje e-poštovne obvestila o novih deljenih datotekah/mapah in aktivnosti v vaših {{rooms}} in {{aiAgents}}.",
-  "RoomUpdateNotify": "Deljeni vsebine, dejavnost v razdelkih {{rooms}} in {{aiAgents}}",
-  "SettingUpNotifications": "Nastavljanje obvestil",
+  "RoomsActivityDescription": "Prejemajte takojšnja e-poštna obvestila o novih deljenih datotekah in mapah ter o dejavnosti v {{files}}, {{rooms}}, {{forms}} in {{aiAgents}}.",
+  "RoomUpdateNotify": "Dejavnost v {{files}}, {{rooms}}, {{forms}} in {{aiAgents}}",
+  "SettingUpNotifications": "Nastavitve obvestil",
   "SuccessConnected": "{{serviceName}} je bil uspešno povezan kot kanal za obveščanje. Sedaj boste prejemali posodobitve tam.",
   "SuccessDisconnected": "{{serviceName}} je bil uspešno izklopljen kot kanal za obveščanja. Obveščanja ne bodo več poslana tja.",
   "UsefulTips": "Uporabni {{organizationName}} {{productName}} nasveti",
-  "UsefulTipsDescription": "Pridobite uporabna navodila za {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Odkrijte uporabne nasvete in navodila za uporabo {{organizationName}} {{productName}}."
 }

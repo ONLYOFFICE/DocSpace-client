@@ -53,6 +53,7 @@ import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import { USER_TYPE_DROPDOWN_WIDTH } from "SRC_DIR/helpers/contacts";
 
 import Badges from "../../Badges";
 
@@ -217,7 +218,7 @@ const PeopleTableRow = ({
         size={ComboBoxSize.content}
         displaySelectedOption
         modernView
-        manualWidth="auto"
+        manualWidth={USER_TYPE_DROPDOWN_WIDTH}
       />
     );
 

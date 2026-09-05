@@ -1,20 +1,20 @@
 {
   "key_path": "DashboardDevTools",
-  "content": "Building something of your own? Everything here is for that: an API to drive the workspace from your code, an SDK to embed the editors in your own app, plugins, webhooks and keys. Nothing you need to touch to use {{organizationName}} {{productName}} day to day.",
-  "content_en_sha1_hash": "73fc414da8db0c3d63946731f0a039f436a30636",
-  "created_at": "2026-08-14T09:26:31.624Z",
-  "updated_at": "2026-08-14T15:24:57.637Z",
+  "content": "This is your developer hub: APIs, SDKs, plugins, webhooks, and more. Click into any card to learn more or get started.",
+  "content_en_sha1_hash": "d89eb46049865ddde4155f3cea98e33d83f290e2",
+  "created_at": "2026-08-31T18:23:46.754Z",
+  "updated_at": "2026-08-31T19:50:17.751Z",
   "comment": {
-    "text": "Body text for a step in the dashboard tour explaining available developer tools. It includes placeholders for the organization and product names.",
+    "text": "A descriptive text for a step in the Dashboard tour popover, explaining the purpose and contents of the developer hub.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:24:57.637Z",
+    "updated_at": "2026-08-31T19:50:17.751Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
-      "line_number": 195,
-      "context": "// portal has an API side at all, which is the whole point of stopping here.\n hasDevTools &&\n elementStep(\n DEVTOOLS_SELECTOR,\n t(\"DashboardTour:DashboardDevToolsTitle\"),\n t(\"DashboardTour:DashboardDevTools\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n }),\n callbacks,\n LOG_LABEL,",
+      "line_number": 198,
+      "context": "elementStep(\n DEVTOOLS_SELECTOR,\n t(\"DashboardTour:DashboardDevToolsTitle\", {\n organizationName: getBrandName(\"OrganizationName\"),\n }),\n t(\"DashboardTour:DashboardDevTools\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n }),\n callbacks,\n LOG_LABEL,",
       "module": "/packages/client"
     }
   ],

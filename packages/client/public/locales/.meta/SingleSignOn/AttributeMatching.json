@@ -1,14 +1,14 @@
 {
   "key_path": "AttributeMatching",
-  "content": "Attribute Mapping",
-  "content_en_sha1_hash": "3c36e2ea92c694eb893c563ee8f8242b35bfedcc",
-  "created_at": "2025-05-19T21:30:50.063Z",
-  "updated_at": "2026-05-15T15:37:40.280Z",
+  "content": "Attribute mapping",
+  "content_en_sha1_hash": "27eab1836ffd4c37244c32f6e2d3186e58553f97",
+  "created_at": "2026-08-31T18:23:39.964Z",
+  "updated_at": "2026-08-31T21:07:27.232Z",
   "comment": {
-    "text": "This is a section title on the Single Sign-On settings page, indicating where users can configure how attributes from their identity provider map to DocSpace user attributes.",
+    "text": "Section heading in the Single Sign-On integration settings used to label the configuration area for user attribute field mapping.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:27:01.095Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T21:07:27.232Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

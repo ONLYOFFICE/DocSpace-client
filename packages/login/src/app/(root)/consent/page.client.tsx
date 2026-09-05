@@ -61,6 +61,7 @@ import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";
 import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
+import AppLoader from "@docspace/ui-kit/components/app-loader";
 
 import { getRedirectURL } from "@/utils";
 import OAuthClientInfo from "../../../components/ConsentInfo";
@@ -72,6 +73,7 @@ interface IConsentProps {
   user: TUser;
   baseUrl?: string;
   currentScopesProp?: string[];
+  hasSignature?: boolean;
 }
 
 const Consent = ({
@@ -80,6 +82,7 @@ const Consent = ({
   currentScopesProp,
   user,
   baseUrl,
+  hasSignature,
 }: IConsentProps) => {
   const { t } = useTranslation(["Consent", "Common"]);
   const router = useRouter();
@@ -90,6 +93,8 @@ const Consent = ({
   const [currentScopes, setCurrentScopes] = React.useState<string[]>(
     currentScopesProp || [],
   );
+
+  const [isRedirecting, setIsRedirecting] = React.useState(!hasSignature);
 
   React.useEffect(() => {
     const redirect_url = getCookie("x-redirect-authorization-uri");
@@ -126,17 +131,29 @@ const Consent = ({
 
   React.useEffect(() => {
     const validateToken = async () => {
-      if (!user.id) return;
+      if (!user.id) {
+        setIsRedirecting(false);
+        return;
+      }
 
       const token = getOAuthJWTSignature(user.id);
 
-      if (token) return;
+      if (token) {
+        setIsRedirecting(false);
+        return;
+      }
 
-      await setOAuthJWTSignature(user.id);
+      try {
+        await setOAuthJWTSignature(user.id);
+      } catch {
+        setIsRedirecting(false);
+        return;
+      }
 
       const redirect_url = getRedirectURL();
 
       if (!redirect_url) {
+        setIsRedirecting(false);
         return;
       }
 
@@ -212,6 +229,8 @@ const Consent = ({
 
     router.push(`/?client_id=${client.clientId}&type=oauth2`);
   };
+
+  if (isRedirecting) return <AppLoader />;
 
   return (
     <FormWrapper>

@@ -1,19 +1,19 @@
 {
-  "ActionsWithFilesDescription": "As etiquetas destacarão a atividade do arquivo — uploads, edições ou compartilhamentos — nas seções {{rooms}}, {{shared}}, {{documents}} e {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Os distintivos destacam as atividades de arquivos, como uploads, edições e compartilhamentos, nos aplicativos {{files}}, {{rooms}}, {{forms}} e {{aiAgents}}.",
   "AdminSetupRequired": "Configuração de administrador necessária",
   "Badges": "Distintivos",
   "DailyFeed": "Feed diário do {{organizationName}} {{productName}}",
-  "DailyFeedDescription": "Leia notícias e eventos do seu {{organizationName}} {{productName}} em um resumo diário.",
+  "DailyFeedDescription": "Receba um resumo diário de notícias e eventos do {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Notificações de atividade de arquivo",
   "IsNotValid": "Não é válido",
   "LdapEmailTooltip": "Esta conta de usuário foi carregada do LDAP. O endereço de e-mail do usuário não foi especificado, e o atual foi gerado automaticamente e não pode ser usado para enviar notificações.",
   "NotConfigured": "Não configurado",
   "Notifications": "Notificações",
-  "RoomsActivityDescription": "Receba notificações instantâneas por e-mail sobre novos arquivos/pastas compartilhados e atividades dentro dos seus {{rooms}} e {{aiAgents}}.",
-  "RoomUpdateNotify": "Conteúdo compartilhado, atividade de {{rooms}} e {{aiAgents}}",
-  "SettingUpNotifications": "Configurando notificações",
+  "RoomsActivityDescription": "Receba notificações instantâneas por e-mail sobre novos arquivos e pastas compartilhados e sobre a atividade em {{files}}, {{rooms}}, {{forms}} e {{aiAgents}}.",
+  "RoomUpdateNotify": "Atividade em {{files}}, {{rooms}}, {{forms}} e {{aiAgents}}",
+  "SettingUpNotifications": "Configurações de notificação",
   "SuccessConnected": "{{serviceName}} foi conectado com sucesso como um canal de notificação. Agora você receberá atualizações por lá.",
   "SuccessDisconnected": "{{serviceName}} foi desconectado com sucesso como canal de notificação. As notificações não serão mais enviadas para lá.",
   "UsefulTips": "Dicas úteis do {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Obtenha guias úteis sobre o {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Descubra dicas e guias úteis para usar o {{organizationName}} {{productName}}."
 }

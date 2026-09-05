@@ -2,7 +2,7 @@
   "ActiveSessions": "Aktiv Sessiyalar",
   "AutoDeleteTitle": "60 gündən köhnə bütün sessiyalar avtomatik silinəcək.",
   "ChangePasswordAfterLoggingOut": "Çıxdıqdan sonra şifrəni dəyişdirin",
-  "ConnectSocialNetworks": "Sosial şəbəkələrinizi əlaqələndirin",
+  "ConnectSocialNetworks": "Hesablarınızı qoşun",
   "DescriptionForSecurity": "Daha çox təhlükəsizlik üçün şifrəni dəyişdirməlisiniz.",
   "DesktopTheme": "Masaüstü Redaktor tənzimləmələri ilə sinxronizasiya edin",
   "DesktopThemeDescription": "Masa üstü redaktorların cari mövzusundan asılı olaraq açıq və qaranlıq mövzular arasında avtomatik keçid edin.",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "E-poçt təsdiqlənmədi",
   "ErrorAccountAlreadyUse": "Keçid olunan hesab artıq başqa istifadəçi tərəfindən istifadə olunur",
   "LogoutActiveConnection": "Aktiv bağlantıdan çıxın",
-  "LogoutAllActiveSessionsDescription": "Bundan başqa bütün aktiv bağlantılar hazırda istifadə edildiyi üçün sistemdən çıxacaq.",
+  "LogoutAllActiveSessionsDescription": "Cari sessiya istisna olmaqla bütün aktiv sessiyalar sonlandırılacaq. Cari sessiya aktiv qalacaq.",
   "LogoutBtn": "Çıxış",
-  "LogoutDescription": "Qeyd. Bundan başqa bütün aktiv bağlantılar hazırda istifadə edildiyi üçün sistemdən çıxacaq.",
+  "LogoutDescription": "Qeyd. Cari sessiya istisna olmaqla bütün aktiv sessiyalar sonlandırılacaq. Cari sessiya aktiv qalacaq.",
   "LogoutFrom": "{{platform}} {{browser}} platformasından çıxış etmək istəyirsiniz?",
   "MyProfile": "Mənim profilim",
   "NotificationsChannels": "Xəbər kanalları",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Rezerv kodlarını göstər",
   "SuccessLogout": "Aktiv bağlantıdan çıxış edildi: {{platform}}, {{browser}}",
   "TelegramAccount": "Telegram hesabı",
-  "TelegramAccountDescription": "TelegramBot-u hesabınızla birləşdirmək üçün gizli linkə nəzər salın və “Telegrama qoşul” düyməsinə klikləyin.",
+  "TelegramAccountDescription": "Hesabınızın bildirişlərini Telegramda almaq üçün aşağıdakı keçidə daxil olun və ya Qoşul düyməsinə klikləyin.",
   "TelegramAccountDisconnect": "Telegramı əlaqədən kəsin",
   "TelegramAccountDisconnectDescription": "Sizin @{{username}} hesabınız Telegram bildirişləri üçün qoşuludur. Siz bu hesabdan bağlantını kəsə bilərsiniz. Bu halda, siz bildirişlər almayacaqsınız.",
   "TerminateAllSessions": "Cari sessiyadan başqa bütün sessiyaları dayandırın",
-  "TwoFactorDescription": "Bütün istifadəçilər üçün kod yaradan tətbiq vasitəsilə ikili autentifikasiya inzibatçı tərəfindən aktivləşdirildi."
+  "TwoFactorDescription": "Bütün istifadəçilər üçün admin tərəfindən doğrulama tətbiqi vasitəsilə iki faktorlu autentifikasiya aktivləşdirilib."
 }

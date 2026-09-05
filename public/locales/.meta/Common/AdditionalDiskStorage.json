@@ -3,7 +3,7 @@
   "content": "Additional disk storage",
   "content_en_sha1_hash": "ea3c32df1d9ec757ba8a262fccd8dfacc12bae03",
   "created_at": "2026-04-10T13:53:41.750Z",
-  "updated_at": "2026-08-13T14:37:21.765Z",
+  "updated_at": "2026-08-31T18:23:50.843Z",
   "comment": {
     "text": "This is a title for a section or dialog related to purchasing or managing extra storage space. It appears when users are considering or configuring additional disk capacity for their account.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 249,
+      "line_number": 250,
       "context": "<ServiceToggleSection\n withBottomMargin={withBottomMargin}\n isEnabled={hasStorageSubscription}\n isDisabled={isDisabled || isScheduled}\n onToggle={handleToggleChange}\n title={t(\"AdditionalDiskStorage\")}\n priceText={t(\"PerStorage\", {\n currency: formatWalletCurrency(storagePriceIncrement, 2),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n })}\n description={t(\"AdjustStorageToExactAmount\")}",
       "module": "/libs/ui-kit"
     },

@@ -135,6 +135,8 @@ export const getOAuthMessageKeyTranslation = (
       return t("Errors:OAuthApplicationEmpty");
     case OAuth2ErrorKey.client_permission_denied_error:
       return t("Common:AccessDenied");
+    case OAuth2ErrorKey.invalid_request:
+      return t("Errors:OAuthInvalidRequest");
     case OAuth2ErrorKey.missing_client_id_error:
       return t("Errors:OAuthClientEmpty");
     case OAuth2ErrorKey.something_went_wrong_error:

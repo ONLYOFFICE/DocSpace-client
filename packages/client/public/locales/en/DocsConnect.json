@@ -55,7 +55,7 @@
   "FileSizeLimitExceeded": "The file size limit cannot exceed {{limit}} bytes ({{size}}). Enter a smaller value.",
   "FileSizeLimits": "File size limits",
   "FileSizeLimitsDescription": "Configure maximum download limits for document processing",
-  "FileSizeLimitsTooltip": "The value is limited to {{limit}} bytes ({{size}}) - the maximum file size allowed for document processing.",
+  "FileSizeLimitsTooltip": "The value is limited to {{limit}} bytes ({{size}}) — the maximum file size allowed for document processing.",
   "FourEditorsDescription": "Document, Spreadsheet, Presentation and PDF editors, with fillable forms — embedded in your product.",
   "FourEditorsTitle": "Four editors in one",
   "FreeTrialTitle": "Free trial",

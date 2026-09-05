@@ -184,14 +184,17 @@ export function getTourSteps(
       ),
 
     // 5. The developer tools, which is the one card on the page whose audience
-    // is not the person the rest of the tour is addressed to — so the step says
-    // who it is for rather than what is in it. A user who does not build
-    // anything can read one sentence and move on; the one who does now knows the
-    // portal has an API side at all, which is the whole point of stopping here.
+    // is not the person the rest of the tour is addressed to — so the step
+    // offers the card as something to build on rather than describing what is
+    // inside it. A user who does not build anything can read one sentence and
+    // move on; the one who does now knows the portal has an API side at all,
+    // which is the whole point of stopping here.
     hasDevTools &&
       elementStep(
         DEVTOOLS_SELECTOR,
-        t("DashboardTour:DashboardDevToolsTitle"),
+        t("DashboardTour:DashboardDevToolsTitle", {
+          organizationName: getBrandName("OrganizationName"),
+        }),
         t("DashboardTour:DashboardDevTools", {
           organizationName: getBrandName("OrganizationName"),
           productName: getBrandName("ProductName"),

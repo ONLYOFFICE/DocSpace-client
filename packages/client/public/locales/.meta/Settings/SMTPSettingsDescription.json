@@ -1,13 +1,13 @@
 {
   "key_path": "SMTPSettingsDescription",
-  "content": "The SMTP settings are needed to set up an email account which will be used to send notifications from the workspace using your own SMTP server instead of the one {{organizationName}} uses. Please fill in all the fields and click the 'Save' button. You can use the 'Send Test Mail' button to check if all the settings you entered are correct and work as supposed.",
-  "content_en_sha1_hash": "cb5dc75babbc37c76694a0a6c9d73c073b22ad8a",
-  "created_at": "2026-08-12T11:00:46.428Z",
-  "updated_at": "2026-08-12T12:05:23.101Z",
+  "content": "Set up SMTP to send notifications from your own email account instead of {{organizationName}}'s default server. Fill in the fields below and click \"Save.\" You can use \"Send Test Mail\" to check that everything's working correctly.",
+  "content_en_sha1_hash": "9aed93b18d8f213e5537da1aa4d415a7dc7b7b4f",
+  "created_at": "2026-08-31T18:23:42.237Z",
+  "updated_at": "2026-08-31T20:20:59.104Z",
   "comment": {
-    "text": "Instructional text within the SMTP settings section explaining how to configure a custom email server. It includes the variable {{organizationName}}, which represents the organization's name.",
+    "text": "Description text in the SMTP settings section providing instructions for configuring a custom email server. It includes the `{{organizationName}}` variable, which represents the organization's name.",
     "is_auto": true,
-    "updated_at": "2026-08-12T12:05:23.101Z",
+    "updated_at": "2026-08-31T20:20:59.104Z",
     "model": "gemma4:26b"
   },
   "usage": [

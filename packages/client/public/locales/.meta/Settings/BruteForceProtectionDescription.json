@@ -1,13 +1,13 @@
 {
   "key_path": "BruteForceProtectionDescription",
-  "content": "Set up the limit of unsuccessful login attempts by the user to protect the workspace against brute-force attacks. When the limit is reached, attempts coming from the associated IP address will be banned for specified period of time, or captcha will be requested if enabled.",
-  "content_en_sha1_hash": "f40135e3c92936af32ceadf81ee32efc86e660fb",
-  "created_at": "2026-08-12T15:15:00.265Z",
-  "updated_at": "2026-08-12T15:28:00.330Z",
+  "content": "Set a limit on failed login attempts to protect your workspace from brute-force attacks. Once the limit is reached, the associated IP address is temporarily banned or shown a CAPTCHA, if enabled.",
+  "content_en_sha1_hash": "f2ca609597de7c140491dca096a6b19b87a8ef8e",
+  "created_at": "2026-08-31T18:23:40.548Z",
+  "updated_at": "2026-08-31T20:44:40.287Z",
   "comment": {
-    "text": "Subtitle text for the Brute Force Protection setting in the portal's security configuration, explaining how login attempt limits trigger IP bans or captcha requests.",
+    "text": "Subtitle in the security settings section explaining the functionality and consequences of enabling brute-force protection.",
     "is_auto": true,
-    "updated_at": "2026-08-12T15:28:00.330Z",
+    "updated_at": "2026-08-31T20:44:40.287Z",
     "model": "gemma4:26b"
   },
   "usage": [

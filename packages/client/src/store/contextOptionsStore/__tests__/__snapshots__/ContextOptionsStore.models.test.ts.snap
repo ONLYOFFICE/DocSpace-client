@@ -4,15 +4,15 @@ exports[`ContextOptionsStore.getFolderModel — characterization > builds the cr
 [
   {
     "key": "new-document",
-    "label": "Common:NewDocument",
+    "label": "Common:Document",
   },
   {
     "key": "new-spreadsheet",
-    "label": "Common:NewSpreadsheet",
+    "label": "Common:Spreadsheet",
   },
   {
     "key": "new-presentation",
-    "label": "Common:NewPresentation",
+    "label": "Common:Presentation",
   },
   {
     "items": [
@@ -30,7 +30,7 @@ exports[`ContextOptionsStore.getFolderModel — characterization > builds the cr
   },
   {
     "key": "new-folder",
-    "label": "Common:NewFolder",
+    "label": "Common:Folder",
   },
   {
     "key": "separator",

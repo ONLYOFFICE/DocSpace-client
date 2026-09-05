@@ -1,13 +1,13 @@
 {
   "key_path": "PortalDeactivationDescription",
-  "content": "Use this option to deactivate your workspace temporarily.",
-  "content_en_sha1_hash": "0c42e962d6930c96cd5e47c792fdf0c24cb8f63e",
-  "created_at": "2026-08-12T11:00:46.187Z",
-  "updated_at": "2026-08-14T14:58:32.790Z",
+  "content": "Temporarily deactivate your workspace.",
+  "content_en_sha1_hash": "ab0efb0156f7e1014ebb5f061956b8733e962a51",
+  "created_at": "2026-08-31T18:23:41.729Z",
+  "updated_at": "2026-08-31T20:25:30.775Z",
   "comment": {
-    "text": "Description text on the Portal Settings page explaining the purpose of the workspace deactivation feature.",
+    "text": "Description text in the portal deactivation settings section, explaining the purpose of the deactivation action.",
     "is_auto": true,
-    "updated_at": "2026-08-12T12:08:42.894Z",
+    "updated_at": "2026-08-31T20:25:30.775Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -35,7 +35,8 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 
 import { Link } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
@@ -50,7 +51,10 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import * as Styled from "./index.styled";
 import styles from "./index.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 import ApplyToPortalDialog from "../../developer-tools/DocsConnect/TenantPanel/sub-components/ApplyToPortalDialog";
+
+const DOCS_CONNECT_PATH = "/developer-tools/docs-connect";
 
 const URL_REGEX =
   /^(?:https?:\/\/(?:[^\/]+\/)?|^\/)[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
@@ -70,8 +74,10 @@ const DocumentService = ({
   fetchDocsConnectConnection,
   applyDocsConnectToPortal,
   isDocsConnectAvailable,
+  showDocsConnectHint,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
+  const navigate = useNavigate();
 
   const [isSaveLoading, setSaveIsLoading] = useState(false);
   const [isResetLoading, setResetIsLoading] = useState(false);
@@ -322,6 +328,29 @@ const DocumentService = ({
       <Styled.LocationHeader>
         <div className={styles.main}>
           {t("Settings:DocumentServiceLocationHeaderHelp")}
+          {/* Docs Connect is SaaS-only: a standalone portal has nothing to
+              connect to, so the sentence that points at it is dropped rather
+              than left as a link nobody here can follow. */}
+          {showDocsConnectHint ? (
+            <>
+              {" "}
+              <Trans
+                t={t}
+                ns="Settings"
+                i18nKey="DocumentServiceConnectOwnPlatform"
+                components={{
+                  1: (
+                    <Link
+                      color={currentColorScheme.main?.accent}
+                      isHovered
+                      onClick={() => navigate(DOCS_CONNECT_PATH)}
+                      dataTestId="integration_docs_connect_link"
+                    />
+                  ),
+                }}
+              />
+            </>
+          ) : null}
         </div>
         {documentServiceSettingsUrl ? (
           <Link
@@ -577,12 +606,15 @@ export default inject(
     filesSettingsStore,
     clientLoadingStore,
     docsConnectStore,
+    userStore,
   }) => {
     const {
       currentColorScheme,
       documentServiceSettingsUrl,
       currentDeviceType,
       apiBasicLink,
+      standalone,
+      limitedAccessDevToolsForUsers,
     } = settingsStore;
     const {
       changeDocumentServiceLocation,
@@ -602,6 +634,11 @@ export default inject(
       fetchDocsConnectConnection: docsConnectStore.fetchConnection,
       applyDocsConnectToPortal: docsConnectStore.applyToDocumentService,
       isDocsConnectAvailable: docsConnectStore.isPortalConnectionAvailable,
+      showDocsConnectHint: canOpenDocsConnect(
+        userStore?.user,
+        standalone,
+        limitedAccessDevToolsForUsers,
+      ),
     };
   },
 )(observer(DocumentService));

@@ -1,14 +1,14 @@
 {
   "key_path": "SystemThemeDescription",
-  "content": "Automatically switch between light and dark themes when your system does.",
-  "content_en_sha1_hash": "c63fc79ca86878cd4320587abf222c6e63118c5c",
-  "created_at": "2026-04-03T21:51:34.692Z",
-  "updated_at": "2026-06-03T09:30:05.099Z",
+  "content": "Automatically switch between light and dark themes based on your system settings.",
+  "content_en_sha1_hash": "2023396d689cd5e53d6d90a4cdddd72ebade84a1",
+  "created_at": "2026-08-31T18:23:33.067Z",
+  "updated_at": "2026-08-31T18:38:40.248Z",
   "comment": {
-    "text": "This is a description for a radio button option. It explains that selecting this option will make the application's theme (light or dark) automatically match the operating system's theme setting.",
+    "text": "Description text for the \"System Theme\" option in the interface theme settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:41:21.847Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:38:40.248Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

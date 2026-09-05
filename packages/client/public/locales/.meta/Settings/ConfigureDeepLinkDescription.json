@@ -1,14 +1,14 @@
 {
   "key_path": "ConfigureDeepLinkDescription",
-  "content": "When handling documents in a mobile browser, users can be offered (or not) the choice of opening the file in a browser or in the mobile app.",
-  "content_en_sha1_hash": "afb876d6cee5ba727fb68bd3489940d7d4460ac1",
-  "created_at": "2025-05-19T21:30:50.957Z",
-  "updated_at": "2026-05-15T15:37:40.234Z",
+  "content": "When opening documents in a mobile browser, choose whether to give users the option to open the file in the app instead.",
+  "content_en_sha1_hash": "3c0ef2a16ea014ff30b844a61fa00a431465a442",
+  "created_at": "2026-08-31T18:23:40.660Z",
+  "updated_at": "2026-08-31T20:43:11.831Z",
   "comment": {
-    "text": "This is a subtitle for a settings category. It explains the purpose of the \"Configure Deep Link\" setting, which allows administrators to control how mobile users open documents.",
+    "text": "Subtitle for a settings category item and body text on the deep link configuration page, describing the option to prompt users to use the mobile app instead of a browser.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:16.150Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:43:11.831Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -40,15 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:49:14.358Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -163,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -178,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -214,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

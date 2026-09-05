@@ -45,6 +45,14 @@
     line-height: 22px;
   }
 
+  .colorDescription {
+    padding-top: 8px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--settings-common-description-color);
+  }
+
   .previewHeader {
     display: flex;
     align-items: center;

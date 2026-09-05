@@ -16,5 +16,5 @@
   "PluginSDK": "Plagin SDK",
   "PluginSDKDescription": "Yeni funksionallıq əlavə etmək, üçüncü tərəf xidmətlərini qoşmaq və ya mövcud təcrübəni yaxşılaşdırmaq üçün Plagin SDK-dan istifadə edin. Mənbə kodu GitHub-da mövcud olan nümunə pluginlərə aşağıda baxın. Onları iş sahəniz üçün aktivləşdirmək üçün <1>Pluginlər</1> səhifəsinə keçin.",
   "PluginSDKInstruction": "Öz pluginlərinizi yaratmaq üçün <1>təlimatları oxuyun</1>.",
-  "UploadDescription": "İş sahəsinin funksionallığını əlavə funksiyalarla genişləndirmək üçün plaginlər əlavə edə bilərsiniz. Plagini yükləyin və ya faylı ZIP arxivinə sürükləyin."
+  "UploadDescription": "İş sahənizi əlavə funksiyalarla genişləndirmək üçün plaginlər əlavə edin. Aşağıdakı siyahıdan birini aktivləşdirin, və ya öz plagininizi əlavə etmək üçün \"Plagin yüklə\" düyməsinə klikləyin (və ya bir ZIP faylını sürükləyin)."
 }

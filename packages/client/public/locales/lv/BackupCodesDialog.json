@@ -1,8 +1,8 @@
 {
   "BackupCodesDescription": "Izmantojiet rezerves kodus, lai pierakstītos, kad jums nav piekļuves tālrunim.",
-  "BackupCodesSecondDescription": "Katru kodu var izmantot vienu reizi. Jūs varat saņemt jaunus kodus jebkurā laikā. Derīgi ir tikai pēdējie ģenerētie kodi.",
+  "BackupCodesSecondDescription": "Katru kodu var izmantot tikai vienu reizi. Jūs varat saņemt jaunus kodus jebkurā laikā. Derīgs ir tikai pēdējais ģenerētais kods.",
   "BackupCodesTitle": "Rezerves kodi",
-  "CodesCounter": "kodi:",
+  "CodesCounter": "rezerves kodi:",
   "PrintButton": "Drukāt",
   "RequestNewButton": "Pieprasīt jaunu"
 }

@@ -2,7 +2,7 @@
   "ActiveSessions": "Aktive Sitzungen",
   "AutoDeleteTitle": "Alle Sitzungen, die älter als 60 Tage sind, werden automatisch gelöscht.",
   "ChangePasswordAfterLoggingOut": "Passwort nach Abmeldung ändern",
-  "ConnectSocialNetworks": "Verbinden Sie Ihre sozialen Netzwerke",
+  "ConnectSocialNetworks": "Verbinden Sie Ihre Konten",
   "DescriptionForSecurity": "Um die Sicherheit zu erhöhen, müssen Sie Ihr Passwort ändern.",
   "DesktopTheme": "Mit den Einstellungen des Desktop-Editors synchronisieren",
   "DesktopThemeDescription": "Automatisches Umschalten zwischen hellen und dunklen Themen je nach dem aktuellen Thema der Desktop-Editoren.",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "E-Mail nicht verifiziert",
   "ErrorAccountAlreadyUse": "Verknüpftes Konto, das bereits von einem anderen Benutzer verwendet wird",
   "LogoutActiveConnection": "Abmelden von der aktiven Verbindung",
-  "LogoutAllActiveSessionsDescription": "Alle aktiven Verbindungen mit Ausnahme dieser Verbindung werden abgemeldet, da sie gerade in Gebrauch ist.",
+  "LogoutAllActiveSessionsDescription": "Alle aktiven Sitzungen außer der aktuellen werden beendet. Die aktuelle Sitzung bleibt aktiv.",
   "LogoutBtn": "Abmelden",
-  "LogoutDescription": "Hinweis. Alle aktiven Verbindungen mit Ausnahme dieser Verbindung werden abgemeldet, da sie gerade in Gebrauch ist.",
+  "LogoutDescription": "Hinweis. Alle aktiven Sitzungen außer der aktuellen werden beendet. Die aktuelle Sitzung bleibt aktiv.",
   "LogoutFrom": "Abmelden von {{platform}} {{browser}}?",
   "MyProfile": "Mein Profil",
   "NotificationsChannels": "Benachrichtigungskanäle",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Back-up-Codes anzeigen",
   "SuccessLogout": "Die aktive Verbindung wurde abgemeldet: {{platform}}, {{browser}}",
   "TelegramAccount": "Telegram-Konto",
-  "TelegramAccountDescription": "Um TelegramBot mit Ihrem Konto zu verbinden, folgen Sie dem geheimen Link und klicken Sie auf die Schaltfläche Telegramm verbinden.",
+  "TelegramAccountDescription": "Um Benachrichtigungen zu Ihrem Konto in Telegram zu erhalten, folgen Sie dem Link unten oder klicken Sie auf Verbinden.",
   "TelegramAccountDisconnect": "Telegramm trennen",
   "TelegramAccountDisconnectDescription": "Ihr @{{username}}-Konto ist für Telegram-Benachrichtigungen angemeldet. Sie können die Verbindung zu diesem Konto trennen. In diesem Fall erhalten Sie keine Benachrichtigungen.",
   "TerminateAllSessions": "Alle Sitzungen außer der aktuellen beenden",
-  "TwoFactorDescription": "Zwei-Faktor-Authentifizierung über eine App zur Code-Generierung wurde vom Administrator für alle Benutzer aktiviert."
+  "TwoFactorDescription": "Die Zwei-Faktor-Authentifizierung über eine Authentifizierungs-App wurde vom Administrator für alle Benutzer aktiviert."
 }

@@ -16,5 +16,5 @@
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Sử dụng Plugin SDK để thêm chức năng mới, kết nối các dịch vụ của bên thứ ba hoặc cải thiện trải nghiệm hiện có. Hãy xem các plugin mẫu bên dưới, với mã nguồn có sẵn trên GitHub. Truy cập trang <1>Plugins</1> để bật chúng cho không gian làm việc của bạn.",
   "PluginSDKInstruction": "<1>Đọc hướng dẫn</1> để tự xây dựng plugin của riêng bạn.",
-  "UploadDescription": "Bạn có thể thêm các plugin để mở rộng chức năng của không gian làm việc với các tính năng bổ sung. Hãy nhấp vào Tải plugin lên hoặc kéo thả tập tin vào kho lưu trữ ZIP."
+  "UploadDescription": "Thêm plugin để mở rộng không gian làm việc của bạn với các tính năng bổ sung. Bật một plugin từ danh sách bên dưới, hoặc nhấp \"Tải plugin lên\" (hoặc kéo thả tệp ZIP) để thêm plugin của riêng bạn."
 }

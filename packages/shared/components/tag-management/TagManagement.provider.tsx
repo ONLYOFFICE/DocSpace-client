@@ -43,21 +43,35 @@ import React, {
 
 import type {
   TTag,
-  TagManagementContextValue,
   TagManagementProviderProps,
   ITagManagementStateContext,
 } from "./TagManagement.types";
 import { searchFilter, unionTagsData } from "./TagManagement.utils";
+import { useTagMutations } from "./hooks/useTagMutations";
+import type { TagMutations } from "./hooks/useTagMutations";
+
+/**
+ * The list and the requests that change it, in one place.
+ *
+ * The mutations are here rather than in the components because a `useMutation`
+ * call made twice gives two observers that know nothing of each other - see
+ * useTagMutations.
+ */
+export type TagManagementContextValue = ITagManagementStateContext &
+  TagMutations;
 
 const TagManagementStateContext =
-  createContext<ITagManagementStateContext | null>(null);
+  createContext<TagManagementContextValue | null>(null);
 
 export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
   children,
   roomTags,
   fetchedTags,
+  roomId,
   access,
 }) => {
+  const mutations = useTagMutations(roomId);
+
   const canCreate = access.canCreate || false;
 
   const [searchValue, setSearchValue] = useState("");
@@ -85,7 +99,7 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
     setSearchValue("");
   }, []);
 
-  const value = useMemo<ITagManagementStateContext>(
+  const value = useMemo<TagManagementContextValue>(
     () => ({
       tags,
       setTags,
@@ -96,6 +110,7 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
       setSearchValue,
       clearSearch,
       access,
+      ...mutations,
     }),
     [
       searchValue,
@@ -105,6 +120,7 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
       clearSearch,
       access,
       tags,
+      mutations,
     ],
   );
 

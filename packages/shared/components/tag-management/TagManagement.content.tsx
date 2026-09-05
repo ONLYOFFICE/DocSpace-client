@@ -71,7 +71,6 @@ import {
 import type { TagManagementContentProps } from "./TagManagement.types";
 
 export const TagManagementContent: React.FC<TagManagementContentProps> = ({
-  roomId,
   confirmDeleteTag,
   confirmEditTag,
   onTagsChanged,
@@ -94,7 +93,6 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     deleteTag,
     editTagHandleKey,
   } = useTagManagementService({
-    roomId,
     confirmDeleteTag,
     confirmEditTag,
     onTagsChanged,

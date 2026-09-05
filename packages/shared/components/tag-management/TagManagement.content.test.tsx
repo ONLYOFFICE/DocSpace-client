@@ -108,16 +108,41 @@ const renderContent = (
       <TagManagementProvider
         roomTags={["boundTag"]}
         fetchedTags={["boundTag", "freeTag"]}
+        roomId={ROOM_ID}
         access={access}
       >
         <TagManagementContent
-          roomId={ROOM_ID}
           confirmEditTag={confirmEditTag}
           confirmDeleteTag={confirmDeleteTag}
         />
       </TagManagementProvider>
     </QueryClientProvider>,
   );
+};
+
+// The testid sits on the ui-kit wrapper, so the state is read off the input
+// it renders.
+const isChecked = (label: string) =>
+  screen
+    .getByTestId(`tag_checkbox_${label}`)
+    .querySelector<HTMLInputElement>('input[type="checkbox"]')?.checked;
+
+// Holds the next request of a kind open until the test lets it answer.
+const holdNext = (request: {
+  mockImplementation: (fn: () => Promise<void>) => unknown;
+}) => {
+  let refuse: (() => void) | null = null;
+  let answer: (() => void) | null = null;
+
+  request.mockImplementation(
+    () =>
+      new Promise<void>((resolve, reject) => {
+        answer = () => resolve();
+        refuse = () => reject(new Error("nope"));
+      }),
+  );
+
+  return { settle: () => answer?.(), fail: () => refuse?.() };
 };
 
 // Opens the inline editor on a row and submits a new name.
@@ -267,6 +292,57 @@ describe("<TagManagementContent />", () => {
 
     await waitFor(() => {
       expect(removeTagsFromRoom).toHaveBeenCalledWith(ROOM_ID, ["boundTag"]);
+    });
+  });
+
+  describe("before the server answers", () => {
+    // The tick itself cannot be seen while the request is out - the loader
+    // stands in for the checkbox - so this covers the rollback rather than
+    // the optimism. What the early write buys is the list's own state, which
+    // is what the search box reads to decide what Enter means.
+    it("puts the tick back when the bind fails", async () => {
+      const request = holdNext(addTagsToRoom);
+
+      renderContent();
+
+      await userEvent.click(screen.getByTestId("tag_row_freeTag"));
+      await screen.findByTestId("tag_loader_freeTag");
+
+      request.fail();
+
+      await waitFor(() => {
+        expect(screen.getByTestId("tag_checkbox_freeTag")).toBeInTheDocument();
+      });
+      expect(isChecked("freeTag")).toBe(false);
+      expect(toastError).toHaveBeenCalled();
+      // Undone by name: the row it never touched keeps its tick.
+      expect(isChecked("boundTag")).toBe(true);
+    });
+
+    it("renames the row at once, and back again if the rename fails", async () => {
+      const request = holdNext(updateTagName);
+
+      renderContent();
+
+      await renameTo("freeTag", "renamedTag");
+
+      // On screen under its new name before the server has agreed - and
+      // carrying the loader, so it cannot be acted on meanwhile.
+      expect(
+        await screen.findByTestId("tag_item_renamedTag"),
+      ).toBeInTheDocument();
+      expect(screen.getByTestId("tag_loader_renamedTag")).toBeInTheDocument();
+      expect(screen.queryByTestId("tag_item_freeTag")).not.toBeInTheDocument();
+
+      request.fail();
+
+      await waitFor(() => {
+        expect(screen.getByTestId("tag_item_freeTag")).toBeInTheDocument();
+      });
+      expect(
+        screen.queryByTestId("tag_item_renamedTag"),
+      ).not.toBeInTheDocument();
+      expect(toastError).toHaveBeenCalled();
     });
   });
 

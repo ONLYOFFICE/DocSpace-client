@@ -56,12 +56,10 @@ import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 import { removeEmojiCharacters } from "../../utils/removeEmojiCharacters";
 
 import { useTagManagement } from "./TagManagement.provider";
-import { useCreateTagMutation, useUpdateTag } from "./hooks/useTagsQuery";
-import type { TagManagementFilterProps, TTag } from "./TagManagement.types";
+import type { TagManagementFilterProps } from "./TagManagement.types";
 import styles from "./TagManagement.module.scss";
 
 export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
-  roomId,
   roomName,
   onTagsChanged,
 }) => {
@@ -76,10 +74,11 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     tags,
     setTags,
     filteredTags,
+    createTag,
+    bindTag,
+    isPending,
     access: { canSearch, canBindTag },
   } = useTagManagement();
-  const createTag = useCreateTagMutation(roomId);
-  const updateTag = useUpdateTag(roomId);
 
   const [inputValue, setInputValue] = useState("");
 
@@ -101,6 +100,8 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   );
 
   const handleCreateTag = useCallback(async () => {
+    if (isPending) return;
+
     const trimmedValue = searchValue.trim().replace(/\s+/g, " ");
     if (trimmedValue.length === 0) return;
 
@@ -120,50 +121,60 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
       // the list shows the tag - there is nothing to send.
       if (existing.checked || !canBindTag) return;
 
-      const originalTags = [...tags];
-      const boundTag: TTag = { ...existing, checked: true };
-      const updatedTags = tags.map((tag) =>
-        tag.label === existing.label ? boundTag : tag,
-      );
+      // Ticked before the answer comes, and put back if it does not. Both
+      // writes name the one tag they are about: a whole list written back from
+      // here would also undo whatever else has changed in the meantime.
+      const setChecked = (checked: boolean) =>
+        setTags((prev) =>
+          prev.map((tag) =>
+            tag.label === existing.label ? { ...tag, checked } : tag,
+          ),
+        );
 
-      updateTag.mutate(boundTag, {
-        onSuccess: () => {
-          setTags(updatedTags);
-          onTagsChanged?.();
+      setChecked(true);
+
+      bindTag(
+        { ...existing, checked: true },
+        {
+          onSuccess: () => onTagsChanged?.(),
+          onError: (error) => {
+            console.error("Failed to update room tags:", error);
+            toastr.error(error);
+            // Unticked, not restored to `existing.checked`: the handler
+            // returned above when it was already true.
+            setChecked(false);
+          },
         },
-        onError: (error) => {
-          console.error("Failed to update room tags:", error);
-          toastr.error(error);
-          setTags(originalTags);
-        },
-      });
+      );
 
       return;
     }
 
     if (!showCreateTag) return;
 
-    const newTag: TTag = { label: trimmedValue, checked: true };
-    const updatedTags = [newTag, ...tags];
     clearSearch();
     setInputValue("");
 
-    createTag.mutate(trimmedValue, {
-      onSuccess: () => {
-        setTags(updatedTags);
-        onTagsChanged?.();
-      },
+    // Listed at once, so the tag the user just typed does not disappear
+    // between the cleared input and the server's answer. It leads the list,
+    // where a newly created tag belongs.
+    setTags((prev) => [{ label: trimmedValue, checked: true }, ...prev]);
+
+    createTag(trimmedValue, {
+      onSuccess: () => onTagsChanged?.(),
       onError: (error) => {
         console.error("Failed to create tag:", error);
         toastr.error(error);
+        setTags((prev) => prev.filter((tag) => tag.label !== trimmedValue));
       },
     });
   }, [
+    isPending,
     searchValue,
     tags,
     clearSearch,
     createTag,
-    updateTag,
+    bindTag,
     canBindTag,
     setTags,
     showCreateTag,

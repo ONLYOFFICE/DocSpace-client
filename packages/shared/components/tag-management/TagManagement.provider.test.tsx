@@ -34,15 +34,49 @@
  */
 
 import React from "react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import type { TagType } from "@docspace/ui-kit/components/tag";
 import {
-  TagManagementProvider,
+  TagManagementProvider as Provider,
   useTagManagement,
 } from "./TagManagement.provider";
+import type { TagManagementProviderProps } from "./TagManagement.types";
+
+vi.mock("../../api/rooms", () => ({
+  getTags: vi.fn(() => Promise.resolve([])),
+  addTagsToRoom: vi.fn(() => Promise.resolve()),
+  removeTagsFromRoom: vi.fn(() => Promise.resolve()),
+  updateTagName: vi.fn(() => Promise.resolve()),
+  removeTagRequest: vi.fn(() => Promise.resolve()),
+}));
+
+// The provider holds the list's mutations, so it needs a query client. These
+// tests are about the list itself and never send anything, so the room and the
+// client are the same for all of them.
+const TagManagementProvider = ({
+  children,
+  ...props
+}: Omit<TagManagementProviderProps, "roomId">) => (
+  <QueryClientProvider
+    client={
+      new QueryClient({
+        defaultOptions: {
+          queries: { retry: false },
+          mutations: { retry: false },
+        },
+      })
+    }
+  >
+    <Provider roomId="room-1" {...props}>
+      {children}
+    </Provider>
+  </QueryClientProvider>
+);
 
 const TestComponent = () => {
   const {

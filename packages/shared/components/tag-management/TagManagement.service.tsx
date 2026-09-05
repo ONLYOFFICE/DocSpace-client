@@ -41,11 +41,6 @@ import type { KeyboardEvent, MouseEvent } from "react";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useTagManagement } from "./TagManagement.provider";
-import {
-  useRemoveTagMutation,
-  useUpdateTag,
-  useUpdateTagNameMutation,
-} from "./hooks/useTagsQuery";
 import { stopPropagation } from "./TagManagement.utils";
 import { EDIT_TAG_FORM_NAME } from "./TagManagement.constants";
 import type {
@@ -61,7 +56,6 @@ import type {
  * here and the markup renders whatever this returns.
  */
 export const useTagManagementService = ({
-  roomId,
   confirmDeleteTag,
   confirmEditTag,
   onTagsChanged,
@@ -74,34 +68,15 @@ export const useTagManagementService = ({
   });
 
   const { t } = useTranslation("Common");
-  const { tags, setTags } = useTagManagement();
-
-  const updateTag = useUpdateTag(roomId);
-  const updateTagName = useUpdateTagNameMutation();
-  const removeTag = useRemoveTagMutation();
-
-  // The row whose request is in flight, read from the mutation itself rather
-  // than kept alongside it: react-query already knows both which tag was sent
-  // and whether the answer is still coming.
-  const pendingLabel = useMemo(() => {
-    if (updateTag.isPending) {
-      return updateTag.variables.label;
-    }
-
-    if (updateTagName.isPending) {
-      return updateTagName.variables.oldLabel;
-    }
-
-    if (removeTag.isPending) {
-      return removeTag.variables;
-    }
-  }, [updateTagName.isPending, removeTag.isPending, updateTag.isPending]);
-
-  // Nothing new is started while a request is out. The list holds one mutation
-  // of each kind, so a second call would detach the first and lose both its
-  // callbacks and the loader on its row - and the rules say so here, not only
-  // in the markup that greys the buttons out.
-  const isPending = pendingLabel !== undefined;
+  const {
+    tags,
+    setTags,
+    bindTag,
+    renameTag,
+    removeTag,
+    pendingLabel,
+    isPending,
+  } = useTagManagement();
 
   const [editingLabel, setEditingLabel] = useState<string | null>(null);
 
@@ -109,30 +84,39 @@ export const useTagManagementService = ({
     (label: string) => {
       if (isPending) return;
 
-      const originalTags = [...tags];
-      const updatedTags = [...tags];
-      const tagIndex = updatedTags.findIndex((tag) => tag.label === label);
+      const current = tags.find((tag) => tag.label === label);
 
-      if (tagIndex === -1) return;
+      if (!current) return;
 
-      updatedTags[tagIndex] = {
-        ...updatedTags[tagIndex],
-        checked: !updatedTags[tagIndex].checked,
-      };
+      const checked = !current.checked;
 
-      updateTag.mutate(updatedTags[tagIndex], {
-        onSuccess: () => {
-          setTags(updatedTags);
-          onTagsChanged?.();
+      // Names the one tag it is about, in both directions. A whole list
+      // written back from here - on success or on failure - would also carry
+      // rows as they were when this callback was made, undoing anything that
+      // has changed since. The confirmation dialogs make that window long: the
+      // guard above is passed before a modal opens, not held while it is open.
+      const setChecked = (value: boolean) =>
+        setTags((prev) =>
+          prev.map((tag) =>
+            tag.label === label ? { ...tag, checked: value } : tag,
+          ),
+        );
+
+      setChecked(checked);
+
+      bindTag(
+        { label, checked },
+        {
+          onSuccess: () => onTagsChanged?.(),
+          onError: (error) => {
+            toastr.error(error);
+            console.error("Failed to update room tags:", error);
+            setChecked(current.checked);
+          },
         },
-        onError: (error) => {
-          toastr.error(error);
-          console.error("Failed to update room tags:", error);
-          setTags(originalTags);
-        },
-      });
+      );
     },
-    [isPending, tags, setTags, updateTag, onTagsChanged],
+    [isPending, tags, setTags, bindTag, onTagsChanged],
   );
 
   const handleEdit = useCallback(
@@ -182,6 +166,14 @@ export const useTagManagementService = ({
         return;
       }
 
+      // Renames the one row, either way round. The rollback runs after two
+      // awaits, the second of them a modal the user answers in their own time,
+      // so it must not carry a copy of the whole list back with it.
+      const rename = (from: string, to: string) =>
+        setTags((prev) =>
+          prev.map((tag) => (tag.label === from ? { ...tag, label: to } : tag)),
+        );
+
       try {
         cancelEdit();
 
@@ -189,14 +181,11 @@ export const useTagManagementService = ({
         // is nothing to report.
         if (!(await confirmEditTag())) return;
 
-        await updateTagName.mutateAsync({ oldLabel, newLabel });
+        rename(oldLabel, newLabel);
 
-        setTags((prev) =>
-          prev.map((tag) =>
-            tag.label === oldLabel ? { ...tag, label: newLabel } : tag,
-          ),
-        );
+        await renameTag({ oldLabel, newLabel });
       } catch (error) {
+        rename(newLabel, oldLabel);
         toastr.error(error as Error);
         console.error("Failed to update tag name:", error);
       }
@@ -208,7 +197,7 @@ export const useTagManagementService = ({
       setTags,
       cancelEdit,
       confirmEditTag,
-      updateTagName,
+      renameTag,
       t,
     ],
   );
@@ -223,7 +212,7 @@ export const useTagManagementService = ({
         // As with the rename: a refusal ends it quietly.
         if (!(await confirmDeleteTag(tag))) return;
 
-        await removeTag.mutateAsync(tag);
+        await removeTag(tag);
 
         toastr.success(
           <Trans
@@ -239,14 +228,16 @@ export const useTagManagementService = ({
           />,
         );
 
-        const updatedTags = tags.filter((item) => item.label !== tag);
-        setTags(updatedTags);
+        // From `prev`, not from the list this callback closed over: two awaits
+        // stand above this line, and the second of them is a modal the user
+        // answers in their own time.
+        setTags((prev) => prev.filter((item) => item.label !== tag));
       } catch (error) {
         toastr.error(error as Error);
         console.error("Failed to remove room tag:", error);
       }
     },
-    [isPending, tags, setTags, confirmDeleteTag, removeTag, t],
+    [isPending, setTags, confirmDeleteTag, removeTag, t],
   );
 
   const editTagHandleKey = useCallback(

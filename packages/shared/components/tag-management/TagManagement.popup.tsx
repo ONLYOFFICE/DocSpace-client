@@ -155,15 +155,14 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
           <TagManagementProvider
             fetchedTags={fetchedTags ?? []}
             roomTags={roomTags}
+            roomId={roomId}
             access={access}
           >
             <TagManagementFilter
-              roomId={roomId}
               roomName={roomName}
               onTagsChanged={onTagsChanged}
             />
             <TagManagementContent
-              roomId={roomId}
               confirmEditTag={confirmEditTag}
               confirmDeleteTag={confirmDeleteTag}
               onTagsChanged={onTagsChanged}

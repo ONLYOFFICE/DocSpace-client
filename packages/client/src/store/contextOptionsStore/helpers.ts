@@ -281,8 +281,8 @@ export const onShowWaitOperationToast = (t: TTranslation) => {
   toastr.warning(t("Files:WaitOperation"));
 };
 
-export const onSuggestOformChanges = (item: { title?: string }) => {
-  const formTitle = item.title;
+export const onSuggestOformChanges = (item: { title?: string } | null) => {
+  const formTitle = item?.title;
 
   // assigning a string to window.location is valid at
   // runtime (navigates) but lib.dom types the setter stricter — the cast

@@ -33,8 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type OformsFilter from "./filter";
-
 /**
  * Types of the ONLYOFFICE template gallery (oforms) CMS.
  *
@@ -187,12 +185,4 @@ export type TOformPurpose = {
   key: string;
   name: string;
   parentCategories: TOformParentCategory[];
-};
-
-/**
- * Instance shape of `OformsFilter` as the client actually uses it: `locale`
- * starts as `null` but is reassigned to a string before the first request.
- */
-export type TOformsFilter = Omit<OformsFilter, "locale"> & {
-  locale: string | null;
 };

@@ -35,6 +35,7 @@
 
 import axios from "axios";
 
+import type OformsFilter from "./filter";
 import type {
   TOformCategory,
   TOformFile,
@@ -48,7 +49,6 @@ import type {
   TOformRawPurposesResponse,
   TOformRawTemplate,
   TOformSource,
-  TOformsFilter,
   TOformsList,
   TOformsPagination,
   TOformsRawListResponse,
@@ -182,7 +182,7 @@ const normalizeParentCategory = (
 
 export const getOforms = async (
   url: string,
-  filter: TOformsFilter,
+  filter: OformsFilter,
 ): Promise<TOformsList> => {
   const res = await axios.get<TOformsRawListResponse>(
     `${url}?${TEMPLATE_FIELDS}&${filter.toApiUrlParams()}`,

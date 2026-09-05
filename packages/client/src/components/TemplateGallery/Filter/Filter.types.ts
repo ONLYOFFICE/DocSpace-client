@@ -34,19 +34,13 @@
  */
 
 import OformsFilter from "@docspace/shared/api/oforms/filter";
-import type {
-  TOformParentCategory,
-  TOformPurpose,
-} from "@docspace/shared/api/oforms/types";
+import type { TOformParentCategory } from "@docspace/shared/api/oforms/types";
 
 export interface FilterContentProps {
   oformsFilter: OformsFilter;
   noLocales: boolean;
   menuItems: TOformParentCategory[];
-  fetchPurposes: () => Promise<TOformPurpose[] | null>;
   filterOformsByLocaleIsLoading: boolean;
-  setFilterOformsByLocaleIsLoading: (isLoading: boolean) => void;
-  setCategoryFilterLoaded: (isLoaded: boolean) => void;
   setLanguageFilterLoaded: (isLoaded: boolean) => void;
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;

@@ -38,13 +38,7 @@ import { validateAndFixObject } from "../../utils/filterValidator";
 
 const PAGE = "pagination[page]";
 const PAGE_SIZE = "pagination[pageSize]";
-const CATEGORY_ID = "categoryId";
-const PURPOSE = "purpose";
 const LOCALE = "locale";
-const SEARCH = "filterValue";
-const SORT_BY = "sortby";
-const SORT_ORDER = "sortorder";
-
 const SORT = "sort[0]";
 const SEARCH_FILTER = "filters[name_form][$containsi]";
 const EXTENSION_FILTER = "filters[form_exts][ext][$eq]";
@@ -145,36 +139,6 @@ class OformsFilter {
     return OformsFilter.getDefault(total, "pptx");
   }
 
-  static getFilter(location?: { search: string }) {
-    if (!location) return OformsFilter.getDefault();
-
-    const urlFilter = new URLSearchParams(location.search);
-    const defaultFilter = OformsFilter.getDefault();
-
-    const page = Number(urlFilter.get(PAGE)) || defaultFilter.page;
-    const pageSize = Number(urlFilter.get(PAGE_SIZE)) || defaultFilter.pageSize;
-    const categoryId =
-      urlFilter.get(CATEGORY_ID) || defaultFilter.categoryId;
-    const purpose = urlFilter.get(PURPOSE) || defaultFilter.purpose;
-    const locale = urlFilter.get(LOCALE) || defaultFilter.locale;
-    const search = urlFilter.get(SEARCH) || defaultFilter.search;
-    const sortBy = urlFilter.get(SORT_BY) || defaultFilter.sortBy;
-    const sortOrder = urlFilter.get(SORT_ORDER) || defaultFilter.sortOrder;
-
-    return new OformsFilter(
-      page,
-      pageSize,
-      categoryId,
-      purpose,
-      locale,
-      search,
-      defaultFilter.extension,
-      sortBy,
-      sortOrder,
-      defaultFilter.total,
-    );
-  }
-
   clone() {
     return new OformsFilter(
       this.page,
@@ -195,22 +159,6 @@ class OformsFilter {
       { sortBy: this.sortBy, sortOrder: this.sortOrder },
       sortTypeDefinition,
     );
-
-  toUrlParams = () => {
-    const { sortBy, sortOrder } = this.getValidSort();
-
-    return toUrlParams(
-      {
-        [CATEGORY_ID]: this.categoryId,
-        [PURPOSE]: this.purpose,
-        [LOCALE]: this.locale,
-        [SEARCH]: this.search,
-        [SORT_BY]: sortBy,
-        [SORT_ORDER]: sortOrder,
-      },
-      true,
-    );
-  };
 
   toApiUrlParams = () => {
     const { sortBy, sortOrder } = this.getValidSort();

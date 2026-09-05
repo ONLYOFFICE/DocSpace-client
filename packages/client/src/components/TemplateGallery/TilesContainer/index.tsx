@@ -53,10 +53,7 @@ import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-c
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import type OformsFilter from "@docspace/shared/api/oforms/filter";
-import type {
-  TOformParentCategory,
-  TOformPurpose,
-} from "@docspace/shared/api/oforms/types";
+import type { TOformParentCategory } from "@docspace/shared/api/oforms/types";
 import styles from "../TemplateGallery.module.scss";
 import FilterContent from "../Filter";
 import Tiles from "../Tiles";
@@ -72,10 +69,7 @@ interface FilterProps {
   oformsFilter: OformsFilter;
   noLocales: boolean;
   menuItems: TOformParentCategory[];
-  fetchPurposes: () => Promise<TOformPurpose[] | null>;
   filterOformsByLocaleIsLoading: boolean;
-  setFilterOformsByLocaleIsLoading: (isLoading: boolean) => void;
-  setCategoryFilterLoaded: (isLoaded: boolean) => void;
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
   setLanguageFilterLoaded: (isLoaded: boolean) => void;
@@ -91,7 +85,7 @@ interface TilesContainerInjectedProps extends FilterProps {
   resetFilters: (ext: string) => Promise<void>;
   t: TTranslation;
   isFormsOnlyGallery: boolean;
-  oformsIsLoading: boolean;
+  oformsIsRefetching: boolean;
 }
 
 interface TilesContainerProps
@@ -106,7 +100,7 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
     resetFilters,
     t,
     isFormsOnlyGallery,
-    oformsIsLoading,
+    oformsIsRefetching,
     ...filterProps
   } = props;
 
@@ -202,10 +196,10 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
         isShowInitSkeleton={isShowInitSkeleton}
       />
       {/* A filter change keeps the current tiles on screen and dims them
-          until the new page arrives, so the request is visible. */}
+          until the new list arrives; loading the next page does not. */}
       <div
         className={classNames(styles.galleryContent, {
-          [styles.dimmed]: oformsIsLoading && !isShowInitSkeleton,
+          [styles.dimmed]: oformsIsRefetching && !isShowInitSkeleton,
         })}
       >
         {renderContent()}
@@ -220,18 +214,15 @@ export default inject<TStore>(({ oformsStore }) => {
     resetFilters,
     oformsFilter,
     parentCategories,
-    fetchPurposes,
-    setCategoryFilterLoaded,
     categoryFilterLoaded,
     filterOformsByLocale,
     filterOformsByLocaleIsLoading,
-    setFilterOformsByLocaleIsLoading,
     languageFilterLoaded,
     setLanguageFilterLoaded,
     filterOformsBySearch,
     sortOforms,
     isFormsOnlyGallery,
-    oformsIsLoading,
+    oformsIsRefetching,
   } = oformsStore;
 
   const oformLocales = oformsStore.oformLocales as string[] | null;
@@ -244,18 +235,15 @@ export default inject<TStore>(({ oformsStore }) => {
     resetFilters,
     oformsFilter,
     menuItems: parentCategories,
-    fetchPurposes,
-    setCategoryFilterLoaded,
     categoryFilterLoaded,
     filterOformsByLocale,
     filterOformsByLocaleIsLoading,
-    setFilterOformsByLocaleIsLoading,
     languageFilterLoaded,
     setLanguageFilterLoaded,
     filterOformsBySearch,
     sortOforms,
     isFormsOnlyGallery,
-    oformsIsLoading,
+    oformsIsRefetching,
   };
 })(
   withTranslation("Common")(observer(TilesContainer)),

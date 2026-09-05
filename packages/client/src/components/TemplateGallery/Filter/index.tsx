@@ -59,12 +59,9 @@ const FilterContent: FC<FilterContentProps> = (props) => {
     oformsFilter,
     noLocales,
     menuItems,
-    fetchPurposes,
-    setCategoryFilterLoaded,
     categoryFilterLoaded,
 
     filterOformsByLocaleIsLoading,
-    setFilterOformsByLocaleIsLoading,
     setLanguageFilterLoaded,
     languageFilterLoaded,
     oformsLocal,
@@ -82,13 +79,9 @@ const FilterContent: FC<FilterContentProps> = (props) => {
   }, [setShowOneTile, isShowOneTile]);
 
   const categoryFilterProps = {
-    oformsFilter,
     noLocales,
     menuItems,
-    fetchPurposes,
     filterOformsByLocaleIsLoading,
-    setFilterOformsByLocaleIsLoading,
-    setCategoryFilterLoaded,
     categoryFilterLoaded,
     languageFilterLoaded,
     isShowInitSkeleton,

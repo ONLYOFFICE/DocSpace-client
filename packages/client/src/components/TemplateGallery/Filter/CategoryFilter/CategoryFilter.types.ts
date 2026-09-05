@@ -38,26 +38,13 @@ import { TFunction } from "i18next";
 import type {
   TOformCategory,
   TOformParentCategory,
-  TOformPurpose,
 } from "@docspace/shared/api/oforms/types";
 
-export interface OformsFilter {
-  locale: string | null;
-  purpose: string;
-  extension: string;
-  sortBy: string;
-  sortOrder: string;
-}
-
 export interface CategoryFilterProps {
-  oformsFilter: OformsFilter;
   noLocales: boolean;
   /** Category groups of the selected purpose, or of both when none is set. */
   menuItems: TOformParentCategory[];
-  fetchPurposes: () => Promise<TOformPurpose[] | null>;
   filterOformsByLocaleIsLoading: boolean;
-  setFilterOformsByLocaleIsLoading: (loading: boolean) => void;
-  setCategoryFilterLoaded: (loaded: boolean) => void;
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
   isShowInitSkeleton: boolean;

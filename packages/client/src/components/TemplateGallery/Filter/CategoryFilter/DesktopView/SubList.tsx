@@ -43,6 +43,10 @@ import styles from "./DesktopView.module.scss";
 import type { TOformCategory } from "@docspace/shared/api/oforms/types";
 import type { SubListProps, InjectedProps } from "../CategoryFilter.types";
 
+export const SUBLIST_ITEM_HEIGHT = 36;
+export const SUBLIST_PADDING = 8;
+export const SUBLIST_MAX_HEIGHT = 296;
+
 const SubList: React.FC<SubListProps> = ({
   parentCategoryId,
   categories,
@@ -77,7 +81,7 @@ const SubList: React.FC<SubListProps> = ({
       manualY="0px"
       manualX="0px"
       clickOutsideAction={() => {}}
-      maxHeight={296}
+      maxHeight={SUBLIST_MAX_HEIGHT}
       manualWidth="206px"
       showDisabledItems={false}
       isDefaultMode={false}
@@ -95,8 +99,8 @@ const SubList: React.FC<SubListProps> = ({
               "dropdown-item",
               styles.categoryFilterSubListItem,
             )}
-            height={36}
-            heightTablet={36}
+            height={SUBLIST_ITEM_HEIGHT}
+            heightTablet={SUBLIST_ITEM_HEIGHT}
             key={category.id}
             onClick={onCategoryClick}
             onMouseDown={onPreventDefault}

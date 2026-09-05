@@ -83,7 +83,7 @@ export const getFormGalleryContextOptionsImpl = (
     {
       key: "template-info",
       label: t("FormGallery:TemplateInfo"),
-      onClick: () => self.onShowOformTemplateInfo(item as TOformFile),
+      onClick: () => item && self.onShowOformTemplateInfo(item),
     },
     {
       key: "separator",
@@ -92,7 +92,7 @@ export const getFormGalleryContextOptionsImpl = (
     {
       key: "suggest-changes",
       label: t("FormGallery:SuggestChanges"),
-      onClick: () => onSuggestOformChanges(item ?? {}),
+      onClick: () => onSuggestOformChanges(item),
     },
   ];
 };

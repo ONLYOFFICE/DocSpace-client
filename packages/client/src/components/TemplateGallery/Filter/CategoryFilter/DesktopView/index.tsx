@@ -40,17 +40,17 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import styles from "./DesktopView.module.scss";
-import SubList from "./SubList";
+import SubList, {
+  SUBLIST_ITEM_HEIGHT,
+  SUBLIST_MAX_HEIGHT,
+  SUBLIST_PADDING,
+} from "./SubList";
 import type { TOformParentCategory } from "@docspace/shared/api/oforms/types";
 import type {
   CategoryFilterDesktopProps,
   InjectedProps,
 } from "../CategoryFilter.types";
 
-// Geometry of a sublist, mirrored from DesktopView.module.scss.
-const SUBLIST_ITEM_HEIGHT = 36;
-const SUBLIST_PADDING = 8;
-const SUBLIST_MAX_HEIGHT = 296;
 const VIEWPORT_MARGIN = 16;
 
 const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
@@ -118,7 +118,7 @@ const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
     <div ref={rootRef} className={styles.categoryFilterRoot}>
       <ComboBox
         className={styles.categoryFilter}
-        id="comboBoxLanguage"
+        id="comboBoxCategory"
         tabIndex={1}
         opened={isOpen}
         onToggle={onOpenDropdown}

@@ -56,7 +56,6 @@ import type {
   TOformFile,
   TOformParentCategory,
   TOformPurpose,
-  TOformsFilter,
   TOformsList,
 } from "@docspace/shared/api/oforms/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -89,18 +88,23 @@ class OformsStore {
 
   oformsIsLoading = false;
 
+  oformsIsRefetching = false;
+
+  listRequestId = 0;
+
   oformsLoadError = false;
 
   oformsNetworkError = false;
 
-  oformsFilter: TOformsFilter = OformsFilter.getDefault();
+  oformsFilter: OformsFilter = OformsFilter.getDefault();
 
   oformFromFolderId: number | string = myDocumentsFolderId;
 
   currentCategory: TOformCategory | null = null;
 
-  // The whole taxonomy of the CMS, fetched in one request per locale:
-  // purpose (Business / Personal) -> parent category -> subcategory.
+  // The whole taxonomy of the CMS, fetched in one request per gallery locale
+  // and file type: purpose (Business / Personal) -> parent category ->
+  // subcategory.
   purposes: TOformPurpose[] = [];
 
   oformLocales: string[] | null = null;
@@ -146,7 +150,7 @@ class OformsStore {
     this.settingsStore = settingsStore;
     this.userStore = userStore;
     this.treeFoldersStore = treeFoldersStore;
-    makeAutoObservable(this);
+    makeAutoObservable(this, { listRequestId: false });
   }
 
   get defaultOformLocale() {
@@ -167,7 +171,7 @@ class OformsStore {
   setOformFiles = (oformFiles: TOformFile[] | null) =>
     (this.oformFiles = oformFiles);
 
-  setOformsFilter = (oformsFilter: TOformsFilter) =>
+  setOformsFilter = (oformsFilter: OformsFilter) =>
     (this.oformsFilter = oformsFilter);
 
   setOformFromFolderId = (oformFromFolderId: number | string) => {
@@ -176,6 +180,9 @@ class OformsStore {
 
   setOformsIsLoading = (oformsIsLoading: boolean) =>
     (this.oformsIsLoading = oformsIsLoading);
+
+  setOformsIsRefetching = (oformsIsRefetching: boolean) =>
+    (this.oformsIsRefetching = oformsIsRefetching);
 
   setGallerySelected = (gallerySelected: TOformFile | null) => {
     this.gallerySelected = gallerySelected;
@@ -254,7 +261,7 @@ class OformsStore {
     }
   };
 
-  getOforms = async (filter: TOformsFilter = OformsFilter.getDefault()) => {
+  getOforms = async (filter: OformsFilter = OformsFilter.getDefault()) => {
     try {
       const oforms = await getOforms(this.oformsApiUrl, filter);
       this.oformsLoadError = false;
@@ -277,7 +284,7 @@ class OformsStore {
     return null;
   };
 
-  applyOformsList = (filter: TOformsFilter, oformData: TOformsList | null) => {
+  applyOformsList = (filter: OformsFilter, oformData: TOformsList | null) => {
     if (oformData) {
       filter.page = oformData.pagination.page;
       filter.total = oformData.pagination.total;
@@ -286,44 +293,56 @@ class OformsStore {
     return oformData?.templates ?? [];
   };
 
-  fetchOforms = async (filter: TOformsFilter = OformsFilter.getDefault()) => {
+  fetchOforms = async (filter: OformsFilter = OformsFilter.getDefault()) => {
+    this.listRequestId += 1;
+    const requestId = this.listRequestId;
+
     const oformData = await this.getOforms(filter);
+    if (requestId !== this.listRequestId) return false;
+
     const templates = this.applyOformsList(filter, oformData);
 
     runInAction(() => {
       this.setOformsFilter(filter);
       this.setOformFiles(templates);
     });
+
+    return true;
   };
 
   /**
    * A filter change refetches the list in place: the tiles already on screen
-   * stay, dimmed, until the answer arrives. The flag also keeps
+   * stay, dimmed, until the answer arrives. The loading flag also keeps
    * `fetchMoreOforms` from paginating a list that is being replaced.
    */
-  refetchOforms = async (filter: TOformsFilter) => {
+  refetchOforms = async (filter: OformsFilter) => {
     this.setOformsIsLoading(true);
+    this.setOformsIsRefetching(true);
 
-    try {
-      await this.fetchOforms(filter);
-    } finally {
-      this.setOformsIsLoading(false);
-    }
+    const isLatest = await this.fetchOforms(filter);
+    if (!isLatest) return;
+
+    this.setOformsIsLoading(false);
+    this.setOformsIsRefetching(false);
   };
 
   fetchMoreOforms = async () => {
     if (!this.hasMoreForms || this.oformsIsLoading) return;
     this.setOformsIsLoading(true);
 
+    const requestId = this.listRequestId;
     const newOformsFilter = this.oformsFilter.clone();
     newOformsFilter.page += 1;
 
     const oformData = await this.getOforms(newOformsFilter);
-    const newForms = this.applyOformsList(newOformsFilter, oformData);
 
     runInAction(() => {
-      this.setOformsFilter(newOformsFilter);
-      this.setOformFiles([...(this.oformFiles || []), ...newForms]);
+      if (requestId === this.listRequestId) {
+        const newForms = this.applyOformsList(newOformsFilter, oformData);
+        this.setOformsFilter(newOformsFilter);
+        this.setOformFiles([...(this.oformFiles || []), ...newForms]);
+      }
+
       this.setOformsIsLoading(false);
     });
   };
@@ -371,24 +390,27 @@ class OformsStore {
       .filter(({ subcategories }) => subcategories.length > 0);
   }
 
-  fetchPurposes = async () => {
+  fetchPurposes = async (locale: string, extension: string) => {
     const url = combineUrl(this.oformsApiRoot, "/purposes");
 
     try {
-      const purposes = await getOformPurposes(
-        url,
-        this.defaultOformLocale,
-        this.oformsFilter.extension,
-      );
-      this.setPurposes(purposes);
-      return purposes;
+      this.setPurposes(await getOformPurposes(url, locale, extension));
     } catch (err) {
       (err as AxiosError)?.message !== "Network Error" &&
         toastr.error(err as string);
+    } finally {
+      this.setCategoryFilterLoaded(true);
     }
-
-    return null;
   };
+
+  fetchOformsWithPurposes = (filter: OformsFilter) =>
+    Promise.all([
+      this.fetchOforms(filter),
+      this.fetchPurposes(
+        filter.locale ?? this.defaultOformLocale,
+        filter.extension,
+      ),
+    ]);
 
   filterOformsByCategory = (category: TOformCategory | null) => {
     this.currentCategory = category;
@@ -426,7 +448,14 @@ class OformsStore {
     this.oformsFilter.categoryId = "";
     const newOformsFilter = this.oformsFilter.clone();
 
-    runInAction(() => this.refetchOforms(newOformsFilter));
+    try {
+      await Promise.all([
+        this.refetchOforms(newOformsFilter),
+        this.fetchPurposes(locale, newOformsFilter.extension),
+      ]);
+    } finally {
+      this.setFilterOformsByLocaleIsLoading(false);
+    }
   };
 
   filterOformsBySearch = (search: string) => {
@@ -440,13 +469,13 @@ class OformsStore {
   initTemplateGallery = async () => {
     await this.fetchOformLocales();
 
-    const firstLoadFilter: TOformsFilter = this.isFormsOnlyGallery
+    const firstLoadFilter = this.isFormsOnlyGallery
       ? OformsFilter.getDefault()
       : OformsFilter.getDefaultDocx();
 
     firstLoadFilter.locale = this.defaultOformLocale;
 
-    await this.fetchOforms(firstLoadFilter);
+    await this.fetchOformsWithPurposes(firstLoadFilter);
   };
 
   sortOforms = (sortBy: string, sortOrder: string) => {
@@ -463,7 +492,7 @@ class OformsStore {
   resetFilters = async (ext?: string) => {
     this.currentCategory = null;
 
-    const defaultFilter: TOformsFilter =
+    const defaultFilter =
       ext === ".docx"
         ? OformsFilter.getDefaultDocx()
         : ext === ".xlsx"
@@ -473,7 +502,7 @@ class OformsStore {
             : OformsFilter.getDefault();
 
     defaultFilter.locale = this.defaultOformLocale;
-    await this.fetchOforms(defaultFilter);
+    await this.fetchOformsWithPurposes(defaultFilter);
   };
 
   hideSubmitToGalleryTile = () => {

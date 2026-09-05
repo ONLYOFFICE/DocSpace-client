@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import classNames from "classnames";
@@ -44,44 +44,15 @@ import styles from "./CategoryFilter.module.scss";
 import type { CategoryFilterProps } from "./CategoryFilter.types";
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({
-  oformsFilter,
   noLocales,
   menuItems,
-  fetchPurposes,
   filterOformsByLocaleIsLoading,
-  setFilterOformsByLocaleIsLoading,
-  setCategoryFilterLoaded,
   categoryFilterLoaded,
   languageFilterLoaded,
   isShowInitSkeleton,
   viewMobile,
   isLanguageFilterChange,
 }) => {
-  // The whole taxonomy arrives in one request, localized by the gallery locale
-  // and counted per file type: both the names and which categories are worth
-  // offering change with the locale and the open tab.
-  useEffect(() => {
-    (async () => {
-      if (!oformsFilter.locale) return;
-
-      await fetchPurposes();
-
-      // Loaded means the taxonomy request settled, not that it brought
-      // categories: an empty answer must not keep the whole filter row -- and
-      // with it the gallery header -- in a skeleton state forever.
-      setCategoryFilterLoaded(true);
-
-      if (filterOformsByLocaleIsLoading) setFilterOformsByLocaleIsLoading(false);
-    })();
-  }, [
-    oformsFilter.locale,
-    oformsFilter.extension,
-    fetchPurposes,
-    setCategoryFilterLoaded,
-    filterOformsByLocaleIsLoading,
-    setFilterOformsByLocaleIsLoading,
-  ]);
-
   if (
     (isShowInitSkeleton ||
       filterOformsByLocaleIsLoading ||

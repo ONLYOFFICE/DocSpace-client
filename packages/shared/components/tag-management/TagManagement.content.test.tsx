@@ -145,6 +145,11 @@ const holdNext = (request: {
   return { settle: () => answer?.(), fail: () => refuse?.() };
 };
 
+const rowLabels = () =>
+  screen
+    .getAllByTestId(/^tag_row_/)
+    .map((row) => row.getAttribute("data-testid")?.replace("tag_row_", ""));
+
 // Opens the inline editor on a row and submits a new name.
 const renameTo = async (label: string, newLabel: string) => {
   await userEvent.click(screen.getByTestId(`edit_tag_button_${label}`));
@@ -367,6 +372,31 @@ describe("<TagManagementContent />", () => {
           screen.queryByTestId("tag_item_freeTag"),
         ).not.toBeInTheDocument();
       });
+    });
+
+    it("takes the row out at once and puts it back where it was if the delete fails", async () => {
+      const request = holdNext(removeTagRequest);
+
+      renderContent();
+
+      await userEvent.click(screen.getByTestId("delete_tag_button_boundTag"));
+
+      // Gone before the server has answered - boundTag led the list.
+      await waitFor(() => {
+        expect(
+          screen.queryByTestId("tag_item_boundTag"),
+        ).not.toBeInTheDocument();
+      });
+
+      request.fail();
+
+      // Back in its own place, not appended at the end, and still ticked.
+      await waitFor(() => {
+        expect(screen.getByTestId("tag_item_boundTag")).toBeInTheDocument();
+      });
+      expect(rowLabels()).toEqual(["boundTag", "freeTag"]);
+      expect(isChecked("boundTag")).toBe(true);
+      expect(toastError).toHaveBeenCalled();
     });
 
     it("sends nothing when the user refuses", async () => {

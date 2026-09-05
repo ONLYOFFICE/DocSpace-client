@@ -36,12 +36,25 @@
 import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { UseQueryResult } from "@tanstack/react-query";
 
 import { TagManagementPopup } from "./TagManagement.popup";
 import type { TagManagementPopupProps } from "./TagManagement.types";
 import * as useTagsQueryModule from "./hooks/useTagsQuery";
+
+const { addTagsToRoom } = vi.hoisted(() => ({
+  addTagsToRoom: vi.fn(() => Promise.resolve()),
+}));
+
+vi.mock("../../api/rooms", () => ({
+  addTagsToRoom,
+  getTags: vi.fn(() => Promise.resolve([])),
+  removeTagsFromRoom: vi.fn(() => Promise.resolve()),
+  updateTagName: vi.fn(() => Promise.resolve()),
+  removeTagRequest: vi.fn(() => Promise.resolve()),
+}));
 
 vi.mock("../../utils/useClickOutside", () => ({
   useClickOutside: vi.fn(),
@@ -70,6 +83,13 @@ const defaultProps: TagManagementPopupProps = {
   confirmEditTag: vi.fn(() => Promise.resolve(true)),
   confirmDeleteTag: vi.fn(() => Promise.resolve(true)),
 };
+
+// The testid sits on the ui-kit wrapper, so the state is read off the input
+// it renders.
+const isChecked = (label: string) =>
+  screen
+    .getByTestId(`tag_checkbox_${label}`)
+    .querySelector<HTMLInputElement>('input[type="checkbox"]')?.checked;
 
 const renderWithQueryClient = (
   ui: React.ReactElement,
@@ -156,7 +176,7 @@ describe("<TagManagementPopup />", () => {
     expect(mockUseClickOutside).toHaveBeenCalled();
   });
 
-  it("passes correct props to TagManagementProvider", async () => {
+  it("lists the room's own tags and the rest of the shared list", async () => {
     const roomTags = ["roomTag1", "roomTag2"];
     const fetchedTags = ["fetchedTag1"];
 
@@ -172,11 +192,16 @@ describe("<TagManagementPopup />", () => {
       <TagManagementPopup {...defaultProps} tags={roomTags} />,
     );
 
+    // Both sources reach the list, and the room's own tags come back ticked -
+    // which is what the provider is handed roomTags and fetchedTags for.
     await waitFor(() => {
-      expect(
-        screen.queryByTestId("tag-management-loader"),
-      ).not.toBeInTheDocument();
+      expect(screen.getByTestId("tag_item_roomTag1")).toBeInTheDocument();
     });
+    expect(screen.getByTestId("tag_item_roomTag2")).toBeInTheDocument();
+    expect(screen.getByTestId("tag_item_fetchedTag1")).toBeInTheDocument();
+
+    expect(isChecked("roomTag1")).toBe(true);
+    expect(isChecked("fetchedTag1")).toBe(false);
   });
 
   it("renders with empty tags array", () => {
@@ -267,7 +292,7 @@ describe("<TagManagementPopup />", () => {
     });
   });
 
-  it("passes roomId to child components", async () => {
+  it("sends the room's id with what the list changes", async () => {
     const roomId = "test-room-123";
 
     vi.spyOn(useTagsQueryModule, "useTagsQuery").mockReturnValue({
@@ -279,13 +304,20 @@ describe("<TagManagementPopup />", () => {
     } as unknown as UseQueryResult<string[], Error>);
 
     renderWithQueryClient(
-      <TagManagementPopup {...defaultProps} roomId={roomId} />,
+      <TagManagementPopup
+        {...defaultProps}
+        roomId={roomId}
+        tags={[]}
+        access={{ canBindTag: true, canSearch: true }}
+      />,
     );
 
+    await userEvent.click(await screen.findByTestId("tag_row_tag1"));
+
+    // The id reaches the mutations through the provider now, not through each
+    // child, so the request it produces is what proves the wiring.
     await waitFor(() => {
-      expect(
-        screen.queryByTestId("tag-management-loader"),
-      ).not.toBeInTheDocument();
+      expect(addTagsToRoom).toHaveBeenCalledWith(roomId, ["tag1"]);
     });
   });
 });

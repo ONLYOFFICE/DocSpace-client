@@ -45,6 +45,7 @@ import { stopPropagation } from "./TagManagement.utils";
 import { EDIT_TAG_FORM_NAME } from "./TagManagement.constants";
 import type {
   FormValues,
+  TTag,
   TagManagementContentProps,
 } from "./TagManagement.types";
 
@@ -93,8 +94,7 @@ export const useTagManagementService = ({
       // Names the one tag it is about, in both directions. A whole list
       // written back from here - on success or on failure - would also carry
       // rows as they were when this callback was made, undoing anything that
-      // has changed since. The confirmation dialogs make that window long: the
-      // guard above is passed before a modal opens, not held while it is open.
+      // has changed since.
       const setChecked = (value: boolean) =>
         setTags((prev) =>
           prev.map((tag) =>
@@ -208,9 +208,35 @@ export const useTagManagementService = ({
 
       if (isPending) return;
 
+      // The row as it was, so a refusal puts it back where it sat and with
+      // the tick it had - not at the end of the list, and not always ticked.
+      let removed: { at: number; tag: TTag } | null = null;
+
+      const drop = () =>
+        setTags((prev) => {
+          const at = prev.findIndex((item) => item.label === tag);
+
+          if (at !== -1) removed = { at, tag: prev[at] };
+
+          return prev.filter((item) => item.label !== tag);
+        });
+
+      const restore = () =>
+        setTags((prev) => {
+          if (!removed || prev.some((item) => item.label === tag)) return prev;
+
+          const restored = [...prev];
+
+          restored.splice(Math.min(removed.at, prev.length), 0, removed.tag);
+
+          return restored;
+        });
+
       try {
         // As with the rename: a refusal ends it quietly.
         if (!(await confirmDeleteTag(tag))) return;
+
+        drop();
 
         await removeTag(tag);
 
@@ -227,12 +253,8 @@ export const useTagManagementService = ({
             }}
           />,
         );
-
-        // From `prev`, not from the list this callback closed over: two awaits
-        // stand above this line, and the second of them is a modal the user
-        // answers in their own time.
-        setTags((prev) => prev.filter((item) => item.label !== tag));
       } catch (error) {
+        restore();
         toastr.error(error as Error);
         console.error("Failed to remove room tag:", error);
       }

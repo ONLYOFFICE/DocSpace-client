@@ -83,11 +83,18 @@ export function useTagMutations(roomId: string | number) {
     if (removeTag.isPending) {
       return removeTag.variables;
     }
+    // The variables are listed as well as the flags: they are read above, and
+    // react-query sets them in the same render that raises isPending - which
+    // is easy to read as a forgotten dependency otherwise.
   }, [
     createTag.isPending,
+    createTag.variables,
     updateTag.isPending,
+    updateTag.variables,
     updateTagName.isPending,
+    updateTagName.variables,
     removeTag.isPending,
+    removeTag.variables,
   ]);
 
   // The senders rather than the whole results: react-query keeps `mutate` and

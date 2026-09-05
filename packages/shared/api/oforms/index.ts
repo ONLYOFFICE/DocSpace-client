@@ -239,5 +239,5 @@ export function submitToGallery(
   formData.append("formName", formName);
   formData.append("language", language);
 
-  return axios.post(url, formData, { signal });
+  return axios.post(url, formData, { signal: signal ?? undefined });
 }

@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import classNames from "classnames";
+
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { TableCell } from "@docspace/ui-kit/components/table";
@@ -76,12 +78,19 @@ const NameCell = ({
           hasAccess
           checked={isChecked}
         >
-          <div className="table-container_element-container">
+          <div
+            className={classNames(
+              "table-container_element-container",
+              styles.nameContainer,
+            )}
+          >
             <div className="table-container_element">
-              {icon ? <img className={styles.nameImage} src={icon} alt="App icon" /> : null}
+              {icon ? (
+                <img className={styles.nameImage} src={icon} alt="App icon" />
+              ) : null}
             </div>
             <Checkbox
-              className={`table-container_row-checkbox ${styles.rowCheckbox}`}
+              className="table-container_row-checkbox"
               onChange={onChange}
               isChecked={isChecked}
               title={name}
@@ -91,7 +100,7 @@ const NameCell = ({
         </TableCell>
       )}
 
-      <Text title={name} fontWeight="600" fontSize="13px">
+      <Text title={name} fontWeight="600" fontSize="13px" truncate>
         {name}
       </Text>
     </>

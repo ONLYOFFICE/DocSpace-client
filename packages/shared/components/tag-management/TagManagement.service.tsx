@@ -184,6 +184,8 @@ export const useTagManagementService = ({
         rename(oldLabel, newLabel);
 
         await renameTag({ oldLabel, newLabel });
+
+        onTagsChanged?.();
       } catch (error) {
         rename(newLabel, oldLabel);
         toastr.error(error as Error);
@@ -198,6 +200,7 @@ export const useTagManagementService = ({
       cancelEdit,
       confirmEditTag,
       renameTag,
+      onTagsChanged,
       t,
     ],
   );
@@ -240,6 +243,8 @@ export const useTagManagementService = ({
 
         await removeTag(tag);
 
+        onTagsChanged?.();
+
         toastr.success(
           <Trans
             t={t}
@@ -259,7 +264,7 @@ export const useTagManagementService = ({
         console.error("Failed to remove room tag:", error);
       }
     },
-    [isPending, setTags, confirmDeleteTag, removeTag, t],
+    [isPending, setTags, confirmDeleteTag, removeTag, onTagsChanged, t],
   );
 
   const editTagHandleKey = useCallback(
@@ -291,4 +296,3 @@ export const useTagManagementService = ({
     editTagHandleKey,
   };
 };
-

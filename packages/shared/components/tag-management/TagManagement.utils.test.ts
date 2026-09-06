@@ -40,8 +40,13 @@ import {
   transformTagsData,
   unionTagsData,
   searchFilter,
+  applyTagChangeToRoomTags,
+  applyTagChangeToTagList,
+  inverseTagChange,
+  isSharedTagChange,
 } from "./TagManagement.utils";
 import type { TTag } from "./TagManagement.types";
+import { TagChangeType } from "./TagManagement.types";
 
 describe("TagManagement.utils", () => {
   describe("transformTagsData", () => {
@@ -244,6 +249,212 @@ describe("TagManagement.utils", () => {
       const result = searchFilter(tagsWithChecked, "test");
       expect(result[0].checked).toBe(true);
       expect(result[1].checked).toBe(false);
+    });
+  });
+
+  // The rules a host would otherwise write for itself, once per host.
+  describe("applyTagChangeToRoomTags", () => {
+    const ROOM_ID = "room-1";
+
+    // A tag just bound or just created leads the room's list, where the tag
+    // the user has this moment put on the room belongs.
+    it("adds a bound tag, and a created one, without listing it twice", () => {
+      expect(
+        applyTagChangeToRoomTags(["a"], {
+          type: TagChangeType.Bound,
+          roomId: ROOM_ID,
+          label: "b",
+        }),
+      ).toEqual(["b", "a"]);
+
+      expect(
+        applyTagChangeToRoomTags(["a"], {
+          type: TagChangeType.Created,
+          roomId: ROOM_ID,
+          label: "b",
+        }),
+      ).toEqual(["b", "a"]);
+
+      const listed = ["a", "b"];
+
+      // Already there: the same array back, so a store can skip the write.
+      expect(
+        applyTagChangeToRoomTags(listed, {
+          type: TagChangeType.Bound,
+          roomId: ROOM_ID,
+          label: "b",
+        }),
+      ).toBe(listed);
+    });
+
+    it("takes an unbound tag out", () => {
+      expect(
+        applyTagChangeToRoomTags(["a", "b"], {
+          type: TagChangeType.Unbound,
+          roomId: ROOM_ID,
+          label: "a",
+        }),
+      ).toEqual(["b"]);
+    });
+
+    it("follows a rename, and only where the old name was", () => {
+      expect(
+        applyTagChangeToRoomTags(["a", "b"], {
+          type: TagChangeType.Renamed,
+          oldLabel: "a",
+          newLabel: "c",
+        }),
+      ).toEqual(["c", "b"]);
+
+      const untouched = ["b"];
+
+      expect(
+        applyTagChangeToRoomTags(untouched, {
+          type: TagChangeType.Renamed,
+          oldLabel: "a",
+          newLabel: "c",
+        }),
+      ).toBe(untouched);
+    });
+
+    it("drops a removed tag", () => {
+      expect(
+        applyTagChangeToRoomTags(["a", "b"], {
+          type: TagChangeType.Removed,
+          label: "a",
+        }),
+      ).toEqual(["b"]);
+    });
+  });
+
+  describe("applyTagChangeToTagList", () => {
+    const ROOM_ID = "room-1";
+
+    it("leaves the shared list alone on a bind or unbind", () => {
+      const listed = ["a"];
+
+      expect(
+        applyTagChangeToTagList(listed, {
+          type: TagChangeType.Bound,
+          roomId: ROOM_ID,
+          label: "b",
+        }),
+      ).toBe(listed);
+
+      expect(
+        applyTagChangeToTagList(listed, {
+          type: TagChangeType.Unbound,
+          roomId: ROOM_ID,
+          label: "a",
+        }),
+      ).toBe(listed);
+    });
+
+    it("leads the list with a created tag", () => {
+      expect(
+        applyTagChangeToTagList(["a"], {
+          type: TagChangeType.Created,
+          roomId: ROOM_ID,
+          label: "b",
+        }),
+      ).toEqual(["b", "a"]);
+    });
+
+    it("follows a rename and a removal", () => {
+      expect(
+        applyTagChangeToTagList(["a", "b"], {
+          type: TagChangeType.Renamed,
+          oldLabel: "a",
+          newLabel: "c",
+        }),
+      ).toEqual(["c", "b"]);
+
+      expect(
+        applyTagChangeToTagList(["a", "b"], {
+          type: TagChangeType.Removed,
+          label: "b",
+        }),
+      ).toEqual(["a"]);
+    });
+  });
+
+  // A change is told to the host before the request is sent, so a failure has
+  // to be told the other way round.
+  describe("inverseTagChange", () => {
+    const ROOM_ID = "room-1";
+
+    it("turns a bind into an unbind, and back", () => {
+      expect(
+        inverseTagChange({
+          type: TagChangeType.Bound,
+          roomId: ROOM_ID,
+          label: "a",
+        }),
+      ).toEqual({ type: TagChangeType.Unbound, roomId: ROOM_ID, label: "a" });
+
+      expect(
+        inverseTagChange({
+          type: TagChangeType.Unbound,
+          roomId: ROOM_ID,
+          label: "a",
+        }),
+      ).toEqual({ type: TagChangeType.Bound, roomId: ROOM_ID, label: "a" });
+    });
+
+    it("turns a rename round", () => {
+      expect(
+        inverseTagChange({
+          type: TagChangeType.Renamed,
+          oldLabel: "a",
+          newLabel: "b",
+        }),
+      ).toEqual({
+        type: TagChangeType.Renamed,
+        oldLabel: "b",
+        newLabel: "a",
+      });
+    });
+
+    // The tag did not exist a moment ago, so taking it out everywhere is
+    // exactly where it was.
+    it("undoes a create by removing the tag", () => {
+      expect(
+        inverseTagChange({
+          type: TagChangeType.Created,
+          roomId: ROOM_ID,
+          label: "a",
+        }),
+      ).toEqual({ type: TagChangeType.Removed, label: "a" });
+    });
+
+    // Which rooms carried it is what a removal makes unknowable - which is
+    // why a removal is the one change told only after the server agrees.
+    it("has nothing to undo a removal with", () => {
+      expect(
+        inverseTagChange({ type: TagChangeType.Removed, label: "a" }),
+      ).toBeUndefined();
+    });
+  });
+
+  describe("isSharedTagChange", () => {
+    it("tells the changes that reach every room from the ones that do not", () => {
+      expect(
+        isSharedTagChange({ type: TagChangeType.Removed, label: "a" }),
+      ).toBe(true);
+      expect(
+        isSharedTagChange({
+          type: TagChangeType.Renamed,
+          oldLabel: "a",
+          newLabel: "b",
+        }),
+      ).toBe(true);
+      expect(
+        isSharedTagChange({
+          type: TagChangeType.Bound,
+          roomId: "room-1",
+          label: "a",
+        }),
+      ).toBe(false);
     });
   });
 });

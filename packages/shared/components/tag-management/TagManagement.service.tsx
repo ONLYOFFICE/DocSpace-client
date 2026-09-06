@@ -41,11 +41,11 @@ import type { KeyboardEvent, MouseEvent } from "react";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useTagManagement } from "./TagManagement.provider";
-import { stopPropagation } from "./TagManagement.utils";
+import { stopPropagation, toError, undoTagChange } from "./TagManagement.utils";
 import { EDIT_TAG_FORM_NAME } from "./TagManagement.constants";
+import { TagChangeType } from "./TagManagement.types";
 import type {
   FormValues,
-  TTag,
   TagManagementContentProps,
 } from "./TagManagement.types";
 
@@ -71,19 +71,20 @@ export const useTagManagementService = ({
   const { t } = useTranslation("Common");
   const {
     tags,
+    roomId,
     setTags,
     bindTag,
     renameTag,
     removeTag,
-    pendingLabel,
-    isPending,
+    pendingLabels,
   } = useTagManagement();
 
   const [editingLabel, setEditingLabel] = useState<string | null>(null);
 
   const toggleChecked = useCallback(
-    (label: string) => {
-      if (isPending) return;
+    async (label: string) => {
+      // Only this tag: a request out on another row is that row's business.
+      if (pendingLabels.has(label)) return;
 
       const current = tags.find((tag) => tag.label === label);
 
@@ -104,19 +105,31 @@ export const useTagManagementService = ({
 
       setChecked(checked);
 
-      bindTag(
-        { label, checked },
-        {
-          onSuccess: () => onTagsChanged?.(),
-          onError: (error) => {
-            toastr.error(error);
-            console.error("Failed to update room tags:", error);
-            setChecked(current.checked);
-          },
-        },
-      );
+      // The host hears about it before the answer, so the rooms it holds tick
+      // over at the same moment this row does - and hears the opposite if the
+      // request fails, which is what puts them back.
+      const change = {
+        type: checked ? TagChangeType.Bound : TagChangeType.Unbound,
+        roomId,
+        label,
+      } as const;
+
+      onTagsChanged?.(change);
+
+      // Awaited rather than answered through the callbacks `mutate` takes:
+      // those belong to the observer, which remembers only its latest call, so
+      // a request started on another row meanwhile would swallow them - and
+      // with them this rollback. The promise belongs to this call alone.
+      try {
+        await bindTag({ label, checked });
+      } catch (error) {
+        toastr.error(toError(error));
+        console.error("Failed to update room tags:", error);
+        setChecked(current.checked);
+        undoTagChange(change, onTagsChanged);
+      }
     },
-    [isPending, tags, setTags, bindTag, onTagsChanged],
+    [pendingLabels, tags, roomId, setTags, bindTag, onTagsChanged],
   );
 
   const handleEdit = useCallback(
@@ -136,7 +149,14 @@ export const useTagManagementService = ({
 
   const confirmEdit = useCallback(
     async (submitValue: FormValues) => {
-      if (editingLabel === null || isPending) return;
+      // The row being renamed, and the name it is being renamed to: neither
+      // may already be waiting on a request of its own.
+      if (
+        editingLabel === null ||
+        pendingLabels.has(editingLabel) ||
+        pendingLabels.has(submitValue[EDIT_TAG_FORM_NAME].trim())
+      )
+        return;
 
       const newLabel = submitValue[EDIT_TAG_FORM_NAME].trim();
       const oldLabel = editingLabel;
@@ -183,18 +203,32 @@ export const useTagManagementService = ({
 
         rename(oldLabel, newLabel);
 
-        await renameTag({ oldLabel, newLabel });
+        // No room is named: the tag itself now reads differently, in every
+        // room that carries it. Told before the answer, and told the other way
+        // round below if it never comes.
+        const change = {
+          type: TagChangeType.Renamed,
+          oldLabel,
+          newLabel,
+        } as const;
 
-        onTagsChanged?.();
+        onTagsChanged?.(change);
+
+        try {
+          await renameTag({ oldLabel, newLabel });
+        } catch (error) {
+          undoTagChange(change, onTagsChanged);
+          throw error;
+        }
       } catch (error) {
         rename(newLabel, oldLabel);
-        toastr.error(error as Error);
+        toastr.error(toError(error));
         console.error("Failed to update tag name:", error);
       }
     },
     [
       editingLabel,
-      isPending,
+      pendingLabels,
       tags,
       setTags,
       cancelEdit,
@@ -209,41 +243,22 @@ export const useTagManagementService = ({
     async (event: MouseEvent<HTMLDivElement>, tag: string) => {
       stopPropagation(event);
 
-      if (isPending) return;
-
-      // The row as it was, so a refusal puts it back where it sat and with
-      // the tick it had - not at the end of the list, and not always ticked.
-      let removed: { at: number; tag: TTag } | null = null;
-
-      const drop = () =>
-        setTags((prev) => {
-          const at = prev.findIndex((item) => item.label === tag);
-
-          if (at !== -1) removed = { at, tag: prev[at] };
-
-          return prev.filter((item) => item.label !== tag);
-        });
-
-      const restore = () =>
-        setTags((prev) => {
-          if (!removed || prev.some((item) => item.label === tag)) return prev;
-
-          const restored = [...prev];
-
-          restored.splice(Math.min(removed.at, prev.length), 0, removed.tag);
-
-          return restored;
-        });
+      if (pendingLabels.has(tag)) return;
 
       try {
         // As with the rename: a refusal ends it quietly.
         if (!(await confirmDeleteTag(tag))) return;
 
-        drop();
-
+        // The row stays where it is, carrying its loader, until the tag is
+        // really gone. Taking it off the list first would leave the delete
+        // with nothing to show for itself - and nothing to put back when it
+        // fails, which is why the row used to be restored by hand.
         await removeTag(tag);
 
-        onTagsChanged?.();
+        setTags((prev) => prev.filter((item) => item.label !== tag));
+
+        // As with the rename: gone from every room, not from this one.
+        onTagsChanged?.({ type: TagChangeType.Removed, label: tag });
 
         toastr.success(
           <Trans
@@ -259,12 +274,12 @@ export const useTagManagementService = ({
           />,
         );
       } catch (error) {
-        restore();
-        toastr.error(error as Error);
+        // Nothing to undo: the row was never taken off the list.
+        toastr.error(toError(error));
         console.error("Failed to remove room tag:", error);
       }
     },
-    [isPending, setTags, confirmDeleteTag, removeTag, onTagsChanged, t],
+    [pendingLabels, setTags, confirmDeleteTag, removeTag, onTagsChanged, t],
   );
 
   const editTagHandleKey = useCallback(
@@ -287,7 +302,7 @@ export const useTagManagementService = ({
     control,
     handleSubmit,
     editingLabel,
-    pendingLabel,
+    pendingLabels,
     toggleChecked,
     handleEdit,
     cancelEdit,

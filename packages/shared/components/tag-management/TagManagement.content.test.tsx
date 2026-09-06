@@ -41,7 +41,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementContent } from "./TagManagement.content";
-import type { AccessTagManagement } from "./TagManagement.types";
+import type {
+  AccessTagManagement,
+  TagsChangedHandler,
+} from "./TagManagement.types";
+import { TagChangeType } from "./TagManagement.types";
 
 const {
   addTagsToRoom,
@@ -93,16 +97,21 @@ const fullAccess: AccessTagManagement = {
 
 // Both confirmations say yes by default: the tests that care about a refusal
 // hand in one that answers false.
+const newQueryClient = () =>
+  new QueryClient({
+    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+  });
+
 const renderContent = (
   access: AccessTagManagement = fullAccess,
   confirmEditTag: () => Promise<boolean> = () => Promise.resolve(true),
   confirmDeleteTag: (label: string) => Promise<boolean> = () =>
     Promise.resolve(true),
+  onTagsChanged?: TagsChangedHandler,
+  // Handed in by the test that closes the list and opens it again: what is in
+  // flight lives in this client, not in the components it renders.
+  queryClient: QueryClient = newQueryClient(),
 ) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
-  });
-
   return render(
     <QueryClientProvider client={queryClient}>
       <TagManagementProvider
@@ -114,6 +123,7 @@ const renderContent = (
         <TagManagementContent
           confirmEditTag={confirmEditTag}
           confirmDeleteTag={confirmDeleteTag}
+          onTagsChanged={onTagsChanged}
         />
       </TagManagementProvider>
     </QueryClientProvider>,
@@ -260,24 +270,87 @@ describe("<TagManagementContent />", () => {
     expect(screen.getByTestId("tag_checkbox_freeTag")).toBeInTheDocument();
   });
 
-  it("starts nothing else while a request is out", async () => {
-    let answer: () => void = () => {};
+  // The request outlives the list it was started from: the query client sits
+  // above the popup, so closing the popup cancels nothing - and does not lose
+  // the fact that the row is still waiting.
+  it("keeps the loader when the list is closed and opened again", async () => {
+    const request = holdNext(addTagsToRoom);
+    const queryClient = newQueryClient();
 
-    addTagsToRoom.mockImplementation(
-      () =>
-        new Promise<void>((resolve) => {
-          answer = resolve;
-        }),
+    const list = renderContent(
+      fullAccess,
+      undefined,
+      undefined,
+      undefined,
+      queryClient,
     );
+
+    await userEvent.click(screen.getByTestId("tag_row_freeTag"));
+    await screen.findByTestId("tag_loader_freeTag");
+
+    list.unmount();
+
+    renderContent(fullAccess, undefined, undefined, undefined, queryClient);
+
+    // Opened again while the request is still out: the row is still marked,
+    // and its checkbox has not come back.
+    expect(await screen.findByTestId("tag_loader_freeTag")).toBeInTheDocument();
+    expect(
+      screen.queryByTestId("tag_checkbox_freeTag"),
+    ).not.toBeInTheDocument();
+
+    request.settle();
+
+    await waitFor(() => {
+      expect(screen.getByTestId("tag_checkbox_freeTag")).toBeInTheDocument();
+    });
+  });
+
+  it("gives every row a loader of its own", async () => {
+    const bind = holdNext(addTagsToRoom);
+    const unbind = holdNext(removeTagsFromRoom);
 
     renderContent();
 
     await userEvent.click(screen.getByTestId("tag_row_freeTag"));
     await screen.findByTestId("tag_loader_freeTag");
 
-    // Another row, and the buttons on the busy one: none of them may send a
-    // second request while the first is still out.
+    // A second row started while the first is still out: both wait, each
+    // under its own loader.
     await userEvent.click(screen.getByTestId("tag_row_boundTag"));
+
+    expect(
+      await screen.findByTestId("tag_loader_boundTag"),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("tag_loader_freeTag")).toBeInTheDocument();
+    expect(addTagsToRoom).toHaveBeenCalledTimes(1);
+    expect(removeTagsFromRoom).toHaveBeenCalledTimes(1);
+
+    // Each answer clears its own row and leaves the other waiting.
+    bind.settle();
+
+    await waitFor(() => {
+      expect(screen.getByTestId("tag_checkbox_freeTag")).toBeInTheDocument();
+    });
+    expect(screen.getByTestId("tag_loader_boundTag")).toBeInTheDocument();
+
+    unbind.settle();
+
+    await waitFor(() => {
+      expect(screen.getByTestId("tag_checkbox_boundTag")).toBeInTheDocument();
+    });
+  });
+
+  it("refuses a second request on the row that is already waiting", async () => {
+    const request = holdNext(addTagsToRoom);
+
+    renderContent();
+
+    await userEvent.click(screen.getByTestId("tag_row_freeTag"));
+    await screen.findByTestId("tag_loader_freeTag");
+
+    // The row itself, and both of its buttons: nothing new until it answers.
+    await userEvent.click(screen.getByTestId("tag_row_freeTag"));
     await userEvent.click(screen.getByTestId("edit_tag_button_freeTag"));
     await userEvent.click(screen.getByTestId("delete_tag_button_freeTag"));
 
@@ -286,17 +359,119 @@ describe("<TagManagementContent />", () => {
     expect(removeTagRequest).not.toHaveBeenCalled();
     expect(screen.queryByTestId("edit_tag_input")).not.toBeInTheDocument();
 
-    answer();
+    request.settle();
 
-    // And it works again once the answer is in.
+    // And it takes clicks again once its answer is in.
     await waitFor(() => {
       expect(screen.getByTestId("tag_checkbox_freeTag")).toBeInTheDocument();
     });
 
-    await userEvent.click(screen.getByTestId("tag_row_boundTag"));
+    await userEvent.click(screen.getByTestId("tag_row_freeTag"));
 
     await waitFor(() => {
-      expect(removeTagsFromRoom).toHaveBeenCalledWith(ROOM_ID, ["boundTag"]);
+      expect(removeTagsFromRoom).toHaveBeenCalledWith(ROOM_ID, ["freeTag"]);
+    });
+  });
+
+  // What the host is told, rather than that it was told: a room-scoped change
+  // names its room, a change to the tag itself does not - and the difference
+  // is what lets the host update one room or all of them.
+  describe("telling the host what changed", () => {
+    // `clearMocks` clears the calls but not the implementations, and the tests
+    // above leave requests hanging on purpose - so these say plainly that
+    // every request answers.
+    beforeEach(() => {
+      addTagsToRoom.mockImplementation(() => Promise.resolve());
+      removeTagsFromRoom.mockImplementation(() => Promise.resolve());
+      removeTagRequest.mockImplementation(() => Promise.resolve());
+      updateTagName.mockImplementation(() => Promise.resolve());
+    });
+
+    it("names the room a tag was bound to, and unbound from", async () => {
+      const onTagsChanged = vi.fn();
+
+      renderContent(fullAccess, undefined, undefined, onTagsChanged);
+
+      await userEvent.click(screen.getByTestId("tag_row_freeTag"));
+
+      await waitFor(() => {
+        expect(onTagsChanged).toHaveBeenCalledWith({
+          type: TagChangeType.Bound,
+          roomId: ROOM_ID,
+          label: "freeTag",
+        });
+      });
+
+      await userEvent.click(screen.getByTestId("tag_row_boundTag"));
+
+      await waitFor(() => {
+        expect(onTagsChanged).toHaveBeenCalledWith({
+          type: TagChangeType.Unbound,
+          roomId: ROOM_ID,
+          label: "boundTag",
+        });
+      });
+    });
+
+    it("names no room for a rename", async () => {
+      const onTagsChanged = vi.fn();
+
+      renderContent(fullAccess, undefined, undefined, onTagsChanged);
+
+      await renameTo("freeTag", "renamedTag");
+
+      await waitFor(() => {
+        expect(onTagsChanged).toHaveBeenCalledWith({
+          type: TagChangeType.Renamed,
+          oldLabel: "freeTag",
+          newLabel: "renamedTag",
+        });
+      });
+    });
+
+    it("names no room for a removal", async () => {
+      const onTagsChanged = vi.fn();
+
+      renderContent(fullAccess, undefined, undefined, onTagsChanged);
+
+      await userEvent.click(screen.getByTestId("delete_tag_button_freeTag"));
+
+      await waitFor(() => {
+        expect(onTagsChanged).toHaveBeenCalledWith({
+          type: TagChangeType.Removed,
+          label: "freeTag",
+        });
+      });
+    });
+
+    // Told before the request is sent, so the rooms the host holds tick over
+    // at the same moment the row does - and told the other way round when the
+    // request fails, which is what puts them back.
+    it("tells the host before the answer, and tells it back when it fails", async () => {
+      const onTagsChanged = vi.fn();
+      const request = holdNext(addTagsToRoom);
+
+      renderContent(fullAccess, undefined, undefined, onTagsChanged);
+
+      await userEvent.click(screen.getByTestId("tag_row_freeTag"));
+      await screen.findByTestId("tag_loader_freeTag");
+
+      expect(onTagsChanged).toHaveBeenCalledWith({
+        type: TagChangeType.Bound,
+        roomId: ROOM_ID,
+        label: "freeTag",
+      });
+
+      request.fail();
+
+      await waitFor(() => {
+        expect(onTagsChanged).toHaveBeenCalledWith({
+          type: TagChangeType.Unbound,
+          roomId: ROOM_ID,
+          label: "freeTag",
+        });
+      });
+      expect(toastError).toHaveBeenCalled();
     });
   });
 
@@ -374,29 +549,48 @@ describe("<TagManagementContent />", () => {
       });
     });
 
-    it("takes the row out at once and puts it back where it was if the delete fails", async () => {
+    it("keeps the row with its loader until the tag is really gone", async () => {
       const request = holdNext(removeTagRequest);
 
       renderContent();
 
       await userEvent.click(screen.getByTestId("delete_tag_button_boundTag"));
 
-      // Gone before the server has answered - boundTag led the list.
+      // Still listed while the request is out, and carrying the loader in
+      // place of its checkbox - a row taken off the list at once would leave
+      // the delete with nothing to show for itself.
+      expect(
+        await screen.findByTestId("tag_loader_boundTag"),
+      ).toBeInTheDocument();
+      expect(screen.getByTestId("tag_item_boundTag")).toBeInTheDocument();
+
+      request.settle();
+
       await waitFor(() => {
         expect(
           screen.queryByTestId("tag_item_boundTag"),
         ).not.toBeInTheDocument();
       });
+    });
+
+    it("leaves the row in its place when the delete fails", async () => {
+      const request = holdNext(removeTagRequest);
+
+      renderContent();
+
+      await userEvent.click(screen.getByTestId("delete_tag_button_boundTag"));
+      await screen.findByTestId("tag_loader_boundTag");
 
       request.fail();
 
-      // Back in its own place, not appended at the end, and still ticked.
+      // Never left the list, so it is still first and still ticked - there
+      // was nothing to put back.
       await waitFor(() => {
-        expect(screen.getByTestId("tag_item_boundTag")).toBeInTheDocument();
+        expect(toastError).toHaveBeenCalled();
       });
+      expect(screen.getByTestId("tag_item_boundTag")).toBeInTheDocument();
       expect(rowLabels()).toEqual(["boundTag", "freeTag"]);
       expect(isChecked("boundTag")).toBe(true);
-      expect(toastError).toHaveBeenCalled();
     });
 
     it("sends nothing when the user refuses", async () => {

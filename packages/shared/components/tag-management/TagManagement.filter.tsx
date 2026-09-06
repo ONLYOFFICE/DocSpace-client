@@ -56,6 +56,8 @@ import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 import { removeEmojiCharacters } from "../../utils/removeEmojiCharacters";
 
 import { useTagManagement } from "./TagManagement.provider";
+import { toError, undoTagChange } from "./TagManagement.utils";
+import { TagChangeType } from "./TagManagement.types";
 import type { TagManagementFilterProps } from "./TagManagement.types";
 import styles from "./TagManagement.module.scss";
 
@@ -72,11 +74,12 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     setSearchValue,
     clearSearch,
     tags,
+    roomId,
     setTags,
     filteredTags,
     createTag,
     bindTag,
-    isPending,
+    pendingLabels,
     access: { canSearch, canBindTag },
   } = useTagManagement();
 
@@ -100,10 +103,12 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   );
 
   const handleCreateTag = useCallback(async () => {
-    if (isPending) return;
-
     const trimmedValue = searchValue.trim().replace(/\s+/g, " ");
     if (trimmedValue.length === 0) return;
+
+    // Only the tag this would send: the rest of the list goes on working
+    // while it is out.
+    if (pendingLabels.has(trimmedValue)) return;
 
     // The name of an existing tag is not a mistake: it means that tag, so
     // Enter on it adds it to the room instead of doing nothing. Matched the
@@ -133,19 +138,30 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
 
       setChecked(true);
 
-      bindTag(
-        { ...existing, checked: true },
-        {
-          onSuccess: () => onTagsChanged?.(),
-          onError: (error) => {
-            console.error("Failed to update room tags:", error);
-            toastr.error(error);
-            // Unticked, not restored to `existing.checked`: the handler
-            // returned above when it was already true.
-            setChecked(false);
-          },
-        },
-      );
+      // Told before the answer, so the rooms the host holds tick over at the
+      // same moment this list does, and told the other way round if it fails.
+      const change = {
+        type: TagChangeType.Bound,
+        roomId,
+        label: existing.label,
+      } as const;
+
+      onTagsChanged?.(change);
+
+      // Awaited rather than answered through the callbacks `mutate` takes:
+      // those belong to the observer, which remembers only its latest call,
+      // so a request started elsewhere meanwhile would swallow them - and
+      // with them this rollback.
+      try {
+        await bindTag({ ...existing, checked: true });
+      } catch (error) {
+        console.error("Failed to update room tags:", error);
+        toastr.error(toError(error));
+        // Unticked, not restored to `existing.checked`: the handler
+        // returned above when it was already true.
+        setChecked(false);
+        undoTagChange(change, onTagsChanged);
+      }
 
       return;
     }
@@ -160,18 +176,31 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     // where a newly created tag belongs.
     setTags((prev) => [{ label: trimmedValue, checked: true }, ...prev]);
 
-    createTag(trimmedValue, {
-      onSuccess: () => onTagsChanged?.(),
-      onError: (error) => {
-        console.error("Failed to create tag:", error);
-        toastr.error(error);
-        setTags((prev) => prev.filter((tag) => tag.label !== trimmedValue));
-      },
-    });
+    // Created and bound to this room in one request, so it names the room -
+    // and unlike a bind it also adds to the shared list of every tag. Undoing
+    // it takes the tag out everywhere, which is where it was a moment ago:
+    // nowhere.
+    const change = {
+      type: TagChangeType.Created,
+      roomId,
+      label: trimmedValue,
+    } as const;
+
+    onTagsChanged?.(change);
+
+    try {
+      await createTag(trimmedValue);
+    } catch (error) {
+      console.error("Failed to create tag:", error);
+      toastr.error(toError(error));
+      setTags((prev) => prev.filter((tag) => tag.label !== trimmedValue));
+      undoTagChange(change, onTagsChanged);
+    }
   }, [
-    isPending,
+    pendingLabels,
     searchValue,
     tags,
+    roomId,
     clearSearch,
     createTag,
     bindTag,

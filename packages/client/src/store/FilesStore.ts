@@ -52,6 +52,11 @@ import SocketHelper, {
 import { RoomsTypes, isDesktop } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 import { isSameEntity } from "@docspace/shared/utils/isSameEntity";
+import {
+  applyTagChangeToRoomTags,
+  isSharedTagChange,
+  type TagChange,
+} from "@docspace/shared/components/tag-management";
 
 import { getCategoryType } from "@docspace/shared/utils/common";
 import {
@@ -1066,6 +1071,32 @@ class FilesStore {
   updateRoomMute = (index: number, status: boolean) => {
     this.folders[index].mute = status;
     this.updateSelection(this.folders[index]);
+  };
+
+  // The rooms on screen after a tag change, patched from the change itself
+  // rather than fetched again.
+  //
+  // How far it reaches is what the change says: binding a tag, unbinding it
+  // and creating one are sent for one room and touch only that room, while
+  // renaming or removing a tag changes the tag itself - and every room that
+  // carries it. Rooms the change leaves alone are not written back at all, so
+  // nothing observing them re-renders.
+  applyTagChange = (change: TagChange) => {
+    const roomId = isSharedTagChange(change) ? undefined : change.roomId;
+
+    this.folders.forEach((folder, index) => {
+      if (roomId !== undefined && String(folder.id) !== String(roomId)) return;
+
+      const tags = "tags" in folder ? folder.tags : undefined;
+
+      if (!Array.isArray(tags)) return;
+
+      const next = applyTagChangeToRoomTags(tags, change);
+
+      if (next !== tags) {
+        this.updateFolder(index, { ...folder, tags: next });
+      }
+    });
   };
 
   setFile = (file: TFile) => {

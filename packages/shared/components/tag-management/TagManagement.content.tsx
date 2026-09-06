@@ -85,7 +85,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     control,
     handleSubmit,
     editingLabel,
-    pendingLabel,
+    pendingLabels,
     toggleChecked,
     handleEdit,
     cancelEdit,
@@ -114,7 +114,8 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
       <Scrollbar fixedSize className={styles.scrollbar}>
         {filteredTags.map((tag) => {
           const isEditing = editingLabel === tag.label;
-          const isPending = pendingLabel === tag.label;
+          // Its own loader: several rows can be waiting at the same time.
+          const isPending = pendingLabels.has(tag.label);
           const isRowClickable = canBindTag && !isEditing && !isPending;
 
           return (

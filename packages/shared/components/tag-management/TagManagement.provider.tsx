@@ -77,9 +77,15 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
   const [searchValue, setSearchValue] = useState("");
   const deferredSearchValue = useDeferredValue(searchValue);
 
-  const [tags, setTags] = useState<TTag[]>(() => {
+  const [tags, setTags_] = useState<TTag[]>(() => {
     return unionTagsData(roomTags, fetchedTags);
   });
+
+  const setTags = useCallback((updater: React.SetStateAction<TTag[]>) => {
+    setTags_((prevTags) => {
+      return typeof updater === "function" ? updater(prevTags) : updater;
+    });
+  }, []);
 
   const [filteredTags, showCreateTag] = useMemo(() => {
     const search = deferredSearchValue.trim().replace(/\s+/g, " ");
@@ -110,6 +116,8 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
       setSearchValue,
       clearSearch,
       access,
+      // Read back by the list to say which room a change was sent for.
+      roomId,
       ...mutations,
     }),
     [
@@ -119,6 +127,7 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
       showCreateTag,
       clearSearch,
       access,
+      roomId,
       tags,
       mutations,
     ],

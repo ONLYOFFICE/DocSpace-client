@@ -41,85 +41,46 @@ import {
   useUpdateTag,
   useUpdateTagNameMutation,
 } from "./useTagsQuery";
+import { useTagsPending } from "./useTagPending";
 
 /**
  * The one set of tag mutations a list works through.
  *
  * Every `useMutation` call makes an observer of its own, so a hook called in
  * two places gives two independent pieces of state: a request started from one
- * of them leaves the other reading `isPending: false`. The search box and the
- * rows are two such places, and they have to agree on what is in flight - the
- * row's loader and the "one request at a time" rule are both that answer. So
+ * of them leaves the other seeing nothing in flight. The search box and the
+ * rows are two such places, and they have to agree on which rows are busy - so
  * the observers are made once, here, and handed to both through the provider.
+ *
+ * Each row waits on its own, though. Which tags are in flight is read from the
+ * mutation cache rather than off the observers, which only ever remember their
+ * latest call - see useTagPending - and every request is sent with
+ * `mutateAsync`, whose promise belongs to that call and settles whatever else
+ * was started meanwhile. So one slow row carries its own loader and holds up
+ * nothing else, and closing the popup mid-request loses neither the loader nor
+ * the answer.
  */
 export function useTagMutations(roomId: string | number) {
-  const createTag = useCreateTagMutation(roomId);
-  const updateTag = useUpdateTag(roomId);
-  const updateTagName = useUpdateTagNameMutation();
-  const removeTag = useRemoveTagMutation();
+  // The senders rather than the whole results: react-query keeps `mutateAsync`
+  // referentially stable, while the result object is new on every render -
+  // handing those out would make the context value, and every memo built on
+  // it, change for nothing.
+  const { mutateAsync: createTag } = useCreateTagMutation(roomId);
+  const { mutateAsync: bindTag } = useUpdateTag(roomId);
+  const { mutateAsync: renameTag } = useUpdateTagNameMutation();
+  const { mutateAsync: removeTag } = useRemoveTagMutation();
 
-  // The row whose request is out, read from the mutations themselves rather
-  // than kept alongside them: react-query already knows both which tag was
-  // sent and whether the answer is still coming.
-  //
-  // A create counts too. Its row is on screen before the server has heard of
-  // it, and it is the one row that must not be clicked - there is nothing yet
-  // to bind or unbind.
-  const pendingLabel = useMemo(() => {
-    if (createTag.isPending) {
-      return createTag.variables;
-    }
+  const pendingLabels = useTagsPending(roomId);
 
-    if (updateTag.isPending) {
-      return updateTag.variables.label;
-    }
-
-    // The new name, not the old one: the row has already been renamed on
-    // screen, and this has to name the row as it now reads.
-    if (updateTagName.isPending) {
-      return updateTagName.variables.newLabel;
-    }
-
-    if (removeTag.isPending) {
-      return removeTag.variables;
-    }
-    // The variables are listed as well as the flags: they are read above, and
-    // react-query sets them in the same render that raises isPending - which
-    // is easy to read as a forgotten dependency otherwise.
-  }, [
-    createTag.isPending,
-    createTag.variables,
-    updateTag.isPending,
-    updateTag.variables,
-    updateTagName.isPending,
-    updateTagName.variables,
-    removeTag.isPending,
-    removeTag.variables,
-  ]);
-
-  // The senders rather than the whole results: react-query keeps `mutate` and
-  // `mutateAsync` referentially stable, while the result object is new on
-  // every render - handing those out would make the context value, and every
-  // memo built on it, change for nothing.
   return useMemo(
     () => ({
-      createTag: createTag.mutate,
-      bindTag: updateTag.mutate,
-      renameTag: updateTagName.mutateAsync,
-      removeTag: removeTag.mutateAsync,
-      pendingLabel,
-      // Nothing new is started while a request is out: a second mutate on the
-      // same observer detaches the first call, and with it the rollback that
-      // would undo its optimistic write.
-      isPending: pendingLabel !== undefined,
+      createTag,
+      bindTag,
+      renameTag,
+      removeTag,
+      pendingLabels,
     }),
-    [
-      createTag.mutate,
-      updateTag.mutate,
-      updateTagName.mutateAsync,
-      removeTag.mutateAsync,
-      pendingLabel,
-    ],
+    [createTag, bindTag, renameTag, removeTag, pendingLabels],
   );
 }
 

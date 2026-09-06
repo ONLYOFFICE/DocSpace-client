@@ -34,4 +34,17 @@
  */
 
 export { TagManagement } from "./TagManagement";
-export type { AccessTagManagement } from "./TagManagement.types";
+export type {
+  AccessTagManagement,
+  TagChange,
+  TagsChangedHandler,
+} from "./TagManagement.types";
+export { TagChangeType } from "./TagManagement.types";
+// What a change means for a list of tags, so every host applies it the same
+// way instead of writing the same rules again.
+export {
+  applyTagChangeToRoomTags,
+  applyTagChangeToTagList,
+  inverseTagChange,
+  isSharedTagChange,
+} from "./TagManagement.utils";

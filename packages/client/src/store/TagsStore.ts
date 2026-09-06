@@ -35,6 +35,10 @@
 
 import { makeAutoObservable } from "mobx";
 import api from "@docspace/shared/api";
+import {
+  applyTagChangeToTagList,
+  type TagChange,
+} from "@docspace/shared/components/tag-management";
 
 class TagsStore {
   tags: string[] = [];
@@ -45,6 +49,15 @@ class TagsStore {
 
   setTags = (tags: string[]) => {
     this.tags = tags;
+  };
+
+  // A tag created, renamed or removed somewhere in the app: this list is
+  // patched in place rather than fetched again - the change already says
+  // everything the fetch would.
+  applyTagChange = (change: TagChange) => {
+    const next = applyTagChangeToTagList(this.tags, change);
+
+    if (next !== this.tags) this.tags = next;
   };
 
   fetchTags = () => {

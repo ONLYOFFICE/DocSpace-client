@@ -348,7 +348,7 @@ describe("<TagManagementFilter /> submitting the search", () => {
       expect(isChecked("boundTag")).toBe(true);
     });
 
-    it("starts nothing else while the request is out", async () => {
+    it("sends the next tag without waiting for the first answer", async () => {
       const request = holdNextRequest();
 
       renderPopupBody();
@@ -358,13 +358,18 @@ describe("<TagManagementFilter /> submitting the search", () => {
 
       await typeAndSubmit("secondTag");
 
-      expect(addTagsToRoom).toHaveBeenCalledTimes(1);
+      // Each tag waits on its own, so the second went out while the first is
+      // still unanswered - and both rows are listed, each with its loader.
+      await waitFor(() => {
+        expect(addTagsToRoom).toHaveBeenCalledTimes(2);
+      });
       expect(
-        screen.queryByTestId("tag_item_secondTag"),
-      ).not.toBeInTheDocument();
+        await screen.findByTestId("tag_item_secondTag"),
+      ).toBeInTheDocument();
+      expect(screen.getByTestId("tag_loader_brandNewTag")).toBeInTheDocument();
+      expect(screen.getByTestId("tag_loader_secondTag")).toBeInTheDocument();
 
       request.settle();
     });
   });
 });
-

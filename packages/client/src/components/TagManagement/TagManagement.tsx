@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FC, useMemo } from "react";
+import { FC, useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 
 import { ShareAccessRights } from "@docspace/ui-kit/enums";
@@ -41,6 +41,7 @@ import { ShareAccessRights } from "@docspace/ui-kit/enums";
 import {
   AccessTagManagement,
   TagManagement as TagManagementShared,
+  type TagChange,
 } from "@docspace/shared/components/tag-management";
 
 import type {
@@ -84,6 +85,10 @@ const TagManagement: FC<TagManagementWrapperProps> = ({
   access: roomAccess,
   isAdmin,
   isArchiveFolder,
+  applyTagChangeToRooms,
+  applyTagChangeToOpenRoom,
+  applyTagChangeToTags,
+  onTagsChanged,
   ...props
 }) => {
   const access = useMemo(
@@ -91,13 +96,53 @@ const TagManagement: FC<TagManagementWrapperProps> = ({
     [roomAccess, isAdmin, isArchiveFolder],
   );
 
-  return <TagManagementShared {...props} access={access} />;
+  // Every change is written straight into the stores that hold the tags, from
+  // the change itself - nothing is fetched again. Each store decides what the
+  // change means for it: the rooms list and the open room patch the one room a
+  // bind was sent for and every room a rename or a removal reaches, while the
+  // shared list of tags hears only about the tag itself.
+  //
+  // The socket says the same thing for a bind, a moment later; applying a
+  // change that is already applied writes nothing.
+  const handleTagsChanged = useCallback(
+    (change: TagChange) => {
+      applyTagChangeToRooms(change);
+      applyTagChangeToOpenRoom(change);
+      applyTagChangeToTags(change);
+
+      onTagsChanged?.(change);
+    },
+    [
+      applyTagChangeToRooms,
+      applyTagChangeToOpenRoom,
+      applyTagChangeToTags,
+      onTagsChanged,
+    ],
+  );
+
+  return (
+    <TagManagementShared
+      {...props}
+      access={access}
+      onTagsChanged={handleTagsChanged}
+    />
+  );
 };
 
 export default inject<TStore, TagManagementProps, InjectedTagManagementProps>(
-  ({ filesActionsStore, authStore, treeFoldersStore }) => ({
+  ({
+    filesActionsStore,
+    authStore,
+    treeFoldersStore,
+    filesStore,
+    selectedFolderStore,
+    tagsStore,
+  }) => ({
     isAdmin: authStore.isAdmin,
     onSelectTag: filesActionsStore.selectTag,
     isArchiveFolder: treeFoldersStore.isArchiveFolderRoot,
+    applyTagChangeToRooms: filesStore.applyTagChange,
+    applyTagChangeToOpenRoom: selectedFolderStore.applyTagChange,
+    applyTagChangeToTags: tagsStore.applyTagChange,
   }),
 )(observer(TagManagement as FC<TagManagementProps>));

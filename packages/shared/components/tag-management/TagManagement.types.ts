@@ -53,7 +53,7 @@ export interface TagManagementPopupProps {
   confirmEditTag: () => Promise<boolean>;
   /** The same for a delete. */
   confirmDeleteTag: (label: string) => Promise<boolean>;
-  onTagsChanged?: VoidFunction;
+  onTagsChanged?: TagsChangedHandler;
 
   roomName: string;
   access: AccessTagManagement;
@@ -63,6 +63,32 @@ export type TTag = {
   label: string;
   checked: boolean;
 };
+
+/**
+ * What happened to a tag, as told to whoever holds the rooms.
+ *
+ * The two kinds are apart because their reach is: binding a tag, unbinding it
+ * and creating one are sent for a single room and change only that room, while
+ * renaming and removing change the tag itself - and with it every room that
+ * carries it. So the first three name their room and the last two do not,
+ * rather than leaving the reader to guess.
+ */
+export enum TagChangeType {
+  Bound = "bound",
+  Unbound = "unbound",
+  Created = "created",
+  Renamed = "renamed",
+  Removed = "removed",
+}
+
+export type TagChange =
+  | { type: TagChangeType.Bound; roomId: string | number; label: string }
+  | { type: TagChangeType.Unbound; roomId: string | number; label: string }
+  | { type: TagChangeType.Created; roomId: string | number; label: string }
+  | { type: TagChangeType.Renamed; oldLabel: string; newLabel: string }
+  | { type: TagChangeType.Removed; label: string };
+
+export type TagsChangedHandler = (change: TagChange) => void;
 
 export interface TagManagementProviderProps {
   children: React.ReactNode;
@@ -76,6 +102,7 @@ export interface TagManagementProviderProps {
 /** The list itself. The mutations are added to it by the provider. */
 export interface ITagManagementStateContext {
   tags: TTag[];
+  roomId: string | number;
   setTags: React.Dispatch<React.SetStateAction<TTag[]>>;
   searchValue: string;
   deferredSearchValue: string;
@@ -95,12 +122,12 @@ export interface UpdateTagNameParams {
 export interface TagManagementContentProps {
   confirmDeleteTag: (label: string) => Promise<boolean>;
   confirmEditTag: () => Promise<boolean>;
-  onTagsChanged?: VoidFunction;
+  onTagsChanged?: TagsChangedHandler;
 }
 
 export interface TagManagementFilterProps {
   roomName: string;
-  onTagsChanged?: VoidFunction;
+  onTagsChanged?: TagsChangedHandler;
 }
 
 export interface TagManagementProps {
@@ -112,7 +139,7 @@ export interface TagManagementProps {
   onSelectTag: (tag: TagClickEvent) => void;
   access: AccessTagManagement;
   roomName: string;
-  onTagsChanged?: VoidFunction;
+  onTagsChanged?: TagsChangedHandler;
 }
 
 export interface FormValues {

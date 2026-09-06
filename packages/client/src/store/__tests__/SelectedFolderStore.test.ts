@@ -175,7 +175,8 @@ describe("SelectedFolderStore.applyTagChange", () => {
       label: "beta",
     });
 
-    expect(store.tags).toEqual(["alpha", "beta"]);
+    // A tag just bound leads the room's list.
+    expect(store.tags).toEqual(["beta", "alpha"]);
   });
 
   it("ignores a change sent for another room", () => {

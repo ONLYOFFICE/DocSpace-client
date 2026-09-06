@@ -65,7 +65,8 @@ describe("FilesStore.applyTagChange", () => {
       label: "beta",
     });
 
-    expect(tagsOf(store.folders[0])).toEqual(["alpha", "beta"]);
+    // A tag just bound leads the room's list.
+    expect(tagsOf(store.folders[0])).toEqual(["beta", "alpha"]);
     // The other room was not the one it was sent for.
     expect(tagsOf(store.folders[1])).toEqual(["alpha"]);
   });

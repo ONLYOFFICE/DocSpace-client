@@ -736,7 +736,7 @@ const BuyPlanPanel = ({
                 step={1}
                 showSlider
                 showPlusSign
-                underContorlsTitle={t("DocsConnect:PerUserPerMonth", {
+                underControlsTitle={t("DocsConnect:PerUserPerMonth", {
                   price: formatCurrency(pricePerUser),
                 })}
                 onChange={setUsers}

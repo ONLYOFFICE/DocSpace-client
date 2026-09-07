@@ -847,7 +847,16 @@ export const getSuggestionsBySection = (t: TTranslation) => {
 
     // Composer attachment the backend flagged as analyzable (a form): the
     // chips act on the attached file itself, so they need no folder rights.
+    //
+    // The opening chip is the "what is even possible here" one: a PDF form is
+    // the one attachment that answers differently from a plain document, and
+    // the rest of the list is what it will name — read the fields, check the
+    // answers, or build something out of them.
     attachedForm: [
+      {
+        name: t("AiSuggestions:AiFormWhatCanIDoWithThisForm"),
+        prompt: t("AiSuggestions:AiFormWhatCanIDoWithThisFormPrompt"),
+      },
       {
         name: t("AiSuggestions:AiFormAnalyzeTheForm"),
         prompt: t("AiSuggestions:AiFormAnalyzeTheFormPrompt"),
@@ -867,6 +876,18 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:AiFormSummarizeTheResponses"),
         prompt: t("AiSuggestions:AiFormSummarizeTheResponsesPrompt"),
+      },
+      {
+        name: t("AiSuggestions:AiFormCollectResponsesIntoATable"),
+        prompt: t("AiSuggestions:AiFormCollectResponsesIntoATablePrompt"),
+      },
+      {
+        name: t("AiSuggestions:AiFormCreateAReportFromTheForm"),
+        prompt: t("AiSuggestions:AiFormCreateAReportFromTheFormPrompt"),
+      },
+      {
+        name: t("AiSuggestions:AiFormImproveTheForm"),
+        prompt: t("AiSuggestions:AiFormImproveTheFormPrompt"),
       },
     ],
 

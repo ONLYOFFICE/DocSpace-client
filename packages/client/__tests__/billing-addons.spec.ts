@@ -44,6 +44,7 @@ import {
   apiUrl,
   balanceHandler,
   jsonResponse,
+  SERVICE_STATE_PATH,
   serviceFeeHandler,
   serviceStateHandler,
   storageSubscriptionTariff,
@@ -112,6 +113,25 @@ test.describe("Add-ons with a linked card", () => {
     await expect.poll(() => changes.length).toBe(1);
     expect(changes[0]).toContain('"enabled":true');
     await expect(stripeDialogButton(page)).toHaveCount(0);
+  });
+
+  test("a failed switch reports the error and turns the toggle back off", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      http.post(apiUrl(SERVICE_STATE_PATH), () => new Response(null, { status: 500 })),
+    );
+
+    await openAddons(page, baseUrl);
+
+    await toggle(page, "backup").click();
+
+    await expect(page.getByTestId("toast-content")).toContainText(
+      "An unexpected error occurred. Try again later or contact support.",
+    );
+    await expect(toggle(page, "backup")).toHaveAttribute("aria-checked", "false");
   });
 
   test("switching AI tools on charges the wallet without a detour", async ({

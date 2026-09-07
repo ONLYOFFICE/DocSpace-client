@@ -120,6 +120,12 @@ const upcomingHandler = (rows: unknown[] = []) =>
 const usageHandler = (collection: unknown[] = []) =>
   http.get(apiUrl(USAGE_PATH), () => jsonResponse({ collection }));
 
+const providerError = () =>
+  new Response(
+    JSON.stringify({ error: { message: "Payment provider is unavailable" } }),
+    { status: 500, headers: { "Content-Type": "application/json" } },
+  );
+
 const openWallet = async (page: Page, baseUrl: string, query = "") => {
   await page.goto(`${baseUrl}/billing/wallet${query}`);
 
@@ -512,6 +518,58 @@ test.describe("Billing wallet", () => {
       "wallet",
       "auto-top-up-dialog-edit.png",
     ]);
+  });
+
+  test("a failed top-up reports the provider error and keeps the dialog open", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      http.post(apiUrl("portal/payment/deposit"), () => providerError()),
+    );
+
+    await openWallet(page, baseUrl);
+    await topUpButton(page).click();
+
+    const amount = page.getByTestId("top_up_amount_input").first();
+    await amount.fill("25");
+    await page.getByTestId("first_topup_continue_to_stripe").click();
+
+    await expect(page.getByTestId("toast-content")).toContainText(
+      "Payment provider is unavailable",
+    );
+    await expect(amount).toBeVisible();
+    await expect(page.getByText("Wallet has been successfully topped up")).toHaveCount(0);
+  });
+
+  test("a failed auto top-up save leaves the previous settings", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      http.post(apiUrl(TOP_UP_SETTINGS_PATH), () => providerError()),
+    );
+
+    await openWallet(page, baseUrl);
+    await autoTopUpButton(page).click();
+
+    const dialog = page
+      .getByTestId("modal")
+      .filter({ hasText: "Top up credits" });
+    await dialog.getByTestId("auto_payments_toggle_button").click();
+    await dialog.getByTestId("top_up_min_balance_input").first().fill("10");
+    await dialog.getByTestId("top_up_max_balance_input").first().fill("100");
+    await dialog.getByTestId("wallet_refilled_save_button").click();
+
+    await expect(page.getByTestId("toast-content")).toContainText(
+      "Payment provider is unavailable",
+    );
+    await expect(dialog).toHaveCount(0);
+    await expect(
+      page.getByText("When credits drop below $10, your wallet will automatically refill to $100."),
+    ).toHaveCount(0);
   });
 
   test("the month-to-date spend links to the usage page", async ({

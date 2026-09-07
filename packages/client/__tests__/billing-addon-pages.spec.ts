@@ -49,6 +49,7 @@ import {
   balanceHandler,
   jsonResponse,
   payerWarning,
+  SERVICE_STATE_PATH,
   serviceFeeHandler,
   serviceStateHandler,
   storageSubscriptionTariff,
@@ -222,6 +223,9 @@ const servicePageHandlers = ({
 
 const topUpWalletButton = (page: Page) =>
   page.getByTestId("top_up_wallet_button");
+const errorToast = (page: Page) => page.getByTestId("toast-content");
+const failingServiceStateHandler = () =>
+  http.post(apiUrl(SERVICE_STATE_PATH), () => new Response(null, { status: 500 }));
 const serviceToggle = (page: Page) => page.getByTestId("toggle-button").first();
 // The toggle container has no height of its own: click and wait on its label.
 const toggleSwitch = (toggle: ReturnType<Page["getByTestId"]>) =>
@@ -704,6 +708,24 @@ test.describe("Backup page", () => {
     await expect(page.getByTestId("top_up_amount_input").first()).toBeVisible();
   });
 
+  test("a failed enable leaves the backups disabled", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(failingServiceStateHandler());
+
+    await page.goto(`${baseUrl}${BACKUP_ROUTE}`);
+
+    await page.getByRole("button", { name: "Enable", exact: true }).click();
+
+    await expect(errorToast(page)).toContainText(
+      "An unexpected error occurred. Try again later or contact support.",
+    );
+    await expect(page.getByText("Additional backups disabled")).toBeVisible();
+    await expect(serviceToggle(page)).toHaveAttribute("aria-checked", "false");
+  });
+
   test("a non-payer may enable backups but cannot top up", async ({
     page,
     baseUrl,
@@ -794,6 +816,25 @@ test.describe("AI services page", () => {
     await expect(
       page.getByText("AI tools service successfully enabled."),
     ).toBeVisible();
+  });
+
+  test("a failed switch reports the error and flips the toggle back", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(failingServiceStateHandler());
+
+    await page.goto(`${baseUrl}${AI_ROUTE}`);
+
+    await expect(toggleSwitch(aiToggle(page))).toBeVisible(FIRST_RENDER);
+    await toggleSwitch(aiToggle(page)).click();
+
+    await expect(errorToast(page)).toContainText(
+      "An unexpected error occurred. Try again later or contact support.",
+    );
+    await expect(aiToggle(page)).toHaveAttribute("aria-checked", "false");
+    await expect(page.getByText("AI tools service successfully enabled.")).toHaveCount(0);
   });
 
   test("running AI on a nearly empty wallet warns about the credits", async ({

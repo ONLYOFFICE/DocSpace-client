@@ -2119,6 +2119,7 @@
   "SystemTheme": "Gebruik systeemthema",
   "SystemThemeDescription": "Schakelt automatisch tussen lichte en donkere thema's op basis van uw systeeminstellingen.",
   "TableSettingsTitle": "Weergegeven kolommen beheren",
+  "TagAlreadyExists": "Tag \"{{tagName}}\" bestaat al",
   "Tags": "Tags",
   "TagsPlaceholder": "Een tag toevoegen",
   "TariffActivationDetails": "Beheerders: {{admins}} | Opslag: {{storage}}",

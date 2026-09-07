@@ -2119,6 +2119,7 @@
   "SystemTheme": "システムテーマを使用",
   "SystemThemeDescription": "システムの動作に合わせて、ライトテーマとダークテーマを自動で切り替えます。",
   "TableSettingsTitle": "表示列の管理",
+  "TagAlreadyExists": "タグ「{{tagName}}」はすでに存在します",
   "Tags": "タグ",
   "TagsPlaceholder": "タグを付ける",
   "TariffActivationDetails": "管理者：{{admins}}人 | ストレージ：{{storage}}",

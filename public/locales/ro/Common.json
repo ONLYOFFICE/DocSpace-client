@@ -2119,6 +2119,7 @@
   "SystemTheme": "Utilizare temă de sistem",
   "SystemThemeDescription": "Comută automat între temele luminoasă și întunecată în funcție de setările sistemului dumneavoastră.",
   "TableSettingsTitle": "Gestionează coloane afișate",
+  "TagAlreadyExists": "Eticheta \"{{tagName}}\" există deja",
   "Tags": "Etichete",
   "TagsPlaceholder": "Adăugare etichetă",
   "TariffActivationDetails": "Administratori: {{admins}} | Stocare: {{storage}}",

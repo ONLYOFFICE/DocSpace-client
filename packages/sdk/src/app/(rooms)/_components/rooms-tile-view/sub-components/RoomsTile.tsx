@@ -40,7 +40,6 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { RoomTile } from "@docspace/ui-kit/components/tiles/room-tile";
@@ -67,6 +66,7 @@ import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import { getRoomIconLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 
 import useRoomContextMenuModel from "../../../_hooks/useRoomContextMenuModel";
+import { useTagsChanged } from "../../../_hooks/useTagsChanged";
 import { RoomsRefreshContext } from "../../../_contexts/RoomsRefreshContext";
 
 import type { RoomsTileProps } from "../RoomsTileView.types";
@@ -171,12 +171,9 @@ const RoomsTile = observer(
       [onTagClick],
     );
 
-    // TEMPORARY: refresh the room after tag bind/unbind/create via callback.
-    // Replace with WebSocket MODIFY_FOLDER subscription once sockets are
-    // enabled in the SDK (initSocket={false} in providers).
-    const onRoomTagsChanged = React.useCallback(() => {
-      onRoomChanged?.(item.id as number);
-    }, [item.id, onRoomChanged]);
+    // The stores are patched from the change itself, so nothing is fetched
+    // again - see useTagsChanged.
+    const onRoomTagsChanged = useTagsChanged();
 
     const onOpenRoom = React.useCallback(
       (e: React.MouseEvent) => {
@@ -323,4 +320,3 @@ const RoomsTile = observer(
 );
 
 export default RoomsTile;
-

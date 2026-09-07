@@ -53,6 +53,8 @@ vi.mock("../../helpers/utils", () => ({
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { FolderType } from "@docspace/shared/enums";
 
+import { TagChangeType } from "@docspace/shared/components/tag-management/TagManagement.types";
+
 import SelectedFolderStore from "../SelectedFolderStore";
 
 const createStore = () =>
@@ -155,5 +157,59 @@ describe("SelectedFolderStore.isRoomStorageQuotaExceeded", () => {
     });
 
     expect(store.isRoomStorageQuotaExceeded).toBe(false);
+  });
+});
+
+// The room the user is standing in keeps its own copy of the tags, beside the
+// one in the rooms list, so a change has to reach both.
+describe("SelectedFolderStore.applyTagChange", () => {
+  it("binds a tag sent for this room", () => {
+    const store = createStore();
+
+    store.id = 42;
+    store.tags = ["alpha"];
+
+    store.applyTagChange({
+      type: TagChangeType.Bound,
+      roomId: 42,
+      label: "beta",
+    });
+
+    // A tag just bound leads the room's list.
+    expect(store.tags).toEqual(["beta", "alpha"]);
+  });
+
+  it("ignores a change sent for another room", () => {
+    const store = createStore();
+
+    store.id = 42;
+    store.tags = ["alpha"];
+
+    store.applyTagChange({
+      type: TagChangeType.Unbound,
+      roomId: 7,
+      label: "alpha",
+    });
+
+    expect(store.tags).toEqual(["alpha"]);
+  });
+
+  it("follows a rename and a removal, which name no room", () => {
+    const store = createStore();
+
+    store.id = 42;
+    store.tags = ["alpha", "beta"];
+
+    store.applyTagChange({
+      type: TagChangeType.Renamed,
+      oldLabel: "alpha",
+      newLabel: "gamma",
+    });
+
+    expect(store.tags).toEqual(["gamma", "beta"]);
+
+    store.applyTagChange({ type: TagChangeType.Removed, label: "beta" });
+
+    expect(store.tags).toEqual(["gamma"]);
   });
 });

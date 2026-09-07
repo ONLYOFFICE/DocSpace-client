@@ -36,6 +36,12 @@
 import { makeAutoObservable } from "mobx";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+// From the leaves, not the folder's barrel: that one re-exports the component.
+import {
+  applyTagChangeToRoomTags,
+  isSharedTagChange,
+} from "@docspace/shared/components/tag-management/TagManagement.utils";
+import type { TagChange } from "@docspace/shared/components/tag-management/TagManagement.types";
 import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   FolderType,
@@ -234,6 +240,19 @@ class SelectedFolderStore {
   constructor(protected settingsStore: SettingsStore) {
     makeAutoObservable(this);
   }
+
+  // The room the user is standing in keeps its own tags here, beside the copy
+  // in the rooms list, so a tag bound from inside the room has to reach both.
+  // A rename or a removal names no room and reaches this one like any other -
+  // if it carries the tag, which the helper decides.
+  applyTagChange = (change: TagChange) => {
+    if (!isSharedTagChange(change) && String(change.roomId) !== String(this.id))
+      return;
+
+    const next = applyTagChangeToRoomTags(this.tags, change);
+
+    if (next !== this.tags) this.tags = next;
+  };
 
   getSelectedFolder: () => TSelectedFolder = () => {
     return {

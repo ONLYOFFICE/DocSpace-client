@@ -2119,6 +2119,7 @@
   "SystemTheme": "Sistem temasından istifadə edin",
   "SystemThemeDescription": "Sistem parametrlərinizə əsasən açıq və qaranlıq temalar arasında avtomatik keçid edin.",
   "TableSettingsTitle": "Göstərilən sütunları idarə edin",
+  "TagAlreadyExists": "\"{{tagName}}\" etiketi artıq mövcuddur",
   "Tags": "Etiketlər",
   "TagsPlaceholder": "Teq əlavə edin",
   "TariffActivationDetails": "Adminlər: {{admins}} | Yaddaş: {{storage}}",

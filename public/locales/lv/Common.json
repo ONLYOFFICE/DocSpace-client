@@ -2119,6 +2119,7 @@
   "SystemTheme": "Izmantot sistēmas dizainu",
   "SystemThemeDescription": "Automātiski pārslēdzieties starp gaišiem un tumšiem dizainiem atbilstoši sistēmas iestatījumiem.",
   "TableSettingsTitle": "Pārvaldiet parādītās kolonnas",
+  "TagAlreadyExists": "Atzīme \"{{tagName}}\" jau pastāv",
   "Tags": "Atzīmes",
   "TagsPlaceholder": "Pievienot atzīmi",
   "TariffActivationDetails": "Administratori: {{admins}} | Krātuve: {{storage}}",

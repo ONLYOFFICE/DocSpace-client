@@ -254,19 +254,3 @@ export const stopPropagation = (event: React.MouseEvent) =>
 // What a rejected request carries is not typed, and the toast wants an Error.
 export const toError = (error: unknown) =>
   error instanceof Error ? error : new Error(String(error));
-
-export const promiseWithResolvers = <T>() => {
-  let resolve: (value: T | PromiseLike<T>) => void;
-  let reject: (reason?: unknown) => void;
-
-  const promise = new Promise<T>((res, rej) => {
-    resolve = res;
-    reject = rej;
-  });
-
-  return {
-    promise,
-    resolve: resolve!,
-    reject: reject!,
-  };
-};

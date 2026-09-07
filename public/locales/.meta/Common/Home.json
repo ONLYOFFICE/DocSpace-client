@@ -3,7 +3,7 @@
   "content": "Home",
   "content_en_sha1_hash": "70f8bb9a8a5393ef080507a89e4b98d139000d65",
   "created_at": "2026-08-20T15:38:18.642Z",
-  "updated_at": "2026-08-31T18:23:50.556Z",
+  "updated_at": "2026-09-04T07:59:41.548Z",
   "comment": {
     "text": "Label for the sidebar navigation item that opens the dashboard landing page, also used as that page document title.",
     "is_auto": false,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 265,
+      "line_number": 276,
       "context": "};\n };\n \n const overview: NavMenuItem = {\n id: \"dashboard\",\n label: t(\"Common:Home\"),\n icon: CatalogOverviewReactSvgUrl,\n ...nav(\"/dashboard\"),\n };\n \n const roomsFolder = find(FolderType.Rooms);",
       "module": "/packages/client"
     },
@@ -32,6 +32,12 @@
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
       "line_number": 253,
       "context": "const groups = React.useMemo<NavMenuGroup[]>(() => {\n // const underDevelopment = () => toastr.info(t(\"Common:UnderDevelopment\"));\n \n const overviewItem: NavMenuItem = {\n id: OVERVIEW_ID,\n label: t(\"Common:Home\"),\n icon: CatalogOverviewReactSvgUrl,\n onClick: () => navigate(\"/dashboard\"),\n };\n \n const sharedWithMeHasNew =",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
+      "line_number": 72,
+      "context": "const getStartPageOptions = () => {\n const isGuest = userType === EmployeeType.Guest;\n \n const options = [\n {\n label: t(\"Common:Home\"),\n key: FolderType.DEFAULT,\n },\n {\n label: t(\"Common:AIAgents\"),\n key: FolderType.AIAgents,",
       "module": "/packages/client"
     }
   ],

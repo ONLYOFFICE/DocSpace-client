@@ -1,19 +1,19 @@
 {
   "key_path": "DefaultAISetupDescription",
-  "content": "Set the default model used in AI chat and agents",
-  "content_en_sha1_hash": "17aa38008e1aca6854d07d2beeab88477d1982ad",
-  "created_at": "2026-08-31T18:22:59.087Z",
-  "updated_at": "2026-08-31T19:22:40.542Z",
+  "content": "Set the default model used in AI chat and agents.",
+  "content_en_sha1_hash": "509cae37325f74f6d7aa255d0f0e2ecaf4429056",
+  "created_at": "2026-09-04T07:59:03.855Z",
+  "updated_at": "2026-09-04T08:04:04.902Z",
   "comment": {
-    "text": "Subtext under a heading in the AI model assignment settings, explaining the purpose of the configuration.",
+    "text": "Description text in the AI model assignment settings explaining the purpose of the default model selection.",
     "is_auto": true,
-    "updated_at": "2026-08-31T19:22:40.542Z",
+    "updated_at": "2026-09-04T08:04:04.902Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/settings/model-assignment/index.tsx",
-      "line_number": 57,
+      "line_number": 61,
       "context": "className={styles.defaultSetupTitle}\n >\n {t(\"Common:DefaultAISetupTitle\")}\n </Heading>\n <Text lineHeight=\"20px\" className={styles.defaultSetupDescription}>\n {t(\"Common:DefaultAISetupDescription\")}\n </Text>\n </>\n }\n />\n );",
       "module": "/libs/ui-kit"
     }

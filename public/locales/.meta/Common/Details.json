@@ -3,7 +3,7 @@
   "content": "Details",
   "content_en_sha1_hash": "dc3decbb93847518f1a049dcf49d0d7c6560bcc6",
   "created_at": "2026-06-25T11:54:48.214Z",
-  "updated_at": "2026-08-31T18:23:50.743Z",
+  "updated_at": "2026-09-04T07:59:41.636Z",
   "comment": {
     "text": "Column header in the upcoming payments table and a button label for accessing further information; use as a noun.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
-      "line_number": 325,
+      "line_number": 324,
       "context": "className={classNames(styles.button, styles.swapFade, {\n [styles.swapFadeHidden]: isSwapping,\n })}\n primary={!isEnabled}\n size={ButtonSize.small}\n label={isEnabled ? t(\"Common:Details\") : activateLabel}\n onClick={onActivate}\n scale={isMobile}\n />\n \n {isMobile ? (",
       "module": "/packages/client"
     }

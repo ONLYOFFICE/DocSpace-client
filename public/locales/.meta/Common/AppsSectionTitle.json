@@ -3,7 +3,7 @@
   "content": "Apps",
   "content_en_sha1_hash": "d9a36850b7f3f78365a998cb16cb68b6fd79400d",
   "created_at": "2026-08-21T15:49:14.339Z",
-  "updated_at": "2026-08-31T18:23:50.562Z",
+  "updated_at": "2026-09-04T07:59:41.551Z",
   "comment": {
     "text": "Sidebar section title used to label a group of available applications.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 546,
+      "line_number": 557,
       "context": "// instead of text, so the collapsed sidebar keeps the same separation.\n ...(mainItems.length > 0\n ? [\n {\n id: \"main\",\n label: t(\"Common:AppsSectionTitle\"),\n items: mainItems,\n },\n ]\n : []),\n ];",
       "module": "/packages/client"
     }

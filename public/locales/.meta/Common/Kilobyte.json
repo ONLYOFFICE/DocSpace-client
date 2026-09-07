@@ -3,7 +3,7 @@
   "content": "KB",
   "content_en_sha1_hash": "315b39a0fc19fb45d146c17b813d46c7acb0b872",
   "created_at": "2025-05-19T21:30:46.020Z",
-  "updated_at": "2026-06-30T07:32:49.146Z",
+  "updated_at": "2026-09-04T07:59:41.665Z",
   "comment": {
     "text": "This is a unit of measurement for file size, appearing as a short label in dropdowns and lists. It represents 1024 bytes.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 111,
+      "line_number": 110,
       "context": "const [uploadMode, setUploadMode] = useState(\"files\");\n const [uploadQuantity, setUploadQuantity] = useState(\"single\");\n const [perFileSize, setPerFileSize] = useState({ value: \"25\", unit: \"mb\" });\n const [totalSize, setTotalSize] = useState({ value: \"100\", unit: \"mb\" });\n const fileSizeUnits = [\n { key: \"kb\", label: t(\"Common:Kilobyte\") },\n { key: \"mb\", label: t(\"Common:Megabyte\") },\n { key: \"gb\", label: t(\"Common:Gigabyte\") },\n ];\n \n const defaultSizeUnit = fileSizeUnits[1];",
       "module": "/packages/client"
     },

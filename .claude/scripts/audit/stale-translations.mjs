@@ -40,7 +40,11 @@ const asJson = has("--json");
 const authorFilter = val("--author", null);
 const until = val("--until", "HEAD");
 
-const sh = (c) => execSync(c, { encoding: "utf8", maxBuffer: 5e8 });
+// stderr is silenced on purpose: missing blobs and parentless commits are
+// normal here, and git writes "fatal: ..." for them. Leaking that corrupts
+// --json output for anyone redirecting with 2>&1.
+const sh = (c) =>
+  execSync(c, { encoding: "utf8", maxBuffer: 5e8, stdio: ["ignore", "pipe", "ignore"] });
 const shq = (c) => {
   try { return sh(c); } catch { return ""; }
 };
@@ -103,10 +107,14 @@ const commits = sh(`git log --format=%H%x09%an ${since}..${until}`)
 /** file -> Set(key) reworded by the selected commits */
 const reworded = new Map();
 const added = new Map();
+const EMPTY_TREE = "4b825dc642cb6eb9a060e54bf8d69288fbee4904";
 for (const { hash } of commits) {
-  const touched = shq(`git diff --name-only ${hash}^ ${hash}`).split("\n").filter(isEnLocale);
+  // A root commit has no parent to diff against; compare with the empty tree
+  // so its keys still count.
+  const parent = shq(`git rev-parse --verify --quiet ${hash}^`).trim() || EMPTY_TREE;
+  const touched = shq(`git diff --name-only ${parent} ${hash}`).split("\n").filter(isEnLocale);
   for (const file of touched) {
-    const before = readJson(`${hash}^`, file) ?? {};
+    const before = readJson(parent, file) ?? {};
     const after = readJson(hash, file) ?? {};
     for (const key of Object.keys(after)) {
       if (key in before) {
@@ -128,7 +136,17 @@ for (const { hash } of commits) {
 
 const normalise = (s) =>
   s.toLowerCase().replace(/[.,;:!?'"«»()\-–—]/g, "").replace(/\s+/g, " ").trim();
-const endsSentence = (s) => /[.!?]$/.test(s);
+// Sentence terminators are script-specific: CJK ends with a full-width stop and
+// Armenian with a colon (the files use ASCII ":"). Treating only ".!?" as an
+// ending reported ja-JP, zh-CN and hy-AM as drifting on every single key.
+const endsSentence = (s, lang) =>
+  lang === "hy-AM" ? /[.!?:\u0589]$/u.test(s) : /[.!?\u3002\uFF01\uFF1F]$/u.test(s);
+
+// Whether a sentence takes a terminator at all is a property of the script, not
+// of the English source: these end a statement their own way regardless of what
+// English does, so comparing them produces noise. Same exemption list the repo
+// already uses for MissingSpaceAfterSentenceTest.
+const OWN_PUNCTUATION = new Set(["zh-CN", "ja-JP", "ko-KR", "lo-LA", "si", "ar-SA"]);
 
 const findings = { substantive: [], case: [], punct: [] };
 const periodDrift = [];
@@ -154,13 +172,16 @@ for (const [file, keys] of reworded) {
       const nowFile = readJson(until, path);
       if (!nowFile || !(key in nowFile)) continue; // absent there — a coverage gap, not this check
       if (wasFile && key in wasFile && wasFile[key] === nowFile[key]) stale.push(lang);
-      if (endsSentence(nowFile[key]) !== endsSentence(after[key])) periodOff.push(lang);
+      if (
+        !OWN_PUNCTUATION.has(lang) &&
+        endsSentence(nowFile[key], lang) !== endsSentence(after[key], "en")
+      ) periodOff.push(lang);
     }
 
-    if (endsSentence(before[key]) !== endsSentence(after[key]) && periodOff.length) {
+    if (endsSentence(before[key], "en") !== endsSentence(after[key], "en") && periodOff.length) {
       periodDrift.push({
         id: `${ns}:${key}`,
-        direction: endsSentence(after[key]) ? "gained a final period" : "lost a final period",
+        direction: endsSentence(after[key], "en") ? "gained a final period" : "lost a final period",
         languages: periodOff,
         total: languages.length,
       });

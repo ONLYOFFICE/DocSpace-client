@@ -3,7 +3,7 @@
   "content": "AI features enabled",
   "content_en_sha1_hash": "2aabdfb25234057920b26eaf0e9c67a33bb4beb9",
   "created_at": "2026-07-03T11:07:18.744Z",
-  "updated_at": "2026-08-31T18:23:50.742Z",
+  "updated_at": "2026-09-04T07:59:41.636Z",
   "comment": {
     "text": "Status label in the AI settings banner indicating that AI functionality is currently active.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
-      "line_number": 139,
-      "context": "enabledDescription: t(\"Common:AISearchEnabledDescription\"),\n }\n : {\n activateDescription: t(\"Common:GetAccessToAIModels\"),\n activateLabel: t(\"Common:ActivateAIFeatures\"),\n enabledTitle: t(\"Common:AIFeaturesEnabled\"),\n enabledDescription: t(\"Common:AIFeaturesEnabledDescription\"),\n }),\n });\n \n const AIFeaturesBanner = ({",
+      "line_number": 138,
+      "context": "enabledTitle: t(\"Common:AISearchEnabledTitle\"),\n enabledDescription: t(\"Common:AISearchEnabledDescription\"),\n }\n : {\n activateDescription: t(\"Common:GetAccessToAIModels\"),\n enabledTitle: t(\"Common:AIFeaturesEnabled\"),\n enabledDescription: t(\"Common:AIFeaturesEnabledDescription\"),\n }),\n });\n \n const AIFeaturesBanner = ({",
       "module": "/packages/client"
     }
   ],

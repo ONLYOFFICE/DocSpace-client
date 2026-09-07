@@ -3,7 +3,7 @@
   "content": "Pay-as-you-go, billed from your Wallet",
   "content_en_sha1_hash": "95eda46d9729f10522f5cb6045284e037e44cd0f",
   "created_at": "2026-08-31T18:23:21.099Z",
-  "updated_at": "2026-08-31T18:47:48.132Z",
+  "updated_at": "2026-09-04T07:59:41.636Z",
   "comment": {
     "text": "A text label in a list of AI benefits or a pricing banner describing the billing method. It appears alongside a wallet icon in the AI chat or settings section.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
-      "line_number": 270,
+      "line_number": 269,
       "context": "{pricingNote}\n </div>\n <div className={styles.featureRow}>\n <WalletIcon className={styles.payIcon} />\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"Common:PayAsYouGoFromWallet\")}\n </Text>\n </div>\n </>\n )}\n </div>",
       "module": "/packages/client"
     }

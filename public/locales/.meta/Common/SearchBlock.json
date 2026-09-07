@@ -3,7 +3,7 @@
   "content": "Search block",
   "content_en_sha1_hash": "56c6cf7793ee4ba51ec0088f1810351bb7bb5a27",
   "created_at": "2026-06-09T09:42:58.761Z",
-  "updated_at": "2026-08-14T14:58:32.730Z",
+  "updated_at": "2026-09-04T07:59:41.603Z",
   "comment": {
     "text": "Label for a checkbox and tooltip title referring to the search and filter functionality section.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 596,
+      "line_number": 595,
       "context": "place=\"right\"\n offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"Common:SearchBlock\")}\n description={t(\"Common:ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n dataTestId=\"show_filter_help_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 467,
+      "line_number": 466,
       "context": "offsetRight={4}\n size={12}\n dataTestId=\"filter_help_button\"\n tooltipContent={\n <TooltipContent\n title={t(\"Common:SearchBlock\")}\n description={t(\"Common:ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n />",
       "module": "/packages/client"
     },

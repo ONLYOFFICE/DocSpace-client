@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-08-31T18:23:50.571Z",
+  "updated_at": "2026-09-04T07:59:41.554Z",
   "comment": {
     "text": "This is a label for a section or category within the file selector, representing a collection of collaborative workspaces.",
     "is_auto": true,
@@ -139,7 +139,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
-      "line_number": 82,
+      "line_number": 84,
       "context": "{\n label: t(\"Common:Files\"),\n key: FolderType.USER,\n },\n {\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,\n },\n {\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,",
       "module": "/packages/client"
     },
@@ -170,7 +170,7 @@
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
       "line_number": 174,
-      "context": "productName: getBrandName(\"ProductName\"),\n defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n defaultValue:\n \"Pick files from {{sectionNameFirst}} or {{sectionNameSecond}}.\",\n }),\n icon: <UploadPDFFormIcon />,\n onClick: onUploadFromDocSpace,",
+      "context": "productName: getBrandName(\"ProductName\"),\n defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n defaultValue:\n \"Add files from {{files}}, {{rooms}}, {{forms}}, or other {{aiAgents}}\",\n }),",
       "module": "/packages/sdk"
     },
     {

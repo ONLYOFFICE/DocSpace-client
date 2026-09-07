@@ -3,7 +3,7 @@
   "content": "Default homepage",
   "content_en_sha1_hash": "242721afc682c76a302c397f042a07ff0049ae03",
   "created_at": "2026-08-31T18:23:45.075Z",
-  "updated_at": "2026-08-31T19:59:48.353Z",
+  "updated_at": "2026-09-04T07:59:41.696Z",
   "comment": {
     "text": "Label for a setting in the file management section used to select the initial page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
-      "line_number": 115,
+      "line_number": 119,
       "context": "};\n \n return (\n <div className=\"default-page-setting\">\n <Text lineHeight=\"20px\" fontWeight={600}>\n {t(\"FilesSettings:DefaultHomepage\")}\n </Text>\n <ComboBox\n options={startPageOptions}\n selectedOption={getSelectedStartPage()}\n onSelect={onSelectStartPage}",
       "module": "/packages/client"
     }

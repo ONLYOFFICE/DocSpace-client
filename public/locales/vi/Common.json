@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "Ẩn lập luận",
   "ArbiterIntroDescription": "Nhiều chuyên gia AI trả lời câu hỏi của bạn song song; một trọng tài tổng hợp câu trả lời của họ thành một câu trả lời có trọng số duy nhất.",
   "ArbiterLabel": "TRỌNG TÀI:",
-  "ArbiterNoAIProvider": "Không có nhà cung cấp AI nào được cấu hình cho không gian làm việc này.",
+  "ArbiterNoModels": "Không có mô hình AI nào được cấu hình cho không gian làm việc này.",
   "ArbiterNonAdminDescription": "Trọng tài AI chỉ dành cho quản trị viên. Hãy nhờ siêu quản trị viên thiết lập.",
   "ArbiterOpenAiArbiter": "Mở Trọng tài AI",
   "ArbiterPageDescription": "Đặt câu hỏi, nhận câu trả lời độc lập từ nhiều chuyên gia AI và để trọng tài cân nhắc chúng thành một phán quyết có lý duy nhất.",

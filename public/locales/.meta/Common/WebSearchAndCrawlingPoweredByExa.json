@@ -1,19 +1,19 @@
 {
   "key_path": "WebSearchAndCrawlingPoweredByExa",
-  "content": "Web search and crawling are powered by Exa - no Exa account or setup needed. Usage is billed through your Wallet.",
-  "content_en_sha1_hash": "1f2e307965c97da828e97065cacdee0d7f0d1212",
-  "created_at": "2026-08-31T18:23:38.350Z",
-  "updated_at": "2026-08-31T18:27:33.170Z",
+  "content": "Web search and crawling are powered by Exa — no Exa account or setup needed. Usage is billed through your Wallet.",
+  "content_en_sha1_hash": "34c88f465f0b8852eec61cf1ea3d2b4d06bfe396",
+  "created_at": "2026-09-04T07:59:33.829Z",
+  "updated_at": "2026-09-04T08:00:12.916Z",
   "comment": {
-    "text": "Informational text in the AI settings banner that appears when the Web Search tab is active, explaining the service provider and billing details.",
+    "text": "Informational text in the AI settings banner that appears when the Web Search feature is active, explaining the service provider and billing details.",
     "is_auto": true,
-    "updated_at": "2026-08-31T18:27:33.170Z",
+    "updated_at": "2026-09-04T08:00:12.916Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
-      "line_number": 252,
+      "line_number": 251,
       "context": "<>\n {isWebSearchTab ? (\n <div className={styles.featureRow}>\n <WebSearchIcon className={styles.payIcon} />\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"Common:WebSearchAndCrawlingPoweredByExa\")}\n </Text>\n </div>\n ) : (\n <div className={styles.featureRow}>\n <AIIcon className={styles.payIcon} />",
       "module": "/packages/client"
     }

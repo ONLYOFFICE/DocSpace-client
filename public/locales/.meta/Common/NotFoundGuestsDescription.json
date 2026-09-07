@@ -1,13 +1,13 @@
 {
   "key_path": "NotFoundGuestsDescription",
-  "content": "Guests you invite to your rooms will show up here",
-  "content_en_sha1_hash": "a5f755c0a53408089e10ccd3d546b477c29d1012",
-  "created_at": "2026-08-31T18:23:18.647Z",
-  "updated_at": "2026-08-31T18:49:45.965Z",
+  "content": "Guests you invite to your rooms will show up here.",
+  "content_en_sha1_hash": "b080058d56ecbc4039efc43de216c6ce68fadadb",
+  "created_at": "2026-09-04T07:59:18.531Z",
+  "updated_at": "2026-09-04T08:02:30.480Z",
   "comment": {
-    "text": "Empty screen description text shown when the Guests tab contains no entries. It informs the user that invited guests will be listed in this area.",
+    "text": "Empty screen description shown in the Guests tab when no guests have been invited to any rooms.",
     "is_auto": true,
-    "updated_at": "2026-08-31T18:49:45.965Z",
+    "updated_at": "2026-09-04T08:02:30.480Z",
     "model": "gemma4:26b"
   },
   "usage": [

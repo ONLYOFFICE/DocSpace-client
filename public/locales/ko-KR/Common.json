@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "추론 숨기기",
   "ArbiterIntroDescription": "여러 AI 전문가가 질문에 병렬로 답변하고, 중재자가 그 답변들을 하나의 가중 답변으로 종합합니다.",
   "ArbiterLabel": "중재자:",
-  "ArbiterNoAIProvider": "이 워크스페이스에는 AI 공급자가 구성되어 있지 않습니다.",
+  "ArbiterNoModels": "이 워크스페이스에는 AI 모델이 구성되어 있지 않습니다.",
   "ArbiterNonAdminDescription": "AI 중재자는 관리자만 사용할 수 있습니다. 슈퍼 관리자에게 설정을 요청하세요.",
   "ArbiterOpenAiArbiter": "AI 중재자 열기",
   "ArbiterPageDescription": "질문을 제출하고 여러 AI 전문가로부터 독립적인 답변을 받은 후, 중재자가 이를 하나의 논리적인 판결로 평가하도록 합니다.",

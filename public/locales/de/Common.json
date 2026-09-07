@@ -203,7 +203,7 @@
   "ArbiterHideReasoning": "Begründung ausblenden",
   "ArbiterIntroDescription": "Mehrere KI-Experten beantworten Ihre Frage parallel; ein Arbiter fasst ihre Antworten zu einer einzigen gewichteten Antwort zusammen.",
   "ArbiterLabel": "ARBITER:",
-  "ArbiterNoAIProvider": "Für diesen Arbeitsbereich ist kein KI-Anbieter konfiguriert.",
+  "ArbiterNoModels": "Für diesen Arbeitsbereich ist kein KI-Modell konfiguriert.",
   "ArbiterNonAdminDescription": "KI Arbiter ist nur für Administratoren verfügbar. Bitten Sie einen Super-Administrator, ihn einzurichten.",
   "ArbiterOpenAiArbiter": "AI Arbiter öffnen",
   "ArbiterPageDescription": "Stellen Sie eine Frage, erhalten Sie unabhängige Antworten von mehreren KI-Experten und lassen Sie den Arbiter sie zu einem einzigen begründeten Urteil abwägen.",

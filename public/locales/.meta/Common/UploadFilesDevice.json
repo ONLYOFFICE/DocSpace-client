@@ -3,7 +3,7 @@
   "content": "Add files from your computer or phone",
   "content_en_sha1_hash": "b34ab5f2fff4cee01cd43a1d77a812b3564f9676",
   "created_at": "2026-08-31T18:23:36.483Z",
-  "updated_at": "2026-08-31T18:29:16.671Z",
+  "updated_at": "2026-09-04T07:59:41.557Z",
   "comment": {
     "text": "Subtext for an upload option in an empty state view, describing the action of selecting files from a local device.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 667,
+      "line_number": 669,
       "context": "true,\n );\n \n const uploadFilesFromDevice = createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"Common:UploadFilesDevice\"),\n \"file\",\n true,\n );\n \n return [uploadFilesFromDocSpace, uploadFilesFromDevice];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
-      "line_number": 186,
+      "line_number": 188,
       "context": "{\n key: \"knowledge-empty-upload-from-device\",\n title: t(\"EmptyView:UploadDeviceOptionTitle\", {\n defaultValue: \"Upload from device\",\n }),\n description: t(\"Common:UploadFilesDevice\", {\n defaultValue: \"Pick files from your device.\",\n }),\n icon: <UploadDevicePDFFormIcon />,\n onClick: onUploadFromDevice,\n },",
       "module": "/packages/sdk"
     }

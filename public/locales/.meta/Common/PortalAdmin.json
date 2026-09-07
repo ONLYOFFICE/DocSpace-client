@@ -3,7 +3,7 @@
   "content": "Full admin",
   "content_en_sha1_hash": "8b16bbd40111e55863b1d7ea4eb0cf527889bddf",
   "created_at": "2026-08-13T14:37:01.841Z",
-  "updated_at": "2026-08-31T18:23:50.758Z",
+  "updated_at": "2026-09-04T07:59:41.641Z",
   "comment": {
     "text": "Label for the highest-level user role appearing in tooltips, dropdown menus, and selection lists; includes a product name variable when used within tooltip text.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 683,
-      "context": "? [\n {\n id: \"accounts-add_administrator\",\n className: \"main-button_drop-down\",\n icon: PersonAdminReactSvgUrl,\n label: t(\"Common:PortalAdmin\"),\n onClick: () => this.inviteUser(EmployeeType.Admin),\n \"data-type\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: \"administrator\",\n },",
+      "line_number": 694,
+      "context": "? [\n {\n id: \"accounts-add_administrator\",\n className: \"main-button_drop-down\",\n icon: PersonAdminReactSvgUrl,\n label: t(\"Common:PortalAdmin\"),\n onClick: () => this.inviteUser(EmployeeType.Admin),\n description: getDescription(EmployeeType.Admin),\n \"data-type\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: \"administrator\",",
       "module": "/packages/client"
     },
     {

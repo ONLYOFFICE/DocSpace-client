@@ -3,7 +3,7 @@
   "content": "Guests cannot be assigned as Content creator.\nOnly Room admins, Full admins and Users are eligible for this role.",
   "content_en_sha1_hash": "e21f3e636f2b0d1a18825e95caf57242921a972c",
   "created_at": "2026-08-13T14:36:53.405Z",
-  "updated_at": "2026-08-14T14:58:32.737Z",
+  "updated_at": "2026-09-04T07:59:41.607Z",
   "comment": {
     "text": "Tooltip or warning text in the Invite or Members panel that appears when attempting to assign the \"Content creator\" role to a guest user.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 201,
+      "line_number": 166,
       "context": "key: \"contentCreator\",\n label: t(\"Common:ContentCreator\"),\n description: getUserDescription(roomType, t),\n tooltip:\n roomType === RoomsType.AIRoom\n ? t(\"Common:GuestAgentMaxAvailableRoleWarning\")\n : undefined,\n access: isNone ? EmployeeType.User : ShareAccessRights.Collaborator,\n type: EmployeeType.User,\n },\n editor: {",
       "module": "/packages/shared"
     }

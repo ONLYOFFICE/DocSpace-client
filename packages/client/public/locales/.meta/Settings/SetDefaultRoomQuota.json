@@ -1,13 +1,13 @@
 {
   "key_path": "SetDefaultRoomQuota",
-  "content": "Set a default storage quota for rooms in this workspace - room admins can adjust it later for individual rooms.",
-  "content_en_sha1_hash": "afee8862584be776a0b08bfc72b709aca9eada20",
-  "created_at": "2026-08-31T18:23:42.175Z",
-  "updated_at": "2026-08-31T20:18:15.864Z",
+  "content": "Set a default storage quota for rooms in this workspace — room admins can adjust it later for individual rooms.",
+  "content_en_sha1_hash": "c93c23e62c99483f8768c7a0eb60181f8305f52d",
+  "created_at": "2026-09-04T07:59:36.298Z",
+  "updated_at": "2026-09-04T08:06:21.304Z",
   "comment": {
-    "text": "Subtitle for a menu item or toggle description in storage management settings, explaining the purpose of setting a default storage quota for rooms.",
+    "text": "Subtitle for a menu item and a description for a toggle in the storage management settings, explaining the default storage quota for rooms.",
     "is_auto": true,
-    "updated_at": "2026-08-31T20:18:15.864Z",
+    "updated_at": "2026-09-04T08:06:21.304Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -107,13 +107,107 @@ const AI_SEARCH_USAGE = [
   },
 ];
 
+const transaction = (overrides: Record<string, unknown>) => ({
+  agentTitle: "",
+  serviceUnit: "",
+  quantity: 0,
+  participantDisplayName: "Administrator",
+  debit: 0,
+  credit: 0,
+  currency: "USD",
+  ...overrides,
+});
+
+const STORAGE_TRANSACTIONS = [
+  transaction({
+    date: "2025-12-05T10:00:00.0000000Z",
+    description: "Additional storage",
+    details: "Subscription",
+    serviceUnit: "GB",
+    quantity: 200,
+    debit: 20,
+  }),
+  transaction({
+    date: "2025-12-01T08:00:00.0000000Z",
+    description: "Wallet top-up",
+    details: "Card",
+    credit: 100,
+  }),
+];
+
+const BACKUP_TRANSACTIONS = [
+  transaction({
+    date: "2025-12-08T09:30:00.0000000Z",
+    description: "Backups",
+    details: "Backup",
+    serviceUnit: "backup",
+    quantity: 1,
+    participantDisplayName: "Admin User",
+    debit: 2,
+  }),
+  transaction({
+    date: "2025-12-03T14:00:00.0000000Z",
+    description: "Backups",
+    details: "Backup",
+    serviceUnit: "backup",
+    quantity: 1,
+    debit: 2,
+  }),
+];
+
+const AI_TRANSACTIONS = [
+  transaction({
+    date: "2025-12-09T10:15:00.0000000Z",
+    description: "AI services",
+    details: "Requests",
+    agentTitle: "Assistant",
+    serviceUnit: "requests",
+    quantity: 120,
+    participantDisplayName: "Admin User",
+    debit: 1.2,
+  }),
+  transaction({
+    date: "2025-12-04T16:45:00.0000000Z",
+    description: "AI services",
+    details: "Tokens",
+    agentTitle: "Assistant",
+    serviceUnit: "tokens",
+    quantity: 12345,
+    debit: 0.3,
+  }),
+];
+
+const AI_SEARCH_TRANSACTIONS = [
+  transaction({
+    date: "2025-12-09T11:00:00.0000000Z",
+    description: "AI search",
+    details: "Requests",
+    serviceUnit: "requests",
+    quantity: 42,
+    participantDisplayName: "Admin User",
+    debit: 0.84,
+  }),
+];
+
+const DOCS_CONNECT_TRANSACTIONS = [
+  transaction({
+    date: "2026-06-21T10:00:00.0000000Z",
+    description: "Docs Connect",
+    details: "Subscription",
+    serviceUnit: "users",
+    quantity: 50,
+    debit: 100,
+  }),
+];
+
 // Every service page loads its history and month usage on mount.
 const servicePageHandlers = ({
   usage = [] as unknown[],
   backups = { free: 0, paid: 0 },
+  operations = [] as unknown[],
 } = {}) => [
   http.get(apiUrl("portal/payment/customer/operations"), () =>
-    jsonResponse({ collection: [] }),
+    jsonResponse({ collection: operations }),
   ),
   http.get(apiUrl("portal/payment/customer/usage"), () =>
     jsonResponse({ collection: usage }),
@@ -1150,5 +1244,139 @@ test.describe("Deactivated storage warning on the billing pages", () => {
 
     await expect(payerWarning(page)).toBeVisible(FIRST_RENDER);
     await expect(warning(page)).toHaveCount(0);
+  });
+});
+
+test.describe("Add-on pages with a transaction history", () => {
+  test.beforeEach(async ({ mockRequest, page }) => {
+    useSaasBilling(mockRequest);
+    await page.clock.setSystemTime(PAID_NOW);
+  });
+
+  test("the storage page lists the subscription charges", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      ...walletServicesHandler(),
+      storageSubscriptionTariff(200),
+      ...servicePageHandlers({ operations: STORAGE_TRANSACTIONS }),
+    );
+
+    await openStorage(page, baseUrl);
+
+    await expect(page.getByText("Additional storage (Subscription)")).toBeVisible();
+    await expect(page.getByText("-$20.00", { exact: true })).toBeVisible();
+    await expect(page.getByText("Wallet top-up (Card)")).toBeVisible();
+    await expect(page.getByText("+$100.00", { exact: true })).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "addon-pages",
+      "storage-transactions.png",
+    ]);
+  });
+
+  test("the backup page lists every paid backup", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      ...walletServicesHandler(["backup"]),
+      ...servicePageHandlers({
+        usage: BACKUP_USAGE,
+        backups: { free: 1, paid: 3 },
+        operations: BACKUP_TRANSACTIONS,
+      }),
+    );
+
+    await page.goto(`${baseUrl}${BACKUP_ROUTE}`);
+
+    await expect(page.getByText("Backups (Backup)")).toHaveCount(2, FIRST_RENDER);
+    await expect(page.getByText("-$2.00", { exact: true })).toHaveCount(2);
+    await expect(page.getByText("Admin User", { exact: true })).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "addon-pages",
+      "backup-transactions.png",
+    ]);
+  });
+
+  test("the AI services page names the agent behind each charge", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      ...walletServicesHandler(["aitools"]),
+      ...servicePageHandlers({ usage: AI_USAGE, operations: AI_TRANSACTIONS }),
+    );
+
+    await page.goto(`${baseUrl}${AI_ROUTE}`);
+
+    await expect(page.getByText("AI Agent: Assistant")).toHaveCount(2, FIRST_RENDER);
+    await expect(page.getByText("AI services (Requests)")).toBeVisible();
+    await expect(page.getByText("AI services (Tokens)")).toBeVisible();
+    await expect(page.getByText("-$1.2", { exact: true })).toBeVisible();
+    await expect(page.getByText("-$0.3", { exact: true })).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "addon-pages",
+      "ai-services-transactions.png",
+    ]);
+  });
+
+  test("the AI search page lists the search requests", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      ...walletServicesHandler(["aitools", "aisearch"]),
+      ...servicePageHandlers({
+        usage: AI_SEARCH_USAGE,
+        operations: AI_SEARCH_TRANSACTIONS,
+      }),
+    );
+
+    await page.goto(`${baseUrl}${AI_SEARCH_ROUTE}`);
+
+    await expect(page.getByText("AI search (Requests)")).toBeVisible(FIRST_RENDER);
+    await expect(page.getByText("-$0.84", { exact: true })).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "addon-pages",
+      "ai-search-transactions.png",
+    ]);
+  });
+
+  test("the Docs Connect page lists the subscription charge", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      ...docsConnectHandlers(TEST_PORT, "paid"),
+      ...servicePageHandlers({ operations: DOCS_CONNECT_TRANSACTIONS }),
+    );
+    await page.clock.setSystemTime(new Date(DOCS_CONNECT_FROZEN_NOW));
+
+    await page.goto(`${baseUrl}${DOCS_CONNECT_ROUTE}`);
+
+    await expect(page.getByText("Docs Connect (Subscription)")).toBeVisible(
+      FIRST_RENDER,
+    );
+    await expect(page.getByText("-$100.00", { exact: true })).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "addon-pages",
+      "docs-connect-transactions.png",
+    ]);
   });
 });

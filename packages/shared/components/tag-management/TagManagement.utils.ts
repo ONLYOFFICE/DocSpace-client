@@ -63,7 +63,10 @@ export const applyTagChangeToRoomTags = (
     case TagChangeType.Created:
       return tags.includes(change.label) ? tags : [change.label, ...tags];
 
+    // A create that failed reads here like an unbind: out of the room it was
+    // typed in, and out of no other.
     case TagChangeType.Unbound:
+    case TagChangeType.Uncreated:
       return tags.includes(change.label)
         ? tags.filter((tag) => tag !== change.label)
         : tags;
@@ -101,6 +104,10 @@ export const applyTagChangeToTagList = (
         ? tags.map((tag) => (tag === change.oldLabel ? change.newLabel : tag))
         : tags;
 
+    // A create that failed takes the name back out of the list, where the
+    // create had just put it - this is the one place `Uncreated` reads like a
+    // removal, because the tag never came to exist.
+    case TagChangeType.Uncreated:
     case TagChangeType.Removed:
       return tags.includes(change.label)
         ? tags.filter((tag) => tag !== change.label)
@@ -159,10 +166,14 @@ export const inverseTagChange = (change: TagChange): TagChange | undefined => {
         label: change.label,
       };
 
-    // The tag did not exist a moment ago, so taking it out everywhere puts
-    // things back as they were.
+    // Not a `Removed`: that reaches every room, and the name the room was
+    // trying to invent may already belong to a tag other rooms carry.
     case TagChangeType.Created:
-      return { type: TagChangeType.Removed, label: change.label };
+      return {
+        type: TagChangeType.Uncreated,
+        roomId: change.roomId,
+        label: change.label,
+      };
 
     case TagChangeType.Renamed:
       return {

@@ -67,16 +67,23 @@ export type TTag = {
 /**
  * What happened to a tag, as told to whoever holds the rooms.
  *
- * The two kinds are apart because their reach is: binding a tag, unbinding it
- * and creating one are sent for a single room and change only that room, while
+ * The kinds are apart because their reach is: binding a tag, unbinding it and
+ * creating one are sent for a single room and change only that room, while
  * renaming and removing change the tag itself - and with it every room that
- * carries it. So the first three name their room and the last two do not,
+ * carries it. So the first ones name their room and the last two do not,
  * rather than leaving the reader to guess.
+ *
+ * `Uncreated` is what a failed create is told as. It cannot be a `Removed`:
+ * that one reaches every room, and a name a room was trying to invent may
+ * already belong to a tag other rooms carry - which a `Removed` would strip
+ * from them. So it names its room like a create, and only the tag list, where
+ * the create had put the new name, hears it as a removal.
  */
 export enum TagChangeType {
   Bound = "bound",
   Unbound = "unbound",
   Created = "created",
+  Uncreated = "uncreated",
   Renamed = "renamed",
   Removed = "removed",
 }
@@ -85,6 +92,7 @@ export type TagChange =
   | { type: TagChangeType.Bound; roomId: string | number; label: string }
   | { type: TagChangeType.Unbound; roomId: string | number; label: string }
   | { type: TagChangeType.Created; roomId: string | number; label: string }
+  | { type: TagChangeType.Uncreated; roomId: string | number; label: string }
   | { type: TagChangeType.Renamed; oldLabel: string; newLabel: string }
   | { type: TagChangeType.Removed; label: string };
 

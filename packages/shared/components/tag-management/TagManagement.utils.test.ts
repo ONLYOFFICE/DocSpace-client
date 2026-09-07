@@ -325,6 +325,18 @@ describe("TagManagement.utils", () => {
         }),
       ).toEqual(["b"]);
     });
+
+    // A create that failed: out of the room it was typed in, and - since the
+    // store scopes it by roomId - out of no other.
+    it("takes an uncreated tag out like an unbind", () => {
+      expect(
+        applyTagChangeToRoomTags(["a", "b"], {
+          type: TagChangeType.Uncreated,
+          roomId: ROOM_ID,
+          label: "a",
+        }),
+      ).toEqual(["b"]);
+    });
   });
 
   describe("applyTagChangeToTagList", () => {
@@ -376,6 +388,18 @@ describe("TagManagement.utils", () => {
         }),
       ).toEqual(["a"]);
     });
+
+    // The one place a failed create reads as a removal: the name goes back
+    // out of the list the create had just put it into.
+    it("takes an uncreated name back out of the list", () => {
+      expect(
+        applyTagChangeToTagList(["b", "a"], {
+          type: TagChangeType.Uncreated,
+          roomId: ROOM_ID,
+          label: "b",
+        }),
+      ).toEqual(["a"]);
+    });
   });
 
   // A change is told to the host before the request is sent, so a failure has
@@ -415,16 +439,20 @@ describe("TagManagement.utils", () => {
       });
     });
 
-    // The tag did not exist a moment ago, so taking it out everywhere is
-    // exactly where it was.
-    it("undoes a create by removing the tag", () => {
+    // Not a removal: that reaches every room, and the name this room was
+    // trying to invent may already belong to a tag other rooms carry.
+    it("undoes a create with a change that names the room", () => {
       expect(
         inverseTagChange({
           type: TagChangeType.Created,
           roomId: ROOM_ID,
           label: "a",
         }),
-      ).toEqual({ type: TagChangeType.Removed, label: "a" });
+      ).toEqual({
+        type: TagChangeType.Uncreated,
+        roomId: ROOM_ID,
+        label: "a",
+      });
     });
 
     // Which rooms carried it is what a removal makes unknowable - which is

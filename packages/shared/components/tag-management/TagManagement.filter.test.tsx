@@ -42,7 +42,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementFilter } from "./TagManagement.filter";
 import { TagManagementContent } from "./TagManagement.content";
-import type { AccessTagManagement } from "./TagManagement.types";
+import type {
+  AccessTagManagement,
+  TagsChangedHandler,
+} from "./TagManagement.types";
+import { TagChangeType } from "./TagManagement.types";
 
 const { addTagsToRoom, removeTagsFromRoom, toastError } = vi.hoisted(() => ({
   addTagsToRoom: vi.fn(() => Promise.resolve()),
@@ -103,7 +107,10 @@ const renderFilter = (access: AccessTagManagement = fullAccess) => {
 
 // Both halves of the popup under one provider - the only way to see that a
 // request started from the search box reaches the rows.
-const renderPopupBody = (access: AccessTagManagement = fullAccess) => {
+const renderPopupBody = (
+  access: AccessTagManagement = fullAccess,
+  onTagsChanged?: TagsChangedHandler,
+) => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
   });
@@ -116,10 +123,11 @@ const renderPopupBody = (access: AccessTagManagement = fullAccess) => {
         roomId={ROOM_ID}
         access={access}
       >
-        <TagManagementFilter roomName="Room" />
+        <TagManagementFilter roomName="Room" onTagsChanged={onTagsChanged} />
         <TagManagementContent
           confirmEditTag={() => Promise.resolve(true)}
           confirmDeleteTag={() => Promise.resolve(true)}
+          onTagsChanged={onTagsChanged}
         />
       </TagManagementProvider>
     </QueryClientProvider>,
@@ -290,11 +298,18 @@ describe("<TagManagementFilter /> submitting the search", () => {
 
     it("takes a created tag back off the list when the request fails", async () => {
       const request = holdNextRequest();
+      const onTagsChanged = vi.fn();
 
-      renderPopupBody();
+      renderPopupBody(fullAccess, onTagsChanged);
 
       await typeAndSubmit("brandNewTag");
       await screen.findByTestId("tag_item_brandNewTag");
+
+      expect(onTagsChanged).toHaveBeenCalledWith({
+        type: TagChangeType.Created,
+        roomId: ROOM_ID,
+        label: "brandNewTag",
+      });
 
       request.fail();
 
@@ -306,6 +321,15 @@ describe("<TagManagementFilter /> submitting the search", () => {
       expect(toastError).toHaveBeenCalled();
       // Undone by name: the rows it never touched are still there.
       expect(rowLabels()).toEqual(["boundTag", "freeTag"]);
+
+      // The host is told the create came to nothing - and told it as a change
+      // that names the room, so a tag of the same name in other rooms is left
+      // alone. A `Removed` would have stripped it from them.
+      expect(onTagsChanged).toHaveBeenLastCalledWith({
+        type: TagChangeType.Uncreated,
+        roomId: ROOM_ID,
+        label: "brandNewTag",
+      });
     });
 
     it("shows the loader on the row an existing tag is added from", async () => {

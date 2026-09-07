@@ -33,12 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, {
-  useCallback,
-  startTransition,
-  useState,
-  useEffect,
-} from "react";
+import React, { useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
@@ -56,12 +51,12 @@ import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 import { removeEmojiCharacters } from "../../utils/removeEmojiCharacters";
 
 import { useTagManagement } from "./TagManagement.provider";
-import { useCreateTagMutation } from "./hooks/useTagsQuery";
-import type { TagManagementFilterProps, TTag } from "./TagManagement.types";
+import { toError, undoTagChange } from "./TagManagement.utils";
+import { TagChangeType } from "./TagManagement.types";
+import type { TagManagementFilterProps } from "./TagManagement.types";
 import styles from "./TagManagement.module.scss";
 
 export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
-  roomId,
   roomName,
   onTagsChanged,
 }) => {
@@ -74,55 +69,132 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     setSearchValue,
     clearSearch,
     tags,
+    roomId,
     setTags,
     filteredTags,
-    access: { canSearch },
+    createTag,
+    bindTag,
+    pendingLabels,
+    access: { canSearch, canBindTag },
   } = useTagManagement();
-  const createTag = useCreateTagMutation(roomId);
 
-  const [inputValue, setInputValue] = useState("");
-
-  useEffect(() => {
-    if (searchValue === "") {
-      setInputValue("");
-    }
-  }, [searchValue]);
-
+  // The input reads its value straight out of the provider, and writes it
+  // there as it is typed. It used to keep a copy of its own and hand the
+  // provider the value in a transition, which left two answers to "what is in
+  // the box" - and the Escape ladder, which has to know whether the filter is
+  // on, could be told the stale one. Typing stays smooth without the
+  // transition because the filtering itself is already deferred: only
+  // `deferredSearchValue` reaches the list.
   const onChangeSearchValue = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = removeEmojiCharacters(event.target.value);
-      setInputValue(value);
-      startTransition(() => {
-        setSearchValue(value);
-      });
+      setSearchValue(removeEmojiCharacters(event.target.value));
     },
     [setSearchValue],
   );
 
   const handleCreateTag = useCallback(async () => {
-    const trimmedValue = searchValue.trim();
-    if (trimmedValue.length === 0 || !showCreateTag) return;
+    const trimmedValue = searchValue.trim().replace(/\s+/g, " ");
+    if (trimmedValue.length === 0) return;
 
-    const newTag: TTag = { label: trimmedValue, checked: true };
-    const updatedTags = [newTag, ...tags];
+    // The name of an existing tag is not a mistake: it means that tag, so
+    // Enter on it adds it to the room instead of doing nothing. Matched the
+    // way names are compared everywhere here - case-insensitively - and the
+    // tag keeps its own spelling.
+    const existing = tags.find(
+      (tag) => tag.label.trim().toLowerCase() === trimmedValue.toLowerCase(),
+    );
+
+    // The name this would send, which for an existing tag is the tag's own
+    // spelling rather than what was typed: "FREETAG" on Enter sends "freeTag",
+    // and it is that request the row may already be waiting on. Only that one
+    // tag is refused - the rest of the list goes on working.
+    if (pendingLabels.has(existing?.label ?? trimmedValue)) return;
+
+    if (existing) {
+      clearSearch();
+
+      // Already in the room, or not allowed to add: the search is cleared and
+      // the list shows the tag - there is nothing to send.
+      if (existing.checked || !canBindTag) return;
+
+      // Ticked before the answer comes, and put back if it does not. Both
+      // writes name the one tag they are about: a whole list written back from
+      // here would also undo whatever else has changed in the meantime.
+      const setChecked = (checked: boolean) =>
+        setTags((prev) =>
+          prev.map((tag) =>
+            tag.label === existing.label ? { ...tag, checked } : tag,
+          ),
+        );
+
+      setChecked(true);
+
+      // Told before the answer, so the rooms the host holds tick over at the
+      // same moment this list does, and told the other way round if it fails.
+      const change = {
+        type: TagChangeType.Bound,
+        roomId,
+        label: existing.label,
+      } as const;
+
+      onTagsChanged?.(change);
+
+      // Awaited rather than answered through the callbacks `mutate` takes:
+      // those belong to the observer, which remembers only its latest call,
+      // so a request started elsewhere meanwhile would swallow them - and
+      // with them this rollback.
+      try {
+        await bindTag({ ...existing, checked: true });
+      } catch (error) {
+        console.error("Failed to update room tags:", error);
+        toastr.error(toError(error));
+        // Unticked, not restored to `existing.checked`: the handler
+        // returned above when it was already true.
+        setChecked(false);
+        undoTagChange(change, onTagsChanged);
+      }
+
+      return;
+    }
+
+    if (!showCreateTag) return;
+
     clearSearch();
-    setInputValue("");
 
-    createTag.mutate(trimmedValue, {
-      onSuccess: () => {
-        setTags(updatedTags);
-        onTagsChanged?.();
-      },
-      onError: (error) => {
-        console.error("Failed to create tag:", error);
-        toastr.error(error);
-      },
-    });
+    // Listed at once, so the tag the user just typed does not disappear
+    // between the cleared input and the server's answer. It leads the list,
+    // where a newly created tag belongs.
+    setTags((prev) => [{ label: trimmedValue, checked: true }, ...prev]);
+
+    // Created and bound to this room in one request, so it names the room -
+    // and unlike a bind it also adds to the shared list of every tag. Undoing
+    // it takes the tag out everywhere, which is where it was a moment ago:
+    // nowhere.
+    const change = {
+      type: TagChangeType.Created,
+      roomId,
+      label: trimmedValue,
+    } as const;
+
+    onTagsChanged?.(change);
+
+    try {
+      await createTag(trimmedValue);
+    } catch (error) {
+      console.error("Failed to create tag:", error);
+      toastr.error(toError(error));
+      setTags((prev) => prev.filter((tag) => tag.label !== trimmedValue));
+      undoTagChange(change, onTagsChanged);
+    }
   }, [
+    pendingLabels,
     searchValue,
     tags,
+    roomId,
     clearSearch,
     createTag,
+    bindTag,
+    canBindTag,
     setTags,
     showCreateTag,
     onTagsChanged,
@@ -130,19 +202,13 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
-      switch (event.key) {
-        case "Enter":
-          handleCreateTag();
-          break;
-        case "Escape":
-          setInputValue("");
-          clearSearch();
-          break;
-        default:
-          break;
-      }
+      // Escape is not here: clearing the search is one step of the ladder the
+      // list owns - see useTagManagementService - so that the same press means
+      // the same thing whether or not the input has the focus. The cleared
+      // search reaches the input through the effect above.
+      if (event.key === "Enter") handleCreateTag();
     },
-    [handleCreateTag, clearSearch],
+    [handleCreateTag],
   );
 
   if (!canSearch && !showCreateTag) {
@@ -169,7 +235,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
             scale
             autoFocus={!isMobile}
             withBorder={false}
-            value={inputValue}
+            value={searchValue}
             size={InputSize.base}
             type={InputType.search}
             className={styles.input}

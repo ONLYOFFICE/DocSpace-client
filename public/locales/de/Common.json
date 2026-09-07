@@ -2119,6 +2119,7 @@
   "SystemTheme": "Systemdesign verwenden",
   "SystemThemeDescription": "Automatisch zwischen hellen und dunklen Themen wechseln, basierend auf Ihren Systemeinstellungen.",
   "TableSettingsTitle": "Angezeigte Spalten verwalten",
+  "TagAlreadyExists": "Tag \"{{tagName}}\" existiert bereits",
   "Tags": "Tags",
   "TagsPlaceholder": "Tag hinzufügen",
   "TariffActivationDetails": "Admins: {{admins}} | Speicher: {{storage}}",

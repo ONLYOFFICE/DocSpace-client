@@ -52,6 +52,14 @@ import SocketHelper, {
 import { RoomsTypes, isDesktop } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 import { isSameEntity } from "@docspace/shared/utils/isSameEntity";
+// From the leaves rather than the folder's barrel: that one re-exports the
+// TagManagement component, and a store must not drag a component - with its
+// SCSS and its icons - in behind it.
+import {
+  applyTagChangeToRoomTags,
+  isSharedTagChange,
+} from "@docspace/shared/components/tag-management/TagManagement.utils";
+import type { TagChange } from "@docspace/shared/components/tag-management/TagManagement.types";
 
 import { getCategoryType } from "@docspace/shared/utils/common";
 import {
@@ -1066,6 +1074,63 @@ class FilesStore {
   updateRoomMute = (index: number, status: boolean) => {
     this.folders[index].mute = status;
     this.updateSelection(this.folders[index]);
+  };
+
+  // The rooms on screen after a tag change, patched from the change itself
+  // rather than fetched again.
+  //
+  // How far it reaches is what the change says: binding a tag, unbinding it
+  // and creating one are sent for one room and touch only that room, while
+  // renaming or removing a tag changes the tag itself - and every room that
+  // carries it. Rooms the change leaves alone are not written back at all, so
+  // nothing observing them re-renders.
+  applyTagChange = (change: TagChange) => {
+    const roomId = isSharedTagChange(change) ? undefined : change.roomId;
+
+    const patched: (TFolder | TRoom)[] = [];
+
+    const next = this.folders.map((folder) => {
+      if (roomId !== undefined && String(folder.id) !== String(roomId)) {
+        return folder;
+      }
+
+      const tags = "tags" in folder ? folder.tags : undefined;
+
+      if (!Array.isArray(tags)) return folder;
+
+      const tagsNext = applyTagChangeToRoomTags(tags, change);
+
+      if (tagsNext === tags) return folder;
+
+      const updated = { ...folder, tags: tagsNext };
+
+      patched.push(updated);
+
+      return updated;
+    });
+
+    if (patched.length === 0) return;
+
+    // One write rather than one per room. `updateFolder` would do a write and
+    // a selection pass each time, and every write to the list invalidates the
+    // computed the selection pass reads - so a rename across many rooms paid
+    // for the whole list again per room. The rooms themselves are the same
+    // ones, so nothing needs re-subscribing.
+    this.folders = next;
+
+    // Selection and buffer selection hold the objects that were just replaced,
+    // so they are re-pointed at the new ones. Only the rooms they actually
+    // hold: `updateSelection` writes to both of them and scans the computed
+    // list, and doing that for a room nobody selected is a render for nothing.
+    const selectedIds = new Set<number | string | undefined>(
+      this.selection.map((item) => item.id),
+    );
+
+    selectedIds.add(this.bufferSelection?.id);
+
+    patched.forEach((folder) => {
+      if (selectedIds.has(folder.id)) this.updateSelection(folder);
+    });
   };
 
   setFile = (file: TFile) => {

@@ -36,11 +36,12 @@
 import { makeAutoObservable } from "mobx";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+// From the leaves, not the folder's barrel: that one re-exports the component.
 import {
   applyTagChangeToRoomTags,
   isSharedTagChange,
-  type TagChange,
-} from "@docspace/shared/components/tag-management";
+} from "@docspace/shared/components/tag-management/TagManagement.utils";
+import type { TagChange } from "@docspace/shared/components/tag-management/TagManagement.types";
 import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   FolderType,

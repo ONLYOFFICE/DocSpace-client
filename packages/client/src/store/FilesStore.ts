@@ -52,11 +52,14 @@ import SocketHelper, {
 import { RoomsTypes, isDesktop } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 import { isSameEntity } from "@docspace/shared/utils/isSameEntity";
+// From the leaves rather than the folder's barrel: that one re-exports the
+// TagManagement component, and a store must not drag a component - with its
+// SCSS and its icons - in behind it.
 import {
   applyTagChangeToRoomTags,
   isSharedTagChange,
-  type TagChange,
-} from "@docspace/shared/components/tag-management";
+} from "@docspace/shared/components/tag-management/TagManagement.utils";
+import type { TagChange } from "@docspace/shared/components/tag-management/TagManagement.types";
 
 import { getCategoryType } from "@docspace/shared/utils/common";
 import {

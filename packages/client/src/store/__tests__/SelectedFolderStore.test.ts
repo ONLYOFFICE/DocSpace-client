@@ -53,7 +53,7 @@ vi.mock("../../helpers/utils", () => ({
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { FolderType } from "@docspace/shared/enums";
 
-import { TagChangeType } from "@docspace/shared/components/tag-management";
+import { TagChangeType } from "@docspace/shared/components/tag-management/TagManagement.types";
 
 import SelectedFolderStore from "../SelectedFolderStore";
 

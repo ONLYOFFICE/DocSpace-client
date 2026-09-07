@@ -35,10 +35,9 @@
 
 import { makeAutoObservable } from "mobx";
 import api from "@docspace/shared/api";
-import {
-  applyTagChangeToTagList,
-  type TagChange,
-} from "@docspace/shared/components/tag-management";
+// From the leaves, not the folder's barrel: that one re-exports the component.
+import { applyTagChangeToTagList } from "@docspace/shared/components/tag-management/TagManagement.utils";
+import type { TagChange } from "@docspace/shared/components/tag-management/TagManagement.types";
 
 class TagsStore {
   tags: string[] = [];

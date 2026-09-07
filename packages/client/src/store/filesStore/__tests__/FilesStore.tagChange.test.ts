@@ -34,7 +34,7 @@
  */
 
 import { describe, it, expect } from "vitest";
-import { TagChangeType } from "@docspace/shared/components/tag-management";
+import { TagChangeType } from "@docspace/shared/components/tag-management/TagManagement.types";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 

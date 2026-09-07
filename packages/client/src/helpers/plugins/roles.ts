@@ -33,58 +33,23 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export enum MessageKey {
-  "None",
-  "Error",
-  "ErrorUserNotFound",
-  "ErrorExpiredActivationLink",
-  "ErrorInvalidActivationLink",
-  "ErrorConfirmURLError",
-  "ErrorNotCorrectEmail",
-  "LoginWithBruteForce",
-  "RecaptchaInvalid",
-  "LoginWithAccountNotFound",
-  "InvalidUsernameOrPassword",
-  "SsoSettingsDisabled",
-  "ErrorNotAllowedOption",
-  "SsoSettingsEmptyToken",
-  "SsoSettingsNotValidToken",
-  "SsoSettingsCantCreateUser",
-  "SsoSettingsUserTerminated",
-  "SsoError",
-  "SsoAuthFailed",
-  "SsoAttributesNotFound",
-  "QuotaPaidUserLimitError",
-  "InvalidLink",
-}
+import { PluginUserRole, PluginUsersType } from "./enums";
 
-export enum OAuth2ErrorKey {
-  asc_retrieval_error = "asc_retrieval_error",
-  client_disabled_error = "client_disabled_error",
-  client_not_found_error = "client_not_found_error",
-  client_permission_denied_error = "client_permission_denied_error",
-  invalid_request = "invalid_request",
-  missing_asc_cookie_error = "missing_asc_signature_error",
-  missing_client_id_error = "missing_client_id_error",
-  something_went_wrong_error = "something_went_wrong_error",
-}
+const LEGACY_USER_ROLES: Partial<Record<PluginUserRole, PluginUsersType[]>> = {
+  [PluginUserRole.fullAdmin]: [PluginUsersType.docSpaceAdmin],
+  [PluginUserRole.user]: [PluginUsersType.collaborator],
+  [PluginUserRole.guest]: [PluginUsersType.user],
+};
 
-export const enum AuthenticatedAction {
-  None = 0,
-  Logout = 1,
-  Redirect = 2,
-}
+export const matchesUserRole = (
+  usersTypes: (PluginUserRole | PluginUsersType)[] | undefined,
+  userRole: PluginUserRole,
+): boolean => {
+  if (!usersTypes) return true;
 
-/**
- * Enum for result of validation confirm link.
- * @readonly
- */
-export const enum ValidationResult {
-  Ok = 0,
-  Invalid = 1,
-  Expired = 2,
-  TariffLimit = 3,
-  UserExisted = 4,
-  UserExcluded = 5,
-  QuotaFailed = 6,
-}
+  if (usersTypes.includes(userRole)) return true;
+
+  const legacy = LEGACY_USER_ROLES[userRole];
+
+  return !!legacy && legacy.some((type) => usersTypes.includes(type));
+};

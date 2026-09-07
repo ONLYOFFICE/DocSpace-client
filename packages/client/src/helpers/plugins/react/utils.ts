@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// Narrows DocSpace entities down to the fields the plugin runtime exposes.
+// Narrows portal entities down to the fields the plugin runtime exposes.
 
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";

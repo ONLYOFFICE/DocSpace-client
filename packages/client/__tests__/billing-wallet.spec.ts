@@ -38,6 +38,10 @@ import { http } from "msw";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import type { Page } from "@playwright/test";
 
+import {
+  settingAuthWithSocket,
+  PATH as SETTINGS_PATH,
+} from "@docspace/shared/__mocks__/handlers/settings/settings";
 import { expect, test } from "./fixtures/base";
 import {
   PAID_NOW,
@@ -55,6 +59,8 @@ const TOP_UP_SETTINGS_PATH = "portal/payment/topupsettings";
 const OPERATIONS_PATH = "portal/payment/customer/operations";
 const UPCOMING_PATH = "portal/tariff/upcoming";
 const USAGE_PATH = "portal/payment/customer/usage";
+const BALANCE_PATH = "portal/payment/customer/balance";
+const OPERATIONS_REPORT_PATH = "portal/payment/customer/operationsreport";
 
 const autoTopUpSettings = ({
   enabled = false,
@@ -119,6 +125,37 @@ const upcomingHandler = (rows: unknown[] = []) =>
 
 const usageHandler = (collection: unknown[] = []) =>
   http.get(apiUrl(USAGE_PATH), () => jsonResponse({ collection }));
+
+const reportHandlers = (fileUrl: string) => [
+  http.post(apiUrl(OPERATIONS_REPORT_PATH), () => jsonResponse(true)),
+  http.get(apiUrl(OPERATIONS_REPORT_PATH), () =>
+    jsonResponse({ isCompleted: true, resultFileUrl: fileUrl }),
+  ),
+];
+
+const trackPosts = (page: Page, path: string) => {
+  const bodies: string[] = [];
+
+  page.on("request", (request) => {
+    if (
+      request.method() === "POST" &&
+      new URL(request.url()).pathname.endsWith(`/${path}`)
+    )
+      bodies.push(request.postData() ?? "");
+  });
+
+  return bodies;
+};
+
+const socketSettingsHandler = () =>
+  http.get(apiUrl(SETTINGS_PATH), () =>
+    new Response(
+      JSON.stringify({
+        ...settingAuthWithSocket,
+        response: { ...settingAuthWithSocket.response, standalone: false },
+      }),
+    ),
+  );
 
 const providerError = () =>
   new Response(
@@ -570,6 +607,76 @@ test.describe("Billing wallet", () => {
     await expect(
       page.getByText("When credits drop below $10, your wallet will automatically refill to $100."),
     ).toHaveCount(0);
+  });
+
+  test("the history report follows the type filter and opens when ready", async ({
+    page,
+    baseUrl,
+    mockRequest,
+    context,
+  }) => {
+    mockRequest.use(
+      operationsHandler(),
+      ...reportHandlers(`${baseUrl}/wallet-report.xlsx`),
+    );
+    const orders = trackPosts(page, OPERATIONS_REPORT_PATH);
+
+    await openWallet(page, baseUrl);
+    await expect(page.getByText("Wallet top-up")).toBeVisible();
+
+    const report = context.waitForEvent("page");
+    await page.getByTestId("download_report_button").click();
+
+    await expect.poll(() => orders.length).toBe(1);
+    expect(orders[0]).toContain('"startDate":"2025-11-12T00:00:00"');
+    expect(orders[0]).toContain('"endDate":"2025-12-10T23:59:59"');
+    expect(orders[0]).toContain('"credit":true');
+    expect(orders[0]).toContain('"debit":true');
+    expect((await report).url()).toContain("/wallet-report.xlsx");
+
+    await page.getByTestId("transaction_type_combobox").click();
+    await page.getByTestId("credit_transactions_option").click();
+    await page.getByTestId("download_report_button").click();
+
+    await expect.poll(() => orders.length).toBe(2);
+    expect(orders[1]).toContain('"credit":true');
+    expect(orders[1]).toContain('"debit":false');
+  });
+
+  test("a top-up reported over the socket refreshes the balance and the history", async ({
+    page,
+    baseUrl,
+    mockRequest,
+    wsMock,
+  }) => {
+    let balance = 50;
+    let historyReads = 0;
+    mockRequest.use(
+      socketSettingsHandler(),
+      http.get(apiUrl(BALANCE_PATH), () =>
+        jsonResponse({ subAccounts: [{ currency: "USD", amount: balance }] }),
+      ),
+      http.get(apiUrl(OPERATIONS_PATH), () => {
+        historyReads += 1;
+        return jsonResponse({ collection: TRANSACTIONS });
+      }),
+    );
+    await wsMock.setupWebSocketMock();
+
+    await openWallet(page, baseUrl);
+
+    // The amount is rendered as separate tokens, so the container is matched as a whole.
+    await expect(page.getByText("$50.00", { exact: true })).toBeVisible();
+    await expect(page.getByText("Wallet top-up")).toBeVisible();
+    const readsBefore = historyReads;
+
+    balance = 150;
+    wsMock.emitSocketEvent("s:top-up-wallet", { auto: true });
+
+    await expect(page.getByText("$150.00", { exact: true })).toBeVisible();
+    await expect.poll(() => historyReads).toBeGreaterThan(readsBefore);
+
+    wsMock.closeConnection();
   });
 
   test("the month-to-date spend links to the usage page", async ({

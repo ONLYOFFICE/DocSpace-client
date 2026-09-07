@@ -224,6 +224,26 @@ const servicePageHandlers = ({
 const topUpWalletButton = (page: Page) =>
   page.getByTestId("top_up_wallet_button");
 const errorToast = (page: Page) => page.getByTestId("toast-content");
+const OPERATIONS_REPORT_PATH = "portal/payment/customer/operationsreport";
+const reportHandlers = (fileUrl: string) => [
+  http.post(apiUrl(OPERATIONS_REPORT_PATH), () => jsonResponse(true)),
+  http.get(apiUrl(OPERATIONS_REPORT_PATH), () =>
+    jsonResponse({ isCompleted: true, resultFileUrl: fileUrl }),
+  ),
+];
+const trackPosts = (page: Page, path: string) => {
+  const bodies: string[] = [];
+
+  page.on("request", (request) => {
+    if (
+      request.method() === "POST" &&
+      new URL(request.url()).pathname.endsWith(`/${path}`)
+    )
+      bodies.push(request.postData() ?? "");
+  });
+
+  return bodies;
+};
 const failingServiceStateHandler = () =>
   http.post(apiUrl(SERVICE_STATE_PATH), () => new Response(null, { status: 500 }));
 const serviceToggle = (page: Page) => page.getByTestId("toggle-button").first();
@@ -706,6 +726,36 @@ test.describe("Backup page", () => {
     await topUpWalletButton(page).click();
 
     await expect(page.getByTestId("top_up_amount_input").first()).toBeVisible();
+  });
+
+  test("the history report is ordered for the backup service only", async ({
+    page,
+    baseUrl,
+    mockRequest,
+    context,
+  }) => {
+    mockRequest.use(
+      ...walletServicesHandler(["backup"]),
+      ...servicePageHandlers({
+        usage: BACKUP_USAGE,
+        backups: { free: 1, paid: 3 },
+        operations: BACKUP_TRANSACTIONS,
+      }),
+      ...reportHandlers(`${baseUrl}/backup-report.xlsx`),
+    );
+    const orders = trackPosts(page, OPERATIONS_REPORT_PATH);
+
+    await page.goto(`${baseUrl}${BACKUP_ROUTE}`);
+    await expect(page.getByText("Backups (Backup)")).toHaveCount(2, FIRST_RENDER);
+
+    const report = context.waitForEvent("page");
+    await page.getByTestId("download_report_button").click();
+
+    await expect.poll(() => orders.length).toBe(1);
+    expect(orders[0]).toContain('"serviceName":"backup"');
+    expect(orders[0]).toContain('"credit":true');
+    expect(orders[0]).toContain('"debit":true');
+    expect((await report).url()).toContain("/backup-report.xlsx");
   });
 
   test("a failed enable leaves the backups disabled", async ({

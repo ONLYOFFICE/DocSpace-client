@@ -320,6 +320,18 @@ test.describe("Tariff plan recalculation", () => {
 const modalWith = (page: Page, text: string) =>
   page.getByTestId("modal").filter({ hasText: text });
 
+const nonProfitQuotaHandler = () =>
+  http.get(apiUrl("portal/payment/quota"), () => {
+    const body = quotaSuccess(false, false, false, true);
+
+    return new Response(
+      JSON.stringify({
+        ...body,
+        response: { ...body.response, nonProfit: true },
+      }),
+    );
+  });
+
 type TQuotaFeature = {
   id?: string;
   value?: number;
@@ -691,5 +703,61 @@ test.describe("Migration to wallet billing", () => {
     expect(payloads).toHaveLength(1);
     // The migration sends the absolute count; the ordinary upgrade sends the difference.
     expect(payloads[0]).toContain('"adminwallet":32');
+  });
+});
+
+test.describe("Tariff plan limits", () => {
+  test.beforeEach(async ({ mockRequest, page }) => {
+    useSaasBilling(mockRequest, { user: "owner", payer: "self-owner" });
+    mockRequest.use(
+      walletTariffHandler(),
+      calculateWalletHandler(93.5),
+      walletServicesHandler(),
+      balanceHandler(500),
+    );
+    await page.clock.setSystemTime(PAID_NOW);
+  });
+
+  test("a non-profit portal sees the benefits without the price calculator", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(nonProfitQuotaHandler());
+
+    await page.goto(`${baseUrl}/billing/tariff-plan`);
+
+    await expect(page.getByText("Benefits", { exact: true })).toBeVisible(
+      AFTER_ESTIMATE,
+    );
+    await expect(page.getByTestId("quantity_picker_input")).toHaveCount(0);
+    await expect(page.getByText("Total due today")).toHaveCount(0);
+    await expect(page.getByTestId("top_up_wallet_button")).toHaveCount(0);
+
+    await expectScreenshot(page, ["desktop", "tariff-plan", "non-profit.png"]);
+  });
+
+  test("more admins than the plan allows turn into a sales request", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/billing/tariff-plan`);
+
+    const input = page.getByTestId("quantity_picker_input");
+    await expect(input).toBeVisible(AFTER_ESTIMATE);
+    await input.fill("1000");
+
+    const requestButton = page.getByTestId("sales_request_button");
+    await expect(requestButton).toBeVisible(AFTER_ESTIMATE);
+    await expect(page.getByText("Total due today")).toHaveCount(0);
+
+    await expectScreenshot(page, ["desktop", "tariff-plan", "sales-request.png"]);
+
+    await requestButton.click();
+
+    await expect(page.getByText("Sales department request")).toBeVisible();
+    await expect(
+      page.getByText("The sales team will contact you after creating the request."),
+    ).toBeVisible();
   });
 });

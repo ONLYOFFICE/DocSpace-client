@@ -127,13 +127,13 @@ test.describe("Tariff plan recalculation", () => {
 
     await expect(page.getByText("Total due today")).toBeVisible();
     await expect(
-      page.getByText("€94", { exact: true }),
+      page.getByText("$94", { exact: true }),
     ).toBeVisible(AFTER_ESTIMATE);
-    await expect(page.getByText("€7,040").first()).toBeVisible();
+    await expect(page.getByText("$7,040").first()).toBeVisible();
 
     await expect(planButton(page)).toBeEnabled();
     await expect(planButton(page)).toContainText(
-      "Pay €94 & Upgrade",
+      "Pay $94 & Upgrade",
       AFTER_ESTIMATE,
     );
 
@@ -154,7 +154,7 @@ test.describe("Tariff plan recalculation", () => {
     await page.getByTestId("quantity_picker_plus_icon").click();
 
     await expect(
-      page.getByText("€94", { exact: true }),
+      page.getByText("$94", { exact: true }),
     ).toBeVisible(AFTER_ESTIMATE);
     await expect(planButton(page)).toBeEnabled();
     await expect(planButton(page)).toContainText(
@@ -173,8 +173,8 @@ test.describe("Tariff plan recalculation", () => {
     await page.getByTestId("quantity_picker_minus_icon").click();
 
     await expect(page.getByText("Total due today")).toBeVisible();
-    await expect(page.getByText("€0", { exact: true })).toBeVisible();
-    await expect(page.getByText("€6,600").first()).toBeVisible();
+    await expect(page.getByText("$0", { exact: true })).toBeVisible();
+    await expect(page.getByText("$6,600").first()).toBeVisible();
 
     const downgradeButton = page.getByTestId("downgrade_plan_button");
     await expect(downgradeButton).toBeEnabled();
@@ -201,7 +201,7 @@ test.describe("Tariff plan recalculation", () => {
     ).toBeVisible();
     await expect(page.getByText("Cancel change")).toBeVisible();
     await expect(
-      page.getByText("€4,400/month (Admins: 20 | €220 per admin)"),
+      page.getByText("$4,400/month (Admins: 20 | $220 per admin)"),
     ).toBeVisible();
 
     await expect(page.getByTestId("quantity_picker_input")).toHaveCount(0);
@@ -226,7 +226,7 @@ test.describe("Tariff plan recalculation", () => {
     await expect(page.getByTestId("quantity_picker_input")).toBeVisible();
     await page.getByTestId("quantity_picker_plus_icon").click();
     await expect(
-      page.getByText("€94", { exact: true }),
+      page.getByText("$94", { exact: true }),
     ).toBeVisible(AFTER_ESTIMATE);
 
     const pageButtonLabel = ((await planButton(page).textContent()) ?? "").trim();
@@ -241,13 +241,13 @@ test.describe("Tariff plan recalculation", () => {
     await expect(dialog).toContainText("Additional admins");
     await expect(dialog).toContainText("+1");
     await expect(dialog).toContainText("Price per admin");
-    await expect(dialog).toContainText("€220");
+    await expect(dialog).toContainText("$220");
     await expect(dialog).toContainText("Remaining period");
     await expect(dialog).toContainText("until January 5, 2026");
     await expect(dialog).toContainText("Total due today");
-    await expect(dialog).toContainText("€94");
+    await expect(dialog).toContainText("$94");
     await expect(dialog).toContainText(
-      "Your next monthly bill will be €7,040 starting from January 5, 2026",
+      "Your next monthly bill will be $7,040 starting from January 5, 2026",
     );
     await expect(dialog.getByTestId("price_details_due_today_help")).toHaveCount(
       1,
@@ -276,7 +276,7 @@ test.describe("Tariff plan recalculation", () => {
 
     await expect(page.getByTestId("quantity_picker_input")).toBeVisible();
     await page.getByTestId("quantity_picker_minus_icon").click();
-    await expect(page.getByText("€0", { exact: true })).toBeVisible();
+    await expect(page.getByText("$0", { exact: true })).toBeVisible();
 
     const pageButtonLabel = (
       (await page.getByTestId("downgrade_plan_button").textContent()) ?? ""
@@ -292,11 +292,11 @@ test.describe("Tariff plan recalculation", () => {
     await expect(dialog).toContainText("Reduced admins");
     await expect(dialog).toContainText("-1");
     await expect(dialog).toContainText("New monthly price");
-    await expect(dialog).toContainText("€6,600");
+    await expect(dialog).toContainText("$6,600");
     await expect(dialog).toContainText("Effective date");
     await expect(dialog).toContainText("January 5, 2026");
     await expect(dialog).toContainText("Total due today");
-    await expect(dialog).toContainText("€0");
+    await expect(dialog).toContainText("$0");
     await expect(dialog.getByTestId("price_details_due_today_help")).toHaveCount(
       0,
     );
@@ -597,18 +597,18 @@ test.describe("Migration to wallet billing", () => {
 
     await expect(dialog).toContainText("Billing via Stripe stops today");
     await expect(dialog).toContainText("Current tariff");
-    await expect(dialog).toContainText("€6,820 /mo");
+    await expect(dialog).toContainText("$6,820 /mo");
     await expect(dialog).toContainText("until January 5, 2026");
     await expect(dialog).toContainText("Refund to wallet");
     await expect(dialog).toContainText("+ $8,000.00");
     await expect(dialog).not.toContainText("Unused value refund");
 
-    await expect(dialog).toContainText("Admins: 32 × €220");
-    await expect(dialog).toContainText("€7,040 /mo");
+    await expect(dialog).toContainText("Admins: 32 × $220");
+    await expect(dialog).toContainText("$7,040 /mo");
     await expect(dialog).toContainText("From your wallet");
     await expect(dialog).toContainText("- $7,040.00");
     await expect(dialog).toContainText("Due on your card today");
-    await expect(dialog).toContainText("€0.00");
+    await expect(dialog).toContainText("$0.00");
 
     await expect(dialog).toContainText("Active until January 5, 2026");
 
@@ -646,16 +646,16 @@ test.describe("Migration to wallet billing", () => {
     const dialog = await openMigrationDialog(page, baseUrl);
 
     await expect(dialog).toContainText("Unused value refund");
-    await expect(dialog).toContainText("€900.00");
+    await expect(dialog).toContainText("\u20ac900.00");
     await expect(dialog).toContainText("+ $1,000.00");
     await expect(dialog).toContainText("Wallet credits are stored and used in USD");
 
     await expect(dialog).toContainText("- $1,050.00");
     await expect(dialog).toContainText("Due on your card today");
-    await expect(dialog).toContainText("€5,990.00");
+    await expect(dialog).toContainText("$5,990.00");
 
     const confirmButton = dialog.getByTestId("migrate_to_wallet_confirm_button");
-    await expect(confirmButton).toContainText("Pay €5,990.00");
+    await expect(confirmButton).toContainText("Pay $5,990.00");
     await expect(confirmButton).toBeDisabled();
 
     await expectScreenshot(page, [

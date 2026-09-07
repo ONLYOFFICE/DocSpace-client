@@ -346,29 +346,38 @@ const purchasableQuotas = () => {
   };
 };
 
-export const portalPaymentQuotasSuccess = () => {
+export type TQuotaCurrency = {
+  currencySymbol: string;
+  isoCurrencySymbol: string;
+};
+
+// currency: overrides the price currency of every quota, e.g. to match the wallet.
+export const portalPaymentQuotasSuccess = (currency?: TQuotaCurrency) => {
   const body = purchasableQuotas();
   const paidTariff = body.response[1];
+  const quotas = [...body.response, { ...paidTariff, id: FUTURE_TARIFF_QUOTA_ID }];
 
   return {
     ...body,
-    response: [
-      ...body.response,
-      { ...paidTariff, id: FUTURE_TARIFF_QUOTA_ID },
-    ],
-    count: body.response.length + 1,
+    response: currency
+      ? quotas.map((quota) => ({ ...quota, price: { ...quota.price, ...currency } }))
+      : quotas,
+    count: quotas.length,
   };
 };
 
-export const portalPaymentQuotasResolver = () => {
-  return new Response(JSON.stringify(portalPaymentQuotasSuccess()));
+export const portalPaymentQuotasResolver = (currency?: TQuotaCurrency) => {
+  return new Response(JSON.stringify(portalPaymentQuotasSuccess(currency)));
 };
 
-export const portalPaymentQuotasHandler = (port: string) => {
+export const portalPaymentQuotasHandler = (
+  port: string,
+  currency?: TQuotaCurrency,
+) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_PORTAL_PAYMENT_QUOTAS}`,
     () => {
-      return portalPaymentQuotasResolver();
+      return portalPaymentQuotasResolver(currency);
     },
   );
 };

@@ -118,6 +118,8 @@ const PAYER_EMAIL: Record<PayerKind, string | null> = {
   none: null,
 };
 
+const WALLET_CURRENCY = { currencySymbol: "$", isoCurrencySymbol: "USD" };
+
 const CARD_STATUS: Record<CardKind, PaymentMethodStatus> = {
   active: PaymentMethodStatus.Set,
   unlinked: PaymentMethodStatus.None,
@@ -172,7 +174,8 @@ export const useSaasBilling = (
     settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
     colorThemeHandler(TEST_PORT),
     paymentSettingsHandler(TEST_PORT, false),
-    portalPaymentQuotasHandler(TEST_PORT),
+    // Since billing moved to the wallet the plan is priced in the wallet currency.
+    portalPaymentQuotasHandler(TEST_PORT, WALLET_CURRENCY),
     customerInfoHandler(payer, card),
     paymentAccountHandler(TEST_PORT),
     paymentUrlHandler(TEST_PORT),

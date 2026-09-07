@@ -33,12 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, {
-  useCallback,
-  startTransition,
-  useState,
-  useEffect,
-} from "react";
+import React, { useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
@@ -83,21 +78,16 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     access: { canSearch, canBindTag },
   } = useTagManagement();
 
-  const [inputValue, setInputValue] = useState("");
-
-  useEffect(() => {
-    if (searchValue === "") {
-      setInputValue("");
-    }
-  }, [searchValue]);
-
+  // The input reads its value straight out of the provider, and writes it
+  // there as it is typed. It used to keep a copy of its own and hand the
+  // provider the value in a transition, which left two answers to "what is in
+  // the box" - and the Escape ladder, which has to know whether the filter is
+  // on, could be told the stale one. Typing stays smooth without the
+  // transition because the filtering itself is already deferred: only
+  // `deferredSearchValue` reaches the list.
   const onChangeSearchValue = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = removeEmojiCharacters(event.target.value);
-      setInputValue(value);
-      startTransition(() => {
-        setSearchValue(value);
-      });
+      setSearchValue(removeEmojiCharacters(event.target.value));
     },
     [setSearchValue],
   );
@@ -122,7 +112,6 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
 
     if (existing) {
       clearSearch();
-      setInputValue("");
 
       // Already in the room, or not allowed to add: the search is cleared and
       // the list shows the tag - there is nothing to send.
@@ -171,7 +160,6 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     if (!showCreateTag) return;
 
     clearSearch();
-    setInputValue("");
 
     // Listed at once, so the tag the user just typed does not disappear
     // between the cleared input and the server's answer. It leads the list,
@@ -247,7 +235,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
             scale
             autoFocus={!isMobile}
             withBorder={false}
-            value={inputValue}
+            value={searchValue}
             size={InputSize.base}
             type={InputType.search}
             className={styles.input}

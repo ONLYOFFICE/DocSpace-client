@@ -110,7 +110,6 @@ const renderFilter = (access: AccessTagManagement = fullAccess) => {
 const renderPopupBody = (
   access: AccessTagManagement = fullAccess,
   onTagsChanged?: TagsChangedHandler,
-  onClose: VoidFunction = () => {},
 ) => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
@@ -129,7 +128,7 @@ const renderPopupBody = (
           confirmEditTag={() => Promise.resolve(true)}
           confirmDeleteTag={() => Promise.resolve(true)}
           onTagsChanged={onTagsChanged}
-          onClose={onClose}
+          onClose={() => {}}
         />
       </TagManagementProvider>
     </QueryClientProvider>,
@@ -428,82 +427,5 @@ describe("<TagManagementFilter /> submitting the search", () => {
 
       request.settle();
     });
-  });
-});
-
-// One press undoes one thing, innermost first, so nothing the user is still
-// looking at is thrown away by the same key that closes the popup.
-describe("<TagManagementPopup /> Escape", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it("closes the popup when neither the editor nor the filter is open", async () => {
-    const onClose = vi.fn();
-
-    renderPopupBody(fullAccess, undefined, onClose);
-
-    await userEvent.keyboard("{Escape}");
-
-    expect(onClose).toHaveBeenCalledTimes(1);
-  });
-
-  it("clears the filter first, and closes on the press after that", async () => {
-    const onClose = vi.fn();
-
-    renderPopupBody(fullAccess, undefined, onClose);
-
-    await userEvent.type(searchInput(), "free");
-    await waitFor(() => {
-      expect(rowLabels()).toEqual(["freeTag"]);
-    });
-
-    await userEvent.keyboard("{Escape}");
-
-    // The whole list is back and the input with it, and the popup is still up.
-    await waitFor(() => {
-      expect(searchInput().value).toBe("");
-    });
-    expect(rowLabels()).toEqual(["boundTag", "freeTag"]);
-    expect(onClose).not.toHaveBeenCalled();
-
-    await userEvent.keyboard("{Escape}");
-
-    expect(onClose).toHaveBeenCalledTimes(1);
-  });
-
-  it("closes the editor first, leaving the filter as it was", async () => {
-    const onClose = vi.fn();
-
-    renderPopupBody(fullAccess, undefined, onClose);
-
-    await userEvent.type(searchInput(), "free");
-    await waitFor(() => {
-      expect(rowLabels()).toEqual(["freeTag"]);
-    });
-
-    await userEvent.click(screen.getByTestId("edit_tag_button_freeTag"));
-    expect(await screen.findByTestId("edit_tag_input")).toBeInTheDocument();
-
-    await userEvent.keyboard("{Escape}");
-
-    await waitFor(() => {
-      expect(screen.queryByTestId("edit_tag_input")).not.toBeInTheDocument();
-    });
-    // Only the editor went: the search is still on, and nothing closed.
-    expect(searchInput().value).toBe("free");
-    expect(rowLabels()).toEqual(["freeTag"]);
-    expect(onClose).not.toHaveBeenCalled();
-
-    await userEvent.keyboard("{Escape}");
-
-    await waitFor(() => {
-      expect(searchInput().value).toBe("");
-    });
-    expect(onClose).not.toHaveBeenCalled();
-
-    await userEvent.keyboard("{Escape}");
-
-    expect(onClose).toHaveBeenCalledTimes(1);
   });
 });

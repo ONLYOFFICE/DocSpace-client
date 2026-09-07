@@ -51,6 +51,7 @@ import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import { getUserTypeDescriptionByType } from "@docspace/shared/utils/getUserTypeDescription";
 import { CategoryType } from "@docspace/shared/constants";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
@@ -356,11 +357,15 @@ class ContactsConextOptionsStore {
 
     const options = [];
 
+    const getDescription = (type: EmployeeType) =>
+      getUserTypeDescriptionByType(type, t);
+
     const adminOption = {
       id: "menu_change-user_administrator",
       className: "group-menu_drop-down",
       label: getUserTypeTranslation(EmployeeType.Admin, t),
       title: getUserTypeTranslation(EmployeeType.Admin, t),
+      description: getDescription(EmployeeType.Admin),
       icon: PersonAdminReactSvgUrl,
       badgeLabel: isGuests && !standalone ? t("Common:Paid") : undefined,
       isPaidBadge: !standalone,
@@ -376,6 +381,7 @@ class ContactsConextOptionsStore {
       className: "group-menu_drop-down",
       label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      description: getDescription(EmployeeType.RoomAdmin),
       icon: PersonManagerReactSvgUrl,
       badgeLabel: isGuests && !standalone? t("Common:Paid") : undefined,
       isPaidBadge: !standalone,
@@ -393,6 +399,7 @@ class ContactsConextOptionsStore {
       key: EmployeeType.User,
       label: getUserTypeTranslation(EmployeeType.User, t),
       title: getUserTypeTranslation(EmployeeType.User, t),
+      description: getDescription(EmployeeType.User),
       icon: PersonDefaultReactSvgUrl,
       "data-action": EmployeeType.User,
       action: EmployeeType.User,
@@ -405,6 +412,7 @@ class ContactsConextOptionsStore {
       key: EmployeeType.Guest,
       label: getUserTypeTranslation(EmployeeType.Guest, t),
       title: getUserTypeTranslation(EmployeeType.Guest, t),
+      description: getDescription(EmployeeType.Guest),
       icon: CatalogGuestReactSvgUrl,
       "data-action": EmployeeType.Guest,
       action: EmployeeType.Guest,
@@ -673,6 +681,9 @@ class ContactsConextOptionsStore {
     )
       return null;
 
+    const getDescription = (type: EmployeeType) =>
+      getUserTypeDescriptionByType(type, t);
+
     const accountsUserOptions = [
       ...(isOwner
         ? [
@@ -682,6 +693,7 @@ class ContactsConextOptionsStore {
               icon: PersonAdminReactSvgUrl,
               label: t("Common:PortalAdmin"),
               onClick: () => this.inviteUser(EmployeeType.Admin),
+              description: getDescription(EmployeeType.Admin),
               "data-type": EmployeeType.Admin,
               action: EmployeeType.Admin,
               key: "administrator",
@@ -697,6 +709,7 @@ class ContactsConextOptionsStore {
               icon: PersonManagerReactSvgUrl,
               label: t("Common:RoomAdmin"),
               onClick: () => this.inviteUser(EmployeeType.RoomAdmin),
+              description: getDescription(EmployeeType.RoomAdmin),
               "data-type": EmployeeType.RoomAdmin,
               action: EmployeeType.RoomAdmin,
               key: "manager",
@@ -710,6 +723,7 @@ class ContactsConextOptionsStore {
         icon: PersonDefaultReactSvgUrl,
         label: t("Common:User"),
         onClick: () => this.inviteUser(EmployeeType.User),
+        description: getDescription(EmployeeType.User),
         "data-type": EmployeeType.User,
         action: EmployeeType.User,
         key: "collaborator",

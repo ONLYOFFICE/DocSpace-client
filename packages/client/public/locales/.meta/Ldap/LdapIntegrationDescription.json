@@ -1,13 +1,13 @@
 {
   "key_path": "LdapIntegrationDescription",
-  "content": "Import users and groups via LDAP, and enable user authentication through logins/passwords stored on the LDAP server. Users will be imported immediately after the settings are saved. Users added later will be imported during their first authentication. If you want to provide access via LDAP only, disable the option to invite new workspace members via {{sectionName}}: <1>{{link}}</1>",
-  "content_en_sha1_hash": "0f5d93b0200c60e887eb733e1cf0cbb8bcba1687",
-  "created_at": "2026-08-13T22:44:30.856Z",
-  "updated_at": "2026-08-14T15:29:02.073Z",
+  "content": "Import users and groups via LDAP, and let users sign in with their LDAP credentials. Users are imported as soon as you save these settings — anyone added later is imported the first time they sign in. To allow LDAP sign-in only, turn off inviting new members via {{sectionName}}: <1>{{link}}</1>",
+  "content_en_sha1_hash": "938c8039c8a4edb769e4083670caa4febb714ea4",
+  "created_at": "2026-08-31T18:23:43.762Z",
+  "updated_at": "2026-08-31T20:02:18.383Z",
   "comment": {
-    "text": "Introductory text on the LDAP integration settings page explaining the LDAP import and authentication process. It includes the `sectionName` variable and a `<1>` tag containing a clickable link.",
+    "text": "Introductory text on the LDAP integration settings page explaining user/group import and sign-in behavior. It includes a variable `sectionName` for a section title and a `<1>` tag containing a clickable link.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:29:02.073Z",
+    "updated_at": "2026-08-31T20:02:18.383Z",
     "model": "gemma4:26b"
   },
   "usage": [

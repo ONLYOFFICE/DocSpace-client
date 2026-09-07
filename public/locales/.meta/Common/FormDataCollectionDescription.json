@@ -1,14 +1,14 @@
 {
   "key_path": "FormDataCollectionDescription",
-  "content": "Collect the completed form copies and data from them into XLSX for analyzing responses in Form Filling spaces.",
-  "content_en_sha1_hash": "3481b046b386686e8c1a3aea01b49702bf7780bb",
-  "created_at": "2025-05-19T21:30:45.493Z",
-  "updated_at": "2026-08-17T19:42:56.947Z",
+  "content": "Collect completed form responses and export the data to XLSX for analysis in the Form space",
+  "content_en_sha1_hash": "d2ed3e85e15047012087cf9742ce98ec02099aea",
+  "created_at": "2026-08-31T18:23:08.562Z",
+  "updated_at": "2026-08-31T19:03:57.303Z",
   "comment": {
-    "text": "This is a description for a feature that allows users to collect completed form copies and their data into an XLSX file for analysis. It appears in dialogs related to sharing forms and filling out PDFs.",
+    "text": "Subtext for the \"Form data collection\" feature option in a selection list or dialog, explaining the feature's functionality.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:52:07.801Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:03:57.303Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -215,20 +221,6 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \"t\"",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:47:52.012Z",
-          "checked_by": "deterministic"
-        }
-      ],
       "approved_at": null
     }
   }

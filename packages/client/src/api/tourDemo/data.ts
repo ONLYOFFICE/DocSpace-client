@@ -181,6 +181,14 @@ export const DEMO_SPACE_ITEM_IDS = {
 } as const;
 
 /**
+ * Whether an id is the demo's own rather than the portal's. Every real id is a
+ * positive integer and the demo's count down from `DEMO_ID_BASE`, so anything
+ * that must not be asked about the server can be told apart by this alone —
+ * a stand-in room is only ever answered by the interceptors above it.
+ */
+export const isTourDemoId = (id: string | number) => Number(id) <= DEMO_ID_BASE;
+
+/**
  * The timestamp every stand-in entity is created and updated at.
  *
  * Read at build time rather than fixed, because the list renders it: the epoch

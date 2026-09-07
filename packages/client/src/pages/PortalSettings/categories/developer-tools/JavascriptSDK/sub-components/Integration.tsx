@@ -56,18 +56,16 @@ import styles from "./StyledPortalIntegration.module.scss";
 
 type IntegrationProps = {
   className?: string;
-  compact?: boolean;
+  narrow?: boolean;
   integrationsEntries?: TIntegrationsEntries;
   moodleUrl?: string;
   allConnectorsUrl?: string;
 };
 
-const Integration = ({ className, compact, ...urls }: IntegrationProps) => {
+const Integration = ({ className, narrow, ...urls }: IntegrationProps) => {
   const { t } = useTranslation(["JavascriptSdk", "Common"]);
 
   const connectors = useSdkConnectors(t, urls);
-
-  const testIdPrefix = compact ? "sdk-connector-compact" : "sdk-connector";
 
   const [openConnector, setOpenConnector] =
     React.useState<IntegrationPlatform | null>(null);
@@ -75,13 +73,17 @@ const Integration = ({ className, compact, ...urls }: IntegrationProps) => {
   const closeDialog = React.useCallback(() => setOpenConnector(null), []);
 
   return (
-    <div className={classNames(styles.connectors, className)}>
+    <div
+      className={classNames(
+        styles.connectors,
+        { [styles.narrow]: narrow },
+        className,
+      )}
+    >
       <div
-        className={classNames(
-          styles.categoryHeader,
-          { [styles.isMobile]: isMobile() },
-          "integration-header",
-        )}
+        className={classNames(styles.categoryHeader, {
+          [styles.isMobile]: isMobile(),
+        })}
       >
         {t("JavascriptSdk:ConnectorsTitle")}
       </div>
@@ -91,7 +93,10 @@ const Integration = ({ className, compact, ...urls }: IntegrationProps) => {
         })}
       </Text>
 
-      <PlatformTileGrid compact={compact}>
+      <PlatformTileGrid
+        columns={narrow ? 2 : undefined}
+        testId="sdk-connectors-grid"
+      >
         {connectors.map((connector) => (
           <PlatformTile
             key={connector.id}
@@ -99,16 +104,15 @@ const Integration = ({ className, compact, ...urls }: IntegrationProps) => {
             iconUrl={connector.iconUrl}
             iconAlt={connector.name}
             onClick={() => setOpenConnector(connector)}
-            testId={`${testIdPrefix}-${connector.id}`}
+            testId={`sdk-connector-${connector.id}`}
           />
         ))}
         <PlatformTile
           hideIcon
-          wide={compact}
           isBold
           name={t("JavascriptSdk:SeeAllConnectors")}
           href={urls.allConnectorsUrl}
-          testId={`${testIdPrefix}-all`}
+          testId="sdk-connector-all"
         />
       </PlatformTileGrid>
 

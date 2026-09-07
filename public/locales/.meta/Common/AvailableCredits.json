@@ -3,7 +3,7 @@
   "content": "Available credits",
   "content_en_sha1_hash": "18001da8d15dc257d0536ba486f2b5d8401f3591",
   "created_at": "2026-04-10T13:53:44.792Z",
-  "updated_at": "2026-08-27T15:37:55.740Z",
+  "updated_at": "2026-08-31T18:23:50.768Z",
   "comment": {
     "text": "This is a label for a numerical value, indicating the remaining balance of AI service credits. It appears within a balance card on the AI tools page.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 238,
+      "line_number": 236,
       "context": ") : null}\n \n <div className={styles.summaryGrid}>\n <div className={`${styles.summaryCard} ${styles.summaryCardBalance}`}>\n <BalanceAmount\n title={t(\"AvailableCredits\")}\n titleFontSize=\"14px\"\n mainFontSize=\"28px\"\n fractionFontSize=\"18px\"\n showRefresh={!isNotPaidPeriod && isCardLinkedToPortal}\n isRefreshing={isRefreshing || isAutoSpinning}",
       "module": "/libs/ui-kit"
     },

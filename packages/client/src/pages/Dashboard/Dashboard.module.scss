@@ -206,7 +206,7 @@
   }
 
   :global(.dark) & {
-    color: $gray-dark;
+    color: $dark-gray-dark;
   }
 }
 
@@ -343,7 +343,7 @@
   }
 
   :global(.dark) & {
-    color: $gray-dark-text;
+    color: $dark-gray-dark;
   }
 }
 
@@ -468,7 +468,7 @@
 
   :global(.dark) & {
     background-color: $dark-gray-light;
-    color: $gray-dark;
+    color: $dark-gray-dark;
   }
 
   svg {
@@ -599,7 +599,7 @@
   }
 
   :global(.dark) & {
-    color: $gray-dark;
+    color: $dark-gray-dark;
   }
 }
 
@@ -687,7 +687,7 @@
   }
 
   :global(.dark) & {
-    color: $gray-dark;
+    color: $dark-gray-dark;
   }
 }
 

@@ -3,7 +3,7 @@
   "content": "Admin account types and their privileges",
   "content_en_sha1_hash": "5060d32a68417be31ade57ca08df60bbb21d2738",
   "created_at": "2026-04-10T13:53:42.705Z",
-  "updated_at": "2026-08-14T14:58:32.930Z",
+  "updated_at": "2026-08-31T18:23:50.990Z",
   "comment": {
     "text": "This is the bolded title of a tooltip that appears when hovering over information about manager account types. It introduces a list of different administrative roles and their associated permissions within the DocSpace platform.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
-      "line_number": 147,
+      "line_number": 146,
       "context": "className=\"payment-tooltip\"\n offsetRight={0}\n iconNode={<HelpReactSvg />}\n tooltipContent={\n <>\n <Text isBold>{t(\"ManagerTypesDescription\")}</Text>\n <br />\n <Text isBold>\n {t(\"PortalAdmin\")}\n </Text>\n <Text>",
       "module": "/libs/ui-kit"
     }

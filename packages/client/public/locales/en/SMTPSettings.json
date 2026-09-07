@@ -8,7 +8,7 @@
   "HostLogin": "Host login",
   "HostPassword": "Host password",
   "Port": "Port",
-  "SenderDisplayName": "Sender Display Name",
-  "SenderEmailAddress": "Sender Email Address",
-  "SendTestMail": "Send Test Mail"
+  "SenderDisplayName": "Sender display name",
+  "SenderEmailAddress": "Sender email address",
+  "SendTestMail": "Send test mail"
 }

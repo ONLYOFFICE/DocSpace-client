@@ -1,13 +1,13 @@
 {
   "key_path": "NoMCPServersDescription",
-  "content": "Please connect {{mcpServers}} in workspace settings to use them in the {{aiAgent}}.",
-  "content_en_sha1_hash": "7a1ca7aedd92c169dcdd063f25d7e016964d8290",
-  "created_at": "2026-08-13T22:44:13.097Z",
-  "updated_at": "2026-08-14T15:07:26.844Z",
+  "content": "Go to Settings >> AI settings >> {{mcpServers}} to connect servers for this {{aiAgent}}.",
+  "content_en_sha1_hash": "076d5bd4fb116dccf861d1710c2d603b3ad32c0d",
+  "created_at": "2026-08-31T18:23:18.289Z",
+  "updated_at": "2026-08-31T18:51:24.608Z",
   "comment": {
-    "text": "Empty screen description shown when no MCP servers are configured, instructing the user to connect {{mcpServers}} (a settings section title) in workspace settings to enable them for the {{aiAgent}} (the AI agent name).",
+    "text": "Empty screen description providing navigation instructions to configure servers, featuring placeholders for the MCP settings title and the specific AI agent.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:07:26.844Z",
+    "updated_at": "2026-08-31T18:51:24.608Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -9,6 +9,6 @@
   "HostPassword": "Senha do host",
   "Port": "Porta",
   "SenderDisplayName": "Nome do remetente a mostrar",
-  "SenderEmailAddress": "Endereço de E-mail do remetente",
-  "SendTestMail": "Enviar Email de Teste"
+  "SenderEmailAddress": "Endereço de e-mail do remetente",
+  "SendTestMail": "Enviar email de teste"
 }

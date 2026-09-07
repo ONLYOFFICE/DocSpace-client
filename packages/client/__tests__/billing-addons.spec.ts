@@ -277,7 +277,7 @@ test.describe("Add-ons without a card", () => {
     await expect(stripeDialogButton(page)).toBeVisible();
     await expect(stripeDialogButton(page)).toContainText("Continue to Stripe");
     await expect(
-      page.getByText("you'll be asked to attach a payment method securely via Stripe"),
+      page.getByText("you'll need to securely add a payment method via Stripe"),
     ).toBeVisible();
     expect(changes).toHaveLength(0);
 

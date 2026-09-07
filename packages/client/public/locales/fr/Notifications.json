@@ -1,19 +1,19 @@
 {
-  "ActionsWithFilesDescription": "Les badges mettront en évidence l'activité des fichiers — téléchargements, modifications ou partages — dans les sections {{rooms}}, {{shared}}, {{documents}} et {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Les badges mettent en évidence les activités sur les fichiers, comme les téléversements, les modifications et les partages, dans les applications {{files}}, {{rooms}}, {{forms}} et {{aiAgents}}.",
   "AdminSetupRequired": "Configuration administrateur requise",
   "Badges": "Badges",
   "DailyFeed": "Flux quotidien de {{organizationName}} {{productName}}",
-  "DailyFeedDescription": "Lisez les nouvelles et les événements de votre {{organizationName}} {{productName}} dans un rapport quotidien.",
+  "DailyFeedDescription": "Recevez un résumé quotidien des actualités et des événements de {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Notifications d'activité des fichiers",
   "IsNotValid": "Non valide",
   "LdapEmailTooltip": "Ce compte utilisateur est chargé depuis LDAP. L'adresse e-mail de l'utilisateur n'a pas été spécifiée, et l'adresse actuelle a été générée automatiquement et ne peut pas être utilisée pour envoyer des notifications.",
   "NotConfigured": "Non configuré",
   "Notifications": "Notifications",
-  "RoomsActivityDescription": "Recevez des notifications e-mail instantanées concernant les nouveaux fichiers/dossiers partagés et l'activité à l'intérieur de vos {{rooms}} et {{aiAgents}}.",
-  "RoomUpdateNotify": "Contenu partagé, {{rooms}} et activité {{aiAgents}}",
-  "SettingUpNotifications": "Configuration des notifications",
+  "RoomsActivityDescription": "Recevez des notifications par e-mail instantanées sur les nouveaux fichiers et dossiers partagés et sur l'activité dans {{files}}, {{rooms}}, {{forms}} et {{aiAgents}}.",
+  "RoomUpdateNotify": "Activité dans {{files}}, {{rooms}}, {{forms}} et {{aiAgents}}",
+  "SettingUpNotifications": "Paramètres de notification",
   "SuccessConnected": "{{serviceName}} a été connecté avec succès en tant que canal de notification. Vous recevrez désormais des mises à jour là-bas.",
   "SuccessDisconnected": "{{serviceName}} a été déconnecté avec succès en tant que canal de notification. Les notifications ne seront plus envoyées là-bas.",
   "UsefulTips": "Conseils utiles pour {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Obtenez des guides utiles sur {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Découvrez des astuces et guides utiles pour utiliser {{organizationName}} {{productName}}."
 }

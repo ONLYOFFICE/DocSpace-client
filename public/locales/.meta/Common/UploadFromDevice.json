@@ -1,13 +1,13 @@
 {
   "key_path": "UploadFromDevice",
-  "content": "Upload from device",
-  "content_en_sha1_hash": "37ea5a59d00e13d5967bc95d080fc94a3db0eb2a",
-  "created_at": "2026-06-03T11:45:59.880Z",
-  "updated_at": "2026-08-04T09:58:56.582Z",
+  "content": "Add files from device",
+  "content_en_sha1_hash": "1b86a08e237448f59276bfdf69d6db5ec08b13af",
+  "created_at": "2026-08-31T18:23:36.546Z",
+  "updated_at": "2026-08-31T18:28:21.027Z",
   "comment": {
-    "text": "Button label for an action that opens a file picker to select files from the local device.",
+    "text": "Button label in an action menu that triggers the local file picker to select files for uploading.",
     "is_auto": true,
-    "updated_at": "2026-06-03T11:46:28.747Z",
+    "updated_at": "2026-08-31T18:28:21.027Z",
     "model": "gemma4:26b"
   },
   "usage": [

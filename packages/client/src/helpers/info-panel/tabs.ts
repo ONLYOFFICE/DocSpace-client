@@ -34,7 +34,10 @@
  */
 
 import { FolderType } from "@docspace/shared/enums";
-import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
+import {
+  isFile as isFileUtil,
+  isRoom as isRoomUtil,
+} from "@docspace/shared/utils/typeGuards";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
@@ -143,11 +146,13 @@ export function getAvailableInfoPanelTabs({
   tabs.push(InfoPanelView.infoHistory, InfoPanelView.infoDetails);
 
   if (!isAIAgentsSection && enablePlugins && infoPanelItemsList.length > 0) {
-    const hasRoomType = "roomType" in selection && !!selection.roomType;
+    const isRoomSelection = isRoomUtil(selection);
+    const isFileSelection = isFileUtil(selection);
+
     const fileExst = "fileExst" in selection ? (selection.fileExst ?? "") : "";
 
     const viewAccessibility =
-      fileExst && "viewAccessibility" in selection
+      isFileSelection && "viewAccessibility" in selection
         ? selection.viewAccessibility
         : null;
 
@@ -167,8 +172,10 @@ export function getAvailableInfoPanelTabs({
         continue;
       }
 
-      if (hasRoomType && item.value.filesType.includes(PluginFileType.room)) {
-        tabs.push(`info_plugin-${item.key}`);
+      if (isRoomSelection) {
+        if (item.value.filesType.includes(PluginFileType.room)) {
+          tabs.push(`info_plugin-${item.key}`);
+        }
         continue;
       }
 
@@ -182,7 +189,10 @@ export function getAvailableInfoPanelTabs({
         continue;
       }
 
-      if (fileExst && item.value.filesType.includes(PluginFileType.file)) {
+      if (
+        isFileSelection &&
+        item.value.filesType.includes(PluginFileType.file)
+      ) {
         if (
           item.value.filesExsts &&
           !item.value.filesExsts.includes(fileExst)
@@ -193,7 +203,10 @@ export function getAvailableInfoPanelTabs({
         continue;
       }
 
-      if (!fileExst && item.value.filesType.includes(PluginFileType.folder)) {
+      if (
+        !isFileSelection &&
+        item.value.filesType.includes(PluginFileType.folder)
+      ) {
         tabs.push(`info_plugin-${item.key}`);
       }
     }

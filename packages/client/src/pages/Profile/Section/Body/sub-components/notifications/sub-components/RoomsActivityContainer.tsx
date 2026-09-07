@@ -75,7 +75,9 @@ const RoomsActivityContainer = ({
       <div className={styles.row}>
         <Text {...textProps} className="subscription-title">
           {t("RoomUpdateNotify", {
+            files: t("Common:Files"),
             rooms: t("Common:Rooms"),
+            forms: t("Common:Forms"),
             aiAgents: t("Common:AIAgents"),
           })}
         </Text>
@@ -88,7 +90,9 @@ const RoomsActivityContainer = ({
       </div>
       <Text {...textDescriptionsProps}>
         {t("RoomsActivityDescription", {
+          files: t("Common:Files"),
           rooms: t("Common:Rooms"),
+          forms: t("Common:Forms"),
           aiAgents: t("Common:AIAgents"),
         })}
       </Text>

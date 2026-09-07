@@ -58,7 +58,6 @@ import { FileTypesFilter } from "../sub-components/FileTypesFilter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { VersionSelector } from "../sub-components/VersionSelector";
-import Integration from "../sub-components/Integration";
 import { EventLogBlock } from "../sub-components/EventLogBlock";
 
 import {
@@ -595,12 +594,8 @@ const Uploader = (props) => {
               setConfig={setConfig}
             />
           </ControlsSection>
-
-          <Integration compact className="integration-examples" />
         </Controls>
       </Container>
-
-      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };

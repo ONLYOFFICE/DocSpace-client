@@ -80,7 +80,6 @@ import { ItemsCountBlock } from "../sub-components/ItemsCountBlock";
 import { DisplayPageBlock } from "../sub-components/DisplayPageBlock";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { VersionSelector } from "../sub-components/VersionSelector";
-import Integration from "../sub-components/Integration";
 import { TooltipContent } from "../sub-components/TooltipContent";
 
 import {
@@ -767,12 +766,8 @@ const Manager = (props) => {
               </ControlsGroup>
             ) : null}
           </ControlsSection>
-
-          <Integration compact className="integration-examples" />
         </Controls>
       </Container>
-
-      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };

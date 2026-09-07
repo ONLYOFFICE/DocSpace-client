@@ -283,7 +283,7 @@ const SessionLifetime = (props) => {
           },
           {
             id: "session-lifetime-enable",
-            label: t("Common:Enable"),
+            label: t("Common:Enabled"),
             value: "enable",
             dataTestId: "session_lifetime_enabled",
           },

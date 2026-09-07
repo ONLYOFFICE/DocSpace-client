@@ -2,7 +2,7 @@
   "ActiveSessions": "Aktiiviset istunnot",
   "AutoDeleteTitle": "Kaikki yli 60 päivää vanhat istunnot poistetaan automaattisesti.",
   "ChangePasswordAfterLoggingOut": "Vaihda salasana uloskirjautumisen jälkeen",
-  "ConnectSocialNetworks": "Yhdistä sosiaaliset verkostosi",
+  "ConnectSocialNetworks": "Yhdistä tilisi",
   "DescriptionForSecurity": "Vaihda salasanasi lisätäksesi turvallisuutta.",
   "DesktopTheme": "Synkronoi työpöytäeditorin asetusten kanssa",
   "DesktopThemeDescription": "Vaihda automaattisesti vaaleiden ja tummien teemojen välillä työpöytäeditorien nykyisen teeman mukaan.",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "Sähköpostia ei ole vahvistettu",
   "ErrorAccountAlreadyUse": "Linkitetty tili on jo toisen käyttäjän käytössä",
   "LogoutActiveConnection": "Kirjaudu ulos aktiivisesta yhteydestä",
-  "LogoutAllActiveSessionsDescription": "Kaikki muut aktiiviset yhteydet paitsi tämä yhteys kirjataan ulos, koska tämä yhteys on parhaillaan käytössä.",
+  "LogoutAllActiveSessionsDescription": "Kaikki muut aktiiviset istunnot paitsi nykyinen päätetään. Nykyinen istunto pysyy aktiivisena.",
   "LogoutBtn": "Kirjaudu ulos",
-  "LogoutDescription": "Huom. Kaikki muut aktiiviset yhteydet paitsi tämä yhteys katkaistaan, koska tätä yhteyttä käytetään parhaillaan.",
+  "LogoutDescription": "Huom. Kaikki muut aktiiviset istunnot paitsi nykyinen päätetään. Nykyinen istunto pysyy aktiivisena.",
   "LogoutFrom": "Kirjaudu ulos {{platform}} {{browser}}?",
   "MyProfile": "Profiilini",
   "NotificationsChannels": "Ilmoituskanavat",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Näytä varakoodit",
   "SuccessLogout": "Aktiivisesta yhteydestä kirjauduttiin ulos:{{platform}}, {{browser}}",
   "TelegramAccount": "Telegram-tili",
-  "TelegramAccountDescription": "Yhdistääksesi TelegramBot-tilisi, seuraa salattua linkkiä ja klikkaa \"Yhdistä Telegram\" -painiketta.",
+  "TelegramAccountDescription": "Saadaksesi tilisi ilmoitukset Telegramiin, seuraa alla olevaa linkkiä tai klikkaa Yhdistä-painiketta.",
   "TelegramAccountDisconnect": "Katkaise Telegram",
   "TelegramAccountDisconnectDescription": "Sinun @{{username}}-tilisi on yhdistetty Telegram-ilmoituksia varten. Voit irrottaa tilin. Tässä tapauksessa et saa ilmoituksia.",
   "TerminateAllSessions": "Lopeta kaikki istunnot paitsi nykyinen",
-  "TwoFactorDescription": "Järjestelmänvalvoja otti käyttöön kaksivaiheisen todennuksen koodia luovan sovelluksen kautta kaikille käyttäjille."
+  "TwoFactorDescription": "Järjestelmänvalvoja on ottanut käyttöön kaksivaiheisen todennuksen todennussovelluksen kautta kaikille käyttäjille."
 }

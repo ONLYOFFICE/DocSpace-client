@@ -1,8 +1,8 @@
 {
   "BackupCodesDescription": "Loguj się za pomocą kodów zapasowych, gdy nie masz dostępu do swojego telefonu.",
-  "BackupCodesSecondDescription": "Każdy kod może być wykorzystany tylko raz. Nowe kody możesz utworzyć, kiedykolwiek zechcesz. Wyłącznie ostatnio wygenerowane kody są ważne.",
+  "BackupCodesSecondDescription": "Każdy kod może zostać wykorzystany tylko raz. Nowe kody możesz uzyskać w dowolnym momencie. Ważny jest wyłącznie ostatnio wygenerowany kod.",
   "BackupCodesTitle": "Kody zapasowe",
-  "CodesCounter": "kody:",
+  "CodesCounter": "kody zapasowe:",
   "PrintButton": "Drukuj",
   "RequestNewButton": "Wygeneruj nowe"
 }

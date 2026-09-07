@@ -676,7 +676,7 @@ self: FilesActionStore,
     }
 
     if (((fileStatus as number) & FileStatus.IsNew) === FileStatus.IsNew)
-      await self.onMarkAsRead(item);
+      self.onMarkAsRead(item);
 
     if (canWebEdit || canViewedDocs) {
       let shareKey = item.requestToken;

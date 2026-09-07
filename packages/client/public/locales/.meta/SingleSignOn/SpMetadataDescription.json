@@ -1,14 +1,14 @@
 {
   "key_path": "SpMetadataDescription",
-  "content": "Access Service Provider metadata to add {{organizationName}} {{productName}} as a trusted Service Provider in your IdP account.",
-  "content_en_sha1_hash": "098786ad0d536a8db1b1460c33f375fa8fd80406",
-  "created_at": "2025-05-19T21:30:50.169Z",
-  "updated_at": "2026-05-15T15:37:40.282Z",
+  "content": "Access Service Provider metadata to add {{organizationName}} {{productName}} as a trusted Service Provider in your Identity provider account.",
+  "content_en_sha1_hash": "5ee96866b7213124171192d54953f73f4adda815",
+  "created_at": "2026-08-31T18:23:40.157Z",
+  "updated_at": "2026-08-31T20:58:11.496Z",
   "comment": {
-    "text": "This is a subtitle for a category item in the mobile view of Portal Settings. It explains how to use Service Provider metadata to integrate {{organizationName}} {{productName}} with an Identity Provider. {{organizationName}} is the name of the organization, and {{productName}} is the name of the product.",
+    "text": "Subtitle for a category item in the SSO integration settings, explaining how to use metadata to configure a trusted Service Provider. Includes variables for the organization name and product name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:21.871Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:58:11.496Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -88,15 +88,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \"P\"",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:48:37.272Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -157,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -172,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -208,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

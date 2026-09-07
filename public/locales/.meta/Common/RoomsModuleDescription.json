@@ -1,14 +1,14 @@
 {
   "key_path": "RoomsModuleDescription",
-  "content": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
-  "content_en_sha1_hash": "2f37d9051c90dfc970642bac71d6899484e612bd",
-  "created_at": "2025-05-26T07:15:47.398Z",
-  "updated_at": "2026-08-14T14:58:32.903Z",
+  "content": "Save the backup to a new room created just for it, an existing room, or your {{roomName}}.",
+  "content_en_sha1_hash": "2c33d55a18269f95881f19c29b327c998c131413",
+  "created_at": "2026-08-31T18:23:28.174Z",
+  "updated_at": "2026-08-31T18:40:30.746Z",
   "comment": {
-    "text": "This is a descriptive text explaining options for saving a backup. It appears in the auto-backup and manual-backup dialogs. The `{{roomName}}` variable will be replaced with the name of a specific room, such as \"My Documents\".",
+    "text": "Description text in the backup settings explaining the available destination options for backups. The {{roomName}} variable represents a specific room or folder name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:44:04.009Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:40:30.746Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

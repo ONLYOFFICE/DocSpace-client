@@ -1,14 +1,14 @@
 {
   "key_path": "StudioTimeLanguageSettings",
-  "content": "Language and Time Zone Settings",
-  "content_en_sha1_hash": "392b7f827b97606957ef5bc78968a32a3ca7ad0b",
-  "created_at": "2025-05-19T21:30:52.811Z",
-  "updated_at": "2026-08-14T14:58:32.775Z",
+  "content": "Language and time zone",
+  "content_en_sha1_hash": "39f32366d97cf1ffad16028bcf8ebf95a611ddef",
+  "created_at": "2026-08-31T18:23:42.292Z",
+  "updated_at": "2026-08-31T20:15:45.624Z",
   "comment": {
-    "text": "This is the title for the \"Language and Time Zone Settings\" page and a navigation item label within the portal settings. It allows users to configure their preferred language and time zone.",
+    "text": "Title for a navigation item in the customization navbar and the heading for the settings page.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:21:56.884Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:15:45.624Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -188,6 +188,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -224,12 +230,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

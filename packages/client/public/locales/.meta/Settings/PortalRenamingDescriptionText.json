@@ -1,13 +1,13 @@
 {
   "key_path": "PortalRenamingDescriptionText",
-  "content": "Change the workspace address that appears next to {{ domain }}.",
-  "content_en_sha1_hash": "1b557de76d4dc9f9e635f1a160e4a56e7514df7a",
-  "created_at": "2026-08-12T15:15:01.110Z",
-  "updated_at": "2026-08-14T14:58:32.781Z",
+  "content": "Change the address that appears alongside {{ domain }}.",
+  "content_en_sha1_hash": "4747dd483e450c918877ea510725a75a55e6bfe0",
+  "created_at": "2026-08-31T18:23:41.780Z",
+  "updated_at": "2026-08-31T20:22:45.609Z",
   "comment": {
-    "text": "Description text for a customization setting that explains how to modify the workspace address, including the current {{ domain }} variable.",
+    "text": "Description text for a customization setting in Portal Settings, explaining how to modify the address shown alongside the {{ domain }} variable.",
     "is_auto": true,
-    "updated_at": "2026-08-12T15:24:23.593Z",
+    "updated_at": "2026-08-31T20:22:45.609Z",
     "model": "gemma4:26b"
   },
   "usage": [

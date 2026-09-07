@@ -126,6 +126,7 @@ const Row = (props: RowProps) => {
   return (
     <div className={styles.styledRowWrapper}>
       <TableRow
+        className={styles.styledTableRow}
         contextOptions={contextOptions || []}
         onClick={handleRowClick}
         fileContextClick={(isRightClick) => {

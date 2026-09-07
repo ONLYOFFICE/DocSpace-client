@@ -1,13 +1,13 @@
 {
   "key_path": "RestoreBackupDescription",
-  "content": "Use this option to restore your workspace from the previously saved backup file.",
-  "content_en_sha1_hash": "242709065a357dae87c85afe2b886c788ff0d9eb",
-  "created_at": "2026-08-12T11:00:35.240Z",
-  "updated_at": "2026-08-14T14:58:32.904Z",
+  "content": "Restore your workspace from a previously saved backup file.",
+  "content_en_sha1_hash": "4b79c4b1192e8edb1064f2256ace5845b5d029da",
+  "created_at": "2026-08-31T18:23:25.863Z",
+  "updated_at": "2026-08-31T18:44:47.580Z",
   "comment": {
-    "text": "Instructional text on the Restore Backup page describing the purpose of the restoration option.",
+    "text": "Descriptive text on the restore backup page explaining the process of recovering a workspace using a saved backup file.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:05:02.778Z",
+    "updated_at": "2026-08-31T18:44:47.580Z",
     "model": "gemma4:26b"
   },
   "usage": [

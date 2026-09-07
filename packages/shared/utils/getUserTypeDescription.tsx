@@ -35,10 +35,34 @@
 
 "use client";
 
-import type { TFunction } from "i18next";
-import { Trans } from "react-i18next";
-
+import { EmployeeType } from "../enums";
 import type { TTranslation } from "../types";
+
+/** What a workspace user type can do - shown under the type in the user type
+ * menus and as the type hint on the profile. */
+export const getUserTypeDescriptionByType = (
+  type: EmployeeType,
+  t: TTranslation,
+) => {
+  switch (type) {
+    case EmployeeType.Admin:
+      return t("Common:RolePortalAdminDescription", {
+        sectionName: t("Common:Files"),
+      });
+    case EmployeeType.RoomAdmin:
+      return t("Common:RoleRoomAdminDescription", {
+        sectionName: t("Common:Files"),
+      });
+    case EmployeeType.User:
+      return t("Common:RoleNewUserDescription", {
+        sectionName: t("Common:Files"),
+      });
+    case EmployeeType.Guest:
+      return t("Common:RoleGuestDescription");
+    default:
+      return undefined;
+  }
+};
 
 export const getUserTypeDescriptionClient = (
   isPortalAdmin: boolean,
@@ -46,53 +70,13 @@ export const getUserTypeDescriptionClient = (
   isCollaborator: boolean,
   t: TTranslation,
 ) => {
-  if (isPortalAdmin)
-    return (
-      <Trans
-        t={t as TFunction}
-        ns="Common"
-        i18nKey="RolePortalAdminDescription"
-        components={{
-          1: <strong></strong>,
-        }}
-        values={{
-          sectionName: t("Common:Documents"),
-          agentSection: t("Common:AIAgents"),
-        }}
-      />
-    );
+  const type = isPortalAdmin
+    ? EmployeeType.Admin
+    : isRoomAdmin
+      ? EmployeeType.RoomAdmin
+      : isCollaborator
+        ? EmployeeType.User
+        : EmployeeType.Guest;
 
-  if (isRoomAdmin)
-    return (
-      <Trans
-        t={t as TFunction}
-        ns="Common"
-        i18nKey="RoleRoomAdminDescription"
-        components={{
-          1: <strong></strong>,
-        }}
-        values={{
-          sectionName: t("Common:Documents"),
-          agentSection: t("Common:AIAgents"),
-        }}
-      />
-    );
-
-  if (isCollaborator)
-    return (
-      <Trans
-        t={t as TFunction}
-        ns="Common"
-        i18nKey="RoleNewUserDescription"
-        components={{
-          1: <strong></strong>,
-        }}
-        values={{
-          agentSection: t("Common:AIAgents"),
-          aiAgent: t("Common:AIAgent"),
-        }}
-      />
-    );
-
-  return t("Translations:RoleGuestDescriprion");
+  return getUserTypeDescriptionByType(type, t);
 };

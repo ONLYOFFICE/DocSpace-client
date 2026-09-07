@@ -1,14 +1,14 @@
 {
   "key_path": "DontAskAgain",
-  "content": "Don't ask file name again on creation",
-  "content_en_sha1_hash": "8e94add6c6b263663fe317dddfd29004f6cc223b",
-  "created_at": "2025-05-19T21:30:44.617Z",
-  "updated_at": "2026-08-04T09:58:56.364Z",
+  "content": "Don't ask for the file name again when creating a file.",
+  "content_en_sha1_hash": "cd947c9fb1357ee03ea6de40d2e9268262a173c5",
+  "created_at": "2026-08-31T18:23:01.409Z",
+  "updated_at": "2026-08-31T19:19:01.487Z",
   "comment": {
-    "text": "This is a checkbox label or toggle button label. It allows users to prevent the system from asking for a file name again when creating new files.",
+    "text": "Label for a checkbox or toggle button in file management settings and dialogs, used to disable the file name prompt during file creation.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:54:50.024Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:19:01.487Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -212,12 +218,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

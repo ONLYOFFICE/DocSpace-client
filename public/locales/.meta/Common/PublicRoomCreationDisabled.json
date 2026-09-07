@@ -3,7 +3,7 @@
   "content": "Public Rooms cannot be created because external sharing is disabled.",
   "content_en_sha1_hash": "77005c009d9680f4180487bf6ec21096b43c0c7c",
   "created_at": "2026-06-02T08:43:15.985Z",
-  "updated_at": "2026-08-24T22:30:00.638Z",
+  "updated_at": "2026-08-31T18:23:50.639Z",
   "comment": {
     "text": "Tooltip text explaining why the Public Room option is unavailable when external sharing is disabled.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/utils/hooks/useRoomsHelper.tsx",
-      "line_number": 161,
+      "line_number": 166,
       "context": "<Tooltip\n id={`${tooltipId}-instance`}\n anchorSelect={`#${tooltipId}`}\n place=\"bottom\"\n float\n getContent={() => t(\"PublicRoomCreationDisabled\")}\n />\n </div>\n );\n });\n }, [addInputItem, disabledCreatePublicRoom, t]);",
       "module": "/libs/ui-kit"
     },

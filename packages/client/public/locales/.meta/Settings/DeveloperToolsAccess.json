@@ -1,14 +1,14 @@
 {
   "key_path": "DeveloperToolsAccess",
-  "content": "Developer Tools section",
-  "content_en_sha1_hash": "8e2edfe027bccc66916acfd0ca199bbf466f8f61",
-  "created_at": "2025-05-19T21:30:51.166Z",
-  "updated_at": "2026-08-14T14:58:32.832Z",
+  "content": "Developer Tools visibility",
+  "content_en_sha1_hash": "aa67b7688499b1efb91ddac3bfd42263f8936a19",
+  "created_at": "2026-08-31T18:23:40.899Z",
+  "updated_at": "2026-08-31T20:35:26.998Z",
   "comment": {
-    "text": "This is a section title within the portal settings, indicating the area for managing developer tools access.",
+    "text": "A label for a settings item in the security access portal that controls the visibility of developer tools.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:24:44.446Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:35:26.998Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -212,12 +218,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,13 +1,13 @@
 {
   "key_path": "AdminsMessageSettingDescription",
-  "content": "Enable this option to display the Full admin contact form on the Sign In page.",
-  "content_en_sha1_hash": "369409ec247c68bcc531f2071a01ccad0c3d7342",
-  "created_at": "2026-08-13T14:37:15.346Z",
-  "updated_at": "2026-08-14T14:58:32.830Z",
+  "content": "Show a form on the Sign In page that lets people contact your full admins.",
+  "content_en_sha1_hash": "065d5ebf0be64a78e9ebba7e577e104be080c10f",
+  "created_at": "2026-08-31T18:23:40.297Z",
+  "updated_at": "2026-08-31T20:48:20.657Z",
   "comment": {
-    "text": "Description text for a security setting in the Portal Settings, explaining that enabling this option displays an admin contact form on the Sign In page.",
+    "text": "Description text for a setting in the Portal Settings, explaining the purpose of the \"Admins Message\" feature.",
     "is_auto": true,
-    "updated_at": "2026-08-13T15:19:57.061Z",
+    "updated_at": "2026-08-31T20:48:20.657Z",
     "model": "gemma4:26b"
   },
   "usage": [

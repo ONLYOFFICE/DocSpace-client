@@ -1480,6 +1480,11 @@ const SectionFilterContent = ({
         filterOptions.push(...tagsOptions);
       }
     } else {
+      // The "Forms" section holds PDF forms only, so its Recent/Favorites
+      // aggregates give the file-type filter nothing to narrow down.
+      const withTypeOptions =
+        !isFormsSection || (!isRecentFolder && !isFavoritesFolder);
+
       const authorOption = getAuthorFilter();
 
       const sharedByOption = getSharedByFilter();
@@ -1487,7 +1492,8 @@ const SectionFilterContent = ({
       !isPublicRoom && filterOptions.push(...authorOption);
 
       filterOptions.push(...sharedByOption);
-      filterOptions.push(...typeOptions);
+
+      if (withTypeOptions) filterOptions.push(...typeOptions);
 
       if (isRoomsTrash) {
         const roomOption = [
@@ -1511,6 +1517,12 @@ const SectionFilterContent = ({
         ];
         filterOptions.push(...roomOption);
       }
+
+      if (!withTypeOptions) {
+        const lastHeader = filterOptions.findLast((option) => option.isHeader);
+
+        if (lastHeader) lastHeader.isLast = true;
+      }
     }
     return filterOptions;
   }, [
@@ -1521,6 +1533,7 @@ const SectionFilterContent = ({
     isAIAgentsFolder,
     isContactsPage,
     isRecentFolder,
+    isFavoritesFolder,
     isTrash,
     isRoomsTrash,
     isPublicRoom,

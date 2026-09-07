@@ -3,7 +3,7 @@
   "content": "Edit subscription",
   "content_en_sha1_hash": "ff7f89fc702e468dbff110a0c725497b81c29c76",
   "created_at": "2026-04-10T13:53:45.069Z",
-  "updated_at": "2026-08-13T14:37:21.734Z",
+  "updated_at": "2026-08-31T18:23:50.768Z",
   "comment": {
     "text": "This is a button label in a context menu and a dialog title. It allows users to modify their existing subscription plan.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 218,
+      "line_number": 219,
       "context": "const balance = formatWalletCurrency();\n \n const contextMenuItems = [\n {\n key: \"edit\",\n label: t(\"EditSubscription\"),\n iconNode: <PencilIcon />,\n onClick: openUpgradeDialog,\n },\n {\n key: \"cancel\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 218,
+      "line_number": 219,
       "context": "const balance = formatWalletCurrency();\n \n const contextMenuItems = [\n {\n key: \"edit\",\n label: t(\"EditSubscription\"),\n iconNode: <PencilIcon />,\n onClick: openUpgradeDialog,\n },\n {\n key: \"cancel\",",
       "module": "/libs/ui-kit"
     },

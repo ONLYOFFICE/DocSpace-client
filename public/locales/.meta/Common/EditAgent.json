@@ -1,14 +1,14 @@
 {
   "key_path": "EditAgent",
-  "content": "Edit Agent",
-  "content_en_sha1_hash": "07c504c5b4e6c55a509698a594e6e99f8b1b3ec9",
-  "created_at": "2025-10-27T16:14:13.848Z",
-  "updated_at": "2026-08-26T14:08:32.990Z",
+  "content": "Edit agent",
+  "content_en_sha1_hash": "8e424aecf7369d4b8b043b8b333a738fbc42d9f2",
+  "created_at": "2026-08-31T18:23:02.045Z",
+  "updated_at": "2026-08-31T19:17:57.217Z",
   "comment": {
-    "text": "This is the title of a dialog window and a menu item label. It allows users to modify the settings of an existing agent.",
+    "text": "Dialog title and menu item label used to open the interface for modifying an existing agent.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:54:30.801Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:17:57.217Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

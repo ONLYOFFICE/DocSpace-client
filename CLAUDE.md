@@ -149,7 +149,9 @@ product names** — neither in code nor in translation strings. Pass them as
 Full reference (locale file locations, test rules, completeness reports,
 supported languages) is in `.claude/rules/i18n.md`, loaded automatically when
 editing locale files. For translation work use the `translate-locales`,
-`translate-key` and `translate-progress` skills.
+`translate-key` and `translate-progress` skills; `translate-stale` finds keys
+whose English was reworded while the translations stayed behind — no test
+catches that.
 
 ## Detailed rules (auto-loaded by path)
 

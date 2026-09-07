@@ -9,6 +9,6 @@
   "HostPassword": "Κωδικός πρόσβασης host",
   "Port": "Θύρα",
   "SenderDisplayName": "Όνομα απεικόνισης αποστολέα",
-  "SenderEmailAddress": "Διεύθυνση Email Αποστολέα",
+  "SenderEmailAddress": "Διεύθυνση email αποστολέα",
   "SendTestMail": "Αποστολή δοκιμαστικού email"
 }

@@ -26,7 +26,11 @@ COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
 COPY libs/ui-kit/ ./libs/ui-kit/
 
-RUN pnpm install --frozen-lockfile
+# CI=true is scoped to this one command on purpose. It skips the
+# `lefthook install` in the workspace prepare scripts, which cannot work
+# because the image has no .git. A persistent `ENV CI=true` would also
+# change Playwright's runtime defaults (retries, workers, forbidOnly).
+RUN CI=true pnpm install --frozen-lockfile
 
 RUN pnpm --filter @docspace/management run build:translations
 

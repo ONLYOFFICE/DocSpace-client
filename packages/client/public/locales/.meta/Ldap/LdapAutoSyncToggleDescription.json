@@ -1,13 +1,13 @@
 {
   "key_path": "LdapAutoSyncToggleDescription",
-  "content": "Synchronization will allow to upload all the data from the workspace and update the new data after changing the settings. Sync every time you have new data on users in the workspace.",
-  "content_en_sha1_hash": "8906863f0ef8271b72c3d6cc6902033597df09e3",
-  "created_at": "2026-08-12T11:00:47.163Z",
-  "updated_at": "2026-08-12T11:56:04.479Z",
+  "content": "Syncing pulls in all your workspace data and keeps it updated whenever settings change — run it anytime you have new user data to bring in.",
+  "content_en_sha1_hash": "bc0c79dc4fc603e3b4efd5c62d41e261e4ce83a2",
+  "created_at": "2026-09-04T07:59:37.184Z",
+  "updated_at": "2026-09-04T08:05:33.978Z",
   "comment": {
-    "text": "Descriptive subtext for the LDAP Auto Sync toggle in the integration settings, explaining how synchronization works and when to enable it.",
+    "text": "Descriptive subtext for the LDAP Auto Sync toggle switch in the integration settings, explaining the functionality and purpose of the synchronization feature.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:56:04.479Z",
+    "updated_at": "2026-09-04T08:05:33.978Z",
     "model": "gemma4:26b"
   },
   "usage": [

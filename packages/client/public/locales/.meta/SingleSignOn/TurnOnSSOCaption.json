@@ -1,13 +1,13 @@
 {
   "key_path": "TurnOnSSOCaption",
-  "content": "Enable this option if you want to add users from SSO service to your workspace automatically.",
-  "content_en_sha1_hash": "37c2821136042d586955cf66831802b4c5a8237a",
-  "created_at": "2026-08-12T11:00:45.261Z",
-  "updated_at": "2026-08-12T13:36:03.278Z",
+  "content": "Turn this on to automatically add users from your SSO service.",
+  "content_en_sha1_hash": "cc465f7cf1ae2298135ce38e7c2557801ef82d62",
+  "created_at": "2026-08-31T18:23:40.182Z",
+  "updated_at": "2026-08-31T20:56:18.442Z",
   "comment": {
-    "text": "Caption for a toggle switch in the Single Sign-On (SSO) integration settings, providing instructions on the effect of enabling the feature.",
+    "text": "Caption for a toggle switch in the Single Sign-On integration settings, explaining the effect of enabling the feature.",
     "is_auto": true,
-    "updated_at": "2026-08-12T13:36:03.278Z",
+    "updated_at": "2026-08-31T20:56:18.442Z",
     "model": "gemma4:26b"
   },
   "usage": [

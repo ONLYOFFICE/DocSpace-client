@@ -1,14 +1,14 @@
 {
   "key_path": "CodesCounter",
-  "content": "codes:",
-  "content_en_sha1_hash": "182fa94ceffa8e593b7c9b54ae58703edfb9445b",
-  "created_at": "2025-05-19T21:30:57.036Z",
-  "updated_at": "2026-05-15T14:00:06.636Z",
+  "content": "backup codes:",
+  "content_en_sha1_hash": "5171f6b9c407a8eabb8e8f2e4ef3e5deaedadb07",
+  "created_at": "2026-08-31T18:23:47.178Z",
+  "updated_at": "2026-08-31T19:38:35.937Z",
   "comment": {
-    "text": "This is a short label indicating the number of backup codes. It appears next to a numerical value, for example, \"10 codes:\".",
+    "text": "Label in the BackupCodesDialog that follows a numeric variable representing the count of available backup codes.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:03:16.713Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:38:35.937Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

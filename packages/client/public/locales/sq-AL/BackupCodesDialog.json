@@ -1,8 +1,8 @@
 {
   "BackupCodesDescription": "Përdorni kodet e kopjes së sigurisë për të hyrë kur nuk keni akses në telefonin tuaj.",
-  "BackupCodesSecondDescription": "Çdo kod mund të përdoret vetëm një herë. Mund të merrni kode të reja në çdo kohë. Vetëm kodet që janë krijuar së fundmi janë të vlefshme.",
+  "BackupCodesSecondDescription": "Çdo kod mund të përdoret vetëm një herë. Mund të merrni kode të reja në çdo kohë. Vetëm kodi i krijuar më së fundmi është i vlefshëm.",
   "BackupCodesTitle": "Titulli i kodeve të kopjes së sigurisë",
-  "CodesCounter": "kodet:",
+  "CodesCounter": "kodet e kopjes së sigurisë:",
   "PrintButton": "Printoni",
   "RequestNewButton": "Kërkesë e re"
 }

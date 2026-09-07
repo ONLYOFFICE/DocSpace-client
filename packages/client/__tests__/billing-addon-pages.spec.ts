@@ -772,7 +772,7 @@ test.describe("AI search page", () => {
     await expect(page.getByTestId("heading")).toHaveText("AI search");
     await expect(page.getByText("No AI search used in December 2025")).toBeVisible();
     await expect(
-      page.getByText("Exa pricing + 20% service fee applies to usage"),
+      page.getByText("Exa pricing, plus a 20% service fee"),
     ).toBeVisible();
     await expect(page.getByText("No AI search transactions yet")).toBeVisible();
   });

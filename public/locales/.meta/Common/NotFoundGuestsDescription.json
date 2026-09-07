@@ -1,14 +1,14 @@
 {
   "key_path": "NotFoundGuestsDescription",
-  "content": "New guests will be added here once you invite them to the room.",
-  "content_en_sha1_hash": "67fb4d9324338a8ac05bfb73179d010e43aecfd7",
-  "created_at": "2025-05-19T21:30:46.881Z",
-  "updated_at": "2026-08-24T22:30:00.675Z",
+  "content": "Guests you invite to your rooms will show up here.",
+  "content_en_sha1_hash": "b080058d56ecbc4039efc43de216c6ce68fadadb",
+  "created_at": "2026-09-04T07:59:18.531Z",
+  "updated_at": "2026-09-04T08:02:30.480Z",
   "comment": {
-    "text": "This is an empty state message displayed when no guests have been invited to a room yet. It appears in the guest list area.",
+    "text": "Empty screen description shown in the Guests tab when no guests have been invited to any rooms.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:47:46.468Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-09-04T08:02:30.480Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -94,15 +94,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \"a\"",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:47:35.926Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -163,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -178,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -214,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

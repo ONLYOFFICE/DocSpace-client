@@ -3,7 +3,7 @@
   "content": "New presentation",
   "content_en_sha1_hash": "2f9d6210592804df00fdbb934945bcb6ee2accb8",
   "created_at": "2025-05-19T21:30:46.772Z",
-  "updated_at": "2026-08-26T16:06:02.289Z",
+  "updated_at": "2026-08-31T18:23:50.690Z",
   "comment": {
     "text": "This is a label for creating a new presentation file. It appears in menus and as a default file name.",
     "is_auto": true,
@@ -15,12 +15,6 @@
       "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 92,
       "context": "case \"docx\":\n return i18n.t(\"Common:NewDocument\");\n case \"xlsx\":\n return i18n.t(\"Common:NewSpreadsheet\");\n case \"pptx\":\n return i18n.t(\"Common:NewPresentation\");\n case \"pdf\":\n return i18n.t(\"Common:NewPDFForm\");\n default:\n return i18n.t(\"Common:NewFolder\");\n }",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 271,
-      "context": "};\n \n const createNewPresentation = {\n id: \"personal_new-presentation\",\n key: \"new-presentation\",\n label: t(\"Common:NewPresentation\"),\n onClick: () => self.onCreate(\"pptx\"),\n icon: ActionsPresentationReactSvgUrl,\n };\n \n const createTemplateForm = {",
       "module": "/packages/client"
     },
     {

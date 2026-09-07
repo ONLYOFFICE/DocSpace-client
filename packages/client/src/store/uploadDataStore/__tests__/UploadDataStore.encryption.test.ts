@@ -42,7 +42,12 @@ import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
-import { prepareEncryptedUpload } from "@docspace/shared/services/private-room/encrypted-upload";
+import {
+  EncryptedReimportError,
+  prepareEncryptedUpload,
+  recoverDekForReimport,
+  sniffDse3Upload,
+} from "@docspace/shared/services/private-room/encrypted-upload";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 import { hasFileDek, setFileDek, takeFileDek } from "../helpers";
@@ -73,7 +78,12 @@ vi.mock(
   "@docspace/shared/services/private-room/encrypted-upload",
   async (orig) => {
     const actual = (await orig()) as Record<string, unknown>;
-    return { ...actual, prepareEncryptedUpload: vi.fn() };
+    return {
+      ...actual,
+      prepareEncryptedUpload: vi.fn(),
+      sniffDse3Upload: vi.fn(),
+      recoverDekForReimport: vi.fn(),
+    };
   },
 );
 
@@ -435,9 +445,7 @@ describe("UploadDataStore.startSessionFunc — encrypted upload preparation", ()
     expect(store.uploadedFilesHistory[0].error).toBe(
       "Common:EncryptionPrepareFailed",
     );
-    expect(toastr.error).toHaveBeenCalledWith(
-      "Common:EncryptionPrepareFailed",
-    );
+    expect(toastr.error).not.toHaveBeenCalled();
     expect(
       fakes.primaryProgressDataStore.setPrimaryProgressBarData,
     ).toHaveBeenLastCalledWith({
@@ -450,6 +458,155 @@ describe("UploadDataStore.startSessionFunc — encrypted upload preparation", ()
     expect(filesApi.startUploadSession).not.toHaveBeenCalled();
     expect(store.finishUploadFilesCalled).toBe(true);
     expect(finishUploadFiles.mock.calls).toEqual([[t, false]]);
+  });
+});
+
+describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)", () => {
+  const RAW_NAME = "9f8b7c6d-1a2b-4c3d-8e4f-556677889900.docx";
+  const dse3Header = {
+    encryptedName: new Uint8Array([1, 2, 3]),
+    fileNonce: new Uint8Array(16),
+  };
+  const identity = { publicKey: "id-pub" };
+
+  const setupReimportPendingFile = () => {
+    const harness = createTestUploadDataStore({
+      treeFoldersStore: { isPrivacyFolder: true },
+      userStore: userWithKeys(),
+    });
+    const { store } = harness;
+    const entry = makeUploadFile({
+      uniqueId: "reimport-pending",
+      file: makeBrowserFile(RAW_NAME, 2048),
+      toFolderId: 7,
+      encryptionRoomId: 55,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    return { ...harness, entry };
+  };
+
+  it("uploads the DSE3 blob unchanged with the recovered DEK instead of re-encrypting", async () => {
+    const { store, entry } = setupReimportPendingFile();
+    const dek = makeDek();
+    vi.mocked(sniffDse3Upload).mockResolvedValue(dse3Header as never);
+    vi.mocked(requireUnlock).mockResolvedValue(identity as never);
+    vi.mocked(recoverDekForReimport).mockResolvedValue({
+      dek,
+      realName: "secret.docx",
+      sourceFileId: 42,
+    } as never);
+    vi.mocked(filesApi.startUploadSession).mockReturnValue(
+      new Promise(() => {}) as never,
+    );
+
+    store.startSessionFunc(0, t);
+    await vi.waitFor(() =>
+      expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1),
+    );
+
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(vi.mocked(recoverDekForReimport).mock.calls).toEqual([
+      [
+        {
+          file: entry.file,
+          header: dse3Header,
+          roomId: 55,
+          userId: "user-1",
+          identity,
+        },
+      ],
+    ]);
+
+    expect(hasFileDek(store.files[0])).toBe(true);
+    expect(takeFileDek(store.files[0])).toBe(dek);
+    expect(store.files[0].encrypted).toBe(true);
+    expect(store.files[0].reimportRealName).toBe("secret.docx");
+
+    const sessionArgs = vi.mocked(filesApi.startUploadSession).mock.calls[0];
+    expect(sessionArgs[0]).toBe(7);
+    expect(sessionArgs[1]).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.docx$/,
+    );
+    expect(sessionArgs[1]).not.toBe(RAW_NAME);
+    expect(sessionArgs[2]).toBe(2048);
+    expect(sessionArgs[4]).toBe(true);
+  });
+
+  it("fails the file with the re-import message when no DEK can be recovered", async () => {
+    allowConsoleError("[ENCRYPTION] prepareFileForEncryptedUpload failed");
+    const { store } = setupReimportPendingFile();
+    vi.mocked(sniffDse3Upload).mockResolvedValue(dse3Header as never);
+    vi.mocked(requireUnlock).mockResolvedValue(identity as never);
+    vi.mocked(recoverDekForReimport).mockRejectedValue(
+      new EncryptedReimportError("no source file"),
+    );
+    const finishUploadFiles = replaceAction(store, "finishUploadFiles");
+
+    await store.startSessionFunc(0, t);
+
+    expect(hasFileDek(store.files[0])).toBe(false);
+    expect(store.files[0].error).toBe("Common:EncryptionReimportFailed");
+    expect(store.uploadedFilesHistory[0].error).toBe(
+      "Common:EncryptionReimportFailed",
+    );
+    expect(toastr.error).not.toHaveBeenCalled();
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(store.currentUploadNumber).toBe(0);
+    expect(finishUploadFiles).toHaveBeenCalled();
+  });
+
+  it("fails with the re-import message when the identity stays locked", async () => {
+    allowConsoleError("[ENCRYPTION] prepareFileForEncryptedUpload failed");
+    const { store } = setupReimportPendingFile();
+    vi.mocked(sniffDse3Upload).mockResolvedValue(dse3Header as never);
+    vi.mocked(requireUnlock).mockResolvedValue(null as never);
+    replaceAction(store, "finishUploadFiles");
+
+    await store.startSessionFunc(0, t);
+
+    expect(recoverDekForReimport).not.toHaveBeenCalled();
+    expect(store.files[0].error).toBe("Common:EncryptionReimportFailed");
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+  });
+});
+
+describe("UploadDataStore.checkChunkUpload — re-imported file display name", () => {
+  it("caches the recovered real name instead of the opaque browser file name", () => {
+    const harness = createTestUploadDataStore({ userStore: userWithKeys() });
+    const { store } = harness;
+    const entry = makeUploadFile({
+      uniqueId: "reimport-done",
+      encrypted: true,
+      inAction: true,
+      toFolderId: 7,
+      reimportRealName: "secret.docx",
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry, percent: 50 }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    replaceAction(store, "refreshFiles");
+    replaceAction(store, "wrapForSelfThenRoom");
+    setFileDek(store.files[0], makeDek());
+
+    callCheckChunkUpload(store, {
+      res: {
+        uploaded: true,
+        id: 555,
+        file: makeFileInfo({ id: 555, folderId: 7 }),
+      },
+      index: 1,
+      indexOfFile: 0,
+      chunksLength: 1,
+      resolve: vi.fn(),
+    });
+
+    expect(vi.mocked(rememberEncryptedFilename).mock.calls).toEqual([
+      [555, "secret.docx"],
+    ]);
   });
 });
 

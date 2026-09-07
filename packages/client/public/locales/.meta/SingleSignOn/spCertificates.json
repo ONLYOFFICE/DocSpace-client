@@ -1,14 +1,14 @@
 {
   "key_path": "spCertificates",
-  "content": "SP Certificates",
-  "content_en_sha1_hash": "ddb5368e6f2802175629771e18ffdae9be88db3d",
-  "created_at": "2025-05-19T21:30:50.156Z",
-  "updated_at": "2026-05-15T15:37:40.280Z",
+  "content": "Service provider certificates",
+  "content_en_sha1_hash": "61a72ec0e0811a545ec66103651eece46768c0b9",
+  "created_at": "2026-08-31T18:23:40.126Z",
+  "updated_at": "2026-08-31T20:52:08.968Z",
   "comment": {
-    "text": "This is a label for a section or setting related to Service Provider (SP) certificates within the Single Sign-On (SSO) configuration. It appears in the integration settings.",
+    "text": "Section header in the Single Sign-On integration settings that labels the area for managing Service Provider certificates.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:27.212Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:52:08.968Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

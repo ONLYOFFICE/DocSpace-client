@@ -1,13 +1,13 @@
 {
   "key_path": "RestoreBackupResetInfoWarningText",
-  "content": "All current passwords will be reset. Workspace users will get an email with the access restoration link.",
-  "content_en_sha1_hash": "148226528b143e6559e6265c392cc52350adec3d",
-  "created_at": "2026-08-13T22:44:18.707Z",
-  "updated_at": "2026-08-14T15:03:28.162Z",
+  "content": "All current passwords will be reset, and users will receive an email with a link to restore access.",
+  "content_en_sha1_hash": "fa012d56e005fbd786990f25dfb45b484b0e76c2",
+  "created_at": "2026-08-31T18:23:25.883Z",
+  "updated_at": "2026-08-31T18:44:07.483Z",
   "comment": {
-    "text": "Warning text displayed during the backup restoration process to inform users about the consequences of resetting passwords and the subsequent email notifications.",
+    "text": "Warning text displayed during the backup restoration process to inform users about the consequences of resetting passwords and the subsequent email notification for access recovery.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:03:28.162Z",
+    "updated_at": "2026-08-31T18:44:07.483Z",
     "model": "gemma4:26b"
   },
   "usage": [

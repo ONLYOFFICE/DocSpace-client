@@ -63,6 +63,7 @@ export type EncryptFileOptions = {
   dek?: Uint8Array;
   /** Encrypted into the DSE3 header - server never sees the real name. */
   fileName?: string;
+  isForm?: boolean;
   onProgress?: ProgressCallback;
 };
 
@@ -89,6 +90,7 @@ export async function encryptFile(
     encryptedName,
     options.onProgress,
     fileNonce,
+    options.isForm ?? false,
   );
 
   return { encryptedBlob, dek };

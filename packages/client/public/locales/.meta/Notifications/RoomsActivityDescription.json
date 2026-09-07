@@ -1,20 +1,20 @@
 {
   "key_path": "RoomsActivityDescription",
-  "content": "Get instant email notifications about new shared files/folders and activity inside your {{rooms}} and {{aiAgents}}.",
-  "content_en_sha1_hash": "0cdb4a22170c3752b1d8f39b5aebd28811a08b9e",
-  "created_at": "2025-11-27T11:56:59.215Z",
-  "updated_at": "2026-05-15T14:00:06.881Z",
+  "content": "Get instant email notifications about new shared files and folders and activity in {{files}}, {{rooms}}, {{forms}}, and {{aiAgents}}.",
+  "content_en_sha1_hash": "ab50f85af8e886e367102f5985883b013aade1cb",
+  "created_at": "2026-08-31T18:23:43.458Z",
+  "updated_at": "2026-08-31T20:04:37.002Z",
   "comment": {
-    "text": "This is a descriptive text explaining the \"Rooms Activity\" notification setting. It appears below a toggle button and informs the user about the types of email notifications they will receive. The variables `{{rooms}}` and `{{aiAgents}}` will be replaced with the localized terms for \"Rooms\" and \"AI Agents\" respectively.",
+    "text": "Explanatory text for the Rooms Activity notification toggle. It describes the scope of email alerts, using placeholders for various workspace entities (files, rooms, forms, and AI agents).",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:17:58.340Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:04:37.002Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
-      "line_number": 90,
-      "context": "isChecked={roomsActivitySubscription}\n dataTestId=\"rooms_activity_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"RoomsActivityDescription\", {\n rooms: t(\"Common:Rooms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n </div>",
+      "line_number": 92,
+      "context": "isChecked={roomsActivitySubscription}\n dataTestId=\"rooms_activity_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"RoomsActivityDescription\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

@@ -58,7 +58,7 @@
   "PrivacyPolicy": "Privacy policy",
   "PrivacyPolicyURL": "Privacy policy URL",
   "PrivacyPolicyURLHelpButton": "Provide a URL link to your Privacy Policy that must comply with applicable laws and regulations and that make clear how you collect, use, share, retain and otherwise process personal information.",
-  "ProfileDescription": "Here you can check the apps info to which you have granted the auth access, and revoke consent if needed.",
+  "ProfileDescription": "View the apps you have authorized to access your account and revoke access if needed.",
   "Read": "Read",
   "ReadOAuthGuide": "Read the OAuth 2.0 guide",
   "RedirectsURLS": "Redirects URLs",

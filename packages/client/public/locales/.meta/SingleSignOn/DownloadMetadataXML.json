@@ -1,14 +1,14 @@
 {
   "key_path": "DownloadMetadataXML",
-  "content": "Download SP metadata XML",
-  "content_en_sha1_hash": "69cdbb542da10c910280c5a6dd9347606d5ba14e",
-  "created_at": "2025-05-19T21:30:50.077Z",
-  "updated_at": "2026-05-15T15:37:40.282Z",
+  "content": "Download service provider metadata XML",
+  "content_en_sha1_hash": "0c6da7ce1b9fec8ad4e496b67c513aa4e6986d37",
+  "created_at": "2026-08-31T18:23:39.979Z",
+  "updated_at": "2026-08-31T21:07:02.906Z",
   "comment": {
-    "text": "This is the label for a button that allows users to download the Service Provider (SP) metadata XML file, typically used for Single Sign-On (SSO) configuration.",
+    "text": "Button label for downloading the XML file containing service provider metadata in the Single Sign-On integration settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:56.191Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T21:07:02.906Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

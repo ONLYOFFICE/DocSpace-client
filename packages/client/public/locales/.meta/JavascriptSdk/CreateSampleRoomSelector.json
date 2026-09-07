@@ -3,7 +3,7 @@
   "content": "Try a Room selector embed",
   "content_en_sha1_hash": "f46a4838abf70c92408a5809d13af1f85a1c5198",
   "created_at": "2026-08-26T16:05:57.722Z",
-  "updated_at": "2026-08-26T16:08:40.818Z",
+  "updated_at": "2026-09-04T07:59:41.664Z",
   "comment": {
     "text": "Header for a developer tool preset section that introduces a preview of the Room selector embed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 257,
+      "line_number": 256,
       "context": ");\n \n return (\n <PresetWrapper\n description={t(\"RoomSelectorDescription\")}\n header={t(\"CreateSampleRoomSelector\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     }

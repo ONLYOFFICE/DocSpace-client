@@ -89,6 +89,7 @@ export const Controls = ({
   <div
     className={classNames(styles.controls, { [styles.isMobile]: isMobile() }, className)}
     style={style}
+    data-testid="sdk_preset_controls"
     {...rest}
   >
     {children}
@@ -235,6 +236,7 @@ export const Frame = ({
       "--frame-height": height ?? "100%",
       ...style,
     } as React.CSSProperties}
+    data-testid="sdk_preview_frame"
     {...rest}
   >
     {children}

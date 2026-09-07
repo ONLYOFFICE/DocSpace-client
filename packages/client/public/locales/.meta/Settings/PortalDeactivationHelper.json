@@ -1,13 +1,13 @@
 {
   "key_path": "PortalDeactivationHelper",
-  "content": "If you wish to deactivate the workspace, all information associated with it will be blocked so that no one has access to it for a particular period. To do that, click the Deactivate button. A link to confirm the operation will be sent to the email address of the owner.\nIn case you want to come back to the workspace and continue using it, you will need to use the second link provided in the confirmation email. So, please, keep this email in a safe place.",
-  "content_en_sha1_hash": "fb6f2020673af1a76984219043d841001519b3e3",
-  "created_at": "2026-08-14T09:26:28.528Z",
-  "updated_at": "2026-08-14T15:33:56.478Z",
+  "content": "Click Deactivate to block access to your workspace and its data for a set period. A confirmation link will be sent to the owner's email.\nTo reactivate the workspace later, you'll need the second link in that same email so keep it somewhere safe.",
+  "content_en_sha1_hash": "65bbad6d3004fc534ccd13b53676b2fe7a0445be",
+  "created_at": "2026-08-31T18:23:41.734Z",
+  "updated_at": "2026-08-31T20:24:58.612Z",
   "comment": {
-    "text": "Instructional helper text on the portal deactivation settings page explaining the consequences of deactivation and the procedure for reactivation via email.",
+    "text": "Instructional helper text on the portal deactivation settings page explaining the deactivation process and the necessity of saving the reactivation link.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:33:56.478Z",
+    "updated_at": "2026-08-31T20:24:58.612Z",
     "model": "gemma4:26b"
   },
   "usage": [

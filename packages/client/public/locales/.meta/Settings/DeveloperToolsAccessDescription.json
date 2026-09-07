@@ -1,13 +1,13 @@
 {
   "key_path": "DeveloperToolsAccessDescription",
-  "content": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the owner and Full admins only, select Disable and click <strong>Save</strong> button.",
-  "content_en_sha1_hash": "6f182804467baa40bc3bd128681b4ca085131b3e",
-  "created_at": "2026-08-13T14:37:15.753Z",
-  "updated_at": "2026-08-14T14:58:32.831Z",
+  "content": "Choose whether all users (except guests) can see the Developer Tools section, or restrict it to just the owner and full admins by selecting Disabled.",
+  "content_en_sha1_hash": "ccd7f7bec37697ed99855dec817d7596ee598a59",
+  "created_at": "2026-08-31T18:23:40.906Z",
+  "updated_at": "2026-08-31T20:34:56.166Z",
   "comment": {
-    "text": "Description text for a security setting in the Portal Settings menu that explains how to control access to the Developer Tools section; includes an HTML <strong> tag for emphasis.",
+    "text": "Description text for a configuration setting in the Portal Settings security section, explaining the options for controlling access to the Developer Tools section.",
     "is_auto": true,
-    "updated_at": "2026-08-13T15:18:22.749Z",
+    "updated_at": "2026-08-31T20:34:56.166Z",
     "model": "gemma4:26b"
   },
   "usage": [

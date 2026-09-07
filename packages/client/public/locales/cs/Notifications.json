@@ -1,19 +1,19 @@
 {
-  "ActionsWithFilesDescription": "Znacení zvýrazní aktivitu souborů — nahrání, úpravy nebo sdílení — v sekcích {{rooms}}, {{shared}}, {{documents}} a {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Odznaky zvýrazňují aktivitu souborů, jako je nahrávání, úpravy a sdílení, v aplikacích {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}.",
   "AdminSetupRequired": "Požadovaná konfigurace administrace",
   "Badges": "Odznaky",
   "DailyFeed": "Denní kanál {{organizationName}} {{productName}}",
-  "DailyFeedDescription": "Přečtěte si novinky a události z vašeho {{organizationName}} {{productName}} v denním přehledu.",
+  "DailyFeedDescription": "Dostávejte denní přehled novinek a událostí z {{organizationName}} {{productName}}.",
   "FileActivityNotify": "Upozornění na aktivitu souborů",
   "IsNotValid": "Není platné",
   "LdapEmailTooltip": "Tento uživatelský účet je načten z LDAP. Uživatelova e-mailová adresa nebyla zadána a aktuální byla vygenerována automaticky a nelze ji použít k odesílání oznámení.",
   "NotConfigured": "Není nakonfigurováno",
   "Notifications": "Oznámení",
-  "RoomsActivityDescription": "Získejte okamžité e-mailové upozornění na nové sdílené soubory/složky a aktivitu uvnitř vašich {{rooms}} a {{aiAgents}}.",
-  "RoomUpdateNotify": "Sdílený obsah, aktivita v sekcích {{rooms}} a {{aiAgents}}",
+  "RoomsActivityDescription": "Získejte okamžitá e-mailová upozornění na nové sdílené soubory a složky a na aktivitu v {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}.",
+  "RoomUpdateNotify": "Aktivita v {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}",
   "SettingUpNotifications": "Nastavení upozornění",
   "SuccessConnected": "{{serviceName}} bylo úspěšně připojeno jako notifikační kanál. Nyní tam budete dostávat aktualizace.",
   "SuccessDisconnected": "{{serviceName}} bylo úspěšně odpojeno jako notifikační kanál. Tam nebudou odesílány žádné další notifikace.",
   "UsefulTips": "Užitečné tipy pro {{organizationName}} {{productName}}",
-  "UsefulTipsDescription": "Získejte užitečné příručky o {{organizationName}} {{productName}}"
+  "UsefulTipsDescription": "Objevte užitečné tipy a příručky pro používání {{organizationName}} {{productName}}."
 }

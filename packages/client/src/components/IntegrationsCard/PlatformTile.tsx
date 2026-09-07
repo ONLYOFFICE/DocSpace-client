@@ -48,7 +48,6 @@ export type PlatformTileProps = {
   iconAlt?: string;
   hideIcon?: boolean;
   muted?: boolean;
-  wide?: boolean;
   isBold?: boolean;
   linkLabel?: string;
   href?: string;
@@ -58,14 +57,17 @@ export type PlatformTileProps = {
 
 export const PlatformTileGrid = ({
   children,
-  compact = false,
+  columns,
+  testId,
 }: {
   children: React.ReactNode;
-  compact?: boolean;
+  columns?: 2;
+  testId?: string;
 }) => (
   <div
     className={styles.integrationsGrid}
-    data-compact={compact ? "true" : undefined}
+    data-columns={columns}
+    data-testid={testId}
   >
     {children}
   </div>
@@ -77,7 +79,6 @@ export const PlatformTile = ({
   iconAlt,
   hideIcon = false,
   muted = false,
-  wide = false,
   isBold = false,
   linkLabel,
   href,
@@ -121,7 +122,6 @@ export const PlatformTile = ({
   const tileProps = {
     className: styles.integrationTile,
     "data-variant": muted ? "muted" : undefined,
-    "data-span": wide ? "2" : undefined,
     "data-testid": testId,
   };
 

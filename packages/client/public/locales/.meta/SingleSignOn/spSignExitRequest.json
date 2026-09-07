@@ -1,14 +1,14 @@
 {
   "key_path": "spSignExitRequest",
-  "content": "Sign Logout Requests",
-  "content_en_sha1_hash": "fd1f4f7fefacb45ef56a56caa93e85ad86fd41e8",
-  "created_at": "2025-05-19T21:30:50.172Z",
-  "updated_at": "2026-05-15T15:37:40.283Z",
+  "content": "Sign logout requests",
+  "content_en_sha1_hash": "26a0dc057bfb63eac8fa6354b1681473826c9f0a",
+  "created_at": "2026-08-31T18:23:40.161Z",
+  "updated_at": "2026-08-31T20:50:41.362Z",
   "comment": {
-    "text": "This is a checkbox label in the Single Sign-On settings. It allows administrators to enable or disable the signing of logout requests sent by the service provider (ONLYOFFICE DocSpace).",
+    "text": "Checkbox label in the Single Sign-On integration settings used to enable or disable the signing of logout requests.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:20.916Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:50:41.362Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,14 +1,14 @@
 {
   "key_path": "MCPDescriptionServers",
-  "content": "Use {{mcpServers}} connected by the administrator to enhance chat experience with AI. {{mcpServers}} can assist with data extraction, summaries, smart suggestions, etc.",
-  "content_en_sha1_hash": "64a638703aa5554ea60107211b1d5bfa55d866bd",
-  "created_at": "2025-12-19T10:17:03.457Z",
-  "updated_at": "2026-07-28T07:30:59.841Z",
+  "content": "Use {{mcpServers}} set up by your admin to power AI chat with extra capabilities, like data extraction, summaries, and smart suggestions",
+  "content_en_sha1_hash": "fcd77b5ecc0d9e532453a45d7298f61646d5ea12",
+  "created_at": "2026-08-31T18:23:15.914Z",
+  "updated_at": "2026-08-31T18:54:06.559Z",
   "comment": {
-    "text": "This is a descriptive text within a dialog, explaining how administrator-connected AI servers enhance the chat experience. It includes the variable `{{mcpServers}}` which will be replaced by the localized term for \"AI servers\".",
+    "text": "Info description in the Agent creation/editing dialog explaining how configured MCP servers enhance AI chat capabilities. The {{mcpServers}} variable represents the title of the MCP settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:01:51.127Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:54:06.559Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

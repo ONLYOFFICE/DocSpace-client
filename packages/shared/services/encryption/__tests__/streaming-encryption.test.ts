@@ -169,6 +169,35 @@ describe("streamingEncryption", () => {
       expect(parsed.flags & 0x01).toBe(0);
     });
 
+    it("sets the IS_FORM flag and round-trips isForm=true", () => {
+      const nonce = freshNonce();
+      const headerBytes = writeDSE3Header(1, nonce, null, true);
+      const parsed = parseDSE3Header(headerBytes);
+
+      expect(parsed.flags & 0x02).toBe(0x02);
+      expect(parsed.isForm).toBe(true);
+    });
+
+    it("leaves the IS_FORM flag clear by default", () => {
+      const nonce = freshNonce();
+      const headerBytes = writeDSE3Header(1, nonce, null);
+      const parsed = parseDSE3Header(headerBytes);
+
+      expect(parsed.flags & 0x02).toBe(0);
+      expect(parsed.isForm).toBe(false);
+    });
+
+    it("combines IS_FORM with HAS_ENCRYPTED_NAME independently", () => {
+      const nonce = freshNonce();
+      const fakeName = new Uint8Array([10, 20, 30]);
+      const headerBytes = writeDSE3Header(2, nonce, fakeName, true);
+      const parsed = parseDSE3Header(headerBytes);
+
+      expect(parsed.flags & 0x01).toBe(0x01);
+      expect(parsed.isForm).toBe(true);
+      expect(Array.from(parsed.encryptedName!)).toEqual(Array.from(fakeName));
+    });
+
     it("throws InvalidFormatError when magic bytes are wrong", () => {
       const nonce = freshNonce();
       const good = writeDSE3Header(1, nonce, null);

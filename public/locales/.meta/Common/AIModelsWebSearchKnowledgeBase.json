@@ -3,7 +3,7 @@
   "content": "Models, Web search, Knowledge base",
   "content_en_sha1_hash": "a8870b4b33952ec32b66cf2527f840763dfa3d77",
   "created_at": "2026-07-03T11:07:19.098Z",
-  "updated_at": "2026-08-24T22:30:00.680Z",
+  "updated_at": "2026-09-04T07:59:41.636Z",
   "comment": {
     "text": "A label in an AI features banner within the portal settings, listing available capabilities as a comma-separated list of nouns.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
-      "line_number": 256,
+      "line_number": 258,
       "context": "</div>\n ) : (\n <div className={styles.featureRow}>\n <AIIcon className={styles.payIcon} />\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"Common:AIModelsWebSearchKnowledgeBase\")}\n </Text>\n </div>\n )}\n <div className={styles.featureRow}>\n <PriceIcon />",
       "module": "/packages/client"
     }

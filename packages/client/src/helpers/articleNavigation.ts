@@ -190,6 +190,25 @@ export const getSectionTrashTarget = (
 };
 
 /**
+ * Full filter URL of the trash that belongs to the section `pathname` is in,
+ * scoped to that section's content — for links that point at the trash from
+ * outside it (the "moved to Trash" toast), so they do not land on the
+ * unscoped Files trash aggregate.
+ */
+export const getSectionTrashUrl = (
+  trashFolderId: number | string,
+  pathname: string,
+): string => {
+  const { path, folderType } = getSectionTrashTarget(pathname);
+
+  const filter = FilesFilter.getDefault();
+  filter.folder = String(trashFolderId);
+  filter.folderType = folderType;
+
+  return `${path}?${filter.toUrlParams()}`;
+};
+
+/**
  * Map the current location to the active NavMenu item id (a folder id).
  *
  * Templates share the `/rooms/shared` path with the Rooms list and are told

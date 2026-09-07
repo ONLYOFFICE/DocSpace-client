@@ -1,8 +1,8 @@
 {
-  "ActiveSessions": "Actieve Sessies",
+  "ActiveSessions": "Actieve sessies",
   "AutoDeleteTitle": "Alle sessies die ouder zijn dan 60 dagen worden automatisch verwijderd.",
   "ChangePasswordAfterLoggingOut": "Wachtwoord wijzigen na uitloggen",
-  "ConnectSocialNetworks": "Sluit uw sociale netwerken aan",
+  "ConnectSocialNetworks": "Verbind uw accounts",
   "DescriptionForSecurity": "Voor meer veiligheid moet u uw wachtwoord wijzigen.",
   "DesktopTheme": "Synchroniseren met desktop Editor instellingen",
   "DesktopThemeDescription": "Schakel automatisch tussen lichte en donkere thema's, afhankelijk van het huidige thema van de desktop editors.",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "E-mail niet geverifieerd",
   "ErrorAccountAlreadyUse": "Gekoppelde account al in gebruik door een andere gebruiker",
   "LogoutActiveConnection": "Uitloggen van actieve verbinding",
-  "LogoutAllActiveSessionsDescription": "Alle actieve verbindingen behalve deze verbinding worden uitgelogd, omdat deze momenteel in gebruik is.",
+  "LogoutAllActiveSessionsDescription": "Alle actieve sessies behalve de huidige worden beëindigd. De huidige sessie blijft actief.",
   "LogoutBtn": "Uitloggen",
-  "LogoutDescription": "Opmerking. Alle actieve verbindingen behalve deze verbinding worden uitgelogd, omdat deze momenteel in gebruik is.",
+  "LogoutDescription": "Opmerking. Alle actieve sessies behalve de huidige worden beëindigd. De huidige sessie blijft actief.",
   "LogoutFrom": "Uitloggen van {{platform}} {{browser}}?",
   "MyProfile": "Mijn profiel",
   "NotificationsChannels": "Meldingkanalen",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Back-up codes tonen",
   "SuccessLogout": "De actieve verbinding werd afgemeld: {{platform}}, {{browser}}",
   "TelegramAccount": "Telegram account",
-  "TelegramAccountDescription": "Om TelegramBot met uw account te verbinden, volg dan de geheime link en klik op de “Verbind Telegram” knop.",
+  "TelegramAccountDescription": "Om meldingen van uw account in Telegram te ontvangen, volgt u de onderstaande link of klikt u op Verbinden.",
   "TelegramAccountDisconnect": "Telegram verbreken",
   "TelegramAccountDisconnectDescription": "Uw @{{username}} account is verbonden voor telegram notificaties. U kunt zich van dit account loskoppelen. In dat geval ontvangt u geen notificaties.",
   "TerminateAllSessions": "Beëindig alle sessies behalve de huidige",
-  "TwoFactorDescription": "Twee-factor authenticatie via een code-genererende app was ingeschakeld voor alle gebruikers door de beheerder."
+  "TwoFactorDescription": "Twee-factor authenticatie via een authenticator app is ingeschakeld voor alle gebruikers door de beheerder."
 }

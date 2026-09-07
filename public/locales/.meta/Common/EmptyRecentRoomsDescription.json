@@ -1,13 +1,13 @@
 {
   "key_path": "EmptyRecentRoomsDescription",
-  "content": "Files you've recently opened in Rooms show up here, and stick around for 90 days.",
-  "content_en_sha1_hash": "1759e510564b67753b48ebef11224e0b22232345",
-  "created_at": "2026-08-21T15:04:01.896Z",
-  "updated_at": "2026-08-21T15:08:21.211Z",
+  "content": "Files you've recently opened in Rooms show up here and stick around for 90 days.",
+  "content_en_sha1_hash": "6f721f2456d33870c9da3e34b8b754f2c25e4c90",
+  "created_at": "2026-08-31T18:23:03.810Z",
+  "updated_at": "2026-08-31T19:12:02.830Z",
   "comment": {
-    "text": "Placeholder text in the empty state of the Recent Rooms section, informing users that recently opened files are stored for 90 days.",
+    "text": "Placeholder text in the empty state of the Rooms section, informing the user that recently opened files will appear here and remain for 90 days.",
     "is_auto": true,
-    "updated_at": "2026-08-21T15:08:21.211Z",
+    "updated_at": "2026-08-31T19:12:02.830Z",
     "model": "gemma4:26b"
   },
   "usage": [

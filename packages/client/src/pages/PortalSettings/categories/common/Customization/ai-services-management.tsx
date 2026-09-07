@@ -198,7 +198,7 @@ const AiServicesManagementComponent = ({
       setAiServicesEnabled(false);
 
       if (defaultFolderType === FolderType.AIAgents) {
-        await updateDefaultFolderType(FolderType.Rooms);
+        await updateDefaultFolderType(FolderType.DEFAULT);
       }
 
       await fetchTreeFolders();

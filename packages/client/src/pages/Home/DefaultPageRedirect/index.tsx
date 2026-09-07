@@ -37,42 +37,32 @@ import { inject, observer } from "mobx-react";
 import { Navigate } from "react-router";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { FolderType } from "@docspace/shared/enums";
-import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 
-import { getUrlByDefaultFolderType } from "SRC_DIR/helpers/utils";
-import { isDashboardVisited } from "SRC_DIR/helpers/dashboardVisited";
+import { getDefaultStartPageUrl } from "SRC_DIR/helpers/defaultStartPage";
 
 type Props = {
   defaultFolderType?: SettingsStore["defaultFolderType"];
-  userId?: string;
+  aiServicesEnabled?: SettingsStore["aiServicesEnabled"];
+  isGuest?: boolean;
 };
 
-const DefaultPageRedirectComponent = ({ defaultFolderType, userId }: Props) => {
-  const val = localStorage.getItem("useDocSpace");
+const DefaultPageRedirectComponent = ({
+  defaultFolderType,
+  aiServicesEnabled,
+  isGuest,
+}: Props) => {
+  const defaultUrl = getDefaultStartPageUrl(defaultFolderType, {
+    aiServicesEnabled,
+    isGuest,
+  });
 
-  const defaultUrl = getUrlByDefaultFolderType(
-    defaultFolderType || FolderType.Rooms,
-  );
-
-  if (val === "old" || isOAuthFrame()) {
-    return <Navigate to={defaultUrl} replace />;
-  }
-
-  // First visit (null) — write "new" via the URL handler so the value is stored explicitly
-  if (val === null) return <Navigate to="/dashboard?design=new" replace />;
-
-  // The Overview introduces the new design, so it gets the first load. Once the
-  // user has actually been there, entry belongs to their Default Homepage
-  // setting instead — the same routes the sidebar and the Overview tiles use.
-  if (isDashboardVisited(userId)) return <Navigate to={defaultUrl} replace />;
-
-  return <Navigate to="/dashboard" replace />;
+  return <Navigate to={defaultUrl} replace />;
 };
 
 export const DefaultPageRedirect = inject(
   ({ settingsStore, userStore }: TStore) => ({
     defaultFolderType: settingsStore.defaultFolderType,
-    userId: userStore.user?.id,
+    aiServicesEnabled: settingsStore.aiServicesEnabled,
+    isGuest: userStore.user?.isVisitor ?? false,
   }),
 )(observer(DefaultPageRedirectComponent));

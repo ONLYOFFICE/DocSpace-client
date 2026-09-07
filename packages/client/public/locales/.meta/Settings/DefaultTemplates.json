@@ -1,14 +1,14 @@
 {
   "key_path": "DefaultTemplates",
-  "content": "Default Templates",
-  "content_en_sha1_hash": "25a73de07cb5568979d641c9cdc35f2af9be1da8",
-  "created_at": "2026-02-18T14:56:26.335Z",
-  "updated_at": "2026-05-15T14:00:06.774Z",
+  "content": "Templates",
+  "content_en_sha1_hash": "f25b700ed9f092123a43acb205a6869342cf9dd6",
+  "created_at": "2026-08-31T18:23:40.830Z",
+  "updated_at": "2026-08-31T20:36:26.748Z",
   "comment": {
-    "text": "This is a section title in the portal settings, referring to the management of default document templates.",
+    "text": "Page title and menu item label for the section in Portal Settings where default templates are configured.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:24:55.117Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:36:26.748Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

@@ -1491,6 +1491,7 @@
   "Open": "Отвори",
   "OpenAgentSettings": "Отвори подешавања агента",
   "OpenAISettings": "Отвори АИ подешавања",
+  "OpenGeneratedDocument": "Отвори генерисани документ",
   "OpenFileMessage": "Датотека документа коју отворите биц́е конвертована у Office Open XML формат ради брзог прегледа и уређивања.",
   "OpenKeysManagement": "Отвори управљање кључевима",
   "OpenLocation": "Отвори локацију",

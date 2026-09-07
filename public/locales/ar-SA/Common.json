@@ -1491,6 +1491,7 @@
   "Open": "فتح",
   "OpenAgentSettings": "فتح إعدادات الوكيل",
   "OpenAISettings": "فتح إعدادات الذكاء الاصطناعي",
+  "OpenGeneratedDocument": "فتح المستند المُنشأ",
   "OpenFileMessage": "سيتم تحويل ملف المستند الذي تفتحه إلى صيغةOffice Open XML لعرضه وتحريره بسرعة.",
   "OpenKeysManagement": "فتح إدارة المفاتيح",
   "OpenLocation": "افتح الموقع",

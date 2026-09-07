@@ -1491,6 +1491,7 @@
   "Open": "開く",
   "OpenAgentSettings": "エージェント設定を開く",
   "OpenAISettings": "AI設定を開く",
+  "OpenGeneratedDocument": "生成されたドキュメントを開く",
   "OpenFileMessage": "開いた文書ファイルは、より高速に表示、編集するようにOffice Open XML形式に変換されます。",
   "OpenKeysManagement": "鍵の管理を開く",
   "OpenLocation": "場所を開く",

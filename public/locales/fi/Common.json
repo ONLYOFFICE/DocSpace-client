@@ -1491,6 +1491,7 @@
   "Open": "Avaa",
   "OpenAgentSettings": "Avaa agentin asetukset",
   "OpenAISettings": "Avaa tekoälyasetukset",
+  "OpenGeneratedDocument": "Avaa luotu asiakirja",
   "OpenFileMessage": "Avaamasi asiakirja muunnetaan Office Open XML muotoon nopeampaa katselua ja muokkausta varten.",
   "OpenKeysManagement": "Avaa avainten hallinta",
   "OpenLocation": "Avaa sijainti",

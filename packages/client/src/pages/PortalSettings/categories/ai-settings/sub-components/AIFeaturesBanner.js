@@ -146,6 +146,8 @@ const AIFeaturesBanner = ({
   isAiSearchServiceOn,
   isCardLinkedToPortal,
   isWebSearchTab,
+  aiToolsFeePercent,
+  aiSearchFeePercent,
 }) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -214,34 +216,38 @@ const AIFeaturesBanner = ({
     );
   };
 
-  const pricingNote = (
-    <Text as="div" fontSize="12px" fontWeight={600}>
-      <CommonTrans
-        i18nKey={
-          isWebSearchTab ? "AIExaPricingNote" : "AIOpenRouterPricingNote"
-        }
-        namespaces={["Common"]}
-        components={{
-          1: (
-            <Link
-              type={LinkType.page}
-              href={isWebSearchTab ? EXA_PRICING_URL : OPENROUTER_PRICING_URL}
-              target={LinkTarget.blank}
-              color="accent"
-              fontSize="12px"
-              isHovered
-              fontWeight={600}
-            />
-          ),
-        }}
-      />
-    </Text>
-  );
+  const feePercent = isWebSearchTab ? aiSearchFeePercent : aiToolsFeePercent;
+
+  const pricingNote =
+    feePercent == null ? null : (
+      <Text as="div" fontSize="12px" fontWeight={600}>
+        <CommonTrans
+          i18nKey={
+            isWebSearchTab ? "AIExaPricingNote" : "AIOpenRouterPricingNote"
+          }
+          namespaces={["Common"]}
+          values={{ percent: feePercent }}
+          components={{
+            1: (
+              <Link
+                type={LinkType.page}
+                href={isWebSearchTab ? EXA_PRICING_URL : OPENROUTER_PRICING_URL}
+                target={LinkTarget.blank}
+                color="accent"
+                fontSize="12px"
+                isHovered
+                fontWeight={600}
+              />
+            ),
+          }}
+        />
+      </Text>
+    );
 
   const features = (
     <div className={styles.features}>
       {isEnabled ? (
-        <div className={styles.featureRow}>{pricingNote}</div>
+        pricingNote && <div className={styles.featureRow}>{pricingNote}</div>
       ) : (
         <>
           {isWebSearchTab ? (
@@ -259,10 +265,12 @@ const AIFeaturesBanner = ({
               </Text>
             </div>
           )}
-          <div className={styles.featureRow}>
-            <PriceIcon />
-            {pricingNote}
-          </div>
+          {pricingNote ? (
+            <div className={styles.featureRow}>
+              <PriceIcon />
+              {pricingNote}
+            </div>
+          ) : null}
           <div className={styles.featureRow}>
             <WalletIcon className={styles.payIcon} />
             <Text fontSize="12px" fontWeight={600}>

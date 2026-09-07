@@ -35,6 +35,7 @@
 
 import { FC, useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
+import { runInAction } from "mobx";
 
 import { ShareAccessRights } from "@docspace/ui-kit/enums";
 
@@ -104,11 +105,17 @@ const TagManagement: FC<TagManagementWrapperProps> = ({
   //
   // The socket says the same thing for a bind, a moment later; applying a
   // change that is already applied writes nothing.
+  //
+  // The three writes go in one transaction, so what observes them re-renders
+  // once. Without it the rollback of a failed request - which runs after an
+  // await, outside React's own batching - would schedule a render per store.
   const handleTagsChanged = useCallback(
     (change: TagChange) => {
-      applyTagChangeToRooms(change);
-      applyTagChangeToOpenRoom(change);
-      applyTagChangeToTags(change);
+      runInAction(() => {
+        applyTagChangeToRooms(change);
+        applyTagChangeToOpenRoom(change);
+        applyTagChangeToTags(change);
+      });
 
       onTagsChanged?.(change);
     },

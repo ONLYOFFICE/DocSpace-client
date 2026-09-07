@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { useMutationState } from "@tanstack/react-query";
 
 import {
@@ -74,23 +74,29 @@ const labelOf = (variables: unknown): string | undefined => {
   return undefined;
 };
 
+const isSameSet = (a: ReadonlySet<string>, b: ReadonlySet<string>) =>
+  a.size === b.size && [...a].every((label) => b.has(label));
+
 const useLabelsInFlight = (mutationKey: readonly unknown[]) => {
   const variables = useMutationState({
     filters: { mutationKey, status: "pending" },
     select: (mutation) => mutation.state.variables,
   });
 
-  // Joined and split again rather than kept as an array: `useMutationState`
-  // hands back a new array on every render, and a set built straight from it
-  // would be new every render too - and with it every memo built on the set.
-  // A string of the names changes only when the names do, and a tag name is a
-  // line of typing, so it never carries the newline they are joined with.
-  const key = variables
-    .map(labelOf)
-    .filter((label) => label !== undefined)
-    .join("\n");
+  // The same set object back while the names are the same, compared as sets
+  // rather than as some string they were joined into: a name is whatever the
+  // server accepted, and a separator it could contain would split one name
+  // into two. `useMutationState` hands back a new array on every render, so
+  // without this every memo built on the set would be rebuilt on every render.
+  const next = new Set(
+    variables.map(labelOf).filter((label) => label !== undefined),
+  );
 
-  return useMemo(() => new Set(key === "" ? [] : key.split("\n")), [key]);
+  const kept = useRef<ReadonlySet<string>>(next);
+
+  if (!isSameSet(next, kept.current)) kept.current = next;
+
+  return kept.current;
 };
 
 /** The tags this list is waiting on, whichever request they were sent by. */

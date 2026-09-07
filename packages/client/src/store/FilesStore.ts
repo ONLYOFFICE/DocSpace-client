@@ -1087,18 +1087,49 @@ class FilesStore {
   applyTagChange = (change: TagChange) => {
     const roomId = isSharedTagChange(change) ? undefined : change.roomId;
 
-    this.folders.forEach((folder, index) => {
-      if (roomId !== undefined && String(folder.id) !== String(roomId)) return;
+    const patched: (TFolder | TRoom)[] = [];
+
+    const next = this.folders.map((folder) => {
+      if (roomId !== undefined && String(folder.id) !== String(roomId)) {
+        return folder;
+      }
 
       const tags = "tags" in folder ? folder.tags : undefined;
 
-      if (!Array.isArray(tags)) return;
+      if (!Array.isArray(tags)) return folder;
 
-      const next = applyTagChangeToRoomTags(tags, change);
+      const tagsNext = applyTagChangeToRoomTags(tags, change);
 
-      if (next !== tags) {
-        this.updateFolder(index, { ...folder, tags: next });
-      }
+      if (tagsNext === tags) return folder;
+
+      const updated = { ...folder, tags: tagsNext };
+
+      patched.push(updated);
+
+      return updated;
+    });
+
+    if (patched.length === 0) return;
+
+    // One write rather than one per room. `updateFolder` would do a write and
+    // a selection pass each time, and every write to the list invalidates the
+    // computed the selection pass reads - so a rename across many rooms paid
+    // for the whole list again per room. The rooms themselves are the same
+    // ones, so nothing needs re-subscribing.
+    this.folders = next;
+
+    // Selection and buffer selection hold the objects that were just replaced,
+    // so they are re-pointed at the new ones. Only the rooms they actually
+    // hold: `updateSelection` writes to both of them and scans the computed
+    // list, and doing that for a room nobody selected is a render for nothing.
+    const selectedIds = new Set<number | string | undefined>(
+      this.selection.map((item) => item.id),
+    );
+
+    selectedIds.add(this.bufferSelection?.id);
+
+    patched.forEach((folder) => {
+      if (selectedIds.has(folder.id)) this.updateSelection(folder);
     });
   };
 

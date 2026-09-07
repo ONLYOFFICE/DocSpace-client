@@ -36,6 +36,7 @@
 "use client";
 
 import React from "react";
+import { runInAction } from "mobx";
 
 import type { TFolder } from "@docspace/shared/api/files/types";
 import {
@@ -66,30 +67,37 @@ export const useTagsChanged = () => {
 
   return React.useCallback(
     (change: TagChange) => {
-      filesListStore.applyTagChange(change);
-      tagsStore.applyChange(change);
+      // All of it in one transaction, so what observes these stores re-renders
+      // once. Without it the rollback of a failed request - which runs after
+      // an await, outside React's own batching - would schedule a render per
+      // store it touches.
+      runInAction(() => {
+        filesListStore.applyTagChange(change);
+        tagsStore.applyChange(change);
 
-      // The panel keeps its own copy of the room it is showing - which is the
-      // room this is about only when the change names one and names that one.
-      const selected = infoPanelStore.selection;
-      const tags = (selected as unknown as { tags?: string[] })?.tags;
+        // The panel keeps its own copy of the room it is showing - which is
+        // the room this is about only when the change names one and names
+        // that one.
+        const selected = infoPanelStore.selection;
+        const tags = (selected as unknown as { tags?: string[] })?.tags;
 
-      if (!selected || !Array.isArray(tags)) return;
+        if (!selected || !Array.isArray(tags)) return;
 
-      if (
-        !isSharedTagChange(change) &&
-        String(change.roomId) !== String(selected.id)
-      )
-        return;
+        if (
+          !isSharedTagChange(change) &&
+          String(change.roomId) !== String(selected.id)
+        )
+          return;
 
-      const next = applyTagChangeToRoomTags(tags, change);
+        const next = applyTagChangeToRoomTags(tags, change);
 
-      if (next !== tags) {
-        infoPanelStore.setSelection({
-          ...selected,
-          tags: next,
-        } as unknown as TFolder);
-      }
+        if (next !== tags) {
+          infoPanelStore.setSelection({
+            ...selected,
+            tags: next,
+          } as unknown as TFolder);
+        }
+      });
     },
     [filesListStore, infoPanelStore, tagsStore],
   );

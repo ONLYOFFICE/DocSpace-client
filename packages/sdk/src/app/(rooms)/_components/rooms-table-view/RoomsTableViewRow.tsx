@@ -66,7 +66,6 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-
 import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
@@ -96,6 +95,7 @@ import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import { getRoomIconLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import useRoomContextMenuModel from "../../_hooks/useRoomContextMenuModel";
+import { useTagsChanged } from "../../_hooks/useTagsChanged";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 
 import type {
@@ -210,12 +210,9 @@ const RoomsTableViewRow = observer(
       [onTagClick],
     );
 
-    // TEMPORARY: refresh the room after tag bind/unbind/create via callback.
-    // Replace with WebSocket MODIFY_FOLDER subscription once sockets are
-    // enabled in the SDK (initSocket={false} in providers).
-    const onRoomTagsChanged = React.useCallback(() => {
-      onRoomChanged?.(item.id as number);
-    }, [item.id, onRoomChanged]);
+    // The stores are patched from the change itself, so nothing is fetched
+    // again - see useTagsChanged.
+    const onRoomTagsChanged = useTagsChanged();
 
     const onUnpinClick = React.useCallback(async () => {
       if (!canUnpin) return;
@@ -281,8 +278,7 @@ const RoomsTableViewRow = observer(
 
     const itemSnapshot = { ...observableItem };
 
-    const isPrivateRoomItem =
-      (item as { private?: boolean }).private === true;
+    const isPrivateRoomItem = (item as { private?: boolean }).private === true;
 
     // Private rooms render like every other room — the literal letter/cover
     // icon — with the encrypted state shown via the green shield badge from
@@ -429,4 +425,3 @@ const RoomsTableViewRow = observer(
 );
 
 export { RoomsTableViewRow };
-

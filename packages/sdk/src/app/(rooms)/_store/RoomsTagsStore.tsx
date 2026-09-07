@@ -39,6 +39,8 @@ import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
+import { applyTagChangeToTagList } from "@docspace/shared/components/tag-management/TagManagement.utils";
+import type { TagChange } from "@docspace/shared/components/tag-management/TagManagement.types";
 
 class RoomsTagsStore {
   tags: string[] = [];
@@ -90,6 +92,16 @@ class RoomsTagsStore {
     await this.inflight;
   };
 
+  // A tag created, renamed or removed somewhere in the app: the list the
+  // filter offers is patched in place rather than fetched again - the change
+  // already says everything the fetch would. `upsertTags` alone could not do
+  // it: it only ever adds, so a renamed or removed tag stayed in the list.
+  applyChange = (change: TagChange) => {
+    const next = applyTagChangeToTagList(this.tags, change);
+
+    if (next !== this.tags) this.tags = next;
+  };
+
   upsertTags = (newTags: string[]) => {
     if (!Array.isArray(newTags) || newTags.length === 0) return;
     const set = new Set(this.tags);
@@ -130,4 +142,3 @@ export const useRoomsTagsStore = () => {
 };
 
 export default RoomsTagsStore;
-

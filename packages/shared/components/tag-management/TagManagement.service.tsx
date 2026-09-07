@@ -195,11 +195,13 @@ export const useTagManagementService = ({
         );
 
       try {
-        cancelEdit();
-
-        // Refusing is an answer, not a failure, so nothing is sent and there
-        // is nothing to report.
+        // Refusing is an answer, not a failure: nothing is sent, there is
+        // nothing to report - and the editor stays open with the name that was
+        // typed, which is the whole point of having been asked. Closing it
+        // first would make "Cancel" mean "throw my typing away".
         if (!(await confirmEditTag())) return;
+
+        cancelEdit();
 
         rename(oldLabel, newLabel);
 

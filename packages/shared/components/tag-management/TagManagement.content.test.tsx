@@ -640,6 +640,32 @@ describe("<TagManagementContent />", () => {
       expect(toastError).not.toHaveBeenCalled();
     });
 
+    // Being asked is what makes changing one's mind possible, so a refusal
+    // leaves the row exactly as it was left: still in edit mode, with the name
+    // that was typed. Closing the editor would make the dialog's "Cancel"
+    // throw the typing away - and the name would have to be retyped from the
+    // old one.
+    it("keeps the editor open with the typed name when the user refuses", async () => {
+      const confirmEditTag = vi.fn(() => Promise.resolve(false));
+
+      renderContent(fullAccess, confirmEditTag);
+
+      await renameTo("freeTag", "renamedTag");
+
+      await waitFor(() => {
+        expect(confirmEditTag).toHaveBeenCalled();
+      });
+
+      const input =
+        await screen.findByTestId<HTMLInputElement>("edit_tag_input");
+
+      expect(input.value).toBe("renamedTag");
+      // And the row is not listed under either name yet.
+      expect(
+        screen.queryByTestId("tag_item_renamedTag"),
+      ).not.toBeInTheDocument();
+    });
+
     it("lets a tag be respelled in another case", async () => {
       renderContent();
 

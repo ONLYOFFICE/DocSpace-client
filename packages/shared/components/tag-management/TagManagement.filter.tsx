@@ -214,19 +214,13 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
-      switch (event.key) {
-        case "Enter":
-          handleCreateTag();
-          break;
-        case "Escape":
-          setInputValue("");
-          clearSearch();
-          break;
-        default:
-          break;
-      }
+      // Escape is not here: clearing the search is one step of the ladder the
+      // list owns - see useTagManagementService - so that the same press means
+      // the same thing whether or not the input has the focus. The cleared
+      // search reaches the input through the effect above.
+      if (event.key === "Enter") handleCreateTag();
     },
-    [handleCreateTag, clearSearch],
+    [handleCreateTag],
   );
 
   if (!canSearch && !showCreateTag) {

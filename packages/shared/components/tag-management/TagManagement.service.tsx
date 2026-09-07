@@ -35,14 +35,15 @@
 
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import type { KeyboardEvent, MouseEvent } from "react";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 
 import { useTagManagement } from "./TagManagement.provider";
 import { stopPropagation, toError, undoTagChange } from "./TagManagement.utils";
-import { EDIT_TAG_FORM_NAME } from "./TagManagement.constants";
+import { EDIT_TAG_FORM_NAME, EVENT_OPTIONS } from "./TagManagement.constants";
 import { TagChangeType } from "./TagManagement.types";
 import type {
   FormValues,
@@ -60,6 +61,7 @@ export const useTagManagementService = ({
   confirmDeleteTag,
   confirmEditTag,
   onTagsChanged,
+  onClose,
 }: TagManagementContentProps) => {
   const { control, handleSubmit, setValue, resetField } = useForm({
     defaultValues: {
@@ -77,9 +79,16 @@ export const useTagManagementService = ({
     renameTag,
     removeTag,
     pendingLabels,
+    searchValue,
+    clearSearch,
   } = useTagManagement();
 
   const [editingLabel, setEditingLabel] = useState<string | null>(null);
+
+  // True while a confirmation modal is waiting for an answer. That modal
+  // closes itself on Escape, and it is the only thing that key means then -
+  // without this the same press would also walk the ladder underneath it.
+  const awaitingConfirmation = useRef(false);
 
   const toggleChecked = useCallback(
     async (label: string) => {
@@ -199,7 +208,12 @@ export const useTagManagementService = ({
         // nothing to report - and the editor stays open with the name that was
         // typed, which is the whole point of having been asked. Closing it
         // first would make "Cancel" mean "throw my typing away".
-        if (!(await confirmEditTag())) return;
+        awaitingConfirmation.current = true;
+        try {
+          if (!(await confirmEditTag())) return;
+        } finally {
+          awaitingConfirmation.current = false;
+        }
 
         cancelEdit();
 
@@ -249,7 +263,12 @@ export const useTagManagementService = ({
 
       try {
         // As with the rename: a refusal ends it quietly.
-        if (!(await confirmDeleteTag(tag))) return;
+        awaitingConfirmation.current = true;
+        try {
+          if (!(await confirmDeleteTag(tag))) return;
+        } finally {
+          awaitingConfirmation.current = false;
+        }
 
         // The row stays where it is, carrying its loader, until the tag is
         // really gone. Taking it off the list first would leave the delete
@@ -286,19 +305,47 @@ export const useTagManagementService = ({
 
   const editTagHandleKey = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
-      switch (event.key) {
-        case "Enter":
-          handleSubmit(confirmEdit)(event);
-          break;
-        case "Escape":
-          cancelEdit();
-          break;
-        default:
-          break;
-      }
+      // Escape is not here: it is one step of the ladder below, which the
+      // editor shares with the filter and with the popup itself.
+      if (event.key === "Enter") handleSubmit(confirmEdit)(event);
     },
-    [handleSubmit, confirmEdit, cancelEdit],
+    [handleSubmit, confirmEdit],
   );
+
+  /**
+   * Escape undoes one thing at a time, innermost first.
+   *
+   * A row being edited, then the filter, then the popup - so a single press
+   * never throws away more than the user was looking at. Listened for on the
+   * window rather than on the inputs, because the same order has to hold
+   * wherever the focus happens to be: on a row, on the scrollbar, or nowhere
+   * at all after the editor has just closed.
+   */
+  const handleEscape = useCallback(
+    (event: globalThis.KeyboardEvent) => {
+      if (event.key !== "Escape" || awaitingConfirmation.current) return;
+
+      // Taken in the capture phase and consumed here: with the popup open,
+      // Escape belongs to it and to nothing behind it.
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (editingLabel !== null) {
+        cancelEdit();
+        return;
+      }
+
+      if (searchValue !== "") {
+        clearSearch();
+        return;
+      }
+
+      onClose();
+    },
+    [editingLabel, cancelEdit, searchValue, clearSearch, onClose],
+  );
+
+  useEventListener("keydown", handleEscape, undefined, EVENT_OPTIONS);
 
   return {
     control,

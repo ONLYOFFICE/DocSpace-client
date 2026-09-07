@@ -111,6 +111,8 @@ const renderContent = (
   // Handed in by the test that closes the list and opens it again: what is in
   // flight lives in this client, not in the components it renders.
   queryClient: QueryClient = newQueryClient(),
+  // The last step of the Escape ladder - see the Escape tests below.
+  onClose: VoidFunction = () => {},
 ) => {
   return render(
     <QueryClientProvider client={queryClient}>
@@ -124,6 +126,7 @@ const renderContent = (
           confirmEditTag={confirmEditTag}
           confirmDeleteTag={confirmDeleteTag}
           onTagsChanged={onTagsChanged}
+          onClose={onClose}
         />
       </TagManagementProvider>
     </QueryClientProvider>,

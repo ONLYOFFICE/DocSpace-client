@@ -74,6 +74,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   confirmDeleteTag,
   confirmEditTag,
   onTagsChanged,
+  onClose,
 }) => {
   const isMobile = useIsMobile();
   const {
@@ -96,6 +97,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     confirmDeleteTag,
     confirmEditTag,
     onTagsChanged,
+    onClose,
   });
 
   const style = useMemo(() => {

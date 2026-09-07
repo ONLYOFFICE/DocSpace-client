@@ -131,6 +131,8 @@ export interface TagManagementContentProps {
   confirmDeleteTag: (label: string) => Promise<boolean>;
   confirmEditTag: () => Promise<boolean>;
   onTagsChanged?: TagsChangedHandler;
+  /** The last step of the Escape ladder - see useTagManagementService. */
+  onClose: VoidFunction;
 }
 
 export interface TagManagementFilterProps {

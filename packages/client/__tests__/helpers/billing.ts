@@ -303,15 +303,17 @@ export const walletServicesHandler = (on: string[] = []) => {
 };
 
 // A storage subscription is a wallet quota under the storage service id; quantity is GB.
-// state 1 marks an overdue (deactivated) plan, nextQuantity a scheduled change.
+// state 1 marks an overdue (deactivated) plan, nextQuantity a scheduled change;
+// the options are read per request, so a test may mutate them as the flow goes.
 export const storageSubscriptionTariff = (
   sizeGb: number | (() => number),
-  quota: { state?: number; nextQuantity?: number } = {},
+  quota: { state?: number; nextQuantity?: number; grace?: boolean } = {},
 ) =>
   http.get(apiUrl(PATH_TARIFF), () => {
+    const { grace = false, ...extra } = quota;
     const body = tariffSuccess(
       false,
-      false,
+      grace,
       false,
       false,
       TARIFF_DUE_DATE_EXPIRED,
@@ -331,7 +333,7 @@ export const storageSubscriptionTariff = (
                   quantity,
                   wallet: true,
                   dueDate: STORAGE_DUE_DATE,
-                  ...quota,
+                  ...extra,
                 },
               ]
             : body.response.quotas,

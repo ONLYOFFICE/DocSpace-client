@@ -33,12 +33,20 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.rowCheckbox {
-  margin-inline-start: -8px;
-  width: 16px;
-  padding-block: 16px;
-  padding-inline-start: 16px;
-  padding-inline-end: 8px;
+.nameContainer {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :global(.table-container_row-checkbox) {
+    margin-inline-start: -8px;
+    width: 16px;
+    padding-block: 16px;
+    padding-inline-start: 16px;
+    padding-inline-end: 8px;
+  }
 }
 
 .nameImage {

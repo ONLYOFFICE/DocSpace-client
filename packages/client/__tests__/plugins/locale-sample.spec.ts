@@ -67,9 +67,7 @@ test.describe("Locale Sample Plugin — plugin metadata localization", () => {
       plugin.getByRole("heading", { name: PLUGIN_NAME }),
     ).toBeVisible();
     await expect(
-      plugin.getByText(
-        "Sample plugin demonstrating plugin localization for DocSpace",
-      ),
+      plugin.getByText("Sample plugin demonstrating plugin localization"),
     ).toBeVisible();
   });
 
@@ -91,7 +89,7 @@ test.describe("Locale Sample Plugin — plugin metadata localization", () => {
     await expect(settingsDescription).toBeVisible();
     await expect(
       settingsDescription.getByText(
-        "Sample plugin demonstrating plugin localization for DocSpace",
+        "Sample plugin demonstrating plugin localization",
       ),
     ).toBeVisible();
   });
@@ -137,9 +135,7 @@ test.describe("Locale Sample Plugin — plugin metadata localization", () => {
       plugin.getByRole("heading", { name: "Lokal nümunəsi" }),
     ).toBeVisible();
     await expect(
-      plugin.getByText(
-        "DocSpace üçün plagin lokalizasiyasını nümayiş etdirən nümunə plagin",
-      ),
+      plugin.getByText("Plagin lokalizasiyasını nümayiş etdirən nümunə plagin"),
     ).toBeVisible();
 
     await expectScreenshot(page, [
@@ -191,7 +187,7 @@ test.describe("Locale Sample Plugin — plugin metadata localization", () => {
     await expect(settingsDescription).toBeVisible();
     await expect(
       settingsDescription.getByText(
-        "DocSpace üçün plagin lokalizasiyasını nümayiş etdirən nümunə plagin",
+        "Plagin lokalizasiyasını nümayiş etdirən nümunə plagin",
       ),
     ).toBeVisible();
 
@@ -251,9 +247,7 @@ test.describe("Locale Sample Plugin — plugin metadata localization", () => {
       plugin.getByRole("heading", { name: PLUGIN_NAME }),
     ).toBeVisible();
     await expect(
-      plugin.getByText(
-        "Sample plugin demonstrating plugin localization for DocSpace",
-      ),
+      plugin.getByText("Sample plugin demonstrating plugin localization"),
     ).toBeVisible();
 
     await expectScreenshot(page, [
@@ -304,7 +298,7 @@ test.describe("Locale Sample Plugin — plugin metadata localization", () => {
     await expect(settingsDescription).toBeVisible();
     await expect(
       settingsDescription.getByText(
-        "Sample plugin demonstrating plugin localization for DocSpace",
+        "Sample plugin demonstrating plugin localization",
       ),
     ).toBeVisible();
 

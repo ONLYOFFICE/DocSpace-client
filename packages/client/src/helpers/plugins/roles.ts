@@ -33,38 +33,23 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// Narrows portal entities down to the fields the plugin runtime exposes.
+import { PluginUserRole, PluginUsersType } from "./enums";
 
-import type { TUser } from "@docspace/shared/api/people/types";
-import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TFile, TFolder } from "@docspace/shared/api/files/types";
-import type {
-  TCurrentUser,
-  TCurrentFile,
-} from "@onlyoffice/docspace-plugin-sdk/react";
+const LEGACY_USER_ROLES: Partial<Record<PluginUserRole, PluginUsersType[]>> = {
+  [PluginUserRole.fullAdmin]: [PluginUsersType.docSpaceAdmin],
+  [PluginUserRole.user]: [PluginUsersType.collaborator],
+  [PluginUserRole.guest]: [PluginUsersType.user],
+};
 
-export function toCurrentUser(user: TUser): TCurrentUser {
-  return {
-    id: user.id,
-    displayName: user.displayName,
-    email: user.email,
-    isOwner: !!user.isOwner,
-    isAdmin: !!user.isAdmin,
-    isRoomAdmin: !!user.isRoomAdmin,
-  };
-}
+export const matchesUserRole = (
+  usersTypes: (PluginUserRole | PluginUsersType)[] | undefined,
+  userRole: PluginUserRole,
+): boolean => {
+  if (!usersTypes) return true;
 
-export function toCurrentFile(
-  selection: TRoom | TFile | TFolder,
-): TCurrentFile {
-  const isFolder = "isFolder" in selection && !!selection.isFolder;
-  const isRoom = "roomType" in selection && !!selection.roomType;
-  return {
-    id: selection.id,
-    title: selection.title,
-    fileExst: "fileExst" in selection ? selection.fileExst : undefined,
-    isFolder,
-    isRoom,
-    roomType: isRoom ? String((selection as TRoom).roomType) : undefined,
-  };
-}
+  if (usersTypes.includes(userRole)) return true;
+
+  const legacy = LEGACY_USER_ROLES[userRole];
+
+  return !!legacy && legacy.some((type) => usersTypes.includes(type));
+};

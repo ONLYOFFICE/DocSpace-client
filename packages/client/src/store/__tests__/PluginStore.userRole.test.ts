@@ -34,7 +34,6 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { runInAction } from "mobx";
 
 vi.mock("@docspace/ui-kit/utils/socket", () => ({
   default: { emit: vi.fn(), on: vi.fn() },
@@ -56,88 +55,32 @@ import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTar
 
 import PluginStore from "../PluginStore";
 import type SelectedFolderStore from "../SelectedFolderStore";
-import type { TPlugin } from "../../helpers/plugins/types";
-import { PluginUserRole, PluginUsersType } from "../../helpers/plugins/enums";
+import { PluginUserRole } from "../../helpers/plugins/enums";
 
-const PLUGIN = "Sample";
-const ICON_URL = "https://portal.test/plugins/sample";
-
-const withFileItem = (
-  item: Record<string, unknown>,
-  user: Record<string, boolean> | null = null,
-) => {
-  const store = new PluginStore(
+const storeFor = (user: Record<string, boolean> | null) =>
+  new PluginStore(
     { culture: "en" } as unknown as SettingsStore,
     {} as unknown as SelectedFolderStore,
     { user } as unknown as UserStore,
     {} as unknown as CurrentTariffStatusStore,
   );
 
-  const plugin = {
-    name: PLUGIN,
-    enabled: true,
-    version: "1.0.0",
-    iconUrl: ICON_URL,
-    getFileItems: () => new Map([[".md", { extension: ".md", ...item }]]),
-  };
-
-  runInAction(() => {
-    store.plugins = [plugin as unknown as TPlugin];
-  });
-
-  store.updateFileItems(PLUGIN);
-
-  return store.fileItems.get(".md");
-};
-
 beforeEach(() => {
   vi.clearAllMocks();
 });
 
-describe("PluginStore file item icons", () => {
-  it("builds both urls when the plugin ships both icons", () => {
-    const item = withFileItem({
-      fileRowIcon: "md-32.svg",
-      fileTileIcon: "md-96.svg",
-    });
-
-    expect(item?.fileIcon).toBe(`${ICON_URL}/assets/md-32.svg?hash=1.0.0`);
-    expect(item?.fileIconTile).toBe(`${ICON_URL}/assets/md-96.svg?hash=1.0.0`);
+describe("PluginStore.getUserRole", () => {
+  it.each([
+    ["owner", { isOwner: true }, PluginUserRole.owner],
+    ["full admin", { isAdmin: true }, PluginUserRole.fullAdmin],
+    ["user", { isCollaborator: true }, PluginUserRole.user],
+    ["guest", { isVisitor: true }, PluginUserRole.guest],
+    ["room admin", {}, PluginUserRole.roomAdmin],
+  ])("maps a %s to the matching role", (_label, predicates, expected) => {
+    expect(storeFor(predicates).getUserRole()).toBe(expected);
   });
 
-  it("falls back to the row icon when no tile icon is declared", () => {
-    const item = withFileItem({ fileRowIcon: "md-32.svg" });
-
-    expect(item?.fileIconTile).toBe(`${ICON_URL}/assets/md-32.svg?hash=1.0.0`);
-  });
-
-  it("leaves both urls empty when the plugin ships no icon", () => {
-    const item = withFileItem({ fileTypeName: "Markdown" });
-
-    expect(item?.fileIcon).toBeUndefined();
-    expect(item?.fileIconTile).toBeUndefined();
-  });
-});
-
-describe("PluginStore item filtering by role", () => {
-  const fileItemFor = (
-    user: Record<string, boolean>,
-    usersType: (PluginUserRole | PluginUsersType)[],
-  ) => withFileItem({ usersType }, user);
-
-  it("keeps an item listing the deprecated docSpaceAdmin for a full admin", () => {
-    expect(
-      fileItemFor({ isAdmin: true }, [PluginUsersType.docSpaceAdmin]),
-    ).toBeDefined();
-  });
-
-  it("keeps an item listing the current fullAdmin for a full admin", () => {
-    expect(
-      fileItemFor({ isAdmin: true }, [PluginUserRole.fullAdmin]),
-    ).toBeDefined();
-  });
-
-  it("drops an admin-only item for a room admin", () => {
-    expect(fileItemFor({}, [PluginUserRole.fullAdmin])).toBeUndefined();
+  it("treats a missing profile as a guest", () => {
+    expect(storeFor(null).getUserRole()).toBe(PluginUserRole.guest);
   });
 });

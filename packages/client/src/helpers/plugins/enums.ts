@@ -40,6 +40,7 @@ import {
   PluginStatus,
   ToastType,
   Components,
+  UserRole,
   UsersType,
   Devices,
   Section,
@@ -68,6 +69,7 @@ export {
   PluginStatus,
   ToastType as PluginToastType,
   Components as PluginComponents,
+  UserRole as PluginUserRole,
   UsersType as PluginUsersType,
   Devices as PluginDevices,
 };

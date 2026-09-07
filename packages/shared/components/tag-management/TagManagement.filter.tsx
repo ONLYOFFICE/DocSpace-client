@@ -106,10 +106,6 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     const trimmedValue = searchValue.trim().replace(/\s+/g, " ");
     if (trimmedValue.length === 0) return;
 
-    // Only the tag this would send: the rest of the list goes on working
-    // while it is out.
-    if (pendingLabels.has(trimmedValue)) return;
-
     // The name of an existing tag is not a mistake: it means that tag, so
     // Enter on it adds it to the room instead of doing nothing. Matched the
     // way names are compared everywhere here - case-insensitively - and the
@@ -117,6 +113,12 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     const existing = tags.find(
       (tag) => tag.label.trim().toLowerCase() === trimmedValue.toLowerCase(),
     );
+
+    // The name this would send, which for an existing tag is the tag's own
+    // spelling rather than what was typed: "FREETAG" on Enter sends "freeTag",
+    // and it is that request the row may already be waiting on. Only that one
+    // tag is refused - the rest of the list goes on working.
+    if (pendingLabels.has(existing?.label ?? trimmedValue)) return;
 
     if (existing) {
       clearSearch();

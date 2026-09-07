@@ -372,6 +372,37 @@ describe("<TagManagementFilter /> submitting the search", () => {
       expect(isChecked("boundTag")).toBe(true);
     });
 
+    // An unbind is out, so the row reads unticked - and Enter on the same name
+    // in another case means that same tag, which must not be sent for while
+    // its own request is still unanswered.
+    it("refuses a tag already waiting, whatever case it is typed in", async () => {
+      const held: { answer: (() => void) | null } = { answer: null };
+
+      removeTagsFromRoom.mockImplementation(
+        () =>
+          new Promise<void>((resolve) => {
+            held.answer = () => resolve();
+          }),
+      );
+
+      renderPopupBody();
+
+      await userEvent.click(screen.getByTestId("tag_row_boundTag"));
+
+      await waitFor(() => {
+        expect(removeTagsFromRoom).toHaveBeenCalledWith(ROOM_ID, ["boundTag"]);
+      });
+      await screen.findByTestId("tag_loader_boundTag");
+
+      await typeAndSubmit("BOUNDTAG");
+
+      // Nothing was sent: the guard reads the tag's own spelling, not what was
+      // typed.
+      expect(addTagsToRoom).not.toHaveBeenCalled();
+
+      held.answer?.();
+    });
+
     it("sends the next tag without waiting for the first answer", async () => {
       const request = holdNextRequest();
 

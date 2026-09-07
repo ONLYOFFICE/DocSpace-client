@@ -51,6 +51,7 @@ import {
 } from "./types";
 import { Nullable } from "../../types";
 import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import type { TAccountingPrice } from "@docspace/ui-kit/billing/types";
 
 const baseURL = "/apisystem";
 
@@ -470,6 +471,18 @@ export async function getAiPrices(signal?: AbortSignal) {
     url: `/portal/payment/ai-prices`,
     signal,
   });
+}
+
+export async function getServiceAccountingPrices(
+  serviceName: string,
+  signal?: AbortSignal,
+) {
+  return (await request({
+    method: "get",
+    url: `/portal/payment/accounting/prices/${serviceName}`,
+    params: { active: true },
+    signal,
+  })) as TAccountingPrice[];
 }
 
 export async function getWalletPayer(refresh?: boolean, signal?: AbortSignal) {

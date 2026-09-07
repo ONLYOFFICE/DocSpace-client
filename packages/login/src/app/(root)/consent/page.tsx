@@ -118,6 +118,7 @@ async function Page(props: {
           }
           user={user}
           baseUrl={config?.oauth2?.origin}
+          hasSignature={!!token}
         />
       </>
     </LoginContainer>

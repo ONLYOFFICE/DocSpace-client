@@ -37,13 +37,16 @@
 @use "@docspace/ui-kit/styles/variables/quick-actions" as quick-actions;
 
 // Quick-actions banner above the files/rooms list (ported from the SDK
-// layouts). Centered by the auto margins, capped to fit the widest banner
-// (Rooms = 5 room tiles + AI chat = 6) in a single row. The cap is derived
-// from the ui-kit tile metrics — hardcoding it went stale when the tile size
-// or gap changed and clipped the last tile at every width.
+// layouts). The cap goes on the tile row rather than on the banner: the banner
+// spans the content column so the floating controls have room to sit clear of
+// the tiles, while the row itself stays centred and no wider than the widest
+// banner (Rooms = 5 room tiles + AI chat = 6). The cap is derived from the
+// ui-kit tile metrics — hardcoding it went stale when the tile size or gap
+// changed and clipped the last tile at every width.
 .quickActions {
-  margin: 4px auto 16px;
-  max-width: quick-actions.row-width();
+  --quick-actions-row-max-width: #{quick-actions.row-width()};
+
+  margin: 4px 0 16px;
   width: 100%;
   flex-shrink: 0;
 }

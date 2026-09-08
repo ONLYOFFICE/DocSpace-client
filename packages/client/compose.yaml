@@ -60,6 +60,7 @@ services:
       # UI-kit sources
       - ../../libs/ui-kit/components:/app/libs/ui-kit/components
       - ../../libs/ui-kit/assets:/app/libs/ui-kit/assets
+      - ../../libs/ui-kit/billing:/app/libs/ui-kit/billing
       - ../../libs/ui-kit/constants:/app/libs/ui-kit/constants
       - ../../libs/ui-kit/context:/app/libs/ui-kit/context
       - ../../libs/ui-kit/enums:/app/libs/ui-kit/enums

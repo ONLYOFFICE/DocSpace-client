@@ -36,11 +36,11 @@
 import { headers } from "next/headers";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { TSettings } from "@docspace/shared/api/settings/types";
 
 import { getFilesSettings, getFolder } from "@/api/files";
 import { getSettings } from "@/api/settings";
 import { PAGE_COUNT, PATHNAME_HEADER } from "@/utils/constants";
+import InvalidLinkError from "@/components/InvalidLinkError";
 
 import PublicRoomPage from "./page.client";
 
@@ -65,28 +65,32 @@ export default async function PublicRoom({
   const filter = FilesFilter.getFilter({
     search: `?${filterStr}`,
     pathname,
-  } as Location)!;
+  } as Location);
 
   filter.pageCount = PAGE_COUNT;
 
   const [folderList, filesSettings, portalSettings] = await Promise.all([
-    getFolder(folderId as string, filter),
+    getFolder(folderId as string, filter).catch(() => undefined),
     getFilesSettings(),
     getSettings(),
   ]);
 
+  if (
+    !folderList ||
+    !filesSettings ||
+    !portalSettings ||
+    typeof portalSettings === "string"
+  ) {
+    return <InvalidLinkError />;
+  }
+
   return (
     <PublicRoomPage
       folderList={folderList}
-      filesSettings={filesSettings!}
-      portalSettings={portalSettings! as TSettings}
+      filesSettings={filesSettings}
+      portalSettings={portalSettings}
       filesFilter={filterStr}
       shareKey={baseConfig.key as string}
-      // baseConfig={{
-      //   showFilter: baseConfig.showFilter as boolean,
-      //   showHeader: baseConfig.showHeader as boolean,
-      //   folder: baseConfig.id as string,
-      // }}
     />
   );
 }

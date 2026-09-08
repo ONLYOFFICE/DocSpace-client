@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "Altere as permissões de usuário para as pessoas convidadas.",
   "ChargeAmount": "Um valor de <1>{{price}}</1> será cobrado no seu método de pagamento salvo.",
   "ChatHistory": "Histórico de chat",
+  "ChatMessageNotAllowedInFormRoom": "A mensagem de chat não pode ser salva no espaço Preenchimento de formulários, pois este tipo de espaço só pode conter formulários em PDF.",
   "ChooseAIAgent": "Escolha um {{aiAgent}}",
   "ChooseAIAgentDescription": "Selecione o agente onde você quer conversar com a IA sobre o arquivo selecionado. Você pode escolher um agente existente.",
   "ChooseAnother": "Escolha outro",

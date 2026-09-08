@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "Ndryshoni lejet e përdoruesve për personat e ftuar.",
   "ChargeAmount": "Një shumë prej <1>{{price}}</1> do të tarifohet në mënyrën e ruajtur të pagesës.",
   "ChatHistory": "Historia e bisedave",
+  "ChatMessageNotAllowedInFormRoom": "Mesazhi i bisedës nuk mund të ruhet në hapësirën e plotësimit të formularit pasi ky lloj hapësire mund të përmbajë vetëm formularë PDF.",
   "ChooseAIAgent": "Zgjidh një {{aiAgent}}",
   "ChooseAIAgentDescription": "Zgjidhni agentin me të cilin doni të bisedoni me IA për skedarin e zgjedhur. Mund të zgjidhni një agent ekzistues.",
   "ChooseAnother": "Zgjidhni një tjetër",

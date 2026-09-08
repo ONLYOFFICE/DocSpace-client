@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "Change user permissions to the invited people.",
   "ChargeAmount": "An amount of <1>{{price}}</1> will be charged to your saved payment method.",
   "ChatHistory": "Chat history",
+  "ChatMessageNotAllowedInFormRoom": "The chat message cannot be saved to the Form Filling space since this space type can only contain PDF forms.",
   "ChooseAIAgent": "Choose an {{aiAgent}}",
   "ChooseAIAgentDescription": "Select the agent where you want to chat with AI about the selected file. You can pick an existing agent.",
   "ChooseAnother": "Choose another",

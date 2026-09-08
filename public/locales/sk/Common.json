@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "Zmeňte oprávnenia používateľov pre pozvané osoby.",
   "ChargeAmount": "Bude účtovaná suma <1>{{price}}</1> z vašej uloženej platobnej metódy.",
   "ChatHistory": "História chatovania",
+  "ChatMessageNotAllowedInFormRoom": "Správu z chatu nie je možné uložiť do priestoru na vyplňovanie formulárov, pretože tento typ priestoru môže obsahovať len PDF formuláre.",
   "ChooseAIAgent": "Vyberte {{aiAgent}}.",
   "ChooseAIAgentDescription": "Vyberte agenta, s ktorým chcete chatovať s AI o vybranom súbore. Môžete si vybrať existujúceho agenta.",
   "ChooseAnother": "Vyberte si iný",

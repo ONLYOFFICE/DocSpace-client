@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "招待した人へのユーザー権限を変更します。",
   "ChargeAmount": "<1>{{price}}</1> が、登録されているお支払い方法に請求されます。",
   "ChatHistory": "チャット履歴",
+  "ChatMessageNotAllowedInFormRoom": "チャットメッセージは、フォーム記入スペースに保存できません。このスペースタイプにはPDFフォームのみを含めることができます。",
   "ChooseAIAgent": "{{aiAgent}} を選択してください。",
   "ChooseAIAgentDescription": "選択したファイルについてAIとチャットしたいエージェントを選択してください。既存のエージェントを選択できます。",
   "ChooseAnother": "他のを選択してください",

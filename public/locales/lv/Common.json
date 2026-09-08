@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "Mainiet lietotāju atļaujas uzaicinātajām personām.",
   "ChargeAmount": "Par saglabāto maksājuma veidu tiks noņemta summa <1>{{price}}</1>.",
   "ChatHistory": "Čata vēsture",
+  "ChatMessageNotAllowedInFormRoom": "Tērzēšanas ziņojumu nevar saglabāt Veidlapu aizpildīšanas telpā, jo šajā telpas tipā var saglabāt tikai PDF veidlapas.",
   "ChooseAIAgent": "Izvēlieties {{aiAgent}}",
   "ChooseAIAgentDescription": "Izvēlieties aģentu, kurā vēlaties saņemt MI sarunu par atlasīto failu. Jūs varat izvēlēties esošu aģentu.",
   "ChooseAnother": "Izvēlēties citu",

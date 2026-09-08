@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "Promenite dozvole korisnicima koje ste pozvali.",
   "ChargeAmount": "Iznos od <1>{{price}}</1> biće naplaćen sa sačuvanog načina plaćanja.",
   "ChatHistory": "Istorija chata",
+  "ChatMessageNotAllowedInFormRoom": "Poruka iz razgovora ne može biti sačuvana u prostoru za popunjavanje formulara, jer ova vrsta prostora može sadržati samo PDF formulare.",
   "ChooseAIAgent": "Izaberite {{aiAgent}}",
   "ChooseAIAgentDescription": "Izaberite agenta sa kojim želite da razgovarate sa AI o odabranom fajlu. Možete izabrati postojećeg agenta.",
   "ChooseAnother": "Izaberite drugi",

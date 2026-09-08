@@ -56,6 +56,7 @@ import {
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import { isOAuthFrame } from "../utils/oauthToken";
 import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
+import { AI_SEARCH, AI_TOOLS } from "@docspace/ui-kit/billing/constants";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import { Nullable, TI18n } from "../types";
@@ -302,6 +303,8 @@ class AuthStore {
     const isAdmin =
       this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner;
 
+    const isSaasAdmin = isAdmin && !this.settingsStore?.standalone;
+
     const request = [];
 
     request.push(this.currentTariffStatusStore?.fetchPortalTariff(refresh));
@@ -310,11 +313,18 @@ class AuthStore {
       request.push(this.currentQuotaStore?.fetchPortalQuota(refresh));
     }
 
-    if (isAdmin && !this.settingsStore?.standalone) {
+    if (isSaasAdmin) {
       request.push(this.currentTariffStatusStore?.fetchPayerInfo(refresh));
     }
 
     await Promise.all(request);
+
+    // An unpaid portal cannot reach the pages that show the AI fees, and the
+    // banner re-renders when the percent arrives, so the boot does not wait for it.
+    if (isSaasAdmin && !this.currentTariffStatusStore?.isNotPaidPeriod) {
+      this.currentTariffStatusStore?.fetchServiceFeePercent(AI_TOOLS);
+      this.currentTariffStatusStore?.fetchServiceFeePercent(AI_SEARCH);
+    }
 
     runInAction(() => {
       this.isPortalInfoLoaded = true;

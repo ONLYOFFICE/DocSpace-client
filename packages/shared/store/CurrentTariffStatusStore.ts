@@ -37,7 +37,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
 
 import api from "../api";
-import { getWalletPayer } from "../api/portal";
+import { getServiceAccountingPrices, getWalletPayer } from "../api/portal";
 
 import { PaymentMethodStatus, QuotaState, TariffState } from "../enums";
 
@@ -51,6 +51,7 @@ import {
   isAfter,
   now,
 } from "@docspace/ui-kit/utils/date";
+import { AI_SEARCH, AI_TOOLS } from "@docspace/ui-kit/billing/constants";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
 import { SettingsStore } from "./SettingsStore";
@@ -63,6 +64,8 @@ class CurrentTariffStatusStore {
   portalTariffStatus: Nullable<TPortalTariff> = null;
 
   isLoaded = false;
+
+  serviceFeePercents = new Map<string, number>();
 
   language: string = "en";
 
@@ -231,6 +234,29 @@ class CurrentTariffStatusStore {
       throw e;
     } finally {
       this.isPayerInfoLoaded = true;
+    }
+  };
+
+  get aiToolsFeePercent() {
+    return this.serviceFeePercents.get(AI_TOOLS) ?? null;
+  }
+
+  get aiSearchFeePercent() {
+    return this.serviceFeePercents.get(AI_SEARCH) ?? null;
+  }
+
+  setServiceFeePercent = (serviceName: string, value: number) => {
+    this.serviceFeePercents.set(serviceName, value);
+  };
+
+  fetchServiceFeePercent = async (serviceName: string) => {
+    try {
+      const prices = await getServiceAccountingPrices(serviceName);
+      const percent = prices?.[0]?.extraCharge;
+      if (percent !== undefined)
+        this.setServiceFeePercent(serviceName, percent);
+    } catch (e) {
+      console.error(e);
     }
   };
 

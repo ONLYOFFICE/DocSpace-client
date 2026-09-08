@@ -35,7 +35,7 @@
 
 import { match } from "ts-pattern";
 import { createPortal } from "react-dom";
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useCallback, useLayoutEffect, useMemo, useRef } from "react";
 import { isTablet } from "react-device-detect";
 import {
   computePosition,
@@ -73,11 +73,10 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   roomId,
   onClose,
   anchor,
-  onSelectTag,
   tags: roomTags,
   access,
-  onDeleteTag,
-  onEditTag,
+  confirmDeleteTag,
+  confirmEditTag,
   onTagsChanged,
   roomName,
 }) => {
@@ -97,6 +96,29 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   useKeyboardAwareSheet(sheetRef, isMobile && isReliableAndroidViewport());
 
   const { data: fetchedTags, status } = useTagsQuery();
+
+  // Escape while the list is up walks the ladder in the service - close the
+  // editor, then the filter, then the popup - because only the list knows
+  // whether a row is being edited. With no list there is nothing to walk:
+  // Escape on the loader, or on a list that never arrived, just closes.
+  const closeOptions = useMemo(
+    () => ({ ...EVENT_OPTIONS, enabled: status !== "success" }),
+    [status],
+  );
+
+  const closeOnEscape = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      onClose();
+    },
+    [onClose],
+  );
+
+  useEventListener("keydown", closeOnEscape, undefined, closeOptions);
 
   useLayoutEffect(() => {
     if (isMobile) return;
@@ -156,19 +178,18 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
           <TagManagementProvider
             fetchedTags={fetchedTags ?? []}
             roomTags={roomTags}
+            roomId={roomId}
             access={access}
           >
             <TagManagementFilter
-              roomId={roomId}
               roomName={roomName}
               onTagsChanged={onTagsChanged}
             />
             <TagManagementContent
-              roomId={roomId}
-              onEditTag={onEditTag}
-              onDeleteTag={onDeleteTag}
-              onSelectTag={onSelectTag}
+              confirmEditTag={confirmEditTag}
+              confirmDeleteTag={confirmDeleteTag}
               onTagsChanged={onTagsChanged}
+              onClose={onClose}
             />
           </TagManagementProvider>
         ))

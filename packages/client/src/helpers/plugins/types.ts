@@ -86,7 +86,7 @@ import type {
   PluginDevices,
   PluginFileType,
   PluginScopes,
-  PluginUsersType,
+  PluginUserRole,
 } from "./enums";
 
 // Re-export SDK types for backward compatibility
@@ -201,7 +201,7 @@ export interface IMediaViewerClient extends IMediaViewer {
 export interface IContextMenuItemValidation {
   type?: PluginFileType;
   fileExst?: string | null;
-  userRole?: PluginUsersType;
+  userRole?: PluginUserRole;
   device?: PluginDevices;
   security?:
     | TRoomSecurity

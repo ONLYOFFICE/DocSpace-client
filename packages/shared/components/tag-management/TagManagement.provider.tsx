@@ -43,32 +43,52 @@ import React, {
 
 import type {
   TTag,
-  TagManagementContextValue,
   TagManagementProviderProps,
   ITagManagementStateContext,
 } from "./TagManagement.types";
 import { searchFilter, unionTagsData } from "./TagManagement.utils";
+import { useTagMutations } from "./hooks/useTagMutations";
+import type { TagMutations } from "./hooks/useTagMutations";
+
+/**
+ * The list and the requests that change it, in one place.
+ *
+ * The mutations are here rather than in the components because a `useMutation`
+ * call made twice gives two observers that know nothing of each other - see
+ * useTagMutations.
+ */
+export type TagManagementContextValue = ITagManagementStateContext &
+  TagMutations;
 
 const TagManagementStateContext =
-  createContext<ITagManagementStateContext | null>(null);
+  createContext<TagManagementContextValue | null>(null);
 
 export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
   children,
   roomTags,
   fetchedTags,
+  roomId,
   access,
 }) => {
+  const mutations = useTagMutations(roomId);
+
   const canCreate = access.canCreate || false;
 
   const [searchValue, setSearchValue] = useState("");
   const deferredSearchValue = useDeferredValue(searchValue);
 
-  const [tags, setTags] = useState<TTag[]>(() => {
+  const [tags, setTags_] = useState<TTag[]>(() => {
     return unionTagsData(roomTags, fetchedTags);
   });
 
+  const setTags = useCallback((updater: React.SetStateAction<TTag[]>) => {
+    setTags_((prevTags) => {
+      return typeof updater === "function" ? updater(prevTags) : updater;
+    });
+  }, []);
+
   const [filteredTags, showCreateTag] = useMemo(() => {
-    const search = deferredSearchValue.trim();
+    const search = deferredSearchValue.trim().replace(/\s+/g, " ");
 
     if (!search) return [tags, false];
 
@@ -85,7 +105,7 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
     setSearchValue("");
   }, []);
 
-  const value = useMemo<ITagManagementStateContext>(
+  const value = useMemo<TagManagementContextValue>(
     () => ({
       tags,
       setTags,
@@ -96,6 +116,9 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
       setSearchValue,
       clearSearch,
       access,
+      // Read back by the list to say which room a change was sent for.
+      roomId,
+      ...mutations,
     }),
     [
       searchValue,
@@ -104,7 +127,9 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
       showCreateTag,
       clearSearch,
       access,
+      roomId,
       tags,
+      mutations,
     ],
   );
 

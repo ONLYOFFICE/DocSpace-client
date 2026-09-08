@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Diese Anwendung ist deaktiviert",
   "OAuthApplicationEmpty": "Anwendung konnte nicht gefunden werden",
   "OAuthClientEmpty": "Client-ID konnte nicht gefunden werden",
+  "OAuthInvalidRequest": "Die Autorisierungsanfrage ist ungültig. Überprüfen Sie die Weiterleitungs-URI in den Anwendungseinstellungen",
   "RecaptchaInvalid": "Ungültiges Recaptcha",
   "SsoAttributesNotFound": "Authentifizierung fehlgeschlagen",
   "SsoAuthFailed": "Authentifizierung fehlgeschlagen",

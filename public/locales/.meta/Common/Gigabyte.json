@@ -3,7 +3,7 @@
   "content": "GB",
   "content_en_sha1_hash": "505a44facaa3e758845f6e101f4e21f9d99acf63",
   "created_at": "2025-05-19T21:30:45.623Z",
-  "updated_at": "2026-09-04T07:59:41.666Z",
+  "updated_at": "2026-09-08T08:44:10.102Z",
   "comment": {
     "text": "This is a unit of measurement for storage size, \"Gigabyte\", used in billing-related dialogs and pages. It appears as a short label, often alongside a numerical value (e.g., \"10 GB\").",
     "is_auto": true,
@@ -175,19 +175,19 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 172,
+      "line_number": 174,
       "context": "const textTooltip = (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 172,
+      "line_number": 174,
       "context": "const textTooltip = (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 172,
+      "line_number": 174,
       "context": "const textTooltip = (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
       "module": "/libs/ui-kit"
     },

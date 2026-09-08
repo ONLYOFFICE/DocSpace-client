@@ -52,6 +52,7 @@ export type ChatNoAccessStoreProps = {
   getAIConfig?: SettingsStore["getAIConfig"];
   refreshPaymentInfo?: () => Promise<void> | void;
   language?: string;
+  aiToolsFeePercent?: PaymentStore["aiToolsFeePercent"];
 };
 
 export const mapChatNoAccessStores = ({
@@ -61,7 +62,12 @@ export const mapChatNoAccessStores = ({
   authStore,
 }: TStore): ChatNoAccessStoreProps => {
   const { standalone, getAIConfig } = settingsStore;
-  const { isCardLinkedToPortal, isAIReady, enableAIService } = paymentStore;
+  const {
+    isCardLinkedToPortal,
+    isAIReady,
+    enableAIService,
+    aiToolsFeePercent,
+  } = paymentStore;
 
   return {
     standalone,
@@ -72,6 +78,7 @@ export const mapChatNoAccessStores = ({
     getAIConfig,
     refreshPaymentInfo: authStore?.getPaymentInfo,
     language: authStore?.language ?? "en",
+    aiToolsFeePercent,
   };
 };
 
@@ -84,6 +91,7 @@ export const useChatNoAccess = ({
   getAIConfig,
   refreshPaymentInfo,
   language,
+  aiToolsFeePercent,
 }: ChatNoAccessStoreProps) => {
   const navigate = useNavigate();
 
@@ -113,6 +121,7 @@ export const useChatNoAccess = ({
       onTopUpAndActivateAI: activation.onTopUpAndActivateAI,
       isActivating: activation.isActivating,
       goToAISettings,
+      aiToolsFeePercent,
     }),
     [
       standalone,
@@ -122,6 +131,7 @@ export const useChatNoAccess = ({
       activation.onTopUpAndActivateAI,
       activation.isActivating,
       goToAISettings,
+      aiToolsFeePercent,
     ],
   );
 

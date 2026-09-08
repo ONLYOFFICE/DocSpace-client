@@ -319,11 +319,11 @@ class AuthStore {
 
     await Promise.all(request);
 
+    // An unpaid portal cannot reach the pages that show the AI fees, and the
+    // banner re-renders when the percent arrives, so the boot does not wait for it.
     if (isSaasAdmin && !this.currentTariffStatusStore?.isNotPaidPeriod) {
-      await Promise.all([
-        this.currentTariffStatusStore?.fetchServiceFeePercent(AI_TOOLS),
-        this.currentTariffStatusStore?.fetchServiceFeePercent(AI_SEARCH),
-      ]);
+      this.currentTariffStatusStore?.fetchServiceFeePercent(AI_TOOLS);
+      this.currentTariffStatusStore?.fetchServiceFeePercent(AI_SEARCH);
     }
 
     runInAction(() => {

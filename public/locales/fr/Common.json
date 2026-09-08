@@ -645,7 +645,7 @@
   "Disabled": "Désactivé",
   "DisableDownload": "Restreindre la copie du contenu des fichiers, le téléchargement et l'impression des fichiers",
   "DisableNotifications": "Désactiver les notifications",
-  "DisableQuickActionsOnAllPages": "Désactiver les actions rapides sur toutes les pages",
+  "DisableQuickActionsOnAllPages": "Masquer les actions rapides sur toutes les pages",
   "DisableQuota": "Désactiver le quota",
   "DisableStorageQuota": "Désactiver les quotas de stockage",
   "Disconnect": "Déconnecter",

@@ -645,7 +645,7 @@
   "Disabled": "Disabled",
   "DisableDownload": "Restrict file content copy, file download and printing",
   "DisableNotifications": "Disable notifications",
-  "DisableQuickActionsOnAllPages": "Disable Quick Actions on all pages",
+  "DisableQuickActionsOnAllPages": "Hide quick actions on all pages",
   "DisableQuota": "Disable quota",
   "DisableStorageQuota": "Disable storage quota",
   "Disconnect": "Disconnect",

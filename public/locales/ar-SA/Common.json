@@ -645,7 +645,7 @@
   "Disabled": "معطل",
   "DisableDownload": "تقييد نسخ محتوى الملف وتنزيل الملف وطباعته",
   "DisableNotifications": "تعطيل التنبيهات",
-  "DisableQuickActionsOnAllPages": "تعطيل الإجراءات السريعة في جميع الصفحات",
+  "DisableQuickActionsOnAllPages": "إخفاء الإجراءات السريعة في جميع الصفحات",
   "DisableQuota": "تعطيل الحصة",
   "DisableStorageQuota": "تعطيل حصة التخزين",
   "Disconnect": "قطع الاتصال",

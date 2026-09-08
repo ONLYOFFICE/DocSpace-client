@@ -645,7 +645,7 @@
   "Disabled": "Отключено",
   "DisableDownload": "Ограничить копирование, загрузку и печать содержимого файла",
   "DisableNotifications": "Выключить уведомления",
-  "DisableQuickActionsOnAllPages": "Отключить быстрые действия на всех страницах",
+  "DisableQuickActionsOnAllPages": "Скрыть быстрые действия на всех страницах",
   "DisableQuota": "Отключить квоту",
   "DisableStorageQuota": "Отключить квоту хранилища",
   "Disconnect": "Отключить",

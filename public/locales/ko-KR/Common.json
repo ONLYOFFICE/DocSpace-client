@@ -645,7 +645,7 @@
   "Disabled": "비활성화",
   "DisableDownload": "파일 콘텐츠 복사, 파일 다운로드 및 인쇄 제한",
   "DisableNotifications": "알림 비활성화",
-  "DisableQuickActionsOnAllPages": "모든 페이지에서 빠른 작업 비활성화",
+  "DisableQuickActionsOnAllPages": "모든 페이지에서 빠른 작업 숨기기",
   "DisableQuota": "할당량 비활성화",
   "DisableStorageQuota": "스토리지 할당량 비활성화",
   "Disconnect": "연결 해제",

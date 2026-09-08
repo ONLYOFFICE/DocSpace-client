@@ -645,7 +645,7 @@
   "Disabled": "Devre dışı bırakıldı",
   "DisableDownload": "Dosya içeriği kopyalamayı, dosya indirmeyi ve yazdırmayı kısıtla",
   "DisableNotifications": "Bildirimleri devre dışı bırak",
-  "DisableQuickActionsOnAllPages": "Hızlı eylemleri tüm sayfalarda devre dışı bırak",
+  "DisableQuickActionsOnAllPages": "Hızlı eylemleri tüm sayfalarda gizle",
   "DisableQuota": "Kotayı devre dışı bırak",
   "DisableStorageQuota": "Depolama kotasını devre dışı bırak",
   "Disconnect": "Bağlantıyı kes",

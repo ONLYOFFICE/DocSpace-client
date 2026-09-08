@@ -645,7 +645,7 @@
   "Disabled": "無効",
   "DisableDownload": "ファイル内容のコピー、ファイルのダウンロード、印刷の制限",
   "DisableNotifications": "通知をオフする",
-  "DisableQuickActionsOnAllPages": "すべてのページでクイックアクションを無効にする",
+  "DisableQuickActionsOnAllPages": "すべてのページでクイックアクションを非表示にする",
   "DisableQuota": "容量制限を無効にする",
   "DisableStorageQuota": "ストレージの容量制限を無効にする",
   "Disconnect": "接続解除",

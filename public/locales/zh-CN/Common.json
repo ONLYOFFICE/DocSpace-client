@@ -645,7 +645,7 @@
   "Disabled": "已禁用",
   "DisableDownload": "限制文件内容复制、文件下载和打印",
   "DisableNotifications": "禁用消息通知",
-  "DisableQuickActionsOnAllPages": "在所有页面禁用快捷操作",
+  "DisableQuickActionsOnAllPages": "在所有页面隐藏快捷操作",
   "DisableQuota": "停用配额",
   "DisableStorageQuota": "停用存储配额",
   "Disconnect": "断开连接",

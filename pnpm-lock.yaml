@@ -121,9 +121,6 @@ importers:
       '@mistralai/mistralai':
         specifier: 1.15.1
         version: 1.15.1
-      '@onlyoffice/ai-chat':
-        specifier: file:onlyoffice-ai-chat-0.5.82.tgz
-        version: file:libs/ui-kit/onlyoffice-ai-chat-0.5.82.tgz(df0f92bb32183b734d32af4b491fc1b6)
       '@onlyoffice/docspace-api-sdk':
         specifier: ^3.7.0
         version: 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -311,6 +308,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.4.16
         version: 2.4.16
+      '@onlyoffice/ai-chat':
+        specifier: file:onlyoffice-ai-chat-0.5.82.tgz
+        version: file:libs/ui-kit/onlyoffice-ai-chat-0.5.82.tgz(df0f92bb32183b734d32af4b491fc1b6)
       '@playwright/test':
         specifier: 1.58.1
         version: 1.58.1
@@ -425,6 +425,9 @@ importers:
       storybook:
         specifier: ^10.5.5
         version: 10.6.0(@types/react@19.2.10)(prettier@3.9.6)(react@19.2.8)
+      tslib:
+        specifier: 2.8.1
+        version: 2.8.1
       typescript:
         specifier: 5.9.3
         version: 5.9.3

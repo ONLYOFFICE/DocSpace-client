@@ -346,6 +346,11 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       "webpack-dev-server",
       "resolve-url-loader",
       "typescript",
+      // @rollup/plugin-typescript forces importHelpers + noEmitHelpers on
+      // every build, so tsc emits `import ... from "tslib"` for any helper it
+      // needs and errors TS2354 when the module is absent. It is an optional
+      // peer of that plugin, never imported from ui-kit source.
+      "tslib",
       "local-web-server",
       "identity-obj-proxy",
       "@types/identity-obj-proxy",

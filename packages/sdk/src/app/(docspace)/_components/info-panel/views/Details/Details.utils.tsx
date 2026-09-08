@@ -68,6 +68,7 @@ import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import {
   TagManagement,
   type AccessTagManagement,
+  type TagsChangedHandler,
 } from "@docspace/shared/components/tag-management";
 import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
@@ -78,7 +79,7 @@ const tagList = (
   access: AccessTagManagement,
   title: string,
   tagListClassName: string,
-  onTagsChanged?: () => void,
+  onTagsChanged?: TagsChangedHandler,
 ) => (
   <div
     className={`property-tag_list ${tagListClassName}`}
@@ -123,7 +124,7 @@ type DetailsHelperProps = {
   item: DetailsItem;
   culture: string;
   tagListClassName: string;
-  onTagsChanged?: () => void;
+  onTagsChanged?: TagsChangedHandler;
   canManageTags: boolean;
 };
 
@@ -138,7 +139,7 @@ class DetailsHelper {
   item: DetailsItem;
   culture: string;
   tagListClassName: string;
-  onTagsChanged?: () => void;
+  onTagsChanged?: TagsChangedHandler;
   canManageTags: boolean;
 
   constructor(props: DetailsHelperProps) {
@@ -259,7 +260,8 @@ class DetailsHelper {
   };
 
   private getItemType = () => {
-    if ("fileType" in this.item) return text(getFileTypeName(this.item.fileType, this.t));
+    if ("fileType" in this.item)
+      return text(getFileTypeName(this.item.fileType, this.t));
     return text(getFileTypeName("", this.t));
   };
 

@@ -682,6 +682,7 @@ const DocsLayoutCore = observer(
                                       infoPanelBody ?? (
                                         <DocsInfoPanelBody
                                           onTagsChanged={onInfoPanelRoomUpdated}
+                                          onRoomUpdated={onInfoPanelRoomUpdated}
                                         />
                                       )
                                     }

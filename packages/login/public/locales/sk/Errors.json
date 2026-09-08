@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Táto aplikácia je deaktivovaná",
   "OAuthApplicationEmpty": "Aplikáciu sa nepodarilo nájsť",
   "OAuthClientEmpty": "ID klienta sa nepodarilo nájsť",
+  "OAuthInvalidRequest": "Žiadosť o autorizáciu je neplatná. Skontrolujte URI na presmerovanie v nastaveniach aplikácie",
   "RecaptchaInvalid": "Nesprávna Recapt",
   "SsoAttributesNotFound": "Autentifikácia zlyhala (atribúty tvrdenia neboli nájdené)",
   "SsoAuthFailed": "Autentifikácia zlyhala",

@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Ova aplikacija je onemogućena",
   "OAuthApplicationEmpty": "Aplikacija nije pronađena",
   "OAuthClientEmpty": "ID klijenta nije pronađen",
+  "OAuthInvalidRequest": "Zahtev za autorizaciju nije važeći. Proverite URI za preusmeravanje u podešavanjima aplikacije",
   "RecaptchaInvalid": "Nevažeći Recaptcha",
   "SsoAttributesNotFound": "Neuspela autentifikacija (atributi tvrdnje nisu pronađeni)",
   "SsoAuthFailed": "Autentifikacija neuspela",

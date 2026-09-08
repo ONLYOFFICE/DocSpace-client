@@ -3,7 +3,7 @@
   "content": "Go to Settings >> AI settings >> {{mcpServers}} to connect servers for this {{aiAgent}}.",
   "content_en_sha1_hash": "076d5bd4fb116dccf861d1710c2d603b3ad32c0d",
   "created_at": "2026-08-31T18:23:18.289Z",
-  "updated_at": "2026-08-31T18:51:24.608Z",
+  "updated_at": "2026-09-08T08:44:10.180Z",
   "comment": {
     "text": "Empty screen description providing navigation instructions to configure servers, featuring placeholders for the MCP settings title and the specific AI agent.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
-      "line_number": 228,
+      "line_number": 254,
       "context": ")\n }\n emptyScreenHeader={t(\"NoMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"NoMCPServersDescription\", {\n mcpServers: t(\"MCPSettingTitle\"),\n aiAgent: t(\"AIAgent\"),\n })}\n searchEmptyScreenImage={\n isBase ? (",
       "module": "/libs/ui-kit"
     }

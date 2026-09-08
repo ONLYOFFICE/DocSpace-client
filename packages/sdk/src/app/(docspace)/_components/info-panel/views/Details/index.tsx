@@ -70,6 +70,7 @@ import { FileType, FolderType } from "@docspace/shared/enums";
 import { createThumbnails } from "@docspace/shared/api/files";
 import { isAdmin } from "@docspace/shared/utils/common";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { TagsChangedHandler } from "@docspace/shared/components/tag-management/TagManagement.types";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import { useDocsSettingsStore } from "@/app/(personal-files)/_store/DocsSettingsStore";
@@ -84,118 +85,121 @@ import styles from "./Details.module.scss";
 
 type DetailsProps = {
   selection: TFile | TFolder;
-  onTagsChanged?: () => void;
+  onTagsChanged?: TagsChangedHandler;
+  /** Something else about the room changed - its logo - so read it back. */
+  onRoomUpdated?: () => void;
 };
 
-const Details = observer(({ selection, onTagsChanged }: DetailsProps) => {
-  const { t, i18n } = useTranslation(["Common"]);
+const Details = observer(
+  ({ selection, onTagsChanged, onRoomUpdated }: DetailsProps) => {
+    const { t, i18n } = useTranslation(["Common"]);
 
-  const docsSettingsStore = useDocsSettingsStore();
-  const { getIcon } = useItemIcon({
-    filesSettings: docsSettingsStore.filesSettings ?? undefined,
-  });
-
-  const { user } = useDocsUserStore();
-  const { rootFolderType } = useFilesListStore();
-  const canManageTags =
-    !!(user && isAdmin(user)) && rootFolderType !== FolderType.Archive;
-
-  const [itemProperties, setItemProperties] = React.useState<DetailsProperty[]>(
-    [],
-  );
-  const [isThumbnailError, setIsThumbnailError] = React.useState(false);
-
-  React.useEffect(() => {
-    const helper = new DetailsHelper({
-      t,
-      item: selection,
-      culture: i18n.language,
-      tagListClassName: styles.tagList,
-      onTagsChanged,
-      canManageTags,
+    const docsSettingsStore = useDocsSettingsStore();
+    const { getIcon } = useItemIcon({
+      filesSettings: docsSettingsStore.filesSettings ?? undefined,
     });
-    setItemProperties(helper.getPropertyList());
 
-    if (
-      "isFolder" in selection &&
-      !selection.isFolder &&
-      "thumbnailStatus" in selection &&
-      selection.thumbnailStatus === 0 &&
-      "fileType" in selection &&
-      (selection.fileType === FileType.Image ||
-        selection.fileType === FileType.Spreadsheet ||
-        selection.fileType === FileType.Presentation ||
-        selection.fileType === FileType.Document)
-    ) {
-      createThumbnails([Number(selection.id)]).catch((e) => {
-        console.error("createThumbnails failed", e);
+    const { user } = useDocsUserStore();
+    const { rootFolderType } = useFilesListStore();
+    const canManageTags =
+      !!(user && isAdmin(user)) && rootFolderType !== FolderType.Archive;
+
+    const [itemProperties, setItemProperties] = React.useState<
+      DetailsProperty[]
+    >([]);
+    const [isThumbnailError, setIsThumbnailError] = React.useState(false);
+
+    React.useEffect(() => {
+      const helper = new DetailsHelper({
+        t,
+        item: selection,
+        culture: i18n.language,
+        tagListClassName: styles.tagList,
+        onTagsChanged,
+        canManageTags,
       });
-    }
+      setItemProperties(helper.getPropertyList());
 
-    setIsThumbnailError(false);
-  }, [selection, t, i18n.language, canManageTags]);
+      if (
+        "isFolder" in selection &&
+        !selection.isFolder &&
+        "thumbnailStatus" in selection &&
+        selection.thumbnailStatus === 0 &&
+        "fileType" in selection &&
+        (selection.fileType === FileType.Image ||
+          selection.fileType === FileType.Spreadsheet ||
+          selection.fileType === FileType.Presentation ||
+          selection.fileType === FileType.Document)
+      ) {
+        createThumbnails([Number(selection.id)]).catch((e) => {
+          console.error("createThumbnails failed", e);
+        });
+      }
 
-  const onThumbnailError = () => setIsThumbnailError(true);
+      setIsThumbnailError(false);
+    }, [selection, t, i18n.language, canManageTags]);
 
-  const isFolder = "isFolder" in selection && selection.isFolder;
-  const isRoom = "isRoom" in selection && Boolean(selection.isRoom);
-  const fileExst = "fileExst" in selection ? selection.fileExst : "";
+    const onThumbnailError = () => setIsThumbnailError(true);
 
-  const iconUrl =
-    "thumbnailUrl" in selection && selection.thumbnailUrl && !isThumbnailError
-      ? null
-      : getIcon(isFolder ? undefined : fileExst, 96);
+    const isFolder = "isFolder" in selection && selection.isFolder;
+    const isRoom = "isRoom" in selection && Boolean(selection.isRoom);
+    const fileExst = "fileExst" in selection ? selection.fileExst : "";
 
-  return (
-    <>
-      {isRoom ? (
-        <div className={styles.noThumbnail}>
-          <RoomLogoEditableIcon
-            selection={selection as TFolder}
-            variant="details"
-            onUpdated={onTagsChanged}
-          />
-        </div>
-      ) : "thumbnailUrl" in selection &&
-        selection.thumbnailUrl &&
-        !isThumbnailError ? (
-        <div className={styles.thumbnail}>
-          {/* biome-ignore lint/performance/noImgElement: authenticated same-origin thumbnail with immutable caching; next/image proxy is not applicable */}
-          <img
-            src={`${selection.thumbnailUrl}&size=3840x2160`}
-            alt="thumbnail-image"
-            onError={onThumbnailError}
-          />
-        </div>
-      ) : (
-        <div className={styles.noThumbnail}>
-          {iconUrl ? (
-            // biome-ignore lint/performance/noImgElement: static SVG via image-helpers
-            <img src={iconUrl} alt="file-icon" />
-          ) : null}
-        </div>
-      )}
-      <div className={commonStyles.subtitle}>
-        <Text fontWeight="600" fontSize="14px">
-          {t("Common:Properties")}
-        </Text>
-      </div>
-      <div className={commonStyles.properties}>
-        {itemProperties.map((property) => (
-          <div
-            id={property.id}
-            key={property.id}
-            className="property"
-            data-testid={`info_panel_details_${property.id}`}
-          >
-            <Text className="property-title">{property.title}</Text>
-            {property.content}
+    const iconUrl =
+      "thumbnailUrl" in selection && selection.thumbnailUrl && !isThumbnailError
+        ? null
+        : getIcon(isFolder ? undefined : fileExst, 96);
+
+    return (
+      <>
+        {isRoom ? (
+          <div className={styles.noThumbnail}>
+            <RoomLogoEditableIcon
+              selection={selection as TFolder}
+              variant="details"
+              onUpdated={onRoomUpdated}
+            />
           </div>
-        ))}
-      </div>
-    </>
-  );
-});
+        ) : "thumbnailUrl" in selection &&
+          selection.thumbnailUrl &&
+          !isThumbnailError ? (
+          <div className={styles.thumbnail}>
+            {/* biome-ignore lint/performance/noImgElement: authenticated same-origin thumbnail with immutable caching; next/image proxy is not applicable */}
+            <img
+              src={`${selection.thumbnailUrl}&size=3840x2160`}
+              alt="thumbnail-image"
+              onError={onThumbnailError}
+            />
+          </div>
+        ) : (
+          <div className={styles.noThumbnail}>
+            {iconUrl ? (
+              // biome-ignore lint/performance/noImgElement: static SVG via image-helpers
+              <img src={iconUrl} alt="file-icon" />
+            ) : null}
+          </div>
+        )}
+        <div className={commonStyles.subtitle}>
+          <Text fontWeight="600" fontSize="14px">
+            {t("Common:Properties")}
+          </Text>
+        </div>
+        <div className={commonStyles.properties}>
+          {itemProperties.map((property) => (
+            <div
+              id={property.id}
+              key={property.id}
+              className="property"
+              data-testid={`info_panel_details_${property.id}`}
+            >
+              <Text className="property-title">{property.title}</Text>
+              {property.content}
+            </div>
+          ))}
+        </div>
+      </>
+    );
+  },
+);
 
 export default Details;
-

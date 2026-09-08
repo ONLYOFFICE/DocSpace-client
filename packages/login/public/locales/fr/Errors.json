@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Cette application est désactivée",
   "OAuthApplicationEmpty": "L'application n'a pas été trouvée",
   "OAuthClientEmpty": "Le numéro identifiant du client n'a pas été trouvé",
+  "OAuthInvalidRequest": "La demande d'autorisation n'est pas valide. Vérifiez l'URI de redirection dans les paramètres de l'application",
   "RecaptchaInvalid": "Recaptcha Invalide",
   "SsoAttributesNotFound": "Echec d'authentification (affirmation des attributs non trouvée)",
   "SsoAuthFailed": "Echec d'authentification",

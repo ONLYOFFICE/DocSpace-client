@@ -33,8 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useForm, Controller } from "react-hook-form";
-import React, { useCallback, useMemo, useState } from "react";
+import classNames from "classnames";
+import { Controller } from "react-hook-form";
+import React, { useMemo } from "react";
 
 import CheckIconURL from "PUBLIC_DIR/images/check.edit.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
@@ -42,7 +43,7 @@ import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
 import { Tag } from "@docspace/ui-kit/components/tag";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
@@ -55,156 +56,49 @@ import {
 import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 
 import { useTagManagement } from "./TagManagement.provider";
-import { useUpdateTag } from "./hooks/useTagsQuery";
+import { useTagManagementService } from "./TagManagement.service";
+import { stopPropagation } from "./TagManagement.utils";
 import styles from "./TagManagement.module.scss";
 import {
   ROW_HEIGHT,
   ICON_SIZE,
+  LOADER_SIZE,
   MAX_BODY_HEIGHT,
   MARGIN_BOTTOM,
-  EDIT_CANCELLED,
-  DELETE_CANCELLED,
   EDIT_TAG_FORM_NAME,
+  REGEX_TAG_NAME_PATTERN,
 } from "./TagManagement.constants";
-import type {
-  FormValues,
-  TagManagementContentProps,
-} from "./TagManagement.types";
+import type { TagManagementContentProps } from "./TagManagement.types";
 
 export const TagManagementContent: React.FC<TagManagementContentProps> = ({
-  onSelectTag,
-  roomId,
-  onDeleteTag,
-  onEditTag,
+  confirmDeleteTag,
+  confirmEditTag,
   onTagsChanged,
+  onClose,
 }) => {
-  const { control, handleSubmit, setValue, resetField } = useForm({
-    defaultValues: {
-      [EDIT_TAG_FORM_NAME]: "",
-    },
-    shouldUnregister: true,
-  });
-
   const isMobile = useIsMobile();
   const {
     filteredTags,
-    tags,
-    setTags,
     access: { canEdit, canRemove, canBindTag },
   } = useTagManagement();
 
-  const updateTag = useUpdateTag(roomId);
-
-  const [editingLabel, setEditingLabel] = useState<string | null>(null);
-
-  const toggleChecked = useCallback(
-    (label: string) => {
-      const originalTags = [...tags];
-      const updatedTags = [...tags];
-      const tagIndex = updatedTags.findIndex((tag) => tag.label === label);
-
-      if (tagIndex === -1) return;
-
-      updatedTags[tagIndex] = {
-        ...updatedTags[tagIndex],
-        checked: !updatedTags[tagIndex].checked,
-      };
-
-      updateTag.mutate(updatedTags[tagIndex], {
-        onSuccess: () => {
-          setTags(updatedTags);
-          onTagsChanged?.();
-        },
-        onError: (error) => {
-          toastr.error(error);
-          console.error("Failed to update room tags:", error);
-          setTags(originalTags);
-        },
-      });
-    },
-    [tags, updateTag, onTagsChanged],
-  );
-
-  const handleEdit = useCallback(
-    (label: string) => {
-      setEditingLabel(label);
-
-      setValue(EDIT_TAG_FORM_NAME, label);
-    },
-    [tags, setValue],
-  );
-
-  const cancelEdit = useCallback(() => {
-    setEditingLabel(null);
-    resetField(EDIT_TAG_FORM_NAME);
-  }, [resetField]);
-
-  const confirmEdit = useCallback(
-    async (submitValue: FormValues) => {
-      if (editingLabel === null) return;
-
-      const newLabel = submitValue[EDIT_TAG_FORM_NAME].trim();
-      const oldLabel = editingLabel;
-
-      if (newLabel === oldLabel) {
-        return cancelEdit();
-      }
-
-      if (newLabel.length === 0) {
-        console.error("Tag name cannot be empty");
-        return;
-      }
-
-      try {
-        await onEditTag?.(oldLabel, newLabel);
-        setTags((prev) =>
-          prev.map((tag) =>
-            tag.label === oldLabel ? { ...tag, label: newLabel } : tag,
-          ),
-        );
-        cancelEdit();
-      } catch (error) {
-        if (error === EDIT_CANCELLED) return;
-
-        toastr.error(error as Error);
-        console.error("Failed to update tag name:", error);
-      }
-    },
-    [editingLabel, tags, cancelEdit, onEditTag],
-  );
-
-  const deleteTag = useCallback(
-    async (tag: string) => {
-      try {
-        await onDeleteTag?.(tag);
-
-        const updatedTags = tags.filter((t) => t.label !== tag);
-        setTags(updatedTags);
-      } catch (error) {
-        if (error === DELETE_CANCELLED) return;
-
-        toastr.error(error as Error);
-        console.error("Failed to remove room tag:", error);
-      }
-    },
-    [tags, onDeleteTag],
-  );
-
-  const editTagHandleKey = useCallback(
-    (event: React.KeyboardEvent<HTMLInputElement>) => {
-      switch (event.key) {
-        case "Enter":
-          handleSubmit(confirmEdit)(event);
-          break;
-        case "Escape":
-          cancelEdit();
-          break;
-        default:
-          break;
-      }
-    },
-    [confirmEdit, cancelEdit],
-  );
+  const {
+    control,
+    handleSubmit,
+    editingLabel,
+    pendingLabels,
+    toggleChecked,
+    handleEdit,
+    cancelEdit,
+    confirmEdit,
+    deleteTag,
+    editTagHandleKey,
+  } = useTagManagementService({
+    confirmDeleteTag,
+    confirmEditTag,
+    onTagsChanged,
+    onClose,
+  });
 
   const style = useMemo(() => {
     return {
@@ -221,21 +115,57 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     <div className={styles.wrapperList} style={style}>
       <Scrollbar fixedSize className={styles.scrollbar}>
         {filteredTags.map((tag) => {
+          const isEditing = editingLabel === tag.label;
+          // Its own loader: several rows can be waiting at the same time.
+          const isPending = pendingLabels.has(tag.label);
+          const isRowClickable = canBindTag && !isEditing && !isPending;
+
           return (
-            <div key={tag.label} className={styles.row}>
-              <Checkbox
-                isChecked={tag.checked}
-                isDisabled={!canBindTag}
-                className={styles.checkbox}
-                onChange={() => toggleChecked(tag.label)}
-                dataTestId={`tag_checkbox_${tag.label}`}
-              />
-              {editingLabel === tag.label ? (
+            <div
+              key={tag.label}
+              className={classNames(styles.row, {
+                [styles.rowClickable]: isRowClickable,
+                [styles.rowPending]: isPending,
+              })}
+              onClick={
+                isRowClickable ? () => toggleChecked(tag.label) : undefined
+              }
+              data-testid={`tag_row_${tag.label}`}
+            >
+              {/* The checkbox toggles through its own onChange, so its click
+                  must not reach the row handler and toggle a second time. */}
+              <span
+                onClick={stopPropagation}
+                className={styles.checkboxWrapper}
+              >
+                {isPending ? (
+                  <span
+                    className={styles.checkboxLoader}
+                    style={{ width: LOADER_SIZE, height: LOADER_SIZE }}
+                    data-testid={`tag_loader_${tag.label}`}
+                  >
+                    <Loader
+                      primary
+                      size={`${LOADER_SIZE}px`}
+                      type={LoaderTypes.track}
+                    />
+                  </span>
+                ) : (
+                  <Checkbox
+                    isChecked={tag.checked}
+                    isDisabled={!canBindTag || isEditing}
+                    className={styles.checkbox}
+                    onChange={() => toggleChecked(tag.label)}
+                    dataTestId={`tag_checkbox_${tag.label}`}
+                  />
+                )}
+              </span>
+              {isEditing ? (
                 <>
                   <Controller
                     name={EDIT_TAG_FORM_NAME}
                     control={control}
-                    rules={{ required: true }}
+                    rules={{ required: true, pattern: REGEX_TAG_NAME_PATTERN }}
                     render={({
                       field: { value, onChange, ref, disabled },
                       fieldState,
@@ -278,28 +208,44 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                   <Tag
                     label={tag.label}
                     tag={tag.label}
-                    onClick={onSelectTag}
                     className={styles.tag}
                     dataTestId={`tag_item_${tag.label}`}
                   />
-                  {canEdit ? (
-                    <IconButton
-                      size={ICON_SIZE}
-                      className={styles.editIcon}
-                      iconName={AccessEditReactSvgUrl}
-                      onClick={() => handleEdit(tag.label)}
-                      dataTestId={`edit_tag_button_${tag.label}`}
-                    />
+                  {canEdit || canRemove ? (
+                    // One flex item for both icons, so the row's own gap
+                    // separates them from the tag rather than from each other.
+                    // The click never reaches the row: the gap between them is
+                    // part of this box, not of the row.
+                    <div
+                      className={styles.rowActions}
+                      onClick={stopPropagation}
+                    >
+                      {canEdit ? (
+                        <IconButton
+                          size={ICON_SIZE}
+                          className={styles.editIcon}
+                          iconName={AccessEditReactSvgUrl}
+                          onClick={(event) => {
+                            handleEdit(event, tag.label);
+                          }}
+                          dataTestId={`edit_tag_button_${tag.label}`}
+                          isDisabled={isPending}
+                        />
+                      ) : null}
+                      {canRemove ? (
+                        <IconButton
+                          size={ICON_SIZE}
+                          iconName={TrashReactSvgUrl}
+                          className={styles.deleteIcon}
+                          onClick={(event) => {
+                            deleteTag(event, tag.label);
+                          }}
+                          dataTestId={`delete_tag_button_${tag.label}`}
+                          isDisabled={isPending}
+                        />
+                      ) : null}
+                    </div>
                   ) : null}
-                  {canRemove && (
-                    <IconButton
-                      size={ICON_SIZE}
-                      iconName={TrashReactSvgUrl}
-                      className={styles.deleteIcon}
-                      onClick={() => deleteTag(tag.label)}
-                      dataTestId={`delete_tag_button_${tag.label}`}
-                    />
-                  )}
                 </>
               )}
             </div>

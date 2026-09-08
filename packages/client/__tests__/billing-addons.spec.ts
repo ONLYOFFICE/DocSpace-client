@@ -403,32 +403,32 @@ test.describe("Add-ons with services switched on", () => {
   });
 });
 
-test.describe("Add-ons on a negative balance", () => {
+test.describe("Add-ons on a low balance", () => {
   test.beforeEach(async ({ mockRequest, page }) => {
     useSaasBilling(mockRequest, { user: "owner", payer: "self-owner" });
     mockRequest.use(serviceStateHandler(), serviceFeeHandler());
     await page.clock.setSystemTime(PAID_NOW);
   });
 
-  test("the AI card warns about the credits while backups still read as available", async ({
+  test("a nearly empty wallet warns on the AI card and leaves no backups", async ({
     page,
     baseUrl,
     mockRequest,
   }) => {
     mockRequest.use(
       ...walletServicesHandler(["aitools", "backup"]),
-      balanceHandler(-3),
+      balanceHandler(0.5),
     );
 
     await openAddons(page, baseUrl);
 
     await expect(
-      page.getByText("Available credits: -$3.00. Credits running low"),
+      page.getByText("Available credits: $0.50. Credits running low"),
     ).toBeVisible();
     await expect(card(page, "aitools").getByTestId("ai_supported_models_link")).toBeVisible();
-    // TODO(ui-kit): availableBackupsCount only zeroes an exactly empty wallet, so a negative
-    // balance still reads as available; flip this to "unavailable" once it is fixed.
-    await expect(page.getByText("Backups available — $2.00 per backup")).toBeVisible();
+    await expect(
+      page.getByText("Additional backups unavailable — top up wallet"),
+    ).toBeVisible();
 
     await expectScreenshot(page, ["desktop", "addons", "low-balance.png"]);
   });
@@ -458,7 +458,7 @@ test.describe("Add-ons on a negative balance", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(...walletServicesHandler(["backup"]), balanceHandler(-3));
+    mockRequest.use(...walletServicesHandler(["backup"]), balanceHandler(0.5));
 
     await openAddons(page, baseUrl);
 

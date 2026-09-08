@@ -2173,6 +2173,7 @@
   "TopUpCreditsAmountDescription": "Enter the amount of credits you want to add.",
   "TopUpCreditsChargeHint": "The entered amount will be charged after you add your payment method",
   "TopUpCreditsDescription": "Enter the amount you'd like to add to your credits balance. In the next step, you'll need to securely add a payment method via Stripe.",
+  "TopUpDelayedPaymentMethodWarning": "Bank transfers may take several business days to process. Credits will be added to your Wallet only after the funds arrive.",
   "TopUpInProgress": "Top up in progress",
   "TopUpTakeSomeTimeToComplete": "The top-up might take some time to complete",
   "TopUpToReactivateStorage": "To reactivate your subscription, please top up your wallet via Services. Once the payment is complete, your additional storage will become available again.",

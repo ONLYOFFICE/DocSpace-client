@@ -507,6 +507,35 @@ test.describe("Billing wallet", () => {
     await expectScreenshot(page, ["desktop", "wallet", "top-up-dialog.png"]);
   });
 
+  test("isDelayedPaymentMethod warns in the top-up dialog that the funds settle later", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      isDelayedPaymentMethod: true,
+    });
+
+    await openWallet(page, baseUrl);
+
+    await topUpButton(page).click();
+
+    await expect(page.getByTestId("top_up_amount_input").first()).toBeVisible();
+    await expect(
+      page.getByText(
+        "Bank transfers may take several business days to process. Credits will be added to your Wallet only after the funds arrive.",
+      ),
+    ).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "wallet",
+      "top-up-dialog-delayed.png",
+    ]);
+  });
+
   test("the auto top-up dialog asks for the two thresholds", async ({
     page,
     baseUrl,

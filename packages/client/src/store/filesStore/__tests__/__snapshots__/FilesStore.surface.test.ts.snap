@@ -10,6 +10,7 @@ exports[`FilesStore — public surface > exposes a stable set of public members 
   "aiRoomStore",
   "allFilesIsEditing",
   "alreadyFetchingRooms",
+  "applyTagChange",
   "arrRoomGroups",
   "authStore",
   "bufferSelection",

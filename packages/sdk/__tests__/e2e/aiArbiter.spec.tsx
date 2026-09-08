@@ -1,5 +1,3 @@
-import { describe } from "node:test";
-
 import {
   aiArbiterPanelHandler,
   aiChatProfilesListHandler,
@@ -35,7 +33,7 @@ const seedAuthCookie = (
     .context()
     .addCookies([{ name: "asc_auth_key", value: "e2e-test-token", url: baseUrl }]);
 
-describe("SDK AI Arbiter mode", () => {
+test.describe("SDK AI Arbiter mode", () => {
   test("renders a provisioned panel and emits the frame events", async ({
     page,
     baseUrl,
@@ -91,9 +89,10 @@ describe("SDK AI Arbiter mode", () => {
 
     await page.goto(`${baseUrl}${path}?theme=Base`);
 
-    await expect(page.getByText("Set up AI Arbiter")).toBeVisible();
+    const wizard = page.getByRole("dialog");
+    await expect(wizard).toContainText("Set up AI Arbiter");
     await expect(
-      page.getByText("No AI provider is configured for this workspace."),
+      wizard.getByText("No AI model is configured for this workspace."),
     ).toBeVisible();
   });
 

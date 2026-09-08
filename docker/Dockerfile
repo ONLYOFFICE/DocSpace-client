@@ -49,8 +49,12 @@ COPY ../libs/ ./libs/
 
 # ENV NODE_OPTIONS="--max-old-space-size=8192"
 
-# Install dependencies with recursive installation and ignore scripts (prevents running scripts that may not be needed in production)
-RUN pnpm install --frozen-lockfile
+# Install dependencies
+# CI=true is scoped to this one command on purpose. It skips the
+# `lefthook install` in the workspace prepare scripts, which cannot work
+# because the image has no .git. A persistent `ENV CI=true` would also
+# change Playwright's runtime defaults (retries, workers, forbidOnly).
+RUN CI=true pnpm install --frozen-lockfile
 
 # Run build apps
 RUN pnpm run build

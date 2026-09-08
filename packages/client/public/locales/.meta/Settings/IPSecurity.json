@@ -1,14 +1,14 @@
 {
   "key_path": "IPSecurity",
-  "content": "IP Security",
-  "content_en_sha1_hash": "6384288df2a9807354de1df765c871288d7c2492",
-  "created_at": "2025-05-19T21:30:51.718Z",
-  "updated_at": "2026-08-14T14:58:32.832Z",
+  "content": "IP security",
+  "content_en_sha1_hash": "6373496dcb03feb4f857fa380152a9422d28f180",
+  "created_at": "2026-08-31T18:23:41.476Z",
+  "updated_at": "2026-08-31T20:31:25.050Z",
   "comment": {
-    "text": "This is a section title and menu item label for the IP Security settings. It refers to the feature that allows administrators to restrict access to the portal based on IP addresses.",
+    "text": "Section title for the IP security configuration category within the Portal Settings security menu.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:23:40.513Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:31:25.050Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -212,12 +218,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

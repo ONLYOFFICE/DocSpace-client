@@ -1,14 +1,14 @@
 {
   "key_path": "InvitationSettingsGuests",
-  "content": "Allow inviting guests",
-  "content_en_sha1_hash": "4a09c16f30591c146b613bc29c19cb5ea20bb65c",
-  "created_at": "2025-05-26T07:15:51.094Z",
-  "updated_at": "2026-08-14T14:58:32.833Z",
+  "content": "Invite guests",
+  "content_en_sha1_hash": "9ee4e97dd2ff18f41027962246ffa4ac62cf2e53",
+  "created_at": "2026-08-31T18:23:41.437Z",
+  "updated_at": "2026-08-31T20:29:07.779Z",
   "comment": {
-    "text": "This is a checkbox label in the portal settings. It allows administrators to control whether users can invite external guests to DocSpace.",
+    "text": "Clickable label in the Portal Settings security section used to initiate the guest invitation process.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:23:45.843Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:29:07.779Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

@@ -1,14 +1,14 @@
 {
   "key_path": "TemporaryStorageDescription",
-  "content": "Backup is stored in the 'Backup' section, you will be able to download it within 24 hours after creating.",
-  "content_en_sha1_hash": "88ae5786931a2fc09fc6599fe91ada967589e48d",
-  "created_at": "2025-05-26T07:15:48.759Z",
-  "updated_at": "2026-08-12T11:00:51.635Z",
+  "content": "Your backup is stored in the \"Backup\" section, and you'll have 24 hours to download it after it's created.",
+  "content_en_sha1_hash": "f3c9dd1f2b40e120f3c717d1424372c574e043c0",
+  "created_at": "2026-08-31T18:23:33.507Z",
+  "updated_at": "2026-08-31T18:37:44.406Z",
   "comment": {
-    "text": "This is a descriptive text that appears below a checkbox related to temporary storage for backups. It informs the user about the backup's storage location and availability period.",
+    "text": "Informational text in the manual backup section that appears when temporary storage is selected, explaining the backup's location and its 24-hour expiration period.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:41:17.371Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:37:44.406Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -118,15 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \"n\"",
-          "suggestion": "",
-          "checked_at": "2026-04-12T15:59:23.546Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -157,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -172,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -208,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,14 +1,14 @@
 {
   "key_path": "SenderDisplayName",
-  "content": "Sender Display Name",
-  "content_en_sha1_hash": "2eea8d166574d677a663c6e1b76fc92de06fd18d",
-  "created_at": "2025-05-19T21:30:53.308Z",
-  "updated_at": "2026-05-15T14:00:06.854Z",
+  "content": "Sender display name",
+  "content_en_sha1_hash": "4b24bb45e9340aaa09a97cd98ca524d4f019aaa4",
+  "created_at": "2026-08-31T18:23:42.598Z",
+  "updated_at": "2026-08-31T20:10:44.050Z",
   "comment": {
-    "text": "This is a label for a text input field where users can enter the display name for the sender of email notifications.",
+    "text": "Label for an input field in the SMTP configuration settings, representing the name that will be shown to recipients in outgoing emails.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:21:04.239Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:10:44.050Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

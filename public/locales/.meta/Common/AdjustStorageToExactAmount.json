@@ -3,7 +3,7 @@
   "content": "Adjust the storage to the exact amount you require",
   "content_en_sha1_hash": "02f0d7dc67a720d514f48f1a93d966c14032a411",
   "created_at": "2026-04-10T13:53:41.790Z",
-  "updated_at": "2026-08-13T14:37:21.819Z",
+  "updated_at": "2026-08-31T18:23:51.035Z",
   "comment": {
     "text": "This is a description displayed below a price, explaining that users can precisely set their desired storage amount.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 254,
+      "line_number": 255,
       "context": "title={t(\"AdditionalDiskStorage\")}\n priceText={t(\"PerStorage\", {\n currency: formatWalletCurrency(storagePriceIncrement, 2),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n })}\n description={t(\"AdjustStorageToExactAmount\")}\n />\n \n {isShowPreviousStoragePlan ? (\n <div className={styles.deactivatedBanner}>\n <span className={styles.deactivatedBannerIcon} aria-hidden=\"true\">",
       "module": "/libs/ui-kit"
     },

@@ -1,14 +1,14 @@
 {
   "key_path": "NotFoundGuests",
-  "content": "No added guests yet",
-  "content_en_sha1_hash": "e98856533c4e928082936c4943b3796791537ac1",
-  "created_at": "2025-05-19T21:30:46.873Z",
-  "updated_at": "2026-08-24T22:30:00.675Z",
+  "content": "No guests yet",
+  "content_en_sha1_hash": "a19e5185b357fa87f192049de7f268f9faddd0fd",
+  "created_at": "2026-08-31T18:23:18.625Z",
+  "updated_at": "2026-08-31T18:50:31.227Z",
   "comment": {
-    "text": "This is an empty state message displayed when no guests have been added to the current view.",
+    "text": "Header for an empty state screen in the Guests tab, appearing when no guests have been added.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:47:47.199Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:50:31.227Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

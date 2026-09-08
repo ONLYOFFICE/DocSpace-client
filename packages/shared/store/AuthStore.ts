@@ -56,6 +56,7 @@ import {
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import { isOAuthFrame } from "../utils/oauthToken";
 import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
+import { AI_SEARCH, AI_TOOLS } from "@docspace/ui-kit/billing/constants";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import { Nullable, TI18n } from "../types";
@@ -311,7 +312,11 @@ class AuthStore {
     }
 
     if (isAdmin && !this.settingsStore?.standalone) {
-      request.push(this.currentTariffStatusStore?.fetchPayerInfo(refresh));
+      request.push(
+        this.currentTariffStatusStore?.fetchPayerInfo(refresh),
+        this.currentTariffStatusStore?.fetchServiceFeePercent(AI_TOOLS),
+        this.currentTariffStatusStore?.fetchServiceFeePercent(AI_SEARCH),
+      );
     }
 
     await Promise.all(request);

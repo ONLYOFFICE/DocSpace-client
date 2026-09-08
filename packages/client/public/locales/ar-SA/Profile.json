@@ -2,7 +2,7 @@
   "ActiveSessions": "الجلسات النشطة",
   "AutoDeleteTitle": "سيتم حذف جميع الجلسات التي تزيد عن 60 يومًا تلقائيًا.",
   "ChangePasswordAfterLoggingOut": "تغيير كلمة المرور بعد تسجيل الخروج",
-  "ConnectSocialNetworks": "ربط حساباتك على الشبكات الاجتماعية",
+  "ConnectSocialNetworks": "ربط حساباتك",
   "DescriptionForSecurity": "من أجل مزيد من الأمان، يجب عليك تغيير كلمة المرور.",
   "DesktopTheme": "المزامنة مع إعدادات محرر سطح المكتب",
   "DesktopThemeDescription": "قم بالتبديل تلقائيًا بين السمات الفاتحة والداكنة وفقًا للسمة الحالية لمحرري سطح المكتب.",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "البريد الإلكتروني غير موثق",
   "ErrorAccountAlreadyUse": "الحساب المرتبط قيد الاستخدام بالفعل من قبل مستخدم آخر",
   "LogoutActiveConnection": "تسجيل الخروج من الاتصال النشط",
-  "LogoutAllActiveSessionsDescription": "سيتم تسجيل الخروج من جميع الاتصالات النشطة باستثناء هذا الاتصال، حيث أنه قيد الاستخدام حاليًا.",
+  "LogoutAllActiveSessionsDescription": "سيتم إنهاء جميع الجلسات النشطة باستثناء الجلسة الحالية. ستبقى الجلسة الحالية نشطة.",
   "LogoutBtn": "تسجيل الخروج",
-  "LogoutDescription": "ملحوظة. سيتم تسجيل خروج جميع الاتصالات النشطة باستثناء هذا الاتصال ، حيث إنه قيد الاستخدام حاليًا.",
+  "LogoutDescription": "ملحوظة. سيتم إنهاء جميع الجلسات النشطة باستثناء الجلسة الحالية. ستبقى الجلسة الحالية نشطة.",
   "LogoutFrom": "هل تريد الخروج من {{platform}} {{browser}}؟",
   "MyProfile": "ملفي الشخصي",
   "NotificationsChannels": "قنوات الإشعارات",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "اعرض الرموز الاحتياطية",
   "SuccessLogout": "تم تسجيل خروج الاتصال النشط: {{platform}} ، {{browser}}",
   "TelegramAccount": "حساب Telegram",
-  "TelegramAccountDescription": "لربط TelegramBot بحسابكم، اتبعوا الرابط السري وانقروا على زر \"ربط Telegram\".",
+  "TelegramAccountDescription": "لتلقي إشعارات حسابك في Telegram، اتبع الرابط أدناه أو انقر على \"ربط\".",
   "TelegramAccountDisconnect": "فصل Telegram",
   "TelegramAccountDisconnectDescription": "حسابكم @{{username}} متصل لتلقي إشعارات Telegram. يمكنكم فصل هذا الحساب. في هذه الحالة، لن تتلقوا الإشعارات.",
   "TerminateAllSessions": "إنهاء جميع الجلسات باستثناء الجلسة الحالية",
-  "TwoFactorDescription": "تم تمكين المصادقة الثنائية عبر تطبيق إنشاء التعليمات البرمجية لجميع المستخدمين من قبل المسؤول."
+  "TwoFactorDescription": "تم تمكين المصادقة الثنائية باستخدام تطبيق المصادقة لجميع المستخدمين من قبل المسؤول."
 }

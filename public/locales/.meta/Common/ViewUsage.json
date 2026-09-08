@@ -3,7 +3,7 @@
   "content": "View usage",
   "content_en_sha1_hash": "972c8f47b5573786cca057ddc67ea96af3504eef",
   "created_at": "2026-06-25T11:55:00.363Z",
-  "updated_at": "2026-08-17T17:23:21.856Z",
+  "updated_at": "2026-08-31T18:23:51.002Z",
   "comment": {
     "text": "Clickable link label in the billing wallet section that navigates the user to their resource usage details.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 306,
+      "line_number": 304,
       "context": "color=\"accent\"\n className={styles.viewUsageLink}\n dataTestId=\"wallet_view_usage_link\"\n fontWeight={600}\n >\n {t(\"ViewUsage\")}\n </Link>\n ) : null}\n </div>\n </div>",
       "module": "/libs/ui-kit"
     }

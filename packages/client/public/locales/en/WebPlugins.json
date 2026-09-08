@@ -16,5 +16,5 @@
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Use the Plugin SDK to add new functionality, connect third-party services, or improve the existing experience. Browse sample plugins below, with source code available on GitHub. Go to the <1>Plugins</1> page to enable them for your workspace.",
   "PluginSDKInstruction": "<1>Read instructions</1> to build your own plugins.",
-  "UploadDescription": "You can add plugins to extend the functionality of the workspace with extra features. Click Upload plugin or drop file in the ZIP archive."
+  "UploadDescription": "Add plugins to extend your workspace with extra features. Enable one from the list below, or click \"Upload plugin\" (or drop a ZIP file) to add your own."
 }

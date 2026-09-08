@@ -80,6 +80,7 @@ import {
 } from "@/app/(rooms)/_contexts/RoomActionsContext";
 import useRoomActions from "@/app/(rooms)/_hooks/useRoomActions";
 import type { TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
+import type { TagsChangedHandler } from "@docspace/shared/components/tag-management/TagManagement.types";
 
 import { InfoPanelView, useInfoPanelStore } from "../../_store/InfoPanelStore";
 
@@ -96,179 +97,193 @@ import { NoItem, SeveralItems } from "./views/EmptyStates";
 import commonStyles from "./helpers/Common.module.scss";
 
 type InfoPanelBodyProps = {
-  onTagsChanged?: () => void;
+  onTagsChanged?: TagsChangedHandler;
+  /** Something else about the room changed - its logo - so read it back. */
+  onRoomUpdated?: () => void;
 };
 
-const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
-  const infoPanelStore = useInfoPanelStore();
-  const filesSelectionStore = useFilesSelectionStore();
-  const filesListStore = useFilesListStore();
-  const { selection, fileView, isVisible, isPinnedSelection } = infoPanelStore;
+const InfoPanelBody = observer(
+  ({ onTagsChanged, onRoomUpdated }: InfoPanelBodyProps) => {
+    const infoPanelStore = useInfoPanelStore();
+    const filesSelectionStore = useFilesSelectionStore();
+    const filesListStore = useFilesListStore();
+    const { selection, fileView, isVisible, isPinnedSelection } =
+      infoPanelStore;
 
-  const selectedCount = filesSelectionStore.selection.length;
-  const isSeveralItems = selectedCount > 1;
+    const selectedCount = filesSelectionStore.selection.length;
+    const isSeveralItems = selectedCount > 1;
 
-  const isRoom =
-    !!selection && "isRoom" in selection && Boolean(selection.isRoom);
-  const scrollContext = React.use(ScrollbarContext);
-  const scrollToTop = React.useCallback(() => {
-    scrollContext?.parentScrollbar?.scrollToTop();
-  }, []);
-  const membersData = useMembers({
-    room: isRoom ? (selection as unknown as TRoom) : null,
-    scrollToTop,
-  });
+    const isRoom =
+      !!selection && "isRoom" in selection && Boolean(selection.isRoom);
+    const scrollContext = React.use(ScrollbarContext);
+    const scrollToTop = React.useCallback(() => {
+      scrollContext?.parentScrollbar?.scrollToTop();
+    }, []);
+    const membersData = useMembers({
+      room: isRoom ? (selection as unknown as TRoom) : null,
+      scrollToTop,
+    });
 
-  const inheritedRoomActions = React.useContext(RoomActionsContext);
-  const roomActions = useRoomActions();
-  const isArchive = filesListStore.rootFolderType === FolderType.Archive;
-  const fallbackRoomActions = React.useMemo<RoomActionsHandler>(
-    () => ({
-      archiveSelected: () => {},
-      deleteSelected: () => {},
-      restoreSelected: () => {},
-      pinSelected: () => {},
-      isArchive,
-      editRoom: roomActions.editRoom,
-      inviteRoom: roomActions.inviteRoom,
-      changeOwner: roomActions.changeOwner,
-      archiveRoom: roomActions.archiveRoom,
-      deleteRoom: roomActions.deleteRoom,
-      infoRoom: roomActions.infoRoom,
-      roomChanged: roomActions.roomChanged,
-    }),
-    [roomActions, isArchive],
-  );
+    const inheritedRoomActions = React.useContext(RoomActionsContext);
+    const roomActions = useRoomActions();
+    const isArchive = filesListStore.rootFolderType === FolderType.Archive;
+    const fallbackRoomActions = React.useMemo<RoomActionsHandler>(
+      () => ({
+        archiveSelected: () => {},
+        deleteSelected: () => {},
+        restoreSelected: () => {},
+        pinSelected: () => {},
+        isArchive,
+        editRoom: roomActions.editRoom,
+        inviteRoom: roomActions.inviteRoom,
+        changeOwner: roomActions.changeOwner,
+        archiveRoom: roomActions.archiveRoom,
+        deleteRoom: roomActions.deleteRoom,
+        infoRoom: roomActions.infoRoom,
+        roomChanged: roomActions.roomChanged,
+      }),
+      [roomActions, isArchive],
+    );
 
-  const effectiveRoomActions = inheritedRoomActions ?? fallbackRoomActions;
+    const effectiveRoomActions = inheritedRoomActions ?? fallbackRoomActions;
 
-  // Clear pinned selection when the user navigates to a different folder so that
-  // a previously-pinned room does not remain visible after entering another room.
-  const prevFolderIdRef = React.useRef<number | string | undefined>(
-    filesListStore.currentFolder?.id,
-  );
-  React.useEffect(() => {
-    const newId = filesListStore.currentFolder?.id;
-    if (newId !== prevFolderIdRef.current) {
-      prevFolderIdRef.current = newId;
-      infoPanelStore.setPinnedSelection(false);
-    }
-  }, [filesListStore.currentFolder?.id, infoPanelStore]);
+    // Clear pinned selection when the user navigates to a different folder so that
+    // a previously-pinned room does not remain visible after entering another room.
+    const prevFolderIdRef = React.useRef<number | string | undefined>(
+      filesListStore.currentFolder?.id,
+    );
+    React.useEffect(() => {
+      const newId = filesListStore.currentFolder?.id;
+      if (newId !== prevFolderIdRef.current) {
+        prevFolderIdRef.current = newId;
+        infoPanelStore.setPinnedSelection(false);
+      }
+    }, [filesListStore.currentFolder?.id, infoPanelStore]);
 
-  React.useEffect(() => {
-    if (!isVisible) return;
+    React.useEffect(() => {
+      if (!isVisible) return;
 
-    // When the panel was opened explicitly for a specific item (e.g. from the
-    // folder header context menu), don't let the selection-sync overwrite it.
-    // The pin is cleared when the panel closes or the user clicks another item.
-    if (isPinnedSelection && selectedCount === 0) return;
+      // When the panel was opened explicitly for a specific item (e.g. from the
+      // folder header context menu), don't let the selection-sync overwrite it.
+      // The pin is cleared when the panel closes or the user clicks another item.
+      if (isPinnedSelection && selectedCount === 0) return;
 
-    if (isPinnedSelection && selectedCount > 0) {
-      infoPanelStore.setPinnedSelection(false);
-    }
+      if (isPinnedSelection && selectedCount > 0) {
+        infoPanelStore.setPinnedSelection(false);
+      }
 
-    if (isSeveralItems) {
-      if (selection !== null) infoPanelStore.setSelection(null);
-      return;
-    }
+      if (isSeveralItems) {
+        if (selection !== null) infoPanelStore.setSelection(null);
+        return;
+      }
 
-    const cf = filesListStore.currentFolder;
-    const isRootFolder = !!(cf && cf.id === cf.rootFolderId);
-    let currentFolderAsItem = null;
-    if (!isRootFolder && cf) {
-      const rawLogo = (cf as unknown as { logo?: TLogo }).logo;
-      const { roomLogo, roomIconColor, hasRoomImage } = normalizeRoomLogo(rawLogo);
-      currentFolderAsItem = {
-        ...cf,
-        isFolder: true as const,
-        isRoom: !!cf.roomType,
-        roomLogo,
-        roomIconColor,
-        hasRoomImage,
-      };
-    }
+      const cf = filesListStore.currentFolder;
+      const isRootFolder = !!(cf && cf.id === cf.rootFolderId);
+      let currentFolderAsItem = null;
+      if (!isRootFolder && cf) {
+        const rawLogo = (cf as unknown as { logo?: TLogo }).logo;
+        const { roomLogo, roomIconColor, hasRoomImage } =
+          normalizeRoomLogo(rawLogo);
+        currentFolderAsItem = {
+          ...cf,
+          isFolder: true as const,
+          isRoom: !!cf.roomType,
+          roomLogo,
+          roomIconColor,
+          hasRoomImage,
+        };
+      }
 
-    const next =
-      selectedCount === 1
-        ? filesSelectionStore.selection[0]
-        : (filesSelectionStore.bufferSelection ?? currentFolderAsItem ?? null);
+      const next =
+        selectedCount === 1
+          ? filesSelectionStore.selection[0]
+          : (filesSelectionStore.bufferSelection ??
+            currentFolderAsItem ??
+            null);
 
-    if (!next) {
-      if (selection !== null) infoPanelStore.setSelection(null);
-      return;
-    }
+      if (!next) {
+        if (selection !== null) infoPanelStore.setSelection(null);
+        return;
+      }
 
-    if (selection && selection.id === next.id) return;
+      if (selection && selection.id === next.id) return;
 
-    infoPanelStore.setSelection(next as TFolder);
-  }, [
-    isVisible,
-    isPinnedSelection,
-    isSeveralItems,
-    selectedCount,
-    filesSelectionStore.selection,
-    filesSelectionStore.bufferSelection,
-    filesListStore.currentFolder,
-    selection,
-    infoPanelStore,
-  ]);
+      infoPanelStore.setSelection(next as TFolder);
+    }, [
+      isVisible,
+      isPinnedSelection,
+      isSeveralItems,
+      selectedCount,
+      filesSelectionStore.selection,
+      filesSelectionStore.bufferSelection,
+      filesListStore.currentFolder,
+      selection,
+      infoPanelStore,
+    ]);
 
-  const availableTabs = selection ? getAvailableTabs(selection) : [];
-  const currentView = availableTabs.includes(fileView)
-    ? fileView
-    : (availableTabs[0] ?? InfoPanelView.infoDetails);
+    const availableTabs = selection ? getAvailableTabs(selection) : [];
+    const currentView = availableTabs.includes(fileView)
+      ? fileView
+      : (availableTabs[0] ?? InfoPanelView.infoDetails);
 
-  const isMembersView = currentView === InfoPanelView.infoMembers;
+    const isMembersView = currentView === InfoPanelView.infoMembers;
 
-  const room = selection as unknown as TRoom;
-  const hasEditAccess = isRoom ? Boolean(room.security?.EditAccess) : false;
+    const room = selection as unknown as TRoom;
+    const hasEditAccess = isRoom ? Boolean(room.security?.EditAccess) : false;
 
-  const showHeader = !isSeveralItems && !!selection;
+    const showHeader = !isSeveralItems && !!selection;
 
-  const renderContent = () => {
-    if (isSeveralItems) return <SeveralItems count={selectedCount} />;
+    const renderContent = () => {
+      if (isSeveralItems) return <SeveralItems count={selectedCount} />;
 
-    if (!selection) return <NoItem />;
+      if (!selection) return <NoItem />;
 
-    if (currentView === InfoPanelView.infoMembers)
-      return <Members selection={selection} membersData={membersData} />;
-    if (currentView === InfoPanelView.infoShare)
-      return <ShareView selection={selection} />;
-    if (currentView === InfoPanelView.infoHistory)
-      return <History selection={selection} />;
-    return <Details selection={selection} onTagsChanged={onTagsChanged} />;
-  };
+      if (currentView === InfoPanelView.infoMembers)
+        return <Members selection={selection} membersData={membersData} />;
+      if (currentView === InfoPanelView.infoShare)
+        return <ShareView selection={selection} />;
+      if (currentView === InfoPanelView.infoHistory)
+        return <History selection={selection} />;
+      return (
+        <Details
+          selection={selection}
+          onTagsChanged={onTagsChanged}
+          onRoomUpdated={onRoomUpdated}
+        />
+      );
+    };
 
-  return (
-    <div
-      className={commonStyles.infoPanelBody}
-      data-info-panel-scroll
-      data-testid="info_panel_body"
-    >
-      {showHeader && isRoom ? (
-        <RoomActionsContext.Provider value={effectiveRoomActions}>
-          <RoomHeader
-            selection={selection as TFolder}
-            isMembersView={isMembersView}
-            hasEditAccess={hasEditAccess}
-            setSearchValue={membersData.handleSearchMembers}
-            onInvite={() =>
-              effectiveRoomActions.inviteRoom?.(
-                selection as unknown as TFolderItem,
-              )
-            }
-            onUpdated={onTagsChanged}
-          />
-        </RoomActionsContext.Provider>
-      ) : null}
+    return (
+      <div
+        className={commonStyles.infoPanelBody}
+        data-info-panel-scroll
+        data-testid="info_panel_body"
+      >
+        {showHeader && isRoom ? (
+          <RoomActionsContext.Provider value={effectiveRoomActions}>
+            <RoomHeader
+              selection={selection as TFolder}
+              isMembersView={isMembersView}
+              hasEditAccess={hasEditAccess}
+              setSearchValue={membersData.handleSearchMembers}
+              onInvite={() =>
+                effectiveRoomActions.inviteRoom?.(
+                  selection as unknown as TFolderItem,
+                )
+              }
+              onUpdated={onRoomUpdated}
+            />
+          </RoomActionsContext.Provider>
+        ) : null}
 
-      {showHeader && !isRoom ? (
-        <FileHeader selection={selection as TFile | TFolder} />
-      ) : null}
+        {showHeader && !isRoom ? (
+          <FileHeader selection={selection as TFile | TFolder} />
+        ) : null}
 
-      {renderContent()}
-    </div>
-  );
-});
+        {renderContent()}
+      </div>
+    );
+  },
+);
 
 export default InfoPanelBody;

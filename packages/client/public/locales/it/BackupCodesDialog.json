@@ -1,8 +1,8 @@
 {
   "BackupCodesDescription": "Usa i codici di backup per accedere quando non hai accesso al tuo telefono.",
-  "BackupCodesSecondDescription": "Ogni codice può essere utilizzato una volta. Puoi ottenere nuovi codici in qualsiasi momento. Sono validi solo i codici che sono stati generati per ultimi.",
+  "BackupCodesSecondDescription": "Ogni codice può essere utilizzato una sola volta. Puoi ottenere nuovi codici in qualsiasi momento. È valido solo il codice generato più di recente.",
   "BackupCodesTitle": "Codici di backup",
-  "CodesCounter": "codici:",
+  "CodesCounter": "codici di backup:",
   "PrintButton": "Stampa",
   "RequestNewButton": "Richiedere nuovo"
 }

@@ -1,14 +1,14 @@
 {
   "key_path": "AiServicesManagement",
-  "content": "{{aiServices}} Management",
-  "content_en_sha1_hash": "f4923bbe665d8a6f338bef657a66364c9b39476a",
-  "created_at": "2026-03-26T08:26:46.810Z",
-  "updated_at": "2026-08-19T13:26:37.742Z",
+  "content": "{{aiServices}}",
+  "content_en_sha1_hash": "f30f31979bf50fd36d26da6edd136e5a969953e3",
+  "created_at": "2026-08-31T18:23:40.314Z",
+  "updated_at": "2026-08-31T20:47:40.915Z",
   "comment": {
-    "text": "This is a category title in the portal settings navigation. It refers to the section where users can manage AI services. The `{{aiServices}}` variable will be replaced with the localized term for \"AI Services\".",
+    "text": "Category title in the customization settings menu, displaying the name of the AI services via the {{aiServices}} variable.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:51.624Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:47:40.915Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

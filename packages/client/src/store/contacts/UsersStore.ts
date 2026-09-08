@@ -256,7 +256,7 @@ class UsersStore {
         setReducedRightsData(true, admin);
 
         if (defaultFolderType === FolderType.USER) {
-          setDefaultFolderType(FolderType.Rooms);
+          setDefaultFolderType(FolderType.DEFAULT);
         }
       }
 

@@ -1,14 +1,14 @@
 {
   "key_path": "EmptyGroupsCreateGroupOptionDescription",
-  "content": "Create a group to add them to the room",
-  "content_en_sha1_hash": "514e4c85dc8f34985592a41f54d63d2f18a077fd",
-  "created_at": "2025-05-19T21:30:56.487Z",
-  "updated_at": "2026-05-28T15:46:18.577Z",
+  "content": "Create a group to invite all its members to a room, or share a file with them at once",
+  "content_en_sha1_hash": "1d5af3fa6a3c99a02e717baa979f4cbaf38bf45d",
+  "created_at": "2026-08-31T18:23:45.773Z",
+  "updated_at": "2026-08-31T19:58:34.095Z",
   "comment": {
-    "text": "This is the description text for an option to create a new user group. It appears on an empty screen when no groups have been created yet, guiding the user to create one to populate the room.",
+    "text": "Description for an option in the empty state view for groups, explaining the utility of the \"Create Group\" action.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:07:01.314Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:58:34.095Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

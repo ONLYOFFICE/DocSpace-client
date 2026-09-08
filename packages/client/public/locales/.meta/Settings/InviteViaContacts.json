@@ -1,13 +1,13 @@
 {
   "key_path": "InviteViaContacts",
-  "content": "Invite workspace members via {{sectionName}}",
-  "content_en_sha1_hash": "b00d900e0c5d689168e82b626f61fa24e8018d82",
-  "created_at": "2026-08-13T22:44:29.623Z",
-  "updated_at": "2026-08-14T15:35:41.774Z",
+  "content": "Invite members via {{sectionName}}",
+  "content_en_sha1_hash": "17a5fa0243de14a926e94d7d18ab563ba42181e4",
+  "created_at": "2026-08-31T18:23:41.468Z",
+  "updated_at": "2026-08-31T20:28:13.015Z",
   "comment": {
-    "text": "Clickable text label in the invitation settings that initiates the process of inviting members through a specific contact source. The {{sectionName}} variable represents the name of that source (e.g., \"Contacts\").",
+    "text": "Clickable text label in the portal invitation settings that initiates the invitation process via a specific contact source. The {{sectionName}} variable represents the name of the contact section.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:35:41.774Z",
+    "updated_at": "2026-08-31T20:28:13.015Z",
     "model": "gemma4:26b"
   },
   "usage": [

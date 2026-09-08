@@ -170,10 +170,12 @@ const EmptyView = ({
         defaultValue: "Upload from {{productName}}",
       }),
       description: t("Common:UploadFilesPortal", {
-        sectionNameFirst: t("Common:Files"),
-        sectionNameSecond: t("Common:Rooms"),
+        files: t("Common:Files"),
+        rooms: t("Common:Rooms"),
+        forms: t("Common:Forms"),
+        aiAgents: t("Common:AIAgents"),
         defaultValue:
-          "Pick files from {{sectionNameFirst}} or {{sectionNameSecond}}.",
+          "Add files from {{files}}, {{rooms}}, {{forms}}, or other {{aiAgents}}",
       }),
       icon: <UploadPDFFormIcon />,
       onClick: onUploadFromDocSpace,

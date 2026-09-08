@@ -252,7 +252,7 @@ export const getFolderModelImpl = (
   const createNewDoc: TContextOption = {
     id: "personal_new-document",
     key: "new-document",
-    label: t("Common:NewDocument"),
+    label: t("Common:Document"),
     onClick: () => self.onCreate("docx"),
     icon: ActionsDocumentsReactSvgUrl,
   };
@@ -260,7 +260,7 @@ export const getFolderModelImpl = (
   const createNewSpreadsheet = {
     id: "personal_new-spreadsheet",
     key: "new-spreadsheet",
-    label: t("Common:NewSpreadsheet"),
+    label: t("Common:Spreadsheet"),
     onClick: () => self.onCreate("xlsx"),
     icon: SpreadsheetReactSvgUrl,
   };
@@ -268,7 +268,7 @@ export const getFolderModelImpl = (
   const createNewPresentation = {
     id: "personal_new-presentation",
     key: "new-presentation",
-    label: t("Common:NewPresentation"),
+    label: t("Common:Presentation"),
     onClick: () => self.onCreate("pptx"),
     icon: ActionsPresentationReactSvgUrl,
   };
@@ -302,7 +302,7 @@ export const getFolderModelImpl = (
   const createNewFolder: TContextOption = {
     id: "personal_new-folder",
     key: "new-folder",
-    label: t("Common:NewFolder"),
+    label: t("Common:Folder"),
     onClick: () => self.onCreate(),
     icon: CatalogFolderReactSvgUrl,
   };

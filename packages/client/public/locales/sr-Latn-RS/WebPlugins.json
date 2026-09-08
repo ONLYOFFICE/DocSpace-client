@@ -16,5 +16,5 @@
   "PluginSDK": "Plugin SDK (SDK za dodatke)",
   "PluginSDKDescription": "Koristite Plugin SDK da dodate nove funkcionalnosti, povežete usluge trećih strana ili unapredite postojeće iskustvo. Pregledajte primere dodataka ispod, čiji je izvorni kod dostupan na GitHub-u. Idite na stranicu <1>Dodaci</1> da ih omogućite za svoj radni prostor.",
   "PluginSDKInstruction": "<1>Pročitajte uputstva</1> da napravite sopstvene dodatke.",
-  "UploadDescription": "Možete dodati dodatke da biste proširili funkcionalnost radnog prostora sa dodatnim mogućnostima. Kliknite na \"Postavi dodatak\" ili prevucite datoteku u ZIP arhivi."
+  "UploadDescription": "Dodajte dodatke da biste proširili radni prostor dodatnim mogućnostima. Omogućite neki sa liste ispod ili kliknite na „Postavi dodatak“ (ili prevucite ZIP datoteku) da dodate svoj."
 }

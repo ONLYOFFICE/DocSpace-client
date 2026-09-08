@@ -58,7 +58,7 @@
   "PrivacyPolicy": "Datenschutzrichtlinie",
   "PrivacyPolicyURL": "Datenschutzrichtlinien-URL",
   "PrivacyPolicyURLHelpButton": "Geben Sie einen URL-Link zu Ihrer Datenschutzrichtlinie an, die den geltenden Gesetzen und Vorschriften entsprechen muss und klar darlegt, wie Sie personenbezogene Daten erheben, nutzen, teilen, speichern und anderweitig verarbeiten.",
-  "ProfileDescription": "Hier können Sie die Informationen der Apps überprüfen, denen Sie den Auth-Zugriff gewährt haben, und gegebenenfalls die Zustimmung widerrufen.",
+  "ProfileDescription": "Sehen Sie die Apps ein, denen Sie Zugriff auf Ihr Konto gewährt haben, und widerrufen Sie den Zugriff bei Bedarf.",
   "Read": "Lesen",
   "ReadOAuthGuide": "OAuth 2.0-Leitfaden lesen",
   "RedirectsURLS": "Weiterleitungs-URLs",

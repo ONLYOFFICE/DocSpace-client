@@ -1,13 +1,13 @@
 {
   "key_path": "SendNotificationAboutRestoring",
-  "content": "Send notification about workspace restoring to users",
-  "content_en_sha1_hash": "ec9920327c5bd8c26a4cc8112eb660d647f15711",
-  "created_at": "2026-08-12T11:00:38.041Z",
-  "updated_at": "2026-08-14T14:58:32.905Z",
+  "content": "Notify users when the data restore begins",
+  "content_en_sha1_hash": "ed0b59d93a42ca83ea1ff850e7e2a6928f0579ec",
+  "created_at": "2026-08-31T18:23:29.651Z",
+  "updated_at": "2026-08-31T18:39:32.696Z",
   "comment": {
-    "text": "Checkbox label in the backup restoration settings that determines whether users are notified when a workspace is being restored.",
+    "text": "Checkbox label for enabling or disabling notifications at the start of a data restoration process.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:03:30.591Z",
+    "updated_at": "2026-08-31T18:39:32.696Z",
     "model": "gemma4:26b"
   },
   "usage": [

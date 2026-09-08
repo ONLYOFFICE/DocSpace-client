@@ -3,7 +3,7 @@
   "content": "New spreadsheet",
   "content_en_sha1_hash": "6bde054ddba34bfc0975daa6211434db38bf5b6f",
   "created_at": "2025-05-19T21:30:46.791Z",
-  "updated_at": "2026-08-26T16:06:02.289Z",
+  "updated_at": "2026-08-31T18:23:50.690Z",
   "comment": {
     "text": "This string is used as the default file name for a new spreadsheet and as a label for a button that creates a new spreadsheet.",
     "is_auto": true,
@@ -15,12 +15,6 @@
       "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 90,
       "context": "export const getDefaultFileName = (format) => {\n switch (format) {\n case \"docx\":\n return i18n.t(\"Common:NewDocument\");\n case \"xlsx\":\n return i18n.t(\"Common:NewSpreadsheet\");\n case \"pptx\":\n return i18n.t(\"Common:NewPresentation\");\n case \"pdf\":\n return i18n.t(\"Common:NewPDFForm\");\n default:",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 263,
-      "context": "};\n \n const createNewSpreadsheet = {\n id: \"personal_new-spreadsheet\",\n key: \"new-spreadsheet\",\n label: t(\"Common:NewSpreadsheet\"),\n onClick: () => self.onCreate(\"xlsx\"),\n icon: SpreadsheetReactSvgUrl,\n };\n \n const createNewPresentation = {",
       "module": "/packages/client"
     },
     {

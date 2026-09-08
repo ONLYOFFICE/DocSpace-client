@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2026-08-14T14:58:32.659Z",
+  "updated_at": "2026-09-04T07:59:41.562Z",
   "comment": {
     "text": "This is a button label or dialog title. It prompts the user to choose a file, appearing in contexts like attaching a file to a chat message or selecting a file within a file selector.",
     "is_auto": true,
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 248,
+      "line_number": 247,
       "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"FileId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFile\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput\n onSelectFile={onChangeFileId}\n filterParam={FilesSelectorFilterTypes.ALL}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer.js",
-      "line_number": 249,
+      "line_number": 248,
       "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"FileId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFile\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput\n onSelectFile={onChangeFileId}\n filterParam={FilesSelectorFilterTypes.ALL}",
       "module": "/packages/client"
     },

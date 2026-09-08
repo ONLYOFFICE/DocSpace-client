@@ -1,8 +1,8 @@
 {
   "BackupCodesDescription": "Telefonunuz əlçatan deyilsə, rezerv kodlardan istifadə edin.",
-  "BackupCodesSecondDescription": "Hər bir kod bir dəfə istifadə oluna bilər. Yeni kodu istənilən zaman əldə edə bilərsiniz. Yalnız generasiya olunmuş kodlar düzgündür.",
+  "BackupCodesSecondDescription": "Hər bir kod yalnız bir dəfə istifadə oluna bilər. İstənilən vaxt yeni kodlar əldə edə bilərsiniz. Yalnız ən son generasiya olunmuş kod etibarlıdır.",
   "BackupCodesTitle": "Ehtiyyat kodları",
-  "CodesCounter": "kodlar::",
+  "CodesCounter": "ehtiyat kodlar:",
   "PrintButton": "Çap et",
   "RequestNewButton": "Yenisini sorğula"
 }

@@ -1,14 +1,14 @@
 {
   "key_path": "OpenSameTab",
-  "content": "Open {{organizationName}} editor in same tab",
-  "content_en_sha1_hash": "12e13651b8dd15fd738e338dc6d423420896c148",
-  "created_at": "2025-05-19T21:30:55.180Z",
-  "updated_at": "2026-05-15T14:00:06.877Z",
+  "content": "Open editors in same tab",
+  "content_en_sha1_hash": "d43f406e37ead8b4ab1cead8f93b4ca7e2bcfcf8",
+  "created_at": "2026-08-31T18:23:45.079Z",
+  "updated_at": "2026-08-31T19:59:15.617Z",
   "comment": {
-    "text": "This is the label for a toggle switch in the user's profile settings. It describes an option to open the ONLYOFFICE editor in the same browser tab, where `{{organizationName}}` will be replaced by the name of the organization (e.g., \"ONLYOFFICE\").",
+    "text": "Label for a toggle button that configures whether editors open in the current browser tab.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:10:53.465Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:59:15.617Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -2,7 +2,7 @@
   "ActiveSessions": "Aktivní relace",
   "AutoDeleteTitle": "Všechny relace starší než 60 dní budou automaticky odstraněny.",
   "ChangePasswordAfterLoggingOut": "Změna hesla po odhlášení",
-  "ConnectSocialNetworks": "Připojte své sociální sítě",
+  "ConnectSocialNetworks": "Připojte své účty",
   "DescriptionForSecurity": "Pro větší bezpečnost je třeba změnit heslo.",
   "DesktopTheme": "Synchronizace s nastavením desktopového editoru",
   "DesktopThemeDescription": "Automatické přepínání mezi světlými a tmavými motivy v závislosti na aktuálním motivu editorů plochy.",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "E-mail není ověřen",
   "ErrorAccountAlreadyUse": "Propojený účet již používaný jiným uživatelem",
   "LogoutActiveConnection": "Odhlášení z aktivního připojení",
-  "LogoutAllActiveSessionsDescription": "Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
+  "LogoutAllActiveSessionsDescription": "Všechny aktivní relace kromě aktuální budou ukončeny. Aktuální relace zůstane aktivní.",
   "LogoutBtn": "Odhlásit se",
-  "LogoutDescription": "Poznámka. Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
+  "LogoutDescription": "Poznámka. Všechny aktivní relace kromě aktuální budou ukončeny. Aktuální relace zůstane aktivní.",
   "LogoutFrom": "Odhlášení z {{platform}} {{browser}}?",
   "MyProfile": "Můj profil",
   "NotificationsChannels": "Notifikační kanály",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Zobrazit záložní kódy",
   "SuccessLogout": "Aktivní připojení bylo odhlášeno: {{platform}}, {{browser}}",
   "TelegramAccount": "Telegram účet",
-  "TelegramAccountDescription": "Pro připojení TelegramBot k vašemu účtu přejděte po tajném odkazu a klikněte na tlačítko „Connect Telegram“.",
+  "TelegramAccountDescription": "Chcete-li dostávat oznámení ke svému účtu v Telegramu, přejděte na odkaz níže nebo klikněte na Připojit.",
   "TelegramAccountDisconnect": "Odpojit Telegram",
   "TelegramAccountDisconnectDescription": "Váš účet @{{username}} je propojený pro telegramové notifikace. Můžete se od tohoto účtu odpojit. V tomto případě nebudete dostávat notifikace.",
   "TerminateAllSessions": "Ukončení všech relací kromě aktuální",
-  "TwoFactorDescription": "Dvoufázové ověřování prostřednictvím aplikace generující kódy bylo správcem povoleno pro všechny uživatele."
+  "TwoFactorDescription": "Dvoufázové ověřování prostřednictvím aplikace pro ověřování bylo správcem povoleno pro všechny uživatele."
 }

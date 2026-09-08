@@ -1,13 +1,13 @@
 {
   "key_path": "TrashAutoDeleteWarning",
-  "content": "Items in {{sectionName}} are automatically deleted after 30 days.",
-  "content_en_sha1_hash": "72740d2f13fab9038a1cf3a73558f696ef70b1af",
-  "created_at": "2026-06-03T09:30:00.163Z",
-  "updated_at": "2026-08-20T12:26:01.770Z",
+  "content": "Items in the {{sectionName}} are automatically deleted after 30 days.",
+  "content_en_sha1_hash": "e570669e3913377d421d1bad0811177cb4d248b7",
+  "created_at": "2026-08-31T18:23:34.993Z",
+  "updated_at": "2026-08-31T18:33:21.944Z",
   "comment": {
-    "text": "Warning text displayed in a warning component or header when viewing the trash section. The {{sectionName}} variable represents the name of the section.",
+    "text": "Warning text displayed in the header or section warning area when viewing the trash. It informs users about the 30-day automatic deletion policy, where {{sectionName}} represents the name of the trash section.",
     "is_auto": true,
-    "updated_at": "2026-06-03T09:30:32.639Z",
+    "updated_at": "2026-08-31T18:33:21.944Z",
     "model": "gemma4:26b"
   },
   "usage": [

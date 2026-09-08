@@ -302,7 +302,7 @@ const IpSecurity = (props) => {
           },
           {
             id: "ip-security-enable",
-            label: t("Common:Enable"),
+            label: t("Common:Enabled"),
             value: "enable",
             dataTestId: "ip_security_enabled",
           },

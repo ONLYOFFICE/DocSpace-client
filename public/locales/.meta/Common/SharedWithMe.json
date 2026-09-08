@@ -3,7 +3,7 @@
   "content": "Shared with me",
   "content_en_sha1_hash": "f40ca84f04474455cba711b1643a006b59aa1210",
   "created_at": "2025-05-19T21:30:48.661Z",
-  "updated_at": "2026-08-14T14:58:32.661Z",
+  "updated_at": "2026-08-31T18:23:50.589Z",
   "comment": {
     "text": "A label for a section or category in the UI, referring to files and folders that have been shared with the current user. It appears as a short label, often within settings or import/export options.",
     "is_auto": true,
@@ -45,12 +45,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
       "line_number": 147,
       "context": "personalExportDetails={{\n name: t(\"Common:Files\"),\n icon: UserSolidIcon,\n }}\n sharedFilesAndFoldersExportDetails={{\n name: t(\"Common:SharedWithMe\"),\n icon: SharedIcon,\n }}\n hasCommonFiles\n hasProjectFiles\n />",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
-      "line_number": 97,
-      "context": "/>\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n rooms: t(\"Common:Rooms\"),\n shared: t(\"Common:SharedWithMe\"),\n documents: t(\"Common:Files\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n </div>",
       "module": "/packages/client"
     },
     {

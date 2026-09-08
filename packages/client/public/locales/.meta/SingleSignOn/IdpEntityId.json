@@ -1,14 +1,14 @@
 {
   "key_path": "IdpEntityId",
-  "content": "IdP Entity Id",
-  "content_en_sha1_hash": "ec80bd1846e6613c32d80934518fd3cfe3e05f8e",
-  "created_at": "2025-05-19T21:30:50.123Z",
-  "updated_at": "2026-05-15T15:37:40.281Z",
+  "content": "Identity provider entity ID",
+  "content_en_sha1_hash": "07af7eb3b5ae34457b0bea96565aab6770fb917b",
+  "created_at": "2026-08-31T18:23:40.006Z",
+  "updated_at": "2026-08-31T21:05:56.960Z",
   "comment": {
-    "text": "This is a label for an input field in the Single Sign-On settings. It identifies the unique identifier for the Identity Provider.",
+    "text": "Form field label for the unique identifier of the identity provider in the Single Sign-On settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:48.062Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T21:05:56.960Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

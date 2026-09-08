@@ -1,14 +1,14 @@
 {
   "key_path": "idpAuthRequest",
-  "content": "Verify Auth Responses Sign",
-  "content_en_sha1_hash": "c23e7e3e2e865e4a6cfba1a6ded472c00450480e",
-  "created_at": "2025-05-19T21:30:50.091Z",
-  "updated_at": "2026-05-15T15:37:40.283Z",
+  "content": "Verify auth responses sign",
+  "content_en_sha1_hash": "3fd9169ea09f4d2dd55fc81205543ed2c6f250f9",
+  "created_at": "2026-08-31T18:23:39.993Z",
+  "updated_at": "2026-08-31T20:55:25.613Z",
   "comment": {
-    "text": "This is a checkbox label in the Single Sign-On settings. It enables or disables the verification of signed authentication responses from the Identity Provider.",
+    "text": "Checkbox label in the Single Sign-On configuration settings used to enable signature verification for authentication responses from an Identity Provider (IdP).",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:51.356Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:55:25.613Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

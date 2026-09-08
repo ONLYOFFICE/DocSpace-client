@@ -106,6 +106,46 @@ contain. Fixing a header on an allowlisted file requires removing it from
 `common/tests/test/license-*-allowlist.json` **in the same commit** (stale
 allowlist entries fail the test).
 
+## Menu labels live in Vitest snapshots, not in the spec (test:client)
+
+Nine `.snap` files sit under `packages/client/src/store/**/__tests__/__snapshots__/`.
+Three of them record **i18n keys**, because their harness mocks `t` as an
+identity function (`testHarness.ts`: `const t = (key: string) => key`), so every
+`t("Common:NewFolder")` is frozen into the snapshot verbatim:
+
+| Snapshot | Freezes the model built by |
+|----------|---------------------------|
+| `ContextOptionsStore.models.test.ts.snap` | `contextOptionsStore/folderModel.helpers.ts` (the "+ New" menu) |
+| `ContextOptionsStore.filesContextOptions.test.ts.snap` | `contextOptionsStore/filesContextOptions.helpers.ts` |
+| `FilesActionsStore.headerMenu.test.ts.snap` | `filesActionsStore/menu.helpers.ts` |
+
+So **swapping the key at a `t()` call site in those three helpers breaks
+`pnpm test:client`** — a locale-only change that never touches a test file
+still fails the pre-push gate. `common/tests` and `pnpm test` (shared) stay
+green, which makes it look safe right up to the push.
+
+Grepping the `.test.ts` file for the key proves nothing: the strings are in the
+sibling `__snapshots__/*.snap`, not in the spec. Before renaming a key at a call
+site, grep the snapshots too:
+
+```bash
+grep -rn --include='*.snap' 'Common:NewFolder' packages/client/src
+```
+
+These are characterization snapshots — they exist to make the menu shape
+visible, not to pin the wording. When the diff is only the labels you meant to
+change and the keys, order and separators are untouched, updating is the right
+fix, and the untouched structure is the evidence that only wording moved:
+
+```bash
+cd packages/client && pnpm exec vitest run src/store/contextOptionsStore -u
+git diff -- 'packages/client/src/**/__snapshots__/*'  # review before committing
+```
+
+Never run a bare `vitest -u` across the whole package: it rewrites all nine
+snapshots and silently absorbs regressions in the six that have nothing to do
+with the change.
+
 ## Advisory-only tools (not gated)
 
 `pnpm check-circular` (madge) and `fallow` / `fallow:audit` (dead code,

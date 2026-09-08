@@ -1,14 +1,14 @@
 {
   "key_path": "spSignResponseRequest",
-  "content": "Sign Logout Responses",
-  "content_en_sha1_hash": "656e9899abc81145d0e36cc78c3bc14375b78969",
-  "created_at": "2025-05-19T21:30:50.178Z",
-  "updated_at": "2026-05-15T15:37:40.283Z",
+  "content": "Sign logout responses",
+  "content_en_sha1_hash": "ce2b78b24eb9c97cf0ee9ea88741319f3901f8ff",
+  "created_at": "2026-08-31T18:23:40.166Z",
+  "updated_at": "2026-08-31T20:50:13.718Z",
   "comment": {
-    "text": "This is a checkbox label in the Single Sign-On settings. It allows administrators to configure whether logout responses from the service provider should be digitally signed.",
+    "text": "Checkbox label in the Single Sign-On integration settings used to enable or disable the request for logout responses.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:18.938Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:50:13.718Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

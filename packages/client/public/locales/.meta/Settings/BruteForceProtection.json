@@ -1,14 +1,14 @@
 {
   "key_path": "BruteForceProtection",
-  "content": "Brute Force Protection",
-  "content_en_sha1_hash": "ad05e298131255f6f589995a3c3f681dfa43a007",
-  "created_at": "2025-05-19T21:30:50.820Z",
-  "updated_at": "2026-08-14T14:58:32.832Z",
+  "content": "Brute force protection",
+  "content_en_sha1_hash": "cc2c00f9d3e7f6f8b135a2b662a1e9b3e5091be7",
+  "created_at": "2026-08-31T18:23:40.539Z",
+  "updated_at": "2026-08-31T20:45:37.441Z",
   "comment": {
-    "text": "This is a section title in the portal settings, referring to a security feature that prevents automated attempts to guess login credentials.",
+    "text": "Section header and menu item title in the Portal Security settings, labeling the feature used to prevent automated login attempts.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:26.722Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:45:37.441Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -212,12 +218,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

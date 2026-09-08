@@ -167,7 +167,7 @@ class SettingsStore {
 
   utcHoursOffset = 0;
 
-  defaultFolderType = FolderType.Rooms;
+  defaultFolderType = FolderType.DEFAULT;
 
   homepage = "";
 

@@ -3,7 +3,7 @@
   "content": "<1>Grace period: {{fromDate}} – {{byDate}} ({{delayDaysCount}} days remaining).</1> During this time, admins can't create rooms, AI agents, or add users. After {{byDate}}, the workspace will be unavailable until payment is made.",
   "content_en_sha1_hash": "52bbec9185e3a6a1e550e79523b9d367c8622fa9",
   "created_at": "2026-08-13T22:44:07.213Z",
-  "updated_at": "2026-08-14T15:09:01.959Z",
+  "updated_at": "2026-08-31T18:23:50.992Z",
   "comment": {
     "text": "Text notice in the payment container that appears when a grace period is active, informing users of the period's duration and the consequences of non-payment. It includes `<1>` tags for styling and variables for the start date, end date, and remaining days.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
-      "line_number": 249,
+      "line_number": 248,
       "context": "if (isGracePeriod)\n return (\n <Text fontSize=\"14px\" lineHeight=\"16px\">\n <CommonTrans\n i18nKey=\"GracePeriodActivatedNotice\"\n values={{\n fromDate: paymentDate,\n byDate: gracePeriodEndDate,\n delayDaysCount,\n productName: getBrandName(\"ProductName\"),",
       "module": "/libs/ui-kit"
     }

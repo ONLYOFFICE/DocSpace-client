@@ -1,14 +1,14 @@
 {
   "key_path": "PrivateKey",
-  "content": "Private Key",
-  "content_en_sha1_hash": "ade5ddaf2557ee93225fc565adbfe1ade3bae3a0",
-  "created_at": "2025-05-19T21:30:50.121Z",
-  "updated_at": "2026-05-15T14:00:06.859Z",
+  "content": "Private key",
+  "content_en_sha1_hash": "7b1acb5bb38da7fec11ed97a7b1aed476ba79071",
+  "created_at": "2026-08-31T18:23:40.063Z",
+  "updated_at": "2026-08-31T21:02:57.140Z",
   "comment": {
-    "text": "This is a label for an input field where a user can enter or view a private key, likely for security or integration settings.",
+    "text": "Label for a textarea field in the SSO certificate configuration modal.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:38.187Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T21:02:57.140Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

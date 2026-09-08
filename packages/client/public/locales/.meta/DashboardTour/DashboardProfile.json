@@ -1,13 +1,13 @@
 {
   "key_path": "DashboardProfile",
-  "content": "The workspace name and a short summary of your profile: your name, email and password. From here you can rename the workspace or change your password.",
-  "content_en_sha1_hash": "f4156d4aca8c595c6dc55f5cdd98fbc8b195a373",
-  "created_at": "2026-08-12T11:00:49.076Z",
-  "updated_at": "2026-08-12T11:32:13.850Z",
+  "content": "Here's your workspace name and profile summary: name, email, and password. Rename your workspace or update your password anytime from here. To update other settings, go to your Profile page.",
+  "content_en_sha1_hash": "c644943bae6189ca5ba29d259114e4d68b3b8d90",
+  "created_at": "2026-08-31T18:23:46.772Z",
+  "updated_at": "2026-08-31T19:44:13.793Z",
   "comment": {
-    "text": "Instructional text for a guided tour step describing the contents and available actions within the user profile card.",
+    "text": "Instructional text for a step in the dashboard onboarding tour, appearing when the user is guided to the profile card.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:32:13.850Z",
+    "updated_at": "2026-08-31T19:44:13.793Z",
     "model": "gemma4:26b"
   },
   "usage": [

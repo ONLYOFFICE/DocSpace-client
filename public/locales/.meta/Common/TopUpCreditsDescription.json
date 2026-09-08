@@ -1,13 +1,13 @@
 {
   "key_path": "TopUpCreditsDescription",
-  "content": "Enter the amount you want to add to your credits balance. On the next step, you'll be asked to attach a payment method securely via Stripe.",
-  "content_en_sha1_hash": "0d176424c79bb935ff4108f3f577eede57ada9eb",
-  "created_at": "2026-05-27T14:11:43.026Z",
-  "updated_at": "2026-08-27T15:37:55.820Z",
+  "content": "Enter the amount you'd like to add to your credits balance. In the next step, you'll need to securely add a payment method via Stripe.",
+  "content_en_sha1_hash": "a54920a85cfa86b0be83a78ee42966f9c1dda723",
+  "created_at": "2026-08-31T18:23:34.405Z",
+  "updated_at": "2026-08-31T18:34:12.226Z",
   "comment": {
-    "text": "Description text in a modal dialog for adding credits, explaining the process and the upcoming Stripe payment step.",
+    "text": "Instructional text in a credit top-up modal dialog that explains the process of entering an amount and proceeding to Stripe payment.",
     "is_auto": true,
-    "updated_at": "2026-05-27T14:13:52.467Z",
+    "updated_at": "2026-08-31T18:34:12.226Z",
     "model": "gemma4:26b"
   },
   "usage": [

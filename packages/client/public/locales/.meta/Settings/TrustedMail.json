@@ -1,14 +1,14 @@
 {
   "key_path": "TrustedMail",
-  "content": "Trusted mail domain settings",
-  "content_en_sha1_hash": "cad01243d98a7420bb73d72774f75a5a0388682f",
-  "created_at": "2025-05-19T21:30:52.982Z",
-  "updated_at": "2026-08-14T14:58:32.831Z",
+  "content": "Trusted mail domains",
+  "content_en_sha1_hash": "feee5106546e56d699c37846cf678dd2c5f6523c",
+  "created_at": "2026-08-31T18:23:42.391Z",
+  "updated_at": "2026-08-31T20:14:25.780Z",
   "comment": {
-    "text": "This is a section title in the portal settings, referring to the configuration options for trusted email domains.",
+    "text": "A menu item title in the security settings section that leads to the configuration of allowed email domains.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:21:41.284Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:14:25.780Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -212,12 +218,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

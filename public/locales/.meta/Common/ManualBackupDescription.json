@@ -1,13 +1,13 @@
 {
   "key_path": "ManualBackupDescription",
-  "content": "Use this option if you want to get all data contained in the workspace as a file.",
-  "content_en_sha1_hash": "84b13aac99019044bc52197f4efabfdfed49086e",
-  "created_at": "2026-08-12T11:00:27.872Z",
-  "updated_at": "2026-08-12T11:11:02.135Z",
+  "content": "Download all the data in your workspace as a single file.",
+  "content_en_sha1_hash": "99a8defd7c9ef60dc9dbd0e61a67444e7696156b",
+  "created_at": "2026-08-31T18:23:15.720Z",
+  "updated_at": "2026-08-31T18:53:05.166Z",
   "comment": {
-    "text": "Description text for the manual backup option, explaining that it allows downloading all workspace data as a single file.",
+    "text": "Description text for the manual backup module explaining the result of performing a backup.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:11:02.135Z",
+    "updated_at": "2026-08-31T18:53:05.166Z",
     "model": "gemma4:26b"
   },
   "usage": [

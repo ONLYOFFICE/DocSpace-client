@@ -2,7 +2,7 @@
   "ActiveSessions": "Aktywne sesje",
   "AutoDeleteTitle": "Wszystkie sesje starsze niż 60 dni zostaną automatycznie usunięte.",
   "ChangePasswordAfterLoggingOut": "Zmień hasło po wylogowaniu",
-  "ConnectSocialNetworks": "Podłącz swoje sieci społecznościowe",
+  "ConnectSocialNetworks": "Podłącz swoje konta",
   "DescriptionForSecurity": "Ze względów bezpieczeństwa należy zmienić hasło.",
   "DesktopTheme": "Zsynchronizuj z ustawieniami edytora dla komputerów stacjonarnych",
   "DesktopThemeDescription": "Automatycznie przełączaj się między jasnym i ciemnym motywem w zależności od bieżącego motywu edytorów dla komputerów stacjonarnych.",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "Adres e-mail nie został jeszcze zweryfikowany",
   "ErrorAccountAlreadyUse": "Połączone konto jest już wykorzystywane przez innego użytkownika",
   "LogoutActiveConnection": "Wyloguj z aktywnego połączenia",
-  "LogoutAllActiveSessionsDescription": "Wszystkie aktywne połączenia, oprócz niniejszego zostaną wylogowane, ponieważ jest ono obecnie w użyciu.",
+  "LogoutAllActiveSessionsDescription": "Wszystkie aktywne sesje, oprócz bieżącej, zostaną zakończone. Bieżąca sesja pozostanie aktywna.",
   "LogoutBtn": "Wyloguj",
-  "LogoutDescription": "Uwaga. Wszystkie aktywne połączenia, oprócz niniejszego zostaną wylogowane, ponieważ jest ono obecnie w użyciu.",
+  "LogoutDescription": "Uwaga. Wszystkie aktywne sesje, oprócz bieżącej, zostaną zakończone. Bieżąca sesja pozostanie aktywna.",
   "LogoutFrom": "Wylogować z {{platform}} na {{browser}}?",
   "MyProfile": "Mój profil",
   "NotificationsChannels": "Kanały powiadomień",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Pokaż kody zapasowe",
   "SuccessLogout": "Aktywne połączenie zostało wylogowane: {{platform}}, {{browser}}",
   "TelegramAccount": "Konto Telegram",
-  "TelegramAccountDescription": "Aby połączyć TelegramBot ze swoim kontem, przejdź do tajnego linku i kliknij przycisk „Connect Telegram”.",
+  "TelegramAccountDescription": "Aby otrzymywać powiadomienia dotyczące swojego konta w Telegramie, przejdź do poniższego linku lub kliknij Połącz.",
   "TelegramAccountDisconnect": "Odłącz Telegram",
   "TelegramAccountDisconnectDescription": "Twoje konto @{{username}} jest połączone w celu otrzymywania powiadomień z Telegrama. Możesz rozłączyć to konto. W takim przypadku nie będziesz otrzymywać powiadomień.",
   "TerminateAllSessions": "Zakończ wszystkie sesje z wyjątkiem bieżącej",
-  "TwoFactorDescription": "Weryfikacja dwuetapowa za pośrednictwem aplikacji generującej kody została włączona przez administratora dla wszystkich użytkowników."
+  "TwoFactorDescription": "Weryfikacja dwuetapowa za pośrednictwem aplikacji uwierzytelniającej została włączona przez administratora dla wszystkich użytkowników."
 }

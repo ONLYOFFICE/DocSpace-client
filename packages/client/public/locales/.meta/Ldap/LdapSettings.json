@@ -1,14 +1,14 @@
 {
   "key_path": "LdapSettings",
-  "content": "LDAP settings",
-  "content_en_sha1_hash": "47aabd81090aebfdaf6d1d37da2399019820296f",
-  "created_at": "2025-05-19T21:30:54.273Z",
-  "updated_at": "2026-08-14T14:58:32.776Z",
+  "content": "LDAP",
+  "content_en_sha1_hash": "d8343c683ae1584c96390fa627005bc1bb0719cd",
+  "created_at": "2026-08-31T18:23:43.819Z",
+  "updated_at": "2026-08-31T20:01:45.437Z",
   "comment": {
-    "text": "This is a page title and a category item title. It labels the section for configuring LDAP integration settings.",
+    "text": "Page title and category item title for the LDAP integration settings section.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:16:48.128Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:01:45.437Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -179,7 +179,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -194,6 +194,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

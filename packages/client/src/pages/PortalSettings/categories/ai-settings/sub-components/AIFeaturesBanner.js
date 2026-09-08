@@ -121,22 +121,24 @@ const useAnimatedHeight = (ref, key) => {
   });
 };
 
-const getBannerTexts = (t, isWebSearchTab) =>
-  isWebSearchTab
+// Heading and button are deliberately the same on both tabs: together they say
+// what the page as a whole switches on, without repeating each other. What each
+// tab adds is said between them, by the description.
+const getBannerTexts = (t, isWebSearchTab) => ({
+  activateTitle: t("Common:ActivateAIFeaturesToGetStarted"),
+  activateLabel: t("Common:Activate"),
+  ...(isWebSearchTab
     ? {
-        activateTitle: t("Common:ActivateAISearchToGetStarted"),
         activateDescription: t("Common:ActivateAISearchDescription"),
-        activateLabel: t("Common:ActivateAISearch"),
         enabledTitle: t("Common:AISearchEnabledTitle"),
         enabledDescription: t("Common:AISearchEnabledDescription"),
       }
     : {
-        activateTitle: t("Common:ActivateAIFeaturesToGetStarted"),
         activateDescription: t("Common:GetAccessToAIModels"),
-        activateLabel: t("Common:ActivateAIFeatures"),
         enabledTitle: t("Common:AIFeaturesEnabled"),
         enabledDescription: t("Common:AIFeaturesEnabledDescription"),
-      };
+      }),
+});
 
 const AIFeaturesBanner = ({
   currentDeviceType,
@@ -144,6 +146,8 @@ const AIFeaturesBanner = ({
   isAiSearchServiceOn,
   isCardLinkedToPortal,
   isWebSearchTab,
+  aiToolsFeePercent,
+  aiSearchFeePercent,
 }) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -212,34 +216,38 @@ const AIFeaturesBanner = ({
     );
   };
 
-  const pricingNote = (
-    <Text as="div" fontSize="12px" fontWeight={600}>
-      <CommonTrans
-        i18nKey={
-          isWebSearchTab ? "AIExaPricingNote" : "AIOpenRouterPricingNote"
-        }
-        namespaces={["Common"]}
-        components={{
-          1: (
-            <Link
-              type={LinkType.page}
-              href={isWebSearchTab ? EXA_PRICING_URL : OPENROUTER_PRICING_URL}
-              target={LinkTarget.blank}
-              color="accent"
-              fontSize="12px"
-              isHovered
-              fontWeight={600}
-            />
-          ),
-        }}
-      />
-    </Text>
-  );
+  const feePercent = isWebSearchTab ? aiSearchFeePercent : aiToolsFeePercent;
+
+  const pricingNote =
+    feePercent == null ? null : (
+      <Text as="div" fontSize="12px" fontWeight={600}>
+        <CommonTrans
+          i18nKey={
+            isWebSearchTab ? "AIExaPricingNote" : "AIOpenRouterPricingNote"
+          }
+          namespaces={["Common"]}
+          values={{ percent: feePercent }}
+          components={{
+            1: (
+              <Link
+                type={LinkType.page}
+                href={isWebSearchTab ? EXA_PRICING_URL : OPENROUTER_PRICING_URL}
+                target={LinkTarget.blank}
+                color="accent"
+                fontSize="12px"
+                isHovered
+                fontWeight={600}
+              />
+            ),
+          }}
+        />
+      </Text>
+    );
 
   const features = (
     <div className={styles.features}>
       {isEnabled ? (
-        <div className={styles.featureRow}>{pricingNote}</div>
+        pricingNote && <div className={styles.featureRow}>{pricingNote}</div>
       ) : (
         <>
           {isWebSearchTab ? (
@@ -257,10 +265,12 @@ const AIFeaturesBanner = ({
               </Text>
             </div>
           )}
-          <div className={styles.featureRow}>
-            <PriceIcon />
-            {pricingNote}
-          </div>
+          {pricingNote ? (
+            <div className={styles.featureRow}>
+              <PriceIcon />
+              {pricingNote}
+            </div>
+          ) : null}
           <div className={styles.featureRow}>
             <WalletIcon className={styles.payIcon} />
             <Text fontSize="12px" fontWeight={600}>

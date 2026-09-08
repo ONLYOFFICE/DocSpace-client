@@ -3,7 +3,7 @@
   "content": "Document Service address for internal requests from the workspace",
   "content_en_sha1_hash": "6f152acb5467b7df9daade8880cf805c854838af",
   "created_at": "2026-08-13T22:44:29.428Z",
-  "updated_at": "2026-08-14T15:37:24.267Z",
+  "updated_at": "2026-09-04T07:59:41.684Z",
   "comment": {
     "text": "Label for a text input field in the Document Service integration settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 493,
+      "line_number": 522,
       "context": "</Text>\n </div>\n <div className={styles.inputWrapper}>\n <Label\n htmlFor=\"internalAdress\"\n text={t(\"Settings:DocumentServiceLocationUrlInternal\")}\n />\n <InputBlock\n id=\"internalAdress\"\n type=\"text\"\n autoComplete=\"off\"",
       "module": "/packages/client"
     }

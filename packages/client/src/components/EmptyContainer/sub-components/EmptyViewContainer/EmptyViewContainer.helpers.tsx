@@ -331,7 +331,7 @@ export const getOptions = (
   );
 
   const uploadFromDevicePDF = createUploadFromDeviceOption(
-    t("EmptyView:UploadDevicePDFFormOptionTitle"),
+    t("EmptyView:UploadDeviceOptionTitle"),
     t("EmptyView:UploadDevicePDFFormOptionDescription"),
     "pdf",
   );
@@ -655,8 +655,10 @@ export const getOptions = (
       const uploadFilesFromDocSpace = createUploadFromDocSpace(
         t("EmptyView:UploadFromPortalTitle"),
         t("Common:UploadFilesPortal", {
-          sectionNameFirst: t("Common:Files"),
-          sectionNameSecond: t("Common:Rooms"),
+          files: t("Common:Files"),
+          rooms: t("Common:Rooms"),
+          forms: t("Common:Forms"),
+          aiAgents: t("Common:AIAgents"),
         }),
         "",
         true,

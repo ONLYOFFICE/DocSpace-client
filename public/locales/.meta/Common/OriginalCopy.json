@@ -1,14 +1,14 @@
 {
   "key_path": "OriginalCopy",
-  "content": "Save the file copy in the original format as well",
-  "content_en_sha1_hash": "590aa54a4acb697b9b402769bb231a09e8ad806a",
-  "created_at": "2026-04-03T21:51:34.700Z",
-  "updated_at": "2026-05-15T14:00:06.877Z",
+  "content": "Save a copy of the file in its original format",
+  "content_en_sha1_hash": "7b8393e6e5c9416ba319ab1f282255ef3b73a262",
+  "created_at": "2026-08-31T18:23:19.768Z",
+  "updated_at": "2026-08-31T18:48:39.895Z",
   "comment": {
-    "text": "This is the label for a toggle button in the user's profile settings. It allows users to choose whether to save a copy of edited files in their original format.",
+    "text": "Label for a toggle button in file management settings that enables saving a copy of the file in its original format.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:47:09.492Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:48:39.895Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

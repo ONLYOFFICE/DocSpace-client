@@ -1,13 +1,13 @@
 {
   "key_path": "PortalDeletionHelper",
-  "content": "If you do not think you will use the workspace and would like to delete it permanently, submit your request using the Delete button. Please, keep in mind that you will not be able to reactivate your workspace or recover any information associated with it.",
-  "content_en_sha1_hash": "3b85ca3c87b9fee01e92c762aa53bd6b0a66e7d9",
-  "created_at": "2026-08-13T14:37:16.337Z",
-  "updated_at": "2026-08-14T14:58:32.790Z",
+  "content": "Click Delete to submit your request. This can't be undone — your workspace and its data can't be recovered.",
+  "content_en_sha1_hash": "ce76cd346669915b65bb7f07fba4c5cc6c635e1e",
+  "created_at": "2026-08-31T18:23:41.761Z",
+  "updated_at": "2026-08-31T20:23:57.857Z",
   "comment": {
-    "text": "Instructional helper text in the portal deletion settings that warns users about the permanent and irreversible nature of workspace deletion.",
+    "text": "Helper text in the portal deletion settings that warns the user that deleting the workspace and its data is permanent and irreversible.",
     "is_auto": true,
-    "updated_at": "2026-08-13T15:15:52.802Z",
+    "updated_at": "2026-08-31T20:23:57.857Z",
     "model": "gemma4:26b"
   },
   "usage": [

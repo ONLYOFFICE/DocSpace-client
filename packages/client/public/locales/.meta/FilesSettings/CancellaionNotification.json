@@ -1,14 +1,14 @@
 {
   "key_path": "CancellaionNotification",
-  "content": "Don't display cancellation notification again",
-  "content_en_sha1_hash": "537727f09456ab87cd615e057378ddfcf8cdf4b9",
-  "created_at": "2025-05-19T21:30:55.169Z",
-  "updated_at": "2026-05-15T14:00:06.878Z",
+  "content": "Don't show the cancellation notification again",
+  "content_en_sha1_hash": "1a371fa8ab23fe1007552ab2967e21f4ded64ae1",
+  "created_at": "2026-08-31T18:23:45.070Z",
+  "updated_at": "2026-08-31T20:00:16.969Z",
   "comment": {
-    "text": "This is a checkbox label. It allows the user to disable future notifications about canceling an operation.",
+    "text": "Label for a toggle button in the profile settings used to disable the confirmation prompt for cancellation operations.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:10:56.177Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:00:16.969Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

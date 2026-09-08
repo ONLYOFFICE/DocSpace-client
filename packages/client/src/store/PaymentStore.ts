@@ -72,7 +72,10 @@ import {
   BACKUP_SERVICE,
 } from "@docspace/ui-kit/billing/constants";
 import { applyServiceQuotaToMap } from "@docspace/ui-kit/billing/utils/parsers";
-import { formatCurrencyValue } from "@docspace/ui-kit/billing/utils/common";
+import {
+  formatCurrencyValue,
+  formatPercentValue,
+} from "@docspace/ui-kit/billing/utils/common";
 import {
   getCardLinkedOnFreeTariff,
   getCardLinkedOnNonProfit,
@@ -160,6 +163,24 @@ class PaymentStore {
   > = new Map(); // temporary solution, should be in the service store
 
   servicesQuotas: TPaymentQuota | null = null; // temporary solution, should be in the service store
+
+  get aiToolsFeePercent() {
+    return this.formatServiceFeePercent(
+      this.currentTariffStatusStore?.aiToolsFeePercent,
+    );
+  }
+
+  get aiSearchFeePercent() {
+    return this.formatServiceFeePercent(
+      this.currentTariffStatusStore?.aiSearchFeePercent,
+    );
+  }
+
+  formatServiceFeePercent = (value?: number | null) => {
+    if (value == null) return;
+
+    return formatPercentValue(authStore.language ?? "en", value);
+  };
 
   constructor(
     userStore: UserStore,

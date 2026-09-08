@@ -1,6 +1,6 @@
 {
-  "CancellaionNotification": "Don't display cancellation notification again",
-  "DefaultHomepage": "Default Homepage",
+  "CancellaionNotification": "Don't show the cancellation notification again",
+  "DefaultHomepage": "Default homepage",
   "GroupByRooms": "Group by rooms",
-  "OpenSameTab": "Open {{organizationName}} editor in same tab"
+  "OpenSameTab": "Open editors in same tab"
 }

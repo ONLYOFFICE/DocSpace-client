@@ -47,6 +47,7 @@ import { makeAutoObservable } from "mobx";
 import { Trans } from "react-i18next";
 
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
+import { getSectionTrashUrl } from "SRC_DIR/helpers/articleNavigation";
 import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
 
 import i18n from "../i18n";
@@ -185,6 +186,18 @@ class SecondaryProgressDataStore {
       ) => Promise<{ url: string; state: { title?: string } }>
     )(destFolderInfo);
 
+    // The trash destination is the same folder for every section, so
+    // createFolderNavigation always resolves it to the unscoped Files trash.
+    // The link has to open the trash of the section the items were deleted
+    // from, scoped to its content.
+    const locationUrl =
+      operation === OPERATIONS_NAME.trash && destFolderInfo
+        ? getSectionTrashUrl(
+            destFolderInfo.id,
+            window.DocSpace.location.pathname,
+          )
+        : url;
+
     const onClickLocation = () => {
       toastr.clear();
 
@@ -196,7 +209,7 @@ class SecondaryProgressDataStore {
 
       if (window.ClientConfig?.isFrame) return;
 
-      window.DocSpace.navigate(url, { state });
+      window.DocSpace.navigate(locationUrl, { state });
     };
 
     const commonComponents = {

@@ -1,8 +1,8 @@
 {
   "BackupCodesDescription": "Če nimate dostopa do telefona, se prijavite z nadomestnimi kodami.",
-  "BackupCodesSecondDescription": "Vsako kodo lahko uporabite enkrat. Nove kode lahko dobite kadar koli. Veljavne so le zadnje ustvarjene kode.",
+  "BackupCodesSecondDescription": "Vsako kodo lahko uporabite le enkrat. Nove kode lahko dobite kadar koli. Veljavna je le nazadnje ustvarjena koda.",
   "BackupCodesTitle": "Obnovitvene kode",
-  "CodesCounter": "kode:",
+  "CodesCounter": "Obnovitvene kode:",
   "PrintButton": "Tiskaj",
   "RequestNewButton": "Zahtevaj novo"
 }

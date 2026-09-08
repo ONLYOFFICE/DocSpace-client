@@ -16,5 +16,5 @@
   "PluginSDK": "SDK di Plugin",
   "PluginSDKDescription": "Utilizza l'SDK del plugin per aggiungere nuove funzionalità, collegare servizi di terze parti o migliorare l'esperienza esistente. Sfoglia i plugin di esempio qui sotto, con il codice sorgente disponibile su GitHub. Vai alla pagina <1>Plugin</1> per abilitarli nel tuo spazio di lavoro.",
   "PluginSDKInstruction": "<1>Leggi le istruzioni</1> per creare i tuoi plugin.",
-  "UploadDescription": "Puoi aggiungere plugin per estendere le funzionalità dello spazio di lavoro con funzionalità extra. Fai clic su Carica plugin o rilascia il file nell'archivio ZIP."
+  "UploadDescription": "Aggiungi plugin per estendere il tuo spazio di lavoro con funzionalità extra. Attivane uno dall'elenco qui sotto, oppure fai clic su \"Carica plugin\" (o trascina un file ZIP) per aggiungere il tuo."
 }

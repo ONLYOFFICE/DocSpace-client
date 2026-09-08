@@ -93,9 +93,9 @@ const RoomsActionsContainer = ({
       </div>
       <Text {...textDescriptionsProps}>
         {t("ActionsWithFilesDescription", {
+          files: t("Common:Files"),
           rooms: t("Common:Rooms"),
-          shared: t("Common:SharedWithMe"),
-          documents: t("Common:Files"),
+          forms: t("Common:Forms"),
           aiAgents: t("Common:AIAgents"),
         })}
       </Text>

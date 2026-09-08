@@ -1,13 +1,13 @@
 {
   "key_path": "PortalDeletionDescription",
-  "content": "Use this option to delete your workspace permanently.",
-  "content_en_sha1_hash": "50cdd4174a148b81927424c88b5012c3f9d7f6f1",
-  "created_at": "2026-08-12T11:00:46.199Z",
-  "updated_at": "2026-08-14T14:58:32.790Z",
+  "content": "Permanently delete your workspace.",
+  "content_en_sha1_hash": "fa44da33ab32580288b1aaa7e813f2089fa7a7ba",
+  "created_at": "2026-08-31T18:23:41.745Z",
+  "updated_at": "2026-08-31T20:24:23.997Z",
   "comment": {
-    "text": "Description text in the portal deletion settings section explaining that the action results in permanent workspace removal.",
+    "text": "Description text in the Portal Settings (delete data section) explaining the irreversible consequence of the action.",
     "is_auto": true,
-    "updated_at": "2026-08-12T12:07:55.923Z",
+    "updated_at": "2026-08-31T20:24:23.997Z",
     "model": "gemma4:26b"
   },
   "usage": [

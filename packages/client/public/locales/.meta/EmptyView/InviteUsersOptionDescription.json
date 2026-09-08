@@ -1,14 +1,14 @@
 {
   "key_path": "InviteUsersOptionDescription",
-  "content": "Add members for joint editing in the room",
-  "content_en_sha1_hash": "dd3d55974b01e5c72167bb188cb7036fcffbce1b",
-  "created_at": "2025-05-19T21:30:56.522Z",
-  "updated_at": "2026-08-20T12:26:01.700Z",
+  "content": "Add members to work together in the room",
+  "content_en_sha1_hash": "e19f18cf783ccb85e5c0d701d010f05303f7f642",
+  "created_at": "2026-08-31T18:23:45.817Z",
+  "updated_at": "2026-08-31T19:58:03.550Z",
   "comment": {
-    "text": "This is a description for an option to invite users. It explains the purpose of inviting users to a room for collaborative editing. It appears as part of a sentence.",
+    "text": "Subtext for an invitation option in an empty state view, explaining the purpose of adding members to a room.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:06:47.700Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:58:03.550Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

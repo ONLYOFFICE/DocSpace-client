@@ -1,14 +1,14 @@
 {
   "key_path": "QuotasDescription",
-  "content": "Here, you can set storage quota for users and rooms.",
-  "content_en_sha1_hash": "efbbb4d56fa28e8b96099485a18c6bc5e107536e",
-  "created_at": "2025-05-19T21:30:52.363Z",
-  "updated_at": "2026-05-15T14:00:06.871Z",
+  "content": "Set storage limits for users and rooms.",
+  "content_en_sha1_hash": "8065762064ea6f49c791270e7d0b81e3516518c7",
+  "created_at": "2026-08-31T18:23:41.904Z",
+  "updated_at": "2026-08-31T20:21:30.596Z",
   "comment": {
-    "text": "This is a descriptive sentence appearing below the \"Quotas\" heading in the Storage Management settings. It explains that this section allows setting storage limits for users and rooms.",
+    "text": "Subtext in the storage management settings explaining the purpose of the quotas configuration.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:22:43.740Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:21:30.596Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

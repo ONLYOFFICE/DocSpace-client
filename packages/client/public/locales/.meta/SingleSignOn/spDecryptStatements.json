@@ -1,14 +1,14 @@
 {
   "key_path": "spDecryptStatements",
-  "content": "Decrypt Assertions",
-  "content_en_sha1_hash": "eaebd6a20f344646b8d0e78e11449954b24a719a",
-  "created_at": "2025-05-19T21:30:50.160Z",
-  "updated_at": "2026-05-15T15:37:40.283Z",
+  "content": "Decrypt assertions",
+  "content_en_sha1_hash": "752bf03ad8121b8c8f922e324b789b47408543f4",
+  "created_at": "2026-08-31T18:23:40.137Z",
+  "updated_at": "2026-08-31T20:51:09.131Z",
   "comment": {
-    "text": "This is a checkbox label in the Single Sign-On settings. It allows users to choose whether to decrypt assertions received from the Identity Provider.",
+    "text": "Checkbox label in the Single Sign-On (SSO) integration settings used to enable the decryption of assertions.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:25.500Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:51:09.131Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

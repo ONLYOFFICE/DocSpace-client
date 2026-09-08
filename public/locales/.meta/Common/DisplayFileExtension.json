@@ -1,14 +1,14 @@
 {
   "key_path": "DisplayFileExtension",
-  "content": "Display file extension next to file name",
-  "content_en_sha1_hash": "5aca0949443f945850e45a5d1a5def5c80406042",
-  "created_at": "2026-04-03T21:51:34.715Z",
-  "updated_at": "2026-05-15T14:00:06.877Z",
+  "content": "Display the file extension next to the file name",
+  "content_en_sha1_hash": "3d2616a0d6f077395d885c70133fb50133ea3828",
+  "created_at": "2026-08-31T18:23:00.702Z",
+  "updated_at": "2026-08-31T19:20:08.394Z",
   "comment": {
-    "text": "This is a label for a toggle button in the user's profile settings. It controls whether file extensions (e.g., \".docx\", \".pdf\") are shown next to file names in the interface.",
+    "text": "Label for a toggle button in the file management settings that controls whether file extensions are shown alongside filenames.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:54:56.849Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:20:08.394Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

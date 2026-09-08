@@ -1,14 +1,14 @@
 {
   "key_path": "TrustedMailSettingDescription",
-  "content": "Configure Trusted Mail Domain Settings to specify the allowed mail servers to use for self-registration.",
-  "content_en_sha1_hash": "0f4d0291e365f84ebfba31711be3a84c9938ddc2",
-  "created_at": "2025-05-19T21:30:52.998Z",
-  "updated_at": "2026-08-14T14:58:32.832Z",
+  "content": "Set which email domains are allowed for self-registration.",
+  "content_en_sha1_hash": "7f2a7065f17e7807bbcea33e07f66ec833778de8",
+  "created_at": "2026-08-31T18:23:42.402Z",
+  "updated_at": "2026-08-31T20:13:18.465Z",
   "comment": {
-    "text": "This is a descriptive text explaining the purpose of the \"Trusted Mail Domain Settings\" section within the portal's security settings. It clarifies that these settings are used to define allowed mail servers for self-registration.",
+    "text": "Description text for the TrustedMail setting in the Portal Settings security section, explaining the purpose of restricting self-registration to specific email domains.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:21:39.675Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:13:18.465Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

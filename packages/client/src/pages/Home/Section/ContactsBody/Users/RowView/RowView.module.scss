@@ -35,15 +35,22 @@
 
 @use "@docspace/ui-kit/styles/mixins";
 
+/* The row is width: 100% and border-box, so the padded box has to grow by
+   what the negative margins pull out. Without it the padding is taken from
+   the content instead and everything in the row - the context menu button
+   included - shifts towards the leading edge. */
+
 .styledRowContainer {
   .row-selected + .row-wrapper:not(.row-selected) {
     .user-row {
       margin-inline: -24px;
       padding-inline: 24px;
+      width: calc(100% + 48px);
 
       @include mixins.tablet-and-below {
         margin-inline: -16px;
         padding-inline: 16px;
+        width: calc(100% + 32px);
       }
     }
   }
@@ -52,10 +59,12 @@
     .user-row {
       margin-inline: -24px;
       padding-inline: 24px;
+      width: calc(100% + 48px);
 
       @include mixins.tablet-and-below {
         margin-inline: -16px;
         padding-inline: 16px;
+        width: calc(100% + 32px);
       }
     }
   }
@@ -125,24 +134,28 @@
   &.checked,
   &.active {
     background: var(--files-section-row-view-checked-background);
-    margin-inline-start: -24px;
+    margin-inline: -24px;
     padding-inline: 24px;
+    width: calc(100% + 48px);
 
     @include mixins.tablet-and-below {
-      margin-inline-start: -16px;
+      margin-inline: -16px;
       padding-inline: 16px;
+      width: calc(100% + 32px);
     }
   }
 
   @include mixins.can-hover {
     &:hover {
       background: var(--files-section-row-view-checked-background);
-      margin-inline-start: -24px;
+      margin-inline: -24px;
       padding-inline: 24px;
+      width: calc(100% + 48px);
 
       @include mixins.tablet-and-below {
-        margin-inline-start: -16px;
+        margin-inline: -16px;
         padding-inline: 16px;
+        width: calc(100% + 32px);
       }
     }
   }

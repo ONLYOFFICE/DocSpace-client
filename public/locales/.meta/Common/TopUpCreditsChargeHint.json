@@ -1,13 +1,13 @@
 {
   "key_path": "TopUpCreditsChargeHint",
-  "content": "The entered amount will be charged after you attach your payment method",
-  "content_en_sha1_hash": "d9994e0b1091d2aa899dbeb572a897d4e4f3fb29",
-  "created_at": "2026-05-27T14:11:43.015Z",
-  "updated_at": "2026-08-27T15:37:55.820Z",
+  "content": "The entered amount will be charged after you add your payment method",
+  "content_en_sha1_hash": "5cd8953206cd9dfe79a2aac6950c76e6cde663a1",
+  "created_at": "2026-08-31T18:23:34.384Z",
+  "updated_at": "2026-08-31T18:35:08.791Z",
   "comment": {
-    "text": "Helper text in the First Top Up dialog explaining when the transaction will be processed.",
+    "text": "Helper text in a top-up modal dialog that informs the user when the transaction will be processed.",
     "is_auto": true,
-    "updated_at": "2026-05-27T14:14:08.549Z",
+    "updated_at": "2026-08-31T18:35:08.791Z",
     "model": "gemma4:26b"
   },
   "usage": [

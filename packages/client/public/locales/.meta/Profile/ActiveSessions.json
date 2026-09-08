@@ -1,14 +1,14 @@
 {
   "key_path": "ActiveSessions",
-  "content": "Active Sessions",
-  "content_en_sha1_hash": "c71ffaf9d95811865c2053fe8d448a6cc7d90243",
-  "created_at": "2025-05-19T21:30:53.331Z",
-  "updated_at": "2026-05-15T14:00:06.879Z",
+  "content": "Active sessions",
+  "content_en_sha1_hash": "e58e7782cacd278aab2eea0af1f3bfe26a4bce28",
+  "created_at": "2026-08-31T18:23:42.685Z",
+  "updated_at": "2026-08-31T20:09:50.176Z",
   "comment": {
-    "text": "This is a section title on the user's profile page, indicating a list of active login sessions.",
+    "text": "Section header in the user profile that labels the list of currently logged-in sessions.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:20:55.968Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:09:50.176Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -33,40 +33,23 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { safeGet, safeSet } from "SRC_DIR/store/TourStore";
+import { PluginUserRole, PluginUsersType } from "./enums";
 
-const VISITED_PREFIX = "dashboard_visited";
-
-/**
- * Per-user, because a browser is shared: one person having seen the Overview
- * says nothing about where the next person to sign in should land.
- */
-const visitedKey = (userId: string) => `${VISITED_PREFIX}_${userId}`;
-
-/**
- * Whether this user has already landed on the Overview (Dashboard) page.
- *
- * This is what entry routing turns on: the Overview is the introduction to the
- * new design, so it wins the first load, and from then on the user's own
- * Default Homepage setting does. Deliberately *not* the welcome-modal flag —
- * that one means "has been offered the tour", is left unspent on mobile on
- * purpose, and must not decide where anyone lands.
- *
- * Unknown `userId` reads as visited, so a load that has not resolved the user
- * yet never spends the one first-visit Overview on nobody's behalf.
- */
-export const isDashboardVisited = (userId?: string): boolean => {
-  if (!userId) return true;
-  return safeGet(visitedKey(userId)) === "true";
+const LEGACY_USER_ROLES: Partial<Record<PluginUserRole, PluginUsersType[]>> = {
+  [PluginUserRole.fullAdmin]: [PluginUsersType.docSpaceAdmin],
+  [PluginUserRole.user]: [PluginUsersType.collaborator],
+  [PluginUserRole.guest]: [PluginUsersType.user],
 };
 
-/**
- * Records that the user has been on the Overview. Called by the page itself, so
- * that only actually rendering it counts — being redirected past it does not.
- *
- * With storage unavailable the write silently fails and the user keeps landing
- * on the Overview, which is the pre-existing behaviour rather than a new fault.
- */
-export const setDashboardVisited = (userId?: string): void => {
-  if (userId) safeSet(visitedKey(userId), "true");
+export const matchesUserRole = (
+  usersTypes: (PluginUserRole | PluginUsersType)[] | undefined,
+  userRole: PluginUserRole,
+): boolean => {
+  if (!usersTypes) return true;
+
+  if (usersTypes.includes(userRole)) return true;
+
+  const legacy = LEGACY_USER_ROLES[userRole];
+
+  return !!legacy && legacy.some((type) => usersTypes.includes(type));
 };

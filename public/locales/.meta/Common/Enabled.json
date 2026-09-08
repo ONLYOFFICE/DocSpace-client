@@ -1,20 +1,38 @@
 {
-  "key_path": "ActivateAISearchToGetStarted",
-  "content": "Activate AI Search to get started?",
-  "content_en_sha1_hash": "aad227e4867d3f9357feda940e8d89d425bcc5cd",
-  "created_at": "2026-08-24T22:29:10.840Z",
-  "updated_at": "2026-08-24T22:32:58.232Z",
+  "key_path": "Enabled",
+  "content": "Enabled",
+  "content_en_sha1_hash": "df174a3f2faa31814e06540acda7af8825403fac",
+  "created_at": "2026-08-31T18:23:04.311Z",
+  "updated_at": "2026-08-31T19:07:32.236Z",
   "comment": {
-    "text": "Banner title in the AI settings section that prompts the user to enable AI Search functionality.",
+    "text": "A label for an option in a selection list used to activate specific portal settings.",
     "is_auto": true,
-    "updated_at": "2026-08-24T22:32:58.232Z",
+    "updated_at": "2026-08-31T19:07:32.236Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
-      "line_number": 127,
-      "context": "};\n \n const getBannerTexts = (t, isWebSearchTab) =>\n isWebSearchTab\n ? {\n activateTitle: t(\"Common:ActivateAISearchToGetStarted\"),\n activateDescription: t(\"Common:ActivateAISearchDescription\"),\n activateLabel: t(\"Common:ActivateAISearch\"),\n enabledTitle: t(\"Common:AISearchEnabledTitle\"),\n enabledDescription: t(\"Common:AISearchEnabledDescription\"),\n }",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
+      "line_number": 202,
+      "context": "value: \"disabled\",\n dataTestId: \"administrator_message_disabled\",\n },\n {\n id: \"admin-message-enable\",\n label: t(\"Common:Enabled\"),\n value: \"enable\",\n dataTestId: \"administrator_message_enabled\",\n },\n ]}\n selected={type}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
+      "line_number": 237,
+      "context": "value: \"true\",\n dataTestId: \"developer_tools_access_disabled\",\n },\n {\n id: \"dev-tools-access-enable\",\n label: t(\"Common:Enabled\"),\n value: \"false\",\n dataTestId: \"developer_tools_access_enabled\",\n },\n ]}\n selected={accessEnabled}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
+      "line_number": 305,
+      "context": "value: \"disabled\",\n dataTestId: \"ip_security_disabled\",\n },\n {\n id: \"ip-security-enable\",\n label: t(\"Common:Enabled\"),\n value: \"enable\",\n dataTestId: \"ip_security_enabled\",\n },\n ]}\n selected={enable ? \"enable\" : \"disabled\"}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
+      "line_number": 286,
+      "context": "value: \"disabled\",\n dataTestId: \"session_lifetime_disabled\",\n },\n {\n id: \"session-lifetime-enable\",\n label: t(\"Common:Enabled\"),\n value: \"enable\",\n dataTestId: \"session_lifetime_enabled\",\n },\n ]}\n selected={type ? \"enable\" : \"disabled\"}",
       "module": "/packages/client"
     }
   ],

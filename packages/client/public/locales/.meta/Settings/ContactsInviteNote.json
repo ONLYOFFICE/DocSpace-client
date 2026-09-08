@@ -1,13 +1,13 @@
 {
   "key_path": "ContactsInviteNote",
-  "content": "Enable this option to allow invitations to be sent to new workspace members through the {{sectionName}} section. Disable this option in case you want to invite new members through LDAP only. ",
-  "content_en_sha1_hash": "5cc0adc60220ad2568e63ff370f0f5cf749a9ce0",
-  "created_at": "2026-08-13T22:44:29.112Z",
-  "updated_at": "2026-08-14T15:39:17.833Z",
+  "content": "Turn this on to let people send invitations through the {{sectionName}} section, or turn it off if you want invitations to go through LDAP only.",
+  "content_en_sha1_hash": "0d681f683af928c3d5d0ffe41fc3914bdd74fdeb",
+  "created_at": "2026-08-31T18:23:40.681Z",
+  "updated_at": "2026-08-31T20:42:21.328Z",
   "comment": {
-    "text": "Checkbox description explaining the setting for sending invitations via a specific section versus LDAP. The {{sectionName}} variable represents the name of the UI section.",
+    "text": "Checkbox description in the invitation settings explaining how the toggle affects invitation routing between a specific section and LDAP; includes a variable `{{sectionName}}` for the section name.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:39:17.833Z",
+    "updated_at": "2026-08-31T20:42:21.328Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -11,7 +11,7 @@
   "AiSuggestions: FormsTemplatesSaveAsTemplate, RoomsTemplatesSaveAsTemplate",
   "AiSuggestions: FormsTrashDeletePermanently, RoomsTrashDeletePermanently",
   "AiSuggestions: FormsTrashWhatSDeleted, RoomsTrashWhatSDeleted",
-  "Common: AIAgentModel, AIModel, Model",
+  "Common: AIAgentModel, AIModel",
   "Common: AIChat, AIChatButton",
   "Common: AboutCompanyTitle, AboutHeader",
   "Common: AddTag, TagsPlaceholder",

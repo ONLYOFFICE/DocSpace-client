@@ -81,6 +81,7 @@ type DetailsProps = {
 
   isVisitor?: boolean;
   isCollaborator?: boolean;
+  isAdmin?: boolean;
 
   onCreateRoomFromTemplate?: FilesActionStore["onCreateRoomFromTemplate"];
 
@@ -103,6 +104,7 @@ const Details = ({
   openUser,
   isVisitor,
   isCollaborator,
+  isAdmin,
   isArchive,
   isDefaultRoomsQuotaSet,
   isDefaultAIAgentsQuotaSet,
@@ -136,6 +138,8 @@ const Details = ({
     isDefaultRoomsQuotaSet: isDefaultRoomsQuotaSet!,
     isDefaultAIAgentsQuotaSet: isDefaultAIAgentsQuotaSet!,
     isAIAgentsFolder: isAIAgentsFolderRoot!,
+    isAdmin: isAdmin!,
+    isArchiveFolder: isArchive,
     roomLifetime: roomLifetime!,
   });
 
@@ -367,6 +371,7 @@ export default inject(
 
     const isVisitor = user?.isVisitor;
     const isCollaborator = user?.isCollaborator;
+    const isAdmin = user?.isAdmin;
 
     const { isDefaultRoomsQuotaSet, isDefaultAIAgentsQuotaSet } =
       currentQuotaStore;
@@ -380,6 +385,7 @@ export default inject(
       openUser,
       isVisitor,
       isCollaborator,
+      isAdmin,
       isDefaultRoomsQuotaSet,
       isDefaultAIAgentsQuotaSet,
       isAIAgentsFolderRoot,

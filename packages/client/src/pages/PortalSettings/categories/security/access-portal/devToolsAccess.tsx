@@ -234,7 +234,7 @@ const DevToolsAccess = ({
           },
           {
             id: "dev-tools-access-enable",
-            label: t("Common:Enable"),
+            label: t("Common:Enabled"),
             value: "false",
             dataTestId: "developer_tools_access_enabled",
           },

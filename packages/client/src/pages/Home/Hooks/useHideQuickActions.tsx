@@ -64,19 +64,33 @@ export const useHideQuickActions = ({
     // The Undo handler runs long after this call returns, so it can read the id
     // it is nested in: it dismisses this toast alone and leaves any other
     // notification standing.
+    const undo = () => {
+      toastr.clear(toastId);
+      setShowQuickActions?.(true);
+    };
+
     const toastId = toastr.success(
       <Trans
         t={t as TTranslation & TFunction}
         i18nKey="Common:QuickActionsHiddenDescription"
         components={[
+          // `Link` renders a bare <a> with no href: no implicit role, no place
+          // in the tab order, deaf to Enter. Undo is the only way back short of
+          // the profile and it is on screen for five seconds, so it is named,
+          // focusable and keyed by hand.
           <Link
             key="undo"
             tag="a"
             isHovered
             color="accent"
-            onClick={() => {
-              toastr.clear(toastId);
-              setShowQuickActions?.(true);
+            role="button"
+            tabIndex={0}
+            onClick={undo}
+            onKeyDown={(event: React.KeyboardEvent<Element>) => {
+              if (event.key !== "Enter" && event.key !== " ") return;
+
+              event.preventDefault();
+              undo();
             }}
           />,
         ]}

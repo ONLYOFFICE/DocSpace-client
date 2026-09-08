@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Această aplicație a fost dezactivată",
   "OAuthApplicationEmpty": "Imposibil de găsit aplicația",
   "OAuthClientEmpty": "Imposibil de găsit ID client",
+  "OAuthInvalidRequest": "Cererea de autorizare nu este validă. Verificați URI-ul de redirecționare în setările aplicației",
   "RecaptchaInvalid": "Recaptcha incorectă",
   "SsoAttributesNotFound": "Autentificare nereușită (atributele aserțiunii nu s-a găsit)",
   "SsoAuthFailed": "Autentificare nereușită",

@@ -451,6 +451,7 @@ const useEditorEvents = ({
                     connector,
                     e as TEditorAIEvent,
                     modelProfileMap,
+                    fileInfo?.id,
                   ),
                 );
               }
@@ -535,6 +536,7 @@ const useEditorEvents = ({
     checkAndRequestRoles,
     t,
     successAuth,
+    fileInfo?.id,
   ]);
 
   const onUserActionRequired = React.useCallback(() => {

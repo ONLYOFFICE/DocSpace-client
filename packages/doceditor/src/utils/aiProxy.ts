@@ -49,10 +49,27 @@ const sendEvent = (
   data: Record<string, unknown>,
 ) => connector.sendEvent("ai_onExternalFetch", data);
 
+// The NewAi OpenAI passthrough reads these two query parameters (and strips
+// them before forwarding): the DocSpace entry the round is attributed to, and
+// which table its id lives in — file and folder ids may collide. The service
+// resolves the entry's type and title under the caller's credentials and
+// sends them to the ONLYOFFICE provider as the request's source metadata.
+const withSourceParams = (url: string, sourceFileId: number | string | undefined) => {
+  if (sourceFileId === undefined || sourceFileId === "") {
+    return url;
+  }
+  const params = new URLSearchParams({
+    entityId: String(sourceFileId),
+    entityKind: "file",
+  });
+  return `${url}${url.includes("?") ? "&" : "?"}${params.toString()}`;
+};
+
 const externalAIFetch = async (
   connector: TEditorConnector,
   e: TEditorAIEvent,
   modelProfileMap: Map<string, string>,
+  sourceFileId?: number | string,
 ) => {
   const { id, type } = e;
 
@@ -97,7 +114,10 @@ const externalAIFetch = async (
       // OpenAI-compatible passthrough served by the ASC.NewAi service: it
       // resolves the profile (base URL, key, headers) server-side and
       // forwards the body to the provider verbatim.
-      url = e.url.replace("[external]", `/api/2.0/ai/openai/${profileId}/v1`);
+      url = withSourceParams(
+        e.url.replace("[external]", `/api/2.0/ai/openai/${profileId}/v1`),
+        sourceFileId,
+      );
     }
 
     const options = {

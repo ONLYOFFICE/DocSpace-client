@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Dana aplikacja jest wyłączona",
   "OAuthApplicationEmpty": "Nie znaleziono aplikacji",
   "OAuthClientEmpty": "Nie znaleziono ID klienta",
+  "OAuthInvalidRequest": "Żądanie autoryzacji jest nieprawidłowe. Sprawdź URI przekierowania w ustawieniach aplikacji",
   "RecaptchaInvalid": "Nieprawidłowy kod reCAPTCHA",
   "SsoAttributesNotFound": "Uwierzytelnianie nie powiodło się (nie znaleziono atrybutów asercji)",
   "SsoAuthFailed": "Uwierzytelnianie nie powiodło się",

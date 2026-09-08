@@ -1491,6 +1491,7 @@
   "OpenAgentSettings": "Abrir configurações do agente",
   "OpenAISettings": "Abrir configurações de IA",
   "OpenFileMessage": "O arquivo de documento que você abrir será convertido para o formato Office Open XML para uma visualização e edição rápidas.",
+  "OpenGeneratedDocument": "Abrir o documento gerado",
   "OpenKeysManagement": "Abrir o gerenciamento de chaves",
   "OpenLocation": "Abrir a localização",
   "OpenPortalBilling": "Ir para o faturamento do espaço de trabalho",

@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Deze toepassing is uitgeschakeld",
   "OAuthApplicationEmpty": "Toepassing kon niet worden gevonden",
   "OAuthClientEmpty": "Client ID kon niet worden gevonden",
+  "OAuthInvalidRequest": "Het autorisatieverzoek is ongeldig. Controleer de doorverwijzings-URI in de instellingen van de toepassing",
   "RecaptchaInvalid": "Ongeldige Recaptcha",
   "SsoAttributesNotFound": "Authenticatie mislukt (bevestigingskenmerken niet gevonden)",
   "SsoAuthFailed": "Authenticatie mislukt",

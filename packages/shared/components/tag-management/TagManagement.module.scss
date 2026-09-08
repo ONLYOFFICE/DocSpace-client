@@ -186,6 +186,25 @@
     flex-shrink: 0;
   }
 
+  .checkboxWrapper {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  // Takes the checkbox's place while the row waits for its request, so the
+  // row keeps its layout instead of shifting under the cursor.
+  .checkboxLoader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > * {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
   .checkbox svg {
     margin: 0;
   }
@@ -194,12 +213,42 @@
   .deleteIcon {
     flex-shrink: 0;
   }
+
+  // The two action icons as one flex item: the row's gap separates the icons
+  // from the tag, not the icons from each other. Two 16px icons and the 4px
+  // between them - the width is held whether or not they are on screen, so
+  // the tag does not shift when they appear on hover.
+  .rowActions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+
+    gap: 4px;
+    height: 100%;
+    width: 36px;
+  }
+
   .tag {
     margin-inline-end: auto;
   }
 
+  // While the row waits for its answer nothing on it can be used, so it says
+  // so: dimmed, and the cursor refuses rather than inviting another click.
+  // The loader keeps its own weight - it is the one thing still speaking.
+  &.rowPending {
+    cursor: not-allowed;
+
+    .tag,
+    .editIcon,
+    .deleteIcon {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
   @media (hover: hover) {
-    & {
+    &.rowClickable {
       cursor: pointer;
     }
 
@@ -209,6 +258,14 @@
     }
 
     &:hover {
+      .editIcon,
+      .deleteIcon {
+        visibility: visible;
+      }
+    }
+
+    // Kept in view, so the row does not look empty while it is busy.
+    &.rowPending:hover {
       .editIcon,
       .deleteIcon {
         visibility: visible;

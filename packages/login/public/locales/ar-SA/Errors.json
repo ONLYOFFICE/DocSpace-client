@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "تم تعطيل هذا التطبيق",
   "OAuthApplicationEmpty": "لم يتم العثور على التطبيق",
   "OAuthClientEmpty": "لم يتم العثور على معرّف العميل",
+  "OAuthInvalidRequest": "طلب التخويل غير صالح. تحقق من عنوان URI لإعادة التوجيه في إعدادات التطبيق",
   "RecaptchaInvalid": "التحقق غير صالح",
   "SsoAttributesNotFound": "فشلت المصادقة (لم يتم العثور على سمات التأكيد)",
   "SsoAuthFailed": "فشلت المصادقة",

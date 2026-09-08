@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Цей застосунок деактивовано",
   "OAuthApplicationEmpty": "Застосунок не знайдено",
   "OAuthClientEmpty": "Ідентифікатор клієнта не знайдено",
+  "OAuthInvalidRequest": "Запит авторизації недійсний. Перевірте URI перенаправлення в налаштуваннях застосунку",
   "RecaptchaInvalid": "Недійсна Recaptcha",
   "SsoAttributesNotFound": "Помилка аутентифікації (атрибути твердження не знайдено)",
   "SsoAuthFailed": "Помилка аутентифікації",

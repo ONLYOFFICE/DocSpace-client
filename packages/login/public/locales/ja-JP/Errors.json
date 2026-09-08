@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "このアプリケーションは無効になっています",
   "OAuthApplicationEmpty": "アプリケーションが見つかりません",
   "OAuthClientEmpty": "クライアントIDが見つかりません",
+  "OAuthInvalidRequest": "認証リクエストが無効です。アプリケーション設定のリダイレクトURIを確認してください",
   "RecaptchaInvalid": "Recaptchaが間違っているようです",
   "SsoAttributesNotFound": "認証に失敗しました（属性値アサーションが見つかりません）",
   "SsoAuthFailed": "認証に失敗しました",

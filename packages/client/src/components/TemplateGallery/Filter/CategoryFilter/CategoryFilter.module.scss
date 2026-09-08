@@ -37,6 +37,7 @@
 
 .categoryFilterWrapper {
   width: 100%;
+  min-width: 0;
   position: relative;
 
   &.withLocales {
@@ -52,6 +53,7 @@
 
   @include mixins.mobile {
     width: 100%;
+    min-width: 0;
   }
 
   &.withLocales {

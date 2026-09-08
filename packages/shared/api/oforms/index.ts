@@ -180,6 +180,20 @@ const normalizeParentCategory = (
   subcategories: (category.subcategories ?? []).map(normalizeCategory),
 });
 
+/**
+ * Thrown when the CMS answers a well-formed 200 that is not the contract this
+ * client speaks. The previous CMS (Strapi v4) wraps every entity in
+ * `{ id, attributes }` and carries no `documentId`, so normalizing its answer
+ * would fill the gallery with nameless, image-less cards instead of failing -
+ * the store turns this into the same error screen as a 404.
+ */
+export class OformsContractError extends Error {
+  constructor() {
+    super("The oforms CMS answered with an unsupported contract");
+    this.name = "OformsContractError";
+  }
+}
+
 export const getOforms = async (
   url: string,
   filter: OformsFilter,
@@ -188,7 +202,12 @@ export const getOforms = async (
     `${url}?${TEMPLATE_FIELDS}&${filter.toApiUrlParams()}`,
   );
 
-  const templates = (res?.data?.data ?? []).map((template) =>
+  const rawTemplates = res?.data?.data ?? [];
+
+  if (rawTemplates.length && !rawTemplates[0].documentId)
+    throw new OformsContractError();
+
+  const templates = rawTemplates.map((template) =>
     normalizeTemplate(template, url),
   );
 

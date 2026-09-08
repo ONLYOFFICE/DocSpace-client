@@ -9,7 +9,12 @@ vi.mock("axios", () => ({
 }));
 
 // eslint-disable-next-line import/first
-import { getOforms, getOformPurposes, getOformLocales } from ".";
+import {
+  getOforms,
+  getOformPurposes,
+  getOformLocales,
+  OformsContractError,
+} from ".";
 // eslint-disable-next-line import/first
 import OformsFilter from "./filter";
 
@@ -142,6 +147,24 @@ describe("getOforms", () => {
     expect(templates[0].preview).toBeNull();
     expect(templates[0].file).toBeNull();
     expect(pagination).toEqual({ page: 1, pageSize: 0, pageCount: 0, total: 1 });
+  });
+
+  it("rejects an answer of the previous CMS instead of emptying the cards", async () => {
+    get.mockResolvedValueOnce({
+      data: {
+        data: [
+          {
+            id: 3,
+            attributes: { name_form: "Lease agreement", updatedAt: "" },
+          },
+        ],
+        meta: { pagination: { page: 1, pageSize: 150, pageCount: 1, total: 1 } },
+      },
+    });
+
+    await expect(
+      getOforms(`${CMS}/oforms`, OformsFilter.getDefault()),
+    ).rejects.toBeInstanceOf(OformsContractError);
   });
 });
 

@@ -78,11 +78,12 @@ const LanguageFilter: FC<LanguageFilterProps> = ({
     if (sectionScroll) sectionScroll.scrollTop = 0;
   };
 
+  // Loaded means the locales request answered, empty list included: tying it
+  // to a non-empty list left the whole gallery on init skeletons whenever the
+  // CMS refused that request.
   useEffect(() => {
-    setLanguageFilterLoaded(
-      Boolean(oformLocales && oformLocales?.length !== 0),
-    );
-  }, [oformLocales, oformLocales?.length, setLanguageFilterLoaded]);
+    setLanguageFilterLoaded(oformLocales !== null);
+  }, [oformLocales, setLanguageFilterLoaded]);
 
   useEffect(() => {
     if (!isLanguageFilterChange) return;
@@ -110,6 +111,10 @@ const LanguageFilter: FC<LanguageFilterProps> = ({
 
   const convertedLocales =
     oformLocales?.map((item) => convertToCulture(item)) || [];
+
+  // Nothing to pick from: the category filter already lays itself out for a
+  // row without this control (`noLocales`).
+  if (convertedLocales.length === 0) return null;
 
   return (
     <LanguageCombobox

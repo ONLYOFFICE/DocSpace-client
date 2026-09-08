@@ -7,7 +7,12 @@ const api = vi.hoisted(() => ({
   submitToGallery: vi.fn(),
 }));
 
-vi.mock("@docspace/shared/api/oforms", () => api);
+// Partial: the module also exports `OformsContractError`, which the store
+// checks with `instanceof` - a full replacement would make it `undefined`.
+vi.mock("@docspace/shared/api/oforms", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  ...api,
+}));
 
 vi.mock("@docspace/ui-kit/components/toast", () => ({
   toastr: { error: vi.fn(), warning: vi.fn() },
@@ -20,6 +25,8 @@ import type {
   TOformPurpose,
   TOformsList,
 } from "@docspace/shared/api/oforms/types";
+
+import { OformsContractError } from "@docspace/shared/api/oforms";
 
 import OformsStore from "../OformsStore";
 
@@ -304,5 +311,120 @@ describe("OformsStore list loading", () => {
 
     expect(store.oformFiles?.map(({ id }) => id)).toEqual([5]);
     expect(store.oformsIsLoading).toBe(false);
+  });
+
+  it("leaves the loading flag to the refetch that dropped a page", async () => {
+    const store = createStore();
+    store.oformsFilter.total = 10;
+    store.setOformFiles([template(1)]);
+
+    const page = deferred<TOformsList>();
+    api.getOforms.mockReturnValueOnce(page.promise);
+    const more = store.fetchMoreOforms();
+
+    const replacement = deferred<TOformsList>();
+    api.getOforms.mockReturnValueOnce(replacement.promise);
+    const refetch = store.refetchOforms(store.oformsFilter.clone());
+
+    page.resolve(list([2], 10));
+    await more;
+
+    expect(store.oformsIsLoading).toBe(true);
+    expect(store.oformFiles?.map(({ id }) => id)).toEqual([1]);
+
+    replacement.resolve(list([5]));
+    await refetch;
+
+    expect(store.oformsIsLoading).toBe(false);
+  });
+
+  it("dims the list while a tab switch reloads it", async () => {
+    const store = createStore();
+    const pending = deferred<TOformsList>();
+    api.getOforms.mockReturnValueOnce(pending.promise);
+
+    const reset = store.resetFilters(".xlsx");
+
+    expect(store.oformsIsLoading).toBe(true);
+    expect(store.oformsIsRefetching).toBe(true);
+
+    pending.resolve(list([3]));
+    await reset;
+
+    expect(store.oformsIsLoading).toBe(false);
+    expect(store.oformsIsRefetching).toBe(false);
+    expect(store.oformFiles?.map(({ id }) => id)).toEqual([3]);
+  });
+
+  it("undims the list when a tab switch outruns a filter change", async () => {
+    const store = createStore();
+    const slow = deferred<TOformsList>();
+    api.getOforms.mockReturnValueOnce(slow.promise);
+
+    const searchFilter = store.oformsFilter.clone();
+    searchFilter.search = "slow";
+    const refetch = store.refetchOforms(searchFilter);
+
+    api.getOforms.mockResolvedValueOnce(list([7]));
+    await store.resetFilters(".xlsx");
+
+    slow.resolve(list([1]));
+    await refetch;
+
+    expect(store.oformFiles?.map(({ id }) => id)).toEqual([7]);
+    expect(store.oformsIsLoading).toBe(false);
+    expect(store.oformsIsRefetching).toBe(false);
+  });
+
+  it("stops paginating when the list request fails", async () => {
+    const store = createStore();
+    store.oformsFilter.total = 10;
+    store.setOformFiles([template(1)]);
+
+    api.getOforms.mockRejectedValueOnce({ response: { status: 500 } });
+    await store.fetchOforms(store.oformsFilter.clone());
+
+    expect(store.oformsFilter.total).toBe(0);
+    expect(store.hasMoreForms).toBe(false);
+  });
+
+  it("raises the error screen for a status the CMS was not expected to answer", async () => {
+    const store = createStore();
+
+    api.getOforms.mockRejectedValueOnce({ response: { status: 403 } });
+    await store.fetchOforms(store.oformsFilter.clone());
+
+    expect(store.oformsLoadError).toBe(true);
+    expect(store.oformsNetworkError).toBe(false);
+  });
+
+  it("tells a dead network apart from a refusing CMS", async () => {
+    const store = createStore();
+
+    api.getOforms.mockRejectedValueOnce({ code: "ERR_NETWORK" });
+    await store.fetchOforms(store.oformsFilter.clone());
+
+    expect(store.oformsNetworkError).toBe(true);
+    expect(store.oformsLoadError).toBe(false);
+  });
+
+  it("answers the locales request with an empty list when it fails", async () => {
+    const store = createStore();
+    store.setOformLocales(null);
+
+    api.getOformLocales.mockRejectedValueOnce({ response: { status: 403 } });
+    await store.fetchOformLocales();
+
+    expect(store.oformLocales).toEqual([]);
+  });
+
+  it("raises the error screen when the CMS answers with the previous contract", async () => {
+    const store = createStore();
+
+    api.getOforms.mockRejectedValueOnce(new OformsContractError());
+    await store.fetchOforms(store.oformsFilter.clone());
+
+    expect(store.oformsLoadError).toBe(true);
+    expect(store.oformFiles).toEqual([]);
   });
 });

@@ -47,7 +47,6 @@ Line numbers are approximate (as of extraction) — grep the symbol to relocate.
 - `PublicRoomStore.ts` — `api.rooms.getExternalLinks` untyped; cast to `Promise<TFileLink[]>`. (~203)
 - `FilesSettingsStore.ts` — `api.rooms.hideConfirmRoomLifetime` untyped; cast to `Promise<boolean>`. (~766)
 - `SsoFormStore.ts` — `loadXmlMetadata` / `uploadXmlMetadata` / `validateCerts` / `generateCerts` untyped raw axios calls (~76); `resetSsoForm` (`DELETE /settings/ssov2`) untyped, cast to `TGetSsoSettings` (~533).
-- `OformsStore.ts` — oforms API client (`shared/api/oforms/index.js`) is `@ts-nocheck`; responses cast across `getOformLocales` / `getOforms` / `getCategoryById` / `getCategoryTypes` / `getCategoriesOfCategoryType` / `submitToGallery`. (~208)
 - `StorageManagement.ts` — `getQuotaSettings` untyped (local `TQuotaSettings` covers only `lastRecalculateDate`, ~69); `checkRecalculateQuota` untyped, cast to boolean (~175).
 - `LdapFormStore.ts` — LDAP endpoints untyped (`getLdapSettings`, `getLdapDefaultSettings`, `getLdapStatus`, `syncLdap`, `saveLdapSettings`, `getCronLdap`, `saveCronLdap`); move local types to `shared/api/settings/types.ts` once typed. (~24)
 - `WebhooksStore.ts` — webhook API in `shared/api/settings` untyped; `TWebhook` shapes inferred from server responses. (~55)

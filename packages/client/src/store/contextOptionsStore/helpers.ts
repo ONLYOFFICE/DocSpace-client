@@ -284,13 +284,23 @@ export const onShowWaitOperationToast = (t: TTranslation) => {
 export const onSuggestOformChanges = (item: { title?: string } | null) => {
   const formTitle = item?.title;
 
+  // Without a template to name, the subject stays generic: interpolating an
+  // absent title used to mail out "Suggesting changes for undefined".
+  const subject = formTitle
+    ? `Suggesting changes for ${formTitle}`
+    : "Suggesting changes";
+
+  // The query is encoded and kept on one line: the newlines and indentation
+  // of a multi-line literal are part of the URL, and mail clients carry them
+  // into the subject.
+  const mailto = `mailto:marketing@onlyoffice.com?subject=${encodeURIComponent(
+    subject,
+  )}&body=${encodeURIComponent(`${subject}.`)}`;
+
   // assigning a string to window.location is valid at
   // runtime (navigates) but lib.dom types the setter stricter — the cast
   // keeps the original statement.
-  window.location = `mailto:marketing@onlyoffice.com
-    ?subject=Suggesting changes for ${formTitle}
-    &body=Suggesting changes for ${formTitle}.
-  ` as unknown as string & Location;
+  window.location = mailto as unknown as string & Location;
 };
 
 export const createMenuGroup = (

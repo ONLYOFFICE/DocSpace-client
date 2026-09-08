@@ -41,9 +41,8 @@ import {
   getOformLocales,
   getOforms,
   getOformPurposes,
+  OformsContractError,
 } from "@docspace/shared/api/oforms";
-
-import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { convertToLanguage } from "@docspace/shared/utils/common";
 import { LANGUAGE } from "@docspace/shared/constants";
@@ -253,11 +252,11 @@ class OformsStore {
 
     try {
       this.setOformLocales(await getOformLocales(url));
-    } catch (err) {
+    } catch {
+      // An empty list is the answer the language filter renders from; the
+      // failure itself reaches the user through the error screen the list
+      // request raises, so it is not toasted on top of it.
       this.setOformLocales([]);
-
-      (err as AxiosError)?.message !== "Network Error" &&
-        toastr.error(err as string);
     }
   };
 
@@ -268,26 +267,31 @@ class OformsStore {
       this.oformsNetworkError = false;
       return oforms;
     } catch (err) {
-      const status = (err as AxiosError)?.response?.status;
+      // Every way the catalog can fail ends on the same error screen: a
+      // status this code does not enumerate (403 from the CDN in front of the
+      // CMS, 401, 429) used to fall through to a toast, leaving the gallery
+      // on skeletons that never resolve.
       const isNetworkError = (err as AxiosError)?.code === "ERR_NETWORK";
-      const isApiError = status === 404 || status === 500;
 
-      if (isApiError) {
-        this.oformsLoadError = true;
-      } else if (isNetworkError) {
+      if (isNetworkError) {
         this.oformsNetworkError = true;
       } else {
-        toastr.error(err as string);
+        this.oformsLoadError = true;
       }
     }
 
     return null;
   };
 
+  // A failed request leaves no list to paginate: keeping the previous total
+  // would make `hasMoreForms` true against an empty list and let the grid
+  // retry the same failing page on every scroll.
   applyOformsList = (filter: OformsFilter, oformData: TOformsList | null) => {
     if (oformData) {
       filter.page = oformData.pagination.page;
       filter.total = oformData.pagination.total;
+    } else {
+      filter.total = 0;
     }
 
     return oformData?.templates ?? [];
@@ -305,6 +309,8 @@ class OformsStore {
     runInAction(() => {
       this.setOformsFilter(filter);
       this.setOformFiles(templates);
+      this.setOformsIsLoading(false);
+      this.setOformsIsRefetching(false);
     });
 
     return true;
@@ -314,16 +320,18 @@ class OformsStore {
    * A filter change refetches the list in place: the tiles already on screen
    * stay, dimmed, until the answer arrives. The loading flag also keeps
    * `fetchMoreOforms` from paginating a list that is being replaced.
+   *
+   * Both flags are cleared by whichever `fetchOforms` turns out to be the
+   * latest one, not here: a superseded refetch must leave them raised for the
+   * request that replaced it, and that request can just as well come from an
+   * entry point that never went through `refetchOforms` (a tab switch, the
+   * first load).
    */
   refetchOforms = async (filter: OformsFilter) => {
     this.setOformsIsLoading(true);
     this.setOformsIsRefetching(true);
 
-    const isLatest = await this.fetchOforms(filter);
-    if (!isLatest) return;
-
-    this.setOformsIsLoading(false);
-    this.setOformsIsRefetching(false);
+    await this.fetchOforms(filter);
   };
 
   fetchMoreOforms = async () => {
@@ -337,12 +345,15 @@ class OformsStore {
     const oformData = await this.getOforms(newOformsFilter);
 
     runInAction(() => {
-      if (requestId === this.listRequestId) {
-        const newForms = this.applyOformsList(newOformsFilter, oformData);
-        this.setOformsFilter(newOformsFilter);
-        this.setOformFiles([...(this.oformFiles || []), ...newForms]);
-      }
+      // A page of a list that has already been replaced is dropped whole,
+      // the loading flag included: it now belongs to the request that
+      // replaced the list, and clearing it here would let the grid paginate
+      // that list while it is still being fetched.
+      if (requestId !== this.listRequestId) return;
 
+      const newForms = this.applyOformsList(newOformsFilter, oformData);
+      this.setOformsFilter(newOformsFilter);
+      this.setOformFiles([...(this.oformFiles || []), ...newForms]);
       this.setOformsIsLoading(false);
     });
   };
@@ -395,9 +406,10 @@ class OformsStore {
 
     try {
       this.setPurposes(await getOformPurposes(url, locale, extension));
-    } catch (err) {
-      (err as AxiosError)?.message !== "Network Error" &&
-        toastr.error(err as string);
+    } catch {
+      // Same as the locales: the taxonomy fails together with the list it
+      // filters, and the error screen speaks for both.
+      this.setPurposes([]);
     } finally {
       this.setCategoryFilterLoaded(true);
     }
@@ -502,6 +514,12 @@ class OformsStore {
             : OformsFilter.getDefault();
 
     defaultFilter.locale = this.defaultOformLocale;
+
+    // Switching a tab and clearing a filter both replace the list in place,
+    // so they dim the tiles the same way a filter change does.
+    this.setOformsIsLoading(true);
+    this.setOformsIsRefetching(true);
+
     await this.fetchOformsWithPurposes(defaultFilter);
   };
 

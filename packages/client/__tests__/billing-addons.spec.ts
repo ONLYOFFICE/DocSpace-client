@@ -410,7 +410,7 @@ test.describe("Add-ons on a negative balance", () => {
     await page.clock.setSystemTime(PAID_NOW);
   });
 
-  test("the AI card warns about the credits and backups become unavailable", async ({
+  test("the AI card warns about the credits while backups still read as available", async ({
     page,
     baseUrl,
     mockRequest,
@@ -426,7 +426,8 @@ test.describe("Add-ons on a negative balance", () => {
       page.getByText("Available credits: -$3.00. Credits running low"),
     ).toBeVisible();
     await expect(card(page, "aitools").getByTestId("ai_supported_models_link")).toBeVisible();
-    // floor(balance / price) is negative here, not zero, so backups still read as available.
+    // TODO(ui-kit): availableBackupsCount only zeroes an exactly empty wallet, so a negative
+    // balance still reads as available; flip this to "unavailable" once it is fixed.
     await expect(page.getByText("Backups available — $2.00 per backup")).toBeVisible();
 
     await expectScreenshot(page, ["desktop", "addons", "low-balance.png"]);

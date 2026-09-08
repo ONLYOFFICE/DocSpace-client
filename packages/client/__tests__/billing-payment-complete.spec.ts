@@ -601,6 +601,39 @@ test.describe("Payment complete page", () => {
     await page.waitForURL("**/developer-tools/docs-connect");
   });
 
+  // The page falls back to the paywall start amount instead of refusing a broken amount.
+  for (const amount of ["abc", "-5"]) {
+    test(`an amount of "${amount}" is charged as the default 20`, async ({
+      page,
+      baseUrl,
+    }) => {
+      const deposits = trackRequests(page, "POST", DEPOSIT_PATH);
+
+      await page.goto(`${baseUrl}${completeUrl({ amount })}`);
+
+      await expect(page.getByText("Wallet topped up", { exact: true })).toBeVisible(
+        FIRST_RENDER,
+      );
+      expect(deposits).toHaveLength(1);
+      expect(deposits[0]).toContain('"amount":20');
+    });
+  }
+
+  test("an unknown currency is passed on to the deposit as it is", async ({
+    page,
+    baseUrl,
+  }) => {
+    const deposits = trackRequests(page, "POST", DEPOSIT_PATH);
+
+    await page.goto(`${baseUrl}${completeUrl({ currency: "XYZ" })}`);
+
+    await expect(page.getByText("Wallet topped up", { exact: true })).toBeVisible(
+      FIRST_RENDER,
+    );
+    expect(deposits).toHaveLength(1);
+    expect(deposits[0]).toContain('"currency":"XYZ"');
+  });
+
   test("without payment details the page falls through to the wallet", async ({
     page,
     baseUrl,

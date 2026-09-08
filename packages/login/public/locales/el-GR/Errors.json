@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Αυτή η εφαρμογή είναι απενεργοποιημένη",
   "OAuthApplicationEmpty": "Η εφαρμογή δεν βρέθηκε",
   "OAuthClientEmpty": "Το αναγνωριστικό πελάτη δεν βρέθηκε",
+  "OAuthInvalidRequest": "Το αίτημα εξουσιοδότησης δεν είναι έγκυρο. Ελέγξτε το URI ανακατεύθυνσης στις ρυθμίσεις της εφαρμογής",
   "RecaptchaInvalid": "Μη έγκυρο Recaptcha",
   "SsoAttributesNotFound": "Αποτυχία αυθεντικοποίησης (δεν βρέθηκαν τα χαρακτηριστικά επιβεβαίωσης)",
   "SsoAuthFailed": "Η αυθεντικοποίηση απέτυχε",

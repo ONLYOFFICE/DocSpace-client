@@ -202,6 +202,35 @@ test.describe("Billing wallet", () => {
     await expectScreenshot(page, ["desktop", "wallet", "never-topped-up.png"]);
   });
 
+  test("isDelayedPaymentMethod announces the transfer and hides auto top-up", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      isDelayedPaymentMethod: true,
+    });
+
+    await openWallet(page, baseUrl);
+
+    await expect(
+      page.getByText(
+        "SEPA transfer sent. Funds can take several business days to arrive. Your Wallet balance will update automatically after the funds arrive. You can still top up again, including by card.",
+      ),
+    ).toBeVisible();
+    await expect(topUpButton(page)).toBeEnabled();
+    // the wallet cannot be refilled automatically before the transfer settles
+    await expect(autoTopUpButton(page)).toHaveCount(0);
+
+    await expectScreenshot(page, [
+      "desktop",
+      "wallet",
+      "delayed-payment-method.png",
+    ]);
+  });
+
   test("a configured auto top-up states its thresholds", async ({
     page,
     baseUrl,

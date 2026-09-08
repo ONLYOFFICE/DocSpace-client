@@ -2320,6 +2320,7 @@
   "VirtualDataRoomDescription": "Use VDR for advanced file security and transparency. Set watermarks, automatically index and track all content, restrict downloading and copying.",
   "Wallet": "Wallet",
   "WalletBalanceTooLow": "Wallet balance is too low",
+  "WalletDelayedPaymentMethodBanner": "SEPA transfer sent. Funds can take several business days to arrive. Your Wallet balance will update automatically after the funds arrive. You can still top up again, including by card.",
   "WalletRefilled": "Wallet refilled",
   "WalletSectionDescriptionAddons": "The Wallet allows you to easily purchase add-ons such as storage, AI tools, and backups. Add credits and select the <1>add-ons</1> you need to get started.",
   "WalletToppedUp": "Wallet has been successfully topped up",

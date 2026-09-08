@@ -33,7 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { filesSettingsHandler } from "./filesSettings";
+import {
+  filesSettingsHandler,
+  showQuickActionsHandler,
+} from "./filesSettings";
 import { foldersTreeHandler } from "./foldersTree";
 import { folderHandler, folderInfoHandler } from "./folder";
 import {
@@ -142,6 +145,7 @@ export {
 export {
   foldersTreeHandler,
   filesSettingsHandler,
+  showQuickActionsHandler,
   validatePublicRoomKeyHandler,
   roomListHandler,
   roomPrimaryLinkHandler,
@@ -213,6 +217,7 @@ export const filesHandlers = (port: string) => [
   resultStorageFolderHandler(port),
   rootHandler(port),
   filesSettingsHandler(port),
+  showQuickActionsHandler(port),
   validatePublicRoomKeyHandler(port),
   roomListHandler(port),
   agentFolderInfoHandler(port),

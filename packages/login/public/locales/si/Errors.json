@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "මෙම යෙදුම අක්‍රිය කර ඇත",
   "OAuthApplicationEmpty": "යෙදුම සොයා ගැනීමට නොහැකි විය",
   "OAuthClientEmpty": "සේවාලාභී ID සොයා ගැනීමට නොහැකි විය",
+  "OAuthInvalidRequest": "අනුමැති ඉල්ලීම වලංගු නොවේ. යෙදුම් සැකසුම්වල නැවත හැරවීමේ URI පරීක්ෂා කරන්න",
   "RecaptchaInvalid": "වැරදි විසඳුමකි",
   "SsoAttributesNotFound": "බලය දීමට අසමත් විය (ප්‍රකාශන උපලක්‍ෂණ හමු නොවිණි)",
   "SsoAuthFailed": "බලය දීමට අසමත් විය",

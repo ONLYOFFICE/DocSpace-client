@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Ky aplikacion është i çaktivizuar",
   "OAuthApplicationEmpty": "Aplikacioni nuk mund të gjendej",
   "OAuthClientEmpty": "ID-ja e klientit nuk u gjet",
+  "OAuthInvalidRequest": "Kërkesa e autorizimit është e pavlefshme. Kontrolloni URI-n e ridrejtimit në cilësimet e aplikacionit",
   "RecaptchaInvalid": "Recaptcha e pavlefshme",
   "SsoAttributesNotFound": "Autentifikimi dështoi (atributet e pohimit nuk u gjetën)",
   "SsoAuthFailed": "Autentifikimi dështoi",

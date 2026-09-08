@@ -303,6 +303,8 @@ class AuthStore {
     const isAdmin =
       this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner;
 
+    const isSaasAdmin = isAdmin && !this.settingsStore?.standalone;
+
     const request = [];
 
     request.push(this.currentTariffStatusStore?.fetchPortalTariff(refresh));
@@ -311,15 +313,18 @@ class AuthStore {
       request.push(this.currentQuotaStore?.fetchPortalQuota(refresh));
     }
 
-    if (isAdmin && !this.settingsStore?.standalone) {
-      request.push(
-        this.currentTariffStatusStore?.fetchPayerInfo(refresh),
-        this.currentTariffStatusStore?.fetchServiceFeePercent(AI_TOOLS),
-        this.currentTariffStatusStore?.fetchServiceFeePercent(AI_SEARCH),
-      );
+    if (isSaasAdmin) {
+      request.push(this.currentTariffStatusStore?.fetchPayerInfo(refresh));
     }
 
     await Promise.all(request);
+
+    // An unpaid portal cannot reach the pages that show the AI fees, and the
+    // banner re-renders when the percent arrives, so the boot does not wait for it.
+    if (isSaasAdmin && !this.currentTariffStatusStore?.isNotPaidPeriod) {
+      this.currentTariffStatusStore?.fetchServiceFeePercent(AI_TOOLS);
+      this.currentTariffStatusStore?.fetchServiceFeePercent(AI_SEARCH);
+    }
 
     runInAction(() => {
       this.isPortalInfoLoaded = true;

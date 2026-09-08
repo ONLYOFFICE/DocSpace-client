@@ -1491,6 +1491,7 @@
   "OpenAgentSettings": "打开助手设置",
   "OpenAISettings": "打开AI设置",
   "OpenFileMessage": "您打开的文本文档将被转换为Office Open XML格式，以便快速查看并编辑。",
+  "OpenGeneratedDocument": "打开生成的文档",
   "OpenKeysManagement": "打开密钥管理",
   "OpenLocation": "打开位置",
   "OpenPortalBilling": "前往工作区账单",

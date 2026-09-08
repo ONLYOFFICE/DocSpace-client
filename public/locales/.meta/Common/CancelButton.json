@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-09-04T07:59:41.567Z",
+  "updated_at": "2026-09-08T08:44:10.015Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -157,7 +157,7 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
-      "line_number": 264,
+      "line_number": 290,
       "context": "onBackClick: onBackClick,\n onCloseClick: onClose ?? onBackClick,\n withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"CancelButton\")}\n onCancel={onBackClick}\n selectedItems={initedSelectedServersItems}\n />\n );\n };",
       "module": "/libs/ui-kit"
     },
@@ -1111,7 +1111,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 597,
+      "line_number": 602,
       "context": "case \"provisioning\":\n return (\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={handleCancelProvisioning}\n />\n );\n case \"done\":\n return (",
       "module": "/packages/sdk"
     },
@@ -1183,7 +1183,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 802,
+      "line_number": 803,
       "context": "// initHasNextPage={selectorInitData.hasNextPage}\n submitButtonLabel={getSubmitLabel(\n selectorMode,\n t,\n )}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n withCancelButton\n withBreadCrumbs\n withSearch\n withCreate={!!selectorMode}\n createDefineRoomType={RoomsType.CustomRoom}",
       "module": "/packages/sdk"
     },

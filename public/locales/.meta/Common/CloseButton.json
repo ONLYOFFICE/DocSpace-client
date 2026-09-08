@@ -3,7 +3,7 @@
   "content": "Close",
   "content_en_sha1_hash": "bbfa773e5a63a5ea58c9b6207e608ca0120e592a",
   "created_at": "2025-05-19T21:30:43.485Z",
-  "updated_at": "2026-08-28T14:38:40.197Z",
+  "updated_at": "2026-09-08T08:44:10.024Z",
   "comment": {
     "text": "This is the label for a button that closes a dialog window, such as a conversion dialog, a password dialog, or a \"Get Code\" dialog.",
     "is_auto": true,
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 624,
+      "line_number": 630,
       "context": "onClick={handleRetry}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CloseButton\")}\n onClick={onClose}\n />\n </>\n );\n default:",
       "module": "/packages/sdk"
     },

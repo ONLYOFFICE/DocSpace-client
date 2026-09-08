@@ -33,3 +33,8 @@ pre-push:
       skip_empty: true
       follow: true
       skip_on_fail: false
+    unit-tests-sdk:
+      run: CI=true FORCE_COLOR=0 pnpm run test:sdk
+      skip_empty: true
+      follow: true
+      skip_on_fail: false

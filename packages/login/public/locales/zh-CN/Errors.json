@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "该应用已禁用",
   "OAuthApplicationEmpty": "无法找到该应用",
   "OAuthClientEmpty": "无法找到此客户 ID",
+  "OAuthInvalidRequest": "授权请求无效。请检查应用设置中的重定向 URI",
   "RecaptchaInvalid": "无效的Recaptcha",
   "SsoAttributesNotFound": "认证失败（未找到断言属性）",
   "SsoAuthFailed": "认证失败",

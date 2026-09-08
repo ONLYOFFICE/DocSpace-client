@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Bu uygulama devre dışı bırakıldı",
   "OAuthApplicationEmpty": "Uygulama bulunamadı",
   "OAuthClientEmpty": "İstemci kimliği bulunamadı",
+  "OAuthInvalidRequest": "Yetkilendirme isteği geçersiz. Uygulama ayarlarındaki yönlendirme URI'sini kontrol edin",
   "RecaptchaInvalid": "Geçersiz Recaptcha",
   "SsoAttributesNotFound": "Kimlik doğrulama başarısız oldu (onay öznitelikleri bulunamadı)",
   "SsoAuthFailed": "Kimlik doğrulama başarısız oldu",

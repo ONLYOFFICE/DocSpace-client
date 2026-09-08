@@ -1,21 +1,21 @@
 {
-  "key_path": "AddCreditsToEnableAI",
-  "content": "Adding credits will automatically enable {{organizationName}} AI and make models available to all users. Continue?",
-  "content_en_sha1_hash": "62cddbbb2dcb39e4d51592f64bbe20c7da91f478",
-  "created_at": "2026-04-10T13:53:44.141Z",
-  "updated_at": "2026-09-08T08:44:10.175Z",
+  "key_path": "TagAlreadyExists",
+  "content": "Tag \"{{tagName}}\" already exists",
+  "content_en_sha1_hash": "2e60c7d1e48218cf441448ff65252c5704c6e9b6",
+  "created_at": "2026-09-08T08:43:58.787Z",
+  "updated_at": "2026-09-08T08:44:37.567Z",
   "comment": {
-    "text": "This is the body text of a confirmation dialog. It appears when a user is about to add credits to enable AI features for their organization, informing them that doing so will make AI models available to all users. `{{organizationName}}` will be replaced with the name of the user's organization.",
+    "text": "Error toast message appearing when a user attempts to create or rename a tag with a name that is already in use. The {{tagName}} variable represents the name of the existing tag.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:01:05.879Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-09-08T08:44:37.567Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 363,
-      "context": "<ConfirmationDialog\n visible={isTopUpConfirmVisible}\n onClose={onCloseTopUpConfirm}\n onConfirm={onConfirmTopUp}\n title={t(\"ServiceIsDisabled\")}\n bodyText={t(\"AddCreditsToEnableAI\", { organizationName: logoText })}\n />\n ) : null}\n </div>\n );\n };",
-      "module": "/libs/ui-kit"
+      "file_path": "/packages/shared/components/tag-management/TagManagement.service.tsx",
+      "line_number": 194,
+      "context": ");\n \n if (isTaken) {\n // Nothing is sent and the row stays in edit mode, so the name can be\n // corrected instead of retyped.\n toastr.error(t(\"Common:TagAlreadyExists\", { tagName: newLabel }));\n return;\n }\n \n // Renames the one row, either way round. The rollback runs after two\n // awaits, the second of them a modal the user answers in their own time,",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

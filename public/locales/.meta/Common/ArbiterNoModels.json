@@ -3,7 +3,7 @@
   "content": "No AI model is configured for this workspace.",
   "content_en_sha1_hash": "b6ffbdf7ff41ff7f3d60b38daa94b0fa8b400647",
   "created_at": "2026-09-04T00:00:00.000Z",
-  "updated_at": "2026-09-04T00:00:00.000Z",
+  "updated_at": "2026-09-08T08:44:10.158Z",
   "comment": {
     "text": "Message shown in the AI Arbiter setup wizard when the workspace has no AI model configured yet. It is a missing precondition rather than a failure, so the wizard keeps its own header and offers Retry. Replaces the former ArbiterNoAIProvider, which said \"provider\" after the panel moved to AI profiles.",
     "is_auto": false,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 229,
-      "context": "const modelRef =\n models.find((m) => m.profileId === preferredId) ?? models[0];\n if (!modelRef) {\n // A workspace with no AI model configured is a missing precondition,\n // not a failed setup: it keeps the wizard's own header and still\n // offers Retry, which re-runs the bootstrap once a model is added.\n setErrorMessage(t(\"Common:ArbiterNoModels\"));\n setPhase(\"no-models\");\n return;\n }\n \n const wizard = await ensureWizardAgent({\n userId,",
+      "line_number": 230,
+      "context": "models.find((m) => m.profileId === preferredId) ?? models[0];\n if (!modelRef) {\n // A workspace with no AI model configured is a missing precondition,\n // not a failed setup: it keeps the wizard's own header and still\n // offers Retry, which re-runs the bootstrap once a model is added.\n setErrorMessage(t(\"Common:ArbiterNoModels\"));\n setPhase(\"no-models\");\n return;\n }\n \n const wizard = await ensureWizardAgent({",
       "module": "/packages/sdk"
     }
   ],

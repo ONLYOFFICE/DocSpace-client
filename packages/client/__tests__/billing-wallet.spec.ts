@@ -536,6 +536,34 @@ test.describe("Billing wallet", () => {
     ]);
   });
 
+  test("isDelayedPaymentMethod ends an instant top-up with the settlement notice", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      isDelayedPaymentMethod: true,
+    });
+    mockRequest.use(
+      http.post(apiUrl("portal/payment/deposit"), () => jsonResponse(true)),
+    );
+
+    await openWallet(page, baseUrl);
+    await topUpButton(page).click();
+
+    const amount = page.getByTestId("top_up_amount_input").first();
+    await amount.fill("25");
+    await page.getByTestId("first_topup_continue_to_stripe").click();
+
+    await expect(page.getByTestId("toast-content")).toContainText(
+      "Bank transfers may take several business days to process. Credits will be added to your Wallet only after the funds arrive.",
+    );
+    await expect(amount).toHaveCount(0);
+    await expect(page.getByText("Wallet has been successfully topped up")).toHaveCount(0);
+  });
+
   test("the auto top-up dialog asks for the two thresholds", async ({
     page,
     baseUrl,

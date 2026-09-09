@@ -1,5 +1,6 @@
 {
   "AddRoom": "Add room",
+  "AddSpace": "Add space",
   "AddToGroup": "Add to group",
   "ChangesApplied": "Changes have been applied",
   "CreateAGroup": "Create a group",
@@ -8,7 +9,9 @@
   "DisablingRoomGroups": "Disabling room groups",
   "DisablingRoomGroupsDescription": "Groups will be saved but hidden. Re-enable in Profile, File management.",
   "EditRoomGroups": "Edit room groups",
+  "EditSpaceGroups": "Edit space groups",
   "EmptyGroupRoomsDescription": "There are no rooms here. Try adding a room or remove this group.",
+  "EmptyGroupSpacesDescription": "There are no spaces here. Try adding a space or remove this group.",
   "GroupHasBeenDeleted": "The group has been deleted",
   "GroupIcon": "Group icon",
   "GroupIsEmpty": "Group is empty",
@@ -18,6 +21,8 @@
   "RemoveGroup": "Remove group",
   "RemoveGroupConfirmation": "You are about to delete group of rooms. Are you sure you want to proceed?",
   "RemoveGroupInfo": "The rooms included in group will be displayed in the <strong>All Rooms</strong> section.",
+  "RemoveSpaceGroupConfirmation": "You are about to delete group of spaces. Are you sure you want to proceed?",
+  "RemoveSpaceGroupInfo": "The spaces included in group will be displayed in the <strong>All spaces</strong> section.",
   "RoomAddedToGroup": "The selected room has been added to <1>{{groupName}}</1>.",
   "RoomGrouping": "Room grouping",
   "RoomGroupingDisabled": "Room grouping is disabled",
@@ -25,5 +30,10 @@
   "RoomGroupingSettingDescription": "You can group rooms into folders and easily switch between them.",
   "RoomRemovedFromGroup": "The selected room has been removed from <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "The selected rooms have been added to <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "The selected rooms have been removed from <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "The selected rooms have been removed from <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "The selected space has been added to <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "The selected space has been removed from <1>{{groupName}}</1>.",
+  "Spaces": "Spaces",
+  "SpacesAddedToGroup": "The selected spaces have been added to <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "The selected spaces have been removed from <1>{{groupName}}</1>."
 }

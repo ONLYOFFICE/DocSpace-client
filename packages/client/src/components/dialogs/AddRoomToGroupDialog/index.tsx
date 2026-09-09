@@ -42,6 +42,7 @@ import { Aside } from "@docspace/ui-kit/components/aside";
 import RoomSelector from "@docspace/ui-kit/selectors/Room";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector/Selector.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
+import { RoomSearchArea } from "@docspace/shared/enums";
 
 type AddRoomToGroupDialogProps = {
   visible?: boolean;
@@ -56,6 +57,7 @@ type AddRoomToGroupDialogProps = {
     data: { roomsToAdd?: (string | number)[]; roomsToRemove?: number[] },
   ) => Promise<void>;
   getAllRoomGroups?: () => Promise<void>;
+  isFormsSection?: boolean;
 };
 
 const AddRoomToGroupDialog = ({
@@ -65,6 +67,7 @@ const AddRoomToGroupDialog = ({
   getGroupById,
   updateRoomGroup,
   getAllRoomGroups,
+  isFormsSection = false,
 }: AddRoomToGroupDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
   const [groupData, setGroupData] = useState<{
@@ -179,12 +182,16 @@ const AddRoomToGroupDialog = ({
           headerProps={{
             onBackClick: onClose,
             onCloseClick: onClose,
-            headerLabel: groupData?.name || t("GroupingRooms:AddRoom"),
+            headerLabel:
+              groupData?.name ||
+              (isFormsSection
+                ? t("GroupingRooms:AddSpace")
+                : t("GroupingRooms:AddRoom")),
             withoutBorder: false,
             withoutBackButton: false,
           }}
           withSearch
-          isForms={false}
+          isForms={isFormsSection}
           isMultiSelect
           selectedItems={groupData ? convertToItems(groupData.rooms || []) : []}
           withCancelButton
@@ -207,6 +214,7 @@ export default inject(({ dialogsStore }: TStore) => {
     getGroupById,
     updateRoomGroup,
     getAllRoomGroups,
+    roomGroupsArea,
   } = dialogsStore;
 
   return {
@@ -216,5 +224,6 @@ export default inject(({ dialogsStore }: TStore) => {
     getGroupById,
     updateRoomGroup,
     getAllRoomGroups,
+    isFormsSection: roomGroupsArea === RoomSearchArea.Forms,
   };
 })(observer(AddRoomToGroupDialog));

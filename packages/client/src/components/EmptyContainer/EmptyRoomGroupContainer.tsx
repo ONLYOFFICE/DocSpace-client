@@ -48,10 +48,12 @@ import styles from "./EmptyRoomGroupContainer.module.scss";
 
 type EmptyRoomGroupContainerProps = {
   onManageGroups?: () => void;
+  isFormsSection?: boolean;
 };
 
 const EmptyRoomGroupContainer = ({
   onManageGroups,
+  isFormsSection,
 }: EmptyRoomGroupContainerProps) => {
   const { t } = useTranslation(["GroupingRooms", "Common"]);
   const { isBase } = useTheme();
@@ -76,7 +78,11 @@ const EmptyRoomGroupContainer = ({
     <EmptyView
       icon={icon}
       title={t("GroupingRooms:GroupIsEmpty")}
-      description={t("GroupingRooms:EmptyGroupRoomsDescription")}
+      description={
+        isFormsSection
+          ? t("GroupingRooms:EmptyGroupSpacesDescription")
+          : t("GroupingRooms:EmptyGroupRoomsDescription")
+      }
       options={options}
       className={styles.wrapper}
       bodyClassName={styles.body}

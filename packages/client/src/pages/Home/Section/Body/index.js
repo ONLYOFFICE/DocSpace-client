@@ -121,6 +121,7 @@ const SectionBodyContent = (props) => {
     setEditRoomGroupsDialogVisible,
     isFilterOrSearchActive,
     isRoomsFolder,
+    isFormsFolder,
     draggedFiles,
     setIsChatDropTarget,
   } = props;
@@ -505,12 +506,21 @@ const SectionBodyContent = (props) => {
     return <KnowledgeDisabledContainer />;
 
   if (isEmptyFilesList) {
-    if (roomsFilterGroupId && !isFilterOrSearchActive && isRoomsFolder) {
+    if (
+      roomsFilterGroupId &&
+      !isFilterOrSearchActive &&
+      (isRoomsFolder || isFormsFolder)
+    ) {
       const onManageGroups = () => {
         setEditRoomGroupsDialogVisible?.(true);
       };
 
-      return <EmptyRoomGroupContainer onManageGroups={onManageGroups} />;
+      return (
+        <EmptyRoomGroupContainer
+          onManageGroups={onManageGroups}
+          isFormsSection={isFormsFolder}
+        />
+      );
     }
     return <EmptyContainer isEmptyPage={isEmptyPage} />;
   }
@@ -579,6 +589,7 @@ export default inject(
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
       isRoomsFolder: treeFoldersStore.isRoomsFolder,
+      isFormsFolder: treeFoldersStore.isFormsFolder,
       moveDragItems: filesActionsStore.moveDragItems,
       changeIndex: filesActionsStore.changeIndex,
       viewAs,

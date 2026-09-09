@@ -41,6 +41,7 @@ import { Nullable } from "types";
 import {
   FolderType,
   MembersSubjectType,
+  RoomSearchArea,
   ShareAccessRights,
   ShareLinkType,
 } from "../../enums";
@@ -720,10 +721,10 @@ export function createGroupRooms(newGroup) {
   return request(options);
 }
 
-export function getRoomGroups() {
+export function getRoomGroups(searchArea = RoomSearchArea.Active) {
   const options = {
     method: "get",
-    url: "/files/group?includeMembers=false",
+    url: `/files/group?searchArea=${searchArea}&includeMembers=false`,
   };
 
   return request(options);

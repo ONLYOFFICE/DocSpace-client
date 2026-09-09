@@ -381,8 +381,11 @@ class FilesStore {
   aiRoomStore: AiRoomStore = null as unknown as AiRoomStore;
 
   // Narrow interface (Track F): attached post-construction in
-  // store/index.ts (mutual reference); only `roomGroups` is read here.
-  dialogsStore: Nullable<Pick<DialogsStore, "roomGroups">> = null;
+  // store/index.ts (mutual reference); only the room group list and the
+  // section it was loaded for are read here.
+  dialogsStore: Nullable<
+    Pick<DialogsStore, "roomGroups" | "roomGroupsArea">
+  > = null;
 
   arrRoomGroups: unknown[] = [];
 

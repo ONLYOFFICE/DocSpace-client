@@ -34,6 +34,7 @@
  */
 
 import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import type { RoomSearchArea } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 
 import {
@@ -59,6 +60,7 @@ export interface CoverDialogProps {
   currentGroupIcon: ILogo | string | null;
   currentGroupName: string | null;
   isOpenedFromContextMenu?: boolean;
+  searchArea: RoomSearchArea;
 }
 
 export interface SelectIconProps {

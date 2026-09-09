@@ -48,12 +48,13 @@ import styles from "../EditRoomGroupsDialog.module.scss";
 
 const GroupItem = ({
   group,
+  isFormsSection,
   onClickGroup,
   onClickEditIcon,
   onClickDeleteGroup,
   disabled,
 }: GroupItemProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "GroupingRooms"]);
 
   const iconData = group?.icon?.data.small;
 
@@ -106,7 +107,8 @@ const GroupItem = ({
           <div className={styles.titleContainer}>
             <div className={styles.nameGroup}>{group.name}</div>
             <div className={styles.countRooms}>
-              {group.totalRooms} {t("Common:Rooms")}
+              {group.totalRooms}{" "}
+              {isFormsSection ? t("GroupingRooms:Spaces") : t("Common:Rooms")}
             </div>
           </div>
         </div>

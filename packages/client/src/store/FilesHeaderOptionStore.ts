@@ -57,6 +57,7 @@ import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 
 import { isDesktop } from "@docspace/shared/utils";
+import { RoomSearchArea } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import type { TRoomGroup } from "@docspace/ui-kit/components/filter/Filter.types";
@@ -143,6 +144,10 @@ export default class FilesHeaderOptionStore {
       this.t,
     );
 
+  private get isFormsGroupsArea() {
+    return this.dialogsStore.roomGroupsArea === RoomSearchArea.Forms;
+  }
+
   private isAvailableOption = (option: string) =>
     this.filesActionsStore.isAvailableOption(option);
 
@@ -164,10 +169,15 @@ export default class FilesHeaderOptionStore {
         values: { groupName },
         components: { 1: React.createElement("strong") },
       };
-      const keys = {
-        single: { tKey: "GroupingRooms:RoomAddedToGroup" },
-        multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
-      };
+      const keys = this.isFormsGroupsArea
+        ? {
+            single: { tKey: "GroupingRooms:SpaceAddedToGroup" },
+            multiple: { tKey: "GroupingRooms:SpacesAddedToGroup" },
+          }
+        : {
+            single: { tKey: "GroupingRooms:RoomAddedToGroup" },
+            multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
+          };
       const i18nKey =
         roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
       toastr.success(
@@ -207,10 +217,15 @@ export default class FilesHeaderOptionStore {
         values: { groupName },
         components: { 1: React.createElement("strong") },
       };
-      const keys = {
-        single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
-        multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
-      };
+      const keys = this.isFormsGroupsArea
+        ? {
+            single: { tKey: "GroupingRooms:SpaceRemovedFromGroup" },
+            multiple: { tKey: "GroupingRooms:SpacesRemovedFromGroup" },
+          }
+        : {
+            single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
+            multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
+          };
       const i18nKey =
         roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
       toastr.success(

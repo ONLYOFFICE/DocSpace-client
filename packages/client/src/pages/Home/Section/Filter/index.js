@@ -198,6 +198,15 @@ const SectionFilterContent = ({
     [isFormsSection],
   );
 
+  const roomGroupsSearchArea = isFormsFolder
+    ? RoomSearchArea.Forms
+    : RoomSearchArea.Active;
+
+  const getRoomGroupsForSection = React.useCallback(
+    () => getAllRoomGroups(roomGroupsSearchArea),
+    [getAllRoomGroups, roomGroupsSearchArea],
+  );
+
   const isContactsPage = location.pathname.includes("accounts");
   const isContactsPeoplePage = contactsTab === "people";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
@@ -1942,13 +1951,14 @@ const SectionFilterContent = ({
       isRecentFolder={isRecentFolder}
       renderSelector={renderFilterSelector}
       setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
-      getAllRoomGroups={getAllRoomGroups}
+      getAllRoomGroups={getRoomGroupsForSection}
       roomGroups={roomGroups}
       onFilterByGroup={onFilterByGroup}
       currentGroupId={(() => {
         return roomsFilter?.groupId;
       })()}
-      isRoomsFolder={isRoomsFolder}
+      withRoomGroups={isRoomsFolder || isFormsFolder}
+      isFormsSection={isFormsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}
       showMainButton={(showAgentsCreate || showMainButton) && isDesktopView}

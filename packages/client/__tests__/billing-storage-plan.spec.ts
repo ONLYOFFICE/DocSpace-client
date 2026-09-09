@@ -48,6 +48,7 @@ import {
   storageSubscriptionTariff,
   useSaasBilling,
   walletServicesHandler,
+  balanceHandler,
 } from "./helpers/billing";
 
 test.use({ locale: "en-US", timezoneId: "UTC" });
@@ -193,6 +194,45 @@ test.describe("Storage plan dialog", () => {
     expect(purchases[0]).toContain('"productQuantityType":1');
     await expect(okButton(page)).toBeHidden();
     await expect(page.getByText("300 GB", { exact: true })).toBeVisible();
+  });
+
+  test("isDelayedPaymentMethod turns a short-balance upgrade into a wallet top-up", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, { isDelayedPaymentMethod: true });
+    const state: StorageState = { size: 200, quota: {} };
+    mockRequest.use(...purchaseHandlers(state, 64), balanceHandler(50));
+    const purchases = trackRequests(page, "PUT", UPDATE_WALLET_PATH);
+
+    await openStorage(page, baseUrl);
+    await openEditDialog(page);
+    await fillSize(page, "300");
+
+    await expect(dialog(page).getByText("Total due today")).toBeVisible(
+      AFTER_ESTIMATE,
+    );
+    await expect(okButton(page)).toHaveText("Top up wallet", AFTER_ESTIMATE);
+    await expect(
+      dialog(page).getByText(
+        "Your Wallet will be topped up by $14.00. Return after the funds arrive to purchase additional storage.",
+      ),
+    ).toBeVisible();
+
+    await expectScreenshot(page, shot("top-up-wallet.png"));
+
+    await okButton(page).click();
+
+    await expect(page.getByTestId("top_up_amount_input").first()).toHaveValue(
+      "14",
+    );
+    await expect(okButton(page)).toBeHidden();
+    expect(purchases).toHaveLength(0);
+
+    await page.getByTestId("first_topup_cancel").click();
+
+    await expect(okButton(page)).toBeVisible();
   });
 
   test("a downgrade is scheduled for the next period with a warning", async ({
@@ -399,7 +439,9 @@ test.describe("Storage plan dialog", () => {
 
     await openStorage(page, baseUrl);
     await page.getByTestId("close_storage_tariff_deactivated_button").click();
-    await page.getByRole("button", { name: "Top up & Renew", exact: true }).click();
+    await page
+      .getByRole("button", { name: "Renew subscription", exact: true })
+      .click();
 
     await expect(okButton(page)).toBeVisible();
     await expect(dialog(page).locator("input")).toHaveValue("200");

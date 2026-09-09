@@ -107,8 +107,9 @@ test.describe("Docs Connect plan panel", () => {
     mockRequest: Parameters<typeof useSaasBilling>[0],
     preset: DocsConnectPreset,
     balance?: number,
+    saas: Parameters<typeof useSaasBilling>[1] = {},
   ) => {
-    useSaasBilling(mockRequest);
+    useSaasBilling(mockRequest, saas);
     mockRequest.use(
       ...servicePageHandlers(),
       ...docsConnectHandlers(TEST_PORT, preset, { balance }),
@@ -227,6 +228,61 @@ test.describe("Docs Connect plan panel", () => {
     await expect.poll(() => purchases.length).toBe(1);
     expect(purchases[0]).toContain('"docscloud":50');
     await expect(page.getByText("Your plan has been purchased")).toBeVisible();
+  });
+
+  test("isDelayedPaymentMethod sends a deactivated plan to the wallet top-up", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    usePreset(mockRequest, "deactivated", 10, { isDelayedPaymentMethod: true });
+    const deposits = trackRequests(page, "POST", DEPOSIT_PATH);
+    const purchases = trackRequests(page, "PUT", UPDATE_WALLET_PATH);
+
+    await page.goto(`${baseUrl}${DOCS_CONNECT_ROUTE}`);
+
+    const button = page.getByRole("button", { name: "Top up wallet", exact: true });
+    await expect(button).toBeVisible(FIRST_RENDER);
+    await button.click();
+
+    await expect(page.getByTestId("top_up_amount_input").first()).toHaveValue(
+      "90",
+    );
+    expect(deposits).toHaveLength(0);
+    expect(purchases).toHaveLength(0);
+
+    await expectScreenshot(page, shot("deactivated-top-up-wallet.png"));
+  });
+
+  test("isDelayedPaymentMethod turns a short-balance upgrade into a wallet top-up", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    usePreset(mockRequest, "paid", 1, { isDelayedPaymentMethod: true });
+    const purchases = trackRequests(page, "PUT", UPDATE_WALLET_PATH);
+
+    await openPanel(page, baseUrl, "Edit subscription");
+    await usersInput(page).fill("100");
+
+    await expect(submitButton(page)).toHaveText("Top up wallet");
+    await expect(
+      page.getByText(
+        "There aren't enough credits for the selected Docs Connect subscription. Top up your Wallet, then return to complete the purchase.",
+      ),
+    ).toBeVisible();
+
+    await expectScreenshot(page, shot("top-up-wallet.png"));
+
+    await submitButton(page).click();
+
+    await expect(page.getByTestId("top_up_amount_input").first()).toBeVisible();
+    await expect(submitButton(page)).toBeHidden();
+    expect(purchases).toHaveLength(0);
+
+    await page.getByTestId("first_topup_cancel").click();
+
+    await expect(submitButton(page)).toBeVisible();
   });
 
   test("a deactivated plan is paid again with a top-up", async ({

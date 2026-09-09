@@ -301,6 +301,36 @@ test.describe("Billing overview", () => {
     await expectScreenshot(page, ["desktop", "overview", "grace.png"]);
   });
 
+  test("isDelayedPaymentMethod turns the overdue renewal into a wallet top-up", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, { tariff: "grace", isDelayedPaymentMethod: true });
+    mockRequest.use(balanceHandler(5));
+    await page.clock.setSystemTime(GRACE_NOW);
+
+    await openOverview(page, baseUrl);
+
+    await expect(planButton(page)).toHaveText("Top up wallet");
+    await expect(autoTopUpButton(page)).toHaveCount(0);
+
+    await planButton(page).click();
+
+    await expect(page.getByTestId("top_up_amount_input").first()).toBeVisible();
+    await expect(
+      page.getByText(
+        "Bank transfers may take several business days to process. Credits will be added to your Wallet only after the funds arrive.",
+      ),
+    ).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "overview",
+      "grace-top-up-wallet.png",
+    ]);
+  });
+
   test("an unlinked card is reported on the payment method card", async ({
     page,
     baseUrl,

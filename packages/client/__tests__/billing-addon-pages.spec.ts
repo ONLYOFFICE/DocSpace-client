@@ -468,7 +468,7 @@ test.describe("Disk storage page", () => {
     await expect(page.getByText("Subscription deactivated")).toBeVisible();
     await expect(page.getByText("200 GB", { exact: true })).toBeVisible();
     await expect(
-      page.getByRole("button", { name: "Top up & Renew", exact: true }),
+      page.getByRole("button", { name: "Renew subscription", exact: true }),
     ).toBeEnabled();
     await expect(
       page.getByRole("button", { name: "Remove subscription", exact: true }),
@@ -1189,7 +1189,7 @@ test.describe("Docs Connect page", () => {
     await expect(page.getByText("Inactive", { exact: true })).toBeVisible();
     await expect(page.getByText("Subscription deactivated")).toBeVisible();
     await expect(
-      page.getByRole("button", { name: "Top up & Renew", exact: true }),
+      page.getByRole("button", { name: "Renew subscription", exact: true }),
     ).toBeEnabled();
     await expect(
       page.getByRole("button", { name: "Remove subscription", exact: true }),

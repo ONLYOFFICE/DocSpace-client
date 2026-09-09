@@ -845,6 +845,11 @@ export const getSuggestionsBySection = (t: TTranslation) => {
     // +
     formSpaceResults,
 
+    // Composer attachment the backend flagged as analyzable (a form with
+    // collected responses): the chips act on the attached file itself, so
+    // they carry no `requires` — no folder rights are involved. Shown only
+    // until the backend's own per-form questions arrive, which name the
+    // form's real fields (see `SuggestionSet.analyzableForm` in the ui-kit).
     attachedForm: [
       {
         name: t("AiSuggestions:AiFormWhatCanTheResponsesTellMe"),

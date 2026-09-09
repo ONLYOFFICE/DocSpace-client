@@ -397,11 +397,19 @@ export const userByTypeResolver = (userType: UserType): Response => {
 export const selfByTypeHandler = (
   port: string,
   userType: UserType = "owner",
+  // Overrides the en-GB culture every stand-in user inherits.
+  culture?: string,
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_DELETE_USER}`,
     () => {
-      return userByTypeResolver(userType);
+      if (!culture) return userByTypeResolver(userType);
+
+      return new Response(
+        JSON.stringify({
+          response: { ...usersByType[userType], cultureName: culture },
+        }),
+      );
     },
   );
 };

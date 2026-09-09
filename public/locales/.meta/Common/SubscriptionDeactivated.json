@@ -3,7 +3,7 @@
   "content": "Subscription deactivated — non-payment",
   "content_en_sha1_hash": "6244400f48c757281fab42d54dc81d4c61f933c3",
   "created_at": "2026-04-10T13:53:45.694Z",
-  "updated_at": "2026-08-31T18:23:50.774Z",
+  "updated_at": "2026-09-08T08:44:10.099Z",
   "comment": {
     "text": "This is a status message displayed when a subscription has been deactivated due to non-payment, specifically for storage plan changes.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 195,
+      "line_number": 197,
       "context": "priceValue?: number,\n ) => {\n switch (serviceName) {\n case TOTAL_SIZE:\n if (isShowPreviousStoragePlan && !isStorageDeactivationVisited) {\n return t(\"SubscriptionDeactivated\");\n }\n \n if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }",
       "module": "/libs/ui-kit"
     },

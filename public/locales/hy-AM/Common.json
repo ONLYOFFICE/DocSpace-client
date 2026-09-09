@@ -1491,6 +1491,7 @@
   "OpenAgentSettings": "Բացել գործակալի կարգավորումները",
   "OpenAISettings": "Բացել ԱԲ կարգավորումները",
   "OpenFileMessage": "Ձեր բացած փաստաթղթի ֆայլը կվերածվի Office Open XML ձևաչափի՝ արագ դիտման և խմբագրման համար:",
+  "OpenGeneratedDocument": "Բացել ստեղծված փաստաթուղթը",
   "OpenKeysManagement": "Բացել բանալիների կառավարումը",
   "OpenLocation": "Բացել գտնվելու վայրը",
   "OpenPortalBilling": "Գնալ աշխատանքային տարածքի հաշվարկման բաժին",

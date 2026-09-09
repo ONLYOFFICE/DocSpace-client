@@ -1491,6 +1491,7 @@
   "OpenAgentSettings": "에이전트 설정 열기",
   "OpenAISettings": "AI 설정 열기",
   "OpenFileMessage": "당신이 열 문서 파일을 빠르게 확인하고 수정할 Office Open XML 형식 로 변환됩니다.",
+  "OpenGeneratedDocument": "생성된 문서 열기",
   "OpenKeysManagement": "키 관리 열기",
   "OpenLocation": "위치 열기",
   "OpenPortalBilling": "워크스페이스 결제로 이동",

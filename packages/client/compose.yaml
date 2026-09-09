@@ -67,6 +67,7 @@ services:
       - ../../libs/ui-kit/styles:/app/libs/ui-kit/styles
       - ../../libs/ui-kit/types:/app/libs/ui-kit/types
       - ../../libs/ui-kit/utils:/app/libs/ui-kit/utils
+      - ../../libs/ui-kit/billing:/app/libs/ui-kit/billing
       # Public assets (fonts, images, scripts)
       - ../../public:/app/public
       # Tests, mocks, config

@@ -121,6 +121,7 @@ interface BuyPlanPanelProps {
   isCardMissingOrInactive?: boolean;
   isCardLinkedToPortal?: boolean;
   isPayer?: boolean;
+  isDelayedPaymentMethod?: boolean;
   walletCustomerEmail?: string | null;
   walletCustomerDisplayName?: string | null;
   fetchPayerInfo?: (isRefresh?: boolean) => Promise<unknown>;
@@ -139,6 +140,7 @@ const BuyPlanPanel = ({
   isCardMissingOrInactive,
   isCardLinkedToPortal,
   isPayer,
+  isDelayedPaymentMethod,
   walletCustomerEmail,
   walletCustomerDisplayName,
   fetchPayerInfo,
@@ -163,6 +165,8 @@ const BuyPlanPanel = ({
   const [submitting, setSubmitting] = useState(false);
   const [waitingPayment, setWaitingPayment] = useState(false);
   const [topUpDialogVisible, setTopUpDialogVisible] = useState(false);
+  const openTopUpDialog = () => setTopUpDialogVisible(true);
+  const closeTopUpDialog = () => setTopUpDialogVisible(false);
   const [requestDialogVisible, setRequestDialogVisible] = useState(false);
   const [devPackCalc, setDevPackCalc] =
     useState<TDocsConnectDevPackCalculation | null>(null);
@@ -303,6 +307,11 @@ const BuyPlanPanel = ({
   const topUpRequired = Math.max(0, Math.ceil(chargeNow - availableCredits));
   const isTopUpUnavailable =
     insufficientFunds && !!isCardLinkedToPortal && !isPayer;
+  const isDelayedPaymentTopUp =
+    insufficientFunds &&
+    !isTopUpUnavailable &&
+    !isCardMissingOrInactive &&
+    !!isDelayedPaymentMethod;
 
   const formatCurrency = (amount: number) =>
     formatCurrencyValue(i18n.language, amount, currency, 2);
@@ -363,8 +372,13 @@ const BuyPlanPanel = ({
   const onBuy = async () => {
     if (submitting) return;
 
+    if (isDelayedPaymentTopUp) {
+      openTopUpDialog();
+      return;
+    }
+
     if (isDevPackUpgrade && insufficientFunds && isCardMissingOrInactive) {
-      setTopUpDialogVisible(true);
+      openTopUpDialog();
       return;
     }
 
@@ -466,6 +480,8 @@ const BuyPlanPanel = ({
     if (isEditActive) {
       if (isScheduled) return t("Common:ScheduleChange");
 
+      if (isDelayedPaymentTopUp) return t("Common:TopUpWallet");
+
       return insufficientFunds && !isTopUpUnavailable
         ? t("DocsConnect:TopUpAndBuy")
         : t("Common:Upgrade");
@@ -473,6 +489,8 @@ const BuyPlanPanel = ({
 
     if (!insufficientFunds || isTopUpUnavailable)
       return isRenew ? t("Common:RenewSubscription") : t("Common:Upgrade");
+
+    if (isDelayedPaymentTopUp) return t("Common:TopUpWallet");
 
     return info.deactivated
       ? t("Common:TopUpAndPay")
@@ -539,6 +557,13 @@ const BuyPlanPanel = ({
                 ),
             }}
           />
+        </Text>
+      );
+
+    if (isDelayedPaymentTopUp)
+      return (
+        <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
+          {t("DocsConnect:TopUpWalletHint")}
         </Text>
       );
 
@@ -649,7 +674,8 @@ const BuyPlanPanel = ({
   return (
     <>
       <ModalDialog
-        visible={visible}
+        visible={visible && !topUpDialogVisible}
+        hideContent={topUpDialogVisible}
         displayType={ModalDialogType.aside}
         onClose={onClose}
         withBodyScroll
@@ -1137,7 +1163,7 @@ const BuyPlanPanel = ({
       {topUpDialogVisible ? (
         <ClientSimpleTopUpDialog
           visible={topUpDialogVisible}
-          onClose={() => setTopUpDialogVisible(false)}
+          onClose={closeTopUpDialog}
           onConfirm={onTopUpConfirm}
           language={i18n.language}
           service=""
@@ -1164,6 +1190,7 @@ export default inject(
     isCardMissingOrInactive: paymentStore.isCardMissingOrInactive,
     isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
     isPayer: paymentStore.isPayer,
+    isDelayedPaymentMethod: currentTariffStatusStore.isDelayedPaymentMethod,
     walletCustomerEmail: currentTariffStatusStore.walletCustomerEmail,
     walletCustomerDisplayName:
       currentTariffStatusStore.walletCustomerInfo?.displayName,

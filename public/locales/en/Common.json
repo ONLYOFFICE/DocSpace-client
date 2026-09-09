@@ -2178,6 +2178,7 @@
   "TopUpTakeSomeTimeToComplete": "The top-up might take some time to complete",
   "TopUpToReactivateStorage": "To reactivate your subscription, please top up your wallet via Services. Once the payment is complete, your additional storage will become available again.",
   "TopUpWallet": "Top up wallet",
+  "TopUpWalletStorageHint": "Your Wallet will be topped up by <1>{{currency}}</1>. Return after the funds arrive to purchase additional storage. Top-up amounts are rounded up to the next whole dollar.",
   "TopUpWalletToContinue": "Top up your Wallet to continue.",
   "TotalDueToday": "Total due today",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/month</3>",

@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Subscription will be automatically renewed <1>on {{date}}</1>",
   "TopUpAndBuy": "Top up & Buy",
   "TopUpHint": "Your wallet will be topped up by <1>{{amount}}</1> and the selected subscription will be purchased automatically. Top-up amounts are rounded up to the next whole dollar.",
+  "TopUpWalletHint": "There aren't enough credits for the selected Docs Connect subscription. Top up your Wallet, then return to complete the purchase.",
   "TotalDueTodayTooltip": "Today, you're only paying for the selected amount of users for the remaining days until your billing date. Moving forward, the full amount will be charged once per billing cycle on your regular billing date.",
   "TotalMonthly": "Total monthly",
   "TrialAvailable": "Free 30-day trial available, with Dev Pack included. No credit card required.",

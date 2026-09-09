@@ -106,6 +106,9 @@ const ClientSimpleTopUpDialog: React.FC<ClientSimpleTopUpDialogProps> = ({
       walletCustomerStatusNotActive={
         store.currentTariffStatusStore.walletCustomerStatusNotActive
       }
+      isDelayedPaymentMethod={
+        store.currentTariffStatusStore.isDelayedPaymentMethod
+      }
       language={language}
       fetchCardLinked={fetchCardLinked}
       walletBalance={walletBalance}

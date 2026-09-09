@@ -41,6 +41,7 @@ import {
 } from "@docspace/shared/__mocks__/handlers/portal/tariff";
 import { quotaSuccess } from "@docspace/shared/__mocks__/handlers/portal/quota";
 import { TARIFF_DUE_DATE_EXPIRED } from "@docspace/shared/__mocks__/handlers";
+import { PaymentMethodStatus } from "@docspace/shared/enums";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 
 import type { Page } from "@playwright/test";
@@ -641,6 +642,50 @@ test.describe("Startup plan", () => {
     await expect(dialog).toHaveCount(0);
   });
 
+  test("a delayed payment method picked in Stripe checkout closes the dialog without waiting for the balance", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "admin",
+      plan: "startup",
+      payer: "none",
+      card: "unlinked",
+    });
+    mockRequest.use(
+      http.get(apiUrl("portal/payment/checkoutsetupurl"), () =>
+        jsonResponse("https://example.com/checkout"),
+      ),
+    );
+    await page.clock.setSystemTime(PAID_NOW);
+
+    await page.goto(`${baseUrl}/billing/tariff-plan`);
+    await planButton(page).click();
+
+    const dialog = modalWith(page, "Continue to Stripe");
+    await dialog.getByTestId("top_up_amount_input").first().fill("25");
+
+    const checkout = page.waitForEvent("popup");
+    await dialog.getByTestId("first_topup_continue_to_stripe").click();
+    await checkout;
+
+    mockRequest.use(
+      http.get(apiUrl("portal/payment/customerinfo"), () =>
+        jsonResponse({
+          portalId: null,
+          paymentMethodStatus: PaymentMethodStatus.Set,
+          isDelayedPaymentMethod: true,
+          email: "admin@test.com",
+          payer: { displayName: "Test Payer", hasAvatar: false },
+        }),
+      ),
+    );
+
+    await expect(dialog).toHaveCount(0, { timeout: 15_000 });
+    await expect(page.getByText("Unexpected error")).toHaveCount(0);
+  });
+
   test("a card linked on Startup makes the purchase payer-only", async ({
     page,
     baseUrl,
@@ -708,6 +753,22 @@ test.describe("Migration to wallet billing", () => {
     useSaasBilling(mockRequest, { user: "owner", payer: "self-owner" });
     mockRequest.use(moveToWalletHandler());
     await page.clock.setSystemTime(PAID_NOW);
+  });
+
+  test("isDelayedPaymentMethod with a short balance still opens the migration dialog", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      isDelayedPaymentMethod: true,
+    });
+    mockRequest.use(subscriptionBalanceHandler());
+
+    await openMigrationDialog(page, baseUrl);
+    await expect(page.getByTestId("top_up_amount_input")).toHaveCount(0);
   });
 
   test("a refund that covers the new plan leaves nothing due on the card", async ({

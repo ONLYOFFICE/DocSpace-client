@@ -563,7 +563,9 @@ const BuyPlanPanel = ({
     if (isDelayedPaymentTopUp)
       return (
         <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
-          {t("DocsConnect:TopUpWalletHint")}
+          {t("DocsConnect:TopUpWalletHint", {
+            service: t("DocsConnect:DocsConnect"),
+          })}
         </Text>
       );
 

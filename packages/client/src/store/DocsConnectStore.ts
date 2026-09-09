@@ -393,10 +393,21 @@ class DocsConnectStore {
       },
     );
 
+    let isDelayedPaymentMethod = false;
+
     await pollUntil(async () => {
       const payer = await this.currentTariffStatusStore?.fetchPayerInfo(true);
+      isDelayedPaymentMethod = payer?.isDelayedPaymentMethod === true;
       return !!payer?.email;
     }, signal);
+
+    if (signal.aborted) return false;
+
+    if (isDelayedPaymentMethod) {
+      this.closeBuyPlan();
+      this.refreshPortalState();
+      return false;
+    }
 
     await pollUntil(async () => {
       let info: Nullable<TDocsConnectInfo> = null;

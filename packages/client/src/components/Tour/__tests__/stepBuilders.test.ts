@@ -606,6 +606,90 @@ describe("revealStep", () => {
       NAVIGATION_TARGET_TIMEOUT,
     );
   });
+
+  describe("awaitBefore", () => {
+    it("holds the reveal until what it reads is on the page", async () => {
+      // The rooms tour's members step opens the info panel *on* the first room,
+      // which it reads out of the file list rather than off the DOM. Walking
+      // back into it from the closing step means that list is being fetched
+      // again right now, so a reveal that fires immediately reads an empty one
+      // and the step is left with no panel to point at.
+      mount('<div id="panel"></div>');
+
+      let revealedWithRow: boolean | null = null;
+
+      const step = revealStep("#panel", "title", "body", undefined, LOG_LABEL, {
+        reveal: () => {
+          revealedWithRow = !!document.querySelector("#row");
+        },
+        restore: () => {},
+        awaitBefore: "#row",
+      });
+
+      const pending = step.before?.(HOOK_DATA);
+
+      // Not yet: the row it was told to wait for has not arrived.
+      await Promise.resolve();
+      expect(revealedWithRow).toBeNull();
+
+      const row = document.createElement("div");
+      row.id = "row";
+      document.body.appendChild(row);
+
+      await pending;
+
+      expect(revealedWithRow).toBe(true);
+    });
+
+    it("reveals straight away when nothing was asked for", async () => {
+      mount('<div id="panel"></div>');
+
+      const reveal = vi.fn();
+
+      const step = revealStep("#panel", "title", "body", undefined, LOG_LABEL, {
+        reveal,
+        restore: () => {},
+      });
+
+      await step.before?.(HOOK_DATA);
+
+      expect(reveal).toHaveBeenCalledTimes(1);
+    });
+
+    it("gives up on a precondition that never arrives rather than hanging", async () => {
+      // Same contract as the target's own wait: a step whose precondition is
+      // missing is one abandoned step, never a tour that stops responding.
+      vi.useFakeTimers();
+
+      try {
+        mount('<div id="panel"></div>');
+
+        const reveal = vi.fn();
+
+        const step = revealStep(
+          "#panel",
+          "title",
+          "body",
+          undefined,
+          LOG_LABEL,
+          { reveal, restore: () => {}, awaitBefore: "#never" },
+        );
+
+        let settled = false;
+        const pending = step.before?.(HOOK_DATA).then(() => {
+          settled = true;
+        });
+
+        await vi.advanceTimersByTimeAsync(STEP_TARGET_TIMEOUT + 1);
+        await pending;
+
+        expect(settled).toBe(true);
+        expect(reveal).toHaveBeenCalledTimes(1);
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+  });
 });
 
 describe("scrollTargetIntoView", () => {

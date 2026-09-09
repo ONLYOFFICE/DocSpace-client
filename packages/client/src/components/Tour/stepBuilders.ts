@@ -79,13 +79,26 @@ export const NAVIGATION_TARGET_TIMEOUT = 8000;
  * The pair of hooks a `revealStep` uses to bring its own target on screen, and
  * to put back whatever that took.
  *
- * `navigates` marks a reveal that changes the route — see `revealStep` for why
- * that matters to the wait.
+ * `navigates` marks a reveal that changes the route, or re-fetches the section
+ * it is pointing at — either way the target arrives on a round trip rather
+ * than on a re-render, which does not fit the ordinary budget. See
+ * `revealStep` for why that matters to the wait.
  */
 export type RevealHooks = {
   reveal: () => void;
   restore: () => void;
   navigates?: boolean;
+  /**
+   * Something `reveal` needs on the page before it can do its job — the room
+   * row the info panel is opened *on*, for instance, which `reveal` reads out
+   * of the file list rather than off the DOM.
+   *
+   * Waited for before `reveal` is called, so a step whose precondition is
+   * still on its way (a list being re-fetched by the step the user just walked
+   * back out of) opens on it rather than on nothing. A step whose reveal
+   * depends on nothing but the page already being there leaves this out.
+   */
+  awaitBefore?: string;
 };
 
 /**
@@ -628,6 +641,16 @@ export function revealStep(
     data: { revealsTarget: true, presence },
     before: async () => {
       const signal = callbacks?.getSignal();
+
+      // Whatever the reveal is about to read — see `awaitBefore`. The same
+      // budget as the target itself: both are the step waiting for the section
+      // to be in the state it describes.
+      if (hooks.awaitBefore) {
+        await waitForElement(hooks.awaitBefore, timeout, signal).catch(
+          silenceNonAbort(logLabel),
+        );
+      }
+
       hooks.reveal();
       await waitForElement(target, timeout, signal).catch(
         silenceNonAbort(logLabel),

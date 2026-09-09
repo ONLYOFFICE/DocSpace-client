@@ -3,7 +3,7 @@
   "content": "Favorite files",
   "content_en_sha1_hash": "2c3e71c8bc44fde8dff5efc87b140e933c09d30e",
   "created_at": "2025-08-29T14:33:19.030Z",
-  "updated_at": "2026-09-04T07:59:41.547Z",
+  "updated_at": "2026-09-09T15:42:08.200Z",
   "comment": {
     "text": "This is a label for a folder or section in the file management interface, indicating items that have been marked as favorites. It appears in navigation menus and settings for default page display.",
     "is_auto": true,
@@ -73,7 +73,7 @@
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 234,
+      "line_number": 235,
       "context": "t(\"RoomsTour:RoomsPlacesTitle\"),\n createElement(TourList, {\n items: [\n t(\"RoomsTour:RoomsPlacesFiles\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n trash: t(\"Common:TrashSection\"),\n }),\n t(\"RoomsTour:RoomsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),",
       "module": "/packages/client"
     },

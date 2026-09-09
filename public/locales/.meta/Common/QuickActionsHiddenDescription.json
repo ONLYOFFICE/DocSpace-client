@@ -1,20 +1,20 @@
 {
-  "key_path": "DiscoverApps",
-  "content": "Discover Apps",
-  "content_en_sha1_hash": "b5d97328540f838835775fa2572426588a6ca686",
-  "created_at": "2026-08-20T20:04:31.363Z",
-  "updated_at": "2026-09-09T15:42:08.497Z",
+  "key_path": "QuickActionsHiddenDescription",
+  "content": "You can restore them in your profile. <0>Undo</0>",
+  "content_en_sha1_hash": "e890b47be93e9c9085bfaa9570791c7232102697",
+  "created_at": "2026-09-09T15:41:25.336Z",
+  "updated_at": "2026-09-09T15:45:50.987Z",
   "comment": {
-    "text": "Section title on the Dashboard that introduces a list of available applications.",
+    "text": "Success toast message appearing when quick actions are hidden. The <0> tag represents a clickable \"Undo\" link.",
     "is_auto": true,
-    "updated_at": "2026-08-21T08:14:29.430Z",
+    "updated_at": "2026-09-09T15:45:50.987Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 392,
-      "context": "{moduleItems.length > 0 ? (\n <section data-tour-id=\"dashboard-apps\" className={styles.section}>\n <div className={styles.sectionHeading}>\n <Text className={styles.sectionTitle}>\n {t(\"Common:DiscoverApps\")}\n </Text>\n <Text className={styles.sectionSubtitle}>\n {isAdminOrOwner && !standalone\n ? t(\"Common:DiscoverAppsDescription\", {\n planName: isFreeTariff",
+      "file_path": "/packages/client/src/pages/Home/Hooks/useHideQuickActions.tsx",
+      "line_number": 75,
+      "context": "};\n \n const toastId = toastr.success(\n <Trans\n t={t as TTranslation & TFunction}\n i18nKey=\"Common:QuickActionsHiddenDescription\"\n components={[\n // `Link` renders a bare <a> with no href: no implicit role, no place\n // in the tab order, deaf to Enter. Undo is the only way back short of\n // the profile and it is on screen for five seconds, so it is named,\n // focusable and keyed by hand.",
       "module": "/packages/client"
     }
   ],

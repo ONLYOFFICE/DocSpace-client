@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-09-08T08:44:10.004Z",
+  "updated_at": "2026-09-09T15:42:08.213Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -122,7 +122,7 @@
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
       "line_number": 261,
-      "context": "canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n LOG_LABEL,\n 6,\n expandQuickActions,\n ),",
+      "context": "canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n LOG_LABEL,\n 6,\n revealQuickActionTile('[data-testid=\"quick-ai-chat\"]'),\n ),",
       "module": "/packages/client"
     },
     {

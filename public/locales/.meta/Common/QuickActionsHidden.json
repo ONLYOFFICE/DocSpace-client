@@ -1,20 +1,20 @@
 {
-  "key_path": "DiscoverApps",
-  "content": "Discover Apps",
-  "content_en_sha1_hash": "b5d97328540f838835775fa2572426588a6ca686",
-  "created_at": "2026-08-20T20:04:31.363Z",
-  "updated_at": "2026-09-09T15:42:08.497Z",
+  "key_path": "QuickActionsHidden",
+  "content": "Quick actions hidden",
+  "content_en_sha1_hash": "1b5cb9c734e373885e5ceec75eb049e097b2ede4",
+  "created_at": "2026-09-09T15:41:25.297Z",
+  "updated_at": "2026-09-09T15:46:19.390Z",
   "comment": {
-    "text": "Section title on the Dashboard that introduces a list of available applications.",
+    "text": "Toast message appearing when the quick actions menu is hidden from the interface.",
     "is_auto": true,
-    "updated_at": "2026-08-21T08:14:29.430Z",
+    "updated_at": "2026-09-09T15:46:19.390Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 392,
-      "context": "{moduleItems.length > 0 ? (\n <section data-tour-id=\"dashboard-apps\" className={styles.section}>\n <div className={styles.sectionHeading}>\n <Text className={styles.sectionTitle}>\n {t(\"Common:DiscoverApps\")}\n </Text>\n <Text className={styles.sectionSubtitle}>\n {isAdminOrOwner && !standalone\n ? t(\"Common:DiscoverAppsDescription\", {\n planName: isFreeTariff",
+      "file_path": "/packages/client/src/pages/Home/Hooks/useHideQuickActions.tsx",
+      "line_number": 98,
+      "context": "undo();\n }}\n />,\n ]}\n />,\n t(\"Common:QuickActionsHidden\"),\n undefined,\n // Without a cross the toast closes on any click inside it, so the Undo\n // link would be swallowed by the dismissal before its handler ran.\n true,\n );",
       "module": "/packages/client"
     }
   ],

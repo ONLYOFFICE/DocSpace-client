@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "Schimbaţi permisiuni de acces acordate invitaților.",
   "ChargeAmount": "Suma de <1>{{price}}</1> va fi facturată conform metodei de plată pe care ați indicat-o.",
   "ChatHistory": "Istoric chat",
+  "ChatMessageNotAllowedInFormRoom": "Nu se poate salva mesajul de chat în Spațiul de completare a formularelor deoarece acest spațiu poate conține numai formulare PDF.",
   "ChooseAIAgent": "Alege un {{aiAgent}}",
   "ChooseAIAgentDescription": "Selectează agentul cu care dorești să discuți cu IA despre fișierul selectat. Poți alege un agent existent.",
   "ChooseAnother": "Alegeți altceva",

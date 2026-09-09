@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "Modifiez les droits d'accès des personnes invitées.",
   "ChargeAmount": "Un montant de <1>{{price}}</1> sera débité de la méthode de paiement que vous avez enregistrée.",
   "ChatHistory": "Historique des chats",
+  "ChatMessageNotAllowedInFormRoom": "Le message de chat ne peut pas être enregistré dans l'espace de remplissage de formulaires, car ce type d'espace ne peut contenir que des formulaires PDF.",
   "ChooseAIAgent": "Choisissez un {{aiAgent}}",
   "ChooseAIAgentDescription": "Sélectionnez l'agent avec lequel vous souhaitez discuter avec l'IA au sujet du fichier sélectionné. Vous pouvez choisir un agent existant.",
   "ChooseAnother": "Choisir un autre",

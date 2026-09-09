@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "Wijzig de gebruikersrechten voor de uitgenodigde personen.",
   "ChargeAmount": "Een bedrag van <1>{{price}}</1> wordt belast op uw opgeslagen betaalmethode.",
   "ChatHistory": "Chatgeschiedenis",
+  "ChatMessageNotAllowedInFormRoom": "Het chatbericht kan niet worden opgeslagen in de Ruimte voor het invullen van formulieren, omdat dit ruimtetype alleen PDF formulieren kan bevatten.",
   "ChooseAIAgent": "Kies een {{aiAgent}}",
   "ChooseAIAgentDescription": "Selecteer de agent waar u een gesprek met AI wilt voeren over het geselecteerde bestand. U kunt een bestaande agent kiezen.",
   "ChooseAnother": "Kies een andere",

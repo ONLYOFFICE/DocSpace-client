@@ -46,6 +46,8 @@ import {
   fileItemStep,
   revealStep,
   scrollTargetIntoView,
+  revealQuickActionTile,
+  rewindQuickActions,
   NAVIGATION_TARGET_TIMEOUT,
   STEP_TARGET_TIMEOUT,
 } from "../stepBuilders";
@@ -808,5 +810,128 @@ describe("scrollTargetIntoView", () => {
     );
 
     expect(scrollIntoView).toHaveBeenCalled();
+  });
+});
+
+describe("the quick-actions carousel helpers", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  const TRACK = '[data-testid="quick-actions-track"]';
+
+  // The controls layer sits before the strip on purpose: the helpers must find
+  // the strip by the name the ui-kit gives it, not by its position among the
+  // banner's children, so a change to the banner's DOM cannot silently turn
+  // them into no-ops.
+  const mountBanner = () => {
+    mount(
+      '<div data-testid="quick-actions">' +
+        '<div class="controls"><button data-testid="quick-actions-next"></button></div>' +
+        '<div data-testid="quick-actions-track">' +
+        '<button data-testid="quick-ai-chat"></button>' +
+        "</div>" +
+        "</div>",
+    );
+  };
+
+  describe("revealQuickActionTile", () => {
+    // jsdom performs no scrolling, so `scrollLeft` is a constant 0 with an
+    // inert setter. Recording the writes is the only way to see where the
+    // strip was sent.
+    const recordScrollLeft = () => {
+      const writes: number[] = [];
+
+      Object.defineProperty(HTMLElement.prototype, "scrollLeft", {
+        configurable: true,
+        get: () => 0,
+        set: (value: number) => {
+          writes.push(value);
+        },
+      });
+
+      return writes;
+    };
+
+    it("centres the tile by scrolling the strip itself", () => {
+      // The banner is a carousel: a tile past the fold is mounted and
+      // measurable but out of sight, so joyride would spotlight bare strip.
+      mountBanner();
+      withRect('[data-testid="quick-ai-chat"]', {
+        top: 0,
+        left: 900,
+        width: 184,
+        height: 147,
+      });
+      withRect(TRACK, { top: 0, left: 0, width: 600, height: 147 });
+
+      const writes = recordScrollLeft();
+
+      revealQuickActionTile('[data-testid="quick-ai-chat"]')();
+
+      // Tile centre 992 less track centre 300.
+      expect(writes).toEqual([692]);
+    });
+
+    it("never scrolls anything but the strip", () => {
+      // `scrollIntoView` walks every scrollable ancestor, and the section body
+      // gives up its inline inset to satisfy the request: the list ends up
+      // flush against the article and the screenshot guard refuses to
+      // photograph the shifted page. Three tour specs failed exactly that way.
+      mountBanner();
+      const scrollIntoView = vi.spyOn(Element.prototype, "scrollIntoView");
+
+      revealQuickActionTile('[data-testid="quick-ai-chat"]')();
+
+      expect(scrollIntoView).not.toHaveBeenCalled();
+    });
+
+    it("does nothing when the tile is not on the page", () => {
+      // The banner is hidden for anyone who turned quick actions off, and the
+      // step that wanted it must not throw on the way past.
+      mount("");
+      const writes = recordScrollLeft();
+
+      expect(() =>
+        revealQuickActionTile('[data-testid="quick-ai-chat"]')(),
+      ).not.toThrow();
+      expect(writes).toHaveLength(0);
+    });
+  });
+
+  describe("rewindQuickActions", () => {
+    // jsdom implements no scrolling at all, so `Element.scrollTo` is missing
+    // rather than a no-op and there is nothing to spy on until it is defined.
+    const spyOnScrollTo = () => {
+      Object.defineProperty(Element.prototype, "scrollTo", {
+        configurable: true,
+        writable: true,
+        value: () => {},
+      });
+
+      return vi.spyOn(Element.prototype, "scrollTo");
+    };
+
+    it("returns the strip to its first tile", () => {
+      mountBanner();
+      const scrollTo = spyOnScrollTo();
+
+      rewindQuickActions();
+
+      expect(scrollTo).toHaveBeenCalledWith(
+        expect.objectContaining({ left: 0 }),
+      );
+      // The strip is what scrolls, not the banner wrapper and not the controls
+      // layer that happens to precede it.
+      expect(scrollTo.mock.instances[0]).toBe(document.querySelector(TRACK));
+    });
+
+    it("does nothing when the banner is not on the page", () => {
+      mount("");
+      const scrollTo = spyOnScrollTo();
+
+      expect(() => rewindQuickActions()).not.toThrow();
+      expect(scrollTo).not.toHaveBeenCalled();
+    });
   });
 });

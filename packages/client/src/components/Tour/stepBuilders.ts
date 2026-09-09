@@ -757,15 +757,51 @@ export function fileItemStep(
   };
 }
 
+// The scroll port inside the banner, named by the ui-kit component itself so
+// the tour does not depend on where in the banner's DOM the strip sits.
+const QUICK_ACTIONS_TRACK_SELECTOR = '[data-testid="quick-actions-track"]';
+
 /**
- * Reveal all quick-action tiles by clicking the banner's "Show more" overlay.
- * With more than four tiles the grid is clipped to the first row, so a tile in
- * the second row would be spotlighted while visually hidden. No-op when the
- * banner isn't collapsed.
+ * Bring a quick-action tile into the banner's scroll port.
+ *
+ * The banner is a carousel, so a tile past the fold is mounted and measurable
+ * but scrolled out of sight — joyride would spotlight an empty patch of the
+ * strip.
+ *
+ * The track's own `scrollLeft` is moved rather than calling `scrollIntoView`:
+ * that walks every scrollable ancestor, and the section body will happily give
+ * up a few pixels of its inline inset to satisfy the request. The list then
+ * sits flush against the article and the whole page is captured shifted
+ * sideways, which is exactly what the screenshot helper's alignment guard
+ * refuses to photograph. Confining the scroll to the strip cannot move
+ * anything else.
  */
-export function expandQuickActions() {
-  const showMore = document.querySelector<HTMLButtonElement>(
-    '[data-testid="quick-actions-show-more"]',
-  );
-  showMore?.click();
+export function revealQuickActionTile(selector: string) {
+  return () => {
+    const tile = document.querySelector(selector);
+    const track = tile?.closest(QUICK_ACTIONS_TRACK_SELECTOR);
+
+    if (!tile || !track) return;
+
+    const tileBox = tile.getBoundingClientRect();
+    const trackBox = track.getBoundingClientRect();
+
+    const tileCentre = tileBox.left + tileBox.width / 2;
+    const trackCentre = trackBox.left + trackBox.width / 2;
+
+    // Assignment rather than `scrollTo`, so the jump is instant: joyride
+    // measures as soon as this hook resolves and a smooth scroll cannot be
+    // awaited. Out-of-range values are clamped by the browser.
+    track.scrollLeft += tileCentre - trackCentre;
+  };
+}
+
+/**
+ * Rewind the quick-actions carousel to its first tile, for steps that spotlight
+ * a group spanning the start of the strip rather than one tile.
+ */
+export function rewindQuickActions() {
+  document
+    .querySelector(QUICK_ACTIONS_TRACK_SELECTOR)
+    ?.scrollTo({ left: 0, behavior: "instant" });
 }

@@ -3,7 +3,7 @@
   "content": "Room grouping is disabled",
   "content_en_sha1_hash": "e2755224a1bcc0b618e6adb4dfdb36ac6d435f7b",
   "created_at": "2026-02-19T13:36:24.886Z",
-  "updated_at": "2026-07-07T08:59:21.923Z",
+  "updated_at": "2026-09-09T15:42:08.883Z",
   "comment": {
     "text": "This is a toast message indicating that the room grouping feature has been turned off. It appears briefly after a user action to disable grouping.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesSettingsStore.ts",
-      "line_number": 425,
+      "line_number": 448,
       "context": "const res = await setOrganizeGrouping(data);\n this.setFilesSetting(\"organizeRoomsGrouping\", res);\n \n const message = res\n ? i18n.t(\"GroupingRooms:RoomGroupingEnabled\")\n : i18n.t(\"GroupingRooms:RoomGroupingDisabled\");\n toastr.success(message);\n \n return res;\n } catch (e) {\n toastr.error(e as string);",
       "module": "/packages/client"
     }

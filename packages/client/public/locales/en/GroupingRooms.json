@@ -12,6 +12,7 @@
   "EditSpaceGroups": "Edit space groups",
   "EmptyGroupRoomsDescription": "There are no rooms here. Try adding a room or remove this group.",
   "EmptyGroupSpacesDescription": "There are no spaces here. Try adding a space or remove this group.",
+  "FormSpaces": "Spaces",
   "GroupHasBeenDeleted": "The group has been deleted",
   "GroupIcon": "Group icon",
   "GroupIsEmpty": "Group is empty",
@@ -33,7 +34,6 @@
   "RoomsRemovedFromGroup": "The selected rooms have been removed from <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "The selected space has been added to <1>{{groupName}}</1>.",
   "SpaceRemovedFromGroup": "The selected space has been removed from <1>{{groupName}}</1>.",
-  "Spaces": "Spaces",
   "SpacesAddedToGroup": "The selected spaces have been added to <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "The selected spaces have been removed from <1>{{groupName}}</1>."
 }

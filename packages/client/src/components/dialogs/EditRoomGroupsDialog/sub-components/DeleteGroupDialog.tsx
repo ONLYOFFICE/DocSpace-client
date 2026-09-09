@@ -122,15 +122,19 @@ const DeleteGroupDialog = ({
             : t("GroupingRooms:RemoveGroupConfirmation")}
         </Text>
         <Text style={{ marginTop: "16px" }} lineHeight="24px">
-          <Trans
-            t={t}
-            i18nKey={
-              isFormsSection
-                ? "GroupingRooms:RemoveSpaceGroupInfo"
-                : "GroupingRooms:RemoveGroupInfo"
-            }
-            components={{ strong: <strong style={{ fontWeight: 700 }} /> }}
-          />
+          {isFormsSection ? (
+            <Trans
+              t={t}
+              i18nKey="GroupingRooms:RemoveSpaceGroupInfo"
+              components={{ strong: <strong style={{ fontWeight: 700 }} /> }}
+            />
+          ) : (
+            <Trans
+              t={t}
+              i18nKey="GroupingRooms:RemoveGroupInfo"
+              components={{ strong: <strong style={{ fontWeight: 700 }} /> }}
+            />
+          )}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

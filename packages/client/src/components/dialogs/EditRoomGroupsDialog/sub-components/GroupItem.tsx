@@ -108,7 +108,9 @@ const GroupItem = ({
             <div className={styles.nameGroup}>{group.name}</div>
             <div className={styles.countRooms}>
               {group.totalRooms}{" "}
-              {isFormsSection ? t("GroupingRooms:Spaces") : t("Common:Rooms")}
+              {isFormsSection
+                ? t("GroupingRooms:FormSpaces")
+                : t("Common:Rooms")}
             </div>
           </div>
         </div>

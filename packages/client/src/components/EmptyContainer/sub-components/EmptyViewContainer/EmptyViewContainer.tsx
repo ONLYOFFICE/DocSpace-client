@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
-import AIFeaturesDialog from "@docspace/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog";
+import AIFeaturesDialog from "@onlyoffice/apps-ui-kit/billing/services/panels/ai-service/AIFeaturesDialog";
 import { getFolderInfo } from "@docspace/shared/api/files";
 import ClientSimpleTopUpDialog from "./ClientSimpleTopUpDialog";
 

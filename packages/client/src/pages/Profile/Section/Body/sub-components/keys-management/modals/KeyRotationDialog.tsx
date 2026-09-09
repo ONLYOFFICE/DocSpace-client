@@ -39,13 +39,13 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { PASSPHRASE_MIN_LENGTH } from "@docspace/shared/services/encryption/passphrase-strength";
 

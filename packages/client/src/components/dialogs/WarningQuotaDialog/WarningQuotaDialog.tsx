@@ -36,11 +36,11 @@
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { WarningQuotaDialogProps } from "./WarningQuotaDialog.types";
 
 export const WarningQuotaDialog = ({

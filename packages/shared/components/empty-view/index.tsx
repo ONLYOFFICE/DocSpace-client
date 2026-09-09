@@ -38,7 +38,7 @@ import { Link } from "react-router";
 import {
   EmptyView as EmptyViewBase,
   type EmptyViewProps as EmptyViewBaseProps,
-} from "@docspace/ui-kit/components/empty-view";
+} from "@onlyoffice/apps-ui-kit/components/empty-view";
 
 type EmptyViewProps = Omit<EmptyViewBaseProps, "LinkRouter">;
 
@@ -52,4 +52,4 @@ export type {
   EmptyViewLinkType,
   EmptyViewOptionsType,
   EmptyViewButtonType,
-} from "@docspace/ui-kit/components/empty-view";
+} from "@onlyoffice/apps-ui-kit/components/empty-view";

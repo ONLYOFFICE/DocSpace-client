@@ -37,9 +37,9 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { unlinkTfaApp } from "@docspace/shared/api/settings";
 import { TUser } from "@docspace/shared/api/people/types";
 import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";

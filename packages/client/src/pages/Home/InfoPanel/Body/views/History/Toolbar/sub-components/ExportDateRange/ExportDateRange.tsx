@@ -38,12 +38,12 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import type { DateTime } from "luxon";
 
-import { Calendar } from "@docspace/ui-kit/components/calendar";
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
-import { Text } from "@docspace/ui-kit/components/text";
-import { formatDateLocalized, now } from "@docspace/ui-kit/utils/date";
-import { useClickOutside } from "@docspace/ui-kit/utils/use-click-outside";
+import { Calendar } from "@onlyoffice/apps-ui-kit/components/calendar";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { InputSize, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { formatDateLocalized, now } from "@onlyoffice/apps-ui-kit/utils/date";
+import { useClickOutside } from "@onlyoffice/apps-ui-kit/utils/use-click-outside";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import type { Nullable } from "@docspace/shared/types";
 

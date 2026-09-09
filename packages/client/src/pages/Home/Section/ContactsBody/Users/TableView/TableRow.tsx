@@ -37,19 +37,19 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TableCell, TableRow } from "@docspace/ui-kit/components/table";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { TableCell, TableRow } from "@onlyoffice/apps-ui-kit/components/table";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { EmployeeType } from "@docspace/shared/enums";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/ui-kit/components/combobox";
-import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
+import { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";

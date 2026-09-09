@@ -34,8 +34,8 @@
  */
 
 import classNames from "classnames";
-import { Row } from "@docspace/ui-kit/components/rows";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import LoadErrorIcon from "PUBLIC_DIR/images/load.error.react.svg";
 

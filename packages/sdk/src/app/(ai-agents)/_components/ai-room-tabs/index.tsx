@@ -65,8 +65,8 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+import { Tabs, type TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import { useAiRoomStore, type AiRoomTab } from "../../_store";
 

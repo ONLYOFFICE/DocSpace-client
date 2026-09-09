@@ -42,8 +42,8 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
-import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 

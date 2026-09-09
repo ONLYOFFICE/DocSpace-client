@@ -38,7 +38,7 @@
 import React, { useCallback } from "react";
 
 import type { TFolder } from "@docspace/shared/api/files/types";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 import type { CategoryItem } from "../../_hooks/useLibraryLandingData";
 import styles from "./LibraryLanding.module.scss";

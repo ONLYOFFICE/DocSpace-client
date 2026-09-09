@@ -37,15 +37,15 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { ThemeKeys } from "@docspace/shared/enums";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+import { getSystemTheme } from "@onlyoffice/apps-ui-kit/utils/get-system-theme";
 import { getEditorTheme } from "@docspace/shared/utils/common";
 import { hideLoader, showLoader } from "@docspace/shared/utils/common";
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import ThemePreview from "./ThemePreview";
 import styles from "./interface-theme.module.scss";

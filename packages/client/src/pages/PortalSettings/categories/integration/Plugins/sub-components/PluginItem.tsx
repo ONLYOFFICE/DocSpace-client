@@ -37,13 +37,13 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import PluginSettingsIconUrl from "PUBLIC_DIR/images/plugin.settings.react.svg?url";
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";

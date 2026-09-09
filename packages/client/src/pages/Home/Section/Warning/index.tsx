@@ -37,7 +37,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
+import WarningComponent from "@onlyoffice/apps-ui-kit/components/navigation/sub-components/WarningComponent";
 import { DeviceType } from "@docspace/shared/enums";
 import WarningQuotaExceededUrl from "PUBLIC_DIR/images/warning.quota-exceeded.react.svg?url";
 import { getWarningText } from "../getWarningText";

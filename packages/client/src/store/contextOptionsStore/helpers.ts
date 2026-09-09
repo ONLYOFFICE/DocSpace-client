@@ -36,7 +36,7 @@
 import type React from "react";
 import copy from "copy-to-clipboard";
 import config from "PACKAGE_FILE";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import type { TTranslation } from "@docspace/shared/types";
 import type {

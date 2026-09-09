@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { checkFilterInstance } from "../../utils/common";
 import { isOAuthFrame } from "../../utils/oauthToken";
 

@@ -40,13 +40,13 @@ import {
 	Avatar,
 	AvatarRole,
 	AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import cloneDeep from "lodash/cloneDeep";
 import { TTranslation } from "@docspace/shared/types";
-import { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import styles from "../TemplateAccessSettingsPanel.module.scss";
 
 type ItemProps = {

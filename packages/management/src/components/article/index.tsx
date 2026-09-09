@@ -48,9 +48,9 @@ import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { ArticleItem } from "@docspace/ui-kit/components/article/item";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { Portal } from "@docspace/ui-kit/components/portal";
+import { ArticleItem } from "@onlyoffice/apps-ui-kit/components/article/item";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { useStores } from "@/hooks/useStores";
 import useDeviceType from "@/hooks/useDeviceType";
 

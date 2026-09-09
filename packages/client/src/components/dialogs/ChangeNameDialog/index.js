@@ -37,11 +37,11 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Button } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import styles from "./change-name.module.scss";
 

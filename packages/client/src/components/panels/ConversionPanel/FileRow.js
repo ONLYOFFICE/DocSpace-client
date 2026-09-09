@@ -44,9 +44,9 @@ import {
   FileActions,
 } from "SRC_DIR/components/PanelComponents";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { SimulatePassword } from "@docspace/shared/components/simulate-password";
 import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 

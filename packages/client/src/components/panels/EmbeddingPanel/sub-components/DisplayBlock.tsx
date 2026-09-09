@@ -33,17 +33,17 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/ui-kit/components/combobox";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
 import { dimensionsModel } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/constants";
 import styles from "../EmbeddingPanel.module.scss";
 

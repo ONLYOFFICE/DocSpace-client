@@ -65,7 +65,7 @@ import { inject, observer } from "mobx-react";
 import {
   ArticleProfile,
   type ArticleProfileProps,
-} from "@docspace/ui-kit/components/article";
+} from "@onlyoffice/apps-ui-kit/components/article";
 import { DeviceType } from "@docspace/shared/enums";
 
 type ProfileBlockInjectedProps = Pick<ArticleProfileProps, "user" | "showText">;

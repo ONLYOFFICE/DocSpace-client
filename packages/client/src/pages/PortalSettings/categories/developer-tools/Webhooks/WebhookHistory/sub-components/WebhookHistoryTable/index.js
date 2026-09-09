@@ -35,7 +35,7 @@
 
 import React from "react";
 
-import { Consumer } from "@docspace/ui-kit/utils";
+import { Consumer } from "@onlyoffice/apps-ui-kit/utils";
 
 import { inject, observer } from "mobx-react";
 import HistoryTableView from "./HistoryTableView";

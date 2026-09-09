@@ -43,18 +43,18 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { TDefaultTemplateItem } from "@docspace/shared/types";
 import { UrlActionType } from "@docspace/shared/enums";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import {
   getTitleWithoutExtension,
   getUpperCaseExtension,
 } from "@docspace/shared/utils";
 import { getConvertedSize } from "@docspace/shared/utils/common";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";

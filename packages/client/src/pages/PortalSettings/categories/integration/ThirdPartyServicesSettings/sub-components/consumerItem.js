@@ -37,10 +37,10 @@ import React from "react";
 import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 import PropTypes from "prop-types";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { thirdpartiesLogo } from "@docspace/shared/utils/image-thirdparties";
 import ConsumerToggle from "./consumerToggle";
-import { Heading } from "@docspace/ui-kit/components";
+import { Heading } from "@onlyoffice/apps-ui-kit/components";
 
 import styles from "./consumerItem.module.scss";
 

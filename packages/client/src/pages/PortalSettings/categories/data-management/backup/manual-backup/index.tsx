@@ -41,7 +41,7 @@ import { isManagement } from "@docspace/shared/utils/common";
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import { getBackupsCount } from "@docspace/shared/api/backup";
-import { BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
+import { BACKUP_SERVICE } from "@onlyoffice/apps-ui-kit/billing/constants";
 
 import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";

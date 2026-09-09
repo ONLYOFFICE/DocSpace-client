@@ -34,12 +34,12 @@
  */
 
 import React from "react";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import NextStepReactSvg from "PUBLIC_DIR/images/arrow.right.react.svg?url";
-import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
+import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
 import { useTwoFactorCampaignBanner } from "../../hooks/useTwoFactorCampaignBanner";
 import { CampaignsBanner } from "../campaigns-banner";
-import { TColorScheme } from "@docspace/ui-kit/providers/theme";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme";
 import styles from "./TwoFactorCampaignBanner.module.scss";
 
 export interface TwoFactorCampaignBannerProps {

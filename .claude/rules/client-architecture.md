@@ -67,21 +67,21 @@ read `var(--token)` in SCSS, never branch on `theme.isBase` in JSX. RTL: the
 provider sets `data-dir` on `<html>` — use CSS logical properties
 (`padding-inline-start`, …) and the mixins in
 `libs/ui-kit/styles/mixins/_direction.scss`; never hand-write `[dir="rtl"]`
-overrides. In SCSS, only `@docspace/ui-kit` and `@docspace/shared` prefixes
+overrides. In SCSS, only `@onlyoffice/apps-ui-kit` and `@docspace/shared` prefixes
 resolve in `@use` (custom Sass importer).
 
 ## Where components come from
 
-UI primitives (Button, Text, toast, …) are in `@docspace/ui-kit/components`
+UI primitives (Button, Text, toast, …) are in `@onlyoffice/apps-ui-kit/components`
 (~99 components — the default place to look); `@docspace/shared/components`
 holds only ~42 composite/domain components (media-viewer, share, …).
-`toastr`, `cookie`, `socket` live in `@docspace/ui-kit/utils/*`.
+`toastr`, `cookie`, `socket` live in `@onlyoffice/apps-ui-kit/utils/*`.
 
 ## Path aliases
 
 `PUBLIC_DIR` (repo `/public`), `ASSETS_DIR` (`packages/client/public`),
 `SRC_DIR` (`packages/client/src`), `COMMON_DIR`, `PACKAGE_FILE`,
-`@docspace/shared`, `@docspace/ui-kit`. Defined in **two places that must
+`@docspace/shared`, `@onlyoffice/apps-ui-kit`. Defined in **two places that must
 stay in sync**: `packages/client/config/resolve.ts` (Vite) and `paths` in
 `packages/client/tsconfig.json`.
 
@@ -102,4 +102,4 @@ async lazy() {
 Gating via `PrivateRoute` / `PublicRoute` / `ProtectedAppRoute` wrappers.
 
 Theme types (`TTheme`, `TColorScheme`) are imported from
-`@docspace/ui-kit/providers/theme/themes`.
+`@onlyoffice/apps-ui-kit/providers/theme/themes`.

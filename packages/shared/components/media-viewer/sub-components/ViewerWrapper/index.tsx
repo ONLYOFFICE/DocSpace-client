@@ -42,7 +42,7 @@ import { isSeparator } from "../../../../utils/typeGuards";
 import { Viewer } from "../Viewer";
 import { getCustomToolbar, getPDFToolbar } from "../../MediaViewer.helpers";
 import styles from "./ViewerWrapper.module.scss";
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
 import { DropDownItem } from "../../../drop-down-item";
 import type ViewerWrapperProps from "./ViewerWrapper.props";
 

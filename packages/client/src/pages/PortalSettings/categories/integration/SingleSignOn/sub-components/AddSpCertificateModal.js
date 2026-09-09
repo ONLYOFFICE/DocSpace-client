@@ -36,11 +36,11 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@docspace/ui-kit/components/button";
-import { Link } from "@docspace/ui-kit/components/link";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 
 import ModalComboBox from "./ModalComboBox";
 import StyledBodyContent from "../styled-containers/StyledModalDialog";

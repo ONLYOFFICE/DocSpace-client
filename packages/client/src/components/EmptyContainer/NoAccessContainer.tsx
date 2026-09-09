@@ -49,9 +49,9 @@ import { EmptyView } from "@docspace/shared/components/empty-view";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
-import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { TTranslation } from "@docspace/shared/types";
-import { EmptyViewProps } from "@docspace/ui-kit/components/empty-view";
+import { EmptyViewProps } from "@onlyoffice/apps-ui-kit/components/empty-view";
 
 export enum NoAccessContainerType {
   Room,

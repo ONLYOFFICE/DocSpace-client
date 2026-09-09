@@ -36,8 +36,8 @@
 import React from "react";
 import { reaction } from "mobx";
 
-import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
+import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 
 import type InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 

@@ -36,11 +36,11 @@
 import React from "react";
 import classNames from "classnames";
 
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { Text } from "@docspace/ui-kit/components/text";
-import { AddButton } from "@docspace/ui-kit/components/add-button";
-import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
-import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
+import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
+import { InputSize, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { TTranslation } from "@docspace/shared/types";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 

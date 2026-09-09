@@ -37,7 +37,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
 import { IAdditionalResources } from "./AdditionalResources.types";

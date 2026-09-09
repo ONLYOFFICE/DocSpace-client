@@ -64,8 +64,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.light.svg?url";
 import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.dark.svg?url";

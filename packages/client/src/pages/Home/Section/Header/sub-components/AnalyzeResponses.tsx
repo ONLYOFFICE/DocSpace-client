@@ -39,9 +39,9 @@ import { useTranslation } from "react-i18next";
 
 import AIReactSvg from "PUBLIC_DIR/images/icons/16/AI.svg";
 
-import { FolderType } from "@docspace/ui-kit/enums";
-import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
-import { Button, ButtonSize, toastr } from "@docspace/ui-kit/components";
+import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
+import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
+import { Button, ButtonSize, toastr } from "@onlyoffice/apps-ui-kit/components";
 
 import { getFileInfo } from "@docspace/shared/api/files";
 import { createLoader } from "@docspace/shared/utils/createLoader";

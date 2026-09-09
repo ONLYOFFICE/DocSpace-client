@@ -47,7 +47,7 @@ import {
   resendInvitesAgain,
   resendUserInvites,
 } from "@docspace/shared/api/people";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import type UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import config from "PACKAGE_FILE";

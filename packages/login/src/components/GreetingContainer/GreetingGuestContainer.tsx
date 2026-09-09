@@ -38,7 +38,7 @@
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { DEFAULT_GUEST_TEXT } from "@/utils/constants";
 import { Logo } from "../Logo";

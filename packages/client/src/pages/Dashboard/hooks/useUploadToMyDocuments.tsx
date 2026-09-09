@@ -63,10 +63,10 @@ import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { TFunction } from "i18next";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { createChunks, runWithConcurrency } from "@docspace/ui-kit/uploader";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { createChunks, runWithConcurrency } from "@onlyoffice/apps-ui-kit/uploader";
 import {
   getSettingsFiles,
   startUploadSession,

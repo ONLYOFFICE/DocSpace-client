@@ -39,7 +39,7 @@ import {
 	InputSize,
 	InputType,
 	TextInput,
-} from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
 import { useDidMount } from "../../hooks/useDidMount";
 
 import { BUCKET, FILE_PATH } from "./GoogleCloudSettings.constants";

@@ -33,11 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
-import { RowContent as UIRowContent } from "@docspace/ui-kit/components/rows";
+import { RowContent as UIRowContent } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import styles from "./RowView.styled.module.scss";
 import { RowContentProps } from "./RowView.types";

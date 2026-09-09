@@ -38,16 +38,16 @@ import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { ModalDialogType } from "@onlyoffice/apps-ui-kit/components/modal-dialog/ModalDialog.enums";
 import { SocialButton } from "@docspace/shared/components/social-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { generatePKCEPair } from "@docspace/shared/utils/oauth";
 import { AuthenticationMethod } from "@docspace/shared/enums";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 
 import OnlyofficeLight from "PUBLIC_DIR/images/onlyoffice.light.react.svg";

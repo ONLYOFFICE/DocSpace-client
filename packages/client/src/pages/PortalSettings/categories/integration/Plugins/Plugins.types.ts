@@ -34,7 +34,7 @@
  */
 import { TFunction } from "i18next";
 
-import { TColorScheme, TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TColorScheme, TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { TTranslation } from "@docspace/shared/types";
 
 import { TPlugin } from "SRC_DIR/helpers/plugins/types";

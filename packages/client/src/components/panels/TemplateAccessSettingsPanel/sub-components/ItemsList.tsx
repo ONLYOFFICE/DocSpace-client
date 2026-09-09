@@ -35,11 +35,11 @@
 
 import { useState, useEffect, useRef, memo, useCallback } from "react";
 import { FixedSizeList as List } from "react-window";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
-import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
+import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
 import { TTranslation } from "@docspace/shared/types";
-import { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import Item from "./Item";
 import styles from "../TemplateAccessSettingsPanel.module.scss";

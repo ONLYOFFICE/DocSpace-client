@@ -39,15 +39,15 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import MarkdownField from "@docspace/ui-kit/ai-agent/markdown";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import MarkdownField from "@onlyoffice/apps-ui-kit/ai-agent/markdown";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import ZoomPlusIcon from "@docspace/ui-kit/assets/zoom-plus.react.svg";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import ZoomPlusIcon from "@onlyoffice/apps-ui-kit/assets/zoom-plus.react.svg";
 
 import type { PanelState } from "@/types/arbiter";
 

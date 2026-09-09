@@ -49,7 +49,7 @@ import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 // import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 // import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 import {
   EmployeeActivationStatus,
   FileType,
@@ -69,9 +69,9 @@ import {
   dateDiff,
   now,
   humanizeDuration,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE } from "../../constants";
 
 import type { RoomMember, TRoom } from "../../api/rooms/types";
@@ -83,8 +83,8 @@ import type {
 } from "../../types";
 import type { TFile, TFileLink, TFolder } from "../../api/files/types";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   TCopyShareLinkOptions,
   TShare,

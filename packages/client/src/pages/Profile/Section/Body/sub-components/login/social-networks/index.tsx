@@ -37,9 +37,9 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { SocialButton } from "@docspace/shared/components/social-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { getAuthProviders } from "@docspace/shared/api/settings";
 import { unlinkOAuth, linkOAuth } from "@docspace/shared/api/people";
@@ -47,7 +47,7 @@ import {
   getProviderTranslation,
   getLoginLink,
 } from "@docspace/shared/utils/common";
-import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
+import { getOAuthToken } from "@onlyoffice/apps-ui-kit/utils/get-oauth-token";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 

@@ -33,14 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import hexRgb from "hex-rgb";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import classNames from "classnames";
 import styles from "./SubmitToGalleryTile.module.scss";
 import type { FC } from "react";

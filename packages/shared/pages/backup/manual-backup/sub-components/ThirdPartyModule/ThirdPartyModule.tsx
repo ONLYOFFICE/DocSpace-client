@@ -39,7 +39,7 @@ import classNames from "classnames";
 
 import { BackupStorageType, ProvidersType } from "../../../../../enums";
 import { isNullOrUndefined } from "../../../../../utils/typeGuards";
-import { Button, type ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, type ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { getFromLocalStorage } from "../../../../../utils";
 import { DirectThirdPartyConnection } from "../../../../../components/direct-third-party-connection";
 
@@ -49,7 +49,7 @@ import type {
 	ThirdPartyAccountType,
 	TTranslation,
 } from "../../../../../types";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type { FilesSelectorSettings } from "../../../../../components/files-selector-input";
 import type { TThirdParties } from "../../../../../api/files/types";
 

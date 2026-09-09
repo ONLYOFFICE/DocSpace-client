@@ -60,7 +60,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 export const trackRoomOperation = async (
   operationId: string,

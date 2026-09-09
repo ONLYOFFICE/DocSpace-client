@@ -40,12 +40,12 @@ import { useLocation, useNavigate } from "react-router";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isManagement } from "@docspace/shared/utils/common";
 
-import { BillingRoot } from "@docspace/ui-kit/billing";
-import { default as AiPage } from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
-import { default as AiSearchPage } from "@docspace/ui-kit/billing/services/pages/ai-search/AiSearchPage";
-import { default as BackupPage } from "@docspace/ui-kit/billing/services/pages/backup/BackupPage";
-import { default as AdditionalStoragePage } from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
-import type { TPaymentUser } from "@docspace/ui-kit/billing/types";
+import { BillingRoot } from "@onlyoffice/apps-ui-kit/billing";
+import { default as AiPage } from "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage";
+import { default as AiSearchPage } from "@onlyoffice/apps-ui-kit/billing/services/pages/ai-search/AiSearchPage";
+import { default as BackupPage } from "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage";
+import { default as AdditionalStoragePage } from "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
+import type { TPaymentUser } from "@onlyoffice/apps-ui-kit/billing/types";
 
 import config from "PACKAGE_FILE";
 

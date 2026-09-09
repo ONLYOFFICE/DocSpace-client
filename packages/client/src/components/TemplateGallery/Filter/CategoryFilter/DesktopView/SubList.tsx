@@ -36,7 +36,7 @@
 import React from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import classNames from "classnames";
 import styles from "./DesktopView.module.scss";

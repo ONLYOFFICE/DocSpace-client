@@ -37,12 +37,12 @@ import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import ExpanderDownIcon from "@docspace/ui-kit/assets/expander-down.react.svg";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { Text } from "@docspace/ui-kit/components/text";
-import { useClickOutside } from "@docspace/ui-kit/utils/use-click-outside";
+import ExpanderDownIcon from "@onlyoffice/apps-ui-kit/assets/expander-down.react.svg";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useClickOutside } from "@onlyoffice/apps-ui-kit/utils/use-click-outside";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import { ExportDateRange } from "../ExportDateRange";

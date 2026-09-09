@@ -36,10 +36,10 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Consumer } from "@docspace/ui-kit/utils/context";
+import { Consumer } from "@onlyoffice/apps-ui-kit/utils/context";
 import { DeviceType } from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import EmptyScreenServerErrorLightSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.light.svg";
 import EmptyScreenServerErrorDarkSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.dark.svg";

@@ -37,15 +37,15 @@ import path from "path";
 
 import { cookies, headers } from "next/headers";
 
-import { Toast } from "@docspace/ui-kit/components/toast";
+import { Toast } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TenantStatus } from "@docspace/shared/enums";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { SYSTEM_THEME_KEY } from "@onlyoffice/apps-ui-kit/providers/theme/themes/constants";
 import {
   getDirectionByLanguage,
   getFontFamilyDependingOnLanguage,
-} from "@docspace/ui-kit/providers/theme/rtl-utils";
+} from "@onlyoffice/apps-ui-kit/providers/theme/rtl-utils";
 import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
 import ChunkRetryScript from "@docspace/shared/components/chunk-retry-script";
 

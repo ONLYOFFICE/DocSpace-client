@@ -36,8 +36,8 @@
 import React from "react";
 import classNames from "classnames";
 
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Label } from "@docspace/ui-kit/components/label";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
 
 import styles from "../Webhooks.styled.module.scss";
 

@@ -36,9 +36,9 @@
 import { FC, useId, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import { AccessSelectorBlockProps } from "./AccessSelectorBlock.types";
 

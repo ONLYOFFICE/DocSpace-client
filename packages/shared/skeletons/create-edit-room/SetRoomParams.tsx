@@ -35,7 +35,7 @@
 
 import React from "react";
 import styles from "./CreateEditRoom.module.scss";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 const SetRoomParamsLoader = () => {
 	return (

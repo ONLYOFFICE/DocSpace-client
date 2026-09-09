@@ -35,7 +35,7 @@
 
 import React from "react";
 
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 

@@ -39,20 +39,20 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { MemoryRouter } from "react-router";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { BillingRoot, Wallet, PaymentMethod } from "@docspace/ui-kit/billing";
-import AdditionalStoragePage from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
-import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { BillingRoot, Wallet, PaymentMethod } from "@onlyoffice/apps-ui-kit/billing";
+import AdditionalStoragePage from "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
+import type { TPaymentConfig } from "@onlyoffice/apps-ui-kit/billing/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 import { BillingCards, type BillingCardTab } from "@/components/BillingCards";
 import cardStyles from "@/components/BillingCards/BillingCards.module.scss";
 
-import WalletIcon from "@docspace/ui-kit/assets/icons/16/wallet.react.svg";
-import StorageIcon from "@docspace/ui-kit/assets/icons/16/catalog-settings-storage-management.svg";
-import CardIcon from "@docspace/ui-kit/assets/icons/16/card.react.svg";
+import WalletIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/wallet.react.svg";
+import StorageIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog-settings-storage-management.svg";
+import CardIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/card.react.svg";
 
 import styles from "./SettingsPanel.module.scss";
 

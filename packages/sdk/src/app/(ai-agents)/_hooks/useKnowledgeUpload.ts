@@ -37,13 +37,13 @@
 
 import React from "react";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   startUploadSession,
   uploadChunkParallel,
   finalizeUploadSession,
 } from "@docspace/shared/api/files";
-import { createChunks, runWithConcurrency } from "@docspace/ui-kit/uploader";
+import { createChunks, runWithConcurrency } from "@onlyoffice/apps-ui-kit/uploader";
 
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 

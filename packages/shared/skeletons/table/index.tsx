@@ -35,7 +35,7 @@
 
 import React from "react";
 import TableRow from "./sub-components/Row";
-import { RectangleSkeletonProps } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeletonProps } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 const TableSkeleton = ({
 	count = 25,

@@ -35,8 +35,8 @@
 
 import { ReactSVG } from "react-svg";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 

@@ -47,7 +47,7 @@ import {
   VectorizationStatus,
 } from "@docspace/shared/enums";
 import { runInAction } from "mobx";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isFile as isFileCheck } from "@docspace/shared/utils/typeGuards";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import {

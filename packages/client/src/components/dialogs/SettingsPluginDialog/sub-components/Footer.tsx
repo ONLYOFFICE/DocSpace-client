@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Component, IButton } from "@onlyoffice/docspace-plugin-sdk";
 
 import { PluginComponent } from "SRC_DIR/helpers/plugins/WrappedComponent";

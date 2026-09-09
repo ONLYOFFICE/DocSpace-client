@@ -38,10 +38,10 @@ import isEqual from "lodash/isEqual";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { WhiteLabelLogoType } from "../../../enums";
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 import { Logo } from "./Logo";
 import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";

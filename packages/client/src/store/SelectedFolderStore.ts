@@ -36,7 +36,7 @@
 import { makeAutoObservable } from "mobx";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
+import SocketHelper, { SocketCommands } from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   FolderType,
   RoomsType,
@@ -63,7 +63,7 @@ import {
   TRoomSecurity,
   TWatermark,
 } from "@docspace/shared/api/rooms/types";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 
 import { setDocumentTitle } from "../helpers/utils";
 

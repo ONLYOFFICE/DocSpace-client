@@ -36,8 +36,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import FilesSelectorWrapper from "@docspace/ui-kit/selectors/Files";
-import type { SdkFolderType } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import FilesSelectorWrapper from "@onlyoffice/apps-ui-kit/selectors/Files";
+import type { SdkFolderType } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 
 import { DeviceType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 

@@ -39,7 +39,7 @@ import { FeedActionKeys } from "@docspace/shared/api/rooms/types";
 import {
   humanizeDuration,
   type DurationUnit,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 import { TTranslation } from "@docspace/shared/types";
 
 import { HistoryText } from "./HistoryText";

@@ -51,7 +51,7 @@ import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { frameCallEvent } from "@docspace/shared/utils/common";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 
 import { FormsSection } from "@/types/forms";
 import type { CustomContextMenuAction } from "@/types/forms";

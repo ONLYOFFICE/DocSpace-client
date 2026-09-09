@@ -35,9 +35,9 @@
 
 import React from "react";
 
-import { useApi } from "@docspace/ui-kit/providers/api";
-import { formatCurrencyValue } from "@docspace/ui-kit/billing/utils/common";
-import SimpleTopUpDialog from "@docspace/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog";
+import { useApi } from "@onlyoffice/apps-ui-kit/providers/api";
+import { formatCurrencyValue } from "@onlyoffice/apps-ui-kit/billing/utils/common";
+import SimpleTopUpDialog from "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog";
 import store from "SRC_DIR/store";
 
 type ClientSimpleTopUpDialogProps = {

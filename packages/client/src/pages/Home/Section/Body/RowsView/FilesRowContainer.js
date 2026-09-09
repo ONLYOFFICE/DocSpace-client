@@ -36,9 +36,9 @@
 import { useMemo, use } from "react";
 import { inject, observer } from "mobx-react";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 
-import { Context } from "@docspace/ui-kit/utils/context";
+import { Context } from "@onlyoffice/apps-ui-kit/utils/context";
 import { FilesRowContainer as RowContainer } from "@docspace/shared/components/files-row";
 
 

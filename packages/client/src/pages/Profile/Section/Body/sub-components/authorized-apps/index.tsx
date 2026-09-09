@@ -37,11 +37,11 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Consumer } from "@docspace/ui-kit/utils/context";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Consumer } from "@onlyoffice/apps-ui-kit/utils/context";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import InfoDialog from "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog";
 

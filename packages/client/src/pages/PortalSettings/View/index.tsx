@@ -38,11 +38,11 @@ import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
-import { AI_ENUM, AI_SEARCH_ENUM } from "@docspace/ui-kit/billing/constants";
+import { LoaderWrapper } from "@onlyoffice/apps-ui-kit/components/loader-wrapper";
+import { AI_ENUM, AI_SEARCH_ENUM } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { DeviceType } from "@docspace/shared/enums";
 import componentLoader from "@docspace/shared/utils/component-loader";
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import { Component as Customization } from "../categories/common";
 import { Component as Security } from "../categories/security";

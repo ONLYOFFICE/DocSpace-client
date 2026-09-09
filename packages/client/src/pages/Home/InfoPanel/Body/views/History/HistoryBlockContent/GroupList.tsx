@@ -41,8 +41,8 @@ import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { TFeedAction, TFeedData } from "@docspace/shared/api/rooms/types";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";

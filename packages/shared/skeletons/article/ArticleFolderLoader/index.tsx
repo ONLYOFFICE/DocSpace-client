@@ -36,7 +36,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 import styles from "./ArticleFolderLoader.module.scss";
 import { FolderLoaderProps } from "./FolderLoader.types";

@@ -40,10 +40,10 @@ import {
   HeaderProps,
   THeaderBackButton,
   TSelectorHeader,
-} from "@docspace/ui-kit/components/selector";
+} from "@onlyoffice/apps-ui-kit/components/selector";
 
-import GroupsSelector from "@docspace/ui-kit/selectors/Groups";
-import { GroupsSelectorProps } from "@docspace/ui-kit/selectors/Groups/GroupsSelector.types";
+import GroupsSelector from "@onlyoffice/apps-ui-kit/selectors/Groups";
+import { GroupsSelectorProps } from "@onlyoffice/apps-ui-kit/selectors/Groups/GroupsSelector.types";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
 

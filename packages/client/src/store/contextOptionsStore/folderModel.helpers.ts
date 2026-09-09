@@ -51,7 +51,7 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.template.react.svg?url";
 import { isMobile, isTablet } from "react-device-detect";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TOformFile } from "@docspace/shared/api/oforms/types";
 import {

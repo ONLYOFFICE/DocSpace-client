@@ -41,7 +41,7 @@ import {
   getFetchedRoomParams,
   TRoomParams,
 } from "@docspace/shared/utils/rooms";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { RoomsType } from "@docspace/shared/enums";

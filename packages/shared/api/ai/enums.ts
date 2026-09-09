@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { ProviderType, ServerType } from "@docspace/ui-kit/enums/ai";
+import { ProviderType, ServerType } from "@onlyoffice/apps-ui-kit/enums/ai";
 
 export { ProviderType, ServerType };
 

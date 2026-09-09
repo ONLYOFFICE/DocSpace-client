@@ -36,15 +36,15 @@
 import PlusPreviewSvgUrl from "PUBLIC_DIR/images/plus.preview.svg?url";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 
 import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
 
 import classnames from "classnames";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
 import previewStyles from "./StyledPreview.module.scss";
 
 const buildPreviewVars = (themePreview, colorPreview, isViewTablet) => {

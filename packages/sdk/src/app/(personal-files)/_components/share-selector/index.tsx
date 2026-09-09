@@ -38,13 +38,13 @@
 import { FC, useState } from "react";
 
 import { ShareSelector as ShareSelectorComponent } from "@docspace/shared/components/share/selector";
-import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
+import { useEventListener } from "@onlyoffice/apps-ui-kit/hooks/useEventListener";
 import {
   ShareEventName,
   ShareUpdateListEventName,
 } from "@docspace/shared/components/share/Share.constants";
 import type { Nullable } from "@docspace/shared/types";
-import { Portal } from "@docspace/ui-kit/components/portal";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { RoomMember } from "@docspace/shared/api/rooms/types";
 

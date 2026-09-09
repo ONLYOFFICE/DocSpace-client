@@ -41,14 +41,14 @@ import {
   deleteVersionFile,
 } from "@docspace/shared/api/files";
 import { AnalyticsEvents, FileOperationStatus } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import {
   forgetEncryptedFilename,
 } from "@docspace/shared/services/encryption/filename-cache";
 import { getCategoryTypeByFolderType } from "SRC_DIR/helpers/utils";
 import uniqueid from "lodash/uniqueId";
-import SocketHelper, {SocketCommands} from "@docspace/ui-kit/utils/socket";
+import SocketHelper, {SocketCommands} from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   getEmptyPersonalProgress,
   startEmptyPersonal,

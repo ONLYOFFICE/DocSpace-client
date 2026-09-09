@@ -36,7 +36,7 @@
 import { getBackupProgress } from "@docspace/shared/api/portal";
 import { makeAutoObservable } from "mobx";
 import axios, { type AxiosResponse } from "axios";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
@@ -66,7 +66,7 @@ import type {
   TTranslation,
   TWeekdaysLabel,
 } from "@docspace/shared/types";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";

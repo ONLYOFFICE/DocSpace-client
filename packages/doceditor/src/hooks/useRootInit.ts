@@ -35,7 +35,7 @@
 
 import React from "react";
 
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie, setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { isRetina } from "@docspace/shared/utils/common";
 
 import SlideIcoUrl from "PUBLIC_DIR/images/slide.ico?url";

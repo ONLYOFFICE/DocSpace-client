@@ -35,7 +35,7 @@
 
 import React from "react";
 
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
 import styles from "./CreateEditDialogParams.module.scss";
 

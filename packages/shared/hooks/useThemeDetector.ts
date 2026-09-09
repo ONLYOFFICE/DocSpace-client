@@ -34,10 +34,10 @@
  */
 
 import { useEffect, useState } from "react";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
-import { setCookie } from "@docspace/ui-kit/utils/cookie";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { getSystemTheme } from "@onlyoffice/apps-ui-kit/utils/get-system-theme";
+import { setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
+import { SYSTEM_THEME_KEY } from "@onlyoffice/apps-ui-kit/providers/theme/themes/constants";
 
 export const useThemeDetector = () => {
   const isDesktopClient = window.AscDesktopEditor !== undefined;

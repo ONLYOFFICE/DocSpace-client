@@ -41,9 +41,9 @@ import { useTranslation } from "react-i18next";
 
 import AutomaticBackup from "@docspace/shared/pages/backup/auto-backup";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
-import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import type { FilesSettingsDto } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
+import { useUnmount } from "@onlyoffice/apps-ui-kit/hooks/useUnmount";
 
 import { useDefaultOptions } from "@docspace/shared/pages/backup/auto-backup/hooks";
 

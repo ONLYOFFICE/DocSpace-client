@@ -65,7 +65,7 @@ import api from "@docspace/shared/api";
 import { RoomsType } from "@docspace/shared/enums";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TCreatedBy } from "@docspace/shared/types";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import {

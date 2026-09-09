@@ -35,8 +35,8 @@
 
 import React from "react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { useTranslation } from "react-i18next";
 
 import styles from "../../WebhookHistory.styled.module.scss";

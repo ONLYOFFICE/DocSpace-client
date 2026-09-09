@@ -41,14 +41,14 @@ import { useLocation, useNavigate } from "react-router";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { default as AiPage } from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
-import { default as AiSearchPage } from "@docspace/ui-kit/billing/services/pages/ai-search/AiSearchPage";
-import { default as BackupPage } from "@docspace/ui-kit/billing/services/pages/backup/BackupPage";
-import { default as AdditionalStoragePage } from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
-import { default as DocsConnectPage } from "@docspace/ui-kit/billing/services/pages/docs-connect/DocsConnectPage";
-import { default as BackupPageLoader } from "@docspace/ui-kit/billing/services/pages/backup/BackupPageLoader";
-import type { TDocsConnectPageState } from "@docspace/ui-kit/billing/types";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { default as AiPage } from "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage";
+import { default as AiSearchPage } from "@onlyoffice/apps-ui-kit/billing/services/pages/ai-search/AiSearchPage";
+import { default as BackupPage } from "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage";
+import { default as AdditionalStoragePage } from "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
+import { default as DocsConnectPage } from "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage";
+import { default as BackupPageLoader } from "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPageLoader";
+import type { TDocsConnectPageState } from "@onlyoffice/apps-ui-kit/billing/types";
 
 import config from "PACKAGE_FILE";
 

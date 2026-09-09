@@ -63,11 +63,11 @@
 
 import React from "react";
 
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { Label } from "@docspace/ui-kit/components/label";
-import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { InputType, TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { StyledParam } from "../create-agent-dialog/sub-components/StyledParam";
 import styles from "./InputParam.module.scss";

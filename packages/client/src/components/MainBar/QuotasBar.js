@@ -36,10 +36,10 @@
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 
-import { SnackBar } from "@docspace/ui-kit/components/snackbar";
+import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
 const QuotasBar = ({

@@ -45,7 +45,7 @@ import {
 import {
   humanizeDuration,
   type DurationUnit,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 
 import { RoomsType } from "@docspace/shared/enums";
 

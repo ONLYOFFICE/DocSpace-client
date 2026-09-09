@@ -36,15 +36,15 @@
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
+import { TableRow, TableCell } from "@onlyoffice/apps-ui-kit/components/table";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/ui-kit/components/combobox";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
 import {
   InjectedTypeSelectTableRowProps,
   TypeSelectTableRowProps,

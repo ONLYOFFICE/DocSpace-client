@@ -45,9 +45,9 @@ import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { Avatar } from "@docspace/ui-kit/components/avatar";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { Avatar } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import { parseAddresses } from "@docspace/shared/utils";
 import {
   getUserType,
@@ -60,10 +60,10 @@ import {
   EmployeeType,
   RoomsType,
 } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Button } from "@docspace/ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";

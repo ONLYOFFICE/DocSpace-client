@@ -37,12 +37,12 @@ import React, { useState, useCallback, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile, isIOS } from "react-device-detect";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Button } from "@docspace/ui-kit/components/button";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 
 import { removeEmojiCharacters } from "@docspace/shared/utils";
 import { getCreateModalEntityType } from "SRC_DIR/helpers/filesUtils";

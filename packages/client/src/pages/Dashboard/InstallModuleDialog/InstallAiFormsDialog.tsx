@@ -63,12 +63,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
-import PeopleIcon from "@docspace/ui-kit/assets/icons/16/people.react.svg";
-import TemplateIcon from "@docspace/ui-kit/assets/icons/16/catalog.documents.react.svg";
+import CatalogRoomsIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.rooms.react.svg";
+import PeopleIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/people.react.svg";
+import TemplateIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.documents.react.svg";
 import FormRoomLightIllustration from "PUBLIC_DIR/images/emptyview/empty.form.room.light.svg";
 import FormRoomDarkIllustration from "PUBLIC_DIR/images/emptyview/empty.form.room.dark.svg";
 

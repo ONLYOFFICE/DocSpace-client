@@ -34,7 +34,7 @@
 
 import { vi } from "vitest";
 
-vi.mock("@docspace/ui-kit/utils/socket", async (importOriginal) => {
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, unknown>;
   return {
     ...actual,
@@ -46,7 +46,7 @@ vi.mock("@docspace/ui-kit/utils/socket", async (importOriginal) => {
     },
   };
 });
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn(), info: vi.fn(), warning: vi.fn() },
 }));
 vi.mock("SRC_DIR/i18n", () => ({

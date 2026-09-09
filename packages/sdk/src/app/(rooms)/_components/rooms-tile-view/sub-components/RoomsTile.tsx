@@ -41,18 +41,18 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { RoomTile } from "@docspace/ui-kit/components/tiles/room-tile";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { RoomTile } from "@onlyoffice/apps-ui-kit/components/tiles/room-tile";
 import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import type { TagClickEvent } from "@docspace/ui-kit/components/tag";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import type { TagClickEvent } from "@onlyoffice/apps-ui-kit/components/tag";
 import Badges from "@docspace/shared/components/badges";
 import api from "@docspace/shared/api";
 
 import { isAdmin } from "@docspace/shared/utils/common";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   TagManagement,
   type AccessTagManagement,

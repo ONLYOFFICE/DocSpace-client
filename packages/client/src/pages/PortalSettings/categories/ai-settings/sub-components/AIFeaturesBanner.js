@@ -40,19 +40,19 @@ import { useTranslation } from "react-i18next";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { DeviceType } from "@docspace/shared/enums";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { CommonTrans } from "@docspace/ui-kit/utils/i18n/CommonTrans";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { CommonTrans } from "@onlyoffice/apps-ui-kit/utils/i18n/CommonTrans";
 
 // 16px icons reused from the ui-kit icon set (matches AI services pages).
-import AIIcon from "@docspace/ui-kit/assets/icons/16/AI.svg";
-import PriceIcon from "@docspace/ui-kit/assets/icons/16/price.react.svg";
-import WalletIcon from "@docspace/ui-kit/assets/icons/16/wallet.react.svg";
-import WebSearchIcon from "@docspace/ui-kit/assets/icons/16/ai-feature-web-search.react.svg";
+import AIIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/AI.svg";
+import PriceIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/price.react.svg";
+import WalletIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/wallet.react.svg";
+import WebSearchIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/ai-feature-web-search.react.svg";
 
-import { AI_SEARCH, AI_TOOLS } from "@docspace/ui-kit/billing/constants";
+import { AI_SEARCH, AI_TOOLS } from "@onlyoffice/apps-ui-kit/billing/constants";
 
 import InfoIcon from "PUBLIC_DIR/images/info.react.svg";
 import EnabledIcon from "PUBLIC_DIR/images/tick.rounded.svg";

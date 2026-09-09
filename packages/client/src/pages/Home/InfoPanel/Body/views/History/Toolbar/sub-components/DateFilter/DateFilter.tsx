@@ -38,11 +38,11 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import type { DateTime } from "luxon";
 
-import CalendarIcon from "@docspace/ui-kit/assets/calendar.react.svg";
-import { Calendar } from "@docspace/ui-kit/components/calendar";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { now, formatDate, parseToDateTime } from "@docspace/ui-kit/utils/date";
-import { useClickOutside } from "@docspace/ui-kit/utils/use-click-outside";
+import CalendarIcon from "@onlyoffice/apps-ui-kit/assets/calendar.react.svg";
+import { Calendar } from "@onlyoffice/apps-ui-kit/components/calendar";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { now, formatDate, parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";
+import { useClickOutside } from "@onlyoffice/apps-ui-kit/utils/use-click-outside";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";

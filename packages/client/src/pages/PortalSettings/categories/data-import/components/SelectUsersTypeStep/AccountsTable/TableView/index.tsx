@@ -40,17 +40,17 @@ import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import {
   TableContainer,
   TableGroupMenu,
   TableBody,
   TGroupMenuItem,
-} from "@docspace/ui-kit/components/table";
+} from "@onlyoffice/apps-ui-kit/components/table";
 
 import styles from "../../../../StyledDataImport.module.scss";
 import UsersTableRow from "./UsersTableRow";

@@ -34,7 +34,7 @@
  */
 
 import React from "react";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 const CreateEditRoomDilogHeaderLoader = () => {
 	return <RectangleSkeleton width="250" height="21" borderRadius="3" />;

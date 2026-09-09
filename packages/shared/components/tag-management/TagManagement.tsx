@@ -37,11 +37,11 @@ import { useTranslation, Trans } from "react-i18next";
 import { FC, useCallback, useRef, useState } from "react";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-import { Tags } from "@docspace/ui-kit/components/tags";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
-import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
-import { useCloseOnAnchorCovered } from "@docspace/ui-kit/hooks/useCloseOnAnchorCovered";
+import { Tags } from "@onlyoffice/apps-ui-kit/components/tags";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useUnmount } from "@onlyoffice/apps-ui-kit/hooks/useUnmount";
+import { useIsMobile } from "@onlyoffice/apps-ui-kit/hooks/use-is-mobile";
+import { useCloseOnAnchorCovered } from "@onlyoffice/apps-ui-kit/hooks/useCloseOnAnchorCovered";
 
 import { useIsTable } from "../../hooks/useIsTable";
 

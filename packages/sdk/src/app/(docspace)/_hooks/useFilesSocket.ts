@@ -43,7 +43,7 @@ import SocketHelper, {
   SocketEvents,
   type TOptSocket,
   type TEditFileData,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import { useFilesListStore } from "../_store/FilesListStore";
 

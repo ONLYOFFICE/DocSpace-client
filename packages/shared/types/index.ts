@@ -33,21 +33,21 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export * from "@docspace/ui-kit/types";
+export * from "@onlyoffice/apps-ui-kit/types";
 
 import type { TFile, TFileLink, TFolder } from "../api/files/types";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type {
   FolderType,
   RoomsType,
   ShareAccessRights,
   ShareRights,
 } from "../enums";
-import type { TTheme, TColorScheme } from "@docspace/ui-kit/providers/theme";
+import type { TTheme, TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme";
 import type FirebaseHelper from "../utils/firebase";
 import type { TRoom } from "../api/rooms/types";
 
-export type { TDirectionX, TDirectionY } from "@docspace/ui-kit/types";
+export type { TDirectionX, TDirectionY } from "@onlyoffice/apps-ui-kit/types";
 
 export type Option = {
   key: string;
@@ -335,10 +335,10 @@ declare global {
   }
 
   export type ContextMenuModel =
-    import("@docspace/ui-kit/components/context-menu").ContextMenuModel;
+    import("@onlyoffice/apps-ui-kit/components/context-menu").ContextMenuModel;
 
   export type SeparatorType =
-    import("@docspace/ui-kit/components/context-menu").SeparatorType;
+    import("@onlyoffice/apps-ui-kit/components/context-menu").SeparatorType;
 }
 
 export type TDefaultTemplateItem = {

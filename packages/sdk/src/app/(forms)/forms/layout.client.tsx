@@ -41,24 +41,24 @@ import dynamic from "next/dynamic";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-import Section from "@docspace/ui-kit/components/section";
+import Section from "@onlyoffice/apps-ui-kit/components/section";
 import {
   useAiChatPanel,
   useOpenAiChat,
-} from "@docspace/ui-kit/ai-agent/ai-chat-panel";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
-import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
-import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
-import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
+} from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
+import { FloatingButton } from "@onlyoffice/apps-ui-kit/components/floating-button";
+import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
+import type { QuickActionItem } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import {
   BlankPdfIcon,
   GeneratePdfAiIcon,
   CreateFromTextIcon,
   CreateFromTemplateIcon,
   AIChatIcon,
-} from "@docspace/ui-kit/components/quick-actions/icons";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+} from "@onlyoffice/apps-ui-kit/components/quick-actions/icons";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import {
@@ -109,8 +109,8 @@ import FormsAiChatProviders from "../_components/ai-chat-providers";
 import FormsFilter from "../_components/forms-filter";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import type { MainButtonProps } from "@onlyoffice/apps-ui-kit/components/main-button/MainButton.types";
 
 const CreateFormDialog = dynamic(
   () => import("../_components/create-form-dialog"),

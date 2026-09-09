@@ -39,7 +39,7 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { frameCallCommand, frameCallEvent } from "../../../utils/common";
-import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
+import ErrorContainer from "@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer";
 
 const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {
   const { t, ready } = useTranslation(["Errors", "Common"]);

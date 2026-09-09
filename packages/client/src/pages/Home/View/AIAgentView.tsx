@@ -37,7 +37,7 @@ import { Activity } from "react";
 import { inject, observer } from "mobx-react";
 import { useStores } from "@onlyoffice/ai-chat";
 
-import NewChat from "@docspace/ui-kit/ai-agent/new-chat";
+import NewChat from "@onlyoffice/apps-ui-kit/ai-agent/new-chat";
 
 import styles from "./AIAgentView.module.scss";
 

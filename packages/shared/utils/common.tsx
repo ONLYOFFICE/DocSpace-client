@@ -41,7 +41,7 @@ import {
   parseToDateTime,
   startOf,
   dateDiffAbs,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
 import resizeImage from "resize-image";
 import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
@@ -72,8 +72,8 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import { AvatarRole } from "@docspace/ui-kit/components/avatar";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { AvatarRole } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
 
 import { parseAddress } from "./email";
 
@@ -104,19 +104,19 @@ import {
   TPasswordHash,
   TTimeZone,
 } from "../api/settings/types";
-import { TopLoaderService } from "@docspace/ui-kit/components/top-loading-indicator";
+import { TopLoaderService } from "@onlyoffice/apps-ui-kit/components/top-loading-indicator";
 
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import { combineUrl } from "./combineUrl";
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
-import { checkIsSSR } from "@docspace/ui-kit/utils/device";
+import { getCookie, setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { checkIsSSR } from "@onlyoffice/apps-ui-kit/utils/device";
 
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
 import { isFile, isFolder } from "./typeGuards";
 import { getUserTypeDescriptionClient } from "./getUserTypeDescription";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
-import { isLanguageRtl } from "@docspace/ui-kit/providers/theme";
+import { getSystemTheme } from "@onlyoffice/apps-ui-kit/utils/get-system-theme";
+import { isLanguageRtl } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -721,7 +721,7 @@ export {
   calculateTotalPrice,
   truncateNumberToFraction,
   formatCurrencyValue,
-} from "@docspace/ui-kit/billing/utils/common";
+} from "@onlyoffice/apps-ui-kit/billing/utils/common";
 
 export const frameHandlePing = (eventData: {
   type?: string;
@@ -740,7 +740,7 @@ export const frameHandlePing = (eventData: {
   return false;
 };
 
-import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
+import { getConvertedSize } from "@onlyoffice/apps-ui-kit/billing/utils/common";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { getConstName } from "@docspace/shared/constants/consts";
 

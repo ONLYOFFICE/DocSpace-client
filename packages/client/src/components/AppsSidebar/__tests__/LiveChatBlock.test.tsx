@@ -47,7 +47,7 @@ import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock(
-  "@docspace/ui-kit/components/article/sub-components/LiveChat",
+  "@onlyoffice/apps-ui-kit/components/article/sub-components/LiveChat",
   () => ({
     default: ({
       zendeskKey,

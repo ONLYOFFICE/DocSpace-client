@@ -34,7 +34,7 @@
  */
 
 import { http } from "msw";
-import { uuid } from "@docspace/ui-kit/utils";
+import { uuid } from "@onlyoffice/apps-ui-kit/utils";
 import { ShareAccessRights } from "../../../enums";
 import { TGetRooms, TRoom } from "../../../api/rooms/types";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";

@@ -36,7 +36,7 @@
 import React from "react";
 import { isDesktop as isDesktopUtils } from "../../../utils";
 
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 import styles from "./Header.module.scss";
 

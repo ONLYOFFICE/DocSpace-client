@@ -55,7 +55,7 @@ type MenuItem = { key: string; checked?: boolean };
 
 // Stand-in for the real ui-kit ArticleProfile: what matters here is that it
 // rebuilds the menu model on every render and is not an observer itself.
-vi.mock("@docspace/ui-kit/components/article", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/article", () => ({
   ArticleProfile: ({
     getActions,
   }: {

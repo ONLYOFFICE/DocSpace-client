@@ -34,8 +34,8 @@
  */
 
 import React from "react";
-import { Text } from "@docspace/ui-kit/components/text";
-import { RowContent } from "@docspace/ui-kit/components/rows";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
 import { UsersRowContentProps } from "../../../../types";
 import styles from "../../../../StyledDataImport.module.scss";
 

@@ -35,13 +35,13 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { inject, observer } from "mobx-react";
 
-import { Button } from "@docspace/ui-kit/components/button";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
-import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
-import { Link } from "@docspace/ui-kit/components/link";
+import ErrorContainer from "@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import styles from "./PortalUnavailable.module.scss";
 

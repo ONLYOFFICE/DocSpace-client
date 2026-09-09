@@ -50,17 +50,17 @@ import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Row } from "@docspace/ui-kit/components/rows";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
-import { toastr } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 
 import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";

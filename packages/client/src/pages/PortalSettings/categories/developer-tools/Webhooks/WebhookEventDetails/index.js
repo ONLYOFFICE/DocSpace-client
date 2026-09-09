@@ -38,7 +38,7 @@ import React, { useEffect, useTransition, Suspense } from "react";
 import { useParams } from "react-router";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import DetailsBar from "./sub-components/DetailsBar";
 import MessagesDetails from "./sub-components/MessagesDetails";

@@ -37,8 +37,8 @@ import { inject, observer } from "mobx-react";
 import { useMemo } from "react";
 import { useNavigate } from "react-router";
 
-import { ServicesList } from "@docspace/ui-kit/billing";
-import type { TDocsConnectCardState } from "@docspace/ui-kit/billing/types";
+import { ServicesList } from "@onlyoffice/apps-ui-kit/billing";
+import type { TDocsConnectCardState } from "@onlyoffice/apps-ui-kit/billing/types";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 

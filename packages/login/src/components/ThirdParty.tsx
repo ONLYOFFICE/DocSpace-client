@@ -39,9 +39,9 @@ import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getLoginLink } from "@docspace/shared/utils/common";
-import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
+import { getOAuthToken } from "@onlyoffice/apps-ui-kit/utils/get-oauth-token";
 import {
   TCapabilities,
   TThirdPartyProvider,

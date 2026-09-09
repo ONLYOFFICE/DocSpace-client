@@ -39,9 +39,9 @@ import { inject, observer } from "mobx-react";
 
 import styles from "./AdvancedSettings.module.scss";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { getConstName } from "@docspace/shared/constants/consts";
 
 interface InjectedProps {

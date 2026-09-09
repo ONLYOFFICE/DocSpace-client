@@ -44,7 +44,7 @@ import {
 } from "SRC_DIR/helpers/contacts";
 import { TUser } from "@docspace/shared/api/people/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import api from "@docspace/shared/api";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";

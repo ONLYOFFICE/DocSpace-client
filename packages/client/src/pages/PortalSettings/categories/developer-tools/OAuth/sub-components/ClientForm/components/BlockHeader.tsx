@@ -35,9 +35,9 @@
 
 import classNames from "classnames";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import styles from "../ClientForm.styled.module.scss";
 

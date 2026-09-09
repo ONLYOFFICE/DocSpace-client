@@ -32,7 +32,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-import { PortalFeaturesLimitations } from "@docspace/ui-kit/enums";
+import { PortalFeaturesLimitations } from "@onlyoffice/apps-ui-kit/enums";
 import { TQuota } from "../categories/data-import/types";
 
 export const parseQuota = (quotaCharacteristics: TQuota) => {

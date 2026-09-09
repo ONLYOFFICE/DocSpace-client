@@ -42,15 +42,15 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { inject, observer } from "mobx-react";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import { UrlActionType } from "@docspace/shared/enums";
 import {
   MAX_FILE_COMMENT_LENGTH,

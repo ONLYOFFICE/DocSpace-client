@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { NavigateFunction, Location } from "react-router";
 
-import { TableHeader, TTableColumn } from "@docspace/ui-kit/components/table";
+import { TableHeader, TTableColumn } from "@onlyoffice/apps-ui-kit/components/table";
 import { Events } from "@docspace/shared/enums";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 

@@ -37,9 +37,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { RowContainer } from "@docspace/ui-kit/components/rows";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.12.react.svg";
 

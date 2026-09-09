@@ -36,12 +36,12 @@
 import { useEffect } from "react";
 
 import { withTranslation } from "react-i18next";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { DeleteApiKeyDialogProps } from "../../types";
 
 const DeleteApiKeyDialog = (props: DeleteApiKeyDialogProps) => {

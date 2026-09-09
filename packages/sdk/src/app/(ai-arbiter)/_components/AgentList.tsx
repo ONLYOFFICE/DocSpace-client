@@ -38,12 +38,12 @@
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/ui-kit/providers/theme";
-import CrossIcon from "@docspace/ui-kit/assets/icons/12/cross.react.svg";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
+import CrossIcon from "@onlyoffice/apps-ui-kit/assets/icons/12/cross.react.svg";
 
 import type { AgentSummary } from "@/types/arbiter";
 

@@ -40,7 +40,7 @@ import {
 	InputSize,
 	InputType,
 	TextInput,
-} from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
 
 import {
 	FILE_PATH,

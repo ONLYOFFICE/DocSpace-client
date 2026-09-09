@@ -45,8 +45,8 @@ import {
 import { getPresignedUri, getReferenceData } from "@docspace/shared/api/files";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
-import { TSelectedFileInfo } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
-import { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import { TSelectedFileInfo } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
+import { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 
 import { TEvent, UseSelectFileDialogProps } from "@/types";

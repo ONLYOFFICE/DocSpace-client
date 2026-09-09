@@ -35,7 +35,7 @@
 
 import { useCallback } from "react";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import ImportAccountsStore from "SRC_DIR/store/ImportAccountsStore";
 

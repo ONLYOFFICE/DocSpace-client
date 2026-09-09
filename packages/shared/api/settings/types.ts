@@ -39,7 +39,7 @@ import {
   EncryptionStatus,
   EmployeeType,
 } from "../../enums";
-import { TColorScheme } from "@docspace/ui-kit/providers/theme";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 export type TTfaType = "sms" | "app" | "none";
 

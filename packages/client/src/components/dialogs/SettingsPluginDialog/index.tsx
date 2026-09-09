@@ -37,11 +37,11 @@ import { useCallback, useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";

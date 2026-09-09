@@ -39,9 +39,9 @@ import { I18nextProvider, useTranslation } from "react-i18next";
 
 import { getCrashReport } from "../../utils/crashReport";
 
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import ReportDialog from "../report-dialog";
-import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
+import ErrorContainer from "@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer";
 import { zendeskAPI } from "../zendesk/Zendesk.utils";
 
 import styles from "./Errors.module.scss";

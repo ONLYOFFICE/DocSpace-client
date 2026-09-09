@@ -34,10 +34,10 @@
  */
 
 import { ContextMenuSkeleton } from "./context-menu";
-import { RowsSkeleton } from "@docspace/ui-kit/components/rows";
+import { RowsSkeleton } from "@onlyoffice/apps-ui-kit/components/rows";
 import { TableSkeleton } from "./table";
 
-export * from "@docspace/ui-kit/components/rectangle";
-export * from "@docspace/ui-kit/components/circle";
+export * from "@onlyoffice/apps-ui-kit/components/rectangle";
+export * from "@onlyoffice/apps-ui-kit/components/circle";
 
 export { ContextMenuSkeleton, RowsSkeleton, TableSkeleton };

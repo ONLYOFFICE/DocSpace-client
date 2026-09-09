@@ -41,18 +41,18 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
-import { Tag } from "@docspace/ui-kit/components/tag";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Tag } from "@onlyoffice/apps-ui-kit/components/tag";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
 
-import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+import { useIsMobile } from "@onlyoffice/apps-ui-kit/hooks/use-is-mobile";
 
 import { useTagManagement } from "./TagManagement.provider";
 import { useUpdateTag } from "./hooks/useTagsQuery";

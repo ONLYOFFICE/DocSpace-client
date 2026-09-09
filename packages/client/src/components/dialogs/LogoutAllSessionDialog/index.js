@@ -34,10 +34,10 @@
  */
 
 import { useState } from "react";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 const LogoutAllSessionDialog = ({
   t,

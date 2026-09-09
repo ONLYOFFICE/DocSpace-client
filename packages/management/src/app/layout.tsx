@@ -38,13 +38,13 @@ import path from "path";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
+import { SYSTEM_THEME_KEY } from "@onlyoffice/apps-ui-kit/providers/theme/themes/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
 import ChunkRetryScript from "@docspace/shared/components/chunk-retry-script";
 
-import { Toast } from "@docspace/ui-kit/components/toast";
+import { Toast } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import {
   getSettings,

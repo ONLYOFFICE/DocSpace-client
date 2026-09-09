@@ -36,7 +36,7 @@
 import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
 import { Events } from "@docspace/shared/enums";
 
-import type { TFile } from "@docspace/ui-kit/types";
+import type { TFile } from "@onlyoffice/apps-ui-kit/types";
 
 export const showCreatedPDFFormDialog = (file: TFile, userId: string) => {
   const localKey = `${PDF_FORM_DIALOG_KEY}-${userId}`;

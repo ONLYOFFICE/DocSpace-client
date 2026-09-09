@@ -35,7 +35,7 @@
 
 "use client";
 
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 
 export default function OAuthPageLoader() {
   return (

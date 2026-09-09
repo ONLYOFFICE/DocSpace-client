@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import type { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import type { TTranslation } from "@docspace/shared/types";
 import type { LinkProps } from "@docspace/shared/utils/plugin-file-utils";
 

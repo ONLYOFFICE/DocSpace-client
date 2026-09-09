@@ -36,7 +36,7 @@
 import { FC, memo } from "react";
 import equal from "fast-deep-equal";
 
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { classNames } from "@docspace/shared/utils";
 
 import type { FileNameProps } from "./FileNameCell.types";

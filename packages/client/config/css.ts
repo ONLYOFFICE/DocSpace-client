@@ -46,9 +46,9 @@ export const css: UserConfig["css"] = {
       importers: [
         {
           findFileUrl(url: string) {
-            if (url.startsWith("@docspace/ui-kit")) {
+            if (url.startsWith("@onlyoffice/apps-ui-kit")) {
               const resolved = url.replace(
-                "@docspace/ui-kit",
+                "@onlyoffice/apps-ui-kit",
                 path.resolve(rootDir, "../../libs/ui-kit"),
               );
               return new URL(

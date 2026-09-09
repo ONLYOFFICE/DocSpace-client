@@ -37,7 +37,7 @@ import { FolderType, RoomsType } from "@docspace/shared/enums";
 import type {
   Suggestion,
   SuggestionSet,
-} from "@docspace/ui-kit/ai-agent/providers";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";
 

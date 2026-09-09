@@ -45,7 +45,7 @@ import {
   ModalDialog,
   ModalDialogType,
   DialogAsideSkeleton
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
 import styles from "../UploadPanel/UploadPanel.module.scss";
 import FileList from "./FileList";

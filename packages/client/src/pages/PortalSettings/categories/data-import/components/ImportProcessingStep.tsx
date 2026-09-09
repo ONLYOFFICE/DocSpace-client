@@ -36,9 +36,9 @@
 import { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 
-import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
+import { ProgressBar } from "@onlyoffice/apps-ui-kit/components/progress-bar";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import styles from "../StyledDataImport.module.scss";
 import {
   ImportProcessingStepProps,

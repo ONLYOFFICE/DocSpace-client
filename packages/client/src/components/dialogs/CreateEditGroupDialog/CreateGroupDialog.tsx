@@ -40,12 +40,12 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TOnSubmit } from "@docspace/ui-kit/components/selector";
+import { TOnSubmit } from "@onlyoffice/apps-ui-kit/components/selector";
 
 import styles from "./CreateEditGroupDialog.module.scss";
 import { GroupParams } from "./types";

@@ -40,11 +40,11 @@ import { useNavigate } from "react-router";
 
 // import { TABLE_ROOMS_COLUMNS } from "SRC_DIR/helpers/constants";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
-import { Row } from "@docspace/ui-kit/components/rows";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import styles from "../StyledComponent.module.scss";
 import { TABLE_AI_AGENTS_COLUMNS } from "SRC_DIR/helpers/constants";

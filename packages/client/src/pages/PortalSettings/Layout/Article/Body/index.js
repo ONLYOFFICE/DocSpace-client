@@ -43,7 +43,7 @@ import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelpe
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { ArticleItem } from "@docspace/ui-kit/components/article/item";
+import { ArticleItem } from "@onlyoffice/apps-ui-kit/components/article/item";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import {
   // getKeyByLink,

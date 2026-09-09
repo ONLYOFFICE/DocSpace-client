@@ -39,7 +39,7 @@ import uniqueid from "lodash/uniqueId";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { getCountTilesInRow } from "@docspace/shared/utils";
-import { InfiniteLoaderComponent } from "@docspace/ui-kit/components/infinite-loader";
+import { InfiniteLoaderComponent } from "@onlyoffice/apps-ui-kit/components/infinite-loader";
 
 import type { InfiniteGridProps } from "../../TileView.types";
 import classNames from "classnames";

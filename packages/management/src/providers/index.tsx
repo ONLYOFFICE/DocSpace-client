@@ -41,17 +41,17 @@ import type {
   TSettings,
 } from "@docspace/shared/api/settings/types";
 import type { ThemeKeys } from "@docspace/shared/enums";
-import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
-import { ErrorBoundary } from "@docspace/ui-kit/providers/error-boundary";
-import { TranslationProvider } from "@docspace/ui-kit/providers/translation";
+import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { ErrorBoundary } from "@onlyoffice/apps-ui-kit/providers/error-boundary";
+import { TranslationProvider } from "@onlyoffice/apps-ui-kit/providers/translation";
 import type {
   TTranslations,
   TTranslationProvider,
-} from "@docspace/ui-kit/providers/translation";
-import { ThemeProvider } from "@docspace/ui-kit/providers/theme";
-import type { TThemeProvider } from "@docspace/ui-kit/providers/theme";
-import { ApiProvider } from "@docspace/ui-kit/providers/api";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+} from "@onlyoffice/apps-ui-kit/providers/translation";
+import { ThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
+import type { TThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
+import { ApiProvider } from "@onlyoffice/apps-ui-kit/providers/api";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import StoreProvider from "./StoreProvider";

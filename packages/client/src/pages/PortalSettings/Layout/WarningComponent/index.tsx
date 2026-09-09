@@ -38,11 +38,11 @@ import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 
-import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
-import { Link } from "@docspace/ui-kit/components/link";
+import WarningComponent from "@onlyoffice/apps-ui-kit/components/navigation/sub-components/WarningComponent";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { formatCurrencyValue } from "@docspace/ui-kit/billing/utils/common";
-import { BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
+import { formatCurrencyValue } from "@onlyoffice/apps-ui-kit/billing/utils/common";
+import { BACKUP_SERVICE } from "@onlyoffice/apps-ui-kit/billing/constants";
 
 import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";

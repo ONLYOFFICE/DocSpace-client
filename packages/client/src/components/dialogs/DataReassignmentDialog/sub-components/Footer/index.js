@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 
 import styles from "SRC_DIR/components/dialogs/ChangePortalOwnerDialog/ChangePortalOwner.module.scss";
 

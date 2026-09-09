@@ -57,9 +57,9 @@ import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 
 import { isDesktop } from "@docspace/shared/utils";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
-import type { TRoomGroup } from "@docspace/ui-kit/components/filter/Filter.types";
+import type { TRoomGroup } from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
 
 import { showInfoPanel } from "SRC_DIR/helpers/info-panel";
 

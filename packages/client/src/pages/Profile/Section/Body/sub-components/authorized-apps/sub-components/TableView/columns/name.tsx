@@ -36,10 +36,10 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { TableCell } from "@docspace/ui-kit/components/table";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { TableCell } from "@onlyoffice/apps-ui-kit/components/table";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import styles from "../../../authorized-apps.module.scss";
 
 interface NameCellProps {

@@ -38,9 +38,9 @@
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { AsideHeader } from "@docspace/ui-kit/components/aside";
-import { Tabs } from "@docspace/ui-kit/components/tabs";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { AsideHeader } from "@onlyoffice/apps-ui-kit/components/aside";
+import { Tabs } from "@onlyoffice/apps-ui-kit/components/tabs";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 
 import { useAgentInfoPanelStore, type AgentInfoPanelView } from "../../_store";
 

@@ -35,7 +35,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { TableCell } from "@docspace/ui-kit/components/table";
+import { TableCell } from "@onlyoffice/apps-ui-kit/components/table";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import FileNameCell from "./FileNameCell";
@@ -46,7 +46,7 @@ import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
 } from "../StyledTable";
-import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { TAgent } from "@docspace/shared/api/ai/types";
 import { TTranslation } from "@docspace/shared/types";
 

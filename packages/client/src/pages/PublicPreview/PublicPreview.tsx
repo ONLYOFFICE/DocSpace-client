@@ -41,8 +41,8 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { ValidationStatus } from "@docspace/shared/enums";
 import { PublicRoomPasswordForm } from "@docspace/shared/pages/PublicRoom";
-import useFilesSettings from "@docspace/ui-kit/selectors/utils/hooks/useFilesSettings";
-import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import useFilesSettings from "@onlyoffice/apps-ui-kit/selectors/utils/hooks/useFilesSettings";
+import type { FilesSettingsDto } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 
 import PublicPreviewViewer from "./PublicPreview.viewer";
 import type { PublicPreviewLoaderProps } from "./PublicPreview.types";

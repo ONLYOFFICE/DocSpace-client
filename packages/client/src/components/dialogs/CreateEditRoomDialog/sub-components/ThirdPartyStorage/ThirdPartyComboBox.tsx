@@ -38,14 +38,14 @@ import { ReactSVG } from "react-svg";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { TFunction } from "i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { TConnectingStorage } from "@docspace/shared/api/files/types";
-import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
+import { getOAuthToken } from "@onlyoffice/apps-ui-kit/utils/get-oauth-token";
 
 import {
 	THIRD_PARTY_SERVICES_URL,

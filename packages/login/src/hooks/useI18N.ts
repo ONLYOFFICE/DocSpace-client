@@ -35,7 +35,7 @@
 
 import React, { useState } from "react";
 
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { TSettings } from "@docspace/shared/api/settings/types";
 

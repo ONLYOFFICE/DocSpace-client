@@ -83,7 +83,7 @@ import type {
   IUpdateRoomGroup,
 } from "SRC_DIR/components/dialogs/EditRoomGroupsDialog/EditRoomGroupsDialog.types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
-import type { TModel } from "@docspace/ui-kit/components/room-icon";
+import type { TModel } from "@onlyoffice/apps-ui-kit/components/room-icon";
 
 import type InfoPanelStore from "./InfoPanelStore";
 import type SelectedFolderStore from "./SelectedFolderStore";

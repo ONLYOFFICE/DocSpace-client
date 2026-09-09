@@ -35,9 +35,9 @@
 
 import { inject, observer } from "mobx-react";
 import type { Key } from "react";
-import InfoPanel from "@docspace/ui-kit/components/section/sub-components/InfoPanel";
-import SubInfoPanelBody from "@docspace/ui-kit/components/section/sub-components/InfoPanelBody";
-import SubInfoPanelHeader from "@docspace/ui-kit/components/section/sub-components/InfoPanelHeader";
+import InfoPanel from "@onlyoffice/apps-ui-kit/components/section/sub-components/InfoPanel";
+import SubInfoPanelBody from "@onlyoffice/apps-ui-kit/components/section/sub-components/InfoPanelBody";
+import SubInfoPanelHeader from "@onlyoffice/apps-ui-kit/components/section/sub-components/InfoPanelHeader";
 
 import {
   InfoPanelHeaderContent,

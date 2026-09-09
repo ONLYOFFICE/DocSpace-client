@@ -35,7 +35,7 @@
 
 import React from "react";
 
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 
 import BookmarksProps from "./Bookmarks.props";
 import styles from "./Bookmarks.module.scss";

@@ -37,10 +37,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
-import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
+import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 
-import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
+import type { QuickActionItem } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import {
   BlankPdfIcon,
   CreateDocumentIcon,
@@ -55,9 +55,9 @@ import {
   CreateFromTemplateIcon,
   CreateAgentIcon,
   AIChatIcon,
-} from "@docspace/ui-kit/components/quick-actions/icons";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { RoomsType } from "@docspace/ui-kit/enums";
+} from "@onlyoffice/apps-ui-kit/components/quick-actions/icons";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 import { Events } from "@docspace/shared/enums";
 import { getConstName } from "@docspace/shared/constants/consts";
 

@@ -39,10 +39,10 @@ import { useNavigate, useLocation } from "react-router";
 import elementResizeDetectorMaker from "element-resize-detector";
 import React, { useEffect, useRef, useCallback, useMemo, use } from "react";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 
-import { TableContainer, TableBody } from "@docspace/ui-kit/components/table";
-import { Context } from "@docspace/ui-kit/utils/context";
+import { TableContainer, TableBody } from "@onlyoffice/apps-ui-kit/components/table";
+import { Context } from "@onlyoffice/apps-ui-kit/utils/context";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";

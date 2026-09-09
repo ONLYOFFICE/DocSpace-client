@@ -44,7 +44,7 @@ import type {
 } from "@docspace/shared/api/files/types";
 import type { TGetRooms, TRoom } from "@docspace/shared/api/rooms/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
-import { getFilterParams } from "@docspace/ui-kit/selectors/Files/FilesSelector.utils";
+import { getFilterParams } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.utils";
 
 import { PAGE_COUNT } from "@/utils/constants";
 

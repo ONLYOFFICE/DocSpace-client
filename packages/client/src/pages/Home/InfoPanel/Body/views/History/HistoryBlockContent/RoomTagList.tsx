@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Tag } from "@docspace/ui-kit/components/tag";
+import { Tag } from "@onlyoffice/apps-ui-kit/components/tag";
 
 import {
   FeedAction,

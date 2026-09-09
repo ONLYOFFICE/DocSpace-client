@@ -38,17 +38,17 @@ import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { size } from "@docspace/shared/utils";
-import type { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
-import type { TData } from "@docspace/ui-kit/components/toast";
+import type { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import type { TData } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { LearnMoreWrapper } from "../StyledSecurity";
 import styles from "./devToolsAccess.module.scss";

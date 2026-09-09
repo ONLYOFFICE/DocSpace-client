@@ -41,12 +41,12 @@ import LinkIcon from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import ExternalLinkWarningIconUrl from "PUBLIC_DIR/images/external-link-warning.react.svg?url";
 
 import { RowSkeleton } from "../../../skeletons/share";
-import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+import { useIsMobile } from "@onlyoffice/apps-ui-kit/hooks/use-is-mobile";
 import type { TFileLink } from "../../../api/files/types";
 
-import type { TOption } from "@docspace/ui-kit/components/combobox";
-import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { getAccessTypeOptions, getLinkAccessRight } from "../Share.helpers";
 import type { LinkRowProps } from "../Share.types";

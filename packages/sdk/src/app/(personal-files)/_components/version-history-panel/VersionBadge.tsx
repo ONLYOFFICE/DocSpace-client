@@ -37,7 +37,7 @@ import React from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import VersionSvg from "PUBLIC_DIR/images/versionrevision_active.react.svg";
 
 import styles from "./VersionBadge.module.scss";

@@ -35,7 +35,7 @@
 
 import type { TUser } from "../../api/people/types";
 import type FirebaseHelper from "../../utils/firebase";
-import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
+import type { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme";
 import type { DeviceType } from "../../enums";
 
 export type ErrorUnavailableProps = Record<string, never>;

@@ -37,10 +37,10 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
-import { RecomendedModel } from "@docspace/ui-kit/ai-agent/recomended-model";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { RecomendedModel } from "@onlyoffice/apps-ui-kit/ai-agent/recomended-model";
 import {
   isChatCapableProfile,
   OPENROUTER_AI_PROFILE_PROVIDER_TYPE,

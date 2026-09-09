@@ -42,8 +42,8 @@ import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.a
 import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
-import { Text } from "@docspace/ui-kit/components";
-import AIFeaturesDialog from "@docspace/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components";
+import AIFeaturesDialog from "@onlyoffice/apps-ui-kit/billing/services/panels/ai-service/AIFeaturesDialog";
 
 import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
 import ClientSimpleTopUpDialog from "./sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";

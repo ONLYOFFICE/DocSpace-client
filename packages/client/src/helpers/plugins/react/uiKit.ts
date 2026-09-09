@@ -37,4 +37,4 @@
 // no portal context and falls back to light LTR. Re-exported whole, so all of it
 // is de-facto plugin API — narrow this module if that coupling has to be cut.
 
-export * from "@docspace/ui-kit";
+export * from "@onlyoffice/apps-ui-kit";

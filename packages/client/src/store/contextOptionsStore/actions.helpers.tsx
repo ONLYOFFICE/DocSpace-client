@@ -39,15 +39,15 @@ import copy from "copy-to-clipboard";
 import { isMobile } from "react-device-detect";
 import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { copyShareLink as copyToBuffer } from "@docspace/shared/utils/copy";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
-import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
-import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
+import { getOAuthToken } from "@onlyoffice/apps-ui-kit/utils/get-oauth-token";
+import { OPERATIONS_NAME } from "@onlyoffice/apps-ui-kit/constants";
 import {
   AnalyticsEvents,
   RoomsType,

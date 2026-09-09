@@ -36,7 +36,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import {
 	getEntityMcpServers,
@@ -44,7 +44,7 @@ import {
 } from "@docspace/shared/api/ai";
 import { getServerIconUrl } from "@docspace/shared/utils";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import { ServerType } from "@docspace/shared/api/ai/enums";
 import { getBrandName } from "@docspace/shared/constants/brands";
 

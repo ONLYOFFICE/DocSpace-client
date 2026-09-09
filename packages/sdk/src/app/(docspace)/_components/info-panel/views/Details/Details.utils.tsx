@@ -62,8 +62,8 @@
 import React from "react";
 import { decode } from "he";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import {
   TagManagement,

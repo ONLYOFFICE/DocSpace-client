@@ -29,7 +29,7 @@
       "path": "packages/shared"
     },
     {
-      "name": "📦 @docspace/ui-kit",
+      "name": "📦 @onlyoffice/apps-ui-kit",
       "path": "libs/ui-kit"
     }
   ],

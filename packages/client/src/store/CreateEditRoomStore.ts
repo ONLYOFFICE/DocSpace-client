@@ -36,10 +36,10 @@ import { makeAutoObservable, when } from "mobx";
 import isEqual from "lodash/isEqual";
 import { TFunction } from "i18next";
 
-import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
+import { OPERATIONS_NAME } from "@onlyoffice/apps-ui-kit/constants";
 
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { createFile } from "@docspace/shared/api/files";
@@ -66,7 +66,7 @@ import { startDbSync } from "@docspace/shared/api/rooms";
 import { DbSyncService } from "@docspace/shared/services/db-sync.service";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
+import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import FilesStore from "./FilesStore";

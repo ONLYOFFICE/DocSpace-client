@@ -39,21 +39,21 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ComboBox,
   ComboBoxSize,
   type TOption,
-} from "@docspace/ui-kit/components/combobox";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import CheckIcon from "@docspace/ui-kit/assets/check.react.svg";
-import DangerIcon from "@docspace/ui-kit/assets/danger.toast.react.svg";
+import CheckIcon from "@onlyoffice/apps-ui-kit/assets/check.react.svg";
+import DangerIcon from "@onlyoffice/apps-ui-kit/assets/danger.toast.react.svg";
 
-import { useApi, useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { useApi, useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import {
   cleanupOrphanAgents,
   ensureWizardAgent,

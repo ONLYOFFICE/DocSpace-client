@@ -36,11 +36,11 @@
 import React from "react";
 import { match } from "ts-pattern";
 
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { InputType, TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components";
 
 import styles from "./ExternalDbModal.module.scss";
 import type { ExternalDbFieldProps } from "./ExternalDbModal.types";

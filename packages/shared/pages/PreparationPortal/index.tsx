@@ -36,12 +36,12 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
-import { Text } from "@docspace/ui-kit/components/text";
-import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
+import ErrorContainer from "@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
 import { getRestoreProgress } from "../../api/portal";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
-import { PreparationPortalProgress } from "@docspace/ui-kit/components/progress-bar";
+import { PreparationPortalProgress } from "@onlyoffice/apps-ui-kit/components/progress-bar";
 
 import { clearLocalStorage, returnToPortal } from "./PreparationPortal.utils";
 import { IPreparationPortal } from "./PreparationPortal.types";

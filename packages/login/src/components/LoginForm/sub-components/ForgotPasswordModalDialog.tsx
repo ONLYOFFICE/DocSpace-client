@@ -36,21 +36,21 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { EmailInput } from "@docspace/ui-kit/components/email-input";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { EmailInput } from "@onlyoffice/apps-ui-kit/components/email-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { toastr } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { sendInstructionsToChangePassword } from "@docspace/shared/api/people";
-import { TValidate } from "@docspace/ui-kit/components/email-input";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { ButtonKeys } from "@docspace/shared/enums";
 import { useCaptcha } from "@docspace/shared/hooks/useCaptcha";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import Captcha from "@docspace/shared/components/captcha";
 
 import { ForgotPasswordModalDialogProps, TError } from "@/types";

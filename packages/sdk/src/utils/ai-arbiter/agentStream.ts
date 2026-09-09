@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { useApi } from "@docspace/ui-kit/ai-agent/providers";
-import { getOnlyofficeFileType } from "@docspace/ui-kit/ai-agent/providers/files/file-type";
+import type { useApi } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { getOnlyofficeFileType } from "@onlyoffice/apps-ui-kit/ai-agent/providers/files/file-type";
 
 import type { AttachedFile, SseEvent } from "@/types/arbiter";
 

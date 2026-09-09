@@ -36,7 +36,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
+import ErrorContainer from "@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer";
 import styles from "./Errors.module.scss";
 
 const ErrorUnavailable = () => {

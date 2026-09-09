@@ -34,7 +34,7 @@
  */
 
 import React, { memo, useCallback } from "react";
-import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
+import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
 import AutoSizer from "react-virtualized-auto-sizer";
 import InfiniteLoader from "react-window-infinite-loader";
 import { areEqual, FixedSizeList as List } from "react-window";
@@ -45,7 +45,7 @@ import { TGroupMemberInvitedInRoom } from "../../../../api/groups/types";
 import {
   Scrollbar,
   ScrollbarProps,
-} from "@docspace/ui-kit/components/scrollbar";
+} from "@onlyoffice/apps-ui-kit/components/scrollbar";
 
 import GroupMember from "../GroupMember";
 

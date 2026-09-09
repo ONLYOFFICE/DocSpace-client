@@ -37,8 +37,8 @@ import { useEffect, useState } from "react";
 
 import { isDesktop } from "../../utils";
 
-import { RowsSkeleton } from "@docspace/ui-kit/components/rows";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RowsSkeleton } from "@onlyoffice/apps-ui-kit/components/rows";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 import styles from "./Profile.module.scss";
 import { ProfileFooterLoaderProps } from "./Profile.types";

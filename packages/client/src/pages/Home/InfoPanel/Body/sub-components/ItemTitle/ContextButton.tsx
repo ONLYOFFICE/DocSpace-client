@@ -46,11 +46,11 @@ import {
   ContextMenu,
   ContextMenuRefType,
   HeaderType,
-} from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/ui-kit/components/context-menu-button";
+} from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 
 import ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";

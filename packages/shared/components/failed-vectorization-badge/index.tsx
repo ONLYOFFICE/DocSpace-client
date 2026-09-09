@@ -37,11 +37,11 @@ import { isMobile as isMobileDevice } from "react-device-detect";
 import React, { useId } from "react";
 import { useTranslation } from "react-i18next";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { classNames } from "../../utils";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import ButtonAlertIconSvgUrl from "PUBLIC_DIR/images/button.alert.react.svg?url";
 import LoadErrorIconSvgUrl from "PUBLIC_DIR/images/load.error.react.svg?url";
 

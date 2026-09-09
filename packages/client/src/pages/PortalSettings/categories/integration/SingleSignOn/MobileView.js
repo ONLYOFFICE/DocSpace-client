@@ -38,7 +38,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./MobileView.module.scss";
 import { useNavigate } from "react-router";
 
-import { CategoryItem } from "@docspace/ui-kit/components/category-item";
+import { CategoryItem } from "@onlyoffice/apps-ui-kit/components/category-item";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 

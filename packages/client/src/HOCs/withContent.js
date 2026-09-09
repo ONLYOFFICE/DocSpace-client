@@ -43,8 +43,8 @@ import {
 } from "@docspace/shared/enums";
 // import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 import config from "PACKAGE_FILE";
 

@@ -36,7 +36,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { autorun } from "mobx";
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn(), info: vi.fn() },
 }));
 
@@ -50,7 +50,7 @@ vi.mock("@docspace/shared/utils/openUrlWithExportToast", () => ({
 
 // The real pollUntil sleeps between attempts; the store's contract is only that
 // it keeps calling `check` until it returns true or the signal aborts.
-vi.mock("@docspace/ui-kit/billing/utils/stripe-flow", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/billing/utils/stripe-flow", () => ({
   pollUntil: vi.fn(
     async (check: () => Promise<boolean>, signal: AbortSignal) => {
       for (let attempt = 0; attempt < 10; attempt += 1) {
@@ -61,8 +61,8 @@ vi.mock("@docspace/ui-kit/billing/utils/stripe-flow", () => ({
   ),
 }));
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { pollUntil } from "@docspace/ui-kit/billing/utils/stripe-flow";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { pollUntil } from "@onlyoffice/apps-ui-kit/billing/utils/stripe-flow";
 import { openUrlWithExportToast } from "@docspace/shared/utils/openUrlWithExportToast";
 import type { TDocumentBuilderTask } from "@docspace/shared/api/files/types";
 

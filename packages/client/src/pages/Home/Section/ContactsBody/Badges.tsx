@@ -36,12 +36,12 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
-import { useTheme } from "@docspace/ui-kit/context";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context";
 
 import Filter from "@docspace/shared/api/people/filter";
 import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { Badge } from "@docspace/ui-kit/components/badge";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 
 import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
 

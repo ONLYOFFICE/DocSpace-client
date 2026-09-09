@@ -35,23 +35,23 @@
 
 import { useRef, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { decode } from "he";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
 	ContextMenuButton,
 	ContextMenuButtonDisplayType,
-} from "@docspace/ui-kit/components/context-menu-button";
+} from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import {
 	ContextMenu,
 	ContextMenuRefType,
 	HeaderType,
-} from "@docspace/ui-kit/components";
-import { Avatar, AvatarSize } from "@docspace/ui-kit/components/avatar";
-import { Badge } from "@docspace/ui-kit/components/badge";
+} from "@onlyoffice/apps-ui-kit/components";
+import { Avatar, AvatarSize } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";

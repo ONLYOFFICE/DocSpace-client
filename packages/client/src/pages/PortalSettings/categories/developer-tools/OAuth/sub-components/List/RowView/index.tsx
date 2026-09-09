@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 
-import { RowContainer } from "@docspace/ui-kit/components/rows";
+import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import { OAuthRow } from "./Row";
 

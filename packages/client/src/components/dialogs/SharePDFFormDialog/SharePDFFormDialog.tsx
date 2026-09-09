@@ -39,9 +39,9 @@ import { observer, inject } from "mobx-react";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Events, RoomsType } from "@docspace/shared/enums";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 
 import type {
   EventWithPayload,

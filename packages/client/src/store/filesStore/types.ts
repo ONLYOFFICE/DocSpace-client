@@ -61,7 +61,7 @@ import type {
   TRoomSecurity,
   TWatermark,
 } from "@docspace/shared/api/rooms/types";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 
 // `pdfViewer` exists in public/scripts/config.json but is
 // missing from the duplicated Window.ClientConfig declarations

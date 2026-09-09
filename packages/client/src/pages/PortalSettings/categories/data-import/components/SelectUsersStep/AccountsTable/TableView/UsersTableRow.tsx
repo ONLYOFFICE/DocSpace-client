@@ -34,10 +34,10 @@
  */
 
 import React from "react";
-import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
+import { TableRow, TableCell } from "@onlyoffice/apps-ui-kit/components/table";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { UsersTableRowProps } from "../../../../types";
 import styles from "../../../../StyledDataImport.module.scss";
 

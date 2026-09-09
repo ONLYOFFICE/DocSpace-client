@@ -43,8 +43,8 @@ import { useSearchParams } from "next/navigation";
 
 import Navigation, {
   TNavigationItem,
-} from "@docspace/ui-kit/components/navigation";
-import { TableGroupMenu } from "@docspace/ui-kit/components/table";
+} from "@onlyoffice/apps-ui-kit/components/navigation";
+import { TableGroupMenu } from "@onlyoffice/apps-ui-kit/components/table";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 import { FolderType, DeviceType } from "@docspace/shared/enums";
 import useDeviceType from "@/hooks/useDeviceType";

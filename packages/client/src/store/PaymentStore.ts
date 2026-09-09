@@ -48,14 +48,14 @@ import {
   setServiceState,
   getWalletBalance,
 } from "@docspace/shared/api/portal";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TTranslation } from "@docspace/shared/types";
-import { type TData } from "@docspace/ui-kit/components/toast";
+import { type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   TBalance,
   TAutoTopUpSettings,
@@ -70,9 +70,9 @@ import {
   AI_ENUM,
   AI_SEARCH_ENUM,
   BACKUP_SERVICE,
-} from "@docspace/ui-kit/billing/constants";
-import { applyServiceQuotaToMap } from "@docspace/ui-kit/billing/utils/parsers";
-import { formatCurrencyValue } from "@docspace/ui-kit/billing/utils/common";
+} from "@onlyoffice/apps-ui-kit/billing/constants";
+import { applyServiceQuotaToMap } from "@onlyoffice/apps-ui-kit/billing/utils/parsers";
+import { formatCurrencyValue } from "@onlyoffice/apps-ui-kit/billing/utils/common";
 import {
   getCardLinkedOnFreeTariff,
   getCardLinkedOnNonProfit,
@@ -82,7 +82,7 @@ import {
   getWalletBalanceAmount,
   getWalletBalanceCurrency,
   formatPaymentDate,
-} from "@docspace/ui-kit/billing/utils/paymentSelectors";
+} from "@onlyoffice/apps-ui-kit/billing/utils/paymentSelectors";
 import type { DateTime } from "luxon";
 
 import { PersistenceKeys, removePersisted } from "./utils/persistence";

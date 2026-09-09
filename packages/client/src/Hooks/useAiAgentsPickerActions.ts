@@ -39,7 +39,7 @@ import { getAIAgent, getAIAgents } from "@docspace/shared/api/ai";
 import type { TAgent } from "@docspace/shared/api/ai/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
-import type { ProfilePickerAction } from "@docspace/ui-kit/ai-agent/providers";
+import type { ProfilePickerAction } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 // TODO: temporary hardcoded label, no i18n at this stage by design.
 const CHOOSE_AI_AGENT_LABEL = "Choose AI Agent";

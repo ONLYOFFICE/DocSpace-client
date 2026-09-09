@@ -39,12 +39,12 @@ import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url
 
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { TableContainer, TableBody } from "@docspace/ui-kit/components/table";
+import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { TableContainer, TableBody } from "@onlyoffice/apps-ui-kit/components/table";
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 
 import UsersTableRow from "./UsersTableRow";

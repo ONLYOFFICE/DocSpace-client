@@ -38,13 +38,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "@docspace/ui-kit";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
+import { useTheme } from "@onlyoffice/apps-ui-kit";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
-} from "@docspace/ui-kit/ai-agent/providers/themes";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import type { TUser } from "@docspace/shared/api/people/types";
 
 type AiAgentProvidersProps = React.ComponentProps<typeof AiAgentProviders>;

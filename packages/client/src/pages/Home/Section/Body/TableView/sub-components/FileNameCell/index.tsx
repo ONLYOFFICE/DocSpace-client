@@ -34,10 +34,10 @@
  */
 
 import React, { ChangeEvent, memo, useCallback, useMemo } from "react";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { classNames } from "@docspace/shared/utils";
-import { TableCell } from "@docspace/ui-kit/components/table";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { TableCell } from "@onlyoffice/apps-ui-kit/components/table";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
 
 import { FileName } from "./FileNameCell.helpers";

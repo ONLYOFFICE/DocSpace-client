@@ -35,8 +35,8 @@
 
 import React from "react";
 import { Trans } from "react-i18next";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import type { SupportLinksProps } from "./ExternalDbModal.types";
 import styles from "./ExternalDbModal.module.scss";

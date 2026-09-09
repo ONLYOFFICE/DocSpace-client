@@ -37,7 +37,7 @@ import { type FC } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { startOf } from "@docspace/ui-kit/utils/date";
+import { startOf } from "@onlyoffice/apps-ui-kit/utils/date";
 import type { TFolderLogReportDateRange } from "@docspace/shared/api/files/types";
 
 import { ReportType } from "SRC_DIR/store/DocumentBuilderReportStore";

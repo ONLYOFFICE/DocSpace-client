@@ -100,48 +100,15 @@ importers:
 
   libs/ui-kit:
     dependencies:
-      '@anthropic-ai/sdk':
-        specifier: 0.60.0
-        version: 0.60.0
-      '@assistant-ui/react-markdown':
-        specifier: 0.11.10
-        version: 0.11.10(@assistant-ui/react@0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8)))(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)
       '@babel/runtime':
         specifier: 7.28.3
         version: 7.28.3
-      '@codemirror/lang-json':
-        specifier: 6.0.2
-        version: 6.0.2
       '@floating-ui/dom':
         specifier: 1.6.13
         version: 1.6.13
-      '@google/genai':
-        specifier: 1.52.0
-        version: 1.52.0(supports-color@8.1.1)
-      '@mistralai/mistralai':
-        specifier: 1.15.1
-        version: 1.15.1
       '@onlyoffice/docspace-api-sdk':
         specifier: ^3.7.0
         version: 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
-      '@onlyoffice/document-editor-react':
-        specifier: 2.1.1
-        version: 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@radix-ui/react-dialog':
-        specifier: 1.1.15
-        version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@radix-ui/react-switch':
-        specifier: 1.2.6
-        version: 1.2.6(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@radix-ui/react-tabs':
-        specifier: 1.1.13
-        version: 1.1.13(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@radix-ui/react-tooltip':
-        specifier: 1.2.8
-        version: 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@socket.io/component-emitter':
-        specifier: 3.1.2
-        version: 3.1.2
       '@types/node':
         specifier: 24.10.7
         version: 24.10.7
@@ -151,21 +118,12 @@ importers:
       '@types/react-text-mask':
         specifier: 5.4.14
         version: 5.4.14
-      axios:
-        specifier: '>=1.15.2'
-        version: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
-      class-variance-authority:
-        specifier: 0.7.1
-        version: 0.7.1
       classnames:
         specifier: 2.5.1
         version: 2.5.1
       cnbuilder:
         specifier: 3.1.0
         version: 3.1.0
-      codemirror:
-        specifier: 6.0.2
-        version: 6.0.2
       copy-to-clipboard:
         specifier: 3.3.3
         version: 3.3.3
@@ -185,26 +143,14 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       i18next:
-        specifier: 23.7.19
+        specifier: ^23.7.19
         version: 23.7.19
-      katex:
-        specifier: ^0.16.47
-        version: 0.16.47
       lodash:
         specifier: 4.18.1
         version: 4.18.1
       luxon:
         specifier: 3.7.2
         version: 3.7.2
-      mobx:
-        specifier: 6.16.1
-        version: 6.16.1
-      mobx-react:
-        specifier: 9.2.2
-        version: 9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      openai:
-        specifier: 5.23.2
-        version: 5.23.2(ws@8.21.3)(zod@4.5.4)
       react-autosize-textarea:
         specifier: 7.1.0
         version: 7.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -233,23 +179,11 @@ importers:
         specifier: 3.4.7
         version: 3.4.7(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-i18next:
-        specifier: 14.0.1
+        specifier: ^14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      react-markdown:
-        specifier: ^10.1.0
-        version: 10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1)
-      react-router:
-        specifier: 8.3.0
-        version: 8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      react-shiki:
-        specifier: 0.8.0
-        version: 0.8.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)
       react-svg:
         specifier: 16.1.34
         version: 16.1.34(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      react-syntax-highlighter:
-        specifier: ^16.1.1
-        version: 16.1.1(react@19.2.8)
       react-text-mask:
         specifier: 5.5.0
         version: 5.5.0(react@19.2.8)
@@ -265,33 +199,12 @@ importers:
       react-virtualized:
         specifier: ^9.22.6
         version: 9.22.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      react-virtualized-auto-sizer:
-        specifier: 1.0.24
-        version: 1.0.24(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-window:
         specifier: 1.8.10
         version: 1.8.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-window-infinite-loader:
         specifier: 1.0.9
         version: 1.0.9(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      rehype-katex:
-        specifier: ^7.0.1
-        version: 7.0.1
-      rehype-raw:
-        specifier: ^7.0.0
-        version: 7.0.0
-      remark-gfm:
-        specifier: 4.0.1
-        version: 4.0.1(supports-color@8.1.1)
-      remark-math:
-        specifier: ^6.0.0
-        version: 6.0.0(supports-color@8.1.1)
-      socket.io-client:
-        specifier: 4.8.3
-        version: 4.8.3(supports-color@8.1.1)
-      tailwind-merge:
-        specifier: 3.6.0
-        version: 3.6.0
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -302,18 +215,51 @@ importers:
         specifier: 2.5.0
         version: 2.5.0
     devDependencies:
+      '@anthropic-ai/sdk':
+        specifier: 0.60.0
+        version: 0.60.0
+      '@assistant-ui/react':
+        specifier: ^0.11.58
+        version: 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
+      '@assistant-ui/react-markdown':
+        specifier: 0.11.10
+        version: 0.11.10(@assistant-ui/react@0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8)))(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)
       '@babel/core':
         specifier: '>=7.29.6 <8'
         version: 7.29.7(supports-color@8.1.1)
       '@biomejs/biome':
         specifier: 2.4.16
         version: 2.4.16
+      '@codemirror/lang-json':
+        specifier: 6.0.2
+        version: 6.0.2
+      '@google/genai':
+        specifier: 1.52.0
+        version: 1.52.0(supports-color@8.1.1)
+      '@mistralai/mistralai':
+        specifier: 1.15.1
+        version: 1.15.1
       '@onlyoffice/ai-chat':
         specifier: file:onlyoffice-ai-chat-0.5.82.tgz
         version: file:libs/ui-kit/onlyoffice-ai-chat-0.5.82.tgz(df0f92bb32183b734d32af4b491fc1b6)
+      '@onlyoffice/document-editor-react':
+        specifier: 2.1.1
+        version: 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@playwright/test':
         specifier: 1.58.1
         version: 1.58.1
+      '@radix-ui/react-dialog':
+        specifier: 1.1.15
+        version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@radix-ui/react-switch':
+        specifier: 1.2.6
+        version: 1.2.6(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@radix-ui/react-tabs':
+        specifier: 1.1.13
+        version: 1.1.13(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@radix-ui/react-tooltip':
+        specifier: 1.2.8
+        version: 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rollup/plugin-commonjs':
         specifier: ^28.0.9
         version: 28.0.9(rollup@4.63.1)
@@ -326,6 +272,9 @@ importers:
       '@rollup/plugin-typescript':
         specifier: ^12.3.0
         version: 12.3.0(rollup@4.63.1)(tslib@2.8.1)(typescript@5.9.3)
+      '@socket.io/component-emitter':
+        specifier: 3.1.2
+        version: 3.1.2
       '@storybook/addon-docs':
         specifier: 10.2.8
         version: 10.2.8(@types/react@19.2.10)(esbuild@0.28.2)(rollup@4.63.1)(storybook@10.6.0(@types/react@19.2.10)(prettier@3.9.6)(react@19.2.8))(vite@8.2.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.0))(webpack@5.110.3(cssnano@7.1.9(postcss@8.5.26))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.26))
@@ -386,12 +335,36 @@ importers:
       '@vueless/storybook-dark-mode':
         specifier: ^10.0.8
         version: 10.0.8(storybook@10.6.0(@types/react@19.2.10)(prettier@3.9.6)(react@19.2.8))
+      assistant-stream:
+        specifier: ^0.2.47
+        version: 0.2.47
+      axios:
+        specifier: '>=1.15.2'
+        version: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
+      class-variance-authority:
+        specifier: 0.7.1
+        version: 0.7.1
+      codemirror:
+        specifier: 6.0.2
+        version: 6.0.2
       jsdom:
         specifier: ^27.4.0
         version: 27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1)
+      katex:
+        specifier: ^0.16.47
+        version: 0.16.47
       lefthook:
         specifier: ^2.1.10
         version: 2.1.12
+      mobx:
+        specifier: 6.16.1
+        version: 6.16.1
+      mobx-react:
+        specifier: 9.2.2
+        version: 9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      openai:
+        specifier: 5.23.2
+        version: 5.23.2(ws@8.21.3)(zod@4.5.4)
       postcss:
         specifier: '>=8.5.10'
         version: 8.5.26
@@ -404,6 +377,30 @@ importers:
       react-dom:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
+      react-markdown:
+        specifier: ^10.1.0
+        version: 10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1)
+      react-router:
+        specifier: 8.3.0
+        version: 8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react-shiki:
+        specifier: 0.8.0
+        version: 0.8.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)
+      react-syntax-highlighter:
+        specifier: ^16.1.1
+        version: 16.1.1(react@19.2.8)
+      rehype-katex:
+        specifier: ^7.0.1
+        version: 7.0.1
+      rehype-raw:
+        specifier: ^7.0.0
+        version: 7.0.0
+      remark-gfm:
+        specifier: 4.0.1
+        version: 4.0.1(supports-color@8.1.1)
+      remark-math:
+        specifier: ^6.0.0
+        version: 6.0.0(supports-color@8.1.1)
       rollup:
         specifier: ^4.62.4
         version: 4.63.1
@@ -422,9 +419,15 @@ importers:
       serve:
         specifier: 14.2.5
         version: 14.2.5(supports-color@8.1.1)
+      socket.io-client:
+        specifier: 4.8.3
+        version: 4.8.3(supports-color@8.1.1)
       storybook:
         specifier: ^10.5.5
         version: 10.6.0(@types/react@19.2.10)(prettier@3.9.6)(react@19.2.8)
+      tailwind-merge:
+        specifier: 3.6.0
+        version: 3.6.0
       tslib:
         specifier: 2.8.1
         version: 2.8.1
@@ -449,7 +452,7 @@ importers:
       '@docspace/shared':
         specifier: workspace:*
         version: link:../shared
-      '@docspace/ui-kit':
+      '@onlyoffice/apps-ui-kit':
         specifier: workspace:*
         version: link:../../libs/ui-kit
       '@onlyoffice/docspace-sdk-js':
@@ -720,7 +723,7 @@ importers:
       '@docspace/shared':
         specifier: workspace:*
         version: link:../shared
-      '@docspace/ui-kit':
+      '@onlyoffice/apps-ui-kit':
         specifier: workspace:*
         version: link:../../libs/ui-kit
       classnames:
@@ -838,7 +841,7 @@ importers:
       '@docspace/shared':
         specifier: workspace:*
         version: link:../shared
-      '@docspace/ui-kit':
+      '@onlyoffice/apps-ui-kit':
         specifier: workspace:*
         version: link:../../libs/ui-kit
       classnames:
@@ -956,7 +959,7 @@ importers:
       '@docspace/shared':
         specifier: workspace:*
         version: link:../shared
-      '@docspace/ui-kit':
+      '@onlyoffice/apps-ui-kit':
         specifier: workspace:*
         version: link:../../libs/ui-kit
       axios:
@@ -1095,7 +1098,7 @@ importers:
       '@docspace/shared':
         specifier: workspace:*
         version: link:../shared
-      '@docspace/ui-kit':
+      '@onlyoffice/apps-ui-kit':
         specifier: workspace:*
         version: link:../../libs/ui-kit
       '@tanstack/react-query':
@@ -1261,9 +1264,6 @@ importers:
       '@babel/runtime':
         specifier: 7.28.3
         version: 7.28.3
-      '@docspace/ui-kit':
-        specifier: workspace:*
-        version: link:../../libs/ui-kit
       '@floating-ui/dom':
         specifier: 1.6.13
         version: 1.6.13
@@ -1279,6 +1279,9 @@ importers:
       '@noble/hashes':
         specifier: ^2.2.0
         version: 2.4.0
+      '@onlyoffice/apps-ui-kit':
+        specifier: workspace:*
+        version: link:../../libs/ui-kit
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.8(react@19.2.8))(react@19.2.8)

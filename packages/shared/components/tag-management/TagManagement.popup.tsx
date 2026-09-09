@@ -45,17 +45,17 @@ import {
   shift,
 } from "@floating-ui/dom";
 
-import { useClickOutside } from "@docspace/ui-kit/utils/use-click-outside";
-import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
+import { useClickOutside } from "@onlyoffice/apps-ui-kit/utils/use-click-outside";
+import { useEventListener } from "@onlyoffice/apps-ui-kit/hooks/useEventListener";
 
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
-import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
-import { useKeyboardAwareSheet } from "@docspace/ui-kit/hooks/useKeyboardAwareSheet";
-import { isReliableAndroidViewport } from "@docspace/ui-kit/utils/device";
+import { useIsMobile } from "@onlyoffice/apps-ui-kit/hooks/use-is-mobile";
+import { useKeyboardAwareSheet } from "@onlyoffice/apps-ui-kit/hooks/useKeyboardAwareSheet";
+import { isReliableAndroidViewport } from "@onlyoffice/apps-ui-kit/utils/device";
 
 import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementFilter } from "./TagManagement.filter";

@@ -38,8 +38,8 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Events } from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import type { EmptyViewOptionsType } from "@docspace/shared/components/empty-view";

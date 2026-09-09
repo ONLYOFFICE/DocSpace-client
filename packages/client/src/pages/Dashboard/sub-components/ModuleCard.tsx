@@ -62,9 +62,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import TickSvg from "PUBLIC_DIR/images/icons/12/tick.svg";
 import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";

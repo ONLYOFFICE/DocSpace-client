@@ -36,7 +36,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
-import { BillingOverview } from "@docspace/ui-kit/billing";
+import { BillingOverview } from "@onlyoffice/apps-ui-kit/billing";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import ConfirmWrapper from "SRC_DIR/components/ConfirmWrapper";

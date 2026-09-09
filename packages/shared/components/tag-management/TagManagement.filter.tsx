@@ -43,15 +43,15 @@ import { Trans, useTranslation } from "react-i18next";
 
 import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 
-import { Tag } from "@docspace/ui-kit/components/tag";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Tag } from "@onlyoffice/apps-ui-kit/components/tag";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/ui-kit/components/text-input";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useIsMobile } from "@onlyoffice/apps-ui-kit/hooks/use-is-mobile";
 
 import { removeEmojiCharacters } from "../../utils/removeEmojiCharacters";
 

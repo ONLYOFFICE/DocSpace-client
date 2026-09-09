@@ -62,8 +62,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
-import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
+import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
+import type { QuickActionItem } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import { getConstName } from "@docspace/shared/constants/consts";
 import {
   AIChatIcon,
@@ -71,7 +71,7 @@ import {
   CreateDocumentIcon,
   CreatePresentationIcon,
   CreateSpreadsheetIcon,
-} from "@docspace/ui-kit/components/quick-actions/icons";
+} from "@onlyoffice/apps-ui-kit/components/quick-actions/icons";
 
 import { GuestRestrictionTooltip } from "../sub-components/GuestRestrictionTooltip";
 import { makeCreateUrl, NEW_FILE_NAMES } from "../utils";

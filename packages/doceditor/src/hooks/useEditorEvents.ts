@@ -63,8 +63,8 @@ import {
   getProfileAssignments,
   getWebSearchConfigured,
 } from "@docspace/shared/api/ai";
-// import { DEFAULT_SERVER_API_ROUTES } from "@docspace/ui-kit/ai-agent/providers";
-// import type { ServerAPIConfig } from "@docspace/ui-kit/ai-agent/providers";
+// import { DEFAULT_SERVER_API_ROUTES } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+// import type { ServerAPIConfig } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import {
   CREATED_FORM_KEY,
@@ -81,8 +81,8 @@ import {
   FormFillingManageAction,
   StartFillingMode,
 } from "@docspace/shared/enums";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { FolderType } from "@docspace/ui-kit/enums";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
+import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 import type { Nullable } from "@docspace/shared/types";
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 

@@ -40,12 +40,12 @@ import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { ADS_TIMEOUT } from "SRC_DIR/helpers/filesConstants";
-import { AnalyticsEvents } from "@docspace/ui-kit/enums";
+import { AnalyticsEvents } from "@onlyoffice/apps-ui-kit/enums";
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getBannerAttribute } from "@docspace/shared/utils";
-import { SnackBar } from "@docspace/ui-kit/components/snackbar";
+import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";

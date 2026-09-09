@@ -34,7 +34,7 @@
  */
 
 import React from "react";
-import { Row } from "@docspace/ui-kit/components/rows";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
 import HistoryContent from "./HistoryContent";
 
 export const HistoryUserRow = ({ item, sectionWidth }) => {

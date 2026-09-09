@@ -39,7 +39,7 @@ import classNames from "classnames";
 import {
 	RectangleSkeleton,
 	RectangleSkeletonProps,
-} from "@docspace/ui-kit/components/rectangle";
+} from "@onlyoffice/apps-ui-kit/components/rectangle";
 import styles from "./Row.module.scss";
 
 interface RowLoaderProps extends RectangleSkeletonProps {

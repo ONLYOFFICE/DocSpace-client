@@ -38,7 +38,7 @@ import { useTranslation } from "react-i18next";
 import RoomType from "@docspace/shared/components/room-type";
 import { getCreateRoomTypes } from "@docspace/shared/utils/rooms";
 import { RoomsType } from "@docspace/shared/enums";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import styles from "./RoomTypeList.module.scss";
 

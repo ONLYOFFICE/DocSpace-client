@@ -38,9 +38,9 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Button } from "@docspace/ui-kit/components/button";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./DisableAiServicesDialog.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";

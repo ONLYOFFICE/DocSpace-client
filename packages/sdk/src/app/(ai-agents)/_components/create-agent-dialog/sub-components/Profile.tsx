@@ -64,9 +64,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 

@@ -41,16 +41,16 @@ import axios from "axios";
 
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { TextInput, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getConvertedSize } from "@onlyoffice/apps-ui-kit/billing/utils/common";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";

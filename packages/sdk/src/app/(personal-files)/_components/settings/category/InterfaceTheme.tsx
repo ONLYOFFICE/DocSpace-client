@@ -39,12 +39,12 @@ import React, { useState, useCallback } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { ThemeKeys } from "@docspace/shared/enums";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+import { getSystemTheme } from "@onlyoffice/apps-ui-kit/utils/get-system-theme";
 import { changeTheme as changeThemeApi } from "@docspace/shared/api/people";
 
 import { ThemeChangeContext } from "@/providers";

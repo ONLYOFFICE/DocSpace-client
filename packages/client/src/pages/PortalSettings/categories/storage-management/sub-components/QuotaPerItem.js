@@ -36,8 +36,8 @@
 import { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { QuotaForm } from "@docspace/shared/components/quota-form";
 
 import styles from "../StyledComponent.module.scss";

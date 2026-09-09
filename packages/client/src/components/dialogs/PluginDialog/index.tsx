@@ -40,8 +40,8 @@ import type { BoxGroup } from "@onlyoffice/docspace-plugin-sdk";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Portal } from "@docspace/ui-kit/components/portal";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";

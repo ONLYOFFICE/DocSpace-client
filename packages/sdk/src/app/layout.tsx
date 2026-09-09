@@ -37,12 +37,12 @@ import path from "path";
 import { headers, cookies } from "next/headers";
 import type { Metadata } from "next";
 
-import { ThemeKeys } from "@docspace/ui-kit/enums";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
+import { SYSTEM_THEME_KEY } from "@onlyoffice/apps-ui-kit/providers/theme/themes/constants";
 import {
   getDirectionByLanguage,
   getFontFamilyDependingOnLanguage,
-} from "@docspace/ui-kit/providers/theme/rtl-utils";
+} from "@onlyoffice/apps-ui-kit/providers/theme/rtl-utils";
 
 import "@docspace/shared/styles/theme.scss";
 

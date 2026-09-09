@@ -41,18 +41,18 @@ import { TTranslation } from "@docspace/shared/types";
 import { EmployeeType, ShareAccessRights } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
 	ModalDialog,
 	ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { TSelectorItem } from "@docspace/ui-kit/components/selector";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import {
 	getRoomMembers,
 	getTemplateAvailable,

@@ -69,7 +69,7 @@ import {
   EmptyView,
   type EmptyViewOptionsType,
 } from "@docspace/shared/components/empty-view";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
 

@@ -57,7 +57,7 @@ import {
 } from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import { FILTER_DOCUMENTS } from "@docspace/shared/utils/filterConstants";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import i18n from "../../i18n";
 

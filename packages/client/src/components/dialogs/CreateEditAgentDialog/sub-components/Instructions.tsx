@@ -36,8 +36,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";

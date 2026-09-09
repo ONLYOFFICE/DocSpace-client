@@ -36,10 +36,10 @@ import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { TFile } from "@docspace/shared/api/files/types";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getFolderPath } from "@docspace/shared/api/files";
 
 import styles from "./CellStyles.module.scss";

@@ -43,14 +43,14 @@ import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url
 import { IconSizeType } from "@docspace/shared/utils";
 import { TTranslation } from "@docspace/shared/types";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import {
   Scrollbar,
   ScrollbarType,
-} from "@docspace/ui-kit/components/scrollbar";
-import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+} from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import type OformsFilter from "@docspace/shared/api/oforms/filter";
 import type { Category } from "../Filter/CategoryFilter/CategoryFilter.types";
 import styles from "../TemplateGallery.module.scss";

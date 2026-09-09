@@ -45,7 +45,7 @@ import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { PlaylistType } from "@docspace/shared/components/media-viewer/MediaViewer.types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 

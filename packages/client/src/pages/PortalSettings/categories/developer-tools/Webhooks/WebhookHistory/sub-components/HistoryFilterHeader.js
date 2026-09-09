@@ -38,8 +38,8 @@ import { inject, observer } from "mobx-react";
 import { useParams } from "react-router";
 
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import FilterDialog from "./FilterDialog";
 import StatusBar from "./StatusBar";

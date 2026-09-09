@@ -39,7 +39,7 @@ import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/ui-kit/components/combobox";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import { getLabel, getOptions } from "../Cron.utils";
 import type { PeriodProps, PeriodType } from "../Cron.types";

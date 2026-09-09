@@ -34,7 +34,7 @@
  */
 
 import axios from "axios";
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 import {
   ILogoOptions,
   IUploadedDimensions,

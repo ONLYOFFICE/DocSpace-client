@@ -38,8 +38,8 @@ import { inject, observer } from "mobx-react";
 import styles from "./FieldMapping.module.scss";
 import { useTranslation } from "react-i18next";
 
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { SSO_GIVEN_NAME, SSO_SN, SSO_EMAIL } from "SRC_DIR/helpers/constants";
 import SsoFormField from "./sub-components/SsoFormField";

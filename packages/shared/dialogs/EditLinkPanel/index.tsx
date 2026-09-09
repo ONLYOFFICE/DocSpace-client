@@ -44,17 +44,17 @@ import React, {
   useDeferredValue,
 } from "react";
 
-import { Portal } from "@docspace/ui-kit/components/portal";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useEventListener } from "@onlyoffice/apps-ui-kit/hooks/useEventListener";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import {
   getLinkAccessRightOptions,
   getRoomLinkAccessOptions,
@@ -68,12 +68,12 @@ import {
   isFolderOrRoom,
   isRoom,
 } from "../../utils/typeGuards";
-import { parseToDateTime } from "@docspace/ui-kit/utils/date";
+import { parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";
 
 import { ShareLinkService } from "../../services/share-link.service";
 import type { TFileLink } from "../../api/files/types";
 import type { TError } from "../../utils/axiosClient";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 

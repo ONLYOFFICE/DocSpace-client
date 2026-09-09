@@ -53,7 +53,7 @@ import {
 // eagerly-loaded client module resolves to the package's `.d.ts` and fails the
 // bundle (`UNRESOLVED_IMPORT`). tsc is unaffected — `packages/client/tsconfig`
 // maps the specifier straight at those types.
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";
 

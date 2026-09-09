@@ -35,7 +35,7 @@
 
 import type { DateTime } from "luxon";
 
-import { now } from "@docspace/ui-kit/utils/date";
+import { now } from "@onlyoffice/apps-ui-kit/utils/date";
 import type { TFolderLogReportDateRange } from "@docspace/shared/api/files/types";
 import type { Nullable } from "@docspace/shared/types";
 

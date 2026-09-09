@@ -37,7 +37,7 @@
 
 import { AxiosRequestConfig } from "axios";
 
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import { checkFilterInstance } from "../../utils/common";
 import { TReqOption } from "../../utils/axiosClient";
 import {

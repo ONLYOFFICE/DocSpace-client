@@ -37,7 +37,7 @@ import { thirdPartyLogin } from "@docspace/shared/utils/loginUtils";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { parseURL } from "@docspace/shared/utils/common";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 
 import { getAvailablePortals as getAvailablePortalsServer } from "./actions";
 

@@ -38,11 +38,11 @@ import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 import { inject, observer } from "mobx-react";
 
 import { isMobile } from "@docspace/shared/utils";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
-import { Text } from "@docspace/ui-kit/components/text";
-import { RowContent } from "@docspace/ui-kit/components/rows";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import styles from "../../active-sessions.module.scss";
 

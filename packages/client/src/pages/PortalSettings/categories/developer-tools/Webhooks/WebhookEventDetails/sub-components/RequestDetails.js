@@ -34,12 +34,12 @@
  */
 
 import React from "react";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { inject, observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
-import StatusMessage from "@docspace/ui-kit/components/status-message";
+import StatusMessage from "@onlyoffice/apps-ui-kit/components/status-message";
 import { isJSON } from "@docspace/shared/utils/json";
 
 import styles from "../WebhookEventDetails.styled.module.scss";

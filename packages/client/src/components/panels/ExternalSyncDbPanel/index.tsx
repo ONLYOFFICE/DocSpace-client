@@ -36,19 +36,19 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
+import { OPERATIONS_NAME } from "@onlyoffice/apps-ui-kit/constants";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/icons/17/clear.react.svg?url";
-import AlertIcon from "@docspace/ui-kit/assets/info.outline.react.svg";
-import TickIcon from "@docspace/ui-kit/assets/check.edit.react.svg";
+import AlertIcon from "@onlyoffice/apps-ui-kit/assets/info.outline.react.svg";
+import TickIcon from "@onlyoffice/apps-ui-kit/assets/check.edit.react.svg";
 import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg";
 
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import type { ExternalSyncDB } from "@docspace/shared/api/rooms/types";
 

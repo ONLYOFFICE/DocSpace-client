@@ -35,7 +35,7 @@
 
 import { useTranslation } from "react-i18next";
 
-import { TTableColumn, TableHeader } from "@docspace/ui-kit/components/table";
+import { TTableColumn, TableHeader } from "@onlyoffice/apps-ui-kit/components/table";
 
 import { HeaderProps } from "../TableView.types";
 

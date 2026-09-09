@@ -64,11 +64,11 @@ import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type {
   NavMenuGroup,
   NavMenuItem,
-} from "@docspace/ui-kit/components/nav-menu";
+} from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import { DeviceType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
 

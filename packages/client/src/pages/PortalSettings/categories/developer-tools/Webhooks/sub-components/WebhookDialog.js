@@ -38,9 +38,9 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect, useRef } from "react";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { validateUrl } from "../Webhooks.helpers";
 

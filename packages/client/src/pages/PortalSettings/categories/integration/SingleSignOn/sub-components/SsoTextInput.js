@@ -36,7 +36,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
 
 import StyledInputWrapper from "../styled-containers/StyledInputWrapper";
 

@@ -35,13 +35,13 @@
 
 import React from "react";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import type { TTranslation } from "../../../../../types";
 import styles from "./RestoreConfirmModal.module.scss";

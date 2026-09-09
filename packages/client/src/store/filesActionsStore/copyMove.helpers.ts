@@ -39,7 +39,7 @@ import {
   getFolder,
 } from "@docspace/shared/api/files";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   isFile as isFileCheck,
   isFolder as isFolderCheck,

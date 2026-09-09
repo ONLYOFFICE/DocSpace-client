@@ -39,9 +39,9 @@ import { useTranslation } from "react-i18next";
 
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
-import { Avatar } from "@docspace/ui-kit/components/avatar";
+import { Avatar } from "@onlyoffice/apps-ui-kit/components/avatar";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./CellStyles.module.scss";
 

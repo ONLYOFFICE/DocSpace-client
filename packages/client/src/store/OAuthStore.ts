@@ -53,7 +53,7 @@ import {
   IClientProps,
   TScope,
 } from "@docspace/shared/utils/oauth/types";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";

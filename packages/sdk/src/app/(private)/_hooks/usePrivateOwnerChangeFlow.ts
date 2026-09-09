@@ -40,7 +40,7 @@ import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";

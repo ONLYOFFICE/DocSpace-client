@@ -63,7 +63,7 @@ import axios from "axios";
 // Must be the very singleton the mounted widget flushes its queue from
 // (AppsSidebar/LiveChatBlock renders the ui-kit Zendesk) - shared has a second,
 // unrelated copy whose queued commands nobody ever delivers.
-import { zendeskAPI } from "@docspace/ui-kit/components/article/zendesk/Zendesk.utils";
+import { zendeskAPI } from "@onlyoffice/apps-ui-kit/components/article/zendesk/Zendesk.utils";
 import { CategoryType } from "@docspace/shared/constants";
 
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
@@ -75,14 +75,14 @@ import type {
   ContextMenuType,
   SeparatorType,
   TContextMenuValueTypeOnClick,
-} from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import {
   PersistenceKeys,
   getPersistedString,
   setPersistedString,
 } from "./utils/persistence";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import AccountsFilter from "@docspace/shared/api/people/filter";

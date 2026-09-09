@@ -41,7 +41,7 @@ import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import SocketHelper, {
   SocketCommands,
   type TOptSocket,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import i18n from "../i18n";
 

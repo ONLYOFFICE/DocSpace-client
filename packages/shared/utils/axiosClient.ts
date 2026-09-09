@@ -43,7 +43,7 @@ import axios, {
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import { combineUrl } from "./combineUrl";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { isOAuthFrame, requestAuthToken } from "./oauthToken";
 import { frameCallEvent } from "./common";
 import { isPortalNotFoundRedirectClaimed } from "./portalNotFound";

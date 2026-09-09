@@ -39,7 +39,7 @@ import type {
 	BackupToPublicRoomOptionType,
 	Nullable,
 } from "../../../../../types";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 
 import { type ScheduleComponentProps } from "../ScheduleComponent";
 

@@ -63,15 +63,15 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import CheckIcon from "@docspace/ui-kit/assets/check.react.svg";
-import DangerIcon from "@docspace/ui-kit/assets/danger.toast.react.svg";
-import CatalogAiArbiterIcon from "@docspace/ui-kit/assets/icons/16/catalog.ai-arbiter.react.svg";
+import CheckIcon from "@onlyoffice/apps-ui-kit/assets/check.react.svg";
+import DangerIcon from "@onlyoffice/apps-ui-kit/assets/danger.toast.react.svg";
+import CatalogAiArbiterIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.ai-arbiter.react.svg";
 import AiAgentsLightIllustration from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
 import AiAgentsDarkIllustration from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 

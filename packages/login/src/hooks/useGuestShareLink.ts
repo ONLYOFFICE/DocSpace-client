@@ -36,7 +36,7 @@
 import { TError } from "@/types";
 import { addGuest } from "@docspace/shared/api/people";
 import Filter from "@docspace/shared/api/people/filter";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useState } from "react";
 
 export const useGuestShareLink = () => {

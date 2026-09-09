@@ -42,7 +42,7 @@ import queryString from "query-string";
 import { UrlActionType } from "@docspace/shared/enums";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
-import { Portal } from "@docspace/ui-kit/components/portal";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { usePlugin } from "./hooks/usePlugin";
 
 const FilesMediaViewer = (props) => {

@@ -35,8 +35,8 @@
 
 import { useEffect, useState } from "react";
 
-import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
-import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+import { useEventListener } from "@onlyoffice/apps-ui-kit/hooks/useEventListener";
+import { useIsMobile } from "@onlyoffice/apps-ui-kit/hooks/use-is-mobile";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 const FULL_CALENDAR_HEIGHT = 376;

@@ -34,7 +34,7 @@
  */
 
 import { redirect } from "next/navigation";
-import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
+import { FormWrapper } from "@onlyoffice/apps-ui-kit/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";

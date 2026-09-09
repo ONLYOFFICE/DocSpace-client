@@ -38,8 +38,8 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { FilterType, FolderType } from "@docspace/shared/enums";
-import FilesSelector from "@docspace/ui-kit/selectors/Files";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import {
   TFile,
@@ -50,14 +50,14 @@ import {
 import {
   TBreadCrumb,
   TSelectorItem,
-} from "@docspace/ui-kit/components/selector";
-import { type TData } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/components/selector";
+import { type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import type {
   TSelectedFileInfo,
   FolderDtoInteger,
   SdkFolderType,
   FilesSettingsDto,
-} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+} from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 

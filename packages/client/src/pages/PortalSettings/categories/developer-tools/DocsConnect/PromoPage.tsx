@@ -37,11 +37,11 @@ import { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Link, LinkType, LinkTarget } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Heading, HeadingLevel } from "@onlyoffice/apps-ui-kit/components/heading";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link, LinkType, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import config from "PACKAGE_FILE";

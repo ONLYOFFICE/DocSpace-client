@@ -38,8 +38,8 @@ import { TFunction } from "i18next";
 
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { TFolder } from "@docspace/shared/api/files/types";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";

@@ -35,7 +35,7 @@
 
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { ContextMenu } from "@docspace/ui-kit/components/context-menu";
+import { ContextMenu } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import { ToolbarActionType } from "../../MediaViewer.enums";
 import { ViewerToolbar } from "./index";
 import type { ToolbarItemType } from "./ViewerToolbar.props";

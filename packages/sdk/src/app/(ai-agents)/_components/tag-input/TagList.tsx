@@ -63,7 +63,7 @@
 
 import classNames from "classnames";
 
-import { Tag } from "@docspace/ui-kit/components/tag";
+import { Tag } from "@onlyoffice/apps-ui-kit/components/tag";
 
 import styles from "./TagInput.module.scss";
 import type { TagListProps } from "./TagInput.types";

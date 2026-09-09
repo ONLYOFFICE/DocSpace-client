@@ -36,7 +36,7 @@
 import React from "react";
 
 import { inject, observer } from "mobx-react";
-import { Consumer } from "@docspace/ui-kit/utils";
+import { Consumer } from "@onlyoffice/apps-ui-kit/utils";
 
 import WebhooksTableView from "./WebhooksTableView";
 import WebhooksRowView from "./WebhooksRowView";

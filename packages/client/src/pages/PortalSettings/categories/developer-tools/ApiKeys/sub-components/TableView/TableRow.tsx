@@ -39,15 +39,15 @@ import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_s
 import {
   TableRow as TableRowComponent,
   TableCell,
-} from "@docspace/ui-kit/components/table";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+} from "@onlyoffice/apps-ui-kit/components/table";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
 import { TableRowProps } from "../../types";
 import {
   getItemPermissions,

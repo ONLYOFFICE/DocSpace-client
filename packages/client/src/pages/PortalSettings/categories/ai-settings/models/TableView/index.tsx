@@ -37,8 +37,8 @@ import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
-import { Text } from "@docspace/ui-kit/components/text";
+import { TableBody, TableContainer } from "@onlyoffice/apps-ui-kit/components/table";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";

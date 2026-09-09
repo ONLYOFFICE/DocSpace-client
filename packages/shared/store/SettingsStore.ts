@@ -41,16 +41,16 @@ import SocketHelper, {
   SocketCommands,
   SocketCommandsRoomParts,
   SocketEvents,
-} from "@docspace/ui-kit/utils/socket";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   Base,
   Dark,
   type TColorScheme,
-} from "@docspace/ui-kit/providers/theme";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+} from "@onlyoffice/apps-ui-kit/providers/theme";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
+import { getCookie, setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { getSystemTheme } from "@onlyoffice/apps-ui-kit/utils/get-system-theme";
 
 import api from "../api";
 import type { TAIConfig } from "../api/ai/types";

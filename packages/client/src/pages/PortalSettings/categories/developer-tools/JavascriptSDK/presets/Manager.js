@@ -58,13 +58,13 @@ import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { Label } from "@docspace/ui-kit/components/label";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";

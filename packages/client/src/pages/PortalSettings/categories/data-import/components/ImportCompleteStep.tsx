@@ -37,10 +37,10 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
 	ImportCompleteStepProps,
 	InjectedImportCompleteStepProps,

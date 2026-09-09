@@ -36,9 +36,9 @@
 import React, { PropsWithChildren, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
-import type { ThemeProviderProps } from "@docspace/ui-kit/components/theme-provider";
-import { getFontFamilyDependingOnLanguage } from "@docspace/ui-kit/providers/theme/rtl-utils";
+import { ThemeProviderComponent } from "@onlyoffice/apps-ui-kit/components/theme-provider";
+import type { ThemeProviderProps } from "@onlyoffice/apps-ui-kit/components/theme-provider";
+import { getFontFamilyDependingOnLanguage } from "@onlyoffice/apps-ui-kit/providers/theme/rtl-utils";
 
 const ThemeProviderWrapper = ({
   children,

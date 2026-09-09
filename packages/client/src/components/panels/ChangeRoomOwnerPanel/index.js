@@ -36,7 +36,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import {
@@ -50,9 +50,9 @@ import { getRoomMembers } from "@docspace/shared/api/rooms";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { toastr } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { validateMembersForEncryption } from "@docspace/shared/services/private-room/room-encryption";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
 

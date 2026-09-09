@@ -67,23 +67,23 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 
-import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { TableRow, TableCell } from "@onlyoffice/apps-ui-kit/components/table";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
 
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import Badges from "@docspace/shared/components/badges";
 import {
   TagManagement,
   type AccessTagManagement,
 } from "@docspace/shared/components/tag-management";
-import type { TagClickEvent } from "@docspace/ui-kit/components/tag";
+import type { TagClickEvent } from "@onlyoffice/apps-ui-kit/components/tag";
 import api from "@docspace/shared/api";
 import { isAdmin } from "@docspace/shared/utils/common";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 

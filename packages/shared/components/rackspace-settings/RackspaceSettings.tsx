@@ -38,7 +38,7 @@ import {
 	InputSize,
 	InputType,
 	TextInput,
-} from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
 import { useDidMount } from "../../hooks/useDidMount";
 import { RackspaceSettingsProps } from "./RackspaceSettings.types";
 import {

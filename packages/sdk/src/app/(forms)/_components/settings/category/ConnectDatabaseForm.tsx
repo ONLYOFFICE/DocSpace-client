@@ -39,15 +39,15 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
-import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
+import { InputSize, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import {
   useFormsDbSettingsStore,

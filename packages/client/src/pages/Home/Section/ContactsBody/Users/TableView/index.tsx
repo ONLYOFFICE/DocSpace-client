@@ -40,9 +40,9 @@ import { useNavigate, useLocation } from "react-router";
 import {
   TableBody,
   TableContainer,
-} from "@docspace/ui-kit/components/table";
+} from "@onlyoffice/apps-ui-kit/components/table";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
 import EmptyScreen from "../../EmptyScreen";

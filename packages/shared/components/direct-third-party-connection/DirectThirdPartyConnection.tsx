@@ -44,16 +44,16 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Button } from "@docspace/ui-kit/components/button";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { useUnmount } from "@onlyoffice/apps-ui-kit/hooks/useUnmount";
 
 import { buildDataTestId } from "../../utils/common";
-import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
+import { getOAuthToken } from "@onlyoffice/apps-ui-kit/utils/get-oauth-token";
 import { saveSettingsThirdParty } from "../../api/files";
 import { THIRD_PARTY_SERVICES_URL } from "../../constants";
 import { DropDownItem } from "../drop-down-item";

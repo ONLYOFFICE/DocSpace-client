@@ -35,11 +35,11 @@
 
 import React, { useState, useRef } from "react";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { ComboButton } from "@docspace/ui-kit/components/combobox";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { ComboButton } from "@onlyoffice/apps-ui-kit/components/combobox";
 import classNames from "classnames";
 import styles from "./MobileView.module.scss";
 import type {
@@ -48,7 +48,7 @@ import type {
 	Category,
 	InjectedProps,
 } from "../CategoryFilter.types";
-import { ScrollbarType } from "@docspace/ui-kit/components/scrollbar";
+import { ScrollbarType } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 
 const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
 	t,

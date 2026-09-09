@@ -39,20 +39,20 @@ import { withTranslation } from "react-i18next";
 import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
 
-import { Avatar } from "@docspace/ui-kit/components/avatar";
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Avatar } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   parseAddresses,
   getParts,
   isBetaLanguage,
 } from "@docspace/shared/utils";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
@@ -74,7 +74,7 @@ import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?ur
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import styles from "../InvitePanel.module.scss";
 

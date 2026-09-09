@@ -35,9 +35,9 @@
 
 import { type FC, type PropsWithChildren, useId } from "react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
 import type { ToggleBlockProps } from "./EditLinkPanel.types";
 import styles from "./EditLinkPanel.module.scss";

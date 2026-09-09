@@ -39,15 +39,15 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-import CheckIcon from "@docspace/ui-kit/assets/check.react.svg";
+import CheckIcon from "@onlyoffice/apps-ui-kit/assets/check.react.svg";
 import GithubLightIcon from "PUBLIC_DIR/images/thirdparties/github.light.react.svg";
 import GithubDarkIcon from "PUBLIC_DIR/images/thirdparties/github.dark.react.svg";
 

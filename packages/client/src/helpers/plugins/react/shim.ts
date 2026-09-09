@@ -159,7 +159,7 @@ const SPECIFIER_MAP: Record<string, string> = {
   "react/jsx-runtime": JSX_RUNTIME_SHIM_URL,
   "react/jsx-dev-runtime": JSX_DEV_RUNTIME_SHIM_URL,
   "@onlyoffice/docspace-plugin-sdk/react": PLUGIN_SDK_REACT_SHIM_URL,
-  "@docspace/ui-kit": PLUGIN_UI_KIT_SHIM_URL,
+  "@onlyoffice/apps-ui-kit": PLUGIN_UI_KIT_SHIM_URL,
 };
 
 // What the browser resolves by itself; everything else is a package name.

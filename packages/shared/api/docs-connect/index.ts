@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { findDocsConnectServices } from "@docspace/ui-kit/billing/utils/docs-connect";
+import { findDocsConnectServices } from "@onlyoffice/apps-ui-kit/billing/utils/docs-connect";
 import { request } from "../client";
 import type {
   TDocsConnectInfo,

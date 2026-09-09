@@ -68,8 +68,8 @@ import type {
   NavMenuGroup,
   NavMenuItem,
   NavSubItem,
-} from "@docspace/ui-kit/components/nav-menu";
-import { useAiChatStoreOptional } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
+} from "@onlyoffice/apps-ui-kit/components/nav-menu";
+import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";

@@ -41,15 +41,15 @@ import {
   NotificationsType,
   EmployeeActivationStatus,
 } from "@docspace/shared/enums";
-import { setCookie } from "@docspace/ui-kit/utils/cookie";
+import { setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
-import { AvatarActionKeys } from "@docspace/ui-kit/components/avatar";
+import { AvatarActionKeys } from "@onlyoffice/apps-ui-kit/components/avatar";
 import {
   changeNotificationSubscription,
   getNotificationSubscription,
 } from "@docspace/shared/api/settings";
 import { TNotificationChannel } from "@docspace/shared/api/settings/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable } from "@docspace/shared/types";
 

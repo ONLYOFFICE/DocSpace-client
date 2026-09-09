@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import CollapseIcon from "@docspace/ui-kit/assets/article-hide-menu-icon.react.svg";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import CollapseIcon from "@onlyoffice/apps-ui-kit/assets/article-hide-menu-icon.react.svg";
 
 import styles from "./CollapseButton.module.scss";
 

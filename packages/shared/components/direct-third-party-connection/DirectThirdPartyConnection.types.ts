@@ -39,13 +39,13 @@ import type {
 	ConnectedThirdPartyAccountType,
 	TTranslation,
 } from "../../types";
-import type { ButtonSize } from "@docspace/ui-kit/components/button";
+import type { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import type {
 	FileInfoType,
 	FilesSelectorSettings,
 } from "../files-selector-input/FilesSelectorInput.types";
 import type { TThirdParties } from "../../api/files/types";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 
 export type DirectThirdPartyConnectionState = {
 	// folderList: {};

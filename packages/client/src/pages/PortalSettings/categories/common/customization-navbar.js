@@ -38,7 +38,7 @@ import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { CategoryItem } from "@docspace/ui-kit/components/category-item";
+import { CategoryItem } from "@onlyoffice/apps-ui-kit/components/category-item";
 
 import LoaderCustomizationNavbar from "./sub-components/loaderCustomizationNavbar";
 import styles from "./customization-navbar.module.scss";

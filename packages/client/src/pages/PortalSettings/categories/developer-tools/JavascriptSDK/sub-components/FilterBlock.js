@@ -42,16 +42,16 @@ import { FilterType, RoomsType } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { getUserList } from "@docspace/shared/api/people";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Avatar } from "@docspace/ui-kit/components/avatar";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Label } from "@docspace/ui-kit/components/label";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { Avatar } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
-import { Text } from "@docspace/ui-kit/components/text";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 

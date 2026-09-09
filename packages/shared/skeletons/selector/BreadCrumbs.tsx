@@ -37,7 +37,7 @@ import React from "react";
 import {
 	RectangleSkeleton,
 	RectangleSkeletonProps,
-} from "@docspace/ui-kit/components/rectangle";
+} from "@onlyoffice/apps-ui-kit/components/rectangle";
 import styles from "./BreadCrumbs.module.scss";
 
 interface BreadCrumbsProps extends RectangleSkeletonProps {

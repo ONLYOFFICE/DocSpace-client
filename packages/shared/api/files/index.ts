@@ -38,7 +38,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import type { DateTime } from "luxon";
 
-import type { TFile } from "@docspace/ui-kit/types";
+import type { TFile } from "@onlyoffice/apps-ui-kit/types";
 
 import {
   ConflictResolveType,

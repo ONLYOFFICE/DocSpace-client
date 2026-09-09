@@ -33,9 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TFile } from "@docspace/ui-kit/types";
+import type { TFile } from "@onlyoffice/apps-ui-kit/types";
 
-import { Events } from "@docspace/ui-kit/enums";
+import { Events } from "@onlyoffice/apps-ui-kit/enums";
 import { InfoPanelEvents } from "@docspace/shared/enums";
 
 import { isFormFile } from "../FormInfo.utils";

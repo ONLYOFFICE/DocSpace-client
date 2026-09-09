@@ -39,13 +39,13 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import type {
   TAgentParams,
   TAgentTagsParams,
 } from "@docspace/shared/utils/aiAgents";
-import MCPServersSelector from "@docspace/ui-kit/selectors/MCPServers";
+import MCPServersSelector from "@onlyoffice/apps-ui-kit/selectors/MCPServers";
 import type { TCreatedBy } from "@docspace/shared/types";
 
 import type { ICover } from "SRC_DIR/components/dialogs/RoomLogoCoverDialog/RoomLogoCoverDialog.types";

@@ -39,7 +39,7 @@ import { useLocation, useNavigate } from "react-router";
 import type {
   NavMenuGroup,
   NavMenuItem,
-} from "@docspace/ui-kit/components/nav-menu";
+} from "@onlyoffice/apps-ui-kit/components/nav-menu";
 
 import type { Section } from "SRC_DIR/helpers/plugins/enums";
 import { getPluginSectionPath } from "SRC_DIR/helpers/plugins/navigation";

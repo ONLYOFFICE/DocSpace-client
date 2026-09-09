@@ -37,7 +37,7 @@ import React from "react";
 import { FileType, RoomsType } from "@docspace/shared/enums";
 import { getSinglePDFTitle } from "@docspace/shared/utils/getPDFTite";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./CellStyles.module.scss";
 

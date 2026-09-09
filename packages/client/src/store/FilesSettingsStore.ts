@@ -63,9 +63,9 @@ import {
   isPublicPreview,
   insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
-import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
+import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import i18n from "../i18n";

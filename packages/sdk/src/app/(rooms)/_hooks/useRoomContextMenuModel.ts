@@ -64,9 +64,9 @@ import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { RoomsType } from "@docspace/shared/enums";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";

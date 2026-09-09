@@ -41,8 +41,8 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import {
   getUserType,
   getUserTypeTranslation,

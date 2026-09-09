@@ -38,9 +38,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
-import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+import { Tabs, type TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
+import { LoaderWrapper } from "@onlyoffice/apps-ui-kit/components/loader-wrapper";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import BillingForm from "./category/BillingForm";
 import FileManagement from "./category/FileManagement";

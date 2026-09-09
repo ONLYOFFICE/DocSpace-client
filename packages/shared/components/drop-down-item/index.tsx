@@ -38,7 +38,7 @@ import { useTranslation } from "react-i18next";
 import {
   DropDownItem as Component,
   type DropDownItemProps,
-} from "@docspace/ui-kit/components/drop-down-item";
+} from "@onlyoffice/apps-ui-kit/components/drop-down-item";
 import { getConstName } from "@docspace/shared/constants/consts";
 
 const DropDownItem = (props: DropDownItemProps) => {

@@ -33,10 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { RowContent as RowContentComponent } from "@docspace/ui-kit/components/rows";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { RowContent as RowContentComponent } from "@onlyoffice/apps-ui-kit/components/rows";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { RowContentProps } from "./RowView.types";
 import styles from "../../authorized-apps.module.scss";

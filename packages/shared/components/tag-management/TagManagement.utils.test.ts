@@ -35,7 +35,7 @@
 
 import { describe, it, expect } from "vitest";
 
-import type { TagType } from "@docspace/ui-kit/components/tag";
+import type { TagType } from "@onlyoffice/apps-ui-kit/components/tag";
 import {
   transformTagsData,
   unionTagsData,

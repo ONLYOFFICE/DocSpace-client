@@ -66,9 +66,9 @@ For big stores use the existing harnesses instead of hand-rolling:
 
 If a store test blows up at **import time**, the cause is transitive legacy
 imports (`src/i18n`, socket): mock `SRC_DIR/i18n`, and
-`@docspace/ui-kit/utils/socket` (keep real enums via `importOriginal`, replace
+`@onlyoffice/apps-ui-kit/utils/socket` (keep real enums via `importOriginal`, replace
 `default` with `{on, off, emit, socketSubscribers: new Set()}`), plus
-`@docspace/ui-kit/components/toast` when toasts fire.
+`@onlyoffice/apps-ui-kit/components/toast` when toasts fire.
 
 `vi.hoisted` bindings must not be exported directly — alias them first.
 
@@ -76,7 +76,7 @@ imports (`src/i18n`, socket): mock `SRC_DIR/i18n`, and
 
 Plain RTL: `data-testid` queries, `userEvent` for clicks, local
 `renderComponent` helper per file (no repo-wide one). Wrap in
-`ThemeProviderComponent` + `Base` theme (from `@docspace/ui-kit`) only when
+`ThemeProviderComponent` + `Base` theme (from `@onlyoffice/apps-ui-kit`) only when
 the component needs theme; heavy child components are stubbed with
 `vi.mock` returning a `<div data-testid=… />`. Fixtures live in co-located
 `mockData.ts`.
@@ -84,7 +84,7 @@ the component needs theme; heavy child components are stubbed with
 ## Aliases available in test code
 
 client: `SRC_DIR`, `PUBLIC_DIR`, `ASSETS_DIR`, `COMMON_DIR`, `PACKAGE_FILE`,
-`@docspace/shared`, `@docspace/ui-kit`. shared: `@docspace/shared`,
+`@docspace/shared`, `@onlyoffice/apps-ui-kit`. shared: `@docspace/shared`,
 `PUBLIC_DIR` only.
 
 ## Running

@@ -40,12 +40,12 @@ import {
   NO_COMPRESSION_RATIO,
 } from "@docspace/shared/constants";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 
 import resizeImage from "resize-image";
 import api from "@docspace/shared/api";
-import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
+import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TTranslation } from "@docspace/shared/types";

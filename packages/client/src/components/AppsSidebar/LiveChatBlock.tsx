@@ -37,7 +37,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
-import ArticleLiveChat from "@docspace/ui-kit/components/article/sub-components/LiveChat";
+import ArticleLiveChat from "@onlyoffice/apps-ui-kit/components/article/sub-components/LiveChat";
 
 type LiveChatBlockProps = {
   isLiveChatAvailable: boolean;

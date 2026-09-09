@@ -42,10 +42,10 @@ import {
 } from "@docspace/shared/api/ai";
 import type { TAgent } from "@docspace/shared/api/ai/types";
 import { Events } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { AgentDialogContext } from "SRC_DIR/helpers/enums";
-import type { FormsRecommendation } from "@docspace/ui-kit/ai-agent/providers";
+import type { FormsRecommendation } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 type UseFormsRecommendationArgs = {
   /**

@@ -35,7 +35,7 @@
 
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { CategoryItem } from "@docspace/ui-kit/components/category-item";
+import { CategoryItem } from "@onlyoffice/apps-ui-kit/components/category-item";
 import styles from "./LdapMobileView.module.scss";
 
 const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {

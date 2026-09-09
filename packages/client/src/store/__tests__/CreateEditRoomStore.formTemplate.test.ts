@@ -37,7 +37,7 @@ import { describe, it, expect, vi } from "vitest";
 
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 
-vi.mock("@docspace/ui-kit/utils/socket", async (io) => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (io) => ({
   ...((await io()) as Record<string, unknown>),
   default: {
     on: vi.fn(),
@@ -46,7 +46,7 @@ vi.mock("@docspace/ui-kit/utils/socket", async (io) => ({
     socketSubscribers: new Set<string>(),
   },
 }));
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn(), info: vi.fn(), warning: vi.fn() },
 }));
 vi.mock("SRC_DIR/i18n", () => ({
@@ -59,7 +59,7 @@ vi.mock("@docspace/shared/api/files", async (io) => ({
 
 const CreateEditRoomStore = (await import("../CreateEditRoomStore")).default;
 const { createFile } = await import("@docspace/shared/api/files");
-const { toastr } = await import("@docspace/ui-kit/components/toast");
+const { toastr } = await import("@onlyoffice/apps-ui-kit/components/toast");
 
 /** CreateEditRoomStore with only the deps createFormFromTemplate touches. */
 const createStore = (oformsStore: Record<string, unknown>) => {

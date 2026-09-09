@@ -56,7 +56,7 @@ import {
   TThirdPartyProvider,
   TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
@@ -67,13 +67,13 @@ import {
   getLoginLink,
   toUrlParams,
 } from "@docspace/shared/utils/common";
-import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
-import { setCookie } from "@docspace/ui-kit/utils/cookie";
+import { getOAuthToken } from "@onlyoffice/apps-ui-kit/utils/get-oauth-token";
+import { setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { ButtonKeys, EmployeeStatus } from "@docspace/shared/enums";
-import { TValidate } from "@docspace/ui-kit/components/email-input";
+import { TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { login, thirdPartyLogin } from "@docspace/shared/api/user";
 import {
   createUser,
@@ -84,7 +84,7 @@ import {
 import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
 

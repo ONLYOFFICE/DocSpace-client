@@ -38,8 +38,8 @@ import classNames from "classnames";
 import { match } from "ts-pattern";
 
 import { FolderType } from "@docspace/shared/enums";
-import { AsideHeader } from "@docspace/ui-kit/components/aside";
-import { Tabs } from "@docspace/ui-kit/components/tabs";
+import { AsideHeader } from "@onlyoffice/apps-ui-kit/components/aside";
+import { Tabs } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 

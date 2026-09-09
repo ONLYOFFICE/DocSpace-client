@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Consumer } from "@docspace/ui-kit/utils";
+import { Consumer } from "@onlyoffice/apps-ui-kit/utils";
 import TableView from "./TableView";
 import RowView from "./RowView";
 import { ApiKeyViewProps } from "../types";

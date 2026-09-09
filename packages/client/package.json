@@ -37,7 +37,7 @@
   "dependencies": {
     "@codemirror/lang-javascript": "6.2.2",
     "@docspace/shared": "workspace:*",
-    "@docspace/ui-kit": "workspace:*",
+    "@onlyoffice/apps-ui-kit": "workspace:*",
     "@onlyoffice/docspace-sdk-js": "file:onlyoffice-docspace-sdk-js-2.2.0.tgz",
     "@react-spring/web": "9.7.5",
     "@tanstack/react-query": "^5.101.4",

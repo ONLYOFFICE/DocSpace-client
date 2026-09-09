@@ -41,12 +41,12 @@ import { observer } from "mobx-react";
 import { usePathname, useRouter } from "next/navigation";
 import classNames from "classnames";
 
-import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
-import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
+import { LoaderWrapper } from "@onlyoffice/apps-ui-kit/components/loader-wrapper";
+import { Tabs, type TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import { pathsWithoutTabs } from "@/lib/constants";
 import useAppState from "@/hooks/useAppState";

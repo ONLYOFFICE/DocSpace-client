@@ -40,12 +40,12 @@ import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import type { Nullable } from "@docspace/shared/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
-import { ROOM_ACTION_KEYS } from "@docspace/ui-kit/constants";
-import type { TImage } from "@docspace/ui-kit/components/image-editor";
-import type { ICover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
-import type { TModel } from "@docspace/ui-kit/components/room-icon";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
+import { ROOM_ACTION_KEYS } from "@onlyoffice/apps-ui-kit/constants";
+import type { TImage } from "@onlyoffice/apps-ui-kit/components/image-editor";
+import type { ICover } from "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog";
+import type { TModel } from "@onlyoffice/apps-ui-kit/components/room-icon";
 
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 

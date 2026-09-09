@@ -37,8 +37,8 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { AsideHeader } from "@docspace/ui-kit/components/aside";
-import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
+import { AsideHeader } from "@onlyoffice/apps-ui-kit/components/aside";
+import { useEventListener } from "@onlyoffice/apps-ui-kit/hooks/useEventListener";
 
 import styles from "./Header.module.scss";
 

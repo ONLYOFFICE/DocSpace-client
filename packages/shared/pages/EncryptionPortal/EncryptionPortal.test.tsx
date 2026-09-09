@@ -40,11 +40,11 @@ import { screen, waitFor, act, render } from "@testing-library/react";
 import { EncryptionPortal } from "./index";
 import styles from "./EncryptionPortal.module.scss";
 
-import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
+import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
 import * as settingsApi from "../../api/settings";
 
 // Mock the socket helper
-vi.mock("@docspace/ui-kit/utils/socket", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
   __esModule: true,
   default: {
     on: vi.fn(),

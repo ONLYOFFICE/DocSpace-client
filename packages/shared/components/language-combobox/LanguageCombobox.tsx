@@ -39,7 +39,7 @@ import {
   TOption,
   ComboBoxSize,
   ComboBox,
-} from "@docspace/ui-kit/components/combobox";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
 import { mapCulturesToArray } from "../../utils/cultures";
 import { TCulture, ComboboxProps } from "./LanguageCombobox.types";
 import styles from "./LanguageCombobox.module.scss";

@@ -36,15 +36,15 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import classNames from "classnames";
-import { TableCell, TableRow } from "@docspace/ui-kit/components/table";
-import { Link } from "@docspace/ui-kit/components/link";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Text } from "@docspace/ui-kit/components/text";
+import { TableCell, TableRow } from "@onlyoffice/apps-ui-kit/components/table";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";

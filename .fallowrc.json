@@ -6,9 +6,9 @@
       "libs/*"
     ]
   },
-  // @docspace/ui-kit has no main/module/exports in package.json so fallow
+  // @onlyoffice/apps-ui-kit has no main/module/exports in package.json so fallow
   // cannot trace cross-workspace consumers. Mark as public to avoid false positives.
-  "publicPackages": ["@docspace/ui-kit"],
+  "publicPackages": ["@onlyoffice/apps-ui-kit"],
   "ignorePatterns": [
     // MSW mock handlers and test fixtures — not imported by app code
     "**/__mocks__/**",

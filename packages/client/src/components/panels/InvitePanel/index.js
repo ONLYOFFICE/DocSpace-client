@@ -42,7 +42,7 @@ import {
   addToDate,
   parseToDateTime,
   isAfter,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 
 import {
   AnalyticsEvents,
@@ -58,8 +58,8 @@ import {
 } from "@docspace/shared/services/private-room/room-encryption";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 
-import { Button } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
@@ -68,10 +68,10 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Link } from "@docspace/ui-kit/components/link";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
@@ -87,12 +87,12 @@ import {
   createInviteLink,
   updateInviteLink,
 } from "@docspace/shared/api/portal";
-import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
+import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
 import { getDate } from "@docspace/shared/components/share/Share.helpers";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import styles from "./InvitePanel.module.scss";
-import { Badge } from "@docspace/ui-kit/components/badge";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 
 const InvitePanel = ({
   folders,

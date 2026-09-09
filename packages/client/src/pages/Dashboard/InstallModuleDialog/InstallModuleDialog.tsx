@@ -62,14 +62,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import CheckIcon from "@docspace/ui-kit/assets/check.react.svg";
-import DangerIcon from "@docspace/ui-kit/assets/danger.toast.react.svg";
-import InfoIcon from "@docspace/ui-kit/assets/info.outline.react.svg";
+import CheckIcon from "@onlyoffice/apps-ui-kit/assets/check.react.svg";
+import DangerIcon from "@onlyoffice/apps-ui-kit/assets/danger.toast.react.svg";
+import InfoIcon from "@onlyoffice/apps-ui-kit/assets/info.outline.react.svg";
 
 import styles from "./InstallModuleDialog.module.scss";
 

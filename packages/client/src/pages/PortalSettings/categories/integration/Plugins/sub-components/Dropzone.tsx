@@ -35,7 +35,7 @@
 
 import { useTranslation } from "react-i18next";
 
-import DropzoneComponent from "@docspace/ui-kit/components/dropzone";
+import DropzoneComponent from "@onlyoffice/apps-ui-kit/components/dropzone";
 
 import styles from "../Plugins.module.scss";
 import { PluginDropzoneProps } from "../Plugins.types";

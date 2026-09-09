@@ -40,14 +40,14 @@ import { useNavigate } from "react-router";
 import classNames from "classnames";
 
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
 	ComboBox,
 	ComboBoxSize,
 	TOption,
-} from "@docspace/ui-kit/components/combobox";
-import { TContextMenuValueTypeOnClick } from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
+import { TContextMenuValueTypeOnClick } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";

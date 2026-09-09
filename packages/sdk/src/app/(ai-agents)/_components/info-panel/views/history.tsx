@@ -40,14 +40,14 @@ import { observer } from "mobx-react";
 import { decode } from "he";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 
 import { getHistory } from "@docspace/shared/api/rooms";
 import {

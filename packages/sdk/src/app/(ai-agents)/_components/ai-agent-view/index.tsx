@@ -86,7 +86,7 @@ import styles from "./AIAgentView.module.scss";
 // external-scroll / sticky-header glue is needed — it only needs a
 // bounded-height flex parent (.aiAgentChat) and the AiAgentProviders stack
 // supplied by AiAgentsAiChatProviders.
-const NewChat = dynamic(() => import("@docspace/ui-kit/ai-agent/new-chat"), {
+const NewChat = dynamic(() => import("@onlyoffice/apps-ui-kit/ai-agent/new-chat"), {
   ssr: false,
 });
 

@@ -49,19 +49,19 @@ import { getExternalLinks } from "@docspace/shared/api/files";
 import { getExternalLinks as getRoomExternalLinks } from "@docspace/shared/api/rooms";
 import type { TFileLink } from "@docspace/shared/api/files/types";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";

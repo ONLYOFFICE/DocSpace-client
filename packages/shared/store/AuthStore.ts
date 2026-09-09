@@ -39,7 +39,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import SocketHelper, {
   SocketEvents,
   TOptSocket,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";
@@ -55,7 +55,7 @@ import {
 } from "../utils/common";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import { isOAuthFrame } from "../utils/oauthToken";
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie, setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import { Nullable, TI18n } from "../types";

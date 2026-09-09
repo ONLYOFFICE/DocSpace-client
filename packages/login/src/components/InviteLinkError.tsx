@@ -39,9 +39,9 @@ import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { useRouter } from "next/navigation";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import ErrorContainer from "@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 
 const InviteLinkError = ({ isExpired }: { isExpired?: boolean }) => {
   const router = useRouter();

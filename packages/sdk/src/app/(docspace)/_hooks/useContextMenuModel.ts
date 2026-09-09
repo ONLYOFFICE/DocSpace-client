@@ -37,9 +37,9 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import { CHAT_SUPPORTED_FORMATS } from "@docspace/ui-kit/constants/ai";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import { CHAT_SUPPORTED_FORMATS } from "@onlyoffice/apps-ui-kit/constants/ai";
 import { FileType } from "@docspace/shared/enums";
 
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";

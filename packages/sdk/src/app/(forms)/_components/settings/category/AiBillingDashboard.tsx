@@ -38,12 +38,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import AiPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
-import { PaymentMethod } from "@docspace/ui-kit/billing";
+import AiPage from "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage";
+import { PaymentMethod } from "@onlyoffice/apps-ui-kit/billing";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-import AiIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
-import CardIcon from "@docspace/ui-kit/assets/icons/16/card.react.svg";
+import AiIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/ai-agents.svg";
+import CardIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/card.react.svg";
 
 import { BillingCards, type BillingCardTab } from "@/components/BillingCards";
 import cardStyles from "@/components/BillingCards/BillingCards.module.scss";

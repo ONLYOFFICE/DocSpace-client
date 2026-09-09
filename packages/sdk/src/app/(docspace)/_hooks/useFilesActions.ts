@@ -37,7 +37,7 @@ import React from "react";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import type { TTranslation } from "@docspace/shared/types";

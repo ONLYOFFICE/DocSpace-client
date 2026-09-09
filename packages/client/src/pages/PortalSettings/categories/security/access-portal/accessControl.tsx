@@ -65,13 +65,13 @@ import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 import { useTranslation } from "react-i18next";
 
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { size } from "@docspace/shared/utils";
-import type { TData } from "@docspace/ui-kit/components/toast";
+import type { TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import type { TAccessControlSettings } from "@docspace/shared/api/files";

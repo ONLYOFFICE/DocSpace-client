@@ -47,18 +47,18 @@ import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TPathParts } from "@docspace/shared/types";
 import { FolderType, DeviceType } from "@docspace/shared/enums";
 import { RoomsType } from "@docspace/shared/enums";
-import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
 import type {
   FilesSelectorProps,
   FolderDtoInteger,
   TSelectedFileInfo,
   FileEntryDtoIntegerAllOfSecurity,
-} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
-import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
-import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
+} from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
+import { FloatingButton } from "@onlyoffice/apps-ui-kit/components/floating-button";
+import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import WarningComponent from "@onlyoffice/apps-ui-kit/components/navigation/sub-components/WarningComponent";
 import EmptyPrivateRoomView from "@docspace/shared/components/empty-views/empty-private-room";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
@@ -148,13 +148,13 @@ import {
   useOpenAiChat,
   useAiChatPanel,
   type AiChatPanelBindings,
-} from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+} from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
 import { usePanelExclusivity } from "@/app/(docspace)/_hooks/usePanelExclusivity";
 import {
   useAttachHostFilesToChat,
   notifyAlreadyAttached,
   notifyAttachmentLimit,
-} from "@docspace/ui-kit/ai-agent/providers/files";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/files";
 
 import styles from "./DocsLayout.module.scss";
 

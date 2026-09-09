@@ -34,7 +34,7 @@
  */
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-import { isTablet, isMobile } from "@docspace/ui-kit/utils/device";
+import { isTablet, isMobile } from "@onlyoffice/apps-ui-kit/utils/device";
 import { DeviceType, FolderType, RoomsType } from "../enums";
 import type { Nullable } from "../types";
 

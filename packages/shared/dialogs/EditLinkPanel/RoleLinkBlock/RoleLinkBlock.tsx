@@ -37,11 +37,11 @@ import React from "react";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
 
-import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
-import { Text } from "@docspace/ui-kit/components/text";
+import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { isMobile } from "../../../utils";
 import { DeviceType } from "../../../enums";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import styles from "./RoleLinkBlock.module.scss";
 import type { RoleLinkBlockProps } from "./RoleLinkBlock.types";

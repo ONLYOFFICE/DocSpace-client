@@ -38,11 +38,11 @@ import { useNavigate, useLocation, LinkProps } from "react-router";
 import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 import { isMobile } from "react-device-detect";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
-import { useStores as useAiChatStores } from "@docspace/ui-kit/ai-agent/providers";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
+import { useStores as useAiChatStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import {
   Events,
   FileExtensions,

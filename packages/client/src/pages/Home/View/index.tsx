@@ -41,18 +41,18 @@ import { Navigate, useLocation, useNavigate } from "react-router";
 import { getCategoryType } from "@docspace/shared/utils/common";
 import componentLoader from "@docspace/shared/utils/component-loader";
 import { CategoryType } from "@docspace/shared/constants";
-import { Consumer } from "@docspace/ui-kit/utils";
+import { Consumer } from "@onlyoffice/apps-ui-kit/utils";
 import type { Nullable } from "@docspace/shared/types";
 import type { TError } from "@docspace/shared/utils/axiosClient";
 
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 import {
   clearTextSelection,
   isEditableElementFocused,
 } from "@docspace/shared/utils/copy";
-import { TopLoaderService as TopLoadingIndicator } from "@docspace/ui-kit/components";
-import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { TopLoaderService as TopLoadingIndicator } from "@onlyoffice/apps-ui-kit/components";
+import { LoaderWrapper } from "@onlyoffice/apps-ui-kit/components/loader-wrapper";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TOAST_FOLDER_PUBLIC_KEY } from "@docspace/shared/constants";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";

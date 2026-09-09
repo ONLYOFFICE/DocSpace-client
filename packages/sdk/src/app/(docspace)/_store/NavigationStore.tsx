@@ -38,7 +38,7 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import { TNavigationItem } from "@docspace/ui-kit/components/navigation";
+import { TNavigationItem } from "@onlyoffice/apps-ui-kit/components/navigation";
 import { Nullable } from "@docspace/shared/types";
 
 class NavigationStore {

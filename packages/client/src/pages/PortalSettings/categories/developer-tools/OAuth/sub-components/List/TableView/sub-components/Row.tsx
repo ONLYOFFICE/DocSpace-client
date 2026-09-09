@@ -36,13 +36,13 @@
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { TableCell, TableRow } from "@docspace/ui-kit/components/table";
-import { Tags } from "@docspace/ui-kit/components/tags";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { TableCell, TableRow } from "@onlyoffice/apps-ui-kit/components/table";
+import { Tags } from "@onlyoffice/apps-ui-kit/components/tags";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import NameCell from "../columns/name";
 import CreatorCell from "../columns/creator";

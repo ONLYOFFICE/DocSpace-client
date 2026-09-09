@@ -36,7 +36,7 @@
 import { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/ui-kit/components";
+import { toastr } from "@onlyoffice/apps-ui-kit/components";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
 import { getBrandName } from "@docspace/shared/constants/brands";

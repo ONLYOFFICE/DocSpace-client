@@ -35,10 +35,10 @@
 
 import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Label } from "@docspace/ui-kit/components/label";
-import { Text } from "@docspace/ui-kit/components/text";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { LabelGroup, ControlsGroup } from "../presets/StyledPresets";
 

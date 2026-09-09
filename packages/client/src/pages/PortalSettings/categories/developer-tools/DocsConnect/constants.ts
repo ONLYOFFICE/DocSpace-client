@@ -35,7 +35,7 @@
 
 // Re-exported so the route lives in a single place: ui-kit redirects to it from
 // the payment completion page.
-export { DOCS_CONNECT_ROUTE } from "@docspace/ui-kit/billing/constants";
+export { DOCS_CONNECT_ROUTE } from "@onlyoffice/apps-ui-kit/billing/constants";
 
 export type TDocsConnectTab = "statistics" | "settings" | "preview";
 

@@ -43,7 +43,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import type AiAgentsTourStore from "SRC_DIR/store/AiAgentsTourStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";

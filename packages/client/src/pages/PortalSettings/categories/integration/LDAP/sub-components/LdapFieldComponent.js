@@ -35,9 +35,9 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
 
 const LdapFieldComponent = (props) => {
   const {

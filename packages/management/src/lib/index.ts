@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { parseToDateTime, now, formatDateLocalized, dateDiff } from "@docspace/ui-kit/utils/date";
+import { parseToDateTime, now, formatDateLocalized, dateDiff } from "@onlyoffice/apps-ui-kit/utils/date";
 
 import { TTranslation } from "@docspace/shared/types";
 import type { TPaymentQuota } from "@docspace/shared/api/portal/types";

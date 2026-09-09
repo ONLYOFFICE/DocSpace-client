@@ -39,7 +39,7 @@ import { isMobile } from "react-device-detect";
 import { withTranslation } from "react-i18next";
 
 import { EMPTY_OBJECT } from "@docspace/shared/constants";
-import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
+import { DragAndDrop } from "@onlyoffice/apps-ui-kit/components/drag-and-drop";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { isMobile as isMobileUtile, classNames } from "@docspace/shared/utils";
 import {

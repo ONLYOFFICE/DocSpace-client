@@ -43,7 +43,7 @@ import {
   IClientReqDTO,
 } from "@docspace/shared/utils/oauth/types";
 import { AuthenticationMethod } from "@docspace/shared/enums";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { addClient, getClient, updateClient } from "@docspace/shared/api/oauth";
 
 import ResetDialog from "../ResetDialog";

@@ -67,7 +67,7 @@ import { makeAutoObservable } from "mobx";
 import type { Nullable } from "@docspace/shared/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { TAgent } from "@docspace/shared/api/ai/types";
-import type { TChatPlaylistImage } from "@docspace/ui-kit/types/ai";
+import type { TChatPlaylistImage } from "@onlyoffice/apps-ui-kit/types/ai";
 
 export type AiRoomTab = "chat" | "knowledge" | "result";
 

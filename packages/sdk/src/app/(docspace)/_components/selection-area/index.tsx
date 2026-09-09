@@ -42,7 +42,7 @@ import {
   SelectionArea as SelectionAreaComponent,
   type TArrayTypes,
   type TOnMove,
-} from "@docspace/ui-kit/components/selection-area";
+} from "@onlyoffice/apps-ui-kit/components/selection-area";
 import { checkIsSSR, getCountTilesInRow } from "@docspace/shared/utils";
 import useFilesSelection from "@/app/(docspace)/_hooks/useFilesSelection";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";

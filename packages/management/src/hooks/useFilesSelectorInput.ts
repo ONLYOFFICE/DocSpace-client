@@ -36,7 +36,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 
 export const useFilesSelectorInput = () => {
 	const [newPath, setNewPathState] = useState("");

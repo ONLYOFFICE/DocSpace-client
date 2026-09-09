@@ -48,14 +48,14 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TPathParts } from "@docspace/shared/types";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import api from "@docspace/shared/api";
-import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
-import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
+import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
+import type { QuickActionItem } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import {
   CreateCustomRoomIllustrationIcon,
   UseRoomTemplateIllustrationIcon,
-} from "@docspace/ui-kit/components/quick-actions/icons";
+} from "@onlyoffice/apps-ui-kit/components/quick-actions/icons";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
@@ -90,7 +90,7 @@ import {
   InfoPanelEmbeddingDialog,
 } from "@/app/(docspace)/_components/info-panel";
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
-import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
 import { usePanelExclusivity } from "@/app/(docspace)/_hooks/usePanelExclusivity";
 
 import styles from "./RoomsLayout.module.scss";

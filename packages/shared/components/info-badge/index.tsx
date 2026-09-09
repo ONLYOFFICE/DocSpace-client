@@ -38,13 +38,13 @@ import type { TooltipRefProps } from "react-tooltip";
 
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import styles from "./InfoBadge.module.scss";
 import type InfoBadgeProps from "./InfoBadge.types";
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 const InfoBadge: FC<InfoBadgeProps> = ({
   label,

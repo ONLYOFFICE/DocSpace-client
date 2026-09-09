@@ -518,6 +518,24 @@ describe("ManualBackup", () => {
 
       expect(screen.getByText("Common:Create")).toBeInTheDocument();
     });
+
+    it("sends a delayed payment method to the wallet top-up instead of the copy", async () => {
+      const onOpenTopUpDialog = vi.fn();
+
+      render(
+        <ManualBackup
+          {...paidProps}
+          isDelayedPaymentMethod
+          onOpenTopUpDialog={onOpenTopUpDialog}
+        />,
+      );
+
+      await userEvent.click(screen.getByText("Common:TopUpWallet"));
+
+      expect(onOpenTopUpDialog).toHaveBeenCalled();
+      expect(portalApi.saveDeposite).not.toHaveBeenCalled();
+      expect(portalApi.startBackup).not.toHaveBeenCalled();
+    });
   });
 
   it("sets up and cleans up socket listeners", () => {

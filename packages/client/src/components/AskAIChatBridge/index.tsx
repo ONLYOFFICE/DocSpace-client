@@ -48,6 +48,7 @@ import {
   useAttachHostFilesToChat,
   notifyAlreadyAttached,
   notifyAttachmentLimit,
+  notifyOneFormOnly,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -112,11 +113,13 @@ const AskAIChatBridgeComponent = () => {
     setCurrentPage("chat");
 
     attachFilesToChat([file])
-      .then(({ skippedOverLimit, duplicates }) => {
-        // A file that did not make it onto the composer — capped or
-        // already there — must not disappear without a word.
+      .then(({ skippedOverLimit, duplicates, skippedExtraForms, limit }) => {
+        // A file that did not make it onto the composer — capped, already
+        // there, or a second form — must not disappear without a word. The
+        // cap is per section, so quote the one that actually applied.
         notifyAlreadyAttached(t, duplicates);
-        notifyAttachmentLimit(t, skippedOverLimit);
+        notifyOneFormOnly(t, skippedExtraForms);
+        notifyAttachmentLimit(t, skippedOverLimit, limit);
       })
       .catch((error: unknown) => {
         toastr.error(

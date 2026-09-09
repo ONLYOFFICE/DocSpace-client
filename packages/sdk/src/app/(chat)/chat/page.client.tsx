@@ -48,6 +48,7 @@ import {
   useAttachHostFilesToChat,
   notifyAlreadyAttached,
   notifyAttachmentLimit,
+  notifyOneFormOnly,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 import { ChatToolbar } from "@docspace/ui-kit/ai-agent/chat-toolbar";
 import {
@@ -114,12 +115,14 @@ const ChatParamsBridge = ({ fileId, threadId }: ChatParamsBridgeProps) => {
           },
         ]),
       )
-      .then(({ duplicates, skippedOverLimit }) => {
+      .then(({ duplicates, skippedOverLimit, skippedExtraForms, limit }) => {
         // Resuming a thread can land on a composer that already holds this
-        // file, and the cap applies here as anywhere else — both drop the
-        // chip silently, so say which one happened.
+        // file, the cap applies here as anywhere else, and a message carries
+        // one form at most — all three drop the chip silently, so say which
+        // one happened.
         notifyAlreadyAttached(t, duplicates);
-        notifyAttachmentLimit(t, skippedOverLimit);
+        notifyOneFormOnly(t, skippedExtraForms);
+        notifyAttachmentLimit(t, skippedOverLimit, limit);
       })
       .catch((error: unknown) => {
         frameCallEvent({

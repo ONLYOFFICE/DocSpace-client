@@ -270,11 +270,6 @@ export function fetchFilesImpl(
 
       let navigationPath = await Promise.all(
         data.pathParts.map(async (folder, idx) => {
-          // FolderType is a ui-kit `const enum` and may
-          // not be destructured (TS2475); the runtime object exists in the
-          // babel/esbuild build, so the original statement is kept under a
-          // suppression.
-          // @ts-expect-error TS2475 — const enum destructuring, see above.
           const { Rooms, Archive, AIAgents } = FolderType;
 
           // if (

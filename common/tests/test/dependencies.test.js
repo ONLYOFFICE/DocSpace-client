@@ -374,7 +374,9 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       // them statically, so host builds (Vite/webpack) need them installed,
       // but they are not referenced directly from ui-kit source.
       "@anthropic-ai/sdk",
+      "@assistant-ui/react",
       "@assistant-ui/react-markdown",
+      "assistant-stream",
       "@codemirror/lang-json",
       "codemirror",
       "@google/genai",

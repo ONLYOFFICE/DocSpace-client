@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "غيّر أذونات المستخدم للأشخاص المدعوين.",
   "ChargeAmount": "سيتم خصم مبلغ <1>{{price}}</1> من طريقة الدفع المحفوظة الخاصة بك.",
   "ChatHistory": "تاريخ الدردشة",
+  "ChatMessageNotAllowedInFormRoom": "لا يمكن حفظ رسالة الدردشة في مساحة تعبئة النماذج، لأن هذا النوع من المساحات يدعم ملفات \"PDF\" فقط.",
   "ChooseAIAgent": "اختر {{aiAgent}}",
   "ChooseAIAgentDescription": "حدد الوكيل الذي تريد الدردشة معه مع الذكاء الاصطناعي حول الملف المحدد. يمكنك اختيار وكيل موجود.",
   "ChooseAnother": "اختر أخرى",

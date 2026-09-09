@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "修改受邀人员的用户权限。",
   "ChargeAmount": "将从您保存的支付方式中扣除<1>{{price}}</1>的金额。",
   "ChatHistory": "历史对话",
+  "ChatMessageNotAllowedInFormRoom": "无法将聊天消息保存到表单填写空间，因为此空间类型仅支持 PDF 格式文件。",
   "ChooseAIAgent": "选择一个 {{aiAgent}}",
   "ChooseAIAgentDescription": "选择您希望与 AI 讨论所选文件的代理。您可以选择一个已存在的代理。",
   "ChooseAnother": "选择另一个",

@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "Spremenite uporabniška dovoljenja za povabljene osebe.",
   "ChargeAmount": "Z vašega shranjenega načina plačila bo zaračunano <1>{{price}}</1>.",
   "ChatHistory": "Zgodovina klepeta",
+  "ChatMessageNotAllowedInFormRoom": "Sporočila iz klepeta ni mogoče shraniti v prostor za izpolnjevanje obrazcev, ker ta vrsta prostora lahko vsebuje samo obrazce PDF.",
   "ChooseAIAgent": "Izberite {{aiAgent}}.",
   "ChooseAIAgentDescription": "Izberite agenta, kjer želite klepetati z umetno inteligenco o izbrani datoteki. Lahko izberete obstoječega agenta.",
   "ChooseAnother": "Izberi drugo",

@@ -392,6 +392,7 @@
   "ChangeUserPermissionsOnly": "Davet edilen kişilerin kullanıcı izinlerini değiştirin.",
   "ChargeAmount": "<1>{{price}}</1> tutarı kaydedilmiş ödeme yönteminize yüklenecektir.",
   "ChatHistory": "Sohbet geçmişi",
+  "ChatMessageNotAllowedInFormRoom": "Sohbet mesajı Form Doldurma alanına kaydedilemez çünkü bu alan türü sadece PDF formlar içerebilir.",
   "ChooseAIAgent": "Bir {{aiAgent}} seçin",
   "ChooseAIAgentDescription": "Seçtiğiniz dosya hakkında yapay zeka ile sohbet etmek istediğiniz aracı seçin. Mevcut bir aracı seçebilirsiniz.",
   "ChooseAnother": "Başka bir tane seçin",

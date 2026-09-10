@@ -40,6 +40,7 @@ import {
   docsConnectHandlers,
 } from "@docspace/shared/__mocks__/handlers";
 import type { DocsConnectPreset } from "@docspace/shared/__mocks__/handlers";
+import { PaymentMethodStatus } from "@docspace/shared/enums";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import type { Page } from "@playwright/test";
 
@@ -283,6 +284,47 @@ test.describe("Docs Connect plan panel", () => {
     await page.getByTestId("first_topup_cancel").click();
 
     await expect(submitButton(page)).toBeVisible();
+  });
+
+  test("a delayed payment method picked in Stripe checkout closes the panel with a settlement notice", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    usePreset(mockRequest, "paid", 1, { card: "unlinked" });
+    mockRequest.use(
+      http.get(apiUrl("portal/payment/checkoutsetupurl"), () =>
+        jsonResponse("https://example.com/checkout"),
+      ),
+    );
+
+    await openPanel(page, baseUrl, "Edit subscription");
+    await usersInput(page).fill("100");
+    await expect(submitButton(page)).toHaveText("Top up & Buy");
+
+    mockRequest.use(
+      http.get(apiUrl("portal/payment/customerinfo"), () =>
+        jsonResponse({
+          portalId: null,
+          paymentMethodStatus: PaymentMethodStatus.Set,
+          isDelayedPaymentMethod: true,
+          email: "test@gmail.com",
+          payer: { displayName: "Test Payer", hasAvatar: false },
+        }),
+      ),
+    );
+
+    const checkout = page.waitForEvent("popup");
+    await submitButton(page).click();
+    await checkout;
+
+    await expect(submitButton(page)).toBeHidden({ timeout: 15_000 });
+    await expect(
+      page.getByText(
+        "Bank transfers may take several business days to process. Credits will be added to your Wallet only after the funds arrive.",
+      ),
+    ).toBeVisible();
+    await expect(page.getByText("Your plan has been purchased")).toHaveCount(0);
   });
 
   test("a deactivated plan is paid again with a top-up", async ({

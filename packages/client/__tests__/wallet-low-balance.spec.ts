@@ -89,13 +89,21 @@ const balanceHandler = (amount = 0.6) =>
     jsonResponse({ subAccounts: [{ currency: "USD", amount }] }),
   );
 
-const customerInfoHandler = ({ isPayer = true } = {}) =>
+// payerLeft: the Stripe email is still stored but no profile matches it.
+const customerInfoHandler = ({ isPayer = true, payerLeft = false } = {}) =>
   http.get(apiUrl("portal/payment/customerinfo"), () =>
     jsonResponse({
       portalId: null,
       paymentMethodStatus: 1,
-      email: isPayer ? SELF_EMAIL : "konstantin123@gmail.com",
-      payer: isPayer ? null : { displayName: "Konstantin Payer", hasAvatar: false },
+      email: payerLeft
+        ? "gone.payer@example.com"
+        : isPayer
+          ? SELF_EMAIL
+          : "payer@example.com",
+      payer:
+        isPayer || payerLeft
+          ? null
+          : { displayName: "Test Payer", hasAvatar: false },
     }),
   );
 
@@ -181,7 +189,7 @@ test.describe("Wallet low balance banner", () => {
 
     await expect(
       banner(page).getByText(
-        "Contact the Payer (Konstantin Payer) to top up the wallet and avoid interruptions to paid services.",
+        "Contact the Payer (Test Payer) to top up the wallet and avoid interruptions to paid services.",
       ),
     ).toBeVisible();
 
@@ -189,6 +197,40 @@ test.describe("Wallet low balance banner", () => {
       "desktop",
       "wallet-low-balance",
       "banner-non-payer.png",
+    ]);
+  });
+
+  test("a departed payer is pointed at by a mailto link", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      walletSettingsHandler(),
+      customerInfoHandler({ isPayer: false, payerLeft: true }),
+    );
+
+    await page.goto(`${baseUrl}${PAGE_URL}`);
+
+    const header = page.getByTestId("snackbar-header");
+    await expect(header).toBeVisible();
+    await expect(header).toHaveText("Your credits are running low: $0.60");
+
+    await expect(
+      banner(page).getByText(
+        "Contact the Payer (gone.payer@example.com) to top up the wallet and avoid interruptions to paid services.",
+      ),
+    ).toBeVisible();
+
+    const mailtoLink = banner(page).locator(
+      'a[href="mailto:gone.payer@example.com"]',
+    );
+    await expect(mailtoLink).toHaveText("gone.payer@example.com");
+
+    await expectScreenshot(page, [
+      "desktop",
+      "wallet-low-balance",
+      "banner-departed-payer.png",
     ]);
   });
 

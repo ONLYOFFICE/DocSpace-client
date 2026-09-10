@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Это приложение отключено",
   "OAuthApplicationEmpty": "Приложение не найдено",
   "OAuthClientEmpty": "Идентификатор клиента не найден",
+  "OAuthInvalidRequest": "Запрос авторизации недействителен. Проверьте URI перенаправления в настройках приложения",
   "RecaptchaInvalid": "Неверный код Recaptcha",
   "SsoAttributesNotFound": "Аутентификация не пройдена (атрибуты пользователя в утверждении не найдены)",
   "SsoAuthFailed": "Аутентификация не пройдена",

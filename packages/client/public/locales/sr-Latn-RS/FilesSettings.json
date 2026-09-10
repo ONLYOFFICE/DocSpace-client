@@ -2,5 +2,6 @@
   "CancellaionNotification": "Ne prikazuj više obaveštenje o otkazivanju",
   "DefaultHomepage": "Podrazumevana početna stranica",
   "GroupByRooms": "Grupisanje po sobama",
-  "OpenSameTab": "Otvori uređivače u istoj kartici"
+  "OpenSameTab": "Otvori uređivače u istoj kartici",
+  "ShowQuickActions": "Prikaži brze akcije"
 }

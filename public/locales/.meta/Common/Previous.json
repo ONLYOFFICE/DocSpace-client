@@ -3,7 +3,7 @@
   "content": "Previous",
   "content_en_sha1_hash": "50f94286ba30706a19070d3ec0a0c8d34d6cf6eb",
   "created_at": "2025-05-19T21:30:47.476Z",
-  "updated_at": "2026-05-15T15:37:40.246Z",
+  "updated_at": "2026-09-09T15:42:08.496Z",
   "comment": {
     "text": "Button label. Navigates to the previous page in a paginated list of items, such as user accounts.",
     "is_auto": true,
@@ -12,10 +12,46 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 383,
+      "context": "/>\n ) : null}\n <QuickActions\n items={createItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n </section>\n \n {moduleItems.length > 0 ? (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/index.js",
+      "line_number": 747,
+      "context": "items={quickActions.items}\n className={styles.quickActions}\n isLoading={showFilterLoader}\n onClose={onHideQuickActions}\n closeLabel={t(\"Common:DisableQuickActionsOnAllPages\")}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n dataTestId=\"quick-actions\"\n />\n </Section.SectionBanner>\n ) : null}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AccountsPaging.tsx",
       "line_number": 127,
       "context": "return (\n <Paging\n className={`${styles.styledPaging} accounts-paging`}\n pageItems={pageItems}\n countItems={countItems}\n previousLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n openDirection=\"top\"\n onSelectPage={onSelectPage}\n onSelectCount={onCountChange}\n previousAction={onSelectPagePrevHandler}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
+      "line_number": 214,
+      "context": "<>\n {showCreateButton && (\n <QuickActions\n items={quickActionItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n )}\n <AgentsFilter\n showMainButton={showCreateButton}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/layout.client.tsx",
+      "line_number": 686,
+      "context": "<div style={{ display: isEditing ? \"none\" : undefined }}>\n {showQuickActions && (\n <QuickActions\n items={quickActionItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n )}\n {showFilter && (\n <FormsFilter",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
+      "line_number": 615,
+      "context": "className={styles.createNewSection}\n >\n <QuickActions\n items={quickActionItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n </div>\n ) : undefined\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-layout/index.tsx",
+      "line_number": 325,
+      "context": "sectionBannerContent={\n !isArchive && canCreateRooms ? (\n <QuickActions\n items={quickActionItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n ) : undefined\n }\n sectionFilterContent={",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

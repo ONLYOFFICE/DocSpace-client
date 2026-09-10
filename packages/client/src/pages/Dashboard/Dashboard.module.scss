@@ -366,8 +366,6 @@
 // capped tiles left a gap at the end of the row. Height is unchanged.
 .quickActions {
   --quick-actions-tile-max-width: none;
-
-  justify-content: flex-start;
 }
 
 // Modules grid. Breakpoints are on the `dashboard-content` container

@@ -401,12 +401,12 @@ class DocsConnectStore {
       return !!payer?.email;
     }, signal);
 
-    if (signal.aborted) return false;
+    if (signal.aborted) return null;
 
     if (isDelayedPaymentMethod) {
       this.closeBuyPlan();
       this.refreshPortalState();
-      return false;
+      return { isDelayedPaymentMethod };
     }
 
     await pollUntil(async () => {
@@ -430,11 +430,11 @@ class DocsConnectStore {
       return activated;
     }, signal);
 
-    if (signal.aborted) return false;
+    if (signal.aborted) return null;
 
     this.closeBuyPlan();
     this.refreshPortalState();
-    return true;
+    return { isDelayedPaymentMethod };
   };
 
   calculateDevPack = async (quantity: number) =>

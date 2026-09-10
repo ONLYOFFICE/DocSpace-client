@@ -117,7 +117,7 @@ interface BuyPlanPanelProps {
       successUrl?: string,
     ) => Promise<string | null | undefined>;
     signal: AbortSignal;
-  }) => Promise<boolean>;
+  }) => Promise<{ isDelayedPaymentMethod: boolean } | null>;
   isCardMissingOrInactive?: boolean;
   isCardLinkedToPortal?: boolean;
   isPayer?: boolean;
@@ -396,7 +396,7 @@ const BuyPlanPanel = ({
           topUp: insufficientFunds ? topUpRequired : 0,
         });
       } else if (controller) {
-        const done = await buyPlanViaStripe?.({
+        const completion = await buyPlanViaStripe?.({
           users,
           devPack,
           topUp: topUpRequired,
@@ -405,7 +405,11 @@ const BuyPlanPanel = ({
           fetchCardLinked,
           signal: controller.signal,
         });
-        if (!done) return;
+        if (!completion) return;
+        if (completion.isDelayedPaymentMethod) {
+          toastr.success(t("Common:TopUpDelayedPaymentMethodWarning"));
+          return;
+        }
       } else {
         await buyPlan?.({
           users,

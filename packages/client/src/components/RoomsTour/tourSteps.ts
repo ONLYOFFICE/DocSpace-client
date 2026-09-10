@@ -45,7 +45,8 @@ import {
   elementGroupStep,
   revealStep,
   sidebarSelector,
-  expandQuickActions,
+  revealQuickActionTile,
+  rewindQuickActions,
 } from "SRC_DIR/components/Tour/stepBuilders";
 
 const LOG_LABEL = "rooms tour";
@@ -67,8 +68,10 @@ const ROOM_TYPE_TILE_SELECTORS = [
 const GROUPS_SELECTOR = ".group-tags";
 
 // The first room of the list, in whichever view is active (only one of the
-// three is mounted at a time).
-const FIRST_ITEM_SELECTOR =
+// three is mounted at a time). Exported because the host waits on it too: the
+// members step's reveal reads the room out of the file list, so it needs the
+// row to be there before it runs (`RevealHooks.awaitBefore`).
+export const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
 // The info panel's outer wrapper (ui-kit Section/InfoPanel keeps this plain
@@ -137,8 +140,8 @@ export function getTourSteps(
   return [
     // 1. The room types, named by what each one is for. Picking the right type
     // up front matters: the type fixes what members can do and cannot be
-    // changed afterwards. With six tiles the banner clips to its first row, so
-    // every tile step expands it before measuring anything.
+    // changed afterwards. The banner is a carousel, so every tile step scrolls
+    // its target into the strip before measuring anything.
     canCreate &&
       showFilter &&
       elementGroupStep(
@@ -157,7 +160,7 @@ export function getTourSteps(
         callbacks,
         LOG_LABEL,
         6,
-        expandQuickActions,
+        rewindQuickActions,
       ),
 
     // 2. Templates — the fastest path for teams that spin up similar rooms
@@ -172,7 +175,7 @@ export function getTourSteps(
         callbacks,
         LOG_LABEL,
         6,
-        expandQuickActions,
+        revealQuickActionTile('[data-testid="quick-use-template"]'),
       ),
 
     // 3. AI chat — the same tile, and the same thing to say about it, as in the
@@ -185,7 +188,7 @@ export function getTourSteps(
         callbacks,
         LOG_LABEL,
         6,
-        expandQuickActions,
+        revealQuickActionTile('[data-testid="quick-ai-chat"]'),
       ),
 
     // 4. Room groups — the row of chips above the list.
@@ -250,8 +253,15 @@ export function getTourSteps(
     // 7. Only when the section was stood in for. The stand-in rooms are the
     // last thing the user saw, and dropping them lands them on the empty
     // screen — so rather than let that happen behind their back, the closing
-    // step does it deliberately. `restore` is a no-op either way: the section
-    // is the user's own from here on.
+    // step does it deliberately.
+    //
+    // `restore` puts the stand-in rooms back, because the user can walk back
+    // out of this step and everything before it is anchored on the section it
+    // just dismantled — the banner's tiles, the groups row, a room row and the
+    // panel opened on it. react-joyride answers a step whose target has gone
+    // by moving one further in the direction of travel, so leaving the empty
+    // screen up made a single Back skip a step, and from there the index
+    // walked off the start of the list and closed the tour outright.
     //
     // What it points at, and what it says, is whatever that screen actually
     // offers. Somebody who can create a room is a click away from everything

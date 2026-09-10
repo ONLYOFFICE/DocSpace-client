@@ -35,7 +35,7 @@
 
 import { defineConfig, type UserConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import svgr from "vite-plugin-svgr";
+import svgr, { type VitePluginSvgrOptions } from "vite-plugin-svgr";
 
 import { pkg, getBuildDate } from "./config/utils";
 import { jsxInJsPlugin } from "./config/plugins/jsx-in-js";
@@ -53,6 +53,12 @@ import { resolve } from "./config/resolve";
 import { css } from "./config/css";
 import { server } from "./config/server";
 import { getBuildConfig } from "./config/build";
+
+type SvgrOptions = NonNullable<VitePluginSvgrOptions["svgrOptions"]>;
+
+/** Plugin list accepted by the svgo instance svgr runs. */
+type SvgoConfig = NonNullable<SvgrOptions["svgoConfig"]>;
+type SvgoPlugins = NonNullable<SvgoConfig["plugins"]>;
 
 // ===========================================================================
 // Main Vite configuration
@@ -86,6 +92,17 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
           exportType: "default",
           svgo: true,
           svgoConfig: {
+            // Keep the viewBox so imported icons stay scalable.
+            //
+            // The cast covers a version split, not a wrong value: svgr runs
+            // svgo 3 (pinned as `@svgr/plugin-svgo>svgo` in
+            // pnpm-workspace.yaml), where `removeViewBox` is part of
+            // preset-default and has to be switched off here. The types come
+            // from svgo 4 instead, because @svgr/core's declarations import
+            // "svgo" without depending on it, so TypeScript picks whichever
+            // copy pnpm hoists. svgo 4 dropped `removeViewBox` from
+            // preset-default, so its types reject an override that is
+            // required for the svgo that actually runs.
             plugins: [
               {
                 name: "preset-default",
@@ -95,7 +112,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
                   },
                 },
               },
-            ],
+            ] as SvgoPlugins,
           },
         },
         include: "**/*.svg",

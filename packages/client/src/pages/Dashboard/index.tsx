@@ -380,6 +380,8 @@ const Dashboard = (props: DashboardProps) => {
               <QuickActions
                 items={createItems}
                 className={styles.quickActions}
+                prevLabel={t("Common:Previous")}
+                nextLabel={t("Common:Next")}
               />
             </section>
 

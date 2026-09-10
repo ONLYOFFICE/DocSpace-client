@@ -1,4 +1,0 @@
-[submodule "libs/ui-kit"]
-	path = libs/ui-kit
-	url = ../docspace-ui-kit-react.git
-	branch = release/v4.0.0

@@ -2981,7 +2981,7 @@ packages:
     os: [win32]
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tar.gz':
-    resolution: {integrity: sha512-6q2k2gEYRMQYugxfi0PwSkBSq+7wcVoxCBZKORXwHDwKhFWj1cD1rT1T9K6Blg7PtZJttwj3xSXSQWwa3jhmkA==, tarball: file:onlyoffice-apps-ui-kit.tar.gz}
+    resolution: {integrity: sha512-QnHk1KAWWAaPjyzRp13MYDq1LLnHxIkFH1Ajt5W4qNyT4ZUe5JduAincjLhzocSClx4c7KYR31Gkoo+YcURLpg==, tarball: file:onlyoffice-apps-ui-kit.tar.gz}
     version: 0.0.1
     engines: {node: '>=22'}
     peerDependencies:

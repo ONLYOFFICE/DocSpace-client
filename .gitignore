@@ -57,3 +57,7 @@ translation-stats.md
 verification-checkpoint.json
 common/translation-app/backend/src/scripts/form/downloads
 .fallow/
+
+# Cloned separately, no longer a git submodule; built into a tarball by
+# scripts/build-ui-kit-tarball.js. See CLAUDE.md for the clone instructions.
+/libs/ui-kit/

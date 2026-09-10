@@ -10,8 +10,8 @@ paths:
 
 Rules below are enforced by `common/tests` suites (blocking pre-push gate) and
 Biome plugins, but are invisible until the push fails. `libs/ui-kit` is in
-scope for all of them, but it is a git submodule — violations there must be
-fixed in `docspace-ui-kit-react`.
+scope for all of them, but it is a separately cloned repository, not part of
+this one — violations there must be fixed in `docspace-ui-kit-react`.
 
 ## No hardcoded hex colors — anywhere (colors.test.js)
 

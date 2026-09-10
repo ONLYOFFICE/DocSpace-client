@@ -36,8 +36,12 @@
 
 // Rebuilds libs/ui-kit and packs it into a tarball at the repo root so it can
 // be consumed as a `file:` dependency instead of a pnpm workspace package.
-// Run this manually after pulling a new ui-kit submodule commit and re-run
-// `pnpm install` in the client repo afterwards to pick up the new tarball.
+//
+// libs/ui-kit is a plain, independent clone of docspace-ui-kit-react -- not a
+// git submodule of this repo -- so it is not created by `git clone` here and
+// is gitignored. Run this manually after pulling a new ui-kit commit and
+// re-run `pnpm install` in the client repo afterwards to pick up the new
+// tarball.
 
 const { execFileSync } = require("node:child_process");
 const fs = require("node:fs");
@@ -50,16 +54,17 @@ const tarballPath = path.join(repoRoot, tarballName);
 
 if (!fs.existsSync(path.join(uiKitDir, "package.json"))) {
   console.error(
-    `libs/ui-kit not found or not checked out (expected ${uiKitDir}). ` +
-      "Run `git submodule update --init libs/ui-kit` first.",
+    `libs/ui-kit not found (expected ${uiKitDir}). ` +
+      "Clone it there first, e.g.:\n" +
+      "  git clone git@git.onlyoffice.com:ONLYOFFICE/docspace-ui-kit-react.git libs/ui-kit",
   );
   process.exit(1);
 }
 
 // `pnpm build` runs generate-exports-map.mjs, which rewrites package.json in
 // place with ~900 generated export entries -- needed inside the packed
-// tarball, but not something to leave sitting in the submodule's working
-// tree afterwards. Only restore it automatically when it was clean going in;
+// tarball, but not something to leave sitting in libs/ui-kit's working tree
+// afterwards. Only restore it automatically when it was clean going in;
 // otherwise leave it for the developer to sort out rather than discarding
 // unrelated in-progress edits.
 const packageJsonWasClean =

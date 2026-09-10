@@ -1182,6 +1182,17 @@ export async function enableDisplayFileExtension(val: boolean) {
   return res;
 }
 
+export async function changeShowQuickActions(val: boolean) {
+  const data = { set: val };
+  const res = (await request({
+    method: "put",
+    url: "files/showquickactions",
+    data,
+  })) as boolean;
+
+  return res;
+}
+
 export async function changeOpenEditorInSameTab(val: boolean) {
   const data = { set: val };
   const res = (await request({

@@ -109,7 +109,6 @@ const AI_SEARCH_USAGE = [
 ];
 
 const transaction = (overrides: Record<string, unknown>) => ({
-  agentTitle: "",
   serviceUnit: "",
   quantity: 0,
   participantDisplayName: "Administrator",
@@ -161,7 +160,9 @@ const AI_TRANSACTIONS = [
     date: "2025-12-09T10:15:00.0000000Z",
     description: "AI services",
     details: "Requests",
-    agentTitle: "Assistant",
+    sourceId: "10",
+    sourceTitle: "Assistant",
+    sourceType: "Agent",
     serviceUnit: "requests",
     quantity: 120,
     participantDisplayName: "Admin User",
@@ -171,12 +172,58 @@ const AI_TRANSACTIONS = [
     date: "2025-12-04T16:45:00.0000000Z",
     description: "AI services",
     details: "Tokens",
-    agentTitle: "Assistant",
+    sourceId: "10",
+    sourceTitle: "Assistant",
+    sourceType: "Agent",
     serviceUnit: "tokens",
     quantity: 12345,
     debit: 0.3,
   }),
 ];
+
+const AI_SOURCE_TRANSACTIONS = [
+  ["Agent", "Smith"],
+  ["Room", "Marketing"],
+  ["Folder", "Reports"],
+  ["File", "Budget.xlsx"],
+  ["Form", "Onboarding"],
+].map(([sourceType, sourceTitle], index) =>
+  transaction({
+    date: `2025-12-0${9 - index}T10:00:00.0000000Z`,
+    description: "AI services",
+    details: "Requests",
+    sourceId: String(index + 1),
+    sourceTitle,
+    sourceType,
+    serviceUnit: "requests",
+    quantity: 10 * (index + 1),
+    participantDisplayName: "Admin User",
+    debit: (index + 1) / 10,
+  }),
+);
+
+AI_SOURCE_TRANSACTIONS.push(
+  transaction({
+    date: "2025-12-04T10:00:00.0000000Z",
+    description: "AI services",
+    details: "Requests",
+    sourceId: "6",
+    sourceType: "Room",
+    serviceUnit: "requests",
+    quantity: 7,
+    participantDisplayName: "Admin User",
+    debit: 0.07,
+  }),
+  transaction({
+    date: "2025-12-03T10:00:00.0000000Z",
+    description: "AI services",
+    details: "Requests",
+    serviceUnit: "requests",
+    quantity: 5,
+    participantDisplayName: "Admin User",
+    debit: 0.05,
+  }),
+);
 
 const AI_SEARCH_TRANSACTIONS = [
   transaction({
@@ -1418,6 +1465,46 @@ test.describe("Add-on pages with a transaction history", () => {
       "desktop",
       "addon-pages",
       "ai-services-transactions.png",
+    ]);
+  });
+
+  test("the AI services page labels every kind of charge source", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      ...walletServicesHandler(["aitools"]),
+      ...servicePageHandlers({
+        usage: AI_USAGE,
+        operations: AI_SOURCE_TRANSACTIONS,
+      }),
+    );
+
+    await page.goto(`${baseUrl}${AI_ROUTE}`);
+
+    await expect(
+      page.getByText("AI Agent: Smith", { exact: true }),
+    ).toBeVisible(FIRST_RENDER);
+    await expect(
+      page.getByText("Room: Marketing", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("Folder: Reports", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("File: Budget.xlsx", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("Form space: Onboarding", { exact: true }),
+    ).toBeVisible();
+    await expect(page.getByText("Room", { exact: true })).toBeVisible();
+    await expect(page.getByText("-$0.05", { exact: true })).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "addon-pages",
+      "ai-services-transaction-sources.png",
     ]);
   });
 

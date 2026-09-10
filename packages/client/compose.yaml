@@ -60,6 +60,9 @@ services:
       # UI-kit sources
       - ../../libs/ui-kit/components:/app/libs/ui-kit/components
       - ../../libs/ui-kit/assets:/app/libs/ui-kit/assets
+      # Billing helpers are imported by mounted client stores, so leaving them
+      # baked in the image builds fresh callers against stale helpers and fails
+      # on a missing export - the same trap as shared/routes above.
       - ../../libs/ui-kit/billing:/app/libs/ui-kit/billing
       - ../../libs/ui-kit/constants:/app/libs/ui-kit/constants
       - ../../libs/ui-kit/context:/app/libs/ui-kit/context

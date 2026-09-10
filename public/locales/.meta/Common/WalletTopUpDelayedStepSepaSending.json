@@ -1,0 +1,29 @@
+{
+  "key_path": "WalletTopUpDelayedStepSepaSending",
+  "content": "Sending SEPA transfer",
+  "content_en_sha1_hash": "daa879bbd56fa86f003e09a7aae8794b9a155664",
+  "created_at": "2026-09-10T16:17:38.445Z",
+  "updated_at": "2026-09-10T16:19:01.289Z",
+  "comment": {
+    "text": "A step label in a progress list on the payment completion page, representing the active stage of a delayed SEPA transfer process.",
+    "is_auto": true,
+    "updated_at": "2026-09-10T16:19:01.289Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 127,
+      "context": "callout: t(\"Common:WalletTopUpDelayedCallout\"),\n steps: [\n { key: \"card\", label: t(\"Common:WalletTopUpStepCardSaved\") },\n {\n key: \"transfer\",\n label: t(\"Common:WalletTopUpDelayedStepSepaSending\"),\n doneLabel: t(\"Common:WalletTopUpDelayedStepSepaSent\"),\n },\n { key: \"funds\", label: t(\"Common:WalletTopUpDelayedStepFunds\") },\n ],\n buttonLabel: t(\"Common:BackToBilling\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

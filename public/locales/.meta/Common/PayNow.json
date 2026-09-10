@@ -3,7 +3,7 @@
   "content": "Pay now",
   "content_en_sha1_hash": "748c323563fa6fbdd11c83ad179d271f720fa73a",
   "created_at": "2026-08-27T15:37:35.205Z",
-  "updated_at": "2026-08-27T15:39:15.783Z",
+  "updated_at": "2026-09-10T16:17:50.362Z",
   "comment": {
     "text": "Button label in the billing overview that appears when a user is in a grace period and needs to process a payment to maintain their plan.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
-      "line_number": 120,
-      "context": "size={isMobile ? ButtonSize.normal : ButtonSize.small}\n label={\n isGracePeriod\n ? isBalanceInsufficient\n ? t(\"TopUpAndRenew\")\n : t(\"PayNow\")\n : t(\"UpgradePlan\")\n }\n onClick={isGracePeriod ? onRenewPlan : onEditPlan}\n isDisabled={isGracePeriod && isCardMissingOrInactive}\n isLoading={isLoading}",
+      "line_number": 101,
+      "context": "const getPlanButtonLabel = () => {\n if (!isGracePeriod) return t(\"UpgradePlan\");\n if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n if (isBalanceInsufficient) return t(\"TopUpAndRenew\");\n return t(\"PayNow\");\n };\n \n const getPlanButtonAction = () => {\n if (isDelayedPaymentTopUp) return openTopUpDialog;\n if (isGracePeriod) return onRenewPlan;",
       "module": "/libs/ui-kit"
     }
   ],

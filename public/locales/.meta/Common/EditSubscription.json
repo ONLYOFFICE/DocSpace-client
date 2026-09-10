@@ -3,7 +3,7 @@
   "content": "Edit subscription",
   "content_en_sha1_hash": "ff7f89fc702e468dbff110a0c725497b81c29c76",
   "created_at": "2026-04-10T13:53:45.069Z",
-  "updated_at": "2026-08-31T18:23:50.768Z",
+  "updated_at": "2026-09-10T16:17:50.235Z",
   "comment": {
     "text": "This is a button label in a context menu and a dialog title. It allows users to modify their existing subscription plan.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 219,
+      "line_number": 230,
       "context": "const balance = formatWalletCurrency();\n \n const contextMenuItems = [\n {\n key: \"edit\",\n label: t(\"EditSubscription\"),\n iconNode: <PencilIcon />,\n onClick: openUpgradeDialog,\n },\n {\n key: \"cancel\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 219,
+      "line_number": 230,
       "context": "const balance = formatWalletCurrency();\n \n const contextMenuItems = [\n {\n key: \"edit\",\n label: t(\"EditSubscription\"),\n iconNode: <PencilIcon />,\n onClick: openUpgradeDialog,\n },\n {\n key: \"cancel\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 192,
+      "line_number": 203,
       "context": "},\n ]\n : [\n {\n key: \"edit\",\n label: t(\"Common:EditSubscription\"),\n iconNode: <PencilIcon />,\n onClick: onEditPlan,\n },\n {\n key: \"usage\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 192,
+      "line_number": 203,
       "context": "},\n ]\n : [\n {\n key: \"edit\",\n label: t(\"Common:EditSubscription\"),\n iconNode: <PencilIcon />,\n onClick: onEditPlan,\n },\n {\n key: \"usage\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 519,
+      "line_number": 526,
       "context": "withBodyScroll\n >\n <ModalDialog.Container>{container}</ModalDialog.Container>\n <ModalDialog.Header>\n {hasStorageSubscription\n ? t(\"EditSubscription\")\n : t(\"AdditionalDiskStorage\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.dialogBody}>\n <Text className={styles.dialogDescription} fontSize=\"12px\">",
       "module": "/libs/ui-kit"
     },
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 663,
+      "line_number": 695,
       "context": ">\n <ModalDialog.Header>\n {isRenew\n ? t(\"Common:RenewSubscription\")\n : isEditActive\n ? t(\"Common:EditSubscription\")\n : t(\"DocsConnect:DocsConnect\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.body}>\n <div className={styles.walletCard}>",
       "module": "/packages/client"
     },

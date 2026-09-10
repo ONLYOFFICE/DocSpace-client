@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Het abonnement wordt automatisch verlengd <1>op {{date}}</1>",
   "TopUpAndBuy": "Aanvullen & kopen",
   "TopUpHint": "Uw portemonnee wordt opgewaardeerd met <1>{{amount}}</1> en het geselecteerde abonnement wordt automatisch aangeschaft. Oplaadtarieven worden afgerond naar het volgende volle dollar.",
+  "TopUpWalletHint": "Er zijn niet genoeg credits voor het geselecteerde {{service}}-abonnement. Vul uw portemonnee aan en kom daarna terug om de aankoop te voltooien.",
   "TotalDueTodayTooltip": "Vandaag betaalt u alleen voor het geselecteerde aantal gebruikers voor de resterende dagen tot uw factureringsdatum. Vanaf dan wordt het volledige bedrag eenmaal per factureringscyclus in rekening gebracht op uw reguliere factureringsdatum.",
   "TotalMonthly": "Totaal per maand",
   "TrialAvailable": "Er is een gratis proefperiode van één maand beschikbaar. Geen creditcard vereist.",

@@ -3,7 +3,7 @@
   "content": "Top up wallet",
   "content_en_sha1_hash": "155fb560e348142a6331187a877f862f8cc8df81",
   "created_at": "2026-04-10T13:53:43.673Z",
-  "updated_at": "2026-09-04T07:59:41.545Z",
+  "updated_at": "2026-09-10T16:17:50.103Z",
   "comment": {
     "text": "Dialog title for a modal window where users can add funds to their wallet.",
     "is_auto": true,
@@ -12,16 +12,70 @@
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 168,
+      "context": "? executeWalletUpdate(managersCount, ProductQuantityType.Add, t)\n : onUpdateTariff());\n };\n \n const getPayTariffLabel = () => {\n if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n if (!isCardLinkedToPortal || isBalanceInsufficient)\n return t(\"TopUpAndUpgrade\");\n return t(\"UpgradeNow\");\n };",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
+      "line_number": 99,
+      "context": "executeWalletUpdate(maxCountManagersByQuota, ProductQuantityType.Add, t);\n };\n \n const getPlanButtonLabel = () => {\n if (!isGracePeriod) return t(\"UpgradePlan\");\n if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n if (isBalanceInsufficient) return t(\"TopUpAndRenew\");\n return t(\"PayNow\");\n };\n \n const getPlanButtonAction = () => {",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 222,
+      "context": "const renewalShortfall = Math.max(0, Math.ceil(monthlyPrice - walletBalance));\n const isDelayedPaymentTopUp = isDelayedPaymentMethod && renewalShortfall > 0;\n \n const getRenewLabel = () => {\n if (renewalShortfall <= 0) return t(\"RenewSubscription\");\n if (isDelayedPaymentMethod) return t(\"TopUpWallet\");\n return t(\"TopUpAndRenew\");\n };\n const balance = formatWalletCurrency();\n \n const contextMenuItems = [",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 136,
+      "context": "const renewalShortfall = Math.max(0, Math.ceil(monthlyCharge - credits));\n const isDelayedPaymentTopUp = isDelayedPaymentMethod && renewalShortfall > 0;\n \n const getRenewLabel = () => {\n if (renewalShortfall <= 0) return t(\"Common:RenewSubscription\");\n if (isDelayedPaymentMethod) return t(\"Common:TopUpWallet\");\n return t(\"Common:TopUpAndRenew\");\n };\n const formatCurrency = (value: number, digits: number) =>\n paymentStore.formatWalletCurrency(value, digits, currency);",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
+      "line_number": 113,
+      "context": "isBalanceInsufficient && !isTopUpUnavailable && !isDelayedPaymentTopUp;\n \n const getTitle = () => {\n if (isExceedingStorageLimit) return t(\"SendRequest\");\n \n if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n \n if (canTopUpAndBuy) return t(\"TopUpAndUpgrade\");\n \n if (!hasStorageSubscription) return t(\"UpgradeNow\");",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/TopUpModal.tsx",
       "line_number": 121,
       "context": "onClose={() => onClose(false)}\n displayType={ModalDialogType.aside}\n {...headerProps}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"TopUpWallet\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.modalBody}>\n <WalletInfo balance={balanceValue} />\n <PaymentMethod\n walletCustomerEmail={walletCustomerEmail!}",
       "module": "/libs/ui-kit"
     },
     {
+      "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
+      "line_number": 1671,
+      "context": "if (this.isTariffDueTodayCalculating) return t(\"UpgradeNow\");\n \n if (this.tariffDueTodayAmount !== null && !isTheSameCount) {\n if (isBalanceInsufficient)\n return this.tariff.isDelayedPaymentMethod\n ? t(\"TopUpWallet\")\n : t(\"TopUpAndUpgrade\");\n return t(\"PayAndUpgrade\", {\n amount: this.formatPaymentCurrency(dueTodayAmount),\n });\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 487,
+      "context": "if (isOverLimit) return t(\"Common:SendRequest\");\n \n if (isEditActive) {\n if (isScheduled) return t(\"Common:ScheduleChange\");\n \n if (isDelayedPaymentTopUp) return t(\"Common:TopUpWallet\");\n \n return insufficientFunds && !isTopUpUnavailable\n ? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 487,
+      "context": "if (isOverLimit) return t(\"Common:SendRequest\");\n \n if (isEditActive) {\n if (isScheduled) return t(\"Common:ScheduleChange\");\n \n if (isDelayedPaymentTopUp) return t(\"Common:TopUpWallet\");\n \n return insufficientFunds && !isTopUpUnavailable\n ? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/Shell.jsx",
       "line_number": 902,
       "context": "description: isPayer\n ? t(\"Common:TopUpWalletToContinue\")\n : t(\"Common:InsufficientFundsContactPayerShort\"),\n action: isPayer\n ? {\n text: t(\"Common:TopUpWallet\"),\n onClick: () => navigate(\"/portal-settings/payments/wallet\"),\n }\n : null,\n };\n },",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
+      "line_number": 258,
+      "context": ");\n \n const topUpAmount = Math.ceil((backupServicePrice ?? 0) - walletBalance);\n \n const getCopyButtonLabel = () => {\n if (isDelayedPaymentTopUp) return t(\"Common:TopUpWallet\");\n if (isTopUpBeforeCopy || isTopUpDialogBeforeCopy)\n return t(\"Common:TopUpAndMakeCopy\");\n return undefined;\n };",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

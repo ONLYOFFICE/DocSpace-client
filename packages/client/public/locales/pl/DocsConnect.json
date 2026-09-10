@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Subskrypcja zostanie automatycznie odnowiona <1>w dniu {{date}}</1>",
   "TopUpAndBuy": "Doładuj i kup",
   "TopUpHint": "Twój portfel zostanie doładowany o <1>{{amount}}</1>, a wybrana subskrypcja zostanie zakupiona automatycznie. Kwoty doładowania są zaokrąglane w górę do pełnego dolara.",
+  "TopUpWalletHint": "Brak wystarczającej liczby kredytów dla wybranej subskrypcji {{service}}. Doładuj portfel, a następnie wróć, aby dokończyć zakup.",
   "TotalDueTodayTooltip": "Dzisiaj płacisz jedynie za wybraną liczbę użytkowników za pozostałe dni do daty rozliczenia. Od tego momentu pełna kwota będzie naliczana raz na cykl rozliczeniowy w regularnym dniu rozliczenia.",
   "TotalMonthly": "Razem miesięcznie",
   "TrialAvailable": "Dostępny jest bezpłatny miesięczny okres próbny. Karta kredytowa nie jest wymagana.",

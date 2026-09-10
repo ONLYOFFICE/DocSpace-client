@@ -79,13 +79,26 @@ export const NAVIGATION_TARGET_TIMEOUT = 8000;
  * The pair of hooks a `revealStep` uses to bring its own target on screen, and
  * to put back whatever that took.
  *
- * `navigates` marks a reveal that changes the route — see `revealStep` for why
- * that matters to the wait.
+ * `navigates` marks a reveal that changes the route, or re-fetches the section
+ * it is pointing at — either way the target arrives on a round trip rather
+ * than on a re-render, which does not fit the ordinary budget. See
+ * `revealStep` for why that matters to the wait.
  */
 export type RevealHooks = {
   reveal: () => void;
   restore: () => void;
   navigates?: boolean;
+  /**
+   * Something `reveal` needs on the page before it can do its job — the room
+   * row the info panel is opened *on*, for instance, which `reveal` reads out
+   * of the file list rather than off the DOM.
+   *
+   * Waited for before `reveal` is called, so a step whose precondition is
+   * still on its way (a list being re-fetched by the step the user just walked
+   * back out of) opens on it rather than on nothing. A step whose reveal
+   * depends on nothing but the page already being there leaves this out.
+   */
+  awaitBefore?: string;
 };
 
 /**
@@ -628,6 +641,16 @@ export function revealStep(
     data: { revealsTarget: true, presence },
     before: async () => {
       const signal = callbacks?.getSignal();
+
+      // Whatever the reveal is about to read — see `awaitBefore`. The same
+      // budget as the target itself: both are the step waiting for the section
+      // to be in the state it describes.
+      if (hooks.awaitBefore) {
+        await waitForElement(hooks.awaitBefore, timeout, signal).catch(
+          silenceNonAbort(logLabel),
+        );
+      }
+
       hooks.reveal();
       await waitForElement(target, timeout, signal).catch(
         silenceNonAbort(logLabel),
@@ -734,15 +757,51 @@ export function fileItemStep(
   };
 }
 
+// The scroll port inside the banner, named by the ui-kit component itself so
+// the tour does not depend on where in the banner's DOM the strip sits.
+const QUICK_ACTIONS_TRACK_SELECTOR = '[data-testid="quick-actions-track"]';
+
 /**
- * Reveal all quick-action tiles by clicking the banner's "Show more" overlay.
- * With more than four tiles the grid is clipped to the first row, so a tile in
- * the second row would be spotlighted while visually hidden. No-op when the
- * banner isn't collapsed.
+ * Bring a quick-action tile into the banner's scroll port.
+ *
+ * The banner is a carousel, so a tile past the fold is mounted and measurable
+ * but scrolled out of sight — joyride would spotlight an empty patch of the
+ * strip.
+ *
+ * The track's own `scrollLeft` is moved rather than calling `scrollIntoView`:
+ * that walks every scrollable ancestor, and the section body will happily give
+ * up a few pixels of its inline inset to satisfy the request. The list then
+ * sits flush against the article and the whole page is captured shifted
+ * sideways, which is exactly what the screenshot helper's alignment guard
+ * refuses to photograph. Confining the scroll to the strip cannot move
+ * anything else.
  */
-export function expandQuickActions() {
-  const showMore = document.querySelector<HTMLButtonElement>(
-    '[data-testid="quick-actions-show-more"]',
-  );
-  showMore?.click();
+export function revealQuickActionTile(selector: string) {
+  return () => {
+    const tile = document.querySelector(selector);
+    const track = tile?.closest(QUICK_ACTIONS_TRACK_SELECTOR);
+
+    if (!tile || !track) return;
+
+    const tileBox = tile.getBoundingClientRect();
+    const trackBox = track.getBoundingClientRect();
+
+    const tileCentre = tileBox.left + tileBox.width / 2;
+    const trackCentre = trackBox.left + trackBox.width / 2;
+
+    // Assignment rather than `scrollTo`, so the jump is instant: joyride
+    // measures as soon as this hook resolves and a smooth scroll cannot be
+    // awaited. Out-of-range values are clamped by the browser.
+    track.scrollLeft += tileCentre - trackCentre;
+  };
+}
+
+/**
+ * Rewind the quick-actions carousel to its first tile, for steps that spotlight
+ * a group spanning the start of the strip rather than one tile.
+ */
+export function rewindQuickActions() {
+  document
+    .querySelector(QUICK_ACTIONS_TRACK_SELECTOR)
+    ?.scrollTo({ left: 0, behavior: "instant" });
 }

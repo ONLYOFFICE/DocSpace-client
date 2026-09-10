@@ -2,5 +2,6 @@
   "CancellaionNotification": "Don't show the cancellation notification again",
   "DefaultHomepage": "Default homepage",
   "GroupByRooms": "Group by rooms",
-  "OpenSameTab": "Open editors in same tab"
+  "OpenSameTab": "Open editors in same tab",
+  "ShowQuickActions": "Show quick actions"
 }

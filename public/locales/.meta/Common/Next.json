@@ -3,7 +3,7 @@
   "content": "Next",
   "content_en_sha1_hash": "bc981983e7f547dc62e19a1e383acfe00782a6d5",
   "created_at": "2025-05-19T21:30:46.809Z",
-  "updated_at": "2026-08-19T13:26:37.680Z",
+  "updated_at": "2026-09-09T15:42:08.340Z",
   "comment": {
     "text": "This is a button label that advances the user to the next step in a multi-step process, such as a wizard, pagination, or a guided tour.",
     "is_auto": true,
@@ -18,15 +18,51 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 384,
+      "context": ") : null}\n <QuickActions\n items={createItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n </section>\n \n {moduleItems.length > 0 ? (\n <section data-tour-id=\"dashboard-apps\" className={styles.section}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/index.js",
+      "line_number": 748,
+      "context": "className={styles.quickActions}\n isLoading={showFilterLoader}\n onClose={onHideQuickActions}\n closeLabel={t(\"Common:DisableQuickActionsOnAllPages\")}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n dataTestId=\"quick-actions\"\n />\n </Section.SectionBanner>\n ) : null}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AccountsPaging.tsx",
       "line_number": 128,
       "context": "<Paging\n className={`${styles.styledPaging} accounts-paging`}\n pageItems={pageItems}\n countItems={countItems}\n previousLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n openDirection=\"top\"\n onSelectPage={onSelectPage}\n onSelectCount={onCountChange}\n previousAction={onSelectPagePrevHandler}\n nextAction={onSelectPageNextHandler}",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
+      "line_number": 215,
+      "context": "{showCreateButton && (\n <QuickActions\n items={quickActionItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n )}\n <AgentsFilter\n showMainButton={showCreateButton}\n mainButtonProps={showCreateButton ? mainButtonProps : undefined}",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",
       "line_number": 147,
       "context": "},\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },\n });\n \n useEffect(() => {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/layout.client.tsx",
+      "line_number": 687,
+      "context": "{showQuickActions && (\n <QuickActions\n items={quickActionItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n )}\n {showFilter && (\n <FormsFilter\n showMainButton={showFilterMainButton}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
+      "line_number": 616,
+      "context": ">\n <QuickActions\n items={quickActionItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n </div>\n ) : undefined\n }\n sectionWarningContent={",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-layout/index.tsx",
+      "line_number": 326,
+      "context": "!isArchive && canCreateRooms ? (\n <QuickActions\n items={quickActionItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n ) : undefined\n }\n sectionFilterContent={\n <RoomsFilter",
       "module": "/packages/sdk"
     }
   ],

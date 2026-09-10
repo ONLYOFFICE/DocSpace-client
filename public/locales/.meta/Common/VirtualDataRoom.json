@@ -3,7 +3,7 @@
   "content": "Virtual Data Room",
   "content_en_sha1_hash": "29f2e3affa77388673134388754b5295d908047b",
   "created_at": "2025-05-19T21:30:49.548Z",
-  "updated_at": "2026-09-09T15:42:08.321Z",
+  "updated_at": "2026-09-10T16:17:50.133Z",
   "comment": {
     "text": "This is a label for a type of room. It appears in various places, such as when displaying room types or filtering rooms.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/index.tsx",
-      "line_number": 200,
+      "line_number": 190,
       "context": "roomType: RoomsType.EditingRoom,\n title: t(\"Common:CollaborationRoomTitle\"),\n },\n {\n roomType: RoomsType.VirtualDataRoom,\n title: t(\"Common:VirtualDataRoom\"),\n },\n { roomType: RoomsType.PublicRoom, title: t(\"Common:PublicRoom\") },\n { roomType: RoomsType.CustomRoom, title: t(\"Common:CustomRoomTitle\") },\n ],\n owner: user as unknown as TCreatedBy,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 154,
+      "line_number": 156,
       "context": "// Each type is named by the label its own tile carries (the same\n // Common keys `useQuickActions` builds the banner from), so the\n // tooltip and the tiles under the spotlight never drift apart.\n t(\"RoomsTour:RoomsTypes\", {\n collaboration: t(\"Common:CollaborationRoomTitle\"),\n vdr: t(\"Common:VirtualDataRoom\"),\n publicRoom: t(\"Common:PublicRoom\"),\n custom: t(\"Common:CustomRoomTitle\"),\n }),\n callbacks,\n LOG_LABEL,",
       "module": "/packages/client"
     },

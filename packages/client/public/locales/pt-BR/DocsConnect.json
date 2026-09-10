@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "A assinatura será renovada automaticamente <1>em {{date}}</1>",
   "TopUpAndBuy": "Recarregar e comprar",
   "TopUpHint": "Sua carteira será recarregada em <1>{{amount}}</1> e a assinatura selecionada será comprada automaticamente. Os valores de recarga são arredondados para o próximo dólar inteiro.",
+  "TopUpWalletHint": "Não há créditos suficientes para a assinatura do {{service}} selecionada. Recarregue sua carteira e volte para concluir a compra.",
   "TotalDueTodayTooltip": "Hoje, você está pagando apenas pela quantidade selecionada de usuários pelos dias restantes até a sua data de faturamento. A partir de então, o valor total será cobrado uma vez por ciclo de faturamento na sua data de faturamento regular.",
   "TotalMonthly": "Total mensal",
   "TrialAvailable": "Um teste gratuito de um mês está disponível. Não é necessário cartão de crédito.",

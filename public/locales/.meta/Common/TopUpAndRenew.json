@@ -3,7 +3,7 @@
   "content": "Top up & Renew",
   "content_en_sha1_hash": "8dd4787548a226b9236b332c2f3b9277d5d48bc0",
   "created_at": "2026-07-27T13:07:39.125Z",
-  "updated_at": "2026-08-27T15:37:55.744Z",
+  "updated_at": "2026-09-10T16:17:50.243Z",
   "comment": {
     "text": "Button label and clickable link text used to initiate the process of adding funds or extending an expired subscription.",
     "is_auto": true,
@@ -13,20 +13,20 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
-      "line_number": 119,
-      "context": "<Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n label={\n isGracePeriod\n ? isBalanceInsufficient\n ? t(\"TopUpAndRenew\")\n : t(\"PayNow\")\n : t(\"UpgradePlan\")\n }\n onClick={isGracePeriod ? onRenewPlan : onEditPlan}\n isDisabled={isGracePeriod && isCardMissingOrInactive}",
+      "line_number": 100,
+      "context": "};\n \n const getPlanButtonLabel = () => {\n if (!isGracePeriod) return t(\"UpgradePlan\");\n if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n if (isBalanceInsufficient) return t(\"TopUpAndRenew\");\n return t(\"PayNow\");\n };\n \n const getPlanButtonAction = () => {\n if (isDelayedPaymentTopUp) return openTopUpDialog;",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 378,
-      "context": ") : null}\n \n {isShowPreviousStoragePlan ? (\n <div className={styles.actionRow}>\n <Button\n label={t(\"TopUpAndRenew\")}\n size={ButtonSize.small}\n primary\n onClick={openUpgradeDialog}\n isDisabled={isDisabled}\n />",
+      "line_number": 223,
+      "context": "const isDelayedPaymentTopUp = isDelayedPaymentMethod && renewalShortfall > 0;\n \n const getRenewLabel = () => {\n if (renewalShortfall <= 0) return t(\"RenewSubscription\");\n if (isDelayedPaymentMethod) return t(\"TopUpWallet\");\n return t(\"TopUpAndRenew\");\n };\n const balance = formatWalletCurrency();\n \n const contextMenuItems = [\n {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 433,
-      "context": "deactivated ? (\n <div className={styles.actionsRow}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:TopUpAndRenew\")}\n onClick={onEditPlan}\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:RemoveSubscription\")}",
+      "line_number": 137,
+      "context": "const isDelayedPaymentTopUp = isDelayedPaymentMethod && renewalShortfall > 0;\n \n const getRenewLabel = () => {\n if (renewalShortfall <= 0) return t(\"Common:RenewSubscription\");\n if (isDelayedPaymentMethod) return t(\"Common:TopUpWallet\");\n return t(\"Common:TopUpAndRenew\");\n };\n const formatCurrency = (value: number, digits: number) =>\n paymentStore.formatWalletCurrency(value, digits, currency);\n \n const trialLow =",
       "module": "/libs/ui-kit"
     },
     {

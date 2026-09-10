@@ -40,6 +40,7 @@ import {
   docsConnectHandlers,
 } from "@docspace/shared/__mocks__/handlers";
 import type { DocsConnectPreset } from "@docspace/shared/__mocks__/handlers";
+import { PaymentMethodStatus } from "@docspace/shared/enums";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import type { Page } from "@playwright/test";
 
@@ -107,8 +108,9 @@ test.describe("Docs Connect plan panel", () => {
     mockRequest: Parameters<typeof useSaasBilling>[0],
     preset: DocsConnectPreset,
     balance?: number,
+    saas: Parameters<typeof useSaasBilling>[1] = {},
   ) => {
-    useSaasBilling(mockRequest);
+    useSaasBilling(mockRequest, saas);
     mockRequest.use(
       ...servicePageHandlers(),
       ...docsConnectHandlers(TEST_PORT, preset, { balance }),
@@ -227,6 +229,102 @@ test.describe("Docs Connect plan panel", () => {
     await expect.poll(() => purchases.length).toBe(1);
     expect(purchases[0]).toContain('"docscloud":50');
     await expect(page.getByText("Your plan has been purchased")).toBeVisible();
+  });
+
+  test("isDelayedPaymentMethod sends a deactivated plan to the wallet top-up", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    usePreset(mockRequest, "deactivated", 10, { isDelayedPaymentMethod: true });
+    const deposits = trackRequests(page, "POST", DEPOSIT_PATH);
+    const purchases = trackRequests(page, "PUT", UPDATE_WALLET_PATH);
+
+    await page.goto(`${baseUrl}${DOCS_CONNECT_ROUTE}`);
+
+    const button = page.getByRole("button", { name: "Top up wallet", exact: true });
+    await expect(button).toBeVisible(FIRST_RENDER);
+    await button.click();
+
+    await expect(page.getByTestId("top_up_amount_input").first()).toHaveValue(
+      "90",
+    );
+    expect(deposits).toHaveLength(0);
+    expect(purchases).toHaveLength(0);
+
+    await expectScreenshot(page, shot("deactivated-top-up-wallet.png"));
+  });
+
+  test("isDelayedPaymentMethod turns a short-balance upgrade into a wallet top-up", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    usePreset(mockRequest, "paid", 1, { isDelayedPaymentMethod: true });
+    const purchases = trackRequests(page, "PUT", UPDATE_WALLET_PATH);
+
+    await openPanel(page, baseUrl, "Edit subscription");
+    await usersInput(page).fill("100");
+
+    await expect(submitButton(page)).toHaveText("Top up wallet");
+    await expect(
+      page.getByText(
+        "There aren't enough credits for the selected Docs Connect subscription. Top up your Wallet, then return to complete the purchase.",
+      ),
+    ).toBeVisible();
+
+    await expectScreenshot(page, shot("top-up-wallet.png"));
+
+    await submitButton(page).click();
+
+    await expect(page.getByTestId("top_up_amount_input").first()).toBeVisible();
+    await expect(submitButton(page)).toBeHidden();
+    expect(purchases).toHaveLength(0);
+
+    await page.getByTestId("first_topup_cancel").click();
+
+    await expect(submitButton(page)).toBeVisible();
+  });
+
+  test("a delayed payment method picked in Stripe checkout closes the panel with a settlement notice", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    usePreset(mockRequest, "paid", 1, { card: "unlinked" });
+    mockRequest.use(
+      http.get(apiUrl("portal/payment/checkoutsetupurl"), () =>
+        jsonResponse("https://example.com/checkout"),
+      ),
+    );
+
+    await openPanel(page, baseUrl, "Edit subscription");
+    await usersInput(page).fill("100");
+    await expect(submitButton(page)).toHaveText("Top up & Buy");
+
+    mockRequest.use(
+      http.get(apiUrl("portal/payment/customerinfo"), () =>
+        jsonResponse({
+          portalId: null,
+          paymentMethodStatus: PaymentMethodStatus.Set,
+          isDelayedPaymentMethod: true,
+          email: "test@gmail.com",
+          payer: { displayName: "Test Payer", hasAvatar: false },
+        }),
+      ),
+    );
+
+    const checkout = page.waitForEvent("popup");
+    await submitButton(page).click();
+    await checkout;
+
+    await expect(submitButton(page)).toBeHidden({ timeout: 15_000 });
+    await expect(
+      page.getByText(
+        "Bank transfers may take several business days to process. Credits will be added to your Wallet only after the funds arrive.",
+      ),
+    ).toBeVisible();
+    await expect(page.getByText("Your plan has been purchased")).toHaveCount(0);
   });
 
   test("a deactivated plan is paid again with a top-up", async ({

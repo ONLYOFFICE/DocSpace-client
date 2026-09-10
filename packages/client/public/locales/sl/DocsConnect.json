@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Naročnina bo samodejno obnovljena <1>dne {{date}}</1>",
   "TopUpAndBuy": "Napolni in kupi",
   "TopUpHint": "Vaša denarnica bo napolnjena za <1>{{amount}}</1>, izbrana naročnina pa bo samodejno kupljena. Zneski dopolnitve so zaokroženi navzgor na naslednji cel dolar.",
+  "TopUpWalletHint": "Za izbrano naročnino {{service}} ni dovolj kreditov. Napolnite denarnico, nato pa se vrnite in dokončajte nakup.",
   "TotalDueTodayTooltip": "Danes plačate samo za izbrano število uporabnikov za preostale dni do datuma obračuna. V nadaljevanju bo celoten znesek zaračunan enkrat na obračunsko obdobje na vaš redni datum obračuna.",
   "TotalMonthly": "Skupaj mesečno",
   "TrialAvailable": "Na voljo je brezplačen enomesečni preizkus. Kreditna kartica ni potrebna.",

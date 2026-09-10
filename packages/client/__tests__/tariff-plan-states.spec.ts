@@ -41,6 +41,7 @@ import {
 } from "@docspace/shared/__mocks__/handlers/portal/tariff";
 import { quotaSuccess } from "@docspace/shared/__mocks__/handlers/portal/quota";
 import { TARIFF_DUE_DATE_EXPIRED } from "@docspace/shared/__mocks__/handlers";
+import { PaymentMethodStatus } from "@docspace/shared/enums";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 
 import type { Page } from "@playwright/test";
@@ -163,6 +164,47 @@ test.describe("Tariff plan recalculation", () => {
     );
   });
 
+  test("isDelayedPaymentMethod turns the short-balance upgrade into a wallet top-up", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      isDelayedPaymentMethod: true,
+    });
+    mockRequest.use(walletTariffHandler());
+
+    await page.goto(`${baseUrl}/billing/tariff-plan`);
+
+    await expect(page.getByTestId("quantity_picker_input")).toBeVisible();
+    await page.getByTestId("quantity_picker_plus_icon").click();
+
+    await expect(
+      page.getByText("$94", { exact: true }),
+    ).toBeVisible(AFTER_ESTIMATE);
+    await expect(planButton(page)).toBeEnabled();
+    await expect(planButton(page)).toHaveText("Top up wallet", AFTER_ESTIMATE);
+
+    await planButton(page).click();
+
+    await expect(page.getByTestId("top_up_amount_input").first()).toHaveValue(
+      "44",
+    );
+    await expect(
+      page.getByText(
+        "Bank transfers may take several business days to process. Credits will be added to your Wallet only after the funds arrive.",
+      ),
+    ).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "tariff-plan",
+      "top-up-wallet.png",
+    ]);
+  });
+
   test("removing a manager schedules the downgrade for the period end", async ({
     page,
     baseUrl,
@@ -266,6 +308,45 @@ test.describe("Tariff plan recalculation", () => {
     await dialog.getByTestId("price_details_cancel_button").click();
     await expect(dialog).toHaveCount(0);
     await expect(planButton(page)).toContainText(pageButtonLabel);
+  });
+
+  test("isDelayedPaymentMethod turns the order summary confirm into a wallet top-up", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      isDelayedPaymentMethod: true,
+    });
+    mockRequest.use(walletTariffHandler());
+
+    await page.goto(`${baseUrl}/billing/tariff-plan`);
+
+    await expect(page.getByTestId("quantity_picker_input")).toBeVisible();
+    await page.getByTestId("quantity_picker_plus_icon").click();
+    await expect(
+      page.getByText("$94", { exact: true }),
+    ).toBeVisible(AFTER_ESTIMATE);
+
+    await page.getByTestId("due_today_info_button").click();
+
+    const dialog = modalWith(page, "Price Details");
+    await expect(dialog).toHaveCount(1);
+    const confirmButton = dialog.getByTestId("price_details_pay_button");
+    await expect(confirmButton).toHaveText("Top up wallet");
+
+    await confirmButton.click();
+
+    await expect(page.getByTestId("top_up_amount_input").first()).toHaveValue(
+      "44",
+    );
+    await expect(dialog).toHaveCount(0);
+
+    await page.getByTestId("first_topup_cancel").click();
+
+    await expect(modalWith(page, "Price Details")).toHaveCount(1);
   });
 
   test("the downgrade hint opens the confirmation of the scheduled change", async ({
@@ -529,6 +610,82 @@ test.describe("Startup plan", () => {
     await expect(dialog).toHaveCount(0);
   });
 
+  test("isDelayedPaymentMethod closes the dialog as soon as Stripe checkout opens", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "admin",
+      plan: "startup",
+      payer: "none",
+      card: "unlinked",
+      isDelayedPaymentMethod: true,
+    });
+    mockRequest.use(
+      http.get(apiUrl("portal/payment/checkoutsetupurl"), () =>
+        jsonResponse("https://example.com/checkout"),
+      ),
+    );
+    await page.clock.setSystemTime(PAID_NOW);
+
+    await page.goto(`${baseUrl}/billing/tariff-plan`);
+    await planButton(page).click();
+
+    const dialog = modalWith(page, "Continue to Stripe");
+    await dialog.getByTestId("top_up_amount_input").first().fill("25");
+
+    const checkout = page.waitForEvent("popup");
+    await dialog.getByTestId("first_topup_continue_to_stripe").click();
+
+    await checkout;
+    await expect(dialog).toHaveCount(0);
+  });
+
+  test("a delayed payment method picked in Stripe checkout closes the dialog without waiting for the balance", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "admin",
+      plan: "startup",
+      payer: "none",
+      card: "unlinked",
+    });
+    mockRequest.use(
+      http.get(apiUrl("portal/payment/checkoutsetupurl"), () =>
+        jsonResponse("https://example.com/checkout"),
+      ),
+    );
+    await page.clock.setSystemTime(PAID_NOW);
+
+    await page.goto(`${baseUrl}/billing/tariff-plan`);
+    await planButton(page).click();
+
+    const dialog = modalWith(page, "Continue to Stripe");
+    await dialog.getByTestId("top_up_amount_input").first().fill("25");
+
+    const checkout = page.waitForEvent("popup");
+    await dialog.getByTestId("first_topup_continue_to_stripe").click();
+    await checkout;
+
+    mockRequest.use(
+      http.get(apiUrl("portal/payment/customerinfo"), () =>
+        jsonResponse({
+          portalId: null,
+          paymentMethodStatus: PaymentMethodStatus.Set,
+          isDelayedPaymentMethod: true,
+          email: "admin@test.com",
+          payer: { displayName: "Test Payer", hasAvatar: false },
+        }),
+      ),
+    );
+
+    await expect(dialog).toHaveCount(0, { timeout: 15_000 });
+    await expect(page.getByText("Unexpected error")).toHaveCount(0);
+  });
+
   test("a card linked on Startup makes the purchase payer-only", async ({
     page,
     baseUrl,
@@ -596,6 +753,22 @@ test.describe("Migration to wallet billing", () => {
     useSaasBilling(mockRequest, { user: "owner", payer: "self-owner" });
     mockRequest.use(moveToWalletHandler());
     await page.clock.setSystemTime(PAID_NOW);
+  });
+
+  test("isDelayedPaymentMethod with a short balance still opens the migration dialog", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      isDelayedPaymentMethod: true,
+    });
+    mockRequest.use(subscriptionBalanceHandler());
+
+    await openMigrationDialog(page, baseUrl);
+    await expect(page.getByTestId("top_up_amount_input")).toHaveCount(0);
   });
 
   test("a refund that covers the new plan leaves nothing due on the card", async ({

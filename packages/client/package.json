@@ -37,6 +37,7 @@
   "dependencies": {
     "@codemirror/lang-javascript": "6.2.2",
     "@docspace/shared": "workspace:*",
+    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-0.5.82.tgz",
     "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tar.gz",
     "@onlyoffice/docspace-sdk-js": "file:onlyoffice-docspace-sdk-js-2.2.0.tgz",
     "@react-spring/web": "9.7.5",
@@ -88,6 +89,7 @@
     "react-window-infinite-loader": "1.0.9",
     "remark-gfm": "4.0.1",
     "resize-image": "0.1.0",
+    "socket.io-client": "4.8.3",
     "ts-pattern": "5.5.0",
     "use-resize-observer": "9.1.0",
     "utif": "3.1.0",

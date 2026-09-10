@@ -389,6 +389,14 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       "openai",
       "react-shiki",
       "tailwind-merge",
+      // @onlyoffice/apps-ui-kit dependencies that peer-installed apps must
+      // declare for the host build to resolve them (Vite/Next.js/tsc), but
+      // never import by name directly -- the only usage is through ui-kit's
+      // own compiled subpaths, or (document-editor-react) purely as an
+      // ambient global-type augmentation with no import statement at all.
+      "@onlyoffice/document-editor-react",
+      "@onlyoffice/ai-chat",
+      "socket.io-client",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));
@@ -435,7 +443,15 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
 
 it("DifferentDependencyVersionsTest: Verify that all workspaces use same dependency versions", () => {
   // List of packages to be ignored
-  const ignoredPackages = new Set([]);
+  const ignoredPackages = new Set([
+    // Vendored tarball, referenced by a `file:` path -- inherently relative,
+    // so it cannot read identically from libs/ui-kit (one directory below
+    // the repo root) and from packages/* (two directories below). Both
+    // resolve to the same tarball; the version string just can't match
+    // textually. @onlyoffice/apps-ui-kit is not listed here because every
+    // consumer of it happens to sit at the same depth (packages/*).
+    "@onlyoffice/ai-chat",
+  ]);
 
   const dependencyMap = {};
 

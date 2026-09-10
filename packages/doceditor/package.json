@@ -29,7 +29,9 @@
   "dependencies": {
     "@aws-sdk/client-cloudwatch-logs": "3.981.0",
     "@docspace/shared": "workspace:*",
+    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-0.5.82.tgz",
     "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tar.gz",
+    "@onlyoffice/document-editor-react": "2.1.1",
     "classnames": "2.5.1",
     "crypto-js": "4.2.0",
     "date-and-time": "3.6.0",
@@ -42,6 +44,7 @@
     "react-device-detect": "2.2.3",
     "react-dom": "19.2.8",
     "react-i18next": "14.0.1",
+    "socket.io-client": "4.8.3",
     "ts-pattern": "5.5.0",
     "winston": "3.17.0",
     "winston-cloudwatch": "6.3.0",

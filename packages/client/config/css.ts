@@ -34,8 +34,14 @@
  */
 
 import path from "path";
+import { createRequire } from "module";
 import type { UserConfig } from "vite";
 import { rootDir } from "./utils";
+
+const require = createRequire(import.meta.url);
+const uiKitDir = path.dirname(
+  require.resolve("@onlyoffice/apps-ui-kit/package.json"),
+);
 
 export const css: UserConfig["css"] = {
   modules: {
@@ -49,7 +55,7 @@ export const css: UserConfig["css"] = {
             if (url.startsWith("@onlyoffice/apps-ui-kit")) {
               const resolved = url.replace(
                 "@onlyoffice/apps-ui-kit",
-                path.resolve(rootDir, "../../libs/ui-kit"),
+                uiKitDir,
               );
               return new URL(
                 `file:///${resolved.split(path.sep).join("/")}`,

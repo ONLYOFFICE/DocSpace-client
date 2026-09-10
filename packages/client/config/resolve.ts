@@ -45,7 +45,6 @@ export const resolve: UserConfig["resolve"] = {
     PACKAGE_FILE: path.resolve(rootDir, "package.json"),
     COMMON_DIR: path.resolve(rootDir, "../common"),
     "@docspace/shared": path.resolve(rootDir, "../shared"),
-    "@onlyoffice/apps-ui-kit": path.resolve(rootDir, "../../libs/ui-kit"),
   },
   extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
   dedupe: ["styled-components", "react", "react-dom", "@onlyoffice/ai-chat"],

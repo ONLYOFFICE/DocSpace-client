@@ -65,9 +65,9 @@ import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 
 // `pdfViewer` exists in public/scripts/config.json but is
 // missing from the duplicated Window.ClientConfig declarations
-// (packages/shared/types/index.ts and the libs/ui-kit submodule); both must
-// be updated in sync (TS2717) and ui-kit is a separate submodule, so a local
-// cast type is used here (same approach as MediaViewerDataStore).
+// (packages/shared/types/index.ts and libs/ui-kit); both must be updated in
+// sync (TS2717) and ui-kit is a separate repository, so a local cast type is
+// used here (same approach as MediaViewerDataStore).
 export type TClientConfigWithPdfViewer = NonNullable<Window["ClientConfig"]> & {
   pdfViewer?: boolean;
 };

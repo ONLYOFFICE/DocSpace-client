@@ -188,9 +188,10 @@ describe("ManualBackup", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.spyOn(portalApi, "startBackup").mockResolvedValue(undefined);
-    if (socketModule.default) {
-      vi.spyOn(socketModule.default, "on").mockImplementation(() => {});
-      vi.spyOn(socketModule.default, "off").mockImplementation(() => {});
+    const socket = socketModule.default;
+    if (socket) {
+      vi.spyOn(socket, "on").mockImplementation(() => {});
+      vi.spyOn(socket, "off").mockImplementation(() => {});
     }
   });
 

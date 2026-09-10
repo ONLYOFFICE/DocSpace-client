@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@docspace/shared": "workspace:*",
+    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-0.5.82.tgz",
     "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tar.gz",
     "@tanstack/react-query": "^5.101.4",
     "adm-zip": "0.6.0",
@@ -47,6 +48,7 @@
     "nconf": "0.12.1",
     "next": "16.2.12",
     "react": "19.2.8",
+    "react-device-detect": "2.2.3",
     "react-dom": "19.2.8",
     "react-hotkeys-hook": "3.4.7",
     "react-i18next": "14.0.1",
@@ -56,6 +58,7 @@
     "react-virtualized": "^9.22.6",
     "react-window": "1.8.10",
     "resize-image": "0.1.0",
+    "socket.io-client": "4.8.3",
     "ts-pattern": "5.5.0",
     "use-resize-observer": "9.1.0",
     "winston": "3.17.0",

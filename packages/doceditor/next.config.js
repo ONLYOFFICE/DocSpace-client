@@ -61,9 +61,16 @@ const banner = getBanner(version);
 const isDev = process.env.NODE_ENV !== productionMode;
 
 const monorepoRoot = path.resolve(__dirname, "../..");
+// @onlyoffice/docspace-api-sdk is a dependency of @onlyoffice/apps-ui-kit
+// (installed from the tarball at the repo root), not of this app directly --
+// resolve it starting from wherever ui-kit itself actually landed rather than
+// a hardcoded path.
+const uiKitDir = path.dirname(
+  require.resolve("@onlyoffice/apps-ui-kit/package.json"),
+);
 const docspaceApiSdkDir = path.dirname(
   require.resolve("@onlyoffice/docspace-api-sdk/package.json", {
-    paths: [path.resolve(__dirname, "../../libs/ui-kit")],
+    paths: [uiKitDir],
   }),
 );
 const docspaceApiSdkTraceGlob = `${path
@@ -131,7 +138,6 @@ module.exports = withBundleAnalyzer({
       alias: {
         ...config.resolve?.alias,
         "@docspace/shared": path.resolve(__dirname, "../shared"),
-        "@onlyoffice/apps-ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
       },
     };
 

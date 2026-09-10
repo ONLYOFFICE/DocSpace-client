@@ -48,11 +48,10 @@ import {
   type Step,
 } from "react-joyride";
 
-// Through the ui-kit re-export, not `@onlyoffice/ai-chat` directly: the chat
-// library is a dependency of `libs/ui-kit` alone, so a bare specifier from an
-// eagerly-loaded client module resolves to the package's `.d.ts` and fails the
-// bundle (`UNRESOLVED_IMPORT`). tsc is unaffected — `packages/client/tsconfig`
-// maps the specifier straight at those types.
+// Through the ui-kit re-export, not `@onlyoffice/ai-chat` directly: this
+// module is eagerly loaded, and `@onlyoffice/ai-chat` is meant to stay inside
+// the lazy AI-only bundle (see the `aiChat` vendor split in config/build.ts)
+// -- a bare specifier here would pull it in eagerly instead.
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";

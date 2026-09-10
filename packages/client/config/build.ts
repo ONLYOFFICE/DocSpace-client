@@ -145,9 +145,11 @@ export const getBuildConfig = (
               ),
             priority: 10,
           },
-          // Our shared package + the ui-kit submodule (libs/ui-kit) reused
-          // across routes — one chunk instead of dozens of tiny per-component
-          // files (color-picker, slider, table, icon SVGs, …).
+          // Our shared package + @onlyoffice/apps-ui-kit (installed from the
+          // tarball at the repo root, so it lives under node_modules like any
+          // other dependency) reused across routes — one chunk instead of
+          // dozens of tiny per-component files (color-picker, slider, table,
+          // icon SVGs, …).
           // ui-kit's ai-agent subtree is excluded for the same reason as the
           // AI deps above: it statically imports @onlyoffice/ai-chat and is
           // itself only reached from lazy AI pages — captured here it would
@@ -155,8 +157,10 @@ export const getBuildConfig = (
           {
             name: "shared",
             test: (id: string) =>
-              /([\\/]packages[\\/]shared|[\\/]libs[\\/]ui-kit)[\\/]/.test(id) &&
-              !/[\\/]libs[\\/]ui-kit[\\/]ai-agent[\\/]/.test(id),
+              /([\\/]packages[\\/]shared|[\\/]@onlyoffice[\\/]apps-ui-kit[\\/])/.test(
+                id,
+              ) &&
+              !/[\\/]@onlyoffice[\\/]apps-ui-kit[\\/]ai-agent[\\/]/.test(id),
             priority: 5,
           },
         ],

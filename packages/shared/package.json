@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.28.3",
+    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-0.5.82.tgz",
     "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tar.gz",
     "@floating-ui/dom": "1.6.13",
     "@hcaptcha/react-hcaptcha": "1.11.0",
@@ -65,6 +66,7 @@
     "react-window": "1.8.10",
     "react-window-infinite-loader": "1.0.9",
     "resize-image": "0.1.0",
+    "socket.io-client": "4.8.3",
     "ts-pattern": "5.5.0",
     "utif": "3.1.0",
     "vite-plugin-svgr": "^4.5.0",

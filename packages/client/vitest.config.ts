@@ -95,7 +95,6 @@ export default defineConfig({
       PACKAGE_FILE: path.resolve(__dirname, "./package.json"),
       COMMON_DIR: path.resolve(__dirname, "../common"),
       "@docspace/shared": path.resolve(__dirname, "../shared"),
-      "@onlyoffice/apps-ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
       "PUBLIC_DIR/scripts/config.json": path.resolve(
         __dirname,
         "../shared/__mocks__/configMock.js",

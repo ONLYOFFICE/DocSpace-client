@@ -52,7 +52,6 @@ import {
   useAttachHostFilesToChat,
   notifyAlreadyAttached,
   notifyAttachmentLimit,
-  notifyOneFormOnly,
 } from "@docspace/ui-kit/ai-agent/providers/files";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
@@ -361,13 +360,12 @@ const SectionBodyContent = (props) => {
       if (isDragActive && draggedFiles.length > 0) {
         attachFilesToChat(draggedFiles)
           .then(
-            ({ skippedOverLimit, duplicates, skippedExtraForms, limit }) => {
-              // Files that did not make it onto the composer — capped,
-              // already there, or a second form — must not vanish without a
-              // word. The cap is per section, so quote the one that applied.
+            ({ skippedOverLimit, duplicates, cap }) => {
+              // Files that did not make it onto the composer — capped or
+              // already there — must not vanish without a word. The cap is
+              // per section, so quote the one that applied.
               notifyAlreadyAttached(t, duplicates);
-              notifyOneFormOnly(t, skippedExtraForms);
-              notifyAttachmentLimit(t, skippedOverLimit, limit);
+              notifyAttachmentLimit(t, skippedOverLimit, cap);
             },
           )
           .catch((error) => toastr.error(error));

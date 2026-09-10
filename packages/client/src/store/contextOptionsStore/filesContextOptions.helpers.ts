@@ -91,6 +91,7 @@ import type { TTranslation } from "@docspace/shared/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { isLockedSharedRoom, trimSeparator } from "@docspace/shared/utils";
 import { removeOptions } from "SRC_DIR/helpers/filesUtils";
+import { isAnalyzeResponsesTarget } from "SRC_DIR/helpers/analyzeResponses";
 import {
   RoomsType,
   FolderType,
@@ -497,7 +498,13 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_ask-ai",
       key: "ask-ai",
-      label: t("Common:AskAI"),
+      // One entry, two readings: on a form whose filling has started and
+      // whose responses land in a table, the chat can talk about the answers
+      // rather than the document, and the label says so. Same action either
+      // way — the bridge derives the mode from the same predicate.
+      label: isAnalyzeResponsesTarget(item)
+        ? t("Files:AnalyzeResponses")
+        : t("Common:AskAI"),
       icon: AISvgUrl,
       onClick: () => self.askAI(item),
       disabled: false,

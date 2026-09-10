@@ -828,11 +828,14 @@ export const _syncInfoPanelRoomImpl = (
 export const askAIImpl = async (
   self: ContextOptionsStore,
   item: TContextItem,
+  // The request is about the form's responses, not the document — see
+  // `askAIActionImpl`. Passed through every branch below unchanged.
+  analyze = false,
 ) => {
   const skipAi = getPersisted(PersistenceKeys.skipAiModal, false);
 
   if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
-    self.filesActionsStore.askAIAction(item);
+    self.filesActionsStore.askAIAction(item, analyze);
     return;
   }
 
@@ -847,7 +850,7 @@ export const askAIImpl = async (
     if (!room) return;
 
     if (room.sendFormToExternalDB || !room.security?.EditRoom) {
-      self.filesActionsStore.askAIAction(item);
+      self.filesActionsStore.askAIAction(item, analyze);
       return;
     }
 
@@ -855,7 +858,7 @@ export const askAIImpl = async (
       if (action === "connect") {
         onEditRoomTemplate(room, self._syncInfoPanelRoom);
       } else if (action === "continue") {
-        self.filesActionsStore.askAIAction(item);
+        self.filesActionsStore.askAIAction(item, analyze);
       }
     });
   } catch (error) {

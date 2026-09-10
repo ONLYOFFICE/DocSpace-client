@@ -60,8 +60,24 @@ describe("DialogsStore — Ask AI request", () => {
     // MobX wraps the stored object in an observable proxy, so compare by value.
     expect(store.askAIFile).toEqual(file);
 
-    expect(store.consumeAskAIFile()).toEqual(file);
+    expect(store.consumeAskAIFile()).toEqual({ file, analyze: false });
     expect(store.askAIFile).toBeNull();
-    expect(store.consumeAskAIFile()).toBeNull();
+    expect(store.consumeAskAIFile()).toEqual({ file: null, analyze: false });
+  });
+
+  // "Analyze responses" attaches the form as the subject of the message, so
+  // the intent has to survive the hop through the store.
+  it("keeps the analyze intent alongside the file, and clears it too", () => {
+    const store = createStore();
+    const file = { id: 1, title: "survey.pdf" } as TFile;
+
+    store.setAskAIFile(file, true);
+    expect(store.askAIAnalyze).toBe(true);
+    expect(store.consumeAskAIFile()).toEqual({ file, analyze: true });
+    expect(store.askAIAnalyze).toBe(false);
+
+    // A plain "Ask AI" after it must not inherit the flag.
+    store.setAskAIFile(file);
+    expect(store.consumeAskAIFile()).toEqual({ file, analyze: false });
   });
 });

@@ -556,7 +556,8 @@ class FilesActionStore {
     newSelection: Nullable<TActionItem[]> = null,
   )=> deleteActionImpl(this, translations, newSelection);
 
-  askAIAction = (item: TActionItem)=> askAIActionImpl(this, item);
+  askAIAction = (item: TActionItem, analyze = false)=>
+    askAIActionImpl(this, item, analyze);
 
   emptyTrash = async (translations: TSuccessTranslations)=> emptyTrashImpl(this, translations);
 

@@ -948,7 +948,8 @@ class ContextOptionsStore {
 
   _syncInfoPanelRoom = (newRoom: TRoom)=> _syncInfoPanelRoomImpl(this, newRoom);
 
-  askAI = async (item: TContextItem)=> askAIImpl(this, item);
+  askAI = async (item: TContextItem, analyze = false)=>
+    askAIImpl(this, item, analyze);
 
   getFilesContextOptions = (
     item: TContextItem,

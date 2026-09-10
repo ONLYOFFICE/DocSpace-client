@@ -253,4 +253,58 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
 
     expect(keys).toEqual(["open", "move-to", "rename", "delete"]);
   });
+
+  // The AI entry is one option with two readings: on a form that has started
+  // collecting responses into a table the chat talks about the answers, and
+  // the label says "Analyze responses" instead of "Ask AI".
+  describe("ask-ai label", () => {
+    const askAiLabelOf = (form: Record<string, unknown>) => {
+      const store = createTestContextOptionsStore();
+      const model = store.getFilesContextOptions(
+        {
+          id: 1,
+          parentId: 10,
+          title: "Survey.pdf",
+          fileExst: ".pdf",
+          rootFolderId: 5,
+          security: {},
+          viewAccessibility: {},
+          contextOptions: ["ask-ai"],
+          ...form,
+        } as never,
+        t,
+      );
+      return menuShape(model).find((option) => option.key === "ask-ai")?.label;
+    };
+
+    it("reads Analyze responses once filling started and results are collected", () => {
+      expect(
+        askAiLabelOf({
+          isForm: true,
+          startFilling: true,
+          externalDbTableName: "form_42",
+        }),
+      ).toBe("Files:AnalyzeResponses");
+    });
+
+    it("stays Ask AI for a form with no results table", () => {
+      expect(askAiLabelOf({ isForm: true, startFilling: true })).toBe(
+        "Common:AskAI",
+      );
+    });
+
+    it("stays Ask AI while filling has not started", () => {
+      expect(
+        askAiLabelOf({
+          isForm: true,
+          startFilling: false,
+          externalDbTableName: "form_42",
+        }),
+      ).toBe("Common:AskAI");
+    });
+
+    it("stays Ask AI for an ordinary file", () => {
+      expect(askAiLabelOf({})).toBe("Common:AskAI");
+    });
+  });
 });

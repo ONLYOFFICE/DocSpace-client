@@ -125,7 +125,9 @@ export type TFilesActionsStore = {
   changeCustomFilter: (item: TContextItem, t: TTranslation) => Promise<unknown>;
   duplicateAction: (item: TContextItem) => Promise<unknown>;
   setThirdpartyInfo: (providerKey?: string) => void;
-  askAIAction: (item: TContextItem) => void;
+  // `analyze` marks a request about the form's responses ("Analyze
+  // responses"), which the chat attaches as the subject of the message.
+  askAIAction: (item: TContextItem, analyze?: boolean) => void;
   retryVectorization: (files: TContextItem[]) => Promise<unknown>;
   setPinAction: (
     action: "pin" | "unpin",

@@ -86,7 +86,11 @@ const AnalyzeResponsesButtonComponent = ({
       startLoader(() => setIsLoading(true));
 
       const file = await getFileInfo(originalFormId);
-      await askAI(file);
+      // This button is the analyze action by definition — it only renders on
+      // a results folder — so it says so instead of leaving the chat to infer
+      // it from the fetched row: the form is attached as the subject of the
+      // message and the composer takes nothing else.
+      await askAI(file, true);
     } catch (error) {
       console.error(error);
       toastr.error(error as Error);

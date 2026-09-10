@@ -30,7 +30,7 @@
   "dependencies": {
     "@aws-sdk/client-cloudwatch-logs": "3.981.0",
     "@docspace/shared": "workspace:*",
-    "@onlyoffice/apps-ui-kit": "workspace:*",
+    "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tar.gz",
     "classnames": "2.5.1",
     "crypto-js": "4.2.0",
     "date-and-time": "3.6.0",

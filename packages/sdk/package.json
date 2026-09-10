@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@docspace/shared": "workspace:*",
-    "@onlyoffice/apps-ui-kit": "workspace:*",
+    "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tar.gz",
     "@tanstack/react-query": "^5.101.4",
     "adm-zip": "0.6.0",
     "axios": "^1.19.0",

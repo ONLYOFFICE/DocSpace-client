@@ -30,7 +30,7 @@
     "@aws-sdk/client-cloudwatch-logs": "3.981.0",
     "@babel/runtime": "7.28.3",
     "@docspace/shared": "workspace:*",
-    "@onlyoffice/apps-ui-kit": "workspace:*",
+    "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tar.gz",
     "axios": "^1.19.0",
     "classnames": "2.5.1",
     "date-and-time": "3.6.0",

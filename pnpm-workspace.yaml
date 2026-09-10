@@ -1,11 +1,10 @@
 packages:
   - packages/*
-  - libs/*
 
 # Dependency install/postinstall scripts (pnpm >= 11 requires an explicit
 # decision per package; unreviewed packages fail the install).
 allowBuilds:
-  # No-op preinstall echo only (transitive via libs/ui-kit)
+  # No-op preinstall echo only (transitive via the ui-kit tarball dependency)
   '@google/genai': false
   # Native file watcher used by the Nx daemon
   '@parcel/watcher': true
@@ -21,10 +20,14 @@ allowBuilds:
   sharp: true
 
 minimumReleaseAgeExclude:
-  # Vendored tarball (libs/ui-kit/onlyoffice-ai-chat-*.tgz), never published to
-  # npm, so the age check 404s on the registry. Listed without a version so it
-  # survives tarball bumps; the artifact is committed and reviewed in ui-kit.
+  # Vendored tarball (onlyoffice-ai-chat-*.tgz inside the ui-kit tarball),
+  # never published to npm, so the age check 404s on the registry. Listed
+  # without a version so it survives tarball bumps; the artifact is committed
+  # and reviewed in the ui-kit repo.
   - '@onlyoffice/ai-chat'
+  # Vendored tarball (onlyoffice-apps-ui-kit-*.tgz at the repo root), never
+  # published to npm, so the age check 404s on the registry.
+  - '@onlyoffice/apps-ui-kit'
   - '@rolldown/binding-android-arm64@1.2.2'
   - '@rolldown/binding-linux-arm-gnueabihf@1.2.2'
   - '@rolldown/binding-linux-arm64-musl@1.2.2'
@@ -33,7 +36,7 @@ minimumReleaseAgeExclude:
 
 overrides:
   pnpm: ">=10.33.0"
-  # Single mobx instance across the workspace (libs/ui-kit submodule pins 6.13.5)
+  # Single mobx instance across the workspace (the ui-kit tarball pins 6.13.5)
   mobx: "6.16.1"
   mobx-react: "9.2.2"
   # Single react instance across the workspace; react-router 8 needs >=19.2.7
@@ -82,6 +85,6 @@ overrides:
   "@babel/core": ">=7.29.6 <8"
   # Inherited libvips CVEs; pulled in transitively by next
   sharp: ">=0.35.0"
-  # Guards against libs/ui-kit submodule drift until its pointer is bumped;
-  # every manifest now pins 8.3.0 directly, so this can be dropped afterwards
+  # Guards against ui-kit tarball drift until it is rebuilt/repacked; every
+  # manifest now pins 8.3.0 directly, so this can be dropped afterwards
   react-router: "8.3.0"

@@ -231,7 +231,6 @@ export type TLicenseQuota = {
 
 export type TCustomerInfo = {
   paymentMethodStatus: number;
-  paymentMethodType?: string | null;
   isDelayedPaymentMethod?: boolean;
   email: string | null;
   portalId: string | null;

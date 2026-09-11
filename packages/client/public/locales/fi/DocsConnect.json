@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Tilaus uusiutuu automaattisesti <1>{{date}}</1>",
   "TopUpAndBuy": "Täydennä ja osta",
   "TopUpHint": "Lompakkoosi ladataan <1>{{amount}}</1> ja valittu tilaus ostetaan automaattisesti. Täydennyssummat pyöristetään ylöspäin seuraavaan kokonaiseen dollariin.",
+  "TopUpWalletHint": "Valitulle {{service}} -tilaukselle ei ole riittävästi krediittejä. Lataa lompakkoasi ja palaa sitten viimeistelemään ostos.",
   "TotalDueTodayTooltip": "Tänään maksat vain valitusta käyttäjämäärästä jäljellä olevilta päiviltä laskutuspäivääsi asti. Jatkossa koko summa veloitetaan kerran laskutusjaksossa säännöllisenä laskutuspäivänäsi.",
   "TotalMonthly": "Yhteensä kuukaudessa",
   "TrialAvailable": "Ilmainen kuukauden kokeilujakso on saatavilla. Luottokorttia ei vaadita.",

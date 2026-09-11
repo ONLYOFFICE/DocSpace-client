@@ -1,0 +1,29 @@
+{
+  "key_path": "BackToBilling",
+  "content": "Back to Billing",
+  "content_en_sha1_hash": "853b933bdc787ee3ec3e70b0209b744cbe9e0d13",
+  "created_at": "2026-09-10T16:16:55.782Z",
+  "updated_at": "2026-09-10T16:23:36.796Z",
+  "comment": {
+    "text": "Button label on the payment completion page used to navigate the user back to the billing overview.",
+    "is_auto": true,
+    "updated_at": "2026-09-10T16:23:36.796Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 132,
+      "context": "label: t(\"Common:WalletTopUpDelayedStepSepaSending\"),\n doneLabel: t(\"Common:WalletTopUpDelayedStepSepaSent\"),\n },\n { key: \"funds\", label: t(\"Common:WalletTopUpDelayedStepFunds\") },\n ],\n buttonLabel: t(\"Common:BackToBilling\"),\n footerNote: t(\"Common:PaymentMethodSepa\"),\n redirectUrl: BILLING_OVERVIEW_REDIRECT_URL,\n };\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

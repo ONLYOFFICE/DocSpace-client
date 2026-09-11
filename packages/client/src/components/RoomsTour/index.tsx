@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -54,12 +54,14 @@ import useTour, {
 import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
 import { getTourAudience } from "SRC_DIR/components/Tour/audience";
 import { tourDemo } from "SRC_DIR/api/tourDemo";
+import { waitForElement } from "SRC_DIR/components/Tour/waitForElement";
 
 import type { TCreatedBy } from "@docspace/shared/types";
 
 import {
   getTourSteps,
   FIRST_ITEM_SELECTOR,
+  GROUPS_SELECTOR,
   type TourStepFlags,
 } from "./tourSteps";
 
@@ -79,6 +81,7 @@ type RoomsTourProps = {
   showFilter: boolean;
   hasItems: boolean;
   roomsId: string | null;
+  organizeRoomsGrouping: boolean;
 };
 
 /** What the member step took over, so its `close` can hand it all back. */
@@ -105,6 +108,7 @@ const RoomsTour = ({
   showFilter,
   hasItems,
   roomsId,
+  organizeRoomsGrouping,
 }: RoomsTourProps) => {
   const { t } = useTranslation(["RoomsTour", "FilesTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
@@ -351,6 +355,34 @@ const RoomsTour = ({
     "rooms tour",
   );
 
+  // `.group-tags` mounts behind its own async gates inside ui-kit's `Filter`
+  // (a `getAllRoomGroups()` round trip, then a layout measurement pass) that
+  // the section's loading flags know nothing about. `useTour` freezes the step
+  // list against the DOM the instant the tour starts, with no retry — so
+  // without this wait, the groups step is dropped for good whenever that row
+  // is still settling when `usePendingTour`'s fixed settle delay runs out.
+  // Bounded rather than indefinite: grouping can be genuinely off, in which
+  // case the row never mounts and the step is meant to be skipped.
+  const [groupsRowSettled, setGroupsRowSettled] = useState(
+    !showFilter || !organizeRoomsGrouping,
+  );
+
+  useEffect(() => {
+    if (!showFilter || !organizeRoomsGrouping) {
+      setGroupsRowSettled(true);
+      return undefined;
+    }
+
+    setGroupsRowSettled(false);
+    const controller = new AbortController();
+
+    waitForElement(GROUPS_SELECTOR, 5000, controller.signal)
+      .catch(() => {})
+      .finally(() => setGroupsRowSettled(true));
+
+    return () => controller.abort();
+  }, [showFilter, organizeRoomsGrouping]);
+
   usePendingTour(
     roomsTourStore,
     !firstLoad &&
@@ -360,7 +392,8 @@ const RoomsTour = ({
       // have actually landed. Without this the reload above and the start
       // timer race, and joyride can freeze its step list against the empty
       // page the reload is on its way to replace.
-      (!isDemo || hasItems),
+      (!isDemo || hasItems) &&
+      groupsRowSettled,
     isMobileView,
   );
 
@@ -379,6 +412,7 @@ export default inject(
     clientLoadingStore,
     publicRoomStore,
     roomsTourStore,
+    filesSettingsStore,
   }: TStore) => {
     const { roomsFolder, roomsFolderId, isRoomsFolderRoot, isRoot } =
       treeFoldersStore;
@@ -412,6 +446,10 @@ export default inject(
       // Rooms parent item id is the tree folder id; its sub-items use static
       // ids ("rooms-recent", "rooms-trash").
       roomsId: roomsFolderId != null ? String(roomsFolderId) : null,
+      // Whether ui-kit's `Filter` will attempt to mount `.group-tags` at all —
+      // used to hold the tour start for that row instead of waiting on a
+      // permanently-disabled feature.
+      organizeRoomsGrouping: filesSettingsStore.organizeRoomsGrouping,
     };
   },
 )(observer(RoomsTour));

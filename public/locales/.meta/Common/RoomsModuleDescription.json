@@ -3,7 +3,7 @@
   "content": "Save the backup to a new room created just for it, an existing room, or your {{roomName}}.",
   "content_en_sha1_hash": "2c33d55a18269f95881f19c29b327c998c131413",
   "created_at": "2026-08-31T18:23:28.174Z",
-  "updated_at": "2026-08-31T18:40:30.746Z",
+  "updated_at": "2026-09-10T16:17:50.334Z",
   "comment": {
     "text": "Description text in the backup settings explaining the available destination options for backups. The {{roomName}} variable represents a specific room or folder name.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 642,
+      "line_number": 654,
       "context": "styles.backupDescription,\n \"backup-description module-documents\",\n { [styles.disabled]: additionalDisabled },\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:Files\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule",
       "module": "/packages/shared"
     }

@@ -18,6 +18,7 @@ export const paymentCustomerInfoSuccess = (
     response: {
       portalId: null,
       paymentMethodStatus: 1,
+      isDelayedPaymentMethod: false,
       email: email ?? (nonpayer ? "test-nonpayer@gtest.com" : "test@gmail.com"),
       payer,
     },

@@ -100,17 +100,12 @@
           {
             "label": "Update all lock files",
             "task": "Frontend | update all lock files",
-            "tooltip": "🛠️ Update pnpm-lock.yaml + ui-kit lock + translation-app lock"
+            "tooltip": "🛠️ Update pnpm-lock.yaml + translation-app lock"
           },
           {
             "label": "Update pnpm-lock.yaml",
             "task": "Frontend | update pnpm-lock.yaml",
             "tooltip": "🛠️ Start the \"frontend update pnpm-lock.yaml\" task"
-          },
-          {
-            "label": "Update ui-kit lock",
-            "task": "Frontend | update ui-kit lock",
-            "tooltip": "🛠️ Update libs/ui-kit pnpm lock file"
           },
           {
             "label": "Update translation-app lock",
@@ -171,11 +166,6 @@
             "label": "Start storybook",
             "task": "Frontend | storybook",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task"
-          },
-          {
-            "label": "Start storybook (ui-kit)",
-            "task": "Frontend | storybook (ui-kit)",
-            "tooltip": "🛠️ Start the \"ui-kit storybook\" task"
           },
           {
             "label": "Start storybook prod",
@@ -267,11 +257,6 @@
             "label": "Test unit",
             "task": "Test | Vitest:unit",
             "tooltip": "🛠️ Start the \"Test | Vitest:unit\" task"
-          },
-          {
-            "label": "Test unit:ui-kit",
-            "task": "Test | Vitest:unit:ui-kit",
-            "tooltip": "🛠️ Start the \"Test | Vitest:unit:ui-kit\" task"
           },
           {
             "label": "Test vitest (client)",

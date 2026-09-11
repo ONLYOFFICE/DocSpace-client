@@ -46,7 +46,7 @@ The bug's product/component decides where the fix lands and how it is verified:
 |---|---|---|
 | `DocSpace/API`, `DocSpace/AI` (routes `/api/2.0/ai/*`) | **server**: `common/ASC.NewAi` (Node — `app/controllers/*`, `app/routes.ts`) for most `/ai/*`; some in `products/ASC.AI/Server/**` (C#, e.g. `TextToDocxController.cs`). Grep the exact route to pick the layer. | ASC.NewAi: `yarn typecheck` (+ unit tests if present). C#: build the project. |
 | `UI.Desktop/AI.Agent`, `SDK.Desktop/AI.Agent`, `AI.Agent/UI` | the **`@onlyoffice/ai-chat` source checkout** → then the tgz handoff into ui-kit + client + ASC.NewAi. HEAVY, multi-repo. | ai-chat build; then consumer builds. |
-| `DocSpace/Files`, `Rooms`, `Accounts`, `Settings`, `Plugins` | **client**: `packages/client/**` (React); some `Settings` UI in `libs/ui-kit`. | `pnpm tsc && pnpm lint && pnpm test:client` (or the targeted test). |
+| `DocSpace/Files`, `Rooms`, `Accounts`, `Settings`, `Plugins` | **client**: `packages/client/**` (React); some `Settings` UI in ui-kit (separate repo). | `pnpm tsc && pnpm lint && pnpm test:client` (or the targeted test). |
 | `DocSpace/DocEditor` (Forms) | client `packages/doceditor/**` (or server forms). | `pnpm tsc && pnpm lint`. |
 | `DocSpace/Server` (`Srv:*`) | **server** C# (`products/`, `web/`). | build the affected project. |
 

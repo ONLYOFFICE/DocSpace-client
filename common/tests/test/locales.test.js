@@ -37,6 +37,23 @@ import { describe, it, expect, beforeAll } from "vitest";
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const { createRequire } = require("module");
+
+// ui-kit is no longer checked out here: it ships as a prebuilt tarball and is
+// only present under node_modules. Its components own a large share of the
+// Common namespace, so the key-usage tests have to read the built package
+// instead of source. Returns null when it is not installed, and every caller
+// degrades to "ui-kit contributes no keys" rather than failing.
+const resolveUiKitDist = () => {
+  try {
+    const req = createRequire(path.join(BASE_DIR, "packages", "client", "noop.js"));
+    const pkgJson = req.resolve("@onlyoffice/apps-ui-kit/package.json");
+    const dist = path.join(path.dirname(pkgJson), "dist", "esm");
+    return fs.existsSync(dist) ? dist : null;
+  } catch {
+    return null;
+  }
+};
 const {
   getAllFiles,
   convertPathToOS,
@@ -676,8 +693,33 @@ describe("Locales Tests", () => {
       .filter((value, index, self) => self.indexOf(value) === index) // Distinct
       .sort();
 
+    // Many Common keys are consumed only by ui-kit components. Its source is
+    // not in this repo, so scan the built bundle for literal key occurrences;
+    // a key that appears there is in use, not dead.
+    const uiKitDist = resolveUiKitDist();
+    const uiKitText = uiKitDist
+      ? getAllFiles(uiKitDist, [])
+          .filter((f) => f && f.endsWith(".js"))
+          .map((f) => {
+            try {
+              return fs.readFileSync(f, "utf8");
+            } catch {
+              return "";
+            }
+          })
+          .join("\n")
+      : "";
+    // Keys appear in the bundle either bare ("AINewChat") or namespace-
+    // prefixed ("Common:AINewChat"), so match both forms.
+    const usedInUiKit = (key) =>
+      [`"`, `'`, "`"].some(
+        (q) =>
+          uiKitText.includes(`${q}${key}${q}`) ||
+          uiKitText.includes(`:${key}${q}`),
+      );
+
     const notFoundi18nKeys = allEnKeys.filter(
-      (k) => !allJsTranslationKeys.includes(k),
+      (k) => !allJsTranslationKeys.includes(k) && !usedInUiKit(k),
     );
 
     const message = `Some i18n-keys are not found in js \r\n\r\nKeys:\r\n\r\n${notFoundi18nKeys.join(
@@ -1433,8 +1475,8 @@ describe("Locales Tests", () => {
    * `translationFiles` so that a namespace file which is missing entirely for a
    * language is still detected.
    *
-   * Note: `libs/ui-kit/locales` is intentionally out of scope — it lives in the
-   * docspace-ui-kit-react submodule and cannot be fixed from this repository.
+   * Note: ui-kit's locales are intentionally out of scope — they live in the
+   * docspace-ui-kit-react repository and cannot be fixed from here.
    *
    * @returns {Array<{localesDir: string, languages: string[], namespaces: object[]}>}
    */
@@ -3141,9 +3183,6 @@ describe("Locales Tests", () => {
     const violations = [];
 
     javascriptFiles.forEach((jsFile) => {
-      // ui-kit is a separate submodule with its own Common-bound translation hook.
-      if (jsFile.path.includes(convertPathToOS("libs/ui-kit"))) return;
-
       const text = fs.readFileSync(jsFile.path, "utf8");
 
       // When the file's default namespace is Common, unprefixed Common keys
@@ -3176,8 +3215,9 @@ describe("Locales Tests", () => {
   });
 
   it("UiKitCommonResolverPrefixTest: Verify that keys resolved through ui-kit's Common-default helpers carry an explicit namespace prefix.", () => {
-    // CommonNamespacePrefixTest skips libs/ui-kit (the submodule has its own
-    // Common-bound translation helpers). This test guards that blind spot.
+    // ui-kit source is not scanned here (it ships as a prebuilt tarball from
+    // its own repository), but the client calls these Common-defaulting ui-kit
+    // helpers, so this test guards that blind spot on our side.
     //
     // ui-kit resolves translations in two Common-defaulting ways:
     //   1. getCommonTranslation(key) / useCommonTranslation() — look an unprefixed
@@ -3209,18 +3249,15 @@ describe("Locales Tests", () => {
     const isCommonKey = (k) =>
       keyNamespaces.has(k) && keyNamespaces.get(k).has("Common");
 
-    const uiKitFiles = getAllFiles(path.join(BASE_DIR, "libs", "ui-kit"), [
-      "node_modules",
-      convertPathToOS(".next"),
-      convertPathToOS("/dist"),
-      convertPathToOS(path.join("ui-kit", "locales")),
-    ]).filter(
-      (filePath) =>
-        filePath &&
-        /\.(ts|tsx)$/.test(filePath) &&
-        !filePath.includes(".test.") &&
-        !filePath.includes(".stories."),
-    );
+    // ui-kit source is not available here (prebuilt tarball), so this runs
+    // against the built bundle. When the package is not installed there is
+    // nothing to check and the test passes vacuously.
+    const uiKitDistDir = resolveUiKitDist();
+    const uiKitFiles = uiKitDistDir
+      ? getAllFiles(uiKitDistDir, []).filter(
+          (filePath) => filePath && filePath.endsWith(".js"),
+        )
+      : [];
 
     const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const violations = [];

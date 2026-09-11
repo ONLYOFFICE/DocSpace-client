@@ -64,23 +64,31 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
   for EE/DE). `pnpm deploy` writes to `../publish/web`; SSR apps expect
   `../buildtools/config` for appsettings
 
-### ui-kit: separate repo, consumed as a tarball
+### ui-kit: separate repo, consumed as a prebuilt tarball
 
 `@onlyoffice/apps-ui-kit` lives in its own repository (`docspace-ui-kit-react`)
-and is **not** a git submodule or a pnpm workspace member of this repo. Its
-code is fixed there, never here. Clone it once, out-of-band, at `libs/ui-kit`
-(gitignored):
+and is **not** a git submodule, a pnpm workspace member, or a checkout inside
+this repo. Its code is fixed there, never here. This repo consumes only the
+committed tarball `onlyoffice-apps-ui-kit.tgz` at the root, which the six apps
+depend on via `"file:../../onlyoffice-apps-ui-kit.tgz"`.
 
-```bash
-git clone git@git.onlyoffice.com:ONLYOFFICE/docspace-ui-kit-react.git libs/ui-kit
-```
+The tarball is built **in the ui-kit repository** (`pnpm build && pnpm pack`
+there) and copied here by hand. To pick up a new ui-kit version: drop the new
+`onlyoffice-apps-ui-kit.tgz` at the repo root, run `pnpm install` to relink the
+`file:` dependency, and commit the tarball together with any
+`pnpm-lock.yaml` changes it causes. There is no build script on this side.
 
-To pick up a new ui-kit commit: `git -C libs/ui-kit pull`, then
-`pnpm run build:ui-kit-tarball` (installs ui-kit's own deps, builds it, and
-packs it into `onlyoffice-apps-ui-kit.tar.gz` at the repo root), then
-`pnpm install` here to relink the six apps' `file:` dependency against the
-refreshed tarball. Commit the regenerated tarball together with any
-`package.json`/`pnpm-lock.yaml` changes it causes.
+The tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's `main`,
+`module`, `types` and `exports` fields live under `publishConfig`, which only
+pnpm promotes to the top level when packing. An npm-packed tarball has no entry
+points at all.
+
+`@onlyoffice/ai-chat` is an **optional peer** of ui-kit that ui-kit statically
+imports from its `ai-agent/*` and `api/ai` subpaths without bundling it. Its
+own tarball (`onlyoffice-ai-chat-<version>.tgz`) is therefore committed here
+too and declared by the apps that render the AI agent — that `file:` dependency
+is what satisfies ui-kit's peer, so it cannot be dropped while those subpaths
+are used.
 
 ## Code Quality
 
@@ -93,11 +101,11 @@ hardcoded.
 
 ### Branch review
 
-Use the `review-branch` skill to review a branch against its parent. `libs/ui-kit`
-is a separately cloned repository, not a submodule of this one, so a ui-kit
-change must be reviewed from inside `libs/ui-kit` itself (its own base branch,
-via `git config branch.<name>.reviewBase` or auto-detect) — nothing in this
-repo's diff reflects it.
+Use the `review-branch` skill to review a branch against its parent. ui-kit is a
+separate repository that this repo consumes only as a prebuilt tarball, so a
+ui-kit change must be reviewed inside a `docspace-ui-kit-react` checkout (its
+own base branch, via `git config branch.<name>.reviewBase` or auto-detect) —
+nothing in this repo's diff reflects it beyond the swapped tarball.
 
 ### Dependency audits
 
@@ -106,8 +114,8 @@ covers only the pnpm workspace. Use the `audit-deps` skill (or run
 `node .claude/scripts/audit/audit-deps.mjs`) to audit every tree at once -
 including the npm sub-projects under `common/` - and to get the override line
 that fixes each finding. Overrides go in `pnpm-workspace.yaml` for pnpm trees
-and in the project's own `package.json` for npm trees; `libs/ui-kit` is a
-separate repository and its findings belong there, not here.
+and in the project's own `package.json` for npm trees; ui-kit is a separate
+repository and its findings belong there, not here.
 
 ### License headers
 
@@ -166,7 +174,7 @@ catches that.
 | Rule | Loaded when editing |
 |------|---------------------|
 | `.claude/rules/client-architecture.md` | `packages/client/src/**`, `packages/shared/**` |
-| `.claude/rules/source-checks.md` | `packages/**`, `libs/ui-kit/**`, `public/images/**` |
+| `.claude/rules/source-checks.md` | `packages/**`, `public/images/**` |
 | `.claude/rules/generated-artifacts.md` | `public/locales/.constants/**`, `**/biome-plugins/**`, `**/package.json` |
 | `.claude/rules/unit-tests.md` | `**/*.test.*`, `**/__tests__/**` (unit), vitest configs |
 | `.claude/rules/i18n.md` | `public/locales/**`, `common/tests/**` |

@@ -103,6 +103,6 @@ cd common/tests && npx vitest run test/locales.test.js
 
 ## Out of scope
 
-`libs/ui-kit/locales/` is not scanned — it lives in the `docspace-ui-kit-react`
+ui-kit's `locales/` are not scanned — they live in the `docspace-ui-kit-react`
 submodule and is loaded only by a Storybook story; ui-kit components resolve
 their strings from the host app's namespaces at runtime.

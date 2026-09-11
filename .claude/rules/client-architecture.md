@@ -66,7 +66,7 @@ Theming is **CSS custom properties**, not JS theme objects: tokens live in
 read `var(--token)` in SCSS, never branch on `theme.isBase` in JSX. RTL: the
 provider sets `data-dir` on `<html>` — use CSS logical properties
 (`padding-inline-start`, …) and the mixins in
-`libs/ui-kit/styles/mixins/_direction.scss`; never hand-write `[dir="rtl"]`
+ui-kit's `styles/mixins/_direction.scss`; never hand-write `[dir="rtl"]`
 overrides. In SCSS, only `@onlyoffice/apps-ui-kit` and `@docspace/shared` prefixes
 resolve in `@use` (custom Sass importer).
 

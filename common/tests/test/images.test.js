@@ -39,6 +39,26 @@ const path = require("path");
 const crypto = require("crypto");
 const { getAllFiles, getWorkSpaces, BASE_DIR, convertPathToOS } = require("../utils/files");
 const { findImagesIntoFiles } = require("../utils/images");
+const { createRequire } = require("module");
+
+// ui-kit ships as a prebuilt tarball and is not checked out here, but its
+// components reference images that live in this repo's public/images. Scan the
+// built bundle so those are not reported as unused. Returns [] when the
+// package is not installed.
+const getUiKitBuiltFiles = () => {
+  try {
+    const req = createRequire(path.join(BASE_DIR, "packages", "client", "noop.js"));
+    const dist = path.join(
+      path.dirname(req.resolve("@onlyoffice/apps-ui-kit/package.json")),
+      "dist",
+      "esm",
+    );
+    if (!fs.existsSync(dist)) return [];
+    return getAllFiles(dist, []).filter((f) => f && f.endsWith(".js"));
+  } catch {
+    return [];
+  }
+};
 
 const LOGO_REGEX = new RegExp(/\/logo\/(.)*\/(.)*.svg/);
 const ICONS_REGEX = new RegExp(/\/(icons|thirdparties)\/(.)*/);
@@ -107,6 +127,10 @@ beforeAll(() => {
   });
 
   console.log(`Found files by filter = ${files.length}.`);
+
+  // Built ui-kit modules are reference sources only: they are searched for
+  // image names, never treated as images themselves.
+  files.push(...getUiKitBuiltFiles());
 
   console.time('Reading files');
   files.forEach((filePath) => {

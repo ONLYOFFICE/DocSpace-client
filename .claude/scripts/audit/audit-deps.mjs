@@ -2,10 +2,12 @@
 /**
  * Audit every dependency tree in the repo, not just the pnpm workspace.
  *
- * The repo carries several independent lockfiles (root pnpm workspace, the
- * ui-kit submodule's standalone lock, and a handful of npm sub-projects under
- * common/). `pnpm audit` at the root only ever sees the first one, so a clean
- * root audit says nothing about the rest.
+ * The repo carries several independent lockfiles (root pnpm workspace plus a
+ * handful of npm sub-projects under common/). `pnpm audit` at the root only
+ * ever sees the first one, so a clean root audit says nothing about the rest.
+ *
+ * ui-kit is out of scope: it ships as a prebuilt tarball from its own
+ * repository and has no lockfile here. Audit it in `docspace-ui-kit-react`.
  *
  * Read-only: runs audits, reads lockfiles, prints findings and the override
  * line that would fix each one. Never installs, never edits a file.
@@ -19,7 +21,6 @@
  * Flags:
  *   --level <info|low|moderate|high|critical>  minimum severity (default moderate)
  *   --tree <substring>                         only trees whose name matches
- *   --strict                                   informational trees affect the exit code
  *   --json                                     machine-readable output
  *
  * Exit code: 0 clean, 1 findings at or above --level, 2 script error.
@@ -51,7 +52,6 @@ if (!SEVERITIES.includes(level)) {
 const minSeverity = SEVERITIES.indexOf(level);
 const treeFilter = flag("--tree");
 const asJson = has("--json");
-const strict = has("--strict");
 
 /* ---------------------------------------------------------------- trees */
 
@@ -75,10 +75,6 @@ function discoverTrees(dir, out = []) {
         dir: treeDir,
         manager: entry === "pnpm-lock.yaml" ? "pnpm" : "npm",
         lockfile: full,
-        // The submodule's standalone lock is never what gets installed here:
-        // at the root it resolves as a workspace member under the root
-        // overrides. Findings are real, but they belong to the ui-kit repo.
-        informational: relative(ROOT, treeDir).startsWith("libs/ui-kit"),
       });
     }
   }
@@ -287,17 +283,13 @@ if (asJson) {
       ? `error: ${r.error}`
       : r.findings.length === 0
         ? "clean"
-        : `${r.findings.length} finding(s)${r.informational ? " (informational)" : ""}`;
+        : `${r.findings.length} finding(s)`;
     console.log(`${pad(r.name, width)}  ${pad(r.manager, 5)}  ${status}`);
   }
 
   for (const r of results) {
     if (r.findings.length === 0) continue;
-    console.log(`\n=== ${r.name} (${r.manager})${r.informational ? " - informational" : ""}`);
-    if (r.informational) {
-      console.log("    Standalone lockfile of the submodule; the root install overrides it.");
-      console.log("    Fix these in the ui-kit repo, not here.");
-    }
+    console.log(`\n=== ${r.name} (${r.manager})`);
     for (const f of r.findings) {
       console.log(`\n  [${f.severity}] ${f.package} ${f.vulnerable ?? ""}`);
       if (f.title) console.log(`    ${f.title}`);
@@ -324,5 +316,5 @@ if (asJson) {
   console.log("");
 }
 
-const blocking = results.filter((r) => (strict || !r.informational) && r.findings.length > 0);
+const blocking = results.filter((r) => r.findings.length > 0);
 process.exit(blocking.length > 0 ? 1 : 0);

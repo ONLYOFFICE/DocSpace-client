@@ -1,7 +1,6 @@
 ---
 paths:
   - "packages/**"
-  - "libs/ui-kit/**"
   - "common/tests/**"
   - "public/images/**"
 ---
@@ -9,16 +8,16 @@ paths:
 # Hidden source-code checks (pre-push / CI enforced)
 
 Rules below are enforced by `common/tests` suites (blocking pre-push gate) and
-Biome plugins, but are invisible until the push fails. `libs/ui-kit` is in
-scope for all of them, but it is a separately cloned repository, not part of
-this one — violations there must be fixed in `docspace-ui-kit-react`.
+Biome plugins, but are invisible until the push fails. ui-kit is **not** in
+scope: it ships as a prebuilt tarball from `docspace-ui-kit-react` and is not
+checked out here, so its own checks run in that repository.
 
 ## No hardcoded hex colors — anywhere (colors.test.js)
 
 Zero `#RRGGBB`/`#RGB` in `.js/.jsx/.ts/.tsx/.scss/.css`. It is a raw text
 scan: a hex inside a comment, string, or SVG `fill=` fails just the same
 (`rgba()`/`hsl()` literals are a loophole — do not exploit it). Instead use a
-token from `libs/ui-kit/styles/variables/_colors.scss` or a theme entry under
+token from ui-kit's `styles/variables/_colors.scss` or a theme entry under
 a `themes/` directory. Exempt: paths containing `themes`, `.test.`,
 `.stories.`, plus a short hardcoded file list.
 
@@ -46,18 +45,16 @@ indentation in bulk must skip those lines too, and verify that every template
 literal is byte-identical afterwards.
 
 `common/tests/test/indentation-allowlist.json` is now **empty** — the last two
-offenders (both in `libs/ui-kit`) were fixed in `docspace-ui-kit-react`. The
+offenders (both in ui-kit) were fixed in `docspace-ui-kit-react`. The
 list must only ever shrink, so it stays empty: a new mixed-indentation file
 fails the push rather than being added to it.
 
 ## Images (images.test.js)
 
-- Every image added under `packages/**`, `public/`, `libs/ui-kit/**` must be
+- Every image added under `packages/**` or `public/` must be
   referenced by its **basename** somewhere in source — unused assets fail.
 - No two different images with the same filename; no identical image under
-  two names or two copies (a 1:1 mirror between `libs/ui-kit/assets/` and
-  `public/images/` is the one allowed duplication, and mirrored files must
-  keep the same name, relative path and content).
+  two names or two copies.
 - Never reference images via the string literals `"/static/images`,
   `"/images`, `"static/images`, `"images/` in source.
 
@@ -83,18 +80,17 @@ fails the push rather than being added to it.
   `t("PDF")`, `t("Culture_ru")`, …) fail lint — use `getBrandName()` /
   `getConstName()` / `getCultureLabel()`.
 - After editing `public/locales/.constants/*.json` run
-  `pnpm biome-plugins:generate` — it regenerates **two** copies of the `.grit`
-  plugin (`packages/shared/biome-plugins/` and `libs/ui-kit/biome-plugins/`;
-  the ui-kit copy exists because its standalone CI can't reach
-  `packages/shared`). Nothing checks their freshness. The ui-kit copy must be
-  committed in the `docspace-ui-kit-react` repo. Full procedure and the other
-  checked-in generated files: `.claude/rules/generated-artifacts.md`.
+  `pnpm biome-plugins:generate` — it regenerates the `.grit` plugin into
+  `packages/shared/biome-plugins/`. Nothing checks its freshness.
+  ui-kit keeps its own copy in the `docspace-ui-kit-react` repo, regenerated
+  and committed there. Full procedure and the other checked-in generated
+  files: `.claude/rules/generated-artifacts.md`.
 - The plugins are declared **once** in `packages/shared/biome.json` and
   inherited by the other packages via `extends`. Gotcha: biome resolves a
   plugin's relative path against the *extending* package's directory, so the
   shared config must use `../shared/biome-plugins/…` (valid from `shared`
   itself and from every sibling) — `./biome-plugins/…` breaks every extender
-  with "Cannot read file". `libs/ui-kit/biome.json` wires its own local copy.
+  with "Cannot read file". ui-kit wires its own local copy in its own repo.
 
 ## License headers — enforcement details (license.test.js)
 

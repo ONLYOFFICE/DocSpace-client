@@ -253,21 +253,6 @@
       }
     },
     {
-      "label": "Frontend | update ui-kit lock",
-      "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm run update-ui-kit-lock",
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
       "label": "Frontend | update translation-app lock",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run update-translation-app-lock",
@@ -285,7 +270,7 @@
     {
       "label": "Frontend | update all lock files",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm run wipe ; pnpm install ; pnpm run update-ui-kit-lock ; pnpm run update-translation-app-lock",
+      "command": "cd ${workspaceFolder} ; pnpm run wipe ; pnpm install ; pnpm run update-translation-app-lock",
       "group": {
         "kind": "build",
         "isDefault": false
@@ -451,21 +436,6 @@
       "label": "Frontend | deploy run",
       "type": "shell",
       "command": "cd ${workspaceFolder}/../publish/web ; trap 'kill 0' EXIT ; (cd login && node server.js) & (cd editor && node server.js) & (cd management && node server.js) & (cd sdk && node server.js) & npx serve client -s -l 5001",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Frontend | storybook (ui-kit)",
-      "type": "shell",
-      "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm run storybook",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -676,21 +646,6 @@
       "label": "Test | Vitest:unit",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm test",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Test | Vitest:unit:ui-kit",
-      "type": "shell",
-      "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm test",
       "group": {
         "kind": "build",
         "isDefault": true

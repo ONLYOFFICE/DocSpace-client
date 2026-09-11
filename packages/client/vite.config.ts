@@ -153,7 +153,24 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
         "firebase/compat/remote-config",
         "firebase/compat/storage",
         "firebase/compat/database",
+        // @onlyoffice/apps-ui-kit ships ~1200 unbundled ESM files behind a
+        // ~900-entry exports map, and the app imports it almost exclusively
+        // through deep subpaths (.../components/text, .../components/toast).
+        // As a node_modules dependency each of those subpaths is a separate
+        // optimizable entry, so without these globs a cold start pre-bundles
+        // them one by one -- the single biggest dev-server cost after the
+        // move off the pnpm workspace, where the package was source and never
+        // pre-bundled at all. The globs collapse them into a few chunks.
+        "@onlyoffice/apps-ui-kit",
+        "@onlyoffice/apps-ui-kit/components/*",
+        "@onlyoffice/apps-ui-kit/utils/*",
+        "@onlyoffice/apps-ui-kit/context/*",
+        "@onlyoffice/apps-ui-kit/providers/*",
       ],
+      // The AI stack is lazy-loaded and deliberately split out of the vendor
+      // chunk in config/build.ts; pre-bundling it would pull it into the
+      // eager graph and undo that.
+      exclude: ["@onlyoffice/ai-chat"],
     },
   };
 });

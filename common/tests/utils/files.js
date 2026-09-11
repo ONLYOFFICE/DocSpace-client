@@ -38,8 +38,6 @@ const fs = require("fs");
 
 const BASE_DIR = process.env.BASE_DIR || path.resolve(__dirname, "../../../");
 
-const UI_KIT_PATH = path.join("libs", "ui-kit")
-
 const moduleWorkspaces = [
 	path.join("packages", "client"),
 	path.join("packages", "doceditor"),
@@ -48,15 +46,13 @@ const moduleWorkspaces = [
 	path.join("packages", "management"),
 	path.join("packages", "sdk"),
 	path.join("public", "locales"), // common
-	UI_KIT_PATH,
 ];
 
-const getWorkSpaces = ({ excludeUiKit = false } = {}) => {
-	const workspaces = moduleWorkspaces
-		.filter((ws) => !excludeUiKit || ws !== UI_KIT_PATH)
-		.map((ws) => path.resolve(BASE_DIR, ws));
-
-	return workspaces;
+// `excludeUiKit` is accepted and ignored: ui-kit ships as a prebuilt tarball
+// from its own repository and is no longer checked out here, so it is never
+// part of the scanned workspaces. Callers keep passing it for readability.
+const getWorkSpaces = () => {
+	return moduleWorkspaces.map((ws) => path.resolve(BASE_DIR, ws));
 };
 
 const getAllFiles = (dir, excludeDirs = []) => {

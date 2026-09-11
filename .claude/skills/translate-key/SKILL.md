@@ -29,7 +29,7 @@ Use the namespace to find the locale and `.meta` directories:
 | `ChangeLinkTypeDialog`, `CompletedForm`, `DeepLink`, `Editor` | `packages/doceditor/public/locales/{lang}/{Namespace}.json` | `packages/doceditor/public/locales/.meta/{Namespace}/{Key}.json` |
 | `Confirm`, `Consent`, `Errors`, `Login`, `TenantList`, `Wizard` | `packages/login/public/locales/{lang}/{Namespace}.json` | `packages/login/public/locales/.meta/{Namespace}/{Key}.json` |
 | `Management` | `packages/management/public/locales/{lang}/Management.json` | `packages/management/public/locales/.meta/Management/{Key}.json` |
-| `Settings`, `Services`, `Payments` *(ui-kit)* | `libs/ui-kit/locales/{lang}/{Namespace}.json` | *(no `.meta` — use English value only)* |
+| `Settings`, `Services`, `Payments` *(ui-kit)* | `locales/{lang}/{Namespace}.json` **in the `docspace-ui-kit-react` repo** | *(no `.meta` — use English value only)* |
 | *everything else* | `packages/client/public/locales/{lang}/{Namespace}.json` | `packages/client/public/locales/.meta/{Namespace}/{Key}.json` |
 
 English source is always at the same path with `{lang}` = `en`.

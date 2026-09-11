@@ -18,7 +18,7 @@ paths:
   E2E** — never put unit tests there.
 - **shared**: co-located next to the component
   (`SaveCancelButtons.test.tsx`), a few `__tests__/` dirs.
-- **ui-kit** (`libs/ui-kit`) is a third, separate suite with its own setup and
+- **ui-kit** is a third, separate suite living in its own repository, with its own setup and
   mocks; shared's setup does not apply there, and its `include` is an explicit
   directory list — a test outside those dirs silently does not run.
 - Naming: `<Subject>.test.ts` (stores/utils) / `.test.tsx` (JSX). Big subjects

@@ -29,14 +29,6 @@ const OUT_FILES = [
     "biome-plugins",
     "no-constants-via-i18n.grit",
   ),
-  path.join(
-    __dirname,
-    "..",
-    "libs",
-    "ui-kit",
-    "biome-plugins",
-    "no-constants-via-i18n.grit",
-  ),
 ];
 
 function loadKeys(fileName) {

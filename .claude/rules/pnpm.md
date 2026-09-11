@@ -39,31 +39,46 @@ version in `npm install -g pnpm@…` — bump them together.
 
 ## The ui-kit tarball dependency
 
-`@onlyoffice/apps-ui-kit` is **not** a pnpm workspace package. `libs/ui-kit` is
-a separately cloned repository (gitignored, not a git submodule of this repo);
-the six apps that use it depend on a committed tarball at the repo root via
-`"file:../../onlyoffice-apps-ui-kit.tar.gz"`. Rebuild it with
-`pnpm run build:ui-kit-tarball` after pulling a new `libs/ui-kit` commit, then
-`pnpm install` here to relink against the refreshed tarball — see the
-"ui-kit: separate repo, consumed as a tarball" section in `CLAUDE.md`.
+`@onlyoffice/apps-ui-kit` is **not** a pnpm workspace package and ui-kit is not
+checked out inside this repo at all. The six apps that use it depend on a
+committed tarball at the repo root via
+`"file:../../onlyoffice-apps-ui-kit.tgz"`.
+
+The tarball is built and packed in the `docspace-ui-kit-react` repository and
+copied here by hand; there is no build script on this side. To update: replace
+`onlyoffice-apps-ui-kit.tgz` at the root, run `pnpm install`, and commit the
+tarball with the resulting `pnpm-lock.yaml` change.
 
 The tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's `main`,
 `module`, `types` and `exports` fields live under `publishConfig`, which only
 pnpm promotes to the top level when packing. An npm-packed tarball has no
-entry points at all. `scripts/build-ui-kit-tarball.js` always uses `pnpm`.
+entry points at all.
 
-`libs/ui-kit/package.json`'s `exports` map is itself generated at build time
-by `libs/ui-kit/scripts/generate-exports-map.mjs` (wired into ui-kit's own
-`pnpm build`) — one exact key per real `dist/` module subpath, not a
-hand-written wildcard. A single `"./*"` wildcard cannot serve this package: it
-mixes flat-file modules (`billing/utils/common.ts`) and folder-with-index
-modules (`context/InterfaceDirectionContext/index.tsx`) throughout, and per
-the ES module spec, the `exports`-array fallback only skips an entry on a
-condition mismatch, never on a missing file — so any single wildcard pattern
-order always breaks one shape or the other for a real deep import. This was
-invisible while ui-kit was a pnpm workspace package, because that resolved
-straight into source and never consulted `exports` at all; it only surfaces
-once the package is actually installed from a tarball. `build-ui-kit-tarball.js`
-restores `libs/ui-kit/package.json` to its pre-build state after packing
-(only when its working tree was clean beforehand), so the ~900 generated
-entries never need to be committed there.
+ui-kit's `exports` map is generated at build time by its own
+`scripts/generate-exports-map.mjs` — one exact key per real `dist/` module
+subpath, not a hand-written wildcard. A single `"./*"` wildcard cannot serve
+this package: it mixes flat-file modules (`billing/utils/common.ts`) and
+folder-with-index modules (`context/InterfaceDirectionContext/index.tsx`)
+throughout, and per the ES module spec, the `exports`-array fallback only skips
+an entry on a condition mismatch, never on a missing file — so any single
+wildcard pattern order always breaks one shape or the other for a real deep
+import. This was invisible while ui-kit was a pnpm workspace package, because
+that resolved straight into source and never consulted `exports` at all; it
+only surfaces once the package is installed from a tarball.
+
+Because those ~900 subpaths are real `node_modules` entry points and the app
+imports them directly, Vite treats each one as its own optimizable dependency.
+`packages/client/vite.config.ts` lists ui-kit in `optimizeDeps.include` with
+subpath globs for exactly this reason — without them a cold dev start
+pre-bundles each subpath separately. `@onlyoffice/ai-chat` is deliberately
+`optimizeDeps.exclude`d instead, to keep the lazy AI chunking in
+`config/build.ts` intact.
+
+### The ai-chat peer
+
+`@onlyoffice/ai-chat` is an **optional peer** of ui-kit, and ui-kit statically
+imports it from 19 of its `ai-agent/*` and `api/ai` modules without bundling
+it. The client-side `file:../../onlyoffice-ai-chat-<version>.tgz` dependency is
+what satisfies that peer, so it must stay declared in every app that reaches
+those subpaths — dropping it resolves the peer to nothing and breaks the AI
+agent at runtime.

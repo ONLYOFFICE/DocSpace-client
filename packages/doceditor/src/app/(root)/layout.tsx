@@ -43,6 +43,7 @@ import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
 import { SYSTEM_THEME_KEY } from "@onlyoffice/apps-ui-kit/providers/theme/themes/constants";
 
+import "@onlyoffice/apps-ui-kit/styles.css";
 import "@docspace/shared/styles/theme.scss";
 
 import ChunkRetryScript from "@docspace/shared/components/chunk-retry-script";
@@ -80,8 +81,7 @@ export default async function RootLayout({
   ]);
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
-    | ThemeKeys
-    | undefined;
+    ThemeKeys | undefined;
 
   const theme =
     (hdrs.get("x-sdk-config-theme") as ThemeKeys | null) ||
@@ -111,8 +111,12 @@ export default async function RootLayout({
 
   const translations = await loadTranslationsForLocale(locale || "en", {
     namespaces: DOCEDITOR_NAMESPACES,
-    appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
-    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
+    appLocalesDir:
+      process.env.NEXT_APP_LOCALES_DIR ??
+      path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir:
+      process.env.NEXT_SHARED_LOCALES_DIR ??
+      path.join(process.cwd(), "../../public/locales"),
   });
 
   return (
@@ -156,3 +160,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

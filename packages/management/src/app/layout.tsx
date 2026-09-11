@@ -59,6 +59,7 @@ import { LayoutWrapper } from "@/components/layout";
 import { Scripts } from "@/components/Scripts";
 import { ManagementDialogs } from "@/dialogs";
 
+import "@onlyoffice/apps-ui-kit/styles.css";
 import "@/styles/globals.scss";
 import "@docspace/shared/styles/theme.scss";
 import { logger } from "../../logger.mjs";

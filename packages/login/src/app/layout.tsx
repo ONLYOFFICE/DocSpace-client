@@ -56,6 +56,8 @@ import {
   getSettings,
   getUser,
 } from "@/utils/actions";
+
+import "@onlyoffice/apps-ui-kit/styles.css";
 import "../styles/globals.scss";
 import "@docspace/shared/styles/theme.scss";
 import Scripts from "@/components/Scripts";
@@ -164,8 +166,12 @@ export default async function RootLayout({
 
   const translations = await loadTranslationsForLocale(locale || "en", {
     namespaces: LOGIN_NAMESPACES,
-    appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
-    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
+    appLocalesDir:
+      process.env.NEXT_APP_LOCALES_DIR ??
+      path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir:
+      process.env.NEXT_SHARED_LOCALES_DIR ??
+      path.join(process.cwd(), "../../public/locales"),
   });
 
   const dirClass = getDirectionByLanguage(locale || "en");
@@ -229,3 +235,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

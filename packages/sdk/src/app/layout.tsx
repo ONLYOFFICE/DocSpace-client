@@ -44,6 +44,7 @@ import {
   getFontFamilyDependingOnLanguage,
 } from "@onlyoffice/apps-ui-kit/providers/theme/rtl-utils";
 
+import "@onlyoffice/apps-ui-kit/styles.css";
 import "@docspace/shared/styles/theme.scss";
 
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
@@ -108,13 +109,16 @@ export default async function RootLayout({
 
   const initialLocaleResources = await loadTranslationsForLocale(locale, {
     namespaces: [],
-    appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
-    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
+    appLocalesDir:
+      process.env.NEXT_APP_LOCALES_DIR ??
+      path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir:
+      process.env.NEXT_SHARED_LOCALES_DIR ??
+      path.join(process.cwd(), "../../public/locales"),
   });
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
-    | ThemeKeys
-    | undefined;
+    ThemeKeys | undefined;
 
   const currentColorScheme = colorTheme?.themes.find(
     (t) => t.id === colorTheme.selected,

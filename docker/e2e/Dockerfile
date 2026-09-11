@@ -23,7 +23,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 # Install PNPM
-RUN npm install -g pnpm@12.3.4 && npm cache clean --force
+RUN npm install -g pnpm@12.4.1 && npm cache clean --force
 
 WORKDIR /app
 

@@ -110,7 +110,7 @@ const RoomsTour = ({
   roomsId,
   organizeRoomsGrouping,
 }: RoomsTourProps) => {
-  const { t } = useTranslation(["RoomsTour", "FilesTour", "Common"]);
+  const { t, ready } = useTranslation(["RoomsTour", "FilesTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
@@ -247,6 +247,13 @@ const RoomsTour = ({
     if (tourDemo.isActive || hasItems) return;
     if (isMobileView || firstLoad || isSectionLoading || !isRoomsRoot) return;
     if (!user) return;
+    // `demoConfig` names the stand-in rooms, and the demo keeps whatever it was
+    // armed with: the next run of this effect finds it active and returns. The
+    // names are `Common` keys, which i18n preloads (SRC_DIR/i18n.js), so the
+    // window is narrower than a tour with a namespace of its own — but with
+    // `useSuspense: false` it is still a window, and what it leaves behind is a
+    // list of raw keys for as long as the tour is up.
+    if (!ready) return;
 
     // Whatever the audience. Somebody who cannot create a room has the most to
     // gain from this and the least without it: their empty section renders
@@ -268,6 +275,7 @@ const RoomsTour = ({
     isRoomsRoot,
     user,
     reloadSection,
+    ready,
     demoConfig,
   ]);
 

@@ -105,7 +105,7 @@ const FilesTour = ({
   favoritesId,
   trashId,
 }: FilesTourProps) => {
-  const { t } = useTranslation(["FilesTour", "Common"]);
+  const { t, ready } = useTranslation(["FilesTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
@@ -169,6 +169,13 @@ const FilesTour = ({
     // The same test as `willStandIn`, plus the narrowing TypeScript needs to
     // hand these two to the config below.
     if (!willStandIn || sharedFolderId === null || !user) return;
+    // The stand-in file names below are read once and frozen into the demo: the
+    // next run of this effect finds it active and returns. They are `Common`
+    // keys, which i18n preloads (SRC_DIR/i18n.js), so the window is narrower
+    // than a tour with a namespace of its own — but with `useSuspense: false`
+    // it is still a window, and what it leaves behind is a list of raw keys for
+    // as long as the tour is up.
+    if (!ready) return;
 
     tourDemo.activate({
       // Shared with me is a plain folder, so its list is the ordinary
@@ -219,6 +226,7 @@ const FilesTour = ({
     sharedFolderId,
     user,
     reloadSection,
+    ready,
     t,
   ]);
 

@@ -31,8 +31,8 @@
   },
   "dependencies": {
     "@docspace/shared": "workspace:*",
-    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-0.5.82.tgz",
-    "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tar.gz",
+    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-0.5.108.tgz",
+    "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tgz",
     "@tanstack/react-query": "^5.101.4",
     "adm-zip": "0.6.0",
     "axios": "^1.19.0",

@@ -29,8 +29,8 @@
   "dependencies": {
     "@aws-sdk/client-cloudwatch-logs": "3.981.0",
     "@docspace/shared": "workspace:*",
-    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-0.5.82.tgz",
-    "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tar.gz",
+    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-0.5.108.tgz",
+    "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tgz",
     "@onlyoffice/document-editor-react": "2.1.1",
     "classnames": "2.5.1",
     "crypto-js": "4.2.0",

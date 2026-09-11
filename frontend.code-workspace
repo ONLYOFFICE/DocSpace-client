@@ -28,10 +28,6 @@
       "name": "📦 @docspace/shared",
       "path": "packages/shared"
     },
-    {
-      "name": "📦 @onlyoffice/apps-ui-kit",
-      "path": "libs/ui-kit"
-    }
   ],
   "settings": {
     "window.zoomLevel": 0,

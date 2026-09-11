@@ -47,7 +47,7 @@ import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { CommonTrans } from "@onlyoffice/apps-ui-kit/utils/i18n/CommonTrans";
 
 // 16px icons reused from the ui-kit icon set (matches AI services pages).
-import AIIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/AI.svg";
+import AIIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/ai-chat.react.svg";
 import PriceIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/price.react.svg";
 import WalletIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/wallet.react.svg";
 import WebSearchIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/ai-feature-web-search.react.svg";

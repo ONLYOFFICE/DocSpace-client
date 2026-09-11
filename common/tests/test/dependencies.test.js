@@ -378,17 +378,29 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       "@assistant-ui/react-markdown",
       "assistant-stream",
       "@codemirror/lang-json",
+      "@codemirror/state",
+      "@codemirror/view",
       "codemirror",
       "@google/genai",
       "@mistralai/mistralai",
       "@radix-ui/react-dialog",
+      "@radix-ui/react-dropdown-menu",
+      "@radix-ui/react-slot",
       "@radix-ui/react-switch",
       "@radix-ui/react-tabs",
       "@radix-ui/react-tooltip",
       "class-variance-authority",
+      "clsx",
+      "framer-motion",
+      "katex",
       "openai",
       "react-shiki",
+      "react-syntax-highlighter",
+      "rehype-katex",
+      "rehype-raw",
+      "remark-math",
       "tailwind-merge",
+      "zustand",
       // @onlyoffice/apps-ui-kit dependencies that peer-installed apps must
       // declare for the host build to resolve them (Vite/Next.js/tsc), but
       // never import by name directly -- the only usage is through ui-kit's
@@ -396,6 +408,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       // ambient global-type augmentation with no import statement at all.
       "@onlyoffice/document-editor-react",
       "@onlyoffice/ai-chat",
+      "@socket.io/component-emitter",
       "socket.io-client",
     ];
 

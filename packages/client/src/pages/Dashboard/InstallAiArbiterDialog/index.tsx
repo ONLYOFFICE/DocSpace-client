@@ -69,9 +69,9 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import CheckIcon from "@onlyoffice/apps-ui-kit/assets/check.react.svg";
+import CheckIcon from "@onlyoffice/apps-ui-kit/assets/check.edit.react.svg";
 import DangerIcon from "@onlyoffice/apps-ui-kit/assets/danger.toast.react.svg";
-import CatalogAiArbiterIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.ai-arbiter.react.svg";
+import CatalogAiArbiterIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.ai-agents.react.svg";
 import AiAgentsLightIllustration from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
 import AiAgentsDarkIllustration from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 

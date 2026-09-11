@@ -69,7 +69,6 @@ describe("rewritePluginImports", () => {
     "react",
     "react-dom",
     "react/jsx-runtime",
-    "react/jsx-dev-runtime",
     "@onlyoffice/docspace-plugin-sdk/react",
     "@docspace/ui-kit",
   ])("provides %s", (specifier) => {

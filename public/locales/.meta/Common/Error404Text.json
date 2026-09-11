@@ -20,7 +20,7 @@
     {
       "file_path": "/packages/shared/components/errors/Error404.tsx",
       "line_number": 47,
-      "context": "import ErrorContainer from \"@docspace/ui-kit/components/error-container/ErrorContainer\";\n \n const Error404 = () => {\n const { t, ready } = useTranslation([\"Common\"]);\n \n return ready && <ErrorContainer headerText={t(\"Error404Text\")} />;\n };\n \n export default Error404;",
+      "context": "import ErrorContainer from \"@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer\";\n \n const Error404 = () => {\n const { t, ready } = useTranslation([\"Common\"]);\n \n return ready && <ErrorContainer headerText={t(\"Error404Text\")} />;\n };\n \n export default Error404;",
       "module": "/packages/shared"
     }
   ],

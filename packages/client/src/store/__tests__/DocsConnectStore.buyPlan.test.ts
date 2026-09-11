@@ -63,7 +63,7 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn(), info: vi.fn() },
 }));
 
-vi.mock("@docspace/ui-kit/billing/utils/stripe-flow", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/billing/utils/stripe-flow", () => ({
   openStripeCheckout: vi.fn(),
   pollUntil: vi.fn(
     async (check: () => Promise<boolean>, signal: AbortSignal) => {
@@ -270,7 +270,9 @@ describe("DocsConnectStore.switchToDevPack", () => {
   it("keeps the original error when refreshing the info also fails", async () => {
     const store = createStore(makeInfo());
 
-    mockedSwitchToDevPack.mockRejectedValueOnce(new Error("Insufficient funds"));
+    mockedSwitchToDevPack.mockRejectedValueOnce(
+      new Error("Insufficient funds"),
+    );
     mockedGetInfo.mockRejectedValue(new Error("Refresh failed"));
 
     await expect(
@@ -389,3 +391,4 @@ describe("DocsConnectStore.buyPlanViaStripe", () => {
     expect(store.buyPlanPanelVisible).toBe(true);
   });
 });
+

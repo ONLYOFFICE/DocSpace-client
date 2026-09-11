@@ -38,8 +38,8 @@ import { Trans, useTranslation } from "react-i18next";
 import { useCallback, useRef, useState } from "react";
 import type { KeyboardEvent, MouseEvent } from "react";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useEventListener } from "@onlyoffice/apps-ui-kit/hooks/useEventListener";
 
 import { useTagManagement } from "./TagManagement.provider";
 import { stopPropagation, toError, undoTagChange } from "./TagManagement.utils";
@@ -360,3 +360,4 @@ export const useTagManagementService = ({
     editTagHandleKey,
   };
 };
+

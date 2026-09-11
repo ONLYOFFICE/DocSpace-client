@@ -35,13 +35,13 @@
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-vi.mock("@docspace/ui-kit/utils/socket", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
   default: { emit: vi.fn(), on: vi.fn() },
   SocketCommands: { Subscribe: "subscribe" },
   SocketEvents: { ChangeWebPlugin: "change-web-plugin" },
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn(), info: vi.fn() },
 }));
 
@@ -84,3 +84,4 @@ describe("PluginStore.getUserRole", () => {
     expect(storeFor(null).getUserRole()).toBe(PluginUserRole.guest);
   });
 });
+

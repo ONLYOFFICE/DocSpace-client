@@ -109,9 +109,10 @@ Check each flag against the target version — `pnpm <cmd> --help` lists them, b
 absence from `--help` is not proof: verify by running the flag against the new
 pnpm in a throwaway directory pinned with `packageManager`, and confirm the
 control case (a bogus flag must error) so "accepted" means something.
-Flags currently relied on: `--frozen-lockfile`, `--node-linker=hoisted`
-(Windows installer build) and `--dangerously-allow-all-builds` (MCP build) —
-all three still valid in pnpm 12.
+Flags currently relied on: `--frozen-lockfile` and
+`--dangerously-allow-all-builds` (MCP build) — both still valid in pnpm 12. The
+Windows build does **not** use `--node-linker`; it edits `pnpm-workspace.yaml`
+instead, for the reason given in §5.
 
 Sibling repos built by the same scripts (`mcp`, checked out next to `client`)
 carry their own `packageManager` and lockfile. They are **not** covered by this
@@ -136,16 +137,34 @@ git -C ../buildtools branch -a --contains <commit>
 ```
 
 Real example: `install/win/frontend-build.bat` carried a `sed` that uncommented
-`node-linker=hoisted` in the client's `.npmrc`. That line no longer exists, so
-the `sed` silently does nothing and the Windows build fails on MAX_PATH. The fix
-(`pnpm install --node-linker=hoisted`) was already committed on
-`bugfix/frontend-build` and simply not merged — rewriting it here produces a
-duplicate change and a conflict. Say what is broken and where the fix already
-lives; let the user merge it.
+`node-linker=hoisted` in the client's `.npmrc`. When that line was dropped from
+`.npmrc`, the `sed` silently stopped matching and the Windows build started
+failing on MAX_PATH — a green build with the wrong layout. A fix already existed
+on an unmerged `bugfix/frontend-build`, so rewriting it here would only have
+produced a duplicate change and a conflict. Say what is broken and where the fix
+already lives; let the user merge it.
+
+That episode is also why the replacement contract is spelled out in
+`pnpm-workspace.yaml` itself: the `sed` now targets the commented `nodeLinker`
+line there, and its wording must not be reformatted.
 
 Because pnpm ≥10 self-manages via `managePackageManagerVersions`, editing
-`packageManager` is enough to switch the local binary; a Homebrew/global pnpm of
-a different version is overridden inside the repo and does not need touching.
+`packageManager` is normally enough to switch the local binary; a Homebrew or
+global pnpm of a different version is overridden inside the repo.
+
+**One exception, on Windows.** Self-switching into pnpm ≥12 from a global pnpm
+≤11 has been observed to leave a broken shim — the npm `pnpm` package is a
+wrapper whose install script swaps in the native binary, and that script does
+not run under self-switching, so cmd.exe ends up invoking a shell stub it cannot
+execute. `pnpm install`, `pnpm start` and the whole pre-push gate then fail. The
+fix is one-time, per machine, and cannot be made in the repo:
+
+```powershell
+npm i -g pnpm@<new version>
+```
+
+When a bump crosses into a new major, say this in the report so Windows users
+are not left debugging it.
 
 ---
 
@@ -160,7 +179,10 @@ sed -i '' "s/pnpm@${OLD}/pnpm@${NEW}/" \
 sed -i '' 's/"pnpm": ">=11"/"pnpm": ">=12"/' package.json
 ```
 
-On Linux use `sed -i` without the `''`.
+The `sed -i ''` above is the macOS form. On Linux use `sed -i` without the `''`;
+in Git Bash on Windows the `''` is also wrong, and `sed -i.bak` followed by
+deleting the `.bak` files is the portable option. Check the result either way —
+a mis-quoted `-i` silently writes to a file named `''`.
 
 The ui-kit files are **committed in the ui-kit repo**, never here. Edit them in
 `libs/ui-kit/`, commit and push there, then commit the gitlink in the client
@@ -204,10 +226,12 @@ dependency did: since pnpm 12 the lockfile carries a
 `packageManagerDependencies` document pinning the pnpm binary itself with
 per-platform integrity hashes, so every version bump rewrites it. That makes
 `pnpm-lock.yaml` a **multi-document YAML** (a `---` separator before the real
-lockfile). Nothing in this repo parses the lockfile —
-`.claude/scripts/audit/audit-deps.mjs` only uses it as a marker for tree
-discovery — but re-check that if a new script ever loads it with a
-single-document YAML loader.
+lockfile). Nx parses this file for its project graph
+(`nx/dist/src/plugins/js/lock-file/pnpm-parser.js`) and has handled multiple
+documents since 22.7, so the pinned Nx must stay at or above that; a downgrade
+below it would break the graph. `.claude/scripts/audit/audit-deps.mjs` only uses
+the file as a marker for tree discovery. Any new script that reads it needs a
+multi-document loader.
 
 The diff should be **purely additive** when only the pnpm version changed.
 Verify before accepting it:
@@ -260,20 +284,27 @@ when the schema cannot be fetched, and `--json` is for scripting.
 
 Some settings fix one environment and would change everyone else's install.
 `nodeLinker: hoisted` is the standing example: it flattens `node_modules`, which
-rescues Windows installer builds from `MAX_PATH` failures during the copy step,
-but repo-wide it changes resolution for every developer, CI job and Docker build
-and re-exposes phantom dependencies.
+rescues the Windows installer build from `MAX_PATH` failures during the copy
+step, but repo-wide it changes resolution for every developer, CI job and Docker
+build and re-exposes phantom dependencies.
 
-Prefer the per-build override, which needs no repo change and works identically
-on pnpm 10, 11 and 12:
+**A CLI flag cannot scope such a setting to one build.** `pnpm install
+--node-linker=hoisted` does produce a flat tree, but pnpm verifies the
+dependency tree before running a script, so the next `pnpm run …` relinks it
+back to the layout declared in `pnpm-workspace.yaml`. Anything that must hold
+until a later script runs has to be declared in the file.
 
-```bash
-pnpm install --node-linker=hoisted     # values: isolated | hoisted | pnp
-```
+What this repo does instead: `nodeLinker: hoisted` ships **commented out** in
+`pnpm-workspace.yaml`, and the Windows build uncomments it in place with a
+`sed` matching `^# *nodeLinker: *hoisted`. That makes the comment's exact
+wording a contract with buildtools — a failed match is silent, leaving a green
+build with the wrong layout. Never reword such a line without grepping
+buildtools for it.
 
 `virtualStoreDirMaxLength` is the narrower alternative when the isolated linker
 must be kept and only path length is the problem. Only put such a setting in
-`pnpm-workspace.yaml` when every consumer of the repo genuinely wants it.
+`pnpm-workspace.yaml` uncommented when every consumer of the repo genuinely
+wants it.
 
 ---
 

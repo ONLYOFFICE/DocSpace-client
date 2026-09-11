@@ -5,6 +5,14 @@ packages:
 # Flat node_modules. The Windows build agent copies the Next.js standalone
 # output with xcopy, which fails past MAX_PATH (260 chars) on the isolated
 # `.pnpm/<name>@<version>_<hash>/node_modules/...` paths. See .npmrc.
+#
+# DO NOT reword or reformat the line below. buildtools enables it for the
+# Windows build by uncommenting it in place, matching `^# *nodeLinker: *hoisted`
+# (install/win/frontend-build.bat). The match is silent when it fails: the build
+# stays green and the layout stays isolated, which is exactly how the previous
+# breakage happened after the equivalent line was dropped from .npmrc. A
+# --node-linker flag cannot replace this - pnpm relinks the tree to the layout
+# declared here before running a script.
 # nodeLinker: hoisted
 
 # Dependency install/postinstall scripts (pnpm >= 11 requires an explicit
@@ -90,4 +98,3 @@ overrides:
   # Guards against libs/ui-kit submodule drift until its pointer is bumped;
   # every manifest now pins 8.3.0 directly, so this can be dropped afterwards
   react-router: "8.3.0"
-

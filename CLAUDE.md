@@ -150,9 +150,9 @@ The pnpm version is hardcoded in three repos: `packageManager` and
 `libs/ui-kit` submodule. Only CI (`pnpm/action-setup`) and the buildtools build
 image follow `packageManager` on their own — the Dockerfiles use
 `npm install -g pnpm@…` and drift silently. buildtools must keep a bare
-`corepack enable` (never `corepack prepare pnpm@latest`), and its build scripts
-need a flag audit on every major, since no gate or CI covers them. Use the
-`update-pnpm` skill to bump them together and regenerate both lockfiles.
+`corepack enable` and needs a flag audit on every major, since no gate or CI
+covers it — `.claude/rules/pnpm.md` has the reasoning. Use the `update-pnpm`
+skill to bump them together and regenerate both lockfiles.
 
 ### License headers
 

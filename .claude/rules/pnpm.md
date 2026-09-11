@@ -61,5 +61,6 @@ automatically, and audits the buildtools scripts for flags a new major drops.
 
 Since pnpm 12 the lockfile also carries a `packageManagerDependencies` document
 pinning the pnpm binary itself, which makes `pnpm-lock.yaml` a multi-document
-YAML file. Nothing here parses it today; keep it that way or use a
-multi-document loader.
+YAML file. Nx parses it for the project graph and has supported multiple
+documents since 22.7, so the pinned Nx must not drop below that. Any new script
+that reads the lockfile needs a multi-document loader.

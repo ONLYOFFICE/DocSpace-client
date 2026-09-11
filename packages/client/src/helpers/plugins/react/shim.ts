@@ -108,25 +108,6 @@ const JSX_RUNTIME_SHIM_URL = URL.createObjectURL(
   ),
 );
 
-// A dev-mode plugin calls `jsxDEV`, which the production runtime lacks;
-// `isStaticChildren` is the flag that picks between `jsx` and `jsxs`.
-const JSX_DEV_RUNTIME_SHIM_URL = URL.createObjectURL(
-  new Blob(
-    [
-      [
-        `const R = window.__ds_ReactJSXRuntime;`,
-        `export const Fragment = R["Fragment"];`,
-        `export const jsxDEV = (type, props, key, isStatic) =>`,
-        `  isStatic`,
-        `    ? R["jsxs"](type, props, key)`,
-        `    : R["jsx"](type, props, key);`,
-        `export default { Fragment, jsxDEV };`,
-      ].join("\n"),
-    ],
-    { type: "application/javascript" },
-  ),
-);
-
 const PLUGIN_SDK_REACT_SHIM_URL = URL.createObjectURL(
   new Blob(
     [
@@ -157,7 +138,6 @@ const SPECIFIER_MAP: Record<string, string> = {
   react: REACT_SHIM_URL,
   "react-dom": REACT_DOM_SHIM_URL,
   "react/jsx-runtime": JSX_RUNTIME_SHIM_URL,
-  "react/jsx-dev-runtime": JSX_DEV_RUNTIME_SHIM_URL,
   "@onlyoffice/docspace-plugin-sdk/react": PLUGIN_SDK_REACT_SHIM_URL,
   "@docspace/ui-kit": PLUGIN_UI_KIT_SHIM_URL,
 };

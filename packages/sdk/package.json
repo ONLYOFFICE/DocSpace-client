@@ -72,7 +72,7 @@
     "shx": "0.4.0",
     "terser-webpack-plugin": "5.3.16",
     "typescript": "5.9.3",
-    "vitest": "4.1.8"
+    "vitest": "4.1.11"
   },
   "nx": {
     "targets": {

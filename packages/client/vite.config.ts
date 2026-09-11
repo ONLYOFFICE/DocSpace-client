@@ -166,11 +166,15 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
         "@onlyoffice/apps-ui-kit/utils/*",
         "@onlyoffice/apps-ui-kit/context/*",
         "@onlyoffice/apps-ui-kit/providers/*",
+        // Must stay pre-bundled: assistant-stream (pulled in through the AI
+        // stack) does `import sjson from "secure-json-parse"`, and that package
+        // is plain CommonJS with no ESM build. Only esbuild's CJS-to-ESM
+        // interop during pre-bundling gives it a `default` export -- served raw
+        // it fails at runtime with "does not provide an export named 'default'".
+        // optimizeDeps affects the dev server only, so this does not interfere
+        // with the lazy AI chunking in config/build.ts.
+        "@onlyoffice/ai-chat",
       ],
-      // The AI stack is lazy-loaded and deliberately split out of the vendor
-      // chunk in config/build.ts; pre-bundling it would pull it into the
-      // eager graph and undo that.
-      exclude: ["@onlyoffice/ai-chat"],
     },
   };
 });

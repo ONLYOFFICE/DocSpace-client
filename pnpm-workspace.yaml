@@ -2,6 +2,11 @@ packages:
   - packages/*
   - libs/*
 
+# Flat node_modules. The Windows build agent copies the Next.js standalone
+# output with xcopy, which fails past MAX_PATH (260 chars) on the isolated
+# `.pnpm/<name>@<version>_<hash>/node_modules/...` paths. See .npmrc.
+# nodeLinker: hoisted
+
 # Dependency install/postinstall scripts (pnpm >= 11 requires an explicit
 # decision per package; unreviewed packages fail the install).
 allowBuilds:
@@ -85,3 +90,4 @@ overrides:
   # Guards against libs/ui-kit submodule drift until its pointer is bumped;
   # every manifest now pins 8.3.0 directly, so this can be dropped afterwards
   react-router: "8.3.0"
+

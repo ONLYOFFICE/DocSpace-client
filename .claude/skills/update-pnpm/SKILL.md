@@ -118,6 +118,31 @@ carry their own `packageManager` and lockfile. They are **not** covered by this
 skill; check their pin separately, because a build server with an unpinned
 global pnpm will silently build them with whatever it has.
 
+#### In buildtools: report defects, do not fix them
+
+The only buildtools edit this skill makes is the version bump itself (and
+keeping the build image on a bare `corepack enable`). Anything else the audit
+turns up — a dead `sed`, a build script using a flag the new major dropped, a
+stale workaround — gets **reported to the user, not edited**. buildtools is a
+shared repo with its own release cadence, and a plausible-looking fix here is
+the single most likely way this skill causes a merge conflict.
+
+Before touching any buildtools file, check whether a fix already exists on an
+unmerged branch:
+
+```bash
+git -C ../buildtools log --oneline --all -3 -- <file>
+git -C ../buildtools branch -a --contains <commit>
+```
+
+Real example: `install/win/frontend-build.bat` carried a `sed` that uncommented
+`node-linker=hoisted` in the client's `.npmrc`. That line no longer exists, so
+the `sed` silently does nothing and the Windows build fails on MAX_PATH. The fix
+(`pnpm install --node-linker=hoisted`) was already committed on
+`bugfix/frontend-build` and simply not merged — rewriting it here produces a
+duplicate change and a conflict. Say what is broken and where the fix already
+lives; let the user merge it.
+
 Because pnpm ≥10 self-manages via `managePackageManagerVersions`, editing
 `packageManager` is enough to switch the local binary; a Homebrew/global pnpm of
 a different version is overridden inside the repo and does not need touching.

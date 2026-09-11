@@ -55,6 +55,8 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
 
 - Client (Vite): `http://localhost:5001` — served behind nginx proxy at port 8092
 - Static assets (images, fonts, scripts): served by nginx from `/var/www/public/` at `/static/` prefix
+  — the routing lives in `../buildtools/config/nginx/onlyoffice.conf` (see the
+  buildtools section below); a new asset kind needs a `location` there
 - Other dev ports: login 5011, doceditor 5013, management 5015, sdk 5099;
   Storybook: shared 8082, ui-kit 6006; E2E serve: client 5110, login 5111,
   sdk 5112, doceditor 5113, management 5115; Playwright reports 9325–9329
@@ -73,6 +75,46 @@ Bumping the pointer: `git -C libs/ui-kit pull` on develop, then
 committed; root `pnpm-lock.yaml` only when ui-kit deps changed — then run
 `pnpm install` first). The submodule's own lockfile is refreshed with
 `pnpm run update-ui-kit-lock` and committed in the ui-kit repo.
+
+### buildtools sibling repo
+
+`../buildtools` (ONLYOFFICE Apps Build Tools) is a **separate, optional repo**,
+not a submodule. The client clones, installs, builds and tests without it — so
+treat every path below as "only if `../buildtools` exists", and never block or
+fail client work because it is missing. It owns the nginx routing, the
+appsettings and the build/install scripts the client runs behind, so when it
+*is* checked out, client work regularly needs changes there. It has its own
+`../buildtools/CLAUDE.md` with the full layout — the parts that matter here:
+
+- **`config/nginx/onlyoffice.conf`** — the routing source of truth for
+  everything the browser requests. `/` proxies to the client dev server; each
+  `/static/<kind>/` subpath (`css`, `fonts`, `locales`, `scripts`, `images`,
+  `offline`, `plugins`, `campaigns`) is served from the public root by its own
+  `location`, and login / doceditor / management / sdk / confirm / wizard are
+  mounted under their prefixes with their own `_next/static` handling. A new
+  asset kind, locale directory or app route is **not** served until it gets a
+  `location` here. The same file carries the `$cache_control` and
+  `$content_security_policy` maps, so a new asset type also needs a cache rule,
+  and a new external origin needs a CSP entry.
+- **`config/nginx/includes/onlyoffice-upstream-map.conf`** — maps every service
+  to its dev port (client 5001, login 5011, doceditor 5013, management 5015,
+  sdk 5099, storybook 6006, backend 5000/5007/…). Generated from the
+  `.template` next to it; edit the template.
+- **`config/appsettings*.json`** — what `pnpm deploy`'d SSR apps read
+  (base / `developer` / `enterprise` / `test` overlays, matching `APP_EDITION`).
+- **`install/docker/build/Dockerfile`** — builds the client in CI. It must keep
+  a bare `corepack enable` so the pinned `packageManager` decides the pnpm
+  version (see the pnpm version section below).
+- **Frontend build entry points** — `build.frontend.bat`, `build.static.sh`,
+  `install/common/packages-build.sh` (also builds the sibling `mcp` repo) and
+  `install/win/frontend-build.bat`. None of these are covered by the client's
+  pre-push gate or CI, so a flag or script change here is only caught at
+  release-build time.
+
+Changes to any of this are committed **in the buildtools repo**, on its own
+branch (`master` / `develop`, `feature/*`, `bugfix/*`), never from the client
+repo. Check its branch state before editing — a fix may already exist on an
+unmerged branch.
 
 ## Code Quality
 
@@ -100,6 +142,17 @@ including the npm sub-projects under `common/` - and to get the override line
 that fixes each finding. Overrides go in `pnpm-workspace.yaml` for pnpm trees
 and in the project's own `package.json` for npm trees; `libs/ui-kit` findings
 belong to the ui-kit repo.
+
+### pnpm version
+
+The pnpm version is hardcoded in three repos: `packageManager` and
+`engines.pnpm` in `package.json`, seven Dockerfiles here, and two files in the
+`libs/ui-kit` submodule. Only CI (`pnpm/action-setup`) and the buildtools build
+image follow `packageManager` on their own — the Dockerfiles use
+`npm install -g pnpm@…` and drift silently. buildtools must keep a bare
+`corepack enable` (never `corepack prepare pnpm@latest`), and its build scripts
+need a flag audit on every major, since no gate or CI covers them. Use the
+`update-pnpm` skill to bump them together and regenerate both lockfiles.
 
 ### License headers
 

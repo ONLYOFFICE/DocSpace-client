@@ -197,6 +197,7 @@ export const buildContextOptions = (
       "update-xlsx-data",
       "separator0",
       "ask-ai",
+      "analyze-responses",
       "separator6",
       "filling-status",
       "start-filling",
@@ -248,18 +249,32 @@ export const buildContextOptions = (
       "stop-filling",
     ];
 
-    // `security.AskAi` is server-computed at fetch time, so an already-loaded
+    // Both AI entries are server-computed at fetch time, so an already-loaded
     // list keeps stale `true` values after an admin disables AI portal-wide —
-    // check the live switch as well.
-    const noAskAi =
-      !item?.security?.AskAi ||
+    // check the live switch as well. Privacy and encryption rule the chat out
+    // whatever the rights say.
+    const noAi =
       !deps.settingsStore.aiServicesEnabled ||
       isPrivacyFolder ||
       item.private ||
       isEncrypted;
 
-    if (noAskAi) {
-      fileOptions = removeOptions(fileOptions, ["ask-ai", "separator6"]);
+    // "Analyze responses" is the same chat, opened on the form's answers
+    // rather than on the document, so the two are alternatives: where the
+    // server offers it, it replaces the plain entry.
+    const canAnalyzeResponses = !noAi && Boolean(item?.security?.AnalyzeResponses);
+    const canAskAi = !noAi && !canAnalyzeResponses && Boolean(item?.security?.AskAi);
+
+    if (!canAnalyzeResponses) {
+      fileOptions = removeOptions(fileOptions, ["analyze-responses"]);
+    }
+
+    if (!canAskAi) {
+      fileOptions = removeOptions(fileOptions, ["ask-ai"]);
+    }
+
+    if (!canAskAi && !canAnalyzeResponses) {
+      fileOptions = removeOptions(fileOptions, ["separator6"]);
     }
 
     if (item.external && item.isLinkExpired) {

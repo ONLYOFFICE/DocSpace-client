@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 
 import {
@@ -254,12 +254,15 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
     expect(keys).toEqual(["open", "move-to", "rename", "delete"]);
   });
 
-  // The AI entry is one option with two readings: on a form that has started
-  // collecting responses into a table the chat talks about the answers, and
-  // the label says "Analyze responses" instead of "Ask AI".
-  describe("ask-ai label", () => {
-    const askAiLabelOf = (form: Record<string, unknown>) => {
+  // Two entries, two actions: the plain chat, and the chat opened on a
+  // form's answers. Which of them a row gets is decided by the option list
+  // (`filesStore/contextOptions.helpers.ts`, from `security.AnalyzeResponses`);
+  // this file only checks that each renders as itself.
+  describe("AI entries", () => {
+    const entryOf = (key: string) => {
       const store = createTestContextOptionsStore();
+      const askAI = vi.fn();
+      store.askAI = askAI as never;
       const model = store.getFilesContextOptions(
         {
           id: 1,
@@ -269,42 +272,39 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
           rootFolderId: 5,
           security: {},
           viewAccessibility: {},
-          contextOptions: ["ask-ai"],
-          ...form,
+          contextOptions: [key],
         } as never,
         t,
       );
-      return menuShape(model).find((option) => option.key === "ask-ai")?.label;
+      const entry = (
+        model as unknown as {
+          id?: string;
+          key?: string;
+          label?: string;
+          onClick?: () => void;
+        }[]
+      ).find((option) => option.key === key);
+      return { entry, askAI };
     };
 
-    it("reads Analyze responses once filling started and results are collected", () => {
-      expect(
-        askAiLabelOf({
-          isForm: true,
-          startFilling: true,
-          externalDbTableName: "form_42",
-        }),
-      ).toBe("Files:AnalyzeResponses");
+    it("renders ask-ai as the plain chat entry", () => {
+      const { entry, askAI } = entryOf("ask-ai");
+      expect(entry?.label).toBe("Common:AskAI");
+      entry?.onClick?.();
+      expect(askAI).toHaveBeenCalledWith(expect.objectContaining({ id: 1 }));
     });
 
-    it("stays Ask AI for a form with no results table", () => {
-      expect(askAiLabelOf({ isForm: true, startFilling: true })).toBe(
-        "Common:AskAI",
+    it("renders analyze-responses as its own entry, asking for the mode", () => {
+      const { entry, askAI } = entryOf("analyze-responses");
+      expect(entry?.id).toBe("option_analyze_responses");
+      expect(entry?.label).toBe("Files:AnalyzeResponses");
+      // `true` is what makes the chat attach the form as the subject of the
+      // message and lock the composer to it.
+      entry?.onClick?.();
+      expect(askAI).toHaveBeenCalledWith(
+        expect.objectContaining({ id: 1 }),
+        true,
       );
-    });
-
-    it("stays Ask AI while filling has not started", () => {
-      expect(
-        askAiLabelOf({
-          isForm: true,
-          startFilling: false,
-          externalDbTableName: "form_42",
-        }),
-      ).toBe("Common:AskAI");
-    });
-
-    it("stays Ask AI for an ordinary file", () => {
-      expect(askAiLabelOf({})).toBe("Common:AskAI");
     });
   });
 });

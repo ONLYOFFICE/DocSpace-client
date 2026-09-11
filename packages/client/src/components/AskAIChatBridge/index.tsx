@@ -51,7 +51,6 @@ import {
 } from "@docspace/ui-kit/ai-agent/providers/files";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { isAnalyzeResponsesTarget } from "SRC_DIR/helpers/analyzeResponses";
 import { useStore } from "SRC_DIR/store/useStore";
 
 /**
@@ -112,18 +111,12 @@ const AskAIChatBridgeComponent = () => {
     // and therefore the freshly attached chip — is not on screen.
     setCurrentPage("chat");
 
-    // A request about the form's responses attaches the form as the subject
-    // of the message: the composer is emptied first and locked to it until
-    // the message is sent (see `useAnalyzeLock` in the ui-kit).
-    //
-    // Either the caller said so — the results folder's "Analyze responses"
-    // button, which is that action by definition — or the row itself says so
-    // (filling started, responses collected in a table), which is what the
-    // context menu, Ctrl+I and the info-panel card go by, and what makes
-    // their menu entry read "Analyze responses" in the first place.
-    const analyzeOnly = analyze || isAnalyzeResponsesTarget(file);
-
-    attachFilesToChat([{ ...file, analyzeOnly }])
+    // "Analyze responses" attaches the form as the subject of the message:
+    // the composer is emptied first and locked to it until the message is
+    // sent (see `useAnalyzeLock` in the ui-kit). The caller decides — the
+    // context menu entry and the results folder's button both say so, plain
+    // "Ask AI" does not.
+    attachFilesToChat([{ ...file, analyzeOnly: analyze }])
       .then(({ skippedOverLimit, duplicates, cap }) => {
         // A file that did not make it onto the composer — capped or
         // already there — must not disappear without a word. The cap is per

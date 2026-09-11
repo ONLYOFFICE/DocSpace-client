@@ -121,6 +121,7 @@ export type TFileSecurity = {
   Vectorization: boolean;
   AskAi?: boolean;
   UpdateXlsx?: boolean;
+  AnalyzeResponses?: boolean;
 };
 
 export type TShareSettings = {

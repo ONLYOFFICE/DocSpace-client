@@ -187,6 +187,42 @@ describe("FilesStore.getFilesContextOptions — characterization", () => {
     expect(store.getFilesContextOptions(roomTemplate())).toMatchSnapshot();
   });
 
+  // The two AI entries are alternatives, not neighbours: a form whose
+  // responses the server lets you analyze opens the chat on the answers, so
+  // offering the plain entry next to it would be two doors to one room.
+  it("replaces ask-ai with analyze-responses where the server allows it", () => {
+    const plain = store.getFilesContextOptions(documentFile());
+    expect(plain).toContain("ask-ai");
+    expect(plain).not.toContain("analyze-responses");
+
+    const form = {
+      ...documentFile(),
+      security: { ...fileSecurity, AnalyzeResponses: true },
+    } as never;
+    const opts = store.getFilesContextOptions(form);
+    expect(opts).toContain("analyze-responses");
+    expect(opts).not.toContain("ask-ai");
+    // The entry keeps its separator, so the group does not merge upwards.
+    expect(opts).toContain("separator6");
+  });
+
+  it("drops both AI entries when the portal switch is off", () => {
+    const store2 = createTestFilesStore({
+      settingsStore: { aiServicesEnabled: false },
+    });
+    store2.dialogsStore = { roomGroups: [] } as never;
+
+    const form = {
+      ...documentFile(),
+      security: { ...fileSecurity, AnalyzeResponses: true },
+    } as never;
+    const opts = store2.getFilesContextOptions(form);
+
+    expect(opts).not.toContain("analyze-responses");
+    expect(opts).not.toContain("ask-ai");
+    expect(opts).not.toContain("separator6");
+  });
+
   it("honors optionsToRemove", () => {
     const full = store.getFilesContextOptions(documentFile());
     const trimmed = store.getFilesContextOptions(documentFile(), ["download"]);

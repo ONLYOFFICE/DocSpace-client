@@ -84,14 +84,11 @@ import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?u
 import copy from "copy-to-clipboard";
 import { isMobile } from "react-device-detect";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import type {
-  ContextMenuModel,
-} from "@docspace/ui-kit/components/context-menu";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { isLockedSharedRoom, trimSeparator } from "@docspace/shared/utils";
 import { removeOptions } from "SRC_DIR/helpers/filesUtils";
-import { isAnalyzeResponsesTarget } from "SRC_DIR/helpers/analyzeResponses";
 import {
   RoomsType,
   FolderType,
@@ -108,11 +105,7 @@ import {
   onShowEditingToast,
   placePlugins,
 } from "./helpers";
-import type {
-  TContextItem,
-  TContextOption,
-  TMenuGroupConfig,
-} from "./helpers";
+import type { TContextItem, TContextOption, TMenuGroupConfig } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
 import type { TSelectionItem } from "./types";
 
@@ -191,11 +184,7 @@ export const getFilesContextOptionsImpl = (
           label: t("Common:ShowVersionHistory"),
           icon: HistoryReactSvgUrl,
           onClick: () =>
-            self.showVersionHistory(
-              item.id,
-              item.security,
-              item?.requestToken,
-            ),
+            self.showVersionHistory(item.id, item.security, item?.requestToken),
           disabled: false,
         },
       ]
@@ -271,10 +260,7 @@ export const getFilesContextOptionsImpl = (
     },
   ];
 
-  const { pinOptions, muteOptions } = self.getRoomsRootContextOptions(
-    item,
-    t,
-  );
+  const { pinOptions, muteOptions } = self.getRoomsRootContextOptions(item, t);
 
   let withOpen = item.id !== self.selectedFolderStore.id;
   const isPublicRoomType =
@@ -498,15 +484,17 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_ask-ai",
       key: "ask-ai",
-      // One entry, two readings: on a form whose filling has started and
-      // whose responses land in a table, the chat can talk about the answers
-      // rather than the document, and the label says so. Same action either
-      // way — the bridge derives the mode from the same predicate.
-      label: isAnalyzeResponsesTarget(item)
-        ? t("Files:AnalyzeResponses")
-        : t("Common:AskAI"),
+      label: t("Common:AskAI"),
       icon: AISvgUrl,
       onClick: () => self.askAI(item),
+      disabled: false,
+    },
+    {
+      id: "option_analyze_responses",
+      key: "analyze-responses",
+      label: t("Files:AnalyzeResponses"),
+      icon: AISvgUrl,
+      onClick: () => self.askAI(item, true),
       disabled: false,
     },
     {
@@ -688,10 +676,7 @@ export const getFilesContextOptionsImpl = (
         let groupIcon = CreateGroupReactSvgUrl;
         if (typeof group.icon === "string" && group.icon) {
           groupIcon = group.icon;
-        } else if (
-          typeof group.icon === "object" &&
-          group.icon?.data?.small
-        ) {
+        } else if (typeof group.icon === "object" && group.icon?.data?.small) {
           groupIcon = `data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data.small)}`;
         }
         return {
@@ -965,8 +950,7 @@ export const getFilesContextOptionsImpl = (
                 ? t("Common:DeleteFormSpace")
                 : t("Common:DeleteRoom")
               : t("Common:Delete"),
-      icon:
-        item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
+      icon: item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
       onClick: () => self.onDelete(item, t),
       disabled: item.isTemplate ? !isTemplateOwner : false,
     },
@@ -1009,10 +993,7 @@ export const getFilesContextOptionsImpl = (
   ];
   // `false` entries are skipped by filterModel's key lookup
   // exactly as in the original .js — the cast keeps that behavior.
-  const options = filterModel(
-    optionsModel as TContextOption[],
-    contextOptions,
-  );
+  const options = filterModel(optionsModel as TContextOption[], contextOptions);
 
   const pluginItems = self.onLoadPlugins(item);
 
@@ -1106,9 +1087,7 @@ export const getFilesContextOptionsImpl = (
     });
   }
 
-  const downloadOption = newOptions.find(
-    (option) => option.key === "download",
-  );
+  const downloadOption = newOptions.find((option) => option.key === "download");
   const downloadAsOption = newOptions.find(
     (option) => option.key === "download-as",
   );
@@ -1215,8 +1194,7 @@ export const getFilesContextOptionsImpl = (
 
     // Remove all plugin items from resultOptions first
     for (let i = resultOptions.length - 1; i >= 0; i--) {
-      if (pluginKeys.includes(resultOptions[i].key))
-        resultOptions.splice(i, 1);
+      if (pluginKeys.includes(resultOptions[i].key)) resultOptions.splice(i, 1);
     }
 
     const defaultPlugins = pluginItems.filter((p) => !p.placement);
@@ -1297,7 +1275,7 @@ export const getFilesContextOptionsImpl = (
             "open-location",
           ],
           ["filling-status", "reset-and-start-filling"],
-          ["ask-ai"],
+          ["ask-ai", "analyze-responses"],
           [
             "update-xlsx-data",
             "share",
@@ -1380,10 +1358,7 @@ export const getFilesContextOptionsImpl = (
 
   if (downloadGroupIndex !== -1 && moveIndex !== -1) {
     // If download group is already before move, do nothing
-    if (
-      downloadGroupIndex < moveIndex &&
-      moveIndex - downloadGroupIndex > 1
-    ) {
+    if (downloadGroupIndex < moveIndex && moveIndex - downloadGroupIndex > 1) {
       // If there are other items between them, move download right before move
       const downloadGroup = resultOptions.splice(downloadGroupIndex, 1)[0];
       resultOptions.splice(moveIndex - 1, 0, downloadGroup);

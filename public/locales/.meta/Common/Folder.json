@@ -3,7 +3,7 @@
   "content": "Folder",
   "content_en_sha1_hash": "30baa24967e08965d1594408031f0324ae11ccac",
   "created_at": "2025-05-19T21:30:45.416Z",
-  "updated_at": "2026-08-31T18:23:50.558Z",
+  "updated_at": "2026-09-09T15:42:08.208Z",
   "comment": {
     "text": "This is a button label for creating a new folder or uploading an existing folder. It appears in menus related to adding new content.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/utils.ts",
+      "line_number": 48,
+      "context": "switch (type) {\n case \"Agent\":\n return t(\"AIAgent\");\n case \"File\":\n return t(\"File\");\n case \"Folder\":\n return t(\"Folder\");\n case \"Room\":\n return t(\"Room\");\n case \"Form\":\n return t(\"FormSpaceTitle\");",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
       "line_number": 549,

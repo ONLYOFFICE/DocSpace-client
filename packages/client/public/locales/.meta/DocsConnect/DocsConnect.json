@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-08-27T15:37:55.665Z",
+  "updated_at": "2026-09-10T16:17:50.127Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 232,
+      "line_number": 243,
       "context": "? onTopUp\n : isPaid\n ? onCancelPlan\n : onBuyPlan\n }\n title={t(\"DocsConnect:DocsConnect\")}\n priceText={\n isPaid\n ? devPackEnabled\n ? t(\"DocsConnect:PricePerUserMonthDevPackNote\", {\n price: formatCurrency(pricePerUser, 0),",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 232,
+      "line_number": 243,
       "context": "? onTopUp\n : isPaid\n ? onCancelPlan\n : onBuyPlan\n }\n title={t(\"DocsConnect:DocsConnect\")}\n priceText={\n isPaid\n ? devPackEnabled\n ? t(\"DocsConnect:PricePerUserMonthDevPackNote\", {\n price: formatCurrency(pricePerUser, 0),",
       "module": "/libs/ui-kit"
     },
@@ -43,25 +43,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 504,
+      "line_number": 526,
       "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 504,
+      "line_number": 526,
       "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 504,
+      "line_number": 526,
       "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 504,
+      "line_number": 526,
+      "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 526,
       "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },

@@ -1936,7 +1936,7 @@ export const deleteFavoritesResolver = () => {
 
 export const deleteFavoritesHandler = (port: string) => {
   return http.delete(
-    `${BASE_URL}:${port}${API_PREFIX}/${PATH_DELETE_FAVORITES}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_DELETE_FAVORITES}`,
     () => {
       return deleteFavoritesResolver();
     },
@@ -1950,7 +1950,7 @@ export const addFileToFavoritesResolver = () => {
 
 export const addFileToFavoritesHandler = (port: string) => {
   return http.post(
-    `${BASE_URL}:${port}${API_PREFIX}/${PATH_ADD_TO_FAVORITES}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ADD_TO_FAVORITES}`,
     () => {
       return addFileToFavoritesResolver();
     },
@@ -1963,7 +1963,7 @@ export const getFileResolver = () => {
 };
 
 export const getFileHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}${API_PREFIX}/${PATH_GET_FILE}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_GET_FILE}`, () => {
     return getFileResolver();
   });
 };

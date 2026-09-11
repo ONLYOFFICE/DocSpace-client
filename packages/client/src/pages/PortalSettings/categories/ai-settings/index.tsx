@@ -114,6 +114,8 @@ type TAISettingsProps = {
   isAiToolsServiceOn?: PaymentStore["isAiToolsServiceOn"];
   isAiSearchServiceOn?: PaymentStore["isAiSearchServiceOn"];
   isCardLinkedToPortal?: PaymentStore["isCardLinkedToPortal"];
+  aiToolsFeePercent?: PaymentStore["aiToolsFeePercent"];
+  aiSearchFeePercent?: PaymentStore["aiSearchFeePercent"];
 };
 
 const AISettings = ({
@@ -123,6 +125,8 @@ const AISettings = ({
   isAiToolsServiceOn,
   isAiSearchServiceOn,
   isCardLinkedToPortal,
+  aiToolsFeePercent,
+  aiSearchFeePercent,
 }: TAISettingsProps) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -242,6 +246,8 @@ const AISettings = ({
               isAiSearchServiceOn={isAiSearchServiceOn}
               isCardLinkedToPortal={isCardLinkedToPortal}
               isWebSearchTab={currentTabId === TAB_IDS.WEB_SEARCH}
+              aiToolsFeePercent={aiToolsFeePercent}
+              aiSearchFeePercent={aiSearchFeePercent}
             />
           )
         }
@@ -254,8 +260,13 @@ export const Component = inject(
   ({ aiSettingsStore, settingsStore, paymentStore }: TStore) => {
     const { fetchKnowledge } = aiSettingsStore;
     const { currentDeviceType, standalone } = settingsStore;
-    const { isAiToolsServiceOn, isAiSearchServiceOn, isCardLinkedToPortal } =
-      paymentStore;
+    const {
+      isAiToolsServiceOn,
+      isAiSearchServiceOn,
+      isCardLinkedToPortal,
+      aiToolsFeePercent,
+      aiSearchFeePercent,
+    } = paymentStore;
 
     return {
       fetchKnowledge,
@@ -264,6 +275,8 @@ export const Component = inject(
       isAiToolsServiceOn,
       isAiSearchServiceOn,
       isCardLinkedToPortal,
+      aiToolsFeePercent,
+      aiSearchFeePercent,
     };
   },
 )(observer(AISettings));

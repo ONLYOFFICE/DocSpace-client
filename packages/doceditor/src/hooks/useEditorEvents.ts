@@ -387,7 +387,10 @@ const useEditorEvents = ({
                   name: p.name,
                   modelId: p.modelId,
                   headers: p.headers,
-                  reasoning: p.reasoning,
+                  // The plugin expects the legacy boolean ("can this model
+                  // think"); the server now describes reasoning as an object,
+                  // and an object is truthy even when `thinks` is false.
+                  reasoning: p.reasoning?.thinks ?? false,
                   capabilities: p.capabilities,
                   canUseTool: p.canUseTool ?? false,
                   useResponsesApi: p.useResponsesApi,
@@ -451,6 +454,7 @@ const useEditorEvents = ({
                     connector,
                     e as TEditorAIEvent,
                     modelProfileMap,
+                    fileInfo?.id,
                   ),
                 );
               }
@@ -535,6 +539,7 @@ const useEditorEvents = ({
     checkAndRequestRoles,
     t,
     successAuth,
+    fileInfo?.id,
   ]);
 
   const onUserActionRequired = React.useCallback(() => {

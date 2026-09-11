@@ -37,7 +37,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
 
 import api from "../api";
-import { getWalletPayer } from "../api/portal";
+import { getServiceAccountingPrices, getWalletPayer } from "../api/portal";
 
 import { PaymentMethodStatus, QuotaState, TariffState } from "../enums";
 
@@ -51,6 +51,7 @@ import {
   isAfter,
   now,
 } from "@onlyoffice/apps-ui-kit/utils/date";
+import { AI_SEARCH, AI_TOOLS } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
 import { SettingsStore } from "./SettingsStore";
@@ -63,6 +64,8 @@ class CurrentTariffStatusStore {
   portalTariffStatus: Nullable<TPortalTariff> = null;
 
   isLoaded = false;
+
+  serviceFeePercents = new Map<string, number>();
 
   language: string = "en";
 
@@ -217,6 +220,10 @@ class CurrentTariffStatusStore {
     return this.payerInfo.payer;
   }
 
+  get isDelayedPaymentMethod() {
+    return this.payerInfo.isDelayedPaymentMethod === true;
+  }
+
   fetchPayerInfo = async (isRefresh?: boolean) => {
     try {
       const res = await getWalletPayer(isRefresh);
@@ -234,15 +241,36 @@ class CurrentTariffStatusStore {
     }
   };
 
+  get aiToolsFeePercent() {
+    return this.serviceFeePercents.get(AI_TOOLS) ?? null;
+  }
+
+  get aiSearchFeePercent() {
+    return this.serviceFeePercents.get(AI_SEARCH) ?? null;
+  }
+
+  setServiceFeePercent = (serviceName: string, value: number) => {
+    this.serviceFeePercents.set(serviceName, value);
+  };
+
+  fetchServiceFeePercent = async (serviceName: string) => {
+    try {
+      const prices = await getServiceAccountingPrices(serviceName);
+      const percent = prices?.[0]?.extraCharge;
+      if (percent !== undefined)
+        this.setServiceFeePercent(serviceName, percent);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   resolveWalletServiceIds = async () => {
     if (this.walletServicesResolved) return;
 
     try {
       const services = await api.portal.getWalletServices();
       const storageService = (services ?? []).find((service) =>
-        (service.features ?? []).some(
-          (feature) => feature.id === "total_size",
-        ),
+        (service.features ?? []).some((feature) => feature.id === "total_size"),
       );
 
       runInAction(() => {
@@ -279,9 +307,7 @@ class CurrentTariffStatusStore {
 
           if (isAdminUser) {
             const quota = this.walletServicesResolved
-              ? tariffWalletQuotas.find(
-                  (q) => q.id === this.storageServiceId,
-                )
+              ? tariffWalletQuotas.find((q) => q.id === this.storageServiceId)
               : tariffWalletQuotas[0];
 
             if (quota) {

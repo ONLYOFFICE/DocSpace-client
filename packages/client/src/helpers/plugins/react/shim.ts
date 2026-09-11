@@ -108,25 +108,6 @@ const JSX_RUNTIME_SHIM_URL = URL.createObjectURL(
   ),
 );
 
-// A dev-mode plugin calls `jsxDEV`, which the production runtime lacks;
-// `isStaticChildren` is the flag that picks between `jsx` and `jsxs`.
-const JSX_DEV_RUNTIME_SHIM_URL = URL.createObjectURL(
-  new Blob(
-    [
-      [
-        `const R = window.__ds_ReactJSXRuntime;`,
-        `export const Fragment = R["Fragment"];`,
-        `export const jsxDEV = (type, props, key, isStatic) =>`,
-        `  isStatic`,
-        `    ? R["jsxs"](type, props, key)`,
-        `    : R["jsx"](type, props, key);`,
-        `export default { Fragment, jsxDEV };`,
-      ].join("\n"),
-    ],
-    { type: "application/javascript" },
-  ),
-);
-
 const PLUGIN_SDK_REACT_SHIM_URL = URL.createObjectURL(
   new Blob(
     [
@@ -157,7 +138,6 @@ const SPECIFIER_MAP: Record<string, string> = {
   react: REACT_SHIM_URL,
   "react-dom": REACT_DOM_SHIM_URL,
   "react/jsx-runtime": JSX_RUNTIME_SHIM_URL,
-  "react/jsx-dev-runtime": JSX_DEV_RUNTIME_SHIM_URL,
   "@onlyoffice/docspace-plugin-sdk/react": PLUGIN_SDK_REACT_SHIM_URL,
   "@onlyoffice/apps-ui-kit": PLUGIN_UI_KIT_SHIM_URL,
 };
@@ -230,7 +210,7 @@ export function rewritePluginImports(code: string): string {
     // unknown: its own subpath is on offer, so the generic wording reads as a
     // contradiction.
     const sdkRootNote = unresolved.has(PLUGIN_SDK_ROOT)
-      ? `The bundle imports "${PLUGIN_SDK_ROOT}". DocSpace shims only its ` +
+      ? `The bundle imports "${PLUGIN_SDK_ROOT}". The portal shims only its ` +
         `"${PLUGIN_SDK_ROOT}/react" entry point — the root carries no module ` +
         `state, so a plugin runs against its own copy. Drop it from "external" ` +
         `in the plugin build config so it is bundled into plugin.js.`
@@ -238,9 +218,9 @@ export function rewritePluginImports(code: string): string {
 
     const missingNote =
       missing.length > 0
-        ? `The bundle imports ${quote(missing)}, which DocSpace does not ` +
+        ? `The bundle imports ${quote(missing)}, which the portal does not ` +
           `provide. Drop them from "external" in the plugin build config so ` +
-          `they are bundled into plugin.js. DocSpace provides: ` +
+          `they are bundled into plugin.js. The portal provides: ` +
           `${quote(Object.keys(SPECIFIER_MAP))}.`
         : "";
 

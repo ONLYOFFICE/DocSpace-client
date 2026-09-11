@@ -77,6 +77,7 @@ import RoomsFilter from "../rooms-filter";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
 import QuotaWarningDialog from "../quota-warning-dialog";
 import { useRoomsTagsStore } from "../../_store/RoomsTagsStore";
+import { useTagsChanged } from "../../_hooks/useTagsChanged";
 import { useRoomsQuotaStore } from "../../_store/RoomsQuotaStore";
 import {
   RoomActionsContext,
@@ -167,12 +168,10 @@ const RoomsLayout = observer(
     // the shared ui-kit panel hook and gated on the same condition.
     usePanelExclusivity(!isPrivate);
 
-    // Re-fetch the room after tags are bound/unbound inside the info panel and
-    // update both the panel's selection (so Tags row refreshes) and the room
-    // entry in the files list store (so the table/row view updates).
-    // Also merge any newly-added tags into the global tags cache so the filter
-    // dropdown picks them up without a reload.
-    const onInfoPanelTagsChanged = React.useCallback(async () => {
+    // A tag change says what it changed, so the stores are patched from it -
+    // see useTagsChanged. This reads the room back instead, for the changes
+    // that describe nothing: a new logo.
+    const refetchSelectedRoom = React.useCallback(async () => {
       const sel = infoPanelStore.selection;
       if (!sel || !("isRoom" in sel) || !sel.isRoom) return;
       try {
@@ -202,6 +201,8 @@ const RoomsLayout = observer(
         // ignore
       }
     }, [infoPanelStore, filesListStore, tagsStore]);
+
+    const onInfoPanelTagsChanged = useTagsChanged();
 
     const canCreateRooms = !!(
       user?.isAdmin ||
@@ -321,6 +322,8 @@ const RoomsLayout = observer(
                   <QuickActions
                     items={quickActionItems}
                     className={styles.quickActions}
+                    prevLabel={t("Common:Previous")}
+                    nextLabel={t("Common:Next")}
                   />
                 ) : undefined
               }
@@ -370,7 +373,10 @@ const RoomsLayout = observer(
               infoPanelBodyContent={
                 infoPanelBody ?? (
                   <RoomsRefreshContext.Provider value={refreshRooms}>
-                    <DocsInfoPanelBody onTagsChanged={onInfoPanelTagsChanged} />
+                    <DocsInfoPanelBody
+                      onTagsChanged={onInfoPanelTagsChanged}
+                      onRoomUpdated={refetchSelectedRoom}
+                    />
                   </RoomsRefreshContext.Provider>
                 )
               }

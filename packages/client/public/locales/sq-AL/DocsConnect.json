@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Abonimi do të rinovohet automatikisht <1>më {{date}}</1>",
   "TopUpAndBuy": "Mbush & Bli",
   "TopUpHint": "Portofoli juaj do të mbushet me <1>{{amount}}</1> dhe abonimi i zgjedhur do të blihet automatikisht. Shumat e mbushjes rrumbullakosen lart në dollarin e plotë më të afërt.",
+  "TopUpWalletHint": "Nuk ka kredite të mjaftueshme për abonimin e zgjedhur në {{service}}. Mbushni portofolin tuaj, pastaj kthehuni për të përfunduar blerjen.",
   "TotalDueTodayTooltip": "Sot, ju paguani vetëm për numrin e zgjedhur të përdoruesve për ditët e mbetura deri në datën tuaj të faturimit. Më pas, shuma e plotë do të ngarkohet një herë për çdo cikël faturimi në datën tuaj të rregullt të faturimit.",
   "TotalMonthly": "Totali mujor",
   "TrialAvailable": "Është e disponueshme një provë falas një-mujore. Nuk kërkohet kartë krediti.",

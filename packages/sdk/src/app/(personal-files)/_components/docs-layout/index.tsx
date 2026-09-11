@@ -612,6 +612,8 @@ const DocsLayoutCore = observer(
                                           <QuickActions
                                             items={quickActionItems}
                                             className={styles.quickActions}
+                                            prevLabel={t("Common:Previous")}
+                                            nextLabel={t("Common:Next")}
                                           />
                                         </div>
                                       ) : undefined
@@ -680,6 +682,7 @@ const DocsLayoutCore = observer(
                                       infoPanelBody ?? (
                                         <DocsInfoPanelBody
                                           onTagsChanged={onInfoPanelRoomUpdated}
+                                          onRoomUpdated={onInfoPanelRoomUpdated}
                                         />
                                       )
                                     }

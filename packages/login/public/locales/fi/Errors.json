@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Tämä sovellus ei ole käytössä",
   "OAuthApplicationEmpty": "Sovellusta ei löytynyt",
   "OAuthClientEmpty": "Client-tunnusta ei löytynyt",
+  "OAuthInvalidRequest": "Valtuutuspyyntö on virheellinen. Tarkista uudelleenohjauksen URI-osoite sovelluksen asetuksista",
   "RecaptchaInvalid": "Virheellinen Recaptcha",
   "SsoAttributesNotFound": "Todennus epäonnistui (väitemääritteitä ei löydy)",
   "SsoAuthFailed": "Todennus epäonnistui",

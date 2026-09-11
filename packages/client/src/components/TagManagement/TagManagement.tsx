@@ -33,14 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FC, useMemo } from "react";
+import { FC, useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
+import { runInAction } from "mobx";
 
 import { ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 
 import {
   AccessTagManagement,
   TagManagement as TagManagementShared,
+  type TagChange,
 } from "@docspace/shared/components/tag-management";
 
 import type {
@@ -49,43 +51,105 @@ import type {
   TagManagementWrapperProps,
 } from "./TagManagement.types";
 
+// The one place the tag permissions are derived from the room access. The
+// info panel asks it too, to decide whether an empty room still gets a Tags
+// row with the add button.
+export const getTagManagementAccess = (
+  roomAccess: ShareAccessRights,
+  isAdmin: boolean | undefined,
+  isArchiveFolder: boolean | undefined,
+): AccessTagManagement => {
+  const isRoomManager = roomAccess === ShareAccessRights.RoomManager;
+  const isRoomOwner =
+    roomAccess === ShareAccessRights.None ||
+    roomAccess === ShareAccessRights.FullAccess;
+
+  const canEdit = isAdmin && !isArchiveFolder;
+  const canRemove = isAdmin && !isArchiveFolder;
+
+  const canCreate =
+    (isAdmin || isRoomOwner || isRoomManager) && !isArchiveFolder;
+
+  const canBindTag = canCreate;
+  const canSearch = canCreate;
+
+  return {
+    canEdit,
+    canRemove,
+    canCreate,
+    canBindTag,
+    canSearch,
+  } satisfies AccessTagManagement;
+};
+
 const TagManagement: FC<TagManagementWrapperProps> = ({
   access: roomAccess,
   isAdmin,
   isArchiveFolder,
+  applyTagChangeToRooms,
+  applyTagChangeToOpenRoom,
+  applyTagChangeToTags,
+  onTagsChanged,
   ...props
 }) => {
-  const access = useMemo(() => {
-    const isRoomManager = roomAccess === ShareAccessRights.RoomManager;
-    const isRoomOwner =
-      roomAccess === ShareAccessRights.None ||
-      roomAccess === ShareAccessRights.FullAccess;
+  const access = useMemo(
+    () => getTagManagementAccess(roomAccess, isAdmin, isArchiveFolder),
+    [roomAccess, isAdmin, isArchiveFolder],
+  );
 
-    const canEdit = isAdmin && !isArchiveFolder;
-    const canRemove = isAdmin && !isArchiveFolder;
+  // Every change is written straight into the stores that hold the tags, from
+  // the change itself - nothing is fetched again. Each store decides what the
+  // change means for it: the rooms list and the open room patch the one room a
+  // bind was sent for and every room a rename or a removal reaches, while the
+  // shared list of tags hears only about the tag itself.
+  //
+  // The socket says the same thing for a bind, a moment later; applying a
+  // change that is already applied writes nothing.
+  //
+  // The three writes go in one transaction, so what observes them re-renders
+  // once. Without it the rollback of a failed request - which runs after an
+  // await, outside React's own batching - would schedule a render per store.
+  const handleTagsChanged = useCallback(
+    (change: TagChange) => {
+      runInAction(() => {
+        applyTagChangeToRooms(change);
+        applyTagChangeToOpenRoom(change);
+        applyTagChangeToTags(change);
+      });
 
-    const canCreate =
-      (isAdmin || isRoomOwner || isRoomManager) && !isArchiveFolder;
+      onTagsChanged?.(change);
+    },
+    [
+      applyTagChangeToRooms,
+      applyTagChangeToOpenRoom,
+      applyTagChangeToTags,
+      onTagsChanged,
+    ],
+  );
 
-    const canBindTag = canCreate;
-    const canSearch = canCreate;
-
-    return {
-      canEdit,
-      canRemove,
-      canCreate,
-      canBindTag,
-      canSearch,
-    } satisfies AccessTagManagement;
-  }, [roomAccess, isAdmin, isArchiveFolder]);
-
-  return <TagManagementShared {...props} access={access} />;
+  return (
+    <TagManagementShared
+      {...props}
+      access={access}
+      onTagsChanged={handleTagsChanged}
+    />
+  );
 };
 
 export default inject<TStore, TagManagementProps, InjectedTagManagementProps>(
-  ({ filesActionsStore, authStore, treeFoldersStore }) => ({
+  ({
+    filesActionsStore,
+    authStore,
+    treeFoldersStore,
+    filesStore,
+    selectedFolderStore,
+    tagsStore,
+  }) => ({
     isAdmin: authStore.isAdmin,
     onSelectTag: filesActionsStore.selectTag,
     isArchiveFolder: treeFoldersStore.isArchiveFolderRoot,
+    applyTagChangeToRooms: filesStore.applyTagChange,
+    applyTagChangeToOpenRoom: selectedFolderStore.applyTagChange,
+    applyTagChangeToTags: tagsStore.applyTagChange,
   }),
 )(observer(TagManagement as FC<TagManagementProps>));

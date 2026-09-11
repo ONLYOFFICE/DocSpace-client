@@ -38,6 +38,9 @@ import { headers, cookies } from "next/headers";
 const API_PREFIX = "api/2.0";
 const APISYSTEM_PREFIX = "apisystem";
 
+export const SDK_SHARE_KEY_HEADER = "x-sdk-config-share-key";
+export const REQUEST_TOKEN_HEADER = "Request-Token";
+
 export const getBaseUrl = async () => {
   const hdrs = await headers();
 
@@ -74,6 +77,12 @@ export const createRequest = async (
   newHeaders.forEach((hdr) => {
     if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
   });
+
+  const shareKey = hdrs.get(SDK_SHARE_KEY_HEADER);
+
+  if (shareKey && !hdrs.get(REQUEST_TOKEN_HEADER)) {
+    hdrs.set(REQUEST_TOKEN_HEADER, shareKey);
+  }
 
   const baseURL = await getBaseUrl();
 

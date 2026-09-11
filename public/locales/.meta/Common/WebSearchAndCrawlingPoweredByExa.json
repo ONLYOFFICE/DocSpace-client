@@ -3,7 +3,7 @@
   "content": "Web search and crawling are powered by Exa — no Exa account or setup needed. Usage is billed through your Wallet.",
   "content_en_sha1_hash": "34c88f465f0b8852eec61cf1ea3d2b4d06bfe396",
   "created_at": "2026-09-04T07:59:33.829Z",
-  "updated_at": "2026-09-04T08:00:12.916Z",
+  "updated_at": "2026-09-08T08:44:10.088Z",
   "comment": {
     "text": "Informational text in the AI settings banner that appears when the Web Search feature is active, explaining the service provider and billing details.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
-      "line_number": 251,
+      "line_number": 257,
       "context": "<>\n {isWebSearchTab ? (\n <div className={styles.featureRow}>\n <WebSearchIcon className={styles.payIcon} />\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"Common:WebSearchAndCrawlingPoweredByExa\")}\n </Text>\n </div>\n ) : (\n <div className={styles.featureRow}>\n <AIIcon className={styles.payIcon} />",
       "module": "/packages/client"
     }

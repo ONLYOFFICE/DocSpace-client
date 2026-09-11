@@ -57,15 +57,19 @@ import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTar
 import PluginStore from "../PluginStore";
 import type SelectedFolderStore from "../SelectedFolderStore";
 import type { TPlugin } from "../../helpers/plugins/types";
+import { PluginUserRole, PluginUsersType } from "../../helpers/plugins/enums";
 
 const PLUGIN = "Sample";
 const ICON_URL = "https://portal.test/plugins/sample";
 
-const withFileItem = (item: Record<string, unknown>) => {
+const withFileItem = (
+  item: Record<string, unknown>,
+  user: Record<string, boolean> | null = null,
+) => {
   const store = new PluginStore(
     { culture: "en" } as unknown as SettingsStore,
     {} as unknown as SelectedFolderStore,
-    { user: null } as unknown as UserStore,
+    { user } as unknown as UserStore,
     {} as unknown as CurrentTariffStatusStore,
   );
 
@@ -112,5 +116,28 @@ describe("PluginStore file item icons", () => {
 
     expect(item?.fileIcon).toBeUndefined();
     expect(item?.fileIconTile).toBeUndefined();
+  });
+});
+
+describe("PluginStore item filtering by role", () => {
+  const fileItemFor = (
+    user: Record<string, boolean>,
+    usersType: (PluginUserRole | PluginUsersType)[],
+  ) => withFileItem({ usersType }, user);
+
+  it("keeps an item listing the deprecated docSpaceAdmin for a full admin", () => {
+    expect(
+      fileItemFor({ isAdmin: true }, [PluginUsersType.docSpaceAdmin]),
+    ).toBeDefined();
+  });
+
+  it("keeps an item listing the current fullAdmin for a full admin", () => {
+    expect(
+      fileItemFor({ isAdmin: true }, [PluginUserRole.fullAdmin]),
+    ).toBeDefined();
+  });
+
+  it("drops an admin-only item for a room admin", () => {
+    expect(fileItemFor({}, [PluginUserRole.fullAdmin])).toBeUndefined();
   });
 });

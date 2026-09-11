@@ -132,7 +132,7 @@ test.describe("Article Navigation Sample Plugin", () => {
     // The files item declares no `usersTypes`, so it survives any role.
     await expect(page.locator(navItem(FILES_KEY))).toBeVisible();
 
-    // `usersTypes: [owner, docSpaceAdmin]` keeps the settings item out of the
+    // `usersTypes: [owner, fullAdmin]` keeps the settings item out of the
     // store altogether, so the settings sidebar has nothing to render either.
     await page.goto(`${baseUrl}${PORTAL_SETTINGS_URL}`);
     await expect(page.locator(navItem(SETTINGS_KEY))).toHaveCount(0);

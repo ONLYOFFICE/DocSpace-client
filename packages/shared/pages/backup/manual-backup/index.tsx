@@ -200,6 +200,7 @@ const ManualBackup = ({
   walletBalance = 0,
   walletCodeCurrency,
   isCardLinked = false,
+  isDelayedPaymentMethod = false,
   fetchWalletBalance,
   onOpenTopUpDialog,
 }: ManualBackupProps) => {
@@ -222,7 +223,14 @@ const ManualBackup = ({
     !!backupServicePrice &&
     walletBalance < backupServicePrice;
 
-  const isTopUpBeforeCopy = isBalanceInsufficient && isPayer && isCardLinked;
+  const isDelayedPaymentTopUp =
+    isBalanceInsufficient &&
+    isPayer &&
+    isDelayedPaymentMethod &&
+    !!onOpenTopUpDialog;
+
+  const isTopUpBeforeCopy =
+    isBalanceInsufficient && isPayer && isCardLinked && !isDelayedPaymentTopUp;
 
   const isTopUpDialogBeforeCopy =
     isBalanceInsufficient && !isCardLinked && !!onOpenTopUpDialog;
@@ -246,13 +254,17 @@ const ManualBackup = ({
 
   const topUpAmount = Math.ceil((backupServicePrice ?? 0) - walletBalance);
 
-  const copyButtonLabel =
-    isTopUpBeforeCopy || isTopUpDialogBeforeCopy
-      ? t("Common:TopUpAndMakeCopy")
-      : undefined;
+  const getCopyButtonLabel = () => {
+    if (isDelayedPaymentTopUp) return t("Common:TopUpWallet");
+    if (isTopUpBeforeCopy || isTopUpDialogBeforeCopy)
+      return t("Common:TopUpAndMakeCopy");
+    return undefined;
+  };
+
+  const copyButtonLabel = getCopyButtonLabel();
 
   const topUpIfNeeded = async () => {
-    if (isTopUpDialogBeforeCopy) {
+    if (isDelayedPaymentTopUp || isTopUpDialogBeforeCopy) {
       onOpenTopUpDialog?.();
       return false;
     }

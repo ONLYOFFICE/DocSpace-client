@@ -70,7 +70,7 @@ export default async function AuthPage({
   ) as Record<string, string>;
   const confirmParams = new URLSearchParams(definedParams);
   if (confirmParams.has("inviteKey")) {
-    confirmParams.set("key", confirmParams.get("inviteKey")!);
+    confirmParams.set("key", confirmParams.get("inviteKey") ?? "");
     confirmParams.delete("inviteKey");
   }
   const confirmHeader = confirmParams.toString();

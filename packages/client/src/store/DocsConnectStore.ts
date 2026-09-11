@@ -393,10 +393,21 @@ class DocsConnectStore {
       },
     );
 
+    let isDelayedPaymentMethod = false;
+
     await pollUntil(async () => {
       const payer = await this.currentTariffStatusStore?.fetchPayerInfo(true);
+      isDelayedPaymentMethod = payer?.isDelayedPaymentMethod === true;
       return !!payer?.email;
     }, signal);
+
+    if (signal.aborted) return null;
+
+    if (isDelayedPaymentMethod) {
+      this.closeBuyPlan();
+      this.refreshPortalState();
+      return { isDelayedPaymentMethod };
+    }
 
     await pollUntil(async () => {
       let info: Nullable<TDocsConnectInfo> = null;
@@ -419,11 +430,11 @@ class DocsConnectStore {
       return activated;
     }, signal);
 
-    if (signal.aborted) return false;
+    if (signal.aborted) return null;
 
     this.closeBuyPlan();
     this.refreshPortalState();
-    return true;
+    return { isDelayedPaymentMethod };
   };
 
   calculateDevPack = async (quantity: number) =>

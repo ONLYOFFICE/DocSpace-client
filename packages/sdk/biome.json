@@ -46,6 +46,19 @@
           }
         }
       }
+    },
+    {
+      "includes": [
+        "src/api/**",
+        "src/app/**/page.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noNonNullAssertion": "error"
+          }
+        }
+      }
     }
   ]
 }

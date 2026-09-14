@@ -52,7 +52,7 @@ const LinkPreviewMeta = ({
 }: LinkPreviewMetaProps) => {
   const imageUrl = baseUrl?.startsWith("http")
     ? `${baseUrl}${LINK_PREVIEW_IMAGE_ROUTE}`
-    : LINK_PREVIEW_IMAGE_ROUTE;
+    : undefined;
 
   return (
     <>
@@ -63,18 +63,28 @@ const LinkPreviewMeta = ({
       {description ? (
         <meta property="og:description" content={description} />
       ) : null}
-      <meta property="og:image" content={imageUrl} />
-      <meta property="og:image:type" content={LINK_PREVIEW_IMAGE_TYPE} />
-      <meta property="og:image:width" content={LINK_PREVIEW_IMAGE_WIDTH} />
-      <meta property="og:image:height" content={LINK_PREVIEW_IMAGE_HEIGHT} />
-      <meta property="og:image:alt" content={title} />
+      {imageUrl ? (
+        <>
+          <meta property="og:image" content={imageUrl} />
+          <meta property="og:image:type" content={LINK_PREVIEW_IMAGE_TYPE} />
+          <meta property="og:image:width" content={LINK_PREVIEW_IMAGE_WIDTH} />
+          <meta
+            property="og:image:height"
+            content={LINK_PREVIEW_IMAGE_HEIGHT}
+          />
+          <meta property="og:image:alt" content={title} />
+        </>
+      ) : null}
 
-      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="twitter:card"
+        content={imageUrl ? "summary_large_image" : "summary"}
+      />
       <meta name="twitter:title" content={title} />
       {description ? (
         <meta name="twitter:description" content={description} />
       ) : null}
-      <meta name="twitter:image" content={imageUrl} />
+      {imageUrl ? <meta name="twitter:image" content={imageUrl} /> : null}
     </>
   );
 };

@@ -48,16 +48,29 @@ import { logger } from "@/../logger.mjs";
 const WIDTH = Number(LINK_PREVIEW_IMAGE_WIDTH);
 const HEIGHT = Number(LINK_PREVIEW_IMAGE_HEIGHT);
 const LOGO_WIDTH = 760;
+const LOGO_MAX_HEIGHT = 420;
 const LOGO_DENSITY = 450;
 const CACHE_CONTROL = "public, max-age=3600";
 const BACKGROUND = { r: 255, g: 255, b: 255 };
 
 export const dynamic = "force-dynamic";
 
+const getLogoOrigin = async () => {
+  const apiHost = process.env.API_HOST?.trim();
+
+  if (apiHost) return apiHost;
+
+  if (process.env.NODE_ENV === "production") return undefined;
+
+  return getBaseUrl();
+};
+
 export async function GET() {
-  const origin = process.env.API_HOST?.trim() || (await getBaseUrl());
+  const origin = await getLogoOrigin();
 
   try {
+    if (!origin) throw new Error("API_HOST is not configured");
+
     const response = await fetch(
       `${origin}/logo.ashx?logotype=${WhiteLabelLogoType.LoginPage}`,
     );
@@ -68,7 +81,7 @@ export async function GET() {
     const logo = Buffer.from(await response.arrayBuffer());
 
     const rendered = await sharp(logo, { density: LOGO_DENSITY })
-      .resize({ width: LOGO_WIDTH, fit: "inside" })
+      .resize({ width: LOGO_WIDTH, height: LOGO_MAX_HEIGHT, fit: "inside" })
       .png()
       .toBuffer();
 

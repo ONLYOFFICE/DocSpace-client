@@ -80,7 +80,10 @@ overrides:
   form-data: ">=4.0.6"
   vite: ">=8.0.16"
   "@babel/core": ">=7.29.6 <8"
-  # Inherited libvips CVEs; pulled in transitively by next
+  # Inherited libvips CVEs. No longer transitive-only: @docspace/login depends
+  # on sharp directly for the link-preview image. This range overrides that
+  # manifest's exact pin, so the installed version floats above the CVE floor
+  # rather than being pinned - narrow it to one version if that is not wanted.
   sharp: ">=0.35.0"
   # Guards against libs/ui-kit submodule drift until its pointer is bumped;
   # every manifest now pins 8.3.0 directly, so this can be dropped afterwards

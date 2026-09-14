@@ -3,7 +3,7 @@
   "content": "Presentation",
   "content_en_sha1_hash": "6e875951a6f9aa1374d93572de657c12ded57355",
   "created_at": "2025-05-19T21:30:47.449Z",
-  "updated_at": "2026-08-31T18:23:50.559Z",
+  "updated_at": "2026-09-14T20:38:41.339Z",
   "comment": {
     "text": "This is a label for a presentation file type or a button to create a new presentation. It appears in menus and file listings.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/index.tsx",
-      "line_number": 200,
+      "line_number": 207,
       "context": "fileExst: \".xlsx\",\n fileType: FileType.Spreadsheet,\n access: ShareAccessRights.Comment,\n },\n {\n title: t(\"Common:Presentation\"),\n fileExst: \".pptx\",\n fileType: FileType.Presentation,\n access: ShareAccessRights.ReadOnly,\n },\n ],",
       "module": "/packages/client"
     },

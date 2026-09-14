@@ -3,13 +3,21 @@
   "content": "{{organizationName}} {{productName}} is a workspace where you can create documents, collaborate in rooms, and collect data with forms, all in one place.",
   "content_en_sha1_hash": "29ef5616a1bc9c05b711976e0820b6f3e6ce54c7",
   "created_at": "2026-09-14T09:17:12.879Z",
-  "updated_at": "2026-09-14T09:17:12.879Z",
+  "updated_at": "2026-09-14T20:39:13.957Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Link preview description that appears when a workspace link is shared; contains {{organizationName}} and {{productName}} as part of a summary sentence.",
+    "is_auto": true,
+    "updated_at": "2026-09-14T20:39:13.957Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/link-preview.ts",
+      "line_number": 78,
+      "context": "const title = logoText || organizationName;\n \n const t = createTranslator(translations, locale);\n \n const description = t(\"Common:LinkPreviewDescription\", {\n organizationName: title,\n productName,\n });\n \n return { title, description };",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -140,7 +140,7 @@ export const getBuildConfig = (
             name: "vendor",
             test: (id: string) =>
               /[\\/]node_modules[\\/]/.test(id) &&
-              !/[\\/](shiki|@shikijs|react-shiki|heic2any|@onlyoffice[\\/]ai-chat|openai|@anthropic-ai|@mistralai|@google[\\/]genai|@assistant-ui|assistant-stream|@radix-ui|zustand|katex|rehype-[\w-]+|remark-[\w-]+|react-markdown|micromark[\w-]*|mdast-util-[\w-]+|hast-util-[\w-]+|hastscript|unist-[\w-]+|unified|vfile[\w-]*|codemirror|@codemirror|@uiw)[\\/]/.test(
+              !/[\\/](shiki|@shikijs|react-shiki|heic2any|@onlyoffice[\\/](ai-chat|apps-ui-kit)|openai|@anthropic-ai|@mistralai|@google[\\/]genai|@assistant-ui|assistant-stream|@radix-ui|zustand|katex|rehype-[\w-]+|remark-[\w-]+|react-markdown|micromark[\w-]*|mdast-util-[\w-]+|hast-util-[\w-]+|hastscript|unist-[\w-]+|unified|vfile[\w-]*|codemirror|@codemirror|@uiw)[\\/]/.test(
                 id,
               ),
             priority: 10,

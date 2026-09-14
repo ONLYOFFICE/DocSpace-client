@@ -3538,7 +3538,7 @@
 						<name>AiSuggestions</name>
 						<children>
 							<concept_node>
-								<name>AiFormAnalyzeTheForm</name>
+								<name>AiFormBreakDownTheAnswers</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -3673,7 +3673,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>AiFormAnalyzeTheFormPrompt</name>
+								<name>AiFormBreakDownTheAnswersPrompt</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -4078,7 +4078,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>AiFormShowTheFields</name>
+								<name>AiFormCollectResponsesIntoATable</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -4213,7 +4213,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>AiFormShowTheFieldsPrompt</name>
+								<name>AiFormCollectResponsesIntoATablePrompt</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -4348,7 +4348,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>AiFormSummarizeTheResponses</name>
+								<name>AiFormCreateAReportFromTheForm</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -4483,7 +4483,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>AiFormSummarizeTheResponsesPrompt</name>
+								<name>AiFormCreateAReportFromTheFormPrompt</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -4618,7 +4618,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>AiFormWhatIsStillEmpty</name>
+								<name>AiFormWhatCanTheResponsesTellMe</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -4753,7 +4753,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>AiFormWhatIsStillEmptyPrompt</name>
+								<name>AiFormWhatCanTheResponsesTellMePrompt</name>
 								<description/>
 								<comment/>
 								<translations>

@@ -3,7 +3,7 @@
   "content": "Analyze responses",
   "content_en_sha1_hash": "46e903d2491f229806f1d44900b64de628b52b4a",
   "created_at": "2026-05-08T13:10:42.862Z",
-  "updated_at": "2026-05-15T14:00:06.753Z",
+  "updated_at": "2026-09-14T19:16:02.607Z",
   "comment": {
     "text": "Button label that triggers the analysis of responses.",
     "is_auto": true,
@@ -13,8 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/sub-components/AnalyzeResponses.tsx",
-      "line_number": 98,
+      "line_number": 106,
       "context": "} finally {\n endLoader(() => setIsLoading(false));\n }\n };\n \n const label = t(\"Files:AnalyzeResponses\");\n \n return (\n <Button\n accent\n onClick={onClick}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 501,
+      "context": "disabled: false,\n },\n {\n id: \"option_analyze_responses\",\n key: \"analyze-responses\",\n label: t(\"Files:AnalyzeResponses\"),\n icon: AISvgUrl,\n onClick: () => self.askAI(item, true),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }
   ],

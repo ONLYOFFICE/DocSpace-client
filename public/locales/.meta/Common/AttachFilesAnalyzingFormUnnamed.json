@@ -1,0 +1,29 @@
+{
+  "key_path": "AttachFilesAnalyzingFormUnnamed",
+  "content": "Analyze responses is on: this chat works with one form only. Start a new chat to attach other files.",
+  "content_en_sha1_hash": "0d79149df26f9c8460638ac985d1bf0786a5b0bc",
+  "created_at": "2026-09-14T19:15:19.342Z",
+  "updated_at": "2026-09-14T19:16:55.362Z",
+  "comment": {
+    "text": "An informational notice in a chat interface that appears when the \"Analyze responses\" feature is active, notifying the user that the current session is limited to a single form.",
+    "is_auto": true,
+    "updated_at": "2026-09-14T19:16:55.362Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/providers/files/notices.ts",
+      "line_number": 100,
+      "context": "? t(\"Common:AttachFilesAnalyzingForm\", {\n fileName: cap.fileName,\n defaultValue:\n \"Analyze responses is on: this chat works with {{fileName}} only. Start a new chat to attach other files.\",\n })\n : t(\"Common:AttachFilesAnalyzingFormUnnamed\", {\n defaultValue:\n \"Analyze responses is on: this chat works with one form only. Start a new chat to attach other files.\",\n }),\n );\n return;",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

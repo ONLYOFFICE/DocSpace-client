@@ -3,7 +3,7 @@
   "content": "Turn AI features on or off across {{productName}} and {{organizationName}} editors. When disabled, the {{aiSettings}} section is hidden, {{aiAgents}} become unavailable to all users, and paid {{organizationName}} {{aiServices}} can no longer be accessed. Your interaction history is kept safe and fully restored if you turn {{aiServices}} back on.",
   "content_en_sha1_hash": "97773202e49eccec23f8efbb00eb50f5c2542cf5",
   "created_at": "2026-08-31T18:23:40.318Z",
-  "updated_at": "2026-08-31T20:47:12.969Z",
+  "updated_at": "2026-09-14T19:16:02.612Z",
   "comment": {
     "text": "Subtitle for a category item in the customization settings that explains the impact of enabling or disabling AI features. It contains placeholders for the product name, organization name, AI settings section, AI agents, and AI services.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 238,
+      "line_number": 243,
       "context": "aiServices: t(\"Common:AIServices\"),\n })}\n </Text>\n ) : null}\n <Text className=\"category-item-description\" fontSize=\"13px\">\n {t(\"AiServicesManagementDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n organizationName: getBrandName(\"OrganizationName\"),",
       "module": "/packages/client"
     }

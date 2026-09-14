@@ -1,0 +1,29 @@
+{
+  "key_path": "AttachFilesLimitOne",
+  "content": "This chat works with one file at a time. Remove the attached file to add another.",
+  "content_en_sha1_hash": "fe2874b57a681764651320094a1fc86bfb30de0f",
+  "created_at": "2026-09-14T19:15:19.375Z",
+  "updated_at": "2026-09-14T19:16:30.247Z",
+  "comment": {
+    "text": "Warning toast message appearing when a user attempts to attach a file while another is already present in a chat that only supports one attachment.",
+    "is_auto": true,
+    "updated_at": "2026-09-14T19:16:30.247Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/providers/files/notices.ts",
+      "line_number": 110,
+      "context": "return;\n }\n \n if (cap.limit === 1) {\n toastr.warning(\n t(\"Common:AttachFilesLimitOne\", {\n defaultValue:\n \"This chat works with one file at a time. Remove the attached file to add another.\",\n }),\n );\n return;",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

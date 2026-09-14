@@ -1280,6 +1280,7 @@
   "LinkNewCardDesc": "Əlavə etmək üçün aşağıdakı düyməni sıxın",
   "LinkNoExpiration": "Linkin bitmə <1>tarixi yoxdur</1>",
   "LinkNoLongerAvailable": "Bağlantı artıq mövcud deyil",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} sənədlər yarada, otaqlarda əməkdaşlıq edə və anketlərlə məlumat toplaya biləcəyiniz iş sahəsidir, hamısı bir yerdə.",
   "LinkProtectedWithPassword": "Link şifrəylə qorunur.",
   "LinkRemoved": "Link silindi",
   "LinkSettings": "Link parametrləri",

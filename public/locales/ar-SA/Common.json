@@ -1280,6 +1280,7 @@
   "LinkNewCardDesc": "انقر على الزر أدناه لإضافة طريقة دفع",
   "LinkNoExpiration": "الرابط <1>ليس له تاريخ انتهاء صلاحية</1>",
   "LinkNoLongerAvailable": "الرابط لم يعد متاحًا",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} هي مساحة عمل يمكنك فيها إنشاء المستندات والتعاون في الغرف وجمع البيانات عبر النماذج، كل ذلك في مكان واحد.",
   "LinkProtectedWithPassword": "الرابط محمي بكلمة مرور.",
   "LinkRemoved": "تمت إزالة الرابط",
   "LinkSettings": "إعدادات الرابط",

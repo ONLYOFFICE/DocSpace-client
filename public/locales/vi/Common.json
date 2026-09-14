@@ -1280,6 +1280,7 @@
   "LinkNewCardDesc": "Nhấp vào nút bên dưới để thêm",
   "LinkNoExpiration": "Liên kết này không có <1>ngày hết hạn</1>",
   "LinkNoLongerAvailable": "Liên kết không còn khả dụng",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} là không gian làm việc nơi bạn có thể tạo tài liệu, cộng tác trong các phòng và thu thập dữ liệu bằng biểu mẫu, tất cả ở cùng một nơi.",
   "LinkProtectedWithPassword": "Liên kết được bảo vệ bằng mật khẩu.",
   "LinkRemoved": "Liên kết đã bị xóa",
   "LinkSettings": "Cài đặt liên kết",

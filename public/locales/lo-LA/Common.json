@@ -1280,6 +1280,7 @@
   "LinkNewCardDesc": "ກົດປຸ່ມດ້ານລຸ່ມເພື່ອເພີ່ມ",
   "LinkNoExpiration": "ລິ້ງມີ <1>ບໍ່ມີວັນໝົດອາຍຸ</1>",
   "LinkNoLongerAvailable": "ລິ້ງນີ້ບໍ່ສາມາດໃຊ້ໄດ້ແລ້ວ",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} ແມ່ນພື້ນທີ່ເຮັດວຽກທີ່ທ່ານສາມາດສ້າງເອກະສານ, ຮ່ວມມືກັນໃນຫ້ອງ ແລະ ເກັບກຳຂໍ້ມູນດ້ວຍແບບຟອມ, ທັງໝົດຢູ່ບ່ອນດຽວ.",
   "LinkProtectedWithPassword": "ລິ້ງນີ້ຖືກປົກປ້ອງດ້ວຍລະຫັດຜ່ານ.",
   "LinkRemoved": "ລິ້ງຖືກລົບອອກແລ້ວ",
   "LinkSettings": "ການຕັ້ງຄ່າການເຊື່ອມຕໍ່",

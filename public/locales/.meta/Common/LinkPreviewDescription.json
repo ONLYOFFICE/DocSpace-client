@@ -1,27 +1,21 @@
 {
-  "key_path": "AgentProfileDescription",
-  "content": "Choose the AI model this agent will use in chats.",
-  "content_en_sha1_hash": "2c1037ddd23a3c85915d7b131c29ec9ff03317e9",
-  "created_at": "2026-09-04T07:58:55.521Z",
-  "updated_at": "2026-09-14T20:38:41.368Z",
+  "key_path": "LinkPreviewDescription",
+  "content": "{{organizationName}} {{productName}} is a workspace where you can create documents, collaborate in rooms, and collect data with forms, all in one place.",
+  "content_en_sha1_hash": "29ef5616a1bc9c05b711976e0820b6f3e6ce54c7",
+  "created_at": "2026-09-14T09:17:12.879Z",
+  "updated_at": "2026-09-14T20:39:13.957Z",
   "comment": {
-    "text": "Info description text in the Create/Edit Agent dialog that instructs the user to select an AI model for the agent's chat functionality.",
+    "text": "Link preview description that appears when a workspace link is shared; contains {{organizationName}} and {{productName}} as part of a summary sentence.",
     "is_auto": true,
-    "updated_at": "2026-09-04T08:04:28.534Z",
+    "updated_at": "2026-09-14T20:39:13.957Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Profile.tsx",
-      "line_number": 213,
-      "context": "lineHeight=\"16px\"\n fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"Common:AgentProfileDescription\", {\n defaultValue:\n \"Select the AI model to be used in this agent's chats.\",\n })}\n </Text>\n </div>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/Profile.tsx",
-      "line_number": 182,
-      "context": "lineHeight=\"16px\"\n fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"Common:AgentProfileDescription\", {\n defaultValue:\n \"Select the AI model to be used in this agent's chats.\",\n })}\n </Text>\n </div>",
-      "module": "/packages/sdk"
+      "file_path": "/packages/shared/utils/link-preview.ts",
+      "line_number": 78,
+      "context": "const title = logoText || organizationName;\n \n const t = createTranslator(translations, locale);\n \n const description = t(\"Common:LinkPreviewDescription\", {\n organizationName: title,\n productName,\n });\n \n return { title, description };",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

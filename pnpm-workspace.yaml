@@ -93,8 +93,11 @@ overrides:
   form-data: ">=4.0.6"
   vite: ">=8.0.16"
   "@babel/core": ">=7.29.6 <8"
-  # Inherited libvips CVEs; pulled in transitively by next
-  sharp: ">=0.35.0"
+  # Inherited libvips CVEs: next still asks for ^0.34.x, so the override lifts
+  # its transitive copy. @docspace/login depends on sharp directly for the
+  # link-preview image and pins this same version - keep the two in step, an
+  # open range here would silently replace that manifest's exact pin.
+  sharp: "0.35.4"
   # Guards against libs/ui-kit submodule drift until its pointer is bumped;
   # every manifest now pins 8.3.0 directly, so this can be dropped afterwards
   react-router: "8.3.0"

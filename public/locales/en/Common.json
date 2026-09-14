@@ -1280,6 +1280,7 @@
   "LinkNewCardDesc": "Click the button below to add one",
   "LinkNoExpiration": "The link has <1>no expiration date</1>",
   "LinkNoLongerAvailable": "Link no longer available",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} is a workspace where you can create documents, collaborate in rooms, and collect data with forms, all in one place.",
   "LinkProtectedWithPassword": "The link is protected with a password.",
   "LinkRemoved": "Link removed",
   "LinkSettings": "Link settings",

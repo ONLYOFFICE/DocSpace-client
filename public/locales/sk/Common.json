@@ -1280,6 +1280,7 @@
   "LinkNewCardDesc": "Ak ho chcete pridať, kliknite na tlačidlo nižšie",
   "LinkNoExpiration": "Odkaz nemá <1>žiadny dátum expirácie</1>",
   "LinkNoLongerAvailable": "Odkaz už nie je dostupný",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} je pracovný priestor, v ktorom môžete vytvárať dokumenty, spolupracovať v miestnostiach a zhromažďovať údaje pomocou formulárov, a to všetko na jednom mieste.",
   "LinkProtectedWithPassword": "Odkaz je chránený heslom.",
   "LinkRemoved": "Odkaz bol odstránený",
   "LinkSettings": "Nastavenia odkazu",

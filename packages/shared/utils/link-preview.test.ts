@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vitest";
+
 import type { TTranslations } from "@docspace/ui-kit/providers/translation";
 
 import { getBrandName } from "../constants/brands";

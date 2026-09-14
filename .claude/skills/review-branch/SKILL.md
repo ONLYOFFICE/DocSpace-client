@@ -107,6 +107,11 @@ follow-up with `/translate-key Common:<NewKey>`, not as a blocker.
 Also check key placement: locale files are kept alphabetical by convention. No
 test enforces it — flag it as a nit, not a failure.
 
+Billing-sensitive diffs get an extra pass: when the diff matches the
+"Trigger paths" section of the `billing-review` skill — by path or by
+the billing identifiers it lists — run its checks and merge the
+findings into this report.
+
 ## Step 5 — verify mechanically
 
 Run what is cheap and targeted; do not run the whole gate unless the diff

@@ -1,0 +1,785 @@
+<!--
+  Onboarding page template (the /onboard skill).
+
+  HOW TO USE
+  - Start every onboarding page from this file: copy it, fill the
+    content, delete the component examples you do not need. Do NOT
+    re-derive the CSS or the scripts — every rule in SKILL.md is
+    already encoded here.
+  - The file is artifact-wrapper content: no <!doctype>, <html>, <head>
+    or <body> tags. Publish with the Artifact tool only.
+  - Page language: replace the placeholder copy; UI strings from the
+    product stay verbatim. Keep <title> a short name.
+  - Screenshots: <img src="@@IMG:key@@"> markers, inlined by a script —
+    never paste base64 by hand.
+
+  COMPONENT MAP (delete what the page does not need)
+  hero band+chips · toc · numbered sections · .roles concept cards ·
+  .filter+ul.actions permissions (never a table) · .filter+.card.panel
+  tabs · .fsteps step rail · .diagram flow strips · .dia inline SVG ·
+  .compare forks · figure/.frame/.crop/.shots-2 screenshots ·
+  .ui verbatim product strings · .callout rule|warn aside ·
+  table.data reference data only
+-->
+<title>Feature Name</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  :root {
+    --ground: #f5f7fa;
+    --card: #ffffff;
+    --ink: #1d2733;
+    --muted: #5b6675;
+    --line: #dfe5ec;
+    --accent: #3567c0;
+    --accent-soft: #e6eefb;
+    --good: #2f7d4f;
+    --good-soft: #e3f2e9;
+    --warn: #a06a12;
+    --warn-soft: #f8eeda;
+    --crit: #b3433a;
+    --crit-soft: #f9e7e5;
+    --chip-ink: #33415a;
+    --code-bg: #eef2f9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #131820;
+      --card: #1b222c;
+      --ink: #e7ecf2;
+      --muted: #9aa6b5;
+      --line: #2b3542;
+      --accent: #7aa5e8;
+      --accent-soft: #22314a;
+      --good: #6cc192;
+      --good-soft: #1e3329;
+      --warn: #d9a84e;
+      --warn-soft: #372c17;
+      --crit: #e08a82;
+      --crit-soft: #3b2321;
+      --chip-ink: #c6d1e2;
+      --code-bg: #232c3c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #131820;
+    --card: #1b222c;
+    --ink: #e7ecf2;
+    --muted: #9aa6b5;
+    --line: #2b3542;
+    --accent: #7aa5e8;
+    --accent-soft: #22314a;
+    --good: #6cc192;
+    --good-soft: #1e3329;
+    --warn: #d9a84e;
+    --warn-soft: #372c17;
+    --crit: #e08a82;
+    --crit-soft: #3b2321;
+    --chip-ink: #c6d1e2;
+    --code-bg: #232c3c;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    overflow-wrap: break-word;
+  }
+  h1, h2, h3, h4 {
+    font-family: "Manrope", "Segoe UI", system-ui, sans-serif;
+    line-height: 1.2;
+    text-wrap: balance;
+    margin: 0;
+  }
+  code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85em;
+    background: var(--code-bg);
+    color: var(--chip-ink);
+    padding: 1px 6px;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    overflow-x: auto;
+    margin: 14px 0;
+  }
+  pre code { background: none; padding: 0; white-space: pre; font-size: 13.5px; line-height: 1.55; }
+  a { color: var(--accent); }
+
+  .shell {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 40px 24px 96px;
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 48px;
+  }
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: minmax(0, 1fr); }
+    nav.toc { display: none; }
+  }
+
+  header.hero {
+    background:
+      radial-gradient(900px 320px at 12% -40%, var(--accent-soft), transparent 65%),
+      var(--card);
+    border-bottom: 1px solid var(--line);
+    padding: 48px 0 36px;
+  }
+  .hero-inner { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  .hero .kicker {
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.02em; }
+  .hero p.lead { max-width: 62ch; font-size: 19px; color: var(--muted); margin: 16px 0 24px; }
+  .factline { display: flex; flex-wrap: wrap; gap: 10px; }
+  .fact {
+    background: var(--ground);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--chip-ink);
+  }
+  .fact b { color: var(--accent); font-weight: 800; }
+  /* Fact chips double as navigation: each links to its section */
+  a.fact { text-decoration: none; cursor: pointer; }
+  a.fact:hover { border-color: var(--accent); }
+
+  nav.toc { position: sticky; top: 40px; align-self: start; font-size: 15px; }
+  nav.toc .toc-title {
+    font-family: "Manrope", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  nav.toc a {
+    display: block;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-left: 2px solid var(--line);
+  }
+  /* active state must not change font-weight — bolding shifts the row */
+  nav.toc a.active { color: var(--accent); border-left-color: var(--accent); }
+
+  main { min-width: 0; }
+  section { margin-top: 56px; scroll-margin-top: 24px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; }
+  .sec-num { font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 600; color: var(--accent); }
+  section > .sec-head h2 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+  section > p.sub { color: var(--muted); margin: 0 0 20px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 24px;
+  }
+  /* direct section-level siblings only — inside a grid the gap owns the spacing */
+  section > .card + .card, .roles + .card { margin-top: 16px; }
+
+  .card.panel { padding: 22px 26px; }
+  .panel[hidden] { display: none; }
+  .filter .expand-all {
+    border-style: dashed;
+    background: none;
+    color: var(--muted);
+  }
+  .panel.expanded + .panel.expanded { margin-top: 16px; }
+  .panel.expanded::before {
+    content: attr(data-title);
+    display: block;
+    font-family: "Manrope", sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .panel-intro { margin-top: 0; color: var(--muted); font-size: 15px; }
+  .panel > p:first-of-type { margin-top: 0; }
+  .panel h3 { font-size: 17px; margin: 20px 0 8px; }
+  .plainlist { margin: 0; padding-left: 20px; }
+  .plainlist li { margin: 5px 0; }
+
+  /* Concept cards (roles, key ideas) */
+  .roles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  @media (max-width: 720px) { .roles { grid-template-columns: minmax(0, 1fr); } }
+  .role-card h3 { font-size: 18px; margin-bottom: 8px; }
+  .role-card p { font-size: 15.5px; color: var(--muted); margin: 0; }
+  .role-tag {
+    display: inline-block;
+    font-family: "Manrope", sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  .tag-good { background: var(--good-soft); color: var(--good); }
+  .tag-accent { background: var(--accent-soft); color: var(--accent); }
+  .tag-warn { background: var(--warn-soft); color: var(--warn); }
+
+  /* Filter buttons — role pickers and tab switchers share this look */
+  .filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+  .filter button {
+    font: 600 15px "Source Sans 3", sans-serif;
+    color: var(--chip-ink);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 18px;
+    cursor: pointer;
+  }
+  .filter button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .filter button[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--card);
+  }
+  /* one rule per role: active button takes the role's color */
+  .filter button[data-filter="role-a"][aria-pressed="true"] { background: var(--good); border-color: var(--good); }
+  .filter button[data-filter="role-b"][aria-pressed="true"] { background: var(--warn); border-color: var(--warn); }
+
+  /* Permissions rows */
+  ul.actions { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  ul.actions li {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 16px;
+    align-items: baseline;
+  }
+  ul.actions li .who {
+    font-family: "Manrope", sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  ul.actions li .note { grid-column: 1 / -1; font-size: 15px; color: var(--muted); }
+  ul.actions.dim li { opacity: 0.35; transition: opacity 0.15s; }
+  ul.actions.dim li.hit { opacity: 1; }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "Manrope", sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 2px 11px;
+    white-space: nowrap;
+  }
+  .pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  .pill.ok { color: var(--good); background: var(--good-soft); }
+  .pill.no { color: var(--muted); background: var(--line); }
+
+  /* Flow strips */
+  .diagram {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 18px 8px;
+    padding: 24px 22px;
+  }
+  .node { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; text-align: center; background: var(--ground); }
+  .node .t { font-weight: 700; font-size: 15px; font-family: "Manrope", sans-serif; }
+  .node .d { font-size: 13px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+  .node.hub { border-color: var(--accent); background: var(--accent-soft); }
+  .node.ok { border-color: var(--good); background: var(--good-soft); }
+  .node.off { border-color: var(--crit); background: var(--crit-soft); }
+  .darrow { color: var(--accent); font-weight: 700; font-size: 18px; text-align: center; }
+  .darrow small {
+    display: block;
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .darrow .ar { display: inline-block; }
+  @media (max-width: 720px) {
+    .diagram { grid-template-columns: 1fr; }
+    /* rotate only the glyph — the label stays horizontal */
+    .darrow .ar { transform: rotate(90deg); }
+    .darrow small { white-space: normal; }
+  }
+  @media (max-width: 560px) {
+    ul.actions li { grid-template-columns: 1fr; }
+    ul.actions li .who { white-space: normal; }
+  }
+
+  /* Step rail (inside a tab panel) */
+  .fsteps { display: grid; margin-top: 16px; }
+  .fstep { display: grid; grid-template-columns: 32px 1fr; gap: 12px; }
+  .fstep .rail { display: flex; flex-direction: column; align-items: center; }
+  .fstep .dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px; font-weight: 600;
+    background: var(--accent-soft); color: var(--accent);
+    border: 1.5px solid var(--line);
+    flex-shrink: 0;
+  }
+  .fstep .rail-line { width: 2px; flex: 1; background: var(--line); margin: 4px 0; min-height: 12px; }
+  .fstep:last-child .rail-line { display: none; }
+  .fstep .fbody { padding-bottom: 16px; font-size: 15.5px; }
+  .fstep:last-child .fbody { padding-bottom: 2px; }
+  .fstep .actor {
+    display: inline-block;
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--ground);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 1px 7px;
+    margin-bottom: 4px;
+  }
+  .fstep small { display: block; color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+
+  /* The one aside component; two tones. */
+  .callout {
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin: 18px 0;
+    font-size: 16px;
+    border: 1px solid transparent;
+  }
+  .callout.rule { background: var(--accent-soft); color: var(--chip-ink); }
+  .callout.warn { background: var(--warn-soft); color: var(--ink); }
+  .callout b:first-child { font-family: "Manrope", sans-serif; }
+
+  /* Two-way forks and comparisons */
+  .compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 14px; margin: 18px 0; }
+  .compare .card h3 { font-size: 17px; margin-bottom: 10px; }
+  .compare ul { margin: 0; padding-left: 20px; font-size: 15.5px; }
+  .compare li { margin: 5px 0; }
+
+  .pill-list { list-style: none; padding: 0; margin: 14px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill-list li {
+    background: var(--ground);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--chip-ink);
+  }
+
+  /* Screenshots: framed, captioned, click-to-zoom */
+  figure { margin: 22px 0; }
+  .frame { position: relative; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--card); }
+  /* zoom badge: says "click to enlarge" before hover does */
+  .frame::after {
+    content: "🔍";
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 12px;
+    line-height: 1;
+    background: rgba(13, 17, 23, 0.55);
+    color: #fff;
+    border-radius: 8px;
+    padding: 4px 6px;
+    pointer-events: none;
+  }
+  .frame .bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--line);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12.5px;
+    color: var(--muted);
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .frame .bar::before { content: ""; width: 34px; height: 10px; border-radius: 999px; background: var(--line); flex: none; }
+  .frame img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+
+  /* CSS crop: inline shows the region the caption points at; the
+     lightbox opens the full frame. Values in source pixels: --iw is
+     the screenshot's full width, --cx/--cy the offset, --cw/--ch the
+     visible box. One class per figure. */
+  .crop { overflow: hidden; aspect-ratio: var(--cw) / var(--ch); background: var(--ground); }
+  .crop img {
+    /* the artifact wrapper sets img { max-width: 100% } — lift it, the
+       crop box does the clipping */
+    max-width: none;
+    width: calc(100% * var(--iw) / var(--cw));
+    margin-left: calc(-100% * var(--cx) / var(--cw));
+    margin-top: calc(-100% * var(--cy) / var(--cw));
+  }
+  .c-example { --iw: 1440; --cx: 0; --cy: 0; --cw: 720; --ch: 400; }
+
+  /* Verbatim product UI strings */
+  .ui {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.82em;
+    font-weight: 500;
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 0.05em 0.4em;
+    color: var(--chip-ink);
+    white-space: nowrap;
+  }
+  .ui-long { white-space: normal; }
+
+  /* Inline SVG diagrams: draw with the tokens so both themes hold */
+  .dia { padding: 20px; overflow-x: auto; }
+  .dia svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+  .dia text { font-family: "Manrope", sans-serif; }
+  figcaption { font-size: 15px; color: var(--muted); padding: 10px 4px 0; }
+  figcaption b { color: var(--ink); }
+  .shots-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 20px; }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(13, 17, 23, 0.88);
+    display: grid;
+    place-items: center;
+    padding: 28px;
+    cursor: zoom-out;
+  }
+  .lightbox[hidden] { display: none; }
+  .lightbox img { max-width: 100%; max-height: 100%; border-radius: 10px; box-shadow: 0 12px 48px rgba(0, 0, 0, 0.55); }
+
+  /* Reference data only — permissions use .filter + ul.actions */
+  .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); margin: 18px 0; }
+  table.data { border-collapse: collapse; width: 100%; min-width: 560px; }
+  table.data th, table.data td { text-align: left; padding: 12px 18px; border-bottom: 1px solid var(--line); font-size: 15px; vertical-align: top; }
+  table.data th {
+    font-family: "Manrope", sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+    font-weight: 700;
+    background: var(--ground);
+  }
+  table.data tr:last-child td { border-bottom: none; }
+
+  .ui-text { font-style: italic; color: var(--ink); }
+
+  footer {
+    margin-top: 72px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 14px;
+  }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  }
+  /* Print: hide the chrome, expand every tab panel with its title */
+  @media print {
+    nav.toc, .filter, .lightbox { display: none !important; }
+    .shell { display: block; max-width: none; padding: 0; }
+    .panel, .panel[hidden] { display: block !important; }
+    .panel { break-inside: avoid; }
+    .panel::before {
+      content: attr(data-title);
+      display: block;
+      font-family: "Manrope", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    ul.actions.dim li { opacity: 1 !important; }
+    .frame::after { display: none; }
+    header.hero { background: none; }
+  }
+</style>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">DocSpace · area · reference</div>
+    <h1>Feature Name</h1>
+    <p class="lead">One sentence listing the questions this page answers.
+    Never name the target audience here.</p>
+    <div class="factline">
+      <a class="fact" href="#one">Fact chip one — <b>the key bit bold</b></a>
+      <a class="fact" href="#two">Fact chip two — <b>parallel structure</b></a>
+      <a class="fact" href="#two">Fact chip three — <b>same shape</b></a>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="toc" aria-label="Contents">
+    <div class="toc-title">Contents</div>
+    <a href="#one">01 · Section one</a>
+    <a href="#two">02 · Section two</a>
+  </nav>
+
+  <main>
+    <!-- Concept cards + a flow strip -->
+    <section id="one">
+      <div class="sec-head"><span class="sec-num">01</span><h2>Section one</h2></div>
+      <p class="sub">One-line intro; fold into it any prose a diagram below would otherwise repeat.</p>
+      <div class="roles">
+        <div class="card role-card">
+          <span class="role-tag tag-good">Role A</span>
+          <h3>Card headline</h3>
+          <p>Two or three sentences, written for a reader who does not read code.</p>
+        </div>
+        <!-- ... two more cards ... -->
+      </div>
+      <div class="card diagram">
+        <div class="node"><div class="t">Start</div><div class="d">detail</div></div>
+        <div class="darrow"><small>arrow label</small><span class="ar">&#8594;</span></div>
+        <div class="node hub"><div class="t">Center</div><div class="d">detail</div></div>
+        <div class="darrow"><span class="ar">&#8594;</span></div>
+        <div class="node ok"><div class="t">Outcome</div><div class="d">detail</div></div>
+        <!-- A second related strip goes in THIS SAME grid (5 more cells)
+             so the columns align. Use .node.off for the failure lane. -->
+      </div>
+    </section>
+
+    <!-- Permissions: ALWAYS this component, never a table -->
+    <section id="two">
+      <div class="sec-head"><span class="sec-num">02</span><h2>Who may do what</h2></div>
+      <p class="sub">Pick a role — its abilities light up. Rights are cumulative.</p>
+      <div class="filter" id="role-filter" role="group" aria-label="Role filter">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="role-a" aria-pressed="false">Role A</button>
+        <button type="button" data-filter="role-b" aria-pressed="false">Role B</button>
+      </div>
+      <ul class="actions" id="actions">
+        <li data-role="role-a"><span>Action only role A may take</span><span class="who">Role A</span></li>
+        <li data-role="role-b"><span>Action open to role B (and above)</span><span class="who">Role B</span>
+          <span class="note">Optional one-line nuance under the action.</span></li>
+      </ul>
+      <div class="callout rule"><b>Rule in one line:</b> the sentence a reader
+      should remember if they remember nothing else.</div>
+
+      <!-- Tabs for scenarios/states: panels hidden, never removed -->
+      <div class="filter" id="example-tabs" role="group" aria-label="Scenario">
+        <button type="button" data-panel="tab-one" aria-pressed="true">Scenario one</button>
+        <button type="button" data-panel="tab-two" aria-pressed="false">Scenario two</button>
+      </div>
+      <div class="card panel" id="tab-one" data-title="Scenario one">
+        <p class="panel-intro">One line about when this scenario applies.</p>
+        <div class="fsteps">
+          <div class="fstep"><div class="rail"><div class="dot">1</div><div class="rail-line"></div></div>
+            <div class="fbody"><span class="actor">Actor</span><div>Step text.</div>
+              <small>Optional nuance.</small></div></div>
+          <div class="fstep"><div class="rail"><div class="dot">2</div><div class="rail-line"></div></div>
+            <div class="fbody"><span class="actor">System</span><div>Step text.</div></div></div>
+        </div>
+        <div class="callout rule">Closing note of the scenario.</div>
+      </div>
+      <div class="card panel" id="tab-two" data-title="Scenario two" hidden>
+        <p class="panel-intro">Second scenario.</p>
+      </div>
+
+      <!-- Screenshots -->
+      <div class="shots-2">
+        <figure>
+          <div class="frame"><div class="bar">/route/shown/in/bar</div>
+            <!-- drop the .crop wrapper when the full frame IS the story -->
+            <!-- no loading="lazy" — lazy imgs have stayed unloaded in the artifact preview -->
+            <div class="crop c-example"><img src="@@IMG:example@@" alt="What the screen shows"></div>
+          </div>
+          <figcaption><b>Who/state:</b> what to notice on this frame — with a
+          verbatim UI string like <span class="ui">Only the Payer can manage this section</span>.</figcaption>
+        </figure>
+      </div>
+
+      <!-- Two-way fork -->
+      <div class="compare">
+        <div class="card"><h3>Branch one</h3><ul><li>consequence</li></ul></div>
+        <div class="card"><h3>Branch two</h3><ul><li>consequence</li></ul></div>
+      </div>
+    </section>
+
+    <footer>
+      Built from the repository rule (<code>rule-name</code>) · month year ·
+      scope note when the page narrows the area · assembled by
+      &lt;model name&gt;<!-- the model actually running the session -->.
+    </footer>
+  </main>
+</div>
+
+<script>
+  (function () {
+    /* Lightbox: click a framed screenshot to zoom; click/Esc closes. */
+    var lb = document.createElement("div");
+    lb.className = "lightbox";
+    lb.hidden = true;
+    lb.setAttribute("role", "dialog");
+    lb.setAttribute("aria-label", "Enlarged screenshot, click or Esc to close");
+    var lbImg = document.createElement("img");
+    lb.appendChild(lbImg);
+    document.body.appendChild(lb);
+    function closeLightbox() { lb.hidden = true; lbImg.removeAttribute("src"); }
+    lb.addEventListener("click", closeLightbox);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeLightbox();
+    });
+    document.querySelectorAll(".frame img").forEach(function (img) {
+      img.addEventListener("click", function () {
+        lbImg.src = img.src;
+        lbImg.alt = img.alt || "";
+        lb.hidden = false;
+      });
+    });
+
+    /* Tabs. Call once per group; panels need a data-title (their heading when "expand all" is on). */
+    function wireTabs(groupId, expandLabel, collapseLabel) {
+      var group = document.getElementById(groupId);
+      if (!group) return;
+      var tabs = Array.prototype.slice.call(group.querySelectorAll("button[data-panel]"));
+      var panelOf = function (b) { return document.getElementById(b.getAttribute("data-panel")); };
+
+      var expandBtn = document.createElement("button");
+      expandBtn.type = "button";
+      expandBtn.className = "expand-all";
+      expandBtn.textContent = expandLabel;
+      expandBtn.setAttribute("aria-pressed", "false");
+      group.appendChild(expandBtn);
+      var expanded = false;
+
+      function setExpanded(on) {
+        expanded = on;
+        expandBtn.textContent = on ? collapseLabel : expandLabel;
+        expandBtn.setAttribute("aria-pressed", String(on));
+        tabs.forEach(function (b) {
+          var panel = panelOf(b);
+          if (!panel) return;
+          panel.classList.toggle("expanded", on);
+          panel.hidden = on ? false : b.getAttribute("aria-pressed") !== "true";
+        });
+      }
+      expandBtn.addEventListener("click", function () { setExpanded(!expanded); });
+
+      function select(btn) {
+        tabs.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+        setExpanded(false);
+      }
+      tabs.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          // an already-open tab is a no-op (unless leaving expand-all)
+          if (!expanded && btn.getAttribute("aria-pressed") === "true") return;
+          select(btn);
+        });
+      });
+      // initial sync: highlight and show exactly one panel, whatever
+      // state the browser restored the markup in
+      var initial = tabs.filter(function (b) {
+        return b.getAttribute("aria-pressed") === "true";
+      })[0] || tabs[0];
+      select(initial);
+    }
+    wireTabs("example-tabs", "Expand all", "Collapse");
+
+    /* Role filter: the map lists which roles each button lights up */
+    var CUMULATIVE = {
+      "role-a": ["role-a", "role-b"],
+      "role-b": ["role-b"],
+    };
+    var filterBox = document.getElementById("role-filter");
+    var list = document.getElementById("actions");
+    if (filterBox && list) {
+      var buttons = filterBox.querySelectorAll("button[data-filter]");
+      buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+          var f = btn.getAttribute("data-filter");
+          var items = list.querySelectorAll("li");
+          if (f === "all") {
+            list.classList.remove("dim");
+            items.forEach(function (li) { li.classList.remove("hit"); });
+            return;
+          }
+          var visible = CUMULATIVE[f] || [];
+          list.classList.add("dim");
+          items.forEach(function (li) {
+            li.classList.toggle("hit", visible.indexOf(li.getAttribute("data-role")) !== -1);
+          });
+        });
+      });
+    }
+
+    /* TOC highlight follows the scroll position. */
+    var links = document.querySelectorAll("nav.toc a");
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+    /* a click moves the highlight immediately; the observer keeps it
+       in sync while scrolling, but stays quiet during the click-scroll
+       so it does not highlight the sections the glide passes by */
+    function setActive(a) {
+      if (current) current.classList.remove("active");
+      current = a;
+      if (current) current.classList.add("active");
+    }
+    var locked = false;
+    var lockTimer = 0;
+    links.forEach(function (a) {
+      a.addEventListener("click", function () {
+        setActive(a);
+        locked = true;
+        clearTimeout(lockTimer);
+        lockTimer = setTimeout(function () { locked = false; }, 1200);
+      });
+    });
+    window.addEventListener("scrollend", function () {
+      clearTimeout(lockTimer);
+      locked = false;
+    });
+    if ("IntersectionObserver" in window) {
+      var current = null;
+      var io = new IntersectionObserver(function (entries) {
+        if (locked) return;
+        entries.forEach(function (e) {
+          if (e.isIntersecting) setActive(map[e.target.id]);
+        });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      document.querySelectorAll("main section").forEach(function (s) { io.observe(s); });
+    }
+  })();
+</script>

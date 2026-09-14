@@ -228,7 +228,14 @@ class AuthStore {
                 this.isAuthenticated &&
                 !skipRequest
               ) {
-                this.settingsStore?.getAIConfig();
+                // /ai/config sits behind `[AiFeature]` like the rest of the AI
+                // API and answers 403 while the portal's AI switch is off. The
+                // config describes an AI setup such a portal is not running,
+                // so skip the probe instead of logging a 403 on every boot;
+                // turning the switch back on refetches it (see the AI services
+                // setting).
+                if (this.settingsStore?.aiServicesEnabled)
+                  this.settingsStore?.getAIConfig();
                 this.settingsStore?.getAdditionalResources();
               }
             } else {

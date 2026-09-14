@@ -49,15 +49,20 @@ import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
 import { QuotaPerAIAgentComponentSection } from "./sub-components/QuotaPerAIAgent";
 
-const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
+const QuotaPerItemsComponent = ({ isStatisticsAvailable, aiServicesEnabled }) => {
   if (isMobile())
-    return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;
+    return (
+      <MobileQuotasComponent
+        isDisabled={!isStatisticsAvailable}
+        aiServicesEnabled={aiServicesEnabled}
+      />
+    );
 
   return (
     <>
       <QuotaPerRoomComponentSection />
       <QuotaPerUserComponentSection />
-      <QuotaPerAIAgentComponentSection />
+      {aiServicesEnabled ? <QuotaPerAIAgentComponentSection /> : null}
     </>
   );
 };
@@ -66,7 +71,8 @@ const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
   const { isBase } = useTheme();
 
-  const { isStatisticsAvailable, storageManagementUrl } = props;
+  const { isStatisticsAvailable, storageManagementUrl, aiServicesEnabled } =
+    props;
 
   return (
     <div className={styles.baseQuotaComponent}>
@@ -104,17 +110,21 @@ const QuotasComponent = (props) => {
         ) : null}
       </Text>
 
-      <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />
+      <QuotaPerItemsComponent
+        isStatisticsAvailable={isStatisticsAvailable}
+        aiServicesEnabled={aiServicesEnabled}
+      />
     </div>
   );
 };
 
 export default inject(({ currentQuotaStore, settingsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
-  const { storageManagementUrl } = settingsStore;
+  const { storageManagementUrl, aiServicesEnabled } = settingsStore;
 
   return {
     isStatisticsAvailable,
     storageManagementUrl,
+    aiServicesEnabled,
   };
 })(observer(QuotasComponent));

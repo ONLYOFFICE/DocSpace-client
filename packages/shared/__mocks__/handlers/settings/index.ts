@@ -55,6 +55,10 @@ import { buildHandler } from "./build";
 import { settingsAdditionalHandler } from "./additional";
 import { culturesHandler } from "./cultures";
 import {
+  userQuotaSettingsHandler,
+  checkRecalculateQuotaHandler,
+} from "./quotaSettings";
+import {
   webPluginsHandler,
   webPluginsAddHandler,
   webPluginsUpdateHandler,
@@ -116,6 +120,8 @@ export {
   whiteLabelLogosIsDefaultHandler,
   whiteLabelLogoTextHandler,
   whiteLabelLogosHandler,
+  userQuotaSettingsHandler,
+  checkRecalculateQuotaHandler,
 };
 
 export const settingsHandlers = (port: string) => [
@@ -158,4 +164,6 @@ export const settingsHandlers = (port: string) => [
   whiteLabelLogosIsDefaultHandler(port),
   whiteLabelLogoTextHandler(port),
   whiteLabelLogosHandler(port),
+  userQuotaSettingsHandler(port),
+  checkRecalculateQuotaHandler(port),
 ];

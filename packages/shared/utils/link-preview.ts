@@ -58,10 +58,8 @@ const createTranslator =
 
     if (!template) return undefined;
 
-    return Object.entries(values).reduce(
-      (result, [placeholder, value]) =>
-        result.replace(new RegExp(`\\{\\{${placeholder}\\}\\}`, "g"), value),
-      template,
+    return template.replace(/\{\{(\w+)\}\}/g, (match, placeholder) =>
+      placeholder in values ? values[placeholder] : match,
     );
   };
 

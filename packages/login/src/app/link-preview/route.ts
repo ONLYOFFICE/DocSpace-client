@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { headers } from "next/headers";
 import sharp from "sharp";
 
 import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
@@ -71,8 +72,18 @@ export async function GET() {
   try {
     if (!origin) throw new Error("API_HOST is not configured");
 
+    const hdrs = await headers();
+    const forwardedHost = hdrs.get("x-forwarded-host");
+    const forwardedProto = hdrs.get("x-forwarded-proto");
+
     const response = await fetch(
       `${origin}/logo.ashx?logotype=${WhiteLabelLogoType.LoginPage}`,
+      {
+        headers: {
+          ...(forwardedHost ? { "x-forwarded-host": forwardedHost } : {}),
+          ...(forwardedProto ? { "x-forwarded-proto": forwardedProto } : {}),
+        },
+      },
     );
 
     if (!response.ok)

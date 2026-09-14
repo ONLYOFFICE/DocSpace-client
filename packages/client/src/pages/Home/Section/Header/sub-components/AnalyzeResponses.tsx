@@ -53,12 +53,15 @@ type AnalyzeResponsesProps = ExternalAnalyzeResponsesProps & {
     TStore["selectedFolderStore"]["getSelectedFolder"]
   >;
   askAI: TStore["contextOptionsStore"]["askAI"];
+  /** The chat is unavailable here whatever the folder's rights say. */
+  noAi: boolean;
 };
 
 const AnalyzeResponsesButtonComponent = ({
   selectedFolder,
   className,
   askAI,
+  noAi,
 }: AnalyzeResponsesProps) => {
   const { t } = useTranslation("Files");
   const isDesktopView = useIsDesktop();
@@ -66,6 +69,7 @@ const AnalyzeResponsesButtonComponent = ({
 
   if (
     !isDesktopView ||
+    noAi ||
     selectedFolder.type !== FolderType.SubFolderDone ||
     !selectedFolder.originalFormId ||
     !(
@@ -119,11 +123,23 @@ export const AnalyzeResponsesButton = inject<
   TStore,
   FC<ExternalAnalyzeResponsesProps>,
   Omit<AnalyzeResponsesProps, keyof ExternalAnalyzeResponsesProps>
->(({ selectedFolderStore, contextOptionsStore }) => {
+>(({ selectedFolderStore, contextOptionsStore, settingsStore, treeFoldersStore }) => {
   const selectedFolder = selectedFolderStore.getSelectedFolder();
   const askAI = contextOptionsStore.askAI;
 
-  return { selectedFolder, askAI };
+  return {
+    selectedFolder,
+    askAI,
+    // `security.AnalyzeResponses` is computed when the folder is fetched, so
+    // an open results folder keeps saying yes after an admin switches AI off
+    // portal-wide. The live switch is read here for the same reason the
+    // context menu reads it (see `filesStore/contextOptions.helpers.ts`), and
+    // privacy rules the chat out whatever the rights say.
+    noAi:
+      !settingsStore.aiServicesEnabled ||
+      treeFoldersStore.isPrivacyFolder ||
+      selectedFolder.private,
+  };
 })(
   observer(
     AnalyzeResponsesButtonComponent as FC<ExternalAnalyzeResponsesProps>,

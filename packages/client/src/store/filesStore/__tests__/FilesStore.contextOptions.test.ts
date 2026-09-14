@@ -241,6 +241,26 @@ describe("FilesStore.getFilesContextOptions — characterization", () => {
     expect(opts).not.toContain("send-by-email");
   });
 
+  // A public room strips the chat entirely, and the two AI entries are
+  // alternatives — so a form whose responses the server would let you analyze
+  // must not smuggle the chat back in through the other key.
+  it("strips both AI entries in a public room context", () => {
+    const store2 = createTestFilesStore({
+      publicRoomStore: { isPublicRoom: true },
+    });
+    store2.dialogsStore = { roomGroups: [] } as never;
+
+    const form = {
+      ...documentFile(),
+      security: { ...fileSecurity, AnalyzeResponses: true },
+    } as never;
+    const opts = store2.getFilesContextOptions(form);
+
+    expect(opts).not.toContain("analyze-responses");
+    expect(opts).not.toContain("ask-ai");
+    expect(opts).not.toContain("separator6");
+  });
+
   it("collapses expired-link files to just select outside a shared-with-me section", () => {
     // The expired-link set starts as ["select","separator0",
     // "remove-shared-folder-or-file"], but outside a shared-with-me section

@@ -310,7 +310,13 @@ export const buildContextOptions = (
         "mark-as-favorite",
         "remove-from-favorites",
         "copy-to",
+        // Both AI entries, because they are alternatives: a form the server
+        // lets you analyze offers "analyze-responses" *instead of* "ask-ai",
+        // so naming only the latter would leave the chat reachable in the one
+        // place it is meant to be absent — and with `separator6` stripped
+        // below it, hanging off the previous group.
         "ask-ai",
+        "analyze-responses",
         "separator6",
       ]);
 

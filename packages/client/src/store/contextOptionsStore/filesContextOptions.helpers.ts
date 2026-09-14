@@ -155,7 +155,13 @@ export const getFilesContextOptionsImpl = (
 
   const hasInfoPanel = contextOptions.includes("show-info");
 
-  const withAI = contextOptions.includes("ask-ai");
+  // Either AI entry counts: they are alternatives, not neighbours (a form the
+  // server lets you analyze gets "analyze-responses" in place of "ask-ai"), and
+  // both bring `separator6` with them. Checking only one would hide separator0
+  // and send the menu groups to the wrong separator on exactly those forms.
+  const withAI =
+    contextOptions.includes("ask-ai") ||
+    contextOptions.includes("analyze-responses");
 
   // const emailSendIsDisabled = true;
   const showSeparator0 =

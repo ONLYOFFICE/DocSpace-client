@@ -809,8 +809,12 @@ const Shell = ({ page = "home", ...rest }) => {
   // Anonymous sessions (public room / public preview via a share link) and
   // guests must never issue AI calls: they answer 401, and the shared axios
   // client reacts to a 401 with logout + redirect to the login page, killing
-  // the public link view. An unpaid portal skips AI boot requests entirely.
-  const canUseAi = isAuthenticated && !isGuest && !isNotPaidPeriod;
+  // the public link view. An unpaid portal skips AI boot requests entirely,
+  // and so does a portal with AI switched off (Settings -> Customization ->
+  // AI services): every ASC.AI controller is behind `[AiFeature]` and answers
+  // 403, so hydrating the chat stores only floods the console on every page.
+  const canUseAi =
+    isAuthenticated && !isGuest && !isNotPaidPeriod && aiServicesEnabled;
 
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.

@@ -109,35 +109,40 @@ beforeEach(() => {
 
 describe("PluginStore react runtime settings", () => {
   describe("load", () => {
-    it("hands the plugin its stored settings", async () => {
+    it("hands the plugin its stored settings", () => {
       const { store } = withPlugin({
         settings: JSON.stringify({ enabled: true, tries: 3 }),
       });
 
-      await expect(settingsOf(store).load()).resolves.toEqual({
-        enabled: true,
-        tries: 3,
-      });
+      expect(settingsOf(store).load()).toEqual({ enabled: true, tries: 3 });
+    });
+
+    // The settings are already in the store by the time a plugin component
+    // renders, so a component can read them in a state initialiser.
+    it("reads the settings synchronously", () => {
+      const { store } = withPlugin({ settings: JSON.stringify({ tries: 3 }) });
+
+      expect(settingsOf(store).load()).not.toBeInstanceOf(Promise);
     });
 
     // The portal keeps whatever the plugin wrote, and an earlier version of a
     // plugin may well have written something else.
-    it("answers null instead of throwing on settings that are not JSON", async () => {
+    it("answers null instead of throwing on settings that are not JSON", () => {
       const { store } = withPlugin({ settings: "{not json" });
 
-      await expect(settingsOf(store).load()).resolves.toBeNull();
+      expect(settingsOf(store).load()).toBeNull();
     });
 
-    it("answers null when nothing is stored", async () => {
+    it("answers null when nothing is stored", () => {
       const { store } = withPlugin();
 
-      await expect(settingsOf(store).load()).resolves.toBeNull();
+      expect(settingsOf(store).load()).toBeNull();
     });
 
-    it("answers null when the plugin is not installed", async () => {
+    it("answers null when the plugin is not installed", () => {
       const store = createStore();
 
-      await expect(settingsOf(store).load()).resolves.toBeNull();
+      expect(settingsOf(store).load()).toBeNull();
     });
   });
 

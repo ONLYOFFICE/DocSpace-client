@@ -3323,7 +3323,7 @@ packages:
     resolution: {integrity: sha512-zzhvkBZj7RelLDxGg/OnonG2vFwurlI2FaPSSHPiYXosu5y4lopQnSkoxoZ1uXgnWAKREjt1d0p+nkdtTH5xkA==}
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz':
-    resolution: {integrity: sha512-AhGVEE4TTVNBwMXNMeYCLwBQIe3e7bUUqKyBc25JPRXe1mAxZktrXiIciBkTCGaySwcy3gRZ5Ef1yBZSZvGlWA==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz}
+    resolution: {integrity: sha512-H0C0agDnG9KxSXVrBu5xW0B1WrAJ45jsn4K/y/bDZ6hJzRK3vFHXUrvH7IkgXj0xZUwRhY4tzNYuW+UYCqQcJg==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz}
     version: 3.0.0
     hasBin: true
     peerDependencies:

@@ -1899,7 +1899,7 @@ class PluginStore {
       },
       api: pluginApi,
       settings: {
-        load: async () => {
+        load: () => {
           const entry = this.plugins.find((p) => p.name === pluginName);
           if (!entry?.settings) return null;
           try {

@@ -206,7 +206,7 @@ overrides:
   form-data: '>=4.0.6'
   vite: '>=8.0.16'
   '@babel/core': '>=7.29.6 <8'
-  sharp: '>=0.35.0'
+  sharp: 0.35.4
   react-router: 8.3.0
 
 importers:
@@ -1039,7 +1039,7 @@ importers:
         specifier: 0.1.0
         version: 0.1.0
       sharp:
-        specifier: '>=0.35.0'
+        specifier: 0.35.4
         version: 0.35.4(@types/node@24.10.7)
       ts-pattern:
         specifier: 5.5.0

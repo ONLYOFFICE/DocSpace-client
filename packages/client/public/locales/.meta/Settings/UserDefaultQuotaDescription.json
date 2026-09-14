@@ -3,7 +3,7 @@
   "content": "Set a storage quota for users — this limits how much space each user's {{sectionName}} folder can use.",
   "content_en_sha1_hash": "8a3539e73d55b9f0e21e0b019f618c036539108e",
   "created_at": "2026-09-04T07:59:36.526Z",
-  "updated_at": "2026-09-04T08:05:57.519Z",
+  "updated_at": "2026-09-14T20:38:41.444Z",
   "comment": {
     "text": "Subtitle for a settings category item that explains the purpose of the user storage quota; includes a variable {{sectionName}} representing the folder type.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
       "line_number": 66,
-      "context": "/>\n <CategoryItem\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n sectionName: t(\"Common:Files\"),\n })}\n isDisabled={isDisabled}\n />\n <CategoryItem",
+      "context": "/>\n <CategoryItem\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n sectionName: t(\"Common:Files\"),\n })}\n isDisabled={isDisabled}\n />\n {aiServicesEnabled ? (",
       "module": "/packages/client"
     },
     {

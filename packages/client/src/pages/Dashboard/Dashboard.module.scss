@@ -137,7 +137,7 @@
   flex-direction: column;
   gap: 32px;
   width: 100%;
-  max-width: 1180px;
+  max-width: 1440px;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -362,7 +362,7 @@
 }
 
 // The create tiles fill the whole content width here instead of stopping at the
-// ui-kit tile cap (184px) — the dashboard has a fixed 1180px content column, so
+// ui-kit tile cap (184px) — the dashboard has a fixed 1440px content column, so
 // capped tiles left a gap at the end of the row. Height is unchanged.
 .quickActions {
   --quick-actions-tile-max-width: none;

@@ -3,7 +3,7 @@
   "content": "Save the backup to a third-party account: Dropbox, Box, OneDrive, or Google Drive. Just connect the account first, then choose or create a folder there to store your backup.",
   "content_en_sha1_hash": "31166a8fd1719022fa8910328b9c22f6d94bb379",
   "created_at": "2026-08-31T18:23:33.636Z",
-  "updated_at": "2026-08-31T18:36:44.719Z",
+  "updated_at": "2026-09-10T16:17:50.335Z",
   "comment": {
     "text": "Instructional text in the auto and manual backup settings that explains how to connect and use third-party cloud storage accounts for backups.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 683,
+      "line_number": 695,
       "context": "testId=\"third_party_resource_radio_button\"\n />\n <Text\n className={classNames(styles.backupDescription, \"backup-description\")}\n >\n {t(\"Common:ThirdPartyResourceDescription\")}\n </Text>\n {isCheckedThirdParty ? (\n <ThirdPartyModule\n newPath={newPath}\n accounts={accounts}",
       "module": "/packages/shared"
     }

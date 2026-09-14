@@ -85,12 +85,26 @@ export type TProfile = {
   modelId: string;
   key?: string | null;
   headers?: Record<string, string>;
-  reasoning?: boolean;
+  reasoning?: TProfileReasoning | null;
   capabilities?: number;
   canUseTool?: boolean;
   useResponsesApi?: boolean;
   createdAt?: number;
 };
+
+/**
+ * Extended-thinking capabilities of a profile's model as the server stores
+ * them (`ReasoningConfig` on the C# side). Replaces the former boolean:
+ * `thinks` is what that boolean used to say.
+ */
+export type TProfileReasoning = {
+  thinks: boolean;
+  canDisable: boolean;
+  depths: TReasoningDepth[];
+  defaultDepth?: TReasoningDepth | null;
+};
+
+export type TReasoningDepth = "none" | "low" | "medium" | "high" | "xhigh" | "max";
 
 export type TProfilesList = TProfile[];
 

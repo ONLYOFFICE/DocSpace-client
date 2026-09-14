@@ -3,7 +3,7 @@
   "content": "Previous",
   "content_en_sha1_hash": "50f94286ba30706a19070d3ec0a0c8d34d6cf6eb",
   "created_at": "2025-05-19T21:30:47.476Z",
-  "updated_at": "2026-09-09T15:42:08.496Z",
+  "updated_at": "2026-09-10T16:17:50.199Z",
   "comment": {
     "text": "Button label. Navigates to the previous page in a paginated list of items, such as user accounts.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/index.js",
-      "line_number": 747,
+      "line_number": 749,
       "context": "items={quickActions.items}\n className={styles.quickActions}\n isLoading={showFilterLoader}\n onClose={onHideQuickActions}\n closeLabel={t(\"Common:DisableQuickActionsOnAllPages\")}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n dataTestId=\"quick-actions\"\n />\n </Section.SectionBanner>\n ) : null}",
       "module": "/packages/client"
     },

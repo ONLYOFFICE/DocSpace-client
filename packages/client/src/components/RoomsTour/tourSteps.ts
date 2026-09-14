@@ -65,7 +65,13 @@ const ROOM_TYPE_TILE_SELECTORS = [
 // button that creates the first group). ui-kit renders it behind three gates —
 // the grouping setting, the rooms root, and no active filter — so the step is
 // dropped by the start-of-run DOM check whenever it is not on screen.
-const GROUPS_SELECTOR = ".group-tags";
+//
+// Exported because the host waits on it too: mounting this row also depends on
+// a `getAllRoomGroups()` round trip and a layout measurement pass inside
+// ui-kit's `Filter`, neither of which the section's own loading flags cover —
+// so the tour start is held until this selector resolves (see
+// `usePendingTour`'s caller in RoomsTour/index.tsx).
+export const GROUPS_SELECTOR = ".group-tags";
 
 // The first room of the list, in whichever view is active (only one of the
 // three is mounted at a time). Exported because the host waits on it too: the

@@ -1,0 +1,41 @@
+{
+  "key_path": "TopUpDelayedPaymentMethodWarning",
+  "content": "Bank transfers may take several business days to process. Credits will be added to your Wallet only after the funds arrive.",
+  "content_en_sha1_hash": "77ddb6f3f7a0b5edb352b4c99891c66e58240ec6",
+  "created_at": "2026-09-10T16:17:34.741Z",
+  "updated_at": "2026-09-10T16:22:42.855Z",
+  "comment": {
+    "text": "Success toast message appearing when a user selects a delayed payment method (e.g., bank transfer) during a top-up or plan purchase.",
+    "is_auto": true,
+    "updated_at": "2026-09-10T16:22:42.855Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
+      "line_number": 208,
+      "context": "if (fetchTransactionHistory)\n requests.push(fetchTransactionHistory(serviceName));\n await Promise.allSettled(requests);\n \n if (isDelayedPaymentMethod) {\n toastr.success(t(\"TopUpDelayedPaymentMethodWarning\"));\n } else {\n toastr.success(t(\"WalletToppedUp\"));\n await onConfirm?.();\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
+      "line_number": 208,
+      "context": "if (fetchTransactionHistory)\n requests.push(fetchTransactionHistory(serviceName));\n await Promise.allSettled(requests);\n \n if (isDelayedPaymentMethod) {\n toastr.success(t(\"TopUpDelayedPaymentMethodWarning\"));\n } else {\n toastr.success(t(\"WalletToppedUp\"));\n await onConfirm?.();\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 410,
+      "context": "fetchCardLinked,\n signal: controller.signal,\n });\n if (!completion) return;\n if (completion.isDelayedPaymentMethod) {\n toastr.success(t(\"Common:TopUpDelayedPaymentMethodWarning\"));\n return;\n }\n } else {\n await buyPlan?.({\n users,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

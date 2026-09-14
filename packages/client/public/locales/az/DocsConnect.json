@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Abunəlik <1>{{date}} tarixində</1> avtomatik olaraq yenilənəcək",
   "TopUpAndBuy": "Doldurun və alın",
   "TopUpHint": "Cüzdanınız <1>{{amount}}</1> qədər doldurulacaq və seçilmiş abunəlik avtomatik olaraq alınacaq. Doldurma məbləğləri bir sonrakı tam dollara qədər yuxarı yuvarlaqlanır.",
+  "TopUpWalletHint": "Seçilmiş {{service}} abunəliyi üçün kifayət qədər kredit yoxdur. Pul kisənizi doldurun, sonra alışı tamamlamaq üçün geri qayıdın.",
   "TotalDueTodayTooltip": "Bu gün siz yalnız ödəniş tarixinizə qədər qalan günlər üçün seçilmiş istifadəçi sayına görə ödəniş edirsiniz. Bundan sonra tam məbləğ hər ödəniş dövründə bir dəfə, adi ödəniş tarixinizdə tutulacaq.",
   "TotalMonthly": "Ümumi aylıq",
   "TrialAvailable": "Pulsuz bir aylıq sınaq mövcuddur. Kredit kartı tələb olunmur.",

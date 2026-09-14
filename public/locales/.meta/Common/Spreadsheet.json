@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2026-08-31T18:23:50.558Z",
+  "updated_at": "2026-09-14T20:38:41.339Z",
   "comment": {
     "text": "This is a button label or menu item for creating a new spreadsheet, or a label within a conversion dialog. It refers to the file type.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/index.tsx",
-      "line_number": 194,
+      "line_number": 201,
       "context": "fileExst: \".docx\",\n fileType: FileType.Document,\n access: ShareAccessRights.Editing,\n },\n {\n title: t(\"Common:Spreadsheet\"),\n fileExst: \".xlsx\",\n fileType: FileType.Spreadsheet,\n access: ShareAccessRights.Comment,\n },\n {",
       "module": "/packages/client"
     },

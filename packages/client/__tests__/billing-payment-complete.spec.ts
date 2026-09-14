@@ -127,12 +127,14 @@ const trackRequests = (page: Page, method: string, path: string) => {
   return bodies;
 };
 
-const step = (page: Page, state: "done" | "active" | "pending") =>
+const step = (page: Page, state: "done" | "active" | "current" | "pending") =>
   page.locator(`li[data-state="${state}"]`);
 const successButton = (page: Page) =>
   page.getByTestId("ai_paywall_go_to_wallet_button");
 const errorButton = (page: Page) =>
   page.getByTestId("ai_paywall_go_to_billing_button");
+const backToBillingButton = (page: Page) =>
+  page.getByTestId("payment_complete_back_to_billing_button");
 const shot = (name: string) => ["desktop", "payment-complete", name];
 // The active step spins, so its spinner is hidden to keep the processing shots stable.
 const processingShot = async (page: Page, name: string) => {
@@ -462,11 +464,11 @@ test.describe("Payment complete page", () => {
 
     await page.goto(`${baseUrl}${completeUrl()}`);
 
-    await expect(step(page, "active")).toContainText(
-      "Adding $50.00 to your wallet",
-      FIRST_RENDER,
-    );
-    await expect.poll(() => card.reads()).toBe(1);
+    // until Stripe confirms the payment method the page shows only a loader:
+    // the steps depend on the method, and nothing is charged yet
+    await expect.poll(() => card.reads(), FIRST_RENDER).toBe(1);
+    await expect(page.getByTestId("loader")).toBeVisible();
+    await expect(step(page, "done")).toHaveCount(0);
     expect(deposits).toHaveLength(0);
 
     await expect(page.getByText("Wallet topped up", { exact: true })).toBeVisible(
@@ -644,5 +646,82 @@ test.describe("Payment complete page", () => {
 
     await page.waitForURL("**/billing/wallet", FIRST_RENDER);
     expect(deposits).toHaveLength(0);
+  });
+
+  test("isDelayedPaymentMethod shows the transfer flow from the first frame", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, { isDelayedPaymentMethod: true });
+    mockRequest.use(depositHandler({ delayMs: SLOW_STEP_MS }));
+    const deposits = trackRequests(page, "POST", DEPOSIT_PATH);
+
+    await page.goto(`${baseUrl}${completeUrl()}`);
+
+    await expect(
+      page.getByText(
+        "Your transfer is on its way and may take a few business days to arrive. Feel free to leave this page while we wait for the funds.",
+      ),
+    ).toBeVisible(FIRST_RENDER);
+    await expect(
+      page.getByText(
+        "Your Wallet balance updates automatically after the funds arrive. You can top up again, including by card.",
+      ),
+    ).toBeVisible();
+    await expect(step(page, "done")).toHaveText("Payment method saved");
+    await expect(step(page, "active")).toContainText("Sending SEPA transfer");
+    await expect(step(page, "pending")).toContainText(
+      "Funds will be added to your Wallet",
+    );
+    await expect(page.getByText("SEPA bank transfer")).toBeVisible();
+    // nothing of the card flow shows up, and the button waits for the transfer request
+    await expect(page.getByText("Adding $50.00 to your wallet")).toBeHidden();
+    await expect(
+      page.getByText("Keep this tab open until the payment is complete"),
+    ).toBeHidden();
+    await expect(backToBillingButton(page)).toBeHidden();
+
+    await processingShot(page, "processing-delayed.png");
+
+    await expect(step(page, "done").nth(1)).toHaveText("SEPA transfer sent", {
+      timeout: SLOW_STEP_MS * 3,
+    });
+    await expect(step(page, "current")).toContainText(
+      "Funds will be added to your Wallet",
+    );
+    await expect(backToBillingButton(page)).toHaveText("Back to Billing");
+    expect(deposits).toHaveLength(1);
+    expect(deposits[0]).toContain('"amount":50');
+
+    await expectScreenshot(page, shot("success-delayed.png"));
+
+    await backToBillingButton(page).click();
+
+    await page.waitForURL("**/billing/overview");
+  });
+
+  test("isDelayedPaymentMethod leaves the add-on activation for later", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, { isDelayedPaymentMethod: true });
+    const changes = trackRequests(page, "POST", SERVICE_STATE_PATH);
+
+    await page.goto(`${baseUrl}${completeUrl({ service: "ai-tools" })}`);
+
+    await expect(step(page, "done").nth(1)).toHaveText(
+      "SEPA transfer sent",
+      FIRST_RENDER,
+    );
+    await expect(page.getByText("Activating AI features")).toBeHidden();
+    await expect(page.getByText("AI features activated")).toBeHidden();
+    // the funds are not in the wallet yet, so nothing can be activated
+    expect(changes).toHaveLength(0);
+
+    await backToBillingButton(page).click();
+
+    await page.waitForURL("**/billing/overview");
   });
 });

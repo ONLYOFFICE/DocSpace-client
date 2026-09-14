@@ -3,7 +3,7 @@
   "content": "Top up & Upgrade",
   "content_en_sha1_hash": "7f12b9a72a1ce147ecf9af79a4a075550af1912f",
   "created_at": "2026-06-02T15:02:52.991Z",
-  "updated_at": "2026-09-09T15:42:09.153Z",
+  "updated_at": "2026-09-10T16:17:50.361Z",
   "comment": {
     "text": "Button label shown when the user's balance is insufficient.",
     "is_auto": true,
@@ -13,20 +13,20 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
-      "line_number": 164,
-      "context": "};\n \n const payTariffButton = () => {\n const buttonLabel =\n !isCardLinkedToPortal || isBalanceInsufficient\n ? t(\"TopUpAndUpgrade\")\n : t(\"UpgradeNow\");\n \n const onClick = () => {\n if (canPayTariff) {\n isCardLinkedToPortal",
+      "line_number": 170,
+      "context": "};\n \n const getPayTariffLabel = () => {\n if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n if (!isCardLinkedToPortal || isBalanceInsufficient)\n return t(\"TopUpAndUpgrade\");\n return t(\"UpgradeNow\");\n };\n \n const getUpdateTariffAction = () => {\n if (needsWalletMigration) return openMigrateDialog;",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
-      "line_number": 105,
-      "context": "const isTopUpUnavailable =\n isBalanceInsufficient && isCardLinkedToPortal && !isPayer;\n const canTopUpAndBuy = isBalanceInsufficient && !isTopUpUnavailable;\n \n const title = canTopUpAndBuy\n ? t(\"TopUpAndUpgrade\")\n : !hasStorageSubscription\n ? t(\"UpgradeNow\")\n : isExceedingStorageLimit\n ? t(\"SendRequest\")\n : t(\"Update\");",
+      "line_number": 115,
+      "context": "const getTitle = () => {\n if (isExceedingStorageLimit) return t(\"SendRequest\");\n \n if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n \n if (canTopUpAndBuy) return t(\"TopUpAndUpgrade\");\n \n if (!hasStorageSubscription) return t(\"UpgradeNow\");\n \n return t(\"Update\");\n };",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1664,
-      "context": "const dueTodayAmount = this.tariffDueTodayAmount ?? this.totalPrice;\n const isBalanceInsufficient = this.walletBalance < dueTodayAmount;\n \n if (this.tariffDueTodayAmount !== null && !isTheSameCount) {\n return isBalanceInsufficient\n ? t(\"TopUpAndUpgrade\")\n : t(\"PayAndUpgrade\", {\n amount: this.formatPaymentCurrency(dueTodayAmount),\n });\n }",
+      "line_number": 1672,
+      "context": "if (this.tariffDueTodayAmount !== null && !isTheSameCount) {\n if (isBalanceInsufficient)\n return this.tariff.isDelayedPaymentMethod\n ? t(\"TopUpWallet\")\n : t(\"TopUpAndUpgrade\");\n return t(\"PayAndUpgrade\", {\n amount: this.formatPaymentCurrency(dueTodayAmount),\n });\n }",
       "module": "/libs/ui-kit"
     }
   ],

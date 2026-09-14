@@ -166,6 +166,7 @@ const PureHome = observer((props) => {
     getSettings,
     logout,
     login,
+    loginWithCode,
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
@@ -434,6 +435,7 @@ const PureHome = observer((props) => {
     getSettings,
     logout,
     login,
+    loginWithCode,
     addTagsToRoom,
     createTag,
     removeTagsFromRoom,
@@ -1084,6 +1086,7 @@ export const Component = inject(
       getSettings,
       logout: authStore.logout,
       login: authStore.login,
+      loginWithCode: authStore.loginWithCode,
 
       loadCurrentUser: userStore.loadCurrentUser,
       getRooms,

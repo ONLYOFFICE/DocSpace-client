@@ -1,0 +1,29 @@
+{
+  "key_path": "WalletDelayedPaymentMethodBanner",
+  "content": "SEPA transfer sent. Funds can take several business days to arrive. Your Wallet balance will update automatically after the funds arrive. You can still top up again, including by card.",
+  "content_en_sha1_hash": "81e937962fcdb3a8e702d990de4b5a00cdc8bff0",
+  "created_at": "2026-09-10T16:17:38.119Z",
+  "updated_at": "2026-09-10T16:21:33.285Z",
+  "comment": {
+    "text": "Informational banner text displayed in the wallet section after a SEPA transfer is initiated, notifying the user about the expected delay and the availability of other top-up methods.",
+    "is_auto": true,
+    "updated_at": "2026-09-10T16:21:33.285Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/sub-components/DelayedPaymentMethodBanner.tsx",
+      "line_number": 58,
+      "context": "as=\"span\"\n fontSize=\"12px\"\n lineHeight=\"16px\"\n className={styles.autoPaymentBannerText}\n >\n {t(\"WalletDelayedPaymentMethodBanner\")}\n </Text>\n </div>\n );\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

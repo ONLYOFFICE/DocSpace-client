@@ -37,23 +37,6 @@ import { describe, it, expect, beforeAll } from "vitest";
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { createRequire } = require("module");
-
-// ui-kit is no longer checked out here: it ships as a prebuilt tarball and is
-// only present under node_modules. Its components own a large share of the
-// Common namespace, so the key-usage tests have to read the built package
-// instead of source. Returns null when it is not installed, and every caller
-// degrades to "ui-kit contributes no keys" rather than failing.
-const resolveUiKitDist = () => {
-  try {
-    const req = createRequire(path.join(BASE_DIR, "packages", "client", "noop.js"));
-    const pkgJson = req.resolve("@onlyoffice/apps-ui-kit/package.json");
-    const dist = path.join(path.dirname(pkgJson), "dist", "esm");
-    return fs.existsSync(dist) ? dist : null;
-  } catch {
-    return null;
-  }
-};
 const {
   getAllFiles,
   convertPathToOS,
@@ -61,6 +44,7 @@ const {
   BASE_DIR,
   moduleWorkspaces,
 } = require("../utils/files");
+const { resolveUiKitDist } = require("../utils/ui-kit");
 
 // Groups of English keys that already share one value inside a namespace.
 // This baseline freezes pre-existing debt so the test only catches NEW

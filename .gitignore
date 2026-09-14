@@ -34,6 +34,7 @@ license.xml
 .idea
 packages/runtime.json
 playwright-report
+.playwright-mcp
 common/tests/reports/tests-results.html
 
 .nx/cache

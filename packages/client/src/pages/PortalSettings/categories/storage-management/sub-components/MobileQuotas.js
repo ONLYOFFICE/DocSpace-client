@@ -41,7 +41,7 @@ import { CategoryItem } from "@onlyoffice/apps-ui-kit/components/category-item";
 
 import styles from "../StyledComponent.module.scss";
 
-const MobileQuotasComponent = ({ isDisabled }) => {
+const MobileQuotasComponent = ({ isDisabled, aiServicesEnabled }) => {
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
 
@@ -68,18 +68,20 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         })}
         isDisabled={isDisabled}
       />
-      <CategoryItem
-        title={t("QuotaPerAIAgent", {
-          aiAgent: t("Common:AIAgent"),
-        })}
-        onClickLink={onClickLink}
-        url="/portal-settings/management/disk-space/quota-per-ai-agent"
-        subtitle={t("SetDefaultAIAgentQuota", {
-          aiAgents: t("Common:AIAgents"),
-          aiAgent: t("Common:AIAgent"),
-        })}
-        isDisabled={isDisabled}
-      />
+      {aiServicesEnabled ? (
+        <CategoryItem
+          title={t("QuotaPerAIAgent", {
+            aiAgent: t("Common:AIAgent"),
+          })}
+          onClickLink={onClickLink}
+          url="/portal-settings/management/disk-space/quota-per-ai-agent"
+          subtitle={t("SetDefaultAIAgentQuota", {
+            aiAgents: t("Common:AIAgents"),
+            aiAgent: t("Common:AIAgent"),
+          })}
+          isDisabled={isDisabled}
+        />
+      ) : null}
     </div>
   );
 };

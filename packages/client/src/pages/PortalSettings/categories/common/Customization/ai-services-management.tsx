@@ -75,6 +75,7 @@ interface AiServicesManagementProps {
   standalone: boolean;
   defaultFolderType: SettingsStore["defaultFolderType"];
   updateDefaultFolderType: SettingsStore["updateDefaultFolderType"];
+  getAIConfig: SettingsStore["getAIConfig"];
 }
 
 const AiServicesManagementComponent = ({
@@ -93,6 +94,7 @@ const AiServicesManagementComponent = ({
   standalone,
   defaultFolderType,
   updateDefaultFolderType,
+  getAIConfig,
 }: AiServicesManagementProps) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
@@ -181,6 +183,9 @@ const AiServicesManagementComponent = ({
       setIsSaving(true);
       await setAiAccessSettings(type);
       setAiServicesEnabled(type);
+      // The boot probe is skipped while AI is off, so the config the rest of
+      // the UI reads is stale (or was never loaded) the moment it comes back.
+      await getAIConfig();
       await fetchTreeFolders();
       setShowReminder(false);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
@@ -321,6 +326,7 @@ export const AiServicesManagement = inject<TStore>(
       defaultFolderType,
       updateDefaultFolderType,
       standalone,
+      getAIConfig,
     } = settingsStore;
     const { isLoaded, initSettings, setIsLoadedAiServicesManagement } = common;
     const { fetchTreeFolders } = treeFoldersStore;
@@ -344,6 +350,7 @@ export const AiServicesManagement = inject<TStore>(
       standalone,
       defaultFolderType,
       updateDefaultFolderType,
+      getAIConfig,
     };
   },
 )(withLoading(observer(AiServicesManagementComponent)));

@@ -57,7 +57,7 @@ const buttonProps = {
 const StatisticsComponent = (props) => {
   const { t } = useTranslation("Settings");
   const { isBase } = useTheme();
-  const { isStatisticsAvailable } = props;
+  const { isStatisticsAvailable, aiServicesEnabled } = props;
 
   const iconElement = (
     id,
@@ -131,22 +131,26 @@ const StatisticsComponent = (props) => {
             quotaElement={quotaElement}
             iconElement={iconElement}
           />
-          <AIAgentList
-            buttonProps={buttonProps}
-            textElement={textElement}
-            quotaElement={quotaElement}
-            iconElement={iconElement}
-          />
+          {aiServicesEnabled ? (
+            <AIAgentList
+              buttonProps={buttonProps}
+              textElement={textElement}
+              quotaElement={quotaElement}
+              iconElement={iconElement}
+            />
+          ) : null}
         </>
       ) : null}
     </div>
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export default inject(({ currentQuotaStore, settingsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
+  const { aiServicesEnabled } = settingsStore;
 
   return {
     isStatisticsAvailable,
+    aiServicesEnabled,
   };
 })(observer(StatisticsComponent));

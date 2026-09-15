@@ -32,6 +32,11 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 # Copy package files first for better layer caching
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
+# ui-kit and ai-chat ship as prebuilt tarballs at the repo root; every app's
+# `file:../../*.tgz` dependency resolves against these, so they must be present
+# before `pnpm install --frozen-lockfile` runs.
+COPY *.tgz ./
+
 ENV NODE_OPTIONS="--max-old-space-size=8192"
 
 # Copy the source code with correct directory structure
@@ -40,8 +45,6 @@ COPY common/tests/package.json ./common/tests/package.json
 COPY packages/client/package.json ./packages/client/package.json
 COPY packages/client/*.tgz ./packages/client/
 COPY packages/shared/package.json ./packages/shared/package.json
-COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
-COPY libs/ui-kit/*.tgz ./libs/ui-kit/
 
 # Install dependencies
 # CI=true is scoped to this one command on purpose. It skips the
@@ -54,7 +57,6 @@ RUN CI=true pnpm install --frozen-lockfile
 COPY common/ ./common/
 COPY packages/client/ ./packages/client/
 COPY packages/shared/ ./packages/shared/
-COPY libs/ui-kit ./libs/ui-kit
 COPY public/ ./public/
 
 # Run build:translations

@@ -23,12 +23,16 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 # Copy package files first for better layer caching
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
+# ui-kit and ai-chat ship as prebuilt tarballs at the repo root; every app's
+# `file:../../*.tgz` dependency resolves against these, so they must be present
+# before `pnpm install --frozen-lockfile` runs.
+COPY *.tgz ./
+
 # Copy the source code with correct directory structure
 COPY common/ ./common/
 COPY packages/doceditor/ ./packages/doceditor/
 COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
-COPY libs/ui-kit/ ./libs/ui-kit/
 
 # Install dependencies
 # CI=true is scoped to this one command on purpose. It skips the

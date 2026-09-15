@@ -65,6 +65,23 @@ pre-push gate. That is what `createTranslator` in
 Fall back per key, not per locale: a locale file that exists but lacks the key
 must still produce an English description.
 
+## The image URL carries the logo version
+
+`og:image` is emitted as `/login/link-preview?v=<hash>`, where the hash comes
+from the login-page entry of the anonymous `/settings/whitelabel/logos`
+response (`getLinkPreviewImageVersion`). The backend puts it there itself: for
+an uploaded logo it is the file's ETag (`BaseStorage.GetUrlWithHashAsync`), for
+the default logo the product version — so it changes exactly when the picture
+does.
+
+The route ignores `v`; it exists for the messengers. Telegram binds an image to
+a page at the first crawl and does **not** re-download it on a later refresh
+(including a forced one through @WebpageBot) while its URL is unchanged. With a
+fixed URL a portal that was crawled before rebranding kept showing the default
+logo forever, with no way to fix it. Keep the parameter, and never replace the
+hash with anything that does not change on upload. The `$cache_control` regex
+in nginx matches the path with the query string, so caching is unaffected.
+
 ## The nginx side (`../buildtools`)
 
 `config/nginx/onlyoffice.conf` has a `map $http_user_agent $link_preview_bot`

@@ -1,9 +1,18 @@
 import { describe, expect, it } from "vitest";
 
+import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
 import type { TTranslations } from "@docspace/ui-kit/providers/translation";
 
 import { getBrandName } from "../constants/brands";
-import { getLinkPreview } from "./link-preview";
+import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
+import { getLinkPreview, getLinkPreviewImageVersion } from "./link-preview";
+
+const buildLogo = (type: number, light: string): ILogo => ({
+  type,
+  name: `Logo${type}`,
+  path: { light, dark: "" },
+  size: { width: 0, height: 0, isEmpty: false },
+});
 
 const DESCRIPTION_KEY = "LinkPreviewDescription";
 const TEMPLATE = "{{organizationName}} {{productName}} is a workspace.";
@@ -103,5 +112,48 @@ describe("getLinkPreview", () => {
     const { description } = getLinkPreview("Acme", translations, "en");
 
     expect(description).toBe("Acme and {{unknownThing}}");
+  });
+
+  it("passes the login logo hash through as the image version", () => {
+    const logos = [
+      buildLogo(WhiteLabelLogoType.LeftMenu, "/storage/leftmenu.svg?hash=aaa"),
+      buildLogo(
+        WhiteLabelLogoType.LoginPage,
+        "https://portal.example/storage/loginpage.svg?hash=6a980c20-cee",
+      ),
+    ];
+
+    const { imageVersion } = getLinkPreview("Acme", undefined, "en", logos);
+
+    expect(imageVersion).toBe("6a980c20-cee");
+  });
+});
+
+describe("getLinkPreviewImageVersion", () => {
+  it("reads the hash of the login page logo only", () => {
+    const logos = [
+      buildLogo(WhiteLabelLogoType.LeftMenu, "/leftmenu.svg?hash=aaa"),
+      buildLogo(WhiteLabelLogoType.LoginPage, "/loginpage.svg?hash=bbb"),
+      buildLogo(WhiteLabelLogoType.Favicon, "/favicon.ico?hash=ccc"),
+    ];
+
+    expect(getLinkPreviewImageVersion(logos)).toBe("bbb");
+  });
+
+  it("returns nothing without logos", () => {
+    expect(getLinkPreviewImageVersion(undefined)).toBeUndefined();
+    expect(getLinkPreviewImageVersion([])).toBeUndefined();
+  });
+
+  it("returns nothing when the login logo path carries no hash", () => {
+    const logos = [buildLogo(WhiteLabelLogoType.LoginPage, "/loginpage.svg")];
+
+    expect(getLinkPreviewImageVersion(logos)).toBeUndefined();
+  });
+
+  it("returns nothing when the login logo is missing", () => {
+    const logos = [buildLogo(WhiteLabelLogoType.LeftMenu, "/x.svg?hash=aaa")];
+
+    expect(getLinkPreviewImageVersion(logos)).toBeUndefined();
   });
 });

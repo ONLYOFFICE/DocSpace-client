@@ -51,7 +51,12 @@ import LinkPreviewMeta from "@docspace/shared/components/link-preview-meta";
 
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
-import { getColorTheme, getSettings, getUser } from "@/utils/actions";
+import {
+  getColorTheme,
+  getSettings,
+  getUser,
+  getWhiteLabelLogos,
+} from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 import "@/styles/globals.scss";
 
@@ -75,10 +80,11 @@ export default async function RootLayout({
     return null;
   }
 
-  const [user, settings, colorTheme] = await Promise.all([
+  const [user, settings, colorTheme, logos] = await Promise.all([
     getUser(),
     getSettings(),
     getColorTheme(),
+    getWhiteLabelLogos(),
   ]);
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
@@ -124,6 +130,7 @@ export default async function RootLayout({
     typeof settings === "object" ? settings.logoText : undefined,
     translations,
     locale,
+    logos,
   );
 
   return (

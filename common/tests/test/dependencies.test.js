@@ -458,15 +458,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
 
 it("DifferentDependencyVersionsTest: Verify that all workspaces use same dependency versions", () => {
   // List of packages to be ignored
-  const ignoredPackages = new Set([
-    // Vendored tarball, referenced by a `file:` path -- inherently relative,
-    // so it cannot read identically from libs/ui-kit (one directory below
-    // the repo root) and from packages/* (two directories below). Both
-    // resolve to the same tarball; the version string just can't match
-    // textually. @onlyoffice/apps-ui-kit is not listed here because every
-    // consumer of it happens to sit at the same depth (packages/*).
-    "@onlyoffice/ai-chat",
-  ]);
+  const ignoredPackages = new Set([]);
 
   const dependencyMap = {};
 

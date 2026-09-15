@@ -1,3 +1,161 @@
+---
+lockfileVersion: '9.0'
+
+importers:
+
+  .:
+    configDependencies: {}
+    packageManagerDependencies:
+      pnpm:
+        specifier: 12.4.1
+        version: 12.4.1
+
+packages:
+
+  '@pnpm/exe.android-arm64@12.4.1':
+    resolution: {integrity: sha512-/HwsqXMSmlOfgtV9+O0ratzjV6Vd/8n1hh4rGHpCGmDURvt52MwZxdbhyxP4K03ZfvgSDvotFPr8O+RzE5Eu8A==}
+    cpu: [arm64]
+    os: [android]
+
+  '@pnpm/exe.android-x64@12.4.1':
+    resolution: {integrity: sha512-+l74Qb4c2YjOzNKHXJLg+1wr8xHM1ckkUhnU5KRUK9TJqiiczt6yeTZqqzHIlJ8i6pAoj5V0OJevDRwnQKLgrQ==}
+    cpu: [x64]
+    os: [android]
+
+  '@pnpm/exe.darwin-arm64@12.4.1':
+    resolution: {integrity: sha512-6rkZkT3iGfaxknUdGHraqSWFvTa6N0ajAHluv9Ax0GRWs0sIcGNiFhDopv6xSZCsJZmG483aNS/b6UEDy3blfw==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@pnpm/exe.darwin-x64@12.4.1':
+    resolution: {integrity: sha512-Vb1CHlR88HghC1qUxjxjs82zQSXnXacPD+btG2CmG8Q/hBU7Q0/b2YWJKSQqZXicunV5khFtfTlAwJddV9RkYA==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@pnpm/exe.freebsd-x64@12.4.1':
+    resolution: {integrity: sha512-iT3iHz3Nl0Sxxj7UPOtZ/aQ81AFsQhjoeWMAlPkSRO04gsgDGAXv3UYxOFaesMWsfNxaGn0A+CITbuCHFF66FA==}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@pnpm/exe.linux-arm64-musl@12.4.1':
+    resolution: {integrity: sha512-aBooZfNXM5f+OGUgCAMFWpE/kAhsWfvmqIyMtHy6zl3aNxyInWrcY/Saln/UElzo7lZWMC0Yktroxd/2J26lNQ==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  '@pnpm/exe.linux-arm64@12.4.1':
+    resolution: {integrity: sha512-TlOdacTTP09BgcMvwWBFRsu8VAjfwqwnslBj+XSq1JFM3ck4f3k+1O/747EuctxZxs3/o785b6Q3s7Pd92Ptsg==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@pnpm/exe.linux-ppc64@12.4.1':
+    resolution: {integrity: sha512-r/ab/MlIBo75oizUP5ITiziCCrnXz4SJwfErLQ+603AshB+Yq7xTMCoMtzTSCAMu6aaymIKkAFtZvd2J75Wq0w==}
+    cpu: [ppc64]
+    os: [linux]
+    libc: [glibc]
+
+  '@pnpm/exe.linux-riscv64@12.4.1':
+    resolution: {integrity: sha512-C/D1QWdKMiB8+wv/spl1rGITFUuqC+aI/fb6h8NB5sqxsOaGXeYc/g891oCuzggHn6SODk9p+I09hI76x/cMNw==}
+    cpu: [riscv64]
+    os: [linux]
+    libc: [glibc]
+
+  '@pnpm/exe.linux-s390x@12.4.1':
+    resolution: {integrity: sha512-nxz5zD4yXt94uzbStDk0QTPKW+aE92hH1b5tFXK9ctB1HE9Xcq1vjTiA2LsZMFC6p4gdu5OwQeFqYNAVGa6QlA==}
+    cpu: [s390x]
+    os: [linux]
+    libc: [glibc]
+
+  '@pnpm/exe.linux-x64-musl@12.4.1':
+    resolution: {integrity: sha512-5AwgFdGhVUg2kIweYGfxzSLEHiIG77PQhZAkXC3TwofQHsu1Wr+TrV5/rNX2PopFnHRzuE581zoB8F6Wle32yg==}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  '@pnpm/exe.linux-x64@12.4.1':
+    resolution: {integrity: sha512-FJOZuuuQMhp0oLzBtcKkLXknBI92hfkmSnlKc47vfin4HrmfID5khY2lGekL9tCzk1cpR+HShEw/meFl+nHtzQ==}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@pnpm/exe.win32-arm64@12.4.1':
+    resolution: {integrity: sha512-OO7eKBL9S+xk5hRy+JUUZSNJknGuGe3GEUffsrlC2LbqKF02g+VX1anGIzSbJDvkkdnpJhSlxF5AUz2JzJu2Jw==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@pnpm/exe.win32-x64@12.4.1':
+    resolution: {integrity: sha512-x7gJHZgHo6hp354xCYA2NvoFzYJkHwovt2kVsUBK5EmXULLcP51JGMq09CX+5FRFJUZFKoXjLu3mZWmfP7o6PQ==}
+    cpu: [x64]
+    os: [win32]
+
+  pnpm@12.4.1:
+    resolution: {integrity: sha512-LoHjmdc/6DkNqyXgaqeIq3pZCCSNL1o3D4K0gRR6ano2e/gEj5pv22Rg8hpm8FQt7bi5TKLIcjWWdBkgsWVtTA==}
+    engines: {node: '>=18.*'}
+    hasBin: true
+
+snapshots:
+
+  '@pnpm/exe.android-arm64@12.4.1':
+    optional: true
+
+  '@pnpm/exe.android-x64@12.4.1':
+    optional: true
+
+  '@pnpm/exe.darwin-arm64@12.4.1':
+    optional: true
+
+  '@pnpm/exe.darwin-x64@12.4.1':
+    optional: true
+
+  '@pnpm/exe.freebsd-x64@12.4.1':
+    optional: true
+
+  '@pnpm/exe.linux-arm64-musl@12.4.1':
+    optional: true
+
+  '@pnpm/exe.linux-arm64@12.4.1':
+    optional: true
+
+  '@pnpm/exe.linux-ppc64@12.4.1':
+    optional: true
+
+  '@pnpm/exe.linux-riscv64@12.4.1':
+    optional: true
+
+  '@pnpm/exe.linux-s390x@12.4.1':
+    optional: true
+
+  '@pnpm/exe.linux-x64-musl@12.4.1':
+    optional: true
+
+  '@pnpm/exe.linux-x64@12.4.1':
+    optional: true
+
+  '@pnpm/exe.win32-arm64@12.4.1':
+    optional: true
+
+  '@pnpm/exe.win32-x64@12.4.1':
+    optional: true
+
+  pnpm@12.4.1:
+    optionalDependencies:
+      '@pnpm/exe.android-arm64': 12.4.1
+      '@pnpm/exe.android-x64': 12.4.1
+      '@pnpm/exe.darwin-arm64': 12.4.1
+      '@pnpm/exe.darwin-x64': 12.4.1
+      '@pnpm/exe.freebsd-x64': 12.4.1
+      '@pnpm/exe.linux-arm64': 12.4.1
+      '@pnpm/exe.linux-arm64-musl': 12.4.1
+      '@pnpm/exe.linux-ppc64': 12.4.1
+      '@pnpm/exe.linux-riscv64': 12.4.1
+      '@pnpm/exe.linux-s390x': 12.4.1
+      '@pnpm/exe.linux-x64': 12.4.1
+      '@pnpm/exe.linux-x64-musl': 12.4.1
+      '@pnpm/exe.win32-arm64': 12.4.1
+      '@pnpm/exe.win32-x64': 12.4.1
+
+---
 lockfileVersion: '9.0'
 
 settings:
@@ -48,7 +206,7 @@ overrides:
   form-data: '>=4.0.6'
   vite: '>=8.0.16'
   '@babel/core': '>=7.29.6 <8'
-  sharp: '>=0.35.0'
+  sharp: 0.35.4
   react-router: 8.3.0
 
 importers:
@@ -131,11 +289,11 @@ importers:
         specifier: 1.15.1
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:../../onlyoffice-ai-chat-0.5.108.tgz
-        version: file:onlyoffice-ai-chat-0.5.108.tgz(f0febf8438579ca14b55f991e3a22c74)
+        specifier: file:../../onlyoffice-ai-chat-0.5.110.tgz
+        version: file:onlyoffice-ai-chat-0.5.110.tgz(f0febf8438579ca14b55f991e3a22c74)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.108.tgz(f0febf8438579ca14b55f991e3a22c74))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
+        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.110.tgz(f0febf8438579ca14b55f991e3a22c74))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
       '@onlyoffice/docspace-sdk-js':
         specifier: file:onlyoffice-docspace-sdk-js-2.2.0.tgz
         version: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz
@@ -174,7 +332,7 @@ importers:
         version: 4.23.5(@codemirror/language@6.12.4)(@codemirror/state@6.5.2)(@codemirror/view@6.38.2)
       '@uiw/react-codemirror':
         specifier: 4.23.5
-        version: 4.23.5(@babel/runtime@7.28.3)(@codemirror/autocomplete@6.20.3)(@codemirror/language@6.12.4)(@codemirror/lint@6.9.7)(@codemirror/search@6.7.2)(@codemirror/state@6.5.2)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.38.2)(codemirror@6.0.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 4.23.5(@babel/runtime@7.29.7)(@codemirror/autocomplete@6.20.3)(@codemirror/language@6.12.4)(@codemirror/lint@6.9.7)(@codemirror/search@6.7.2)(@codemirror/state@6.5.2)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.38.2)(codemirror@6.0.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@use-gesture/react':
         specifier: 10.3.1
         version: 10.3.1(react@19.2.8)
@@ -475,7 +633,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.108.tgz(f0febf8438579ca14b55f991e3a22c74))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
+        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.110.tgz(f0febf8438579ca14b55f991e3a22c74))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
       '@onlyoffice/document-editor-react':
         specifier: 2.1.1
         version: 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -599,7 +757,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.108.tgz(f0febf8438579ca14b55f991e3a22c74))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
+        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.110.tgz(f0febf8438579ca14b55f991e3a22c74))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -639,6 +797,9 @@ importers:
       resize-image:
         specifier: 0.1.0
         version: 0.1.0
+      sharp:
+        specifier: 0.35.4
+        version: 0.35.4(@types/node@24.10.7)
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -717,7 +878,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.108.tgz(f0febf8438579ca14b55f991e3a22c74))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
+        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.110.tgz(f0febf8438579ca14b55f991e3a22c74))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
       axios:
         specifier: '>=1.15.2'
         version: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -882,11 +1043,11 @@ importers:
         specifier: 1.15.1
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:../../onlyoffice-ai-chat-0.5.108.tgz
-        version: file:onlyoffice-ai-chat-0.5.108.tgz(6f993adbd67efe75f0de02ae15eef291)
+        specifier: file:../../onlyoffice-ai-chat-0.5.110.tgz
+        version: file:onlyoffice-ai-chat-0.5.110.tgz(6f993adbd67efe75f0de02ae15eef291)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.108.tgz(6f993adbd67efe75f0de02ae15eef291))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
+        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.110.tgz(6f993adbd67efe75f0de02ae15eef291))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
       '@radix-ui/react-dialog':
         specifier: 1.1.15
         version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1139,7 +1300,7 @@ importers:
         version: 2.4.0
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.108.tgz(f0febf8438579ca14b55f991e3a22c74))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
+        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.110.tgz(f0febf8438579ca14b55f991e3a22c74))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -3253,9 +3414,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.108.tgz':
-    resolution: {integrity: sha512-OzoqjXrgoQJRkQWYJgkKtKggmfaJ3EOAop5KjH0cA8wbQ065uhPQ1NoSrHLquVb3hO+OI9p4hZAugZ0HZ2L4Sw==, tarball: file:onlyoffice-ai-chat-0.5.108.tgz}
-    version: 0.5.108
+  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.110.tgz':
+    resolution: {integrity: sha512-9LL9moSmvTPK6Pqm4K0euzLmfuHXqkB+740EkR6oRwjKlHTea2M5X+EA1dmRYXyyCjsEZhwx8zKyaW5c8c8Wcw==, tarball: file:onlyoffice-ai-chat-0.5.110.tgz}
+    version: 0.5.110
     peerDependencies:
       '@anthropic-ai/sdk': ^0.60.0
       '@assistant-ui/react': ^0.11.0
@@ -3348,11 +3509,11 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-xkIa/2t1kMCMfKiM4BWeXA65ytXEYusprr/nj1BUiCLlesk3htjaUrUoGBJd8LbVjHZSMuQxY/Nmv94oe6jUdg==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-lr+CfQe0FM17Wz+ikWoXWIkkH4bSHyvE9rAi2PKw6hOzOgD02Xnf9jI+tS5EtgfH/h3yQnYDwFZ0uNQ21j1Y1w==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.0.0
     engines: {node: '>=22'}
     peerDependencies:
-      '@onlyoffice/ai-chat': 0.5.108
+      '@onlyoffice/ai-chat': 0.5.110
       '@onlyoffice/document-editor-react': 2.1.1
       '@socket.io/component-emitter': 3.1.2
       axios: '>=1.15.2'
@@ -11185,8 +11346,7 @@ snapshots:
     dependencies:
       '@hpke/common': 1.10.1
 
-  '@img/colour@1.1.0':
-    optional: true
+  '@img/colour@1.1.0': {}
 
   '@img/sharp-darwin-arm64@0.35.4':
     optionalDependencies:
@@ -11540,7 +11700,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@23.1.1':
     optional: true
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.108.tgz(6f993adbd67efe75f0de02ae15eef291)':
+  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.110.tgz(6f993adbd67efe75f0de02ae15eef291)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
       assistant-stream: 0.2.47
@@ -11577,7 +11737,7 @@ snapshots:
       tailwind-merge: 3.6.0
       zustand: 5.0.7(@types/react@19.2.10)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.108.tgz(f0febf8438579ca14b55f991e3a22c74)':
+  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.110.tgz(f0febf8438579ca14b55f991e3a22c74)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
       assistant-stream: 0.2.47
@@ -11614,7 +11774,7 @@ snapshots:
       tailwind-merge: 3.6.0
       zustand: 5.0.7(@types/react@19.2.10)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
 
-  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.108.tgz(6f993adbd67efe75f0de02ae15eef291))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)':
+  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.110.tgz(6f993adbd67efe75f0de02ae15eef291))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@onlyoffice/docspace-api-sdk': 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -11653,7 +11813,7 @@ snapshots:
       xss: 1.0.15
       zoom-level: 2.5.0
     optionalDependencies:
-      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-0.5.108.tgz(6f993adbd67efe75f0de02ae15eef291)
+      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-0.5.110.tgz(6f993adbd67efe75f0de02ae15eef291)
       '@onlyoffice/document-editor-react': 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@socket.io/component-emitter': 3.1.2
       axios: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -11673,7 +11833,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.108.tgz(f0febf8438579ca14b55f991e3a22c74))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)':
+  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.110.tgz(f0febf8438579ca14b55f991e3a22c74))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@23.7.19)(katex@0.16.47)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@onlyoffice/docspace-api-sdk': 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -11712,7 +11872,7 @@ snapshots:
       xss: 1.0.15
       zoom-level: 2.5.0
     optionalDependencies:
-      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-0.5.108.tgz(f0febf8438579ca14b55f991e3a22c74)
+      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-0.5.110.tgz(f0febf8438579ca14b55f991e3a22c74)
       '@onlyoffice/document-editor-react': 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@socket.io/component-emitter': 3.1.2
       axios: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -13258,9 +13418,9 @@ snapshots:
       '@codemirror/state': 6.5.2
       '@codemirror/view': 6.38.2
 
-  '@uiw/react-codemirror@4.23.5(@babel/runtime@7.28.3)(@codemirror/autocomplete@6.20.3)(@codemirror/language@6.12.4)(@codemirror/lint@6.9.7)(@codemirror/search@6.7.2)(@codemirror/state@6.5.2)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.38.2)(codemirror@6.0.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@uiw/react-codemirror@4.23.5(@babel/runtime@7.29.7)(@codemirror/autocomplete@6.20.3)(@codemirror/language@6.12.4)(@codemirror/lint@6.9.7)(@codemirror/search@6.7.2)(@codemirror/state@6.5.2)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.38.2)(codemirror@6.0.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.29.7
       '@codemirror/commands': 6.11.0
       '@codemirror/state': 6.5.2
       '@codemirror/theme-one-dark': 6.1.3
@@ -17216,7 +17376,6 @@ snapshots:
       '@img/sharp-win32-ia32': 0.35.4
       '@img/sharp-win32-x64': 0.35.4
       '@types/node': 24.10.7
-    optional: true
 
   shebang-command@1.2.0:
     dependencies:

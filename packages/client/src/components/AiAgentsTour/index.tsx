@@ -144,7 +144,7 @@ const AiAgentsTour = ({
   hasFavorites,
   hasTrash,
 }: AiAgentsTourProps) => {
-  const { t } = useTranslation(["AiAgentsTour", "Common"]);
+  const { t, ready } = useTranslation(["AiAgentsTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
@@ -288,6 +288,12 @@ const AiAgentsTour = ({
     if (isMobileView || firstLoad || isSectionLoading || !isAiAgentsRoot)
       return;
     if (!user) return;
+    // The stand-in titles below are read once and frozen into the demo: the
+    // next run of this effect finds the demo active and returns. `AiAgentsTour`
+    // is not one of the preloaded namespaces (SRC_DIR/i18n.js), so with
+    // `useSuspense: false` it can still be a render behind the rest of the
+    // page — and a demo armed then keeps the raw keys for as long as it is up.
+    if (!ready) return;
 
     // Whatever the audience. Somebody who cannot create an agent has the most
     // to gain from this and the least without it: their empty section renders
@@ -347,6 +353,7 @@ const AiAgentsTour = ({
     user,
     standInForAi,
     reloadSection,
+    ready,
     t,
   ]);
 

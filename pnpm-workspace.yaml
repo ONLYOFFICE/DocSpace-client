@@ -1,6 +1,19 @@
 packages:
   - packages/*
 
+# Flat node_modules. The Windows build agent copies the Next.js standalone
+# output with xcopy, which fails past MAX_PATH (260 chars) on the isolated
+# `.pnpm/<name>@<version>_<hash>/node_modules/...` paths. See .npmrc.
+#
+# DO NOT reword or reformat the line below. buildtools enables it for the
+# Windows build by uncommenting it in place, matching `^# *nodeLinker: *hoisted`
+# (install/win/frontend-build.bat). The match is silent when it fails: the build
+# stays green and the layout stays isolated, which is exactly how the previous
+# breakage happened after the equivalent line was dropped from .npmrc. A
+# --node-linker flag cannot replace this - pnpm relinks the tree to the layout
+# declared here before running a script.
+# nodeLinker: hoisted
+
 # Dependency install/postinstall scripts (pnpm >= 11 requires an explicit
 # decision per package; unreviewed packages fail the install).
 allowBuilds:
@@ -85,8 +98,11 @@ overrides:
   form-data: ">=4.0.6"
   vite: ">=8.0.16"
   "@babel/core": ">=7.29.6 <8"
-  # Inherited libvips CVEs; pulled in transitively by next
-  sharp: ">=0.35.0"
+  # Inherited libvips CVEs: next still asks for ^0.34.x, so the override lifts
+  # its transitive copy. @docspace/login depends on sharp directly for the
+  # link-preview image and pins this same version - keep the two in step, an
+  # open range here would silently replace that manifest's exact pin.
+  sharp: "0.35.4"
   # Guards against ui-kit tarball drift until it is rebuilt/repacked; every
   # manifest now pins 8.3.0 directly, so this can be dropped afterwards
   react-router: "8.3.0"

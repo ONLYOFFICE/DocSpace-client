@@ -39,7 +39,7 @@
     "@docspace/shared": "workspace:*",
     "@google/genai": "1.52.0",
     "@mistralai/mistralai": "1.15.1",
-    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-0.5.108.tgz",
+    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-0.5.110.tgz",
     "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tgz",
     "@radix-ui/react-dialog": "1.1.15",
     "@radix-ui/react-dropdown-menu": "2.1.16",

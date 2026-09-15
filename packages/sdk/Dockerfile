@@ -38,6 +38,12 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 # before `pnpm install --frozen-lockfile` runs.
 COPY *.tgz ./
 
+# `--frozen-lockfile` installs every package the lockfile names, not just the
+# ones the workspace projects present in this image depend on. Two of them are
+# tarballs under packages/client, so they have to be here even though this image
+# never builds the client.
+COPY packages/client/*.tgz ./packages/client/
+
 # Copy the source code with correct directory structure
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json

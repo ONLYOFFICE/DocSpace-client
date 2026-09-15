@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Pretplata će biti automatski obnovljena <1>{{date}}</1>",
   "TopUpAndBuy": "Dopuni i Kupi",
   "TopUpHint": "Vaš novčanik će biti dopunjen za <1>{{amount}}</1>, a izabrana pretplata će biti automatski kupljena. Iznosi dopune se zaokružuju na sledeći celi dolar.",
+  "TopUpWalletHint": "Nema dovoljno kredita za izabranu {{service}} pretplatu. Dopunite novčanik, a zatim se vratite da biste dovršili kupovinu.",
   "TotalDueTodayTooltip": "Danas plaćate samo za izabrani broj korisnika za preostale dane do datuma naplate. Ubuduće će se pun iznos naplaćivati jednom po ciklusu naplate, na vaš uobičajeni datum naplate.",
   "TotalMonthly": "Ukupno mesečno",
   "TrialAvailable": "Dostupna je besplatna jednomesečna proba. Kreditna kartica nije potrebna.",

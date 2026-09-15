@@ -76,7 +76,9 @@ const TRANSACTIONS = [
     date: "2025-12-09T10:15:00.0000000Z",
     description: "AI services",
     details: "Requests",
-    agentTitle: "AI services",
+    sourceId: "10",
+    sourceTitle: "Assistant",
+    sourceType: "Agent",
     serviceUnit: "requests",
     quantity: 120,
     participantDisplayName: "Admin User",
@@ -88,7 +90,6 @@ const TRANSACTIONS = [
     date: "2025-12-01T08:00:00.0000000Z",
     description: "Wallet top-up",
     details: "Card",
-    agentTitle: "Top up",
     serviceUnit: "",
     quantity: 0,
     participantDisplayName: "Administrator",
@@ -200,6 +201,35 @@ test.describe("Billing wallet", () => {
     await expect(autoTopUpButton(page)).toHaveCount(0);
 
     await expectScreenshot(page, ["desktop", "wallet", "never-topped-up.png"]);
+  });
+
+  test("isDelayedPaymentMethod announces the transfer and hides auto top-up", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      isDelayedPaymentMethod: true,
+    });
+
+    await openWallet(page, baseUrl);
+
+    await expect(
+      page.getByText(
+        "SEPA transfer sent. Funds can take several business days to arrive. Your Wallet balance will update automatically after the funds arrive. You can still top up again, including by card.",
+      ),
+    ).toBeVisible();
+    await expect(topUpButton(page)).toBeEnabled();
+    // the wallet cannot be refilled automatically before the transfer settles
+    await expect(autoTopUpButton(page)).toHaveCount(0);
+
+    await expectScreenshot(page, [
+      "desktop",
+      "wallet",
+      "delayed-payment-method.png",
+    ]);
   });
 
   test("a configured auto top-up states its thresholds", async ({
@@ -476,6 +506,63 @@ test.describe("Billing wallet", () => {
     await expect(page.getByTestId("top_up_amount_input").first()).toBeVisible();
 
     await expectScreenshot(page, ["desktop", "wallet", "top-up-dialog.png"]);
+  });
+
+  test("isDelayedPaymentMethod warns in the top-up dialog that the funds settle later", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      isDelayedPaymentMethod: true,
+    });
+
+    await openWallet(page, baseUrl);
+
+    await topUpButton(page).click();
+
+    await expect(page.getByTestId("top_up_amount_input").first()).toBeVisible();
+    await expect(
+      page.getByText(
+        "Bank transfers may take several business days to process. Credits will be added to your Wallet only after the funds arrive.",
+      ),
+    ).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "wallet",
+      "top-up-dialog-delayed.png",
+    ]);
+  });
+
+  test("isDelayedPaymentMethod ends an instant top-up with the settlement notice", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      isDelayedPaymentMethod: true,
+    });
+    mockRequest.use(
+      http.post(apiUrl("portal/payment/deposit"), () => jsonResponse(true)),
+    );
+
+    await openWallet(page, baseUrl);
+    await topUpButton(page).click();
+
+    const amount = page.getByTestId("top_up_amount_input").first();
+    await amount.fill("25");
+    await page.getByTestId("first_topup_continue_to_stripe").click();
+
+    await expect(page.getByTestId("toast-content")).toContainText(
+      "Bank transfers may take several business days to process. Credits will be added to your Wallet only after the funds arrive.",
+    );
+    await expect(amount).toHaveCount(0);
+    await expect(page.getByText("Wallet has been successfully topped up")).toHaveCount(0);
   });
 
   test("the auto top-up dialog asks for the two thresholds", async ({

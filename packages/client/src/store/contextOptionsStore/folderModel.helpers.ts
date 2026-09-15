@@ -408,7 +408,7 @@ export const getFolderModelImpl = (
     uploadFiles,
   ];
 
-  const options: (TContextOption | null)[] = isAIAgentsFolder
+  const options: TContextOption[] = isAIAgentsFolder
     ? [
         {
           key: "new-agent",
@@ -454,7 +454,7 @@ export const getFolderModelImpl = (
               ...templateGallery,
               { key: "separator", isSeparator: true },
               uploadFiles,
-              showUploadFolder ? uploadFolder : null,
+              ...(showUploadFolder ? [uploadFolder] : []),
             ];
   if (
     !isAIAgents() &&

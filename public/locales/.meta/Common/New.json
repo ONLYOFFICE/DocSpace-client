@@ -3,7 +3,7 @@
   "content": "New",
   "content_en_sha1_hash": "6403f2b7eb2aaafe6de34cbf2a029b01afebc512",
   "created_at": "2025-05-19T21:30:46.723Z",
-  "updated_at": "2026-08-26T16:06:02.290Z",
+  "updated_at": "2026-09-09T15:42:08.487Z",
   "comment": {
     "text": "This is a short label displayed on a badge, indicating a new feature or item.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 645,
+      "line_number": 647,
       "context": "mainButtonProps={\n isActionButtonEnabled && !isMobile\n ? {\n isDropdown: true,\n model: desktopModel,\n text: t(\"Common:New\"),\n }\n : undefined\n }\n />\n }",
       "module": "/packages/sdk"
     },

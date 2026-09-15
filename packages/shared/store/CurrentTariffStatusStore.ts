@@ -220,6 +220,10 @@ class CurrentTariffStatusStore {
     return this.payerInfo.payer;
   }
 
+  get isDelayedPaymentMethod() {
+    return this.payerInfo.isDelayedPaymentMethod === true;
+  }
+
   fetchPayerInfo = async (isRefresh?: boolean) => {
     try {
       const res = await getWalletPayer(isRefresh);

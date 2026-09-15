@@ -69,6 +69,9 @@ type FileManagementProps = {
 
   organizeRoomsGrouping?: boolean;
   setOrganizeRoomsGrouping?: FilesSettingsStore["setOrganizeRoomsGrouping"];
+
+  showQuickActions?: boolean;
+  setShowQuickActions?: FilesSettingsStore["setShowQuickActions"];
 };
 
 const FileManagement = ({
@@ -94,6 +97,9 @@ const FileManagement = ({
 
   organizeRoomsGrouping,
   setOrganizeRoomsGrouping,
+
+  showQuickActions,
+  setShowQuickActions,
 }: FileManagementProps) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
 
@@ -125,6 +131,10 @@ const FileManagement = ({
   const onChangeOpenEditorInSameTab = React.useCallback(() => {
     setOpenEditorInSameTab?.(!openEditorInSameTab);
   }, [setOpenEditorInSameTab, openEditorInSameTab]);
+
+  const onChangeShowQuickActions = React.useCallback(() => {
+    setShowQuickActions?.(!showQuickActions);
+  }, [setShowQuickActions, showQuickActions]);
 
   return (
     <div className={styles.styledWrapper} data-testid="profile-file-management">
@@ -208,6 +218,15 @@ const FileManagement = ({
           />
           <Text>{t("GroupByRooms")}</Text>
         </div>
+        <div className={styles.toggleBtnWrapper}>
+          <ToggleButton
+            className={classNames("show-quick-actions", styles.toggleBtn)}
+            onChange={onChangeShowQuickActions}
+            isChecked={showQuickActions}
+            dataTestId="show_quick_actions_toggle_button"
+          />
+          <Text>{t("ShowQuickActions")}</Text>
+        </div>
       </div>
     </div>
   );
@@ -242,6 +261,8 @@ export default inject(
       setHideConfirmCancelOperation,
       organizeRoomsGrouping,
       setOrganizeRoomsGrouping,
+      showQuickActions,
+      setShowQuickActions,
     } = filesSettingsStore;
     const { logoText } = settingsStore;
 
@@ -274,6 +295,8 @@ export default inject(
       setHideConfirmCancelOperation,
       organizeRoomsGrouping,
       setOrganizeRoomsGrouping,
+      showQuickActions,
+      setShowQuickActions,
     };
   },
 )(observer(FileManagement));

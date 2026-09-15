@@ -198,10 +198,7 @@ const ProfileSettings = ({
 
   return (
     <StyledParam increaseGap>
-      {/* width:100% so the scaled ComboBox spans the dialog width instead of
-          shrinking to its content (the shared StyledParam info block sizes to
-          content by default). */}
-      <div className=" set_room_params-info" style={{ width: "100%" }}>
+      <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
             {t("Common:AIAgentModel", { defaultValue: "Model" })}

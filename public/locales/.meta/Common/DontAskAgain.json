@@ -3,7 +3,7 @@
   "content": "Don't ask for the file name again when creating a file.",
   "content_en_sha1_hash": "cd947c9fb1357ee03ea6de40d2e9268262a173c5",
   "created_at": "2026-08-31T18:23:01.409Z",
-  "updated_at": "2026-08-31T19:19:01.487Z",
+  "updated_at": "2026-09-09T15:42:08.295Z",
   "comment": {
     "text": "Label for a checkbox or toggle button in file management settings and dialogs, used to disable the file name prompt during file creation.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
-      "line_number": 140,
+      "line_number": 150,
       "context": "className={classNames(\"ask-again\", styles.toggleBtn)}\n onChange={onChangeKeepNewFileName}\n isChecked={keepNewFileName}\n dataTestId=\"ask_again_toggle_button\"\n />\n <Text>{t(\"Common:DontAskAgain\")}</Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>\n <ToggleButton\n className={classNames(\"save-copy-original \", styles.toggleBtn)}",
       "module": "/packages/client"
     },

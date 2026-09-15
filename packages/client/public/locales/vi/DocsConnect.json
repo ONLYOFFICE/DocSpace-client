@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Gói đăng ký sẽ tự động gia hạn <1>vào {{date}}</1>",
   "TopUpAndBuy": "Nạp tiền & Mua",
   "TopUpHint": "Ví của bạn sẽ được nạp thêm <1>{{amount}}</1> và gói đăng ký đã chọn sẽ được mua tự động. Số tiền nạp được làm tròn lên đến đơn vị đô la nguyên gần nhất.",
+  "TopUpWalletHint": "Không có đủ tín dụng cho gói đăng ký {{service}} đã chọn. Hãy nạp tiền vào ví của bạn, sau đó quay lại để hoàn tất giao dịch mua.",
   "TotalDueTodayTooltip": "Hôm nay, bạn chỉ thanh toán cho số lượng người dùng đã chọn trong những ngày còn lại cho đến ngày lập hóa đơn của bạn. Từ đó trở đi, toàn bộ số tiền sẽ được tính một lần mỗi chu kỳ thanh toán vào ngày lập hóa đơn định kỳ của bạn.",
   "TotalMonthly": "Tổng chi phí hàng tháng",
   "TrialAvailable": "Có bản dùng thử miễn phí một tháng. Không cần thẻ tín dụng.",

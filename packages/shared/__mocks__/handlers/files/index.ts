@@ -33,8 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { filesSettingsHandler } from "./filesSettings";
+import {
+  filesSettingsHandler,
+  showQuickActionsHandler,
+} from "./filesSettings";
 import { foldersTreeHandler } from "./foldersTree";
+import { filesUsedSpaceHandler } from "./filesUsedSpace";
 import { folderHandler, folderInfoHandler } from "./folder";
 import {
   validatePublicRoomKeyHandler,
@@ -142,6 +146,7 @@ export {
 export {
   foldersTreeHandler,
   filesSettingsHandler,
+  showQuickActionsHandler,
   validatePublicRoomKeyHandler,
   roomListHandler,
   roomPrimaryLinkHandler,
@@ -198,6 +203,7 @@ export {
   getEmptyInvitationLink,
   folderHistoryHandler,
   folderHistoryReportHandlers,
+  filesUsedSpaceHandler,
 };
 
 // Note: recentHandler, sharedWithMeHandler, favoritesHandler are NOT included here
@@ -205,6 +211,9 @@ export {
 // They should be added explicitly in tests that need them.
 
 export const filesHandlers = (port: string) => [
+  // Ahead of the folder handlers: their `files/:id` pattern also swallows
+  // named endpoints under files/, and the first match wins.
+  filesUsedSpaceHandler(port),
   //foldersTreeHandler(port),
   // agentFolderResultStorageHandler, agentFolderKnowledgeHandler and agentFolderChatHandler filter by searchArea parameter
   agentFolderResultStorageHandler(port),
@@ -213,6 +222,7 @@ export const filesHandlers = (port: string) => [
   resultStorageFolderHandler(port),
   rootHandler(port),
   filesSettingsHandler(port),
+  showQuickActionsHandler(port),
   validatePublicRoomKeyHandler(port),
   roomListHandler(port),
   agentFolderInfoHandler(port),

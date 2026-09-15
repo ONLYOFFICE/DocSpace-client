@@ -45,6 +45,10 @@
     gap: 4px;
   }
 
+  > :global(.set_room_params-info) {
+    width: 100%;
+  }
+
   :global(.set_room_params-info) {
     display: flex;
     flex-direction: column;

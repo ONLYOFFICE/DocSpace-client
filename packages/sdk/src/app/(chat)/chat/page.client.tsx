@@ -158,7 +158,8 @@ const ChatPage = ({
   React.useEffect(() => {
     frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
     frameCallCommand("setIsLoaded");
-  }, []);
+    if (!canUseAi) frameCallEvent({ event: "onNoAccess" });
+  }, [canUseAi]);
 
   const getAgentRoomId = React.useCallback(() => {
     if (!agentId) return null;

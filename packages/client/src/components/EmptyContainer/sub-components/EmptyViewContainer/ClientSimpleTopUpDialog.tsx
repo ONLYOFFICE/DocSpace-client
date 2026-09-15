@@ -71,11 +71,8 @@ const ClientSimpleTopUpDialog: React.FC<ClientSimpleTopUpDialogProps> = ({
     return res?.data?.response as string | undefined;
   };
 
-  const fetchCustomerInfo = async (isRefresh?: boolean) => {
-    const payerInfo =
-      await store.currentTariffStatusStore.fetchPayerInfo(isRefresh);
-    return payerInfo?.email ?? null;
-  };
+  const fetchCustomerInfo = (isRefresh?: boolean) =>
+    store.currentTariffStatusStore.fetchPayerInfo(isRefresh);
 
   const walletBalance = store.paymentStore.walletBalance;
   const walletCodeCurrency = store.paymentStore.walletCodeCurrency;
@@ -105,6 +102,9 @@ const ClientSimpleTopUpDialog: React.FC<ClientSimpleTopUpDialogProps> = ({
       fetchBalance={fetchBalance}
       walletCustomerStatusNotActive={
         store.currentTariffStatusStore.walletCustomerStatusNotActive
+      }
+      isDelayedPaymentMethod={
+        store.currentTariffStatusStore.isDelayedPaymentMethod
       }
       language={language}
       fetchCardLinked={fetchCardLinked}

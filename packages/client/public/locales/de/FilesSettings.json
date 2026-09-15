@@ -2,5 +2,6 @@
   "CancellaionNotification": "Abbruchbenachrichtigung nicht mehr anzeigen",
   "DefaultHomepage": "Standard-Startseite",
   "GroupByRooms": "Nach Räumen gruppieren",
-  "OpenSameTab": "Editoren im selben Tab öffnen"
+  "OpenSameTab": "Editoren im selben Tab öffnen",
+  "ShowQuickActions": "Schnellaktionen anzeigen"
 }

@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "订阅将于 <1>{{date}}</1> 自动续订",
   "TopUpAndBuy": "充值并购买",
   "TopUpHint": "您的钱包将充值 <1>{{amount}}</1>，所选订阅将自动购买。充值金额将向上取整至最接近的整数美元。",
+  "TopUpWalletHint": "所选 {{service}} 订阅的积分不足。请为您的钱包充值，然后返回完成购买。",
   "TotalDueTodayTooltip": "今天，您只需为所选用户数量支付至账单日期前剩余天数的费用。此后，每个账单周期将在您的常规账单日按全额收费一次。",
   "TotalMonthly": "每月总计",
   "TrialAvailable": "提供为期一个月的免费试用，无需信用卡。",

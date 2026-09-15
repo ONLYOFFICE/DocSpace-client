@@ -187,6 +187,12 @@ class FilesSettingsStore {
 
   organizeRoomsGrouping = false;
 
+  // Shown unless this user has turned it off. Defaulting to `true` rather than
+  // to "unknown" is deliberate: it is the right value for everyone who has
+  // never hidden the banner, and it stands only until `getFilesSettings`
+  // resolves and overwrites it with the stored one.
+  showQuickActions = true;
+
   extsFilesVectorized: string[] = [];
 
   externalShare = true;
@@ -413,6 +419,23 @@ class FilesSettingsStore {
       .changeOpenEditorInSameTab(data)
       .then((res) => this.setFilesSetting("openEditorInSameTab", res))
       .catch((e) => toastr.error(e as string));
+  };
+
+  // Applied before the request resolves: the caller hides the banner and
+  // raises its toast in the same gesture, so waiting for the round trip would
+  // leave the tiles on screen under a toast announcing they are gone. A
+  // rejected request puts the previous value back.
+  setShowQuickActions = async (data: boolean) => {
+    const previous = this.showQuickActions;
+    this.showQuickActions = data;
+
+    try {
+      const res = await api.files.changeShowQuickActions(data);
+      this.setFilesSetting("showQuickActions", res);
+    } catch (e) {
+      this.showQuickActions = previous;
+      toastr.error(e as string);
+    }
   };
 
   setOrganizeRoomsGrouping = async (data: boolean) => {

@@ -3,7 +3,7 @@
   "content": "Room",
   "content_en_sha1_hash": "90e2fca9e9906b8390346daa20885b3a71a7a70e",
   "created_at": "2025-05-19T21:30:48.160Z",
-  "updated_at": "2026-09-04T07:59:41.632Z",
+  "updated_at": "2026-09-09T15:42:08.562Z",
   "comment": {
     "text": "This is a label for a \"Room\" in DocSpace, referring to a collaborative workspace or folder. It appears in filter options and as a label in developer tools settings.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/utils.ts",
+      "line_number": 50,
+      "context": "return t(\"AIAgent\");\n case \"File\":\n return t(\"File\");\n case \"Folder\":\n return t(\"Folder\");\n case \"Room\":\n return t(\"Room\");\n case \"Form\":\n return t(\"FormSpaceTitle\");\n default:\n return null;",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
       "line_number": 1504,

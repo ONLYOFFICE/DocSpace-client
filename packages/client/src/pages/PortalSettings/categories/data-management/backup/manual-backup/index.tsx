@@ -218,8 +218,12 @@ export default inject(
       setDeleteThirdPartyDialogVisible,
     } = dialogsStore;
 
-    const { isNotPaidPeriod, walletCustomerEmail, fetchPayerInfo } =
-      currentTariffStatusStore;
+    const {
+      isNotPaidPeriod,
+      walletCustomerEmail,
+      fetchPayerInfo,
+      isDelayedPaymentMethod,
+    } = currentTariffStatusStore;
 
     const {
       providers,
@@ -356,6 +360,7 @@ export default inject(
       walletBalance,
       walletCodeCurrency,
       isCardLinked: isCardLinkedToPortal,
+      isDelayedPaymentMethod,
       fetchWalletBalance: paymentStore.fetchWalletBalance,
 
       language,

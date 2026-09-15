@@ -1,0 +1,29 @@
+{
+  "key_path": "TransactionSourceRoom",
+  "content": "Room: {{roomName}}",
+  "content_en_sha1_hash": "1f37c3ea9fefe1bd49d411ce2bf752253a8f7fde",
+  "created_at": "2026-09-09T15:41:43.265Z",
+  "updated_at": "2026-09-09T15:43:30.990Z",
+  "comment": {
+    "text": "A label in the transaction history list identifying the source of a transaction, where {{roomName}} is the name of the room.",
+    "is_auto": true,
+    "updated_at": "2026-09-09T15:43:30.990Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/utils.ts",
+      "line_number": 72,
+      "context": "case \"File\":\n return t(\"TransactionSourceFile\", { fileName: title });\n case \"Folder\":\n return t(\"TransactionSourceFolder\", { folderName: title });\n case \"Room\":\n return t(\"TransactionSourceRoom\", { roomName: title });\n case \"Form\":\n return t(\"TransactionSourceFormSpace\", { formSpaceName: title });\n default:\n return title;\n }",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

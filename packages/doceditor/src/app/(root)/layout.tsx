@@ -40,16 +40,23 @@ import { headers, cookies } from "next/headers";
 import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+import { getLinkPreview } from "@docspace/shared/utils/link-preview";
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
 import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 
 import "@docspace/shared/styles/theme.scss";
 
 import ChunkRetryScript from "@docspace/shared/components/chunk-retry-script";
+import LinkPreviewMeta from "@docspace/shared/components/link-preview-meta";
 
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
-import { getColorTheme, getSettings, getUser } from "@/utils/actions";
+import {
+  getColorTheme,
+  getSettings,
+  getUser,
+  getWhiteLabelLogos,
+} from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 import "@/styles/globals.scss";
 
@@ -73,10 +80,11 @@ export default async function RootLayout({
     return null;
   }
 
-  const [user, settings, colorTheme] = await Promise.all([
+  const [user, settings, colorTheme, logos] = await Promise.all([
     getUser(),
     getSettings(),
     getColorTheme(),
+    getWhiteLabelLogos(),
   ]);
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
@@ -102,6 +110,9 @@ export default async function RootLayout({
 
   const stylesUrl = sanitizeStylesUrl(hdrs.get("x-sdk-config-styles-url"));
 
+  const documentTitle =
+    typeof settings === "object" ? settings.greetingSettings : undefined;
+
   const baseURL = await getBaseUrl();
 
   if (settings === "access-restricted") {
@@ -115,9 +126,17 @@ export default async function RootLayout({
     sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
   });
 
+  const linkPreview = getLinkPreview(
+    typeof settings === "object" ? settings.logoText : undefined,
+    translations,
+    locale,
+    logos,
+  );
+
   return (
     <html lang="en" translate="no">
       <head>
+        {documentTitle ? <title>{documentTitle}</title> : null}
         <meta charSet="utf-8" />
         <ChunkRetryScript />
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
@@ -128,6 +147,7 @@ export default async function RootLayout({
         <meta name="google" content="notranslate" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        <LinkPreviewMeta baseUrl={baseURL} {...linkPreview} />
         {stylesUrl ? (
           <link
             id="sdk-custom-styles"

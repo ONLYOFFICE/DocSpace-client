@@ -2,5 +2,6 @@
   "CancellaionNotification": "Nezobrazovať znova oznámenie o zrušení",
   "DefaultHomepage": "Predvolená domovská stránka",
   "GroupByRooms": "Zoskupiť podľa miestností",
-  "OpenSameTab": "Otvárať editory v rovnakej karte"
+  "OpenSameTab": "Otvárať editory v rovnakej karte",
+  "ShowQuickActions": "Zobrazovať rýchle akcie"
 }

@@ -3,7 +3,7 @@
   "content": "AI Agent: {{AgentName}}",
   "content_en_sha1_hash": "614985a909a5ac3847fb1e51c41ba81d4699fbf7",
   "created_at": "2026-06-01T21:20:07.275Z",
-  "updated_at": "2026-06-01T21:51:33.380Z",
+  "updated_at": "2026-09-09T15:42:09.207Z",
   "comment": {
     "text": "Text label in transaction history rows or table cells identifying the AI agent. `{{AgentName}}` is the name of the agent.",
     "is_auto": true,
@@ -12,15 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/RowView/RowBody.tsx",
-      "line_number": 115,
-      "context": "];\n \n if (serviceName === AI_TOOLS && transaction.agentTitle) {\n children.push(\n <Text key=\"source\" fontWeight={600} fontSize=\"11px\">\n {t(\"AIAgentName\", { AgentName: transaction.agentTitle })}\n </Text>,\n );\n }\n \n if (transaction.participantDisplayName) {",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableBody.tsx",
-      "line_number": 93,
-      "context": "</TableCell>\n {serviceName === AI_TOOLS ? (\n <TableCell>\n <Text fontWeight={600} fontSize=\"11px\">\n {transaction.agentTitle\n ? t(\"AIAgentName\", { AgentName: transaction.agentTitle })\n : \"—\"}\n </Text>\n </TableCell>\n ) : null}\n <TableCell>",
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/utils.ts",
+      "line_number": 66,
+      "context": "type: TransactionSourceType,\n title: string,\n ) => {\n switch (type) {\n case \"Agent\":\n return t(\"AIAgentName\", { AgentName: title });\n case \"File\":\n return t(\"TransactionSourceFile\", { fileName: title });\n case \"Folder\":\n return t(\"TransactionSourceFolder\", { folderName: title });\n case \"Room\":",
       "module": "/libs/ui-kit"
     }
   ],

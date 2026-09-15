@@ -370,6 +370,8 @@ export type TFilesSettings = {
   openEditorInSameTab: boolean;
   displayFileExtension: boolean;
   organizeRoomsGrouping: boolean;
+  /** Whether the quick actions banner is shown (see PUT files/showquickactions). */
+  showQuickActions: boolean;
   /** Whether the room lifetime confirmation dialog is hidden (see PUT files/hideconfirmroomlifetime). */
   hideConfirmRoomLifetime?: boolean;
   /** Whether the cancel-operation confirmation dialog is hidden (see PUT files/hideconfirmcanceloperation). */

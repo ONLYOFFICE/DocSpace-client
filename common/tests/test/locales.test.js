@@ -678,29 +678,61 @@ describe("Locales Tests", () => {
       .sort();
 
     // Many Common keys are consumed only by ui-kit components. Its source is
-    // not in this repo, so scan the built bundle for literal key occurrences;
-    // a key that appears there is in use, not dead.
+    // not in this repo, so the built bundle has to stand in for it -- but only
+    // at the shapes a translation key can actually appear in. Accepting any
+    // quoted literal would mark every key whose text collides with an
+    // unrelated string somewhere in ~1200 built modules ("Add", "Name",
+    // "Search", "Files") as used, which is most of the short ones, and the
+    // test would stop reporting dead keys at all.
+    //
+    // Two shapes carry a key. A direct call -- `t("Key")`, `t("NS:Key")`,
+    // `getCommonTranslation("Key")`, `translate("Key")` -- and a property
+    // whose name ends in "Key", which is how a key gets handed to a component
+    // to resolve later: `i18nKey` (<Trans>), `tKey`, `defaultTitleKey`. The
+    // property rule is keyed on the suffix rather than on that list, so a new
+    // prop does not quietly turn its key into a dead one.
+    const KEY = String.raw`(?:[A-Za-z0-9_]+:)?[A-Za-z0-9_.-]+`;
+    const UI_KIT_KEY_PATTERNS = [
+      new RegExp(
+        String.raw`\b(?:t|translate|getCommonTranslation)\(\s*(["'\`])(${KEY})\1`,
+        "g",
+      ),
+      new RegExp(
+        String.raw`\b[A-Za-z_$][A-Za-z0-9_$]*[Kk]ey\s*[:=]\s*(["'\`])(${KEY})\1`,
+        "g",
+      ),
+    ];
+
     const uiKitDist = resolveUiKitDist();
-    const uiKitText = uiKitDist
-      ? getAllFiles(uiKitDist, [])
-          .filter((f) => f && f.endsWith(".js"))
-          .map((f) => {
-            try {
-              return fs.readFileSync(f, "utf8");
-            } catch {
-              return "";
+    const uiKitKeys = new Set();
+
+    if (uiKitDist) {
+      getAllFiles(uiKitDist, [])
+        .filter((f) => f && f.endsWith(".js"))
+        .forEach((f) => {
+          let text;
+          try {
+            text = fs.readFileSync(f, "utf8");
+          } catch {
+            return;
+          }
+
+          UI_KIT_KEY_PATTERNS.forEach((pattern) => {
+            pattern.lastIndex = 0;
+
+            let match = pattern.exec(text);
+            while (match !== null) {
+              // Bare and namespace-prefixed forms name the same key; the
+              // caller compares against namespace-stripped keys.
+              const key = match[2];
+              uiKitKeys.add(key.slice(key.indexOf(":") + 1));
+              match = pattern.exec(text);
             }
-          })
-          .join("\n")
-      : "";
-    // Keys appear in the bundle either bare ("AINewChat") or namespace-
-    // prefixed ("Common:AINewChat"), so match both forms.
-    const usedInUiKit = (key) =>
-      [`"`, `'`, "`"].some(
-        (q) =>
-          uiKitText.includes(`${q}${key}${q}`) ||
-          uiKitText.includes(`:${key}${q}`),
-      );
+          });
+        });
+    }
+
+    const usedInUiKit = (key) => uiKitKeys.has(key);
 
     const notFoundi18nKeys = allEnKeys.filter(
       (k) => !allJsTranslationKeys.includes(k) && !usedInUiKit(k),

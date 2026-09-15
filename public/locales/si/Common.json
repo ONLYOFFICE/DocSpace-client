@@ -1280,6 +1280,7 @@
   "LinkNewCardDesc": "එකතු කිරීමට, පහත බොත්තම ක්ලික් කරන්න",
   "LinkNoExpiration": "සබැඳියේ <1>කල් ඉකුත් වීමේ දිනයක් නැත</1>",
   "LinkNoLongerAvailable": "මෙම සබැඳිය වැඩිදුරටත් ලබා ගත නොහැක",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} යනු ලේඛන නිර්මාණය කිරීමට, කාමරවල සහයෝගයෙන් කටයුතු කිරීමට සහ ආකෘතිපත්‍ර මගින් දත්ත රැස් කිරීමට හැකි වැඩ අවකාශයකි, මේ සියල්ල එකම ස්ථානයක.",
   "LinkProtectedWithPassword": "මුළු සබැඳියාවම මුරපදයකින් ආරක්ෂා කර ඇත.",
   "LinkRemoved": "සබැඳිය ඉවත් කරන ලදී",
   "LinkSettings": "සබැඳියේ සැකසුම්",

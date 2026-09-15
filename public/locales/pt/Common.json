@@ -1280,6 +1280,7 @@
   "LinkNewCardDesc": "Clique no botão abaixo para adicionar um",
   "LinkNoExpiration": "O link <1>não tem data de expiração</1>",
   "LinkNoLongerAvailable": "Link indisponível",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} é um espaço de trabalho onde pode criar documentos, colaborar em salas e recolher dados com formulários, tudo num só lugar.",
   "LinkProtectedWithPassword": "O link é protegido por senha.",
   "LinkRemoved": "Link removido",
   "LinkSettings": "Configurações de link",

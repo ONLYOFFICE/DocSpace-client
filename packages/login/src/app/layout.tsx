@@ -47,7 +47,10 @@ import {
   getFontFamilyDependingOnLanguage,
 } from "@docspace/ui-kit/providers/theme/rtl-utils";
 import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+import { getLinkPreview } from "@docspace/shared/utils/link-preview";
 import ChunkRetryScript from "@docspace/shared/components/chunk-retry-script";
+import LinkPreviewMeta from "@docspace/shared/components/link-preview-meta";
 
 import { Providers } from "@/providers";
 import {
@@ -176,6 +179,17 @@ export default async function RootLayout({
     (theme) => theme.id === colorTheme.selected,
   );
 
+  const baseUrl = await getBaseUrl();
+
+  const documentTitle =
+    typeof settings !== "string" ? settings?.greetingSettings : undefined;
+
+  const linkPreview = getLinkPreview(
+    typeof settings !== "string" ? settings?.logoText : undefined,
+    translations,
+    locale,
+  );
+
   const styles = {
     "--color-scheme-main-accent": currentColorScheme?.main?.accent,
     "--color-scheme-text-accent": currentColorScheme?.text?.accent,
@@ -190,6 +204,7 @@ export default async function RootLayout({
   return (
     <html lang="en" translate="no">
       <head>
+        {documentTitle ? <title>{documentTitle}</title> : null}
         <link rel="icon" type="image/x-icon" href="/logo.ashx?logotype=3" />
         <link rel="mask-icon" href="/logo.ashx?logotype=3" />
         <link
@@ -204,6 +219,7 @@ export default async function RootLayout({
           content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
         <meta name="google" content="notranslate" />
+        <LinkPreviewMeta baseUrl={baseUrl} {...linkPreview} />
       </head>
       <body
         style={styles}

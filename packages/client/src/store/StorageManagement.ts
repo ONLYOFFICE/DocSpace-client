@@ -129,7 +129,7 @@ class StorageManagement {
     const { usersStore } = this.peopleStore;
     const { getPeopleListItem } = usersStore;
     const { isFreeTariff } = this.currentQuotaStore;
-    const { standalone } = this.settingsStore;
+    const { standalone, aiServicesEnabled } = this.settingsStore;
 
     this.userFilterData.pageCount = FILTER_COUNT;
     this.userFilterData.sortBy = SortByFieldName.UsedSpace;
@@ -191,8 +191,16 @@ class StorageManagement {
         requests.push(
           getUserList(this.userFilterData, userAbortRequests.signal),
           getRooms(this.roomFilterData, roomAbortRequests.signal),
-          getAIAgents(this.roomFilterData, roomAbortRequests.signal),
         );
+
+        // The AI agents list is served by the AI product, whose controllers
+        // answer 403 once AI is turned off for the portal (Settings ->
+        // Customization -> AI services). Asking anyway rejects the whole
+        // Promise.all below and leaves the page empty behind a 403 toast.
+        if (aiServicesEnabled)
+          requests.push(
+            getAIAgents(this.roomFilterData, roomAbortRequests.signal),
+          );
       }
 
       [

@@ -75,10 +75,11 @@ committed tarball `onlyoffice-apps-ui-kit.tgz` at the root, which the six apps
 depend on via `"file:../../onlyoffice-apps-ui-kit.tgz"`.
 
 The tarball is built **in the ui-kit repository** (`pnpm build && pnpm pack`
-there) and copied here by hand. To pick up a new ui-kit version: drop the new
-`onlyoffice-apps-ui-kit.tgz` at the repo root, run `pnpm install` to relink the
-`file:` dependency, and commit the tarball together with any
-`pnpm-lock.yaml` changes it causes. There is no build script on this side.
+there) and copied here. To pick up a new ui-kit version run
+`pnpm run update-ui-kit`, then commit `onlyoffice-apps-ui-kit.tgz` together
+with the `pnpm-lock.yaml` change. Do not copy the file and run `pnpm install`
+yourself - the specifier never changes, so pnpm keeps the cached copy and the
+update silently does not happen; see `.claude/rules/pnpm.md`.
 
 The tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's `main`,
 `module`, `types` and `exports` fields live under `publishConfig`, which only

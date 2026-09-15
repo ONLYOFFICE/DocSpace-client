@@ -74,12 +74,28 @@ checked out inside this repo at all. The six apps that use it depend on a
 committed tarball at the repo root via
 `"file:../../onlyoffice-apps-ui-kit.tgz"`.
 
-The tarball is built and packed in the `docspace-ui-kit-react` repository and
-copied here by hand; there is no build script on this side. To update: replace
-`onlyoffice-apps-ui-kit.tgz` at the root, run `pnpm install`, and commit the
-tarball with the resulting `pnpm-lock.yaml` change. The filename carries no
-version on purpose - the version lives in the package and shows up in the
-lockfile entry, so a bump touches no app manifest.
+The tarball is built and packed in the `docspace-ui-kit-react` repository
+(`pnpm build && pnpm pack`) and copied here; there is no build script on this
+side. The filename carries no version on purpose - the version lives in the
+package and shows up in the lockfile entry, so a bump touches no app manifest.
+
+**Do not update it by hand.** Copying the `.tgz` over and running `pnpm install`
+silently installs nothing: the `file:onlyoffice-apps-ui-kit.tgz` specifier is
+unchanged, pnpm matches the integrity already in `pnpm-lock.yaml` and keeps the
+cached copy. The install is green, the lockfile is untouched, and node_modules
+still holds the previous build. `pnpm install --force` does not help either,
+because the recorded integrity still matches what it has.
+
+```bash
+pnpm run update-ui-kit                 # newest pack in ../../docspace-ui-kit-react
+pnpm run update-ui-kit path/to/pack.tgz
+```
+
+It copies the tarball, rewrites the recorded integrity, drops the extracted
+copy under `node_modules/.pnpm/`, reinstalls, and then verifies by hash that
+what landed in node_modules is what was copied in - the silent no-op above is
+precisely what it refuses to let pass. Commit `onlyoffice-apps-ui-kit.tgz`
+together with the `pnpm-lock.yaml` change it produces.
 
 The tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's `main`,
 `module`, `types` and `exports` fields live under `publishConfig`, which only

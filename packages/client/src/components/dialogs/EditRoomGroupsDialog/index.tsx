@@ -518,7 +518,12 @@ const EditRoomGroupsDialog = ({
 };
 
 export default inject(
-  ({ dialogsStore, filesStore, filesSettingsStore }: TStore) => {
+  ({
+    dialogsStore,
+    filesStore,
+    filesSettingsStore,
+    treeFoldersStore,
+  }: TStore) => {
     const {
       setCreateGroupRooms,
       getAllRoomGroups,
@@ -529,7 +534,6 @@ export default inject(
       deleteRoomGroup,
       createGroupFromRoomIds,
       openInCreateMode,
-      roomGroupsArea,
     } = dialogsStore;
 
     const { roomsFilter, fetchRooms } = filesStore;
@@ -551,7 +555,9 @@ export default inject(
       roomsFilter,
       organizeRoomsGrouping,
       setOrganizeRoomsGrouping,
-      searchArea: roomGroupsArea,
+      searchArea: treeFoldersStore.isFormsFolder
+        ? RoomSearchArea.Forms
+        : RoomSearchArea.Active,
     };
   },
 )(observer(EditRoomGroupsDialog));

@@ -1369,6 +1369,8 @@ class DialogsStore {
   getAllRoomGroups = async (
     searchArea: RoomSearchArea = this.roomGroupsArea,
   ) => {
+    if (searchArea !== this.roomGroupsArea) this.setRoomGroups([], searchArea);
+
     const response = (await getRoomGroups(searchArea)) as IRoomGroup[];
     this.setRoomGroups(response, searchArea);
   };

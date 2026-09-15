@@ -909,18 +909,21 @@ export const buildContextOptions = (
     const { organizeRoomsGrouping } = deps.filesSettingsStore;
     // dialogsStore is attached post-construction in
     // store/index.js; the non-null assertion keeps the old unchecked read.
-    const { roomGroups, roomGroupsArea } = deps.dialogsStore!;
+    const { roomGroups } = deps.dialogsStore!;
     const currentGroupId = deps.roomsFilter?.groupId;
     const itemGroupsArea =
       item.roomType === RoomsType.FormRoom
         ? RoomSearchArea.Forms
         : RoomSearchArea.Active;
+    const sectionGroupsArea = deps.treeFoldersStore.isFormsFolder
+      ? RoomSearchArea.Forms
+      : RoomSearchArea.Active;
     if (
       !organizeRoomsGrouping ||
       isArchiveFolder ||
       item.rootFolderType === FolderType.Archive ||
       deps.treeFoldersStore.isAIAgentsFolder ||
-      itemGroupsArea !== roomGroupsArea
+      itemGroupsArea !== sectionGroupsArea
     ) {
       roomOptions = removeOptions(roomOptions, [
         "create-group",

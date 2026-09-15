@@ -42,7 +42,7 @@ import { Aside } from "@docspace/ui-kit/components/aside";
 import RoomSelector from "@docspace/ui-kit/selectors/Room";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector/Selector.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 
 type AddRoomToGroupDialogProps = {
   visible?: boolean;
@@ -212,7 +212,7 @@ const AddRoomToGroupDialog = ({
   );
 };
 
-export default inject(({ dialogsStore }: TStore) => {
+export default inject(({ dialogsStore, treeFoldersStore }: TStore) => {
   const {
     addRoomToGroupDialogVisible,
     addRoomToGroupId,
@@ -220,7 +220,6 @@ export default inject(({ dialogsStore }: TStore) => {
     getGroupById,
     updateRoomGroup,
     getAllRoomGroups,
-    roomGroupsArea,
   } = dialogsStore;
 
   return {
@@ -230,6 +229,6 @@ export default inject(({ dialogsStore }: TStore) => {
     getGroupById,
     updateRoomGroup,
     getAllRoomGroups,
-    isFormsSection: roomGroupsArea === RoomSearchArea.Forms,
+    isFormsSection: treeFoldersStore.isFormsFolder,
   };
 })(observer(AddRoomToGroupDialog));

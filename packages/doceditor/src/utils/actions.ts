@@ -51,6 +51,7 @@ import type {
   TGetColorTheme,
   TSettings,
 } from "@docspace/shared/api/settings/types";
+import type { ILogo } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
 
 import { logger } from "@/../logger.mjs";
 
@@ -596,6 +597,37 @@ export async function getColorTheme() {
     return colorTheme.response as TGetColorTheme;
   } catch (error) {
     logger.error(`Error in getColorTheme: ${error}`);
+  }
+}
+
+export async function getWhiteLabelLogos() {
+  logger.debug(`Start GET /settings/whitelabel/logos`);
+
+  try {
+    const [getLogosRes] = await createRequest(
+      [`/settings/whitelabel/logos`],
+      [["", ""]],
+      "GET",
+    );
+
+    const res = await fetch(getLogosRes);
+
+    if (!res.ok) {
+      const hdrs = await headers();
+
+      const hostname = hdrs.get("x-forwarded-host");
+
+      logger.error(
+        `error: ${res} url: ${hostname} GET /settings/whitelabel/logos failed`,
+      );
+      return;
+    }
+
+    const logos = await res.json();
+
+    return logos.response as ILogo[];
+  } catch (error) {
+    logger.error(`Error in getWhiteLabelLogos: ${error}`);
   }
 }
 

@@ -49,7 +49,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { ButtonKeys, RoomSearchArea } from "@docspace/shared/enums";
+import { ButtonKeys, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
@@ -277,7 +277,10 @@ const EditRoomGroupsDialog = ({
     try {
       const groupData = await getGroupById(groupId);
 
-      const rooms = groupData.rooms || [];
+      const rooms = (groupData.rooms || []).filter(
+        (room) => (room.roomType === RoomsType.FormRoom) === isFormsSection,
+      );
+
       setSelectedGroup({
         id: groupId,
         name: groupData.name,

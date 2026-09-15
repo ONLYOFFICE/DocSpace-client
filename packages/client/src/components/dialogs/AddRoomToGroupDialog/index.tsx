@@ -42,7 +42,7 @@ import { Aside } from "@docspace/ui-kit/components/aside";
 import RoomSelector from "@docspace/ui-kit/selectors/Room";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector/Selector.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import { RoomSearchArea } from "@docspace/shared/enums";
+import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 
 type AddRoomToGroupDialogProps = {
   visible?: boolean;
@@ -80,7 +80,13 @@ const AddRoomToGroupDialog = ({
       if (visible && groupId && getGroupById) {
         try {
           const data = await getGroupById(groupId);
-          setGroupData(data);
+          setGroupData({
+            ...data,
+            rooms: (data.rooms || []).filter(
+              (room) =>
+                (room.roomType === RoomsType.FormRoom) === isFormsSection,
+            ),
+          });
         } catch (error) {
           console.error("Error fetching group data:", error);
         }
@@ -88,7 +94,7 @@ const AddRoomToGroupDialog = ({
     };
 
     fetchGroupData();
-  }, [visible, groupId, getGroupById]);
+  }, [visible, groupId, getGroupById, isFormsSection]);
 
   const onClose = () => {
     setAddRoomToGroupDialogVisible?.(false);

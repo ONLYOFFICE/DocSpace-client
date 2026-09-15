@@ -123,7 +123,13 @@ export const AnalyzeResponsesButton = inject<
   TStore,
   FC<ExternalAnalyzeResponsesProps>,
   Omit<AnalyzeResponsesProps, keyof ExternalAnalyzeResponsesProps>
->(({ selectedFolderStore, contextOptionsStore, settingsStore, treeFoldersStore }) => {
+>(({
+  selectedFolderStore,
+  contextOptionsStore,
+  settingsStore,
+  treeFoldersStore,
+  publicRoomStore,
+}) => {
   const selectedFolder = selectedFolderStore.getSelectedFolder();
   const askAI = contextOptionsStore.askAI;
 
@@ -132,13 +138,17 @@ export const AnalyzeResponsesButton = inject<
     askAI,
     // `security.AnalyzeResponses` is computed when the folder is fetched, so
     // an open results folder keeps saying yes after an admin switches AI off
-    // portal-wide. The live switch is read here for the same reason the
-    // context menu reads it (see `filesStore/contextOptions.helpers.ts`), and
-    // privacy rules the chat out whatever the rights say.
+    // portal-wide. The signals the context menu checks are read here too
+    // (`filesStore/contextOptions.helpers.ts`), because this button is the
+    // same action: privacy rules the chat out whatever the rights say, and a
+    // public room hides it altogether — otherwise a link visitor would reach
+    // through this button what the menu denies them. Encryption is the one
+    // signal that has no counterpart here: `TFolder` carries no such flag.
     noAi:
       !settingsStore.aiServicesEnabled ||
       treeFoldersStore.isPrivacyFolder ||
-      selectedFolder.private,
+      selectedFolder.private ||
+      publicRoomStore.isPublicRoom,
   };
 })(
   observer(

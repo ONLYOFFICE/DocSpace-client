@@ -703,34 +703,26 @@ describe("Locales Tests", () => {
       ),
     ];
 
-    const uiKitDist = resolveUiKitDist();
     const uiKitKeys = new Set();
 
-    if (uiKitDist) {
-      getAllFiles(uiKitDist, [])
-        .filter((f) => f && f.endsWith(".js"))
-        .forEach((f) => {
-          let text;
-          try {
-            text = fs.readFileSync(f, "utf8");
-          } catch {
-            return;
+    getAllFiles(resolveUiKitDist(), [])
+      .filter((f) => f && f.endsWith(".js"))
+      .forEach((f) => {
+        const text = fs.readFileSync(f, "utf8");
+
+        UI_KIT_KEY_PATTERNS.forEach((pattern) => {
+          pattern.lastIndex = 0;
+
+          let match = pattern.exec(text);
+          while (match !== null) {
+            // Bare and namespace-prefixed forms name the same key; the
+            // caller compares against namespace-stripped keys.
+            const key = match[2];
+            uiKitKeys.add(key.slice(key.indexOf(":") + 1));
+            match = pattern.exec(text);
           }
-
-          UI_KIT_KEY_PATTERNS.forEach((pattern) => {
-            pattern.lastIndex = 0;
-
-            let match = pattern.exec(text);
-            while (match !== null) {
-              // Bare and namespace-prefixed forms name the same key; the
-              // caller compares against namespace-stripped keys.
-              const key = match[2];
-              uiKitKeys.add(key.slice(key.indexOf(":") + 1));
-              match = pattern.exec(text);
-            }
-          });
         });
-    }
+      });
 
     const usedInUiKit = (key) => uiKitKeys.has(key);
 
@@ -3266,14 +3258,10 @@ describe("Locales Tests", () => {
       keyNamespaces.has(k) && keyNamespaces.get(k).has("Common");
 
     // ui-kit source is not available here (prebuilt tarball), so this runs
-    // against the built bundle. When the package is not installed there is
-    // nothing to check and the test passes vacuously.
-    const uiKitDistDir = resolveUiKitDist();
-    const uiKitFiles = uiKitDistDir
-      ? getAllFiles(uiKitDistDir, []).filter(
-          (filePath) => filePath && filePath.endsWith(".js"),
-        )
-      : [];
+    // against the built bundle.
+    const uiKitFiles = getAllFiles(resolveUiKitDist(), []).filter(
+      (filePath) => filePath && filePath.endsWith(".js"),
+    );
 
     const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const violations = [];

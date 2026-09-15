@@ -43,19 +43,40 @@ const { BASE_DIR } = require("./files");
 // only present under node_modules. Its components own a large share of the
 // Common namespace and reference images that live in this repo's
 // public/images, so callers that need either have to read the built package
-// instead of source. Returns null when it is not installed, and every caller
-// degrades to "ui-kit contributes nothing" rather than failing.
+// instead of source.
+//
+// Throws when the package is not installed. Returning a "ui-kit contributes
+// nothing" fallback instead would let UiKitCommonResolverPrefixTest pass on an
+// empty file list and let the locale and image scans quietly lose ui-kit's
+// share of the evidence -- a green run that checked nothing. Every caller runs
+// after `pnpm install`, so absence is a broken environment, not a mode.
 const resolveUiKitDist = () => {
+	let pkgJson;
+
 	try {
 		const req = createRequire(
 			path.join(BASE_DIR, "packages", "client", "noop.js"),
 		);
-		const pkgJson = req.resolve("@onlyoffice/apps-ui-kit/package.json");
-		const dist = path.join(path.dirname(pkgJson), "dist", "esm");
-		return fs.existsSync(dist) ? dist : null;
-	} catch {
-		return null;
+		pkgJson = req.resolve("@onlyoffice/apps-ui-kit/package.json");
+	} catch (err) {
+		throw new Error(
+			"@onlyoffice/apps-ui-kit is not installed, so these checks cannot " +
+				"see the code that owns much of the Common namespace and many of " +
+				`the images. Run \`pnpm install\` and retry. (${err.message})`,
+		);
 	}
+
+	const dist = path.join(path.dirname(pkgJson), "dist", "esm");
+
+	if (!fs.existsSync(dist)) {
+		throw new Error(
+			`@onlyoffice/apps-ui-kit is installed but ships no ${path.join("dist", "esm")}: ` +
+				`${dist} does not exist. The tarball at the repo root is broken -- ` +
+				"rebuild it in the docspace-ui-kit-react repository.",
+		);
+	}
+
+	return dist;
 };
 
 module.exports = { resolveUiKitDist };

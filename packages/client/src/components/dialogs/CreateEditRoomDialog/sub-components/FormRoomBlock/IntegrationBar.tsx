@@ -37,7 +37,7 @@ import React from "react";
 import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 
-import DangerToastReactSvg from "@onlyoffice/apps-ui-kit/assets/danger.toast.react.svg";
+import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
 import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";
 
 import styles from "./FormRoomBlock.module.scss";

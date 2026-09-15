@@ -42,8 +42,8 @@ import AiPage from "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPa
 import { PaymentMethod } from "@onlyoffice/apps-ui-kit/billing";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-import AiIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/ai-agents.svg";
-import CardIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/card.react.svg";
+import AiIcon from "PUBLIC_DIR/images/icons/16/ai-agents.svg";
+import CardIcon from "PUBLIC_DIR/images/icons/16/card.react.svg";
 
 import { BillingCards, type BillingCardTab } from "@/components/BillingCards";
 import cardStyles from "@/components/BillingCards/BillingCards.module.scss";

@@ -47,7 +47,7 @@ import {
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import ZoomPlusIcon from "@onlyoffice/apps-ui-kit/assets/zoom-plus.react.svg";
+import ZoomPlusIcon from "PUBLIC_DIR/images/zoom-plus.react.svg";
 
 import type { PanelState } from "@/types/arbiter";
 

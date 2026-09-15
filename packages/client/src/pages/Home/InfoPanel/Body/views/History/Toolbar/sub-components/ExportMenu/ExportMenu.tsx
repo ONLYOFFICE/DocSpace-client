@@ -37,7 +37,7 @@ import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import ExpanderDownIcon from "@onlyoffice/apps-ui-kit/assets/expander-down.react.svg";
+import ExpanderDownIcon from "PUBLIC_DIR/images/expander-down.react.svg";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";

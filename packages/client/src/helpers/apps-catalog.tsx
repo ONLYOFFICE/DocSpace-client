@@ -62,12 +62,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import CatalogFolderIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.folder.react.svg";
-import CatalogRoomsIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.rooms.react.svg";
-import CatalogDocumentsIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.documents.react.svg";
-import AiAgentsIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/ai-agents.svg";
-import CatalogAiArbiterIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.ai-agents.react.svg";
-import CatalogPrivateIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.private.react.svg";
+import CatalogFolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
+import CatalogRoomsIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg";
+import CatalogDocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg";
+import AiAgentsIcon from "PUBLIC_DIR/images/icons/16/ai-agents.svg";
+import CatalogAiArbiterIcon from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg";
+import CatalogPrivateIcon from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg";
 
 import { isAppTemporarilyDisabled } from "./disabled-apps";
 

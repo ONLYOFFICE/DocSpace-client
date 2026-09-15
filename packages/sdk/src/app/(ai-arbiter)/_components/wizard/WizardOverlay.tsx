@@ -50,8 +50,8 @@ import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import CheckIcon from "@onlyoffice/apps-ui-kit/assets/check.react.svg";
-import DangerIcon from "@onlyoffice/apps-ui-kit/assets/danger.toast.react.svg";
+import CheckIcon from "PUBLIC_DIR/images/check.react.svg";
+import DangerIcon from "PUBLIC_DIR/images/danger.toast.react.svg";
 
 import { useApi, useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import {

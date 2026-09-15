@@ -34,7 +34,7 @@
  */
 
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
-import CollapseIcon from "@onlyoffice/apps-ui-kit/assets/article-hide-menu-icon.react.svg";
+import CollapseIcon from "PUBLIC_DIR/images/article-hide-menu-icon.react.svg";
 
 import styles from "./CollapseButton.module.scss";
 

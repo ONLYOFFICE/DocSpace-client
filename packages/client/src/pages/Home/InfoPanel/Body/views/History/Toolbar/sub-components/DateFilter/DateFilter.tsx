@@ -38,7 +38,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import type { DateTime } from "luxon";
 
-import CalendarIcon from "@onlyoffice/apps-ui-kit/assets/calendar.react.svg";
+import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
 import { Calendar } from "@onlyoffice/apps-ui-kit/components/calendar";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { now, formatDate, parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";

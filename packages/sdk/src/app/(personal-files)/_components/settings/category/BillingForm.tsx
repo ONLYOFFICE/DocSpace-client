@@ -50,9 +50,9 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import { BillingCards, type BillingCardTab } from "@/components/BillingCards";
 import cardStyles from "@/components/BillingCards/BillingCards.module.scss";
 
-import WalletIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/wallet.react.svg";
-import StorageIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog-settings-storage-management.svg";
-import CardIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/card.react.svg";
+import WalletIcon from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
+import StorageIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg";
+import CardIcon from "PUBLIC_DIR/images/icons/16/card.react.svg";
 
 import styles from "./SettingsPanel.module.scss";
 

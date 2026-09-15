@@ -39,8 +39,8 @@ import { useTranslation } from "react-i18next";
 import { OPERATIONS_NAME } from "@onlyoffice/apps-ui-kit/constants";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/icons/17/clear.react.svg?url";
-import AlertIcon from "@onlyoffice/apps-ui-kit/assets/info.outline.react.svg";
-import TickIcon from "@onlyoffice/apps-ui-kit/assets/check.edit.react.svg";
+import AlertIcon from "PUBLIC_DIR/images/info.outline.react.svg";
+import TickIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg";
 
 import {

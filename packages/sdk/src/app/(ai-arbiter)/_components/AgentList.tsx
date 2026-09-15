@@ -43,7 +43,7 @@ import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
-import CrossIcon from "@onlyoffice/apps-ui-kit/assets/icons/12/cross.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 
 import type { AgentSummary } from "@/types/arbiter";
 

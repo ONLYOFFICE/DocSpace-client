@@ -39,10 +39,10 @@ import { useTranslation } from "react-i18next";
 
 import { Events, RoomsType } from "@docspace/shared/enums";
 
-import CatalogRoomsIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.rooms.react.svg";
-import CatalogFolderIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.folder.react.svg";
-import CatalogDocumentsIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/catalog.documents.react.svg";
-import AiAgentsIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/ai-agents.svg";
+import CatalogRoomsIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg";
+import CatalogFolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
+import CatalogDocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg";
+import AiAgentsIcon from "PUBLIC_DIR/images/icons/16/ai-agents.svg";
 
 import type { ModuleItem } from "../sub-components/ModuleCard";
 

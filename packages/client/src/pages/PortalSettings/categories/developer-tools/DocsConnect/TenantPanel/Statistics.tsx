@@ -48,7 +48,7 @@ import StorageWarning from "@onlyoffice/apps-ui-kit/billing/services/panels/addi
 import { getDocsConnectScheduleFlags } from "@onlyoffice/apps-ui-kit/billing/utils/docs-connect";
 import { formatDateLocalized } from "@onlyoffice/apps-ui-kit/utils/date";
 
-import AlertIcon from "@onlyoffice/apps-ui-kit/assets/plugin.incompatible.react.svg";
+import AlertIcon from "PUBLIC_DIR/images/plugin.incompatible.react.svg";
 
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import { getBrandName } from "@docspace/shared/constants/brands";

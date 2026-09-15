@@ -41,7 +41,7 @@ import { Card } from "@onlyoffice/apps-ui-kit/components/card";
 import { ActionButton } from "@onlyoffice/apps-ui-kit/components/action-button";
 import { getBrandName } from "@onlyoffice/apps-ui-kit/constants/brands";
 
-import SettingsSvg from "@onlyoffice/apps-ui-kit/assets/settings.desc.react.svg";
+import SettingsSvg from "PUBLIC_DIR/images/settings.desc.react.svg";
 
 import AIReactSvg from "PUBLIC_DIR/images/icons/16/AI.svg";
 import GridSvg from "PUBLIC_DIR/images/icons/12/grid.svg";

@@ -67,9 +67,9 @@ import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import CheckIcon from "@onlyoffice/apps-ui-kit/assets/check.edit.react.svg";
-import DangerIcon from "@onlyoffice/apps-ui-kit/assets/danger.toast.react.svg";
-import InfoIcon from "@onlyoffice/apps-ui-kit/assets/info.outline.react.svg";
+import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
+import DangerIcon from "PUBLIC_DIR/images/danger.toast.react.svg";
+import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
 
 import styles from "./InstallModuleDialog.module.scss";
 

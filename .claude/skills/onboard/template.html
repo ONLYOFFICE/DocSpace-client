@@ -590,11 +590,18 @@
         <button type="button" data-filter="role-b" aria-pressed="false">Role B</button>
       </div>
       <ul class="actions" id="actions">
-        <li data-role="role-a"><span>Action only role A may take</span><span class="who">Role A</span></li>
-        <li data-role="role-b"><span>Action open to role B (and above)</span><span class="who">Role B</span>
+        <!-- status is never color-only: every pill carries an aria-label in
+             the page language, and its wording never changes on toggle -->
+        <li data-role="role-a"><span>Action only role A may take</span>
+          <span class="pill ok" aria-label="allowed">Role A</span></li>
+        <li data-role="role-b"><span>Action open to role B (and above)</span>
+          <span class="pill ok" aria-label="allowed">Role B</span>
           <span class="note">Optional one-line nuance under the action.</span></li>
+        <li data-role="none"><span>Action no role on this page may take</span>
+          <span class="pill no" aria-label="not allowed">Nobody</span></li>
       </ul>
-      <div class="callout rule"><b>Rule in one line:</b> the sentence a reader
+      <!-- the bold lead names the subject, never the sentence's genre -->
+      <div class="callout rule"><b>Who becomes the payer.</b> The sentence a reader
       should remember if they remember nothing else.</div>
 
       <!-- Tabs for scenarios/states: panels hidden, never removed -->

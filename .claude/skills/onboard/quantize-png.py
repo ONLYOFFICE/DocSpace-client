@@ -18,7 +18,7 @@ from PIL import Image
 for path in sys.argv[1:]:
     before = os.path.getsize(path)
     im = Image.open(path).convert("RGB")
-    q = im.quantize(colors=256, method=Image.MEDIANCUT, dither=Image.Dither.NONE)
+    q = im.quantize(colors=256, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE)
     q.save(path, optimize=True)
     after = os.path.getsize(path)
     print(f"{path}: {before // 1024}KB -> {after // 1024}KB")

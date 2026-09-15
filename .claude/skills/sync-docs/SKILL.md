@@ -8,9 +8,12 @@ argument-hint: "<area or rule name>"
 
 Three places describe the same behavior and age independently: the code,
 the `.claude/rules/*.md` files, and Storybook prose — any `.mdx` page
-the Storybook glob picks up (see `.storybook/main.ts`; that includes
-the unattached pages under `docs/`), plus story descriptions in
-`*.stories.tsx`. This skill finds where they disagree,
+the ui-kit Storybook glob picks up (see `libs/ui-kit/.storybook/main.ts`;
+that includes the unattached pages under `libs/ui-kit/docs/`), plus story
+descriptions in `*.stories.tsx`. Storybook lives only in `libs/ui-kit`
+today — `packages/shared` keeps a `storybook` script but has no
+`.storybook` config, so it contributes stories only if that changes.
+This skill finds where they disagree,
 reports the findings, and — only after the user approves — fixes the
 stale side in the right repository. Never edit anything before the
 report is shown and answered.
@@ -33,8 +36,7 @@ role-restricted long after the code opened it to everyone.
   built-in "Other" cover the rest. Never start a full sweep of every
   rule unless the user explicitly asks for it.
 - Resolve the area from the argument: the matching rule file(s) in
-  `.claude/rules/`, and the area's Storybook files in `libs/ui-kit/**`
-  and `packages/shared/**`.
+  `.claude/rules/`, and the area's Storybook files in `libs/ui-kit/**`.
 - Extract every checkable claim each document makes: "X is payer-only",
   "route Y redirects to Z", "component hides A when B". Skip pure
   style/convention notes — only behavior claims are checkable.

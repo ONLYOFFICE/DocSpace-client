@@ -75,7 +75,7 @@ type TMediaViewerData = {
 
 // `pdfViewer` exists in public/scripts/config.json but is
 // missing from the duplicated Window.ClientConfig declarations
-// (packages/shared/types/index.ts and libs/ui-kit's
+// (packages/shared/types/index.ts and ui-kit's
 // utils/openingNewTab/index.ts). Both declarations must be updated in sync
 // (TS2717) and ui-kit is a separate repository, so a local cast is used here
 // until the field can be added to both.

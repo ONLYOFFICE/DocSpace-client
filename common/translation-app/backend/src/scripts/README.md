@@ -52,7 +52,7 @@ Scans all source code (`.ts`, `.tsx`, `.js`, `.jsx`) to find where each translat
 node src/scripts/save-meta-keys-usage.js
 ```
 
-Scans: `packages/client`, `packages/shared`, `packages/login`, `packages/doceditor`, `packages/management`, `packages/sdk`, `libs/ui-kit`.
+Scans: `packages/client`, `packages/shared`, `packages/login`, `packages/doceditor`, `packages/management`, `packages/sdk`.
 
 ---
 

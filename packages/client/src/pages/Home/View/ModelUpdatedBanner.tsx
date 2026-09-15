@@ -49,9 +49,10 @@ import {
 } from "react-joyride";
 
 // Through the ui-kit re-export, not `@onlyoffice/ai-chat` directly: this
-// module is eagerly loaded, and `@onlyoffice/ai-chat` is meant to stay inside
-// the lazy AI-only bundle (see the `aiChat` vendor split in config/build.ts)
-// -- a bare specifier here would pull it in eagerly instead.
+// module is eagerly loaded, and `@onlyoffice/ai-chat` is meant to stay in the
+// lazy AI-only chunks -- config/build.ts keeps it out of `vendor` and out of
+// `shared` precisely so it is not on the critical path. A bare specifier here
+// would pull it in eagerly instead.
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";

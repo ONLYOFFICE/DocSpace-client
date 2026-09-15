@@ -27,7 +27,7 @@
     {
       "name": "📦 @docspace/shared",
       "path": "packages/shared"
-    },
+    }
   ],
   "settings": {
     "window.zoomLevel": 0,

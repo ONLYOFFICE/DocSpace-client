@@ -233,7 +233,7 @@ class FilesSettingsStore {
       // in ui-kit's TListenEventCallbackMap, so `on` expects a zero-argument
       // listener, while the server actually sends the access-control settings
       // payload. The cast keeps the original callback untouched without
-      // modifying libs/ui-kit.
+      // modifying ui-kit.
       ((settings: TAccessControlSettings) => {
         this.externalShare = settings.externalShare;
         this.defaultShareLinkInternal = settings.defaultShareLinkInternal;

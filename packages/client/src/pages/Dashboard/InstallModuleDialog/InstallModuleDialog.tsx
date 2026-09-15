@@ -67,7 +67,7 @@ import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
+import CheckIcon from "PUBLIC_DIR/images/check.react.svg";
 import DangerIcon from "PUBLIC_DIR/images/danger.toast.react.svg";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
 

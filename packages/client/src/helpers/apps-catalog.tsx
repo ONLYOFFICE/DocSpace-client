@@ -66,7 +66,7 @@ import CatalogFolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 import CatalogRoomsIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg";
 import CatalogDocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg";
 import AiAgentsIcon from "PUBLIC_DIR/images/icons/16/ai-agents.svg";
-import CatalogAiArbiterIcon from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg";
+import CatalogAiArbiterIcon from "PUBLIC_DIR/images/icons/16/catalog.ai-arbiter.react.svg";
 import CatalogPrivateIcon from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg";
 
 import { isAppTemporarilyDisabled } from "./disabled-apps";

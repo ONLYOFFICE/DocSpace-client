@@ -60,25 +60,16 @@ let fileContentsCache = new Map();
 
 /**
  * Analyzes a group of images to find duplication rule violations.
- * A 1:1 mirror between the 'ui-kit' and the rest of the 'project' is allowed.
- * Violations occur if there are multiple duplicates within the same space (ui-kit or project).
- * 
+ * Every copy beyond the first is a violation.
+ *
+ * This used to allow a 1:1 mirror between libs/ui-kit and the rest of the
+ * project. ui-kit now ships as a prebuilt tarball from its own repository and
+ * its images are not in this tree, so there is nothing left to mirror.
+ *
  * @param {Array} val - Array of image objects with path and md5Hash
  * @returns {Array} - List of files that violate the duplication rules
  */
-const getDuplicateViolations = (val) => {
-  const uiKit = val.filter((i) => i.path.includes(convertPathToOS("/libs/ui-kit/")));
-  const project = val.filter((i) => !i.path.includes(convertPathToOS("/libs/ui-kit/")));
-
-  // 1:1 mirror is allowed
-  if (uiKit.length <= 1 && project.length <= 1) return [];
-
-  const offending = [];
-  if (uiKit.length > 1) offending.push(...uiKit);
-  if (project.length > 1) offending.push(...project);
-
-  return offending;
-};
+const getDuplicateViolations = (val) => (val.length > 1 ? [...val] : []);
 
 beforeAll(() => {
   console.log(`Base path = ${BASE_DIR}`);
@@ -363,110 +354,6 @@ describe("Image Tests", () => {
           message += `${++k}. ${file.path} \r\n`;
         }
       });
-    });
-
-    expect(k, message).toBe(0);
-  });
-
-    it("ClientAndUiKitImagesNameConsistencyTest: Verify that identical images (by MD5 hash) have the same name in Client and UI-Kit.", () => {
-    const uiKitImgs = allImgs.filter((i) => i.path.includes(convertPathToOS("/libs/ui-kit/")));
-    const clientImgs = allImgs.filter((i) => !i.path.includes(convertPathToOS("/libs/ui-kit/")));
-
-    const uiKitMd5Map = new Map();
-    uiKitImgs.forEach((i) => {
-      if (!uiKitMd5Map.has(i.md5Hash)) uiKitMd5Map.set(i.md5Hash, []);
-      uiKitMd5Map.get(i.md5Hash).push(i);
-    });
-
-    let message = "Found identical images (by MD5) with different names in Client vs UI-Kit.\r\n\r\n";
-    let k = 0;
-
-    clientImgs.forEach((pImg) => {
-      const uiMatches = uiKitMd5Map.get(pImg.md5Hash);
-      if (uiMatches) {
-        uiMatches.forEach((uiImg) => {
-          if (uiImg.fileName !== pImg.fileName) {
-            if (
-              uiImg.path.includes(convertPathToOS("/logo/")) ||
-              pImg.path.includes(convertPathToOS("/logo/")) ||
-              uiImg.path.includes("phoneFlags") ||
-              pImg.path.includes("phoneFlags")
-            ) return;
-
-            message += `${++k}. MD5: ${pImg.md5Hash}\r\n`;
-            message += `  UI-Kit: ${uiImg.fileName} (${uiImg.path})\r\n`;
-            message += `  Client: ${pImg.fileName} (${pImg.path})\r\n\r\n`;
-          }
-        });
-      }
-    });
-
-    expect(k, message).toBe(0);
-  });
-
-  it("ClientAndUiKitImagesPathConsistencyTest: Verify that identical images (name + md5) are stored in identical directory structures in Client and UI-Kit.", () => {
-    const uiKitImgs = allImgs.filter((i) => i.path.includes(convertPathToOS("/libs/ui-kit/")));
-    const clientImgs = allImgs.filter((i) => !i.path.includes(convertPathToOS("/libs/ui-kit/")));
-
-    const getRelativePath = (fullPath, isUiKit) => {
-      const marker = isUiKit ? convertPathToOS("/libs/ui-kit/assets/") : convertPathToOS("/public/images/");
-      const index = fullPath.indexOf(marker);
-      if (index === -1) return null;
-      return fullPath.substring(index + marker.length);
-    };
-
-    let message = "Found identical images with different relative paths in Client vs UI-Kit.\r\n\r\n";
-    let k = 0;
-
-    clientImgs.forEach((pImg) => {
-      const pRel = getRelativePath(pImg.path, false);
-      if (!pRel) return;
-
-      const identicalInUiKit = uiKitImgs.filter((ui) => ui.md5Hash === pImg.md5Hash && ui.fileName === pImg.fileName);
-      
-      identicalInUiKit.forEach((uiImg) => {
-        const uiRel = getRelativePath(uiImg.path, true);
-        if (uiRel && uiRel !== pRel) {
-          message += `${++k}. ${pImg.fileName}:\r\n`;
-          message += `  UI-Kit Rel: ${uiRel} (${uiImg.path})\r\n`;
-          message += `  Client Rel: ${pRel} (${pImg.path})\r\n\r\n`;
-        }
-      });
-    });
-
-    expect(k, message).toBe(0);
-  });
-
-  it("ClientAndUiKitImagesContentConsistencyTest: Verify that images in identical directory structures are identical by MD5 hash in Client and UI-Kit.", () => {
-    const uiKitImgs = allImgs.filter((i) => i.path.includes(convertPathToOS("/libs/ui-kit/")));
-    const clientImgs = allImgs.filter((i) => !i.path.includes(convertPathToOS("/libs/ui-kit/")));
-
-    const getRelativePath = (fullPath, isUiKit) => {
-      const marker = isUiKit ? convertPathToOS("/libs/ui-kit/assets/") : convertPathToOS("/public/images/");
-      const index = fullPath.indexOf(marker);
-      if (index === -1) return null;
-      return fullPath.substring(index + marker.length);
-    };
-
-    const uiKitPathMap = new Map();
-    uiKitImgs.forEach((i) => {
-      const rel = getRelativePath(i.path, true);
-      if (rel) uiKitPathMap.set(rel, i);
-    });
-
-    let message = "Found images in identical paths that have different content in Client vs UI-Kit.\r\n\r\n";
-    let k = 0;
-
-    clientImgs.forEach((pImg) => {
-      const pRel = getRelativePath(pImg.path, false);
-      if (!pRel) return;
-
-      const uiMatch = uiKitPathMap.get(pRel);
-      if (uiMatch && uiMatch.md5Hash !== pImg.md5Hash) {
-        message += `${++k}. ${pRel}:\r\n`;
-        message += `  UI-Kit MD5: ${uiMatch.md5Hash} (${uiMatch.path})\r\n`;
-        message += `  Client MD5: ${pImg.md5Hash} (${pImg.path})\r\n\r\n`;
-      }
     });
 
     expect(k, message).toBe(0);

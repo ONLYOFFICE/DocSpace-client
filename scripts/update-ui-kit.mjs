@@ -341,9 +341,10 @@ const contentsOfTarball = (file) => {
 const expected = digestEntries(contentsOfTarball(TARBALL));
 
 // Every extracted copy, not just the one the client resolves: pnpm installs one
-// per distinct peer-resolution set (packages/sdk currently lands on a different
-// copy than everything else), and a stale sibling is as broken as a stale
-// primary -- it is what the apps that resolve to it will run.
+// per distinct peer-resolution set. There is one today (zod is pinned through
+// the catalog so client and sdk resolve the same ai-chat variant), but the
+// moment a peer drifts there are two again, and a stale sibling is as broken as
+// a stale primary -- it is what the apps that resolve to it will run.
 const copies = fs.existsSync(PNPM_DIR)
   ? fs
       .readdirSync(PNPM_DIR)

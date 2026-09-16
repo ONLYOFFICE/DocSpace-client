@@ -124,6 +124,7 @@
     "utif": "3.1.0",
     "windows-iana": "5.1.0",
     "workbox-window": "6.6.0",
+    "zod": "catalog:",
     "zustand": "catalog:"
   },
   "devDependencies": {

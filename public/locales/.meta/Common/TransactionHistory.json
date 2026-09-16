@@ -3,7 +3,7 @@
   "content": "Transaction history",
   "content_en_sha1_hash": "aa7d3d7dd9d1706c1bda7bd97c31b7c47a7d310f",
   "created_at": "2026-04-10T13:53:43.722Z",
-  "updated_at": "2026-09-10T16:17:50.246Z",
+  "updated_at": "2026-09-16T18:53:34.516Z",
   "comment": {
     "text": "This is the title for a section or page displaying a user's past transactions.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/index.tsx",
-      "line_number": 137,
+      "line_number": 159,
       "context": "icon: PaymentReactSvgUrl,\n onClick: () => openBuyPlan?.(\"trial\"),\n },\n {\n key: \"transaction-history\",\n label: t(\"Common:TransactionHistory\"),\n icon: HistoryReactSvgUrl,\n onClick: () => navigate(PAYMENT_ROUTES.docsConnect),\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/index.tsx",
-      "line_number": 137,
+      "line_number": 159,
       "context": "icon: PaymentReactSvgUrl,\n onClick: () => openBuyPlan?.(\"trial\"),\n },\n {\n key: \"transaction-history\",\n label: t(\"Common:TransactionHistory\"),\n icon: HistoryReactSvgUrl,\n onClick: () => navigate(PAYMENT_ROUTES.docsConnect),\n },\n ];",
       "module": "/packages/client"
     }

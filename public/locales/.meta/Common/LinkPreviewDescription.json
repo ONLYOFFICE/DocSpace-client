@@ -3,7 +3,7 @@
   "content": "{{organizationName}} {{productName}} is a workspace where you can create documents, collaborate in rooms, and collect data with forms, all in one place.",
   "content_en_sha1_hash": "29ef5616a1bc9c05b711976e0820b6f3e6ce54c7",
   "created_at": "2026-09-14T09:17:12.879Z",
-  "updated_at": "2026-09-14T20:39:13.957Z",
+  "updated_at": "2026-09-16T18:53:34.566Z",
   "comment": {
     "text": "Link preview description that appears when a workspace link is shared; contains {{organizationName}} and {{productName}} as part of a summary sentence.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/link-preview.ts",
-      "line_number": 78,
-      "context": "const title = logoText || organizationName;\n \n const t = createTranslator(translations, locale);\n \n const description = t(\"Common:LinkPreviewDescription\", {\n organizationName: title,\n productName,\n });\n \n return { title, description };",
+      "line_number": 94,
+      "context": "const title = logoText || organizationName;\n \n const t = createTranslator(translations, locale);\n \n const description = t(\"Common:LinkPreviewDescription\", {\n organizationName: title,\n productName,\n });\n \n return {",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-09-14T20:38:41.352Z",
+  "updated_at": "2026-09-16T18:53:34.443Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -739,7 +739,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 1162,
+      "line_number": 1157,
       "context": "testId=\"docs_connect_buy_plan_submit\"\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n isDisabled={submitting && !waitingPayment}\n />\n </div>\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },

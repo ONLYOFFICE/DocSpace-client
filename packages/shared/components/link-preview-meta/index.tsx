@@ -49,9 +49,14 @@ const LinkPreviewMeta = ({
   baseUrl,
   title,
   description,
+  imageVersion,
 }: LinkPreviewMetaProps) => {
+  const imageQuery = imageVersion
+    ? `?v=${encodeURIComponent(imageVersion)}`
+    : "";
+
   const imageUrl = baseUrl?.startsWith("http")
-    ? `${baseUrl}${LINK_PREVIEW_IMAGE_ROUTE}`
+    ? `${baseUrl}${LINK_PREVIEW_IMAGE_ROUTE}${imageQuery}`
     : undefined;
 
   return (

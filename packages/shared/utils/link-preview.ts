@@ -33,9 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { WhiteLabelLogoType } from "@onlyoffice/apps-ui-kit/enums";
 import type { TTranslations } from "@onlyoffice/apps-ui-kit/providers/translation";
 
 import { getBrandName } from "../constants/brands";
+import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
 
 export const LINK_PREVIEW_IMAGE_ROUTE = "/login/link-preview";
 export const LINK_PREVIEW_IMAGE_TYPE = "image/png";
@@ -45,6 +47,19 @@ export const LINK_PREVIEW_IMAGE_HEIGHT = "630";
 export type TLinkPreview = {
   title: string;
   description?: string;
+  imageVersion?: string;
+};
+
+export const getLinkPreviewImageVersion = (logos?: ILogo[]) => {
+  const path = logos?.find(
+    (logo) => logo.type === WhiteLabelLogoType.LoginPage,
+  )?.path.light;
+
+  const query = path?.split("?")[1];
+
+  if (!query) return undefined;
+
+  return new URLSearchParams(query).get("hash") ?? undefined;
 };
 
 const createTranslator =
@@ -67,6 +82,7 @@ export const getLinkPreview = (
   logoText?: string,
   translations?: TTranslations,
   locale?: string,
+  logos?: ILogo[],
 ): TLinkPreview => {
   const organizationName = getBrandName("OrganizationName");
   const productName = getBrandName("ProductName");
@@ -80,5 +96,9 @@ export const getLinkPreview = (
     productName,
   });
 
-  return { title, description };
+  return {
+    title,
+    description,
+    imageVersion: getLinkPreviewImageVersion(logos),
+  };
 };

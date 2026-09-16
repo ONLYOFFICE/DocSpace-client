@@ -58,6 +58,7 @@ import {
   getConfig,
   getSettings,
   getUser,
+  getWhiteLabelLogos,
 } from "@/utils/actions";
 
 import "@onlyoffice/apps-ui-kit/styles.css";
@@ -101,10 +102,11 @@ export default async function RootLayout({
 
   let redirectUrl = "";
 
-  const [settings, colorTheme, user] = await Promise.all([
+  const [settings, colorTheme, user, logos] = await Promise.all([
     getSettings(),
     getColorTheme(),
     getUser(),
+    getWhiteLabelLogos(),
   ]);
 
   if (
@@ -194,6 +196,7 @@ export default async function RootLayout({
     typeof settings !== "string" ? settings?.logoText : undefined,
     translations,
     locale,
+    logos,
   );
 
   const styles = {

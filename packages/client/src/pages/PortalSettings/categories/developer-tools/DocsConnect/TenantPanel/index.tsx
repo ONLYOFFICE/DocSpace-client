@@ -60,7 +60,7 @@ import PaymentReactSvgUrl from "PUBLIC_DIR/images/icons/16/price.react.svg?url";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
 
-import { getDocsConnectTrialState } from "../utils";
+import { getDocsConnectTrialState, isDocsConnectLocked } from "../utils";
 import { DOCS_CONNECT_ROUTE, type TDocsConnectTab } from "../constants";
 import { PAYMENT_ROUTES } from "../../../payments/utils";
 
@@ -87,6 +87,18 @@ const getTabFromLocation = (): TDocsConnectTab => {
     : "statistics";
 };
 
+const replaceTabUrl = (tab: TDocsConnectTab) => {
+  window.history.replaceState(
+    "",
+    "",
+    combineUrl(
+      window.ClientConfig?.proxy?.url,
+      config.homepage,
+      `${DOCS_CONNECT_ROUTE}/${tab}`,
+    ),
+  );
+};
+
 const TenantPanel = ({
   info,
   openBuyPlan,
@@ -98,12 +110,22 @@ const TenantPanel = ({
 }: TenantPanelProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
   const navigate = useNavigate();
-  const [selectedTab, setSelectedTab] =
-    useState<TDocsConnectTab>(getTabFromLocation);
+  const locked = isDocsConnectLocked(info);
+
+  const [selectedTab, setSelectedTab] = useState<TDocsConnectTab>(() =>
+    locked ? "statistics" : getTabFromLocation(),
+  );
 
   useEffect(() => {
     return () => abortStatisticsRefresh?.();
   }, [abortStatisticsRefresh]);
+
+  useEffect(() => {
+    if (!locked || getTabFromLocation() === "statistics") return;
+
+    setSelectedTab("statistics");
+    replaceTabUrl("statistics");
+  }, [locked]);
 
   useEffect(() => {
     if (!isStatisticsRefreshing) {
@@ -190,11 +212,13 @@ const TenantPanel = ({
       id: "settings",
       name: t("DocsConnect:TabSettings"),
       content: <Settings />,
+      isDisabled: locked,
     },
     {
       id: "preview",
       name: t("DocsConnect:TabPreview"),
       content: <Preview />,
+      isDisabled: locked,
     },
   ];
 
@@ -247,20 +271,14 @@ const TenantPanel = ({
         items={tabs}
         selectedItemId={selectedTab}
         onSelect={(item) => {
+          if (item.isDisabled) return;
+
           const tab = item.id as TDocsConnectTab;
 
           if (tab !== "statistics") abortStatisticsRefresh?.();
 
           setSelectedTab(tab);
-          window.history.replaceState(
-            "",
-            "",
-            combineUrl(
-              window.ClientConfig?.proxy?.url,
-              config.homepage,
-              `${DOCS_CONNECT_ROUTE}/${tab}`,
-            ),
-          );
+          replaceTabUrl(tab);
         }}
       />
     </div>

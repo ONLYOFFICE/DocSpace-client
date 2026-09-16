@@ -75,7 +75,11 @@ const findSource = () => {
 };
 
 const source = findSource();
-const before = fs.existsSync(TARBALL) ? integrityOf(TARBALL) : null;
+const hadTarball = fs.existsSync(TARBALL);
+// Snapshot before overwriting: the rollback below has to put these exact bytes
+// back, and by then the file on disk is already the new pack.
+const previousTarball = hadTarball ? fs.readFileSync(TARBALL) : null;
+const before = hadTarball ? integrityOf(TARBALL) : null;
 
 fs.copyFileSync(source, TARBALL);
 
@@ -96,6 +100,12 @@ if (!matches || matches.length === 0) {
   fail("No @onlyoffice/apps-ui-kit entry in pnpm-lock.yaml -- has the dependency been renamed?");
 }
 
+const restore = () => {
+  fs.writeFileSync(LOCKFILE, lock);
+  if (previousTarball === null) fs.rmSync(TARBALL, { force: true });
+  else fs.writeFileSync(TARBALL, previousTarball);
+};
+
 fs.writeFileSync(LOCKFILE, lock.replace(pattern, `$1${after}$2`));
 
 // And drop the extracted copy, which pnpm would otherwise relink as is.
@@ -111,36 +121,102 @@ if (fs.existsSync(PNPM_DIR)) {
 // once the lockfile matches what pnpm last installed it skips the link step
 // entirely, and the extracted copy removed just above is never recreated.
 console.log(`Installing ${path.basename(source)} (${matches.length} lockfile entry rewritten)...`);
-execFileSync("pnpm", ["install", "--force"], { cwd: ROOT, stdio: "inherit" });
+// shell: true on Windows -- pnpm is a .CMD shim there and Node will not spawn
+// one directly (ENOENT), and this workspace has no node_modules/.bin/pnpm to
+// fall back on.
+try {
+  execFileSync("pnpm", ["install", "--force"], {
+    cwd: ROOT,
+    stdio: "inherit",
+    shell: process.platform === "win32",
+  });
+} catch (error) {
+  // The tarball and the lockfile were already rewritten above, so a failed
+  // install leaves the tree claiming a version it does not have. Put both back.
+  restore();
+  fail(`pnpm install failed, tarball and lockfile restored: ${error.message}`);
+}
 
 // Prove it landed. A silent no-op is exactly what this script is here to catch,
 // so do not take the install's exit code as evidence.
-let installed;
-try {
-  const require_ = createRequire(path.join(ROOT, "packages", "client", "noop.js"));
-  installed = path.dirname(require_.resolve("@onlyoffice/apps-ui-kit/package.json"));
-} catch {
+// Every copy, not just the first. pnpm's isolated layout installs one physical
+// copy per distinct peer-resolution set, and the apps do not all land on the
+// same one -- packages/sdk currently resolves a different copy than everything
+// else. Verifying only the copy that packages/client sees would leave the other
+// one silently stale.
+const installedCopies = () => {
+  const found = new Map();
+
+  for (const app of fs.readdirSync(path.join(ROOT, "packages"))) {
+    try {
+      const require_ = createRequire(path.join(ROOT, "packages", app, "noop.js"));
+      const dir = fs.realpathSync(
+        path.dirname(require_.resolve("@onlyoffice/apps-ui-kit/package.json")),
+      );
+      if (!found.has(dir)) found.set(dir, []);
+      found.get(dir).push(app);
+    } catch {
+      // The app does not depend on ui-kit; nothing to verify for it.
+    }
+  }
+
+  return found;
+};
+
+const copies = installedCopies();
+
+if (copies.size === 0) {
   fail("@onlyoffice/apps-ui-kit did not resolve after the install -- the tree is broken.");
 }
 
-const stylesheet = path.join(installed, "dist", "styles.css");
-const packed = execFileSync("tar", ["-xzOf", TARBALL, "package/dist/styles.css"], {
-  maxBuffer: 64 * 1024 * 1024,
-});
+// Hash the whole package, not one file inside it. Comparing dist/styles.css
+// alone passed a build whose JavaScript had changed and whose stylesheet had
+// not -- which is most of them, since a change to a .ts file leaves the CSS
+// byte-identical. The check that is meant to catch a silent no-op has to see
+// everything the tarball ships.
+const treeHash = (files) => {
+  const digest = createHash("sha256");
+  for (const [name, bytes] of [...files].sort(([a], [b]) => a.localeCompare(b))) {
+    digest.update(name).update("\0").update(bytes).update("\0");
+  }
+  return digest.digest("hex");
+};
 
-const sameStylesheet =
-  fs.existsSync(stylesheet) &&
-  createHash("sha1").update(fs.readFileSync(stylesheet)).digest("hex") ===
-    createHash("sha1").update(packed).digest("hex");
+/** Every file in the packed tarball, keyed by its path below `package/`. */
+const packedFiles = () => {
+  const list = execFileSync("tar", ["-tzf", TARBALL], { encoding: "utf8" })
+    .split("\n")
+    .filter((name) => name.startsWith("package/") && !name.endsWith("/"));
 
-if (!sameStylesheet) {
+  return list.map((name) => [
+    name.slice("package/".length),
+    execFileSync("tar", ["-xzOf", TARBALL, name], { maxBuffer: 256 * 1024 * 1024 }),
+  ]);
+};
+
+/** The same files as installed, skipping anything the tarball does not ship. */
+const installedFiles = (root, names) =>
+  names.map(([name]) => {
+    const full = path.join(root, name);
+    return [name, fs.existsSync(full) ? fs.readFileSync(full) : Buffer.alloc(0)];
+  });
+
+const packed = packedFiles();
+const want = treeHash(packed);
+
+for (const [dir, apps] of copies) {
+  if (treeHash(installedFiles(dir, packed)) === want) continue;
+
   fail(
-    "node_modules still holds a different build of @onlyoffice/apps-ui-kit. " +
+    `node_modules still holds a different build of @onlyoffice/apps-ui-kit for ` +
+      `${apps.join(", ")} (${path.relative(ROOT, dir)}). ` +
       "Remove node_modules/.pnpm/@onlyoffice+apps-ui-kit* and reinstall.",
   );
 }
 
-const { version } = JSON.parse(fs.readFileSync(path.join(installed, "package.json"), "utf8"));
+const [firstCopy] = copies.keys();
+const { version } = JSON.parse(fs.readFileSync(path.join(firstCopy, "package.json"), "utf8"));
+const where = copies.size === 1 ? "1 copy" : `${copies.size} copies`;
 
-console.log(`@onlyoffice/apps-ui-kit ${version} installed and verified against the tarball.`);
+console.log(`@onlyoffice/apps-ui-kit ${version} installed and verified against the tarball (${where}).`);
 console.log("Commit onlyoffice-apps-ui-kit.tgz together with pnpm-lock.yaml.");

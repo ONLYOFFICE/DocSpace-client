@@ -36,6 +36,8 @@ packages/runtime.json
 playwright-report
 .playwright-mcp
 common/tests/reports/tests-results.html
+# vitest writes here when common/tests is run with --root from the repo root
+reports/
 
 .nx/cache
 .nx/workspace-data

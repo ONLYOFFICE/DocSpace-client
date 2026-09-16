@@ -40,6 +40,9 @@ const fail = (message) => {
 const integrityOf = (file) =>
   `sha512-${createHash("sha512").update(fs.readFileSync(file)).digest("base64")}`;
 
+/** Set by findSource when it located a ui-kit checkout rather than a bare path. */
+let uiKitRoot = null;
+
 /** The tarball to install: an explicit argument, or the newest pack next door. */
 const findSource = () => {
   const [arg] = process.argv.slice(2);
@@ -71,10 +74,68 @@ const findSource = () => {
     fail(`No onlyoffice-apps-ui-kit-*.tgz in ${uiKit}. Run \`pnpm build && pnpm pack\` there first.`);
   }
 
+  uiKitRoot = uiKit;
+
   return packs[0];
 };
 
+/**
+ * ui-kit statically imports @onlyoffice/ai-chat, so the two move together. That
+ * tarball is versioned in its filename, which means a bump is not just a file
+ * swap -- every app manifest naming it has to change with it. Doing that by
+ * hand is how the repositories last drifted apart: ui-kit required 0.5.113
+ * while this repo still vendored, and every app still named, 0.5.110.
+ *
+ * So take whatever ai-chat sits next to the ui-kit checkout as the truth.
+ */
+const syncAiChat = (uiKitRoot) => {
+  if (uiKitRoot === null) return null;
+
+  const NAME = /^onlyoffice-ai-chat-(.+)\.tgz$/;
+  const [newest] = fs
+    .readdirSync(uiKitRoot)
+    .filter((f) => NAME.test(f))
+    .sort((a, b) => fs.statSync(path.join(uiKitRoot, b)).mtimeMs - fs.statSync(path.join(uiKitRoot, a)).mtimeMs);
+
+  if (!newest) return null;
+
+  const current = fs.readdirSync(ROOT).filter((f) => NAME.test(f));
+
+  if (current.length === 1 && current[0] === newest) return null;
+
+  fs.copyFileSync(path.join(uiKitRoot, newest), path.join(ROOT, newest));
+  for (const stale of current) {
+    if (stale !== newest) fs.rmSync(path.join(ROOT, stale), { force: true });
+  }
+
+  // Every manifest that names the old file has to name the new one, or the
+  // install fails on a path that no longer exists.
+  const touched = [];
+  for (const app of fs.readdirSync(path.join(ROOT, "packages"))) {
+    const manifest = path.join(ROOT, "packages", app, "package.json");
+    if (!fs.existsSync(manifest)) continue;
+
+    const text = fs.readFileSync(manifest, "utf8");
+    const next = text.replace(
+      /"@onlyoffice\/ai-chat": "file:\.\.\/\.\.\/onlyoffice-ai-chat-[^"]+\.tgz"/g,
+      `"@onlyoffice/ai-chat": "file:../../${newest}"`,
+    );
+
+    if (next === text) continue;
+    fs.writeFileSync(manifest, next);
+    touched.push(app);
+  }
+
+  console.log(
+    `@onlyoffice/ai-chat -> ${newest}` +
+      (touched.length > 0 ? ` (${touched.join(", ")} repointed)` : ""),
+  );
+
+  return newest;
+};
+
 const source = findSource();
+const aiChat = syncAiChat(uiKitRoot);
 const hadTarball = fs.existsSync(TARBALL);
 // Snapshot before overwriting: the rollback below has to put these exact bytes
 // back, and by then the file on disk is already the new pack.
@@ -85,7 +146,9 @@ fs.copyFileSync(source, TARBALL);
 
 const after = integrityOf(TARBALL);
 
-if (before === after) {
+// An unchanged ui-kit does not mean there is nothing to do: ai-chat may have
+// moved on its own, and the manifests rewritten above then need an install.
+if (before === after && aiChat === null) {
   console.log(`${path.relative(ROOT, TARBALL)} is already this build -- nothing to do.`);
   process.exit(0);
 }

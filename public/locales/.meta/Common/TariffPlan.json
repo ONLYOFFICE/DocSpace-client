@@ -3,7 +3,7 @@
   "content": "Tariff plan",
   "content_en_sha1_hash": "aeb383dc7ea42f058365530cf364e14c91618eda",
   "created_at": "2026-05-25T18:26:14.961Z",
-  "updated_at": "2026-08-19T13:26:37.776Z",
+  "updated_at": "2026-09-16T20:56:59.543Z",
   "comment": {
     "text": "Menu item label in the portal settings payments section, containing the dynamic variable `productName`.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/BillingSidebar/index.tsx",
+      "line_number": 77,
+      "context": "},\n {\n id: \"billing-tariff-plan\",\n path: \"/billing/tariff-plan\",\n icon: TariffReactSvgUrl,\n translationKey: \"Common:TariffPlan\" as const,\n },\n {\n id: \"billing-addons\",\n path: \"/billing/addons\",\n icon: AddonsReactSvgUrl,",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/utils/index.ts",
       "line_number": 64,

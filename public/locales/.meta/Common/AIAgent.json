@@ -3,7 +3,7 @@
   "content": "AI agent",
   "content_en_sha1_hash": "ab15eb3d82fcf6e76a2ede7896d22471a681f18e",
   "created_at": "2025-12-19T10:16:17.398Z",
-  "updated_at": "2026-09-14T20:38:41.343Z",
+  "updated_at": "2026-09-16T20:56:59.554Z",
   "comment": {
     "text": "This string refers to an AI agent, likely a feature or service within the application. It appears as a label in various contexts, including a selector and an empty screen description.",
     "is_auto": true,
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
-      "line_number": 149,
+      "line_number": 150,
       "context": "break;\n // TODO: for AI agents\n case NoAccessContainerType.Agent:\n emptyViewProps = {\n title: t(\"Common:NoAccessAIAgentTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n description: t(\"Common:AIAgentAccessRedirectNote\", {\n sectionName: t(\"Common:AIAgents\"),\n }),\n icon: theme.isBase ? (",
       "module": "/packages/client"
     },

@@ -184,7 +184,14 @@ console.log(`Found javascripts by js(x)|ts(x) filter = ${javascripts.length}.`);
 const pattern1 =
   "[.{\\s\\(]t\\??\\.?\\(\\s*[\"'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"'`]\\s*[\\),]";
 const pattern2 = 'i18nKey="([a-zA-Z0-9_.:-]+)"';
-const pattern3 = 'tKey:\\s"([a-zA-Z0-9_.:-]+)"';
+// Keys travel as props on data objects too, not only through `t()`. `tKey` was
+// the only one the scan knew, so `titleKey`, `labelKey`, `translationKey` and
+// `toastKey` produced no usage record at all -- which is how
+// Common:OrganizationAI came to look unused once the stale ui-kit record
+// pointing at a deleted file was dropped. The `Key`-suffixed props that hold
+// something else (publicKey, apiKey, providerKey, secretKey) are not listed.
+const pattern3 =
+  '\\b(?:t|title|label|translation|toast)Key:\\s*["\']([a-zA-Z0-9_.:-]+)["\']';
 const pattern4 = 'getTitle\\("([a-zA-Z0-9_.:-]+)"\\)';
 const pattern5 = 'getCommonTranslation\\("([a-zA-Z0-9_.:-]+)"[\\s,)]';
 

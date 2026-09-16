@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-09-16T18:53:34.444Z",
+  "updated_at": "2026-09-16T20:56:59.536Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -22,6 +22,18 @@
       "line_number": 243,
       "context": "? onTopUp\n : isPaid\n ? onCancelPlan\n : onBuyPlan\n }\n title={t(\"DocsConnect:DocsConnect\")}\n priceText={\n isPaid\n ? devPackEnabled\n ? t(\"DocsConnect:PricePerUserMonthDevPackNote\", {\n price: formatCurrency(pricePerUser, 0),",
       "module": "@onlyoffice/apps-ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/Article/Body/DeveloperToolsItems.tsx",
+      "line_number": 67,
+      "context": "},\n {\n id: \"devtools-docs-connect\",\n path: \"/developer-tools/docs-connect\",\n pageType: PageType.devToolsDocsConnect,\n translationKey: \"DocsConnect:DocsConnect\",\n conditionalOnDocsConnect: true,\n },\n {\n id: \"devtools-javascript-sdk\",\n path: \"/developer-tools/javascript-sdk\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/DeveloperToolsSidebar/index.tsx",
+      "line_number": 90,
+      "context": "},\n {\n id: \"devtools-docs-connect\",\n path: \"/developer-tools/docs-connect\",\n pageType: PageType.devToolsDocsConnect,\n translationKey: \"DocsConnect:DocsConnect\" as const,\n conditionalOnDocsConnect: true,\n },\n {\n id: \"devtools-javascript-sdk\",\n path: \"/developer-tools/javascript-sdk\",",
+      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/IntegrationsCard/integrations-catalog.tsx",

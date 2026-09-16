@@ -3,7 +3,7 @@
   "content": "Embed SDK",
   "content_en_sha1_hash": "a9ccf1a96c44b79062482e5c0b3db74a1df2a6dd",
   "created_at": "2026-04-03T21:51:36.584Z",
-  "updated_at": "2026-08-27T15:37:55.718Z",
+  "updated_at": "2026-09-16T20:56:59.537Z",
   "comment": {
     "text": "This is a title for a section in the Developer Tools settings, referring to the Embed SDK. It also appears as a card title in the same section.",
     "is_auto": true,
@@ -11,6 +11,18 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/Body/DeveloperToolsItems.tsx",
+      "line_number": 74,
+      "context": "},\n {\n id: \"devtools-javascript-sdk\",\n path: \"/developer-tools/javascript-sdk\",\n pageType: PageType.devToolsJavascriptSdk,\n translationKey: \"Settings:EmbedSDK\",\n },\n {\n id: \"devtools-plugin-sdk\",\n path: \"/developer-tools/plugin-sdk\",\n pageType: PageType.devToolsPluginSdk,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/DeveloperToolsSidebar/index.tsx",
+      "line_number": 97,
+      "context": "},\n {\n id: \"devtools-javascript-sdk\",\n path: \"/developer-tools/javascript-sdk\",\n pageType: PageType.devToolsJavascriptSdk,\n translationKey: \"Settings:EmbedSDK\" as const,\n },\n {\n id: \"devtools-plugin-sdk\",\n path: \"/developer-tools/plugin-sdk\",\n pageType: PageType.devToolsPluginSdk,",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
       "line_number": 151,

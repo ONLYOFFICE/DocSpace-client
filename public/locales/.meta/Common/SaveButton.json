@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-09-14T20:38:41.349Z",
+  "updated_at": "2026-09-16T20:56:59.573Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -103,13 +103,13 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 398,
+      "line_number": 399,
       "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n isDisabled={!hasInvitedUsers || isLoading}\n primary\n label={t(\"Common:SaveButton\")}\n onClick={onSubmit}\n testId=\"template_access_settings_save_button\"\n />\n <Button\n className=\"cancel-button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 398,
+      "line_number": 399,
       "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n isDisabled={!hasInvitedUsers || isLoading}\n primary\n label={t(\"Common:SaveButton\")}\n onClick={onSubmit}\n testId=\"template_access_settings_save_button\"\n />\n <Button\n className=\"cancel-button\"",
       "module": "/packages/client"
     },

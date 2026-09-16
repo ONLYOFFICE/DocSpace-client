@@ -45,6 +45,31 @@ const {
 } = require("../utils/files");
 
 let workspaces = [];
+
+// Peer dependency names declared by the installed copies of a workspace's
+// direct dependencies, read straight from node_modules/<dep>/package.json:
+// pnpm links every declared dependency there, and require.resolve is no use
+// because a package with an `exports` map (ai-chat among them) does not
+// expose its package.json.
+const peerNamesOf = (wsDepsItem) => {
+  const names = new Set();
+  const nodeModules = path.join(path.dirname(wsDepsItem.path), "node_modules");
+
+  for (const dep of wsDepsItem.deps) {
+    try {
+      const manifest = JSON.parse(
+        fs.readFileSync(path.join(nodeModules, dep.name, "package.json"), "utf8"),
+      );
+      for (const peer of Object.keys(manifest.peerDependencies ?? {})) {
+        names.add(peer);
+      }
+    } catch {
+      // Not installed, or no manifest: nothing to learn from it.
+    }
+  }
+
+  return names;
+};
 let workspaceCodeImports = [];
 let workspaceDeps = [];
 
@@ -325,93 +350,50 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       return !success;
     });
 
+    // A dependency nothing imports can still be load-bearing. pnpm does not
+    // install optional peers, so an app that renders a library's optional
+    // module has to declare that module's peers itself: client and sdk carry
+    // ai-chat's LLM SDKs, radix and codemirror this way, and ui-kit's
+    // markdown stack. Such an entry is used by the package that lists it as
+    // a peer, and the installed manifest says which ones do.
+    const peersOfDeclared = peerNamesOf(wsDepsItem);
+
+    missing = missing.filter((m) => {
+      const success = peersOfDeclared.has(m.name);
+
+      if (success) {
+        usedSomeWhere.add(m.name);
+      }
+
+      return !success;
+    });
+
     // Filter out allowed unused dependencies
     const allowedUnusedDeps = [
-      "@aws-sdk/client-cloudwatch-logs",
-      "@storybook/addon-docs",
-      "@storybook/addon-links",
-      "@storybook/react",
-      "babel-jest",
-      "babel-plugin-styled-components",
-      "@babel/core",
-      "@babel/runtime",
+      // packages/shared tooling that is configured rather than imported: the
+      // Babel preset chain (babel.config), Storybook (.storybook), the Vitest
+      // module mock and its types, ts-node for the config loaders, Biome and
+      // open-cli behind package scripts of the root, and two runtime shims
+      // (linkifyjs, path-browserify) that host bundles resolve by name.
+      "@babel/plugin-proposal-export-default-from",
+      "@babel/plugin-transform-class-properties",
+      "@babel/plugin-transform-export-namespace-from",
+      "@babel/plugin-transform-private-property-in-object",
+      "@babel/plugin-transform-runtime",
       "@babel/preset-env",
       "@babel/preset-react",
       "@babel/preset-typescript",
-      "@babel/plugin-transform-runtime",
-      "@babel/plugin-transform-private-property-in-object",
-      "@babel/plugin-transform-export-namespace-from",
-      "@babel/plugin-transform-class-properties",
-      "@babel/plugin-proposal-export-default-from",
-      "webpack-dev-server",
-      "resolve-url-loader",
-      "typescript",
-      // @rollup/plugin-typescript forces importHelpers + noEmitHelpers on
-      // every build, so tsc emits `import ... from "tslib"` for any helper it
-      // needs and errors TS2354 when the module is absent. It is an optional
-      // peer of that plugin, never imported from ui-kit source.
-      "tslib",
-      "local-web-server",
-      "identity-obj-proxy",
-      "@types/identity-obj-proxy",
-      "@types/element-resize-detector",
-      "@types/node",
-      "jest-environment-jsdom",
-      "jest-styled-components",
-      "jsdom",
-      "ts-jest",
-      "ts-node",
-      "jest-html-reporter",
-      "linkifyjs",
+      "@babel/runtime",
       "@biomejs/biome",
-      "@vitest/ui",
-      "@vitest/coverage-v8",
+      "@storybook/addon-docs",
+      "@storybook/react",
+      "@types/element-resize-detector",
+      "@types/identity-obj-proxy",
+      "identity-obj-proxy",
+      "linkifyjs",
       "open-cli",
-      "postcss",
       "path-browserify",
-      "sass",
-      // Optional peer deps of @onlyoffice/ai-chat. Its registry imports
-      // them statically, so host builds (Vite/webpack) need them installed,
-      // but they are not referenced directly from ui-kit source.
-      "@anthropic-ai/sdk",
-      "@assistant-ui/react",
-      "@assistant-ui/react-markdown",
-      "assistant-stream",
-      "@codemirror/lang-json",
-      "@codemirror/state",
-      "@codemirror/view",
-      "codemirror",
-      "@google/genai",
-      "@mistralai/mistralai",
-      "@radix-ui/react-dialog",
-      "@radix-ui/react-dropdown-menu",
-      "@radix-ui/react-slot",
-      "@radix-ui/react-switch",
-      "@radix-ui/react-tabs",
-      "@radix-ui/react-tooltip",
-      "class-variance-authority",
-      "clsx",
-      "framer-motion",
-      "katex",
-      "openai",
-      "react-markdown",
-      "react-shiki",
-      "react-syntax-highlighter",
-      "rehype-katex",
-      "rehype-raw",
-      "remark-gfm",
-      "remark-math",
-      "tailwind-merge",
-      "zustand",
-      // @onlyoffice/apps-ui-kit dependencies that peer-installed apps must
-      // declare for the host build to resolve them (Vite/Next.js/tsc), but
-      // never import by name directly -- the only usage is through ui-kit's
-      // own compiled subpaths, or (document-editor-react) purely as an
-      // ambient global-type augmentation with no import statement at all.
-      "@onlyoffice/document-editor-react",
-      "@onlyoffice/ai-chat",
-      "@socket.io/component-emitter",
-      "socket.io-client",
+      "ts-node",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));

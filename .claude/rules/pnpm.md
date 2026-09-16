@@ -97,6 +97,70 @@ what landed in node_modules is what was copied in - the silent no-op above is
 precisely what it refuses to let pass. Commit `onlyoffice-apps-ui-kit.tgz`
 together with the `pnpm-lock.yaml` change it produces.
 
+The verification digests **everything the tarball ships** in **every** extracted
+copy under `node_modules/.pnpm/@onlyoffice+apps-ui-kit@*` (skipping the
+`node_modules` pnpm adds there), against the tarball read with node's own gzip
+and tar walker. Three earlier shortcuts are why: comparing only
+`dist/styles.css` passed any build that changed just JavaScript; comparing only
+`dist/` missed `styles/` and `locales/`, which the exports map serves directly
+and which hundreds of the client's own `.module.scss` files `@use`; and checking
+only the copy the client resolves left a stale sibling in place, which is what
+the apps resolving to *that* copy would run. It also runs when the tarball is
+unchanged, because the install can die after the lockfile and the extracted
+copies were already rewritten. The `tar` binary is deliberately not used - the
+GNU tar shipped with Git Bash reads a Windows path as a remote `host:path` spec
+and refuses it.
+
+### Running the client against a ui-kit checkout
+
+Waiting for build, pack, install and a dev-server restart on every ui-kit edit
+is the cost of consuming a prebuilt package. `DOCSPACE_UI_KIT_SRC` removes it
+for local work by pointing the client's Vite at a checkout instead:
+
+```bash
+pnpm run start:ui-kit-src                 # same app set as `pnpm start`
+pnpm run start:ui-kit-src start:lite      # any other start script
+DOCSPACE_UI_KIT_SRC=../elsewhere pnpm run start:ui-kit-src
+```
+
+Use the **root** script, or the "Start (ui-kit src)" button. `pnpm start` fans
+out to five apps through Nx, so the root is where the variable has to be set; a
+script in `packages/client` alone is never the one anyone runs. The path is
+resolved against the repo root. The switch lives entirely in
+`packages/client/config/` (`ui-kit-dev.ts` plus one line each in `resolve.ts`,
+`css.ts`, `server.ts` and `vite.config.ts`) and changes nothing in the ui-kit
+repository; the checkout serves its own `assets/`, `styles/` and `locales/`,
+exactly as the tarball does. `optimizeDeps` drops the ui-kit globs in this mode,
+because pre-bundling would freeze the files being edited.
+
+Four properties keep it honest:
+
+- **It is a Vite alias only, never a tsconfig path.** `pnpm tsc` in the pre-push
+  gate keeps resolving `@onlyoffice/apps-ui-kit` through `node_modules`, so a
+  client import of a subpath the *package* does not export still fails the gate
+  while the browser is happily serving source.
+- **It is a dev-server switch only.** `vite.config.ts` refuses `vite build`
+  while the variable is set. `resolve` and `css` are shared by both commands, so
+  a build would otherwise take ui-kit from the checkout - and emit a different
+  artifact, since the chunking rules in `config/build.ts` match node_modules
+  paths a checkout does not have.
+- **An import that escapes the checkout fails.** Under the alias, ui-kit source
+  is processed by the client's config, so `PUBLIC_DIR`, `SRC_DIR`,
+  `@docspace/shared` and friends would resolve from inside ui-kit and break only
+  later, in its own rollup build. `config/plugins/ui-kit-boundary.ts` covers
+  JS/TS; sass never reaches `resolveId`, so `config/css.ts` carries the same
+  check in its `findFileUrl` importer, keyed on `containingUrl`.
+- **Source mode is more forgiving than packing.** It does not exercise the
+  extracted stylesheet and its cascade order, `"use client"` preservation, the
+  exports wildcard and module shape, the generated `.d.mts`, or the type-only
+  subpaths that have no runtime module. Run the client once **without** the
+  variable before committing a new tarball.
+
+`resolve.dedupe` is built from the checkout's own `peerDependencies` rather than
+a hand-picked list: every peer is a package both trees resolve separately, and a
+second copy of anything holding module state (a context, a store, a socket) is a
+silent behaviour change. A hand-picked subset rots on the next bump either side.
+
 The tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's `main`,
 `module`, `types` and `exports` fields live under `publishConfig`, which only
 pnpm promotes to the top level when packing. An npm-packed tarball has no

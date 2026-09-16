@@ -34,47 +34,48 @@
  */
 
 import path from "path";
-import type { UserConfig } from "vite";
-import { rootDir } from "./utils";
-import {
-  UI_KIT_PACKAGE,
-  uiKitDevRoot,
-  uiKitPeerDependencies,
-  uiKitStylesEntry,
-} from "./ui-kit-dev";
+import type { Plugin } from "vite";
 
-const uiKitAlias =
-  uiKitDevRoot && uiKitStylesEntry
-    ? {
-        [`${UI_KIT_PACKAGE}/styles.css`]: uiKitStylesEntry,
-        [UI_KIT_PACKAGE]: uiKitDevRoot,
-      }
-    : {};
+import { isInsideUiKit, uiKitBoundaryError } from "../ui-kit-dev";
 
-const baseDedupe = [
-  "styled-components",
-  "react",
-  "react-dom",
-  "@onlyoffice/ai-chat",
-];
+const NODE_MODULES = `${path.sep}node_modules${path.sep}`;
 
-// The checkout sits next to this repo, so every bare specifier in ui-kit source
-// resolves against the checkout's own node_modules. For a package both trees
-// carry that means two copies, and for anything holding module state -- a
-// context, a store, a socket -- two copies is a silent behaviour change.
-// UI_KIT_PACKAGE itself is not listed: the alias above intercepts it first.
-const dedupe = [...new Set([...baseDedupe, ...uiKitPeerDependencies])];
+const bare = (id: string) => id.split("?")[0].split("#")[0];
 
-export const resolve: UserConfig["resolve"] = {
-  alias: {
-    PUBLIC_DIR: path.resolve(rootDir, "../../public"),
-    ASSETS_DIR: path.resolve(rootDir, "./public"),
-    SRC_DIR: path.resolve(rootDir, "./src"),
-    PACKAGE_FILE: path.resolve(rootDir, "package.json"),
-    COMMON_DIR: path.resolve(rootDir, "../common"),
-    "@docspace/shared": path.resolve(rootDir, "../shared"),
-    ...uiKitAlias,
+// Guards JS and TS imports only. SCSS never reaches resolveId -- sass resolves
+// `@use` through the importer in config/css.ts, which carries the same check.
+export const uiKitBoundaryPlugin = (): Plugin => ({
+  name: "ui-kit-boundary",
+  enforce: "pre",
+  apply: "serve",
+  resolveId(source, importer) {
+    if (!importer || source.startsWith("\0")) return null;
+
+    const from = path.normalize(bare(importer));
+
+    if (!isInsideUiKit(from) || from.includes(NODE_MODULES)) return null;
+
+    const spec = bare(source);
+
+    if (spec.startsWith("/@") || spec.startsWith("virtual:")) return null;
+
+    // Judged by destination, not by specifier: `vite:alias` runs ahead of this
+    // plugin, so every client alias arrives already rewritten to an absolute
+    // path. Checking where it lands covers them all, including aliases added
+    // later, and needs no list to keep in step with config/resolve.ts.
+    const target = spec.startsWith(".")
+      ? path.resolve(path.dirname(from), spec)
+      : path.isAbsolute(spec)
+        ? path.normalize(spec)
+        : null;
+
+    if (target && !isInsideUiKit(target))
+      throw uiKitBoundaryError(
+        from,
+        source,
+        `it points outside the ui-kit checkout, at ${target}`,
+      );
+
+    return null;
   },
-  extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
-  dedupe,
-};
+});

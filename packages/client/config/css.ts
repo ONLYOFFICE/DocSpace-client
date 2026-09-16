@@ -34,14 +34,12 @@
  */
 
 import path from "path";
-import { createRequire } from "module";
+import { fileURLToPath } from "url";
 import type { UserConfig } from "vite";
 import { rootDir } from "./utils";
+import { isInsideUiKit, uiKitBoundaryError, uiKitDir } from "./ui-kit-dev";
 
-const require = createRequire(import.meta.url);
-const uiKitDir = path.dirname(
-  require.resolve("@onlyoffice/apps-ui-kit/package.json"),
-);
+type FileImporterContext = { containingUrl: URL | null };
 
 export const css: UserConfig["css"] = {
   modules: {
@@ -51,7 +49,7 @@ export const css: UserConfig["css"] = {
     scss: {
       importers: [
         {
-          findFileUrl(url: string) {
+          findFileUrl(url: string, context: FileImporterContext) {
             if (url.startsWith("@onlyoffice/apps-ui-kit")) {
               const resolved = url.replace(
                 "@onlyoffice/apps-ui-kit",
@@ -62,6 +60,18 @@ export const css: UserConfig["css"] = {
               );
             }
             if (url.startsWith("@docspace/shared")) {
+              const from =
+                context?.containingUrl?.protocol === "file:"
+                  ? fileURLToPath(context.containingUrl)
+                  : null;
+
+              if (from && isInsideUiKit(from))
+                throw uiKitBoundaryError(
+                  from,
+                  url,
+                  '"@docspace/shared" is an alias the client defines, not ui-kit',
+                );
+
               const resolved = url.replace(
                 "@docspace/shared",
                 path.resolve(rootDir, "../shared"),

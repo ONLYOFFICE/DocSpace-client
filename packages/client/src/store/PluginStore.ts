@@ -1975,7 +1975,7 @@ class PluginStore {
       });
 
       this.initLocalePlugin(newPlugin);
-      this.installPlugin(newPlugin);
+      await this.installPlugin(newPlugin);
 
       if (newPlugin.scopes.includes(PluginScopes.Settings)) {
         newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);

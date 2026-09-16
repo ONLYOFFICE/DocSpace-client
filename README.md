@@ -188,14 +188,18 @@ submodules to initialize.
 
 **Updating it:** build and pack the library in the ui-kit repository
 (`pnpm build && pnpm pack` — it must be `pnpm pack`, since ui-kit's entry
-points live under `publishConfig`), copy the resulting tarball over
-`onlyoffice-apps-ui-kit.tgz` here, then:
+points live under `publishConfig`), then run the updater here:
 
 ```bash
-pnpm install
-git add onlyoffice-apps-ui-kit.tgz pnpm-lock.yaml
-git commit -m "chore: update ui-kit"
+pnpm run update-ui-kit          # newest pack in ../docspace-ui-kit-react, or pass a path
+git add onlyoffice-apps-ui-kit.tgz onlyoffice-ai-chat-*.tgz pnpm-lock.yaml packages/*/package.json
 ```
+
+Do not copy the tarball and run `pnpm install` yourself: the `file:` specifier
+never changes, so pnpm keeps the cached copy and the update silently does not
+happen. The updater rewrites the recorded integrity, drops the extracted copy,
+reinstalls, verifies every installed copy against the tarball, and keeps the
+vendored `@onlyoffice/ai-chat` tarball in step with what ui-kit requires.
 
 **Documentation:** See the [ui-kit README](https://github.com/ONLYOFFICE/docspace-ui-kit-react#readme) for component documentation and usage examples.
 

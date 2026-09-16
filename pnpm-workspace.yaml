@@ -33,11 +33,11 @@ allowBuilds:
   sharp: true
 
 minimumReleaseAgeExclude:
-  # Vendored tarball (onlyoffice-ai-chat-*.tgz at the repo root, also vendored
-  # inside the ui-kit tarball for ui-kit's own build), never published to npm,
-  # so the age check 404s on the registry. Listed without a version so it
-  # survives tarball bumps; the artifact is committed and reviewed in the
-  # ui-kit repo, then copied here.
+  # Vendored tarball (onlyoffice-ai-chat-*.tgz at the repo root), never
+  # published to npm, so the age check 404s on the registry. Listed without a
+  # version so it survives tarball bumps; the artifact is committed in the
+  # ui-kit repo, which builds against it, and `pnpm run update-ui-kit` copies
+  # the version ui-kit requires here.
   - '@onlyoffice/ai-chat'
   # Vendored tarball (onlyoffice-apps-ui-kit-*.tgz at the repo root), never
   # published to npm, so the age check 404s on the registry.

@@ -48,9 +48,8 @@ const moduleWorkspaces = [
 	path.join("public", "locales"), // common
 ];
 
-// `excludeUiKit` is accepted and ignored: ui-kit ships as a prebuilt tarball
-// from its own repository and is no longer checked out here, so it is never
-// part of the scanned workspaces. Callers keep passing it for readability.
+// ui-kit ships as a prebuilt tarball from its own repository and is never
+// part of the scanned workspaces.
 const getWorkSpaces = () => {
 	return moduleWorkspaces.map((ws) => path.resolve(BASE_DIR, ws));
 };

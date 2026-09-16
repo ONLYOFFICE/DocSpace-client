@@ -80,10 +80,10 @@ export const getSelectFormatTranslation = (
       });
 
     case FilterType.Pdf:
-      return getTranslatedType(getManyPDFTitle(t, false));
+      return getTranslatedType(getManyPDFTitle(t, false), false);
 
     case FilterType.PDFForm:
-      return getTranslatedType(getManyPDFTitle(t, true));
+      return getTranslatedType(getManyPDFTitle(t, true), false);
 
     case "EditorSupportedTypes":
       return getTranslatedType(

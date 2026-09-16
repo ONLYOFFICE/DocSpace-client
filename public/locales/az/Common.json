@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Ödəniş üsulu ayrıldı.</1> Birini əlavə etmək üçün ödəyici ilə əlaqə saxlayın <2>{{email}}</2>",
   "PaymentsTitle": "Ödənişlər",
   "PayNow": "İndi ödə",
+  "PDFDocuments": "PDF-sənədlər",
+  "PDFForms": "PDF-anketlər",
   "PDFs": "PDFs",
   "People": "İnsanlar",
   "PeopleSelectorInfo": "Otağın sahibi yalnız otaq və ya super administrator ola bilər",

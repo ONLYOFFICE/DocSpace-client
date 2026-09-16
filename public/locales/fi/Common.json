@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Maksutapa irrotettu.</1> Lisää maksutapa ottamalla yhteyttä maksajaan <2>{{email}}</2>",
   "PaymentsTitle": "Maksut",
   "PayNow": "Maksa nyt",
+  "PDFDocuments": "PDF-asiakirjat",
+  "PDFForms": "PDF-lomakkeet",
   "PDFs": "PDF:t",
   "People": "Ihmiset",
   "PeopleSelectorInfo": "Vain huoneen tai pääjärjestelmänvalvoja voi tulla huoneen omistajaksi",

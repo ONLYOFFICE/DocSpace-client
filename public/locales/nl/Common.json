@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Betaalmethode ontkoppeld.</1> Neem contact op met de betaler <2>{{email}}</2> om er een toe te voegen",
   "PaymentsTitle": "Betalingen",
   "PayNow": "Nu betalen",
+  "PDFDocuments": "PDF-documenten",
+  "PDFForms": "PDF-formulieren",
   "PDFs": "PDFs",
   "People": "Mensen",
   "PeopleSelectorInfo": "Alleen een kamerbeheerder of superbeheerder kan eigenaar van de kamer worden",

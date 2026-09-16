@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Platební metoda odpojena.</1> Pro přidání prosím kontaktujte plátce <2>{{email}}</2>",
   "PaymentsTitle": "Platby",
   "PayNow": "Zaplatit nyní",
+  "PDFDocuments": "PDF-dokumenty",
+  "PDFForms": "PDF-formuláře",
   "PDFs": "PDFy",
   "People": "Lidé",
   "PeopleSelectorInfo": "Vlastníkem místnosti se může stát pouze administrátor místnosti nebo supersprávce",

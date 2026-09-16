@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Método de pagamento desassociado.</1> Para adicionar um, contacte o pagador <2>{{email}}</2>",
   "PaymentsTitle": "Pagamentos",
   "PayNow": "Pagar agora",
+  "PDFDocuments": "PDF-documentos",
+  "PDFForms": "PDF-formulários",
   "PDFs": "PDFs",
   "People": "Pessoas",
   "PeopleSelectorInfo": "Apenas um administrador de sala ou superadministrador pode tornar-se proprietário da sala",

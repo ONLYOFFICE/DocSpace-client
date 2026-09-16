@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Начин плаћања је одвезан.</1> Да бисте га додали, контактирајте платиоца <2>{{email}}</2>",
   "PaymentsTitle": "Плаћања",
   "PayNow": "Плати сада",
+  "PDFDocuments": "PDF-документи",
+  "PDFForms": "PDF-обрасци",
   "PDFs": "PDF-ови",
   "People": "Људи",
   "PeopleSelectorInfo": "Само администратор собе или суперадминистратор може постати власник собе",

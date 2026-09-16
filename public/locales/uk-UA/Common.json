@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Спосіб оплати відв'язано.</1> Щоб додати його, зверніться до платника <2>{{email}}</2>",
   "PaymentsTitle": "Платежі",
   "PayNow": "Оплатити зараз",
+  "PDFDocuments": "PDF-документи",
+  "PDFForms": "PDF-форми",
   "PDFs": "PDFs",
   "People": "Люди",
   "PeopleSelectorInfo": "Лише адміністратор кімнати або суперадміністратор може стати власником кімнати",

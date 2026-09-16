@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Maksāšanas metode atsaistīta.</1> Lai to pievienotu, lūdzu, sazinieties ar maksātāju <2>{{email}}</2>",
   "PaymentsTitle": "Maksājumi",
   "PayNow": "Maksāt tagad",
+  "PDFDocuments": "PDF-dokumenti",
+  "PDFForms": "PDF-veidlapas",
   "PDFs": "PDFs",
   "People": "Cilvēki",
   "PeopleSelectorInfo": "Tikai telpas vai superadministrators var kļūt par telpas īpašnieku",

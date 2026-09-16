@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Mode de paiement dissocié.</1> Pour en ajouter un, veuillez contacter le payeur <2>{{email}}</2>",
   "PaymentsTitle": "Paiements",
   "PayNow": "Payer maintenant",
+  "PDFDocuments": "PDF-documents",
+  "PDFForms": "PDF-formulaires",
   "PDFs": "PDFs",
   "People": "Personnes",
   "PeopleSelectorInfo": "Seul un administrateur de salle ou super-administrateur peut devenir propriétaire de la salle",

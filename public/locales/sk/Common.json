@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Platobná metóda odpojená.</1> Ak chcete nejakú pridať, kontaktujte platiteľa <2>{{email}}</2>",
   "PaymentsTitle": "Platby",
   "PayNow": "Zaplatiť teraz",
+  "PDFDocuments": "PDF-dokumenty",
+  "PDFForms": "PDF-formuláre",
   "PDFs": "PDFy",
   "People": "Ľudia",
   "PeopleSelectorInfo": "Majiteľom miestnosti sa môže stať iba administrátor miestnosti alebo supersprávca",

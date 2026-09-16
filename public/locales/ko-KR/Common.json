@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>결제 수단 연결 해제됨.</1> 추가하려면 결제자 <2>{{email}}</2>에게 문의하세요",
   "PaymentsTitle": "결제",
   "PayNow": "지금 결제",
+  "PDFDocuments": "PDF-문서",
+  "PDFForms": "PDF-양식",
   "PDFs": "PDFs",
   "People": "사람들",
   "PeopleSelectorInfo": "룸 관리자 또는 슈퍼 관리자만 룸의 소유자가 될 수 있습니다",

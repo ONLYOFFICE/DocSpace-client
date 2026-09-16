@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>付款方式已取消关联。</1> 要添加付款方式，请联系付款人 <2>{{email}}</2>",
   "PaymentsTitle": "付款",
   "PayNow": "立即支付",
+  "PDFDocuments": "PDF-文档",
+  "PDFForms": "PDF-表单",
   "PDFs": "PDF",
   "People": "人员",
   "PeopleSelectorInfo": "只有房间管理员或超级管理员才能成为房间的所有者",

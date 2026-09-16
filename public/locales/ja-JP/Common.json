@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>支払い方法の連携が解除されました。</1> 追加するには、支払者 <2>{{email}}</2> にご連絡ください",
   "PaymentsTitle": "お支払い",
   "PayNow": "今すぐ支払う",
+  "PDFDocuments": "PDF-ドキュメント",
+  "PDFForms": "PDF-フォーム",
   "PDFs": "PDFs",
   "People": "方々",
   "PeopleSelectorInfo": "ルームの所有者になれるのは、ルーム管理者またはスーパー管理者のみです",

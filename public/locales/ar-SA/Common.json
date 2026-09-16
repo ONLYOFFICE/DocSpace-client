@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>تم إلغاء ربط طريقة الدفع.</1> لإضافة واحدة، يُرجى الاتصال بالدافع <2>{{email}}</2>",
   "PaymentsTitle": "المدفوعات",
   "PayNow": "ادفع الآن",
+  "PDFDocuments": "PDF-ملفات",
+  "PDFForms": "PDF-نماذج",
   "PDFs": "ملفات PDF",
   "People": "الأشخاص",
   "PeopleSelectorInfo": "يمكن لمسؤول الغرفة أو المسؤول العام فقط أن يصبح مالكًا للغرفة",

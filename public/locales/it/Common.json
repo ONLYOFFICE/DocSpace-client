@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Metodo di pagamento scollegato.</1> Per aggiungerne uno, contatta il pagante <2>{{email}}</2>",
   "PaymentsTitle": "Pagamenti",
   "PayNow": "Paga ora",
+  "PDFDocuments": "PDF-documenti",
+  "PDFForms": "PDF-moduli",
   "PDFs": "PDFs",
   "People": "Persone",
   "PeopleSelectorInfo": "Solo un amministratore della stanza o superamministratore può diventare proprietario della stanza",

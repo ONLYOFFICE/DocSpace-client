@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Payment method unlinked.</1> To add one, please contact the payer <2>{{email}}</2>",
   "PaymentsTitle": "Payments",
   "PayNow": "Pay now",
+  "PDFDocuments": "PDF documents",
+  "PDFForms": "PDF forms",
   "PDFs": "PDFs",
   "People": "People",
   "PeopleSelectorInfo": "Only a room admin or Full admin can become the owner of the room",

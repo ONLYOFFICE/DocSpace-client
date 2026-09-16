@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Metoda e pagesës u shkëput.</1> Për të shtuar një, ju lutemi kontaktoni paguesin <2>{{email}}</2>",
   "PaymentsTitle": "Pagesat",
   "PayNow": "Paguaj tani",
+  "PDFDocuments": "PDF-dokumentet",
+  "PDFForms": "PDF-formularë",
   "PDFs": "PDF-ë",
   "People": "Njerëzit",
   "PeopleSelectorInfo": "Vetëm një administrator i dhomës ose superadministrator mund të bëhet pronar i dhomës",

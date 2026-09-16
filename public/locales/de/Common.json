@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Zahlungsmethode getrennt.</1> Um eine hinzuzufügen, wenden Sie sich bitte an den Zahler <2>{{email}}</2>",
   "PaymentsTitle": "Zahlungen",
   "PayNow": "Jetzt bezahlen",
+  "PDFDocuments": "PDF-Dokumente",
+  "PDFForms": "PDF-Formulare",
   "PDFs": "PDFs",
   "People": "Personen",
   "PeopleSelectorInfo": "Nur ein Raum- oder Super-Administrator kann Besitzer des Raums werden",

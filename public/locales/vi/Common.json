@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Đã hủy liên kết phương thức thanh toán.</1> Để thêm một phương thức, vui lòng liên hệ với người thanh toán <2>{{email}}</2>",
   "PaymentsTitle": "Thanh toán",
   "PayNow": "Thanh toán ngay",
+  "PDFDocuments": "PDF-các tài liệu",
+  "PDFForms": "PDF-các biểu mẫu",
   "PDFs": "PDFs",
   "People": "Người",
   "PeopleSelectorInfo": "Chỉ quản trị viên phòng hoặc siêu quản trị viên có thể trở thành chủ sở hữu của phòng",

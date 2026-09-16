@@ -1582,6 +1582,8 @@
   "PaymentMethodUnlinkedEmailBanner": "<1>Plačilna metoda je odklopljena.</1> Za dodajanje se obrnite na plačnika <2>{{email}}</2>",
   "PaymentsTitle": "Plačila",
   "PayNow": "Plačaj zdaj",
+  "PDFDocuments": "PDF-dokumenti",
+  "PDFForms": "PDF-obrazci",
   "PDFs": "PDF-i",
   "People": "Ljudje",
   "PeopleSelectorInfo": "Lastnik sobe lahko postane samo skrbnik sobe ali superskrbnik",

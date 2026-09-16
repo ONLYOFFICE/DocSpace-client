@@ -343,6 +343,21 @@
       }
     },
     {
+      "label": "Frontend | start (ui-kit source)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run start:ui-kit-src",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | start:lite",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run start:lite",

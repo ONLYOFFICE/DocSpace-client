@@ -191,7 +191,7 @@ its pnpm version. Like buildtools, the checkout is optional, so guard for it
 rather than assuming a path:
 
 ```bash
-UI_KIT=${DOCSPACE_UI_KIT_ROOT:-../../docspace-ui-kit-react}
+UI_KIT=${DOCSPACE_UI_KIT_SRC:-../../docspace-ui-kit-react}
 [ -f "$UI_KIT/package.json" ] || echo "ui-kit not cloned - skipping"
 ```
 

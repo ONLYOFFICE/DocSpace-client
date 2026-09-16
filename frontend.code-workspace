@@ -128,6 +128,11 @@
             "tooltip": "🛠️ Start the \"frontend start\" task"
           },
           {
+            "label": "Start (ui-kit src)",
+            "task": "Frontend | start (ui-kit source)",
+            "tooltip": "🛠️ Start the frontend with @onlyoffice/apps-ui-kit served from the ../../docspace-ui-kit-react checkout (HMR on ui-kit edits)"
+          },
+          {
             "label": "Start:lite",
             "task": "Frontend | start:lite",
             "tooltip": "🛠️ Start the \"frontend start\" task"

@@ -17,12 +17,12 @@
  *
  *   node scripts/update-ui-kit.mjs                     # newest pack in the sibling checkout
  *   node scripts/update-ui-kit.mjs path/to/pack.tgz    # an explicit tarball
- *   DOCSPACE_UI_KIT_ROOT=... node scripts/update-ui-kit.mjs
+ *   DOCSPACE_UI_KIT_SRC=... node scripts/update-ui-kit.mjs
  */
 
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { createRequire } from "node:module";
+import { gunzipSync } from "node:zlib";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -54,13 +54,13 @@ const findSource = () => {
 
   const uiKit = path.resolve(
     ROOT,
-    process.env.DOCSPACE_UI_KIT_ROOT ?? "../../docspace-ui-kit-react",
+    process.env.DOCSPACE_UI_KIT_SRC ?? "../../docspace-ui-kit-react",
   );
 
   if (!fs.existsSync(uiKit)) {
     fail(
       `ui-kit is not checked out at ${uiKit}. Clone it, or pass the tarball ` +
-        "path, or set DOCSPACE_UI_KIT_ROOT.",
+        "path, or set DOCSPACE_UI_KIT_SRC.",
     );
   }
 
@@ -87,6 +87,11 @@ const findSource = () => {
  * while this repo still vendored, and every app still named, 0.5.110.
  *
  * So take whatever ai-chat sits next to the ui-kit checkout as the truth.
+ *
+ * Returns null when nothing moved, otherwise the new filename and a `restore`
+ * that puts the previous tarball(s) and every rewritten manifest back -- the
+ * install below can still fail, and a tree whose manifests name a file the
+ * lockfile does not know is the half-updated state this script exists to avoid.
  */
 const syncAiChat = (uiKitRoot) => {
   if (uiKitRoot === null) return null;
@@ -102,6 +107,11 @@ const syncAiChat = (uiKitRoot) => {
   const current = fs.readdirSync(ROOT).filter((f) => NAME.test(f));
 
   if (current.length === 1 && current[0] === newest) return null;
+
+  // Snapshot before touching anything: the bytes of every tarball about to be
+  // removed or overwritten, and the text of every manifest about to change.
+  const previousTarballs = current.map((f) => [f, fs.readFileSync(path.join(ROOT, f))]);
+  const previousManifests = [];
 
   fs.copyFileSync(path.join(uiKitRoot, newest), path.join(ROOT, newest));
   for (const stale of current) {
@@ -122,6 +132,7 @@ const syncAiChat = (uiKitRoot) => {
     );
 
     if (next === text) continue;
+    previousManifests.push([manifest, text]);
     fs.writeFileSync(manifest, next);
     touched.push(app);
   }
@@ -131,7 +142,13 @@ const syncAiChat = (uiKitRoot) => {
       (touched.length > 0 ? ` (${touched.join(", ")} repointed)` : ""),
   );
 
-  return newest;
+  const restore = () => {
+    for (const [manifest, text] of previousManifests) fs.writeFileSync(manifest, text);
+    if (!current.includes(newest)) fs.rmSync(path.join(ROOT, newest), { force: true });
+    for (const [f, bytes] of previousTarballs) fs.writeFileSync(path.join(ROOT, f), bytes);
+  };
+
+  return { file: newest, restore };
 };
 
 const source = findSource();
@@ -146,140 +163,217 @@ fs.copyFileSync(source, TARBALL);
 
 const after = integrityOf(TARBALL);
 
-// An unchanged ui-kit does not mean there is nothing to do: ai-chat may have
-// moved on its own, and the manifests rewritten above then need an install.
+// An unchanged tarball still falls through to the verification below rather
+// than exiting here. The install step can die after the tarball, the lockfile
+// and the extracted copies have already been rewritten -- that is what the
+// `shell` flag and the rollback below exist for -- and a re-run that exits
+// early on "same build" would report success over a tree with no ui-kit in it
+// at all.
+//
+// Nor does an unchanged ui-kit mean there is nothing to install: ai-chat may
+// have moved on its own, and the manifests rewritten above then need pnpm to
+// pick the new file up.
 if (before === after && aiChat === null) {
-  console.log(`${path.relative(ROOT, TARBALL)} is already this build -- nothing to do.`);
-  process.exit(0);
-}
+  console.log(
+    `${path.relative(ROOT, TARBALL)} is already this build -- checking what is installed.`,
+  );
+} else {
+  // Point the lockfile at the new contents. Without this pnpm trusts the old
+  // hash and never reads the file.
+  const lock = fs.readFileSync(LOCKFILE, "utf8");
+  const pattern = /(integrity: )sha512-[A-Za-z0-9+/=]+(, tarball: file:onlyoffice-apps-ui-kit\.tgz)/g;
+  const matches = lock.match(pattern);
 
-// Point the lockfile at the new contents. Without this pnpm trusts the old
-// hash and never reads the file.
-const lock = fs.readFileSync(LOCKFILE, "utf8");
-const pattern = /(integrity: )sha512-[A-Za-z0-9+/=]+(, tarball: file:onlyoffice-apps-ui-kit\.tgz)/g;
-const matches = lock.match(pattern);
+  if (!matches || matches.length === 0) {
+    fail("No @onlyoffice/apps-ui-kit entry in pnpm-lock.yaml -- has the dependency been renamed?");
+  }
 
-if (!matches || matches.length === 0) {
-  fail("No @onlyoffice/apps-ui-kit entry in pnpm-lock.yaml -- has the dependency been renamed?");
-}
+  const restore = () => {
+    fs.writeFileSync(LOCKFILE, lock);
+    if (previousTarball === null) fs.rmSync(TARBALL, { force: true });
+    else fs.writeFileSync(TARBALL, previousTarball);
+    aiChat?.restore();
+  };
 
-const restore = () => {
-  fs.writeFileSync(LOCKFILE, lock);
-  if (previousTarball === null) fs.rmSync(TARBALL, { force: true });
-  else fs.writeFileSync(TARBALL, previousTarball);
-};
+  fs.writeFileSync(LOCKFILE, lock.replace(pattern, `$1${after}$2`));
 
-fs.writeFileSync(LOCKFILE, lock.replace(pattern, `$1${after}$2`));
-
-// And drop the extracted copy, which pnpm would otherwise relink as is.
-if (fs.existsSync(PNPM_DIR)) {
-  for (const entry of fs.readdirSync(PNPM_DIR)) {
-    if (entry.startsWith("@onlyoffice+apps-ui-kit@")) {
-      fs.rmSync(path.join(PNPM_DIR, entry), { recursive: true, force: true });
+  // And drop the extracted copy, which pnpm would otherwise relink as is.
+  if (fs.existsSync(PNPM_DIR)) {
+    for (const entry of fs.readdirSync(PNPM_DIR)) {
+      if (entry.startsWith("@onlyoffice+apps-ui-kit@")) {
+        fs.rmSync(path.join(PNPM_DIR, entry), { recursive: true, force: true });
+      }
     }
   }
-}
 
-// `--force` because a plain install short-circuits on "Already up to date":
-// once the lockfile matches what pnpm last installed it skips the link step
-// entirely, and the extracted copy removed just above is never recreated.
-console.log(`Installing ${path.basename(source)} (${matches.length} lockfile entry rewritten)...`);
-// shell: true on Windows -- pnpm is a .CMD shim there and Node will not spawn
-// one directly (ENOENT), and this workspace has no node_modules/.bin/pnpm to
-// fall back on.
-try {
-  execFileSync("pnpm", ["install", "--force"], {
-    cwd: ROOT,
-    stdio: "inherit",
-    shell: process.platform === "win32",
-  });
-} catch (error) {
-  // The tarball and the lockfile were already rewritten above, so a failed
-  // install leaves the tree claiming a version it does not have. Put both back.
-  restore();
-  fail(`pnpm install failed, tarball and lockfile restored: ${error.message}`);
+  const rewritten = `${matches.length} lockfile ${matches.length === 1 ? "entry" : "entries"} rewritten`;
+
+  // `--force` because a plain install short-circuits on "Already up to date":
+  // once the lockfile matches what pnpm last installed it skips the link step
+  // entirely, and the extracted copy removed just above is never recreated.
+  console.log(`Installing ${path.basename(source)} (${rewritten})...`);
+  // `shell` on Windows: pnpm is a .CMD shim there, and CreateProcess cannot run
+  // one. Without it execFileSync throws ENOENT after the tarball and the lockfile
+  // have already been rewritten, leaving the tree half-updated.
+  try {
+    execFileSync("pnpm", ["install", "--force"], {
+      cwd: ROOT,
+      stdio: "inherit",
+      shell: process.platform === "win32",
+    });
+  } catch (error) {
+    // The tarball, the lockfile and (when ai-chat moved) its tarball and the
+    // app manifests were already rewritten above, so a failed install leaves
+    // the tree claiming a version it does not have. Put all of it back.
+    restore();
+    fail(
+      `pnpm install failed; tarball, lockfile${aiChat ? ", ai-chat and manifests" : ""} restored: ${error.message}`,
+    );
+  }
 }
 
 // Prove it landed. A silent no-op is exactly what this script is here to catch,
 // so do not take the install's exit code as evidence.
-// Every copy, not just the first. pnpm's isolated layout installs one physical
-// copy per distinct peer-resolution set, and the apps do not all land on the
-// same one -- packages/sdk currently resolves a different copy than everything
-// else. Verifying only the copy that packages/client sees would leave the other
-// one silently stale.
-const installedCopies = () => {
-  const found = new Map();
+//
+// Digest everything the tarball ships, not a chosen subtree. Narrower versions
+// kept missing changes: `dist/styles.css` alone is identical across any build
+// that touched only JavaScript, and `dist/` alone misses `styles/` and
+// `locales/`, which the exports map serves directly and which hundreds of the
+// client's own .module.scss files `@use`. Hashing the whole `package/` prefix
+// also means this needs no edit when the manifest's `files` changes.
+//
+// The tarball is read with node's own gzip and a minimal tar walker rather
+// than the `tar` binary: the GNU tar that ships with Git Bash reads a Windows
+// path as a remote `host:path` spec and refuses both the archive and `-C`.
+const PACKAGE_PREFIX = "package/";
 
-  for (const app of fs.readdirSync(path.join(ROOT, "packages"))) {
-    try {
-      const require_ = createRequire(path.join(ROOT, "packages", app, "noop.js"));
-      const dir = fs.realpathSync(
-        path.dirname(require_.resolve("@onlyoffice/apps-ui-kit/package.json")),
-      );
-      if (!found.has(dir)) found.set(dir, []);
-      found.get(dir).push(app);
-    } catch {
-      // The app does not depend on ui-kit; nothing to verify for it.
+// pnpm puts the package's own dependencies here; the tarball has no such entry.
+const INSTALL_ONLY = ["node_modules"];
+
+const digestEntries = (entries) => {
+  const hash = createHash("sha1");
+
+  for (const [name, content] of [...entries].sort(([a], [b]) =>
+    a < b ? -1 : a > b ? 1 : 0,
+  )) {
+    hash.update(name);
+    hash.update("\0");
+    hash.update(content);
+  }
+
+  return hash.digest("hex");
+};
+
+const contentsOfDir = (dir) => {
+  const entries = [];
+
+  const walk = (current, prefix) => {
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      const full = path.join(current, entry.name);
+      const name = prefix ? `${prefix}/${entry.name}` : entry.name;
+
+      if (INSTALL_ONLY.includes(name)) continue;
+
+      if (entry.isDirectory()) walk(full, name);
+      else entries.push([name, fs.readFileSync(full)]);
+    }
+  };
+
+  walk(dir, "");
+
+  return entries;
+};
+
+const contentsOfTarball = (file) => {
+  const buf = gunzipSync(fs.readFileSync(file));
+  const entries = [];
+  let offset = 0;
+  let override = null;
+
+  while (offset + 512 <= buf.length) {
+    const header = buf.subarray(offset, offset + 512);
+
+    if (header.every((byte) => byte === 0)) break;
+
+    const field = (start, length) =>
+      header
+        .subarray(start, start + length)
+        .toString("utf8")
+        .replace(/\0.*$/, "");
+
+    const size = parseInt(field(124, 12).trim(), 8) || 0;
+    const type = String.fromCharCode(header[156]);
+    const body = buf.subarray(offset + 512, offset + 512 + size);
+
+    offset += 512 + Math.ceil(size / 512) * 512;
+
+    // GNU long name and PAX extended header: both carry the real path for the
+    // record that follows, which matters for this package's deepest subpaths.
+    if (type === "L") {
+      override = body.toString("utf8").replace(/\0.*$/, "");
+      continue;
+    }
+
+    if (type === "x" || type === "g") {
+      const match = body.toString("utf8").match(/\d+ path=([^\n]*)\n/);
+      if (match) [, override] = match;
+      continue;
+    }
+
+    const prefix = field(345, 155);
+    const name = field(0, 100);
+    const full = override ?? (prefix ? `${prefix}/${name}` : name);
+
+    override = null;
+
+    if ((type === "0" || type === "\0") && full.startsWith(PACKAGE_PREFIX)) {
+      entries.push([full.slice(PACKAGE_PREFIX.length), body]);
     }
   }
 
-  return found;
-};
-
-const copies = installedCopies();
-
-if (copies.size === 0) {
-  fail("@onlyoffice/apps-ui-kit did not resolve after the install -- the tree is broken.");
-}
-
-// Hash the whole package, not one file inside it. Comparing dist/styles.css
-// alone passed a build whose JavaScript had changed and whose stylesheet had
-// not -- which is most of them, since a change to a .ts file leaves the CSS
-// byte-identical. The check that is meant to catch a silent no-op has to see
-// everything the tarball ships.
-const treeHash = (files) => {
-  const digest = createHash("sha256");
-  for (const [name, bytes] of [...files].sort(([a], [b]) => a.localeCompare(b))) {
-    digest.update(name).update("\0").update(bytes).update("\0");
+  if (entries.length === 0) {
+    fail(`${path.basename(file)} carries no ${PACKAGE_PREFIX} entries -- the tarball is broken.`);
   }
-  return digest.digest("hex");
+
+  return entries;
 };
 
-/** Every file in the packed tarball, keyed by its path below `package/`. */
-const packedFiles = () => {
-  const list = execFileSync("tar", ["-tzf", TARBALL], { encoding: "utf8" })
-    .split("\n")
-    .filter((name) => name.startsWith("package/") && !name.endsWith("/"));
+const expected = digestEntries(contentsOfTarball(TARBALL));
 
-  return list.map((name) => [
-    name.slice("package/".length),
-    execFileSync("tar", ["-xzOf", TARBALL, name], { maxBuffer: 256 * 1024 * 1024 }),
-  ]);
-};
+// Every extracted copy, not just the one the client resolves: pnpm installs one
+// per distinct peer-resolution set (packages/sdk currently lands on a different
+// copy than everything else), and a stale sibling is as broken as a stale
+// primary -- it is what the apps that resolve to it will run.
+const copies = fs.existsSync(PNPM_DIR)
+  ? fs
+      .readdirSync(PNPM_DIR)
+      .filter((entry) => entry.startsWith("@onlyoffice+apps-ui-kit@"))
+      .map((entry) =>
+        path.join(PNPM_DIR, entry, "node_modules", "@onlyoffice", "apps-ui-kit"),
+      )
+      .filter((dir) => fs.existsSync(dir))
+  : [];
 
-/** The same files as installed, skipping anything the tarball does not ship. */
-const installedFiles = (root, names) =>
-  names.map(([name]) => {
-    const full = path.join(root, name);
-    return [name, fs.existsSync(full) ? fs.readFileSync(full) : Buffer.alloc(0)];
-  });
-
-const packed = packedFiles();
-const want = treeHash(packed);
-
-for (const [dir, apps] of copies) {
-  if (treeHash(installedFiles(dir, packed)) === want) continue;
-
-  fail(
-    `node_modules still holds a different build of @onlyoffice/apps-ui-kit for ` +
-      `${apps.join(", ")} (${path.relative(ROOT, dir)}). ` +
-      "Remove node_modules/.pnpm/@onlyoffice+apps-ui-kit* and reinstall.",
-  );
+if (copies.length === 0) {
+  fail("@onlyoffice/apps-ui-kit is not in node_modules after the install -- the tree is broken.");
 }
 
-const [firstCopy] = copies.keys();
-const { version } = JSON.parse(fs.readFileSync(path.join(firstCopy, "package.json"), "utf8"));
-const where = copies.size === 1 ? "1 copy" : `${copies.size} copies`;
+const stale = copies.filter(
+  (dir) => digestEntries(contentsOfDir(dir)) !== expected,
+);
 
-console.log(`@onlyoffice/apps-ui-kit ${version} installed and verified against the tarball (${where}).`);
+if (stale.length > 0) {
+  console.error("node_modules still holds a different build of @onlyoffice/apps-ui-kit:\n");
+  for (const dir of stale) console.error(`  ${path.relative(ROOT, dir)}`);
+  fail("\nRemove node_modules/.pnpm/@onlyoffice+apps-ui-kit* and reinstall.");
+}
+
+const { version } = JSON.parse(
+  fs.readFileSync(path.join(copies[0], "package.json"), "utf8"),
+);
+
+console.log(
+  `@onlyoffice/apps-ui-kit ${version} installed and verified against the tarball ` +
+    `(${copies.length} extracted ${copies.length === 1 ? "copy" : "copies"}).`,
+);
 console.log("Commit onlyoffice-apps-ui-kit.tgz together with pnpm-lock.yaml.");

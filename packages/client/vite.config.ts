@@ -49,6 +49,12 @@ import {
 } from "./config/plugins/copy-locales";
 import { copyFontsPlugin } from "./config/plugins/copy-fonts";
 import { serveRootPublicPlugin } from "./config/plugins/serve-root-public";
+import { uiKitBoundaryPlugin } from "./config/plugins/ui-kit-boundary";
+import {
+  UI_KIT_SRC_ENV,
+  logUiKitMode,
+  uiKitDevRoot,
+} from "./config/ui-kit-dev";
 import { resolve } from "./config/resolve";
 import { css } from "./config/css";
 import { server } from "./config/server";
@@ -63,9 +69,24 @@ type SvgoPlugins = NonNullable<SvgoConfig["plugins"]>;
 // ===========================================================================
 // Main Vite configuration
 // ===========================================================================
-export default defineConfig(async ({ mode }): Promise<UserConfig> => {
+export default defineConfig(async ({ mode, command }): Promise<UserConfig> => {
   const isProduction = mode === "production";
   const isAnalyze = mode === "analyze";
+
+  // `resolve` and `css` are shared by both commands, so an exported
+  // DOCSPACE_UI_KIT_SRC would silently bundle ui-kit from the checkout. The
+  // output would also differ: the chunking rules in config/build.ts match
+  // node_modules paths, which a checkout does not have, so ui-kit would leave
+  // its chunk group. Neither the boundary plugin nor optimizeDeps applies to a
+  // build, so refuse instead of producing a quietly different artifact.
+  if (command === "build" && uiKitDevRoot) {
+    throw new Error(
+      `${UI_KIT_SRC_ENV} is a dev-server switch and is set to ${uiKitDevRoot}. ` +
+        "Unset it to build: a build must come from the installed package.",
+    );
+  }
+
+  logUiKitMode();
 
   return {
     root: __dirname,
@@ -122,6 +143,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
       htmlTransformPlugin(),
       chunkRetryPlugin(),
       serveRootPublicPlugin(),
+      uiKitDevRoot ? uiKitBoundaryPlugin(uiKitDevRoot) : null,
       isProduction && bannerPlugin(),
       isProduction && copyLocalesPlugin(),
       isProduction && copyFontsPlugin(),
@@ -154,18 +176,27 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
         "firebase/compat/storage",
         "firebase/compat/database",
         // @onlyoffice/apps-ui-kit ships ~1200 unbundled ESM files behind a
-        // single `./*` exports wildcard, and the app imports it almost exclusively
-        // through deep subpaths (.../components/text, .../components/toast).
-        // As a node_modules dependency each of those subpaths is a separate
-        // optimizable entry, so without these globs a cold start pre-bundles
-        // them one by one -- the single biggest dev-server cost after the
-        // move off the pnpm workspace, where the package was source and never
-        // pre-bundled at all. The globs collapse them into a few chunks.
-        "@onlyoffice/apps-ui-kit",
-        "@onlyoffice/apps-ui-kit/components/*",
-        "@onlyoffice/apps-ui-kit/utils/*",
-        "@onlyoffice/apps-ui-kit/context/*",
-        "@onlyoffice/apps-ui-kit/providers/*",
+        // single "./*" exports wildcard, and the app imports it almost
+        // exclusively through deep subpaths (.../components/text,
+        // .../components/toast). As a node_modules dependency each of those
+        // subpaths is a separate optimizable entry, so without these globs a
+        // cold start pre-bundles them one by one -- the single biggest
+        // dev-server cost after the move off the pnpm workspace, where the
+        // package was source and never pre-bundled at all. The globs collapse
+        // them into a few chunks.
+        //
+        // DOCSPACE_UI_KIT_SRC drops them: an aliased checkout is not a
+        // dependency, pre-bundling it would freeze the very files being
+        // edited, and serving them as source is what restores HMR.
+        ...(uiKitDevRoot
+          ? []
+          : [
+              "@onlyoffice/apps-ui-kit",
+              "@onlyoffice/apps-ui-kit/components/*",
+              "@onlyoffice/apps-ui-kit/utils/*",
+              "@onlyoffice/apps-ui-kit/context/*",
+              "@onlyoffice/apps-ui-kit/providers/*",
+            ]),
         // Must stay pre-bundled: assistant-stream (pulled in through the AI
         // stack) does `import sjson from "secure-json-parse"`, and that package
         // is plain CommonJS with no ESM build. Only esbuild's CJS-to-ESM

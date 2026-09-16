@@ -85,7 +85,11 @@ export default defineConfig({
     clearMocks: true,
     pool: process.env.POOL || "threads",
     testTimeout: 30000,
-    include: ["src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    include: [
+      "src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}",
+      // Vite config plugins are plain functions; their tests sit next to them.
+      "config/**/*.{test,spec}.{ts,mts}",
+    ],
     // Playwright e2e specs live under __tests__/; never let vitest pick them up.
     exclude: [
       "node_modules",

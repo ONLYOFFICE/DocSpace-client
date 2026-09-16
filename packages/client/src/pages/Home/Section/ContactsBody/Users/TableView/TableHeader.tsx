@@ -238,7 +238,7 @@ class PeopleTableHeader extends React.Component<
         sorted={sorted}
         sortBy={sortBy}
         // fix types for table header and remove this
-        containerRef={containerRef as unknown as { current: HTMLDivElement }}
+        containerRef={containerRef}
         columns={columns as TTableColumn[]}
         columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName!}

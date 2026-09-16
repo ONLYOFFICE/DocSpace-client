@@ -38,6 +38,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { withoutInjected } from "SRC_DIR/helpers/injected";
 import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import { ComboButton } from "@onlyoffice/apps-ui-kit/components/combobox";
 import classNames from "classnames";
@@ -194,9 +195,18 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
 	);
 };
 
-export default inject(({ oformsStore }: InjectedProps) => ({
+const injectStores = ({ oformsStore }: InjectedProps) => ({
 	currentCategory: oformsStore.currentCategory,
 	getCategoryTitle: oformsStore.getCategoryTitle,
 	filterOformsByCategory: oformsStore.filterOformsByCategory,
 	setOformsCurrentCategory: oformsStore.setOformsCurrentCategory,
-}))(withTranslation(["FormGallery"])(observer(CategoryFilterMobile)));
+});
+
+export default withoutInjected<
+	CategoryFilterMobileProps,
+	ReturnType<typeof injectStores>
+>(
+	inject(injectStores)(
+		withTranslation(["FormGallery"])(observer(CategoryFilterMobile)),
+	),
+);

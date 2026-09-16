@@ -34,7 +34,6 @@
  */
 
 import type { Key } from "react";
-import type { NavigateFunction } from "react-router";
 import type { IndexRange } from "react-virtualized";
 
 export interface TFile {
@@ -83,7 +82,6 @@ export interface TilesProps {
   submitToGalleryTileIsVisible: boolean;
   canSubmitToFormGallery: () => boolean;
   viewMobile: boolean;
-  onCreateOform: (navigate: NavigateFunction) => void;
   setTemplateGalleryVisible: (isVisible: boolean) => void;
   isShowInitSkeleton: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;

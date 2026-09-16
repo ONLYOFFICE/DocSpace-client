@@ -114,7 +114,10 @@ const HistoryTitleBlock = ({
           {getFeedTranslation()}
         </Text>
         {isDisplayFolderInfo ? (
-          <HistoryMainTextFolderInfo feed={feed} actionType={actionType} />
+          <HistoryMainTextFolderInfo
+            feed={feed as TFeedAction<TFeedData>}
+            actionType={actionType}
+          />
         ) : null}
         {feed.related.length === 0 &&
         targetType === "group" &&

@@ -33,41 +33,32 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
 
-import { createFetchBackend } from "@docspace/shared/utils/i18n-fetch-backend";
+import type { ComponentType } from "react";
+import type { WithTranslation } from "react-i18next";
 
-// Fetch-based backend — loads translation JSON at runtime so no static imports
-// end up in the Next.js bundle (used only by global-error.tsx error boundary).
-const fetchBackend = createFetchBackend("doceditor");
-
-export const getI18NInstance = (lng: string) => {
-  if (!i18n.isInitialized) {
-    i18n
-      .use(fetchBackend)
-      .use(initReactI18next)
-      .init({
-        lng,
-        fallbackLng: "en",
-        load: "currentOnly",
-
-        debug: false,
-
-        interpolation: {
-          escapeValue: false,
-        },
-
-        ns: ["Editor", "Common", "DeepLink", "ChangeLinkTypeDialog"],
-        defaultNS: "Editor",
-
-        react: {
-          useSuspense: false,
-        },
-      });
-  } else {
-    i18n.changeLanguage(lng);
-  }
-
-  return i18n;
-};
+/**
+ * Types a component wrapped in mobx-react's `inject` and react-i18next's
+ * `withTranslation` by what a caller still has to pass.
+ *
+ * Both HOCs supply props at runtime and leave them in the component's type, so
+ * the wrapped export asks its call sites for props they must not pass. That
+ * was invisible until react-i18next 15: v14's `withTranslation` resolved the
+ * wrapped props through the global `JSX` namespace, which React 19 removed, so
+ * the resolved type quietly degraded to `any` and every call site
+ * type-checked. v15 reads them through `React.JSX`, which works -- and turned
+ * the check back on.
+ *
+ * Passing the inject mapper's return type as `Injected` keeps the public shape
+ * correct on its own: inject one more prop and it drops out of the public type
+ * too. `t`, `i18n` and `tReady` go with it, from `withTranslation`.
+ *
+ * The assertion is the point: no HOC signature can express "these props are
+ * already filled in", so it is made once, here, instead of at each export.
+ */
+export const withoutInjected = <Props, Injected>(
+  wrapped: unknown,
+): ComponentType<Omit<Props, keyof Injected | keyof WithTranslation>> =>
+  wrapped as ComponentType<
+    Omit<Props, keyof Injected | keyof WithTranslation>
+  >;

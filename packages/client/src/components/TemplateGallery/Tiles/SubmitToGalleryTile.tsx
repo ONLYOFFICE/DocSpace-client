@@ -44,6 +44,8 @@ import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import classNames from "classnames";
 import styles from "./SubmitToGalleryTile.module.scss";
 import type { FC } from "react";
+import { withoutInjected } from "SRC_DIR/helpers/injected";
+
 import type { SubmitToGalleryTileProps } from "./SubmitToGalleryTile.types";
 
 const SubmitToGalleryTile: FC<SubmitToGalleryTileProps> = ({
@@ -129,17 +131,24 @@ const SubmitToGalleryTile: FC<SubmitToGalleryTileProps> = ({
   );
 };
 
-export default inject<TStore>(
-  ({ settingsStore, oformsStore, dialogsStore }) => {
-    const { currentColorScheme, logoText } = settingsStore;
+const injectStores = ({ settingsStore, oformsStore, dialogsStore }: TStore) => {
+  const { currentColorScheme, logoText } = settingsStore;
 
-    return {
-      submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
-      hideSubmitToGalleryTile: oformsStore.hideSubmitToGalleryTile,
-      setSubmitToGalleryDialogVisible:
-        dialogsStore.setSubmitToGalleryDialogVisible,
-      currentColorScheme,
-      logoText,
-    };
-  },
-)(withTranslation(["Common", "FormGallery"])(observer(SubmitToGalleryTile)));
+  return {
+    submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
+    hideSubmitToGalleryTile: oformsStore.hideSubmitToGalleryTile,
+    setSubmitToGalleryDialogVisible:
+      dialogsStore.setSubmitToGalleryDialogVisible,
+    currentColorScheme,
+    logoText,
+  };
+};
+
+export default withoutInjected<
+  SubmitToGalleryTileProps,
+  ReturnType<typeof injectStores>
+>(
+  inject<TStore>(injectStores)(
+    withTranslation(["Common", "FormGallery"])(observer(SubmitToGalleryTile)),
+  ),
+);

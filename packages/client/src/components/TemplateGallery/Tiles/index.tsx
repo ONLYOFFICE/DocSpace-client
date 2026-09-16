@@ -37,6 +37,7 @@ import { Key, useEffect, useCallback } from "react";
 import { observer, inject } from "mobx-react";
 
 import { withTranslation } from "react-i18next";
+import { withoutInjected } from "SRC_DIR/helpers/injected";
 
 import type { FC } from "react";
 import type { TilesProps, TFile } from "./Tiles.types";
@@ -165,32 +166,35 @@ const Tiles: FC<TilesProps> = ({
   );
 };
 
-export default inject<TStore>(
-  ({
-    settingsStore,
-    accessRightsStore,
-    oformsStore,
-    contextOptionsStore,
-    dialogsStore,
-  }) => ({
-    theme: settingsStore.theme,
-    oformFiles: oformsStore.oformFiles,
-    hasGalleryFiles: oformsStore.hasGalleryFiles,
-    hasMoreFiles: oformsStore.hasMoreForms,
-    fetchMoreFiles: oformsStore.fetchMoreOforms,
-    setGallerySelected: oformsStore.setGallerySelected,
-    resetFilters: oformsStore.resetFilters,
-    submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
-    canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
-    setOformFilesLoaded: oformsStore.setOformFilesLoaded,
-    categoryFilterLoaded: oformsStore.categoryFilterLoaded,
-    languageFilterLoaded: oformsStore.languageFilterLoaded,
-    oformFilesLoaded: oformsStore.oformFilesLoaded,
-    onCreateTemplate: contextOptionsStore.onCreateTemplate,
-    setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
-    setIsVisibleInfoPanelTemplateGallery:
-      oformsStore.setIsVisibleInfoPanelTemplateGallery,
-    setSubmitToGalleryDialogVisible:
-      dialogsStore.setSubmitToGalleryDialogVisible,
-  }),
-)(withTranslation(["Common", "FormGallery"])(observer(Tiles)));
+const injectStores = ({
+  settingsStore,
+  accessRightsStore,
+  oformsStore,
+  contextOptionsStore,
+  dialogsStore,
+}: TStore) => ({
+  theme: settingsStore.theme,
+  oformFiles: oformsStore.oformFiles,
+  hasGalleryFiles: oformsStore.hasGalleryFiles,
+  hasMoreFiles: oformsStore.hasMoreForms,
+  fetchMoreFiles: oformsStore.fetchMoreOforms,
+  setGallerySelected: oformsStore.setGallerySelected,
+  resetFilters: oformsStore.resetFilters,
+  submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
+  canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
+  setOformFilesLoaded: oformsStore.setOformFilesLoaded,
+  categoryFilterLoaded: oformsStore.categoryFilterLoaded,
+  languageFilterLoaded: oformsStore.languageFilterLoaded,
+  oformFilesLoaded: oformsStore.oformFilesLoaded,
+  onCreateTemplate: contextOptionsStore.onCreateTemplate,
+  setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
+  setIsVisibleInfoPanelTemplateGallery:
+    oformsStore.setIsVisibleInfoPanelTemplateGallery,
+  setSubmitToGalleryDialogVisible: dialogsStore.setSubmitToGalleryDialogVisible,
+});
+
+export default withoutInjected<TilesProps, ReturnType<typeof injectStores>>(
+  inject<TStore>(injectStores)(
+    withTranslation(["Common", "FormGallery"])(observer(Tiles)),
+  ),
+);

@@ -73,7 +73,10 @@ type GroupsTableHeaderProps = {
   navigate: NavigateFunction;
   location: Location;
 
-  containerRef: React.RefObject<Nullable<React.ForwardedRef<HTMLDivElement>>>;
+  // What the caller actually holds: a ref to the scroll container. The old
+  // `RefObject<Nullable<ForwardedRef<HTMLDivElement>>>` described a ref to a
+  // ref, which is why passing it on needed a cast to `{ current: HTMLDivElement }`.
+  containerRef: React.RefObject<HTMLDivElement | null>;
 };
 
 type GroupTableHeaderState = { columns: TableHeaderColumn[] };
@@ -195,7 +198,7 @@ class GroupsTableHeader extends React.Component<
       <TableHeader
         sorted={sorted}
         sortBy={sortBy}
-        containerRef={containerRef as unknown as { current: HTMLDivElement }}
+        containerRef={containerRef}
         columns={columns as TTableColumn[]}
         columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName!}

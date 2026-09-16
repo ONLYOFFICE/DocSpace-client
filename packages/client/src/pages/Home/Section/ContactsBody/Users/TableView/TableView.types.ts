@@ -154,7 +154,10 @@ export type TableHeaderProps = {
 
   sectionWidth: number;
 
-  containerRef: React.RefObject<Nullable<React.ForwardedRef<HTMLDivElement>>>;
+  // What the caller actually holds: a ref to the scroll container. The old
+  // `RefObject<Nullable<ForwardedRef<HTMLDivElement>>>` described a ref to a
+  // ref, which is why passing it on needed a cast to `{ current: HTMLDivElement }`.
+  containerRef: React.RefObject<HTMLDivElement | null>;
 
   navigate: NavigateFunction;
   location: Location;

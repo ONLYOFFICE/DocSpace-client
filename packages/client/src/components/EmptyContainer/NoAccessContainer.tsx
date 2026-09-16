@@ -41,6 +41,7 @@ import ManageAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.acces
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { withoutInjected } from "SRC_DIR/helpers/injected";
 import { useNavigate } from "react-router";
 
 import { RoomSearchArea } from "@docspace/shared/enums";
@@ -183,23 +184,31 @@ const NoAccessContainer = (props: Props) => {
   return <EmptyView {...emptyViewProps} />;
 };
 
-export default inject<TStore>(
-  ({ settingsStore, filesStore, clientLoadingStore, userStore }) => {
-    const { setIsSectionFilterLoading } = clientLoadingStore;
+const injectStores = ({
+  settingsStore,
+  filesStore,
+  clientLoadingStore,
+  userStore,
+}: TStore) => {
+  const { setIsSectionFilterLoading } = clientLoadingStore;
 
-    const setIsLoading = (param: boolean) => {
-      setIsSectionFilterLoading(param);
-    };
-    const { isEmptyPage } = filesStore;
-    const { isFrame, theme } = settingsStore;
-    return {
-      setIsLoading,
+  const setIsLoading = (param: boolean) => {
+    setIsSectionFilterLoading(param);
+  };
+  const { isEmptyPage } = filesStore;
+  const { isFrame, theme } = settingsStore;
 
-      isEmptyPage,
-      theme,
-      isFrame,
-      userId: userStore?.user?.id,
-    };
-  },
-)(withTranslation(["Files", "Common"])(observer(NoAccessContainer)));
+  return {
+    setIsLoading,
+    isEmptyPage,
+    theme,
+    isFrame,
+    userId: userStore?.user?.id,
+  };
+};
 
+export default withoutInjected<Props, ReturnType<typeof injectStores>>(
+  inject<TStore>(injectStores)(
+    withTranslation(["Files", "Common"])(observer(NoAccessContainer)),
+  ),
+);

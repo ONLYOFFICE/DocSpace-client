@@ -77,10 +77,6 @@ newInstance
 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
-      format(value, format) {
-        if (format === "lowercase") return value.toLowerCase();
-        return value;
-      },
     },
 
     ns: [

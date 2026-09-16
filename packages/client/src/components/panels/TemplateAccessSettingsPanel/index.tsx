@@ -36,6 +36,7 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { withoutInjected } from "SRC_DIR/helpers/injected";
 import { TTranslation } from "@docspace/shared/types";
 
 import { EmployeeType, ShareAccessRights } from "@docspace/shared/enums";
@@ -515,7 +516,7 @@ const TemplateAccessSettingsPanel = ({
 	);
 };
 
-export default inject(
+const injectStores =
 	(
 		{ dialogsStore, infoPanelStore, filesStore }: TStore,
 		{
@@ -550,9 +551,18 @@ export default inject(
 				: setTemplateAccessSettingsVisible,
 			updateInfoPanelMembers,
 		};
-	},
-)(
-	withTranslation(["Files", "Common", "InfoPanel"])(
-		observer(TemplateAccessSettingsPanel),
+	};
+
+// `setIsVisible` and `templateItem` stay in the public type: the mapper reads
+// `setIsVisible` off ownProps, and callers pass `templateItem` even though the
+// store value wins once inject has merged them -- behaviour left as it is.
+export default withoutInjected<
+	TemplateAccessSettingsPanelProps,
+	Omit<ReturnType<typeof injectStores>, "setIsVisible" | "templateItem">
+>(
+	inject(injectStores)(
+		withTranslation(["Files", "Common", "InfoPanel"])(
+			observer(TemplateAccessSettingsPanel),
+		),
 	),
 );

@@ -41,12 +41,16 @@ import { FolderType } from "@docspace/shared/enums";
 import { FeedAction } from "@docspace/shared/api/rooms/types";
 import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
-import { Feed } from "./HistoryBlockContent.types";
+import type { TFeedAction, TFeedData } from "@docspace/shared/api/rooms/types";
 import styles from "../History.module.scss";
 
 type HistoryMainTextFolderInfoProps = {
   t: TTranslation;
-  feed: Feed;
+  // The shared feed shape, not the local `Feed` interface this file used to
+  // import: that one types `data` as a user, while everything read below is
+  // folder data. Nothing checked the mismatch until react-i18next 15 started
+  // resolving the wrapped component's props for real.
+  feed: TFeedAction<TFeedData>;
   selectedFolderId?: number;
   actionType: string;
 };

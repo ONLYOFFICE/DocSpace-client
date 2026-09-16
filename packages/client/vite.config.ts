@@ -137,7 +137,7 @@ export default defineConfig(async ({ mode, command }): Promise<UserConfig> => {
       htmlTransformPlugin(),
       chunkRetryPlugin(),
       serveRootPublicPlugin(),
-      uiKitDevRoot && uiKitBoundaryPlugin(),
+      uiKitDevRoot ? uiKitBoundaryPlugin() : null,
       isProduction && bannerPlugin(),
       isProduction && copyLocalesPlugin(),
       isProduction && copyFontsPlugin(),

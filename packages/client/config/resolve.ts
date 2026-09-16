@@ -43,7 +43,7 @@ import {
   uiKitStylesEntry,
 } from "./ui-kit-dev";
 
-const uiKitAlias =
+const uiKitAlias: Record<string, string> =
   uiKitDevRoot && uiKitStylesEntry
     ? {
         [`${UI_KIT_PACKAGE}/styles.css`]: uiKitStylesEntry,

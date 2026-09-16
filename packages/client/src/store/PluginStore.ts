@@ -650,6 +650,7 @@ class PluginStore {
 
           if (newPlugin.scopes.includes(PluginScopes.Settings)) {
             newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
+            this.updatePluginStatus(newPlugin.name);
           }
 
           callback?.(newPlugin);
@@ -1974,10 +1975,11 @@ class PluginStore {
       });
 
       this.initLocalePlugin(newPlugin);
-      this.installPlugin(newPlugin);
+      await this.installPlugin(newPlugin);
 
       if (newPlugin.scopes.includes(PluginScopes.Settings)) {
         newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
+        this.updatePluginStatus(newPlugin.name);
       }
 
       callback?.(newPlugin);

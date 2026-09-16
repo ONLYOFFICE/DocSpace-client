@@ -33,6 +33,27 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+
+// Every playwright.config.ts imports this module, so this runs in the runner's
+// main process before any spec is loaded. Importing the stub installs the
+// stylesheet hook here; NODE_OPTIONS hands it to the worker processes -- see
+// node-css-stub.mjs for why the specs need that at all. Idempotent: workers
+// import this module too and must not add the option a second time.
+// `__dirname`, not `import.meta.url`: Playwright transpiles this file to
+// CommonJS, and a reference to import.meta flips it to an ES module that then
+// has no `exports`.
+import "./node-css-stub.mjs";
+
+const cssStubFlag = `--import=${pathToFileURL(path.join(__dirname, "node-css-stub.mjs")).href}`;
+
+if (!(process.env.NODE_OPTIONS ?? "").includes(cssStubFlag)) {
+  process.env.NODE_OPTIONS = [process.env.NODE_OPTIONS, cssStubFlag]
+    .filter(Boolean)
+    .join(" ");
+}
+
 export {
   createServerRequestInterceptor,
   setupAndResetHandlersServer,

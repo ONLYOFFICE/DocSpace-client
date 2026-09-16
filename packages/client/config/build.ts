@@ -155,8 +155,8 @@ export const getBuildConfig = (
           // itself only reached from lazy AI pages — captured here it would
           // pull the whole chat UI into the preloaded `shared` chunk.
           //
-          // Both patterns have to allow for the `dist/esm` (or `dist/cjs`)
-          // segment the published package inserts: a module id reads
+          // Both patterns have to allow for the `dist/esm` segment the
+          // published package inserts: a module id reads
           // `.../node_modules/@onlyoffice/apps-ui-kit/dist/esm/ai-agent/...`,
           // not `.../apps-ui-kit/ai-agent/...` as it did when ui-kit was
           // source in the workspace.
@@ -166,7 +166,7 @@ export const getBuildConfig = (
               /([\\/]packages[\\/]shared[\\/]|[\\/]@onlyoffice[\\/]apps-ui-kit[\\/])/.test(
                 id,
               ) &&
-              !/[\\/]@onlyoffice[\\/]apps-ui-kit[\\/](dist[\\/](esm|cjs)[\\/])?ai-agent[\\/]/.test(
+              !/[\\/]@onlyoffice[\\/]apps-ui-kit[\\/](dist[\\/]esm[\\/])?ai-agent[\\/]/.test(
                 id,
               ),
             priority: 5,

@@ -16,6 +16,9 @@ pnpm test
 pnpm test:client               # all @docspace/client unit tests
 pnpm test:store                # only client store tests (src/store, incl. FilesStore)
 
+# Unit tests (sdk package, Vitest)
+pnpm test:sdk
+
 # Run single unit test file
 cd packages/shared && pnpm vitest run path/to/file.test.ts
 cd packages/client && pnpm exec vitest run src/store/filesStore
@@ -101,7 +104,9 @@ imports from its `ai-agent/*` and `api/ai` subpaths without bundling it. Its
 own tarball (`onlyoffice-ai-chat-<version>.tgz`) is therefore committed here
 too and declared by the apps that render the AI agent — that `file:` dependency
 is what satisfies ui-kit's peer, so it cannot be dropped while those subpaths
-are used.
+are used. ai-chat's own optional peers (LLM SDKs, radix, codemirror, ...) must
+be declared by those same apps; their versions sit in the `catalog:` block of
+`pnpm-workspace.yaml` - see `.claude/rules/pnpm.md`.
 
 ### buildtools sibling repo
 
@@ -174,7 +179,7 @@ repository and its findings belong there, not here.
 
 The pnpm version is hardcoded in three repos: `packageManager` and
 `engines.pnpm` in `package.json`, seven Dockerfiles here, and two files in the
-`libs/ui-kit` submodule. Only CI (`pnpm/action-setup`) and the buildtools build
+separate `docspace-ui-kit-react` repository. Only CI (`pnpm/action-setup`) and the buildtools build
 image follow `packageManager` on their own — the Dockerfiles use
 `npm install -g pnpm@…` and drift silently. buildtools must keep a bare
 `corepack enable` and needs a flag audit on every major, since no gate or CI
@@ -198,7 +203,7 @@ commit messages.
 
 ### Git hooks (lefthook)
 
-`lefthook.yml` runs a blocking pre-push gate — five sequential commands, any
+`lefthook.yml` runs a blocking pre-push gate — six sequential commands, any
 failure aborts the push:
 
 1. `pnpm run tsc` — type checking, all packages
@@ -208,6 +213,7 @@ failure aborts the push:
    skipped here, so a green push does **not** mean locales are complete)
 4. `pnpm run test` — shared unit tests
 5. `pnpm run test:client` — client unit tests (incl. store tests)
+6. `pnpm run test:sdk` — sdk unit tests
 
 Expect a push to take several minutes. To debug a blocked push, run the
 failing command individually. Never bypass the gate with `git push --no-verify`.

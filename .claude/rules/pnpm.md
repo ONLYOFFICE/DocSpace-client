@@ -167,7 +167,8 @@ pnpm promotes to the top level when packing. An npm-packed tarball has no
 entry points at all.
 
 ui-kit's `exports` map is a single `"./*"` wildcard onto
-`dist/{esm,cjs}/*/index.js`. That works only because its rollup build
+`dist/esm/*/index.js` — the package ships ESM only. That works only because
+its rollup build
 normalises every module to `<subpath>/index.js` (`entryFileNames` in its
 `rollup.config.mjs`), giving the package one uniform shape. A wildcard cannot
 serve a mixed tree: per the ES module spec the `exports`-array fallback skips an
@@ -193,7 +194,19 @@ satisfies that peer, so it must stay declared in every app that reaches those
 subpaths - dropping it resolves the peer to nothing and breaks the AI agent at
 runtime.
 
-27 of ai-chat's own 31 peers are optional too, so pnpm installs none of them
-for an app that does not declare them. An app that reaches `ai-agent/*` has to
-declare that list itself; `packages/client` and `packages/sdk` do, and
-`UnusedDependenciesTest` allowlists them because nothing imports them by name.
+Most of ai-chat's own peers are optional too (the assistant-ui widgets, the
+radix primitives, codemirror, the LLM vendor SDKs), so pnpm installs none of
+them for an app that does not declare them. An app that reaches `ai-agent/*`
+has to declare that list itself; `packages/client` and `packages/sdk` do. The
+versions live once in the `catalog:` block of `pnpm-workspace.yaml` and the two
+manifests reference them as `"catalog:"`, so a bump is one edit. Nothing in
+those apps imports them by name; `UnusedDependenciesTest` accepts them because
+the installed ai-chat manifest lists them as peers - the same rule that covers
+ui-kit's optional peers (the markdown stack, mobx, react-router) - so no
+allowlist entry is needed for a peer.
+
+Do not try to move that list into a `packageExtensions` block that adds the
+peers as ai-chat's own `dependencies`. pnpm treats a name that is also an
+optional peer of the package as a peer: it resolves it from the dependent when
+it can and silently drops it when it cannot, so a fresh resolution loses the
+LLM SDKs while an incremental one appears to work. It was tried and reverted.

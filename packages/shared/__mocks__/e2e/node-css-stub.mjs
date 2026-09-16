@@ -33,71 +33,29 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@onlyoffice/apps-ui-kit/styles/mixins";
+// Node module-loader hook that turns a stylesheet import into an empty module.
+//
+// The Playwright runner executes spec files in plain Node, and the specs reach
+// @onlyoffice/apps-ui-kit through the shared mocks and enums. Every ui-kit
+// module imports its own CSS file (`import "./index.css"`), which a bundler
+// turns into a stylesheet and Node rejects with ERR_UNKNOWN_FILE_EXTENSION.
+// Nothing in a test needs the styles, so the hook answers such imports with
+// an empty module.
+//
+// registerHooks, not register: Playwright transpiles the specs to CommonJS
+// and reaches ui-kit through require(esm), a synchronous path that the
+// off-thread hooks of module.register() never see. Importing this file is
+// enough to install the hook -- ./index.ts does so for the runner's main
+// process and passes it to the workers through NODE_OPTIONS.
 
-.sdkContainer {
-  box-sizing: border-box;
-  width: 100%;
-  container-type: inline-size;
-  container-name: sdk-presets;
-}
+import { registerHooks } from "node:module";
 
-.categoryHeader {
-  margin-top: 40px;
-  margin-bottom: 16px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22px;
+registerHooks({
+  load(url, context, nextLoad) {
+    if (/\.(?:css|scss)(?:\?|$)/.test(url)) {
+      return { format: "module", source: "", shortCircuit: true };
+    }
 
-  @include mixins.tablet {
-    margin-top: 24px;
-  }
-
-  &.isMobile {
-    margin-top: 24px;
-  }
-}
-
-.categoryDescription {
-  box-sizing: border-box;
-  margin-top: 2px;
-  max-width: 700px;
-
-  :global(.sdk-description) {
-    display: inline;
-    line-height: 20px;
-    color: var(--settings-common-description-color);
-  }
-}
-
-.presetsContainer {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  max-width: 700px;
-  margin-top: 16px;
-
-  @include mixins.mobileContainer(sdk-presets) {
-    grid-template-columns: minmax(0, 1fr);
-    max-width: none;
-  }
-}
-
-.connectors {
-  box-sizing: border-box;
-
-  .categoryHeader {
-    margin-bottom: 4px;
-  }
-
-  &.narrow {
-    max-width: 700px;
-  }
-}
-
-.connectorsDescription {
-  max-width: 700px;
-  margin-bottom: 16px;
-  color: var(--settings-common-description-color);
-}
+    return nextLoad(url, context);
+  },
+});

@@ -49,7 +49,7 @@ const PAGE_PATH = "/doceditor/start-filling?formId=1&roomId=1&share=qwerty";
 const CHUNKS_ROUTE = "**/_next/static/chunks/**";
 
 test.describe("Chunk load recovery", () => {
-  test("ships the retry bootstrap before any chunk script", async ({
+  test("ships the retry bootstrap inline in the document head", async ({
     page,
     serverRequestInterceptor,
     port,
@@ -65,12 +65,13 @@ test.describe("Chunk load recovery", () => {
     expect(response).not.toBeNull();
     const html = (await response?.text()) ?? "";
 
-    // The inline bootstrap must ship inside <head> of the SSR HTML. Next.js
-    // hoists its own async chunk <script> tags above user head content, so
-    // a tag-order check is impossible — but async scripts cannot execute
-    // (or fail) before the parser reaches the inline script a few KB
-    // later, which the recovery test below proves by aborting chunk
-    // requests instantly.
+    // The inline bootstrap must ship inside <head> of the SSR HTML. Its
+    // position there guarantees nothing more: React hoists the stylesheets
+    // and Next's async chunk <script> tags above it, and an inline script
+    // waits for every stylesheet before it to load, so chunks that fail
+    // fast fail before the bootstrap runs. The recovery tests below abort
+    // chunk requests instantly, which exercises exactly that window and
+    // the Resource Timing catch-up that closes it.
     const bootstrapIndex = html.indexOf('id="chunk-retry"');
     const headEnd = html.indexOf("</head>");
 

@@ -49,6 +49,44 @@ minimumReleaseAgeExclude:
   - '@rolldown/binding-linux-x64-musl@1.2.2'
   - '@rolldown/binding-openharmony-arm64@1.2.8'
 
+# The peers an app has to carry for @onlyoffice/ai-chat. ai-chat declares the
+# libraries it is built on -- the assistant-ui widgets, the radix primitives,
+# codemirror, the LLM vendor SDKs -- as *optional peer* dependencies, and pnpm
+# never installs optional peers, so every app that renders the AI agent
+# (client, sdk) must declare them or ai-chat's imports resolve to nothing at
+# runtime. Nothing in those apps imports them by name; they are there for
+# ai-chat, and UnusedDependenciesTest recognises them as such by reading
+# ai-chat's peer list. The versions live here once, as `catalog:` entries in
+# the two manifests, instead of in two lists that DifferentDependencyVersionsTest
+# had to keep in step. A packageExtensions block adding them as ai-chat's own
+# dependencies does NOT work here: pnpm treats a name that is also an optional
+# peer as a peer, resolves it from the dependent when it can and drops it when
+# it cannot, so a fresh resolution silently loses the LLM SDKs.
+catalog:
+  '@anthropic-ai/sdk': '0.60.0'
+  '@assistant-ui/react': '^0.11.58'
+  '@assistant-ui/react-markdown': '0.11.10'
+  '@codemirror/lang-json': '6.0.2'
+  '@codemirror/state': '6.5.2'
+  '@codemirror/view': '6.38.2'
+  '@google/genai': '1.52.0'
+  '@mistralai/mistralai': '1.15.1'
+  '@radix-ui/react-dialog': '1.1.15'
+  '@radix-ui/react-dropdown-menu': '2.1.16'
+  '@radix-ui/react-slot': '1.2.3'
+  '@radix-ui/react-switch': '1.2.6'
+  '@radix-ui/react-tabs': '1.1.13'
+  '@radix-ui/react-tooltip': '1.2.8'
+  'assistant-stream': '^0.2.47'
+  'class-variance-authority': '0.7.1'
+  'clsx': '2.1.1'
+  'codemirror': '6.0.2'
+  'framer-motion': '^12.43.0'
+  'openai': '5.23.2'
+  'react-shiki': '0.8.0'
+  'tailwind-merge': '3.6.0'
+  'zustand': '5.0.7'
+
 overrides:
   pnpm: ">=10.33.0"
   # Single mobx instance across the workspace (the ui-kit tarball pins 6.13.5)

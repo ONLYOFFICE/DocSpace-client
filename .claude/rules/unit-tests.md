@@ -91,11 +91,11 @@ client: `SRC_DIR`, `PUBLIC_DIR`, `ASSETS_DIR`, `COMMON_DIR`, `PACKAGE_FILE`,
 
 ```bash
 pnpm test          # shared          pnpm test:client   # client
-pnpm test:store    # client src/store only
+pnpm test:sdk      # sdk             pnpm test:store    # client src/store only
 cd packages/client && pnpm exec vitest run src/store/filesStore   # single path
 ```
 
-Both suites are part of the blocking lefthook pre-push gate.
+All three suites are part of the blocking lefthook pre-push gate.
 
 ## Snapshots
 

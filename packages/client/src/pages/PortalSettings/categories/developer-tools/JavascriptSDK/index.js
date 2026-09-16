@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
@@ -72,8 +72,6 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PortalIntegration = (props) => {
   const { t, currentColorScheme, sdkLink, theme, tReady } = props;
-
-  const [isFlex, setIsFlex] = useState(false);
 
   const navigate = useNavigate();
 
@@ -141,21 +139,6 @@ const PortalIntegration = (props) => {
     if (tReady) setDocumentTitle(t("JavascriptSdk"));
   }, [tReady]);
 
-  useEffect(() => {
-    const content = document.querySelector(".section-wrapper-content");
-    if (!content) return;
-
-    const onResize = (entries) => {
-      setIsFlex(entries[0].contentRect.width <= 600);
-    };
-
-    const rObserver = new ResizeObserver(onResize);
-    rObserver.observe(content);
-    return () => {
-      rObserver.disconnect();
-    };
-  }, []);
-
   return (
     <div className={classNames(styles.sdkContainer, { [styles.isMobile]: isMobile() })}>
       <div className={styles.categoryDescription}>
@@ -180,7 +163,7 @@ const PortalIntegration = (props) => {
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}
       </Text>
-      <div className={classNames(styles.presetsContainer, { "presets-flex": isFlex })}>
+      <div className={styles.presetsContainer}>
         {presetsData.map((data) => (
           <PresetTile
             t={t}

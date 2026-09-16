@@ -80,18 +80,6 @@ const docspaceApiSdkTraceGlob = `${path
 
 const nextConfig = {
   basePath: "/doceditor",
-  experimental: {
-    // ui-kit ships one CSS file per component, imported by the component, so
-    // the app's stylesheets and ui-kit's are ordered by import order alone.
-    // That order carries real meaning: an app rule that overrides a ui-kit
-    // rule at equal specificity wins only because the component (and its
-    // CSS) is imported before the app's own stylesheet. Next's default
-    // chunking merges CSS files to cut requests and is allowed to reorder
-    // them while doing so -- on doceditor's completed-form page it put the
-    // page's CSS ahead of Heading's and the file title grew from 14px to
-    // 21px. "strict" keeps import order and costs a few more CSS requests.
-    cssChunking: "strict",
-  },
   outputFileTracingRoot: monorepoRoot,
   outputFileTracingIncludes: {
     "/*": [docspaceApiSdkTraceGlob, "public/locales/*/*.json", "../../public/locales/*/Common.json"],

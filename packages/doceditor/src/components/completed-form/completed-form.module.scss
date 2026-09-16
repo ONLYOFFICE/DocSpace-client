@@ -238,7 +238,12 @@
     }
   }
 
-  :global(.completed-form__filename) {
+  // The element selector lifts this above ui-kit's own `.heading.medium`
+  // rule (0,2,0 -> 0,2,1). Without it the two tie and the winner is whichever
+  // stylesheet the bundler emits last: ui-kit ships one CSS file per
+  // component now, and Next's default CSS chunking is free to reorder files
+  // while merging them -- it did, and the title grew from 14px to 21px.
+  :global(h5.completed-form__filename) {
     font-size: 14px;
     line-height: 16px;
 

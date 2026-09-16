@@ -16,6 +16,9 @@ pnpm test
 pnpm test:client               # all @docspace/client unit tests
 pnpm test:store                # only client store tests (src/store, incl. FilesStore)
 
+# Unit tests (sdk package, Vitest)
+pnpm test:sdk
+
 # Run single unit test file
 cd packages/shared && pnpm vitest run path/to/file.test.ts
 cd packages/client && pnpm exec vitest run src/store/filesStore
@@ -190,7 +193,7 @@ commit messages.
 
 ### Git hooks (lefthook)
 
-`lefthook.yml` runs a blocking pre-push gate — five sequential commands, any
+`lefthook.yml` runs a blocking pre-push gate — six sequential commands, any
 failure aborts the push:
 
 1. `pnpm run tsc` — type checking, all packages
@@ -200,6 +203,7 @@ failure aborts the push:
    skipped here, so a green push does **not** mean locales are complete)
 4. `pnpm run test` — shared unit tests
 5. `pnpm run test:client` — client unit tests (incl. store tests)
+6. `pnpm run test:sdk` — sdk unit tests
 
 Expect a push to take several minutes. To debug a blocked push, run the
 failing command individually. Never bypass the gate with `git push --no-verify`.

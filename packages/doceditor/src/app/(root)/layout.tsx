@@ -44,7 +44,6 @@ import { getLinkPreview } from "@docspace/shared/utils/link-preview";
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
 import { SYSTEM_THEME_KEY } from "@onlyoffice/apps-ui-kit/providers/theme/themes/constants";
 
-import "@onlyoffice/apps-ui-kit/styles.css";
 import "@docspace/shared/styles/theme.scss";
 
 import ChunkRetryScript from "@docspace/shared/components/chunk-retry-script";

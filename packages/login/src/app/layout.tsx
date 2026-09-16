@@ -61,7 +61,6 @@ import {
   getWhiteLabelLogos,
 } from "@/utils/actions";
 
-import "@onlyoffice/apps-ui-kit/styles.css";
 import "../styles/globals.scss";
 import "@docspace/shared/styles/theme.scss";
 import Scripts from "@/components/Scripts";

@@ -33,35 +33,29 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import path from "node:path";
-import { pathToFileURL } from "node:url";
+// Node module-loader hook that turns a stylesheet import into an empty module.
+//
+// The Playwright runner executes spec files in plain Node, and the specs reach
+// @onlyoffice/apps-ui-kit through the shared mocks and enums. Every ui-kit
+// module imports its own CSS file (`import "./index.css"`), which a bundler
+// turns into a stylesheet and Node rejects with ERR_UNKNOWN_FILE_EXTENSION.
+// Nothing in a test needs the styles, so the hook answers such imports with
+// an empty module.
+//
+// registerHooks, not register: Playwright transpiles the specs to CommonJS
+// and reaches ui-kit through require(esm), a synchronous path that the
+// off-thread hooks of module.register() never see. Importing this file is
+// enough to install the hook -- ./index.ts does so for the runner's main
+// process and passes it to the workers through NODE_OPTIONS.
 
-// Every playwright.config.ts imports this module, so this runs in the runner's
-// main process before any spec is loaded. Importing the stub installs the
-// stylesheet hook here; NODE_OPTIONS hands it to the worker processes -- see
-// node-css-stub.mjs for why the specs need that at all. Idempotent: workers
-// import this module too and must not add the option a second time.
-// `__dirname`, not `import.meta.url`: Playwright transpiles this file to
-// CommonJS, and a reference to import.meta flips it to an ES module that then
-// has no `exports`.
-import "./node-css-stub.mjs";
+import { registerHooks } from "node:module";
 
-const cssStubFlag = `--import=${pathToFileURL(path.join(__dirname, "node-css-stub.mjs")).href}`;
+registerHooks({
+  load(url, context, nextLoad) {
+    if (/\.(?:css|scss)(?:\?|$)/.test(url)) {
+      return { format: "module", source: "", shortCircuit: true };
+    }
 
-if (!(process.env.NODE_OPTIONS ?? "").includes(cssStubFlag)) {
-  process.env.NODE_OPTIONS = [process.env.NODE_OPTIONS, cssStubFlag]
-    .filter(Boolean)
-    .join(" ");
-}
-
-export {
-  createServerRequestInterceptor,
-  setupAndResetHandlersServer,
-} from "./mswRequestInterceptor";
-export { createNextTestServer } from "./testServer";
-export { PlaywrightWebSocketMock } from "./playwrightWebSocketMock";
-export { expectScreenshot } from "./screenshots";
-
-export * from "./utils";
-
-export * from "./msw-compat";
+    return nextLoad(url, context);
+  },
+});

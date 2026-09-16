@@ -44,7 +44,6 @@ import {
   getFontFamilyDependingOnLanguage,
 } from "@onlyoffice/apps-ui-kit/providers/theme/rtl-utils";
 
-import "@onlyoffice/apps-ui-kit/styles.css";
 import "@docspace/shared/styles/theme.scss";
 
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";

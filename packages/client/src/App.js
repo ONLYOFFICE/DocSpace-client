@@ -40,7 +40,6 @@ import { RouterProvider } from "react-router";
 import { Provider as MobxProvider } from "mobx-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import "@onlyoffice/apps-ui-kit/styles.css";
 import { ApiProvider } from "@onlyoffice/apps-ui-kit/providers/api";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

@@ -75,6 +75,16 @@ export default defineConfig({
     // Setup files
     setupFiles: ["./vitest/setupTests.ts"],
 
+    // ui-kit modules each import their own CSS file. Vitest externalizes
+    // node_modules by default, which hands those modules to Node as-is, and
+    // Node rejects the .css import (ERR_UNKNOWN_FILE_EXTENSION). Inlining
+    // routes them through Vite, which treats the stylesheet like any other.
+    server: {
+      deps: {
+        inline: [/@onlyoffice[\\/]apps-ui-kit/],
+      },
+    },
+
     // Global test settings
     globals: true,
     clearMocks: true,

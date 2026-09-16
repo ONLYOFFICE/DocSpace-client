@@ -650,6 +650,7 @@ class PluginStore {
 
           if (newPlugin.scopes.includes(PluginScopes.Settings)) {
             newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
+            this.updatePluginStatus(newPlugin.name);
           }
 
           callback?.(newPlugin);
@@ -1978,6 +1979,7 @@ class PluginStore {
 
       if (newPlugin.scopes.includes(PluginScopes.Settings)) {
         newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
+        this.updatePluginStatus(newPlugin.name);
       }
 
       callback?.(newPlugin);

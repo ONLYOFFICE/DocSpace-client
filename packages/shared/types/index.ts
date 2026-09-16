@@ -33,7 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export * from "@onlyoffice/apps-ui-kit/types";
+// `export type *`, not `export *`: ui-kit's `types` subpath is declarations
+// only -- it has no dist/esm/types/index.js -- so a value re-export would
+// resolve for tsc and fail for the bundler. Today esbuild drops the whole
+// statement because nothing imports a value through it, which would stop
+// being true the moment ui-kit exported one.
+export type * from "@onlyoffice/apps-ui-kit/types";
 
 import type { TFile, TFileLink, TFolder } from "../api/files/types";
 import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";

@@ -2,12 +2,12 @@
   "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
   "workspaces": {
     "packages": [
-      "packages/*",
-      "libs/*"
+      "packages/*"
     ]
   },
-  // @onlyoffice/apps-ui-kit has no main/module/exports in package.json so fallow
-  // cannot trace cross-workspace consumers. Mark as public to avoid false positives.
+  // @onlyoffice/apps-ui-kit is no longer a workspace member -- it is installed
+  // from a tarball -- so fallow cannot trace consumers across the boundary.
+  // Mark as public to avoid false positives.
   "publicPackages": ["@onlyoffice/apps-ui-kit"],
   "ignorePatterns": [
     // MSW mock handlers and test fixtures — not imported by app code

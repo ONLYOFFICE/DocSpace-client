@@ -164,7 +164,7 @@ repository and its findings belong there, not here.
 
 The pnpm version is hardcoded in three repos: `packageManager` and
 `engines.pnpm` in `package.json`, seven Dockerfiles here, and two files in the
-`libs/ui-kit` submodule. Only CI (`pnpm/action-setup`) and the buildtools build
+separate `docspace-ui-kit-react` repository. Only CI (`pnpm/action-setup`) and the buildtools build
 image follow `packageManager` on their own — the Dockerfiles use
 `npm install -g pnpm@…` and drift silently. buildtools must keep a bare
 `corepack enable` and needs a flag audit on every major, since no gate or CI

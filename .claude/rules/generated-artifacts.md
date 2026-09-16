@@ -35,9 +35,10 @@ here. This repo consumes ui-kit only as a prebuilt tarball
 nothing here needs to be regenerated when ui-kit changes — swapping the tarball
 and re-running `pnpm install` is the whole client-side update.
 
-The same applies to ui-kit's generated `publishConfig.exports` block (~900
-entries, one per real module subpath — see `.claude/rules/pnpm.md`): it is
-produced by ui-kit's own `pnpm build` before packing, inside that repository.
+ui-kit's `publishConfig.exports` is no longer generated: a single `./*`
+wildcard replaced the ~900 exact keys and the script that wrote them, because
+the build normalises every module to `<subpath>/index.js` — see
+`.claude/rules/pnpm.md`. Nothing regenerates it, in either repository.
 
 ## Reviewing for staleness
 

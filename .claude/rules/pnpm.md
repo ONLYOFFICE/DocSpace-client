@@ -103,7 +103,8 @@ pnpm promotes to the top level when packing. An npm-packed tarball has no
 entry points at all.
 
 ui-kit's `exports` map is a single `"./*"` wildcard onto
-`dist/{esm,cjs}/*/index.js`. That works only because its rollup build
+`dist/esm/*/index.js` — the package ships ESM only. That works only because
+its rollup build
 normalises every module to `<subpath>/index.js` (`entryFileNames` in its
 `rollup.config.mjs`), giving the package one uniform shape. A wildcard cannot
 serve a mixed tree: per the ES module spec the `exports`-array fallback skips an

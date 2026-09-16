@@ -154,7 +154,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
         "firebase/compat/storage",
         "firebase/compat/database",
         // @onlyoffice/apps-ui-kit ships ~1200 unbundled ESM files behind a
-        // ~900-entry exports map, and the app imports it almost exclusively
+        // single `./*` exports wildcard, and the app imports it almost exclusively
         // through deep subpaths (.../components/text, .../components/toast).
         // As a node_modules dependency each of those subpaths is a separate
         // optimizable entry, so without these globs a cold start pre-bundles

@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
       "line_number": 320,
       "context": "</div>\n \n {paymentStore.aiToolsFeePercent != null ? (\n <Text as=\"span\" fontSize=\"13px\" className={styles.pricingRow}>\n <CommonTrans\n i18nKey=\"AIUsagePricingNote\"\n values={{ percent: paymentStore.aiToolsFeePercent }}\n components={{\n 1: (\n <Link\n fontSize=\"13px\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 265,
       "context": "if (aiToolsFeePercent == null) return \"\";\n \n return (\n <CommonTrans\n i18nKey=\"AIUsagePricingNote\"\n values={{ percent: aiToolsFeePercent }}\n components={{\n 1: (\n <Link\n fontSize=\"13px\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

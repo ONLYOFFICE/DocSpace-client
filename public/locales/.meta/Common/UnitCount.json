@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/utils/serviceUsage.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/utils/serviceUsage.ts",
       "line_number": 87,
       "context": "): string => {\n if (item.service === BACKUP_SERVICE)\n return t(\"Common:BilledBackups\", { count: item.totalQuantity });\n \n if (item.service === AI_TOOLS)\n return t(\"Common:UnitCount\", {\n unit: item.serviceUnit,\n count: formatCompactNumber(item.totalQuantity, language),\n });\n \n if (!item.serviceUnit) return \"—\";",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/utils/serviceUsage.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/utils/serviceUsage.ts",
       "line_number": 87,
       "context": "): string => {\n if (item.service === BACKUP_SERVICE)\n return t(\"Common:BilledBackups\", { count: item.totalQuantity });\n \n if (item.service === AI_TOOLS)\n return t(\"Common:UnitCount\", {\n unit: item.serviceUnit,\n count: formatCompactNumber(item.totalQuantity, language),\n });\n \n if (!item.serviceUnit) return \"—\";",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/utils/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/utils/index.tsx",
       "line_number": 151,
       "context": "t: TTranslation,\n quantity: number,\n serviceUnit?: string,\n ) => {\n if (!serviceUnit) return \"—\";\n return t(\"Common:UnitCount\", { unit: serviceUnit, count: quantity });\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

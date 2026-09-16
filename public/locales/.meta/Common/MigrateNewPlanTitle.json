@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
       "line_number": 324,
       "context": "</>,\n )}\n \n {renderStep(\n 2,\n t(\"MigrateNewPlanTitle\"),\n <div className={styles.card}>\n {renderRow(\n t(\"MigratePlanLine\", {\n count: newAdmins,\n price: formatFuturePaymentCurrency(futurePricePerAdmin),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

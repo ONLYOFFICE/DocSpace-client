@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/drop-down-item/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/drop-down-item/index.tsx",
       "line_number": 162,
       "context": "const t = useCommonTranslation();\n const { isRTL } = useInterfaceDirection();\n const { isBase } = useTheme();\n \n const resolvedBetaLabel = betaLabel || getConstName(\"BetaLabel\") || \"\";\n const resolvedPaidLabel = paidLabel || t(\"Paid\") || \"\";\n \n const withDisabledTooltip = disabled && tooltip;\n const hasDescription = Boolean(description);\n \n const labelNode = (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",

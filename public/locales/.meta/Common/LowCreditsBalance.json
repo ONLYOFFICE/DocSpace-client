@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
       "line_number": 237,
       "context": "withBottomMargin={withBottomMargin}\n />\n \n {isAiToolsServiceOn && isLowWalletBalance ? (\n <Text fontSize=\"15px\" fontWeight={600} className={styles.lowBalance}>\n {t(\"LowCreditsBalance\")}\n </Text>\n ) : null}\n \n {withoutWallet ? null : (\n <>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

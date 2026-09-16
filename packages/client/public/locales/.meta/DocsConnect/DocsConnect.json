@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 243,
       "context": "? onTopUp\n : isPaid\n ? onCancelPlan\n : onBuyPlan\n }\n title={t(\"DocsConnect:DocsConnect\")}\n priceText={\n isPaid\n ? devPackEnabled\n ? t(\"DocsConnect:PricePerUserMonthDevPackNote\", {\n price: formatCurrency(pricePerUser, 0),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 243,
       "context": "? onTopUp\n : isPaid\n ? onCancelPlan\n : onBuyPlan\n }\n title={t(\"DocsConnect:DocsConnect\")}\n priceText={\n isPaid\n ? devPackEnabled\n ? t(\"DocsConnect:PricePerUserMonthDevPackNote\", {\n price: formatCurrency(pricePerUser, 0),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/IntegrationsCard/integrations-catalog.tsx",

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
       "line_number": 245,
       "context": ">\n <Textarea\n id=\"request-details\"\n heightScale={false}\n hasError={!isValidDescription}\n placeholder={t(\"RequestDetails\")}\n tabIndex={3}\n value={description}\n onChange={onChangeDescription}\n isDisabled={isLoading}\n heightTextArea={100}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

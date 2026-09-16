@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
       "line_number": 278,
       "context": "<Text fontSize=\"12px\" className={styles.helperText}>\n {helperText ??\n (isStripeFlow\n ? t(\"TopUpCreditsChargeHint\")\n : t(\"TopUpTakeSomeTimeToComplete\"))}\n </Text>\n </div>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
       "line_number": 140,
       "context": "}\n };\n \n return (\n <div className={styles.buttonContainerWrapper}>\n {isLoading ? <Text>{t(\"TopUpTakeSomeTimeToComplete\")}</Text> : null}\n <div className={styles.buttonContainer}>\n <Button\n key=\"OkButton\"\n label={t(\"TopUp\")}\n size={ButtonSize.normal}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/index.tsx",
       "line_number": 569,
       "context": "<Text\n isBold\n fontSize=\"16px\"\n className={styles.transactionHistoryTitle}\n >\n {headerTitle ?? t(\"TransactionHistory\")}\n </Text>\n )}\n {isMobile ? mobileFilter : null}\n </div>\n {!isMobile ? filterCombobox : null}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletContainer.tsx",
       "line_number": 190,
       "context": "};\n \n const tabsItems: TTabItem[] = [\n {\n id: \"transaction-history\",\n name: t(\"TransactionHistory\"),\n content: (\n <div>\n <TransactionHistory withoutRoleFilter withoutHeader />\n </div>\n ),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/index.tsx",

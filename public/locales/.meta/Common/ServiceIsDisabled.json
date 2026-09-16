@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
       "line_number": 362,
       "context": "{isTopUpConfirmVisible ? (\n <ConfirmationDialog\n visible={isTopUpConfirmVisible}\n onClose={onCloseTopUpConfirm}\n onConfirm={onConfirmTopUp}\n title={t(\"ServiceIsDisabled\")}\n bodyText={t(\"AddCreditsToEnableAI\", { organizationName: logoText })}\n />\n ) : null}\n </div>\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

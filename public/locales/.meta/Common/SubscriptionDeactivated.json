@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 276,
       "context": "<span className={styles.deactivatedBannerIcon} aria-hidden=\"true\">\n <AlertIcon />\n </span>\n <div className={styles.deactivatedBannerText}>\n <Text className={styles.deactivatedTitle}>\n {t(\"SubscriptionDeactivated\")}\n </Text>\n <Text className={styles.deactivatedDescription}>\n {t(\"SubscriptionDeactivatedDescription\")}\n </Text>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 298,
       "context": "<span className={styles.deactivatedBannerIcon} aria-hidden=\"true\">\n <AlertIcon />\n </span>\n <div className={styles.deactivatedBannerText}>\n <Text className={styles.deactivatedTitle}>\n {t(\"Common:SubscriptionDeactivated\")}\n </Text>\n <Text className={styles.deactivatedDescription}>\n {t(\"Common:SubscriptionDeactivatedDescription\")}\n </Text>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 197,
       "context": "priceValue?: number,\n ) => {\n switch (serviceName) {\n case TOTAL_SIZE:\n if (isShowPreviousStoragePlan && !isStorageDeactivationVisited) {\n return t(\"SubscriptionDeactivated\");\n }\n \n if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/uploader/index.tsx",
       "line_number": 434,
       "context": "isLoading={isLoading}\n uploadPercent={uploadPercent}\n isFolderUpload={isFolderUpload}\n isMultipleUpload={isMultipleUpload}\n onSingleUploadError={() => {\n toastr.warning(getCommonTranslation(\"SingleUploadWarning\"), null);\n }}\n onDrop={onDrop}\n onDropRejected={onDropRejected}\n accept={accept}\n linkMainText={linkMainText ?? getCommonTranslation(\"Upload\")}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

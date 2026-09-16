@@ -12,28 +12,28 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/utils.ts",
       "line_number": 45,
       "context": "} from \"../../store/PaymentStore\";\n \n const getSourceTypeLabel = (t: TTranslation, type: TransactionSourceType) => {\n switch (type) {\n case \"Agent\":\n return t(\"AIAgent\");\n case \"File\":\n return t(\"File\");\n case \"Folder\":\n return t(\"Folder\");\n case \"Room\":",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/AIAgent/index.tsx",
       "line_number": 200,
       "context": "const { getAgentList: onLoadNextPage } = useAgentsHelper({\n withCreate: true,\n isInit: isInitRef.current,\n setIsInit,\n createDefineLabel: t(\"CreateAIAgent\", {\n aiAgent: t(\"AIAgent\"),\n }),\n excludeItems,\n searchValue,\n setHasNextPage,\n setTotal,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/AIAgent/index.tsx",
       "line_number": 200,
       "context": "const { getAgentList: onLoadNextPage } = useAgentsHelper({\n withCreate: true,\n isInit: isInitRef.current,\n setIsInit,\n createDefineLabel: t(\"CreateAIAgent\", {\n aiAgent: t(\"AIAgent\"),\n }),\n excludeItems,\n searchValue,\n setHasNextPage,\n setTotal,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/MCPServers/index.tsx",
       "line_number": 256,
       "context": "emptyScreenHeader={t(\"NoMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"NoMCPServersDescription\", {\n mcpServers: t(\"MCPSettingTitle\"),\n aiAgent: t(\"AIAgent\"),\n })}\n searchEmptyScreenImage={\n isBase ? (\n <EmptyScreenRoomSelectorLight />\n ) : (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Instructions.tsx",

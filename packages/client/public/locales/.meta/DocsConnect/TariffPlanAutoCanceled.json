@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 467,
       "context": "label={t(\"Settings:Statistics\")}\n onClick={onGoToTenant}\n />\n <Text className={styles.renewalText}>\n <CommonTrans\n i18nKey=\"DocsConnect:TariffPlanAutoCanceled\"\n values={{\n date: formatDateLocalized(\n scheduledChange.dueDate,\n \"DATE_MED\",\n { locale: language },",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

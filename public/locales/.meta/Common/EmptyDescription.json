@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/People/index.tsx",
       "line_number": 777,
       "context": "(activeTabId === GUESTS_TAB_ID\n ? isAgent\n ? t(\"NotFoundGuestsDescriptionAgent\")\n : t(\"NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"EmptyDescription\")\n : t(\"GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

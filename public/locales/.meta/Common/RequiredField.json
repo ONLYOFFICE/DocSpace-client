@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
       "line_number": 190,
       "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"RequiredField\")}\n dataTestId=\"request_name_field\"\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
       "line_number": 190,
       "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"RequiredField\")}\n dataTestId=\"request_name_field\"\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
       "line_number": 315,
       "context": "),\n styles.positive,\n )}\n </div>\n <Text fontSize=\"13px\" className={styles.muted}>\n {t(\"MigrateWalletCurrencyNote\", {\n currency: walletCodeCurrency,\n })}\n </Text>\n </>,\n )}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

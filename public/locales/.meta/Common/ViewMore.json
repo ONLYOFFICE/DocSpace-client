@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
       "line_number": 292,
       "context": "color=\"accent\"\n textDecoration=\"underline\"\n onClick={onViewMore}\n dataTestId=\"ai_search_view_more_link\"\n >\n {t(\"ViewMore\")}\n </Link>\n ) : null}\n </div>\n \n <div className={styles.cardsGrid}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
       "line_number": 271,
       "context": "color=\"accent\"\n textDecoration=\"underline\"\n onClick={onViewMore}\n dataTestId=\"ai_view_more_link\"\n >\n {t(\"ViewMore\")}\n </Link>\n ) : null}\n </div>\n \n <div className={styles.cardsGrid}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 313,
       "context": "color=\"accent\"\n textDecoration=\"underline\"\n onClick={onViewMore}\n dataTestId=\"backup_view_more_link\"\n >\n {t(\"ViewMore\")}\n </Link>\n ) : null}\n </div>\n \n <div className={styles.cardsGrid}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

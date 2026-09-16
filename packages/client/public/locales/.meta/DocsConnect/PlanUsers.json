@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 433,
       "context": "<div className={styles.summaryCard}>\n <Text className={styles.cardLabel}>{t(\"Common:Quantity\")}</Text>\n <Text className={styles.quantityValue}>{planUsers}</Text>\n <Text className={styles.cardCaption}>\n {t(\"DocsConnect:PlanUsers\")}\n </Text>\n </div>\n </div>\n \n {isPaid ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 433,
       "context": "<div className={styles.summaryCard}>\n <Text className={styles.cardLabel}>{t(\"Common:Quantity\")}</Text>\n <Text className={styles.quantityValue}>{planUsers}</Text>\n <Text className={styles.cardCaption}>\n {t(\"DocsConnect:PlanUsers\")}\n </Text>\n </div>\n </div>\n \n {isPaid ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",

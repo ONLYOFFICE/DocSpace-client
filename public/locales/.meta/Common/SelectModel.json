@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/recomended-model/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/recomended-model/index.tsx",
       "line_number": 179,
       "context": "fontSize=\"12px\"\n lineHeight=\"16px\"\n isHovered\n onClick={onSelectModel}\n >\n {t(\"SelectModel\")}\n </Link>\n ) : null}\n \n {isNotAvailableAdminState ? (\n <Link",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/utils.ts",
       "line_number": 68,
       "context": ") => {\n switch (type) {\n case \"Agent\":\n return t(\"AIAgentName\", { AgentName: title });\n case \"File\":\n return t(\"TransactionSourceFile\", { fileName: title });\n case \"Folder\":\n return t(\"TransactionSourceFolder\", { folderName: title });\n case \"Room\":\n return t(\"TransactionSourceRoom\", { roomName: title });\n case \"Form\":",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/selector/sub-components/Footer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/selector/sub-components/Footer.tsx",
       "line_number": 135,
       "context": "<Text\n className={styles.errorText}\n fontSize=\"12px\"\n lineHeight=\"16px\"\n >\n {t(\"ContainsSpecCharacter\") || \"\"}\n </Text>\n ) : null}\n </div>\n \n {withFooterCheckbox ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",

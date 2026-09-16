@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/errors/ErrorInvalidLink.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/errors/ErrorInvalidLink.tsx",
       "line_number": 45,
       "context": "const t = useCommonTranslation();\n const ready = getTranslationReady();\n \n return ready ? (\n <ErrorContainer\n headerText={t(\"InvalidLink\")}\n bodyText={t(\"LinkDoesNotExist\")}\n />\n ) : null;\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/View/index.tsx",

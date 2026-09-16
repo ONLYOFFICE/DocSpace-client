@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/PaymentContainer.tsx",
       "line_number": 271,
       "context": "lineHeight=\"16px\"\n className={styles.paymentInfoManagersPrice}\n >\n {hasScheduledTariffAdminsChange && nextTariffAdminsCount? (\n <CommonTrans\n i18nKey=\"BusinessRenewalPricingInfo\"\n values={{\n finalDate: paymentDate,\n price: formatFuturePaymentCurrency(\n getTotalCostByFormula(nextTariffAdminsCount),\n ),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

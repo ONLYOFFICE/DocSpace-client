@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/store/PaymentStore.ts",
       "line_number": 1786,
       "context": "email,\n userName,\n message,\n },\n });\n toastr.success(t(\"Common:SuccessfullySentMessage\"));\n } catch (e) {\n toastr.error(e as TData);\n }\n };\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

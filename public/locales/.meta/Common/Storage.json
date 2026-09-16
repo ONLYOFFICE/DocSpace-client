@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/tiles/template-tile/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/tiles/template-tile/index.tsx",
       "line_number": 91,
       "context": "truncate\n fontSize=\"13px\"\n fontWeight={400}\n className={styles.text}\n >\n {t(\"Storage\")}\n </Text>\n ) : null}\n </div>\n <div className={styles.field}>\n {item.createdBy ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",

@@ -12,190 +12,190 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
       "line_number": 123,
       "context": "<Text as=\"span\">\n <CommonTrans\n i18nKey=\"PreviousPlan\"\n \n values={{\n amount: `${previousStoragePlanSize} ${t(\"Gigabyte\")}`,\n price: formatWalletCurrency(totalPrice, 2),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,\n 2: <Text className={styles.monthPayment} as=\"span\" />,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 167,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 167,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 167,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 167,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 167,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 167,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/CurrentSubscription.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/CurrentSubscription.tsx",
       "line_number": 74,
       "context": "<Text\n fontWeight=\"600\"\n fontSize=\"14px\"\n className={styles.storageName}\n >\n {currentStoragePlanSize} {t(\"Gigabyte\")}\n </Text>\n </div>\n </div>\n <div className={styles.priceInfo}>\n <Text fontWeight=\"600\" fontSize=\"14px\">",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
       "line_number": 95,
       "context": "const tooltipText = () => {\n return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",\n ),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
       "line_number": 95,
       "context": "const tooltipText = () => {\n return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",\n ),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
       "line_number": 95,
       "context": "const tooltipText = () => {\n return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",\n ),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanCancel.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanCancel.tsx",
       "line_number": 142,
       "context": "<br />\n <Text as=\"span\">\n <CommonTrans\n i18nKey=\"YourCurrentPlan\"\n values={{\n amount: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n price: formatWalletCurrency(totalPrice, 2),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,\n 2: <Text className={styles.monthPayment} as=\"span\" />,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 541,
       "context": "<div className={styles.inputSection}>\n <Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 541,
       "context": "<div className={styles.inputSection}>\n <Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 541,
       "context": "<div className={styles.inputSection}>\n <Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 541,
       "context": "<div className={styles.inputSection}>\n <Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 541,
       "context": "<div className={styles.inputSection}>\n <Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StorageWarning.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StorageWarning.tsx",
       "line_number": 92,
       "context": "</div>\n \n <Text fontSize=\"12px\" className={styles.warningBody}>\n {body ??\n t(\"StorageWarning\", {\n amount: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>\n \n {!isDisabled && isCancellationMode ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StorageWarning.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StorageWarning.tsx",
       "line_number": 92,
       "context": "</div>\n \n <Text fontSize=\"12px\" className={styles.warningBody}>\n {body ??\n t(\"StorageWarning\", {\n amount: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>\n \n {!isDisabled && isCancellationMode ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 174,
       "context": "const textTooltip = (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 174,
       "context": "const textTooltip = (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 174,
       "context": "const textTooltip = (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/utils/common.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/utils/common.ts",
       "line_number": 85,
       "context": "const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",

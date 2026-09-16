@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/utils.ts",
       "line_number": 50,
       "context": "return t(\"AIAgent\");\n case \"File\":\n return t(\"File\");\n case \"Folder\":\n return t(\"Folder\");\n case \"Room\":\n return t(\"Room\");\n case \"Form\":\n return t(\"FormSpaceTitle\");\n default:\n return null;",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
       "line_number": 249,
       "context": "const renderInputField = () => (\n <div className={styles.inputFields}>\n <div className={styles.inputField}>\n <Text fontSize=\"12px\" className={styles.inputLabel} fontWeight={600}>\n {t(\"WhenBalanceGoesBellow\")}\n </Text>\n <TextInput\n scale\n value={minBalance!}\n onChange={onMinBalanceChange}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

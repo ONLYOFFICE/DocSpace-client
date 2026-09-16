@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
       "line_number": 117,
       "context": "admins: limitValue(MANAGER),\n rooms: limitValue(ROOM),\n storage: getConvertedSize(t, limitValue(TOTAL_SIZE)),\n })\n : isGracePeriod\n ? t(\"OverduePaymentBlockedAfter\", {\n price: planPrice,\n date: gracePeriodEndDate,\n })\n : t(\"PlanCost\", { admins: limitValue(MANAGER), price: planPrice });",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

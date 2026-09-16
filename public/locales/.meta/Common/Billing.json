@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/index.tsx",
       "line_number": 84,
       "context": "init(t);\n return () => resetTariffContainerToBasic();\n }, [isQuotasLoaded]);\n \n useEffect(() => {\n const title = t(\"Billing\");\n if (onSetDocumentTitle) {\n onSetDocumentTitle(title);\n } else {\n document.title = title;\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/overview/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/index.tsx",
       "line_number": 90,
       "context": "return (\n <div className={styles.overviewRoot}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700}>\n {t(\"Billing\")}\n </Text>\n <Text className={styles.headerDescription}>\n {t(\"BillingOverviewDescription\")}\n </Text>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/PaidQuotaLimitError/index.js",

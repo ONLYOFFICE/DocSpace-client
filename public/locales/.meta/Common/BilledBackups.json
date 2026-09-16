@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 373,
       "context": "</Text>\n ) : null}\n <Text className={styles.cardCaption}>\n {isFreeTariff\n ? t(\"BilledBackupsLabel\")\n : t(\"BilledBackups\", { count: paidBackupsUsed })}\n </Text>\n </>\n ) : (\n <Text className={styles.cardCaption}>\n {t(\"NoBackupsUsedInMonth\", { month: monthLabel })}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/utils/serviceUsage.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/utils/serviceUsage.ts",
       "line_number": 84,
       "context": "t: TTranslation,\n item: TServiceUsage,\n language?: string,\n ): string => {\n if (item.service === BACKUP_SERVICE)\n return t(\"Common:BilledBackups\", { count: item.totalQuantity });\n \n if (item.service === AI_TOOLS)\n return t(\"Common:UnitCount\", {\n unit: item.serviceUnit,\n count: formatCompactNumber(item.totalQuantity, language),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

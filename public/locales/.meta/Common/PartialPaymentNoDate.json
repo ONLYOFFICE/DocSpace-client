@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 162,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
       "line_number": 95,
       "context": "const tooltipText = () => {\n return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",\n ),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

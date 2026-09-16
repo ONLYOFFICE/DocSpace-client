@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useRootHelper.tsx",
       "line_number": 181,
       "context": "switch (folder.rootFolderType) {\n case FolderType.USER:\n title = t(\"Files\");\n break;\n case FolderType.VirtualRooms:\n title = t(\"Rooms\");\n break;\n case FolderType.AiAgents:\n title = t(\"AIAgents\");\n break;\n default:",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
       "line_number": 256,
       "context": ": isEmptyAgentsRootScreen\n ? t(\"EmptyRoomsDescriptionTextAgent\", {\n sectionName: t(\"AIAgents\"),\n })\n : t(\"EmptyRoomsDescriptionText\", {\n sectionName: t(\"Rooms\"),\n });\n \n const SelectorBody = (\n <Selector\n {...headerSelectorProps}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Room/index.tsx",
       "line_number": 358,
       "context": "}\n emptyScreenHeader={emptyScreenHeader ?? t(\"EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ??\n t(\"EmptyRoomsDescriptionText\", {\n sectionName: isForms ? t(\"Forms\") : t(\"Rooms\"),\n })\n }\n searchEmptyScreenImage={\n isBase ? (\n <EmptyScreenFilterRoomsLight />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList/index.tsx",

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/tiles/room-tile/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/tiles/room-tile/index.tsx",
       "line_number": 125,
       "context": "if (item.tags && item.tags.length > 0) {\n tempTags.push(...item.tags);\n } else if (item.isAIAgent) {\n tempTags.push({\n isDefault: true,\n label: t(\"NoTags\") ?? \"\",\n });\n } else {\n tempTags.push({\n isDefault: true,\n label: getRoomTypeName(item.roomType, t),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

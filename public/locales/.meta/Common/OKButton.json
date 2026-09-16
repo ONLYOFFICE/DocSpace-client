@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/ChangePricingPlanDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/ChangePricingPlanDialog.tsx",
       "line_number": 127,
       "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"ok-button\"\n label={t(\"OKButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onCloseModal}\n tabIndex={3}\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",

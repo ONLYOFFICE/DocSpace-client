@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
       "line_number": 244,
       "context": "visible={isTopUpDialogVisible}\n onClose={() => setIsTopUpDialogVisible(false)}\n recommendedAmount={recommendedAmount}\n minValue={isGracePeriod ? String(overduePlanCost) : undefined}\n descriptionText={\n isGracePeriod ? t(\"TopUpCoverOverdueDescription\") : undefined\n }\n helperText={\n isGracePeriod ? (\n <CommonTrans\n i18nKey=\"TopUpCoverOverdueHint\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

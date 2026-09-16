@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/MCPServers/index.tsx",
       "line_number": 266,
       "context": ") : (\n <EmptyScreenRoomSelectorDark />\n )\n }\n searchEmptyScreenHeader={t(\"NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"SearchEmptyRoomsDescription\")}\n submitButtonLabel={t(\"AddButton\")}\n disableSubmitButton={false}\n onSubmit={onSubmitAction}\n rowLoader={<RowLoader />}\n hasNextPage={servers.length < totalServers}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Room/index.tsx",
       "line_number": 369,
       "context": ") : (\n <EmptyScreenFilterRoomsDark />\n )\n }\n searchEmptyScreenHeader={t(\"NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"SearchEmptyRoomsDescription\")}\n totalItems={total}\n hasNextPage={hasNextPage}\n isNextPageLoading={isNextPageLoading}\n loadNextPage={onLoadNextPage}\n isLoading={showBodyLoader}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

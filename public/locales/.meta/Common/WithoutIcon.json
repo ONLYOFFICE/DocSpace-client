@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/sub-components/SelectIcon.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog/sub-components/SelectIcon.tsx",
       "line_number": 53,
       "context": "<div\n className={`${styles.withoutIcon}${withoutIcon ? ` ${styles.isSelected}` : \"\"}`}\n onClick={toggleWithoutIcon}\n data-testid=\"room_logo_cover_without_icon\"\n >\n {t(\"WithoutIcon\")}\n </div>\n </div>\n \n <div className=\"cover-icon-container\">\n {covers.map((icon, index) => {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/usage/sub-components/PeriodSelect.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/sub-components/PeriodSelect.tsx",
       "line_number": 102,
       "context": "case \"last3Months\":\n return t(\"Last3Months\");\n case \"last6Months\":\n return t(\"Last6Months\");\n case \"last12Months\":\n return t(\"Last12Months\");\n default:\n return null;\n }\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

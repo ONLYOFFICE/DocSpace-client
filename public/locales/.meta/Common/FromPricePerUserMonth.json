@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 564,
       "context": "count: trialDaysLeft,\n });\n } else if (deactivated) {\n docsConnectPrice = t(\"SubscriptionDeactivatedNonPayment\");\n } else if (canceled) {\n docsConnectPrice = t(\"FromPricePerUserMonth\", {\n price: formatWalletCurrency(item.price.value, 0),\n });\n } else if (hasScheduledChange) {\n docsConnectPrice = t(\"ChangeShedule\");\n } else {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/filter/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/filter/index.tsx",
       "line_number": 714,
       "context": "isSemitransparent\n type={LinkType.action}\n onClick={clearAll}\n dataTestId=\"filter_clear_all_link\"\n >\n {t(\"ClearAll\")}\n </Link>\n ) : null}\n </div>\n ) : null}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/EventLogBlock.js",

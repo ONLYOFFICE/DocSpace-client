@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
       "line_number": 152,
       "context": "case ErrorKeys.IncorrectEmail:\n return t(\"IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"ManyEmails\");\n case ErrorKeys.EmptyEmail:\n return t(\"EmptyEmail\");\n default:\n throw new Error(\"Unknown translation key\");\n }\n });",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",

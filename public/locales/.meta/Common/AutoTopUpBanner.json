@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/wallet/sub-components/AutoPaymentInfo.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/sub-components/AutoPaymentInfo.tsx",
       "line_number": 63,
       "context": "fontSize=\"12px\"\n lineHeight=\"16px\"\n className={styles.autoPaymentBannerText}\n >\n <CommonTrans\n i18nKey=\"AutoTopUpBanner\"\n values={{\n min: formatWalletCurrency!(minBalance, 0),\n max: formatWalletCurrency!(upToBalance, 0),\n }}\n components={{",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

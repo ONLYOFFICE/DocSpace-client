@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 373,
       "context": "</Text>\n </div>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:Upgrade\")}\n onClick={onBuyPlan}\n />\n </div>\n ) : (\n <Text className={styles.sectionTitle}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 373,
       "context": "</Text>\n </div>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:Upgrade\")}\n onClick={onBuyPlan}\n />\n </div>\n ) : (\n <Text className={styles.sectionTitle}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 553,
       "context": "e.stopPropagation();\n onClick?.(item.id!);\n }}\n dataTestId=\"docs_connect_buy_plan_link\"\n >\n {t(\"Upgrade\")}\n </Link>\n </>\n );\n } else if (isTrial) {\n docsConnectPrice = t(\"DocsConnectTrialDaysLeft\", {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",

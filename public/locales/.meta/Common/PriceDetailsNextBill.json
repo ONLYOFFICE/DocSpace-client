@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
       "line_number": 237,
       "context": "})}\n />\n ) : (\n <Text fontSize=\"13px\">\n <CommonTrans\n i18nKey=\"PriceDetailsNextBill\"\n values={{\n price: formatPaymentCurrency(totalPrice),\n date: paymentDate,\n }}\n components={{",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useFilesHelper.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useFilesHelper.ts",
       "line_number": 421,
       "context": "if (withCreate && security?.Create) {\n setTotal(total + 1);\n itemList.unshift({\n isCreateNewItem: true,\n label: t(\"NewFolder\"),\n id: \"create-folder-item\",\n key: \"create-folder-item\",\n hotkey: \"f\",\n onCreateClick: () =>\n addInputItem(t(\"NewFolder\"), React.createElement(FolderSvg)),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useFilesHelper.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useFilesHelper.ts",
       "line_number": 421,
       "context": "if (withCreate && security?.Create) {\n setTotal(total + 1);\n itemList.unshift({\n isCreateNewItem: true,\n label: t(\"NewFolder\"),\n id: \"create-folder-item\",\n key: \"create-folder-item\",\n hotkey: \"f\",\n onCreateClick: () =>\n addInputItem(t(\"NewFolder\"), React.createElement(FolderSvg)),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorState.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useSelectorState.ts",
       "line_number": 108,
       "context": "return [\n ...((withCreate && [\n {\n isCreateNewItem: true,\n label: initSelectedItemType === \"files\" ? t(\"NewFolder\") : t(\"NewRoom\"),\n id: \"create-folder-item\",\n key: \"create-folder-item\",\n hotkey: \"f\",\n onBackClick: () => {},\n },",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx",

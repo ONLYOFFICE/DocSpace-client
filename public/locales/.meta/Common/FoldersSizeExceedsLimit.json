@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/uploader/index.tsx",
       "line_number": 297,
       "context": "if (limitExceeded) {\n const maxTotalFormatted = maxTotalUploadSize.toUpperCase();\n \n if (isFolderMode) {\n toastr.error(\n getCommonTranslation(\"FoldersSizeExceedsLimit\", {\n maxSize: maxTotalFormatted,\n }),\n );\n } else {\n toastr.error(",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

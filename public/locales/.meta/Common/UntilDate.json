@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
       "line_number": 289,
       "context": "<Text\n as=\"span\"\n fontSize=\"14px\"\n className={styles.muted}\n >\n ({t(\"UntilDate\", { date: initialPaymentDate })})\n </Text>\n </>,\n )}\n {isDetailsReady && !isSameCurrency\n ? renderRow(",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
       "line_number": 193,
       "context": ": renderRow(\n t(\"RemainingPeriod\"),\n <>\n {`${daysDisplay} `}\n <Text as=\"span\" fontSize=\"14px\" className={styles.muted}>\n ({t(\"UntilDate\", { date: initialPaymentDate })})\n </Text>\n </>,\n )}\n \n <div className={styles.divider} />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 277,
       "context": "<Text\n as=\"span\"\n fontSize=\"14px\"\n className={styles.rowSubtext}\n >\n ({t(\"UntilDate\", { date: storageExpiryDate })})\n </Text>\n </>\n )}\n </Text>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",

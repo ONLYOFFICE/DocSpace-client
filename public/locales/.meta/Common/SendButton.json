@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
       "line_number": 259,
       "context": "</FieldContainer>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"\n label={isLoading ? t(\"Sending\") : t(\"SendButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onSendRequest}\n isLoading={isLoading}\n isDisabled={isLoading}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",

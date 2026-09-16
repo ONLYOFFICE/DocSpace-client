@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 378,
       "context": ": t(\"BilledBackups\", { count: paidBackupsUsed })}\n </Text>\n </>\n ) : (\n <Text className={styles.cardCaption}>\n {t(\"NoBackupsUsedInMonth\", { month: monthLabel })}\n </Text>\n )}\n </div>\n </div>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

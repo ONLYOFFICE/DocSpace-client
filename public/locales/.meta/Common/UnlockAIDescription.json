@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
       "line_number": 143,
       "context": "className={styles.introTitle}\n >\n {t(\"UnlockAIAcrossWorkspace\")}\n </Text>\n <Text fontSize=\"13px\" className={styles.introDescription}>\n {t(\"UnlockAIDescription\")}\n </Text>\n </div>\n \n <div className={styles.cards}>\n {cards.map((card) => (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/article/sub-components/DevToolsBar.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/article/sub-components/DevToolsBar.tsx",
       "line_number": 91,
       "context": "data-testid=\"dev-tools-bar\"\n data-show-text={showText ? \"true\" : \"false\"}\n data-icon-only={showText ? \"false\" : \"true\"}\n data-with-custom-slot={withCustomSlot ? \"true\" : \"false\"}\n data-hide-profile-block={articleOpen ? \"true\" : \"false\"}\n title={showText ? undefined : t(\"DeveloperTools\")}\n >\n <DeveloperReactSvg className=\"icon\" />\n {showText ? (\n <>\n <Text fontWeight={600} fontSize=\"12px\" className=\"label\">",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/article/sub-components/DevToolsBar.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/article/sub-components/DevToolsBar.tsx",
       "line_number": 91,
       "context": "data-testid=\"dev-tools-bar\"\n data-show-text={showText ? \"true\" : \"false\"}\n data-icon-only={showText ? \"false\" : \"true\"}\n data-with-custom-slot={withCustomSlot ? \"true\" : \"false\"}\n data-hide-profile-block={articleOpen ? \"true\" : \"false\"}\n title={showText ? undefined : t(\"DeveloperTools\")}\n >\n <DeveloperReactSvg className=\"icon\" />\n {showText ? (\n <>\n <Text fontWeight={600} fontSize=\"12px\" className=\"label\">",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",

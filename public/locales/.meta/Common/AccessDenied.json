@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/errors/AccessRestricted.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/errors/AccessRestricted.tsx",
       "line_number": 53,
       "context": "return (\n ready && (\n <div className={styles.accessRestrictedWrapper}>\n <ErrorContainer\n headerText={t(\"AccessDenied\")}\n bodyText={t(\"PortalRestriction\")}\n />\n </div>\n )\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",

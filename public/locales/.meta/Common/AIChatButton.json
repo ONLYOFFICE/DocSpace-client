@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/ai-chat-panel/components/ai-chat-panel-header-container/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/components/ai-chat-panel-header-container/index.tsx",
       "line_number": 68,
       "context": "store.close();\n };\n \n return (\n <AiChatPanelHeader\n title={t(\"Common:AIChatButton\")}\n onClose={handleClose}\n isFullscreen={store.effectiveFullscreen}\n onToggleFullscreen={isDesktop ? store.toggleFullscreen : undefined}\n />\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/ai-agent/ai-chat-panel/components/ai-chat-trigger/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/components/ai-chat-trigger/index.tsx",
       "line_number": 59,
       "context": "return (\n <Button\n accent\n onClick={openChat}\n size={ButtonSize.small}\n label={t(\"Common:AIChatButton\")}\n icon={<AiAgentsReactSvg />}\n aria-label={t(\"Common:AIChatButton\")}\n className={styles.trigger}\n />\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/ai-agent/ai-chat-panel/components/ai-chat-trigger/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/components/ai-chat-trigger/index.tsx",
       "line_number": 59,
       "context": "return (\n <Button\n accent\n onClick={openChat}\n size={ButtonSize.small}\n label={t(\"Common:AIChatButton\")}\n icon={<AiAgentsReactSvg />}\n aria-label={t(\"Common:AIChatButton\")}\n className={styles.trigger}\n />\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",

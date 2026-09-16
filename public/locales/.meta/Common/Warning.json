@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
       "line_number": 112,
       "context": "displayType={ModalDialogType.modal}\n isLarge\n >\n <ModalDialog.Header>\n <Text fontSize=\"21px\" isBold>\n {t(\"Warning\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontWeight={600}>{t(\"StorageTariffDeactivated\")}</Text>\n <br />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/GracePeriodModal.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/GracePeriodModal.tsx",
       "line_number": 79,
       "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n isLarge\n >\n <ModalDialog.Header>{t(\"Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontWeight={600}>\n {t(\"ServiceManagementUnavailable\", { planName: tariffPlanTitle })}\n </Text>\n <br />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",

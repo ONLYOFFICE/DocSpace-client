@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
       "line_number": 87,
       "context": "<ModalDialog.Footer>\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Remove\")}\n onClick={onRemove}\n testId=\"remove_storage_subscription_button\"\n />\n <Button\n scale",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",

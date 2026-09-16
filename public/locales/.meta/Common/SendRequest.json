@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/RequestButtonContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/RequestButtonContainer.tsx",
       "line_number": 74,
       "context": "onClose={onClose}\n />\n ) : null}\n <Button\n className=\"send-request-button\"\n label={t(\"SendRequest\")}\n size={ButtonSize.medium}\n primary\n isDisabled={isLoading || isDisabled}\n onClick={toDoRequest}\n isLoading={isLoading}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
       "line_number": 111,
       "context": "isBalanceInsufficient && !isTopUpUnavailable && isDelayedPaymentMethod;\n const canTopUpAndBuy =\n isBalanceInsufficient && !isTopUpUnavailable && !isDelayedPaymentTopUp;\n \n const getTitle = () => {\n if (isExceedingStorageLimit) return t(\"SendRequest\");\n \n if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n \n if (canTopUpAndBuy) return t(\"TopUpAndUpgrade\");",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",

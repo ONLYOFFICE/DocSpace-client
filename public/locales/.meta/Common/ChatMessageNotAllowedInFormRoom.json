@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/save-dialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/save-dialog.tsx",
       "line_number": 219,
       "context": "// pass the security.Create check, but the md → docx export into them\n // dies silently in the AI Worker. Block entering them with the\n // selector's own warning toast instead (Bug 83615).\n formProps={{\n isRoomFormAccessible: false,\n message: t(\"Common:ChatMessageNotAllowedInFormRoom\", {\n defaultValue:\n \"The chat message cannot be saved to the Form Filling space since this space type can only contain PDF forms.\",\n }),\n }}\n isThirdParty={false}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

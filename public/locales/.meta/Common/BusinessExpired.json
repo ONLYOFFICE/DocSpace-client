@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/PaymentContainer.tsx",
       "line_number": 197,
       "context": "isBold\n color=\"var(--settings-payment-warning-color)\"\n dataTestId=\"expired_subscription_text\"\n >\n <CommonTrans\n i18nKey=\"BusinessExpired\"\n values={{ date: gracePeriodEndDate, planName: tariffPlanTitle }}\n />\n </Text>\n );\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

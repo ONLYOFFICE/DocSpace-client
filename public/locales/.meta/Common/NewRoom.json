@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorState.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useSelectorState.ts",
       "line_number": 108,
       "context": "return [\n ...((withCreate && [\n {\n isCreateNewItem: true,\n label: initSelectedItemType === \"files\" ? t(\"NewFolder\") : t(\"NewRoom\"),\n id: \"create-folder-item\",\n key: \"create-folder-item\",\n hotkey: \"f\",\n onBackClick: () => {},\n },",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/utils/hooks/useRoomsHelper.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/utils/hooks/useRoomsHelper.tsx",
       "line_number": 282,
       "context": "const createRoomType =\n createDefineRoomType ??\n (formsSection ? ApiRoomType.FillingFormsRoom : undefined);\n const createItem: TSelectorItem = {\n isCreateNewItem: true,\n label: createDefineRoomLabel ?? t(\"NewRoom\"),\n id: \"create-room-item\",\n key: \"create-room-item\",\n hotkey: \"r\",\n isRoomsOnly,\n createDefineRoomType: createRoomType,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",

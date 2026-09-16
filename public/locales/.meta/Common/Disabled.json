@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/People/index.tsx",
       "line_number": 133,
       "context": "disableDisabledUsers && status === EmployeeStatus.Terminated;\n \n const disabledText = isInvited\n ? (disabledInvitedText ?? t(\"Invited\"))\n : isDisabled\n ? t(\"Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);\n \n const i: TSelectorItem = {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",

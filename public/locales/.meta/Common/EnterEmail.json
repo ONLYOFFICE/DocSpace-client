@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
       "line_number": 227,
       "context": "scale\n value={email}\n onChange={onChangeEmail}\n onValidateInput={onValidateEmailInput}\n hasError={!isValidEmail}\n placeholder={t(\"EnterEmail\")}\n dataTestId=\"request_email_input\"\n />\n </FieldContainer>\n \n <FieldContainer",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",

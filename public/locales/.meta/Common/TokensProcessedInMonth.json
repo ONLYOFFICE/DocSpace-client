@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
       "line_number": 311,
       "context": "/>\n ) : (\n <Text className={styles.cardValue}>{monthTokensText}</Text>\n )}\n <Text className={styles.cardCaption}>\n {t(\"TokensProcessedInMonth\", { month: monthLabel })}\n </Text>\n </div>\n </div>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

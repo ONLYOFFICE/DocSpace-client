@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
       "line_number": 78,
       "context": "</Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"RemoveSubscriptionConfirm\", {\n service: t(\"AdditionalDiskStorage\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 261,
       "context": "<ServiceToggleSection\n withBottomMargin={withBottomMargin}\n isEnabled={hasStorageSubscription}\n isDisabled={isDisabled || isScheduled}\n onToggle={handleToggleChange}\n title={t(\"AdditionalDiskStorage\")}\n priceText={t(\"PerStorage\", {\n currency: formatWalletCurrency(storagePriceIncrement, 2),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n })}\n description={t(\"AdjustStorageToExactAmount\")}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 527,
       "context": ">\n <ModalDialog.Container>{container}</ModalDialog.Container>\n <ModalDialog.Header>\n {hasStorageSubscription\n ? t(\"EditSubscription\")\n : t(\"AdditionalDiskStorage\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.dialogBody}>\n <Text className={styles.dialogDescription} fontSize=\"12px\">\n {t(\"AdjustStorageToExactAmount\")}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",

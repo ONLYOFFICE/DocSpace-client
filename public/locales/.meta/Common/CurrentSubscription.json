@@ -12,28 +12,28 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 332,
       "context": "/>\n </div>\n ) : (\n <div className={styles.subscriptionHeader}>\n <Text fontWeight={700} fontSize=\"14px\">\n {t(\"CurrentSubscription\")}\n </Text>\n {isDisabled || isScheduled ? null : (\n <>\n <div\n className={styles.settingsIcon}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 316,
       "context": "/>\n \n {isPaid && canceled ? (\n <>\n <Text className={styles.sectionTitle}>\n {t(\"Common:CurrentSubscription\")}\n </Text>\n <div className={styles.noPlanCard}>\n <Text\n fontSize=\"13px\"\n fontWeight={600}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 316,
       "context": "/>\n \n {isPaid && canceled ? (\n <>\n <Text className={styles.sectionTitle}>\n {t(\"Common:CurrentSubscription\")}\n </Text>\n <div className={styles.noPlanCard}>\n <Text\n fontSize=\"13px\"\n fontWeight={600}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/CurrentSubscription.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/CurrentSubscription.tsx",
       "line_number": 60,
       "context": "(currentStoragePlanSize || 0) * (storagePriceIncrement || 0);\n \n return (\n <div className={styles.currentSubscriptionWrapper}>\n <Text fontWeight=\"700\" fontSize=\"16px\">\n {t(\"CurrentSubscription\")}\n </Text>\n <div className={styles.subscriptionCard}>\n <div className={styles.subscriptionContent}>\n <div className={styles.storageInfo}>\n <div className={styles.storageIcon}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

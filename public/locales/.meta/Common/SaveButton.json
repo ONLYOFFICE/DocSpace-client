@@ -12,28 +12,28 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/save-dialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/save-dialog.tsx",
       "line_number": 240,
       "context": "getIsDisabled={getIsDisabled}\n currentFolderId=\"\"\n rootFolderType={FolderType.USER}\n disabledItems={[]}\n filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SaveButton\", { defaultValue: \"Save\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader={t(\"Common:FileName\", { defaultValue: \"File name\" })}\n currentFooterInputValue={stripDocxExt(defaultName)}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
       "line_number": 284,
       "context": "</div>\n {!onAdditionalSave ? (\n <div className={styles.inputButtons}>\n <Button\n key=\"OkButton\"\n label={t(\"SaveButton\")}\n size={ButtonSize.small}\n primary\n onClick={onSaveAutoPayment}\n isLoading={isLoading}\n isDisabled={",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletRefilledModal.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletRefilledModal.tsx",
       "line_number": 142,
       "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"EnableButton\"\n label={t(\"SaveButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onAdditionalSave}\n isDisabled={",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/avatar-editor-dialog/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/avatar-editor-dialog/index.tsx",
       "line_number": 125,
       "context": "/>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={handleSave}\n isLoading={isLoading}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 575,
       "context": "/>\n </FieldContainer>\n {!hasMinError ? (\n <Text className={styles.perStorageInfo} fontSize=\"12px\">\n <CommonTrans\n i18nKey=\"PerStorageWitnMinValue\"\n values={{\n currency: formatWalletCurrency(storagePriceIncrement, 2),\n amount: `1 ${t(\"Gigabyte\")}`,\n minValue: MIN_VALUE,\n storageUnit: t(\"Gigabyte\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

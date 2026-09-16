@@ -12,166 +12,166 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/attach-dialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/attach-dialog.tsx",
       "line_number": 221,
       "context": "currentFolderId=\"\"\n rootFolderType={FolderType.USER}\n disabledItems={[]}\n filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SelectAction\", { defaultValue: \"Select\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader=\"\"\n currentFooterInputValue=\"\"\n getFilesArchiveError={() => \"\"}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/save-dialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/save-dialog.tsx",
       "line_number": 241,
       "context": "currentFolderId=\"\"\n rootFolderType={FolderType.USER}\n disabledItems={[]}\n filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SaveButton\", { defaultValue: \"Save\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader={t(\"Common:FileName\", { defaultValue: \"File name\" })}\n currentFooterInputValue={stripDocxExt(defaultName)}\n getFilesArchiveError={() => \"\"}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
       "line_number": 94,
       "context": "testId=\"remove_storage_subscription_button\"\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"CancelButton\")}\n onClick={onClose}\n testId=\"cancel_remove_storage_subscription_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
       "line_number": 270,
       "context": "tabIndex={3}\n testId=\"send_sales_request_button\"\n />\n <Button\n className=\"cancel-button\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n onClick={onCloseModal}\n isLoading={isLoading}\n isDisabled={isLoading}\n tabIndex={3}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
       "line_number": 175,
       "context": "onClick={onClick}\n testId=\"go_to_service_button\"\n />\n <Button\n className=\"cancel-button\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n onClick={onCloseModal}\n testId=\"close_storage_tariff_deactivated_button\"\n />\n </ModalDialog.Footer>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
       "line_number": 397,
       "context": "onClick={onConfirm}\n testId=\"migrate_to_wallet_confirm_button\"\n />\n <Button\n key=\"cancel\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n testId=\"migrate_to_wallet_cancel_button\"\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
       "line_number": 270,
       "context": "onClick={onConfirm}\n testId=\"price_details_pay_button\"\n />\n <Button\n key=\"cancel\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n testId=\"price_details_cancel_button\"\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
       "line_number": 334,
       "context": "scale\n onClick={onUpdateTariff}\n testId=\"confirm_payment_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n testId=\"cancel_payment_button\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
       "line_number": 230,
       "context": "isLoading={isLoading}\n isDisabled={isOkDisabled}\n testId=\"storage_plan_upgrade_ok_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/GracePeriodModal.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/GracePeriodModal.tsx",
       "line_number": 114,
       "context": "primary\n onClick={onClick}\n testId=\"grace_period_ok_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n testId=\"grace_period_cancel_button\"\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
       "line_number": 207,
       "context": "primary\n isLoading={isActivating}\n testId=\"ai-features-dialog-activate-button\"\n />\n <Button\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n isDisabled={isActivating}\n testId=\"ai-features-dialog-cancel-button\"\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/sub-components/ConfirmationDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/sub-components/ConfirmationDialog.tsx",
       "line_number": 94,
       "context": "primary\n scale\n testId=\"service-confirmation-dialog-continue-button\"\n />\n <Button\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n testId=\"service-confirmation-dialog-close-button\"\n scale\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
       "line_number": 297,
       "context": "isLoading={isLoading}\n isDisabled={isDisabled}\n testId=\"first_topup_continue_to_stripe\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
       "line_number": 299,
       "context": "!upToBalance\n }\n testId=\"save_auto_payment_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"CancelButton\")}\n size={ButtonSize.small}\n onClick={onClose}\n isDisabled={isDisabled || isLoading}\n testId=\"cancel_auto_payment_button\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
       "line_number": 154,
       "context": "onClick={onTopUp}\n isLoading={isLoading}\n testId=\"top_up_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={() => onClose(false)}\n isDisabled={isLoading}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
       "line_number": 162,
       "context": "testId=\"apply_filter_button\"\n />\n <Button\n onClick={closeFilterDialog}\n size={ButtonSize.medium}\n label={t(\"CancelButton\")}\n scale\n testId=\"cancel_filter_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletRefilledModal.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletRefilledModal.tsx",
       "line_number": 158,
       "context": "}\n isLoading={isLoading}\n testId=\"wallet_refilled_save_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onCloseDialog}\n testId=\"wallet_refilled_cancel_button\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/avatar-editor-dialog/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/avatar-editor-dialog/index.tsx",
       "line_number": 133,
       "context": "primary\n onClick={handleSave}\n isLoading={isLoading}\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={handleClose}\n isDisabled={isLoading}\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/filter/sub-components/FilterBlock.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/filter/sub-components/FilterBlock.tsx",
       "line_number": 573,
       "context": "testId=\"filter_apply_button\"\n />\n <Button\n id=\"filter_cancel-button\"\n size={ButtonSize.normal}\n label={t(\"CancelButton\") ?? \"\"}\n scale\n onClick={hideFilterBlock}\n isDisabled={isLoading}\n testId=\"filter_cancel_button\"\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog/index.tsx",
       "line_number": 207,
       "context": "<Button\n scale\n tabIndex={0}\n onClick={handleClose}\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n testId=\"room_logo_cover_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
       "line_number": 178,
       "context": "onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </ModalDialog>\n ) : (\n <DropDown",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
       "line_number": 178,
       "context": "onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </ModalDialog>\n ) : (\n <DropDown",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/AIAgent/index.tsx",
       "line_number": 234,
       "context": "},\n };\n \n const cancelButtonSelectorProps: TSelectorCancelButton = {\n withCancelButton: true,\n cancelButtonLabel: t(\"CancelButton\"),\n onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
       "line_number": 200,
       "context": "};\n \n const cancelButtonProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton,\n cancelButtonLabel: cancelButtonLabel || t(\"CancelButton\"),\n cancelButtonId,\n onCancel,\n }\n : {};",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/MCPServers/index.tsx",
       "line_number": 290,
       "context": "onBackClick: onBackClick,\n onCloseClick: onClose ?? onBackClick,\n withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"CancelButton\")}\n onCancel={onBackClick}\n selectedItems={initedSelectedServersItems}\n />\n );\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/People/index.tsx",
       "line_number": 586,
       "context": ": ({} as TSelectorHeader);\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton,\n cancelButtonLabel: cancelButtonLabel || t(\"CancelButton\"),\n onCancel,\n }\n : ({} as TSelectorCancelButton);\n \n const searchSelectorProps: TSelectorSearch = {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Room/index.tsx",
       "line_number": 314,
       "context": ": {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton: true,\n cancelButtonLabel: cancelButtonLabel || t(\"CancelButton\"),\n onCancel,\n }\n : {};\n \n const searchSelectorProps: TSelectorSearch = withSearch",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",

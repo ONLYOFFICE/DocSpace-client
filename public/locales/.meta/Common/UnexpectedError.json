@@ -12,202 +12,202 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-method/index.tsx",
       "line_number": 103,
       "context": "return <PaymentMethodLoader />;\n \n const goToStripePortal = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(toAbsoluteUrl(cardLinked), \"_top\")",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-method/index.tsx",
       "line_number": 103,
       "context": "return <PaymentMethodLoader />;\n \n const goToStripePortal = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(toAbsoluteUrl(cardLinked), \"_top\")",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/index.tsx",
       "line_number": 281,
       "context": ") {\n changeServiceState(AI_SEARCH_ENUM);\n }\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/index.tsx",
       "line_number": 281,
       "context": ") {\n changeServiceState(AI_SEARCH_ENUM);\n }\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/index.tsx",
       "line_number": 281,
       "context": ") {\n changeServiceState(AI_SEARCH_ENUM);\n }\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 190,
       "context": "quantity: { storage: null },\n productQuantityType: 0,\n },\n });\n const res = walletRes?.data?.response;\n if (res === false) throw new Error(t(\"UnexpectedError\"));\n \n await Promise.all([fetchPortalTariff?.(), fetchBalance?.()]);\n \n toastr.success(t(\"StorageCapacityUpdated\"));\n } catch (e) {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
       "line_number": 169,
       "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: { service: walletService, enabled },\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(enumId);\n return false;\n }\n \n if (enabled && enumId === AI_SEARCH_ENUM)",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
       "line_number": 169,
       "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: { service: walletService, enabled },\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(enumId);\n return false;\n }\n \n if (enabled && enumId === AI_SEARCH_ENUM)",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
       "line_number": 166,
       "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: raw,\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(AI_ENUM);\n return;\n }\n \n if (!isAiToolsServiceOn) toastr.success(t(\"AIToolsEnabled\"));",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
       "line_number": 166,
       "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: raw,\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(AI_ENUM);\n return;\n }\n \n if (!isAiToolsServiceOn) toastr.success(t(\"AIToolsEnabled\"));",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 143,
       "context": "await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: raw,\n });\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(BACKUP_SERVICE);\n } finally {\n setIsLoading(false);\n }\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 138,
       "context": "const result = calcRes?.data?.response as unknown as {\n amount: number;\n } | null;\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n return;\n }\n \n setPartialUpgradeFee(result.amount);\n setIsPriceLoading(false);",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
       "line_number": 130,
       "context": "{ signal: controller.signal },\n );\n const currentWriteOff = calcRes?.data?.response as unknown as { amount: number } | null;\n \n if (!currentWriteOff) {\n toastr.error(t(\"UnexpectedError\"));\n return;\n }\n \n const paymentAmount = currentWriteOff.amount;\n setPartialUpgradeFee(paymentAmount);",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanCancel.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanCancel.tsx",
       "line_number": 103,
       "context": "},\n });\n const res = walletRes?.data?.response;\n \n if (res === false) {\n toastr.error(t(\"UnexpectedError\"));\n \n clearTimeout(timerId);\n setIsLoading(false);\n \n return;",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 346,
       "context": "},\n });\n const res = walletRes?.data?.response;\n \n if (res === false) {\n throw new Error(t(\"UnexpectedError\"));\n }\n \n if (isNewSubscription) {\n await fetchPortalTariff!(true);",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 346,
       "context": "},\n });\n const res = walletRes?.data?.response;\n \n if (res === false) {\n throw new Error(t(\"UnexpectedError\"));\n }\n \n if (isNewSubscription) {\n await fetchPortalTariff!(true);",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/payer-information/index.tsx",
       "line_number": 72,
       "context": "const [isDisabled, setDisabled] = useState(false);\n const goToStripePortal = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const onRefreshData = async () => {\n setDisabled(true);\n try {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/payer-information/index.tsx",
       "line_number": 72,
       "context": "const [isDisabled, setDisabled] = useState(false);\n const goToStripePortal = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const onRefreshData = async () => {\n setDisabled(true);\n try {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
       "line_number": 180,
       "context": "if (signal.aborted) return;\n \n onClose();\n } catch (error) {\n console.error(\"[first-topup] flow failed\", error);\n if (!signal.aborted) toastr.error(t(\"UnexpectedError\"));\n } finally {\n if (!signal.aborted) setIsLoading(false);\n }\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
       "line_number": 180,
       "context": "if (signal.aborted) return;\n \n onClose();\n } catch (error) {\n console.error(\"[first-topup] flow failed\", error);\n if (!signal.aborted) toastr.error(t(\"UnexpectedError\"));\n } finally {\n if (!signal.aborted) setIsLoading(false);\n }\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
       "line_number": 111,
       "context": "}, []);\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(toAbsoluteUrl(cardLinked), \"_self\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const goStripeAccount = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
       "line_number": 111,
       "context": "}, []);\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(toAbsoluteUrl(cardLinked), \"_self\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const goStripeAccount = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
       "line_number": 102,
       "context": "setIsLoading(true);\n \n const res = await onTopUpBalance(+amount, serviceName ?? currency);\n \n if (!res) {\n throw new Error(t(\"UnexpectedError\"));\n }\n \n if (!serviceName) {\n window.dataLayer = window.dataLayer || [];\n window.dataLayer.push({",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/index.tsx",
       "line_number": 380,
       "context": "const checkRes = await paymentApi.getCustomerOperationsReport();\n const response = checkRes?.data\n ?.response as unknown as TransactionHistoryReportResponse;\n \n if (!response) {\n reject(new Error(t(\"UnexpectedError\")));\n return;\n }\n \n if (response.error) {\n reject(new Error(response.error));",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/index.tsx",
       "line_number": 380,
       "context": "const checkRes = await paymentApi.getCustomerOperationsReport();\n const response = checkRes?.data\n ?.response as unknown as TransactionHistoryReportResponse;\n \n if (!response) {\n reject(new Error(t(\"UnexpectedError\")));\n return;\n }\n \n if (response.error) {\n reject(new Error(response.error));",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/unlinked-card-banner/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/unlinked-card-banner/index.tsx",
       "line_number": 57,
       "context": "const { walletCustomerEmail } = tariff;\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(toAbsoluteUrl(cardLinked), \"_self\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n return (\n <div className={styles.banner}>\n <PluginIncompatibleSvg className={styles.icon} />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/store/PaymentStore.ts",
       "line_number": 1367,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/store/PaymentStore.ts",
       "line_number": 1367,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/store/PaymentStore.ts",
       "line_number": 1367,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/store/ServicesStore.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/store/ServicesStore.ts",
       "line_number": 543,
       "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n } finally {\n if (this.pendingServiceName === serviceName)\n this.loadedServiceName = serviceName;\n }\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/store/ServicesStore.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/store/ServicesStore.ts",
       "line_number": 543,
       "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n } finally {\n if (this.pendingServiceName === serviceName)\n this.loadedServiceName = serviceName;\n }\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/usage/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/index.tsx",
       "line_number": 274,
       "context": "error?: string;\n }\n | undefined;\n \n if (!response) {\n reject(new Error(t(\"UnexpectedError\")));\n return;\n }\n if (response.error) {\n reject(new Error(response.error));\n return;",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/uploader/index.tsx",
       "line_number": 348,
       "context": ");\n \n onUploadSuccess?.(uploadedFiles);\n } catch (err) {\n const message =\n getErrorMessage(err) || getCommonTranslation(\"UnexpectedError\");\n toastr.error(message);\n \n onUploadError?.({ error: message });\n } finally {\n setIsLoading(false);",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/save-dialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/save-dialog.tsx",
       "line_number": 244,
       "context": "filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SaveButton\", { defaultValue: \"Save\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader={t(\"Common:FileName\", { defaultValue: \"File name\" })}\n currentFooterInputValue={stripDocxExt(defaultName)}\n getFilesArchiveError={() => \"\"}\n currentDeviceType={currentDeviceType}\n />\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",

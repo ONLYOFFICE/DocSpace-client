@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
       "line_number": 171,
       "context": "// const getServiceTitle = (service: string) => {\n //   switch (service) {\n //     case DISK_STORAGE:\n //       return t(\"AdditionalStorageInfo\");\n //     case BACKUP_SERVICE:\n //       return t(\"Backups\");\n //     case AI_TOOLS:\n //       return t(\"AIFeatures\");\n //     default:\n //       return service;\n //   }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

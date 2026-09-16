@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/People/index.tsx",
       "line_number": 578,
       "context": "const headerSelectorProps: TSelectorHeader = withHeader\n ? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel: headerProps.headerLabel || t(\"Contacts\"),\n },\n }\n : ({} as TSelectorHeader);\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",

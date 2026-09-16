@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 170,
       "context": "const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n });\n \n const handleToggleChange = () => {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

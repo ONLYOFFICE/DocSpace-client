@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-ai-benefits/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/new-chat/components/chat-ai-benefits/index.tsx",
       "line_number": 83,
       "context": "{serviceFeePercent != null ? (\n <li className={styles.item}>\n <PriceIcon className={styles.icon} />\n <Text as=\"span\" fontSize=\"12px\" fontWeight=\"600\" lineHeight=\"16px\">\n <CommonTrans\n i18nKey=\"AIOpenRouterPricingNote\"\n values={{ percent: serviceFeePercent }}\n components={{\n 1: (\n <Link\n fontSize=\"12px\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

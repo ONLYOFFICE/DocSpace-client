@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
       "line_number": 198,
       "context": "return (\n <div className={`${styles.card} ${styles.creditsCard}`}>\n <div className={styles.creditsTop}>\n <BalanceAmount\n className={styles.creditsBalance}\n title={t(\"AvailableCredits\")}\n titleFontSize=\"14px\"\n mainFontSize=\"28px\"\n fractionFontSize=\"20px\"\n showRefresh={!isNotPaidPeriod && isCardLinkedToPortal}\n isRefreshing={isRefreshing}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletContainer.tsx",
       "line_number": 237,
       "context": ") : null}\n \n <div className={styles.summaryGrid}>\n <div className={`${styles.summaryCard} ${styles.summaryCardBalance}`}>\n <BalanceAmount\n title={t(\"AvailableCredits\")}\n titleFontSize=\"14px\"\n mainFontSize=\"28px\"\n fractionFontSize=\"18px\"\n showRefresh={!isNotPaidPeriod && isCardLinkedToPortal}\n isRefreshing={isRefreshing || isAutoSpinning}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",

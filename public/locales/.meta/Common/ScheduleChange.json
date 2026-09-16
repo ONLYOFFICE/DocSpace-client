@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/store/PaymentStore.ts",
       "line_number": 1659,
       "context": "getConfirmButtonLabel = (t: TTranslation) => {\n const { isFreeTariff, maxCountManagersByQuota } = this.quotas;\n const isDowngrade =\n !isFreeTariff && this.managersCount < maxCountManagersByQuota;\n if (isDowngrade) return t(\"ScheduleChange\");\n \n const isTheSameCount =\n !isFreeTariff && this.managersCount === maxCountManagersByQuota;\n const dueTodayAmount = this.tariffDueTodayAmount ?? this.totalPrice;\n const isBalanceInsufficient = this.walletBalance < dueTodayAmount;",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",

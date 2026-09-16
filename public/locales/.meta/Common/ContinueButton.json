@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/sub-components/ConfirmationDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/sub-components/ConfirmationDialog.tsx",
       "line_number": 86,
       "context": "))}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={acceptLabel ?? t(\"ContinueButton\")}\n size={ButtonSize.normal}\n onClick={onConfirm}\n primary\n scale\n testId=\"service-confirmation-dialog-continue-button\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/AskAIConnectDialog/index.tsx",

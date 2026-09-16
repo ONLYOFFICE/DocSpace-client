@@ -10,14 +10,7 @@
     "updated_at": "2026-04-11T20:47:10.368Z",
     "model": "google/gemini-2.5-flash"
   },
-  "usage": [
-    {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/FromWalletToAi.tsx",
-      "line_number": 100,
-      "context": "<div className={modalStyles.transferBlock}>\n <Text fontWeight=\"600\">{t(\"TopUpTo\")}</Text>\n \n <WalletInfo\n title={t(\"OrganizationAI\", {\n organizationName: logoText,\n })}\n balance={aiServiceBalanceValue}\n icon={<AiAgentsIcon />}\n />",
-      "module": "/libs/ui-kit"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

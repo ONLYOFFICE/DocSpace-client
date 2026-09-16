@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
       "line_number": 123,
       "context": "</div>\n \n <StepsTimeline steps={steps} stepIndex={stepIndex} />\n \n <Text className={styles.footerNote}>\n {t(\"WalletTopUpSecuredByStripe\")}\n </Text>\n </>\n );\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

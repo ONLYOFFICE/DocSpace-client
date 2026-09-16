@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/index.tsx",
       "line_number": 300,
       "context": "await applyServiceStateChange(AI_SEARCH_ENUM, true);\n };\n \n const getServiceSuccessMessage = (id: string) => {\n if (id === BACKUP_SERVICE) return t(\"BackupServiceEnabled\");\n if (id === AI_ENUM) return t(\"AIToolsEnabled\");\n return undefined;\n };\n \n const applyServiceStateChange = async (id: string, enabled: boolean) => {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

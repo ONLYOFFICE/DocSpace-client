@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 345,
       "context": ".map(({ item }) => item);\n \n return (\n <div style={{ width: \"100%\" }}>\n <Text className={styles.storageDescription}>\n {t(\"ConnectAndConfigureAddons\")}\n </Text>\n \n <div\n className={classNames(styles.servicesWrapper, {\n [styles.servicesWrapperMobile]: isMobile,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

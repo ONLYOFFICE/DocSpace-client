@@ -12,34 +12,34 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
       "line_number": 385,
       "context": "? t(\"MigratePay\", {\n amount: subscriptionDetails\n ? formatFuturePaymentCurrency(cardCharge, 2)\n : \"\",\n })\n : t(\"UpgradeNow\")\n }\n size={ButtonSize.normal}\n primary\n scale\n isDisabled={isLoading || !subscriptionDetails || !isAgreed}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
       "line_number": 171,
       "context": "const getPayTariffLabel = () => {\n if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n if (!isCardLinkedToPortal || isBalanceInsufficient)\n return t(\"TopUpAndUpgrade\");\n return t(\"UpgradeNow\");\n };\n \n const getUpdateTariffAction = () => {\n if (needsWalletMigration) return openMigrateDialog;\n if (isDelayedPaymentTopUp) return openTopUpDialog;",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
       "line_number": 117,
       "context": "if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n \n if (canTopUpAndBuy) return t(\"TopUpAndUpgrade\");\n \n if (!hasStorageSubscription) return t(\"UpgradeNow\");\n \n return t(\"Update\");\n };\n \n const getOnClick = () => {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/store/PaymentStore.ts",
       "line_number": 1666,
       "context": "const isTheSameCount =\n !isFreeTariff && this.managersCount === maxCountManagersByQuota;\n const dueTodayAmount = this.tariffDueTodayAmount ?? this.totalPrice;\n const isBalanceInsufficient = this.walletBalance < dueTodayAmount;\n \n if (this.isTariffDueTodayCalculating) return t(\"UpgradeNow\");\n \n if (this.tariffDueTodayAmount !== null && !isTheSameCount) {\n if (isBalanceInsufficient)\n return this.tariff.isDelayedPaymentMethod\n ? t(\"TopUpWallet\")",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/store/PaymentStore.ts",
       "line_number": 1666,
       "context": "const isTheSameCount =\n !isFreeTariff && this.managersCount === maxCountManagersByQuota;\n const dueTodayAmount = this.tariffDueTodayAmount ?? this.totalPrice;\n const isBalanceInsufficient = this.walletBalance < dueTodayAmount;\n \n if (this.isTariffDueTodayCalculating) return t(\"UpgradeNow\");\n \n if (this.tariffDueTodayAmount !== null && !isTheSameCount) {\n if (isBalanceInsufficient)\n return this.tariff.isDelayedPaymentMethod\n ? t(\"TopUpWallet\")",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

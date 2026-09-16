@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/components/room-type/RoomType.utils.ts",
       "line_number": 11,
       "context": "roomType: RoomsType = 1,\n isTemplate: boolean = false,\n isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:FromTemplate\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",

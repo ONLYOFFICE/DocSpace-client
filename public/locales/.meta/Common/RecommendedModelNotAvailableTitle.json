@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/recomended-model/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/recomended-model/index.tsx",
       "line_number": 95,
       "context": "// Non-chat states.\n const isSelectModelState = !isChat && isRecomendedAvailable;\n const isNotAvailableAdminState = !isChat && !isRecomendedAvailable && isAdmin;\n const isNotAvailableUserState = !isChat && !isRecomendedAvailable && !isAdmin;\n \n let title = t(\"RecommendedModelNotAvailableTitle\");\n if (isChatAdminState) title = t(\"RecommendedModelChatTitle\");\n else if (isChatUserState) title = t(\"RecommendedModelChatNotSelectedTitle\");\n else if (isSelectModelState) title = t(\"RecommendedModelNotSelectedTitle\");\n \n return (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

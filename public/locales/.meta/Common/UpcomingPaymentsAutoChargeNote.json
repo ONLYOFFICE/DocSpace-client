@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/sub-components/UpcomingPayments/index.tsx",
       "line_number": 91,
       "context": ">\n {upcomingPayments.length ? (\n <>\n <div className={styles.introText}>\n <Text>{t(\"UpcomingPaymentsDescription\")}</Text>\n <Text>{t(\"UpcomingPaymentsAutoChargeNote\")}</Text>\n </div>\n <Consumer>\n {(context) =>\n viewAs === \"table\" ? (\n <TableView sectionWidth={context.sectionWidth || 0} />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

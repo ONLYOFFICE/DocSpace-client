@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
       "line_number": 103,
       "context": "onClick: onActivateAI,\n isLoading: isActivating,\n } as const)\n : ({\n type: \"button\",\n title: t(\"TopUpAndActivate\"),\n key: \"top-up-and-activate-ai\",\n onClick: onTopUpAndActivateAI,\n } as const);\n \n const getSaasAdminOptions = () => {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
       "line_number": 197,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={\n !isCardLinkedToPortal\n ? t(\"TopUpAndActivate\")\n : t(\"ActivateAIFeatures\")\n }\n size={ButtonSize.normal}\n onClick={onActivate}\n primary",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",

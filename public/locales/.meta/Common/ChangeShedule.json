@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 174,
       "context": ": t(\"Common:TariffDevPackDisableScheduledWithPrice\", {\n price: nextMonthlyPrice,\n });\n }\n \n if (!usersAdjusting) return t(\"Common:ChangeShedule\");\n \n return t(\"Common:TariffUserAdjustmentScheduled\", {\n fromCount: planUsers,\n toCount: scheduledChange?.nextUsers,\n });",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 201,
       "context": "if (isShowPreviousStoragePlan && !isStorageDeactivationVisited) {\n return t(\"SubscriptionDeactivated\");\n }\n \n if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }\n \n if (!hasScheduledStorageChange && currentStoragePlanSize! > 0) {\n return t(\"CurrentSubscriptionInfo\", {\n amount: formatWalletCurrency(",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 201,
       "context": "if (isShowPreviousStoragePlan && !isStorageDeactivationVisited) {\n return t(\"SubscriptionDeactivated\");\n }\n \n if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }\n \n if (!hasScheduledStorageChange && currentStoragePlanSize! > 0) {\n return t(\"CurrentSubscriptionInfo\", {\n amount: formatWalletCurrency(",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",

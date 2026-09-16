@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 243,
       "context": "case AI_ENUM:\n if (isLowWalletBalance) {\n return (\n <CommonTrans\n i18nKey=\"AIPricingLowBalanceWithModels\"\n values={{ price: formatWalletCurrency() }}\n components={{\n 1: (\n <Link\n fontSize=\"13px\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

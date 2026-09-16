@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/save-dialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/save-dialog.tsx",
       "line_number": 143,
       "context": "// translations for every locale); without a `components` entry the\n // <1>…</1> file name renders as plain text.\n const exportedToast = (createdTitle: string) =>\n toastr.success(\n <CommonTrans\n i18nKey=\"MessageExported\"\n values={{ fileName: createdTitle }}\n />,\n );\n try {\n // Real md → docx conversion via the AI Worker. The call only",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

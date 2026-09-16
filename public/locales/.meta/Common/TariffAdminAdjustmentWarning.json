@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/PaymentContainer.tsx",
       "line_number": 316,
       "context": "<StorageWarning\n title={t(\"TariffAdminAdjustmentScheduled\", {\n fromCount: currentTariffAdminsCount,\n toCount: nextTariffAdminsCount ?? 0,\n })}\n body={t(\"TariffAdminAdjustmentWarning\", {\n admins: maxCountManagersByQuota,\n })}\n onCancelChange={handleCancelTariffDowngrade}\n isCancelLoading={isCancelDowngradeLoading}\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
       "line_number": 230,
       "context": "</div>\n </div>\n \n {isDowngradePlan ? (\n <StorageWarning\n body={t(\"TariffAdminAdjustmentWarning\", {\n admins: currentAdmins,\n })}\n />\n ) : (\n <Text fontSize=\"13px\">",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

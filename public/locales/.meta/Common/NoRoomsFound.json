@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
       "line_number": 77,
       "context": "return (\n <section className={styles.newEmptyScreen}>\n <FormRoomEmptyScreenImage className=\"empty-image\" />\n <Heading level={3} className=\"empty-header\">\n {t(\"NoRoomsFound\") || \"\"}\n </Heading>\n <Text className=\"empty-description\">{description}</Text>\n <div className=\"empty_button-wrapper\" onClick={onCreateClickAction}>\n <AddButton\n isAction",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

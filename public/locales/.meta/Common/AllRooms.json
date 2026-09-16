@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/filter/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/filter/index.tsx",
       "line_number": 729,
       "context": "<div className={styles.rowGroupingRooms} ref={rowRef}>\n {(isRowReady || hasEverBeenReadyRef.current) && (\n <div className=\"group-tags\">\n <SelectedItem\n propKey=\"all-rooms\"\n label={t(\"AllRooms\")}\n onClick={() => handleFilterByGroup(null)}\n onClose={() => {}}\n hideCross\n clickable\n isActive={activeGroupId === null}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/filter/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/filter/index.tsx",
       "line_number": 729,
       "context": "<div className={styles.rowGroupingRooms} ref={rowRef}>\n {(isRowReady || hasEverBeenReadyRef.current) && (\n <div className=\"group-tags\">\n <SelectedItem\n propKey=\"all-rooms\"\n label={t(\"AllRooms\")}\n onClick={() => handleFilterByGroup(null)}\n onClose={() => {}}\n hideCross\n clickable\n isActive={activeGroupId === null}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

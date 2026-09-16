@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat-info-block/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/chat-info-block/index.tsx",
       "line_number": 118,
       "context": ")}\n </>\n ))\n // standalone/saas user\n .otherwise(() =>\n t(\"AIDisabledInfoBlockContactAdminDescription\"),\n );\n \n return (\n <PublicRoomBar\n className={styles.chatInfoBlock}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

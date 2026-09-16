@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/recomended-model/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/recomended-model/index.tsx",
       "line_number": 135,
       "context": ") : null}\n \n {isSelectModelState ? (\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n <CommonTrans\n i18nKey=\"RecommendedModelSelectDescription\"\n values={{ model: recomendedModel }}\n />\n </Text>\n ) : null}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

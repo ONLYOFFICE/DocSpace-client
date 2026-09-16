@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/tiles/template-tile/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/tiles/template-tile/index.tsx",
       "line_number": 82,
       "context": "const bottomContent = (\n <div className={styles.wrapper}>\n <div className={styles.field}>\n <Text truncate fontSize=\"13px\" fontWeight={400} className={styles.text}>\n {t(\"Owner\")}\n </Text>\n {showStorageInfo ? (\n <Text\n truncate\n fontSize=\"13px\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",

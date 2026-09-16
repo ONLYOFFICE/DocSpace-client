@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/index.tsx",
       "line_number": 919,
       "context": "formatChatError,\n // Hide \"Always allow\" only for generate tools (matched by full name).\n hideToolAllowAlways: GENERATE_TOOL_NAMES,\n onToolCallApproveResult,\n composerActionSendSize: 32,\n composerPlaceholder: t(\"AskAnyQuestion\"),\n webSearchSaveMode: \"button\",\n welcomeDescription: t(\"Common:WelcomeAiChatDescription\"),\n // Context-specific chips: the host builds the lists for the current\n // section, and the set is narrowed above by what is attached.\n suggestions: resolvedSuggestions,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

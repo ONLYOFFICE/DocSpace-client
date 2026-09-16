@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 540,
       "context": "price: formatWalletCurrency(item.price.value, 0),\n });\n } else if (trialExpired) {\n docsConnectPrice = (\n <>\n {t(\"TrialExpired\")}\n <Link\n fontSize=\"13px\"\n fontWeight={600}\n color=\"accent\"\n textDecoration=\"underline dotted\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/TariffBar/helpers.js",

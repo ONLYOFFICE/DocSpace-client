@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/payer-information/index.tsx",
       "line_number": 188,
       "context": "<Text as=\"span\" fontWeight={600} fontSize=\"14px\">\n {payerInfo ? (\n Encoder.htmlDecode(payerInfo.displayName ?? \"\")\n ) : (\n <CommonTrans\n i18nKey=\"ContactNotFound\"\n values={{ email: emailUnfoundedUser }}\n components={{\n 1: (\n <Link\n as=\"span\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

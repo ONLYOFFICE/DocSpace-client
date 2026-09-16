@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Room/index.tsx",
       "line_number": 306,
       "context": "? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel:\n headerProps.headerLabel || (isForms ? t(\"Forms\") : t(\"RoomList\")),\n },\n }\n : {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",

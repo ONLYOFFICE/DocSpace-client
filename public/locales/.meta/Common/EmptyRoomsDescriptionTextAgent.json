@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
       "line_number": 252,
       "context": "}, [isKnowledgeFolder, isEmptyFilesRootScreen, isEmptyAgentsRootScreen, t]);\n \n const emptyScreenDescription = isEmptyFilesRootScreen\n ? \"\"\n : isEmptyAgentsRootScreen\n ? t(\"EmptyRoomsDescriptionTextAgent\", {\n sectionName: t(\"AIAgents\"),\n })\n : t(\"EmptyRoomsDescriptionText\", {\n sectionName: t(\"Rooms\"),\n });",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

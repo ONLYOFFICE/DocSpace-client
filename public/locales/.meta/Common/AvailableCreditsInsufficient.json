@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
       "line_number": 85,
       "context": "const showOpenBilling = withOpenBilling && !!walletRoute;\n const onOpenWallet = () =>\n window.open(toAbsoluteUrl(walletRoute ?? \"\"), \"_blank\");\n \n const keyProp = isBalanceInsufficient\n ? { tKey: \"AvailableCreditsInsufficient\" }\n : { tKey: \"AvailableCreditsAmount\" };\n \n return (\n <div\n className={classNames(styles.walletInfoContainer, {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

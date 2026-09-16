@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
       "line_number": 208,
       "context": "if (fetchTransactionHistory)\n requests.push(fetchTransactionHistory(serviceName));\n await Promise.allSettled(requests);\n \n if (isDelayedPaymentMethod) {\n toastr.success(t(\"TopUpDelayedPaymentMethodWarning\"));\n } else {\n toastr.success(t(\"WalletToppedUp\"));\n await onConfirm?.();\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
       "line_number": 208,
       "context": "if (fetchTransactionHistory)\n requests.push(fetchTransactionHistory(serviceName));\n await Promise.allSettled(requests);\n \n if (isDelayedPaymentMethod) {\n toastr.success(t(\"TopUpDelayedPaymentMethodWarning\"));\n } else {\n toastr.success(t(\"WalletToppedUp\"));\n await onConfirm?.();\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",

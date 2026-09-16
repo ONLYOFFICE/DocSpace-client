@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
       "line_number": 170,
       "context": "autoMaxHeight\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n <Text isBold fontSize=\"21px\">\n {t(\"SalesDepartmentRequest\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text\n key=\"text-body\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

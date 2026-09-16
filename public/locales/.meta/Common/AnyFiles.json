@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/uploader/index.tsx",
       "line_number": 442,
       "context": "onDropRejected={onDropRejected}\n accept={accept}\n linkMainText={linkMainText ?? getCommonTranslation(\"Upload\")}\n linkSecondaryText={getSecondaryText()}\n exstsText={\n extensionsText ?? (shortText || getCommonTranslation(\"AnyFiles\"))\n }\n fullExstsText={fullText}\n formatsPlusBadgeValue={badgeValue}\n dataTestId=\"sdk-uploader\"\n className={styles.dropzoneWrapper}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

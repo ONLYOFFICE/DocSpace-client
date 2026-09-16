@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
       "line_number": 155,
       "context": "onClose={onClose}\n autoMaxHeight\n isLarge\n >\n <ModalDialog.Header>\n {isDowngradePlan ? t(\"Confirmation\") : t(\"PriceDetails\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.content}>\n <WalletInfo balance={formatWalletCurrency()} />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 151,
       "context": "setIsLoading(false);\n }\n };\n \n const confirmationDialogContent = {\n title: t(\"Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"EnableBackupConfirm\")\n : isFreeTariff\n ? t(\"DisableBackupConfirmWithoutQuota\")",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CancelOperationDialog/index.tsx",

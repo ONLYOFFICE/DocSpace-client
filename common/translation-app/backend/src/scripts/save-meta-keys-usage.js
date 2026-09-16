@@ -330,6 +330,16 @@ javascripts.forEach(({ workspace, files }) => {
   });
 });
 
+// The modules this scan can see. @onlyoffice/apps-ui-kit is not one of them:
+// it lives in its own repository and is consumed here as a prebuilt package,
+// yet it renders the portal's own namespaces, so 1 030 usage records point
+// into it. Replacing meta.usage wholesale would erase every one of them on the
+// first run that touches the same key from client code -- and leave the rest
+// pointing at a checkout this repository no longer has.
+const scannedModules = new Set(
+  workspaces.map((ws) => ws.replace(BASE_DIR, "").replace(/\\/g, "/")),
+);
+
 console.log(`Found usages = ${Object.keys(usagesData).length}.`);
 
 console.log(`Found parseJsonErrors = ${parseJsonErrors.length}.`);
@@ -350,10 +360,13 @@ Object.entries(usagesData).forEach(([metaPath, usages]) => {
 
     const meta = JSON.parse(metaData);
 
-    const sortedUsages = sortUsageEntries(usages);
-    const existingSortedUsages = Array.isArray(meta.usage)
-      ? sortUsageEntries(meta.usage)
-      : [];
+    const existingUsages = Array.isArray(meta.usage) ? meta.usage : [];
+    const externalUsages = existingUsages.filter(
+      (usage) => !scannedModules.has(usage.module),
+    );
+
+    const sortedUsages = sortUsageEntries([...usages, ...externalUsages]);
+    const existingSortedUsages = sortUsageEntries(existingUsages);
 
     //todo: compare usages with meta.usage skip update if no changes
     if (JSON.stringify(existingSortedUsages) === JSON.stringify(sortedUsages)) {

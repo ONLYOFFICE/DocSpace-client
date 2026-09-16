@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/GracePeriodModal.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/GracePeriodModal.tsx",
       "line_number": 101,
       "context": "1: <Text as=\"span\" />,\n }}\n />\n </Text>{\" \"}\n <Text as=\"span\">\n {t(\"GracePeriodActivatedDescription\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OkButton\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",

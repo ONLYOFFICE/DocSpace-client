@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
       "line_number": 376,
       "context": "<TransactionHistory\n serviceName={AI_SEARCH}\n withoutRoleFilter\n hideTypeFilter\n emptyTitle={t(\"NoAISearchTransactions\")}\n emptyDescription={t(\"NoAISearchTransactionsDescription\")}\n />\n </div>\n \n {isEnableAIToolsDialogVisible ? (\n <ConfirmationDialog",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

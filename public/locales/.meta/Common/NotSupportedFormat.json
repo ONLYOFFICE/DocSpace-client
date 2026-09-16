@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/file-input/FileInput.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/file-input/FileInput.tsx",
       "line_number": 84,
       "context": "const [fileName, setFileName] = React.useState(\"\");\n \n const onDrop = (acceptedFiles: File[]) => {\n if (acceptedFiles.length === 0) {\n toastr.error(t(\"NotSupportedFormat\"));\n return;\n }\n \n setFileName(\n acceptedFiles.length > 1",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/store/AvatarEditorDialogStore.ts",

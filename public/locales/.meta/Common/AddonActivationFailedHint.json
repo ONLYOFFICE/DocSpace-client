@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.tsx",
       "line_number": 380,
       "context": "{status === \"error\" ? (\n isActivationError ? (\n <ErrorCard\n title={t(\"AddonActivationFailed\")}\n hint={t(\"AddonActivationFailedHint\")}\n buttonLabel={t(\"TryAgainInAddon\")}\n onGoToServiceClick={onGoToBillingClick}\n />\n ) : (\n <ErrorCard",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

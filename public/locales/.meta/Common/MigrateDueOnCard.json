@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
       "line_number": 345,
       "context": "styles.positive,\n )}\n <div className={styles.cardDivider} />\n {renderRow(\n <Text as=\"span\" fontSize=\"14px\" fontWeight={600}>\n {t(\"MigrateDueOnCard\")}\n </Text>,\n withLoader(formatFuturePaymentCurrency(cardCharge, 2)),\n )}\n </div>,\n )}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

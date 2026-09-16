@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/errors/Error404.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/errors/Error404.tsx",
       "line_number": 45,
       "context": "const Error404 = () => {\n const t = useCommonTranslation();\n const ready = getTranslationReady();\n \n return ready && <ErrorContainer headerText={t(\"Error404Text\")} />;\n };\n \n export default Error404;",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/shared/components/errors/Error404.tsx",

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
       "line_number": 228,
       "context": ") : null}\n \n <ServiceToggleSection\n isEnabled={isAiToolsServiceOn}\n onToggle={onToggleChange}\n title={t(\"EnableAIFeatures\")}\n description={t(\"EnableAIFeaturesDescription\")}\n testId=\"service-ai-toggle-button\"\n isDisabled={isDisabled}\n withBottomMargin={withBottomMargin}\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

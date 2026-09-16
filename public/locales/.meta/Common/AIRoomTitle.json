@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/components/room-type/RoomType.utils.ts",
       "line_number": 23,
       "context": "case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n default:",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",

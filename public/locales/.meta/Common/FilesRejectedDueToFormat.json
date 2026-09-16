@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/uploader/index.tsx",
       "line_number": 382,
       "context": "const isMultiple = isMultipleUpload ?? true;\n \n if (isMultiple) {\n toastr.error(\n getCommonTranslation(\"FilesRejectedDueToFormat\", {\n count: fileRejections.length,\n }),\n );\n } else {\n toastr.error(getCommonTranslation(\"FileFormatNotAllowed\"));",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
       "line_number": 266,
       "context": "{description(5, 1000)}\n </div>\n \n <div className={styles.inputField}>\n <Text fontSize=\"12px\" className={styles.inputLabel} fontWeight={600}>\n {t(\"BringCreditBackUpTo\")}\n </Text>\n <TextInput\n scale\n value={upToBalance!}\n onChange={onMaxUpToBalanceChange}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

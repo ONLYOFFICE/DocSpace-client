@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/index.tsx",
       "line_number": 514,
       "context": "onClick={onClearFilter}\n textDecoration=\"underline dotted\"\n dataTestId=\"clear_filter_button\"\n className={styles.clearFilter}\n >\n {t(\"ClearFilter\")}\n </Link>\n ) : null}\n </div>\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/selector/sub-components/EmptyScreen.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/selector/sub-components/EmptyScreen.tsx",
       "line_number": 206,
       "context": "}\n isFill\n />\n \n <Link {...linkStyles}>\n {withSearch ? t(\"ClearFilter\") || \"\" : t(\"Back\") || \"\"}\n </Link>\n </div>\n ) : null}\n </div>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",

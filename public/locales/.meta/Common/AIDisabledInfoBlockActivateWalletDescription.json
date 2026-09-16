@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat-info-block/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/chat-info-block/index.tsx",
       "line_number": 74,
       "context": "? t(\"AIFeaturesAreCurrentlyDisabled\")\n : t(\"AIFeaturesNotActive\");\n \n // shared intro for the SaaS admin variants: what AI gives + wallet notice\n const activateIntro = (\n <Text as=\"span\">{`${t(\"AIDisabledInfoBlockActivateWalletDescription\")} `}</Text>\n );\n \n const bodyText = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
       "line_number": 85,
       "context": "const isSelectedColorPicker = pickerColor === selectedColor;\n \n return (\n <div className=\"select-color-container\">\n <div className=\"color-name\">{t(\"Common:Color\")}</div>\n <div className=\"colors-container\">\n {logoColors.map((color, index) =>\n color === selectedColor ? (\n <div\n key={color}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",

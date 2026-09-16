@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 274,
       "context": "height=\"16px\"\n borderRadius=\"3px\"\n />\n ) : (\n <Text className={styles.cardCaption}>\n {t(\"PerBackup\", {\n currency: formatWalletCurrency(backupServicePrice, 2),\n })}\n </Text>\n )}\n </>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 235,
       "context": "return t(\"BackupsAvailable\", {\n currency: formatWalletCurrency(priceValue!, 2),\n });\n }\n \n return t(\"PerBackup\", {\n currency: formatWalletCurrency(priceValue!, 2),\n });\n \n case AI_ENUM:\n if (isLowWalletBalance) {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

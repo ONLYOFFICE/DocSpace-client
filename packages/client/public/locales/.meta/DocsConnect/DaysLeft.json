@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 409,
       "context": "</Text>\n </div>\n ) : (\n <div className={styles.trialCard}>\n <Text className={styles.trialLabel}>\n {t(\"DocsConnect:DaysLeft\")}\n </Text>\n <Text className={styles.trialDays}>{daysLeft}</Text>\n <Text className={styles.trialTotal}>\n {t(\"DocsConnect:OfDays\", { count: totalDays })}\n </Text>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

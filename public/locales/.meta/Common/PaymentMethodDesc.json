@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-method/index.tsx",
       "line_number": 177,
       "context": "isRefreshing={isRefreshing}\n />\n </div>\n \n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"PaymentMethodDesc\")}\n </Text>\n \n <CardInformation />\n \n {!isNotPaidPeriod && walletCustomerStatusNotActive && isPayer ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

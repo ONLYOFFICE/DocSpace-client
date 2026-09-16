@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
       "line_number": 188,
       "context": "case PaymentFlavor.Tariff:\n return {\n processingTitle: t(\"Common:WalletTopUpCallbackProcessingTitle\"),\n processingHint: t(\"Common:WalletTopUpCallbackProcessingHint\"),\n activateStepLabel: \"\",\n successTitle: t(\"Common:PlanActivated\", { planName: plan }),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:GoToTariffPlan\"),\n redirectUrl: TARIFF_REDIRECT_URL,\n };\n case PaymentFlavor.DocsConnect:",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

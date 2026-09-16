@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
       "line_number": 86,
       "context": "t,\n });\n \n const goToAIProviderSettings = {\n type: \"button\",\n title: t(\"GoToSettings\"),\n key: \"go-to-ai-provider-settings\",\n onClick: goToAISettings,\n } as const;\n \n // saas admin: activate AI right away (or top up first) + show benefits.",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",

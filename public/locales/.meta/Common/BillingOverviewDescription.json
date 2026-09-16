@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/index.tsx",
       "line_number": 93,
       "context": "<div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700}>\n {t(\"Billing\")}\n </Text>\n <Text className={styles.headerDescription}>\n {t(\"BillingOverviewDescription\")}\n </Text>\n </div>\n \n {!isInitOverviewPage ? (\n <OverviewLoader />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

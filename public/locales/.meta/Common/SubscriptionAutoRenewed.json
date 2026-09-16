@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 183,
       "context": "<Text fontSize=\"12px\">\n {nextStoragePlanSize === 0\n ? t(\"SubscriptionAutoCancellation\", {\n finalDate: storageExpiryDate,\n })\n : t(\"SubscriptionAutoRenewed\", {\n finalDate: storageExpiryDate,\n })}\n </Text>\n </>\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 183,
       "context": "<Text fontSize=\"12px\">\n {nextStoragePlanSize === 0\n ? t(\"SubscriptionAutoCancellation\", {\n finalDate: storageExpiryDate,\n })\n : t(\"SubscriptionAutoRenewed\", {\n finalDate: storageExpiryDate,\n })}\n </Text>\n </>\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

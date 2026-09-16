@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/index.tsx",
       "line_number": 454,
       "context": "{dialogVisibility[AI_SEARCH_ENUM] ? (\n <ConfirmationDialog\n visible={dialogVisibility[AI_SEARCH_ENUM]}\n onClose={() => updateDialogVisibility(AI_SEARCH_ENUM, false)}\n onConfirm={onConfirmEnableAITools}\n title={t(\"ActivateAIFeatures\")}\n bodyText={[\n t(\"AISearchRequiresAIFeatures\"),\n t(\"EnableAISearchDescription\"),\n ]}\n acceptLabel={t(\"Activate\")}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
       "line_number": 385,
       "context": "{isEnableAIToolsDialogVisible ? (\n <ConfirmationDialog\n visible={isEnableAIToolsDialogVisible}\n onClose={() => setIsEnableAIToolsDialogVisible(false)}\n onConfirm={onConfirmEnableAITools}\n title={t(\"ActivateAIFeatures\")}\n bodyText={[\n t(\"AISearchRequiresAIFeatures\"),\n t(\"EnableAISearchDescription\"),\n ]}\n acceptLabel={t(\"Activate\")}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
       "line_number": 198,
       "context": "<ModalDialog.Footer>\n <Button\n label={\n !isCardLinkedToPortal\n ? t(\"TopUpAndActivate\")\n : t(\"ActivateAIFeatures\")\n }\n size={ButtonSize.normal}\n onClick={onActivate}\n primary\n isLoading={isActivating}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

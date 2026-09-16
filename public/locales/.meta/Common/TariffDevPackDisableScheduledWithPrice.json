@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 169,
       "context": "? t(\"Common:TariffUserAdjustmentDevPackDisableScheduledWithPrice\", {\n fromCount: planUsers,\n toCount: scheduledChange?.nextUsers,\n price: nextMonthlyPrice,\n })\n : t(\"Common:TariffDevPackDisableScheduledWithPrice\", {\n price: nextMonthlyPrice,\n });\n }\n \n if (!usersAdjusting) return t(\"Common:ChangeShedule\");",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 354,
       "context": "className={classNames(styles.balanceInfo, {\n [styles.warningColor]: recommendedAmount,\n })}\n >\n {recommendedAmount\n ? t(\"WalletTopUpRequired\", {\n currency: formatWalletCurrency(recommendedAmount, 2),\n })\n : t(\"RemainingBalanceAfterPurchase\", {\n currency: formatWalletCurrency(remainingBalance, 2),\n })}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",

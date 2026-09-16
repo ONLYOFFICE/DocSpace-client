@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 498,
       "context": "if (devPackDisabling) titles.push(t(\"DevPackWillBeDisabled\"));\n \n if (usersAdjusting)\n titles.push(\n t(\"UserAdjustment\", {\n fromCount: docsConnectState?.tariffUsers ?? 0,\n toCount: scheduledUsers,\n }),\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

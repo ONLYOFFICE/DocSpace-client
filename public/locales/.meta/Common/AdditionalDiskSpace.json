@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 380,
       "context": "<Text className={styles.cardLabel}>{t(\"StorageAdded\")}</Text>\n <Text className={styles.cardValue}>\n {`${planSize} ${t(\"Gigabyte\")}`}\n </Text>\n <Text className={styles.cardCaption}>\n {t(\"AdditionalDiskSpace\")}\n </Text>\n </div>\n </div>\n ) : null}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

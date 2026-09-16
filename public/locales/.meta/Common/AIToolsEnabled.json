@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/index.tsx",
       "line_number": 301,
       "context": "await applyServiceStateChange(AI_SEARCH_ENUM, true);\n };\n \n const getServiceSuccessMessage = (id: string) => {\n if (id === BACKUP_SERVICE) return t(\"BackupServiceEnabled\");\n if (id === AI_ENUM) return t(\"AIToolsEnabled\");\n return undefined;\n };\n \n const applyServiceStateChange = async (id: string, enabled: boolean) => {\n const raw: ChangeWalletServiceStateRequestDto = {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
       "line_number": 171,
       "context": "toastr.error(t(\"UnexpectedError\"));\n changeServiceState(AI_ENUM);\n return;\n }\n \n if (!isAiToolsServiceOn) toastr.success(t(\"AIToolsEnabled\"));\n \n await getAIConfig?.();\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

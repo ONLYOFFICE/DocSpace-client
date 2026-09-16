@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
       "line_number": 203,
       "context": "<div className={styles.divider} />\n \n <div className={styles.row}>\n <div className={styles.totalLabel}>\n <Text as=\"span\" fontSize=\"14px\" fontWeight={600}>\n {t(\"TotalDueToday\")}\n </Text>\n {isDowngradePlan ? null : (\n <HelpButton\n iconNode={<InfoIcon />}\n tooltipContent={",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/TotalTariffContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/TotalTariffContainer.tsx",
       "line_number": 149,
       "context": "[styles.isDisabled]: isDisabled,\n })}\n >\n <div className={styles.proratedNowLabel}>\n <Text as=\"span\" fontSize=\"13px\" fontWeight={600}>\n {t(\"TotalDueToday\")}\n </Text>\n <IconButton\n iconNode={<InfoIcon />}\n size={12}\n onClick={() => setIsPriceDetailsVisible(true)}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
       "line_number": 301,
       "context": ") : (\n <div\n className={classNames(styles.rowLabel, styles.planInfoHeader)}\n >\n <Text fontWeight=\"600\" fontSize=\"14px\">\n {t(\"TotalDueToday\")}\n </Text>\n {isUpgradeStoragePlan && !isNewSubscription && (\n <HelpButton\n size={12}\n offsetRight={0}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",

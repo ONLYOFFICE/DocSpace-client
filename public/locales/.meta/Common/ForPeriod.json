@@ -12,34 +12,34 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
       "line_number": 295,
       "context": "fontWeight={700}\n tooltipId=\"ai-tools-month-spend\"\n />\n )}\n <Text className={styles.cardCaption}>\n {t(\"ForPeriod\", { period: monthLabel })}\n </Text>\n </div>\n \n <div className={styles.card}>\n <Text className={styles.cardLabel}>{t(\"MonthUsage\")}</Text>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 333,
       "context": "<Text className={styles.cardValue}>\n {formatWalletCurrency(monthSpend, 2)}\n </Text>\n )}\n <Text className={styles.cardCaption}>\n {t(\"ForPeriod\", { period: monthLabel })}\n </Text>\n </div>\n \n <div className={styles.card}>\n <Text className={styles.cardLabel}>{t(\"MonthUsage\")}</Text>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/usage/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/index.tsx",
       "line_number": 186,
       "context": "});\n \n const dateRangeSpan = <Text as=\"span\" className={styles.totalRange} />;\n \n const periodCaption: Record<TUsagePeriodKey, ReactNode> = {\n thisMonth: t(\"ForPeriod\", { period: monthText }),\n lastMonth: t(\"ForPeriod\", { period: monthText }),\n last3Months: (\n <CommonTrans\n i18nKey=\"ForLast3Months\"\n values={{ startDate, endDate }}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/usage/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/index.tsx",
       "line_number": 186,
       "context": "});\n \n const dateRangeSpan = <Text as=\"span\" className={styles.totalRange} />;\n \n const periodCaption: Record<TUsagePeriodKey, ReactNode> = {\n thisMonth: t(\"ForPeriod\", { period: monthText }),\n lastMonth: t(\"ForPeriod\", { period: monthText }),\n last3Months: (\n <CommonTrans\n i18nKey=\"ForLast3Months\"\n values={{ startDate, endDate }}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletContainer.tsx",
       "line_number": 294,
       "context": "fractionFontSize=\"12px\"\n withoutMargin\n className={styles.spendAmount}\n />\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"ForPeriod\", { period: monthLabel })}\n </Text>\n {onViewUsage ? (\n <Link\n onClick={onViewUsage}\n textDecoration=\"underline\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

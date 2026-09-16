@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/errors/ErrorOffline.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/errors/ErrorOffline.tsx",
       "line_number": 41,
       "context": "import { useCommonTranslation } from \"../utils/i18n\";\n import ErrorContainer from \"../components/error-container/ErrorContainer\";\n \n export const ErrorOfflineContainer = () => {\n const t = useCommonTranslation();\n return <ErrorContainer headerText={t(\"ErrorOfflineText\")} />;\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/shared/components/errors/ErrorOffline.tsx",

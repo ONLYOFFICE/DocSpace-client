@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/People/index.tsx",
       "line_number": 653,
       "context": ">\n {Encoder.htmlDecode(label ?? \"\")}\n </Text>\n {!isGroup && String(id) === currentUserId ? (\n <Text className={styles.isMeLabel} fontWeight={600} fontSize=\"14px\">\n ({t(\"MeLabel\")})\n </Text>\n ) : null}\n {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}\n </div>\n {!isGroup ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/ChangeRoomOwner/index.tsx",

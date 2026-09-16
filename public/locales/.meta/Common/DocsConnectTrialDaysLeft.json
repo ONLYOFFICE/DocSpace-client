@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 558,
       "context": "{t(\"Upgrade\")}\n </Link>\n </>\n );\n } else if (isTrial) {\n docsConnectPrice = t(\"DocsConnectTrialDaysLeft\", {\n count: trialDaysLeft,\n });\n } else if (deactivated) {\n docsConnectPrice = t(\"SubscriptionDeactivatedNonPayment\");\n } else if (canceled) {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/store/PaymentStore.ts",
       "line_number": 1673,
       "context": "if (this.tariffDueTodayAmount !== null && !isTheSameCount) {\n if (isBalanceInsufficient)\n return this.tariff.isDelayedPaymentMethod\n ? t(\"TopUpWallet\")\n : t(\"TopUpAndUpgrade\");\n return t(\"PayAndUpgrade\", {\n amount: this.formatPaymentCurrency(dueTodayAmount),\n });\n }\n \n return t(\"UpgradeNow\");",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

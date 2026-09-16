@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/notices.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/notices.ts",
       "line_number": 57,
       "context": "count === 1\n ? t(\"Common:AttachFilesAlreadyAttached_one\", {\n count,\n defaultValue: \"This file is already attached\",\n })\n : t(\"Common:AttachFilesAlreadyAttached_other\", {\n count,\n defaultValue: \"{{count}} files are already attached\",\n }),\n );\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

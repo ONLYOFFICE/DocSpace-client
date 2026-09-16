@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletContainer.tsx",
       "line_number": 208,
       "context": "return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n <CommonTrans\n i18nKey=\"WalletSectionDescriptionAddons\"\n components={{\n 1: (\n <Link\n as=\"span\"\n onClick={onAddonsClick}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

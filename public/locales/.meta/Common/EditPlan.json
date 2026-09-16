@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/TableView/TableRow.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/sub-components/UpcomingPayments/TableView/TableRow.tsx",
       "line_number": 68,
       "context": "}) => {\n const t = useCommonTranslation();\n \n const actionLabel =\n actionType === \"edit-plan\"\n ? t(\"EditPlan\")\n : actionType === \"edit-subscription\"\n ? t(\"EditSubscription\")\n : \"\";\n \n const onAction = () => {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

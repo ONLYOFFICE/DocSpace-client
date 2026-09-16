@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
       "line_number": 116,
       "context": "const tags = [\n { label: t(\"AIFeatureWriteRewriteTranslate\"), icon: <WriteTagIcon /> },\n { label: t(\"AIFeatureSummarizeDocuments\"), icon: <SummarizeTagIcon /> },\n { label: getConstName(\"OCR\"), icon: <OcrTagIcon /> },\n { label: t(\"AIFeaturePDFForms\"), icon: <PdfFormTagIcon /> },\n { label: t(\"AIFeatureCheckGrammar\"), icon: <GrammarTagIcon /> },\n { label: t(\"AIFeatureFormInsights\"), icon: <InsightsTagIcon /> },\n { label: t(\"AIFeatureWebSearch\"), icon: <WebSearchTagIcon /> },\n ];",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

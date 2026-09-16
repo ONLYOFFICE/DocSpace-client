@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
       "line_number": 170,
       "context": "};\n \n const getPayTariffLabel = () => {\n if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n if (!isCardLinkedToPortal || isBalanceInsufficient)\n return t(\"TopUpAndUpgrade\");\n return t(\"UpgradeNow\");\n };\n \n const getUpdateTariffAction = () => {\n if (needsWalletMigration) return openMigrateDialog;",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
       "line_number": 115,
       "context": "const getTitle = () => {\n if (isExceedingStorageLimit) return t(\"SendRequest\");\n \n if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n \n if (canTopUpAndBuy) return t(\"TopUpAndUpgrade\");\n \n if (!hasStorageSubscription) return t(\"UpgradeNow\");\n \n return t(\"Update\");\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/store/PaymentStore.ts",
       "line_number": 1672,
       "context": "if (this.tariffDueTodayAmount !== null && !isTheSameCount) {\n if (isBalanceInsufficient)\n return this.tariff.isDelayedPaymentMethod\n ? t(\"TopUpWallet\")\n : t(\"TopUpAndUpgrade\");\n return t(\"PayAndUpgrade\", {\n amount: this.formatPaymentCurrency(dueTodayAmount),\n });\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

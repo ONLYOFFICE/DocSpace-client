@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
       "line_number": 144,
       "context": "iconNode={<ExternalLinkIcon />}\n size={16}\n isFill\n isClickable\n onClick={onOpenWallet}\n title={t(\"OpenPortalBilling\")}\n dataTestId=\"open_wallet_button\"\n />\n ) : null}\n </div>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",

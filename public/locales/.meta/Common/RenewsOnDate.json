@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 244,
       "context": "<Text className={styles.cardValue}>\n {`${freeBackupsUsed}/${maxFreeBackups}`}\n </Text>\n )}\n <Text className={styles.cardCaption}>\n {t(\"RenewsOnDate\", { date: renewsDate })}\n </Text>\n </div>\n ) : null}\n \n <div className={styles.card}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",

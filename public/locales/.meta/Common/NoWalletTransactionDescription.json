@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TransactionBody.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TransactionBody.tsx",
       "line_number": 117,
       "context": "const description = hasAppliedDateFilter\n ? t(\"NoTransactionsFilter\")\n : (emptyDescription ??\n (isDocsConnect\n ? t(\"NoDocsConnectTransactionDescription\")\n : t(\"NoWalletTransactionDescription\")));\n \n const emptyView = (\n <EmptyView\n icon={hasAppliedDateFilter ? filterIcon : emptyIcon}\n title={title}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

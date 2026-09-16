@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 236,
       "context": "iconNode: <PencilIcon />,\n onClick: openUpgradeDialog,\n },\n {\n key: \"cancel\",\n label: t(\"CancelSubscription\"),\n iconNode: <RemoveSessionIcon />,\n onClick: openCancelDialog,\n },\n ];",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 219,
       "context": "key: \"separator\",\n isSeparator: true,\n },\n {\n key: \"cancel\",\n label: t(\"Common:CancelSubscription\"),\n iconNode: <CircleCrossIcon />,\n onClick: onCancelPlan,\n },\n ];",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/index.tsx",

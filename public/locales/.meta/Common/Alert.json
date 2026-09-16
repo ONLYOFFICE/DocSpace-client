@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/toast/sub-components/Toastr.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/toast/sub-components/Toastr.tsx",
       "line_number": 60,
       "context": "import styles from \"../Toast.module.scss\";\n \n const DEFAULT_TIMEOUT = 5000;\n const MIN_TIMEOUT_THRESHOLD = 750;\n \n type TitleKey = \"Done\" | \"Warning\" | \"Alert\" | \"Info\";\n \n interface NotifyConfig {\n type: ToastType;\n defaultTitleKey: TitleKey;\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

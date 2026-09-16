@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/PaymentMethod.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/PaymentMethod.tsx",
       "line_number": 108,
       "context": "return (\n <div className={styles.card}>\n <div className={styles.cardHeader}>\n <Text fontSize=\"14px\" fontWeight={700}>\n {t(\"PaymentMethod\")}\n </Text>\n {onManagePaymentMethod ? (\n <Link\n onClick={onManagePaymentMethod}\n textDecoration=\"underline\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-method/index.tsx",
       "line_number": 168,
       "context": "<PayerInformation />\n \n <div className={styles.header}>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"PaymentMethod\")}\n </Text>\n <RefreshIconButton\n onRefresh={onRefreshPaymentMethod}\n isRefreshing={isRefreshing}\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
       "line_number": 125,
       "context": "return (\n <div className={styles.addPaymentMethod}>\n <div className={styles.paymentMethodDescription}>\n <div className={styles.paymentMethodTitle}>\n <Text isBold fontSize=\"16px\">\n {t(\"PaymentMethod\")}\n </Text>\n {walletCustomerEmail ? (\n <Link\n fontWeight={600}\n onClick={",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/utils/index.ts",

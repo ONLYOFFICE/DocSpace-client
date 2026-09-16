@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 226,
       "context": "case BACKUP_SERVICE:\n if (isBackupServiceOn && availableBackupsCount === 0) {\n return isFreeTariff\n ? t(\"BackupsNotAvailable\")\n : t(\"AdditionalBackupsNotAvailable\");\n }\n \n if (isBackupServiceOn) {\n return t(\"BackupsAvailable\", {\n currency: formatWalletCurrency(priceValue!, 2),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

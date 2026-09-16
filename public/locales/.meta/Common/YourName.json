@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
       "line_number": 201,
       "context": "name=\"name\"\n type={InputType.text}\n size={InputSize.base}\n scale\n tabIndex={1}\n placeholder={t(\"YourName\")}\n isAutoFocussed\n isDisabled={isLoading}\n value={name}\n onChange={onChangeName}\n testId=\"request_name_input\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

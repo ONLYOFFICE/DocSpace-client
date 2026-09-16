@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/filter/sub-components/ViewSelector.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/filter/sub-components/ViewSelector.tsx",
       "line_number": 120,
       "context": "id={id}\n key={value}\n data-view={value}\n title={\n value === \"row\"\n ? (t(\"SwitchViewToCompact\") ?? \"\")\n : (t(\"SwitchToThumbnails\") ?? \"\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/filter/sub-components/ViewSelector.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/filter/sub-components/ViewSelector.tsx",
       "line_number": 120,
       "context": "id={id}\n key={value}\n data-view={value}\n title={\n value === \"row\"\n ? (t(\"SwitchViewToCompact\") ?? \"\")\n : (t(\"SwitchToThumbnails\") ?? \"\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

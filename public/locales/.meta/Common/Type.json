@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
       "line_number": 115,
       "context": "<div className={styles.filterDialogContent}>\n {!hideTypeFilter ? (\n <>\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"Type\")}\n </Text>\n <ComboBox\n options={typeOfHistoty}\n selectedOption={selectedType}\n onSelect={onSelectType}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
       "line_number": 79,
       "context": "minWidth: 150,\n },\n ]\n : []),\n {\n key: \"Type\",\n title: t(\"Type\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/TableView/TableHeader.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/sub-components/UpcomingPayments/TableView/TableHeader.tsx",
       "line_number": 64,
       "context": "default: true,\n active: true,\n minWidth: 140,\n },\n {\n key: \"Type\",\n title: t(\"Type\"),\n enable: true,\n resizable: true,\n minWidth: 160,\n },",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",

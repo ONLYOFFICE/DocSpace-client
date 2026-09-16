@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 381,
       "context": "} catch (e) {\n if (isInsufficientFundsError(e)) {\n toastr.error(\n isPayer\n ? t(\"InsufficientFundsCheckCredits\")\n : t(\"InsufficientFundsContactPayerShort\"),\n t(\"InsufficientFunds\"),\n );\n } else {\n toastr.error(e as Error);\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",

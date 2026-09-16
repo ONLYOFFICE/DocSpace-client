@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/index.tsx",
       "line_number": 614,
       "context": "scale={isMobile}\n testId=\"download_report_button\"\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"ReportSaveLocation\", {\n sectionName: t(\"Files\"),\n })}\n </Text>\n </div>\n </>\n ) : null}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useRootHelper.tsx",
       "line_number": 178,
       "context": ") {\n let title = \"\";\n \n switch (folder.rootFolderType) {\n case FolderType.USER:\n title = t(\"Files\");\n break;\n case FolderType.VirtualRooms:\n title = t(\"Rooms\");\n break;\n case FolderType.AiAgents:",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",

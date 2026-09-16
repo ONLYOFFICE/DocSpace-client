@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 176,
       "context": "});\n }\n \n if (!usersAdjusting) return t(\"Common:ChangeShedule\");\n \n return t(\"Common:TariffUserAdjustmentScheduled\", {\n fromCount: planUsers,\n toCount: scheduledChange?.nextUsers,\n });\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

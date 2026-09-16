@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
       "line_number": 153,
       "context": "return (\n <div className={styles.buttonWrapper}>\n {showNextBillHint ? (\n <Text>\n {t(\"NextMonthBillDate\", {\n currency: formatWalletCurrency(totalPrice, 2),\n date: storageExpiryDate,\n })}\n </Text>\n ) : null}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/uploader/index.tsx",
       "line_number": 337,
       "context": "href={folderUrl}\n target=\"_blank\"\n rel=\"noopener noreferrer\"\n className={styles.toastLink}\n >\n {getCommonTranslation(\"Open\")}\n </a>\n </>\n )}\n </>,\n getCommonTranslation(\"Done\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",

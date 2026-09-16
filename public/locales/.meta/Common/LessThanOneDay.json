@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/utils/common.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/utils/common.ts",
       "line_number": 57,
       "context": "language: string,\n t: (key: string) => string,\n ) =>\n days > 1\n ? Duration.fromObject({ days }, { locale: language }).toHuman()\n : t(\"LessThanOneDay\");\n \n // Done in a similar way to server code\n // https://github.com/ONLYOFFICE/DocSpace-server/blob/master/common/ASC.Common/Utils/CommonFileSizeComment.cs\n export const getPowerFromBytes = (bytes: number, maxPower = 6) => {\n const power = Math.floor(Math.log(bytes) / Math.log(1024));",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

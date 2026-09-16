@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/image-editor/ButtonDelete/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/image-editor/ButtonDelete/index.tsx",
       "line_number": 95,
       "context": "\"icon_cropper-delete_button\",\n styles.buttonDelete,\n className,\n )}\n onClick={onClick}\n title={t(\"Common:Delete\")}\n data-testid=\"cropper_delete_button\"\n >\n <TrashReactSvg />\n <div\n className={classNames(\"icon_cropper-delete_button-text\", styles.text)}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/image-editor/ButtonDelete/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/image-editor/ButtonDelete/index.tsx",
       "line_number": 95,
       "context": "\"icon_cropper-delete_button\",\n styles.buttonDelete,\n className,\n )}\n onClick={onClick}\n title={t(\"Common:Delete\")}\n data-testid=\"cropper_delete_button\"\n >\n <TrashReactSvg />\n <div\n className={classNames(\"icon_cropper-delete_button-text\", styles.text)}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/editor/avatar-cropper.js",

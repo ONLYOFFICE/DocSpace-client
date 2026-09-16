@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
       "line_number": 82,
       "context": "as=\"span\"\n fontSize=\"12px\"\n fontWeight={400}\n className={styles.tariffActivationDetails}\n >\n {t(\"TariffActivationDetails\", {\n admins: tariffActivation.admins,\n storage: tariffActivation.storage,\n })}\n </Text>\n </span>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

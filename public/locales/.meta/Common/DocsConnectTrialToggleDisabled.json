@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 186,
       "context": "const scheduledChangeTitle = getScheduledChangeTitle();\n \n const trialActive = !isPaid && !expired;\n const trialToggleTooltip = trialActive\n ? t(\"Common:DocsConnectTrialToggleDisabled\", {\n date: formatDateLocalized(endDate, \"DATE_MED\", { locale: language }),\n })\n : undefined;\n \n const contextMenuItems = scheduledChange",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 474,
       "context": "});\n const deactivated = docsConnectState?.deactivated ?? false;\n const canceled = docsConnectState?.canceled ?? false;\n \n const trialToggleTooltip = trialActive\n ? t(\"DocsConnectTrialToggleDisabled\", {\n date: formatDateLocalized(\n docsConnectState?.trialEndDate,\n \"DATE_MED\",\n { locale: language },\n ),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/index.tsx",
       "line_number": 709,
       "context": ") {\n toastr.dismiss(toastId);\n }\n }}\n >\n {t(\"Common:OpenGeneratedDocument\")}\n </Link>,\n null,\n 0,\n true,\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

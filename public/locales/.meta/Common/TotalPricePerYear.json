@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/TotalTariffContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/TotalTariffContainer.tsx",
       "line_number": 203,
       "context": "fontSize=\"16px\"\n className={styles.totalPriceLine}\n >\n {isYearTariff ? (\n <CommonTrans\n i18nKey=\"TotalPricePerYear\"\n values={{ price: formatPaymentCurrency(totalPrice) }}\n components={{\n 2: (\n <span\n key=\"large-font-year\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

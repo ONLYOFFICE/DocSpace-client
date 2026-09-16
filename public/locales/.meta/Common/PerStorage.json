@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 262,
       "context": "withBottomMargin={withBottomMargin}\n isEnabled={hasStorageSubscription}\n isDisabled={isDisabled || isScheduled}\n onToggle={handleToggleChange}\n title={t(\"AdditionalDiskStorage\")}\n priceText={t(\"PerStorage\", {\n currency: formatWalletCurrency(storagePriceIncrement, 2),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n })}\n description={t(\"AdjustStorageToExactAmount\")}\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 262,
       "context": "withBottomMargin={withBottomMargin}\n isEnabled={hasStorageSubscription}\n isDisabled={isDisabled || isScheduled}\n onToggle={handleToggleChange}\n title={t(\"AdditionalDiskStorage\")}\n priceText={t(\"PerStorage\", {\n currency: formatWalletCurrency(storagePriceIncrement, 2),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n })}\n description={t(\"AdjustStorageToExactAmount\")}\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 217,
       "context": "),\n info: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n });\n }\n \n return t(\"PerStorage\", {\n currency: formatWalletCurrency(storagePriceIncrement, 2),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n });\n \n case BACKUP_SERVICE:",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

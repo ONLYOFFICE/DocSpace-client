@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/PaymentContainer.tsx",
       "line_number": 220,
       "context": "if (isPaidPeriod && !isNonProfit) {\n return (\n <Text fontSize=\"16px\" isBold className={styles.paymentInfoSuggestion}>\n <CommonTrans\n i18nKey=\"BusinessSuggestion\"\n values={{ planName: tariffPlanTitle }}\n />\n </Text>\n );\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

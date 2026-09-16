@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/PaymentContainer.tsx",
       "line_number": 294,
       "context": "<HelpButton\n className=\"payment-tooltip\"\n offsetRight={0}\n iconNode={<HelpReactSvg />}\n style={{ display: \"inline-block\", verticalAlign: \"middle\" }}\n tooltipContent={<Text>{t(\"RenewalChargeOrderTooltip\")}</Text>}\n dataTestId=\"renewal_charge_order_help_button\"\n />\n </Text>\n );\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

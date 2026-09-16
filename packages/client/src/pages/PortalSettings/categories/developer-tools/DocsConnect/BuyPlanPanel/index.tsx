@@ -79,8 +79,8 @@ import {
   isDocsConnectCanceled,
   isDocsConnectPaid,
 } from "../utils";
+import { DOCS_CONNECT_LINKS } from "../constants";
 import { PAYMENT_ROUTES } from "../../../payments/utils";
-import { brandingRedirectUrl } from "../../../common/Branding/constants";
 
 import styles from "./BuyPlanPanel.module.scss";
 
@@ -127,7 +127,6 @@ interface BuyPlanPanelProps {
   fetchPayerInfo?: (isRefresh?: boolean) => Promise<unknown>;
   fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
   closeBuyPlan?: () => void;
-  docsConnectUrl?: string;
 }
 
 const BuyPlanPanel = ({
@@ -146,7 +145,6 @@ const BuyPlanPanel = ({
   fetchPayerInfo,
   fetchWalletBalance,
   closeBuyPlan,
-  docsConnectUrl,
 }: BuyPlanPanelProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
   const { paymentApi } = useApi();
@@ -357,12 +355,6 @@ const BuyPlanPanel = ({
       ),
       "_blank",
     );
-
-  const rebrandingUrl = combineUrl(
-    window.ClientConfig?.proxy?.url,
-    config.homepage,
-    brandingRedirectUrl,
-  );
 
   const onTopUpConfirm = async () => {
     await switchToDevPack?.({ quantity: users, topUp: 0 });
@@ -835,7 +827,7 @@ const BuyPlanPanel = ({
                   <div>
                     <Link
                       type={LinkType.page}
-                      href={docsConnectUrl}
+                      href={DOCS_CONNECT_LINKS.automationApi}
                       target={LinkTarget.blank}
                       fontSize="13px"
                       fontWeight={600}
@@ -856,7 +848,7 @@ const BuyPlanPanel = ({
                   <div>
                     <Link
                       type={LinkType.page}
-                      href={rebrandingUrl}
+                      href={DOCS_CONNECT_LINKS.branding}
                       target={LinkTarget.blank}
                       fontSize="13px"
                       fontWeight={600}
@@ -1185,7 +1177,6 @@ export default inject(
     docsConnectStore,
     paymentStore,
     currentTariffStatusStore,
-    settingsStore,
   }: TStore) => ({
     visible: docsConnectStore.buyPlanPanelVisible,
     info: docsConnectStore.info,
@@ -1203,7 +1194,6 @@ export default inject(
     fetchPayerInfo: currentTariffStatusStore.fetchPayerInfo,
     fetchWalletBalance: paymentStore.fetchWalletBalance,
     closeBuyPlan: docsConnectStore.closeBuyPlan,
-    docsConnectUrl: settingsStore.docsConnectUrl,
   }),
 )(observer(BuyPlanPanel));
 

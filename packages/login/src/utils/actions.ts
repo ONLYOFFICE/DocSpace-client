@@ -56,6 +56,7 @@ import {
   TVersionBuild,
   TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
+import type { ILogo } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
 import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import {
   TConfirmLinkParams,
@@ -182,6 +183,34 @@ export async function getColorTheme() {
       throw error;
     }
     logger.error(`Error in getColorTheme: ${error}`);
+  }
+}
+
+export async function getWhiteLabelLogos() {
+  logger.debug(`Start GET /settings/whitelabel/logos`);
+
+  try {
+    const [getLogosRes] = await createRequest(
+      [`/settings/whitelabel/logos`],
+      [["", ""]],
+      "GET",
+    );
+
+    const res = await fetch(getLogosRes);
+
+    if (!res.ok) {
+      logger.error(`GET /settings/whitelabel/logos failed: ${res.status}`);
+      return;
+    }
+
+    const logos = await res.json();
+
+    return logos.response as ILogo[];
+  } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
+    logger.error(`Error in getWhiteLabelLogos: ${error}`);
   }
 }
 

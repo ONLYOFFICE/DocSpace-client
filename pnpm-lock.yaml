@@ -280,8 +280,8 @@ importers:
         specifier: 1.15.1
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:onlyoffice-ai-chat-0.5.108-docspace.1.tgz
-        version: file:libs/ui-kit/onlyoffice-ai-chat-0.5.108-docspace.1.tgz(4ef55b3eb2d44e99eec672f8df48793b)
+        specifier: file:onlyoffice-ai-chat-0.5.114-docspace.1.tgz
+        version: file:libs/ui-kit/onlyoffice-ai-chat-0.5.114-docspace.1.tgz(4ef55b3eb2d44e99eec672f8df48793b)
       '@onlyoffice/docspace-api-sdk':
         specifier: file:onlyoffice-docspace-api-sdk-3.7.0.tgz
         version: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -3565,9 +3565,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.108-docspace.1.tgz':
-    resolution: {integrity: sha512-sb3BUK8XCLiz6InBXigkmOkSXcU0mGgVYczbVjBPzVm3g1DENDf0L6C1ADI3s0paeWiuAZZ/Tm+bsKQOHWdsJw==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.5.108-docspace.1.tgz}
-    version: 0.5.108-docspace.1
+  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.114-docspace.1.tgz':
+    resolution: {integrity: sha512-KMJcFo0HKSls2OZ2zuxuVzsFGI/lKwwPnPbgQwm65Zag9g4wcEj3Yvi70bXrhpSKLk2ymRewIywX9Ij2wOxmGw==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.5.114-docspace.1.tgz}
+    version: 0.5.114-docspace.1
     peerDependencies:
       '@anthropic-ai/sdk': ^0.60.0
       '@assistant-ui/react': ^0.11.0
@@ -12441,7 +12441,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@23.1.1':
     optional: true
 
-  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.108-docspace.1.tgz(4ef55b3eb2d44e99eec672f8df48793b)':
+  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.114-docspace.1.tgz(4ef55b3eb2d44e99eec672f8df48793b)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
       assistant-stream: 0.2.47

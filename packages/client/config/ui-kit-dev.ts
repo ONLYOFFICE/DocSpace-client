@@ -92,19 +92,19 @@ const checkout = readDevCheckout();
 
 export const uiKitDevRoot = checkout?.root ?? null;
 
-console.log(
-  uiKitDevRoot
-    ? `ui-kit: serving source from ${uiKitDevRoot}`
-    : `ui-kit: installed package (set ${UI_KIT_SRC_ENV}, or run \`pnpm run start:ui-kit-src\`, to serve a checkout)`,
-);
+// Called from vite.config.ts once the command is known, not at import time:
+// this module is loaded by every config consumer, and a build that is about to
+// refuse the variable has no use for the line.
+export const logUiKitMode = () =>
+  console.log(
+    uiKitDevRoot
+      ? `ui-kit: serving source from ${uiKitDevRoot}`
+      : `ui-kit: installed package (set ${UI_KIT_SRC_ENV}, or run \`pnpm run start:ui-kit-src\`, to serve a checkout)`,
+  );
 
 export const uiKitDir =
   uiKitDevRoot ??
   path.dirname(require.resolve(`${UI_KIT_PACKAGE}/package.json`));
-
-export const uiKitStylesEntry = uiKitDevRoot
-  ? path.join(uiKitDevRoot, "components", "theme-provider", "ThemeProvider.scss")
-  : null;
 
 // Read from the checkout rather than listed by hand: every peer is a package
 // both trees can resolve separately, and a second copy of any of them is a
@@ -114,13 +114,15 @@ export const uiKitPeerDependencies = Object.keys(
   checkout?.manifest.peerDependencies ?? {},
 );
 
-export const isInsideUiKit = (target: string) => {
-  if (!uiKitDevRoot) return false;
-
-  const rel = path.relative(uiKitDevRoot, target);
+/** True when `target` lies strictly below `root` (the root itself does not count). */
+export const isInside = (root: string, target: string) => {
+  const rel = path.relative(root, target);
 
   return rel !== "" && !rel.startsWith("..") && !path.isAbsolute(rel);
 };
+
+export const isInsideUiKit = (target: string) =>
+  uiKitDevRoot !== null && isInside(uiKitDevRoot, target);
 
 export const uiKitBoundaryError = (
   importer: string,

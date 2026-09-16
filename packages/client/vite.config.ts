@@ -50,7 +50,11 @@ import {
 import { copyFontsPlugin } from "./config/plugins/copy-fonts";
 import { serveRootPublicPlugin } from "./config/plugins/serve-root-public";
 import { uiKitBoundaryPlugin } from "./config/plugins/ui-kit-boundary";
-import { UI_KIT_SRC_ENV, uiKitDevRoot } from "./config/ui-kit-dev";
+import {
+  UI_KIT_SRC_ENV,
+  logUiKitMode,
+  uiKitDevRoot,
+} from "./config/ui-kit-dev";
 import { resolve } from "./config/resolve";
 import { css } from "./config/css";
 import { server } from "./config/server";
@@ -81,6 +85,8 @@ export default defineConfig(async ({ mode, command }): Promise<UserConfig> => {
         "Unset it to build: a build must come from the installed package.",
     );
   }
+
+  logUiKitMode();
 
   return {
     root: __dirname,
@@ -137,7 +143,7 @@ export default defineConfig(async ({ mode, command }): Promise<UserConfig> => {
       htmlTransformPlugin(),
       chunkRetryPlugin(),
       serveRootPublicPlugin(),
-      uiKitDevRoot ? uiKitBoundaryPlugin() : null,
+      uiKitDevRoot ? uiKitBoundaryPlugin(uiKitDevRoot) : null,
       isProduction && bannerPlugin(),
       isProduction && copyLocalesPlugin(),
       isProduction && copyFontsPlugin(),

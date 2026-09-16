@@ -88,10 +88,11 @@ For local work on ui-kit itself, `pnpm run start:ui-kit-src` (root script, or
 the "Start (ui-kit src)" workspace button) points the client's dev server at a
 checkout and restores HMR, with no build, pack or install in the loop. It is a
 dev-server alias only - never a tsconfig path, and `vite build` refuses to run
-while it is set - and an import that escapes the checkout fails, in JS/TS and
-in SCSS alike. Run the client once **without** the variable before committing a
-new tarball: source mode does not exercise the stylesheet order, `"use client"`,
-the exports wildcard or the generated types. Details in
+while it is set - and an import that escapes the checkout fails: any JS/TS
+import, and a bare `@docspace/shared` load in SCSS (sass resolves relative
+`@use` paths itself, unchecked). Run the client once **without** the variable
+before committing a new tarball: source mode does not exercise the stylesheet
+order, `"use client"`, the exports wildcard or the generated types. Details in
 `.claude/rules/pnpm.md`.
 
 The tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's `main`,

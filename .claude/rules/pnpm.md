@@ -127,8 +127,8 @@ Use the **root** script, or the "Start (ui-kit src)" button. `pnpm start` fans
 out to five apps through Nx, so the root is where the variable has to be set; a
 script in `packages/client` alone is never the one anyone runs. The path is
 resolved against the repo root. The switch lives entirely in
-`packages/client/config/` (`ui-kit-dev.ts` plus one line each in `resolve.ts`,
-`css.ts`, `server.ts` and `vite.config.ts`) and changes nothing in the ui-kit
+`packages/client/config/` (`ui-kit-dev.ts`, the boundary plugin, and small
+changes in `resolve.ts`, `css.ts`, `server.ts` and `vite.config.ts`) and changes nothing in the ui-kit
 repository; the checkout serves its own `assets/`, `styles/` and `locales/`,
 exactly as the tarball does. `optimizeDeps` drops the ui-kit globs in this mode,
 because pre-bundling would freeze the files being edited.
@@ -148,8 +148,11 @@ Four properties keep it honest:
   is processed by the client's config, so `PUBLIC_DIR`, `SRC_DIR`,
   `@docspace/shared` and friends would resolve from inside ui-kit and break only
   later, in its own rollup build. `config/plugins/ui-kit-boundary.ts` covers
-  JS/TS; sass never reaches `resolveId`, so `config/css.ts` carries the same
-  check in its `findFileUrl` importer, keyed on `containingUrl`.
+  JS/TS, relative and aliased specifiers alike; sass never reaches
+  `resolveId`, so `config/css.ts` carries the same check in its `findFileUrl`
+  importer, keyed on `containingUrl`. That importer only sees bare loads, so it
+  catches `@use "@docspace/shared/..."` but not a relative `@use` that climbs
+  out of the checkout -- sass resolves those on its own.
 - **Source mode is more forgiving than packing.** It does not exercise the
   extracted stylesheet and its cascade order, `"use client"` preservation, the
   exports wildcard and module shape, the generated `.d.mts`, or the type-only

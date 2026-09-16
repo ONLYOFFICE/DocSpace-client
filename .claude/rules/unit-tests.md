@@ -12,8 +12,9 @@ paths:
 
 ## Where tests live — and where they must not
 
-- **client**: only under `packages/client/src/**` (vitest `include` is limited
-  to `src/`). Convention: `__tests__/` dir next to the code. Anything in
+- **client**: under `packages/client/src/**`, plus `packages/client/config/**`
+  for the Vite config plugins (vitest `include` lists exactly those two).
+  Convention: `__tests__/` dir next to the code. Anything in
   `packages/client/__tests__/` or `packages/client/tests/` is **Playwright
   E2E** — never put unit tests there.
 - **shared**: co-located next to the component

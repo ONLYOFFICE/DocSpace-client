@@ -36,7 +36,7 @@
 import path from "path";
 import type { Plugin } from "vite";
 
-import { isInsideUiKit, uiKitBoundaryError } from "../ui-kit-dev";
+import { isInside, uiKitBoundaryError } from "../ui-kit-dev";
 
 const NODE_MODULES = `${path.sep}node_modules${path.sep}`;
 
@@ -44,7 +44,11 @@ const bare = (id: string) => id.split("?")[0].split("#")[0];
 
 // Guards JS and TS imports only. SCSS never reaches resolveId -- sass resolves
 // `@use` through the importer in config/css.ts, which carries the same check.
-export const uiKitBoundaryPlugin = (): Plugin => ({
+//
+// `root` is the ui-kit checkout being served (config/ui-kit-dev.ts knows it);
+// it is a parameter rather than a module import so the plugin can be exercised
+// against a fake root without a checkout on disk.
+export const uiKitBoundaryPlugin = (root: string): Plugin => ({
   name: "ui-kit-boundary",
   enforce: "pre",
   apply: "serve",
@@ -53,7 +57,7 @@ export const uiKitBoundaryPlugin = (): Plugin => ({
 
     const from = path.normalize(bare(importer));
 
-    if (!isInsideUiKit(from) || from.includes(NODE_MODULES)) return null;
+    if (!isInside(root, from) || from.includes(NODE_MODULES)) return null;
 
     const spec = bare(source);
 
@@ -69,7 +73,7 @@ export const uiKitBoundaryPlugin = (): Plugin => ({
         ? path.normalize(spec)
         : null;
 
-    if (target && !isInsideUiKit(target))
+    if (target && !isInside(root, target))
       throw uiKitBoundaryError(
         from,
         source,

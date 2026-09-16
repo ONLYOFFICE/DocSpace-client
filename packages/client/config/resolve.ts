@@ -40,16 +40,15 @@ import {
   UI_KIT_PACKAGE,
   uiKitDevRoot,
   uiKitPeerDependencies,
-  uiKitStylesEntry,
 } from "./ui-kit-dev";
 
-const uiKitAlias: Record<string, string> =
-  uiKitDevRoot && uiKitStylesEntry
-    ? {
-        [`${UI_KIT_PACKAGE}/styles.css`]: uiKitStylesEntry,
-        [UI_KIT_PACKAGE]: uiKitDevRoot,
-      }
-    : {};
+// One prefix alias is enough: the checkout mirrors the tarball's layout, so
+// `@onlyoffice/apps-ui-kit/components/text` lands on `components/text` in both.
+// Nothing imports the `styles.css` bundle any more -- components carry their
+// own stylesheet, and ThemeProvider's source imports its SCSS directly.
+const uiKitAlias: Record<string, string> = uiKitDevRoot
+  ? { [UI_KIT_PACKAGE]: uiKitDevRoot }
+  : {};
 
 const baseDedupe = [
   "styled-components",

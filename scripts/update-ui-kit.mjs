@@ -87,6 +87,11 @@ const findSource = () => {
  * while this repo still vendored, and every app still named, 0.5.110.
  *
  * So take whatever ai-chat sits next to the ui-kit checkout as the truth.
+ *
+ * Returns null when nothing moved, otherwise the new filename and a `restore`
+ * that puts the previous tarball(s) and every rewritten manifest back -- the
+ * install below can still fail, and a tree whose manifests name a file the
+ * lockfile does not know is the half-updated state this script exists to avoid.
  */
 const syncAiChat = (uiKitRoot) => {
   if (uiKitRoot === null) return null;
@@ -102,6 +107,11 @@ const syncAiChat = (uiKitRoot) => {
   const current = fs.readdirSync(ROOT).filter((f) => NAME.test(f));
 
   if (current.length === 1 && current[0] === newest) return null;
+
+  // Snapshot before touching anything: the bytes of every tarball about to be
+  // removed or overwritten, and the text of every manifest about to change.
+  const previousTarballs = current.map((f) => [f, fs.readFileSync(path.join(ROOT, f))]);
+  const previousManifests = [];
 
   fs.copyFileSync(path.join(uiKitRoot, newest), path.join(ROOT, newest));
   for (const stale of current) {
@@ -122,6 +132,7 @@ const syncAiChat = (uiKitRoot) => {
     );
 
     if (next === text) continue;
+    previousManifests.push([manifest, text]);
     fs.writeFileSync(manifest, next);
     touched.push(app);
   }
@@ -131,7 +142,13 @@ const syncAiChat = (uiKitRoot) => {
       (touched.length > 0 ? ` (${touched.join(", ")} repointed)` : ""),
   );
 
-  return newest;
+  const restore = () => {
+    for (const [manifest, text] of previousManifests) fs.writeFileSync(manifest, text);
+    if (!current.includes(newest)) fs.rmSync(path.join(ROOT, newest), { force: true });
+    for (const [f, bytes] of previousTarballs) fs.writeFileSync(path.join(ROOT, f), bytes);
+  };
+
+  return { file: newest, restore };
 };
 
 const source = findSource();
@@ -175,6 +192,7 @@ if (before === after && aiChat === null) {
     fs.writeFileSync(LOCKFILE, lock);
     if (previousTarball === null) fs.rmSync(TARBALL, { force: true });
     else fs.writeFileSync(TARBALL, previousTarball);
+    aiChat?.restore();
   };
 
   fs.writeFileSync(LOCKFILE, lock.replace(pattern, `$1${after}$2`));
@@ -204,10 +222,13 @@ if (before === after && aiChat === null) {
       shell: process.platform === "win32",
     });
   } catch (error) {
-    // The tarball and the lockfile were already rewritten above, so a failed
-    // install leaves the tree claiming a version it does not have. Put both back.
+    // The tarball, the lockfile and (when ai-chat moved) its tarball and the
+    // app manifests were already rewritten above, so a failed install leaves
+    // the tree claiming a version it does not have. Put all of it back.
     restore();
-    fail(`pnpm install failed, tarball and lockfile restored: ${error.message}`);
+    fail(
+      `pnpm install failed; tarball, lockfile${aiChat ? ", ai-chat and manifests" : ""} restored: ${error.message}`,
+    );
   }
 }
 

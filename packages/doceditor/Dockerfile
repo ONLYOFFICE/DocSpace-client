@@ -38,6 +38,8 @@ COPY packages/client/*.tgz ./packages/client/
 COPY common/ ./common/
 COPY packages/doceditor/ ./packages/doceditor/
 COPY packages/shared/ ./packages/shared/
+# next.config.js requires scripts/ui-kit-dev.cjs at load time.
+COPY scripts/ ./scripts/
 COPY public/ ./public/
 
 # Install dependencies

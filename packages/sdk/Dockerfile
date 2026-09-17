@@ -61,6 +61,8 @@ RUN CI=true pnpm install --frozen-lockfile
 COPY common/ ./common/
 COPY packages/sdk/ ./packages/sdk/
 COPY packages/shared/ ./packages/shared/
+# next.config.js requires scripts/ui-kit-dev.cjs at load time.
+COPY scripts/ ./scripts/
 COPY public/ ./public/
 
 # Run build:translations

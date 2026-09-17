@@ -111,11 +111,12 @@ copies were already rewritten. The `tar` binary is deliberately not used - the
 GNU tar shipped with Git Bash reads a Windows path as a remote `host:path` spec
 and refuses it.
 
-### Running the client against a ui-kit checkout
+### Running the apps against a ui-kit checkout
 
 Waiting for build, pack, install and a dev-server restart on every ui-kit edit
 is the cost of consuming a prebuilt package. `DOCSPACE_UI_KIT_SRC` removes it
-for local work by pointing the client's Vite at a checkout instead:
+for local work by pointing the dev servers at a checkout instead -- all five
+apps, the Vite client and the four Next ones:
 
 ```bash
 pnpm run start:ui-kit-src                 # same app set as `pnpm start`
@@ -125,44 +126,56 @@ DOCSPACE_UI_KIT_SRC=../elsewhere pnpm run start:ui-kit-src
 
 Use the **root** script, or the "Start (ui-kit src)" button. `pnpm start` fans
 out to five apps through Nx, so the root is where the variable has to be set; a
-script in `packages/client` alone is never the one anyone runs. The path is
-resolved against the repo root. The switch lives entirely in
-`packages/client/config/` (`ui-kit-dev.ts`, the boundary plugin, and small
-changes in `resolve.ts`, `css.ts`, `server.ts` and `vite.config.ts`) and changes nothing in the ui-kit
-repository; the checkout serves its own `assets/`, `styles/` and `locales/`,
-exactly as the tarball does. `optimizeDeps` drops the ui-kit globs in this mode,
-because pre-bundling would freeze the files being edited.
+script in one package alone is never the one anyone runs. The path is resolved
+against the repo root, and nothing changes in the ui-kit repository; the
+checkout serves its own `assets/`, `styles/` and `locales/`, exactly as the
+tarball does.
+
+The client's half lives in `packages/client/config/` (`ui-kit-dev.ts`, the
+boundary plugin, and small changes in `resolve.ts`, `css.ts`, `server.ts` and
+`vite.config.ts`); `optimizeDeps` drops the ui-kit globs in this mode, because
+pre-bundling would freeze the files being edited. The Next apps share
+`scripts/ui-kit-dev.cjs`, which each `next.config.js` calls twice: once to
+refuse a production build while the variable is set, once from its `webpack`
+hook to alias the package to the checkout, pin ui-kit's peers to the app's own
+copies, and add the checkout to the `next-swc-loader` rules so its TypeScript
+compiles. The CSS rules need nothing -- they key off the extension, so the
+checkout's `*.module.scss` go through the app's own CSS Modules pipeline and
+come out named by it rather than by ui-kit's rollup config.
 
 Four properties keep it honest:
 
-- **It is a Vite alias only, never a tsconfig path.** `pnpm tsc` in the pre-push
-  gate keeps resolving `@onlyoffice/apps-ui-kit` through `node_modules`, so a
-  client import of a subpath the *package* does not export still fails the gate
-  while the browser is happily serving source.
-- **It is a dev-server switch only.** `vite.config.ts` refuses `vite build`
-  while the variable is set. `resolve` and `css` are shared by both commands, so
-  a build would otherwise take ui-kit from the checkout - and emit a different
-  artifact, since the chunking rules in `config/build.ts` match node_modules
-  paths a checkout does not have.
-- **An import that escapes the checkout fails.** Under the alias, ui-kit source
-  is processed by the client's config, so `PUBLIC_DIR`, `SRC_DIR`,
+- **It is a bundler alias only, never a tsconfig path.** `pnpm tsc` in the
+  pre-push gate keeps resolving `@onlyoffice/apps-ui-kit` through
+  `node_modules`, so an import of a subpath the *package* does not export still
+  fails the gate while the browser is happily serving source.
+- **It is a dev-server switch only.** `vite.config.ts` refuses `vite build` and
+  every `next.config.js` refuses `next build` while the variable is set. A build
+  would otherwise take ui-kit from the checkout and emit a different artifact:
+  the client's chunking rules in `config/build.ts` match node_modules paths a
+  checkout does not have, and in the Next apps the CSS Modules would be named by
+  the app instead of by ui-kit.
+- **An import that escapes the checkout fails, in the client.** Under the alias,
+  ui-kit source is processed by the client's config, so `PUBLIC_DIR`, `SRC_DIR`,
   `@docspace/shared` and friends would resolve from inside ui-kit and break only
   later, in its own rollup build. `config/plugins/ui-kit-boundary.ts` covers
   JS/TS, relative and aliased specifiers alike; sass never reaches
   `resolveId`, so `config/css.ts` carries the same check in its `findFileUrl`
   importer, keyed on `containingUrl`. That importer only sees bare loads, so it
   catches `@use "@docspace/shared/..."` but not a relative `@use` that climbs
-  out of the checkout -- sass resolves those on its own.
+  out of the checkout -- sass resolves those on its own. The Next apps have no
+  equivalent check: an escaping import there fails later, in ui-kit's own build.
 - **Source mode is more forgiving than packing.** It does not exercise the
   extracted stylesheet and its cascade order, `"use client"` preservation, the
   exports wildcard and module shape, the generated `.d.mts`, or the type-only
   subpaths that have no runtime module. Run the client once **without** the
   variable before committing a new tarball.
 
-`resolve.dedupe` is built from the checkout's own `peerDependencies` rather than
-a hand-picked list: every peer is a package both trees resolve separately, and a
-second copy of anything holding module state (a context, a store, a socket) is a
-silent behaviour change. A hand-picked subset rots on the next bump either side.
+Both halves read the checkout's own `peerDependencies` rather than a hand-picked
+list -- Vite through `resolve.dedupe`, webpack by aliasing each peer to the
+app's copy. Every peer is a package both trees resolve separately, and a second
+copy of anything holding module state (a context, a store, a socket) is a silent
+behaviour change. A hand-picked subset rots on the next bump either side.
 
 The tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's `main`,
 `module`, `types` and `exports` fields live under `publishConfig`, which only

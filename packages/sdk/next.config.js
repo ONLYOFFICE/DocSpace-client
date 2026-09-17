@@ -36,6 +36,10 @@
 /** @type {import('next').NextConfig} */
 
 const path = require("path");
+const {
+  applyUiKitSourceMode,
+  refuseBuildFromSource,
+} = require("../../scripts/ui-kit-dev.cjs");
 const fs = require("fs");
 const os = require("os");
 
@@ -59,6 +63,9 @@ const productionMode = "production";
 const version = pkg.version;
 const banner = getBanner(version);
 const isDev = process.env.NODE_ENV !== productionMode;
+
+// `next build` must come from the installed package; see scripts/ui-kit-dev.cjs.
+if (!isDev) refuseBuildFromSource(__dirname);
 
 const monorepoRoot = path.resolve(__dirname, "../..");
 // @onlyoffice/docspace-api-sdk is a dependency of @onlyoffice/apps-ui-kit
@@ -135,6 +142,10 @@ const nextConfig = {
         crypto: false,
       },
     };
+
+    const uiKitSrc = applyUiKitSourceMode(config, __dirname);
+
+    if (uiKitSrc) console.log(`ui-kit: serving source from ${uiKitSrc}`);
 
     config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
 

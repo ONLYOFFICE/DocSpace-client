@@ -3,7 +3,7 @@
   "content": "Quotas",
   "content_en_sha1_hash": "34ed58657019e0ff061ea2eef787a27a97813fe2",
   "created_at": "2025-05-19T21:30:52.354Z",
-  "updated_at": "2026-09-14T19:16:02.644Z",
+  "updated_at": "2026-09-14T20:38:41.443Z",
   "comment": {
     "text": "This is a section title within the portal settings. It labels the area where administrators can manage storage limits for users and rooms.",
     "is_auto": true,

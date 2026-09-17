@@ -1285,6 +1285,7 @@
   "LinkNewCardDesc": "Kliknite dugme ispod da biste ga dodali",
   "LinkNoExpiration": "Link nema <1>datum isteka</1>",
   "LinkNoLongerAvailable": "Link više nije dostupan",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} je radni prostor u kojem možete da kreirate dokumente, sarađujete u sobama i prikupljate podatke pomoću obrazaca, sve na jednom mestu.",
   "LinkProtectedWithPassword": "Link je zaštićen lozinkom.",
   "LinkRemoved": "Link je uklonjen",
   "LinkSettings": "Podešavanja linka",

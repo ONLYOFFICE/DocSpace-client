@@ -1285,6 +1285,7 @@
   "LinkNewCardDesc": "Eklemek için aşağıdaki düğmeye tıklayın",
   "LinkNoExpiration": "Bağlantının <1>süre sonu tarihi yok</1>",
   "LinkNoLongerAvailable": "Bağlantı artık mevcut değil",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}}, belgeler oluşturabileceğiniz, odalarda iş birliği yapabileceğiniz ve formlarla veri toplayabileceğiniz bir çalışma alanıdır; hepsi tek bir yerde.",
   "LinkProtectedWithPassword": "Bağlantı bir şifre ile korunmaktadır.",
   "LinkRemoved": "Bağlantı kaldırıldı",
   "LinkSettings": "Bağlantı ayarları",

@@ -1285,6 +1285,7 @@
   "LinkNewCardDesc": "추가하려면 아래 버튼을 클릭하세요",
   "LinkNoExpiration": "링크에는 <1>만료일이 없습니다</1>",
   "LinkNoLongerAvailable": "더 이상 사용할 수 없는 링크입니다",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}}는 문서 작성, 방에서의 협업, 양식을 통한 데이터 수집을 한곳에서 처리할 수 있는 워크스페이스입니다.",
   "LinkProtectedWithPassword": "링크는 비밀번호로 보호됩니다.",
   "LinkRemoved": "링크가 제거되었습니다",
   "LinkSettings": "링크 설정",

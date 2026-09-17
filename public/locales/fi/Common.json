@@ -1285,6 +1285,7 @@
   "LinkNewCardDesc": "Lisätäksesi, napsauta alla olevaa painiketta",
   "LinkNoExpiration": "Linkillä ei ole <1>voimassaoloaikaa</1>",
   "LinkNoLongerAvailable": "Linkki ei ole enää käytettävissä",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} on työtila, jossa voit luoda asiakirjoja, tehdä yhteistyötä huoneissa ja kerätä tietoja lomakkeilla, kaikki samassa paikassa.",
   "LinkProtectedWithPassword": "Linkki on suojattu salasanalla.",
   "LinkRemoved": "Linkki poistettu",
   "LinkSettings": "Linkkiasetukset",

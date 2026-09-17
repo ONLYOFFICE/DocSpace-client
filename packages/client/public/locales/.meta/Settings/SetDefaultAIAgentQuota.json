@@ -3,7 +3,7 @@
   "content": "Set a default storage quota for {{aiAgents}} — you can adjust it later or customize it for each agent when it's created.",
   "content_en_sha1_hash": "86fdd1cde7c4dca79f4e0c773c574351eb0a29a5",
   "created_at": "2026-09-04T07:59:36.294Z",
-  "updated_at": "2026-09-14T19:16:02.646Z",
+  "updated_at": "2026-09-14T20:38:41.444Z",
   "comment": {
     "text": "Subtitle for a storage management setting describing the default quota for AI agents. The {{aiAgents}} variable represents the plural form of AI agents.",
     "is_auto": true,

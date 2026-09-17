@@ -1285,6 +1285,7 @@
   "LinkNewCardDesc": "Clique no botão abaixo para adicionar um",
   "LinkNoExpiration": "O link <1>não tem data de validade</1>",
   "LinkNoLongerAvailable": "Link não está mais disponível",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} é um espaço de trabalho onde você pode criar documentos, colaborar em salas e coletar dados com formulários, tudo em um só lugar.",
   "LinkProtectedWithPassword": "O link é protegido por senha.",
   "LinkRemoved": "Link removido",
   "LinkSettings": "Configurações de link",

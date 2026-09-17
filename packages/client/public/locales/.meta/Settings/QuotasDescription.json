@@ -3,7 +3,7 @@
   "content": "Set storage limits for users and rooms.",
   "content_en_sha1_hash": "8065762064ea6f49c791270e7d0b81e3516518c7",
   "created_at": "2026-08-31T18:23:41.904Z",
-  "updated_at": "2026-09-14T19:16:02.645Z",
+  "updated_at": "2026-09-14T20:38:41.443Z",
   "comment": {
     "text": "Subtext in the storage management settings explaining the purpose of the quotas configuration.",
     "is_auto": true,

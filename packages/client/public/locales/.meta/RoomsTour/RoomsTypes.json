@@ -3,7 +3,7 @@
   "content": "{{collaboration}} for teamwork, {{vdr}} for secure file sharing, {{publicRoom}} for external access, {{custom}} for your own scenarios.",
   "content_en_sha1_hash": "e70ba02995434cb16168b61c756cc5db63134212",
   "created_at": "2026-08-06T14:20:52.340Z",
-  "updated_at": "2026-09-14T19:16:02.551Z",
+  "updated_at": "2026-09-14T20:38:41.358Z",
   "comment": {
     "text": "Tooltip description in a product tour explaining the purpose of various room types, using placeholders that represent the titles of each specific room type.",
     "is_auto": true,

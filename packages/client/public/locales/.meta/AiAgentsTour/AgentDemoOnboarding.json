@@ -3,7 +3,7 @@
   "content": "Onboarding buddy",
   "content_en_sha1_hash": "568cfd1694328318b3d51cb74e10804f8f89518f",
   "created_at": "2026-08-06T14:20:56.246Z",
-  "updated_at": "2026-09-14T19:16:02.529Z",
+  "updated_at": "2026-09-14T20:38:41.337Z",
   "comment": {
     "text": "Title of a step within the AI Agents onboarding tour, acting as a label for a helpful assistant or guide.",
     "is_auto": true,

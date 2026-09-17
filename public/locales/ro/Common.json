@@ -1285,6 +1285,7 @@
   "LinkNewCardDesc": "Faceți clic pe butonul de mai jos pentru a adăuga una",
   "LinkNoExpiration": "Linkul <1>fără dată de expirare</1>",
   "LinkNoLongerAvailable": "Link-ul nu mai este disponibil",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} este un spațiu de lucru în care puteți crea documente, puteți colabora în săli și puteți colecta date cu ajutorul formularelor, toate într-un singur loc.",
   "LinkProtectedWithPassword": "Acest link este protejat prin parolă.",
   "LinkRemoved": "Link-ul a fost eliminat",
   "LinkSettings": "Setări link",

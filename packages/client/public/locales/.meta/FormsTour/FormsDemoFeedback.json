@@ -3,7 +3,7 @@
   "content": "Client feedback",
   "content_en_sha1_hash": "136c8c6ede3ec1905978012d0cd6bdf4cee13aee",
   "created_at": "2026-08-06T14:20:53.751Z",
-  "updated_at": "2026-09-14T19:16:02.543Z",
+  "updated_at": "2026-09-14T20:38:41.350Z",
   "comment": {
     "text": "A title for a step in the product tour that introduces the client feedback feature within Form rooms.",
     "is_auto": true,

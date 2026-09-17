@@ -1285,6 +1285,7 @@
   "LinkNewCardDesc": "Klik op de onderstaande knop om er een toe te voegen",
   "LinkNoExpiration": "De link heeft <1>geen vervaldatum</1>",
   "LinkNoLongerAvailable": "Link niet langer beschikbaar",
+  "LinkPreviewDescription": "{{organizationName}} {{productName}} is een werkruimte waarin u documenten kunt maken, in kamers kunt samenwerken en gegevens kunt verzamelen met formulieren, allemaal op één plek.",
   "LinkProtectedWithPassword": "De link is beveiligd met een wachtwoord.",
   "LinkRemoved": "Link verwijderd",
   "LinkSettings": "Link instellingen",

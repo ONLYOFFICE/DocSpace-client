@@ -3,7 +3,7 @@
   "content": "Your AI assistant",
   "content_en_sha1_hash": "12787ee75f40a66c50e93cdc63a48c3af81ac717",
   "created_at": "2026-08-06T14:20:53.788Z",
-  "updated_at": "2026-09-14T19:16:02.542Z",
+  "updated_at": "2026-09-14T20:38:41.350Z",
   "comment": {
     "text": "Title of a feature tour step that introduces the AI chat functionality in both the Files and Rooms sections.",
     "is_auto": true,

@@ -89,7 +89,6 @@
     "mobx-react": "9.2.2",
     "openai": "catalog:",
     "prop-types": "15.8.1",
-    "query-string": "7.1.3",
     "queue-promise": "2.2.1",
     "react": "19.2.8",
     "react-avatar-editor": "^14.0.0",

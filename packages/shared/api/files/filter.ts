@@ -35,7 +35,6 @@
 
 // @ts-nocheck
 
-import queryString from "query-string";
 
 import {
   ApplyFilterOption,
@@ -480,7 +479,10 @@ class FilesFilter {
 
     const dtoFilter: { [key: string]: unknown } = {};
 
-    const URLParams = queryString.parse(window.location.href);
+    // The query, not the whole href: passing the href to a query parser made
+    // the first parameter's key the entire URL up to it, so `preview` was read
+    // only when something else came first in the query string.
+    const preview = new URLSearchParams(window.location.search).get(PREVIEW);
 
     if (filterType) dtoFilter[FILTER_TYPE] = filterType;
     if (withSubfolders) dtoFilter[SEARCH_TYPE] = withSubfolders;
@@ -490,7 +492,7 @@ class FilesFilter {
     if (sharedBy) dtoFilter[SHARED_BY] = sharedBy;
     if (folder) dtoFilter[FOLDER] = folder;
     if (pageCount !== DEFAULT_PAGE_COUNT) dtoFilter[PAGE_COUNT] = pageCount;
-    if (URLParams.preview) dtoFilter[PREVIEW] = URLParams.preview;
+    if (preview) dtoFilter[PREVIEW] = preview;
     if (searchInContent) dtoFilter[SEARCH_IN_CONTENT] = searchInContent;
     if (excludeSubject) dtoFilter[EXCLUDE_SUBJECT] = excludeSubject;
     if (applyFilterOption) dtoFilter[APPLY_FILTER_OPTION] = applyFilterOption;

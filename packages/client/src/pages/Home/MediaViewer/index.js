@@ -37,7 +37,6 @@ import React, { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
-import queryString from "query-string";
 
 import { UrlActionType } from "@docspace/shared/enums";
 
@@ -199,7 +198,7 @@ const FilesMediaViewer = (props) => {
   };
 
   useEffect(() => {
-    const previewId = queryString.parse(location.search).preview;
+    const previewId = new URLSearchParams(location.search).get("preview");
 
     if (previewId) {
       removeQuery("preview");

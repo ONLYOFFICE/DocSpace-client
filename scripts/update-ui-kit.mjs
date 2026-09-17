@@ -151,6 +151,20 @@ const syncAiChat = (uiKitRoot) => {
   return { file: newest, restore };
 };
 
+// Checked before anything is written. Everything below overwrites tarballs and
+// app manifests, and the rollback that undoes them is only wired up once the
+// install is about to run -- so a precondition that fails after those writes
+// leaves exactly the half-updated tree this script exists to avoid. Read the
+// lockfile first and bail while there is still nothing to undo.
+const LOCK_PATTERN =
+  /(integrity: )sha512-[A-Za-z0-9+/=]+(, tarball: file:onlyoffice-apps-ui-kit\.tgz)/g;
+const lock = fs.readFileSync(LOCKFILE, "utf8");
+const lockMatches = lock.match(LOCK_PATTERN);
+
+if (!lockMatches || lockMatches.length === 0) {
+  fail("No @onlyoffice/apps-ui-kit entry in pnpm-lock.yaml -- has the dependency been renamed?");
+}
+
 const source = findSource();
 const aiChat = syncAiChat(uiKitRoot);
 const hadTarball = fs.existsSync(TARBALL);
@@ -178,16 +192,6 @@ if (before === after && aiChat === null) {
     `${path.relative(ROOT, TARBALL)} is already this build -- checking what is installed.`,
   );
 } else {
-  // Point the lockfile at the new contents. Without this pnpm trusts the old
-  // hash and never reads the file.
-  const lock = fs.readFileSync(LOCKFILE, "utf8");
-  const pattern = /(integrity: )sha512-[A-Za-z0-9+/=]+(, tarball: file:onlyoffice-apps-ui-kit\.tgz)/g;
-  const matches = lock.match(pattern);
-
-  if (!matches || matches.length === 0) {
-    fail("No @onlyoffice/apps-ui-kit entry in pnpm-lock.yaml -- has the dependency been renamed?");
-  }
-
   const restore = () => {
     fs.writeFileSync(LOCKFILE, lock);
     if (previousTarball === null) fs.rmSync(TARBALL, { force: true });
@@ -195,7 +199,9 @@ if (before === after && aiChat === null) {
     aiChat?.restore();
   };
 
-  fs.writeFileSync(LOCKFILE, lock.replace(pattern, `$1${after}$2`));
+  // Point the lockfile at the new contents. Without this pnpm trusts the old
+  // hash and never reads the file.
+  fs.writeFileSync(LOCKFILE, lock.replace(LOCK_PATTERN, `$1${after}$2`));
 
   // And drop the extracted copy, which pnpm would otherwise relink as is.
   if (fs.existsSync(PNPM_DIR)) {
@@ -206,7 +212,7 @@ if (before === after && aiChat === null) {
     }
   }
 
-  const rewritten = `${matches.length} lockfile ${matches.length === 1 ? "entry" : "entries"} rewritten`;
+  const rewritten = `${lockMatches.length} lockfile ${lockMatches.length === 1 ? "entry" : "entries"} rewritten`;
 
   // `--force` because a plain install short-circuits on "Already up to date":
   // once the lockfile matches what pnpm last installed it skips the link step

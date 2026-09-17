@@ -140,4 +140,55 @@ describe.each([
     expect(store.plugins[0].status).toBe(PluginStatus.hide);
     expect(store.contextMenuItems.has(ITEM_KEY)).toBe(false);
   });
+
+  // Clearing the settings is the same gate read backwards: the plugin hides
+  // itself, and the item it registered has to go with it.
+  it("takes the items back when the settings stop covering the plugin", async () => {
+    const plugin = createPlugin();
+    const store = withFrame(plugin);
+
+    await store.initPlugin(apiPlugin("api-token"));
+
+    plugin.setAdminPluginSettingsValue(null);
+    store.updatePluginStatus(PLUGIN);
+
+    expect(store.plugins[0].status).toBe(PluginStatus.hide);
+    expect(store.contextMenuItems.has(ITEM_KEY)).toBe(false);
+  });
+
+  it("brings the items back when the settings cover the plugin again", async () => {
+    const plugin = createPlugin();
+    const store = withFrame(plugin);
+
+    await store.initPlugin(apiPlugin(null));
+
+    plugin.setAdminPluginSettingsValue("api-token");
+    store.updatePluginStatus(PLUGIN);
+
+    expect(store.plugins[0].status).toBe(PluginStatus.active);
+    expect(store.contextMenuItems.has(ITEM_KEY)).toBe(true);
+  });
+});
+
+// A plugin is free not to implement the status at all, and the portal then
+// treats it as always shown — a status read that answers nothing must not be
+// mistaken for a plugin asking to be hidden.
+describe("PluginStore updatePluginStatus without a status of its own", () => {
+  class StatelessPlugin {
+    getContextMenuItems = () =>
+      new Map([[ITEM_KEY, { key: ITEM_KEY, label: "Convert to PDF" }]]);
+  }
+
+  it("keeps the items of a plugin that reports no status", async () => {
+    const store = withFrame(
+      new StatelessPlugin() as unknown as TokenGatedPlugin,
+    );
+
+    await store.initPlugin(apiPlugin("api-token"));
+
+    store.updatePluginStatus(PLUGIN);
+
+    expect(store.plugins[0].status).toBe(PluginStatus.active);
+    expect(store.contextMenuItems.has(ITEM_KEY)).toBe(true);
+  });
 });

@@ -80,6 +80,7 @@ const NavMenu = (props) => {
 
   const timeout = React.useRef(null);
   const scrollTopRef = React.useRef(0);
+  const headerRef = React.useRef(null);
 
   const location = useLocation();
 
@@ -92,6 +93,10 @@ const NavMenu = (props) => {
     isNavHoverEnabledProp,
   );
   const [isFixed, setIsFixed] = useState(true);
+  // Bumped on every scroll that clears the threshold, so the --nav-offset effect
+  // re-measures the bar as it slides in and out of its sticky range instead of
+  // only when isFixed flips.
+  const [scrollTick, setScrollTick] = useState(0);
 
   const onScroll = useCallback((e) => {
     const eventTarget = e.target;
@@ -117,6 +122,7 @@ const NavMenu = (props) => {
     if (Math.abs(scrollShift) < SCROLL_THRESHOLD) return;
 
     scrollTopRef.current = currentScrollTop;
+    setScrollTick((tick) => tick + 1);
 
     const isNearBottom = scrollHeight - (currentScrollTop + clientHeight) < 100;
 
@@ -143,9 +149,36 @@ const NavMenu = (props) => {
     };
   }, [onScroll]);
 
+  // --nav-offset must describe the space the bar actually occupies at the top of
+  // the viewport, because the section header (top: var(--nav-offset)) and the
+  // filter (top: calc(53px + var(--nav-offset))) both stack against it.
+  //
+  // isFixed alone is not that answer. `position: sticky` only pins an element
+  // inside its own scroll range, so far down a long list the bar is scrolled
+  // thousands of pixels above the viewport and cannot reach top: 0 no matter
+  // what isFixed says. Publishing 48px there reserved room for a bar that is not
+  // on screen, and the header and filter came to rest 48px too low -- the gap
+  // that showed up after scrolling to the bottom of the list and back up.
+  //
+  // Measuring the rendered element collapses both conditions into one: the
+  // offset is whatever height the bar really covers, and it is 0 whenever the
+  // bar is unpinned or out of view.
   useEffect(() => {
-    if (isFixed) {
-      document.documentElement.style.setProperty("--nav-offset", "48px");
+    const element = headerRef.current;
+
+    if (!element) {
+      document.documentElement.style.removeProperty("--nav-offset");
+      return undefined;
+    }
+
+    const { top, height } = element.getBoundingClientRect();
+    const visibleHeight = Math.round(Math.min(height, Math.max(0, top + height)));
+
+    if (isFixed && top <= 0.5 && visibleHeight > 0) {
+      document.documentElement.style.setProperty(
+        "--nav-offset",
+        `${visibleHeight}px`,
+      );
     } else {
       document.documentElement.style.removeProperty("--nav-offset");
     }
@@ -153,7 +186,7 @@ const NavMenu = (props) => {
     return () => {
       document.documentElement.style.removeProperty("--nav-offset");
     };
-  }, [isFixed]);
+  }, [isFixed, scrollTick]);
 
   useEffect(() => {
     setIsFixed(false);
@@ -215,6 +248,7 @@ const NavMenu = (props) => {
 
   return (
     <header
+      ref={headerRef}
       className={classNames(styles.header, {
         [styles.isFixed]: isFixed,
       })}

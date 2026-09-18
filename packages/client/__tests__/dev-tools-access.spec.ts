@@ -40,7 +40,6 @@ import {
   TypeSettings,
   selfActivationStatusHandler,
   selfByTypeHandler,
-  usersByType,
   type UserType,
 } from "@docspace/shared/__mocks__/handlers";
 
@@ -101,19 +100,12 @@ const DOCS_CONNECT_TILE = '[data-testid="dashboard-devtool-docs-connect"]';
 const CREATE_INSTANCE_BUTTON =
   '[data-testid="docs_connect_create_tenant_button"]';
 
-// packages/client/src/store/DashboardTourStore.ts — spent up front so the
-// welcome does not sit over the page.
-const welcomeKey = (userId: string) => `dashboard_welcome_seen_${userId}`;
-
 const openDashboard = async (
   page: Page,
   baseUrl: string,
   userType: UserType,
 ) => {
   await page.clock.setSystemTime(FIXED_NOW);
-  await page.addInitScript((key: string) => {
-    window.localStorage.setItem(key, "true");
-  }, welcomeKey(usersByType[userType].id));
 
   await page.goto(`${baseUrl}${DASHBOARD_URL}`);
   await expect(page.locator('[data-tour-id="dashboard-create"]')).toBeVisible();

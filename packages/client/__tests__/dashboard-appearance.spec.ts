@@ -45,7 +45,6 @@ import {
   settingsHandler,
   tariffHandler,
   TypeSettings,
-  usersByType,
   type UserType,
 } from "@docspace/shared/__mocks__/handlers";
 
@@ -97,10 +96,6 @@ const FIXED_NOW = new Date("2026-02-10T12:00:00.000Z");
 // The portal's own timezone would otherwise render the renewal date differently
 // depending on where the run happens.
 test.use({ timezoneId: "UTC" });
-
-// packages/client/src/store/DashboardTourStore.ts — per-user, keyed on the id
-// of whoever is signed in.
-const welcomeKey = (userId: string) => `dashboard_welcome_seen_${userId}`;
 
 /** The page's own anchors — see Dashboard/DashboardTour/tourSteps.ts. */
 const PROFILE_CARD = '[data-tour-id="dashboard-profile"]';
@@ -365,25 +360,19 @@ const AI_STATES: AiState[] = [
 ];
 
 /**
- * Lands on the Overview as a user who has been there before.
+ * Lands on the Overview, which is all it takes: nothing is offered on arrival.
  *
- * The welcome modal is offered once per user and would otherwise cover the page
- * in every one of these cases; it is spent up front by writing the flag the
- * store reads, under the id of whoever this case signs in as (a guessed id
- * writes a flag nobody reads, which shows up as a modal that will not go away).
- * The modal itself is covered by dashboard-tour.spec.ts.
+ * The welcome modal only ever opens from the header's help button, so no case
+ * here has to get it out of the way first. The modal itself is covered by
+ * dashboard-tour.spec.ts.
  */
 const openDashboard = async (
   page: Page,
   baseUrl: string,
-  userId: string,
   viewport: Viewport,
 ) => {
   await page.setViewportSize(viewport.size);
   await page.clock.setSystemTime(FIXED_NOW);
-  await page.addInitScript((key: string) => {
-    window.localStorage.setItem(key, "true");
-  }, welcomeKey(userId));
 
   await page.goto(`${baseUrl}${DASHBOARD_URL}`);
 
@@ -521,7 +510,7 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       aiConfigHandler(TEST_PORT, !ai.enabled),
     );
 
-    await openDashboard(page, baseUrl, usersByType[role.userType].id, viewport);
+    await openDashboard(page, baseUrl, viewport);
 
     // The details on the card are the reader's own, so every audience gets it -
     // only the pencil that renames the workspace is admin/owner-only, since

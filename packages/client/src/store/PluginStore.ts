@@ -392,62 +392,28 @@ class PluginStore {
   }
 
   updatePluginStatus = (name: string) => {
-    const plugin = this.plugins.find((p) => p.name === name);
-
-    const newStatus = plugin?.getStatus?.();
-
     const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
-    if (pluginIdx !== -1) {
-      if (this.plugins[pluginIdx].status === newStatus) return;
+    if (pluginIdx === -1) return;
 
-      this.plugins[pluginIdx].status = newStatus || PluginStatus.active;
+    const plugin = this.plugins[pluginIdx];
 
-      if (
-        newStatus === PluginStatus.active &&
-        this.plugins[pluginIdx].enabled
-      ) {
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.ContextMenu)) {
-          this.updateContextMenuItems(name);
-        }
+    // A plugin that reports no status of its own is always shown.
+    const newStatus = plugin.getStatus?.() || PluginStatus.active;
 
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.InfoPanel)) {
-          this.updateInfoPanelItems(name);
-        }
+    plugin.status = newStatus;
 
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.MainButton)) {
-          this.updateMainButtonItems(name);
-        }
+    if (!plugin.enabled) return;
 
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.ProfileMenu)) {
-          this.updateProfileMenuItems(name);
-        }
+    if (newStatus === PluginStatus.active) {
+      this.installPluginCss(plugin);
+      this.registerPluginItems(plugin);
 
-        if (
-          this.plugins[pluginIdx].scopes.includes(PluginScopes.EventListener)
-        ) {
-          this.updateEventListenerItems(name);
-        }
-
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.File)) {
-          this.updateFileItems(name);
-        }
-
-        if (
-          this.plugins[pluginIdx].scopes.includes(PluginScopes.ArticleButton)
-        ) {
-          this.updateArticleButtonItems(name);
-        }
-
-        if (
-          this.plugins[pluginIdx].scopes.includes(
-            PluginScopes.ArticleNavigation,
-          )
-        ) {
-          this.updateArticleNavigationItems(name);
-        }
-      }
+      return;
     }
+
+    this.uninstallPluginCss(plugin);
+    this.unregisterPluginItems(plugin);
   };
 
   setPluginFrame = (frame: HTMLIFrameElement) => {
@@ -713,6 +679,80 @@ class PluginStore {
     }
   };
 
+  /** Publishes every item the plugin's scopes provide to the portal. */
+  private registerPluginItems = (plugin: TPlugin) => {
+    const { name, scopes } = plugin;
+
+    if (scopes.includes(PluginScopes.ContextMenu)) {
+      this.updateContextMenuItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.InfoPanel)) {
+      this.updateInfoPanelItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.MainButton)) {
+      this.updateMainButtonItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.ProfileMenu)) {
+      this.updateProfileMenuItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.EventListener)) {
+      this.updateEventListenerItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.File)) {
+      this.updateFileItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleButton)) {
+      this.updateArticleButtonItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleNavigation)) {
+      this.updateArticleNavigationItems(name);
+    }
+  };
+
+  /** Takes back everything `registerPluginItems` published. */
+  private unregisterPluginItems = (plugin: TPlugin) => {
+    const { scopes } = plugin;
+
+    if (scopes.includes(PluginScopes.ContextMenu)) {
+      this.deactivateContextMenuItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.InfoPanel)) {
+      this.deactivateInfoPanelItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.ProfileMenu)) {
+      this.deactivateProfileMenuItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.MainButton)) {
+      this.deactivateMainButtonItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.EventListener)) {
+      this.deactivateEventListenerItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.File)) {
+      this.deactivateFileItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleButton)) {
+      this.deactivateArticleButtonItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleNavigation)) {
+      this.deactivateArticleNavigationItems(plugin);
+    }
+  };
+
   installPlugin = async (plugin: TPlugin, addToList = true) => {
     if (addToList) {
       const idx = this.plugins.findIndex((p) => p.name === plugin.name);
@@ -746,40 +786,10 @@ class PluginStore {
 
     this.installPluginCss(plugin);
 
-    if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
-      this.updateContextMenuItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.InfoPanel)) {
-      this.updateInfoPanelItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.MainButton)) {
-      this.updateMainButtonItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ProfileMenu)) {
-      this.updateProfileMenuItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.EventListener)) {
-      this.updateEventListenerItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.File)) {
-      this.updateFileItems(name);
-    }
+    this.registerPluginItems(plugin);
 
     if (plugin.scopes.includes(PluginScopes.PostMessage)) {
       this.initPostMessagePlugin(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
-      this.updateArticleButtonItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ArticleNavigation)) {
-      this.updateArticleNavigationItems(name);
     }
   };
 
@@ -854,37 +864,7 @@ class PluginStore {
 
     this.uninstallPluginCss(plugin);
 
-    if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
-      this.deactivateContextMenuItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.InfoPanel)) {
-      this.deactivateInfoPanelItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ProfileMenu)) {
-      this.deactivateProfileMenuItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.MainButton)) {
-      this.deactivateMainButtonItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.EventListener)) {
-      this.deactivateEventListenerItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.File)) {
-      this.deactivateFileItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
-      this.deactivateArticleButtonItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ArticleNavigation)) {
-      this.deactivateArticleNavigationItems(plugin);
-    }
+    this.unregisterPluginItems(plugin);
   };
 
   getUserRole = () => {
@@ -1922,6 +1902,8 @@ class PluginStore {
             entry.settings = settingsStr;
           });
           entry.setAdminPluginSettingsValue?.(settingsStr);
+
+          this.updatePluginStatus(pluginName);
         },
         setSaveButton: (props: ButtonGroup) => {
           this.setReactSettingsSaveButtonState(pluginName, props);

@@ -575,7 +575,7 @@ class FilesStore {
 
     SocketHelper?.on(SocketEvents.ModifyRoom, (option) => {
       // the ui-kit TOptSocket.cmd union does not include
-      // "create-form" (ui-kit is a separate submodule); the erased cast
+      // "create-form" (ui-kit is a separate repository); the erased cast
       // keeps the original switch.
       switch (option.cmd as string) {
         case "create-form":

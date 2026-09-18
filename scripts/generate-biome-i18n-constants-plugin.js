@@ -18,8 +18,6 @@ const CONSTANTS_DIR = path.join(
   "locales",
   ".constants",
 );
-// The ui-kit copy exists because the submodule's standalone CI checks out
-// only its own repo and cannot reference ../../packages/shared.
 const OUT_FILES = [
   path.join(
     __dirname,

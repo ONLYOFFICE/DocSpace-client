@@ -191,7 +191,7 @@ submodules to initialize.
 points live under `publishConfig`), then run the updater here:
 
 ```bash
-pnpm run update-ui-kit          # newest pack in ../docspace-ui-kit-react, or pass a path
+pnpm run update-ui-kit          # newest pack in ../../docspace-ui-kit-react, or pass a path
 git add onlyoffice-apps-ui-kit.tgz onlyoffice-ai-chat-*.tgz pnpm-lock.yaml packages/*/package.json
 ```
 
@@ -200,6 +200,28 @@ never changes, so pnpm keeps the cached copy and the update silently does not
 happen. The updater rewrites the recorded integrity, drops the extracted copy,
 reinstalls, verifies every installed copy against the tarball, and keeps the
 vendored `@onlyoffice/ai-chat` tarball in step with what ui-kit requires.
+
+**Working on the kit itself:** waiting for a build, a pack and an install on
+every edit is the cost of consuming a prebuilt package. `DOCSPACE_UI_KIT_SRC`
+removes it for local work — the dev servers of all five apps then serve the kit
+from a checkout, with HMR:
+
+```bash
+pnpm run start:ui-kit-src                   # same app set as `pnpm start`
+pnpm run start:ui-kit-src start:lite        # any other start script
+DOCSPACE_UI_KIT_SRC=../elsewhere pnpm run start:ui-kit-src
+```
+
+The path is resolved against the repo root and defaults to
+`../../docspace-ui-kit-react`, i.e. a sibling of the `DocSpace` directory. The
+checkout resolves its own dependencies, so **run `pnpm install` in it first** —
+a bare clone is not enough.
+
+It is a dev-server switch only: `vite build` and `next build` both refuse to
+run while the variable is set, because a build must come from the installed
+package. Run the apps once without it before committing a new tarball — source
+mode does not exercise the stylesheet order, `"use client"`, the exports
+wildcard or the generated types. Details in `.claude/rules/pnpm.md`.
 
 **Documentation:** See the [ui-kit README](https://github.com/ONLYOFFICE/docspace-ui-kit-react#readme) for component documentation and usage examples.
 

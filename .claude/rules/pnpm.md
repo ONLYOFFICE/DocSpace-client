@@ -131,6 +131,13 @@ against the repo root, and nothing changes in the ui-kit repository; the
 checkout serves its own `assets/`, `styles/` and `locales/`, exactly as the
 tarball does.
 
+**The checkout needs its own `pnpm install`.** It resolves its own
+dependencies, and a bare clone has none -- which is the state anyone is in the
+first time they press the button. `scripts/start-ui-kit-src.mjs` checks for
+`node_modules` before handing over to Nx: without that check the four Next apps
+come up, the client alone dies inside `vite.config.ts`, and it reads as "the
+portal will not open" rather than "the kit is not installed".
+
 The client's half lives in `packages/client/config/` (`ui-kit-dev.ts`, the
 boundary plugin, and small changes in `resolve.ts`, `css.ts`, `server.ts` and
 `vite.config.ts`); `optimizeDeps` drops the ui-kit globs in this mode, because

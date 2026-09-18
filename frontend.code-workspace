@@ -130,7 +130,7 @@
           {
             "label": "Start (ui-kit src)",
             "task": "Frontend | start (ui-kit source)",
-            "tooltip": "🛠️ Start the frontend with @onlyoffice/apps-ui-kit served from the ../../docspace-ui-kit-react checkout (HMR on ui-kit edits)"
+            "tooltip": "🛠️ Start the frontend with @onlyoffice/apps-ui-kit served from the ../../docspace-ui-kit-react checkout, which needs its own pnpm install (HMR on ui-kit edits)"
           },
           {
             "label": "Start:lite",

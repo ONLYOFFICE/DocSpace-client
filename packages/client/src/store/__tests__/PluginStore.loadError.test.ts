@@ -66,6 +66,7 @@ import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
+import type { TPlugin } from "../../helpers/plugins/types";
 import type { TTranslation } from "@docspace/shared/types";
 
 import api from "@docspace/shared/api";
@@ -185,6 +186,50 @@ describe("PluginStore module plugin load failure", () => {
     expect(store.plugins[0].loadError).toContain("HTTP 404");
   });
 
+  it("keeps a plugin whose initialization fails in the list as a working one", async () => {
+    const store = createStore();
+    const exported = {
+      onLoadCallback: async () => {
+        throw new Error("settings request timed out");
+      },
+    };
+
+    await expect(
+      store.initLoadedModulePlugin(apiPlugin(), exported),
+    ).rejects.toThrow("settings request timed out");
+
+    expect(store.plugins).toHaveLength(1);
+    expect(store.plugins[0]).toMatchObject({
+      name: PLUGIN,
+      nameLocale: PLUGIN,
+      enabled: true,
+    });
+    expect(store.plugins[0].loadError).toBeUndefined();
+  });
+
+  it("takes back the items of the version it replaces", async () => {
+    vi.stubGlobal("fetch", fetchNotFound());
+
+    const store = createStore();
+    const itemKey = "sample-item";
+
+    await store.initLoadedModulePlugin(
+      apiPlugin({ scopes: "ContextMenu" }),
+      {
+        getContextMenuItems: () =>
+          new Map([[itemKey, { key: itemKey, label: "Sample" }]]),
+      } as Partial<TPlugin>,
+    );
+
+    expect(store.contextMenuItems.has(itemKey)).toBe(true);
+
+    await store.initModulePlugin(apiPlugin({ version: "1.0.1" }));
+
+    expect(store.plugins).toHaveLength(1);
+    expect(store.plugins[0].loadError).toContain("HTTP 404");
+    expect(store.contextMenuItems.has(itemKey)).toBe(false);
+  });
+
   it("lets the admin delete a broken plugin", async () => {
     vi.stubGlobal("fetch", fetchNotFound());
 
@@ -198,27 +243,141 @@ describe("PluginStore module plugin load failure", () => {
   });
 });
 
+type FakeScript = {
+  onload?: () => void;
+  onerror?: () => void;
+  setAttribute: () => void;
+};
+
+type FakeFrame = {
+  script: FakeScript;
+  errorListeners: Array<(event: ErrorEvent) => void>;
+  frame: HTMLIFrameElement;
+};
+
+const legacyPlugin = () => apiPlugin({ runtime: undefined });
+
+const fakeFrame = (
+  plugins: Record<string, unknown>,
+  onAppend: (frame: FakeFrame) => void,
+): FakeFrame => {
+  const script: FakeScript = { setAttribute: () => {} };
+  const errorListeners: Array<(event: ErrorEvent) => void> = [];
+
+  const fake: FakeFrame = {
+    script,
+    errorListeners,
+    frame: {
+      contentWindow: {
+        Plugins: plugins,
+        addEventListener: (_: string, listener: (event: ErrorEvent) => void) =>
+          errorListeners.push(listener),
+        removeEventListener: () => {},
+      },
+      contentDocument: {
+        createElement: () => script,
+        body: { appendChild: () => onAppend(fake) },
+      },
+    } as unknown as HTMLIFrameElement,
+  };
+
+  return fake;
+};
+
+const withFrame = (fake: FakeFrame) => {
+  const store = createStore();
+
+  runInAction(() => {
+    store.pluginFrame = fake.frame;
+  });
+
+  fake.frame = store.pluginFrame as HTMLIFrameElement;
+
+  return store;
+};
+
 describe("PluginStore legacy plugin load failure", () => {
   it("keeps a plugin whose script fails to load in the list", async () => {
-    const store = createStore();
+    const store = withFrame(fakeFrame({}, ({ script }) => script.onerror?.()));
 
-    const script: { onerror?: () => void; setAttribute: () => void } = {
-      setAttribute: () => {},
-    };
-
-    runInAction(() => {
-      store.pluginFrame = {
-        contentWindow: { Plugins: {} },
-        contentDocument: {
-          createElement: () => script,
-          body: { appendChild: () => script.onerror?.() },
-        },
-      } as unknown as HTMLIFrameElement;
-    });
-
-    await store.initPlugin(apiPlugin({ runtime: undefined }));
+    await store.initPlugin(legacyPlugin());
 
     expect(store.plugins).toHaveLength(1);
     expect(store.plugins[0].loadError).toContain("Failed to load script");
+  });
+
+  it("marks a script that ran but never registered itself as broken", async () => {
+    const store = withFrame(fakeFrame({}, ({ script }) => script.onload?.()));
+
+    await store.initPlugin(legacyPlugin());
+
+    expect(store.plugins[0].loadError).toContain(
+      `window.Plugins["${PLUGIN}"]`,
+    );
+    expect(store.plugins[0].enabled).toBe(true);
+  });
+
+  it("reports the exception the script threw before registering", async () => {
+    const store = withFrame(
+      fakeFrame({}, ({ script, errorListeners }) => {
+        errorListeners.forEach((listener) =>
+          listener({
+            filename: legacyPlugin().url,
+            error: new Error("setAdminPluginSettings exploded"),
+            message: "Uncaught Error: setAdminPluginSettings exploded",
+          } as ErrorEvent),
+        );
+        script.onload?.();
+      }),
+    );
+
+    await store.initPlugin(legacyPlugin());
+
+    expect(store.plugins[0].loadError).toBe("setAdminPluginSettings exploded");
+  });
+
+  it("ignores errors thrown by other scripts in the shared frame", async () => {
+    const store = withFrame(
+      fakeFrame({}, ({ script, errorListeners }) => {
+        errorListeners.forEach((listener) =>
+          listener({
+            filename: "https://portal.test/plugins/other/plugin.js",
+            error: new Error("someone else"),
+            message: "Uncaught Error: someone else",
+          } as ErrorEvent),
+        );
+        script.onload?.();
+      }),
+    );
+
+    await store.initPlugin(legacyPlugin());
+
+    expect(store.plugins[0].loadError).toContain("did not register");
+  });
+
+  it("does not trust a registration left behind by the previous version", async () => {
+    const stale = { status: "active", getContextMenuItems: () => new Map() };
+    const store = withFrame(
+      fakeFrame({ [PLUGIN]: stale }, ({ script }) => script.onload?.()),
+    );
+
+    await store.initPlugin(legacyPlugin());
+
+    expect(store.plugins[0].loadError).toContain("did not register");
+  });
+
+  it("loads a script that registers itself as before", async () => {
+    const registered = { status: "active", getContextMenuItems: () => new Map() };
+    const store = withFrame(
+      fakeFrame({}, ({ script, frame }) => {
+        (frame.contentWindow as unknown as { Plugins: Record<string, unknown> })
+          .Plugins[PLUGIN] = registered;
+        script.onload?.();
+      }),
+    );
+
+    await store.initPlugin(legacyPlugin());
+
+    expect(store.plugins[0].loadError).toBeUndefined();
   });
 });

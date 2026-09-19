@@ -12,6 +12,7 @@
   "PluginDeletedSuccessfully": "Plugin șters cu succes",
   "PluginIsNotCompatible": "Versiunea SDK a pluginului nu se potrivește cu versiunea {{organizationName}} {{productName}}. Vă rugăm să actualizați la o versiune compatibilă.",
   "PluginLoadedSuccessfully": "Plugin-ul a fost încărcat cu succes.",
+  "PluginLoadFailed": "Încărcarea a eșuat",
   "PluginSamples": "Exemple de plugin-uri",
   "PluginSDK": "Kit de dezvoltare a plugin-urilor",
   "PluginSDKDescription": "Utilizați kit-ul de dezvoltare a plugin-urilor pentru a adăuga funcționalități noi, a conecta servicii terțe sau a îmbunătăți experiența existentă. Consultați exemplele de pluginuri de mai jos, al căror cod sursă este disponibil pe GitHub. Accesați pagina <1>Pluginuri</1> pentru a le activa în spațiul dumneavoastră de lucru.",

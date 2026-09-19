@@ -12,6 +12,7 @@
   "PluginDeletedSuccessfully": "Vtičnik je bil uspešno izbrisan",
   "PluginIsNotCompatible": "Različica SDK-ja za vtičnike ne ustreza različici {{organizationName}} {{productName}}. Posodobite na združljivo različico.",
   "PluginLoadedSuccessfully": "Vtičnik je bil uspešno naložen.",
+  "PluginLoadFailed": "Nalaganje ni uspelo",
   "PluginSamples": "Primeri dodatkov",
   "PluginSDK": "Vtičnik SDK",
   "PluginSDKDescription": "Uporabite vtičnik SDK za dodajanje novih funkcionalnosti, povezovanje storitev tretjih oseb ali izboljšanje obstoječe izkušnje. Spodaj si oglejte vzorčne vtičnike, katerih izvorna koda je na voljo na GitHubu. Pojdite na stran <1>Vtičniki</1> in jih omogočite za svoj delovni prostor.",

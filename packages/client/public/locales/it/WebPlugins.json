@@ -12,6 +12,7 @@
   "PluginDeletedSuccessfully": "Plugin eliminato con successo",
   "PluginIsNotCompatible": "La versione dell’SDK del plugin non corrisponde alla versione di {{organizationName}} {{productName}}. Aggiorna a una versione compatibile.",
   "PluginLoadedSuccessfully": "Plugin caricato con successo",
+  "PluginLoadFailed": "Caricamento non riuscito",
   "PluginSamples": "Esempi di plugin",
   "PluginSDK": "SDK di Plugin",
   "PluginSDKDescription": "Utilizza l'SDK del plugin per aggiungere nuove funzionalità, collegare servizi di terze parti o migliorare l'esperienza esistente. Sfoglia i plugin di esempio qui sotto, con il codice sorgente disponibile su GitHub. Vai alla pagina <1>Plugin</1> per abilitarli nel tuo spazio di lavoro.",

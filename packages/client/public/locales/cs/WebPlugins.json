@@ -12,6 +12,7 @@
   "PluginDeletedSuccessfully": "Zásuvný modul byl úspěšně odstraněn",
   "PluginIsNotCompatible": "Verze plugin SDK neodpovídá verzi {{organizationName}} {{productName}}. Prosím, aktualizujte na kompatibilní verzi.",
   "PluginLoadedSuccessfully": "Plugin načten úspěšně",
+  "PluginLoadFailed": "Načtení se nezdařilo",
   "PluginSamples": "Ukázky pluginů",
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Použijte Plugin SDK k přidání nových funkcí, propojení služeb třetích stran nebo vylepšení existujícího prostředí. Prohlédněte si ukázkové pluginy níže, jejichž zdrojový kód je dostupný na GitHubu. Přejděte na stránku <1>Zásuvné moduly</1> a povolte je pro svůj pracovní prostor.",

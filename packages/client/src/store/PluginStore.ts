@@ -593,15 +593,53 @@ class PluginStore {
     if (!plugin.enabled && !fromList) return;
 
     return new Promise((resolve, reject) => {
-      const onLoad = async () => {
-        try {
-          const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
+      const iWindow = this.pluginFrame?.contentWindow as
+        IframeWindow | undefined;
+      const scriptUrl = new URL(plugin.url, window.location.href).href;
 
+      let scriptError: unknown;
+
+      const onScriptError = (event: ErrorEvent) => {
+        if (event.filename && event.filename !== scriptUrl) return;
+
+        scriptError =
+          event.error instanceof Error ? event.error : new Error(event.message);
+      };
+
+      if (iWindow?.Plugins) delete iWindow.Plugins[plugin.pluginName];
+
+      iWindow?.addEventListener?.("error", onScriptError);
+
+      const stopListening = () =>
+        iWindow?.removeEventListener?.("error", onScriptError);
+
+      const onLoad = async () => {
+        stopListening();
+
+        const registered = iWindow?.Plugins?.[plugin.pluginName];
+
+        if (!registered) {
+          const error =
+            scriptError ??
+            new Error(
+              `Plugin did not register window.Plugins["${plugin.pluginName}"]`,
+            );
+
+          console.error(
+            `[Plugin: ${plugin.name}] Failed to load plugin:`,
+            error,
+          );
+
+          resolve(this.installBrokenPlugin(plugin, error));
+          return;
+        }
+
+        try {
           const newPlugin = cloneDeep({
             ...plugin,
             nameLocaleMap: plugin.nameLocale,
             descriptionLocaleMap: plugin.descriptionLocale,
-            ...iWindow?.Plugins?.[plugin.pluginName],
+            ...registered,
           });
 
           newPlugin.scopes =
@@ -632,6 +670,8 @@ class PluginStore {
       };
 
       const onError = () => {
+        stopListening();
+
         const error = new Error(`Failed to load script ${plugin.url}`);
 
         console.error(`[Plugin: ${plugin.name}] Failed to load plugin:`, error);
@@ -791,6 +831,17 @@ class PluginStore {
       compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
       loadError: error instanceof Error ? error.message : String(error),
     } as unknown as TPlugin;
+
+    const previous = this.plugins.find((p) => p.name === plugin.name);
+
+    if (previous) {
+      try {
+        this.uninstallPluginCss(previous);
+        this.unregisterPluginItems(previous);
+      } catch (e) {
+        console.error(`[Plugin: ${plugin.name}] Failed to unregister:`, e);
+      }
+    }
 
     this.initLocalePlugin(brokenPlugin);
     this.addToPluginList(brokenPlugin);
@@ -1945,50 +1996,56 @@ class PluginStore {
     };
   };
 
-  initModulePlugin = async (
+  private loadModulePlugin = async (
     plugin: TAPIPlugin,
-    callback?: (plugin: TPlugin) => void,
-  ): Promise<void> => {
+  ): Promise<Partial<TPlugin>> => {
+    const res = await fetch(plugin.url);
+    if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${plugin.url}`);
+
+    const rawCode = await res.text();
+
+    const { rewritePluginImports } =
+      await import("../helpers/plugins/react/shim");
+
+    const code = rewritePluginImports(rawCode);
+    const blob = new Blob([code], { type: "application/javascript" });
+    const blobUrl = URL.createObjectURL(blob);
+
+    let mod: { default?: Partial<TPlugin> };
     try {
-      const res = await fetch(plugin.url);
-      if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${plugin.url}`);
+      mod = await import(/* @vite-ignore */ blobUrl);
+    } finally {
+      URL.revokeObjectURL(blobUrl);
+    }
 
-      const rawCode = await res.text();
+    const exported = mod?.default;
+    if (!exported) throw new Error("Module plugin has no default export");
 
-      const { rewritePluginImports } = await import(
-        "../helpers/plugins/react/shim"
-      );
+    return exported;
+  };
 
-      const code = rewritePluginImports(rawCode);
-      const blob = new Blob([code], { type: "application/javascript" });
-      const blobUrl = URL.createObjectURL(blob);
+  initLoadedModulePlugin = async (
+    plugin: TAPIPlugin,
+    exported: Partial<TPlugin>,
+    callback?: (plugin: TPlugin) => void,
+  ): Promise<TPlugin> => {
+    const scopes =
+      typeof plugin.scopes === "string"
+        ? (plugin.scopes.split(",") as PluginScopes[])
+        : plugin.scopes;
 
-      let mod: { default?: Partial<TPlugin> };
-      try {
-        mod = await import(/* @vite-ignore */ blobUrl);
-        URL.revokeObjectURL(blobUrl);
-      } catch (e) {
-        URL.revokeObjectURL(blobUrl);
-        throw e;
-      }
+    const newPlugin = Object.assign(exported as TPlugin, {
+      ...plugin,
+      nameLocaleMap: plugin.nameLocale,
+      descriptionLocaleMap: plugin.descriptionLocale,
+      nameLocale: plugin.name,
+      descriptionLocale: plugin.description,
+      scopes,
+      iconUrl: getPluginUrl(plugin.url, ""),
+      compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
+    });
 
-      const exported = mod?.default;
-      if (!exported) throw new Error("Module plugin has no default export");
-
-      const scopes =
-        typeof plugin.scopes === "string"
-          ? (plugin.scopes.split(",") as PluginScopes[])
-          : plugin.scopes;
-
-      const newPlugin = Object.assign(exported as TPlugin, {
-        ...plugin,
-        nameLocaleMap: plugin.nameLocale,
-        descriptionLocaleMap: plugin.descriptionLocale,
-        scopes,
-        iconUrl: getPluginUrl(plugin.url, ""),
-        compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
-      });
-
+    try {
       this.initLocalePlugin(newPlugin);
       await this.installPlugin(newPlugin);
 
@@ -1996,8 +2053,30 @@ class PluginStore {
         newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
         this.updatePluginStatus(newPlugin.name);
       }
+    } catch (e) {
+      console.error(
+        `[Plugin: ${plugin.name}] Plugin initialization failed:`,
+        e,
+      );
 
-      callback?.(newPlugin);
+      this.addToPluginList(newPlugin);
+
+      throw e;
+    }
+
+    callback?.(newPlugin);
+
+    return newPlugin;
+  };
+
+  initModulePlugin = async (
+    plugin: TAPIPlugin,
+    callback?: (plugin: TPlugin) => void,
+  ): Promise<void> => {
+    let exported: Partial<TPlugin>;
+
+    try {
+      exported = await this.loadModulePlugin(plugin);
     } catch (e) {
       console.error(
         `[Plugin: ${plugin.name}] Failed to load module plugin:`,
@@ -2005,7 +2084,10 @@ class PluginStore {
       );
 
       this.installBrokenPlugin(plugin, e);
+      return;
     }
+
+    await this.initLoadedModulePlugin(plugin, exported, callback);
   };
 
   get articleNavigationItemsList() {

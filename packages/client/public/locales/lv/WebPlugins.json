@@ -12,6 +12,7 @@
   "PluginDeletedSuccessfully": "Spraudnis veiksmīgi dzēsts",
   "PluginIsNotCompatible": "Spraudņa SDK versija nesakrīt ar {{organizationName}} {{productName}} versiju. Lūdzu, atjauniniet uz saderīgu versiju.",
   "PluginLoadedSuccessfully": "Papildinājums ielādēts veiksmīgi",
+  "PluginLoadFailed": "Neizdevās ielādēt",
   "PluginSamples": "Spraudņu paraugi",
   "PluginSDK": "Pievienotājprogrammas SDK",
   "PluginSDKDescription": "Izmantojiet spraudņu SDK, lai pievienotu jaunas funkcijas, savienotu trešo pušu pakalpojumus vai uzlabotu esošo pieredzi. Zemāk apskatiet spraudņu paraugus, kuru pirmkods ir pieejams GitHub. Dodieties uz lapu <1>Spraudņi</1>, lai iespējotu tos savā darbvietā.",

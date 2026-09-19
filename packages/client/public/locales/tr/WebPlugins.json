@@ -12,6 +12,7 @@
   "PluginDeletedSuccessfully": "Eklenti başarıyla silindi",
   "PluginIsNotCompatible": "Eklenti SDK sürümü, {{organizationName}} {{productName}} sürümüyle eşleşmiyor. Lütfen uyumlu bir sürüme güncelleyin.",
   "PluginLoadedSuccessfully": "Eklenti başarıyla yüklendi",
+  "PluginLoadFailed": "Yüklenemedi",
   "PluginSamples": "Eklenti örnekleri",
   "PluginSDK": "Eklenti SDK'sı",
   "PluginSDKDescription": "Yeni işlevler eklemek, üçüncü taraf hizmetleri bağlamak veya mevcut deneyimi geliştirmek için Eklenti SDK'sını kullanın. Kaynak kodu GitHub'da bulunan örnek eklentilere aşağıdan göz atın. Bunları çalışma alanınız için etkinleştirmek üzere <1>Eklentiler</1> sayfasına gidin.",

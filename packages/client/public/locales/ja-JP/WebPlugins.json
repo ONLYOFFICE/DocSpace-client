@@ -12,6 +12,7 @@
   "PluginDeletedSuccessfully": "プラグインを正常に削除しました。",
   "PluginIsNotCompatible": "プラグインSDKのバージョンが{{organizationName}} {{productName}}のバージョンと一致しません。互換性のあるバージョンに更新してください。",
   "PluginLoadedSuccessfully": "プラグインが正常に読み込まれました",
+  "PluginLoadFailed": "読み込みに失敗しました",
   "PluginSamples": "プラグインのサンプル",
   "PluginSDK": "プラグインSDK",
   "PluginSDKDescription": "プラグインSDKを使用して、新しい機能を追加したり、サードパーティのサービスを連携したり、既存の操作性を向上させることができます。以下のサンプルプラグインをご覧ください。ソースコードはGitHubで公開されています。ワークスペースで有効にするには、<1>プラグイン</1>ページに移動してください。",

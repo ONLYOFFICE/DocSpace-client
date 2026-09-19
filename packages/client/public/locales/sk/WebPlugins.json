@@ -12,6 +12,7 @@
   "PluginDeletedSuccessfully": "Doplnok bol úspešne odstránený",
   "PluginIsNotCompatible": "Verzia plugin SDK nezodpovedá verzii {{organizationName}} {{productName}}. Prosím, aktualizujte na kompatibilnú verziu.",
   "PluginLoadedSuccessfully": "Plugin bol úspešne načítaný.",
+  "PluginLoadFailed": "Načítanie zlyhalo",
   "PluginSamples": "Ukážky pluginov",
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Použite Plugin SDK na pridanie novej funkčnosti, pripojenie služieb tretích strán alebo zlepšenie existujúceho prostredia. Prezrite si ukážkové pluginy nižšie, ktorých zdrojový kód je dostupný na GitHube. Prejdite na stránku <1>Pluginy</1> a povoľte ich pre svoj pracovný priestor.",

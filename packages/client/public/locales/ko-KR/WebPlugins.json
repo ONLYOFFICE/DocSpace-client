@@ -12,6 +12,7 @@
   "PluginDeletedSuccessfully": "플러그인이 성공적으로 삭제되었습니다",
   "PluginIsNotCompatible": "플러그인 SDK 버전이 {{organizationName}} {{productName}} 버전과 일치하지 않습니다. 호환 가능한 버전으로 업데이트해주세요.",
   "PluginLoadedSuccessfully": "플러그인이 성공적으로 로드되었습니다.",
+  "PluginLoadFailed": "로드 실패",
   "PluginSamples": "플러그인 샘플",
   "PluginSDK": "플러그인 SDK",
   "PluginSDKDescription": "플러그인 SDK를 사용하여 새로운 기능을 추가하고, 타사 서비스를 연결하거나 기존 사용 환경을 개선할 수 있습니다. 아래의 샘플 플러그인을 살펴보세요. 소스 코드는 GitHub에서 확인할 수 있습니다. 워크스페이스에서 사용하려면 <1>플러그인</1> 페이지로 이동하세요.",

@@ -12,6 +12,7 @@
   "PluginDeletedSuccessfully": "Wtyczka została pomyślnie usunięta",
   "PluginIsNotCompatible": "Wersja SDK wtyczki nie pasuje do wersji {{organizationName}} {{productName}}. Proszę zaktualizować do kompatybilnej wersji.",
   "PluginLoadedSuccessfully": "Wtyczka załadowana pomyślnie",
+  "PluginLoadFailed": "Nie udało się załadować",
   "PluginSamples": "Próbki wtyczek",
   "PluginSDK": "Zestaw SDK do tworzenia wtyczek",
   "PluginSDKDescription": "Użyj zestawu SDK do tworzenia wtyczek, aby dodać nowe funkcje, połączyć usługi zewnętrzne lub ulepszyć istniejące działanie. Przejrzyj przykładowe wtyczki poniżej, ich kod źródłowy jest dostępny na GitHubie. Przejdź na stronę <1>Wtyczki</1>, aby włączyć je w swoim obszarze roboczym.",

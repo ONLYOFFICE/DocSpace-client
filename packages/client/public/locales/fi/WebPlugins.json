@@ -12,6 +12,7 @@
   "PluginDeletedSuccessfully": "Lisäosa poistettu onnistuneesti",
   "PluginIsNotCompatible": "Lisäosan SDK-versio ei täsmää {{organizationName}} {{productName}}-version kanssa. Päivitä yhteensopivaan versioon.",
   "PluginLoadedSuccessfully": "Lisäosa ladattu onnistuneesti",
+  "PluginLoadFailed": "Lataus epäonnistui",
   "PluginSamples": "Laajennusmallit",
   "PluginSDK": "SDK-laajennus",
   "PluginSDKDescription": "Käytä SDK-laajennusta lisätäksesi uusia toimintoja, yhdistääksesi kolmannen osapuolen palveluita tai parantaaksesi nykyistä käyttökokemusta. Selaa alla olevia esimerkkilisäosia, joiden lähdekoodi on saatavilla GitHubissa. Siirry <1>Lisäosat</1>-sivulle ottaaksesi ne käyttöön työtilassasi.",

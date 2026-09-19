@@ -12,6 +12,7 @@
   "PluginDeletedSuccessfully": "Tiện ích đã bị xóa thành công",
   "PluginIsNotCompatible": "Phiên bản SDK plugin không khớp với phiên bản {{organizationName}} {{productName}}. Vui lòng cập nhật lên phiên bản tương thích.",
   "PluginLoadedSuccessfully": "Plugin đã được tải thành công",
+  "PluginLoadFailed": "Không thể tải",
   "PluginSamples": "Mẫu plugin",
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Sử dụng Plugin SDK để thêm chức năng mới, kết nối các dịch vụ của bên thứ ba hoặc cải thiện trải nghiệm hiện có. Hãy xem các plugin mẫu bên dưới, với mã nguồn có sẵn trên GitHub. Truy cập trang <1>Plugins</1> để bật chúng cho không gian làm việc của bạn.",

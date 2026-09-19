@@ -51,8 +51,9 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
   const locale = getCookie(LANGUAGE) || "en";
   const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);
 
-  const pluginStatus =
-    plugin.status === PluginStatus.active
+  const pluginStatus = plugin.loadError
+    ? t("PluginLoadFailed")
+    : plugin.status === PluginStatus.active
       ? t("NotNeedSettings")
       : t("NeedSettings");
 
@@ -150,9 +151,30 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
         <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
           {t("People:UserStatus")}
         </Text>
-        <Text fontSize="13px" fontWeight={600} lineHeight="20px">
-          {pluginStatus}
-        </Text>
+        {plugin.loadError ? (
+          <div
+            className={classNames(styles.status, styles.incompatible)}
+            data-tooltip-id="system-tooltip"
+            data-tooltip-content={plugin.loadError}
+            data-tooltip-place="bottom"
+          >
+            <Text
+              dataTestId="plugin_load_error_status"
+              fontSize="13px"
+              fontWeight={600}
+              lineHeight="20px"
+            >
+              {pluginStatus}
+            </Text>
+            <div data-testid="plugin_load_error_icon">
+              <PluginIncompatibleSvg className={styles.incompatibleSvg} />
+            </div>
+          </div>
+        ) : (
+          <Text fontSize="13px" fontWeight={600} lineHeight="20px">
+            {pluginStatus}
+          </Text>
+        )}
 
         {plugin.homePage ? (
           <>

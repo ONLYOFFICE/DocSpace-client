@@ -245,6 +245,7 @@ export type TPlugin = {
   cssUrl?: string;
   settings: string;
   iconUrl: string;
+  loadError?: string;
   setLanguage?: (locale: string) => void;
   getLanguage?: () => string;
 } & IPlugin &

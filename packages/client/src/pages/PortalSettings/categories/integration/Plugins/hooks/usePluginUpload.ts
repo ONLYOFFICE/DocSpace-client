@@ -53,10 +53,15 @@ const usePluginUpload = ({ addPlugin }: UsePluginUploadProps) => {
     (result: Awaited<ReturnType<typeof addPlugin>>) => {
       if (!result) return;
 
-      const { isPluginCompatible, isPluginInCache } = result;
+      const { isPluginCompatible, isPluginInCache, loadError } = result;
 
       if (isPluginInCache) {
         setShowCacheWarning(true);
+        return;
+      }
+
+      if (loadError) {
+        toastr.error(loadError, t("PluginLoadFailed"));
         return;
       }
 

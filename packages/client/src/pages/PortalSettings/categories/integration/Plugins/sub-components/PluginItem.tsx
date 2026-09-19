@@ -46,6 +46,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import PluginSettingsIconUrl from "PUBLIC_DIR/images/plugin.settings.react.svg?url";
+import PluginIncompatibleSvg from "PUBLIC_DIR/images/plugin.incompatible.react.svg";
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
 
 import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
@@ -68,6 +69,7 @@ const PluginItem = ({
 
   image,
   url,
+  loadError,
   dataTestId,
   theme,
 }: PluginItemProps) => {
@@ -144,6 +146,18 @@ const PluginItem = ({
     />
   );
 
+  const loadErrorIcon = loadError ? (
+    <div
+      className={styles.pluginLoadError}
+      data-tooltip-id="system-tooltip"
+      data-tooltip-content={loadError}
+      data-tooltip-place="bottom"
+      data-testid={`plugin_load_error_${name}_icon`}
+    >
+      <PluginIncompatibleSvg />
+    </div>
+  ) : null;
+
 
   return (
     <div className={styles.pluginItem} data-testid={dataTestId}>
@@ -167,23 +181,26 @@ const PluginItem = ({
               className={styles.pluginToggleButton}
               onChange={onChangeStatus}
               isChecked={enabled}
+              isDisabled={!!loadError}
               dataTestId="enable_plugin_toggle_button"
             />
           </div>
         </div>
 
-        {!compatible ? (
-          <div
-            className={styles.pluginBadge}
-            data-tooltip-id="system-tooltip"
-            data-tooltip-content={incompatibleTooltip}
-            data-tooltip-place="bottom"
-          >
-            {badge}
-          </div>
-        ) : (
-          <div className={styles.pluginBadge}>{badge}</div>
-        )}
+        <div className={styles.pluginBadges}>
+          {!compatible ? (
+            <div
+              data-tooltip-id="system-tooltip"
+              data-tooltip-content={incompatibleTooltip}
+              data-tooltip-place="bottom"
+            >
+              {badge}
+            </div>
+          ) : (
+            badge
+          )}
+          {loadErrorIcon}
+        </div>
 
         {descriptionLocale ? (
           <>

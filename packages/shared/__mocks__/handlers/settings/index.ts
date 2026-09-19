@@ -63,6 +63,8 @@ import {
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
+  webPluginsBrokenBundleHandler,
+  BROKEN_PLUGIN_MISSING_PACKAGE,
 } from "./webplugins";
 import { activeConnectionsHandler } from "./activeconnections";
 import { backupStorageHandler } from "./backupStorage";
@@ -104,6 +106,8 @@ export {
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
+  webPluginsBrokenBundleHandler,
+  BROKEN_PLUGIN_MISSING_PACKAGE,
   ldapHandler,
   ldapDefaultHandler,
   ldapCronHandler,

@@ -529,14 +529,19 @@ class PluginStore {
       this.setNeedPageReload(true);
 
       if (plugin.runtime === "module") {
-        this.initModulePlugin(plugin);
+        await this.initModulePlugin(plugin);
       } else {
-        this.initPlugin(plugin);
+        await this.initPlugin(plugin);
       }
+
+      const loadError = this.plugins.find(
+        (p) => p.name === plugin.name,
+      )?.loadError;
 
       return {
         isPluginCompatible,
         isPluginInCache,
+        loadError,
       };
     } catch (e) {
       toastr.error(e as TData);
@@ -627,7 +632,11 @@ class PluginStore {
       };
 
       const onError = () => {
-        resolve(null);
+        const error = new Error(`Failed to load script ${plugin.url}`);
+
+        console.error(`[Plugin: ${plugin.name}] Failed to load plugin:`, error);
+
+        resolve(this.installBrokenPlugin(plugin, error));
       };
 
       const frameDoc = this.pluginFrame?.contentDocument;
@@ -753,22 +762,46 @@ class PluginStore {
     }
   };
 
-  installPlugin = async (plugin: TPlugin, addToList = true) => {
-    if (addToList) {
-      const idx = this.plugins.findIndex((p) => p.name === plugin.name);
+  private addToPluginList = (plugin: TPlugin) => {
+    const idx = this.plugins.findIndex((p) => p.name === plugin.name);
 
-      if (idx === -1) {
-        runInAction(() => {
-          this.plugins = [plugin, ...this.plugins];
-        });
+    if (idx === -1) {
+      runInAction(() => {
+        this.plugins = [plugin, ...this.plugins];
+      });
 
-        this.setIsEmptyList(false);
-      } else {
-        this.plugins[idx] = plugin;
-      }
+      this.setIsEmptyList(false);
+    } else {
+      this.plugins[idx] = plugin;
     }
+  };
 
-    if (!plugin || !plugin.enabled) return;
+  private installBrokenPlugin = (plugin: TAPIPlugin, error: unknown) => {
+    const scopes =
+      typeof plugin.scopes === "string"
+        ? (plugin.scopes.split(",") as PluginScopes[])
+        : plugin.scopes;
+
+    const brokenPlugin = {
+      ...plugin,
+      nameLocaleMap: plugin.nameLocale,
+      descriptionLocaleMap: plugin.descriptionLocale,
+      scopes,
+      iconUrl: getPluginUrl(plugin.url, ""),
+      compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
+      loadError: error instanceof Error ? error.message : String(error),
+    } as unknown as TPlugin;
+
+    this.initLocalePlugin(brokenPlugin);
+    this.addToPluginList(brokenPlugin);
+
+    return brokenPlugin;
+  };
+
+  installPlugin = async (plugin: TPlugin, addToList = true) => {
+    if (addToList) this.addToPluginList(plugin);
+
+    if (!plugin || !plugin.enabled || plugin.loadError) return;
 
     if (plugin.scopes.includes(PluginScopes.API)) {
       plugin.setAPI?.(origin, proxy, prefix);
@@ -1970,6 +2003,8 @@ class PluginStore {
         `[Plugin: ${plugin.name}] Failed to load module plugin:`,
         e,
       );
+
+      this.installBrokenPlugin(plugin, e);
     }
   };
 

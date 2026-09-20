@@ -380,4 +380,34 @@ describe("PluginStore legacy plugin load failure", () => {
 
     expect(store.plugins[0].loadError).toBeUndefined();
   });
+
+  it("keeps a plugin whose initialization fails in the list as a working one", async () => {
+    const registered = {
+      status: "active",
+      setLanguage: () => {
+        throw new Error("locale bundle missing");
+      },
+    };
+    const store = withFrame(
+      fakeFrame({}, ({ script, frame }) => {
+        (frame.contentWindow as unknown as { Plugins: Record<string, unknown> })
+          .Plugins[PLUGIN] = registered;
+        script.onload?.();
+      }),
+    );
+
+    await expect(store.initPlugin(legacyPlugin())).rejects.toThrow(
+      "locale bundle missing",
+    );
+
+    expect(store.plugins).toHaveLength(1);
+    expect(store.plugins[0]).toMatchObject({
+      name: PLUGIN,
+      nameLocale: PLUGIN,
+      enabled: true,
+      scopes: [PluginScopes.Settings, PluginScopes.ArticleNavigation],
+    });
+    expect(store.plugins[0].loadError).toBeUndefined();
+    expect(store.isEmptyList).toBe(false);
+  });
 });

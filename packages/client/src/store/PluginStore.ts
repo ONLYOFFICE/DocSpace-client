@@ -634,12 +634,16 @@ class PluginStore {
           return;
         }
 
+        let newPlugin: TPlugin | undefined;
+
         try {
-          const newPlugin = cloneDeep({
+          newPlugin = cloneDeep({
             ...plugin,
             nameLocaleMap: plugin.nameLocale,
             descriptionLocaleMap: plugin.descriptionLocale,
             ...registered,
+            nameLocale: plugin.name,
+            descriptionLocale: plugin.description,
           });
 
           newPlugin.scopes =
@@ -665,6 +669,13 @@ class PluginStore {
           callback?.(newPlugin);
           resolve(newPlugin);
         } catch (error) {
+          console.error(
+            `[Plugin: ${plugin.name}] Plugin initialization failed:`,
+            error,
+          );
+
+          if (newPlugin) this.addToPluginList(newPlugin);
+
           reject(error);
         }
       };

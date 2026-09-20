@@ -600,7 +600,7 @@ class PluginStore {
       let scriptError: unknown;
 
       const onScriptError = (event: ErrorEvent) => {
-        if (event.filename && event.filename !== scriptUrl) return;
+        if (event.filename !== scriptUrl) return;
 
         scriptError =
           event.error instanceof Error ? event.error : new Error(event.message);
@@ -705,6 +705,8 @@ class PluginStore {
 
         frameDoc?.body.appendChild(script);
       } else {
+        stopListening();
+
         reject(new Error("Failed to create script element"));
       }
     });

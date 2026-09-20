@@ -355,6 +355,25 @@ describe("PluginStore legacy plugin load failure", () => {
     expect(store.plugins[0].loadError).toContain("did not register");
   });
 
+  it("ignores an opaque error a cross-origin script reports without a filename", async () => {
+    const store = withFrame(
+      fakeFrame({}, ({ script, errorListeners }) => {
+        errorListeners.forEach((listener) =>
+          listener({
+            filename: "",
+            error: null,
+            message: "Script error.",
+          } as unknown as ErrorEvent),
+        );
+        script.onload?.();
+      }),
+    );
+
+    await store.initPlugin(legacyPlugin());
+
+    expect(store.plugins[0].loadError).toContain("did not register");
+  });
+
   it("does not trust a registration left behind by the previous version", async () => {
     const stale = { status: "active", getContextMenuItems: () => new Map() };
     const store = withFrame(

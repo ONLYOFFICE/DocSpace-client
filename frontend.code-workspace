@@ -113,6 +113,11 @@
             "tooltip": "🛠️ Update common/translation-app frontend & backend npm lock files"
           },
           {
+            "label": "Update ui-kit",
+            "task": "Frontend | update ui-kit",
+            "tooltip": "🛠️ Install the committed ui-kit tarball and refresh pnpm-lock.yaml"
+          },
+          {
             "label": "Build",
             "task": "Frontend | build",
             "tooltip": "🛠️ Start the \"frontend build\" task"

@@ -35,6 +35,7 @@
 
 import { describe, it, expect, vi } from "vitest";
 import type { TFunction } from "i18next";
+import type { TourData } from "react-joyride";
 
 import { bullets } from "SRC_DIR/components/Tour/__tests__/bullets";
 
@@ -117,6 +118,37 @@ describe("getTourSteps — owner", () => {
     const [create] = steps(ownerFlags);
 
     expect(create.spotlightTarget).toBeTypeOf("function");
+  });
+
+  it("rewinds the carousel before spotlighting the format tiles", async () => {
+    // Stepping back from the AI chat tile leaves the strip scrolled to it, with
+    // the first tile past its edge — the group spotlight then ran from off
+    // screen to the fourth tile.
+    document.body.innerHTML =
+      '<div data-testid="quick-actions">' +
+      '<div data-testid="quick-actions-track">' +
+      '<button data-testid="quick-docx"></button>' +
+      "</div>" +
+      "</div>";
+    // jsdom implements no scrolling, so `scrollTo` has to exist to be spied on.
+    Object.defineProperty(Element.prototype, "scrollTo", {
+      configurable: true,
+      writable: true,
+      value: () => {},
+    });
+    const scrollTo = vi.spyOn(Element.prototype, "scrollTo");
+
+    const [create] = steps(ownerFlags);
+    await create.before?.({} as TourData);
+
+    expect(scrollTo).toHaveBeenCalledWith(
+      expect.objectContaining({ left: 0 }),
+    );
+    expect(scrollTo.mock.instances[0]).toBe(
+      document.querySelector('[data-testid="quick-actions-track"]'),
+    );
+
+    document.body.innerHTML = "";
   });
 
   it("lights up the New button together with the menu it opens", () => {

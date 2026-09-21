@@ -50,6 +50,7 @@ import {
   revealStep,
   sidebarSelector,
   revealQuickActionTile,
+  rewindQuickActions,
   type RevealHooks,
 } from "SRC_DIR/components/Tour/stepBuilders";
 
@@ -235,7 +236,8 @@ function getPersonalSteps(
   const canOpenNewMenu = canCreateFiles && isDesktop;
 
   return [
-    // 1. Create tiles.
+    // 1. Create tiles. Rewind the carousel: stepping back from the AI chat tile
+    // leaves it scrolled.
     canCreateFiles &&
       elementGroupStep(
         '[data-testid="quick-actions"]',
@@ -244,6 +246,8 @@ function getPersonalSteps(
         t("FilesTour:TourCreateAnything"),
         callbacks,
         LOG_LABEL,
+        6,
+        rewindQuickActions,
       ),
 
     // 2. AI chat tile is the last one and may sit past the carousel fold.

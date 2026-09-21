@@ -293,6 +293,16 @@ function getPersonalSteps(
 
     // 6. Sidebar shortcuts.
     placesStep(t, callbacks, flags),
+
+    // 7. Closing action: the "New" button. The title is shared with Rooms.
+    canOpenNewMenu &&
+      elementStep(
+        NEW_BUTTON_SELECTOR,
+        t("RoomsTour:RoomsCreateFirstTitle"),
+        t("FilesTour:TourCreateFirst"),
+        callbacks,
+        LOG_LABEL,
+      ),
   ].filter(Boolean) as Step[];
 }
 

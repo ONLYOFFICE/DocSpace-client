@@ -105,7 +105,7 @@ const FilesTour = ({
   favoritesId,
   trashId,
 }: FilesTourProps) => {
-  const { t, ready } = useTranslation(["FilesTour", "Common"]);
+  const { t, ready } = useTranslation(["FilesTour", "RoomsTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
 

@@ -60,6 +60,10 @@ const SHARE_ICON_TARGET =
 
 const TABLE_HEADER_TARGET = '[data-testid="table-header"]';
 
+// The whole "+ New" pill, not just MainButton's own box (see the step file).
+const NEW_BUTTON_TARGET =
+  '#filter_search-input > div:has(> [data-testid="main-button"])';
+
 /**
  * A guest on the Files section: no personal space and no Trash, so the sidebar
  * keys the section item by the literal "files" and points it at Shared with
@@ -100,8 +104,11 @@ const ownerFlags: TourStepFlags = {
   trashId: "13",
 };
 
+const placesOf = (flags: TourStepFlags) =>
+  steps(flags).find((step) => step.title === "FilesTour:TourPlacesTitle");
+
 describe("getTourSteps — owner", () => {
-  it("walks create, AI chat, upload, search, sharing and the sidebar", () => {
+  it("walks create, AI chat, upload, search, sharing, the sidebar and the closing action", () => {
     expect(targets(ownerFlags)).toEqual([
       '[data-testid="quick-actions"]',
       '[data-testid="quick-ai-chat"]',
@@ -109,7 +116,16 @@ describe("getTourSteps — owner", () => {
       SEARCH_TARGET,
       SHARE_ICON_TARGET,
       '[data-item-id="10"]',
+      NEW_BUTTON_TARGET,
     ]);
+  });
+
+  it("ends on the New button, the action the tour has been leading to", () => {
+    const closing = steps(ownerFlags).at(-1);
+
+    // The title is the same "Now make it yours" the Rooms tour closes with.
+    expect(closing?.title).toBe("RoomsTour:RoomsCreateFirstTitle");
+    expect(closing?.target).toBe(NEW_BUTTON_TARGET);
   });
 
   it("spotlights the four format tiles, not the whole banner", () => {
@@ -184,7 +200,7 @@ describe("getTourSteps — owner", () => {
   });
 
   it("names every sidebar shortcut it points at, one bullet each", () => {
-    const places = steps(ownerFlags).at(-1);
+    const places = placesOf(ownerFlags);
 
     expect(places?.title).toBe("FilesTour:TourPlacesTitle");
     // Shared with me, Recent, Favorites and Trash — a bullet apiece.
@@ -199,8 +215,8 @@ describe("getTourSteps — owner", () => {
   });
 
   it("drops the Trash point when there is no Trash item", () => {
-    const withTrash = steps(ownerFlags).at(-1);
-    const withoutTrash = steps({ ...ownerFlags, trashId: null }).at(-1);
+    const withTrash = placesOf(ownerFlags);
+    const withoutTrash = placesOf({ ...ownerFlags, trashId: null });
 
     expect(bullets(withTrash)).toContain("FilesTour:TourPlacesTrash");
     expect(bullets(withoutTrash)).not.toContain("FilesTour:TourPlacesTrash");
@@ -334,6 +350,12 @@ describe("getTourSteps — what the page allows", () => {
 
     expect(tablet).not.toContain('[data-item-id="10"]');
     expect(tablet).not.toContain(".p-contextmenu");
+  });
+
+  it("keeps the closing action off a narrow screen, where there is no New button", () => {
+    expect(targets({ ...ownerFlags, isDesktop: false })).not.toContain(
+      NEW_BUTTON_TARGET,
+    );
   });
 
   it("drops the whole sidebar block when the section item is missing", () => {

@@ -112,13 +112,16 @@ test.describe("Plugin whose bundle fails to load", () => {
     await expect(tooltip).toBeVisible();
   });
 
-  test("The enable toggle is locked", async ({ page, baseUrl }) => {
+  test("The enable toggle reads off and is locked", async ({
+    page,
+    baseUrl,
+  }) => {
     const card = await openPluginsPage(page, baseUrl);
 
     const toggleInput = card
       .getByTestId("enable_plugin_toggle_button")
       .getByTestId("toggle-button-input");
-    await expect(toggleInput).toBeChecked();
+    await expect(toggleInput).not.toBeChecked();
     await expect(toggleInput).toBeDisabled();
   });
 

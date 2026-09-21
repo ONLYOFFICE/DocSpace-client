@@ -51,6 +51,9 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
   const locale = getCookie(LANGUAGE) || "en";
   const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);
 
+  const statusError = plugin.loadError ?? plugin.initError;
+  const errorKind = plugin.loadError ? "load" : "init";
+
   const pluginStatus = plugin.loadError
     ? t("PluginLoadFailed")
     : plugin.status === PluginStatus.active
@@ -151,23 +154,28 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
         <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
           {t("People:UserStatus")}
         </Text>
-        {plugin.loadError ? (
-          <div
-            className={classNames(styles.status, styles.incompatible)}
-            data-tooltip-id="system-tooltip"
-            data-tooltip-content={plugin.loadError}
-            data-tooltip-place="bottom"
-          >
+        {statusError ? (
+          <div className={styles.status}>
             <Text
-              dataTestId="plugin_load_error_status"
+              dataTestId={`plugin_${errorKind}_error_status`}
               fontSize="13px"
               fontWeight={600}
               lineHeight="20px"
             >
               {pluginStatus}
             </Text>
-            <div data-testid="plugin_load_error_icon">
-              <PluginIncompatibleSvg className={styles.incompatibleSvg} />
+            <div
+              className={styles.statusError}
+              data-testid={`plugin_${errorKind}_error_icon`}
+              data-tooltip-id="system-tooltip"
+              data-tooltip-content={statusError}
+              data-tooltip-place="bottom"
+            >
+              <PluginIncompatibleSvg
+                className={classNames(styles.incompatibleSvg, {
+                  [styles.warningSvg]: !plugin.loadError,
+                })}
+              />
             </div>
           </div>
         ) : (

@@ -70,6 +70,7 @@ const PluginItem = ({
   image,
   url,
   loadError,
+  initError,
   dataTestId,
   theme,
 }: PluginItemProps) => {
@@ -146,13 +147,17 @@ const PluginItem = ({
     />
   );
 
-  const loadErrorIcon = loadError ? (
+  const errorMessage = loadError ?? initError;
+
+  const errorIcon = errorMessage ? (
     <div
-      className={styles.pluginLoadError}
+      className={classNames(styles.pluginLoadError, {
+        [styles.pluginInitError]: !loadError,
+      })}
       data-tooltip-id="system-tooltip"
-      data-tooltip-content={loadError}
+      data-tooltip-content={errorMessage}
       data-tooltip-place="bottom"
-      data-testid={`plugin_load_error_${name}_icon`}
+      data-testid={`plugin_${loadError ? "load" : "init"}_error_${name}_icon`}
     >
       <PluginIncompatibleSvg />
     </div>
@@ -199,7 +204,7 @@ const PluginItem = ({
           ) : (
             badge
           )}
-          {loadErrorIcon}
+          {errorIcon}
         </div>
 
         {descriptionLocale ? (

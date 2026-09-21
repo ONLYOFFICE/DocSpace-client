@@ -10,6 +10,7 @@
   "NotNeedSettings": "Parametrləri daxil etməyə ehtiyac yoxdur",
   "PluginCacheWarningDescription": "Pluginlər versiya nömrələrinə əsasən keşik edilir. Dəyişikliklərinizin tətbiq olunduğuna əmin olmaq üçün, yükləmədən əvvəl <1>package.json</1> faylınızda versiya nömrəsini artırın. Sistem versiya eyni qalsa plugin-i yeniləməyəcək.",
   "PluginDeletedSuccessfully": "Plagin uğurla silindi",
+  "PluginInitFailed": "İnisiallama alınmadı",
   "PluginIsNotCompatible": "Plugin SDK versiyası {{organizationName}} {{productName}} versiyası ilə üstə düşmür. Xahiş edirik uyğun versiyaya yeniləyin.",
   "PluginLoadedSuccessfully": "Plugin yüklandı uğurla",
   "PluginLoadFailed": "Yüklənmə alınmadı",

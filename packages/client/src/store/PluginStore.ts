@@ -132,6 +132,9 @@ const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
 // lists `api` in a dependency array must not see a new object on every render.
 const pluginApi = createPluginApi();
 
+const getErrorMessage = (error: unknown) =>
+  error instanceof Error ? error.message : String(error);
+
 type TDispatchMessage = Pick<
   TMessageActionsParams,
   | "pluginName"
@@ -528,20 +531,30 @@ class PluginStore {
 
       this.setNeedPageReload(true);
 
-      if (plugin.runtime === "module") {
-        await this.initModulePlugin(plugin);
-      } else {
-        await this.initPlugin(plugin);
+      let thrownInitError: string | undefined;
+
+      try {
+        if (plugin.runtime === "module") {
+          await this.initModulePlugin(plugin);
+        } else {
+          await this.initPlugin(plugin);
+        }
+      } catch (e) {
+        console.error(
+          `[Plugin: ${plugin.name}] Plugin initialization failed:`,
+          e,
+        );
+
+        thrownInitError = getErrorMessage(e);
       }
 
-      const loadError = this.plugins.find(
-        (p) => p.name === plugin.name,
-      )?.loadError;
+      const installed = this.plugins.find((p) => p.name === plugin.name);
 
       return {
         isPluginCompatible,
         isPluginInCache,
-        loadError,
+        loadError: installed?.loadError,
+        initError: installed?.initError ?? thrownInitError,
       };
     } catch (e) {
       toastr.error(e as TData);
@@ -657,14 +670,7 @@ class PluginStore {
             plugin.minDocSpaceVersion,
           );
 
-          this.initLocalePlugin(newPlugin);
-
-          await this.installPlugin(newPlugin);
-
-          if (newPlugin.scopes.includes(PluginScopes.Settings)) {
-            newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
-            this.updatePluginStatus(newPlugin.name);
-          }
+          await this.runPluginInit(newPlugin, plugin.settings || null);
 
           callback?.(newPlugin);
           resolve(newPlugin);
@@ -674,7 +680,10 @@ class PluginStore {
             error,
           );
 
-          if (newPlugin) this.addToPluginList(newPlugin);
+          if (newPlugin) {
+            newPlugin.initError = getErrorMessage(error);
+            this.addToPluginList(newPlugin);
+          }
 
           reject(error);
         }
@@ -842,7 +851,7 @@ class PluginStore {
       scopes,
       iconUrl: getPluginUrl(plugin.url, ""),
       compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
-      loadError: error instanceof Error ? error.message : String(error),
+      loadError: getErrorMessage(error),
     } as unknown as TPlugin;
 
     const previous = this.plugins.find((p) => p.name === plugin.name);
@@ -860,6 +869,23 @@ class PluginStore {
     this.addToPluginList(brokenPlugin);
 
     return brokenPlugin;
+  };
+
+  private runPluginInit = async (
+    plugin: TPlugin,
+    settings: string | null,
+    addToList = true,
+  ) => {
+    this.initLocalePlugin(plugin);
+
+    await this.installPlugin(plugin, addToList);
+
+    if (plugin.loadError) return;
+
+    if (plugin.scopes.includes(PluginScopes.Settings)) {
+      plugin.setAdminPluginSettingsValue?.(settings);
+      this.updatePluginStatus(plugin.name);
+    }
   };
 
   installPlugin = async (plugin: TPlugin, addToList = true) => {
@@ -944,7 +970,21 @@ class PluginStore {
 
     this.setNeedPageReload(true);
 
-    this.installPlugin(this.plugins[idx], false);
+    const plugin = this.plugins[idx];
+
+    try {
+      await this.runPluginInit(plugin, plugin.settings || null, false);
+
+      runInAction(() => {
+        plugin.initError = undefined;
+      });
+    } catch (e) {
+      console.error(`[Plugin: ${name}] Plugin initialization failed:`, e);
+
+      runInAction(() => {
+        plugin.initError = getErrorMessage(e);
+      });
+    }
   };
 
   deactivatePlugin = async (name: string) => {
@@ -2059,19 +2099,14 @@ class PluginStore {
     });
 
     try {
-      this.initLocalePlugin(newPlugin);
-      await this.installPlugin(newPlugin);
-
-      if (newPlugin.scopes.includes(PluginScopes.Settings)) {
-        newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
-        this.updatePluginStatus(newPlugin.name);
-      }
+      await this.runPluginInit(newPlugin, plugin.settings || null);
     } catch (e) {
       console.error(
         `[Plugin: ${plugin.name}] Plugin initialization failed:`,
         e,
       );
 
+      newPlugin.initError = getErrorMessage(e);
       this.addToPluginList(newPlugin);
 
       throw e;

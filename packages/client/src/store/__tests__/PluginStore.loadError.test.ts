@@ -174,6 +174,21 @@ describe("PluginStore module plugin load failure", () => {
     expect(store.articleNavigationItems.size).toBe(0);
   });
 
+  it("does not publish a broken plugin that carries the settings scope", async () => {
+    vi.stubGlobal("fetch", fetchNotFound());
+
+    const store = createStore();
+
+    await store.initModulePlugin(
+      apiPlugin({ enabled: false, scopes: "Settings,ArticleNavigation" }),
+    );
+    await store.activatePlugin(PLUGIN);
+
+    expect(store.plugins[0].loadError).toContain("HTTP 404");
+    expect(store.plugins[0].status).toBeUndefined();
+    expect(store.articleNavigationItems.size).toBe(0);
+  });
+
   it("reports the load error to the uploader instead of a success", async () => {
     vi.stubGlobal("fetch", fetchNotFound());
     vi.mocked(api.plugins.addPlugin).mockResolvedValue(apiPlugin());
@@ -205,6 +220,66 @@ describe("PluginStore module plugin load failure", () => {
       enabled: true,
     });
     expect(store.plugins[0].loadError).toBeUndefined();
+    expect(store.plugins[0].initError).toBe("settings request timed out");
+  });
+
+  it("clears the initialization mark once the retry succeeds", async () => {
+    const store = createStore();
+    let attempt = 0;
+    const exported = {
+      onLoadCallback: async () => {
+        attempt += 1;
+        if (attempt === 1) throw new Error("settings request timed out");
+      },
+    };
+
+    await expect(
+      store.initLoadedModulePlugin(apiPlugin(), exported),
+    ).rejects.toThrow("settings request timed out");
+
+    await store.activatePlugin(PLUGIN);
+
+    expect(attempt).toBe(2);
+    expect(store.plugins[0].initError).toBeUndefined();
+  });
+
+  it("keeps the mark when the retry hits the same broken setLanguage", async () => {
+    const store = createStore();
+    const exported = {
+      setLanguage: () => {
+        throw new Error("locale bundle missing");
+      },
+    };
+
+    await expect(
+      store.initLoadedModulePlugin(apiPlugin(), exported),
+    ).rejects.toThrow("locale bundle missing");
+
+    await store.deactivatePlugin(PLUGIN);
+    await store.activatePlugin(PLUGIN);
+
+    expect(store.plugins[0].initError).toBe("locale bundle missing");
+  });
+
+  it("keeps the mark fresh when the retry fails with a new reason", async () => {
+    const store = createStore();
+    let attempt = 0;
+    const exported = {
+      onLoadCallback: async () => {
+        attempt += 1;
+        throw new Error(
+          attempt === 1 ? "settings request timed out" : "portal unreachable",
+        );
+      },
+    };
+
+    await expect(
+      store.initLoadedModulePlugin(apiPlugin(), exported),
+    ).rejects.toThrow("settings request timed out");
+
+    await store.activatePlugin(PLUGIN);
+
+    expect(store.plugins[0].initError).toBe("portal unreachable");
   });
 
   it("takes back the items of the version it replaces", async () => {
@@ -213,13 +288,10 @@ describe("PluginStore module plugin load failure", () => {
     const store = createStore();
     const itemKey = "sample-item";
 
-    await store.initLoadedModulePlugin(
-      apiPlugin({ scopes: "ContextMenu" }),
-      {
-        getContextMenuItems: () =>
-          new Map([[itemKey, { key: itemKey, label: "Sample" }]]),
-      } as Partial<TPlugin>,
-    );
+    await store.initLoadedModulePlugin(apiPlugin({ scopes: "ContextMenu" }), {
+      getContextMenuItems: () =>
+        new Map([[itemKey, { key: itemKey, label: "Sample" }]]),
+    } as Partial<TPlugin>);
 
     expect(store.contextMenuItems.has(itemKey)).toBe(true);
 
@@ -311,9 +383,7 @@ describe("PluginStore legacy plugin load failure", () => {
 
     await store.initPlugin(legacyPlugin());
 
-    expect(store.plugins[0].loadError).toContain(
-      `window.Plugins["${PLUGIN}"]`,
-    );
+    expect(store.plugins[0].loadError).toContain(`window.Plugins["${PLUGIN}"]`);
     expect(store.plugins[0].enabled).toBe(true);
   });
 
@@ -386,11 +456,15 @@ describe("PluginStore legacy plugin load failure", () => {
   });
 
   it("loads a script that registers itself as before", async () => {
-    const registered = { status: "active", getContextMenuItems: () => new Map() };
+    const registered = {
+      status: "active",
+      getContextMenuItems: () => new Map(),
+    };
     const store = withFrame(
       fakeFrame({}, ({ script, frame }) => {
-        (frame.contentWindow as unknown as { Plugins: Record<string, unknown> })
-          .Plugins[PLUGIN] = registered;
+        (
+          frame.contentWindow as unknown as { Plugins: Record<string, unknown> }
+        ).Plugins[PLUGIN] = registered;
         script.onload?.();
       }),
     );
@@ -409,8 +483,9 @@ describe("PluginStore legacy plugin load failure", () => {
     };
     const store = withFrame(
       fakeFrame({}, ({ script, frame }) => {
-        (frame.contentWindow as unknown as { Plugins: Record<string, unknown> })
-          .Plugins[PLUGIN] = registered;
+        (
+          frame.contentWindow as unknown as { Plugins: Record<string, unknown> }
+        ).Plugins[PLUGIN] = registered;
         script.onload?.();
       }),
     );
@@ -427,6 +502,35 @@ describe("PluginStore legacy plugin load failure", () => {
       scopes: [PluginScopes.Settings, PluginScopes.ArticleNavigation],
     });
     expect(store.plugins[0].loadError).toBeUndefined();
+    expect(store.plugins[0].initError).toBe("locale bundle missing");
     expect(store.isEmptyList).toBe(false);
+  });
+
+  it("reports an initialization failure without losing the upload result", async () => {
+    const registered = {
+      status: "active",
+      setLanguage: () => {
+        throw new Error("locale bundle missing");
+      },
+    };
+    const store = withFrame(
+      fakeFrame({}, ({ script, frame }) => {
+        (
+          frame.contentWindow as unknown as { Plugins: Record<string, unknown> }
+        ).Plugins[PLUGIN] = registered;
+        script.onload?.();
+      }),
+    );
+
+    vi.mocked(api.plugins.addPlugin).mockResolvedValue(legacyPlugin());
+
+    const result = await store.addPlugin(new FormData());
+
+    expect(result).toMatchObject({
+      isPluginCompatible: false,
+      isPluginInCache: false,
+      loadError: undefined,
+      initError: "locale bundle missing",
+    });
   });
 });

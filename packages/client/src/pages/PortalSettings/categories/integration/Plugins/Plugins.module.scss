@@ -115,6 +115,10 @@
       path {
         fill: var(--plugins-error-status-color);
       }
+
+      &.pluginInitError path {
+        fill: var(--plugins-warning-status-color);
+      }
     }
 
     .pluginDescription {

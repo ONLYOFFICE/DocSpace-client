@@ -85,7 +85,8 @@
     align-items: center;
     gap: 8px;
 
-    &.incompatible {
+    .statusError {
+      display: flex;
       cursor: pointer;
     }
 
@@ -94,11 +95,19 @@
       path {
         fill: var(--plugins-error-status-color);
       }
+
+      &.warningSvg path {
+        fill: var(--plugins-warning-status-color);
+      }
     }
   }
 
   .version {
     width: min-content;
+
+    &.incompatible {
+      cursor: pointer;
+    }
   }
 
   .status {

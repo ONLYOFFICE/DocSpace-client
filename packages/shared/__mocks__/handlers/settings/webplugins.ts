@@ -548,6 +548,37 @@ export const mockBrokenPlugin: TAPIPlugin = {
   settings: "",
 };
 
+export const INIT_ERROR_PLUGIN_MESSAGE = "Locale bundle missing";
+
+export const mockInitErrorPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "init-error-sample",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin whose bundle loads but throws while the portal initializes it",
+  pluginName: "InitErrorSample",
+  scopes: "ArticleNavigation",
+  image: "",
+  url: "/plugins/init-error-sample/plugin.js",
+  runtime: "module",
+  settings: "",
+};
+
+// Plugins list with a plugin that loads but fails to initialize
+export const webPluginsWithInitErrorPlugin = {
+  response: [mockInitErrorPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 // Plugins list with a plugin whose bundle cannot be loaded
 export const webPluginsWithBrokenPlugin = {
   response: [mockBrokenPlugin],
@@ -721,7 +752,8 @@ type TWebPluginType =
   | "withPostMessagePlugin"
   | "withSettingsPlugin"
   | "withNavigationPlugin"
-  | "withBrokenPlugin";
+  | "withBrokenPlugin"
+  | "withInitErrorPlugin";
 
 // Resolvers
 export const webPluginsResolver = (type: TWebPluginType = "empty") => {
@@ -787,6 +819,9 @@ export const webPluginsResolver = (type: TWebPluginType = "empty") => {
       break;
     case "withBrokenPlugin":
       data = webPluginsWithBrokenPlugin;
+      break;
+    case "withInitErrorPlugin":
+      data = webPluginsWithInitErrorPlugin;
       break;
     default:
       data = webPluginsEmpty;
@@ -859,6 +894,28 @@ export const webPluginsBrokenBundleHandler = (port: string) => {
   ].join("\n");
 
   return http.get(`${BASE_URL}:${port}${mockBrokenPlugin.url}`, () => {
+    return new Response(bundle, {
+      headers: { "Content-Type": "application/javascript; charset=utf-8" },
+    });
+  });
+};
+
+// Serves a module bundle the portal can load and import, but whose setLanguage
+// throws - the failure happens after the code is in hand, so the portal keeps
+// the plugin switchable and only marks it.
+export const webPluginsInitErrorBundleHandler = (port: string) => {
+  const bundle = [
+    "export default {",
+    '  status: "active",',
+    '  getStatus: () => "active",',
+    `  setLanguage: () => { throw new Error("${INIT_ERROR_PLUGIN_MESSAGE}"); },`,
+    '  getLanguage: () => "en",',
+    "  getArticleNavigationItems: () => new Map(),",
+    "};",
+    "",
+  ].join("\n");
+
+  return http.get(`${BASE_URL}:${port}${mockInitErrorPlugin.url}`, () => {
     return new Response(bundle, {
       headers: { "Content-Type": "application/javascript; charset=utf-8" },
     });

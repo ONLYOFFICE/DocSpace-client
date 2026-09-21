@@ -221,10 +221,7 @@ function placesStep(
   );
 }
 
-/**
- * The Files tour proper: a personal space, and everything that can be made in
- * it.
- */
+/** Personal space (My documents). */
 function getPersonalSteps(
   t: TFunction,
   callbacks: TourStepCallbacks | undefined,
@@ -232,14 +229,14 @@ function getPersonalSteps(
 ): Step[] {
   const { audience, isDesktop, canCreate, showFilter, hasItems } = flags;
 
-  // Guests own no files, so nothing that creates applies to them.
-  const canOwnFiles = audience !== "guest";
+  // `showFilter` is `!isEmptyPage`: an empty page renders neither the banner
+  // nor the filter bar.
+  const canCreateFiles = audience !== "guest" && canCreate && showFilter;
+  const canOpenNewMenu = canCreateFiles && isDesktop;
 
   return [
-    // 1. Create — the four format tiles, named by what they produce.
-    canOwnFiles &&
-      canCreate &&
-      showFilter &&
+    // 1. Create tiles.
+    canCreateFiles &&
       elementGroupStep(
         '[data-testid="quick-actions"]',
         CREATE_TILE_SELECTORS,
@@ -249,12 +246,8 @@ function getPersonalSteps(
         LOG_LABEL,
       ),
 
-    // 2. AI chat tile — the least discoverable, most differentiating feature.
-    // It is the last tile, so on a narrow banner it sits past the fold; scroll
-    // the carousel to it first so the spotlight lands on something visible.
-    canOwnFiles &&
-      canCreate &&
-      showFilter &&
+    // 2. AI chat tile is the last one and may sit past the carousel fold.
+    canCreateFiles &&
       elementStep(
         '[data-testid="quick-ai-chat"]',
         t("FilesTour:TourAiAssistantTitle"),
@@ -265,12 +258,8 @@ function getPersonalSteps(
         revealQuickActionTile('[data-testid="quick-ai-chat"]'),
       ),
 
-    // 3. Uploading, which lives in the "New" menu — so the step opens it and
-    // spotlights the menu rather than the button that hides it.
-    canOwnFiles &&
-      canCreate &&
-      showFilter &&
-      isDesktop &&
+    // 3. Upload lives in the "New" menu.
+    canOpenNewMenu &&
       menuStep(
         NEW_BUTTON_TRIGGER_SELECTOR,
         NEW_MENU_SELECTOR,
@@ -278,11 +267,10 @@ function getPersonalSteps(
         t("FilesTour:TourBringFiles"),
         callbacks,
         LOG_LABEL,
-        // The button and its menu read as one thing, so they share a spotlight.
-        [NEW_BUTTON_SELECTOR],
+        [NEW_BUTTON_SELECTOR], // spotlight the button together with the menu
       ),
 
-    // 4. Search, with the filter, sort and view controls that sit beside it.
+    // 4. Search and filter bar.
     showFilter &&
       elementStep(
         SEARCH_SELECTOR,
@@ -292,7 +280,7 @@ function getPersonalSteps(
         LOG_LABEL,
       ),
 
-    // 5. The share button on a row — the per-item action users hunt for most.
+    // 5. Share badge on a row; the table view shows it only on hover.
     hasItems &&
       hoverRevealStep(
         SHARE_ICON_SELECTOR,
@@ -303,7 +291,7 @@ function getPersonalSteps(
         4,
       ),
 
-    // 6. The sidebar sub-items: what each of the section's shortcuts holds.
+    // 6. Sidebar shortcuts.
     placesStep(t, callbacks, flags),
   ].filter(Boolean) as Step[];
 }

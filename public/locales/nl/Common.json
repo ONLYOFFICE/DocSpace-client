@@ -262,6 +262,7 @@
   "AssignToRecipient": "Toewijzen aan ontvanger",
   "AttachFilesAlreadyAttached_one": "Dit bestand is al bijgevoegd",
   "AttachFilesAlreadyAttached_other": "{{count}} bestanden zijn al bijgevoegd",
+  "AttachFilesAnalyzingBusy": "Wacht tot het huidige antwoord klaar is voordat u een ander formulier analyseert.",
   "AttachFilesAnalyzingForm": "Antwoorden analyseren staat aan: deze chat werkt alleen met {{fileName}}. Start een nieuwe chat om andere bestanden bij te voegen.",
   "AttachFilesAnalyzingFormUnnamed": "Antwoorden analyseren staat aan: deze chat werkt alleen met één formulier. Start een nieuwe chat om andere bestanden bij te voegen.",
   "AttachFilesLimit": "U kunt maximaal {{limit}} bestanden bijvoegen",

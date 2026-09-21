@@ -262,6 +262,7 @@
   "AssignToRecipient": "수신인에게 할당",
   "AttachFilesAlreadyAttached_one": "이 파일은 이미 첨부되어 있습니다",
   "AttachFilesAlreadyAttached_other": "{{count}}개의 파일이 이미 첨부되어 있습니다",
+  "AttachFilesAnalyzingBusy": "다른 양식을 분석하기 전에 현재 응답이 완료될 때까지 기다리세요.",
   "AttachFilesAnalyzingForm": "응답 분석이 켜져 있습니다. 이 채팅은 {{fileName}}에 대해서만 작동합니다. 다른 파일을 첨부하려면 새 채팅을 시작하세요.",
   "AttachFilesAnalyzingFormUnnamed": "응답 분석이 켜져 있습니다. 이 채팅은 하나의 양식에 대해서만 작동합니다. 다른 파일을 첨부하려면 새 채팅을 시작하세요.",
   "AttachFilesLimit": "최대 {{limit}}개의 파일을 첨부할 수 있습니다",

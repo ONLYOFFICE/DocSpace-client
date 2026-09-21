@@ -262,6 +262,7 @@
   "AssignToRecipient": "Alıcıya ata",
   "AttachFilesAlreadyAttached_one": "Bu dosya zaten eklendi",
   "AttachFilesAlreadyAttached_other": "{{count}} dosya zaten eklendi",
+  "AttachFilesAnalyzingBusy": "Başka bir formu analiz etmeden önce geçerli yanıtın tamamlanmasını bekleyin.",
   "AttachFilesAnalyzingForm": "Yanıt analizi açık: bu sohbet yalnızca {{fileName}} ile çalışır. Başka dosya eklemek için yeni bir sohbet başlatın.",
   "AttachFilesAnalyzingFormUnnamed": "Yanıt analizi açık: bu sohbet yalnızca tek bir formla çalışır. Başka dosya eklemek için yeni bir sohbet başlatın.",
   "AttachFilesLimit": "En fazla {{limit}} dosya ekleyebilirsiniz",

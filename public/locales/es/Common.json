@@ -262,6 +262,7 @@
   "AssignToRecipient": "Asignar a destinatario",
   "AttachFilesAlreadyAttached_one": "Este archivo ya está adjunto",
   "AttachFilesAlreadyAttached_other": "{{count}} archivos ya están adjuntos",
+  "AttachFilesAnalyzingBusy": "Espere a que termine la respuesta actual antes de analizar otro formulario.",
   "AttachFilesAnalyzingForm": "El análisis de respuestas está activado: este chat solo funciona con {{fileName}}. Inicie un chat nuevo para adjuntar otros archivos.",
   "AttachFilesAnalyzingFormUnnamed": "El análisis de respuestas está activado: este chat solo funciona con un formulario. Inicie un chat nuevo para adjuntar otros archivos.",
   "AttachFilesLimit": "Puede adjuntar hasta {{limit}} archivos",

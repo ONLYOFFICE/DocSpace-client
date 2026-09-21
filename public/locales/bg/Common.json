@@ -262,6 +262,7 @@
   "AssignToRecipient": "Присвояване на получател",
   "AttachFilesAlreadyAttached_one": "Този файл вече е прикачен",
   "AttachFilesAlreadyAttached_other": "{{count}} файла вече са прикачени",
+  "AttachFilesAnalyzingBusy": "Изчакайте текущият отговор да завърши, преди да анализирате друг формуляр.",
   "AttachFilesAnalyzingForm": "Анализът на отговорите е включен: този чат работи само с {{fileName}}. Започнете нов чат, за да прикачите други файлове.",
   "AttachFilesAnalyzingFormUnnamed": "Анализът на отговорите е включен: този чат работи само с един формуляр. Започнете нов чат, за да прикачите други файлове.",
   "AttachFilesLimit": "Можете да прикачите до {{limit}} файла",

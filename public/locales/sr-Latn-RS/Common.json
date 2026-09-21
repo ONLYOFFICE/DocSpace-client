@@ -262,6 +262,7 @@
   "AssignToRecipient": "Dodeli primaocu",
   "AttachFilesAlreadyAttached_one": "Ova datoteka je već priložena",
   "AttachFilesAlreadyAttached_other": "Već priloženih datoteka: {{count}}",
+  "AttachFilesAnalyzingBusy": "Sačekajte da se trenutni odgovor završi pre nego što analizirate drugi obrazac.",
   "AttachFilesAnalyzingForm": "Analiza odgovora je uključena: ovaj čat radi samo sa datotekom {{fileName}}. Započnite novi čat da biste priložili druge datoteke.",
   "AttachFilesAnalyzingFormUnnamed": "Analiza odgovora je uključena: ovaj čat radi samo sa jednim obrascem. Započnite novi čat da biste priložili druge datoteke.",
   "AttachFilesLimit": "Možete priložiti najviše {{limit}} datoteka",

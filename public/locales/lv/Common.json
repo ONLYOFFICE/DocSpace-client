@@ -262,6 +262,7 @@
   "AssignToRecipient": "Assignēt saņēmējam",
   "AttachFilesAlreadyAttached_one": "Šis fails jau ir pievienots",
   "AttachFilesAlreadyAttached_other": "Jau pievienoto failu skaits: {{count}}",
+  "AttachFilesAnalyzingBusy": "Pirms citas veidlapas analīzes uzgaidiet, līdz pašreizējā atbilde ir pabeigta.",
   "AttachFilesAnalyzingForm": "Atbilžu analīze ir ieslēgta: šis čats darbojas tikai ar failu {{fileName}}. Sāciet jaunu čatu, lai pievienotu citus failus.",
   "AttachFilesAnalyzingFormUnnamed": "Atbilžu analīze ir ieslēgta: šis čats darbojas tikai ar vienu veidlapu. Sāciet jaunu čatu, lai pievienotu citus failus.",
   "AttachFilesLimit": "Jūs varat pievienot ne vairāk kā {{limit}} failus",

@@ -262,6 +262,7 @@
   "AssignToRecipient": "Přiřadit příjemci",
   "AttachFilesAlreadyAttached_one": "Tento soubor je již přiložen",
   "AttachFilesAlreadyAttached_other": "Již přiložených souborů: {{count}}",
+  "AttachFilesAnalyzingBusy": "Před analýzou dalšího formuláře počkejte na dokončení aktuální odpovědi.",
   "AttachFilesAnalyzingForm": "Analýza odpovědí je zapnutá: tento chat pracuje pouze se souborem {{fileName}}. Chcete-li připojit další soubory, začněte nový chat.",
   "AttachFilesAnalyzingFormUnnamed": "Analýza odpovědí je zapnutá: tento chat pracuje pouze s jedním formulářem. Chcete-li připojit další soubory, začněte nový chat.",
   "AttachFilesLimit": "Můžete přiložit až {{limit}} souborů",

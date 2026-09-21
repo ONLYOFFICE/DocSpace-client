@@ -262,6 +262,7 @@
   "AssignToRecipient": "التعيين إلى المستلم",
   "AttachFilesAlreadyAttached_one": "هذا الملف مرفق بالفعل",
   "AttachFilesAlreadyAttached_other": "عدد الملفات المرفقة بالفعل: {{count}}",
+  "AttachFilesAnalyzingBusy": "انتظر انتهاء الإجابة الحالية قبل تحليل نموذج آخر.",
   "AttachFilesAnalyzingForm": "وضع تحليل الاستجابات مُفعَّل: تعمل هذه الدردشة مع {{fileName}} فقط. ابدأ دردشة جديدة لإرفاق ملفات أخرى.",
   "AttachFilesAnalyzingFormUnnamed": "وضع تحليل الاستجابات مُفعَّل: تعمل هذه الدردشة مع نموذج واحد فقط. ابدأ دردشة جديدة لإرفاق ملفات أخرى.",
   "AttachFilesLimit": "يمكنك إرفاق ما يصل إلى {{limit}} ملف",

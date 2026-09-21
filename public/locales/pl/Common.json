@@ -262,6 +262,7 @@
   "AssignToRecipient": "Przypisz do odbiorcy",
   "AttachFilesAlreadyAttached_one": "Ten plik jest już załączony",
   "AttachFilesAlreadyAttached_other": "Już załączonych plików: {{count}}",
+  "AttachFilesAnalyzingBusy": "Poczekaj na zakończenie bieżącej odpowiedzi przed analizą innego formularza.",
   "AttachFilesAnalyzingForm": "Analiza odpowiedzi jest włączona: ten czat działa tylko z plikiem {{fileName}}. Rozpocznij nowy czat, aby załączyć inne pliki.",
   "AttachFilesAnalyzingFormUnnamed": "Analiza odpowiedzi jest włączona: ten czat działa tylko z jednym formularzem. Rozpocznij nowy czat, aby załączyć inne pliki.",
   "AttachFilesLimit": "Możesz załączyć maksymalnie {{limit}} plików",

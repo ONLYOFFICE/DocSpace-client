@@ -262,6 +262,7 @@
   "AssignToRecipient": "ලබන්නාට පවරන්න",
   "AttachFilesAlreadyAttached_one": "මෙම ගොනුව දැනටමත් අමුණා ඇත",
   "AttachFilesAlreadyAttached_other": "දැනටමත් අමුණා ඇති ගොනු ගණන: {{count}}",
+  "AttachFilesAnalyzingBusy": "වෙනත් පෝරමයක් විශ්ලේෂණය කිරීමට පෙර වත්මන් ප්‍රතිචාරය සම්පූර්ණ වන තෙක් රැඳී සිටින්න.",
   "AttachFilesAnalyzingForm": "ප්‍රතිචාර විශ්ලේෂණය සක්‍රියයි: මෙම කතාබස ක්‍රියා කරන්නේ {{fileName}} සමඟ පමණි. වෙනත් ගොනු අමුණන්නට නම් නව කතාබසක් අරඹන්න.",
   "AttachFilesAnalyzingFormUnnamed": "ප්‍රතිචාර විශ්ලේෂණය සක්‍රියයි: මෙම කතාබස ක්‍රියා කරන්නේ එක් පෝරමයක් සමඟ පමණි. වෙනත් ගොනු අමුණන්නට නම් නව කතාබසක් අරඹන්න.",
   "AttachFilesLimit": "ඔබට ගොනු {{limit}} ක් දක්වා අමුණා ගත හැක",

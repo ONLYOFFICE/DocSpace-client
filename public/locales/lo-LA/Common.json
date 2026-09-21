@@ -262,6 +262,7 @@
   "AssignToRecipient": "ມອບໝາຍໃຫ້ຜູ້ຮັບ",
   "AttachFilesAlreadyAttached_one": "ໄຟລ໌ນີ້ຖືກແນບໄວ້ແລ້ວ",
   "AttachFilesAlreadyAttached_other": "ຈຳນວນໄຟລ໌ທີ່ແນບໄວ້ແລ້ວ: {{count}}",
+  "AttachFilesAnalyzingBusy": "ລໍຖ້າໃຫ້ຄຳຕອບປັດຈຸບັນສຳເລັດກ່ອນຈະວິເຄາະແບບຟອມອື່ນ.",
   "AttachFilesAnalyzingForm": "ການວິເຄາະຄຳຕອບເປີດຢູ່: ການສົນທະນານີ້ໃຊ້ໄດ້ກັບ {{fileName}} ເທົ່ານັ້ນ. ເລີ່ມການສົນທະນາໃໝ່ເພື່ອແນບໄຟລ໌ອື່ນ.",
   "AttachFilesAnalyzingFormUnnamed": "ການວິເຄາະຄຳຕອບເປີດຢູ່: ການສົນທະນານີ້ໃຊ້ໄດ້ກັບແບບຟອມດຽວເທົ່ານັ້ນ. ເລີ່ມການສົນທະນາໃໝ່ເພື່ອແນບໄຟລ໌ອື່ນ.",
   "AttachFilesLimit": "ທ່ານສາມາດແນບໄຟລ໌ໄດ້ສູງສຸດ {{limit}} ໄຟລ໌",

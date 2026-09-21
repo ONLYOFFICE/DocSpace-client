@@ -262,6 +262,7 @@
   "AssignToRecipient": "分配给接收者",
   "AttachFilesAlreadyAttached_one": "该文件已附加",
   "AttachFilesAlreadyAttached_other": "{{count}} 个文件已附加",
+  "AttachFilesAnalyzingBusy": "请等待当前回复完成后再分析其他表单。",
   "AttachFilesAnalyzingForm": "回复分析已开启：本次聊天仅处理 {{fileName}}。如需附加其他文件，请开始新的聊天。",
   "AttachFilesAnalyzingFormUnnamed": "回复分析已开启：本次聊天仅处理一个表单。如需附加其他文件，请开始新的聊天。",
   "AttachFilesLimit": "最多可附加 {{limit}} 个文件",

@@ -262,6 +262,7 @@
   "AssignToRecipient": "Caktoni tek marrësi",
   "AttachFilesAlreadyAttached_one": "Ky skedar është tashmë i bashkëngjitur",
   "AttachFilesAlreadyAttached_other": "{{count}} skedarë janë tashmë të bashkëngjitur",
+  "AttachFilesAnalyzingBusy": "Prisni të përfundojë përgjigja aktuale përpara se të analizoni një formular tjetër.",
   "AttachFilesAnalyzingForm": "Analiza e përgjigjeve është aktive: kjo bisedë funksionon vetëm me {{fileName}}. Filloni një bisedë të re për të bashkëngjitur skedarë të tjerë.",
   "AttachFilesAnalyzingFormUnnamed": "Analiza e përgjigjeve është aktive: kjo bisedë funksionon vetëm me një formular. Filloni një bisedë të re për të bashkëngjitur skedarë të tjerë.",
   "AttachFilesLimit": "Mund të bashkëngjitni deri në {{limit}} skedarë",

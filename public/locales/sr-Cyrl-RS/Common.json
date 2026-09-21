@@ -262,6 +262,7 @@
   "AssignToRecipient": "Додели примаоцу",
   "AttachFilesAlreadyAttached_one": "Ова датотека је већ приложена",
   "AttachFilesAlreadyAttached_other": "Већ приложених датотека: {{count}}",
+  "AttachFilesAnalyzingBusy": "Сачекајте да се тренутни одговор заврши пре него што анализирате други образац.",
   "AttachFilesAnalyzingForm": "Анализа одговора је укључена: овај чат ради само са датотеком {{fileName}}. Започните нови чат да бисте приложили друге датотеке.",
   "AttachFilesAnalyzingFormUnnamed": "Анализа одговора је укључена: овај чат ради само са једним обрасцем. Започните нови чат да бисте приложили друге датотеке.",
   "AttachFilesLimit": "Можете приложити највише {{limit}} датотека",

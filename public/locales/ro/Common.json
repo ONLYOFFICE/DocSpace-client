@@ -262,6 +262,7 @@
   "AssignToRecipient": "Desemnare destinatar",
   "AttachFilesAlreadyAttached_one": "Acest fișier este deja atașat",
   "AttachFilesAlreadyAttached_other": "{{count}} fișiere sunt deja atașate",
+  "AttachFilesAnalyzingBusy": "Așteptați finalizarea răspunsului curent înainte de a analiza alt formular.",
   "AttachFilesAnalyzingForm": "Analiza răspunsurilor este activată: acest chat funcționează doar cu {{fileName}}. Începeți un chat nou pentru a atașa alte fișiere.",
   "AttachFilesAnalyzingFormUnnamed": "Analiza răspunsurilor este activată: acest chat funcționează doar cu un singur formular. Începeți un chat nou pentru a atașa alte fișiere.",
   "AttachFilesLimit": "Puteți atașa cel mult {{limit}} fișiere",

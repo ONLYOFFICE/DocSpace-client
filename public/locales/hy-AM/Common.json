@@ -262,6 +262,7 @@
   "AssignToRecipient": "Նշանակել ստացողին",
   "AttachFilesAlreadyAttached_one": "Այս ֆայլն արդեն կցված է",
   "AttachFilesAlreadyAttached_other": "Արդեն կցված ֆայլերի քանակը՝ {{count}}",
+  "AttachFilesAnalyzingBusy": "Սպասեք ընթացիկ պատասխանի ավարտին՝ նախքան մեկ այլ ձև վերլուծելը:",
   "AttachFilesAnalyzingForm": "Պատասխանների վերլուծությունը միացված է. այս չաթն աշխատում է միայն {{fileName}} ֆայլի հետ: Այլ ֆայլեր կցելու համար սկսեք նոր չաթ:",
   "AttachFilesAnalyzingFormUnnamed": "Պատասխանների վերլուծությունը միացված է. այս չաթն աշխատում է միայն մեկ ձևի հետ: Այլ ֆայլեր կցելու համար սկսեք նոր չաթ:",
   "AttachFilesLimit": "Դուք կարող եք կցել առավելագույնը {{limit}} ֆայլ",

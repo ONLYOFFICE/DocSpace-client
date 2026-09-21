@@ -262,6 +262,7 @@
   "AssignToRecipient": "Attribuer au destinataire",
   "AttachFilesAlreadyAttached_one": "Ce fichier est déjà joint",
   "AttachFilesAlreadyAttached_other": "{{count}} fichiers sont déjà joints",
+  "AttachFilesAnalyzingBusy": "Attendez la fin de la réponse en cours avant d'analyser un autre formulaire.",
   "AttachFilesAnalyzingForm": "L'analyse des réponses est activée : ce chat fonctionne uniquement avec {{fileName}}. Démarrez un nouveau chat pour joindre d'autres fichiers.",
   "AttachFilesAnalyzingFormUnnamed": "L'analyse des réponses est activée : ce chat fonctionne uniquement avec un seul formulaire. Démarrez un nouveau chat pour joindre d'autres fichiers.",
   "AttachFilesLimit": "Vous pouvez joindre jusqu'à {{limit}} fichiers",

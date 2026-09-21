@@ -262,6 +262,7 @@
   "AssignToRecipient": "Назначить получателю",
   "AttachFilesAlreadyAttached_one": "Этот файл уже прикреплён",
   "AttachFilesAlreadyAttached_other": "Уже прикреплено файлов: {{count}}",
+  "AttachFilesAnalyzingBusy": "Дождитесь завершения текущего ответа, прежде чем анализировать другую форму.",
   "AttachFilesAnalyzingForm": "Анализ ответов включён: этот чат работает только с {{fileName}}. Чтобы прикрепить другие файлы, начните новый чат.",
   "AttachFilesAnalyzingFormUnnamed": "Анализ ответов включён: этот чат работает только с одной формой. Чтобы прикрепить другие файлы, начните новый чат.",
   "AttachFilesLimit": "Можно прикрепить не более {{limit}} файлов",

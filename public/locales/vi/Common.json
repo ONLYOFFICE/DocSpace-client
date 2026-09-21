@@ -262,6 +262,7 @@
   "AssignToRecipient": "Gán cho người nhận",
   "AttachFilesAlreadyAttached_one": "Tệp này đã được đính kèm",
   "AttachFilesAlreadyAttached_other": "{{count}} tệp đã được đính kèm",
+  "AttachFilesAnalyzingBusy": "Hãy đợi phản hồi hiện tại hoàn tất trước khi phân tích biểu mẫu khác.",
   "AttachFilesAnalyzingForm": "Phân tích phản hồi đang bật: cuộc trò chuyện này chỉ làm việc với {{fileName}}. Hãy bắt đầu cuộc trò chuyện mới để đính kèm các tệp khác.",
   "AttachFilesAnalyzingFormUnnamed": "Phân tích phản hồi đang bật: cuộc trò chuyện này chỉ làm việc với một biểu mẫu. Hãy bắt đầu cuộc trò chuyện mới để đính kèm các tệp khác.",
   "AttachFilesLimit": "Bạn có thể đính kèm tối đa {{limit}} tệp",

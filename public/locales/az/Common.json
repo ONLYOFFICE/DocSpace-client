@@ -262,6 +262,7 @@
   "AssignToRecipient": "Alıcıya ver",
   "AttachFilesAlreadyAttached_one": "Bu fayl artıq əlavə edilib",
   "AttachFilesAlreadyAttached_other": "{{count}} fayl artıq əlavə edilib",
+  "AttachFilesAnalyzingBusy": "Başqa formanı analiz etməzdən əvvəl cari cavabın bitməsini gözləyin.",
   "AttachFilesAnalyzingForm": "Cavabların analizi aktivdir: bu çat yalnız {{fileName}} ilə işləyir. Başqa fayllar əlavə etmək üçün yeni çat başladın.",
   "AttachFilesAnalyzingFormUnnamed": "Cavabların analizi aktivdir: bu çat yalnız bir forma ilə işləyir. Başqa fayllar əlavə etmək üçün yeni çat başladın.",
   "AttachFilesLimit": "Ən çox {{limit}} fayl əlavə edə bilərsiniz",

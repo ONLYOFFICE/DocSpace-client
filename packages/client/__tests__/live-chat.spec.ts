@@ -40,7 +40,6 @@ import {
   TypeSettings,
   selfActivationStatusHandler,
   selfByTypeHandler,
-  usersByType,
 } from "@docspace/shared/__mocks__/handlers";
 
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
@@ -76,10 +75,6 @@ const LIVE_CHAT_ITEM = "user-menu-live-chat";
 const TOGGLE = "toggle-button";
 const TOAST = ".Toastify__toast";
 
-// packages/client/src/store/DashboardTourStore.ts — spent up front so the
-// welcome does not sit over the page.
-const welcomeKey = (userId: string) => `dashboard_welcome_seen_${userId}`;
-
 const mockPortal = () => [
   settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone, {
     zendeskKey: ZENDESK_KEY,
@@ -102,9 +97,6 @@ const stubZendesk = (page: Page) =>
   );
 
 const openProfileMenu = async (page: Page, baseUrl: string) => {
-  await page.addInitScript((key: string) => {
-    window.localStorage.setItem(key, "true");
-  }, welcomeKey(usersByType.owner.id));
 
   await page.goto(`${baseUrl}${DASHBOARD_URL}`);
 
@@ -224,9 +216,6 @@ test.describe("Profile menu live chat switch", () => {
       }),
     );
 
-    await page.addInitScript((key: string) => {
-      window.localStorage.setItem(key, "true");
-    }, welcomeKey(usersByType.owner.id));
 
     await page.goto(`${baseUrl}${DASHBOARD_URL}`);
 

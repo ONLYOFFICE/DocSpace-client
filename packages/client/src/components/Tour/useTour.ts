@@ -151,11 +151,13 @@ export default function useTour(
     },
     options: {
       overlayColor: "rgba(0, 0, 0, 0.5)",
-      // A click on the backdrop does nothing: the tour is a few steps long and
-      // losing it to a stray click beside the tooltip is worse than having to
-      // aim for the close button. Esc still ends it (`dismissKeyAction`).
+      // A stray click beside the tooltip must not lose the tour.
       overlayClickAction: false,
       blockTargetInteraction: true,
+      // joyride's own close advances the index first, which runs the next
+      // step's `before` hook. Esc did the same, so it is handled below.
+      closeButtonAction: "skip" as const,
+      dismissKeyAction: false as const,
       // Each step's anchor is still scrolled into view before the step is laid
       // out — the sections are all taller than the viewport, and a tour opens
       // on whatever the user had scrolled to rather than on a fresh page, so
@@ -187,10 +189,24 @@ export default function useTour(
     }
   }, [isMobileView, tourStore]);
 
-  // Keyboard walking: the arrows step back and forth, which is what a keyboard
-  // user reaches for first. Enter and Space already work — the focus trap puts
-  // them on the tooltip's own Next button — and Esc closes the tour through
-  // joyride's `dismissKeyAction`, so neither is handled here.
+  // A step's own `after` hook is skipped when the tour ends on that step.
+  const clearStepArtifacts = useCallback(() => {
+    document
+      .querySelector(".tour-outline-item")
+      ?.classList.remove("tour-outline-item");
+    removeUnionSpotlight();
+    removeRevealedControl();
+  }, []);
+
+  const stopTour = useCallback(() => {
+    stepAbortRef.current?.abort();
+    stepAbortRef.current = null;
+    currentSignalRef.current = undefined;
+    clearStepArtifacts();
+    tourStore.completeTour();
+  }, [clearStepArtifacts, tourStore]);
+
+  // Enter and Space already work: the focus trap puts them on Next.
   useEffect(() => {
     if (!tourStore.isRunning) return undefined;
 
@@ -203,13 +219,16 @@ export default function useTour(
       } else if (event.key === "ArrowLeft") {
         event.preventDefault();
         controls.prev();
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+        stopTour();
       }
     };
 
     document.addEventListener("keydown", onKeyDown);
 
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [controls, tourStore.isRunning]);
+  }, [controls, stopTour, tourStore.isRunning]);
 
   // Every anchor was filtered out, so there is nothing to show. react-joyride
   // never starts on an empty step list, which would leave the tour flagged as
@@ -235,38 +254,8 @@ export default function useTour(
     };
   }, []);
 
-  // Whatever the steps put on the page for their own sake: the accent outline
-  // on a sidebar item, the stand-in node a grouped spotlight measures into,
-  // the class standing in for a hover. A step's `after` hook normally takes
-  // its own down, but a tour that ends on the step — closed, skipped, anchor
-  // gone — never gets there.
-  const clearStepArtifacts = useCallback(() => {
-    document
-      .querySelector(".tour-outline-item")
-      ?.classList.remove("tour-outline-item");
-    removeUnionSpotlight();
-    removeRevealedControl();
-  }, []);
-
-  const stopTour = useCallback(() => {
-    stepAbortRef.current?.abort();
-    stepAbortRef.current = null;
-    currentSignalRef.current = undefined;
-    clearStepArtifacts();
-    tourStore.completeTour();
-  }, [clearStepArtifacts, tourStore]);
-
-  // The close button (and Esc) route through `controls.close()`, which only
-  // sets `action: CLOSE` and bumps the index — it leaves the status RUNNING
-  // unless the × was hit on the last step. So TOUR_END does not fire, and the
-  // STEP_AFTER that would carry the CLOSE action is itself gated on the step
-  // having reached the TOOLTIP lifecycle: close during a `before` hook, a
-  // reposition or a navigation and neither event arrives. Nothing would then
-  // lower `isRunning`, and a section that stood its list in for the tour
-  // (FilesTour's demo files) would never be handed back.
-  //
-  // The store state changes on every close regardless of lifecycle, so it is
-  // the one signal that always lands.
+  // A backstop for closes that still end in `controls.close()`: those leave
+  // the status RUNNING, so TOUR_END never fires.
   useEffect(() => {
     if (!tourStore.isRunning) return;
     if (state.action === ACTIONS.CLOSE) stopTour();

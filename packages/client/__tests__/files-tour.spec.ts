@@ -71,6 +71,8 @@ const EMPTY_STEP = "Your list is empty for now";
 // The empty screen the closing step points at.
 const EMPTY_SCREEN = '[data-testid="empty-view"]';
 
+const QUICK_ACTIONS_TRACK = '[data-testid="quick-actions-track"]';
+
 // The dropdown MainButton opens, portalled to the body.
 const NEW_MENU = ".p-contextmenu";
 // The share button on the first row that has one — hidden until the row is
@@ -244,6 +246,27 @@ test.describe("Files tour", () => {
     await page.keyboard.press("Escape");
 
     await expect(tourTooltip(page)).toBeHidden();
+  });
+
+  test("leaves the quick-actions strip where it was when closed", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // Closing used to run the next step's prepare, which scrolls the strip.
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+
+    const scrollLeft = () =>
+      page.locator(QUICK_ACTIONS_TRACK).evaluate((el) => el.scrollLeft);
+
+    expect(await scrollLeft()).toBe(0);
+
+    await tourTooltip(page).getByRole("button", { name: "Close" }).click();
+    await expect(tourTooltip(page)).toBeHidden();
+
+    expect(await scrollLeft()).toBe(0);
   });
 
   // The guest walkthrough is not here but in "Files tour for a guest" below:

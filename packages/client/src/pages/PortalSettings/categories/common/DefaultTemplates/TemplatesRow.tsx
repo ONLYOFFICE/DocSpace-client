@@ -235,6 +235,7 @@ const TemplatesRow = ({
         <FilesSelector
           key="select-default-template-dialog"
           filterParam={filterParam}
+          withSubFolders={false}
           isPanelVisible={isSelectorVisible}
           onSelectFile={(file) => onSelectFile(file as TFile)}
           onClose={() => setIsSelectorVisible(false)}

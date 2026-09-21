@@ -80,6 +80,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 	isFormRoom?: boolean;
 
 	filterParam?: string;
+	withSubFolders?: boolean;
 
 	currentFolderId: number | string;
 	fromFolderId?: number;

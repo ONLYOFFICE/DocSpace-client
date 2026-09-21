@@ -66,14 +66,10 @@ const CREATE_TILE_SELECTORS = [
   '[data-testid="quick-pdf"]',
 ];
 
-// The "New" button in the filter bar, and the menu it opens.
-//
-// MainButton keeps its click handler on the box inside the test-id wrapper, so
-// the trigger points one level in while the spotlight takes the whole button.
-// The menu is portalled to the body and only mounted while open (ContextMenu
-// unmounts on exit) — with the tour blocking every other interaction it is the
-// only one that can be up.
-const NEW_BUTTON_SELECTOR = '[data-testid="main-button"]';
+// The test id covers the label alone; the plus belongs to the wrapper around it.
+const NEW_BUTTON_SELECTOR =
+  '#filter_search-input > div:has(> [data-testid="main-button"])';
+// MainButton keeps its click handler one level inside the test id.
 const NEW_BUTTON_TRIGGER_SELECTOR = '[data-testid="main-button"] > *';
 const NEW_MENU_SELECTOR = ".p-contextmenu";
 

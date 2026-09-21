@@ -359,15 +359,13 @@ const SectionBodyContent = (props) => {
       // panel is not a `.droppable`, so the move path below must not run either.
       if (isDragActive && draggedFiles.length > 0) {
         attachFilesToChat(draggedFiles)
-          .then(
-            ({ skippedOverLimit, duplicates, cap }) => {
-              // Files that did not make it onto the composer — capped or
-              // already there — must not vanish without a word. The cap is
-              // per section, so quote the one that applied.
-              notifyAlreadyAttached(t, duplicates);
-              notifyAttachmentLimit(t, skippedOverLimit, cap);
-            },
-          )
+          .then(({ skippedOverLimit, duplicates, cap }) => {
+            // Files that did not make it onto the composer — capped or
+            // already there — must not vanish without a word. The cap is
+            // per section, so quote the one that applied.
+            notifyAlreadyAttached(t, duplicates);
+            notifyAttachmentLimit(t, skippedOverLimit, cap);
+          })
           .catch((error) => toastr.error(error));
       }
 

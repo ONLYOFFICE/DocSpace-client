@@ -204,9 +204,15 @@ Because those subpaths are real `node_modules` entry points and the app imports
 them directly, Vite treats each one as its own optimizable dependency.
 `packages/client/vite.config.ts` lists ui-kit in `optimizeDeps.include` with
 subpath globs for exactly this reason - without them a cold dev start
-pre-bundles each subpath separately. `@onlyoffice/ai-chat` is deliberately
-`optimizeDeps.exclude`d instead, to keep the lazy AI chunking in
-`config/build.ts` intact.
+pre-bundles each subpath separately. `@onlyoffice/ai-chat` is in that same
+`include` list, for the opposite kind of reason: it has to stay pre-bundled.
+assistant-stream, pulled in through the AI stack, does
+`import sjson from "secure-json-parse"`, and that package is plain CommonJS
+with no ESM build - only esbuild's CJS-to-ESM interop during pre-bundling gives
+it a `default` export, and served raw it fails at runtime with "does not
+provide an export named 'default'". `optimizeDeps` affects the dev server only,
+so including it does not interfere with the lazy AI chunking in
+`config/build.ts`.
 
 ### The ai-chat peer
 

@@ -427,8 +427,11 @@ export const getFolderModelImpl = (
           },
           {
             key: "template-gallery",
+            // The Forms root has no folder to hold a form, so the picked
+            // template creates a form space around it -- same flow as the
+            // Forms quick-action tile.
             label: t("Common:TemplateGallery"),
-            onClick: () => self.onShowTemplateGallery(),
+            onClick: () => self.onShowTemplateGallery(true),
             icon: TemplateGalleryReactSvgUrl,
           },
         ]

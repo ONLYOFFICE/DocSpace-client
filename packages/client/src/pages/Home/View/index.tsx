@@ -264,6 +264,7 @@ const View = ({
     selectedFolderStore,
     wsCreatedPDFForm,
     currentExtensionGallery,
+    setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
   });
 
   const { getProfileInitialValue } = useProfileBody({

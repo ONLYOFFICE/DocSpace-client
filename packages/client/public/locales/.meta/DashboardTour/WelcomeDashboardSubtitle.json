@@ -3,7 +3,7 @@
   "content": "Everything starts here",
   "content_en_sha1_hash": "9d72d40e88a69527225390e07d5a0c77a5b506d5",
   "created_at": "2026-08-31T18:23:46.778Z",
-  "updated_at": "2026-08-31T19:41:48.543Z",
+  "updated_at": "2026-09-22T10:56:05.089Z",
   "comment": {
     "text": "Subtitle in the welcome dialog/dashboard tour, appearing under the mascot icon during the initial onboarding process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/WelcomeDialog/WelcomeDialog.tsx",
-      "line_number": 93,
+      "line_number": 94,
       "context": "<div className={styles.illustrationWrap} aria-hidden=\"true\">\n <MascotIcon className={styles.illustration} />\n </div>\n \n <Text as=\"h3\" className={styles.subtitle}>\n {t(\"DashboardTour:WelcomeDashboardSubtitle\")}\n </Text>\n \n <Text as=\"p\" className={styles.description}>\n {t(\"DashboardTour:WelcomeDescription\")}\n </Text>",
       "module": "/packages/client"
     }

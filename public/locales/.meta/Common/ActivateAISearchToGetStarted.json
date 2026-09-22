@@ -1,21 +1,21 @@
 {
-  "key_path": "BackToRoom",
-  "content": "Back to room",
-  "content_en_sha1_hash": "05b5ad942bc5883b0e92e79a35cf1ad9a6740b9d",
-  "created_at": "2025-05-19T21:30:57.150Z",
-  "updated_at": "2026-07-28T07:30:59.933Z",
+  "key_path": "ActivateAISearchToGetStarted",
+  "content": "Activate AI Search to get started?",
+  "content_en_sha1_hash": "aad227e4867d3f9357feda940e8d89d425bcc5cd",
+  "created_at": "2026-09-22T17:10:40.889Z",
+  "updated_at": "2026-09-22T17:12:06.039Z",
   "comment": {
-    "text": "This is a button label that allows users to return to the room after completing a form.",
+    "text": "Banner title prompting the user to enable AI Search functionality.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:29:45.017Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-09-22T17:12:06.039Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 264,
-      "context": "/>\n {(!isShareFile || isRoomMember) && !isSDK ? (\n <Button\n scale\n size={ButtonSize.medium}\n label={t(\"CompletedForm:BackToRoom\")}\n onClick={handleBackToRoom}\n testId=\"back_to_room_button\"\n />\n ) : null}\n </footer>",
-      "module": "/packages/doceditor"
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
+      "line_number": 130,
+      "context": "// tab adds is said between them, by the description.\n const getBannerTexts = (t, isWebSearchTab) => ({\n activateLabel: t(\"Common:Activate\"),\n ...(isWebSearchTab\n ? {\n activateTitle: t(\"Common:ActivateAISearchToGetStarted\"),\n activateDescription: t(\"Common:ActivateAISearchDescription\"),\n enabledTitle: t(\"Common:AISearchEnabledTitle\"),\n enabledDescription: t(\"Common:AISearchEnabledDescription\"),\n }\n : {",
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.611151Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

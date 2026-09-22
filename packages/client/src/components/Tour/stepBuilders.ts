@@ -53,61 +53,48 @@ function silenceNonAbort(logLabel: string) {
   };
 }
 
+/** Waits for an anchor; a missing one costs its step, not the tour. */
+const awaitAnchor = (
+  selector: string,
+  timeout: number,
+  signal: AbortSignal | undefined,
+  logLabel: string,
+) => waitForElement(selector, timeout, signal).catch(silenceNonAbort(logLabel));
+
 export const sidebarSelector = (id: string) => `[data-item-id="${id}"]`;
 
 /**
- * How long a step's `before` hook waits for its target.
- *
- * `useTour` filters the step list against the DOM the moment the tour starts,
- * so a step that runs at all normally has its target on screen already and the
- * wait resolves on the first tick. The budget is only there for anchors that a
- * `prepare` call reveals — keep it short, because every millisecond of it is a
- * spinner the user stares at when the element never shows up.
+ * How long a step waits for an anchor a `prepare` call reveals. Anchors that
+ * were already on the page resolve on the first tick, so keep this short: the
+ * user stares at a spinner for whatever it is set to.
  */
 export const STEP_TARGET_TIMEOUT = 1500;
 
 /**
- * The budget for a step whose `reveal` navigates rather than opens something
- * already on the page. A route change is a fetch and a re-render of the whole
- * section, which does not fit in the ordinary budget — and overrunning it is
- * not a slow step but a broken one: the wait is swallowed, so joyride lays the
- * step out against a target that never arrived and pins the tooltip to the
- * corner of the screen with nothing under the spotlight.
+ * The budget for a reveal that navigates or re-fetches. Overrunning it is not a
+ * slow step but a broken one: joyride lays the step out against a target that
+ * never arrived, pinning the tooltip to the corner of the screen.
  */
 export const NAVIGATION_TARGET_TIMEOUT = 8000;
 
-/**
- * The pair of hooks a `revealStep` uses to bring its own target on screen, and
- * to put back whatever that took.
- *
- * `navigates` marks a reveal that changes the route, or re-fetches the section
- * it is pointing at — either way the target arrives on a round trip rather
- * than on a re-render, which does not fit the ordinary budget. See
- * `revealStep` for why that matters to the wait.
- */
+/** How a `revealStep` brings its target on screen, and puts it back. */
 export type RevealHooks = {
   reveal: () => void;
   restore: () => void;
+  /** The target arrives on a round trip, which buys it the longer budget. */
   navigates?: boolean;
   /**
-   * Something `reveal` needs on the page before it can do its job — the room
-   * row the info panel is opened *on*, for instance, which `reveal` reads out
-   * of the file list rather than off the DOM.
-   *
-   * Waited for before `reveal` is called, so a step whose precondition is
-   * still on its way (a list being re-fetched by the step the user just walked
-   * back out of) opens on it rather than on nothing. A step whose reveal
-   * depends on nothing but the page already being there leaves this out.
+   * What `reveal` reads before it can do its job — the room row the info panel
+   * is opened *on*, for instance. Waited for, so a step walked back into while
+   * the list is still coming back opens on it rather than on nothing.
    */
   awaitBefore?: string;
 };
 
 /**
- * `document.querySelector` that answers "no" to a selector it cannot parse
- * rather than throwing. `isStepTargetPresent` runs over the whole step list
- * during render, so a malformed selector in one step would otherwise take the
- * section down with it instead of costing that step alone. Belt-and-braces —
- * every selector the tours use today parses.
+ * `querySelector` that answers "no" to a selector it cannot parse. The step
+ * list is filtered during render, so one bad selector would take the section
+ * down rather than cost its own step.
  */
 function match(selector: string): Element | null {
   try {
@@ -118,17 +105,10 @@ function match(selector: string): Element | null {
 }
 
 /**
- * The widest descendant of `row` that has a box of its own — in a file list,
- * the name column.
- *
- * Descends a level at a time and stops at the first level that measures
- * anything, so the anchor stays as close to the row as the layout allows, and
- * only walks into the nodes that measured nothing themselves. That last part is
- * the point: a file-list row is not one boxless wrapper but two nested ones —
- * the drag-and-drop wrapper carrying `folder_{id}` / `file_{id}`, and ui-kit's
- * own table row inside it, both `display: contents`. Looking a single level
- * down found only the second wrapper, which measures 0×0 exactly like the
- * first, and the step was laid out against that.
+ * The widest descendant of `row` with a box of its own — in a file list, the
+ * name column. Descends level by level, and only into nodes that measured
+ * nothing: a row is two nested `display: contents` wrappers, so stopping at
+ * the first level finds another 0x0 box.
  */
 function widestMeasurableDescendant(row: HTMLElement): HTMLElement | null {
   let level = Array.from(row.children) as HTMLElement[];
@@ -160,22 +140,9 @@ function widestMeasurableDescendant(row: HTMLElement): HTMLElement | null {
 }
 
 /**
- * The element a step should be laid out against — `selector`'s match, or the
- * widest descendant that can be measured when that match has no box of its own.
- *
- * A file list's table row is `display: contents`, so the element carrying the
- * row's id reports a 0×0 rect at (0,0) even though its cells are on screen and
- * visible. react-joyride positions both the tooltip and the spotlight from that
- * rect, so pointing a step straight at such a row parks the tooltip in the
- * top-left corner of the viewport with nothing lit up — the row is found, it
- * just cannot be measured. The cells are the part with geometry, so the widest
- * of them (the name column) stands in for the row.
- *
- * Every step that anchors on a file-list row has to go through this, whether it
- * names the row by `data-testid` or by its `folder_{id}` / `file_{id}` id — and
- * the two name different nodes: the id sits on the drag-and-drop wrapper, one
- * boxless level above the `data-testid` row, so the search cannot stop at the
- * first level down.
+ * What a step is laid out against: the match itself, or a descendant of it that
+ * can be measured. A `display: contents` row reports a 0x0 rect at (0,0), and
+ * joyride would park the tooltip in the corner with nothing lit up.
  */
 function measurableTarget(selector: string): HTMLElement | null {
   const element = match(selector) as HTMLElement | null;
@@ -184,9 +151,7 @@ function measurableTarget(selector: string): HTMLElement | null {
   const { width, height } = element.getBoundingClientRect();
   if (width > 0 && height > 0) return element;
 
-  // The element itself when it has no cell to stand in for it — a leaf that
-  // measures nothing is no worse an anchor than nothing at all, and giving up
-  // here would drop a step whose target is on the page.
+  // A leaf that measures nothing is still a better anchor than none.
   return widestMeasurableDescendant(element) ?? element;
 }
 
@@ -205,30 +170,17 @@ function isVisible(element: Element): boolean {
   return element.isConnected;
 }
 
-/**
- * The element ui-kit's `Scrollbar` hands its content to — the node that
- * actually moves when a section scrolls (`Scrollbar.tsx`, `.scroller`).
- */
+/** What ui-kit's `Scrollbar` actually moves when a section scrolls. */
 const SCROLLER_SELECTOR = ".scroller";
 
 /**
- * The share of the scroll container's height, at the top and at the bottom,
- * that a step's anchor is not left sitting in. Mirrors the margin react-joyride
- * uses for the same judgement.
- *
- * It buys two things at once: an anchor already well inside the container is
- * left exactly where the user last saw it, because a tour that re-centres the
- * page on every step moves the ground under the reader for nothing; and an
- * anchor that is only just inside the edge is still scrolled, because the
- * spotlight around it would be cut in half by the container's edge.
+ * The band at the top and bottom of the scroll container that an anchor is not
+ * left sitting in: closer than that and the spotlight around it is cut in half,
+ * further in and it is left exactly where the user last saw it.
  */
 const COMFORTABLE_MARGIN_RATIO = 0.2;
 
-/**
- * The box a target has to be visible inside: its scroll container, or the
- * viewport for a target that is not in one (the sidebar's own items on a narrow
- * screen, anything a section renders outside its `Scrollbar`).
- */
+/** The box a target has to be visible inside, or the viewport when it has none. */
 function scrollBounds(element: HTMLElement) {
   const container = element.closest(SCROLLER_SELECTOR);
 
@@ -242,48 +194,22 @@ function scrollBounds(element: HTMLElement) {
 }
 
 /**
- * Bring a step's anchor on screen, before react-joyride lays the step out.
+ * Brings a step's anchor on screen before joyride lays the step out. joyride's
+ * own scrolling is off (`skipScroll`): it over-scrolls inside ui-kit's
+ * `Scrollbar` by the container's distance from the top of the viewport, which
+ * drags the anchor out through the top while the spotlight keeps drawing it.
  *
- * joyride's own scrolling is switched off (`skipScroll` in `useTour`) and cannot
- * be used for these sections. For a target inside a custom scroll container it
- * derives the container's `scrollTop` from the target's *viewport* top
- * (react-joyride's `modules/dom.ts`, `getScrollTo`), which is the same number
- * only while the container's box starts at the top of the viewport. The branch
- * that measures the target against the container instead is gated on the
- * container having a non-zero `offsetTop`, and ui-kit's `Scrollbar` renders its
- * `.scroller` as `position: absolute; top: 0` inside an absolutely positioned
- * wrapper — so it is always zero here, and that branch never runs.
- *
- * What that costs is an over-scroll by exactly the container's distance from the
- * top of the viewport, so everything standing above the section (the main bar's
- * email-activation notice, a campaign banner, on a section the header and the
- * filter) is added to the scroll and drags the anchor up and out through the top
- * of the container. Nothing clips the spotlight — it is an SVG over the whole
- * page — so it goes on drawing the anchor's box where the anchor now is: over
- * the banner, with the row or card it belongs to no longer on screen.
- *
- * `scrollIntoView` sidesteps the arithmetic: the browser scrolls every ancestor
- * scroll box that needs it, the document included, and it is the same call
- * whether the section scrolls itself or the page does.
- *
- * Synchronous, and deliberately so: the scroll offsets are set by the call
- * itself, and the next `getBoundingClientRect` — joyride's, when it lays the step
- * out — reads the settled layout. Waiting a frame first was the obvious thing to
- * do and the wrong one: a frame is only produced when the browser gets round to
- * painting, so every step of every tour would hang on the machine being idle.
+ * Synchronous on purpose: joyride measures as soon as this returns, and waiting
+ * a frame would hang every step on the browser getting round to painting.
  */
 export function scrollTargetIntoView(
   selector: string,
   signal?: AbortSignal,
 ): void {
-  // The step has been left (walked back out of, or the tour closed) while its
-  // hook was waiting for the anchor: scrolling the section now would move the
-  // page under whatever came next.
+  // The step has been left while its hook waited, so scrolling now would move
+  // the page under whatever came next.
   if (signal?.aborted) return;
 
-  // Through `measurableTarget`, so a `display: contents` file-list row is
-  // scrolled by the cell that has the geometry rather than by a 0x0 rect at
-  // (0,0), which would read as off-screen and scroll to the top of the list.
   const element = measurableTarget(selector);
 
   if (!element) return;
@@ -316,10 +242,8 @@ export function scrollTargetIntoView(
  * instead of stalling on them and then killing the tour.
  */
 export function isStepTargetPresent(step: Step): boolean {
-  // A step that reveals its own target — a menu it clicks open, a control the
-  // row only shows on hover — can't be judged by how the page looks now. When
-  // it names something whose mere presence proves it is worth running, that is
-  // what gets checked (existence only: the target is hidden, not absent).
+  // A step that reveals its own target cannot be judged by the page as it is;
+  // `presence` stands in for it where the step named one.
   if (step.data?.revealsTarget) {
     const { presence } = step.data as { presence?: string };
 
@@ -347,13 +271,8 @@ export function isStepTargetPresent(step: Step): boolean {
 }
 
 /**
- * Spotlight a sidebar NavMenu item (or the whole list containing it, for a
- * nested "quick access" block). Adds/removes the accent outline class.
- *
- * `prepare` runs before the target is awaited, like `elementStep`'s — a tour
- * that walked into a room needs a way to walk back out before pointing at the
- * sidebar again. It must be idempotent: a step's `before` hook runs again when
- * the user steps back into it.
+ * A sidebar item, or the whole list around it. `prepare` runs before the target
+ * is awaited and must be idempotent: a step walked back into runs it again.
  */
 export function navItemStep(
   selector: string,
@@ -380,9 +299,7 @@ export function navItemStep(
     before: async () => {
       const signal = callbacks?.getSignal();
       prepare?.();
-      await waitForElement(selector, STEP_TARGET_TIMEOUT, signal).catch(
-        silenceNonAbort(logLabel),
-      );
+      await awaitAnchor(selector, STEP_TARGET_TIMEOUT, signal, logLabel);
       scrollTargetIntoView(selector, signal);
       if (!spotlightList) {
         document.querySelector(selector)?.classList.add("tour-outline-item");
@@ -446,9 +363,7 @@ export function elementStep(
     before: async () => {
       const signal = callbacks?.getSignal();
       prepare?.();
-      await waitForElement(target, STEP_TARGET_TIMEOUT, signal).catch(
-        silenceNonAbort(logLabel),
-      );
+      await awaitAnchor(target, STEP_TARGET_TIMEOUT, signal, logLabel);
       scrollTargetIntoView(target, signal);
     },
   };
@@ -459,28 +374,17 @@ const UNION_SPOTLIGHT_ID = "tour-spotlight-union";
 
 /**
  * An empty node covering the union of `selectors`' boxes, so a spotlight can
- * cover a run of siblings — the four create tiles — without lighting up the
- * whole container they share with something the tour highlights separately.
- * react-joyride resolves `spotlightTarget` down to one element and reads its
- * rect, so the rect has to belong to a real node.
- *
- * Positioned `fixed`, which is both what `getBoundingClientRect` measures and
- * what joyride's own fixed-target path expects. Recomputed on every call:
- * joyride re-resolves the target on scroll and resize.
- *
- * Falls back to the anchor when nothing measurable is on the page, so a
- * degenerate rect never sends the spotlight to the viewport corner.
+ * cover a run of siblings without the container they share. joyride resolves
+ * `spotlightTarget` to one element and reads its rect, so the rect needs a node
+ * of its own; it is recomputed on every call, because joyride re-resolves the
+ * target on scroll and resize.
  */
 function unionSpotlight(selectors: string[], anchorSelector: string) {
-  // The last-resort fallback stays the anchor element itself: it is the whole
-  // region the step is about, and descending into a child of it would narrow
-  // the spotlight rather than widen it.
+  // The fallback when nothing measurable is on the page: the whole region the
+  // step is about, rather than a degenerate rect in the viewport corner.
   const anchor = match(anchorSelector) as HTMLElement | null;
 
   const rects = selectors
-    // Through `measurableTarget`, so a member that is a `display: contents`
-    // file-list row contributes its cells' box rather than a 0×0 rect the
-    // filter below would drop.
     .map((selector) => measurableTarget(selector))
     .filter((element): element is HTMLElement => !!element && isVisible(element))
     .map((element) => element.getBoundingClientRect())
@@ -586,19 +490,11 @@ export function menuStep(
     data: { revealsTarget: true },
     before: async () => {
       const signal = callbacks?.getSignal();
-      // The trigger is what gets scrolled into view, not the menu, and it is
-      // scrolled before the menu is opened.
-      //
-      // A dropdown is positioned against its trigger and floats above the scroll
-      // container rather than inside it, so scrolling to the menu itself either
-      // does nothing (it is already wherever the trigger put it) or drags the
-      // trigger out from under it. Centring the trigger keeps the pair together,
-      // and the menu opens on screen because the thing it hangs off is.
+      // The trigger, not the menu: a dropdown floats above the scroll
+      // container, so scrolling to it would drag the trigger out from under it.
       scrollTargetIntoView(triggerSelector, signal);
       if (!isOpen()) toggle();
-      await waitForElement(menuSelector, STEP_TARGET_TIMEOUT, signal).catch(
-        silenceNonAbort(logLabel),
-      );
+      await awaitAnchor(menuSelector, STEP_TARGET_TIMEOUT, signal, logLabel);
     },
     after: () => {
       if (isOpen()) toggle();
@@ -608,26 +504,13 @@ export function menuStep(
 }
 
 /**
- * Spotlight something the step brings on screen itself through the stores
- * rather than through the DOM — the info panel is opened by selecting an item
- * and switching a tab, an empty screen is brought back by reloading a section.
- * Neither is a click on a single element the way `menuStep`'s trigger is.
+ * A step whose target is brought on screen through the stores rather than by a
+ * click: the info panel opened on an item, the empty screen a reload brings up.
+ * The hooks come from the tour's host, the only place with the stores in hand.
  *
- * `reveal`/`restore` come from the tour's host component, which is the only
- * place with the stores in hand. `restore` has to put back whatever `reveal`
- * changed, because the user can walk back out of the step as easily as
- * forward; pass a no-op when the step is meant to leave its change standing.
- *
- * `presence` names an element whose being on the page proves the step is worth
- * running at all (a room row, for a panel that describes a room) — the target
- * itself is not on screen when the tour starts, so it cannot be the thing
- * checked. Leave it out for a step that is always worth running.
- *
- * `hooks.navigates` says the reveal is a route change rather than something
- * opened on the page already, which buys the target a much longer wait. It sits
- * on the hooks rather than in a parameter of its own because it is a fact about
- * the reveal, and the alternative is every caller passing a run of `undefined`s
- * to reach a trailing argument.
+ * `presence` names something whose being on the page proves the step is worth
+ * running — the target itself is not there when the tour starts, so the
+ * start-of-run check cannot look at it.
  */
 export function revealStep(
   target: string,
@@ -666,19 +549,12 @@ export function revealStep(
     before: async () => {
       const signal = callbacks?.getSignal();
 
-      // Whatever the reveal is about to read — see `awaitBefore`. The same
-      // budget as the target itself: both are the step waiting for the section
-      // to be in the state it describes.
       if (hooks.awaitBefore) {
-        await waitForElement(hooks.awaitBefore, timeout, signal).catch(
-          silenceNonAbort(logLabel),
-        );
+        await awaitAnchor(hooks.awaitBefore, timeout, signal, logLabel);
       }
 
       hooks.reveal();
-      await waitForElement(target, timeout, signal).catch(
-        silenceNonAbort(logLabel),
-      );
+      await awaitAnchor(target, timeout, signal, logLabel);
       scrollTargetIntoView(target, signal);
     },
     after: () => {
@@ -720,9 +596,7 @@ export function hoverRevealStep(
     before: async () => {
       const signal = callbacks?.getSignal();
       document.querySelector(target)?.classList.add(REVEAL_CLASS);
-      await waitForElement(target, STEP_TARGET_TIMEOUT, signal).catch(
-        silenceNonAbort(logLabel),
-      );
+      await awaitAnchor(target, STEP_TARGET_TIMEOUT, signal, logLabel);
       scrollTargetIntoView(target, signal);
     },
     after: () => {
@@ -737,15 +611,9 @@ export function removeRevealedControl() {
 }
 
 /**
- * Spotlight the first item of a file list.
- *
- * `rowSelector` must match the row wrapper. In the table view that wrapper is
- * `display: contents` (see the callers' notes), so it has no geometry of its
- * own: both the spotlight and the tooltip's anchor fall back to the row's
- * widest cell (the file-name column). react-joyride anchors the tooltip on
- * `target`, not on `spotlightTarget`, so both have to be resolved — otherwise
- * the tooltip floats at the viewport corner. In the row/tile views the wrapper
- * is a normal box and is used as-is.
+ * The first row of a file list. Both the anchor and the spotlight are resolved
+ * through `measurableTarget`: in the table view the row wrapper has no box of
+ * its own, and joyride reads them separately.
  */
 export function fileItemStep(
   rowSelector: string,
@@ -753,11 +621,8 @@ export function fileItemStep(
   body: ReactNode,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
-  // Same contract as `elementStep`'s: runs before the row is awaited, and has
-  // to be idempotent.
   prepare?: () => void,
-  // As on `revealStep`: pass `NAVIGATION_TARGET_TIMEOUT` when `prepare` changes
-  // the route, so the list has time to come back before the row is given up on.
+  // `NAVIGATION_TARGET_TIMEOUT` when `prepare` changes the route.
   timeout = STEP_TARGET_TIMEOUT,
 ): Step {
   const resolve = () => measurableTarget(rowSelector);
@@ -773,32 +638,21 @@ export function fileItemStep(
     before: async () => {
       const signal = callbacks?.getSignal();
       prepare?.();
-      await waitForElement(rowSelector, timeout, signal).catch(
-        silenceNonAbort(logLabel),
-      );
+      await awaitAnchor(rowSelector, timeout, signal, logLabel);
       scrollTargetIntoView(rowSelector, signal);
     },
   };
 }
 
-// The scroll port inside the banner, named by the ui-kit component itself so
-// the tour does not depend on where in the banner's DOM the strip sits.
+// The scroll port inside the banner, named by the ui-kit component itself.
 const QUICK_ACTIONS_TRACK_SELECTOR = '[data-testid="quick-actions-track"]';
 
 /**
- * Bring a quick-action tile into the banner's scroll port.
+ * Brings a quick-action tile into the banner's scroll port: past the fold it is
+ * measurable but out of sight, so joyride would spotlight bare strip.
  *
- * The banner is a carousel, so a tile past the fold is mounted and measurable
- * but scrolled out of sight — joyride would spotlight an empty patch of the
- * strip.
- *
- * The track's own `scrollLeft` is moved rather than calling `scrollIntoView`:
- * that walks every scrollable ancestor, and the section body will happily give
- * up a few pixels of its inline inset to satisfy the request. The list then
- * sits flush against the article and the whole page is captured shifted
- * sideways, which is exactly what the screenshot helper's alignment guard
- * refuses to photograph. Confining the scroll to the strip cannot move
- * anything else.
+ * The track's own `scrollLeft` is moved rather than `scrollIntoView`, which
+ * walks every scrollable ancestor and shifts the whole page sideways.
  */
 export function revealQuickActionTile(selector: string) {
   return () => {

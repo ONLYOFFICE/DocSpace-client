@@ -454,7 +454,7 @@ class SettingsStore {
    * (standalone) installation. Absent on backends that do not publish it yet.
    */
   get docsAdminPanelUrl() {
-    return this.externalResources?.adminpanel?.domain;
+    return this.externalResources?.adminPanel?.domain;
   }
 
   get apiDomain() {

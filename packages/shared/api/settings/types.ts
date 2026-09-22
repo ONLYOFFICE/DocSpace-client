@@ -416,7 +416,7 @@ export type TExternalResources = {
    * Editors-side resources. Optional: only a server (standalone) installation
    * with a new enough backend returns it, so every reader must guard.
    */
-  adminpanel?: TAdminPanelResources;
+  adminPanel?: TAdminPanelResources;
   forum: {
     domain: string;
   };

@@ -49,6 +49,8 @@ COPY *.tgz ./
 # Copy the source code with correct directory structure
 COPY ../common/ ./common/
 COPY ../packages/ ./packages/
+# next.config.js requires scripts/ui-kit-dev.cjs at load time.
+COPY ../scripts/ ./scripts/
 COPY ../public/ ./public/
 
 # ENV NODE_OPTIONS="--max-old-space-size=8192"

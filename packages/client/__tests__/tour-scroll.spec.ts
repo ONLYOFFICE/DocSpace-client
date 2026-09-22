@@ -48,6 +48,8 @@ import { armTour, tourTooltip } from "./helpers/tour";
 const TOUR_KEY = "dashboard_tour_pending";
 const DASHBOARD_URL = "/dashboard";
 const WELCOME_TAKE_TOUR = '[data-testid="dashboard-welcome-take-tour"]';
+// The welcome is no longer shown on its own; the help button is its way in.
+const HELP_BUTTON = '[data-testid="dashboard-open-welcome"]';
 
 /**
  * The dashboard's profile card, which the tour opens on. Any anchor would do —
@@ -118,6 +120,8 @@ test.describe("Tour scrolling", () => {
     await page.evaluate((key) => window.localStorage.removeItem(key), TOUR_KEY);
     await page.goto(`${baseUrl}${DASHBOARD_URL}`);
 
+    await expect(page.locator(HELP_BUTTON)).toBeVisible();
+    await page.locator(HELP_BUTTON).click();
     await expect(page.locator(WELCOME_TAKE_TOUR)).toBeVisible();
 
     await page.addStyleTag({

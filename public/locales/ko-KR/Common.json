@@ -129,7 +129,6 @@
   "AIFeatureWebSearch": "웹 검색",
   "AIFeatureWriteRewriteTranslate": "작성, 재작성, 번역",
   "AIInstructions": "AI 지침",
-  "AIModel": "모델",
   "AIModelPrice": "{{inputPrice}}/M 입력 토큰 | {{outputPrice}}/M 출력 토큰",
   "AIModels": "AI 모델",
   "AIModelsDescription": "OpenRouter를 통해 다양한 AI 모델에 액세스하세요",

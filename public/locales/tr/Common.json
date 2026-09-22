@@ -129,7 +129,6 @@
   "AIFeatureWebSearch": "Web'de arama yapın",
   "AIFeatureWriteRewriteTranslate": "Yazın, yeniden yazın, çevirin",
   "AIInstructions": "AI talimatları",
-  "AIModel": "Model",
   "AIModelPrice": "{{inputPrice}}/M giriş belirteçleri | {{outputPrice}}/M çıkış belirteçleri",
   "AIModels": "AI modelleri",
   "AIModelsDescription": "OpenRouter aracılığıyla çok çeşitli AI modellerine erişin",

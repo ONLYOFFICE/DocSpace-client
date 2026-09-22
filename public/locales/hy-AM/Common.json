@@ -129,7 +129,6 @@
   "AIFeatureWebSearch": "Որոնել համացանցում",
   "AIFeatureWriteRewriteTranslate": "Գրել, վերաշարադրել, թարգմանել",
   "AIInstructions": "ԱԲ հրահանգներ",
-  "AIModel": "Մոդել",
   "AIModelPrice": "{{inputPrice}}/M մուտքային տոքեններ | {{outputPrice}}/M ելքային տոքեններ",
   "AIModels": "ԱԲ մոդելներ",
   "AIModelsDescription": "Ստացեք հասանելիություն ԱԲ մոդելների լայն շրջանակին OpenRouter-ի միջոցով",

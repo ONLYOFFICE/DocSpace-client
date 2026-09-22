@@ -129,7 +129,6 @@
   "AIFeatureWebSearch": "Kërkoni në ueb",
   "AIFeatureWriteRewriteTranslate": "Shkruani, rishkruani, përktheni",
   "AIInstructions": "Udhëzimet e IA",
-  "AIModel": "Model",
   "AIModelPrice": "{{inputPrice}}/M tokenë hyrëse | {{outputPrice}}/M tokenë dalëse",
   "AIModels": "Modelet e IA",
   "AIModelsDescription": "Përfitoni akses në një gamë të gjerë modelesh IA përmes OpenRouter",

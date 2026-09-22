@@ -129,7 +129,6 @@
   "AIFeatureWebSearch": "Търсене в уеб",
   "AIFeatureWriteRewriteTranslate": "Писане, пренаписване, превод",
   "AIInstructions": "Инструкции за изкуствен интелект",
-  "AIModel": "Модел",
   "AIModelPrice": "{{inputPrice}}/M входни токени | {{outputPrice}}/M изходни токени",
   "AIModels": "ИИ модели",
   "AIModelsDescription": "Получете достъп до широк набор от ИИ модели чрез OpenRouter",

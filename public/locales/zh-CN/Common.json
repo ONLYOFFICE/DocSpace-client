@@ -129,7 +129,6 @@
   "AIFeatureWebSearch": "搜索网络",
   "AIFeatureWriteRewriteTranslate": "撰写、改写、翻译",
   "AIInstructions": "AI 指令",
-  "AIModel": "模型",
   "AIModelPrice": "{{inputPrice}}/M 输入令牌 | {{outputPrice}}/M 输出令牌",
   "AIModels": "AI 模型",
   "AIModelsDescription": "通过 OpenRouter 访问广泛的 AI 模型",

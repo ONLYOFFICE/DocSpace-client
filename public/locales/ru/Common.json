@@ -129,7 +129,6 @@
   "AIFeatureWebSearch": "Поиск в интернете",
   "AIFeatureWriteRewriteTranslate": "Написание, переписывание, перевод",
   "AIInstructions": "Инструкции ИИ",
-  "AIModel": "Модель",
   "AIModelPrice": "{{inputPrice}}/млн входных токенов | {{outputPrice}}/млн выходных токенов",
   "AIModels": "Модели ИИ",
   "AIModelsDescription": "Получите доступ к широкому спектру моделей ИИ через OpenRouter",

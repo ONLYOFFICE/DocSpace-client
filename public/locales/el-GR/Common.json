@@ -129,7 +129,6 @@
   "AIFeatureWebSearch": "Αναζήτηση στο Web",
   "AIFeatureWriteRewriteTranslate": "Σύνταξη, επανεγγραφή, μετάφραση",
   "AIInstructions": "Οδηγίες τεχνητής νοημοσύνης",
-  "AIModel": "Μοντέλο",
   "AIModelPrice": "{{inputPrice}}/M tokens εισόδου | {{outputPrice}}/M tokens εξόδου",
   "AIModels": "Μοντέλα AI",
   "AIModelsDescription": "Αποκτήστε πρόσβαση σε ένα ευρύ φάσμα μοντέλων AI μέσω του OpenRouter",

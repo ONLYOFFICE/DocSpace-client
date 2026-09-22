@@ -449,6 +449,14 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  /**
+   * Admin panel of the editors, shown in the profile menu of a server
+   * (standalone) installation. Absent on backends that do not publish it yet.
+   */
+  get docsAdminPanelUrl() {
+    return this.externalResources?.adminpanel?.domain;
+  }
+
   get apiDomain() {
     return this.externalResources?.api?.domain;
   }
@@ -1887,3 +1895,4 @@ class SettingsStore {
 }
 
 export { SettingsStore };
+

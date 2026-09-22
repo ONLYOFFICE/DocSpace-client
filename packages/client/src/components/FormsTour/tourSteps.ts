@@ -33,23 +33,19 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { createElement } from "react";
 import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
-import TourList from "SRC_DIR/components/Tour/TourList";
 import {
-  navItemStep,
+  sidebarListStep,
   elementStep,
   fileItemStep,
   revealStep,
-  sidebarSelector,
   type RevealHooks,
 } from "SRC_DIR/components/Tour/stepBuilders";
+import { FORMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import { DEMO_SPACE_ITEM_IDS } from "SRC_DIR/api/tourDemo/data";
-
-const LOG_LABEL = "forms tour";
 
 // The first form space of the list, in whichever view is active (only one of
 // the three is mounted at a time). Same wrappers as the files list — in the
@@ -174,7 +170,7 @@ export function getTourSteps(
         t("FormsTour:FormsSpaceTitle"),
         t("FormsTour:FormsSpace"),
         callbacks,
-        LOG_LABEL,
+        FORMS_TOUR_LABEL,
         6,
         leaveSpace,
       ),
@@ -188,7 +184,7 @@ export function getTourSteps(
         t("FormsTour:FormsTemplatesTitle"),
         t("FormsTour:FormsTemplates"),
         callbacks,
-        LOG_LABEL,
+        FORMS_TOUR_LABEL,
         6,
         leaveSpace,
       ),
@@ -201,7 +197,7 @@ export function getTourSteps(
         t("FormsTour:FormsItemTitle"),
         t("FormsTour:FormsItem"),
         callbacks,
-        LOG_LABEL,
+        FORMS_TOUR_LABEL,
         leaveSpace,
       ),
 
@@ -216,7 +212,7 @@ export function getTourSteps(
         t("FormsTour:FormsBlankTitle"),
         t("FormsTour:FormsBlank"),
         callbacks,
-        LOG_LABEL,
+        FORMS_TOUR_LABEL,
         spaceHooks,
       ),
 
@@ -234,7 +230,7 @@ export function getTourSteps(
           formFiller: t("Common:RoleFormFiller"),
         }),
         callbacks,
-        LOG_LABEL,
+        FORMS_TOUR_LABEL,
         spaceHooks,
       ),
 
@@ -248,7 +244,7 @@ export function getTourSteps(
         t("FormsTour:FormsCompleteTitle"),
         t("FormsTour:FormsComplete", { complete: t("Common:Complete") }),
         callbacks,
-        LOG_LABEL,
+        FORMS_TOUR_LABEL,
         spaceHooks,
       ),
 
@@ -256,13 +252,12 @@ export function getTourSteps(
     // the sidebar's own label so the wording in the tooltip is the wording on
     // screen and the names are not translated twice.
     showQuickAccess &&
-      navItemStep(
-        sidebarSelector("forms-recent"),
+      sidebarListStep(
+        "forms-recent",
         t("FormsTour:FormsPlacesTitle"),
-        createElement(TourList, { items: places }),
+        places,
         callbacks,
-        LOG_LABEL,
-        true,
+        FORMS_TOUR_LABEL,
         leaveSpace,
       ),
 
@@ -286,7 +281,7 @@ export function getTourSteps(
             t("FormsTour:FormsCreateFirstTitle"),
             t("FormsTour:FormsCreateFirst"),
             callbacks,
-            LOG_LABEL,
+            FORMS_TOUR_LABEL,
             demoHooks,
           )
         : revealStep(
@@ -294,7 +289,7 @@ export function getTourSteps(
             t("FormsTour:FormsEmptyTitle"),
             t("FormsTour:FormsEmpty"),
             callbacks,
-            LOG_LABEL,
+            FORMS_TOUR_LABEL,
             demoHooks,
           )),
   ].filter(Boolean) as Step[];

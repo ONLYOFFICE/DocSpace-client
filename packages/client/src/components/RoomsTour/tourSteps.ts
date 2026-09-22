@@ -33,23 +33,19 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { createElement } from "react";
 import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
-import TourList from "SRC_DIR/components/Tour/TourList";
 import {
-  navItemStep,
+  sidebarListStep,
   elementStep,
   elementGroupStep,
   revealStep,
-  sidebarSelector,
   revealQuickActionTile,
   rewindQuickActions,
 } from "SRC_DIR/components/Tour/stepBuilders";
-
-const LOG_LABEL = "rooms tour";
+import { ROOMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 
 // The room-type tiles, in the banner order the quick-actions hook builds them
 // (VDR first). The template and AI chat tiles share their container and get a
@@ -164,7 +160,7 @@ export function getTourSteps(
           custom: t("Common:CustomRoomTitle"),
         }),
         callbacks,
-        LOG_LABEL,
+        ROOMS_TOUR_LABEL,
         6,
         rewindQuickActions,
       ),
@@ -179,7 +175,7 @@ export function getTourSteps(
         t("RoomsTour:RoomsTemplatesTitle"),
         t("RoomsTour:RoomsTemplates"),
         callbacks,
-        LOG_LABEL,
+        ROOMS_TOUR_LABEL,
         6,
         revealQuickActionTile('[data-testid="quick-use-template"]'),
       ),
@@ -192,7 +188,7 @@ export function getTourSteps(
         t("FilesTour:TourAiAssistantTitle"),
         t("FilesTour:TourAiAssistant", { sectionName: t("Common:Rooms") }),
         callbacks,
-        LOG_LABEL,
+        ROOMS_TOUR_LABEL,
         6,
         revealQuickActionTile('[data-testid="quick-ai-chat"]'),
       ),
@@ -204,7 +200,7 @@ export function getTourSteps(
         t("RoomsTour:RoomsGroupsTitle"),
         t("RoomsTour:RoomsGroups"),
         callbacks,
-        LOG_LABEL,
+        ROOMS_TOUR_LABEL,
       ),
 
     // 5. Members — the single most useful thing in the section, and the one
@@ -218,7 +214,7 @@ export function getTourSteps(
         t("RoomsTour:RoomsMembersTitle"),
         t("RoomsTour:RoomsMembers"),
         callbacks,
-        LOG_LABEL,
+        ROOMS_TOUR_LABEL,
         infoPanelHooks,
         [FIRST_ITEM_SELECTOR],
         FIRST_ITEM_SELECTOR,
@@ -233,27 +229,22 @@ export function getTourSteps(
     // other, and running them together buried the sidebar names the user is
     // meant to spot. The wording of each is unchanged.
     showQuickAccess &&
-      navItemStep(
-        sidebarSelector("rooms-recent"),
+      sidebarListStep(
+        "rooms-recent",
         t("RoomsTour:RoomsPlacesTitle"),
-        createElement(TourList, {
-          items: [
-            t("RoomsTour:RoomsPlacesFiles", {
-              recent: t("Common:Recent"),
-              favorites: t("Common:Favorites"),
-              trash: t("Common:TrashSection"),
-            }),
-            t("RoomsTour:RoomsPlacesTemplates", {
-              templates: t("Common:Templates"),
-            }),
-            t("RoomsTour:RoomsPlacesArchive", {
-              archive: t("Common:Archive"),
-            }),
-          ],
-        }),
+        [
+          t("RoomsTour:RoomsPlacesFiles", {
+            recent: t("Common:Recent"),
+            favorites: t("Common:Favorites"),
+            trash: t("Common:TrashSection"),
+          }),
+          t("RoomsTour:RoomsPlacesTemplates", {
+            templates: t("Common:Templates"),
+          }),
+          t("RoomsTour:RoomsPlacesArchive", { archive: t("Common:Archive") }),
+        ],
         callbacks,
-        LOG_LABEL,
-        true,
+        ROOMS_TOUR_LABEL,
       ),
 
     // 7. Only when the section was stood in for. The stand-in rooms are the
@@ -283,7 +274,7 @@ export function getTourSteps(
             t("RoomsTour:RoomsCreateFirstTitle"),
             t("RoomsTour:RoomsCreateFirst"),
             callbacks,
-            LOG_LABEL,
+            ROOMS_TOUR_LABEL,
             demoHooks,
           )
         : revealStep(
@@ -291,7 +282,7 @@ export function getTourSteps(
             t("RoomsTour:RoomsEmptyTitle"),
             t("RoomsTour:RoomsEmpty"),
             callbacks,
-            LOG_LABEL,
+            ROOMS_TOUR_LABEL,
             demoHooks,
           )),
   ].filter(Boolean) as Step[];

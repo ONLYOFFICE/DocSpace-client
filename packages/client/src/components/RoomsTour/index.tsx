@@ -51,6 +51,7 @@ import type { UserStore } from "@docspace/shared/store/UserStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import { ROOMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
 import { getTourAudience } from "SRC_DIR/components/Tour/audience";
 import { tourDemo } from "SRC_DIR/api/tourDemo";
@@ -360,7 +361,7 @@ const RoomsTour = ({
     roomsTourStore,
     buildSteps,
     isMobileView,
-    "rooms tour",
+    ROOMS_TOUR_LABEL,
   );
 
   // `.group-tags` mounts behind its own async gates inside ui-kit's `Filter`

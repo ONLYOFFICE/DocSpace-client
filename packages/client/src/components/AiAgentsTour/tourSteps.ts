@@ -33,15 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { createElement } from "react";
 import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
 import type { TourAudience } from "SRC_DIR/components/Tour/audience";
-import TourList from "SRC_DIR/components/Tour/TourList";
 import {
   navItemStep,
+  sidebarListStep,
   elementStep,
   elementGroupStep,
   fileItemStep,
@@ -49,8 +48,7 @@ import {
   sidebarSelector,
   type RevealHooks,
 } from "SRC_DIR/components/Tour/stepBuilders";
-
-const LOG_LABEL = "ai agents tour";
+import { AI_AGENTS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 
 // The first agent of the list, in whichever view is active (only one of the
 // three is mounted at a time). Same wrappers as the files list — in the table
@@ -186,7 +184,7 @@ export function getTourSteps(
           ? t("AiAgentsTour:AgentWhatIs")
           : t("AiAgentsTour:AgentWhatIsShared"),
         callbacks,
-        LOG_LABEL,
+        AI_AGENTS_TOUR_LABEL,
       ),
 
     // 2. Create. The agents banner holds a single "New agent" tile, so
@@ -201,7 +199,7 @@ export function getTourSteps(
         t("AiAgentsTour:AgentBuildTitle"),
         t("AiAgentsTour:AgentBuild"),
         callbacks,
-        LOG_LABEL,
+        AI_AGENTS_TOUR_LABEL,
       ),
 
     // 3. An agent row: the per-agent actions people reach for most, none of
@@ -213,7 +211,7 @@ export function getTourSteps(
         t("AiAgentsTour:AgentRowTitle"),
         isAdmin ? t("AiAgentsTour:AgentRow") : t("AiAgentsTour:AgentRowMember"),
         callbacks,
-        LOG_LABEL,
+        AI_AGENTS_TOUR_LABEL,
       ),
 
     // 4. Who may use the agent. The step opens the info panel on the first
@@ -234,7 +232,7 @@ export function getTourSteps(
           ? t("AiAgentsTour:AgentAccess")
           : t("AiAgentsTour:AgentAccessMember"),
         callbacks,
-        LOG_LABEL,
+        AI_AGENTS_TOUR_LABEL,
         infoPanelHooks,
         [FIRST_ITEM_SELECTOR],
         FIRST_ITEM_SELECTOR,
@@ -250,19 +248,18 @@ export function getTourSteps(
         t("AiAgentsTour:AgentFindTitle"),
         t("AiAgentsTour:AgentFind"),
         callbacks,
-        LOG_LABEL,
+        AI_AGENTS_TOUR_LABEL,
       ),
 
     // 6. The sidebar sub-items, one bullet each.
     showQuickAccess &&
       places.length > 0 &&
-      navItemStep(
-        sidebarSelector(quickAccessAnchor as string),
+      sidebarListStep(
+        quickAccessAnchor as string,
         t("AiAgentsTour:AgentPlacesTitle"),
-        createElement(TourList, { items: places }),
+        places,
         callbacks,
-        LOG_LABEL,
-        true,
+        AI_AGENTS_TOUR_LABEL,
       ),
 
     // 7. Only when the list was stood in for. The stand-in agents are the last
@@ -292,7 +289,7 @@ export function getTourSteps(
               ? t("AiAgentsTour:AgentStart")
               : t("AiAgentsTour:AgentSwitchOn"),
             callbacks,
-            LOG_LABEL,
+            AI_AGENTS_TOUR_LABEL,
             demoHooks,
           )
         : !isAdmin &&
@@ -301,7 +298,7 @@ export function getTourSteps(
             t("AiAgentsTour:AgentEmptyTitle"),
             t("AiAgentsTour:AgentEmpty"),
             callbacks,
-            LOG_LABEL,
+            AI_AGENTS_TOUR_LABEL,
             demoHooks,
           )),
   ].filter(Boolean) as Step[];

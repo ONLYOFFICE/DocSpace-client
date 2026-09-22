@@ -33,9 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { ReactNode } from "react";
+import { createElement, type ReactNode } from "react";
 import type { Step } from "react-joyride";
 
+import TourList from "./TourList";
 import type { TourStepCallbacks } from "./useTour";
 import { waitForElement } from "./waitForElement";
 
@@ -393,6 +394,29 @@ export function navItemStep(
         ?.classList.remove("tour-outline-item");
     },
   };
+}
+
+/**
+ * A sidebar item whose step reads as a bulleted list: the spotlight covers the
+ * whole sub-list, and the body is built from already-translated lines.
+ */
+export function sidebarListStep(
+  anchorId: string,
+  title: string,
+  items: string[],
+  callbacks: TourStepCallbacks | undefined,
+  logLabel: string,
+  prepare?: () => void,
+): Step {
+  return navItemStep(
+    sidebarSelector(anchorId),
+    title,
+    createElement(TourList, { items }),
+    callbacks,
+    logLabel,
+    true,
+    prepare,
+  );
 }
 
 /**

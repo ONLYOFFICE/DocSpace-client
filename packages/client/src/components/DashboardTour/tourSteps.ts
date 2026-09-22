@@ -45,8 +45,7 @@ import {
   elementGroupStep,
   sidebarSelector,
 } from "SRC_DIR/components/Tour/stepBuilders";
-
-const LOG_LABEL = "dashboard tour";
+import { DASHBOARD_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 
 /**
  * The dashboard's own anchors, as `data-tour-id` attributes rather than the
@@ -139,7 +138,7 @@ export function getTourSteps(
         t("DashboardTour:DashboardProfileTitle"),
         t("DashboardTour:DashboardProfile"),
         callbacks,
-        LOG_LABEL,
+        DASHBOARD_TOUR_LABEL,
       ),
 
     // 2. The quick actions, as an invitation rather than a description: create
@@ -152,7 +151,7 @@ export function getTourSteps(
         files: t("Common:Files"),
       }),
       callbacks,
-      LOG_LABEL,
+      DASHBOARD_TOUR_LABEL,
     ),
 
     // 3. The whole row of apps, lit up as one region — every card named
@@ -168,7 +167,7 @@ export function getTourSteps(
         t("DashboardTour:DashboardAppsTitle"),
         t("DashboardTour:DashboardApps"),
         callbacks,
-        LOG_LABEL,
+        DASHBOARD_TOUR_LABEL,
       ),
 
     // 4. The integrations card, which reads as an ad and is skipped as one —
@@ -180,7 +179,7 @@ export function getTourSteps(
         t("DashboardTour:DashboardIntegrationsTitle"),
         t("DashboardTour:DashboardIntegrations"),
         callbacks,
-        LOG_LABEL,
+        DASHBOARD_TOUR_LABEL,
       ),
 
     // 5. The developer tools, which is the one card on the page whose audience
@@ -200,7 +199,7 @@ export function getTourSteps(
           productName: getBrandName("ProductName"),
         }),
         callbacks,
-        LOG_LABEL,
+        DASHBOARD_TOUR_LABEL,
       ),
 
     // 6. The way back. The dashboard is a page users leave and have to be able
@@ -212,7 +211,7 @@ export function getTourSteps(
       t("DashboardTour:DashboardOverviewTitle"),
       t("DashboardTour:DashboardOverview", { overview: t("Common:Home") }),
       callbacks,
-      LOG_LABEL,
+      DASHBOARD_TOUR_LABEL,
     ),
   ].filter(Boolean) as Step[];
 }

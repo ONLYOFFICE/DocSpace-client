@@ -54,6 +54,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import { FORMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
 import { getTourAudience } from "SRC_DIR/components/Tour/audience";
 import { tourDemo } from "SRC_DIR/api/tourDemo";
@@ -413,7 +414,7 @@ const FormsTour = ({
     formsTourStore,
     buildSteps,
     isMobileView,
-    "forms tour",
+    FORMS_TOUR_LABEL,
   );
 
   usePendingTour(

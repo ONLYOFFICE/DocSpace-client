@@ -55,6 +55,7 @@ import type { Nullable } from "@docspace/shared/types";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import { AI_AGENTS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
 import {
   getTourAudience,
@@ -460,7 +461,7 @@ const AiAgentsTour = ({
     aiAgentsTourStore,
     buildSteps,
     isMobileView,
-    "ai agents tour",
+    AI_AGENTS_TOUR_LABEL,
   );
 
   usePendingTour(

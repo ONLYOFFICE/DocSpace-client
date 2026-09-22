@@ -128,7 +128,6 @@
   "AIFeatureWebSearch": "Buscar en la web",
   "AIFeatureWriteRewriteTranslate": "Escribir, reescribir, traducir",
   "AIInstructions": "Instrucciones para la IA",
-  "AIModel": "Modelo",
   "AIModelPrice": "{{inputPrice}}/M tokens de entrada | {{outputPrice}}/M tokens de salida",
   "AIModels": "Modelos de IA",
   "AIModelsDescription": "Acceda a una amplia gama de modelos de IA a través de OpenRouter",

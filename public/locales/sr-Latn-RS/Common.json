@@ -128,7 +128,6 @@
   "AIFeatureWebSearch": "Pretraga veba",
   "AIFeatureWriteRewriteTranslate": "Pisanje, prepravljanje, prevođenje",
   "AIInstructions": "AI instrukcije",
-  "AIModel": "Model",
   "AIModelPrice": "{{inputPrice}}/M ulaznih tokena | {{outputPrice}}/M izlaznih tokena",
   "AIModels": "AI modeli",
   "AIModelsDescription": "Pristupite širokom spektru AI modela kroz OpenRouter",

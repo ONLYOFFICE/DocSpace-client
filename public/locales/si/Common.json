@@ -128,7 +128,6 @@
   "AIFeatureWebSearch": "වෙබ් අඩවියේ සොයන්න",
   "AIFeatureWriteRewriteTranslate": "ලියන්න, නැවත ලියන්න, පරිවර්තනය කරන්න",
   "AIInstructions": "AI උපදෙස්",
-  "AIModel": "ආකෘතිය",
   "AIModelPrice": "{{inputPrice}}/M ආදාන ටෝකන | {{outputPrice}}/M ප්‍රතිදාන ටෝකන",
   "AIModels": "AI මාදිලි",
   "AIModelsDescription": "OpenRouter හරහා පුළුල් පරාසයක AI ආකෘති වෙත ප්‍රවේශ වන්න",

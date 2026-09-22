@@ -128,7 +128,6 @@
   "AIFeatureWebSearch": "Vyhledávat na webu",
   "AIFeatureWriteRewriteTranslate": "Psát, přepisovat, překládat",
   "AIInstructions": "Pokyny pro AI",
-  "AIModel": "Model",
   "AIModelPrice": "{{inputPrice}}/M vstupní tokeny | {{outputPrice}}/M výstupní tokeny",
   "AIModels": "AI modely",
   "AIModelsDescription": "Získejte přístup k široké škále modelů AI prostřednictvím OpenRouter",

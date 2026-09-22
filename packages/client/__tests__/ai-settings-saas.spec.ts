@@ -81,13 +81,25 @@ const chatModel = (
   price: { prompt, completion },
 });
 
+const imageModel = (
+  id: string,
+  alias: string,
+  provider: string,
+  prompt: number,
+  completion: number,
+  image: number,
+) => ({
+  ...chatModel(id, alias, provider, prompt, completion),
+  price: { prompt, completion, image },
+});
+
 const AI_PRICES = {
   currency: { code: "USD", symbol: "$" },
   chat: [
     chatModel(CHAT_MODEL_A, "Chat Model A", "Provider A", 2.5, 10),
     chatModel(CHAT_MODEL_B, "Chat Model B", "Provider B", 3, 15),
   ],
-  image: [chatModel(IMAGE_MODEL, "Image Model", "Provider A", 5, 40)],
+  image: [imageModel(IMAGE_MODEL, "Image Model", "Provider A", 5, 40, 60)],
   embedding: [
     {
       id: "provider-a/embedding-model",
@@ -205,6 +217,11 @@ test.describe("AI settings on SaaS", () => {
     ).toBeVisible();
     for (const alias of ["Chat Model A", "Chat Model B", "Image Model"])
       await expect(page.getByText(alias, { exact: true })).toBeVisible();
+    await expect(page.getByText("Text models", { exact: true })).toBeVisible();
+    await expect(page.getByTestId("ai-image-models-title")).toBeVisible();
+    await expect(page.getByText("Image input ($/1M)")).toBeVisible();
+    await expect(page.getByText("Image output ($/1M)")).toBeVisible();
+    await expect(page.getByText("$60.00", { exact: true })).toBeVisible();
     for (const id of [CHAT_MODEL_A, CHAT_MODEL_B, IMAGE_MODEL])
       await expect(modelToggle(page, id)).toHaveAttribute("aria-checked", "true");
     // Models are only switchable once the AI service itself is on.
@@ -500,6 +517,12 @@ test.describe("AI settings on a phone", () => {
     await expect(page.getByText("Models, Web search, Knowledge base")).toBeHidden();
     for (const alias of ["Chat Model A", "Chat Model B", "Image Model"])
       await expect(page.getByText(alias, { exact: true })).toBeVisible();
+    await expect(page.getByText("Text models", { exact: true })).toBeVisible();
+    await expect(page.getByTestId("ai-image-models-title")).toBeVisible();
+    await expect(
+      page.getByText("$5.00/M image input | $60.00/M image output"),
+    ).toBeVisible();
+    await expect(page.getByText("$40.00/M output tokens")).toBeVisible();
     await expect(modelToggle(page, CHAT_MODEL_A)).toHaveAttribute(
       "aria-checked",
       "true",

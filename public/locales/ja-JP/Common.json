@@ -128,7 +128,6 @@
   "AIFeatureWebSearch": "ウェブを検索",
   "AIFeatureWriteRewriteTranslate": "作成、書き換え、翻訳",
   "AIInstructions": "AIの使い方",
-  "AIModel": "モデル",
   "AIModelPrice": "{{inputPrice}}/M 入力トークン | {{outputPrice}}/M 出力トークン",
   "AIModels": "AIモデル",
   "AIModelsDescription": "OpenRouterを通じて幅広いAIモデルにアクセスできます",

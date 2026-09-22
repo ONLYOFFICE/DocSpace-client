@@ -128,7 +128,6 @@
   "AIFeatureWebSearch": "Op het web zoeken",
   "AIFeatureWriteRewriteTranslate": "Schrijven, herschrijven, vertalen",
   "AIInstructions": "AI-instructies",
-  "AIModel": "Model",
   "AIModelPrice": "{{inputPrice}}/M invoer-tokens | {{outputPrice}}/M uitvoer-tokens",
   "AIModels": "AI-modellen",
   "AIModelsDescription": "Krijg toegang tot een breed scala aan AI-modellen via OpenRouter",

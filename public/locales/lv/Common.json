@@ -128,7 +128,6 @@
   "AIFeatureWebSearch": "Meklēt tīmeklī",
   "AIFeatureWriteRewriteTranslate": "Rakstīt, pārrakstīt, tulkot",
   "AIInstructions": "MI instrukcijas",
-  "AIModel": "Modelis",
   "AIModelPrice": "{{inputPrice}}/M ielietotājiem tokeniem | {{outputPrice}}/M izplatītiem tokeniem",
   "AIModels": "MI modeļi",
   "AIModelsDescription": "Piekļūstiet plašam MI modeļu klāstam, izmantojot OpenRouter",

@@ -128,7 +128,6 @@
   "AIFeatureWebSearch": "Tìm kiếm trên web",
   "AIFeatureWriteRewriteTranslate": "Viết, viết lại, dịch",
   "AIInstructions": "Hướng dẫn AI",
-  "AIModel": "Mô hình",
   "AIModelPrice": "{{inputPrice}}/Triệu token đầu vào | {{outputPrice}}/Triệu token đầu ra",
   "AIModels": "Mô hình AI",
   "AIModelsDescription": "Truy cập nhiều mô hình AI thông qua OpenRouter",

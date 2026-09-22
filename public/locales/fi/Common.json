@@ -128,7 +128,6 @@
   "AIFeatureWebSearch": "Hae verkosta",
   "AIFeatureWriteRewriteTranslate": "Kirjoita, muokkaa, käännä",
   "AIInstructions": "AI-ohjeet",
-  "AIModel": "Malli",
   "AIModelPrice": "{{inputPrice}}/M syöte-tokenit | {{outputPrice}}/M tulostokenit",
   "AIModels": "AI-mallit",
   "AIModelsDescription": "Käytä laajaa valikoimaa AI-malleja OpenRouterin kautta",

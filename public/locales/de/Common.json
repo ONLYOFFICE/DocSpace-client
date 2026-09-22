@@ -128,7 +128,6 @@
   "AIFeatureWebSearch": "Im Web suchen",
   "AIFeatureWriteRewriteTranslate": "Schreiben, umformulieren, übersetzen",
   "AIInstructions": "KI-Anweisungen",
-  "AIModel": "Modell",
   "AIModelPrice": "{{inputPrice}}/M Input-Tokens | {{outputPrice}}/M Ausgabe-Tokens",
   "AIModels": "KI-Modelle",
   "AIModelsDescription": "Greifen Sie über OpenRouter auf eine breite Palette von KI-Modellen zu",

@@ -128,7 +128,6 @@
   "AIFeatureWebSearch": "Пошук у вебі",
   "AIFeatureWriteRewriteTranslate": "Написання, переписування, переклад",
   "AIInstructions": "Інструкції щодо AI",
-  "AIModel": "Модель",
   "AIModelPrice": "{{inputPrice}}/М вхідних токенів | {{outputPrice}}/М вихідних токенів",
   "AIModels": "Моделі ШІ",
   "AIModelsDescription": "Отримайте доступ до широкого спектра моделей ШІ через OpenRouter",

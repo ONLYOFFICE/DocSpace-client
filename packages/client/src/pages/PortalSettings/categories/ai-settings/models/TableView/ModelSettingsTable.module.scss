@@ -1,5 +1,6 @@
 .tableWrapper {
   width: 100%;
+  max-width: 1188px;
 }
 
 .tableContainer {
@@ -59,7 +60,7 @@
 .modelTitleRow {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   min-width: 0;
 }
 
@@ -98,4 +99,9 @@
     top: 0 !important;
     left: 0 !important;
   }
+}
+
+.groupTitle {
+  margin-top: 32px;
+  margin-bottom: 8px;
 }

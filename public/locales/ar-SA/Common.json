@@ -128,7 +128,6 @@
   "AIFeatureWebSearch": "البحث على الويب",
   "AIFeatureWriteRewriteTranslate": "الكتابة، وإعادة الكتابة، والترجمة",
   "AIInstructions": "تعليمات الذكاء الاصطناعي",
-  "AIModel": "النموذج",
   "AIModelPrice": "{{inputPrice}}/M رموز الإدخال | {{outputPrice}}/M رموز الإخراج",
   "AIModels": "نماذج الذكاء الاصطناعي",
   "AIModelsDescription": "يمكنك الوصول إلى مجموعة واسعة من نماذج الذكاء الاصطناعي عبر OpenRouter",

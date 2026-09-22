@@ -54,21 +54,13 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import type { TCreatedBy } from "@docspace/shared/types";
 
 /**
- * The stand-in rooms the tour shows a portal that has none of its own.
- *
- * Their ids are negative so nothing can mistake one for a room the server
- * knows about: every real id is a positive integer, so a demo room that leaked
- * past the tour would fail loudly on the first request rather than quietly
- * addressing someone else's room.
+ * Demo ids count down from here. Negative, so a row that leaked past the tour
+ * fails loudly instead of addressing somebody else's room: every real id is a
+ * positive integer.
  */
 const DEMO_ID_BASE = -1000;
 
-/**
- * How many stand-in rooms the list may hold, which is what separates the two
- * ranges below: rooms count down from `DEMO_ID_BASE` and the things inside a
- * room count down from `DEMO_CONTENTS_ID_BASE`, so the two only meet if a tour
- * asks for more rooms than this. The sections ask for three.
- */
+/** Keeps the room ids clear of the ids of what is inside a room. */
 const DEMO_ROOM_ID_LIMIT = 100;
 
 /** Where the ids of a stand-in room's contents start, below every room id. */
@@ -164,14 +156,10 @@ export type TourDemoConfig = {
 };
 
 /**
- * The ids of the stand-in form space and of the three things inside it. Fixed
- * rather than derived: the tour only ever walks into the first space, and steps
- * anchor on these ids through the row's `folder_{id}` / `file_{id}` element id,
- * which is the one handle that holds in all three views.
- *
- * `space` is the first room `buildDemoRooms` lays down (`DEMO_ID_BASE - 0`) and
- * the one `tourDemo.space` hands back — the step that walks in points at that
- * row, so the space the user is looking at is the space they end up inside.
+ * The stand-in form space and the three things inside it. Fixed rather than
+ * derived: steps anchor on these ids through the row's `folder_{id}` element
+ * id, the one handle that holds in all three views. `space` is the first room
+ * `buildDemoRooms` lays down, which is the one the tour walks into.
  */
 export const DEMO_SPACE_ITEM_IDS = {
   space: DEMO_ID_BASE,
@@ -232,14 +220,9 @@ const fullSecurity: TRoomSecurity = {
  * square, and the colour is part of what makes a row read as a room at all —
  * without one the list is initials floating on the page.
  *
- * The product picks one of these at random when a room is created
- * (SetRoomParams / SetAgentParams). The tour must not: a colour drawn per run
- * would make every screenshot comparison a coin toss. So the palette is walked
- * by list position instead — room 0 is always the first colour, room 1 always
- * the second — which is as distinct as three real rooms would be and is the
- * same on every run.
- *
- * Returned without the leading `#`, which is the form RoomIcon expects.
+ * Walked by list position rather than drawn at random the way the product does
+ * it: a colour per run would make every screenshot comparison a coin toss.
+ * Returned without the leading `#`, which is what RoomIcon expects.
  */
 const demoLogoColor = (index: number) =>
   globalColors.logoColors[index % globalColors.logoColors.length].replace(
@@ -248,11 +231,9 @@ const demoLogoColor = (index: number) =>
   );
 
 /**
- * The stand-in rooms that go into the real answer in place of its empty list.
- *
- * `current` is the folder the server itself named, so the rooms sit under the
- * ids the section actually lives at and nothing downstream has to be told this
- * list is not genuine.
+ * The stand-in rooms put into the real answer in place of its empty list.
+ * `current` is the folder the server named, so nothing downstream has to be
+ * told the list is not genuine.
  */
 export function buildDemoRooms(
   current: TFolder,
@@ -303,12 +284,8 @@ export function buildDemoRooms(
 }
 
 /**
- * What each stand-in member is called, by the role they hold.
- *
- * Addresses rather than names on purpose — an invented person's name would be
- * a user-facing string with nowhere to be translated, and `example.com` is the
- * reserved documentation domain, so nothing here can be mistaken for a real
- * contact.
+ * Addresses rather than names: an invented name would be a user-facing string
+ * with nowhere to be translated, and `example.com` is the reserved domain.
  */
 const MEMBER_ADDRESS: Partial<Record<ShareAccessRights, string>> = {
   [ShareAccessRights.Editing]: "editor@example.com",
@@ -316,10 +293,7 @@ const MEMBER_ADDRESS: Partial<Record<ShareAccessRights, string>> = {
   [ShareAccessRights.FormFilling]: "filler@example.com",
 };
 
-/**
- * The member list of a demo room: the signed-in user as its owner, plus the
- * stand-ins the tour asked for, which give the roles something to sit against.
- */
+/** The signed-in user as owner, plus the stand-ins the tour asked for. */
 export function buildDemoMembers(config: TourDemoConfig): RoomMember[] {
   const asUser = (id: string, email: string, isVisitor: boolean) =>
     ({
@@ -529,18 +503,9 @@ const fullFolderSecurity = {
 };
 
 /**
- * The inside of a stand-in form space: the blank form, and the two system
- * folders the answers move between.
- *
- * This is the part of the section the tour cannot borrow from the portal. A
- * form space only grows its `In progress` and `Complete` folders once a form
- * has been uploaded and started, so walking a real space would show a
- * different room to every user — and an empty one to anybody who has not
- * collected anything yet, which is exactly who the tour is for.
- *
- * `room` and `sectionRoot` are the objects the rest of the demo already built
- * from the server's own answer, so the ids, the path and the owner are the
- * same ones the section is really using.
+ * The inside of a stand-in form space: the blank form and the two system
+ * folders the answers move between. A real space only grows them once a form
+ * has been started, so walking one would show something different to everyone.
  */
 export function buildDemoSpaceContents(
   room: TRoom,

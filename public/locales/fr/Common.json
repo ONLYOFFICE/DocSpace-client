@@ -19,6 +19,7 @@
   "ActivateAIFeatures": "Activer les fonctionnalités IA",
   "ActivateAIFeaturesToGetStarted": "Activer les fonctionnalités d'IA pour commencer",
   "ActivateAISearchDescription": "Activez la recherche sur le Web pour intégrer des informations en temps réel provenant d'Internet dans les chats d'IA.",
+  "ActivateAISearchToGetStarted": "Activer la recherche IA pour commencer ?",
   "ActivateLicense": "Activer la licence",
   "ActivateLicenseActivated": "Licence activée",
   "ActivatePaidTariffExpiration": "Votre abonnement expire le {{date}}.",

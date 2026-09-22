@@ -19,6 +19,7 @@
   "ActivateAIFeatures": "Активировать функции ИИ",
   "ActivateAIFeaturesToGetStarted": "Активировать функции ИИ, чтобы начать",
   "ActivateAISearchDescription": "Включите веб-поиск, чтобы получать актуальную информацию из интернета в чатах ИИ.",
+  "ActivateAISearchToGetStarted": "Активировать ИИ-поиск, чтобы начать?",
   "ActivateLicense": "Активировать лицензию",
   "ActivateLicenseActivated": "Лицензия активирована",
   "ActivatePaidTariffExpiration": "Подписка истекает {{date}}.",

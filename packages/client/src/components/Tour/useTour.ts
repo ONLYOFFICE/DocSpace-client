@@ -225,12 +225,16 @@ export default function useTour(
       if (!walk) return;
 
       event.preventDefault();
+      // The section's own hotkeys are bound to the document and would move the
+      // caret through the list behind the tour.
+      event.stopPropagation();
       walk();
     };
 
-    document.addEventListener("keydown", onKeyDown);
+    // Capturing, so the keys are taken before those hotkeys see them.
+    document.addEventListener("keydown", onKeyDown, true);
 
-    return () => document.removeEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown, true);
   }, [controls, steps.length, tourStore.isRunning]);
 
   // Every anchor was filtered out, so there is nothing to show. react-joyride

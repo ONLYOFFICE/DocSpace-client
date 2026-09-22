@@ -251,6 +251,22 @@ test.describe("Files tour", () => {
     await expect(tourTooltip(page)).toBeHidden();
   });
 
+  test("walking with the arrows leaves the list alone", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // The section's own hotkeys are bound to the document, and the arrows used
+    // to move the caret through the rows behind the tour.
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+    await goToStep(page, 3);
+
+    await expect(page.locator(".table-hotkey-border")).toHaveCount(0);
+    await expect(page.locator(".table-row-selected")).toHaveCount(0);
+  });
+
   test("leaves the quick-actions strip where it was when closed", async ({
     page,
     mockRequest,

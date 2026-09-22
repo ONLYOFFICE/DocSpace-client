@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "ප්ලගිනය සාර්ථකව පූරණය විය",
   "PluginLoadFailed": "පූරණය අසාර්ථක විය",
   "PluginNoDefaultExport": "ප්ලගින මොඩියුලයේ පෙරනිමි නිර්යාතයක් නොමැත",
-  "PluginNotRegistered": "ස්ක්‍රිප්ට් window.Plugins[\"{{pluginName}}\"] ලියාපදිංචි කළේ නැත",
+  "PluginNotRegistered": "ස්ක්‍රිප්ට් ක්‍රියාත්මක වූ නමුත් \"{{pluginName}}\" නමැති ප්ලගිනයක් ලියාපදිංචි කළේ නැත",
   "PluginSamples": "ප්ලගින් ආදර්ශ",
   "PluginScriptLoadFailed": "{{url}} ස්ක්‍රිප්ට් පූරණය අසාර්ථක විය",
   "PluginSDK": "ප්ලගින් SDK",

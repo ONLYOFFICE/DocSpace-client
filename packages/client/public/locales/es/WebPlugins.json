@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Plugin cargado correctamente",
   "PluginLoadFailed": "Error al cargar",
   "PluginNoDefaultExport": "El módulo del plugin no tiene exportación por defecto",
-  "PluginNotRegistered": "El script no registró window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "El script se ejecutó, pero no registró ningún plugin con el nombre \"{{pluginName}}\"",
   "PluginSamples": "Ejemplos de plugins",
   "PluginScriptLoadFailed": "Error al cargar el script {{url}}",
   "PluginSDK": "SDK de plugins",

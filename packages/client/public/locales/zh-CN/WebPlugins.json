@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "插件加载成功",
   "PluginLoadFailed": "加载失败",
   "PluginNoDefaultExport": "插件模块没有默认导出",
-  "PluginNotRegistered": "脚本未注册 window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "脚本已执行，但未注册名为 \"{{pluginName}}\" 的插件",
   "PluginSamples": "插件示例",
   "PluginScriptLoadFailed": "无法加载脚本 {{url}}",
   "PluginSDK": "插件SDK",

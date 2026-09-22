@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Vtičnik je bil uspešno naložen.",
   "PluginLoadFailed": "Nalaganje ni uspelo",
   "PluginNoDefaultExport": "Modul vtičnika nima privzetega izvoza",
-  "PluginNotRegistered": "Skript ni registriral window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Skript se je izvedel, vendar ni registriral vtičnika z imenom \"{{pluginName}}\"",
   "PluginSamples": "Primeri dodatkov",
   "PluginScriptLoadFailed": "Nalaganje skripta {{url}} ni uspelo",
   "PluginSDK": "Vtičnik SDK",

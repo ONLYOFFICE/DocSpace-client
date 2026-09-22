@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Eklenti başarıyla yüklendi",
   "PluginLoadFailed": "Yüklenemedi",
   "PluginNoDefaultExport": "Eklenti modülünde varsayılan dışa aktarma yok",
-  "PluginNotRegistered": "Betik window.Plugins[\"{{pluginName}}\"] kaydını yapmadı",
+  "PluginNotRegistered": "Betik çalıştı, ancak \"{{pluginName}}\" adlı bir eklenti kaydetmedi",
   "PluginSamples": "Eklenti örnekleri",
   "PluginScriptLoadFailed": "{{url}} betiği yüklenemedi",
   "PluginSDK": "Eklenti SDK'sı",

@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Wtyczka załadowana pomyślnie",
   "PluginLoadFailed": "Nie udało się załadować",
   "PluginNoDefaultExport": "Moduł wtyczki nie ma domyślnego eksportu",
-  "PluginNotRegistered": "Skrypt nie zarejestrował window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Skrypt został wykonany, ale nie zarejestrował wtyczki o nazwie \"{{pluginName}}\"",
   "PluginSamples": "Próbki wtyczek",
   "PluginScriptLoadFailed": "Nie udało się załadować skryptu {{url}}",
   "PluginSDK": "Zestaw SDK do tworzenia wtyczek",

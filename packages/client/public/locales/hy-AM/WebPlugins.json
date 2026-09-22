@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Պլագինը հաջողությամբ բեռնվել է։",
   "PluginLoadFailed": "Բեռնումը ձախողվեց",
   "PluginNoDefaultExport": "Փլագինի մոդուլը չունի լռելյայն արտահանում",
-  "PluginNotRegistered": "Սկրիպտը չի գրանցել window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Սկրիպտը կատարվեց, սակայն չգրանցեց \"{{pluginName}}\" անունով փլագին",
   "PluginSamples": "Պլագինի նմուշներ",
   "PluginScriptLoadFailed": "Չհաջողվեց բեռնել {{url}} սկրիպտը",
   "PluginSDK": "Պլագին SDK",

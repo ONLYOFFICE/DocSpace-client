@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Shtojca u ngarkua me sukses",
   "PluginLoadFailed": "Ngarkimi dështoi",
   "PluginNoDefaultExport": "Moduli i shtojcës nuk ka eksport të parazgjedhur",
-  "PluginNotRegistered": "Skripti nuk regjistroi window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Skripti u ekzekutua, por nuk regjistroi asnjë plugin me emrin \"{{pluginName}}\"",
   "PluginSamples": "Mostrat e shtojcave",
   "PluginScriptLoadFailed": "Ngarkimi i skriptit {{url}} dështoi",
   "PluginSDK": "Shtojca SDK",

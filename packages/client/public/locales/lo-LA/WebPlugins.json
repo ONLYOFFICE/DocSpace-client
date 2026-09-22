@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "ໂຫຼດປລັກອິນສຳເລັດແລ້ວ",
   "PluginLoadFailed": "ໂຫຼດບໍ່ສຳເລັດ",
   "PluginNoDefaultExport": "ໂມດູນປັກອິນບໍ່ມີການສົ່ງອອກເລີ່ມຕົ້ນ",
-  "PluginNotRegistered": "ສະຄຣິບບໍ່ໄດ້ລົງທະບຽນ window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "ສະຄຣິບເຮັດວຽກແລ້ວ ແຕ່ບໍ່ໄດ້ລົງທະບຽນປລັກອິນຊື່ \"{{pluginName}}\"",
   "PluginSamples": "ຕົວຢ່າງປລັກອິນ",
   "PluginScriptLoadFailed": "ໂຫຼດສະຄຣິບ {{url}} ບໍ່ສຳເລັດ",
   "PluginSDK": "ປລັກອິນ SDK",

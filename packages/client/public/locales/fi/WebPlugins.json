@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Lisäosa ladattu onnistuneesti",
   "PluginLoadFailed": "Lataus epäonnistui",
   "PluginNoDefaultExport": "Laajennusmoduulilla ei ole oletusvientiä",
-  "PluginNotRegistered": "Skripti ei rekisteröinyt kohdetta window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Skripti suoritettiin, mutta se ei rekisteröinyt lisäosaa nimeltä \"{{pluginName}}\"",
   "PluginSamples": "Laajennusmallit",
   "PluginScriptLoadFailed": "Skriptin {{url}} lataus epäonnistui",
   "PluginSDK": "SDK-laajennus",

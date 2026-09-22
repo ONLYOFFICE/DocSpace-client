@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Plugin-ul a fost încărcat cu succes.",
   "PluginLoadFailed": "Încărcarea a eșuat",
   "PluginNoDefaultExport": "Modulul pluginului nu are export implicit",
-  "PluginNotRegistered": "Scriptul nu a înregistrat window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Scriptul a rulat, dar nu a înregistrat niciun plugin cu numele \"{{pluginName}}\"",
   "PluginSamples": "Exemple de plugin-uri",
   "PluginScriptLoadFailed": "Încărcarea scriptului {{url}} a eșuat",
   "PluginSDK": "Kit de dezvoltare a plugin-urilor",

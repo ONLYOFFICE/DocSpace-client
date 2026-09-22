@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "プラグインが正常に読み込まれました",
   "PluginLoadFailed": "読み込みに失敗しました",
   "PluginNoDefaultExport": "プラグインモジュールにデフォルトエクスポートがありません",
-  "PluginNotRegistered": "スクリプトが window.Plugins[\"{{pluginName}}\"] を登録しませんでした",
+  "PluginNotRegistered": "スクリプトは実行されましたが、\"{{pluginName}}\" という名前のプラグインは登録されませんでした",
   "PluginSamples": "プラグインのサンプル",
   "PluginScriptLoadFailed": "スクリプト {{url}} の読み込みに失敗しました",
   "PluginSDK": "プラグインSDK",

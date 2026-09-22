@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Плъгинът беше зареден успешно",
   "PluginLoadFailed": "Неуспешно зареждане",
   "PluginNoDefaultExport": "Модулът на плъгина няма експорт по подразбиране",
-  "PluginNotRegistered": "Скриптът не регистрира window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Скриптът се изпълни, но не регистрира плъгин с име \"{{pluginName}}\"",
   "PluginSamples": "Мостри на плъгини",
   "PluginScriptLoadFailed": "Неуспешно зареждане на скрипта {{url}}",
   "PluginSDK": "Плъгин SDK",

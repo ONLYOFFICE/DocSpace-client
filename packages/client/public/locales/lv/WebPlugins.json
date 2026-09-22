@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Papildinājums ielādēts veiksmīgi",
   "PluginLoadFailed": "Neizdevās ielādēt",
   "PluginNoDefaultExport": "Spraudņa modulim nav noklusējuma eksporta",
-  "PluginNotRegistered": "Skripts nereģistrēja window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Skripts tika izpildīts, bet nereģistrēja nevienu spraudni ar nosaukumu \"{{pluginName}}\"",
   "PluginSamples": "Spraudņu paraugi",
   "PluginScriptLoadFailed": "Neizdevās ielādēt skriptu {{url}}",
   "PluginSDK": "Pievienotājprogrammas SDK",

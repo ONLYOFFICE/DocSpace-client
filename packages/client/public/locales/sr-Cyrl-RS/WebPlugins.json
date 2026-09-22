@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Плугин успешно учитан",
   "PluginLoadFailed": "Учитавање није успело",
   "PluginNoDefaultExport": "Модул додатка нема подразумевани извоз",
-  "PluginNotRegistered": "Скрипта није регистровала window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Скрипта је извршена, али није регистровала додатак под називом \"{{pluginName}}\"",
   "PluginSamples": "Примери додатка",
   "PluginScriptLoadFailed": "Учитавање скрипте {{url}} није успело",
   "PluginSDK": "Plugin SDK (SDK за додатке)",

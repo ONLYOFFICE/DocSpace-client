@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Plugin đã được tải thành công",
   "PluginLoadFailed": "Không thể tải",
   "PluginNoDefaultExport": "Mô-đun plugin không có export mặc định",
-  "PluginNotRegistered": "Tập lệnh không đăng ký window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Tập lệnh đã chạy nhưng không đăng ký tiện ích nào có tên \"{{pluginName}}\"",
   "PluginSamples": "Mẫu plugin",
   "PluginScriptLoadFailed": "Không thể tải tập lệnh {{url}}",
   "PluginSDK": "Plugin SDK",

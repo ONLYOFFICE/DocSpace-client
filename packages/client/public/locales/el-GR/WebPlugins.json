@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Το πρόσθετο φορτώθηκε επιτυχώς",
   "PluginLoadFailed": "Αποτυχία φόρτωσης",
   "PluginNoDefaultExport": "Η μονάδα του πρόσθετου δεν έχει προεπιλεγμένη εξαγωγή",
-  "PluginNotRegistered": "Το script δεν καταχώρισε το window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Το script εκτελέστηκε, αλλά δεν καταχώρισε πρόσθετο με όνομα \"{{pluginName}}\"",
   "PluginSamples": "Δείγματα πρόσθετων",
   "PluginScriptLoadFailed": "Αποτυχία φόρτωσης του script {{url}}",
   "PluginSDK": "Plugin SDK",

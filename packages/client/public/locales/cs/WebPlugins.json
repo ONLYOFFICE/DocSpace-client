@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Plugin načten úspěšně",
   "PluginLoadFailed": "Načtení se nezdařilo",
   "PluginNoDefaultExport": "Modul pluginu nemá výchozí export",
-  "PluginNotRegistered": "Skript nezaregistroval window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Skript proběhl, ale nezaregistroval žádný zásuvný modul s názvem \"{{pluginName}}\"",
   "PluginSamples": "Ukázky pluginů",
   "PluginScriptLoadFailed": "Načtení skriptu {{url}} se nezdařilo",
   "PluginSDK": "Plugin SDK",

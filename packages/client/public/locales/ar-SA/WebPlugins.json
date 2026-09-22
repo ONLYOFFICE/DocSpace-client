@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "تم تحميل الإضافة بنجاح",
   "PluginLoadFailed": "فشل التحميل",
   "PluginNoDefaultExport": "وحدة المكون الإضافي لا تحتوي على تصدير افتراضي",
-  "PluginNotRegistered": "لم يقم السكربت بتسجيل window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "تم تشغيل السكربت لكنه لم يسجّل أي مكوّن إضافي باسم \"{{pluginName}}\"",
   "PluginSamples": "عينات الاضافات",
   "PluginScriptLoadFailed": "فشل تحميل السكربت {{url}}",
   "PluginSDK": "SDK الإضافات",

@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Плагин успешно загружен",
   "PluginLoadFailed": "Не удалось загрузить",
   "PluginNoDefaultExport": "Модуль плагина не содержит экспорт по умолчанию",
-  "PluginNotRegistered": "Скрипт не зарегистрировал window.Plugins[\"{{pluginName}}\"]",
+  "PluginNotRegistered": "Скрипт выполнен, но не зарегистрировал плагин с именем \"{{pluginName}}\"",
   "PluginSamples": "Примеры плагинов",
   "PluginScriptLoadFailed": "Не удалось загрузить скрипт {{url}}",
   "PluginSDK": "Плагин SDK",

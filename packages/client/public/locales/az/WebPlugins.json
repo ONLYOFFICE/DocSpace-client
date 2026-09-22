@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "Plugin yüklandı uğurla",
   "PluginLoadFailed": "Yüklənmə alınmadı",
   "PluginNoDefaultExport": "Plagin modulunda defolt eksport yoxdur",
-  "PluginNotRegistered": "Skript window.Plugins[\"{{pluginName}}\"] qeydiyyatını etmədi",
+  "PluginNotRegistered": "Skript işlədi, lakin \"{{pluginName}}\" adlı plagin qeydiyyatdan keçirmədi",
   "PluginSamples": "Plagin nümunələri",
   "PluginScriptLoadFailed": "{{url}} skriptini yükləmək mümkün olmadı",
   "PluginSDK": "Plagin SDK",

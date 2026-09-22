@@ -16,7 +16,7 @@
   "PluginLoadedSuccessfully": "플러그인이 성공적으로 로드되었습니다.",
   "PluginLoadFailed": "로드 실패",
   "PluginNoDefaultExport": "플러그인 모듈에 기본 내보내기가 없습니다",
-  "PluginNotRegistered": "스크립트가 window.Plugins[\"{{pluginName}}\"]을(를) 등록하지 않았습니다",
+  "PluginNotRegistered": "스크립트가 실행되었지만 \"{{pluginName}}\" 이름의 플러그인을 등록하지 않았습니다",
   "PluginSamples": "플러그인 샘플",
   "PluginScriptLoadFailed": "스크립트 {{url}}을(를) 로드하지 못했습니다",
   "PluginSDK": "플러그인 SDK",

@@ -38,6 +38,7 @@ import type { Step } from "react-joyride";
 
 import TourList from "./TourList";
 import type { TourStepCallbacks } from "./useTour";
+import { throughSectionFade } from "./sectionFade";
 import { waitForElement } from "./waitForElement";
 
 function isAbortError(err: unknown) {
@@ -83,6 +84,8 @@ export type RevealHooks = {
   restore: () => void;
   /** The target arrives on a round trip, which buys it the longer budget. */
   navigates?: boolean;
+  /** The reveal swaps the list, so the section is faded through it. */
+  swapsList?: boolean;
   /**
    * What `reveal` reads before it can do its job — the room row the info panel
    * is opened *on*, for instance. Waited for, so a step walked back into while
@@ -530,10 +533,8 @@ export function revealStep(
     : STEP_TARGET_TIMEOUT;
 
   return {
-    // Resolved rather than handed over as a selector: a reveal can land on a
-    // file-list row, whose wrapper is `display: contents` and has no box for
-    // joyride to lay the tooltip against (see `measurableTarget`). An ordinary
-    // element comes back from it untouched.
+    // Resolved, not handed over as a selector: a reveal can land on a row with
+    // no box of its own (see `measurableTarget`).
     target: () => measurableTarget(target),
     spotlightTarget: spotlightWith.length
       ? () => unionSpotlight([target, ...spotlightWith], target)
@@ -553,9 +554,17 @@ export function revealStep(
         await awaitAnchor(hooks.awaitBefore, timeout, signal, logLabel);
       }
 
-      hooks.reveal();
-      await awaitAnchor(target, timeout, signal, logLabel);
-      scrollTargetIntoView(target, signal);
+      const showTarget = async () => {
+        hooks.reveal();
+        await awaitAnchor(target, timeout, signal, logLabel);
+        scrollTargetIntoView(target, signal);
+      };
+
+      if (hooks.swapsList) {
+        await throughSectionFade(showTarget);
+      } else {
+        await showTarget();
+      }
     },
     after: () => {
       hooks.restore();

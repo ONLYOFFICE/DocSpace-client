@@ -51,6 +51,7 @@ import {
   NAVIGATION_TARGET_TIMEOUT,
   STEP_TARGET_TIMEOUT,
 } from "../stepBuilders";
+import { SECTION_FADE_MS } from "../sectionFade";
 
 const LOG_LABEL = "test tour";
 
@@ -82,7 +83,7 @@ const withRect = (
     }) as DOMRect;
 };
 
-/** The payload joyride hands its hooks; none of the builders here read it. */
+/** The payload joyride hands its hooks. */
 const HOOK_DATA = {} as Parameters<NonNullable<Step["before"]>>[0];
 
 /** Resolves a step's spotlight target the way react-joyride does. */
@@ -534,6 +535,79 @@ describe("file-list row anchors", () => {
 
 describe("revealStep", () => {
   const TARGET = "#late-arrival";
+
+  it("fades the section through a swap and brings it back", async () => {
+    vi.useFakeTimers();
+
+    try {
+      mount('<div class="section-wrapper-content"></div>');
+      const section = document.querySelector(".section-wrapper-content");
+      const reveal = vi.fn(() => {
+        mount('<div class="section-wrapper-content"><i id="swapped"></i></div>');
+      });
+
+      const step = revealStep(
+        "#swapped",
+        "title",
+        "body",
+        undefined,
+        LOG_LABEL,
+        { reveal, restore: () => {}, swapsList: true },
+      );
+
+      const pending = step.before?.(HOOK_DATA);
+
+      // Hidden before the swap runs, so the list does not blink out.
+      expect(section?.classList.contains("tour-section-fade-out")).toBe(true);
+      expect(reveal).not.toHaveBeenCalled();
+
+      await vi.advanceTimersByTimeAsync(SECTION_FADE_MS);
+      await pending;
+
+      expect(reveal).toHaveBeenCalled();
+      expect(
+        document
+          .querySelector(".section-wrapper-content")
+          ?.classList.contains("tour-section-fade-out"),
+      ).toBe(false);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("brings the section back even when the step is abandoned", async () => {
+    vi.useFakeTimers();
+
+    try {
+      mount('<div class="section-wrapper-content"></div>');
+      const controller = new AbortController();
+      const step = revealStep(
+        "#never-arrives",
+        "title",
+        "body",
+        { getSignal: () => controller.signal },
+        LOG_LABEL,
+        {
+          reveal: () => {},
+          restore: () => {},
+          swapsList: true,
+        },
+      );
+
+      const pending = step.before?.(HOOK_DATA);
+      await vi.advanceTimersByTimeAsync(SECTION_FADE_MS);
+      controller.abort();
+      await pending;
+
+      expect(
+        document
+          .querySelector(".section-wrapper-content")
+          ?.classList.contains("tour-section-fade-out"),
+      ).toBe(false);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 
   /**
    * How long the step actually waited before giving up. The wait is swallowed

@@ -275,7 +275,7 @@ const AiAgentsTour = ({
   const demoHooks = useMemo(
     // Nothing to restore afterwards: the section is already the user's own
     // again by the time this step is done with it.
-    () => ({ reveal: endDemo, restore: () => {} }),
+    () => ({ reveal: endDemo, restore: () => {}, swapsList: true }),
     [endDemo],
   );
 

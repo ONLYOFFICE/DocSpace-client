@@ -220,6 +220,7 @@ const FormsTour = ({
         void endDemo();
       },
       restore: () => {},
+      swapsList: true,
       // Steps out of the space and refetches the section, so the empty screen
       // this step points at is the far side of a route change and a request.
       navigates: true,

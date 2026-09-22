@@ -231,6 +231,7 @@ const RoomsTour = ({
     () => ({
       reveal: endDemo,
       restore: restoreDemo,
+      swapsList: true,
       // Both directions swap the list through a re-fetch, so the screen this
       // step points at — and the one the step before it points back at —
       // arrives on a round trip rather than on a re-render.

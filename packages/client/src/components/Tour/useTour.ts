@@ -42,6 +42,7 @@ import { useJoyride, EVENTS, STATUS, ACTIONS, type Step } from "react-joyride";
 import type TourStore from "SRC_DIR/store/TourStore";
 
 import TourTooltip from "./TourTooltip";
+import { clearSectionFade } from "./sectionFade";
 import {
   isStepTargetPresent,
   removeRevealedControl,
@@ -196,6 +197,7 @@ export default function useTour(
       ?.classList.remove("tour-outline-item");
     removeUnionSpotlight();
     removeRevealedControl();
+    clearSectionFade();
   }, []);
 
   const stopTour = useCallback(() => {

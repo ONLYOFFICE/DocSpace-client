@@ -46,7 +46,7 @@ import { SearchArea } from "@docspace/shared/enums";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "@docspace/shared/constants";
+import { CategoryType, MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
 type AiRoomTabsProps = {
@@ -89,9 +89,20 @@ const AiRoomTabs = ({
 
       const chatId = currentSearch.get("chat");
 
-      if (chatId) {
-        currentSearch.delete("chat");
-      }
+      // This cleanup also runs on a plain remount, not just when the user
+      // leaves: the section renders the submenu in a different subtree per
+      // device type, so a phone rotated into landscape crosses the mobile
+      // breakpoint and unmounts it. By then `window.location` may point at the
+      // media-view URL the viewer pushed (`/media/view/{id}`) rather than at
+      // the AI room, and rewriting that URL dropped the room and its
+      // `searchArea` -- the next read of the location then fell back to the
+      // default Files section, swapping the open image for an unrelated one.
+      // Touch the URL only when there is a `chat` param to strip AND the
+      // location is still the room's own, never the viewer's.
+      if (!chatId) return;
+      if (window.location.pathname.includes(MEDIA_VIEW_URL)) return;
+
+      currentSearch.delete("chat");
 
       const searchString = currentSearch.toString();
       const newUrl = searchString

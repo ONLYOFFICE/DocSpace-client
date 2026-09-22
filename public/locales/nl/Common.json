@@ -656,6 +656,7 @@
   "DiscoverAppsWorkspaceDescription": "Uw werkruimte omvat toepassingen voor het opslaan en beheren van documenten en het automatiseren van documentworkflows. Bekijk wat elke toepassing kan doen of ga direct aan de slag.",
   "DisplayFileExtension": "De bestandsextensie naast de bestandsnaam weergeven",
   "DisplaySettings": "Weergave instellingen",
+  "DocsAdminPanel": "{{editorsName}} beheerpaneel",
   "DocsApiReference": "{{organizationName}} {{docsName}} API",
   "DocsConnectCallbackErrorHint": "Uw kaart is opgeslagen, maar we konden de aankoop niet voltooien. U kunt het opnieuw proberen vanuit Docs Connect.",
   "DocsConnectCallbackErrorTitle": "Aankoop mislukt",

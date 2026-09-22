@@ -416,14 +416,19 @@ export function fetchFilesImpl(
               currentFolder.security!.Create &&
               !self.settingsStore.aiConfig?.aiReadyNeedReset,
             Download: aiRoom.security!.Download,
+            // Membership and room-management rights belong to the AI room
+            // itself, not to the Knowledge/ResultStorage subfolder the user
+            // is standing in -- read them from `aiRoom`, like Download/Pin
+            // below. Reading them off `currentFolder` yielded undefined and
+            // hid the info panel's Contacts actions on these tabs.
             EditAccess:
-              currentFolder.security!.security?.EditAccess &&
+              aiRoom.security!.EditAccess &&
               !self.settingsStore.aiConfig?.aiReadyNeedReset,
             EditRoom:
-              currentFolder.security!.security?.EditRoom &&
+              aiRoom.security!.EditRoom &&
               !self.settingsStore.aiConfig?.aiReadyNeedReset,
             ChangeOwner:
-              currentFolder.security!.security?.ChangeOwner &&
+              aiRoom.security!.ChangeOwner &&
               !self.settingsStore.aiConfig?.aiReadyNeedReset,
             Delete: aiRoom.security!.Delete,
 

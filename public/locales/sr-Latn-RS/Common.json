@@ -656,6 +656,7 @@
   "DiscoverAppsWorkspaceDescription": "Vaš radni prostor obuhvata aplikacije za čuvanje dokumenata, upravljanje njima i automatizaciju tokova rada sa dokumentima. Pogledajte šta svaka aplikacija može da radi ili odmah počnite sa radom.",
   "DisplayFileExtension": "Prikaz ekstenzije fajla pored imena fajla",
   "DisplaySettings": "Podešavanja Ekrana",
+  "DocsAdminPanel": "Administrativni panel {{editorsName}}",
   "DocsApiReference": "{{organizationName}} {{docsName}} API",
   "DocsConnectCallbackErrorHint": "Vaša kartica je sačuvana, ali nismo uspeli da završimo kupovinu. Možete ponovo pokušati iz Docs Connect.",
   "DocsConnectCallbackErrorTitle": "Kupovina nije uspela",

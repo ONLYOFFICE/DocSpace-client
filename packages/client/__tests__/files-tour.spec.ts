@@ -41,6 +41,8 @@ import {
   selfActivationStatusHandler,
   selfByTypeHandler,
   sharedWithMeHandler,
+  folderHandler,
+  TypeFolder,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { armTour, tourTooltip, walkTour } from "./helpers/tour";
@@ -68,6 +70,7 @@ const DEMO_SHARER = "colleague@example.com";
 // The step that hands the stand-in list back, from
 // public/locales/en/FilesTour.json.
 const EMPTY_STEP = "Your list is empty for now";
+const CREATE_FIRST_STEP = "Now make it yours";
 // The empty screen the closing step points at.
 const EMPTY_SCREEN = '[data-testid="empty-view"]';
 
@@ -369,5 +372,38 @@ test.describe("Files tour for a guest with nothing shared yet", () => {
     // out behind the user's back once the tour is over.
     await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
     await expect(page.getByRole("main").getByText(DEMO_SHARER)).toHaveCount(0);
+  });
+});
+
+test.describe("Files tour on an emptied personal space", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      folderHandler(TEST_PORT, TypeFolder.IsEmpty),
+    );
+  });
+
+  test("walks a stood-in list instead of an empty section", async ({
+    page,
+    baseUrl,
+  }) => {
+    await startTour(page, baseUrl);
+
+    await expect(page.locator('[data-testid="quick-actions"]')).toBeVisible();
+    await expect(page.locator('[data-testid^="table-row-"]')).toHaveCount(3);
+
+    await walkTour(page, ["desktop", "files-tour", "personal-empty"]);
+  });
+
+  test("hands the section back before the closing step", async ({
+    page,
+    baseUrl,
+  }) => {
+    await startTour(page, baseUrl);
+    await goToStepByTitle(page, CREATE_FIRST_STEP);
+
+    await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
+    await expect(page.locator('[data-testid^="table-row-"]')).toHaveCount(0);
   });
 });

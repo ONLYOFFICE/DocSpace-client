@@ -6,6 +6,7 @@
   "TourCreateAnything": "Create documents, spreadsheets, presentations and PDF forms right in your browser — no software needed.",
   "TourCreateAnythingTitle": "Create anything",
   "TourCreateFirst": "Start a document, a spreadsheet or a presentation, or upload the files you already have. One click, and you are working — with everything you have just seen at hand.",
+  "TourCreateFirstEmpty": "Start a document, a spreadsheet or a presentation. One click, and you are working — with everything you have just seen at hand.",
   "TourFindFast": "Search by name, filter by type or author, sort the list and switch between list and tile view.",
   "TourFindFastTitle": "Find anything fast",
   "TourPlacesFavorites": "{{sectionName}} — starred files.",

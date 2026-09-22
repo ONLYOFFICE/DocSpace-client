@@ -42,6 +42,7 @@ import type { TFolder, TGetFolder } from "@docspace/shared/api/files/types";
 import {
   buildDemoRooms,
   buildDemoMembers,
+  buildDemoPersonalFiles,
   buildDemoSharedFiles,
   buildDemoSpaceContents,
   type TourDemoConfig,
@@ -201,7 +202,7 @@ class TourDemo {
     });
 
     this.teardown =
-      config.list === "shared"
+      config.list === "shared" || config.list === "personal"
         ? this.standInForFolder(config)
         : this.standInForRooms(config);
   };
@@ -333,7 +334,10 @@ class TourDemo {
 
           if (!config.standInForList) return data;
 
-          const files = buildDemoSharedFiles(folder.current, config);
+          const files =
+            config.list === "personal"
+              ? buildDemoPersonalFiles(folder.current, config)
+              : buildDemoSharedFiles(folder.current, config);
 
           return {
             ...envelope,

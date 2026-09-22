@@ -96,59 +96,34 @@ export type TourDemoFile = {
  * a room as far as everything downstream is concerned (`RoomsType.AIRoom` under
  * `FolderType.AIAgents`).
  *
- * `shared` is the odd one out: Shared with me is a plain folder, so its list
- * comes back on `files/{id}` under the portal's own id and the rows arrive in
- * `files` rather than in `folders`.
+ * `shared` and `personal` are plain folders: the list comes back on
+ * `files/{id}` and the rows arrive in `files`. They differ only in who owns
+ * them.
  */
-export type TourDemoList = "rooms" | "agents" | "shared";
+export type TourDemoList = "rooms" | "agents" | "shared" | "personal";
 
 export type TourDemoConfig = {
   /** The endpoint whose answer the stand-in rows are put into. */
   list: TourDemoList;
-  /**
-   * The stand-in rooms, in list order. Built by the tour rather than here:
-   * what a section's list should be standing in for is the tour's business,
-   * and the titles are its translations to hold.
-   *
-   * Left out by a section that lists files rather than rooms.
-   */
+  /** In list order, and named by the tour: the titles are its translations. */
   rooms?: TourDemoRoom[];
-  /**
-   * The stand-in files, in list order — the `shared` list's counterpart to
-   * `rooms`.
-   */
   files?: TourDemoFile[];
-  /**
-   * The folder the stand-in files are put into. The room lists come back on an
-   * endpoint that names itself, but a file list is answered by `files/{id}`
-   * under an id only the portal knows, so the route the demo claims for the
-   * `shared` list has to be built from it.
-   */
+  /** Where the stand-in files go: a file list is answered by `files/{id}`. */
   folderId?: number;
   /**
-   * Whether the section's own list is replaced by them.
-   *
-   * Off, the stand-in rooms are still built — a tour that walks into one needs
-   * something to walk into — but the list the user sees stays their own. That
-   * is the line the demo does not cross: a portal with rooms of its own never
-   * sees a room it does not have *in its list*.
+   * Whether the user's own list is replaced by them. Off, the stand-in rooms
+   * are still built for a tour that walks into one, but the list stays theirs:
+   * a portal with rooms of its own never sees a room it does not have.
    */
   standInForList: boolean;
-  /** The signed-in user, who owns every demo room — real data, not invented. */
-  owner: TCreatedBy;
   /**
-   * The stand-in members every demo room shares, after the owner. Which roles
-   * are worth showing differs by section — a room has editors and viewers, a
-   * form space has the people filling the form in — so the tour picks them.
-   *
-   * Left out by a list of files, which has no members to speak of.
+   * The signed-in user, who owns every demo row — real data, not invented. The
+   * store hands it over as `TUser`, which the rows carry as their `TCreatedBy`.
    */
+  owner: TCreatedBy | TUser;
+  /** The roles worth showing in a room's member list, picked by the tour. */
   memberAccess?: ShareAccessRights[];
-  /**
-   * What the inside of a stand-in room is made of, when the tour walks into
-   * one. Only the forms tour does, and only the two system folders need
-   * naming — the blank form is named after the space it belongs to.
-   */
+  /** Named only by the forms tour, the one that walks into a stand-in room. */
   contents?: {
     inProgressTitle: string;
     completeTitle: string;
@@ -387,18 +362,49 @@ const sharedFileSecurity = (access: ShareAccessRights) => ({
   Vectorization: false,
 });
 
+/** What every stand-in file carries, whoever it belongs to. */
+function demoFileFields(
+  current: TFolder,
+  file: TourDemoFile,
+  index: number,
+  rootFolderType: FolderType,
+  now: string,
+) {
+  return {
+    id: DEMO_ID_BASE - index,
+    folderId: current.id,
+    rootFolderId: current.id,
+    // The section names its own root, so a stand-in file cannot end up filed
+    // as somebody's personal document.
+    rootFolderType: current.rootFolderType ?? rootFolderType,
+    title: `${file.title}${file.fileExst}`,
+    fileExst: file.fileExst,
+    fileType: file.fileType,
+    version: 1,
+    versionGroup: 1,
+    contentLength: "0 KB",
+    pureContentLength: 0,
+    fileStatus: 0,
+    mute: false,
+    comment: "",
+    viewUrl: "",
+    webUrl: "",
+    shortWebUrl: "",
+    thumbnailUrl: "",
+    thumbnailStatus: 1,
+    fileEntryType: 2,
+    shared: false,
+    sharedForUser: false,
+    parentShared: false,
+    created: now,
+    updated: now,
+  };
+}
+
 /**
- * The stand-in files of a Shared with me that has nothing in it yet.
- *
- * This is the section a guest lives in — they have no personal space and
- * nothing of their own anywhere — so an empty one leaves the tour with the
- * sidebar and nothing else: no row to point at, and no filter bar either
- * (`isEmptyPage` gates it). The three files stand in for what the section is
- * for, and carry the two things it exists to show: who a file came from, and
- * what the guest may do with it.
- *
- * `current` is the folder the server itself named, so the files sit under the
- * ids the section actually lives at.
+ * The stand-in files of a Shared with me that has nothing in it yet, carrying
+ * the two things the section exists to show: where a file came from, and what
+ * may be done with it.
  */
 export function buildDemoSharedFiles(
   current: TFolder,
@@ -416,64 +422,126 @@ export function buildDemoSharedFiles(
     isAnonim: false,
   } as unknown as TCreatedBy;
 
-  return (config.files ?? []).map(
-    ({ title, fileExst, fileType, access }, index) => {
-      const canEdit = access === ShareAccessRights.Editing;
+  return (config.files ?? []).map((file, index) => {
+    const { access } = file;
+    const canEdit = access === ShareAccessRights.Editing;
 
-      return {
-        id: DEMO_ID_BASE - index,
-        folderId: current.id,
-        rootFolderId: current.id,
-        // The section names its own root, so a stand-in file cannot end up
-        // filed as somebody's personal document.
-        rootFolderType: current.rootFolderType ?? FolderType.SHARE,
-        title: `${title}${fileExst}`,
-        fileExst,
-        fileType,
-        version: 1,
-        versionGroup: 1,
-        contentLength: "0 KB",
-        pureContentLength: 0,
-        fileStatus: 0,
-        mute: false,
-        comment: "",
-        viewUrl: "",
-        webUrl: "",
-        shortWebUrl: "",
-        thumbnailUrl: "",
-        thumbnailStatus: 1,
-        fileEntryType: 2,
-        // What was shared with the user is not theirs to pass on, which is also
-        // what keeps the row's share button off a demo row.
-        canShare: false,
-        shared: false,
-        sharedForUser: false,
-        parentShared: false,
-        // The one person in this section who is not the signed-in user: they
-        // own every file in it, and the list says so in two columns.
-        sharedBy,
-        createdBy: sharedBy,
-        updatedBy: sharedBy,
-        created: now,
-        updated: now,
-        access,
-        security: sharedFileSecurity(access),
+    return {
+      ...demoFileFields(current, file, index, FolderType.SHARE, now),
+      // Not theirs to pass on, which keeps the share button off the row.
+      canShare: false,
+      sharedBy,
+      createdBy: sharedBy,
+      updatedBy: sharedBy,
+      access,
+      security: sharedFileSecurity(access),
+      viewAccessibility: {
+        ImageView: false,
+        MediaView: false,
+        WebView: true,
+        WebEdit: canEdit,
+        WebReview: false,
+        WebCustomFilterEditing: false,
+        WebRestrictedEditing: false,
+        WebComment: canEdit || access === ShareAccessRights.Comment,
+        CoAuhtoring: canEdit,
+        CanConvert: false,
+        MustConvert: false,
+      },
+    };
+  }) as unknown as TFile[];
+}
+
+const ownFileSecurity = {
+  Read: true,
+  Edit: true,
+  Comment: true,
+  Review: true,
+  FillForms: true,
+  CustomFilter: true,
+  ReadHistory: true,
+  EditHistory: true,
+  Download: true,
+  Delete: true,
+  Rename: true,
+  Lock: true,
+  Copy: true,
+  Move: true,
+  Duplicate: true,
+  Convert: true,
+  SubmitToFormGallery: false,
+  CreateRoomFrom: true,
+  CopyLink: true,
+  Embed: false,
+  EditForm: false,
+  StartFilling: false,
+  OpenForm: false,
+  FillingStatus: false,
+  Vectorization: false,
+};
+
+/**
+ * The three formats every file section stands in with, named by the caller so
+ * the titles stay the tour's translations to hold.
+ */
+export function buildDemoFileList(titles: {
+  document: string;
+  spreadsheet: string;
+  presentation: string;
+}): TourDemoFile[] {
+  return [
+    {
+      title: titles.document,
+      fileExst: ".docx",
+      fileType: FileType.Document,
+      access: ShareAccessRights.Editing,
+    },
+    {
+      title: titles.spreadsheet,
+      fileExst: ".xlsx",
+      fileType: FileType.Spreadsheet,
+      access: ShareAccessRights.Comment,
+    },
+    {
+      title: titles.presentation,
+      fileExst: ".pptx",
+      fileType: FileType.Presentation,
+      access: ShareAccessRights.ReadOnly,
+    },
+  ];
+}
+
+/** The stand-in files of a personal space its owner has emptied. */
+export function buildDemoPersonalFiles(
+  current: TFolder,
+  config: TourDemoConfig,
+): TFile[] {
+  const now = demoTimestamp();
+
+  return (config.files ?? []).map(
+    (file, index) =>
+      ({
+        ...demoFileFields(current, file, index, FolderType.USER, now),
+        canShare: true,
+        createdBy: config.owner,
+        updatedBy: config.owner,
+        access: ShareAccessRights.None,
+        security: ownFileSecurity,
         viewAccessibility: {
           ImageView: false,
           MediaView: false,
           WebView: true,
-          WebEdit: canEdit,
-          WebReview: false,
-          WebCustomFilterEditing: false,
+          WebEdit: true,
+          WebReview: true,
+          WebCustomFilterEditing: true,
           WebRestrictedEditing: false,
-          WebComment: canEdit || access === ShareAccessRights.Comment,
-          CoAuhtoring: canEdit,
+          WebComment: true,
+          CoAuhtoring: true,
           CanConvert: false,
           MustConvert: false,
         },
-      };
-    },
-  ) as unknown as TFile[];
+      }) as unknown as TFile,
+  );
 }
 
 /** Everything anyone can do to something inside a room they administer. */

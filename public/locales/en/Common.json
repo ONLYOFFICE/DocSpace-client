@@ -1624,6 +1624,7 @@
   "PreparingBackup": "Preparing backup",
   "PreparingForAI": "Preparing for AI",
   "PreparingForAIInfo": "We’re analyzing and processing this file so that it can be used by AI as part of the knowledge base. Once preparation is complete, the file will be available for search, summaries, and other AI-powered features.",
+  "PreparingTour": "Preparing your tour...",
   "Presentation": "Presentation",
   "Presentations": "Presentations",
   "PreventDownloadFile": "Enable this setting to disable downloading of this file shared via a link.",

@@ -104,6 +104,13 @@ const ownerFlags: TourStepFlags = {
   trashId: "13",
 };
 
+/** The same owner, on a list that is stood in for. */
+const ownerDemoFlags: TourStepFlags = {
+  ...ownerFlags,
+  isDemo: true,
+  demoHooks: { reveal: vi.fn(), restore: vi.fn() },
+};
+
 const placesOf = (flags: TourStepFlags) =>
   steps(flags).find((step) => step.title === "FilesTour:TourPlacesTitle");
 
@@ -126,6 +133,24 @@ describe("getTourSteps — owner", () => {
     // The title is the same "Now make it yours" the Rooms tour closes with.
     expect(closing?.title).toBe("RoomsTour:RoomsCreateFirstTitle");
     expect(closing?.target).toBe(NEW_BUTTON_TARGET);
+  });
+
+  it("closes on the empty screen's own options when the list was stood in for", () => {
+    const closing = steps(ownerDemoFlags).at(-1);
+
+    expect(closing?.title).toBe("RoomsTour:RoomsCreateFirstTitle");
+    expect(closing?.content).toBe("FilesTour:TourCreateFirstEmpty");
+    expect(closing?.data).toEqual({ revealsTarget: true, presence: undefined });
+    expect(targets(ownerDemoFlags)).not.toContain(NEW_BUTTON_TARGET);
+  });
+
+  it("puts the stand-in files back when the closing step is walked out of", () => {
+    // Without it Back lands on steps whose anchors the empty screen lacks.
+    const closing = steps(ownerDemoFlags).at(-1);
+
+    closing?.after?.({} as TourData);
+
+    expect(ownerDemoFlags.demoHooks?.restore).toHaveBeenCalled();
   });
 
   it("spotlights the four format tiles, not the whole banner", () => {

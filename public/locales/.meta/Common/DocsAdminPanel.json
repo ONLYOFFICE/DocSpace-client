@@ -3,7 +3,7 @@
   "content": "{{editorsName}} Admin Panel",
   "content_en_sha1_hash": "f5c894caa54d3df60e7551d44a4848186758210e",
   "created_at": "2026-09-22T10:55:26.974Z",
-  "updated_at": "2026-09-22T10:56:36.704Z",
+  "updated_at": "2026-09-22T15:31:29.848Z",
   "comment": {
     "text": "Menu item label in the user menu for administrators or owners to access the admin panel. {{editorsName}} represents the product brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
-      "line_number": 442,
+      "line_number": 443,
       "context": "const docsAdminPanel: TProfileActionType | null =\n standalone && (isFullAdmin || isOwner) && docsAdminPanelUrl\n ? {\n key: \"user-menu-docs-admin-panel\",\n icon: AppsGridReactSvgUrl,\n label: t(\"Common:DocsAdminPanel\", {\n editorsName: getBrandName(\"ProductEditorsName\"),\n }),\n onClick: this.onDocsAdminPanelClick,\n url: docsAdminPanelUrl,\n isOutsideLink: true,",
       "module": "/packages/client"
     }

@@ -1,20 +1,20 @@
 {
-  "key_path": "NotNeedSettings",
-  "content": "No need to enter settings",
-  "content_en_sha1_hash": "80108142d370b94a1e63c31ec4747e9d9cef7c95",
-  "created_at": "2026-08-13T22:46:35.599Z",
-  "updated_at": "2026-09-22T15:31:29.773Z",
+  "key_path": "PluginInitFailed",
+  "content": "Failed to initialize",
+  "content_en_sha1_hash": "5f3068dbaf51dc252107e74f4aeb0664d290338d",
+  "created_at": "2026-09-22T15:31:22.820Z",
+  "updated_at": "2026-09-22T15:33:24.975Z",
   "comment": {
-    "text": "Status label in the plugin information dialog that appears when a plugin is active, indicating that no configuration is required.",
+    "text": "Error toast title that appears when a plugin fails to initialize during the integration process.",
     "is_auto": true,
-    "updated_at": "2026-08-14T15:42:28.034Z",
+    "updated_at": "2026-09-22T15:33:24.975Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
-      "line_number": 60,
-      "context": "const errorKind = plugin.loadError ? \"load\" : \"init\";\n \n const pluginStatus = plugin.loadError\n ? t(\"PluginLoadFailed\")\n : plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n const incompatibleTooltip = t(\"WebPlugins:PluginIsNotCompatible\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/hooks/usePluginUpload.ts",
+      "line_number": 70,
+      "context": "toastr.error(loadError, t(\"PluginLoadFailed\"));\n return;\n }\n \n if (initError) {\n toastr.error(initError, t(\"PluginInitFailed\"));\n return;\n }\n \n if (!isPluginCompatible) {\n toastr.warning(",
       "module": "/packages/client"
     }
   ],

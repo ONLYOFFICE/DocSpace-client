@@ -80,8 +80,9 @@ export const JOYRIDE_TIMEOUTS = {
  * end/skip/close) and returns the portal-ready <Tour/> element plus stable
  * `callbacks` a section's step builder threads into each step's `before` hook.
  *
- * `buildSteps(callbacks)` is called on every render; memoize its inputs in the
- * caller so the steps array is stable.
+ * `buildSteps(callbacks)` is called on every render, and the list it returns is
+ * frozen for the length of a run (see below) rather than kept stable by the
+ * caller.
  */
 export default function useTour(
   tourStore: TourStore,
@@ -155,9 +156,8 @@ export default function useTour(
       // A stray click beside the tooltip must not lose the tour.
       overlayClickAction: false,
       blockTargetInteraction: true,
-      // joyride's own close advances the index first, which runs the next
-      // step's `before` hook. Esc did the same, so it is handled below.
-      closeButtonAction: "skip" as const,
+      // Esc is ours: joyride's own dismiss advances the index first, which
+      // runs the next step's `before` hook.
       dismissKeyAction: false as const,
       // Each step's anchor is still scrolled into view before the step is laid
       // out — the sections are all taller than the viewport, and a tour opens
@@ -215,22 +215,23 @@ export default function useTour(
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.defaultPrevented || event.altKey || event.metaKey) return;
 
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        controls.next();
-      } else if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        controls.prev();
-      } else if (event.key === "Escape") {
-        event.preventDefault();
-        stopTour();
-      }
+      const walk = {
+        ArrowRight: () => controls.next(),
+        ArrowLeft: () => controls.prev(),
+        // Past the last step, which is how the tour ends on its own.
+        Escape: () => controls.go(steps.length),
+      }[event.key];
+
+      if (!walk) return;
+
+      event.preventDefault();
+      walk();
     };
 
     document.addEventListener("keydown", onKeyDown);
 
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [controls, stopTour, tourStore.isRunning]);
+  }, [controls, steps.length, tourStore.isRunning]);
 
   // Every anchor was filtered out, so there is nothing to show. react-joyride
   // never starts on an empty step list, which would leave the tour flagged as

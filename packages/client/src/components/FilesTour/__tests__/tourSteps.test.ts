@@ -148,7 +148,7 @@ describe("getTourSteps — owner", () => {
     // Without it Back lands on steps whose anchors the empty screen lacks.
     const closing = steps(ownerDemoFlags).at(-1);
 
-    closing?.after?.({} as TourData);
+    closing?.after?.({ action: "prev", status: "running" } as TourData);
 
     expect(ownerDemoFlags.demoHooks?.restore).toHaveBeenCalled();
   });

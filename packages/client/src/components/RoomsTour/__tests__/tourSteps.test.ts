@@ -188,7 +188,7 @@ describe("getTourSteps — walking back out of the closing step", () => {
       const hooksForRun = listHooks();
       const closing = steps({ ...flags, demoHooks: hooksForRun }).at(-1)!;
 
-      closing.after?.({} as never);
+      closing.after?.({ action: "prev", status: "running" } as never);
 
       expect(hooksForRun.restore).toHaveBeenCalledTimes(1);
     }

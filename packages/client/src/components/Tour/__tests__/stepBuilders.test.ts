@@ -86,6 +86,15 @@ const withRect = (
 /** The payload joyride hands its hooks. */
 const HOOK_DATA = {} as Parameters<NonNullable<Step["before"]>>[0];
 
+const afterData = (over: Partial<{ action: string; index: number }> = {}) =>
+  ({
+    status: "running",
+    action: "next",
+    index: 0,
+    size: 3,
+    ...over,
+  }) as Parameters<NonNullable<Step["after"]>>[0];
+
 /** Resolves a step's spotlight target the way react-joyride does. */
 const spotlight = (step: Step) =>
   (step.spotlightTarget as () => HTMLElement | null)();
@@ -535,6 +544,24 @@ describe("file-list row anchors", () => {
 
 describe("revealStep", () => {
   const TARGET = "#late-arrival";
+
+  it("restores only when another step follows", () => {
+    // Done on the last step used to run `restore`, which put the stand-in list
+    // back for a moment before the host handed the section over.
+    const restore = vi.fn();
+    const step = revealStep("#target", "title", "body", undefined, LOG_LABEL, {
+      reveal: () => {},
+      restore,
+    });
+
+    // Done on the last step: nothing follows, so the reveal stands.
+    step.after?.(afterData({ index: 2 }));
+    expect(restore).not.toHaveBeenCalled();
+
+    step.after?.(afterData({ action: "prev", index: 2 }));
+    step.after?.(afterData({ index: 1 }));
+    expect(restore).toHaveBeenCalledTimes(2);
+  });
 
   it("fades the section through a swap and brings it back", async () => {
     vi.useFakeTimers();

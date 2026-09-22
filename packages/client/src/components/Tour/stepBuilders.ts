@@ -34,7 +34,7 @@
  */
 
 import { createElement, type ReactNode } from "react";
-import type { Step } from "react-joyride";
+import { ACTIONS, STATUS, type Step } from "react-joyride";
 
 import TourList from "./TourList";
 import type { TourStepCallbacks } from "./useTour";
@@ -566,8 +566,14 @@ export function revealStep(
         await showTarget();
       }
     },
-    after: () => {
-      hooks.restore();
+    after: (data) => {
+      // `restore` is for a step another one follows, forward or back. Ending on
+      // this step leaves what the reveal did standing: the status is still
+      // `running` here, so the last step has to be recognised by its index.
+      const continues =
+        data.action === ACTIONS.PREV || data.index + 1 < data.size;
+
+      if (data.status === STATUS.RUNNING && continues) hooks.restore();
       removeUnionSpotlight();
     },
   };

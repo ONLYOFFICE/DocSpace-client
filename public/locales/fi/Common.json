@@ -656,6 +656,7 @@
   "DiscoverAppsWorkspaceDescription": "Työtilaasi kuuluu sovelluksia asiakirjojen tallentamiseen, hallintaan ja asiakirjatyönkulkujen automatisointiin. Katso, mitä kukin sovellus osaa, tai aloita työskentely heti.",
   "DisplayFileExtension": "Näytä tiedostopääte tiedostonimen perässä",
   "DisplaySettings": "Näyttöasetukset",
+  "DocsAdminPanel": "{{editorsName}}-hallintapaneeli",
   "DocsApiReference": "{{organizationName}} {{docsName}} -API",
   "DocsConnectCallbackErrorHint": "Korttisi tallennettiin, mutta emme pystyneet viimeistelemään ostoa. Voit yrittää uudelleen Docs Connect -palvelusta.",
   "DocsConnectCallbackErrorTitle": "Osto epäonnistui",

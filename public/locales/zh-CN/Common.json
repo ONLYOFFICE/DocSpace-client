@@ -656,6 +656,7 @@
   "DiscoverAppsWorkspaceDescription": "您的工作区包含用于文档存储、管理和文档工作流自动化的应用。了解每个应用的功能，或直接开始使用。",
   "DisplayFileExtension": "在文件名称旁显示文件扩展名",
   "DisplaySettings": "显示设置",
+  "DocsAdminPanel": "{{editorsName}} 管理面板",
   "DocsApiReference": "{{organizationName}} {{docsName}} API",
   "DocsConnectCallbackErrorHint": "您的银行卡已保存，但我们无法完成购买。您可以从 Docs Connect 重试。",
   "DocsConnectCallbackErrorTitle": "购买失败",

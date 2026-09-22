@@ -70,6 +70,15 @@ const NEW_MENU_SELECTOR = ".p-contextmenu";
 // The field, not the block around it: the "New" button lives in there too.
 const SEARCH_SELECTOR = "#filter_search-input .search-input-block";
 
+// What the step promises besides search: filtering, sorting, and the view
+// switch. Each is dropped from the spotlight when the bar does not show it.
+const FILTER_CONTROL_SELECTORS = [
+  SEARCH_SELECTOR,
+  "#filter-button",
+  "#sort-by-button",
+  '[data-testid="view-selector"]',
+];
+
 // One selector per view; the first match wins, so a row without the button is
 // stepped over. The table view hides it until the row is hovered.
 const SHARE_ICON_SELECTOR = [
@@ -122,8 +131,9 @@ function searchStep(
   t: TFunction,
   callbacks: TourStepCallbacks | undefined,
 ): Step {
-  return elementStep(
+  return elementGroupStep(
     SEARCH_SELECTOR,
+    FILTER_CONTROL_SELECTORS,
     t("FilesTour:TourFindFastTitle"),
     t("FilesTour:TourFindFast"),
     callbacks,

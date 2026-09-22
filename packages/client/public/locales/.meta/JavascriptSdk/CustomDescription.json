@@ -3,7 +3,7 @@
   "content": "Manually configure the parameters for embedding your workspace.",
   "content_en_sha1_hash": "59e0d6cf929dd697c1ffb551d000085eab47dad4",
   "created_at": "2026-08-12T11:00:47.386Z",
-  "updated_at": "2026-09-04T07:59:41.648Z",
+  "updated_at": "2026-09-22T10:56:05.152Z",
   "comment": {
     "text": "Description text for a menu item or preset card explaining how to manually configure workspace embedding parameters.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 128,
+      "line_number": 126,
       "context": "image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,\n handleOnClick: navigateToFileSelector,\n },\n {\n title: t(\"Common:Custom\"),\n description: t(\"CustomDescription\"),\n image: theme.isBase ? CustomImg : CustomImgDark,\n handleOnClick: navigateToCustom,\n },\n {\n title: t(\"Common:Uploader\"),",
       "module": "/packages/client"
     },

@@ -656,6 +656,7 @@
   "DiscoverAppsWorkspaceDescription": "Twoja przestrzeń robocza obejmuje aplikacje do przechowywania dokumentów, zarządzania nimi i automatyzacji obiegu dokumentów. Sprawdź, co potrafi każda aplikacja, lub od razu zacznij pracę.",
   "DisplayFileExtension": "Wyświetlaj rozszerzenie pliku obok nazwy pliku",
   "DisplaySettings": "Ustawienia wyświetlania",
+  "DocsAdminPanel": "Panel administracyjny {{editorsName}}",
   "DocsApiReference": "API {{organizationName}} {{docsName}}",
   "DocsConnectCallbackErrorHint": "Twoja karta została zapisana, ale nie udało się sfinalizować zakupu. Możesz spróbować ponownie w Docs Connect.",
   "DocsConnectCallbackErrorTitle": "Zakup nie powiódł się",

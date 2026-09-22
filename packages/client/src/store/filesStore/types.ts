@@ -72,15 +72,9 @@ export type TClientConfigWithPdfViewer = NonNullable<Window["ClientConfig"]> & {
   pdfViewer?: boolean;
 };
 
-// FilesStore.js reads `security.security?.X` in the AI
-// knowledge/result branch of fetchFiles — the nested member never exists at
-// runtime (always undefined); it is typed here so the read stays legal
-// without call-site casts. Candidate for cleanup.
 export type TItemSecurity = Partial<
   TFileSecurity & TFolderSecurity & TRoomSecurity
-> & {
-  security?: Partial<TFileSecurity & TFolderSecurity & TRoomSecurity>;
-};
+>;
 
 // this store mixes three API entity families (files,
 // folders, rooms) and its own filesList view-models in the same collections.

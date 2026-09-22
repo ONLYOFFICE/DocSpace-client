@@ -68,7 +68,7 @@ const DOCS_ADMIN_PANEL_URL = "https://docs.e2e.local/admin-panel/";
 
 const externalResourcesWithPanel = {
   ...settingsAuth.response.externalResources,
-  adminpanel: { domain: DOCS_ADMIN_PANEL_URL },
+  adminPanel: { domain: DOCS_ADMIN_PANEL_URL },
 };
 
 /**
@@ -147,7 +147,10 @@ test.describe("Docs Admin Panel entry in the profile menu", () => {
 
     await openProfileMenu(page, baseUrl);
 
-    const popupPromise = page.waitForEvent("popup");
+    // The context's "page" event rather than the page's "popup" one: the
+    // handler opens with "noopener", so the new tab has no opener to be a
+    // popup of, and only the context hears about it.
+    const popupPromise = page.context().waitForEvent("page");
 
     await page.getByTestId(DOCS_ADMIN_PANEL_ITEM).click();
 

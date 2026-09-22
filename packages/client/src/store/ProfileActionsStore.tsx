@@ -307,7 +307,8 @@ class ProfileActionsStore {
   onDocsAdminPanelClick = () => {
     const { docsAdminPanelUrl } = this.settingsStore;
 
-    if (docsAdminPanelUrl) window.open(docsAdminPanelUrl, "_blank");
+    if (docsAdminPanelUrl)
+      window.open(docsAdminPanelUrl, "_blank", "noopener,noreferrer");
   };
 
   onHelpCenterClick = () => {

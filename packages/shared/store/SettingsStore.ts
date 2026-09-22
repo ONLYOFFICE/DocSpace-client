@@ -1895,4 +1895,3 @@ class SettingsStore {
 }
 
 export { SettingsStore };
-

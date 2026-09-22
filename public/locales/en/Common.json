@@ -19,6 +19,7 @@
   "ActivateAIFeatures": "Activate AI features",
   "ActivateAIFeaturesToGetStarted": "Activate AI features to get started",
   "ActivateAISearchDescription": "Enable web search to bring real-time information from the internet into AI chats.",
+  "ActivateAISearchToGetStarted": "Activate AI Search to get started?",
   "ActivateLicense": "Activate license",
   "ActivateLicenseActivated": "License activated",
   "ActivatePaidTariffExpiration": "Your subscription expires on {{date}}.",

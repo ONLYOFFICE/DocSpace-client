@@ -261,7 +261,7 @@ export const CompletedForm = ({
               <Button
                 scale
                 size={ButtonSize.medium}
-                label={t("CompletedForm:BackToRoom")}
+                label={t("CompletedForm:BackToFormSpace")}
                 onClick={handleBackToRoom}
                 testId="back_to_room_button"
               />

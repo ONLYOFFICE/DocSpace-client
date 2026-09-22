@@ -656,6 +656,7 @@
   "DiscoverAppsWorkspaceDescription": "تتضمن مساحة العمل الخاصة بك تطبيقات لتخزين المستندات وإدارتها وأتمتة سير عمل المستندات. تعرّف على ما يمكن أن يقوم به كل تطبيق، أو ابدأ العمل مباشرة.",
   "DisplayFileExtension": "عرض امتداد الملف بجوار اسم الملف",
   "DisplaySettings": "عرض الإعدادات",
+  "DocsAdminPanel": "لوحة إدارة {{editorsName}}",
   "DocsApiReference": "واجهة برمجة تطبيقات {{organizationName}} {{docsName}}",
   "DocsConnectCallbackErrorHint": "تم حفظ بطاقتك، ولكن تعذر إتمام عملية الشراء. يمكنك إعادة المحاولة من Docs Connect.",
   "DocsConnectCallbackErrorTitle": "فشلت عملية الشراء",

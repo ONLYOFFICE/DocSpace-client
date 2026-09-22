@@ -85,6 +85,7 @@ const FilesSelectorWrapper = ({
   isSelectFolder = false,
   rootThirdPartyId,
   filterParam,
+  withSubFolders,
 
   onClose,
 
@@ -566,6 +567,7 @@ const FilesSelectorWrapper = ({
           : undefined
       }
       filterParam={filterParam}
+      withSubFolders={withSubFolders}
       getIcon={getIcon}
       setIsDataReady={setIsDataReady}
       treeFolders={treeFolders as unknown as FolderDtoInteger[]}

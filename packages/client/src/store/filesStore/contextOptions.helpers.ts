@@ -253,8 +253,19 @@ export const buildContextOptions = (
     // list keeps stale `true` values after an admin disables AI portal-wide —
     // check the live switch as well. Privacy and encryption rule the chat out
     // whatever the rights say.
+    //
+    // Inside an AI agent room "Ask AI" does not raise the side panel (disabled
+    // there — see `isAiChatAvailable` in Shell) but navigates to the room's
+    // chat tab, which a member without `UseChat` is redirected away from. Its
+    // files still carry `AskAi: true`, so without this the entry is offered to
+    // a Viewer and leads straight back to where they came from. The same holds
+    // for "Analyze responses", which opens that very chat.
+    const noAgentChatAccess =
+      deps.selectedFolderStore.isAIRoom && !deps.accessRightsStore.canUseChat;
+
     const noAi =
       !deps.settingsStore.aiServicesEnabled ||
+      noAgentChatAccess ||
       isPrivacyFolder ||
       item.private ||
       isEncrypted;

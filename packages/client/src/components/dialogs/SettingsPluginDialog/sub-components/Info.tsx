@@ -43,6 +43,7 @@ import { getCookie } from "@docspace/ui-kit/utils/cookie";
 
 import PluginIncompatibleSvg from "PUBLIC_DIR/images/plugin.incompatible.react.svg";
 import { PluginStatus } from "SRC_DIR/helpers/plugins/enums";
+import { getPluginErrorText } from "SRC_DIR/helpers/plugins/errors";
 import { InfoProps } from "../SettingsPluginDialog.types";
 import styles from "../SettingsPluginDialog.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
@@ -54,11 +55,16 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
   const statusError = plugin.loadError ?? plugin.initError;
   const errorKind = plugin.loadError ? "load" : "init";
 
-  const pluginStatus = plugin.loadError
-    ? t("PluginLoadFailed")
-    : plugin.status === PluginStatus.active
+  const getPluginStatus = () => {
+    if (plugin.loadError) return t("PluginLoadFailed");
+    if (plugin.initError) return t("PluginInitFailed");
+
+    return plugin.status === PluginStatus.active
       ? t("NotNeedSettings")
       : t("NeedSettings");
+  };
+
+  const pluginStatus = getPluginStatus();
 
   const incompatibleTooltip = t("WebPlugins:PluginIsNotCompatible", {
     organizationName: getBrandName("OrganizationName"),
@@ -168,7 +174,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
               className={styles.statusError}
               data-testid={`plugin_${errorKind}_error_icon`}
               data-tooltip-id="system-tooltip"
-              data-tooltip-content={statusError}
+              data-tooltip-content={getPluginErrorText(t, statusError)}
               data-tooltip-place="bottom"
             >
               <PluginIncompatibleSvg

@@ -50,6 +50,7 @@ import PluginIncompatibleSvg from "PUBLIC_DIR/images/plugin.incompatible.react.s
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
 
 import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
+import { getPluginErrorText } from "SRC_DIR/helpers/plugins/errors";
 
 import styles from "../Plugins.module.scss";
 import { PluginItemProps } from "../Plugins.types";
@@ -74,7 +75,7 @@ const PluginItem = ({
   dataTestId,
   theme,
 }: PluginItemProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "WebPlugins"]);
 
   const descriptionRef = useRef<HTMLDivElement>(null);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
@@ -147,22 +148,21 @@ const PluginItem = ({
     />
   );
 
-  const errorMessage = loadError ?? initError;
+  const error = loadError ?? initError;
 
-  const errorIcon = errorMessage ? (
+  const errorIcon = error ? (
     <div
       className={classNames(styles.pluginLoadError, {
         [styles.pluginInitError]: !loadError,
       })}
       data-tooltip-id="system-tooltip"
-      data-tooltip-content={errorMessage}
+      data-tooltip-content={getPluginErrorText(t, error)}
       data-tooltip-place="bottom"
       data-testid={`plugin_${loadError ? "load" : "init"}_error_${name}_icon`}
     >
       <PluginIncompatibleSvg />
     </div>
   ) : null;
-
 
   return (
     <div className={styles.pluginItem} data-testid={dataTestId}>

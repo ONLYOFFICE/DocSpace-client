@@ -97,6 +97,7 @@ import type {
   IArticleNavigationItemClient,
   IframeWindow,
   TPlugin,
+  TPluginError,
   IPostMessageCallbackMessage,
   IMediaViewerClient,
   IModalDialogClient,
@@ -104,6 +105,7 @@ import type {
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
+import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
 import { matchesUserRole } from "../helpers/plugins/roles";
 import { createPluginApi } from "../helpers/plugins/react/api";
 import { toCurrentUser } from "../helpers/plugins/react/utils";
@@ -131,9 +133,6 @@ const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
 // One client for every plugin: it holds no per-plugin state, and a plugin that
 // lists `api` in a dependency array must not see a new object on every render.
 const pluginApi = createPluginApi();
-
-const getErrorMessage = (error: unknown) =>
-  error instanceof Error ? error.message : String(error);
 
 type TDispatchMessage = Pick<
   TMessageActionsParams,
@@ -531,7 +530,7 @@ class PluginStore {
 
       this.setNeedPageReload(true);
 
-      let thrownInitError: string | undefined;
+      let thrownInitError: TPluginError | undefined;
 
       try {
         if (plugin.runtime === "module") {
@@ -545,16 +544,16 @@ class PluginStore {
           e,
         );
 
-        thrownInitError = getErrorMessage(e);
+        thrownInitError = toPluginError(e);
       }
 
-      const installed = this.plugins.find((p) => p.name === plugin.name);
+      const storedPlugin = this.plugins.find((p) => p.name === plugin.name);
 
       return {
         isPluginCompatible,
         isPluginInCache,
-        loadError: installed?.loadError,
-        initError: installed?.initError ?? thrownInitError,
+        loadError: storedPlugin?.loadError,
+        initError: storedPlugin?.initError ?? thrownInitError,
       };
     } catch (e) {
       toastr.error(e as TData);
@@ -588,13 +587,12 @@ class PluginStore {
     const currentLanguage = (getCookie(LANGUAGE) || culture) as string;
     plugin.setLanguage?.(currentLanguage);
 
-    const language = plugin.getLanguage?.();
+    const language = plugin.getLanguage?.() ?? currentLanguage;
 
-    plugin.nameLocale =
-      (language && plugin.nameLocaleMap?.[language]) || plugin.name;
+    plugin.nameLocale = plugin.nameLocaleMap?.[language] || plugin.name;
 
     plugin.descriptionLocale =
-      (language && plugin.descriptionLocaleMap?.[language]) ||
+      plugin.descriptionLocaleMap?.[language] ||
       plugin.description;
   };
 
@@ -632,25 +630,21 @@ class PluginStore {
         const registered = iWindow?.Plugins?.[plugin.pluginName];
 
         if (!registered) {
-          const error =
-            scriptError ??
-            new Error(
-              `Plugin did not register window.Plugins["${plugin.pluginName}"]`,
-            );
+          const error: TPluginError = scriptError
+            ? toPluginError(scriptError)
+            : { kind: "unregistered", pluginName: plugin.pluginName };
 
           console.error(
             `[Plugin: ${plugin.name}] Failed to load plugin:`,
-            error,
+            scriptError ?? error,
           );
 
           resolve(this.installBrokenPlugin(plugin, error));
           return;
         }
 
-        let newPlugin: TPlugin | undefined;
-
         try {
-          newPlugin = cloneDeep({
+          const newPlugin: TPlugin = cloneDeep({
             ...plugin,
             nameLocaleMap: plugin.nameLocale,
             descriptionLocaleMap: plugin.descriptionLocale,
@@ -670,20 +664,20 @@ class PluginStore {
             plugin.minDocSpaceVersion,
           );
 
-          await this.runPluginInit(newPlugin, plugin.settings || null);
+          const storedPlugin = await this.runPluginInit(
+            newPlugin,
+            plugin.settings || null,
+          );
 
-          callback?.(newPlugin);
-          resolve(newPlugin);
+          callback?.(storedPlugin);
+          resolve(storedPlugin);
         } catch (error) {
           console.error(
             `[Plugin: ${plugin.name}] Plugin initialization failed:`,
             error,
           );
 
-          if (newPlugin) {
-            newPlugin.initError = getErrorMessage(error);
-            this.addToPluginList(newPlugin);
-          }
+          this.setInitError(plugin.name, toPluginError(error));
 
           reject(error);
         }
@@ -692,7 +686,7 @@ class PluginStore {
       const onError = () => {
         stopListening();
 
-        const error = new Error(`Failed to load script ${plugin.url}`);
+        const error: TPluginError = { kind: "script", url: plugin.url };
 
         console.error(`[Plugin: ${plugin.name}] Failed to load plugin:`, error);
 
@@ -833,12 +827,31 @@ class PluginStore {
       });
 
       this.setIsEmptyList(false);
-    } else {
-      this.plugins[idx] = plugin;
+
+      return this.plugins[0];
     }
+
+    runInAction(() => {
+      this.plugins[idx] = plugin;
+    });
+
+    return this.plugins[idx];
   };
 
-  private installBrokenPlugin = (plugin: TAPIPlugin, error: unknown) => {
+  private setInitError = (
+    name: string,
+    initError: TPluginError | undefined,
+  ) => {
+    const plugin = this.plugins.find((p) => p.name === name);
+
+    if (!plugin) return;
+
+    runInAction(() => {
+      plugin.initError = initError;
+    });
+  };
+
+  private installBrokenPlugin = (plugin: TAPIPlugin, error: TPluginError) => {
     const scopes =
       typeof plugin.scopes === "string"
         ? (plugin.scopes.split(",") as PluginScopes[])
@@ -851,7 +864,7 @@ class PluginStore {
       scopes,
       iconUrl: getPluginUrl(plugin.url, ""),
       compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
-      loadError: getErrorMessage(error),
+      loadError: error,
     } as unknown as TPlugin;
 
     const previous = this.plugins.find((p) => p.name === plugin.name);
@@ -866,9 +879,8 @@ class PluginStore {
     }
 
     this.initLocalePlugin(brokenPlugin);
-    this.addToPluginList(brokenPlugin);
 
-    return brokenPlugin;
+    return this.addToPluginList(brokenPlugin);
   };
 
   private runPluginInit = async (
@@ -876,21 +888,23 @@ class PluginStore {
     settings: string | null,
     addToList = true,
   ) => {
-    this.initLocalePlugin(plugin);
+    const storedPlugin = addToList ? this.addToPluginList(plugin) : plugin;
 
-    await this.installPlugin(plugin, addToList);
+    this.initLocalePlugin(storedPlugin);
 
-    if (plugin.loadError) return;
+    await this.installPlugin(storedPlugin);
 
-    if (plugin.scopes.includes(PluginScopes.Settings)) {
-      plugin.setAdminPluginSettingsValue?.(settings);
-      this.updatePluginStatus(plugin.name);
+    if (storedPlugin.loadError) return storedPlugin;
+
+    if (storedPlugin.scopes.includes(PluginScopes.Settings)) {
+      storedPlugin.setAdminPluginSettingsValue?.(settings);
+      this.updatePluginStatus(storedPlugin.name);
     }
+
+    return storedPlugin;
   };
 
-  installPlugin = async (plugin: TPlugin, addToList = true) => {
-    if (addToList) this.addToPluginList(plugin);
-
+  installPlugin = async (plugin: TPlugin) => {
     if (!plugin || !plugin.enabled || plugin.loadError) return;
 
     if (plugin.scopes.includes(PluginScopes.API)) {
@@ -975,15 +989,11 @@ class PluginStore {
     try {
       await this.runPluginInit(plugin, plugin.settings || null, false);
 
-      runInAction(() => {
-        plugin.initError = undefined;
-      });
+      this.setInitError(name, undefined);
     } catch (e) {
       console.error(`[Plugin: ${name}] Plugin initialization failed:`, e);
 
-      runInAction(() => {
-        plugin.initError = getErrorMessage(e);
-      });
+      this.setInitError(name, toPluginError(e));
     }
   };
 
@@ -2053,7 +2063,13 @@ class PluginStore {
     plugin: TAPIPlugin,
   ): Promise<Partial<TPlugin>> => {
     const res = await fetch(plugin.url);
-    if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${plugin.url}`);
+    if (!res.ok) {
+      throw new PluginLoadError({
+        kind: "http",
+        status: res.status,
+        url: plugin.url,
+      });
+    }
 
     const rawCode = await res.text();
 
@@ -2072,7 +2088,7 @@ class PluginStore {
     }
 
     const exported = mod?.default;
-    if (!exported) throw new Error("Module plugin has no default export");
+    if (!exported) throw new PluginLoadError({ kind: "no-default-export" });
 
     return exported;
   };
@@ -2099,22 +2115,24 @@ class PluginStore {
     });
 
     try {
-      await this.runPluginInit(newPlugin, plugin.settings || null);
+      const storedPlugin = await this.runPluginInit(
+        newPlugin,
+        plugin.settings || null,
+      );
+
+      callback?.(storedPlugin);
+
+      return storedPlugin;
     } catch (e) {
       console.error(
         `[Plugin: ${plugin.name}] Plugin initialization failed:`,
         e,
       );
 
-      newPlugin.initError = getErrorMessage(e);
-      this.addToPluginList(newPlugin);
+      this.setInitError(plugin.name, toPluginError(e));
 
       throw e;
     }
-
-    callback?.(newPlugin);
-
-    return newPlugin;
   };
 
   initModulePlugin = async (
@@ -2131,7 +2149,7 @@ class PluginStore {
         e,
       );
 
-      this.installBrokenPlugin(plugin, e);
+      this.installBrokenPlugin(plugin, toPluginError(e));
       return;
     }
 

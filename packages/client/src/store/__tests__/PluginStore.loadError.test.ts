@@ -66,7 +66,7 @@ import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
-import type { TPlugin } from "../../helpers/plugins/types";
+import type { TPlugin, TPluginError } from "../../helpers/plugins/types";
 import type { TTranslation } from "@docspace/shared/types";
 
 import api from "@docspace/shared/api";
@@ -76,8 +76,14 @@ import type SelectedFolderStore from "../SelectedFolderStore";
 import { PluginScopes } from "../../helpers/plugins/enums";
 
 const PLUGIN = "article-navigation-sample";
+const PLUGIN_URL = "https://portal.test/plugins/sample/plugin.js";
 const SHIM_ERROR =
   'The bundle imports "@docspace/ui-kit", which the portal does not provide.';
+
+const thrown = (message: string): TPluginError => ({ kind: "thrown", message });
+const HTTP_404: TPluginError = { kind: "http", status: 404, url: PLUGIN_URL };
+const SCRIPT_FAILED: TPluginError = { kind: "script", url: PLUGIN_URL };
+const UNREGISTERED: TPluginError = { kind: "unregistered", pluginName: PLUGIN };
 
 const apiPlugin = (overrides: Partial<TAPIPlugin> = {}): TAPIPlugin =>
   ({
@@ -86,7 +92,7 @@ const apiPlugin = (overrides: Partial<TAPIPlugin> = {}): TAPIPlugin =>
     enabled: true,
     settings: "",
     scopes: "Settings,ArticleNavigation",
-    url: "https://portal.test/plugins/sample/plugin.js",
+    url: PLUGIN_URL,
     version: "1.0.0",
     runtime: "module",
     ...overrides,
@@ -135,7 +141,7 @@ describe("PluginStore module plugin load failure", () => {
       name: PLUGIN,
       nameLocale: PLUGIN,
       enabled: true,
-      loadError: SHIM_ERROR,
+      loadError: thrown(SHIM_ERROR),
       scopes: [PluginScopes.Settings, PluginScopes.ArticleNavigation],
     });
     expect(store.isEmptyList).toBe(false);
@@ -148,7 +154,25 @@ describe("PluginStore module plugin load failure", () => {
 
     await store.initModulePlugin(apiPlugin());
 
-    expect(store.plugins[0].loadError).toContain("HTTP 404");
+    expect(store.plugins[0].loadError).toEqual(HTTP_404);
+  });
+
+  it("shows a broken plugin under its localized name", async () => {
+    vi.stubGlobal("fetch", fetchNotFound());
+
+    const store = createStore();
+
+    await store.initModulePlugin(
+      apiPlugin({
+        nameLocale: { en: "Sample plugin" },
+        descriptionLocale: { en: "Loads nothing" },
+      }),
+    );
+
+    expect(store.plugins[0]).toMatchObject({
+      nameLocale: "Sample plugin",
+      descriptionLocale: "Loads nothing",
+    });
   });
 
   it("publishes nothing for a broken plugin", async () => {
@@ -170,7 +194,7 @@ describe("PluginStore module plugin load failure", () => {
     await store.activatePlugin(PLUGIN);
 
     expect(store.plugins[0].enabled).toBe(true);
-    expect(store.plugins[0].loadError).toContain("HTTP 404");
+    expect(store.plugins[0].loadError).toEqual(HTTP_404);
     expect(store.articleNavigationItems.size).toBe(0);
   });
 
@@ -184,7 +208,7 @@ describe("PluginStore module plugin load failure", () => {
     );
     await store.activatePlugin(PLUGIN);
 
-    expect(store.plugins[0].loadError).toContain("HTTP 404");
+    expect(store.plugins[0].loadError).toEqual(HTTP_404);
     expect(store.plugins[0].status).toBeUndefined();
     expect(store.articleNavigationItems.size).toBe(0);
   });
@@ -197,8 +221,8 @@ describe("PluginStore module plugin load failure", () => {
 
     const result = await store.addPlugin(new FormData());
 
-    expect(result?.loadError).toContain("HTTP 404");
-    expect(store.plugins[0].loadError).toContain("HTTP 404");
+    expect(result?.loadError).toEqual(HTTP_404);
+    expect(store.plugins[0].loadError).toEqual(HTTP_404);
   });
 
   it("keeps a plugin whose initialization fails in the list as a working one", async () => {
@@ -220,7 +244,9 @@ describe("PluginStore module plugin load failure", () => {
       enabled: true,
     });
     expect(store.plugins[0].loadError).toBeUndefined();
-    expect(store.plugins[0].initError).toBe("settings request timed out");
+    expect(store.plugins[0].initError).toEqual(
+      thrown("settings request timed out"),
+    );
   });
 
   it("clears the initialization mark once the retry succeeds", async () => {
@@ -258,7 +284,7 @@ describe("PluginStore module plugin load failure", () => {
     await store.deactivatePlugin(PLUGIN);
     await store.activatePlugin(PLUGIN);
 
-    expect(store.plugins[0].initError).toBe("locale bundle missing");
+    expect(store.plugins[0].initError).toEqual(thrown("locale bundle missing"));
   });
 
   it("keeps the mark fresh when the retry fails with a new reason", async () => {
@@ -279,7 +305,7 @@ describe("PluginStore module plugin load failure", () => {
 
     await store.activatePlugin(PLUGIN);
 
-    expect(store.plugins[0].initError).toBe("portal unreachable");
+    expect(store.plugins[0].initError).toEqual(thrown("portal unreachable"));
   });
 
   it("takes back the items of the version it replaces", async () => {
@@ -298,7 +324,7 @@ describe("PluginStore module plugin load failure", () => {
     await store.initModulePlugin(apiPlugin({ version: "1.0.1" }));
 
     expect(store.plugins).toHaveLength(1);
-    expect(store.plugins[0].loadError).toContain("HTTP 404");
+    expect(store.plugins[0].loadError).toEqual(HTTP_404);
     expect(store.contextMenuItems.has(itemKey)).toBe(false);
   });
 
@@ -375,7 +401,7 @@ describe("PluginStore legacy plugin load failure", () => {
     await store.initPlugin(legacyPlugin());
 
     expect(store.plugins).toHaveLength(1);
-    expect(store.plugins[0].loadError).toContain("Failed to load script");
+    expect(store.plugins[0].loadError).toEqual(SCRIPT_FAILED);
   });
 
   it("marks a script that ran but never registered itself as broken", async () => {
@@ -383,7 +409,7 @@ describe("PluginStore legacy plugin load failure", () => {
 
     await store.initPlugin(legacyPlugin());
 
-    expect(store.plugins[0].loadError).toContain(`window.Plugins["${PLUGIN}"]`);
+    expect(store.plugins[0].loadError).toEqual(UNREGISTERED);
     expect(store.plugins[0].enabled).toBe(true);
   });
 
@@ -403,7 +429,29 @@ describe("PluginStore legacy plugin load failure", () => {
 
     await store.initPlugin(legacyPlugin());
 
-    expect(store.plugins[0].loadError).toBe("setAdminPluginSettings exploded");
+    expect(store.plugins[0].loadError).toEqual(
+      thrown("setAdminPluginSettings exploded"),
+    );
+  });
+
+  it("keeps a plugin broken when its script threw an error without a message", async () => {
+    const store = withFrame(
+      fakeFrame({}, ({ script, errorListeners }) => {
+        errorListeners.forEach((listener) =>
+          listener({
+            filename: legacyPlugin().url,
+            error: new Error(),
+            message: "Uncaught Error",
+          } as ErrorEvent),
+        );
+        script.onload?.();
+      }),
+    );
+
+    await store.initPlugin(legacyPlugin());
+
+    expect(store.plugins[0].loadError).toEqual(thrown(""));
+    expect(store.plugins[0].status).toBeUndefined();
   });
 
   it("ignores errors thrown by other scripts in the shared frame", async () => {
@@ -422,7 +470,7 @@ describe("PluginStore legacy plugin load failure", () => {
 
     await store.initPlugin(legacyPlugin());
 
-    expect(store.plugins[0].loadError).toContain("did not register");
+    expect(store.plugins[0].loadError).toEqual(UNREGISTERED);
   });
 
   it("ignores an opaque error a cross-origin script reports without a filename", async () => {
@@ -441,7 +489,7 @@ describe("PluginStore legacy plugin load failure", () => {
 
     await store.initPlugin(legacyPlugin());
 
-    expect(store.plugins[0].loadError).toContain("did not register");
+    expect(store.plugins[0].loadError).toEqual(UNREGISTERED);
   });
 
   it("does not trust a registration left behind by the previous version", async () => {
@@ -452,7 +500,7 @@ describe("PluginStore legacy plugin load failure", () => {
 
     await store.initPlugin(legacyPlugin());
 
-    expect(store.plugins[0].loadError).toContain("did not register");
+    expect(store.plugins[0].loadError).toEqual(UNREGISTERED);
   });
 
   it("loads a script that registers itself as before", async () => {
@@ -502,7 +550,7 @@ describe("PluginStore legacy plugin load failure", () => {
       scopes: [PluginScopes.Settings, PluginScopes.ArticleNavigation],
     });
     expect(store.plugins[0].loadError).toBeUndefined();
-    expect(store.plugins[0].initError).toBe("locale bundle missing");
+    expect(store.plugins[0].initError).toEqual(thrown("locale bundle missing"));
     expect(store.isEmptyList).toBe(false);
   });
 
@@ -530,7 +578,7 @@ describe("PluginStore legacy plugin load failure", () => {
       isPluginCompatible: false,
       isPluginInCache: false,
       loadError: undefined,
-      initError: "locale bundle missing",
+      initError: thrown("locale bundle missing"),
     });
   });
 });

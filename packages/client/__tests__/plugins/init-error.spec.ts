@@ -105,7 +105,7 @@ test.describe("Plugin whose bundle loads but fails to initialize", () => {
     ).toBeVisible();
   });
 
-  test("The settings dialog keeps the ordinary status and marks it", async ({
+  test("The settings dialog names the failure and marks it", async ({
     page,
     baseUrl,
   }) => {
@@ -114,10 +114,9 @@ test.describe("Plugin whose bundle loads but fails to initialize", () => {
     await card.getByTestId("open_settings_icon_button").click();
 
     const status = page.getByTestId("plugin_init_error_status");
-    await expect(status).toHaveText("No need to enter settings");
+    await expect(status).toHaveText("Failed to initialize");
 
-    // Only the mark explains the failure - the status text is the plugin's own
-    // state and must not carry the tooltip.
+    // The status names the kind of failure; only the mark carries the reason.
     await expect(status).not.toHaveAttribute("data-tooltip-content");
 
     await page.getByTestId("plugin_init_error_icon").hover();

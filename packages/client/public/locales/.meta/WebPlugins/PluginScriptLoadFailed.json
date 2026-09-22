@@ -1,26 +1,19 @@
 {
-  "key_path": "PluginLoadFailed",
-  "content": "Failed to load",
-  "content_en_sha1_hash": "af14db26285b064105f24e15286e7cfc27d0fcf1",
-  "created_at": "2026-09-22T15:31:22.830Z",
-  "updated_at": "2026-09-22T19:32:49.287Z",
+  "key_path": "PluginScriptLoadFailed",
+  "content": "Failed to load the script {{url}}",
+  "content_en_sha1_hash": "d7e35353b9e62e9624107bdc0eda5d650b357595",
+  "created_at": "2026-09-22T19:29:41.516Z",
+  "updated_at": "2026-09-22T19:32:49.461Z",
   "comment": {
-    "text": "Error status text in the plugin info dialog and a title for error toast notifications when a plugin fails to load.",
-    "is_auto": true,
-    "updated_at": "2026-09-22T15:33:00.721Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
-      "line_number": 59,
-      "context": "const statusError = plugin.loadError ?? plugin.initError;\n const errorKind = plugin.loadError ? \"load\" : \"init\";\n \n const getPluginStatus = () => {\n if (plugin.loadError) return t(\"PluginLoadFailed\");\n if (plugin.initError) return t(\"PluginInitFailed\");\n \n return plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/hooks/usePluginUpload.ts",
-      "line_number": 66,
-      "context": "setShowCacheWarning(true);\n return;\n }\n \n if (loadError) {\n toastr.error(getPluginErrorText(t, loadError), t(\"PluginLoadFailed\"));\n return;\n }\n \n if (initError) {\n toastr.error(getPluginErrorText(t, initError), t(\"PluginInitFailed\"));",
+      "file_path": "/packages/client/src/helpers/plugins/errors.ts",
+      "line_number": 77,
+      "context": "};\n \n export const getPluginErrorText = (t: TTranslation, error: TPluginError) => {\n switch (error.kind) {\n case \"script\":\n return t(\"WebPlugins:PluginScriptLoadFailed\", { url: error.url });\n case \"unregistered\":\n return t(\"WebPlugins:PluginNotRegistered\", {\n pluginName: error.pluginName,\n });\n case \"http\":",
       "module": "/packages/client"
     }
   ],

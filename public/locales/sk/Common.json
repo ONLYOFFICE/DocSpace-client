@@ -662,6 +662,7 @@
   "DiscoverAppsWorkspaceDescription": "Váš pracovný priestor obsahuje aplikácie na ukladanie, správu a automatizáciu dokumentových pracovných postupov. Pozrite si, čo jednotlivé aplikácie dokážu, alebo sa hneď pustite do práce.",
   "DisplayFileExtension": "Zobrazenie prípony súboru vedľa jeho názvu",
   "DisplaySettings": "Nastavenia zobrazenia",
+  "DocsAdminPanel": "Administračný panel {{editorsName}}",
   "DocsApiReference": "API {{organizationName}} {{docsName}}",
   "DocsConnectCallbackErrorHint": "Vaša karta bola uložená, ale nákup sa nepodarilo dokončiť. Skúsiť to znova môžete v Docs Connect.",
   "DocsConnectCallbackErrorTitle": "Nákup zlyhal",

@@ -662,6 +662,7 @@
   "DiscoverAppsWorkspaceDescription": "Hapësira juaj e punës përfshin aplikacione për ruajtjen, administrimin dhe automatizimin e rrjedhave të punës me dokumente. Shihni se çfarë mund të bëjë secili aplikacion, ose filloni punën menjëherë.",
   "DisplayFileExtension": "Shfaqni zgjerimin e skedarit pranë emrit të skedarit",
   "DisplaySettings": "Cilësimet e ekranit",
+  "DocsAdminPanel": "Paneli i administrimit të {{editorsName}}",
   "DocsApiReference": "API e {{organizationName}} {{docsName}}",
   "DocsConnectCallbackErrorHint": "Karta juaj u ruajt, por nuk mundëm ta përfundonim blerjen. Mund ta provoni përsëri nga Docs Connect.",
   "DocsConnectCallbackErrorTitle": "Blerja dështoi",

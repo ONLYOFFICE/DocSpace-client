@@ -662,6 +662,7 @@
   "DiscoverAppsWorkspaceDescription": "Your workspace includes apps for storing, managing, and automating document workflows. See what each app can do, or jump right in.",
   "DisplayFileExtension": "Display the file extension next to the file name",
   "DisplaySettings": "Display settings",
+  "DocsAdminPanel": "{{editorsName}} Admin Panel",
   "DocsApiReference": "{{organizationName}} {{docsName}} API",
   "DocsConnectCallbackErrorHint": "Your card was saved, but we couldn't complete the purchase. You can retry from Docs Connect.",
   "DocsConnectCallbackErrorTitle": "Purchase failed",

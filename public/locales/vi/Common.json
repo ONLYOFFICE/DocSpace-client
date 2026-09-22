@@ -662,6 +662,7 @@
   "DiscoverAppsWorkspaceDescription": "Không gian làm việc của bạn bao gồm các ứng dụng để lưu trữ, quản lý và tự động hóa quy trình làm việc với tài liệu. Xem từng ứng dụng có thể làm gì, hoặc bắt đầu sử dụng ngay.",
   "DisplayFileExtension": "Hiển thị phần mở rộng tập tin bên cạnh tên tập tin",
   "DisplaySettings": "Cài đặt hiển thị",
+  "DocsAdminPanel": "Bảng quản trị {{editorsName}}",
   "DocsApiReference": "API {{organizationName}} {{docsName}}",
   "DocsConnectCallbackErrorHint": "Thẻ của bạn đã được lưu, nhưng chúng tôi không thể hoàn tất giao dịch mua. Bạn có thể thử lại từ Docs Connect.",
   "DocsConnectCallbackErrorTitle": "Giao dịch mua thất bại",

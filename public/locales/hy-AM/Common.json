@@ -662,6 +662,7 @@
   "DiscoverAppsWorkspaceDescription": "Ձեր աշխատանքային տարածքը ներառում է հավելվածներ փաստաթղթերի պահպանման, կառավարման և փաստաթղթային աշխատանքային հոսքերի ավտոմատացման համար: Տեսեք, թե ինչ կարող է անել յուրաքանչյուր հավելված, կամ անմիջապես անցեք գործի:",
   "DisplayFileExtension": "Ցուցադրել ֆայլի ընդլայնումը ֆայլի անվան կողքին",
   "DisplaySettings": "Ցուցադրման կարգավորումներ",
+  "DocsAdminPanel": "{{editorsName}}-ի կառավարման վահանակ",
   "DocsApiReference": "{{organizationName}} {{docsName}} API",
   "DocsConnectCallbackErrorHint": "Ձեր քարտը պահպանվել է, սակայն մեզ չհաջողվեց ավարտին հասցնել գնումը: Կարող եք կրկին փորձել Docs Connect-ից:",
   "DocsConnectCallbackErrorTitle": "Գնումը ձախողվեց",

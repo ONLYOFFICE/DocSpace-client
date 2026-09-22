@@ -662,6 +662,7 @@
   "DiscoverAppsWorkspaceDescription": "Вашето работно пространство включва приложения за съхранение, управление и автоматизация на работните потоци с документи. Вижте какво може да прави всяко приложение или започнете работа веднага.",
   "DisplayFileExtension": "Покажи файловото разширение до името на файла",
   "DisplaySettings": "Настройки на дисплея",
+  "DocsAdminPanel": "Административен панел на {{editorsName}}",
   "DocsApiReference": "API на {{organizationName}} {{docsName}}",
   "DocsConnectCallbackErrorHint": "Картата ви беше запазена, но не успяхме да завършим покупката. Можете да опитате отново от Docs Connect.",
   "DocsConnectCallbackErrorTitle": "Неуспешна покупка",

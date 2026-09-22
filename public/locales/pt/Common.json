@@ -662,6 +662,7 @@
   "DiscoverAppsWorkspaceDescription": "O seu espaço de trabalho inclui aplicações para armazenamento, gestão e automatização de fluxos de trabalho de documentos. Veja o que cada aplicação pode fazer ou comece a trabalhar de imediato.",
   "DisplayFileExtension": "Exibir extensão de arquivo ao lado do nome do arquivo",
   "DisplaySettings": "Configurações do visor",
+  "DocsAdminPanel": "Painel de administração do {{editorsName}}",
   "DocsApiReference": "API do {{organizationName}} {{docsName}}",
   "DocsConnectCallbackErrorHint": "O seu cartão foi guardado, mas não foi possível concluir a compra. Pode tentar novamente a partir do Docs Connect.",
   "DocsConnectCallbackErrorTitle": "Falha na compra",

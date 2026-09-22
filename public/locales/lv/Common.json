@@ -662,6 +662,7 @@
   "DiscoverAppsWorkspaceDescription": "Jūsu darbvietā ir pieejamas lietotnes dokumentu glabāšanai, pārvaldībai un dokumentu darbplūsmu automatizācijai. Uzziniet, ko katra lietotne var paveikt, vai sāciet darbu uzreiz.",
   "DisplayFileExtension": "Rādīt faila paplašinājumu blakus faila nosaukumam",
   "DisplaySettings": "Displeja iestatījumi",
+  "DocsAdminPanel": "{{editorsName}} administrēšanas panelis",
   "DocsApiReference": "{{organizationName}} {{docsName}} API",
   "DocsConnectCallbackErrorHint": "Jūsu karte tika saglabāta, taču mums neizdevās pabeigt pirkumu. Varat mēģināt vēlreiz no Docs Connect.",
   "DocsConnectCallbackErrorTitle": "Pirkums neizdevās",

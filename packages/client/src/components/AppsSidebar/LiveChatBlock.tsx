@@ -46,7 +46,7 @@ type LiveChatBlockProps = {
   chatDisplayName: string;
   zendeskKey: string;
   isShowLiveChat: boolean;
-  isMobileArticle: boolean;
+  withFloatingButton: boolean;
   showProgress: boolean;
   isInfoPanelVisible: boolean;
 };
@@ -77,6 +77,7 @@ const LiveChatBlockConnected = inject<TStore>(
     infoPanelStore,
     backup,
     profileActionsStore,
+    filesStore,
   }) => {
     const { downloadingProgress } = backup;
     const isBackupProgressVisible =
@@ -89,7 +90,10 @@ const LiveChatBlockConnected = inject<TStore>(
       chatDisplayName: userStore.user?.displayName ?? "",
       zendeskKey: settingsStore.zendeskKey,
       isShowLiveChat: profileActionsStore.isShowLiveChat,
-      isMobileArticle: settingsStore.isMobileArticle,
+      // CreateButtonMobile keeps this flag in step with the create button it
+      // renders into the same corner, so the widget dodges exactly when the
+      // button is there.
+      withFloatingButton: filesStore.mainButtonVisible,
       showProgress:
         uploadDataStore.primaryProgressDataStore.isPrimaryProgressVisbile ||
         uploadDataStore.secondaryProgressDataStore.isSecondaryProgressVisbile ||

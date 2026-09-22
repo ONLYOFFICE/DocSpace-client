@@ -52,11 +52,17 @@ vi.mock(
     default: ({
       zendeskKey,
       isShowLiveChat,
+      withFloatingButton,
     }: {
       zendeskKey: string;
       isShowLiveChat: boolean;
+      withFloatingButton: boolean;
     }) => (
-      <span data-testid="zendesk" data-show={String(isShowLiveChat)}>
+      <span
+        data-testid="zendesk"
+        data-show={String(isShowLiveChat)}
+        data-with-floating-button={String(withFloatingButton)}
+      >
         {zendeskKey}
       </span>
     ),
@@ -65,11 +71,15 @@ vi.mock(
 
 import LiveChatBlock from "../LiveChatBlock";
 
-const renderComponent = (isLiveChatAvailable: boolean) =>
+const renderComponent = (
+  isLiveChatAvailable: boolean,
+  mainButtonVisible = false,
+) =>
   render(
     <Provider
       authStore={{ isLiveChatAvailable, languageBaseName: "en" }}
-      settingsStore={{ zendeskKey: "zendesk-key", isMobileArticle: false }}
+      settingsStore={{ zendeskKey: "zendesk-key" }}
+      filesStore={{ mainButtonVisible }}
       userStore={{ user: { email: "user@example.com", displayName: "User" } }}
       uploadDataStore={{
         primaryProgressDataStore: { isPrimaryProgressVisbile: false },
@@ -91,6 +101,27 @@ describe("AppsSidebar LiveChatBlock", () => {
 
     expect(zendesk).toHaveTextContent("zendesk-key");
     expect(zendesk).toHaveAttribute("data-show", "true");
+  });
+
+  it("tells the widget to step aside for the mobile create button", () => {
+    // The widget is placed by script, in the same corner as the create button,
+    // so the button's own visibility flag is the only thing that keeps the two
+    // off each other.
+    renderComponent(true, true);
+
+    expect(screen.getByTestId("zendesk")).toHaveAttribute(
+      "data-with-floating-button",
+      "true",
+    );
+  });
+
+  it("keeps the widget in the corner while no create button is there", () => {
+    renderComponent(true);
+
+    expect(screen.getByTestId("zendesk")).toHaveAttribute(
+      "data-with-floating-button",
+      "false",
+    );
   });
 
   it("stays out of the page when live chat is not available", () => {

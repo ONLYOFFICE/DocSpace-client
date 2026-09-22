@@ -34,15 +34,19 @@
  */
 
 @use "@onlyoffice/apps-ui-kit/styles/mixins";
+@use "@onlyoffice/apps-ui-kit/styles/variables/floating-corner" as corner;
 
+// The Zendesk launcher is placed in this same corner by script, off these very
+// numbers, so it keeps lining up with the button only while both read them
+// from the one file.
 .createButtonMobile {
   position: fixed;
   z-index: 200;
-  inset-inline-end: 24px;
-  bottom: 24px;
+  inset-inline-end: corner.$inset;
+  bottom: corner.$inset;
 
   @include mixins.mobile {
-    inset-inline-end: 16px;
-    bottom: 16px;
+    inset-inline-end: corner.$inset-mobile;
+    bottom: corner.$inset-mobile;
   }
 }

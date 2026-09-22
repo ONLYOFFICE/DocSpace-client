@@ -40,6 +40,10 @@ import {
   TypeSettings,
   selfActivationStatusHandler,
   selfByTypeHandler,
+  rootHandler,
+  filesSettingsHandler,
+  myHandler,
+  myDocumentsHandler,
 } from "@docspace/shared/__mocks__/handlers";
 
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
@@ -227,5 +231,172 @@ test.describe("Profile menu live chat switch", () => {
     // and the only gate it answers to is the desktop one.
     await expect(page.getByTestId("user-menu-hotkeys")).toBeVisible();
     await expect(page.getByTestId(LIVE_CHAT_ITEM)).toHaveCount(0);
+  });
+});
+
+/**
+ * The Support launcher against the create button it shares the corner with.
+ *
+ * The launcher is an iframe Zendesk places itself, and the app only hands it an
+ * offset - which Zendesk adds to the margin the frame already carries. Nothing
+ * in the app's layout holds the two buttons on one line, so asking for the
+ * create button's own inset left the launcher that margin higher, floating
+ * above it. The stub below reproduces that placement, a frame pinned to the
+ * corner with the vendor's margin, so the spec measures the corner the browser
+ * actually shows. It models the widget, not Zendesk's code: were the vendor to
+ * change that margin, the live widget would move and this spec would not
+ * notice.
+ */
+
+const FILES_URL = "/rooms/personal/filter?folder=12764";
+
+/** At or below 600px the app is in its mobile layout (ui-kit/utils/device). */
+const MOBILE = { width: 428, height: 830 };
+
+/** The margin Zendesk's own launcher frame carries, offsets added on top. */
+const LAUNCHER_MARGIN_BLOCK = 10;
+const LAUNCHER_MARGIN_INLINE = 20;
+
+/** CreateButtonMobile on a phone: styles/variables/_floating-corner.scss. */
+const CORNER_INSET_MOBILE = 16;
+const CORNER_GAP = 16;
+
+const CREATE_BUTTON = "main-button-mobile";
+const LAUNCHER = "#launcher";
+
+/**
+ * Zendesk's CDN, answering with the launcher instead of the widget: a frame in
+ * the corner carrying the vendor's margin, which the offsets we send are added
+ * to. Only the calls that place it are honoured - the rest of the classic API
+ * the component uses (locale, prefill, colors) is accepted and ignored.
+ */
+const stubZendeskLauncher = (page: Page) =>
+  page.route(ZENDESK_SNIPPET_URL, (route) =>
+    route.fulfill({
+      contentType: "application/javascript",
+      body: `(() => {
+        const launcher = document.createElement("iframe");
+        launcher.id = "launcher";
+        launcher.title = "Support";
+        Object.assign(launcher.style, {
+          position: "fixed",
+          bottom: "0px",
+          right: "0px",
+          margin: "${LAUNCHER_MARGIN_BLOCK}px ${LAUNCHER_MARGIN_INLINE}px",
+          width: "160px",
+          height: "48px",
+          border: "0",
+          borderRadius: "24px",
+          background: "royalblue",
+          display: "none",
+        });
+        document.body.appendChild(launcher);
+
+        window.zE = (product, command, payload) => {
+          if (product !== "webWidget") return;
+          if (command === "show") launcher.style.display = "block";
+          if (command === "hide") launcher.style.display = "none";
+          if (command === "updateSettings" && payload && payload.offset) {
+            const { horizontal, vertical } = payload.offset;
+            if (horizontal !== undefined) launcher.style.right = horizontal;
+            if (vertical !== undefined) launcher.style.bottom = vertical;
+          }
+        };
+      })();`,
+    }),
+  );
+
+/** The widget only mounts for a portal that has live chat switched on. */
+const withLiveChatOn = (page: Page) =>
+  page.addInitScript(() => {
+    window.localStorage.setItem("live_chat_state", "true");
+  });
+
+const openFilesOnAPhone = async (page: Page, baseUrl: string) => {
+  await withLiveChatOn(page);
+  await stubZendeskLauncher(page);
+  await page.setViewportSize(MOBILE);
+
+  await page.goto(`${baseUrl}${FILES_URL}`);
+
+  const createButton = page.getByTestId(CREATE_BUTTON);
+  const launcher = page.locator(LAUNCHER);
+
+  await expect(createButton).toBeVisible();
+  await expect(launcher).toBeVisible();
+
+  return { createButton, launcher };
+};
+
+test.describe("Support launcher beside the create button", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      ...mockPortal(),
+      myHandler(TEST_PORT, true),
+      myDocumentsHandler(TEST_PORT, true),
+    );
+  });
+
+  test("stands on the same line as the create button", async ({
+    page,
+    baseUrl,
+  }) => {
+    const { createButton, launcher } = await openFilesOnAPhone(page, baseUrl);
+
+    const button = await createButton.boundingBox();
+    const support = await launcher.boundingBox();
+    expect(button).not.toBeNull();
+    expect(support).not.toBeNull();
+    if (!button || !support) return;
+
+    // What the eye reads as "one level": the two rest on the same bottom edge.
+    expect(Math.round(support.y + support.height)).toBe(
+      Math.round(button.y + button.height),
+    );
+
+    // Both sit at the inset the stylesheet gives the create button, one gap
+    // apart, so the launcher clears the button instead of covering it.
+    expect(Math.round(MOBILE.height - (button.y + button.height))).toBe(
+      CORNER_INSET_MOBILE,
+    );
+    expect(Math.round(MOBILE.width - (button.x + button.width))).toBe(
+      CORNER_INSET_MOBILE,
+    );
+    expect(Math.round(button.x - (support.x + support.width))).toBe(CORNER_GAP);
+
+    await expectScreenshot(page, [
+      "mobile",
+      "live-chat",
+      "launcher-beside-create-button.png",
+    ]);
+  });
+
+  test("takes the corner back when there is no create button", async ({
+    page,
+    baseUrl,
+  }) => {
+    const { createButton, launcher } = await openFilesOnAPhone(page, baseUrl);
+
+    // The dashboard offers nothing to create, so the button unmounts and the
+    // launcher has the corner to itself.
+    await page.goto(`${baseUrl}${DASHBOARD_URL}`);
+    await expect(createButton).toHaveCount(0);
+
+    const support = await launcher.boundingBox();
+    expect(support).not.toBeNull();
+    if (!support) return;
+
+    expect(Math.round(MOBILE.height - (support.y + support.height))).toBe(
+      CORNER_INSET_MOBILE,
+    );
+
+    // Inline, the frame's own margin is a floor: an offset cannot be negative,
+    // so 20px is as close to the edge as the widget goes. It lands there
+    // instead of at the 16px the create button would have used.
+    expect(Math.round(MOBILE.width - (support.x + support.width))).toBe(
+      Math.max(CORNER_INSET_MOBILE, LAUNCHER_MARGIN_INLINE),
+    );
   });
 });

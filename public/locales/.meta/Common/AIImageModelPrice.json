@@ -1,0 +1,29 @@
+{
+  "key_path": "AIImageModelPrice",
+  "content": "{{inputPrice}}/M image input | {{imagePrice}}/M image output",
+  "content_en_sha1_hash": "fa0923bcac75dc150c42635cc0ce057d213957c4",
+  "created_at": "2026-09-23T12:24:05.455Z",
+  "updated_at": "2026-09-23T12:29:20.763Z",
+  "comment": {
+    "text": "A text label in a settings table row displaying the cost per million images for input and output. `{{inputPrice}}` and `{{imagePrice}}` are formatted price values.",
+    "is_auto": true,
+    "updated_at": "2026-09-23T12:29:20.763Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/RowView/index.tsx",
+      "line_number": 108,
+      "context": "id: m.id,\n alias: m.alias,\n image: m.image,\n link: m.link,\n prices: [\n t(\"Common:AIImageModelPrice\", {\n inputPrice: formatPrice(m.price?.prompt),\n imagePrice: formatPrice(m.price?.image),\n }),\n t(\"Common:AIModelOutputPrice\", {\n outputPrice: formatPrice(m.price?.completion),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

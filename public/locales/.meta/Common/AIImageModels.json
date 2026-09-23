@@ -1,0 +1,35 @@
+{
+  "key_path": "AIImageModels",
+  "content": "Image models",
+  "content_en_sha1_hash": "fde2f93279fcbfef1990f5daa2046ade4adec91f",
+  "created_at": "2026-09-23T12:24:05.472Z",
+  "updated_at": "2026-09-23T12:28:50.188Z",
+  "comment": {
+    "text": "Section header in the AI settings that labels the group of available image generation models.",
+    "is_auto": true,
+    "updated_at": "2026-09-23T12:28:50.188Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/RowView/index.tsx",
+      "line_number": 209,
+      "context": "fontSize=\"16px\"\n fontWeight={700}\n className={styles.groupTitle}\n dataTestId=\"ai-image-models-title\"\n >\n {t(\"Common:AIImageModels\")}\n </Text>\n {renderRows(imageRows, \"imageRowContainer\", 88)}\n </React.Fragment>\n ) : null}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/TableView/index.tsx",
+      "line_number": 203,
+      "context": "fontSize=\"16px\"\n fontWeight={700}\n className={styles.groupTitle}\n dataTestId=\"ai-image-models-title\"\n >\n {t(\"Common:AIImageModels\")}\n </Text>\n {renderTable(imageRows, imageTableRef, true)}\n </React.Fragment>\n ) : null}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

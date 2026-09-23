@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M մուտքային տոքեններ | {{outputPrice}}/M ելքային տոքեններ",
   "AIModels": "ԱԲ մոդելներ",
   "AIModelsDescription": "Ստացեք հասանելիություն ԱԲ մոդելների լայն շրջանակին OpenRouter-ի միջոցով",
-  "AIModelsWebSearchKnowledgeBase": "Մոդելներ, Վեբ որոնում, Գիտելիքների բազա",
   "AIModelUpdatedDescription": "Մենք թարմացրել ենք հասանելի մոդելները։ <1>{{model}}</1> մոդելն ընտրվել է ավտոմատ կերպով։ Ստուգեք կամ փոխեք մոդելը ստորև։",
   "AIModelUpdatedTitle": "Մոդելը թարմացվել է",
   "AINewChat": "Նոր չատ",

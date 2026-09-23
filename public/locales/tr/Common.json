@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M giriş belirteçleri | {{outputPrice}}/M çıkış belirteçleri",
   "AIModels": "AI modelleri",
   "AIModelsDescription": "OpenRouter aracılığıyla çok çeşitli AI modellerine erişin",
-  "AIModelsWebSearchKnowledgeBase": "Modeller, Web araması, Bilgi tabanı",
   "AIModelUpdatedDescription": "Kullanılabilir modelleri güncelledik. <1>{{model}}</1> otomatik olarak seçildi. Aşağıdan modeli gözden geçirin veya değiştirin.",
   "AIModelUpdatedTitle": "Model güncellendi",
   "AINewChat": "Yeni sohbet",

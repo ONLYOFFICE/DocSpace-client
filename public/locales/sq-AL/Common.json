@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M tokenë hyrëse | {{outputPrice}}/M tokenë dalëse",
   "AIModels": "Modelet e IA",
   "AIModelsDescription": "Përfitoni akses në një gamë të gjerë modelesh IA përmes OpenRouter",
-  "AIModelsWebSearchKnowledgeBase": "Modele, Kërkim në internet, Bazë njohurish",
   "AIModelUpdatedDescription": "Ne përditësuam modelet e disponueshme. <1>{{model}}</1> u zgjodh automatikisht. Rishikoni ose ndryshoni modelin më poshtë.",
   "AIModelUpdatedTitle": "Modeli u përditësua",
   "AINewChat": "Bisedë e re",

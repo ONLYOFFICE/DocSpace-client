@@ -106,12 +106,26 @@ const withFrame = (plugin: TokenGatedPlugin) => {
     setAttribute: () => {},
   };
 
+  // The store observes pluginFrame deeply, so the registry has to be reached
+  // through the store, the way a script running inside the frame would.
+  const register = () => {
+    const iWindow = store.pluginFrame?.contentWindow as unknown as {
+      Plugins: Record<string, TokenGatedPlugin>;
+    };
+    iWindow.Plugins[PLUGIN] = plugin;
+  };
+
   runInAction(() => {
     store.pluginFrame = {
-      contentWindow: { Plugins: { [PLUGIN]: plugin } },
+      contentWindow: { Plugins: {} },
       contentDocument: {
         createElement: () => script,
-        body: { appendChild: () => script.onload?.() },
+        body: {
+          appendChild: () => {
+            register();
+            script.onload?.();
+          },
+        },
       },
     } as unknown as HTMLIFrameElement;
   });

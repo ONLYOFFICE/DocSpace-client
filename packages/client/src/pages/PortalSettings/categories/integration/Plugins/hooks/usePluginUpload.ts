@@ -39,6 +39,7 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/ui-kit/components";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
+import { getPluginErrorText } from "SRC_DIR/helpers/plugins/errors";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 export type UsePluginUploadProps = {
@@ -53,10 +54,21 @@ const usePluginUpload = ({ addPlugin }: UsePluginUploadProps) => {
     (result: Awaited<ReturnType<typeof addPlugin>>) => {
       if (!result) return;
 
-      const { isPluginCompatible, isPluginInCache } = result;
+      const { isPluginCompatible, isPluginInCache, loadError, initError } =
+        result;
 
       if (isPluginInCache) {
         setShowCacheWarning(true);
+        return;
+      }
+
+      if (loadError) {
+        toastr.error(getPluginErrorText(t, loadError), t("PluginLoadFailed"));
+        return;
+      }
+
+      if (initError) {
+        toastr.error(getPluginErrorText(t, initError), t("PluginInitFailed"));
         return;
       }
 

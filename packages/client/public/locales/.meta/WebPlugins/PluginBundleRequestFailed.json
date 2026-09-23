@@ -1,20 +1,19 @@
 {
-  "key_path": "PluginLoadedSuccessfully",
-  "content": "Plugin loaded successfully",
-  "content_en_sha1_hash": "074423f8efcfbd9cbe5fe040de2bbef07f85be71",
-  "created_at": "2025-09-24T13:10:10.160Z",
-  "updated_at": "2026-09-22T19:32:49.742Z",
+  "key_path": "PluginBundleRequestFailed",
+  "content": "The request for {{url}} failed with HTTP {{status}}",
+  "content_en_sha1_hash": "27123ea0448227f176fe4586e89a44bfa4e21572",
+  "created_at": "2026-09-22T19:29:41.202Z",
+  "updated_at": "2026-09-22T19:32:49.462Z",
   "comment": {
-    "text": "This is a toast message confirming that a plugin has been successfully loaded into the application.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:27:51.214Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/hooks/usePluginUpload.ts",
+      "file_path": "/packages/client/src/helpers/plugins/errors.ts",
       "line_number": 83,
-      "context": "organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n }),\n );\n } else {\n toastr.success(t(\"PluginLoadedSuccessfully\"));\n }\n },\n [t],\n );",
+      "context": "case \"unregistered\":\n return t(\"WebPlugins:PluginNotRegistered\", {\n pluginName: error.pluginName,\n });\n case \"http\":\n return t(\"WebPlugins:PluginBundleRequestFailed\", {\n status: error.status,\n url: error.url,\n });\n case \"no-default-export\":\n return t(\"WebPlugins:PluginNoDefaultExport\");",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +148,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

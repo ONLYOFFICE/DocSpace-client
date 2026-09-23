@@ -1,20 +1,19 @@
 {
-  "key_path": "PluginLoadedSuccessfully",
-  "content": "Plugin loaded successfully",
-  "content_en_sha1_hash": "074423f8efcfbd9cbe5fe040de2bbef07f85be71",
-  "created_at": "2025-09-24T13:10:10.160Z",
-  "updated_at": "2026-09-22T19:32:49.742Z",
+  "key_path": "PluginNoDefaultExport",
+  "content": "The plugin module has no default export",
+  "content_en_sha1_hash": "7f4d97878f91f9aaa9641107a5e5a45ecf8c9dd8",
+  "created_at": "2026-09-22T19:29:41.437Z",
+  "updated_at": "2026-09-22T19:32:49.463Z",
   "comment": {
-    "text": "This is a toast message confirming that a plugin has been successfully loaded into the application.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:27:51.214Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/hooks/usePluginUpload.ts",
-      "line_number": 83,
-      "context": "organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n }),\n );\n } else {\n toastr.success(t(\"PluginLoadedSuccessfully\"));\n }\n },\n [t],\n );",
+      "file_path": "/packages/client/src/helpers/plugins/errors.ts",
+      "line_number": 88,
+      "context": "return t(\"WebPlugins:PluginBundleRequestFailed\", {\n status: error.status,\n url: error.url,\n });\n case \"no-default-export\":\n return t(\"WebPlugins:PluginNoDefaultExport\");\n default:\n return error.message || t(\"Common:UnknownError\");\n }\n };",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +148,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

@@ -531,6 +531,68 @@ export const webPluginsWithArticleNavigationPlugin = {
   statusCode: 200,
 };
 
+export const BROKEN_PLUGIN_MISSING_PACKAGE = "broken-package";
+
+export const mockBrokenPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "broken-sample",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin whose bundle imports a package the portal does not provide",
+  pluginName: "BrokenSample",
+  scopes: "ArticleNavigation",
+  image: "",
+  url: "/plugins/broken-sample/plugin.js",
+  runtime: "module",
+  settings: "",
+};
+
+export const INIT_ERROR_PLUGIN_MESSAGE = "Locale bundle missing";
+
+export const mockInitErrorPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "init-error-sample",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin whose bundle loads but throws while the portal initializes it",
+  pluginName: "InitErrorSample",
+  scopes: "ArticleNavigation",
+  image: "",
+  url: "/plugins/init-error-sample/plugin.js",
+  runtime: "module",
+  settings: "",
+};
+
+// Plugins list with a plugin that loads but fails to initialize
+export const webPluginsWithInitErrorPlugin = {
+  response: [mockInitErrorPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with a plugin whose bundle cannot be loaded
+export const webPluginsWithBrokenPlugin = {
+  response: [mockBrokenPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 // Plugins list with file item sample plugin
 export const webPluginsWithFileItemPlugin = {
   response: [mockFileItemPlugin],
@@ -689,7 +751,9 @@ type TWebPluginType =
   | "withFloatingOperationsPlugin"
   | "withPostMessagePlugin"
   | "withSettingsPlugin"
-  | "withNavigationPlugin";
+  | "withNavigationPlugin"
+  | "withBrokenPlugin"
+  | "withInitErrorPlugin";
 
 // Resolvers
 export const webPluginsResolver = (type: TWebPluginType = "empty") => {
@@ -753,6 +817,12 @@ export const webPluginsResolver = (type: TWebPluginType = "empty") => {
     case "withNavigationPlugin":
       data = webPluginsWithNavigationPlugin;
       break;
+    case "withBrokenPlugin":
+      data = webPluginsWithBrokenPlugin;
+      break;
+    case "withInitErrorPlugin":
+      data = webPluginsWithInitErrorPlugin;
+      break;
     default:
       data = webPluginsEmpty;
       break;
@@ -811,4 +881,61 @@ export const webPluginsDeleteHandler = (port: string) => {
       return webPluginsDeleteResolver();
     },
   );
+};
+
+export const webPluginsTestBundleHandler = (port: string) => {
+  const pluginsSharingBundle = [mockPlugin1, mockPlugin2, mockPlugin3];
+
+  const bundle = [
+    "window.Plugins = window.Plugins || {};",
+    ...pluginsSharingBundle.map(
+      ({ pluginName }) => `window.Plugins["${pluginName}"] = {};`,
+    ),
+    "",
+  ].join("\n");
+
+  return http.get(`${BASE_URL}:${port}${mockPlugin1.url}`, () => {
+    return new Response(bundle, {
+      headers: { "Content-Type": "application/javascript; charset=utf-8" },
+    });
+  });
+};
+
+// Serves a module bundle that imports a package the portal does not shim, so
+// the plugin fails in rewritePluginImports exactly like a build with a stale
+// "external" list does.
+export const webPluginsBrokenBundleHandler = (port: string) => {
+  const bundle = [
+    `import { Button } from "${BROKEN_PLUGIN_MISSING_PACKAGE}";`,
+    "export default { Button };",
+    "",
+  ].join("\n");
+
+  return http.get(`${BASE_URL}:${port}${mockBrokenPlugin.url}`, () => {
+    return new Response(bundle, {
+      headers: { "Content-Type": "application/javascript; charset=utf-8" },
+    });
+  });
+};
+
+// Serves a module bundle the portal can load and import, but whose setLanguage
+// throws - the failure happens after the code is in hand, so the portal keeps
+// the plugin switchable and only marks it.
+export const webPluginsInitErrorBundleHandler = (port: string) => {
+  const bundle = [
+    "export default {",
+    '  status: "active",',
+    '  getStatus: () => "active",',
+    `  setLanguage: () => { throw new Error("${INIT_ERROR_PLUGIN_MESSAGE}"); },`,
+    '  getLanguage: () => "en",',
+    "  getArticleNavigationItems: () => new Map(),",
+    "};",
+    "",
+  ].join("\n");
+
+  return http.get(`${BASE_URL}:${port}${mockInitErrorPlugin.url}`, () => {
+    return new Response(bundle, {
+      headers: { "Content-Type": "application/javascript; charset=utf-8" },
+    });
+  });
 };

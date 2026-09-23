@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M vstopnih tokenov | {{outputPrice}}/M izstopnih tokenov",
   "AIModels": "Modeli umetne inteligence",
   "AIModelsDescription": "Dostopajte do širokega nabora modelov AI prek OpenRouter",
-  "AIModelsWebSearchKnowledgeBase": "Modeli, Iskanje po spletu, Baza znanja",
   "AIModelUpdatedDescription": "Posodobili smo razpoložljive modele. Model <1>{{model}}</1> je bil izbran samodejno. Spodaj preglejte ali spremenite model.",
   "AIModelUpdatedTitle": "Model posodobljen",
   "AINewChat": "Nova klepetalnica",

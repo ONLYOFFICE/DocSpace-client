@@ -261,7 +261,7 @@ const AIFeaturesBanner = ({
             <div className={styles.featureRow}>
               <AIIcon className={styles.payIcon} />
               <Text fontSize="12px" fontWeight={600}>
-                {t("Common:AIModelsWebSearchKnowledgeBase")}
+                {t("Common:AIModelsAndKnowledgeBase")}
               </Text>
             </div>
           )}

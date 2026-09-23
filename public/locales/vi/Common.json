@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/Triệu token đầu vào | {{outputPrice}}/Triệu token đầu ra",
   "AIModels": "Mô hình AI",
   "AIModelsDescription": "Truy cập nhiều mô hình AI thông qua OpenRouter",
-  "AIModelsWebSearchKnowledgeBase": "Mô hình, Tìm kiếm trên web, Cơ sở kiến thức",
   "AIModelUpdatedDescription": "Chúng tôi đã cập nhật các mô hình khả dụng. <1>{{model}}</1> đã được chọn tự động. Xem lại hoặc thay đổi mô hình bên dưới.",
   "AIModelUpdatedTitle": "Đã cập nhật mô hình",
   "AINewChat": "Trò chuyện mới",

@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M улазних токена | {{outputPrice}}/M излазних токена",
   "AIModels": "АИ модели",
   "AIModelsDescription": "Приступите широком спектру АИ модела кроз OpenRouter",
-  "AIModelsWebSearchKnowledgeBase": "Модели, Веб претрага, База знања",
   "AIModelUpdatedDescription": "Ажурирали смо доступне моделе. Модел <1>{{model}}</1> је аутоматски изабран. Прегледајте или промените модел испод.",
   "AIModelUpdatedTitle": "Модел је ажуриран",
   "AINewChat": "Нови разговор",

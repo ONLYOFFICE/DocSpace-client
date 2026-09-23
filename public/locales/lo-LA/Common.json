@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M ໂຕເຄັນປ້ອນເຂົ້າ | {{outputPrice}}/M ໂຕເຄັນຜົນອອກ",
   "AIModels": "ຮູບແບບ AI",
   "AIModelsDescription": "ເຂົ້າເຖິງ AI ຮຸ່ນຫຼາກຫຼາຍຜ່ານ OpenRouter",
-  "AIModelsWebSearchKnowledgeBase": "ຮຸ່ນ, ຄົ້ນຫາເວັບ, ຖານຄວາມຮູ້",
   "AIModelUpdatedDescription": "ພວກເຮົາໄດ້ອັບເດດຮູບແບບທີ່ມີໃຫ້ໃຊ້ແລ້ວ. <1>{{model}}</1> ຖືກເລືອກໂດຍອັດຕະໂນມັດ. ກວດສອບ ຫຼື ປ່ຽນຮູບແບບຢູ່ດ້ານລຸ່ມ.",
   "AIModelUpdatedTitle": "ອັບເດດຮູບແບບແລ້ວ",
   "AINewChat": "ການສົນທະນາໃໝ່",

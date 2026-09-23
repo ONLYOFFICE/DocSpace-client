@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M tokens de entrada | {{outputPrice}}/M tokens de saída",
   "AIModels": "Modelos de IA",
   "AIModelsDescription": "Aceda a uma ampla gama de modelos de IA através do OpenRouter",
-  "AIModelsWebSearchKnowledgeBase": "Modelos, Pesquisa na web, Base de conhecimento",
   "AIModelUpdatedDescription": "Atualizámos os modelos disponíveis. O <1>{{model}}</1> foi selecionado automaticamente. Reveja ou altere o modelo abaixo.",
   "AIModelUpdatedTitle": "Modelo atualizado",
   "AINewChat": "Novo chat",

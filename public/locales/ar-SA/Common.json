@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M رموز الإدخال | {{outputPrice}}/M رموز الإخراج",
   "AIModels": "نماذج الذكاء الاصطناعي",
   "AIModelsDescription": "يمكنك الوصول إلى مجموعة واسعة من نماذج الذكاء الاصطناعي عبر OpenRouter",
-  "AIModelsWebSearchKnowledgeBase": "النماذج، البحث على الويب، قاعدة المعرفة",
   "AIModelUpdatedDescription": "لقد قمنا بتحديث النماذج المتاحة. تم اختيار <1>{{model}}</1> تلقائيًا. راجع النموذج أو غيّره أدناه.",
   "AIModelUpdatedTitle": "تم تحديث النموذج",
   "AINewChat": "دردشة جديدة",

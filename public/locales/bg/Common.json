@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M входни токени | {{outputPrice}}/M изходни токени",
   "AIModels": "ИИ модели",
   "AIModelsDescription": "Получете достъп до широк набор от ИИ модели чрез OpenRouter",
-  "AIModelsWebSearchKnowledgeBase": "Модели, Уеб търсене, База знания",
   "AIModelUpdatedDescription": "Актуализирахме наличните модели. <1>{{model}}</1> беше избран автоматично. Прегледайте или променете модела по-долу.",
   "AIModelUpdatedTitle": "Моделът е актуализиран",
   "AINewChat": "Нов чат",

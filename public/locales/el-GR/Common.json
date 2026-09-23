@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M tokens εισόδου | {{outputPrice}}/M tokens εξόδου",
   "AIModels": "Μοντέλα AI",
   "AIModelsDescription": "Αποκτήστε πρόσβαση σε ένα ευρύ φάσμα μοντέλων AI μέσω του OpenRouter",
-  "AIModelsWebSearchKnowledgeBase": "Μοντέλα, Αναζήτηση στο Web, Βάση γνώσεων",
   "AIModelUpdatedDescription": "Ενημερώσαμε τα διαθέσιμα μοντέλα. Το <1>{{model}}</1> επιλέχθηκε αυτόματα. Ελέγξτε ή αλλάξτε το μοντέλο παρακάτω.",
   "AIModelUpdatedTitle": "Το μοντέλο ενημερώθηκε",
   "AINewChat": "Νέα συνομιλία",

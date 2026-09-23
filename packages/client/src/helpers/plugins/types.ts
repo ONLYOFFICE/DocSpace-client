@@ -221,6 +221,13 @@ export interface IframeWindow extends Window {
   Plugins: { [key: string]: TPlugin };
 }
 
+export type TPluginError =
+  | { kind: "script"; url: string }
+  | { kind: "unregistered"; pluginName: string }
+  | { kind: "http"; status: number; url: string }
+  | { kind: "no-default-export" }
+  | { kind: "thrown"; message: string };
+
 export type TPlugin = {
   name: string;
   nameLocaleMap?: { [key: string]: string };
@@ -245,6 +252,8 @@ export type TPlugin = {
   cssUrl?: string;
   settings: string;
   iconUrl: string;
+  loadError?: TPluginError;
+  initError?: TPluginError;
   setLanguage?: (locale: string) => void;
   getLanguage?: () => string;
 } & IPlugin &

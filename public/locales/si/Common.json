@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M ආදාන ටෝකන | {{outputPrice}}/M ප්‍රතිදාන ටෝකන",
   "AIModels": "AI මාදිලි",
   "AIModelsDescription": "OpenRouter හරහා පුළුල් පරාසයක AI ආකෘති වෙත ප්‍රවේශ වන්න",
-  "AIModelsWebSearchKnowledgeBase": "ආකෘති, වෙබ් සෙවුම, දැනුම් පදනම",
   "AIModelUpdatedDescription": "අපි ලබා ගත හැකි ආකෘති යාවත්කාලීන කර ඇත. <1>{{model}}</1> ස්වයංක්‍රීයව තෝරා ගෙන ඇත. පහතින් ආකෘතිය සමාලෝචනය කරන්න හෝ වෙනස් කරන්න.",
   "AIModelUpdatedTitle": "ආකෘතිය යාවත්කාලීන කරන ලදී",
   "AINewChat": "නව කතාබහ",

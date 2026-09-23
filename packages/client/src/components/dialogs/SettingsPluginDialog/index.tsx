@@ -78,7 +78,7 @@ const SettingsPluginDialog = ({
   const [modalRequestRunning, setModalRequestRunning] = useState(false);
 
   const reactSaveButton =
-    reactSettingsSaveButtonState?.pluginName === plugin?.name
+    plugin && reactSettingsSaveButtonState?.pluginName === plugin.name
       ? reactSettingsSaveButtonState.button
       : null;
 

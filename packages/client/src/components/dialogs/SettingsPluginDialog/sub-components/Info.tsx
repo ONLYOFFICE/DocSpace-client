@@ -43,6 +43,7 @@ import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 
 import PluginIncompatibleSvg from "PUBLIC_DIR/images/plugin.incompatible.react.svg";
 import { PluginStatus } from "SRC_DIR/helpers/plugins/enums";
+import { getPluginErrorText } from "SRC_DIR/helpers/plugins/errors";
 import { InfoProps } from "../SettingsPluginDialog.types";
 import styles from "../SettingsPluginDialog.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
@@ -51,10 +52,19 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
   const locale = getCookie(LANGUAGE) || "en";
   const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);
 
-  const pluginStatus =
-    plugin.status === PluginStatus.active
+  const statusError = plugin.loadError ?? plugin.initError;
+  const errorKind = plugin.loadError ? "load" : "init";
+
+  const getPluginStatus = () => {
+    if (plugin.loadError) return t("PluginLoadFailed");
+    if (plugin.initError) return t("PluginInitFailed");
+
+    return plugin.status === PluginStatus.active
       ? t("NotNeedSettings")
       : t("NeedSettings");
+  };
+
+  const pluginStatus = getPluginStatus();
 
   const incompatibleTooltip = t("WebPlugins:PluginIsNotCompatible", {
     organizationName: getBrandName("OrganizationName"),
@@ -150,9 +160,35 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
         <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
           {t("People:UserStatus")}
         </Text>
-        <Text fontSize="13px" fontWeight={600} lineHeight="20px">
-          {pluginStatus}
-        </Text>
+        {statusError ? (
+          <div className={styles.status}>
+            <Text
+              dataTestId={`plugin_${errorKind}_error_status`}
+              fontSize="13px"
+              fontWeight={600}
+              lineHeight="20px"
+            >
+              {pluginStatus}
+            </Text>
+            <div
+              className={styles.statusError}
+              data-testid={`plugin_${errorKind}_error_icon`}
+              data-tooltip-id="system-tooltip"
+              data-tooltip-content={getPluginErrorText(t, statusError)}
+              data-tooltip-place="bottom"
+            >
+              <PluginIncompatibleSvg
+                className={classNames(styles.incompatibleSvg, {
+                  [styles.warningSvg]: !plugin.loadError,
+                })}
+              />
+            </div>
+          </div>
+        ) : (
+          <Text fontSize="13px" fontWeight={600} lineHeight="20px">
+            {pluginStatus}
+          </Text>
+        )}
 
         {plugin.homePage ? (
           <>

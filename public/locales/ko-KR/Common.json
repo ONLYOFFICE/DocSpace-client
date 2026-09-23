@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M 입력 토큰 | {{outputPrice}}/M 출력 토큰",
   "AIModels": "AI 모델",
   "AIModelsDescription": "OpenRouter를 통해 다양한 AI 모델에 액세스하세요",
-  "AIModelsWebSearchKnowledgeBase": "모델, 웹 검색, 지식 베이스",
   "AIModelUpdatedDescription": "사용 가능한 모델을 업데이트했습니다. <1>{{model}}</1> 모델이 자동으로 선택되었습니다. 아래에서 모델을 확인하거나 변경하세요.",
   "AIModelUpdatedTitle": "모델이 업데이트되었습니다",
   "AINewChat": "새로운 채팅",

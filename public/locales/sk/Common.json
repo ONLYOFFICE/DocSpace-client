@@ -132,7 +132,6 @@
   "AIModelPrice": "{{inputPrice}}/M vstupných tokenov | {{outputPrice}}/M výstupných tokenov",
   "AIModels": "AI modely",
   "AIModelsDescription": "Získajte prístup k širokej škále modelov AI prostredníctvom OpenRouter",
-  "AIModelsWebSearchKnowledgeBase": "Modely, Webové vyhľadávanie, Znalostná báza",
   "AIModelUpdatedDescription": "Aktualizovali sme dostupné modely. Model <1>{{model}}</1> bol vybraný automaticky. Nižšie si model skontrolujte alebo zmeňte.",
   "AIModelUpdatedTitle": "Model bol aktualizovaný",
   "AINewChat": "Nový chat",

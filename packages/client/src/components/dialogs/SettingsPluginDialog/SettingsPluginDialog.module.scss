@@ -79,13 +79,14 @@
   grid-template-columns: max-content 1fr;
   gap: 8px 24px;
 
-  .version {
-    width: min-content;
+  .version,
+  .status {
     display: flex;
     align-items: center;
     gap: 8px;
 
-    &.incompatible {
+    .statusError {
+      display: flex;
       cursor: pointer;
     }
 
@@ -94,6 +95,22 @@
       path {
         fill: var(--plugins-error-status-color);
       }
+
+      &.warningSvg path {
+        fill: var(--plugins-warning-status-color);
+      }
     }
+  }
+
+  .version {
+    width: min-content;
+
+    &.incompatible {
+      cursor: pointer;
+    }
+  }
+
+  .status {
+    width: fit-content;
   }
 }

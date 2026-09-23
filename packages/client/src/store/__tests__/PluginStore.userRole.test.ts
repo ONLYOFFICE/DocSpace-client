@@ -35,10 +35,9 @@
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (importOriginal) => ({
+  ...((await importOriginal()) as Record<string, unknown>),
   default: { emit: vi.fn(), on: vi.fn() },
-  SocketCommands: { Subscribe: "subscribe" },
-  SocketEvents: { ChangeWebPlugin: "change-web-plugin" },
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({

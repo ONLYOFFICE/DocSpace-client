@@ -36,10 +36,9 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { autorun, runInAction } from "mobx";
 
-vi.mock("@docspace/ui-kit/utils/socket", () => ({
+vi.mock("@docspace/ui-kit/utils/socket", async (importOriginal) => ({
+  ...((await importOriginal()) as Record<string, unknown>),
   default: { emit: vi.fn(), on: vi.fn() },
-  SocketCommands: { Subscribe: "subscribe" },
-  SocketEvents: { ChangeWebPlugin: "change-web-plugin" },
 }));
 
 vi.mock("@docspace/ui-kit/components/toast", () => ({

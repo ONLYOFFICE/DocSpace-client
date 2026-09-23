@@ -205,3 +205,65 @@ describe("PluginStore updatePluginStatus without a status of its own", () => {
     expect(store.contextMenuItems.has(ITEM_KEY)).toBe(true);
   });
 });
+
+// The portal answers every save of a plugin with a change-web-plugin socket
+// event, settings-only saves included. The store still holds the settings it
+// loaded when the event arrives, so re-running the plugin on it would hand the
+// plugin its old settings back right after the plugin saved new ones.
+describe("PluginStore change-web-plugin socket event", () => {
+  class TokenPlugin extends TokenGatedPlugin {
+    token: string | null = null;
+
+    setAdminPluginSettingsValue = (token: string | null) => {
+      this.token = token;
+      this.updateStatus(token ? PluginStatus.active : PluginStatus.hide);
+    };
+  }
+
+  it("keeps the settings a plugin has just saved", async () => {
+    const plugin = new TokenPlugin();
+    const store = withFrame(plugin);
+
+    await store.initPlugin(apiPlugin("old-token"));
+
+    plugin.setAdminPluginSettingsValue("new-token");
+
+    await store.handlePluginStateChange({
+      webPluginName: PLUGIN,
+      enabled: true,
+    });
+
+    expect(plugin.token).toBe("new-token");
+  });
+
+  it("switches a plugin off when another session disables it", async () => {
+    const store = withFrame(new TokenPlugin());
+
+    await store.initPlugin(apiPlugin("api-token"));
+
+    await store.handlePluginStateChange({
+      webPluginName: PLUGIN,
+      enabled: false,
+    });
+
+    expect(store.plugins[0].enabled).toBe(false);
+    expect(store.contextMenuItems.has(ITEM_KEY)).toBe(false);
+  });
+
+  it("switches a plugin back on when another session enables it", async () => {
+    const plugin = new TokenPlugin();
+    const store = withFrame(plugin);
+
+    await store.initPlugin(apiPlugin("api-token"));
+    await store.deactivatePlugin(PLUGIN);
+
+    await store.handlePluginStateChange({
+      webPluginName: PLUGIN,
+      enabled: true,
+    });
+
+    expect(store.plugins[0].enabled).toBe(true);
+    expect(plugin.token).toBe("api-token");
+    expect(store.contextMenuItems.has(ITEM_KEY)).toBe(true);
+  });
+});

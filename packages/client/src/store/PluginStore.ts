@@ -253,19 +253,13 @@ class PluginStore {
   handlePluginStateChange = (data: TChangeWebPluginData) => {
     const { webPluginName, enabled } = data;
 
-    runInAction(() => {
-      const plugin = this.plugins.find((p) => p.name === webPluginName);
+    const plugin = this.plugins.find((p) => p.name === webPluginName);
 
-      if (!plugin) return;
+    if (!plugin || plugin.enabled === enabled) return;
 
-      plugin.enabled = enabled;
-
-      if (enabled) {
-        this.activatePlugin(webPluginName);
-      } else {
-        this.deactivatePlugin(webPluginName);
-      }
-    });
+    return enabled
+      ? this.activatePlugin(webPluginName)
+      : this.deactivatePlugin(webPluginName);
   };
 
   dispatchMessage = ({

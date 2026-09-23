@@ -3,11 +3,11 @@
   "content": "Check the settings of the Docs service used by default in your cloud workspace to edit and convert files into OfficeOpen XML format.",
   "content_en_sha1_hash": "67040fbcbe2606abb6fe838faa503cca0f10a3d9",
   "created_at": "2026-09-04T07:59:35.672Z",
-  "updated_at": "2026-09-14T19:20:55.505Z",
+  "updated_at": "2026-09-22T15:32:32.386Z",
   "comment": {
-    "text": "Help text located under the Document Service location header in the integration settings, explaining the default Docs service used for file editing and conversion.",
+    "text": "Help text under the Document Service location header in the integration settings. It describes the default Docs service used for file editing and conversion.",
     "is_auto": true,
-    "updated_at": "2026-09-14T19:20:55.505Z",
+    "updated_at": "2026-09-22T15:32:32.386Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -2421,6 +2421,7 @@
   --plugins-plugin-name-color: #{$gray};
   --plugins-border-color: #{$gray-light-mid};
   --plugins-error-status-color: #{$light-error-status};
+  --plugins-warning-status-color: #{$light-status-warning};
   --plugins-description-color: #{$light-gray-dark};
 }
 
@@ -2428,6 +2429,7 @@
   --plugins-plugin-name-color: #{$gray-dark};
   --plugins-border-color: #{$gray-dark-strong};
   --plugins-error-status-color: #{$dark-error-status};
+  --plugins-warning-status-color: #{$dark-status-warning};
   --plugins-description-color: #{$dark-gray-dark};
 }
 

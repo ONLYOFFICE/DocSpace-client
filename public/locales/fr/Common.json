@@ -1280,7 +1280,7 @@
   "LinkNewCardDesc": "Cliquez sur le bouton ci-dessous pour en ajouter un",
   "LinkNoExpiration": "Le lien n'a <1>pas de date d'expiration</1>",
   "LinkNoLongerAvailable": "Lien non disponible",
-  "LinkPreviewDescription": "{{organizationName}} {{productName}} est un espace de travail où vous pouvez créer des documents, collaborer dans des salles et collecter des données avec des formulaires, le tout au même endroit.",
+  "LinkPreviewDescription": "Collaborez dans des salles, collectez des données avec des formulaires, gérez vos fichiers et automatisez vos flux de travail documentaires avec l'IA, sans changer d'outil.",
   "LinkProtectedWithPassword": "Le lien est protégé par un mot de passe.",
   "LinkRemoved": "Lien supprimé",
   "LinkSettings": "Paramètres des liens",

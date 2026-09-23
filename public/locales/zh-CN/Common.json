@@ -1280,7 +1280,7 @@
   "LinkNewCardDesc": "如需添加，请点击下方按钮",
   "LinkNoExpiration": "此链接<1>永久有效</1>",
   "LinkNoLongerAvailable": "链接不再可用",
-  "LinkPreviewDescription": "{{organizationName}} {{productName}} 是一个工作区，您可以在其中创建文档、在房间中协作以及通过表单收集数据，所有这些都在一处完成。",
+  "LinkPreviewDescription": "在房间中协作、通过表单收集数据、管理文件，并借助 AI 实现文档工作流自动化，无需切换工具。",
   "LinkProtectedWithPassword": "该链接受密码保护。",
   "LinkRemoved": "链接已移除",
   "LinkSettings": "链接设置",

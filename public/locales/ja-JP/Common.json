@@ -1280,7 +1280,7 @@
   "LinkNewCardDesc": "追加するには、下のボタンをクリックしてください",
   "LinkNoExpiration": "リンクには<1>有効期限がありません</1>",
   "LinkNoLongerAvailable": "リンクは利用できません",
-  "LinkPreviewDescription": "{{organizationName}} {{productName}}は、ドキュメントの作成、ルームでの共同作業、フォームによるデータ収集をすべて一か所で行えるワークスペースです。",
+  "LinkPreviewDescription": "ルームでの共同作業、フォームでのデータ収集、ファイル管理、AIによる文書ワークフローの自動化を、ツールを切り替えることなく実現します。",
   "LinkProtectedWithPassword": "リンクはパスワードで保護されています。",
   "LinkRemoved": "リンク削除済み",
   "LinkSettings": "リンクの設定",

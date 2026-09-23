@@ -205,7 +205,7 @@ test.describe("AI settings on SaaS", () => {
       page.getByText("Get access to a wide range of AI models"),
     ).toBeVisible();
     await expect(
-      page.getByText("Models, Web search, Knowledge base"),
+      page.getByText("Models & Knowledge base"),
     ).toBeVisible();
     await expect(
       page.getByText("OpenRouter pricing, plus a 20% service fee"),
@@ -557,7 +557,7 @@ test.describe("AI settings on a phone", () => {
     await expect(page.getByText(ACTIVATE_TITLE)).toBeVisible(FIRST_RENDER);
     await expect(activateButton(page)).toBeEnabled();
     await expect(
-      page.getByText("Models, Web search, Knowledge base"),
+      page.getByText("Models & Knowledge base"),
     ).toBeHidden();
     for (const alias of ["Chat Model A", "Chat Model B", "Image Model"])
       await expect(page.getByText(alias, { exact: true })).toBeVisible();
@@ -577,7 +577,7 @@ test.describe("AI settings on a phone", () => {
     await page.locator("svg[data-tooltip-id]").first().click();
 
     await expect(
-      page.getByText("Models, Web search, Knowledge base"),
+      page.getByText("Models & Knowledge base"),
     ).toBeVisible();
     await expect(
       page.getByText("OpenRouter pricing, plus a 20% service fee"),

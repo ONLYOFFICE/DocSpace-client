@@ -101,8 +101,24 @@
     align-items: flex-start;
     gap: 8px;
 
-    .pluginBadge {
+    .pluginBadges {
       margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pluginLoadError {
+      display: flex;
+      cursor: pointer;
+
+      path {
+        fill: var(--plugins-error-status-color);
+      }
+
+      &.pluginInitError path {
+        fill: var(--plugins-warning-status-color);
+      }
     }
 
     .pluginDescription {

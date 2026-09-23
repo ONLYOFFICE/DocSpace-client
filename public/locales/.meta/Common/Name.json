@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.705Z",
-  "updated_at": "2026-08-26T14:08:33.017Z",
+  "updated_at": "2026-09-23T12:24:51.866Z",
   "comment": {
     "text": "This is a label for a user's name, appearing in a welcome dialog, as a sorting option in a filter, and as a column header in a table.",
     "is_auto": true,
@@ -27,6 +27,12 @@
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 768,
       "context": "const options = [];\n \n const firstName = {\n id: \"sort-by_displayname\",\n key: \"displayname\",\n label: t(\"Common:Name\"),\n default: true,\n };\n \n const type = {\n id: \"sort-by_type\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/TableView/TableHeader.tsx",
+      "line_number": 107,
+      "context": "const defaultColumns = [\n {\n // Key \"Name\" would trigger ui-kit min-width handling.\n key: \"Model\",\n title: t(\"Common:Name\"),\n enable: true,\n resizable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
     {

@@ -322,7 +322,11 @@ class ProfileActionsStore {
 
     this.setStateLiveChat(isShow);
 
-    zendeskAPI.addChanges("webWidget", isShow ? "show" : "hide");
+    // Only the closing half talks to the widget: the flag above is what puts
+    // the app's own Support button on the page, while the vendor's launcher
+    // stays hidden either way. Switching live chat off has to take an open
+    // chat window down with it.
+    if (!isShow) zendeskAPI.addChanges("webWidget", "hide");
 
     toastr.success(isShow ? t("Common:LiveChatOn") : t("Common:LiveChatOff"));
   };

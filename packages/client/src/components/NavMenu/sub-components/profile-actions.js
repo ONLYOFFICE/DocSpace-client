@@ -165,6 +165,8 @@ class ProfileActions extends React.PureComponent {
         >
           <div style={{ paddingTop: "8px" }}>
             {userActions.map(({ key, ...action }) => {
+              // The key doubles as the item's test id, the way the sidebar
+              // menu identifies its rows.
               return (
                 <React.Fragment key={key}>
                   {action ? (
@@ -185,6 +187,7 @@ class ProfileActions extends React.PureComponent {
                       >
                         <DropDownItem
                           {...action}
+                          testId={key}
                           noHover
                           className={styles.dropDownItem}
                         />

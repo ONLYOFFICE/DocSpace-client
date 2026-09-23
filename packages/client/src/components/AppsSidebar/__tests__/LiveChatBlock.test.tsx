@@ -43,6 +43,7 @@
 
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -52,17 +53,11 @@ vi.mock(
     default: ({
       zendeskKey,
       isShowLiveChat,
-      withFloatingButton,
     }: {
       zendeskKey: string;
       isShowLiveChat: boolean;
-      withFloatingButton: boolean;
     }) => (
-      <span
-        data-testid="zendesk"
-        data-show={String(isShowLiveChat)}
-        data-with-floating-button={String(withFloatingButton)}
-      >
+      <span data-testid="zendesk" data-show={String(isShowLiveChat)}>
         {zendeskKey}
       </span>
     ),
@@ -71,9 +66,12 @@ vi.mock(
 
 import LiveChatBlock from "../LiveChatBlock";
 
+const onLiveChatClick = vi.fn();
+
 const renderComponent = (
   isLiveChatAvailable: boolean,
   mainButtonVisible = false,
+  isShowLiveChat = true,
 ) =>
   render(
     <Provider
@@ -87,7 +85,7 @@ const renderComponent = (
       }}
       infoPanelStore={{ isVisible: false }}
       backup={{ downloadingProgress: 0 }}
-      profileActionsStore={{ isShowLiveChat: true }}
+      profileActionsStore={{ isShowLiveChat, onLiveChatClick }}
     >
       <LiveChatBlock />
     </Provider>,
@@ -103,25 +101,40 @@ describe("AppsSidebar LiveChatBlock", () => {
     expect(zendesk).toHaveAttribute("data-show", "true");
   });
 
-  it("tells the widget to step aside for the mobile create button", () => {
-    // The widget is placed by script, in the same corner as the create button,
-    // so the button's own visibility flag is the only thing that keeps the two
-    // off each other.
+  it("puts the Support button up beside the create button", () => {
+    // Both stand in the same corner, and the create button's own visibility
+    // flag is what keeps the launcher off it.
     renderComponent(true, true);
 
-    expect(screen.getByTestId("zendesk")).toHaveAttribute(
+    expect(screen.getByTestId("live-chat-launcher")).toHaveAttribute(
       "data-with-floating-button",
       "true",
     );
   });
 
-  it("keeps the widget in the corner while no create button is there", () => {
+  it("leaves the launcher in the corner while no create button is there", () => {
     renderComponent(true);
 
-    expect(screen.getByTestId("zendesk")).toHaveAttribute(
+    expect(screen.getByTestId("live-chat-launcher")).toHaveAttribute(
       "data-with-floating-button",
       "false",
     );
+  });
+
+  it("switches live chat off from the launcher's own close", async () => {
+    // The point of the close: turning the button off without going looking for
+    // the toggle in the profile menu.
+    renderComponent(true);
+
+    await userEvent.click(screen.getByTestId("live-chat-launcher-close"));
+
+    expect(onLiveChatClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("keeps the Support button away while live chat is switched off", () => {
+    renderComponent(true, false, false);
+
+    expect(screen.queryByTestId("live-chat-launcher")).not.toBeInTheDocument();
   });
 
   it("stays out of the page when live chat is not available", () => {

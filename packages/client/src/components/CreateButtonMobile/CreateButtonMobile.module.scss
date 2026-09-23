@@ -36,9 +36,9 @@
 @use "@onlyoffice/apps-ui-kit/styles/mixins";
 @use "@onlyoffice/apps-ui-kit/styles/variables/floating-corner" as corner;
 
-// The Zendesk launcher is placed in this same corner by script, off these very
-// numbers, so it keeps lining up with the button only while both read them
-// from the one file.
+// The Support button stands in this same corner, off these very numbers, so
+// the two keep one height and one baseline only while both read them from the
+// one file (see LiveChatLauncher).
 .createButtonMobile {
   position: fixed;
   z-index: 200;

@@ -162,7 +162,7 @@ const trackRestrictionUpdates = (page: Page) => {
 };
 
 const ACTIVATE_TITLE = "Activate AI features to get started";
-const ACTIVATE_WEB_SEARCH_TITLE = "Activate AI Search to get started?";
+const ACTIVATE_WEB_SEARCH_TITLE = "Activate AI Search to get started";
 const AI_ENABLED_TITLE = "AI features enabled";
 const SEARCH_ENABLED_TITLE = "AI Search enabled";
 
@@ -205,7 +205,7 @@ test.describe("AI settings on SaaS", () => {
       page.getByText("Get access to a wide range of AI models"),
     ).toBeVisible();
     await expect(
-      page.getByText("Models, Web search, Knowledge base"),
+      page.getByText("Models & Knowledge base"),
     ).toBeVisible();
     await expect(
       page.getByText("OpenRouter pricing, plus a 20% service fee"),
@@ -398,7 +398,7 @@ test.describe("AI settings on SaaS", () => {
       ),
     ).toBeVisible();
     await expect(
-      page.getByText("Web search and crawling are powered by Exa"),
+      page.getByText("Web search and web crawling powered by Exa"),
     ).toBeVisible();
     await expect(
       page.getByText("Exa pricing, plus a 20% service fee"),
@@ -410,7 +410,7 @@ test.describe("AI settings on SaaS", () => {
       ),
     ).toBeVisible();
     await expect(
-      page.getByText("Web search and web crawling are powered by Exa."),
+      page.getByText("no Exa account or setup needed. Usage is billed through your Wallet."),
     ).toBeVisible();
     await expect(
       page.getByText("Search engine", { exact: true }),
@@ -557,7 +557,7 @@ test.describe("AI settings on a phone", () => {
     await expect(page.getByText(ACTIVATE_TITLE)).toBeVisible(FIRST_RENDER);
     await expect(activateButton(page)).toBeEnabled();
     await expect(
-      page.getByText("Models, Web search, Knowledge base"),
+      page.getByText("Models & Knowledge base"),
     ).toBeHidden();
     for (const alias of ["Chat Model A", "Chat Model B", "Image Model"])
       await expect(page.getByText(alias, { exact: true })).toBeVisible();
@@ -577,7 +577,7 @@ test.describe("AI settings on a phone", () => {
     await page.locator("svg[data-tooltip-id]").first().click();
 
     await expect(
-      page.getByText("Models, Web search, Knowledge base"),
+      page.getByText("Models & Knowledge base"),
     ).toBeVisible();
     await expect(
       page.getByText("OpenRouter pricing, plus a 20% service fee"),
@@ -628,7 +628,7 @@ test.describe("AI settings on a phone", () => {
     ).toBeVisible();
     await expect(activateButton(page)).toBeEnabled();
     await expect(
-      page.getByText("Web search and crawling are powered by Exa"),
+      page.getByText("Web search and web crawling powered by Exa"),
     ).toBeHidden();
     await expect(
       page.getByText("Search engine", { exact: true }),
@@ -640,7 +640,7 @@ test.describe("AI settings on a phone", () => {
     await page.locator("svg[data-tooltip-id]").first().click();
 
     await expect(
-      page.getByText("Web search and crawling are powered by Exa"),
+      page.getByText("Web search and web crawling powered by Exa"),
     ).toBeVisible();
     await expect(
       page.getByText("Exa pricing, plus a 20% service fee"),

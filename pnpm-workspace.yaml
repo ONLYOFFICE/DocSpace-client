@@ -118,7 +118,3 @@ overrides:
   smol-toml: "^1.7.1"
   # @vitest/ui still asks for fflate ^0.8.2; pins the patched 0.8.x
   fflate: "^0.8.3"
-  # libs/ui-kit pins vitest 4.1.8 until its pointer is bumped; drop afterwards
-  "vitest@^4": "4.1.11"
-  "@vitest/ui@^4": "4.1.11"
-  "@vitest/coverage-v8@^4": "4.1.11"

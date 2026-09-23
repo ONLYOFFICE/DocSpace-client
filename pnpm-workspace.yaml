@@ -43,6 +43,19 @@ minimumReleaseAgeExclude:
   - '@rolldown/binding-linux-arm64-musl@1.2.2'
   - '@rolldown/binding-linux-s390x-gnu@1.2.2'
   - '@rolldown/binding-linux-x64-musl@1.2.2'
+  # next 16.3.6 (critical RCE fixes GHSA-p293-qw3h-jr36, GHSA-2xp9-vwfh-vxw4)
+  # was younger than the release-age window; drop once it ages out
+  - '@next/bundle-analyzer@16.3.6'
+  - '@next/env@16.3.6'
+  - '@next/swc-darwin-arm64@16.3.6'
+  - '@next/swc-darwin-x64@16.3.6'
+  - '@next/swc-linux-arm64-gnu@16.3.6'
+  - '@next/swc-linux-arm64-musl@16.3.6'
+  - '@next/swc-linux-x64-gnu@16.3.6'
+  - '@next/swc-linux-x64-musl@16.3.6'
+  - '@next/swc-win32-arm64-msvc@16.3.6'
+  - '@next/swc-win32-x64-msvc@16.3.6'
+  - next@16.3.6
 
 overrides:
   pnpm: ">=10.33.0"
@@ -101,3 +114,11 @@ overrides:
   # Guards against libs/ui-kit submodule drift until its pointer is bumped;
   # every manifest now pins 8.3.0 directly, so this can be dropped afterwards
   react-router: "8.3.0"
+  # nx (23.2.1 included) pins smol-toml 1.6.1 exactly; drop once nx lifts it
+  smol-toml: "^1.7.1"
+  # @vitest/ui still asks for fflate ^0.8.2; pins the patched 0.8.x
+  fflate: "^0.8.3"
+  # libs/ui-kit pins vitest 4.1.8 until its pointer is bumped; drop afterwards
+  "vitest@^4": "4.1.11"
+  "@vitest/ui@^4": "4.1.11"
+  "@vitest/coverage-v8@^4": "4.1.11"

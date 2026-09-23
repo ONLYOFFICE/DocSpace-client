@@ -883,6 +883,24 @@ export const webPluginsDeleteHandler = (port: string) => {
   );
 };
 
+export const webPluginsTestBundleHandler = (port: string) => {
+  const pluginsSharingBundle = [mockPlugin1, mockPlugin2, mockPlugin3];
+
+  const bundle = [
+    "window.Plugins = window.Plugins || {};",
+    ...pluginsSharingBundle.map(
+      ({ pluginName }) => `window.Plugins["${pluginName}"] = {};`,
+    ),
+    "",
+  ].join("\n");
+
+  return http.get(`${BASE_URL}:${port}${mockPlugin1.url}`, () => {
+    return new Response(bundle, {
+      headers: { "Content-Type": "application/javascript; charset=utf-8" },
+    });
+  });
+};
+
 // Serves a module bundle that imports a package the portal does not shim, so
 // the plugin fails in rewritePluginImports exactly like a build with a stale
 // "external" list does.

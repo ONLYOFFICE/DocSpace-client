@@ -842,12 +842,13 @@ class PluginStore {
     name: string,
     initError: TPluginError | undefined,
   ) => {
-    const plugin = this.plugins.find((p) => p.name === name);
+    const idx = this.plugins.findIndex((p) => p.name === name);
 
-    if (!plugin) return;
+    if (idx === -1) return;
 
     runInAction(() => {
-      plugin.initError = initError;
+      this.plugins[idx].initError = initError;
+      this.plugins.splice(idx, 1, this.plugins[idx]);
     });
   };
 

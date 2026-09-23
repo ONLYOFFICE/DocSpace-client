@@ -34,7 +34,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { runInAction } from "mobx";
+import { autorun, runInAction } from "mobx";
 
 vi.mock("@docspace/ui-kit/utils/socket", () => ({
   default: { emit: vi.fn(), on: vi.fn() },
@@ -306,6 +306,35 @@ describe("PluginStore module plugin load failure", () => {
     await store.activatePlugin(PLUGIN);
 
     expect(store.plugins[0].initError).toEqual(thrown("portal unreachable"));
+  });
+
+  it("shows and clears the mark on a plugin exported as a class instance", async () => {
+    const store = createStore();
+    let attempt = 0;
+
+    class SamplePlugin {
+      onLoadCallback = async () => {
+        attempt += 1;
+        if (attempt === 1) throw new Error("settings request timed out");
+      };
+    }
+
+    let rendered: TPluginError | undefined;
+    const dispose = autorun(() => {
+      rendered = store.pluginList[0]?.initError;
+    });
+
+    await expect(
+      store.initLoadedModulePlugin(apiPlugin(), new SamplePlugin()),
+    ).rejects.toThrow("settings request timed out");
+
+    expect(rendered).toEqual(thrown("settings request timed out"));
+
+    await store.activatePlugin(PLUGIN);
+
+    expect(rendered).toBeUndefined();
+
+    dispose();
   });
 
   it("takes back the items of the version it replaces", async () => {

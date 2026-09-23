@@ -3,7 +3,7 @@
   "content": "{{editorsName}} Admin Panel",
   "content_en_sha1_hash": "f5c894caa54d3df60e7551d44a4848186758210e",
   "created_at": "2026-09-22T10:55:26.974Z",
-  "updated_at": "2026-09-22T15:31:29.848Z",
+  "updated_at": "2026-09-22T17:11:29.520Z",
   "comment": {
     "text": "Menu item label in the user menu for administrators or owners to access the admin panel. {{editorsName}} represents the product brand name.",
     "is_auto": true,

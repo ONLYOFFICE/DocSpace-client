@@ -2,12 +2,12 @@
   "key_path": "BackToFormSpace",
   "content": "Back to form space",
   "content_en_sha1_hash": "466c9994b645a718a9c8e66d4cf97b3a89177b5e",
-  "created_at": "2026-09-22T15:31:28.536Z",
-  "updated_at": "2026-09-22T15:33:52.663Z",
+  "created_at": "2026-09-22T17:11:28.158Z",
+  "updated_at": "2026-09-22T17:12:50.910Z",
   "comment": {
-    "text": "Button label in the completed form footer that navigates the user back to the form space.",
+    "text": "Button label in the footer of a completed form that navigates the user back to the form space.",
     "is_auto": true,
-    "updated_at": "2026-09-22T15:33:52.663Z",
+    "updated_at": "2026-09-22T17:12:50.910Z",
     "model": "gemma4:26b"
   },
   "usage": [

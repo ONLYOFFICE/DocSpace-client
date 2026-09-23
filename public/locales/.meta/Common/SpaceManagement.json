@@ -3,7 +3,7 @@
   "content": "Workspace management",
   "content_en_sha1_hash": "40240bf59e1f3dd8458ff8d200426a7ef78565e7",
   "created_at": "2026-08-13T14:37:09.000Z",
-  "updated_at": "2026-09-22T15:31:29.848Z",
+  "updated_at": "2026-09-22T17:11:29.520Z",
   "comment": {
     "text": "Menu item label in a navigation list and a title for an article header, referring to the feature for managing workspaces.",
     "is_auto": true,

@@ -49,8 +49,7 @@ type ModelSettingsRowProps = {
   modelId: string;
   image: string;
   title: string;
-  inputPrice: string;
-  outputPrice?: string;
+  prices: { key: string; value: string }[];
   enabled: boolean;
   isUpdating: boolean;
   link?: string;
@@ -61,8 +60,7 @@ type ModelSettingsRowProps = {
 const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
   modelId,
   title,
-  inputPrice,
-  outputPrice,
+  prices,
   enabled,
   isUpdating,
   link,
@@ -96,16 +94,13 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
           </div>
         </div>
       </TableCell>
-      <TableCell>
-        <Text fontSize="12px" fontWeight={600} className={styles.priceCell}>
-          {inputPrice}
-        </Text>
-      </TableCell>
-      <TableCell>
-        <Text fontSize="12px" fontWeight={600} className={styles.priceCell}>
-          {outputPrice ?? "—"}
-        </Text>
-      </TableCell>
+      {prices.map(({ key, value }) => (
+        <TableCell key={key}>
+          <Text fontSize="12px" fontWeight={600} className={styles.priceCell}>
+            {value || "—"}
+          </Text>
+        </TableCell>
+      ))}
       <TableCell>
         <div className={styles.toggleCell}>
           <div className={styles.toggleWrapper}>

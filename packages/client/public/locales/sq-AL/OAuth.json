@@ -21,7 +21,7 @@
   "BasicInfo": "Info bazik",
   "Client": "Klient",
   "ClientCopy": "ID-ja e klientit u kopjua me sukses në kujtesën e fragmenteve",
-  "ClientHelpButton": "Kredencialet për përdorimin e OAth 2.0 si llojin tuaj të vërtetimit.<br/> <strong>Shënim:</strong> Çdo administrator i ndërmarrjes që njeh ID-në e klientit të aplikacionit do të jetë në gjendje të marrë informacione rreth aplikacionit duke përfshirë emrin e aplikacionit, llojin e vërtetimit, shtrirjen e aplikacionit dhe ridrejtoni URI.",
+  "ClientHelpButton": "Kredencialet për përdorimin e OAuth 2.0 si llojin tuaj të vërtetimit.<br/> <strong>Shënim:</strong> Çdo administrator i ndërmarrjes që njeh ID-në e klientit të aplikacionit do të jetë në gjendje të marrë informacione rreth aplikacionit duke përfshirë emrin e aplikacionit, llojin e vërtetimit, shtrirjen e aplikacionit dhe ridrejtoni URI.",
   "ClientSecretResetSuccessfully": "Rivendosja e sekretit të klientit me sukses",
   "CodeVerifier": "Verifikuesi i kodit",
   "Creator": "Krijuesi",

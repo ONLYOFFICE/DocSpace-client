@@ -147,7 +147,6 @@ const ItemTitle = ({
 			<div className={styles.infoText}>
 				<div className={styles.infoWrapper}>
 					<Text
-						tooltipFitToContent
 						className={styles.infoTextName}
 						title={displayName}
 						truncate
@@ -173,7 +172,6 @@ const ItemTitle = ({
 				</div>
 				{!isPending && displayName ? (
 					<Text
-						tooltipFitToContent
 						className={styles.infoTextEmail}
 						title={userSelection.email}
 						fontSize="13px"

@@ -175,7 +175,6 @@ const Users = ({
 
 		const text = (
 			<Text
-				tooltipFitToContent
 				title={typeLabel}
 				fontSize="13px"
 				fontWeight={600}
@@ -249,7 +248,6 @@ const Users = ({
 			<div className={styles.userContent}>
 				<div className={styles.header}>
 					<Text
-						tooltipFitToContent
 						title={t("Data")}
 						fontSize="14px"
 						fontWeight={600}
@@ -260,14 +258,12 @@ const Users = ({
 				</div>
 				<div className={styles.body}>
 					<Text
-						tooltipFitToContent
 						className={classNames(styles.infoField, styles.firstRow)}
 						title={t("Data")}
 					>
 						{t("Common:Account")}
 					</Text>
 					<Text
-						tooltipFitToContent
 						className={classNames(styles.infoData, styles.firstRow)}
 						fontSize="13px"
 						fontWeight={600}
@@ -277,7 +273,6 @@ const Users = ({
 					</Text>
 
 					<Text
-						tooltipFitToContent
 						className={styles.infoField}
 						title={t("Common:Type")}
 					>
@@ -288,14 +283,12 @@ const Users = ({
 					{isGuests && userSelection.createdBy?.displayName ? (
 						<>
 							<Text
-								tooltipFitToContent
 								className={styles.infoField}
 								title={t("Common:Inviter")}
 							>
 								{t("Common:Inviter")}
 							</Text>
 							<Text
-								tooltipFitToContent
 								fontSize="13px"
 								fontWeight={600}
 								title={statusLabel}
@@ -308,14 +301,12 @@ const Users = ({
 					{userSelection.status === EmployeeStatus.Active ? (
 						<>
 							<Text
-								tooltipFitToContent
 								className={styles.infoField}
 								title={t("PeopleTranslations:RegistrationDate")}
 							>
 								{t("PeopleTranslations:RegistrationDate")}
 							</Text>
 							<Text
-								tooltipFitToContent
 								fontSize="13px"
 								fontWeight={600}
 								title={userSelection.registrationDate}
@@ -327,14 +318,12 @@ const Users = ({
 					{!standalone ? (
 						<>
 							<Text
-								tooltipFitToContent
 								className={styles.infoField}
 								title={t("UserStatus")}
 							>
 								{t("UserStatus")}
 							</Text>
 							<Text
-								tooltipFitToContent
 								fontSize="13px"
 								fontWeight={600}
 								title={statusLabel}
@@ -346,7 +335,6 @@ const Users = ({
 					{showStorageInfo && !isGuests ? (
 						<>
 							<Text
-								tooltipFitToContent
 								className={styles.infoField}
 								title={t("Common:Storage")}
 							>
@@ -365,7 +353,6 @@ const Users = ({
 					{userSelection?.groups?.length && !isGuests ? (
 						<>
 							<Text
-								tooltipFitToContent
 								className={styles.infoFieldGroups}
 								title={t("Common:Group")}
 							>
@@ -375,7 +362,6 @@ const Users = ({
 							<div className={styles.groups}>
 								{userSelection.groups.map((group, index) => (
 									<Link
-										tooltipFitToContent
 										key={group.id}
 										isHovered
 										fontSize="13px"

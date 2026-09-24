@@ -93,7 +93,6 @@ const GroupMember = ({ groupMember, isManager }: GroupMemberProps) => {
           as="div"
           className={styles.email}
           title={groupMember.email}
-          tooltipFitToContent
         >
           {groupMember.email}
         </TooltipContainer>

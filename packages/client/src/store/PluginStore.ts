@@ -97,6 +97,7 @@ import type {
   IArticleNavigationItemClient,
   IframeWindow,
   TPlugin,
+  TPluginError,
   IPostMessageCallbackMessage,
   IMediaViewerClient,
   IModalDialogClient,
@@ -104,6 +105,7 @@ import type {
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
+import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
 import { matchesUserRole } from "../helpers/plugins/roles";
 import { createPluginApi } from "../helpers/plugins/react/api";
 import { toCurrentUser } from "../helpers/plugins/react/utils";
@@ -251,19 +253,13 @@ class PluginStore {
   handlePluginStateChange = (data: TChangeWebPluginData) => {
     const { webPluginName, enabled } = data;
 
-    runInAction(() => {
-      const plugin = this.plugins.find((p) => p.name === webPluginName);
+    const plugin = this.plugins.find((p) => p.name === webPluginName);
 
-      if (!plugin) return;
+    if (!plugin || plugin.enabled === enabled) return;
 
-      plugin.enabled = enabled;
-
-      if (enabled) {
-        this.activatePlugin(webPluginName);
-      } else {
-        this.deactivatePlugin(webPluginName);
-      }
-    });
+    return enabled
+      ? this.activatePlugin(webPluginName)
+      : this.deactivatePlugin(webPluginName);
   };
 
   dispatchMessage = ({
@@ -392,62 +388,28 @@ class PluginStore {
   }
 
   updatePluginStatus = (name: string) => {
-    const plugin = this.plugins.find((p) => p.name === name);
-
-    const newStatus = plugin?.getStatus?.();
-
     const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
-    if (pluginIdx !== -1) {
-      if (this.plugins[pluginIdx].status === newStatus) return;
+    if (pluginIdx === -1) return;
 
-      this.plugins[pluginIdx].status = newStatus || PluginStatus.active;
+    const plugin = this.plugins[pluginIdx];
 
-      if (
-        newStatus === PluginStatus.active &&
-        this.plugins[pluginIdx].enabled
-      ) {
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.ContextMenu)) {
-          this.updateContextMenuItems(name);
-        }
+    // A plugin that reports no status of its own is always shown.
+    const newStatus = plugin.getStatus?.() || PluginStatus.active;
 
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.InfoPanel)) {
-          this.updateInfoPanelItems(name);
-        }
+    plugin.status = newStatus;
 
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.MainButton)) {
-          this.updateMainButtonItems(name);
-        }
+    if (!plugin.enabled) return;
 
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.ProfileMenu)) {
-          this.updateProfileMenuItems(name);
-        }
+    if (newStatus === PluginStatus.active) {
+      this.installPluginCss(plugin);
+      this.registerPluginItems(plugin);
 
-        if (
-          this.plugins[pluginIdx].scopes.includes(PluginScopes.EventListener)
-        ) {
-          this.updateEventListenerItems(name);
-        }
-
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.File)) {
-          this.updateFileItems(name);
-        }
-
-        if (
-          this.plugins[pluginIdx].scopes.includes(PluginScopes.ArticleButton)
-        ) {
-          this.updateArticleButtonItems(name);
-        }
-
-        if (
-          this.plugins[pluginIdx].scopes.includes(
-            PluginScopes.ArticleNavigation,
-          )
-        ) {
-          this.updateArticleNavigationItems(name);
-        }
-      }
+      return;
     }
+
+    this.uninstallPluginCss(plugin);
+    this.unregisterPluginItems(plugin);
   };
 
   setPluginFrame = (frame: HTMLIFrameElement) => {
@@ -562,15 +524,30 @@ class PluginStore {
 
       this.setNeedPageReload(true);
 
-      if (plugin.runtime === "module") {
-        this.initModulePlugin(plugin);
-      } else {
-        this.initPlugin(plugin);
+      let thrownInitError: TPluginError | undefined;
+
+      try {
+        if (plugin.runtime === "module") {
+          await this.initModulePlugin(plugin);
+        } else {
+          await this.initPlugin(plugin);
+        }
+      } catch (e) {
+        console.error(
+          `[Plugin: ${plugin.name}] Plugin initialization failed:`,
+          e,
+        );
+
+        thrownInitError = toPluginError(e);
       }
+
+      const storedPlugin = this.plugins.find((p) => p.name === plugin.name);
 
       return {
         isPluginCompatible,
         isPluginInCache,
+        loadError: storedPlugin?.loadError,
+        initError: storedPlugin?.initError ?? thrownInitError,
       };
     } catch (e) {
       toastr.error(e as TData);
@@ -604,13 +581,12 @@ class PluginStore {
     const currentLanguage = (getCookie(LANGUAGE) || culture) as string;
     plugin.setLanguage?.(currentLanguage);
 
-    const language = plugin.getLanguage?.();
+    const language = plugin.getLanguage?.() ?? currentLanguage;
 
-    plugin.nameLocale =
-      (language && plugin.nameLocaleMap?.[language]) || plugin.name;
+    plugin.nameLocale = plugin.nameLocaleMap?.[language] || plugin.name;
 
     plugin.descriptionLocale =
-      (language && plugin.descriptionLocaleMap?.[language]) ||
+      plugin.descriptionLocaleMap?.[language] ||
       plugin.description;
   };
 
@@ -622,15 +598,53 @@ class PluginStore {
     if (!plugin.enabled && !fromList) return;
 
     return new Promise((resolve, reject) => {
-      const onLoad = async () => {
-        try {
-          const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
+      const iWindow = this.pluginFrame?.contentWindow as
+        IframeWindow | undefined;
+      const scriptUrl = new URL(plugin.url, window.location.href).href;
 
-          const newPlugin = cloneDeep({
+      let scriptError: unknown;
+
+      const onScriptError = (event: ErrorEvent) => {
+        if (event.filename !== scriptUrl) return;
+
+        scriptError =
+          event.error instanceof Error ? event.error : new Error(event.message);
+      };
+
+      if (iWindow?.Plugins) delete iWindow.Plugins[plugin.pluginName];
+
+      iWindow?.addEventListener?.("error", onScriptError);
+
+      const stopListening = () =>
+        iWindow?.removeEventListener?.("error", onScriptError);
+
+      const onLoad = async () => {
+        stopListening();
+
+        const registered = iWindow?.Plugins?.[plugin.pluginName];
+
+        if (!registered) {
+          const error: TPluginError = scriptError
+            ? toPluginError(scriptError)
+            : { kind: "unregistered", pluginName: plugin.pluginName };
+
+          console.error(
+            `[Plugin: ${plugin.name}] Failed to load plugin:`,
+            scriptError ?? error,
+          );
+
+          resolve(this.installBrokenPlugin(plugin, error));
+          return;
+        }
+
+        try {
+          const newPlugin: TPlugin = cloneDeep({
             ...plugin,
             nameLocaleMap: plugin.nameLocale,
             descriptionLocaleMap: plugin.descriptionLocale,
-            ...iWindow?.Plugins?.[plugin.pluginName],
+            ...registered,
+            nameLocale: plugin.name,
+            descriptionLocale: plugin.description,
           });
 
           newPlugin.scopes =
@@ -644,23 +658,33 @@ class PluginStore {
             plugin.minDocSpaceVersion,
           );
 
-          this.initLocalePlugin(newPlugin);
+          const storedPlugin = await this.runPluginInit(
+            newPlugin,
+            plugin.settings || null,
+          );
 
-          await this.installPlugin(newPlugin);
-
-          if (newPlugin.scopes.includes(PluginScopes.Settings)) {
-            newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
-          }
-
-          callback?.(newPlugin);
-          resolve(newPlugin);
+          callback?.(storedPlugin);
+          resolve(storedPlugin);
         } catch (error) {
+          console.error(
+            `[Plugin: ${plugin.name}] Plugin initialization failed:`,
+            error,
+          );
+
+          this.setInitError(plugin.name, toPluginError(error));
+
           reject(error);
         }
       };
 
       const onError = () => {
-        resolve(null);
+        stopListening();
+
+        const error: TPluginError = { kind: "script", url: plugin.url };
+
+        console.error(`[Plugin: ${plugin.name}] Failed to load plugin:`, error);
+
+        resolve(this.installBrokenPlugin(plugin, error));
       };
 
       const frameDoc = this.pluginFrame?.contentDocument;
@@ -678,6 +702,8 @@ class PluginStore {
 
         frameDoc?.body.appendChild(script);
       } else {
+        stopListening();
+
         reject(new Error("Failed to create script element"));
       }
     });
@@ -712,22 +738,169 @@ class PluginStore {
     }
   };
 
-  installPlugin = async (plugin: TPlugin, addToList = true) => {
-    if (addToList) {
-      const idx = this.plugins.findIndex((p) => p.name === plugin.name);
+  /** Publishes every item the plugin's scopes provide to the portal. */
+  private registerPluginItems = (plugin: TPlugin) => {
+    const { name, scopes } = plugin;
 
-      if (idx === -1) {
-        runInAction(() => {
-          this.plugins = [plugin, ...this.plugins];
-        });
+    if (scopes.includes(PluginScopes.ContextMenu)) {
+      this.updateContextMenuItems(name);
+    }
 
-        this.setIsEmptyList(false);
-      } else {
-        this.plugins[idx] = plugin;
+    if (scopes.includes(PluginScopes.InfoPanel)) {
+      this.updateInfoPanelItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.MainButton)) {
+      this.updateMainButtonItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.ProfileMenu)) {
+      this.updateProfileMenuItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.EventListener)) {
+      this.updateEventListenerItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.File)) {
+      this.updateFileItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleButton)) {
+      this.updateArticleButtonItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleNavigation)) {
+      this.updateArticleNavigationItems(name);
+    }
+  };
+
+  /** Takes back everything `registerPluginItems` published. */
+  private unregisterPluginItems = (plugin: TPlugin) => {
+    const { scopes } = plugin;
+
+    if (scopes.includes(PluginScopes.ContextMenu)) {
+      this.deactivateContextMenuItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.InfoPanel)) {
+      this.deactivateInfoPanelItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.ProfileMenu)) {
+      this.deactivateProfileMenuItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.MainButton)) {
+      this.deactivateMainButtonItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.EventListener)) {
+      this.deactivateEventListenerItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.File)) {
+      this.deactivateFileItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleButton)) {
+      this.deactivateArticleButtonItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleNavigation)) {
+      this.deactivateArticleNavigationItems(plugin);
+    }
+  };
+
+  private addToPluginList = (plugin: TPlugin) => {
+    const idx = this.plugins.findIndex((p) => p.name === plugin.name);
+
+    if (idx === -1) {
+      runInAction(() => {
+        this.plugins = [plugin, ...this.plugins];
+      });
+
+      this.setIsEmptyList(false);
+
+      return this.plugins[0];
+    }
+
+    runInAction(() => {
+      this.plugins[idx] = plugin;
+    });
+
+    return this.plugins[idx];
+  };
+
+  private setInitError = (
+    name: string,
+    initError: TPluginError | undefined,
+  ) => {
+    const idx = this.plugins.findIndex((p) => p.name === name);
+
+    if (idx === -1) return;
+
+    runInAction(() => {
+      this.plugins[idx].initError = initError;
+      this.plugins.splice(idx, 1, this.plugins[idx]);
+    });
+  };
+
+  private installBrokenPlugin = (plugin: TAPIPlugin, error: TPluginError) => {
+    const scopes =
+      typeof plugin.scopes === "string"
+        ? (plugin.scopes.split(",") as PluginScopes[])
+        : plugin.scopes;
+
+    const brokenPlugin = {
+      ...plugin,
+      nameLocaleMap: plugin.nameLocale,
+      descriptionLocaleMap: plugin.descriptionLocale,
+      scopes,
+      iconUrl: getPluginUrl(plugin.url, ""),
+      compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
+      loadError: error,
+    } as unknown as TPlugin;
+
+    const previous = this.plugins.find((p) => p.name === plugin.name);
+
+    if (previous) {
+      try {
+        this.uninstallPluginCss(previous);
+        this.unregisterPluginItems(previous);
+      } catch (e) {
+        console.error(`[Plugin: ${plugin.name}] Failed to unregister:`, e);
       }
     }
 
-    if (!plugin || !plugin.enabled) return;
+    this.initLocalePlugin(brokenPlugin);
+
+    return this.addToPluginList(brokenPlugin);
+  };
+
+  private runPluginInit = async (
+    plugin: TPlugin,
+    settings: string | null,
+    addToList = true,
+  ) => {
+    const storedPlugin = addToList ? this.addToPluginList(plugin) : plugin;
+
+    this.initLocalePlugin(storedPlugin);
+
+    await this.installPlugin(storedPlugin);
+
+    if (storedPlugin.loadError) return storedPlugin;
+
+    if (storedPlugin.scopes.includes(PluginScopes.Settings)) {
+      storedPlugin.setAdminPluginSettingsValue?.(settings);
+      this.updatePluginStatus(storedPlugin.name);
+    }
+
+    return storedPlugin;
+  };
+
+  installPlugin = async (plugin: TPlugin) => {
+    if (!plugin || !plugin.enabled || plugin.loadError) return;
 
     if (plugin.scopes.includes(PluginScopes.API)) {
       plugin.setAPI?.(origin, proxy, prefix);
@@ -745,40 +918,10 @@ class PluginStore {
 
     this.installPluginCss(plugin);
 
-    if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
-      this.updateContextMenuItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.InfoPanel)) {
-      this.updateInfoPanelItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.MainButton)) {
-      this.updateMainButtonItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ProfileMenu)) {
-      this.updateProfileMenuItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.EventListener)) {
-      this.updateEventListenerItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.File)) {
-      this.updateFileItems(name);
-    }
+    this.registerPluginItems(plugin);
 
     if (plugin.scopes.includes(PluginScopes.PostMessage)) {
       this.initPostMessagePlugin(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
-      this.updateArticleButtonItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ArticleNavigation)) {
-      this.updateArticleNavigationItems(name);
     }
   };
 
@@ -836,7 +979,17 @@ class PluginStore {
 
     this.setNeedPageReload(true);
 
-    this.installPlugin(this.plugins[idx], false);
+    const plugin = this.plugins[idx];
+
+    try {
+      await this.runPluginInit(plugin, plugin.settings || null, false);
+
+      this.setInitError(name, undefined);
+    } catch (e) {
+      console.error(`[Plugin: ${name}] Plugin initialization failed:`, e);
+
+      this.setInitError(name, toPluginError(e));
+    }
   };
 
   deactivatePlugin = async (name: string) => {
@@ -853,37 +1006,7 @@ class PluginStore {
 
     this.uninstallPluginCss(plugin);
 
-    if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
-      this.deactivateContextMenuItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.InfoPanel)) {
-      this.deactivateInfoPanelItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ProfileMenu)) {
-      this.deactivateProfileMenuItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.MainButton)) {
-      this.deactivateMainButtonItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.EventListener)) {
-      this.deactivateEventListenerItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.File)) {
-      this.deactivateFileItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
-      this.deactivateArticleButtonItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ArticleNavigation)) {
-      this.deactivateArticleNavigationItems(plugin);
-    }
+    this.unregisterPluginItems(plugin);
   };
 
   getUserRole = () => {
@@ -1899,7 +2022,7 @@ class PluginStore {
       },
       api: pluginApi,
       settings: {
-        load: async () => {
+        load: () => {
           const entry = this.plugins.find((p) => p.name === pluginName);
           if (!entry?.settings) return null;
           try {
@@ -1921,6 +2044,8 @@ class PluginStore {
             entry.settings = settingsStr;
           });
           entry.setAdminPluginSettingsValue?.(settingsStr);
+
+          this.updatePluginStatus(pluginName);
         },
         setSaveButton: (props: ButtonGroup) => {
           this.setReactSettingsSaveButtonState(pluginName, props);
@@ -1929,64 +2054,101 @@ class PluginStore {
     };
   };
 
+  private loadModulePlugin = async (
+    plugin: TAPIPlugin,
+  ): Promise<Partial<TPlugin>> => {
+    const res = await fetch(plugin.url);
+    if (!res.ok) {
+      throw new PluginLoadError({
+        kind: "http",
+        status: res.status,
+        url: plugin.url,
+      });
+    }
+
+    const rawCode = await res.text();
+
+    const { rewritePluginImports } =
+      await import("../helpers/plugins/react/shim");
+
+    const code = rewritePluginImports(rawCode);
+    const blob = new Blob([code], { type: "application/javascript" });
+    const blobUrl = URL.createObjectURL(blob);
+
+    let mod: { default?: Partial<TPlugin> };
+    try {
+      mod = await import(/* @vite-ignore */ blobUrl);
+    } finally {
+      URL.revokeObjectURL(blobUrl);
+    }
+
+    const exported = mod?.default;
+    if (!exported) throw new PluginLoadError({ kind: "no-default-export" });
+
+    return exported;
+  };
+
+  initLoadedModulePlugin = async (
+    plugin: TAPIPlugin,
+    exported: Partial<TPlugin>,
+    callback?: (plugin: TPlugin) => void,
+  ): Promise<TPlugin> => {
+    const scopes =
+      typeof plugin.scopes === "string"
+        ? (plugin.scopes.split(",") as PluginScopes[])
+        : plugin.scopes;
+
+    const newPlugin = Object.assign(exported as TPlugin, {
+      ...plugin,
+      nameLocaleMap: plugin.nameLocale,
+      descriptionLocaleMap: plugin.descriptionLocale,
+      nameLocale: plugin.name,
+      descriptionLocale: plugin.description,
+      scopes,
+      iconUrl: getPluginUrl(plugin.url, ""),
+      compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
+    });
+
+    try {
+      const storedPlugin = await this.runPluginInit(
+        newPlugin,
+        plugin.settings || null,
+      );
+
+      callback?.(storedPlugin);
+
+      return storedPlugin;
+    } catch (e) {
+      console.error(
+        `[Plugin: ${plugin.name}] Plugin initialization failed:`,
+        e,
+      );
+
+      this.setInitError(plugin.name, toPluginError(e));
+
+      throw e;
+    }
+  };
+
   initModulePlugin = async (
     plugin: TAPIPlugin,
     callback?: (plugin: TPlugin) => void,
   ): Promise<void> => {
+    let exported: Partial<TPlugin>;
+
     try {
-      const res = await fetch(plugin.url);
-      if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${plugin.url}`);
-
-      const rawCode = await res.text();
-
-      const { rewritePluginImports } = await import(
-        "../helpers/plugins/react/shim"
-      );
-
-      const code = rewritePluginImports(rawCode);
-      const blob = new Blob([code], { type: "application/javascript" });
-      const blobUrl = URL.createObjectURL(blob);
-
-      let mod: { default?: Partial<TPlugin> };
-      try {
-        mod = await import(/* @vite-ignore */ blobUrl);
-        URL.revokeObjectURL(blobUrl);
-      } catch (e) {
-        URL.revokeObjectURL(blobUrl);
-        throw e;
-      }
-
-      const exported = mod?.default;
-      if (!exported) throw new Error("Module plugin has no default export");
-
-      const scopes =
-        typeof plugin.scopes === "string"
-          ? (plugin.scopes.split(",") as PluginScopes[])
-          : plugin.scopes;
-
-      const newPlugin = Object.assign(exported as TPlugin, {
-        ...plugin,
-        nameLocaleMap: plugin.nameLocale,
-        descriptionLocaleMap: plugin.descriptionLocale,
-        scopes,
-        iconUrl: getPluginUrl(plugin.url, ""),
-        compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
-      });
-
-      this.initLocalePlugin(newPlugin);
-      this.installPlugin(newPlugin);
-
-      if (newPlugin.scopes.includes(PluginScopes.Settings)) {
-        newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
-      }
-
-      callback?.(newPlugin);
+      exported = await this.loadModulePlugin(plugin);
     } catch (e) {
       console.error(
         `[Plugin: ${plugin.name}] Failed to load module plugin:`,
         e,
       );
+
+      this.installBrokenPlugin(plugin, toPluginError(e));
+      return;
     }
+
+    await this.initLoadedModulePlugin(plugin, exported, callback);
   };
 
   get articleNavigationItemsList() {

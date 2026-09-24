@@ -145,7 +145,6 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                     data-testid={`tag_loader_${tag.label}`}
                   >
                     <Loader
-                      primary
                       size={`${LOADER_SIZE}px`}
                       type={LoaderTypes.track}
                     />

@@ -52,6 +52,9 @@ import RowView from "./RowView";
 import { TableViewLoader } from "./TableView/TableViewLoader";
 import { RowViewLoader } from "./RowView/RowViewLoader";
 
+// The image table needs 769px for full headers.
+const TABLE_MIN_SECTION_WIDTH = 780;
+
 type AiModelsSaasProps = {
   currentDeviceType?: DeviceType;
   aiToolsPrices?: ServicesStore["aiToolsPrices"];
@@ -69,7 +72,17 @@ const AiModelsSaas = ({
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
   if (isAiToolsPricesLoading)
-    return isDesktop ? <TableViewLoader /> : <RowViewLoader />;
+    return (
+      <Consumer>
+        {(context) =>
+          isDesktop && (context.sectionWidth ?? 0) >= TABLE_MIN_SECTION_WIDTH ? (
+            <TableViewLoader />
+          ) : (
+            <RowViewLoader />
+          )
+        }
+      </Consumer>
+    );
 
   if (!aiToolsPrices) {
     const icon = isBase ? (
@@ -99,13 +112,15 @@ const AiModelsSaas = ({
 
   return (
     <Consumer>
-      {(context) =>
-        isDesktop ? (
-          <TableView sectionWidth={context.sectionWidth ?? 0} />
+      {(context) => {
+        const sectionWidth = context.sectionWidth ?? 0;
+
+        return isDesktop && sectionWidth >= TABLE_MIN_SECTION_WIDTH ? (
+          <TableView sectionWidth={sectionWidth} />
         ) : (
-          <RowView sectionWidth={context.sectionWidth ?? 0} />
-        )
-      }
+          <RowView sectionWidth={sectionWidth} />
+        );
+      }}
     </Consumer>
   );
 };

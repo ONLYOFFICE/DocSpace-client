@@ -60,6 +60,7 @@ const useSDK = ({
   getSettings,
   logout,
   login,
+  loginWithCode,
   addTagsToRoom,
   createTag,
   removeTagsFromRoom,
@@ -198,8 +199,10 @@ const useSDK = ({
             break;
           case "login":
             {
-              const { email, passwordHash } = data;
-              res = await login(email, passwordHash);
+              const { email, passwordHash, code } = data;
+              res = code
+                ? { url: await loginWithCode(email, passwordHash, code) }
+                : await login(email, passwordHash);
             }
             break;
           case "logout":

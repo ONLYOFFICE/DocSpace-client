@@ -253,6 +253,57 @@ test.describe("Rooms tour on an empty portal", () => {
     ).toHaveCount(0);
   });
 
+  test("walks back out of the closing step one step at a time", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // The regression this guards, from the closing step's two-way door. That
+    // step drops the stand-in rooms to show the real empty screen, and every
+    // step before it is anchored on the section that dismantles — the banner's
+    // tiles, the groups row, a room row, the panel opened on it. react-joyride
+    // answers a step whose target has gone by moving one further in the
+    // direction of travel, so Back skipped a step, and from there the index
+    // walked off the start of the list and closed the tour outright.
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "admin"),
+      ...roomOwnerMembers(),
+    );
+
+    const tooltip = tourTooltip(page);
+
+    await startTour(page, baseUrl);
+    await goToStep(page, CREATE_FIRST_STEP);
+
+    await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
+
+    // Back off the last step: the stand-in rooms come back, because the step
+    // this lands on has nothing to point at without them.
+    await page.keyboard.press("ArrowLeft");
+
+    await expect(
+      tooltip.getByText(CREATE_FIRST_STEP, { exact: true }),
+    ).toHaveCount(0);
+    await expect(page.locator(EMPTY_SCREEN)).toBeHidden();
+    await expect(
+      page.getByRole("main").getByText("Collaboration room").first(),
+    ).toBeVisible();
+
+    // Back again — this is the click that used to close the tour. It has to
+    // land on a step, and it must not be the one just left.
+    const secondFromLast = await tooltip
+      .locator('[role="progressbar"]')
+      .getAttribute("aria-label");
+
+    await page.keyboard.press("ArrowLeft");
+
+    await expect(tooltip).toBeVisible();
+    await expect(tooltip.locator('[role="progressbar"]')).not.toHaveAttribute(
+      "aria-label",
+      secondFromLast!,
+    );
+  });
+
   test("user gets the stood-in section too, not a one-step tour", async ({
     page,
     mockRequest,

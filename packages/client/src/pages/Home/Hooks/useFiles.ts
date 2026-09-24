@@ -64,6 +64,7 @@ import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
+import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 
 export type UseFilesProps = {
   fetchFiles: FilesStore["fetchFiles"];
@@ -84,6 +85,7 @@ export type UseFilesProps = {
 
   selectedFolderStore: SelectedFolderStore;
   currentExtensionGallery: OformsStore["currentExtensionGallery"];
+  setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
 };
 
 const useFiles = ({
@@ -102,6 +104,7 @@ const useFiles = ({
   isVisibleInfoPanelTemplateGallery,
   currentExtensionGallery,
   userId,
+  setIsSectionHeaderLoading,
 
   selectedFolderStore,
 }: UseFilesProps) => {
@@ -175,10 +178,29 @@ const useFiles = ({
     let filterObj = null;
     let isRooms = false;
 
-    if (
-      window.location.href.indexOf(MEDIA_VIEW_URL) > 1 &&
-      playlist.length < 1
-    ) {
+    const isMediaViewUrl = window.location.href.indexOf(MEDIA_VIEW_URL) > 1;
+
+    // The viewer owns the URL while it is open: it swaps the path for
+    // `/media/view/{id}` with a raw `history.pushState`, so the router's
+    // location still points at the section underneath. With a playlist already
+    // loaded there is nothing to fetch -- and nothing to redirect to either.
+    // Falling through here used to reach the filter lookup below, which finds
+    // no filter in a media-view URL and navigated to the default Files
+    // section, pulling the viewer onto an unrelated file. A phone rotated into
+    // landscape hit exactly that: crossing the mobile breakpoint remounts the
+    // section subtree and re-runs this.
+    //
+    // Clear the header loader on the way out. Every other path here ends in a
+    // fetch, and it is the fetch helpers that switch it back off, so returning
+    // without one would leave the section covered by the loader that View's
+    // mount effect had just switched on -- the chat underneath would never
+    // come back after the viewer was closed.
+    if (isMediaViewUrl && playlist.length > 0) {
+      setIsSectionHeaderLoading(false, false);
+      return;
+    }
+
+    if (isMediaViewUrl) {
       setTimeout(() => {
         // `id` comes from the media-view URL and may be
         // undefined; the erased cast keeps the old unchecked call.
@@ -394,6 +416,7 @@ const useFiles = ({
     userId,
 
     selectedFolderStore,
+    setIsSectionHeaderLoading,
   ]);
 
   return { getFiles };

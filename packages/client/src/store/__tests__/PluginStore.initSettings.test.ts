@@ -1,0 +1,269 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { describe, it, expect, vi } from "vitest";
+import { runInAction } from "mobx";
+
+vi.mock("@docspace/ui-kit/utils/socket", async (importOriginal) => ({
+  ...((await importOriginal()) as Record<string, unknown>),
+  default: { emit: vi.fn(), on: vi.fn() },
+}));
+
+vi.mock("@docspace/ui-kit/components/toast", () => ({
+  toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn(), info: vi.fn() },
+}));
+
+vi.mock("@docspace/shared/api", () => ({
+  default: { plugins: { updatePlugin: vi.fn() } },
+}));
+
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { UserStore } from "@docspace/shared/store/UserStore";
+import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
+import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
+
+import PluginStore from "../PluginStore";
+import type SelectedFolderStore from "../SelectedFolderStore";
+import { PluginStatus } from "../../helpers/plugins/enums";
+
+const PLUGIN = "Sample";
+const ITEM_KEY = "convert-file-item";
+
+class TokenGatedPlugin {
+  status: PluginStatus = PluginStatus.hide;
+
+  getStatus = () => this.status;
+
+  updateStatus = (status: PluginStatus) => {
+    this.status = status;
+  };
+
+  setAdminPluginSettingsValue = (token: string | null) => {
+    this.updateStatus(token ? PluginStatus.active : PluginStatus.hide);
+  };
+
+  getContextMenuItems = () =>
+    new Map([[ITEM_KEY, { key: ITEM_KEY, label: "Convert to PDF" }]]);
+}
+
+class TokenGatedPluginWithOnLoad extends TokenGatedPlugin {
+  onLoadCallback = async () => {};
+}
+
+const apiPlugin = (settings: string | null): TAPIPlugin =>
+  ({
+    name: PLUGIN,
+    pluginName: PLUGIN,
+    enabled: true,
+    settings,
+    scopes: "Settings,ContextMenu",
+    url: "https://portal.test/plugins/sample/plugin.js",
+    version: "1.0.0",
+  }) as unknown as TAPIPlugin;
+
+const withFrame = (plugin: TokenGatedPlugin) => {
+  const store = new PluginStore(
+    { culture: "en" } as unknown as SettingsStore,
+    {} as unknown as SelectedFolderStore,
+    { user: null } as unknown as UserStore,
+    {} as unknown as CurrentTariffStatusStore,
+  );
+
+  const script: { onload?: () => void; setAttribute: () => void } = {
+    setAttribute: () => {},
+  };
+
+  // The store observes pluginFrame deeply, so the registry has to be reached
+  // through the store, the way a script running inside the frame would.
+  const register = () => {
+    const iWindow = store.pluginFrame?.contentWindow as unknown as {
+      Plugins: Record<string, TokenGatedPlugin>;
+    };
+    iWindow.Plugins[PLUGIN] = plugin;
+  };
+
+  runInAction(() => {
+    store.pluginFrame = {
+      contentWindow: { Plugins: {} },
+      contentDocument: {
+        createElement: () => script,
+        body: {
+          appendChild: () => {
+            register();
+            script.onload?.();
+          },
+        },
+      },
+    } as unknown as HTMLIFrameElement;
+  });
+
+  return store;
+};
+
+describe.each([
+  ["with onLoadCallback", () => new TokenGatedPluginWithOnLoad()],
+  ["without onLoadCallback", () => new TokenGatedPlugin()],
+])("PluginStore initPlugin with stored settings, %s", (_, createPlugin) => {
+  it("registers items of a plugin whose status depends on its settings", async () => {
+    const store = withFrame(createPlugin());
+
+    await store.initPlugin(apiPlugin("api-token"));
+
+    expect(store.plugins[0].status).toBe(PluginStatus.active);
+    expect(store.contextMenuItems.has(ITEM_KEY)).toBe(true);
+  });
+
+  it("keeps the items hidden while the plugin has no settings", async () => {
+    const store = withFrame(createPlugin());
+
+    await store.initPlugin(apiPlugin(null));
+
+    expect(store.plugins[0].status).toBe(PluginStatus.hide);
+    expect(store.contextMenuItems.has(ITEM_KEY)).toBe(false);
+  });
+
+  // Clearing the settings is the same gate read backwards: the plugin hides
+  // itself, and the item it registered has to go with it.
+  it("takes the items back when the settings stop covering the plugin", async () => {
+    const plugin = createPlugin();
+    const store = withFrame(plugin);
+
+    await store.initPlugin(apiPlugin("api-token"));
+
+    plugin.setAdminPluginSettingsValue(null);
+    store.updatePluginStatus(PLUGIN);
+
+    expect(store.plugins[0].status).toBe(PluginStatus.hide);
+    expect(store.contextMenuItems.has(ITEM_KEY)).toBe(false);
+  });
+
+  it("brings the items back when the settings cover the plugin again", async () => {
+    const plugin = createPlugin();
+    const store = withFrame(plugin);
+
+    await store.initPlugin(apiPlugin(null));
+
+    plugin.setAdminPluginSettingsValue("api-token");
+    store.updatePluginStatus(PLUGIN);
+
+    expect(store.plugins[0].status).toBe(PluginStatus.active);
+    expect(store.contextMenuItems.has(ITEM_KEY)).toBe(true);
+  });
+});
+
+// A plugin is free not to implement the status at all, and the portal then
+// treats it as always shown — a status read that answers nothing must not be
+// mistaken for a plugin asking to be hidden.
+describe("PluginStore updatePluginStatus without a status of its own", () => {
+  class StatelessPlugin {
+    getContextMenuItems = () =>
+      new Map([[ITEM_KEY, { key: ITEM_KEY, label: "Convert to PDF" }]]);
+  }
+
+  it("keeps the items of a plugin that reports no status", async () => {
+    const store = withFrame(
+      new StatelessPlugin() as unknown as TokenGatedPlugin,
+    );
+
+    await store.initPlugin(apiPlugin("api-token"));
+
+    store.updatePluginStatus(PLUGIN);
+
+    expect(store.plugins[0].status).toBe(PluginStatus.active);
+    expect(store.contextMenuItems.has(ITEM_KEY)).toBe(true);
+  });
+});
+
+// The portal answers every save of a plugin with a change-web-plugin socket
+// event, settings-only saves included. The store still holds the settings it
+// loaded when the event arrives, so re-running the plugin on it would hand the
+// plugin its old settings back right after the plugin saved new ones.
+describe("PluginStore change-web-plugin socket event", () => {
+  class TokenPlugin extends TokenGatedPlugin {
+    token: string | null = null;
+
+    setAdminPluginSettingsValue = (token: string | null) => {
+      this.token = token;
+      this.updateStatus(token ? PluginStatus.active : PluginStatus.hide);
+    };
+  }
+
+  it("keeps the settings a plugin has just saved", async () => {
+    const plugin = new TokenPlugin();
+    const store = withFrame(plugin);
+
+    await store.initPlugin(apiPlugin("old-token"));
+
+    plugin.setAdminPluginSettingsValue("new-token");
+
+    await store.handlePluginStateChange({
+      webPluginName: PLUGIN,
+      enabled: true,
+    });
+
+    expect(plugin.token).toBe("new-token");
+  });
+
+  it("switches a plugin off when another session disables it", async () => {
+    const store = withFrame(new TokenPlugin());
+
+    await store.initPlugin(apiPlugin("api-token"));
+
+    await store.handlePluginStateChange({
+      webPluginName: PLUGIN,
+      enabled: false,
+    });
+
+    expect(store.plugins[0].enabled).toBe(false);
+    expect(store.contextMenuItems.has(ITEM_KEY)).toBe(false);
+  });
+
+  it("switches a plugin back on when another session enables it", async () => {
+    const plugin = new TokenPlugin();
+    const store = withFrame(plugin);
+
+    await store.initPlugin(apiPlugin("api-token"));
+    await store.deactivatePlugin(PLUGIN);
+
+    await store.handlePluginStateChange({
+      webPluginName: PLUGIN,
+      enabled: true,
+    });
+
+    expect(store.plugins[0].enabled).toBe(true);
+    expect(plugin.token).toBe("api-token");
+    expect(store.contextMenuItems.has(ITEM_KEY)).toBe(true);
+  });
+});

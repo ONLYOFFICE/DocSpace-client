@@ -208,7 +208,12 @@ const RootFilter = observer(() => {
   return (
     <>
       {showCreateButton && (
-        <QuickActions items={quickActionItems} className={styles.quickActions} />
+        <QuickActions
+          items={quickActionItems}
+          className={styles.quickActions}
+          prevLabel={t("Common:Previous")}
+          nextLabel={t("Common:Next")}
+        />
       )}
       <AgentsFilter
         showMainButton={showCreateButton}

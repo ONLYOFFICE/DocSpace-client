@@ -2,5 +2,6 @@
   "CancellaionNotification": "Älä näytä peruutusilmoitusta enää",
   "DefaultHomepage": "Oletusetusivu",
   "GroupByRooms": "Ryhmittele huoneittain",
-  "OpenSameTab": "Avaa editorit samassa välilehdessä"
+  "OpenSameTab": "Avaa editorit samassa välilehdessä",
+  "ShowQuickActions": "Näytä pikatoiminnot"
 }

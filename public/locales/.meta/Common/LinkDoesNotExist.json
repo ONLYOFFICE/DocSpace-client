@@ -3,7 +3,7 @@
   "content": "The link you are trying to open does not exist.",
   "content_en_sha1_hash": "f7dcb59c0d6224005d43ea22aaf3099617981d79",
   "created_at": "2025-05-19T21:30:46.162Z",
-  "updated_at": "2026-05-15T14:00:06.930Z",
+  "updated_at": "2026-09-09T15:42:08.958Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to access a link that is no longer valid or has been removed.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 46,
       "context": "const ready = getTranslationReady();\n \n return ready ? (\n <ErrorContainer\n headerText={t(\"InvalidLink\")}\n bodyText={t(\"LinkDoesNotExist\")}\n />\n ) : null;\n };",
       "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/sdk/src/components/InvalidLinkError.tsx",
+      "line_number": 48,
+      "context": "const { t } = useTranslation([\"Common\"]);\n \n return (\n <ErrorContainer\n headerText={t(\"Common:InvalidLink\")}\n bodyText={t(\"Common:LinkDoesNotExist\")}\n />\n );\n };\n \n export default InvalidLinkError;",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/errors/ErrorInvalidLink.tsx",

@@ -212,7 +212,9 @@ const DeleteDialogComponent = (props) => {
 
   const getDialogTitle = () => {
     if (isAIAgent) {
-      return t("Common:DeleteAIAgentTitle");
+      return selection.length > 1
+        ? t("Common:DeleteAIAgentsTitle")
+        : t("Common:DeleteAIAgentTitle");
     }
 
     if (isTemplate) {
@@ -276,7 +278,9 @@ const DeleteDialogComponent = (props) => {
             style={{ marginTop: "16px" }}
             label={
               isAIAgent
-                ? t("Common:DeleteAIAgentWarning")
+                ? selection.length > 1
+                  ? t("Common:DeleteAIAgentsWarning")
+                  : t("Common:DeleteAIAgentWarning")
                 : isTemplate
                   ? t("DeleteTemplateWarning")
                   : isFormSpace

@@ -36,10 +36,9 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { autorun, runInAction } from "mobx";
 
-vi.mock("@docspace/ui-kit/utils/socket", () => ({
+vi.mock("@docspace/ui-kit/utils/socket", async (importOriginal) => ({
+  ...((await importOriginal()) as Record<string, unknown>),
   default: { emit: vi.fn(), on: vi.fn() },
-  SocketCommands: { Subscribe: "subscribe" },
-  SocketEvents: { ChangeWebPlugin: "change-web-plugin" },
 }));
 
 vi.mock("@docspace/ui-kit/components/toast", () => ({
@@ -58,8 +57,10 @@ import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTar
 import PluginStore from "../PluginStore";
 import type SelectedFolderStore from "../SelectedFolderStore";
 import type { TPlugin } from "../../helpers/plugins/types";
+import { PluginScopes, PluginStatus } from "../../helpers/plugins/enums";
 
 const PLUGIN = "Sample";
+const ITEM_KEY = "convert-file-item";
 
 const updatePlugin = api.plugins.updatePlugin as unknown as ReturnType<
   typeof vi.fn
@@ -100,6 +101,30 @@ const withPlugin = (overrides: Partial<PluginInstance> = {}) => {
   return { store, plugin };
 };
 
+// The settings gate: the plugin hides itself until its settings say otherwise,
+// and the portal has to follow that with the item it publishes.
+class ItemPlugin extends PluginInstance {
+  scopes: string[] = [PluginScopes.ContextMenu];
+
+  status: PluginStatus = PluginStatus.hide;
+
+  getStatus = () => this.status;
+
+  getContextMenuItems = () =>
+    new Map([[ITEM_KEY, { key: ITEM_KEY, label: "Convert" }]]);
+}
+
+const withItemPlugin = () => {
+  const store = createStore();
+  const plugin = new ItemPlugin();
+
+  runInAction(() => {
+    store.plugins = [plugin as unknown as TPlugin];
+  });
+
+  return { store, plugin };
+};
+
 const settingsOf = (store: PluginStore) =>
   store.buildReactPluginRuntime(PLUGIN, null, null).settings;
 
@@ -109,35 +134,40 @@ beforeEach(() => {
 
 describe("PluginStore react runtime settings", () => {
   describe("load", () => {
-    it("hands the plugin its stored settings", async () => {
+    it("hands the plugin its stored settings", () => {
       const { store } = withPlugin({
         settings: JSON.stringify({ enabled: true, tries: 3 }),
       });
 
-      await expect(settingsOf(store).load()).resolves.toEqual({
-        enabled: true,
-        tries: 3,
-      });
+      expect(settingsOf(store).load()).toEqual({ enabled: true, tries: 3 });
+    });
+
+    // The settings are already in the store by the time a plugin component
+    // renders, so a component can read them in a state initialiser.
+    it("reads the settings synchronously", () => {
+      const { store } = withPlugin({ settings: JSON.stringify({ tries: 3 }) });
+
+      expect(settingsOf(store).load()).not.toBeInstanceOf(Promise);
     });
 
     // The portal keeps whatever the plugin wrote, and an earlier version of a
     // plugin may well have written something else.
-    it("answers null instead of throwing on settings that are not JSON", async () => {
+    it("answers null instead of throwing on settings that are not JSON", () => {
       const { store } = withPlugin({ settings: "{not json" });
 
-      await expect(settingsOf(store).load()).resolves.toBeNull();
+      expect(settingsOf(store).load()).toBeNull();
     });
 
-    it("answers null when nothing is stored", async () => {
+    it("answers null when nothing is stored", () => {
       const { store } = withPlugin();
 
-      await expect(settingsOf(store).load()).resolves.toBeNull();
+      expect(settingsOf(store).load()).toBeNull();
     });
 
-    it("answers null when the plugin is not installed", async () => {
+    it("answers null when the plugin is not installed", () => {
       const store = createStore();
 
-      await expect(settingsOf(store).load()).resolves.toBeNull();
+      expect(settingsOf(store).load()).toBeNull();
     });
   });
 
@@ -186,6 +216,37 @@ describe("PluginStore react runtime settings", () => {
       await settingsOf(store).save({ tries: 3 });
 
       expect(updatePlugin).not.toHaveBeenCalled();
+    });
+
+    // A plugin gated on its settings decides in setAdminPluginSettingsValue
+    // whether it has anything to show, and nothing else asks it afterwards.
+    it("re-reads the status the plugin took from the settings", async () => {
+      const { store, plugin } = withItemPlugin();
+
+      plugin.setAdminPluginSettingsValue.mockImplementation(() => {
+        plugin.status = PluginStatus.active;
+      });
+
+      await settingsOf(store).save({ apiKey: "token" });
+
+      expect(store.plugins[0].status).toBe(PluginStatus.active);
+      expect(store.contextMenuItems.has(ITEM_KEY)).toBe(true);
+    });
+
+    it("takes the items back when the saved settings hide the plugin", async () => {
+      const { store, plugin } = withItemPlugin();
+
+      plugin.status = PluginStatus.active;
+      store.updatePluginStatus(PLUGIN);
+
+      plugin.setAdminPluginSettingsValue.mockImplementation(() => {
+        plugin.status = PluginStatus.hide;
+      });
+
+      await settingsOf(store).save({ apiKey: "" });
+
+      expect(store.plugins[0].status).toBe(PluginStatus.hide);
+      expect(store.contextMenuItems.has(ITEM_KEY)).toBe(false);
     });
   });
 

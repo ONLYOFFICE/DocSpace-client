@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { usersByType } from "@docspace/shared/__mocks__/handlers";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import type { Page } from "@playwright/test";
 
@@ -561,9 +560,6 @@ test.describe("Unlinked card", () => {
 });
 
 test.describe("Billing entry in the profile menu", () => {
-  // Spent up front so the dashboard welcome does not sit over the page.
-  const welcomeKey = (userId: string) => `dashboard_welcome_seen_${userId}`;
-
   const openProfileMenu = async (page: Page, baseUrl: string) => {
     await page.goto(`${baseUrl}/dashboard`);
 
@@ -581,9 +577,6 @@ test.describe("Billing entry in the profile menu", () => {
     mockRequest,
   }) => {
     useSaasBilling(mockRequest, { user: "admin" });
-    await page.addInitScript((key: string) => {
-      window.localStorage.setItem(key, "true");
-    }, welcomeKey(usersByType.admin.id));
 
     await openProfileMenu(page, baseUrl);
 
@@ -598,9 +591,6 @@ test.describe("Billing entry in the profile menu", () => {
     mockRequest,
   }) => {
     useSaasBilling(mockRequest, { user: "regular" });
-    await page.addInitScript((key: string) => {
-      window.localStorage.setItem(key, "true");
-    }, welcomeKey(usersByType.regular.id));
 
     await openProfileMenu(page, baseUrl);
 

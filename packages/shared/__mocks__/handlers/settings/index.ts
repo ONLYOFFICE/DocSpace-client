@@ -55,10 +55,19 @@ import { buildHandler } from "./build";
 import { settingsAdditionalHandler } from "./additional";
 import { culturesHandler } from "./cultures";
 import {
+  userQuotaSettingsHandler,
+  checkRecalculateQuotaHandler,
+} from "./quotaSettings";
+import {
   webPluginsHandler,
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
+  webPluginsTestBundleHandler,
+  webPluginsBrokenBundleHandler,
+  webPluginsInitErrorBundleHandler,
+  BROKEN_PLUGIN_MISSING_PACKAGE,
+  INIT_ERROR_PLUGIN_MESSAGE,
 } from "./webplugins";
 import { activeConnectionsHandler } from "./activeconnections";
 import { backupStorageHandler } from "./backupStorage";
@@ -100,6 +109,11 @@ export {
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
+  webPluginsTestBundleHandler,
+  webPluginsBrokenBundleHandler,
+  webPluginsInitErrorBundleHandler,
+  BROKEN_PLUGIN_MISSING_PACKAGE,
+  INIT_ERROR_PLUGIN_MESSAGE,
   ldapHandler,
   ldapDefaultHandler,
   ldapCronHandler,
@@ -116,6 +130,8 @@ export {
   whiteLabelLogosIsDefaultHandler,
   whiteLabelLogoTextHandler,
   whiteLabelLogosHandler,
+  userQuotaSettingsHandler,
+  checkRecalculateQuotaHandler,
 };
 
 export const settingsHandlers = (port: string) => [
@@ -158,4 +174,6 @@ export const settingsHandlers = (port: string) => [
   whiteLabelLogosIsDefaultHandler(port),
   whiteLabelLogoTextHandler(port),
   whiteLabelLogosHandler(port),
+  userQuotaSettingsHandler(port),
+  checkRecalculateQuotaHandler(port),
 ];

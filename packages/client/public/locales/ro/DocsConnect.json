@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Abonamentul va fi reînnoit automat <1>pe {{date}}</1>",
   "TopUpAndBuy": "Reîncarcă & Cumpără",
   "TopUpHint": "Portofelul dvs. va fi reîncărcat cu <1>{{amount}}</1> și abonamentul selectat va fi achiziționat automat. Sumele de reîncărcare sunt rotunjite la cel mai apropiat dolar întreg.",
+  "TopUpWalletHint": "Nu există suficiente credite pentru abonamentul {{service}} selectat. Alimentați-vă portofelul, apoi reveniți pentru a finaliza achiziția.",
   "TotalDueTodayTooltip": "Astăzi plătiți doar pentru numărul selectat de utilizatori pentru zilele rămase până la data facturării. Ulterior, suma integrală va fi taxată o dată pe ciclu de facturare, la data dvs. obișnuită de facturare.",
   "TotalMonthly": "Total lunar",
   "TrialAvailable": "Este disponibilă o versiune de încercare gratuită de o lună. Nu este necesar cardul de credit.",

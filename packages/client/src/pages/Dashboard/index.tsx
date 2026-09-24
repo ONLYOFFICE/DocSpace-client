@@ -110,13 +110,6 @@ type DashboardProps = ChatNoAccessStoreProps & {
   showLoader: boolean;
   currentDeviceType?: TStore["settingsStore"]["currentDeviceType"];
   requestAppTour: (appId: AppId) => void;
-  userId?: string;
-  /** False until the welcome has been shown to this user (and dismissed). */
-  isWelcomeSeen: boolean;
-  /** Reads `isWelcomeSeen` back for `userId` — the flag is per-user. */
-  hydrateWelcome: (userId?: string) => void;
-  /** Marks the welcome as shown, whether the tour was taken from it or not. */
-  dismissWelcome: (userId?: string) => void;
   /** Arms the dashboard's own tour, which `DashboardTour` then starts. */
   requestDashboardTour: () => void;
   /** Admins / owners / room admins — the set allowed to create rooms. */
@@ -147,10 +140,6 @@ const Dashboard = (props: DashboardProps) => {
     showLoader,
     currentDeviceType,
     requestAppTour,
-    userId,
-    isWelcomeSeen,
-    hydrateWelcome,
-    dismissWelcome,
     requestDashboardTour,
     canCreateRooms,
     isAdminOrOwner,
@@ -212,49 +201,23 @@ const Dashboard = (props: DashboardProps) => {
   // behind the dashboard.
   useSdkFrame({ appId: "dashboard", enabled: false });
 
-  // The welcome flag is per-user and lives in storage, so it has to be read
-  // back once the signed-in user is known. Keyed on `userId` rather than run
-  // once: the same page survives a user switch on this route.
-  React.useEffect(() => {
-    hydrateWelcome(userId);
-  }, [hydrateWelcome, userId]);
-
   /**
-   * Whether the welcome is on screen, which two different things can ask for:
-   * the first visit (the stored flag) and the help button (this state). Local
-   * rather than derived from the store alone, because reopening it deliberately
-   * must not depend on un-dismissing a flag that means "has been offered once".
+   * Whether the welcome is on screen. The help button in the header is its only
+   * entry point — the modal is never offered on its own, not even on a first
+   * visit, so nothing but this state decides it.
    */
   const [isWelcomeOpen, setIsWelcomeOpen] = React.useState(false);
 
-  /**
-   * The first-visit offer, made once to a user who can actually be walked
-   * through the page afterwards.
-   *
-   * Not on mobile, where no tour runs at all (`useTour` refuses to) — and the
-   * flag is deliberately left unspent there rather than dismissed, so somebody
-   * whose first visit was on a phone still gets the offer on their desktop.
-   * Behind the loader for the same reason the tour is: the modal introduces the
-   * page, and the page is a skeleton until then.
-   */
-  const isFirstVisit = !isWelcomeSeen && !showLoader && !isMobile;
-
-  const showWelcome = isFirstVisit || isWelcomeOpen;
-
   const onWelcomeClose = React.useCallback(() => {
     setIsWelcomeOpen(false);
-    // Spends the first-visit offer. A no-op once already spent, so closing a
-    // modal reopened from the help button costs nothing.
-    dismissWelcome(userId);
-  }, [dismissWelcome, userId]);
+  }, []);
 
-  // Both buttons dismiss; this one arms the tour on the way out. The host below
-  // is what starts it, once the page has settled.
+  // Closes and arms the tour on the way out. The host below is what starts it,
+  // once the page has settled.
   const onWelcomeTakeTour = React.useCallback(() => {
     setIsWelcomeOpen(false);
-    dismissWelcome(userId);
     requestDashboardTour();
-  }, [dismissWelcome, userId, requestDashboardTour]);
+  }, [requestDashboardTour]);
 
   // AI chat panel, mirroring the Home page: the "AI Chat" quick action opens
   // the shared panel (AiChatStore), which the dashboard hosts itself since it
@@ -380,6 +343,8 @@ const Dashboard = (props: DashboardProps) => {
               <QuickActions
                 items={createItems}
                 className={styles.quickActions}
+                prevLabel={t("Common:Previous")}
+                nextLabel={t("Common:Next")}
               />
             </section>
 
@@ -440,7 +405,7 @@ const Dashboard = (props: DashboardProps) => {
           />
         ) : null}
 
-        {showWelcome ? (
+        {isWelcomeOpen ? (
           <WelcomeDialog
             onTakeTour={onWelcomeTakeTour}
             onClose={onWelcomeClose}
@@ -506,12 +471,6 @@ const DashboardConnected = inject((stores: TStore) => {
       if (appId in appTourStores)
         appTourStores[appId as keyof typeof appTourStores].requestTour();
     },
-    // The welcome flag is per-user, so the id is passed through rather than read
-    // inside the store — which has no view of who is signed in.
-    userId: userStore.user?.id,
-    isWelcomeSeen: dashboardTourStore.isWelcomeSeen,
-    hydrateWelcome: dashboardTourStore.hydrateWelcome,
-    dismissWelcome: dashboardTourStore.dismissWelcome,
     requestDashboardTour: dashboardTourStore.requestTour,
     // Same set the Home quick actions and the agents header button gate on.
     canCreateRooms: authStore.isAdmin || authStore.isRoomAdmin,

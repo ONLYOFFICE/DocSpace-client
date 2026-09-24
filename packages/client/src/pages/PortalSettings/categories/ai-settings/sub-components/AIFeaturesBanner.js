@@ -104,8 +104,7 @@ const useAnimatedHeight = (ref, key) => {
     heightRef.current = next;
 
     if (prev === null || prev === next) return;
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches)
-      return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
 
     el.style.height = `${prev}px`;
     void el.offsetHeight;
@@ -125,15 +124,16 @@ const useAnimatedHeight = (ref, key) => {
 // what the page as a whole switches on, without repeating each other. What each
 // tab adds is said between them, by the description.
 const getBannerTexts = (t, isWebSearchTab) => ({
-  activateTitle: t("Common:ActivateAIFeaturesToGetStarted"),
   activateLabel: t("Common:Activate"),
   ...(isWebSearchTab
     ? {
+        activateTitle: t("Common:ActivateAISearchToGetStarted"),
         activateDescription: t("Common:ActivateAISearchDescription"),
         enabledTitle: t("Common:AISearchEnabledTitle"),
         enabledDescription: t("Common:AISearchEnabledDescription"),
       }
     : {
+        activateTitle: t("Common:ActivateAIFeaturesToGetStarted"),
         activateDescription: t("Common:GetAccessToAIModels"),
         enabledTitle: t("Common:AIFeaturesEnabled"),
         enabledDescription: t("Common:AIFeaturesEnabledDescription"),
@@ -261,7 +261,7 @@ const AIFeaturesBanner = ({
             <div className={styles.featureRow}>
               <AIIcon className={styles.payIcon} />
               <Text fontSize="12px" fontWeight={600}>
-                {t("Common:AIModelsWebSearchKnowledgeBase")}
+                {t("Common:AIModelsAndKnowledgeBase")}
               </Text>
             </div>
           )}

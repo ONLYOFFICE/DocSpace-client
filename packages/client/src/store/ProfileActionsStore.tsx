@@ -47,6 +47,7 @@ import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import SpacesReactSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
 import LampReactSvgUrl from "PUBLIC_DIR/images/lamp.react.svg?url";
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
+import AppsGridReactSvgUrl from "PUBLIC_DIR/images/icons/16/apps-grid.react.svg?url";
 
 import type {
   ComponentType,
@@ -65,6 +66,7 @@ import axios from "axios";
 // unrelated copy whose queued commands nobody ever delivers.
 import { zendeskAPI } from "@docspace/ui-kit/components/article/zendesk/Zendesk.utils";
 import { CategoryType } from "@docspace/shared/constants";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
@@ -302,6 +304,13 @@ class ProfileActionsStore {
     window.DocSpace.navigate(url);
   };
 
+  onDocsAdminPanelClick = () => {
+    const { docsAdminPanelUrl } = this.settingsStore;
+
+    if (docsAdminPanelUrl)
+      window.open(docsAdminPanelUrl, "_blank", "noopener,noreferrer");
+  };
+
   onHelpCenterClick = () => {
     const helpCenterDomain = this.settingsStore.helpCenterDomain;
 
@@ -388,13 +397,19 @@ class ProfileActionsStore {
       tenantAlias,
       limitedAccessSpace,
       displayAbout,
+      docsAdminPanelUrl,
     } = this.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.currentTariffStatusStore.isCommunity;
     const isNotPaidPeriod = this.currentTariffStatusStore.isNotPaidPeriod;
     // userStore.user is TUser | null; the old JS destructuring
     // crashed here when user was null — the `!` keeps that runtime unchanged.
-    const { isVisitor, isCollaborator } = this.userStore.user!;
+    const {
+      isVisitor,
+      isCollaborator,
+      isAdmin: isFullAdmin,
+      isOwner,
+    } = this.userStore.user!;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
     // const peopleAvailable = modules.some((m) => m.appName === "people");
@@ -413,6 +428,24 @@ class ProfileActionsStore {
             label: t("Common:Settings"),
             onClick: (obj) => this.onSettingsClick("/portal-settings", obj),
             url: SETTINGS_URL,
+            preventNewTab: true,
+          }
+        : null;
+
+    // Server (standalone) only, and only for full admins - a room admin or a
+    // module admin has nothing to do in the editors' admin panel. The URL is
+    // whatever the backend publishes; without it there is nowhere to go.
+    const docsAdminPanel: TProfileActionType | null =
+      standalone && (isFullAdmin || isOwner) && docsAdminPanelUrl
+        ? {
+            key: "user-menu-docs-admin-panel",
+            icon: AppsGridReactSvgUrl,
+            label: t("Common:DocsAdminPanel", {
+              editorsName: getBrandName("ProductEditorsName"),
+            }),
+            onClick: this.onDocsAdminPanelClick,
+            url: docsAdminPanelUrl,
+            isOutsideLink: true,
             preventNewTab: true,
           }
         : null;
@@ -552,6 +585,7 @@ class ProfileActionsStore {
       },
       accounts,
       settings,
+      docsAdminPanel,
       management,
       !isNotPaidPeriod &&
         isAdmin &&
@@ -623,7 +657,10 @@ class ProfileActionsStore {
     }
 
     if (debugInfo) {
-      actions.splice(4, 0, {
+      // Index 5 == right before "Payments" (profile, accounts, settings,
+      // docs admin panel, management); the slots above hold nulls when their
+      // condition is off, so the offset does not depend on what is shown.
+      actions.splice(5, 0, {
         key: "user-menu-debug",
         icon: InfoOutlineReactSvgUrl,
         label: "Debug Info",

@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Abonements tiks automātiski atjaunots <1>{{date}}</1>",
   "TopUpAndBuy": "Papildināt un pirkt",
   "TopUpHint": "Jūsu maks tiks papildināts par <1>{{amount}}</1>, un izvēlētais abonements tiks iegādāts automātiski. Papildināšanas summas tiek noapaļotas uz augšu līdz nākamajam veselam dolāram.",
+  "TopUpWalletHint": "Izvēlētajam {{service}} abonementam nav pietiekami kredītu. Papildiniet savu maku un pēc tam atgriezieties, lai pabeigtu pirkumu.",
   "TotalDueTodayTooltip": "Šodien jūs maksājat tikai par izvēlēto lietotāju skaitu par atlikušajām dienām līdz jūsu norēķinu datumam. Turpmāk pilna summa tiks iekasēta vienreiz norēķinu ciklā jūsu ierastajā norēķinu datumā.",
   "TotalMonthly": "Kopā mēnesī",
   "TrialAvailable": "Pieejams bezmaksas viena mēneša izmēģinājums. Kredītkarte nav nepieciešama.",

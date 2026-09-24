@@ -37,16 +37,26 @@
 @use "@docspace/ui-kit/styles/variables/quick-actions" as quick-actions;
 
 // Quick-actions banner above the files/rooms list (ported from the SDK
-// layouts). Centered, capped to fit the widest banner (Rooms = 5 room tiles +
-// AI chat = 6) in a single row; narrower banners stay centered within it. The
-// cap is derived from the ui-kit tile metrics — hardcoding it went stale when
-// the tile size/gap changed and clipped the last tile at every width, so
-// "Show more" appeared with room to spare.
+// layouts). The cap goes on the tile row rather than on the banner: the banner
+// spans the content column so the floating controls have room to sit clear of
+// the tiles, while the row itself stays centred and no wider than the widest
+// banner (Rooms = 5 room tiles + AI chat = 6). The cap is derived from the
+// ui-kit tile metrics — hardcoding it went stale when the tile size or gap
+// changed and clipped the last tile at every width.
+// The banner reaches the section's own edges, so a tile scrolling out of the
+// strip runs all the way to the boundary and fades there, and the controls have
+// the edge to sit at. The tiles are held back onto the list's line by the
+// strip's own padding rather than by a narrower banner — that is the difference
+// between a tile that leaves the page and one that stops short of it. The
+// section publishes both distances, so neither number is copied here.
 .quickActions {
-  margin: 4px auto 16px;
-  justify-content: center;
-  max-width: quick-actions.row-width();
-  width: 100%;
+  --quick-actions-row-max-width: #{quick-actions.row-width()};
+  --quick-actions-edge-inset: var(--section-banner-padding-inline, 0px);
+  --_slot-bleed: var(--section-banner-bleed-inline, 0px);
+
+  margin: 4px 0 16px;
+  margin-inline: calc(-1 * var(--_slot-bleed));
+  width: calc(100% + 2 * var(--_slot-bleed));
   flex-shrink: 0;
 }
 

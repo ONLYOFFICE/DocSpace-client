@@ -184,6 +184,7 @@ export interface ManualBackupProps {
 	walletBalance?: number;
 	walletCodeCurrency?: string;
 	isCardLinked?: boolean;
+	isDelayedPaymentMethod?: boolean;
 	onOpenTopUpDialog?: () => void;
 	fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
 }

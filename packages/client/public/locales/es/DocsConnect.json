@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "La suscripción se renovará automáticamente <1>el {{date}}</1>",
   "TopUpAndBuy": "Recargar y Comprar",
   "TopUpHint": "Su monedero se recargará con <1>{{amount}}</1> y la suscripción seleccionada se comprará automáticamente. Los importes de recarga se redondean al siguiente dólar completo.",
+  "TopUpWalletHint": "No hay créditos suficientes para la suscripción a {{service}} seleccionada. Recargue su monedero y vuelva para completar la compra.",
   "TotalDueTodayTooltip": "Hoy solo paga por la cantidad seleccionada de usuarios durante los días restantes hasta su fecha de facturación. En adelante, se cobrará el importe completo una vez por ciclo de facturación en su fecha de facturación habitual.",
   "TotalMonthly": "Total mensual",
   "TrialAvailable": "Hay disponible una prueba gratuita de un mes. No se requiere tarjeta de crédito.",

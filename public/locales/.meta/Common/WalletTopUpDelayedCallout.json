@@ -1,0 +1,29 @@
+{
+  "key_path": "WalletTopUpDelayedCallout",
+  "content": "Your Wallet balance updates automatically after the funds arrive. You can top up again, including by card.",
+  "content_en_sha1_hash": "ba3c9b79c9aeb061db9e161c68f1448d2d5be6c9",
+  "created_at": "2026-09-10T16:17:38.334Z",
+  "updated_at": "2026-09-10T16:21:00.743Z",
+  "comment": {
+    "text": "Informational callout on the payment completion page explaining that the wallet balance updates automatically once funds arrive and suggesting alternative top-up methods like card payments.",
+    "is_auto": true,
+    "updated_at": "2026-09-10T16:21:00.743Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 122,
+      "context": "export const getDelayedContent = (t: TTranslation): TDelayedContent => {\n return {\n title: t(\"Common:WalletTopUpStepCardSaved\"),\n hint: t(\"Common:WalletTopUpDelayedHint\"),\n callout: t(\"Common:WalletTopUpDelayedCallout\"),\n steps: [\n { key: \"card\", label: t(\"Common:WalletTopUpStepCardSaved\") },\n {\n key: \"transfer\",\n label: t(\"Common:WalletTopUpDelayedStepSepaSending\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

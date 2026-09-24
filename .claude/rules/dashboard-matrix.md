@@ -60,8 +60,8 @@ never reaches that far down and `fullPage` does not help.
 - **The clock is pinned** (`FIXED_NOW`). Tariff and Docs Connect mocks answer
   with fixed calendar dates, so an unpinned frame silently becomes an
   expired-subscription one the day a date passes.
-- The welcome modal is spent up front, under the signed-in user's real id — the
-  flag is per-user, and a guessed id writes one nobody reads.
+- Nothing has to be dismissed on arrival: the welcome modal opens only from the
+  header's help button, never on its own.
 
 ## Neighbouring specs
 

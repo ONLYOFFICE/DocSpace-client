@@ -3,7 +3,7 @@
   "content": "Date",
   "content_en_sha1_hash": "eb9a4bc1c0c153e4e4b042a79113b815b7e3021d",
   "created_at": "2025-05-19T21:30:44.395Z",
-  "updated_at": "2026-05-15T14:00:06.870Z",
+  "updated_at": "2026-09-22T10:56:05.175Z",
   "comment": {
     "text": "This is a table header label for a column displaying a date. It appears in transaction history, audit trail, and login history tables.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
       "line_number": 59,
-      "context": "const isAiTools = serviceName === AI_TOOLS;\n \n const defaultColumns = [\n {\n key: \"Date\",\n title: t(\"Date\"),\n enable: true,\n resizable: true,\n sortBy: \"AZ\",\n active: true,",
+      "context": "const withSource = hasTransactionSource(serviceName);\n \n const defaultColumns = [\n {\n key: \"Date\",\n title: t(\"Date\"),\n enable: true,\n resizable: true,\n sortBy: \"AZ\",\n active: true,",
       "module": "/libs/ui-kit"
     },
     {

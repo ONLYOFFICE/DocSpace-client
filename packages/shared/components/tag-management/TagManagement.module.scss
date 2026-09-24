@@ -65,6 +65,11 @@
     .divider {
       --divider-color: #{colors.$gray-dark-strong};
     }
+
+    .row .checkbox {
+      --checkbox-disable-border-color: #{colors.$gray-dark-strong};
+      --checkbox-disable-arrow-color: #{colors.$gray-dark};
+    }
   }
 }
 

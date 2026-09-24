@@ -21,7 +21,7 @@
   "BasicInfo": "Informații de bază",
   "Client": "Client",
   "ClientCopy": "ID client a fost copiat cu succes în clipboard",
-  "ClientHelpButton": "Datele de autentificare pentru folosirea OAth 2.0 ca metodă de autentificare.<br/> <strong>Mențiune:</strong> Orice administrator care cunoaște ID-ul de client al aplicației va putea extrage informații despre aplicația, inclusiv denumirea aplicației, metodă de autentificare, domeniile de aplicare și URL-ul de redirecționare.",
+  "ClientHelpButton": "Datele de autentificare pentru folosirea OAuth 2.0 ca metodă de autentificare.<br/> <strong>Mențiune:</strong> Orice administrator care cunoaște ID-ul de client al aplicației va putea extrage informații despre aplicația, inclusiv denumirea aplicației, metodă de autentificare, domeniile de aplicare și URL-ul de redirecționare.",
   "ClientSecretResetSuccessfully": "Cheia secretă a clientului este resetară cu succes",
   "CodeVerifier": "Verificare cod",
   "Creator": "Creator",

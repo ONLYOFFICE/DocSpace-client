@@ -62,10 +62,11 @@ const openPluginsPage = async (
   return card;
 };
 
+const toggleButton = (card: Locator) =>
+  card.getByTestId("enable_plugin_toggle_button");
+
 const toggleInput = (card: Locator) =>
-  card
-    .getByTestId("enable_plugin_toggle_button")
-    .getByTestId("toggle-button-input");
+  toggleButton(card).getByTestId("toggle-button-input");
 
 test.describe("Plugin whose bundle loads but fails to initialize", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -131,14 +132,16 @@ test.describe("Plugin whose bundle loads but fails to initialize", () => {
   }) => {
     const card = await openPluginsPage(page, baseUrl);
 
-    const toggle = toggleInput(card);
+    // The input is visually hidden under the toggle's icon, which intercepts
+    // the pointer, so click the toggle itself and read the state off the input.
+    const toggle = toggleButton(card);
 
     await toggle.click();
     await expect(page.getByText("Plugin disabled")).toBeVisible();
 
     await toggle.click();
     await expect(page.getByText("Plugin enabled")).toBeVisible();
-    await expect(toggle).toBeChecked();
+    await expect(toggleInput(card)).toBeChecked();
 
     await expect(card.getByTestId(CARD_ICON_TEST_ID)).toBeVisible();
 

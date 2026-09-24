@@ -1,33 +1,21 @@
 {
-  "key_path": "SectionMoveConfirmation",
-  "content": "Move to {{sectionName}}?",
-  "content_en_sha1_hash": "ee3b1c51a995b4cd544de5f673d85dd47977b235",
-  "created_at": "2025-06-02T10:19:15.915Z",
-  "updated_at": "2026-09-24T18:43:14.846Z",
+  "key_path": "ExportDocxDocument",
+  "content": ".docx document",
+  "content_en_sha1_hash": "b6cf6842e986b193051d3c01738b54b80b20308d",
+  "created_at": "2026-09-24T18:42:30.929Z",
+  "updated_at": "2026-09-24T18:44:41.890Z",
   "comment": {
-    "text": "This is a dialog title asking for confirmation to move an item to a specific section. The `{{sectionName}}` variable will be replaced with the name of the destination section (e.g., \"Archive\" or \"Trash\").",
+    "text": "Label for an export format option in a menu or dropdown, identifying the Word document file type.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:43:49.875Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-09-24T18:44:41.890Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
-      "line_number": 104,
-      "context": "visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>\n {t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:Archive\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{description}</Text>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 237,
-      "context": "if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");\n \n return t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n };\n \n const noteText = getDialogContent(",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(rooms)/_components/move-to-archive-dialog/index.tsx",
-      "line_number": 116,
-      "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:Archive\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>",
-      "module": "/packages/sdk"
+      "file_path": "/libs/ui-kit/ai-agent/providers/files/use-integration.tsx",
+      "line_number": 113,
+      "context": "label: t(\"Common:ExportPdfDocument\", { defaultValue: \".pdf document\" }),\n extension: EXTENSION_BY_FORMAT[EXPORT_FORMAT_IDS.pdf],\n },\n {\n id: EXPORT_FORMAT_IDS.docx,\n label: t(\"Common:ExportDocxDocument\", {\n defaultValue: \".docx document\",\n }),\n extension: EXTENSION_BY_FORMAT[EXPORT_FORMAT_IDS.docx],\n },\n {",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -161,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Size",
   "content_en_sha1_hash": "b7152342a267362add3c0d7f69f720f7a9c76c9e",
   "created_at": "2025-05-19T21:30:48.889Z",
-  "updated_at": "2026-09-08T08:44:10.071Z",
+  "updated_at": "2026-09-24T18:43:14.918Z",
   "comment": {
     "text": "This is a label for the size of a file or item, displayed in various information panels and table headers.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.tsx",
-      "line_number": 198,
+      "line_number": 150,
       "context": "<div\n className=\"property\"\n data-testid=\"info_panel_gallery_size_property\"\n >\n <Text className={classNames(styles.select, \"property-title\")}>\n {t(\"Common:Size\")}\n </Text>\n <Text className={classNames(styles.select, \"property-content\")}>\n {sizeWithExtra}\n </Text>\n </div>",
       "module": "/packages/client"
     },

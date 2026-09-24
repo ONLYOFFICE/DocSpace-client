@@ -3,7 +3,7 @@
   "content": "Add files from device",
   "content_en_sha1_hash": "1b86a08e237448f59276bfdf69d6db5ec08b13af",
   "created_at": "2026-08-31T18:23:36.546Z",
-  "updated_at": "2026-08-31T18:28:21.027Z",
+  "updated_at": "2026-09-24T18:43:15.102Z",
   "comment": {
     "text": "Button label in an action menu that triggers the local file picker to select files for uploading.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/providers/files/use-integration.tsx",
-      "line_number": 117,
+      "line_number": 149,
       "context": "icon: <CatalogDocuments className={styles.composerActionIcon} />,\n onClick: () => setPickerVisible(true),\n },\n {\n id: \"upload-from-device\",\n text: t(\"Common:UploadFromDevice\", {\n defaultValue: \"Upload from device\",\n }),\n icon: <UploadIcon className={styles.composerActionIcon} />,\n onClick: () => deviceUploaderRef.current?.open(),\n },",
       "module": "/libs/ui-kit"
     }

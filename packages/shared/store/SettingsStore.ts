@@ -198,7 +198,6 @@ class SettingsStore {
     domain: "",
     uploadPath: "",
     uploadDomain: "",
-    uploadDashboard: "",
   };
 
   logoUrl: Nullable<ILogo> = null;

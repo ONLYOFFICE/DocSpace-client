@@ -33,43 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { Key } from "react";
 import type { NavigateFunction } from "react-router";
 import type { IndexRange } from "react-virtualized";
+import type { TOformFile } from "@docspace/shared/api/oforms/types";
 
-export interface TFile {
-  id: Key | null | undefined;
-  attributes: {
-    template_image: {
-      data: {
-        id: number;
-        attributes: {
-          formats: {
-            thumbnail: {
-              ext: string;
-              url: string;
-              hash: string;
-              mime: string;
-              name: string;
-              path: string | null;
-              size: number;
-              width: number;
-              height: number;
-            };
-          };
-        };
-      };
-    };
-    name_form: string;
-    card_prewiew: {
-      data?: {
-        attributes: {
-          url: string;
-        };
-      };
-    };
-  };
-}
+export type TFile = TOformFile;
 
 export interface TilesProps {
   tReady: boolean;
@@ -79,7 +47,7 @@ export interface TilesProps {
   setOformFilesLoaded: (loaded: boolean) => void;
   isShowOneTile?: boolean;
   smallPreview: boolean;
-  setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
+  setGallerySelected: (item: TOformFile | null) => void;
   submitToGalleryTileIsVisible: boolean;
   canSubmitToFormGallery: () => boolean;
   viewMobile: boolean;

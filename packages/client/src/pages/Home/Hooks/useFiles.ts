@@ -383,13 +383,7 @@ const useFiles = ({
             extension: currentExtensionGallery.replace(".", ""),
             id: -1,
             fromTemplate: true,
-            title: (
-              gallerySelected as {
-                attributes: {
-                  name_form: string;
-                };
-              }
-            ).attributes.name_form,
+            title: gallerySelected.title,
             openEditor: !isFormRoom,
             edit: !isFormRoom,
           };

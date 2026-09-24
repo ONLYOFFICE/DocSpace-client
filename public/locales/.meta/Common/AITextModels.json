@@ -1,0 +1,35 @@
+{
+  "key_path": "AITextModels",
+  "content": "Text models",
+  "content_en_sha1_hash": "5d7dd9a9ed76f5980b88e58e134bac42b81e7c58",
+  "created_at": "2026-09-23T12:24:05.960Z",
+  "updated_at": "2026-09-23T12:27:36.704Z",
+  "comment": {
+    "text": "Section header in the AI settings that labels a list or table of available AI text models.",
+    "is_auto": true,
+    "updated_at": "2026-09-23T12:27:36.704Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/RowView/index.tsx",
+      "line_number": 195,
+      "context": "</Text>\n \n {chatRows.length ? (\n <React.Fragment>\n <Text fontSize=\"16px\" fontWeight={700} className={styles.groupTitle}>\n {t(\"Common:AITextModels\")}\n </Text>\n {renderRows(chatRows, \"rowContainer\", 72)}\n </React.Fragment>\n ) : null}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/TableView/index.tsx",
+      "line_number": 189,
+      "context": "</Text>\n \n {chatRows.length ? (\n <React.Fragment>\n <Text fontSize=\"16px\" fontWeight={700} className={styles.groupTitle}>\n {t(\"Common:AITextModels\")}\n </Text>\n {renderTable(chatRows, chatTableRef)}\n </React.Fragment>\n ) : null}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

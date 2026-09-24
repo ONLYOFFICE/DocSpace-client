@@ -35,7 +35,6 @@
 
 // @ts-nocheck
 
-
 import {
   ApplyFilterOption,
   FilterLocation,

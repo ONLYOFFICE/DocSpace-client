@@ -1,13 +1,13 @@
 {
   "key_path": "LinkPreviewDescription",
-  "content": "{{organizationName}} {{productName}} is a workspace where you can create documents, collaborate in rooms, and collect data with forms, all in one place.",
-  "content_en_sha1_hash": "29ef5616a1bc9c05b711976e0820b6f3e6ce54c7",
-  "created_at": "2026-09-14T09:17:12.879Z",
-  "updated_at": "2026-09-16T18:53:34.566Z",
+  "content": "Run collaborative rooms, collect data with forms, manage files, and automate document workflows with AI without switching tools.",
+  "content_en_sha1_hash": "b548702d2193b37f84dbddc3d09abb30b48d902a",
+  "created_at": "2026-09-23T12:24:25.369Z",
+  "updated_at": "2026-09-23T12:26:08.678Z",
   "comment": {
-    "text": "Link preview description that appears when a workspace link is shared; contains {{organizationName}} and {{productName}} as part of a summary sentence.",
+    "text": "A descriptive text for a link preview card that summarizes the platform's core features and capabilities.",
     "is_auto": true,
-    "updated_at": "2026-09-14T20:39:13.957Z",
+    "updated_at": "2026-09-23T12:26:08.678Z",
     "model": "gemma4:26b"
   },
   "usage": [

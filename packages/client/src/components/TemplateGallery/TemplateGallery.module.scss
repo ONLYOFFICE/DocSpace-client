@@ -141,3 +141,12 @@
     margin-inline: 0 7px;
   }
 }
+
+.galleryContent {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.dimmed {
+  opacity: 0.5;
+  pointer-events: none;
+}

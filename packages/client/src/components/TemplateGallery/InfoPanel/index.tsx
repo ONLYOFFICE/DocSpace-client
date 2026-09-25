@@ -34,7 +34,7 @@
  */
 
 import { inject, observer } from "mobx-react";
-import type { Key } from "react";
+import type { TOformFile } from "@docspace/shared/api/oforms/types";
 import InfoPanel from "@docspace/ui-kit/components/section/sub-components/InfoPanel";
 import SubInfoPanelBody from "@docspace/ui-kit/components/section/sub-components/InfoPanelBody";
 import SubInfoPanelHeader from "@docspace/ui-kit/components/section/sub-components/InfoPanelHeader";
@@ -47,7 +47,7 @@ import {
 interface InfoPanelTemplateGalleryProps {
   isVisibleInfoPanelTemplateGallery: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
-  setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
+  setGallerySelected: (item: TOformFile | null) => void;
 }
 
 const InfoPanelTemplateGallery = ({

@@ -43,6 +43,7 @@ import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
+import PurposeFilter from "./PurposeFilter";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
 import { useMobileDetection } from "../hooks/useMobileDetection";
@@ -57,13 +58,10 @@ const FilterContent: FC<FilterContentProps> = (props) => {
 
     oformsFilter,
     noLocales,
-    fetchCategoryTypes,
-    fetchCategoriesOfCategoryType,
-    setCategoryFilterLoaded,
+    menuItems,
     categoryFilterLoaded,
 
     filterOformsByLocaleIsLoading,
-    setFilterOformsByLocaleIsLoading,
     setLanguageFilterLoaded,
     languageFilterLoaded,
     oformsLocal,
@@ -81,13 +79,9 @@ const FilterContent: FC<FilterContentProps> = (props) => {
   }, [setShowOneTile, isShowOneTile]);
 
   const categoryFilterProps = {
-    oformsFilter,
     noLocales,
-    fetchCategoryTypes,
-    fetchCategoriesOfCategoryType,
+    menuItems,
     filterOformsByLocaleIsLoading,
-    setFilterOformsByLocaleIsLoading,
-    setCategoryFilterLoaded,
     categoryFilterLoaded,
     languageFilterLoaded,
     isShowInitSkeleton,
@@ -116,6 +110,14 @@ const FilterContent: FC<FilterContentProps> = (props) => {
     isShowInitSkeleton,
     oformsFilter,
     filterOformsBySearch,
+    isLanguageFilterChange,
+  };
+
+  const purposeFilterProps = {
+    filterOformsByLocaleIsLoading,
+    categoryFilterLoaded,
+    languageFilterLoaded,
+    isShowInitSkeleton,
     isLanguageFilterChange,
   };
 
@@ -158,6 +160,7 @@ const FilterContent: FC<FilterContentProps> = (props) => {
   return (
     <div className={styles.filter}>
       <div className={styles.formOnlyFilters}>
+        <PurposeFilter {...purposeFilterProps} />
         <CategoryFilter {...categoryFilterProps} />
         <LanguageFilter {...languageFilterProps} />
       </div>

@@ -21,7 +21,7 @@
   "BasicInfo": "Podstawowe informacje",
   "Client": "Klient",
   "ClientCopy": "ID klienta został pomyślnie skopiowany do schowka",
-  "ClientHelpButton": "Dane uwierzytelniające dla OAth 2.0 jako Twojego typu uwierzytelniania.<br/> <strong>Uwaga:</strong> każdy administrator przedsiębiorstwa, który zna ID klienta aplikacji, będzie w stanie pobrać informacje o aplikacji, w tym jej nazwę, typ uwierzytelniania, zakresy aplikacji oraz URI przekierowania.",
+  "ClientHelpButton": "Dane uwierzytelniające dla OAuth 2.0 jako Twojego typu uwierzytelniania.<br/> <strong>Uwaga:</strong> każdy administrator przedsiębiorstwa, który zna ID klienta aplikacji, będzie w stanie pobrać informacje o aplikacji, w tym jej nazwę, typ uwierzytelniania, zakresy aplikacji oraz URI przekierowania.",
   "ClientSecretResetSuccessfully": "Sekret klienta został pomyślnie zresetowany",
   "CodeVerifier": "Weryfikator kodów",
   "Creator": "Twórca",

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import classNames from "classnames";
@@ -41,83 +41,18 @@ import classNames from "classnames";
 import CategoryFilterDesktop from "./DesktopView";
 import CategoryFilterMobile from "./MobileView";
 import styles from "./CategoryFilter.module.scss";
-import type {
-  CategoryFilterProps,
-  MenuItem,
-  Category,
-} from "./CategoryFilter.types";
+import type { CategoryFilterProps } from "./CategoryFilter.types";
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({
-  oformsFilter,
   noLocales,
-  fetchCategoryTypes,
-  fetchCategoriesOfCategoryType,
+  menuItems,
   filterOformsByLocaleIsLoading,
-  setFilterOformsByLocaleIsLoading,
-  setCategoryFilterLoaded,
   categoryFilterLoaded,
   languageFilterLoaded,
   isShowInitSkeleton,
   viewMobile,
   isLanguageFilterChange,
 }) => {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      if (!oformsFilter.locale) return;
-      const categoryData = await fetchCategoryTypes();
-      if (!categoryData) {
-        filterOformsByLocaleIsLoading &&
-          setFilterOformsByLocaleIsLoading(false);
-
-        return;
-      }
-
-      const categoryPromises = categoryData.map(
-        (item: Category) =>
-          new Promise<Category[]>((resolve) => {
-            resolve(fetchCategoriesOfCategoryType(item.attributes.categoryId));
-          }),
-      );
-
-      Promise.all(categoryPromises)
-        .then((results) => {
-          const menuItems: MenuItem[] = categoryData.map(
-            (item: Category, index: number) => ({
-              key: item.attributes.categoryId,
-              label: item.attributes.name,
-              categories: results[index],
-            }),
-          );
-          setMenuItems(menuItems);
-        })
-        .catch((err) => {
-          console.error(err);
-          const menuItems: MenuItem[] = categoryData.map((item: Category) => ({
-            key: item.attributes.categoryId,
-            label: item.attributes.name,
-            categories: [],
-          }));
-          setMenuItems(menuItems);
-        })
-        .finally(() => {
-          filterOformsByLocaleIsLoading &&
-            setFilterOformsByLocaleIsLoading(false);
-        });
-    })();
-  }, [
-    oformsFilter.locale,
-    fetchCategoryTypes,
-    fetchCategoriesOfCategoryType,
-    filterOformsByLocaleIsLoading,
-    setFilterOformsByLocaleIsLoading,
-  ]);
-
-  useEffect(() => {
-    setCategoryFilterLoaded(menuItems.length !== 0);
-  }, [menuItems.length, setCategoryFilterLoaded]);
-
   if (
     (isShowInitSkeleton ||
       filterOformsByLocaleIsLoading ||

@@ -228,11 +228,15 @@ export const usePlugin = ({
     const items: IContextMenuItemClient[] = [];
 
     contextMenuItemsList?.forEach(({ value }) => {
+      if (value.isGroupAction) return;
+
       if (pluginContextMenuKeys.includes(value.key)) {
         if (value.items && value.items.length > 0) {
           const processedOptionValues: IContextMenuItemClient[] = [];
 
           value.items.forEach((nestedItem: IContextMenuItemClient) => {
+            if (nestedItem.isGroupAction) return;
+
             if (pluginContextMenuKeys.includes(nestedItem.key)) {
               processedOptionValues.push(nestedItem);
             }

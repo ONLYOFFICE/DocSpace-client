@@ -49,6 +49,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { matchesUserRole } from "SRC_DIR/helpers/plugins/roles";
+import { isSameId } from "SRC_DIR/helpers/plugins/utils";
 
 import {
   findNearestIndex,
@@ -350,6 +351,20 @@ class MediaViewerDataStore {
     );
   }
 
+  get isPluginFileOutsidePlaylist() {
+    const fileId = this.requestedPluginFileId;
+
+    if (isNullOrUndefined(fileId)) return false;
+
+    return !this.playlist.some((entry) => isSameId(entry.fileId, fileId));
+  }
+
+  private get requestedPluginFileId() {
+    if (!this.isPluginViewerActive) return undefined;
+
+    return this.pluginStore.pluginMediaViewerProps?.fileId;
+  }
+
   filterFilesByPluginCriteria = (files: TFile[]) => {
     if (!this.isPluginViewerActive) return files;
 
@@ -403,7 +418,9 @@ class MediaViewerDataStore {
       return 0;
     }
 
-    let index = this.playlist.find((file) => file.fileId === this.id)?.id;
+    let index = this.playlist.find((file) =>
+      isSameId(file.fileId, this.id),
+    )?.id;
 
     if (isNullOrUndefined(index)) {
       index = findNearestIndex(this.playlist, this.prevPostionIndex);

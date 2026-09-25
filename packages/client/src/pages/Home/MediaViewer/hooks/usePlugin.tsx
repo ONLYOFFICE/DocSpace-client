@@ -35,6 +35,7 @@
 
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
+  PluginActions,
   PluginFileType,
   PluginComponents,
 } from "SRC_DIR/helpers/plugins/enums";
@@ -48,6 +49,8 @@ import {
   PlaylistType,
 } from "@docspace/shared/components/media-viewer/MediaViewer.types";
 import { IContextMenuItemClient } from "SRC_DIR/helpers/plugins/types";
+import { isSameId } from "SRC_DIR/helpers/plugins/utils";
+import type MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import type { TCurrentFile } from "@onlyoffice/docspace-plugin-sdk/react";
 import { BoxGroup } from "@onlyoffice/docspace-plugin-sdk";
 
@@ -63,6 +66,7 @@ interface UsePluginProps {
     visible: boolean;
     id: NumberOrString | null;
   }) => void;
+  isPluginFileOutsidePlaylist: MediaViewerDataStore["isPluginFileOutsidePlaylist"];
 }
 
 export const usePlugin = ({
@@ -74,6 +78,7 @@ export const usePlugin = ({
   currentMediaFileId,
   playlist,
   setMediaViewerData,
+  isPluginFileOutsidePlaylist,
 }: UsePluginProps) => {
   const isLoaded = useRef(false);
 
@@ -108,10 +113,27 @@ export const usePlugin = ({
   );
 
   useEffect(() => {
+    if (!isPluginFileOutsidePlaylist || !pluginMediaViewerProps) return;
+
+    const { pluginName, fileId } = pluginMediaViewerProps;
+
+    console.warn(
+      `[Plugin: ${pluginName}] The media viewer was not opened: file ${fileId} is not in the open folder`,
+    );
+
+    dispatchMessage({
+      message: { actions: [PluginActions.closeMediaViewer] },
+      pluginName,
+    });
+  }, [isPluginFileOutsidePlaylist, pluginMediaViewerProps, dispatchMessage]);
+
+  useEffect(() => {
     if (!pluginMediaViewerVisible) {
       isLoaded.current = false;
       return;
     }
+
+    if (isPluginFileOutsidePlaylist) return;
 
     const fileId = pluginMediaViewerProps?.fileId || currentMediaFileId;
 
@@ -122,6 +144,7 @@ export const usePlugin = ({
     }
   }, [
     pluginMediaViewerVisible,
+    isPluginFileOutsidePlaylist,
     onLoad,
     pluginMediaViewerProps,
     currentMediaFileId,
@@ -130,7 +153,7 @@ export const usePlugin = ({
   // The file on screen in the shape `useCurrentFile` returns, so a component
   // reads it directly instead of being handed the id through `onLoad`.
   const currentFile = useMemo<TCurrentFile | null>(() => {
-    const item = playlist.find((p) => p.fileId === currentMediaFileId);
+    const item = playlist.find((p) => isSameId(p.fileId, currentMediaFileId));
     if (!item) return null;
 
     return {
@@ -175,7 +198,7 @@ export const usePlugin = ({
 
   // Get plugin context menu items
   const pluginContextMenuItems = useMemo(() => {
-    const item = playlist.find((p) => p.fileId === currentMediaFileId);
+    const item = playlist.find((p) => isSameId(p.fileId, currentMediaFileId));
     const fileExst = item?.fileExst;
 
     // plugins fetch the file themselves and cannot decrypt it, so an encrypted

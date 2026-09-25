@@ -3,7 +3,7 @@
   "content": "Unpin",
   "content_en_sha1_hash": "2eba6a03b89a9ddb19e9cb15699a8737f8bab076",
   "created_at": "2025-05-19T21:30:56.284Z",
-  "updated_at": "2026-08-26T16:06:02.348Z",
+  "updated_at": "2026-09-25T10:58:53.384Z",
   "comment": {
     "text": "This is a button label that removes a pinned item from its current location, making it no longer easily accessible.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 334,
+      "line_number": 349,
       "context": "};\n case \"unpin\":\n return {\n id: \"menu-unpin\",\n key: \"unpin\",\n label: t(\"Common:Unpin\"),\n iconUrl: UnpinReactSvgUrl,\n onClick: this.unpinHandle,\n disabled: false,\n };\n case \"create-group\":",
       "module": "/packages/client"
     },

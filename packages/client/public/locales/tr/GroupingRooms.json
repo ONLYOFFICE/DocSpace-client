@@ -1,5 +1,6 @@
 {
   "AddRoom": "Odayı ekle",
+  "AddSpace": "Alan ekle",
   "AddToGroup": "Grup'a ekle",
   "ChangesApplied": "Değişiklikler uygulandı",
   "CreateAGroup": "Grup oluştur",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Oda gruplarını devre dışı bırakma",
   "DisablingRoomGroupsDescription": "Gruplar kaydedilecek ancak gizlenecektir. Profil, Dosya yönetimi'nden yeniden etkinleştirin.",
   "EditRoomGroups": "Oda gruplarını düzenle",
+  "EditSpaceGroups": "Alan gruplarını düzenle",
   "EmptyGroupRoomsDescription": "Burada oda yok. Bir oda eklemeyi veya bu grubu kaldırmayı deneyin.",
+  "EmptyGroupSpacesDescription": "Burada alan yok. Bir alan eklemeyi veya bu grubu kaldırmayı deneyin.",
+  "FormSpaces": "Alanlar",
   "GroupHasBeenDeleted": "Grup silindi",
   "GroupIcon": "Grup simgesi",
   "GroupIsEmpty": "Grup boş",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Grup kaldır",
   "RemoveGroupConfirmation": "Bir oda grubu silmek üzeresiniz. Devam etmek istediğinizden emin misiniz?",
   "RemoveGroupInfo": "Grup içindeki odalar <strong>Tüm Odalar</strong> bölümünde görüntülenecektir.",
+  "RemoveSpaceGroupConfirmation": "Bir alan grubunu silmek üzeresiniz. Devam etmek istediğinizden emin misiniz?",
+  "RemoveSpaceGroupInfo": "Grup içindeki alanlar <strong>Tüm alanlar</strong> bölümünde görüntülenecektir.",
   "RoomAddedToGroup": "Seçilen oda <1>{{groupName}}</1>'a eklendi.",
   "RoomGrouping": "Oda gruplama",
   "RoomGroupingDisabled": "Oda gruplama devre dışı",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Odaları klasörlere gruplayabilir ve aralarında kolayca geçiş yapabilirsiniz.",
   "RoomRemovedFromGroup": "Seçilen oda <1>{{groupName}}</1>'dan kaldırıldı.",
   "RoomsAddedToGroup": "Seçilen odalar <1>{{groupName}}</1>'a eklendi.",
-  "RoomsRemovedFromGroup": "Seçilen odalar <1>{{groupName}}</1>'dan kaldırıldı."
+  "RoomsRemovedFromGroup": "Seçilen odalar <1>{{groupName}}</1>'dan kaldırıldı.",
+  "SpaceAddedToGroup": "Seçilen alan <1>{{groupName}}</1> grubuna eklendi.",
+  "SpaceRemovedFromGroup": "Seçilen alan <1>{{groupName}}</1> grubundan kaldırıldı.",
+  "SpacesAddedToGroup": "Seçilen alanlar <1>{{groupName}}</1> grubuna eklendi.",
+  "SpacesRemovedFromGroup": "Seçilen alanlar <1>{{groupName}}</1> grubundan kaldırıldı."
 }

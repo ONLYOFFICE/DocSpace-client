@@ -51,6 +51,7 @@ const DeleteGroupDialog = ({
   deleteRoomGroup,
   getAllRoomGroups,
   currentFilterGroupId,
+  isFormsSection,
 }: DeleteGroupDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -69,7 +70,9 @@ const DeleteGroupDialog = ({
         currentFilterGroupId != null &&
         String(currentFilterGroupId) === String(groupId)
       ) {
-        window.DocSpace.navigate("/rooms/shared/filter");
+        window.DocSpace.navigate(
+          isFormsSection ? "/forms/filter" : "/rooms/shared/filter",
+        );
       }
     } catch (error) {
       toastr.error(error as Error);
@@ -82,6 +85,7 @@ const DeleteGroupDialog = ({
     deleteRoomGroup,
     getAllRoomGroups,
     currentFilterGroupId,
+    isFormsSection,
     onClose,
     t,
   ]);
@@ -113,14 +117,24 @@ const DeleteGroupDialog = ({
       <ModalDialog.Header>{t("GroupingRooms:RemoveGroup")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text lineHeight="20px">
-          {t("GroupingRooms:RemoveGroupConfirmation")}
+          {isFormsSection
+            ? t("GroupingRooms:RemoveSpaceGroupConfirmation")
+            : t("GroupingRooms:RemoveGroupConfirmation")}
         </Text>
         <Text style={{ marginTop: "16px" }} lineHeight="24px">
-          <Trans
-            t={t}
-            i18nKey="GroupingRooms:RemoveGroupInfo"
-            components={{ strong: <strong style={{ fontWeight: 700 }} /> }}
-          />
+          {isFormsSection ? (
+            <Trans
+              t={t}
+              i18nKey="GroupingRooms:RemoveSpaceGroupInfo"
+              components={{ strong: <strong style={{ fontWeight: 700 }} /> }}
+            />
+          ) : (
+            <Trans
+              t={t}
+              i18nKey="GroupingRooms:RemoveGroupInfo"
+              components={{ strong: <strong style={{ fontWeight: 700 }} /> }}
+            />
+          )}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

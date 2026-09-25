@@ -3,7 +3,7 @@
   "content": "Room list",
   "content_en_sha1_hash": "61e05608df86be266bae6e1183981c8d88c82435",
   "created_at": "2025-05-19T21:30:48.199Z",
-  "updated_at": "2026-09-04T07:59:41.595Z",
+  "updated_at": "2026-09-25T10:58:53.278Z",
   "comment": {
     "text": "This is a label for a list of rooms. It appears as a header in a dialog and as a menu item.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 463,
-      "context": "element={\n <RoomListPanel\n visible={isOpenRoomList}\n onClose={onCloseRoomList}\n onSubmit={onSubmitRoom}\n headerLabel={t(\"Common:RoomList\")}\n withSearch\n disableSubmitUntilChanged\n withoutBackdropBackground\n />\n }",
+      "line_number": 475,
+      "context": "<RoomListPanel\n visible={isOpenRoomList}\n onClose={onCloseRoomList}\n onSubmit={onSubmitRoom}\n headerLabel={\n isFormsSection ? t(\"Common:Forms\") : t(\"Common:RoomList\")\n }\n withSearch\n disableSubmitUntilChanged\n withoutBackdropBackground\n isFormsSection={isFormsSection}",
       "module": "/packages/client"
     },
     {

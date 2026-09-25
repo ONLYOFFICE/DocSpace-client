@@ -1,5 +1,6 @@
 {
   "AddRoom": "Додати prostoriju",
+  "AddSpace": "Додај простор",
   "AddToGroup": "Додати u grupu",
   "ChangesApplied": "Измене су примењени",
   "CreateAGroup": "Креирати групу",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Онемактивировање група соба",
   "DisablingRoomGroupsDescription": "Групе ће бити сачуване, али скривене. Поново омогућите у Профилу, Управљање фајловима.",
   "EditRoomGroups": "Уређивање група соба",
+  "EditSpaceGroups": "Уређивање група простора",
   "EmptyGroupRoomsDescription": "Нeма нима собарића овде. Покушајте да додате соба или уклоните ову групу.",
+  "EmptyGroupSpacesDescription": "Овде нема простора. Покушајте да додате простор или уклоните ову групу.",
+  "FormSpaces": "Простори",
   "GroupHasBeenDeleted": "Група је избрисана",
   "GroupIcon": "Икона групе",
   "GroupIsEmpty": "Група је празна",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Уклони групу",
   "RemoveGroupConfirmation": "Спремно сте da обришете групу соба. Да ли сте сигурни да желите да наставите?",
   "RemoveGroupInfo": "Собе укључене у групу биће прикажане у <strong>All Rooms</strong> секцији.",
+  "RemoveSpaceGroupConfirmation": "Спремате се да обришете групу простора. Да ли сте сигурни да желите да наставите?",
+  "RemoveSpaceGroupInfo": "Простори укључени у групу биће приказани у одељку <strong>Сви простори</strong>.",
   "RoomAddedToGroup": "Изабрана соба је додата у <1>{{groupName}}</1>.",
   "RoomGrouping": "Груписање просторија",
   "RoomGroupingDisabled": "Групирање собама је искључено",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Можете груписати собероти у фолдере и лакотно прелаћи између њих.",
   "RoomRemovedFromGroup": "Изабрана просторија је уклоњена из <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Изабране собе су додата у <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Изабране собе су уклоњене из <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Изабране собе су уклоњене из <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "Изабрани простор је додат у <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "Изабрани простор је уклоњен из <1>{{groupName}}</1>.",
+  "SpacesAddedToGroup": "Изабрани простори су додати у <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "Изабрани простори су уклоњени из <1>{{groupName}}</1>."
 }

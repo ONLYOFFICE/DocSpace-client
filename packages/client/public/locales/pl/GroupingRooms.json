@@ -1,5 +1,6 @@
 {
   "AddRoom": "Dodaj pokój",
+  "AddSpace": "Dodaj obszar",
   "AddToGroup": "Dodaj do grupy",
   "ChangesApplied": "Wprowadzono zmiany",
   "CreateAGroup": "Utwórz grupę",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Wyłączanie grup pomieszczeń",
   "DisablingRoomGroupsDescription": "Grupy zostaną zapisane, ale ukryte. Można je ponownie włączyć w Profilu, w zarządzaniu plikami.",
   "EditRoomGroups": "Edytuj grupy pomieszczeń",
+  "EditSpaceGroups": "Edytuj grupy obszarów",
   "EmptyGroupRoomsDescription": "Nie ma tu pokoi. Spróbuj dodać pokój lub usunąć tę grupę.",
+  "EmptyGroupSpacesDescription": "Nie ma tu obszarów. Spróbuj dodać obszar lub usunąć tę grupę.",
+  "FormSpaces": "Obszary",
   "GroupHasBeenDeleted": "Grupa została usunięta",
   "GroupIcon": "Ikona grupy",
   "GroupIsEmpty": "Grupa jest pusta",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Usuń grupę",
   "RemoveGroupConfirmation": "Zamierzają Państwo usunąć grupę pokoi. Czy ma Pan/Pani pewność, że chce kontynuować?",
   "RemoveGroupInfo": "Pokoje zawarte w grupie będą wyświetlane w sekcji <strong>Wszystkie pokoje</strong>.",
+  "RemoveSpaceGroupConfirmation": "Zamierzasz usunąć grupę obszarów. Czy na pewno chcesz kontynuować?",
+  "RemoveSpaceGroupInfo": "Obszary zawarte w grupie będą wyświetlane w sekcji <strong>Wszystkie obszary</strong>.",
   "RoomAddedToGroup": "Wybrany pokój został dodany do <1>{{groupName}}</1>.",
   "RoomGrouping": "Grupowanie pomieszczeń",
   "RoomGroupingDisabled": "Grupowanie pomieszczeń jest wyłączone",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Możesz grupować pomieszczenia w foldery i łatwo przełączać się między nimi.",
   "RoomRemovedFromGroup": "Wybrany pokój został usunięty z <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Wybrane pomieszczenia dodano do <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Wybrane pomieszczenia zostały usunięte z <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Wybrane pomieszczenia zostały usunięte z <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "Wybrany obszar został dodany do <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "Wybrany obszar został usunięty z <1>{{groupName}}</1>.",
+  "SpacesAddedToGroup": "Wybrane obszary zostały dodane do <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "Wybrane obszary zostały usunięte z <1>{{groupName}}</1>."
 }

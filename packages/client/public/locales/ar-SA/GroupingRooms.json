@@ -1,5 +1,6 @@
 {
   "AddRoom": "إضافة غرفة",
+  "AddSpace": "إضافة مساحة",
   "AddToGroup": "أضف إلى المجموعة",
   "ChangesApplied": "تم تطبيق التغييرات",
   "CreateAGroup": "إنشاء مجموعة",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "تعطيل مجموعات الغرف",
   "DisablingRoomGroupsDescription": "سيتم حفظ المجموعات ولكنها مخفية. أعد التمكين في الملف الشخصي، إدارة الملفات.",
   "EditRoomGroups": "تعديل مجموعات الغرفة",
+  "EditSpaceGroups": "تعديل مجموعات المساحات",
   "EmptyGroupRoomsDescription": "لا توجد غرف هنا. حاول إضافة غرفة أو قم بإزالة هذه المجموعة.",
+  "EmptyGroupSpacesDescription": "لا توجد مساحات هنا. حاول إضافة مساحة أو قم بإزالة هذه المجموعة.",
+  "FormSpaces": "المساحات",
   "GroupHasBeenDeleted": "تم حذف المجموعة",
   "GroupIcon": "أيقونة المجموعة",
   "GroupIsEmpty": "المجموعة فارغة",
@@ -18,6 +22,8 @@
   "RemoveGroup": "إزالة المجموعة",
   "RemoveGroupConfirmation": "أنت على وشك حذف مجموعة من الغرف. هل أنت متأكد من رغبتك في المتابعة؟",
   "RemoveGroupInfo": "سيتم عرض الغرف المضمنة في المجموعة في قسم <strong>جميع الغرف</strong>.",
+  "RemoveSpaceGroupConfirmation": "أنت على وشك حذف مجموعة من المساحات. هل أنت متأكد من رغبتك في المتابعة؟",
+  "RemoveSpaceGroupInfo": "سيتم عرض المساحات المضمنة في المجموعة في قسم <strong>جميع المساحات</strong>.",
   "RoomAddedToGroup": "تمت إضافة الغرفة المحددة إلى <1>{{groupName}}</1>.",
   "RoomGrouping": "تجميع الغرف",
   "RoomGroupingDisabled": "تجميع الغرف معطّل",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "يمكنكم تجميع المساحات في مجلدات والتبديل بينها بسهولة.",
   "RoomRemovedFromGroup": "تمت إزالة الغرفة المحددة من <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "تمت إضافة الغرف المحددة إلى <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "تمت إزالة الغرف المحددة من <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "تمت إزالة الغرف المحددة من <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "تمت إضافة المساحة المحددة إلى <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "تمت إزالة المساحة المحددة من <1>{{groupName}}</1>.",
+  "SpacesAddedToGroup": "تمت إضافة المساحات المحددة إلى <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "تمت إزالة المساحات المحددة من <1>{{groupName}}</1>."
 }

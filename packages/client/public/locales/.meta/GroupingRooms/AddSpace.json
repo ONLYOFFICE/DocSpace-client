@@ -1,0 +1,29 @@
+{
+  "key_path": "AddSpace",
+  "content": "Add space",
+  "content_en_sha1_hash": "abb802929c9a53c99c874365b3bf5aa230796bb5",
+  "created_at": "2026-09-25T10:58:49.170Z",
+  "updated_at": "2026-09-25T11:04:49.850Z",
+  "comment": {
+    "text": "Dialog title used when adding a new space to a group within the forms section.",
+    "is_auto": true,
+    "updated_at": "2026-09-25T11:04:49.850Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AddRoomToGroupDialog/index.tsx",
+      "line_number": 194,
+      "context": "onBackClick: onClose,\n onCloseClick: onClose,\n headerLabel:\n groupData?.name ||\n (isFormsSection\n ? t(\"GroupingRooms:AddSpace\")\n : t(\"GroupingRooms:AddRoom\")),\n withoutBorder: false,\n withoutBackButton: false,\n }}\n withSearch",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

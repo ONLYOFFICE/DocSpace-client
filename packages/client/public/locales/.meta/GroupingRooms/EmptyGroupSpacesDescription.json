@@ -1,0 +1,29 @@
+{
+  "key_path": "EmptyGroupSpacesDescription",
+  "content": "There are no spaces here. Try adding a space or remove this group.",
+  "content_en_sha1_hash": "18706fe59d3ff07a1f70ba0bd68d4639b27061e0",
+  "created_at": "2026-09-25T10:58:49.189Z",
+  "updated_at": "2026-09-25T11:04:06.863Z",
+  "comment": {
+    "text": "Description text in an empty state view that appears when a group of spaces contains no spaces. It provides instructions to add a space or remove the group.",
+    "is_auto": true,
+    "updated_at": "2026-09-25T11:04:06.863Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyRoomGroupContainer.tsx",
+      "line_number": 83,
+      "context": "<EmptyView\n icon={icon}\n title={t(\"GroupingRooms:GroupIsEmpty\")}\n description={\n isFormsSection\n ? t(\"GroupingRooms:EmptyGroupSpacesDescription\")\n : t(\"GroupingRooms:EmptyGroupRoomsDescription\")\n }\n options={options}\n className={styles.wrapper}\n bodyClassName={styles.body}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

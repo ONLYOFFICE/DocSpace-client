@@ -67,6 +67,8 @@ interface UsePluginProps {
   isPluginViewerClosing: MediaViewerDataStore["isPluginViewerClosing"];
   openPluginViewer: MediaViewerDataStore["openPluginViewer"];
   closePluginViewer: MediaViewerDataStore["closePluginViewer"];
+  pendingPluginFileId: MediaViewerDataStore["pendingPluginFileId"];
+  showPluginFile: MediaViewerDataStore["showPluginFile"];
 }
 
 export const usePlugin = ({
@@ -82,6 +84,8 @@ export const usePlugin = ({
   isPluginViewerClosing,
   openPluginViewer,
   closePluginViewer,
+  pendingPluginFileId,
+  showPluginFile,
 }: UsePluginProps) => {
   const handlePluginClose = useCallback(async () => {
     if (!pluginMediaViewerVisible || !pluginMediaViewerProps?.onClose) {
@@ -148,6 +152,14 @@ export const usePlugin = ({
     currentMediaFileId,
     openPluginViewer,
   ]);
+
+  useEffect(() => {
+    if (pendingPluginFileId === undefined) return;
+
+    if (isPluginFileOutsidePlaylist) return;
+
+    showPluginFile(pendingPluginFileId);
+  }, [pendingPluginFileId, isPluginFileOutsidePlaylist, showPluginFile]);
 
   useEffect(() => {
     if (isPluginViewerClosing) closePluginViewer();

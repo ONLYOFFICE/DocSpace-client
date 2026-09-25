@@ -115,6 +115,8 @@ const FilesMediaViewer = (props) => {
     isPluginViewerClosing,
     openPluginViewer,
     closePluginViewer,
+    pendingPluginFileId,
+    showPluginFile,
   } = props;
 
   const navigate = useNavigate();
@@ -135,6 +137,8 @@ const FilesMediaViewer = (props) => {
       isPluginViewerClosing,
       openPluginViewer,
       closePluginViewer,
+      pendingPluginFileId,
+      showPluginFile,
     });
 
   useEffect(() => {
@@ -456,6 +460,8 @@ export default inject(
       isPluginViewerClosing,
       openPluginViewer,
       closePluginViewer,
+      pendingPluginFileId,
+      showPluginFile,
     } = mediaViewerDataStore;
 
     const { deleteItemAction } = filesActionsStore;
@@ -508,6 +514,8 @@ export default inject(
       isPluginViewerClosing,
       openPluginViewer,
       closePluginViewer,
+      pendingPluginFileId,
+      showPluginFile,
       deleteItemAction,
       setMediaViewerData,
       extsImagePreviewed,

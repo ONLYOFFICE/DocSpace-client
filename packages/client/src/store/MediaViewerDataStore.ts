@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, observable, runInAction } from "mobx";
 
 import {
   MEDIA_VIEW_URL,
@@ -105,12 +105,14 @@ class MediaViewerDataStore {
 
   isOpenedByPlugin = false;
 
+  handledPluginViewerProps: PluginStore["pluginMediaViewerProps"] = null;
+
   constructor(
     filesStore: TFilesStore,
     publicRoomStore: PublicRoomStore,
     pluginStore: PluginStore,
   ) {
-    makeAutoObservable(this);
+    makeAutoObservable(this, { handledPluginViewerProps: observable.ref });
     this.filesStore = filesStore;
     this.publicRoomStore = publicRoomStore;
     this.pluginStore = pluginStore;
@@ -134,11 +136,18 @@ class MediaViewerDataStore {
 
   openPluginViewer = (id: number | string) => {
     this.isOpenedByPlugin = true;
+    this.handledPluginViewerProps = this.pluginStore.pluginMediaViewerProps;
     this.setMediaViewerData({ visible: true, id });
+  };
+
+  showPluginFile = (id: number | string) => {
+    this.handledPluginViewerProps = this.pluginStore.pluginMediaViewerProps;
+    this.setCurrentId(id);
   };
 
   closePluginViewer = () => {
     this.isOpenedByPlugin = false;
+    this.handledPluginViewerProps = null;
     this.setMediaViewerData({ visible: false, id: null });
 
     if (!window.location.pathname.includes(MEDIA_VIEW_URL)) return;
@@ -369,6 +378,18 @@ class MediaViewerDataStore {
 
   get isPluginViewerClosing() {
     return this.isOpenedByPlugin && !this.isPluginViewerActive;
+  }
+
+  get pendingPluginFileId() {
+    const fileId = this.requestedPluginFileId;
+    const isHandled =
+      this.pluginStore.pluginMediaViewerProps === this.handledPluginViewerProps;
+
+    if (!this.isOpenedByPlugin || isNullOrUndefined(fileId)) return undefined;
+
+    if (isHandled) return undefined;
+
+    return fileId;
   }
 
   get isPluginFileOutsidePlaylist() {

@@ -21,7 +21,7 @@
   "BasicInfo": "Informazioni di base",
   "Client": "Cliente",
   "ClientCopy": "ID cliente copiato con successo negli appunti",
-  "ClientHelpButton": "Credenziali per l'utilizzo di OAth 2.0 come tipo di autenticazione.<br/> <strong>Nota:</strong> Qualsiasi amministratore aziendale che conosca l'ID client dell'app sarà in grado di recuperare informazioni sull'app, tra cui il nome dell'app, il tipo di autenticazione, gli ambiti dell'app e l'URI di reindirizzamento.",
+  "ClientHelpButton": "Credenziali per l'utilizzo di OAuth 2.0 come tipo di autenticazione.<br/> <strong>Nota:</strong> Qualsiasi amministratore aziendale che conosca l'ID client dell'app sarà in grado di recuperare informazioni sull'app, tra cui il nome dell'app, il tipo di autenticazione, gli ambiti dell'app e l'URI di reindirizzamento.",
   "ClientSecretResetSuccessfully": "Segreto del client reimpostato con successo",
   "CodeVerifier": "Codice verificatore",
   "Creator": "Creatore",

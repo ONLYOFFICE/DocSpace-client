@@ -1,0 +1,29 @@
+{
+  "key_path": "AIModelOutputPrice",
+  "content": "{{outputPrice}}/M output tokens",
+  "content_en_sha1_hash": "ee14309153606031c95f1b85eaf5d109cb3abc61",
+  "created_at": "2026-09-23T12:24:05.508Z",
+  "updated_at": "2026-09-23T12:28:29.310Z",
+  "comment": {
+    "text": "Label in the AI model settings list indicating the cost per million output tokens, where {{outputPrice}} is the formatted price.",
+    "is_auto": true,
+    "updated_at": "2026-09-23T12:28:29.310Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/RowView/index.tsx",
+      "line_number": 112,
+      "context": "prices: [\n t(\"Common:AIImageModelPrice\", {\n inputPrice: formatPrice(m.price?.prompt),\n imagePrice: formatPrice(m.price?.image),\n }),\n t(\"Common:AIModelOutputPrice\", {\n outputPrice: formatPrice(m.price?.completion),\n }),\n ],\n }));",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

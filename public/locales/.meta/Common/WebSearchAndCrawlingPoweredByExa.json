@@ -1,13 +1,13 @@
 {
   "key_path": "WebSearchAndCrawlingPoweredByExa",
-  "content": "Web search and crawling are powered by Exa — no Exa account or setup needed. Usage is billed through your Wallet.",
-  "content_en_sha1_hash": "34c88f465f0b8852eec61cf1ea3d2b4d06bfe396",
-  "created_at": "2026-09-04T07:59:33.829Z",
-  "updated_at": "2026-09-08T08:44:10.088Z",
+  "content": "Web search and web crawling powered by Exa",
+  "content_en_sha1_hash": "e1ec1012c37b019abf08d784c89845ca69c25fcd",
+  "created_at": "2026-09-23T12:24:43.878Z",
+  "updated_at": "2026-09-23T12:25:46.863Z",
   "comment": {
-    "text": "Informational text in the AI settings banner that appears when the Web Search feature is active, explaining the service provider and billing details.",
+    "text": "A descriptive text label in the AI features banner that indicates the technology provider for web search and crawling capabilities.",
     "is_auto": true,
-    "updated_at": "2026-09-04T08:00:12.916Z",
+    "updated_at": "2026-09-23T12:25:46.863Z",
     "model": "gemma4:26b"
   },
   "usage": [

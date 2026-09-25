@@ -862,11 +862,8 @@ class ContextOptionsStore {
     this.oformsStore.setGallerySelected(item);
   };
 
-  // the Gallery ItemTitle consumer passes either a full
-  // TOformFile or a minimal { attributes } shape (and forwards it as-is);
-  // the casts below keep the original unchecked usage.
   getFormGalleryContextOptions = (
-    item: TOformFile | { attributes: { name_form: string } } | null,
+    item: TOformFile | null,
     t: TTranslation,
     navigate?: unknown,
   ): ContextMenuModel[]=> getFormGalleryContextOptionsImpl(this, item, t, navigate);
@@ -948,7 +945,8 @@ class ContextOptionsStore {
 
   _syncInfoPanelRoom = (newRoom: TRoom)=> _syncInfoPanelRoomImpl(this, newRoom);
 
-  askAI = async (item: TContextItem)=> askAIImpl(this, item);
+  askAI = async (item: TContextItem, analyze = false)=>
+    askAIImpl(this, item, analyze);
 
   getFilesContextOptions = (
     item: TContextItem,
@@ -1045,7 +1043,13 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileDialogVisible(true);
   };
 
-  onShowTemplateGallery = () => {
+  // `createRoomFromTemplate` is set from the Forms root, where there is no
+  // folder to create a file in: the picked template must produce a form space
+  // built around it instead of a bare PDF (see onCreateTemplateImpl). Without
+  // it the create falls through to the file branch and the editor opens on a
+  // file the user may not create there -- "Access denied".
+  onShowTemplateGallery = (createRoomFromTemplate = false) => {
+    this.oformsStore.setCreateRoomFromTemplate(createRoomFromTemplate);
     this.oformsStore.setTemplateGalleryVisible(true);
     // the original .js passed a possibly-null selected folder
     // id through unchecked — the non-null assertion keeps that behavior.

@@ -70,7 +70,7 @@ import type ContextOptionsStore from "../ContextOptionsStore";
 
 export const getFormGalleryContextOptionsImpl = (
   self: ContextOptionsStore,
-  item: TOformFile | { attributes: { name_form: string } } | null,
+  item: TOformFile | null,
   t: TTranslation,
   navigate?: unknown,
 ): ContextMenuModel[] => {
@@ -83,7 +83,7 @@ export const getFormGalleryContextOptionsImpl = (
     {
       key: "template-info",
       label: t("FormGallery:TemplateInfo"),
-      onClick: () => self.onShowOformTemplateInfo(item as TOformFile),
+      onClick: () => item && self.onShowOformTemplateInfo(item),
     },
     {
       key: "separator",
@@ -92,7 +92,7 @@ export const getFormGalleryContextOptionsImpl = (
     {
       key: "suggest-changes",
       label: t("FormGallery:SuggestChanges"),
-      onClick: () => onSuggestOformChanges(item as TOformFile),
+      onClick: () => onSuggestOformChanges(item),
     },
   ];
 };
@@ -427,8 +427,11 @@ export const getFolderModelImpl = (
           },
           {
             key: "template-gallery",
+            // The Forms root has no folder to hold a form, so the picked
+            // template creates a form space around it -- same flow as the
+            // Forms quick-action tile.
             label: t("Common:TemplateGallery"),
-            onClick: () => self.onShowTemplateGallery(),
+            onClick: () => self.onShowTemplateGallery(true),
             icon: TemplateGalleryReactSvgUrl,
           },
         ]

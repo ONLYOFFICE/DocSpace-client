@@ -198,7 +198,6 @@ class SettingsStore {
     domain: "",
     uploadPath: "",
     uploadDomain: "",
-    uploadDashboard: "",
   };
 
   logoUrl: Nullable<ILogo> = null;
@@ -447,6 +446,14 @@ class SettingsStore {
     return this.helpCenterDomain && this.helpCenterEntries?.aiservicesmanagement
       ? `${this.helpCenterDomain}${this.helpCenterEntries.aiservicesmanagement}`
       : this.helpCenterDomain;
+  }
+
+  /**
+   * Admin panel of the editors, shown in the profile menu of a server
+   * (standalone) installation. Absent on backends that do not publish it yet.
+   */
+  get docsAdminPanelUrl() {
+    return this.externalResources?.adminPanel?.domain;
   }
 
   get apiDomain() {

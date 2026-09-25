@@ -648,7 +648,7 @@ const onCreateRoomFromTemplateImpl = (self: ContextOptionsStore) => {
   if (!gallerySelected) return;
 
   const extension = self.oformsStore.currentExtensionGallery.replace(".", "");
-  const title = gallerySelected.attributes.name_form;
+  const title = gallerySelected.title;
 
   setFormTemplateForNewRoom({ id: gallerySelected.id, title, extension });
 
@@ -700,7 +700,7 @@ export const onCreateTemplateImpl = async (
     extension,
     id: -1,
     fromTemplate: true,
-    title: gallerySelected.attributes.name_form,
+    title: gallerySelected.title,
     openEditor: true,
     edit: true,
   };
@@ -841,11 +841,14 @@ export const _syncInfoPanelRoomImpl = (
 export const askAIImpl = async (
   self: ContextOptionsStore,
   item: TContextItem,
+  // The request is about the form's responses, not the document — see
+  // `askAIActionImpl`. Passed through every branch below unchanged.
+  analyze = false,
 ) => {
   const skipAi = getPersisted(PersistenceKeys.skipAiModal, false);
 
   if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
-    self.filesActionsStore.askAIAction(item);
+    self.filesActionsStore.askAIAction(item, analyze);
     return;
   }
 
@@ -860,7 +863,7 @@ export const askAIImpl = async (
     if (!room) return;
 
     if (room.sendFormToExternalDB || !room.security?.EditRoom) {
-      self.filesActionsStore.askAIAction(item);
+      self.filesActionsStore.askAIAction(item, analyze);
       return;
     }
 
@@ -868,7 +871,7 @@ export const askAIImpl = async (
       if (action === "connect") {
         onEditRoomTemplate(room, self._syncInfoPanelRoom);
       } else if (action === "continue") {
-        self.filesActionsStore.askAIAction(item);
+        self.filesActionsStore.askAIAction(item, analyze);
       }
     });
   } catch (error) {

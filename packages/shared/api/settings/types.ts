@@ -143,7 +143,6 @@ export type TFormGallery = {
   uploadPath: string;
   uploadDomain: string;
   uploadExt: string;
-  uploadDashboard: string;
   url?: string;
   uploadUrl?: string;
 };
@@ -400,6 +399,10 @@ export type TVideoGuidesEntries = {
   whatis: string;
 };
 
+export type TAdminPanelResources = {
+  domain: string;
+};
+
 export type TExternalResources = {
   api: {
     domain: string;
@@ -408,6 +411,11 @@ export type TExternalResources = {
   common: {
     entries: TCommonEntries;
   };
+  /**
+   * Editors-side resources. Optional: only a server (standalone) installation
+   * with a new enough backend returns it, so every reader must guard.
+   */
+  adminPanel?: TAdminPanelResources;
   forum: {
     domain: string;
   };

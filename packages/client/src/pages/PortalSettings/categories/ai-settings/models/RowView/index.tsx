@@ -49,6 +49,14 @@ import { useTurnOffModelConfirmation } from "../TurnOffModelDialog";
 
 import styles from "./ModelSettingsRowView.module.scss";
 
+type TModelRow = {
+  id: string;
+  alias: string;
+  image: string;
+  link?: string;
+  prices: string[];
+};
+
 type ModelSettingsRowViewProps = {
   sectionWidth: number;
 
@@ -70,104 +78,139 @@ const RowView = (props: ModelSettingsRowViewProps) => {
     isAiToolsServiceOn,
   } = props;
 
-  const models = [
-    ...(aiToolsPrices?.chat ?? []),
-    ...(aiToolsPrices?.image ?? []),
-  ];
-
   const { t } = useTranslation(["Common"]);
 
   const { requestToggle, turnOffModelDialog } =
     useTurnOffModelConfirmation(setAiModelAvailability);
 
-  if (!models.length) return null;
+  const formatPrice = (value?: number) =>
+    value == null ? "" : (formatAiModelsCurrency?.(value) ?? "");
+
+  const chatRows: TModelRow[] = (aiToolsPrices?.chat ?? []).map((m) => ({
+    id: m.id,
+    alias: m.alias,
+    image: m.image,
+    link: m.link,
+    prices: [
+      t("Common:AIModelPrice", {
+        inputPrice: formatPrice(m.price?.prompt),
+        outputPrice: formatPrice(m.price?.completion),
+      }),
+    ],
+  }));
+
+  const imageRows: TModelRow[] = (aiToolsPrices?.image ?? []).map((m) => ({
+    id: m.id,
+    alias: m.alias,
+    image: m.image,
+    link: m.link,
+    prices: [
+      t("Common:AIImageModelPrice", {
+        inputPrice: formatPrice(m.price?.prompt),
+        imagePrice: formatPrice(m.price?.image),
+      }),
+      t("Common:AIModelOutputPrice", {
+        outputPrice: formatPrice(m.price?.completion),
+      }),
+    ],
+  }));
+
+  if (!chatRows.length && !imageRows.length) return null;
+
+  const renderRows = (rows: TModelRow[], id: string, itemHeight: number) => (
+    <RowContainer
+      id={id}
+      useReactWindow
+      fetchMoreFiles={() => Promise.resolve()}
+      hasMoreFiles={false}
+      itemCount={rows.length}
+      filesLength={rows.length}
+      itemHeight={itemHeight}
+    >
+      {rows.map((row) => {
+        const enabled = aiModelAvailabilityMap?.get(row.id) ?? true;
+        const isUpdating = aiModelAvailabilityUpdatingSet?.has(row.id) ?? false;
+
+        const onRowClick = () => {
+          if (row.link) window.open(row.link, "_blank", "noopener,noreferrer");
+        };
+
+        return (
+          <div
+            className={styles.row}
+            key={row.id}
+            onClick={row.link ? onRowClick : undefined}
+            data-has-link={row.link ? "true" : undefined}
+          >
+            <div className={styles.modelIcon}>
+              <div
+                className={styles.iconInner}
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
+                dangerouslySetInnerHTML={{ __html: row.image }}
+              />
+            </div>
+
+            <div className={styles.content}>
+              <div className={styles.titleRow}>
+                <Text fontSize="14px" fontWeight={600} className={styles.title}>
+                  {row.alias}
+                </Text>
+                {row.link ? (
+                  <ExternalLinkIcon className={styles.detailsIcon} />
+                ) : null}
+              </div>
+
+              {row.prices.map((price) => (
+                <Text key={price} fontSize="12px" className={styles.prices}>
+                  {price}
+                </Text>
+              ))}
+            </div>
+
+            <div className={styles.toggle} onClick={(e) => e.stopPropagation()}>
+              <ToggleButton
+                isChecked={enabled}
+                onChange={() =>
+                  requestToggle({ id: row.id, title: row.alias }, !enabled)
+                }
+                isDisabled={isUpdating || !isAiToolsServiceOn}
+                dataTestId={`ai_model_toggle_${row.id}`}
+              />
+            </div>
+          </div>
+        );
+      })}
+    </RowContainer>
+  );
 
   return (
     <div className={styles.rowContainer}>
       <Text className={styles.introText}>
         {t("Common:AIModelsDescription")}
       </Text>
-      <RowContainer
-        useReactWindow
-        fetchMoreFiles={() => Promise.resolve()}
-        hasMoreFiles={false}
-        itemCount={models.length}
-        filesLength={models.length}
-        itemHeight={72}
-      >
-        {models.map((m) => {
-          const enabled = aiModelAvailabilityMap?.get(m.id) ?? true;
-          const isUpdating = aiModelAvailabilityUpdatingSet?.has(m.id) ?? false;
-          const inputPrice =
-            m.price?.prompt != null
-              ? (formatAiModelsCurrency?.(m.price.prompt) ?? "")
-              : "";
 
-          const outputValue = m.price?.completion;
+      {chatRows.length ? (
+        <React.Fragment>
+          <Text fontSize="16px" fontWeight={700} className={styles.groupTitle}>
+            {t("Common:AITextModels")}
+          </Text>
+          {renderRows(chatRows, "rowContainer", 72)}
+        </React.Fragment>
+      ) : null}
 
-          const outputPrice =
-            outputValue != null
-              ? (formatAiModelsCurrency?.(outputValue) ?? "")
-              : "";
-
-          const onRowClick = () => {
-            if (m.link) window.open(m.link, "_blank", "noopener,noreferrer");
-          };
-
-          return (
-            <div
-              className={styles.row}
-              key={m.id}
-              onClick={m.link ? onRowClick : undefined}
-              data-has-link={m.link ? "true" : undefined}
-            >
-              <div className={styles.modelIcon}>
-                <div
-                  className={styles.iconInner}
-                  // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
-                  dangerouslySetInnerHTML={{ __html: m.image }}
-                />
-              </div>
-
-              <div className={styles.content}>
-                <div className={styles.titleRow}>
-                  <Text
-                    fontSize="14px"
-                    fontWeight={600}
-                    className={styles.title}
-                  >
-                    {m.alias}
-                  </Text>
-                  {m.link ? (
-                    <ExternalLinkIcon className={styles.detailsIcon} />
-                  ) : null}
-                </div>
-
-                <Text fontSize="12px" className={styles.prices}>
-                  {t("Common:AIModelPrice", {
-                    inputPrice,
-                    outputPrice,
-                  })}
-                </Text>
-              </div>
-
-              <div
-                className={styles.toggle}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ToggleButton
-                  isChecked={enabled}
-                  onChange={() =>
-                    requestToggle({ id: m.id, title: m.alias }, !enabled)
-                  }
-                  isDisabled={isUpdating || !isAiToolsServiceOn}
-                  dataTestId={`ai_model_toggle_${m.id}`}
-                />
-              </div>
-            </div>
-          );
-        })}
-      </RowContainer>
+      {imageRows.length ? (
+        <React.Fragment>
+          <Text
+            fontSize="16px"
+            fontWeight={700}
+            className={styles.groupTitle}
+            dataTestId="ai-image-models-title"
+          >
+            {t("Common:AIImageModels")}
+          </Text>
+          {renderRows(imageRows, "imageRowContainer", 88)}
+        </React.Fragment>
+      ) : null}
 
       {turnOffModelDialog}
     </div>
@@ -193,4 +236,3 @@ export default inject<TStore>(({ servicesStore, paymentStore }) => {
     isAiToolsServiceOn,
   };
 })(observer(RowView));
-

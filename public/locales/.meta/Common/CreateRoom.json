@@ -3,7 +3,7 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2026-09-08T08:44:10.031Z",
+  "updated_at": "2026-09-14T19:16:02.564Z",
   "comment": {
     "text": "This is a button label or dialog title. It appears on buttons that create a new room, or as the title of a dialog for creating a room.",
     "is_auto": true,
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 550,
+      "line_number": 551,
       "context": "{\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: isFormSpace\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 550,
+      "line_number": 551,
       "context": "{\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: isFormSpace\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },

@@ -1,5 +1,6 @@
 {
   "AddRoom": "Thêm phòng",
+  "AddSpace": "Thêm không gian",
   "AddToGroup": "Thêm vào nhóm",
   "ChangesApplied": "Đã áp dụng các thay đổi",
   "CreateAGroup": "Tạo nhóm",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Tắt nhóm phòng",
   "DisablingRoomGroupsDescription": "Các nhóm sẽ được lưu nhưng bị ẩn. Vui lòng bật lại trong Hồ sơ, Quản lý tệp.",
   "EditRoomGroups": "Chỉnh sửa nhóm phòng",
+  "EditSpaceGroups": "Chỉnh sửa nhóm không gian",
   "EmptyGroupRoomsDescription": "Không có phòng nào ở đây. Hãy thử thêm một phòng hoặc xóa nhóm này.",
+  "EmptyGroupSpacesDescription": "Không có không gian nào ở đây. Hãy thử thêm một không gian hoặc xóa nhóm này.",
+  "FormSpaces": "Không gian",
   "GroupHasBeenDeleted": "Nhóm đã bị xóa",
   "GroupIcon": "Biểu tượng nhóm",
   "GroupIsEmpty": "Nhóm trống",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Xóa nhóm",
   "RemoveGroupConfirmation": "Bạn có chắc chắn muốn xóa nhóm phòng này không?",
   "RemoveGroupInfo": "Các phòng được bao gồm trong nhóm sẽ được hiển thị trong phần <strong>Tất cả các Phòng</strong>.",
+  "RemoveSpaceGroupConfirmation": "Bạn sắp xóa một nhóm không gian. Bạn có chắc chắn muốn tiếp tục không?",
+  "RemoveSpaceGroupInfo": "Các không gian trong nhóm sẽ được hiển thị trong phần <strong>Tất cả không gian</strong>.",
   "RoomAddedToGroup": "Phòng đã chọn đã được thêm vào <1>{{groupName}}</1>.",
   "RoomGrouping": "Nhóm phòng",
   "RoomGroupingDisabled": "Nhóm phòng bị vô hiệu hóa",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Bạn có thể nhóm các phòng thành thư mục và dễ dàng chuyển đổi giữa chúng.",
   "RoomRemovedFromGroup": "Phòng đã chọn đã được xóa khỏi <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Các phòng đã chọn đã được thêm vào <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Các phòng đã chọn đã được xóa khỏi <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Các phòng đã chọn đã được xóa khỏi <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "Không gian đã chọn đã được thêm vào <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "Không gian đã chọn đã được xóa khỏi <1>{{groupName}}</1>.",
+  "SpacesAddedToGroup": "Các không gian đã chọn đã được thêm vào <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "Các không gian đã chọn đã được xóa khỏi <1>{{groupName}}</1>."
 }

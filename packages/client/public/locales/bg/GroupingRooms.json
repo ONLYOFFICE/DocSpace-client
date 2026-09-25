@@ -1,5 +1,6 @@
 {
   "AddRoom": "Добави стая",
+  "AddSpace": "Добави пространство",
   "AddToGroup": "Добави към група",
   "ChangesApplied": "Изпратени са промени",
   "CreateAGroup": "Създай група",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Изключване на групи на стаи",
   "DisablingRoomGroupsDescription": "Групите ще бъдат запазени, но скрити. Активирайте в Профил, управление на файловете.",
   "EditRoomGroups": "Редактиране на групи на стаи",
+  "EditSpaceGroups": "Редактиране на групи от пространства",
   "EmptyGroupRoomsDescription": "Няма стаи тук. Опитайте да добавите стая или премахнете тази група.",
+  "EmptyGroupSpacesDescription": "Няма пространства тук. Опитайте да добавите пространство или премахнете тази група.",
+  "FormSpaces": "Пространства",
   "GroupHasBeenDeleted": "Групата е изтрита",
   "GroupIcon": "Икона на група",
   "GroupIsEmpty": "Групата е празна",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Премахване на група",
   "RemoveGroupConfirmation": "Предстои изтриването на група стаи. Имате ли сигурност, че искате да продължите?",
   "RemoveGroupInfo": "Стаите, включени в групата, ще бъдат показани в раздела <strong>Всички стаи</strong>.",
+  "RemoveSpaceGroupConfirmation": "Предстои изтриването на група пространства. Сигурни ли сте, че искате да продължите?",
+  "RemoveSpaceGroupInfo": "Пространствата, включени в групата, ще бъдат показани в раздела <strong>Всички пространства</strong>.",
   "RoomAddedToGroup": "Избраната стая беше добавена към <1>{{groupName}}</1>.",
   "RoomGrouping": "Групиране на стаи",
   "RoomGroupingDisabled": "Групирането на стаи е деактивирано",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Можете да групирате стаи в папки и лесно да превключвате между тях.",
   "RoomRemovedFromGroup": "Избраната стая е премахната от <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Избраните стаи са добавени към <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Избраните стаи са премахнати от <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Избраните стаи са премахнати от <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "Избраното пространство беше добавено към <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "Избраното пространство беше премахнато от <1>{{groupName}}</1>.",
+  "SpacesAddedToGroup": "Избраните пространства бяха добавени към <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "Избраните пространства бяха премахнати от <1>{{groupName}}</1>."
 }

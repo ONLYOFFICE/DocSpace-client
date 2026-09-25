@@ -1,5 +1,6 @@
 {
   "AddRoom": "කාමර එකක් එකතු කරන්න",
+  "AddSpace": "අවකාශයක් එකතු කරන්න",
   "AddToGroup": "කණ්ඩායමට එකතු කරන්න",
   "ChangesApplied": "වෙනස්කම් යොදා ඇත",
   "CreateAGroup": "කණ්ඩායමක් සාදන්න",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "කාමර කණ්ඩායම් අක්‍රිය කිරීම",
   "DisablingRoomGroupsDescription": "කණ්ඩායම් සුරැකෙනු ඇත, නමුත් ඒවා සඟවා ඇත. Profile, File management වෙත ගොස් නැවත සක්‍රීය කරන්න.",
   "EditRoomGroups": "කාමර කණ්ඩායම් සංස්කරණය කරන්න",
+  "EditSpaceGroups": "අවකාශ කණ්ඩායම් සංස්කරණය කරන්න",
   "EmptyGroupRoomsDescription": "මෙතැන කාමර නැත. කාමරයක් එකතු කිරීමට උත්සාහ කරන්න හෝ මෙම කණ්ඩායම ඉවත් කරන්න.",
+  "EmptyGroupSpacesDescription": "මෙතැන අවකාශ නැත. අවකාශයක් එකතු කිරීමට උත්සාහ කරන්න හෝ මෙම කණ්ඩායම ඉවත් කරන්න.",
+  "FormSpaces": "අවකාශ",
   "GroupHasBeenDeleted": "කණ්ඩායම මකා දමා ඇත",
   "GroupIcon": "කණ්ඩායම් අයිකනය",
   "GroupIsEmpty": "කණ්ඩායම හිස්ය",
@@ -18,6 +22,8 @@
   "RemoveGroup": "කණ්ඩායම ඉවත් කරන්න",
   "RemoveGroupConfirmation": "ඔබ කාමර සමූහයක් මකා දැමීමට අදහස් කරයි. ඔබට ඉදචනය කිරීමට විශ්වාසද?",
   "RemoveGroupInfo": "කණ්ඩායමෙහි ඇතුළත් කාමර `<strong>All Rooms</strong>` කොටසේ ප්‍රදර්ශනය කරනු ඇත.",
+  "RemoveSpaceGroupConfirmation": "ඔබ අවකාශ කණ්ඩායමක් මකා දැමීමට සූදානම්. ඔබට ඉදිරියට යාමට අවශ්‍ය බව විශ්වාසද?",
+  "RemoveSpaceGroupInfo": "කණ්ඩායමෙහි ඇතුළත් අවකාශ <strong>සියලු අවකාශ</strong> කොටසේ ප්‍රදර්ශනය කරනු ඇත.",
   "RoomAddedToGroup": "තෝරාගත් කාමරය <1>{{groupName}}</1> වෙත එකතු කර ඇත.",
   "RoomGrouping": "කාමර කණ්ඩායම්කරණය",
   "RoomGroupingDisabled": "කාමර සමූහගත කිරීම අක්‍රිය කර ඇත",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "ඔබට කාමර ෆෝල්ඩර් වලට කණ්ඩායම් කර ඒවා අතර පහසුවෙන් මාරු විය හැකිය.",
   "RoomRemovedFromGroup": "තෝරාගත් කාමරය <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත.",
   "RoomsAddedToGroup": "තෝරාගත් කාමර <1>{{groupName}}</1> වෙත එකතු කර ඇත.",
-  "RoomsRemovedFromGroup": "තෝරාගත් කාමර <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත."
+  "RoomsRemovedFromGroup": "තෝරාගත් කාමර <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත.",
+  "SpaceAddedToGroup": "තෝරාගත් අවකාශය <1>{{groupName}}</1> වෙත එකතු කර ඇත.",
+  "SpaceRemovedFromGroup": "තෝරාගත් අවකාශය <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත.",
+  "SpacesAddedToGroup": "තෝරාගත් අවකාශ <1>{{groupName}}</1> වෙත එකතු කර ඇත.",
+  "SpacesRemovedFromGroup": "තෝරාගත් අවකාශ <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත."
 }

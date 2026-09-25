@@ -43,19 +43,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 1013,
+      "line_number": 1014,
       "context": "// the non-null assertion keeps that behavior.\n onCreate = (format?: FileExtensions | string, t?: TTranslation) => {\n const isPDf = format === FileExtensions.PDF;\n \n if (isMobile && isPDf) {\n toastr.info(t!(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n \n const event: TStoreCustomEvent = new CustomEvent(Events.CREATE, {\n detail: {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 377,
+      "line_number": 370,
       "context": "key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n self.onOpenPDFEditDialog(item.id);\n },\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 377,
+      "line_number": 370,
       "context": "key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n self.onOpenPDFEditDialog(item.id);\n },\n disabled: false,",
       "module": "/packages/client"
     },

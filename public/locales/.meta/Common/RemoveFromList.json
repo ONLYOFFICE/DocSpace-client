@@ -19,25 +19,25 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 843,
+      "line_number": 841,
       "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => self.onRemoveSharedFilesOrFolder([item]),\n disabled:\n self.userStore?.user?.isAdmin ||\n self.userStore?.user?.isOwner ||",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 843,
+      "line_number": 841,
       "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => self.onRemoveSharedFilesOrFolder([item]),\n disabled:\n self.userStore?.user?.isAdmin ||\n self.userStore?.user?.isOwner ||",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 843,
+      "line_number": 841,
       "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => self.onRemoveSharedFilesOrFolder([item]),\n disabled:\n self.userStore?.user?.isAdmin ||\n self.userStore?.user?.isOwner ||",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 843,
+      "line_number": 841,
       "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => self.onRemoveSharedFilesOrFolder([item]),\n disabled:\n self.userStore?.user?.isAdmin ||\n self.userStore?.user?.isOwner ||",
       "module": "/packages/client"
     },

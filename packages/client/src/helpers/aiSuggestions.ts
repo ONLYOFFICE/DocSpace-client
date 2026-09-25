@@ -845,28 +845,31 @@ export const getSuggestionsBySection = (t: TTranslation) => {
     // +
     formSpaceResults,
 
-    // Composer attachment the backend flagged as analyzable (a form): the
-    // chips act on the attached file itself, so they need no folder rights.
+    // Composer attachment the backend flagged as analyzable (a form with
+    // collected responses): the chips act on the attached file itself, so
+    // they carry no `requires` — no folder rights are involved. Shown only
+    // until the backend's own per-form questions arrive, which name the
+    // form's real fields (see `SuggestionSet.analyzableForm` in the ui-kit).
     attachedForm: [
       {
-        name: t("AiSuggestions:AiFormAnalyzeTheForm"),
-        prompt: t("AiSuggestions:AiFormAnalyzeTheFormPrompt"),
+        name: t("AiSuggestions:AiFormWhatCanTheResponsesTellMe"),
+        prompt: t("AiSuggestions:AiFormWhatCanTheResponsesTellMePrompt"),
       },
       {
-        name: t("AiSuggestions:AiFormShowTheFields"),
-        prompt: t("AiSuggestions:AiFormShowTheFieldsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:AiFormWhatIsStillEmpty"),
-        prompt: t("AiSuggestions:AiFormWhatIsStillEmptyPrompt"),
+        name: t("AiSuggestions:AiFormBreakDownTheAnswers"),
+        prompt: t("AiSuggestions:AiFormBreakDownTheAnswersPrompt"),
       },
       {
         name: t("AiSuggestions:AiFormCheckTheAnswers"),
         prompt: t("AiSuggestions:AiFormCheckTheAnswersPrompt"),
       },
       {
-        name: t("AiSuggestions:AiFormSummarizeTheResponses"),
-        prompt: t("AiSuggestions:AiFormSummarizeTheResponsesPrompt"),
+        name: t("AiSuggestions:AiFormCollectResponsesIntoATable"),
+        prompt: t("AiSuggestions:AiFormCollectResponsesIntoATablePrompt"),
+      },
+      {
+        name: t("AiSuggestions:AiFormCreateAReportFromTheForm"),
+        prompt: t("AiSuggestions:AiFormCreateAReportFromTheFormPrompt"),
       },
     ],
 

@@ -282,8 +282,8 @@ importers:
         specifier: 1.15.1
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:onlyoffice-ai-chat-0.5.121.tgz
-        version: file:libs/ui-kit/onlyoffice-ai-chat-0.5.121.tgz(1cade6a5876f104ef671938a56256703)
+        specifier: file:onlyoffice-ai-chat-0.5.130.tgz
+        version: file:libs/ui-kit/onlyoffice-ai-chat-0.5.130.tgz(1cade6a5876f104ef671938a56256703)
       '@onlyoffice/docspace-api-sdk':
         specifier: file:onlyoffice-docspace-api-sdk-3.7.0.tgz
         version: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -599,7 +599,7 @@ importers:
         version: 4.5.0(rollup@4.63.4)(supports-color@8.1.1)(typescript@5.9.3)(vite@8.3.0(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))
       vitest:
         specifier: 4.1.11
-        version: 4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(sass@1.79.6)(terser@5.46.0))
+        version: 4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))
 
   packages/client:
     dependencies:
@@ -867,7 +867,7 @@ importers:
         version: 4.5.0(rollup@4.63.4)(supports-color@8.1.1)(typescript@5.9.3)(vite@8.3.0(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))
       vitest:
         specifier: 4.1.11
-        version: 4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(sass@1.79.6)(terser@5.46.0))
+        version: 4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))
 
   packages/doceditor:
     dependencies:
@@ -1414,7 +1414,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 4.1.11
-        version: 4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(sass@1.79.6)(terser@5.46.0))
+        version: 4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))
 
   packages/shared:
     dependencies:
@@ -1703,7 +1703,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 4.1.11
-        version: 4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(sass@1.79.6)(terser@5.46.0))
+        version: 4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))
 
 packages:
 
@@ -3564,9 +3564,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.121.tgz':
-    resolution: {integrity: sha512-Bz1Xy0+TVKAz+6V/XmNjnyIUxFEtEtKkjPGbJR0Ahi1RIxwPLoVXe5Oh+m6KOUWOVS//sYiDcT080maM4R1QCQ==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.5.121.tgz}
-    version: 0.5.121
+  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.130.tgz':
+    resolution: {integrity: sha512-OYUO1dMzgX4vrHiMm38qcQ9gEt99G5qhcvoVNV7v0vs3LBfo95VJT1GseM0wPaJU6vPHKcFpUqlCnTgeZjVs4A==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.5.130.tgz}
+    version: 0.5.130
     peerDependencies:
       '@anthropic-ai/sdk': ^0.60.0
       '@assistant-ui/react': ^0.11.0
@@ -12416,7 +12416,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@23.1.1':
     optional: true
 
-  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.121.tgz(1cade6a5876f104ef671938a56256703)':
+  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.130.tgz(1cade6a5876f104ef671938a56256703)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
       assistant-stream: 0.2.47
@@ -14253,7 +14253,7 @@ snapshots:
       obug: 2.2.1
       std-env: 4.2.0
       tinyrainbow: 3.1.1
-      vitest: 4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(sass@1.79.6)(terser@5.46.0))
+      vitest: 4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))
 
   '@vitest/expect@3.2.4':
     dependencies:
@@ -14272,7 +14272,7 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.1
 
-  '@vitest/mocker@4.1.11(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(sass@1.79.6)(terser@5.46.0))':
+  '@vitest/mocker@4.1.11(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))':
     dependencies:
       '@vitest/spy': 4.1.11
       estree-walker: 3.0.3
@@ -14316,7 +14316,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.1
-      vitest: 4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(sass@1.79.6)(terser@5.46.0))
+      vitest: 4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))
 
   '@vitest/utils@3.2.4':
     dependencies:
@@ -19162,10 +19162,10 @@ snapshots:
       terser: 5.46.0
       yaml: 2.9.1
 
-  vitest@4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(sass@1.79.6)(terser@5.46.0)):
+  vitest@4.1.11(@types/node@24.10.7)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)):
     dependencies:
       '@vitest/expect': 4.1.11
-      '@vitest/mocker': 4.1.11(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(sass@1.79.6)(terser@5.46.0))
+      '@vitest/mocker': 4.1.11(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.0(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))
       '@vitest/pretty-format': 4.1.11
       '@vitest/runner': 4.1.11
       '@vitest/snapshot': 4.1.11

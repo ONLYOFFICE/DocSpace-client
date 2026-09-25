@@ -1382,6 +1382,9 @@ class DialogsStore {
     if (searchArea !== this.roomGroupsArea) this.setRoomGroups([], searchArea);
 
     const response = (await getRoomGroups(searchArea)) as IRoomGroup[];
+
+    if (searchArea !== this.roomGroupsArea) return;
+
     this.setRoomGroups(response, searchArea);
   };
 

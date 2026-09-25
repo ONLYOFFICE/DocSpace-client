@@ -198,7 +198,7 @@ const SectionFilterContent = ({
     [isFormsSection],
   );
 
-  const roomGroupsSearchArea = isFormsFolder
+  const roomGroupsSearchArea = isFormsSection
     ? RoomSearchArea.Forms
     : RoomSearchArea.Active;
 

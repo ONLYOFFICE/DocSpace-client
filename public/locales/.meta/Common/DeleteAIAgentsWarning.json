@@ -3,7 +3,7 @@
   "content": "I understand the consequences and want to delete the agents",
   "content_en_sha1_hash": "dc4b08ca6ed52bcb522e736f99a654dbbae446bc",
   "created_at": "2026-09-24T00:00:00.000Z",
-  "updated_at": "2026-09-24T00:00:00.000Z",
+  "updated_at": "2026-09-24T18:43:14.875Z",
   "comment": {
     "text": "Checkbox label in the confirmation dialog for deleting several AI agents at once, used to confirm the user's awareness of the deletion consequences.",
     "is_auto": false,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 281,
-      "context": "label={\n isAIAgent\n ? selection.length > 1\n ? t(\"Common:DeleteAIAgentsWarning\")\n : t(\"Common:DeleteAIAgentWarning\")\n : isTemplate",
+      "line_number": 282,
+      "context": "<Checkbox\n style={{ marginTop: \"16px\" }}\n label={\n isAIAgent\n ? selection.length > 1\n ? t(\"Common:DeleteAIAgentsWarning\")\n : t(\"Common:DeleteAIAgentWarning\")\n : isTemplate\n ? t(\"DeleteTemplateWarning\")\n : isFormSpace\n ? t(\"Common:DeleteFormSpaceWarning\")",
       "module": "/packages/client"
     }
   ],

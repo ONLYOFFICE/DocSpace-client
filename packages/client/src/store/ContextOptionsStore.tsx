@@ -862,11 +862,8 @@ class ContextOptionsStore {
     this.oformsStore.setGallerySelected(item);
   };
 
-  // the Gallery ItemTitle consumer passes either a full
-  // TOformFile or a minimal { attributes } shape (and forwards it as-is);
-  // the casts below keep the original unchecked usage.
   getFormGalleryContextOptions = (
-    item: TOformFile | { attributes: { name_form: string } } | null,
+    item: TOformFile | null,
     t: TTranslation,
     navigate?: unknown,
   ): ContextMenuModel[]=> getFormGalleryContextOptionsImpl(this, item, t, navigate);

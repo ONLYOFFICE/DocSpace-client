@@ -3,7 +3,7 @@
   "content": "Delete these agents?",
   "content_en_sha1_hash": "a6fe632d20c9bdf22bde6f9baafe47a42bceb355",
   "created_at": "2026-09-24T00:00:00.000Z",
-  "updated_at": "2026-09-24T00:00:00.000Z",
+  "updated_at": "2026-09-24T18:43:14.873Z",
   "comment": {
     "text": "Dialog title used for confirmation when multiple AI agents are selected for deletion.",
     "is_auto": false,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 215,
-      "context": "const getDialogTitle = () => {\n if (isAIAgent) {\n return selection.length > 1\n ? t(\"Common:DeleteAIAgentsTitle\")\n : t(\"Common:DeleteAIAgentTitle\");\n }",
+      "line_number": 216,
+      "context": "};\n \n const getDialogTitle = () => {\n if (isAIAgent) {\n return selection.length > 1\n ? t(\"Common:DeleteAIAgentsTitle\")\n : t(\"Common:DeleteAIAgentTitle\");\n }\n \n if (isTemplate) {\n return `${t(\"Files:DeleteTemplateAction\")}?`;",
       "module": "/packages/client"
     }
   ],

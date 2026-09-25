@@ -44,9 +44,11 @@ import { ComboButton } from "@onlyoffice/apps-ui-kit/components/combobox";
 import classNames from "classnames";
 import styles from "./MobileView.module.scss";
 import type {
+	TOformCategory,
+	TOformParentCategory,
+} from "@docspace/shared/api/oforms/types";
+import type {
 	CategoryFilterMobileProps,
-	MenuItem,
-	Category,
 	InjectedProps,
 } from "../CategoryFilter.types";
 import { ScrollbarType } from "@onlyoffice/apps-ui-kit/components/scrollbar";
@@ -55,15 +57,14 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
 	t,
 	menuItems,
 	currentCategory,
-	getCategoryTitle,
 	filterOformsByCategory,
-	setOformsCurrentCategory,
 	isLanguageFilterChange,
 }) => {
 	const scrollRef = useRef<ScrollbarType>(null);
 
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [openedMenuItem, setOpenedMenuItem] = useState<MenuItem | null>(null);
+	const [openedMenuItem, setOpenedMenuItem] =
+		useState<TOformParentCategory | null>(null);
 
 	const onCloseDropdown = () => {
 		setIsOpen(false);
@@ -75,17 +76,16 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
 	};
 
 	const onViewAllTemplates = () => {
-		filterOformsByCategory("", "");
+		filterOformsByCategory(null);
 		onCloseDropdown();
 	};
 
-	const onOpenMenuItem = (category: MenuItem) => setOpenedMenuItem(category);
+	const onOpenMenuItem = (category: TOformParentCategory) =>
+		setOpenedMenuItem(category);
 	const onHeaderArrowClick = () => setOpenedMenuItem(null);
 
-	const onFilterByCategory = (category: Category) => {
-		if (!openedMenuItem) return;
-		filterOformsByCategory(openedMenuItem.key, category.id);
-		setOformsCurrentCategory(category);
+	const onFilterByCategory = (category: TOformCategory) => {
+		filterOformsByCategory(category);
 		setOpenedMenuItem(null);
 		setIsOpen(false);
 	};
@@ -97,7 +97,7 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
 		48 +
 		(!openedMenuItem
 			? 36 + 13 + menuItems.length * 36
-			: openedMenuItem.categories.length * 36);
+			: openedMenuItem.subcategories.length * 36);
 
 	if (calculatedHeight > maxCalculatedHeight) height = maxCalculatedHeight;
 	else height = calculatedHeight;
@@ -107,8 +107,7 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
 			<ComboButton
 				selectedOption={{
 					key: currentCategory?.id || "categories",
-					label:
-						getCategoryTitle(currentCategory) || t("FormGallery:Categories"),
+					label: currentCategory?.name || t("FormGallery:Categories"),
 				}}
 				isOpen={isOpen}
 				scaled
@@ -142,7 +141,7 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
 						isHeader
 						withHeaderArrow={!!openedMenuItem}
 						headerArrowAction={onHeaderArrowClick}
-						label={openedMenuItem?.label || t("Categories")}
+						label={openedMenuItem?.name || t("Categories")}
 						style={{ paddingLeft: "0" }}
 					/>
 
@@ -169,22 +168,22 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
 					{!openedMenuItem
 						? menuItems.map((item) => (
 								<DropDownItem
-									key={item.key}
+									key={item.id}
 									className={classNames(
-										`item-by-${item.key}`,
+										`item-by-${item.slug}`,
 										styles.categoryFilterItemMobile,
 									)}
-									label={item.label}
+									label={item.name}
 									onClick={() => onOpenMenuItem(item)}
 									style={{ paddingLeft: "0" }}
 									isSubMenu
 								/>
 							))
-						: openedMenuItem.categories.map((category) => (
+						: openedMenuItem.subcategories.map((category) => (
 								<DropDownItem
 									key={category.id}
 									className={styles.categoryFilterItemMobile}
-									label={getCategoryTitle(category)}
+									label={category.name}
 									onClick={() => onFilterByCategory(category)}
 									style={{ paddingLeft: "0" }}
 								/>
@@ -197,9 +196,7 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
 
 const injectStores = ({ oformsStore }: InjectedProps) => ({
 	currentCategory: oformsStore.currentCategory,
-	getCategoryTitle: oformsStore.getCategoryTitle,
 	filterOformsByCategory: oformsStore.filterOformsByCategory,
-	setOformsCurrentCategory: oformsStore.setOformsCurrentCategory,
 });
 
 export default withoutInjected<

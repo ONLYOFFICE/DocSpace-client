@@ -3,7 +3,7 @@
   "content": "The selected <1>agents ({{count}})</1> will be permanently deleted. All data and user accesses will be lost.",
   "content_en_sha1_hash": "9fab667a0bb743b68fdc609e6beb3ef448f40269",
   "created_at": "2026-09-24T00:00:00.000Z",
-  "updated_at": "2026-09-24T00:00:00.000Z",
+  "updated_at": "2026-09-24T18:43:14.866Z",
   "comment": {
     "text": "Body text in the confirmation dialog for deleting several AI agents at once, warning of permanent data loss. The `count` variable is wrapped in a tag for bold formatting.",
     "is_auto": false,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 101,
-      "context": "<Trans\n t={t}\n i18nKey=\"DeleteAIAgentsDescription\"\n ns=\"Common\"\n values={{ count: selection.length }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}",
+      "line_number": 105,
+      "context": "</>\n ) : (\n <>\n <Trans\n t={t}\n i18nKey=\"DeleteAIAgentsDescription\"\n ns=\"Common\"\n values={{ count: selection.length }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}",
       "module": "/packages/client"
     }
   ],

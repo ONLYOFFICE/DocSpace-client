@@ -143,7 +143,6 @@ export type TFormGallery = {
   uploadPath: string;
   uploadDomain: string;
   uploadExt: string;
-  uploadDashboard: string;
   url?: string;
   uploadUrl?: string;
 };

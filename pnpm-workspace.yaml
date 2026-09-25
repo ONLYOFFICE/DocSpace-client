@@ -89,6 +89,7 @@ catalog:
   '@radix-ui/react-slot': '1.2.3'
   '@radix-ui/react-switch': '1.2.6'
   '@radix-ui/react-tabs': '1.1.13'
+  '@radix-ui/react-toast': '1.2.15'
   '@radix-ui/react-tooltip': '1.2.8'
   'assistant-stream': '^0.2.47'
   'class-variance-authority': '0.7.1'

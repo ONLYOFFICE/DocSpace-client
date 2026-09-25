@@ -203,6 +203,9 @@ catalogs:
     '@radix-ui/react-tabs':
       specifier: 1.1.13
       version: 1.1.13
+    '@radix-ui/react-toast':
+      specifier: 1.2.15
+      version: 1.2.15
     '@radix-ui/react-tooltip':
       specifier: 1.2.8
       version: 1.2.8
@@ -369,10 +372,10 @@ importers:
         version: 1.15.1
       '@onlyoffice/ai-chat':
         specifier: file:../../onlyoffice-ai-chat-0.5.130-docs.8.tgz
-        version: file:onlyoffice-ai-chat-0.5.130-docs.8.tgz(6948e608d79e3a42e22ac535b46d726b)
+        version: file:onlyoffice-ai-chat-0.5.130-docs.8.tgz(e7e1441c7a85a29b3dce13c7306af61b)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(5ce581e1fd94f45eb6d9b39e8430726f)
+        version: file:onlyoffice-apps-ui-kit.tgz(c812326fb3741f99ab439a7aa1e6a423)
       '@onlyoffice/docspace-sdk-js':
         specifier: file:onlyoffice-docspace-sdk-js-2.2.0.tgz
         version: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz
@@ -394,6 +397,9 @@ importers:
       '@radix-ui/react-tabs':
         specifier: 'catalog:'
         version: 1.1.13(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@radix-ui/react-toast':
+        specifier: 'catalog:'
+        version: 1.2.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@radix-ui/react-tooltip':
         specifier: 'catalog:'
         version: 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -712,7 +718,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(5ce581e1fd94f45eb6d9b39e8430726f)
+        version: file:onlyoffice-apps-ui-kit.tgz(c812326fb3741f99ab439a7aa1e6a423)
       '@onlyoffice/document-editor-react':
         specifier: 2.1.1
         version: 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -836,7 +842,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(5ce581e1fd94f45eb6d9b39e8430726f)
+        version: file:onlyoffice-apps-ui-kit.tgz(c812326fb3741f99ab439a7aa1e6a423)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -957,7 +963,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(5ce581e1fd94f45eb6d9b39e8430726f)
+        version: file:onlyoffice-apps-ui-kit.tgz(c812326fb3741f99ab439a7aa1e6a423)
       axios:
         specifier: '>=1.15.2'
         version: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -1123,10 +1129,10 @@ importers:
         version: 1.15.1
       '@onlyoffice/ai-chat':
         specifier: file:../../onlyoffice-ai-chat-0.5.130-docs.8.tgz
-        version: file:onlyoffice-ai-chat-0.5.130-docs.8.tgz(6948e608d79e3a42e22ac535b46d726b)
+        version: file:onlyoffice-ai-chat-0.5.130-docs.8.tgz(e7e1441c7a85a29b3dce13c7306af61b)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(5ce581e1fd94f45eb6d9b39e8430726f)
+        version: file:onlyoffice-apps-ui-kit.tgz(c812326fb3741f99ab439a7aa1e6a423)
       '@radix-ui/react-dialog':
         specifier: 'catalog:'
         version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1142,6 +1148,9 @@ importers:
       '@radix-ui/react-tabs':
         specifier: 'catalog:'
         version: 1.1.13(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@radix-ui/react-toast':
+        specifier: 'catalog:'
+        version: 1.2.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@radix-ui/react-tooltip':
         specifier: 'catalog:'
         version: 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1382,7 +1391,7 @@ importers:
         version: 2.4.0
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(5ce581e1fd94f45eb6d9b39e8430726f)
+        version: file:onlyoffice-apps-ui-kit.tgz(c812326fb3741f99ab439a7aa1e6a423)
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -4388,6 +4397,19 @@ packages:
 
   '@radix-ui/react-tabs@1.1.13':
     resolution: {integrity: sha512-7xdcatg7/U+7+Udyoj2zodtI9H/IIopqo+YOIcZOq1nJwXWBZ9p8xiu5llXlekDbZkca79a/fozEYQXIA4sW6A==}
+    peerDependencies:
+      '@types/react': 19.2.10
+      '@types/react-dom': 19.2.3
+      react: 19.2.8
+      react-dom: 19.2.8
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+
+  '@radix-ui/react-toast@1.2.15':
+    resolution: {integrity: sha512-3OSz3TacUWy4WtOXV38DggwxoqJK4+eDkNMl5Z/MJZaoUPaP4/9lf81xXMe1I2ReTAptverZUpbPY4wWwWyL5g==}
     peerDependencies:
       '@types/react': 19.2.10
       '@types/react-dom': 19.2.3
@@ -11767,7 +11789,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@23.1.1':
     optional: true
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.130-docs.8.tgz(6948e608d79e3a42e22ac535b46d726b)':
+  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.5.130-docs.8.tgz(e7e1441c7a85a29b3dce13c7306af61b)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
       assistant-stream: 0.2.47
@@ -11787,6 +11809,7 @@ snapshots:
       '@radix-ui/react-slot': 1.2.3(@types/react@19.2.10)(react@19.2.8)
       '@radix-ui/react-switch': 1.2.6(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@radix-ui/react-tabs': 1.1.13(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@radix-ui/react-toast': 1.2.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@radix-ui/react-tooltip': 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       class-variance-authority: 0.7.1
       clsx: 2.1.1
@@ -11804,7 +11827,7 @@ snapshots:
       tailwind-merge: 3.6.0
       zustand: 5.0.7(@types/react@19.2.10)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
 
-  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(5ce581e1fd94f45eb6d9b39e8430726f)':
+  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(c812326fb3741f99ab439a7aa1e6a423)':
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@onlyoffice/docspace-api-sdk': 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -11843,7 +11866,7 @@ snapshots:
       xss: 1.0.15
       zoom-level: 2.5.0
     optionalDependencies:
-      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-0.5.130-docs.8.tgz(6948e608d79e3a42e22ac535b46d726b)
+      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-0.5.130-docs.8.tgz(e7e1441c7a85a29b3dce13c7306af61b)
       '@onlyoffice/document-editor-react': 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@socket.io/component-emitter': 3.1.2
       axios: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -12462,6 +12485,26 @@ snapshots:
       '@radix-ui/react-primitive': 2.1.3(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@radix-ui/react-roving-focus': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@radix-ui/react-use-controllable-state': 1.2.2(@types/react@19.2.10)(react@19.2.8)
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+    optionalDependencies:
+      '@types/react': 19.2.10
+      '@types/react-dom': 19.2.3(@types/react@19.2.10)
+
+  '@radix-ui/react-toast@1.2.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@radix-ui/primitive': 1.1.3
+      '@radix-ui/react-collection': 1.1.7(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@radix-ui/react-compose-refs': 1.1.2(@types/react@19.2.10)(react@19.2.8)
+      '@radix-ui/react-context': 1.1.2(@types/react@19.2.10)(react@19.2.8)
+      '@radix-ui/react-dismissable-layer': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@radix-ui/react-portal': 1.1.9(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@radix-ui/react-presence': 1.1.5(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@radix-ui/react-primitive': 2.1.3(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@radix-ui/react-use-callback-ref': 1.1.1(@types/react@19.2.10)(react@19.2.8)
+      '@radix-ui/react-use-controllable-state': 1.2.2(@types/react@19.2.10)(react@19.2.8)
+      '@radix-ui/react-use-layout-effect': 1.1.1(@types/react@19.2.10)(react@19.2.8)
+      '@radix-ui/react-visually-hidden': 1.2.3(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
     optionalDependencies:

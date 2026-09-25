@@ -54,6 +54,7 @@
     "@radix-ui/react-slot": "catalog:",
     "@radix-ui/react-switch": "catalog:",
     "@radix-ui/react-tabs": "catalog:",
+    "@radix-ui/react-toast": "catalog:",
     "@radix-ui/react-tooltip": "catalog:",
     "@react-spring/web": "9.7.5",
     "@socket.io/component-emitter": "3.1.2",

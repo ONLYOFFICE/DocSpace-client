@@ -197,6 +197,7 @@ export const buildContextOptions = (
       "update-xlsx-data",
       "separator0",
       "ask-ai",
+      "analyze-responses",
       "separator6",
       "filling-status",
       "start-filling",
@@ -248,29 +249,43 @@ export const buildContextOptions = (
       "stop-filling",
     ];
 
-    // `security.AskAi` is server-computed at fetch time, so an already-loaded
+    // Both AI entries are server-computed at fetch time, so an already-loaded
     // list keeps stale `true` values after an admin disables AI portal-wide —
-    // check the live switch as well.
+    // check the live switch as well. Privacy and encryption rule the chat out
+    // whatever the rights say.
     //
     // Inside an AI agent room "Ask AI" does not raise the side panel (disabled
     // there — see `isAiChatAvailable` in Shell) but navigates to the room's
     // chat tab, which a member without `UseChat` is redirected away from. Its
     // files still carry `AskAi: true`, so without this the entry is offered to
-    // a Viewer and leads straight back to where they came from.
+    // a Viewer and leads straight back to where they came from. The same holds
+    // for "Analyze responses", which opens that very chat.
     const noAgentChatAccess =
-      deps.selectedFolderStore.isAIRoom &&
-      !deps.accessRightsStore.canUseChat;
+      deps.selectedFolderStore.isAIRoom && !deps.accessRightsStore.canUseChat;
 
-    const noAskAi =
-      !item?.security?.AskAi ||
+    const noAi =
       !deps.settingsStore.aiServicesEnabled ||
       noAgentChatAccess ||
       isPrivacyFolder ||
       item.private ||
       isEncrypted;
 
-    if (noAskAi) {
-      fileOptions = removeOptions(fileOptions, ["ask-ai", "separator6"]);
+    // "Analyze responses" is the same chat, opened on the form's answers
+    // rather than on the document, so the two are alternatives: where the
+    // server offers it, it replaces the plain entry.
+    const canAnalyzeResponses = !noAi && Boolean(item?.security?.AnalyzeResponses);
+    const canAskAi = !noAi && !canAnalyzeResponses && Boolean(item?.security?.AskAi);
+
+    if (!canAnalyzeResponses) {
+      fileOptions = removeOptions(fileOptions, ["analyze-responses"]);
+    }
+
+    if (!canAskAi) {
+      fileOptions = removeOptions(fileOptions, ["ask-ai"]);
+    }
+
+    if (!canAskAi && !canAnalyzeResponses) {
+      fileOptions = removeOptions(fileOptions, ["separator6"]);
     }
 
     if (item.external && item.isLinkExpired) {
@@ -306,7 +321,13 @@ export const buildContextOptions = (
         "mark-as-favorite",
         "remove-from-favorites",
         "copy-to",
+        // Both AI entries, because they are alternatives: a form the server
+        // lets you analyze offers "analyze-responses" *instead of* "ask-ai",
+        // so naming only the latter would leave the chat reachable in the one
+        // place it is meant to be absent — and with `separator6` stripped
+        // below it, hanging off the previous group.
         "ask-ai",
+        "analyze-responses",
         "separator6",
       ]);
 

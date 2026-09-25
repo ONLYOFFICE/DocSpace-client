@@ -1,0 +1,29 @@
+{
+  "key_path": "AiFormCollectResponsesIntoATable",
+  "content": "Collect the answers into a table",
+  "content_en_sha1_hash": "28fe0ac2562224f06d89a03701b54756180bef16",
+  "created_at": "2026-09-14T19:16:00.066Z",
+  "updated_at": "2026-09-14T19:19:48.030Z",
+  "comment": {
+    "text": "Label for an AI suggestion option that triggers the aggregation of form responses into a table.",
+    "is_auto": true,
+    "updated_at": "2026-09-14T19:19:48.030Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 867,
+      "context": "{\n name: t(\"AiSuggestions:AiFormCheckTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormCheckTheAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormCollectResponsesIntoATable\"),\n prompt: t(\"AiSuggestions:AiFormCollectResponsesIntoATablePrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormCreateAReportFromTheForm\"),\n prompt: t(\"AiSuggestions:AiFormCreateAReportFromTheFormPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -64,8 +64,6 @@ import { TAgent, TAIConfig } from "@docspace/shared/api/ai/types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
-import CreateEditAgentStore from "SRC_DIR/store/CreateEditAgentStore";
-import { AgentDialogContext } from "SRC_DIR/helpers/enums";
 import { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
@@ -119,10 +117,6 @@ type setAgentParamsProps = {
   isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
-  recommendedModelForForms?: TAIConfig["recommendedModelForForms"];
-  isUserAdmin?: boolean;
-  openContext?: CreateEditAgentStore["openContext"];
-  standalone?: SettingsStore["standalone"];
 };
 
 const SetAgentParams = ({
@@ -159,10 +153,6 @@ const SetAgentParams = ({
   selectedServers,
   setSelectedServers,
   systemAiEnabled,
-  recommendedModelForForms,
-  isUserAdmin,
-  openContext,
-  standalone,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -498,10 +488,6 @@ const SetAgentParams = ({
 
       <ProfileSettings
         agentParams={agentParams}
-        isAdmin={!!isUserAdmin}
-        recommendedModelForForms={recommendedModelForForms}
-        openedFromChat={openContext === AgentDialogContext.Chat}
-        standalone={standalone}
         setAgentParams={setAgentParams}
       />
 
@@ -559,13 +545,9 @@ export default inject(
     infoPanelStore,
     avatarEditorDialogStore,
     currentQuotaStore,
-    userStore,
-    createEditAgentStore,
   }: TStore) => {
     const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
-    const { openContext } = createEditAgentStore;
-    const { folderFormValidation, maxImageUploadSize, aiConfig, standalone } =
-      settingsStore;
+    const { folderFormValidation, maxImageUploadSize, aiConfig } = settingsStore;
 
     const { bufferSelection } = filesStore;
     const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
@@ -612,11 +594,6 @@ export default inject(
       infoPanelSelection,
 
       systemAiEnabled: aiConfig?.systemAiEnabled,
-      recommendedModelForForms: aiConfig?.recommendedModelForForms,
-      isUserAdmin:
-        !!userStore?.user && (userStore.user.isOwner || userStore.user.isAdmin),
-      openContext,
-      standalone,
     };
   },
 )(observer(SetAgentParams));

@@ -3,7 +3,7 @@
   "content": "Invite people",
   "content_en_sha1_hash": "e1eb97afa7ac563e4e26cd26d812294d4e04782c",
   "created_at": "2026-08-31T18:23:11.871Z",
-  "updated_at": "2026-08-31T18:59:27.909Z",
+  "updated_at": "2026-09-14T19:16:02.536Z",
   "comment": {
     "text": "Label for a menu option or a title used to initiate the process of inviting users to a room or folder.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 478,
+      "line_number": 471,
       "context": "disabled: false,\n },\n {\n id: \"option_invite-users-to-room\",\n key: \"invite-users-to-room\",\n label: t(\"Common:InviteContacts\"),\n icon: PersonReactSvgUrl,\n onClick: () => self.onClickInviteUsers(item.id, item.roomType),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },

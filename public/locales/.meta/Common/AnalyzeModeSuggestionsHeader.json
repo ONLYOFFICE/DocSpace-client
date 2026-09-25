@@ -1,0 +1,29 @@
+{
+  "key_path": "AnalyzeModeSuggestionsHeader",
+  "content": "Ask about the responses in {{fileName}}. Other files are not attached in this chat.",
+  "content_en_sha1_hash": "9ffa9422965e045dcb37d4b819f21cff505e2ec3",
+  "created_at": "2026-09-14T19:15:17.795Z",
+  "updated_at": "2026-09-14T19:17:47.193Z",
+  "comment": {
+    "text": "Instructional hint text in the AI agent's introduction screen that informs the user which file is currently being analyzed. The {{fileName}} variable represents the name of the attached document.",
+    "is_auto": true,
+    "updated_at": "2026-09-14T19:17:47.193Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/analyze-intro/index.tsx",
+      "line_number": 94,
+      "context": "lineHeight=\"16px\"\n className={`${styles.text} ${styles.hint}`}\n title={fileName}\n noSelect\n >\n {t(\"AnalyzeModeSuggestionsHeader\", { fileName })}\n </Text>\n </div>\n </div>\n );\n });",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

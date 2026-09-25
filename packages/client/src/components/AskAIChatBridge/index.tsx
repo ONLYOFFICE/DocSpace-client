@@ -80,7 +80,7 @@ const AskAIChatBridgeComponent = () => {
 
     // Read-and-clear, so a second invocation of this effect with the same
     // closure attaches nothing.
-    const file = dialogsStore.consumeAskAIFile();
+    const { file, analyze } = dialogsStore.consumeAskAIFile();
     if (!file) return;
 
     // Inside an AI room the chat is not the side panel (which is disabled
@@ -111,12 +111,18 @@ const AskAIChatBridgeComponent = () => {
     // and therefore the freshly attached chip — is not on screen.
     setCurrentPage("chat");
 
-    attachFilesToChat([file])
-      .then(({ skippedOverLimit, duplicates }) => {
+    // "Analyze responses" attaches the form as the subject of the message:
+    // the composer is emptied first and locked to it until the message is
+    // sent (see `useAnalyzeLock` in the ui-kit). The caller decides — the
+    // context menu entry and the results folder's button both say so, plain
+    // "Ask AI" does not.
+    attachFilesToChat([{ ...file, analyzeOnly: analyze }])
+      .then(({ skippedOverLimit, duplicates, cap }) => {
         // A file that did not make it onto the composer — capped or
-        // already there — must not disappear without a word.
+        // already there — must not disappear without a word. The cap is per
+        // section, so quote the one that actually applied.
         notifyAlreadyAttached(t, duplicates);
-        notifyAttachmentLimit(t, skippedOverLimit);
+        notifyAttachmentLimit(t, skippedOverLimit, cap);
       })
       .catch((error: unknown) => {
         toastr.error(

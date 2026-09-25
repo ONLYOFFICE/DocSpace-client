@@ -53,12 +53,15 @@ type AnalyzeResponsesProps = ExternalAnalyzeResponsesProps & {
     TStore["selectedFolderStore"]["getSelectedFolder"]
   >;
   askAI: TStore["contextOptionsStore"]["askAI"];
+  /** The chat is unavailable here whatever the folder's rights say. */
+  noAi: boolean;
 };
 
 const AnalyzeResponsesButtonComponent = ({
   selectedFolder,
   className,
   askAI,
+  noAi,
 }: AnalyzeResponsesProps) => {
   const { t } = useTranslation("Files");
   const isDesktopView = useIsDesktop();
@@ -66,6 +69,7 @@ const AnalyzeResponsesButtonComponent = ({
 
   if (
     !isDesktopView ||
+    noAi ||
     selectedFolder.type !== FolderType.SubFolderDone ||
     !selectedFolder.originalFormId ||
     !(
@@ -86,7 +90,11 @@ const AnalyzeResponsesButtonComponent = ({
       startLoader(() => setIsLoading(true));
 
       const file = await getFileInfo(originalFormId);
-      await askAI(file);
+      // This button is the analyze action by definition — it only renders on
+      // a results folder — so it says so instead of leaving the chat to infer
+      // it from the fetched row: the form is attached as the subject of the
+      // message and the composer takes nothing else.
+      await askAI(file, true);
     } catch (error) {
       console.error(error);
       toastr.error(error as Error);
@@ -115,11 +123,33 @@ export const AnalyzeResponsesButton = inject<
   TStore,
   FC<ExternalAnalyzeResponsesProps>,
   Omit<AnalyzeResponsesProps, keyof ExternalAnalyzeResponsesProps>
->(({ selectedFolderStore, contextOptionsStore }) => {
+>(({
+  selectedFolderStore,
+  contextOptionsStore,
+  settingsStore,
+  treeFoldersStore,
+  publicRoomStore,
+}) => {
   const selectedFolder = selectedFolderStore.getSelectedFolder();
   const askAI = contextOptionsStore.askAI;
 
-  return { selectedFolder, askAI };
+  return {
+    selectedFolder,
+    askAI,
+    // `security.AnalyzeResponses` is computed when the folder is fetched, so
+    // an open results folder keeps saying yes after an admin switches AI off
+    // portal-wide. The signals the context menu checks are read here too
+    // (`filesStore/contextOptions.helpers.ts`), because this button is the
+    // same action: privacy rules the chat out whatever the rights say, and a
+    // public room hides it altogether — otherwise a link visitor would reach
+    // through this button what the menu denies them. Encryption is the one
+    // signal that has no counterpart here: `TFolder` carries no such flag.
+    noAi:
+      !settingsStore.aiServicesEnabled ||
+      treeFoldersStore.isPrivacyFolder ||
+      selectedFolder.private ||
+      publicRoomStore.isPublicRoom,
+  };
 })(
   observer(
     AnalyzeResponsesButtonComponent as FC<ExternalAnalyzeResponsesProps>,

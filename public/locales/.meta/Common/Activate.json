@@ -3,7 +3,7 @@
   "content": "Activate",
   "content_en_sha1_hash": "92ef08325a4813563a3110359906076374683282",
   "created_at": "2025-05-19T21:30:42.888Z",
-  "updated_at": "2026-09-16T18:53:34.436Z",
+  "updated_at": "2026-09-25T07:39:03.137Z",
   "comment": {
     "text": "This is the label for a button. Clicking it activates a license after a file has been uploaded.",
     "is_auto": true,
@@ -55,8 +55,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
-      "line_number": 131,
-      "context": "// Heading and button are deliberately the same on both tabs: together they say\n // what the page as a whole switches on, without repeating each other. What each\n // tab adds is said between them, by the description.\n const getBannerTexts = (t, isWebSearchTab) => ({\n activateTitle: t(\"Common:ActivateAIFeaturesToGetStarted\"),\n activateLabel: t(\"Common:Activate\"),\n ...(isWebSearchTab\n ? {\n activateDescription: t(\"Common:ActivateAISearchDescription\"),\n enabledTitle: t(\"Common:AISearchEnabledTitle\"),\n enabledDescription: t(\"Common:AISearchEnabledDescription\"),",
+      "line_number": 129,
+      "context": "// Heading and button are deliberately the same on both tabs: together they say\n // what the page as a whole switches on, without repeating each other. What each\n // tab adds is said between them, by the description.\n const getBannerTexts = (t, isWebSearchTab) => ({\n activateLabel: t(\"Common:Activate\"),\n ...(isWebSearchTab\n ? {\n activateTitle: t(\"Common:ActivateAISearchToGetStarted\"),\n activateDescription: t(\"Common:ActivateAISearchDescription\"),\n enabledTitle: t(\"Common:AISearchEnabledTitle\"),",
       "module": "/packages/client"
     },
     {

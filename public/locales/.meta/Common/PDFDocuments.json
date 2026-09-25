@@ -1,39 +1,21 @@
 {
-  "key_path": "Spaces",
-  "content": "Workspaces",
-  "content_en_sha1_hash": "205b4561ed36923d5a51de1b34c70044bf82e111",
-  "created_at": "2026-08-12T11:00:39.325Z",
-  "updated_at": "2026-09-25T07:39:03.282Z",
+  "key_path": "PDFDocuments",
+  "content": "PDF documents",
+  "content_en_sha1_hash": "87d214026956eb523cb0da75d43f92941ae35555",
+  "created_at": "2026-09-25T07:38:42.535Z",
+  "updated_at": "2026-09-25T07:42:28.054Z",
   "comment": {
-    "text": "Navigation menu label and page header used to access the section for managing various workspaces.",
+    "text": "Title for a collection or list of multiple PDF files.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:02:02.576Z",
+    "updated_at": "2026-09-25T07:42:28.054Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
-      "line_number": 477,
-      "context": "isAdmin && standalone && !limitedAccessSpace\n ? {\n key: \"spaces-management-settings\",\n id: \"spaces\",\n icon: SpacesReactSvgUrl,\n label: t(\"Common:Spaces\"),\n onClick: this.onSpacesClick,\n url: SPACES_URL,\n preventNewTab: true,\n items:\n baseDomain && baseDomain !== \"localhost\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/management/src/components/article/index.tsx",
-      "line_number": 107,
-      "context": ">\n <div className={styles.articleContent}>\n <ArticleHeader />\n <ArticleItem\n key=\"spaces\"\n text={t(\"Common:Spaces\")}\n iconNode={<SpacesSvg />}\n showText={showText}\n onClick={() => onItemClick(\"spaces\")}\n isActive={activePath.includes(\"spaces\")}\n folderId=\"management_catalog-spaces\"",
-      "module": "/packages/management"
-    },
-    {
-      "file_path": "/packages/management/src/lib/index.ts",
-      "line_number": 60,
-      "context": "export const getHeaderByPathname = (pathname: string, t: TTranslation) => {\n const path = pathname.split(\"/\").at(-1);\n \n switch (path) {\n case \"spaces\":\n return { key: t(\"Common:Spaces\"), isSubPage: false };\n case \"branding\":\n case \"data-backup\":\n case \"auto-backup\":\n case \"restore\":\n case \"encrypt-data\":",
-      "module": "/packages/management"
-    },
-    {
-      "file_path": "/packages/management/src/lib/index.ts",
-      "line_number": 60,
-      "context": "export const getHeaderByPathname = (pathname: string, t: TTranslation) => {\n const path = pathname.split(\"/\").at(-1);\n \n switch (path) {\n case \"spaces\":\n return { key: t(\"Common:Spaces\"), isSubPage: false };\n case \"branding\":\n case \"data-backup\":\n case \"auto-backup\":\n case \"restore\":\n case \"encrypt-data\":",
-      "module": "/packages/management"
+      "file_path": "/packages/shared/utils/getPDFTite.ts",
+      "line_number": 43,
+      "context": "export const getSinglePDFTitle = (t: TTranslation, isForm: boolean) => {\n return isForm ? t(\"Common:Form\") : t(\"Common:Document\");\n };\n \n export const getManyPDFTitle = (t: TTranslation, isForms: boolean) => {\n return isForms ? t(\"Common:PDFForms\") : t(\"Common:PDFDocuments\");\n };",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

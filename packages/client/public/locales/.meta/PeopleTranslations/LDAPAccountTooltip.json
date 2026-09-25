@@ -3,7 +3,7 @@
   "content": "This user account is loaded from LDAP. If you need to change the user name and email address, or disable a user, refer to the LDAP directory.",
   "content_en_sha1_hash": "c6c9f4030007d68e41bd8f5af7b73dfdf15d63b7",
   "created_at": "2025-05-19T21:30:53.478Z",
-  "updated_at": "2026-07-07T08:59:21.820Z",
+  "updated_at": "2026-09-25T07:39:03.205Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over an LDAP badge next to a user's name, explaining that the user account is managed via LDAP.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/ItemTitle.tsx",
-      "line_number": 211,
+      "line_number": 209,
       "context": ") : null}\n \n {isLDAP ? (\n <div\n data-tooltip-id=\"system-tooltip\"\n data-tooltip-content={t(\"PeopleTranslations:LDAPAccountTooltip\")}\n data-tooltip-place=\"bottom\"\n >\n <Badge\n className={styles.ldapBadge}\n label={getConstName(\"LDAP\")}",
       "module": "/packages/client"
     },

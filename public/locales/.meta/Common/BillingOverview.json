@@ -3,11 +3,12 @@
   "content": "Billing Overview",
   "content_en_sha1_hash": "f47699ff2527d9e1733debd305710db2080f6ca0",
   "created_at": "2026-07-07T08:58:38.995Z",
-  "updated_at": "2026-09-16T20:56:59.542Z",
+  "updated_at": "2026-09-25T07:42:40.279Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Sidebar navigation item label that links to the billing overview page.",
+    "is_auto": true,
+    "updated_at": "2026-09-25T07:42:40.279Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

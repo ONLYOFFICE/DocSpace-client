@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2026-09-08T08:44:10.069Z",
+  "updated_at": "2026-09-25T07:39:03.195Z",
   "comment": {
     "text": "This is a table column header or a filter option label. It refers to the kind or category of an item, such as a transaction or a file.",
     "is_auto": true,
@@ -37,14 +37,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 282,
-      "context": "</Text>\n \n <Text\n tooltipFitToContent\n className={styles.infoField}\n title={t(\"Common:Type\")}\n >\n {t(\"Common:Type\")}\n </Text>\n {typeData}",
+      "line_number": 277,
+      "context": "{statusLabel}\n </Text>\n \n <Text\n className={styles.infoField}\n title={t(\"Common:Type\")}\n >\n {t(\"Common:Type\")}\n </Text>\n {typeData}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 282,
-      "context": "</Text>\n \n <Text\n tooltipFitToContent\n className={styles.infoField}\n title={t(\"Common:Type\")}\n >\n {t(\"Common:Type\")}\n </Text>\n {typeData}",
+      "line_number": 277,
+      "context": "{statusLabel}\n </Text>\n \n <Text\n className={styles.infoField}\n title={t(\"Common:Type\")}\n >\n {t(\"Common:Type\")}\n </Text>\n {typeData}",
       "module": "/packages/client"
     },
     {

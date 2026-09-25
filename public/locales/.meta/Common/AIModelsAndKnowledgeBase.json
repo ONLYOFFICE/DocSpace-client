@@ -3,7 +3,7 @@
   "content": "Models & Knowledge base",
   "content_en_sha1_hash": "bbe19f70db5c2a09e270c5bcb9479e6c48e1caa5",
   "created_at": "2026-09-23T12:24:05.561Z",
-  "updated_at": "2026-09-23T12:27:59.475Z",
+  "updated_at": "2026-09-25T07:39:03.214Z",
   "comment": {
     "text": "Feature label in the AI settings list within Portal Settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
-      "line_number": 264,
+      "line_number": 266,
       "context": "</div>\n ) : (\n <div className={styles.featureRow}>\n <AIIcon className={styles.payIcon} />\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"Common:AIModelsAndKnowledgeBase\")}\n </Text>\n </div>\n )}\n {pricingNote ? (\n <div className={styles.featureRow}>",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Analyze responses is on: this chat works with {{fileName}} only. Start a new chat to attach other files.",
   "content_en_sha1_hash": "397d224b732121e905a0b3cb3df6922a90350b76",
   "created_at": "2026-09-14T19:15:19.325Z",
-  "updated_at": "2026-09-14T19:17:13.621Z",
+  "updated_at": "2026-09-25T10:58:53.433Z",
   "comment": {
     "text": "An info toast message appearing when \"Analyze responses\" mode is active, notifying the user that the chat is restricted to the file specified by {{fileName}}.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/providers/files/notices.ts",
-      "line_number": 95,
+      "line_number": 108,
       "context": "// The name is what makes this explainable, so when the host sent none\n // (an attach that reported no title) the sentence drops the slot rather\n // than printing a hole where the form should be.\n toastr.info(\n cap.fileName\n ? t(\"Common:AttachFilesAnalyzingForm\", {\n fileName: cap.fileName,\n defaultValue:\n \"Analyze responses is on: this chat works with {{fileName}} only. Start a new chat to attach other files.\",\n })\n : t(\"Common:AttachFilesAnalyzingFormUnnamed\", {",
       "module": "/libs/ui-kit"
     }

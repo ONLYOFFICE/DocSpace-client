@@ -1,0 +1,29 @@
+{
+  "key_path": "RemoveSpaceGroupConfirmation",
+  "content": "You are about to delete group of spaces. Are you sure you want to proceed?",
+  "content_en_sha1_hash": "9941d2f6bfafc67880e7513d24dad1bf06b4803e",
+  "created_at": "2026-09-25T10:58:49.209Z",
+  "updated_at": "2026-09-25T11:03:15.237Z",
+  "comment": {
+    "text": "Confirmation text in a modal dialog body that appears when a user attempts to delete a group of spaces.",
+    "is_auto": true,
+    "updated_at": "2026-09-25T11:03:15.237Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/DeleteGroupDialog.tsx",
+      "line_number": 121,
+      "context": ">\n <ModalDialog.Header>{t(\"GroupingRooms:RemoveGroup\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text lineHeight=\"20px\">\n {isFormsSection\n ? t(\"GroupingRooms:RemoveSpaceGroupConfirmation\")\n : t(\"GroupingRooms:RemoveGroupConfirmation\")}\n </Text>\n <Text style={{ marginTop: \"16px\" }} lineHeight=\"24px\">\n {isFormsSection ? (\n <Trans",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

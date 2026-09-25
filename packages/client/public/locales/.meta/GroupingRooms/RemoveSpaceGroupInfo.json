@@ -1,0 +1,29 @@
+{
+  "key_path": "RemoveSpaceGroupInfo",
+  "content": "The spaces included in group will be displayed in the <strong>All spaces</strong> section.",
+  "content_en_sha1_hash": "7a26d8eb8d6a1c9726178519f9473cf98afb2832",
+  "created_at": "2026-09-25T10:58:49.211Z",
+  "updated_at": "2026-09-25T11:02:51.992Z",
+  "comment": {
+    "text": "Informational text in the Delete Group dialog explaining that spaces from the removed group will be moved to the \"All spaces\" section. The `<strong>` tag highlights the destination section name.",
+    "is_auto": true,
+    "updated_at": "2026-09-25T11:02:51.992Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/DeleteGroupDialog.tsx",
+      "line_number": 128,
+      "context": "</Text>\n <Text style={{ marginTop: \"16px\" }} lineHeight=\"24px\">\n {isFormsSection ? (\n <Trans\n t={t}\n i18nKey=\"GroupingRooms:RemoveSpaceGroupInfo\"\n components={{ strong: <strong style={{ fontWeight: 700 }} /> }}\n />\n ) : (\n <Trans\n t={t}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

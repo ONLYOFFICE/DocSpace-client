@@ -111,6 +111,10 @@ const FilesMediaViewer = (props) => {
     dispatchMessage,
     userId,
     isPluginFileOutsidePlaylist,
+    isOpenedByPlugin,
+    isPluginViewerClosing,
+    openPluginViewer,
+    closePluginViewer,
   } = props;
 
   const navigate = useNavigate();
@@ -126,8 +130,11 @@ const FilesMediaViewer = (props) => {
       currentMediaFileId,
       playlist,
       dispatchMessage,
-      setMediaViewerData,
       isPluginFileOutsidePlaylist,
+      isOpenedByPlugin,
+      isPluginViewerClosing,
+      openPluginViewer,
+      closePluginViewer,
     });
 
   useEffect(() => {
@@ -445,6 +452,10 @@ export default inject(
       autoPlay,
       isPluginViewerActive,
       isPluginFileOutsidePlaylist,
+      isOpenedByPlugin,
+      isPluginViewerClosing,
+      openPluginViewer,
+      closePluginViewer,
     } = mediaViewerDataStore;
 
     const { deleteItemAction } = filesActionsStore;
@@ -477,6 +488,7 @@ export default inject(
     } = pluginStore;
 
     const hasPlaylist = playlist.length > 0 || aiPlaylistImages.length > 0;
+    const isOpen = visible && !isPluginViewerClosing;
     const isPluginViewerShown =
       isPluginViewerActive && !isPluginFileOutsidePlaylist;
 
@@ -488,10 +500,14 @@ export default inject(
       nextMedia,
       prevMedia,
       userAccess,
-      isOpenMediaViewer: visible || isPluginViewerActive,
-      visible: (hasPlaylist && visible) || isPluginViewerShown,
+      isOpenMediaViewer: isOpen || isPluginViewerActive,
+      visible: (hasPlaylist && isOpen) || isPluginViewerShown,
       currentMediaFileId,
       isPluginFileOutsidePlaylist,
+      isOpenedByPlugin,
+      isPluginViewerClosing,
+      openPluginViewer,
+      closePluginViewer,
       deleteItemAction,
       setMediaViewerData,
       extsImagePreviewed,

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import {
   PluginActions,
   PluginFileType,
@@ -62,11 +62,11 @@ interface UsePluginProps {
   getContextMenuKeysByType: PluginStore["getContextMenuKeysByType"];
   currentMediaFileId: NumberOrString;
   playlist: PlaylistType[];
-  setMediaViewerData: (data: {
-    visible: boolean;
-    id: NumberOrString | null;
-  }) => void;
   isPluginFileOutsidePlaylist: MediaViewerDataStore["isPluginFileOutsidePlaylist"];
+  isOpenedByPlugin: MediaViewerDataStore["isOpenedByPlugin"];
+  isPluginViewerClosing: MediaViewerDataStore["isPluginViewerClosing"];
+  openPluginViewer: MediaViewerDataStore["openPluginViewer"];
+  closePluginViewer: MediaViewerDataStore["closePluginViewer"];
 }
 
 export const usePlugin = ({
@@ -77,11 +77,12 @@ export const usePlugin = ({
   getContextMenuKeysByType,
   currentMediaFileId,
   playlist,
-  setMediaViewerData,
   isPluginFileOutsidePlaylist,
+  isOpenedByPlugin,
+  isPluginViewerClosing,
+  openPluginViewer,
+  closePluginViewer,
 }: UsePluginProps) => {
-  const isLoaded = useRef(false);
-
   const handlePluginClose = useCallback(async () => {
     if (!pluginMediaViewerVisible || !pluginMediaViewerProps?.onClose) {
       return null;
@@ -109,7 +110,7 @@ export const usePlugin = ({
         });
       }
     },
-    [pluginMediaViewerProps, dispatchMessage, setMediaViewerData],
+    [pluginMediaViewerProps, dispatchMessage],
   );
 
   useEffect(() => {
@@ -128,27 +129,29 @@ export const usePlugin = ({
   }, [isPluginFileOutsidePlaylist, pluginMediaViewerProps, dispatchMessage]);
 
   useEffect(() => {
-    if (!pluginMediaViewerVisible) {
-      isLoaded.current = false;
-      return;
-    }
+    if (!pluginMediaViewerVisible || isOpenedByPlugin) return;
 
     if (isPluginFileOutsidePlaylist) return;
 
     const fileId = pluginMediaViewerProps?.fileId || currentMediaFileId;
 
-    if (!isLoaded.current && fileId) {
-      isLoaded.current = true;
-      setMediaViewerData({ visible: true, id: fileId });
-      onLoad?.(fileId);
-    }
+    if (!fileId) return;
+
+    openPluginViewer(fileId);
+    onLoad?.(fileId);
   }, [
     pluginMediaViewerVisible,
+    isOpenedByPlugin,
     isPluginFileOutsidePlaylist,
     onLoad,
     pluginMediaViewerProps,
     currentMediaFileId,
+    openPluginViewer,
   ]);
+
+  useEffect(() => {
+    if (isPluginViewerClosing) closePluginViewer();
+  }, [isPluginViewerClosing, closePluginViewer]);
 
   // The file on screen in the shape `useCurrentFile` returns, so a component
   // reads it directly instead of being handed the id through `onLoad`.

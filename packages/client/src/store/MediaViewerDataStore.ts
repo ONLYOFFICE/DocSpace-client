@@ -103,6 +103,8 @@ class MediaViewerDataStore {
 
   prevPostionIndex = 0;
 
+  isOpenedByPlugin = false;
+
   constructor(
     filesStore: TFilesStore,
     publicRoomStore: PublicRoomStore,
@@ -128,6 +130,20 @@ class MediaViewerDataStore {
     this.setAutoPlay(true);
 
     if (!mediaData.visible) this.setCurrentItem(null);
+  };
+
+  openPluginViewer = (id: number | string) => {
+    this.isOpenedByPlugin = true;
+    this.setMediaViewerData({ visible: true, id });
+  };
+
+  closePluginViewer = () => {
+    this.isOpenedByPlugin = false;
+    this.setMediaViewerData({ visible: false, id: null });
+
+    if (!window.location.pathname.includes(MEDIA_VIEW_URL)) return;
+
+    window.history.pushState("", "", this.getFirstUrl());
   };
 
   fetchPreviewMediaFile = (
@@ -349,6 +365,10 @@ class MediaViewerDataStore {
       this.pluginStore?.pluginMediaViewerVisible &&
       !!this.pluginStore?.pluginMediaViewerProps
     );
+  }
+
+  get isPluginViewerClosing() {
+    return this.isOpenedByPlugin && !this.isPluginViewerActive;
   }
 
   get isPluginFileOutsidePlaylist() {

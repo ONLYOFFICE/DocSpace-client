@@ -299,9 +299,6 @@ importers:
       '@radix-ui/react-tabs':
         specifier: 1.1.13
         version: 1.1.13(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@radix-ui/react-toast':
-        specifier: 1.2.23
-        version: 1.2.23(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@radix-ui/react-tooltip':
         specifier: 1.2.8
         version: 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -13147,6 +13144,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.10
       '@types/react-dom': 19.2.3(@types/react@19.2.10)
+    optional: true
 
   '@radix-ui/react-tooltip@1.2.8(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
@@ -13285,6 +13283,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.10
       '@types/react-dom': 19.2.3(@types/react@19.2.10)
+    optional: true
 
   '@radix-ui/react-visually-hidden@1.2.3(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:

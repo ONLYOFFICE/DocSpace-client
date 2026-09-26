@@ -47,6 +47,8 @@ import { PluginDevices, PluginUserRole } from "../../helpers/plugins/enums";
 
 const FOLDER_URL = "/rooms/shared/7/filter?folder=7";
 
+const currentUrl = () => window.location.pathname + window.location.search;
+
 const imageOf = (id: number) =>
   ({
     id,
@@ -88,11 +90,6 @@ class FakePluginStore {
     this.pluginMediaViewerVisible = true;
     this.pluginMediaViewerProps = { pluginName: "sample", fileId };
   };
-
-  closeViewer = () => {
-    this.pluginMediaViewerVisible = false;
-    this.pluginMediaViewerProps = null;
-  };
 }
 
 const createStores = () => {
@@ -109,6 +106,7 @@ const createStores = () => {
 
 beforeEach(() => {
   vi.spyOn(window.history, "back").mockImplementation(() => {});
+  window.history.replaceState(null, "", FOLDER_URL);
 });
 
 afterEach(() => {
@@ -116,58 +114,62 @@ afterEach(() => {
   window.history.replaceState(null, "", "/");
 });
 
-describe("MediaViewerDataStore closing the plugin viewer", () => {
-  it("does not hand the viewer over to the portal once the plugin closed it", () => {
-    const { store, pluginStore } = createStores();
+describe("MediaViewerDataStore history entry of the viewer", () => {
+  it("adds one entry on opening and replaces it while paging", () => {
+    const { store } = createStores();
+    const length = window.history.length;
 
-    pluginStore.showViewer(2);
-    store.openPluginViewer(2);
+    store.changeUrl(1);
+    store.changeUrl(2);
 
-    expect(store.isPluginViewerClosing).toBe(false);
-
-    pluginStore.closeViewer();
-
-    expect(store.isPluginViewerClosing).toBe(true);
-
-    store.closePluginViewer();
-
-    expect(store.visible).toBe(false);
-    expect(store.isPluginViewerClosing).toBe(false);
+    expect(window.history.length).toBe(length + 1);
+    expect(currentUrl()).toBe("/media/view/2");
   });
 
-  it("leaves the portal's own viewer open when the plugin never opened it", () => {
-    const { store, pluginStore } = createStores();
+  it("steps back over its entry on closing", () => {
+    const { store } = createStores();
 
-    store.setMediaViewerData({ visible: true, id: 1 });
-    pluginStore.showViewer(99);
-    pluginStore.closeViewer();
-
-    expect(store.isPluginViewerClosing).toBe(false);
-    expect(store.visible).toBe(true);
-  });
-
-  it("gives the folder address back after the portal's viewer put a file in it", () => {
-    const { store, pluginStore } = createStores();
-
-    window.history.replaceState(null, "", "/media/view/2");
-    pluginStore.showViewer(2);
-    store.openPluginViewer(2);
-    pluginStore.closeViewer();
-    store.closePluginViewer();
-
-    expect(window.location.pathname + window.location.search).toBe(FOLDER_URL);
-  });
-
-  it("steps back over its own history entry when it was opened in a folder", () => {
-    const { store, pluginStore } = createStores();
-
-    window.history.replaceState(null, "", FOLDER_URL);
-    pluginStore.showViewer(2);
-    store.openPluginViewer(2);
-    pluginStore.closeViewer();
-    store.closePluginViewer();
+    store.changeUrl(1);
+    store.removeViewerHistoryEntry();
 
     expect(window.history.back).toHaveBeenCalledTimes(1);
-    expect(window.location.pathname + window.location.search).toBe(FOLDER_URL);
+  });
+
+  it("puts the folder address in place of a viewer opened by a link", () => {
+    const { store } = createStores();
+
+    window.history.replaceState(null, "", "/media/view/1");
+    const length = window.history.length;
+
+    store.changeUrl(2);
+    store.removeViewerHistoryEntry();
+
+    expect(window.history.back).not.toHaveBeenCalled();
+    expect(window.history.length).toBe(length);
+    expect(currentUrl()).toBe(FOLDER_URL);
+  });
+
+  it("gives the plugin viewer an entry of its own at the folder address", () => {
+    const { store, pluginStore } = createStores();
+    const length = window.history.length;
+
+    pluginStore.showViewer(1);
+    store.openPluginViewer(1);
+
+    expect(window.history.length).toBe(length + 1);
+    expect(currentUrl()).toBe(FOLDER_URL);
+  });
+
+  it("adds nothing when the plugin viewer opens over the portal's viewer", () => {
+    const { store, pluginStore } = createStores();
+
+    store.changeUrl(1);
+    const length = window.history.length;
+
+    pluginStore.showViewer(1);
+    store.openPluginViewer(1);
+
+    expect(window.history.length).toBe(length);
+    expect(currentUrl()).toBe("/media/view/1");
   });
 });

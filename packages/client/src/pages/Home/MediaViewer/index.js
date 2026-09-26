@@ -39,6 +39,8 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 
 import { UrlActionType } from "@docspace/shared/enums";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { Portal } from "@docspace/ui-kit/components/portal";
@@ -89,7 +91,6 @@ const FilesMediaViewer = (props) => {
     nextMedia,
     prevMedia,
     resetUrl,
-    getFirstUrl,
     firstLoad,
     setSelection,
     activeFiles,
@@ -117,6 +118,7 @@ const FilesMediaViewer = (props) => {
     closePluginViewer,
     pendingPluginFileId,
     showPluginFile,
+    removeViewerHistoryEntry,
   } = props;
 
   const navigate = useNavigate();
@@ -157,15 +159,16 @@ const FilesMediaViewer = (props) => {
     }
   }, [previewFile]);
 
-  const onButtonBackHandler = () => {
-    const hash = window.location.hash;
-    const id = hash.slice(9);
-    if (!id) {
-      setMediaViewerData({ visible: false, id: null });
+  const onButtonBackHandler = useEventCallback(() => {
+    const [, fileId] = window.location.pathname.split(MEDIA_VIEW_URL);
+
+    if (fileId) {
+      setMediaViewerData({ visible: true, id: fileId });
       return;
     }
-    setMediaViewerData({ visible: true, id });
-  };
+
+    if (isOpenMediaViewer) onMediaViewerClose();
+  });
 
   useEffect(() => {
     window.addEventListener("popstate", onButtonBackHandler);
@@ -288,11 +291,6 @@ const FilesMediaViewer = (props) => {
     }
 
     setMediaViewerData({ visible: false, id: null });
-    const url = getFirstUrl();
-
-    if (!url) {
-      return;
-    }
 
     const targetFile = files.find((item) => item.id === currentMediaFileId);
     if (targetFile) {
@@ -300,7 +298,7 @@ const FilesMediaViewer = (props) => {
       setScrollToItem({ id: targetFile.id, type: "file" });
     }
 
-    window.history.pushState("", "", url);
+    removeViewerHistoryEntry();
   }, [
     files,
     isPreview,
@@ -310,7 +308,7 @@ const FilesMediaViewer = (props) => {
 
     resetUrl,
     navigate,
-    getFirstUrl,
+    removeViewerHistoryEntry,
     setIsPreview,
     setScrollToItem,
     setToPreviewFile,
@@ -447,7 +445,7 @@ export default inject(
       id: currentMediaFileId,
       currentPostionIndex,
       setMediaViewerData,
-      getFirstUrl,
+      removeViewerHistoryEntry,
       playlist,
       previewFile,
       setToPreviewFile,
@@ -517,6 +515,7 @@ export default inject(
       closePluginViewer,
       pendingPluginFileId,
       showPluginFile,
+      removeViewerHistoryEntry,
       deleteItemAction,
       setMediaViewerData,
       extsImagePreviewed,
@@ -552,7 +551,6 @@ export default inject(
       onDuplicate,
       archiveRoomsId,
       setSelection,
-      getFirstUrl,
       activeFiles,
       activeFolders,
       setActiveFiles,

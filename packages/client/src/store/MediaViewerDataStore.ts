@@ -84,6 +84,12 @@ type TClientConfigWithPdfViewer = NonNullable<Window["ClientConfig"]> & {
   pdfViewer?: boolean;
 };
 
+const VIEWER_HISTORY_STATE = { isMediaViewer: true };
+
+const isViewerHistoryEntry = () => window.history.state?.isMediaViewer === true;
+
+const isMediaViewUrl = () => window.location.pathname.includes(MEDIA_VIEW_URL);
+
 class MediaViewerDataStore {
   filesStore: TFilesStore;
 
@@ -138,6 +144,7 @@ class MediaViewerDataStore {
     this.isOpenedByPlugin = true;
     this.handledPluginViewerProps = this.pluginStore.pluginMediaViewerProps;
     this.setMediaViewerData({ visible: true, id });
+    this.writeViewerHistoryEntry();
   };
 
   showPluginFile = (id: number | string) => {
@@ -149,10 +156,7 @@ class MediaViewerDataStore {
     this.isOpenedByPlugin = false;
     this.handledPluginViewerProps = null;
     this.setMediaViewerData({ visible: false, id: null });
-
-    if (!window.location.pathname.includes(MEDIA_VIEW_URL)) return;
-
-    window.history.pushState("", "", this.getFirstUrl());
+    this.removeViewerHistoryEntry();
   };
 
   fetchPreviewMediaFile = (
@@ -264,8 +268,27 @@ class MediaViewerDataStore {
   changeUrl = (id: number | string) => {
     if (this.isPluginViewerActive) return;
 
-    const url = this.getUrl(id);
-    window.history.pushState("", "", url);
+    this.writeViewerHistoryEntry(this.getUrl(id));
+  };
+
+  removeViewerHistoryEntry = () => {
+    if (isViewerHistoryEntry()) {
+      window.history.back();
+      return;
+    }
+
+    if (!isMediaViewUrl()) return;
+
+    window.history.replaceState(window.history.state, "", this.getFirstUrl());
+  };
+
+  private writeViewerHistoryEntry = (url?: string) => {
+    if (isViewerHistoryEntry() || isMediaViewUrl()) {
+      window.history.replaceState(window.history.state, "", url);
+      return;
+    }
+
+    window.history.pushState(VIEWER_HISTORY_STATE, "", url);
   };
 
   nextMedia = async () => {

@@ -104,7 +104,7 @@ const PluginWrappedComponent = ({
   );
 
   return (
-    <PluginErrorBoundary pluginName={pluginName}>
+    <PluginErrorBoundary pluginName={pluginName} resetKey={stableCurrentFile}>
       <ComponentWithRuntime runtime={runtime} />
     </PluginErrorBoundary>
   );

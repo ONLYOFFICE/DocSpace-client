@@ -34,11 +34,7 @@
  */
 
 import { useCallback, useEffect, useMemo } from "react";
-import {
-  PluginActions,
-  PluginFileType,
-  PluginComponents,
-} from "SRC_DIR/helpers/plugins/enums";
+import { PluginActions, PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
@@ -51,6 +47,7 @@ import {
 import { IContextMenuItemClient } from "SRC_DIR/helpers/plugins/types";
 import { isSameId } from "SRC_DIR/helpers/plugins/utils";
 import type MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
+import type FilesStore from "SRC_DIR/store/FilesStore";
 import type { TCurrentFile } from "@onlyoffice/docspace-plugin-sdk/react";
 import { BoxGroup } from "@onlyoffice/docspace-plugin-sdk";
 
@@ -59,7 +56,8 @@ interface UsePluginProps {
   pluginMediaViewerProps: PluginStore["pluginMediaViewerProps"];
   dispatchMessage: PluginStore["dispatchMessage"];
   contextMenuItemsList: PluginStore["contextMenuItemsList"];
-  getContextMenuKeysByType: PluginStore["getContextMenuKeysByType"];
+  files: FilesStore["files"];
+  getFilesContextOptions: FilesStore["getFilesContextOptions"];
   currentMediaFileId: NumberOrString;
   playlist: PlaylistType[];
   isPluginFileOutsidePlaylist: MediaViewerDataStore["isPluginFileOutsidePlaylist"];
@@ -76,7 +74,8 @@ export const usePlugin = ({
   pluginMediaViewerProps,
   dispatchMessage,
   contextMenuItemsList,
-  getContextMenuKeysByType,
+  files,
+  getFilesContextOptions,
   currentMediaFileId,
   playlist,
   isPluginFileOutsidePlaylist,
@@ -213,31 +212,25 @@ export const usePlugin = ({
 
   // Get plugin context menu items
   const pluginContextMenuItems = useMemo(() => {
-    const item = playlist.find((p) => isSameId(p.fileId, currentMediaFileId));
-    const fileExst = item?.fileExst;
+    const file = files.find((item) => isSameId(item.id, currentMediaFileId));
 
-    // plugins fetch the file themselves and cannot decrypt it, so an encrypted
-    // file must not be offered to them from the viewer either
-    if (item?.encrypted) return [];
+    if (!file) return [];
 
-    const pluginContextMenuKeys = [
-      ...(getContextMenuKeysByType(PluginFileType.image, fileExst) || []),
-      ...(getContextMenuKeysByType(PluginFileType.video, fileExst) || []),
-    ];
+    const contextOptions = getFilesContextOptions(file);
 
     const items: IContextMenuItemClient[] = [];
 
     contextMenuItemsList?.forEach(({ value }) => {
       if (value.isGroupAction) return;
 
-      if (pluginContextMenuKeys.includes(value.key)) {
+      if (contextOptions.includes(value.key)) {
         if (value.items && value.items.length > 0) {
           const processedOptionValues: IContextMenuItemClient[] = [];
 
           value.items.forEach((nestedItem: IContextMenuItemClient) => {
             if (nestedItem.isGroupAction) return;
 
-            if (pluginContextMenuKeys.includes(nestedItem.key)) {
+            if (contextOptions.includes(nestedItem.key)) {
               processedOptionValues.push(nestedItem);
             }
           });
@@ -254,12 +247,7 @@ export const usePlugin = ({
     });
 
     return items;
-  }, [
-    contextMenuItemsList,
-    getContextMenuKeysByType,
-    currentMediaFileId,
-    playlist,
-  ]);
+  }, [contextMenuItemsList, getFilesContextOptions, currentMediaFileId, files]);
 
   return {
     handlePluginClose,

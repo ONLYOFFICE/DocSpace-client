@@ -107,7 +107,7 @@ const FilesMediaViewer = (props) => {
     pluginMediaViewerVisible,
     pluginMediaViewerProps,
     pluginContextMenuItemsList,
-    getContextMenuKeysByType,
+    getFilesContextOptions,
     dispatchMessage,
     userId,
     isPluginFileOutsidePlaylist,
@@ -128,7 +128,8 @@ const FilesMediaViewer = (props) => {
       pluginMediaViewerVisible,
       pluginMediaViewerProps,
       contextMenuItemsList: pluginContextMenuItemsList,
-      getContextMenuKeysByType,
+      files,
+      getFilesContextOptions,
       currentMediaFileId,
       playlist,
       dispatchMessage,
@@ -439,6 +440,7 @@ export default inject(
       activeFolders,
 
       setActiveFiles,
+      getFilesContextOptions,
     } = filesStore;
     const {
       visible,
@@ -486,7 +488,6 @@ export default inject(
 
     const {
       contextMenuItemsList,
-      getContextMenuKeysByType,
       pluginMediaViewerProps,
       setPluginMediaViewerVisible,
       setPluginMediaViewerProps,
@@ -566,7 +567,7 @@ export default inject(
       setPluginMediaViewerVisible,
       setPluginMediaViewerProps,
       pluginContextMenuItemsList: contextMenuItemsList,
-      getContextMenuKeysByType,
+      getFilesContextOptions,
       dispatchMessage,
       userId: userStore?.user?.id ? String(userStore.user.id) : undefined,
       currentRoomId:

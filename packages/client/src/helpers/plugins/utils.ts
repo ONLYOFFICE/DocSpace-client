@@ -322,6 +322,13 @@ export const messageActions = ({
         break;
 
       case PluginActions.showMediaViewer:
+        if (isPluginPage()) {
+          console.warn(
+            `[Plugin: ${pluginName}] The media viewer is not available on plugin pages`,
+          );
+          break;
+        }
+
         if (message.mediaViewerProps) {
           setPluginMediaViewerVisible?.(true);
           setPluginMediaViewerProps?.({

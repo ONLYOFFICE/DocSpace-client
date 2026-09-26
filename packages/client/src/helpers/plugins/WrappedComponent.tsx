@@ -321,28 +321,34 @@ const PluginComponentBase = inject(
                 if (isSaveButton) setSettingsModalRequestRunning?.(true);
               }
 
-              const message = await onClick?.();
-              dispatch(message);
-
-              setIsRequestRunning?.(false);
-              setModalRequestRunning?.(false);
-              if (isSaveButton) {
-                setSettingsModalRequestRunning?.(false);
-                onCloseAction?.();
+              try {
+                const message = await onClick?.();
+                dispatch(message);
+              } catch (error) {
+                console.error(
+                  `[Plugin: ${pluginName}] Button click failed:`,
+                  error,
+                );
+                return;
+              } finally {
+                setIsRequestRunning?.(false);
+                setModalRequestRunning?.(false);
+                if (isSaveButton) setSettingsModalRequestRunning?.(false);
               }
+
+              if (isSaveButton) onCloseAction?.();
             };
 
-            const isLoading = withLoadingAfterClick
-              ? isSaveButton
-                ? settingsModalRequestRunning
-                : isRequestRunning || rest.isLoading || modalRequestRunning
-              : rest.isLoading;
+            const isRequestPending = isSaveButton
+              ? settingsModalRequestRunning
+              : isRequestRunning || modalRequestRunning;
 
-            const isDisabled = disableWhileRequestRunning
-              ? isSaveButton
-                ? settingsModalRequestRunning
-                : isRequestRunning || rest.isDisabled || modalRequestRunning
-              : rest.isDisabled;
+            const isLoading =
+              rest.isLoading || (withLoadingAfterClick && isRequestPending);
+
+            const isDisabled =
+              rest.isDisabled ||
+              (disableWhileRequestRunning && isRequestPending);
 
             return (
               <Button

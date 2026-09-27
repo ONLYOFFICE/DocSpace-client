@@ -59,6 +59,7 @@ type TDialogProps = {
   isCreateDisabled?: boolean;
   extension?: string;
   errorText?: string;
+  withDontAskAgain?: boolean;
   options?: IComboBoxItem[];
   selectedOption?: IComboBoxItem;
   onSave?: (e: unknown, value: string) => Promise<void>;
@@ -192,6 +193,7 @@ const CreatePluginFile = ({
       extension={extension}
       errorText={errorText}
       isCreateDisabled={isCreateDisabled}
+      withDontAskAgain={false}
     />
   );
 };

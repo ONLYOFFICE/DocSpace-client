@@ -102,14 +102,14 @@ const CreatePluginFile = ({
 }: TCreatePluginFileProps) => {
   const { t } = useTranslation(["Translations", "Common", "Files"]);
 
-  const onCloseAction = () => {
+  const onCancelAction = () => {
     onCancel?.();
     onClose?.();
   };
 
   const onSaveAction = async (e: unknown, value: string) => {
     if (!onSave) {
-      onCloseAction();
+      onClose?.();
       return;
     }
 
@@ -122,7 +122,7 @@ const CreatePluginFile = ({
         updateCreateDialogProps: updateCreatePluginFileProps,
       });
 
-      if (isCloseAfterCreate) onCloseAction();
+      if (isCloseAfterCreate) onClose?.();
     } catch (error) {
       if (!onError) return;
 
@@ -183,8 +183,8 @@ const CreatePluginFile = ({
       startValue={startValue}
       onSave={onSaveAction}
       onChange={onChangeAction}
-      onCancel={onCloseAction}
-      onClose={onCloseAction}
+      onCancel={onCancelAction}
+      onClose={onCancelAction}
       isCreateDialog={isCreateDialog}
       options={options}
       selectedOption={selectedOption}

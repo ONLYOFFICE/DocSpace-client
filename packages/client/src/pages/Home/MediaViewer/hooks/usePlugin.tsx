@@ -87,12 +87,21 @@ export const usePlugin = ({
   showPluginFile,
 }: UsePluginProps) => {
   const handlePluginClose = useCallback(async () => {
-    if (!pluginMediaViewerVisible || !pluginMediaViewerProps?.onClose) {
+    if (!pluginMediaViewerVisible || !pluginMediaViewerProps) {
       return null;
     }
 
-    const pluginName = pluginMediaViewerProps.pluginName;
-    const message = await pluginMediaViewerProps.onClose();
+    const { pluginName, onClose } = pluginMediaViewerProps;
+
+    if (!onClose) {
+      dispatchMessage({
+        message: { actions: [PluginActions.closeMediaViewer] },
+        pluginName,
+      });
+      return null;
+    }
+
+    const message = await onClose();
 
     dispatchMessage({ message, pluginName });
   }, [pluginMediaViewerProps, pluginMediaViewerVisible, dispatchMessage]);

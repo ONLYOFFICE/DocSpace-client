@@ -44,6 +44,7 @@ import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { Portal } from "@docspace/ui-kit/components/portal";
+import { isSameId } from "SRC_DIR/helpers/plugins/utils";
 import { usePlugin } from "./hooks/usePlugin";
 
 const FilesMediaViewer = (props) => {
@@ -266,7 +267,9 @@ const FilesMediaViewer = (props) => {
       await handlePluginClose();
       setMediaViewerData({ visible: false, id: null });
 
-      const targetFile = files.find((item) => item.id === currentMediaFileId);
+      const targetFile = files.find((item) =>
+        isSameId(item.id, currentMediaFileId),
+      );
 
       if (targetFile) {
         setBufferSelection(targetFile);
@@ -292,7 +295,9 @@ const FilesMediaViewer = (props) => {
 
     setMediaViewerData({ visible: false, id: null });
 
-    const targetFile = files.find((item) => item.id === currentMediaFileId);
+    const targetFile = files.find((item) =>
+      isSameId(item.id, currentMediaFileId),
+    );
     if (targetFile) {
       setBufferSelection(targetFile);
       setScrollToItem({ id: targetFile.id, type: "file" });

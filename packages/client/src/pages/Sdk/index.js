@@ -57,6 +57,7 @@ const Sdk = ({
   frameConfig,
   setFrameConfig,
   login,
+  loginWithCode,
   logout,
   loadCurrentUser,
   getIcon,
@@ -149,8 +150,10 @@ const Sdk = ({
             break;
           case "login":
             {
-              const { email, passwordHash } = data;
-              res = await login(email, passwordHash);
+              const { email, passwordHash, code } = data;
+              res = code
+                ? { url: await loginWithCode(email, passwordHash, code) }
+                : await login(email, passwordHash);
             }
             break;
           case "logout":
@@ -311,7 +314,7 @@ export const Component = inject(
     userStore,
     filesStore,
   }) => {
-    const { login, logout } = authStore;
+    const { login, loginWithCode, logout } = authStore;
     const {
       theme,
       setFrameConfig,
@@ -329,6 +332,7 @@ export const Component = inject(
       setFrameConfig,
       frameConfig,
       login,
+      loginWithCode,
       logout,
       getSettings,
       loadCurrentUser,

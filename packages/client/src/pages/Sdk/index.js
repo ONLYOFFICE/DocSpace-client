@@ -62,8 +62,7 @@ const Sdk = ({
   getIcon,
   isLoaded,
   getSettings,
-  userId,
-  updateProfileCulture,
+  i18n,
   getRoomsIcon,
   getFilesSettings,
   getPrimaryLink,
@@ -128,9 +127,7 @@ const Sdk = ({
             {
               const requests = await Promise.all([
                 setFrameConfig(data),
-                userId &&
-                  data.locale &&
-                  updateProfileCulture(userId, data.locale),
+                data.locale && i18n?.changeLanguage(data.locale),
               ]);
               res = requests[0];
             }
@@ -311,7 +308,6 @@ export const Component = inject(
     authStore,
     settingsStore,
     filesSettingsStore,
-    peopleStore,
     userStore,
     filesStore,
   }) => {
@@ -324,8 +320,7 @@ export const Component = inject(
       isLoaded,
       logoText,
     } = settingsStore;
-    const { loadCurrentUser, user } = userStore;
-    const { updateProfileCulture } = peopleStore.targetUserStore;
+    const { loadCurrentUser } = userStore;
     const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
     const { getPrimaryLink } = filesStore;
 
@@ -340,8 +335,6 @@ export const Component = inject(
       getIcon,
       getRoomsIcon,
       isLoaded,
-      updateProfileCulture,
-      userId: user?.id,
       getFilesSettings,
       getPrimaryLink,
       logoText,

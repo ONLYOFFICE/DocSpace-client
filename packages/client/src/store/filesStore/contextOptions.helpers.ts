@@ -33,7 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FileStatus, FolderType, RoomsType } from "@docspace/shared/enums";
+import {
+  FileStatus,
+  FolderType,
+  RoomSearchArea,
+  RoomsType,
+} from "@docspace/shared/enums";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
 import { EMPTY_ARRAY } from "@docspace/shared/constants";
 
@@ -938,11 +943,19 @@ export const buildContextOptions = (
     // store/index.js; the non-null assertion keeps the old unchecked read.
     const { roomGroups } = deps.dialogsStore!;
     const currentGroupId = deps.roomsFilter?.groupId;
+    const itemGroupsArea =
+      item.roomType === RoomsType.FormRoom
+        ? RoomSearchArea.Forms
+        : RoomSearchArea.Active;
+    const sectionGroupsArea = deps.treeFoldersStore.isFormsFolder
+      ? RoomSearchArea.Forms
+      : RoomSearchArea.Active;
     if (
       !organizeRoomsGrouping ||
       isArchiveFolder ||
       item.rootFolderType === FolderType.Archive ||
-      deps.treeFoldersStore.isAIAgentsFolder
+      deps.treeFoldersStore.isAIAgentsFolder ||
+      itemGroupsArea !== sectionGroupsArea
     ) {
       roomOptions = removeOptions(roomOptions, [
         "create-group",

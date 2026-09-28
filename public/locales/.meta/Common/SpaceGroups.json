@@ -1,0 +1,29 @@
+{
+  "key_path": "SpaceGroups",
+  "content": "Space groups",
+  "content_en_sha1_hash": "3b34e489caab8edffd16942a506c40ccf4cdbe5e",
+  "created_at": "2026-09-25T10:58:39.607Z",
+  "updated_at": "2026-09-25T10:59:21.270Z",
+  "comment": {
+    "text": "Title for the overflow context menu header when viewing the forms section.",
+    "is_auto": true,
+    "updated_at": "2026-09-25T10:59:21.270Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/filter/index.tsx",
+      "line_number": 596,
+      "context": "[overflowGroups, handleFilterByGroup],\n );\n \n const overflowContextMenuHeader = React.useMemo(\n () => ({\n title: isFormsSection ? t(\"SpaceGroups\") : t(\"RoomGroups\"),\n icon: \"\",\n }),\n [t, isFormsSection],\n );",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

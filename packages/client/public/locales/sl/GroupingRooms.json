@@ -1,5 +1,6 @@
 {
   "AddRoom": "Dodaj sobo",
+  "AddSpace": "Dodaj prostor",
   "AddToGroup": "Dodaj v skupino",
   "ChangesApplied": "Izmene so bile vključene",
   "CreateAGroup": "Ustvarite skupino",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Onemrejevanje skupin sob",
   "DisablingRoomGroupsDescription": "Skupine bodo shranjene, vendar skrite. Ponovno aktivirajte v Profilu, upravljanje datotek.",
   "EditRoomGroups": "Ureditev skupin sob",
+  "EditSpaceGroups": "Uredi skupine prostorov",
   "EmptyGroupRoomsDescription": "Ni sob v tem prostoru. Poskusite dodati sobo ali pa odstraniti skupino.",
+  "EmptyGroupSpacesDescription": "Tukaj ni prostorov. Poskusite dodati prostor ali odstranite to skupino.",
+  "FormSpaces": "Prostori",
   "GroupHasBeenDeleted": "Skupina je bila izbrisana",
   "GroupIcon": "Ikona skupine",
   "GroupIsEmpty": "Skupina je prazna",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Vplectic skupino",
   "RemoveGroupConfirmation": "Na želite izbrisati skupino sob. Ali ste preprimeni, da želite nadaljevati?",
   "RemoveGroupInfo": "Soby, vključene v skupino, bodo prikazane v razdelku <strong>Vse sobe</strong>.",
+  "RemoveSpaceGroupConfirmation": "Izbrisali boste skupino prostorov. Ali ste prepričani, da želite nadaljevati?",
+  "RemoveSpaceGroupInfo": "Prostori, vključeni v skupino, bodo prikazani v razdelku <strong>Vsi prostori</strong>.",
   "RoomAddedToGroup": "Izbrana soba je dodana v <1>{{groupName}}</1>.",
   "RoomGrouping": "Skupščina sob",
   "RoomGroupingDisabled": "Skupna namestitev je onemogočena",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Shranjujte sobe v mapiranje in preklopite med njima zlahice.",
   "RoomRemovedFromGroup": "Izbrana soba je odstranjena iz <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Izbrane sobe so dodane v <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Izbrane sobe so bile odstranjene iz <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Izbrane sobe so bile odstranjene iz <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "Izbrani prostor je bil dodan v <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "Izbrani prostor je bil odstranjen iz <1>{{groupName}}</1>.",
+  "SpacesAddedToGroup": "Izbrani prostori so bili dodani v <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "Izbrani prostori so bili odstranjeni iz <1>{{groupName}}</1>."
 }

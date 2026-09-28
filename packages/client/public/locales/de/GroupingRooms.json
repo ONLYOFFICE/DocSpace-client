@@ -1,5 +1,6 @@
 {
   "AddRoom": "Raum hinzufügen",
+  "AddSpace": "Space hinzufügen",
   "AddToGroup": "Zu Gruppe hinzufügen",
   "ChangesApplied": "Änderungen wurden angewendet",
   "CreateAGroup": "Gruppe erstellen",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Deaktivierung von Raumgruppen",
   "DisablingRoomGroupsDescription": "Die Gruppen werden gespeichert, sind aber versteckt. Sie können sie in Profil, Dateiverwaltung wieder aktivieren.",
   "EditRoomGroups": "Bearbeiten Raumgruppen",
+  "EditSpaceGroups": "Space-Gruppen bearbeiten",
   "EmptyGroupRoomsDescription": "Hier sind keine Räume vorhanden. Versuchen Sie, einen Raum hinzuzufügen, oder entfernen Sie diese Gruppe.",
+  "EmptyGroupSpacesDescription": "Hier sind keine Spaces vorhanden. Versuchen Sie, einen Space hinzuzufügen, oder entfernen Sie diese Gruppe.",
+  "FormSpaces": "Spaces",
   "GroupHasBeenDeleted": "Die Gruppe wurde gelöscht",
   "GroupIcon": "Gruppensymbol",
   "GroupIsEmpty": "Die Gruppe ist leer",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Gruppe entfernen",
   "RemoveGroupConfirmation": "Sie sind dabei, eine Gruppe von Räumen zu löschen. Möchten Sie fortfahren?",
   "RemoveGroupInfo": "Die in der Gruppe enthaltenen Räume werden im Bereich <strong>Alle Räume</strong> angezeigt.",
+  "RemoveSpaceGroupConfirmation": "Sie sind dabei, eine Gruppe von Spaces zu löschen. Möchten Sie fortfahren?",
+  "RemoveSpaceGroupInfo": "Die in der Gruppe enthaltenen Spaces werden im Bereich <strong>Alle Spaces</strong> angezeigt.",
   "RoomAddedToGroup": "Der ausgewählte Raum wurde zu <1>{{groupName}}</1> hinzugefügt.",
   "RoomGrouping": "Raumgruppenbildung",
   "RoomGroupingDisabled": "Räumengruppierung ist deaktiviert",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Sie können Räume in Ordnern gruppieren und einfach zwischen ihnen wechseln.",
   "RoomRemovedFromGroup": "Der ausgewählte Raum wurde aus <1>{{groupName}}</1> entfernt.",
   "RoomsAddedToGroup": "Die ausgewählten Räume wurden zu <1>{{groupName}}</1> hinzugefügt.",
-  "RoomsRemovedFromGroup": "Die ausgewählten Räume wurden aus <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Die ausgewählten Räume wurden aus <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "Der ausgewählte Space wurde zu <1>{{groupName}}</1> hinzugefügt.",
+  "SpaceRemovedFromGroup": "Der ausgewählte Space wurde aus <1>{{groupName}}</1> entfernt.",
+  "SpacesAddedToGroup": "Die ausgewählten Spaces wurden zu <1>{{groupName}}</1> hinzugefügt.",
+  "SpacesRemovedFromGroup": "Die ausgewählten Spaces wurden aus <1>{{groupName}}</1> entfernt."
 }

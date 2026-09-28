@@ -36,6 +36,7 @@
 import {
   EmployeeType,
   FilesSelectorFilterTypes,
+  RoomSearchArea,
   ShareAccessRights,
   Events,
 } from "@docspace/shared/enums";
@@ -517,6 +518,8 @@ class DialogsStore {
   pauseSubmissionsDialogCallback: Nullable<(res: boolean) => void> = null;
 
   roomGroups: IRoomGroup[] = [];
+
+  roomGroupsArea: RoomSearchArea = RoomSearchArea.Active;
 
   syncDbData: {
     operationId: Nullable<number>;
@@ -1368,13 +1371,21 @@ class DialogsStore {
     await createGroupRooms(newGroup);
   };
 
-  setRoomGroups = (groups: IRoomGroup[]) => {
+  setRoomGroups = (groups: IRoomGroup[], searchArea: RoomSearchArea) => {
     this.roomGroups = groups;
+    this.roomGroupsArea = searchArea;
   };
 
-  getAllRoomGroups = async () => {
-    const response = (await getRoomGroups()) as IRoomGroup[];
-    this.setRoomGroups(response);
+  getAllRoomGroups = async (
+    searchArea: RoomSearchArea = this.roomGroupsArea,
+  ) => {
+    if (searchArea !== this.roomGroupsArea) this.setRoomGroups([], searchArea);
+
+    const response = (await getRoomGroups(searchArea)) as IRoomGroup[];
+
+    if (searchArea !== this.roomGroupsArea) return;
+
+    this.setRoomGroups(response, searchArea);
   };
 
   getGroupById = async (groupId: string) => {

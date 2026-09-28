@@ -1,5 +1,6 @@
 {
   "AddRoom": "Προσθήκη αίθουσας",
+  "AddSpace": "Προσθήκη χώρου",
   "AddToGroup": "Προσθήκη σε ομάδα",
   "ChangesApplied": "Οι αλλαγές έχουν εφαρμοστεί",
   "CreateAGroup": "Δημιουργία ομάδας",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Απενεργοποίηση ομάδων δωματίων",
   "DisablingRoomGroupsDescription": "Οι ομάδες θα αποθηκευτούν αλλά θα είναι κρυμμένες. Επανενεργοποιήστε στο Προφίλ, Διαχείριση αρχείων.",
   "EditRoomGroups": "Επεξεργασία ομάδων δωματίων",
+  "EditSpaceGroups": "Επεξεργασία ομάδων χώρων",
   "EmptyGroupRoomsDescription": "Δεν υπάρχουν δωμάτια εδώ. Δοκιμάστε να προσθέσετε ένα δωμάτιο ή να αφαιρέσετε αυτή τη ομάδα.",
+  "EmptyGroupSpacesDescription": "Δεν υπάρχουν χώροι εδώ. Δοκιμάστε να προσθέσετε έναν χώρο ή να αφαιρέσετε αυτήν την ομάδα.",
+  "FormSpaces": "Χώροι",
   "GroupHasBeenDeleted": "Η ομάδα έχει διαγραφεί",
   "GroupIcon": "Εικονίδιο Ομάδας",
   "GroupIsEmpty": "Η ομάδα είναι κενή",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Αφαίρεση ομάδας",
   "RemoveGroupConfirmation": "Ετοιμάζεστε να διαγράψετε μια ομάδα δωματίων. Είστε βέβαιοι ότι θέλετε να προχωρήσετε;",
   "RemoveGroupInfo": "Τα δωμάτια που περιλαμβάνονται στην ομάδα θα εμφανίζονται στην ενότητα <strong>All Rooms</strong>.",
+  "RemoveSpaceGroupConfirmation": "Ετοιμάζεστε να διαγράψετε μια ομάδα χώρων. Είστε βέβαιοι ότι θέλετε να προχωρήσετε;",
+  "RemoveSpaceGroupInfo": "Οι χώροι που περιλαμβάνονται στην ομάδα θα εμφανίζονται στην ενότητα <strong>Όλοι οι χώροι</strong>.",
   "RoomAddedToGroup": "Η επιλεγμένη αίθουσα έχει προστεθεί στο <1>{{groupName}}</1>.",
   "RoomGrouping": "Ομαδοποίηση Δωματίων",
   "RoomGroupingDisabled": "Η ομαδοποίηση δωματίων είναι απενεργοποιημένη",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Μπορείτε να ομαδοποιήσετε δωμάτια σε φακέλους και να εναλλάσσετε εύκολα μεταξύ τους.",
   "RoomRemovedFromGroup": "Η επιλεγμένη αίθουσα αφαιρέθηκε από <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Οι επιλεγμένες αίθουσες έχουν προστεθεί στο <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Οι επιλεγμένες αίθουσες αφαιρέθηκαν από <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Οι επιλεγμένες αίθουσες αφαιρέθηκαν από <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "Ο επιλεγμένος χώρος προστέθηκε στο <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "Ο επιλεγμένος χώρος αφαιρέθηκε από το <1>{{groupName}}</1>.",
+  "SpacesAddedToGroup": "Οι επιλεγμένοι χώροι προστέθηκαν στο <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "Οι επιλεγμένοι χώροι αφαιρέθηκαν από το <1>{{groupName}}</1>."
 }

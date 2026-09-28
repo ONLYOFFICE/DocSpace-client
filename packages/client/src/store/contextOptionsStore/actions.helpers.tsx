@@ -50,6 +50,7 @@ import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
 import {
   AnalyticsEvents,
+  RoomSearchArea,
   RoomsType,
   Events,
   FolderType,
@@ -549,10 +550,16 @@ export const onAddRoomsToGroupImpl = async (
       values: { groupName },
       components: { 1: React.createElement("strong") },
     };
-    const keys = {
-      single: { tKey: "GroupingRooms:RoomAddedToGroup" },
-      multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
-    };
+    const keys =
+      self.dialogsStore.roomGroupsArea === RoomSearchArea.Forms
+        ? {
+            single: { tKey: "GroupingRooms:SpaceAddedToGroup" },
+            multiple: { tKey: "GroupingRooms:SpacesAddedToGroup" },
+          }
+        : {
+            single: { tKey: "GroupingRooms:RoomAddedToGroup" },
+            multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
+          };
     const i18nKey =
       roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
     toastr.success(
@@ -594,10 +601,16 @@ export const onRemoveRoomsFromGroupImpl = async (
       values: { groupName },
       components: { 1: React.createElement("strong") },
     };
-    const keys = {
-      single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
-      multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
-    };
+    const keys =
+      self.dialogsStore.roomGroupsArea === RoomSearchArea.Forms
+        ? {
+            single: { tKey: "GroupingRooms:SpaceRemovedFromGroup" },
+            multiple: { tKey: "GroupingRooms:SpacesRemovedFromGroup" },
+          }
+        : {
+            single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
+            multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
+          };
     const i18nKey =
       roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
     toastr.success(

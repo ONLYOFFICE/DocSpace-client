@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2026-09-14T19:16:02.556Z",
+  "updated_at": "2026-09-25T10:58:53.262Z",
   "comment": {
     "text": "This is a button label or tooltip text. It allows users to remove a selected item, such as a chat or an image.",
     "is_auto": true,
@@ -193,25 +193,25 @@
     },
     {
       "file_path": "/packages/client/src/store/DialogsStore.ts",
-      "line_number": 1275,
+      "line_number": 1278,
       "context": "ref!.current!.click(),\n },\n \n hasImage\n ? {\n label: t(\"Common:Delete\"),\n icon: TrashIconSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,\n onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),\n }\n : {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 473,
+      "line_number": 488,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete-agent\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 473,
+      "line_number": 488,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete-agent\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 473,
+      "line_number": 488,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete-agent\":",
       "module": "/packages/client"
     },

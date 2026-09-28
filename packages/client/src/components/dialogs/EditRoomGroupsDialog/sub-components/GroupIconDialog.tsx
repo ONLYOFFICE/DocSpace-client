@@ -76,6 +76,7 @@ const GroupIconDialog = ({
   currentGroupIcon,
   currentGroupName,
   isOpenedFromContextMenu,
+  searchArea,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
 
@@ -182,6 +183,7 @@ const GroupIconDialog = ({
         name: groupName,
         icon: typeof roomIcon === "object" ? roomIcon.id : roomIcon,
         rooms: arrIdsRooms,
+        searchArea,
       };
 
       setIsLoading(true);

@@ -1,5 +1,6 @@
 {
   "AddRoom": "Додати кімнату",
+  "AddSpace": "Додати простір",
   "AddToGroup": "Додати до групи",
   "ChangesApplied": "Внесені зміни",
   "CreateAGroup": "Створити групу",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Вимкнення груп кімнат",
   "DisablingRoomGroupsDescription": "Групи будуть збережені, але приховані. Увімкнути в Профілі, керуванні файлами.",
   "EditRoomGroups": "Редагувати групи кімнат",
+  "EditSpaceGroups": "Редагувати групи просторів",
   "EmptyGroupRoomsDescription": "Тут немає кімнат. Спробуйте додати кімнату або видалити цю групу.",
+  "EmptyGroupSpacesDescription": "Тут немає просторів. Спробуйте додати простір або видалити цю групу.",
+  "FormSpaces": "Простори",
   "GroupHasBeenDeleted": "Група була видалена",
   "GroupIcon": "Іконка групи",
   "GroupIsEmpty": "Група порожня",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Видалити групу",
   "RemoveGroupConfirmation": "Ви впевнені, що хочете видалити групу кімнат?",
   "RemoveGroupInfo": "Кімнати, що входять до групи, будуть відображатися в розділі <strong>Усі кімнати</strong>.",
+  "RemoveSpaceGroupConfirmation": "Ви збираєтеся видалити групу просторів. Ви впевнені, що хочете продовжити?",
+  "RemoveSpaceGroupInfo": "Простори, що входять до групи, відображатимуться в розділі <strong>Усі простори</strong>.",
   "RoomAddedToGroup": "Обрана кімната додана до <1>{{groupName}}</1>.",
   "RoomGrouping": "Групування кімнат",
   "RoomGroupingDisabled": "Групування кімнат вимкнено",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Ви можете згруповувати кімнати в папки та легко перемикатися між ними.",
   "RoomRemovedFromGroup": "Вибрана кімната була видалена з <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Обрані кімнати додано до <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Вибрані кімнати були видалені з <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Вибрані кімнати були видалені з <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "Вибраний простір додано до <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "Вибраний простір видалено з <1>{{groupName}}</1>.",
+  "SpacesAddedToGroup": "Вибрані простори додано до <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "Вибрані простори видалено з <1>{{groupName}}</1>."
 }

@@ -52,6 +52,7 @@ const RoomListPanel = ({
   disableSubmitUntilChanged = false,
   sortSelectedFirst = false,
   withoutBackdropBackground = false,
+  isFormsSection = false,
 }: RoomListPanelProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -83,7 +84,7 @@ const RoomListPanel = ({
             withoutBackButton: false,
           }}
           withSearch={withSearch}
-          isForms={false}
+          isForms={isFormsSection}
           isMultiSelect
           forceIsMultiSelect
           selectedItems={

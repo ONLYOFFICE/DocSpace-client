@@ -42,6 +42,7 @@ import { Aside } from "@docspace/ui-kit/components/aside";
 import RoomSelector from "@docspace/ui-kit/selectors/Room";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector/Selector.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
+import { RoomsType } from "@docspace/shared/enums";
 
 type AddRoomToGroupDialogProps = {
   visible?: boolean;
@@ -56,6 +57,7 @@ type AddRoomToGroupDialogProps = {
     data: { roomsToAdd?: (string | number)[]; roomsToRemove?: number[] },
   ) => Promise<void>;
   getAllRoomGroups?: () => Promise<void>;
+  isFormsSection?: boolean;
 };
 
 const AddRoomToGroupDialog = ({
@@ -65,6 +67,7 @@ const AddRoomToGroupDialog = ({
   getGroupById,
   updateRoomGroup,
   getAllRoomGroups,
+  isFormsSection = false,
 }: AddRoomToGroupDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
   const [groupData, setGroupData] = useState<{
@@ -77,7 +80,13 @@ const AddRoomToGroupDialog = ({
       if (visible && groupId && getGroupById) {
         try {
           const data = await getGroupById(groupId);
-          setGroupData(data);
+          setGroupData({
+            ...data,
+            rooms: (data.rooms || []).filter(
+              (room) =>
+                (room.roomType === RoomsType.FormRoom) === isFormsSection,
+            ),
+          });
         } catch (error) {
           console.error("Error fetching group data:", error);
         }
@@ -85,7 +94,7 @@ const AddRoomToGroupDialog = ({
     };
 
     fetchGroupData();
-  }, [visible, groupId, getGroupById]);
+  }, [visible, groupId, getGroupById, isFormsSection]);
 
   const onClose = () => {
     setAddRoomToGroupDialogVisible?.(false);
@@ -179,12 +188,16 @@ const AddRoomToGroupDialog = ({
           headerProps={{
             onBackClick: onClose,
             onCloseClick: onClose,
-            headerLabel: groupData?.name || t("GroupingRooms:AddRoom"),
+            headerLabel:
+              groupData?.name ||
+              (isFormsSection
+                ? t("GroupingRooms:AddSpace")
+                : t("GroupingRooms:AddRoom")),
             withoutBorder: false,
             withoutBackButton: false,
           }}
           withSearch
-          isForms={false}
+          isForms={isFormsSection}
           isMultiSelect
           selectedItems={groupData ? convertToItems(groupData.rooms || []) : []}
           withCancelButton
@@ -199,7 +212,7 @@ const AddRoomToGroupDialog = ({
   );
 };
 
-export default inject(({ dialogsStore }: TStore) => {
+export default inject(({ dialogsStore, treeFoldersStore }: TStore) => {
   const {
     addRoomToGroupDialogVisible,
     addRoomToGroupId,
@@ -216,5 +229,6 @@ export default inject(({ dialogsStore }: TStore) => {
     getGroupById,
     updateRoomGroup,
     getAllRoomGroups,
+    isFormsSection: treeFoldersStore.isFormsFolder,
   };
 })(observer(AddRoomToGroupDialog));

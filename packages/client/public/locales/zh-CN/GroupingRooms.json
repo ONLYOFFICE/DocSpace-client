@@ -1,5 +1,6 @@
 {
   "AddRoom": "添加房间",
+  "AddSpace": "添加空间",
   "AddToGroup": "添加到群组",
   "ChangesApplied": "已应用更改",
   "CreateAGroup": "创建群组",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "禁用房间组",
   "DisablingRoomGroupsDescription": "群组将被保存但隐藏。请在“个人资料”>“文件管理”中重新启用。",
   "EditRoomGroups": "编辑房间组",
+  "EditSpaceGroups": "编辑空间组",
   "EmptyGroupRoomsDescription": "此处没有房间。请尝试添加房间或移除此组。",
+  "EmptyGroupSpacesDescription": "此处没有空间。请尝试添加空间或移除此组。",
+  "FormSpaces": "空间",
   "GroupHasBeenDeleted": "群组已被删除",
   "GroupIcon": "群组图标",
   "GroupIsEmpty": "群组为空",
@@ -18,6 +22,8 @@
   "RemoveGroup": "移除组",
   "RemoveGroupConfirmation": "您即将删除一组房间。您确定要继续吗？",
   "RemoveGroupInfo": "包含在组中的房间将显示在 <strong>所有房间</strong> 部分。",
+  "RemoveSpaceGroupConfirmation": "您即将删除一组空间。您确定要继续吗？",
+  "RemoveSpaceGroupInfo": "包含在组中的空间将显示在 <strong>所有空间</strong> 部分。",
   "RoomAddedToGroup": "选定的房间已添加到<1>{{groupName}}</1>中。",
   "RoomGrouping": "房间分组",
   "RoomGroupingDisabled": "房间分组已禁用",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "您可以将房间分组到文件夹中，并轻松地在它们之间切换。",
   "RoomRemovedFromGroup": "所选房间已从<1>{{groupName}}</1>中移除。",
   "RoomsAddedToGroup": "已将选定的房间添加到 <1>{{groupName}}</1>。",
-  "RoomsRemovedFromGroup": "已从 <1>{{groupName}}</1> 中移除选定的房间。"
+  "RoomsRemovedFromGroup": "已从 <1>{{groupName}}</1> 中移除选定的房间。",
+  "SpaceAddedToGroup": "选定的空间已添加到<1>{{groupName}}</1>中。",
+  "SpaceRemovedFromGroup": "已从 <1>{{groupName}}</1> 中移除选定的空间。",
+  "SpacesAddedToGroup": "选定的多个空间已添加到<1>{{groupName}}</1>中。",
+  "SpacesRemovedFromGroup": "已从 <1>{{groupName}}</1> 中移除选定的多个空间。"
 }

@@ -1,0 +1,29 @@
+{
+  "key_path": "ManageGroupSpaces",
+  "content": "Manage group of spaces",
+  "content_en_sha1_hash": "7c142633520618412197f63bbe9daa01338c762c",
+  "created_at": "2026-09-25T10:58:27.485Z",
+  "updated_at": "2026-09-25T10:59:46.153Z",
+  "comment": {
+    "text": "Tooltip title for the group management button, appearing on hover.",
+    "is_auto": true,
+    "updated_at": "2026-09-25T10:59:46.153Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/filter/index.tsx",
+      "line_number": 869,
+      "context": "<TooltipContainer\n as=\"div\"\n className={styles.groupManagementButton}\n title={\n isFormsSection\n ? t(\"ManageGroupSpaces\")\n : t(\"ManageGroupRooms\")\n }\n onClick={onCreateGroup}\n >\n <IconButton",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

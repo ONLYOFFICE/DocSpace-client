@@ -1,5 +1,6 @@
 {
   "AddRoom": "Otaq əlavə et",
+  "AddSpace": "Sahə əlavə et",
   "AddToGroup": "Qrupa əlavə et",
   "ChangesApplied": "Dəyişikliklər tətbiq edildi",
   "CreateAGroup": "Qrup yarat",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Otaq qruplarını deaktiv etmək",
   "DisablingRoomGroupsDescription": "Qruplar yadda saxlanılacaq, lakin gizlənəcək. Profildə, Fayl idarəetməsində yenidən aktivləşdirin.",
   "EditRoomGroups": "Redaktə etmə otaq qrupları",
+  "EditSpaceGroups": "Sahə qruplarını redaktə et",
   "EmptyGroupRoomsDescription": "Bu yerdə otaq yoxdur. Bir otaq əlavə etməyi sınayın və ya bu qrupu silin.",
+  "EmptyGroupSpacesDescription": "Burada sahə yoxdur. Bir sahə əlavə etməyi sınayın və ya bu qrupu silin.",
+  "FormSpaces": "Sahələr",
   "GroupHasBeenDeleted": "Qrup silinib",
   "GroupIcon": "Qrup ikonu",
   "GroupIsEmpty": "Qrup boşdur",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Qrupu sil",
   "RemoveGroupConfirmation": "Otaqlar qrupunu silməyə hazırsınız. Davam etmək istədiyinizə əminsiniz?",
   "RemoveGroupInfo": "Qrupa daxil olan otaqlar <strong>Bütün Otaqlar</strong> bölməsində göstəriləcək.",
+  "RemoveSpaceGroupConfirmation": "Sahələr qrupunu silmək üzrəsiniz. Davam etmək istədiyinizə əminsiniz?",
+  "RemoveSpaceGroupInfo": "Qrupa daxil olan sahələr <strong>Bütün sahələr</strong> bölməsində göstəriləcək.",
   "RoomAddedToGroup": "Seçilmiş otaq <1>{{groupName}}</1>-ə əlavə edildi.",
   "RoomGrouping": "Otaq qruplaşdırması",
   "RoomGroupingDisabled": "Otaq qruplaşdırması deaktivləşdirilib",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Otaqları qovluqlara qruplaşdıra və aralarında asanlıqla keçid edə bilərsiniz.",
   "RoomRemovedFromGroup": "Seçilmiş otaq <1>{{groupName}}</1>dan çıxarılıb.",
   "RoomsAddedToGroup": "Seçilmiş otaqlar <1>{{groupName}}</1> -ə əlavə edilmişdir.",
-  "RoomsRemovedFromGroup": "Seçilmiş otaqlar <1>{{groupName}}</1>dan çıxarıldı."
+  "RoomsRemovedFromGroup": "Seçilmiş otaqlar <1>{{groupName}}</1>dan çıxarıldı.",
+  "SpaceAddedToGroup": "Seçilmiş sahə <1>{{groupName}}</1> qrupuna əlavə edildi.",
+  "SpaceRemovedFromGroup": "Seçilmiş sahə <1>{{groupName}}</1> qrupundan çıxarıldı.",
+  "SpacesAddedToGroup": "Seçilmiş sahələr <1>{{groupName}}</1> qrupuna əlavə edildi.",
+  "SpacesRemovedFromGroup": "Seçilmiş sahələr <1>{{groupName}}</1> qrupundan çıxarıldı."
 }

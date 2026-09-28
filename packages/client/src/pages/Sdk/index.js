@@ -42,6 +42,7 @@ import RoomSelector from "@docspace/ui-kit/selectors/Room";
 import {
   frameCallEvent,
   frameCallbackData,
+  toFrameMethodError,
   createPasswordHash,
   frameCallCommand,
   frameHandlePing,
@@ -162,7 +163,7 @@ const Sdk = ({
             res = "Wrong method for this mode";
         }
       } catch (err) {
-        res = err;
+        res = toFrameMethodError(err);
       }
       frameCallbackData(res, callId);
     }

@@ -41,6 +41,7 @@ import {
   frameCallCommand,
   createPasswordHash,
   frameHandlePing,
+  toFrameMethodError,
 } from "@docspace/shared/utils/common";
 
 const useSDK = ({
@@ -212,7 +213,7 @@ const useSDK = ({
             res = "Wrong method for this mode";
         }
       } catch (err) {
-        res = err;
+        res = toFrameMethodError(err);
       }
 
       frameCallbackData(res, callId);

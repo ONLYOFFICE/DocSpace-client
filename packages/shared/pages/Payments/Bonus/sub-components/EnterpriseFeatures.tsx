@@ -44,33 +44,23 @@ import TechSupportReactSvgUrl from "PUBLIC_DIR/images/tech_support.react.svg?url
 
 import { Text } from "@docspace/ui-kit/components/text";
 
+import {
+  type TEnterpriseFeatureId,
+  useEnterpriseFeatures,
+} from "../../common/useEnterpriseFeatures";
+
 import styles from "../Bonus.module.scss";
+
+const FEATURE_ICONS: Record<TEnterpriseFeatureId, string> = {
+  aiTools: AIReactSvgUrl,
+  mobileEditing: MobileEditingReactSvgUrl,
+  scalability: ScalabilityReactSvgUrl,
+  techSupport: TechSupportReactSvgUrl,
+};
 
 export const EnterpriseFeatures = ({ license }: { license: string }) => {
   const { t } = useTranslation("Common");
-
-  const features = [
-    {
-      icon: AIReactSvgUrl,
-      title: t("Common:UpgradeAIToolsTitle"),
-      description: t("Common:UpgradeAIToolsDescription"),
-    },
-    {
-      icon: MobileEditingReactSvgUrl,
-      title: t("Common:UpgradeMobileEditingTitle"),
-      description: t("Common:UpgradeMobileEditingDescription"),
-    },
-    {
-      icon: ScalabilityReactSvgUrl,
-      title: t("Common:UpgradeScalabilityTitle"),
-      description: t("Common:UpgradeToProBannerItemScalabilityDescr"),
-    },
-    {
-      icon: TechSupportReactSvgUrl,
-      title: t("Common:UpgradeTechSupportTitle"),
-      description: t("Common:UpgradeTechSupportDescription"),
-    },
-  ];
+  const features = useEnterpriseFeatures();
 
   return (
     <div className={styles.featuresCard} data-testid="bonus-features">
@@ -79,8 +69,11 @@ export const EnterpriseFeatures = ({ license }: { license: string }) => {
       </Text>
       <div className={styles.features}>
         {features.map((feature) => (
-          <div key={feature.title} className={styles.feature}>
-            <ReactSVG src={feature.icon} className={styles.featureIcon} />
+          <div key={feature.id} className={styles.feature}>
+            <ReactSVG
+              src={FEATURE_ICONS[feature.id]}
+              className={styles.featureIcon}
+            />
             <div className={styles.featureText}>
               <Text fontSize="13px" fontWeight={600} lineHeight="20px">
                 {feature.title}

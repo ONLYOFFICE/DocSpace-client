@@ -56,11 +56,23 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 
 import { getBrandName } from "../../constants/brands";
+import {
+  type TEnterpriseFeatureId,
+  useEnterpriseFeatures,
+} from "../../pages/Payments/common/useEnterpriseFeatures";
 
 import type { UpgradePathDialogProps } from "./UpgradePathDialog.types";
 import styles from "./UpgradePathDialog.module.scss";
 
+const ENTERPRISE_FEATURE_ICONS: Record<TEnterpriseFeatureId, string> = {
+  aiTools: AIReactSvgUrl,
+  mobileEditing: MobileEditingReactSvgUrl,
+  scalability: ScalabilityReactSvgUrl,
+  techSupport: TechSupportReactSvgUrl,
+};
+
 type TFeature = {
+  id: string;
   icon: string;
   title: string;
   description: string;
@@ -84,6 +96,7 @@ export const UpgradePathDialog = ({
   onStartDeveloperTrial,
 }: UpgradePathDialogProps) => {
   const { t } = useTranslation(["Common"]);
+  const enterpriseFeatures = useEnterpriseFeatures();
 
   const productName = getBrandName("ProductEditorsName");
   const enterprise = t("Common:EnterpriseLicense");
@@ -98,28 +111,10 @@ export const UpgradePathDialog = ({
       }),
       description: t("Common:UpgradeEnterpriseDescription"),
       onStartTrial: onStartEnterpriseTrial,
-      features: [
-        {
-          icon: AIReactSvgUrl,
-          title: t("Common:UpgradeAIToolsTitle"),
-          description: t("Common:UpgradeAIToolsDescription"),
-        },
-        {
-          icon: MobileEditingReactSvgUrl,
-          title: t("Common:UpgradeMobileEditingTitle"),
-          description: t("Common:UpgradeMobileEditingDescription"),
-        },
-        {
-          icon: ScalabilityReactSvgUrl,
-          title: t("Common:UpgradeScalabilityTitle"),
-          description: t("Common:UpgradeToProBannerItemScalabilityDescr"),
-        },
-        {
-          icon: TechSupportReactSvgUrl,
-          title: t("Common:UpgradeTechSupportTitle"),
-          description: t("Common:UpgradeTechSupportDescription"),
-        },
-      ],
+      features: enterpriseFeatures.map((feature) => ({
+        ...feature,
+        icon: ENTERPRISE_FEATURE_ICONS[feature.id],
+      })),
     },
     {
       id: "developer",
@@ -131,6 +126,7 @@ export const UpgradePathDialog = ({
       onStartTrial: onStartDeveloperTrial,
       features: [
         {
+          id: "fullFeatureSet",
           icon: AIReactSvgUrl,
           title: t("Common:UpgradeFullFeatureSetTitle", {
             license: enterprise,
@@ -138,16 +134,19 @@ export const UpgradePathDialog = ({
           description: t("Common:UpgradeFullFeatureSetDescription"),
         },
         {
+          id: "whiteLabeling",
           icon: WhiteLabelingReactSvgUrl,
           title: t("Common:UpgradeWhiteLabelingTitle"),
           description: t("Common:UpgradeWhiteLabelingDescription"),
         },
         {
+          id: "automationApi",
           icon: AutomationApiReactSvgUrl,
           title: t("Common:UpgradeAutomationApiTitle"),
           description: t("Common:UpgradeAutomationApiDescription"),
         },
         {
+          id: "apiIntegration",
           icon: ApiIntegrationReactSvgUrl,
           title: t("Common:UpgradeApiIntegrationTitle"),
           description: t("Common:UpgradeApiIntegrationDescription"),
@@ -167,11 +166,15 @@ export const UpgradePathDialog = ({
       href: feedbackAndSupportUrl,
       label: t("Common:UpgradeGetTechAssistanceLink"),
     },
-    {
-      id: "purchase",
-      href: `mailto:${salesEmail}`,
-      label: t("Common:UpgradeAskPurchaseQuestionsLink"),
-    },
+    ...(salesEmail
+      ? [
+          {
+            id: "purchase",
+            href: `mailto:${salesEmail}`,
+            label: t("Common:UpgradeAskPurchaseQuestionsLink"),
+          },
+        ]
+      : []),
   ];
 
   return (

@@ -77,6 +77,15 @@ describe("UpgradePathDialog", () => {
     );
   });
 
+  it("hides the purchase link until the sales email is known", () => {
+    render(<UpgradePathDialog {...defaultProps} salesEmail="" />);
+
+    expect(
+      screen.queryByTestId("upgrade-path-purchase-link"),
+    ).not.toBeInTheDocument();
+    expect(screen.getByTestId("upgrade-path-demo-link")).toBeInTheDocument();
+  });
+
   it("disables the trial buttons until a handler is provided", () => {
     render(<UpgradePathDialog {...defaultProps} />);
 

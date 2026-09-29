@@ -42,7 +42,11 @@ import SocketHelper, {
 } from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import api from "../api";
-import { setWithCredentialsStatus } from "../api/client";
+import {
+  getAuthToken,
+  setAuthToken,
+  setWithCredentialsStatus,
+} from "../api/client";
 import { loginWithTfaCode } from "../api/user";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
@@ -189,6 +193,18 @@ class AuthStore {
     if (window.location.pathname === "/shared/invalid-link") return;
 
     await this.settingsStore?.init();
+
+    if (
+      isOAuthFrame() &&
+      getAuthToken() &&
+      !this.isAuthenticated &&
+      !this.settingsStore?.isPortalDeactivate
+    ) {
+      frameCallEvent({
+        event: "onAuthError",
+        data: { code: "UNAUTHORIZED", message: "unauthorized" },
+      });
+    }
 
     const requests = [];
 
@@ -523,9 +539,11 @@ class AuthStore {
       const w = window as unknown as { __redirectToLogin?: boolean };
       w.__redirectToLogin = true;
     }
+    const isOAuth = isOAuthFrame();
+
     let ssoLogoutUrl;
     try {
-      ssoLogoutUrl = await api.user.logout();
+      ssoLogoutUrl = isOAuth ? undefined : await api.user.logout();
     } catch {
       ssoLogoutUrl = undefined;
     }
@@ -558,6 +576,11 @@ class AuthStore {
     if (isFrame) frameCallEvent({ event: "onSignOut" });
 
     if (ssoLogoutUrl) return ssoLogoutUrl;
+
+    if (isOAuth) {
+      setAuthToken(null);
+      return;
+    }
 
     if (!reset) return;
 

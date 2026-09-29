@@ -42,6 +42,7 @@ import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
 import {
   frameCallEvent,
   frameCallbackData,
+  toFrameMethodError,
   createPasswordHash,
   frameCallCommand,
   frameHandlePing,
@@ -56,13 +57,13 @@ const Sdk = ({
   frameConfig,
   setFrameConfig,
   login,
+  loginWithCode,
   logout,
   loadCurrentUser,
   getIcon,
   isLoaded,
   getSettings,
-  userId,
-  updateProfileCulture,
+  i18n,
   getRoomsIcon,
   getFilesSettings,
   getPrimaryLink,
@@ -127,9 +128,7 @@ const Sdk = ({
             {
               const requests = await Promise.all([
                 setFrameConfig(data),
-                userId &&
-                  data.locale &&
-                  updateProfileCulture(userId, data.locale),
+                data.locale && i18n?.changeLanguage(data.locale),
               ]);
               res = requests[0];
             }
@@ -151,8 +150,10 @@ const Sdk = ({
             break;
           case "login":
             {
-              const { email, passwordHash } = data;
-              res = await login(email, passwordHash);
+              const { email, passwordHash, code } = data;
+              res = code
+                ? { url: await loginWithCode(email, passwordHash, code) }
+                : await login(email, passwordHash);
             }
             break;
           case "logout":
@@ -162,7 +163,7 @@ const Sdk = ({
             res = "Wrong method for this mode";
         }
       } catch (err) {
-        res = err;
+        res = toFrameMethodError(err);
       }
       frameCallbackData(res, callId);
     }
@@ -310,11 +311,10 @@ export const Component = inject(
     authStore,
     settingsStore,
     filesSettingsStore,
-    peopleStore,
     userStore,
     filesStore,
   }) => {
-    const { login, logout } = authStore;
+    const { login, loginWithCode, logout } = authStore;
     const {
       theme,
       setFrameConfig,
@@ -323,8 +323,7 @@ export const Component = inject(
       isLoaded,
       logoText,
     } = settingsStore;
-    const { loadCurrentUser, user } = userStore;
-    const { updateProfileCulture } = peopleStore.targetUserStore;
+    const { loadCurrentUser } = userStore;
     const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
     const { getPrimaryLink } = filesStore;
 
@@ -333,14 +332,13 @@ export const Component = inject(
       setFrameConfig,
       frameConfig,
       login,
+      loginWithCode,
       logout,
       getSettings,
       loadCurrentUser,
       getIcon,
       getRoomsIcon,
       isLoaded,
-      updateProfileCulture,
-      userId: user?.id,
       getFilesSettings,
       getPrimaryLink,
       logoText,

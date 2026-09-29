@@ -168,7 +168,7 @@ const PureHome = observer((props) => {
     login,
     loginWithCode,
     loadCurrentUser,
-    updateProfileCulture,
+    i18n,
     getRooms,
     setSelectedFolder,
     userId,
@@ -440,7 +440,7 @@ const PureHome = observer((props) => {
     createTag,
     removeTagsFromRoom,
     loadCurrentUser,
-    updateProfileCulture,
+    i18n,
     getRooms,
     isLoading,
   });
@@ -967,10 +967,8 @@ export const Component = inject(
     const {
       usersStore,
       groupsStore,
-      targetUserStore,
       viewAs: contactsViewAs,
     } = peopleStore;
-    const { updateProfileCulture } = targetUserStore;
     const {
       getUsersList,
       setContactsTab,
@@ -1104,7 +1102,6 @@ export const Component = inject(
       getGroups,
       updateCurrentGroup,
       isEmptyGroups,
-      updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
 
       secondaryActiveOperations,

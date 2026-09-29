@@ -41,6 +41,7 @@ import {
   frameCallCommand,
   createPasswordHash,
   frameHandlePing,
+  toFrameMethodError,
 } from "@docspace/shared/utils/common";
 
 const useSDK = ({
@@ -65,7 +66,7 @@ const useSDK = ({
   createTag,
   removeTagsFromRoom,
   loadCurrentUser,
-  updateProfileCulture,
+  i18n,
   getRooms,
   isLoading,
 }) => {
@@ -87,9 +88,7 @@ const useSDK = ({
             {
               const requests = await Promise.all([
                 setFrameConfig(data),
-                userId &&
-                  data.locale &&
-                  updateProfileCulture(userId, data.locale),
+                data.locale && i18n?.changeLanguage(data.locale),
               ]);
               res = requests[0];
             }
@@ -212,7 +211,7 @@ const useSDK = ({
             res = "Wrong method for this mode";
         }
       } catch (err) {
-        res = err;
+        res = toFrameMethodError(err);
       }
 
       frameCallbackData(res, callId);

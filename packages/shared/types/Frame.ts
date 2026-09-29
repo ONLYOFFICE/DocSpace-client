@@ -75,6 +75,7 @@ export type TFrameFilter = {
     | "Author";
   search?: string;
   withSubfolders?: boolean;
+  groupId?: string;
 };
 
 export type TEditorCustomization = {

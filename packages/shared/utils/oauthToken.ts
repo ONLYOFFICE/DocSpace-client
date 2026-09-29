@@ -74,6 +74,14 @@ let nextCallId = 1;
 const pending = new Map<number, PendingEntry>();
 let listenerInstalled = false;
 
+type PushListener = (token: string) => void;
+
+/**
+ * Subscribers to unsolicited token pushes: the SDK host refreshes a token
+ * ahead of its expiry and posts it without a `callId`.
+ */
+const pushListeners = new Set<PushListener>();
+
 const isInIframe = (): boolean => {
   if (typeof window === "undefined") return false;
   try {
@@ -137,7 +145,15 @@ const onMessage = (e: MessageEvent) => {
   }
 
   if (!payload || payload.type !== AUTH_TOKEN_RETURN_TYPE) return;
-  if (typeof payload.callId !== "number") return;
+
+  const token = payload.data?.accessToken;
+
+  if (typeof payload.callId !== "number") {
+    if (typeof token === "string" && token) {
+      pushListeners.forEach((listener) => listener(token));
+    }
+    return;
+  }
 
   const entry = pending.get(payload.callId);
   if (!entry) return;
@@ -145,7 +161,6 @@ const onMessage = (e: MessageEvent) => {
   pending.delete(payload.callId);
   clearTimeout(entry.timer);
 
-  const token = payload.data?.accessToken;
   entry.resolve(typeof token === "string" ? token : null);
 };
 
@@ -184,9 +199,22 @@ export const requestAuthToken = (
   });
 };
 
+/**
+ * Subscribes to access tokens the host pushes ahead of expiry (proactive
+ * refresh). Returns the unsubscribe function.
+ */
+export const onAuthTokenPush = (listener: PushListener): (() => void) => {
+  installListener();
+  pushListeners.add(listener);
+  return () => {
+    pushListeners.delete(listener);
+  };
+};
+
 export const __resetOAuthTokenForTests = () => {
   pending.forEach((entry) => clearTimeout(entry.timer));
   pending.clear();
+  pushListeners.clear();
   nextCallId = 1;
   latchedFromUrl = null;
   if (listenerInstalled && typeof window !== "undefined") {

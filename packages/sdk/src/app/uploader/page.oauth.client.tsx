@@ -32,63 +32,30 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+"use client";
 
-import { headers } from "next/headers";
-
-import { getFilesSettings } from "@/api/files";
-import { OAUTH_FRAME_HEADER } from "@/utils/constants";
-import { logger } from "../../../logger.mjs";
-
-import UploaderClient from "./page.client";
-import UploaderOAuthPage from "./page.oauth.client";
+import { getSettingsFiles } from "@docspace/shared/api/files";
 import type { UploaderFilesSettings } from "@docspace/ui-kit/uploader/Uploader.types";
-import { formatExtensions } from "./_utils";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string }>;
-}) {
-  logger.info("Uploader page");
+import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+import OAuthPageLoader from "@/components/OAuthPageLoader";
 
-  const baseConfig = Object.fromEntries(
-    Object.entries(await searchParams).map(([k, v]) => {
-      if (v === "true") return [k, true];
-      if (v === "false") return [k, false];
-      if (k === "filter") return [k, Number.isNaN(+v) ? v : +v];
+import UploaderClient, { type UploaderClientProps } from "./page.client";
 
-      return [k, v];
-    }),
-  );
+type UploaderOAuthPageProps = Omit<UploaderClientProps, "filesSettings">;
 
-  const { accept, shortText, fullText, badgeValue } = formatExtensions(
-    baseConfig?.acceptExtensions,
-  );
+/**
+ * OAuth frame variant of the uploader page: the server has no portal
+ * cookie, so the files settings are loaded on the client with the Bearer token.
+ */
+export default function UploaderOAuthPage(props: UploaderOAuthPageProps) {
+  const { data, error } = useOAuthSSRData(async () => {
+    const settings = await getSettingsFiles();
+    return settings ? { filesSettings: settings as unknown as UploaderFilesSettings } : null;
+  });
 
-  const hdrs = await headers();
+  if (error) throw error;
+  if (!data) return <OAuthPageLoader />;
 
-  if (hdrs.get(OAUTH_FRAME_HEADER)) {
-    return (
-      <UploaderOAuthPage
-        accept={accept}
-        shortText={shortText}
-        fullText={fullText}
-        badgeValue={badgeValue}
-        baseConfig={baseConfig}
-      />
-    );
-  }
-
-  const filesSettings = (await getFilesSettings()) as UploaderFilesSettings;
-
-  return (
-    <UploaderClient
-      filesSettings={filesSettings}
-      accept={accept}
-      shortText={shortText}
-      fullText={fullText}
-      badgeValue={badgeValue}
-      baseConfig={baseConfig}
-    />
-  );
+  return <UploaderClient {...props} filesSettings={data.filesSettings} />;
 }

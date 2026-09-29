@@ -218,7 +218,7 @@ export const UpgradePathDialog = ({
 
               <div className={styles.features}>
                 {solution.features.map((feature) => (
-                  <div key={feature.title} className={styles.feature}>
+                  <div key={feature.id} className={styles.feature}>
                     <ReactSVG src={feature.icon} className={styles.icon} />
                     <div className={styles.featureText}>
                       <Text fontSize="13px" fontWeight={600} lineHeight="20px">

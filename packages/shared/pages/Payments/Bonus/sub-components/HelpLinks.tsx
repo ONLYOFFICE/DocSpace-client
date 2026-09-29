@@ -104,20 +104,22 @@ export const HelpLinks = ({
             components={{ 1: renderLink(demoOrderUrl, "demo_order_link") }}
           />
         </Text>
-        <Text fontSize="13px" lineHeight="20px">
-          <Trans
-            t={t}
-            ns="Common"
-            i18nKey="UpgradeToProBannerInformationPurchase"
-            values={{ email: salesEmail }}
-            components={{
-              1: renderLink(
-                `mailto:${salesEmail}`,
-                "upgrade_to_pro_banner_purchase_link",
-              ),
-            }}
-          />
-        </Text>
+        {salesEmail ? (
+          <Text fontSize="13px" lineHeight="20px">
+            <Trans
+              t={t}
+              ns="Common"
+              i18nKey="UpgradeToProBannerInformationPurchase"
+              values={{ email: salesEmail }}
+              components={{
+                1: renderLink(
+                  `mailto:${salesEmail}`,
+                  "upgrade_to_pro_banner_purchase_link",
+                ),
+              }}
+            />
+          </Text>
+        ) : null}
         <Text fontSize="13px" lineHeight="20px">
           <Trans
             t={t}

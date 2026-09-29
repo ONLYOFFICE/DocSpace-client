@@ -59,27 +59,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { UpgradePathDialog } from "@docspace/shared/dialogs/upgrade-path-dialog";
-import {
-  DEVELOPER_TRIAL_PATH,
-  ENTERPRISE_TRIAL_PATH,
-  getUpgradeTrialUrl,
-} from "@docspace/shared/dialogs/upgrade-path-dialog/UpgradePathDialog.constants";
 
 import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 
 import styles from "../Dashboard.module.scss";
+import UpgradePathLine from "./UpgradePathLine";
 
 type HeaderProps = {
   /**
@@ -93,11 +87,6 @@ type HeaderProps = {
   isAdminOrOwner?: boolean;
   standalone?: boolean;
   isCommunity?: boolean;
-  salesEmail?: string;
-  demoOrderUrl?: string;
-  feedbackAndSupportUrl?: string;
-  siteDomain?: string;
-  getSettingsPayment?: () => Promise<void>;
 };
 
 const Header = ({
@@ -107,37 +96,13 @@ const Header = ({
   isAdminOrOwner = false,
   standalone = false,
   isCommunity = false,
-  salesEmail = "",
-  demoOrderUrl = "",
-  feedbackAndSupportUrl = "",
-  siteDomain = "",
-  getSettingsPayment,
 }: HeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
-  const [isUpgradeDialogVisible, setIsUpgradeDialogVisible] = useState(false);
 
   const businessPlan = t("Common:BusinessPlan");
 
   const openPayments = () => navigate(PAYMENT_ROUTES.portalPayments);
-
-  const openUpgradeDialog = () => {
-    if (!salesEmail) getSettingsPayment?.();
-    setIsUpgradeDialogVisible(true);
-  };
-
-  const closeUpgradeDialog = () => setIsUpgradeDialogVisible(false);
-
-  const openTrial = (path: string) =>
-    window.open(getUpgradeTrialUrl(siteDomain, path), "_blank", "noopener");
-
-  const startEnterpriseTrial = siteDomain
-    ? () => openTrial(ENTERPRISE_TRIAL_PATH)
-    : undefined;
-
-  const startDeveloperTrial = siteDomain
-    ? () => openTrial(DEVELOPER_TRIAL_PATH)
-    : undefined;
 
   return (
     <header className={styles.planHeader}>
@@ -183,31 +148,7 @@ const Header = ({
         ) : null}
 
         {isAdminOrOwner && standalone && isCommunity ? (
-          <div className={styles.planSubline}>
-            <Text as="span" className={styles.planSublineText}>
-              <Trans
-                t={t}
-                ns="Common"
-                i18nKey="UnlockMoreWithSolutions"
-                values={{
-                  enterprise: t("Common:EnterpriseLicense"),
-                  developer: t("Common:DeveloperLicense"),
-                }}
-                components={{
-                  1: (
-                    <Link
-                      className={styles.planLink}
-                      color="accent"
-                      type={LinkType.page}
-                      onClick={openUpgradeDialog}
-                      isHovered
-                      dataTestId="dashboard-open-upgrade-path"
-                    />
-                  ),
-                }}
-              />
-            </Text>
-          </div>
+          <UpgradePathLine />
         ) : null}
       </div>
 
@@ -223,18 +164,6 @@ const Header = ({
           dataTestId="dashboard-open-welcome"
         />
       ) : null}
-
-      {isUpgradeDialogVisible ? (
-        <UpgradePathDialog
-          visible={isUpgradeDialogVisible}
-          onClose={closeUpgradeDialog}
-          salesEmail={salesEmail}
-          demoOrderUrl={demoOrderUrl}
-          feedbackAndSupportUrl={feedbackAndSupportUrl}
-          onStartEnterpriseTrial={startEnterpriseTrial}
-          onStartDeveloperTrial={startDeveloperTrial}
-        />
-      ) : null}
     </header>
   );
 };
@@ -245,7 +174,6 @@ const HeaderConnected = inject<TStore>(
     currentQuotaStore,
     currentTariffStatusStore,
     settingsStore,
-    paymentStore,
   }) => ({
     isFreeTariff: currentQuotaStore.isFreeTariff,
     paymentDate: currentTariffStatusStore.paymentDate,
@@ -253,11 +181,6 @@ const HeaderConnected = inject<TStore>(
       (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
     standalone: settingsStore.standalone,
     isCommunity: currentTariffStatusStore.isCommunity,
-    salesEmail: paymentStore.salesEmail,
-    demoOrderUrl: settingsStore.demoOrderUrl,
-    feedbackAndSupportUrl: settingsStore.feedbackAndSupportUrl,
-    siteDomain: settingsStore.siteDomain,
-    getSettingsPayment: paymentStore.getSettingsPayment,
   }),
 )(observer(Header));
 

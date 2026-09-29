@@ -35,19 +35,48 @@
 
 @use "@docspace/ui-kit/styles/mixins";
 
-.bonus {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 940px;
+.upgradePathDialog {
+  --modal-dialog-width: min(880px, calc(100vw - 32px));
 
-  .cards {
+  .summary {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 20px;
+    border-radius: 6px;
+    background: var(--upgrade-card-bg);
+  }
+
+  .solutions {
     display: grid;
-    grid-template-columns: minmax(0, 540px) minmax(0, 384px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
+    margin-top: 16px;
 
     @include mixins.tablet-and-below {
       grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .solution {
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    border-radius: 6px;
+    background: var(--upgrade-card-bg);
+
+    &.enterprise {
+      --upgrade-accent: var(--upgrade-enterprise-color);
+      --upgrade-accent-bg: var(--upgrade-enterprise-icon-bg);
+    }
+
+    &.developer {
+      --upgrade-accent: var(--upgrade-developer-color);
+      --upgrade-accent-bg: var(--upgrade-developer-icon-bg);
+    }
+
+    > .description {
+      margin-top: 12px;
     }
   }
 
@@ -55,45 +84,19 @@
     color: var(--upgrade-description-color);
   }
 
-  .featuresCard {
-    padding: 18px;
-    border-radius: 6px;
-    background: var(--upgrade-card-bg);
-  }
-
   .features {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-top: 16px;
+    flex: 1;
+    margin: 12px 0 32px;
   }
 
   .feature {
     display: grid;
-    grid-template-columns: 24px 1fr;
+    grid-template-columns: 32px 1fr;
     gap: 10px;
     align-items: start;
-  }
-
-  .featureIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    color: var(--upgrade-icon-color);
-
-    div {
-      display: flex;
-    }
-
-    svg [fill]:not([fill="none"]):not(rect) {
-      fill: currentColor;
-    }
-
-    svg [stroke] {
-      stroke: currentColor;
-    }
   }
 
   .featureText {
@@ -102,79 +105,53 @@
     gap: 4px;
   }
 
-  .trialCard {
-    display: flex;
-    flex-direction: column;
-    padding: 17px 17px 23px;
-    border-radius: 6px;
-    border: var(--upgrade-trial-card-border);
-    background: var(--upgrade-trial-card-bg);
-  }
-
-  .chooseDeployment {
-    margin: 32px 0 16px;
-    color: var(--upgrade-description-color);
-  }
-
-  .deployments {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .deployment {
+  .icon {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
     border-radius: 6px;
-    background: var(--upgrade-card-item-bg);
-  }
-
-  .deploymentIcon {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-  }
-
-  .deploymentLabel {
-    flex: 1;
-  }
-
-  .readNow {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .readNowIcon {
-    display: flex;
-    color: var(--accent-main);
+    color: var(--upgrade-accent);
+    background: var(--upgrade-accent-bg);
 
     div {
       display: flex;
     }
 
-    @include mixins.flip-in-rtl;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    svg path {
+      fill: currentColor;
+    }
+  }
+
+  .trialButton {
+    --accent-button: var(--upgrade-accent);
+    color: var(--upgrade-button-text-color);
   }
 
   .note {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    gap: 8px;
+    margin-top: 16px;
     padding: 10px 16px 12px;
     border-radius: 6px;
     background: var(--upgrade-card-bg);
   }
 
-  .noteHeader {
+  .noteText {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    gap: 2px;
   }
 
   .noteIcon {
     display: flex;
+    padding-top: 2px;
     color: var(--upgrade-info-icon-color);
 
     div {
@@ -186,41 +163,10 @@
     }
   }
 
-  .help {
+  .links {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .helpLines {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-}
-
-.contactComponent {
-  margin-top: 16px;
-  max-width: 504px;
-
-  .paymentsContact {
-    display: flex;
-    width: 100%;
-    p {
-      margin-inline-end: 4px;
-      margin-bottom: 4px;
-    }
-
-    a {
-      text-decoration: underline;
-    }
-
-    .text {
-      color: var(--payment-contact-container-text-color);
-    }
-
-    .link {
-      color: var(--payment-contact-container-link-color);
-    }
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
   }
 }

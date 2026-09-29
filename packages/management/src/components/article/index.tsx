@@ -139,7 +139,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
         ) : (
           <ArticleItem
             key="bonus"
-            text={t("Common:Bonus")}
+            text={t("Common:Upgrade")}
             iconNode={<GiftReactSvg />}
             showText={showText}
             onClick={() => onItemClick("bonus")}

@@ -1,0 +1,101 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import React from "react";
+import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
+
+import AIReactSvgUrl from "PUBLIC_DIR/images/ai_tools.react.svg?url";
+import MobileEditingReactSvgUrl from "PUBLIC_DIR/images/mobile_editing.react.svg?url";
+import ScalabilityReactSvgUrl from "PUBLIC_DIR/images/scalability.react.svg?url";
+import TechSupportReactSvgUrl from "PUBLIC_DIR/images/tech_support.react.svg?url";
+
+import { Text } from "@docspace/ui-kit/components/text";
+
+import styles from "../Bonus.module.scss";
+
+export const EnterpriseFeatures = ({ license }: { license: string }) => {
+  const { t } = useTranslation("Common");
+
+  const features = [
+    {
+      icon: AIReactSvgUrl,
+      title: t("Common:UpgradeAIToolsTitle"),
+      description: t("Common:UpgradeAIToolsDescription"),
+    },
+    {
+      icon: MobileEditingReactSvgUrl,
+      title: t("Common:UpgradeMobileEditingTitle"),
+      description: t("Common:UpgradeMobileEditingDescription"),
+    },
+    {
+      icon: ScalabilityReactSvgUrl,
+      title: t("Common:UpgradeScalabilityTitle"),
+      description: t("Common:UpgradeToProBannerItemScalabilityDescr"),
+    },
+    {
+      icon: TechSupportReactSvgUrl,
+      title: t("Common:UpgradeTechSupportTitle"),
+      description: t("Common:UpgradeTechSupportDescription"),
+    },
+  ];
+
+  return (
+    <div className={styles.featuresCard} data-testid="bonus-features">
+      <Text fontSize="16px" fontWeight={700} lineHeight="22px">
+        {t("Common:UpgradeFeaturesTitle", { license })}
+      </Text>
+      <div className={styles.features}>
+        {features.map((feature) => (
+          <div key={feature.title} className={styles.feature}>
+            <ReactSVG src={feature.icon} className={styles.featureIcon} />
+            <div className={styles.featureText}>
+              <Text fontSize="13px" fontWeight={600} lineHeight="20px">
+                {feature.title}
+              </Text>
+              <Text
+                fontSize="13px"
+                lineHeight="20px"
+                className={styles.description}
+              >
+                {feature.description}
+              </Text>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};

@@ -33,12 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export interface IBonusProps {
-  feedbackAndSupportUrl: string;
-  salesEmail: string;
-  logoText: string;
-  enterpriseInstallScriptUrl: string;
-  enterpriseInstallWindowsUrl: string;
-  forEnterprisesUrl: string;
-  demoOrderUrl: string;
-}
+// TODO: move to externalresources site entries (downloadenterprise, downloaddeveloper)
+export const ENTERPRISE_TRIAL_PATH = "/download#docspace-enterprise";
+export const DEVELOPER_TRIAL_PATH = "/download-developer#docspace-developer";
+
+export const getUpgradeTrialUrl = (siteDomain: string, path: string) =>
+  `${siteDomain.replace(/\/$/, "")}${path}`;

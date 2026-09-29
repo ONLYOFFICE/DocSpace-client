@@ -33,12 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export interface IBonusProps {
+export type UpgradePathDialogProps = {
+  visible: boolean;
+  onClose: () => void;
+  demoOrderUrl: string;
   feedbackAndSupportUrl: string;
   salesEmail: string;
-  logoText: string;
-  enterpriseInstallScriptUrl: string;
-  enterpriseInstallWindowsUrl: string;
-  forEnterprisesUrl: string;
-  demoOrderUrl: string;
-}
+  onStartEnterpriseTrial?: () => void;
+  onStartDeveloperTrial?: () => void;
+};

@@ -2342,6 +2342,36 @@
   --payment-benefits-icons-color: #{$light-gray-dark};
 }
 
+.light {
+  --upgrade-enterprise-color: #{$light-second-main};
+  --upgrade-developer-color: #{$second-purple};
+  --upgrade-enterprise-icon-bg: #{rgba($light-second-main, 0.1)};
+  --upgrade-developer-icon-bg: #{rgba($second-purple, 0.1)};
+  --upgrade-button-text-color: #{$white};
+  --upgrade-card-bg: #{$gray-light};
+  --upgrade-card-item-bg: #{$gray-light};
+  --upgrade-trial-card-bg: #{$white};
+  --upgrade-trial-card-border: 1px solid var(--accent-main);
+  --upgrade-description-color: #{$gray-text};
+  --upgrade-icon-color: #{$light-gray-dark};
+  --upgrade-info-icon-color: #{$gray};
+}
+
+.dark {
+  --upgrade-enterprise-color: #{$light-second-main};
+  --upgrade-developer-color: #{$second-purple};
+  --upgrade-enterprise-icon-bg: #{rgba($light-second-main, 0.2)};
+  --upgrade-developer-icon-bg: #{rgba($second-purple, 0.2)};
+  --upgrade-button-text-color: #{$white};
+  --upgrade-card-bg: #{$dark-gray-light};
+  --upgrade-card-item-bg: #{$dark-gray-light};
+  --upgrade-trial-card-bg: transparent;
+  --upgrade-trial-card-border: 1px solid var(--accent-main);
+  --upgrade-description-color: #{$dark-gray-dark};
+  --upgrade-icon-color: #{$dark-gray-dark};
+  --upgrade-info-icon-color: #{$gray-dark};
+}
+
 .dark {
   --settings-payment-warning-color: #{$dark-error-status};
   --settings-payment-color: #{$dark-status-warning};

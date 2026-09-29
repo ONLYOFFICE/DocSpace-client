@@ -34,25 +34,23 @@
  */
 
 import React from "react";
+import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
+
+import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { PaymentsStandaloneLoader } from "../../../skeletons/payments";
 
-import { BenefitsContainer } from "../common/BenefitsContainer";
-import { ContactContainer } from "../common/ContactContainer";
+import { EnterpriseFeatures } from "./sub-components/EnterpriseFeatures";
 import { OfficialDocumentation } from "./sub-components/OfficialDocumentation";
+import { HelpLinks } from "./sub-components/HelpLinks";
 
 import { IBonusProps } from "./Bonus.types";
 import styles from "./Bonus.module.scss";
 
 export const Bonus = ({
-  isEnterprise,
-  isTrial,
-  isDeveloper,
-  isCommunity,
   salesEmail,
-  dataBackupUrl,
   logoText,
   enterpriseInstallScriptUrl,
   enterpriseInstallWindowsUrl,
@@ -64,30 +62,37 @@ export const Bonus = ({
 
   if (!ready) return <PaymentsStandaloneLoader />;
 
+  const license = t("Common:EnterpriseLicense");
+
   return (
     <div data-testid="bonus" className={styles.bonus}>
-      <BenefitsContainer
-        isTrial={isTrial}
-        isEnterprise={isEnterprise}
-        isDeveloper={isDeveloper}
-      />
-      <Text fontWeight={600}>
-        {t("UpgradeToProBannerInstructionHeader", {
-          organizationName: logoText,
-          license: t("Common:EnterpriseLicense"),
-        })}
-      </Text>
-      <Text>{t("UpgradeToProBannerInstructionDescr")}</Text>
+      <div className={styles.cards}>
+        <EnterpriseFeatures license={license} />
+        <OfficialDocumentation
+          organizationName={logoText}
+          license={license}
+          enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
+          enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
+        />
+      </div>
 
-      <OfficialDocumentation
-        dataBackupUrl={dataBackupUrl}
-        enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
-        enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
-      />
+      <div className={styles.note} data-testid="bonus-upgrade-note">
+        <div className={styles.noteHeader}>
+          <ReactSVG src={InfoOutlineReactSvgUrl} className={styles.noteIcon} />
+          <Text fontSize="13px" fontWeight={600} lineHeight="20px">
+            {t("Common:UpgradeBeforeYouUpgrade")}
+          </Text>
+        </div>
+        <Text fontSize="12px" lineHeight="16px">
+          {t("Common:UpgradeEditorsUnavailableNote")}{" "}
+          {t("Common:UpgradeBackupRecommendation")}
+        </Text>
+      </div>
 
-      <ContactContainer
+      <HelpLinks
+        organizationName={logoText}
+        license={license}
         salesEmail={salesEmail}
-        isCommunity={isCommunity}
         forEnterprisesUrl={forEnterprisesUrl}
         demoOrderUrl={demoOrderUrl}
         feedbackAndSupportUrl={feedbackAndSupportUrl}

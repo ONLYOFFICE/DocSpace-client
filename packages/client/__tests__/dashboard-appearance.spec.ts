@@ -126,6 +126,10 @@ const sidebarAgentsItem = (page: Page) =>
 const planLine = (page: Page) =>
   page.getByText(/You are (on the free|using)\b/);
 
+/** The Community-only line that opens the upgrade path dialog. */
+const upgradePathLink = (page: Page) =>
+  page.getByTestId("dashboard-open-upgrade-path");
+
 type Role = {
   /** Names the case, in the test title and in the screenshot file name. */
   key: string;
@@ -215,9 +219,11 @@ const SAAS_PLANS: Plan[] = [
 
 /**
  * The standalone editions whose frames duplicate the Enterprise ones — they
- * keep a single canary screenshot instead of a full set.
+ * keep a single canary screenshot instead of a full set. Community is not one
+ * of them: its admins and owner get the upgrade path line in the header, so
+ * they are shot on their own and the rest of its audience is left to Enterprise.
  */
-const STANDALONE_CANARY_ONLY = ["community", "developer"];
+const STANDALONE_CANARY_ONLY = ["developer"];
 
 const STANDALONE_PLANS: Plan[] = [
   {
@@ -534,6 +540,14 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       await expect(planLine(page)).toHaveCount(0);
     }
 
+    // A standalone Community portal gets an upgrade line in its place, and only
+    // for the audience that can act on it - the ones who can install a license.
+    await expect(upgradePathLink(page)).toHaveCount(
+      role.isAdminOrOwner && edition.standalone && plan.key === "community"
+        ? 1
+        : 0,
+    );
+
     // The apps subtitle follows the same rule as the plan line: it names the
     // plan for a SaaS admin and stays neutral for everyone else, a standalone
     // portal included. Both wordings share "includes apps for", so the same
@@ -648,17 +662,21 @@ for (const edition of EDITIONS) {
               ai,
               devToolsLimited: false,
               viewport: DESKTOP,
-              // A standalone portal is offered no billing at all, so its three
-              // editions render pixel for pixel alike - the plan line and the
-              // plan-named subtitle, the only things that could tell them
+              // A standalone portal is offered no billing at all, so Enterprise
+              // and Developer render pixel for pixel alike - the plan line and
+              // the plan-named subtitle, the only things that could tell them
               // apart, are both dropped there. Enterprise carries the full set
-              // of frames and the other two keep one canary each; the day the
-              // page starts telling them apart, the canary fails and the rest
-              // of the audience gets its own baselines then. Every case runs
-              // every assertion above either way.
+              // of frames and Developer keeps one canary; the day the page
+              // starts telling them apart, the canary fails and the rest of the
+              // audience gets its own baselines then. Community differs only for
+              // its admins and owner (the upgrade path line), so only they get
+              // frames of their own; everyone else matches Enterprise pixel for
+              // pixel. Every case runs every assertion above either way.
               withScreenshot:
-                !STANDALONE_CANARY_ONLY.includes(plan.key) ||
-                (ai.enabled && role === ROLES[0]),
+                plan.key === "community"
+                  ? role.isAdminOrOwner
+                  : !STANDALONE_CANARY_ONLY.includes(plan.key) ||
+                    (ai.enabled && role === ROLES[0]),
               screenshot: `${edition.key}-${plan.key}-ai-${ai.key}-${role.key}.png`,
             });
           }

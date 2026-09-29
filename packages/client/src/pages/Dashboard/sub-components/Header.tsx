@@ -198,7 +198,7 @@ const Header = ({
                     <Link
                       className={styles.planLink}
                       color="accent"
-                      type={LinkType.action}
+                      type={LinkType.page}
                       onClick={openUpgradeDialog}
                       isHovered
                       dataTestId="dashboard-open-upgrade-path"

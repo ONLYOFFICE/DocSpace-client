@@ -44,10 +44,6 @@ import UploaderClient, { type UploaderClientProps } from "./page.client";
 
 type UploaderOAuthPageProps = Omit<UploaderClientProps, "filesSettings">;
 
-/**
- * OAuth frame variant of the uploader page: the server has no portal
- * cookie, so the files settings are loaded on the client with the Bearer token.
- */
 export default function UploaderOAuthPage(props: UploaderOAuthPageProps) {
   const { data, error } = useOAuthSSRData(async () => {
     const settings = await getSettingsFiles();

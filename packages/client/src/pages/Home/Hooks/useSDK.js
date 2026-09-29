@@ -45,16 +45,8 @@ import {
 } from "@docspace/shared/utils/common";
 
 
-/**
- * Store fields that must not reach the host through `getFolderInfo`:
- * the injected settings store carries the whole portal configuration.
- */
 const FOLDER_INFO_EXCLUDED_KEYS = new Set(["settingsStore"]);
 
-/**
- * Builds the `getFolderInfo` answer from the selected folder store: every
- * data field the 2.1 contract returned, without injected stores and methods.
- */
 export const toFolderInfo = (folder) =>
   Object.fromEntries(
     Object.entries(folder).filter(

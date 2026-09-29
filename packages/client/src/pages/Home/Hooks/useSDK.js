@@ -44,6 +44,59 @@ import {
   toFrameMethodError,
 } from "@docspace/shared/utils/common";
 
+/**
+ * Fields of the selected folder the host receives from `getFolderInfo`:
+ * the folder as the API describes it plus the room and navigation flags,
+ * without the store internals.
+ */
+const FOLDER_INFO_KEYS = [
+  "id",
+  "title",
+  "parentId",
+  "rootFolderId",
+  "rootFolderType",
+  "type",
+  "filesCount",
+  "foldersCount",
+  "new",
+  "created",
+  "createdBy",
+  "updated",
+  "updatedBy",
+  "ownedBy",
+  "sharedBy",
+  "access",
+  "security",
+  "shared",
+  "canShare",
+  "isShareable",
+  "mute",
+  "pinned",
+  "private",
+  "indexing",
+  "roomType",
+  "parentRoomType",
+  "isRoom",
+  "inRoom",
+  "isTemplate",
+  "isArchive",
+  "logo",
+  "tags",
+  "pathParts",
+  "navigationPath",
+  "providerItem",
+  "providerKey",
+  "providerId",
+];
+
+const toFolderInfo = (folder) =>
+  Object.fromEntries(
+    FOLDER_INFO_KEYS.filter((key) => folder[key] !== undefined).map((key) => [
+      key,
+      folder[key],
+    ]),
+  );
+
 const useSDK = ({
   frameConfig,
   setFrameConfig,
@@ -94,7 +147,7 @@ const useSDK = ({
             }
             break;
           case "getFolderInfo":
-            res = selectedFolderStore;
+            res = toFolderInfo(selectedFolderStore);
             break;
           case "getFolders":
             res = folders;

@@ -199,6 +199,7 @@ self: ContextOptionsStore,t: TTranslation
 
     if (archiveOptions) options.push(archiveOptions);
     options.push(...pluginOptions);
+    options.push(...self.onMultiLoadFrameActions(selection));
 
     canDelete &&
       options.push({
@@ -362,7 +363,12 @@ self: ContextOptionsStore,t: TTranslation
 
   const pluginOptions = self.onMultiLoadPlugins(selection);
 
-  options.splice(1, 0, ...pluginOptions);
+  options.splice(
+    1,
+    0,
+    ...pluginOptions,
+    ...self.onMultiLoadFrameActions(selection),
+  );
 
   const newOptions = options.filter(
     (option, index) =>

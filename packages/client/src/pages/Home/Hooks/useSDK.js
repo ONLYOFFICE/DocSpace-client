@@ -58,6 +58,7 @@ export const toFolderInfo = (folder) =>
 const useSDK = ({
   frameConfig,
   setFrameConfig,
+  setFrameCustomActions,
   selectedFolderStore,
   folders,
   files,
@@ -103,6 +104,10 @@ const useSDK = ({
               ]);
               res = requests[0];
             }
+            break;
+          case "setCustomActions":
+            setFrameCustomActions?.(data ?? null);
+            res = {};
             break;
           case "getFolderInfo":
             res = toFolderInfo(selectedFolderStore);

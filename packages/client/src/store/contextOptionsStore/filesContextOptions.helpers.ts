@@ -1017,6 +1017,13 @@ export const getFilesContextOptionsImpl = (
     });
   }
 
+  const frameActions = self.onLoadFrameActions(item);
+
+  if (frameActions.length > 0) {
+    options.push({ key: "separator-custom-actions", isSeparator: true });
+    options.push(...frameActions);
+  }
+
   const { isCollaborator } = self.userStore?.user || {
     isCollaborator: false,
   };

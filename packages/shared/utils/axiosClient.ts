@@ -44,7 +44,7 @@ import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
-import { isOAuthFrame, requestAuthToken } from "./oauthToken";
+import { isOAuthFrame, onAuthTokenPush, requestAuthToken } from "./oauthToken";
 import { frameCallEvent } from "./common";
 import { isPortalNotFoundRedirectClaimed } from "./portalNotFound";
 
@@ -237,6 +237,8 @@ class AxiosClient {
     });
 
     this.client = axios.create(apxiosConfig);
+
+    if (isOAuthFrame()) onAuthTokenPush((token) => this.setAuthToken(token));
 
     this.client.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
@@ -471,23 +473,22 @@ class AxiosClient {
 
         switch (error.response?.status) {
           case 401: {
-            if (options.skipUnauthorized) return Promise.resolve();
-
-            if (options.skipLogout) return Promise.reject(error);
-
             if (isOAuthFrame()) {
               const opts = options as TReqOption &
                 AxiosRequestConfig & { _oauthRetried?: boolean };
 
-              const signalAuthError = (): Promise<void> => {
+              const settle = (): Promise<void> =>
+                options.skipUnauthorized
+                  ? Promise.resolve()
+                  : Promise.reject(error);
+
+              if (opts._oauthRetried) {
                 frameCallEvent({
                   event: "onAuthError",
                   data: { code: "UNAUTHORIZED", message: "unauthorized" },
                 });
-                return Promise.reject(error);
-              };
-
-              if (opts._oauthRetried) return signalAuthError();
+                return settle();
+              }
 
               opts._oauthRetried = true;
 
@@ -499,9 +500,13 @@ class AxiosClient {
                     isOAuth,
                   ) as unknown as Promise<void>;
 
-                return Promise.reject(error);
+                return settle();
               });
             }
+
+            if (options.skipUnauthorized) return Promise.resolve();
+
+            if (options.skipLogout) return Promise.reject(error);
 
             console.log("debug is SDK frame", window?.ClientConfig?.isFrame);
 

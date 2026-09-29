@@ -142,8 +142,19 @@ const sectionFromPathnameAndFolder = (
   }
 };
 
-const withAuthParam = (url: string, auth: string | null): string =>
-  auth ? `${url}${url.includes("?") ? "&" : "?"}auth=${auth}` : url;
+/**
+ * Puts the frame's `auth` parameter on a navigation URL. `FilesFilter.toUrlParams`
+ * already carries the other parameters of the current location, `auth` among
+ * them, so the value is set rather than appended: a duplicated `auth` reaches
+ * the page as an array and sends it down the cookie SSR branch.
+ */
+const withAuthParam = (url: string, auth: string | null): string => {
+  const [path, query = ""] = url.split("?");
+  const params = new URLSearchParams(query);
+  if (auth) params.set("auth", auth);
+  const search = params.toString();
+  return search ? `${path}?${search}` : path;
+};
 
 const sectionToUrl = (section: string, auth: string | null): string => {
   if (section === DocsSection.Settings) {

@@ -54,7 +54,11 @@ const UpgradePathLine = () => {
   const { t } = useTranslation(["Common"]);
   const { paymentStore, settingsStore } = useStores();
   const { salesEmail, getSettingsPayment } = paymentStore;
-  const { demoOrderUrl, feedbackAndSupportUrl, siteDomain } = settingsStore;
+  const {
+    demoOrderUrl = "",
+    feedbackAndSupportUrl = "",
+    siteDomain = "",
+  } = settingsStore;
 
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const isPaymentSettingsRequested = useRef(false);

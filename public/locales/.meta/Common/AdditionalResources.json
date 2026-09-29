@@ -3,7 +3,7 @@
   "content": "Additional resources",
   "content_en_sha1_hash": "a15fa56393dfeea6e8ddbb0e0c2a6f3cc24b93de",
   "created_at": "2025-05-26T07:15:40.217Z",
-  "updated_at": "2026-08-14T14:58:32.838Z",
+  "updated_at": "2026-09-29T10:21:08.110Z",
   "comment": {
     "text": "This is a section title in the portal settings, referring to extra links or information provided to users.",
     "is_auto": true,
@@ -20,7 +20,7 @@
     {
       "file_path": "/packages/management/src/lib/index.ts",
       "line_number": 74,
-      "context": "case \"white-label\":\n return { key: t(\"Common:WhiteLabel\"), isSubPage: true };\n case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":\n return { key: t(\"Common:BrandName\"), isSubPage: true };\n case \"bonus\":\n return { key: t(\"Common:Bonus\"), isSubPage: false };\n default:",
+      "context": "case \"white-label\":\n return { key: t(\"Common:WhiteLabel\"), isSubPage: true };\n case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":\n return { key: t(\"Common:BrandName\"), isSubPage: true };\n case \"bonus\":\n return { key: t(\"Common:Upgrade\"), isSubPage: false };\n default:",
       "module": "/packages/management"
     },
     {

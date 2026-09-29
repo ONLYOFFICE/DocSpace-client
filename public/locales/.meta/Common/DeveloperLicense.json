@@ -3,7 +3,7 @@
   "content": "Developer",
   "content_en_sha1_hash": "7e08ebec5e6f80a136fa4076e041dd0c811a5e70",
   "created_at": "2025-05-19T21:30:44.508Z",
-  "updated_at": "2026-08-12T11:00:51.632Z",
+  "updated_at": "2026-09-29T10:21:07.740Z",
   "comment": {
     "text": "This is a short label for a developer license, used as a noun within sentences describing payment and subscription options. It appears in banners and descriptions related to activating or renewing licenses.",
     "is_auto": true,
@@ -11,6 +11,18 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/Header.tsx",
+      "line_number": 194,
+      "context": "t={t}\n ns=\"Common\"\n i18nKey=\"UnlockMoreWithSolutions\"\n values={{\n enterprise: t(\"Common:EnterpriseLicense\"),\n developer: t(\"Common:DeveloperLicense\"),\n }}\n components={{\n 1: (\n <Link\n className={styles.planLink}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
+      "line_number": 90,
+      "context": "}: UpgradePathDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n \n const productName = getBrandName(\"ProductEditorsName\");\n const enterprise = t(\"Common:EnterpriseLicense\");\n const developer = t(\"Common:DeveloperLicense\");\n \n const solutions: TSolution[] = [\n {\n id: \"enterprise\",\n name: t(\"Common:UpgradeSolutionName\", {",
+      "module": "/packages/shared"
+    },
     {
       "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
       "line_number": 64,

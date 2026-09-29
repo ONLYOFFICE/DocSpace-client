@@ -44,8 +44,11 @@ export type TFrameMode =
   | "room-selector"
   | "file-selector"
   | "system"
+  | "public-room"
+  | "uploader"
   | "forms"
-  | "chat";
+  | "chat"
+  | "personal";
 
 export type TFrameSelectorType =
   | "roomsOnly"
@@ -108,6 +111,7 @@ export type TEditorCustomization = {
 export type TFrameEvents = {
   onAppError?: null | ((message: string) => void);
   onAppReady?: null | ((data: { frameId: string }) => void);
+  onAuthError?: null | ((error: { code?: string; message: string }) => void);
   onAuthSuccess?: null | ((data: object) => void);
   onCloseCallback?: null | (() => void);
   onContentReady?: null | (() => void);
@@ -118,10 +122,14 @@ export type TFrameEvents = {
   onEditorCloseCallback?: null | (() => void);
   onEditorOpen?: null | ((data: object) => void);
   onFileManagerClick?: null | ((data: object) => void);
+  onGetExternalData?:
+    | null
+    | ((request: { key: string; callId: number }) => unknown);
   onNavigate?: null | ((data: { section: string }) => void);
   onNoAccess?: null | (() => void);
   onNotFound?: null | (() => void);
   onSelectCallback?: null | ((item: object) => void);
+  onSetExternalData?: null | ((payload: { key: string; value: unknown }) => void);
   onSignOut?: null | (() => void);
   onUploadError?:
     | null

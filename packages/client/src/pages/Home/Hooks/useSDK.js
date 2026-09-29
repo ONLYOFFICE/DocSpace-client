@@ -44,57 +44,23 @@ import {
   toFrameMethodError,
 } from "@docspace/shared/utils/common";
 
-/**
- * Fields of the selected folder the host receives from `getFolderInfo`:
- * the folder as the API describes it plus the room and navigation flags,
- * without the store internals.
- */
-const FOLDER_INFO_KEYS = [
-  "id",
-  "title",
-  "parentId",
-  "rootFolderId",
-  "rootFolderType",
-  "type",
-  "filesCount",
-  "foldersCount",
-  "new",
-  "created",
-  "createdBy",
-  "updated",
-  "updatedBy",
-  "ownedBy",
-  "sharedBy",
-  "access",
-  "security",
-  "shared",
-  "canShare",
-  "isShareable",
-  "mute",
-  "pinned",
-  "private",
-  "indexing",
-  "roomType",
-  "parentRoomType",
-  "isRoom",
-  "inRoom",
-  "isTemplate",
-  "isArchive",
-  "logo",
-  "tags",
-  "pathParts",
-  "navigationPath",
-  "providerItem",
-  "providerKey",
-  "providerId",
-];
 
-const toFolderInfo = (folder) =>
+/**
+ * Store fields that must not reach the host through `getFolderInfo`:
+ * the injected settings store carries the whole portal configuration.
+ */
+const FOLDER_INFO_EXCLUDED_KEYS = new Set(["settingsStore"]);
+
+/**
+ * Builds the `getFolderInfo` answer from the selected folder store: every
+ * data field the 2.1 contract returned, without injected stores and methods.
+ */
+export const toFolderInfo = (folder) =>
   Object.fromEntries(
-    FOLDER_INFO_KEYS.filter((key) => folder[key] !== undefined).map((key) => [
-      key,
-      folder[key],
-    ]),
+    Object.entries(folder).filter(
+      ([key, value]) =>
+        !FOLDER_INFO_EXCLUDED_KEYS.has(key) && typeof value !== "function",
+    ),
   );
 
 const useSDK = ({

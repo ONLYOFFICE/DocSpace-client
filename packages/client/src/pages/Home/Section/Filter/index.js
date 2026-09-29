@@ -171,6 +171,7 @@ const SectionFilterContent = ({
   isRoomsFolder,
   isFormsFolder,
   organizeRoomsGrouping,
+  getPinnedGroupId,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -315,7 +316,7 @@ const SectionFilterContent = ({
         newFilter.provider = providerType || null;
         newFilter.type = type || null;
         // Clear groupId when filter is applied - grouping doesn't work with filters
-        newFilter.groupId = null;
+        newFilter.groupId = getPinnedGroupId() ?? null;
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
@@ -546,7 +547,7 @@ const SectionFilterContent = ({
         newFilter.page = 0;
         newFilter.filterValue = searchValue;
         // Clear groupId when search is applied - grouping doesn't work with filters
-        newFilter.groupId = null;
+        newFilter.groupId = getPinnedGroupId() ?? null;
 
         const path = getRoomsListBasePath(newFilter.searchArea);
 
@@ -1861,7 +1862,7 @@ const SectionFilterContent = ({
   };
 
   const onFilterByGroup = (groupId) => {
-    if (!isRooms) return;
+    if (!isRooms || getPinnedGroupId()) return;
 
     setIsLoading(true);
 
@@ -1954,10 +1955,8 @@ const SectionFilterContent = ({
       getAllRoomGroups={getRoomGroupsForSection}
       roomGroups={roomGroups}
       onFilterByGroup={onFilterByGroup}
-      currentGroupId={(() => {
-        return roomsFilter?.groupId;
-      })()}
-      withRoomGroups={isRoomsFolder || isFormsFolder}
+      currentGroupId={getPinnedGroupId() ? null : roomsFilter?.groupId}
+      withRoomGroups={(isRoomsFolder || isFormsFolder) && !getPinnedGroupId()}
       isFormsSection={isFormsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}
@@ -2140,6 +2139,10 @@ export default inject(
       setRoomsFilter,
       standalone,
       currentDeviceType,
+      getPinnedGroupId: () =>
+        settingsStore.isFrame
+          ? (settingsStore.frameConfig?.filter?.groupId ?? null)
+          : null,
 
       filesStore,
       groupsStore,

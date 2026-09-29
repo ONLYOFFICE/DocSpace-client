@@ -1,5 +1,6 @@
 {
   "AddRoom": "Lisää huone",
+  "AddSpace": "Lisää tila",
   "AddToGroup": "Lisää ryhmään",
   "ChangesApplied": "Muutokset on sovellettu",
   "CreateAGroup": "Luo ryhmä",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Poistetaan huoneryhmät",
   "DisablingRoomGroupsDescription": "Ryhmät tallennetaan, mutta ne ovat piilotettuina. Aktivoi ne uudelleen Profiilissa, Tiedostojen hallinnassa.",
   "EditRoomGroups": "Muokkaa huoneryhmiä",
+  "EditSpaceGroups": "Muokkaa tilaryhmiä",
   "EmptyGroupRoomsDescription": "Täällä ei ole huoneita. Kokeile lisätä huone tai poistaa tämä ryhmä.",
+  "EmptyGroupSpacesDescription": "Täällä ei ole tiloja. Kokeile lisätä tila tai poistaa tämä ryhmä.",
+  "FormSpaces": "Tilat",
   "GroupHasBeenDeleted": "Ryhmä on poistettu",
   "GroupIcon": "Ryhmäkuvake",
   "GroupIsEmpty": "Ryhmä on tyhjä",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Poista ryhmä",
   "RemoveGroupConfirmation": "Olet aike poistaa huonetuon. Oletko varma, että haluat jatkaa?",
   "RemoveGroupInfo": "Ryhmään kuuluvat huoneet näetään <strong>Kaikki huoneet</strong> -osiossa.",
+  "RemoveSpaceGroupConfirmation": "Olet poistamassa tilojen ryhmää. Haluatko varmasti jatkaa?",
+  "RemoveSpaceGroupInfo": "Ryhmään kuuluvat tilat näytetään <strong>Kaikki tilat</strong> -osiossa.",
   "RoomAddedToGroup": "Valittu huone on lisätty <1>{{groupName}}</1>:een.",
   "RoomGrouping": "Huoneiden ryhmittely",
   "RoomGroupingDisabled": "Huoneiden ryhmittely on poistettu käytöstä",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Voit ryhmitellä huoneet kansioihin ja vaihtaa niiden välillä helposti.",
   "RoomRemovedFromGroup": "Valittu huone on poistettu <1>{{groupName}}</1>:sta.",
   "RoomsAddedToGroup": "Valitut huoneet on lisätty <1>{{groupName}}</1>:een.",
-  "RoomsRemovedFromGroup": "Valitut huoneet on poistettu <1>{{groupName}}</1>:sta."
+  "RoomsRemovedFromGroup": "Valitut huoneet on poistettu <1>{{groupName}}</1>:sta.",
+  "SpaceAddedToGroup": "Valittu tila on lisätty ryhmään <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "Valittu tila on poistettu ryhmästä <1>{{groupName}}</1>.",
+  "SpacesAddedToGroup": "Valitut tilat on lisätty ryhmään <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "Valitut tilat on poistettu ryhmästä <1>{{groupName}}</1>."
 }

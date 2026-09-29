@@ -70,7 +70,7 @@ import type ContextOptionsStore from "../ContextOptionsStore";
 
 export const getFormGalleryContextOptionsImpl = (
   self: ContextOptionsStore,
-  item: TOformFile | { attributes: { name_form: string } } | null,
+  item: TOformFile | null,
   t: TTranslation,
   navigate?: unknown,
 ): ContextMenuModel[] => {
@@ -83,7 +83,7 @@ export const getFormGalleryContextOptionsImpl = (
     {
       key: "template-info",
       label: t("FormGallery:TemplateInfo"),
-      onClick: () => self.onShowOformTemplateInfo(item as TOformFile),
+      onClick: () => item && self.onShowOformTemplateInfo(item),
     },
     {
       key: "separator",
@@ -92,7 +92,7 @@ export const getFormGalleryContextOptionsImpl = (
     {
       key: "suggest-changes",
       label: t("FormGallery:SuggestChanges"),
-      onClick: () => onSuggestOformChanges(item as TOformFile),
+      onClick: () => onSuggestOformChanges(item),
     },
   ];
 };

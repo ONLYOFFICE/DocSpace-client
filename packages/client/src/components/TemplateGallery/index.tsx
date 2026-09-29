@@ -36,7 +36,6 @@
 import { inject, observer } from "mobx-react";
 import { useState, useEffect, useMemo } from "react";
 import { withTranslation } from "react-i18next";
-import type { Key } from "react";
 import classNames from "classnames";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
@@ -45,6 +44,7 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Button } from "@docspace/ui-kit/components/button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import { TTranslation } from "@docspace/shared/types";
+import type { TOformFile } from "@docspace/shared/api/oforms/types";
 import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import TilesContainer from "./TilesContainer";
 import ErrorView from "./ErrorView";
@@ -150,7 +150,7 @@ type TemplateGalleryProps = {
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
-  setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
+  setGallerySelected: (item: TOformFile | null) => void;
   isFormsOnlyGallery: boolean;
   setCreateRoomFromTemplate: (createRoomFromTemplate: boolean) => void;
 };

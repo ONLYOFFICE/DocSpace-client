@@ -1,0 +1,35 @@
+{
+  "key_path": "SpacesAddedToGroup",
+  "content": "The selected spaces have been added to <1>{{groupName}}</1>.",
+  "content_en_sha1_hash": "010eefa58c890189e6c595eadb0048e140f185cd",
+  "created_at": "2026-09-25T10:58:49.230Z",
+  "updated_at": "2026-09-25T11:01:16.483Z",
+  "comment": {
+    "text": "Toast message confirming that multiple selected spaces have been added to a group. The variable `{{groupName}}` represents the name of the target group and is displayed in bold.",
+    "is_auto": true,
+    "updated_at": "2026-09-25T11:01:16.483Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 557,
+      "context": "};\n const keys =\n self.dialogsStore.roomGroupsArea === RoomSearchArea.Forms\n ? {\n single: { tKey: \"GroupingRooms:SpaceAddedToGroup\" },\n multiple: { tKey: \"GroupingRooms:SpacesAddedToGroup\" },\n }\n : {\n single: { tKey: \"GroupingRooms:RoomAddedToGroup\" },\n multiple: { tKey: \"GroupingRooms:RoomsAddedToGroup\" },\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 175,
+      "context": "components: { 1: React.createElement(\"strong\") },\n };\n const keys = this.isFormsGroupsArea\n ? {\n single: { tKey: \"GroupingRooms:SpaceAddedToGroup\" },\n multiple: { tKey: \"GroupingRooms:SpacesAddedToGroup\" },\n }\n : {\n single: { tKey: \"GroupingRooms:RoomAddedToGroup\" },\n multiple: { tKey: \"GroupingRooms:RoomsAddedToGroup\" },\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Show File Actions",
   "content_en_sha1_hash": "5f4d732bf49f42d2b52ab6682a11f986c01135a6",
   "created_at": "2026-02-18T14:56:21.929Z",
-  "updated_at": "2026-08-28T14:38:40.233Z",
+  "updated_at": "2026-09-24T18:43:14.916Z",
   "comment": {
     "text": "This is a tooltip for a button that opens a context menu with actions for a file or folder.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/ItemTitle.tsx",
-      "line_number": 137,
+      "line_number": 133,
       "context": "dataTestId=\"info_panel_gallery_context_menu\"\n />\n <ContextMenuButton\n id=\"info-options\"\n className=\"expandButton\"\n title={t(\"Common:TitleShowActions\")}\n onClick={onClickContextMenu}\n getData={onGetContextOptions}\n directionX=\"right\"\n displayType={ContextMenuButtonDisplayType.toggle}\n testId=\"info_panel_gallery_context_menu_button\"",
       "module": "/packages/client"
     },

@@ -115,16 +115,20 @@ self: FilesActionStore,option: string
     }
     case "create-group": {
       const { organizeRoomsGrouping } = self.filesSettingsStore;
-      const { isRoomsFolder } = self.treeFoldersStore;
-      return organizeRoomsGrouping && isRoomsFolder && hasSelection;
+      const { isRoomsFolder, isFormsFolder } = self.treeFoldersStore;
+      return (
+        organizeRoomsGrouping &&
+        (isRoomsFolder || isFormsFolder) &&
+        hasSelection
+      );
     }
     case "add-to-group": {
       const { organizeRoomsGrouping } = self.filesSettingsStore;
-      const { isRoomsFolder } = self.treeFoldersStore;
+      const { isRoomsFolder, isFormsFolder } = self.treeFoldersStore;
       const { roomGroups } = self.dialogsStore;
       return (
         organizeRoomsGrouping &&
-        isRoomsFolder &&
+        (isRoomsFolder || isFormsFolder) &&
         hasSelection &&
         roomGroups &&
         roomGroups.length > 0
@@ -132,12 +136,12 @@ self: FilesActionStore,option: string
     }
     case "remove-from-group": {
       const { organizeRoomsGrouping } = self.filesSettingsStore;
-      const { isRoomsFolder } = self.treeFoldersStore;
+      const { isRoomsFolder, isFormsFolder } = self.treeFoldersStore;
       const { roomGroups } = self.dialogsStore;
       const currentGroupId = self.filesStore.roomsFilter?.groupId;
       return (
         organizeRoomsGrouping &&
-        isRoomsFolder &&
+        (isRoomsFolder || isFormsFolder) &&
         hasSelection &&
         roomGroups &&
         roomGroups.length > 0 &&

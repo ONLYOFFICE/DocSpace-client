@@ -36,6 +36,7 @@
 import {
   EmployeeType,
   FilesSelectorFilterTypes,
+  RoomSearchArea,
   ShareAccessRights,
   Events,
 } from "@docspace/shared/enums";
@@ -437,6 +438,13 @@ class DialogsStore {
   // store only records the request and AskAIChatBridge consumes it.
   askAIFile: Nullable<TFile> = null;
 
+  // The request came from an entry point that is about the form's responses
+  // ("Analyze responses"), so the chat attaches it as the subject of the
+  // message. Kept beside the file rather than derived, because the results
+  // folder's own button is that action by definition — the fields the
+  // predicate reads may not survive the `getFileInfo` it goes through.
+  askAIAnalyze = false;
+
   newFilesPanelFolderId: Nullable<number | string> = null;
 
   sortedDownloadFiles: TSortedDownloadFiles = {
@@ -511,6 +519,8 @@ class DialogsStore {
 
   roomGroups: IRoomGroup[] = [];
 
+  roomGroupsArea: RoomSearchArea = RoomSearchArea.Active;
+
   syncDbData: {
     operationId: Nullable<number>;
     forms: ExternalSyncDB["forms"];
@@ -555,8 +565,9 @@ class DialogsStore {
     this.newFilesPanelFolderId = folderId;
   };
 
-  setAskAIFile = (file: Nullable<TFile>) => {
+  setAskAIFile = (file: Nullable<TFile>, analyze = false) => {
     this.askAIFile = file;
+    this.askAIAnalyze = analyze;
   };
 
   // Read-and-clear: the same file can be asked about twice in a row (the
@@ -564,8 +575,10 @@ class DialogsStore {
   // effect must attach only once.
   consumeAskAIFile = () => {
     const file = this.askAIFile;
+    const analyze = this.askAIAnalyze;
     this.askAIFile = null;
-    return file;
+    this.askAIAnalyze = false;
+    return { file, analyze };
   };
 
   setEditRoomDialogProps = (props: TEditRoomDialogProps) => {
@@ -1358,13 +1371,21 @@ class DialogsStore {
     await createGroupRooms(newGroup);
   };
 
-  setRoomGroups = (groups: IRoomGroup[]) => {
+  setRoomGroups = (groups: IRoomGroup[], searchArea: RoomSearchArea) => {
     this.roomGroups = groups;
+    this.roomGroupsArea = searchArea;
   };
 
-  getAllRoomGroups = async () => {
-    const response = (await getRoomGroups()) as IRoomGroup[];
-    this.setRoomGroups(response);
+  getAllRoomGroups = async (
+    searchArea: RoomSearchArea = this.roomGroupsArea,
+  ) => {
+    if (searchArea !== this.roomGroupsArea) this.setRoomGroups([], searchArea);
+
+    const response = (await getRoomGroups(searchArea)) as IRoomGroup[];
+
+    if (searchArea !== this.roomGroupsArea) return;
+
+    this.setRoomGroups(response, searchArea);
   };
 
   getGroupById = async (groupId: string) => {

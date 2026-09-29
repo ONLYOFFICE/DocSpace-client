@@ -1,0 +1,29 @@
+{
+  "key_path": "AiFormWhatCanTheResponsesTellMe",
+  "content": "What can the responses tell me?",
+  "content_en_sha1_hash": "2965e9be898d7bb16b46de906bc7cee25be714ee",
+  "created_at": "2026-09-14T19:16:00.082Z",
+  "updated_at": "2026-09-14T19:18:36.680Z",
+  "comment": {
+    "text": "A title for an AI suggestion form that introduces a feature about analyzing form responses.",
+    "is_auto": true,
+    "updated_at": "2026-09-14T19:18:36.680Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 855,
+      "context": "// they carry no `requires` — no folder rights are involved. Shown only\n // until the backend's own per-form questions arrive, which name the\n // form's real fields (see `SuggestionSet.analyzableForm` in the ui-kit).\n attachedForm: [\n {\n name: t(\"AiSuggestions:AiFormWhatCanTheResponsesTellMe\"),\n prompt: t(\"AiSuggestions:AiFormWhatCanTheResponsesTellMePrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormBreakDownTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormBreakDownTheAnswersPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

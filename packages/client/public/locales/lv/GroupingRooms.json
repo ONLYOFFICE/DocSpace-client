@@ -1,5 +1,6 @@
 {
   "AddRoom": "Pievienot istabu",
+  "AddSpace": "Pievienot telpu",
   "AddToGroup": "Pievienot grupai",
   "ChangesApplied": "Izmaiņas ir veikotas",
   "CreateAGroup": "Izveidot grupu",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Atmeldotu telpu grupas",
   "DisablingRoomGroupsDescription": "Grupes tiks saglabātas, bet paslēptas. Atjaunot Profili, failu pārvaldībā.",
   "EditRoomGroups": "Rediģēt istabas grupas",
+  "EditSpaceGroups": "Rediģēt telpu grupas",
   "EmptyGroupRoomsDescription": "Šeit nav istabām. Mēģiniet pievienot istabu vai dzēst šo grupu.",
+  "EmptyGroupSpacesDescription": "Šeit nav telpu. Mēģiniet pievienot telpu vai noņemiet šo grupu.",
+  "FormSpaces": "Telpas",
   "GroupHasBeenDeleted": "Grupe ir dzēsta",
   "GroupIcon": "Gruppas ikona",
   "GroupIsEmpty": "Grupe ir tukša",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Izņemt grupu",
   "RemoveGroupConfirmation": "Jūs esat parasti grupu istabu dzēst. Vai vēlaties turpināt?",
   "RemoveGroupInfo": "Nogrupējošie istabas tiks rādītas sadaļā <strong>Visas istabas</strong>.",
+  "RemoveSpaceGroupConfirmation": "Jūs grasāties dzēst telpu grupu. Vai tiešām vēlaties turpināt?",
+  "RemoveSpaceGroupInfo": "Grupā iekļautās telpas tiks rādītas sadaļā <strong>Visas telpas</strong>.",
   "RoomAddedToGroup": "Izvēlētais telpa ir pievienots <1>{{groupName}}</1>.",
   "RoomGrouping": "Neluokļu grupa",
   "RoomGroupingDisabled": "Tomu grupināšana ir atspējota",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Jūs varat rūpēt istabas grozīs un viegli pāriet starp tām.",
   "RoomRemovedFromGroup": "Izvēlētais istaba ir noņemts no <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Izvēlētie istabas ir pievienoti <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Izvēlētie istabas ir noņemti no <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Izvēlētie istabas ir noņemti no <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "Izvēlētā telpa ir pievienota <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "Izvēlētā telpa ir noņemta no <1>{{groupName}}</1>.",
+  "SpacesAddedToGroup": "Izvēlētās telpas ir pievienotas <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "Izvēlētās telpas ir noņemtas no <1>{{groupName}}</1>."
 }

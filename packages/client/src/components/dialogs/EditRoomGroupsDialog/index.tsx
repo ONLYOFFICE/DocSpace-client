@@ -49,7 +49,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { ButtonKeys } from "@docspace/shared/enums";
+import { ButtonKeys, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
@@ -83,9 +83,12 @@ const EditRoomGroupsDialog = ({
   roomsFilter,
   organizeRoomsGrouping,
   setOrganizeRoomsGrouping,
+  searchArea,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
   const navigate = useNavigate();
+
+  const isFormsSection = searchArea === RoomSearchArea.Forms;
 
   const [isOpenRoomList, setIsOpenRoomList] = useState(
     () => !!openInCreateMode,
@@ -170,7 +173,7 @@ const EditRoomGroupsDialog = ({
       // If grouping was disabled and we're currently viewing a group,
       // navigate away to show all rooms instead of empty group placeholder
       if (!localGroupingEnabled && currentFilterGroupId) {
-        navigate("rooms/shared");
+        navigate(isFormsSection ? "forms" : "rooms/shared");
       }
     } catch (error) {
       toastr.error(error as Error);
@@ -274,7 +277,10 @@ const EditRoomGroupsDialog = ({
     try {
       const groupData = await getGroupById(groupId);
 
-      const rooms = groupData.rooms || [];
+      const rooms = (groupData.rooms || []).filter(
+        (room) => (room.roomType === RoomsType.FormRoom) === isFormsSection,
+      );
+
       setSelectedGroup({
         id: groupId,
         name: groupData.name,
@@ -320,6 +326,7 @@ const EditRoomGroupsDialog = ({
         deleteRoomGroup={deleteRoomGroup}
         getAllRoomGroups={getAllRoomGroups}
         currentFilterGroupId={currentFilterGroupId}
+        isFormsSection={isFormsSection}
       />
     );
   }
@@ -332,6 +339,7 @@ const EditRoomGroupsDialog = ({
       <GroupItem
         key={group.id}
         group={group}
+        isFormsSection={isFormsSection}
         onClickGroup={localGroupingEnabled ? onClickGroup : undefined}
         onClickEditIcon={localGroupingEnabled ? onClickEditIcon : undefined}
         onClickDeleteGroup={
@@ -354,7 +362,9 @@ const EditRoomGroupsDialog = ({
         onClose={onCloseEditRoomGroupsDialog}
       >
         <ModalDialog.Header>
-          {t("GroupingRooms:EditRoomGroups")}
+          {isFormsSection
+            ? t("GroupingRooms:EditSpaceGroups")
+            : t("GroupingRooms:EditRoomGroups")}
         </ModalDialog.Header>
 
         <ModalDialog.Body>
@@ -447,6 +457,7 @@ const EditRoomGroupsDialog = ({
               disableSubmitUntilChanged
               sortSelectedFirst
               withoutBackdropBackground
+              isFormsSection={isFormsSection}
             />
           }
         />
@@ -460,10 +471,13 @@ const EditRoomGroupsDialog = ({
               visible={isOpenRoomList}
               onClose={onCloseRoomList}
               onSubmit={onSubmitRoom}
-              headerLabel={t("Common:RoomList")}
+              headerLabel={
+                isFormsSection ? t("Common:Forms") : t("Common:RoomList")
+              }
               withSearch
               disableSubmitUntilChanged
               withoutBackdropBackground
+              isFormsSection={isFormsSection}
             />
           }
         />
@@ -496,6 +510,7 @@ const EditRoomGroupsDialog = ({
           currentGroupIcon={currentEditingGroup?.icon || null}
           currentGroupName={currentEditingGroup?.name || null}
           isOpenedFromContextMenu={isOpenedFromContextMenu && !editingGroupId}
+          searchArea={searchArea}
         />
       )}
     </>
@@ -503,7 +518,12 @@ const EditRoomGroupsDialog = ({
 };
 
 export default inject(
-  ({ dialogsStore, filesStore, filesSettingsStore }: TStore) => {
+  ({
+    dialogsStore,
+    filesStore,
+    filesSettingsStore,
+    treeFoldersStore,
+  }: TStore) => {
     const {
       setCreateGroupRooms,
       getAllRoomGroups,
@@ -535,6 +555,9 @@ export default inject(
       roomsFilter,
       organizeRoomsGrouping,
       setOrganizeRoomsGrouping,
+      searchArea: treeFoldersStore.isFormsFolder
+        ? RoomSearchArea.Forms
+        : RoomSearchArea.Active,
     };
   },
 )(observer(EditRoomGroupsDialog));

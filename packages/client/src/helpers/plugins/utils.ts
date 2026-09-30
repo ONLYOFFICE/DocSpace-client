@@ -34,6 +34,7 @@
  */
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Events } from "@docspace/shared/enums";
 
@@ -321,6 +322,13 @@ export const messageActions = ({
         break;
 
       case PluginActions.showMediaViewer:
+        if (isPluginPage()) {
+          console.warn(
+            `[Plugin: ${pluginName}] The media viewer is not available on plugin pages`,
+          );
+          break;
+        }
+
         if (message.mediaViewerProps) {
           setPluginMediaViewerVisible?.(true);
           setPluginMediaViewerProps?.({
@@ -377,6 +385,14 @@ export const isAIAgents = (): boolean => {
     window.location.pathname.startsWith("/ai-agents")
   );
 };
+
+export const isSameId = (
+  first: number | string | null | undefined,
+  second: number | string | null | undefined,
+): boolean =>
+  !isNullOrUndefined(first) &&
+  !isNullOrUndefined(second) &&
+  String(first) === String(second);
 
 export function borderToStyle(border: IBox["borderProp"]): {
   border?: string;

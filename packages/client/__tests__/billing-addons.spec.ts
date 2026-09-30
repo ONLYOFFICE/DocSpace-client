@@ -425,7 +425,7 @@ test.describe("Add-ons on a low balance", () => {
     await expect(
       page.getByText("Available credits: $0.50. Credits running low"),
     ).toBeVisible();
-    await expect(card(page, "aitools").getByTestId("ai_supported_models_link")).toBeVisible();
+    await expect(card(page, "aitools").getByTestId("ai_see_pricing_link")).toBeVisible();
     await expect(
       page.getByText("Additional backups unavailable — top up wallet"),
     ).toBeVisible();

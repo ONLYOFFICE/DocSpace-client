@@ -301,6 +301,7 @@
   "Back": "Back",
   "BackToBilling": "Back to Billing",
   "Backup": "Backup",
+  "BackupCopiesUnit": "copies",
   "BackupCreatedSuccess": "The backup copy has been successfully created.",
   "BackupDescription": "Create backup files to protect your data. Backups can be created manually or automatically.",
   "BackupList": "Backup list",

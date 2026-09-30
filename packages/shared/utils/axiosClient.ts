@@ -44,7 +44,7 @@ import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
-import { isOAuthFrame, requestAuthToken } from "./oauthToken";
+import { isOAuthFrame, onAuthTokenPush, requestAuthToken } from "./oauthToken";
 import { frameCallEvent } from "./common";
 import { isPortalNotFoundRedirectClaimed } from "./portalNotFound";
 
@@ -125,6 +125,8 @@ class AxiosClient {
   private oauthGeneration = 0;
 
   private oauthUnavailable = false;
+
+  private oauthSignedOut = false;
 
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
@@ -238,6 +240,8 @@ class AxiosClient {
 
     this.client = axios.create(apxiosConfig);
 
+    if (isOAuthFrame()) onAuthTokenPush((token) => this.setAuthToken(token));
+
     this.client.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
         if (typeof window === "undefined") return config;
@@ -309,9 +313,16 @@ class AxiosClient {
   };
 
   setAuthToken = (token: string | null) => {
+    if (this.oauthSignedOut) return;
     this.authToken = token;
     this.oauthGeneration += 1;
     if (token) this.oauthUnavailable = false;
+  };
+
+  signOutOAuth = () => {
+    this.authToken = null;
+    this.oauthGeneration += 1;
+    this.oauthSignedOut = true;
   };
 
   getOAuthToken = async (): Promise<string | null> => {
@@ -321,7 +332,7 @@ class AxiosClient {
   };
 
   refreshOAuthToken = (): Promise<string | null> => {
-    if (typeof window === "undefined" || !isOAuthFrame())
+    if (typeof window === "undefined" || !isOAuthFrame() || this.oauthSignedOut)
       return Promise.resolve(null);
     if (this.oauthRefreshing !== null) return this.oauthRefreshing;
 
@@ -348,7 +359,7 @@ class AxiosClient {
 
   private ensureOAuthToken = (): Promise<void> => {
     if (this.authToken) return Promise.resolve();
-    if (this.oauthUnavailable) return Promise.resolve();
+    if (this.oauthUnavailable || this.oauthSignedOut) return Promise.resolve();
     if (this.oauthReady !== null) return this.oauthReady;
 
     const generation = this.oauthGeneration;
@@ -471,23 +482,22 @@ class AxiosClient {
 
         switch (error.response?.status) {
           case 401: {
-            if (options.skipUnauthorized) return Promise.resolve();
-
-            if (options.skipLogout) return Promise.reject(error);
-
             if (isOAuthFrame()) {
               const opts = options as TReqOption &
                 AxiosRequestConfig & { _oauthRetried?: boolean };
 
-              const signalAuthError = (): Promise<void> => {
+              const settle = (): Promise<void> =>
+                options.skipUnauthorized
+                  ? Promise.resolve()
+                  : Promise.reject(error);
+
+              if (opts._oauthRetried) {
                 frameCallEvent({
                   event: "onAuthError",
                   data: { code: "UNAUTHORIZED", message: "unauthorized" },
                 });
-                return Promise.reject(error);
-              };
-
-              if (opts._oauthRetried) return signalAuthError();
+                return settle();
+              }
 
               opts._oauthRetried = true;
 
@@ -499,9 +509,13 @@ class AxiosClient {
                     isOAuth,
                   ) as unknown as Promise<void>;
 
-                return Promise.reject(error);
+                return settle();
               });
             }
+
+            if (options.skipUnauthorized) return Promise.resolve();
+
+            if (options.skipLogout) return Promise.reject(error);
 
             console.log("debug is SDK frame", window?.ClientConfig?.isFrame);
 

@@ -68,10 +68,13 @@ const Dialog = ({
   setKeepNewFileName,
   withForm,
   errorText,
+  withDontAskAgain = true,
 }) => {
   const createEntityType = isCreateDialog
     ? getCreateModalEntityType(extension)
     : null;
+
+  const isDontAskAgainAvailable = isCreateDialog && withDontAskAgain;
 
   const [value, setValue] = useState("");
 
@@ -102,14 +105,14 @@ const Dialog = ({
     async (e) => {
       setIsDisabled(true);
       const keepNewFileNamePromise =
-        isCreateDialog && isChecked && setKeepNewFileName(isChecked);
+        isDontAskAgainAvailable && isChecked && setKeepNewFileName(isChecked);
 
       const savePromise = onSave && onSave(e, value);
 
       await Promise.all([keepNewFileNamePromise, savePromise]);
       setIsDisabled(false);
     },
-    [onSave, isCreateDialog, value, isChecked, setKeepNewFileName],
+    [onSave, isDontAskAgainAvailable, value, isChecked, setKeepNewFileName],
   );
 
   const onKeyUpHandler = useCallback(
@@ -136,8 +139,10 @@ const Dialog = ({
   );
 
   useEffect(() => {
-    keepNewFileName && isCreateDialog && setIsChecked(keepNewFileName);
-  }, [isCreateDialog, keepNewFileName]);
+    keepNewFileName &&
+      isDontAskAgainAvailable &&
+      setIsChecked(keepNewFileName);
+  }, [isDontAskAgainAvailable, keepNewFileName]);
 
   useEffect(() => {
     const input = document?.getElementById("create-text-input");
@@ -180,7 +185,7 @@ const Dialog = ({
   }, []);
 
   const onChangeCheckbox = () => {
-    isCreateDialog && setIsChecked((val) => !val);
+    isDontAskAgainAvailable && setIsChecked((val) => !val);
   };
 
   return (
@@ -219,7 +224,7 @@ const Dialog = ({
             testId={`${idPrefix}_text_input`}
           />
         </FieldContainer>
-        {isCreateDialog && extension ? (
+        {isDontAskAgainAvailable && extension ? (
           <div
             style={{
               boxSizing: "border-box",

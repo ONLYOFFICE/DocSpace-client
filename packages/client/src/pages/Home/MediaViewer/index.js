@@ -39,9 +39,12 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 
 import { UrlActionType } from "@docspace/shared/enums";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { Portal } from "@docspace/ui-kit/components/portal";
+import { isSameId } from "SRC_DIR/helpers/plugins/utils";
 import { usePlugin } from "./hooks/usePlugin";
 
 const FilesMediaViewer = (props) => {
@@ -89,7 +92,6 @@ const FilesMediaViewer = (props) => {
     nextMedia,
     prevMedia,
     resetUrl,
-    getFirstUrl,
     firstLoad,
     setSelection,
     activeFiles,
@@ -107,9 +109,17 @@ const FilesMediaViewer = (props) => {
     pluginMediaViewerVisible,
     pluginMediaViewerProps,
     pluginContextMenuItemsList,
-    getContextMenuKeysByType,
+    getFilesContextOptions,
     dispatchMessage,
     userId,
+    isPluginFileOutsidePlaylist,
+    isOpenedByPlugin,
+    isPluginViewerClosing,
+    openPluginViewer,
+    closePluginViewer,
+    pendingPluginFileId,
+    showPluginFile,
+    removeViewerHistoryEntry,
   } = props;
 
   const navigate = useNavigate();
@@ -121,11 +131,18 @@ const FilesMediaViewer = (props) => {
       pluginMediaViewerVisible,
       pluginMediaViewerProps,
       contextMenuItemsList: pluginContextMenuItemsList,
-      getContextMenuKeysByType,
+      files,
+      getFilesContextOptions,
       currentMediaFileId,
       playlist,
       dispatchMessage,
-      setMediaViewerData,
+      isPluginFileOutsidePlaylist,
+      isOpenedByPlugin,
+      isPluginViewerClosing,
+      openPluginViewer,
+      closePluginViewer,
+      pendingPluginFileId,
+      showPluginFile,
     });
 
   useEffect(() => {
@@ -143,15 +160,16 @@ const FilesMediaViewer = (props) => {
     }
   }, [previewFile]);
 
-  const onButtonBackHandler = () => {
-    const hash = window.location.hash;
-    const id = hash.slice(9);
-    if (!id) {
-      setMediaViewerData({ visible: false, id: null });
+  const onButtonBackHandler = useEventCallback(() => {
+    const [, fileId] = window.location.pathname.split(MEDIA_VIEW_URL);
+
+    if (fileId) {
+      setMediaViewerData({ visible: true, id: fileId });
       return;
     }
-    setMediaViewerData({ visible: true, id });
-  };
+
+    if (isOpenMediaViewer) onMediaViewerClose();
+  });
 
   useEffect(() => {
     window.addEventListener("popstate", onButtonBackHandler);
@@ -249,7 +267,9 @@ const FilesMediaViewer = (props) => {
       await handlePluginClose();
       setMediaViewerData({ visible: false, id: null });
 
-      const targetFile = files.find((item) => item.id === currentMediaFileId);
+      const targetFile = files.find((item) =>
+        isSameId(item.id, currentMediaFileId),
+      );
 
       if (targetFile) {
         setBufferSelection(targetFile);
@@ -274,19 +294,16 @@ const FilesMediaViewer = (props) => {
     }
 
     setMediaViewerData({ visible: false, id: null });
-    const url = getFirstUrl();
 
-    if (!url) {
-      return;
-    }
-
-    const targetFile = files.find((item) => item.id === currentMediaFileId);
+    const targetFile = files.find((item) =>
+      isSameId(item.id, currentMediaFileId),
+    );
     if (targetFile) {
       setBufferSelection(targetFile);
       setScrollToItem({ id: targetFile.id, type: "file" });
     }
 
-    window.history.pushState("", "", url);
+    removeViewerHistoryEntry();
   }, [
     files,
     isPreview,
@@ -296,7 +313,7 @@ const FilesMediaViewer = (props) => {
 
     resetUrl,
     navigate,
-    getFirstUrl,
+    removeViewerHistoryEntry,
     setIsPreview,
     setScrollToItem,
     setToPreviewFile,
@@ -307,15 +324,17 @@ const FilesMediaViewer = (props) => {
   ]);
 
   useEffect(() => {
-    if (
-      playlist.length === 0 &&
-      aiPlaylistImages.length === 0 &&
-      isOpenMediaViewer
-    ) {
-      onMediaViewerClose();
-    }
+    const isPlaylistEmpty =
+      playlist.length === 0 && aiPlaylistImages.length === 0;
+
+    if (!isOpenMediaViewer || !isPlaylistEmpty) return;
+
+    if (isPluginFileOutsidePlaylist) return;
+
+    onMediaViewerClose();
   }, [
     isOpenMediaViewer,
+    isPluginFileOutsidePlaylist,
     onMediaViewerClose,
     playlist.length,
     aiPlaylistImages.length,
@@ -424,13 +443,14 @@ export default inject(
       activeFolders,
 
       setActiveFiles,
+      getFilesContextOptions,
     } = filesStore;
     const {
       visible,
       id: currentMediaFileId,
       currentPostionIndex,
       setMediaViewerData,
-      getFirstUrl,
+      removeViewerHistoryEntry,
       playlist,
       previewFile,
       setToPreviewFile,
@@ -440,6 +460,13 @@ export default inject(
       changeUrl,
       autoPlay,
       isPluginViewerActive,
+      isPluginFileOutsidePlaylist,
+      isOpenedByPlugin,
+      isPluginViewerClosing,
+      openPluginViewer,
+      closePluginViewer,
+      pendingPluginFileId,
+      showPluginFile,
     } = mediaViewerDataStore;
 
     const { deleteItemAction } = filesActionsStore;
@@ -464,12 +491,16 @@ export default inject(
 
     const {
       contextMenuItemsList,
-      getContextMenuKeysByType,
       pluginMediaViewerProps,
       setPluginMediaViewerVisible,
       setPluginMediaViewerProps,
       dispatchMessage,
     } = pluginStore;
+
+    const hasPlaylist = playlist.length > 0 || aiPlaylistImages.length > 0;
+    const isOpen = visible && !isPluginViewerClosing;
+    const isPluginViewerShown =
+      isPluginViewerActive && !isPluginFileOutsidePlaylist;
 
     return {
       files,
@@ -479,11 +510,17 @@ export default inject(
       nextMedia,
       prevMedia,
       userAccess,
-      isOpenMediaViewer: visible || isPluginViewerActive,
-      visible:
-        ((playlist.length > 0 || aiPlaylistImages.length > 0) && visible) ||
-        isPluginViewerActive,
+      isOpenMediaViewer: isOpen || isPluginViewerActive,
+      visible: (hasPlaylist && isOpen) || isPluginViewerShown,
       currentMediaFileId,
+      isPluginFileOutsidePlaylist,
+      isOpenedByPlugin,
+      isPluginViewerClosing,
+      openPluginViewer,
+      closePluginViewer,
+      pendingPluginFileId,
+      showPluginFile,
+      removeViewerHistoryEntry,
       deleteItemAction,
       setMediaViewerData,
       extsImagePreviewed,
@@ -519,7 +556,6 @@ export default inject(
       onDuplicate,
       archiveRoomsId,
       setSelection,
-      getFirstUrl,
       activeFiles,
       activeFolders,
       setActiveFiles,
@@ -534,7 +570,7 @@ export default inject(
       setPluginMediaViewerVisible,
       setPluginMediaViewerProps,
       pluginContextMenuItemsList: contextMenuItemsList,
-      getContextMenuKeysByType,
+      getFilesContextOptions,
       dispatchMessage,
       userId: userStore?.user?.id ? String(userStore.user.id) : undefined,
       currentRoomId:

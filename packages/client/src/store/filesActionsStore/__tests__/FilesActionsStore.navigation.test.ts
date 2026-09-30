@@ -102,7 +102,11 @@ describe("FilesActionsStore — navigation/filter (batch 6)", () => {
   it("onClickBack closes the media viewer when it is open", () => {
     const store = createTestFilesActionsStore({
       clientLoadingStore: { isLoading: false },
-      mediaViewerDataStore: { visible: true, setMediaViewerData: vi.fn() },
+      mediaViewerDataStore: {
+        visible: true,
+        setMediaViewerData: vi.fn(),
+        removeViewerHistoryEntry: vi.fn(),
+      },
       peopleStore: { groupsStore: { insideGroupBackUrl: null } },
       filesStore: { setBufferSelection: vi.fn(), setSelection: vi.fn(), clearFiles: vi.fn() },
     });

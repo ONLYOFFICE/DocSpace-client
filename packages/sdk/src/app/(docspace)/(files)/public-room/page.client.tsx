@@ -80,8 +80,6 @@ function PublicRoomPage({
     settingsStore.setDisplayAbout(portalSettings.displayAbout);
   }, [settingsStore, shareKey, portalSettings]);
 
-  // The sdk-js host resolves `onAppReady` only from a frame event, so the
-  // page has to report it itself once the room list is mounted.
   React.useEffect(() => {
     frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
   }, []);

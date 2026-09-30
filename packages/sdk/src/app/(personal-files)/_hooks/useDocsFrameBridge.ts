@@ -40,23 +40,40 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {
   frameCallEvent,
-  frameCallbackData,
   frameHandlePing,
   getFrameId,
 } from "@docspace/shared/utils/common";
-import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
-import { FolderType } from "@docspace/shared/enums";
+import { createFile, createFolder } from "@docspace/shared/api/files";
 
 import { DocsSection, DOCS_SECTION_FOLDER_ALIAS } from "@/types/docs";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import type { TFrameCustomActions } from "@docspace/shared/types/Frame";
 import { PAGE_COUNT } from "@/utils/constants";
+import { useSdkMethods } from "@/providers/sdkMethods";
+import { useSdkCustomActions } from "@/providers/SdkCustomActionsProvider";
+import {
+  docsSectionFromRootFolderType,
+  toFrameEntity,
+} from "@/utils/frameEntity";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
+import type { CreateFileDialogType } from "../_components/create-file-dialog";
+import { useDocsUserStore } from "../_store/DocsUserStore";
 
 type UseDocsFrameBridgeParams = {
   isReady: boolean;
   uploadFilesToFolder?: (files: FileList | File[]) => Promise<void>;
+  openCreateDialog?: (type: CreateFileDialogType) => void;
   enabled?: boolean;
 };
+
+const CREATE_FILE_EXTENSIONS: ReadonlySet<string> = new Set([
+  "docx",
+  "xlsx",
+  "pptx",
+  "pdf",
+]);
 
 const PERSONAL_BASE_PATH = "/personal-files";
 const SETTINGS_PATH = "/personal-files/settings";
@@ -64,25 +81,6 @@ const SETTINGS_PATH = "/personal-files/settings";
 const VALID_SECTIONS: ReadonlySet<string> = new Set(
   Object.values(DocsSection),
 );
-
-const sectionFromRootFolderType = (
-  rootFolderType: FolderType | null,
-): string | null => {
-  switch (rootFolderType) {
-    case FolderType.USER:
-      return DocsSection.MyDocuments;
-    case FolderType.Favorites:
-      return DocsSection.Favorites;
-    case FolderType.Recent:
-      return DocsSection.Recent;
-    case FolderType.SHARE:
-      return DocsSection.SharedWithMe;
-    case FolderType.TRASH:
-      return DocsSection.Trash;
-    default:
-      return null;
-  }
-};
 
 const sectionFromPathnameAndFolder = (
   pathname: string,
@@ -110,12 +108,17 @@ const sectionFromPathnameAndFolder = (
   }
 };
 
-const withAuthParam = (url: string): string =>
-  isOAuthFrame() ? `${url}${url.includes("?") ? "&" : "?"}auth=oauth` : url;
+const withAuthParam = (url: string, auth: string | null): string => {
+  const [path, query = ""] = url.split("?");
+  const params = new URLSearchParams(query);
+  if (auth) params.set("auth", auth);
+  const search = params.toString();
+  return search ? `${path}?${search}` : path;
+};
 
-const sectionToUrl = (section: string): string => {
+const sectionToUrl = (section: string, auth: string | null): string => {
   if (section === DocsSection.Settings) {
-    return withAuthParam(SETTINGS_PATH);
+    return withAuthParam(SETTINGS_PATH, auth);
   }
 
   const folderAlias =
@@ -124,30 +127,29 @@ const sectionToUrl = (section: string): string => {
   filter.folder = folderAlias;
   filter.pageCount = PAGE_COUNT;
 
-  return withAuthParam(`${PERSONAL_BASE_PATH}?${filter.toUrlParams()}`);
+  return withAuthParam(`${PERSONAL_BASE_PATH}?${filter.toUrlParams()}`, auth);
 };
 
-/**
- * Wires the personal-files app to the sdk-js host via postMessage.
- *
- * - Fires `onAppReady` once when initialization completes.
- * - Fires `onNavigate` on section changes.
- * - Listens for host-side `navigateSection` method calls and for binary
- *   `uploadFileData` payloads (mirrors the Forms mode bridge).
- */
 export const useDocsFrameBridge = ({
   isReady,
   uploadFilesToFolder,
+  openCreateDialog,
   enabled = true,
 }: UseDocsFrameBridgeParams) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { rootFolderType } = useFilesListStore();
+  const filesListStore = useFilesListStore();
+  const { rootFolderType } = filesListStore;
+  const filesSelectionStore = useFilesSelectionStore();
+  const settingsStore = useSettingsStore();
+  const { user } = useDocsUserStore();
+  const { setCustomActions } = useSdkCustomActions();
+  const auth = searchParams.get("auth");
 
   const rootFolder = searchParams.get("folder");
   const activeSection =
-    sectionFromRootFolderType(rootFolderType) ??
+    docsSectionFromRootFolderType(rootFolderType) ??
     sectionFromPathnameAndFolder(pathname, rootFolder);
 
   const appReadySent = React.useRef(false);
@@ -233,28 +235,97 @@ export const useDocsFrameBridge = ({
         return;
       }
 
-      const dataEnvelope = eventData?.data as
-        | Record<string, unknown>
-        | undefined;
-      const methodName = dataEnvelope?.methodName as string | undefined;
-      const callId = dataEnvelope?.callId as number | undefined;
-      const payload = dataEnvelope?.data as Record<string, unknown> | undefined;
-
-      if (methodName === "navigateSection") {
-        const section = payload?.section as string | undefined;
-        if (section && VALID_SECTIONS.has(section)) {
-          router.replace(sectionToUrl(section));
-          frameCallbackData({ section }, callId);
-        } else {
-          frameCallbackData(
-            { error: `Unknown section: ${String(section)}` },
-            callId,
-          );
-        }
-      }
     };
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
-  }, [router, enabled]);
+  }, [enabled]);
+
+  const currentFolderId = () => filesListStore.currentFolder?.id;
+
+  useSdkMethods(
+    enabled
+      ? {
+          navigateSection: (data) => {
+            const section = (data as { section?: string } | undefined)?.section;
+            if (!section || !VALID_SECTIONS.has(section)) {
+              throw new Error(`Unknown section: ${String(section)}`);
+            }
+            router.replace(sectionToUrl(section, auth));
+            return { section };
+          },
+          getFolderInfo: () => filesListStore.currentFolder,
+          getFolders: () =>
+            filesListStore.items.filter((item) => item.isFolder).map(toFrameEntity),
+          getFiles: () =>
+            filesListStore.items.filter((item) => !item.isFolder).map(toFrameEntity),
+          getList: () => filesListStore.items.map(toFrameEntity),
+          getSelection: () => filesSelectionStore.selection.map(toFrameEntity),
+          getUserInfo: () => user,
+          createFile: async (data) => {
+            const { folderId, title, templateId, formId } = (data ?? {}) as {
+              folderId?: number | string;
+              title: string;
+              templateId?: number;
+              formId?: number;
+            };
+            const file = await createFile(
+              folderId ?? currentFolderId() ?? "@my",
+              title,
+              templateId,
+              formId,
+            );
+            router.refresh();
+            return file;
+          },
+          createFolder: async (data) => {
+            const { parentFolderId, title } = (data ?? {}) as {
+              parentFolderId?: number | string;
+              title: string;
+            };
+            const folder = await createFolder(
+              parentFolderId ?? currentFolderId() ?? "@my",
+              title.trimEnd(),
+            );
+            router.refresh();
+            return folder;
+          },
+          openModal: (data) => {
+            const { type, options } = (data ?? {}) as {
+              type?: string;
+              options?: string;
+            };
+            if (!openCreateDialog) throw new Error("openModal is not available here");
+            if (type === "CreateFolder") {
+              openCreateDialog("folder");
+            } else if (type === "CreateFile") {
+              const extension = String(options ?? "docx").replace(/^\./, "");
+              if (!CREATE_FILE_EXTENSIONS.has(extension)) {
+                throw new Error(`Unsupported file type: ${extension}`);
+              }
+              openCreateDialog(extension as CreateFileDialogType);
+            } else {
+              throw new Error(`Unsupported modal: ${String(type)}`);
+            }
+            return { type };
+          },
+          setCustomActions: (data) => {
+            const config = (data ?? {}) as TFrameCustomActions;
+            setCustomActions(config);
+            return config;
+          },
+          setListView: (data) => {
+            const viewType =
+              typeof data === "string"
+                ? data
+                : (data as { viewType?: string } | undefined)?.viewType;
+            if (viewType !== "row" && viewType !== "table" && viewType !== "tile") {
+              throw new Error(`Unsupported view: ${String(viewType)}`);
+            }
+            settingsStore.setFilesViewAs(viewType);
+            return { viewType };
+          },
+        }
+      : {},
+  );
 };

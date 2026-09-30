@@ -33,52 +33,44 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+import { FolderType } from "@docspace/shared/enums";
 
-import React from "react";
-import { makeAutoObservable } from "mobx";
+import { DocsSection } from "@/types/docs";
 
-import type {
-  CustomContextMenuAction,
-  CustomActionsConfig,
-} from "@/types/forms";
+const LIST_ITEM_VIEW_KEYS = [
+  "icon",
+  "href",
+  "previewUrl",
+  "docUrl",
+  "folderUrl",
+  "needConvert",
+  "contextOptions",
+  "roomLogo",
+  "roomIconColor",
+  "hasRoomImage",
+] as const;
 
-class FormsCustomActionsStore {
-  fileActions: CustomContextMenuAction[] = [];
-  folderActions: CustomContextMenuAction[] = [];
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  setActions = (config: CustomActionsConfig) => {
-    if (config.contextMenu?.file) {
-      this.fileActions = config.contextMenu.file;
-    }
-    if (config.contextMenu?.folder) {
-      this.folderActions = config.contextMenu.folder;
-    }
-  };
-}
-
-const FormsCustomActionsStoreContext =
-  React.createContext<FormsCustomActionsStore | null>(null);
-
-export const FormsCustomActionsStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FormsCustomActionsStore(), []);
-  return (
-    <FormsCustomActionsStoreContext.Provider value={store}>
-      {children}
-    </FormsCustomActionsStoreContext.Provider>
-  );
+export const toFrameEntity = (item: object) => {
+  const entity: Record<string, unknown> = { ...item };
+  for (const key of LIST_ITEM_VIEW_KEYS) delete entity[key];
+  return entity;
 };
 
-export const useFormsCustomActionsStore = () => {
-  const store = React.useContext(FormsCustomActionsStoreContext);
-  if (!store) throw new Error("FormsCustomActionsStore not provided");
-  return store;
+export const docsSectionFromRootFolderType = (
+  rootFolderType: FolderType | null | undefined,
+): DocsSection | null => {
+  switch (rootFolderType) {
+    case FolderType.USER:
+      return DocsSection.MyDocuments;
+    case FolderType.Favorites:
+      return DocsSection.Favorites;
+    case FolderType.Recent:
+      return DocsSection.Recent;
+    case FolderType.SHARE:
+      return DocsSection.SharedWithMe;
+    case FolderType.TRASH:
+      return DocsSection.Trash;
+    default:
+      return null;
+  }
 };

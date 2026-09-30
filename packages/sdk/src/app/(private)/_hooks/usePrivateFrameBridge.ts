@@ -38,12 +38,9 @@
 import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import {
-  frameCallEvent,
-  frameCallbackData,
-  frameHandlePing,
-  getFrameId,
-} from "@docspace/shared/utils/common";
+import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
+
+import { useSdkMethods } from "@/providers/sdkMethods";
 
 export type PrivateFrameSection = "rooms" | "archive";
 
@@ -75,46 +72,19 @@ export const usePrivateFrameBridge = () => {
     });
   }, [section, pathname, searchParams]);
 
-  React.useEffect(() => {
-    const handler = (e: MessageEvent) => {
-      if (window.self === window.parent || e.source !== window.parent) return;
-
-      let eventData: Record<string, unknown> | undefined;
-      try {
-        eventData =
-          typeof e.data === "string"
-            ? JSON.parse(e.data)
-            : (e.data as Record<string, unknown>);
-      } catch {
-        return;
+  useSdkMethods({
+    navigateSection: (data) => {
+      const sec = (data as { section?: string } | undefined)?.section;
+      if (sec === "archive") {
+        router.replace("/private/archive");
+      } else if (sec === "rooms") {
+        router.replace("/private");
+      } else {
+        throw new Error(`Unknown section: ${String(sec)}`);
       }
-      if (!eventData) return;
-      if (frameHandlePing(eventData)) return;
-
-      const dataEnvelope = eventData?.data as
-        | Record<string, unknown>
-        | undefined;
-      const methodName = dataEnvelope?.methodName as string | undefined;
-      const callId = dataEnvelope?.callId as number | undefined;
-      const payload = dataEnvelope?.data as Record<string, unknown> | undefined;
-
-      if (methodName === "navigateSection") {
-        const sec = payload?.section as string | undefined;
-        if (sec === "archive") {
-          router.replace("/private/archive");
-          frameCallbackData({ section: "archive" }, callId);
-        } else if (sec === "rooms") {
-          router.replace("/private");
-          frameCallbackData({ section: "rooms" }, callId);
-        } else {
-          frameCallbackData({ error: `Unknown section: ${String(sec)}` }, callId);
-        }
-      }
-    };
-
-    window.addEventListener("message", handler);
-    return () => window.removeEventListener("message", handler);
-  }, [router]);
+      return { section: sec };
+    },
+  });
 };
 
 export default usePrivateFrameBridge;

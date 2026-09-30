@@ -1,7 +1,11 @@
 import { describe, expect, test, vi } from "vitest";
 import { NextRequest } from "next/server";
 
-import { AGENT_ID_HEADER, FILTER_HEADER } from "@/utils/constants";
+import {
+  AGENT_ID_HEADER,
+  FILTER_HEADER,
+  OAUTH_FRAME_HEADER,
+} from "@/utils/constants";
 
 import { proxy, config } from "./proxy";
 
@@ -23,6 +27,25 @@ const makeRequest = (url: string) =>
 
 const requestHeader = (response: Response, name: string) =>
   response.headers.get(`x-middleware-request-${name}`);
+
+describe("proxy — matcher coverage", () => {
+  test("covers the uploader route so the OAuth frame header reaches the layout", () => {
+    expect(config.matcher).toContain("/uploader");
+  });
+
+  test("covers the rooms sub-sections that are loaded as documents", () => {
+    expect(config.matcher).toContain("/archive");
+    expect(config.matcher).toContain("/archive/:path*");
+    expect(config.matcher).toContain("/settings");
+  });
+
+  test("forwards the OAuth frame header for the uploader route", async () => {
+    const response = await proxy(makeRequest("/uploader?id=4&auth=oauth"));
+
+    expect(response).toBeDefined();
+    expect(requestHeader(response!, OAUTH_FRAME_HEADER)).toBe("1");
+  });
+});
 
 describe("proxy — /chat", () => {
   test("matcher includes the chat route", () => {

@@ -33,56 +33,45 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// @ts-nocheck
+"use client";
 
-import { AxiosRequestConfig } from "axios";
-import AxiosClient, { TReqOption, TRouteMock } from "../utils/axiosClient";
+import { useEffect, useRef } from "react";
 
-const client = new AxiosClient();
+export type TSdkMethodHandler = (data: unknown) => unknown;
 
-/**
- * Answer matching requests locally instead of sending them, the way
- * `page.route` does in the Playwright suite. Returns the function that takes
- * the mock back down again.
- */
-export const interceptRoute = (mock: TRouteMock) => client.interceptRoute(mock);
+const handlers = new Map<string, TSdkMethodHandler>();
 
-export const initSSR = (headers: Record<string, string>) => {
-  client.initSSR(headers);
+export const registerSdkMethod = (
+  name: string,
+  handler: TSdkMethodHandler,
+): (() => void) => {
+  handlers.set(name, handler);
+  return () => {
+    if (handlers.get(name) === handler) handlers.delete(name);
+  };
 };
 
-export const request = <T>(
-  options: TReqOption & AxiosRequestConfig,
-  skipRedirect = false,
-  isOAuth = false,
-): Promise<T> | undefined => {
-  return client.request<T>(options, skipRedirect, isOAuth);
-};
+export const getSdkMethod = (name: string): TSdkMethodHandler | undefined =>
+  handlers.get(name);
 
-export const setWithCredentialsStatus = (state: boolean) => {
-  return client.setWithCredentialsStatus(state);
-};
+export const useSdkMethods = (
+  methods: Record<string, TSdkMethodHandler | undefined>,
+) => {
+  const ref = useRef(methods);
+  ref.current = methods;
 
-export const setAuthToken = (token: string | null) => {
-  client.setAuthToken(token);
-};
+  const names = Object.keys(methods).sort().join(",");
 
-export const signOutOAuth = () => {
-  client.signOutOAuth();
-};
+  useEffect(() => {
+    const unregister = names
+      .split(",")
+      .filter(Boolean)
+      .map((name) =>
+        registerSdkMethod(name, (data) => ref.current[name]?.(data)),
+      );
 
-export const getAuthToken = (): string | null => {
-  return client.authToken;
-};
-
-export const getApiBaseUrl = (): string => {
-  return client.client?.defaults.baseURL ?? "";
-};
-
-export const resolveOAuthToken = (): Promise<string | null> => {
-  return client.getOAuthToken();
-};
-
-export const refreshOAuthToken = (): Promise<string | null> => {
-  return client.refreshOAuthToken();
+    return () => {
+      unregister.forEach((fn) => fn());
+    };
+  }, [names]);
 };

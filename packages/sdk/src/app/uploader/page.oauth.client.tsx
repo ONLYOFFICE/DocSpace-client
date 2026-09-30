@@ -32,57 +32,26 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+"use client";
 
-// @ts-nocheck
+import { getSettingsFiles } from "@docspace/shared/api/files";
+import type { UploaderFilesSettings } from "@docspace/ui-kit/uploader/Uploader.types";
 
-import { AxiosRequestConfig } from "axios";
-import AxiosClient, { TReqOption, TRouteMock } from "../utils/axiosClient";
+import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+import OAuthPageLoader from "@/components/OAuthPageLoader";
 
-const client = new AxiosClient();
+import UploaderClient, { type UploaderClientProps } from "./page.client";
 
-/**
- * Answer matching requests locally instead of sending them, the way
- * `page.route` does in the Playwright suite. Returns the function that takes
- * the mock back down again.
- */
-export const interceptRoute = (mock: TRouteMock) => client.interceptRoute(mock);
+type UploaderOAuthPageProps = Omit<UploaderClientProps, "filesSettings">;
 
-export const initSSR = (headers: Record<string, string>) => {
-  client.initSSR(headers);
-};
+export default function UploaderOAuthPage(props: UploaderOAuthPageProps) {
+  const { data, error } = useOAuthSSRData(async () => {
+    const settings = await getSettingsFiles();
+    return settings ? { filesSettings: settings as unknown as UploaderFilesSettings } : null;
+  });
 
-export const request = <T>(
-  options: TReqOption & AxiosRequestConfig,
-  skipRedirect = false,
-  isOAuth = false,
-): Promise<T> | undefined => {
-  return client.request<T>(options, skipRedirect, isOAuth);
-};
+  if (error) throw error;
+  if (!data) return <OAuthPageLoader />;
 
-export const setWithCredentialsStatus = (state: boolean) => {
-  return client.setWithCredentialsStatus(state);
-};
-
-export const setAuthToken = (token: string | null) => {
-  client.setAuthToken(token);
-};
-
-export const signOutOAuth = () => {
-  client.signOutOAuth();
-};
-
-export const getAuthToken = (): string | null => {
-  return client.authToken;
-};
-
-export const getApiBaseUrl = (): string => {
-  return client.client?.defaults.baseURL ?? "";
-};
-
-export const resolveOAuthToken = (): Promise<string | null> => {
-  return client.getOAuthToken();
-};
-
-export const refreshOAuthToken = (): Promise<string | null> => {
-  return client.refreshOAuthToken();
-};
+  return <UploaderClient {...props} filesSettings={data.filesSettings} />;
+}

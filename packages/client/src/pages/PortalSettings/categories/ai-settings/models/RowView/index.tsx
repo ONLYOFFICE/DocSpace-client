@@ -127,11 +127,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
         outputPrice: formatPrice(m.price?.completion),
       }),
     ],
-    breakdown: buildCachePriceBreakdown(
-      m.price,
-      aiModelsCurrencySymbol,
-      formatPrice,
-    ),
+    breakdown: null,
   }));
 
   if (!chatRows.length && !imageRows.length) return null;

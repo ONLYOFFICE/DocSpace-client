@@ -2185,6 +2185,7 @@
   "TokensFromCache": "From cache",
   "TokensNotFromCache": "Not from cache",
   "TokensProcessedInMonth": "Tokens processed in {{month}}",
+  "TokensReasoning": "Thinking",
   "TokensReceived": "Model reply",
   "TokensWrittenToCache": "Saved to cache",
   "ToppedUpWallet": "You have successfully topped up your wallet.",

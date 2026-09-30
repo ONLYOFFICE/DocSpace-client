@@ -370,7 +370,7 @@
   "Bytes": "bytes",
   "CacheLifetimeDependsOnProvider": "Cache lifetime depends on the provider",
   "CachePricing": "Cache pricing",
-  "CachePricingTitle": "Cache pricing ({{currency}}/1M tokens)",
+  "CachePricingTitle": "Cache pricing ({{currency}}/1M)",
   "CacheRead": "Cache read",
   "CacheWrite": "Cache write",
   "CachedInputCurrency": "Cached input ({{currency}}/1M)",

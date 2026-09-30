@@ -74,7 +74,7 @@ describe("frame custom actions in Manager menus", () => {
   it("adds the matching file action and reports the click", () => {
     const [option] = onLoadFrameActionsImpl(makeStore(), file as never);
 
-    expect(option).toMatchObject({ key: "custom-send", label: "Send" });
+    expect(option).toMatchObject({ key: "sdk-action-send", label: "Send" });
     (option.onClick as () => void)();
     expect(sendCustomAction).toHaveBeenCalledWith({
       action: "send",
@@ -88,7 +88,7 @@ describe("frame custom actions in Manager menus", () => {
   it("uses the room list for rooms in the rooms section", () => {
     expect(
       onLoadFrameActionsImpl(makeStore(), room as never).map((o) => o.key),
-    ).toEqual(["custom-unlink"]);
+    ).toEqual(["sdk-action-unlink"]);
   });
 
   it("adds nothing outside a frame", () => {

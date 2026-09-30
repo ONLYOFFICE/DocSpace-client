@@ -199,7 +199,14 @@ self: ContextOptionsStore,t: TTranslation
 
     if (archiveOptions) options.push(archiveOptions);
     options.push(...pluginOptions);
-    options.push(...self.onMultiLoadFrameActions(selection));
+
+    const roomFrameActions = self.onMultiLoadFrameActions(selection);
+    if (roomFrameActions.length > 0) {
+      options.push(
+        { key: "separator-custom-actions", isSeparator: true },
+        ...roomFrameActions,
+      );
+    }
 
     canDelete &&
       options.push({
@@ -363,12 +370,22 @@ self: ContextOptionsStore,t: TTranslation
 
   const pluginOptions = self.onMultiLoadPlugins(selection);
 
-  options.splice(
-    1,
-    0,
-    ...pluginOptions,
-    ...self.onMultiLoadFrameActions(selection),
-  );
+  options.splice(1, 0, ...pluginOptions);
+
+  const frameActions = self.onMultiLoadFrameActions(selection);
+
+  if (frameActions.length > 0) {
+    const deleteBlockIndex = options.findIndex(
+      (option) => option.key === "separator1",
+    );
+
+    options.splice(
+      deleteBlockIndex === -1 ? options.length : deleteBlockIndex,
+      0,
+      { key: "separator-custom-actions", isSeparator: true },
+      ...frameActions,
+    );
+  }
 
   const newOptions = options.filter(
     (option, index) =>

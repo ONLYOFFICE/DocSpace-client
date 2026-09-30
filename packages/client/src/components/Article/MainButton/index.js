@@ -181,11 +181,11 @@ const ArticleMainButtonContent = (props) => {
         frameCustomActions,
         getManagerSection(rootFolderType),
       ).map((action) => ({
-        id: `actions_custom-${action.key}`,
+        id: `actions_sdk-action-${action.key}`,
         className: "main-button_drop-down",
         icon: action.icon,
         label: action.label,
-        key: `custom-${action.key}`,
+        key: `sdk-action-${action.key}`,
         onClick: () =>
           sendCustomAction({
             action: action.key,
@@ -197,7 +197,7 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const withFrameActions = (items) =>
-    frameCreateActions.length > 0
+    frameCreateActions.length > 0 && !isAccountsPage && !isSettingsPage
       ? [
           ...items,
           { key: "separator-custom-actions", isSeparator: true },

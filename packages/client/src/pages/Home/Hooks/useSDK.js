@@ -44,7 +44,6 @@ import {
   toFrameMethodError,
 } from "@docspace/shared/utils/common";
 
-
 const FOLDER_INFO_EXCLUDED_KEYS = new Set(["settingsStore"]);
 
 export const toFolderInfo = (folder) =>

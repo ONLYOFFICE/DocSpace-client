@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-
 import type { TFrameCustomActionType } from "@docspace/shared/types/Frame";
 import {
   getManagerSection,
@@ -79,8 +78,8 @@ export const onLoadFrameActionsImpl = (
 
   return getVisibleContextActions(config, type, item, section).map(
     (action) => ({
-      id: `option_custom-${action.key}`,
-      key: `custom-${action.key}`,
+      id: `option_sdk-action-${action.key}`,
+      key: `sdk-action-${action.key}`,
       label: action.label,
       icon: action.icon,
       disabled: false,
@@ -108,8 +107,8 @@ export const onMultiLoadFrameActionsImpl = (
 
   return getVisibleGroupContextActions(config, entries, section).map(
     (action) => ({
-      id: `option_custom-${action.key}`,
-      key: `custom-${action.key}`,
+      id: `option_sdk-action-${action.key}`,
+      key: `sdk-action-${action.key}`,
       label: action.label,
       icon: action.icon,
       disabled: false,
@@ -131,8 +130,8 @@ export const getFrameCreateActionsImpl = (
   if (!config) return [];
 
   return getVisibleCreateActions(config, section).map((action) => ({
-    id: `personal_custom-${action.key}`,
-    key: `custom-${action.key}`,
+    id: `personal_sdk-action-${action.key}`,
+    key: `sdk-action-${action.key}`,
     label: action.label,
     icon: action.icon,
     onClick: () =>

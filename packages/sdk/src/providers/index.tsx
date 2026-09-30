@@ -74,6 +74,7 @@ import {
 
 import ErrorProvider from "./ErrorProvider";
 import { SDKConfigProvider } from "./SDKConfigProvider";
+import { SdkCustomActionsProvider } from "./SdkCustomActionsProvider";
 
 export const ThemeChangeContext = React.createContext<
   ((theme: ThemeKeys) => void) | null
@@ -203,9 +204,11 @@ const Providers = ({ children, contextData, oauthFrame }: TProviders) => {
           >
             <ErrorProvider {...contextData}>
               <SDKConfigProvider>
-                {children}
-                <Toast isSSR />
-                <RootTooltip />
+                <SdkCustomActionsProvider>
+                  {children}
+                  <Toast isSSR />
+                  <RootTooltip />
+                </SdkCustomActionsProvider>
               </SDKConfigProvider>
             </ErrorProvider>
           </ThemeProvider>

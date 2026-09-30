@@ -43,13 +43,18 @@ import {
   frameHandlePing,
   getFrameId,
 } from "@docspace/shared/utils/common";
-import { FolderType } from "@docspace/shared/enums";
 import { createFile, createFolder } from "@docspace/shared/api/files";
 
 import { DocsSection, DOCS_SECTION_FOLDER_ALIAS } from "@/types/docs";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import type { TFrameCustomActions } from "@docspace/shared/types/Frame";
 import { PAGE_COUNT } from "@/utils/constants";
 import { useSdkMethods } from "@/providers/sdkMethods";
+import { useSdkCustomActions } from "@/providers/SdkCustomActionsProvider";
+import {
+  docsSectionFromRootFolderType,
+  toFrameEntity,
+} from "@/utils/frameEntity";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
@@ -61,26 +66,6 @@ type UseDocsFrameBridgeParams = {
   uploadFilesToFolder?: (files: FileList | File[]) => Promise<void>;
   openCreateDialog?: (type: CreateFileDialogType) => void;
   enabled?: boolean;
-};
-
-/** Client-only fields the list adds to API entities; the host gets the entity as the API returned it. */
-const LIST_ITEM_VIEW_KEYS = [
-  "icon",
-  "href",
-  "previewUrl",
-  "docUrl",
-  "folderUrl",
-  "needConvert",
-  "contextOptions",
-  "roomLogo",
-  "roomIconColor",
-  "hasRoomImage",
-] as const;
-
-const toEntity = (item: object) => {
-  const entity: Record<string, unknown> = { ...item };
-  for (const key of LIST_ITEM_VIEW_KEYS) delete entity[key];
-  return entity;
 };
 
 const CREATE_FILE_EXTENSIONS: ReadonlySet<string> = new Set([
@@ -96,25 +81,6 @@ const SETTINGS_PATH = "/personal-files/settings";
 const VALID_SECTIONS: ReadonlySet<string> = new Set(
   Object.values(DocsSection),
 );
-
-const sectionFromRootFolderType = (
-  rootFolderType: FolderType | null,
-): string | null => {
-  switch (rootFolderType) {
-    case FolderType.USER:
-      return DocsSection.MyDocuments;
-    case FolderType.Favorites:
-      return DocsSection.Favorites;
-    case FolderType.Recent:
-      return DocsSection.Recent;
-    case FolderType.SHARE:
-      return DocsSection.SharedWithMe;
-    case FolderType.TRASH:
-      return DocsSection.Trash;
-    default:
-      return null;
-  }
-};
 
 const sectionFromPathnameAndFolder = (
   pathname: string,
@@ -142,12 +108,6 @@ const sectionFromPathnameAndFolder = (
   }
 };
 
-/**
- * Puts the frame's `auth` parameter on a navigation URL. `FilesFilter.toUrlParams`
- * already carries the other parameters of the current location, `auth` among
- * them, so the value is set rather than appended: a duplicated `auth` reaches
- * the page as an array and sends it down the cookie SSR branch.
- */
 const withAuthParam = (url: string, auth: string | null): string => {
   const [path, query = ""] = url.split("?");
   const params = new URLSearchParams(query);
@@ -170,14 +130,6 @@ const sectionToUrl = (section: string, auth: string | null): string => {
   return withAuthParam(`${PERSONAL_BASE_PATH}?${filter.toUrlParams()}`, auth);
 };
 
-/**
- * Wires the personal-files app to the sdk-js host via postMessage.
- *
- * - Fires `onAppReady` once when initialization completes.
- * - Fires `onNavigate` on section changes.
- * - Listens for host-side `navigateSection` method calls and for binary
- *   `uploadFileData` payloads (mirrors the Forms mode bridge).
- */
 export const useDocsFrameBridge = ({
   isReady,
   uploadFilesToFolder,
@@ -192,11 +144,12 @@ export const useDocsFrameBridge = ({
   const filesSelectionStore = useFilesSelectionStore();
   const settingsStore = useSettingsStore();
   const { user } = useDocsUserStore();
+  const { setCustomActions } = useSdkCustomActions();
   const auth = searchParams.get("auth");
 
   const rootFolder = searchParams.get("folder");
   const activeSection =
-    sectionFromRootFolderType(rootFolderType) ??
+    docsSectionFromRootFolderType(rootFolderType) ??
     sectionFromPathnameAndFolder(pathname, rootFolder);
 
   const appReadySent = React.useRef(false);
@@ -303,11 +256,11 @@ export const useDocsFrameBridge = ({
           },
           getFolderInfo: () => filesListStore.currentFolder,
           getFolders: () =>
-            filesListStore.items.filter((item) => item.isFolder).map(toEntity),
+            filesListStore.items.filter((item) => item.isFolder).map(toFrameEntity),
           getFiles: () =>
-            filesListStore.items.filter((item) => !item.isFolder).map(toEntity),
-          getList: () => filesListStore.items.map(toEntity),
-          getSelection: () => filesSelectionStore.selection.map(toEntity),
+            filesListStore.items.filter((item) => !item.isFolder).map(toFrameEntity),
+          getList: () => filesListStore.items.map(toFrameEntity),
+          getSelection: () => filesSelectionStore.selection.map(toFrameEntity),
           getUserInfo: () => user,
           createFile: async (data) => {
             const { folderId, title, templateId, formId } = (data ?? {}) as {
@@ -355,6 +308,11 @@ export const useDocsFrameBridge = ({
               throw new Error(`Unsupported modal: ${String(type)}`);
             }
             return { type };
+          },
+          setCustomActions: (data) => {
+            const config = (data ?? {}) as TFrameCustomActions;
+            setCustomActions(config);
+            return config;
           },
           setListView: (data) => {
             const viewType =

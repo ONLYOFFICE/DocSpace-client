@@ -83,3 +83,45 @@ export const showSuccessCreateFolder = (
 
   toastr.success(toastMessage);
 };
+
+const ROOM_GROUP_TOAST_KEYS = {
+  add: {
+    rooms: {
+      single: { tKey: "GroupingRooms:RoomAddedToGroup" },
+      multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
+    },
+    spaces: {
+      single: { tKey: "GroupingRooms:SpaceAddedToGroup" },
+      multiple: { tKey: "GroupingRooms:SpacesAddedToGroup" },
+    },
+  },
+  remove: {
+    rooms: {
+      single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
+      multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
+    },
+    spaces: {
+      single: { tKey: "GroupingRooms:SpaceRemovedFromGroup" },
+      multiple: { tKey: "GroupingRooms:SpacesRemovedFromGroup" },
+    },
+  },
+};
+
+export const showRoomGroupChangedToast = (
+  t: TTranslation | TFunction,
+  action: "add" | "remove",
+  isFormsArea: boolean,
+  count: number,
+  groupName: string,
+) => {
+  const keys = ROOM_GROUP_TOAST_KEYS[action][isFormsArea ? "spaces" : "rooms"];
+
+  toastr.success(
+    <Trans
+      t={t as TFunction}
+      i18nKey={count === 1 ? keys.single.tKey : keys.multiple.tKey}
+      values={{ groupName }}
+      components={{ 1: <strong /> }}
+    />,
+  );
+};

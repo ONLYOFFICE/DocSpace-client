@@ -33,9 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
 import type { TFunction } from "i18next";
-import { Trans } from "react-i18next";
 import { makeAutoObservable } from "mobx";
 
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -63,6 +61,7 @@ import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStor
 import type { TRoomGroup } from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
 
 import { showInfoPanel } from "SRC_DIR/helpers/info-panel";
+import { showRoomGroupChangedToast } from "SRC_DIR/helpers/toast-helpers";
 
 import type FilesActionsStore from "./FilesActionsStore";
 import type { TActionItem } from "./FilesActionsStore";
@@ -164,27 +163,12 @@ export default class FilesHeaderOptionStore {
     try {
       await this.dialogsStore.updateRoomGroup(groupId, { roomsToAdd: roomIds });
       await this.dialogsStore.getAllRoomGroups();
-      const transProps = {
-        t: this.t,
-        values: { groupName },
-        components: { 1: React.createElement("strong") },
-      };
-      const keys = this.isFormsGroupsArea
-        ? {
-            single: { tKey: "GroupingRooms:SpaceAddedToGroup" },
-            multiple: { tKey: "GroupingRooms:SpacesAddedToGroup" },
-          }
-        : {
-            single: { tKey: "GroupingRooms:RoomAddedToGroup" },
-            multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
-          };
-      const i18nKey =
-        roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
-      toastr.success(
-        React.createElement(Trans, {
-          i18nKey,
-          ...transProps,
-        }),
+      showRoomGroupChangedToast(
+        this.t,
+        "add",
+        this.isFormsGroupsArea,
+        roomIds.length,
+        groupName,
       );
       this.filesStore.resetSelections();
     } catch (error) {
@@ -212,27 +196,12 @@ export default class FilesHeaderOptionStore {
       // Remove the rooms from the current view
       this.filesStore.removeFiles(null, roomIds);
 
-      const transProps = {
-        t: this.t,
-        values: { groupName },
-        components: { 1: React.createElement("strong") },
-      };
-      const keys = this.isFormsGroupsArea
-        ? {
-            single: { tKey: "GroupingRooms:SpaceRemovedFromGroup" },
-            multiple: { tKey: "GroupingRooms:SpacesRemovedFromGroup" },
-          }
-        : {
-            single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
-            multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
-          };
-      const i18nKey =
-        roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
-      toastr.success(
-        React.createElement(Trans, {
-          i18nKey,
-          ...transProps,
-        }),
+      showRoomGroupChangedToast(
+        this.t,
+        "remove",
+        this.isFormsGroupsArea,
+        roomIds.length,
+        groupName,
       );
       this.filesStore.resetSelections();
     } catch (error) {

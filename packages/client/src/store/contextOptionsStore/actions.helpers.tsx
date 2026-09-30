@@ -46,6 +46,7 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { copyShareLink as copyToBuffer } from "@docspace/shared/utils/copy";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
+import { showRoomGroupChangedToast } from "SRC_DIR/helpers/toast-helpers";
 import { getOAuthToken } from "@onlyoffice/apps-ui-kit/utils/get-oauth-token";
 import { OPERATIONS_NAME } from "@onlyoffice/apps-ui-kit/constants";
 import {
@@ -545,28 +546,12 @@ export const onAddRoomsToGroupImpl = async (
       roomsToAdd: roomIds,
     });
     await self.dialogsStore.getAllRoomGroups();
-    const transProps = {
-      t: t as unknown as TFunction,
-      values: { groupName },
-      components: { 1: React.createElement("strong") },
-    };
-    const keys =
-      self.dialogsStore.roomGroupsArea === RoomSearchArea.Forms
-        ? {
-            single: { tKey: "GroupingRooms:SpaceAddedToGroup" },
-            multiple: { tKey: "GroupingRooms:SpacesAddedToGroup" },
-          }
-        : {
-            single: { tKey: "GroupingRooms:RoomAddedToGroup" },
-            multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
-          };
-    const i18nKey =
-      roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
-    toastr.success(
-      React.createElement(Trans, {
-        i18nKey,
-        ...transProps,
-      }),
+    showRoomGroupChangedToast(
+      t,
+      "add",
+      self.dialogsStore.roomGroupsArea === RoomSearchArea.Forms,
+      roomIds.length,
+      groupName,
     );
   } catch (error) {
     console.error("Error adding rooms to group:", error);
@@ -596,28 +581,12 @@ export const onRemoveRoomsFromGroupImpl = async (
     // Remove the rooms from the current view
     self.filesStore.removeFiles(null, roomIds);
 
-    const transProps = {
-      t: t as unknown as TFunction,
-      values: { groupName },
-      components: { 1: React.createElement("strong") },
-    };
-    const keys =
-      self.dialogsStore.roomGroupsArea === RoomSearchArea.Forms
-        ? {
-            single: { tKey: "GroupingRooms:SpaceRemovedFromGroup" },
-            multiple: { tKey: "GroupingRooms:SpacesRemovedFromGroup" },
-          }
-        : {
-            single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
-            multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
-          };
-    const i18nKey =
-      roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
-    toastr.success(
-      React.createElement(Trans, {
-        i18nKey,
-        ...transProps,
-      }),
+    showRoomGroupChangedToast(
+      t,
+      "remove",
+      self.dialogsStore.roomGroupsArea === RoomSearchArea.Forms,
+      roomIds.length,
+      groupName,
     );
   } catch (error) {
     console.error("Error removing rooms from group:", error);

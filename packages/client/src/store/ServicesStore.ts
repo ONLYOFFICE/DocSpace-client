@@ -125,6 +125,9 @@ class ServicesStore {
     );
   };
 
+  formatAiModelPrice = (amount?: number) =>
+    amount == null ? "" : this.formatAiModelsCurrency(amount);
+
   fetchAiPrices = async () => {
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);

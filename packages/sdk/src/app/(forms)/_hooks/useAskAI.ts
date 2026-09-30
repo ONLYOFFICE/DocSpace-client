@@ -71,9 +71,9 @@ export default function useAskAI() {
           externalDbTableName: file.externalDbTableName,
         },
       ])
-        .then(({ duplicates, skippedOverLimit }) => {
+        .then(({ duplicates, skippedOverLimit, cap }) => {
           notifyAlreadyAttached(t, duplicates);
-          notifyAttachmentLimit(t, skippedOverLimit);
+          notifyAttachmentLimit(t, skippedOverLimit, cap);
         })
         .catch((e: unknown) => toastr.error(e as string));
     },

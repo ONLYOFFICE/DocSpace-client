@@ -67,7 +67,7 @@ type ModelSettingsTableViewProps = {
 
   userId?: string;
   aiToolsPrices?: ServicesStore["aiToolsPrices"];
-  formatAiModelsCurrency?: ServicesStore["formatAiModelsCurrency"];
+  formatAiModelPrice?: ServicesStore["formatAiModelPrice"];
   setAiModelAvailability?: ServicesStore["setAiModelAvailability"];
   aiModelAvailabilityMap?: ServicesStore["aiModelAvailabilityMap"];
   aiModelAvailabilityUpdatingSet?: ServicesStore["aiModelAvailabilityUpdatingSet"];
@@ -78,7 +78,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     sectionWidth,
     userId,
     aiToolsPrices,
-    formatAiModelsCurrency,
+    formatAiModelPrice = () => "",
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
@@ -98,17 +98,14 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     requestToggle({ id: modelId, title: model?.alias ?? modelId }, enabled);
   };
 
-  const formatPrice = (value?: number) =>
-    value == null ? "" : (formatAiModelsCurrency?.(value) ?? "");
-
   const chatRows: TModelRow[] = chatModels.map((m) => ({
     id: m.id,
     alias: m.alias,
     image: m.image,
     link: m.link,
     prices: [
-      { key: "input", value: formatPrice(m.price?.prompt) },
-      { key: "output", value: formatPrice(m.price?.completion) },
+      { key: "input", value: formatAiModelPrice(m.price?.prompt) },
+      { key: "output", value: formatAiModelPrice(m.price?.completion) },
     ],
   }));
 
@@ -118,9 +115,9 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     image: m.image,
     link: m.link,
     prices: [
-      { key: "imageInput", value: formatPrice(m.price?.prompt) },
-      { key: "imageOutput", value: formatPrice(m.price?.image) },
-      { key: "output", value: formatPrice(m.price?.completion) },
+      { key: "imageInput", value: formatAiModelPrice(m.price?.prompt) },
+      { key: "imageOutput", value: formatAiModelPrice(m.price?.image) },
+      { key: "output", value: formatAiModelPrice(m.price?.completion) },
     ],
   }));
 
@@ -214,7 +211,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
 export default inject<TStore>(({ servicesStore, userStore }) => {
   const {
     aiToolsPrices,
-    formatAiModelsCurrency,
+    formatAiModelPrice,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
@@ -225,7 +222,7 @@ export default inject<TStore>(({ servicesStore, userStore }) => {
   return {
     userId: user?.id,
     aiToolsPrices,
-    formatAiModelsCurrency,
+    formatAiModelPrice,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,

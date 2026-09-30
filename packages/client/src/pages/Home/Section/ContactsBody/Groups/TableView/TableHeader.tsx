@@ -40,7 +40,7 @@ import { NavigateFunction, Location } from "react-router";
 
 import { TableHeader, TTableColumn } from "@onlyoffice/apps-ui-kit/components/table";
 import { Events } from "@docspace/shared/enums";
-import { Nullable, TTranslation } from "@docspace/shared/types";
+import { TTranslation } from "@docspace/shared/types";
 
 import TableStore from "SRC_DIR/store/TableStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
@@ -73,9 +73,6 @@ type GroupsTableHeaderProps = {
   navigate: NavigateFunction;
   location: Location;
 
-  // What the caller actually holds: a ref to the scroll container. The old
-  // `RefObject<Nullable<ForwardedRef<HTMLDivElement>>>` described a ref to a
-  // ref, which is why passing it on needed a cast to `{ current: HTMLDivElement }`.
   containerRef: React.RefObject<HTMLDivElement | null>;
 };
 

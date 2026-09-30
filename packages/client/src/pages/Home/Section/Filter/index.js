@@ -315,7 +315,6 @@ const SectionFilterContent = ({
         newFilter.page = 0;
         newFilter.provider = providerType || null;
         newFilter.type = type || null;
-        // Clear groupId when filter is applied - grouping doesn't work with filters
         newFilter.groupId = getPinnedGroupId() ?? null;
 
         newFilter.subjectFilter = null;
@@ -474,6 +473,7 @@ const SectionFilterContent = ({
     if (isRooms) {
       const newFilter = RoomsFilter.clean();
       newFilter.searchArea = roomsFilter.searchArea;
+      newFilter.groupId = getPinnedGroupId() ?? null;
 
       const path = getRoomsListBasePath(roomsFilter.searchArea);
 
@@ -546,7 +546,6 @@ const SectionFilterContent = ({
 
         newFilter.page = 0;
         newFilter.filterValue = searchValue;
-        // Clear groupId when search is applied - grouping doesn't work with filters
         newFilter.groupId = getPinnedGroupId() ?? null;
 
         const path = getRoomsListBasePath(newFilter.searchArea);

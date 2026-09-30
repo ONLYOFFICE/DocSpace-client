@@ -47,9 +47,14 @@ import {
   frameCallbackData,
   frameCallCommand,
   frameHandlePing,
+  toFrameMethodError,
 } from "@docspace/shared/utils/common";
 import { applyCustomStyles } from "@docspace/shared/utils/customStyles";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
+
+import { getSdkMethod } from "./sdkMethods";
+
+const WRONG_METHOD = "Wrong method for this mode";
 
 const SDKConfigContext = createContext<TFrameConfig | null>(null);
 
@@ -75,26 +80,26 @@ export const SDKConfigProvider: React.FC<{ children: React.ReactNode }> = ({
 
       if (!methodName) return;
 
-      let res;
-
-      try {
-        switch (methodName) {
-          case "setConfig":
-            setSdkConfig(data);
-            applyCustomStyles(data?.stylesUrl);
-            res = data;
-            break;
-          case "navigateSection":
-          case "setCustomActions":
-            return;
-          default:
-            res = "Wrong method for this mode";
-        }
-      } catch (err) {
-        res = err;
+      if (methodName === "setConfig") {
+        setSdkConfig(data);
+        applyCustomStyles(data?.stylesUrl);
+        frameCallbackData(data, callId);
+        return;
       }
 
-      frameCallbackData(res, callId);
+      const handler = getSdkMethod(methodName);
+
+      if (!handler) {
+        frameCallbackData(WRONG_METHOD, callId);
+        return;
+      }
+
+      Promise.resolve()
+        .then(() => handler(data))
+        .then(
+          (res) => frameCallbackData(res ?? {}, callId),
+          (err: unknown) => frameCallbackData(toFrameMethodError(err), callId),
+        );
     }
   }, []);
 

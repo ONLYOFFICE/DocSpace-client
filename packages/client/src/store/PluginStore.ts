@@ -1416,9 +1416,7 @@ class PluginStore {
         };
       };
 
-      const storeId = this.selectedFolderStore.id;
-
-      if (value.items && storeId) {
+      if (value.items) {
         value.items.forEach((i) => {
           const onClick = createMainButtonClickHandler(i, plugin.name);
 

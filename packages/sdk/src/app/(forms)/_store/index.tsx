@@ -50,7 +50,6 @@ import { FormsSettingsStoreContextProvider } from "./FormsSettingsStore";
 import { FormsDbSettingsStoreContextProvider } from "./FormsDbSettingsStore";
 import { FormsUserStoreContextProvider } from "./FormsUserStore";
 import { FormsTourStoreContextProvider } from "./FormsTourStore";
-import { FormsCustomActionsStoreContextProvider } from "./FormsCustomActionsStore";
 import { FormsDeleteDialogStoreContextProvider } from "./FormsDeleteDialogStore";
 import { FormsProgressStoreContextProvider } from "./FormsProgressStore";
 import { FormsStopFillingDialogStoreContextProvider } from "./FormsStopFillingDialogStore";
@@ -73,7 +72,6 @@ export const FormsStoreProviders = ({
                       <FormsDbSettingsStoreContextProvider>
                         <FormsNavigationStoreContextProvider>
                           <FormsListStoreContextProvider>
-                            <FormsCustomActionsStoreContextProvider>
                               <FormsDeleteDialogStoreContextProvider>
                                 <FormsStopFillingDialogStoreContextProvider>
                                   <FormsProgressStoreContextProvider>
@@ -83,7 +81,6 @@ export const FormsStoreProviders = ({
                                   </FormsProgressStoreContextProvider>
                                 </FormsStopFillingDialogStoreContextProvider>
                               </FormsDeleteDialogStoreContextProvider>
-                            </FormsCustomActionsStoreContextProvider>
                           </FormsListStoreContextProvider>
                         </FormsNavigationStoreContextProvider>
                       </FormsDbSettingsStoreContextProvider>

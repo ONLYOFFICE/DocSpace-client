@@ -84,13 +84,15 @@ describe("FilesActionsStore — quota/index/media (batch 10)", () => {
 
   it("closeMediaViewerAndRestoreUrl hides the media viewer", async () => {
     const setMediaViewerData = vi.fn();
+    const removeViewerHistoryEntry = vi.fn();
     const store = createTestFilesActionsStore({
       mediaViewerDataStore: {
         setMediaViewerData,
-        getFirstUrl: vi.fn(async () => null),
+        removeViewerHistoryEntry,
       },
     });
     await store.closeMediaViewerAndRestoreUrl();
     expect(setMediaViewerData).toHaveBeenCalledWith({ visible: false, id: null });
+    expect(removeViewerHistoryEntry).toHaveBeenCalledTimes(1);
   });
 });

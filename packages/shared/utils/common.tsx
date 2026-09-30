@@ -771,6 +771,8 @@ export const frameHandlePing = (eventData: {
   type?: string;
   frameId?: string;
 }): boolean => {
+  if (eventData?.type === "onAuthTokenReturn") return true;
+
   if (eventData?.type === "ping") {
     window.parent.postMessage(
       JSON.stringify({

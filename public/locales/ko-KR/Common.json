@@ -2132,7 +2132,7 @@
   "SwitchPlan": "이제 <1>{{planName}} 요금제로 전환됩니다.</1>",
   "SwitchToThumbnails": "썸네일 보기로 전환",
   "SwitchViewToCompact": "축소 보기로 전환",
-  "SyncXlsxData": "응답을 XLSX로 동기화",
+  "SyncXlsxData": "응답 동기화",
   "SystemTheme": "시스템 테마 사용",
   "SystemThemeDescription": "시스템 설정에 따라 라이트 테마와 다크 테마 간에 자동으로 전환됩니다.",
   "TableSettingsTitle": "표시된 열 관리",

@@ -2132,7 +2132,7 @@
   "SwitchPlan": "<1>{{planName}}プラン</1> に切り替えようとしています。",
   "SwitchToThumbnails": "サムネイル表示へ切り替え",
   "SwitchViewToCompact": "コンパクトビューに切り替え",
-  "SyncXlsxData": "回答をXLSXに同期",
+  "SyncXlsxData": "回答を同期",
   "SystemTheme": "システムテーマを使用",
   "SystemThemeDescription": "システムの動作に合わせて、ライトテーマとダークテーマを自動で切り替えます。",
   "TableSettingsTitle": "表示列の管理",

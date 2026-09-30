@@ -2132,7 +2132,7 @@
   "SwitchPlan": "Olet siirtymässä <1>{{planName}}</1>-tilaukseen.",
   "SwitchToThumbnails": "Vaihda pikkukuvanäkymään",
   "SwitchViewToCompact": "Vaihda tiiviiseen näkymään",
-  "SyncXlsxData": "Synkronoi vastaukset XLSX-tiedostoon",
+  "SyncXlsxData": "Synkronoi vastaukset",
   "SystemTheme": "Käytä järjestelmän teemaa",
   "SystemThemeDescription": "Vaihda automaattisesti vaalean ja tumman teeman välillä järjestelmäsi asetusten mukaan.",
   "TableSettingsTitle": "Hallitse näytettyjä kolumneja",

@@ -2132,7 +2132,7 @@
   "SwitchPlan": "Управо прелазите на <1>{{planName}}</1> пакет.",
   "SwitchToThumbnails": "Пребаци се на приказ сличица",
   "SwitchViewToCompact": "Пребаци се на компактни приказ",
-  "SyncXlsxData": "Синхронизуј одговоре у XLSX",
+  "SyncXlsxData": "Синхронизуј одговоре",
   "SystemTheme": "Користи тему система",
   "SystemThemeDescription": "Аутоматски се мења између светле и тамне теме у складу са подешавањима вашег система.",
   "TableSettingsTitle": "Управљај приказаним колонама",

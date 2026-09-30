@@ -2132,7 +2132,7 @@
   "SwitchPlan": "Você está prestes a mudar para o plano <1>{{planName}}</1>.",
   "SwitchToThumbnails": "Mudar para a visualização em miniaturas",
   "SwitchViewToCompact": "Alternar para visualização compacta",
-  "SyncXlsxData": "Sincronizar respostas para XLSX",
+  "SyncXlsxData": "Sincronizar respostas",
   "SystemTheme": "Usar tema do sistema",
   "SystemThemeDescription": "Alterne automaticamente entre temas claros e escuros com base nas configurações do seu sistema.",
   "TableSettingsTitle": "Gerenciar colunas exibidas",

@@ -2135,7 +2135,7 @@
   "SwitchPlan": "You’re about to switch to the <1>{{planName}} plan</1>.",
   "SwitchToThumbnails": "Switch to thumbnails view",
   "SwitchViewToCompact": "Switch to compact view",
-  "SyncXlsxData": "Sync responses to XLSX",
+  "SyncXlsxData": "Sync responses",
   "SystemTheme": "Use system theme",
   "SystemThemeDescription": "Automatically switch between light and dark themes based on your system settings.",
   "TableSettingsTitle": "Manage displayed columns",

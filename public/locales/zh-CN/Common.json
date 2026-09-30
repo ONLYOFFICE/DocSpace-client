@@ -2132,7 +2132,7 @@
   "SwitchPlan": "您即将切换至<1>{{planName}}套餐</1>。",
   "SwitchToThumbnails": "切换到缩略图视图",
   "SwitchViewToCompact": "转到紧凑视图",
-  "SyncXlsxData": "同步回复到 XLSX",
+  "SyncXlsxData": "同步回复",
   "SystemTheme": "使用系统主题",
   "SystemThemeDescription": "当系统主题发生变化时，自动在浅色和深色主题之间切换。",
   "TableSettingsTitle": "管理显示的列",

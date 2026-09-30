@@ -2132,7 +2132,7 @@
   "SwitchPlan": "أنت على وشك التبديل إلى الخطة <1>{{planName}}</1>.",
   "SwitchToThumbnails": "التبديل إلى عرض الصور المُصغرة",
   "SwitchViewToCompact": "التبديل إلى العرض المُدمج",
-  "SyncXlsxData": "مزامنة الردود إلى XLSX",
+  "SyncXlsxData": "مزامنة الردود",
   "SystemTheme": "استخدم قالب النظام",
   "SystemThemeDescription": "قم بالتبديل تلقائيًا بين السمات الفاتحة والداكنة استنادًا إلى إعدادات نظامك.",
   "TableSettingsTitle": "إدارة الأعمدة المعروضة",

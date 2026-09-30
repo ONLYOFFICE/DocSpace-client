@@ -2132,7 +2132,7 @@
   "SwitchPlan": "Jeni gati të kaloni në planin <1>{{planName}}</1>.",
   "SwitchToThumbnails": "Kaloni te pamja e miniaturave",
   "SwitchViewToCompact": "Kaloni në pamjen kompakte",
-  "SyncXlsxData": "Sinkronizo përgjigjet në XLSX",
+  "SyncXlsxData": "Sinkronizo përgjigjet",
   "SystemTheme": "Përdorni temën e sistemit",
   "SystemThemeDescription": "Kaloni automatikisht midis temave të lehta dhe të errëta bazuar në cilësimet e sistemit tuaj.",
   "TableSettingsTitle": "Menaxhoni kolonat e shfaqura",

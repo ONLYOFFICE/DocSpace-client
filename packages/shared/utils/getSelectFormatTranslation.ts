@@ -43,36 +43,32 @@ export const getSelectFormatTranslation = (
   filterParam: string | number,
   logoText: string,
 ): string => {
-  const getTranslatedType = (key: string, typeToLowerCase = true) => {
-    // biome-ignore lint/plugin/no-dynamic-i18n-key: keys are declared as literals at the call sites below
-    let type = t(key);
-
-    if (typeToLowerCase) type = type.toLowerCase();
-
-    return t("Common:SelectTypeFiles", { type });
-  };
+  const getTranslatedType = (translatedType: string, typeToLowerCase = true) =>
+    t("Common:SelectTypeFiles", {
+      type: typeToLowerCase ? translatedType.toLowerCase() : translatedType,
+    });
 
   switch (filterParam) {
     case FilterType.DocumentsOnly:
-      return getTranslatedType("Common:Documents");
+      return getTranslatedType(t("Common:Documents"));
 
     case FilterType.SpreadsheetsOnly:
-      return getTranslatedType("Common:Spreadsheets");
+      return getTranslatedType(t("Common:Spreadsheets"));
 
     case FilterType.PresentationsOnly:
-      return getTranslatedType("Common:Presentations");
+      return getTranslatedType(t("Common:Presentations"));
 
     case FilterType.DiagramsOnly:
-      return getTranslatedType("Common:Diagrams");
+      return getTranslatedType(t("Common:Diagrams"));
 
     case FilterType.ImagesOnly:
-      return getTranslatedType("Common:Images");
+      return getTranslatedType(t("Common:Images"));
 
     case FilterType.ArchiveOnly:
-      return getTranslatedType("Common:Archives");
+      return getTranslatedType(t("Common:Archives"));
 
     case FilterType.FoldersOnly:
-      return getTranslatedType("Common:Folders");
+      return getTranslatedType(t("Common:Folders"));
 
     case FilterType.MediaOnly:
       return t("Common:SelectExtensionFiles", {

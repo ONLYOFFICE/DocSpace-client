@@ -521,6 +521,8 @@ class DialogsStore {
 
   roomGroupsArea: RoomSearchArea = RoomSearchArea.Active;
 
+  private roomGroupsRequestId = 0;
+
   syncDbData: {
     operationId: Nullable<number>;
     forms: ExternalSyncDB["forms"];
@@ -1381,9 +1383,12 @@ class DialogsStore {
   ) => {
     if (searchArea !== this.roomGroupsArea) this.setRoomGroups([], searchArea);
 
+    this.roomGroupsRequestId += 1;
+    const requestId = this.roomGroupsRequestId;
+
     const response = (await getRoomGroups(searchArea)) as IRoomGroup[];
 
-    if (searchArea !== this.roomGroupsArea) return;
+    if (requestId !== this.roomGroupsRequestId) return;
 
     this.setRoomGroups(response, searchArea);
   };

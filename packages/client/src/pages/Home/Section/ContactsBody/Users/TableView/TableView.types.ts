@@ -40,7 +40,7 @@ import { TFilterSortBy, TUser } from "@docspace/shared/api/people/types";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { Nullable, TTranslation } from "@docspace/shared/types";
+import { TTranslation } from "@docspace/shared/types";
 import { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
@@ -154,9 +154,6 @@ export type TableHeaderProps = {
 
   sectionWidth: number;
 
-  // What the caller actually holds: a ref to the scroll container. The old
-  // `RefObject<Nullable<ForwardedRef<HTMLDivElement>>>` described a ref to a
-  // ref, which is why passing it on needed a cast to `{ current: HTMLDivElement }`.
   containerRef: React.RefObject<HTMLDivElement | null>;
 
   navigate: NavigateFunction;

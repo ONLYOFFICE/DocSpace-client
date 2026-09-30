@@ -61,7 +61,7 @@ type ModelSettingsRowViewProps = {
   sectionWidth: number;
 
   aiToolsPrices?: ServicesStore["aiToolsPrices"];
-  formatAiModelsCurrency?: ServicesStore["formatAiModelsCurrency"];
+  formatAiModelPrice?: ServicesStore["formatAiModelPrice"];
   setAiModelAvailability?: ServicesStore["setAiModelAvailability"];
   aiModelAvailabilityMap?: ServicesStore["aiModelAvailabilityMap"];
   aiModelAvailabilityUpdatingSet?: ServicesStore["aiModelAvailabilityUpdatingSet"];
@@ -71,7 +71,7 @@ type ModelSettingsRowViewProps = {
 const RowView = (props: ModelSettingsRowViewProps) => {
   const {
     aiToolsPrices,
-    formatAiModelsCurrency,
+    formatAiModelPrice = () => "",
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
@@ -83,9 +83,6 @@ const RowView = (props: ModelSettingsRowViewProps) => {
   const { requestToggle, turnOffModelDialog } =
     useTurnOffModelConfirmation(setAiModelAvailability);
 
-  const formatPrice = (value?: number) =>
-    value == null ? "" : (formatAiModelsCurrency?.(value) ?? "");
-
   const chatRows: TModelRow[] = (aiToolsPrices?.chat ?? []).map((m) => ({
     id: m.id,
     alias: m.alias,
@@ -93,8 +90,8 @@ const RowView = (props: ModelSettingsRowViewProps) => {
     link: m.link,
     prices: [
       t("Common:AIModelPrice", {
-        inputPrice: formatPrice(m.price?.prompt),
-        outputPrice: formatPrice(m.price?.completion),
+        inputPrice: formatAiModelPrice(m.price?.prompt),
+        outputPrice: formatAiModelPrice(m.price?.completion),
       }),
     ],
   }));
@@ -106,11 +103,11 @@ const RowView = (props: ModelSettingsRowViewProps) => {
     link: m.link,
     prices: [
       t("Common:AIImageModelPrice", {
-        inputPrice: formatPrice(m.price?.prompt),
-        imagePrice: formatPrice(m.price?.image),
+        inputPrice: formatAiModelPrice(m.price?.prompt),
+        imagePrice: formatAiModelPrice(m.price?.image),
       }),
       t("Common:AIModelOutputPrice", {
-        outputPrice: formatPrice(m.price?.completion),
+        outputPrice: formatAiModelPrice(m.price?.completion),
       }),
     ],
   }));
@@ -220,7 +217,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
 export default inject<TStore>(({ servicesStore, paymentStore }) => {
   const {
     aiToolsPrices,
-    formatAiModelsCurrency,
+    formatAiModelPrice,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
@@ -229,7 +226,7 @@ export default inject<TStore>(({ servicesStore, paymentStore }) => {
 
   return {
     aiToolsPrices,
-    formatAiModelsCurrency,
+    formatAiModelPrice,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,

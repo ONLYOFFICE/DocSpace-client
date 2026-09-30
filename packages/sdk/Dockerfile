@@ -39,6 +39,7 @@ COPY common/tests/package.json ./common/tests/package.json
 COPY packages/sdk/package.json ./packages/sdk/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
 COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
+COPY packages/client/*.tgz ./packages/client/
 COPY libs/ui-kit/*.tgz ./libs/ui-kit/
 
 # Install dependencies

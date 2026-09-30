@@ -1,0 +1,76 @@
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+
+.anchor {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  cursor: pointer;
+
+  > * {
+    min-width: 0;
+  }
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+
+  rect,
+  path {
+    fill: var(--services-additional-info);
+  }
+}
+
+.content {
+  --price-divider-color: #{$gray-light-mid};
+  --price-note-color: #{$light-gray-dark};
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 220px;
+  color: var(--tooltip-text-color);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+:global(.dark) {
+  :local {
+    .content {
+      --price-divider-color: #{$gray-dark-strong};
+      --price-note-color: #{$dark-gray-dark};
+    }
+  }
+}
+
+.title {
+  font-weight: 600;
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.label {
+  flex: 1;
+}
+
+.value {
+  font-variant-numeric: tabular-nums;
+}
+
+.note {
+  padding-top: 8px;
+  border-top: 1px solid var(--price-divider-color);
+  color: var(--price-note-color);
+}

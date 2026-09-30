@@ -37,18 +37,10 @@
 
 import { useEffect, useRef } from "react";
 
-/**
- * A handler of one SDK method. Receives the payload the host passed to the
- * instance method and returns the value the host resolves with.
- */
 export type TSdkMethodHandler = (data: unknown) => unknown;
 
 const handlers = new Map<string, TSdkMethodHandler>();
 
-/**
- * Registers the handler of an SDK method for the page that is currently
- * mounted. Returns the unregister function.
- */
 export const registerSdkMethod = (
   name: string,
   handler: TSdkMethodHandler,
@@ -62,10 +54,6 @@ export const registerSdkMethod = (
 export const getSdkMethod = (name: string): TSdkMethodHandler | undefined =>
   handlers.get(name);
 
-/**
- * Registers SDK method handlers for the lifetime of the calling component.
- * The latest handlers are always called, so they may close over render state.
- */
 export const useSdkMethods = (
   methods: Record<string, TSdkMethodHandler | undefined>,
 ) => {

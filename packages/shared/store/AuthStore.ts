@@ -44,7 +44,7 @@ import SocketHelper, {
 import api from "../api";
 import {
   getAuthToken,
-  setAuthToken,
+  signOutOAuth,
   setWithCredentialsStatus,
 } from "../api/client";
 import { loginWithTfaCode } from "../api/user";
@@ -579,7 +579,7 @@ class AuthStore {
     if (ssoLogoutUrl) return ssoLogoutUrl;
 
     if (isOAuth) {
-      setAuthToken(null);
+      signOutOAuth();
       return;
     }
 

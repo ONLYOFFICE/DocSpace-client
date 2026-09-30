@@ -158,7 +158,7 @@ export default function useFormsContextMenu() {
     (type: "file" | "folder", item: TFile | TFolder): ContextMenuItem[] =>
       getVisibleContextActions(customActions, type, item, activeSection).map(
         (action) => ({
-          id: `custom_${action.key}`,
+          id: `option_sdk-action-${action.key}`,
           key: `sdk-action-${action.key}`,
           label: action.label,
           icon: action.icon ?? "",

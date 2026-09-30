@@ -3676,7 +3676,7 @@ packages:
         optional: true
 
   '@onlyoffice/docspace-sdk-js@file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz':
-    resolution: {integrity: sha512-YMerGUQxaLjNQvXgAypBLMo63F2WPRrgFLvUCjGZX5l7/Riqnqq4YERhQASZU7s4raV8vUXvliwsdtChZuuMnw==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
+    resolution: {integrity: sha512-0HY0VPeqZkqdNiYSPVuOQVwGNvUX0wE/Ue5poPu5tPnXsDwN7xK8yO8XYRVa5kBzuq1NfdG1siFQibJulJf24g==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
     version: 2.2.0
     engines: {node: '>=18'}
 

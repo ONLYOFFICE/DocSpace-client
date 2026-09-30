@@ -2134,7 +2134,7 @@
   "SwitchPlan": "Bạn sắp chuyển sang gói <1>{{planName}}</1>.",
   "SwitchToThumbnails": "Chuyển sang chế độ xem hình thu nhỏ",
   "SwitchViewToCompact": "Chuyển sang xem đơn giản",
-  "SyncXlsxData": "Đồng bộ phản hồi sang XLSX",
+  "SyncXlsxData": "Đồng bộ phản hồi",
   "SystemTheme": "Sử dụng chủ đề hệ thống",
   "SystemThemeDescription": "Tự động chuyển đổi giữa chế độ sáng và tối theo cài đặt của hệ thống.",
   "TableSettingsTitle": "Quản lý các cột được hiển thị",

@@ -2134,7 +2134,7 @@
   "SwitchPlan": "Je gaat nu overstappen naar het <1>{{planName}} plan</1>.",
   "SwitchToThumbnails": "Overschakelen naar thumbnails weergave",
   "SwitchViewToCompact": "Schakel naar compacte weergave",
-  "SyncXlsxData": "Antwoorden synchroniseren naar XLSX",
+  "SyncXlsxData": "Antwoorden synchroniseren",
   "SystemTheme": "Gebruik systeemthema",
   "SystemThemeDescription": "Schakelt automatisch tussen lichte en donkere thema's op basis van uw systeeminstellingen.",
   "TableSettingsTitle": "Weergegeven kolommen beheren",

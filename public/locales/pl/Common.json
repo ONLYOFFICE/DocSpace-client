@@ -2134,7 +2134,7 @@
   "SwitchPlan": "Przechodzisz na plan <1>{{planName}}</1>.",
   "SwitchToThumbnails": "Przełącz na widok miniatur",
   "SwitchViewToCompact": "Przełącz na widok kompaktowy",
-  "SyncXlsxData": "Synchronizuj odpowiedzi do XLSX",
+  "SyncXlsxData": "Synchronizuj odpowiedzi",
   "SystemTheme": "Użyj motywu systemowego",
   "SystemThemeDescription": "Automatycznie przełączaj się między jasnym i ciemnym motywem na podstawie ustawień systemowych.",
   "TableSettingsTitle": "Zarządzaj wyświetlanymi kolumnami",

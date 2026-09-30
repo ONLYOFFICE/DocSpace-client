@@ -767,15 +767,6 @@ export {
   formatCurrencyValue,
 } from "@docspace/ui-kit/billing/utils/common";
 
-/**
- * Handles the host messages that are not method calls: answers a `ping`
- * and swallows the OAuth token replies and pushes (`onAuthTokenReturn`),
- * which the token helper consumes on its own listener. Returns `true` when
- * the caller must not treat the message as a method call: every frame
- * dispatcher would otherwise answer it with "Wrong method for this mode"
- * and, without a matching callId, the SDK would settle an unrelated
- * pending method with that reply.
- */
 export const frameHandlePing = (eventData: {
   type?: string;
   frameId?: string;

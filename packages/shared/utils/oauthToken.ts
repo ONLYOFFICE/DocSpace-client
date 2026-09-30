@@ -76,10 +76,6 @@ let listenerInstalled = false;
 
 type PushListener = (token: string) => void;
 
-/**
- * Subscribers to unsolicited token pushes: the SDK host refreshes a token
- * ahead of its expiry and posts it without a `callId`.
- */
 const pushListeners = new Set<PushListener>();
 
 const isInIframe = (): boolean => {
@@ -199,10 +195,6 @@ export const requestAuthToken = (
   });
 };
 
-/**
- * Subscribes to access tokens the host pushes ahead of expiry (proactive
- * refresh). Returns the unsubscribe function.
- */
 export const onAuthTokenPush = (listener: PushListener): (() => void) => {
   installListener();
   pushListeners.add(listener);

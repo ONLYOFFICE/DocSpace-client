@@ -91,6 +91,7 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import "@docspace/shared/styles/theme.scss";
 
 import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
+import { getAiContextRoom } from "SRC_DIR/helpers/aiContextRoom";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { setFileView } from "SRC_DIR/helpers/info-panel";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
@@ -173,6 +174,7 @@ const Shell = ({ page = "home", ...rest }) => {
     isFormsFolderRoot,
     isFormRoomRoot,
     isAIReady,
+    aiContextRoom,
   } = rest;
 
   const [searchParams] = useSearchParams();
@@ -986,6 +988,10 @@ const Shell = ({ page = "home", ...rest }) => {
           composerHeader={standalone ? undefined : composerHeader}
           composerDisabled={standalone ? undefined : !isAIReady}
           suggestions={aiSuggestions}
+          // The room the user is in, connected as chat context (with the
+          // skills of its .ai folder) when the chat opens — see
+          // ContextRoomSync in ui-kit.
+          contextRoom={aiContextRoom}
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
@@ -1157,6 +1163,9 @@ const ShellWrapper = inject(
       // rights of the opened folder / room do not allow are filtered out.
       selectedSecurity: selectedFolderStore.security,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
+      // The current room as a chat-context candidate; a new object per
+      // render, the ui-kit provider memoizes it by id and name.
+      aiContextRoom: getAiContextRoom(selectedFolderStore),
       // The Forms section, in both its shapes: the bare Forms root, and a
       // form filling room with its In progress / Complete folders. Caps the
       // chat's attachments at one (see `attachmentLimit`).

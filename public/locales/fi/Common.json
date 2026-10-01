@@ -300,7 +300,7 @@
   "Back": "Takaisin",
   "BackToBilling": "Takaisin laskutukseen",
   "Backup": "Varmuuskopio",
-  "BackupCopiesUnit": "kopiota",
+  "BackupCopiesUnit": "Kopiota",
   "BackupCreatedSuccess": "Turvatallenteen kopio on luotu onnistuneesti.",
   "BackupDescription": "Luo varmuuskopioita suojataksesi dataasi. Varmuuskopioita voidaan luoda manuaalisesti tai automaattisesti.",
   "BackupList": "Varmuuskopiolista",

@@ -300,7 +300,7 @@
   "Back": "Volver",
   "BackToBilling": "Volver a Facturación",
   "Backup": "Copia de seguridad de datos",
-  "BackupCopiesUnit": "copias",
+  "BackupCopiesUnit": "Copias",
   "BackupCreatedSuccess": "La copia de seguridad se ha creado con éxito.",
   "BackupDescription": "Crear archivos de copia de seguridad para proteger sus datos. Las copias de seguridad se pueden crear manualmente o automáticamente.",
   "BackupList": "Lista de copias de seguridad",

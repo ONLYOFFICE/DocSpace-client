@@ -43,7 +43,7 @@
     flex-direction: column;
     gap: 4px;
     padding: 16px 20px;
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--upgrade-card-bg);
   }
 
@@ -62,16 +62,18 @@
     display: flex;
     flex-direction: column;
     padding: 18px;
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--upgrade-card-bg);
 
     &.enterprise {
       --upgrade-accent: var(--upgrade-enterprise-color);
+      --upgrade-accent-icon: var(--upgrade-enterprise-icon-color);
       --upgrade-accent-bg: var(--upgrade-enterprise-icon-bg);
     }
 
     &.developer {
       --upgrade-accent: var(--upgrade-developer-color);
+      --upgrade-accent-icon: var(--upgrade-developer-icon-color);
       --upgrade-accent-bg: var(--upgrade-developer-icon-bg);
     }
 
@@ -112,7 +114,7 @@
     width: 32px;
     height: 32px;
     border-radius: 6px;
-    color: var(--upgrade-accent);
+    color: var(--upgrade-accent-icon);
     background: var(--upgrade-accent-bg);
 
     div {
@@ -135,32 +137,7 @@
   }
 
   .note {
-    display: flex;
-    gap: 8px;
-    margin-top: 16px;
-    padding: 10px 16px 12px;
-    border-radius: 6px;
-    background: var(--upgrade-card-bg);
-  }
-
-  .noteText {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .noteIcon {
-    display: flex;
-    padding-top: 2px;
-    color: var(--upgrade-info-icon-color);
-
-    div {
-      display: flex;
-    }
-
-    svg path {
-      fill: currentColor;
-    }
+    margin: 16px 0 8px;
   }
 
   .links {

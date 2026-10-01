@@ -73,6 +73,7 @@ export const HelpLinks = ({
       target={LinkTarget.blank}
       color="accent"
       fontSize="13px"
+      fontWeight={600}
       lineHeight="20px"
       textDecoration="underline"
       dataTestId={dataTestId}
@@ -86,7 +87,12 @@ export const HelpLinks = ({
       </Text>
       <div className={styles.helpLines}>
         {forEnterprisesUrl ? (
-          <Text fontSize="13px" lineHeight="20px">
+          <Text
+            fontSize="13px"
+            fontWeight={600}
+            lineHeight="20px"
+            className={styles.description}
+          >
             <Trans
               t={t}
               ns="Common"
@@ -99,7 +105,12 @@ export const HelpLinks = ({
           </Text>
         ) : null}
         {demoOrderUrl ? (
-          <Text fontSize="13px" lineHeight="20px">
+          <Text
+            fontSize="13px"
+            fontWeight={600}
+            lineHeight="20px"
+            className={styles.description}
+          >
             <Trans
               t={t}
               ns="Common"
@@ -109,7 +120,12 @@ export const HelpLinks = ({
           </Text>
         ) : null}
         {salesEmail ? (
-          <Text fontSize="13px" lineHeight="20px">
+          <Text
+            fontSize="13px"
+            fontWeight={600}
+            lineHeight="20px"
+            className={styles.description}
+          >
             <Trans
               t={t}
               ns="Common"
@@ -125,7 +141,12 @@ export const HelpLinks = ({
           </Text>
         ) : null}
         {feedbackAndSupportUrl ? (
-          <Text fontSize="13px" lineHeight="20px">
+          <Text
+            fontSize="13px"
+            fontWeight={600}
+            lineHeight="20px"
+            className={styles.description}
+          >
             <Trans
               t={t}
               ns="Common"

@@ -116,7 +116,7 @@ export const OfficialDocumentation = ({
               <Link
                 tag="a"
                 fontSize="13px"
-                fontWeight={400}
+                fontWeight={600}
                 href={deployment.href}
                 target={LinkTarget.blank}
                 color="accent"

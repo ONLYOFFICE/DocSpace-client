@@ -34,13 +34,10 @@
  */
 
 import React from "react";
-import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 
-import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
-
-import { Text } from "@docspace/ui-kit/components/text";
 import { PaymentsStandaloneLoader } from "../../../skeletons/payments";
+import { UpgradeNote } from "../common/UpgradeNote";
 
 import { EnterpriseFeatures } from "./sub-components/EnterpriseFeatures";
 import { OfficialDocumentation } from "./sub-components/OfficialDocumentation";
@@ -76,20 +73,14 @@ export const Bonus = ({
         />
       </div>
 
-      <div className={styles.note} data-testid="bonus-upgrade-note">
-        <div className={styles.noteHeader}>
-          <ReactSVG src={InfoOutlineReactSvgUrl} className={styles.noteIcon} />
-          <Text fontSize="13px" fontWeight={600} lineHeight="20px">
-            {t("Common:UpgradeBeforeYouUpgrade")}
-          </Text>
-        </div>
-        <Text fontSize="12px" lineHeight="16px">
-          {t("Common:UpgradeNoteWithBackupRecommendation", {
-            note: t("Common:UpgradeEditorsUnavailableNote"),
-            backup: t("Common:UpgradeBackupRecommendation"),
-          })}
-        </Text>
-      </div>
+      <UpgradeNote
+        title={t("Common:UpgradeBeforeYouUpgrade")}
+        text={t("Common:UpgradeNoteWithBackupRecommendation", {
+          note: t("Common:UpgradeEditorsUnavailableNote"),
+          backup: t("Common:UpgradeBackupRecommendation"),
+        })}
+        dataTestId="bonus-upgrade-note"
+      />
 
       <HelpLinks
         organizationName={logoText}

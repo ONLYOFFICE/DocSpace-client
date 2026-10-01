@@ -2342,8 +2342,10 @@
   --payment-benefits-icons-color: #{$light-gray-dark};
   --upgrade-enterprise-color: #{$light-second-main};
   --upgrade-developer-color: #{$second-purple};
-  --upgrade-enterprise-icon-bg: #{rgba($light-second-main, 0.1)};
-  --upgrade-developer-icon-bg: #{rgba($second-purple, 0.1)};
+  --upgrade-enterprise-icon-color: #{$light-blue-main};
+  --upgrade-developer-icon-color: #{$purple};
+  --upgrade-enterprise-icon-bg: #{rgba($light-blue-main, 0.1)};
+  --upgrade-developer-icon-bg: #{rgba($purple, 0.1)};
   --upgrade-button-text-color: #{$white};
   --upgrade-card-bg: #{$gray-light};
   --upgrade-trial-card-bg: #{$white};
@@ -2370,6 +2372,8 @@
   --payment-benefits-icons-color: #{$dark-gray-dark};
   --upgrade-enterprise-color: #{$light-second-main};
   --upgrade-developer-color: #{$second-purple};
+  --upgrade-enterprise-icon-color: #{$light-second-main};
+  --upgrade-developer-icon-color: #{$second-purple};
   --upgrade-enterprise-icon-bg: #{rgba($light-second-main, 0.2)};
   --upgrade-developer-icon-bg: #{rgba($second-purple, 0.2)};
   --upgrade-button-text-color: #{$white};

@@ -45,7 +45,6 @@ import TechSupportReactSvgUrl from "PUBLIC_DIR/images/icons/16/upgrade.tech-supp
 import WhiteLabelingReactSvgUrl from "PUBLIC_DIR/images/icons/16/upgrade.white-labeling.react.svg?url";
 import AutomationApiReactSvgUrl from "PUBLIC_DIR/images/icons/16/upgrade.automation-api.react.svg?url";
 import ApiIntegrationReactSvgUrl from "PUBLIC_DIR/images/icons/16/upgrade.api-integration.react.svg?url";
-import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import {
   ModalDialog,
@@ -60,6 +59,7 @@ import {
   type TEnterpriseFeatureId,
   useEnterpriseFeatures,
 } from "../../pages/Payments/common/useEnterpriseFeatures";
+import { UpgradeNote } from "../../pages/Payments/common/UpgradeNote";
 
 import type { UpgradePathDialogProps } from "./UpgradePathDialog.types";
 import styles from "./UpgradePathDialog.module.scss";
@@ -246,17 +246,11 @@ export const UpgradePathDialog = ({
           ))}
         </div>
 
-        <div className={styles.note}>
-          <ReactSVG src={InfoOutlineReactSvgUrl} className={styles.noteIcon} />
-          <div className={styles.noteText}>
-            <Text fontSize="13px" fontWeight={600} lineHeight="20px">
-              {t("Common:UpgradeEditorsUnavailableNote")}
-            </Text>
-            <Text fontSize="12px" lineHeight="16px">
-              {t("Common:UpgradeBackupRecommendation")}
-            </Text>
-          </div>
-        </div>
+        <UpgradeNote
+          title={t("Common:UpgradeEditorsUnavailableNote")}
+          text={t("Common:UpgradeBackupRecommendation")}
+          className={styles.note}
+        />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <div className={styles.links}>

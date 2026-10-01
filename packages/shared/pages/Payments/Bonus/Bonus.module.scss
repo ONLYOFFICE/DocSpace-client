@@ -57,7 +57,7 @@
 
   .featuresCard {
     padding: 18px;
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--upgrade-card-bg);
   }
 
@@ -105,8 +105,8 @@
   .trialCard {
     display: flex;
     flex-direction: column;
-    padding: 17px 17px 23px;
-    border-radius: 6px;
+    padding: 18px 18px 24px;
+    border-radius: 8px;
     border: var(--upgrade-trial-card-border);
     background: var(--upgrade-trial-card-bg);
   }
@@ -156,34 +156,6 @@
     }
 
     @include mixins.flip-in-rtl;
-  }
-
-  .note {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 10px 16px 12px;
-    border-radius: 6px;
-    background: var(--upgrade-card-bg);
-  }
-
-  .noteHeader {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .noteIcon {
-    display: flex;
-    color: var(--upgrade-info-icon-color);
-
-    div {
-      display: flex;
-    }
-
-    svg path {
-      fill: currentColor;
-    }
   }
 
   .help {

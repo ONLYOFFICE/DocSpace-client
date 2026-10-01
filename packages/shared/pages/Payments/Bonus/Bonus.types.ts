@@ -34,13 +34,8 @@
  */
 
 export interface IBonusProps {
-  isEnterprise: boolean;
-  isTrial: boolean;
-  isDeveloper: boolean;
-  isCommunity: boolean;
   feedbackAndSupportUrl: string;
   salesEmail: string;
-  dataBackupUrl: string;
   logoText: string;
   enterpriseInstallScriptUrl: string;
   enterpriseInstallWindowsUrl: string;

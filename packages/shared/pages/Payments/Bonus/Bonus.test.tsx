@@ -1,47 +1,81 @@
 import React from "react";
 import { describe, it, expect } from "vitest";
 import { screen, render } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
 import { Bonus } from "./index";
 
 const defaultProps = {
-  isEnterprise: false,
-  isTrial: false,
-  isDeveloper: false,
-  isCommunity: false,
   salesEmail: "sales@example.com",
-  dataBackupUrl: "https://example.com/backup",
   logoText: "DocSpace",
   enterpriseInstallScriptUrl: "https://example.com/script",
   enterpriseInstallWindowsUrl: "https://example.com/windows",
   forEnterprisesUrl: "https://example.com/enterprise",
   demoOrderUrl: "https://example.com/demo",
-  feedbackAndSupportUrl: "https://example.com/support",
+  feedbackAndSupportUrl: "https://helpdesk.example.com/support",
 };
 
 describe("Bonus", () => {
-  it("renders without errors", () => {
+  it("renders every block of the upgrade page", () => {
     render(<Bonus {...defaultProps} />);
+
     expect(screen.getByTestId("bonus")).toBeInTheDocument();
+    expect(screen.getByTestId("bonus-features")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("bonus-official-documentation"),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("bonus-upgrade-note")).toBeInTheDocument();
+    expect(screen.getByTestId("bonus-help")).toBeInTheDocument();
   });
 
-  it("displays community specific content", () => {
-    render(<Bonus {...defaultProps} isCommunity />);
+  it("lists the four enterprise features", () => {
+    render(<Bonus {...defaultProps} />);
+
+    expect(screen.getByText("Common:UpgradeAIToolsTitle")).toBeInTheDocument();
     expect(
-      screen.getByTestId("community-contact-container"),
+      screen.getByText("Common:UpgradeMobileEditingTitle"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Common:UpgradeScalabilityTitle"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Common:UpgradeTechSupportTitle"),
     ).toBeInTheDocument();
   });
 
-  it("handles click on documentation links", async () => {
-    const user = userEvent.setup();
+  it("hides help lines that have no address", () => {
+    render(
+      <Bonus
+        {...defaultProps}
+        salesEmail=""
+        forEnterprisesUrl=""
+        demoOrderUrl=""
+        feedbackAndSupportUrl=""
+      />,
+    );
+
+    expect(
+      screen.queryByTestId("for_enterprise_license_link"),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByTestId("demo_order_link")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("upgrade_to_pro_banner_purchase_link"),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("upgrade_to_pro_banner_support_link"),
+    ).not.toBeInTheDocument();
+  });
+
+  it("points each deployment instruction at its documentation", () => {
     render(<Bonus {...defaultProps} />);
 
-    const links = screen.getAllByRole("link");
-
-    if (links.length > 0) {
-      await user.click(links[0]);
-      expect(links[0]).toHaveAttribute("href");
-    }
+    expect(
+      screen.getByTestId("enterprise_install_script_docker_link"),
+    ).toHaveAttribute("href", defaultProps.enterpriseInstallScriptUrl);
+    expect(
+      screen.getByTestId("enterprise_install_script_linux_link"),
+    ).toHaveAttribute("href", defaultProps.enterpriseInstallScriptUrl);
+    expect(
+      screen.getByTestId("enterprise_install_script_windows_link"),
+    ).toHaveAttribute("href", defaultProps.enterpriseInstallWindowsUrl);
   });
 });

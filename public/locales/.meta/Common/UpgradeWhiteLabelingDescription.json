@@ -1,20 +1,20 @@
 {
-  "key_path": "UpgradeToProBannerInstructionHeader",
-  "content": "To access pro features, start free 30-day trial of {{organizationName}} {{license}} Edition.",
-  "content_en_sha1_hash": "c9c8467806b03bc93d6fcbf359d6ef48678ee2b7",
-  "created_at": "2025-05-26T07:15:49.175Z",
-  "updated_at": "2026-05-15T14:00:06.954Z",
+  "key_path": "UpgradeWhiteLabelingDescription",
+  "content": "Customize the editors with your own branding to match your product.",
+  "content_en_sha1_hash": "352e2432ab0651a2f620517001194f13548d90c8",
+  "created_at": "2026-09-29T10:10:21.304Z",
+  "updated_at": "2026-10-01T11:07:26.070Z",
   "comment": {
-    "text": "This is a header for a banner that encourages users to upgrade to a Pro edition. It appears when a user tries to access a Pro feature and includes variables for the organization's name (`{{organizationName}}`) and the specific license edition (`{{license}}`).",
+    "text": "Description text within an upgrade path dialog explaining the white-labeling feature.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:40:00.369Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-10-01T11:07:26.070Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Bonus/index.tsx",
-      "line_number": 75,
-      "context": "isTrial={isTrial}\n isEnterprise={isEnterprise}\n isDeveloper={isDeveloper}\n />\n <Text fontWeight={600}>\n {t(\"UpgradeToProBannerInstructionHeader\", {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n })}\n </Text>\n <Text>{t(\"UpgradeToProBannerInstructionDescr\")}</Text>",
+      "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
+      "line_number": 140,
+      "context": "},\n {\n id: \"whiteLabeling\",\n icon: WhiteLabelingReactSvgUrl,\n title: t(\"Common:UpgradeWhiteLabelingTitle\"),\n description: t(\"Common:UpgradeWhiteLabelingDescription\"),\n },\n {\n id: \"automationApi\",\n icon: AutomationApiReactSvgUrl,\n title: t(\"Common:UpgradeAutomationApiTitle\"),",
       "module": "/packages/shared"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

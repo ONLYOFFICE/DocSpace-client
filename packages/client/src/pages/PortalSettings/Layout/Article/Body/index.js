@@ -232,10 +232,10 @@ const ArticleBodyContent = (props) => {
         return t("Common:RestoreBackup");
       case "PortalDeletion":
         return t("PortalDeletion");
-      case "Common:Bonus":
-        return t("Common:Bonus");
-      case "Common:FreeAccessToLicensedVersion":
-        return "Common:FreeAccessToLicensedVersion";
+      case "Common:Upgrade":
+        return t("Common:Upgrade");
+      case "Common:UpgradePageTitle":
+        return "Common:UpgradePageTitle";
       case "DataImport":
         return t("DataImport");
       case "StorageManagement":
@@ -273,7 +273,7 @@ const ArticleBodyContent = (props) => {
     if (standalone) {
       const deletionTKey = isCommunity
         ? ["Common:PaymentsTitle", "Services"]
-        : ["Common:Bonus", "Services"];
+        : ["Common:Upgrade", "Services"];
 
       deletionTKey.forEach((key) => {
         const index = resultTree.findIndex((el) => el.tKey === key);
@@ -282,7 +282,7 @@ const ArticleBodyContent = (props) => {
         }
       });
     } else {
-      const index = resultTree.findIndex((n) => n.tKey === "Common:Bonus");
+      const index = resultTree.findIndex((n) => n.tKey === "Common:Upgrade");
       if (index !== -1) {
         resultTree.splice(index, 1);
       }

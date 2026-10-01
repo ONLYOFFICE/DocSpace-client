@@ -21,6 +21,7 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
 COPY common/ ./common/
+COPY packages/client/*.tgz ./packages/client/
 COPY packages/management/ ./packages/management/
 COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/

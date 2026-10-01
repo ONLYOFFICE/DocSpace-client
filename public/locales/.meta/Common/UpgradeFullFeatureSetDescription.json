@@ -3,11 +3,12 @@
   "content": "Includes AI tools, mobile editing, scalability and clustering, and tech support.",
   "content_en_sha1_hash": "f250e7409a767fac3d13ddec6897088d1f1b0e57",
   "created_at": "2026-09-29T10:10:19.535Z",
-  "updated_at": "2026-10-01T10:04:25.322Z",
+  "updated_at": "2026-10-01T11:46:08.032Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text in an upgrade path dialog listing the features included in the full feature set option.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:46:08.032Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

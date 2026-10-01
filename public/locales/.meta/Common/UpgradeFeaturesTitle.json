@@ -3,11 +3,12 @@
   "content": "{{license}} features",
   "content_en_sha1_hash": "248fef45f30d9ced406d66201556499f73196797",
   "created_at": "2026-09-29T10:10:19.494Z",
-  "updated_at": "2026-10-01T10:04:25.383Z",
+  "updated_at": "2026-10-01T11:47:39.507Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Heading in a feature card indicating which features are included in a specific plan; {{license}} represents the name of the license type.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:47:39.507Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

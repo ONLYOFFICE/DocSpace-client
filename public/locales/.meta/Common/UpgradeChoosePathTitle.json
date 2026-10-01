@@ -3,11 +3,12 @@
   "content": "Choose your upgrade path",
   "content_en_sha1_hash": "f87819595fd4d468a8c9f52d465a1cbb5605f36e",
   "created_at": "2026-09-29T10:10:19.244Z",
-  "updated_at": "2026-10-01T10:04:25.335Z",
+  "updated_at": "2026-10-01T11:53:59.434Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Dialog title for the upgrade path selection modal.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:53:59.434Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

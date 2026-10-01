@@ -3,11 +3,12 @@
   "content": "Pick the one that fits how you work.",
   "content_en_sha1_hash": "827da7a104c79e6e3a5d7cd12b2e909335a01595",
   "created_at": "2026-09-29T10:10:20.079Z",
-  "updated_at": "2026-10-01T10:04:25.337Z",
+  "updated_at": "2026-10-01T11:17:19.091Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional sub-text in the upgrade path dialog that guides the user to select an upgrade option.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:17:19.091Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

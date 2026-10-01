@@ -3,11 +3,12 @@
   "content": "For businesses that want to customize and embed the editors into their own product",
   "content_en_sha1_hash": "bc00061524e767b465233a2ff09b1b5b69732e5e",
   "created_at": "2026-09-29T10:10:19.303Z",
-  "updated_at": "2026-10-01T10:04:25.320Z",
+  "updated_at": "2026-10-01T11:52:34.006Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text in an upgrade path dialog explaining the purpose of the developer upgrade tier.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:52:34.006Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

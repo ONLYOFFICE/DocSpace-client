@@ -3,11 +3,12 @@
   "content": "To start your free 30-day trial of {{organizationName}} {{license}}, use the official documentation:",
   "content_en_sha1_hash": "3c463d41edb519da6b90a128af2cdbeb2c9f709f",
   "created_at": "2026-09-29T10:10:21.254Z",
-  "updated_at": "2026-09-29T10:21:08.502Z",
+  "updated_at": "2026-10-01T11:08:13.168Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional title within a trial card providing steps to begin a trial; contains variables for the organization name and license type.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:08:13.168Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

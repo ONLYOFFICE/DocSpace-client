@@ -3,11 +3,12 @@
   "content": "For businesses that want to embed editors into the platform they use",
   "content_en_sha1_hash": "975aba85e1045ddef7f8fd8c41e62401c2d1a13f",
   "created_at": "2026-09-29T10:10:19.452Z",
-  "updated_at": "2026-10-01T10:04:25.319Z",
+  "updated_at": "2026-10-01T11:49:00.946Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text in the upgrade path dialog explaining the specific use case for the Enterprise plan.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:49:00.946Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

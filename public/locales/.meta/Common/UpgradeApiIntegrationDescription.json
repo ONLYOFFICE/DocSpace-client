@@ -3,11 +3,12 @@
   "content": "Embed the editors directly into your own product or workflow.",
   "content_en_sha1_hash": "b2c24f7777798d30ab200d98c89d863695ec80a2",
   "created_at": "2026-09-29T10:10:18.792Z",
-  "updated_at": "2026-10-01T10:04:25.329Z",
+  "updated_at": "2026-10-01T12:00:56.545Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text in an upgrade path dialog explaining the benefit of the API integration feature.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T12:00:56.545Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

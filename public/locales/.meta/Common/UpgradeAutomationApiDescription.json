@@ -3,11 +3,12 @@
   "content": "Interact with docs, sheets, slides, and forms from the outside.",
   "content_en_sha1_hash": "e3277b9bce3286b4983dbce99d3e49c12350154f",
   "created_at": "2026-09-29T10:10:18.937Z",
-  "updated_at": "2026-10-01T10:04:25.327Z",
+  "updated_at": "2026-10-01T11:59:29.625Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text for an item in the upgrade path dialog, explaining the external interaction capabilities of the Automation API.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:59:29.625Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "{{note}} {{backup}}",
   "content_en_sha1_hash": "1854e893d0ddd7f1882f40b465049e5ad64bd2c2",
   "created_at": "2026-10-01T10:03:58.386Z",
-  "updated_at": "2026-10-01T10:04:25.382Z",
+  "updated_at": "2026-10-01T11:18:46.752Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Informational text displayed during an upgrade process, combining a warning about editor unavailability ({{note}}) and a recommendation to back up data ({{backup}}).",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:18:46.752Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

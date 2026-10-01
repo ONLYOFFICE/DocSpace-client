@@ -3,11 +3,12 @@
   "content": "Before you upgrade",
   "content_en_sha1_hash": "2162d3262b8841e5b24a3fe24e2c2ed7c8dfdf03",
   "created_at": "2026-09-29T10:10:19.083Z",
-  "updated_at": "2026-10-01T10:04:25.381Z",
+  "updated_at": "2026-10-01T11:57:30.664Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Header for an informational note in the bonus section, introducing a recommendation about upgrading.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:57:30.664Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Learn more and get help",
   "content_en_sha1_hash": "8c34d064c198ff13b2e424a4894721d8a5e15f80",
   "created_at": "2026-09-29T10:10:19.764Z",
-  "updated_at": "2026-10-01T10:04:25.384Z",
+  "updated_at": "2026-10-01T11:33:35.680Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Heading for a help section in the payments bonus area that introduces links for additional information and support.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:33:35.680Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

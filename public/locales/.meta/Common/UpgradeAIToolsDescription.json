@@ -3,11 +3,12 @@
   "content": "Summarize documents, generate and refine text, translate content, and get smart writing assistance built right into your docs, sheets, slides, and PDFs.",
   "content_en_sha1_hash": "7f054cb79acf036dd11c2e9f81ced9fab31a795f",
   "created_at": "2026-09-29T10:10:18.636Z",
-  "updated_at": "2026-10-01T10:04:25.401Z",
+  "updated_at": "2026-10-01T12:02:32.038Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Feature description in a list of upgrade benefits, detailing the capabilities of the AI tools available within the editors.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T12:02:32.038Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

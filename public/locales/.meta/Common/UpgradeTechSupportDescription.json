@@ -3,11 +3,12 @@
   "content": "Get quick, professional help for any issue you run into.",
   "content_en_sha1_hash": "bb8b2f835470b22664e80833b23e820f45ebf738",
   "created_at": "2026-09-29T10:10:20.473Z",
-  "updated_at": "2026-10-01T10:04:25.406Z",
+  "updated_at": "2026-10-01T11:09:46.848Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subtext for a feature item in an upgrade banner, describing the technical support benefit included in a premium plan.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:09:46.848Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

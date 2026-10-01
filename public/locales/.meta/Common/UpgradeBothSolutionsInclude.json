@@ -3,11 +3,12 @@
   "content": "Both solutions include AI tools, mobile editing, scalability and clustering, and tech support.",
   "content_en_sha1_hash": "809bb2fd22b5afffe92e0983774b1defdbd20c7e",
   "created_at": "2026-09-29T10:10:19.142Z",
-  "updated_at": "2026-10-01T10:04:25.336Z",
+  "updated_at": "2026-10-01T11:56:54.225Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Bold summary text in the upgrade path dialog that lists features shared by both upgrade options.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:56:54.225Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

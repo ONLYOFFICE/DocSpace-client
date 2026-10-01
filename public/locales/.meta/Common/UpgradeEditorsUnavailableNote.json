@@ -3,11 +3,12 @@
   "content": "Please note that the editors will be unavailable during the upgrade.",
   "content_en_sha1_hash": "61ae58fa11d9c5727c2b2b396abd41b3fdde33cc",
   "created_at": "2026-09-29T10:10:19.399Z",
-  "updated_at": "2026-10-01T10:04:25.339Z",
+  "updated_at": "2026-10-01T11:50:35.299Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Informational note in an upgrade dialog or a variable within a larger warning message, notifying users of editor unavailability during the upgrade process.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:50:35.299Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

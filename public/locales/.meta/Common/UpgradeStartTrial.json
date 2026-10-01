@@ -3,11 +3,12 @@
   "content": "Start 30-day free trial",
   "content_en_sha1_hash": "c2622b498e2fdf12d1d1462f492f27f2e6ce7a01",
   "created_at": "2026-09-29T10:10:20.378Z",
-  "updated_at": "2026-10-01T10:04:25.338Z",
+  "updated_at": "2026-10-01T11:11:14.368Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label in the upgrade path dialog used to initiate a 30-day trial.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:11:14.368Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

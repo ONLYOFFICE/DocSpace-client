@@ -3,11 +3,12 @@
   "content": "Tech support",
   "content_en_sha1_hash": "68be2ea5f3c15941f9e84ffcd43c50893bca889e",
   "created_at": "2026-09-29T10:10:20.511Z",
-  "updated_at": "2026-10-01T10:04:25.405Z",
+  "updated_at": "2026-10-01T11:09:03.260Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Title for a feature item in an upgrade list, representing the availability of technical assistance.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:09:03.260Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

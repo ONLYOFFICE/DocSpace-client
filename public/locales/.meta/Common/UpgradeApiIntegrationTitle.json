@@ -3,11 +3,12 @@
   "content": "API integration",
   "content_en_sha1_hash": "ecca1612ee365cbe3a53d9339ea2ebf1c030f8a0",
   "created_at": "2026-09-29T10:10:18.844Z",
-  "updated_at": "2026-10-01T10:04:25.328Z",
+  "updated_at": "2026-10-01T12:00:30.845Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Title of a feature item within the upgrade path dialog, identifying the API integration option.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T12:00:30.845Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

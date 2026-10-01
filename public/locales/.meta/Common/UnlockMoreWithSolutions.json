@@ -3,11 +3,12 @@
   "content": "Unlock more with <1>{{enterprise}} or {{developer}}</1> solutions.",
   "content_en_sha1_hash": "f73f8cc3b2ce22b9af47ba9e5891e4b9f81418ac",
   "created_at": "2026-09-29T10:10:18.016Z",
-  "updated_at": "2026-10-01T10:04:24.680Z",
+  "updated_at": "2026-10-01T12:03:12.785Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subline text in the UpgradePathLine component on the Dashboard that promotes upgrading to different license types. The variables {{enterprise}} and {{developer}} represent specific license names.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T12:03:12.785Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

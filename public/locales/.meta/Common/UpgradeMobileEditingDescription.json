@@ -3,11 +3,12 @@
   "content": "Edit docs, sheets, slides, PDFs right from your mobile browser, no app required.",
   "content_en_sha1_hash": "ae97de0b3126bed8f9ca010f499b0c3e1113b1c0",
   "created_at": "2026-09-29T10:10:19.871Z",
-  "updated_at": "2026-10-01T10:04:25.403Z",
+  "updated_at": "2026-10-01T11:21:49.374Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text in a feature list or comparison table for upgraded plans, detailing the ability to edit files via a mobile browser.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:21:49.374Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

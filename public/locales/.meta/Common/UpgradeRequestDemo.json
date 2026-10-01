@@ -3,11 +3,12 @@
   "content": "Request a free demo <1>here</1>",
   "content_en_sha1_hash": "5c9bfa11b4753ab3e9a1fa4540dfd7f2d52fbe92",
   "created_at": "2026-09-29T10:10:20.183Z",
-  "updated_at": "2026-10-01T10:04:25.386Z",
+  "updated_at": "2026-10-01T11:16:37.199Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "A text link in the help section that directs users to a demo request page, where the <1> tag represents the clickable hyperlink.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:16:37.199Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

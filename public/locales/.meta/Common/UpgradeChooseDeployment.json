@@ -3,11 +3,12 @@
   "content": "Choose your deployment:",
   "content_en_sha1_hash": "d122976d13c63f3e09514f088b588d2f2b970f9d",
   "created_at": "2026-09-29T10:10:19.190Z",
-  "updated_at": "2026-09-29T10:21:08.504Z",
+  "updated_at": "2026-10-01T11:55:53.041Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional label preceding a list of deployment options in the upgrade section.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:55:53.041Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

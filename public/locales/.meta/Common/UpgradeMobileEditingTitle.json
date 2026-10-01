@@ -3,11 +3,12 @@
   "content": "Mobile editing",
   "content_en_sha1_hash": "a938f0034a0e8c2dfc1a961aa60dfe8b8b5ba0ca",
   "created_at": "2026-09-29T10:10:19.926Z",
-  "updated_at": "2026-10-01T10:04:25.402Z",
+  "updated_at": "2026-10-01T11:19:25.228Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Title of a feature item in the upgrade list, representing the capability to edit documents on mobile devices.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:19:25.228Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

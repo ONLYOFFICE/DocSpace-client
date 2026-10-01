@@ -3,11 +3,12 @@
   "content": "Get tech assistance",
   "content_en_sha1_hash": "cf44d37289ba92cdae6d9dcc4f2494d12ebc7d69",
   "created_at": "2026-09-29T10:10:19.673Z",
-  "updated_at": "2026-10-01T10:04:25.332Z",
+  "updated_at": "2026-10-01T11:40:45.333Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Link label in the upgrade path dialog that directs users to technical support.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:40:45.333Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "{{productName}} {{license}}",
   "content_en_sha1_hash": "5f2ac6145d0c5ae530cb791e63f3e38e124db540",
   "created_at": "2026-09-29T10:10:20.334Z",
-  "updated_at": "2026-10-01T10:04:25.318Z",
+  "updated_at": "2026-10-01T11:12:05.467Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an upgrade solution option in the upgrade path dialog, combining the product name and the specific license type.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:12:05.467Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

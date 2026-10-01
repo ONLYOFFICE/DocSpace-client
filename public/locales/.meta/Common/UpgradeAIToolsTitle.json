@@ -3,11 +3,12 @@
   "content": "AI tools",
   "content_en_sha1_hash": "cd70703df30d4109edda0871e0b7813e5022ed5b",
   "created_at": "2026-09-29T10:10:18.692Z",
-  "updated_at": "2026-10-01T10:04:25.400Z",
+  "updated_at": "2026-10-01T12:02:04.521Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Title for a feature item in a list of enterprise upgrade options, serving as a short label for AI-powered functionality.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T12:02:04.521Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Customize the editors with your own branding to match your product.",
   "content_en_sha1_hash": "352e2432ab0651a2f620517001194f13548d90c8",
   "created_at": "2026-09-29T10:10:21.304Z",
-  "updated_at": "2026-10-01T10:04:25.325Z",
+  "updated_at": "2026-10-01T11:07:26.070Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text within an upgrade path dialog explaining the white-labeling feature.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T11:07:26.070Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

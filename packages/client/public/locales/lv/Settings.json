@@ -250,6 +250,7 @@
   "QuotasDescription": "Iestatiet krātuves ierobežojumus lietotājiem un telpām.",
   "Recalculate": "Pārrēķināt",
   "RegisterApp": "Reģistrēt lietotni",
+  "ReportFormatDescription": "Ja notikumu ir pārāk daudz, XLSX atskaitē tiek saglabāti tikai jaunākie no tiem. Izvēlieties CSV, lai eksportētu visus notikumus.",
   "ResetTemplateDescription": "Vai esat pārliecināti, ka vēlaties atiestatīt pašreizējo šablonu uz sākotnējā stāvokļa?\nŠo darbību nevarēs atcelt.",
   "ResetToDefault": "Atgriezties par défaut",
   "RestAPI": "REST API",

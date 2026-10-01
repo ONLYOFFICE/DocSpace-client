@@ -235,7 +235,8 @@ const HistoryMainContent = (props) => {
           isDisabled={isSettingNotPaid || isLoadingDownloadReport}
         />
         <span className="download-report_description">
-          {downloadReportDescription}
+          <span>{downloadReportDescription}</span>
+          <span>{t("Settings:ReportFormatDescription")}</span>
         </span>
       </div>
     </div>

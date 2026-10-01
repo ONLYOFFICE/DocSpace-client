@@ -250,6 +250,7 @@
   "QuotasDescription": "Caktoni kufijtë e ruajtjes për përdoruesit dhe dhomat.",
   "Recalculate": "Rillogaritni",
   "RegisterApp": "Regjistro aplikacionin",
+  "ReportFormatDescription": "Kur ngjarjet janë shumë, një raport XLSX ruan vetëm më të fundit. Zgjidhni CSV për të eksportuar të gjitha ngjarjet.",
   "ResetTemplateDescription": "Jeni të sigurt se dëshironi të ktheni gjendjen aktuale të boshit në gjendjen e saj parazgjedhur?\nNuk do të mund ta anuloni këtë veprim.",
   "ResetToDefault": "Rikthe në parazohë",
   "RestAPI": "REST API",

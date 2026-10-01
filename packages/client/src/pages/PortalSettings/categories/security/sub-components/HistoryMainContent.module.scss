@@ -146,11 +146,12 @@
   }
 
   :global(.download-report_description) {
+    display: flex;
+    flex-direction: column;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
-    height: 16px;
     margin: 0;
     color: var(--security-side-color);
   }

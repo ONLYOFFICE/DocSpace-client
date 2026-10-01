@@ -1,21 +1,21 @@
 {
-  "key_path": "FreeAccessToLicensedVersion",
-  "content": "Free access to {{license}} solution",
-  "content_en_sha1_hash": "67e196ff367f561eecc1cb56cec37845211b879f",
-  "created_at": "2025-05-19T21:30:45.567Z",
-  "updated_at": "2026-07-27T13:07:50.837Z",
+  "key_path": "UpgradeLearnMoreTitle",
+  "content": "Learn more and get help",
+  "content_en_sha1_hash": "8c34d064c198ff13b2e424a4894721d8a5e15f80",
+  "created_at": "2026-09-29T10:10:19.764Z",
+  "updated_at": "2026-10-01T11:33:35.680Z",
   "comment": {
-    "text": "This is a menu item label in the portal settings. It indicates a section offering free access to a specific ONLYOFFICE solution, where `{{license}}` will be replaced by the name of that solution (e.g., \"DocSpace Enterprise\").",
+    "text": "Heading for a help section in the payments bonus area that introduces links for additional information and support.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:51:55.720Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-10-01T11:33:35.680Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 662,
-      "context": "{\n id: \"portal-settings_catalog-portal-bonus\",\n key: \"11-0\",\n icon: \"\",\n link: \"\",\n tKey: \"Common:FreeAccessToLicensedVersion\",\n isCategory: true,\n },\n ],\n },\n ];",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/HelpLinks.tsx",
+      "line_number": 85,
+      "context": ");\n \n return (\n <div className={styles.help} data-testid=\"bonus-help\">\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Common:UpgradeLearnMoreTitle\")}\n </Text>\n <div className={styles.helpLines}>\n {forEnterprisesUrl ? (\n <Text fontSize=\"13px\" lineHeight=\"20px\">\n <Trans",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

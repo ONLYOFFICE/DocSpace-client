@@ -1,20 +1,20 @@
 {
-  "key_path": "UpgradeToProBannerInstructionNote",
-  "content": "Please note that the editors will be unavailable during the upgrade. We also recommend to <1>backup your data</1> before you start.",
-  "content_en_sha1_hash": "6254435f524d28160ed4c7af92aa2d841ada3ca0",
-  "created_at": "2025-05-26T07:15:49.220Z",
-  "updated_at": "2026-05-15T14:00:06.954Z",
+  "key_path": "UpgradeLearnMoreAbout",
+  "content": "Learn more about {{organizationName}} {{license}} <1>official website</1>",
+  "content_en_sha1_hash": "a06fbb3788ef7c377e549f69c160f17aaaf7d035",
+  "created_at": "2026-09-29T10:10:19.723Z",
+  "updated_at": "2026-10-01T11:39:01.503Z",
   "comment": {
-    "text": "This is an instructional note displayed in a banner, informing users about the implications of upgrading to a Pro plan. It advises them that editors will be unavailable and suggests backing up data before starting the upgrade process. The `<1>backup your data</1>` tag indicates a clickable link within the sentence.",
+    "text": "A text link in the help section directing users to the official website. It includes variables for the organization name and license type, with the tagged part functioning as a hyperlink.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:39:55.753Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-10-01T11:39:01.503Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/OfficialDocumentation.tsx",
-      "line_number": 106,
-      "context": "</Link>\n </Text>\n </div>\n \n <Text className={styles.upgradeInfo}>\n <Trans i18nKey=\"UpgradeToProBannerInstructionNote\" ns=\"Common\" t={t}>\n Please note that the editors will be unavailable during the upgrade.\n We also recommend to\n <Link\n tag=\"a\"\n fontWeight=\"600\"",
+      "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/HelpLinks.tsx",
+      "line_number": 93,
+      "context": "{forEnterprisesUrl ? (\n <Text fontSize=\"13px\" lineHeight=\"20px\">\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"UpgradeLearnMoreAbout\"\n values={{ organizationName, license }}\n components={{\n 1: renderLink(forEnterprisesUrl, \"for_enterprise_license_link\"),\n }}\n />",
       "module": "/packages/shared"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

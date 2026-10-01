@@ -42,6 +42,29 @@ describe("Bonus", () => {
     ).toBeInTheDocument();
   });
 
+  it("hides help lines that have no address", () => {
+    render(
+      <Bonus
+        {...defaultProps}
+        salesEmail=""
+        forEnterprisesUrl=""
+        demoOrderUrl=""
+        feedbackAndSupportUrl=""
+      />,
+    );
+
+    expect(
+      screen.queryByTestId("for_enterprise_license_link"),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByTestId("demo_order_link")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("upgrade_to_pro_banner_purchase_link"),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("upgrade_to_pro_banner_support_link"),
+    ).not.toBeInTheDocument();
+  });
+
   it("points each deployment instruction at its documentation", () => {
     render(<Bonus {...defaultProps} />);
 

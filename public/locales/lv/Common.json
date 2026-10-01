@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Linux instrukcijas",
   "UpgradeMobileEditingDescription": "Rediģējiet dokumentus, izklājlapas, slaidus un PDF failus tieši mobilajā pārlūkprogrammā, lietotne nav nepieciešama.",
   "UpgradeMobileEditingTitle": "Rediģēšana mobilajās ierīcēs",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Uzlabot tagad",
   "UpgradePageTitle": "Bezmaksas piekļuve {{organizationName}} {{license}} versijai",
   "UpgradePickSolution": "Izvēlieties to, kas vislabāk atbilst jūsu darba stilam.",

@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Udhëzimet për Linux",
   "UpgradeMobileEditingDescription": "Redaktoni dokumente, fletë, rrëshqitje dhe PDF drejtpërdrejt nga shfletuesi juaj celular, pa pasur nevojë për aplikacion.",
   "UpgradeMobileEditingTitle": "Redaktimi celular",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Përmirëso tani",
   "UpgradePageTitle": "Akses falas në {{organizationName}} {{license}}",
   "UpgradePickSolution": "Zgjidhni atë që i përshtatet mënyrës si punoni.",

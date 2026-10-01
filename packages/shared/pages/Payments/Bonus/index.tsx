@@ -84,8 +84,10 @@ export const Bonus = ({
           </Text>
         </div>
         <Text fontSize="12px" lineHeight="16px">
-          {t("Common:UpgradeEditorsUnavailableNote")}{" "}
-          {t("Common:UpgradeBackupRecommendation")}
+          {t("Common:UpgradeNoteWithBackupRecommendation", {
+            note: t("Common:UpgradeEditorsUnavailableNote"),
+            backup: t("Common:UpgradeBackupRecommendation"),
+          })}
         </Text>
       </div>
 

@@ -3,7 +3,7 @@
   "content": "Summarize documents, generate and refine text, translate content, and get smart writing assistance built right into your docs, sheets, slides, and PDFs.",
   "content_en_sha1_hash": "7f054cb79acf036dd11c2e9f81ced9fab31a795f",
   "created_at": "2026-09-29T10:10:18.636Z",
-  "updated_at": "2026-09-29T10:21:08.419Z",
+  "updated_at": "2026-10-01T10:04:25.401Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -11,15 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
-      "line_number": 105,
-      "context": "onStartTrial: onStartEnterpriseTrial,\n features: [\n {\n icon: AIReactSvgUrl,\n title: t(\"Common:UpgradeAIToolsTitle\"),\n description: t(\"Common:UpgradeAIToolsDescription\"),\n },\n {\n icon: MobileEditingReactSvgUrl,\n title: t(\"Common:UpgradeMobileEditingTitle\"),\n description: t(\"Common:UpgradeMobileEditingDescription\"),",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/EnterpriseFeatures.tsx",
-      "line_number": 56,
-      "context": "const features = [\n {\n icon: AIReactSvgUrl,\n title: t(\"Common:UpgradeAIToolsTitle\"),\n description: t(\"Common:UpgradeAIToolsDescription\"),\n },\n {\n icon: MobileEditingReactSvgUrl,\n title: t(\"Common:UpgradeMobileEditingTitle\"),\n description: t(\"Common:UpgradeMobileEditingDescription\"),",
+      "file_path": "/packages/shared/pages/Payments/common/useEnterpriseFeatures.ts",
+      "line_number": 57,
+      "context": "return [\n {\n id: \"aiTools\",\n title: t(\"Common:UpgradeAIToolsTitle\"),\n description: t(\"Common:UpgradeAIToolsDescription\"),\n },\n {\n id: \"mobileEditing\",\n title: t(\"Common:UpgradeMobileEditingTitle\"),\n description: t(\"Common:UpgradeMobileEditingDescription\"),",
       "module": "/packages/shared"
     }
   ],

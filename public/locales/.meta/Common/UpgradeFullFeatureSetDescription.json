@@ -3,7 +3,7 @@
   "content": "Includes AI tools, mobile editing, scalability and clustering, and tech support.",
   "content_en_sha1_hash": "f250e7409a767fac3d13ddec6897088d1f1b0e57",
   "created_at": "2026-09-29T10:10:19.535Z",
-  "updated_at": "2026-09-29T10:21:08.428Z",
+  "updated_at": "2026-10-01T10:04:25.322Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
-      "line_number": 138,
-      "context": "{\n icon: AIReactSvgUrl,\n title: t(\"Common:UpgradeFullFeatureSetTitle\", {\n license: enterprise,\n }),\n description: t(\"Common:UpgradeFullFeatureSetDescription\"),\n },\n {\n icon: WhiteLabelingReactSvgUrl,\n title: t(\"Common:UpgradeWhiteLabelingTitle\"),\n description: t(\"Common:UpgradeWhiteLabelingDescription\"),",
+      "line_number": 134,
+      "context": "id: \"fullFeatureSet\",\n icon: AIReactSvgUrl,\n title: t(\"Common:UpgradeFullFeatureSetTitle\", {\n license: enterprise,\n }),\n description: t(\"Common:UpgradeFullFeatureSetDescription\"),\n },\n {\n id: \"whiteLabeling\",\n icon: WhiteLabelingReactSvgUrl,\n title: t(\"Common:UpgradeWhiteLabelingTitle\"),",
       "module": "/packages/shared"
     }
   ],

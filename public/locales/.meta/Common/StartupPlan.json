@@ -3,7 +3,7 @@
   "content": "Startup",
   "content_en_sha1_hash": "79ce33706ca0540aaf9d8ed291d64bf45fad0cd4",
   "created_at": "2026-06-01T21:20:38.387Z",
-  "updated_at": "2026-09-29T10:21:07.705Z",
+  "updated_at": "2026-10-01T10:04:24.646Z",
   "comment": {
     "text": "Plan name label used as a variable within the dashboard header title to identify the current subscription tier.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/Header.tsx",
-      "line_number": 162,
+      "line_number": 127,
       "context": "<Text as=\"span\" className={styles.planSublineText}>\n {/* Two sentences on a paid plan, but each key keeps its own\n punctuation so the join isn't hardcoded to a period. */}\n {isFreeTariff\n ? t(\"Common:FreePlanDescription\", {\n planName: t(\"Common:StartupPlan\"),\n })\n : paymentDate\n ? t(\"Common:PaidPlanDescription\", {\n planName: businessPlan,\n finalDate: paymentDate,",
       "module": "/packages/client"
     }

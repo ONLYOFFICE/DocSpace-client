@@ -85,25 +85,29 @@ export const HelpLinks = ({
         {t("Common:UpgradeLearnMoreTitle")}
       </Text>
       <div className={styles.helpLines}>
-        <Text fontSize="13px" lineHeight="20px">
-          <Trans
-            t={t}
-            ns="Common"
-            i18nKey="UpgradeLearnMoreAbout"
-            values={{ organizationName, license }}
-            components={{
-              1: renderLink(forEnterprisesUrl, "for_enterprise_license_link"),
-            }}
-          />
-        </Text>
-        <Text fontSize="13px" lineHeight="20px">
-          <Trans
-            t={t}
-            ns="Common"
-            i18nKey="UpgradeRequestDemo"
-            components={{ 1: renderLink(demoOrderUrl, "demo_order_link") }}
-          />
-        </Text>
+        {forEnterprisesUrl ? (
+          <Text fontSize="13px" lineHeight="20px">
+            <Trans
+              t={t}
+              ns="Common"
+              i18nKey="UpgradeLearnMoreAbout"
+              values={{ organizationName, license }}
+              components={{
+                1: renderLink(forEnterprisesUrl, "for_enterprise_license_link"),
+              }}
+            />
+          </Text>
+        ) : null}
+        {demoOrderUrl ? (
+          <Text fontSize="13px" lineHeight="20px">
+            <Trans
+              t={t}
+              ns="Common"
+              i18nKey="UpgradeRequestDemo"
+              components={{ 1: renderLink(demoOrderUrl, "demo_order_link") }}
+            />
+          </Text>
+        ) : null}
         {salesEmail ? (
           <Text fontSize="13px" lineHeight="20px">
             <Trans
@@ -120,20 +124,22 @@ export const HelpLinks = ({
             />
           </Text>
         ) : null}
-        <Text fontSize="13px" lineHeight="20px">
-          <Trans
-            t={t}
-            ns="Common"
-            i18nKey="UpgradeGetTechAssistance"
-            values={{ helpUrl: getHost(feedbackAndSupportUrl) }}
-            components={{
-              1: renderLink(
-                feedbackAndSupportUrl,
-                "upgrade_to_pro_banner_support_link",
-              ),
-            }}
-          />
-        </Text>
+        {feedbackAndSupportUrl ? (
+          <Text fontSize="13px" lineHeight="20px">
+            <Trans
+              t={t}
+              ns="Common"
+              i18nKey="UpgradeGetTechAssistance"
+              values={{ helpUrl: getHost(feedbackAndSupportUrl) }}
+              components={{
+                1: renderLink(
+                  feedbackAndSupportUrl,
+                  "upgrade_to_pro_banner_support_link",
+                ),
+              }}
+            />
+          </Text>
+        ) : null}
       </div>
     </div>
   );

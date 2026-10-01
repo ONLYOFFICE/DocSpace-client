@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Linux 安装说明",
   "UpgradeMobileEditingDescription": "无需安装应用，直接在移动浏览器中编辑文档、电子表格、幻灯片和 PDF。",
   "UpgradeMobileEditingTitle": "移动编辑",
+  "UpgradeNoteWithBackupRecommendation": "{{note}}{{backup}}",
   "UpgradeNow": "立即升级",
   "UpgradePageTitle": "免费使用 {{organizationName}} {{license}}",
   "UpgradePickSolution": "选择最适合您工作方式的方案。",

@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Instructies voor Linux",
   "UpgradeMobileEditingDescription": "Bewerk documenten, spreadsheets, presentaties en PDF's rechtstreeks in uw mobiele browser, zonder app.",
   "UpgradeMobileEditingTitle": "Mobiel bewerken",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Upgrade nu",
   "UpgradePageTitle": "Gratis toegang tot {{organizationName}} {{license}}",
   "UpgradePickSolution": "Kies de oplossing die past bij uw manier van werken.",

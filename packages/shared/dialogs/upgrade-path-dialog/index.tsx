@@ -166,16 +166,12 @@ export const UpgradePathDialog = ({
       href: feedbackAndSupportUrl,
       label: t("Common:UpgradeGetTechAssistanceLink"),
     },
-    ...(salesEmail
-      ? [
-          {
-            id: "purchase",
-            href: `mailto:${salesEmail}`,
-            label: t("Common:UpgradeAskPurchaseQuestionsLink"),
-          },
-        ]
-      : []),
-  ];
+    {
+      id: "purchase",
+      href: salesEmail ? `mailto:${salesEmail}` : "",
+      label: t("Common:UpgradeAskPurchaseQuestionsLink"),
+    },
+  ].filter((link) => link.href);
 
   return (
     <ModalDialog

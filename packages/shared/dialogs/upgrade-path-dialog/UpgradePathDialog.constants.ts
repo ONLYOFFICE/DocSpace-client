@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// TODO: move to externalresources site entries (downloadenterprise, downloaddeveloper)
 export const ENTERPRISE_TRIAL_PATH = "/download#docspace-enterprise";
 export const DEVELOPER_TRIAL_PATH = "/download-developer#docspace-developer";
 

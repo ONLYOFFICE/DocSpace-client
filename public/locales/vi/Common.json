@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Hướng dẫn cho Linux",
   "UpgradeMobileEditingDescription": "Chỉnh sửa tài liệu, trang tính, slide, PDF ngay trên trình duyệt di động mà không cần ứng dụng.",
   "UpgradeMobileEditingTitle": "Chỉnh sửa trên thiết bị di động",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Nâng cấp ngay",
   "UpgradePageTitle": "Truy cập miễn phí {{organizationName}} {{license}}",
   "UpgradePickSolution": "Hãy chọn giải pháp phù hợp với cách bạn làm việc.",

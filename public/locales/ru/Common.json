@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Инструкции для Linux",
   "UpgradeMobileEditingDescription": "Редактируйте документы, таблицы, презентации и PDF-файлы прямо в мобильном браузере без установки приложения.",
   "UpgradeMobileEditingTitle": "Редактирование на мобильных устройствах",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Обновить прямо сейчас",
   "UpgradePageTitle": "Бесплатный доступ к {{organizationName}} {{license}}",
   "UpgradePickSolution": "Выберите решение, которое подходит для вашей работы.",

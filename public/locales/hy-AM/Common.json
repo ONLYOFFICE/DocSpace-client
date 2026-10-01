@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Linux-ի հրահանգներ",
   "UpgradeMobileEditingDescription": "Խմբագրեք փաստաթղթեր, աղյուսակներ, սլայդներ և PDF ֆայլեր անմիջապես ձեր բջջային բրաուզերից՝ առանց հավելվածի անհրաժեշտության։",
   "UpgradeMobileEditingTitle": "Բջջային խմբագրում",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Թարմացնել հիմա",
   "UpgradePageTitle": "Անվճար հասանելիություն {{organizationName}} {{license}}-ին",
   "UpgradePickSolution": "Ընտրեք այն մեկը, որը համապատասխանում է ձեր աշխատելու ձևին։",

@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "تعليمات Linux",
   "UpgradeMobileEditingDescription": "حرّر المستندات والجداول والعروض التقديمية وملفات PDF مباشرةً من متصفح هاتفك، دون الحاجة إلى تطبيق.",
   "UpgradeMobileEditingTitle": "التحرير عبر الهاتف",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "قم بالترقية الآن",
   "UpgradePageTitle": "وصول مجاني إلى {{organizationName}} {{license}}",
   "UpgradePickSolution": "اختر الحل الذي يناسب طريقة عملك.",

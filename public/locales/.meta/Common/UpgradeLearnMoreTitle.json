@@ -3,7 +3,7 @@
   "content": "Learn more and get help",
   "content_en_sha1_hash": "8c34d064c198ff13b2e424a4894721d8a5e15f80",
   "created_at": "2026-09-29T10:10:19.764Z",
-  "updated_at": "2026-09-29T10:21:08.493Z",
+  "updated_at": "2026-10-01T10:04:25.384Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/HelpLinks.tsx",
       "line_number": 85,
-      "context": ");\n \n return (\n <div className={styles.help} data-testid=\"bonus-help\">\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Common:UpgradeLearnMoreTitle\")}\n </Text>\n <div className={styles.helpLines}>\n <Text fontSize=\"13px\" lineHeight=\"20px\">\n <Trans\n t={t}",
+      "context": ");\n \n return (\n <div className={styles.help} data-testid=\"bonus-help\">\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Common:UpgradeLearnMoreTitle\")}\n </Text>\n <div className={styles.helpLines}>\n {forEnterprisesUrl ? (\n <Text fontSize=\"13px\" lineHeight=\"20px\">\n <Trans",
       "module": "/packages/shared"
     }
   ],

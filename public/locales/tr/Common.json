@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Linux talimatları",
   "UpgradeMobileEditingDescription": "Dokümanları, sayfaları, slaytları ve PDF'leri uygulama gerekmeden doğrudan mobil tarayıcınızdan düzenleyin.",
   "UpgradeMobileEditingTitle": "Mobil düzenleme",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Şimdi Yükselt",
   "UpgradePageTitle": "{{organizationName}} {{license}} sürümüne ücretsiz erişim",
   "UpgradePickSolution": "Çalışma şeklinize uygun olanı seçin.",

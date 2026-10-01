@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Linux-ohjeet",
   "UpgradeMobileEditingDescription": "Muokkaa asiakirjoja, taulukoita, dioja ja PDF-tiedostoja suoraan mobiiliselaimessa ilman sovellusta.",
   "UpgradeMobileEditingTitle": "Mobiilimuokkaus",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Päivitä nyt",
   "UpgradePageTitle": "Ilmainen pääsy {{organizationName}} {{license}} -versioon",
   "UpgradePickSolution": "Valitse se, joka sopii työskentelytapaasi.",

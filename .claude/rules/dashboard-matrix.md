@@ -57,8 +57,9 @@ never reaches that far down and `fullPage` does not help.
   canary — `withScreenshot` on the case. Community differs only for its admins
   and owner (the upgrade path line), so only `owner` and `full-admin` get
   Community frames; its room-admin, user and guest frames matched Enterprise
-  pixel for pixel and are not kept. Every case still runs every assertion. Prove equality by comparing frames pixel-wise before dropping any;
-  a diff of a few dozen pixels at channel level 1 is antialiasing, not content.
+  pixel for pixel and are not kept. Every case still runs every assertion.
+  Prove equality by comparing frames pixel-wise before dropping any; a diff of
+  a few dozen pixels at channel level 1 is antialiasing, not content.
 - **The clock is pinned** (`FIXED_NOW`). Tariff and Docs Connect mocks answer
   with fixed calendar dates, so an unpinned frame silently becomes an
   expired-subscription one the day a date passes.

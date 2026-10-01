@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Linux 설치 안내",
   "UpgradeMobileEditingDescription": "앱 없이 모바일 브라우저에서 바로 문서, 시트, 슬라이드, PDF를 편집하세요.",
   "UpgradeMobileEditingTitle": "모바일 편집",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "지금 업그레이드",
   "UpgradePageTitle": "{{organizationName}} {{license}} 무료 이용",
   "UpgradePickSolution": "업무 방식에 맞는 솔루션을 선택하세요.",

@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "ຄຳແນະນຳສຳລັບ Linux",
   "UpgradeMobileEditingDescription": "ແກ້ໄຂເອກະສານ, ສະເປຣດຊີດ, ສະໄລ້ ແລະ PDF ໄດ້ໂດຍກົງຈາກຕົວທ່ອງເວັບມືຖືຂອງທ່ານ ໂດຍບໍ່ຕ້ອງໃຊ້ແອັບ.",
   "UpgradeMobileEditingTitle": "ການຂຽນແກ້ໄຂມືຖື",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "ອັບເກຣດດຽວນີ້",
   "UpgradePageTitle": "ສິດເຂົ້າໃຊ້ {{organizationName}} {{license}} ຟຣີ",
   "UpgradePickSolution": "ເລືອກອັນທີ່ເໝາະສົມກັບວິທີການເຮັດວຽກຂອງທ່ານ.",

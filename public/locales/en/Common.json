@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Linux instructions",
   "UpgradeMobileEditingDescription": "Edit docs, sheets, slides, PDFs right from your mobile browser, no app required.",
   "UpgradeMobileEditingTitle": "Mobile editing",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Upgrade now",
   "UpgradePageTitle": "Free access to {{organizationName}} {{license}}",
   "UpgradePickSolution": "Pick the one that fits how you work.",

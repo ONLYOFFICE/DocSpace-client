@@ -3,7 +3,7 @@
   "content": "Both solutions include AI tools, mobile editing, scalability and clustering, and tech support.",
   "content_en_sha1_hash": "809bb2fd22b5afffe92e0983774b1defdbd20c7e",
   "created_at": "2026-09-29T10:10:19.142Z",
-  "updated_at": "2026-09-29T10:21:08.440Z",
+  "updated_at": "2026-10-01T10:04:25.336Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
-      "line_number": 191,
+      "line_number": 190,
       "context": ">\n <ModalDialog.Header>{t(\"Common:UpgradeChoosePathTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.summary}>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Common:UpgradeBothSolutionsInclude\")}\n </Text>\n <Text fontSize=\"13px\" lineHeight=\"20px\">\n {t(\"Common:UpgradePickSolution\")}\n </Text>\n </div>",
       "module": "/packages/shared"
     }

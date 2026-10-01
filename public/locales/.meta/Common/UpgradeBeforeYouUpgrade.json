@@ -3,7 +3,7 @@
   "content": "Before you upgrade",
   "content_en_sha1_hash": "2162d3262b8841e5b24a3fe24e2c2ed7c8dfdf03",
   "created_at": "2026-09-29T10:10:19.083Z",
-  "updated_at": "2026-09-29T10:21:08.491Z",
+  "updated_at": "2026-10-01T10:04:25.381Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/index.tsx",
       "line_number": 83,
-      "context": "<div className={styles.note} data-testid=\"bonus-upgrade-note\">\n <div className={styles.noteHeader}>\n <ReactSVG src={InfoOutlineReactSvgUrl} className={styles.noteIcon} />\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\">\n {t(\"Common:UpgradeBeforeYouUpgrade\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:UpgradeEditorsUnavailableNote\")}{\" \"}\n {t(\"Common:UpgradeBackupRecommendation\")}",
+      "context": "<div className={styles.note} data-testid=\"bonus-upgrade-note\">\n <div className={styles.noteHeader}>\n <ReactSVG src={InfoOutlineReactSvgUrl} className={styles.noteIcon} />\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\">\n {t(\"Common:UpgradeBeforeYouUpgrade\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:UpgradeNoteWithBackupRecommendation\", {\n note: t(\"Common:UpgradeEditorsUnavailableNote\"),",
       "module": "/packages/shared"
     }
   ],

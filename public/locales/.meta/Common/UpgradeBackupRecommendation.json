@@ -3,7 +3,7 @@
   "content": "We recommend backing up your data before you start.",
   "content_en_sha1_hash": "5edb900c9274b8d724eabc58af96c0cfda47bd6e",
   "created_at": "2026-09-29T10:10:19.038Z",
-  "updated_at": "2026-09-29T10:21:08.445Z",
+  "updated_at": "2026-10-01T10:04:25.341Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
-      "line_number": 257,
+      "line_number": 256,
       "context": "<div className={styles.noteText}>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\">\n {t(\"Common:UpgradeEditorsUnavailableNote\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:UpgradeBackupRecommendation\")}\n </Text>\n </div>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/index.tsx",
-      "line_number": 88,
-      "context": "{t(\"Common:UpgradeBeforeYouUpgrade\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:UpgradeEditorsUnavailableNote\")}{\" \"}\n {t(\"Common:UpgradeBackupRecommendation\")}\n </Text>\n </div>\n \n <HelpLinks\n organizationName={logoText}",
+      "line_number": 89,
+      "context": "</Text>\n </div>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:UpgradeNoteWithBackupRecommendation\", {\n note: t(\"Common:UpgradeEditorsUnavailableNote\"),\n backup: t(\"Common:UpgradeBackupRecommendation\"),\n })}\n </Text>\n </div>\n \n <HelpLinks",
       "module": "/packages/shared"
     }
   ],

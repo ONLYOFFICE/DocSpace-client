@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Linuxの手順",
   "UpgradeMobileEditingDescription": "アプリ不要で、モバイルブラウザから直接ドキュメント、スプレッドシート、スライド、PDFを編集できます。",
   "UpgradeMobileEditingTitle": "モバイル編集",
+  "UpgradeNoteWithBackupRecommendation": "{{note}}{{backup}}",
   "UpgradeNow": "今すぐアップグレードする",
   "UpgradePageTitle": "{{organizationName}} {{license}}を無料で利用",
   "UpgradePickSolution": "作業スタイルに合ったものをお選びください。",

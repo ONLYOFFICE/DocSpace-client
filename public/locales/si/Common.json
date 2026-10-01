@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Linux උපදෙස්",
   "UpgradeMobileEditingDescription": "යෙදුමක් අවශ්‍ය නොවී, ඔබේ ජංගම බ්‍රවුසරයෙන්ම ලේඛන, පත්‍රිකා, ස්ලයිඩ සහ PDF සංස්කරණය කරන්න.",
   "UpgradeMobileEditingTitle": "ජංගම සංස්කරණය",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "උත්ශ්‍රේණි කරන්න",
   "UpgradePageTitle": "{{organizationName}} {{license}} වෙත නොමිලේ ප්‍රවේශය",
   "UpgradePickSolution": "ඔබ වැඩ කරන ආකාරයට ගැළපෙන එක තෝරන්න.",

@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Instrucțiuni pentru Linux",
   "UpgradeMobileEditingDescription": "Editați documente, foi de calcul, prezentări și fișiere PDF direct din browserul mobil, fără a fi nevoie de o aplicație.",
   "UpgradeMobileEditingTitle": "Editare pe mobil",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Upgrade acum",
   "UpgradePageTitle": "Acces gratuit la {{organizationName}} {{license}}",
   "UpgradePickSolution": "Alegeți soluția potrivită modului în care lucrați.",

@@ -3,7 +3,7 @@
   "content": "Enterprise",
   "content_en_sha1_hash": "b4afff317fb189b9020c5c4b47338ed3d2b0662a",
   "created_at": "2025-05-19T21:30:45.018Z",
-  "updated_at": "2026-09-29T10:21:07.739Z",
+  "updated_at": "2026-10-01T10:04:24.681Z",
   "comment": {
     "text": "This is a short label for the \"Enterprise\" license type, used in various headers and banners related to billing, upgrades, and product features.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/Header.tsx",
-      "line_number": 193,
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/UpgradePathLine.tsx",
+      "line_number": 96,
       "context": "<Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"UnlockMoreWithSolutions\"\n values={{\n enterprise: t(\"Common:EnterpriseLicense\"),\n developer: t(\"Common:DeveloperLicense\"),\n }}\n components={{\n 1: (\n <Link",
       "module": "/packages/client"
     },
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
-      "line_number": 89,
-      "context": "onStartDeveloperTrial,\n }: UpgradePathDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n \n const productName = getBrandName(\"ProductEditorsName\");\n const enterprise = t(\"Common:EnterpriseLicense\");\n const developer = t(\"Common:DeveloperLicense\");\n \n const solutions: TSolution[] = [\n {\n id: \"enterprise\",",
+      "line_number": 102,
+      "context": "}: UpgradePathDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n const enterpriseFeatures = useEnterpriseFeatures();\n \n const productName = getBrandName(\"ProductEditorsName\");\n const enterprise = t(\"Common:EnterpriseLicense\");\n const developer = t(\"Common:DeveloperLicense\");\n \n const solutions: TSolution[] = [\n {\n id: \"enterprise\",",
       "module": "/packages/shared"
     },
     {

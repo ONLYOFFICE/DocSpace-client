@@ -3,7 +3,7 @@
   "content": "Please note that the editors will be unavailable during the upgrade.",
   "content_en_sha1_hash": "61ae58fa11d9c5727c2b2b396abd41b3fdde33cc",
   "created_at": "2026-09-29T10:10:19.399Z",
-  "updated_at": "2026-09-29T10:21:08.443Z",
+  "updated_at": "2026-10-01T10:04:25.339Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
-      "line_number": 254,
+      "line_number": 253,
       "context": "<div className={styles.note}>\n <ReactSVG src={InfoOutlineReactSvgUrl} className={styles.noteIcon} />\n <div className={styles.noteText}>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\">\n {t(\"Common:UpgradeEditorsUnavailableNote\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:UpgradeBackupRecommendation\")}\n </Text>\n </div>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/index.tsx",
-      "line_number": 87,
-      "context": "<Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\">\n {t(\"Common:UpgradeBeforeYouUpgrade\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:UpgradeEditorsUnavailableNote\")}{\" \"}\n {t(\"Common:UpgradeBackupRecommendation\")}\n </Text>\n </div>\n \n <HelpLinks",
+      "line_number": 88,
+      "context": "{t(\"Common:UpgradeBeforeYouUpgrade\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:UpgradeNoteWithBackupRecommendation\", {\n note: t(\"Common:UpgradeEditorsUnavailableNote\"),\n backup: t(\"Common:UpgradeBackupRecommendation\"),\n })}\n </Text>\n </div>",
       "module": "/packages/shared"
     }
   ],

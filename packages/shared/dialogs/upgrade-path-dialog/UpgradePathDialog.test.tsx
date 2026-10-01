@@ -86,6 +86,24 @@ describe("UpgradePathDialog", () => {
     expect(screen.getByTestId("upgrade-path-demo-link")).toBeInTheDocument();
   });
 
+  it("hides footer links that have no address", () => {
+    render(
+      <UpgradePathDialog
+        {...defaultProps}
+        demoOrderUrl=""
+        feedbackAndSupportUrl=""
+      />,
+    );
+
+    expect(
+      screen.queryByTestId("upgrade-path-demo-link"),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("upgrade-path-support-link"),
+    ).not.toBeInTheDocument();
+    expect(screen.getByTestId("upgrade-path-purchase-link")).toBeInTheDocument();
+  });
+
   it("disables the trial buttons until a handler is provided", () => {
     render(<UpgradePathDialog {...defaultProps} />);
 

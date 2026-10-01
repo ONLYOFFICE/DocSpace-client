@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Οδηγίες για Linux",
   "UpgradeMobileEditingDescription": "Επεξεργαστείτε έγγραφα, φύλλα, διαφάνειες και PDF απευθείας από το πρόγραμμα περιήγησης της κινητής σας συσκευής, χωρίς να απαιτείται εφαρμογή.",
   "UpgradeMobileEditingTitle": "Επεξεργασία μέσω κινητής συσκευής",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Αναβάθμιση τώρα",
   "UpgradePageTitle": "Δωρεάν πρόσβαση στο {{organizationName}} {{license}}",
   "UpgradePickSolution": "Επιλέξτε αυτή που ταιριάζει στον τρόπο που εργάζεστε.",

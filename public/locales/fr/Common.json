@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Instructions pour Linux",
   "UpgradeMobileEditingDescription": "Modifiez des documents, feuilles de calcul, présentations et PDF directement depuis votre navigateur mobile, sans application.",
   "UpgradeMobileEditingTitle": "Édition mobile",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Mettre à jour maintenant",
   "UpgradePageTitle": "Accès gratuit à {{organizationName}} {{license}}",
   "UpgradePickSolution": "Choisissez celle qui correspond à votre façon de travailler.",

@@ -2301,6 +2301,7 @@
   "UpgradeLinuxInstructions": "Pokyny pre Linux",
   "UpgradeMobileEditingDescription": "Upravujte dokumenty, hárky, snímky a súbory PDF priamo v mobilnom prehliadači, bez potreby aplikácie.",
   "UpgradeMobileEditingTitle": "Úpravy pomocou mobilných zariadení",
+  "UpgradeNoteWithBackupRecommendation": "{{note}} {{backup}}",
   "UpgradeNow": "Aktualizovať teraz",
   "UpgradePageTitle": "Bezplatný prístup k edícii {{organizationName}} {{license}}",
   "UpgradePickSolution": "Vyberte si riešenie, ktoré zodpovedá vášmu spôsobu práce.",

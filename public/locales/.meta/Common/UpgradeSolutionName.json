@@ -3,7 +3,7 @@
   "content": "{{productName}} {{license}}",
   "content_en_sha1_hash": "5f2ac6145d0c5ae530cb791e63f3e38e124db540",
   "created_at": "2026-09-29T10:10:20.334Z",
-  "updated_at": "2026-09-29T10:21:08.415Z",
+  "updated_at": "2026-10-01T10:04:25.318Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
-      "line_number": 95,
+      "line_number": 108,
       "context": "const developer = t(\"Common:DeveloperLicense\");\n \n const solutions: TSolution[] = [\n {\n id: \"enterprise\",\n name: t(\"Common:UpgradeSolutionName\", {\n productName,\n license: enterprise,\n }),\n description: t(\"Common:UpgradeEnterpriseDescription\"),\n onStartTrial: onStartEnterpriseTrial,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
-      "line_number": 95,
+      "line_number": 108,
       "context": "const developer = t(\"Common:DeveloperLicense\");\n \n const solutions: TSolution[] = [\n {\n id: \"enterprise\",\n name: t(\"Common:UpgradeSolutionName\", {\n productName,\n license: enterprise,\n }),\n description: t(\"Common:UpgradeEnterpriseDescription\"),\n onStartTrial: onStartEnterpriseTrial,",
       "module": "/packages/shared"
     }

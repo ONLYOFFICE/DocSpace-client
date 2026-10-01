@@ -3,7 +3,7 @@
   "content": "Upgrade now",
   "content_en_sha1_hash": "09a80c7a63cdefe5e5c7bccdc6bf4b894b15c07c",
   "created_at": "2026-04-10T13:53:43.815Z",
-  "updated_at": "2026-09-10T16:17:50.358Z",
+  "updated_at": "2026-10-01T08:23:21.907Z",
   "comment": {
     "text": "This is the label for a button that allows users to upgrade their current plan.",
     "is_auto": true,
@@ -31,13 +31,13 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1666,
+      "line_number": 1677,
       "context": "const isTheSameCount =\n !isFreeTariff && this.managersCount === maxCountManagersByQuota;\n const dueTodayAmount = this.tariffDueTodayAmount ?? this.totalPrice;\n const isBalanceInsufficient = this.walletBalance < dueTodayAmount;\n \n if (this.isTariffDueTodayCalculating) return t(\"UpgradeNow\");\n \n if (this.tariffDueTodayAmount !== null && !isTheSameCount) {\n if (isBalanceInsufficient)\n return this.tariff.isDelayedPaymentMethod\n ? t(\"TopUpWallet\")",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1666,
+      "line_number": 1677,
       "context": "const isTheSameCount =\n !isFreeTariff && this.managersCount === maxCountManagersByQuota;\n const dueTodayAmount = this.tariffDueTodayAmount ?? this.totalPrice;\n const isBalanceInsufficient = this.walletBalance < dueTodayAmount;\n \n if (this.isTariffDueTodayCalculating) return t(\"UpgradeNow\");\n \n if (this.tariffDueTodayAmount !== null && !isTheSameCount) {\n if (isBalanceInsufficient)\n return this.tariff.isDelayedPaymentMethod\n ? t(\"TopUpWallet\")",
       "module": "/libs/ui-kit"
     }

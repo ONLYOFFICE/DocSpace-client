@@ -1,0 +1,29 @@
+{
+  "key_path": "CacheLifetimeDependsOnProvider",
+  "content": "Cache lifetime depends on the provider",
+  "content_en_sha1_hash": "dfaf673a6ffcf3305e469833d2d267096624dacd",
+  "created_at": "2026-10-01T08:22:39.714Z",
+  "updated_at": "2026-10-01T08:29:56.126Z",
+  "comment": {
+    "text": "Informational note displayed within a tooltip to explain that cache duration varies depending on the service provider.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T08:29:56.126Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/CachePriceTooltip/CachePriceTooltip.tsx",
+      "line_number": 86,
+      "context": "label={t(\"Common:CacheWrite\")}\n value={breakdown.savedToCache ?? t(\"Common:Free\")}\n />\n </div>\n <Text fontSize=\"12px\" className={styles.note}>\n {t(\"Common:CacheLifetimeDependsOnProvider\")}\n </Text>\n </div>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

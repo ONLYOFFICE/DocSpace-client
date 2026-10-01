@@ -145,6 +145,22 @@ describe("DocumentBuilderReportStore", () => {
     );
   });
 
+  it("opens an absolute result URL as-is without prefixing the proxy URL", async () => {
+    const store = makeStore();
+    const absoluteUrl = "http://host.example.com/doceditor?fileid=42";
+
+    await store.buildReport(ReportType.AuditTrail, {
+      start: vi
+        .fn()
+        .mockResolvedValue(makeTask({ resultFileUrl: absoluteUrl })),
+      getStatus: vi.fn(),
+    });
+
+    expect(openUrlWithExportToast).toHaveBeenCalledWith(
+      expect.objectContaining({ url: absoluteUrl }),
+    );
+  });
+
   it("exposes the building flag reactively while the report runs", async () => {
     const store = makeStore();
 

@@ -250,6 +250,7 @@
   "QuotasDescription": "Tutaj możesz skonfigurować limity pamięci dla użytkowników i pokoi.",
   "Recalculate": "Przelicz",
   "RegisterApp": "Rejestracja aplikacji",
+  "ReportFormatDescription": "Gdy zdarzeń jest zbyt wiele, raport XLSX zawiera tylko najnowsze z nich. Wybierz CSV, aby wyeksportować wszystkie zdarzenia.",
   "ResetTemplateDescription": "Czy na pewno chcesz przywrócić bieżący stan pustego dokumentu do stanu domyślnego?\nNie będzie można cofnąć tej akcji.",
   "ResetToDefault": "Resetuj do ustawień domyślnych",
   "RestAPI": "REST API",

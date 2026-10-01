@@ -38,6 +38,26 @@
 .upgradePathDialog {
   --modal-dialog-width: min(880px, calc(100vw - 32px));
 
+  // `autoMaxHeight` lifts the height cap, and the backdrop clips what does not
+  // fit - so in a short window, and always on a phone (where the modal is a
+  // bottom sheet), the header and the top of the content end up off screen
+  // with nothing to scroll. Cap the dialog at the window and scroll the body
+  // between a fixed header and footer instead.
+  :global(#modal-dialog) {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100dvh - 32px);
+
+    @include mixins.mobile {
+      max-height: calc(100dvh - 64px);
+    }
+  }
+
+  :global(.modal-body) {
+    min-height: 0;
+    overflow-y: auto;
+  }
+
   .summary {
     display: flex;
     flex-direction: column;

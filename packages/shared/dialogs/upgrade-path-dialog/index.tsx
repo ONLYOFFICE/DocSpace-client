@@ -257,7 +257,7 @@ export const UpgradePathDialog = ({
           {links.map((link, index) => (
             <React.Fragment key={link.id}>
               {index > 0 ? (
-                <Text as="span" fontSize="13px">
+                <Text as="span" fontSize="13px" fontWeight={600}>
                   /
                 </Text>
               ) : null}

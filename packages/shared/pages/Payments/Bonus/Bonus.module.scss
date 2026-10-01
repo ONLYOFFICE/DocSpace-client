@@ -105,7 +105,8 @@
   .trialCard {
     display: flex;
     flex-direction: column;
-    padding: 18px 18px 24px;
+    // Figma draws the stroke inside the frame: 17px + 1px border = mockup's 18px.
+    padding: 17px 17px 23px;
     border-radius: 8px;
     border: var(--upgrade-trial-card-border);
     background: var(--upgrade-trial-card-bg);

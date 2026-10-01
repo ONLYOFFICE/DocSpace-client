@@ -218,6 +218,9 @@ const ServicePage = (props: ServicePageProps) => {
           getAIConfig={getAIConfig}
           withBottomMargin
           onViewMore={onViewUsage}
+          onOpenWebSearch={() =>
+            navigateToRoute("/portal-settings/ai-settings/web-search")
+          }
         />
       ) : null}
       {pathname.includes("backup") ? (

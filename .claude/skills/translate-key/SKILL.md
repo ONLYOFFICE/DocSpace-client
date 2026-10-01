@@ -34,7 +34,23 @@ Use the namespace to find the locale and `.meta` directories:
 
 English source is always at the same path with `{lang}` = `en`.
 
-## Step 3 — collect English source + meta context
+## Step 3 — make sure the key has `.meta` and a comment (mandatory)
+
+Before translating:
+
+```bash
+node .claude/scripts/i18n/locale-comments.mjs find --key Namespace:KeyName --ensure-meta
+```
+
+`--ensure-meta` creates the `.meta` file if there is none, or resets it if the
+English changed (runs `generate-metadata` + `save-meta-keys-usage`, ~1 min).
+If the command exits 1 with `[empty]` or `[outdated-meta]`, run the
+`translate-comments` skill for this key and re-run the command until it exits 0.
+Exit 1 with `[requested]` only means the key already has a comment — read it
+and continue. ui-kit namespaces (`Settings`, `Services`, `Payments`) have no
+`.meta` and are skipped.
+
+## Step 3a — collect English source + meta context
 
 ### A. Read the English value
 

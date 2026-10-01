@@ -37,14 +37,22 @@ import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-campaign";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import { AuditReportFormat } from "@docspace/shared/enums";
 
 import styles from "./HistoryMainContent.module.scss";
+
+// The server cuts an XLSX report at 200,000 rows; CSV carries every event.
+const reportFormatOptions = [
+  { key: AuditReportFormat.Xlsx, label: "XLSX" },
+  { key: AuditReportFormat.Csv, label: "CSV" },
+];
 
 const HistoryMainContent = (props) => {
   const {
@@ -65,6 +73,7 @@ const HistoryMainContent = (props) => {
 
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
   const [auditLifeTime, setAuditLifeTime] = useState(String(lifetime) || "180");
+  const [reportFormat, setReportFormat] = useState(reportFormatOptions[0]);
 
   const theme = useTheme();
 
@@ -99,7 +108,7 @@ const HistoryMainContent = (props) => {
 
   const handleMouseDown = (e) => {
     if (e.button === 0 || e.button === 1) {
-      getReport();
+      getReport(reportFormat.key);
       e.preventDefault();
     }
   };
@@ -208,6 +217,22 @@ const HistoryMainContent = (props) => {
           onMouseDown={handleMouseDown}
           isDisabled={isSettingNotPaid}
           isLoading={isLoadingDownloadReport}
+        />
+        <ComboBox
+          className="download-report_format"
+          dataTestId={
+            loginHistory
+              ? "login_history_report_format_combobox"
+              : "audit_trail_report_format_combobox"
+          }
+          options={reportFormatOptions}
+          selectedOption={reportFormat}
+          onSelect={setReportFormat}
+          scaled={false}
+          size="content"
+          directionY="top"
+          displaySelectedOption
+          isDisabled={isSettingNotPaid || isLoadingDownloadReport}
         />
         <span className="download-report_description">
           {downloadReportDescription}

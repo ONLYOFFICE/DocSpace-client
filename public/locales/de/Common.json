@@ -2421,7 +2421,6 @@
   "WantToRestoreTheRooms": "Alle externen Links in wiederhergestellten Räumen werden aktiv und ihre Inhalte sind für alle mit den Raumlinks zugänglich. Möchten Sie die Räume wiederherstellen?",
   "Warning": "Warnung",
   "WarningCopyToFormRoom": "Die Datei kann nicht in diesen Space kopiert werden. Bitte versuchen Sie, das PDF-Formular {{organizationName}} zu kopieren.",
-  "WebSearch": "Websuche",
   "WebSearchAI": "Websuche",
   "WebSearchAndCrawlingPoweredByExa": "Websuche und Web-Crawling werden von Exa bereitgestellt",
   "WebSearchEngineDescription": "Verwenden Sie eine Web-Suchmaschine, um KI-Chats mit Echtzeitinformationen aus dem Internet zu erweitern",

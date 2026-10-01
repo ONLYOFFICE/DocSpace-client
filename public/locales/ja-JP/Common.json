@@ -2421,7 +2421,6 @@
   "WantToRestoreTheRooms": "復元されたルームの共有リンクは全て有効になり、ルームのリンクを持つ全員がその内容を利用できるようになります。ルームを復元しますか？",
   "Warning": "警告",
   "WarningCopyToFormRoom": "このスペースにファイルをコピーできません。{{organizationName}} PDFフォームをコピーしてみてください。",
-  "WebSearch": "ウェブ検索",
   "WebSearchAI": "Web検索",
   "WebSearchAndCrawlingPoweredByExa": "ウェブ検索とウェブクロールはExaによって提供されます",
   "WebSearchEngineDescription": "ウェブ検索エンジンを使用して、インターネットからのリアルタイム情報でAIチャットを強化します",

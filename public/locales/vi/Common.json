@@ -2388,7 +2388,6 @@
   "WantToRestoreTheRooms": "Tất cả các liên kết bên ngoài trong các phòng được khôi phục sẽ hoạt động, và nội dung của chúng sẽ khả dụng cho tất cả mọi người có liên kết phòng. Bạn có muốn khôi phục phòng không?",
   "Warning": "Cảnh báo",
   "WarningCopyToFormRoom": "Không thể sao chép tập tin vào không gian này. Xin hãy thử sao chép biểu mẫu PDF {{organizationName}}.",
-  "WebSearch": "Tìm kiếm trên web",
   "WebSearchAI": "Tìm kiếm web",
   "WebSearchAndCrawlingPoweredByExa": "Tìm kiếm trên web và thu thập dữ liệu web được cung cấp bởi Exa",
   "WebSearchEngineDescription": "Sử dụng công cụ tìm kiếm trên web để nâng cao các cuộc trò chuyện AI bằng thông tin thời gian thực từ internet",

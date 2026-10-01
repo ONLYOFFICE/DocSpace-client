@@ -2388,7 +2388,6 @@
   "WantToRestoreTheRooms": "Todos los enlaces externos de las salas restauradas se activarán, y su contenido estará disponible para todos los que tengan el enlace a la sala. ¿Desea restaurar las salas?",
   "Warning": "Advertencia",
   "WarningCopyToFormRoom": "El archivo no se puede copiar en este espacio. Por favor, intente copiar el formulario PDF de {{organizationName}}.",
-  "WebSearch": "Búsqueda web",
   "WebSearchAI": "Búsqueda web",
   "WebSearchAndCrawlingPoweredByExa": "La búsqueda web y el rastreo web funcionan con Exa",
   "WebSearchEngineDescription": "Utilice un motor de búsqueda web para enriquecer los chats de IA con información en tiempo real de internet",

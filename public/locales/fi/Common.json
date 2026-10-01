@@ -2388,7 +2388,6 @@
   "WantToRestoreTheRooms": "Kaikki ulkoiset linkit palautetuista huoneissa tulevat aktiivisiksi ja niiden sisältö saataville kaikille, joilla on huoneen linkit. Haluatko palauttaa huoneet?",
   "Warning": "Varoitus",
   "WarningCopyToFormRoom": "Tiedostoa ei voi kopioida tähän tilaan. Ole hyvä ja kopioi {{organizationName}} PDF-lomake.",
-  "WebSearch": "Verkkohaku",
   "WebSearchAI": "Hakukonehaku",
   "WebSearchAndCrawlingPoweredByExa": "Verkkohaun ja verkkosivujen indeksoinnin tarjoaa Exa",
   "WebSearchEngineDescription": "Käytä verkkohakukonetta parantaaksesi AI-chatteja internetin reaaliaikaisilla tiedoilla",

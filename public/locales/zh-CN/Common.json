@@ -2388,7 +2388,6 @@
   "WantToRestoreTheRooms": "恢复房间后，其所有的共享链接都将重新生效，并且拥有房间链接的人都可以访问其内容。 您确定恢复房间吗？",
   "Warning": "警告",
   "WarningCopyToFormRoom": "该文件无法复制到此空间。请尝试复制{{organizationName}}的 PDF 表单。",
-  "WebSearch": "网络搜索",
   "WebSearchAI": "网络搜索",
   "WebSearchAndCrawlingPoweredByExa": "网络搜索和网页抓取由 Exa 提供支持",
   "WebSearchEngineDescription": "使用网络搜索引擎，通过来自互联网的实时信息增强 AI 聊天",

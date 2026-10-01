@@ -2388,7 +2388,6 @@
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "Warning": "Warning",
   "WarningCopyToFormRoom": "The file cannot be copied to this space. Please try to copy the {{organizationName}} PDF form.",
-  "WebSearch": "Web search",
   "WebSearchAI": "Web search",
   "WebSearchAndCrawlingPoweredByExa": "Web search and web crawling powered by Exa",
   "WebSearchEngineDescription": "Use a Web search engine to enhance AI chats with real-time information from the internet",

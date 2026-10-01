@@ -2388,7 +2388,6 @@
   "WantToRestoreTheRooms": "Všechny externí odkazy v obnovených místnostech se stanou aktivními a jejich obsah bude dostupný všem, kteří mají odkazy na místnosti. Chcete místnosti obnovit?",
   "Warning": "Varování",
   "WarningCopyToFormRoom": "Do tohoto prostoru nelze soubor zkopírovat. Zkuste prosím zkopírovat {{organizationName}} PDF formulář.",
-  "WebSearch": "Webové vyhledávání",
   "WebSearchAI": "Vyhledávání webu",
   "WebSearchAndCrawlingPoweredByExa": "Webové vyhledávání a procházení webu zajišťuje Exa",
   "WebSearchEngineDescription": "Používejte webový vyhledávač k obohacení chatů AI o informace z internetu v reálném čase",

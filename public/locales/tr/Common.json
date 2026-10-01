@@ -2388,7 +2388,6 @@
   "WantToRestoreTheRooms": "Geri yüklenen odalardaki tüm dış bağlantılar aktif hale gelecek ve içerikleri, oda bağlantılarına sahip olan herkesin kullanımına açık olacaktır. Odaları restore etmek istiyor musunuz?",
   "Warning": "Uyarı",
   "WarningCopyToFormRoom": "Dosya bu alana kopyalanamıyor. Lütfen {{organizationName}} PDF formunu kopyalamayı deneyin.",
-  "WebSearch": "Web araması",
   "WebSearchAI": "Web araması",
   "WebSearchAndCrawlingPoweredByExa": "Web araması ve web taraması Exa tarafından sağlanır",
   "WebSearchEngineDescription": "AI sohbetlerini internetten gerçek zamanlı bilgilerle zenginleştirmek için bir Web arama motoru kullanın",

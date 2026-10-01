@@ -2388,7 +2388,6 @@
   "WantToRestoreTheRooms": "복원된 방의 모든 공유 링크가 활성화되고, 방 링크를 가진 모든 사람이 콘텐츠를 이용할 수 있게 됩니다. 방을 복원하시겠습니까?",
   "Warning": "경고",
   "WarningCopyToFormRoom": "파일을 이 공간으로 복사할 수 없습니다. {{organizationName}} PDF 양식을 복사해 보세요.",
-  "WebSearch": "웹 검색",
   "WebSearchAI": "웹 검색",
   "WebSearchAndCrawlingPoweredByExa": "웹 검색과 웹 크롤링은 Exa를 통해 제공됩니다",
   "WebSearchEngineDescription": "웹 검색 엔진을 사용하여 인터넷의 실시간 정보로 AI 채팅을 향상시킵니다",

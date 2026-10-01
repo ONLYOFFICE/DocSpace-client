@@ -1,0 +1,29 @@
+{
+  "key_path": "CachePricing",
+  "content": "Cache pricing",
+  "content_en_sha1_hash": "9f6dfe61cc431d9101acee9cce2d0f919f1e21eb",
+  "created_at": "2026-10-01T08:22:39.731Z",
+  "updated_at": "2026-10-01T08:29:36.527Z",
+  "comment": {
+    "text": "Aria-label for a cache icon in the AI settings, describing the pricing associated with the cache.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T08:29:36.527Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/CachePriceTooltip/CachePriceAnchor.tsx",
+      "line_number": 76,
+      "context": "data-testid=\"ai_cache_price_anchor\"\n >\n <CacheIcon\n className={styles.icon}\n role=\"img\"\n aria-label={t(\"Common:CachePricing\")}\n />\n {children}\n </div>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

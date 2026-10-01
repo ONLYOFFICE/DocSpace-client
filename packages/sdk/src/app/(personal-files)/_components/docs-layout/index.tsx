@@ -337,6 +337,7 @@ const DocsLayoutCore = observer(
     useDocsFrameBridge({
       isReady: true,
       uploadFilesToFolder,
+      openCreateDialog,
       enabled: !isPrivate,
     });
 

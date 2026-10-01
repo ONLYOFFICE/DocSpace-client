@@ -1,0 +1,29 @@
+{
+  "key_path": "BackupCopiesUnit",
+  "content": "copies",
+  "content_en_sha1_hash": "475f96eca831d080a0c1c4e82e61660869fdbccd",
+  "created_at": "2026-10-01T08:22:38.389Z",
+  "updated_at": "2026-10-01T08:30:20.103Z",
+  "comment": {
+    "text": "Unit label for the backup service quantity in the billing overview, appearing alongside a numerical value.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T08:30:20.103Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/ActiveAddons.tsx",
+      "line_number": 128,
+      "context": "let unitLabel = item.serviceUnit;\n if (isCurrencyUsage)\n unitLabel = getCurrencySymbol(currency, language);\n else if (item.service === BACKUP_SERVICE)\n unitLabel = t(\"BackupCopiesUnit\");\n \n const usedValue = isCurrencyUsage\n ? (usage?.totalAmount ?? 0)\n : (item.used ?? usage?.totalQuantity ?? 0);",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2026-09-25T10:58:53.270Z",
+  "updated_at": "2026-10-01T08:23:21.768Z",
   "comment": {
     "text": "This is a button label or dialog title. It appears on buttons that create a new room, or as the title of a dialog for creating a room.",
     "is_auto": true,
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
-      "line_number": 262,
+      "line_number": 270,
       "context": "disabled: !favoriteItems.length,\n }, */\n {\n id: \"create_room\",\n key: \"create-room\",\n label: t(\"Common:CreateRoom\"),\n icon: CatalogRoomsReactSvgUrl,\n onClick: () => self.onCreateRoom(null, true),\n disabled: !canCreateRoom,\n },\n {",
       "module": "/packages/client"
     },

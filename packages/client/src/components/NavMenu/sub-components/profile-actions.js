@@ -89,7 +89,17 @@ class ProfileActions extends React.PureComponent {
     }
   }
 
+  // The nav is raised only while the menu is open. Every way of closing it
+  // (outside click, avatar re-tap, picking an item) goes through here, so the
+  // raised z-index cannot outlive the menu and paint the avatar over the
+  // mobile AI chat panel.
   setOpened = (opened) => {
+    const navElement = document.getElementsByClassName("profileMenuIcon");
+
+    if (navElement?.length > 0) {
+      navElement[0].style.setProperty("z-index", opened ? 210 : 180, "important");
+    }
+
     this.setState({ opened });
   };
 
@@ -99,12 +109,6 @@ class ProfileActions extends React.PureComponent {
     const dropDownItem = path ? path.find((x) => x === this.ref.current) : null;
     if (dropDownItem) return;
 
-    const navElement = document.getElementsByClassName("profileMenuIcon");
-
-    if (navElement?.length > 0) {
-      navElement[0].style.setProperty("z-index", 180, "important");
-    }
-
     this.setOpened(!opened);
   };
 
@@ -112,12 +116,6 @@ class ProfileActions extends React.PureComponent {
     const { opened } = this.state;
 
     action.onClick && action.onClick(e);
-
-    const navElement = document.getElementsByClassName("profileMenuIcon");
-
-    if (navElement?.length > 0) {
-      navElement[0].style.setProperty("z-index", 210, "important");
-    }
 
     this.setOpened(!opened);
   };

@@ -1,0 +1,29 @@
+{
+  "key_path": "TokenUsage",
+  "content": "Token usage",
+  "content_en_sha1_hash": "545c3da969d67c5857d7e17f418efc9d8db8da99",
+  "created_at": "2026-10-01T08:23:10.298Z",
+  "updated_at": "2026-10-01T08:26:31.412Z",
+  "comment": {
+    "text": "Accessibility label for a statistics icon in the transaction history, representing the amount of tokens consumed.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T08:26:31.412Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageAnchor.tsx",
+      "line_number": 80,
+      "context": "data-cached={cached}\n >\n <StatisticsIcon\n className={classNames(styles.icon, { [styles.iconCached]: cached })}\n role=\"img\"\n aria-label={t(\"TokenUsage\")}\n />\n {children}\n </div>\n );\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

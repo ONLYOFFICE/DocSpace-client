@@ -377,6 +377,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       "@radix-ui/react-dialog",
       "@radix-ui/react-switch",
       "@radix-ui/react-tabs",
+      "@radix-ui/react-toast",
       "@radix-ui/react-tooltip",
       "class-variance-authority",
       "openai",

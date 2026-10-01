@@ -67,6 +67,10 @@ export const setAuthToken = (token: string | null) => {
   client.setAuthToken(token);
 };
 
+export const signOutOAuth = () => {
+  client.signOutOAuth();
+};
+
 export const getAuthToken = (): string | null => {
   return client.authToken;
 };

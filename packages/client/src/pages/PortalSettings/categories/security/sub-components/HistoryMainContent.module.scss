@@ -135,6 +135,16 @@
     }
   }
 
+  :global(.download-report_format) {
+    @include mixins.mobile {
+      width: 100%;
+
+      > :first-child {
+        width: 100%;
+      }
+    }
+  }
+
   :global(.download-report_description) {
     font-style: normal;
     font-weight: 400;

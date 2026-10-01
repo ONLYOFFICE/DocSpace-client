@@ -1,0 +1,169 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/mixins";
+
+.upgradePathDialog {
+  --modal-dialog-width: min(880px, calc(100vw - 32px));
+
+  // `autoMaxHeight` lifts the height cap, and the backdrop clips what does not
+  // fit - so in a short window, and always on a phone (where the modal is a
+  // bottom sheet), the header and the top of the content end up off screen
+  // with nothing to scroll. Cap the dialog at the window and scroll the body
+  // between a fixed header and footer instead.
+  :global(#modal-dialog) {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100dvh - 32px);
+
+    @include mixins.mobile {
+      max-height: calc(100dvh - 64px);
+    }
+  }
+
+  :global(.modal-body) {
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .summary {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    background: var(--upgrade-card-bg);
+  }
+
+  .solutions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+
+    @include mixins.tablet-and-below {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .solution {
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    border-radius: 8px;
+    background: var(--upgrade-card-bg);
+
+    &.enterprise {
+      --upgrade-accent: var(--upgrade-enterprise-color);
+      --upgrade-accent-icon: var(--upgrade-enterprise-icon-color);
+      --upgrade-accent-bg: var(--upgrade-enterprise-icon-bg);
+    }
+
+    &.developer {
+      --upgrade-accent: var(--upgrade-developer-color);
+      --upgrade-accent-icon: var(--upgrade-developer-icon-color);
+      --upgrade-accent-bg: var(--upgrade-developer-icon-bg);
+    }
+
+    > .description {
+      margin-top: 12px;
+    }
+  }
+
+  .description {
+    color: var(--upgrade-description-color);
+  }
+
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    margin: 12px 0 32px;
+  }
+
+  .feature {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+
+  .featureText {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    color: var(--upgrade-accent-icon);
+    background: var(--upgrade-accent-bg);
+
+    div {
+      display: flex;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    svg path {
+      fill: currentColor;
+    }
+  }
+
+  .trialButton {
+    --accent-button: var(--upgrade-accent);
+    color: var(--upgrade-button-text-color);
+  }
+
+  .note {
+    margin: 16px 0 8px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+  }
+}

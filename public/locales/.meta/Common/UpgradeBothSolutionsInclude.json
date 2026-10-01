@@ -1,20 +1,20 @@
 {
-  "key_path": "UpgradeToProBannerInstructionItemLinux",
-  "content": "Linux instruction.",
-  "content_en_sha1_hash": "4b856283dbe4b6431a050771a1ebbbed5a4f4760",
-  "created_at": "2025-05-26T07:15:49.197Z",
-  "updated_at": "2026-05-15T14:00:06.954Z",
+  "key_path": "UpgradeBothSolutionsInclude",
+  "content": "Both solutions include AI tools, mobile editing, scalability and clustering, and tech support.",
+  "content_en_sha1_hash": "809bb2fd22b5afffe92e0983774b1defdbd20c7e",
+  "created_at": "2026-09-29T10:10:19.142Z",
+  "updated_at": "2026-10-01T11:56:54.225Z",
   "comment": {
-    "text": "This is a short label for an item in a list of instructions, specifically referring to Linux. It appears as part of a sentence providing a link to Linux installation instructions.",
+    "text": "Bold summary text in the upgrade path dialog that lists features shared by both upgrade options.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:39:58.277Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-10-01T11:56:54.225Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/OfficialDocumentation.tsx",
-      "line_number": 75,
-      "context": "{t(\"UpgradeToProBannerInstructionReadNow\")}\n </Link>\n </Text>\n —\n <Text fontWeight={600}>\n {t(\"UpgradeToProBannerInstructionItemLinux\")}{\" \"}\n <Link\n tag=\"a\"\n fontSize=\"13px\"\n fontWeight=\"600\"\n href={enterpriseInstallScriptUrl}",
+      "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
+      "line_number": 190,
+      "context": ">\n <ModalDialog.Header>{t(\"Common:UpgradeChoosePathTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.summary}>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Common:UpgradeBothSolutionsInclude\")}\n </Text>\n <Text fontSize=\"13px\" lineHeight=\"20px\">\n {t(\"Common:UpgradePickSolution\")}\n </Text>\n </div>",
       "module": "/packages/shared"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

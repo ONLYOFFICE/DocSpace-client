@@ -3,7 +3,7 @@
   "content": "Brand name",
   "content_en_sha1_hash": "6b4b8b5df0e218b10da0dadc07407d9783d4e3ad",
   "created_at": "2025-05-26T07:15:41.010Z",
-  "updated_at": "2026-08-14T14:58:32.837Z",
+  "updated_at": "2026-09-29T10:21:08.108Z",
   "comment": {
     "text": "This is a label for a section in the portal settings where users can configure the brand name displayed within the application. It appears as a navigation link and a page title.",
     "is_auto": true,
@@ -20,7 +20,7 @@
     {
       "file_path": "/packages/management/src/lib/index.ts",
       "line_number": 76,
-      "context": "case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":\n return { key: t(\"Common:BrandName\"), isSubPage: true };\n case \"bonus\":\n return { key: t(\"Common:Bonus\"), isSubPage: false };\n default:\n return { key: t(\"Common:Spaces\"), isSubPage: false };\n }",
+      "context": "case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":\n return { key: t(\"Common:BrandName\"), isSubPage: true };\n case \"bonus\":\n return { key: t(\"Common:Upgrade\"), isSubPage: false };\n default:\n return { key: t(\"Common:Spaces\"), isSubPage: false };\n }",
       "module": "/packages/management"
     },
     {

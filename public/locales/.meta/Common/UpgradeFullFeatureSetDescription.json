@@ -1,20 +1,20 @@
 {
-  "key_path": "UpgradeToProBannerInstructionItemWindows",
-  "content": "Windows instruction.",
-  "content_en_sha1_hash": "deb54dea949d2be02af8b22d87c61f6454d31396",
-  "created_at": "2025-05-26T07:15:49.209Z",
-  "updated_at": "2026-05-15T14:00:06.954Z",
+  "key_path": "UpgradeFullFeatureSetDescription",
+  "content": "Includes AI tools, mobile editing, scalability and clustering, and tech support.",
+  "content_en_sha1_hash": "f250e7409a767fac3d13ddec6897088d1f1b0e57",
+  "created_at": "2026-09-29T10:10:19.535Z",
+  "updated_at": "2026-10-01T11:46:08.032Z",
   "comment": {
-    "text": "This is a label for an instruction item, appearing as a clickable link within a banner promoting a Pro plan upgrade. It directs users to Windows-specific installation instructions.",
+    "text": "Description text in an upgrade path dialog listing the features included in the full feature set option.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:39:57.360Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-10-01T11:46:08.032Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/OfficialDocumentation.tsx",
-      "line_number": 90,
-      "context": "{t(\"UpgradeToProBannerInstructionReadNow\")}\n </Link>\n </Text>\n —\n <Text fontWeight={600}>\n {t(\"UpgradeToProBannerInstructionItemWindows\")}{\" \"}\n <Link\n tag=\"a\"\n fontSize=\"13px\"\n fontWeight=\"600\"\n href={enterpriseInstallWindowsUrl}",
+      "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
+      "line_number": 134,
+      "context": "id: \"fullFeatureSet\",\n icon: AIReactSvgUrl,\n title: t(\"Common:UpgradeFullFeatureSetTitle\", {\n license: enterprise,\n }),\n description: t(\"Common:UpgradeFullFeatureSetDescription\"),\n },\n {\n id: \"whiteLabeling\",\n icon: WhiteLabelingReactSvgUrl,\n title: t(\"Common:UpgradeWhiteLabelingTitle\"),",
       "module": "/packages/shared"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,20 +1,20 @@
 {
-  "key_path": "UpgradeToProBannerInstructionItemDocker",
-  "content": "Docker instruction.",
-  "content_en_sha1_hash": "ebb408553e05d849ad37700e004798f23d8228e3",
-  "created_at": "2025-05-26T07:15:49.186Z",
-  "updated_at": "2026-05-15T14:00:06.954Z",
+  "key_path": "UpgradeFullFeatureSetTitle",
+  "content": "Full {{license}} feature set",
+  "content_en_sha1_hash": "827038ad849b8498ad933e7636c35701b48891f1",
+  "created_at": "2026-09-29T10:10:19.580Z",
+  "updated_at": "2026-10-01T11:44:24.783Z",
   "comment": {
-    "text": "This is a short label for an instruction item, specifically for Docker installation. It appears within a list of instructions for upgrading to a Pro plan.",
+    "text": "Title of a feature item in the upgrade path dialog. The {{license}} variable represents the specific license type.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:39:59.455Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-10-01T11:44:24.783Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/OfficialDocumentation.tsx",
-      "line_number": 60,
-      "context": "return (\n <div className={styles.bonus}>\n <div className={styles.officialDocumentation}>\n —\n <Text fontWeight={600}>\n {t(\"UpgradeToProBannerInstructionItemDocker\")}{\" \"}\n <Link\n tag=\"a\"\n fontSize=\"13px\"\n fontWeight=\"600\"\n href={enterpriseInstallScriptUrl}",
+      "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
+      "line_number": 131,
+      "context": "onStartTrial: onStartDeveloperTrial,\n features: [\n {\n id: \"fullFeatureSet\",\n icon: AIReactSvgUrl,\n title: t(\"Common:UpgradeFullFeatureSetTitle\", {\n license: enterprise,\n }),\n description: t(\"Common:UpgradeFullFeatureSetDescription\"),\n },\n {",
       "module": "/packages/shared"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

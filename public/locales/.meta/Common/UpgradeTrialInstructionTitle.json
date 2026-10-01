@@ -1,20 +1,20 @@
 {
-  "key_path": "UpgradeToProBannerInstructionDescr",
-  "content": "Use the official documentation to upgrade:",
-  "content_en_sha1_hash": "543e777ff5b1b9ec51febc46ab0a1b341669aea6",
-  "created_at": "2025-05-26T07:15:49.164Z",
-  "updated_at": "2026-05-15T14:00:06.954Z",
+  "key_path": "UpgradeTrialInstructionTitle",
+  "content": "To start your free 30-day trial of {{organizationName}} {{license}}, use the official documentation:",
+  "content_en_sha1_hash": "3c463d41edb519da6b90a128af2cdbeb2c9f709f",
+  "created_at": "2026-09-29T10:10:21.254Z",
+  "updated_at": "2026-10-01T11:08:13.168Z",
   "comment": {
-    "text": "This is a line of text appearing in a banner that instructs users on how to upgrade their ONLYOFFICE DocSpace. It is part of a sentence providing a link to official documentation.",
+    "text": "Instructional title within a trial card providing steps to begin a trial; contains variables for the organization name and license type.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:40:01.164Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-10-01T11:08:13.168Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Bonus/index.tsx",
-      "line_number": 80,
-      "context": "{t(\"UpgradeToProBannerInstructionHeader\", {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n })}\n </Text>\n <Text>{t(\"UpgradeToProBannerInstructionDescr\")}</Text>\n \n <OfficialDocumentation\n dataBackupUrl={dataBackupUrl}\n enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}\n enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}",
+      "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/OfficialDocumentation.tsx",
+      "line_number": 87,
+      "context": "];\n \n return (\n <div className={styles.trialCard} data-testid=\"bonus-official-documentation\">\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Common:UpgradeTrialInstructionTitle\", {\n organizationName,\n license,\n })}\n </Text>\n <Text",
       "module": "/packages/shared"
     }
   ],
@@ -82,15 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \":\" but translation ends with \"՝\"",
-          "suggestion": "",
-          "checked_at": "2026-04-12T13:30:43.193Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -157,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -172,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -208,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

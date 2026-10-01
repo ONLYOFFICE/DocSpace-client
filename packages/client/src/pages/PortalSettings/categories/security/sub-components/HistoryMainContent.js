@@ -54,6 +54,17 @@ const reportFormatOptions = [
   { key: AuditReportFormat.Csv, label: "CSV" },
 ];
 
+const REPORT_FORMAT_STORAGE_KEY = "auditReportFormat";
+
+const getInitialReportFormat = () => {
+  const savedFormat = getFromSessionStorage(REPORT_FORMAT_STORAGE_KEY);
+
+  return (
+    reportFormatOptions.find((option) => option.key === savedFormat) ||
+    reportFormatOptions[0]
+  );
+};
+
 const HistoryMainContent = (props) => {
   const {
     t,
@@ -73,7 +84,7 @@ const HistoryMainContent = (props) => {
 
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
   const [auditLifeTime, setAuditLifeTime] = useState(String(lifetime) || "180");
-  const [reportFormat, setReportFormat] = useState(reportFormatOptions[0]);
+  const [reportFormat, setReportFormat] = useState(getInitialReportFormat);
 
   const theme = useTheme();
 
@@ -105,6 +116,11 @@ const HistoryMainContent = (props) => {
     };
     saveToSessionStorage("storagePeriod", newSettings);
   }, [loginLifeTime, auditLifeTime]);
+
+  const onSelectReportFormat = (option) => {
+    setReportFormat(option);
+    saveToSessionStorage(REPORT_FORMAT_STORAGE_KEY, option.key);
+  };
 
   const handleMouseDown = (e) => {
     if (e.button === 0 || e.button === 1) {
@@ -227,7 +243,7 @@ const HistoryMainContent = (props) => {
           }
           options={reportFormatOptions}
           selectedOption={reportFormat}
-          onSelect={setReportFormat}
+          onSelect={onSelectReportFormat}
           scaled={false}
           size="content"
           directionY="top"

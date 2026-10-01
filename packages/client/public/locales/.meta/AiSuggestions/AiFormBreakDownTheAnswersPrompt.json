@@ -1,0 +1,29 @@
+{
+  "key_path": "AiFormBreakDownTheAnswersPrompt",
+  "content": "Show how the responses to this form are distributed: the count for each choice field and how submissions spread over time. Name the fields you used. If this information is not provided, ask me which fields to break down first.",
+  "content_en_sha1_hash": "3affa261afe618b689e89bcf0ecd79195c8bf4af",
+  "created_at": "2026-09-14T19:16:00.054Z",
+  "updated_at": "2026-09-14T19:20:10.150Z",
+  "comment": {
+    "text": "An instructional prompt sent to the AI when a user selects the \"Break down answers\" suggestion to analyze form response distributions and submission trends.",
+    "is_auto": true,
+    "updated_at": "2026-09-14T19:20:10.150Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 860,
+      "context": "name: t(\"AiSuggestions:AiFormWhatCanTheResponsesTellMe\"),\n prompt: t(\"AiSuggestions:AiFormWhatCanTheResponsesTellMePrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormBreakDownTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormBreakDownTheAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormCheckTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormCheckTheAnswersPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

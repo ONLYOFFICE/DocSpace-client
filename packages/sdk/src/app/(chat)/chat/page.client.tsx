@@ -114,12 +114,12 @@ const ChatParamsBridge = ({ fileId, threadId }: ChatParamsBridgeProps) => {
           },
         ]),
       )
-      .then(({ duplicates, skippedOverLimit }) => {
+      .then(({ duplicates, skippedOverLimit, cap }) => {
         // Resuming a thread can land on a composer that already holds this
         // file, and the cap applies here as anywhere else — both drop the
         // chip silently, so say which one happened.
         notifyAlreadyAttached(t, duplicates);
-        notifyAttachmentLimit(t, skippedOverLimit);
+        notifyAttachmentLimit(t, skippedOverLimit, cap);
       })
       .catch((error: unknown) => {
         frameCallEvent({

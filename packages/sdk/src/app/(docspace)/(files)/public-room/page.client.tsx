@@ -40,6 +40,7 @@ import { observer } from "mobx-react";
 
 import { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
+import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
@@ -78,6 +79,10 @@ function PublicRoomPage({
     settingsStore.setShareKey(shareKey);
     settingsStore.setDisplayAbout(portalSettings.displayAbout);
   }, [settingsStore, shareKey, portalSettings]);
+
+  React.useEffect(() => {
+    frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
+  }, []);
 
   return (
     <List

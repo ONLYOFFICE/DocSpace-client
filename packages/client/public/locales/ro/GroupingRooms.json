@@ -1,5 +1,6 @@
 {
   "AddRoom": "Adaugă cameră",
+  "AddSpace": "Adaugă spațiu",
   "AddToGroup": "Adaugă în grup",
   "ChangesApplied": "Au fost efectuate modificări",
   "CreateAGroup": "Creează un grup",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Dezactivarea grupurilor de camere",
   "DisablingRoomGroupsDescription": "Grupurile vor fi salvate, dar ascunse. Reactivați în Profil, Gestionarea fișierelor.",
   "EditRoomGroups": "Editarea grupurilor de camere",
+  "EditSpaceGroups": "Editarea grupurilor de spații",
   "EmptyGroupRoomsDescription": "Nu există camere aici. Încercați să adăugați o cameră sau să eliminați acest grup.",
+  "EmptyGroupSpacesDescription": "Nu există spații aici. Încercați să adăugați un spațiu sau să eliminați acest grup.",
+  "FormSpaces": "Spații",
   "GroupHasBeenDeleted": "Grupul a fost șters",
   "GroupIcon": "Iconă de grup",
   "GroupIsEmpty": "Grupul este gol",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Elimină gruparea",
   "RemoveGroupConfirmation": "Sunteți pe punctul de a șterge un grup de camere. Sunteți sigur că doriți să continuați?",
   "RemoveGroupInfo": "Camerele incluse în grup vor fi afișate în secțiunea <strong>Toate camerele</strong>.",
+  "RemoveSpaceGroupConfirmation": "Sunteți pe punctul de a șterge un grup de spații. Sunteți sigur că doriți să continuați?",
+  "RemoveSpaceGroupInfo": "Spațiile incluse în grup vor fi afișate în secțiunea <strong>Toate spațiile</strong>.",
   "RoomAddedToGroup": "Camera selectată a fost adăugată în <1>{{groupName}}</1>.",
   "RoomGrouping": "Grupare camere",
   "RoomGroupingDisabled": "Gruparea camerelor este dezactivată",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Puteți grupa camerele în foldere și puteți comuta ușor între ele.",
   "RoomRemovedFromGroup": "Camera selectată a fost eliminată din <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Camerele selectate au fost adăugate în <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Cuptrările selectate au fost eliminate din <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Cuptrările selectate au fost eliminate din <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "Spațiul selectat a fost adăugat în <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "Spațiul selectat a fost eliminat din <1>{{groupName}}</1>.",
+  "SpacesAddedToGroup": "Spațiile selectate au fost adăugate în <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "Spațiile selectate au fost eliminate din <1>{{groupName}}</1>."
 }

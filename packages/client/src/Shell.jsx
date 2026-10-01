@@ -97,7 +97,6 @@ import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 import { ModelUpdatedBanner } from "SRC_DIR/pages/Home/View/ModelUpdatedBanner";
 import { useAiAgentsPickerActions } from "SRC_DIR/Hooks/useAiAgentsPickerActions";
-import { useFormsRecommendation } from "SRC_DIR/Hooks/useFormsRecommendation";
 
 import config from "PACKAGE_FILE";
 
@@ -160,7 +159,6 @@ const Shell = ({ page = "home", ...rest }) => {
     agentEntityId,
     isInsideAgentRoom,
     canEditAgentRoom,
-    recommendedModelForForms,
     getAgentRoomId,
     openResultFile,
     closeEditorPanel,
@@ -172,6 +170,8 @@ const Shell = ({ page = "home", ...rest }) => {
     selectedIsRootFolder,
     selectedSecurity,
     isPrivacyFolder,
+    isFormsFolderRoot,
+    isFormRoomRoot,
     isAIReady,
   } = rest;
 
@@ -754,6 +754,17 @@ const Shell = ({ page = "home", ...rest }) => {
     selectedFolderType !== FolderType.ResultStorage &&
     selectedRootFolderType !== FolderType.AIAgents;
 
+  // The Forms section takes a single attachment: a question there is about one
+  // form and the responses collected in it, and two forms in one message
+  // would mix two schemas.
+  //
+  // Both signals come from the store rather than from `rootFolderType`:
+  // `FolderType.Forms` only ever sits on the bare Forms root, while a form
+  // filling room and everything inside it report `rootFolderType = Rooms`
+  // (see the note in helpers/utils.js) — `isFormRoomRoot` is the getter that
+  // covers the room and its In progress / Complete folders.
+  const isFormsSection = isFormsFolderRoot || isFormRoomRoot;
+
   const withoutNavMenu =
     isEditor ||
     pagesWithoutNavMenu ||
@@ -871,18 +882,6 @@ const Shell = ({ page = "home", ...rest }) => {
     [isInsideAgentRoom, pickedAgent],
   );
 
-  // The in-chat notice recommending the model tested for form results. Only
-  // inside an AI agent room, as the legacy chat had it: elsewhere the chat
-  // answers with the portal default and there is no agent to re-point.
-  const formsRecommendation = useFormsRecommendation({
-    // `agentEntityId` is dropped for an agent room opened without the UseChat
-    // right (the pane is a view-only stub there) — no chat, nothing to notice.
-    enabled: !!isInsideAgentRoom && !!agentEntityId,
-    agentRoomId: agentEntityId,
-    canEditAgent: !!canEditAgentRoom,
-    recommendedModel: recommendedModelForForms,
-  });
-
   // Chat error box override (Bug 83207): the wallet 402 must read as a
   // human message with a way to top up instead of the raw provider text.
   // Only the Payer can actually top the wallet up, so the button to
@@ -960,7 +959,6 @@ const Shell = ({ page = "home", ...rest }) => {
           // UI are switched off. Viewer-role gating inside agent rooms is
           // handled by `accessRightsStore.canUseChat` in AIAgentView.
           canUseAi={canUseAi}
-          formsRecommendation={formsRecommendation}
           callbacks={aiChatCallbacks}
           entityId={agentEntityId}
           contextEntityId={chatContextEntityId}
@@ -988,6 +986,7 @@ const Shell = ({ page = "home", ...rest }) => {
           composerHeader={standalone ? undefined : composerHeader}
           composerDisabled={standalone ? undefined : !isAIReady}
           suggestions={aiSuggestions}
+          attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
           <ModelUpdatedBanner
@@ -1158,6 +1157,11 @@ const ShellWrapper = inject(
       // rights of the opened folder / room do not allow are filtered out.
       selectedSecurity: selectedFolderStore.security,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
+      // The Forms section, in both its shapes: the bare Forms root, and a
+      // form filling room with its In progress / Complete folders. Caps the
+      // chat's attachments at one (see `attachmentLimit`).
+      isFormsFolderRoot: treeFoldersStore.isFormsFolderRoot,
+      isFormRoomRoot: treeFoldersStore.isFormRoomRoot,
       // Scope the chat to the current location: inside any room (including
       // its subfolders) the room id wins, elsewhere the currently selected
       // folder id is used. Only when nothing is selected yet does the chat
@@ -1184,7 +1188,6 @@ const ShellWrapper = inject(
       // profile. It is shown in the composer as a read-only label, or — for
       // users who may edit the room — an interactive picker to change it.
       isInsideAgentRoom: selectedFolderStore.isAIRoom,
-      recommendedModelForForms: settingsStore.aiConfig?.recommendedModelForForms,
       // EditRoom is the room-manager right; viewers (EditRoom === false, or
       // security not resolved yet) get the read-only label. Both room and
       // sub-folder security view-models carry EditRoom.

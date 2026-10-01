@@ -34,6 +34,7 @@
  */
 
 import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import type { RoomSearchArea } from "@docspace/shared/enums";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector/Selector.types";
 
@@ -58,12 +59,14 @@ export interface IRoomGroup {
   icon: ILogo;
   rooms: TRoom[];
   totalRooms: number;
+  searchArea?: RoomSearchArea;
 }
 
 export interface ICreateRoomGroup {
   name: string;
   icon: string | null;
   rooms: (string | number)[] | null;
+  searchArea: RoomSearchArea;
 }
 
 export interface IUpdateRoomGroup {
@@ -106,6 +109,8 @@ export interface EditRoomGroupsDialogProps {
   organizeRoomsGrouping?: boolean;
   /** Function to toggle room grouping setting */
   setOrganizeRoomsGrouping?: (enabled: boolean) => Promise<boolean>;
+  /** Section the groups belong to: the Rooms section or the Forms section */
+  searchArea: RoomSearchArea;
 }
 
 export interface IRoomItem {
@@ -120,10 +125,12 @@ export interface DeleteGroupDialogProps {
   deleteRoomGroup: (groupId: string) => Promise<void>;
   getAllRoomGroups: () => Promise<void>;
   currentFilterGroupId?: string | number | null;
+  isFormsSection?: boolean;
 }
 
 export interface GroupItemProps {
   group: IRoomGroup;
+  isFormsSection?: boolean;
   onClickGroup?: (groupId: string) => void;
   onClickEditIcon?: (groupId: string) => void;
   onClickDeleteGroup?: (groupId: string) => void;
@@ -140,4 +147,5 @@ export interface RoomListPanelProps {
   disableSubmitUntilChanged?: boolean;
   sortSelectedFirst?: boolean;
   withoutBackdropBackground?: boolean;
+  isFormsSection?: boolean;
 }

@@ -3,7 +3,7 @@
   "content": "Add files from storage",
   "content_en_sha1_hash": "950d4cab20b74e70f578b0a6427eac0cdbf931dd",
   "created_at": "2026-08-31T18:22:47.040Z",
-  "updated_at": "2026-08-31T19:32:21.297Z",
+  "updated_at": "2026-09-24T18:43:15.102Z",
   "comment": {
     "text": "Button label in the composer actions used to select files from an integrated product. It includes the {{productName}} variable representing the brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/providers/files/use-integration.tsx",
-      "line_number": 108,
+      "line_number": 140,
       "context": "const composerActions = React.useMemo<ComposerAction[]>(\n () => [\n {\n id: \"add-files-from-product\",\n text: t(\"Common:AddFilesFromProduct\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue: \"Add files from {{productName}}\",\n }),\n icon: <CatalogDocuments className={styles.composerActionIcon} />,\n onClick: () => setPickerVisible(true),",
       "module": "/libs/ui-kit"
     }

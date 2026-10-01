@@ -3,7 +3,7 @@
   "content": "Edit agent",
   "content_en_sha1_hash": "8e424aecf7369d4b8b043b8b333a738fbc42d9f2",
   "created_at": "2026-08-31T18:23:02.045Z",
-  "updated_at": "2026-08-31T19:17:57.217Z",
+  "updated_at": "2026-09-14T19:16:02.562Z",
   "comment": {
     "text": "Dialog title and menu item label used to open the interface for modifying an existing agent.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 470,
+      "line_number": 463,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-agent\",\n key: \"edit-agent\",\n label: t(\"Common:EditAgent\"),\n icon: SettingsReactSvgUrl,\n onClick: () => onClickEditAgent(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },

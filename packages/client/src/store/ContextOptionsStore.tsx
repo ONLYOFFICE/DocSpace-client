@@ -109,6 +109,11 @@ import {
   onLoadPluginsImpl,
 } from "./contextOptionsStore/plugins.helpers";
 import {
+  getFrameCreateActionsImpl,
+  onLoadFrameActionsImpl,
+  onMultiLoadFrameActionsImpl,
+} from "./contextOptionsStore/frameActions.helpers";
+import {
   onClickReconnectStorageImpl,
   onClickMakeFormImpl,
   onCopyLinkImpl,
@@ -725,6 +730,12 @@ class ContextOptionsStore {
 
   onLoadPlugins = (item: TContextItem): TContextOption[]=> onLoadPluginsImpl(this, item);
 
+  onLoadFrameActions = (item: TContextItem): TContextOption[] =>
+    onLoadFrameActionsImpl(this, item);
+
+  onMultiLoadFrameActions = (items: TSelectionItem[]): TContextOption[] =>
+    onMultiLoadFrameActionsImpl(this, items);
+
   // call sites may pass an undefined roomType which the
   // original .js forwarded as-is to getDefaultAccessUser — the cast keeps
   // that behavior.
@@ -862,11 +873,8 @@ class ContextOptionsStore {
     this.oformsStore.setGallerySelected(item);
   };
 
-  // the Gallery ItemTitle consumer passes either a full
-  // TOformFile or a minimal { attributes } shape (and forwards it as-is);
-  // the casts below keep the original unchecked usage.
   getFormGalleryContextOptions = (
-    item: TOformFile | { attributes: { name_form: string } } | null,
+    item: TOformFile | null,
     t: TTranslation,
     navigate?: unknown,
   ): ContextMenuModel[]=> getFormGalleryContextOptionsImpl(this, item, t, navigate);
@@ -948,7 +956,8 @@ class ContextOptionsStore {
 
   _syncInfoPanelRoom = (newRoom: TRoom)=> _syncInfoPanelRoomImpl(this, newRoom);
 
-  askAI = async (item: TContextItem)=> askAIImpl(this, item);
+  askAI = async (item: TContextItem, analyze = false)=>
+    askAIImpl(this, item, analyze);
 
   getFilesContextOptions = (
     item: TContextItem,
@@ -1079,7 +1088,18 @@ class ContextOptionsStore {
     },
   ) => getContextOptionsPlusFormRoomImpl(this, t, models);
 
-  getFolderModel = (t: TTranslation, isSectionMenu?: boolean)=> getFolderModelImpl(this, t, isSectionMenu);
+  getFolderModel = (t: TTranslation, isSectionMenu?: boolean) => {
+    const options = getFolderModelImpl(this, t, isSectionMenu);
+    const frameActions = getFrameCreateActionsImpl(this);
+
+    if (!options || frameActions.length === 0) return options;
+
+    return [
+      ...options,
+      { key: "separator-custom-actions", isSeparator: true },
+      ...frameActions,
+    ];
+  };
 
   getModel = (item: TContextItem, t: TTranslation) => {
     const { selection } = this.filesStore;

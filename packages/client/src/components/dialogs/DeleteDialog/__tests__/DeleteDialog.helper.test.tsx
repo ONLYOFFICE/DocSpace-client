@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect } from "vitest";
 
+import { RoomsType } from "@docspace/shared/enums";
+
 import { getDialogContent } from "../DeleteDialog.helper";
 
 // Bug 82886: a private room bypasses the recycle bin on purpose
@@ -43,6 +45,7 @@ type ContentArgs = {
   isRecycleBinFolder?: boolean;
   isRoom?: boolean;
   isPrivacyFolder?: boolean;
+  isAIAgent?: boolean;
 };
 
 const noteKeys = ({
@@ -50,6 +53,7 @@ const noteKeys = ({
   isRecycleBinFolder = false,
   isRoom = true,
   isPrivacyFolder = false,
+  isAIAgent = false,
 }: ContentArgs) =>
   keysOf(
     getDialogContent(
@@ -62,7 +66,7 @@ const noteKeys = ({
       isRoom,
       false, // isTemplatesFolder
       false, // isSharedWithMeFolderRoot
-      false, // isAIAgent
+      isAIAgent,
       false, // isAIAgentsFolderRoot
       false, // unsubscribe
       isPrivacyFolder,
@@ -112,5 +116,49 @@ describe("getDialogContent — deleting from a private room", () => {
 
     expect(keys).toContain("DeleteItemForeverConfirm");
     expect(keys).toContain("FilePermanentlyDeleted");
+  });
+});
+
+// Bug: the group menu in the AI agents section deletes every selected agent
+// (delete.helpers.ts: deleteRoomsImpl collects all ids), but the note named
+// only selection[0], so the user confirmed destroying N agents while reading
+// about one. The note must follow the same count as the delete call.
+
+const agent = (id: number, title: string) => ({
+  id,
+  title,
+  isAIAgent: true,
+  roomType: RoomsType.AIRoom,
+});
+
+describe("getDialogContent — deleting AI agents", () => {
+  it("names the agent when a single one is selected", () => {
+    const keys = noteKeys({
+      selection: [agent(1, "Support bot")],
+      isAIAgent: true,
+    });
+
+    expect(keys).toContain("DeleteAIAgentDescription");
+    expect(keys).not.toContain("DeleteAIAgentsDescription");
+  });
+
+  it("uses the counted plural wording for several agents", () => {
+    const keys = noteKeys({
+      selection: [agent(1, "Support bot"), agent(2, "Sales bot")],
+      isAIAgent: true,
+    });
+
+    expect(keys).toContain("DeleteAIAgentsDescription");
+    expect(keys).not.toContain("DeleteAIAgentDescription");
+  });
+
+  it("does not fall back to the room wording", () => {
+    const keys = noteKeys({
+      selection: [agent(1, "Support bot"), agent(2, "Sales bot")],
+      isAIAgent: true,
+    });
+
+    expect(keys).not.toContain("DeleteRooms");
+    expect(keys).toContain("Common:WantToContinue");
   });
 });

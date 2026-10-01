@@ -3,7 +3,7 @@
   "content": "Show version history",
   "content_en_sha1_hash": "55f3b72517c6594dba1e3a6ce9d3fdee0a590f36",
   "created_at": "2025-05-19T21:30:48.734Z",
-  "updated_at": "2026-08-20T12:26:01.813Z",
+  "updated_at": "2026-09-14T19:16:02.654Z",
   "comment": {
     "text": "This is the label for a button or menu item that, when clicked, opens the version history of a document or file. It also appears as a tooltip for a version badge.",
     "is_auto": true,
@@ -14,13 +14,13 @@
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
       "line_number": 190,
-      "context": "const versionActions = onlyShowVersionHistory\n ? [\n {\n id: \"option_show-version-history\",\n key: \"show-version-history\",\n label: t(\"Common:ShowVersionHistory\"),\n icon: HistoryReactSvgUrl,\n onClick: () =>\n self.showVersionHistory(\n item.id,\n item.security,",
+      "context": "const versionActions = onlyShowVersionHistory\n ? [\n {\n id: \"option_show-version-history\",\n key: \"show-version-history\",\n label: t(\"Common:ShowVersionHistory\"),\n icon: HistoryReactSvgUrl,\n onClick: () =>\n self.showVersionHistory(item.id, item.security, item?.requestToken),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
       "line_number": 190,
-      "context": "const versionActions = onlyShowVersionHistory\n ? [\n {\n id: \"option_show-version-history\",\n key: \"show-version-history\",\n label: t(\"Common:ShowVersionHistory\"),\n icon: HistoryReactSvgUrl,\n onClick: () =>\n self.showVersionHistory(\n item.id,\n item.security,",
+      "context": "const versionActions = onlyShowVersionHistory\n ? [\n {\n id: \"option_show-version-history\",\n key: \"show-version-history\",\n label: t(\"Common:ShowVersionHistory\"),\n icon: HistoryReactSvgUrl,\n onClick: () =>\n self.showVersionHistory(item.id, item.security, item?.requestToken),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {

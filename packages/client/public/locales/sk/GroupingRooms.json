@@ -1,5 +1,6 @@
 {
   "AddRoom": "Pridať miestnosť",
+  "AddSpace": "Pridať priestor",
   "AddToGroup": "Pridať do skupiny",
   "ChangesApplied": "Zmeny boli aplikované",
   "CreateAGroup": "Vytvoriť skupinu",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "Deaktivácia skupín miestností",
   "DisablingRoomGroupsDescription": "Skupiny budú uložené, ale skryté. Opätovne zapnúť v Profile, riadenie súborov.",
   "EditRoomGroups": "Upraviť skupiny miestností",
+  "EditSpaceGroups": "Upraviť skupiny priestorov",
   "EmptyGroupRoomsDescription": "Tu nie sú žiadne miestnosti. Skúste pridať miestnosť alebo odstrániť túto skupinu.",
+  "EmptyGroupSpacesDescription": "Tu nie sú žiadne priestory. Skúste pridať priestor alebo odstrániť túto skupinu.",
+  "FormSpaces": "Priestory",
   "GroupHasBeenDeleted": "Skupina bola odstránená",
   "GroupIcon": "Ikona skupiny",
   "GroupIsEmpty": "Skupina je prázdna",
@@ -18,6 +22,8 @@
   "RemoveGroup": "Odobrať skupinu",
   "RemoveGroupConfirmation": "Bola ste na pokraji zmazania skupiny miestností. Chcete pokračovať?",
   "RemoveGroupInfo": "Izby zahrnuté v skupine budú zobrazené v sekcii <strong>Všetky izby</strong>.",
+  "RemoveSpaceGroupConfirmation": "Chystáte sa zmazať skupinu priestorov. Naozaj chcete pokračovať?",
+  "RemoveSpaceGroupInfo": "Priestory zahrnuté v skupine sa zobrazia v sekcii <strong>Všetky priestory</strong>.",
   "RoomAddedToGroup": "Vybraná miestnosť bola pridaná do <1>{{groupName}}</1>.",
   "RoomGrouping": "Skupinovanie miestností",
   "RoomGroupingDisabled": "Skupinovanie miestností je deaktivované",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "Môžete miestnosti zradiť do priečienok a ľahko medzi nimi prepínať.",
   "RoomRemovedFromGroup": "Vybraná miestnosť bola odstránená z <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Vybrané miestnosti boli pridané do <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Vybrané miestnosti boli odstránené z <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Vybrané miestnosti boli odstránené z <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "Vybraný priestor bol pridaný do <1>{{groupName}}</1>.",
+  "SpaceRemovedFromGroup": "Vybraný priestor bol odstránený z <1>{{groupName}}</1>.",
+  "SpacesAddedToGroup": "Vybrané priestory boli pridané do <1>{{groupName}}</1>.",
+  "SpacesRemovedFromGroup": "Vybrané priestory boli odstránené z <1>{{groupName}}</1>."
 }

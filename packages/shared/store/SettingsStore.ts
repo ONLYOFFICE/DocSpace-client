@@ -89,7 +89,7 @@ import { version } from "../package.json";
 import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
 
 import type { Nullable } from "../types";
-import type { TFrameConfig } from "../types/Frame";
+import type { TFrameConfig, TFrameCustomActions } from "../types/Frame";
 
 import { size as deviceSize, getDeviceTypeByWidth, isTablet } from "../utils";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
@@ -198,7 +198,6 @@ class SettingsStore {
     domain: "",
     uploadPath: "",
     uploadDomain: "",
-    uploadDashboard: "",
   };
 
   logoUrl: Nullable<ILogo> = null;
@@ -280,6 +279,8 @@ class SettingsStore {
   hotkeyPanelVisible = false;
 
   frameConfig: Nullable<TFrameConfig> = null;
+
+  frameCustomActions: Nullable<TFrameCustomActions> = null;
 
   appearanceTheme: TColorScheme[] = [];
 
@@ -1690,9 +1691,14 @@ class SettingsStore {
     this.hotkeyPanelVisible = hotkeyPanelVisible;
   };
 
+  setFrameCustomActions = (actions: Nullable<TFrameCustomActions>) => {
+    this.frameCustomActions = actions ?? null;
+  };
+
   setFrameConfig = async (frameConfig: TFrameConfig) => {
     runInAction(() => {
       this.frameConfig = frameConfig;
+      this.frameCustomActions = frameConfig?.customActions ?? null;
     });
 
     applyCustomStyles(frameConfig?.stylesUrl);

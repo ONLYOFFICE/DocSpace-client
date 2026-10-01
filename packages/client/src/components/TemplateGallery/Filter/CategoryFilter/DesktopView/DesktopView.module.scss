@@ -35,6 +35,11 @@
 
 @use "@docspace/ui-kit/styles/mixins";
 
+.categoryFilterRoot {
+  position: relative;
+  width: 100%;
+}
+
 .categoryFilter {
   width: 247px !important;
 

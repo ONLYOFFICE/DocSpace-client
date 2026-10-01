@@ -41,6 +41,7 @@ vi.mock("./common", () => ({
 import { frameCallCommand } from "./common";
 import {
   isOAuthFrame,
+  onAuthTokenPush,
   requestAuthToken,
   AUTH_TOKEN_TIMEOUT_MS,
   __resetOAuthTokenForTests,
@@ -76,7 +77,7 @@ const lastCallId = (): number => {
 };
 
 const dispatchTokenReturn = (
-  callId: number,
+  callId: number | undefined,
   data: unknown,
   opts: { source?: unknown; origin?: string } = {},
 ) => {
@@ -84,7 +85,7 @@ const dispatchTokenReturn = (
     data: JSON.stringify({
       frameId: "test-frame",
       type: "onAuthTokenReturn",
-      callId,
+      ...(callId !== undefined && { callId }),
       data,
     }),
     source: (opts.source ?? fakeParent) as MessageEventSource,
@@ -220,4 +221,55 @@ describe("oauthToken", () => {
     });
   });
 
+
+  describe("onAuthTokenPush", () => {
+    it("delivers a token posted without a callId to subscribers", () => {
+      enterIframe();
+      const listener = vi.fn();
+      onAuthTokenPush(listener);
+
+      dispatchTokenReturn(undefined, { accessToken: "pushed-jwt" });
+
+      expect(listener).toHaveBeenCalledWith("pushed-jwt");
+      expect(frameCallCommandMock).not.toHaveBeenCalled();
+    });
+
+    it("does not settle a pending request and ignores an empty push", async () => {
+      vi.useFakeTimers();
+      enterIframe();
+      const listener = vi.fn();
+      onAuthTokenPush(listener);
+      const promise = requestAuthToken();
+
+      dispatchTokenReturn(undefined, { accessToken: "pushed-jwt" });
+      dispatchTokenReturn(undefined, { accessToken: "" });
+
+      expect(listener).toHaveBeenCalledTimes(1);
+      vi.advanceTimersByTime(AUTH_TOKEN_TIMEOUT_MS);
+      await expect(promise).resolves.toBeNull();
+    });
+
+    it("ignores a push from a different source", () => {
+      enterIframe();
+      const listener = vi.fn();
+      onAuthTokenPush(listener);
+
+      dispatchTokenReturn(undefined, { accessToken: "pushed-jwt" }, {
+        source: {} as Window,
+      });
+
+      expect(listener).not.toHaveBeenCalled();
+    });
+
+    it("stops delivering after unsubscribe", () => {
+      enterIframe();
+      const listener = vi.fn();
+      const unsubscribe = onAuthTokenPush(listener);
+      unsubscribe();
+
+      dispatchTokenReturn(undefined, { accessToken: "pushed-jwt" });
+
+      expect(listener).not.toHaveBeenCalled();
+    });
+  });
 });

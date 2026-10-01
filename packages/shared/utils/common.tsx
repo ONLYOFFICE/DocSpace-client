@@ -688,6 +688,50 @@ export const frameCallbackData = (
   );
 };
 
+export type TFrameMethodError = {
+  isError: true;
+  status?: number;
+  message: string;
+  name?: string;
+  code?: string | number;
+};
+
+export const toFrameMethodError = (error: unknown): TFrameMethodError => {
+  if (!error || typeof error !== "object") {
+    return { isError: true, message: String(error) };
+  }
+
+  const err = error as {
+    status?: unknown;
+    response?: { status?: unknown };
+    message?: unknown;
+    name?: unknown;
+    code?: unknown;
+  };
+  const status =
+    typeof err.status === "number"
+      ? err.status
+      : typeof err.response?.status === "number"
+        ? err.response.status
+        : undefined;
+  const message =
+    typeof err.message === "string" && err.message
+      ? err.message
+      : typeof err.name === "string"
+        ? err.name
+        : "Unknown error";
+
+  return {
+    isError: true,
+    ...(status !== undefined && { status }),
+    message,
+    ...(typeof err.name === "string" && { name: err.name }),
+    ...((typeof err.code === "string" || typeof err.code === "number") && {
+      code: err.code,
+    }),
+  };
+};
+
 export const frameCallEvent = (eventReturnData: unknown) => {
   window.parent.postMessage(
     JSON.stringify({
@@ -727,6 +771,8 @@ export const frameHandlePing = (eventData: {
   type?: string;
   frameId?: string;
 }): boolean => {
+  if (eventData?.type === "onAuthTokenReturn") return true;
+
   if (eventData?.type === "ping") {
     window.parent.postMessage(
       JSON.stringify({

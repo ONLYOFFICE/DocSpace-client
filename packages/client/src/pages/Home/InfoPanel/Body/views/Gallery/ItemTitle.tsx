@@ -59,11 +59,7 @@ import commonStyles from "../../helpers/Common.module.scss";
 import styles from "./Gallery.module.scss";
 
 type ItemTitleProps = {
-  gallerySelected:
-    | OformsStore["gallerySelected"]
-    | {
-        attributes: { name_form: string };
-      };
+  gallerySelected: OformsStore["gallerySelected"];
   getIcon?: FilesSettingsStore["getIcon"];
   currentColorScheme?: SettingsStore["currentColorScheme"];
   getFormGalleryContextOptions?: ContextOptionsStore["getFormGalleryContextOptions"];
@@ -110,7 +106,7 @@ const ItemTitle = ({
         src={getIcon?.(32, currentExtensionGallery) ?? ""}
       />
       <Text className={classNames(styles.select, "text")}>
-        {gallerySelected?.attributes?.name_form}
+        {gallerySelected?.title}
       </Text>
 
       <Text

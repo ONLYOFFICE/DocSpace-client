@@ -21,7 +21,7 @@
   "BasicInfo": "Pamatinformācija",
   "Client": "Klients",
   "ClientCopy": "Klienta ID ir veiksmīgi iekopēts starpliktuvē",
-  "ClientHelpButton": "Akreditācijas dati OAth 2.0 izmantošanai par jūsu autentifikācijas veidu.<br/> <strong>Piezīme:</strong> jebkurš uzņēmuma administrators, kurš zina lietotnes klienta ID, varēs izgūt informāciju par lietotni, tostarp lietotnes nosaukumu, autentifikācijas veidu, lietotnes tvērumu un novirzīšanas URI.",
+  "ClientHelpButton": "Akreditācijas dati OAuth 2.0 izmantošanai par jūsu autentifikācijas veidu.<br/> <strong>Piezīme:</strong> jebkurš uzņēmuma administrators, kurš zina lietotnes klienta ID, varēs izgūt informāciju par lietotni, tostarp lietotnes nosaukumu, autentifikācijas veidu, lietotnes tvērumu un novirzīšanas URI.",
   "ClientSecretResetSuccessfully": "Klienta noslēpuma atiestatīšana ir veiksmīga",
   "CodeVerifier": "Koda verificētājs",
   "Creator": "Sagatavotājs",

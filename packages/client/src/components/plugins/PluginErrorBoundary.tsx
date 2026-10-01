@@ -35,7 +35,11 @@
 
 import React from "react";
 
-type Props = { pluginName: string; children: React.ReactNode };
+type Props = {
+  pluginName: string;
+  resetKey?: unknown;
+  children: React.ReactNode;
+};
 type State = { error: Error | null };
 
 export class PluginErrorBoundary extends React.Component<Props, State> {
@@ -47,6 +51,15 @@ export class PluginErrorBoundary extends React.Component<Props, State> {
 
   componentDidCatch(error: Error) {
     console.error(`[Plugin: ${this.props.pluginName}]`, error);
+  }
+
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    if (
+      prevState.error &&
+      this.state.error &&
+      prevProps.resetKey !== this.props.resetKey
+    )
+      this.setState({ error: null });
   }
 
   render() {

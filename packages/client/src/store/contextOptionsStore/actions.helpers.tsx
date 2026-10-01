@@ -50,6 +50,7 @@ import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
 import {
   AnalyticsEvents,
+  RoomSearchArea,
   RoomsType,
   Events,
   FolderType,
@@ -549,10 +550,16 @@ export const onAddRoomsToGroupImpl = async (
       values: { groupName },
       components: { 1: React.createElement("strong") },
     };
-    const keys = {
-      single: { tKey: "GroupingRooms:RoomAddedToGroup" },
-      multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
-    };
+    const keys =
+      self.dialogsStore.roomGroupsArea === RoomSearchArea.Forms
+        ? {
+            single: { tKey: "GroupingRooms:SpaceAddedToGroup" },
+            multiple: { tKey: "GroupingRooms:SpacesAddedToGroup" },
+          }
+        : {
+            single: { tKey: "GroupingRooms:RoomAddedToGroup" },
+            multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
+          };
     const i18nKey =
       roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
     toastr.success(
@@ -594,10 +601,16 @@ export const onRemoveRoomsFromGroupImpl = async (
       values: { groupName },
       components: { 1: React.createElement("strong") },
     };
-    const keys = {
-      single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
-      multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
-    };
+    const keys =
+      self.dialogsStore.roomGroupsArea === RoomSearchArea.Forms
+        ? {
+            single: { tKey: "GroupingRooms:SpaceRemovedFromGroup" },
+            multiple: { tKey: "GroupingRooms:SpacesRemovedFromGroup" },
+          }
+        : {
+            single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
+            multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
+          };
     const i18nKey =
       roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
     toastr.success(
@@ -635,7 +648,7 @@ const onCreateRoomFromTemplateImpl = (self: ContextOptionsStore) => {
   if (!gallerySelected) return;
 
   const extension = self.oformsStore.currentExtensionGallery.replace(".", "");
-  const title = gallerySelected.attributes.name_form;
+  const title = gallerySelected.title;
 
   setFormTemplateForNewRoom({ id: gallerySelected.id, title, extension });
 
@@ -687,7 +700,7 @@ export const onCreateTemplateImpl = async (
     extension,
     id: -1,
     fromTemplate: true,
-    title: gallerySelected.attributes.name_form,
+    title: gallerySelected.title,
     openEditor: true,
     edit: true,
   };
@@ -828,11 +841,14 @@ export const _syncInfoPanelRoomImpl = (
 export const askAIImpl = async (
   self: ContextOptionsStore,
   item: TContextItem,
+  // The request is about the form's responses, not the document — see
+  // `askAIActionImpl`. Passed through every branch below unchanged.
+  analyze = false,
 ) => {
   const skipAi = getPersisted(PersistenceKeys.skipAiModal, false);
 
   if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
-    self.filesActionsStore.askAIAction(item);
+    self.filesActionsStore.askAIAction(item, analyze);
     return;
   }
 
@@ -847,7 +863,7 @@ export const askAIImpl = async (
     if (!room) return;
 
     if (room.sendFormToExternalDB || !room.security?.EditRoom) {
-      self.filesActionsStore.askAIAction(item);
+      self.filesActionsStore.askAIAction(item, analyze);
       return;
     }
 
@@ -855,7 +871,7 @@ export const askAIImpl = async (
       if (action === "connect") {
         onEditRoomTemplate(room, self._syncInfoPanelRoom);
       } else if (action === "continue") {
-        self.filesActionsStore.askAIAction(item);
+        self.filesActionsStore.askAIAction(item, analyze);
       }
     });
   } catch (error) {

@@ -46,6 +46,12 @@ import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.12.react.svg";
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 
 import { useTurnOffModelConfirmation } from "../TurnOffModelDialog";
+import {
+  buildCachePriceBreakdown,
+  CachePriceAnchor,
+  CachePriceTooltip,
+  type TCachePriceBreakdown,
+} from "../CachePriceTooltip";
 
 import styles from "./ModelSettingsRowView.module.scss";
 
@@ -55,12 +61,14 @@ type TModelRow = {
   image: string;
   link?: string;
   prices: string[];
+  breakdown: TCachePriceBreakdown | null;
 };
 
 type ModelSettingsRowViewProps = {
   sectionWidth: number;
 
   aiToolsPrices?: ServicesStore["aiToolsPrices"];
+  aiModelsCurrencySymbol?: ServicesStore["aiModelsCurrencySymbol"];
   formatAiModelsCurrency?: ServicesStore["formatAiModelsCurrency"];
   setAiModelAvailability?: ServicesStore["setAiModelAvailability"];
   aiModelAvailabilityMap?: ServicesStore["aiModelAvailabilityMap"];
@@ -71,6 +79,7 @@ type ModelSettingsRowViewProps = {
 const RowView = (props: ModelSettingsRowViewProps) => {
   const {
     aiToolsPrices,
+    aiModelsCurrencySymbol = "$",
     formatAiModelsCurrency,
     setAiModelAvailability,
     aiModelAvailabilityMap,
@@ -97,6 +106,11 @@ const RowView = (props: ModelSettingsRowViewProps) => {
         outputPrice: formatPrice(m.price?.completion),
       }),
     ],
+    breakdown: buildCachePriceBreakdown(
+      m.price,
+      aiModelsCurrencySymbol,
+      formatPrice,
+    ),
   }));
 
   const imageRows: TModelRow[] = (aiToolsPrices?.image ?? []).map((m) => ({
@@ -113,6 +127,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
         outputPrice: formatPrice(m.price?.completion),
       }),
     ],
+    breakdown: null,
   }));
 
   if (!chatRows.length && !imageRows.length) return null;
@@ -131,7 +146,9 @@ const RowView = (props: ModelSettingsRowViewProps) => {
         const enabled = aiModelAvailabilityMap?.get(row.id) ?? true;
         const isUpdating = aiModelAvailabilityUpdatingSet?.has(row.id) ?? false;
 
-        const onRowClick = () => {
+        const onRowClick = (e: React.MouseEvent<HTMLDivElement>) => {
+          if ((e.target as Element).closest("[data-tooltip-id]")) return;
+
           if (row.link) window.open(row.link, "_blank", "noopener,noreferrer");
         };
 
@@ -160,10 +177,15 @@ const RowView = (props: ModelSettingsRowViewProps) => {
                 ) : null}
               </div>
 
-              {row.prices.map((price) => (
-                <Text key={price} fontSize="12px" className={styles.prices}>
-                  {price}
-                </Text>
+              {row.prices.map((price, index) => (
+                <CachePriceAnchor
+                  key={price}
+                  breakdown={index === 0 ? row.breakdown : null}
+                >
+                  <Text fontSize="12px" className={styles.prices}>
+                    {price}
+                  </Text>
+                </CachePriceAnchor>
               ))}
             </div>
 
@@ -212,6 +234,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
         </React.Fragment>
       ) : null}
 
+      <CachePriceTooltip />
       {turnOffModelDialog}
     </div>
   );
@@ -220,6 +243,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
 export default inject<TStore>(({ servicesStore, paymentStore }) => {
   const {
     aiToolsPrices,
+    aiModelsCurrencySymbol,
     formatAiModelsCurrency,
     setAiModelAvailability,
     aiModelAvailabilityMap,
@@ -229,6 +253,7 @@ export default inject<TStore>(({ servicesStore, paymentStore }) => {
 
   return {
     aiToolsPrices,
+    aiModelsCurrencySymbol,
     formatAiModelsCurrency,
     setAiModelAvailability,
     aiModelAvailabilityMap,

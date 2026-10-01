@@ -3,7 +3,7 @@
   "content": "Action",
   "content_en_sha1_hash": "97c89a4d6630adeb18fa12ba9976a31413fe293e",
   "created_at": "2025-05-19T21:30:42.859Z",
-  "updated_at": "2026-05-15T14:00:06.870Z",
+  "updated_at": "2026-10-01T08:23:21.829Z",
   "comment": {
     "text": "Table header. It labels a column displaying the type of action performed in audit trails or login history.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
+      "line_number": 398,
+      "context": "};\n setCustomActionTargets(targets);\n \n setConfig((oldConfig) => {\n const { customActions, ...rest } = oldConfig;\n const nextActions = getCustomActions(targets, t(\"Common:Action\"));\n return nextActions ? { ...rest, customActions: nextActions } : rest;\n });\n };\n \n const onChangeSharedLink = (link) => {",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/TableView/TableHeader.js",
       "line_number": 77,

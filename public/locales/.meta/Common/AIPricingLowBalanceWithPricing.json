@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPricingLowBalanceWithPricing",
+  "content": "Available credits: {{price}}. Credits running low | <1>See pricing</1>",
+  "content_en_sha1_hash": "79723944a968f89156c2c2d39412a1a702abb78f",
+  "created_at": "2026-10-01T08:22:35.701Z",
+  "updated_at": "2026-10-01T08:30:51.546Z",
+  "comment": {
+    "text": "Status text in a service item within the billing section, shown when AI credits are low. It includes the remaining balance in {{price}} and a clickable link to the pricing page.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T08:30:51.546Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 246,
+      "context": "case AI_ENUM:\n if (isLowWalletBalance) {\n return (\n <CommonTrans\n i18nKey=\"AIPricingLowBalanceWithPricing\"\n values={{ price: formatWalletCurrency() }}\n components={{\n 1: (\n <Link\n fontSize=\"13px\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

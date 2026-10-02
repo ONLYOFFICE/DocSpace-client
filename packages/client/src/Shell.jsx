@@ -93,6 +93,7 @@ import "@docspace/shared/styles/theme.scss";
 import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
 import { getAiContextRoom } from "SRC_DIR/helpers/aiContextRoom";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 import { setFileView } from "SRC_DIR/helpers/info-panel";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
@@ -905,7 +906,7 @@ const Shell = ({ page = "home", ...rest }) => {
         action: isPayer
           ? {
               text: t("Common:TopUpWallet"),
-              onClick: () => navigate("/portal-settings/payments/wallet"),
+              onClick: () => navigate(PAYMENT_ROUTES.wallet),
             }
           : null,
       };

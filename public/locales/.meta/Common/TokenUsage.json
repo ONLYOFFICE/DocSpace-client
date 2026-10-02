@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageAnchor.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageAnchor.tsx",
       "line_number": 80,
       "context": "data-cached={cached}\n >\n <StatisticsIcon\n className={classNames(styles.icon, { [styles.iconCached]: cached })}\n role=\"img\"\n aria-label={t(\"TokenUsage\")}\n />\n {children}\n </div>\n );\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

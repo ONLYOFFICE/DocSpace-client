@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageContent.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageContent.tsx",
       "line_number": 135,
       "context": "<UsageLine\n label={t(\"TokensWrittenToCache\")}\n value={format(usage.cacheWriteTokens)}\n />\n <UsageLine\n label={t(\"TokensReasoning\")}\n value={format(usage.reasoningTokens)}\n />\n <UsageLine label={t(\"Images\")} value={format(usage.imageTokens)} />\n </div>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageContent.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageContent.tsx",
       "line_number": 89,
       "context": "const percent = getCachedTokensPercent(usage);\n const format = (value: number) => formatNumber(language, value);\n const fromCache =\n percent === null\n ? format(segments.fromCache)\n : t(\"TokenCountWithPercent\", {\n tokens: format(segments.fromCache),\n percent,\n });\n \n const bar = (Object.keys(segments) as Segment[]).filter(",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

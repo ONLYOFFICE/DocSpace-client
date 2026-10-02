@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/use-integration.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/use-integration.tsx",
       "line_number": 120,
       "context": "}),\n extension: EXTENSION_BY_FORMAT[EXPORT_FORMAT_IDS.docx],\n },\n {\n id: EXPORT_FORMAT_IDS.md,\n label: t(\"Common:ExportMdFile\", { defaultValue: \".md file\" }),\n extension: EXTENSION_BY_FORMAT[EXPORT_FORMAT_IDS.md],\n },\n ],\n [t, i18n.language],\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

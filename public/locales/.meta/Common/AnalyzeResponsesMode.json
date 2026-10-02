@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/ai-chat-panel/components/ai-chat-panel-header-container/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/components/ai-chat-panel-header-container/index.tsx",
       "line_number": 70,
       "context": "return (\n <AiChatPanelHeader\n title={\n store.isAnalyzeMode\n ? t(\"Common:AnalyzeResponsesMode\")\n : t(\"Common:AIChatButton\")\n }\n onClose={handleClose}\n isFullscreen={store.effectiveFullscreen}\n onToggleFullscreen={isDesktop ? store.toggleFullscreen : undefined}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/analyze-intro/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/new-chat/components/analyze-intro/index.tsx",
       "line_number": 85,
       "context": "fontWeight={600}\n lineHeight=\"20px\"\n className={styles.title}\n noSelect\n >\n {t(\"AnalyzeResponsesMode\")}\n </Heading>\n <Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n className={`${styles.text} ${styles.hint}`}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

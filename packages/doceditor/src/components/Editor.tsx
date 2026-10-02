@@ -39,13 +39,13 @@ import React, { useMemo } from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
 
-import { DocumentEditor, type IConfig } from "@docspace/ui-kit/document-editor";
+import { DocumentEditor, type IConfig } from "@onlyoffice/apps-ui-kit/document-editor";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
 import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";

@@ -40,8 +40,8 @@ import { useEffect, useMemo, useRef } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useJoyride, EVENTS, STATUS, ACTIONS } from "react-joyride";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { DeviceType } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";

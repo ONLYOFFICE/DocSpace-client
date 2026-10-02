@@ -41,7 +41,7 @@ import { useTranslation } from "react-i18next";
 import type {
   NavMenuGroup,
   NavMenuItem,
-} from "@docspace/ui-kit/components/nav-menu";
+} from "@onlyoffice/apps-ui-kit/components/nav-menu";
 
 import OverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import WalletReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/wallet.react.svg?url";

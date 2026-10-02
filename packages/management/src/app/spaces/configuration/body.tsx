@@ -38,14 +38,14 @@ import { useTranslation } from "react-i18next";
 import toLower from "lodash/toLower";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { Text } from "@docspace/ui-kit/components/text";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import {
   TextInput,
   InputType,
   InputSize,
-} from "@docspace/ui-kit/components/text-input";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { parseDomain, validatePortalName } from "@docspace/shared/utils/common";
 import {
   setDomainName,

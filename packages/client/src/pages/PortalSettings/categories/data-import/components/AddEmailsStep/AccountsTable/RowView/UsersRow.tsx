@@ -34,7 +34,7 @@
  */
 
 import { useState, useRef } from "react";
-import { Row } from "@docspace/ui-kit/components/rows";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
 import UsersRowContent from "./UsersRowContent";
 import { AddEmailUsersRowProps } from "../../../../types";
 

@@ -36,12 +36,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Avatar, AvatarSize } from "@docspace/ui-kit/components/avatar";
+import { Avatar, AvatarSize } from "@onlyoffice/apps-ui-kit/components/avatar";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import api from "@docspace/shared/api";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   getUserAvatarRoleByType,
   getUserType,
@@ -163,6 +163,8 @@ class ProfileActions extends React.PureComponent {
         >
           <div style={{ paddingTop: "8px" }}>
             {userActions.map(({ key, ...action }) => {
+              // The key doubles as the item's test id, the way the sidebar
+              // menu identifies its rows.
               return (
                 <React.Fragment key={key}>
                   {action ? (
@@ -183,6 +185,7 @@ class ProfileActions extends React.PureComponent {
                       >
                         <DropDownItem
                           {...action}
+                          testId={key}
                           noHover
                           className={styles.dropDownItem}
                         />

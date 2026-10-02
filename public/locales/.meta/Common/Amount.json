@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/Amount.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/Amount.tsx",
       "line_number": 164,
       "context": "/>\n ))}\n </div>\n </div>\n <Text fontWeight={600} className={styles.amountTitle}>\n {t(\"Amount\")}\n </Text>\n <FieldContainer\n isVertical\n errorMessage={\n hasMinError",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
       "line_number": 100,
       "context": "enable: true,\n resizable: true,\n minWidth: 150,\n },\n {\n key: \"Amount\",\n title: t(\"Amount\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/TableView/TableHeader.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/sub-components/UpcomingPayments/TableView/TableHeader.tsx",
       "line_number": 78,
       "context": "enable: true,\n resizable: true,\n minWidth: 140,\n },\n {\n key: \"Amount\",\n title: t(\"Amount\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

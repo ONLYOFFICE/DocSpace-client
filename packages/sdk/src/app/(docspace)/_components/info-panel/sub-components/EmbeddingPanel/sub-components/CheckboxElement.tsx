@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 
 import { TooltipContent } from "./TooltipContent";
 import styles from "../EmbeddingPanel.module.scss";

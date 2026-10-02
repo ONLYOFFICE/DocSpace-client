@@ -35,7 +35,7 @@
 "use client";
 
 import { getSettingsFiles } from "@docspace/shared/api/files";
-import type { UploaderFilesSettings } from "@docspace/ui-kit/uploader/Uploader.types";
+import type { UploaderFilesSettings } from "@onlyoffice/apps-ui-kit/uploader/Uploader.types";
 
 import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
 import OAuthPageLoader from "@/components/OAuthPageLoader";

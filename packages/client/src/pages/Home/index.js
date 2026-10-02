@@ -41,9 +41,9 @@ import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
-import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
+import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import {
   useChatNoAccess,
   mapChatNoAccessStores,
@@ -51,7 +51,7 @@ import {
 import {
   useIsAiChatAvailable,
   useStores,
-} from "@docspace/ui-kit/ai-agent/providers";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import {
   addTagsToRoom,
@@ -59,10 +59,10 @@ import {
   createTag,
 } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
-import Section from "@docspace/ui-kit/components/section";
-import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import Section from "@onlyoffice/apps-ui-kit/components/section";
+import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
 

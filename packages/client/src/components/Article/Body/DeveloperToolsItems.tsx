@@ -42,7 +42,7 @@ import { DeviceType, PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 
-import { ArticleItem } from "@docspace/ui-kit/components/article/item";
+import { ArticleItem } from "@onlyoffice/apps-ui-kit/components/article/item";
 
 interface IDeveloperToolsItem {
   showText: boolean;

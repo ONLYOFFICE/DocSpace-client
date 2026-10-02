@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
       "line_number": 166,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"\n label={\n onOpenPanel ? t(\"BuyStorage\") : t(\"GoToAddon\")\n }\n size={ButtonSize.normal}\n primary\n onClick={onClick}\n testId=\"go_to_service_button\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 321,
       "context": "<div className={styles.noSubscriptionCard}>\n <Text fontWeight={700} fontSize=\"14px\">\n {t(\"NoActiveSubscription\")}\n </Text>\n <Button\n label={t(\"BuyStorage\")}\n size={ButtonSize.small}\n primary\n onClick={openUpgradeDialog}\n isDisabled={isDisabled}\n scale",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

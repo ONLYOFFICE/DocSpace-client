@@ -38,8 +38,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { MainButton } from "@docspace/ui-kit/components/main-button";
-import { MainButtonMobile } from "@docspace/ui-kit/components/main-button-mobile";
+import { MainButton } from "@onlyoffice/apps-ui-kit/components/main-button";
+import { MainButtonMobile } from "@onlyoffice/apps-ui-kit/components/main-button-mobile";
 
 import useDocsActions, {
   type DocsActions,

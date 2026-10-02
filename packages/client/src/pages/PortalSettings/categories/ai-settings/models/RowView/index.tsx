@@ -37,9 +37,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { RowContainer } from "@docspace/ui-kit/components/rows";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.12.react.svg";
 
@@ -68,8 +68,8 @@ type ModelSettingsRowViewProps = {
   sectionWidth: number;
 
   aiToolsPrices?: ServicesStore["aiToolsPrices"];
+  formatAiModelPrice?: ServicesStore["formatAiModelPrice"];
   aiModelsCurrencySymbol?: ServicesStore["aiModelsCurrencySymbol"];
-  formatAiModelsCurrency?: ServicesStore["formatAiModelsCurrency"];
   setAiModelAvailability?: ServicesStore["setAiModelAvailability"];
   aiModelAvailabilityMap?: ServicesStore["aiModelAvailabilityMap"];
   aiModelAvailabilityUpdatingSet?: ServicesStore["aiModelAvailabilityUpdatingSet"];
@@ -79,8 +79,8 @@ type ModelSettingsRowViewProps = {
 const RowView = (props: ModelSettingsRowViewProps) => {
   const {
     aiToolsPrices,
+    formatAiModelPrice = () => "",
     aiModelsCurrencySymbol = "$",
-    formatAiModelsCurrency,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
@@ -92,9 +92,6 @@ const RowView = (props: ModelSettingsRowViewProps) => {
   const { requestToggle, turnOffModelDialog } =
     useTurnOffModelConfirmation(setAiModelAvailability);
 
-  const formatPrice = (value?: number) =>
-    value == null ? "" : (formatAiModelsCurrency?.(value) ?? "");
-
   const chatRows: TModelRow[] = (aiToolsPrices?.chat ?? []).map((m) => ({
     id: m.id,
     alias: m.alias,
@@ -102,14 +99,14 @@ const RowView = (props: ModelSettingsRowViewProps) => {
     link: m.link,
     prices: [
       t("Common:AIModelPrice", {
-        inputPrice: formatPrice(m.price?.prompt),
-        outputPrice: formatPrice(m.price?.completion),
+        inputPrice: formatAiModelPrice(m.price?.prompt),
+        outputPrice: formatAiModelPrice(m.price?.completion),
       }),
     ],
     breakdown: buildCachePriceBreakdown(
       m.price,
       aiModelsCurrencySymbol,
-      formatPrice,
+      formatAiModelPrice,
     ),
   }));
 
@@ -120,11 +117,11 @@ const RowView = (props: ModelSettingsRowViewProps) => {
     link: m.link,
     prices: [
       t("Common:AIImageModelPrice", {
-        inputPrice: formatPrice(m.price?.prompt),
-        imagePrice: formatPrice(m.price?.image),
+        inputPrice: formatAiModelPrice(m.price?.prompt),
+        imagePrice: formatAiModelPrice(m.price?.image),
       }),
       t("Common:AIModelOutputPrice", {
-        outputPrice: formatPrice(m.price?.completion),
+        outputPrice: formatAiModelPrice(m.price?.completion),
       }),
     ],
     breakdown: null,
@@ -243,8 +240,8 @@ const RowView = (props: ModelSettingsRowViewProps) => {
 export default inject<TStore>(({ servicesStore, paymentStore }) => {
   const {
     aiToolsPrices,
+    formatAiModelPrice,
     aiModelsCurrencySymbol,
-    formatAiModelsCurrency,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
@@ -253,8 +250,8 @@ export default inject<TStore>(({ servicesStore, paymentStore }) => {
 
   return {
     aiToolsPrices,
+    formatAiModelPrice,
     aiModelsCurrencySymbol,
-    formatAiModelsCurrency,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,

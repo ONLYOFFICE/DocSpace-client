@@ -43,8 +43,8 @@ import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
 
 import RoleHistories from "../role-histories/RoleHistories";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import styles from "./RoleStep.module.scss";
 import type { RoleStepProps } from "./RoleStep.types";

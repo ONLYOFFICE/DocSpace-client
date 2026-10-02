@@ -40,7 +40,7 @@ import { useNavigate, useLocation } from "react-router";
 import { isMobile, isMobileOnly } from "react-device-detect";
 import classNames from "classnames";
 
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import { isTablet as isTabletUtils, tablet } from "@docspace/shared/utils";
 
 import styles from "./layout.module.scss";

@@ -62,7 +62,7 @@ interface TextProps {
   [key: string]: React.HTMLAttributes<HTMLElement> | React.ReactNode;
 }
 // Mock external components
-vi.mock("@docspace/ui-kit/components/text", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/text", () => ({
   Text: ({ children, ...props }: TextProps) => (
     <span {...props}>{children}</span>
   ),

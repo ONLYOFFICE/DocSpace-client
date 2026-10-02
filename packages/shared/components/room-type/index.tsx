@@ -42,10 +42,10 @@ import PrivateRoomLogoUrl from "PUBLIC_DIR/images/icons/32/room/private.svg?url"
 
 import { RoomsType, RoomsTypePrivate } from "../../enums";
 
-import { RoomLogo } from "@docspace/ui-kit/components/room-logo";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { RoomLogo } from "@onlyoffice/apps-ui-kit/components/room-logo";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import {
   getRoomTypeDescriptionTranslation,

@@ -43,11 +43,12 @@
 
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock(
-  "@docspace/ui-kit/components/article/sub-components/LiveChat",
+  "@onlyoffice/apps-ui-kit/components/article/sub-components/LiveChat",
   () => ({
     default: ({
       zendeskKey,
@@ -65,19 +66,31 @@ vi.mock(
 
 import LiveChatBlock from "../LiveChatBlock";
 
-const renderComponent = (isLiveChatAvailable: boolean) =>
+const onLiveChatClick = vi.fn();
+
+const renderComponent = (
+  isLiveChatAvailable: boolean,
+  mainButtonVisible = false,
+  isShowLiveChat = true,
+  {
+    isPrimaryProgressVisbile = false,
+    isSecondaryProgressVisbile = false,
+    downloadingProgress = 0,
+  } = {},
+) =>
   render(
     <Provider
       authStore={{ isLiveChatAvailable, languageBaseName: "en" }}
-      settingsStore={{ zendeskKey: "zendesk-key", isMobileArticle: false }}
+      settingsStore={{ zendeskKey: "zendesk-key" }}
+      filesStore={{ mainButtonVisible }}
       userStore={{ user: { email: "user@example.com", displayName: "User" } }}
       uploadDataStore={{
-        primaryProgressDataStore: { isPrimaryProgressVisbile: false },
-        secondaryProgressDataStore: { isSecondaryProgressVisbile: false },
+        primaryProgressDataStore: { isPrimaryProgressVisbile },
+        secondaryProgressDataStore: { isSecondaryProgressVisbile },
       }}
       infoPanelStore={{ isVisible: false }}
-      backup={{ downloadingProgress: 0 }}
-      profileActionsStore={{ isShowLiveChat: true }}
+      backup={{ downloadingProgress }}
+      profileActionsStore={{ isShowLiveChat, onLiveChatClick }}
     >
       <LiveChatBlock />
     </Provider>,
@@ -91,6 +104,57 @@ describe("AppsSidebar LiveChatBlock", () => {
 
     expect(zendesk).toHaveTextContent("zendesk-key");
     expect(zendesk).toHaveAttribute("data-show", "true");
+  });
+
+  it("puts the Support button up beside the create button", () => {
+    // Both stand in the same corner, and the create button's own visibility
+    // flag is what keeps the launcher off it.
+    renderComponent(true, true);
+
+    expect(screen.getByTestId("live-chat-launcher")).toHaveAttribute(
+      "data-with-floating-button",
+      "true",
+    );
+  });
+
+  it.each([
+    ["an upload", { isPrimaryProgressVisbile: true }],
+    ["a file operation", { isSecondaryProgressVisbile: true }],
+    ["a backup download", { downloadingProgress: 40 }],
+  ])("steps aside from the progress button during %s", (_, progress) => {
+    // OperationsProgressButton is pinned to the same corner on desktop, where
+    // there is no create button, and would otherwise cover the launcher.
+    renderComponent(true, false, true, progress);
+
+    expect(screen.getByTestId("live-chat-launcher")).toHaveAttribute(
+      "data-with-floating-button",
+      "true",
+    );
+  });
+
+  it("leaves the launcher in the corner while no create button is there", () => {
+    renderComponent(true);
+
+    expect(screen.getByTestId("live-chat-launcher")).toHaveAttribute(
+      "data-with-floating-button",
+      "false",
+    );
+  });
+
+  it("switches live chat off from the launcher's own close", async () => {
+    // The point of the close: turning the button off without going looking for
+    // the toggle in the profile menu.
+    renderComponent(true);
+
+    await userEvent.click(screen.getByTestId("live-chat-launcher-close"));
+
+    expect(onLiveChatClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("keeps the Support button away while live chat is switched off", () => {
+    renderComponent(true, false, false);
+
+    expect(screen.queryByTestId("live-chat-launcher")).not.toBeInTheDocument();
   });
 
   it("stays out of the page when live chat is not available", () => {

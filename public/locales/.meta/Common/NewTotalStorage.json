@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 543,
       "context": "<Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>\n <FieldContainer\n isVertical",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

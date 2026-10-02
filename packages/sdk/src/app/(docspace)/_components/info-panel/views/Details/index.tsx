@@ -65,7 +65,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { FileType, FolderType } from "@docspace/shared/enums";
 import { createThumbnails } from "@docspace/shared/api/files";
 import { isAdmin } from "@docspace/shared/utils/common";

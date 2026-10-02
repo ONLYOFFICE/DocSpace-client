@@ -50,8 +50,8 @@ import {
   TLicenseQuota,
 } from "./types";
 import { Nullable } from "../../types";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
-import type { TAccountingPrice } from "@docspace/ui-kit/billing/types";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
+import type { TAccountingPrice } from "@onlyoffice/apps-ui-kit/billing/types";
 
 const baseURL = "/apisystem";
 

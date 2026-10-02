@@ -33,13 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { useTranslation } from "react-i18next";
 
 import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/emptyview/empty.contacts.info.light.svg?url";
 import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.contacts.info.dark.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./NoItem.module.scss";
 

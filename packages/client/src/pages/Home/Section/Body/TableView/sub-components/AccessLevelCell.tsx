@@ -38,7 +38,7 @@ import type { TFunction } from "i18next";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./CellStyles.module.scss";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";

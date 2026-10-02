@@ -39,15 +39,15 @@ import { Trans } from "react-i18next";
 import resizeImage from "resize-image";
 
 import { TTranslation } from "@docspace/shared/types";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
 
-// import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-// import { Text } from "@docspace/ui-kit/components/text";
+// import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+// import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { getOAuthValidationCodeTranslation } from "../ClientForm.utils";
 import styles from "../ClientForm.styled.module.scss";

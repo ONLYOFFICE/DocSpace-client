@@ -39,12 +39,12 @@ import { useSearchParams } from "next/navigation";
 import { useContext, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   getOAuthJWTSignature,
   setOAuthJWTSignature,
 } from "@docspace/shared/api/oauth";
-import AppLoader from "@docspace/ui-kit/components/app-loader";
+import AppLoader from "@onlyoffice/apps-ui-kit/components/app-loader";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { loginWithConfirmKey } from "@docspace/shared/api/user";

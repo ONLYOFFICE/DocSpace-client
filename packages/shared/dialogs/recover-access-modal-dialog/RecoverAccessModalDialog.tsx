@@ -35,19 +35,19 @@
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { EmailInput, TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import {
 	ModalDialog,
 	ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 
 import { sendRecoverRequest } from "../../api/settings";
 import { useCaptcha } from "../../hooks/useCaptcha";

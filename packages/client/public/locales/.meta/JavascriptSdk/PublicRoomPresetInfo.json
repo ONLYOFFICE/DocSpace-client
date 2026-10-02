@@ -3,7 +3,7 @@
   "content": "Embed a public room to allow users to view, edit, comment, or review all the documents stored there without registration",
   "content_en_sha1_hash": "44b0f19f1cc2230605339b239499132c0ecb337c",
   "created_at": "2025-05-19T21:30:54.619Z",
-  "updated_at": "2026-09-22T10:56:05.151Z",
+  "updated_at": "2026-09-16T18:53:34.518Z",
   "comment": {
     "text": "This is a description for a preset option in the JavaScript SDK settings. It explains that embedding a public room allows users to interact with documents without registration.",
     "is_auto": true,

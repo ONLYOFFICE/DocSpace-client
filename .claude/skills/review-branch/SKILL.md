@@ -1,14 +1,13 @@
 ---
 name: review-branch
-description: Review the current branch against its parent branch across client and the ui-kit submodule — resolves the base automatically, traces reachability, checks the hidden pre-push gate rules, and reports ranked findings
+description: Review the current branch against its parent branch — resolves the base automatically, traces reachability, checks the hidden pre-push gate rules, and reports ranked findings
 argument-hint: "[<baseBranch>] [--save] [--fetch]"
 ---
 
 # Review a branch against its parent
 
-Read-only code review of everything the current branch adds on top of its base,
-in **both** the client repo and the `libs/ui-kit` submodule. Never edits, never
-commits, never pushes — the output is findings.
+Read-only code review of everything the current branch adds on top of its base.
+Never edits, never commits, never pushes — the output is findings.
 
 Script (run from the repo root): `.claude/scripts/review/review-scope.mjs`
 
@@ -41,30 +40,29 @@ whole review is relative to it.
 ## Step 2 — get the actual diff
 
 ```bash
-git diff <base>...HEAD                            # client
-git -C libs/ui-kit diff <base>...HEAD             # ui-kit
+git diff <base>...HEAD
 ```
 
 Three dots — our side only, not the base's own movement.
 
-**The client diff is often only a gitlink bump.** A stat like
+**A ui-kit change shows up here only as a swapped tarball.** A stat like
 
 ```
-libs/ui-kit                   | 2 +-
-public/locales/en/Common.json | 1 +
+onlyoffice-apps-ui-kit.tgz    | Bin
+pnpm-lock.yaml                | 4 +-
 ```
 
-means the change under review lives in the submodule, and the two repos have
-independent branches and independent bases. Reviewing only the client diff here
-reviews nothing. Conversely, ui-kit code cannot be fixed in this repo — findings
-there land in `docspace-ui-kit-react`.
+means the change under review lives in `docspace-ui-kit-react` and is opaque in
+this diff — there is nothing reviewable on this side beyond the version bump.
+Review it in a checkout of that repository instead; ui-kit code can never be
+fixed here.
 
 ## Step 3 — read the changed files whole, then trace reachability
 
 Never judge a hunk from the diff alone. For each changed file: read it in full,
 then find out how it is actually reached.
 
-- Who renders / calls this? `grep -rn "<Symbol>" --include="*.ts" --include="*.tsx" packages libs/ui-kit`
+- Who renders / calls this? `grep -rn "<Symbol>" --include="*.ts" --include="*.tsx" packages`
 - What inputs does it really get? Follow the producer — the code that builds the
   URL, the params, the props, the store value. A branch that looks unreachable
   in isolation is often always-taken in practice, and vice versa.
@@ -113,8 +111,7 @@ Run what is cheap and targeted; do not run the whole gate unless the diff
 warrants it.
 
 ```bash
-pnpm exec biome check <changed files>                    # client
-cd libs/ui-kit && pnpm exec biome check <changed files>  # ui-kit
+pnpm exec biome check <changed files>
 ```
 
 Add `pnpm tsc`, `pnpm test:client`, or the relevant vitest file when the change

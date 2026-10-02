@@ -38,12 +38,12 @@
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { AvatarEditorDialog } from "@docspace/ui-kit/components/avatar-editor-dialog";
-import { RoomLogoCoverDialog } from "@docspace/ui-kit/components/room-logo-cover-dialog";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { AvatarEditorDialog } from "@onlyoffice/apps-ui-kit/components/avatar-editor-dialog";
+import { RoomLogoCoverDialog } from "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog";
 import { FolderType } from "@docspace/shared/enums";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 

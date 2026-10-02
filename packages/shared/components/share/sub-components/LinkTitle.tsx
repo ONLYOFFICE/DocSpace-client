@@ -39,8 +39,8 @@ import classNames from "classnames";
 import CopyIcon from "PUBLIC_DIR/images/icons/12/copy.svg?url";
 import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import styles from "../Share.module.scss";
 import type { LinkTitleProps } from "../Share.types";

@@ -39,7 +39,7 @@ import isEqual from "lodash/isEqual";
 import { TFunction } from "i18next";
 
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { AnalyticsEvents, RoomsType, SearchArea } from "@docspace/shared/enums";
@@ -69,7 +69,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
-import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
+import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import FilesStore from "./FilesStore";

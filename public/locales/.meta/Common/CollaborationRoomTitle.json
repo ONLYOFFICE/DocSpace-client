@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/components/room-type/RoomType.utils.ts",
       "line_number": 17,
       "context": "if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n case RoomsType.AIRoom:",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/index.tsx",

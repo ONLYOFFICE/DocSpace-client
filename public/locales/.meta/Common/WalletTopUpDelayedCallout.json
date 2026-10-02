@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
       "line_number": 122,
       "context": "export const getDelayedContent = (t: TTranslation): TDelayedContent => {\n return {\n title: t(\"Common:WalletTopUpStepCardSaved\"),\n hint: t(\"Common:WalletTopUpDelayedHint\"),\n callout: t(\"Common:WalletTopUpDelayedCallout\"),\n steps: [\n { key: \"card\", label: t(\"Common:WalletTopUpStepCardSaved\") },\n {\n key: \"transfer\",\n label: t(\"Common:WalletTopUpDelayedStepSepaSending\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

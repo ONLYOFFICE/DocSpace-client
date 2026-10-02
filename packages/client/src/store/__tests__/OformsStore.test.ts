@@ -14,7 +14,7 @@ vi.mock("@docspace/shared/api/oforms", async (io) => ({
   ...api,
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { error: vi.fn(), warning: vi.fn() },
 }));
 

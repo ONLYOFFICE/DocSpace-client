@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/SuccessCard.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/sub-components/SuccessCard.tsx",
       "line_number": 178,
       "context": "color=\"accent\"\n fontSize=\"13px\"\n fontWeight={600}\n dataTestId=\"docs_connect_read_api_docs_link\"\n >\n {t(\"ReadApiDocumentation\")}\n </Link>\n ) : null}\n </div>\n </>\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",

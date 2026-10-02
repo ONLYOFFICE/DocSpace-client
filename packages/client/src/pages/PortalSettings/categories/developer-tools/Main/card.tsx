@@ -36,8 +36,8 @@
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
 import { useNavigate } from "react-router";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 
 import styles from "./main.module.scss";
 

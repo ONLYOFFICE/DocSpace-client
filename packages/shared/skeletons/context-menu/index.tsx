@@ -40,7 +40,7 @@ import { isDesktop } from "../../utils";
 import {
 	RectangleSkeletonProps,
 	RectangleSkeleton,
-} from "@docspace/ui-kit/components/rectangle";
+} from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 import styles from "./ContextMenu.module.scss";
 import { ContextMenuSkeletonProps } from "./ContextMenu.types";

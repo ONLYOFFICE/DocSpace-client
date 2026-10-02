@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 import styles from "../Body.module.scss";
 
 const HistoryItemLoader = () => {

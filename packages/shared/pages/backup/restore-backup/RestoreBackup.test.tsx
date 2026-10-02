@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { ButtonSize } from "@docspace/ui-kit/components/button";
+import { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { startRestore } from "../../../api/portal";
 
 import { RestoreBackup } from "./index";
@@ -15,7 +15,7 @@ import {
   mockConnectedAccount,
 } from "../mockData";
 
-vi.mock("@docspace/ui-kit/utils/socket", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
   default: {
     on: vi.fn(),
     off: vi.fn(),
@@ -29,7 +29,7 @@ vi.mock("@docspace/ui-kit/utils/socket", () => ({
   },
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: {
     error: vi.fn(),
     success: vi.fn(),

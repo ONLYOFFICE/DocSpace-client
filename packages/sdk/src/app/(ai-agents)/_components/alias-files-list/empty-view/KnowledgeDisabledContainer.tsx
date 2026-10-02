@@ -42,7 +42,7 @@ import { useTranslation } from "react-i18next";
 
 import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/empty-view";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
 import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";

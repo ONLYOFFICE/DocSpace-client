@@ -36,7 +36,7 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 
 import styles from "./CheckboxSet.module.scss";
 

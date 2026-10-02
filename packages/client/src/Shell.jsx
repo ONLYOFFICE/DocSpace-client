@@ -43,7 +43,7 @@ import { toast as toastify } from "react-toastify";
 import SocketHelper, {
   SocketEvents,
   SocketCommands,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   now,
   parseToDateTime,
@@ -51,18 +51,18 @@ import {
   formatDateLocalized,
   isBefore,
   isAfter,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
-} from "@docspace/ui-kit/ai-agent/providers/themes";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import { getAiAccessSettings } from "@docspace/shared/api/settings";
-import { Portal } from "@docspace/ui-kit/components/portal";
-import { SnackBar } from "@docspace/ui-kit/components/snackbar";
-import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
-import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
-import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
-import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
+import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
+import { Toast, toastr, ToastType } from "@onlyoffice/apps-ui-kit/components/toast";
+import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { getCookie, deleteCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 
 import {
   getFrameInitialTheme,

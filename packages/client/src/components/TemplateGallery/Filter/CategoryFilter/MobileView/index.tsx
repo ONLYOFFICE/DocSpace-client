@@ -35,11 +35,12 @@
 
 import React, { useState, useRef } from "react";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { ComboButton } from "@docspace/ui-kit/components/combobox";
+import { withoutInjected } from "SRC_DIR/helpers/injected";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { ComboButton } from "@onlyoffice/apps-ui-kit/components/combobox";
 import classNames from "classnames";
 import styles from "./MobileView.module.scss";
 import type {
@@ -50,7 +51,7 @@ import type {
 	CategoryFilterMobileProps,
 	InjectedProps,
 } from "../CategoryFilter.types";
-import { ScrollbarType } from "@docspace/ui-kit/components/scrollbar";
+import { ScrollbarType } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 
 const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
 	t,
@@ -193,7 +194,16 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
 	);
 };
 
-export default inject(({ oformsStore }: InjectedProps) => ({
+const injectStores = ({ oformsStore }: InjectedProps) => ({
 	currentCategory: oformsStore.currentCategory,
 	filterOformsByCategory: oformsStore.filterOformsByCategory,
-}))(withTranslation(["FormGallery"])(observer(CategoryFilterMobile)));
+});
+
+export default withoutInjected<
+	CategoryFilterMobileProps,
+	ReturnType<typeof injectStores>
+>(
+	inject(injectStores)(
+		withTranslation(["FormGallery"])(observer(CategoryFilterMobile)),
+	),
+);

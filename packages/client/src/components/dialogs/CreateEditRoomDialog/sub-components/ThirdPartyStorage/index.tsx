@@ -37,10 +37,10 @@ import React, { useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TFunction } from "i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";

@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 export const SharedLinkHint = ({
 	t,

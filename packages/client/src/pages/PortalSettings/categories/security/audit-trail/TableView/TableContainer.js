@@ -36,9 +36,9 @@
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 
-import { TableContainer, TableBody } from "@docspace/ui-kit/components/table";
+import { TableContainer, TableBody } from "@onlyoffice/apps-ui-kit/components/table";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";

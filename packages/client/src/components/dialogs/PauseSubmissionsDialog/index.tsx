@@ -37,13 +37,13 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { useEventListener } from "@onlyoffice/apps-ui-kit/hooks/useEventListener";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
 import type { PauseSubmissionsDialogProps } from "./PauseSubmissions.types";
 

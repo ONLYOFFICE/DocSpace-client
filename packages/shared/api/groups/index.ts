@@ -39,7 +39,7 @@ import Filter from "./filter";
 
 import { request } from "../client";
 import { checkFilterInstance, toUrlParams } from "../../utils/common";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 
 import {
   TGetGroupList,

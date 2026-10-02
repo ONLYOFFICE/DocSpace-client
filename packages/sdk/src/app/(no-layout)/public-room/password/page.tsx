@@ -38,7 +38,7 @@ import { headers } from "next/headers";
 import PublicRoomPasswordPageClient from "@/app/(no-layout)/public-room/password/page.client";
 import { PUBLIC_ROOM_TITLE_HEADER } from "@/utils/constants";
 import styles from "@/app/(no-layout)/public-room/password/PasswordPage.module.scss";
-import PortalLogo from "@docspace/ui-kit/components/portal-logo/PortalLogo";
+import PortalLogo from "@onlyoffice/apps-ui-kit/components/portal-logo/PortalLogo";
 import { logger } from "../../../../../logger.mjs";
 
 export default async function PublicRoomPasswordPage() {

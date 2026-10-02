@@ -40,10 +40,10 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { usePathname, useRouter } from "next/navigation";
 
-import Navigation from "@docspace/ui-kit/components/navigation";
-import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
-import { useAiChatStoreOptional } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
+import Navigation from "@onlyoffice/apps-ui-kit/components/navigation";
+import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
+import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 import api from "@docspace/shared/api";
 import { DeviceType } from "@docspace/shared/enums";
 

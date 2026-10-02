@@ -43,15 +43,15 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
-import { EmployeeType, ShareAccessRights } from "@docspace/ui-kit/enums";
+import { EmployeeType, ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 
 import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
 import { updateUserType } from "@docspace/shared/api/people";

@@ -42,7 +42,7 @@ import { FileAction, Events } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { getStartAgentParams } from "@docspace/shared/utils/aiAgents";
 import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 
 import CreateEvent from "./CreateEvent";

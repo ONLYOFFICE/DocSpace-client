@@ -43,19 +43,19 @@ import { useState, useCallback, useMemo, useTransition } from "react";
 
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import { ButtonSize, Button } from "@docspace/ui-kit/components/button";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import { ButtonSize, Button } from "@onlyoffice/apps-ui-kit/components/button";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 import type {
   HeaderProps,
   TAccessRight,
   TOnSubmit,
-} from "@docspace/ui-kit/components/selector";
+} from "@onlyoffice/apps-ui-kit/components/selector";
 
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
 import {
   FillingRoleSelector,

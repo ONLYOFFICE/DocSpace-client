@@ -35,7 +35,7 @@
 
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
-vi.mock("@docspace/ui-kit/utils/socket", async (io) => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (io) => ({
   ...((await io()) as Record<string, unknown>),
   default: {
     on: vi.fn(),
@@ -47,7 +47,7 @@ vi.mock("@docspace/ui-kit/utils/socket", async (io) => ({
 
 vi.mock("SRC_DIR/i18n", () => ({ default: { t: (key: string) => key } }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn() },
 }));
 
@@ -56,7 +56,7 @@ vi.mock("@docspace/shared/api", () => ({
 }));
 
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
@@ -167,3 +167,4 @@ describe("FilesSettingsStore quick-actions visibility", () => {
     await expect(store.setShowQuickActions(false)).resolves.toBeUndefined();
   });
 });
+

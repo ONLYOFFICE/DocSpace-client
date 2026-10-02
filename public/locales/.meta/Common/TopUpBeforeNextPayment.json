@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
       "line_number": 171,
       "context": "fontSize=\"12px\"\n fontWeight={600}\n lineHeight=\"16px\"\n className={styles.topUpWarningText}\n >\n {t(\"TopUpBeforeNextPayment\", {\n amount: formatWalletCurrency(\n Math.ceil(topUpShortfall),\n 0,\n walletCodeCurrency,\n ),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

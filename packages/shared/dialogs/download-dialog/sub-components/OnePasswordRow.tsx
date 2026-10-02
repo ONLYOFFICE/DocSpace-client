@@ -40,14 +40,14 @@ import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 import RemoveIcon from "PUBLIC_DIR/images/remove.react.svg?url";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { SimulatePassword } from "../../../components/simulate-password";
 import { isMobile } from "../../../utils";
 import { useResolvedFileTitle } from "../../../hooks/useResolvedFileTitle";

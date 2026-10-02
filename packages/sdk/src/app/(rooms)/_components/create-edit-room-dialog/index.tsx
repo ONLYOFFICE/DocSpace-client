@@ -67,29 +67,29 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   TextInput,
   InputSize,
   InputType,
-} from "@docspace/ui-kit/components/text-input";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Tag } from "@docspace/ui-kit/components/tag";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Tag } from "@onlyoffice/apps-ui-kit/components/tag";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { AvatarEditorDialog } from "@docspace/ui-kit/components/avatar-editor-dialog";
-import { RoomLogoCoverDialog } from "@docspace/ui-kit/components/room-logo-cover-dialog";
-import { ROOM_ACTION_KEYS } from "@docspace/ui-kit/constants";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
-import type { TImage } from "@docspace/ui-kit/components/image-editor";
-import type { ICover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { AvatarEditorDialog } from "@onlyoffice/apps-ui-kit/components/avatar-editor-dialog";
+import { RoomLogoCoverDialog } from "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog";
+import { ROOM_ACTION_KEYS } from "@onlyoffice/apps-ui-kit/constants";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
+import type { TImage } from "@onlyoffice/apps-ui-kit/components/image-editor";
+import type { ICover } from "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog";
 import type { Nullable, TCreatedBy } from "@docspace/shared/types";
 import { RoomsType, AnalyticsEvents } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
@@ -105,7 +105,7 @@ import PencilSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import PrivateRoom32SvgUrl from "PUBLIC_DIR/images/icons/32/room/private.svg?url";
 
 import { ReactSVG } from "react-svg";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 
@@ -436,7 +436,7 @@ const CreateEditRoomDialog = ({
     if (selectedCover)
       return {
         cover: selectedCover,
-      } as unknown as import("@docspace/ui-kit/types").TLogo;
+      } as unknown as import("@onlyoffice/apps-ui-kit/types").TLogo;
     return undefined;
   }, [previewUrl, selectedCover]);
 

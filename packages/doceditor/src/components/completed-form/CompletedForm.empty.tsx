@@ -42,12 +42,12 @@ import classNames from "classnames";
 import CompletedFormDarkIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.dark.svg?url";
 import CompletedFormLightIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.light.svg?url";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 import { mobile, mobileMore } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Heading, HeadingLevel } from "@onlyoffice/apps-ui-kit/components/heading";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./completed-form.module.scss";
 

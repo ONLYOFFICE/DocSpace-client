@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/payer-information/index.tsx",
       "line_number": 105,
       "context": "};\n \n const unknownPayerDescription = () => {\n if (isNotPaidPeriod) {\n return isOwner\n ? t(\"UnknownPayerOwnerUnpaid\")\n : t(\"UnknownPayerAdminUnpaid\");\n }\n \n return isOwner\n ? t(\"UnknownPayerForOwner\")",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

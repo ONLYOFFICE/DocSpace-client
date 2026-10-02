@@ -12,28 +12,28 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
       "line_number": 166,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"\n label={\n onOpenPanel ? t(\"BuyStorage\") : t(\"GoToAddon\")\n }\n size={ButtonSize.normal}\n primary\n onClick={onClick}\n testId=\"go_to_service_button\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
       "line_number": 213,
       "context": "processingTitle: t(\"Common:BackupPaywallCallbackProcessingTitle\"),\n processingHint: t(\"Common:BackupPaywallCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:BackupPaywallCallbackStepActivate\"),\n successTitle: t(\"Common:BackupPaywallCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:GoToAddon\"),\n redirectUrl: BACKUP_REDIRECT_URL,\n };\n case PaymentFlavor.Ai:\n return {\n processingTitle: t(\"Common:WalletTopUpCallbackProcessingTitle\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
       "line_number": 213,
       "context": "processingTitle: t(\"Common:BackupPaywallCallbackProcessingTitle\"),\n processingHint: t(\"Common:BackupPaywallCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:BackupPaywallCallbackStepActivate\"),\n successTitle: t(\"Common:BackupPaywallCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:GoToAddon\"),\n redirectUrl: BACKUP_REDIRECT_URL,\n };\n case PaymentFlavor.Ai:\n return {\n processingTitle: t(\"Common:WalletTopUpCallbackProcessingTitle\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
       "line_number": 213,
       "context": "processingTitle: t(\"Common:BackupPaywallCallbackProcessingTitle\"),\n processingHint: t(\"Common:BackupPaywallCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:BackupPaywallCallbackStepActivate\"),\n successTitle: t(\"Common:BackupPaywallCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:GoToAddon\"),\n redirectUrl: BACKUP_REDIRECT_URL,\n };\n case PaymentFlavor.Ai:\n return {\n processingTitle: t(\"Common:WalletTopUpCallbackProcessingTitle\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

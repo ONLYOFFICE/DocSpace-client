@@ -38,7 +38,7 @@ import type {
   SelectedStorageType,
   StorageRegionsType,
 } from "../../../../../types";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 export interface ThirdPartyStorageModuleProps {
   isBackupPaid?: boolean;

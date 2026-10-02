@@ -46,8 +46,8 @@ import {
   checkIsFileExist,
 } from "@docspace/shared/api/files";
 import { ConflictResolveType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { createChunks, runWithConcurrency } from "@docspace/ui-kit/uploader";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { createChunks, runWithConcurrency } from "@onlyoffice/apps-ui-kit/uploader";
 
 import { useTranslation } from "react-i18next";
 

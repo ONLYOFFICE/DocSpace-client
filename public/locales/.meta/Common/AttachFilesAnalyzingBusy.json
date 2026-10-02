@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/notices.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/notices.ts",
       "line_number": 94,
       "context": "// Not a cap at all, but the same refusal from the user's side: the chat is\n // mid-answer about the form it is analyzing, and picking a new subject now\n // would re-point it under the reply still arriving.\n if (cap.reason === \"busy\") {\n toastr.info(\n t(\"Common:AttachFilesAnalyzingBusy\", {\n defaultValue:\n \"Wait for the current answer to finish before analyzing another form.\",\n }),\n );\n return;",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

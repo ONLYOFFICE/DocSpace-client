@@ -64,7 +64,7 @@ import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
+import { CollapsibleCard } from "@onlyoffice/apps-ui-kit/components/collapsible-card";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import {
   isDevToolsOffered,

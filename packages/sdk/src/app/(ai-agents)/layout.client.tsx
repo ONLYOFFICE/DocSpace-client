@@ -43,13 +43,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { setAuthToken } from "@docspace/shared/api/client";
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import Section from "@docspace/ui-kit/components/section";
-import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import Section from "@onlyoffice/apps-ui-kit/components/section";
+import { FloatingButton } from "@onlyoffice/apps-ui-kit/components/floating-button";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";

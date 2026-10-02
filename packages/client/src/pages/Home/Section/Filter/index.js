@@ -41,8 +41,8 @@ import { withTranslation } from "react-i18next";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { ROOMS_SECTION_TYPES } from "@docspace/shared/utils/rooms";
-import FilterInput from "@docspace/ui-kit/components/filter";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import FilterInput from "@onlyoffice/apps-ui-kit/components/filter";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -61,7 +61,7 @@ import {
   getTags,
   getQuotaFilter,
   getSharedBy,
-} from "@docspace/ui-kit/components/filter/Filter.utils";
+} from "@onlyoffice/apps-ui-kit/components/filter/Filter.utils";
 
 import {
   DeviceType,
@@ -87,7 +87,7 @@ import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
 import { getRoomInfo } from "@docspace/shared/api/rooms";
-import { FilterLoader } from "@docspace/ui-kit/components/filter/skeletons";
+import { FilterLoader } from "@onlyoffice/apps-ui-kit/components/filter/skeletons";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useContactsFilter } from "./useContacts";

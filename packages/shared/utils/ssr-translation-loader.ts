@@ -62,7 +62,7 @@
 import { readFile, stat } from "fs/promises";
 import path from "path";
 
-import type { TTranslations } from "@docspace/ui-kit/providers/translation";
+import type { TTranslations } from "@onlyoffice/apps-ui-kit/providers/translation";
 
 const fileCache = new Map<string, Promise<Record<string, string> | null>>();
 const warnedMissingDirs = new Set<string>();

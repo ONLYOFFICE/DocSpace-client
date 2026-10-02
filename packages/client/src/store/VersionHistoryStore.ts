@@ -37,8 +37,8 @@ import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
 import type { TFile } from "@docspace/shared/api/files/types";
 import { FileStatus, FileAction } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   resolveDisplayTitle,
   subscribeFilenameCache,

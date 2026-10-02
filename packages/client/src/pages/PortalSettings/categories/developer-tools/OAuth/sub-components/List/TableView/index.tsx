@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 import elementResizeDetectorMaker from "element-resize-detector";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
+import { TableBody, TableContainer } from "@onlyoffice/apps-ui-kit/components/table";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 

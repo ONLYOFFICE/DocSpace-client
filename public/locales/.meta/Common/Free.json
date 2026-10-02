@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 238,
+      "line_number": 237,
       "context": "const typeData = renderTypeData();\n \n const { isVisitor, isCollaborator } = userSelection;\n \n const statusText =\n isVisitor || isCollaborator ? t(\"Common:Free\") : t(\"Common:Paid\");\n \n if (!ready) return <InfoPanelViewLoader view=\"users\" />;\n \n return (\n <>",
       "module": "/packages/client"
     },

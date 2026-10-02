@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { getLogoFromPath, isMobile } from "../../../utils";
 
 import { ILogoProps } from "./WhiteLabel.types";

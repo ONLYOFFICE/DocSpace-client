@@ -39,16 +39,16 @@ import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { FormWrapper } from "@onlyoffice/apps-ui-kit/components/form-wrapper";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
 import { useGuestShareLink } from "@/hooks/useGuestShareLink";
 import styles from "../confirm.module.scss";
 

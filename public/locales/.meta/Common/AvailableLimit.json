@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
       "line_number": 146,
       "context": "}}\n />\n </Text>\n <Text>\n <CommonTrans\n i18nKey=\"AvailableLimit\"\n \n values={{\n amount: getConvertedSize(t, maxTotalSizeByQuota!),\n }}\n components={{",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

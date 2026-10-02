@@ -43,12 +43,12 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Avatar } from "@docspace/ui-kit/components/avatar";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { TableRow, TableCell } from "@onlyoffice/apps-ui-kit/components/table";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Avatar } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 
 import StatusBadge from "../../StatusBadge";
 

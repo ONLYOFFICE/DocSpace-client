@@ -38,7 +38,7 @@ import equal from "fast-deep-equal/react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import type { SocialButtonProps } from "./SocialButton.types";
 import styles from "./SocialButton.module.scss";

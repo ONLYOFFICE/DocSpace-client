@@ -34,7 +34,7 @@
  */
 
 import { memo } from "react";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import type { HeaderProps } from "./RoleMappingPanel.types";
 

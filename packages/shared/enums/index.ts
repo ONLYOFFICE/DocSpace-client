@@ -33,9 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export * from "@docspace/ui-kit/enums";
+export * from "@onlyoffice/apps-ui-kit/enums";
 
-import type { RoomsType } from "@docspace/ui-kit/enums";
+import type { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 
 /** Private room type (extends RoomsType enum from ui-kit) */
 export const RoomsTypePrivate = 13 as RoomsType;

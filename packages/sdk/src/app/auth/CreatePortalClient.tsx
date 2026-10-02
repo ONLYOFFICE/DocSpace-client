@@ -37,10 +37,10 @@
 
 import { useEffect, useState } from "react";
 
-import { PreparationPortalProgress } from "@docspace/ui-kit/components/progress-bar";
-import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { RoomsType, ShareAccessRights } from "@docspace/ui-kit/enums";
+import { PreparationPortalProgress } from "@onlyoffice/apps-ui-kit/components/progress-bar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { RoomsType, ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 
 import { createApiKey } from "@docspace/shared/api/api-keys";
 import { createRoom, setRoomSecurity } from "@docspace/shared/api/rooms";

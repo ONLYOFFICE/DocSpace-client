@@ -48,11 +48,11 @@ const JSON_OUT = argv.has("--json");
 const OFFLINE = argv.has("--offline");
 const UPDATE = argv.has("--update-baseline");
 
-/** Every pnpm-workspace.yaml that belongs to this repo or its submodule. */
-const CONFIGS = [
-  "pnpm-workspace.yaml",
-  join("libs", "ui-kit", "pnpm-workspace.yaml"),
-];
+/**
+ * Every pnpm-workspace.yaml that belongs to this repo. ui-kit is a separate
+ * repository consumed as a prebuilt tarball, so its config is checked there.
+ */
+const CONFIGS = ["pnpm-workspace.yaml"];
 
 /* ------------------------------------------------------------------ keys */
 
@@ -243,7 +243,7 @@ async function main() {
     }
   }
 
-  for (const rel of [".npmrc", join("libs", "ui-kit", ".npmrc")]) {
+  for (const rel of [".npmrc"]) {
     const full = join(ROOT, rel);
     if (!existsSync(full)) continue;
     for (const s of scanNpmrc(readFileSync(full, "utf8"), known))

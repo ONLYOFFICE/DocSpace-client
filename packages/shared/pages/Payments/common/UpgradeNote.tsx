@@ -39,7 +39,7 @@ import classNames from "classnames";
 
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./UpgradeNote.module.scss";
 

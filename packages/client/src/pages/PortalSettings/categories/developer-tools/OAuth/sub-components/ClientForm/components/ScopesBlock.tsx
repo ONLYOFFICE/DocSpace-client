@@ -47,10 +47,10 @@ import {
 } from "@docspace/shared/utils/oauth";
 import { ScopeGroup, ScopeType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import BlockHeader from "./BlockHeader";
 

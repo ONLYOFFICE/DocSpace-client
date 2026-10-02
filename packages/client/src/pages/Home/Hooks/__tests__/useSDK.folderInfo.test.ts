@@ -35,7 +35,7 @@
 
 import { describe, it, expect, vi } from "vitest";
 
-vi.mock("@docspace/ui-kit/utils/socket", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
   default: {
     emit: vi.fn(),
     socketSubscribers: new Set<string>(),

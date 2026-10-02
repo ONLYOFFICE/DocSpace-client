@@ -39,9 +39,9 @@ import React, { useCallback } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   storeOriginal,
   changeDeleteConfirm,

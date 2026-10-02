@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { AvatarSize } from "@docspace/ui-kit/components/avatar";
+import type { AvatarSize } from "@onlyoffice/apps-ui-kit/components/avatar";
 export interface UserPhoto {
   original: string;
   retina: string;

@@ -38,8 +38,8 @@ import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject } from "mobx-react";
 
-import { Consumer } from "@docspace/ui-kit/utils";
-import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
+import { Consumer } from "@onlyoffice/apps-ui-kit/utils";
+import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
 
 import EmptyScreenRecentUrl from "PUBLIC_DIR/images/emptyview/empty.history.light.svg?url";
 import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/emptyview/empty.history.dark.svg?url";

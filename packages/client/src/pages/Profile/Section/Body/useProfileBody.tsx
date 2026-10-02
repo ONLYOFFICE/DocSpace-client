@@ -45,7 +45,7 @@ import {
   TThirdPartyProvider,
   TNotificationChannel,
 } from "@docspace/shared/api/settings/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { NotificationsType } from "@docspace/shared/enums";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";

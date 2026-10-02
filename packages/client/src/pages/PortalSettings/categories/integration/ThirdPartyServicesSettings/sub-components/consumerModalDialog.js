@@ -38,12 +38,12 @@ import PropTypes from "prop-types";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { format } from "react-string-format";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 import styles from "./consumerModalDialog.module.scss";
 

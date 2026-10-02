@@ -40,14 +40,14 @@ import {
   parseToDateTime,
   addToDate,
   dateDiff,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { FolderType } from "@docspace/shared/enums";
 

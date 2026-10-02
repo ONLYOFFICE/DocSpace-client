@@ -51,7 +51,6 @@ export interface TilesProps {
   submitToGalleryTileIsVisible: boolean;
   canSubmitToFormGallery: () => boolean;
   viewMobile: boolean;
-  onCreateOform: (navigate: NavigateFunction) => void;
   setTemplateGalleryVisible: (isVisible: boolean) => void;
   isShowInitSkeleton: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;

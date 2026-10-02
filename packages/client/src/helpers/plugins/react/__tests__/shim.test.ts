@@ -36,7 +36,7 @@
 import { describe, it, expect, vi, beforeAll } from "vitest";
 
 // One stub export is enough to build the kit's shim module from.
-vi.mock("@docspace/ui-kit", () => ({ Text: () => null }));
+vi.mock("@onlyoffice/apps-ui-kit", () => ({ Text: () => null }));
 
 let rewritePluginImports: (code: string) => string;
 
@@ -70,7 +70,7 @@ describe("rewritePluginImports", () => {
     "react-dom",
     "react/jsx-runtime",
     "@onlyoffice/docspace-plugin-sdk/react",
-    "@docspace/ui-kit",
+    "@onlyoffice/apps-ui-kit",
   ])("provides %s", (specifier) => {
     expect(rewrittenSpecifiers(`import x from "${specifier}";`)).toHaveLength(1);
   });
@@ -89,9 +89,9 @@ describe("rewritePluginImports", () => {
   it("refuses a subpath of the kit", () => {
     expect(() =>
       rewritePluginImports(
-        `import { Button } from "@docspace/ui-kit/components/button";`,
+        `import { Button } from "@onlyoffice/apps-ui-kit/components/button";`,
       ),
-    ).toThrow(/"@docspace\/ui-kit\/components\/button"/);
+    ).toThrow(/"@onlyoffice\/apps-ui-kit\/components\/button"/);
   });
 
   it("leaves a specifier the browser can resolve on its own", () => {
@@ -127,7 +127,7 @@ describe("rewritePluginImports", () => {
 
     expect(thrown).toContain('"lodash-es"');
     expect(thrown).toContain('"zod"');
-    expect(thrown).toContain('"@docspace/ui-kit"');
+    expect(thrown).toContain('"@onlyoffice/apps-ui-kit"');
   });
 
   it("leaves the plugin's own code alone", () => {
@@ -146,7 +146,7 @@ describe("rewritePluginImports", () => {
 
   it("rewrites a bundle whose text mentions a package it does not import", () => {
     const code = [
-      `import { Text } from "@docspace/ui-kit";`,
+      `import { Text } from "@onlyoffice/apps-ui-kit";`,
       `export const hint = 'not unlike "zod", but hand-written';`,
     ].join("\n");
 

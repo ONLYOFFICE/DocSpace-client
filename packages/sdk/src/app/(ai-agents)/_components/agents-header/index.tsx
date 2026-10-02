@@ -38,12 +38,12 @@
 import React, { useMemo } from "react";
 import classnames from "classnames";
 
-import Navigation from "@docspace/ui-kit/components/navigation";
+import Navigation from "@onlyoffice/apps-ui-kit/components/navigation";
 import type {
   TNavigationItem,
   TOnNavigationItemClick,
-} from "@docspace/ui-kit/components/navigation/Navigation.types";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/navigation/Navigation.types";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 
 import useDeviceType from "@/hooks/useDeviceType";

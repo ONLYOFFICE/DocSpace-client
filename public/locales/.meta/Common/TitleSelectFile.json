@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/table/table-group-menu/TableGroupMenu.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/table/table-group-menu/TableGroupMenu.tsx",
       "line_number": 153,
       "context": "className={classNames(styles.combobox, \"not-selectable\")}\n options={EMPTY_ARRAY}\n selectedOption={EMPTY_OBJECT as TOption}\n manualY=\"42px\"\n manualX=\"-32px\"\n title={t(\"TitleSelectFile\")}\n isMobileView={isMobileView}\n onSelect={FUNCTION_EMPTY}\n dataTestId=\"table_group_menu_combobox\"\n withBackground={isMobileView}\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/FileNameCell/index.tsx",

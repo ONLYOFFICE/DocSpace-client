@@ -15,18 +15,18 @@ import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-vi.mock("@docspace/ui-kit/components/badge", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/badge", () => ({
   Badge: ({ label }: { label?: string }) =>
     React.createElement("span", { "data-testid": "badge" }, label),
 }));
 
-vi.mock("@docspace/ui-kit/components/button", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/button", () => ({
   Button: ({ label, onClick }: { label?: string; onClick?: () => void }) =>
     React.createElement("button", { "data-testid": "button", onClick }, label),
   ButtonSize: { extraSmall: "extraSmall" },
 }));
 
-vi.mock("@docspace/ui-kit/components/icon-button", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/icon-button", () => ({
   IconButton: ({ title }: { title?: string }) =>
     React.createElement("span", { "data-testid": "icon-button" }, title),
 }));

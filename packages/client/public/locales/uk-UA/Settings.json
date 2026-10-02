@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Квоту AI-агента успішно вимкнено.",
   "AIAgentQuotaEnabled": "Квоту AI-агента успішно увімкнено.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Вмикайте або вимикайте функції ШІ в редакторах {{productName}} та {{organizationName}}. При вимкненні розділ {{aiSettings}} буде приховано, {{aiAgents}} стане недоступним для всіх користувачів, а платні {{aiServices}} {{organizationName}} більше не будуть доступні. Історія вашої взаємодії надійно зберігається та повністю відновлюється, якщо ви знову увімкнете {{aiServices}}.",
+  "AiServicesManagementDescription": "Вмикайте або вимикайте функції AI в редакторах {{productName}} та {{organizationName}}. При вимкненні розділ {{aiSettings}} буде приховано, {{aiAgents}} стане недоступним для всіх користувачів, а платні {{aiServices}} {{organizationName}} більше не будуть доступні. Історія вашої взаємодії надійно зберігається та повністю відновлюється, якщо ви знову увімкнете {{aiServices}}.",
   "AISettings": "Налаштування AI",
   "AllDomains": "Будь-які домени",
   "AllowExistingUntilRemoved": "Залишити наявні посилання до їх видалення",

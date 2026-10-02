@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/Amount.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/Amount.tsx",
       "line_number": 184,
       "context": "onChange={onChangeTextInput}\n pattern=\"^[1-9]\\d*$\"\n scale\n withBorder\n type={InputType.text}\n placeholder={t(\"EnterAmount\")}\n isDisabled={isDisabled || !hasCustomerAccess}\n maxLength={MAX_LENGTH}\n testId=\"top_up_amount_input\"\n hasError={hasError}\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

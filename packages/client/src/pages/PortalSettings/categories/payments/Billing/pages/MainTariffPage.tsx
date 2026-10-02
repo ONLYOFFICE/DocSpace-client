@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { MainTariff } from "@docspace/ui-kit/billing";
+import { MainTariff } from "@onlyoffice/apps-ui-kit/billing";
 
 const MainTariffPage = () => {
   return <MainTariff />;

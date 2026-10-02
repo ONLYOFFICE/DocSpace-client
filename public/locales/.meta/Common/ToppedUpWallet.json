@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletRefilledModal.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletRefilledModal.tsx",
       "line_number": 117,
       "context": "<ModalDialog.Body>\n <div className={styles.modalContent}>\n {wasChangeBalance ? (\n <>\n <div>\n <Text as=\"span\">{t(\"ToppedUpWallet\")}</Text>\n <br />\n <Text as=\"span\">\n <CommonTrans\n i18nKey=\"AvailableCreditsAmount\"\n values={{ balance: formattedBalance }}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

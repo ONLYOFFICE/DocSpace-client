@@ -36,9 +36,9 @@
 import React from "react";
 import classNames from "classnames";
 
-import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import { Row } from "@docspace/ui-kit/components/rows";
-import type { TData } from "@docspace/ui-kit/components/rows/row/Row.types";
+import { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
+import type { TData } from "@onlyoffice/apps-ui-kit/components/rows/row/Row.types";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 

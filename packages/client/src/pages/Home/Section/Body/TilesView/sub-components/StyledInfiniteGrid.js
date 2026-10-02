@@ -34,7 +34,7 @@
  */
 
 import React from "react";
-import { InfiniteLoaderComponent } from "@docspace/ui-kit/components/infinite-loader";
+import { InfiniteLoaderComponent } from "@onlyoffice/apps-ui-kit/components/infinite-loader";
 
 import styles from "./StyledInfiniteGrid.module.scss";
 

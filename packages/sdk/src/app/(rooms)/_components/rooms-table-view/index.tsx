@@ -69,8 +69,8 @@ import {
   TableContainer,
   TableBody,
   TableHeader,
-} from "@docspace/ui-kit/components/table";
-import type { TTableColumn } from "@docspace/ui-kit/components/table";
+} from "@onlyoffice/apps-ui-kit/components/table";
+import type { TTableColumn } from "@onlyoffice/apps-ui-kit/components/table";
 import { SortByFieldName } from "@docspace/shared/enums";
 import { useIsServer } from "@docspace/shared/hooks/useIsServer";
 import type { Nullable, TSortBy } from "@docspace/shared/types";

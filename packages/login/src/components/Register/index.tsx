@@ -38,11 +38,11 @@
 import React, { useCallback, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { TValidate } from "@docspace/ui-kit/components/email-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
 import { sendRegisterRequest } from "@docspace/shared/api/settings";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { RegisterProps } from "@/types";
 

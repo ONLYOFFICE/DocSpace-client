@@ -64,15 +64,15 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 
-import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
-import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { Tabs, TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
+import { SECTION_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/section/Section.constants";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import {
   AiModels,
   ModelAssignment,
   McpServers,
   WebSearch,
-} from "@docspace/ui-kit/ai-agent/settings";
+} from "@onlyoffice/apps-ui-kit/ai-agent/settings";
 
 import { DeviceType } from "@docspace/shared/enums";
 

@@ -36,7 +36,7 @@
 import React, { type PropsWithChildren } from "react";
 import classNames from "classnames";
 
-import { Row } from "@docspace/ui-kit/components/rows";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import { FilesRowProps } from "./FilesRow.types";
 import styles from "./FilesRow.module.scss";

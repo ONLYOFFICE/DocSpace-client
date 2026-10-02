@@ -39,7 +39,7 @@ import { useCallback, useRef } from "react";
 
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { FileStatus } from "@docspace/shared/enums";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 
 import getItemUrl from "../_utils/get-item-url";
 import { normalizeRoomLogo } from "../_utils/getRoomIconLogo";

@@ -38,7 +38,7 @@ import { ReactSVG } from "react-svg";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./InfoBar.module.scss";
 import { InfoBarProps } from "./InfoBar.types";

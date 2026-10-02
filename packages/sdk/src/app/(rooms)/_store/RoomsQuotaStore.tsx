@@ -45,8 +45,8 @@ import type {
   TPortalTariff,
 } from "@docspace/shared/api/portal/types";
 import { TariffState } from "@docspace/shared/enums";
-import { PortalFeaturesLimitations } from "@docspace/ui-kit/enums";
-import { ROOM } from "@docspace/ui-kit/billing/constants";
+import { PortalFeaturesLimitations } from "@onlyoffice/apps-ui-kit/enums";
+import { ROOM } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { COUNT_FOR_SHOWING_BAR } from "@docspace/shared/constants";
 import type { Nullable } from "@docspace/shared/types";
 

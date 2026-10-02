@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-method/index.tsx",
       "line_number": 208,
       "context": "testId=\"go_to_stripe_button\"\n />\n </div>\n ) : walletCustomerStatusNotActive ? (\n <Text className={styles.reachOutPayer}>\n {t(\"ReachedOutPayerForPayment\")}\n </Text>\n ) : null}\n </>\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

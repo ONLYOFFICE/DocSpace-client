@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/utils/serviceUsage.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/utils/serviceUsage.ts",
       "line_number": 60,
       "context": "t: TTranslation,\n service: string,\n price: string,\n ): string => {\n if (isDocsConnectServiceName(service))\n return t(\"Common:SpendRatePerUser\", { price });\n \n switch (service) {\n case ADMIN:\n case MANAGER:\n return t(\"Common:SpendRatePerAdmin\", { price });",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -40,8 +40,8 @@ import { javascript } from "@codemirror/lang-javascript";
 import { githubLightInit, githubDarkInit } from "@uiw/codemirror-theme-github";
 import copy from "copy-to-clipboard";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 

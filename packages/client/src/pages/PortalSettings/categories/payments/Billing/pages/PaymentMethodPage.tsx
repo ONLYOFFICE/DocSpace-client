@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { PaymentMethod } from "@docspace/ui-kit/billing";
+import { PaymentMethod } from "@onlyoffice/apps-ui-kit/billing";
 
 const PaymentMethodPage = () => {
   return <PaymentMethod />;

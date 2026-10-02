@@ -37,9 +37,9 @@ import { inject, observer } from "mobx-react";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 
-import { ServicesList } from "@docspace/ui-kit/billing";
-import type { TDocsConnectCardState } from "@docspace/ui-kit/billing/types";
-import { default as GracePeriodModal } from "@docspace/ui-kit/billing/services/panels/additional-storage/GracePeriodModal";
+import { ServicesList } from "@onlyoffice/apps-ui-kit/billing";
+import type { TDocsConnectCardState } from "@onlyoffice/apps-ui-kit/billing/types";
+import { default as GracePeriodModal } from "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/GracePeriodModal";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 

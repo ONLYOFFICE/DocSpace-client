@@ -37,7 +37,7 @@ import { isIOS, isFirefox } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 
 import { getBgPattern } from "@docspace/shared/utils/common";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 
 import styles from "./confirm-wrapper.module.scss";
 

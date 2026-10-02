@@ -16,6 +16,9 @@ pnpm test
 pnpm test:client               # all @docspace/client unit tests
 pnpm test:store                # only client store tests (src/store, incl. FilesStore)
 
+# Unit tests (sdk package, Vitest)
+pnpm test:sdk
+
 # Run single unit test file
 cd packages/shared && pnpm vitest run path/to/file.test.ts
 cd packages/client && pnpm exec vitest run src/store/filesStore
@@ -66,15 +69,47 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
   for EE/DE). `pnpm deploy` writes to `../publish/web`; SSR apps expect
   `../buildtools/config` for appsettings
 
-### ui-kit git submodule
+### ui-kit: separate repo, consumed as a prebuilt tarball
 
-`libs/ui-kit` is a git submodule (`docspace-ui-kit-react`, branch `develop`)
-and a pnpm workspace member. Its code is fixed in the ui-kit repo, never here.
-Bumping the pointer: `git -C libs/ui-kit pull` on develop, then
-`git add libs/ui-kit && git commit -m "Update ui-kit"` (only the gitlink is
-committed; root `pnpm-lock.yaml` only when ui-kit deps changed — then run
-`pnpm install` first). The submodule's own lockfile is refreshed with
-`pnpm run update-ui-kit-lock` and committed in the ui-kit repo.
+`@onlyoffice/apps-ui-kit` lives in its own repository (`docspace-ui-kit-react`)
+and is **not** a git submodule, a pnpm workspace member, or a checkout inside
+this repo. Its code is fixed there, never here. This repo consumes only the
+committed tarball `onlyoffice-apps-ui-kit.tgz` at the root, which the six apps
+depend on via `"file:../../onlyoffice-apps-ui-kit.tgz"`.
+
+The tarball is built **in the ui-kit repository** (`pnpm build && pnpm pack`
+there) and copied here. To pick up a new ui-kit version run
+`pnpm run update-ui-kit`, then commit `onlyoffice-apps-ui-kit.tgz` together
+with the `pnpm-lock.yaml` change. Do not copy the file and run `pnpm install`
+yourself - the specifier never changes, so pnpm keeps the cached copy and the
+update silently does not happen; see `.claude/rules/pnpm.md`.
+
+For local work on ui-kit itself, `pnpm run start:ui-kit-src` (root script, or
+the "Start (ui-kit src)" workspace button) points every app's dev server at a
+checkout and restores HMR, with no build, pack or install in the loop - the
+Vite client through `packages/client/config/`, the four Next apps through
+`scripts/ui-kit-dev.cjs`. It is a dev-server alias only - never a tsconfig
+path, and both `vite build` and `next build` refuse to run while it is set. In
+the client an import that escapes the checkout fails (any JS/TS import, and a
+bare `@docspace/shared` load in SCSS; sass resolves relative `@use` paths
+itself, unchecked); the Next apps have no such check. Run the apps once
+**without** the variable before committing a new tarball: source mode does not
+exercise the stylesheet order, `"use client"`, the exports wildcard or the
+generated types. Details in `.claude/rules/pnpm.md`.
+
+The tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's `main`,
+`module`, `types` and `exports` fields live under `publishConfig`, which only
+pnpm promotes to the top level when packing. An npm-packed tarball has no entry
+points at all.
+
+`@onlyoffice/ai-chat` is an **optional peer** of ui-kit that ui-kit statically
+imports from its `ai-agent/*` and `api/ai` subpaths without bundling it. Its
+own tarball (`onlyoffice-ai-chat-<version>.tgz`) is therefore committed here
+too and declared by the apps that render the AI agent — that `file:` dependency
+is what satisfies ui-kit's peer, so it cannot be dropped while those subpaths
+are used. ai-chat's own optional peers (LLM SDKs, radix, codemirror, ...) must
+be declared by those same apps; their versions sit in the `catalog:` block of
+`pnpm-workspace.yaml` - see `.claude/rules/pnpm.md`.
 
 ### buildtools sibling repo
 
@@ -127,27 +162,27 @@ hardcoded.
 
 ### Branch review
 
-Use the `review-branch` skill to review a branch against its parent. It
-resolves the base branch (explicit arg → `git config branch.<name>.reviewBase`
-→ auto-detect) for the client repo **and** the `libs/ui-kit` submodule
-separately — a client diff that is only a gitlink bump means the change under
-review lives in the submodule.
+Use the `review-branch` skill to review a branch against its parent. ui-kit is a
+separate repository that this repo consumes only as a prebuilt tarball, so a
+ui-kit change must be reviewed inside a `docspace-ui-kit-react` checkout (its
+own base branch, via `git config branch.<name>.reviewBase` or auto-detect) —
+nothing in this repo's diff reflects it beyond the swapped tarball.
 
 ### Dependency audits
 
-The repo has seven independent lockfiles, so a clean `pnpm audit` at the root
+The repo has several independent lockfiles, so a clean `pnpm audit` at the root
 covers only the pnpm workspace. Use the `audit-deps` skill (or run
 `node .claude/scripts/audit/audit-deps.mjs`) to audit every tree at once -
 including the npm sub-projects under `common/` - and to get the override line
 that fixes each finding. Overrides go in `pnpm-workspace.yaml` for pnpm trees
-and in the project's own `package.json` for npm trees; `libs/ui-kit` findings
-belong to the ui-kit repo.
+and in the project's own `package.json` for npm trees; ui-kit is a separate
+repository and its findings belong there, not here.
 
 ### pnpm version
 
 The pnpm version is hardcoded in three repos: `packageManager` and
 `engines.pnpm` in `package.json`, seven Dockerfiles here, and two files in the
-`libs/ui-kit` submodule. Only CI (`pnpm/action-setup`) and the buildtools build
+separate `docspace-ui-kit-react` repository. Only CI (`pnpm/action-setup`) and the buildtools build
 image follow `packageManager` on their own — the Dockerfiles use
 `npm install -g pnpm@…` and drift silently. buildtools must keep a bare
 `corepack enable` and needs a flag audit on every major, since no gate or CI
@@ -171,7 +206,7 @@ commit messages.
 
 ### Git hooks (lefthook)
 
-`lefthook.yml` runs a blocking pre-push gate — five sequential commands, any
+`lefthook.yml` runs a blocking pre-push gate — six sequential commands, any
 failure aborts the push:
 
 1. `pnpm run tsc` — type checking, all packages
@@ -181,6 +216,7 @@ failure aborts the push:
    skipped here, so a green push does **not** mean locales are complete)
 4. `pnpm run test` — shared unit tests
 5. `pnpm run test:client` — client unit tests (incl. store tests)
+6. `pnpm run test:sdk` — sdk unit tests
 
 Expect a push to take several minutes. To debug a blocked push, run the
 failing command individually. Never bypass the gate with `git push --no-verify`.
@@ -213,7 +249,7 @@ the translation skills use that comment as context.
 | Rule | Loaded when editing |
 |------|---------------------|
 | `.claude/rules/client-architecture.md` | `packages/client/src/**`, `packages/shared/**` |
-| `.claude/rules/source-checks.md` | `packages/**`, `libs/ui-kit/**`, `public/images/**` |
+| `.claude/rules/source-checks.md` | `packages/**`, `public/images/**` |
 | `.claude/rules/generated-artifacts.md` | `public/locales/.constants/**`, `**/biome-plugins/**`, `**/package.json` |
 | `.claude/rules/unit-tests.md` | `**/*.test.*`, `**/__tests__/**` (unit), vitest configs |
 | `.claude/rules/i18n.md` | `public/locales/**`, `common/tests/**` |

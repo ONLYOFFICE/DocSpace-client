@@ -36,14 +36,14 @@
 import React from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { isMobile } from "@docspace/ui-kit/utils";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { isMobile } from "@onlyoffice/apps-ui-kit/utils";
 import { ButtonKeys } from "@docspace/shared/enums";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 
 import { CoverDialogProps } from "../RoomLogoCoverDialog.types";
 import type {
@@ -56,8 +56,8 @@ import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/ui-kit/components/text-input";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import styles from "../EditRoomGroupsDialog.module.scss";
 
 const GroupIconDialog = ({

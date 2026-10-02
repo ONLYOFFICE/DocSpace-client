@@ -34,7 +34,7 @@
  */
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { RoomsType } from "@docspace/shared/enums";
-import { HeaderProps } from "@docspace/ui-kit/components/selector";
+import { HeaderProps } from "@onlyoffice/apps-ui-kit/components/selector";
 
 export interface ShareCollectSelectorProps {
   visible: boolean;

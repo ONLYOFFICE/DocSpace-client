@@ -33,10 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { RoomsType } from "@docspace/shared/enums";
 
 const CreateRoomConfirmDialog = ({

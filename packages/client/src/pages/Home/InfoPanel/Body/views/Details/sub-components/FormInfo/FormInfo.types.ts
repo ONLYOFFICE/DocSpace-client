@@ -34,7 +34,7 @@
  */
 
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TFile, TFolder } from "@docspace/ui-kit/types";
+import type { TFile, TFolder } from "@onlyoffice/apps-ui-kit/types";
 import type { TSelectedFolder } from "SRC_DIR/store/SelectedFolderStore";
 
 export type Selection = TRoom | TFile | TFolder | TSelectedFolder;

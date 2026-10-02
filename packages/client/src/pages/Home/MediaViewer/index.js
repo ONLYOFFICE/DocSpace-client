@@ -43,7 +43,7 @@ import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
-import { Portal } from "@docspace/ui-kit/components/portal";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { isSameId } from "SRC_DIR/helpers/plugins/utils";
 import { usePlugin } from "./hooks/usePlugin";
 

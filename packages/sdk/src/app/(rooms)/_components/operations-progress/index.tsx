@@ -63,7 +63,7 @@
 
 import { observer } from "mobx-react";
 
-import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
+import OperationsProgressButton from "@onlyoffice/apps-ui-kit/components/operations-progress-button";
 
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 

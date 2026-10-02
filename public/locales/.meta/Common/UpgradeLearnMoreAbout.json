@@ -3,7 +3,7 @@
   "content": "Learn more about {{organizationName}} {{license}} <1>official website</1>",
   "content_en_sha1_hash": "a06fbb3788ef7c377e549f69c160f17aaaf7d035",
   "created_at": "2026-09-29T10:10:19.723Z",
-  "updated_at": "2026-10-01T11:39:01.503Z",
+  "updated_at": "2026-10-02T12:15:32.526Z",
   "comment": {
     "text": "A text link in the help section directing users to the official website. It includes variables for the organization name and license type, with the tagged part functioning as a hyperlink.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/HelpLinks.tsx",
-      "line_number": 93,
-      "context": "{forEnterprisesUrl ? (\n <Text fontSize=\"13px\" lineHeight=\"20px\">\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"UpgradeLearnMoreAbout\"\n values={{ organizationName, license }}\n components={{\n 1: renderLink(forEnterprisesUrl, \"for_enterprise_license_link\"),\n }}\n />",
+      "line_number": 99,
+      "context": "className={styles.description}\n >\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"UpgradeLearnMoreAbout\"\n values={{ organizationName, license }}\n components={{\n 1: renderLink(forEnterprisesUrl, \"for_enterprise_license_link\"),\n }}\n />",
       "module": "/packages/shared"
     }
   ],

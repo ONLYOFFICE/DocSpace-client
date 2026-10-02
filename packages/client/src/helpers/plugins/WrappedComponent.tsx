@@ -56,17 +56,17 @@ import type {
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import type { TextProps } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { TextInput, InputSize } from "@docspace/ui-kit/components/text-input";
-import { Label } from "@docspace/ui-kit/components/label";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import type { TextProps } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { TextInput, InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import type PluginStore from "SRC_DIR/store/PluginStore";
 

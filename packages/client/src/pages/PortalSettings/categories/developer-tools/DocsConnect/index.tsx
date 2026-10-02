@@ -40,8 +40,8 @@ import { inject, observer } from "mobx-react";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 
-import { BillingRoot } from "@docspace/ui-kit/billing";
-import type { TPaymentUser } from "@docspace/ui-kit/billing/types";
+import { BillingRoot } from "@onlyoffice/apps-ui-kit/billing";
+import type { TPaymentUser } from "@onlyoffice/apps-ui-kit/billing/types";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
 import { PAYMENT_ROUTES } from "../../payments/utils";

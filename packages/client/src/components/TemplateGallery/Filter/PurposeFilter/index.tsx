@@ -36,9 +36,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { withoutInjected } from "SRC_DIR/helpers/injected";
 
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import styles from "./PurposeFilter.module.scss";
@@ -117,8 +118,15 @@ const PurposeFilter: React.FC<PurposeFilterProps> = ({
   );
 };
 
-export default inject<TStore>(({ oformsStore }) => ({
+const injectStores = ({ oformsStore }: TStore) => ({
   purposes: oformsStore.purposes,
   currentPurpose: oformsStore.oformsFilter.purpose,
   filterOformsByPurpose: oformsStore.filterOformsByPurpose,
-}))(withTranslation(["Common"])(observer(PurposeFilter)));
+});
+
+export default withoutInjected<
+  PurposeFilterProps,
+  ReturnType<typeof injectStores>
+>(
+  inject(injectStores)(withTranslation(["Common"])(observer(PurposeFilter))),
+);

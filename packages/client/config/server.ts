@@ -36,6 +36,7 @@
 import path from "path";
 import type { UserConfig } from "vite";
 import { rootDir } from "./utils";
+import { uiKitDevRoot } from "./ui-kit-dev";
 
 export const server: UserConfig["server"] = {
   host: true,
@@ -61,8 +62,8 @@ export const server: UserConfig["server"] = {
     allow: [
       path.resolve(rootDir, "../../public"),
       path.resolve(rootDir, "../shared"),
-      path.resolve(rootDir, "../../libs"),
       path.resolve(rootDir),
+      ...(uiKitDevRoot ? [uiKitDevRoot] : []),
     ],
   },
 };

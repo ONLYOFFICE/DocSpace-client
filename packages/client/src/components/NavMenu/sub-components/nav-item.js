@@ -38,9 +38,9 @@ import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 import PropTypes from "prop-types";
 
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 

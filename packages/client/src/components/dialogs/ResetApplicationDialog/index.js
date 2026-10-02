@@ -34,10 +34,10 @@
  */
 
 import PropTypes from "prop-types";
-import { Button } from "@docspace/ui-kit/components/button";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { withTranslation } from "react-i18next";
 
 const ResetApplicationDialogComponent = (props) => {

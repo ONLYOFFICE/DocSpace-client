@@ -34,7 +34,7 @@
  */
 
 
-import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+import { useIsMobile } from "@onlyoffice/apps-ui-kit/hooks/use-is-mobile";
 import { useEffect, useRef } from "react";
 
 export const useScroll = () => {

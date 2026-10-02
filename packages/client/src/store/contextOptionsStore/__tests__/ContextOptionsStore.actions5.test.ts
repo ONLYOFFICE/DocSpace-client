@@ -35,7 +35,7 @@
 
 import { describe, it, expect, vi } from "vitest";
 
-import { RoomsType } from "@docspace/ui-kit/enums";
+import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 import { Events } from "@docspace/shared/enums";
 
 import { createTestContextOptionsStore, t } from "./testHarness";

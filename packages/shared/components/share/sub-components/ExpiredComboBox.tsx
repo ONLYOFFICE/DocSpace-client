@@ -37,12 +37,12 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import type { DateTime } from "luxon";
 
-import { now, addToDate } from "@docspace/ui-kit/utils/date";
+import { now, addToDate } from "@onlyoffice/apps-ui-kit/utils/date";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { LinkWithDropdown } from "@docspace/ui-kit/components/link-with-dropdown";
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { LinkWithDropdown } from "@onlyoffice/apps-ui-kit/components/link-with-dropdown";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 import { getDate, getExpiredOptions } from "../Share.helpers";
 import { ExpiredComboBoxProps } from "../Share.types";

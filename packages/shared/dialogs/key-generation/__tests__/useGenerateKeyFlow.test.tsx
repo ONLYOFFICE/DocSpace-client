@@ -61,7 +61,7 @@ vi.mock("../RecoveryPhraseDisplayModal", () => ({
   },
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn() },
 }));
 
@@ -82,7 +82,7 @@ vi.mock("@docspace/shared/context/encryption", () => ({
   useEncryption: () => ({ suspendAutoLock: () => () => {} }),
 }));
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   generateIdentityKeyPair,
   serializeIdentity,

@@ -45,7 +45,7 @@ vi.mock("@docspace/shared/api/ai", () => ({
   getAIAgent: vi.fn(),
 }));
 
-vi.mock("@docspace/ui-kit/utils/socket", async (io) => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (io) => ({
   ...((await io()) as Record<string, unknown>),
   default: {
     on: (event: string, cb: (opt?: unknown) => void) => {
@@ -62,7 +62,7 @@ vi.mock("@docspace/ui-kit/utils/socket", async (io) => ({
 
 import { getAIAgent, getAIAgents } from "@docspace/shared/api/ai";
 import type { TAgent } from "@docspace/shared/api/ai/types";
-import { SocketEvents, type TOptSocket } from "@docspace/ui-kit/utils/socket";
+import { SocketEvents, type TOptSocket } from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import { useAiAgentsPickerActions } from "../useAiAgentsPickerActions";
 

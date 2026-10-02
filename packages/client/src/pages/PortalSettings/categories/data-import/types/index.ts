@@ -41,7 +41,7 @@ import {
 } from "@docspace/shared/api/settings/types";
 import { TPaymentFeature } from "@docspace/shared/api/portal/types";
 
-import { TOption } from "@docspace/ui-kit/components/combobox";
+import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { SaveCancelButtonProps } from "@docspace/shared/components/save-cancel-buttons/SaveCancelButton.types";
 import { TTranslation } from "@docspace/shared/types";
 

@@ -37,7 +37,7 @@
 
 import React from "react";
 
-import AppLoader from "@docspace/ui-kit/components/app-loader";
+import AppLoader from "@onlyoffice/apps-ui-kit/components/app-loader";
 import { request } from "@docspace/shared/api/client";
 import { getUser } from "@docspace/shared/api/people";
 import { getDocumentServiceLocation } from "@docspace/shared/api/files";

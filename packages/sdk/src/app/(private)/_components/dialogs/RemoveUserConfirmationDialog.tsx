@@ -44,10 +44,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 export type RemoveUserConfirmationDialogProps = {
   visible: boolean;

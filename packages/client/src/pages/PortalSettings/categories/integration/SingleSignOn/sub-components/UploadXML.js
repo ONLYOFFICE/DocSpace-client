@@ -39,11 +39,11 @@ import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@docspace/ui-kit/components/button";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import { FileInput } from "@docspace/ui-kit/components/file-input";
+import { FileInput } from "@onlyoffice/apps-ui-kit/components/file-input";
 import SsoTextInput from "./SsoTextInput";
 
 import styles from "./UploadXML.module.scss";

@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
       "line_number": 224,
       "context": "testId=\"overview_top_up_button\"\n />\n {wasFirstTopUp && !isGracePeriod ? (\n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n label={t(\"AutoTopUp\")}\n onClick={() => setIsWalletRefilledOpen(true)}\n isDisabled={isNotPaidPeriod}\n className={styles.cardButton}\n testId=\"overview_auto_top_up_button\"\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
       "line_number": 78,
       "context": "return (\n <div className={styles.infoBlock}>\n <div className={styles.infoBlockTitle}>\n <CheckRoundSvg />\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"AutoTopUp\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" fontWeight={400} className={styles.infoDescription}>\n {t(\"WhenBalanceDropsTo\", {\n min: formatWalletCurrency!(minBalance, 0),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletContainer.tsx",
       "line_number": 264,
       "context": "testId=\"top_up_balance_button\"\n />\n {wasFirstTopUp && !isDelayedPaymentMethod ? (\n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n label={t(\"AutoTopUp\")}\n onClick={() => setIsWalletRefilledOpen(true)}\n isDisabled={!canUpdateTariff || isNotPaidPeriod}\n className={styles.cardButton}\n testId=\"auto_top_up_button\"\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

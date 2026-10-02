@@ -38,13 +38,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   TextInput,
   InputSize,
   InputType,
-} from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
 
 export type CreateFileDialogType = "docx" | "xlsx" | "pptx" | "pdf" | "folder";
 

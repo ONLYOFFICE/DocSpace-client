@@ -36,7 +36,7 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 type ClientSearchProgressProps = {
   clientSearchActive?: boolean;

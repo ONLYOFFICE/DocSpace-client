@@ -39,7 +39,7 @@ import { observer } from "mobx-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
+import { Tabs, type TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
 
 import { useAgentsUserStore } from "../../_store/AgentsUserStore";
 import { useAgentsCommonData } from "../../_store/AgentsCommonDataContext";

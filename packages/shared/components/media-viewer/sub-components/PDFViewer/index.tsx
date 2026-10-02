@@ -52,7 +52,7 @@ import type {
   ToolbarItemType,
 } from "../ViewerToolbar/ViewerToolbar.props";
 import { ViewerLoader } from "../ViewerLoader";
-import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
+import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
 import PDFViewerProps, { BookMarkType } from "./PDFViewer.props";
 
 import { Sidebar } from "./ui/SideBar";

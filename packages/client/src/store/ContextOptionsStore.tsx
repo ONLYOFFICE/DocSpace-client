@@ -38,10 +38,10 @@ import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.s
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
 import { isMobile } from "react-device-detect";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type {
   ContextMenuModel,
-} from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";

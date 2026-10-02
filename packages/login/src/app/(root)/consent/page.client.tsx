@@ -40,14 +40,14 @@ import { useTranslation, Trans } from "react-i18next";
 import { useRouter } from "next/navigation";
 
 import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
 import {
   getOAuthJWTSignature,
   setOAuthJWTSignature,
@@ -56,12 +56,12 @@ import {
   getCookie,
   deleteCookie,
   setCookie,
-} from "@docspace/ui-kit/utils/cookie";
+} from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";
-import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
-import AppLoader from "@docspace/ui-kit/components/app-loader";
+import { FormWrapper } from "@onlyoffice/apps-ui-kit/components/form-wrapper";
+import AppLoader from "@onlyoffice/apps-ui-kit/components/app-loader";
 
 import { getRedirectURL } from "@/utils";
 import OAuthClientInfo from "../../../components/ConsentInfo";

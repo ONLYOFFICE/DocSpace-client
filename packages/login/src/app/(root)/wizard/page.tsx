@@ -36,7 +36,7 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
-import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
+import { FormWrapper } from "@onlyoffice/apps-ui-kit/components/form-wrapper";
 
 import {
   getMachineName,

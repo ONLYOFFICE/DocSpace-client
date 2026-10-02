@@ -37,9 +37,9 @@ import { useParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 
-import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
+import { TableBody, TableContainer } from "@onlyoffice/apps-ui-kit/components/table";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryTableRow from "./HistoryTableRow";
 import HistoryTableHeader from "./HistoryTableHeader";

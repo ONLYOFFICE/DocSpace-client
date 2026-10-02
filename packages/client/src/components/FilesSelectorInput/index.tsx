@@ -35,7 +35,7 @@
 import { inject, observer } from "mobx-react";
 
 import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
-import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { FilesSettingsDto } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import type {
   ExternalFilesSelectorInputWrapperProps,
   FilesSelectorInputWrapperProps,

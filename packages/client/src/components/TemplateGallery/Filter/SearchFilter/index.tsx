@@ -36,8 +36,8 @@
 import { observer } from "mobx-react";
 import { useState, useRef, useEffect, FC } from "react";
 import { withTranslation } from "react-i18next";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { SearchInput } from "@docspace/ui-kit/components/search-input";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { SearchInput } from "@onlyoffice/apps-ui-kit/components/search-input";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { SearchFilterProps } from "./SearchFilter.types";
 

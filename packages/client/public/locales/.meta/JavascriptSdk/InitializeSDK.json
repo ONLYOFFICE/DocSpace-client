@@ -3,7 +3,7 @@
   "content": "Select one of the suggested modes, or use Custom to configure all the parameters manually.",
   "content_en_sha1_hash": "702a3edd62462b46a16de2c782b32b69d774fd2c",
   "created_at": "2025-05-19T21:30:54.525Z",
-  "updated_at": "2026-09-22T10:56:05.153Z",
+  "updated_at": "2026-09-16T18:53:34.519Z",
   "comment": {
     "text": "This is a descriptive text that appears below a header, explaining how to choose a mode for configuring parameters.",
     "is_auto": true,

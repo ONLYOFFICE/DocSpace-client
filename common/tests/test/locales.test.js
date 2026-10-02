@@ -44,6 +44,7 @@ const {
   BASE_DIR,
   moduleWorkspaces,
 } = require("../utils/files");
+const { resolveUiKitDist } = require("../utils/ui-kit");
 
 // Groups of English keys that already share one value inside a namespace.
 // This baseline freezes pre-existing debt so the test only catches NEW
@@ -676,8 +677,57 @@ describe("Locales Tests", () => {
       .filter((value, index, self) => self.indexOf(value) === index) // Distinct
       .sort();
 
+    // Many Common keys are consumed only by ui-kit components. Its source is
+    // not in this repo, so the built bundle has to stand in for it -- but only
+    // at the shapes a translation key can actually appear in. Accepting any
+    // quoted literal would mark every key whose text collides with an
+    // unrelated string somewhere in ~1200 built modules ("Add", "Name",
+    // "Search", "Files") as used, which is most of the short ones, and the
+    // test would stop reporting dead keys at all.
+    //
+    // Two shapes carry a key. A direct call -- `t("Key")`, `t("NS:Key")`,
+    // `getCommonTranslation("Key")`, `translate("Key")` -- and a property
+    // whose name ends in "Key", which is how a key gets handed to a component
+    // to resolve later: `i18nKey` (<Trans>), `tKey`, `defaultTitleKey`. The
+    // property rule is keyed on the suffix rather than on that list, so a new
+    // prop does not quietly turn its key into a dead one.
+    const KEY = String.raw`(?:[A-Za-z0-9_]+:)?[A-Za-z0-9_.-]+`;
+    const UI_KIT_KEY_PATTERNS = [
+      new RegExp(
+        String.raw`\b(?:t|translate|getCommonTranslation)\(\s*(["'\`])(${KEY})\1`,
+        "g",
+      ),
+      new RegExp(
+        String.raw`\b[A-Za-z_$][A-Za-z0-9_$]*[Kk]ey\s*[:=]\s*(["'\`])(${KEY})\1`,
+        "g",
+      ),
+    ];
+
+    const uiKitKeys = new Set();
+
+    getAllFiles(resolveUiKitDist(), [])
+      .filter((f) => f && f.endsWith(".js"))
+      .forEach((f) => {
+        const text = fs.readFileSync(f, "utf8");
+
+        UI_KIT_KEY_PATTERNS.forEach((pattern) => {
+          pattern.lastIndex = 0;
+
+          let match = pattern.exec(text);
+          while (match !== null) {
+            // Bare and namespace-prefixed forms name the same key; the
+            // caller compares against namespace-stripped keys.
+            const key = match[2];
+            uiKitKeys.add(key.slice(key.indexOf(":") + 1));
+            match = pattern.exec(text);
+          }
+        });
+      });
+
+    const usedInUiKit = (key) => uiKitKeys.has(key);
+
     const notFoundi18nKeys = allEnKeys.filter(
-      (k) => !allJsTranslationKeys.includes(k),
+      (k) => !allJsTranslationKeys.includes(k) && !usedInUiKit(k),
     );
 
     const message = `Some i18n-keys are not found in js \r\n\r\nKeys:\r\n\r\n${notFoundi18nKeys.join(
@@ -1433,8 +1483,8 @@ describe("Locales Tests", () => {
    * `translationFiles` so that a namespace file which is missing entirely for a
    * language is still detected.
    *
-   * Note: `libs/ui-kit/locales` is intentionally out of scope — it lives in the
-   * docspace-ui-kit-react submodule and cannot be fixed from this repository.
+   * Note: ui-kit's locales are intentionally out of scope — they live in the
+   * docspace-ui-kit-react repository and cannot be fixed from here.
    *
    * @returns {Array<{localesDir: string, languages: string[], namespaces: object[]}>}
    */
@@ -3141,9 +3191,6 @@ describe("Locales Tests", () => {
     const violations = [];
 
     javascriptFiles.forEach((jsFile) => {
-      // ui-kit is a separate submodule with its own Common-bound translation hook.
-      if (jsFile.path.includes(convertPathToOS("libs/ui-kit"))) return;
-
       const text = fs.readFileSync(jsFile.path, "utf8");
 
       // When the file's default namespace is Common, unprefixed Common keys
@@ -3176,8 +3223,9 @@ describe("Locales Tests", () => {
   });
 
   it("UiKitCommonResolverPrefixTest: Verify that keys resolved through ui-kit's Common-default helpers carry an explicit namespace prefix.", () => {
-    // CommonNamespacePrefixTest skips libs/ui-kit (the submodule has its own
-    // Common-bound translation helpers). This test guards that blind spot.
+    // ui-kit source is not scanned here (it ships as a prebuilt tarball from
+    // its own repository), but the client calls these Common-defaulting ui-kit
+    // helpers, so this test guards that blind spot on our side.
     //
     // ui-kit resolves translations in two Common-defaulting ways:
     //   1. getCommonTranslation(key) / useCommonTranslation() — look an unprefixed
@@ -3209,17 +3257,10 @@ describe("Locales Tests", () => {
     const isCommonKey = (k) =>
       keyNamespaces.has(k) && keyNamespaces.get(k).has("Common");
 
-    const uiKitFiles = getAllFiles(path.join(BASE_DIR, "libs", "ui-kit"), [
-      "node_modules",
-      convertPathToOS(".next"),
-      convertPathToOS("/dist"),
-      convertPathToOS(path.join("ui-kit", "locales")),
-    ]).filter(
-      (filePath) =>
-        filePath &&
-        /\.(ts|tsx)$/.test(filePath) &&
-        !filePath.includes(".test.") &&
-        !filePath.includes(".stories."),
+    // ui-kit source is not available here (prebuilt tarball), so this runs
+    // against the built bundle.
+    const uiKitFiles = getAllFiles(resolveUiKitDist(), []).filter(
+      (filePath) => filePath && filePath.endsWith(".js"),
     );
 
     const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

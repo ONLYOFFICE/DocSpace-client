@@ -66,7 +66,7 @@ import type { Nullable } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TPathParts } from "@docspace/shared/types";
-import type { TOptSocket } from "@docspace/ui-kit/utils/socket";
+import type { TOptSocket } from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import type { default as FilesStore } from "../FilesStore";
 

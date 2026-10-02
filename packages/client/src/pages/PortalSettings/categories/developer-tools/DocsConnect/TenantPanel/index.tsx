@@ -42,14 +42,14 @@ import config from "PACKAGE_FILE";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Tabs, TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/ui-kit/components/context-menu-button";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/context-menu-button";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import KeyReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-api-keys.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";

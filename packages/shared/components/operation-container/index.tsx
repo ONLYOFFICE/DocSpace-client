@@ -37,11 +37,11 @@ import React, { useEffect } from "react";
 import DownloadingReactSvg from "PUBLIC_DIR/images/downloading.react.svg";
 import DownloadingDarkReactSvg from "PUBLIC_DIR/images/downloading.dark.react.svg";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { OperationContainerProps } from "./OperationContainer.types";
-import { Text } from "@docspace/ui-kit/components/text";
-import PortalLogo from "@docspace/ui-kit/components/portal-logo/PortalLogo";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import PortalLogo from "@onlyoffice/apps-ui-kit/components/portal-logo/PortalLogo";
 
 import styles from "./OperationContainer.module.scss";
 

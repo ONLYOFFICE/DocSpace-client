@@ -35,7 +35,7 @@
 
 import { useTranslation } from "react-i18next";
 
-import { AddButton } from "@docspace/ui-kit/components/add-button";
+import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
 import { TUser } from "@docspace/shared/api/people/types";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 

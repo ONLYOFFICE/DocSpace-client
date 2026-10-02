@@ -33,9 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { AddButton } from "@docspace/ui-kit/components/add-button";
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "SRC_DIR/components/dialogs/ChangePortalOwnerDialog/ChangePortalOwner.module.scss";
 

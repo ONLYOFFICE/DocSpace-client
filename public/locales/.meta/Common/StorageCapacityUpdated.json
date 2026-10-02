@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 194,
       "context": "const res = walletRes?.data?.response;\n if (res === false) throw new Error(t(\"UnexpectedError\"));\n \n await Promise.all([fetchPortalTariff?.(), fetchBalance?.()]);\n \n toastr.success(t(\"StorageCapacityUpdated\"));\n } catch (e) {\n toastr.error(e as unknown as string);\n } finally {\n setIsCancelLoading(false);\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 232,
       "context": "if (isCancellation || !isUpgradeStoragePlan)\n setAmount(String(currentStoragePlanSize ?? \"\"));\n \n if (intervalRef.current) {\n toastr.success(t(\"StorageCapacityUpdated\"));\n clearInterval(intervalRef.current);\n intervalRef.current = null;\n }\n \n if (localStorage.getItem(STORAGE_TARIFF_DEACTIVATED) !== null) {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

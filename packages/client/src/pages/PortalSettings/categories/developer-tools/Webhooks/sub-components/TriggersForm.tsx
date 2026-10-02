@@ -35,9 +35,9 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 
 import {
   getTriggerTranslate

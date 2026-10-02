@@ -27,7 +27,7 @@
 // Shared layout mixin for SetRoomParams / SetAgentParams icon-editor sections.
 // Used by CreateEditRoomDialog and CreateEditAgentDialog.
 
-@use "@docspace/ui-kit/styles/mixins";
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
 
 @mixin dialog-params-layout {
   display: flex;

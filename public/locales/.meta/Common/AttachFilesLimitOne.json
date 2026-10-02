@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/notices.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/notices.ts",
       "line_number": 123,
       "context": "return;\n }\n \n if (cap.limit === 1) {\n toastr.warning(\n t(\"Common:AttachFilesLimitOne\", {\n defaultValue:\n \"This chat works with one file at a time. Remove the attached file to add another.\",\n }),\n );\n return;",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -62,7 +62,7 @@
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { FolderType } from "@docspace/ui-kit/enums";
+import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 import type { TViewAs } from "@docspace/shared/types";
 
 import { getSelf } from "@/api/people";

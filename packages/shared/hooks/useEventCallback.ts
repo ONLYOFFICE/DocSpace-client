@@ -34,7 +34,7 @@
  */
 import { useCallback, useRef } from "react";
 
-import { useIsomorphicLayoutEffect } from "@docspace/ui-kit/hooks/useIsomorphicLayoutEffect";
+import { useIsomorphicLayoutEffect } from "@onlyoffice/apps-ui-kit/hooks/useIsomorphicLayoutEffect";
 
 export function useEventCallback<Args extends unknown[], R>(
   fn: (...args: Args) => R,

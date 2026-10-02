@@ -3,7 +3,7 @@
   "content": "Learn more and get help",
   "content_en_sha1_hash": "8c34d064c198ff13b2e424a4894721d8a5e15f80",
   "created_at": "2026-09-29T10:10:19.764Z",
-  "updated_at": "2026-10-01T11:33:35.680Z",
+  "updated_at": "2026-10-02T12:15:32.526Z",
   "comment": {
     "text": "Heading for a help section in the payments bonus area that introduces links for additional information and support.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/HelpLinks.tsx",
-      "line_number": 85,
-      "context": ");\n \n return (\n <div className={styles.help} data-testid=\"bonus-help\">\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Common:UpgradeLearnMoreTitle\")}\n </Text>\n <div className={styles.helpLines}>\n {forEnterprisesUrl ? (\n <Text fontSize=\"13px\" lineHeight=\"20px\">\n <Trans",
+      "line_number": 86,
+      "context": ");\n \n return (\n <div className={styles.help} data-testid=\"bonus-help\">\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Common:UpgradeLearnMoreTitle\")}\n </Text>\n <div className={styles.helpLines}>\n {forEnterprisesUrl ? (\n <Text\n fontSize=\"13px\"",
       "module": "/packages/shared"
     }
   ],

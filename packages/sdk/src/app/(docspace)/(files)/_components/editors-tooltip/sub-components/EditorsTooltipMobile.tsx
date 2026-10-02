@@ -34,10 +34,10 @@
  */
 
 import React from "react";
-import { Portal } from "@docspace/ui-kit/components/portal";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { AvatarSize } from "@docspace/ui-kit/components/avatar";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
+import { AvatarSize } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 
 import { EditorsList } from "./EditorsList";
 import type { EditorsTooltipMobileProps } from "../EditorsTooltip.types";

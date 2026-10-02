@@ -65,12 +65,12 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 // Ports the AI-agent branch of client `DeleteDialog` / `DeleteDialog.helper`.
 // The full client dialog handles trash/private/room/template/unsubscribe

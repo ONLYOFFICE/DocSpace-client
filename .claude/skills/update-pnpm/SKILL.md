@@ -1,6 +1,6 @@
 ---
 name: update-pnpm
-description: Bump the pinned pnpm version across every place it is hardcoded (client package.json and Dockerfiles, the ui-kit submodule, the buildtools build image) and check pnpm config compatibility — unknown, misspelled, superseded and .npmrc-stranded settings, plus new settings worth adopting. Use when upgrading pnpm, when a Dockerfile and packageManager have drifted apart, when a pnpm setting mysteriously has no effect, or when asked which pnpm version the repo uses.
+description: Bump the pinned pnpm version across every place it is hardcoded (client package.json and Dockerfiles, the docspace-ui-kit-react repository, the buildtools build image) and check pnpm config compatibility — unknown, misspelled, superseded and .npmrc-stranded settings, plus new settings worth adopting. Use when upgrading pnpm, when a Dockerfile and packageManager have drifted apart, when a pnpm setting mysteriously has no effect, or when asked which pnpm version the repo uses.
 argument-hint: "[<version>|latest|latest-11] [--check]  (no argument = latest)"
 ---
 
@@ -50,7 +50,7 @@ Never work from a remembered list — rediscover it, because new packages arrive
 with new Dockerfiles:
 
 ```bash
-# client repo + ui-kit submodule
+# client repo
 grep -rn "pnpm@[0-9]" --include="*.json" --include="Dockerfile*" . \
   | grep -v node_modules
 grep -n '"pnpm"' package.json                      # engines.pnpm
@@ -72,9 +72,9 @@ asking the user to clone it.
 | client | `package.json` | `"packageManager": "pnpm@X.Y.Z"` **and** `"engines": { "pnpm": ">=MAJOR" }` |
 | client | `docker/Dockerfile`, `docker/e2e/Dockerfile` | `npm install -g pnpm@X.Y.Z` |
 | client | `packages/{client,login,doceditor,management,sdk}/Dockerfile` | `npm install -g pnpm@X.Y.Z` |
-| ui-kit submodule | `libs/ui-kit/package.json` (both `packageManager` and `engines.pnpm`), `libs/ui-kit/Dockerfile` | same two forms |
+| ui-kit (separate repo) | `package.json` (`packageManager` only -- it declares no `engines.pnpm`, since pnpm is not a constraint on a consumer of the published package), `Dockerfile` | same two forms |
 
-That is 8 files in the client repo and 2 in the submodule. Keep every one on the
+That is 8 files in the client repo and 2 in `docspace-ui-kit-react`. Keep every one on the
 **exact same version** — the Dockerfiles install pnpm globally with npm, which
 has no `packageManager` fallback, so a stale pin there really is the version the
 image ships.
@@ -84,7 +84,7 @@ image ships.
 - `.gitea/workflows/frontend-common-tests.yaml` — `pnpm/action-setup@v4` with no
   `version:` input deliberately reads `packageManager`. Adding a `version:` here
   would create a fourth pin to keep in sync.
-- `libs/ui-kit/.github/workflows/ci.yml` — same pattern.
+- ui-kit's own `.github/workflows/ci.yml` — same pattern, in that repository.
 - `../buildtools/install/docker/build/Dockerfile` — `corepack enable`, then runs
   `pnpm` inside `client/`, where the corepack shim fetches exactly the pinned
   `packageManager` version. Correct as is, and it must **stay** a bare
@@ -184,27 +184,20 @@ in Git Bash on Windows the `''` is also wrong, and `sed -i.bak` followed by
 deleting the `.bak` files is the portable option. Check the result either way —
 a mis-quoted `-i` silently writes to a file named `''`.
 
-The ui-kit files are **committed in the ui-kit repo**, never here. Edit them in
-`libs/ui-kit/`, commit and push there, then commit the gitlink in the client
-repo — see the ui-kit section of `CLAUDE.md`. The submodule may be
-uninitialised (a clone without `--recurse-submodules` leaves `libs/ui-kit`
-empty), so check before editing and skip that half if so:
+The ui-kit files live in `docspace-ui-kit-react`, a **separate repository**
+that is not checked out inside this one — this repo consumes only its prebuilt
+tarball. Edit, lock, commit and push there; nothing on the client side records
+its pnpm version. Like buildtools, the checkout is optional, so guard for it
+rather than assuming a path:
 
 ```bash
-[ -f libs/ui-kit/package.json ] || echo "ui-kit not initialised - skipping"
+UI_KIT=${DOCSPACE_UI_KIT_SRC:-../../docspace-ui-kit-react}
+[ -f "$UI_KIT/package.json" ] || echo "ui-kit not cloned - skipping"
 ```
 
-The submodule carries a standalone lockfile that also records the pinned pnpm
-(see §4), so refresh it from the client root with the sanctioned wrapper — it
-moves the root `pnpm-workspace.yaml` aside so the submodule resolves on its own:
-
-```bash
-pnpm run update-ui-kit-lock
-```
-
-Afterwards confirm the root `pnpm-workspace.yaml` came back (`git status` must
-show it unmodified and no `pnpm-workspace.yaml.bak` left behind) — the wrapper
-restores it with `mv`, which a failed install can interrupt.
+That repo carries its own lockfile, which also records the pinned pnpm (see
+§4), so refresh it there with a plain `pnpm install` — there is no wrapper on
+this side any more, and a bumped tarball is a separate change from a pnpm bump.
 
 ---
 
@@ -221,8 +214,8 @@ Then run enough of the pre-push gate to prove the toolchain still drives the
 build — at minimum `pnpm run tsc` and `pnpm run lint`, and for a major bump the
 full gate (`pnpm run test`, `pnpm run test:client`).
 
-Expect **both** lockfiles (root and `libs/ui-kit/`) to change even when no
-dependency did: since pnpm 12 the lockfile carries a
+Expect the lockfile here — and ui-kit's, in its own repo — to change even when
+no dependency did: since pnpm 12 the lockfile carries a
 `packageManagerDependencies` document pinning the pnpm binary itself with
 per-platform integrity hashes, so every version bump rewrites it. That makes
 `pnpm-lock.yaml` a **multi-document YAML** (a `---` separator before the real

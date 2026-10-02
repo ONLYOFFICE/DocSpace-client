@@ -40,11 +40,11 @@ import { recalculateQuota } from "@docspace/shared/api/settings";
 import {
   parseToDateTime,
   formatDateLocalized,
-} from "@docspace/ui-kit/utils/date";
-import { toastr } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/utils/date";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 
 const RecalculateButton = (props) => {
   const { t } = useTranslation("Settings");

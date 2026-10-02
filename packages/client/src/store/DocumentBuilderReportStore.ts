@@ -37,8 +37,8 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { openUrlWithExportToast } from "@docspace/shared/utils/openUrlWithExportToast";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { pollUntil } from "@docspace/ui-kit/billing/utils/stripe-flow";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
+import { pollUntil } from "@onlyoffice/apps-ui-kit/billing/utils/stripe-flow";
 import type { TDocumentBuilderTask } from "@docspace/shared/api/files/types";
 import type { Nullable } from "@docspace/shared/types";
 

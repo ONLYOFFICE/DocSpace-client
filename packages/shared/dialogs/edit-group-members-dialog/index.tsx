@@ -36,15 +36,15 @@
 import { useEffect, useState, useDeferredValue } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import {
 	getGroupMembersInRoom,
 	getGroupMembersShareFile,
 } from "../../api/groups";
-import { SearchInput } from "@docspace/ui-kit/components/search-input";
-import { MIN_LOADER_TIMER } from "@docspace/ui-kit/selectors/utils/constants";
-import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
+import { SearchInput } from "@onlyoffice/apps-ui-kit/components/search-input";
+import { MIN_LOADER_TIMER } from "@onlyoffice/apps-ui-kit/selectors/utils/constants";
+import { ModalDialog, ModalDialogType } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { isFile } from "../../utils/typeGuards";
 
 import type { TGroupMemberInvitedInRoom } from "../../api/groups/types";

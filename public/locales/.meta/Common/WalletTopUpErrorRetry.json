@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.tsx",
       "line_number": 389,
       "context": ") : (\n <ErrorCard\n title={pageContent.errorTitle ?? t(\"WalletTopUpErrorTitle\")}\n hint={pageContent.errorHint ?? t(\"WalletTopUpCallbackErrorHint\")}\n buttonLabel={\n pageContent.errorButtonLabel ?? t(\"WalletTopUpErrorRetry\")\n }\n onGoToServiceClick={onGoToBillingClick}\n />\n )\n ) : null}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

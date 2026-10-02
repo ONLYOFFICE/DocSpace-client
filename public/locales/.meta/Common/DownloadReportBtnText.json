@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/index.tsx",
       "line_number": 593,
       "context": "{isTransactionHistoryExist && !isTransactionLoading ? (\n <>\n <Text className={styles.transactionsLimit}>\n {t(\"TransactionsLimit\", {\n buttonName: t(\"DownloadReportBtnText\"),\n })}\n </Text>\n \n <div\n className={classNames(styles.downloadWrapper, {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/index.tsx",
       "line_number": 593,
       "context": "{isTransactionHistoryExist && !isTransactionLoading ? (\n <>\n <Text className={styles.transactionsLimit}>\n {t(\"TransactionsLimit\", {\n buttonName: t(\"DownloadReportBtnText\"),\n })}\n </Text>\n \n <div\n className={classNames(styles.downloadWrapper, {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/usage/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/index.tsx",
       "line_number": 328,
       "context": "isReportInProgress\n ? styles.downloadReportLinkDisabled\n : undefined\n }\n >\n {t(\"DownloadReportBtnText\")}\n </Link>\n {isReportLoading ? (\n <Loader color=\"\" size=\"16px\" type={LoaderTypes.track} />\n ) : null}\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",

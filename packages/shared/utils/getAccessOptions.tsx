@@ -32,7 +32,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 import type { TTranslation } from "../types";
 import { getUserTypeTranslation } from "./common";
 import { EmployeeType, RoomsType, ShareAccessRights } from "../enums";

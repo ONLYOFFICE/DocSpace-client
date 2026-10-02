@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 

@@ -42,15 +42,15 @@ import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Avatar, AvatarSize } from "@docspace/ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Avatar, AvatarSize } from "@onlyoffice/apps-ui-kit/components/avatar";
 import {
 	ComboBoxSize,
 	type TOption,
-} from "@docspace/ui-kit/components/combobox";
-import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
+import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
 import { getShareAccessRightOptions } from "../../../../components/share/Share.helpers";
 
 import {

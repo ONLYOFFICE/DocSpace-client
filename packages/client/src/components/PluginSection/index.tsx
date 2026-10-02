@@ -48,7 +48,7 @@ import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComp
 import PluginStore from "SRC_DIR/store/PluginStore";
 import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 type SetSelectedFolder = SelectedFolderStore["setSelectedFolder"];
 

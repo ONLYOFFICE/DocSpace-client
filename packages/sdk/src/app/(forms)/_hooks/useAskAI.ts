@@ -38,13 +38,13 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
 import {
   useAttachHostFilesToChat,
   notifyAlreadyAttached,
   notifyAttachmentLimit,
-} from "@docspace/ui-kit/ai-agent/providers/files";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/files";
 import type { TFile } from "@docspace/shared/api/files/types";
 
 export default function useAskAI() {
@@ -71,9 +71,9 @@ export default function useAskAI() {
           externalDbTableName: file.externalDbTableName,
         },
       ])
-        .then(({ duplicates, skippedOverLimit }) => {
+        .then(({ duplicates, skippedOverLimit, cap }) => {
           notifyAlreadyAttached(t, duplicates);
-          notifyAttachmentLimit(t, skippedOverLimit);
+          notifyAttachmentLimit(t, skippedOverLimit, cap);
         })
         .catch((e: unknown) => toastr.error(e as string));
     },

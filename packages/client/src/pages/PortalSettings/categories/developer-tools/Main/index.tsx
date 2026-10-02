@@ -45,8 +45,8 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/ui-kit/providers";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers";
 import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 
 import ConfirmWrapper from "SRC_DIR/components/ConfirmWrapper";

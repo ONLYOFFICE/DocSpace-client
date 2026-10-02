@@ -67,6 +67,7 @@ export * from "./editor";
 export * from "./notification";
 export * from "./privacyroom";
 export * from "./docsconnect";
+export * from "./oforms";
 
 export const allHandlers = (port: string) => [
   ...settingsHandlers(port),

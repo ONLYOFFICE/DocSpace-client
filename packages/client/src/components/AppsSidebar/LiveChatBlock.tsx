@@ -94,7 +94,17 @@ const LiveChatBlockConnected = inject<TStore>(
     infoPanelStore,
     profileActionsStore,
     filesStore,
+    uploadDataStore,
+    backup,
   }) => {
+    const { downloadingProgress } = backup;
+    // OperationsProgressButton is a floating button too, pinned to the same
+    // corner whenever an upload, a file operation or a backup download runs.
+    const showProgress =
+      uploadDataStore.primaryProgressDataStore.isPrimaryProgressVisbile ||
+      uploadDataStore.secondaryProgressDataStore.isSecondaryProgressVisbile ||
+      (downloadingProgress > 0 && downloadingProgress < 100);
+
     return {
       isLiveChatAvailable: authStore.isLiveChatAvailable,
       languageBaseName: authStore.languageBaseName,
@@ -105,10 +115,10 @@ const LiveChatBlockConnected = inject<TStore>(
       // The launcher's own close switches live chat off, through the very
       // action the profile menu toggle runs.
       onLiveChatClick: profileActionsStore.onLiveChatClick,
-      // CreateButtonMobile keeps this flag in step with the create button it
-      // renders into the same corner, so the launcher dodges exactly when the
-      // button is there.
-      withFloatingButton: filesStore.mainButtonVisible,
+      // CreateButtonMobile keeps mainButtonVisible in step with the create
+      // button it renders into the same corner, so the launcher dodges exactly
+      // when that button or the progress button is there.
+      withFloatingButton: filesStore.mainButtonVisible || showProgress,
       isInfoPanelVisible: infoPanelStore.isVisible,
     };
   },

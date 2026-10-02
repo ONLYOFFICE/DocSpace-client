@@ -72,6 +72,11 @@ const renderComponent = (
   isLiveChatAvailable: boolean,
   mainButtonVisible = false,
   isShowLiveChat = true,
+  {
+    isPrimaryProgressVisbile = false,
+    isSecondaryProgressVisbile = false,
+    downloadingProgress = 0,
+  } = {},
 ) =>
   render(
     <Provider
@@ -80,11 +85,11 @@ const renderComponent = (
       filesStore={{ mainButtonVisible }}
       userStore={{ user: { email: "user@example.com", displayName: "User" } }}
       uploadDataStore={{
-        primaryProgressDataStore: { isPrimaryProgressVisbile: false },
-        secondaryProgressDataStore: { isSecondaryProgressVisbile: false },
+        primaryProgressDataStore: { isPrimaryProgressVisbile },
+        secondaryProgressDataStore: { isSecondaryProgressVisbile },
       }}
       infoPanelStore={{ isVisible: false }}
-      backup={{ downloadingProgress: 0 }}
+      backup={{ downloadingProgress }}
       profileActionsStore={{ isShowLiveChat, onLiveChatClick }}
     >
       <LiveChatBlock />
@@ -105,6 +110,21 @@ describe("AppsSidebar LiveChatBlock", () => {
     // Both stand in the same corner, and the create button's own visibility
     // flag is what keeps the launcher off it.
     renderComponent(true, true);
+
+    expect(screen.getByTestId("live-chat-launcher")).toHaveAttribute(
+      "data-with-floating-button",
+      "true",
+    );
+  });
+
+  it.each([
+    ["an upload", { isPrimaryProgressVisbile: true }],
+    ["a file operation", { isSecondaryProgressVisbile: true }],
+    ["a backup download", { downloadingProgress: 40 }],
+  ])("steps aside from the progress button during %s", (_, progress) => {
+    // OperationsProgressButton is pinned to the same corner on desktop, where
+    // there is no create button, and would otherwise cover the launcher.
+    renderComponent(true, false, true, progress);
 
     expect(screen.getByTestId("live-chat-launcher")).toHaveAttribute(
       "data-with-floating-button",

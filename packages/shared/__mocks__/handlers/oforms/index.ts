@@ -158,7 +158,7 @@ const templatesResponse = (params: URLSearchParams) => {
   const locale = toLocale(params.get("locale"));
   const search = (params.get(SEARCH_FILTER) ?? "").toLowerCase();
   const purpose = params.get(PURPOSE_FILTER) ?? "";
-  const categoryIds = [...params.entries()]
+  const categoryIds = Array.from(params.entries())
     .filter(([key]) => key.startsWith(CATEGORY_FILTER))
     .map(([, value]) => value);
 

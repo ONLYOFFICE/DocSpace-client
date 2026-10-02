@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FC, useCallback, useMemo, useRef, useState } from "react";
+import { FC, useCallback, useMemo, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import classNames from "classnames";
@@ -73,12 +73,16 @@ const FilterPanel: FC<FilterPanelProps> = ({
   filterOformsByLocale,
   filterOformsByPurpose,
   toggleOformsCategory,
+  isOpen,
+  setIsOpen,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  const onToggle = useCallback(() => setIsOpen((open) => !open), []);
+  const onToggle = useCallback(
+    () => setIsOpen(!isOpen),
+    [isOpen, setIsOpen],
+  );
 
   const onOutsideMouseDown = useCallback(
     (e: MouseEvent) => {
@@ -94,7 +98,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
 
       setIsOpen(false);
     },
-    [isOpen],
+    [isOpen, setIsOpen],
   );
 
   useEventListener("mousedown", onOutsideMouseDown);
@@ -227,6 +231,8 @@ const injectStores = ({ oformsStore }: TStore) => ({
   filterOformsByLocale: oformsStore.filterOformsByLocale,
   filterOformsByPurpose: oformsStore.filterOformsByPurpose,
   toggleOformsCategory: oformsStore.toggleOformsCategory,
+  isOpen: oformsStore.filterPanelVisible,
+  setIsOpen: oformsStore.setFilterPanelVisible,
 });
 
 export default withoutInjected<

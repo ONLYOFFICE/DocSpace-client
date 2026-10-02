@@ -55,4 +55,5 @@ export interface TilesProps {
   onCreateTemplate: () => void;
   hotkeysResetKey?: unknown;
   setSubmitToGalleryDialogVisible: (isVisible: boolean) => void;
+  filterPanelVisible: boolean;
 }

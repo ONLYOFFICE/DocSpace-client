@@ -57,4 +57,6 @@ export interface FilterPanelProps extends FilterPanelOwnProps {
   filterOformsByLocale: (locale: string) => Promise<void>;
   filterOformsByPurpose: (purpose: string) => void;
   toggleOformsCategory: (categoryId: string) => void;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }

@@ -146,6 +146,31 @@ describe("OformsStore.parentCategories", () => {
     expect(store.parentCategories.map(({ id }) => id)).toEqual([30]);
   });
 
+  it("lists the groups in alphabetical order across purposes", () => {
+    const store = createStore();
+    store.setPurposes([
+      {
+        ...purposes[0],
+        parentCategories: [
+          { ...category(11, 0), name: "Sales", subcategories: [category(111, 1)] },
+          { ...category(12, 0), name: "Finance", subcategories: [category(121, 1)] },
+        ],
+      },
+      {
+        ...purposes[1],
+        parentCategories: [
+          { ...category(31, 0), name: "Leisure", subcategories: [category(311, 1)] },
+        ],
+      },
+    ]);
+
+    expect(store.parentCategories.map(({ name }) => name)).toEqual([
+      "Finance",
+      "Leisure",
+      "Sales",
+    ]);
+  });
+
   it("hides categories without templates of the current type", () => {
     const store = createStore();
     store.setPurposes(purposes);
@@ -190,6 +215,45 @@ describe("OformsStore filter conditions", () => {
 
     store.oformsFilter.purpose = "business";
     expect(store.isOformsFilterChanged).toBe(true);
+  });
+
+  it("loads the list and the taxonomy together when no category is selected", async () => {
+    const store = createStore();
+    await store.initTemplateGallery();
+    const purposesRequest = deferred<TOformPurpose[]>();
+    api.getOformPurposes.mockReturnValueOnce(purposesRequest.promise);
+    api.getOforms.mockClear();
+
+    const switching = store.filterOformsByLocale("de");
+    await Promise.resolve();
+
+    expect(api.getOforms).toHaveBeenCalledTimes(1);
+
+    purposesRequest.resolve(purposes);
+    await switching;
+  });
+
+  it("ignores Clear all while a language switch is loading", async () => {
+    const store = createStore();
+    await store.initTemplateGallery();
+    store.oformsFilter.purpose = "business";
+    store.setFilterOformsByLocaleIsLoading(true);
+    api.getOforms.mockClear();
+
+    await store.clearOformsFilter();
+
+    expect(store.oformsFilter.purpose).toBe("business");
+    expect(api.getOforms).not.toHaveBeenCalled();
+  });
+
+  it("closes the filter panel together with the gallery", () => {
+    const store = createStore();
+    store.setTemplateGalleryVisible(true);
+    store.setFilterPanelVisible(true);
+
+    store.setTemplateGalleryVisible(false);
+
+    expect(store.filterPanelVisible).toBe(false);
   });
 
   it("clears every condition but the search", async () => {

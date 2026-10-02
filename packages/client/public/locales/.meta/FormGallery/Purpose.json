@@ -9,7 +9,14 @@
     "is_auto": false,
     "updated_at": "2026-10-02T13:07:07.537Z"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/TemplateGallery/Filter/FilterPanel/index.tsx",
+      "line_number": 182,
+      "context": ") : null}\n\n{purposes.length > 1 ? (\n<div className={styles.section}>\n<Text className={styles.sectionHeader} fontWeight={600}>\n{t(\"FormGallery:Purpose\")}\n</Text>\n<RadioButtonGroup\nname=\"template-gallery-purpose\"\norientation=\"vertical\"\nspacing=\"10px\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

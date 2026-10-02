@@ -61,6 +61,7 @@ const Tiles: FC<TilesProps> = ({
   isShowInitSkeleton,
   hotkeysResetKey,
   setSubmitToGalleryDialogVisible,
+  filterPanelVisible,
 }) => {
   useEffect(() => {
     setOformFilesLoaded(tReady && oformFiles?.length > 0);
@@ -107,7 +108,7 @@ const Tiles: FC<TilesProps> = ({
     isShowOneTile,
     onSelect: handleSelectByIndex,
     onInfoSelect: handleInfoSelectByIndex,
-    enabled: !isShowInitSkeleton,
+    enabled: !isShowInitSkeleton && !filterPanelVisible,
     resetKey: hotkeysResetKey,
   });
 
@@ -162,6 +163,7 @@ const injectStores = ({
   setIsVisibleInfoPanelTemplateGallery:
     oformsStore.setIsVisibleInfoPanelTemplateGallery,
   setSubmitToGalleryDialogVisible: dialogsStore.setSubmitToGalleryDialogVisible,
+  filterPanelVisible: oformsStore.filterPanelVisible,
 });
 
 export default withoutInjected<TilesProps, ReturnType<typeof injectStores>>(

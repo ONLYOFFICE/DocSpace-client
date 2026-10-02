@@ -111,6 +111,8 @@ class OformsStore {
 
   isVisibleInfoPanelTemplateGallery = false;
 
+  filterPanelVisible = false;
+
   currentExtensionGallery = ".docx";
 
   // Set when the gallery is opened from the Forms section root, where there is
@@ -369,12 +371,13 @@ class OformsStore {
 
   /**
    * The category filter is scoped by the selected purpose: with none selected
-   * the groups of both purposes are listed, one after the other. Categories
-   * without a single template of the current type are left out - the CMS keeps
-   * plenty of them, and picking one could only ever end in an empty screen.
+   * the groups of both purposes are listed together, in alphabetical order -
+   * the CMS answers them in no meaningful one. Categories without a single
+   * template of the current type are left out - the CMS keeps plenty of them,
+   * and picking one could only ever end in an empty screen.
    */
   get parentCategories(): TOformParentCategory[] {
-    const { purpose } = this.oformsFilter;
+    const { purpose, locale } = this.oformsFilter;
 
     return this.purposes
       .filter(({ key }) => !purpose || key === purpose)
@@ -385,7 +388,8 @@ class OformsStore {
           ({ templatesCount }) => templatesCount > 0,
         ),
       }))
-      .filter(({ subcategories }) => subcategories.length > 0);
+      .filter(({ subcategories }) => subcategories.length > 0)
+      .sort((a, b) => a.name.localeCompare(b.name, locale ?? undefined));
   }
 
   get selectedCategories(): TOformParentCategory[] {
@@ -491,6 +495,14 @@ class OformsStore {
     const newOformsFilter = this.oformsFilter.clone();
 
     try {
+      if (!newOformsFilter.categoryIds.length) {
+        await Promise.all([
+          this.fetchPurposes(locale, newOformsFilter.extension),
+          this.refetchOforms(newOformsFilter),
+        ]);
+        return;
+      }
+
       await this.fetchPurposes(locale, newOformsFilter.extension);
 
       newOformsFilter.categoryIds = this.getAvailableCategoryIds(
@@ -508,7 +520,8 @@ class OformsStore {
   };
 
   clearOformsFilter = async () => {
-    if (!this.isOformsFilterChanged) return;
+    if (!this.isOformsFilterChanged || this.filterOformsByLocaleIsLoading)
+      return;
 
     const locale = this.defaultOformLocale;
 
@@ -570,9 +583,16 @@ class OformsStore {
     // Closing always drops the room-from-template mode: the flag is opt-in per
     // opening, so any other entry point (in-room gallery, "+" menu) keeps
     // creating plain files even if a Forms-root opening was abandoned.
-    if (!templateGalleryVisible) this.createRoomFromTemplate = false;
+    if (!templateGalleryVisible) {
+      this.createRoomFromTemplate = false;
+      this.filterPanelVisible = false;
+    }
 
     this.templateGalleryVisible = templateGalleryVisible;
+  };
+
+  setFilterPanelVisible = (filterPanelVisible: boolean) => {
+    this.filterPanelVisible = filterPanelVisible;
   };
 
   setCurrentExtensionGallery = (extension: string) => {

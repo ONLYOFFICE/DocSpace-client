@@ -3,7 +3,7 @@
   "content": "We recommend backing up your data before you start.",
   "content_en_sha1_hash": "5edb900c9274b8d724eabc58af96c0cfda47bd6e",
   "created_at": "2026-09-29T10:10:19.038Z",
-  "updated_at": "2026-10-01T11:58:19.319Z",
+  "updated_at": "2026-10-02T12:15:32.524Z",
   "comment": {
     "text": "Instructional note text in an upgrade dialog or a variable within a larger note, advising users to perform a data backup before proceeding.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
-      "line_number": 256,
-      "context": "<div className={styles.noteText}>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\">\n {t(\"Common:UpgradeEditorsUnavailableNote\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:UpgradeBackupRecommendation\")}\n </Text>\n </div>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "line_number": 251,
+      "context": "))}\n </div>\n \n <UpgradeNote\n title={t(\"Common:UpgradeEditorsUnavailableNote\")}\n text={t(\"Common:UpgradeBackupRecommendation\")}\n className={styles.note}\n />\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <div className={styles.links}>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/index.tsx",
-      "line_number": 89,
-      "context": "</Text>\n </div>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:UpgradeNoteWithBackupRecommendation\", {\n note: t(\"Common:UpgradeEditorsUnavailableNote\"),\n backup: t(\"Common:UpgradeBackupRecommendation\"),\n })}\n </Text>\n </div>\n \n <HelpLinks",
+      "line_number": 80,
+      "context": "<UpgradeNote\n title={t(\"Common:UpgradeBeforeYouUpgrade\")}\n text={t(\"Common:UpgradeNoteWithBackupRecommendation\", {\n note: t(\"Common:UpgradeEditorsUnavailableNote\"),\n backup: t(\"Common:UpgradeBackupRecommendation\"),\n })}\n dataTestId=\"bonus-upgrade-note\"\n />\n \n <HelpLinks",
       "module": "/packages/shared"
     }
   ],

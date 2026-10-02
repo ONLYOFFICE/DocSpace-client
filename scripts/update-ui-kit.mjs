@@ -48,7 +48,8 @@
  * exists to remove.
  *
  * So: copy, rewrite the recorded integrity, drop the extracted copy, install,
- * then verify by hash that what landed in node_modules is what was copied in.
+ * then verify by hash that what landed in node_modules is what was copied in,
+ * and that the lockfile's peers and dependencies match the packed manifest.
  *
  *   node scripts/update-ui-kit.mjs                     # newest pack in the sibling checkout
  *   node scripts/update-ui-kit.mjs path/to/pack.tgz    # an explicit tarball
@@ -408,6 +409,83 @@ if (stale.length > 0) {
   console.error("node_modules still holds a different build of @onlyoffice/apps-ui-kit:\n");
   for (const dir of stale) console.error(`  ${path.relative(ROOT, dir)}`);
   fail("\nRemove node_modules/.pnpm/@onlyoffice+apps-ui-kit* and reinstall.");
+}
+
+// The bytes match, but the lockfile can still describe the previous build.
+// Rewriting the integrity makes pnpm read the new tarball, yet it keeps the
+// package's recorded peerDependencies and snapshot as they were -- which is how
+// ui-kit once asked for katex ^0.17.0 while the lockfile still said ^0.16.47.
+// A new runtime dependency would be missed the same way and never linked, with
+// `--frozen-lockfile` in Docker staying green. So compare the lockfile entry
+// with the manifest that was actually packed.
+const unquote = (value) => value.trim().replace(/^'(.*)'$/, "$1");
+
+const overridden = (() => {
+  const workspace = fs.readFileSync(path.join(ROOT, "pnpm-workspace.yaml"), "utf8");
+  const block = workspace.match(/^overrides:\n((?:[ #].*\n|\n)*)/m)?.[1] ?? "";
+  const names = new Set();
+  for (const [, key] of block.matchAll(/^ {2}("[^"]+"|'[^']+'|[^\s:#][^:]*):/gm)) {
+    // `"smol-toml@^1"` overrides smol-toml for every range it names.
+    names.add(key.replace(/^["']|["']$/g, "").replace(/(.)@.*$/, "$1"));
+  }
+  return names;
+})();
+
+const lockEntry = (startsWith) => {
+  const lockText = fs.readFileSync(LOCKFILE, "utf8");
+  const start = lockText.indexOf(`\n  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz${startsWith}`);
+  if (start === -1) return null;
+  const end = lockText.indexOf("\n\n", start + 1);
+  return lockText.slice(start + 1, end === -1 ? undefined : end);
+};
+
+const fieldOf = (entry, field) => {
+  const body = entry.match(new RegExp(`^ {4}${field}:\\n((?: {6}.*\\n?)*)`, "m"))?.[1] ?? "";
+  return new Map(
+    [...body.matchAll(/^ {6}('[^']+'|[^\s:]+): (.*)$/gm)].map(([, name, value]) => [
+      unquote(name),
+      unquote(value),
+    ]),
+  );
+};
+
+const packed = JSON.parse(
+  contentsOfTarball(TARBALL)
+    .find(([name]) => name === "package.json")[1]
+    .toString("utf8"),
+);
+const packagesEntry = lockEntry("':");
+const snapshotEntry = lockEntry("(");
+const drift = [];
+
+if (packagesEntry === null || snapshotEntry === null) {
+  drift.push("no @onlyoffice/apps-ui-kit entry in pnpm-lock.yaml packages/snapshots");
+} else {
+  const lockedPeers = fieldOf(packagesEntry, "peerDependencies");
+  for (const [name, range] of Object.entries(packed.peerDependencies ?? {})) {
+    // An override rewrites the recorded range, so it says nothing about drift.
+    if (overridden.has(name)) continue;
+    if (lockedPeers.get(name) !== range) {
+      drift.push(`peer ${name}: tarball ${range}, lockfile ${lockedPeers.get(name) ?? "(missing)"}`);
+    }
+  }
+
+  const linked = new Set([
+    ...fieldOf(snapshotEntry, "dependencies").keys(),
+    ...fieldOf(snapshotEntry, "optionalDependencies").keys(),
+  ]);
+  for (const name of Object.keys(packed.dependencies ?? {})) {
+    if (!linked.has(name)) drift.push(`dependency ${name}: in the tarball, not in the lockfile snapshot`);
+  }
+}
+
+if (drift.length > 0) {
+  console.error("pnpm-lock.yaml still describes a previous build of @onlyoffice/apps-ui-kit:\n");
+  for (const line of drift) console.error(`  ${line}`);
+  fail(
+    "\nRun `pnpm update -r @onlyoffice/apps-ui-kit`, review what else it moves in " +
+      "pnpm-lock.yaml, and re-run this script.",
+  );
 }
 
 const { version } = JSON.parse(

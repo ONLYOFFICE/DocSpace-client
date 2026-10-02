@@ -1983,7 +1983,7 @@
   "ServerErrorEmptyDescription": "페이지를 다시 로드하거나 나중에 다시 시도해 주세요.",
   "ServerSideEncryptionMethod": "서버측 암호화 방법",
   "ServiceIsDisabled": "서비스가 비활성화되었습니다",
-  "ServiceManagementUnavailable": "서비스 관리 기능은 유예 기간 동안 사용할 수 없으며, 이 기간 동안에는 서비스 요금이 부과되지 않습니다. 모든 기능을 다시 사용하려면 {{planName}} 요금제로 업그레이드해 주세요.",
+  "ServiceManagementUnavailable": "유예 기간 동안에는 애드온 관리 기능을 사용할 수 없으며, 이 기간 동안에는 애드온 요금이 부과되지 않습니다. 모든 기능을 다시 사용하려면 {{planName}} 요금제로 업그레이드해 주세요.",
   "ServiceUrl": "서비스 URL",
   "Sessions": "세션",
   "SetDiskSpaceQuota": "이 워크스페이스에 대한 최대 디스크 공간을 정의하려면 스토리지 할당량을 설정하세요.",

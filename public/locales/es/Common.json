@@ -1983,7 +1983,7 @@
   "ServerErrorEmptyDescription": "Por favor, recargue la página o vuelva más tarde.",
   "ServerSideEncryptionMethod": "Método de cifrado del lado del servidor",
   "ServiceIsDisabled": "Servicio deshabilitado",
-  "ServiceManagementUnavailable": "La gestión de servicios no está disponible durante el periodo de gracia, y no se aplicarán costes adicionales a los servicios durante este tiempo. Para recuperar la funcionalidad completa, actualice a un plan {{planName}}.",
+  "ServiceManagementUnavailable": "La gestión de complementos no está disponible durante el periodo de gracia, y no se aplicarán cargos a los complementos durante este tiempo. Para recuperar la funcionalidad completa, actualice a un plan {{planName}}.",
   "ServiceUrl": "URL de servicio",
   "Sessions": "Sesiones",
   "SetDiskSpaceQuota": "Establezca una cuota de almacenamiento para definir el espacio máximo en disco para este espacio de trabajo.",

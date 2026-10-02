@@ -387,7 +387,7 @@ test.describe("Storage plan dialog", () => {
 
     await expect(page.getByText("Warning", { exact: true })).toBeVisible();
     await expect(
-      page.getByText("Service management is unavailable during the grace period"),
+      page.getByText("Add-on management is unavailable during the grace period"),
     ).toBeVisible();
     await expect(page.getByTestId("grace_period_info")).toContainText(
       "Grace period is effective",

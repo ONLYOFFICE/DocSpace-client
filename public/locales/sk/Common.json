@@ -1983,7 +1983,7 @@
   "ServerErrorEmptyDescription": "Prosím, načítajte stránku znova alebo sa vráťte neskôr.",
   "ServerSideEncryptionMethod": "Metóda šifrovania na strane servera",
   "ServiceIsDisabled": "Služba je deaktivovaná",
-  "ServiceManagementUnavailable": "Správa služieb je nedostupná počas grace period a počas tejto doby nebudú účtované žiadne poplatky za služby. Ak chcete obnoviť plnú funkčnosť, prosím, prejdite na plán {{planName}}.",
+  "ServiceManagementUnavailable": "Správa doplnkov nie je počas doby odkladu platby dostupná a počas tejto doby nebudú za doplnky účtované žiadne poplatky. Ak chcete obnoviť plnú funkčnosť, prejdite na plán {{planName}}.",
   "ServiceUrl": "URL adresa služby",
   "Sessions": "Relácie",
   "SetDiskSpaceQuota": "Nastavte kvótu úložiska, aby ste vymedzili maximálny priestor na disku pre tento pracovný priestor.",

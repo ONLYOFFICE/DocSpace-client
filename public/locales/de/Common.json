@@ -1983,7 +1983,7 @@
   "ServerErrorEmptyDescription": "Bitte laden Sie die Seite neu oder kommen Sie später noch einmal vorbei.",
   "ServerSideEncryptionMethod": "Methode der Server-seitigen Verschlüsselung",
   "ServiceIsDisabled": "Dienst ist deaktiviert",
-  "ServiceManagementUnavailable": "Die Serviceverwaltung ist während der Übergangsfrist nicht verfügbar. Für die Dienste fallen in dieser Zeit keine Gebühren an. Um die volle Funktionalität wiederherzustellen, führen Sie bitte ein Upgrade auf einen {{planName}}-Plan durch.",
+  "ServiceManagementUnavailable": "Die Verwaltung von Add-ons ist während der Übergangsfrist nicht verfügbar. Für die Add-ons fallen in dieser Zeit keine Gebühren an. Um die volle Funktionalität wiederherzustellen, führen Sie bitte ein Upgrade auf einen {{planName}}-Plan durch.",
   "ServiceUrl": "URL des Dienstes",
   "Sessions": "Sitzungen",
   "SetDiskSpaceQuota": "Legen Sie die Speicherquote fest, um den maximalen Speicherplatz für diesen Arbeitsbereich zu definieren.",

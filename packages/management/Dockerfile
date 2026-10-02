@@ -32,7 +32,6 @@ COPY *.tgz ./
 COPY packages/client/*.tgz ./packages/client/
 
 COPY common/ ./common/
-COPY packages/client/*.tgz ./packages/client/
 COPY packages/management/ ./packages/management/
 COPY packages/shared/ ./packages/shared/
 # next.config.js requires scripts/ui-kit-dev.cjs at load time.

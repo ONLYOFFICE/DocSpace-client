@@ -1983,7 +1983,7 @@
   "ServerErrorEmptyDescription": "Please reload the page or come back later.",
   "ServerSideEncryptionMethod": "Server Side Encryption Method",
   "ServiceIsDisabled": "Service is disabled",
-  "ServiceManagementUnavailable": "Service management is unavailable during the grace period, and no charges will apply to the services during this time. To regain full functionality, please upgrade to a {{planName}} plan.",
+  "ServiceManagementUnavailable": "Add-on management is unavailable during the grace period, and no charges will apply to the add-ons during this time. To regain full functionality, please upgrade to a {{planName}} plan.",
   "ServiceUrl": "Service URL",
   "Sessions": "Sessions",
   "SetDiskSpaceQuota": "Set storage quota to define the maximum disk space for this workspace.",

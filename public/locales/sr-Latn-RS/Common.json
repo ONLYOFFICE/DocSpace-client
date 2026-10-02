@@ -1983,7 +1983,7 @@
   "ServerErrorEmptyDescription": "Molimo osveži stranicu ili se vrati kasnije.",
   "ServerSideEncryptionMethod": "Metod šifrovanja na serverskoj strani",
   "ServiceIsDisabled": "Usluga je onemogućena",
-  "ServiceManagementUnavailable": "Upravljanje uslugama nije dostupno tokom grejs perioda i u tom periodu se ne vrše naplate za usluge. Da biste ponovo imali punu funkcionalnost, nadogradite se na plan {{planName}}.",
+  "ServiceManagementUnavailable": "Upravljanje dodacima nije dostupno tokom grejs perioda i u tom periodu se dodaci ne naplaćuju. Da biste ponovo imali punu funkcionalnost, nadogradite se na plan {{planName}}.",
   "ServiceUrl": "URL servisa",
   "Sessions": "Sesije",
   "SetDiskSpaceQuota": "Postavite skladišnu kvotu da biste definisali maksimalni prostor na disku za ovaj radni prostor.",

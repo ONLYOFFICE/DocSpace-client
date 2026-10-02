@@ -1983,7 +1983,7 @@
   "ServerErrorEmptyDescription": "Veuillez recharger la page ou revenir plus tard.",
   "ServerSideEncryptionMethod": "Méthode de chiffrement partie serveur",
   "ServiceIsDisabled": "Service désactivé",
-  "ServiceManagementUnavailable": "La gestion des services n'est pas disponible pendant la période de grâce, et aucun frais ne sera appliqué aux services pendant cette période. Pour retrouver toutes les fonctionnalités, veuillez passer à un plan {{planName}}.",
+  "ServiceManagementUnavailable": "La gestion des modules complémentaires n'est pas disponible pendant la période de grâce, et aucuns frais ne seront appliqués aux modules complémentaires pendant cette période. Pour retrouver toutes les fonctionnalités, veuillez passer à un plan {{planName}}.",
   "ServiceUrl": "URL du service",
   "Sessions": "Sessions",
   "SetDiskSpaceQuota": "Définissez le quota de stockage pour définir l'espace de stockage maximum pour cet espace de travail.",

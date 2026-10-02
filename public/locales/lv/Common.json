@@ -1983,7 +1983,7 @@
   "ServerErrorEmptyDescription": "Lūdzu, ielādējiet lapu vēlreiz vai atgriezieties vēlāk.",
   "ServerSideEncryptionMethod": "Servera puses šifrēšanas metode",
   "ServiceIsDisabled": "Pakalpojums ir deaktivizēts",
-  "ServiceManagementUnavailable": "Pakalpojumu pārvaldība nav pieejama žēlastības periodā, un par pakalpojumiem šajā laikā netiks piemērotas maksas. Lai atgūtu pilnu funkcionalitāti, lūdzu, jauniniet uz {{planName}} plānu.",
+  "ServiceManagementUnavailable": "Papildinājumu pārvaldība nav pieejama žēlastības periodā, un par papildinājumiem šajā laikā netiks piemērota maksa. Lai atgūtu pilnu funkcionalitāti, lūdzu, jauniniet uz {{planName}} plānu.",
   "ServiceUrl": "Pakalpojuma URL",
   "Sessions": "Sesijas",
   "SetDiskSpaceQuota": "Iestatiet krātuves kvotu, lai definētu maksimālo diska vietu šai darbvietai.",

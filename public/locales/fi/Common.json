@@ -1983,7 +1983,7 @@
   "ServerErrorEmptyDescription": "Ole hyvä ja lataa sivu uudelleen tai yritä myöhemmin.",
   "ServerSideEncryptionMethod": "Palvelinpuolen salausmenetelmä",
   "ServiceIsDisabled": "Palvelu on poistettu käytöstä",
-  "ServiceManagementUnavailable": "Palvelunhallinta ei ole käytettävissä armonisajan aikana, eikä palveluista veloiteta maksuja tänä aikana. Saadaksesi täyden toiminnallisuuden, päivitä {{planName}}-palvelusuunnitelmaan.",
+  "ServiceManagementUnavailable": "Lisäosien hallinta ei ole käytettävissä lisäajan aikana, eikä lisäosista veloiteta maksuja tänä aikana. Palauttaaksesi täyden toiminnallisuuden päivitä {{planName}}-pakettiin.",
   "ServiceUrl": "Palvelun URL-osoite",
   "Sessions": "Istunnot",
   "SetDiskSpaceQuota": "Aseta tallennuskiintiö määrittääksesi maksimilevytilan tälle työtilalle.",

@@ -1985,7 +1985,7 @@
   "ServerErrorEmptyDescription": "Vă rugăm să reîncărcați pagina sau să reveniți mai târziu.",
   "ServerSideEncryptionMethod": "Metoda de criptare pe partea de server",
   "ServiceIsDisabled": "Serviciul este dezactivat",
-  "ServiceManagementUnavailable": "Administrarea serviciilor nu este disponibilă în timpul perioadei de grație și nicio sumă de plată pentru servicii nu va fi percepută în această perioadă. Pentru a restabili funcționalitatea completă, treceţi la un abonament superior {{planName}}.",
+  "ServiceManagementUnavailable": "Administrarea suplimentelor nu este disponibilă în timpul perioadei de grație și nu va fi percepută nicio taxă pentru suplimente în această perioadă. Pentru a restabili funcționalitatea completă, treceți la un plan {{planName}}.",
   "ServiceUrl": "URL-ul serviciului",
   "Sessions": "Sesiuni",
   "SetDiskSpaceQuota": "Setați cota de stocare pentru a defini spațiul maxim de disc pentru acest spațiu de lucru.",

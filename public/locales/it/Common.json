@@ -1985,7 +1985,7 @@
   "ServerErrorEmptyDescription": "Ricarica la pagina o torna più tardi.",
   "ServerSideEncryptionMethod": "Metodo di crittografia lato server",
   "ServiceIsDisabled": "Il servizio è disabilitato",
-  "ServiceManagementUnavailable": "La gestione del servizio non è disponibile durante il periodo di tolleranza e non verranno applicati addebiti per i servizi durante questo periodo. Per ripristinare la piena funzionalità, effettua l’upgrade al piano {{planName}}.",
+  "ServiceManagementUnavailable": "La gestione dei componenti aggiuntivi non è disponibile durante il periodo di tolleranza e in questo periodo non verranno applicati addebiti per i componenti aggiuntivi. Per ripristinare la piena funzionalità, effettua l’upgrade al piano {{planName}}.",
   "ServiceUrl": "URL di servizio",
   "Sessions": "Sessioni",
   "SetDiskSpaceQuota": "Imposta la quota di archiviazione per definire lo spazio su disco massimo per questo spazio di lavoro.",

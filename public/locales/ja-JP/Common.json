@@ -1985,7 +1985,7 @@
   "ServerErrorEmptyDescription": "ページを再読み込みするか、後でもう一度お越しください。",
   "ServerSideEncryptionMethod": "サーバー側暗号化方法",
   "ServiceIsDisabled": "サービスが無効になっています",
-  "ServiceManagementUnavailable": "猶予期間中はサービス管理をご利用いただけず、この期間中はサービスに対する料金は発生しません。全機能を回復するには、{{planName}}プランにアップグレードしてください。",
+  "ServiceManagementUnavailable": "猶予期間中はアドオンの管理をご利用いただけず、この期間中はアドオンに対する料金は発生しません。全機能を回復するには、{{planName}}プランにアップグレードしてください。",
   "ServiceUrl": "サービスURL",
   "Sessions": "セッション",
   "SetDiskSpaceQuota": "このワークスペースの最大ディスク容量を定義するために、ストレージ容量制限を設定してください。",

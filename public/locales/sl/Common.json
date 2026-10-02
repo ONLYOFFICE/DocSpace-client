@@ -1985,7 +1985,7 @@
   "ServerErrorEmptyDescription": "Prosim, osvežite stran ali se vrnite kasneje.",
   "ServerSideEncryptionMethod": "Šifrirna metoda na strani strežnika",
   "ServiceIsDisabled": "Služba je onemogočena",
-  "ServiceManagementUnavailable": "Usluga upravljanja ni na voljo med obdobjem odloga, in v tem času ne veljajo stroški za storitve. Za ponovno pridobitev polne funkcionalnosti prosim nadgradite na načrt {{planName}}.",
+  "ServiceManagementUnavailable": "Upravljanje dodatkov med odložnim obdobjem ni na voljo in v tem času se za dodatke ne zaračunavajo stroški. Za ponovno pridobitev polne funkcionalnosti nadgradite na načrt {{planName}}.",
   "ServiceUrl": "URL storitve",
   "Sessions": "Seje",
   "SetDiskSpaceQuota": "Nastavite kvoto shranjevanja, da določite največji prostor na disku za ta delovni prostor.",

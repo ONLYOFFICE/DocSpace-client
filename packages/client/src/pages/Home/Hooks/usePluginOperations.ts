@@ -159,8 +159,13 @@ export const usePluginOperations = ({
         });
       };
 
+      const loadPluginOperations = async () => {
+        const message = await pluginProps.onLoad?.(dispatchMessageAction);
+        dispatchMessage({ message, pluginName });
+      };
+
       loadedPluginsRef.current.add(operationsKey);
-      pluginProps.onLoad(dispatchMessageAction);
+      loadPluginOperations();
     });
 
     loadedPluginsRef.current = new Set(

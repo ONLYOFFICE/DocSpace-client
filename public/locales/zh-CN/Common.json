@@ -1985,7 +1985,7 @@
   "ServerErrorEmptyDescription": "请重新加载页面或稍后重试。",
   "ServerSideEncryptionMethod": "服务器端加密方法",
   "ServiceIsDisabled": "服务已禁用",
-  "ServiceManagementUnavailable": "宽限期内部分功能受限，服务不收取费用。恢复完整功能，请升级至{{planName}}套餐。",
+  "ServiceManagementUnavailable": "宽限期内无法管理附加组件，且在此期间附加组件不收取费用。如需恢复完整功能，请升级至{{planName}}套餐。",
   "ServiceUrl": "服务URL",
   "Sessions": "会话",
   "SetDiskSpaceQuota": "设置存储配额以定义此工作区的最大磁盘空间。",

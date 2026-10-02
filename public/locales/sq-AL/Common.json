@@ -1985,7 +1985,7 @@
   "ServerErrorEmptyDescription": "Ju lutem rifreskoni faqen ose kthehuni më vonë.",
   "ServerSideEncryptionMethod": "Metoda e kriptimit nga ana e serverit",
   "ServiceIsDisabled": "Shërbimi është fikur",
-  "ServiceManagementUnavailable": "Shërbimi i menaxhimit është i padisponueshëm gjatë periudhës së mërzitjes, dhe asnjë pagesë nuk do të zbatohet për shërbimet gjatë kësaj kohe. Për të rikthyer funksionalitetin e plotë, ju lutem kaloni në një plan {{planName}}.",
+  "ServiceManagementUnavailable": "Menaxhimi i shtesave nuk është i disponueshëm gjatë periudhës së faljes dhe gjatë kësaj kohe nuk do të zbatohet asnjë pagesë për shtesat. Për të rikthyer funksionalitetin e plotë, ju lutemi kaloni në një plan {{planName}}.",
   "ServiceUrl": "URL-ja e shërbimit",
   "Sessions": "Sesionet",
   "SetDiskSpaceQuota": "Caktoni kuotën e ruajtjes për të përcaktuar hapësirën maksimale të diskut për këtë hapësirë pune.",

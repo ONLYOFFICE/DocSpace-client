@@ -1985,7 +1985,7 @@
   "ServerErrorEmptyDescription": "Recarregue a página ou volte mais tarde.",
   "ServerSideEncryptionMethod": "Método de Criptografia do Lado do Servidor",
   "ServiceIsDisabled": "Serviço desativado",
-  "ServiceManagementUnavailable": "O gerenciamento de serviços não estará disponível durante o período de carência e nenhuma cobrança será aplicada aos serviços durante esse período. Para recuperar a funcionalidade completa, atualize para um plano {{planName}}.",
+  "ServiceManagementUnavailable": "O gerenciamento de add-ons não estará disponível durante o período de carência e nenhuma cobrança será aplicada aos add-ons durante esse período. Para recuperar a funcionalidade completa, atualize para um plano {{planName}}.",
   "ServiceUrl": "URL de serviço",
   "Sessions": "Sessões",
   "SetDiskSpaceQuota": "Defina a cota de armazenamento para definir o espaço máximo em disco para este espaço de trabalho.",

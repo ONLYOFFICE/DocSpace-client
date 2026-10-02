@@ -1985,7 +1985,7 @@
   "ServerErrorEmptyDescription": "Laad de pagina opnieuw of kom later terug.",
   "ServerSideEncryptionMethod": "Server Side Encryptiemethode",
   "ServiceIsDisabled": "Service is uitgeschakeld",
-  "ServiceManagementUnavailable": "Service management is niet beschikbaar tijdens de respijtperiode, en er worden geen kosten in rekening gebracht voor de services gedurende deze periode. Om de volledige functionaliteit terug te krijgen, upgrade alstublieft naar een {{planName}} plan.",
+  "ServiceManagementUnavailable": "Het beheer van add-ons is niet beschikbaar tijdens de respijtperiode, en er worden gedurende deze periode geen kosten in rekening gebracht voor de add-ons. Om de volledige functionaliteit terug te krijgen, upgrade naar een {{planName}}-plan.",
   "ServiceUrl": "Service Url",
   "Sessions": "Sessies",
   "SetDiskSpaceQuota": "Stel opslagquota in om de maximale schijfruimte voor deze werkruimte te bepalen.",

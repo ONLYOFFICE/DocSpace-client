@@ -1985,7 +1985,7 @@
   "ServerErrorEmptyDescription": "Proszę odświeżyć stronę lub wrócić później.",
   "ServerSideEncryptionMethod": "Metoda szyfrowania po stronie serwera",
   "ServiceIsDisabled": "Usługa jest wyłączona",
-  "ServiceManagementUnavailable": "Zarządzanie usługami jest niedostępne w okresie karencji, a w tym czasie nie będą naliczane żadne opłaty za usługi. Aby odzyskać pełną funkcjonalność, prosimy o przejście na plan {{planName}}.",
+  "ServiceManagementUnavailable": "Zarządzanie dodatkami jest niedostępne w okresie karencji, a w tym czasie nie będą naliczane żadne opłaty za dodatki. Aby odzyskać pełną funkcjonalność, prosimy o przejście na plan {{planName}}.",
   "ServiceUrl": "URL usługi",
   "Sessions": "Sesje",
   "SetDiskSpaceQuota": "Ustaw limit pamięci, aby zdefiniować maksymalną przestrzeń dyskową dla tej przestrzeni roboczej.",

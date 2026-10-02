@@ -1985,7 +1985,7 @@
   "ServerErrorEmptyDescription": "Zkuste stránku načíst znovu nebo se později vraťte.",
   "ServerSideEncryptionMethod": "Metoda šifrování na straně serveru",
   "ServiceIsDisabled": "Služba je zakázána",
-  "ServiceManagementUnavailable": "Správa služeb není dostupná během grace period a v tomto období nebudou účtovány žádné poplatky za služby. Pro obnovení plné funkčnosti prosím upgradujte na plán {{planName}}.",
+  "ServiceManagementUnavailable": "Správa doplňků není během doby odkladu dostupná a v tomto období nebudou za doplňky účtovány žádné poplatky. Pro obnovení plné funkčnosti prosím přejděte na plán {{planName}}.",
   "ServiceUrl": "URL adresa služby",
   "Sessions": "Sezení",
   "SetDiskSpaceQuota": "Nastavte kvótu úložiště a určete maximální prostor na disku pro tento pracovní prostor.",

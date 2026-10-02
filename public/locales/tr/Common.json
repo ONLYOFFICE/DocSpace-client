@@ -1419,7 +1419,7 @@
   "MoveToFolderMessage": "Klasörü alt klasörüne taşıyamazsınız",
   "MoveToOperation": "Taşınıyor",
   "MoveToPublicRoom": "Bu oda ve tüm içeriği, bağlantıya sahip olan herkesin kullanımına açıktır. Devam etmek istiyor musunuz?",
-  "MoveToSection": "{{sectionName}}'e geçin",
+  "MoveToSection": "Çöp Kutusuna Taşı",
   "MoveToTrashItem": "Bu öğe Çöp Kutusu'na taşınacaktır.",
   "MoveToTrashItems": "Bu {{itemCount}} öğe Çöp Kutusu'na taşınacak.",
   "MultiplyOverwrite": "Birkaç klasör tek bir klasörde birleştirilecek, sürüm güncellemesi ile dosyaların üzerine yazılacaktır",

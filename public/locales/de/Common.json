@@ -1419,7 +1419,7 @@
   "MoveToFolderMessage": "Ordner können nicht in Unterordner verschoben werden",
   "MoveToOperation": "Wird verschoben",
   "MoveToPublicRoom": "Dieser Raum und sein gesamter Inhalt sind für jeden mit dem Link zugänglich. Möchten Sie fortfahren?",
-  "MoveToSection": "Verschieben nach {{sectionName}}",
+  "MoveToSection": "In den Papierkorb verschieben",
   "MoveToTrashItem": "Dieser Eintrag wird in den Papierkorb verschoben.",
   "MoveToTrashItems": "Diese {{itemCount}} Elemente werden in den Papierkorb verschoben.",
   "MultiplyOverwrite": "Mehrere Ordner werden zu einem zusammengeführt, Dateien werden mit dem Versionsupdate überschrieben.",

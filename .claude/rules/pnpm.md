@@ -111,6 +111,21 @@ copies were already rewritten. The `tar` binary is deliberately not used - the
 GNU tar shipped with Git Bash reads a Windows path as a remote `host:path` spec
 and refuses it.
 
+Matching bytes are still not enough: the rewritten integrity makes pnpm read
+the new tarball, but it keeps the lockfile entry's recorded `peerDependencies`
+and snapshot from the previous build. That is how the lockfile once kept katex
+`^0.16.47` and later ai-chat `^0.5.121` after the tarball had moved on, and a
+new runtime dependency would be missed the same way and never linked, with
+`--frozen-lockfile` staying green. So the script finally compares the
+`@onlyoffice/apps-ui-kit` entry in `pnpm-lock.yaml` with the packed
+`package.json`: every peer range, except names under `overrides` (an override
+rewrites the recorded range, so it says nothing about drift), and every
+runtime dependency in the snapshot. On drift it fails and points at
+`pnpm update -r @onlyoffice/apps-ui-kit`. It does not run that itself, because
+the update also re-resolves unrelated parts of the tree, codemirror among them;
+review what it moves before committing. A one-line peer fix can be made by hand
+in the lockfile instead, followed by `pnpm install`.
+
 ### Running the apps against a ui-kit checkout
 
 Waiting for build, pack, install and a dev-server restart on every ui-kit edit

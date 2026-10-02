@@ -35,9 +35,10 @@
 
 import React, { useRef, useState } from "react";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { withoutInjected } from "SRC_DIR/helpers/injected";
 import classNames from "classnames";
 import styles from "./DesktopView.module.scss";
 import SubList, {
@@ -193,7 +194,16 @@ const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
   );
 };
 
-export default inject(({ oformsStore }: InjectedProps) => ({
+const injectStores = ({ oformsStore }: InjectedProps) => ({
   currentCategory: oformsStore.currentCategory,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
-}))(withTranslation(["FormGallery"])(observer(CategoryFilterDesktop)));
+});
+
+export default withoutInjected<
+  CategoryFilterDesktopProps,
+  ReturnType<typeof injectStores>
+>(
+  inject(injectStores)(
+    withTranslation(["FormGallery"])(observer(CategoryFilterDesktop)),
+  ),
+);

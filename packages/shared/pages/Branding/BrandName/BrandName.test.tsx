@@ -36,8 +36,8 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
-import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
-import { Base } from "@docspace/ui-kit/providers/theme/themes";
+import { ThemeProviderComponent } from "@onlyoffice/apps-ui-kit/components/theme-provider";
+import { Base } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { BrandName } from "./index";
 
 vi.mock("react-device-detect", () => ({

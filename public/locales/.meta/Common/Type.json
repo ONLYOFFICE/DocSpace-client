@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2026-10-01T08:23:21.799Z",
+  "updated_at": "2026-10-02T12:15:32.446Z",
   "comment": {
     "text": "This is a table column header or a filter option label. It refers to the kind or category of an item, such as a transaction or a file.",
     "is_auto": true,
@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
       "line_number": 115,
       "context": "<div className={styles.filterDialogContent}>\n {!hideTypeFilter ? (\n <>\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"Type\")}\n </Text>\n <ComboBox\n options={typeOfHistoty}\n selectedOption={selectedType}\n onSelect={onSelectType}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
       "line_number": 79,
       "context": "minWidth: 150,\n },\n ]\n : []),\n {\n key: \"Type\",\n title: t(\"Type\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/TableView/TableHeader.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/sub-components/UpcomingPayments/TableView/TableHeader.tsx",
       "line_number": 64,
       "context": "default: true,\n active: true,\n minWidth: 140,\n },\n {\n key: \"Type\",\n title: t(\"Type\"),\n enable: true,\n resizable: true,\n minWidth: 160,\n },",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
@@ -37,14 +37,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 282,
-      "context": "</Text>\n \n <Text\n tooltipFitToContent\n className={styles.infoField}\n title={t(\"Common:Type\")}\n >\n {t(\"Common:Type\")}\n </Text>\n {typeData}",
+      "line_number": 277,
+      "context": "{statusLabel}\n </Text>\n \n <Text\n className={styles.infoField}\n title={t(\"Common:Type\")}\n >\n {t(\"Common:Type\")}\n </Text>\n {typeData}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 282,
-      "context": "</Text>\n \n <Text\n tooltipFitToContent\n className={styles.infoField}\n title={t(\"Common:Type\")}\n >\n {t(\"Common:Type\")}\n </Text>\n {typeData}",
+      "line_number": 277,
+      "context": "{statusLabel}\n </Text>\n \n <Text\n className={styles.infoField}\n title={t(\"Common:Type\")}\n >\n {t(\"Common:Type\")}\n </Text>\n {typeData}",
       "module": "/packages/client"
     },
     {

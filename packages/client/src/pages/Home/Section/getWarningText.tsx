@@ -35,7 +35,7 @@
 
 import React from "react";
 import { Trans } from "react-i18next";
-import { Text } from "@docspace/ui-kit/components";
+import { Text } from "@onlyoffice/apps-ui-kit/components";
 import { getConvertedQuota } from "@docspace/shared/utils/common";
 import { TTranslation } from "@docspace/shared/types";
 

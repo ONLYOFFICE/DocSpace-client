@@ -56,7 +56,7 @@ import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { TData, toastr } from "@docspace/ui-kit/components/toast";
+import { TData, toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type {
   TFile,
   TFileSecurity,
@@ -66,12 +66,12 @@ import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
 
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import SocketHelper, {
   SocketEvents,
   TChangeWebPluginData,
   SocketCommands,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 

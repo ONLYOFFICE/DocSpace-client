@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
       "line_number": 94,
       "context": "const steps: TTimelineStep[] = [\n { key: \"card\", label: t(\"WalletTopUpStepCardSaved\") },\n {\n key: \"topup\",\n label: t(\"WalletTopUpCallbackStep\", { price: topUpPrice }),\n doneLabel: t(\"WalletTopUpCallbackStepDone\", { price: topUpPrice }),\n },\n ...(tariffStep\n ? [{ key: \"tariff\", label: tariffStep }]\n : activateStepLabel",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

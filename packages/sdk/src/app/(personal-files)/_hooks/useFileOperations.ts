@@ -52,10 +52,10 @@ import type {
   TFile,
   TGetFolder,
 } from "@docspace/shared/api/files/types";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { ConflictResolveType, FolderType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";

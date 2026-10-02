@@ -71,20 +71,20 @@ import type { TAgent } from "@docspace/shared/api/ai/types";
 import { RoomsType } from "@docspace/shared/enums";
 import { TagManagement } from "@docspace/shared/components/tag-management";
 import type { AccessTagManagement } from "@docspace/shared/components/tag-management";
-import { ShareAccessRights } from "@docspace/ui-kit/enums";
+import { ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 
-import { Button } from "@docspace/ui-kit/components/button";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { RoomTile } from "@docspace/ui-kit/components/tiles/room-tile";
-import { TileContainer } from "@docspace/ui-kit/components/tiles/tile-container";
-import { Row } from "@docspace/ui-kit/components/rows/row";
-import { RowContent } from "@docspace/ui-kit/components/rows/row-content";
-import { RowContainer } from "@docspace/ui-kit/components/rows/row-container";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { RoomTile } from "@onlyoffice/apps-ui-kit/components/tiles/room-tile";
+import { TileContainer } from "@onlyoffice/apps-ui-kit/components/tiles/tile-container";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows/row";
+import { RowContent } from "@onlyoffice/apps-ui-kit/components/rows/row-content";
+import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows/row-container";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 import {
   TableContainer,
@@ -92,10 +92,10 @@ import {
   TableBody,
   TableRow,
   TableCell,
-} from "@docspace/ui-kit/components/table";
-import type { TTableColumn } from "@docspace/ui-kit/components/table";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+} from "@onlyoffice/apps-ui-kit/components/table";
+import type { TTableColumn } from "@onlyoffice/apps-ui-kit/components/table";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 
 import { useAgentsListStore, useAgentsUserStore } from "../../_store";
 import { formatCreated } from "../../_helpers/formatCreated";

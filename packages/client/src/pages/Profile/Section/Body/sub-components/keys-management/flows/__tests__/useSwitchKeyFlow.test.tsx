@@ -38,7 +38,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const captured = { passphrase: null as Record<string, unknown> | null };
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), warning: vi.fn(), error: vi.fn() },
 }));
 vi.mock("@docspace/shared/dialogs/passphrase-modal", () => ({

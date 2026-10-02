@@ -69,7 +69,7 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea, ShareAccessRights } from "@docspace/shared/enums";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { downloadFiles } from "@docspace/shared/api/files";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TAgent } from "@docspace/shared/api/ai/types";
 
 type TFunction = (key: string, options?: Record<string, unknown>) => string;

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 230,
       "context": "<div className={styles.cardsGrid}>\n {!isFreeTariff ? (\n <div className={styles.card}>\n <Text className={styles.cardLabel}>\n {t(\"FreeMonthlyBackups\")}\n </Text>\n {isUsageLoading ? (\n <RectangleSkeleton\n width=\"80px\"\n height=\"24px\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/ActiveAddons.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/ActiveAddons.tsx",
       "line_number": 72,
       "context": "return (\n <div className={styles.card}>\n <div className={styles.cardHeader}>\n <Text fontSize=\"14px\" fontWeight={700}>\n {t(\"ActiveAddons\")}\n </Text>\n {onManageAddons ? (\n <Link\n onClick={onManageAddons}\n textDecoration=\"underline\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

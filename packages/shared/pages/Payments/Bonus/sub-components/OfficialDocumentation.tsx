@@ -42,8 +42,8 @@ import LinuxSvgUrl from "PUBLIC_DIR/images/upgrade.linux.svg?url";
 import WindowsSvgUrl from "PUBLIC_DIR/images/share.microsoft.react.svg?url";
 import ArrowUpRightReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up-right.react.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
 
 import styles from "../Bonus.module.scss";
 

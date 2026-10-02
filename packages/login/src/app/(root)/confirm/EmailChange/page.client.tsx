@@ -37,7 +37,7 @@
 
 import { useContext, useEffect, useState } from "react";
 
-import AppLoader from "@docspace/ui-kit/components/app-loader";
+import AppLoader from "@onlyoffice/apps-ui-kit/components/app-loader";
 import { changeEmail } from "@docspace/shared/api/people";
 
 import { TError } from "@/types";

@@ -41,15 +41,15 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { InputType, TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
-import { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
+import { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList } from "@docspace/shared/api/people";
 import { AccountsSearchArea, EmployeeType } from "@docspace/shared/enums";

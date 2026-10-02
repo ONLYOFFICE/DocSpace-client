@@ -34,7 +34,7 @@
  */
 
 import { DeviceType } from "@docspace/shared/enums";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 
 import styles from "../ClientForm.styled.module.scss";
 

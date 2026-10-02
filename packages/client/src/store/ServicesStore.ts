@@ -48,10 +48,10 @@ import {
 
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { formatterCurrencyWithoutTranction } from "@docspace/ui-kit/billing/wallet/utils";
+import { formatterCurrencyWithoutTranction } from "@onlyoffice/apps-ui-kit/billing/wallet/utils";
 
-import { parseAiPrices } from "@docspace/ui-kit/billing/utils/parsers";
-import type { TAiToolsPrices } from "@docspace/ui-kit/billing/types";
+import { parseAiPrices } from "@onlyoffice/apps-ui-kit/billing/utils/parsers";
+import type { TAiToolsPrices } from "@onlyoffice/apps-ui-kit/billing/types";
 
 export type { TAiToolsPrices };
 
@@ -124,6 +124,9 @@ class ServicesStore {
       this.aiModelsCurrency,
     );
   };
+
+  formatAiModelPrice = (amount?: number) =>
+    amount == null ? "" : this.formatAiModelsCurrency(amount);
 
   fetchAiPrices = async () => {
     const abortController = new AbortController();

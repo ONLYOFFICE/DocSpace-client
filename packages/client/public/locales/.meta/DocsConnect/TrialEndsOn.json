@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 543,
       "context": "size={ButtonSize.small}\n label={t(\"Settings:Statistics\")}\n onClick={onGoToTenant}\n />\n <Text className={styles.trialEnds}>\n {t(\"DocsConnect:TrialEndsOn\", {\n date: formatDateLocalized(endDate, \"DATE_MED\", {\n locale: language,\n }),\n })}\n </Text>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

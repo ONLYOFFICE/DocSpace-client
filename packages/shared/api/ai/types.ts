@@ -45,7 +45,7 @@ import {
   TMCPTool,
   TServer,
   TModelCapabilities,
-} from "@docspace/ui-kit/types/ai";
+} from "@onlyoffice/apps-ui-kit/types/ai";
 
 export type { TMessage, TChat, TAIConfig, TMCPTool, TServer, TModelCapabilities };
 

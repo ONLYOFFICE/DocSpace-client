@@ -33,13 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { now, addToDate } from "@docspace/ui-kit/utils/date";
+import { now, addToDate } from "@onlyoffice/apps-ui-kit/utils/date";
 
-import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+import { useIsMobile } from "@onlyoffice/apps-ui-kit/hooks/use-is-mobile";
 
-import { Calendar } from "@docspace/ui-kit/components/calendar";
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Calendar } from "@onlyoffice/apps-ui-kit/components/calendar";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 
 import type { ShareCalendarProps } from "../Share.types";
 import styles from "../Share.module.scss";

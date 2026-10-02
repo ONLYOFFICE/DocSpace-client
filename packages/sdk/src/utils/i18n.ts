@@ -59,17 +59,13 @@ export const getI18NInstance = (lng: string) => {
       debug: false,
       interpolation: {
         escapeValue: false,
-        format(value, format) {
-          if (format === "lowercase") return value.toLowerCase();
-          return value;
-        },
       },
       ns: ["Common"],
       defaultNS: "Common",
       react: {
         useSuspense: false,
       },
-      initImmediate: false,
+      initAsync: false,
     });
     registerBundles(createInitialTranslations());
     isInitialized = true;

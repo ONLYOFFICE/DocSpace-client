@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletContainer.tsx",
       "line_number": 243,
       "context": "titleFontSize=\"14px\"\n mainFontSize=\"28px\"\n fractionFontSize=\"18px\"\n showRefresh={!isNotPaidPeriod && isCardLinkedToPortal}\n isRefreshing={isRefreshing || isAutoSpinning}\n progressText={t(\"TopUpInProgress\")}\n isProgressTextVisible={isAutoSpinning}\n onRefresh={onClick}\n amount={walletBalance}\n currency={walletCodeCurrency}\n language={store.language}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

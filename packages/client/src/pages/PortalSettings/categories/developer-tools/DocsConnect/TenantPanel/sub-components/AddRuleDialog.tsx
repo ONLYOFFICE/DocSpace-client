@@ -36,13 +36,13 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { ModalDialogType } from "@onlyoffice/apps-ui-kit/components/modal-dialog/ModalDialog.enums";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { TextInput, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import styles from "../TenantPanel.module.scss";
 

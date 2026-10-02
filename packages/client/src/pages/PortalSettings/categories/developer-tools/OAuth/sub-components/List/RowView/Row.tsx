@@ -36,8 +36,8 @@
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { Row } from "@docspace/ui-kit/components/rows";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "./RowView.types";

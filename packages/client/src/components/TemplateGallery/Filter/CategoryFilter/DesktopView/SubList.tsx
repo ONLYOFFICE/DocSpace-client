@@ -36,7 +36,8 @@
 import React from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { withoutInjected } from "SRC_DIR/helpers/injected";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import classNames from "classnames";
 import styles from "./DesktopView.module.scss";
@@ -124,6 +125,10 @@ const SubList: React.FC<SubListProps> = ({
   );
 };
 
-export default inject(({ oformsStore }: InjectedProps) => ({
+const injectStores = ({ oformsStore }: InjectedProps) => ({
   filterOformsByCategory: oformsStore.filterOformsByCategory,
-}))(withTranslation(["FormGallery", "Common"])(SubList));
+});
+
+export default withoutInjected<SubListProps, ReturnType<typeof injectStores>>(
+  inject(injectStores)(withTranslation(["FormGallery", "Common"])(SubList)),
+);

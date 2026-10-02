@@ -37,8 +37,8 @@ import { useRef, useState } from "react";
 import { observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { UpgradePathDialog } from "@docspace/shared/dialogs/upgrade-path-dialog";
 import {
   DEVELOPER_TRIAL_PATH,

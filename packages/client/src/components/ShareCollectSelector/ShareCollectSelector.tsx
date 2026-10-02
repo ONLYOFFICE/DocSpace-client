@@ -40,9 +40,9 @@ import isNil from "lodash/isNil";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { RoomsType } from "@docspace/shared/enums";
-import FilesSelectorWrapper from "@docspace/ui-kit/selectors/Files";
+import FilesSelectorWrapper from "@onlyoffice/apps-ui-kit/selectors/Files";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useSelectorInfoBar } from "@docspace/shared/hooks/useSelectorInfoBar";
 
 import type {
@@ -54,12 +54,12 @@ import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type {
   TSelectedFileInfo,
   SdkFolderType,
-} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
-import type { TData } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
+import type { TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import type {
   TBreadCrumb,
   TInfoBarData,
-} from "@docspace/ui-kit/components/selector";
+} from "@onlyoffice/apps-ui-kit/components/selector";
 import type {
   InjectShareCollectSelectorProps,
   ShareCollectSelectorProps,

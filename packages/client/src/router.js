@@ -37,7 +37,7 @@ import React from "react";
 import { createBrowserRouter } from "react-router";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import routes from "./routes";
 
 import Root from "./Shell";

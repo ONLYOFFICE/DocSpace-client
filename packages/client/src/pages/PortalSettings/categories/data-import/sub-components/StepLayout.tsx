@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { LayoutProps } from "../types";
 import styles from "../StyledDataImport.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";

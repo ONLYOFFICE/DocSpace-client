@@ -36,7 +36,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { objectToGetParams } from "@docspace/shared/utils/common";
-import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
+import { Tabs, TabsTypes } from "@onlyoffice/apps-ui-kit/components/tabs";
 
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";

@@ -39,11 +39,11 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import debounce from "lodash.debounce";
-import { Label } from "@docspace/ui-kit/components/label";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";

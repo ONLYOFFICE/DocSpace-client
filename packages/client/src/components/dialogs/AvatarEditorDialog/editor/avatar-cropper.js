@@ -42,9 +42,9 @@ import { ReactSVG } from "react-svg";
 import throttle from "lodash/throttle";
 import AvatarEditor from "react-avatar-editor";
 
-import { Slider } from "@docspace/ui-kit/components/slider";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { Slider } from "@onlyoffice/apps-ui-kit/components/slider";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import styles from "../AvatarEditorDialog.module.scss";
 
 const AvatarCropper = ({

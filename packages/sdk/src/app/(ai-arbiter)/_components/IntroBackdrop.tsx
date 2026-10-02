@@ -38,14 +38,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   Heading,
   HeadingLevel,
   HeadingSize,
-} from "@docspace/ui-kit/components/heading";
-import { Text } from "@docspace/ui-kit/components/text";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+} from "@onlyoffice/apps-ui-kit/components/heading";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import AiAgentsLightIllustration from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
 import AiAgentsDarkIllustration from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";

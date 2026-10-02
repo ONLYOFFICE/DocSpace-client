@@ -40,8 +40,8 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { usePathname } from "next/navigation";
 
-import { FileTile } from "@docspace/ui-kit/components/tiles/file-tile";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { FileTile } from "@onlyoffice/apps-ui-kit/components/tiles/file-tile";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 
 import type { TFile } from "@docspace/shared/api/files/types";
 

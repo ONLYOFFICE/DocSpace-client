@@ -54,7 +54,7 @@ import {
   getVisibleContextActions,
   sendCustomAction,
 } from "@docspace/shared/utils/frameCustomActions";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 
 import { FormsSection } from "@/types/forms";
 import { useSdkCustomActions } from "@/providers/SdkCustomActionsProvider";

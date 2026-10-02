@@ -73,13 +73,13 @@ import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import { useState, useEffect, useCallback } from "react";
 import classNames from "classnames";
 
-import { Avatar } from "@docspace/ui-kit/components/avatar";
+import { Avatar } from "@onlyoffice/apps-ui-kit/components/avatar";
 import {
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar/Avatar.enums";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+} from "@onlyoffice/apps-ui-kit/components/avatar/Avatar.enums";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import { parseAddresses } from "@docspace/shared/utils";
 import {
   getUserType,
@@ -92,13 +92,13 @@ import {
   EmployeeType,
   RoomsType,
 } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { InputType } from "@docspace/ui-kit/components/text-input/TextInput.enums";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { InputType } from "@onlyoffice/apps-ui-kit/components/text-input/TextInput.enums";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";

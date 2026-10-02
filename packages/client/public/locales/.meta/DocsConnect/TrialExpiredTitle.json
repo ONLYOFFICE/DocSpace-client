@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 364,
       "context": ")\n ) : expired ? (\n <div className={styles.expiredBanner}>\n <div className={styles.expiredBannerText}>\n <Text className={styles.expiredTitle}>\n {t(\"DocsConnect:TrialExpiredTitle\")}\n </Text>\n <Text className={styles.expiredDescription}>\n {t(\"DocsConnect:TrialExpiredDescription\")}\n </Text>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",

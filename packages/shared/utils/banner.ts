@@ -37,7 +37,7 @@ import difference from "lodash/difference";
 
 import { LANGUAGE } from "../constants";
 
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 
 export function getLanguage(lng: string) {
   try {

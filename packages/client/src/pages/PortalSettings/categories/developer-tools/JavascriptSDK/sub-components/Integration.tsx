@@ -38,8 +38,8 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { isMobile } from "@docspace/ui-kit/utils/device";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { isMobile } from "@onlyoffice/apps-ui-kit/utils/device";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TIntegrationsEntries } from "@docspace/shared/api/settings/types";
 

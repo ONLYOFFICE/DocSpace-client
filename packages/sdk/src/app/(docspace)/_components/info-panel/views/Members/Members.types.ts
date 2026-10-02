@@ -35,7 +35,7 @@
 
 import type { useTranslation } from "react-i18next";
 
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type {

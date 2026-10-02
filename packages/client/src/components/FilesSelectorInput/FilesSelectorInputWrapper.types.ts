@@ -37,7 +37,7 @@ import type {
 	FileInfoType,
 	FilesSelectorSettings,
 } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 
 export interface InjectedFilesSelectorInputWrapperProps
 	extends Pick<TStore["settingsStore"], "currentDeviceType">,

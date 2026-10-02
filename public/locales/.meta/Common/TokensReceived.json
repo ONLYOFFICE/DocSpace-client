@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageContent.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageContent.tsx",
       "line_number": 125,
       "context": "label={t(\"TokensNotFromCache\")}\n value={format(segments.notFromCache)}\n />\n <UsageLine\n segment=\"received\"\n label={t(\"TokensReceived\")}\n value={format(segments.received)}\n />\n </div>\n <div className={classNames(styles.lines, styles.details)}>\n <UsageLine",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

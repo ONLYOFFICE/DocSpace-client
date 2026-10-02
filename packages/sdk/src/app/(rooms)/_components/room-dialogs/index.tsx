@@ -66,7 +66,7 @@ import { observer } from "mobx-react";
 
 import api from "@docspace/shared/api";
 import type { TFolder } from "@docspace/shared/api/files/types";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";

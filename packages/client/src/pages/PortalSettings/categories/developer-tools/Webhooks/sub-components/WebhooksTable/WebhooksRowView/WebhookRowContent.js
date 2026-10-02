@@ -35,12 +35,12 @@
 
 import React from "react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RowContent } from "@docspace/ui-kit/components/rows";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
 import { isMobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import StatusBadge from "../../StatusBadge";
 
 import styles from "../WebhooksTable.styled.module.scss";

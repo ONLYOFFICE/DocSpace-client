@@ -37,15 +37,15 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Cron, getNextSynchronization } from "@docspace/shared/components/cron";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { useNavigate } from "react-router";
-import { isMobile, isDesktop } from "@docspace/ui-kit/utils/device";
+import { isMobile, isDesktop } from "@onlyoffice/apps-ui-kit/utils/device";
 import ProgressContainer from "./ProgressContainer";
 import ToggleAutoSync from "./ToggleAutoSync";
 import StyledLdapPage from "../styled-containers/StyledLdapPage";

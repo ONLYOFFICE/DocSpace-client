@@ -64,8 +64,8 @@
 import React, { useEffect, useState } from "react";
 
 import { isMobile } from "@docspace/shared/utils";
-import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import type { TTranslation } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";

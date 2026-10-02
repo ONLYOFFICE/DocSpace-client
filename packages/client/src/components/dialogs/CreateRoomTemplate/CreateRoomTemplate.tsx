@@ -35,17 +35,17 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
-import { TSelectorItem } from "@docspace/ui-kit/components/selector";
-import type { PeopleSelectorProps } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
+import { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
+import type { PeopleSelectorProps } from "@onlyoffice/apps-ui-kit/selectors/People/PeopleSelector.types";
 import { TRoomParams, TRoomTagsParams } from "@docspace/shared/utils/rooms";
 
 import TagHandler from "../../../helpers/TagHandler";
@@ -79,8 +79,20 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
   const [roomParams, setRoomParams] = useState<TRoomParams | TSelectorItem[]>({
     ...fetchedRoomParams,
   });
-  const [inviteItems, setInviteItems] = useState([
-    { ...item.createdBy, templateIsOwner: true },
+  // The access list is a TSelectorItem list whose first row is the template
+  // owner. TCreatedBy carries identity and avatar, not the user flags a
+  // selector item declares, and that row reads none of them -- which is why
+  // the panel has always been handed this shape. `templateAccess` is dropped
+  // rather than carried over: TCreatedBy types it as ShareAccessRights and
+  // TSelectorItem as the API SDK's FileShare, and an owner row has no access
+  // to show anyway.
+  const { templateAccess: _ownerAccess, ...templateOwner } = item.createdBy;
+  const [inviteItems, setInviteItems] = useState<TSelectorItem[]>([
+    {
+      ...templateOwner,
+      label: templateOwner.displayName,
+      templateIsOwner: true,
+    } as unknown as TSelectorItem,
   ]);
   const [isValidTitle, setIsValidTitle] = useState(true);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
@@ -169,20 +181,20 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
 
   const onSubmitItems = (users: TSelectorItem[]) => {
     // Transform TSelectorItem objects to match the expected inviteItems format
+    // Spreading a union widens it into a union of object literals that no
+    // longer narrows back, so the shape is asserted once per item instead.
     const mappedUsers = users.map((user) => ({
       ...user,
       templateIsOwner: false,
-      avatarSmall: user.avatar || "",
-      profileUrl: "", // Add the required profileUrl property
-      displayName: user.displayName || "", // Ensure displayName is a string
-      hasAvatar: !!user.avatar,
-      // templateAccess: 1, // Default access right (assuming 1 is ReadWrite)
-    }));
+      // A selector item's avatar is a URL for a user and a rendered icon for
+      // the other kinds; only the URL belongs in avatarSmall.
+      avatarSmall: typeof user.avatar === "string" ? user.avatar : "",
+      profileUrl: "",
+      displayName: user.displayName || "",
+      hasAvatar: typeof user.avatar === "string" && user.avatar.length > 0,
+    })) as TSelectorItem[];
 
-    const items = [...inviteItems, ...mappedUsers];
-
-    // Use type assertion since we've ensured the structure matches
-    setInviteItems(items as typeof inviteItems);
+    setInviteItems([...inviteItems, ...mappedUsers]);
     onCloseAddUsersPanel();
   };
 

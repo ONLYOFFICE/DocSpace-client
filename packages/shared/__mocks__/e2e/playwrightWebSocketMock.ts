@@ -39,7 +39,7 @@ import {
   TOptSocket,
   TTopUpWalletData,
   TWalletLowBalanceData,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 type ServerMessage =
   | string

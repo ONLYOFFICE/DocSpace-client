@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 313,
       "context": "{isShowPreviousStoragePlan ? (\n <div className={styles.subscriptionHeader}>\n <Text fontWeight={700} fontSize=\"14px\">\n {t(\"PreviousSubscription\")}\n </Text>\n <span className={styles.statusBadge}>{t(\"Inactive\")}</span>\n </div>\n ) : !hasStorageSubscription ? (\n <div className={styles.noSubscriptionCard}>\n <Text fontWeight={700} fontSize=\"14px\">\n {t(\"NoActiveSubscription\")}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 344,
       "context": "<div className={styles.tariffHeader}>\n <Text className={styles.sectionTitle}>\n {t(\"Common:PreviousSubscription\")}\n </Text>\n <span className={styles.statusBadge}>\n {t(\"Common:Inactive\")}\n </span>\n </div>\n ) : (\n <div className={styles.tariffHeader}>\n <Text className={styles.sectionTitle}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",

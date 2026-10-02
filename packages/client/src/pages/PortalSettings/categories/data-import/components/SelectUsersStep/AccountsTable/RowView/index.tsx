@@ -38,13 +38,13 @@ import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.fil
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
 import { inject, observer } from "mobx-react";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { RowContainer, Row } from "@docspace/ui-kit/components/rows";
+import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { RowContainer, Row } from "@onlyoffice/apps-ui-kit/components/rows";
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 
 import UsersRow from "./UsersRow";

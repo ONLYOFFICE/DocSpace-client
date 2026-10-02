@@ -35,7 +35,7 @@ its own. `"nanoid@^3": ">=3.3.18"` therefore resolves to nanoid 6.x. Bound the
 replacement to the major that is actually installed (`"^3.3.18"`) whenever more
 than one major of the package exists in the lockfile.
 
-The repo has seven independent lockfiles; the root audit sees only this
+The repo has several independent lockfiles; the root audit sees only this
 workspace. `node .claude/scripts/audit/audit-deps.mjs` (skill: `audit-deps`)
 audits all of them and prints the override line for each finding. Each lockfile
 is refreshed by its own command and must be committed together with the
@@ -46,14 +46,16 @@ is refreshed by its own command and must be committed together with the
 `packageManager` in `package.json` is the source of truth only for the tools
 that read it: `pnpm/action-setup` in CI, corepack in the buildtools build image,
 and pnpm's own self-switching. The Dockerfiles install pnpm with
-`npm install -g pnpm@…`, which has no such fallback — a stale pin there is the
+`npm install -g pnpm@...`, which has no such fallback - a stale pin there is the
 version the image really ships.
 
 The version is therefore hardcoded across three repos: 8 files here
 (`package.json`, including `engines.pnpm`, plus `docker/Dockerfile`,
-`docker/e2e/Dockerfile` and the five `packages/*/Dockerfile`) and 2 in the
-`libs/ui-kit` submodule. buildtools pins no version, but only because its build
-image uses a bare `corepack enable` and lets `packageManager` decide — adding a
+`docker/e2e/Dockerfile` and the five `packages/*/Dockerfile`) and 2 in
+`docspace-ui-kit-react` (its `packageManager` and its `Dockerfile`; that repo
+declares no `engines.pnpm`, since pnpm is not a constraint on a consumer of the
+published package). buildtools pins no version, but only because its build
+image uses a bare `corepack enable` and lets `packageManager` decide - adding a
 `corepack prepare pnpm@latest` there would silently reintroduce an unpinned
 pnpm. Bump them together with the `update-pnpm` skill, which rediscovers the pin
 sites rather than trusting this list, knows which sites follow `packageManager`
@@ -64,3 +66,191 @@ pinning the pnpm binary itself, which makes `pnpm-lock.yaml` a multi-document
 YAML file. Nx parses it for the project graph and has supported multiple
 documents since 22.7, so the pinned Nx must not drop below that. Any new script
 that reads the lockfile needs a multi-document loader.
+
+## The ui-kit tarball dependency
+
+`@onlyoffice/apps-ui-kit` is **not** a pnpm workspace package and ui-kit is not
+checked out inside this repo at all. The six apps that use it depend on a
+committed tarball at the repo root via
+`"file:../../onlyoffice-apps-ui-kit.tgz"`.
+
+The tarball is built and packed in the `docspace-ui-kit-react` repository
+(`pnpm build && pnpm pack`) and copied here; there is no build script on this
+side. The filename carries no version on purpose - the version lives in the
+package and shows up in the lockfile entry, so a bump touches no app manifest.
+
+**Do not update it by hand.** Copying the `.tgz` over and running `pnpm install`
+silently installs nothing: the `file:onlyoffice-apps-ui-kit.tgz` specifier is
+unchanged, pnpm matches the integrity already in `pnpm-lock.yaml` and keeps the
+cached copy. The install is green, the lockfile is untouched, and node_modules
+still holds the previous build. `pnpm install --force` does not help either,
+because the recorded integrity still matches what it has.
+
+```bash
+pnpm run update-ui-kit                 # newest pack in ../../docspace-ui-kit-react
+pnpm run update-ui-kit path/to/pack.tgz
+```
+
+It copies the tarball, rewrites the recorded integrity, drops the extracted
+copy under `node_modules/.pnpm/`, reinstalls, and then verifies by hash that
+what landed in node_modules is what was copied in - the silent no-op above is
+precisely what it refuses to let pass. Commit `onlyoffice-apps-ui-kit.tgz`
+together with the `pnpm-lock.yaml` change it produces.
+
+The verification digests **everything the tarball ships** in **every** extracted
+copy under `node_modules/.pnpm/@onlyoffice+apps-ui-kit@*` (skipping the
+`node_modules` pnpm adds there), against the tarball read with node's own gzip
+and tar walker. Three earlier shortcuts are why: comparing only
+`dist/styles.css` passed any build that changed just JavaScript; comparing only
+`dist/` missed `styles/` and `locales/`, which the exports map serves directly
+and which hundreds of the client's own `.module.scss` files `@use`; and checking
+only the copy the client resolves left a stale sibling in place, which is what
+the apps resolving to *that* copy would run. It also runs when the tarball is
+unchanged, because the install can die after the lockfile and the extracted
+copies were already rewritten. The `tar` binary is deliberately not used - the
+GNU tar shipped with Git Bash reads a Windows path as a remote `host:path` spec
+and refuses it.
+
+Matching bytes are still not enough: the rewritten integrity makes pnpm read
+the new tarball, but it keeps the lockfile entry's recorded `peerDependencies`
+and snapshot from the previous build. That is how the lockfile once kept katex
+`^0.16.47` and later ai-chat `^0.5.121` after the tarball had moved on, and a
+new runtime dependency would be missed the same way and never linked, with
+`--frozen-lockfile` staying green. So the script finally compares the
+`@onlyoffice/apps-ui-kit` entry in `pnpm-lock.yaml` with the packed
+`package.json`: every peer range, except names under `overrides` (an override
+rewrites the recorded range, so it says nothing about drift), and every
+runtime dependency in the snapshot. On drift it fails and points at
+`pnpm update -r @onlyoffice/apps-ui-kit`. It does not run that itself, because
+the update also re-resolves unrelated parts of the tree, codemirror among them;
+review what it moves before committing. A one-line peer fix can be made by hand
+in the lockfile instead, followed by `pnpm install`.
+
+### Running the apps against a ui-kit checkout
+
+Waiting for build, pack, install and a dev-server restart on every ui-kit edit
+is the cost of consuming a prebuilt package. `DOCSPACE_UI_KIT_SRC` removes it
+for local work by pointing the dev servers at a checkout instead -- all five
+apps, the Vite client and the four Next ones:
+
+```bash
+pnpm run start:ui-kit-src                 # same app set as `pnpm start`
+pnpm run start:ui-kit-src start:lite      # any other start script
+DOCSPACE_UI_KIT_SRC=../elsewhere pnpm run start:ui-kit-src
+```
+
+Use the **root** script, or the "Start (ui-kit src)" button. `pnpm start` fans
+out to five apps through Nx, so the root is where the variable has to be set; a
+script in one package alone is never the one anyone runs. The path is resolved
+against the repo root, and nothing changes in the ui-kit repository; the
+checkout serves its own `assets/`, `styles/` and `locales/`, exactly as the
+tarball does.
+
+**The checkout needs its own `pnpm install`.** It resolves its own
+dependencies, and a bare clone has none -- which is the state anyone is in the
+first time they press the button. `scripts/start-ui-kit-src.mjs` checks for
+`node_modules` before handing over to Nx: without that check the four Next apps
+come up, the client alone dies inside `vite.config.ts`, and it reads as "the
+portal will not open" rather than "the kit is not installed".
+
+The client's half lives in `packages/client/config/` (`ui-kit-dev.ts`, the
+boundary plugin, and small changes in `resolve.ts`, `css.ts`, `server.ts` and
+`vite.config.ts`); `optimizeDeps` drops the ui-kit globs in this mode, because
+pre-bundling would freeze the files being edited. The Next apps share
+`scripts/ui-kit-dev.cjs`, which each `next.config.js` calls twice: once to
+refuse a production build while the variable is set, once from its `webpack`
+hook to alias the package to the checkout, pin ui-kit's peers to the app's own
+copies, and add the checkout to the `next-swc-loader` rules so its TypeScript
+compiles. The CSS rules need nothing -- they key off the extension, so the
+checkout's `*.module.scss` go through the app's own CSS Modules pipeline and
+come out named by it rather than by ui-kit's rollup config.
+
+Four properties keep it honest:
+
+- **It is a bundler alias only, never a tsconfig path.** `pnpm tsc` in the
+  pre-push gate keeps resolving `@onlyoffice/apps-ui-kit` through
+  `node_modules`, so an import of a subpath the *package* does not export still
+  fails the gate while the browser is happily serving source.
+- **It is a dev-server switch only.** `vite.config.ts` refuses `vite build` and
+  every `next.config.js` refuses `next build` while the variable is set. A build
+  would otherwise take ui-kit from the checkout and emit a different artifact:
+  the client's chunking rules in `config/build.ts` match node_modules paths a
+  checkout does not have, and in the Next apps the CSS Modules would be named by
+  the app instead of by ui-kit.
+- **An import that escapes the checkout fails, in the client.** Under the alias,
+  ui-kit source is processed by the client's config, so `PUBLIC_DIR`, `SRC_DIR`,
+  `@docspace/shared` and friends would resolve from inside ui-kit and break only
+  later, in its own rollup build. `config/plugins/ui-kit-boundary.ts` covers
+  JS/TS, relative and aliased specifiers alike; sass never reaches
+  `resolveId`, so `config/css.ts` carries the same check in its `findFileUrl`
+  importer, keyed on `containingUrl`. That importer only sees bare loads, so it
+  catches `@use "@docspace/shared/..."` but not a relative `@use` that climbs
+  out of the checkout -- sass resolves those on its own. The Next apps have no
+  equivalent check: an escaping import there fails later, in ui-kit's own build.
+- **Source mode is more forgiving than packing.** It does not exercise the
+  extracted stylesheet and its cascade order, `"use client"` preservation, the
+  exports wildcard and module shape, the generated `.d.mts`, or the type-only
+  subpaths that have no runtime module. Run the client once **without** the
+  variable before committing a new tarball.
+
+Both halves read the checkout's own `peerDependencies` rather than a hand-picked
+list -- Vite through `resolve.dedupe`, webpack by aliasing each peer to the
+app's copy. Every peer is a package both trees resolve separately, and a second
+copy of anything holding module state (a context, a store, a socket) is a silent
+behaviour change. A hand-picked subset rots on the next bump either side.
+
+The tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's `main`,
+`module`, `types` and `exports` fields live under `publishConfig`, which only
+pnpm promotes to the top level when packing. An npm-packed tarball has no
+entry points at all.
+
+ui-kit's `exports` map is a single `"./*"` wildcard onto
+`dist/esm/*/index.js` — the package ships ESM only. That works only because
+its rollup build
+normalises every module to `<subpath>/index.js` (`entryFileNames` in its
+`rollup.config.mjs`), giving the package one uniform shape. A wildcard cannot
+serve a mixed tree: per the ES module spec the `exports`-array fallback skips an
+entry on a condition mismatch, never on a missing file, so with both flat-file
+and folder-with-index modules present either pattern order breaks one shape.
+An earlier iteration generated ~900 exact keys instead; normalising the output
+replaced both the map and the script that wrote it.
+
+Because those subpaths are real `node_modules` entry points and the app imports
+them directly, Vite treats each one as its own optimizable dependency.
+`packages/client/vite.config.ts` lists ui-kit in `optimizeDeps.include` with
+subpath globs for exactly this reason - without them a cold dev start
+pre-bundles each subpath separately. `@onlyoffice/ai-chat` is in that same
+`include` list, for the opposite kind of reason: it has to stay pre-bundled.
+assistant-stream, pulled in through the AI stack, does
+`import sjson from "secure-json-parse"`, and that package is plain CommonJS
+with no ESM build - only esbuild's CJS-to-ESM interop during pre-bundling gives
+it a `default` export, and served raw it fails at runtime with "does not
+provide an export named 'default'". `optimizeDeps` affects the dev server only,
+so including it does not interfere with the lazy AI chunking in
+`config/build.ts`.
+
+### The ai-chat peer
+
+`@onlyoffice/ai-chat` is an **optional peer** of ui-kit, and ui-kit statically
+imports it from its `ai-agent/*` and `api/ai` modules without bundling it. The
+client-side `file:../../onlyoffice-ai-chat-<version>.tgz` dependency is what
+satisfies that peer, so it must stay declared in every app that reaches those
+subpaths - dropping it resolves the peer to nothing and breaks the AI agent at
+runtime.
+
+Most of ai-chat's own peers are optional too (the assistant-ui widgets, the
+radix primitives, codemirror, the LLM vendor SDKs), so pnpm installs none of
+them for an app that does not declare them. An app that reaches `ai-agent/*`
+has to declare that list itself; `packages/client` and `packages/sdk` do. The
+versions live once in the `catalog:` block of `pnpm-workspace.yaml` and the two
+manifests reference them as `"catalog:"`, so a bump is one edit. Nothing in
+those apps imports them by name; `UnusedDependenciesTest` accepts them because
+the installed ai-chat manifest lists them as peers - the same rule that covers
+ui-kit's optional peers (the markdown stack, mobx, react-router) - so no
+allowlist entry is needed for a peer.
+
+Do not try to move that list into a `packageExtensions` block that adds the
+peers as ai-chat's own `dependencies`. pnpm treats a name that is also an
+optional peer of the package as a peer: it resolves it from the dependent when
+it can and silently drops it when it cannot, so a fresh resolution loses the
+LLM SDKs while an incremental one appears to work. It was tried and reverted.

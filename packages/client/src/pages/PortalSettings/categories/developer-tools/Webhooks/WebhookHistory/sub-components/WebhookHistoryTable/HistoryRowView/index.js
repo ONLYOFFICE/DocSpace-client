@@ -35,9 +35,9 @@
 
 import { useParams } from "react-router";
 import { inject, observer } from "mobx-react";
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 
-import { RowContainer } from "@docspace/ui-kit/components/rows";
+import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryRow from "./HistoryRow";

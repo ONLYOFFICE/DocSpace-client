@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
       "line_number": 263,
       "context": "<Text className={styles.description}>\n {descriptionText ??\n (isStripeFlow\n ? t(\"TopUpCreditsDescription\")\n : t(\"TopUpCreditsAmountDescription\"))}\n </Text>\n \n <Amount\n formatWalletCurrency={formatWalletCurrency}\n isDisabled={isLoading}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -40,7 +40,7 @@ import isNil from "lodash/isNil";
 
 import ConflictResolve from "@docspace/shared/dialogs/conflict-resolve";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
 import type { TFile } from "@docspace/shared/api/files/types";
 

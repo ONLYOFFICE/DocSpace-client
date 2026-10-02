@@ -40,10 +40,10 @@ import { usePathname, useSearchParams } from "next/navigation";
 import {
   TItem,
   TOnFilter,
-} from "@docspace/ui-kit/components/filter/Filter.types";
+} from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { frameCallEvent } from "@docspace/shared/utils/common";
-import { getFilterType } from "@docspace/ui-kit/components/filter/Filter.utils";
+import { getFilterType } from "@onlyoffice/apps-ui-kit/components/filter/Filter.utils";
 import {
   FilterGroups,
   FilterType,

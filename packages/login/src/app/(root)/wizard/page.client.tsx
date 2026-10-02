@@ -47,38 +47,38 @@ import {
   setTimezoneForUnauthorized,
 } from "@docspace/shared/utils/common";
 import { mapCulturesToArray } from "@docspace/shared/utils/cultures";
-import { Text } from "@docspace/ui-kit/components/text";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { EmailInput, TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
   TIMEZONE,
 } from "@docspace/shared/constants";
-import { EmailSettings } from "@docspace/ui-kit/utils/email";
+import { EmailSettings } from "@onlyoffice/apps-ui-kit/utils/email";
 import {
   PasswordInput,
   PasswordInputHandle,
-} from "@docspace/ui-kit/components/password-input";
-import { FileInput } from "@docspace/ui-kit/components/file-input";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+} from "@onlyoffice/apps-ui-kit/components/password-input";
+import { FileInput } from "@onlyoffice/apps-ui-kit/components/file-input";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { setLicense } from "@docspace/shared/api/settings";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/ui-kit/components/combobox";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
 import { BetaBadge } from "@docspace/shared/components/beta-badge";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import api from "@docspace/shared/api";
-import { setCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
+import { setCookie, deleteCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
 import useDeviceType from "@/hooks/useDeviceType";
 import { DeviceType } from "@docspace/shared/enums";
 import { Nullable } from "@docspace/shared/types";
@@ -92,7 +92,7 @@ import {
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 
 import { TError, TTimeZoneOption } from "@/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import styles from "./wizard.module.scss";
 
 type WizardFormProps = {

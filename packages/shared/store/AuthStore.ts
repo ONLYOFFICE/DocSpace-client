@@ -39,7 +39,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import SocketHelper, {
   SocketEvents,
   TOptSocket,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import api from "../api";
 import {
@@ -59,8 +59,8 @@ import {
 } from "../utils/common";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import { isOAuthFrame } from "../utils/oauthToken";
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
-import { AI_SEARCH, AI_TOOLS } from "@docspace/ui-kit/billing/constants";
+import { getCookie, setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { AI_SEARCH, AI_TOOLS } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import { Nullable, TI18n } from "../types";
@@ -561,9 +561,8 @@ class AuthStore {
         await import("../services/encryption/secret-storage");
       SecretStorage.lock();
       if (userId) {
-        const { forgetDeviceUnlock } = await import(
-          "../services/encryption/device-unlock-store"
-        );
+        const { forgetDeviceUnlock } =
+          await import("../services/encryption/device-unlock-store");
         await forgetDeviceUnlock(userId);
       }
     } catch {

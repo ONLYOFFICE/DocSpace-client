@@ -26,7 +26,7 @@
 
 import { describe, expect, it, vi } from "vitest";
 
-import { FolderType } from "@docspace/ui-kit/enums";
+import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 
 import type { TFrameCustomActions } from "../types/Frame";
 

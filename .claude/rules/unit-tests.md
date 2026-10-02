@@ -12,13 +12,14 @@ paths:
 
 ## Where tests live — and where they must not
 
-- **client**: only under `packages/client/src/**` (vitest `include` is limited
-  to `src/`). Convention: `__tests__/` dir next to the code. Anything in
+- **client**: under `packages/client/src/**`, plus `packages/client/config/**`
+  for the Vite config plugins (vitest `include` lists exactly those two).
+  Convention: `__tests__/` dir next to the code. Anything in
   `packages/client/__tests__/` or `packages/client/tests/` is **Playwright
   E2E** — never put unit tests there.
 - **shared**: co-located next to the component
   (`SaveCancelButtons.test.tsx`), a few `__tests__/` dirs.
-- **ui-kit** (`libs/ui-kit`) is a third, separate suite with its own setup and
+- **ui-kit** is a third, separate suite living in its own repository, with its own setup and
   mocks; shared's setup does not apply there, and its `include` is an explicit
   directory list — a test outside those dirs silently does not run.
 - Naming: `<Subject>.test.ts` (stores/utils) / `.test.tsx` (JSX). Big subjects
@@ -66,9 +67,9 @@ For big stores use the existing harnesses instead of hand-rolling:
 
 If a store test blows up at **import time**, the cause is transitive legacy
 imports (`src/i18n`, socket): mock `SRC_DIR/i18n`, and
-`@docspace/ui-kit/utils/socket` (keep real enums via `importOriginal`, replace
+`@onlyoffice/apps-ui-kit/utils/socket` (keep real enums via `importOriginal`, replace
 `default` with `{on, off, emit, socketSubscribers: new Set()}`), plus
-`@docspace/ui-kit/components/toast` when toasts fire.
+`@onlyoffice/apps-ui-kit/components/toast` when toasts fire.
 
 `vi.hoisted` bindings must not be exported directly — alias them first.
 
@@ -76,7 +77,7 @@ imports (`src/i18n`, socket): mock `SRC_DIR/i18n`, and
 
 Plain RTL: `data-testid` queries, `userEvent` for clicks, local
 `renderComponent` helper per file (no repo-wide one). Wrap in
-`ThemeProviderComponent` + `Base` theme (from `@docspace/ui-kit`) only when
+`ThemeProviderComponent` + `Base` theme (from `@onlyoffice/apps-ui-kit`) only when
 the component needs theme; heavy child components are stubbed with
 `vi.mock` returning a `<div data-testid=… />`. Fixtures live in co-located
 `mockData.ts`.
@@ -84,18 +85,18 @@ the component needs theme; heavy child components are stubbed with
 ## Aliases available in test code
 
 client: `SRC_DIR`, `PUBLIC_DIR`, `ASSETS_DIR`, `COMMON_DIR`, `PACKAGE_FILE`,
-`@docspace/shared`, `@docspace/ui-kit`. shared: `@docspace/shared`,
+`@docspace/shared`, `@onlyoffice/apps-ui-kit`. shared: `@docspace/shared`,
 `PUBLIC_DIR` only.
 
 ## Running
 
 ```bash
 pnpm test          # shared          pnpm test:client   # client
-pnpm test:store    # client src/store only
+pnpm test:sdk      # sdk             pnpm test:store    # client src/store only
 cd packages/client && pnpm exec vitest run src/store/filesStore   # single path
 ```
 
-Both suites are part of the blocking lefthook pre-push gate.
+All three suites are part of the blocking lefthook pre-push gate.
 
 ## Snapshots
 

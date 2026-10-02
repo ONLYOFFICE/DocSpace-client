@@ -39,8 +39,8 @@ import { useTranslation } from "react-i18next";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import { FolderType } from "@docspace/shared/enums";
 import { TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";

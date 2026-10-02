@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/SuccessCard.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/sub-components/SuccessCard.tsx",
       "line_number": 129,
       "context": "<>\n <Text as=\"span\" className={styles.adminsAmount}>\n +{storage}\n </Text>\n <Text fontSize=\"14px\" className={styles.tariffActivationDetails}>\n {t(\"StoragePaywallCallbackPricePerMonth\", {\n price: formattedMonthlyPrice,\n })}\n </Text>\n </>\n ) : (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

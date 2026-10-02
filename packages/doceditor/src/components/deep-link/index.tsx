@@ -37,16 +37,16 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { FormWrapper } from "@onlyoffice/apps-ui-kit/components/form-wrapper";
 import { getBgPattern } from "@docspace/shared/utils/common";
-import PortalLogo from "@docspace/ui-kit/components/portal-logo/PortalLogo";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import PortalLogo from "@onlyoffice/apps-ui-kit/components/portal-logo/PortalLogo";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import { DeepLinkType } from "@docspace/shared/enums";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";

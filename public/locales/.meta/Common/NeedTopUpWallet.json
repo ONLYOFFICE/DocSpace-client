@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 218,
       "context": "<UnlinkedCardBanner />\n </div>\n ) : null}\n {isLowBalance ? (\n <Text className={styles.lowBalance} fontSize=\"15px\" fontWeight={600}>\n {t(\"NeedTopUpWallet\")}\n </Text>\n ) : null}\n <div className={styles.section}>\n <Text fontWeight=\"700\" fontSize=\"14px\">\n {t(\"AvailableBackups\")}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

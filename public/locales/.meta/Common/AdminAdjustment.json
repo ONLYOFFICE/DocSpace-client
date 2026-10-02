@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
       "line_number": 167,
       "context": "{t(\"OrderSummary\")}\n </Text>\n \n <div className={styles.summary}>\n {renderRow(\n t(\"AdminAdjustment\"),\n `${currentAdmins} → ${newAdmins}`,\n )}\n {renderRow(\n isDowngradePlan ? t(\"ReducedAdmins\") : t(\"AdditionalAdmins\"),\n isDowngradePlan",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

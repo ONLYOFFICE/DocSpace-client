@@ -38,14 +38,14 @@ import {
 	Avatar,
 	AvatarRole,
 	AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
 import { TCreatedBy, TTranslation } from "@docspace/shared/types";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
-import { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
+import { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import styles from "./TemplateAccess.module.scss";
 
 const MAX_AVATARS_COUNT = 3;

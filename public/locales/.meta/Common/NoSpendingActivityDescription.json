@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
       "line_number": 198,
       "context": "<div className={styles.emptyContent}>\n <Text fontSize=\"12px\" fontWeight={600} className={styles.mutedTitle}>\n {t(\"NoSpendingActivity\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>\n {t(\"NoSpendingActivityDescription\")}\n </Text>\n </div>\n </div>\n ) : (\n <div className={styles.spendBody}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
       "line_number": 200,
       "context": "const emptyView = (\n <EmptyView\n icon={isBase ? <NoSpendingIcon /> : <NoSpendingDarkIcon />}\n title={t(\"NoSpendingActivity\")}\n description={t(\"NoSpendingActivityDescription\")}\n options={null}\n />\n );\n \n const skeleton = (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

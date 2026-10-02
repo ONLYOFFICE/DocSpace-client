@@ -44,7 +44,7 @@ import type {
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
-import { ShareAccessRights } from "@docspace/ui-kit/enums";
+import { ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 import { FormsSection } from "@/types/forms";
 
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";

@@ -69,10 +69,10 @@ import React, {
   useCallback,
 } from "react";
 import { FixedSizeList as List } from "react-window";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import type { ScrollbarProps } from "@docspace/ui-kit/components/scrollbar";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import type { ScrollbarProps } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
-import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
+import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import classNames from "classnames";
 import type { TTranslation } from "@docspace/shared/types";

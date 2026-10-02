@@ -37,8 +37,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { isMobile } from "@docspace/shared/utils";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { Aside } from "@docspace/ui-kit/components/aside";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
+import { Aside } from "@onlyoffice/apps-ui-kit/components/aside";
 
 import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";

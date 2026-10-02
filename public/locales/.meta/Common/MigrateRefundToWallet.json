@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
       "line_number": 307,
       "context": "styles.revealRow,\n )\n : null}\n <div className={styles.cardDivider} />\n {renderRow(\n t(\"MigrateRefundToWallet\"),\n withLoader(\n `+ ${formatWalletCurrency(walletCredit, 2, walletCurrency)}`,\n ),\n styles.positive,\n )}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

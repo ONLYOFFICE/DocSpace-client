@@ -36,8 +36,8 @@
 import React from "react";
 import { Trans } from "react-i18next";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TFunction } from "i18next";
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -105,3 +105,4 @@ export const useHideQuickActions = ({
 };
 
 export default useHideQuickActions;
+

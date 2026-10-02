@@ -12,34 +12,34 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
       "line_number": 215,
       "context": "{isPayer ? (\n <div className={styles.cardButtons}>\n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n primary\n label={t(\"TopUp\")}\n onClick={() => setIsTopUpDialogVisible(true)}\n isDisabled={isNotPaidPeriod}\n className={styles.cardButton}\n testId=\"overview_top_up_button\"\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
       "line_number": 287,
       "context": "<ModalDialog.Footer>\n <div className={styles.footerButtons}>\n <Button\n key=\"ContinueToStripeButton\"\n label={isStripeFlow ? t(\"ContinueToStripe\") : t(\"TopUp\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onContinue}\n isLoading={isLoading}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
       "line_number": 144,
       "context": "<div className={styles.buttonContainerWrapper}>\n {isLoading ? <Text>{t(\"TopUpTakeSomeTimeToComplete\")}</Text> : null}\n <div className={styles.buttonContainer}>\n <Button\n key=\"OkButton\"\n label={t(\"TopUp\")}\n size={ButtonSize.normal}\n primary\n scale\n isDisabled={isButtonDisabled}\n onClick={onTopUp}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
       "line_number": 131,
       "context": "</div>\n <div className={styles.walletInfoActions}>\n {onTopUp && isPayer ? (\n <Button\n size={ButtonSize.small}\n label={t(\"TopUp\")}\n onClick={onTopUp}\n testId=\"top_up_wallet_button\"\n />\n ) : null}\n {showOpenBilling ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletContainer.tsx",
       "line_number": 255,
       "context": "<div className={styles.cardButtons}>\n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n primary\n label={t(\"TopUp\")}\n onClick={onOpen}\n isDisabled={!canUpdateTariff || isNotPaidPeriod}\n className={styles.cardButton}\n testId=\"top_up_balance_button\"\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -46,19 +46,19 @@ import {
 } from "../../utils/crashReport";
 import { DeviceType } from "../../enums";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import {
 	ModalDialogType,
 	ModalDialog,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
 import styles from "./ReportDialog.module.scss";
 import type { ReportDialogProps } from "./ReportDialog.types";
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 const ReportDialog = (props: ReportDialogProps) => {
 	const { t, ready } = useTranslation(["Common"]);

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
       "line_number": 341,
       "context": "[styles.noMargin]: noMargin,\n })}\n >\n <div className={styles.autoPaymentHeader}>\n <Text isBold fontSize=\"16px\">\n {t(\"AutomaticTopUps\")}\n </Text>\n <ToggleButton\n isChecked={isAutomaticPaymentsEnabled}\n onChange={onToggleClick}\n className={styles.toggleButton}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

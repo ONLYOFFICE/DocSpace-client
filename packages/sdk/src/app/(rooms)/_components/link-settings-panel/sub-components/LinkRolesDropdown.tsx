@@ -65,12 +65,12 @@ import classNames from "classnames";
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 
 import { isMobile } from "@docspace/shared/utils";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { Portal } from "@docspace/ui-kit/components/portal";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import { LinkRolesDropdownItem } from "./LinkRolesDropdownItem";
 import styles from "./LinkRolesDropdown.module.scss";

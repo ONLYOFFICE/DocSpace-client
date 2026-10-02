@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
-import type { TTranslations } from "@docspace/ui-kit/providers/translation";
+import { WhiteLabelLogoType } from "@onlyoffice/apps-ui-kit/enums";
+import type { TTranslations } from "@onlyoffice/apps-ui-kit/providers/translation";
 
 import { getBrandName } from "../constants/brands";
 import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";

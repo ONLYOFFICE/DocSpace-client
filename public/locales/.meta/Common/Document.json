@@ -104,7 +104,7 @@
     {
       "file_path": "/packages/shared/utils/getPDFTite.ts",
       "line_number": 39,
-      "context": "*/\n \n import { TTranslation } from \"../types\";\n \n export const getSinglePDFTitle = (t: TTranslation, isForm: boolean) => {\n return isForm ? t(\"Common:Form\") : t(\"Common:Document\");\n };\n \n export const getManyPDFTitle = (t: TTranslation, isForms: boolean) => {\n return `PDF-${(isForms ? t(\"Common:Forms\") : t(\"Common:Documents\")).toLowerCase()}`;\n };",
+      "context": "*/\n \n import { TTranslation } from \"../types\";\n \n export const getSinglePDFTitle = (t: TTranslation, isForm: boolean) => {\n return isForm ? t(\"Common:Form\") : t(\"Common:Document\");\n };\n \n export const getManyPDFTitle = (t: TTranslation, isForms: boolean) => {\n return isForms ? t(\"Common:PDFForms\") : t(\"Common:PDFDocuments\");\n };",
       "module": "/packages/shared"
     }
   ],

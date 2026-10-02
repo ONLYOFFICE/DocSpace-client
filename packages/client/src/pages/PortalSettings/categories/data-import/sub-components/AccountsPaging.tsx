@@ -35,8 +35,8 @@
 
 import { useState } from "react";
 
-import type { TOption } from "@docspace/ui-kit/components/combobox";
-import { Paging } from "@docspace/ui-kit/components/paging";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { Paging } from "@onlyoffice/apps-ui-kit/components/paging";
 
 import { AccountsPagingProps } from "../types";
 import styles from "../StyledDataImport.module.scss";

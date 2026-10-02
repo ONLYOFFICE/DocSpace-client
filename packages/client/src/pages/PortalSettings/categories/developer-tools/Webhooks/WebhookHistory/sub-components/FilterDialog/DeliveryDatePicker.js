@@ -34,18 +34,18 @@
  */
 
 import React, { useState, useEffect, useRef } from "react";
-import { now, formatDate } from "@docspace/ui-kit/utils/date";
+import { now, formatDate } from "@onlyoffice/apps-ui-kit/utils/date";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { useTranslation } from "react-i18next";
-import { DatePicker } from "@docspace/ui-kit/components/date-picker";
-import { Calendar } from "@docspace/ui-kit/components/calendar";
-import { TimePicker } from "@docspace/ui-kit/components/time-picker";
-import { AddButton } from "@docspace/ui-kit/components/add-button";
-import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
+import { DatePicker } from "@onlyoffice/apps-ui-kit/components/date-picker";
+import { Calendar } from "@onlyoffice/apps-ui-kit/components/calendar";
+import { TimePicker } from "@onlyoffice/apps-ui-kit/components/time-picker";
+import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
+import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
 
 import { isMobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import styles from "../../WebhookHistory.styled.module.scss";
 

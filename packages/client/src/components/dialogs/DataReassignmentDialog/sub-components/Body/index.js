@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { DialogReassignmentSkeleton } from "@docspace/ui-kit/components/modal-dialog";
+import { DialogReassignmentSkeleton } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import Progress from "./Progress";
 import AccountInfo from "./AccountInfo";
 import Description from "./Description";

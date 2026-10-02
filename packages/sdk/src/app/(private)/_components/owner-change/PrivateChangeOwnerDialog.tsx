@@ -46,15 +46,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
-import type { PeopleFilter } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
-import type { TOnSubmit } from "@docspace/ui-kit/components/selector";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
+import type { PeopleFilter } from "@onlyoffice/apps-ui-kit/selectors/People/PeopleSelector.types";
+import type { TOnSubmit } from "@onlyoffice/apps-ui-kit/components/selector";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { toastr } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   EmployeeType,
   EmployeeStatus,

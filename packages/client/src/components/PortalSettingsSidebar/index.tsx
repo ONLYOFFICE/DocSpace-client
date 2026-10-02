@@ -67,7 +67,7 @@ import { useTranslation } from "react-i18next";
 import type {
   NavMenuGroup,
   NavMenuItem,
-} from "@docspace/ui-kit/components/nav-menu";
+} from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import {

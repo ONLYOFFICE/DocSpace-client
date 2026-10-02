@@ -51,7 +51,7 @@ vi.mock("../../modals/KeyRotationDialog", () => ({
   },
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn() },
 }));
 
@@ -68,7 +68,7 @@ vi.mock("@docspace/shared/api/privacy", () => ({
   updateEncryptionKeys: vi.fn(),
 }));
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import { changePassphrase } from "@docspace/shared/services/encryption/identity";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";

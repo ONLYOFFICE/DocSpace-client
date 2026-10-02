@@ -35,10 +35,10 @@
 
 import React, { useMemo, useId } from "react";
 import { useTranslation } from "react-i18next";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { AvatarSize } from "@docspace/ui-kit/components/avatar";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { AvatarSize } from "@onlyoffice/apps-ui-kit/components/avatar";
 import { classNames, isMobile as isMobileUtils } from "@docspace/shared/utils";
 
 import FileActionsConvertEditDocReactSvg from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg";

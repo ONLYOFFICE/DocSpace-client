@@ -64,7 +64,7 @@ import axios from "axios";
 // Must be the very singleton the mounted widget flushes its queue from
 // (AppsSidebar/LiveChatBlock renders the ui-kit Zendesk) - shared has a second,
 // unrelated copy whose queued commands nobody ever delivers.
-import { zendeskAPI } from "@docspace/ui-kit/components/article/zendesk/Zendesk.utils";
+import { zendeskAPI } from "@onlyoffice/apps-ui-kit/components/article/zendesk/Zendesk.utils";
 import { CategoryType } from "@docspace/shared/constants";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -77,14 +77,14 @@ import type {
   ContextMenuType,
   SeparatorType,
   TContextMenuValueTypeOnClick,
-} from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import {
   PersistenceKeys,
   getPersistedString,
   setPersistedString,
 } from "./utils/persistence";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import AccountsFilter from "@docspace/shared/api/people/filter";
@@ -322,7 +322,11 @@ class ProfileActionsStore {
 
     this.setStateLiveChat(isShow);
 
-    zendeskAPI.addChanges("webWidget", isShow ? "show" : "hide");
+    // Only the closing half talks to the widget: the flag above is what puts
+    // the app's own Support button on the page, while the vendor's launcher
+    // stays hidden either way. Switching live chat off has to take an open
+    // chat window down with it.
+    if (!isShow) zendeskAPI.addChanges("webWidget", "hide");
 
     toastr.success(isShow ? t("Common:LiveChatOn") : t("Common:LiveChatOff"));
   };

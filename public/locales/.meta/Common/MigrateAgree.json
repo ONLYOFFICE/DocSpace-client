@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
       "line_number": 372,
       "context": "<ModalDialog.Footer>\n <div className={styles.footer}>\n <Checkbox\n isChecked={isAgreed}\n onChange={() => setIsAgreed((v) => !v)}\n label={t(\"MigrateAgree\", { organizationName })}\n dataTestId=\"migrate_to_wallet_agree_checkbox\"\n />\n <div className={styles.footerButtons}>\n <Button\n key=\"confirm\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

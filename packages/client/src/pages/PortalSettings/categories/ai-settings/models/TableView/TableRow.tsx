@@ -36,10 +36,10 @@
 import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableCell, TableRow } from "@docspace/ui-kit/components/table";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { TableCell, TableRow } from "@onlyoffice/apps-ui-kit/components/table";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
 
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.14.react.svg";
 

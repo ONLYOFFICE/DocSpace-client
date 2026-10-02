@@ -38,9 +38,9 @@ import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import GithubLight from "PUBLIC_DIR/images/thirdparties/github.light.react.svg";

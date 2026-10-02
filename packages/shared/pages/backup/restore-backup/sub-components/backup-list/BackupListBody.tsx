@@ -45,12 +45,12 @@ import classNames from "classnames";
 import TrashIcon from "PUBLIC_DIR/images/delete.react.svg";
 import FileArchive32SvgUrl from "PUBLIC_DIR/images/icons/32/archive.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   type ScrollbarProps,
   Scrollbar,
-} from "@docspace/ui-kit/components/scrollbar";
-import { RadioButton } from "@docspace/ui-kit/components/radio-button";
+} from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { RadioButton } from "@onlyoffice/apps-ui-kit/components/radio-button";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../../../constants";
 
 import type { BackupListBodyProps } from "./BackupList.types";

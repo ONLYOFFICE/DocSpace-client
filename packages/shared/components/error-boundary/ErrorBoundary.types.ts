@@ -38,7 +38,7 @@ import { i18n } from "i18next";
 import type { DeviceType } from "../../enums";
 import type { TUser } from "../../api/people/types";
 import type FirebaseHelper from "../../utils/firebase";
-import type { TColorScheme, TTheme } from "@docspace/ui-kit/providers/theme";
+import type { TColorScheme, TTheme } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 export type ErrorBoundaryProps = PropsWithChildren & {
 	/** Callback function to be called when an error occurs */

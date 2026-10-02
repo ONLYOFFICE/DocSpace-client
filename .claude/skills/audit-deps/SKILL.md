@@ -1,14 +1,14 @@
 ---
 name: audit-deps
-description: Find and fix vulnerable dependencies across every lockfile in the repo (root pnpm workspace, the ui-kit submodule, the npm sub-projects under common/) — audits all trees, picks the right override, refreshes the lockfiles, verifies the result
-argument-hint: "[--level <moderate|high|critical>] [--tree <substring>] [--strict]"
+description: Find and fix vulnerable dependencies across every lockfile in the repo (root pnpm workspace, the npm sub-projects under common/) — audits all trees, picks the right override, refreshes the lockfiles, verifies the result
+argument-hint: "[--level <moderate|high|critical>] [--tree <substring>]"
 ---
 
 # Audit and fix vulnerable dependencies
 
-`pnpm audit` at the repo root sees **one** of seven dependency trees. A clean
-root audit says nothing about `common/tests`, the translation app, or the
-ui-kit submodule — each carries its own lockfile and its own overrides.
+`pnpm audit` at the repo root sees **one** of six dependency trees. A clean
+root audit says nothing about `common/tests` or the translation app — each
+carries its own lockfile and its own overrides.
 
 Script (run from the repo root): `.claude/scripts/audit/audit-deps.mjs`
 
@@ -30,17 +30,15 @@ The trees it covers:
 
 | Tree | Manager | Overrides live in |
 |---|---|---|
-| root workspace (`packages/*`, `libs/*`) | pnpm | `pnpm-workspace.yaml` -> `overrides:` |
-| `libs/ui-kit` (standalone lock) | pnpm | the **ui-kit repo**, not here |
+| root workspace (`packages/*`) | pnpm | `pnpm-workspace.yaml` -> `overrides:` |
 | `common/tests` | npm | `common/tests/package.json` -> `overrides` |
 | `common/translation-app/{frontend,backend}` | npm | that project's `package.json` |
 | `common/oauth-sdk-stand`, `common/screenshot-comparison-app` | npm | that project's `package.json` |
 
-`libs/ui-kit` is reported as **informational** and does not fail the exit code
-(use `--strict` to include it). Its standalone lockfile is never what gets
-installed here — at the root the submodule resolves as a workspace member under
-the root overrides. Findings there are real but belong to
-`docspace-ui-kit-react`; report them as a follow-up for that repo.
+ui-kit is **not** audited here: it ships as a prebuilt tarball from its own
+repository and has no lockfile in this tree. Audit it inside
+`docspace-ui-kit-react`. A vulnerability reachable through ui-kit's bundled
+code can only be fixed by publishing a new tarball from there.
 
 ## Step 2 — pick the fix
 
@@ -134,7 +132,6 @@ State per tree: what was vulnerable, what the fix was, what you verified and
 how. Call out explicitly:
 
 - findings left unfixed and why;
-- findings that belong to the ui-kit repo;
 - any override that could not be bounded to a single major.
 
 The override comment in the manifest is part of the deliverable: say which

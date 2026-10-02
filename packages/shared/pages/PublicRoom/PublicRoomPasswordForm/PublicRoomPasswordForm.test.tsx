@@ -40,7 +40,7 @@ import type { TFunction } from "i18next";
 
 import { validatePublicRoomPassword } from "../../../api/rooms";
 import { ValidationStatus, LinkSharingEntityType } from "../../../enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TValidateShareRoom } from "../../../api/rooms/types";
 
 import PublicRoomPassword from ".";
@@ -49,7 +49,7 @@ vi.mock("../../../api/rooms", () => ({
   validatePublicRoomPassword: vi.fn(),
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: {
     error: vi.fn(),
   },

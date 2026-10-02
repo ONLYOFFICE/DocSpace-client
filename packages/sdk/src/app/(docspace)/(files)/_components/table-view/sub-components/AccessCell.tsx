@@ -36,7 +36,7 @@
 import React from "react";
 import type { TFunction } from "i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 

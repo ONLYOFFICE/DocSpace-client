@@ -35,7 +35,7 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { Consumer } from "@docspace/ui-kit/utils/context";
+import { Consumer } from "@onlyoffice/apps-ui-kit/utils/context";
 
 import TableView from "./TableView";
 import RowView from "./RowView";

@@ -44,13 +44,13 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import { isDesktop } from "@docspace/shared/utils";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
 import { createExternalLink } from "@docspace/shared/api/rooms";

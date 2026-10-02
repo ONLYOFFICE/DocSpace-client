@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
       "line_number": 120,
       "context": "redirectUrl: string;\n };\n \n export const getDelayedContent = (t: TTranslation): TDelayedContent => {\n return {\n title: t(\"Common:WalletTopUpStepCardSaved\"),\n hint: t(\"Common:WalletTopUpDelayedHint\"),\n callout: t(\"Common:WalletTopUpDelayedCallout\"),\n steps: [\n { key: \"card\", label: t(\"Common:WalletTopUpStepCardSaved\") },\n {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
       "line_number": 120,
       "context": "redirectUrl: string;\n };\n \n export const getDelayedContent = (t: TTranslation): TDelayedContent => {\n return {\n title: t(\"Common:WalletTopUpStepCardSaved\"),\n hint: t(\"Common:WalletTopUpDelayedHint\"),\n callout: t(\"Common:WalletTopUpDelayedCallout\"),\n steps: [\n { key: \"card\", label: t(\"Common:WalletTopUpStepCardSaved\") },\n {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
       "line_number": 91,
       "context": "</Text>\n </span>\n ) : null;\n \n const steps: TTimelineStep[] = [\n { key: \"card\", label: t(\"WalletTopUpStepCardSaved\") },\n {\n key: \"topup\",\n label: t(\"WalletTopUpCallbackStep\", { price: topUpPrice }),\n doneLabel: t(\"WalletTopUpCallbackStepDone\", { price: topUpPrice }),\n },",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

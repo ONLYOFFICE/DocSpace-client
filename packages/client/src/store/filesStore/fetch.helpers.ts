@@ -57,7 +57,7 @@ import {
 } from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import { FILTER_DOCUMENTS } from "@docspace/shared/utils/filterConstants";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import i18n from "../../i18n";
 
@@ -270,11 +270,6 @@ export function fetchFilesImpl(
 
       let navigationPath = await Promise.all(
         data.pathParts.map(async (folder, idx) => {
-          // FolderType is a ui-kit `const enum` and may
-          // not be destructured (TS2475); the runtime object exists in the
-          // babel/esbuild build, so the original statement is kept under a
-          // suppression.
-          // @ts-expect-error TS2475 — const enum destructuring, see above.
           const { Rooms, Archive, AIAgents } = FolderType;
 
           // if (

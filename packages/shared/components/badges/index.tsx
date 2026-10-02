@@ -36,7 +36,7 @@
 import equal from "fast-deep-equal";
 import React, { useMemo, useState } from "react";
 import { isMobile as isMobileDevice } from "react-device-detect";
-import { useIsomorphicLayoutEffect } from "@docspace/ui-kit/hooks/useIsomorphicLayoutEffect";
+import { useIsomorphicLayoutEffect } from "@onlyoffice/apps-ui-kit/hooks/useIsomorphicLayoutEffect";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
@@ -55,17 +55,17 @@ import FormFillIcon from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { Badge } from "@docspace/ui-kit/components/badge";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 
 import {
   // RoomsType,
   // ShareAccessRights,
   VectorizationStatus,
 } from "../../enums";
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 import {
   classNames,
@@ -79,7 +79,7 @@ import {
 
 import styles from "./Badges.module.scss";
 import type { BadgesProps, BadgeWrapperProps } from "./Badges.type";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
 const BadgeWrapper = ({

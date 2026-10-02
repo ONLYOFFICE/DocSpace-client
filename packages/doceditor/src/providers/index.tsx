@@ -33,22 +33,22 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Toast } from "@docspace/ui-kit/components/toast";
+import { Toast } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type {
   TGetColorTheme,
   TSettings,
 } from "@docspace/shared/api/settings/types";
 import type { ThemeKeys } from "@docspace/shared/enums";
-import { TranslationProvider } from "@docspace/ui-kit/providers/translation";
+import { TranslationProvider } from "@onlyoffice/apps-ui-kit/providers/translation";
 import type {
   TTranslations,
   TTranslationProvider,
-} from "@docspace/ui-kit/providers/translation";
-import { ThemeProvider } from "@docspace/ui-kit/providers/theme";
-import type { TThemeProvider } from "@docspace/ui-kit/providers/theme";
-import { ApiProvider } from "@docspace/ui-kit/providers/api";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+} from "@onlyoffice/apps-ui-kit/providers/translation";
+import { ThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
+import type { TThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
+import { ApiProvider } from "@onlyoffice/apps-ui-kit/providers/api";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { getAuthToken } from "@docspace/shared/api/client";

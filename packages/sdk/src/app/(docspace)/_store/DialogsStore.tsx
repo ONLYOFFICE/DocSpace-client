@@ -39,7 +39,7 @@ import React from "react";
 import { makeAutoObservable } from "mobx";
 
 import api from "@docspace/shared/api";
-import type { ICover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
+import type { ICover } from "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog";
 import type { TCreatedBy } from "@docspace/shared/types";
 import type { RoomsType } from "@docspace/shared/enums";
 

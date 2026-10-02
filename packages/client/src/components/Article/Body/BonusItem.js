@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
-import { ArticleItem } from "@docspace/ui-kit/components/article/item";
+import { ArticleItem } from "@onlyoffice/apps-ui-kit/components/article/item";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { useNavigate } from "react-router";
 import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";

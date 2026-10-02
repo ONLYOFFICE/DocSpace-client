@@ -51,7 +51,7 @@ vi.mock("@docspace/shared/api/privacy", () => ({
   getRoomEncryptionKeys: vi.fn(),
 }));
 
-vi.mock("@docspace/ui-kit/utils/socket", async (importOriginal) => {
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, unknown>;
   return {
     ...actual,
@@ -84,7 +84,7 @@ vi.mock("SRC_DIR/i18n", () => ({
   },
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: {
     success: vi.fn(),
     error: vi.fn(),

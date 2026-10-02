@@ -34,8 +34,12 @@
  */
 
 import path from "path";
+import { fileURLToPath } from "url";
 import type { UserConfig } from "vite";
 import { rootDir } from "./utils";
+import { isInsideUiKit, uiKitBoundaryError, uiKitDir } from "./ui-kit-dev";
+
+type FileImporterContext = { containingUrl: URL | null };
 
 export const css: UserConfig["css"] = {
   modules: {
@@ -45,17 +49,29 @@ export const css: UserConfig["css"] = {
     scss: {
       importers: [
         {
-          findFileUrl(url: string) {
-            if (url.startsWith("@docspace/ui-kit")) {
+          findFileUrl(url: string, context: FileImporterContext) {
+            if (url.startsWith("@onlyoffice/apps-ui-kit")) {
               const resolved = url.replace(
-                "@docspace/ui-kit",
-                path.resolve(rootDir, "../../libs/ui-kit"),
+                "@onlyoffice/apps-ui-kit",
+                uiKitDir,
               );
               return new URL(
                 `file:///${resolved.split(path.sep).join("/")}`,
               );
             }
             if (url.startsWith("@docspace/shared")) {
+              const from =
+                context?.containingUrl?.protocol === "file:"
+                  ? fileURLToPath(context.containingUrl)
+                  : null;
+
+              if (from && isInsideUiKit(from))
+                throw uiKitBoundaryError(
+                  from,
+                  url,
+                  '"@docspace/shared" is an alias the client defines, not ui-kit',
+                );
+
               const resolved = url.replace(
                 "@docspace/shared",
                 path.resolve(rootDir, "../shared"),

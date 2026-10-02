@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
       "line_number": 159,
       "context": "/>\n </Text>\n <br />\n <Text>{t(\"TopUpToReactivateStorage\")}</Text>\n {isStorageTariffLimit ? (\n <Text as=\"span\">{t(\"StorageRestrictions\")}</Text>\n ) : null}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

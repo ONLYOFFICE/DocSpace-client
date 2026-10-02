@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat-info-block/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/chat-info-block/index.tsx",
       "line_number": 110,
       "context": "type={LinkType.action}\n color=\"accent\"\n onClick={onShowAIBenefits}\n textDecoration={\"underline\"}\n >\n {t(\"Benefits\")}\n </Link> */}\n </>\n )}\n </>\n ))",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/BenefitsContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/BenefitsContainer.tsx",
       "line_number": 89,
       "context": "};\n \n return (\n <div className={styles.benefitsBody}>\n <Text fontSize=\"16px\" fontWeight=\"600\" className={styles.benefitsText}>\n {t(\"Benefits\")}\n </Text>\n {features &&\n Array.from(features.values()).map((item: TenantQuotaFeatureDto) => {\n if (!item.title || !item.image) return;\n return (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",

@@ -36,6 +36,10 @@
 /** @type {import('next').NextConfig} */
 
 const path = require("path");
+const {
+  applyUiKitSourceMode,
+  refuseBuildFromSource,
+} = require("../../scripts/ui-kit-dev.cjs");
 const fs = require("fs");
 const os = require("os");
 
@@ -57,10 +61,20 @@ const { getBanner, getAllLocalIps } = buildModule.default;
 const productionMode = "production";
 const isDev = process.env.NODE_ENV !== productionMode;
 
+// `next build` must come from the installed package; see scripts/ui-kit-dev.cjs.
+if (!isDev) refuseBuildFromSource(__dirname);
+
 const monorepoRoot = path.resolve(__dirname, "../..");
+// @onlyoffice/docspace-api-sdk is a dependency of @onlyoffice/apps-ui-kit
+// (installed from the tarball at the repo root), not of this app directly --
+// resolve it starting from wherever ui-kit itself actually landed rather than
+// a hardcoded path.
+const uiKitDir = path.dirname(
+  require.resolve("@onlyoffice/apps-ui-kit/package.json"),
+);
 const docspaceApiSdkDir = path.dirname(
   require.resolve("@onlyoffice/docspace-api-sdk/package.json", {
-    paths: [path.resolve(__dirname, "../../libs/ui-kit")],
+    paths: [uiKitDir],
   }),
 );
 const docspaceApiSdkTraceGlob = `${path
@@ -113,9 +127,12 @@ const nextConfig = {
       alias: {
         ...config.resolve?.alias,
         "@docspace/shared": path.resolve(__dirname, "../shared"),
-        "@docspace/ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
       },
     };
+
+    const uiKitSrc = applyUiKitSourceMode(config, __dirname);
+
+    if (uiKitSrc) console.log(`ui-kit: serving source from ${uiKitSrc}`);
 
     config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
 

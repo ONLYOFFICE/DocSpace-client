@@ -42,16 +42,16 @@ import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Heading } from "@docspace/ui-kit/components/heading";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
@@ -65,7 +65,7 @@ import styles from "../InvitePanel.module.scss";
 
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 import { deleteInviteLink } from "@docspace/shared/api/portal";
-import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
+import { now, parseToDateTime, isAfter } from "@onlyoffice/apps-ui-kit/utils/date";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 const ExternalLinks = ({

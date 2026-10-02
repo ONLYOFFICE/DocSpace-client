@@ -36,7 +36,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import {
   createWebhook,

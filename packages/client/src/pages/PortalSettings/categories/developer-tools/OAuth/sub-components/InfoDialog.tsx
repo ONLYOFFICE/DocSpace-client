@@ -39,24 +39,24 @@ import { useTranslation } from "react-i18next";
 
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
-import { Text } from "@docspace/ui-kit/components/text";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { ModalDialogType } from "@onlyoffice/apps-ui-kit/components/modal-dialog/ModalDialog.enums";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/ui-kit/components/context-menu-button";
+} from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { TTranslation } from "@docspace/shared/types";
-import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import { Tag } from "@docspace/ui-kit/components/tag";
+import { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import { Tag } from "@onlyoffice/apps-ui-kit/components/tag";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 

@@ -43,9 +43,9 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import type { TLogo } from "@docspace/ui-kit/types";
-import { RoomIcon, type TModel } from "@docspace/ui-kit/components";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
+import { RoomIcon, type TModel } from "@onlyoffice/apps-ui-kit/components";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import styles from "./icons.module.scss";
 

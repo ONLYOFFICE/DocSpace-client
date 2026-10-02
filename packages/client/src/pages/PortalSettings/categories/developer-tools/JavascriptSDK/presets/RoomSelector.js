@@ -42,9 +42,9 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { EventLogBlock } from "../sub-components/EventLogBlock";
 
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { Label } from "@docspace/ui-kit/components/label";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
 import { RoomsType } from "@docspace/shared/enums";
 import { getSdkScriptUrl, loadScript } from "@docspace/shared/utils/common";
 

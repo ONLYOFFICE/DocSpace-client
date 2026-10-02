@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/use-integration.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/use-integration.tsx",
       "line_number": 108,
       "context": "// apart would send the dialog a name it then \"corrects\".\n const exportFormats = React.useMemo<ExportFormat[]>(\n () => [\n {\n id: EXPORT_FORMAT_IDS.pdf,\n label: t(\"Common:ExportPdfDocument\", { defaultValue: \".pdf document\" }),\n extension: EXTENSION_BY_FORMAT[EXPORT_FORMAT_IDS.pdf],\n },\n {\n id: EXPORT_FORMAT_IDS.docx,\n label: t(\"Common:ExportDocxDocument\", {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

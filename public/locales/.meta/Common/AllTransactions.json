@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/index.tsx",
       "line_number": 148,
       "context": ");\n \n const typeOfHistoty: TOption[] = [\n {\n key: \"allTransactions\",\n label: t(\"AllTransactions\"),\n dataTestId: \"all_transactions_option\",\n },\n {\n key: \"credit\",\n label: t(\"Credit\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

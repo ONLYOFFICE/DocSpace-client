@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 398,
       "context": "<Text className={styles.cardValue}>\n {formatCurrency(monthlyCharge, 2)}\n </Text>\n <Text className={styles.cardCaption}>\n {devPackEnabled\n ? t(\"DocsConnect:PricePerUserDevPackShort\", {\n price: formatCurrency(pricePerUser, 0),\n })\n : t(\"DocsConnect:PricePerUserShort\", {\n price: formatCurrency(pricePerUser, 0),\n })}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -34,7 +34,7 @@
  */
 
 import React from "react";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import classNames from "classnames";
 import VersionSvg from "PUBLIC_DIR/images/versionrevision_active.react.svg";
 import { useTranslation } from "react-i18next";

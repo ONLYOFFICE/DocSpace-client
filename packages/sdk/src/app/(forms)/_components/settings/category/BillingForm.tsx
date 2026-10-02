@@ -40,12 +40,12 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { MemoryRouter } from "react-router";
 
-import { BillingRoot } from "@docspace/ui-kit/billing";
-import AiPageLoader from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPageLoader";
-import { useServicesStore } from "@docspace/ui-kit/billing/store/ServicesStoreProvider";
-import { AI_TOOLS, AI_ENUM } from "@docspace/ui-kit/billing/constants";
-import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { BillingRoot } from "@onlyoffice/apps-ui-kit/billing";
+import AiPageLoader from "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPageLoader";
+import { useServicesStore } from "@onlyoffice/apps-ui-kit/billing/store/ServicesStoreProvider";
+import { AI_TOOLS, AI_ENUM } from "@onlyoffice/apps-ui-kit/billing/constants";
+import type { TPaymentConfig } from "@onlyoffice/apps-ui-kit/billing/types";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useFormsUserStore } from "../../../_store/FormsUserStore";
 
 import styles from "./SettingsPanel.module.scss";

@@ -38,12 +38,12 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { getRoomTypeTitleTranslation } from "@docspace/shared/components/room-type/RoomType.utils";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { TileContent } from "@docspace/ui-kit/components/tiles/tile-content";
+import { TileContent } from "@onlyoffice/apps-ui-kit/components/tiles/tile-content";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 

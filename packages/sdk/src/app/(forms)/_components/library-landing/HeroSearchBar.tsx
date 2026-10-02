@@ -41,9 +41,9 @@ import { useRouter } from "next/navigation";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { SearchInput } from "@docspace/ui-kit/components/search-input";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { SearchInput } from "@onlyoffice/apps-ui-kit/components/search-input";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 
 import useLibrarySearch, {
   type SearchResult,

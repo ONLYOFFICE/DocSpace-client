@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TagClickEvent, TagType } from "@docspace/ui-kit/components/tag";
+import type { TagClickEvent, TagType } from "@onlyoffice/apps-ui-kit/components/tag";
 import type { EDIT_TAG_FORM_NAME } from "./TagManagement.constants";
 
 export type AccessTagManagement = {

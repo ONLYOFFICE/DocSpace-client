@@ -38,18 +38,18 @@ import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import React from "react";
 import { ReactSVG } from "react-svg";
 
-import { Text as TextComponent } from "@docspace/ui-kit/components/text";
+import { Text as TextComponent } from "@onlyoffice/apps-ui-kit/components/text";
 import {
 	Link as LinkComponent,
 	LinkType,
-} from "@docspace/ui-kit/components/link";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+} from "@onlyoffice/apps-ui-kit/components/link";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import styles from "./CampaignsBanner.module.scss";
 import { CampaignsBannerProps } from "./CampaignsBanner.types";
 
 import useFitText from "./useFitText";
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 const CampaignsBanner = (props: CampaignsBannerProps) => {
 	const {

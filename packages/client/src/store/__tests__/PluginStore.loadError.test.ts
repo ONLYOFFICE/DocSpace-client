@@ -36,12 +36,12 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { autorun, runInAction } from "mobx";
 
-vi.mock("@docspace/ui-kit/utils/socket", async (importOriginal) => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (importOriginal) => ({
   ...((await importOriginal()) as Record<string, unknown>),
   default: { emit: vi.fn(), on: vi.fn() },
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn(), info: vi.fn() },
 }));
 
@@ -77,7 +77,7 @@ import { PluginScopes } from "../../helpers/plugins/enums";
 const PLUGIN = "article-navigation-sample";
 const PLUGIN_URL = "https://portal.test/plugins/sample/plugin.js";
 const SHIM_ERROR =
-  'The bundle imports "@docspace/ui-kit", which the portal does not provide.';
+  'The bundle imports "@onlyoffice/apps-ui-kit", which the portal does not provide.';
 
 const thrown = (message: string): TPluginError => ({ kind: "thrown", message });
 const HTTP_404: TPluginError = { kind: "http", status: 404, url: PLUGIN_URL };

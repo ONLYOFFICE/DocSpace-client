@@ -47,7 +47,6 @@ const moduleWorkspaces = [
   "packages/shared",
   "packages/management",
   "packages/sdk",
-  "libs/ui-kit",
 ];
 
 const getWorkSpaces = () => {
@@ -185,7 +184,14 @@ console.log(`Found javascripts by js(x)|ts(x) filter = ${javascripts.length}.`);
 const pattern1 =
   "[.{\\s\\(]t\\??\\.?\\(\\s*[\"'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"'`]\\s*[\\),]";
 const pattern2 = 'i18nKey="([a-zA-Z0-9_.:-]+)"';
-const pattern3 = 'tKey:\\s"([a-zA-Z0-9_.:-]+)"';
+// Keys travel as props on data objects too, not only through `t()`. `tKey` was
+// the only one the scan knew, so `titleKey`, `labelKey`, `translationKey` and
+// `toastKey` produced no usage record at all -- which is how
+// Common:OrganizationAI came to look unused once the stale ui-kit record
+// pointing at a deleted file was dropped. The `Key`-suffixed props that hold
+// something else (publicKey, apiKey, providerKey, secretKey) are not listed.
+const pattern3 =
+  '\\b(?:t|title|label|translation|toast)Key:\\s*["\']([a-zA-Z0-9_.:-]+)["\']';
 const pattern4 = 'getTitle\\("([a-zA-Z0-9_.:-]+)"\\)';
 const pattern5 = 'getCommonTranslation\\("([a-zA-Z0-9_.:-]+)"[\\s,)]';
 
@@ -331,6 +337,16 @@ javascripts.forEach(({ workspace, files }) => {
   });
 });
 
+// The modules this scan can see. @onlyoffice/apps-ui-kit is not one of them:
+// it lives in its own repository and is consumed here as a prebuilt package,
+// yet it renders the portal's own namespaces, so 1 030 usage records point
+// into it. Replacing meta.usage wholesale would erase every one of them on the
+// first run that touches the same key from client code -- and leave the rest
+// pointing at a checkout this repository no longer has.
+const scannedModules = new Set(
+  workspaces.map((ws) => ws.replace(BASE_DIR, "").replace(/\\/g, "/")),
+);
+
 console.log(`Found usages = ${Object.keys(usagesData).length}.`);
 
 console.log(`Found parseJsonErrors = ${parseJsonErrors.length}.`);
@@ -351,10 +367,13 @@ Object.entries(usagesData).forEach(([metaPath, usages]) => {
 
     const meta = JSON.parse(metaData);
 
-    const sortedUsages = sortUsageEntries(usages);
-    const existingSortedUsages = Array.isArray(meta.usage)
-      ? sortUsageEntries(meta.usage)
-      : [];
+    const existingUsages = Array.isArray(meta.usage) ? meta.usage : [];
+    const externalUsages = existingUsages.filter(
+      (usage) => !scannedModules.has(usage.module),
+    );
+
+    const sortedUsages = sortUsageEntries([...usages, ...externalUsages]);
+    const existingSortedUsages = sortUsageEntries(existingUsages);
 
     //todo: compare usages with meta.usage skip update if no changes
     if (JSON.stringify(existingSortedUsages) === JSON.stringify(sortedUsages)) {

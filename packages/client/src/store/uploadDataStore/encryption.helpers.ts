@@ -44,7 +44,7 @@ import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { prepareEncryptedUpload } from "@docspace/shared/services/private-room/encrypted-upload";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 

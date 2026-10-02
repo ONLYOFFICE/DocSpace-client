@@ -33,10 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 

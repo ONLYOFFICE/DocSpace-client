@@ -39,16 +39,16 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import FilesSelector from "@docspace/ui-kit/selectors/Files";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
-import useGetIcon from "@docspace/ui-kit/ai-agent/hooks/useGetIcon";
+import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
+import useGetIcon from "@onlyoffice/apps-ui-kit/ai-agent/hooks/useGetIcon";
 import { copyToFolder } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
   DeviceType,
   FolderType,
 } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import useDeviceType from "@/hooks/useDeviceType";
 

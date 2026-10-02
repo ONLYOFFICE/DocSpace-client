@@ -34,10 +34,10 @@
  */
 
 import { Trans, useTranslation } from "react-i18next";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Link } from "@docspace/ui-kit/components/link";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
 
 const DeletePortalDialog = (props) => {

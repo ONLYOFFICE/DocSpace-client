@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
       "line_number": 116,
       "context": "</div>\n \n <div className={styles.callout} role=\"status\">\n <InfoIcon className={styles.calloutIcon} aria-hidden=\"true\" />\n <Text fontSize=\"12px\" fontWeight={600} lineHeight=\"16px\">\n {t(\"WalletTopUpKeepOpen\")}\n </Text>\n </div>\n \n <StepsTimeline steps={steps} stepIndex={stepIndex} />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

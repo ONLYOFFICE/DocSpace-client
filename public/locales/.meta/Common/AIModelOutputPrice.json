@@ -3,7 +3,7 @@
   "content": "{{outputPrice}}/M output tokens",
   "content_en_sha1_hash": "ee14309153606031c95f1b85eaf5d109cb3abc61",
   "created_at": "2026-09-23T12:24:05.508Z",
-  "updated_at": "2026-10-01T08:23:21.812Z",
+  "updated_at": "2026-10-02T12:15:32.458Z",
   "comment": {
     "text": "Label in the AI model settings list indicating the cost per million output tokens, where {{outputPrice}} is the formatted price.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/RowView/index.tsx",
-      "line_number": 126,
-      "context": "prices: [\n t(\"Common:AIImageModelPrice\", {\n inputPrice: formatPrice(m.price?.prompt),\n imagePrice: formatPrice(m.price?.image),\n }),\n t(\"Common:AIModelOutputPrice\", {\n outputPrice: formatPrice(m.price?.completion),\n }),\n ],\n breakdown: null,\n }));",
+      "line_number": 123,
+      "context": "prices: [\n t(\"Common:AIImageModelPrice\", {\n inputPrice: formatAiModelPrice(m.price?.prompt),\n imagePrice: formatAiModelPrice(m.price?.image),\n }),\n t(\"Common:AIModelOutputPrice\", {\n outputPrice: formatAiModelPrice(m.price?.completion),\n }),\n ],\n breakdown: null,\n }));",
       "module": "/packages/client"
     }
   ],

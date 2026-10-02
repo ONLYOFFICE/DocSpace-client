@@ -39,17 +39,17 @@ import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touc
 
 import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { TableGroupMenu } from "@docspace/ui-kit/components/table";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { TableGroupMenu } from "@onlyoffice/apps-ui-kit/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { DeviceType } from "@docspace/shared/enums";
 
 import TariffBar from "SRC_DIR/components/TariffBar";

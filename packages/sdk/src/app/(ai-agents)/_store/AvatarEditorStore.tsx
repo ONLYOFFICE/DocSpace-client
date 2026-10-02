@@ -67,7 +67,7 @@ import { makeAutoObservable } from "mobx";
 import resizeImage from "resize-image";
 
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import {
   ONE_MEGABYTE,

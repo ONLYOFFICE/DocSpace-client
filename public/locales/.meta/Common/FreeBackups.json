@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 367,
       "context": "</>\n ) : totalBackupsUsed > 0 ? (\n <>\n {!isFreeTariff ? (\n <Text className={styles.cardCaption}>\n {t(\"FreeBackups\", { count: freeBackupsUsed })}\n </Text>\n ) : null}\n <Text className={styles.cardCaption}>\n {isFreeTariff\n ? t(\"BilledBackupsLabel\")",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

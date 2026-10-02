@@ -65,8 +65,8 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TAgent } from "@docspace/shared/api/ai/types";
 
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";

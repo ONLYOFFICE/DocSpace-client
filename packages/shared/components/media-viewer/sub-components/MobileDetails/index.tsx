@@ -39,9 +39,9 @@ import classNames from "classnames";
 
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import BackArrow from "PUBLIC_DIR/images/viewer.media.back.react.svg";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import { ContextMenu } from "@docspace/ui-kit/components/context-menu";
+import { ContextMenu } from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import styles from "./MobileDetails.module.scss";
 import type MobileDetailsProps from "./MobileDetails.props";

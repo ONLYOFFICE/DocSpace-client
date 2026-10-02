@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
-      "line_number": 595,
+      "line_number": 599,
       "context": "!isNotPaidPeriod &&\n isAdmin &&\n !isCommunity && {\n key: \"user-menu-payments\",\n icon: PaymentsReactSvgUrl,\n label: standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\"),\n onClick: (obj) =>\n this.onPaymentsClick(\n obj,\n standalone ? PAYMENTS_URL : BILLING_OVERVIEW_URL,\n ),",
       "module": "/packages/client"
     },

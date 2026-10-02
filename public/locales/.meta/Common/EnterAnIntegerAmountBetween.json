@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
       "line_number": 238,
       "context": "setIsCurrentSettings(false);\n };\n \n const description = (min: number, max: number) => (\n <Text fontSize=\"12px\" className={styles.inputDescription} fontWeight={400}>\n {t(\"EnterAnIntegerAmountBetween\", {\n min: formatWalletCurrency!(min, 0),\n max: formatWalletCurrency!(max, 0),\n })}\n </Text>\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

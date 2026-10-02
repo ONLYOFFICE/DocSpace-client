@@ -39,8 +39,8 @@ import { useNavigate } from "react-router";
 
 import { inject, observer } from "mobx-react";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import PortalImg from "PUBLIC_DIR/images/sdk-presets_portal.react.svg?url";
 import PublicRoomImg from "PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url";
@@ -65,7 +65,7 @@ import Integration from "./sub-components/Integration";
 import PresetTile from "./sub-components/PresetTile";
 import CSPSetting from "./sub-components/csp";
 
-import { isMobile } from "@docspace/ui-kit/utils/device";
+import { isMobile } from "@onlyoffice/apps-ui-kit/utils/device";
 import classNames from "classnames";
 import styles from "./sub-components/StyledPortalIntegration.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";

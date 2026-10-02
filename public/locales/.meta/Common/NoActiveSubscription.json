@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 318,
       "context": "<span className={styles.statusBadge}>{t(\"Inactive\")}</span>\n </div>\n ) : !hasStorageSubscription ? (\n <div className={styles.noSubscriptionCard}>\n <Text fontWeight={700} fontSize=\"14px\">\n {t(\"NoActiveSubscription\")}\n </Text>\n <Button\n label={t(\"BuyStorage\")}\n size={ButtonSize.small}\n primary",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 324,
       "context": "<Text\n fontSize=\"13px\"\n fontWeight={600}\n className={styles.noPlanTitle}\n >\n {t(\"Common:NoActiveSubscription\")}\n </Text>\n <Button\n primary\n scale\n size={ButtonSize.small}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

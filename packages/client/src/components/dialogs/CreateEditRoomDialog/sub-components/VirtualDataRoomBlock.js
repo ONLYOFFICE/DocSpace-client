@@ -36,8 +36,8 @@
 import { useState, useRef } from "react";
 import { Trans } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
 import FileLifetime from "./FileLifetime";
 import Watermarks from "./Watermarks";

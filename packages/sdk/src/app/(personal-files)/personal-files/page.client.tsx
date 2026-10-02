@@ -38,7 +38,7 @@
 import type { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 
 import { useDocsPageInit } from "../_hooks/useDocsPageInit";
 import DocsLayout from "../_components/docs-layout";

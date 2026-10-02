@@ -34,7 +34,7 @@
  */
 
 import { getBgPattern } from "@docspace/shared/utils/common";
-import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
+import { FormWrapper } from "@onlyoffice/apps-ui-kit/components/form-wrapper";
 
 import { getColorTheme } from "@/api/settings";
 import LinkClient from "./LinkClient";

@@ -38,10 +38,10 @@ import { useParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { ModalDialogType } from "@onlyoffice/apps-ui-kit/components/modal-dialog/ModalDialog.enums";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 

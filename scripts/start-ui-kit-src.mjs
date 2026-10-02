@@ -41,8 +41,9 @@
  *
  * It exists at the repo root because that is where the dev servers are actually
  * started -- `pnpm start` fans out to five apps through Nx, and a script buried
- * in packages/client is never the one anyone runs. The variable is read only by
- * packages/client/config/ui-kit-dev.ts; the Next.js apps ignore it.
+ * in packages/client is never the one anyone runs. The variable is read by
+ * packages/client/config/ui-kit-dev.ts for the Vite client and by
+ * scripts/ui-kit-dev.cjs for the four Next.js apps.
  *
  *   pnpm run start:ui-kit-src                 # same app set as `pnpm start`
  *   pnpm run start:ui-kit-src start:lite      # any other start script

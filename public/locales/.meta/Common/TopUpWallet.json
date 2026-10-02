@@ -3,7 +3,7 @@
   "content": "Top up wallet",
   "content_en_sha1_hash": "155fb560e348142a6331187a877f862f8cc8df81",
   "created_at": "2026-04-10T13:53:43.673Z",
-  "updated_at": "2026-09-16T18:53:34.431Z",
+  "updated_at": "2026-10-01T08:23:21.734Z",
   "comment": {
     "text": "Dialog title for a modal window where users can add funds to their wallet.",
     "is_auto": true,
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "@onlyoffice/apps-ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1671,
+      "line_number": 1682,
       "context": "if (this.isTariffDueTodayCalculating) return t(\"UpgradeNow\");\n \n if (this.tariffDueTodayAmount !== null && !isTheSameCount) {\n if (isBalanceInsufficient)\n return this.tariff.isDelayedPaymentMethod\n ? t(\"TopUpWallet\")\n : t(\"TopUpAndUpgrade\");\n return t(\"PayAndUpgrade\", {\n amount: this.formatPaymentCurrency(dueTodayAmount),\n });\n }",
       "module": "@onlyoffice/apps-ui-kit"
     },
@@ -67,7 +67,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 906,
+      "line_number": 907,
       "context": "description: isPayer\n ? t(\"Common:TopUpWalletToContinue\")\n : t(\"Common:InsufficientFundsContactPayerShort\"),\n action: isPayer\n ? {\n text: t(\"Common:TopUpWallet\"),\n onClick: () => navigate(\"/portal-settings/payments/wallet\"),\n }\n : null,\n };\n },",
       "module": "/packages/client"
     },

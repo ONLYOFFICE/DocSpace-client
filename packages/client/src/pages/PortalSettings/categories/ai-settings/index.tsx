@@ -214,7 +214,7 @@ const AISettings = ({
     },
     {
       id: TAB_IDS.WEB_SEARCH,
-      name: t("Common:WebSearch"),
+      name: t("Common:AISearch"),
       content: standalone ? <WebSearch /> : <WebSearchSaas />,
       onClick: makeOnClick(TAB_IDS.WEB_SEARCH),
       isDisabled: disableNonAiModels,

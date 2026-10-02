@@ -42,13 +42,8 @@ import { Bonus as BonusPage } from "@docspace/shared/pages/Payments/Bonus";
 const Bonus = (props) => {
   const {
     isInitPaymentPage,
-    isEnterprise,
-    isTrial,
-    isDeveloper,
-    isCommunity,
     feedbackAndSupportUrl,
     salesEmail,
-    dataBackupUrl,
     logoText,
     enterpriseInstallScriptUrl,
     enterpriseInstallWindowsUrl,
@@ -62,13 +57,8 @@ const Bonus = (props) => {
 
   return (
     <BonusPage
-      isEnterprise={isEnterprise}
-      isTrial={isTrial}
-      isDeveloper={isDeveloper}
-      isCommunity={isCommunity}
       feedbackAndSupportUrl={feedbackAndSupportUrl}
       salesEmail={salesEmail}
-      dataBackupUrl={dataBackupUrl}
       logoText={logoText}
       enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
       enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
@@ -79,18 +69,9 @@ const Bonus = (props) => {
 };
 
 export const Component = inject(
-  ({
-    paymentStore,
-    currentTariffStatusStore,
-    currentQuotaStore,
-    settingsStore,
-    clientLoadingStore,
-  }) => {
+  ({ paymentStore, settingsStore, clientLoadingStore }) => {
     const { isInitPaymentPage, salesEmail } = paymentStore;
-    const { isCommunity, isEnterprise, isDeveloper } = currentTariffStatusStore;
-    const { isTrial } = currentQuotaStore;
     const {
-      dataBackupUrl,
       logoText,
       enterpriseInstallScriptUrl,
       enterpriseInstallWindowsUrl,
@@ -103,13 +84,8 @@ export const Component = inject(
 
     return {
       isInitPaymentPage,
-      isCommunity,
-      isEnterprise,
-      isTrial,
-      isDeveloper,
       feedbackAndSupportUrl,
       salesEmail,
-      dataBackupUrl,
       logoText,
       enterpriseInstallScriptUrl,
       enterpriseInstallWindowsUrl,

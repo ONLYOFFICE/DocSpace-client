@@ -61,8 +61,8 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
+import type { TFrameCustomActions } from "@docspace/shared/types/Frame";
 import {
-  frameCallbackData,
   frameCallEvent,
   frameHandlePing,
   getFrameId,
@@ -72,10 +72,10 @@ import { DeviceType } from "@docspace/shared/enums";
 import useDeviceType from "@/hooks/useDeviceType";
 import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
+import { useSdkCustomActions } from "@/providers/SdkCustomActionsProvider";
 import {
   FormsSection,
   DEFAULT_SETTINGS_SUBSECTION,
-  type CustomActionsConfig,
 } from "@/types/forms";
 import {
   sectionFromPathname,
@@ -83,6 +83,7 @@ import {
   settingsSubSectionToPath,
 } from "../_utils/sectionFromPathname";
 import { appendRoomParams } from "../_utils/formsUrl";
+import { useSdkMethods } from "@/providers/sdkMethods";
 import { libraryUrl } from "../_utils/libraryUrl";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 // LibraryNavigationStore removed — library uses URL routing now
@@ -99,7 +100,6 @@ import useFormsSocket from "../_hooks/useFormsSocket";
 import useEditorGuard from "../_hooks/useEditorGuard";
 
 import { useFormsTourStore } from "../_store/FormsTourStore";
-import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import { useFormsProgressStore } from "../_store/FormsProgressStore";
 import useTourSandbox from "../_hooks/useTourSandbox";
 import DualRingSpinner from "../_components/forms-layout/DualRingSpinner";
@@ -170,7 +170,7 @@ const FormsShellContent = ({ commonData, children }: FormsShellProps) => {
   const formsListStore = useFormsListStore();
   const { items, folders, isLoading } = formsListStore;
   const tourStore = useFormsTourStore();
-  const customActionsStore = useFormsCustomActionsStore();
+  const { setCustomActions } = useSdkCustomActions();
   const { currentDeviceType } = useDeviceType();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -261,51 +261,42 @@ const FormsShellContent = ({ commonData, children }: FormsShellProps) => {
               },
             });
           });
-        return;
-      }
-
-      const methodName = eventData?.data?.methodName;
-      const data = eventData?.data?.data;
-      const callId = eventData?.data?.callId;
-
-      switch (methodName) {
-        case "navigateSection": {
-          const section = data?.section as string;
-          if (!section) return;
-
-          const validSections = Object.values(FormsSection) as string[];
-          if (!validSections.includes(section)) return;
-
-          if (section === FormsSection.Settings) {
-            router.replace(
-              appendRoomParams(
-                settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION),
-                searchParams,
-              ),
-            );
-          } else {
-            router.replace(
-              appendRoomParams(
-                sectionToPath(section as FormsSection),
-                searchParams,
-              ),
-            );
-          }
-
-          frameCallbackData({ section }, callId);
-          break;
-        }
-        case "setCustomActions": {
-          if (data) customActionsStore.setActions(data as CustomActionsConfig);
-          frameCallbackData(data, callId);
-          break;
-        }
       }
     };
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
-  }, [router, searchParams, customActionsStore]);
+  }, []);
+
+  useSdkMethods({
+    navigateSection: (data) => {
+      const section = (data as { section?: string } | undefined)?.section;
+      const validSections = Object.values(FormsSection) as string[];
+      if (!section || !validSections.includes(section)) {
+        throw new Error(`Unknown section: ${String(section)}`);
+      }
+
+      router.replace(
+        appendRoomParams(
+          section === FormsSection.Settings
+            ? settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)
+            : sectionToPath(section as FormsSection),
+          searchParams,
+        ),
+      );
+
+      return { section };
+    },
+    setCustomActions: (data) => {
+      const config = (data ?? {}) as TFrameCustomActions;
+      setCustomActions(config);
+      return config;
+    },
+    getFiles: () => items,
+    getFolders: () => folders,
+    getList: () => [...folders, ...items],
+    getUserInfo: () => user,
+  });
 
   const socketFolderIds = React.useMemo(() => {
     const ids = new Set<string>();

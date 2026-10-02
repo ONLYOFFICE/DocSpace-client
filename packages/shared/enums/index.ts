@@ -82,6 +82,14 @@ export enum EmployeeTypeString {
   Owner = "owner",
 }
 /**
+ * Enum for the file format of the login history and audit trail reports.
+ * @readonly
+ */
+export enum AuditReportFormat {
+  Xlsx = 0,
+  Csv = 1,
+}
+/**
  * Enum for user payments type.
  * @readonly
  */

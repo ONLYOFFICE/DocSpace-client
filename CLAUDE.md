@@ -240,7 +240,9 @@ supported languages) is in `.claude/rules/i18n.md`, loaded automatically when
 editing locale files. For translation work use the `translate-locales`,
 `translate-key` and `translate-progress` skills; `translate-stale` finds keys
 whose English was reworded while the translations stayed behind — no test
-catches that.
+catches that. `translate-comments` writes the translator comment in
+`.meta` from the real call sites — run it before translating new keys, since
+the translation skills use that comment as context.
 
 ## Detailed rules (auto-loaded by path)
 

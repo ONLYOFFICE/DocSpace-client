@@ -22,10 +22,6 @@ import { requestAuthToken } from "./oauthToken";
 const requestAuthTokenMock = vi.mocked(requestAuthToken);
 const frameCallEventMock = vi.mocked(frameCallEvent);
 
-/**
- * A client whose adapter answers the given statuses in order and records the
- * Authorization header of every attempt.
- */
 const createClient = (statuses: number[]) => {
   const client = new AxiosClient();
   const headers: (string | undefined)[] = [];
@@ -123,5 +119,22 @@ describe("AxiosClient in an OAuth frame", () => {
 
     expect(result).toBeUndefined();
     expect(headers).toHaveLength(1);
+  });
+  it("stops requesting tokens after the OAuth sign-out", async () => {
+    requestAuthTokenMock.mockResolvedValue("token");
+    const { client, headers } = createClient([200, 401]);
+
+    client.signOutOAuth();
+    client.setAuthToken("pushed-token");
+
+    await client.request({ method: "get", url: "/settings" });
+    await client.request({
+      method: "get",
+      url: "/people/@self",
+      skipUnauthorized: true,
+    });
+
+    expect(headers).toEqual([undefined, undefined]);
+    expect(requestAuthTokenMock).not.toHaveBeenCalled();
   });
 });

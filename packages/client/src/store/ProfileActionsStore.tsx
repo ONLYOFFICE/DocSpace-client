@@ -677,23 +677,15 @@ class ProfileActionsStore {
       this.pluginStore.profileMenuItemsList &&
       enablePlugins
     ) {
-      this.pluginStore.profileMenuItemsList.forEach((option) => {
-        // the plugin SDK's IProfileMenuItem has no `position`
-        // field; the old JS read option.value.position (undefined unless a
-        // plugin supplies it — Array.prototype.splice coerces undefined to 0).
-        // The cast keeps that runtime behavior unchanged.
-        const position = (
-          option.value as IProfileMenuItemClient & { position?: number }
-        ).position as number;
-
-        // The Omit<> cast is type-only: at runtime the spread still carries
-        // option.value.key which overwrites option.key, exactly as before
-        // (it silences TS2783 "key is specified more than once").
-        actions.splice(position, 0, {
+      actions.unshift(
+        ...this.pluginStore.profileMenuItemsList.map((option) => ({
           key: option.key,
+          // The Omit<> cast is type-only: at runtime the spread still carries
+          // option.value.key which overwrites option.key, exactly as before
+          // (it silences TS2783 "key is specified more than once").
           ...(option.value as Omit<IProfileMenuItemClient, "key">),
-        });
-      });
+        })),
+      );
     }
 
     // the returned items carry extra DropDownItem-only fields

@@ -50,13 +50,17 @@ import SpreadsheetSvgUrl from "PUBLIC_DIR/images/icons/16/spreadsheet.svg?url";
 import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { frameCallEvent } from "@docspace/shared/utils/common";
+import {
+  getVisibleContextActions,
+  sendCustomAction,
+} from "@docspace/shared/utils/frameCustomActions";
 import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 
 import { FormsSection } from "@/types/forms";
-import type { CustomContextMenuAction } from "@/types/forms";
+import { useSdkCustomActions } from "@/providers/SdkCustomActionsProvider";
 
-import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
+import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
+import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import useFormsActions from "./useFormsActions";
 import useAskAI from "./useAskAI";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
@@ -136,33 +140,40 @@ export default function useFormsContextMenu() {
   } = useFormsActions({ t });
   const askAI = useAskAI();
   const isAiChatAvailable = useIsAiChatAvailable();
-  const { fileActions, folderActions } = useFormsCustomActionsStore();
+  const { customActions } = useSdkCustomActions();
+  const { completedFolder, inProgressFolder } = useFormsNavigationStore();
+  const { roomId } = useFormsSettingsStore();
+
+  const openFolder =
+    activeSection === FormsSection.CompletedForms
+      ? completedFolder
+      : activeSection === FormsSection.InProgress
+        ? inProgressFolder
+        : null;
+  const roomFolderId =
+    roomId && !Number.isNaN(Number(roomId)) ? Number(roomId) : roomId;
+  const folderId = openFolder?.id ?? (roomFolderId || undefined);
 
   const buildCustomItems = useCallback(
-    (
-      actions: CustomContextMenuAction[],
-      type: "file" | "folder",
-      item: TFile | TFolder,
-    ): ContextMenuItem[] => {
-      const filtered = actions.filter(
-        (a) => !a.section || a.section.includes(activeSection),
-      );
-
-      return filtered.map((action) => ({
-        id: `custom_${action.key}`,
-        key: action.key,
-        label: action.label,
-        icon: action.icon ?? "",
-        disabled: false,
-        onClick: () => {
-          frameCallEvent({
-            event: "onCustomAction",
-            data: { action: action.key, type, item },
-          });
-        },
-      }));
-    },
-    [activeSection],
+    (type: "file" | "folder", item: TFile | TFolder): ContextMenuItem[] =>
+      getVisibleContextActions(customActions, type, item, activeSection).map(
+        (action) => ({
+          id: `option_sdk-action-${action.key}`,
+          key: `sdk-action-${action.key}`,
+          label: action.label,
+          icon: action.icon ?? "",
+          disabled: false,
+          onClick: () =>
+            sendCustomAction({
+              action: action.key,
+              type,
+              item,
+              items: [item],
+              folderId,
+            }),
+        }),
+      ),
+    [customActions, activeSection, folderId],
   );
 
   const getContextMenuModel = useCallback(
@@ -336,7 +347,7 @@ export default function useFormsContextMenu() {
       };
 
       const keys = sectionKeys[activeSection] ?? [];
-      const customItems = buildCustomItems(fileActions, "file", file);
+      const customItems = buildCustomItems("file", file);
 
       const expanded: TFormsContextMenuItem[] = [];
       for (const key of keys) {
@@ -360,7 +371,6 @@ export default function useFormsContextMenu() {
       resetFilling,
       stopFilling,
       syncXlsxData,
-      fileActions,
       buildCustomItems,
     ],
   );
@@ -431,7 +441,7 @@ export default function useFormsContextMenu() {
         "separator-after-custom",
         "delete-folder",
       ];
-      const customItems = buildCustomItems(folderActions, "folder", folder);
+      const customItems = buildCustomItems("folder", folder);
 
       const expanded: TFormsContextMenuItem[] = [];
       for (const key of keys) {
@@ -450,7 +460,6 @@ export default function useFormsContextMenu() {
       downloadFolder,
       deleteFolderFromList,
       syncXlsxData,
-      folderActions,
       buildCustomItems,
     ],
   );

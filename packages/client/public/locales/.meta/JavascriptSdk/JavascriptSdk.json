@@ -3,7 +3,7 @@
   "content": "Javascript SDK",
   "content_en_sha1_hash": "e6c94f16090ac34b87010e6e2af5e5e55d93af88",
   "created_at": "2025-05-19T21:30:54.548Z",
-  "updated_at": "2026-09-16T18:53:34.518Z",
+  "updated_at": "2026-10-01T08:23:21.825Z",
   "comment": {
     "text": "This is a page title for the Javascript SDK settings. It appears as the main heading for the Javascript SDK configuration section.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 125,
+      "line_number": 144,
       "context": "const Manager = (props) => {\n const { t, fetchExternalLinks, theme, currentColorScheme } = props;\n const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },",
       "module": "/packages/client"
     },

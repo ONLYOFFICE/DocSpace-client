@@ -130,6 +130,7 @@ const PureHome = observer((props) => {
     refreshFiles,
 
     setFrameConfig,
+    setFrameCustomActions,
     folders,
     files,
     selection,
@@ -421,6 +422,7 @@ const PureHome = observer((props) => {
   useSDK({
     frameConfig,
     setFrameConfig,
+    setFrameCustomActions,
     selectedFolderStore,
     folders,
     files,
@@ -955,6 +957,7 @@ export const Component = inject(
     const { setOperationCancelVisible } = dialogsStore;
     const {
       setFrameConfig,
+      setFrameCustomActions,
       frameConfig,
       isFrame,
       enablePlugins,
@@ -1059,6 +1062,7 @@ export const Component = inject(
       setIsUpdatingRowItem,
 
       setFrameConfig,
+      setFrameCustomActions,
       frameConfig,
       isFrame,
       showTitle: frameConfig?.showTitle,

@@ -42,6 +42,6 @@
   "Common: SelectAction, TitleSelectFile",
   "Common: Skip, SkipTitle",
   "Common: SubscriptionDeactivated, SubscriptionDeactivatedNonPayment",
-  "Common: WebSearch, WebSearchAI",
+  "Common: Thinking, TokensReasoning",
   "OAuth: DeleteApplicationDescription, DeleteApplicationsDescription"
 ]

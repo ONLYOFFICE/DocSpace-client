@@ -35,11 +35,7 @@
 
 import { TTranslation } from "@docspace/shared/types";
 import { Dispatch, SetStateAction } from "react";
-import {
-  ISettings,
-  TButtonGroup,
-  TPlugin,
-} from "SRC_DIR/helpers/plugins/types";
+import { TButtonGroup, TPlugin } from "SRC_DIR/helpers/plugins/types";
 import type PluginStore from "SRC_DIR/store/PluginStore";
 
 export type HeaderProps = {
@@ -66,7 +62,6 @@ export type InfoProps = {
 export type SettingsPluginDialogProps = {
   plugin: TPlugin;
   withDelete: boolean;
-  pluginSettings?: ISettings | null;
   settingsPluginDialogVisible: boolean;
   reactSettingsSaveButtonState: PluginStore["reactSettingsSaveButtonState"];
   onClose: () => void;

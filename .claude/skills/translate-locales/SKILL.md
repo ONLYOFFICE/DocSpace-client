@@ -55,7 +55,26 @@ Test failures report keys as `Namespace:KeyName`. Use the table below to find th
 
 English source is always at the same path with `{lang}` = `en`.
 
-## Step 3 — collect English source + meta context
+## Step 3 — make sure every key has `.meta` and a comment (mandatory)
+
+Do this **before** translating anything. The comment in `.meta` is the
+translator context for Step 4; a key translated without it has to be
+re-checked later.
+
+```bash
+node .claude/scripts/i18n/locale-comments.mjs find --key Ns:Key1,Ns:Key2,... --ensure-meta
+```
+
+- `--ensure-meta` creates the `.meta` file for keys that have none, and resets
+  it for keys whose English changed (it runs `generate-metadata` +
+  `save-meta-keys-usage`, ~1 min). Both cases come out with an empty comment.
+- Exit code 1 = some keys still have an empty (or `outdated-meta`) comment.
+  Run the `translate-comments` skill on exactly those keys, then re-run the
+  command until it exits 0.
+- Keys from `libs/ui-kit/locales/` (`Settings`, `Services`, `Payments`) have no
+  `.meta`; the script skips them — use the English value and code usage only.
+
+## Step 3a — collect English source + meta context
 
 For each broken key:
 

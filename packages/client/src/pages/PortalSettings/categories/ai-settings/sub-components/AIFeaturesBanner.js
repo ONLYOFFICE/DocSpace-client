@@ -220,29 +220,36 @@ const AIFeaturesBanner = ({
 
   const feePercent = isWebSearchTab ? aiSearchFeePercent : aiToolsFeePercent;
 
+  const pricingLink = (
+    <Link
+      type={LinkType.page}
+      href={isWebSearchTab ? EXA_PRICING_URL : OPENROUTER_PRICING_URL}
+      target={LinkTarget.blank}
+      color="accent"
+      fontSize="12px"
+      isHovered
+      fontWeight={600}
+    />
+  );
+
   const pricingNote =
     feePercent == null ? null : (
       <Text as="div" fontSize="12px" fontWeight={600}>
-        <CommonTrans
-          i18nKey={
-            isWebSearchTab ? "AIExaPricingNote" : "AIOpenRouterPricingNote"
-          }
-          namespaces={["Common"]}
-          values={{ percent: feePercent }}
-          components={{
-            1: (
-              <Link
-                type={LinkType.page}
-                href={isWebSearchTab ? EXA_PRICING_URL : OPENROUTER_PRICING_URL}
-                target={LinkTarget.blank}
-                color="accent"
-                fontSize="12px"
-                isHovered
-                fontWeight={600}
-              />
-            ),
-          }}
-        />
+        {isWebSearchTab ? (
+          <CommonTrans
+            i18nKey="AIExaPricingNote"
+            namespaces={["Common"]}
+            values={{ percent: feePercent }}
+            components={{ 1: pricingLink }}
+          />
+        ) : (
+          <CommonTrans
+            i18nKey="AIOpenRouterPricingNote"
+            namespaces={["Common"]}
+            values={{ percent: feePercent }}
+            components={{ 1: pricingLink }}
+          />
+        )}
       </Text>
     );
 

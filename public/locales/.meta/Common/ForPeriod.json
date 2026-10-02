@@ -3,7 +3,7 @@
   "content": "For {{period}}",
   "content_en_sha1_hash": "6fa271e32aa734f72825fb69453a3519528879e0",
   "created_at": "2026-06-25T11:54:50.691Z",
-  "updated_at": "2026-09-10T16:17:50.377Z",
+  "updated_at": "2026-10-01T08:23:21.915Z",
   "comment": {
     "text": "Caption for billing cards and usage summaries specifying the timeframe for displayed data; {{period}} represents a specific month or time range name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 295,
+      "line_number": 294,
       "context": "fontWeight={700}\n tooltipId=\"ai-tools-month-spend\"\n />\n )}\n <Text className={styles.cardCaption}>\n {t(\"ForPeriod\", { period: monthLabel })}\n </Text>\n </div>\n \n <div className={styles.card}>\n <Text className={styles.cardLabel}>{t(\"MonthUsage\")}</Text>",
       "module": "@onlyoffice/apps-ui-kit"
     },

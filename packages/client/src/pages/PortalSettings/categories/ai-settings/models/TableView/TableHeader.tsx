@@ -98,6 +98,15 @@ const ModelSettingsTableHeader = (props: TableHeaderProps) => {
           minWidth: 90,
         },
         outputColumn,
+        {
+          key: "CachedInput",
+          title: t("Common:CachedInputCurrency", {
+            currency: aiModelsCurrencySymbol,
+          }),
+          enable: true,
+          resizable: true,
+          minWidth: 90,
+        },
       ];
 
   const defaultColumns = [

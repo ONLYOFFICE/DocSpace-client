@@ -37,6 +37,49 @@ import { RoomsType, ThemeKeys } from "../enums";
 
 export type TFrameType = "desktop" | "mobile";
 
+export type TFrameManagerSection =
+  | "rooms"
+  | "archive"
+  | "my-documents"
+  | "recent"
+  | "favorites"
+  | "shared"
+  | "trash";
+
+export type TFrameCustomActionType = "file" | "folder" | "room";
+
+export type TFrameCustomContextMenuAction = {
+  key: string;
+  label: string;
+  icon?: string;
+  section?: string[];
+  extensions?: string[];
+  roomTypes?: RoomsType[];
+  requireSecurity?: string[];
+};
+
+export type TFrameCustomCreateAction = {
+  key: string;
+  label: string;
+  icon?: string;
+  section?: string[];
+};
+
+export type TFrameCustomActions = {
+  contextMenu?: Partial<
+    Record<TFrameCustomActionType, TFrameCustomContextMenuAction[]>
+  >;
+  createMenu?: TFrameCustomCreateAction[];
+};
+
+export type TFrameCustomActionEvent = {
+  action: string;
+  type: TFrameCustomActionType | "create";
+  item?: object;
+  items?: object[];
+  folderId?: number | string;
+};
+
 export type TFrameMode =
   | "manager"
   | "editor"
@@ -44,8 +87,11 @@ export type TFrameMode =
   | "room-selector"
   | "file-selector"
   | "system"
+  | "public-room"
+  | "uploader"
   | "forms"
-  | "chat";
+  | "chat"
+  | "personal";
 
 export type TFrameSelectorType =
   | "roomsOnly"
@@ -108,20 +154,23 @@ export type TEditorCustomization = {
 export type TFrameEvents = {
   onAppError?: null | ((message: string) => void);
   onAppReady?: null | ((data: { frameId: string }) => void);
+  onAuthError?: null | ((error: { code?: string; message: string }) => void);
   onAuthSuccess?: null | ((data: object) => void);
   onCloseCallback?: null | (() => void);
   onContentReady?: null | (() => void);
-  onCustomAction?:
-    | null
-    | ((data: { action: string; type: string; item: object }) => void);
+  onCustomAction?: null | ((data: TFrameCustomActionEvent) => void);
   onDownload?: null | ((url: string) => void);
   onEditorCloseCallback?: null | (() => void);
   onEditorOpen?: null | ((data: object) => void);
   onFileManagerClick?: null | ((data: object) => void);
+  onGetExternalData?:
+    | null
+    | ((request: { key: string; callId: number }) => unknown);
   onNavigate?: null | ((data: { section: string }) => void);
   onNoAccess?: null | (() => void);
   onNotFound?: null | (() => void);
   onSelectCallback?: null | ((item: object) => void);
+  onSetExternalData?: null | ((payload: { key: string; value: unknown }) => void);
   onSignOut?: null | (() => void);
   onUploadError?:
     | null
@@ -142,6 +191,7 @@ export type TFrameEvents = {
 
 export type TFrameConfig = {
   acceptButtonLabel?: string;
+  customActions?: TFrameCustomActions;
   buttonColor?: string;
   cancelButtonLabel?: string;
   checkCSP?: boolean;

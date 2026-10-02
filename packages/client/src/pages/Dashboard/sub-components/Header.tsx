@@ -73,6 +73,7 @@ import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 
 import styles from "../Dashboard.module.scss";
+import UpgradePathLine from "./UpgradePathLine";
 
 type HeaderProps = {
   /**
@@ -85,6 +86,7 @@ type HeaderProps = {
   paymentDate?: string;
   isAdminOrOwner?: boolean;
   standalone?: boolean;
+  isCommunity?: boolean;
 };
 
 const Header = ({
@@ -93,6 +95,7 @@ const Header = ({
   paymentDate = "",
   isAdminOrOwner = false,
   standalone = false,
+  isCommunity = false,
 }: HeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -143,6 +146,10 @@ const Header = ({
             </Link>
           </div>
         ) : null}
+
+        {isAdminOrOwner && standalone && isCommunity ? (
+          <UpgradePathLine />
+        ) : null}
       </div>
 
       {/* Pinned to the far edge of the header row, opposite the greeting. */}
@@ -173,6 +180,7 @@ const HeaderConnected = inject<TStore>(
     isAdminOrOwner:
       (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
     standalone: settingsStore.standalone,
+    isCommunity: currentTariffStatusStore.isCommunity,
   }),
 )(observer(Header));
 

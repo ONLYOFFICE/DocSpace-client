@@ -250,6 +250,7 @@
   "QuotasDescription": "Đặt hạn mức lưu trữ cho người dùng và phòng.",
   "Recalculate": "Tính toán lại",
   "RegisterApp": "Đăng ký ứng dụng",
+  "ReportFormatDescription": "Khi có quá nhiều sự kiện, báo cáo XLSX chỉ giữ lại các sự kiện gần đây nhất. Chọn CSV để xuất tất cả sự kiện.",
   "ResetTemplateDescription": "Bạn có chắc chắn muốn đặt lại trạng thái hiện tại của ô trống về mặc định không?\nBạn sẽ không thể hoàn tác hành động này.",
   "ResetToDefault": "Đặt lại về mặc định",
   "RestAPI": "API REST",

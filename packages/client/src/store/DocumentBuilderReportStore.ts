@@ -157,7 +157,9 @@ class DocumentBuilderReportStore {
     }
 
     openUrlWithExportToast({
-      url: combineUrl(window.ClientConfig?.proxy?.url, task.resultFileUrl),
+      url: /^https?:\/\//i.test(task.resultFileUrl)
+        ? task.resultFileUrl
+        : combineUrl(window.ClientConfig?.proxy?.url, task.resultFileUrl),
       openOnNewPage: this.filesSettingsStore.openOnNewPage,
       // Auto-opening a report whose page was left would pull the user out of
       // wherever they navigated to — the toast leaves it up to them.

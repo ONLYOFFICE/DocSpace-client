@@ -3,7 +3,7 @@
   "content": "<1>OpenRouter pricing</1>, plus a {{percent}}% service fee",
   "content_en_sha1_hash": "b49d23c77176204c0f791ec7683d02ed302f63d8",
   "created_at": "2026-09-08T08:43:25.587Z",
-  "updated_at": "2026-09-08T08:45:45.821Z",
+  "updated_at": "2026-10-01T08:23:21.814Z",
   "comment": {
     "text": "A list item in the AI agent benefits list detailing the cost structure. The `<1>` tag wraps a clickable link, and `{{percent}}` is a numeric value for the service fee.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 83,
       "context": "{serviceFeePercent != null ? (\n <li className={styles.item}>\n <PriceIcon className={styles.icon} />\n <Text as=\"span\" fontSize=\"12px\" fontWeight=\"600\" lineHeight=\"16px\">\n <CommonTrans\n i18nKey=\"AIOpenRouterPricingNote\"\n values={{ percent: serviceFeePercent }}\n components={{\n 1: (\n <Link\n fontSize=\"12px\"",
       "module": "@onlyoffice/apps-ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
+      "line_number": 245,
+      "context": "values={{ percent: feePercent }}\n components={{ 1: pricingLink }}\n />\n ) : (\n <CommonTrans\n i18nKey=\"AIOpenRouterPricingNote\"\n namespaces={[\"Common\"]}\n values={{ percent: feePercent }}\n components={{ 1: pricingLink }}\n />\n )}",
+      "module": "/packages/client"
     }
   ],
   "languages": {

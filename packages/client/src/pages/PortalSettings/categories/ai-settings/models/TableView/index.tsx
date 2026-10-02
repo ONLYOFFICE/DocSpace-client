@@ -44,11 +44,17 @@ import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 
 import { useTurnOffModelConfirmation } from "../TurnOffModelDialog";
+import {
+  buildCachePriceBreakdown,
+  CachePriceTooltip,
+  type TAiModelPrice,
+  type TCachePriceBreakdown,
+} from "../CachePriceTooltip";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import styles from "./ModelSettingsTable.module.scss";
 
-const TABLE_VERSION = "5";
+const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `aiModelsColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelAiModelsColumnsSize_ver-${TABLE_VERSION}`;
 const IMAGE_COLUMNS_SIZE = `aiImageModelsColumnsSize_ver-${TABLE_VERSION}`;
@@ -59,7 +65,11 @@ type TModelRow = {
   alias: string;
   image: string;
   link?: string;
-  prices: { key: string; value: string }[];
+  prices: {
+    key: string;
+    value: string;
+    breakdown?: TCachePriceBreakdown | null;
+  }[];
 };
 
 type ModelSettingsTableViewProps = {
@@ -68,6 +78,7 @@ type ModelSettingsTableViewProps = {
   userId?: string;
   aiToolsPrices?: ServicesStore["aiToolsPrices"];
   formatAiModelPrice?: ServicesStore["formatAiModelPrice"];
+  aiModelsCurrencySymbol?: ServicesStore["aiModelsCurrencySymbol"];
   setAiModelAvailability?: ServicesStore["setAiModelAvailability"];
   aiModelAvailabilityMap?: ServicesStore["aiModelAvailabilityMap"];
   aiModelAvailabilityUpdatingSet?: ServicesStore["aiModelAvailabilityUpdatingSet"];
@@ -79,6 +90,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     userId,
     aiToolsPrices,
     formatAiModelPrice = () => "",
+    aiModelsCurrencySymbol = "$",
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
@@ -98,6 +110,9 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     requestToggle({ id: modelId, title: model?.alias ?? modelId }, enabled);
   };
 
+  const cacheBreakdown = (price?: TAiModelPrice) =>
+    buildCachePriceBreakdown(price, aiModelsCurrencySymbol, formatAiModelPrice);
+
   const chatRows: TModelRow[] = chatModels.map((m) => ({
     id: m.id,
     alias: m.alias,
@@ -106,6 +121,11 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     prices: [
       { key: "input", value: formatAiModelPrice(m.price?.prompt) },
       { key: "output", value: formatAiModelPrice(m.price?.completion) },
+      {
+        key: "cachedInput",
+        value: formatAiModelPrice(m.price?.promptCacheRead),
+        breakdown: cacheBreakdown(m.price),
+      },
     ],
   }));
 
@@ -203,6 +223,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
         </React.Fragment>
       ) : null}
 
+      <CachePriceTooltip />
       {turnOffModelDialog}
     </div>
   );
@@ -212,6 +233,7 @@ export default inject<TStore>(({ servicesStore, userStore }) => {
   const {
     aiToolsPrices,
     formatAiModelPrice,
+    aiModelsCurrencySymbol,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
@@ -223,6 +245,7 @@ export default inject<TStore>(({ servicesStore, userStore }) => {
     userId: user?.id,
     aiToolsPrices,
     formatAiModelPrice,
+    aiModelsCurrencySymbol,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,

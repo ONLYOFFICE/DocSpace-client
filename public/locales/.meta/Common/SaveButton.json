@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-09-16T20:56:59.573Z",
+  "updated_at": "2026-10-01T08:23:21.749Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -97,7 +97,7 @@
     },
     {
       "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
-      "line_number": 260,
+      "line_number": 265,
       "context": "id={\n createEntityType\n ? `shared_create-${createEntityType}-modal_submit`\n : undefined\n }\n label={isCreateDialog ? t(\"Common:Create\") : t(\"Common:SaveButton\")}\n size=\"normal\"\n type=\"submit\"\n scale\n primary\n isLoading={isDisabled}",
       "module": "/packages/client"
     },

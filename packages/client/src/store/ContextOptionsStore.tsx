@@ -109,6 +109,11 @@ import {
   onLoadPluginsImpl,
 } from "./contextOptionsStore/plugins.helpers";
 import {
+  getFrameCreateActionsImpl,
+  onLoadFrameActionsImpl,
+  onMultiLoadFrameActionsImpl,
+} from "./contextOptionsStore/frameActions.helpers";
+import {
   onClickReconnectStorageImpl,
   onClickMakeFormImpl,
   onCopyLinkImpl,
@@ -725,6 +730,12 @@ class ContextOptionsStore {
 
   onLoadPlugins = (item: TContextItem): TContextOption[]=> onLoadPluginsImpl(this, item);
 
+  onLoadFrameActions = (item: TContextItem): TContextOption[] =>
+    onLoadFrameActionsImpl(this, item);
+
+  onMultiLoadFrameActions = (items: TSelectionItem[]): TContextOption[] =>
+    onMultiLoadFrameActionsImpl(this, items);
+
   // call sites may pass an undefined roomType which the
   // original .js forwarded as-is to getDefaultAccessUser — the cast keeps
   // that behavior.
@@ -1077,7 +1088,18 @@ class ContextOptionsStore {
     },
   ) => getContextOptionsPlusFormRoomImpl(this, t, models);
 
-  getFolderModel = (t: TTranslation, isSectionMenu?: boolean)=> getFolderModelImpl(this, t, isSectionMenu);
+  getFolderModel = (t: TTranslation, isSectionMenu?: boolean) => {
+    const options = getFolderModelImpl(this, t, isSectionMenu);
+    const frameActions = getFrameCreateActionsImpl(this);
+
+    if (!options || frameActions.length === 0) return options;
+
+    return [
+      ...options,
+      { key: "separator-custom-actions", isSeparator: true },
+      ...frameActions,
+    ];
+  };
 
   getModel = (item: TContextItem, t: TTranslation) => {
     const { selection } = this.filesStore;

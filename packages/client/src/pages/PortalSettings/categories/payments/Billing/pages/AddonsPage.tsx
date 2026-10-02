@@ -169,6 +169,9 @@ const AddonsPage = (props: AddonsPageProps) => {
         onOpenSupportedModels={() =>
           navigateToRoute("/portal-settings/ai-settings/ai-models")
         }
+        onOpenWebSearch={() =>
+          navigateToRoute("/portal-settings/ai-settings/web-search")
+        }
       />
       <DocsConnectGetStartedModal
         visible={getStartedVisible ?? false}

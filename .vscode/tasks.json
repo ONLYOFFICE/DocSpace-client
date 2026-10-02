@@ -118,7 +118,7 @@
         "env": {
           "APP_EDITION": "developer",
           "APP_EDITOR_TEST": "true",
-          "APP_EDITOR_VERSION": "10.0.0.2",
+          "APP_EDITOR_VERSION": "10.0.0.133",
           "SKIP_CLIENT": "true",
           "STORYBOOK": "false"
         }
@@ -142,7 +142,7 @@
         "env": {
           "APP_EDITION": "developer",
           "APP_EDITOR_TEST": "true",
-          "APP_EDITOR_VERSION": "10.0.0.2",
+          "APP_EDITOR_VERSION": "10.0.0.133",
           "SKIP_CLIENT": "true",
           "STORYBOOK": "false"
         }
@@ -186,7 +186,7 @@
       "options": {
         "env": {
           "APP_EDITOR_TEST": "true",
-          "APP_EDITOR_VERSION": "10.0.0.2",
+          "APP_EDITOR_VERSION": "10.0.0.133",
           "SKIP_CLIENT": "true",
           "STORYBOOK": "false",
           "APP_EDITION": "developer"
@@ -1619,7 +1619,7 @@
     {
       "label": "Translation App | update metadata",
       "type": "shell",
-      "command": "node '${workspaceFolder}/common/scripts/clean-empty-locales.js' && cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage && npm run generate-auto-comments-metadata",
+      "command": "node '${workspaceFolder}/common/scripts/clean-empty-locales.js' && cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage",
       "group": "build",
       "presentation": {
         "reveal": "always",

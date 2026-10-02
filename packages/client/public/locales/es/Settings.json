@@ -250,6 +250,7 @@
   "QuotasDescription": "Establezca límites de almacenamiento para usuarios y salas.",
   "Recalculate": "Recalcular",
   "RegisterApp": "Registrar aplicación",
+  "ReportFormatDescription": "Si hay demasiados eventos, un informe XLSX conserva solo los más recientes. Elija CSV para exportar todos los eventos.",
   "ResetTemplateDescription": "¿Está seguro de que desea restablecer el estado actual del espacio en blanco a su estado predeterminado?\nNo podrá deshacer esta acción.",
   "ResetToDefault": "Restablecer a predeterminado",
   "RestAPI": "REST API",

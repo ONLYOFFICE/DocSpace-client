@@ -119,6 +119,15 @@ const ServicesPage = (props: ServicesPageProps) => {
           getAIConfig={getAIConfig}
           withBottomMargin={true}
           onViewMore={onViewUsage}
+          onOpenWebSearch={() =>
+            navigate(
+              combineUrl(
+                window.ClientConfig?.proxy?.url,
+                config.homepage,
+                "/portal-settings/ai-settings/web-search",
+              ),
+            )
+          }
         />
       ) : null}
       {pathname.includes("backup") ? (

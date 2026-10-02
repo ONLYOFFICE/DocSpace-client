@@ -43,13 +43,22 @@ import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
 
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.14.react.svg";
 
+import {
+  CachePriceAnchor,
+  type TCachePriceBreakdown,
+} from "../CachePriceTooltip";
+
 import styles from "./ModelSettingsTable.module.scss";
 
 type ModelSettingsRowProps = {
   modelId: string;
   image: string;
   title: string;
-  prices: { key: string; value: string }[];
+  prices: {
+    key: string;
+    value: string;
+    breakdown?: TCachePriceBreakdown | null;
+  }[];
   enabled: boolean;
   isUpdating: boolean;
   link?: string;
@@ -94,11 +103,13 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
           </div>
         </div>
       </TableCell>
-      {prices.map(({ key, value }) => (
+      {prices.map(({ key, value, breakdown }) => (
         <TableCell key={key}>
-          <Text fontSize="12px" fontWeight={600} className={styles.priceCell}>
-            {value || "—"}
-          </Text>
+          <CachePriceAnchor breakdown={breakdown}>
+            <Text fontSize="12px" fontWeight={600} className={styles.priceCell}>
+              {value || "—"}
+            </Text>
+          </CachePriceAnchor>
         </TableCell>
       ))}
       <TableCell>

@@ -1017,6 +1017,8 @@ export const getFilesContextOptionsImpl = (
     });
   }
 
+  const frameActions = self.onLoadFrameActions(item);
+
   const { isCollaborator } = self.userStore?.user || {
     isCollaborator: false,
   };
@@ -1312,6 +1314,18 @@ export const getFilesContextOptionsImpl = (
     const items = resultOptions.filter((opt) => !opt.isSeparator);
     const result: TContextOption[] = [];
     let folderSeparatorIndex = 0;
+    let frameActionsPlaced = frameActions.length === 0;
+
+    const placeFrameActions = () => {
+      if (result.length > 0) {
+        result.push({
+          key: `separator${folderSeparatorIndex++}`,
+          isSeparator: true,
+        });
+      }
+      result.push(...frameActions);
+      frameActionsPlaced = true;
+    };
 
     groups.forEach((group) => {
       const groupItems: TContextOption[] = [];
@@ -1323,6 +1337,8 @@ export const getFilesContextOptionsImpl = (
 
       if (groupItems.length > 0) {
         const isDeleteGroup = group.includes("delete");
+
+        if (isDeleteGroup && !frameActionsPlaced) placeFrameActions();
         const shouldAddSeparator =
           result.length > 0 && (groupItems.length >= 2 || isDeleteGroup);
 
@@ -1342,6 +1358,8 @@ export const getFilesContextOptionsImpl = (
         result.push(...groupItems);
       }
     });
+
+    if (!frameActionsPlaced) placeFrameActions();
 
     items.forEach((option) => {
       const isInGroups = groups.flat().includes(option.key);
@@ -1373,6 +1391,26 @@ export const getFilesContextOptionsImpl = (
       const downloadGroup = resultOptions.splice(downloadGroupIndex, 1)[0];
       resultOptions.splice(moveIndex, 0, downloadGroup);
     }
+  }
+
+  if (frameActions.length > 0) {
+    const roomExitIndex = resultOptions.findIndex((option) =>
+      ["leave-room", "archive-room", "unarchive-room", "delete"].includes(
+        option.key,
+      ),
+    );
+
+    let insertIndex =
+      roomExitIndex === -1 ? resultOptions.length : roomExitIndex;
+    if (resultOptions[insertIndex - 1]?.isSeparator) insertIndex -= 1;
+
+    resultOptions.splice(
+      insertIndex,
+      0,
+      { key: "separator-custom-actions", isSeparator: true },
+      ...frameActions,
+      { key: "separator-after-custom-actions", isSeparator: true },
+    );
   }
 
   const newResult = placePlugins(resultOptions, pluginItems);

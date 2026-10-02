@@ -126,6 +126,8 @@ class AxiosClient {
 
   private oauthUnavailable = false;
 
+  private oauthSignedOut = false;
+
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
   }
@@ -311,9 +313,16 @@ class AxiosClient {
   };
 
   setAuthToken = (token: string | null) => {
+    if (this.oauthSignedOut) return;
     this.authToken = token;
     this.oauthGeneration += 1;
     if (token) this.oauthUnavailable = false;
+  };
+
+  signOutOAuth = () => {
+    this.authToken = null;
+    this.oauthGeneration += 1;
+    this.oauthSignedOut = true;
   };
 
   getOAuthToken = async (): Promise<string | null> => {
@@ -323,7 +332,7 @@ class AxiosClient {
   };
 
   refreshOAuthToken = (): Promise<string | null> => {
-    if (typeof window === "undefined" || !isOAuthFrame())
+    if (typeof window === "undefined" || !isOAuthFrame() || this.oauthSignedOut)
       return Promise.resolve(null);
     if (this.oauthRefreshing !== null) return this.oauthRefreshing;
 
@@ -350,7 +359,7 @@ class AxiosClient {
 
   private ensureOAuthToken = (): Promise<void> => {
     if (this.authToken) return Promise.resolve();
-    if (this.oauthUnavailable) return Promise.resolve();
+    if (this.oauthUnavailable || this.oauthSignedOut) return Promise.resolve();
     if (this.oauthReady !== null) return this.oauthReady;
 
     const generation = this.oauthGeneration;

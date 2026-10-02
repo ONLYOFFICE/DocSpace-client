@@ -232,4 +232,24 @@ describe("messageActions", () => {
 
     expect(params.updatePlugin).toHaveBeenCalledWith(PLUGIN_NAME, null, "value");
   });
+
+  it("does not show the media viewer on a plugin page", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    window.history.replaceState(null, "", "/p/sample-page");
+
+    dispatch(
+      {
+        actions: [PluginActions.showMediaViewer],
+        mediaViewerProps: { fileId: 2 },
+      },
+      params,
+    );
+
+    expect(params.setPluginMediaViewerVisible).not.toHaveBeenCalled();
+    expect(params.setPluginMediaViewerProps).not.toHaveBeenCalled();
+    expect(warn).toHaveBeenCalledTimes(1);
+
+    warn.mockRestore();
+    window.history.replaceState(null, "", "/");
+  });
 });

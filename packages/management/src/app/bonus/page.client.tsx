@@ -42,34 +42,26 @@ import { IBonusProps } from "@docspace/shared/pages/Payments/Bonus/Bonus.types";
 import { useEndAnimation } from "@/hooks/useEndAnimation";
 
 const BonusPage = ({
-  isEnterprise,
-  isTrial,
-  isDeveloper,
-  isCommunity,
   feedbackAndSupportUrl,
   salesEmail,
-  dataBackupUrl,
   logoText,
   enterpriseInstallScriptUrl,
   enterpriseInstallWindowsUrl,
+  forEnterprisesUrl,
+  demoOrderUrl,
 }: IBonusProps) => {
   const isLoading = useEndAnimation();
 
   return (
     <LoaderWrapper isLoading={isLoading}>
       <Bonus
-        isEnterprise={isEnterprise}
-        isTrial={isTrial}
-        isDeveloper={isDeveloper}
-        isCommunity={isCommunity}
         feedbackAndSupportUrl={feedbackAndSupportUrl}
         salesEmail={salesEmail}
-        dataBackupUrl={dataBackupUrl}
         logoText={logoText}
         enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
         enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
-        forEnterprisesUrl=""
-        demoOrderUrl=""
+        forEnterprisesUrl={forEnterprisesUrl}
+        demoOrderUrl={demoOrderUrl}
       />
     </LoaderWrapper>
   );

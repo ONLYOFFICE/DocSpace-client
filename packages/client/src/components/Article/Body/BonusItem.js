@@ -62,7 +62,7 @@ const BonusItem = ({ showText, toggleArticleOpen, currentColorScheme }) => {
     toggleArticleOpen();
   }, []);
 
-  const title = t("Common:Bonus");
+  const title = t("Common:Upgrade");
 
   return (
     <ArticleItem

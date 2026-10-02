@@ -34,11 +34,12 @@
  */
 
 import { inject, observer } from "mobx-react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 
 import { ServicesList } from "@docspace/ui-kit/billing";
 import type { TDocsConnectCardState } from "@docspace/ui-kit/billing/types";
+import { default as GracePeriodModal } from "@docspace/ui-kit/billing/services/panels/additional-storage/GracePeriodModal";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
@@ -65,6 +66,7 @@ interface AddonsPageProps {
   buyPlanPanelVisible?: boolean;
   openCancelPlanDialog?: () => void;
   cancelPlanDialogVisible?: boolean;
+  isGracePeriod?: boolean;
 }
 
 const AddonsPage = (props: AddonsPageProps) => {
@@ -78,8 +80,11 @@ const AddonsPage = (props: AddonsPageProps) => {
     buyPlanPanelVisible,
     openCancelPlanDialog,
     cancelPlanDialogVisible,
+    isGracePeriod,
   } = props;
   const navigate = useNavigate();
+  const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
+    useState(false);
 
   const navigateToRoute = (route: string) =>
     navigate(
@@ -105,6 +110,11 @@ const AddonsPage = (props: AddonsPageProps) => {
 
     if (isTrial && expired) {
       openBuyPlan?.("trial");
+      return;
+    }
+
+    if (isGracePeriod) {
+      setIsGracePeriodModalVisible(true);
       return;
     }
 
@@ -179,20 +189,29 @@ const AddonsPage = (props: AddonsPageProps) => {
       />
       {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
       {cancelPlanDialogVisible ? <CancelPlanDialog /> : null}
+      {isGracePeriodModalVisible ? (
+        <GracePeriodModal
+          visible={isGracePeriodModalVisible}
+          onClose={() => setIsGracePeriodModalVisible(false)}
+        />
+      ) : null}
     </>
   );
 };
 
-export const Component = inject(({ settingsStore, docsConnectStore }: TStore) => ({
-  getAIConfig: settingsStore.getAIConfig,
-  docsConnectInfo: docsConnectStore.info,
-  getStartedVisible: docsConnectStore.getStartedVisible,
-  openGetStarted: docsConnectStore.openGetStarted,
-  closeGetStarted: docsConnectStore.closeGetStarted,
-  openBuyPlan: docsConnectStore.openBuyPlan,
-  buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
-  openCancelPlanDialog: docsConnectStore.openCancelPlanDialog,
-  cancelPlanDialogVisible: docsConnectStore.cancelPlanDialogVisible,
-}))(observer(AddonsPage));
+export const Component = inject(
+  ({ settingsStore, docsConnectStore, currentTariffStatusStore }: TStore) => ({
+    getAIConfig: settingsStore.getAIConfig,
+    isGracePeriod: currentTariffStatusStore.isGracePeriod,
+    docsConnectInfo: docsConnectStore.info,
+    getStartedVisible: docsConnectStore.getStartedVisible,
+    openGetStarted: docsConnectStore.openGetStarted,
+    closeGetStarted: docsConnectStore.closeGetStarted,
+    openBuyPlan: docsConnectStore.openBuyPlan,
+    buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
+    openCancelPlanDialog: docsConnectStore.openCancelPlanDialog,
+    cancelPlanDialogVisible: docsConnectStore.cancelPlanDialogVisible,
+  }),
+)(observer(AddonsPage));
 
 export default Component;

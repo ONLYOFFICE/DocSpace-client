@@ -44,7 +44,8 @@ const SEARCH_FILTER = "filters[name_form][$containsi]";
 const EXTENSION_FILTER = "filters[form_exts][ext][$eq]";
 // The numeric id of a taxonomy entity differs per locale, `documentId` does
 // not - so the category filter travels as the document id.
-const CATEGORY_FILTER = "filters[subcategories][documentId][$eq]";
+const CATEGORY_FILTER =
+  "filters[subcategories][parent_categories][documentId][$in]";
 const PURPOSE_FILTER =
   "filters[subcategories][parent_categories][purpose][key][$eq]";
 
@@ -55,7 +56,7 @@ const DEFAULT_LOCALE = null;
 const DEFAULT_SEARCH = "";
 const DEFAULT_SORT_BY = "";
 const DEFAULT_SORT_ORDER = "";
-const DEFAULT_CATEGORY_ID = "";
+const DEFAULT_CATEGORY_IDS: string[] = [];
 const DEFAULT_PURPOSE = "";
 const DEFAULT_EXTENSION = "pdf";
 
@@ -69,8 +70,8 @@ class OformsFilter {
 
   pageSize: number;
 
-  /** Document id of the selected subcategory; empty means every category. */
-  categoryId: string;
+  /** Document ids of the selected parent categories; empty means all. */
+  categoryIds: string[];
 
   /** `business` / `personal`; empty means both. */
   purpose: string;
@@ -91,7 +92,7 @@ class OformsFilter {
   constructor(
     page = DEFAULT_PAGE,
     pageSize = DEFAULT_PAGE_SIZE,
-    categoryId = DEFAULT_CATEGORY_ID,
+    categoryIds = DEFAULT_CATEGORY_IDS,
     purpose = DEFAULT_PURPOSE,
     locale: string | null = DEFAULT_LOCALE,
     search = DEFAULT_SEARCH,
@@ -102,7 +103,7 @@ class OformsFilter {
   ) {
     this.page = page;
     this.pageSize = pageSize;
-    this.categoryId = categoryId;
+    this.categoryIds = categoryIds;
     this.purpose = purpose;
     this.locale = locale;
     this.search = search;
@@ -116,7 +117,7 @@ class OformsFilter {
     return new OformsFilter(
       DEFAULT_PAGE,
       DEFAULT_PAGE_SIZE,
-      DEFAULT_CATEGORY_ID,
+      DEFAULT_CATEGORY_IDS,
       DEFAULT_PURPOSE,
       DEFAULT_LOCALE,
       DEFAULT_SEARCH,
@@ -143,7 +144,7 @@ class OformsFilter {
     return new OformsFilter(
       this.page,
       this.pageSize,
-      this.categoryId,
+      [...this.categoryIds],
       this.purpose,
       this.locale,
       this.search,
@@ -170,9 +171,14 @@ class OformsFilter {
         [LOCALE]: this.locale,
         [SEARCH_FILTER]: this.search,
         [EXTENSION_FILTER]: this.extension,
-        [CATEGORY_FILTER]: this.categoryId,
         [PURPOSE_FILTER]: this.purpose,
         [SORT]: sortBy && sortOrder ? `${sortBy}:${sortOrder}` : "",
+        ...Object.fromEntries(
+          this.categoryIds.map((id, index) => [
+            `${CATEGORY_FILTER}[${index}]`,
+            id,
+          ]),
+        ),
       },
       true,
     );

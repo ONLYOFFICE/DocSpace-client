@@ -4,11 +4,8 @@
   "ErrorViewDescription": "Пожалуйста, повторите попытку позже",
   "ErrorViewDescriptionNetworkError": "По-видимому, нет подключения к интернету",
   "ErrorViewHeader": "Галерея временно недоступна",
-  "GalleryTitle": "Галерея шаблонов {{organizationName}}",
   "SelectTemplate": "Выбрать шаблон",
   "SubmitToGalleryDialogMainInfo": "Отправьте свой шаблон в общедоступную галерею, чтобы другие пользователи могли использовать его в своей работе. Как только шаблон пройдет модерацию, вы получите уведомление и вознаграждение за свой вклад.",
   "SuggestChanges": "Предложить изменения",
-  "TemplateInfo": "Информация шаблона",
-  "UploadGallery": "Загрузить в Галерею",
-  "ViewAllTemplates": "Просмотреть все шаблоны"
+  "TemplateInfo": "Информация шаблона"
 }

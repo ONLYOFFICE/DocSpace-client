@@ -33,33 +33,26 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@onlyoffice/apps-ui-kit/styles/mixins";
+import type { TFunction } from "i18next";
+import type {
+  TOformParentCategory,
+  TOformPurpose,
+} from "@docspace/shared/api/oforms/types";
 
-.purposeFilter {
-  width: 160px !important;
-  min-width: 160px;
-
-  :global(.combo-button-label) {
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 20px;
-  }
-
-  :global(.dropdown-container) {
-    margin-top: 4px;
-  }
-
-  @include mixins.mobile {
-    width: 112px !important;
-    min-width: 112px;
-  }
+export interface SelectedFiltersOwnProps {
+  onHeightChange: (height: number) => void;
 }
 
-.skeleton {
-  width: 160px;
-  height: 32px;
-
-  @include mixins.mobile {
-    width: 112px;
-  }
+export interface SelectedFiltersProps extends SelectedFiltersOwnProps {
+  t: TFunction;
+  locale: string;
+  isLocaleChanged: boolean;
+  defaultOformLocale: string;
+  selectedPurpose: TOformPurpose | null;
+  selectedCategories: TOformParentCategory[];
+  filterOformsByLocaleIsLoading: boolean;
+  filterOformsByLocale: (locale: string) => Promise<void>;
+  filterOformsByPurpose: (purpose: string) => void;
+  toggleOformsCategory: (categoryId: string) => void;
+  clearOformsFilter: () => Promise<void>;
 }

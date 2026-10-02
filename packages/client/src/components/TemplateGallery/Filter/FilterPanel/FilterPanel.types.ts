@@ -33,79 +33,28 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@onlyoffice/apps-ui-kit/styles/mixins";
+import type { TFunction } from "i18next";
+import type {
+  TOformParentCategory,
+  TOformPurpose,
+} from "@docspace/shared/api/oforms/types";
 
-.categoryFilterMobileWrapper {
-  width: 100%;
-
-  position: relative;
-
-  :global(.combo-button-label) {
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 20px;
-  }
-
-  @include mixins.tablet {
-    max-width: 100%;
-  }
-
-  @include mixins.mobile {
-    position: static;
-  }
+export interface FilterPanelOwnProps {
+  isLoading: boolean;
+  viewMobile: boolean;
 }
 
-.categoryFilterMobile {
-  position: fixed;
-  top: 36px;
-  inset-inline-start: 0;
-  width: 100%;
-
-  padding: 6px 0;
-  height: var(--forced-height);
-
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  @include mixins.mobile {
-    top: auto;
-    bottom: 0;
-  }
-
-  :global(.scroll-body) {
-    padding-inline-end: 0 !important;
-    padding-inline-start: 16px !important;
-  }
-}
-
-.categoryFilterItemMobile {
-  width: 100%;
-  height: 36px;
-  box-sizing: border-box;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 20px;
-  padding: 8px 16px;
-
-  &.isSeparator {
-    margin: 6px 16px;
-  }
-
-  :global(.submenu-arrow) {
-    margin-block: 0;
-    margin-inline: auto 0;
-
-    svg {
-      height: 12px;
-      width: 12px;
-    }
-
-    &.isMobileOpen {
-      transform: rotate(270deg);
-    }
-  }
+export interface FilterPanelProps extends FilterPanelOwnProps {
+  t: TFunction;
+  oformLocales: string[] | null;
+  locale: string;
+  purposes: TOformPurpose[];
+  purpose: string;
+  parentCategories: TOformParentCategory[];
+  categoryIds: string[];
+  isOformsFilterChanged: boolean;
+  filterOformsByLocaleIsLoading: boolean;
+  filterOformsByLocale: (locale: string) => Promise<void>;
+  filterOformsByPurpose: (purpose: string) => void;
+  toggleOformsCategory: (categoryId: string) => void;
 }

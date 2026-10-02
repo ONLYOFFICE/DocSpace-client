@@ -34,7 +34,7 @@
  */
 
 import uniqueid from "lodash/uniqueId";
-import React, { isValidElement, useEffect, useState, useRef, FC } from "react";
+import React, { useEffect, useState, useRef, FC } from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import { getCountTilesInRow } from "@docspace/shared/utils";
@@ -74,17 +74,7 @@ const Card: FC<CardProps> = ({
   className,
   ...rest
 }) => {
-  const isSubmitToGalleryTile =
-    isValidElement(children) &&
-    (children.props as { isSubmitTile?: boolean })?.isSubmitTile === true;
-  const cardClass = classNames(
-    styles.card,
-    "Card",
-    {
-      [styles.doubleWidth]: Boolean(smallPreview && isSubmitToGalleryTile),
-    },
-    className,
-  );
+  const cardClass = classNames(styles.card, "Card", className);
 
   return (
     <div className={cardClass} {...rest}>
@@ -183,26 +173,8 @@ const InfiniteGrid: FC<InfiniteGridInjectedProps> = (props) => {
       addItemToList(listKey, true, isShowOneTile);
     }
   } else {
-    let currentRowSpan = 0; // Track how many grid columns are used in current row
-
     React.Children.map(children, (child) => {
       if (child) {
-        // Check if this is a SubmitToGalleryTile that will span 2 columns
-        const isSubmitTile =
-          isValidElement(child) &&
-          (child.props as { isSubmitTile?: boolean })?.isSubmitTile === true;
-        const elementSpan = smallPreview && isSubmitTile ? 2 : 1;
-
-        // If adding this element would exceed the row capacity, start a new row
-        if (
-          currentRowSpan > 0 &&
-          currentRowSpan + elementSpan > countTilesInRow
-        ) {
-          const listKey = uniqueid("list-item_");
-          addItemToList(listKey, true, isShowOneTile);
-          currentRowSpan = 0;
-        }
-
         const cardKey = uniqueid("card-item_");
         cards.push(
           <Card
@@ -214,13 +186,9 @@ const InfiniteGrid: FC<InfiniteGridInjectedProps> = (props) => {
           </Card>,
         );
 
-        currentRowSpan += elementSpan;
-
-        // If we've filled the row exactly, start a new row
-        if (currentRowSpan === countTilesInRow) {
+        if (cards.length === countTilesInRow) {
           const listKey = uniqueid("list-item_");
           addItemToList(listKey, true, isShowOneTile);
-          currentRowSpan = 0;
         }
       }
     });

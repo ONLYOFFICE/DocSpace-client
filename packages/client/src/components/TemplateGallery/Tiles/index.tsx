@@ -44,7 +44,6 @@ import type { TilesProps, TFile } from "./Tiles.types";
 import FileTile from "./FileTile";
 
 import InfiniteGrid from "../InfiniteGrid";
-import SubmitToGalleryTile from "./SubmitToGalleryTile";
 import useTemplateGalleryHotkeys from "../hooks/useTemplateGalleryHotkeys";
 
 const Tiles: FC<TilesProps> = ({
@@ -53,13 +52,10 @@ const Tiles: FC<TilesProps> = ({
   hasMoreFiles,
   fetchMoreFiles,
   setGallerySelected,
-  submitToGalleryTileIsVisible,
-  canSubmitToFormGallery,
   setOformFilesLoaded,
   isShowOneTile,
   smallPreview,
   setIsVisibleInfoPanelTemplateGallery,
-  viewMobile,
   onCreateTemplate,
   setTemplateGalleryVisible,
   isShowInitSkeleton,
@@ -106,38 +102,17 @@ const Tiles: FC<TilesProps> = ({
     [oformFiles, onClickInfo],
   );
 
-  const hasSubmitTile =
-    !isShowInitSkeleton &&
-    submitToGalleryTileIsVisible &&
-    canSubmitToFormGallery() &&
-    (oformFiles?.length || 0) > 0;
-
-  const { focusedIndex, isSubmitTileFocused } = useTemplateGalleryHotkeys({
+  const { focusedIndex } = useTemplateGalleryHotkeys({
     itemsCount: oformFiles?.length || 0,
     isShowOneTile,
     onSelect: handleSelectByIndex,
     onInfoSelect: handleInfoSelectByIndex,
     enabled: !isShowInitSkeleton,
     resetKey: hotkeysResetKey,
-    hasSubmitTile,
-    submitTileSpan: smallPreview || viewMobile ? 2 : 1,
   });
-
-  const submitToGalleryTileNode =
-    submitToGalleryTileIsVisible &&
-    canSubmitToFormGallery() &&
-    oformFiles?.length > 0 ? (
-      <SubmitToGalleryTile
-        viewMobile={viewMobile}
-        smallPreview={smallPreview}
-        isSubmitTile
-        isKeyboardFocused={isSubmitTileFocused}
-      />
-    ) : null;
 
   return (
     <div className="tile-container">
-      {viewMobile && !isShowInitSkeleton ? submitToGalleryTileNode : null}
       <InfiniteGrid
         filesList={oformFiles}
         hasMoreFiles={hasMoreFiles}
@@ -146,7 +121,6 @@ const Tiles: FC<TilesProps> = ({
         smallPreview={smallPreview}
         showLoading={isShowInitSkeleton}
       >
-        {viewMobile && !isShowInitSkeleton ? null : submitToGalleryTileNode}
         {isShowInitSkeleton
           ? null
           : oformFiles.map((item: TFile, index: number) => {
@@ -168,7 +142,6 @@ const Tiles: FC<TilesProps> = ({
 
 const injectStores = ({
   settingsStore,
-  accessRightsStore,
   oformsStore,
   contextOptionsStore,
   dialogsStore,
@@ -180,8 +153,6 @@ const injectStores = ({
   fetchMoreFiles: oformsStore.fetchMoreOforms,
   setGallerySelected: oformsStore.setGallerySelected,
   resetFilters: oformsStore.resetFilters,
-  submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
-  canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
   setOformFilesLoaded: oformsStore.setOformFilesLoaded,
   categoryFilterLoaded: oformsStore.categoryFilterLoaded,
   languageFilterLoaded: oformsStore.languageFilterLoaded,

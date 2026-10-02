@@ -33,24 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type OformsFilter from "@docspace/shared/api/oforms/filter";
-import type { TFunction } from "i18next";
+import { LANGUAGE_CULTURE_MAP } from "../constants";
 
-export interface SortFilterProps {
-  t: TFunction;
-  oformsFilter: OformsFilter;
-  sortOforms: (sortBy: string, sortOrder: "asc" | "desc") => void;
-  filterOformsByLocaleIsLoading: boolean;
-  categoryFilterLoaded: boolean;
-  languageFilterLoaded: boolean;
-  isShowInitSkeleton: boolean;
-  isLanguageFilterChange: boolean;
-}
-
-export interface SortData {
-  id: string;
-  key: string;
-  label: string;
-  default: boolean;
-  isSelected: boolean;
-}
+export const toCulture = (locale: string) =>
+  LANGUAGE_CULTURE_MAP[locale] ?? locale;

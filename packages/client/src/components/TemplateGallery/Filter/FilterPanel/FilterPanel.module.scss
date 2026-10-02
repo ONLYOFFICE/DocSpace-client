@@ -33,93 +33,53 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@onlyoffice/apps-ui-kit/styles/mixins";
-
-.categoryFilterRoot {
-  position: relative;
-  width: 100%;
-}
-
-.categoryFilter {
-  width: 247px !important;
-
-  :global(.combo-button-label) {
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 20px;
-  }
-
-  :global(.dropdown-container) {
-    margin-top: 4px;
+.filterPanelRoot {
+  :global(#template-gallery-filter) {
+    margin-inline-start: 0;
   }
 }
 
-.categoryFilterItem {
-  width: 247px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding: 8px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16px;
-
-  span {
-    width: 160px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: left;
-  }
-
-  :global(.submenu-arrow) {
-    margin: 0;
-
-    svg {
-      height: 12px;
-      width: 12px;
-    }
-  }
-}
-
-.categoryFilterSubList {
+.filterPanel {
   position: absolute;
-  top: 0;
-  padding: 4px 0;
-  margin-top: var(--margin-top);
-  inset-inline-start: calc(100% + 4px) !important;
-  max-height: 296px;
-  max-width: auto;
-  visibility: hidden;
+  top: calc(100% + 4px);
+  inset-inline-end: 0;
+  z-index: 400;
 
-  &:before {
-    content: "";
-    position: absolute;
-    inset-inline-start: -4px;
-    top: 0;
-    width: 6px;
-    height: 100%;
-  }
+  width: 320px;
+  max-height: calc(100vh - 320px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 16px;
 
-  &.open {
-    &:hover {
-      visibility: visible;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
-  &.open.isSubHovered {
-    visibility: visible;
+  background: var(--dropdown-background);
+  border: var(--dropdown-border);
+  border-radius: 6px;
+  box-shadow: var(--dropdown-box-shadow);
+
+  &.mobile {
+    inset-inline: 0;
+    width: auto;
+    max-height: calc(100vh - 200px);
   }
 }
 
-.categoryFilterSubListItem {
-  width: 208px;
-  height: 36px;
-  box-sizing: border-box;
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 20px;
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionHeader {
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }

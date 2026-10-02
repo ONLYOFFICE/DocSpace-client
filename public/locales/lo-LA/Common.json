@@ -2110,7 +2110,6 @@
   "SubmenuDetails": "ລາຍລະອຽດ",
   "SubmenuHistory": "ປະຫວັດ",
   "SubmitToGallery": "ສົ່ງໄປທີ່ແກລເລີຣີ",
-  "SubmitToGalleryBlockBody": "ສົ່ງແບບຢ່າງຂອງທ່ານເພື່ອແບ່ງປັນກັບຊຸມຊົນ {{organizationName}}.",
   "SubmitToTemplateGallery": "ຍື່ນເຂົ້າຫໍແກລເລີແມ່ແບບ",
   "Subscribe": "ສະໝັກໃຊ້",
   "SubscriptionAutoCancellation": "ການສັກສະໝັກຈະຖືກຍົກເລີກໂດຍອັດຕະໂນມັດໃນວັນທີ {{finalDate}}",

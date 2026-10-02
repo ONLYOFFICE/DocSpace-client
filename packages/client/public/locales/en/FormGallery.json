@@ -4,11 +4,9 @@
   "ErrorViewDescription": "Please try again later",
   "ErrorViewDescriptionNetworkError": "It seems there is no Internet connection",
   "ErrorViewHeader": "Gallery is temporarily unavailable",
-  "GalleryTitle": "{{organizationName}} Template Gallery",
+  "Purpose": "Purpose",
   "SelectTemplate": "Select Template",
   "SubmitToGalleryDialogMainInfo": "Submit your template to the public gallery to let others use it in their work. Once the template passes moderation, you will be notified and rewarded for your contribution.",
   "SuggestChanges": "Suggest changes",
-  "TemplateInfo": "Template info",
-  "UploadGallery": "Upload in the Gallery",
-  "ViewAllTemplates": "View all templates"
+  "TemplateInfo": "Template info"
 }

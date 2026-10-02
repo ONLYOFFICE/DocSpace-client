@@ -48,14 +48,11 @@ export interface TilesProps {
   isShowOneTile?: boolean;
   smallPreview: boolean;
   setGallerySelected: (item: TOformFile | null) => void;
-  submitToGalleryTileIsVisible: boolean;
-  canSubmitToFormGallery: () => boolean;
   viewMobile: boolean;
   setTemplateGalleryVisible: (isVisible: boolean) => void;
   isShowInitSkeleton: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
   onCreateTemplate: () => void;
   hotkeysResetKey?: unknown;
-  hasSubmitTile?: boolean;
   setSubmitToGalleryDialogVisible: (isVisible: boolean) => void;
 }

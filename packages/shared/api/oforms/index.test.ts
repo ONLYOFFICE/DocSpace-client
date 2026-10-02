@@ -56,7 +56,7 @@ describe("getOforms", () => {
     const filter = OformsFilter.getDefaultDocx();
     filter.locale = "de";
     filter.purpose = "business";
-    filter.categoryId = "cat-1";
+    filter.categoryIds = ["pc-1", "pc-2"];
     filter.search = "invoice";
     filter.sortBy = "name_form";
     filter.sortOrder = "asc";
@@ -72,7 +72,12 @@ describe("getOforms", () => {
     expect(url).toContain("locale=de");
     expect(url).toContain("filters[name_form][$containsi]=invoice");
     expect(url).toContain("filters[form_exts][ext][$eq]=docx");
-    expect(url).toContain("filters[subcategories][documentId][$eq]=cat-1");
+    expect(url).toContain(
+      "filters[subcategories][parent_categories][documentId][$in][0]=pc-1",
+    );
+    expect(url).toContain(
+      "filters[subcategories][parent_categories][documentId][$in][1]=pc-2",
+    );
     expect(url).toContain(
       "filters[subcategories][parent_categories][purpose][key][$eq]=business",
     );

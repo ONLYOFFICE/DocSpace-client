@@ -51,7 +51,6 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import type { AxiosError, AxiosResponse } from "axios";
 import type {
-  TOformCategory,
   TOformFile,
   TOformParentCategory,
   TOformPurpose,
@@ -59,12 +58,6 @@ import type {
 } from "@docspace/shared/api/oforms/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
-
-import {
-  PersistenceKeys,
-  hasPersisted,
-  setPersistedString,
-} from "./utils/persistence";
 
 type TTreeFoldersStore = {
   isFormRoomRoot: boolean;
@@ -98,8 +91,6 @@ class OformsStore {
   oformsFilter: OformsFilter = OformsFilter.getDefault();
 
   oformFromFolderId: number | string = myDocumentsFolderId;
-
-  currentCategory: TOformCategory | null = null;
 
   // The whole taxonomy of the CMS, fetched in one request per gallery locale
   // and file type: purpose (Business / Personal) -> parent category ->
@@ -136,10 +127,6 @@ class OformsStore {
     title: string;
     extension: string;
   } | null = null;
-
-  submitToGalleryTileIsVisible = !hasPersisted(
-    PersistenceKeys.submitToGalleryTileIsHidden,
-  );
 
   constructor(
     settingsStore: SettingsStore,
@@ -401,6 +388,43 @@ class OformsStore {
       .filter(({ subcategories }) => subcategories.length > 0);
   }
 
+  get selectedCategories(): TOformParentCategory[] {
+    const { categoryIds } = this.oformsFilter;
+
+    return this.parentCategories.filter(({ documentId }) =>
+      categoryIds.includes(documentId),
+    );
+  }
+
+  get selectedPurpose(): TOformPurpose | null {
+    const { purpose } = this.oformsFilter;
+
+    return this.purposes.find(({ key }) => key === purpose) ?? null;
+  }
+
+  get isLocaleChanged() {
+    const { locale } = this.oformsFilter;
+
+    return !!locale && locale !== this.defaultOformLocale;
+  }
+
+  get isOformsFilterChanged() {
+    return (
+      this.isLocaleChanged ||
+      !!this.oformsFilter.purpose ||
+      this.oformsFilter.categoryIds.length > 0
+    );
+  }
+
+  getAvailableCategoryIds = (categoryIds: string[], purpose: string) => {
+    const available = this.purposes
+      .filter(({ key }) => !purpose || key === purpose)
+      .flatMap(({ parentCategories }) => parentCategories)
+      .map(({ documentId }) => documentId);
+
+    return categoryIds.filter((id) => available.includes(id));
+  };
+
   fetchPurposes = async (locale: string, extension: string) => {
     const url = combineUrl(this.oformsApiRoot, "/purposes");
 
@@ -424,24 +448,33 @@ class OformsStore {
       ),
     ]);
 
-  filterOformsByCategory = (category: TOformCategory | null) => {
-    this.currentCategory = category;
-
+  filterOformsByCategories = (categoryIds: string[]) => {
     this.oformsFilter.page = 1;
-    this.oformsFilter.categoryId = category?.documentId ?? "";
+    this.oformsFilter.categoryIds = categoryIds;
     const newOformsFilter = this.oformsFilter.clone();
 
     runInAction(() => this.refetchOforms(newOformsFilter));
   };
 
-  // The category groups differ per purpose, so the selected category cannot
-  // survive the switch.
-  filterOformsByPurpose = (purpose: string) => {
-    this.currentCategory = null;
+  toggleOformsCategory = (categoryId: string) => {
+    const { categoryIds } = this.oformsFilter;
 
+    this.filterOformsByCategories(
+      categoryIds.includes(categoryId)
+        ? categoryIds.filter((id) => id !== categoryId)
+        : [...categoryIds, categoryId],
+    );
+  };
+
+  // Every purpose owns its own category groups, so only the selected
+  // categories of the new purpose survive the switch.
+  filterOformsByPurpose = (purpose: string) => {
     this.oformsFilter.page = 1;
+    this.oformsFilter.categoryIds = this.getAvailableCategoryIds(
+      this.oformsFilter.categoryIds,
+      purpose,
+    );
     this.oformsFilter.purpose = purpose;
-    this.oformsFilter.categoryId = "";
     const newOformsFilter = this.oformsFilter.clone();
 
     runInAction(() => this.refetchOforms(newOformsFilter));
@@ -453,21 +486,44 @@ class OformsStore {
     if (locale !== this.oformsFilter.locale)
       this.setFilterOformsByLocaleIsLoading(true);
 
-    this.currentCategory = null;
-
     this.oformsFilter.page = 1;
     this.oformsFilter.locale = locale;
-    this.oformsFilter.categoryId = "";
     const newOformsFilter = this.oformsFilter.clone();
 
     try {
-      await Promise.all([
-        this.refetchOforms(newOformsFilter),
-        this.fetchPurposes(locale, newOformsFilter.extension),
-      ]);
+      await this.fetchPurposes(locale, newOformsFilter.extension);
+
+      newOformsFilter.categoryIds = this.getAvailableCategoryIds(
+        newOformsFilter.categoryIds,
+        newOformsFilter.purpose,
+      );
+      runInAction(() => {
+        this.oformsFilter.categoryIds = newOformsFilter.categoryIds;
+      });
+
+      await this.refetchOforms(newOformsFilter);
     } finally {
       this.setFilterOformsByLocaleIsLoading(false);
     }
+  };
+
+  clearOformsFilter = async () => {
+    if (!this.isOformsFilterChanged) return;
+
+    const locale = this.defaultOformLocale;
+
+    if (this.isLocaleChanged) {
+      this.oformsFilter.purpose = "";
+      this.oformsFilter.categoryIds = [];
+      await this.filterOformsByLocale(locale);
+      return;
+    }
+
+    this.oformsFilter.page = 1;
+    this.oformsFilter.purpose = "";
+    this.oformsFilter.categoryIds = [];
+
+    await this.refetchOforms(this.oformsFilter.clone());
   };
 
   filterOformsBySearch = (search: string) => {
@@ -490,20 +546,7 @@ class OformsStore {
     await this.fetchOformsWithPurposes(firstLoadFilter);
   };
 
-  sortOforms = (sortBy: string, sortOrder: string) => {
-    if (!sortBy || !sortOrder) return;
-
-    this.oformsFilter.page = 1;
-    this.oformsFilter.sortBy = sortBy;
-    this.oformsFilter.sortOrder = sortOrder;
-    const newOformsFilter = this.oformsFilter.clone();
-
-    runInAction(() => this.refetchOforms(newOformsFilter));
-  };
-
   resetFilters = async (ext?: string) => {
-    this.currentCategory = null;
-
     const defaultFilter =
       ext === ".docx"
         ? OformsFilter.getDefaultDocx()
@@ -521,11 +564,6 @@ class OformsStore {
     this.setOformsIsRefetching(true);
 
     await this.fetchOformsWithPurposes(defaultFilter);
-  };
-
-  hideSubmitToGalleryTile = () => {
-    setPersistedString(PersistenceKeys.submitToGalleryTileIsHidden, "true");
-    this.submitToGalleryTileIsVisible = false;
   };
 
   setTemplateGalleryVisible = (templateGalleryVisible: boolean) => {

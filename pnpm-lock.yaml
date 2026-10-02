@@ -3603,7 +3603,7 @@ packages:
     version: 4.0.0
     engines: {node: '>=22'}
     peerDependencies:
-      '@onlyoffice/ai-chat': ^0.5.121
+      '@onlyoffice/ai-chat': ^0.6.11
       '@onlyoffice/document-editor-react': 2.1.1
       '@socket.io/component-emitter': 3.1.2
       axios: '>=1.15.2'

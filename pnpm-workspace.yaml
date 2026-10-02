@@ -151,9 +151,6 @@ overrides:
   protobufjs: ">=8.6.0"
   follow-redirects: ">=1.16.0"
   # Security fixes
-  # nx 23.2.1 still pins smol-toml 1.6.1, which loops on malformed TOML
-  # (GHSA-7w5x-hrqm-74c2). Droppable once nx moves to 1.7.1.
-  "smol-toml@^1": "^1.7.1"
   # Deliberately NOT overridden: decode-uri-component (GHSA-vcc3-ghjq-m6fr,
   # moderate, exponential decoding of malformed percent-encoded input). Every
   # patched version is ESM-only ("type": "module" since 0.4.0) and query-string

@@ -48,8 +48,8 @@ export const PAYMENT_ROUTES = {
   diskStorage: `/billing/addons/disk-storage`,
   docsConnect: `/billing/addons/docs-connect`,
   paymentMethod: `/billing/payment-method`,
-  wallet: `/portal-settings/payments/wallet`,
-  usage: `/portal-settings/payments/usage`,
+  wallet: `/billing/wallet`,
+  usage: `/billing/usage`,
 } as const;
 
 /**

@@ -4,6 +4,7 @@
   "ErrorViewDescription": "後で再試行してください",
   "ErrorViewDescriptionNetworkError": "インターネット接続が見当たらないようです。",
   "ErrorViewHeader": "ギャラリーは現在利用できません。",
+  "Purpose": "用途",
   "SelectTemplate": "テンプレートを選択",
   "SubmitToGalleryDialogMainInfo": "テンプレートをパブリックギャラリーに提出して、他のユーザーが作業で利用できるようにしましょう。テンプレートが承認されると、通知され、貢献に対して報酬が与えられます。",
   "SuggestChanges": "変更点のご提案",

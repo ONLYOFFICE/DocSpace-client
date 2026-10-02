@@ -82,7 +82,7 @@
     "heic2any": "0.0.4",
     "hex-rgb": "5.0.0",
     "i18next": "25.10.10",
-    "katex": "^0.16.47",
+    "katex": "^0.17.0",
     "lodash": "4.18.1",
     "lodash.debounce": "4.0.8",
     "luxon": "3.7.2",

@@ -372,10 +372,10 @@ importers:
         version: 1.15.1
       '@onlyoffice/ai-chat':
         specifier: file:../../onlyoffice-ai-chat-0.6.11.tgz
-        version: file:onlyoffice-ai-chat-0.6.11.tgz(1ca1d9ca76880e77069a4e119a60421e)
+        version: file:onlyoffice-ai-chat-0.6.11.tgz(c29224622a15ec02a8a1188528da0c35)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(84498f395c9f458494f8ad6cb3b84e6c)
+        version: file:onlyoffice-apps-ui-kit.tgz(4c2d99b2fd838a3f5fdc6cb901fc708f)
       '@onlyoffice/docspace-sdk-js':
         specifier: file:onlyoffice-docspace-sdk-js-2.2.0.tgz
         version: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz
@@ -482,8 +482,8 @@ importers:
         specifier: 25.10.10
         version: 25.10.10(typescript@5.9.3)
       katex:
-        specifier: ^0.16.47
-        version: 0.16.47
+        specifier: ^0.17.0
+        version: 0.17.0
       lodash:
         specifier: 4.18.1
         version: 4.18.1
@@ -718,7 +718,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(84498f395c9f458494f8ad6cb3b84e6c)
+        version: file:onlyoffice-apps-ui-kit.tgz(4c2d99b2fd838a3f5fdc6cb901fc708f)
       '@onlyoffice/document-editor-react':
         specifier: 2.1.1
         version: 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -842,7 +842,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(84498f395c9f458494f8ad6cb3b84e6c)
+        version: file:onlyoffice-apps-ui-kit.tgz(4c2d99b2fd838a3f5fdc6cb901fc708f)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -963,7 +963,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(84498f395c9f458494f8ad6cb3b84e6c)
+        version: file:onlyoffice-apps-ui-kit.tgz(4c2d99b2fd838a3f5fdc6cb901fc708f)
       axios:
         specifier: '>=1.15.2'
         version: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -1129,10 +1129,10 @@ importers:
         version: 1.15.1
       '@onlyoffice/ai-chat':
         specifier: file:../../onlyoffice-ai-chat-0.6.11.tgz
-        version: file:onlyoffice-ai-chat-0.6.11.tgz(1ca1d9ca76880e77069a4e119a60421e)
+        version: file:onlyoffice-ai-chat-0.6.11.tgz(c29224622a15ec02a8a1188528da0c35)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(84498f395c9f458494f8ad6cb3b84e6c)
+        version: file:onlyoffice-apps-ui-kit.tgz(4c2d99b2fd838a3f5fdc6cb901fc708f)
       '@radix-ui/react-dialog':
         specifier: 'catalog:'
         version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1194,8 +1194,8 @@ importers:
         specifier: 25.10.10
         version: 25.10.10(typescript@5.9.3)
       katex:
-        specifier: ^0.16.47
-        version: 0.16.47
+        specifier: ^0.17.0
+        version: 0.17.0
       lodash:
         specifier: 4.18.1
         version: 4.18.1
@@ -1391,7 +1391,7 @@ importers:
         version: 2.4.0
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(84498f395c9f458494f8ad6cb3b84e6c)
+        version: file:onlyoffice-apps-ui-kit.tgz(4c2d99b2fd838a3f5fdc6cb901fc708f)
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -3609,7 +3609,7 @@ packages:
       '@socket.io/component-emitter': 3.1.2
       axios: '>=1.15.2'
       i18next: ^25.5.2
-      katex: ^0.16.47
+      katex: ^0.17.0
       mobx: 6.16.1
       mobx-react: 9.2.2
       react: 19.2.8
@@ -7085,6 +7085,10 @@ packages:
 
   katex@0.16.47:
     resolution: {integrity: sha512-Eeo8Ys1doU1z+x8AZsPpQu+p/QcZBI5PeOo7QGQdy2x2m0MU/hYagBbGOmXwr5KVbEfVuWv9LpnQWeehogurjg==}
+    hasBin: true
+
+  katex@0.17.0:
+    resolution: {integrity: sha512-Vdw0ATsQ9V+LuegM/BTwQqV/6cTl5lbGcIrU+BCgLxyf6bo38ybOr372tuSIxir3CN720flu1meYR6XzNMwQnw==}
     hasBin: true
 
   kuler@2.0.0:
@@ -11797,7 +11801,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@23.1.1':
     optional: true
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.6.11.tgz(1ca1d9ca76880e77069a4e119a60421e)':
+  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.6.11.tgz(c29224622a15ec02a8a1188528da0c35)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
       assistant-stream: 0.2.47
@@ -11824,7 +11828,7 @@ snapshots:
       codemirror: 6.0.2
       framer-motion: 12.43.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       i18next: 25.10.10(typescript@5.9.3)
-      katex: 0.16.47
+      katex: 0.17.0
       openai: 5.23.2(ws@8.22.0)(zod@4.5.4)
       react-i18next: 15.7.4(i18next@25.10.10(typescript@5.9.3))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3)
       react-shiki: 0.8.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)
@@ -11835,7 +11839,7 @@ snapshots:
       tailwind-merge: 3.6.0
       zustand: 5.0.7(@types/react@19.2.10)(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
 
-  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(84498f395c9f458494f8ad6cb3b84e6c)':
+  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(4c2d99b2fd838a3f5fdc6cb901fc708f)':
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@onlyoffice/docspace-api-sdk': 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -11874,11 +11878,11 @@ snapshots:
       xss: 1.0.15
       zoom-level: 2.5.0
     optionalDependencies:
-      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-0.6.11.tgz(1ca1d9ca76880e77069a4e119a60421e)
+      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-0.6.11.tgz(c29224622a15ec02a8a1188528da0c35)
       '@onlyoffice/document-editor-react': 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@socket.io/component-emitter': 3.1.2
       axios: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
-      katex: 0.16.47
+      katex: 0.17.0
       mobx: 6.16.1
       mobx-react: 9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-markdown: 10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1)
@@ -15382,6 +15386,10 @@ snapshots:
       safe-buffer: 5.2.1
 
   katex@0.16.47:
+    dependencies:
+      commander: 8.3.0
+
+  katex@0.17.0:
     dependencies:
       commander: 8.3.0
 

@@ -160,10 +160,6 @@ overrides:
   # failed with "decodeComponent is not a function". query-string 9 is ESM and
   # could take it, but that is a two-major upgrade of a parser used across
   # client and shared, and 9.x still declares ^0.4.1 itself. Revisit together.
-  # @vitest/ui resolves fflate 0.8.2, which loops on malformed ZIP64
-  # (GHSA-px8p-9vwx-vf98); its own ^0.8.0 range would allow the fix but the
-  # lockfile never moves on its own. Droppable once @vitest/ui bumps.
-  "fflate@^0": "^0.8.3"
   ws: ">=8.21.0"
   tmp: ">=0.2.6"
   "@grpc/grpc-js": "~1.9.16"

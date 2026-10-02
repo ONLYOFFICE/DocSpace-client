@@ -100,12 +100,13 @@ catalog:
   'react-shiki': '0.8.0'
   'tailwind-merge': '3.6.0'
   'zustand': '5.0.7'
-  # Not an ai-chat peer: openai lists zod as an optional peer with a range that
-  # spans two majors (^3.23.8 || ^4). Left to pnpm, client resolved it to 4.5.4
-  # and sdk to 3.25.76, which split ai-chat -- and with it ui-kit -- into two
-  # installed copies, so shared components rendered inside sdk read the theme
-  # from a different ThemeContext than the app around them. One declared
-  # version pins the peer for both.
+  # Not an ai-chat peer: openai lists zod as an optional peer. Left to pnpm,
+  # client resolved it to 4.5.4 and sdk to 3.25.76, which split ai-chat -- and
+  # with it ui-kit -- into two installed copies, so shared components rendered
+  # inside sdk read the theme from a different ThemeContext than the app around
+  # them. One declared version pins the peer for both. openai 5.23.2 asks for
+  # ^3.23.8, so `pnpm peers check` reports zod 4 as unmet; ai-chat never loads
+  # openai/helpers/zod, the only module that needs it.
   'zod': '4.5.4'
 
 overrides:

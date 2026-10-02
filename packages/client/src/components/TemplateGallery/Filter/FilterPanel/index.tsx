@@ -160,6 +160,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
                 {t("Common:Language")}
               </Text>
               <ComboBox
+                className={styles.languageCombo}
                 options={languageOptions}
                 selectedOption={selectedLanguage}
                 onSelect={onSelectLanguage}

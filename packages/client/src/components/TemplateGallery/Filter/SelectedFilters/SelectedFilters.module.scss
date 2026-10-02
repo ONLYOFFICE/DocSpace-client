@@ -37,8 +37,9 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   margin-top: 8px;
+  padding-inline-start: 4px;
 }
 
 .selectedItem {
@@ -47,5 +48,5 @@
 }
 
 .clearAll {
-  margin-inline-start: 4px;
+  margin-inline-start: 8px;
 }

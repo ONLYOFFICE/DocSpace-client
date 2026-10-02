@@ -71,8 +71,11 @@ node .claude/scripts/i18n/locale-comments.mjs find --key Ns:Key1,Ns:Key2,... --e
 - Exit code 1 = some keys still have an empty (or `outdated-meta`) comment.
   Run the `translate-comments` skill on exactly those keys, then re-run the
   command until it exits 0.
-- Keys from `libs/ui-kit/locales/` (`Settings`, `Services`, `Payments`) have no
-  `.meta`; the script skips them — use the English value and code usage only.
+- ui-kit's own namespaces (`Settings`, `Payments`) live in its `locales/` in
+  the `docspace-ui-kit-react` repository, not here, and are translated there.
+  Keys ui-kit renders from this repo's namespaces (mostly `Common`) do have
+  `.meta`, with usage records under `@onlyoffice/apps-ui-kit/...` -- read those
+  call sites in a ui-kit checkout, or in the installed package's `dist/`.
 
 ## Step 3a — collect English source + meta context
 

@@ -124,6 +124,10 @@ const PortalSettingsRoutes = {
       element: <ViewComponent />,
     },
     {
+      path: "customization/metadata-templates",
+      element: <ViewComponent />,
+    },
+    {
       path: "customization/branding/brand-name",
       async lazy() {
         const { BrandName } = await componentLoader(

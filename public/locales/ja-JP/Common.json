@@ -2135,7 +2135,6 @@
   "SuccessfullySentMessage": "メッセージは正常に送信されました。営業部よりご連絡させていただきます。",
   "SuccessOperation": "{{operationName}}：完了",
   "SuggestFeature": "機能のリクエスト",
-  "Support": "サポート",
   "SwitchKeyPassphraseHint": "切り替え先の鍵のパスフレーズを入力してください。プライベートルームのファイルはこの鍵で再暗号化されます。",
   "SwitchKeyPassphraseTitle": "暗号化キーの切り替え",
   "SwitchPlan": "<1>{{planName}}プラン</1> に切り替えようとしています。",

@@ -2135,7 +2135,6 @@
   "SuccessfullySentMessage": "Jūsu ziņojums tika veiksmīgi nosūtīts! Ar jums sazināsies Pārdošanas nodaļa.",
   "SuccessOperation": "{{operationName}}: Pabeigts",
   "SuggestFeature": "Ieteiciet funkciju",
-  "Support": "Atbalsts",
   "SwitchKeyPassphraseHint": "Ievadiet ieejas frāzi atslēgai, uz kuru pārslēdzaties. Jūsu privātās telpas faili tiks atkārtoti šifrēti ar to.",
   "SwitchKeyPassphraseTitle": "Mainīt šifrēšanas atslēgu",
   "SwitchPlan": "Jūs pārietat uz <1>{{planName}} plānu</1>.",

@@ -2135,7 +2135,6 @@
   "SuccessfullySentMessage": "Viestisi lähetettiin onnistuneesti. Sinuun otetaan yhteyttä Myyntiosastolta.",
   "SuccessOperation": "{{operationName}}: Tehty",
   "SuggestFeature": "Ehdotta ominaisuus",
-  "Support": "Tuki",
   "SwitchKeyPassphraseHint": "Anna salauslause avaimelle, johon vaihdat. Yksityisen huoneesi tiedostot salataan uudelleen sille.",
   "SwitchKeyPassphraseTitle": "Vaihda salausavain",
   "SwitchPlan": "Olet siirtymässä <1>{{planName}}</1>-tilaukseen.",

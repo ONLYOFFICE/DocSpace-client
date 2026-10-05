@@ -2135,7 +2135,6 @@
   "SuccessfullySentMessage": "Mesazhi juaj u dërgua me sukses. Do të kontaktoheni nga Departamenti i Shitjeve.",
   "SuccessOperation": "{{operationName}}: Kryer",
   "SuggestFeature": "Sugjero një veçori",
-  "Support": "Suport",
   "SwitchKeyPassphraseHint": "Vendosni frazëkalimin për çelësin te i cili po kaloni. Skedarët e dhomës suaj private do të rienkriptohen për të.",
   "SwitchKeyPassphraseTitle": "Ndrysho çelësin e enkriptimit",
   "SwitchPlan": "Jeni gati të kaloni në planin <1>{{planName}}</1>.",

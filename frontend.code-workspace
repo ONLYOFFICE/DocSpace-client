@@ -118,6 +118,11 @@
             "tooltip": "🛠️ Install the committed ui-kit tarball and refresh pnpm-lock.yaml"
           },
           {
+            "label": "Update ai-chat",
+            "task": "Frontend | update ai-chat",
+            "tooltip": "🛠️ Install the newest ai-chat tarball from ../../onlyoffice-ai-chat and refresh pnpm-lock.yaml"
+          },
+          {
             "label": "Build",
             "task": "Frontend | build",
             "tooltip": "🛠️ Start the \"frontend build\" task"

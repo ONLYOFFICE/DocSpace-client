@@ -45,11 +45,16 @@ import CatalogDocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.r
 import AiAgentsIcon from "PUBLIC_DIR/images/icons/16/ai-agents.svg";
 
 import type { ModuleItem } from "../sub-components/ModuleCard";
+import { DASHBOARD_ANALYTICS_CONTEXT } from "../utils";
 
 // The dashboard sits outside any folder, so creation is dispatched without a
-// parent and each dialog falls back to its section root. `context` matches the
-// value the sidebar's own create entry points send.
-const DASHBOARD_CREATE_DETAIL = { parentId: null, context: "sidebar" };
+// parent and each dialog falls back to its section root. `context` is only read
+// by analytics: it tags the RoomCreated / AgentCreated events as coming from
+// the Dashboard rather than the sidebar.
+const DASHBOARD_CREATE_DETAIL = {
+  parentId: null,
+  context: DASHBOARD_ANALYTICS_CONTEXT,
+};
 
 // Opens the create-room dialog — the same event/payload contract the Home quick
 // actions use, read by GlobalEvents' onCreateRoom and then by CreateRoomEvent.

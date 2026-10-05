@@ -107,7 +107,8 @@ imports from its `ai-agent/*` and `api/ai` subpaths without bundling it. Its
 own tarball (`onlyoffice-ai-chat-<version>.tgz`) is therefore committed here
 too and declared by the apps that render the AI agent — that `file:` dependency
 is what satisfies ui-kit's peer, so it cannot be dropped while those subpaths
-are used. ai-chat's own optional peers (LLM SDKs, radix, codemirror, ...) must
+are used. `update-ui-kit` moves it along with ui-kit; to bump it alone, from a
+`../../onlyoffice-ai-chat` checkout, run `pnpm run update-ai-chat`. ai-chat's own optional peers (LLM SDKs, radix, codemirror, ...) must
 be declared by those same apps; their versions sit in the `catalog:` block of
 `pnpm-workspace.yaml` - see `.claude/rules/pnpm.md`.
 

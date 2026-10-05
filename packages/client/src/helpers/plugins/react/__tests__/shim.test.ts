@@ -75,6 +75,28 @@ describe("rewritePluginImports", () => {
     expect(rewrittenSpecifiers(`import x from "${specifier}";`)).toHaveLength(1);
   });
 
+  // Plugin SDK 3.0.0 still tells plugins to keep the kit's old name external.
+  it("sends the kit's old name to the same copy", () => {
+    const [legacy] = rewrittenSpecifiers(`import x from "@docspace/ui-kit";`);
+    const [current] = rewrittenSpecifiers(
+      `import x from "@onlyoffice/apps-ui-kit";`,
+    );
+
+    expect(legacy).toBe(current);
+  });
+
+  it("does not offer the kit's old name", () => {
+    let thrown = "";
+
+    try {
+      rewritePluginImports(`import "lodash-es";`);
+    } catch (cause) {
+      thrown = cause instanceof Error ? cause.message : "";
+    }
+
+    expect(thrown).not.toContain("@docspace/ui-kit");
+  });
+
   // A package kept external survives bundling in a dynamic import too.
   it.each([
     ['const React = await import("react");', "await"],

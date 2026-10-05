@@ -22,6 +22,15 @@ vi.mock("../errors/Error520", () => ({
   ),
 }));
 
+const { scheduleChunkErrorReload } = vi.hoisted(() => ({
+  scheduleChunkErrorReload: vi.fn(),
+}));
+
+vi.mock("../../utils/chunk-load-error", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("../../utils/chunk-load-error")>()),
+  scheduleChunkErrorReload,
+}));
+
 // Mock console.error to avoid test output noise
 const originalError = console.error;
 beforeAll(() => {
@@ -138,6 +147,7 @@ describe("ErrorBoundary", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    window.sessionStorage.clear();
   });
 
   it("renders children when there's no error", () => {
@@ -209,5 +219,46 @@ describe("ErrorBoundary", () => {
 
     const errorElement = screen.getByTestId("error-520");
     expect(errorElement.textContent).toContain("Error:");
+  });
+
+  it("reloads instead of the crash page on a chunk load error", () => {
+    const onError = vi.fn();
+    const ThrowChunkError = () => {
+      const error = new Error("Loading chunk 3418 failed.");
+      error.name = "ChunkLoadError";
+      throw error;
+    };
+
+    const { container } = render(
+      <ErrorBoundary {...defaultProps} onError={onError}>
+        <ThrowChunkError />
+      </ErrorBoundary>,
+    );
+
+    expect(scheduleChunkErrorReload).toHaveBeenCalledTimes(1);
+    expect(container).toBeEmptyDOMElement();
+    expect(onError).not.toHaveBeenCalled();
+    expect(mockFirebaseHelper.sendCrashReport).not.toHaveBeenCalled();
+  });
+
+  it("shows the crash page for a chunk error right after a reload", () => {
+    window.sessionStorage.setItem(
+      "error-boundary.retry-chunk-reload",
+      String(Date.now()),
+    );
+    const ThrowChunkError = () => {
+      const error = new Error("Loading chunk 3418 failed.");
+      error.name = "ChunkLoadError";
+      throw error;
+    };
+
+    render(
+      <ErrorBoundary {...defaultProps}>
+        <ThrowChunkError />
+      </ErrorBoundary>,
+    );
+
+    expect(scheduleChunkErrorReload).not.toHaveBeenCalled();
+    expect(screen.getByTestId("error-520")).toBeInTheDocument();
   });
 });

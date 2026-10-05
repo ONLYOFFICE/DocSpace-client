@@ -142,6 +142,13 @@ const SPECIFIER_MAP: Record<string, string> = {
   "@onlyoffice/apps-ui-kit": PLUGIN_UI_KIT_SHIM_URL,
 };
 
+// The kit's name before it was renamed. Plugin SDK 3.0.0 documents it as the
+// external to keep, so plugins built by the book still import it; resolved, but
+// left out of the list an error message offers.
+const LEGACY_SPECIFIER_MAP: Record<string, string> = {
+  "@docspace/ui-kit": PLUGIN_UI_KIT_SHIM_URL,
+};
+
 // What the browser resolves by itself; everything else is a package name.
 const isResolvable = (specifier: string) =>
   specifier.startsWith(".") ||
@@ -160,7 +167,8 @@ const STATIC_IMPORT_RE =
 export function rewritePluginImports(code: string): string {
   const unresolved = new Set<string>();
 
-  const resolve = (specifier: string) => SPECIFIER_MAP[specifier];
+  const resolve = (specifier: string) =>
+    SPECIFIER_MAP[specifier] ?? LEGACY_SPECIFIER_MAP[specifier];
 
   let rewritten = code.replace(
     STATIC_IMPORT_RE,

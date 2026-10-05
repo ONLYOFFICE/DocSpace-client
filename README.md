@@ -201,6 +201,17 @@ happen. The updater rewrites the recorded integrity, drops the extracted copy,
 reinstalls, verifies every installed copy against the tarball, and keeps the
 vendored `@onlyoffice/ai-chat` tarball in step with what ui-kit requires.
 
+**Updating ai-chat alone** (an ai-chat fix that needs no ui-kit rebuild): pack
+it in the ai-chat repository (`npm run pack:docs -- <n>`), then:
+
+```bash
+pnpm run update-ai-chat         # newest pack in ../../onlyoffice-ai-chat, or pass a path
+git add onlyoffice-ai-chat-*.tgz pnpm-lock.yaml packages/*/package.json
+```
+
+It replaces the vendored tarball, repoints every app manifest at the new
+filename, reinstalls and verifies the result the same way.
+
 **Working on the kit itself:** waiting for a build, a pack and an install on
 every edit is the cost of consuming a prebuilt package. `DOCSPACE_UI_KIT_SRC`
 removes it for local work — the dev servers of all five apps then serve the kit

@@ -49,6 +49,7 @@
     "prepare": "node -e \"if (!process.env.CI) { try { require('child_process').execSync('git --version', {stdio: 'ignore'}); require('child_process').execSync('lefthook install', {stdio: 'inherit'}); } catch (e) { console.error('Lefthook installation skipped:', e.message); } }\" && npm --prefix ./common/tests ci --no-audit --no-fund",
     "update-translation-app-lock": "npm --prefix common/translation-app/frontend install --package-lock-only && npm --prefix common/translation-app/backend install --package-lock-only",
     "update-ui-kit": "node scripts/update-ui-kit.mjs",
+    "update-ai-chat": "node scripts/update-ai-chat.mjs",
     "start:ui-kit-src": "node scripts/start-ui-kit-src.mjs"
   },
   "devDependencies": {

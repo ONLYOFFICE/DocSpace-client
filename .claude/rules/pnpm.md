@@ -238,6 +238,25 @@ satisfies that peer, so it must stay declared in every app that reaches those
 subpaths - dropping it resolves the peer to nothing and breaks the AI agent at
 runtime.
 
+The tarball is versioned in its filename, so a bump rewrites the `file:`
+specifier in every app manifest. `update-ui-kit` does that when ui-kit moves,
+taking the ai-chat tarball next to the ui-kit checkout. To move ai-chat alone:
+
+```bash
+pnpm run update-ai-chat                 # newest pack in ../../onlyoffice-ai-chat
+pnpm run update-ai-chat path/to/onlyoffice-ai-chat-<version>.tgz
+DOCSPACE_AI_CHAT_SRC=../elsewhere pnpm run update-ai-chat
+```
+
+It removes the previous tarball, repoints the manifests, and for a repack under
+the same filename rewrites the recorded integrity and drops the extracted copy
+(the ui-kit trap above). After `pnpm install --force` it verifies by hash every
+extracted copy, that the lockfile references no other ai-chat tarball, and the
+lockfile entry's peers and dependencies against the packed manifest; a failed
+install restores the tarballs, manifests and lockfile. It warns when the
+filename and the packed version disagree. Both updaters share their helpers in
+`scripts/lib/vendored-tarball.mjs`.
+
 Most of ai-chat's own peers are optional too (the assistant-ui widgets, the
 radix primitives, codemirror, the LLM vendor SDKs), so pnpm installs none of
 them for an app that does not declare them. An app that reaches `ai-agent/*`

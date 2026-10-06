@@ -1411,6 +1411,7 @@
   "MonthUsage": "Uso del mes",
   "More": "Más",
   "MoreOptions": "Más opciones",
+  "Move": "Mover",
   "MoveFolderItem": "La carpeta <2>{{title}}</2> se ha movido correctamente <1>{{folderName}}</1>",
   "MoveHere": "Mover aquí",
   "MoveItem": "<2>{{title}}</2> se ha movido correctamente a <1>{{folderName}}</1>",

@@ -207,7 +207,7 @@ const DeleteDialogComponent = (props) => {
 
     if (unsubscribe) return t("Common:Remove");
 
-    return t("Common:MoveTo");
+    return t("Common:Move");
   };
 
   const getDialogTitle = () => {

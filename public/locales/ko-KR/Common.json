@@ -1411,6 +1411,7 @@
   "MonthUsage": "월 사용량",
   "More": "더 보기",
   "MoreOptions": "더 많은 옵션",
+  "Move": "이동",
   "MoveFolderItem": "<2>{{title}}</2> 폴더가 <1>{{folderName}}</1> 폴더로 이동되었습니다",
   "MoveHere": "여기로 이동",
   "MoveItem": "<2>{{title}}</2>이/가 <1>{{folderName}}</1> 폴더로 이동되었습니다",

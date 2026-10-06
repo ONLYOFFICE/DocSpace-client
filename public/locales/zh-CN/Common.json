@@ -1411,6 +1411,7 @@
   "MonthUsage": "本月使用量",
   "More": "更多",
   "MoreOptions": "更多选项",
+  "Move": "移动",
   "MoveFolderItem": "文件夹<2>{{title}}</2>已成功移至<1>{{folderName}}</1>",
   "MoveHere": "移到这里",
   "MoveItem": "<2>{{title}}</2>已成功移至<1>{{folderName}}</1>",

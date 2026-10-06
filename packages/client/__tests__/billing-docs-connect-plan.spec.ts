@@ -178,8 +178,8 @@ test.describe("Docs Connect plan panel", () => {
     await expect(page.getByText("$3.00", { exact: true })).toBeVisible();
     await expect(page.getByText("$50.00", { exact: true })).toBeVisible();
 
-    await minusButton(page).click();
-
+    // At the Dev Pack minimum the picker disables its minus button outright.
+    await expect(minusButton(page)).toBeDisabled();
     await expect(usersInput(page)).toHaveValue("10");
 
     await expectScreenshot(page, shot("dev-pack-minimum.png"));

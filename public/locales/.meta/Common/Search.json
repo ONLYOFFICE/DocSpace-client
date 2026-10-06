@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2026-09-25T10:58:53.259Z",
+  "updated_at": "2026-10-06T10:42:37.510Z",
   "comment": {
     "text": "This is a placeholder text for a search input field, prompting the user to type their search query.",
     "is_auto": true,
@@ -43,8 +43,8 @@
     },
     {
       "file_path": "/packages/client/src/components/TemplateGallery/Filter/SearchFilter/index.tsx",
-      "line_number": 90,
-      "context": "return (\n <SearchInput\n forwardedRef={ref}\n scale\n size={InputSize.base}\n placeholder={t(\"Common:Search\")}\n value={value}\n onChange={onChangeValue}\n onClick={onInputClick}\n onClearSearch={onClear}\n isDisabled={isLanguageFilterChange}",
+      "line_number": 81,
+      "context": "return (\n <SearchInput\n forwardedRef={ref}\n scale\n size={InputSize.base}\n placeholder={t(\"Common:Search\")}\n value={value}\n onChange={onChangeValue}\n onClick={onInputClick}\n onClearSearch={onClear}\n isDisabled={isDisabled}",
       "module": "/packages/client"
     },
     {

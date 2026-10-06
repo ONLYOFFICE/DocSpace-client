@@ -4,11 +4,9 @@
   "ErrorViewDescription": "Lütfen daha sonra tekrar deneyin",
   "ErrorViewDescriptionNetworkError": "Görünüşe göre internet bağlantısı yok",
   "ErrorViewHeader": "Galeri geçici olarak kullanılamıyor",
-  "GalleryTitle": "{{organizationName}} Şablon Galerisi",
+  "Purpose": "Amaç",
   "SelectTemplate": "Şablon Seçin",
   "SubmitToGalleryDialogMainInfo": "Şablonunuzu genel galeriye göndererek başkalarının çalışmalarında kullanmasına izin verin. Şablon moderasyondan geçtiğinde, bilgilendirilecek ve katkınız için ödüllendirileceksiniz.",
   "SuggestChanges": "Değişiklik öner",
-  "TemplateInfo": "Şablon bilgisi",
-  "UploadGallery": "Galeride Yükle",
-  "ViewAllTemplates": "Tüm şablonları görüntüle"
+  "TemplateInfo": "Şablon bilgisi"
 }

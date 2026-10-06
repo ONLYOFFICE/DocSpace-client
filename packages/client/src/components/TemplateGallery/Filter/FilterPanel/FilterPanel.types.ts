@@ -33,93 +33,30 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@onlyoffice/apps-ui-kit/styles/mixins";
+import type { TFunction } from "i18next";
+import type {
+  TOformParentCategory,
+  TOformPurpose,
+} from "@docspace/shared/api/oforms/types";
 
-.categoryFilterRoot {
-  position: relative;
-  width: 100%;
+export interface FilterPanelOwnProps {
+  isLoading: boolean;
+  viewMobile: boolean;
 }
 
-.categoryFilter {
-  width: 247px !important;
-
-  :global(.combo-button-label) {
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 20px;
-  }
-
-  :global(.dropdown-container) {
-    margin-top: 4px;
-  }
-}
-
-.categoryFilterItem {
-  width: 247px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding: 8px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16px;
-
-  span {
-    width: 160px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: left;
-  }
-
-  :global(.submenu-arrow) {
-    margin: 0;
-
-    svg {
-      height: 12px;
-      width: 12px;
-    }
-  }
-}
-
-.categoryFilterSubList {
-  position: absolute;
-  top: 0;
-  padding: 4px 0;
-  margin-top: var(--margin-top);
-  inset-inline-start: calc(100% + 4px) !important;
-  max-height: 296px;
-  max-width: auto;
-  visibility: hidden;
-
-  &:before {
-    content: "";
-    position: absolute;
-    inset-inline-start: -4px;
-    top: 0;
-    width: 6px;
-    height: 100%;
-  }
-
-  &.open {
-    &:hover {
-      visibility: visible;
-    }
-  }
-
-  &.open.isSubHovered {
-    visibility: visible;
-  }
-}
-
-.categoryFilterSubListItem {
-  width: 208px;
-  height: 36px;
-  box-sizing: border-box;
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 20px;
+export interface FilterPanelProps extends FilterPanelOwnProps {
+  t: TFunction;
+  oformLocales: string[] | null;
+  locale: string;
+  purposes: TOformPurpose[];
+  purpose: string;
+  parentCategories: TOformParentCategory[];
+  categoryIds: string[];
+  isOformsFilterChanged: boolean;
+  filterOformsByLocaleIsLoading: boolean;
+  filterOformsByLocale: (locale: string) => Promise<void>;
+  filterOformsByPurpose: (purpose: string) => void;
+  toggleOformsCategory: (categoryId: string) => void;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }

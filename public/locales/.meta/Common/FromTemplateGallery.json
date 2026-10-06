@@ -1,0 +1,35 @@
+{
+  "key_path": "FromTemplateGallery",
+  "content": "From template gallery",
+  "content_en_sha1_hash": "0744c4e2b1b7200224c373f0e28e36d73be5f5e8",
+  "created_at": "2026-10-06T10:42:05.892Z",
+  "updated_at": "2026-10-06T10:42:50.491Z",
+  "comment": {
+    "text": "Short title of an option tile in the empty Forms section and in the form space creation dialog; it opens the template gallery to create a form space from a ready-made form. Noun phrase continuing an implied 'Create' (like the sibling 'From template' option), not a verb.",
+    "is_auto": true,
+    "updated_at": "2026-10-06T10:42:50.491Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 431,
+      "context": "onClick: actions.onCreateRoomFromTemplate,\n disabled: false,\n };\n \n const createFormSpaceFromGallery = {\n title: t(\"Common:FromTemplateGallery\"),\n description: t(\"Common:FromTemplateGalleryDescription\"),\n icon: <CreateFromGalleryIcon />,\n key: \"create-form-space-from-gallery\",\n onClick: actions.onOpenTemplateGallery,\n disabled: false,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/room-type/index.tsx",
+      "line_number": 77,
+      "context": "const { t } = useTranslation([\"Common\"]);\n \n const room = {\n type: roomType,\n title: isTemplateGallery\n ? t(\"Common:FromTemplateGallery\")\n : getRoomTypeTitleTranslation(t, roomType, isTemplate, isFormSection),\n description: isTemplateGallery\n ? t(\"Common:FromTemplateGalleryDescription\")\n : getRoomTypeDescriptionTranslation(\n t,",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

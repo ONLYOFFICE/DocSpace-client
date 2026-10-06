@@ -146,12 +146,157 @@ describe("OformsStore.parentCategories", () => {
     expect(store.parentCategories.map(({ id }) => id)).toEqual([30]);
   });
 
+  it("lists the groups in alphabetical order across purposes", () => {
+    const store = createStore();
+    store.setPurposes([
+      {
+        ...purposes[0],
+        parentCategories: [
+          { ...category(11, 0), name: "Sales", subcategories: [category(111, 1)] },
+          { ...category(12, 0), name: "Finance", subcategories: [category(121, 1)] },
+        ],
+      },
+      {
+        ...purposes[1],
+        parentCategories: [
+          { ...category(31, 0), name: "Leisure", subcategories: [category(311, 1)] },
+        ],
+      },
+    ]);
+
+    expect(store.parentCategories.map(({ name }) => name)).toEqual([
+      "Finance",
+      "Leisure",
+      "Sales",
+    ]);
+  });
+
   it("hides categories without templates of the current type", () => {
     const store = createStore();
     store.setPurposes(purposes);
 
     const [integrations] = store.parentCategories;
     expect(integrations.subcategories.map(({ id }) => id)).toEqual([101]);
+  });
+});
+
+describe("OformsStore filter conditions", () => {
+  it("adds and removes categories one by one", async () => {
+    const store = createStore();
+    store.setPurposes(purposes);
+
+    store.toggleOformsCategory("sc-10");
+    store.toggleOformsCategory("sc-30");
+    expect(store.oformsFilter.categoryIds).toEqual(["sc-10", "sc-30"]);
+    expect(store.selectedCategories.map(({ id }) => id)).toEqual([10, 30]);
+
+    store.toggleOformsCategory("sc-10");
+    expect(store.oformsFilter.categoryIds).toEqual(["sc-30"]);
+  });
+
+  it("removes a category only once when its chip reports the removal twice", () => {
+    const store = createStore();
+    store.setPurposes(purposes);
+    store.oformsFilter.categoryIds = ["sc-10", "sc-30"];
+
+    store.removeOformsCategory("sc-10");
+    store.removeOformsCategory("sc-10");
+
+    expect(store.oformsFilter.categoryIds).toEqual(["sc-30"]);
+  });
+
+  it("drops the categories of the other purpose on a purpose switch", () => {
+    const store = createStore();
+    store.setPurposes(purposes);
+    store.oformsFilter.categoryIds = ["sc-10", "sc-30"];
+
+    store.filterOformsByPurpose("personal");
+
+    expect(store.oformsFilter.purpose).toBe("personal");
+    expect(store.oformsFilter.categoryIds).toEqual(["sc-30"]);
+  });
+
+  it("counts only a non-default language, a purpose or a category as a change", async () => {
+    const store = createStore();
+    await store.initTemplateGallery();
+    expect(store.isOformsFilterChanged).toBe(false);
+
+    store.oformsFilter.search = "invoice";
+    expect(store.isOformsFilterChanged).toBe(false);
+
+    store.oformsFilter.purpose = "business";
+    expect(store.isOformsFilterChanged).toBe(true);
+  });
+
+  it("loads the list and the taxonomy together when no category is selected", async () => {
+    const store = createStore();
+    await store.initTemplateGallery();
+    const purposesRequest = deferred<TOformPurpose[]>();
+    api.getOformPurposes.mockReturnValueOnce(purposesRequest.promise);
+    api.getOforms.mockClear();
+
+    const switching = store.filterOformsByLocale("de");
+    await Promise.resolve();
+
+    expect(api.getOforms).toHaveBeenCalledTimes(1);
+
+    purposesRequest.resolve(purposes);
+    await switching;
+  });
+
+  it("ignores Clear all while a language switch is loading", async () => {
+    const store = createStore();
+    await store.initTemplateGallery();
+    store.oformsFilter.purpose = "business";
+    store.setFilterOformsByLocaleIsLoading(true);
+    api.getOforms.mockClear();
+
+    await store.clearOformsFilter();
+
+    expect(store.oformsFilter.purpose).toBe("business");
+    expect(api.getOforms).not.toHaveBeenCalled();
+  });
+
+  it("closes the filter panel on a tab switch", async () => {
+    const store = createStore();
+    store.setFilterPanelVisible(true);
+
+    await store.resetFilters(".xlsx");
+
+    expect(store.filterPanelVisible).toBe(false);
+  });
+
+  it("closes the filter panel together with the gallery", () => {
+    const store = createStore();
+    store.setTemplateGalleryVisible(true);
+    store.setFilterPanelVisible(true);
+
+    store.setTemplateGalleryVisible(false);
+
+    expect(store.filterPanelVisible).toBe(false);
+  });
+
+  it("clears every condition but the search", async () => {
+    const store = createStore();
+    await store.initTemplateGallery();
+    store.oformsFilter.search = "invoice";
+    store.oformsFilter.purpose = "business";
+    store.oformsFilter.categoryIds = ["sc-10"];
+    await store.filterOformsByLocale("de");
+    api.getOformPurposes.mockClear();
+
+    await store.clearOformsFilter();
+
+    expect(store.oformsFilter.locale).toBe("en");
+    expect(store.oformsFilter.purpose).toBe("");
+    expect(store.oformsFilter.categoryIds).toEqual([]);
+    expect(store.oformsFilter.search).toBe("invoice");
+    expect(api.getOformPurposes).toHaveBeenCalledWith(
+      expect.any(String),
+      "en",
+      "docx",
+    );
+    expect(store.isOformsFilterChanged).toBe(false);
   });
 });
 
@@ -196,8 +341,19 @@ describe("OformsStore taxonomy loading", () => {
       "docx",
     );
     expect(store.filterOformsByLocaleIsLoading).toBe(false);
-    expect(store.currentCategory).toBeNull();
-    expect(store.oformsFilter.categoryId).toBe("");
+  });
+
+  it("keeps the selected categories the new language still has", async () => {
+    const store = createStore();
+    await store.initTemplateGallery();
+    store.oformsFilter.categoryIds = ["sc-10", "sc-20", "sc-gone"];
+    api.getOforms.mockClear();
+
+    await store.filterOformsByLocale("de");
+
+    expect(store.oformsFilter.categoryIds).toEqual(["sc-10"]);
+    const [, requested] = api.getOforms.mock.calls[0];
+    expect(requested.categoryIds).toEqual(["sc-10"]);
   });
 
   it("marks the filter as loaded even when the taxonomy request fails", async () => {

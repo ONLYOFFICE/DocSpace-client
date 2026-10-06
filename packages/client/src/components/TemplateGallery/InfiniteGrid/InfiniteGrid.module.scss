@@ -66,11 +66,6 @@
   &.Card {
     height: 100%;
   }
-
-  /* Double width for SubmitToGalleryTile when smallPreview is true */
-  &.doubleWidth {
-    grid-column: span 2;
-  }
 }
 
 .item {

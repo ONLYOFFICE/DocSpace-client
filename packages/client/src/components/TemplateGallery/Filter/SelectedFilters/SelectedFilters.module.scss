@@ -33,20 +33,20 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TFunction } from "i18next";
+.selectedFilters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  padding-inline-start: 4px;
+}
 
-import type { TOformPurpose } from "@docspace/shared/api/oforms/types";
+.selectedItem {
+  --selected-item-margin-inline: 0;
+  --selected-item-margin-bottom: 0;
+}
 
-export interface PurposeFilterProps {
-  t: TFunction;
-  /** Business and Personal, as the CMS names them in the gallery locale. */
-  purposes: TOformPurpose[];
-  /** Key of the selected purpose; empty means both. */
-  currentPurpose: string;
-  filterOformsByPurpose: (purpose: string) => void;
-  filterOformsByLocaleIsLoading: boolean;
-  categoryFilterLoaded: boolean;
-  languageFilterLoaded: boolean;
-  isShowInitSkeleton: boolean;
-  isLanguageFilterChange: boolean;
+.clearAll {
+  margin-inline-start: 8px;
 }

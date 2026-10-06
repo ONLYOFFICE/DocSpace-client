@@ -218,6 +218,8 @@ const InjectedEmptyViewContainer = inject<
       knowledgeId,
       startUpload,
       createFoldersTree,
+      templateGalleryAvailable: settingsStore.templateGalleryAvailable,
+      onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

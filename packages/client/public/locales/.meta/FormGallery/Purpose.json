@@ -1,20 +1,19 @@
 {
-  "key_path": "SubmitToGalleryBlockBody",
-  "content": "Submit your templates to share them with the {{organizationName}} community.",
-  "content_en_sha1_hash": "f402c1826e5738eb55c2ef6d097ef02787db7f76",
-  "created_at": "2025-05-19T21:30:49.165Z",
-  "updated_at": "2026-09-16T20:56:59.601Z",
+  "key_path": "Purpose",
+  "content": "Purpose",
+  "content_en_sha1_hash": "a0fb821bdaf93ed9a1f1e920acfb2840eff5b153",
+  "created_at": "2026-10-02T13:07:07.537Z",
+  "updated_at": "2026-10-06T10:42:37.509Z",
   "comment": {
-    "text": "This is the body text for a block encouraging users to submit templates. It appears within the template gallery and includes the variable `{{organizationName}}` which will be replaced by the name of the organization.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T20:41:48.829Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "Heading of a section in the template gallery filter panel. Under it the user picks who the templates are meant for: All, Business or Personal.",
+    "is_auto": false,
+    "updated_at": "2026-10-02T13:07:07.537Z"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/TemplateGallery/Tiles/SubmitToGalleryTile.tsx",
-      "line_number": 115,
-      "context": "{t(\"FormGallery:GalleryTitle\", {\n organizationName: logoText,\n })}\n </div>\n <div className={styles.body}>\n {t(\"Common:SubmitToGalleryBlockBody\", {\n organizationName: logoText,\n })}\n </div>\n </div>",
+      "file_path": "/packages/client/src/components/TemplateGallery/Filter/FilterPanel/index.tsx",
+      "line_number": 183,
+      "context": ") : null}\n \n {purposes.length > 1 ? (\n <div className={styles.section}>\n <Text className={styles.sectionHeader} fontWeight={600}>\n {t(\"FormGallery:Purpose\")}\n </Text>\n <RadioButtonGroup\n name=\"template-gallery-purpose\"\n orientation=\"vertical\"\n spacing=\"10px\"",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +148,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +205,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

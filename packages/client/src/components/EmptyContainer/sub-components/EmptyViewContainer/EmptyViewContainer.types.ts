@@ -133,6 +133,8 @@ export interface InjectedEmptyViewContainerProps
   knowledgeId: number | null;
   startUpload: TStore["uploadDataStore"]["startUpload"];
   createFoldersTree: TStore["filesActionsStore"]["createFoldersTree"];
+  templateGalleryAvailable: boolean;
+  onShowTemplateGallery: TStore["contextOptionsStore"]["onShowTemplateGallery"];
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &
@@ -157,6 +159,8 @@ export type OptionActions = {
   createAndCopySharedLink: VoidFunction;
   openInfoPanel: VoidFunction;
   onCreateRoom: VoidFunction;
+  onCreateRoomFromTemplate: VoidFunction;
+  onOpenTemplateGallery: VoidFunction;
   inviteRootUser: ContactsConextOptionsStore["inviteUser"];
   onGoToPersonal: () => LinkProps;
   onGoToShared: () => LinkProps;

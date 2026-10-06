@@ -43,15 +43,12 @@ interface UseTemplateGalleryHotkeysProps {
   onInfoSelect?: (index: number) => void;
   enabled?: boolean;
   resetKey?: unknown;
-  hasSubmitTile?: boolean;
-  submitTileSpan?: number;
 }
 
 interface UseTemplateGalleryHotkeysReturn {
   focusedIndex: number;
   setFocusedIndex: (index: number) => void;
   resetFocus: () => void;
-  isSubmitTileFocused: boolean;
 }
 
 const useTemplateGalleryHotkeys = ({
@@ -61,16 +58,11 @@ const useTemplateGalleryHotkeys = ({
   onInfoSelect,
   enabled = true,
   resetKey,
-  hasSubmitTile = false,
-  submitTileSpan = 1,
 }: UseTemplateGalleryHotkeysProps): UseTemplateGalleryHotkeysReturn => {
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
-  const [rawFocusedIndex, setRawFocusedIndex] = useState<number>(-1);
   const focusedIndexRef = useRef<number>(-1);
   const rafIdRef = useRef<number | null>(null);
   const pendingIndexRef = useRef<number | null>(null);
-  const hasSubmitTileRef = useRef<boolean>(hasSubmitTile);
-  const submitTileSpanRef = useRef<number>(submitTileSpan);
 
   const getColumnsCount = useCallback(() => {
     return getCountTilesInRow(false, false, true, isShowOneTile);
@@ -78,92 +70,6 @@ const useTemplateGalleryHotkeys = ({
 
   const resetFocus = useCallback(() => {
     setFocusedIndex(-1);
-    setRawFocusedIndex(-1);
-  }, []);
-
-  useEffect(() => {
-    hasSubmitTileRef.current = hasSubmitTile;
-  }, [hasSubmitTile]);
-
-  useEffect(() => {
-    submitTileSpanRef.current = submitTileSpan;
-  }, [submitTileSpan]);
-
-  const getSubmitSpan = useCallback((columnsCount: number) => {
-    if (!hasSubmitTileRef.current) return 1;
-    const span = submitTileSpanRef.current || 1;
-    return Math.max(1, Math.min(span, columnsCount));
-  }, []);
-
-  const getPositionByRawIndex = useCallback(
-    (rawIndex: number, columnsCount: number) => {
-      if (rawIndex < 0) return { row: -1, col: -1 };
-
-      if (!hasSubmitTileRef.current) {
-        return {
-          row: Math.floor(rawIndex / columnsCount),
-          col: rawIndex % columnsCount,
-        };
-      }
-
-      const span = getSubmitSpan(columnsCount);
-      const firstRowCount = columnsCount - span + 1;
-
-      if (rawIndex === 0) return { row: 0, col: 0 };
-
-      if (rawIndex < firstRowCount) {
-        return { row: 0, col: span + (rawIndex - 1) };
-      }
-
-      const offset = rawIndex - firstRowCount;
-      return {
-        row: 1 + Math.floor(offset / columnsCount),
-        col: offset % columnsCount,
-      };
-    },
-    [getSubmitSpan],
-  );
-
-  const getRawIndexByPosition = useCallback(
-    (row: number, col: number, columnsCount: number, totalCount: number) => {
-      if (row < 0 || col < 0 || col >= columnsCount) return -1;
-
-      let rawIndex = -1;
-
-      if (!hasSubmitTileRef.current) {
-        rawIndex = row * columnsCount + col;
-      } else {
-        const span = getSubmitSpan(columnsCount);
-        const firstRowCount = columnsCount - span + 1;
-
-        if (row === 0) {
-          rawIndex = col < span ? 0 : 1 + (col - span);
-        } else {
-          rawIndex = firstRowCount + (row - 1) * columnsCount + col;
-        }
-      }
-
-      if (rawIndex < 0 || rawIndex >= totalCount) return -1;
-      return rawIndex;
-    },
-    [getSubmitSpan],
-  );
-
-  const getTotalCount = useCallback(() => {
-    return itemsCount + (hasSubmitTileRef.current ? 1 : 0);
-  }, [itemsCount]);
-
-  const rawToFileIndex = useCallback((rawIndex: number) => {
-    if (rawIndex < 0) return -1;
-    if (hasSubmitTileRef.current) return rawIndex === 0 ? -1 : rawIndex - 1;
-    return rawIndex;
-  }, []);
-
-  const getSubmitButton = useCallback(() => {
-    const scrollRoot = document.getElementById("scroll-template-gallery");
-    return scrollRoot?.querySelector(
-      '[data-submit-tile="true"] button',
-    ) as HTMLButtonElement | null;
   }, []);
 
   useEffect(() => {
@@ -178,37 +84,16 @@ const useTemplateGalleryHotkeys = ({
     resetFocus();
   }, [resetKey, resetFocus]);
 
-  const scrollToFocusedItem = useCallback((rawIndex: number) => {
+  const scrollToFocusedItem = useCallback((index: number) => {
     const scrollRoot = document.getElementById("scroll-template-gallery");
     if (!scrollRoot) return;
 
-    const fileIndex = rawToFileIndex(rawIndex);
-
-    let element: HTMLElement | null = null;
-    if (fileIndex === -1 && hasSubmitTileRef.current) {
-      element = scrollRoot.querySelector(
-        '[data-submit-tile="true"]',
-      ) as HTMLElement | null;
-    } else {
-      const cards = scrollRoot.querySelectorAll(".Card");
-
-      const submitTileElement = scrollRoot.querySelector(
-        '[data-submit-tile="true"]',
-      ) as HTMLElement | null;
-      const submitTileCard = submitTileElement?.closest(
-        ".Card",
-      ) as HTMLElement | null;
-
-      const submitCardOffset = submitTileCard ? 1 : 0;
-      const cardIndex = fileIndex + submitCardOffset;
-
-      if (!cards[cardIndex]) return;
-      element = cards[cardIndex] as HTMLElement;
-    }
-
+    const element = scrollRoot.querySelectorAll(".Card")[index] as
+      | HTMLElement
+      | undefined;
     if (!element) return;
 
-    const scrollContainer = scrollRoot?.querySelector(
+    const scrollContainer = scrollRoot.querySelector(
       ".scroller",
     ) as HTMLElement | null;
 
@@ -236,16 +121,10 @@ const useTemplateGalleryHotkeys = ({
       pendingIndexRef.current = null;
       focusedIndexRef.current = nextIndex;
 
-      const nextFileIndex = rawToFileIndex(nextIndex);
-      setFocusedIndex(nextFileIndex);
-      setRawFocusedIndex(nextIndex);
+      setFocusedIndex(nextIndex);
       scrollToFocusedItem(nextIndex);
-
-      if (hasSubmitTileRef.current && nextIndex === 0) {
-        getSubmitButton()?.focus();
-      }
     });
-  }, [getSubmitButton, rawToFileIndex, scrollToFocusedItem]);
+  }, [scrollToFocusedItem]);
 
   useEffect(() => {
     return () => {
@@ -256,29 +135,54 @@ const useTemplateGalleryHotkeys = ({
     };
   }, []);
 
-
   useEffect(() => {
-    const totalCount = getTotalCount();
-    if (totalCount <= 0) {
+    if (itemsCount <= 0) {
       focusedIndexRef.current = -1;
       pendingIndexRef.current = null;
       setFocusedIndex(-1);
-      setRawFocusedIndex(-1);
       return;
     }
 
-    const currentRaw = focusedIndexRef.current;
-    if (currentRaw >= totalCount) {
-      const nextRaw = totalCount - 1;
-      focusedIndexRef.current = nextRaw;
+    if (focusedIndexRef.current >= itemsCount) {
+      const nextIndex = itemsCount - 1;
+      focusedIndexRef.current = nextIndex;
       pendingIndexRef.current = null;
-      setFocusedIndex(rawToFileIndex(nextRaw));
-      setRawFocusedIndex(nextRaw);
+      setFocusedIndex(nextIndex);
     }
-  }, [getTotalCount, itemsCount, rawToFileIndex, hasSubmitTile]);
+  }, [itemsCount]);
 
   useEffect(() => {
     if (!enabled || itemsCount === 0) return;
+
+    const getIndexByPosition = (
+      row: number,
+      col: number,
+      columnsCount: number,
+    ) => {
+      if (row < 0 || col < 0 || col >= columnsCount) return -1;
+
+      const index = row * columnsCount + col;
+      return index < itemsCount ? index : -1;
+    };
+
+    const moveFocus = (rowDelta: number, colDelta: number) => {
+      const columnsCount = getColumnsCount();
+      const currentIndex = pendingIndexRef.current ?? focusedIndexRef.current;
+
+      let newIndex = 0;
+
+      if (currentIndex !== -1) {
+        const candidate = getIndexByPosition(
+          Math.floor(currentIndex / columnsCount) + rowDelta,
+          (currentIndex % columnsCount) + colDelta,
+          columnsCount,
+        );
+        newIndex = candidate === -1 ? currentIndex : candidate;
+      }
+
+      pendingIndexRef.current = newIndex;
+      scheduleFocusUpdate();
+    };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
@@ -286,151 +190,53 @@ const useTemplateGalleryHotkeys = ({
         return;
       }
 
-      const columnsCount = getColumnsCount();
-      const totalCount = getTotalCount();
       const currentIndex = pendingIndexRef.current ?? focusedIndexRef.current;
-
-      const currentPos = getPositionByRawIndex(currentIndex, columnsCount);
+      const isFocusedValid = currentIndex >= 0 && currentIndex < itemsCount;
 
       switch (e.key) {
-        case "ArrowDown": {
+        case "ArrowDown":
           e.preventDefault();
           e.stopPropagation();
-          let newIndex = 0;
-
-          if (currentIndex === -1) {
-            newIndex = 0;
-          } else {
-            const candidate = getRawIndexByPosition(
-              currentPos.row + 1,
-              currentPos.col,
-              columnsCount,
-              totalCount,
-            );
-            newIndex = candidate === -1 ? currentIndex : candidate;
-          }
-
-          pendingIndexRef.current = newIndex;
-          scheduleFocusUpdate();
-
+          moveFocus(1, 0);
           break;
-        }
-        case "ArrowUp": {
+        case "ArrowUp":
           e.preventDefault();
           e.stopPropagation();
-          let newIndex = 0;
-
-          if (currentIndex === -1) {
-            newIndex = 0;
-          } else {
-            const candidate = getRawIndexByPosition(
-              currentPos.row - 1,
-              currentPos.col,
-              columnsCount,
-              totalCount,
-            );
-            newIndex = candidate === -1 ? currentIndex : candidate;
-          }
-
-          pendingIndexRef.current = newIndex;
-          scheduleFocusUpdate();
-
+          moveFocus(-1, 0);
           break;
-        }
-        case "ArrowRight": {
+        case "ArrowRight":
           e.preventDefault();
           e.stopPropagation();
-          let newIndex = 0;
-
-          if (currentIndex === -1) {
-            newIndex = 0;
-          } else {
-            const step =
-              hasSubmitTileRef.current && currentIndex === 0
-                ? getSubmitSpan(columnsCount)
-                : 1;
-
-            const candidate = getRawIndexByPosition(
-              currentPos.row,
-              currentPos.col + step,
-              columnsCount,
-              totalCount,
-            );
-
-            newIndex = candidate === -1 ? currentIndex : candidate;
-          }
-
-          pendingIndexRef.current = newIndex;
-          scheduleFocusUpdate();
-
+          moveFocus(0, 1);
           break;
-        }
-        case "ArrowLeft": {
+        case "ArrowLeft":
           e.preventDefault();
           e.stopPropagation();
-          let newIndex = 0;
-
-          if (currentIndex === -1) {
-            newIndex = 0;
-          } else {
-            const candidate = getRawIndexByPosition(
-              currentPos.row,
-              currentPos.col - 1,
-              columnsCount,
-              totalCount,
-            );
-
-            newIndex = candidate === -1 ? currentIndex : candidate;
-          }
-
-          pendingIndexRef.current = newIndex;
-          scheduleFocusUpdate();
-
+          moveFocus(0, -1);
           break;
-        }
-        case "Enter": {
+        case "Enter":
           e.preventDefault();
           e.stopPropagation();
-          if (hasSubmitTileRef.current && currentIndex === 0) {
-            getSubmitButton()?.click();
-            return;
-          }
-
-          const fileIndex = rawToFileIndex(currentIndex);
-          if (fileIndex >= 0 && fileIndex < itemsCount) {
-            onSelect?.(fileIndex);
-          }
+          if (isFocusedValid) onSelect?.(currentIndex);
           break;
-        }
         case "i":
-        case "I": {
+        case "I":
           e.preventDefault();
           e.stopPropagation();
-
-          const fileIndex = rawToFileIndex(currentIndex);
-          if (fileIndex >= 0 && fileIndex < itemsCount) {
-            onInfoSelect?.(fileIndex);
-          }
-
+          if (isFocusedValid) onInfoSelect?.(currentIndex);
           break;
-        }
-        case "Home": {
+        case "Home":
           e.preventDefault();
           e.stopPropagation();
           pendingIndexRef.current = 0;
           scheduleFocusUpdate();
-
           break;
-        }
-        case "End": {
+        case "End":
           e.preventDefault();
           e.stopPropagation();
-          const lastIndex = totalCount - 1;
-          pendingIndexRef.current = lastIndex >= 0 ? lastIndex : 0;
+          pendingIndexRef.current = itemsCount - 1;
           scheduleFocusUpdate();
-
           break;
-        }
         default:
           break;
       }
@@ -449,22 +255,15 @@ const useTemplateGalleryHotkeys = ({
     enabled,
     itemsCount,
     getColumnsCount,
-    getTotalCount,
-    getPositionByRawIndex,
-    getRawIndexByPosition,
-    getSubmitSpan,
     scheduleFocusUpdate,
     onSelect,
     onInfoSelect,
-    rawToFileIndex,
-    getSubmitButton,
   ]);
 
   return {
     focusedIndex,
     setFocusedIndex,
     resetFocus,
-    isSubmitTileFocused: hasSubmitTile && rawFocusedIndex === 0,
   };
 };
 

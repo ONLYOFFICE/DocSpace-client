@@ -52,8 +52,6 @@ export const PersistenceKeys = {
   bannerIndex: "bannerIndex",
   /** Raw view mode string: "tile" | "table" | "row" (FilesStore) */
   viewAs: "viewAs",
-  /** Presence flag ("true") — submit-to-gallery tile hidden (OformsStore) */
-  submitToGalleryTileIsHidden: "submitToGalleryTileIsHidden",
   /** "true" | "false" — live chat visibility (ProfileActionsStore) */
   liveChatState: LIVE_CHAT_LOCAL_STORAGE_KEY,
   /** Presence flag set by the public room auth window (PublicRoomStore) */

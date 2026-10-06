@@ -76,8 +76,8 @@ export const moveItem = <T>(items: T[], from: number, to: number): T[] => {
   return next;
 };
 
-export const toFieldDrafts = (fields: TMetadataField[] | null): TFieldDraft[] =>
-  [...(fields ?? [])]
+export const toFieldDrafts = (fields: TMetadataField[] = []): TFieldDraft[] =>
+  [...fields]
     .sort((a, b) => a.order - b.order)
     .map((field) => ({
       key: `field-${field.id}`,
@@ -93,7 +93,7 @@ export const toTemplateDraft = (
 ): TTemplateDraft => ({
   name: template?.name ?? "",
   visible: template?.visible ?? true,
-  fields: toFieldDrafts(template?.fields ?? null),
+  fields: toFieldDrafts(template?.fields),
 });
 
 export const createFieldForm = (key: string): TFieldForm => ({

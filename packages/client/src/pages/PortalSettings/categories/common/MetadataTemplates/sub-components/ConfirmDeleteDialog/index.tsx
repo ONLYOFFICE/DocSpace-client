@@ -43,16 +43,20 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-type DeleteTemplateDialogProps = {
+type ConfirmDeleteDialogProps = {
+  title: string;
+  description: string;
   onDelete: () => Promise<void>;
   onClose: () => void;
 };
 
-const DeleteTemplateDialog = ({
+const ConfirmDeleteDialog = ({
+  title,
+  description,
   onDelete,
   onClose,
-}: DeleteTemplateDialogProps) => {
-  const { t } = useTranslation(["Metadata", "Common"]);
+}: ConfirmDeleteDialogProps) => {
+  const { t } = useTranslation(["Common"]);
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async () => {
@@ -65,15 +69,14 @@ const DeleteTemplateDialog = ({
     <ModalDialog
       visible
       autoMaxHeight
+      zIndex={312}
       displayType={ModalDialogType.modal}
       onClose={onClose}
-      dataTestId="metadata_delete_template_dialog"
+      dataTestId="metadata_confirm_delete_dialog"
     >
-      <ModalDialog.Header>
-        {t("Metadata:DeleteTemplateTitle")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{t("Metadata:DeleteTemplateDescription")}</Text>
+        <Text>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -83,7 +86,7 @@ const DeleteTemplateDialog = ({
           label={t("Common:Delete")}
           isLoading={isLoading}
           onClick={onSubmit}
-          testId="metadata_delete_template_button"
+          testId="metadata_confirm_delete_button"
         />
         <Button
           scale
@@ -97,4 +100,4 @@ const DeleteTemplateDialog = ({
   );
 };
 
-export default DeleteTemplateDialog;
+export default ConfirmDeleteDialog;

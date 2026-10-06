@@ -36,15 +36,16 @@
 import { request } from "../client";
 import type {
   TAssignMetadataTemplatesRequest,
+  TCustomField,
+  TCustomFieldRequest,
   TEntryMetadata,
   TMetadataEntryKind,
   TMetadataField,
   TMetadataFieldRequest,
-  TMetadataFieldSuggestion,
   TMetadataOperation,
   TMetadataTemplate,
   TMetadataTemplateRequest,
-  TMetadataValue,
+  TMetadataValueRequest,
 } from "./types";
 
 const baseUrl = "/files/metadata";
@@ -138,7 +139,7 @@ export async function getEntryMetadata(
     signal,
   });
 
-  return res as TEntryMetadata[];
+  return res as TEntryMetadata;
 }
 
 export async function assignMetadataTemplates(
@@ -161,7 +162,7 @@ export async function getMetadataCascadeProgress(folderId: number) {
     url: `${baseUrl}/folder/${folderId}/templates/progress`,
   });
 
-  return (res ?? null) as TMetadataOperation | null;
+  return res as TMetadataOperation;
 }
 
 export async function unassignMetadataTemplate(
@@ -178,7 +179,7 @@ export async function unassignMetadataTemplate(
 export async function setMetadataValues(
   kind: TMetadataEntryKind,
   entryId: number,
-  values: TMetadataValue[],
+  values: TMetadataValueRequest[],
 ) {
   const res = await request({
     method: "put",
@@ -186,44 +187,19 @@ export async function setMetadataValues(
     data: { values },
   });
 
-  return res as TMetadataValue[];
+  return res as TEntryMetadata;
 }
 
-export async function addMetadataCustomField(
+export async function setMetadataCustomFields(
   kind: TMetadataEntryKind,
   entryId: number,
-  data: { name: string; value: string },
+  fields: TCustomFieldRequest[],
 ) {
   const res = await request({
-    method: "post",
-    url: `${baseUrl}/${kind}/${entryId}/customfield`,
-    data,
+    method: "put",
+    url: `${baseUrl}/${kind}/${entryId}/customFields`,
+    data: { fields },
   });
 
-  return (res ?? null) as TMetadataValue | null;
-}
-
-export async function autofillMetadata(data: {
-  fileId: number;
-  templateId?: number;
-  overwrite?: boolean;
-  dryRun?: boolean;
-}) {
-  const res = await request({
-    method: "post",
-    url: "/ai/metadata/autofill",
-    data,
-  });
-
-  return res as TMetadataValue[];
-}
-
-export async function suggestMetadataFields(fileId: number) {
-  const res = await request({
-    method: "post",
-    url: "/ai/metadata/suggest-fields",
-    data: { fileId },
-  });
-
-  return res as TMetadataFieldSuggestion[];
+  return res as TCustomField[];
 }

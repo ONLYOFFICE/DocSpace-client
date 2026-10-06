@@ -46,7 +46,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { useMetadataTemplates } from "./hooks/useMetadataTemplates";
 import TemplatesView from "./sub-components";
 import TemplatePanel from "./sub-components/TemplatePanel";
-import DeleteTemplateDialog from "./sub-components/DeleteTemplateDialog";
+import ConfirmDeleteDialog from "./sub-components/ConfirmDeleteDialog";
 import styles from "./MetadataTemplates.module.scss";
 
 const MetadataTemplates = () => {
@@ -105,7 +105,9 @@ const MetadataTemplates = () => {
       ) : null}
 
       {deletingTemplate ? (
-        <DeleteTemplateDialog
+        <ConfirmDeleteDialog
+          title={t("Metadata:DeleteTemplateTitle")}
+          description={t("Metadata:DeleteTemplateDescription")}
           onDelete={() => removeTemplate(deletingTemplate)}
           onClose={() => setDeletingTemplate(null)}
         />

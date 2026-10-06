@@ -37,7 +37,7 @@ import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { Settings } from "luxon";
 
 import { MetadataFieldType } from "../enums";
-import type { TMetadataField } from "../api/metadata/types";
+import type { TMetadataValue } from "../api/metadata/types";
 import {
   getMetadataDate,
   getMetadataInput,
@@ -45,13 +45,10 @@ import {
   toMetadataValue,
 } from "./metadata";
 
-const field = (type: MetadataFieldType): TMetadataField => ({
+const field = (type: MetadataFieldType, value?: TMetadataValue) => ({
   id: 7,
-  templateId: 1,
-  name: "Field",
   type,
-  options: null,
-  order: 0,
+  value,
 });
 
 describe("getMetadataDate", () => {
@@ -74,8 +71,8 @@ describe("getMetadataDate", () => {
   });
 
   it("returns an empty string for a missing date", () => {
-    expect(getMetadataDate(null)).toBe("");
     expect(getMetadataDate(undefined)).toBe("");
+    expect(getMetadataDate("")).toBe("");
   });
 });
 
@@ -100,10 +97,11 @@ describe("toMetadataValue / getMetadataInput", () => {
       dateValue: "2026-09-15T00:00:00.000Z",
     });
     expect(
-      getMetadataInput(date, {
-        fieldId: 7,
-        dateValue: "2026-09-15T03:00:00.0000000+03:00",
-      }),
+      getMetadataInput(
+        field(MetadataFieldType.Date, {
+          dateValue: "2026-09-15T03:00:00.0000000+03:00",
+        }),
+      ),
     ).toBe("2026-09-15");
   });
 
@@ -114,9 +112,9 @@ describe("toMetadataValue / getMetadataInput", () => {
       fieldId: 7,
       numberValue: 1250000,
     });
-    expect(getMetadataInput(number, { fieldId: 7, numberValue: 42 })).toBe(
-      "42",
-    );
+    expect(
+      getMetadataInput(field(MetadataFieldType.Number, { numberValue: 42 })),
+    ).toBe("42");
     expect(toMetadataValue(field(MetadataFieldType.String), "ACME")).toEqual({
       fieldId: 7,
       stringValue: "ACME",
@@ -143,16 +141,16 @@ describe("toMetadataValue / getMetadataInput", () => {
     });
     expect(toMetadataValue(multi, [])).toEqual({ fieldId: 7, optionIds: [] });
     expect(
-      getMetadataInput(field(MetadataFieldType.SingleChoice), {
-        fieldId: 7,
-        optionIds: null,
-      }),
-    ).toEqual([]);
+      getMetadataInput(
+        field(MetadataFieldType.SingleChoice, { optionIds: ["a"] }),
+      ),
+    ).toEqual(["a"]);
   });
 
   it("reads missing values as empty inputs", () => {
     expect(getMetadataInput(field(MetadataFieldType.String))).toBe("");
     expect(getMetadataInput(field(MetadataFieldType.Number))).toBe("");
     expect(getMetadataInput(field(MetadataFieldType.Date))).toBe("");
+    expect(getMetadataInput(field(MetadataFieldType.MultiChoice))).toEqual([]);
   });
 });

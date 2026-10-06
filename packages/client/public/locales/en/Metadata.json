@@ -1,6 +1,8 @@
 {
   "AddField": "Add field",
   "AddOption": "Add option",
+  "DeleteFieldsDescription": "The removed fields will be deleted together with their values in all files, folders and rooms. This action cannot be undone.",
+  "DeleteFieldsTitle": "Delete fields?",
   "DeleteTemplateDescription": "The template will no longer be available for assignment, and its values will be removed from all files, folders and rooms.",
   "DeleteTemplateTitle": "Delete template?",
   "EditField": "Edit field",

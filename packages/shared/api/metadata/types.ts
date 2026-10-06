@@ -47,7 +47,7 @@ export type TMetadataField = {
   templateId: number;
   name: string;
   type: MetadataFieldType;
-  options: TMetadataFieldOption[] | null;
+  options?: TMetadataFieldOption[];
   order: number;
 };
 
@@ -55,32 +55,55 @@ export type TMetadataTemplate = {
   id: number;
   name: string;
   visible: boolean;
-  isSystem: boolean;
   createBy: string;
   createOn: string;
   modifiedBy: string;
   modifiedOn: string;
-  fields: TMetadataField[] | null;
+  fields?: TMetadataField[];
 };
 
 export type TMetadataValue = {
+  stringValue?: string;
+  numberValue?: number;
+  dateValue?: string;
+  optionIds?: string[];
+};
+
+export type TMetadataValueRequest = TMetadataValue & {
   fieldId: number;
-  stringValue?: string | null;
-  numberValue?: number | null;
-  dateValue?: string | null;
-  optionIds?: string[] | null;
+};
+
+export type TEntryMetadataField = Omit<TMetadataField, "templateId"> & {
+  value?: TMetadataValue;
+};
+
+export type TEntryMetadataTemplate = Pick<
+  TMetadataTemplate,
+  "id" | "name" | "visible"
+> & {
+  fields: TEntryMetadataField[];
+};
+
+export type TCustomField = {
+  name: string;
+  value: string;
+};
+
+export type TCustomFieldRequest = {
+  name: string;
+  value: string | null;
 };
 
 export type TEntryMetadata = {
-  template: TMetadataTemplate;
-  values: TMetadataValue[] | null;
+  templates: TEntryMetadataTemplate[];
+  customFields: TCustomField[];
 };
 
 export type TMetadataOperation = {
-  id: string;
+  id?: string;
   progress: number;
   isCompleted: boolean;
-  error: string | null;
+  error?: string;
 };
 
 export type TMetadataFieldRequest = {
@@ -99,12 +122,7 @@ export type TMetadataTemplateRequest = {
 export type TAssignMetadataTemplatesRequest = {
   templateIds: number[];
   cascade?: boolean;
-  conflictResolveType?: ConflictResolveType.Skip | ConflictResolveType.Overwrite;
-};
-
-export type TMetadataFieldSuggestion = {
-  title: string;
-  type: MetadataFieldType;
-  options: string[] | null;
-  value: string | null;
+  conflictResolveType?:
+    | ConflictResolveType.Skip
+    | ConflictResolveType.Overwrite;
 };

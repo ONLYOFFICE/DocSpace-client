@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
@@ -44,6 +45,7 @@ import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
 
 import { useTemplateEditor } from "../../hooks/useTemplateEditor";
 import { isValidField } from "../../utils";
+import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
 import FieldForm from "./FieldForm";
 import TemplateForm from "./TemplateForm";
 
@@ -62,6 +64,7 @@ const TemplatePanel = ({ template, onClose, onSaved }: TemplatePanelProps) => {
     isNewField,
     isSaving,
     canSave,
+    hasRemovedFields,
     changeDraft,
     setFieldForm,
     addField,
@@ -72,6 +75,11 @@ const TemplatePanel = ({ template, onClose, onSaved }: TemplatePanelProps) => {
     save,
   } = useTemplateEditor(template, onSaved);
 
+  const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
+
+  const onSave = () =>
+    hasRemovedFields ? setIsDeleteConfirmVisible(true) : save();
+
   const getTitle = () => {
     if (fieldForm)
       return isNewField ? t("Metadata:AddField") : t("Metadata:EditField");
@@ -80,64 +88,77 @@ const TemplatePanel = ({ template, onClose, onSaved }: TemplatePanelProps) => {
   };
 
   return (
-    <ModalDialog
-      visible
-      withBodyScroll
-      displayType={ModalDialogType.aside}
-      isBackButton={!!fieldForm}
-      onBackClick={closeField}
-      onClose={onClose}
-      dataTestId="metadata_template_panel"
-    >
-      <ModalDialog.Header>{getTitle()}</ModalDialog.Header>
+    <>
+      <ModalDialog
+        visible
+        withBodyScroll
+        displayType={ModalDialogType.aside}
+        isBackButton={!!fieldForm}
+        onBackClick={closeField}
+        onClose={onClose}
+        dataTestId="metadata_template_panel"
+      >
+        <ModalDialog.Header>{getTitle()}</ModalDialog.Header>
 
-      <ModalDialog.Body>
-        {fieldForm ? (
-          <FieldForm value={fieldForm} onChange={setFieldForm} />
-        ) : (
-          <TemplateForm
-            draft={draft}
-            onChange={changeDraft}
-            onAddField={addField}
-            onEditField={setFieldForm}
-            onMoveField={moveField}
-            onRemoveField={removeField}
-          />
-        )}
-      </ModalDialog.Body>
+        <ModalDialog.Body>
+          {fieldForm ? (
+            <FieldForm value={fieldForm} onChange={setFieldForm} />
+          ) : (
+            <TemplateForm
+              draft={draft}
+              onChange={changeDraft}
+              onAddField={addField}
+              onEditField={setFieldForm}
+              onMoveField={moveField}
+              onRemoveField={removeField}
+            />
+          )}
+        </ModalDialog.Body>
 
-      <ModalDialog.Footer>
-        {fieldForm ? (
+        <ModalDialog.Footer>
+          {fieldForm ? (
+            <Button
+              primary
+              scale
+              size={ButtonSize.normal}
+              label={
+                isNewField ? t("Common:AddButton") : t("Common:SaveButton")
+              }
+              isDisabled={!isValidField(fieldForm)}
+              onClick={submitField}
+              testId="metadata_field_submit_button"
+            />
+          ) : (
+            <Button
+              primary
+              scale
+              size={ButtonSize.normal}
+              label={t("Common:SaveButton")}
+              isDisabled={!canSave}
+              isLoading={isSaving}
+              onClick={onSave}
+              testId="metadata_template_save_button"
+            />
+          )}
           <Button
-            primary
             scale
             size={ButtonSize.normal}
-            label={isNewField ? t("Common:AddButton") : t("Common:SaveButton")}
-            isDisabled={!isValidField(fieldForm)}
-            onClick={submitField}
-            testId="metadata_field_submit_button"
+            label={t("Common:CancelButton")}
+            onClick={fieldForm ? closeField : onClose}
+            testId="metadata_cancel_button"
           />
-        ) : (
-          <Button
-            primary
-            scale
-            size={ButtonSize.normal}
-            label={t("Common:SaveButton")}
-            isDisabled={!canSave}
-            isLoading={isSaving}
-            onClick={save}
-            testId="metadata_template_save_button"
-          />
-        )}
-        <Button
-          scale
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-          onClick={fieldForm ? closeField : onClose}
-          testId="metadata_cancel_button"
+        </ModalDialog.Footer>
+      </ModalDialog>
+
+      {isDeleteConfirmVisible ? (
+        <ConfirmDeleteDialog
+          title={t("Metadata:DeleteFieldsTitle")}
+          description={t("Metadata:DeleteFieldsDescription")}
+          onDelete={save}
+          onClose={() => setIsDeleteConfirmVisible(false)}
         />
-      </ModalDialog.Footer>
-    </ModalDialog>
+      ) : null}
+    </>
   );
 };
 

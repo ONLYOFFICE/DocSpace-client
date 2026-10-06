@@ -90,6 +90,9 @@ export const useTemplateEditor = (
   const isNewField =
     !!fieldForm && !draft.fields.some((field) => field.key === fieldForm.key);
 
+  const hasRemovedFields =
+    !!template && getTemplateChanges(template, draft).removed.length > 0;
+
   const changeDraft = (patch: Partial<TTemplateDraft>) =>
     setDraft((prev) => ({ ...prev, ...patch }));
 
@@ -157,6 +160,7 @@ export const useTemplateEditor = (
     isNewField,
     isSaving,
     canSave: canSaveTemplate(template, draft),
+    hasRemovedFields,
     changeDraft,
     setFieldForm,
     addField,

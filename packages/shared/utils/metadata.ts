@@ -36,21 +36,24 @@
 import { DateTime } from "luxon";
 
 import { MetadataFieldType } from "../enums";
-import type { TMetadataField, TMetadataValue } from "../api/metadata/types";
+import type {
+  TEntryMetadataField,
+  TMetadataValueRequest,
+} from "../api/metadata/types";
 
 export type TMetadataInput = string | string[];
 
-export const getMetadataDate = (value?: string | null) =>
+export const getMetadataDate = (value?: string) =>
   value ? (DateTime.fromISO(value, { zone: "utc" }).toISODate() ?? "") : "";
 
 export const isMetadataNumber = (input: string) =>
   /^-?\d+$/.test(input) && Number.isSafeInteger(Number(input));
 
-export const getMetadataInput = (
-  field: TMetadataField,
-  value?: TMetadataValue,
-): TMetadataInput => {
-  switch (field.type) {
+export const getMetadataInput = ({
+  type,
+  value,
+}: Pick<TEntryMetadataField, "type" | "value">): TMetadataInput => {
+  switch (type) {
     case MetadataFieldType.SingleChoice:
     case MetadataFieldType.MultiChoice:
       return value?.optionIds ?? [];
@@ -64,15 +67,13 @@ export const getMetadataInput = (
 };
 
 export const toMetadataValue = (
-  field: TMetadataField,
+  { id: fieldId, type }: Pick<TEntryMetadataField, "id" | "type">,
   input: TMetadataInput,
-): TMetadataValue => {
-  const fieldId = field.id;
-
+): TMetadataValueRequest => {
   if (Array.isArray(input)) return { fieldId, optionIds: input };
   if (!input.trim()) return { fieldId };
 
-  switch (field.type) {
+  switch (type) {
     case MetadataFieldType.Number:
       return { fieldId, numberValue: Number(input) };
     case MetadataFieldType.Date:

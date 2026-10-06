@@ -68,9 +68,7 @@ export const useMetadataTemplates = () => {
 
   const loadTemplates = useCallback(async () => {
     try {
-      const list = (await getMetadataTemplates()).filter(
-        (template) => !template.isSystem,
-      );
+      const list = await getMetadataTemplates();
 
       setTemplates(list);
       setAuthors(await getAuthorNames(list));
@@ -85,17 +83,12 @@ export const useMetadataTemplates = () => {
 
   const toggleVisible = useCallback(async (item: TMetadataTemplate) => {
     try {
-      const { visible, modifiedBy, modifiedOn } = await updateMetadataTemplate(
-        item.id,
-        { visible: !item.visible },
-      );
+      const updated = await updateMetadataTemplate(item.id, {
+        visible: !item.visible,
+      });
 
       setTemplates((list) =>
-        list.map((template) =>
-          template.id === item.id
-            ? { ...template, visible, modifiedBy, modifiedOn }
-            : template,
-        ),
+        list.map((template) => (template.id === item.id ? updated : template)),
       );
     } catch (e) {
       toastr.error(e as string);

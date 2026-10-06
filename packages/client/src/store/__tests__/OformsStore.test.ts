@@ -246,6 +246,15 @@ describe("OformsStore filter conditions", () => {
     expect(api.getOforms).not.toHaveBeenCalled();
   });
 
+  it("closes the filter panel on a tab switch", async () => {
+    const store = createStore();
+    store.setFilterPanelVisible(true);
+
+    await store.resetFilters(".xlsx");
+
+    expect(store.filterPanelVisible).toBe(false);
+  });
+
   it("closes the filter panel together with the gallery", () => {
     const store = createStore();
     store.setTemplateGalleryVisible(true);
@@ -326,7 +335,7 @@ describe("OformsStore taxonomy loading", () => {
   it("keeps the selected categories the new language still has", async () => {
     const store = createStore();
     await store.initTemplateGallery();
-    store.oformsFilter.categoryIds = ["sc-10", "sc-gone"];
+    store.oformsFilter.categoryIds = ["sc-10", "sc-20", "sc-gone"];
     api.getOforms.mockClear();
 
     await store.filterOformsByLocale("de");

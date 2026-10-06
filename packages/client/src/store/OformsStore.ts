@@ -424,6 +424,9 @@ class OformsStore {
     const available = this.purposes
       .filter(({ key }) => !purpose || key === purpose)
       .flatMap(({ parentCategories }) => parentCategories)
+      .filter(({ subcategories }) =>
+        subcategories.some(({ templatesCount }) => templatesCount > 0),
+      )
       .map(({ documentId }) => documentId);
 
     return categoryIds.filter((id) => available.includes(id));
@@ -560,6 +563,8 @@ class OformsStore {
   };
 
   resetFilters = async (ext?: string) => {
+    this.filterPanelVisible = false;
+
     const defaultFilter =
       ext === ".docx"
         ? OformsFilter.getDefaultDocx()

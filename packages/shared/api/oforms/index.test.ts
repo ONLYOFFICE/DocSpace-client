@@ -84,6 +84,13 @@ describe("getOforms", () => {
     expect(url).toContain("sort[0]=name_form%3Aasc");
   });
 
+  it("gives every filter its own category list", () => {
+    const first = OformsFilter.getDefault();
+    first.categoryIds.push("pc-1");
+
+    expect(OformsFilter.getDefault().categoryIds).toEqual([]);
+  });
+
   it("leaves empty filters out and falls back to sorting by name", async () => {
     get.mockResolvedValueOnce({ data: { data: [] } });
 

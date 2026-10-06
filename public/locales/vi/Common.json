@@ -2134,7 +2134,6 @@
   "SuccessfullySentMessage": "Tin nhắn của bạn đã được gửi đi thành công. Bộ phận Kinh doanh sẽ liên hệ với bạn.",
   "SuccessOperation": "{{operationName}}: Hoàn tất",
   "SuggestFeature": "Gợi ý một tính năng",
-  "Support": "Hỗ trợ",
   "SwitchKeyPassphraseHint": "Nhập mật khẩu bảo vệ cho khoá bạn đang chuyển sang. Các tệp trong phòng riêng tư của bạn sẽ được mã hoá lại bằng khoá đó.",
   "SwitchKeyPassphraseTitle": "Chuyển đổi khoá mã hoá",
   "SwitchPlan": "Bạn sắp chuyển sang gói <1>{{planName}}</1>.",

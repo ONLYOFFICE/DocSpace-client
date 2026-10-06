@@ -2134,7 +2134,6 @@
   "SuccessfullySentMessage": "Your message was successfully sent. You will be contacted by the Sales Department.",
   "SuccessOperation": "{{operationName}}: Done",
   "SuggestFeature": "Suggest a feature",
-  "Support": "Support",
   "SwitchKeyPassphraseHint": "Enter the passphrase for the key you are switching to. Your private-room files will be re-encrypted for it.",
   "SwitchKeyPassphraseTitle": "Switch encryption key",
   "SwitchPlan": "You’re about to switch to the <1>{{planName}} plan</1>.",

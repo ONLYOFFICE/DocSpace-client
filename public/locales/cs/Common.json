@@ -2134,7 +2134,6 @@
   "SuccessfullySentMessage": "Vaše zpráva byla úspěšně odeslána. Bude vás kontaktovat obchodní oddělení.",
   "SuccessOperation": "{{operationName}}: Hotovo",
   "SuggestFeature": "Navrhněte funkci",
-  "Support": "Podpora",
   "SwitchKeyPassphraseHint": "Zadejte přístupovou frázi pro klíč, na který přepínáte. Soubory ve vaší soukromé místnosti budou pro něj znovu zašifrovány.",
   "SwitchKeyPassphraseTitle": "Přepnout šifrovací klíč",
   "SwitchPlan": "Přecházíte na tarif <1>{{planName}}</1>.",

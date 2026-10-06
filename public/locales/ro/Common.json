@@ -2134,7 +2134,6 @@
   "SuccessfullySentMessage": "Mesajul a fost trimis cu succes. Veţi fi contactat de Departamentul Vânzări.",
   "SuccessOperation": "{{operationName}}: Gata",
   "SuggestFeature": "Sugerează o funcție",
-  "Support": "Asistența",
   "SwitchKeyPassphraseHint": "Introduceți fraza de acces a cheii la care treceți. Fișierele din camerele dvs. private vor fi recriptate cu aceasta.",
   "SwitchKeyPassphraseTitle": "Schimbare cheie de criptare",
   "SwitchPlan": "Sunteţi pe cale să treceți la abonamentul <1>{{planName}}</1>.",

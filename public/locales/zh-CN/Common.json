@@ -2134,7 +2134,6 @@
   "SuccessfullySentMessage": "您的消息已成功发送。销售部门将与您联系。",
   "SuccessOperation": "{{operationName}}：完成",
   "SuggestFeature": "建议一个功能",
-  "Support": "支持",
   "SwitchKeyPassphraseHint": "输入您要切换至的密钥的密码短语。您私人房间中的文件将使用该密钥重新加密。",
   "SwitchKeyPassphraseTitle": "切换加密密钥",
   "SwitchPlan": "您即将切换至<1>{{planName}}套餐</1>。",

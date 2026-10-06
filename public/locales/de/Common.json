@@ -2134,7 +2134,6 @@
   "SuccessfullySentMessage": "Ihre Nachricht wurde erfolgreich gesendet. Sie werden von der Verkaufsabteilung kontaktiert.",
   "SuccessOperation": "{{operationName}}: Erledigt",
   "SuggestFeature": "Eine Funktion vorschlagen",
-  "Support": "Support",
   "SwitchKeyPassphraseHint": "Geben Sie die Passphrase für den Schlüssel ein, zu dem Sie wechseln. Ihre Dateien in privaten Räumen werden damit neu verschlüsselt.",
   "SwitchKeyPassphraseTitle": "Verschlüsselungsschlüssel wechseln",
   "SwitchPlan": "Sie sind dabei, zum <1>{{planName}}-Plan</1> zu wechseln.",

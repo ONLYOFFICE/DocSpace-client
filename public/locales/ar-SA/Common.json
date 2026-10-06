@@ -2134,7 +2134,6 @@
   "SuccessfullySentMessage": "تم إرسال رسالتك بنجاح. سيتم الاتصال بك من قبل قسم المبيعات.",
   "SuccessOperation": "{{operationName}}: تم بنجاح",
   "SuggestFeature": "اقترح ميزة",
-  "Support": "الدعم",
   "SwitchKeyPassphraseHint": "أدخل عبارة المرور للمفتاح الذي تريد التبديل إليه. سيُعاد تشفير ملفات غرفتك الخاصة به.",
   "SwitchKeyPassphraseTitle": "تبديل مفتاح التشفير",
   "SwitchPlan": "أنت على وشك التبديل إلى الخطة <1>{{planName}}</1>.",

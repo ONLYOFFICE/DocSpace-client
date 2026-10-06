@@ -2134,7 +2134,6 @@
   "SuccessfullySentMessage": "Vaše sporočilo je bilo uspešno poslano. Kontaktirali vas bodo iz oddelka prodaje.",
   "SuccessOperation": "{{operationName}}: Končano",
   "SuggestFeature": "Predlagajte funkcijo",
-  "Support": "Pomoč",
   "SwitchKeyPassphraseHint": "Vnesite geslo za ključ, na katerega preklapljate. Datoteke v vaši zasebni sobi bodo zanj znova šifrirane.",
   "SwitchKeyPassphraseTitle": "Preklopi šifrirni ključ",
   "SwitchPlan": "Kmalu boste preklopili na načrt <1>{{planName}}</1>.",

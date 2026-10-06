@@ -76,8 +76,6 @@ export default inject<TStore>(
     const { primaryProgressDataStore, secondaryProgressDataStore } =
       uploadDataStore;
 
-    const { email, displayName } = user || {};
-
     const isAdmin = user?.isAdmin || user?.isOwner;
 
     const { isPrimaryProgressVisbile } = primaryProgressDataStore;
@@ -130,8 +128,6 @@ export default inject<TStore>(
       getActions,
 
       currentTariffPlanTitle,
-      email,
-      displayName,
 
       zendeskKey,
       isMobileArticle,

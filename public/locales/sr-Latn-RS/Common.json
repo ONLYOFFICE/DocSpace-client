@@ -1411,6 +1411,7 @@
   "MonthUsage": "Mesečno korišćenje",
   "More": "Više",
   "MoreOptions": "Više opcija",
+  "Move": "Premesti",
   "MoveFolderItem": "Folder <2>{{title}}</2> uspešno premešten u <1>{{folderName}}</1>",
   "MoveHere": "Pomeri ovde",
   "MoveItem": "<2>{{title}}</2> uspešno premešten u <1>{{folderName}}</1>",

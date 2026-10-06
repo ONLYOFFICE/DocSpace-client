@@ -1411,6 +1411,7 @@
   "MonthUsage": "Monatsnutzung",
   "More": "Mehr",
   "MoreOptions": "Weitere Optionen",
+  "Move": "Verschieben",
   "MoveFolderItem": "Der Ordner <2>{{title}}</2> wurde erfolgreich nach <1>{{folderName}}</1> verschoben",
   "MoveHere": "Hierher verschieben",
   "MoveItem": "<2>{{title}}</2> erfolgreich nach <1>{{folderName}}</1> verschoben",

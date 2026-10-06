@@ -1411,6 +1411,7 @@
   "MonthUsage": "Maandgebruik",
   "More": "Meer",
   "MoreOptions": "Meer opties",
+  "Move": "Verplaatsen",
   "MoveFolderItem": "De map <2>{{title}}</2> is succesvol verplaatst naar <1>{{folderName}}</1>",
   "MoveHere": "Hierheen verplaatsen",
   "MoveItem": "<2>{{title}}</2> met succes verplaatst naar <1>{{folderName}}</1>",

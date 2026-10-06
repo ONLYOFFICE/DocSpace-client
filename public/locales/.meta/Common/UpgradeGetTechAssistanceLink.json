@@ -3,7 +3,7 @@
   "content": "Get tech assistance",
   "content_en_sha1_hash": "cf44d37289ba92cdae6d9dcc4f2494d12ebc7d69",
   "created_at": "2026-09-29T10:10:19.673Z",
-  "updated_at": "2026-10-01T11:40:45.333Z",
+  "updated_at": "2026-10-06T13:35:39.045Z",
   "comment": {
     "text": "Link label in the upgrade path dialog that directs users to technical support.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
       "line_number": 167,
-      "context": "label: t(\"Common:UpgradeRequestFreeDemoLink\"),\n },\n {\n id: \"support\",\n href: feedbackAndSupportUrl,\n label: t(\"Common:UpgradeGetTechAssistanceLink\"),\n },\n {\n id: \"purchase\",\n href: salesEmail ? `mailto:${salesEmail}` : \"\",\n label: t(\"Common:UpgradeAskPurchaseQuestionsLink\"),",
+      "context": "label: t(\"Common:UpgradeRequestFreeDemoLink\"),\n },\n {\n id: \"support\",\n href: supportUrl,\n label: t(\"Common:UpgradeGetTechAssistanceLink\"),\n },\n {\n id: \"purchase\",\n href: salesEmail ? `mailto:${salesEmail}` : \"\",\n label: t(\"Common:UpgradeAskPurchaseQuestionsLink\"),",
       "module": "/packages/shared"
     }
   ],

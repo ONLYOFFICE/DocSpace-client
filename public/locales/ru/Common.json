@@ -1411,6 +1411,7 @@
   "MonthUsage": "Использование за месяц",
   "More": "Еще",
   "MoreOptions": "Больше опций",
+  "Move": "Переместить",
   "MoveFolderItem": "Папка <2>{{title}}</2> успешно перемещена в <1>{{folderName}}</1>",
   "MoveHere": "Переместить сюда",
   "MoveItem": "<2>{{title}}</2> успешно перемещена в <1>{{folderName}}</1>",

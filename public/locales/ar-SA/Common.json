@@ -1411,6 +1411,7 @@
   "MonthUsage": "استخدام الشهر",
   "More": "المزيد",
   "MoreOptions": "المزيد من الخيارات",
+  "Move": "نقل",
   "MoveFolderItem": "تم نقل المجلد <2>{{title}}</2> بنجاح إلى <1>{{folderName}}</1>",
   "MoveHere": "انقل إلى هنا",
   "MoveItem": "تم نقل <2>{{title}}</2> بنجاح إلى <1>{{folderName}}</1>",

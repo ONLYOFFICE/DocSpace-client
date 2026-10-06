@@ -60,6 +60,7 @@ import { AppStateProvider } from "./AppStateProvider";
 export type TContextData = {
   user: TUser | undefined;
   settings: TSettings | undefined;
+  isCommunity: boolean;
   systemTheme: ThemeKeys | undefined;
   colorTheme: TGetColorTheme | undefined;
   locale?: string;

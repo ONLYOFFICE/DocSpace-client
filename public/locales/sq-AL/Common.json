@@ -1411,6 +1411,7 @@
   "MonthUsage": "Përdorimi i muajit",
   "More": "Më shumë",
   "MoreOptions": "Opsione të tjera",
+  "Move": "Zhvendos",
   "MoveFolderItem": "Folderi <2>{{title}}</2> është zhvendosur me sukses në <1>{{folderName}}</1>",
   "MoveHere": "Lëvizni këtu",
   "MoveItem": "<2>{{title}}</2> është zhvendosur me sukses në <1>{{folderName}}</1>",

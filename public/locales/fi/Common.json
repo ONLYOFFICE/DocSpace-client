@@ -1411,6 +1411,7 @@
   "MonthUsage": "Kuukauden käyttö",
   "More": "Lisää",
   "MoreOptions": "Lisää vaihtoehtoja",
+  "Move": "Siirrä",
   "MoveFolderItem": "Kansio <2>{{title}}</2> onnistuneesti siirretty kohteeseen <1>{{folderName}}</1>",
   "MoveHere": "Siirrä tänne",
   "MoveItem": "<2>{{title}}</2> onnistuneesti siirretty kohteeseen <1>{{folderName}}</1>",

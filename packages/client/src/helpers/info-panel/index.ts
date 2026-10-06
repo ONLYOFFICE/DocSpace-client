@@ -45,6 +45,7 @@ export const enum InfoPanelView {
   infoDetails = "info_details",
   infoShare = "info_share",
   infoAIChat = "info_ai_chat",
+  infoMetadata = "info_metadata",
 }
 
 export const showInfoPanel = () => {

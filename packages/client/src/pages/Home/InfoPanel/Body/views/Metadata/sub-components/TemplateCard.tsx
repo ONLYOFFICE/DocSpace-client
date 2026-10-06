@@ -33,13 +33,26 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { MetadataFieldType } from "@docspace/shared/enums";
+import type { TEntryMetadataTemplate } from "@docspace/shared/api/metadata/types";
 
-export const FIELD_TYPES = [
-  MetadataFieldType.String,
-  MetadataFieldType.Number,
-  MetadataFieldType.Date,
-  MetadataFieldType.SingleChoice,
-  MetadataFieldType.MultiChoice,
-];
+import type { TCardActions } from "../types";
+import FieldValue from "./FieldValue";
+import MetadataCard from "./MetadataCard";
+import MetadataProperty from "./MetadataProperty";
 
+type TemplateCardProps = {
+  template: TEntryMetadataTemplate;
+  actions?: TCardActions;
+};
+
+const TemplateCard = ({ template, actions }: TemplateCardProps) => (
+  <MetadataCard title={template.name} actions={actions}>
+    {template.fields.map((field) => (
+      <MetadataProperty key={field.id} label={field.name}>
+        <FieldValue field={field} />
+      </MetadataProperty>
+    ))}
+  </MetadataCard>
+);
+
+export default TemplateCard;

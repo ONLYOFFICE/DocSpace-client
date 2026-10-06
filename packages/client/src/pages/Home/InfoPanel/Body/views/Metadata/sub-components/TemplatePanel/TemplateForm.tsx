@@ -35,61 +35,43 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
-import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import type { TMetadataInput } from "@docspace/shared/utils/metadata";
 
-import type { TTemplateItemProps } from "../../types";
-import { useContextOptions } from "../useContextOptions";
-import styles from "./RowView.module.scss";
+import type { TTemplateForm } from "../../types";
+import { isValidFieldInput } from "../../utils";
+import FieldInput from "../FieldInput";
+import styles from "../Panel.module.scss";
 
-type RowItemProps = TTemplateItemProps & {
-  sectionWidth: number;
+type TemplateFormProps = {
+  form: TTemplateForm;
+  onChange: (fieldId: number, input: TMetadataInput) => void;
 };
 
-const RowItem = ({
-  item,
-  author,
-  sectionWidth,
-  onEdit,
-  onDelete,
-  onToggleVisible,
-}: RowItemProps) => {
+const TemplateForm = ({ form, onChange }: TemplateFormProps) => {
   const { t } = useTranslation(["Metadata"]);
-  const contextOptions = useContextOptions({ item, onEdit, onDelete });
-
-  const fieldsCount = t("Metadata:FieldsCount", {
-    count: item.fields?.length ?? 0,
-  });
 
   return (
-    <Row contextOptions={contextOptions}>
-      <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
-        <div>
-          <Text fontSize="14px" fontWeight={600} truncate>
-            {item.name}
-          </Text>
-          <Text
-            className="row-content_text"
-            fontSize="12px"
-            fontWeight={600}
-            truncate
-          >
-            {author ? `${fieldsCount} | ${author}` : fieldsCount}
-          </Text>
-        </div>
-
-        <div className={styles.toggleButtonWrapper}>
-          <ToggleButton
-            className="toggleButton"
-            isChecked={item.visible}
-            onChange={() => onToggleVisible(item)}
-            dataTestId={`metadata_template_visible_${item.id}`}
+    <div className={styles.form}>
+      {form.template.fields.map((field) => (
+        <FieldContainer
+          key={field.id}
+          labelVisible
+          isVertical
+          removeMargin
+          labelText={field.name}
+          hasError={!isValidFieldInput(field, form.inputs[field.id])}
+          errorMessage={t("Metadata:WholeNumberError")}
+        >
+          <FieldInput
+            field={field}
+            value={form.inputs[field.id]}
+            onChange={(input) => onChange(field.id, input)}
           />
-        </div>
-      </RowContent>
-    </Row>
+        </FieldContainer>
+      ))}
+    </div>
   );
 };
 
-export default RowItem;
+export default TemplateForm;

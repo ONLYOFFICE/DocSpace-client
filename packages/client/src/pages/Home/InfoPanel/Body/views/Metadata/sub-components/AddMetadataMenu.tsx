@@ -33,63 +33,60 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import AccessFormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
+import EditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
+
+import { useRef, type MouseEvent, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
-import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import {
+  ContextMenu,
+  type ContextMenuModel,
+  type ContextMenuRefType,
+} from "@onlyoffice/apps-ui-kit/components/context-menu";
 
-import type { TTemplateItemProps } from "../../types";
-import { useContextOptions } from "../useContextOptions";
-import styles from "./RowView.module.scss";
+import type { TAddMetadataActions } from "../types";
 
-type RowItemProps = TTemplateItemProps & {
-  sectionWidth: number;
+type AddMetadataMenuProps = TAddMetadataActions & {
+  children: (openMenu: (e: MouseEvent) => void) => ReactNode;
 };
 
-const RowItem = ({
-  item,
-  author,
-  sectionWidth,
-  onEdit,
-  onDelete,
-  onToggleVisible,
-}: RowItemProps) => {
-  const { t } = useTranslation(["Metadata"]);
-  const contextOptions = useContextOptions({ item, onEdit, onDelete });
+const AddMetadataMenu = ({
+  onAddTemplate,
+  onAddCustomField,
+  isCustomFieldDisabled,
+  children,
+}: AddMetadataMenuProps) => {
+  const { t } = useTranslation(["Common"]);
+  const menuRef = useRef<ContextMenuRefType>(null);
 
-  const fieldsCount = t("Metadata:FieldsCount", {
-    count: item.fields?.length ?? 0,
-  });
+  const model: ContextMenuModel[] = [
+    {
+      key: "metadata-from-template",
+      label: t("Common:FromTemplate"),
+      icon: AccessFormReactSvgUrl,
+      onClick: onAddTemplate,
+    },
+    {
+      key: "metadata-custom",
+      label: t("Common:Custom"),
+      icon: EditReactSvgUrl,
+      disabled: isCustomFieldDisabled,
+      onClick: onAddCustomField,
+    },
+  ];
 
   return (
-    <Row contextOptions={contextOptions}>
-      <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
-        <div>
-          <Text fontSize="14px" fontWeight={600} truncate>
-            {item.name}
-          </Text>
-          <Text
-            className="row-content_text"
-            fontSize="12px"
-            fontWeight={600}
-            truncate
-          >
-            {author ? `${fieldsCount} | ${author}` : fieldsCount}
-          </Text>
-        </div>
-
-        <div className={styles.toggleButtonWrapper}>
-          <ToggleButton
-            className="toggleButton"
-            isChecked={item.visible}
-            onChange={() => onToggleVisible(item)}
-            dataTestId={`metadata_template_visible_${item.id}`}
-          />
-        </div>
-      </RowContent>
-    </Row>
+    <>
+      {children((e) => menuRef.current?.show(e))}
+      <ContextMenu
+        ref={menuRef}
+        model={model}
+        withBackdrop={false}
+        dataTestId="info_panel_metadata_add_menu"
+      />
+    </>
   );
 };
 
-export default RowItem;
+export default AddMetadataMenu;

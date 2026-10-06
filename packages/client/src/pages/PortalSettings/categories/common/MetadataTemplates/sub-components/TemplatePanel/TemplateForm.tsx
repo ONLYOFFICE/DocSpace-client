@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
@@ -42,8 +43,8 @@ import {
   TextInput,
 } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { METADATA_NAME_MAX_LENGTH } from "@docspace/shared/utils/metadata";
 
-import { MAX_NAME_LENGTH } from "../../constants";
 import type { TTemplateDraft } from "../../types";
 import FieldsList, { type FieldsListProps } from "./FieldsList";
 import styles from "./TemplatePanel.module.scss";
@@ -61,17 +62,24 @@ const TemplateForm = ({
   const { t } = useTranslation(["Metadata", "Common"]);
 
   return (
-    <div className={styles.form}>
+    <div className={classNames(styles.form, styles.templateForm)}>
       <div className={styles.visibleBlock}>
-        <ToggleButton
-          isChecked={draft.visible}
-          onChange={() => onChange({ visible: !draft.visible })}
-          label={t("Metadata:Visible")}
-          dataTestId="metadata_template_visible_toggle"
-        />
-        <Text className={styles.hint} fontSize="12px">
-          {t("Metadata:HiddenTemplateHint")}
-        </Text>
+        <div className={styles.visibleToggle}>
+          <ToggleButton
+            className={styles.toggle}
+            isChecked={draft.visible}
+            onChange={() => onChange({ visible: !draft.visible })}
+            dataTestId="metadata_template_visible_toggle"
+          />
+        </div>
+        <div className={styles.visibleText}>
+          <Text fontWeight={600} lineHeight="20px">
+            {t("Metadata:Visible")}
+          </Text>
+          <Text fontSize="12px" lineHeight="16px">
+            {t("Metadata:HiddenTemplateHint")}
+          </Text>
+        </div>
       </div>
 
       <FieldContainer
@@ -85,7 +93,7 @@ const TemplateForm = ({
           value={draft.name}
           onChange={(e) => onChange({ name: e.target.value })}
           placeholder={t("Metadata:EnterTemplateName")}
-          maxLength={MAX_NAME_LENGTH}
+          maxLength={METADATA_NAME_MAX_LENGTH}
           scale
           testId="metadata_template_name_input"
         />

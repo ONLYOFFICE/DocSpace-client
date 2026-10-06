@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import DragReactSvg from "PUBLIC_DIR/images/menu.react.svg";
+import DragHandleReactSvg from "PUBLIC_DIR/images/drag.handle.react.svg";
 
 import type { HTMLAttributes } from "react";
 import classNames from "classnames";
@@ -43,7 +43,7 @@ import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/contex
 import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import type { TFieldDraft } from "../../types";
+import type { TDropLine, TFieldDraft } from "../../types";
 import { getFieldTypeLabel } from "../../utils";
 import styles from "./TemplatePanel.module.scss";
 
@@ -52,7 +52,9 @@ type FieldRowProps = {
   isFirst: boolean;
   isLast: boolean;
   isDragging: boolean;
-  dragProps: HTMLAttributes<HTMLDivElement>;
+  dropLine?: TDropLine;
+  rowRef: (row: HTMLDivElement | null) => void;
+  handleProps: HTMLAttributes<HTMLDivElement>;
   onEdit: () => void;
   onMoveUp: () => void;
   onMoveDown: () => void;
@@ -64,7 +66,9 @@ const FieldRow = ({
   isFirst,
   isLast,
   isDragging,
-  dragProps,
+  dropLine,
+  rowRef,
+  handleProps,
   onEdit,
   onMoveUp,
   onMoveDown,
@@ -92,17 +96,25 @@ const FieldRow = ({
 
   return (
     <div
+      ref={rowRef}
       className={classNames(styles.fieldRow, {
         [styles.dragging]: isDragging,
+        [styles.dropBefore]: dropLine === "before",
+        [styles.dropAfter]: dropLine === "after",
       })}
-      {...dragProps}
     >
-      <DragReactSvg className={styles.dragHandle} />
+      <div
+        className={styles.dragHandle}
+        data-testid="metadata_field_drag_handle"
+        {...handleProps}
+      >
+        <DragHandleReactSvg />
+      </div>
       <div className={styles.fieldInfo}>
-        <Text fontWeight={600} truncate>
+        <Text fontSize="14px" fontWeight={600} lineHeight="16px" truncate>
           {field.name}
         </Text>
-        <Text className={styles.hint} fontSize="12px">
+        <Text className={styles.hint} fontSize="12px" lineHeight="16px">
           {getFieldTypeLabel(t, field.type)}
         </Text>
       </div>

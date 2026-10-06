@@ -61,6 +61,7 @@ import HistoryToolbar from "../History/Toolbar";
 import ThirdPartyComponent from "../History/HistoryBlockContent/ThirdParty";
 import Members from "../Members";
 import Share from "../Share";
+import Metadata from "../Metadata";
 import Plugin from "../Plugin";
 
 import { useHistory } from "./hooks/useHistory";
@@ -386,6 +387,10 @@ const FilesView = ({
           infoPanelSelection={selection}
         />
       );
+    }
+
+    if (value === InfoPanelView.infoMetadata) {
+      return <Metadata selection={selection} />;
     }
 
     if (isPlugin)

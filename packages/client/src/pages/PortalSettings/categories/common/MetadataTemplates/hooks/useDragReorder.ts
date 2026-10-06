@@ -33,26 +33,52 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, type DragEvent } from "react";
+import { useRef, useState, type PointerEvent } from "react";
 
-export const useDragReorder = (onMove: (from: number, to: number) => void) => {
-  const [dragIndex, setDragIndex] = useState<number | null>(null);
+import type { TDragState } from "../types";
+import { getInsertPosition, toMoveIndex } from "../utils";
 
-  const getDragProps = (index: number) => ({
-    draggable: true,
-    onDragStart: (e: DragEvent) => {
-      e.dataTransfer.setData("text/plain", String(index));
-      setDragIndex(index);
-    },
-    onDragOver: (e: DragEvent) => {
+export const useDragReorder = (
+  count: number,
+  onMove: (from: number, to: number) => void,
+) => {
+  const rowsRef = useRef<(HTMLElement | null)[]>([]);
+  const [drag, setDrag] = useState<TDragState | null>(null);
+
+  const getMidpoints = () =>
+    rowsRef.current.slice(0, count).map((row) => {
+      const rect = row?.getBoundingClientRect();
+
+      return rect ? rect.top + rect.height / 2 : Number.POSITIVE_INFINITY;
+    });
+
+  const getHandleProps = (index: number) => ({
+    onPointerDown: (e: PointerEvent<HTMLElement>) => {
+      if (e.button !== 0) return;
+
       e.preventDefault();
-      if (dragIndex === null || dragIndex === index) return;
-
-      onMove(dragIndex, index);
-      setDragIndex(index);
+      e.currentTarget.setPointerCapture(e.pointerId);
+      setDrag({ from: index, position: index });
     },
-    onDragEnd: () => setDragIndex(null),
+    onPointerMove: (e: PointerEvent<HTMLElement>) => {
+      if (drag?.from !== index) return;
+
+      const position = getInsertPosition(getMidpoints(), e.clientY);
+      if (position !== drag.position) setDrag({ from: index, position });
+    },
+    onPointerUp: () => {
+      if (drag?.from !== index) return;
+
+      const to = toMoveIndex(drag);
+      setDrag(null);
+      if (to !== drag.from) onMove(drag.from, to);
+    },
+    onPointerCancel: () => setDrag(null),
   });
 
-  return { dragIndex, getDragProps };
+  const getRowRef = (index: number) => (row: HTMLElement | null) => {
+    rowsRef.current[index] = row;
+  };
+
+  return { drag, getHandleProps, getRowRef };
 };

@@ -45,8 +45,8 @@ import {
   InputType,
   TextInput,
 } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { METADATA_NAME_MAX_LENGTH } from "@docspace/shared/utils/metadata";
 
-import { MAX_NAME_LENGTH } from "../../constants";
 import type { TFieldOptionDraft } from "../../types";
 import styles from "./TemplatePanel.module.scss";
 
@@ -66,8 +66,8 @@ const OptionsList = ({
   const { t } = useTranslation(["Metadata"]);
 
   return (
-    <div className={styles.list}>
-      <Text fontSize="16px" fontWeight={700}>
+    <div className={styles.section}>
+      <Text fontSize="15px" fontWeight={600} lineHeight="16px">
         {t("Metadata:Options")}
       </Text>
       <AddButton
@@ -76,24 +76,28 @@ const OptionsList = ({
         onClick={onAdd}
         testId="metadata_add_option_button"
       />
-      {options.map((option, index) => (
-        <div className={styles.optionRow} key={option.id ?? index}>
-          <TextInput
-            type={InputType.text}
-            value={option.value}
-            onChange={(e) => onChange(index, e.target.value)}
-            placeholder={t("Metadata:OptionValue")}
-            maxLength={MAX_NAME_LENGTH}
-            scale
-          />
-          <IconButton
-            iconName={CatalogTrashReactSvgUrl}
-            size={16}
-            isClickable
-            onClick={() => onRemove(index)}
-          />
+      {options.length ? (
+        <div className={styles.optionList}>
+          {options.map((option, index) => (
+            <div className={styles.optionRow} key={option.id ?? index}>
+              <TextInput
+                type={InputType.text}
+                value={option.value}
+                onChange={(e) => onChange(index, e.target.value)}
+                placeholder={t("Metadata:OptionValue")}
+                maxLength={METADATA_NAME_MAX_LENGTH}
+                scale
+              />
+              <IconButton
+                iconName={CatalogTrashReactSvgUrl}
+                size={16}
+                isClickable
+                onClick={() => onRemove(index)}
+              />
+            </div>
+          ))}
         </div>
-      ))}
+      ) : null}
     </div>
   );
 };

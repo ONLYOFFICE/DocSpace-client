@@ -35,61 +35,38 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import type { TCustomField } from "@docspace/shared/api/metadata/types";
 
-import type { TTemplateItemProps } from "../../types";
-import { useContextOptions } from "../useContextOptions";
-import styles from "./RowView.module.scss";
+import type { TCardActions } from "../types";
+import MetadataCard from "./MetadataCard";
+import MetadataProperty from "./MetadataProperty";
+import styles from "../Metadata.module.scss";
 
-type RowItemProps = TTemplateItemProps & {
-  sectionWidth: number;
+type CustomFieldsCardProps = {
+  fields: TCustomField[];
+  actions?: TCardActions;
 };
 
-const RowItem = ({
-  item,
-  author,
-  sectionWidth,
-  onEdit,
-  onDelete,
-  onToggleVisible,
-}: RowItemProps) => {
+const CustomFieldsCard = ({ fields, actions }: CustomFieldsCardProps) => {
   const { t } = useTranslation(["Metadata"]);
-  const contextOptions = useContextOptions({ item, onEdit, onDelete });
-
-  const fieldsCount = t("Metadata:FieldsCount", {
-    count: item.fields?.length ?? 0,
-  });
 
   return (
-    <Row contextOptions={contextOptions}>
-      <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
-        <div>
-          <Text fontSize="14px" fontWeight={600} truncate>
-            {item.name}
-          </Text>
+    <MetadataCard title={t("Metadata:CustomFields")} actions={actions}>
+      {fields.map(({ name, value }) => (
+        <MetadataProperty key={name} label={name}>
           <Text
-            className="row-content_text"
-            fontSize="12px"
+            className={styles.value}
+            fontSize="13px"
             fontWeight={600}
-            truncate
+            lineHeight="20px"
           >
-            {author ? `${fieldsCount} | ${author}` : fieldsCount}
+            {value}
           </Text>
-        </div>
-
-        <div className={styles.toggleButtonWrapper}>
-          <ToggleButton
-            className="toggleButton"
-            isChecked={item.visible}
-            onChange={() => onToggleVisible(item)}
-            dataTestId={`metadata_template_visible_${item.id}`}
-          />
-        </div>
-      </RowContent>
-    </Row>
+        </MetadataProperty>
+      ))}
+    </MetadataCard>
   );
 };
 
-export default RowItem;
+export default CustomFieldsCard;

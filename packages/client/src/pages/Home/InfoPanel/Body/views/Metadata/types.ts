@@ -33,13 +33,54 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { MetadataFieldType } from "@docspace/shared/enums";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
+import type {
+  TEntryMetadataTemplate,
+  TMetadataFieldOption,
+} from "@docspace/shared/api/metadata/types";
+import type { TMetadataInput } from "@docspace/shared/utils/metadata";
 
-export const FIELD_TYPES = [
-  MetadataFieldType.String,
-  MetadataFieldType.Number,
-  MetadataFieldType.Date,
-  MetadataFieldType.SingleChoice,
-  MetadataFieldType.MultiChoice,
-];
+export type TMetadataSelection = TRoom | TFile | TFolder;
 
+export type TMetadataItemType = "file" | "folder" | "room";
+
+export type TAddMetadataActions = {
+  onAddTemplate: () => void;
+  onAddCustomField: () => void;
+  isCustomFieldDisabled: boolean;
+};
+
+export type TCardActions = {
+  onEdit: () => void;
+  onDelete: () => void;
+};
+
+export type TMetadataPanel =
+  | { type: "template"; template?: TEntryMetadataTemplate }
+  | { type: "customFields"; withNewField: boolean };
+
+export type TMetadataDeletion =
+  | { type: "template"; templateId: number }
+  | { type: "customFields" };
+
+export type TTemplateForm = {
+  template: TEntryMetadataTemplate;
+  inputs: Record<number, TMetadataInput>;
+};
+
+export type TCustomFieldDraft = {
+  key: string;
+  name: string;
+  value: string;
+  isNew: boolean;
+};
+
+export type TValueInputProps<T> = {
+  value: T;
+  onChange: (value: T) => void;
+};
+
+export type TChoiceInputProps = TValueInputProps<string[]> & {
+  options: TMetadataFieldOption[];
+};

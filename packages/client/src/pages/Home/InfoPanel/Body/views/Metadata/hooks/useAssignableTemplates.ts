@@ -33,13 +33,31 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { MetadataFieldType } from "@docspace/shared/enums";
+import { useEffect, useState } from "react";
 
-export const FIELD_TYPES = [
-  MetadataFieldType.String,
-  MetadataFieldType.Number,
-  MetadataFieldType.Date,
-  MetadataFieldType.SingleChoice,
-  MetadataFieldType.MultiChoice,
-];
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getMetadataTemplates } from "@docspace/shared/api/metadata";
+import type {
+  TEntryMetadataTemplate,
+  TMetadataTemplate,
+} from "@docspace/shared/api/metadata/types";
 
+import { getUnassignedTemplates } from "../utils";
+
+export const useAssignableTemplates = (assigned: TEntryMetadataTemplate[]) => {
+  const [templates, setTemplates] = useState<TMetadataTemplate[] | null>(null);
+
+  useEffect(() => {
+    getMetadataTemplates(true)
+      .then(setTemplates)
+      .catch((e) => {
+        toastr.error(e as string);
+        setTemplates([]);
+      });
+  }, []);
+
+  return {
+    templates: templates ? getUnassignedTemplates(templates, assigned) : [],
+    isLoading: templates === null,
+  };
+};

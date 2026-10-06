@@ -57,6 +57,13 @@ export type TFieldForm = Omit<TFieldDraft, "type"> & {
   type?: MetadataFieldType;
 };
 
+export type TDragState = {
+  from: number;
+  position: number;
+};
+
+export type TDropLine = "before" | "after";
+
 export type TTemplateDraft = {
   name: string;
   visible: boolean;

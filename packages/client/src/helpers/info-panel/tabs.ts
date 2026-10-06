@@ -38,6 +38,7 @@ import {
   isFile as isFileUtil,
   isRoom as isRoomUtil,
 } from "@docspace/shared/utils/typeGuards";
+import { isMetadataSupported } from "@docspace/shared/utils/metadata";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
@@ -144,6 +145,10 @@ export function getAvailableInfoPanelTabs({
   }
 
   tabs.push(InfoPanelView.infoHistory, InfoPanelView.infoDetails);
+
+  if (!isAIAgentsSection && isMetadataSupported(selection)) {
+    tabs.push(InfoPanelView.infoMetadata);
+  }
 
   if (!isAIAgentsSection && enablePlugins && infoPanelItemsList.length > 0) {
     const isRoomSelection = isRoomUtil(selection);

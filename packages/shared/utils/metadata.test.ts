@@ -36,12 +36,13 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { Settings } from "luxon";
 
-import { MetadataFieldType } from "../enums";
+import { FolderType, MetadataFieldType } from "../enums";
 import type { TMetadataValue } from "../api/metadata/types";
 import {
   getMetadataDate,
   getMetadataInput,
   isMetadataNumber,
+  isMetadataSupported,
   toMetadataValue,
 } from "./metadata";
 
@@ -152,5 +153,30 @@ describe("toMetadataValue / getMetadataInput", () => {
     expect(getMetadataInput(field(MetadataFieldType.Number))).toBe("");
     expect(getMetadataInput(field(MetadataFieldType.Date))).toBe("");
     expect(getMetadataInput(field(MetadataFieldType.MultiChoice))).toEqual([]);
+  });
+});
+
+describe("isMetadataSupported", () => {
+  it("accepts portal entries outside the trash", () => {
+    expect(
+      isMetadataSupported({ id: 5, rootFolderType: FolderType.USER }),
+    ).toBe(true);
+    expect(
+      isMetadataSupported({ id: 5, rootFolderType: FolderType.Rooms }),
+    ).toBe(true);
+  });
+
+  it("rejects third-party, trash, private and AI agent entries", () => {
+    expect(isMetadataSupported({ id: "box-1" })).toBe(false);
+    expect(isMetadataSupported({ id: 5, providerKey: "Box" })).toBe(false);
+    expect(
+      isMetadataSupported({ id: 5, rootFolderType: FolderType.TRASH }),
+    ).toBe(false);
+    expect(
+      isMetadataSupported({ id: 5, rootFolderType: FolderType.Privacy }),
+    ).toBe(false);
+    expect(
+      isMetadataSupported({ id: 5, rootFolderType: FolderType.AIAgents }),
+    ).toBe(false);
   });
 });

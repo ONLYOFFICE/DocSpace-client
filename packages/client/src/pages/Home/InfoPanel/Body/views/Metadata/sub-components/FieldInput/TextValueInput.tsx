@@ -35,61 +35,34 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
-import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import {
+  InputType,
+  TextInput,
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { METADATA_VALUE_MAX_LENGTH } from "@docspace/shared/utils/metadata";
 
-import type { TTemplateItemProps } from "../../types";
-import { useContextOptions } from "../useContextOptions";
-import styles from "./RowView.module.scss";
+import type { TValueInputProps } from "../../types";
+import { isValidNumberInput } from "../../utils";
 
-type RowItemProps = TTemplateItemProps & {
-  sectionWidth: number;
+type TextValueInputProps = TValueInputProps<string> & {
+  isNumber: boolean;
 };
 
-const RowItem = ({
-  item,
-  author,
-  sectionWidth,
-  onEdit,
-  onDelete,
-  onToggleVisible,
-}: RowItemProps) => {
+const TextValueInput = ({ isNumber, value, onChange }: TextValueInputProps) => {
   const { t } = useTranslation(["Metadata"]);
-  const contextOptions = useContextOptions({ item, onEdit, onDelete });
-
-  const fieldsCount = t("Metadata:FieldsCount", {
-    count: item.fields?.length ?? 0,
-  });
 
   return (
-    <Row contextOptions={contextOptions}>
-      <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
-        <div>
-          <Text fontSize="14px" fontWeight={600} truncate>
-            {item.name}
-          </Text>
-          <Text
-            className="row-content_text"
-            fontSize="12px"
-            fontWeight={600}
-            truncate
-          >
-            {author ? `${fieldsCount} | ${author}` : fieldsCount}
-          </Text>
-        </div>
-
-        <div className={styles.toggleButtonWrapper}>
-          <ToggleButton
-            className="toggleButton"
-            isChecked={item.visible}
-            onChange={() => onToggleVisible(item)}
-            dataTestId={`metadata_template_visible_${item.id}`}
-          />
-        </div>
-      </RowContent>
-    </Row>
+    <TextInput
+      type={InputType.text}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={t("Metadata:EnterValue")}
+      maxLength={METADATA_VALUE_MAX_LENGTH}
+      hasError={isNumber && !isValidNumberInput(value)}
+      scale
+      testId="metadata_value_input"
+    />
   );
 };
 
-export default RowItem;
+export default TextValueInput;

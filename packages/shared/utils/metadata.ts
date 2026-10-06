@@ -35,13 +35,36 @@
 
 import { DateTime } from "luxon";
 
-import { MetadataFieldType } from "../enums";
+import { FolderType, MetadataFieldType } from "../enums";
 import type {
   TEntryMetadataField,
   TMetadataValueRequest,
 } from "../api/metadata/types";
 
 export type TMetadataInput = string | string[];
+
+export const METADATA_NAME_MAX_LENGTH = 255;
+export const METADATA_VALUE_MAX_LENGTH = 8000;
+export const METADATA_CUSTOM_FIELDS_MAX = 50;
+
+const UNSUPPORTED_ROOT_TYPES: (FolderType | undefined)[] = [
+  FolderType.TRASH,
+  FolderType.Privacy,
+  FolderType.AIAgents,
+];
+
+export const isMetadataSupported = ({
+  id,
+  providerKey,
+  rootFolderType,
+}: {
+  id?: number | string;
+  providerKey?: string | null;
+  rootFolderType?: FolderType;
+}) =>
+  typeof id === "number" &&
+  !providerKey &&
+  !UNSUPPORTED_ROOT_TYPES.includes(rootFolderType);
 
 export const getMetadataDate = (value?: string) =>
   value ? (DateTime.fromISO(value, { zone: "utc" }).toISODate() ?? "") : "";

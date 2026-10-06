@@ -41,9 +41,13 @@ import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
 import {
   canSaveTemplate,
   createFieldForm,
+  getDropLine,
+  getInsertPosition,
   getTemplateChanges,
+  isFieldNameTaken,
   isValidField,
   moveItem,
+  toMoveIndex,
   setFieldType,
   toTemplateDraft,
   upsertField,
@@ -253,5 +257,50 @@ describe("canSaveTemplate", () => {
   it("requires a change for an existing template", () => {
     expect(canSaveTemplate(template, { ...draft, name: "Case" })).toBe(true);
     expect(canSaveTemplate(template, { ...draft, name: " " })).toBe(false);
+  });
+});
+
+describe("drag reorder", () => {
+  const midpoints = [24, 72, 120];
+
+  it("finds where the dragged row would be inserted", () => {
+    expect(getInsertPosition(midpoints, 10)).toBe(0);
+    expect(getInsertPosition(midpoints, 80)).toBe(2);
+    expect(getInsertPosition(midpoints, 500)).toBe(3);
+  });
+
+  it("turns the insert position into the target index", () => {
+    expect(toMoveIndex({ from: 0, position: 2 })).toBe(1);
+    expect(toMoveIndex({ from: 2, position: 0 })).toBe(0);
+    expect(toMoveIndex({ from: 1, position: 2 })).toBe(1);
+  });
+
+  it("draws the drop line only where the row would really move", () => {
+    expect(getDropLine({ from: 0, position: 2 }, 2, 3)).toBe("before");
+    expect(getDropLine({ from: 0, position: 3 }, 2, 3)).toBe("after");
+    expect(getDropLine({ from: 1, position: 2 }, 2, 3)).toBeUndefined();
+    expect(getDropLine({ from: 0, position: 2 }, 1, 3)).toBeUndefined();
+    expect(getDropLine(null, 0, 3)).toBeUndefined();
+  });
+});
+
+describe("isFieldNameTaken", () => {
+  const fields = [
+    { key: "a", name: "Court", type: MetadataFieldType.String, options: [] },
+  ] as TFieldDraft[];
+
+  it("rejects a name another field already has, ignoring case", () => {
+    expect(
+      isFieldNameTaken(fields, { ...createFieldForm("b"), name: " court " }),
+    ).toBe(true);
+    expect(
+      isFieldNameTaken(fields, { ...createFieldForm("b"), name: "Stage" }),
+    ).toBe(false);
+  });
+
+  it("lets a field keep its own name", () => {
+    expect(
+      isFieldNameTaken(fields, { ...createFieldForm("a"), name: "Court" }),
+    ).toBe(false);
   });
 });

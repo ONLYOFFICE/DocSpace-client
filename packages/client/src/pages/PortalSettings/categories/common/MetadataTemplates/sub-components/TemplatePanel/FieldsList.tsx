@@ -42,6 +42,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { useDragReorder } from "../../hooks/useDragReorder";
 import type { TFieldDraft } from "../../types";
+import { getDropLine } from "../../utils";
 import FieldRow from "./FieldRow";
 import styles from "./TemplatePanel.module.scss";
 
@@ -61,36 +62,47 @@ const FieldsList = ({
   onRemoveField,
 }: FieldsListProps) => {
   const { t } = useTranslation(["Metadata"]);
-  const { dragIndex, getDragProps } = useDragReorder(onMoveField);
+  const { drag, getHandleProps, getRowRef } = useDragReorder(
+    fields.length,
+    onMoveField,
+  );
 
   return (
-    <div className={styles.list}>
-      <Text fontSize="16px" fontWeight={700}>
-        {t("Metadata:Fields")}
-      </Text>
-      <Text className={styles.hint} fontSize="12px">
-        {t("Metadata:FieldsDescription")}
-      </Text>
+    <div className={styles.section}>
+      <div className={styles.sectionTitle}>
+        <Text fontSize="15px" fontWeight={600} lineHeight="16px">
+          {t("Metadata:Fields")}
+        </Text>
+        <Text className={styles.hint} lineHeight="20px">
+          {t("Metadata:FieldsDescription")}
+        </Text>
+      </div>
       <AddButton
         iconName={PlusReactSvgUrl}
         label={t("Metadata:AddField")}
         onClick={onAddField}
         testId="metadata_add_field_button"
       />
-      {fields.map((field, index) => (
-        <FieldRow
-          key={field.key}
-          field={field}
-          isFirst={index === 0}
-          isLast={index === fields.length - 1}
-          isDragging={dragIndex === index}
-          dragProps={getDragProps(index)}
-          onEdit={() => onEditField(field)}
-          onMoveUp={() => onMoveField(index, index - 1)}
-          onMoveDown={() => onMoveField(index, index + 1)}
-          onRemove={() => onRemoveField(field.key)}
-        />
-      ))}
+      {fields.length ? (
+        <div className={styles.list}>
+          {fields.map((field, index) => (
+            <FieldRow
+              key={field.key}
+              field={field}
+              isFirst={index === 0}
+              isLast={index === fields.length - 1}
+              isDragging={drag?.from === index}
+              dropLine={getDropLine(drag, index, fields.length)}
+              rowRef={getRowRef(index)}
+              handleProps={getHandleProps(index)}
+              onEdit={() => onEditField(field)}
+              onMoveUp={() => onMoveField(index, index - 1)}
+              onMoveDown={() => onMoveField(index, index + 1)}
+              onRemove={() => onRemoveField(field.key)}
+            />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };

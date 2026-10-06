@@ -33,21 +33,47 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+
 .rowContainer {
   margin-top: 16px;
 }
 
 .rowContent {
   display: flex;
+  padding-bottom: 10px;
+
+  :global(.row-main-container-wrapper) {
+    @include mixins.tablet {
+      width: 100%;
+    }
+  }
+
+  :global(.rowMainContainer) {
+    height: 100%;
+    width: 100%;
+  }
+
+  :global(.mainIcons) {
+    min-width: 76px;
+    display: flex;
+  }
+
+  :global(.row-content_text) {
+    color: var(--row-side-color);
+  }
+}
+
+.toggleButtonWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
+  justify-content: flex-end;
+  margin-inline-start: -52px;
 
-.info {
-  min-width: 0;
-}
-
-.secondaryText {
-  color: var(--settings-common-description-color);
+  :global(.toggleButton) {
+    display: flex;
+    align-items: center;
+  }
 }

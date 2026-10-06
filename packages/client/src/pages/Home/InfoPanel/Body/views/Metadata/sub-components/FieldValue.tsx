@@ -35,61 +35,44 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
+import { Tag } from "@onlyoffice/apps-ui-kit/components/tag";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { MetadataFieldType } from "@docspace/shared/enums";
+import type { TEntryMetadataField } from "@docspace/shared/api/metadata/types";
 
-import type { TTemplateItemProps } from "../../types";
-import { useContextOptions } from "../useContextOptions";
-import styles from "./RowView.module.scss";
+import { formatMetadataValue, getSelectedOptions } from "../utils";
+import styles from "../Metadata.module.scss";
 
-type RowItemProps = TTemplateItemProps & {
-  sectionWidth: number;
-};
+const EMPTY_VALUE = "—";
 
-const RowItem = ({
-  item,
-  author,
-  sectionWidth,
-  onEdit,
-  onDelete,
-  onToggleVisible,
-}: RowItemProps) => {
-  const { t } = useTranslation(["Metadata"]);
-  const contextOptions = useContextOptions({ item, onEdit, onDelete });
+const FieldValue = ({ field }: { field: TEntryMetadataField }) => {
+  const { i18n } = useTranslation();
 
-  const fieldsCount = t("Metadata:FieldsCount", {
-    count: item.fields?.length ?? 0,
-  });
+  const selectedOptions =
+    field.type === MetadataFieldType.MultiChoice
+      ? getSelectedOptions(field.options, field.value?.optionIds)
+      : [];
+
+  if (selectedOptions.length) {
+    return (
+      <div className={styles.tags}>
+        {selectedOptions.map((option) => (
+          <Tag key={option.id} tag={option.value} label={option.value} />
+        ))}
+      </div>
+    );
+  }
 
   return (
-    <Row contextOptions={contextOptions}>
-      <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
-        <div>
-          <Text fontSize="14px" fontWeight={600} truncate>
-            {item.name}
-          </Text>
-          <Text
-            className="row-content_text"
-            fontSize="12px"
-            fontWeight={600}
-            truncate
-          >
-            {author ? `${fieldsCount} | ${author}` : fieldsCount}
-          </Text>
-        </div>
-
-        <div className={styles.toggleButtonWrapper}>
-          <ToggleButton
-            className="toggleButton"
-            isChecked={item.visible}
-            onChange={() => onToggleVisible(item)}
-            dataTestId={`metadata_template_visible_${item.id}`}
-          />
-        </div>
-      </RowContent>
-    </Row>
+    <Text
+      className={styles.value}
+      fontSize="13px"
+      fontWeight={600}
+      lineHeight="20px"
+    >
+      {formatMetadataValue(field, i18n.language) || EMPTY_VALUE}
+    </Text>
   );
 };
 
-export default RowItem;
+export default FieldValue;

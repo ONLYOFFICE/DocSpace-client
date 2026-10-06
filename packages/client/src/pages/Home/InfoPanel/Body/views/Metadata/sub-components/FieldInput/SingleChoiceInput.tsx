@@ -33,71 +33,33 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
-import {
-  ModalDialog,
-  ModalDialogType,
-} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
-import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 
-type ConfirmDeleteDialogProps = {
-  title: string;
-  description: string;
-  onDelete: () => Promise<void>;
-  onClose: () => void;
-};
+import type { TChoiceInputProps } from "../../types";
+import { toComboOptions } from "../../utils";
 
-const ConfirmDeleteDialog = ({
-  title,
-  description,
-  onDelete,
-  onClose,
-}: ConfirmDeleteDialogProps) => {
+const SingleChoiceInput = ({ options, value, onChange }: TChoiceInputProps) => {
   const { t } = useTranslation(["Common"]);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = async () => {
-    setIsLoading(true);
-    await onDelete();
-    onClose();
-  };
+  const comboOptions = toComboOptions(options);
+
+  const selectedOption = comboOptions.find(
+    (option) => option.key === value[0],
+  ) ?? { key: "", label: t("Common:SelectAction") };
 
   return (
-    <ModalDialog
-      visible
-      autoMaxHeight
-      zIndex={312}
-      displayType={ModalDialogType.modal}
-      onClose={onClose}
-      dataTestId="metadata_confirm_delete_dialog"
-    >
-      <ModalDialog.Header>{title}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <Text>{description}</Text>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          primary
-          scale
-          size={ButtonSize.normal}
-          label={t("Common:Delete")}
-          isLoading={isLoading}
-          onClick={onSubmit}
-          testId="metadata_confirm_delete_button"
-        />
-        <Button
-          scale
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-          isDisabled={isLoading}
-          onClick={onClose}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
+    <ComboBox
+      options={comboOptions}
+      selectedOption={selectedOption}
+      onSelect={(option) => onChange([String(option.key)])}
+      displaySelectedOption
+      scaled
+      scaledOptions
+      dataTestId="metadata_single_choice_input"
+    />
   );
 };
 
-export default ConfirmDeleteDialog;
+export default SingleChoiceInput;

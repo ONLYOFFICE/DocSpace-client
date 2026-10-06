@@ -33,128 +33,139 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+.body {
+  width: calc(100% + 16px);
+  margin-inline-end: -16px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.templateForm {
-  padding-block-start: 16px;
-}
-
-.fieldForm {
-  padding-block-start: 20px;
+  gap: 16px;
+  padding: 20px 16px;
 }
 
 .hint {
   color: var(--param-description-color);
 }
 
-.visibleBlock {
+.templateList {
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 12px;
-  border-radius: 6px;
-  background-color: var(--info-block-background);
+  flex-direction: column;
+  padding-block: 16px;
 }
 
-.visibleToggle {
-  display: flex;
-  flex-shrink: 0;
-  padding-block: 2px;
+.templateSearch {
+  padding-inline: 16px;
+  margin-block-end: 12px;
+}
 
-  .toggle {
-    position: static;
-    gap: 0;
+.emptyScreen {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 45px 16px 0;
+}
+
+.templateItem {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 48px;
+  padding: 4px 16px 8px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--selector-item-hover-background);
+  }
+
+  &.selected {
+    background-color: var(--selector-item-selected-background);
   }
 }
 
-.visibleText {
+.multiChoice {
+  --tag-height: 24px;
+  --tag-spacing-end: 0;
+  --tag-border-style: 1px solid var(--template-tile-container-border);
+
   display: flex;
-  flex: 1;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 4px;
-  min-width: 0;
+  padding-block-start: 4px;
 }
 
-.section {
+.dateInput {
+  margin-block-start: 4px;
+}
+
+.multiChoiceAnchor {
+  position: relative;
   display: flex;
-  flex-direction: column;
+}
+
+.addOptionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--template-tile-container-border);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+
+  svg path {
+    fill: var(--icon-button-color);
+  }
+
+  &:hover {
+    border-color: var(--selector-item-input-button-border-hover);
+  }
+}
+
+.choiceDropdown {
+  --dropdown-inner-padding: 12px 0;
+  --tag-height: 24px;
+  --tag-border-style: 1px solid var(--template-tile-container-border);
+
+  min-width: 254px;
+  margin-block-start: 4px;
+
+  .choiceOption {
+    --checkbox-gap: 0;
+
+    align-items: center;
+    gap: 12px;
+    height: 30px;
+    padding: 0 16px;
+    line-height: normal;
+
+    label {
+      pointer-events: none;
+    }
+  }
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
   gap: 12px;
 }
 
-.sectionTitle {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.list {
-  display: flex;
-  flex-direction: column;
-}
-
-.fieldRow {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 48px;
-
-  &.dragging {
-    opacity: 0.5;
-
-    .dragHandle {
-      cursor: grabbing;
-    }
-  }
-
-  &.dropBefore::before,
-  &.dropAfter::after {
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    height: 2px;
-    background-color: var(--accent-main);
-  }
-
-  &.dropBefore::before {
-    top: -1px;
-  }
-
-  &.dropAfter::after {
-    bottom: -1px;
-  }
-}
-
-.dragHandle {
-  display: flex;
+.removeSpacer {
   flex-shrink: 0;
-  cursor: grab;
-  touch-action: none;
-
-  path {
-    fill: var(--icon-button-color);
-  }
+  width: 16px;
 }
 
-.fieldInfo {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.optionList {
+.newField {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-
-.optionRow {
-  display: flex;
-  align-items: center;
   gap: 12px;
 }

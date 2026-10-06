@@ -43,9 +43,10 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
 
+import ConfirmDeleteDialog from "SRC_DIR/components/ConfirmDeleteDialog";
+
 import { useTemplateEditor } from "../../hooks/useTemplateEditor";
-import { isValidField } from "../../utils";
-import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
+import { isFieldNameTaken, isValidField } from "../../utils";
 import FieldForm from "./FieldForm";
 import TemplateForm from "./TemplateForm";
 
@@ -80,6 +81,8 @@ const TemplatePanel = ({ template, onClose, onSaved }: TemplatePanelProps) => {
   const onSave = () =>
     hasRemovedFields ? setIsDeleteConfirmVisible(true) : save();
 
+  const isNameTaken = !!fieldForm && isFieldNameTaken(draft.fields, fieldForm);
+
   const getTitle = () => {
     if (fieldForm)
       return isNewField ? t("Metadata:AddField") : t("Metadata:EditField");
@@ -102,7 +105,11 @@ const TemplatePanel = ({ template, onClose, onSaved }: TemplatePanelProps) => {
 
         <ModalDialog.Body>
           {fieldForm ? (
-            <FieldForm value={fieldForm} onChange={setFieldForm} />
+            <FieldForm
+              value={fieldForm}
+              isNameTaken={isNameTaken}
+              onChange={setFieldForm}
+            />
           ) : (
             <TemplateForm
               draft={draft}
@@ -124,7 +131,7 @@ const TemplatePanel = ({ template, onClose, onSaved }: TemplatePanelProps) => {
               label={
                 isNewField ? t("Common:AddButton") : t("Common:SaveButton")
               }
-              isDisabled={!isValidField(fieldForm)}
+              isDisabled={!isValidField(fieldForm) || isNameTaken}
               onClick={submitField}
               testId="metadata_field_submit_button"
             />

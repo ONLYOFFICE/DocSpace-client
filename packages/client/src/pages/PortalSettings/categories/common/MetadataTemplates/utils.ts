@@ -42,6 +42,8 @@ import type {
 import type { TTranslation } from "@docspace/shared/types";
 
 import type {
+  TDragState,
+  TDropLine,
   TFieldDraft,
   TFieldForm,
   TTemplateChanges,
@@ -74,6 +76,27 @@ export const moveItem = <T>(items: T[], from: number, to: number): T[] => {
   next.splice(to, 0, next.splice(from, 1)[0]);
 
   return next;
+};
+
+export const getInsertPosition = (midpoints: number[], y: number) => {
+  const index = midpoints.findIndex((middle) => y < middle);
+
+  return index === -1 ? midpoints.length : index;
+};
+
+export const toMoveIndex = ({ from, position }: TDragState) =>
+  position > from ? position - 1 : position;
+
+export const getDropLine = (
+  drag: TDragState | null,
+  index: number,
+  count: number,
+): TDropLine | undefined => {
+  if (!drag || toMoveIndex(drag) === drag.from) return undefined;
+  if (drag.position === index) return "before";
+  if (drag.position === count && index === count - 1) return "after";
+
+  return undefined;
 };
 
 export const toFieldDrafts = (fields: TMetadataField[] = []): TFieldDraft[] =>
@@ -142,6 +165,18 @@ export const isValidField = (form: TFieldForm): form is TFieldDraft => {
     .filter(Boolean);
 
   return values.length > 0 && new Set(values).size === values.length;
+};
+
+export const isFieldNameTaken = (fields: TFieldDraft[], form: TFieldForm) => {
+  const name = form.name.trim().toLowerCase();
+
+  return (
+    !!name &&
+    fields.some(
+      (field) =>
+        field.key !== form.key && field.name.trim().toLowerCase() === name,
+    )
+  );
 };
 
 export const upsertField = (fields: TFieldDraft[], field: TFieldDraft) =>

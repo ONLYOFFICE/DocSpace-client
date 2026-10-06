@@ -33,63 +33,73 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
-import type { TTemplateItemProps } from "../../types";
-import { useContextOptions } from "../useContextOptions";
-import styles from "./RowView.module.scss";
-
-type RowItemProps = TTemplateItemProps & {
-  sectionWidth: number;
+type ConfirmDeleteDialogProps = {
+  title: string;
+  description: string;
+  deleteLabel?: string;
+  onDelete: () => Promise<void>;
+  onClose: () => void;
 };
 
-const RowItem = ({
-  item,
-  author,
-  sectionWidth,
-  onEdit,
+const ConfirmDeleteDialog = ({
+  title,
+  description,
+  deleteLabel,
   onDelete,
-  onToggleVisible,
-}: RowItemProps) => {
-  const { t } = useTranslation(["Metadata"]);
-  const contextOptions = useContextOptions({ item, onEdit, onDelete });
+  onClose,
+}: ConfirmDeleteDialogProps) => {
+  const { t } = useTranslation(["Common"]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const fieldsCount = t("Metadata:FieldsCount", {
-    count: item.fields?.length ?? 0,
-  });
+  const onSubmit = async () => {
+    setIsLoading(true);
+    await onDelete();
+    onClose();
+  };
 
   return (
-    <Row contextOptions={contextOptions}>
-      <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
-        <div>
-          <Text fontSize="14px" fontWeight={600} truncate>
-            {item.name}
-          </Text>
-          <Text
-            className="row-content_text"
-            fontSize="12px"
-            fontWeight={600}
-            truncate
-          >
-            {author ? `${fieldsCount} | ${author}` : fieldsCount}
-          </Text>
-        </div>
-
-        <div className={styles.toggleButtonWrapper}>
-          <ToggleButton
-            className="toggleButton"
-            isChecked={item.visible}
-            onChange={() => onToggleVisible(item)}
-            dataTestId={`metadata_template_visible_${item.id}`}
-          />
-        </div>
-      </RowContent>
-    </Row>
+    <ModalDialog
+      visible
+      autoMaxHeight
+      zIndex={312}
+      displayType={ModalDialogType.modal}
+      onClose={onClose}
+      dataTestId="confirm_delete_dialog"
+    >
+      <ModalDialog.Header>{title}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <Text>{description}</Text>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          primary
+          scale
+          size={ButtonSize.normal}
+          label={deleteLabel ?? t("Common:Delete")}
+          isLoading={isLoading}
+          onClick={onSubmit}
+          testId="confirm_delete_button"
+        />
+        <Button
+          scale
+          size={ButtonSize.normal}
+          label={t("Common:CancelButton")}
+          isDisabled={isLoading}
+          onClick={onClose}
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
   );
 };
 
-export default RowItem;
+export default ConfirmDeleteDialog;

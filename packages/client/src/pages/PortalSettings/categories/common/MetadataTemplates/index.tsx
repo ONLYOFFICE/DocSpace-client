@@ -42,11 +42,11 @@ import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
 import { isMobile } from "@docspace/shared/utils";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import ConfirmDeleteDialog from "SRC_DIR/components/ConfirmDeleteDialog";
 
 import { useMetadataTemplates } from "./hooks/useMetadataTemplates";
 import TemplatesView from "./sub-components";
 import TemplatePanel from "./sub-components/TemplatePanel";
-import ConfirmDeleteDialog from "./sub-components/ConfirmDeleteDialog";
 import styles from "./MetadataTemplates.module.scss";
 
 const MetadataTemplates = () => {

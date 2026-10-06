@@ -33,63 +33,64 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import EditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+
+import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
-import type { TTemplateItemProps } from "../../types";
-import { useContextOptions } from "../useContextOptions";
-import styles from "./RowView.module.scss";
+import type { TCardActions } from "../types";
+import styles from "../Metadata.module.scss";
 
-type RowItemProps = TTemplateItemProps & {
-  sectionWidth: number;
+type MetadataCardProps = {
+  title: string;
+  actions?: TCardActions;
+  children: ReactNode;
 };
 
-const RowItem = ({
-  item,
-  author,
-  sectionWidth,
-  onEdit,
-  onDelete,
-  onToggleVisible,
-}: RowItemProps) => {
-  const { t } = useTranslation(["Metadata"]);
-  const contextOptions = useContextOptions({ item, onEdit, onDelete });
+const MetadataCard = ({ title, actions, children }: MetadataCardProps) => {
+  const { t } = useTranslation(["Common"]);
 
-  const fieldsCount = t("Metadata:FieldsCount", {
-    count: item.fields?.length ?? 0,
-  });
+  const getContextOptions = (): ContextMenuModel[] => [
+    {
+      key: "metadata-card_edit",
+      label: t("Common:EditButton"),
+      icon: EditReactSvgUrl,
+      onClick: actions?.onEdit,
+    },
+    {
+      key: "separator",
+      isSeparator: true,
+    },
+    {
+      key: "metadata-card_delete",
+      label: t("Common:Delete"),
+      icon: CatalogTrashReactSvgUrl,
+      onClick: actions?.onDelete,
+    },
+  ];
 
   return (
-    <Row contextOptions={contextOptions}>
-      <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
-        <div>
-          <Text fontSize="14px" fontWeight={600} truncate>
-            {item.name}
-          </Text>
-          <Text
-            className="row-content_text"
-            fontSize="12px"
-            fontWeight={600}
-            truncate
-          >
-            {author ? `${fieldsCount} | ${author}` : fieldsCount}
-          </Text>
-        </div>
-
-        <div className={styles.toggleButtonWrapper}>
-          <ToggleButton
-            className="toggleButton"
-            isChecked={item.visible}
-            onChange={() => onToggleVisible(item)}
-            dataTestId={`metadata_template_visible_${item.id}`}
+    <div className={styles.card} data-testid="info_panel_metadata_card">
+      <div className={styles.cardHeader}>
+        <Text fontSize="14px" fontWeight={600} lineHeight="16px" truncate>
+          {title}
+        </Text>
+        {actions ? (
+          <ContextMenuButton
+            directionX="right"
+            getData={getContextOptions}
+            testId="info_panel_metadata_card_menu"
           />
-        </div>
-      </RowContent>
-    </Row>
+        ) : null}
+      </div>
+      {children}
+    </div>
   );
 };
 
-export default RowItem;
+export default MetadataCard;

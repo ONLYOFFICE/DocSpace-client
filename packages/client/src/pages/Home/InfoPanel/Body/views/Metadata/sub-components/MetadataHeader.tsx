@@ -33,63 +33,50 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
+
 import { useTranslation } from "react-i18next";
 
-import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
-import type { TTemplateItemProps } from "../../types";
-import { useContextOptions } from "../useContextOptions";
-import styles from "./RowView.module.scss";
+import type { TAddMetadataActions } from "../types";
+import AddMetadataMenu from "./AddMetadataMenu";
+import styles from "../Metadata.module.scss";
 
-type RowItemProps = TTemplateItemProps & {
-  sectionWidth: number;
+type MetadataHeaderProps = {
+  addActions?: TAddMetadataActions;
 };
 
-const RowItem = ({
-  item,
-  author,
-  sectionWidth,
-  onEdit,
-  onDelete,
-  onToggleVisible,
-}: RowItemProps) => {
-  const { t } = useTranslation(["Metadata"]);
-  const contextOptions = useContextOptions({ item, onEdit, onDelete });
-
-  const fieldsCount = t("Metadata:FieldsCount", {
-    count: item.fields?.length ?? 0,
-  });
+const MetadataHeader = ({ addActions }: MetadataHeaderProps) => {
+  const { t } = useTranslation(["Metadata", "Common"]);
 
   return (
-    <Row contextOptions={contextOptions}>
-      <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
-        <div>
-          <Text fontSize="14px" fontWeight={600} truncate>
-            {item.name}
-          </Text>
-          <Text
-            className="row-content_text"
-            fontSize="12px"
-            fontWeight={600}
-            truncate
-          >
-            {author ? `${fieldsCount} | ${author}` : fieldsCount}
-          </Text>
-        </div>
-
-        <div className={styles.toggleButtonWrapper}>
-          <ToggleButton
-            className="toggleButton"
-            isChecked={item.visible}
-            onChange={() => onToggleVisible(item)}
-            dataTestId={`metadata_template_visible_${item.id}`}
-          />
-        </div>
-      </RowContent>
-    </Row>
+    <div className={styles.header}>
+      <Text
+        className={styles.hint}
+        fontSize="14px"
+        fontWeight={600}
+        lineHeight="16px"
+      >
+        {t("Common:SubmenuMetadata")}
+      </Text>
+      {addActions ? (
+        <AddMetadataMenu {...addActions}>
+          {(openMenu) => (
+            <IconButton
+              iconName={FormFileReactSvgUrl}
+              size={16}
+              isFill
+              title={t("Metadata:AddMetadata")}
+              onClick={openMenu}
+              dataTestId="info_panel_metadata_add_button"
+            />
+          )}
+        </AddMetadataMenu>
+      ) : null}
+    </div>
   );
 };
 
-export default RowItem;
+export default MetadataHeader;

@@ -33,63 +33,32 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { DateTime } from "luxon";
 import { useTranslation } from "react-i18next";
 
-import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
-import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { DatePicker } from "@onlyoffice/apps-ui-kit/components/date-picker";
+import { isMobile } from "@docspace/shared/utils";
 
-import type { TTemplateItemProps } from "../../types";
-import { useContextOptions } from "../useContextOptions";
-import styles from "./RowView.module.scss";
+import type { TValueInputProps } from "../../types";
+import styles from "../Panel.module.scss";
 
-type RowItemProps = TTemplateItemProps & {
-  sectionWidth: number;
-};
+const DateInput = ({ value, onChange }: TValueInputProps<string>) => {
+  const { t, i18n } = useTranslation(["Common"]);
 
-const RowItem = ({
-  item,
-  author,
-  sectionWidth,
-  onEdit,
-  onDelete,
-  onToggleVisible,
-}: RowItemProps) => {
-  const { t } = useTranslation(["Metadata"]);
-  const contextOptions = useContextOptions({ item, onEdit, onDelete });
-
-  const fieldsCount = t("Metadata:FieldsCount", {
-    count: item.fields?.length ?? 0,
-  });
+  const date = value ? DateTime.fromISO(value) : null;
 
   return (
-    <Row contextOptions={contextOptions}>
-      <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
-        <div>
-          <Text fontSize="14px" fontWeight={600} truncate>
-            {item.name}
-          </Text>
-          <Text
-            className="row-content_text"
-            fontSize="12px"
-            fontWeight={600}
-            truncate
-          >
-            {author ? `${fieldsCount} | ${author}` : fieldsCount}
-          </Text>
-        </div>
-
-        <div className={styles.toggleButtonWrapper}>
-          <ToggleButton
-            className="toggleButton"
-            isChecked={item.visible}
-            onChange={() => onToggleVisible(item)}
-            dataTestId={`metadata_template_visible_${item.id}`}
-          />
-        </div>
-      </RowContent>
-    </Row>
+    <DatePicker
+      className={styles.dateInput}
+      outerDate={date}
+      openDate={date ?? DateTime.now()}
+      locale={i18n.language}
+      selectDateText={t("Common:SelectDate")}
+      onChange={(next) => onChange(next?.toISODate() ?? "")}
+      isMobile={isMobile()}
+      testId="metadata_date_input"
+    />
   );
 };
 
-export default RowItem;
+export default DateInput;

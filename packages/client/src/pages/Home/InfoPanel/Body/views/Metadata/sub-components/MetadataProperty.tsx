@@ -33,13 +33,30 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { MetadataFieldType } from "@docspace/shared/enums";
+import type { ReactNode } from "react";
 
-export const FIELD_TYPES = [
-  MetadataFieldType.String,
-  MetadataFieldType.Number,
-  MetadataFieldType.Date,
-  MetadataFieldType.SingleChoice,
-  MetadataFieldType.MultiChoice,
-];
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
+import styles from "../Metadata.module.scss";
+
+type MetadataPropertyProps = {
+  label: string;
+  children: ReactNode;
+};
+
+const MetadataProperty = ({ label, children }: MetadataPropertyProps) => (
+  <div className={styles.property}>
+    <Text
+      className={styles.hint}
+      fontSize="12px"
+      fontWeight={600}
+      lineHeight="16px"
+      truncate
+    >
+      {label}
+    </Text>
+    {children}
+  </div>
+);
+
+export default MetadataProperty;

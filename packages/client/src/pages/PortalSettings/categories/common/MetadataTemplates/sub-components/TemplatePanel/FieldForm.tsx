@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -45,8 +46,9 @@ import {
   TextInput,
 } from "@onlyoffice/apps-ui-kit/components/text-input";
 import type { MetadataFieldType } from "@docspace/shared/enums";
+import { METADATA_NAME_MAX_LENGTH } from "@docspace/shared/utils/metadata";
 
-import { FIELD_TYPES, MAX_NAME_LENGTH } from "../../constants";
+import { FIELD_TYPES } from "../../constants";
 import type { TFieldForm } from "../../types";
 import {
   addOption,
@@ -61,10 +63,11 @@ import styles from "./TemplatePanel.module.scss";
 
 type FieldFormProps = {
   value: TFieldForm;
+  isNameTaken: boolean;
   onChange: (value: TFieldForm) => void;
 };
 
-const FieldForm = ({ value, onChange }: FieldFormProps) => {
+const FieldForm = ({ value, isNameTaken, onChange }: FieldFormProps) => {
   const { t } = useTranslation(["Metadata", "Common"]);
 
   const typeOptions: TOption[] = FIELD_TYPES.map((type) => ({
@@ -77,19 +80,22 @@ const FieldForm = ({ value, onChange }: FieldFormProps) => {
   ) ?? { key: "", label: t("Metadata:SelectType") };
 
   return (
-    <div className={styles.form}>
+    <div className={classNames(styles.form, styles.fieldForm)}>
       <FieldContainer
         labelVisible
         isVertical
         removeMargin
         labelText={t("Common:Name")}
+        hasError={isNameTaken}
+        errorMessage={t("Metadata:FieldNameExists")}
       >
         <TextInput
           type={InputType.text}
           value={value.name}
+          hasError={isNameTaken}
           onChange={(e) => onChange({ ...value, name: e.target.value })}
           placeholder={t("Metadata:EnterFieldName")}
-          maxLength={MAX_NAME_LENGTH}
+          maxLength={METADATA_NAME_MAX_LENGTH}
           scale
           isAutoFocussed
           testId="metadata_field_name_input"

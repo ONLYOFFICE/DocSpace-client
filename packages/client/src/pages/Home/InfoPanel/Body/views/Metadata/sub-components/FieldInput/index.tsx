@@ -34,12 +34,41 @@
  */
 
 import { MetadataFieldType } from "@docspace/shared/enums";
+import type { TEntryMetadataField } from "@docspace/shared/api/metadata/types";
+import type { TMetadataInput } from "@docspace/shared/utils/metadata";
 
-export const FIELD_TYPES = [
-  MetadataFieldType.String,
-  MetadataFieldType.Number,
-  MetadataFieldType.Date,
-  MetadataFieldType.SingleChoice,
-  MetadataFieldType.MultiChoice,
-];
+import type { TValueInputProps } from "../../types";
+import DateInput from "./DateInput";
+import MultiChoiceInput from "./MultiChoiceInput";
+import SingleChoiceInput from "./SingleChoiceInput";
+import TextValueInput from "./TextValueInput";
 
+type FieldInputProps = TValueInputProps<TMetadataInput> & {
+  field: TEntryMetadataField;
+};
+
+const FieldInput = ({ field, value, onChange }: FieldInputProps) => {
+  const options = field.options ?? [];
+
+  if (Array.isArray(value)) {
+    return field.type === MetadataFieldType.MultiChoice ? (
+      <MultiChoiceInput options={options} value={value} onChange={onChange} />
+    ) : (
+      <SingleChoiceInput options={options} value={value} onChange={onChange} />
+    );
+  }
+
+  if (field.type === MetadataFieldType.Date) {
+    return <DateInput value={value} onChange={onChange} />;
+  }
+
+  return (
+    <TextValueInput
+      isNumber={field.type === MetadataFieldType.Number}
+      value={value}
+      onChange={onChange}
+    />
+  );
+};
+
+export default FieldInput;

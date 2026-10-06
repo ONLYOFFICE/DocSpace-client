@@ -1057,6 +1057,8 @@
   "FromPortal": "من مساحة العمل",
   "FromPricePerUserMonth": "بدءًا من {{price}} لكل مستخدم / شهريًا",
   "FromTemplate": "من قالب",
+  "FromTemplateGallery": "من معرض القوالب",
+  "FromTemplateGalleryDescription": "أنشئ مساحة تحتوي على نموذج جاهز من معرض القوالب. يمكنك تعديل النموذج ودعوة الأعضاء لتعبئته.",
   "FromTemplateRoomInfo": "أنشئوا غرفة استنادًا إلى قالب. سيتم نقل جميع الإعدادات والمستخدمين والمجلدات والملفات من قالب الغرفة المختار.",
   "FromTextFile": "من ملف نصي",
   "FromTo": "من <1>{{fromDate}}</1> إلى <2>{{toDate}}</2>",

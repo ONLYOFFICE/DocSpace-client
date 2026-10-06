@@ -1057,6 +1057,8 @@
   "FromPortal": "Iz delovnega prostora",
   "FromPricePerUserMonth": "Od {{price}} na uporabnika / mesec",
   "FromTemplate": "Iz predloge",
+  "FromTemplateGallery": "Iz galerije predlogov",
+  "FromTemplateGalleryDescription": "Ustvarite prostor z vnaprej pripravljenim obrazcem iz galerije predlogov. Obrazec lahko uredite in povabite člane, da ga izpolnijo.",
   "FromTemplateRoomInfo": "Ustvarite sobo na podlagi predloge. Vse nastavitve, uporabniki, mape in datoteke bodo prevzete iz izbrane predloge sobe.",
   "FromTextFile": "Iz besedilne datoteke",
   "FromTo": "Od <1>{{fromDate}}</1> do <2>{{toDate}}</2>",

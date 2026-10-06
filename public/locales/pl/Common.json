@@ -1057,6 +1057,8 @@
   "FromPortal": "Z przestrzeni roboczej",
   "FromPricePerUserMonth": "Od {{price}} za użytkownika / miesiąc",
   "FromTemplate": "Z szablonu",
+  "FromTemplateGallery": "Z galerii szablonów",
+  "FromTemplateGalleryDescription": "Utwórz obszar z gotowym formularzem z galerii szablonów. Możesz edytować formularz i zaprosić członków do jego wypełnienia.",
   "FromTemplateRoomInfo": "Utwórz pokój na podstawie szablonu. Wszystkie ustawienia, użytkownicy, katalogi i pliki zostaną wzięte z wybranego szablonu pokoju.",
   "FromTextFile": "Z pliku tekstowego",
   "FromTo": "Od <1>{{fromDate}}</1> do <2>{{toDate}}</2>",

@@ -1057,6 +1057,8 @@
   "FromPortal": "Z pracovního prostoru",
   "FromPricePerUserMonth": "Od {{price}} za uživatele / měsíc",
   "FromTemplate": "Ze šablony",
+  "FromTemplateGallery": "Z galerie šablon",
+  "FromTemplateGalleryDescription": "Vytvořte prostor s připraveným formulářem z galerie šablon. Formulář můžete upravit a pozvat členy, aby ho vyplnili.",
   "FromTemplateRoomInfo": "Vytvoření místnosti podle šablony. Všechna nastavení, uživatelé, složky a soubory budou převzaty z vybrané šablony místnosti.",
   "FromTextFile": "Z textového souboru",
   "FromTo": "Od <1>{{fromDate}}</1> do <2>{{toDate}}</2>",

@@ -1057,6 +1057,8 @@
   "FromPortal": "ワークスペースから",
   "FromPricePerUserMonth": "ユーザーあたり{{price}}／月から",
   "FromTemplate": "テンプレートから",
+  "FromTemplateGallery": "テンプレートギャラリーから",
+  "FromTemplateGalleryDescription": "テンプレートギャラリーの既製フォームを使ってスペースを作成します。フォームを編集し、メンバーを招待して入力してもらうことができます。",
   "FromTemplateRoomInfo": "テンプレートに基づいてルームを作成します。すべての設定、ユーザー、フォルダー、およびファイルは、選択されたルームのテンプレートから取得されます。",
   "FromTextFile": "テキストファイルから",
   "FromTo": "<1>{{fromDate}}</1> から <2>{{toDate}}</2> まで",

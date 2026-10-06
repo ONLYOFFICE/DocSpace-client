@@ -1057,6 +1057,8 @@
   "FromPortal": "Do espaço de trabalho",
   "FromPricePerUserMonth": "A partir de {{price}} por usuário / mês",
   "FromTemplate": "Do modelo",
+  "FromTemplateGallery": "Da galeria de modelos",
+  "FromTemplateGalleryDescription": "Crie um espaço com um formulário pronto da galeria de modelos. Você pode editar o formulário e convidar membros para preenchê-lo.",
   "FromTemplateRoomInfo": "Crie uma sala com base em um modelo. Todas as configurações, usuários, pastas e arquivos serão retirados do modelo de sala selecionado.",
   "FromTextFile": "De arquivo de texto",
   "FromTo": "De <1>{{fromDate}}</1> a <2>{{toDate}}</2>",

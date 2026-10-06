@@ -1057,6 +1057,8 @@
   "FromPortal": "来自工作区",
   "FromPricePerUserMonth": "起价 {{price}}/用户/月",
   "FromTemplate": "从模板",
+  "FromTemplateGallery": "从模板库",
+  "FromTemplateGalleryDescription": "使用模板库中的现成表单创建空间。您可以编辑表单并邀请成员填写。",
   "FromTemplateRoomInfo": "使用模板创建房间。所有设置、用户、文件夹和文件都将从所选的房间模板中获取。",
   "FromTextFile": "从文本文件",
   "FromTo": "从<1>{{fromDate}}</1>至<2>{{toDate}}</2>",

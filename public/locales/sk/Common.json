@@ -1057,6 +1057,8 @@
   "FromPortal": "Z pracovného priestoru",
   "FromPricePerUserMonth": "Od {{price}} za používateľa / mesiac",
   "FromTemplate": "Zo šablóny",
+  "FromTemplateGallery": "Z galérie šablón",
+  "FromTemplateGalleryDescription": "Vytvorte priestor s pripraveným formulárom z galérie šablón. Formulár môžete upraviť a pozvať členov, aby ho vyplnili.",
   "FromTemplateRoomInfo": "Vytvorenie miestnosti na základe šablóny. Všetky nastavenia, používatelia, priečinky a súbory budú prevzaté z vybranej šablóny miestnosti.",
   "FromTextFile": "Z textového súboru",
   "FromTo": "Od <1>{{fromDate}}</1> do <2>{{toDate}}</2>",

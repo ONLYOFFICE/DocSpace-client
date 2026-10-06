@@ -1057,6 +1057,8 @@
   "FromPortal": "Uit de werkruimte",
   "FromPricePerUserMonth": "Vanaf {{price}} per gebruiker / maand",
   "FromTemplate": "Van sjabloon",
+  "FromTemplateGallery": "Van sjabloon galerij",
+  "FromTemplateGalleryDescription": "Maak een ruimte met een kant-en-klaar formulier uit de sjabloon galerij. U kunt het formulier bewerken en leden uitnodigen om het in te vullen.",
   "FromTemplateRoomInfo": "Maak een kamer op basis van een sjabloon. Alle instellingen, gebruikers, mappen en bestanden worden overgenomen van de geselecteerde kamer sjabloon.",
   "FromTextFile": "Uit tekstbestand",
   "FromTo": "Van <1>{{fromDate}}</1> tot <2>{{toDate}}</2>",

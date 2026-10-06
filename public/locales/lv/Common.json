@@ -1057,6 +1057,8 @@
   "FromPortal": "No darbvietas",
   "FromPricePerUserMonth": "No {{price}} par lietotāju / mēnesī",
   "FromTemplate": "No veidnes",
+  "FromTemplateGallery": "No šablonu galerijas",
+  "FromTemplateGalleryDescription": "Izveidojiet telpu ar gatavu veidlapu no šablonu galerijas. Varat rediģēt veidlapu un uzaicināt dalībniekus to aizpildīt.",
   "FromTemplateRoomInfo": "Izveidojiet telpu, pamatojoties uz veidni. Visi iestatījumi, lietotāji, mapes un faili tiks pārņemti no izvēlētās telpas veidnes.",
   "FromTextFile": "No teksta faila",
   "FromTo": "No <1>{{fromDate}}</1> līdz <2>{{toDate}}</2>",

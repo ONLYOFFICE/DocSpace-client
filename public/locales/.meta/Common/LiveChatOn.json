@@ -3,7 +3,7 @@
   "content": "Live chat was successfully connected",
   "content_en_sha1_hash": "7bcf42efaa0f21c0fcd4e7feb04b48e397e369c3",
   "created_at": "2025-05-19T21:30:46.253Z",
-  "updated_at": "2026-09-25T07:39:03.277Z",
+  "updated_at": "2026-10-06T10:42:37.692Z",
   "comment": {
     "text": "This is a toast message confirming that the live chat widget has successfully connected and is now visible to the user.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
       "line_number": 331,
-      "context": "// the app's own Support button on the page, while the vendor's launcher\n // stays hidden either way. Switching live chat off has to take an open\n // chat window down with it.\n if (!isShow) zendeskAPI.addChanges(\"webWidget\", \"hide\");\n \n toastr.success(isShow ? t(\"Common:LiveChatOn\") : t(\"Common:LiveChatOff\"));\n };\n \n onSupportClick = () => {\n const supportUrl = this.settingsStore.feedbackAndSupportUrl;",
+      "context": "// and hides the widget as a whole. The first switch-on is what loads the\n // script (ui-kit's Zendesk, off the flag above), and the command waits in\n // the queue until it has; the launcher is on screen by default anyway.\n zendeskAPI.addChanges(\"messenger\", isShow ? \"show\" : \"hide\");\n \n toastr.success(isShow ? t(\"Common:LiveChatOn\") : t(\"Common:LiveChatOff\"));\n };\n \n onSupportClick = () => {\n const supportUrl = this.settingsStore.feedbackAndSupportUrl;",
       "module": "/packages/client"
     }
   ],

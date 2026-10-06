@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2026-10-01T08:23:21.759Z",
+  "updated_at": "2026-10-06T10:42:37.527Z",
   "comment": {
     "text": "This is a label for an input field. It prompts the user to enter a name for a group or a room.",
     "is_auto": true,
@@ -27,12 +27,6 @@
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
       "line_number": 436,
       "context": "const tagsTitle = isTemplateSelected || isTemplate ? t(\"Files:RoomTagsLabel\") : \"\";\n \n const inputTitle =\n isTemplateSelected || isTemplate\n ? `${t(\"Files:TemplateName\")}:`\n : `${t(\"Common:Label\")}:`;\n \n return (\n <div\n className={`${styles.setRoomParams}${disableImageRescaling ? ` ${styles.disableImageRescaling}` : \"\"}`}\n >",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/TemplateGallery/Filter/SortFilter/index.tsx",
-      "line_number": 67,
-      "context": "const sortData: SortData[] = [\n {\n id: \"sort-by_name\",\n key: \"name_form\",\n label: t(\"Common:Label\"),\n default: false,\n isSelected: false,\n },\n {\n id: \"sort-by_updatedAt\",",
       "module": "/packages/client"
     },
     {

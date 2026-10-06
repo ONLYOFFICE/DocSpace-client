@@ -3,7 +3,7 @@
   "content": "Upload any file types from your personal device",
   "content_en_sha1_hash": "5a550e3da3236feb33525df9c979f22108806a7d",
   "created_at": "2026-08-31T18:23:45.859Z",
-  "updated_at": "2026-08-31T19:56:50.945Z",
+  "updated_at": "2026-10-06T10:42:37.455Z",
   "comment": {
     "text": "Subtext for an upload option in an empty state view, describing the ability to select files from a local device.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 492,
+      "line_number": 519,
       "context": "// } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),\n description: t(\"EmptyView:UploadDeviceOptionDescription\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 492,
+      "line_number": 519,
       "context": "// } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),\n description: t(\"EmptyView:UploadDeviceOptionDescription\"),",
       "module": "/packages/client"
     }

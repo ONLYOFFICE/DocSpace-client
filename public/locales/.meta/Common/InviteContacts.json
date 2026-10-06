@@ -3,7 +3,7 @@
   "content": "Invite people",
   "content_en_sha1_hash": "e1eb97afa7ac563e4e26cd26d812294d4e04782c",
   "created_at": "2026-08-31T18:23:11.871Z",
-  "updated_at": "2026-09-14T19:16:02.536Z",
+  "updated_at": "2026-10-06T10:42:37.462Z",
   "comment": {
     "text": "Label for a menu option or a title used to initiate the process of inviting users to a room or folder.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 340,
+      "line_number": 343,
       "context": "t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUserOption = createInviteOption(\n t(\"Common:InviteContacts\"),\n t(\"EmptyView:InviteUsersOptionDescription\"),\n );\n \n const inviteUser = isTemplateFolder ? templateAccess : inviteUserOption;",
       "module": "/packages/client"
     },

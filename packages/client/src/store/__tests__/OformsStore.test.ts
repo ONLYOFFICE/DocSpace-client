@@ -194,6 +194,17 @@ describe("OformsStore filter conditions", () => {
     expect(store.oformsFilter.categoryIds).toEqual(["sc-30"]);
   });
 
+  it("removes a category only once when its chip reports the removal twice", () => {
+    const store = createStore();
+    store.setPurposes(purposes);
+    store.oformsFilter.categoryIds = ["sc-10", "sc-30"];
+
+    store.removeOformsCategory("sc-10");
+    store.removeOformsCategory("sc-10");
+
+    expect(store.oformsFilter.categoryIds).toEqual(["sc-30"]);
+  });
+
   it("drops the categories of the other purpose on a purpose switch", () => {
     const store = createStore();
     store.setPurposes(purposes);
@@ -244,6 +255,15 @@ describe("OformsStore filter conditions", () => {
 
     expect(store.oformsFilter.purpose).toBe("business");
     expect(api.getOforms).not.toHaveBeenCalled();
+  });
+
+  it("closes the filter panel on a tab switch", async () => {
+    const store = createStore();
+    store.setFilterPanelVisible(true);
+
+    await store.resetFilters(".xlsx");
+
+    expect(store.filterPanelVisible).toBe(false);
   });
 
   it("closes the filter panel together with the gallery", () => {
@@ -326,7 +346,7 @@ describe("OformsStore taxonomy loading", () => {
   it("keeps the selected categories the new language still has", async () => {
     const store = createStore();
     await store.initTemplateGallery();
-    store.oformsFilter.categoryIds = ["sc-10", "sc-gone"];
+    store.oformsFilter.categoryIds = ["sc-10", "sc-20", "sc-gone"];
     api.getOforms.mockClear();
 
     await store.filterOformsByLocale("de");

@@ -53,6 +53,6 @@ export interface SelectedFiltersProps extends SelectedFiltersOwnProps {
   filterOformsByLocaleIsLoading: boolean;
   filterOformsByLocale: (locale: string) => Promise<void>;
   filterOformsByPurpose: (purpose: string) => void;
-  toggleOformsCategory: (categoryId: string) => void;
+  removeOformsCategory: (categoryId: string) => void;
   clearOformsFilter: () => Promise<void>;
 }

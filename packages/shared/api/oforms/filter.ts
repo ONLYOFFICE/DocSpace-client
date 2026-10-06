@@ -56,7 +56,6 @@ const DEFAULT_LOCALE = null;
 const DEFAULT_SEARCH = "";
 const DEFAULT_SORT_BY = "";
 const DEFAULT_SORT_ORDER = "";
-const DEFAULT_CATEGORY_IDS: string[] = [];
 const DEFAULT_PURPOSE = "";
 const DEFAULT_EXTENSION = "pdf";
 
@@ -92,7 +91,7 @@ class OformsFilter {
   constructor(
     page = DEFAULT_PAGE,
     pageSize = DEFAULT_PAGE_SIZE,
-    categoryIds = DEFAULT_CATEGORY_IDS,
+    categoryIds: string[] = [],
     purpose = DEFAULT_PURPOSE,
     locale: string | null = DEFAULT_LOCALE,
     search = DEFAULT_SEARCH,
@@ -117,7 +116,7 @@ class OformsFilter {
     return new OformsFilter(
       DEFAULT_PAGE,
       DEFAULT_PAGE_SIZE,
-      DEFAULT_CATEGORY_IDS,
+      [],
       DEFAULT_PURPOSE,
       DEFAULT_LOCALE,
       DEFAULT_SEARCH,

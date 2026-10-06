@@ -49,11 +49,11 @@
   max-height: calc(100vh - 320px);
   overflow-y: auto;
   box-sizing: border-box;
-  padding: 18px 16px 16px;
+  padding: 16px;
 
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 
   background: var(--dropdown-background);
   border: var(--dropdown-border);
@@ -70,7 +70,7 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .section .languageCombo {
@@ -78,8 +78,8 @@
 }
 
 .sectionHeader {
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 13px;
+  line-height: 20px;
 }
 
 .categories {

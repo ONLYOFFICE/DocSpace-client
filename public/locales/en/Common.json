@@ -1057,6 +1057,8 @@
   "FromPortal": "From the workspace",
   "FromPricePerUserMonth": "From {{price}} per user / month",
   "FromTemplate": "From template",
+  "FromTemplateGallery": "From template gallery",
+  "FromTemplateGalleryDescription": "Create a space with a ready-made form from the template gallery. You can edit the form and invite members to fill it out.",
   "FromTemplateRoomInfo": "Create a room based on a template. All settings, users, folders and files will be taken from the selected room template.",
   "FromTextFile": "From text file",
   "FromTo": "From <1>{{fromDate}}</1> To <2>{{toDate}}</2>",

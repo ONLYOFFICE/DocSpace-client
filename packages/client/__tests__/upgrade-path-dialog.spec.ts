@@ -59,7 +59,7 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
  * on a desktop and stack below the tablet breakpoint.
  *
  * What the dialog reads comes from the standalone /settings preset
- * (`externalResources.site` and `.support`) and from /settings/payment
+ * (`externalResources.site`) and from /settings/payment
  * (`salesEmail`, requested when the dialog opens), so every link and both
  * trial buttons are live here.
  */
@@ -198,7 +198,7 @@ for (const viewport of VIEWPORTS) {
     await expect(links.nth(0)).toHaveAttribute("href", `${SITE}/demo-order.aspx`);
     await expect(links.nth(1)).toHaveAttribute(
       "href",
-      "https://helpdesk.onlyoffice.com",
+      `${SITE}/support-contact-form`,
     );
     await expect(links.nth(2)).toHaveAttribute(
       "href",
@@ -268,8 +268,8 @@ for (const viewport of VIEWPORTS) {
     await dialog(page).getByTestId("upgrade-path-enterprise-trial").click();
     await dialog(page).getByTestId("upgrade-path-developer-trial").click();
     expect(await readWindowOpen(page)).toEqual([
-      `${SITE}/download#docspace-enterprise`,
-      `${SITE}/download-developer#docspace-developer`,
+      `${SITE}/download#for-enterprises`,
+      `${SITE}/download#for-developers`,
     ]);
   });
 }

@@ -42,12 +42,11 @@ import { Bonus as BonusPage } from "@docspace/shared/pages/Payments/Bonus";
 const Bonus = (props) => {
   const {
     isInitPaymentPage,
-    feedbackAndSupportUrl,
+    siteDomain,
     salesEmail,
     logoText,
     enterpriseInstallScriptUrl,
     enterpriseInstallWindowsUrl,
-    forEnterprisesUrl,
     demoOrderUrl,
     showPortalSettingsLoader,
   } = props;
@@ -57,12 +56,11 @@ const Bonus = (props) => {
 
   return (
     <BonusPage
-      feedbackAndSupportUrl={feedbackAndSupportUrl}
+      siteDomain={siteDomain}
       salesEmail={salesEmail}
       logoText={logoText}
       enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
       enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
-      forEnterprisesUrl={forEnterprisesUrl}
       demoOrderUrl={demoOrderUrl}
     />
   );
@@ -75,8 +73,7 @@ export const Component = inject(
       logoText,
       enterpriseInstallScriptUrl,
       enterpriseInstallWindowsUrl,
-      feedbackAndSupportUrl,
-      forEnterprisesUrl,
+      siteDomain,
       demoOrderUrl,
     } = settingsStore;
 
@@ -84,12 +81,11 @@ export const Component = inject(
 
     return {
       isInitPaymentPage,
-      feedbackAndSupportUrl,
+      siteDomain,
       salesEmail,
       logoText,
       enterpriseInstallScriptUrl,
       enterpriseInstallWindowsUrl,
-      forEnterprisesUrl,
       demoOrderUrl,
       showPortalSettingsLoader,
     };

@@ -72,13 +72,11 @@ async function Page() {
   }
 
   const { logoText, externalResources } = settings;
-  const { site, helpcenter, support } = externalResources;
-  const forEnterprisesUrl = site.domain + site.entries.forenterprises;
+  const { site, helpcenter } = externalResources;
   const enterpriseInstallScriptUrl =
     helpcenter.domain + helpcenter.entries.enterpriseinstallscript;
   const enterpriseInstallWindowsUrl =
     helpcenter.domain + helpcenter.entries.enterpriseinstallwindows;
-  const feedbackAndSupportUrl = support.domain;
   const demoOrderUrl = site.domain + site.entries.demoorder;
 
   const { openSource } = portalTariff;
@@ -91,12 +89,11 @@ async function Page() {
 
   return (
     <BonusPage
-      feedbackAndSupportUrl={feedbackAndSupportUrl}
+      siteDomain={site.domain}
       salesEmail={salesEmail}
       logoText={logoText}
       enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
       enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
-      forEnterprisesUrl={forEnterprisesUrl}
       demoOrderUrl={demoOrderUrl}
     />
   );

@@ -90,7 +90,7 @@ export const UpgradePathDialog = ({
   visible,
   onClose,
   demoOrderUrl,
-  feedbackAndSupportUrl,
+  supportUrl,
   salesEmail,
   onStartEnterpriseTrial,
   onStartDeveloperTrial,
@@ -163,7 +163,7 @@ export const UpgradePathDialog = ({
     },
     {
       id: "support",
-      href: feedbackAndSupportUrl,
+      href: supportUrl,
       label: t("Common:UpgradeGetTechAssistanceLink"),
     },
     {

@@ -43,7 +43,8 @@ import { UpgradePathDialog } from "@docspace/shared/dialogs/upgrade-path-dialog"
 import {
   DEVELOPER_TRIAL_PATH,
   ENTERPRISE_TRIAL_PATH,
-  getUpgradeTrialUrl,
+  SUPPORT_CONTACT_PATH,
+  getUpgradeSiteUrl,
 } from "@docspace/shared/dialogs/upgrade-path-dialog/UpgradePathDialog.constants";
 
 import { useStores } from "SRC_DIR/store/useStore";
@@ -54,11 +55,7 @@ const UpgradePathLine = () => {
   const { t } = useTranslation(["Common"]);
   const { paymentStore, settingsStore } = useStores();
   const { salesEmail, getSettingsPayment } = paymentStore;
-  const {
-    demoOrderUrl = "",
-    feedbackAndSupportUrl = "",
-    siteDomain = "",
-  } = settingsStore;
+  const { demoOrderUrl = "", siteDomain = "" } = settingsStore;
 
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const isPaymentSettingsRequested = useRef(false);
@@ -74,7 +71,7 @@ const UpgradePathLine = () => {
   const closeDialog = () => setIsDialogVisible(false);
 
   const openTrial = (path: string) =>
-    window.open(getUpgradeTrialUrl(siteDomain, path), "_blank", "noopener");
+    window.open(getUpgradeSiteUrl(siteDomain, path), "_blank", "noopener");
 
   const startEnterpriseTrial = siteDomain
     ? () => openTrial(ENTERPRISE_TRIAL_PATH)
@@ -117,7 +114,7 @@ const UpgradePathLine = () => {
         onClose={closeDialog}
         salesEmail={salesEmail}
         demoOrderUrl={demoOrderUrl}
-        feedbackAndSupportUrl={feedbackAndSupportUrl}
+        supportUrl={getUpgradeSiteUrl(siteDomain, SUPPORT_CONTACT_PATH)}
         onStartEnterpriseTrial={startEnterpriseTrial}
         onStartDeveloperTrial={startDeveloperTrial}
       />

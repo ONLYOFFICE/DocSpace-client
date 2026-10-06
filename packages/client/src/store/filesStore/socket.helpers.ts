@@ -43,6 +43,7 @@ import {
 } from "@docspace/shared/enums";
 import {
   frameCallEvent,
+  getCategoryType,
   getFileExtension,
 } from "@docspace/shared/utils/common";
 import {
@@ -533,7 +534,20 @@ export function redirectToParentImpl(
       }
 
       if (pathPart.id === roomsFolderId) {
-        return window.DocSpace.navigate("/");
+        const isForms =
+          getCategoryType(window.DocSpace.location) === CategoryType.Form;
+
+        const roomsFilter = RoomsFilter.getDefault();
+        if (isForms) roomsFilter.searchArea = RoomSearchArea.Forms;
+
+        const path = getCategoryUrl(
+          isForms ? CategoryType.Forms : CategoryType.Shared,
+        );
+
+        return window.DocSpace.navigate(
+          `${path}?${roomsFilter.toUrlParams(userId as string, true)}`,
+          { replace: true },
+        );
       }
 
       const filter = FilesFilter.getDefault();

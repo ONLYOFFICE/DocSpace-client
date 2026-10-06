@@ -194,6 +194,17 @@ describe("OformsStore filter conditions", () => {
     expect(store.oformsFilter.categoryIds).toEqual(["sc-30"]);
   });
 
+  it("removes a category only once when its chip reports the removal twice", () => {
+    const store = createStore();
+    store.setPurposes(purposes);
+    store.oformsFilter.categoryIds = ["sc-10", "sc-30"];
+
+    store.removeOformsCategory("sc-10");
+    store.removeOformsCategory("sc-10");
+
+    expect(store.oformsFilter.categoryIds).toEqual(["sc-30"]);
+  });
+
   it("drops the categories of the other purpose on a purpose switch", () => {
     const store = createStore();
     store.setPurposes(purposes);

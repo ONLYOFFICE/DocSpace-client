@@ -61,7 +61,7 @@ const SelectedFilters: FC<SelectedFiltersProps> = ({
   filterOformsByLocaleIsLoading,
   filterOformsByLocale,
   filterOformsByPurpose,
-  toggleOformsCategory,
+  removeOformsCategory,
   clearOformsFilter,
 }) => {
   const rowRef = useRef<HTMLDivElement>(null);
@@ -128,7 +128,7 @@ const SelectedFilters: FC<SelectedFiltersProps> = ({
         filterOformsByPurpose("");
         break;
       default:
-        toggleOformsCategory(String(key));
+        removeOformsCategory(String(key));
     }
   };
 
@@ -178,7 +178,7 @@ const injectStores = ({ oformsStore }: TStore) => ({
   filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
   filterOformsByLocale: oformsStore.filterOformsByLocale,
   filterOformsByPurpose: oformsStore.filterOformsByPurpose,
-  toggleOformsCategory: oformsStore.toggleOformsCategory,
+  removeOformsCategory: oformsStore.removeOformsCategory,
   clearOformsFilter: oformsStore.clearOformsFilter,
 });
 

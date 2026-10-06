@@ -473,6 +473,15 @@ class OformsStore {
     );
   };
 
+  removeOformsCategory = (categoryId: string) => {
+    const { categoryIds } = this.oformsFilter;
+    if (!categoryIds.includes(categoryId)) return;
+
+    this.filterOformsByCategories(
+      categoryIds.filter((id) => id !== categoryId),
+    );
+  };
+
   // Every purpose owns its own category groups, so only the selected
   // categories of the new purpose survive the switch.
   filterOformsByPurpose = (purpose: string) => {

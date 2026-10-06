@@ -34,11 +34,10 @@
  */
 
 export interface IBonusProps {
-  feedbackAndSupportUrl: string;
+  siteDomain: string;
   salesEmail: string;
   logoText: string;
   enterpriseInstallScriptUrl: string;
   enterpriseInstallWindowsUrl: string;
-  forEnterprisesUrl: string;
   demoOrderUrl: string;
 }

@@ -37,6 +37,11 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { PaymentsStandaloneLoader } from "../../../skeletons/payments";
+import {
+  DOCS_ENTERPRISE_PATH,
+  SUPPORT_CONTACT_PATH,
+  getUpgradeSiteUrl,
+} from "../../../dialogs/upgrade-path-dialog/UpgradePathDialog.constants";
 import { UpgradeNote } from "../common/UpgradeNote";
 
 import { EnterpriseFeatures } from "./sub-components/EnterpriseFeatures";
@@ -51,9 +56,8 @@ export const Bonus = ({
   logoText,
   enterpriseInstallScriptUrl,
   enterpriseInstallWindowsUrl,
-  forEnterprisesUrl,
+  siteDomain,
   demoOrderUrl,
-  feedbackAndSupportUrl,
 }: IBonusProps) => {
   const { t, ready } = useTranslation("Common");
 
@@ -86,9 +90,9 @@ export const Bonus = ({
         organizationName={logoText}
         license={license}
         salesEmail={salesEmail}
-        forEnterprisesUrl={forEnterprisesUrl}
+        docsEnterpriseUrl={getUpgradeSiteUrl(siteDomain, DOCS_ENTERPRISE_PATH)}
         demoOrderUrl={demoOrderUrl}
-        feedbackAndSupportUrl={feedbackAndSupportUrl}
+        supportUrl={getUpgradeSiteUrl(siteDomain, SUPPORT_CONTACT_PATH)}
       />
     </div>
   );

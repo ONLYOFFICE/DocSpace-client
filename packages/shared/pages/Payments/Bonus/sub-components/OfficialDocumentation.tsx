@@ -39,7 +39,7 @@ import { useTranslation } from "react-i18next";
 
 import DockerSvgUrl from "PUBLIC_DIR/images/upgrade.docker.svg?url";
 import LinuxSvgUrl from "PUBLIC_DIR/images/upgrade.linux.svg?url";
-import WindowsSvgUrl from "PUBLIC_DIR/images/share.microsoft.react.svg?url";
+import WindowsSvgUrl from "PUBLIC_DIR/images/upgrade.windows.svg?url";
 import ArrowUpRightReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up-right.react.svg?url";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";

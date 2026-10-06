@@ -9,9 +9,8 @@ const defaultProps = {
   logoText: "DocSpace",
   enterpriseInstallScriptUrl: "https://example.com/script",
   enterpriseInstallWindowsUrl: "https://example.com/windows",
-  forEnterprisesUrl: "https://example.com/enterprise",
+  siteDomain: "https://example.com",
   demoOrderUrl: "https://example.com/demo",
-  feedbackAndSupportUrl: "https://helpdesk.example.com/support",
 };
 
 describe("Bonus", () => {
@@ -47,9 +46,8 @@ describe("Bonus", () => {
       <Bonus
         {...defaultProps}
         salesEmail=""
-        forEnterprisesUrl=""
+        siteDomain=""
         demoOrderUrl=""
-        feedbackAndSupportUrl=""
       />,
     );
 

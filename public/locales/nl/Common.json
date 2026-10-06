@@ -2135,7 +2135,6 @@
   "SuccessfullySentMessage": "Uw bericht is succesvol verzonden. De verkoopafdeling neemt contact met u op.",
   "SuccessOperation": "{{operationName}}: Gereed",
   "SuggestFeature": "Stel een functie voor",
-  "Support": "Support",
   "SwitchKeyPassphraseHint": "Voer de wachtzin in voor de sleutel waarnaar u overschakelt. De bestanden in uw privékamer worden hiermee opnieuw versleuteld.",
   "SwitchKeyPassphraseTitle": "Versleutelingssleutel wisselen",
   "SwitchPlan": "Je gaat nu overstappen naar het <1>{{planName}} plan</1>.",

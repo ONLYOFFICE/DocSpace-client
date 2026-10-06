@@ -2135,7 +2135,6 @@
   "SuccessfullySentMessage": "Votre message a été envoyé avec succès. Vous serez contacté par le service commercial.",
   "SuccessOperation": "{{operationName}} : Terminé",
   "SuggestFeature": "Proposer une fonctionnalité",
-  "Support": "Assistance",
   "SwitchKeyPassphraseHint": "Saisissez la phrase de passe de la clé à laquelle vous passez. Les fichiers de vos salles privées seront rechiffrés avec elle.",
   "SwitchKeyPassphraseTitle": "Changer de clé de chiffrement",
   "SwitchPlan": "Vous êtes sur le point de passer au <1>plan {{planName}}</1>.",

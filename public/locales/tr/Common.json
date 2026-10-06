@@ -2135,7 +2135,6 @@
   "SuccessfullySentMessage": "Mesajınız başarıyla gönderildi. Satış Departmanı sizinle iletişime geçecektir.",
   "SuccessOperation": "{{operationName}}: Tamamlandı",
   "SuggestFeature": "Bir özellik önerin",
-  "Support": "Destek",
   "SwitchKeyPassphraseHint": "Geçiş yaptığınız anahtar için parolayı girin. Özel oda dosyalarınız bu anahtarla yeniden şifrelenecek.",
   "SwitchKeyPassphraseTitle": "Şifreleme anahtarını değiştir",
   "SwitchPlan": "<1>{{planName}}</1> planına geçiyorsunuz.",

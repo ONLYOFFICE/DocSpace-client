@@ -2135,7 +2135,6 @@
   "SuccessfullySentMessage": "ඔබගේ පණිවිඩය සාර්ථකව යවා ඇත. අලෙවි ක්‍රියාංශය ඔබව සම්බන්ධ කර ගනු ඇත.",
   "SuccessOperation": "{{operationName}}: අවසන් වුණා",
   "SuggestFeature": "විශේෂාංගයක් යෝජනා කරන්න",
-  "Support": "සහාය",
   "SwitchKeyPassphraseHint": "ඔබ මාරු වන යතුර සඳහා මුරවාක්‍යය ඇතුළත් කරන්න. ඔබගේ පෞද්ගලික කාමර ගොනු එය සමඟ නැවත සංකේතාංකනය කෙරේ.",
   "SwitchKeyPassphraseTitle": "සංකේතාංකන යතුර මාරු කරන්න",
   "SwitchPlan": "ඔබ දැන් <1>{{planName}}</1> සැලසුමට මාරුවෙමින් සිටිති.",

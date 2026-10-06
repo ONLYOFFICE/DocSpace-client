@@ -2135,7 +2135,6 @@
   "SuccessfullySentMessage": "Vaša správa bola úspešne odoslaná. Obchodné oddelenie vás bude kontaktovať.",
   "SuccessOperation": "{{operationName}}: Hotovo",
   "SuggestFeature": "Navrhni funkciu",
-  "Support": "Podpora",
   "SwitchKeyPassphraseHint": "Zadajte prístupovú frázu pre kľúč, na ktorý prepínate. Súbory vo vašej súkromnej miestnosti budú preň znova zašifrované.",
   "SwitchKeyPassphraseTitle": "Prepnúť šifrovací kľúč",
   "SwitchPlan": "Čoskoro prejdete na plán <1>{{planName}}</1>.",

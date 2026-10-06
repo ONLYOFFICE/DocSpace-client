@@ -74,7 +74,11 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/quick-actions/icons";
 
 import { GuestRestrictionTooltip } from "../sub-components/GuestRestrictionTooltip";
-import { makeCreateUrl, NEW_FILE_NAMES } from "../utils";
+import {
+  makeCreateUrl,
+  NEW_FILE_NAMES,
+  pushDashboardFileCreated,
+} from "../utils";
 
 // Builds the "create new file" quick actions for the Dashboard. Each action
 // opens the editor for a blank file of the matching type in the user's
@@ -101,47 +105,39 @@ export const useCreateActions = (
     [isGuest],
   );
 
-  return React.useMemo<QuickActionItem[]>(
-    () => [
+  return React.useMemo<QuickActionItem[]>(() => {
+    const openNewFile = (fileTitle: string) => {
+      pushDashboardFileCreated(fileTitle, myFolderId);
+      window.open(makeCreateUrl(fileTitle, myFolderId), "_blank");
+    };
+
+    return [
       {
         id: "document",
         icon: <CreateDocumentIcon />,
         label: t("Common:Document"),
-        onClick: () =>
-          window.open(
-            makeCreateUrl(NEW_FILE_NAMES.document, myFolderId),
-            "_blank",
-          ),
+        onClick: () => openNewFile(NEW_FILE_NAMES.document),
         ...disabledProps,
       },
       {
         id: "spreadsheet",
         icon: <CreateSpreadsheetIcon />,
         label: t("Common:Spreadsheet"),
-        onClick: () =>
-          window.open(
-            makeCreateUrl(NEW_FILE_NAMES.spreadsheet, myFolderId),
-            "_blank",
-          ),
+        onClick: () => openNewFile(NEW_FILE_NAMES.spreadsheet),
         ...disabledProps,
       },
       {
         id: "presentation",
         icon: <CreatePresentationIcon />,
         label: t("Common:Presentation"),
-        onClick: () =>
-          window.open(
-            makeCreateUrl(NEW_FILE_NAMES.presentation, myFolderId),
-            "_blank",
-          ),
+        onClick: () => openNewFile(NEW_FILE_NAMES.presentation),
         ...disabledProps,
       },
       {
         id: "pdf",
         icon: <BlankPdfIcon />,
         label: getConstName("PDF"),
-        onClick: () =>
-          window.open(makeCreateUrl(NEW_FILE_NAMES.pdf, myFolderId), "_blank"),
+        onClick: () => openNewFile(NEW_FILE_NAMES.pdf),
         ...disabledProps,
       },
       // Hidden rather than disabled when the chat isn't on offer: guests can
@@ -159,9 +155,8 @@ export const useCreateActions = (
               onClick: openChat,
             },
           ]),
-    ],
-    [t, myFolderId, disabledProps, isGuest, isAiChatAvailable, openChat],
-  );
+    ];
+  }, [t, myFolderId, disabledProps, isGuest, isAiChatAvailable, openChat]);
 };
 
 export default useCreateActions;

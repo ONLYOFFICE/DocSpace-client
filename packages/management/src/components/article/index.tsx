@@ -72,6 +72,11 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
 
   const [activePath, setActivePath] = useState(pathname);
 
+  // Branding is a paid feature, so the Community edition has no Branding tab
+  const settingsPath = isCommunity
+    ? "settings/data-backup"
+    : "settings/branding";
+
   useEffect(() => {
     if (currentDeviceType === DeviceType.mobile) {
       setShowText(true);
@@ -118,10 +123,10 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
           text={t("Common:Settings")}
           iconNode={<SettingsReactSvg />}
           showText={showText}
-          onClick={() => onItemClick("settings/branding")}
+          onClick={() => onItemClick(settingsPath)}
           isActive={activePath.includes("settings")}
           folderId="management_catalog-settings"
-          linkData={{ path: "/settings/branding", state: {} }}
+          linkData={{ path: `/${settingsPath}`, state: {} }}
           withAnimation
         />
         {!isCommunity ? (

@@ -59,16 +59,23 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const { settings } = useAppState();
+  const { settings, isCommunity } = useAppState();
   const isLoading = useEndAnimation();
   const standalone = settings?.standalone;
 
   const data = [
-    {
-      id: "branding",
-      name: t("Common:Branding"),
-      content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,
-    },
+    // Branding is a paid feature, so the Community edition has no Branding tab
+    ...(isCommunity
+      ? []
+      : [
+          {
+            id: "branding",
+            name: t("Common:Branding"),
+            content: (
+              <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>
+            ),
+          },
+        ]),
     {
       id: "data-backup",
       name: t("Common:DataBackup"),

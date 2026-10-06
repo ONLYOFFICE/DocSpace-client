@@ -33,51 +33,18 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+import { redirect } from "next/navigation";
 
-import { createContext, PropsWithChildren, useMemo } from "react";
+import { getPortalTariff } from "@/lib/actions";
 
-import { isAdmin as isAdminUtils } from "@docspace/shared/utils/common";
-import type { TUser } from "@docspace/shared/api/people/types";
-import type { TSettings } from "@docspace/shared/api/settings/types";
+// Branding is a paid feature: the Community edition has no Branding tab,
+// so a direct link to it or to any of its subpages lands on Data backup
+async function BrandingLayout({ children }: { children: React.ReactNode }) {
+  const portalTariff = await getPortalTariff();
 
-export interface IAppStateContext {
-  user: TUser | undefined;
-  settings: TSettings | undefined;
-  isAdmin: boolean;
-  isCommunity: boolean;
+  if (portalTariff?.openSource) redirect("/settings/data-backup");
+
+  return children;
 }
 
-export interface AppStateProviderProps {
-  user: TUser | undefined;
-  settings: TSettings | undefined;
-  isCommunity: boolean;
-}
-
-const AppStateContext = createContext<IAppStateContext | null>(null);
-
-const AppStateProvider = ({
-  user,
-  settings,
-  isCommunity,
-  children,
-}: PropsWithChildren<AppStateProviderProps>) => {
-  const isAdmin = !!user && isAdminUtils(user);
-
-  const value = useMemo(() => {
-    return {
-      user,
-      settings,
-      isAdmin,
-      isCommunity,
-    };
-  }, [user, settings, isAdmin, isCommunity]);
-
-  return (
-    <AppStateContext.Provider value={value}>
-      {children}
-    </AppStateContext.Provider>
-  );
-};
-
-export { AppStateContext, AppStateProvider };
+export default BrandingLayout;

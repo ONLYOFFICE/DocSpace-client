@@ -162,6 +162,11 @@ overrides:
   # client and shared, and 9.x still declares ^0.4.1 itself. Revisit together.
   ws: ">=8.21.0"
   tmp: ">=0.2.6"
+  # @firebase/firestore (firebase 11.2.0 and 12.x) pins grpc-js ~1.9.0, and
+  # 1.9.x has no fix for GHSA-m9gg-hp2v-232j (patched only in >=1.13.6).
+  # Deliberately left on 1.9.x: firestore is never imported (shared/utils/
+  # firebase.ts loads remote-config, storage and database only), and the
+  # advisory is about server-side getAuthContext, which nothing here calls.
   "@grpc/grpc-js": "~1.9.16"
   form-data: ">=4.0.6"
   vite: ">=8.0.16"
@@ -170,7 +175,7 @@ overrides:
   # its transitive copy. @docspace/login depends on sharp directly for the
   # link-preview image and pins this same version - keep the two in step, an
   # open range here would silently replace that manifest's exact pin.
-  sharp: "0.35.4"
+  sharp: "0.35.5"
   # Guards against ui-kit tarball drift until it is rebuilt/repacked; every
   # manifest now pins 8.3.0 directly, so this can be dropped afterwards
   react-router: "8.3.0"
@@ -178,3 +183,9 @@ overrides:
   smol-toml: "^1.7.1"
   # @vitest/ui still asks for fflate ^0.8.2; pins the patched 0.8.x
   fflate: "^0.8.3"
+  # serve 14.2.6 (latest) still pins compression 1.8.1 exactly; drop once
+  # serve lifts it
+  compression: "^1.8.2"
+  # Deliberately NOT overridden: braces (GHSA-vfj7-8cjw-p6xm) has no patched
+  # release. It arrives only via shx > shelljs > fast-glob > micromatch, a
+  # build-script path that expands our own fixed glob patterns.

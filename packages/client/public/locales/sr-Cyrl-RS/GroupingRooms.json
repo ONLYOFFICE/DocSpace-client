@@ -8,6 +8,7 @@
   "DeleteGroup": "Обрисати групу",
   "DisablingRoomGroups": "Онемактивировање група соба",
   "DisablingRoomGroupsDescription": "Групе ће бити сачуване, али скривене. Поново омогућите у Профилу, Управљање фајловима.",
+  "DisablingSpaceGroups": "Онемогућавање група простора",
   "EditRoomGroups": "Уређивање група соба",
   "EditSpaceGroups": "Уређивање група простора",
   "EmptyGroupRoomsDescription": "Нeма нима собарића овде. Покушајте да додате соба или уклоните ову групу.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Изабране собе су додата у <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Изабране собе су уклоњене из <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Изабрани простор је додат у <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Груписање простора",
+  "SpaceGroupingDisabled": "Груписање простора је онемогућено",
+  "SpaceGroupingEnabled": "Груписање простора је омогућено",
+  "SpaceGroupingSettingDescription": "Можете груписати просторе у фасцикле и лако прелазити између њих.",
   "SpaceRemovedFromGroup": "Изабрани простор је уклоњен из <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Изабрани простори су додати у <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Изабрани простори су уклоњени из <1>{{groupName}}</1>."

@@ -8,6 +8,7 @@
   "DeleteGroup": "Șterge gruparea",
   "DisablingRoomGroups": "Dezactivarea grupurilor de camere",
   "DisablingRoomGroupsDescription": "Grupurile vor fi salvate, dar ascunse. Reactivați în Profil, Gestionarea fișierelor.",
+  "DisablingSpaceGroups": "Dezactivarea grupurilor de spații",
   "EditRoomGroups": "Editarea grupurilor de camere",
   "EditSpaceGroups": "Editarea grupurilor de spații",
   "EmptyGroupRoomsDescription": "Nu există camere aici. Încercați să adăugați o cameră sau să eliminați acest grup.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Camerele selectate au fost adăugate în <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Cuptrările selectate au fost eliminate din <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Spațiul selectat a fost adăugat în <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Gruparea spațiilor",
+  "SpaceGroupingDisabled": "Gruparea spațiilor este dezactivată",
+  "SpaceGroupingEnabled": "Gruparea spațiilor este activată",
+  "SpaceGroupingSettingDescription": "Puteți grupa spațiile în foldere și puteți comuta ușor între ele.",
   "SpaceRemovedFromGroup": "Spațiul selectat a fost eliminat din <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Spațiile selectate au fost adăugate în <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Spațiile selectate au fost eliminate din <1>{{groupName}}</1>."

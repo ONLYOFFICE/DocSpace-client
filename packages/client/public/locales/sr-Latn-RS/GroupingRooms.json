@@ -8,6 +8,7 @@
   "DeleteGroup": "Brisanje grupe",
   "DisablingRoomGroups": "Deaktiviranje grupa soba",
   "DisablingRoomGroupsDescription": "Grupe će biti sačuvane, ali skrivene. Ponovo omogućite u Profilu, upravljanju fajlovima.",
+  "DisablingSpaceGroups": "Onemogućavanje grupa prostora",
   "EditRoomGroups": "Urediti grupe soba",
   "EditSpaceGroups": "Uređivanje grupa prostora",
   "EmptyGroupRoomsDescription": "Nema soba ovde. Pokušajte dodati sobu ili ukloniti ovu grupu.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Izabrane sobe su dodate u <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Izabrane sobe su uklonjene iz <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Izabrani prostor je dodat u <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Grupisanje prostora",
+  "SpaceGroupingDisabled": "Grupisanje prostora je onemogućeno",
+  "SpaceGroupingEnabled": "Grupisanje prostora je omogućeno",
+  "SpaceGroupingSettingDescription": "Možete grupisati prostore u fascikle i lako prelaziti između njih.",
   "SpaceRemovedFromGroup": "Izabrani prostor je uklonjen iz <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Izabrani prostori su dodati u <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Izabrani prostori su uklonjeni iz <1>{{groupName}}</1>."

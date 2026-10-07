@@ -108,7 +108,10 @@ export interface EditRoomGroupsDialogProps {
   /** Whether room grouping is enabled in portal settings */
   organizeRoomsGrouping?: boolean;
   /** Function to toggle room grouping setting */
-  setOrganizeRoomsGrouping?: (enabled: boolean) => Promise<boolean>;
+  setOrganizeRoomsGrouping?: (
+    enabled: boolean,
+    isSpaces?: boolean,
+  ) => Promise<boolean>;
   /** Section the groups belong to: the Rooms section or the Forms section */
   searchArea: RoomSearchArea;
 }

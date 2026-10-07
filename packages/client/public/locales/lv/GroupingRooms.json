@@ -8,6 +8,7 @@
   "DeleteGroup": "Dzīrēt grupu",
   "DisablingRoomGroups": "Atmeldotu telpu grupas",
   "DisablingRoomGroupsDescription": "Grupes tiks saglabātas, bet paslēptas. Atjaunot Profili, failu pārvaldībā.",
+  "DisablingSpaceGroups": "Telpu grupu atspējošana",
   "EditRoomGroups": "Rediģēt istabas grupas",
   "EditSpaceGroups": "Rediģēt telpu grupas",
   "EmptyGroupRoomsDescription": "Šeit nav istabām. Mēģiniet pievienot istabu vai dzēst šo grupu.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Izvēlētie istabas ir pievienoti <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Izvēlētie istabas ir noņemti no <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Izvēlētā telpa ir pievienota <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Telpu grupēšana",
+  "SpaceGroupingDisabled": "Telpu grupēšana ir atspējota",
+  "SpaceGroupingEnabled": "Telpu grupēšana ir iespējota",
+  "SpaceGroupingSettingDescription": "Jūs varat grupēt telpas mapēs un viegli pārslēgties starp tām.",
   "SpaceRemovedFromGroup": "Izvēlētā telpa ir noņemta no <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Izvēlētās telpas ir pievienotas <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Izvēlētās telpas ir noņemtas no <1>{{groupName}}</1>."

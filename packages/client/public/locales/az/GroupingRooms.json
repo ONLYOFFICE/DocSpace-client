@@ -8,6 +8,7 @@
   "DeleteGroup": "Sil komanda",
   "DisablingRoomGroups": "Otaq qruplarını deaktiv etmək",
   "DisablingRoomGroupsDescription": "Qruplar yadda saxlanılacaq, lakin gizlənəcək. Profildə, Fayl idarəetməsində yenidən aktivləşdirin.",
+  "DisablingSpaceGroups": "Sahə qruplarını deaktiv etmək",
   "EditRoomGroups": "Redaktə etmə otaq qrupları",
   "EditSpaceGroups": "Sahə qruplarını redaktə et",
   "EmptyGroupRoomsDescription": "Bu yerdə otaq yoxdur. Bir otaq əlavə etməyi sınayın və ya bu qrupu silin.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Seçilmiş otaqlar <1>{{groupName}}</1> -ə əlavə edilmişdir.",
   "RoomsRemovedFromGroup": "Seçilmiş otaqlar <1>{{groupName}}</1>dan çıxarıldı.",
   "SpaceAddedToGroup": "Seçilmiş sahə <1>{{groupName}}</1> qrupuna əlavə edildi.",
+  "SpaceGrouping": "Sahə qruplaşdırması",
+  "SpaceGroupingDisabled": "Sahə qruplaşdırması deaktivləşdirilib",
+  "SpaceGroupingEnabled": "Sahə qruplaşdırması aktivdir",
+  "SpaceGroupingSettingDescription": "Sahələri qovluqlara qruplaşdıra və aralarında asanlıqla keçid edə bilərsiniz.",
   "SpaceRemovedFromGroup": "Seçilmiş sahə <1>{{groupName}}</1> qrupundan çıxarıldı.",
   "SpacesAddedToGroup": "Seçilmiş sahələr <1>{{groupName}}</1> qrupuna əlavə edildi.",
   "SpacesRemovedFromGroup": "Seçilmiş sahələr <1>{{groupName}}</1> qrupundan çıxarıldı."

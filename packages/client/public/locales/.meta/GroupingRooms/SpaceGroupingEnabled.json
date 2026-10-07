@@ -1,26 +1,19 @@
 {
-  "key_path": "SetDefaultRoomQuota",
-  "content": "Set a default storage quota for rooms in this workspace — room admins can adjust it later for individual rooms.",
-  "content_en_sha1_hash": "c93c23e62c99483f8768c7a0eb60181f8305f52d",
-  "created_at": "2026-09-04T07:59:36.298Z",
-  "updated_at": "2026-10-07T14:48:38.552Z",
+  "key_path": "SpaceGroupingEnabled",
+  "content": "Space grouping is enabled",
+  "content_en_sha1_hash": "48a86b61126598dd1e606ecd6fb6b214f9bc568b",
+  "created_at": "2026-10-07T14:48:34.918Z",
+  "updated_at": "2026-10-07T14:48:38.565Z",
   "comment": {
-    "text": "Subtitle for a menu item and a description for a toggle in the storage management settings, explaining the default storage quota for rooms.",
-    "is_auto": true,
-    "updated_at": "2026-09-04T08:06:21.304Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 59,
-      "context": "<div className={styles.baseQuotaComponent}>\n <CategoryItem\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\")}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom.js",
-      "line_number": 61,
-      "context": "saveQuota={(size) => setRoomQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultRoomsQuotaSet}\n tabIndex={1}\n dataTestId=\"quota_room\"\n toggleDescription={t(\"SetDefaultRoomQuota\")}\n />\n );\n };\n \n export const QuotaPerRoomComponentSection = inject(({ currentQuotaStore }) => {",
+      "file_path": "/packages/client/src/store/FilesSettingsStore.ts",
+      "line_number": 448,
+      "context": "const res = await setOrganizeGrouping(data);\n this.setFilesSetting(\"organizeRoomsGrouping\", res);\n \n const message = isSpaces\n ? res\n ? i18n.t(\"GroupingRooms:SpaceGroupingEnabled\")\n : i18n.t(\"GroupingRooms:SpaceGroupingDisabled\")\n : res\n ? i18n.t(\"GroupingRooms:RoomGroupingEnabled\")\n : i18n.t(\"GroupingRooms:RoomGroupingDisabled\");\n toastr.success(message);",
       "module": "/packages/client"
     }
   ],

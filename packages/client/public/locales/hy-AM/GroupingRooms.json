@@ -8,6 +8,7 @@
   "DeleteGroup": "Ջնջել խումբը",
   "DisablingRoomGroups": "Խումբային սենյակների անջատումը",
   "DisablingRoomGroupsDescription": "Խմբերը կպահվենայց կդառնան թաքցված: Վերականգնեք «Պրոֆիլ» > «Ֆայլերի կառավարում» բաժնում:",
+  "DisablingSpaceGroups": "Տարածքների խմբերի անջատում",
   "EditRoomGroups": "Խմբագրել սենյակային խմբերը",
   "EditSpaceGroups": "Խմբագրել տարածքների խմբերը",
   "EmptyGroupRoomsDescription": "Այստեղ սենյակներ չկան: Փորձեք ավելացնել սենյակ կամ հեռացրեք այս խումբը:",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Ընտրված սենյակները ավելացվել են <1>{{groupName}}</1>-ի մեջ։",
   "RoomsRemovedFromGroup": "Ընտրված սենյակները հեռացվել են <1>{{groupName}}</1>-ից։",
   "SpaceAddedToGroup": "Ընտրված տարածքը ավելացվել է <1>{{groupName}}</1> խմբին։",
+  "SpaceGrouping": "Տարածքների խմբավորում",
+  "SpaceGroupingDisabled": "Տարածքների խմբավորումն անջատված է",
+  "SpaceGroupingEnabled": "Տարածքների խմբավորումը միացված է",
+  "SpaceGroupingSettingDescription": "Դուք կարող եք տարածքները խմբավորել թղթապանակների մեջ և հեշտությամբ անցնել դրանց միջև։",
   "SpaceRemovedFromGroup": "Ընտրված տարածքը հեռացվել է <1>{{groupName}}</1> խմբից։",
   "SpacesAddedToGroup": "Ընտրված տարածքները ավելացվել են <1>{{groupName}}</1> խմբին։",
   "SpacesRemovedFromGroup": "Ընտրված տարածքները հեռացվել են <1>{{groupName}}</1> խմբից։"

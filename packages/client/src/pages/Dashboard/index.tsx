@@ -129,6 +129,7 @@ type DashboardProps = ChatNoAccessStoreProps & {
   /** Rooms quota exhausted or portal in its grace period. */
   isWarningRoomsDialog: boolean;
   setQuotaWarningDialogVisible: (visible: boolean) => void;
+  logoText: string;
 };
 
 const UPLOAD_LINK_ID = "dashboard-upload-link";
@@ -150,9 +151,10 @@ const Dashboard = (props: DashboardProps) => {
     standalone,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
+    logoText,
   } = props;
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:Home");
+  useDocumentTitle("Common:Home", logoText);
 
   // Gates every tour entry point on this page. The tours walk through desktop
   // chrome (`useTour` refuses to run on mobile outright), so on a phone the
@@ -409,6 +411,7 @@ const Dashboard = (props: DashboardProps) => {
           <WelcomeDialog
             onTakeTour={onWelcomeTakeTour}
             onClose={onWelcomeClose}
+            organizationName={logoText}
           />
         ) : null}
 
@@ -496,6 +499,7 @@ const DashboardConnected = inject((stores: TStore) => {
     standalone: settingsStore.standalone,
     isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,
     setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
+    logoText: settingsStore.logoText,
   };
 })(observer(Dashboard));
 

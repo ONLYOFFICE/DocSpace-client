@@ -39,18 +39,21 @@ import { useTranslation } from "react-i18next";
 import type { TTranslation } from "../types";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-export const useDocumentTitle = (titleI18nKey: string) => {
+export const useDocumentTitle = (
+  titleI18nKey: string,
+  organizationName?: string,
+) => {
   const { t } = useTranslation();
 
   const setDocumentTitle = (t: TTranslation, titleI18nKey: string) => {
     let title;
-    const organizationName = getBrandName("OrganizationName");
+    const brandName = organizationName || getBrandName("OrganizationName");
 
     if (titleI18nKey) {
       // biome-ignore lint/plugin/no-dynamic-i18n-key: callers pass literal keys captured by the locales scanner
-      title = `${t(titleI18nKey)} - ${organizationName}`;
+      title = `${t(titleI18nKey)} - ${brandName}`;
     } else {
-      title = organizationName;
+      title = brandName;
     }
 
     document.title = title;
@@ -58,5 +61,5 @@ export const useDocumentTitle = (titleI18nKey: string) => {
 
   useEffect(() => {
     setDocumentTitle(t, titleI18nKey);
-  }, [t, titleI18nKey]);
+  }, [t, titleI18nKey, organizationName]);
 };

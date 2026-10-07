@@ -144,11 +144,16 @@ const navKeyFromPath = (
 type AiAgentsProps = {
   canManageAgents?: boolean;
   theme?: TTheme;
+  logoText?: string;
 };
 
-const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
+const AiAgentsComponent = ({
+  canManageAgents,
+  theme,
+  logoText,
+}: AiAgentsProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:AIAgents");
+  useDocumentTitle("Common:AIAgents", logoText);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const lastSdkKeyRef = React.useRef<string | null>(null);
@@ -265,6 +270,7 @@ export const AiAgents = inject<TStore>(
       userStore.user?.isRoomAdmin
     ),
     theme: settingsStore.theme,
+    logoText: settingsStore.logoText,
   }),
 )(observer(AiAgentsComponent));
 

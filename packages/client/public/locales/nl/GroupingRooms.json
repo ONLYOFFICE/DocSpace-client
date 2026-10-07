@@ -8,6 +8,7 @@
   "DeleteGroup": "Verwijder groep",
   "DisablingRoomGroups": "De groepen van kamers uitschakelen",
   "DisablingRoomGroupsDescription": "Groepen worden opgeslagen maar verborgen. Heractiveren in Profiel, Bestandsbeheer.",
+  "DisablingSpaceGroups": "Ruimtegroepen uitschakelen",
   "EditRoomGroups": "Bewerken kamergroepen",
   "EditSpaceGroups": "Ruimtegroepen bewerken",
   "EmptyGroupRoomsDescription": "Er zijn hier geen kamers. Probeer een kamer toe te voegen of verwijder deze groep.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "De geselecteerde kamers zijn toegevoegd aan <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "De geselecteerde kamers zijn verwijderd uit <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "De geselecteerde ruimte is toegevoegd aan <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Ruimtegroepering",
+  "SpaceGroupingDisabled": "Ruimtegroepering is uitgeschakeld",
+  "SpaceGroupingEnabled": "Ruimtegroepering is ingeschakeld",
+  "SpaceGroupingSettingDescription": "U kunt ruimtes groeperen in mappen en eenvoudig daartussen schakelen.",
   "SpaceRemovedFromGroup": "De geselecteerde ruimte is verwijderd uit <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "De geselecteerde ruimtes zijn toegevoegd aan <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "De geselecteerde ruimtes zijn verwijderd uit <1>{{groupName}}</1>."

@@ -438,14 +438,18 @@ class FilesSettingsStore {
     }
   };
 
-  setOrganizeRoomsGrouping = async (data: boolean) => {
+  setOrganizeRoomsGrouping = async (data: boolean, isSpaces = false) => {
     try {
       const res = await setOrganizeGrouping(data);
       this.setFilesSetting("organizeRoomsGrouping", res);
 
-      const message = res
-        ? i18n.t("GroupingRooms:RoomGroupingEnabled")
-        : i18n.t("GroupingRooms:RoomGroupingDisabled");
+      const message = isSpaces
+        ? res
+          ? i18n.t("GroupingRooms:SpaceGroupingEnabled")
+          : i18n.t("GroupingRooms:SpaceGroupingDisabled")
+        : res
+          ? i18n.t("GroupingRooms:RoomGroupingEnabled")
+          : i18n.t("GroupingRooms:RoomGroupingDisabled");
       toastr.success(message);
 
       return res;

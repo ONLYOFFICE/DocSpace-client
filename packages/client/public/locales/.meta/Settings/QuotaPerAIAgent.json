@@ -3,7 +3,7 @@
   "content": "Quota per AI agent",
   "content_en_sha1_hash": "215b8bf5a578ced0bc211d0f9fbf5d4ea2b4f1f9",
   "created_at": "2026-05-25T18:26:18.144Z",
-  "updated_at": "2026-09-14T20:38:41.444Z",
+  "updated_at": "2026-10-07T14:48:38.553Z",
   "comment": {
     "text": "Title for a category item and a form label in storage management settings, containing a variable `aiAgent` that refers to the AI agent.",
     "is_auto": true,
@@ -21,6 +21,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
       "line_number": 66,
       "context": "const disableQuota = () => setAIAgentQuota(NO_QUOTA, t);\n \n return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n toggleLabel={t(\"DefineQuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 501,
+      "context": "{\n id: \"portal-settings_catalog-storageManagement_quota-per-ai-agent\",\n key: \"6-0-3\",\n icon: \"\",\n link: \"quota-per-ai-agent\",\n tKey: \"QuotaPerAIAgent\",\n },\n ],\n },\n ],\n },",
       "module": "/packages/client"
     }
   ],

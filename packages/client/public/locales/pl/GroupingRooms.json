@@ -8,6 +8,7 @@
   "DeleteGroup": "Usuń grupę",
   "DisablingRoomGroups": "Wyłączanie grup pomieszczeń",
   "DisablingRoomGroupsDescription": "Grupy zostaną zapisane, ale ukryte. Można je ponownie włączyć w Profilu, w zarządzaniu plikami.",
+  "DisablingSpaceGroups": "Wyłączanie grup obszarów",
   "EditRoomGroups": "Edytuj grupy pomieszczeń",
   "EditSpaceGroups": "Edytuj grupy obszarów",
   "EmptyGroupRoomsDescription": "Nie ma tu pokoi. Spróbuj dodać pokój lub usunąć tę grupę.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Wybrane pomieszczenia dodano do <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Wybrane pomieszczenia zostały usunięte z <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Wybrany obszar został dodany do <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Grupowanie obszarów",
+  "SpaceGroupingDisabled": "Grupowanie obszarów jest wyłączone",
+  "SpaceGroupingEnabled": "Grupowanie obszarów jest włączone",
+  "SpaceGroupingSettingDescription": "Możesz grupować obszary w foldery i łatwo przełączać się między nimi.",
   "SpaceRemovedFromGroup": "Wybrany obszar został usunięty z <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Wybrane obszary zostały dodane do <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Wybrane obszary zostały usunięte z <1>{{groupName}}</1>."

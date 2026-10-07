@@ -164,7 +164,7 @@ const EditRoomGroupsDialog = ({
     setIsSaving(true);
     try {
       if (setOrganizeRoomsGrouping) {
-        await setOrganizeRoomsGrouping(localGroupingEnabled);
+        await setOrganizeRoomsGrouping(localGroupingEnabled, isFormsSection);
       }
 
       setHasGroupingChanged(false);
@@ -379,7 +379,9 @@ const EditRoomGroupsDialog = ({
                     lineHeight: "16px",
                   }}
                 >
-                  {t("GroupingRooms:DisablingRoomGroups")}
+                  {isFormsSection
+                    ? t("GroupingRooms:DisablingSpaceGroups")
+                    : t("GroupingRooms:DisablingRoomGroups")}
                 </span>
               }
               bodyText={
@@ -395,7 +397,9 @@ const EditRoomGroupsDialog = ({
           <div className={styles.settingRoomGroups}>
             <div className={styles.roomGroups}>
               <div className={styles.title}>
-                {t("GroupingRooms:RoomGrouping")}
+                {isFormsSection
+                  ? t("GroupingRooms:SpaceGrouping")
+                  : t("GroupingRooms:RoomGrouping")}
               </div>
               <ToggleButton
                 className={styles.roomGroupsToggle}
@@ -406,7 +410,9 @@ const EditRoomGroupsDialog = ({
             </div>
 
             <Text className={styles.description}>
-              {t("GroupingRooms:RoomGroupingSettingDescription")}
+              {isFormsSection
+                ? t("GroupingRooms:SpaceGroupingSettingDescription")
+                : t("GroupingRooms:RoomGroupingSettingDescription")}
             </Text>
           </div>
           <AddButton

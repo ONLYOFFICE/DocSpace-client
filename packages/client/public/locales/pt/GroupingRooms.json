@@ -8,6 +8,7 @@
   "DeleteGroup": "Excluir grupo",
   "DisablingRoomGroups": "Desativar grupos de salas",
   "DisablingRoomGroupsDescription": "Os grupos serão salvos, mas ocultos. Reative no Perfil, Gerenciamento de Arquivos.",
+  "DisablingSpaceGroups": "Desativar grupos de espaços",
   "EditRoomGroups": "Editar grupos de salas",
   "EditSpaceGroups": "Editar grupos de espaços",
   "EmptyGroupRoomsDescription": "Não há salas aqui. Tente adicionar uma sala ou remover este grupo.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Os quartos selecionados foram adicionados a <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Os quartos selecionados foram removidos de <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "O espaço selecionado foi adicionado a <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Agrupamento de espaços",
+  "SpaceGroupingDisabled": "O agrupamento de espaços está desativado",
+  "SpaceGroupingEnabled": "O agrupamento de espaços está ativado",
+  "SpaceGroupingSettingDescription": "Pode agrupar espaços em pastas e alternar facilmente entre eles.",
   "SpaceRemovedFromGroup": "O espaço selecionado foi removido de <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Os espaços selecionados foram adicionados a <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Os espaços selecionados foram removidos de <1>{{groupName}}</1>."

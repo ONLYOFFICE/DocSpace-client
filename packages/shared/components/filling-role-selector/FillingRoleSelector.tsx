@@ -45,11 +45,11 @@ import {
   Avatar,
   AvatarSize,
   AvatarRole,
-} from "@docspace/ui-kit/components/avatar";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
 
 import styles from "./FillingRoleSelector.module.scss";
 import type { IFillingRoleSelectorProps } from "./FillingRoleSelector.types";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 const FillingRoleSelector = ({
   roles,

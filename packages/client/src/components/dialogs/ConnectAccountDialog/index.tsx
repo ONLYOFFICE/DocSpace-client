@@ -43,13 +43,13 @@ import copy from "copy-to-clipboard";
 import {
 	ModalDialog,
 	ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { InputType } from "@docspace/ui-kit/components/text-input";
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 

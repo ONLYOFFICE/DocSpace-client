@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { isDesktop, isMobile } from "@docspace/ui-kit/utils/device";
+import { isDesktop, isMobile } from "@onlyoffice/apps-ui-kit/utils/device";
 
 function getTileWidth(
   min: number,

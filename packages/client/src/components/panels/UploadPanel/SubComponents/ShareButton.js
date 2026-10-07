@@ -35,7 +35,7 @@
 
 import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
 import React from "react";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { inject, observer } from "mobx-react";
 
 const ShareButton = (props) => {

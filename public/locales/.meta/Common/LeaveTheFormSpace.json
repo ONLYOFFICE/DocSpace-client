@@ -3,7 +3,7 @@
   "content": "Leave the space",
   "content_en_sha1_hash": "31c02d4e30a5bc889c1f1f6ff92ea56f28665c20",
   "created_at": "2026-08-17T17:22:55.219Z",
-  "updated_at": "2026-08-17T17:24:30.779Z",
+  "updated_at": "2026-09-14T19:16:02.573Z",
   "comment": {
     "text": "Dialog title, checkbox label, and menu item label used when exiting a Form Space.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 911,
+      "line_number": 909,
       "context": "id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: self.onLeaveRoom,\n disabled: isKnowledgeOrResult\n ? false",
       "module": "/packages/client"
     }

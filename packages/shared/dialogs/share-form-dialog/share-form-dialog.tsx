@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
+import { ModalDialog, ModalDialogType } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
 import ShareFormCard from "./share-form-card";
 import type { ShareFormDialogProps } from "./share-form-dialog.types";

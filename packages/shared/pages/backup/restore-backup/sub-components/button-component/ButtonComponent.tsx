@@ -36,13 +36,13 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 
-import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
-import { Button } from "@docspace/ui-kit/components/button";
-import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
+import SocketHelper, { SocketCommands } from "@onlyoffice/apps-ui-kit/utils/socket";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import OperationsProgressButton from "@onlyoffice/apps-ui-kit/components/operations-progress-button";
 import { OPERATIONS_NAME } from "../../../../../constants";
 import { TenantStatus } from "../../../../../enums";
 import { startRestore } from "../../../../../api/portal";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isManagement } from "../../../../../utils/common";
 
 import type { ButtonContainerProps } from "./ButtonContainer.types";

@@ -41,8 +41,11 @@ import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 
 import styles from "./main.module.scss";
 
-const Main = (props) => {
-  const { mainBarVisible, isFrame } = props;
+// `mainBarVisible` and `isFrame` come from the store, `isDesktop` from Shell,
+// and none of the three is an HTML attribute -- spreading the whole props
+// object onto <main> put all three on the DOM node and React complained about
+// each on every page. Only what is left after these is forwarded.
+const Main = ({ mainBarVisible, isFrame, isDesktop, ...rest }) => {
   // console.log("Main render");
   const [mainHeight, setMainHeight] = React.useState(window.innerHeight);
   const updateSizeRef = React.useRef(null);
@@ -79,7 +82,7 @@ const Main = (props) => {
     <main
       className={classNames(styles.main, "main")}
       style={mainStyle}
-      {...props}
+      {...rest}
     />
   );
 };

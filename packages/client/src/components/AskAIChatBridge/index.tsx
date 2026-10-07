@@ -41,14 +41,14 @@ import { useTranslation } from "react-i18next";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { SearchArea } from "@docspace/shared/enums";
 import { CategoryType } from "@docspace/shared/constants";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { useStores as useAiChatStores } from "@docspace/ui-kit/ai-agent/providers";
-import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useStores as useAiChatStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import {
   useAttachHostFilesToChat,
   notifyAlreadyAttached,
   notifyAttachmentLimit,
-} from "@docspace/ui-kit/ai-agent/providers/files";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/files";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { useStore } from "SRC_DIR/store/useStore";
@@ -80,7 +80,7 @@ const AskAIChatBridgeComponent = () => {
 
     // Read-and-clear, so a second invocation of this effect with the same
     // closure attaches nothing.
-    const file = dialogsStore.consumeAskAIFile();
+    const { file, analyze } = dialogsStore.consumeAskAIFile();
     if (!file) return;
 
     // Inside an AI room the chat is not the side panel (which is disabled
@@ -111,12 +111,18 @@ const AskAIChatBridgeComponent = () => {
     // and therefore the freshly attached chip — is not on screen.
     setCurrentPage("chat");
 
-    attachFilesToChat([file])
-      .then(({ skippedOverLimit, duplicates }) => {
+    // "Analyze responses" attaches the form as the subject of the message:
+    // the composer is emptied first and locked to it until the message is
+    // sent (see `useAnalyzeLock` in the ui-kit). The caller decides — the
+    // context menu entry and the results folder's button both say so, plain
+    // "Ask AI" does not.
+    attachFilesToChat([{ ...file, analyzeOnly: analyze }])
+      .then(({ skippedOverLimit, duplicates, cap }) => {
         // A file that did not make it onto the composer — capped or
-        // already there — must not disappear without a word.
+        // already there — must not disappear without a word. The cap is per
+        // section, so quote the one that actually applied.
         notifyAlreadyAttached(t, duplicates);
-        notifyAttachmentLimit(t, skippedOverLimit);
+        notifyAttachmentLimit(t, skippedOverLimit, cap);
       })
       .catch((error: unknown) => {
         toastr.error(

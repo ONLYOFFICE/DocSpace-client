@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/upload-files.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/upload-files.ts",
       "line_number": 123,
       "context": "const unsupported = allPicked\n .filter((f) => ARCHIVE_EXTENSION.test(f.name))\n .map((f) => f.name);\n if (unsupported.length > 0) {\n toastr.error(\n t(\"Common:UnsupportedFileType\", {\n files: unsupported.join(\", \"),\n defaultValue: \"Unsupported file type: {{files}}\",\n }),\n );\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

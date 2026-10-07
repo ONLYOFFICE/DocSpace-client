@@ -45,7 +45,6 @@ import {
   settingsHandler,
   tariffHandler,
   TypeSettings,
-  usersByType,
   type UserType,
 } from "@docspace/shared/__mocks__/handlers";
 
@@ -98,10 +97,6 @@ const FIXED_NOW = new Date("2026-02-10T12:00:00.000Z");
 // depending on where the run happens.
 test.use({ timezoneId: "UTC" });
 
-// packages/client/src/store/DashboardTourStore.ts — per-user, keyed on the id
-// of whoever is signed in.
-const welcomeKey = (userId: string) => `dashboard_welcome_seen_${userId}`;
-
 /** The page's own anchors — see Dashboard/DashboardTour/tourSteps.ts. */
 const PROFILE_CARD = '[data-tour-id="dashboard-profile"]';
 const CREATE_SECTION = '[data-tour-id="dashboard-create"]';
@@ -130,6 +125,10 @@ const sidebarAgentsItem = (page: Page) =>
 /** The plan line, in either of the two wordings the header has for it. */
 const planLine = (page: Page) =>
   page.getByText(/You are (on the free|using)\b/);
+
+/** The Community-only line that opens the upgrade path dialog. */
+const upgradePathLink = (page: Page) =>
+  page.getByTestId("dashboard-open-upgrade-path");
 
 type Role = {
   /** Names the case, in the test title and in the screenshot file name. */
@@ -220,9 +219,11 @@ const SAAS_PLANS: Plan[] = [
 
 /**
  * The standalone editions whose frames duplicate the Enterprise ones — they
- * keep a single canary screenshot instead of a full set.
+ * keep a single canary screenshot instead of a full set. Community is not one
+ * of them: its admins and owner get the upgrade path line in the header, so
+ * they are shot on their own and the rest of its audience is left to Enterprise.
  */
-const STANDALONE_CANARY_ONLY = ["community", "developer"];
+const STANDALONE_CANARY_ONLY = ["developer"];
 
 const STANDALONE_PLANS: Plan[] = [
   {
@@ -365,25 +366,19 @@ const AI_STATES: AiState[] = [
 ];
 
 /**
- * Lands on the Overview as a user who has been there before.
+ * Lands on the Overview, which is all it takes: nothing is offered on arrival.
  *
- * The welcome modal is offered once per user and would otherwise cover the page
- * in every one of these cases; it is spent up front by writing the flag the
- * store reads, under the id of whoever this case signs in as (a guessed id
- * writes a flag nobody reads, which shows up as a modal that will not go away).
- * The modal itself is covered by dashboard-tour.spec.ts.
+ * The welcome modal only ever opens from the header's help button, so no case
+ * here has to get it out of the way first. The modal itself is covered by
+ * dashboard-tour.spec.ts.
  */
 const openDashboard = async (
   page: Page,
   baseUrl: string,
-  userId: string,
   viewport: Viewport,
 ) => {
   await page.setViewportSize(viewport.size);
   await page.clock.setSystemTime(FIXED_NOW);
-  await page.addInitScript((key: string) => {
-    window.localStorage.setItem(key, "true");
-  }, welcomeKey(userId));
 
   await page.goto(`${baseUrl}${DASHBOARD_URL}`);
 
@@ -521,7 +516,7 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       aiConfigHandler(TEST_PORT, !ai.enabled),
     );
 
-    await openDashboard(page, baseUrl, usersByType[role.userType].id, viewport);
+    await openDashboard(page, baseUrl, viewport);
 
     // The details on the card are the reader's own, so every audience gets it -
     // only the pencil that renames the workspace is admin/owner-only, since
@@ -544,6 +539,14 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     } else {
       await expect(planLine(page)).toHaveCount(0);
     }
+
+    // A standalone Community portal gets an upgrade line in its place, and only
+    // for the audience that can act on it - the ones who can install a license.
+    await expect(upgradePathLink(page)).toHaveCount(
+      role.isAdminOrOwner && edition.standalone && plan.key === "community"
+        ? 1
+        : 0,
+    );
 
     // The apps subtitle follows the same rule as the plan line: it names the
     // plan for a SaaS admin and stays neutral for everyone else, a standalone
@@ -659,17 +662,21 @@ for (const edition of EDITIONS) {
               ai,
               devToolsLimited: false,
               viewport: DESKTOP,
-              // A standalone portal is offered no billing at all, so its three
-              // editions render pixel for pixel alike - the plan line and the
-              // plan-named subtitle, the only things that could tell them
+              // A standalone portal is offered no billing at all, so Enterprise
+              // and Developer render pixel for pixel alike - the plan line and
+              // the plan-named subtitle, the only things that could tell them
               // apart, are both dropped there. Enterprise carries the full set
-              // of frames and the other two keep one canary each; the day the
-              // page starts telling them apart, the canary fails and the rest
-              // of the audience gets its own baselines then. Every case runs
-              // every assertion above either way.
+              // of frames and Developer keeps one canary; the day the page
+              // starts telling them apart, the canary fails and the rest of the
+              // audience gets its own baselines then. Community differs only for
+              // its admins and owner (the upgrade path line), so only they get
+              // frames of their own; everyone else matches Enterprise pixel for
+              // pixel. Every case runs every assertion above either way.
               withScreenshot:
-                !STANDALONE_CANARY_ONLY.includes(plan.key) ||
-                (ai.enabled && role === ROLES[0]),
+                plan.key === "community"
+                  ? role.isAdminOrOwner
+                  : !STANDALONE_CANARY_ONLY.includes(plan.key) ||
+                    (ai.enabled && role === ROLES[0]),
               screenshot: `${edition.key}-${plan.key}-ai-${ai.key}-${role.key}.png`,
             });
           }

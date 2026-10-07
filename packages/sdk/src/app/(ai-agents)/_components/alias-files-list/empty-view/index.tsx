@@ -36,10 +36,10 @@
 import { useTranslation } from "react-i18next";
 
 import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/empty-view";
-import type { EmptyViewOptionsType } from "@docspace/ui-kit/components/empty-view";
+import type { EmptyViewOptionsType } from "@onlyoffice/apps-ui-kit/components/empty-view";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FolderType } from "@docspace/shared/enums";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";

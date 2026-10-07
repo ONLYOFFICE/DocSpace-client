@@ -250,6 +250,7 @@
   "QuotasDescription": "Nastavte limity úložiště pro uživatele a místnosti.",
   "Recalculate": "Přepočítat",
   "RegisterApp": "Registrovat aplikaci",
+  "ReportFormatDescription": "Pokud je událostí příliš mnoho, sestava XLSX obsahuje pouze ty nejnovější. Chcete-li exportovat všechny události, zvolte CSV.",
   "ResetTemplateDescription": "Jste si jisti, že chcete resetovat aktuální stav šablony na její výchozí stav?\nTato akce nebude možné zrušit.",
   "ResetToDefault": "Resetovat na výchozí",
   "RestAPI": "REST API",

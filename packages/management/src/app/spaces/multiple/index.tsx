@@ -35,7 +35,7 @@
 
 "use client";
 
-import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
+import { LoaderWrapper } from "@onlyoffice/apps-ui-kit/components/loader-wrapper";
 import type { TPortals } from "@docspace/shared/api/management/types";
 
 import { useEndAnimation } from "@/hooks/useEndAnimation";

@@ -1,4 +1,4 @@
-@use "@docspace/ui-kit/styles/variables/colors" as *;
+@use "@onlyoffice/apps-ui-kit/styles/variables/colors" as *;
 
 /* NEXT COLORS MUST BE REWRITE, BECAUSE IT iS USING INSIDE COMPONENTS AND DUPLICATE */
 .light {
@@ -2340,6 +2340,19 @@
   --payment-price-container-disable-color: #{$gray};
   --payment-price-container-disable-price-color: #{$gray};
   --payment-benefits-icons-color: #{$light-gray-dark};
+  --upgrade-enterprise-color: #{$light-second-main};
+  --upgrade-developer-color: #{$second-purple};
+  --upgrade-enterprise-icon-color: #{$light-blue-main};
+  --upgrade-developer-icon-color: #{$purple};
+  --upgrade-enterprise-icon-bg: #{rgba($light-blue-main, 0.1)};
+  --upgrade-developer-icon-bg: #{rgba($purple, 0.1)};
+  --upgrade-button-text-color: #{$white};
+  --upgrade-card-bg: #{$gray-light};
+  --upgrade-trial-card-bg: #{$white};
+  --upgrade-trial-card-border: 1px solid var(--accent-main);
+  --upgrade-description-color: #{$gray-text};
+  --upgrade-icon-color: #{$light-gray-dark};
+  --upgrade-info-icon-color: #{$gray};
 }
 
 .dark {
@@ -2357,6 +2370,19 @@
   --payment-price-container-disable-color: #{$gray-dark};
   --payment-price-container-disable-price-color: #{$gray-dark-text};
   --payment-benefits-icons-color: #{$dark-gray-dark};
+  --upgrade-enterprise-color: #{$light-second-main};
+  --upgrade-developer-color: #{$second-purple};
+  --upgrade-enterprise-icon-color: #{$light-second-main};
+  --upgrade-developer-icon-color: #{$second-purple};
+  --upgrade-enterprise-icon-bg: #{rgba($light-second-main, 0.2)};
+  --upgrade-developer-icon-bg: #{rgba($second-purple, 0.2)};
+  --upgrade-button-text-color: #{$white};
+  --upgrade-card-bg: #{$dark-gray-light};
+  --upgrade-trial-card-bg: transparent;
+  --upgrade-trial-card-border: 1px solid var(--accent-main);
+  --upgrade-description-color: #{$dark-gray-dark};
+  --upgrade-icon-color: #{$dark-gray-dark};
+  --upgrade-info-icon-color: #{$gray-dark};
 }
 
 .light {
@@ -2421,6 +2447,7 @@
   --plugins-plugin-name-color: #{$gray};
   --plugins-border-color: #{$gray-light-mid};
   --plugins-error-status-color: #{$light-error-status};
+  --plugins-warning-status-color: #{$light-status-warning};
   --plugins-description-color: #{$light-gray-dark};
 }
 
@@ -2428,6 +2455,7 @@
   --plugins-plugin-name-color: #{$gray-dark};
   --plugins-border-color: #{$gray-dark-strong};
   --plugins-error-status-color: #{$dark-error-status};
+  --plugins-warning-status-color: #{$dark-status-warning};
   --plugins-description-color: #{$dark-gray-dark};
 }
 
@@ -2556,21 +2584,7 @@
 
   --template-tile-icon-fill: #{$gray};
 
-  --submit-gallery-tile-border: var(--color-scheme-main-accent);
-  --submit-gallery-tile-color-close-icon-fill: #{$light-gray-dark};
-  --submit-gallery-tile-background: #{$white};
-
-  --submit-gallery-tile-text: var(--color-scheme-main-accent);
-  --submit-gallery-tile-text-body: #{$gray-text};
-  --submit-gallery-tile-text-background: #{$white};
-
-  --submit-gallery-tile-text-background: #{$white};
-
   --template-gallery-empty-screen: #{$gray-text};
-
-  --template-gallery-sort-background: #{$white};
-  --template-gallery-sort-fill: #{$light-gray-dark};
-  --template-gallery-sort-hover: #{$gray-light};
 
   --template-gallery-view-button-border: #{$gray-strong};
 }
@@ -2592,18 +2606,7 @@
 
   --template-tile-icon-fill: #{$gray-dark};
 
-  --submit-gallery-tile-border: #{$white};
-  --submit-gallery-tile-color-close-icon-fill: #{$dark-gray-dark};
-  --submit-gallery-tile-background: #{$dark-gray-light};
-
-  --submit-gallery-tile-text: #{$white};
-  --submit-gallery-tile-text-body: #{$dark-gray-dark};
-
   --template-gallery-empty-screen: #{$dark-gray-dark};
-
-  --template-gallery-sort-background: #{$black};
-  --template-gallery-sort-fill: #{$dark-gray-dark};
-  --template-gallery-sort-hover: #{$black};
 
   --template-gallery-view-button-border: #{$gray-dark-strong};
 }

@@ -56,15 +56,17 @@ import ColumnsDarkUrl from "PUBLIC_DIR/images/sdk-presets_columns_dark.png?url";
 import ActionButtonDarkUrl from "PUBLIC_DIR/images/sdk-presets_action-button_dark.png?url";
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
+import CustomActionIconUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-plugin-sdk.react.svg?url";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { Label } from "@docspace/ui-kit/components/label";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { getRoomGroups } from "@docspace/shared/api/rooms";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
@@ -116,7 +118,24 @@ const MANAGER_EVENT_TYPES = [
   "onEditorOpen",
   "onDownload",
   "onFileManagerClick",
+  "onCustomAction",
 ];
+
+const getCustomActions = (targets, label) => {
+  const icon = new URL(CustomActionIconUrl, window.location.origin).href;
+  const action = (key) => ({ key, label, icon });
+
+  const contextMenu = {};
+  ["file", "folder", "room"].forEach((type) => {
+    if (targets[type]) contextMenu[type] = [action(`${type}-action`)];
+  });
+
+  const customActions = {};
+  if (Object.keys(contextMenu).length) customActions.contextMenu = contextMenu;
+  if (targets.create) customActions.createMenu = [action("create-action")];
+
+  return Object.keys(customActions).length ? customActions : undefined;
+};
 
 const Manager = (props) => {
   const { t, fetchExternalLinks, theme, currentColorScheme } = props;
@@ -172,6 +191,25 @@ const Manager = (props) => {
 
   const [selectedLink, setSelectedLink] = useState(null);
 
+  const customActionTargetLabels = {
+    file: t("Common:Files"),
+    folder: t("Common:Folders"),
+    room: t("Common:Rooms"),
+    create: t("Common:New"),
+  };
+
+  const allRoomsOption = { key: "all", label: t("Common:AllRooms") };
+  const [roomGroupOptions, setRoomGroupOptions] = useState([allRoomsOption]);
+  const [selectedRoomGroup, setSelectedRoomGroup] = useState(allRoomsOption);
+  const [folderSelectorKey, setFolderSelectorKey] = useState(0);
+
+  const [customActionTargets, setCustomActionTargets] = useState({
+    file: false,
+    folder: false,
+    room: false,
+    create: false,
+  });
+
   const [config, setConfig] = useState({
     src: window.location.origin,
     mode: "manager",
@@ -205,6 +243,7 @@ const Manager = (props) => {
       onEditorOpen: () => {},
       onDownload: () => {},
       onFileManagerClick: () => {},
+      onCustomAction: () => {},
     },
   });
 
@@ -254,6 +293,20 @@ const Manager = (props) => {
   }, [config]);
 
   useEffect(() => {
+    getRoomGroups()
+      .then((groups) => {
+        setRoomGroupOptions([
+          allRoomsOption,
+          ...(groups ?? []).map((group) => ({
+            key: group.id,
+            label: group.name,
+          })),
+        ]);
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
       scroll.scrollTop = 0;
@@ -301,8 +354,49 @@ const Manager = (props) => {
       setSharedLinks(null);
     }
 
+    setSelectedRoomGroup(allRoomsOption);
+
     setConfig((oldConfig) => {
-      return { ...oldConfig, ...newConfig };
+      const { groupId, ...filter } = oldConfig.filter;
+      return { ...oldConfig, ...newConfig, filter };
+    });
+  };
+
+  const onChangeRoomGroup = (option) => {
+    if (option.key === selectedRoomGroup.key) return;
+
+    setSelectedRoomGroup(option);
+    setSelectedLink(null);
+    setSharedLinks(null);
+    setFolderSelectorKey((key) => key + 1);
+
+    setConfig((oldConfig) => {
+      const { id, requestToken, ...rest } = oldConfig;
+      const { groupId, ...filter } = oldConfig.filter;
+
+      return {
+        ...rest,
+        mode: "manager",
+        rootPath: "/rooms/shared/",
+        filter:
+          option.key === allRoomsOption.key
+            ? filter
+            : { ...filter, groupId: option.key },
+      };
+    });
+  };
+
+  const onChangeCustomActionTarget = (target) => {
+    const targets = {
+      ...customActionTargets,
+      [target]: !customActionTargets[target],
+    };
+    setCustomActionTargets(targets);
+
+    setConfig((oldConfig) => {
+      const { customActions, ...rest } = oldConfig;
+      const nextActions = getCustomActions(targets, t("Common:Action"));
+      return nextActions ? { ...rest, customActions: nextActions } : rest;
     });
   };
 
@@ -626,6 +720,21 @@ const Manager = (props) => {
             </CheckboxGroup>
           </ControlsSection>
           <ControlsSection>
+            <CategorySubHeader>{t("Common:Actions")}</CategorySubHeader>
+            <CheckboxGroup>
+              {Object.entries(customActionTargetLabels).map(([target, label]) => (
+                <Checkbox
+                  key={target}
+                  className="checkbox"
+                  label={label}
+                  onChange={() => onChangeCustomActionTarget(target)}
+                  isChecked={customActionTargets[target]}
+                  dataTestId={`custom_action_${target}_checkbox`}
+                />
+              ))}
+            </CheckboxGroup>
+          </ControlsSection>
+          <ControlsSection>
             <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
             <ControlsGroup>
               <LabelGroup>
@@ -641,10 +750,24 @@ const Manager = (props) => {
               </LabelGroup>
               <FilesSelectorInputWrapper>
                 <FilesSelectorInput
+                  key={folderSelectorKey}
                   onSelectFolder={onChangeFolderId}
                   isSelect
                 />
               </FilesSelectorInputWrapper>
+            </ControlsGroup>
+            <ControlsGroup>
+              <Label className="label" text={t("Common:RoomGroups")} />
+              <ComboBox
+                scaled
+                onSelect={onChangeRoomGroup}
+                options={roomGroupOptions}
+                selectedOption={selectedRoomGroup}
+                displaySelectedOption
+                directionY="bottom"
+                dataTestId="room_group_combobox"
+                dropDownTestId="room_group_dropdown"
+              />
             </ControlsGroup>
             {sharedLinks ? (
               <ControlsGroup>

@@ -65,18 +65,18 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { getConstName } from "@docspace/shared/constants/consts";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type {
   ActionOption,
   ButtonOption,
-} from "@docspace/ui-kit/components/main-button-mobile/MainButtonMobile.types";
-import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
+} from "@onlyoffice/apps-ui-kit/components/main-button-mobile/MainButtonMobile.types";
+import type { QuickActionItem } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import {
   CreateDocumentIcon,
   CreateSpreadsheetIcon,
   CreatePresentationIcon,
   BlankPdfIcon,
-} from "@docspace/ui-kit/components/quick-actions/icons";
+} from "@onlyoffice/apps-ui-kit/components/quick-actions/icons";
 
 import CreateNewFolderIllustration from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import UploadDeviceIllustration from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
@@ -87,6 +87,15 @@ import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentati
 import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+
+import {
+  getVisibleCreateActions,
+  sendCustomAction,
+} from "@docspace/shared/utils/frameCustomActions";
+
+import { useSdkCustomActions } from "@/providers/SdkCustomActionsProvider";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { docsSectionFromRootFolderType } from "@/utils/frameEntity";
 
 import type { CreateFileDialogType } from "../_components/create-file-dialog";
 
@@ -102,6 +111,24 @@ export function useDocsMenuModels({
   onUploadFolder,
 }: MenuActions) {
   const { t } = useTranslation(["Common"]);
+  const { customActions } = useSdkCustomActions();
+  const { rootFolderType, currentFolder } = useFilesListStore();
+  const folderId = currentFolder?.id;
+
+  const customCreateActions = React.useMemo(
+    () =>
+      getVisibleCreateActions(
+        customActions,
+        docsSectionFromRootFolderType(rootFolderType) ?? undefined,
+      ).map((action) => ({
+        key: `sdk-action-${action.key}`,
+        label: action.label,
+        icon: action.icon ?? "",
+        onClick: () =>
+          sendCustomAction({ action: action.key, type: "create", folderId }),
+      })),
+    [customActions, rootFolderType, folderId],
+  );
 
   const desktopModel = React.useMemo<ContextMenuModel[]>(
     () => [
@@ -158,8 +185,17 @@ export function useDocsMenuModels({
         icon: ActionsUploadReactSvgUrl,
         onClick: onUploadFolder,
       },
+      ...(customCreateActions.length
+        ? [
+            { key: "separator-custom-actions", isSeparator: true },
+            ...customCreateActions.map((action) => ({
+              ...action,
+              id: `actions_${action.key}`,
+            })),
+          ]
+        : []),
     ],
-    [t, openCreateDialog, onUploadFiles, onUploadFolder],
+    [t, openCreateDialog, onUploadFiles, onUploadFolder, customCreateActions],
   );
 
   const actionOptions = React.useMemo<ActionOption[]>(
@@ -194,8 +230,18 @@ export function useDocsMenuModels({
         icon: CatalogFolderReactSvgUrl,
         onClick: () => openCreateDialog("folder"),
       },
+      ...(customCreateActions.length
+        ? [
+            {
+              key: "separator-custom-actions",
+              label: "",
+              isSeparator: true,
+            },
+            ...customCreateActions,
+          ]
+        : []),
     ],
-    [t, openCreateDialog],
+    [t, openCreateDialog, customCreateActions],
   );
 
   const buttonOptions = React.useMemo<ButtonOption[]>(

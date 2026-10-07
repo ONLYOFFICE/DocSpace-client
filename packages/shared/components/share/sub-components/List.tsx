@@ -52,11 +52,11 @@ import classNames from "classnames";
 
 import { RowLoader } from "../../../skeletons/selector";
 import { GENERAL_LINK_HEADER_KEY } from "../../../constants";
-import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
+import { useEventListener } from "@onlyoffice/apps-ui-kit/hooks/useEventListener";
 import type { TUser } from "../../../api/people/types";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ScrollbarContext } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 
 import styles from "../Share.module.scss";
 import { ListProps } from "../Share.types";

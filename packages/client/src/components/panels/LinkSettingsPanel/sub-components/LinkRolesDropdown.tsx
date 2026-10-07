@@ -39,16 +39,16 @@ import { isMobile } from "@docspace/shared/utils";
 
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 
 import { LinkRolesDropdownItem } from "./LinkRolesDropdownItem";
-import { TOption } from "@docspace/ui-kit/components/combobox";
+import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import styles from "./LinkRolesDropdown.module.scss";
 import { LinkRolesDropdownProps } from "../LinkSettingsPanel.types";
-import { Portal } from "@docspace/ui-kit/components/portal";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
 
 const LinkRolesDropdown = ({
   currentAccess,

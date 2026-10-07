@@ -33,30 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { makeObservable, observable, action } from "mobx";
-
-import TourStore, { safeGet, safeSet } from "./TourStore";
-
-const WELCOME_SEEN_PREFIX = "dashboard_welcome_seen";
+import TourStore from "./TourStore";
 
 /**
- * Per-user, because a browser is shared: one person having dismissed the
- * welcome says nothing about the next person to sign in on the same machine.
- * The tour's own pending flag is not keyed this way and does not need to be —
- * it is spent within seconds of being set, on the page that set it.
- */
-const welcomeKey = (userId: string) => `${WELCOME_SEEN_PREFIX}_${userId}`;
-
-/**
- * The dashboard's tour, plus the welcome that offers it.
+ * The dashboard's own tour.
  *
- * Two pieces of state that outlive each other in opposite directions. The
- * pending/running pair is inherited and behaves as everywhere else — it is spent
- * the moment the tour starts. `isWelcomeSeen` is the opposite: set once, kept
- * for good, and deliberately untouched by `completeTour`, because "has been
- * offered the tour" is not "has taken the tour" — somebody who dismisses the
- * welcome, or who walks out of the tour halfway, must not be shown the modal
- * again on their next visit.
+ * The welcome modal that offers it is not state the store keeps: it is opened
+ * from the header's help button and from nowhere else — never on its own, not
+ * on a first visit — so the page holds that as local state and this store only
+ * carries the inherited pending/running pair, spent the moment the tour starts.
  *
  * Unlike the section tours, this one is requested and run on the same route, so
  * it never travels through storage: the welcome's button reaches the store
@@ -64,56 +49,9 @@ const welcomeKey = (userId: string) => `${WELCOME_SEEN_PREFIX}_${userId}`;
  * request made from elsewhere.
  */
 class DashboardTourStore extends TourStore {
-  /**
-   * Starts `true`, which is the opposite of the truth for a first-time user.
-   *
-   * The value is only known once `hydrateWelcome` has read storage, and the
-   * honest-looking `false` would put the modal on screen for the frame before
-   * that — a flash of the welcome for every user who has already dismissed it,
-   * on every load. Silence until proven otherwise is the safer default: the
-   * cost of being wrong this way is that a first-time user's welcome arrives a
-   * frame late, which is invisible.
-   */
-  isWelcomeSeen = true;
-
   constructor() {
     super("dashboard_tour_pending");
-
-    makeObservable(this, {
-      isWelcomeSeen: observable,
-      hydrateWelcome: action,
-      dismissWelcome: action,
-    });
   }
-
-  /**
-   * Reads back whether this user has been shown the welcome. Called with the
-   * signed-in user's id, which is only available once the user has loaded — so
-   * this runs from the dashboard rather than from the constructor.
-   *
-   * Lowers the flag as well as raising it, unlike `TourStore.hydratePending`:
-   * there is no in-memory request to protect here, and the whole point is to
-   * learn that a user has *not* seen the welcome. A `userId` that isn't there
-   * yet leaves the flag alone, so nothing is shown before we know who is asking.
-   */
-  hydrateWelcome = (userId?: string): void => {
-    if (!userId) return;
-    this.isWelcomeSeen = safeGet(welcomeKey(userId)) === "true";
-  };
-
-  /**
-   * The user has been shown the welcome — whether they took the tour from it or
-   * closed it. Both count: the modal is an offer, and it is made once.
-   *
-   * With storage unavailable the write silently fails and the in-memory flag
-   * still holds for the rest of the session, so the modal does not come back on
-   * the next navigation to the dashboard. It will come back on the next full
-   * load, which is the most that can be promised without somewhere to write.
-   */
-  dismissWelcome = (userId?: string): void => {
-    this.isWelcomeSeen = true;
-    if (userId) safeSet(welcomeKey(userId), "true");
-  };
 }
 
 export default DashboardTourStore;

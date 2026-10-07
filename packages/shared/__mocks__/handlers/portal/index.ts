@@ -47,6 +47,7 @@ import { portalPaymentQuotasHandler } from "./paymentQuotas";
 import { paymentCustomerInfoHandler } from "./paymentCustomerInfo";
 import { paymentAccountHandler } from "./paymentAccount";
 import { paymentUrlHandler } from "./paymentUrl";
+import { portalInfoHandler, portalUsersCountHandler } from "./portalInfo";
 
 export {
   suspendPortalHandler,
@@ -66,6 +67,8 @@ export {
   paymentCustomerInfoHandler,
   paymentAccountHandler,
   paymentUrlHandler,
+  portalInfoHandler,
+  portalUsersCountHandler,
 };
 
 export const portalHandlers = (port: string) => [
@@ -84,4 +87,6 @@ export const portalHandlers = (port: string) => [
   paymentCustomerInfoHandler(port),
   paymentAccountHandler(port),
   paymentUrlHandler(port),
+  portalInfoHandler(port),
+  portalUsersCountHandler(port),
 ];

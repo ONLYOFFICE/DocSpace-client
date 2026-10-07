@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/PaymentContainer.tsx",
       "line_number": 146,
       "context": "className=\"payment-tooltip\"\n offsetRight={0}\n iconNode={<HelpReactSvg />}\n tooltipContent={\n <>\n <Text isBold>{t(\"ManagerTypesDescription\")}</Text>\n <br />\n <Text isBold>\n {t(\"PortalAdmin\")}\n </Text>\n <Text>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

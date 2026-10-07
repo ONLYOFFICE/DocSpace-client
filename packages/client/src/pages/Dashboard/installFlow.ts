@@ -59,7 +59,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RoomsType, ShareAccessRights } from "@docspace/ui-kit/enums";
+import { RoomsType, ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 import { createRoom, setRoomSecurity } from "@docspace/shared/api/rooms";
 import { createFile } from "@docspace/shared/api/files";
 import type { TRoom } from "@docspace/shared/api/rooms/types";

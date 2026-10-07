@@ -1,5 +1,6 @@
 {
   "AddRoom": "ເພີ່ມຫ້ອງ",
+  "AddSpace": "ເພີ່ມສະເປສ",
   "AddToGroup": "ເພີ່ມເຂົ້າກຸ່ມ",
   "ChangesApplied": "ໄດ້ມີການປ່ຽນແປງແລ້ວ",
   "CreateAGroup": "ສ້າງກຸ່ມ",
@@ -8,7 +9,10 @@
   "DisablingRoomGroups": "ການປິດກຸ່ມຫ້ອງ",
   "DisablingRoomGroupsDescription": "ກຸ່ມຈະຖືກບັນທຶກແຕ່ຖືກເຊື່ອງໄວ້. ກະລຸນາເປີດໃຊ້ງານຄືນໃນ Profile, ການຈັດການໄຟລ໌.",
   "EditRoomGroups": "ແກ້ໄຂກຸ່ມຫ້ອງ",
+  "EditSpaceGroups": "ແກ້ໄຂກຸ່ມສະເປສ",
   "EmptyGroupRoomsDescription": "ບໍ່ມີຫ້ອງຢູ່ທີ່ນີ້. ລອງເພີ່ມຫ້ອງ ຫຼື ຍົກເລີກກຸ່ມນີ້.",
+  "EmptyGroupSpacesDescription": "ບໍ່ມີສະເປສຢູ່ທີ່ນີ້. ລອງເພີ່ມສະເປສ ຫຼື ລຶບກຸ່ມນີ້ອອກ.",
+  "FormSpaces": "ສະເປສ",
   "GroupHasBeenDeleted": "ກຸ່ມໄດ້ຖືກລຶບແລ້ວ",
   "GroupIcon": "ໄອຄອນກຸ່ມ",
   "GroupIsEmpty": "ກຸ່ມຫວ່າງ",
@@ -18,6 +22,8 @@
   "RemoveGroup": "ເອົາກຸ່ມອອກ",
   "RemoveGroupConfirmation": "ທ່ານກໍາລັງຈະລຶບກຸ່ມຫ້ອງ. ທ່ານແນ່ໃຈບໍວ່າຕ້ອງການດໍາເນີນການຕໍ່?",
   "RemoveGroupInfo": "ຫ້ອງທີ່ລວມຢູ່ໃນກຸ່ມຈະຖືກສະແດງໃນພາກສ່ວນ <strong>ຫ້ອງທັງໝົດ</strong>.",
+  "RemoveSpaceGroupConfirmation": "ທ່ານກໍາລັງຈະລຶບກຸ່ມສະເປສ. ທ່ານແນ່ໃຈບໍວ່າຕ້ອງການດໍາເນີນການຕໍ່?",
+  "RemoveSpaceGroupInfo": "ສະເປສທີ່ລວມຢູ່ໃນກຸ່ມຈະຖືກສະແດງໃນພາກສ່ວນ <strong>ສະເປສທັງໝົດ</strong>.",
   "RoomAddedToGroup": "ຫ້ອງທີ່ເລືອກໄດ້ຖືກເພີ່ມເຂົ້າໃນ <1>{{groupName}}</1> ແລ້ວ.",
   "RoomGrouping": "ການຈັດກຸ່ມຫ້ອງ",
   "RoomGroupingDisabled": "ການຈັດກຸ່ມຫ້ອງຖືກປິດການໃຊ້ງານ",
@@ -25,5 +31,9 @@
   "RoomGroupingSettingDescription": "ທ່ານສາມາດຈັດກຸ່ມຫ້ອງເປັນໂຟນເດີ ແລະສະຫຼັບລະຫວ່າງພວກມັນໄດ້ງ່າຍ.",
   "RoomRemovedFromGroup": "ຫ້ອງທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກ <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "ຫ້ອງທີ່ເລືອກໄດ້ຖືກເພີ່ມເຂົ້າໃນ <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "ຫ້ອງທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກ <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "ຫ້ອງທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກ <1>{{groupName}}</1>.",
+  "SpaceAddedToGroup": "ສະເປສທີ່ເລືອກໄດ້ຖືກເພີ່ມເຂົ້າໃນ <1>{{groupName}}</1> ແລ້ວ.",
+  "SpaceRemovedFromGroup": "ສະເປສທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກ <1>{{groupName}}</1> ແລ້ວ.",
+  "SpacesAddedToGroup": "ສະເປສທີ່ເລືອກທັງໝົດໄດ້ຖືກເພີ່ມເຂົ້າໃນ <1>{{groupName}}</1> ແລ້ວ.",
+  "SpacesRemovedFromGroup": "ສະເປສທີ່ເລືອກທັງໝົດໄດ້ຖືກລຶບອອກຈາກ <1>{{groupName}}</1> ແລ້ວ."
 }

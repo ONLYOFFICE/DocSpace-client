@@ -49,7 +49,7 @@ import {
 } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 import { Nullable } from "@docspace/shared/types";
-import { TOption } from "@docspace/ui-kit/components/combobox";
+import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 

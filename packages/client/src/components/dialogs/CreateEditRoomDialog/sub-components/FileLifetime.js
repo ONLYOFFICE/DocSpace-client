@@ -35,9 +35,9 @@
 
 import { useState, useEffect } from "react";
 import capitalize from "lodash/capitalize";
-import { Text } from "@docspace/ui-kit/components/text";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import styles from "../CreateEditRoomDialog.module.scss";
 

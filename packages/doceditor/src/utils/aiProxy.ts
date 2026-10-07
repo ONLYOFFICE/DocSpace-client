@@ -49,11 +49,14 @@ const sendEvent = (
   data: Record<string, unknown>,
 ) => connector.sendEvent("ai_onExternalFetch", data);
 
-// The NewAi OpenAI passthrough reads these two query parameters (and strips
-// them before forwarding): the DocSpace entry the round is attributed to, and
-// which table its id lives in — file and folder ids may collide. The service
-// resolves the entry's type and title under the caller's credentials and
-// sends them to the ONLYOFFICE provider as the request's source metadata.
+// The NewAi OpenAI and web-search passthroughs read these two query
+// parameters (they never reach the provider): the DocSpace entry the request
+// is billed to, and which table its id lives in — file and folder ids may
+// collide. The service resolves the entry's type and title under the
+// caller's credentials and, for the ONLYOFFICE provider / gateway only, sends
+// them as the request's source metadata (`source_id` / `source_type` /
+// `source_title`). Other backends get no metadata.
+const WEB_SEARCH_PREFIX = "[external]/websearch/";
 const withSourceParams = (url: string, sourceFileId: number | string | undefined) => {
   if (sourceFileId === undefined || sourceFileId === "") {
     return url;
@@ -91,10 +94,15 @@ const externalAIFetch = async (
     // requests carry no `model` in the body. Web search resolves the
     // portal's active provider server-side; editor-tools lists and
     // executes the DocSpace tool catalog.
-    const pathRouted = ["[external]/websearch/", "[external]/editor-tools/"];
+    const pathRouted = [WEB_SEARCH_PREFIX, "[external]/editor-tools/"];
 
     if (pathRouted.some((prefix) => e.url.startsWith(prefix))) {
       url = e.url.replace("[external]", "/api/2.0/ai");
+      // Web search is a paid call and is billed to the document like chat
+      // completions; the editor-tools catalog is not, so it stays unmarked.
+      if (e.url.startsWith(WEB_SEARCH_PREFIX)) {
+        url = withSourceParams(url, sourceFileId);
+      }
     } else {
       let profileId: string | undefined;
       const body = e.options.body;

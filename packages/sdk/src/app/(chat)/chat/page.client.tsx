@@ -39,21 +39,21 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "@docspace/ui-kit";
+import { useTheme } from "@onlyoffice/apps-ui-kit";
 import AiAgentProviders, {
   useApi,
   useStores,
-} from "@docspace/ui-kit/ai-agent/providers";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import {
   useAttachHostFilesToChat,
   notifyAlreadyAttached,
   notifyAttachmentLimit,
-} from "@docspace/ui-kit/ai-agent/providers/files";
-import { ChatToolbar } from "@docspace/ui-kit/ai-agent/chat-toolbar";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/files";
+import { ChatToolbar } from "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar";
 import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
-} from "@docspace/ui-kit/ai-agent/providers/themes";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import { getFileInfo } from "@docspace/shared/api/files";
 import {
   frameCallCommand,
@@ -65,7 +65,7 @@ import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 
 import styles from "./page.module.scss";
 
-const NewChat = dynamic(() => import("@docspace/ui-kit/ai-agent/new-chat"), {
+const NewChat = dynamic(() => import("@onlyoffice/apps-ui-kit/ai-agent/new-chat"), {
   ssr: false,
 });
 
@@ -114,12 +114,12 @@ const ChatParamsBridge = ({ fileId, threadId }: ChatParamsBridgeProps) => {
           },
         ]),
       )
-      .then(({ duplicates, skippedOverLimit }) => {
+      .then(({ duplicates, skippedOverLimit, cap }) => {
         // Resuming a thread can land on a composer that already holds this
         // file, and the cap applies here as anywhere else — both drop the
         // chip silently, so say which one happened.
         notifyAlreadyAttached(t, duplicates);
-        notifyAttachmentLimit(t, skippedOverLimit);
+        notifyAttachmentLimit(t, skippedOverLimit, cap);
       })
       .catch((error: unknown) => {
         frameCallEvent({
@@ -158,7 +158,8 @@ const ChatPage = ({
   React.useEffect(() => {
     frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
     frameCallCommand("setIsLoaded");
-  }, []);
+    if (!canUseAi) frameCallEvent({ event: "onNoAccess" });
+  }, [canUseAi]);
 
   const getAgentRoomId = React.useCallback(() => {
     if (!agentId) return null;

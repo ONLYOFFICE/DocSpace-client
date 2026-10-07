@@ -37,9 +37,9 @@ import { useEffect, useState, useRef } from "react";
 import { Outlet, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 
-import Section from "@docspace/ui-kit/components/section";
-import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+import Section from "@onlyoffice/apps-ui-kit/components/section";
+import { LoaderWrapper } from "@onlyoffice/apps-ui-kit/components/loader-wrapper";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
 import ErrorBoundary from "SRC_DIR/components/ErrorBoundaryWrapper";

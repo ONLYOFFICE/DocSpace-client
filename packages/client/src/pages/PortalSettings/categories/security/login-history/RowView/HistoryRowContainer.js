@@ -34,9 +34,9 @@
  */
 
 import { inject, observer } from "mobx-react";
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 
-import { RowContainer } from "@docspace/ui-kit/components/rows";
+import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import { HistoryUserRow } from "./HistoryUserRow";
 

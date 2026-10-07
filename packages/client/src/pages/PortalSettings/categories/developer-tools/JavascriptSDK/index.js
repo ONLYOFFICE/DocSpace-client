@@ -33,14 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { inject, observer } from "mobx-react";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import PortalImg from "PUBLIC_DIR/images/sdk-presets_portal.react.svg?url";
 import PublicRoomImg from "PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url";
@@ -65,15 +65,13 @@ import Integration from "./sub-components/Integration";
 import PresetTile from "./sub-components/PresetTile";
 import CSPSetting from "./sub-components/csp";
 
-import { isMobile } from "@docspace/ui-kit/utils/device";
+import { isMobile } from "@onlyoffice/apps-ui-kit/utils/device";
 import classNames from "classnames";
 import styles from "./sub-components/StyledPortalIntegration.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PortalIntegration = (props) => {
   const { t, currentColorScheme, sdkLink, theme, tReady } = props;
-
-  const [isFlex, setIsFlex] = useState(false);
 
   const navigate = useNavigate();
 
@@ -141,21 +139,6 @@ const PortalIntegration = (props) => {
     if (tReady) setDocumentTitle(t("JavascriptSdk"));
   }, [tReady]);
 
-  useEffect(() => {
-    const content = document.querySelector(".section-wrapper-content");
-    if (!content) return;
-
-    const onResize = (entries) => {
-      setIsFlex(entries[0].contentRect.width <= 600);
-    };
-
-    const rObserver = new ResizeObserver(onResize);
-    rObserver.observe(content);
-    return () => {
-      rObserver.disconnect();
-    };
-  }, []);
-
   return (
     <div className={classNames(styles.sdkContainer, { [styles.isMobile]: isMobile() })}>
       <div className={styles.categoryDescription}>
@@ -180,7 +163,7 @@ const PortalIntegration = (props) => {
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}
       </Text>
-      <div className={classNames(styles.presetsContainer, { "presets-flex": isFlex })}>
+      <div className={styles.presetsContainer}>
         {presetsData.map((data) => (
           <PresetTile
             t={t}

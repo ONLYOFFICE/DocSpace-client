@@ -140,23 +140,35 @@ export const getBuildConfig = (
             name: "vendor",
             test: (id: string) =>
               /[\\/]node_modules[\\/]/.test(id) &&
-              !/[\\/](shiki|@shikijs|react-shiki|heic2any|@onlyoffice[\\/]ai-chat|openai|@anthropic-ai|@mistralai|@google[\\/]genai|@assistant-ui|assistant-stream|@radix-ui|zustand|katex|rehype-[\w-]+|remark-[\w-]+|react-markdown|micromark[\w-]*|mdast-util-[\w-]+|hast-util-[\w-]+|hastscript|unist-[\w-]+|unified|vfile[\w-]*|codemirror|@codemirror|@uiw)[\\/]/.test(
+              !/[\\/](shiki|@shikijs|react-shiki|heic2any|@onlyoffice[\\/](ai-chat|apps-ui-kit)|openai|@anthropic-ai|@mistralai|@google[\\/]genai|@assistant-ui|assistant-stream|@radix-ui|zustand|katex|rehype-[\w-]+|remark-[\w-]+|react-markdown|micromark[\w-]*|mdast-util-[\w-]+|hast-util-[\w-]+|hastscript|unist-[\w-]+|unified|vfile[\w-]*|codemirror|@codemirror|@uiw)[\\/]/.test(
                 id,
               ),
             priority: 10,
           },
-          // Our shared package + the ui-kit submodule (libs/ui-kit) reused
-          // across routes — one chunk instead of dozens of tiny per-component
-          // files (color-picker, slider, table, icon SVGs, …).
+          // Our shared package + @onlyoffice/apps-ui-kit (installed from the
+          // tarball at the repo root, so it lives under node_modules like any
+          // other dependency) reused across routes — one chunk instead of
+          // dozens of tiny per-component files (color-picker, slider, table,
+          // icon SVGs, …).
           // ui-kit's ai-agent subtree is excluded for the same reason as the
           // AI deps above: it statically imports @onlyoffice/ai-chat and is
           // itself only reached from lazy AI pages — captured here it would
           // pull the whole chat UI into the preloaded `shared` chunk.
+          //
+          // Both patterns have to allow for the `dist/esm` segment the
+          // published package inserts: a module id reads
+          // `.../node_modules/@onlyoffice/apps-ui-kit/dist/esm/ai-agent/...`,
+          // not `.../apps-ui-kit/ai-agent/...` as it did when ui-kit was
+          // source in the workspace.
           {
             name: "shared",
             test: (id: string) =>
-              /([\\/]packages[\\/]shared|[\\/]libs[\\/]ui-kit)[\\/]/.test(id) &&
-              !/[\\/]libs[\\/]ui-kit[\\/]ai-agent[\\/]/.test(id),
+              /([\\/]packages[\\/]shared[\\/]|[\\/]@onlyoffice[\\/]apps-ui-kit[\\/])/.test(
+                id,
+              ) &&
+              !/[\\/]@onlyoffice[\\/]apps-ui-kit[\\/](dist[\\/]esm[\\/])?ai-agent[\\/]/.test(
+                id,
+              ),
             priority: 5,
           },
         ],

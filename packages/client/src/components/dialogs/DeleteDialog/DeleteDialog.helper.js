@@ -34,7 +34,7 @@
  */
 
 import { Trans } from "react-i18next";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { isFile, isFolder } from "@docspace/shared/utils/typeGuards";
 
 const separateItems = (selection) => {
@@ -87,13 +87,24 @@ export const getDialogContent = (
   }
 
   if (isAIAgent) {
-    return (
+    return isSingle ? (
       <>
         <Trans
           t={t}
           i18nKey="DeleteAIAgentDescription"
           ns="Common"
           values={{ agentName: selection[0]?.title }}
+          components={{ 1: <Text fontWeight={600} as="span" /> }}
+        />{" "}
+        {t("Common:WantToContinue")}
+      </>
+    ) : (
+      <>
+        <Trans
+          t={t}
+          i18nKey="DeleteAIAgentsDescription"
+          ns="Common"
+          values={{ count: selection.length }}
           components={{ 1: <Text fontWeight={600} as="span" /> }}
         />{" "}
         {t("Common:WantToContinue")}

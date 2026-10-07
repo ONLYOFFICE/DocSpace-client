@@ -1,0 +1,29 @@
+{
+  "key_path": "CacheWrite",
+  "content": "Cache write",
+  "content_en_sha1_hash": "d725b361acd5111f4fad8ca16d41c8ff6267c38b",
+  "created_at": "2026-10-01T08:22:39.784Z",
+  "updated_at": "2026-10-01T08:28:35.679Z",
+  "comment": {
+    "text": "Label in a price breakdown list within a tooltip, representing the amount of data saved to the cache.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T08:28:35.679Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/CachePriceTooltip/CachePriceTooltip.tsx",
+      "line_number": 81,
+      "context": "label={t(\"Common:CacheRead\")}\n value={breakdown.fromCache}\n />\n ) : null}\n <PriceLine\n label={t(\"Common:CacheWrite\")}\n value={breakdown.savedToCache ?? t(\"Common:Free\")}\n />\n </div>\n <Text fontSize=\"12px\" className={styles.note}>\n {t(\"Common:CacheLifetimeDependsOnProvider\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

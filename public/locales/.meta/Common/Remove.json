@@ -3,7 +3,7 @@
   "content": "Remove",
   "content_en_sha1_hash": "e963907dac5cd5c017869b4c96c18021c9bd058b",
   "created_at": "2025-05-19T21:30:47.809Z",
-  "updated_at": "2026-09-04T07:59:41.592Z",
+  "updated_at": "2026-10-06T13:35:38.850Z",
   "comment": {
     "text": "This is a button label that confirms the removal of an item, such as a guest from a room, a user, or a subscription.",
     "is_auto": true,
@@ -12,15 +12,15 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
       "line_number": 87,
       "context": "<ModalDialog.Footer>\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Remove\")}\n onClick={onRemove}\n testId=\"remove_storage_subscription_button\"\n />\n <Button\n scale",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
       "line_number": 208,
-      "context": "if (isRecycleBinFolder) return t(\"Common:DeleteForeverButton\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:MoveTo\");\n };\n \n const getDialogTitle = () => {",
+      "context": "if (isRecycleBinFolder) return t(\"Common:DeleteForeverButton\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:Move\");\n };\n \n const getDialogTitle = () => {",
       "module": "/packages/client"
     },
     {

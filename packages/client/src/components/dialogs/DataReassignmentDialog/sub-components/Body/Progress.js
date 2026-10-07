@@ -33,9 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Loader } from "@docspace/ui-kit/components/loader";
-import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Loader } from "@onlyoffice/apps-ui-kit/components/loader";
+import { ProgressBar } from "@onlyoffice/apps-ui-kit/components/progress-bar";
 
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import InterruptIcon from "PUBLIC_DIR/images/interrupt.icon.react.svg";

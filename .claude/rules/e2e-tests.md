@@ -22,6 +22,13 @@ E2E tests run against a fully mocked backend:
   (`files`, `rooms`, `people`, `settings`, `ai`, …). Add or override handlers
   there when a spec needs new API behavior.
 - The client is served on `PORT=5110` during tests (`TEST_PORT` in base.ts).
+- Specs run in plain Node, and through the shared mocks they import
+  `@onlyoffice/apps-ui-kit` modules, each of which imports its own CSS file.
+  `packages/shared/__mocks__/e2e/node-css-stub.mjs` turns those imports into
+  empty modules (installed by `@docspace/shared/__mocks__/e2e`, which every
+  `playwright.config.ts` imports; workers get it through `NODE_OPTIONS`).
+  An `ERR_UNKNOWN_FILE_EXTENSION ".css"` from a spec means a runner that did
+  not go through that module.
 
 ## Screenshots — Docker only
 

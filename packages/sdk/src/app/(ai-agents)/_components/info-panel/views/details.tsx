@@ -40,9 +40,9 @@ import { observer } from "mobx-react";
 import { decode } from "he";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 
 import type { TAgent } from "@docspace/shared/api/ai/types";
 

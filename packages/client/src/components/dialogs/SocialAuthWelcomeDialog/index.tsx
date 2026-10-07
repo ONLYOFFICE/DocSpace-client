@@ -36,19 +36,19 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { withTranslation, WithTranslation, Trans } from "react-i18next";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import WelcomeAuthSocial from "PUBLIC_DIR/images/welcome-social_auth.svg?url";
 import WelcomeAuthSocialDark from "PUBLIC_DIR/images/welcome-social_auth_dark.svg?url";
 import styles from "./SocialAuthWelcome.module.scss";

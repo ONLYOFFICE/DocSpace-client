@@ -35,7 +35,7 @@
 
 import { useCallback, useRef, useState } from "react";
 
-import { useApi } from "@docspace/ui-kit/ai-agent/providers";
+import { useApi } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import {
   createAgentThread,

@@ -38,9 +38,9 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 import MascotIcon from "PUBLIC_DIR/images/emptyview/empty.desktop.only.svg";
@@ -55,15 +55,16 @@ export type WelcomeDialogProps = {
 };
 
 /**
- * The first thing a user sees on the dashboard.
+ * The dashboard's welcome, and the way into its tour.
  *
  * A single centered column — mascot, greeting, one short paragraph, two buttons.
  * Deliberately thin on content: the page behind the modal is the thing being
  * introduced and the tour is what explains it, so anything more than a greeting
  * competes with the tour it is trying to start.
  *
- * Whether it is shown at all is `DashboardTourStore.isWelcomeSeen`; this
- * component is layout and copy, and both of its actions dismiss.
+ * Never opens on its own — the header's help button is its only entry point, so
+ * whether it is shown is the page's own state. This component is layout and
+ * copy, and both of its actions close.
  */
 const WelcomeDialog = ({ onTakeTour, onClose }: WelcomeDialogProps) => {
   const { t } = useTranslation(["DashboardTour", "Common"]);

@@ -39,10 +39,10 @@ import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 
 import { TFile } from "@docspace/shared/api/files/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";

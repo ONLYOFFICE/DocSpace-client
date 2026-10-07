@@ -45,15 +45,15 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { ComboBox, TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import {
   getUserType,
   convertLanguage,
@@ -61,14 +61,14 @@ import {
   getUserTypeDescription,
 } from "@docspace/shared/utils/common";
 import { isMobile, classNames } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { TDirectionY } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { TAvatarModel } from "@docspace/ui-kit/components/avatar";
-import { TopLoaderService as TopLoadingIndicator } from "@docspace/ui-kit/components";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
+import { TAvatarModel } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { TopLoaderService as TopLoadingIndicator } from "@onlyoffice/apps-ui-kit/components";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import SendClockReactSvgUrl from "PUBLIC_DIR/images/send.clock.react.svg?url";

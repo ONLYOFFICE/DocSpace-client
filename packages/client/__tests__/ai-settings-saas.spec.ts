@@ -81,13 +81,25 @@ const chatModel = (
   price: { prompt, completion },
 });
 
+const imageModel = (
+  id: string,
+  alias: string,
+  provider: string,
+  prompt: number,
+  completion: number,
+  image: number,
+) => ({
+  ...chatModel(id, alias, provider, prompt, completion),
+  price: { prompt, completion, image },
+});
+
 const AI_PRICES = {
   currency: { code: "USD", symbol: "$" },
   chat: [
     chatModel(CHAT_MODEL_A, "Chat Model A", "Provider A", 2.5, 10),
     chatModel(CHAT_MODEL_B, "Chat Model B", "Provider B", 3, 15),
   ],
-  image: [chatModel(IMAGE_MODEL, "Image Model", "Provider A", 5, 40)],
+  image: [imageModel(IMAGE_MODEL, "Image Model", "Provider A", 5, 40, 60)],
   embedding: [
     {
       id: "provider-a/embedding-model",
@@ -150,6 +162,7 @@ const trackRestrictionUpdates = (page: Page) => {
 };
 
 const ACTIVATE_TITLE = "Activate AI features to get started";
+const ACTIVATE_WEB_SEARCH_TITLE = "Activate AI Search to get started";
 const AI_ENABLED_TITLE = "AI features enabled";
 const SEARCH_ENABLED_TITLE = "AI Search enabled";
 
@@ -191,7 +204,9 @@ test.describe("AI settings on SaaS", () => {
     await expect(
       page.getByText("Get access to a wide range of AI models"),
     ).toBeVisible();
-    await expect(page.getByText("Models, Web search, Knowledge base")).toBeVisible();
+    await expect(
+      page.getByText("Models & Knowledge base"),
+    ).toBeVisible();
     await expect(
       page.getByText("OpenRouter pricing, plus a 20% service fee"),
     ).toBeVisible();
@@ -205,10 +220,20 @@ test.describe("AI settings on SaaS", () => {
     ).toBeVisible();
     for (const alias of ["Chat Model A", "Chat Model B", "Image Model"])
       await expect(page.getByText(alias, { exact: true })).toBeVisible();
+    await expect(page.getByText("Text models", { exact: true })).toBeVisible();
+    await expect(page.getByTestId("ai-image-models-title")).toBeVisible();
+    await expect(page.getByText("Image input ($/1M)")).toBeVisible();
+    await expect(page.getByText("Image output ($/1M)")).toBeVisible();
+    await expect(page.getByText("$60.00", { exact: true })).toBeVisible();
     for (const id of [CHAT_MODEL_A, CHAT_MODEL_B, IMAGE_MODEL])
-      await expect(modelToggle(page, id)).toHaveAttribute("aria-checked", "true");
+      await expect(modelToggle(page, id)).toHaveAttribute(
+        "aria-checked",
+        "true",
+      );
     // Models are only switchable once the AI service itself is on.
-    await expect(modelToggle(page, CHAT_MODEL_A).locator("input")).toBeDisabled();
+    await expect(
+      modelToggle(page, CHAT_MODEL_A).locator("input"),
+    ).toBeDisabled();
 
     await expectScreenshot(page, ["desktop", "ai-settings", "ai-models.png"]);
   });
@@ -249,11 +274,17 @@ test.describe("AI settings on SaaS", () => {
 
     await expect(page.getByText("Turn off Chat Model A?")).toBeVisible();
     await expect(
-      page.getByText("This model will become unavailable to users in the workspace."),
+      page.getByText(
+        "This model will become unavailable to users in the workspace.",
+      ),
     ).toBeVisible();
     expect(updates).toHaveLength(0);
 
-    await expectScreenshot(page, ["desktop", "ai-settings", "turn-off-model.png"]);
+    await expectScreenshot(page, [
+      "desktop",
+      "ai-settings",
+      "turn-off-model.png",
+    ]);
 
     await turnOffButton(page).click();
 
@@ -297,7 +328,9 @@ test.describe("AI settings on SaaS", () => {
 
     await expect(page.getByText(AI_ENABLED_TITLE)).toBeVisible(FIRST_RENDER);
     await expect(
-      page.getByText("service management are available in Billing > Services > AI features."),
+      page.getByText(
+        "service management are available in Billing > Services > AI features.",
+      ),
     ).toBeVisible();
     await expect(
       page.getByText("OpenRouter pricing, plus a 20% service fee"),
@@ -356,22 +389,32 @@ test.describe("AI settings on SaaS", () => {
   }) => {
     await page.goto(`${baseUrl}${WEB_SEARCH_ROUTE}`);
 
-    await expect(page.getByText(ACTIVATE_TITLE)).toBeVisible(FIRST_RENDER);
+    await expect(page.getByText(ACTIVATE_WEB_SEARCH_TITLE)).toBeVisible(
+      FIRST_RENDER,
+    );
     await expect(
-      page.getByText("Enable web search to bring real-time information from the internet into AI chats."),
+      page.getByText(
+        "Enable web search to bring real-time information from the internet into AI chats.",
+      ),
     ).toBeVisible();
     await expect(
-      page.getByText("Web search and crawling are powered by Exa"),
+      page.getByText("Web search and web crawling powered by Exa"),
     ).toBeVisible();
-    await expect(page.getByText("Exa pricing, plus a 20% service fee")).toBeVisible();
+    await expect(
+      page.getByText("Exa pricing, plus a 20% service fee"),
+    ).toBeVisible();
 
     await expect(
-      page.getByText("Use a Web search engine to enhance AI chats with real-time information from the internet"),
+      page.getByText(
+        "Use a Web search engine to enhance AI chats with real-time information from the internet",
+      ),
     ).toBeVisible();
     await expect(
-      page.getByText("Web search and web crawling are powered by Exa."),
+      page.getByText("no Exa account or setup needed. Usage is billed through your Wallet."),
     ).toBeVisible();
-    await expect(page.getByText("Search engine", { exact: true })).toBeVisible();
+    await expect(
+      page.getByText("Search engine", { exact: true }),
+    ).toBeVisible();
     await expect(page.getByText("/ request, Search provider")).toBeVisible();
 
     await expectScreenshot(page, ["desktop", "ai-settings", "web-search.png"]);
@@ -386,11 +429,17 @@ test.describe("AI settings on SaaS", () => {
 
     await page.goto(`${baseUrl}${WEB_SEARCH_ROUTE}`);
 
-    await expect(page.getByText(SEARCH_ENABLED_TITLE)).toBeVisible(FIRST_RENDER);
+    await expect(page.getByText(SEARCH_ENABLED_TITLE)).toBeVisible(
+      FIRST_RENDER,
+    );
     await expect(
-      page.getByText("service management are available in Billing > Services > AI Search."),
+      page.getByText(
+        "service management are available in Billing > Services > AI Search.",
+      ),
     ).toBeVisible();
-    await expect(page.getByText("Exa pricing, plus a 20% service fee")).toBeVisible();
+    await expect(
+      page.getByText("Exa pricing, plus a 20% service fee"),
+    ).toBeVisible();
     await expect(activateButton(page)).toHaveCount(0);
 
     await expectScreenshot(page, [
@@ -418,9 +467,11 @@ test.describe("AI settings on SaaS", () => {
     await tab(page, "web-search").click();
 
     await page.waitForURL("**/ai-settings/web-search");
-    await expect(page.getByText(ACTIVATE_TITLE)).toBeVisible();
+    await expect(page.getByText(ACTIVATE_WEB_SEARCH_TITLE)).toBeVisible();
     await expect(
-      page.getByText("Enable web search to bring real-time information from the internet into AI chats."),
+      page.getByText(
+        "Enable web search to bring real-time information from the internet into AI chats.",
+      ),
     ).toBeVisible();
     await expect(page.getByText(AI_ENABLED_TITLE)).toHaveCount(0);
 
@@ -449,10 +500,16 @@ test.describe("AI settings on SaaS", () => {
     await expect(
       page.getByText("Give AI agents access to a knowledge base."),
     ).toBeVisible();
-    await expect(page.getByText("Vectorization", { exact: true })).toBeVisible();
+    await expect(
+      page.getByText("Vectorization", { exact: true }),
+    ).toBeVisible();
     await expect(page.getByText("/ 1M, Provider A")).toBeVisible();
 
-    await expectScreenshot(page, ["desktop", "ai-settings", "knowledge-base.png"]);
+    await expectScreenshot(page, [
+      "desktop",
+      "ai-settings",
+      "knowledge-base.png",
+    ]);
   });
 
   test("a failed price request shows the reload screen", async ({
@@ -464,7 +521,9 @@ test.describe("AI settings on SaaS", () => {
 
     await page.goto(`${baseUrl}${AI_MODELS_ROUTE}`);
 
-    await expect(page.getByText("Something went wrong.")).toBeVisible(FIRST_RENDER);
+    await expect(page.getByText("Something went wrong.")).toBeVisible(
+      FIRST_RENDER,
+    );
     await expect(page.getByText("Reload page", { exact: true })).toBeVisible();
     await expect(page.getByText(ACTIVATE_TITLE)).toBeVisible();
 
@@ -497,9 +556,17 @@ test.describe("AI settings on a phone", () => {
 
     await expect(page.getByText(ACTIVATE_TITLE)).toBeVisible(FIRST_RENDER);
     await expect(activateButton(page)).toBeEnabled();
-    await expect(page.getByText("Models, Web search, Knowledge base")).toBeHidden();
+    await expect(
+      page.getByText("Models & Knowledge base"),
+    ).toBeHidden();
     for (const alias of ["Chat Model A", "Chat Model B", "Image Model"])
       await expect(page.getByText(alias, { exact: true })).toBeVisible();
+    await expect(page.getByText("Text models", { exact: true })).toBeVisible();
+    await expect(page.getByTestId("ai-image-models-title")).toBeVisible();
+    await expect(
+      page.getByText("$5.00/M image input | $60.00/M image output"),
+    ).toBeVisible();
+    await expect(page.getByText("$40.00/M output tokens")).toBeVisible();
     await expect(modelToggle(page, CHAT_MODEL_A)).toHaveAttribute(
       "aria-checked",
       "true",
@@ -509,7 +576,9 @@ test.describe("AI settings on a phone", () => {
 
     await page.locator("svg[data-tooltip-id]").first().click();
 
-    await expect(page.getByText("Models, Web search, Knowledge base")).toBeVisible();
+    await expect(
+      page.getByText("Models & Knowledge base"),
+    ).toBeVisible();
     await expect(
       page.getByText("OpenRouter pricing, plus a 20% service fee"),
     ).toBeVisible();
@@ -532,7 +601,9 @@ test.describe("AI settings on a phone", () => {
 
     await expect(page.getByText(AI_ENABLED_TITLE)).toBeVisible(FIRST_RENDER);
     await expect(detailsButton(page)).toBeEnabled();
-    await expect(modelToggle(page, CHAT_MODEL_A).locator("input")).toBeEnabled();
+    await expect(
+      modelToggle(page, CHAT_MODEL_A).locator("input"),
+    ).toBeEnabled();
 
     await expectScreenshot(page, [
       "mobile",
@@ -547,15 +618,21 @@ test.describe("AI settings on a phone", () => {
   }) => {
     await page.goto(`${baseUrl}${WEB_SEARCH_ROUTE}`);
 
-    await expect(page.getByText(ACTIVATE_TITLE)).toBeVisible(FIRST_RENDER);
+    await expect(page.getByText(ACTIVATE_WEB_SEARCH_TITLE)).toBeVisible(
+      FIRST_RENDER,
+    );
     await expect(
-      page.getByText("Enable web search to bring real-time information from the internet into AI chats."),
+      page.getByText(
+        "Enable web search to bring real-time information from the internet into AI chats.",
+      ),
     ).toBeVisible();
     await expect(activateButton(page)).toBeEnabled();
     await expect(
-      page.getByText("Web search and crawling are powered by Exa"),
+      page.getByText("Web search and web crawling powered by Exa"),
     ).toBeHidden();
-    await expect(page.getByText("Search engine", { exact: true })).toBeVisible();
+    await expect(
+      page.getByText("Search engine", { exact: true }),
+    ).toBeVisible();
     await expect(page.getByText("/ request, Search provider")).toBeVisible();
 
     await expectScreenshot(page, ["mobile", "ai-settings", "web-search.png"]);
@@ -563,9 +640,11 @@ test.describe("AI settings on a phone", () => {
     await page.locator("svg[data-tooltip-id]").first().click();
 
     await expect(
-      page.getByText("Web search and crawling are powered by Exa"),
+      page.getByText("Web search and web crawling powered by Exa"),
     ).toBeVisible();
-    await expect(page.getByText("Exa pricing, plus a 20% service fee")).toBeVisible();
+    await expect(
+      page.getByText("Exa pricing, plus a 20% service fee"),
+    ).toBeVisible();
 
     await expectScreenshot(page, [
       "mobile",
@@ -583,7 +662,9 @@ test.describe("AI settings on a phone", () => {
 
     await page.goto(`${baseUrl}${WEB_SEARCH_ROUTE}`);
 
-    await expect(page.getByText(SEARCH_ENABLED_TITLE)).toBeVisible(FIRST_RENDER);
+    await expect(page.getByText(SEARCH_ENABLED_TITLE)).toBeVisible(
+      FIRST_RENDER,
+    );
     await expect(detailsButton(page)).toBeEnabled();
     await expect(activateButton(page)).toHaveCount(0);
 
@@ -594,3 +675,4 @@ test.describe("AI settings on a phone", () => {
     ]);
   });
 });
+

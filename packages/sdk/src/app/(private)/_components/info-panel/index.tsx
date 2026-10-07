@@ -64,7 +64,7 @@ import commonStyles from "@/app/(docspace)/_components/info-panel/helpers/Common
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TagsChangedHandler } from "@docspace/shared/components/tag-management/TagManagement.types";
 import type { TUser } from "@docspace/shared/api/people/types";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 

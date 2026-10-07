@@ -37,24 +37,24 @@ import { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { useApi } from "@docspace/ui-kit/providers/api";
+import { useApi } from "@onlyoffice/apps-ui-kit/providers/api";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import QuantityPicker from "@docspace/ui-kit/components/quantity-picker";
-import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
-import SalesDepartmentRequestDialog from "@docspace/ui-kit/billing/dialogs/SalesDepartmentRequestDialog";
-import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
-import { isInsufficientFundsError } from "@docspace/ui-kit/billing/utils/insufficientFunds";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { ModalDialogType } from "@onlyoffice/apps-ui-kit/components/modal-dialog/ModalDialog.enums";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import QuantityPicker from "@onlyoffice/apps-ui-kit/components/quantity-picker";
+import StorageWarning from "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StorageWarning";
+import SalesDepartmentRequestDialog from "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog";
+import { formatDateLocalized } from "@onlyoffice/apps-ui-kit/utils/date";
+import { isInsufficientFundsError } from "@onlyoffice/apps-ui-kit/billing/utils/insufficientFunds";
 
 import WalletSvg from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
 import AutomationApiSvg from "PUBLIC_DIR/images/icons/16/docs-connect.automation-api.react.svg";
@@ -79,8 +79,8 @@ import {
   isDocsConnectCanceled,
   isDocsConnectPaid,
 } from "../utils";
+import { DOCS_CONNECT_LINKS } from "../constants";
 import { PAYMENT_ROUTES } from "../../../payments/utils";
-import { brandingRedirectUrl } from "../../../common/Branding/constants";
 
 import styles from "./BuyPlanPanel.module.scss";
 
@@ -117,16 +117,16 @@ interface BuyPlanPanelProps {
       successUrl?: string,
     ) => Promise<string | null | undefined>;
     signal: AbortSignal;
-  }) => Promise<boolean>;
+  }) => Promise<{ isDelayedPaymentMethod: boolean } | null>;
   isCardMissingOrInactive?: boolean;
   isCardLinkedToPortal?: boolean;
   isPayer?: boolean;
+  isDelayedPaymentMethod?: boolean;
   walletCustomerEmail?: string | null;
   walletCustomerDisplayName?: string | null;
   fetchPayerInfo?: (isRefresh?: boolean) => Promise<unknown>;
   fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
   closeBuyPlan?: () => void;
-  docsConnectUrl?: string;
 }
 
 const BuyPlanPanel = ({
@@ -139,12 +139,12 @@ const BuyPlanPanel = ({
   isCardMissingOrInactive,
   isCardLinkedToPortal,
   isPayer,
+  isDelayedPaymentMethod,
   walletCustomerEmail,
   walletCustomerDisplayName,
   fetchPayerInfo,
   fetchWalletBalance,
   closeBuyPlan,
-  docsConnectUrl,
 }: BuyPlanPanelProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
   const { paymentApi } = useApi();
@@ -163,6 +163,8 @@ const BuyPlanPanel = ({
   const [submitting, setSubmitting] = useState(false);
   const [waitingPayment, setWaitingPayment] = useState(false);
   const [topUpDialogVisible, setTopUpDialogVisible] = useState(false);
+  const openTopUpDialog = () => setTopUpDialogVisible(true);
+  const closeTopUpDialog = () => setTopUpDialogVisible(false);
   const [requestDialogVisible, setRequestDialogVisible] = useState(false);
   const [devPackCalc, setDevPackCalc] =
     useState<TDocsConnectDevPackCalculation | null>(null);
@@ -303,6 +305,11 @@ const BuyPlanPanel = ({
   const topUpRequired = Math.max(0, Math.ceil(chargeNow - availableCredits));
   const isTopUpUnavailable =
     insufficientFunds && !!isCardLinkedToPortal && !isPayer;
+  const isDelayedPaymentTopUp =
+    insufficientFunds &&
+    !isTopUpUnavailable &&
+    !isCardMissingOrInactive &&
+    !!isDelayedPaymentMethod;
 
   const formatCurrency = (amount: number) =>
     formatCurrencyValue(i18n.language, amount, currency, 2);
@@ -325,9 +332,12 @@ const BuyPlanPanel = ({
   );
 
   const fetchCardLinked = async (backUrl?: string, successUrl?: string) => {
+    const resolvedBackUrl = backUrl ?? window.location.href;
     const res = await paymentApi.getCheckoutSetupUrl(
-      { backUrl: backUrl ?? window.location.href },
-      { params: { successUrl } } as never,
+      // successUrl is required by the API SDK, so a caller that omits it gets
+      // the same destination as backUrl -- the page it started from.
+      { backUrl: resolvedBackUrl, successUrl: successUrl ?? resolvedBackUrl },
+      {},
     );
     return res?.data?.response as string | undefined;
   };
@@ -349,12 +359,6 @@ const BuyPlanPanel = ({
       "_blank",
     );
 
-  const rebrandingUrl = combineUrl(
-    window.ClientConfig?.proxy?.url,
-    config.homepage,
-    brandingRedirectUrl,
-  );
-
   const onTopUpConfirm = async () => {
     await switchToDevPack?.({ quantity: users, topUp: 0 });
     toastr.success(t("DocsConnect:PlanPurchased"));
@@ -363,8 +367,13 @@ const BuyPlanPanel = ({
   const onBuy = async () => {
     if (submitting) return;
 
+    if (isDelayedPaymentTopUp) {
+      openTopUpDialog();
+      return;
+    }
+
     if (isDevPackUpgrade && insufficientFunds && isCardMissingOrInactive) {
-      setTopUpDialogVisible(true);
+      openTopUpDialog();
       return;
     }
 
@@ -382,7 +391,7 @@ const BuyPlanPanel = ({
           topUp: insufficientFunds ? topUpRequired : 0,
         });
       } else if (controller) {
-        const done = await buyPlanViaStripe?.({
+        const completion = await buyPlanViaStripe?.({
           users,
           devPack,
           topUp: topUpRequired,
@@ -391,7 +400,11 @@ const BuyPlanPanel = ({
           fetchCardLinked,
           signal: controller.signal,
         });
-        if (!done) return;
+        if (!completion) return;
+        if (completion.isDelayedPaymentMethod) {
+          toastr.success(t("Common:TopUpDelayedPaymentMethodWarning"));
+          return;
+        }
       } else {
         await buyPlan?.({
           users,
@@ -466,6 +479,8 @@ const BuyPlanPanel = ({
     if (isEditActive) {
       if (isScheduled) return t("Common:ScheduleChange");
 
+      if (isDelayedPaymentTopUp) return t("Common:TopUpWallet");
+
       return insufficientFunds && !isTopUpUnavailable
         ? t("DocsConnect:TopUpAndBuy")
         : t("Common:Upgrade");
@@ -473,6 +488,8 @@ const BuyPlanPanel = ({
 
     if (!insufficientFunds || isTopUpUnavailable)
       return isRenew ? t("Common:RenewSubscription") : t("Common:Upgrade");
+
+    if (isDelayedPaymentTopUp) return t("Common:TopUpWallet");
 
     return info.deactivated
       ? t("Common:TopUpAndPay")
@@ -539,6 +556,15 @@ const BuyPlanPanel = ({
                 ),
             }}
           />
+        </Text>
+      );
+
+    if (isDelayedPaymentTopUp)
+      return (
+        <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
+          {t("DocsConnect:TopUpWalletHint", {
+            service: t("DocsConnect:DocsConnect"),
+          })}
         </Text>
       );
 
@@ -649,7 +675,8 @@ const BuyPlanPanel = ({
   return (
     <>
       <ModalDialog
-        visible={visible}
+        visible={visible && !topUpDialogVisible}
+        hideContent={topUpDialogVisible}
         displayType={ModalDialogType.aside}
         onClose={onClose}
         withBodyScroll
@@ -733,7 +760,7 @@ const BuyPlanPanel = ({
                 step={1}
                 showSlider
                 showPlusSign
-                underContorlsTitle={t("DocsConnect:PerUserPerMonth", {
+                underControlsTitle={t("DocsConnect:PerUserPerMonth", {
                   price: formatCurrency(pricePerUser),
                 })}
                 onChange={setUsers}
@@ -803,7 +830,7 @@ const BuyPlanPanel = ({
                   <div>
                     <Link
                       type={LinkType.page}
-                      href={docsConnectUrl}
+                      href={DOCS_CONNECT_LINKS.automationApi}
                       target={LinkTarget.blank}
                       fontSize="13px"
                       fontWeight={600}
@@ -824,7 +851,7 @@ const BuyPlanPanel = ({
                   <div>
                     <Link
                       type={LinkType.page}
-                      href={rebrandingUrl}
+                      href={DOCS_CONNECT_LINKS.branding}
                       target={LinkTarget.blank}
                       fontSize="13px"
                       fontWeight={600}
@@ -1137,7 +1164,7 @@ const BuyPlanPanel = ({
       {topUpDialogVisible ? (
         <ClientSimpleTopUpDialog
           visible={topUpDialogVisible}
-          onClose={() => setTopUpDialogVisible(false)}
+          onClose={closeTopUpDialog}
           onConfirm={onTopUpConfirm}
           language={i18n.language}
           service=""
@@ -1153,7 +1180,6 @@ export default inject(
     docsConnectStore,
     paymentStore,
     currentTariffStatusStore,
-    settingsStore,
   }: TStore) => ({
     visible: docsConnectStore.buyPlanPanelVisible,
     info: docsConnectStore.info,
@@ -1164,13 +1190,13 @@ export default inject(
     isCardMissingOrInactive: paymentStore.isCardMissingOrInactive,
     isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
     isPayer: paymentStore.isPayer,
+    isDelayedPaymentMethod: currentTariffStatusStore.isDelayedPaymentMethod,
     walletCustomerEmail: currentTariffStatusStore.walletCustomerEmail,
     walletCustomerDisplayName:
       currentTariffStatusStore.walletCustomerInfo?.displayName,
     fetchPayerInfo: currentTariffStatusStore.fetchPayerInfo,
     fetchWalletBalance: paymentStore.fetchWalletBalance,
     closeBuyPlan: docsConnectStore.closeBuyPlan,
-    docsConnectUrl: settingsStore.docsConnectUrl,
   }),
 )(observer(BuyPlanPanel));
 

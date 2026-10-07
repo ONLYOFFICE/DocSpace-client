@@ -52,17 +52,17 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useResolvedFileTitle } from "../../hooks/useResolvedFileTitle";
 import { FileFillingFormStatus } from "../../enums";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
-import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
+import { Heading, HeadingLevel } from "@onlyoffice/apps-ui-kit/components/heading";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { FillingRoleProcess } from "../../components/filling-role-process";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { getFormFillingStatus as getFormFillingStatusApi } from "../../api/files";
 import type { TFileFillingFormStatus } from "../../api/files/types";
 import { createLoader } from "../../utils/createLoader";

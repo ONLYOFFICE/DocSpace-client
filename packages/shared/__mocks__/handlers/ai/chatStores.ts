@@ -147,6 +147,18 @@ export const aiChatDeepModeHandler = (port: string) =>
     HttpResponse.json(false),
   );
 
+/**
+ * `GET /api/2.0/ai/preferences/get-reasoning-level` — the extended-thinking
+ * depth of the scope. The chat library reads it twice while it boots: once
+ * portal-wide and once per `entityId` scope it switches into. `"off"` matches
+ * the deep-mode toggle {@link aiChatDeepModeHandler} answers with.
+ */
+export const aiChatReasoningLevelHandler = (port: string) =>
+  http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/ai/preferences/get-reasoning-level`,
+    () => HttpResponse.json("off"),
+  );
+
 /** `GET /api/2.0/ai/threads/list` — an account with no chat history yet. */
 export const aiChatThreadsListHandler = (port: string) =>
   http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/threads/list`, () =>
@@ -233,6 +245,7 @@ export const aiChatEmptyStoreHandlers = (port: string) => [
   aiChatProfilesListHandler(port, { profiles: [] }),
   aiChatAssignmentsHandler(port),
   aiChatDeepModeHandler(port),
+  aiChatReasoningLevelHandler(port),
   aiChatThreadsListHandler(port),
   aiChatPromptsListHandler(port),
   aiChatPromptsFoldersHandler(port),
@@ -253,5 +266,6 @@ export const aiChatStoreHandlers = (
   aiChatProfilesListHandler(port),
   aiChatAssignmentsHandler(port, options),
   aiChatDeepModeHandler(port),
+  aiChatReasoningLevelHandler(port),
   aiChatThreadsListHandler(port),
 ];

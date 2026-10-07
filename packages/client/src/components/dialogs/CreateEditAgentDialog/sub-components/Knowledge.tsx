@@ -37,9 +37,9 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";

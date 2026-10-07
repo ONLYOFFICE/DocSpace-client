@@ -37,7 +37,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Trans } from "react-i18next";
 
-import { CategoryItem } from "@docspace/ui-kit/components/category-item";
+import { CategoryItem } from "@onlyoffice/apps-ui-kit/components/category-item";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, observable, runInAction } from "mobx";
 
 import {
   MEDIA_VIEW_URL,
@@ -45,10 +45,11 @@ import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { PlaylistType } from "@docspace/shared/components/media-viewer/MediaViewer.types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { matchesUserRole } from "SRC_DIR/helpers/plugins/roles";
+import { isSameId } from "SRC_DIR/helpers/plugins/utils";
 
 import {
   findNearestIndex,
@@ -75,13 +76,19 @@ type TMediaViewerData = {
 
 // `pdfViewer` exists in public/scripts/config.json but is
 // missing from the duplicated Window.ClientConfig declarations
-// (packages/shared/types/index.ts and the libs/ui-kit submodule's
+// (packages/shared/types/index.ts and ui-kit's
 // utils/openingNewTab/index.ts). Both declarations must be updated in sync
-// (TS2717) and ui-kit is a separate submodule, so a local cast is used here
+// (TS2717) and ui-kit is a separate repository, so a local cast is used here
 // until the field can be added to both.
 type TClientConfigWithPdfViewer = NonNullable<Window["ClientConfig"]> & {
   pdfViewer?: boolean;
 };
+
+const VIEWER_HISTORY_STATE = { isMediaViewer: true };
+
+const isViewerHistoryEntry = () => window.history.state?.isMediaViewer === true;
+
+const isMediaViewUrl = () => window.location.pathname.includes(MEDIA_VIEW_URL);
 
 class MediaViewerDataStore {
   filesStore: TFilesStore;
@@ -102,12 +109,16 @@ class MediaViewerDataStore {
 
   prevPostionIndex = 0;
 
+  isOpenedByPlugin = false;
+
+  handledPluginViewerProps: PluginStore["pluginMediaViewerProps"] = null;
+
   constructor(
     filesStore: TFilesStore,
     publicRoomStore: PublicRoomStore,
     pluginStore: PluginStore,
   ) {
-    makeAutoObservable(this);
+    makeAutoObservable(this, { handledPluginViewerProps: observable.ref });
     this.filesStore = filesStore;
     this.publicRoomStore = publicRoomStore;
     this.pluginStore = pluginStore;
@@ -127,6 +138,25 @@ class MediaViewerDataStore {
     this.setAutoPlay(true);
 
     if (!mediaData.visible) this.setCurrentItem(null);
+  };
+
+  openPluginViewer = (id: number | string) => {
+    this.isOpenedByPlugin = true;
+    this.handledPluginViewerProps = this.pluginStore.pluginMediaViewerProps;
+    this.setMediaViewerData({ visible: true, id });
+    this.writeViewerHistoryEntry();
+  };
+
+  showPluginFile = (id: number | string) => {
+    this.handledPluginViewerProps = this.pluginStore.pluginMediaViewerProps;
+    this.setCurrentId(id);
+  };
+
+  closePluginViewer = () => {
+    this.isOpenedByPlugin = false;
+    this.handledPluginViewerProps = null;
+    this.setMediaViewerData({ visible: false, id: null });
+    this.removeViewerHistoryEntry();
   };
 
   fetchPreviewMediaFile = (
@@ -238,8 +268,27 @@ class MediaViewerDataStore {
   changeUrl = (id: number | string) => {
     if (this.isPluginViewerActive) return;
 
-    const url = this.getUrl(id);
-    window.history.pushState("", "", url);
+    this.writeViewerHistoryEntry(this.getUrl(id));
+  };
+
+  removeViewerHistoryEntry = () => {
+    if (isViewerHistoryEntry()) {
+      window.history.back();
+      return;
+    }
+
+    if (!isMediaViewUrl()) return;
+
+    window.history.replaceState(window.history.state, "", this.getFirstUrl());
+  };
+
+  private writeViewerHistoryEntry = (url?: string) => {
+    if (isViewerHistoryEntry() || isMediaViewUrl()) {
+      window.history.replaceState(window.history.state, "", url);
+      return;
+    }
+
+    window.history.pushState(VIEWER_HISTORY_STATE, "", url);
   };
 
   nextMedia = async () => {
@@ -350,6 +399,36 @@ class MediaViewerDataStore {
     );
   }
 
+  get isPluginViewerClosing() {
+    return this.isOpenedByPlugin && !this.isPluginViewerActive;
+  }
+
+  get pendingPluginFileId() {
+    const fileId = this.requestedPluginFileId;
+    const isHandled =
+      this.pluginStore.pluginMediaViewerProps === this.handledPluginViewerProps;
+
+    if (!this.isOpenedByPlugin || isNullOrUndefined(fileId)) return undefined;
+
+    if (isHandled) return undefined;
+
+    return fileId;
+  }
+
+  get isPluginFileOutsidePlaylist() {
+    const fileId = this.requestedPluginFileId;
+
+    if (isNullOrUndefined(fileId)) return false;
+
+    return !this.playlist.some((entry) => isSameId(entry.fileId, fileId));
+  }
+
+  private get requestedPluginFileId() {
+    if (!this.isPluginViewerActive) return undefined;
+
+    return this.pluginStore.pluginMediaViewerProps?.fileId;
+  }
+
   filterFilesByPluginCriteria = (files: TFile[]) => {
     if (!this.isPluginViewerActive) return files;
 
@@ -403,7 +482,9 @@ class MediaViewerDataStore {
       return 0;
     }
 
-    let index = this.playlist.find((file) => file.fileId === this.id)?.id;
+    let index = this.playlist.find((file) =>
+      isSameId(file.fileId, this.id),
+    )?.id;
 
     if (isNullOrUndefined(index)) {
       index = findNearestIndex(this.playlist, this.prevPostionIndex);

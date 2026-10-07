@@ -3,7 +3,7 @@
   "content": "PDFs",
   "content_en_sha1_hash": "8c85c119d1cd8e0acfc82505e49fce77f2339f5f",
   "created_at": "2025-12-22T09:40:07.684Z",
-  "updated_at": "2026-05-15T14:00:06.631Z",
+  "updated_at": "2026-09-16T20:56:59.602Z",
   "comment": {
     "text": "This is a tab label in a file gallery, allowing users to filter and view only PDF documents.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/TemplateGallery/constants/index.ts",
+      "line_number": 77,
+      "context": "smallPreview: true,\n },\n [TAB_IDS.FORMS]: {\n id: TAB_IDS.FORMS,\n extension: FILE_EXTENSIONS.PDF,\n translationKey: \"Common:PDFs\",\n smallPreview: false,\n },\n } as const;\n \n export const SCROLL_HEIGHTS = {",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/TemplateGallery/index.tsx",
       "line_number": 100,

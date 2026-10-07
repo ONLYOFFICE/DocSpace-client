@@ -40,20 +40,20 @@ import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TFunction } from "i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { RadioButton } from "@docspace/ui-kit/components/radio-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { RadioButton } from "@onlyoffice/apps-ui-kit/components/radio-button";
 import { saveDeposite, startBackup } from "../../../api/portal";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { BackupStorageLocalKey, BackupStorageType } from "../../../enums";
-import StatusMessage from "@docspace/ui-kit/components/status-message";
+import StatusMessage from "@onlyoffice/apps-ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import { OPERATIONS_NAME } from "../../../constants";
-import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
+import OperationsProgressButton from "@onlyoffice/apps-ui-kit/components/operations-progress-button";
 import DataBackupLoader from "../../../skeletons/backup/DataBackup";
 import { getBackupProgressInfo, getErrorInfo } from "../../../utils/common";
 import { getFromLocalStorage } from "../../../utils";
@@ -200,6 +200,7 @@ const ManualBackup = ({
   walletBalance = 0,
   walletCodeCurrency,
   isCardLinked = false,
+  isDelayedPaymentMethod = false,
   fetchWalletBalance,
   onOpenTopUpDialog,
 }: ManualBackupProps) => {
@@ -222,7 +223,14 @@ const ManualBackup = ({
     !!backupServicePrice &&
     walletBalance < backupServicePrice;
 
-  const isTopUpBeforeCopy = isBalanceInsufficient && isPayer && isCardLinked;
+  const isDelayedPaymentTopUp =
+    isBalanceInsufficient &&
+    isPayer &&
+    isDelayedPaymentMethod &&
+    !!onOpenTopUpDialog;
+
+  const isTopUpBeforeCopy =
+    isBalanceInsufficient && isPayer && isCardLinked && !isDelayedPaymentTopUp;
 
   const isTopUpDialogBeforeCopy =
     isBalanceInsufficient && !isCardLinked && !!onOpenTopUpDialog;
@@ -246,13 +254,17 @@ const ManualBackup = ({
 
   const topUpAmount = Math.ceil((backupServicePrice ?? 0) - walletBalance);
 
-  const copyButtonLabel =
-    isTopUpBeforeCopy || isTopUpDialogBeforeCopy
-      ? t("Common:TopUpAndMakeCopy")
-      : undefined;
+  const getCopyButtonLabel = () => {
+    if (isDelayedPaymentTopUp) return t("Common:TopUpWallet");
+    if (isTopUpBeforeCopy || isTopUpDialogBeforeCopy)
+      return t("Common:TopUpAndMakeCopy");
+    return undefined;
+  };
+
+  const copyButtonLabel = getCopyButtonLabel();
 
   const topUpIfNeeded = async () => {
-    if (isTopUpDialogBeforeCopy) {
+    if (isDelayedPaymentTopUp || isTopUpDialogBeforeCopy) {
       onOpenTopUpDialog?.();
       return false;
     }

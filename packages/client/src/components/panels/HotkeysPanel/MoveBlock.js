@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Row } from "@docspace/ui-kit/components/rows";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import styles from "./HotkeysPanel.module.scss";
 
 const MoveBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {

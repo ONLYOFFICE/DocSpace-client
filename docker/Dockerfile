@@ -31,7 +31,7 @@ RUN apt-get -y update && \
     apt-get install -yq
     
 # Install PNPM
-RUN npm install -g pnpm@11.19.0
+RUN npm install -g pnpm@12.4.1
 
 WORKDIR /app
 
@@ -41,11 +41,17 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 # Copy package files first for better layer caching
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
+# ui-kit and ai-chat ship as prebuilt tarballs at the repo root; every app's
+# `file:../../*.tgz` dependency resolves against these, so they must be present
+# before `pnpm install --frozen-lockfile` runs.
+COPY *.tgz ./
+
 # Copy the source code with correct directory structure
 COPY ../common/ ./common/
 COPY ../packages/ ./packages/
+# next.config.js requires scripts/ui-kit-dev.cjs at load time.
+COPY ../scripts/ ./scripts/
 COPY ../public/ ./public/
-COPY ../libs/ ./libs/
 
 # ENV NODE_OPTIONS="--max-old-space-size=8192"
 

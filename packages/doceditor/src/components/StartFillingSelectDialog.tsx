@@ -37,14 +37,14 @@ import { useTranslation } from "react-i18next";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import FilesSelectorWrapper from "@docspace/ui-kit/selectors/Files";
-import type { SdkFolderType } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import FilesSelectorWrapper from "@onlyoffice/apps-ui-kit/selectors/Files";
+import type { SdkFolderType } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import { RoomsType } from "@docspace/shared/enums";
 import { useSelectorInfoBar } from "@docspace/shared/hooks/useSelectorInfoBar";
 import {
 	TInfoBarData,
 	TSelectorCancelButton,
-} from "@docspace/ui-kit/components/selector";
+} from "@onlyoffice/apps-ui-kit/components/selector";
 
 import { StartFillingSelectorDialogProps } from "@/types";
 import useDeviceType from "@/hooks/useDeviceType";

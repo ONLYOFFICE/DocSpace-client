@@ -38,7 +38,7 @@ import axios from "axios";
 
 import api from "@docspace/shared/api";
 import { setDNSSettings } from "@docspace/shared/api/settings";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";

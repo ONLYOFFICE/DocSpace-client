@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/errors/ErrorUnavailable.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/errors/ErrorUnavailable.tsx",
       "line_number": 48,
       "context": "return (\n ready && (\n <div className={styles.errorUnavailableWrapper}>\n <ErrorContainer\n headerText={t(\"ErrorDeactivatedText\")}\n />\n </div>\n )\n );\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/shared/components/errors/ErrorUnavailable.tsx",

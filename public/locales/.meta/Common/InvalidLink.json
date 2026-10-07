@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/errors/ErrorInvalidLink.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/errors/ErrorInvalidLink.tsx",
       "line_number": 45,
       "context": "const t = useCommonTranslation();\n const ready = getTranslationReady();\n \n return ready ? (\n <ErrorContainer\n headerText={t(\"InvalidLink\")}\n bodyText={t(\"LinkDoesNotExist\")}\n />\n ) : null;\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/View/index.tsx",
@@ -56,7 +56,7 @@
     {
       "file_path": "/packages/shared/pages/PublicRoom/PublicRoomError/index.tsx",
       "line_number": 47,
-      "context": "import ErrorContainer from \"@docspace/ui-kit/components/error-container/ErrorContainer\";\n \n const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {\n const { t, ready } = useTranslation([\"Errors\", \"Common\"]);\n const headerText = isInvalid\n ? t(\"Common:InvalidLink\")\n : t(\"Common:ExpiredLink\");\n const bodyText = isInvalid\n ? t(\"Common:LinkDoesNotExist\")\n : t(\"Common:LinkHasExpired\");",
+      "context": "import ErrorContainer from \"@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer\";\n \n const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {\n const { t, ready } = useTranslation([\"Errors\", \"Common\"]);\n const headerText = isInvalid\n ? t(\"Common:InvalidLink\")\n : t(\"Common:ExpiredLink\");\n const bodyText = isInvalid\n ? t(\"Common:LinkDoesNotExist\")\n : t(\"Common:LinkHasExpired\");",
       "module": "/packages/shared"
     }
   ],

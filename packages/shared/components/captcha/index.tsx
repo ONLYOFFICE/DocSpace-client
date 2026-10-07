@@ -41,7 +41,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 import { RecaptchaType } from "../../enums";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./Captcha.module.scss";
 

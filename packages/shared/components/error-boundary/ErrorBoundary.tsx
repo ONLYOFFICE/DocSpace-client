@@ -36,11 +36,21 @@
 import React, { ErrorInfo } from "react";
 
 import Error520 from "../errors/Error520";
+import {
+  canReloadOnChunkError,
+  scheduleChunkErrorReload,
+} from "../../utils/chunk-load-error";
 
 import type {
   ErrorBoundaryProps,
   ErrorBoundaryState,
 } from "./ErrorBoundary.types";
+
+// A lazy chunk that failed to load (dropped request in a background tab, or
+// a deploy that replaced the chunks) is recovered by one bounded reload
+// instead of the crash page. Without this the boundary swallows the error
+// before the app's global-error.tsx, which holds the same recovery, sees it.
+const CHUNK_RELOAD_KEY = "error-boundary.retry-chunk-reload";
 
 class ErrorBoundary extends React.Component<
   ErrorBoundaryProps,
@@ -48,25 +58,34 @@ class ErrorBoundary extends React.Component<
 > {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { error: null };
+    this.state = { error: null, isReloading: false };
   }
 
   public static getDerivedStateFromError(error?: Error): ErrorBoundaryState {
     // Update state so the next render will show the fallback UI.
-    return { error: error ?? new Error("Unhandled exception") };
+    return {
+      error: error ?? new Error("Unhandled exception"),
+      isReloading: canReloadOnChunkError(error, CHUNK_RELOAD_KEY),
+    };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // You can also log the error to an error reporting service
 
     console.error(error, errorInfo);
+
+    if (this.state.isReloading) {
+      scheduleChunkErrorReload(CHUNK_RELOAD_KEY);
+      return;
+    }
+
     const { onError } = this.props;
 
     onError?.();
   }
 
   public render() {
-    const { error } = this.state;
+    const { error, isReloading } = this.state;
     const {
       children,
       user,
@@ -75,6 +94,8 @@ class ErrorBoundary extends React.Component<
       currentDeviceType,
       currentColorScheme,
     } = this.props;
+
+    if (isReloading) return null;
 
     if (error) {
       // You can render any custom fallback UI

@@ -58,6 +58,16 @@ export const isDocsConnectCanceled = (info: TDocsConnectInfo): boolean =>
   info.scheduledChange == null &&
   (info.tenant.payment?.quantity ?? 0) === 0;
 
+export const isDocsConnectLocked = (
+  info: TDocsConnectInfo | null | undefined,
+): boolean => {
+  if (!info) return false;
+
+  return isDocsConnectPaid(info)
+    ? info.deactivated === true
+    : isDocsConnectTrialExpired(info.tenant.endDate ?? "");
+};
+
 export const getDocsConnectPricePerUser = (
   info: TDocsConnectInfo,
   devPackEnabled: boolean = info.devPackEnabled,

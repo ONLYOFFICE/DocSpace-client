@@ -1,0 +1,29 @@
+{
+  "key_path": "ImageInputCurrency",
+  "content": "Image input ({{currency}}/1M)",
+  "content_en_sha1_hash": "2bc4bb90b970da86343795727134f733aa030145",
+  "created_at": "2026-09-23T12:24:22.171Z",
+  "updated_at": "2026-09-23T12:26:48.570Z",
+  "comment": {
+    "text": "Table column header displaying the cost per 1 million image inputs, where {{currency}} is the currency symbol.",
+    "is_auto": true,
+    "updated_at": "2026-09-23T12:26:48.570Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/TableView/TableHeader.tsx",
+      "line_number": 72,
+      "context": "const priceColumns = isImage\n ? [\n {\n key: \"ImageInput\",\n title: t(\"Common:ImageInputCurrency\", {\n currency: aiModelsCurrencySymbol,\n }),\n enable: true,\n resizable: true,\n minWidth: 90,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

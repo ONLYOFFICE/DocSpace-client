@@ -41,7 +41,6 @@ import {
   TypeSettings,
   selfActivationStatusHandler,
   selfByTypeHandler,
-  usersByType,
   docsConnectHandlers,
   type UserType,
 } from "@docspace/shared/__mocks__/handlers";
@@ -99,19 +98,12 @@ const dialog = (page: Page, platform: string) =>
   );
 const steps = (page: Page) => page.locator('[data-testid="integration-step"]');
 
-// packages/client/src/store/DashboardTourStore.ts — spent up front so the
-// welcome does not sit over the page.
-const welcomeKey = (userId: string) => `dashboard_welcome_seen_${userId}`;
-
 const openDashboard = async (
   page: Page,
   baseUrl: string,
   userType: UserType,
 ) => {
   await page.clock.setSystemTime(FIXED_NOW);
-  await page.addInitScript((key: string) => {
-    window.localStorage.setItem(key, "true");
-  }, welcomeKey(usersByType[userType].id));
 
   await page.goto(`${baseUrl}${DASHBOARD_URL}`);
   await expect(page.locator(INTEGRATIONS_CARD)).toBeVisible();

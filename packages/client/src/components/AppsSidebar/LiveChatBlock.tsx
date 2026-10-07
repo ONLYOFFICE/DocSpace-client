@@ -37,31 +37,27 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
-import ArticleLiveChat from "@docspace/ui-kit/components/article/sub-components/LiveChat";
+import ArticleLiveChat from "@onlyoffice/apps-ui-kit/components/article/sub-components/LiveChat";
 
 type LiveChatBlockProps = {
   isLiveChatAvailable: boolean;
   languageBaseName: string;
-  zendeskEmail: string;
-  chatDisplayName: string;
   zendeskKey: string;
   isShowLiveChat: boolean;
-  isMobileArticle: boolean;
-  showProgress: boolean;
+  withFloatingButton: boolean;
   isInfoPanelVisible: boolean;
 };
 
 /**
- * Loads the Zendesk widget for the sidebar. It renders nothing itself - it only
- * injects the Zendesk snippet and forwards settings to it, which is what the
- * "Live chat" switch in the profile menu (ProfileActionsStore.onLiveChatClick)
- * shows and hides. The availability gate repeats the one that adds the switch to
- * the menu, so the two can never disagree.
+ * Live chat for the sidebar: the Zendesk widget, whose own launcher is the way
+ * into the chat. The "Live chat" switch in the profile menu
+ * (ProfileActionsStore.onLiveChatClick) loads the widget the first time and
+ * shows or hides it from then on. The availability gate repeats the one that
+ * adds the switch to the menu, so the two can never disagree. The launcher
+ * shares the bottom corner with the create button and the progress button,
+ * and the two flags below are what move it aside while one of those is there.
  */
-const LiveChatBlock = ({
-  isLiveChatAvailable,
-  ...rest
-}: LiveChatBlockProps) => {
+const LiveChatBlock = ({ isLiveChatAvailable, ...rest }: LiveChatBlockProps) => {
   if (isMobile || !isLiveChatAvailable) return null;
 
   return <ArticleLiveChat {...rest} />;
@@ -72,28 +68,29 @@ const LiveChatBlockConnected = inject<TStore>(
   ({
     authStore,
     settingsStore,
-    userStore,
-    uploadDataStore,
     infoPanelStore,
-    backup,
     profileActionsStore,
+    filesStore,
+    uploadDataStore,
+    backup,
   }) => {
     const { downloadingProgress } = backup;
-    const isBackupProgressVisible =
-      downloadingProgress > 0 && downloadingProgress < 100;
+    // OperationsProgressButton is a floating button too, pinned to the same
+    // corner whenever an upload, a file operation or a backup download runs.
+    const showProgress =
+      uploadDataStore.primaryProgressDataStore.isPrimaryProgressVisbile ||
+      uploadDataStore.secondaryProgressDataStore.isSecondaryProgressVisbile ||
+      (downloadingProgress > 0 && downloadingProgress < 100);
 
     return {
       isLiveChatAvailable: authStore.isLiveChatAvailable,
       languageBaseName: authStore.languageBaseName,
-      zendeskEmail: userStore.user?.email ?? "",
-      chatDisplayName: userStore.user?.displayName ?? "",
       zendeskKey: settingsStore.zendeskKey,
       isShowLiveChat: profileActionsStore.isShowLiveChat,
-      isMobileArticle: settingsStore.isMobileArticle,
-      showProgress:
-        uploadDataStore.primaryProgressDataStore.isPrimaryProgressVisbile ||
-        uploadDataStore.secondaryProgressDataStore.isSecondaryProgressVisbile ||
-        isBackupProgressVisible,
+      // CreateButtonMobile keeps mainButtonVisible in step with the create
+      // button it renders into the same corner, so the launcher dodges exactly
+      // when that button or the progress button is there.
+      withFloatingButton: filesStore.mainButtonVisible || showProgress,
       isInfoPanelVisible: infoPanelStore.isVisible,
     };
   },

@@ -64,8 +64,8 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
-import type { TLogo } from "@docspace/ui-kit/types";
+import { ScrollbarContext } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 

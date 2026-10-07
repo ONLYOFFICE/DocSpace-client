@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/uploader/index.tsx",
       "line_number": 420,
       "context": "}\n if (folderMode && !multipleMode) {\n return getCommonTranslation(\"DropzoneFolderSecondary\");\n }\n if (!folderMode && multipleMode) {\n return getCommonTranslation(\"DropzoneFilesSecondary\");\n }\n return getCommonTranslation(\"DropzoneTitleSecondary\");\n };\n \n return (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",

@@ -37,11 +37,11 @@ import { useCallback, useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
 import {

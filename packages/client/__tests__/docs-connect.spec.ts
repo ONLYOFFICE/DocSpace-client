@@ -47,7 +47,7 @@ import {
   PATH_WALLET_BALANCE,
   PATH_UPDATE_WALLET,
 } from "@docspace/shared/__mocks__/handlers";
-import type { BrowserContext } from "@playwright/test";
+import type { BrowserContext, Page } from "@playwright/test";
 import type { DocsConnectPreset } from "@docspace/shared/__mocks__/handlers";
 import { selfByTypeHandler } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
@@ -101,6 +101,15 @@ const freezeTime = async (context: BrowserContext, frozenNowMs: number) => {
       }
     };
   }, frozenNowMs);
+};
+
+const expectTabsLocked = async (page: Page) => {
+  for (const id of ["settings", "preview"]) {
+    const tab = page.getByTestId(`${id}_tab`);
+
+    await expect(tab).toHaveCSS("pointer-events", "none");
+    await expect(tab).toHaveCSS("opacity", "0.5");
+  }
 };
 
 const usePreset = (mockRequest: WorkerFixture, preset: DocsConnectPreset) => {
@@ -270,11 +279,31 @@ test.describe("Docs Connect", () => {
         { timeout: FIRST_RENDER_TIMEOUT },
       );
 
+      await expectTabsLocked(page);
+
       await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "trial-expired.png",
       ]);
+    });
+
+    test("redirects to statistics when the trial expired", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      usePreset(mockRequest, "trialExpired");
+
+      await page.goto(`${baseUrl}${DOCS_CONNECT_ROUTE}/settings`);
+
+      await expect(page.getByTestId("docs_connect_panel")).toBeVisible({
+        timeout: FIRST_RENDER_TIMEOUT,
+      });
+      await expect(page).toHaveURL(
+        new RegExp(`${DOCS_CONNECT_ROUTE}/statistics$`),
+      );
+      await expect(page.getByTestId("docs_connect_trial_banner")).toBeVisible();
     });
   });
 
@@ -496,6 +525,25 @@ test.describe("Docs Connect", () => {
 
       expect(body.quantity).toEqual({ docscloud: 0 });
       expect(body.productQuantityType).toBe(0);
+    });
+
+    test("locks the tabs and redirects to statistics", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      usePreset(mockRequest, "deactivated");
+
+      await page.goto(`${baseUrl}${DOCS_CONNECT_ROUTE}/preview`);
+
+      await expect(
+        page.getByTestId("docs_connect_deactivated_banner"),
+      ).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
+      await expect(page).toHaveURL(
+        new RegExp(`${DOCS_CONNECT_ROUTE}/statistics$`),
+      );
+
+      await expectTabsLocked(page);
     });
   });
 

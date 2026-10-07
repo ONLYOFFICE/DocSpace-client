@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/image-editor/ImageCropper/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/image-editor/ImageCropper/index.tsx",
       "line_number": 162,
       "context": "/>\n </div>\n <div\n className={styles.iconCropperChangeButton}\n onClick={() => inputFilesElement.current?.click()}\n title={t(\"Common:ChooseAnother\")}\n data-testid=\"change_image_button\"\n >\n <RefreshReactSvg />\n <div className={styles.iconCropperChangeButtonText}>\n {t(\"Common:ChooseAnother\")}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/image-editor/ImageCropper/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/image-editor/ImageCropper/index.tsx",
       "line_number": 162,
       "context": "/>\n </div>\n <div\n className={styles.iconCropperChangeButton}\n onClick={() => inputFilesElement.current?.click()}\n title={t(\"Common:ChooseAnother\")}\n data-testid=\"change_image_button\"\n >\n <RefreshReactSvg />\n <div className={styles.iconCropperChangeButtonText}>\n {t(\"Common:ChooseAnother\")}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

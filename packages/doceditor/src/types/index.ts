@@ -43,14 +43,14 @@ import {
 import { TUser } from "@docspace/shared/api/people/types";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
-import { HeaderProps, TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import { HeaderProps, TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type {
   TSelectedFileInfo,
   FilesSettingsDto,
   FolderDtoInteger,
   SdkFolderType,
   FileEntryDtoIntegerAllOfSecurity,
-} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+} from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
@@ -59,7 +59,7 @@ import type {
 } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
-import type { RoomsType } from "@docspace/ui-kit/enums";
+import type { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 
 export type TGoBack = {
   requestClose: boolean;

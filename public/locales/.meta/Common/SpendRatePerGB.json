@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/utils/serviceUsage.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/utils/serviceUsage.ts",
       "line_number": 68,
       "context": "case ADMIN:\n case MANAGER:\n return t(\"Common:SpendRatePerAdmin\", { price });\n case DISK_STORAGE:\n case STORAGE_ENUM:\n return t(\"Common:SpendRatePerGB\", { price });\n default:\n return \"\";\n }\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

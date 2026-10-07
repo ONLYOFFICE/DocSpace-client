@@ -38,7 +38,7 @@
 import { useContext } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import {

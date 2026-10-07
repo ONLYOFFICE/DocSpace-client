@@ -35,10 +35,10 @@
 
 import { inject, observer } from "mobx-react";
 
-import { Portal } from "@docspace/ui-kit/components/portal";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
-import { TOnSubmit } from "@docspace/ui-kit/components/selector";
-import type { PeopleSelectorProps } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
+import { TOnSubmit } from "@onlyoffice/apps-ui-kit/components/selector";
+import type { PeopleSelectorProps } from "@onlyoffice/apps-ui-kit/selectors/People/PeopleSelector.types";
 
 type MembersSelectorProps = {
   isVisible: boolean;

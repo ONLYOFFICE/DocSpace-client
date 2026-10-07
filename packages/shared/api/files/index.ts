@@ -38,7 +38,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import type { DateTime } from "luxon";
 
-import type { TFile } from "@docspace/ui-kit/types";
+import type { TFile } from "@onlyoffice/apps-ui-kit/types";
 
 import {
   ConflictResolveType,
@@ -406,6 +406,18 @@ export async function getTrashFolderList() {
 //   return request(options);
 // }
 
+/**
+ * The one folder title the server refuses with 403 for a reason other than
+ * access: a second `.ai` folder in a room's root ("The room already contains
+ * the .ai folder", `InvalidOperationException` -> Forbidden). The shared
+ * client reads a 403 inside a room as lost access and leaves for the root,
+ * so for this title alone the redirect is skipped and the toast stands.
+ */
+const AI_FOLDER_TITLE = ".ai";
+
+const skipRedirectForTitle = (title: string): boolean =>
+  title.trim() === AI_FOLDER_TITLE;
+
 export async function createFolder(
   parentFolderId: number | string,
   title: string,
@@ -417,7 +429,7 @@ export async function createFolder(
     data,
   };
 
-  const res = (await request(options)) as TFolder;
+  const res = (await request(options, skipRedirectForTitle(title))) as TFolder;
 
   return res;
 }
@@ -457,7 +469,7 @@ export async function renameFolder(folderId: number, title: string) {
     data,
   };
 
-  const res = (await request(options)) as TFolder;
+  const res = (await request(options, skipRedirectForTitle(title))) as TFolder;
 
   return res;
 }

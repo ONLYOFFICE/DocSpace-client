@@ -40,6 +40,7 @@ import {
   TypeSettings,
   webPluginsAddHandler,
   webPluginsHandler,
+  webPluginsTestBundleHandler,
   webPluginsUpdateHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
@@ -51,6 +52,7 @@ test.describe("Plugins", () => {
       settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithPlugins),
       filesSettingsHandler(TEST_PORT),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
+      webPluginsTestBundleHandler(TEST_PORT),
     );
   });
 

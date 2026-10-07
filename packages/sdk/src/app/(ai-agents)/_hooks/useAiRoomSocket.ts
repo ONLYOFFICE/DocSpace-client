@@ -63,7 +63,7 @@
 
 import React from "react";
 
-import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
+import SocketHelper, { SocketCommands } from "@onlyoffice/apps-ui-kit/utils/socket";
 
 /**
  * Subscribes to `DIR-{id}` socket room while the id is set; unsubscribes on

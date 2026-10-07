@@ -83,10 +83,8 @@ import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import copy from "copy-to-clipboard";
 import { isMobile } from "react-device-detect";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import type {
-  ContextMenuModel,
-} from "@docspace/ui-kit/components/context-menu";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { isLockedSharedRoom, trimSeparator } from "@docspace/shared/utils";
@@ -107,11 +105,7 @@ import {
   onShowEditingToast,
   placePlugins,
 } from "./helpers";
-import type {
-  TContextItem,
-  TContextOption,
-  TMenuGroupConfig,
-} from "./helpers";
+import type { TContextItem, TContextOption, TMenuGroupConfig } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
 import type { TSelectionItem } from "./types";
 
@@ -161,7 +155,13 @@ export const getFilesContextOptionsImpl = (
 
   const hasInfoPanel = contextOptions.includes("show-info");
 
-  const withAI = contextOptions.includes("ask-ai");
+  // Either AI entry counts: they are alternatives, not neighbours (a form the
+  // server lets you analyze gets "analyze-responses" in place of "ask-ai"), and
+  // both bring `separator6` with them. Checking only one would hide separator0
+  // and send the menu groups to the wrong separator on exactly those forms.
+  const withAI =
+    contextOptions.includes("ask-ai") ||
+    contextOptions.includes("analyze-responses");
 
   // const emailSendIsDisabled = true;
   const showSeparator0 =
@@ -190,11 +190,7 @@ export const getFilesContextOptionsImpl = (
           label: t("Common:ShowVersionHistory"),
           icon: HistoryReactSvgUrl,
           onClick: () =>
-            self.showVersionHistory(
-              item.id,
-              item.security,
-              item?.requestToken,
-            ),
+            self.showVersionHistory(item.id, item.security, item?.requestToken),
           disabled: false,
         },
       ]
@@ -270,10 +266,7 @@ export const getFilesContextOptionsImpl = (
     },
   ];
 
-  const { pinOptions, muteOptions } = self.getRoomsRootContextOptions(
-    item,
-    t,
-  );
+  const { pinOptions, muteOptions } = self.getRoomsRootContextOptions(item, t);
 
   let withOpen = item.id !== self.selectedFolderStore.id;
   const isPublicRoomType =
@@ -503,6 +496,14 @@ export const getFilesContextOptionsImpl = (
       disabled: false,
     },
     {
+      id: "option_analyze_responses",
+      key: "analyze-responses",
+      label: t("Files:AnalyzeResponses"),
+      icon: AISvgUrl,
+      onClick: () => self.askAI(item, true),
+      disabled: false,
+    },
+    {
       key: "separator6",
       isSeparator: true,
     },
@@ -681,10 +682,7 @@ export const getFilesContextOptionsImpl = (
         let groupIcon = CreateGroupReactSvgUrl;
         if (typeof group.icon === "string" && group.icon) {
           groupIcon = group.icon;
-        } else if (
-          typeof group.icon === "object" &&
-          group.icon?.data?.small
-        ) {
+        } else if (typeof group.icon === "object" && group.icon?.data?.small) {
           groupIcon = `data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data.small)}`;
         }
         return {
@@ -958,8 +956,7 @@ export const getFilesContextOptionsImpl = (
                 ? t("Common:DeleteFormSpace")
                 : t("Common:DeleteRoom")
               : t("Common:Delete"),
-      icon:
-        item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
+      icon: item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
       onClick: () => self.onDelete(item, t),
       disabled: item.isTemplate ? !isTemplateOwner : false,
     },
@@ -1002,10 +999,7 @@ export const getFilesContextOptionsImpl = (
   ];
   // `false` entries are skipped by filterModel's key lookup
   // exactly as in the original .js — the cast keeps that behavior.
-  const options = filterModel(
-    optionsModel as TContextOption[],
-    contextOptions,
-  );
+  const options = filterModel(optionsModel as TContextOption[], contextOptions);
 
   const pluginItems = self.onLoadPlugins(item);
 
@@ -1022,6 +1016,8 @@ export const getFilesContextOptionsImpl = (
       });
     });
   }
+
+  const frameActions = self.onLoadFrameActions(item);
 
   const { isCollaborator } = self.userStore?.user || {
     isCollaborator: false,
@@ -1099,9 +1095,7 @@ export const getFilesContextOptionsImpl = (
     });
   }
 
-  const downloadOption = newOptions.find(
-    (option) => option.key === "download",
-  );
+  const downloadOption = newOptions.find((option) => option.key === "download");
   const downloadAsOption = newOptions.find(
     (option) => option.key === "download-as",
   );
@@ -1208,8 +1202,7 @@ export const getFilesContextOptionsImpl = (
 
     // Remove all plugin items from resultOptions first
     for (let i = resultOptions.length - 1; i >= 0; i--) {
-      if (pluginKeys.includes(resultOptions[i].key))
-        resultOptions.splice(i, 1);
+      if (pluginKeys.includes(resultOptions[i].key)) resultOptions.splice(i, 1);
     }
 
     const defaultPlugins = pluginItems.filter((p) => !p.placement);
@@ -1290,7 +1283,7 @@ export const getFilesContextOptionsImpl = (
             "open-location",
           ],
           ["filling-status", "reset-and-start-filling"],
-          ["ask-ai"],
+          ["ask-ai", "analyze-responses"],
           [
             "update-xlsx-data",
             "share",
@@ -1321,6 +1314,18 @@ export const getFilesContextOptionsImpl = (
     const items = resultOptions.filter((opt) => !opt.isSeparator);
     const result: TContextOption[] = [];
     let folderSeparatorIndex = 0;
+    let frameActionsPlaced = frameActions.length === 0;
+
+    const placeFrameActions = () => {
+      if (result.length > 0) {
+        result.push({
+          key: `separator${folderSeparatorIndex++}`,
+          isSeparator: true,
+        });
+      }
+      result.push(...frameActions);
+      frameActionsPlaced = true;
+    };
 
     groups.forEach((group) => {
       const groupItems: TContextOption[] = [];
@@ -1332,6 +1337,8 @@ export const getFilesContextOptionsImpl = (
 
       if (groupItems.length > 0) {
         const isDeleteGroup = group.includes("delete");
+
+        if (isDeleteGroup && !frameActionsPlaced) placeFrameActions();
         const shouldAddSeparator =
           result.length > 0 && (groupItems.length >= 2 || isDeleteGroup);
 
@@ -1351,6 +1358,8 @@ export const getFilesContextOptionsImpl = (
         result.push(...groupItems);
       }
     });
+
+    if (!frameActionsPlaced) placeFrameActions();
 
     items.forEach((option) => {
       const isInGroups = groups.flat().includes(option.key);
@@ -1373,10 +1382,7 @@ export const getFilesContextOptionsImpl = (
 
   if (downloadGroupIndex !== -1 && moveIndex !== -1) {
     // If download group is already before move, do nothing
-    if (
-      downloadGroupIndex < moveIndex &&
-      moveIndex - downloadGroupIndex > 1
-    ) {
+    if (downloadGroupIndex < moveIndex && moveIndex - downloadGroupIndex > 1) {
       // If there are other items between them, move download right before move
       const downloadGroup = resultOptions.splice(downloadGroupIndex, 1)[0];
       resultOptions.splice(moveIndex - 1, 0, downloadGroup);
@@ -1385,6 +1391,26 @@ export const getFilesContextOptionsImpl = (
       const downloadGroup = resultOptions.splice(downloadGroupIndex, 1)[0];
       resultOptions.splice(moveIndex, 0, downloadGroup);
     }
+  }
+
+  if (frameActions.length > 0) {
+    const roomExitIndex = resultOptions.findIndex((option) =>
+      ["leave-room", "archive-room", "unarchive-room", "delete"].includes(
+        option.key,
+      ),
+    );
+
+    let insertIndex =
+      roomExitIndex === -1 ? resultOptions.length : roomExitIndex;
+    if (resultOptions[insertIndex - 1]?.isSeparator) insertIndex -= 1;
+
+    resultOptions.splice(
+      insertIndex,
+      0,
+      { key: "separator-custom-actions", isSeparator: true },
+      ...frameActions,
+      { key: "separator-after-custom-actions", isSeparator: true },
+    );
   }
 
   const newResult = placePlugins(resultOptions, pluginItems);

@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Das Abonnement wird automatisch <1>am {{date}}</1> verlängert",
   "TopUpAndBuy": "Aufladen & Kaufen",
   "TopUpHint": "Ihr Wallet wird um <1>{{amount}}</1> aufgeladen, und das ausgewählte Abonnement wird automatisch gekauft. Aufladebeträge werden auf den nächsten vollen Dollar aufgerundet.",
+  "TopUpWalletHint": "Für das ausgewählte {{service}}-Abonnement ist nicht genügend Guthaben vorhanden. Laden Sie Ihr Wallet auf und kehren Sie dann zurück, um den Kauf abzuschließen.",
   "TotalDueTodayTooltip": "Heute zahlen Sie nur für die ausgewählte Anzahl an Benutzern für die verbleibenden Tage bis zu Ihrem Abrechnungsdatum. Danach wird der volle Betrag einmal pro Abrechnungszyklus an Ihrem regulären Abrechnungsdatum berechnet.",
   "TotalMonthly": "Monatlich gesamt",
   "TrialAvailable": "Ein kostenloser einmonatiger Testzeitraum steht zur Verfügung. Keine Kreditkarte erforderlich.",

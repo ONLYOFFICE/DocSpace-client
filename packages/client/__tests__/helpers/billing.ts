@@ -126,11 +126,16 @@ const CARD_STATUS: Record<CardKind, PaymentMethodStatus> = {
   expired: PaymentMethodStatus.Expired,
 };
 
-const customerInfoHandler = (payer: PayerKind, card: CardKind) =>
+const customerInfoHandler = (
+  payer: PayerKind,
+  card: CardKind,
+  isDelayedPaymentMethod: boolean,
+) =>
   http.get(apiUrl(PATH_PAYMENT_CUSTOMER_INFO), () =>
     jsonResponse({
       portalId: null,
       paymentMethodStatus: CARD_STATUS[card],
+      isDelayedPaymentMethod,
       email: PAYER_EMAIL[payer],
       payer:
         payer === "left" || payer === "none"
@@ -160,12 +165,15 @@ export const useSaasBilling = (
     tariff = "paid",
     plan = "business",
     card = "active",
+    isDelayedPaymentMethod = false,
   }: {
     user?: UserKind;
     payer?: PayerKind;
     tariff?: TariffKind;
     plan?: PlanKind;
     card?: CardKind;
+    /** the deposit is accepted at once, the funds reach the wallet later */
+    isDelayedPaymentMethod?: boolean;
   } = {},
 ) => {
   mockRequest.use(
@@ -176,7 +184,7 @@ export const useSaasBilling = (
     paymentSettingsHandler(TEST_PORT, false),
     // Since billing moved to the wallet the plan is priced in the wallet currency.
     portalPaymentQuotasHandler(TEST_PORT, WALLET_CURRENCY),
-    customerInfoHandler(payer, card),
+    customerInfoHandler(payer, card, isDelayedPaymentMethod),
     paymentAccountHandler(TEST_PORT),
     paymentUrlHandler(TEST_PORT),
     tariffHandlerFor(tariff),

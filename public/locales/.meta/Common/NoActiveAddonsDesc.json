@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/ActiveAddons.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/ActiveAddons.tsx",
       "line_number": 102,
       "context": "className={styles.mutedTitle}\n >\n {t(\"NoActiveAddons\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>\n {t(\"NoActiveAddonsDesc\")}\n </Text>\n </div>\n </div>\n ) : (\n <div className={styles.addonsBody}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

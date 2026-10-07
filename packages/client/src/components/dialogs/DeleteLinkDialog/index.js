@@ -37,10 +37,10 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { RoomsType } from "@docspace/shared/enums";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";

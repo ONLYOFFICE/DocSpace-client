@@ -42,7 +42,7 @@ import AiAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.d
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
-import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import { InstallAiArbiterDialog } from "SRC_DIR/pages/Dashboard/InstallAiArbiterDialog";

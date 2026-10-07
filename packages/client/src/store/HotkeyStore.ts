@@ -42,14 +42,14 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import type FilesFilter from "@docspace/shared/api/files/filter";
 import type { TTranslation } from "@docspace/shared/types";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isMobile, getCountTilesInRow } from "@docspace/shared/utils";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { TABLE_HEADER_HEIGHT } from "@docspace/ui-kit/components/table/Table.constants";
+import { TABLE_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/table/Table.constants";
 
 import type FilesSettingsStore from "./FilesSettingsStore";
 import type IndexingStore from "./IndexingStore";

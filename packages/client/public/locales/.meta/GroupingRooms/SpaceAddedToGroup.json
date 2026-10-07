@@ -1,0 +1,29 @@
+{
+  "key_path": "SpaceAddedToGroup",
+  "content": "The selected space has been added to <1>{{groupName}}</1>.",
+  "content_en_sha1_hash": "ac75e842c4afd534a77c813516b28533bd3c1f34",
+  "created_at": "2026-09-25T10:58:49.227Z",
+  "updated_at": "2026-10-02T12:15:32.442Z",
+  "comment": {
+    "text": "A toast message confirming that a space has been successfully added to a group. The `<1>` tag applies bold styling to the `{{groupName}}` variable.",
+    "is_auto": true,
+    "updated_at": "2026-09-25T11:02:00.694Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/toast-helpers.tsx",
+      "line_number": 94,
+      "context": "rooms: {\n single: { tKey: \"GroupingRooms:RoomAddedToGroup\" },\n multiple: { tKey: \"GroupingRooms:RoomsAddedToGroup\" },\n },\n spaces: {\n single: { tKey: \"GroupingRooms:SpaceAddedToGroup\" },\n multiple: { tKey: \"GroupingRooms:SpacesAddedToGroup\" },\n },\n },\n remove: {\n rooms: {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -33,9 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { LinkWithDropdown } from "@docspace/ui-kit/components/link-with-dropdown";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { LinkWithDropdown } from "@onlyoffice/apps-ui-kit/components/link-with-dropdown";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { isMobile } from "../../../utils";
 import { useResolvedFileTitle } from "../../../hooks/useResolvedFileTitle";
 

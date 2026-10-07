@@ -515,7 +515,7 @@ test.describe("Disk storage page", () => {
     await expect(page.getByText("Subscription deactivated")).toBeVisible();
     await expect(page.getByText("200 GB", { exact: true })).toBeVisible();
     await expect(
-      page.getByRole("button", { name: "Top up & Renew", exact: true }),
+      page.getByRole("button", { name: "Renew subscription", exact: true }),
     ).toBeEnabled();
     await expect(
       page.getByRole("button", { name: "Remove subscription", exact: true }),
@@ -886,10 +886,9 @@ test.describe("AI services page", () => {
     await expect(page.getByText("$1.50", { exact: true })).toBeVisible();
     await expect(page.getByText("12,345", { exact: true })).toBeVisible();
     await expect(page.getByText("Tokens processed in December 2025")).toBeVisible();
-    await expect(
-      page.getByText("OpenRouter pricing + 20% service fee applies to usage"),
-    ).toBeVisible();
-    await expect(page.getByTestId("ai_supported_models_link")).toBeVisible();
+    await expect(page.getByTestId("ai_see_pricing_link")).toHaveText(
+      "See pricing",
+    );
     await expect(topUpWalletButton(page)).toBeVisible();
 
     await expectScreenshot(page, ["desktop", "addon-pages", "ai-services.png"]);
@@ -1003,9 +1002,9 @@ test.describe("AI search page", () => {
     await expect(searchToggle(page)).toHaveAttribute("aria-checked", "false");
     await expect(page.getByTestId("heading")).toHaveText("AI search");
     await expect(page.getByText("No AI search used in December 2025")).toBeVisible();
-    await expect(
-      page.getByText("Exa pricing, plus a 20% service fee"),
-    ).toBeVisible();
+    await expect(page.getByTestId("ai_search_see_pricing_link")).toHaveText(
+      "See pricing",
+    );
     await expect(page.getByText("No AI search transactions yet")).toBeVisible();
   });
 
@@ -1236,7 +1235,7 @@ test.describe("Docs Connect page", () => {
     await expect(page.getByText("Inactive", { exact: true })).toBeVisible();
     await expect(page.getByText("Subscription deactivated")).toBeVisible();
     await expect(
-      page.getByRole("button", { name: "Top up & Renew", exact: true }),
+      page.getByRole("button", { name: "Renew subscription", exact: true }),
     ).toBeEnabled();
     await expect(
       page.getByRole("button", { name: "Remove subscription", exact: true }),

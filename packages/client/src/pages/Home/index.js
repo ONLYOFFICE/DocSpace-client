@@ -41,9 +41,9 @@ import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
-import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
+import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import {
   useChatNoAccess,
   mapChatNoAccessStores,
@@ -51,7 +51,7 @@ import {
 import {
   useIsAiChatAvailable,
   useStores,
-} from "@docspace/ui-kit/ai-agent/providers";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import {
   addTagsToRoom,
@@ -59,10 +59,10 @@ import {
   createTag,
 } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
-import Section from "@docspace/ui-kit/components/section";
-import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import Section from "@onlyoffice/apps-ui-kit/components/section";
+import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
 
@@ -130,6 +130,7 @@ const PureHome = observer((props) => {
     refreshFiles,
 
     setFrameConfig,
+    setFrameCustomActions,
     folders,
     files,
     selection,
@@ -166,8 +167,9 @@ const PureHome = observer((props) => {
     getSettings,
     logout,
     login,
+    loginWithCode,
     loadCurrentUser,
-    updateProfileCulture,
+    i18n,
     getRooms,
     setSelectedFolder,
     userId,
@@ -420,6 +422,7 @@ const PureHome = observer((props) => {
   useSDK({
     frameConfig,
     setFrameConfig,
+    setFrameCustomActions,
     selectedFolderStore,
     folders,
     files,
@@ -434,11 +437,12 @@ const PureHome = observer((props) => {
     getSettings,
     logout,
     login,
+    loginWithCode,
     addTagsToRoom,
     createTag,
     removeTagsFromRoom,
     loadCurrentUser,
-    updateProfileCulture,
+    i18n,
     getRooms,
     isLoading,
   });
@@ -953,6 +957,7 @@ export const Component = inject(
     const { setOperationCancelVisible } = dialogsStore;
     const {
       setFrameConfig,
+      setFrameCustomActions,
       frameConfig,
       isFrame,
       enablePlugins,
@@ -965,10 +970,8 @@ export const Component = inject(
     const {
       usersStore,
       groupsStore,
-      targetUserStore,
       viewAs: contactsViewAs,
     } = peopleStore;
-    const { updateProfileCulture } = targetUserStore;
     const {
       getUsersList,
       setContactsTab,
@@ -1059,6 +1062,7 @@ export const Component = inject(
       setIsUpdatingRowItem,
 
       setFrameConfig,
+      setFrameCustomActions,
       frameConfig,
       isFrame,
       showTitle: frameConfig?.showTitle,
@@ -1084,6 +1088,7 @@ export const Component = inject(
       getSettings,
       logout: authStore.logout,
       login: authStore.login,
+      loginWithCode: authStore.loginWithCode,
 
       loadCurrentUser: userStore.loadCurrentUser,
       getRooms,
@@ -1101,7 +1106,6 @@ export const Component = inject(
       getGroups,
       updateCurrentGroup,
       isEmptyGroups,
-      updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
 
       secondaryActiveOperations,

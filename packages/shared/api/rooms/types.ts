@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TLogo } from "@docspace/ui-kit/types";
-import type { TAIRoomChatSettings } from "@docspace/ui-kit/types/ai";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
+import type { TAIRoomChatSettings } from "@onlyoffice/apps-ui-kit/types/ai";
 
 import type { TFile, TFolder, TShareSettings } from "../files/types";
 import type {

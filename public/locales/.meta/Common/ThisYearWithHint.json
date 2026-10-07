@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/usage/sub-components/PeriodSelect.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/sub-components/PeriodSelect.tsx",
       "line_number": 84,
       "context": "/>\n );\n case \"thisYear\":\n return (\n <CommonTrans\n i18nKey=\"ThisYearWithHint\"\n values={{ year: current.year }}\n components={{ 1: hintSpan }}\n />\n );\n case \"lastYear\":",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

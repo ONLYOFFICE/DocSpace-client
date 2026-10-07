@@ -64,7 +64,7 @@ import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import type { NavMenuGroup, NavMenuItem } from "@docspace/ui-kit/components/nav-menu";
+import type { NavMenuGroup, NavMenuItem } from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import { PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import AccountsFilter from "@docspace/shared/api/people/filter";

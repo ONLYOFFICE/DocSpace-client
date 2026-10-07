@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/index.tsx",
       "line_number": 536,
       "context": "const infoProps = withoutRoleFilter\n ? {}\n : {\n withInfo: true as const,\n infoText: t(\"OnlyPortalAdminsShown\"),\n };\n \n const selectorComponent = isSelectorVisible ? (\n <PeopleSelector\n withCancelButton",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

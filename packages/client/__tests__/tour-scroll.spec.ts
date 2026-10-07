@@ -49,6 +49,11 @@ const TOUR_KEY = "dashboard_tour_pending";
 const DASHBOARD_URL = "/dashboard";
 const WELCOME_TAKE_TOUR = '[data-testid="dashboard-welcome-take-tour"]';
 
+// The header's help button, the welcome modal's only entry point — the modal is
+// never offered on its own, not even on a first visit (packages/client/src/pages/
+// Dashboard/index.tsx).
+const HELP_BUTTON = '[data-testid="dashboard-open-welcome"]';
+
 /**
  * The dashboard's profile card, which the tour opens on. Any anchor would do —
  * what is under test is the geometry every step is laid out with, not this step.
@@ -113,11 +118,15 @@ test.describe("Tour scrolling", () => {
     // card it belongs to no longer on screen.
     await page.goto(`${baseUrl}${DASHBOARD_URL}`);
     await armTour(page, TOUR_KEY);
-    // The pending flag `armTour` just set would start a tour on top of the
-    // welcome; the modal's own button is what starts this one.
+    // The pending flag `armTour` just set would start a tour of its own; the
+    // welcome's button is what starts this one.
     await page.evaluate((key) => window.localStorage.removeItem(key), TOUR_KEY);
     await page.goto(`${baseUrl}${DASHBOARD_URL}`);
 
+    // The welcome is asked for, not proposed, so the help button has to open it
+    // before its "Take a tour" exists.
+    await expect(page.locator(HELP_BUTTON)).toBeVisible();
+    await page.locator(HELP_BUTTON).click();
     await expect(page.locator(WELCOME_TAKE_TOUR)).toBeVisible();
 
     await page.addStyleTag({

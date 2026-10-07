@@ -35,14 +35,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 
 import { inject, observer } from "mobx-react";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";
-import { isDesktop } from "@docspace/ui-kit/utils/device";
+import { isDesktop } from "@onlyoffice/apps-ui-kit/utils/device";
 import { MainContainer } from "../StyledSecurity";
 import { TfaSection } from "./tfa";
 import { PasswordStrengthSection } from "./passwordStrength";

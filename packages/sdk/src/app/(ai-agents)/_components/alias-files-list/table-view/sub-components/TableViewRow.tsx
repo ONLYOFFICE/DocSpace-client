@@ -40,15 +40,15 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { TableRow } from "@docspace/ui-kit/components/table";
-import { TableCell } from "@docspace/ui-kit/components/table";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { TableRow } from "@onlyoffice/apps-ui-kit/components/table";
+import { TableCell } from "@onlyoffice/apps-ui-kit/components/table";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import Badges from "@docspace/shared/components/badges";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";

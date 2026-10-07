@@ -36,11 +36,11 @@
 import { inject, observer } from "mobx-react";
 import { isMobile } from "@docspace/shared/utils";
 
-import { Row } from "@docspace/ui-kit/components/rows";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import SessionsRowContent from "./SessionsRowContent";
 
 const SessionsRow = (props) => {

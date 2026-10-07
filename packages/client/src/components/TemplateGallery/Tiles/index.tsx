@@ -33,17 +33,17 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Key, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { observer, inject } from "mobx-react";
 
 import { withTranslation } from "react-i18next";
+import { withoutInjected } from "SRC_DIR/helpers/injected";
 
 import type { FC } from "react";
 import type { TilesProps, TFile } from "./Tiles.types";
 import FileTile from "./FileTile";
 
 import InfiniteGrid from "../InfiniteGrid";
-import SubmitToGalleryTile from "./SubmitToGalleryTile";
 import useTemplateGalleryHotkeys from "../hooks/useTemplateGalleryHotkeys";
 
 const Tiles: FC<TilesProps> = ({
@@ -52,25 +52,23 @@ const Tiles: FC<TilesProps> = ({
   hasMoreFiles,
   fetchMoreFiles,
   setGallerySelected,
-  submitToGalleryTileIsVisible,
-  canSubmitToFormGallery,
   setOformFilesLoaded,
   isShowOneTile,
   smallPreview,
   setIsVisibleInfoPanelTemplateGallery,
-  viewMobile,
   onCreateTemplate,
   setTemplateGalleryVisible,
   isShowInitSkeleton,
   hotkeysResetKey,
   setSubmitToGalleryDialogVisible,
+  filterPanelVisible,
 }) => {
   useEffect(() => {
     setOformFilesLoaded(tReady && oformFiles?.length > 0);
   }, [tReady, oformFiles]);
 
   const onClickInfo = useCallback(
-    (item: { id: Key | null | undefined }) => {
+    (item: TFile) => {
       if (!item) return;
       setIsVisibleInfoPanelTemplateGallery(true);
       setGallerySelected(item);
@@ -79,7 +77,7 @@ const Tiles: FC<TilesProps> = ({
   );
 
   const onClick = useCallback(
-    (item: { id: Key | null | undefined }) => {
+    (item: TFile) => {
       setGallerySelected(item);
       onCreateTemplate();
       setSubmitToGalleryDialogVisible(false);
@@ -105,38 +103,17 @@ const Tiles: FC<TilesProps> = ({
     [oformFiles, onClickInfo],
   );
 
-  const hasSubmitTile =
-    !isShowInitSkeleton &&
-    submitToGalleryTileIsVisible &&
-    canSubmitToFormGallery() &&
-    (oformFiles?.length || 0) > 0;
-
-  const { focusedIndex, isSubmitTileFocused } = useTemplateGalleryHotkeys({
+  const { focusedIndex } = useTemplateGalleryHotkeys({
     itemsCount: oformFiles?.length || 0,
     isShowOneTile,
     onSelect: handleSelectByIndex,
     onInfoSelect: handleInfoSelectByIndex,
-    enabled: !isShowInitSkeleton,
+    enabled: !isShowInitSkeleton && !filterPanelVisible,
     resetKey: hotkeysResetKey,
-    hasSubmitTile,
-    submitTileSpan: smallPreview || viewMobile ? 2 : 1,
   });
-
-  const submitToGalleryTileNode =
-    submitToGalleryTileIsVisible &&
-    canSubmitToFormGallery() &&
-    oformFiles?.length > 0 ? (
-      <SubmitToGalleryTile
-        viewMobile={viewMobile}
-        smallPreview={smallPreview}
-        isSubmitTile
-        isKeyboardFocused={isSubmitTileFocused}
-      />
-    ) : null;
 
   return (
     <div className="tile-container">
-      {viewMobile && !isShowInitSkeleton ? submitToGalleryTileNode : null}
       <InfiniteGrid
         filesList={oformFiles}
         hasMoreFiles={hasMoreFiles}
@@ -145,7 +122,6 @@ const Tiles: FC<TilesProps> = ({
         smallPreview={smallPreview}
         showLoading={isShowInitSkeleton}
       >
-        {viewMobile && !isShowInitSkeleton ? null : submitToGalleryTileNode}
         {isShowInitSkeleton
           ? null
           : oformFiles.map((item: TFile, index: number) => {
@@ -165,32 +141,33 @@ const Tiles: FC<TilesProps> = ({
   );
 };
 
-export default inject<TStore>(
-  ({
-    settingsStore,
-    accessRightsStore,
-    oformsStore,
-    contextOptionsStore,
-    dialogsStore,
-  }) => ({
-    theme: settingsStore.theme,
-    oformFiles: oformsStore.oformFiles,
-    hasGalleryFiles: oformsStore.hasGalleryFiles,
-    hasMoreFiles: oformsStore.hasMoreForms,
-    fetchMoreFiles: oformsStore.fetchMoreOforms,
-    setGallerySelected: oformsStore.setGallerySelected,
-    resetFilters: oformsStore.resetFilters,
-    submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
-    canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
-    setOformFilesLoaded: oformsStore.setOformFilesLoaded,
-    categoryFilterLoaded: oformsStore.categoryFilterLoaded,
-    languageFilterLoaded: oformsStore.languageFilterLoaded,
-    oformFilesLoaded: oformsStore.oformFilesLoaded,
-    onCreateTemplate: contextOptionsStore.onCreateTemplate,
-    setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
-    setIsVisibleInfoPanelTemplateGallery:
-      oformsStore.setIsVisibleInfoPanelTemplateGallery,
-    setSubmitToGalleryDialogVisible:
-      dialogsStore.setSubmitToGalleryDialogVisible,
-  }),
-)(withTranslation(["Common", "FormGallery"])(observer(Tiles)));
+const injectStores = ({
+  settingsStore,
+  oformsStore,
+  contextOptionsStore,
+  dialogsStore,
+}: TStore) => ({
+  theme: settingsStore.theme,
+  oformFiles: oformsStore.oformFiles,
+  hasGalleryFiles: oformsStore.hasGalleryFiles,
+  hasMoreFiles: oformsStore.hasMoreForms,
+  fetchMoreFiles: oformsStore.fetchMoreOforms,
+  setGallerySelected: oformsStore.setGallerySelected,
+  resetFilters: oformsStore.resetFilters,
+  setOformFilesLoaded: oformsStore.setOformFilesLoaded,
+  categoryFilterLoaded: oformsStore.categoryFilterLoaded,
+  languageFilterLoaded: oformsStore.languageFilterLoaded,
+  oformFilesLoaded: oformsStore.oformFilesLoaded,
+  onCreateTemplate: contextOptionsStore.onCreateTemplate,
+  setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
+  setIsVisibleInfoPanelTemplateGallery:
+    oformsStore.setIsVisibleInfoPanelTemplateGallery,
+  setSubmitToGalleryDialogVisible: dialogsStore.setSubmitToGalleryDialogVisible,
+  filterPanelVisible: oformsStore.filterPanelVisible,
+});
+
+export default withoutInjected<TilesProps, ReturnType<typeof injectStores>>(
+  inject<TStore>(injectStores)(
+    withTranslation(["Common", "FormGallery"])(observer(Tiles)),
+  ),
+);

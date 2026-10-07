@@ -42,7 +42,7 @@ import { vi } from "vitest";
 
 // Inert socket singleton (no listeners fire, no connection opens); keep the
 // real named exports (SocketCommands enum) that the store reads.
-vi.mock("@docspace/ui-kit/utils/socket", async (importOriginal) => {
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, unknown>;
   return {
     ...actual,
@@ -86,7 +86,7 @@ vi.mock("SRC_DIR/i18n", () => ({
 }));
 
 // Toast: assert-friendly no-ops.
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: {
     success: vi.fn(),
     error: vi.fn(),

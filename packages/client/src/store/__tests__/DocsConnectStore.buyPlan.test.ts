@@ -59,8 +59,18 @@ vi.mock("@docspace/shared/api/files", () => ({
   getDocumentServiceLocation: vi.fn(),
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn(), info: vi.fn() },
+}));
+
+vi.mock("@onlyoffice/apps-ui-kit/billing/utils/stripe-flow", () => ({
+  openStripeCheckout: vi.fn(),
+  pollUntil: vi.fn(
+    async (check: () => Promise<boolean>, signal: AbortSignal) => {
+      let done = false;
+      while (!done && !signal.aborted) done = await check();
+    },
+  ),
 }));
 
 vi.mock("../../i18n", () => ({
@@ -133,11 +143,15 @@ const makeInfo = ({
     deactivated: false,
   }) as TDocsConnectInfo;
 
-const createStore = (info: TDocsConnectInfo) => {
+const createStore = (
+  info: TDocsConnectInfo,
+  tariffStore: Record<string, unknown> = {},
+) => {
   const store = new DocsConnectStore(
     {} as SettingsStore,
     {
       fetchPortalTariff: vi.fn().mockResolvedValue(null),
+      ...tariffStore,
     } as unknown as CurrentTariffStatusStore,
     {
       fetchPortalQuota: vi.fn().mockResolvedValue(null),
@@ -256,7 +270,9 @@ describe("DocsConnectStore.switchToDevPack", () => {
   it("keeps the original error when refreshing the info also fails", async () => {
     const store = createStore(makeInfo());
 
-    mockedSwitchToDevPack.mockRejectedValueOnce(new Error("Insufficient funds"));
+    mockedSwitchToDevPack.mockRejectedValueOnce(
+      new Error("Insufficient funds"),
+    );
     mockedGetInfo.mockRejectedValue(new Error("Refresh failed"));
 
     await expect(
@@ -310,3 +326,69 @@ describe("DocsConnectStore.buyPlan", () => {
     expect(store.info?.tenant.payment?.quantity).toBe(USERS + 10);
   });
 });
+
+describe("DocsConnectStore.buyPlanViaStripe", () => {
+  const stripeArgs = (signal: AbortSignal) => ({
+    users: USERS + 10,
+    devPack: false,
+    topUp: TOP_UP,
+    totalMonthly: (USERS + 10) * PRICE_PER_USER,
+    language: "en",
+    fetchCardLinked: vi.fn().mockResolvedValue("https://stripe.test/checkout"),
+    signal,
+  });
+
+  it("closes the panel for a delayed payment method without waiting for the plan", async () => {
+    const fetchPortalTariff = vi.fn().mockResolvedValue(null);
+    const store = createStore(makeInfo(), {
+      fetchPortalTariff,
+      fetchPayerInfo: vi.fn().mockResolvedValue({
+        email: "test@gmail.com",
+        isDelayedPaymentMethod: true,
+      }),
+    });
+
+    const result = await store.buyPlanViaStripe(
+      stripeArgs(new AbortController().signal),
+    );
+
+    expect(result).toEqual({ isDelayedPaymentMethod: true });
+    expect(store.buyPlanPanelVisible).toBe(false);
+    expect(mockedGetInfo).not.toHaveBeenCalled();
+    expect(fetchPortalTariff).toHaveBeenCalledWith(true);
+  });
+
+  it("reports an instant purchase once the plan is active", async () => {
+    const store = createStore(makeInfo(), {
+      fetchPayerInfo: vi.fn().mockResolvedValue({
+        email: "test@gmail.com",
+        isDelayedPaymentMethod: false,
+      }),
+    });
+    mockedGetInfo.mockResolvedValue(makeInfo({ quantity: USERS + 10 }));
+
+    const result = await store.buyPlanViaStripe(
+      stripeArgs(new AbortController().signal),
+    );
+
+    expect(result).toEqual({ isDelayedPaymentMethod: false });
+    expect(store.buyPlanPanelVisible).toBe(false);
+    expect(store.info?.tenant.payment?.quantity).toBe(USERS + 10);
+  });
+
+  it("keeps the panel open when the checkout is cancelled", async () => {
+    const controller = new AbortController();
+    const store = createStore(makeInfo(), {
+      fetchPayerInfo: vi.fn(async () => {
+        controller.abort();
+        return { email: "test@gmail.com", isDelayedPaymentMethod: true };
+      }),
+    });
+
+    const result = await store.buyPlanViaStripe(stripeArgs(controller.signal));
+
+    expect(result).toBeNull();
+    expect(store.buyPlanPanelVisible).toBe(true);
+  });
+});
+

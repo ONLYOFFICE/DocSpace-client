@@ -41,8 +41,8 @@ import { withTranslation } from "react-i18next";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { ROOMS_SECTION_TYPES } from "@docspace/shared/utils/rooms";
-import FilterInput from "@docspace/ui-kit/components/filter";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import FilterInput from "@onlyoffice/apps-ui-kit/components/filter";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -61,7 +61,7 @@ import {
   getTags,
   getQuotaFilter,
   getSharedBy,
-} from "@docspace/ui-kit/components/filter/Filter.utils";
+} from "@onlyoffice/apps-ui-kit/components/filter/Filter.utils";
 
 import {
   DeviceType,
@@ -87,7 +87,7 @@ import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
 import { getRoomInfo } from "@docspace/shared/api/rooms";
-import { FilterLoader } from "@docspace/ui-kit/components/filter/skeletons";
+import { FilterLoader } from "@onlyoffice/apps-ui-kit/components/filter/skeletons";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useContactsFilter } from "./useContacts";
@@ -171,6 +171,7 @@ const SectionFilterContent = ({
   isRoomsFolder,
   isFormsFolder,
   organizeRoomsGrouping,
+  getPinnedGroupId,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -196,6 +197,15 @@ const SectionFilterContent = ({
         : "rooms/archived";
     },
     [isFormsSection],
+  );
+
+  const roomGroupsSearchArea = isFormsSection
+    ? RoomSearchArea.Forms
+    : RoomSearchArea.Active;
+
+  const getRoomGroupsForSection = React.useCallback(
+    () => getAllRoomGroups(roomGroupsSearchArea),
+    [getAllRoomGroups, roomGroupsSearchArea],
   );
 
   const isContactsPage = location.pathname.includes("accounts");
@@ -305,8 +315,7 @@ const SectionFilterContent = ({
         newFilter.page = 0;
         newFilter.provider = providerType || null;
         newFilter.type = type || null;
-        // Clear groupId when filter is applied - grouping doesn't work with filters
-        newFilter.groupId = null;
+        newFilter.groupId = getPinnedGroupId() ?? null;
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
@@ -464,6 +473,7 @@ const SectionFilterContent = ({
     if (isRooms) {
       const newFilter = RoomsFilter.clean();
       newFilter.searchArea = roomsFilter.searchArea;
+      newFilter.groupId = getPinnedGroupId() ?? null;
 
       const path = getRoomsListBasePath(roomsFilter.searchArea);
 
@@ -536,8 +546,7 @@ const SectionFilterContent = ({
 
         newFilter.page = 0;
         newFilter.filterValue = searchValue;
-        // Clear groupId when search is applied - grouping doesn't work with filters
-        newFilter.groupId = null;
+        newFilter.groupId = getPinnedGroupId() ?? null;
 
         const path = getRoomsListBasePath(newFilter.searchArea);
 
@@ -1852,7 +1861,7 @@ const SectionFilterContent = ({
   };
 
   const onFilterByGroup = (groupId) => {
-    if (!isRooms) return;
+    if (!isRooms || getPinnedGroupId()) return;
 
     setIsLoading(true);
 
@@ -1942,13 +1951,12 @@ const SectionFilterContent = ({
       isRecentFolder={isRecentFolder}
       renderSelector={renderFilterSelector}
       setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
-      getAllRoomGroups={getAllRoomGroups}
+      getAllRoomGroups={getRoomGroupsForSection}
       roomGroups={roomGroups}
       onFilterByGroup={onFilterByGroup}
-      currentGroupId={(() => {
-        return roomsFilter?.groupId;
-      })()}
-      isRoomsFolder={isRoomsFolder}
+      currentGroupId={getPinnedGroupId() ? null : roomsFilter?.groupId}
+      withRoomGroups={(isRoomsFolder || isFormsFolder) && !getPinnedGroupId()}
+      isFormsSection={isFormsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}
       showMainButton={(showAgentsCreate || showMainButton) && isDesktopView}
@@ -2130,6 +2138,10 @@ export default inject(
       setRoomsFilter,
       standalone,
       currentDeviceType,
+      getPinnedGroupId: () =>
+        settingsStore.isFrame
+          ? (settingsStore.frameConfig?.filter?.groupId ?? null)
+          : null,
 
       filesStore,
       groupsStore,

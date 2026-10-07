@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/sub-components/SelectIcon.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog/sub-components/SelectIcon.tsx",
       "line_number": 47,
       "context": "const toggleWithoutIcon = () => setWithoutIcon(!withoutIcon);\n \n return (\n <div>\n <div className=\"icon-container\">\n <div className=\"color-name\">{t(\"CreateEditRoomDialog:Icon\")}</div>\n <div\n className={`${styles.withoutIcon}${withoutIcon ? ` ${styles.isSelected}` : \"\"}`}\n onClick={toggleWithoutIcon}\n data-testid=\"room_logo_cover_without_icon\"\n >",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/SelectIcon.tsx",

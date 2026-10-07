@@ -39,19 +39,19 @@ import classNames from "classnames";
 
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import {
   TextInput,
   InputType,
   InputSize,
-} from "@docspace/ui-kit/components/text-input";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { IHeaderProps } from "./WhiteLabel.types";
 import styles from "./WhiteLabel.module.scss";

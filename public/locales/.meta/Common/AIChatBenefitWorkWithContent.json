@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-ai-benefits/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/new-chat/components/chat-ai-benefits/index.tsx",
       "line_number": 74,
       "context": "<ul className={styles.list}>\n <li className={styles.item}>\n <AiChatReactSvg className={styles.icon} />\n <Text as=\"span\" fontSize=\"12px\" fontWeight=\"600\" lineHeight=\"16px\">\n {t(\"AIChatBenefitWorkWithContent\")}\n </Text>\n </li>\n \n {serviceFeePercent != null ? (\n <li className={styles.item}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

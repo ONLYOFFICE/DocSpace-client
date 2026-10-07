@@ -34,7 +34,7 @@
  */
 
 import { useState } from "react";
-import { TableHeader as TableHeaderComponent } from "@docspace/ui-kit/components/table";
+import { TableHeader as TableHeaderComponent } from "@onlyoffice/apps-ui-kit/components/table";
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";

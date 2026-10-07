@@ -35,11 +35,11 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import ItemIcon from "SRC_DIR/components/ItemIcon";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -57,7 +57,7 @@ const buttonProps = {
 const StatisticsComponent = (props) => {
   const { t } = useTranslation("Settings");
   const { isBase } = useTheme();
-  const { isStatisticsAvailable } = props;
+  const { isStatisticsAvailable, aiServicesEnabled } = props;
 
   const iconElement = (
     id,
@@ -131,22 +131,26 @@ const StatisticsComponent = (props) => {
             quotaElement={quotaElement}
             iconElement={iconElement}
           />
-          <AIAgentList
-            buttonProps={buttonProps}
-            textElement={textElement}
-            quotaElement={quotaElement}
-            iconElement={iconElement}
-          />
+          {aiServicesEnabled ? (
+            <AIAgentList
+              buttonProps={buttonProps}
+              textElement={textElement}
+              quotaElement={quotaElement}
+              iconElement={iconElement}
+            />
+          ) : null}
         </>
       ) : null}
     </div>
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export default inject(({ currentQuotaStore, settingsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
+  const { aiServicesEnabled } = settingsStore;
 
   return {
     isStatisticsAvailable,
+    aiServicesEnabled,
   };
 })(observer(StatisticsComponent));

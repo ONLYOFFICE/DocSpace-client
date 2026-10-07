@@ -39,13 +39,14 @@ import classNames from "classnames";
 
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 import PrivateRoomLogoUrl from "PUBLIC_DIR/images/icons/32/room/private.svg?url";
+import TemplateGalleryLogoUrl from "PUBLIC_DIR/images/icons/32/room/template-gallery.svg?url";
 
 import { RoomsType, RoomsTypePrivate } from "../../enums";
 
-import { RoomLogo } from "@docspace/ui-kit/components/room-logo";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { RoomLogo } from "@onlyoffice/apps-ui-kit/components/room-logo";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import {
   getRoomTypeDescriptionTranslation,
@@ -66,18 +67,23 @@ const RoomType = ({
   isTemplate,
   isTemplateRoom,
   isFormSection,
+  isTemplateGallery,
 }: RoomTypeProps) => {
   const { t } = useTranslation(["Common"]);
 
   const room = {
     type: roomType,
-    title: getRoomTypeTitleTranslation(t, roomType, isTemplate, isFormSection),
-    description: getRoomTypeDescriptionTranslation(
-      t,
-      roomType,
-      isTemplate,
-      isFormSection,
-    ),
+    title: isTemplateGallery
+      ? t("Common:FromTemplateGallery")
+      : getRoomTypeTitleTranslation(t, roomType, isTemplate, isFormSection),
+    description: isTemplateGallery
+      ? t("Common:FromTemplateGalleryDescription")
+      : getRoomTypeDescriptionTranslation(
+          t,
+          roomType,
+          isTemplate,
+          isFormSection,
+        ),
   };
 
   const isFormRoom = roomType === RoomsType.FormRoom;
@@ -99,7 +105,12 @@ const RoomType = ({
   const content = (
     <>
       <div className="choose_room-logo_wrapper">
-        {isPrivateRoom ? (
+        {isTemplateGallery ? (
+          <ReactSVG
+            className="choose_room-private-logo"
+            src={TemplateGalleryLogoUrl}
+          />
+        ) : isPrivateRoom ? (
           <ReactSVG
             className="choose_room-private-logo"
             src={PrivateRoomLogoUrl}

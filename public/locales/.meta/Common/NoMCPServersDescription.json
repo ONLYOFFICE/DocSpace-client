@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/MCPServers/index.tsx",
       "line_number": 254,
       "context": ")\n }\n emptyScreenHeader={t(\"NoMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"NoMCPServersDescription\", {\n mcpServers: t(\"MCPSettingTitle\"),\n aiAgent: t(\"AIAgent\"),\n })}\n searchEmptyScreenImage={\n isBase ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

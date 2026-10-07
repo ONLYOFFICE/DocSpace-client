@@ -40,16 +40,16 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { RadioButton } from "@docspace/ui-kit/components/radio-button";
-import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { RadioButton } from "@onlyoffice/apps-ui-kit/components/radio-button";
+import { ComboBox, TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/ui-kit/components/text-input";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { useDidMount } from "../../hooks/useDidMount";
 
 import {

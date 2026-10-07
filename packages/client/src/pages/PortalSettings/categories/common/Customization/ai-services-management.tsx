@@ -40,11 +40,11 @@ import { useNavigate, useLocation } from "react-router";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
 import { setAiAccessSettings } from "@docspace/shared/api/settings";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -56,7 +56,7 @@ import LoaderCustomization from "../sub-components/loaderCustomization";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 import useCommon from "../useCommon";
 import DisableAiServicesDialog from "SRC_DIR/components/dialogs/DisableAiServicesDialog";
-import { AI_ENUM } from "@docspace/ui-kit/billing/constants";
+import { AI_ENUM } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface AiServicesManagementProps {
@@ -75,6 +75,7 @@ interface AiServicesManagementProps {
   standalone: boolean;
   defaultFolderType: SettingsStore["defaultFolderType"];
   updateDefaultFolderType: SettingsStore["updateDefaultFolderType"];
+  getAIConfig: SettingsStore["getAIConfig"];
 }
 
 const AiServicesManagementComponent = ({
@@ -93,6 +94,7 @@ const AiServicesManagementComponent = ({
   standalone,
   defaultFolderType,
   updateDefaultFolderType,
+  getAIConfig,
 }: AiServicesManagementProps) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
@@ -181,6 +183,9 @@ const AiServicesManagementComponent = ({
       setIsSaving(true);
       await setAiAccessSettings(type);
       setAiServicesEnabled(type);
+      // The boot probe is skipped while AI is off, so the config the rest of
+      // the UI reads is stale (or was never loaded) the moment it comes back.
+      await getAIConfig();
       await fetchTreeFolders();
       setShowReminder(false);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
@@ -321,6 +326,7 @@ export const AiServicesManagement = inject<TStore>(
       defaultFolderType,
       updateDefaultFolderType,
       standalone,
+      getAIConfig,
     } = settingsStore;
     const { isLoaded, initSettings, setIsLoadedAiServicesManagement } = common;
     const { fetchTreeFolders } = treeFoldersStore;
@@ -344,6 +350,7 @@ export const AiServicesManagement = inject<TStore>(
       standalone,
       defaultFolderType,
       updateDefaultFolderType,
+      getAIConfig,
     };
   },
 )(withLoading(observer(AiServicesManagementComponent)));

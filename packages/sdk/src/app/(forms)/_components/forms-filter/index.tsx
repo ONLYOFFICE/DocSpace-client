@@ -65,9 +65,9 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { SearchInput } from "@docspace/ui-kit/components/search-input";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
-import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
+import { SearchInput } from "@onlyoffice/apps-ui-kit/components/search-input";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
+import type { MainButtonProps } from "@onlyoffice/apps-ui-kit/components/main-button/MainButton.types";
 
 import { useFormsListStore } from "../../_store/FormsListStore";
 

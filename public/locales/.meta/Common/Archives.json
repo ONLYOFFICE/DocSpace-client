@@ -3,7 +3,7 @@
   "content": "Archives",
   "content_en_sha1_hash": "a50710e773e144dc2bef188e769e70476bfa5af3",
   "created_at": "2025-05-19T21:30:43.070Z",
-  "updated_at": "2026-09-04T07:59:41.631Z",
+  "updated_at": "2026-10-02T12:15:32.454Z",
   "comment": {
     "text": "This is a label for a filter option, allowing users to display only archive files.",
     "is_auto": true,
@@ -13,14 +13,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 868,
+      "line_number": 877,
       "context": "break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 868,
+      "line_number": 877,
       "context": "break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/constants/index.ts",
+      "line_number": 73,
+      "context": "{ key: \"spreadsheet\", labelKey: \"Common:Spreadsheets\" },\n { key: \"presentation\", labelKey: \"Common:Presentations\" },\n { key: \"image\", labelKey: \"Common:Images\" },\n { key: \"video\", labelKey: \"Common:Video\" },\n { key: \"audio\", labelKey: \"Common:Audio\" },\n { key: \"archive\", labelKey: \"Common:Archives\" },\n { key: \"pdf\", constLabelKey: \"PDF\" },\n ];\n \n export const FILE_TYPE_EXTENSIONS = {\n document: [\".doc\", \".docx\", \".odt\", \".rtf\", \".txt\"],",
       "module": "/packages/client"
     },
     {
@@ -58,6 +64,12 @@
       "line_number": 272,
       "context": "},\n {\n id: \"filter_type-archive\",\n key: FilterType.ArchiveOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Archives\"),\n },\n {\n id: \"filter_type-images\",\n key: FilterType.ImagesOnly.toString(),\n group: FilterGroups.filterType,",
       "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/shared/utils/getSelectFormatTranslation.ts",
+      "line_number": 68,
+      "context": "case FilterType.ImagesOnly:\n return getTranslatedType(t(\"Common:Images\"));\n \n case FilterType.ArchiveOnly:\n return getTranslatedType(t(\"Common:Archives\"));\n \n case FilterType.FoldersOnly:\n return getTranslatedType(t(\"Common:Folders\"));\n \n case FilterType.MediaOnly:",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",

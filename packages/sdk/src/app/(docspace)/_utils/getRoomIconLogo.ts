@@ -59,7 +59,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 export type RoomIconFields = {
   isRoom?: boolean;
   icon?: string;

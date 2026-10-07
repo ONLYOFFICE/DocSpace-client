@@ -36,7 +36,7 @@
 import { runInAction } from "mobx";
 import uniqueid from "lodash/uniqueId";
 import { checkIsFileExist, getFolderInfo } from "@docspace/shared/api/files";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 import type { TTranslation } from "@docspace/shared/types";

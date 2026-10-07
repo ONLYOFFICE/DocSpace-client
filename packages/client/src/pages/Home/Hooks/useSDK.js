@@ -41,11 +41,23 @@ import {
   frameCallCommand,
   createPasswordHash,
   frameHandlePing,
+  toFrameMethodError,
 } from "@docspace/shared/utils/common";
+
+const FOLDER_INFO_EXCLUDED_KEYS = new Set(["settingsStore"]);
+
+export const toFolderInfo = (folder) =>
+  Object.fromEntries(
+    Object.entries(folder).filter(
+      ([key, value]) =>
+        !FOLDER_INFO_EXCLUDED_KEYS.has(key) && typeof value !== "function",
+    ),
+  );
 
 const useSDK = ({
   frameConfig,
   setFrameConfig,
+  setFrameCustomActions,
   selectedFolderStore,
   folders,
   files,
@@ -60,11 +72,12 @@ const useSDK = ({
   getSettings,
   logout,
   login,
+  loginWithCode,
   addTagsToRoom,
   createTag,
   removeTagsFromRoom,
   loadCurrentUser,
-  updateProfileCulture,
+  i18n,
   getRooms,
   isLoading,
 }) => {
@@ -86,15 +99,17 @@ const useSDK = ({
             {
               const requests = await Promise.all([
                 setFrameConfig(data),
-                userId &&
-                  data.locale &&
-                  updateProfileCulture(userId, data.locale),
+                data.locale && i18n?.changeLanguage(data.locale),
               ]);
               res = requests[0];
             }
             break;
+          case "setCustomActions":
+            setFrameCustomActions?.(data ?? null);
+            res = {};
+            break;
           case "getFolderInfo":
-            res = selectedFolderStore;
+            res = toFolderInfo(selectedFolderStore);
             break;
           case "getFolders":
             res = folders;
@@ -198,8 +213,10 @@ const useSDK = ({
             break;
           case "login":
             {
-              const { email, passwordHash } = data;
-              res = await login(email, passwordHash);
+              const { email, passwordHash, code } = data;
+              res = code
+                ? { url: await loginWithCode(email, passwordHash, code) }
+                : await login(email, passwordHash);
             }
             break;
           case "logout":
@@ -209,7 +226,7 @@ const useSDK = ({
             res = "Wrong method for this mode";
         }
       } catch (err) {
-        res = err;
+        res = toFrameMethodError(err);
       }
 
       frameCallbackData(res, callId);

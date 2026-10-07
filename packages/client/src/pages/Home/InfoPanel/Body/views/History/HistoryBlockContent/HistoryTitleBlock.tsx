@@ -35,16 +35,16 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { classNames } from "@docspace/shared/utils";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import {
   TFeedAction,
   TFeedData,
   RoomMember,
 } from "@docspace/shared/api/rooms/types";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { formatDateLocalized, parseToDateTime } from "@docspace/ui-kit/utils/date";
+import { formatDateLocalized, parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";
 
 import { useFeedTranslation } from "../hooks/useFeedTranslation";
 
@@ -114,7 +114,10 @@ const HistoryTitleBlock = ({
           {getFeedTranslation()}
         </Text>
         {isDisplayFolderInfo ? (
-          <HistoryMainTextFolderInfo feed={feed} actionType={actionType} />
+          <HistoryMainTextFolderInfo
+            feed={feed as TFeedAction<TFeedData>}
+            actionType={actionType}
+          />
         ) : null}
         {feed.related.length === 0 &&
         targetType === "group" &&

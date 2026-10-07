@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-09-09T15:42:08.226Z",
+  "updated_at": "2026-10-06T10:42:37.458Z",
   "comment": {
     "text": "This is a label for a section or category within the file selector, representing a collection of collaborative workspaces.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useRootHelper.tsx",
       "line_number": 181,
       "context": "switch (folder.rootFolderType) {\n case FolderType.USER:\n title = t(\"Files\");\n break;\n case FolderType.VirtualRooms:\n title = t(\"Rooms\");\n break;\n case FolderType.AiAgents:\n title = t(\"AIAgents\");\n break;\n default:",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
       "line_number": 256,
       "context": ": isEmptyAgentsRootScreen\n ? t(\"EmptyRoomsDescriptionTextAgent\", {\n sectionName: t(\"AIAgents\"),\n })\n : t(\"EmptyRoomsDescriptionText\", {\n sectionName: t(\"Rooms\"),\n });\n \n const SelectorBody = (\n <Selector\n {...headerSelectorProps}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Room/index.tsx",
       "line_number": 358,
       "context": "}\n emptyScreenHeader={emptyScreenHeader ?? t(\"EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ??\n t(\"EmptyRoomsDescriptionText\", {\n sectionName: isForms ? t(\"Forms\") : t(\"Rooms\"),\n })\n }\n searchEmptyScreenImage={\n isBase ? (\n <EmptyScreenFilterRoomsLight />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList/index.tsx",
-      "line_number": 90,
+      "line_number": 94,
       "context": "setRoomType(roomType);\n };\n \n const formRoomTooltipContent = t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n const publicRoomTooltipContent = t(\"Common:PublicRoomCreationDisabled\");\n \n if (isFormsCreate) {",
       "module": "/packages/client"
     },
@@ -43,31 +43,31 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/GroupItem.tsx",
-      "line_number": 109,
-      "context": ")}\n </div>\n <div className={styles.titleContainer}>\n <div className={styles.nameGroup}>{group.name}</div>\n <div className={styles.countRooms}>\n {group.totalRooms} {t(\"Common:Rooms\")}\n </div>\n </div>\n </div>\n \n <div className={styles.editGroup}>",
+      "line_number": 113,
+      "context": "<div className={styles.nameGroup}>{group.name}</div>\n <div className={styles.countRooms}>\n {group.totalRooms}{\" \"}\n {isFormsSection\n ? t(\"GroupingRooms:FormSpaces\")\n : t(\"Common:Rooms\")}\n </div>\n </div>\n </div>\n \n <div className={styles.editGroup}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
-      "line_number": 125,
+      "line_number": 126,
       "context": "title:\n type === NoAccessContainerType.Account\n ? t(\"NoAccessSectionTitle\")\n : t(\"NoAccessRoomTitle\"),\n description: t(\"RoomAccessRedirectNote\", {\n sectionName: t(\"Common:Rooms\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (\n <ManageAccessRightsDarkIcon />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 327,
+      "line_number": 330,
       "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 327,
+      "line_number": 330,
       "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 327,
+      "line_number": 330,
       "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
@@ -91,7 +91,7 @@
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 185,
+      "line_number": 193,
       "context": "// files tour; the wording is shared rather than duplicated per namespace.\n showFilter &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Rooms\") }),\n callbacks,\n LOG_LABEL,\n 6,\n revealQuickActionTile('[data-testid=\"quick-ai-chat\"]'),\n ),",
       "module": "/packages/client"
     },
@@ -109,7 +109,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 161,
+      "line_number": 166,
       "context": "onAction: () => navigate(filesHref),\n },\n {\n id: \"ai-rooms\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:Rooms\"),\n description: t(\"Common:DashboardRoomsDescription\"),\n installed: true,\n href: \"/rooms/shared/filter\",\n ...createOrOpen(\n canCreateRooms,",
       "module": "/packages/client"
     },
@@ -123,6 +123,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
       "line_number": 270,
       "context": "sectionName: t(\"Common:Common\"),\n workspace: serviceName,\n sectionIcon: PortfolioIcon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: getBrandName(\"ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_common_files_section\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
+      "line_number": 197,
+      "context": "const [selectedLink, setSelectedLink] = useState(null);\n \n const customActionTargetLabels = {\n file: t(\"Common:Files\"),\n folder: t(\"Common:Folders\"),\n room: t(\"Common:Rooms\"),\n create: t(\"Common:New\"),\n };\n \n const allRoomsOption = { key: \"all\", label: t(\"Common:AllRooms\") };\n const [roomGroupOptions, setRoomGroupOptions] = useState([allRoomsOption]);",
       "module": "/packages/client"
     },
     {

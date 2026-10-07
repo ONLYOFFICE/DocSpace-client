@@ -68,15 +68,15 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { ImageEditor } from "@docspace/ui-kit/components/image-editor";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { ImageEditor } from "@onlyoffice/apps-ui-kit/components/image-editor";
 import type {
   TImage,
   TChangeImage,
   TSetPreview,
-} from "@docspace/ui-kit/components/image-editor/ImageEditor.types";
+} from "@onlyoffice/apps-ui-kit/components/image-editor/ImageEditor.types";
 
 import styles from "./AvatarEditorDialog.module.scss";
 

@@ -168,7 +168,7 @@ const toRepoRelative = (absPath) => {
 // Returns the repo-relative POSIX paths of every first-party source file that
 // is in scope for the license-header check, sorted for stable output.
 const getSourceFiles = () => {
-  const workspaces = getWorkSpaces({ excludeUiKit: true });
+  const workspaces = getWorkSpaces();
 
   const files = workspaces.flatMap((wsPath) =>
     getAllFiles(wsPath, EXCLUDE_DIRS).filter(Boolean),

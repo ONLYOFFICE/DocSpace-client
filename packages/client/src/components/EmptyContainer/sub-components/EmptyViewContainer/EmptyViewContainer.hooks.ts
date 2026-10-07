@@ -38,11 +38,11 @@ import { useNavigate, useLocation, LinkProps } from "react-router";
 import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 import { isMobile } from "react-device-detect";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
-import { useStores as useAiChatStores } from "@docspace/ui-kit/ai-agent/providers";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
+import { useStores as useAiChatStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import {
   Events,
   FileExtensions,
@@ -247,6 +247,8 @@ export const useOptions = (
     getAIConfig,
     refreshCurrentFolder,
     refreshPaymentInfo,
+    templateGalleryAvailable,
+    onShowTemplateGallery,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -411,6 +413,34 @@ export const useOptions = (
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
 
+  // Opens the create dialog straight on its template picker, scoped to form
+  // templates -- the Forms "Space template" quick action.
+  const onCreateRoomFromTemplate = useCallback(() => {
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
+
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: selectedFolder?.id, context: "empty_state" },
+    }) as CustomEvent & {
+      payload?: { withTemplateSelector: boolean; isFormsCreate: boolean };
+    };
+    event.payload = { withTemplateSelector: true, isFormsCreate: true };
+    window.dispatchEvent(event);
+  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
+
+  // The picked gallery template becomes the first form of a new form space
+  // (see onCreateRoomFromTemplateImpl) -- the Forms "Template gallery" tile.
+  const onOpenTemplateGallery = useCallback(() => {
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
+
+    onShowTemplateGallery(true);
+  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, onShowTemplateGallery]);
+
   const onCreateAIAgent = useCallback(() => {
     if (isGracePeriod) {
       setQuotaWarningDialogVisible(true);
@@ -559,6 +589,8 @@ export const useOptions = (
           createAndCopySharedLink,
           openInfoPanel,
           onCreateRoom,
+          onCreateRoomFromTemplate,
+          onOpenTemplateGallery,
           inviteRootUser,
           navigate,
           onGoToPersonal,
@@ -588,6 +620,7 @@ export const useOptions = (
         isCardLinkedToPortal,
         isActivating,
         isAiChatAvailable,
+        templateGalleryAvailable,
       ),
     [
       type,
@@ -610,6 +643,8 @@ export const useOptions = (
       onCreate,
       openInfoPanel,
       onCreateRoom,
+      onCreateRoomFromTemplate,
+      onOpenTemplateGallery,
       inviteRootUser,
       navigate,
       onGoToPersonal,
@@ -631,6 +666,7 @@ export const useOptions = (
       onOpenAiChat,
       onStartNewChat,
       isAiChatAvailable,
+      templateGalleryAvailable,
     ],
   );
 

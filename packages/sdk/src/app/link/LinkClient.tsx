@@ -37,9 +37,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { getOAuthToken } from "@onlyoffice/apps-ui-kit/utils/get-oauth-token";
 import { getLoginLink } from "@docspace/shared/utils/common";
 import { linkOAuth } from "@docspace/shared/api/people";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";

@@ -35,9 +35,9 @@
 
 import React from "react";
 
-import { useApi } from "@docspace/ui-kit/providers/api";
-import { formatCurrencyValue } from "@docspace/ui-kit/billing/utils/common";
-import SimpleTopUpDialog from "@docspace/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog";
+import { useApi } from "@onlyoffice/apps-ui-kit/providers/api";
+import { formatCurrencyValue } from "@onlyoffice/apps-ui-kit/billing/utils/common";
+import SimpleTopUpDialog from "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog";
 import store from "SRC_DIR/store";
 
 type ClientSimpleTopUpDialogProps = {
@@ -64,18 +64,18 @@ const ClientSimpleTopUpDialog: React.FC<ClientSimpleTopUpDialogProps> = ({
   };
 
   const fetchCardLinked = async (backUrl?: string, successUrl?: string) => {
+    const resolvedBackUrl = backUrl ?? window.location.href;
     const res = await paymentApi.getCheckoutSetupUrl(
-      { backUrl: backUrl ?? window.location.href },
-      { params: { successUrl } } as never,
+      // successUrl is required by the API SDK, so a caller that omits it gets
+      // the same destination as backUrl -- the page it started from.
+      { backUrl: resolvedBackUrl, successUrl: successUrl ?? resolvedBackUrl },
+      {},
     );
     return res?.data?.response as string | undefined;
   };
 
-  const fetchCustomerInfo = async (isRefresh?: boolean) => {
-    const payerInfo =
-      await store.currentTariffStatusStore.fetchPayerInfo(isRefresh);
-    return payerInfo?.email ?? null;
-  };
+  const fetchCustomerInfo = (isRefresh?: boolean) =>
+    store.currentTariffStatusStore.fetchPayerInfo(isRefresh);
 
   const walletBalance = store.paymentStore.walletBalance;
   const walletCodeCurrency = store.paymentStore.walletCodeCurrency;
@@ -105,6 +105,9 @@ const ClientSimpleTopUpDialog: React.FC<ClientSimpleTopUpDialogProps> = ({
       fetchBalance={fetchBalance}
       walletCustomerStatusNotActive={
         store.currentTariffStatusStore.walletCustomerStatusNotActive
+      }
+      isDelayedPaymentMethod={
+        store.currentTariffStatusStore.isDelayedPaymentMethod
       }
       language={language}
       fetchCardLinked={fetchCardLinked}

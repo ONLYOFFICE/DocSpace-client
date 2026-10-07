@@ -36,11 +36,11 @@
 import React from "react";
 
 import { FilterSelectorTypes } from "../enums";
-import type { SelectorRenderProps } from "@docspace/ui-kit/components/filter/Filter.types";
+import type { SelectorRenderProps } from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
 
-import GroupsSelector from "@docspace/ui-kit/selectors/Groups";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
-import RoomSelector from "@docspace/ui-kit/selectors/Room";
+import GroupsSelector from "@onlyoffice/apps-ui-kit/selectors/Groups";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
+import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
 
 const renderFilterSelector = ({
   selectorType,

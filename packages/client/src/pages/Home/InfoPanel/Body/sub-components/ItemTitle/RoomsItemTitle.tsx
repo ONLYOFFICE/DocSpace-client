@@ -39,13 +39,13 @@ import classNames from "classnames";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";

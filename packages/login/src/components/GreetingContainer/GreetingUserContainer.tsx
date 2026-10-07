@@ -37,11 +37,11 @@
 
 import { useTranslation, Trans } from "react-i18next";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 const DEFAULT_CREATION_TEXT =

@@ -27,10 +27,6 @@
     {
       "name": "📦 @docspace/shared",
       "path": "packages/shared"
-    },
-    {
-      "name": "📦 @docspace/ui-kit",
-      "path": "libs/ui-kit"
     }
   ],
   "settings": {
@@ -104,7 +100,7 @@
           {
             "label": "Update all lock files",
             "task": "Frontend | update all lock files",
-            "tooltip": "🛠️ Update pnpm-lock.yaml + ui-kit lock + translation-app lock"
+            "tooltip": "🛠️ Update pnpm-lock.yaml + translation-app lock"
           },
           {
             "label": "Update pnpm-lock.yaml",
@@ -112,14 +108,19 @@
             "tooltip": "🛠️ Start the \"frontend update pnpm-lock.yaml\" task"
           },
           {
-            "label": "Update ui-kit lock",
-            "task": "Frontend | update ui-kit lock",
-            "tooltip": "🛠️ Update libs/ui-kit pnpm lock file"
-          },
-          {
             "label": "Update translation-app lock",
             "task": "Frontend | update translation-app lock",
             "tooltip": "🛠️ Update common/translation-app frontend & backend npm lock files"
+          },
+          {
+            "label": "Update ui-kit",
+            "task": "Frontend | update ui-kit",
+            "tooltip": "🛠️ Install the committed ui-kit tarball and refresh pnpm-lock.yaml"
+          },
+          {
+            "label": "Update ai-chat",
+            "task": "Frontend | update ai-chat",
+            "tooltip": "🛠️ Install the newest ai-chat tarball from ../../onlyoffice-ai-chat and refresh pnpm-lock.yaml"
           },
           {
             "label": "Build",
@@ -135,6 +136,11 @@
             "label": "Start",
             "task": "Frontend | start",
             "tooltip": "🛠️ Start the \"frontend start\" task"
+          },
+          {
+            "label": "Start (ui-kit src)",
+            "task": "Frontend | start (ui-kit source)",
+            "tooltip": "🛠️ Start the frontend with @onlyoffice/apps-ui-kit served from the ../../docspace-ui-kit-react checkout, which needs its own pnpm install (HMR on ui-kit edits)"
           },
           {
             "label": "Start:lite",
@@ -175,11 +181,6 @@
             "label": "Start storybook",
             "task": "Frontend | storybook",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task"
-          },
-          {
-            "label": "Start storybook (ui-kit)",
-            "task": "Frontend | storybook (ui-kit)",
-            "tooltip": "🛠️ Start the \"ui-kit storybook\" task"
           },
           {
             "label": "Start storybook prod",
@@ -271,11 +272,6 @@
             "label": "Test unit",
             "task": "Test | Vitest:unit",
             "tooltip": "🛠️ Start the \"Test | Vitest:unit\" task"
-          },
-          {
-            "label": "Test unit:ui-kit",
-            "task": "Test | Vitest:unit:ui-kit",
-            "tooltip": "🛠️ Start the \"Test | Vitest:unit:ui-kit\" task"
           },
           {
             "label": "Test vitest (client)",

@@ -37,9 +37,9 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import { CHAT_SUPPORTED_FORMATS } from "@docspace/ui-kit/constants/ai";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import { CHAT_SUPPORTED_FORMATS } from "@onlyoffice/apps-ui-kit/constants/ai";
 import { FileType } from "@docspace/shared/enums";
 
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
@@ -80,6 +80,7 @@ import useFolderActions from "./useFolderActions";
 import useFilesActions from "./useFilesActions";
 import useDownloadActions from "./useDownloadActions";
 import useFavoritesActions from "./useFavoritesActions";
+import useSdkCustomContextActions from "./useSdkCustomContextActions";
 
 // Files the AI chat can ingest as an attachment: the document set the chat
 // supports (CHAT_SUPPORTED_FORMATS) plus any image. Gates the "Ask AI" entry.
@@ -179,6 +180,8 @@ export default function useContextMenuModel({
     removeFromRecent,
     removeFromSharedWithMe,
   } = useFavoritesActions({ t });
+  const { getItemCustomActions, getGroupCustomActions } =
+    useSdkCustomContextActions();
 
   const getSelectItem = useCallback(
     (i: TFileItem | TFolderItem) => {
@@ -760,6 +763,8 @@ export default function useContextMenuModel({
       items.push(getGroupRestoreItem());
     }
 
+    items.push(...getGroupCustomActions(filesSelectionStore.selection));
+
     if (onDeleteSelectedClick) {
       items.push(getGroupDeleteItem());
     }
@@ -767,6 +772,7 @@ export default function useContextMenuModel({
     return items;
   }, [
     filesSelectionStore.selection,
+    getGroupCustomActions,
     getDownloadAsItem,
     getDownloadItem,
     getGroupCopyItem,
@@ -782,7 +788,9 @@ export default function useContextMenuModel({
   const getHeaderContextMenuModel = useCallback(() => {
     const base = isRoomsFolder
       ? getRoomsFolderOptions()
-      : getGroupContextMenuModel();
+      : getGroupContextMenuModel().filter(
+          (i) => !String(i.key).startsWith("sdk-action-"),
+        );
 
     const singleFile =
       !isRoomsFolder &&
@@ -855,7 +863,26 @@ export default function useContextMenuModel({
           filesSelectionStore.selection.length &&
           filesSelectionStore.isCheckedItem(item!)
         ) {
-          return getGroupContextMenuModel();
+          const groupModel: ContextMenuModel[] = getGroupContextMenuModel();
+          const isCustom = (i: ContextMenuModel) =>
+            String(i.key).startsWith("sdk-action-");
+          const first = groupModel.findIndex(isCustom);
+          if (first === -1) return groupModel;
+
+          const last = groupModel.findLastIndex(isCustom);
+          if (last < groupModel.length - 1) {
+            groupModel.splice(last + 1, 0, {
+              key: "separator-after-custom-actions",
+              isSeparator: true,
+            });
+          }
+          if (first > 0) {
+            groupModel.splice(first, 0, {
+              key: "separator-custom-actions",
+              isSeparator: true,
+            });
+          }
+          return groupModel;
         }
       }
 
@@ -1047,6 +1074,7 @@ export default function useContextMenuModel({
         actionGroup,
         favoritesGroup,
         restoreGroup,
+        getItemCustomActions(item!),
         deleteGroup,
       ];
       const model: ContextMenuModel[] = [];
@@ -1094,6 +1122,7 @@ export default function useContextMenuModel({
       getDeleteItem,
       getVectorizationItem,
       getAIFeaturesItem,
+      getItemCustomActions,
       onAskAI,
       getHeaderContextMenuModel,
       getGroupContextMenuModel,

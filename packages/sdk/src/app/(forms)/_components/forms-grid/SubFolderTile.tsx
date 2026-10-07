@@ -38,11 +38,11 @@
 import React, { useCallback, useMemo, useRef } from "react";
 
 import type { TFolder } from "@docspace/shared/api/files/types";
-import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { FolderTile } from "@onlyoffice/apps-ui-kit/components/tiles/folder-tile";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import type { TGetIcon } from "@/app/(docspace)/_hooks/useItemIcon";
 import type { TFormsContextMenuItem } from "../../_hooks/useFormsContextMenu";

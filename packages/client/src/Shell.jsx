@@ -43,7 +43,7 @@ import { toast as toastify } from "react-toastify";
 import SocketHelper, {
   SocketEvents,
   SocketCommands,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   now,
   parseToDateTime,
@@ -51,18 +51,18 @@ import {
   formatDateLocalized,
   isBefore,
   isAfter,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
-} from "@docspace/ui-kit/ai-agent/providers/themes";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import { getAiAccessSettings } from "@docspace/shared/api/settings";
-import { Portal } from "@docspace/ui-kit/components/portal";
-import { SnackBar } from "@docspace/ui-kit/components/snackbar";
-import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
-import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
-import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
-import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
+import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
+import { Toast, toastr, ToastType } from "@onlyoffice/apps-ui-kit/components/toast";
+import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { getCookie, deleteCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 
 import {
   getFrameInitialTheme,
@@ -91,13 +91,14 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import "@docspace/shared/styles/theme.scss";
 
 import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
+import { getAiContextRoom } from "SRC_DIR/helpers/aiContextRoom";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 import { setFileView } from "SRC_DIR/helpers/info-panel";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 import { ModelUpdatedBanner } from "SRC_DIR/pages/Home/View/ModelUpdatedBanner";
 import { useAiAgentsPickerActions } from "SRC_DIR/Hooks/useAiAgentsPickerActions";
-import { useFormsRecommendation } from "SRC_DIR/Hooks/useFormsRecommendation";
 
 import config from "PACKAGE_FILE";
 
@@ -160,7 +161,6 @@ const Shell = ({ page = "home", ...rest }) => {
     agentEntityId,
     isInsideAgentRoom,
     canEditAgentRoom,
-    recommendedModelForForms,
     getAgentRoomId,
     openResultFile,
     closeEditorPanel,
@@ -172,7 +172,10 @@ const Shell = ({ page = "home", ...rest }) => {
     selectedIsRootFolder,
     selectedSecurity,
     isPrivacyFolder,
+    isFormsFolderRoot,
+    isFormRoomRoot,
     isAIReady,
+    aiContextRoom,
   } = rest;
 
   const [searchParams] = useSearchParams();
@@ -754,6 +757,17 @@ const Shell = ({ page = "home", ...rest }) => {
     selectedFolderType !== FolderType.ResultStorage &&
     selectedRootFolderType !== FolderType.AIAgents;
 
+  // The Forms section takes a single attachment: a question there is about one
+  // form and the responses collected in it, and two forms in one message
+  // would mix two schemas.
+  //
+  // Both signals come from the store rather than from `rootFolderType`:
+  // `FolderType.Forms` only ever sits on the bare Forms root, while a form
+  // filling room and everything inside it report `rootFolderType = Rooms`
+  // (see the note in helpers/utils.js) — `isFormRoomRoot` is the getter that
+  // covers the room and its In progress / Complete folders.
+  const isFormsSection = isFormsFolderRoot || isFormRoomRoot;
+
   const withoutNavMenu =
     isEditor ||
     pagesWithoutNavMenu ||
@@ -796,8 +810,12 @@ const Shell = ({ page = "home", ...rest }) => {
   // Anonymous sessions (public room / public preview via a share link) and
   // guests must never issue AI calls: they answer 401, and the shared axios
   // client reacts to a 401 with logout + redirect to the login page, killing
-  // the public link view. An unpaid portal skips AI boot requests entirely.
-  const canUseAi = isAuthenticated && !isGuest && !isNotPaidPeriod;
+  // the public link view. An unpaid portal skips AI boot requests entirely,
+  // and so does a portal with AI switched off (Settings -> Customization ->
+  // AI services): every ASC.AI controller is behind `[AiFeature]` and answers
+  // 403, so hydrating the chat stores only floods the console on every page.
+  const canUseAi =
+    isAuthenticated && !isGuest && !isNotPaidPeriod && aiServicesEnabled;
 
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.
@@ -867,18 +885,6 @@ const Shell = ({ page = "home", ...rest }) => {
     [isInsideAgentRoom, pickedAgent],
   );
 
-  // The in-chat notice recommending the model tested for form results. Only
-  // inside an AI agent room, as the legacy chat had it: elsewhere the chat
-  // answers with the portal default and there is no agent to re-point.
-  const formsRecommendation = useFormsRecommendation({
-    // `agentEntityId` is dropped for an agent room opened without the UseChat
-    // right (the pane is a view-only stub there) — no chat, nothing to notice.
-    enabled: !!isInsideAgentRoom && !!agentEntityId,
-    agentRoomId: agentEntityId,
-    canEditAgent: !!canEditAgentRoom,
-    recommendedModel: recommendedModelForForms,
-  });
-
   // Chat error box override (Bug 83207): the wallet 402 must read as a
   // human message with a way to top up instead of the raw provider text.
   // Only the Payer can actually top the wallet up, so the button to
@@ -900,7 +906,7 @@ const Shell = ({ page = "home", ...rest }) => {
         action: isPayer
           ? {
               text: t("Common:TopUpWallet"),
-              onClick: () => navigate("/portal-settings/payments/wallet"),
+              onClick: () => navigate(PAYMENT_ROUTES.wallet),
             }
           : null,
       };
@@ -956,7 +962,6 @@ const Shell = ({ page = "home", ...rest }) => {
           // UI are switched off. Viewer-role gating inside agent rooms is
           // handled by `accessRightsStore.canUseChat` in AIAgentView.
           canUseAi={canUseAi}
-          formsRecommendation={formsRecommendation}
           callbacks={aiChatCallbacks}
           entityId={agentEntityId}
           contextEntityId={chatContextEntityId}
@@ -984,6 +989,11 @@ const Shell = ({ page = "home", ...rest }) => {
           composerHeader={standalone ? undefined : composerHeader}
           composerDisabled={standalone ? undefined : !isAIReady}
           suggestions={aiSuggestions}
+          // The room the user is in, connected as chat context (with the
+          // skills of its .ai folder) when the chat opens — see
+          // ContextRoomSync in ui-kit.
+          contextRoom={aiContextRoom}
+          attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
           <ModelUpdatedBanner
@@ -1154,6 +1164,14 @@ const ShellWrapper = inject(
       // rights of the opened folder / room do not allow are filtered out.
       selectedSecurity: selectedFolderStore.security,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
+      // The current room as a chat-context candidate; a new object per
+      // render, the ui-kit provider memoizes it by id and name.
+      aiContextRoom: getAiContextRoom(selectedFolderStore),
+      // The Forms section, in both its shapes: the bare Forms root, and a
+      // form filling room with its In progress / Complete folders. Caps the
+      // chat's attachments at one (see `attachmentLimit`).
+      isFormsFolderRoot: treeFoldersStore.isFormsFolderRoot,
+      isFormRoomRoot: treeFoldersStore.isFormRoomRoot,
       // Scope the chat to the current location: inside any room (including
       // its subfolders) the room id wins, elsewhere the currently selected
       // folder id is used. Only when nothing is selected yet does the chat
@@ -1180,7 +1198,6 @@ const ShellWrapper = inject(
       // profile. It is shown in the composer as a read-only label, or — for
       // users who may edit the room — an interactive picker to change it.
       isInsideAgentRoom: selectedFolderStore.isAIRoom,
-      recommendedModelForForms: settingsStore.aiConfig?.recommendedModelForForms,
       // EditRoom is the room-manager right; viewers (EditRoom === false, or
       // security not resolved yet) get the read-only label. Both room and
       // sub-folder security view-models carry EditRoom.

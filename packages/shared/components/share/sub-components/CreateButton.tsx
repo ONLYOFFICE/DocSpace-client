@@ -38,8 +38,8 @@ import classNames from "classnames";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link } from "@docspace/ui-kit/components/link";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import styles from "../Share.module.scss";
 

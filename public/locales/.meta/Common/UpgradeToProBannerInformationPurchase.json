@@ -3,7 +3,7 @@
   "content": "Ask purchase questions at <1>{{email}}</1>",
   "content_en_sha1_hash": "6b8817e13f560fda3a03a1762a7240069b4575df",
   "created_at": "2025-05-26T07:15:49.141Z",
-  "updated_at": "2026-05-15T14:00:06.958Z",
+  "updated_at": "2026-10-02T12:15:32.526Z",
   "comment": {
     "text": "This is a line of text within a contact information section, providing an email address for purchase inquiries. The `{{email}}` variable will be replaced with the actual sales email address.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/HelpLinks.tsx",
+      "line_number": 132,
+      "context": "className={styles.description}\n >\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"UpgradeToProBannerInformationPurchase\"\n values={{ email: salesEmail }}\n components={{\n 1: renderLink(\n `mailto:${salesEmail}`,\n \"upgrade_to_pro_banner_purchase_link\",",
+      "module": "/packages/shared"
+    },
     {
       "file_path": "/packages/shared/pages/Payments/common/ContactContainer.tsx",
       "line_number": 118,

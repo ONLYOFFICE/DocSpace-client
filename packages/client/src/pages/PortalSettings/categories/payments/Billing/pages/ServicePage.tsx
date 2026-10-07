@@ -41,14 +41,15 @@ import { useLocation, useNavigate } from "react-router";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { default as AiPage } from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
-import { default as AiSearchPage } from "@docspace/ui-kit/billing/services/pages/ai-search/AiSearchPage";
-import { default as BackupPage } from "@docspace/ui-kit/billing/services/pages/backup/BackupPage";
-import { default as AdditionalStoragePage } from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
-import { default as DocsConnectPage } from "@docspace/ui-kit/billing/services/pages/docs-connect/DocsConnectPage";
-import { default as BackupPageLoader } from "@docspace/ui-kit/billing/services/pages/backup/BackupPageLoader";
-import type { TDocsConnectPageState } from "@docspace/ui-kit/billing/types";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { default as AiPage } from "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPage";
+import { default as AiSearchPage } from "@onlyoffice/apps-ui-kit/billing/services/pages/ai-search/AiSearchPage";
+import { default as BackupPage } from "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage";
+import { default as AdditionalStoragePage } from "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
+import { default as DocsConnectPage } from "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage";
+import { default as BackupPageLoader } from "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPageLoader";
+import { default as GracePeriodModal } from "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/GracePeriodModal";
+import type { TDocsConnectPageState } from "@onlyoffice/apps-ui-kit/billing/types";
 
 import config from "PACKAGE_FILE";
 
@@ -78,6 +79,7 @@ interface ServicePageProps {
   openCancelPlanDialog?: () => void;
   openRemoveSubscriptionDialog?: () => void;
   cancelScheduledChange?: () => Promise<void>;
+  isGracePeriod?: boolean;
 }
 
 // Renders a single add-on service detail page based on the current route.
@@ -97,6 +99,7 @@ const ServicePage = (props: ServicePageProps) => {
     openCancelPlanDialog,
     openRemoveSubscriptionDialog,
     cancelScheduledChange,
+    isGracePeriod,
   } = props;
   useTranslation(["DocsConnect", "Common"]);
   const [isCancelChangeLoading, setIsCancelChangeLoading] = useState(false);
@@ -105,6 +108,16 @@ const ServicePage = (props: ServicePageProps) => {
 
   const { pathname } = location;
   const isDocsConnect = pathname.includes("docs-connect");
+  const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
+    useState(false);
+
+  const withGracePeriodGuard = (action?: () => void) => () => {
+    if (isGracePeriod) {
+      setIsGracePeriodModalVisible(true);
+      return;
+    }
+    action?.();
+  };
 
   useEffect(() => {
     fetchPayerInfo?.();
@@ -183,20 +196,26 @@ const ServicePage = (props: ServicePageProps) => {
       <>
         <DocsConnectPage
           state={state}
-          onTopUp={() => navigate(PAYMENT_ROUTES.wallet)}
+          onTopUp={withGracePeriodGuard(() => navigate(PAYMENT_ROUTES.wallet))}
           onTopUpComplete={() => fetchDocsConnectInfo?.()}
           onViewUsage={() => navigate(PAYMENT_ROUTES.usage)}
           onBuyPlan={() => openBuyPlan?.("trial")}
-          onEditPlan={() => openBuyPlan?.("edit")}
+          onEditPlan={withGracePeriodGuard(() => openBuyPlan?.("edit"))}
           onGoToTenant={() => navigate(DOCS_CONNECT_ROUTE)}
-          onCancelPlan={() => openCancelPlanDialog?.()}
-          onRemovePlan={() => openRemoveSubscriptionDialog?.()}
+          onCancelPlan={withGracePeriodGuard(openCancelPlanDialog)}
+          onRemovePlan={withGracePeriodGuard(openRemoveSubscriptionDialog)}
           onCancelChange={onCancelChange}
           isCancelChangeLoading={isCancelChangeLoading}
         />
         {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
         {cancelPlanDialogVisible ? <CancelPlanDialog /> : null}
         {removeSubscriptionDialogVisible ? <RemoveSubscriptionDialog /> : null}
+        {isGracePeriodModalVisible ? (
+          <GracePeriodModal
+            visible={isGracePeriodModalVisible}
+            onClose={() => setIsGracePeriodModalVisible(false)}
+          />
+        ) : null}
       </>
     );
   };
@@ -218,6 +237,9 @@ const ServicePage = (props: ServicePageProps) => {
           getAIConfig={getAIConfig}
           withBottomMargin
           onViewMore={onViewUsage}
+          onOpenWebSearch={() =>
+            navigateToRoute("/portal-settings/ai-settings/web-search")
+          }
         />
       ) : null}
       {pathname.includes("backup") ? (
@@ -234,11 +256,12 @@ const ServicePage = (props: ServicePageProps) => {
 export const Component = inject(
   ({ settingsStore, currentTariffStatusStore, docsConnectStore }: TStore) => {
     const { getAIConfig } = settingsStore;
-    const { fetchPayerInfo } = currentTariffStatusStore;
+    const { fetchPayerInfo, isGracePeriod } = currentTariffStatusStore;
 
     return {
       getAIConfig,
       fetchPayerInfo,
+      isGracePeriod,
       docsConnectInfo: docsConnectStore.info,
       docsConnectLoading: docsConnectStore.isLoading,
       buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
@@ -256,3 +279,4 @@ export const Component = inject(
 )(observer(ServicePage));
 
 export default Component;
+

@@ -1,14 +1,14 @@
 {
   "key_path": "ClientHelpButton",
-  "content": "Credentials for using OAth 2.0 as your Authentication type.<br/> <strong>Note:</strong> Any enterprise admin who knows the app's client ID will be able to retrieve information about the app including app name, authentication type, app scopes and redirect URI.",
-  "content_en_sha1_hash": "a6a1dae9abd8f55ab17beee6619144748aa32158",
-  "created_at": "2025-05-19T21:30:53.836Z",
-  "updated_at": "2026-05-15T15:37:40.261Z",
+  "content": "Credentials for using OAuth 2.0 as your Authentication type.<br/> <strong>Note:</strong> Any enterprise admin who knows the app's client ID will be able to retrieve information about the app including app name, authentication type, app scopes and redirect URI.",
+  "content_en_sha1_hash": "efc88688047fb35822d22e6a34bd7434648701ae",
+  "created_at": "2026-09-24T18:43:09.537Z",
+  "updated_at": "2026-09-24T18:45:12.793Z",
   "comment": {
-    "text": "This is the tooltip text for a help button next to the \"Client\" section header. It provides information about the credentials needed for OAuth 2.0 authentication and a security note regarding the client ID.",
+    "text": "Help text displayed in a tooltip or popover when clicking the help button in the OAuth client configuration section. It includes HTML tags for line breaks and bolding.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:19:09.701Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-09-24T18:45:12.793Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

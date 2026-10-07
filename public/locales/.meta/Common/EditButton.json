@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2026-08-31T18:23:50.659Z",
+  "updated_at": "2026-10-01T08:23:21.777Z",
   "comment": {
     "text": "This is a button label. It allows users to edit settings, such as auto-payments or submission configurations.",
     "is_auto": true,
@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
       "line_number": 323,
       "context": "<CurrentPaymentSettings\n autoPayments={autoPayments!}\n formatWalletCurrency={formatWalletCurrency}\n />\n <Button\n key=\"EditButton\"\n label={t(\"EditButton\")}\n size={ButtonSize.small}\n onClick={onEditClick}\n isDisabled={isDisabled}\n testId=\"edit_auto_payment_button\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/PauseSubmissionsDialog/index.tsx",
@@ -67,13 +67,13 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 373,
+      "line_number": 366,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 373,
+      "line_number": 366,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
@@ -91,7 +91,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 342,
+      "line_number": 345,
       "context": "const getEditItem = useCallback(\n (i: TFileItem) => {\n return {\n id: \"option_edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n const isPdf = i.fileExst === \".pdf\";\n if (isPdf && isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));",
       "module": "/packages/sdk"
     },
@@ -103,7 +103,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 203,
+      "line_number": 214,
       "context": ": null,\n edit: canEdit\n ? {\n id: \"option_edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: PencilReactSvgUrl,\n onClick: () => openForm(file, \"edit\"),\n disabled: false,\n }\n : null,",
       "module": "/packages/sdk"
     },

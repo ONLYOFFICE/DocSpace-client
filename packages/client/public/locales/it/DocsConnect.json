@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "L'abbonamento verrà rinnovato automaticamente <1>il {{date}}</1>",
   "TopUpAndBuy": "Ricarica & Acquista",
   "TopUpHint": "Il tuo portafoglio verrà ricaricato di <1>{{amount}}</1> e l'abbonamento selezionato verrà acquistato automaticamente. Gli importi di ricarica vengono arrotondati al dollaro superiore.",
+  "TopUpWalletHint": "I crediti non sono sufficienti per l'abbonamento a {{service}} selezionato. Ricarica il portafoglio, quindi torna qui per completare l'acquisto.",
   "TotalDueTodayTooltip": "Oggi paghi solo per la quantità selezionata di utenti per i giorni rimanenti fino alla tua data di fatturazione. In seguito, l'importo completo verrà addebitato una volta per ciclo di fatturazione nella tua data di fatturazione regolare.",
   "TotalMonthly": "Totale mensile",
   "TrialAvailable": "È disponibile una prova gratuita di un mese. Non è richiesta la carta di credito.",

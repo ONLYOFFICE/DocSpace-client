@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/ui-kit/styles/mixins";
-@use "@docspace/ui-kit/styles/variables/colors" as *;
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+@use "@onlyoffice/apps-ui-kit/styles/variables/colors" as *;
 
 // Dashboard content + the AI chat panel side by side. The panel (ui-kit
 // `ChatPanel`, 400px, flex-shrink: 0) renders inline on desktop and as a
@@ -137,7 +137,7 @@
   flex-direction: column;
   gap: 32px;
   width: 100%;
-  max-width: 1180px;
+  max-width: 1440px;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -362,7 +362,7 @@
 }
 
 // The create tiles fill the whole content width here instead of stopping at the
-// ui-kit tile cap (184px) — the dashboard has a fixed 1180px content column, so
+// ui-kit tile cap (184px) — the dashboard has a fixed 1440px content column, so
 // capped tiles left a gap at the end of the row. Height is unchanged.
 .quickActions {
   --quick-actions-tile-max-width: none;

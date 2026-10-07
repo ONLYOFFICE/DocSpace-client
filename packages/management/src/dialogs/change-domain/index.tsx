@@ -40,18 +40,18 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import {
   TextInput,
   InputSize,
   InputType,
-} from "@docspace/ui-kit/components/text-input";
-import { toastr } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { parseDomain } from "@docspace/shared/utils/common";
 
 import { useStores } from "@/hooks/useStores";

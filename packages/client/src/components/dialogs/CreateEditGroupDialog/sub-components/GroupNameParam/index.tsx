@@ -34,9 +34,9 @@
  */
 
 import { ChangeEvent } from "react";
-import { Label } from "@docspace/ui-kit/components/label";
-import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { InputType, TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import { useTranslation } from "react-i18next";
 import styles from "../../CreateEditGroupDialog.module.scss";
 

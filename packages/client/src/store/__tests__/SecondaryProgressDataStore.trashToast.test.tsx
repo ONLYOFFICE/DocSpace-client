@@ -38,7 +38,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 
@@ -48,7 +48,7 @@ vi.mock("SRC_DIR/i18n", () => ({
   default: { t: (key: string) => key },
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn(), clear: vi.fn() },
 }));
 

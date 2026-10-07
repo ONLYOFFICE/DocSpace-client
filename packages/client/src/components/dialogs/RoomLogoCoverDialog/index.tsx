@@ -35,15 +35,15 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { isMobile, isDesktop, isTablet, size } from "@docspace/shared/utils";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import RoomLogoCover from "./sub-components/RoomLogoCover";
 import { CoverDialogProps, ILogoCover } from "./RoomLogoCoverDialog.types";
 import styles from "./RoomLogoCover.module.scss";

@@ -3,7 +3,7 @@
   "content": "Business",
   "content_en_sha1_hash": "d6663dda5fe9b2524bf91f13a7621ec735f8a155",
   "created_at": "2026-06-01T21:20:38.403Z",
-  "updated_at": "2026-09-09T15:42:08.499Z",
+  "updated_at": "2026-10-01T10:04:24.648Z",
   "comment": {
     "text": "Plan name label in the dashboard header, used as a variable within a larger title string.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 399,
+      "line_number": 362,
       "context": "<Text className={styles.sectionSubtitle}>\n {isAdminOrOwner && !standalone\n ? t(\"Common:DiscoverAppsDescription\", {\n planName: isFreeTariff\n ? t(\"Common:StartupPlan\")\n : t(\"Common:BusinessPlan\"),\n })\n : t(\"Common:DiscoverAppsWorkspaceDescription\")}\n </Text>\n </div>\n <div",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/Header.tsx",
-      "line_number": 100,
-      "context": "standalone = false,\n }: HeaderProps) => {\n const { t } = useTranslation([\"Common\"]);\n const navigate = useNavigate();\n \n const businessPlan = t(\"Common:BusinessPlan\");\n \n const openPayments = () => navigate(PAYMENT_ROUTES.portalPayments);\n \n return (\n <header className={styles.planHeader}>",
+      "line_number": 103,
+      "context": "isCommunity = false,\n }: HeaderProps) => {\n const { t } = useTranslation([\"Common\"]);\n const navigate = useNavigate();\n \n const businessPlan = t(\"Common:BusinessPlan\");\n \n const openPayments = () => navigate(PAYMENT_ROUTES.portalPayments);\n \n return (\n <header className={styles.planHeader}>",
       "module": "/packages/client"
     }
   ],

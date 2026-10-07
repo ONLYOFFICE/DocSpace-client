@@ -40,7 +40,7 @@ import userEvent from "@testing-library/user-event";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import type { TagType } from "@docspace/ui-kit/components/tag";
+import type { TagType } from "@onlyoffice/apps-ui-kit/components/tag";
 import {
   TagManagementProvider as Provider,
   useTagManagement,
@@ -380,3 +380,4 @@ describe("TagManagementProvider", () => {
     expect(list.textContent).toContain("tag3");
   });
 });
+

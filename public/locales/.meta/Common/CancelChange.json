@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StorageWarning.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StorageWarning.tsx",
       "line_number": 105,
       "context": "textDecoration=\"underline dashed\"\n onClick={isCancelLoading ? () => {} : onCancelChange}\n fontWeight={600}\n color=\"accent\"\n >\n {t(\"CancelChange\")}\n </Link>\n {isCancelLoading ? (\n <div className={styles.loaderContainer}>\n <Loader\n color=\"\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

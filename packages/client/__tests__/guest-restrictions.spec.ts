@@ -41,7 +41,6 @@ import {
   TypeSettings,
   selfActivationStatusHandler,
   selfByTypeHandler,
-  usersByType,
 } from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
@@ -69,16 +68,9 @@ const TOOLTIP_TITLE = "Guests can't create or upload files.";
 const TOOLTIP_DESCRIPTION =
   "Ask the Room or Full admin for additional permissions.";
 
-// packages/client/src/store/DashboardTourStore.ts — spent up front so the
-// welcome does not sit over the page.
-const welcomeKey = (userId: string) => `dashboard_welcome_seen_${userId}`;
-
 const tooltip = (page: Page) => page.getByText(TOOLTIP_TITLE);
 
 const openDashboardAsGuest = async (page: Page, baseUrl: string) => {
-  await page.addInitScript((key: string) => {
-    window.localStorage.setItem(key, "true");
-  }, welcomeKey(usersByType.visitor.id));
 
   await page.goto(`${baseUrl}${DASHBOARD_URL}`);
   await expect(page.locator(CREATE_SECTION)).toBeVisible();
@@ -152,9 +144,6 @@ test.describe("Guest restrictions on the create section", () => {
     // hovering one says nothing at all.
     mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
 
-    await page.addInitScript((key: string) => {
-      window.localStorage.setItem(key, "true");
-    }, welcomeKey(usersByType.regular.id));
     await page.goto(`${baseUrl}${DASHBOARD_URL}`);
     await expect(page.locator(CREATE_SECTION)).toBeVisible();
 

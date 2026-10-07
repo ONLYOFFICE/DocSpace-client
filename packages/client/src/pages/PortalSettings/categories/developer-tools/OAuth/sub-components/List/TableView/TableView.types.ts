@@ -35,7 +35,7 @@
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { TTranslation } from "@docspace/shared/types";
-import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 

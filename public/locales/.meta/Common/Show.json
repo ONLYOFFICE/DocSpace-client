@@ -3,7 +3,7 @@
   "content": "Show",
   "content_en_sha1_hash": "d97d1ee339e4eeaba8cac91dca37c8b4ec8f5501",
   "created_at": "2026-06-01T21:20:32.973Z",
-  "updated_at": "2026-09-04T07:59:41.687Z",
+  "updated_at": "2026-09-22T15:31:29.832Z",
   "comment": {
     "text": "Button label used to expand and display advanced or additional settings. It is a verb.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginItem.tsx",
-      "line_number": 209,
+      "line_number": 231,
       "context": "type={LinkType.action}\n isHovered\n onClick={onToggleDescription}\n dataTestId=\"toggle_plugin_description_link\"\n >\n {isDescriptionExpanded ? t(\"Common:Hide\") : t(\"Common:Show\")}\n </Link>\n ) : null}\n </>\n ) : null}\n </div>",
       "module": "/packages/client"
     },

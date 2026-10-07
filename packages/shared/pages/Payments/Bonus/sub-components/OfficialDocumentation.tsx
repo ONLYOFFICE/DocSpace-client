@@ -34,91 +34,105 @@
  */
 
 import React from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import DockerSvgUrl from "PUBLIC_DIR/images/upgrade.docker.svg?url";
+import LinuxSvgUrl from "PUBLIC_DIR/images/upgrade.linux.svg?url";
+import WindowsSvgUrl from "PUBLIC_DIR/images/upgrade.windows.svg?url";
+import ArrowUpRightReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up-right.react.svg?url";
+
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
 
 import styles from "../Bonus.module.scss";
 
 export const OfficialDocumentation = ({
-  dataBackupUrl,
+  organizationName,
+  license,
   enterpriseInstallScriptUrl,
   enterpriseInstallWindowsUrl,
 }: {
-  dataBackupUrl: string;
+  organizationName: string;
+  license: string;
   enterpriseInstallScriptUrl: string;
   enterpriseInstallWindowsUrl: string;
 }) => {
   const { t } = useTranslation("Common");
 
-  return (
-    <div className={styles.bonus}>
-      <div className={styles.officialDocumentation}>
-        —
-        <Text fontWeight={600}>
-          {t("UpgradeToProBannerInstructionItemDocker")}{" "}
-          <Link
-            tag="a"
-            fontSize="13px"
-            fontWeight="600"
-            href={enterpriseInstallScriptUrl}
-            target={LinkTarget.blank}
-            color="accent"
-            dataTestId="enterprise_install_script_docker_link"
-          >
-            {t("UpgradeToProBannerInstructionReadNow")}
-          </Link>
-        </Text>
-        —
-        <Text fontWeight={600}>
-          {t("UpgradeToProBannerInstructionItemLinux")}{" "}
-          <Link
-            tag="a"
-            fontSize="13px"
-            fontWeight="600"
-            href={enterpriseInstallScriptUrl}
-            target={LinkTarget.blank}
-            color="accent"
-            dataTestId="enterprise_install_script_linux_link"
-          >
-            {t("UpgradeToProBannerInstructionReadNow")}
-          </Link>
-        </Text>
-        —
-        <Text fontWeight={600}>
-          {t("UpgradeToProBannerInstructionItemWindows")}{" "}
-          <Link
-            tag="a"
-            fontSize="13px"
-            fontWeight="600"
-            href={enterpriseInstallWindowsUrl}
-            target={LinkTarget.blank}
-            color="accent"
-            dataTestId="enterprise_install_script_windows_link"
-          >
-            {t("UpgradeToProBannerInstructionReadNow")}
-          </Link>
-        </Text>
-      </div>
+  const deployments = [
+    {
+      id: "docker",
+      icon: DockerSvgUrl,
+      label: t("Common:UpgradeDockerInstructions"),
+      href: enterpriseInstallScriptUrl,
+    },
+    {
+      id: "linux",
+      icon: LinuxSvgUrl,
+      label: t("Common:UpgradeLinuxInstructions"),
+      href: enterpriseInstallScriptUrl,
+    },
+    {
+      id: "windows",
+      icon: WindowsSvgUrl,
+      label: t("Common:UpgradeWindowsInstructions"),
+      href: enterpriseInstallWindowsUrl,
+    },
+  ];
 
-      <Text className={styles.upgradeInfo}>
-        <Trans i18nKey="UpgradeToProBannerInstructionNote" ns="Common" t={t}>
-          Please note that the editors will be unavailable during the upgrade.
-          We also recommend to
-          <Link
-            tag="a"
-            fontWeight="600"
-            href={dataBackupUrl}
-            target={LinkTarget.blank}
-            color="accent"
-            dataTestId="data_backup_link"
-          >
-            backup your data
-          </Link>
-          before you start.
-        </Trans>
+  return (
+    <div className={styles.trialCard} data-testid="bonus-official-documentation">
+      <Text fontSize="16px" fontWeight={700} lineHeight="22px">
+        {t("Common:UpgradeTrialInstructionTitle", {
+          organizationName,
+          license,
+        })}
       </Text>
+      <Text
+        fontSize="13px"
+        lineHeight="20px"
+        className={styles.chooseDeployment}
+      >
+        {t("Common:UpgradeChooseDeployment")}
+      </Text>
+      <div className={styles.deployments}>
+        {deployments.map((deployment) => (
+          <div key={deployment.id} className={styles.deployment}>
+            <img
+              src={deployment.icon}
+              alt=""
+              className={styles.deploymentIcon}
+            />
+            <Text
+              fontSize="13px"
+              fontWeight={600}
+              lineHeight="20px"
+              className={styles.deploymentLabel}
+            >
+              {deployment.label}
+            </Text>
+            <div className={styles.readNow}>
+              <Link
+                tag="a"
+                fontSize="13px"
+                fontWeight={600}
+                href={deployment.href}
+                target={LinkTarget.blank}
+                color="accent"
+                textDecoration="underline"
+                dataTestId={`enterprise_install_script_${deployment.id}_link`}
+              >
+                {t("Common:UpgradeToProBannerInstructionReadNow")}
+              </Link>
+              <ReactSVG
+                src={ArrowUpRightReactSvgUrl}
+                className={styles.readNowIcon}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@
   "content": "Presentation",
   "content_en_sha1_hash": "6e875951a6f9aa1374d93572de657c12ded57355",
   "created_at": "2025-05-19T21:30:47.449Z",
-  "updated_at": "2026-08-31T18:23:50.559Z",
+  "updated_at": "2026-10-06T10:42:37.448Z",
   "comment": {
     "text": "This is a label for a presentation file type or a button to create a new presentation. It appears in menus and file listings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 567,
+      "line_number": 605,
       "context": "const createNewPresentationPptx = {\n id: \"actions_new-presentation\",\n className: \"main-button_drop-down\",\n icon: ActionsPresentationReactSvgUrl,\n label: t(\"Common:Presentation\"),\n onClick: onCreate,\n action: \"pptx\",\n key: \"pptx\",\n };",
       "module": "/packages/client"
     },
@@ -25,20 +25,20 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 550,
+      "line_number": 577,
       "context": "icon: SpreadsheetReactSvgUrl,\n onClick: () => actions.onCreate(\"xlsx\"),\n },\n {\n key: \"create-presentation\",\n label: t(\"Common:Presentation\"),\n icon: PresentationReactSvgUrl,\n onClick: () => actions.onCreate(\"pptx\"),\n },\n {\n key: \"create-pdf-form\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/index.tsx",
-      "line_number": 200,
+      "line_number": 207,
       "context": "fileExst: \".xlsx\",\n fileType: FileType.Spreadsheet,\n access: ShareAccessRights.Comment,\n },\n {\n title: t(\"Common:Presentation\"),\n fileExst: \".pptx\",\n fileType: FileType.Presentation,\n access: ShareAccessRights.ReadOnly,\n },\n ],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useCreateActions.tsx",
-      "line_number": 131,
-      "context": "...disabledProps,\n },\n {\n id: \"presentation\",\n icon: <CreatePresentationIcon />,\n label: t(\"Common:Presentation\"),\n onClick: () =>\n window.open(\n makeCreateUrl(NEW_FILE_NAMES.presentation, myFolderId),\n \"_blank\",\n ),",
+      "line_number": 132,
+      "context": "...disabledProps,\n },\n {\n id: \"presentation\",\n icon: <CreatePresentationIcon />,\n label: t(\"Common:Presentation\"),\n onClick: () => openNewFile(NEW_FILE_NAMES.presentation),\n ...disabledProps,\n },\n {\n id: \"pdf\",",
       "module": "/packages/client"
     },
     {
@@ -67,19 +67,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 125,
+      "line_number": 152,
       "context": "onClick: () => openCreateDialog(\"xlsx\"),\n },\n {\n id: \"actions_new-presentation\",\n key: \"pptx\",\n label: t(\"Common:Presentation\"),\n icon: ActionsPresentationReactSvgUrl,\n onClick: () => openCreateDialog(\"pptx\"),\n },\n {\n id: \"actions_new-form\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 125,
+      "line_number": 152,
       "context": "onClick: () => openCreateDialog(\"xlsx\"),\n },\n {\n id: \"actions_new-presentation\",\n key: \"pptx\",\n label: t(\"Common:Presentation\"),\n icon: ActionsPresentationReactSvgUrl,\n onClick: () => openCreateDialog(\"pptx\"),\n },\n {\n id: \"actions_new-form\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 125,
+      "line_number": 152,
       "context": "onClick: () => openCreateDialog(\"xlsx\"),\n },\n {\n id: \"actions_new-presentation\",\n key: \"pptx\",\n label: t(\"Common:Presentation\"),\n icon: ActionsPresentationReactSvgUrl,\n onClick: () => openCreateDialog(\"pptx\"),\n },\n {\n id: \"actions_new-form\",",
       "module": "/packages/sdk"
     },

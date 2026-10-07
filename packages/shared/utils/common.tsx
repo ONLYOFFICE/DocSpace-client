@@ -41,7 +41,7 @@ import {
   parseToDateTime,
   startOf,
   dateDiffAbs,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
 import resizeImage from "resize-image";
 import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
@@ -72,8 +72,8 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import { AvatarRole } from "@docspace/ui-kit/components/avatar";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { AvatarRole } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
 
 import { parseAddress } from "./email";
 
@@ -104,19 +104,19 @@ import {
   TPasswordHash,
   TTimeZone,
 } from "../api/settings/types";
-import { TopLoaderService } from "@docspace/ui-kit/components/top-loading-indicator";
+import { TopLoaderService } from "@onlyoffice/apps-ui-kit/components/top-loading-indicator";
 
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import { combineUrl } from "./combineUrl";
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
-import { checkIsSSR } from "@docspace/ui-kit/utils/device";
+import { getCookie, setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { checkIsSSR } from "@onlyoffice/apps-ui-kit/utils/device";
 
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
 import { isFile, isFolder } from "./typeGuards";
 import { getUserTypeDescriptionClient } from "./getUserTypeDescription";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
-import { isLanguageRtl } from "@docspace/ui-kit/providers/theme";
+import { getSystemTheme } from "@onlyoffice/apps-ui-kit/utils/get-system-theme";
+import { isLanguageRtl } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -688,6 +688,50 @@ export const frameCallbackData = (
   );
 };
 
+export type TFrameMethodError = {
+  isError: true;
+  status?: number;
+  message: string;
+  name?: string;
+  code?: string | number;
+};
+
+export const toFrameMethodError = (error: unknown): TFrameMethodError => {
+  if (!error || typeof error !== "object") {
+    return { isError: true, message: String(error) };
+  }
+
+  const err = error as {
+    status?: unknown;
+    response?: { status?: unknown };
+    message?: unknown;
+    name?: unknown;
+    code?: unknown;
+  };
+  const status =
+    typeof err.status === "number"
+      ? err.status
+      : typeof err.response?.status === "number"
+        ? err.response.status
+        : undefined;
+  const message =
+    typeof err.message === "string" && err.message
+      ? err.message
+      : typeof err.name === "string"
+        ? err.name
+        : "Unknown error";
+
+  return {
+    isError: true,
+    ...(status !== undefined && { status }),
+    message,
+    ...(typeof err.name === "string" && { name: err.name }),
+    ...((typeof err.code === "string" || typeof err.code === "number") && {
+      code: err.code,
+    }),
+  };
+};
+
 export const frameCallEvent = (eventReturnData: unknown) => {
   window.parent.postMessage(
     JSON.stringify({
@@ -721,12 +765,14 @@ export {
   calculateTotalPrice,
   truncateNumberToFraction,
   formatCurrencyValue,
-} from "@docspace/ui-kit/billing/utils/common";
+} from "@onlyoffice/apps-ui-kit/billing/utils/common";
 
 export const frameHandlePing = (eventData: {
   type?: string;
   frameId?: string;
 }): boolean => {
+  if (eventData?.type === "onAuthTokenReturn") return true;
+
   if (eventData?.type === "ping") {
     window.parent.postMessage(
       JSON.stringify({
@@ -740,7 +786,7 @@ export const frameHandlePing = (eventData: {
   return false;
 };
 
-import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
+import { getConvertedSize } from "@onlyoffice/apps-ui-kit/billing/utils/common";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { getConstName } from "@docspace/shared/constants/consts";
 

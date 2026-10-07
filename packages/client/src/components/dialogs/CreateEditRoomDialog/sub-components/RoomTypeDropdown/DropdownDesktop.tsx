@@ -37,8 +37,8 @@ import { useEffect, useState, useRef } from "react";
 
 import RoomType from "@docspace/shared/components/room-type";
 import { getCreateRoomTypes } from "@docspace/shared/utils/rooms";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { Backdrop } from "@docspace/ui-kit/components";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components";
 import { RoomsType } from "@docspace/shared/enums";
 
 import styles from "../../CreateEditRoomDialog.module.scss";

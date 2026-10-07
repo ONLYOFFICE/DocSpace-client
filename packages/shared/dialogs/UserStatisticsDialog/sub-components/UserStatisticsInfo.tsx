@@ -34,8 +34,8 @@
  */
 
 import { Trans, useTranslation } from "react-i18next";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ProgressBar } from "@onlyoffice/apps-ui-kit/components/progress-bar";
 import { TUserStatisticsInfoProps } from "../UserStatisticsDialog.types";
 import styles from "../UserStatisticsDialog.module.scss";
 

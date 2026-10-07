@@ -38,7 +38,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
+import { DragAndDrop } from "@onlyoffice/apps-ui-kit/components/drag-and-drop";
 
 import { useDragStore } from "../../_store/DragStore";
 import styles from "./DropZone.module.scss";

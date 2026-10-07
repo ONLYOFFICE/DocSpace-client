@@ -1,0 +1,29 @@
+{
+  "key_path": "TokenCountWithPercent",
+  "content": "{{tokens}} ({{percent}}%)",
+  "content_en_sha1_hash": "c41dd61e8d91a565e400b46ca1279976b8c35135",
+  "created_at": "2026-10-01T08:23:10.281Z",
+  "updated_at": "2026-10-01T08:27:08.171Z",
+  "comment": {
+    "text": "A label in the token usage component displaying the number of tokens and their percentage. `tokens` is a formatted number, and `percent` is the percentage value.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T08:27:08.171Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageContent.tsx",
+      "line_number": 89,
+      "context": "const percent = getCachedTokensPercent(usage);\n const format = (value: number) => formatNumber(language, value);\n const fromCache =\n percent === null\n ? format(segments.fromCache)\n : t(\"TokenCountWithPercent\", {\n tokens: format(segments.fromCache),\n percent,\n });\n \n const bar = (Object.keys(segments) as Segment[]).filter(",
+      "module": "@onlyoffice/apps-ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

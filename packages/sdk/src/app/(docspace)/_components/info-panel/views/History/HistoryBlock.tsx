@@ -71,13 +71,13 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import {
   formatDateLocalized,
   parseToDateTime,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 import { getFileExtension } from "@docspace/shared/utils/common";
 import { getCachedEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { useFilenameCacheVersion } from "@docspace/shared/hooks/useResolvedFileTitle";

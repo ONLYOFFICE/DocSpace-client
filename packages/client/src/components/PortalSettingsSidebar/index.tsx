@@ -67,7 +67,7 @@ import { useTranslation } from "react-i18next";
 import type {
   NavMenuGroup,
   NavMenuItem,
-} from "@docspace/ui-kit/components/nav-menu";
+} from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import {
@@ -132,8 +132,8 @@ const PortalSettingsSidebar = ({
         return t("Settings:PortalDeletion");
       case "Common:PaymentsTitle":
         return standalone ? t("Common:PaymentsTitle") : t("Common:Billing");
-      case "Common:Bonus":
-        return t("Common:Bonus");
+      case "Common:Upgrade":
+        return t("Common:Upgrade");
       default:
         return tKey;
     }
@@ -175,13 +175,13 @@ const PortalSettingsSidebar = ({
     if (standalone) {
       const toRemove = isCommunity
         ? ["Common:PaymentsTitle", "Services"]
-        : ["Common:Bonus", "Services"];
+        : ["Common:Upgrade", "Services"];
       toRemove.forEach((key) => {
         const idx = resultTree.findIndex((e) => e.tKey === key);
         if (idx !== -1) resultTree.splice(idx, 1);
       });
     } else {
-      const idx = resultTree.findIndex((e) => e.tKey === "Common:Bonus");
+      const idx = resultTree.findIndex((e) => e.tKey === "Common:Upgrade");
       if (idx !== -1) resultTree.splice(idx, 1);
     }
 

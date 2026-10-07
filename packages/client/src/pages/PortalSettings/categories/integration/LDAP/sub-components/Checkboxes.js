@@ -36,9 +36,9 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { RadioButton } from "@docspace/ui-kit/components/radio-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { RadioButton } from "@onlyoffice/apps-ui-kit/components/radio-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 const ConnectionType = Object.freeze({
   Unencrypted: 1,

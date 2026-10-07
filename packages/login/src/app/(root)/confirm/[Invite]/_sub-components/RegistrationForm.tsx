@@ -39,18 +39,18 @@ import { ChangeEvent, KeyboardEvent, useContext } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { TPasswordSettings } from "@docspace/shared/api/settings/types";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { GreetingUserContainer } from "@/components/GreetingContainer";

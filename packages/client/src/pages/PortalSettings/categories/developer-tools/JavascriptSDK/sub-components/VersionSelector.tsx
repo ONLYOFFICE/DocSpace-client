@@ -34,10 +34,10 @@
  */
 
 import { useState, useCallback, ReactNode, useEffect } from "react";
-import { Label } from "@docspace/ui-kit/components/label";
-import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { ComboBox, TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { ControlsGroup, LabelGroup } from "../presets/StyledPresets";
 

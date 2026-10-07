@@ -37,8 +37,8 @@ import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import { TRoom } from "@docspace/shared/api/rooms/types";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { Text } from "@docspace/ui-kit/components/text";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 
 import CreateRoomTemplate from "../dialogs/CreateRoomTemplate/CreateRoomTemplate";

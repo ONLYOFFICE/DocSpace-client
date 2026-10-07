@@ -42,17 +42,11 @@ import { Bonus as BonusPage } from "@docspace/shared/pages/Payments/Bonus";
 const Bonus = (props) => {
   const {
     isInitPaymentPage,
-    isEnterprise,
-    isTrial,
-    isDeveloper,
-    isCommunity,
-    feedbackAndSupportUrl,
+    siteDomain,
     salesEmail,
-    dataBackupUrl,
     logoText,
     enterpriseInstallScriptUrl,
     enterpriseInstallWindowsUrl,
-    forEnterprisesUrl,
     demoOrderUrl,
     showPortalSettingsLoader,
   } = props;
@@ -62,40 +56,24 @@ const Bonus = (props) => {
 
   return (
     <BonusPage
-      isEnterprise={isEnterprise}
-      isTrial={isTrial}
-      isDeveloper={isDeveloper}
-      isCommunity={isCommunity}
-      feedbackAndSupportUrl={feedbackAndSupportUrl}
+      siteDomain={siteDomain}
       salesEmail={salesEmail}
-      dataBackupUrl={dataBackupUrl}
       logoText={logoText}
       enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
       enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
-      forEnterprisesUrl={forEnterprisesUrl}
       demoOrderUrl={demoOrderUrl}
     />
   );
 };
 
 export const Component = inject(
-  ({
-    paymentStore,
-    currentTariffStatusStore,
-    currentQuotaStore,
-    settingsStore,
-    clientLoadingStore,
-  }) => {
+  ({ paymentStore, settingsStore, clientLoadingStore }) => {
     const { isInitPaymentPage, salesEmail } = paymentStore;
-    const { isCommunity, isEnterprise, isDeveloper } = currentTariffStatusStore;
-    const { isTrial } = currentQuotaStore;
     const {
-      dataBackupUrl,
       logoText,
       enterpriseInstallScriptUrl,
       enterpriseInstallWindowsUrl,
-      feedbackAndSupportUrl,
-      forEnterprisesUrl,
+      siteDomain,
       demoOrderUrl,
     } = settingsStore;
 
@@ -103,17 +81,11 @@ export const Component = inject(
 
     return {
       isInitPaymentPage,
-      isCommunity,
-      isEnterprise,
-      isTrial,
-      isDeveloper,
-      feedbackAndSupportUrl,
+      siteDomain,
       salesEmail,
-      dataBackupUrl,
       logoText,
       enterpriseInstallScriptUrl,
       enterpriseInstallWindowsUrl,
-      forEnterprisesUrl,
       demoOrderUrl,
       showPortalSettingsLoader,
     };

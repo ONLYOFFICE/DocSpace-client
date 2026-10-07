@@ -36,9 +36,9 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { getConstName } from "@docspace/shared/constants/consts";
 
 const AdvancedSettings = ({

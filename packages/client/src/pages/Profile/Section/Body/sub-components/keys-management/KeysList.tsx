@@ -36,14 +36,14 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
-import { LANGUAGE } from "@docspace/ui-kit/constants";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { LANGUAGE } from "@onlyoffice/apps-ui-kit/constants";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";

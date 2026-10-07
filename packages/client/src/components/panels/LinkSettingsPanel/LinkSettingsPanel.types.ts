@@ -33,9 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TComboboxProps, TOption } from "@docspace/ui-kit/components/combobox";
+import { TComboboxProps, TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 export type LinkRolesDropdownItemProps = {
   item: TOption;

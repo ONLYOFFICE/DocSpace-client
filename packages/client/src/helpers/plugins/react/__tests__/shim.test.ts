@@ -36,7 +36,7 @@
 import { describe, it, expect, vi, beforeAll } from "vitest";
 
 // One stub export is enough to build the kit's shim module from.
-vi.mock("@docspace/ui-kit", () => ({ Text: () => null }));
+vi.mock("@onlyoffice/apps-ui-kit", () => ({ Text: () => null }));
 
 let rewritePluginImports: (code: string) => string;
 
@@ -69,11 +69,32 @@ describe("rewritePluginImports", () => {
     "react",
     "react-dom",
     "react/jsx-runtime",
-    "react/jsx-dev-runtime",
     "@onlyoffice/docspace-plugin-sdk/react",
-    "@docspace/ui-kit",
+    "@onlyoffice/apps-ui-kit",
   ])("provides %s", (specifier) => {
     expect(rewrittenSpecifiers(`import x from "${specifier}";`)).toHaveLength(1);
+  });
+
+  // Plugin SDK 3.0.0 still tells plugins to keep the kit's old name external.
+  it("sends the kit's old name to the same copy", () => {
+    const [legacy] = rewrittenSpecifiers(`import x from "@docspace/ui-kit";`);
+    const [current] = rewrittenSpecifiers(
+      `import x from "@onlyoffice/apps-ui-kit";`,
+    );
+
+    expect(legacy).toBe(current);
+  });
+
+  it("does not offer the kit's old name", () => {
+    let thrown = "";
+
+    try {
+      rewritePluginImports(`import "lodash-es";`);
+    } catch (cause) {
+      thrown = cause instanceof Error ? cause.message : "";
+    }
+
+    expect(thrown).not.toContain("@docspace/ui-kit");
   });
 
   // A package kept external survives bundling in a dynamic import too.
@@ -90,9 +111,9 @@ describe("rewritePluginImports", () => {
   it("refuses a subpath of the kit", () => {
     expect(() =>
       rewritePluginImports(
-        `import { Button } from "@docspace/ui-kit/components/button";`,
+        `import { Button } from "@onlyoffice/apps-ui-kit/components/button";`,
       ),
-    ).toThrow(/"@docspace\/ui-kit\/components\/button"/);
+    ).toThrow(/"@onlyoffice\/apps-ui-kit\/components\/button"/);
   });
 
   it("leaves a specifier the browser can resolve on its own", () => {
@@ -128,7 +149,7 @@ describe("rewritePluginImports", () => {
 
     expect(thrown).toContain('"lodash-es"');
     expect(thrown).toContain('"zod"');
-    expect(thrown).toContain('"@docspace/ui-kit"');
+    expect(thrown).toContain('"@onlyoffice/apps-ui-kit"');
   });
 
   it("leaves the plugin's own code alone", () => {
@@ -147,7 +168,7 @@ describe("rewritePluginImports", () => {
 
   it("rewrites a bundle whose text mentions a package it does not import", () => {
     const code = [
-      `import { Text } from "@docspace/ui-kit";`,
+      `import { Text } from "@onlyoffice/apps-ui-kit";`,
       `export const hint = 'not unlike "zod", but hand-written';`,
     ].join("\n");
 

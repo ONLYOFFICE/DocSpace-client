@@ -56,12 +56,6 @@ const TOUR_KEY = "dashboard_tour_pending";
 // query param, unlike every section tour.
 const DASHBOARD_URL = "/dashboard";
 
-// The per-user "has been offered the welcome" flag
-// (DashboardTourStore.welcomeKey). Only the prefix is known here: the suffix is
-// the signed-in user's id, which differs per mocked user type — so the flag is
-// spent through the UI rather than written by hand under a guessed key.
-const WELCOME_SEEN_PREFIX = "dashboard_welcome_seen";
-
 // packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx —
 // dismissing the card is the one thing that changes which steps a tour has, and
 // it lives in localStorage rather than in a store.
@@ -86,64 +80,37 @@ const OVERVIEW_STEP = "Come back anytime";
 const welcomeDialog = (page: Page) => page.locator(WELCOME_TAKE_TOUR);
 
 /**
- * Lands on the dashboard as a first-time user, with the clock fixed.
+ * Lands on the dashboard with the clock fixed and nothing on top of the page.
  *
- * Unlike the section tours there is nothing to arm: the welcome is shown by the
- * absence of the per-user "seen" flag, and the tour is requested from it on the
- * same page. So the first visit is only here to give `armTour` an origin to
- * write to — the storage it writes is the tour's pending flag, which this route
- * spends by itself and which every test below overrides anyway.
+ * Unlike the section tours there is nothing to arm: the tour is requested from
+ * the welcome on this same page. So the first visit is only here to give
+ * `armTour` an origin to write to — the storage it writes is the tour's pending
+ * flag, which this route spends by itself and which every test below clears.
  */
 const openDashboard = async (page: Page, baseUrl: string) => {
   await page.goto(`${baseUrl}${DASHBOARD_URL}`);
   await armTour(page, TOUR_KEY);
-  // The pending flag `armTour` just set would start a tour on top of the
-  // welcome; clear it so each test drives the modal the way a user does.
+  // The pending flag `armTour` just set would start a tour of its own; clear it
+  // so each test drives the page the way a user does.
   await page.evaluate((key) => window.localStorage.removeItem(key), TOUR_KEY);
   await page.goto(`${baseUrl}${DASHBOARD_URL}`);
+};
+
+/** Opens the welcome from the help button — its only entry point. */
+const openWelcome = async (page: Page) => {
+  await expect(page.locator(HELP_BUTTON)).toBeVisible();
+  await page.locator(HELP_BUTTON).click();
+  await expect(welcomeDialog(page)).toBeVisible();
 };
 
 /** Lands on the dashboard and takes the tour from the welcome's own button. */
 const startTour = async (page: Page, baseUrl: string) => {
   await openDashboard(page, baseUrl);
 
-  await expect(welcomeDialog(page)).toBeVisible();
+  await openWelcome(page);
   await page.locator(WELCOME_TAKE_TOUR).click();
 
   await expect(tourTooltip(page)).toBeVisible();
-};
-
-/**
- * Spends the welcome offer for whoever is signed in, by closing the modal the
- * way a user would.
- *
- * Deliberately not a `localStorage.setItem`: the flag is keyed on the user id,
- * and the mocked user types do not share one — writing it by hand under a
- * guessed id leaves the real key unset, which shows up as a welcome that will
- * not go away rather than as a missing key. Letting the app write it keys the
- * flag correctly by construction.
- */
-const markWelcomeSeen = async (page: Page) => {
-  await expect(welcomeDialog(page)).toBeVisible();
-  await page.locator(WELCOME_LATER).click();
-  await expect(welcomeDialog(page)).toHaveCount(0);
-
-  // The click only proves the modal closed; assert it also reached storage, so
-  // a regression in the write surfaces here and not as a puzzling failure in
-  // whatever the caller goes on to check.
-  await expect
-    .poll(() =>
-      page.evaluate(
-        (prefix) =>
-          Object.keys(window.localStorage).some(
-            (key) =>
-              key.startsWith(`${prefix}_`) &&
-              window.localStorage.getItem(key) === "true",
-          ),
-        WELCOME_SEEN_PREFIX,
-      ),
-    )
-    .toBe(true);
 };
 
 /**
@@ -269,7 +236,7 @@ test.describe("Dashboard tour", () => {
     );
     await page.goto(`${baseUrl}${DASHBOARD_URL}`);
 
-    await expect(welcomeDialog(page)).toBeVisible();
+    await openWelcome(page);
     await page.locator(WELCOME_TAKE_TOUR).click();
     await expect(tourTooltip(page)).toBeVisible();
 
@@ -315,10 +282,30 @@ test.describe("Dashboard welcome", () => {
     );
   });
 
-  test("greets a first-time user", async ({ page, baseUrl }) => {
+  test("is never offered on its own, not even on a first visit", async ({
+    page,
+    baseUrl,
+  }) => {
+    // The regression this guards: the modal used to open by itself the first
+    // time a user reached the dashboard. Landing on the page must interrupt
+    // nobody — the tour is asked for, not proposed.
     await openDashboard(page, baseUrl);
 
-    await expect(welcomeDialog(page)).toBeVisible();
+    await expect(page.locator(HELP_BUTTON)).toBeVisible();
+    await expect(welcomeDialog(page)).toHaveCount(0);
+    await expect(tourTooltip(page)).toHaveCount(0);
+
+    // Still nothing on a second visit: there is no deferred offer waiting to be
+    // made, the way a "seen once" flag would leave one.
+    await page.goto(`${baseUrl}${DASHBOARD_URL}`);
+    await expect(page.locator(HELP_BUTTON)).toBeVisible();
+    await expect(welcomeDialog(page)).toHaveCount(0);
+  });
+
+  test("the help button opens it", async ({ page, baseUrl }) => {
+    await openDashboard(page, baseUrl);
+
+    await openWelcome(page);
     // Nothing runs until the offer is taken — the page behind the modal is what
     // the tour is about, and it is not being walked yet.
     await expect(tourTooltip(page)).toHaveCount(0);
@@ -326,59 +313,29 @@ test.describe("Dashboard welcome", () => {
     await expectScreenshot(page, ["desktop", "dashboard-tour", "welcome.png"]);
   });
 
-  test("is offered once, whether or not the tour was taken", async ({
+  test("the tour it starts is the dashboard's own", async ({
     page,
     baseUrl,
   }) => {
     await openDashboard(page, baseUrl);
-
-    await expect(welcomeDialog(page)).toBeVisible();
-    await page.locator(WELCOME_LATER).click();
-    await expect(welcomeDialog(page)).toHaveCount(0);
-
-    // "Has been offered the tour" is not "has taken the tour": walking out of
-    // the modal spends the offer just as taking it does.
-    await page.goto(`${baseUrl}${DASHBOARD_URL}`);
-    await expect(page.locator(HELP_BUTTON)).toBeVisible();
-    await expect(welcomeDialog(page)).toHaveCount(0);
-  });
-
-  test("the help button brings it back", async ({ page, baseUrl }) => {
-    await openDashboard(page, baseUrl);
-    await markWelcomeSeen(page);
-    await page.goto(`${baseUrl}${DASHBOARD_URL}`);
-
-    // A user who has already been offered the tour gets no modal of their own…
-    await expect(page.locator(HELP_BUTTON)).toBeVisible();
-    await expect(welcomeDialog(page)).toHaveCount(0);
-
-    // …but the button in the corner is how they ask for it back, and the tour
-    // it starts is the same one.
-    await page.locator(HELP_BUTTON).click();
-    await expect(welcomeDialog(page)).toBeVisible();
+    await openWelcome(page);
 
     await page.locator(WELCOME_TAKE_TOUR).click();
     await expect(tourTooltip(page)).toBeVisible();
     await goToStep(page, PROFILE_STEP);
   });
 
-  test("closing a reopened welcome leaves the offer spent", async ({
-    page,
-    baseUrl,
-  }) => {
+  test("closing it leaves the page as it was", async ({ page, baseUrl }) => {
     await openDashboard(page, baseUrl);
-    await markWelcomeSeen(page);
-    await page.goto(`${baseUrl}${DASHBOARD_URL}`);
+    await openWelcome(page);
 
-    await page.locator(HELP_BUTTON).click();
-    await expect(welcomeDialog(page)).toBeVisible();
     await page.locator(WELCOME_LATER).click();
     await expect(welcomeDialog(page)).toHaveCount(0);
-
-    // Dismissing a modal that was asked for is a no-op on a flag that is
-    // already spent — and it must not put the modal back on the next visit.
-    await page.goto(`${baseUrl}${DASHBOARD_URL}`);
+    // Closing starts nothing, and the button that opened it is still there to
+    // ask again with.
+    await expect(tourTooltip(page)).toHaveCount(0);
     await expect(page.locator(HELP_BUTTON)).toBeVisible();
-    await expect(welcomeDialog(page)).toHaveCount(0);
+
+    await openWelcome(page);
   });
 });

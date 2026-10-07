@@ -39,7 +39,7 @@ import {
   RoomsType,
   RoomSearchArea,
 } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
@@ -357,17 +357,11 @@ self: FilesActionStore,
 export const closeMediaViewerAndRestoreUrlImpl = async (
 self: FilesActionStore
 )=> {
-  const { getFirstUrl, setMediaViewerData } = self.mediaViewerDataStore;
+  const { removeViewerHistoryEntry, setMediaViewerData } =
+    self.mediaViewerDataStore;
 
   setMediaViewerData({ visible: false, id: null });
-
-  try {
-    const url = await getFirstUrl();
-    if (!url) return;
-    window.history.pushState("", "", url);
-  } catch (error) {
-    console.error(error);
-  }
+  removeViewerHistoryEntry();
 };
 
 
@@ -588,7 +582,7 @@ self: FilesActionStore,
 
   const { isLoading, setIsSectionBodyLoading } = self.clientLoadingStore;
   const { isRecycleBinFolder } = self.treeFoldersStore;
-  const { setMediaViewerData, getUrl } = self.mediaViewerDataStore;
+  const { setMediaViewerData, changeUrl } = self.mediaViewerDataStore;
   const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
     self.dialogsStore;
 
@@ -706,10 +700,7 @@ self: FilesActionStore,
 
     if (isMediaOrImage) {
       setMediaViewerData({ visible: true, id });
-
-      const url = getUrl(id);
-
-      window.history.pushState("", "", url);
+      changeUrl(id);
 
       return;
     }

@@ -47,12 +47,12 @@ import {
 import { isElementInViewport } from "@docspace/shared/utils/common";
 import { EMPTY_ARRAY } from "@docspace/shared/constants";
 import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   useAttachHostFilesToChat,
   notifyAlreadyAttached,
   notifyAttachmentLimit,
-} from "@docspace/ui-kit/ai-agent/providers/files";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/files";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import ClientSearchProgress from "./ClientSearchProgress";
@@ -121,6 +121,7 @@ const SectionBodyContent = (props) => {
     setEditRoomGroupsDialogVisible,
     isFilterOrSearchActive,
     isRoomsFolder,
+    isFormsFolder,
     draggedFiles,
     setIsChatDropTarget,
   } = props;
@@ -359,11 +360,12 @@ const SectionBodyContent = (props) => {
       // panel is not a `.droppable`, so the move path below must not run either.
       if (isDragActive && draggedFiles.length > 0) {
         attachFilesToChat(draggedFiles)
-          .then(({ skippedOverLimit, duplicates }) => {
-            // Files that did not make it onto the composer — capped, or
-            // already there — must not vanish without a word.
+          .then(({ skippedOverLimit, duplicates, cap }) => {
+            // Files that did not make it onto the composer — capped or
+            // already there — must not vanish without a word. The cap is
+            // per section, so quote the one that applied.
             notifyAlreadyAttached(t, duplicates);
-            notifyAttachmentLimit(t, skippedOverLimit);
+            notifyAttachmentLimit(t, skippedOverLimit, cap);
           })
           .catch((error) => toastr.error(error));
       }
@@ -505,12 +507,21 @@ const SectionBodyContent = (props) => {
     return <KnowledgeDisabledContainer />;
 
   if (isEmptyFilesList) {
-    if (roomsFilterGroupId && !isFilterOrSearchActive && isRoomsFolder) {
+    if (
+      roomsFilterGroupId &&
+      !isFilterOrSearchActive &&
+      (isRoomsFolder || isFormsFolder)
+    ) {
       const onManageGroups = () => {
         setEditRoomGroupsDialogVisible?.(true);
       };
 
-      return <EmptyRoomGroupContainer onManageGroups={onManageGroups} />;
+      return (
+        <EmptyRoomGroupContainer
+          onManageGroups={onManageGroups}
+          isFormsSection={isFormsFolder}
+        />
+      );
     }
     return <EmptyContainer isEmptyPage={isEmptyPage} />;
   }
@@ -579,6 +590,7 @@ export default inject(
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
       isRoomsFolder: treeFoldersStore.isRoomsFolder,
+      isFormsFolder: treeFoldersStore.isFormsFolder,
       moveDragItems: filesActionsStore.moveDragItems,
       changeIndex: filesActionsStore.changeIndex,
       viewAs,

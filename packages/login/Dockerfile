@@ -13,7 +13,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install PNPM
-RUN npm install -g pnpm@11.19.0
+RUN npm install -g pnpm@12.4.1
 
 WORKDIR /app
 
@@ -23,12 +23,21 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 # Copy package files first for better layer caching
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
+# ui-kit and ai-chat ship as prebuilt tarballs at the repo root; every app's
+# `file:../../*.tgz` dependency resolves against these, so they must be present
+# before `pnpm install --frozen-lockfile` runs.
+COPY *.tgz ./
+
+# `--frozen-lockfile` installs every package the lockfile names, not just the
+# ones the workspace projects present in this image depend on. Two of them are
+# tarballs under packages/client, so they have to be here even though this image
+# never builds the client.
+COPY packages/client/*.tgz ./packages/client/
+
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
 COPY packages/login/package.json ./packages/login/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
-COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
-COPY libs/ui-kit/*.tgz ./libs/ui-kit/
 
 # Install dependencies
 # CI=true is scoped to this one command on purpose. It skips the
@@ -41,8 +50,9 @@ RUN CI=true pnpm install --frozen-lockfile
 COPY common/ ./common/
 COPY packages/login/ ./packages/login/
 COPY packages/shared/ ./packages/shared/
+# next.config.js requires scripts/ui-kit-dev.cjs at load time.
+COPY scripts/ ./scripts/
 COPY public/ ./public/
-COPY libs/ui-kit/ ./libs/ui-kit/
 
 # Run build:translations
 RUN pnpm --filter @docspace/login run build:translations

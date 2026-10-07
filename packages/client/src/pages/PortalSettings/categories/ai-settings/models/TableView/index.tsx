@@ -37,27 +37,48 @@ import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
-import { Text } from "@docspace/ui-kit/components/text";
+import { TableBody, TableContainer } from "@onlyoffice/apps-ui-kit/components/table";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 
 import { useTurnOffModelConfirmation } from "../TurnOffModelDialog";
+import {
+  buildCachePriceBreakdown,
+  CachePriceTooltip,
+  type TAiModelPrice,
+  type TCachePriceBreakdown,
+} from "../CachePriceTooltip";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import styles from "./ModelSettingsTable.module.scss";
 
-const TABLE_VERSION = "3";
+const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `aiModelsColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelAiModelsColumnsSize_ver-${TABLE_VERSION}`;
+const IMAGE_COLUMNS_SIZE = `aiImageModelsColumnsSize_ver-${TABLE_VERSION}`;
+const IMAGE_INFO_PANEL_COLUMNS_SIZE = `infoPanelAiImageModelsColumnsSize_ver-${TABLE_VERSION}`;
+
+type TModelRow = {
+  id: string;
+  alias: string;
+  image: string;
+  link?: string;
+  prices: {
+    key: string;
+    value: string;
+    breakdown?: TCachePriceBreakdown | null;
+  }[];
+};
 
 type ModelSettingsTableViewProps = {
   sectionWidth: number;
 
   userId?: string;
   aiToolsPrices?: ServicesStore["aiToolsPrices"];
-  formatAiModelsCurrency?: ServicesStore["formatAiModelsCurrency"];
+  formatAiModelPrice?: ServicesStore["formatAiModelPrice"];
+  aiModelsCurrencySymbol?: ServicesStore["aiModelsCurrencySymbol"];
   setAiModelAvailability?: ServicesStore["setAiModelAvailability"];
   aiModelAvailabilityMap?: ServicesStore["aiModelAvailabilityMap"];
   aiModelAvailabilityUpdatingSet?: ServicesStore["aiModelAvailabilityUpdatingSet"];
@@ -68,7 +89,8 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     sectionWidth,
     userId,
     aiToolsPrices,
-    formatAiModelsCurrency,
+    formatAiModelPrice = () => "",
+    aiModelsCurrencySymbol = "$",
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
@@ -76,38 +98,70 @@ const TableView = (props: ModelSettingsTableViewProps) => {
 
   const { t } = useTranslation(["Common"]);
 
-  const models = [
-    ...(aiToolsPrices?.chat ?? []),
-    ...(aiToolsPrices?.image ?? []),
-  ];
+  const chatModels = aiToolsPrices?.chat ?? [];
+  const imageModels = aiToolsPrices?.image ?? [];
 
   const { requestToggle, turnOffModelDialog } =
     useTurnOffModelConfirmation(setAiModelAvailability);
 
   const onToggle = (modelId: string, enabled: boolean) => {
-    const model = models.find((m) => m.id === modelId);
+    const model = [...chatModels, ...imageModels].find((m) => m.id === modelId);
 
     requestToggle({ id: modelId, title: model?.alias ?? modelId }, enabled);
   };
 
-  const ref = useRef<HTMLDivElement>(null);
-  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
-  const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
+  const cacheBreakdown = (price?: TAiModelPrice) =>
+    buildCachePriceBreakdown(price, aiModelsCurrencySymbol, formatAiModelPrice);
 
-  return (
-    <div className={styles.tableWrapper}>
-      <Text className={styles.introText}>
-        {t("Common:AIModelsDescription")}
-      </Text>
+  const chatRows: TModelRow[] = chatModels.map((m) => ({
+    id: m.id,
+    alias: m.alias,
+    image: m.image,
+    link: m.link,
+    prices: [
+      { key: "input", value: formatAiModelPrice(m.price?.prompt) },
+      { key: "output", value: formatAiModelPrice(m.price?.completion) },
+      {
+        key: "cachedInput",
+        value: formatAiModelPrice(m.price?.promptCacheRead),
+        breakdown: cacheBreakdown(m.price),
+      },
+    ],
+  }));
 
+  const imageRows: TModelRow[] = imageModels.map((m) => ({
+    id: m.id,
+    alias: m.alias,
+    image: m.image,
+    link: m.link,
+    prices: [
+      { key: "imageInput", value: formatAiModelPrice(m.price?.prompt) },
+      { key: "imageOutput", value: formatAiModelPrice(m.price?.image) },
+      { key: "output", value: formatAiModelPrice(m.price?.completion) },
+    ],
+  }));
+
+  const chatTableRef = useRef<HTMLDivElement>(null);
+  const imageTableRef = useRef<HTMLDivElement>(null);
+
+  const renderTable = (
+    rows: TModelRow[],
+    containerRef: React.RefObject<HTMLDivElement | null>,
+    isImage?: boolean,
+  ) => {
+    const columnStorageName = `${isImage ? IMAGE_COLUMNS_SIZE : COLUMNS_SIZE}=${userId}`;
+    const columnInfoPanelStorageName = `${isImage ? IMAGE_INFO_PANEL_COLUMNS_SIZE : INFO_PANEL_COLUMNS_SIZE}=${userId}`;
+
+    return (
       <TableContainer
-        forwardedRef={ref as React.RefObject<HTMLDivElement>}
+        forwardedRef={containerRef as React.RefObject<HTMLDivElement>}
         useReactWindow={false}
         className={styles.tableContainer}
       >
         <TableHeader
+          isImage={isImage}
           sectionWidth={sectionWidth}
-          containerRef={ref as React.RefObject<HTMLDivElement>}
+          containerRef={containerRef as React.RefObject<HTMLDivElement>}
           columnStorageName={columnStorageName}
           columnInfoPanelStorageName={columnInfoPanelStorageName}
           itemHeight={48}
@@ -117,38 +171,59 @@ const TableView = (props: ModelSettingsTableViewProps) => {
           columnStorageName={columnStorageName}
           columnInfoPanelStorageName={columnInfoPanelStorageName}
           itemHeight={48}
-          filesLength={models.length}
+          filesLength={rows.length}
           fetchMoreFiles={() => Promise.resolve()}
           hasMoreFiles={false}
-          itemCount={models.length}
+          itemCount={rows.length}
         >
-          {models.map((m) => (
+          {rows.map((row) => (
             <TableRow
-              key={m.id}
-              modelId={m.id}
-              title={m.alias}
-              inputPrice={
-                m.price?.prompt != null
-                  ? (formatAiModelsCurrency?.(m.price.prompt) ?? "")
-                  : ""
-              }
-              outputPrice={(() => {
-                const outputValue = m.price?.completion;
-
-                return outputValue != null
-                  ? (formatAiModelsCurrency?.(outputValue) ?? "")
-                  : "";
-              })()}
-              enabled={aiModelAvailabilityMap?.get(m.id) ?? true}
-              isUpdating={aiModelAvailabilityUpdatingSet?.has(m.id) ?? false}
+              key={row.id}
+              modelId={row.id}
+              title={row.alias}
+              prices={row.prices}
+              enabled={aiModelAvailabilityMap?.get(row.id) ?? true}
+              isUpdating={aiModelAvailabilityUpdatingSet?.has(row.id) ?? false}
               onToggle={onToggle}
-              image={m.image}
-              link={m.link}
+              image={row.image}
+              link={row.link}
             />
           ))}
         </TableBody>
       </TableContainer>
+    );
+  };
 
+  return (
+    <div className={styles.tableWrapper}>
+      <Text className={styles.introText}>
+        {t("Common:AIModelsDescription")}
+      </Text>
+
+      {chatRows.length ? (
+        <React.Fragment>
+          <Text fontSize="16px" fontWeight={700} className={styles.groupTitle}>
+            {t("Common:AITextModels")}
+          </Text>
+          {renderTable(chatRows, chatTableRef)}
+        </React.Fragment>
+      ) : null}
+
+      {imageRows.length ? (
+        <React.Fragment>
+          <Text
+            fontSize="16px"
+            fontWeight={700}
+            className={styles.groupTitle}
+            dataTestId="ai-image-models-title"
+          >
+            {t("Common:AIImageModels")}
+          </Text>
+          {renderTable(imageRows, imageTableRef, true)}
+        </React.Fragment>
+      ) : null}
+
+      <CachePriceTooltip />
       {turnOffModelDialog}
     </div>
   );
@@ -157,7 +232,8 @@ const TableView = (props: ModelSettingsTableViewProps) => {
 export default inject<TStore>(({ servicesStore, userStore }) => {
   const {
     aiToolsPrices,
-    formatAiModelsCurrency,
+    formatAiModelPrice,
+    aiModelsCurrencySymbol,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
@@ -168,7 +244,8 @@ export default inject<TStore>(({ servicesStore, userStore }) => {
   return {
     userId: user?.id,
     aiToolsPrices,
-    formatAiModelsCurrency,
+    formatAiModelPrice,
+    aiModelsCurrencySymbol,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,

@@ -39,10 +39,10 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { ProgressBar } from "@onlyoffice/apps-ui-kit/components/progress-bar";
 
 import CrossSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";

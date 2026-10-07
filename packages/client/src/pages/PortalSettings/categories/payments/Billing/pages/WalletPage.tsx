@@ -35,7 +35,7 @@
 
 import { useNavigate } from "react-router";
 
-import { Wallet } from "@docspace/ui-kit/billing";
+import { Wallet } from "@onlyoffice/apps-ui-kit/billing";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import config from "PACKAGE_FILE";

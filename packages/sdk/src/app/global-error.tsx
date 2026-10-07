@@ -37,7 +37,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
+import { ThemeProviderComponent } from "@onlyoffice/apps-ui-kit/components/theme-provider";
 import { Error520SSR } from "@docspace/shared/components/errors/Error520";
 import { getUser } from "@docspace/shared/api/people";
 import { getSettings } from "@docspace/shared/api/settings";

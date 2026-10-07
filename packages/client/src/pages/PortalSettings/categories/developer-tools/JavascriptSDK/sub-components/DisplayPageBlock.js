@@ -35,8 +35,8 @@
 
 import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Label } from "@docspace/ui-kit/components/label";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
 
 import { ControlsGroup } from "../presets/StyledPresets";
 

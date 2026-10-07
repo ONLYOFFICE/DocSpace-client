@@ -1,11 +1,23 @@
 packages:
   - packages/*
-  - libs/*
+
+# Flat node_modules. The Windows build agent copies the Next.js standalone
+# output with xcopy, which fails past MAX_PATH (260 chars) on the isolated
+# `.pnpm/<name>@<version>_<hash>/node_modules/...` paths. See .npmrc.
+#
+# DO NOT reword or reformat the line below. buildtools enables it for the
+# Windows build by uncommenting it in place, matching `^# *nodeLinker: *hoisted`
+# (install/win/frontend-build.bat). The match is silent when it fails: the build
+# stays green and the layout stays isolated, which is exactly how the previous
+# breakage happened after the equivalent line was dropped from .npmrc. A
+# --node-linker flag cannot replace this - pnpm relinks the tree to the layout
+# declared here before running a script.
+# nodeLinker: hoisted
 
 # Dependency install/postinstall scripts (pnpm >= 11 requires an explicit
 # decision per package; unreviewed packages fail the install).
 allowBuilds:
-  # No-op preinstall echo only (transitive via libs/ui-kit)
+  # No-op preinstall echo only (transitive via the ui-kit tarball dependency)
   '@google/genai': false
   # Native file watcher used by the Nx daemon
   '@parcel/watcher': true
@@ -21,19 +33,85 @@ allowBuilds:
   sharp: true
 
 minimumReleaseAgeExclude:
-  # Vendored tarball (libs/ui-kit/onlyoffice-ai-chat-*.tgz), never published to
-  # npm, so the age check 404s on the registry. Listed without a version so it
-  # survives tarball bumps; the artifact is committed and reviewed in ui-kit.
+  # Vendored tarball (onlyoffice-ai-chat-*.tgz at the repo root), never
+  # published to npm, so the age check 404s on the registry. Listed without a
+  # version so it survives tarball bumps; the artifact is committed in the
+  # ui-kit repo, which builds against it, and `pnpm run update-ui-kit` copies
+  # the version ui-kit requires here (`pnpm run update-ai-chat` bumps it alone).
   - '@onlyoffice/ai-chat'
+  # Vendored tarball (onlyoffice-apps-ui-kit-*.tgz at the repo root), never
+  # published to npm, so the age check 404s on the registry.
+  - '@onlyoffice/apps-ui-kit'
   - '@rolldown/binding-android-arm64@1.2.2'
   - '@rolldown/binding-linux-arm-gnueabihf@1.2.2'
   - '@rolldown/binding-linux-arm64-musl@1.2.2'
   - '@rolldown/binding-linux-s390x-gnu@1.2.2'
   - '@rolldown/binding-linux-x64-musl@1.2.2'
+  - '@rolldown/binding-openharmony-arm64@1.2.8'
+  # next 16.3.6 (critical RCE fixes GHSA-p293-qw3h-jr36, GHSA-2xp9-vwfh-vxw4)
+  # was younger than the release-age window; drop once it ages out
+  - '@next/bundle-analyzer@16.3.6'
+  - '@next/env@16.3.6'
+  - '@next/swc-darwin-arm64@16.3.6'
+  - '@next/swc-darwin-x64@16.3.6'
+  - '@next/swc-linux-arm64-gnu@16.3.6'
+  - '@next/swc-linux-arm64-musl@16.3.6'
+  - '@next/swc-linux-x64-gnu@16.3.6'
+  - '@next/swc-linux-x64-musl@16.3.6'
+  - '@next/swc-win32-arm64-msvc@16.3.6'
+  - '@next/swc-win32-x64-msvc@16.3.6'
+  - next@16.3.6
+
+# The peers an app has to carry for @onlyoffice/ai-chat. ai-chat declares the
+# libraries it is built on -- the assistant-ui widgets, the radix primitives,
+# codemirror, the LLM vendor SDKs -- as *optional peer* dependencies, and pnpm
+# never installs optional peers, so every app that renders the AI agent
+# (client, sdk) must declare them or ai-chat's imports resolve to nothing at
+# runtime. Nothing in those apps imports them by name; they are there for
+# ai-chat, and UnusedDependenciesTest recognises them as such by reading
+# ai-chat's peer list. The versions live here once, as `catalog:` entries in
+# the two manifests, instead of in two lists that DifferentDependencyVersionsTest
+# had to keep in step. A packageExtensions block adding them as ai-chat's own
+# dependencies does NOT work here: pnpm treats a name that is also an optional
+# peer as a peer, resolves it from the dependent when it can and drops it when
+# it cannot, so a fresh resolution silently loses the LLM SDKs.
+catalog:
+  '@anthropic-ai/sdk': '0.60.0'
+  '@assistant-ui/react': '^0.11.58'
+  '@assistant-ui/react-markdown': '0.11.10'
+  '@codemirror/lang-json': '6.0.2'
+  '@codemirror/state': '6.5.2'
+  '@codemirror/view': '6.38.2'
+  '@google/genai': '1.52.0'
+  '@mistralai/mistralai': '1.15.1'
+  '@radix-ui/react-dialog': '1.1.15'
+  '@radix-ui/react-dropdown-menu': '2.1.16'
+  '@radix-ui/react-slot': '1.2.3'
+  '@radix-ui/react-switch': '1.2.6'
+  '@radix-ui/react-tabs': '1.1.13'
+  '@radix-ui/react-toast': '1.2.15'
+  '@radix-ui/react-tooltip': '1.2.8'
+  'assistant-stream': '^0.2.47'
+  'class-variance-authority': '0.7.1'
+  'clsx': '2.1.1'
+  'codemirror': '6.0.2'
+  'framer-motion': '^12.43.0'
+  'openai': '5.23.2'
+  'react-shiki': '0.8.0'
+  'tailwind-merge': '3.6.0'
+  'zustand': '5.0.7'
+  # Not an ai-chat peer: openai lists zod as an optional peer. Left to pnpm,
+  # client resolved it to 4.5.4 and sdk to 3.25.76, which split ai-chat -- and
+  # with it ui-kit -- into two installed copies, so shared components rendered
+  # inside sdk read the theme from a different ThemeContext than the app around
+  # them. One declared version pins the peer for both. openai 5.23.2 asks for
+  # ^3.23.8, so `pnpm peers check` reports zod 4 as unmet; ai-chat never loads
+  # openai/helpers/zod, the only module that needs it.
+  'zod': '4.5.4'
 
 overrides:
   pnpm: ">=10.33.0"
-  # Single mobx instance across the workspace (libs/ui-kit submodule pins 6.13.5)
+  # Single mobx instance across the workspace (the ui-kit tarball pins 6.13.5)
   mobx: "6.16.1"
   mobx-react: "9.2.2"
   # Single react instance across the workspace; react-router 8 needs >=19.2.7
@@ -74,14 +152,40 @@ overrides:
   protobufjs: ">=8.6.0"
   follow-redirects: ">=1.16.0"
   # Security fixes
+  # Deliberately NOT overridden: decode-uri-component (GHSA-vcc3-ghjq-m6fr,
+  # moderate, exponential decoding of malformed percent-encoded input). Every
+  # patched version is ESM-only ("type": "module" since 0.4.0) and query-string
+  # 7.1.3 loads it with `require`, so forcing 0.5.0 makes the import return a
+  # namespace instead of a function -- it was tried, and four client tests
+  # failed with "decodeComponent is not a function". query-string 9 is ESM and
+  # could take it, but that is a two-major upgrade of a parser used across
+  # client and shared, and 9.x still declares ^0.4.1 itself. Revisit together.
   ws: ">=8.21.0"
   tmp: ">=0.2.6"
+  # @firebase/firestore (firebase 11.2.0 and 12.x) pins grpc-js ~1.9.0, and
+  # 1.9.x has no fix for GHSA-m9gg-hp2v-232j (patched only in >=1.13.6).
+  # Deliberately left on 1.9.x: firestore is never imported (shared/utils/
+  # firebase.ts loads remote-config, storage and database only), and the
+  # advisory is about server-side getAuthContext, which nothing here calls.
   "@grpc/grpc-js": "~1.9.16"
   form-data: ">=4.0.6"
   vite: ">=8.0.16"
   "@babel/core": ">=7.29.6 <8"
-  # Inherited libvips CVEs; pulled in transitively by next
-  sharp: ">=0.35.0"
-  # Guards against libs/ui-kit submodule drift until its pointer is bumped;
-  # every manifest now pins 8.3.0 directly, so this can be dropped afterwards
+  # Inherited libvips CVEs: next still asks for ^0.34.x, so the override lifts
+  # its transitive copy. @docspace/login depends on sharp directly for the
+  # link-preview image and pins this same version - keep the two in step, an
+  # open range here would silently replace that manifest's exact pin.
+  sharp: "0.35.5"
+  # Guards against ui-kit tarball drift until it is rebuilt/repacked; every
+  # manifest now pins 8.3.0 directly, so this can be dropped afterwards
   react-router: "8.3.0"
+  # nx (23.2.1 included) pins smol-toml 1.6.1 exactly; drop once nx lifts it
+  smol-toml: "^1.7.1"
+  # @vitest/ui still asks for fflate ^0.8.2; pins the patched 0.8.x
+  fflate: "^0.8.3"
+  # serve 14.2.6 (latest) still pins compression 1.8.1 exactly; drop once
+  # serve lifts it
+  compression: "^1.8.2"
+  # Deliberately NOT overridden: braces (GHSA-vfj7-8cjw-p6xm) has no patched
+  # release. It arrives only via shx > shelljs > fast-glob > micromatch, a
+  # build-script path that expands our own fixed glob patterns.

@@ -38,11 +38,11 @@
 import { useCallback, useEffect } from "react";
 
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
-import { Uploader } from "@docspace/ui-kit/uploader";
+import { Uploader } from "@onlyoffice/apps-ui-kit/uploader";
 import type {
   UploadProgressData,
   UploaderFilesSettings,
-} from "@docspace/ui-kit/uploader/Uploader.types";
+} from "@onlyoffice/apps-ui-kit/uploader/Uploader.types";
 import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";

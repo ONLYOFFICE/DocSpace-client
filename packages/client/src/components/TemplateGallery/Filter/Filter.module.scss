@@ -33,40 +33,18 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@docspace/ui-kit/styles/mixins";
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
 
 .filter {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 32px;
   padding-bottom: 22px;
 
-  .formOnlyFilters {
+  .searchRow {
+    position: relative;
     height: 32px;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 8px;
-
-    &:empty {
-      display: none;
-    }
-  }
-
-  .generalFilters {
-    height: 32px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: end;
-    gap: 8px;
-  }
-
-  .formOnlyFilters:empty + .generalFilters {
-    justify-content: space-between;
-    max-width: 100%;
   }
 
   .viewButton {
@@ -97,24 +75,6 @@
   }
 
   @include mixins.mobile {
-    flex-direction: column-reverse;
     padding-bottom: 16px;
-    gap: 8px;
-
-    .formOnlyFilters {
-      width: 100%;
-      padding-right: 0;
-    }
-
-    .generalFilters {
-      max-width: 100%;
-    }
-  }
-
-  // RTL support
-  :global([dir="rtl"]) & {
-    @include mixins.mobile {
-      flex-direction: column;
-    }
   }
 }

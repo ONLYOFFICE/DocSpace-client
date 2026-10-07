@@ -39,10 +39,14 @@ import { makeAutoObservable, runInAction } from "mobx";
 import SocketHelper, {
   SocketEvents,
   TOptSocket,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import api from "../api";
-import { setWithCredentialsStatus } from "../api/client";
+import {
+  getAuthToken,
+  signOutOAuth,
+  setWithCredentialsStatus,
+} from "../api/client";
 import { loginWithTfaCode } from "../api/user";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
@@ -55,8 +59,8 @@ import {
 } from "../utils/common";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import { isOAuthFrame } from "../utils/oauthToken";
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
-import { AI_SEARCH, AI_TOOLS } from "@docspace/ui-kit/billing/constants";
+import { getCookie, setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { AI_SEARCH, AI_TOOLS } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import { Nullable, TI18n } from "../types";
@@ -190,6 +194,18 @@ class AuthStore {
 
     await this.settingsStore?.init();
 
+    if (
+      isOAuthFrame() &&
+      getAuthToken() &&
+      !this.isAuthenticated &&
+      !this.settingsStore?.isPortalDeactivate
+    ) {
+      frameCallEvent({
+        event: "onAuthError",
+        data: { code: "UNAUTHORIZED", message: "unauthorized" },
+      });
+    }
+
     const requests = [];
 
     const isPortalDeactivated = this.settingsStore?.isPortalDeactivate;
@@ -228,7 +244,14 @@ class AuthStore {
                 this.isAuthenticated &&
                 !skipRequest
               ) {
-                this.settingsStore?.getAIConfig();
+                // /ai/config sits behind `[AiFeature]` like the rest of the AI
+                // API and answers 403 while the portal's AI switch is off. The
+                // config describes an AI setup such a portal is not running,
+                // so skip the probe instead of logging a 403 on every boot;
+                // turning the switch back on refetches it (see the AI services
+                // setting).
+                if (this.settingsStore?.aiServicesEnabled)
+                  this.settingsStore?.getAIConfig();
                 this.settingsStore?.getAdditionalResources();
               }
             } else {
@@ -516,9 +539,11 @@ class AuthStore {
       const w = window as unknown as { __redirectToLogin?: boolean };
       w.__redirectToLogin = true;
     }
+    const isOAuth = isOAuthFrame();
+
     let ssoLogoutUrl;
     try {
-      ssoLogoutUrl = await api.user.logout();
+      ssoLogoutUrl = isOAuth ? undefined : await api.user.logout();
     } catch {
       ssoLogoutUrl = undefined;
     }
@@ -536,9 +561,8 @@ class AuthStore {
         await import("../services/encryption/secret-storage");
       SecretStorage.lock();
       if (userId) {
-        const { forgetDeviceUnlock } = await import(
-          "../services/encryption/device-unlock-store"
-        );
+        const { forgetDeviceUnlock } =
+          await import("../services/encryption/device-unlock-store");
         await forgetDeviceUnlock(userId);
       }
     } catch {
@@ -552,6 +576,11 @@ class AuthStore {
     if (isFrame) frameCallEvent({ event: "onSignOut" });
 
     if (ssoLogoutUrl) return ssoLogoutUrl;
+
+    if (isOAuth) {
+      signOutOAuth();
+      return;
+    }
 
     if (!reset) return;
 

@@ -3,7 +3,7 @@
   "content": "Leave agent",
   "content_en_sha1_hash": "9923909f26b0352a8fd0d58d8a7c07d0d615967d",
   "created_at": "2026-08-31T18:23:13.455Z",
-  "updated_at": "2026-08-31T18:57:12.549Z",
+  "updated_at": "2026-09-14T19:16:02.573Z",
   "comment": {
     "text": "Dialog title, checkbox label, and menu item label used when exiting an AI Agent's space.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 909,
+      "line_number": 907,
       "context": "},\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: self.onLeaveRoom,",
       "module": "/packages/client"
     },

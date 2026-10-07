@@ -118,7 +118,7 @@
         "env": {
           "APP_EDITION": "developer",
           "APP_EDITOR_TEST": "true",
-          "APP_EDITOR_VERSION": "10.0.0.2",
+          "APP_EDITOR_VERSION": "10.0.0.133",
           "SKIP_CLIENT": "true",
           "STORYBOOK": "false"
         }
@@ -142,7 +142,7 @@
         "env": {
           "APP_EDITION": "developer",
           "APP_EDITOR_TEST": "true",
-          "APP_EDITOR_VERSION": "10.0.0.2",
+          "APP_EDITOR_VERSION": "10.0.0.133",
           "SKIP_CLIENT": "true",
           "STORYBOOK": "false"
         }
@@ -186,7 +186,7 @@
       "options": {
         "env": {
           "APP_EDITOR_TEST": "true",
-          "APP_EDITOR_VERSION": "10.0.0.2",
+          "APP_EDITOR_VERSION": "10.0.0.133",
           "SKIP_CLIENT": "true",
           "STORYBOOK": "false",
           "APP_EDITION": "developer"
@@ -253,21 +253,6 @@
       }
     },
     {
-      "label": "Frontend | update ui-kit lock",
-      "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm run update-ui-kit-lock",
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
       "label": "Frontend | update translation-app lock",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run update-translation-app-lock",
@@ -285,7 +270,7 @@
     {
       "label": "Frontend | update all lock files",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm run wipe ; pnpm install ; pnpm run update-ui-kit-lock ; pnpm run update-translation-app-lock",
+      "command": "cd ${workspaceFolder} ; pnpm run wipe ; pnpm install ; pnpm run update-translation-app-lock",
       "group": {
         "kind": "build",
         "isDefault": false
@@ -301,6 +286,36 @@
       "label": "Frontend | update deps",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm update --recursive",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update ui-kit",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run update-ui-kit",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update ai-chat",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run update-ai-chat",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -346,6 +361,21 @@
       "label": "Frontend | start",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run start",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start (ui-kit source)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run start:ui-kit-src",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -451,21 +481,6 @@
       "label": "Frontend | deploy run",
       "type": "shell",
       "command": "cd ${workspaceFolder}/../publish/web ; trap 'kill 0' EXIT ; (cd login && node server.js) & (cd editor && node server.js) & (cd management && node server.js) & (cd sdk && node server.js) & npx serve client -s -l 5001",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Frontend | storybook (ui-kit)",
-      "type": "shell",
-      "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm run storybook",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -676,21 +691,6 @@
       "label": "Test | Vitest:unit",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm test",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Test | Vitest:unit:ui-kit",
-      "type": "shell",
-      "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm test",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1634,7 +1634,7 @@
     {
       "label": "Translation App | update metadata",
       "type": "shell",
-      "command": "node '${workspaceFolder}/common/scripts/clean-empty-locales.js' && cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage && npm run generate-auto-comments-metadata",
+      "command": "node '${workspaceFolder}/common/scripts/clean-empty-locales.js' && cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage",
       "group": "build",
       "presentation": {
         "reveal": "always",

@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Předplatné bude automaticky obnoveno <1>dne {{date}}</1>",
   "TopUpAndBuy": "Doplnit a koupit",
   "TopUpHint": "Vaše peněženka bude doplněna o <1>{{amount}}</1> a vybrané předplatné bude automaticky zakoupeno. Částky doplnění se zaokrouhlují nahoru na celý dolar.",
+  "TopUpWalletHint": "Pro vybrané předplatné {{service}} není dostatek kreditů. Doplňte peněženku a poté se vraťte a dokončete nákup.",
   "TotalDueTodayTooltip": "Dnes platíte pouze za vybraný počet uživatelů za zbývající dny do data fakturace. Od příštího fakturačního cyklu vám bude účtována celá částka jednou za cyklus k vašemu pravidelnému datu fakturace.",
   "TotalMonthly": "Celkem měsíčně",
   "TrialAvailable": "Je k dispozici jednoměsíční zkušební verze zdarma. Není vyžadována platební karta.",

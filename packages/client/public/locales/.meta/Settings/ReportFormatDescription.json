@@ -1,0 +1,29 @@
+{
+  "key_path": "ReportFormatDescription",
+  "content": "An XLSX report keeps only the most recent events when there are too many of them. Choose CSV to export every event.",
+  "content_en_sha1_hash": "2dc2420d72f7456e60df2af6affba005cea3aaa0",
+  "created_at": "2026-10-01T16:17:04.325Z",
+  "updated_at": "2026-10-01T16:17:16.639Z",
+  "comment": {
+    "text": "Hint under the Download report button and its file format selector on the Login History and Audit Trail pages of portal security settings, below the note about where the report is saved. Explains that the XLSX format may drop older events from a large report, while CSV exports all of them; XLSX and CSV are file format names and stay untranslated.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T16:17:16.639Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/sub-components/HistoryMainContent.js",
+      "line_number": 255,
+      "context": "displaySelectedOption\n isDisabled={isSettingNotPaid || isLoadingDownloadReport}\n />\n <span className=\"download-report_description\">\n <span>{downloadReportDescription}</span>\n <span>{t(\"Settings:ReportFormatDescription\")}</span>\n </span>\n </div>\n </div>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

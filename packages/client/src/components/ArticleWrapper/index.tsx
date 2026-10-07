@@ -36,8 +36,8 @@
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 
-import Article from "@docspace/ui-kit/components/article";
-import { ArticleProps } from "@docspace/ui-kit/components/article/Article.types";
+import Article from "@onlyoffice/apps-ui-kit/components/article";
+import { ArticleProps } from "@onlyoffice/apps-ui-kit/components/article/Article.types";
 import { getUserType } from "@docspace/shared/utils/common";
 
 import { useSectionNavigation } from "../../contexts/SectionNavigationContext";
@@ -75,8 +75,6 @@ export default inject<TStore>(
 
     const { primaryProgressDataStore, secondaryProgressDataStore } =
       uploadDataStore;
-
-    const { email, displayName } = user || {};
 
     const isAdmin = user?.isAdmin || user?.isOwner;
 
@@ -130,8 +128,6 @@ export default inject<TStore>(
       getActions,
 
       currentTariffPlanTitle,
-      email,
-      displayName,
 
       zendeskKey,
       isMobileArticle,

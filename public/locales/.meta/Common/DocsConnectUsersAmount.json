@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/SuccessCard.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/sub-components/SuccessCard.tsx",
       "line_number": 113,
       "context": "</Text>\n </>\n ) : isDocsConnect ? (\n <>\n <Text as=\"span\" className={styles.adminsAmount}>\n {t(\"DocsConnectUsersAmount\", {\n count: docsConnectUsers,\n })}\n </Text>\n <Text fontSize=\"14px\" className={styles.tariffActivationDetails}>\n {t(\"DocsConnectPricePerMonth\", {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

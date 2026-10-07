@@ -95,7 +95,7 @@ const FormsTour = ({
   hasItems,
   hasForms,
 }: FormsTourProps) => {
-  const { t } = useTranslation(["FormsTour", "FilesTour", "Common"]);
+  const { t, ready } = useTranslation(["FormsTour", "FilesTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
@@ -247,6 +247,12 @@ const FormsTour = ({
     if (tourDemo.isActive) return;
     if (isMobileView || firstLoad || isSectionLoading || !isFormsRoot) return;
     if (!user) return;
+    // The stand-in titles below are read once and frozen into the demo: the
+    // next run of this effect finds the demo active and returns. `FormsTour` is
+    // not one of the preloaded namespaces (SRC_DIR/i18n.js), so with
+    // `useSuspense: false` it can still be a render behind the rest of the
+    // page — and a demo armed then keeps the raw keys for as long as it is up.
+    if (!ready) return;
 
     // Whatever the audience. A form filler with no spaces yet has the most to
     // gain from this and the least without it: their empty section renders
@@ -312,6 +318,7 @@ const FormsTour = ({
     isFormsRoot,
     user,
     reloadSection,
+    ready,
     t,
   ]);
 

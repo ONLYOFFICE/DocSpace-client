@@ -3,7 +3,7 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2026-08-26T16:06:02.243Z",
+  "updated_at": "2026-10-06T10:42:37.476Z",
   "comment": {
     "text": "This is a dialog title for creating various entities like agents, groups, or rooms. It appears at the top of the respective creation dialogs.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 447,
+      "line_number": 449,
       "context": "{roomParams.type && !isTemplate ? (\n <ModalDialog.Footer>\n <Button\n id=\"shared_create-room-modal_submit\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n size=\"normal\"\n primary\n scale\n isDisabled={isRoomTitleChanged || isWrongTitle}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/GroupIconDialog.tsx",
-      "line_number": 289,
+      "line_number": 291,
       "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:Create\")}\n onClick={handleSubmit}\n isDisabled={!groupName.trim()}\n isLoading={isLoading}\n testId=\"submit_group_icon_button\"\n />",
       "module": "/packages/client"
     },
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
-      "line_number": 260,
+      "line_number": 265,
       "context": "id={\n createEntityType\n ? `shared_create-${createEntityType}-modal_submit`\n : undefined\n }\n label={isCreateDialog ? t(\"Common:Create\") : t(\"Common:SaveButton\")}\n size=\"normal\"\n type=\"submit\"\n scale\n primary\n isLoading={isDisabled}",
       "module": "/packages/client"
     },
@@ -103,7 +103,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 584,
+      "line_number": 596,
       "context": "\"manual-backup_buttons\",\n )}\n >\n <Button\n id=\"create-button\"\n label={copyButtonLabel ?? t(\"Common:Create\")}\n onClick={onMakeTemporaryBackup}\n primary\n isDisabled={mainDisabled || isToppingUp}\n isLoading={isToppingUp}\n size={buttonSize}",
       "module": "/packages/shared"
     }

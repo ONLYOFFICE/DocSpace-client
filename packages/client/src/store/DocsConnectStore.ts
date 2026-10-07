@@ -63,13 +63,13 @@ import type {
   TDocsConnectInfo,
   TDocsConnectConfigUpdate,
 } from "@docspace/shared/api/docs-connect/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   openStripeCheckout,
   pollUntil,
-} from "@docspace/ui-kit/billing/utils/stripe-flow";
-import type { TStripeCheckoutDeps } from "@docspace/ui-kit/billing/utils/stripe-flow";
-import { DOCS_CONNECT } from "@docspace/ui-kit/billing/constants";
+} from "@onlyoffice/apps-ui-kit/billing/utils/stripe-flow";
+import type { TStripeCheckoutDeps } from "@onlyoffice/apps-ui-kit/billing/utils/stripe-flow";
+import { DOCS_CONNECT } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
@@ -393,10 +393,21 @@ class DocsConnectStore {
       },
     );
 
+    let isDelayedPaymentMethod = false;
+
     await pollUntil(async () => {
       const payer = await this.currentTariffStatusStore?.fetchPayerInfo(true);
+      isDelayedPaymentMethod = payer?.isDelayedPaymentMethod === true;
       return !!payer?.email;
     }, signal);
+
+    if (signal.aborted) return null;
+
+    if (isDelayedPaymentMethod) {
+      this.closeBuyPlan();
+      this.refreshPortalState();
+      return { isDelayedPaymentMethod };
+    }
 
     await pollUntil(async () => {
       let info: Nullable<TDocsConnectInfo> = null;
@@ -419,11 +430,11 @@ class DocsConnectStore {
       return activated;
     }, signal);
 
-    if (signal.aborted) return false;
+    if (signal.aborted) return null;
 
     this.closeBuyPlan();
     this.refreshPortalState();
-    return true;
+    return { isDelayedPaymentMethod };
   };
 
   calculateDevPack = async (quantity: number) =>

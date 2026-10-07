@@ -131,6 +131,7 @@
   "TariffPlanAutoRenewed": "Abonelik <1>{{date}} tarihinde</1> otomatik olarak yenilenecek",
   "TopUpAndBuy": "Yükle ve Satın Al",
   "TopUpHint": "Cüzdanınız <1>{{amount}}</1> kadar yüklenecek ve seçilen abonelik otomatik olarak satın alınacaktır. Yükleme tutarları bir sonraki tam dolara yukarı yuvarlanır.",
+  "TopUpWalletHint": "Seçilen {{service}} aboneliği için yeterli kredi yok. Cüzdanınıza para yükleyin, ardından satın alma işlemini tamamlamak için geri dönün.",
   "TotalDueTodayTooltip": "Bugün yalnızca faturalandırma tarihinize kadar kalan günler için seçilen kullanıcı sayısı kadar ödeme yaparsınız. Bundan sonra, düzenli faturalandırma tarihinizde her faturalandırma döneminde bir kez tam tutar tahsil edilecektir.",
   "TotalMonthly": "Aylık toplam",
   "TrialAvailable": "Ücretsiz bir aylık deneme sunulmaktadır. Kredi kartı gerekmez.",

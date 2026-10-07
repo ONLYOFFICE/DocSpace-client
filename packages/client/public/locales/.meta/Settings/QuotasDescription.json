@@ -3,7 +3,7 @@
   "content": "Set storage limits for users and rooms.",
   "content_en_sha1_hash": "8065762064ea6f49c791270e7d0b81e3516518c7",
   "created_at": "2026-08-31T18:23:41.904Z",
-  "updated_at": "2026-08-31T20:21:30.596Z",
+  "updated_at": "2026-09-14T20:38:41.443Z",
   "comment": {
     "text": "Subtext in the storage management settings explaining the purpose of the quotas configuration.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
-      "line_number": 92,
+      "line_number": 98,
       "context": "isPaidBadge\n />\n ) : null}\n </div>\n <Text className=\"quotas_description\">\n {t(\"Settings:QuotasDescription\")}{\" \"}\n {storageManagementUrl ? (\n <Link\n tag=\"a\"\n isHovered={false}\n target=\"_blank\"",
       "module": "/packages/client"
     }

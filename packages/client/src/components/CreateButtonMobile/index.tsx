@@ -39,7 +39,7 @@ import { useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { DeviceType } from "@docspace/shared/enums";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import { createGroup } from "SRC_DIR/helpers/contacts";
 import { getSectionCreateButton } from "SRC_DIR/helpers/getSectionCreateButton";

@@ -209,7 +209,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
 
   return {
     // The Overview (dashboard) page: "create with AI" starters. The dashboard
-    // has no folder context, so every chip targets the user's My documents
+    // has no folder context, so every chip targets the Files section
     // ("create it in Files"). All rows are for any user — guests never reach
     // them because the chat itself is unavailable to guests.
     overview: [

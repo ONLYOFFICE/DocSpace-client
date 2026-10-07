@@ -1,0 +1,115 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+
+import type { TCascadeConflict, TCascadeItemType } from "../../types";
+import ApplyMetadataDialog from "./ApplyMetadataDialog";
+import CascadeProgress from "./CascadeProgress";
+import styles from "../../Metadata.module.scss";
+
+type CascadeBlockProps = {
+  itemType: TCascadeItemType;
+  templateName: string;
+  isRunning: boolean;
+  isApplied: boolean;
+  progress: number;
+  onApply: (conflict: TCascadeConflict) => Promise<boolean>;
+};
+
+const CascadeBlock = ({
+  itemType,
+  templateName,
+  isRunning,
+  isApplied,
+  progress,
+  onApply,
+}: CascadeBlockProps) => {
+  const { t } = useTranslation(["Metadata"]);
+  const [isDialogVisible, setIsDialogVisible] = useState(false);
+
+  const titles: Record<TCascadeItemType, string> = {
+    folder: t("Metadata:ApplyToFolderItems"),
+    room: t("Metadata:ApplyToRoomItems"),
+  };
+
+  const descriptions: Record<TCascadeItemType, string> = {
+    folder: t("Metadata:ApplyToFolderItemsDescription"),
+    room: t("Metadata:ApplyToRoomItemsDescription"),
+  };
+
+  return (
+    <div
+      className={styles.cascadeBlock}
+      data-testid="info_panel_metadata_cascade"
+    >
+      <div className={styles.cascadeToggle}>
+        <ToggleButton
+          className={styles.toggle}
+          isChecked={isApplied}
+          isDisabled={isApplied}
+          onChange={() => setIsDialogVisible(true)}
+          dataTestId="info_panel_metadata_cascade_toggle"
+        />
+      </div>
+      <div className={styles.cascadeContent}>
+        <div className={styles.cascadeText}>
+          <Text fontWeight={600} lineHeight="20px">
+            {titles[itemType]}
+          </Text>
+          <Text fontSize="12px" lineHeight="16px">
+            {descriptions[itemType]}
+          </Text>
+        </div>
+        {isRunning ? <CascadeProgress progress={progress} /> : null}
+      </div>
+
+      {isDialogVisible ? (
+        <ApplyMetadataDialog
+          itemType={itemType}
+          templateName={templateName}
+          onApply={onApply}
+          onClose={() => setIsDialogVisible(false)}
+        />
+      ) : null}
+    </div>
+  );
+};
+
+export default CascadeBlock;

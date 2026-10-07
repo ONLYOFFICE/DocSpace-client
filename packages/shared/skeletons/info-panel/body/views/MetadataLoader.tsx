@@ -33,45 +33,37 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
-import MembersLoader from "./views/MembersLoader";
-import HistoryLoader from "./views/HistoryLoader";
-import DetailsLoader from "./views/DetailsLoader";
-import UsersLoading from "./views/UsersLoader";
-import GalleryLoader from "./views/GalleryLoader";
-import NoItemLoader from "./views/NoItemLoader";
-import SeveralItemsLoader from "./views/SeveralItemsLoader";
-import GroupsLoader from "./views/GroupsLoader";
-import AIChatLoader from "./views/AIChatLoader";
-import MetadataLoader from "./views/MetadataLoader";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
-import type { InfoPanelViewLoaderProps } from "./body.types";
+import styles from "../Body.module.scss";
 
-const InfoPanelViewLoader = ({ view }: InfoPanelViewLoaderProps) => {
-  switch (view) {
-    case "members":
-      return <MembersLoader />;
-    case "history":
-      return <HistoryLoader />;
-    case "details":
-      return <DetailsLoader />;
-    case "gallery":
-      return <GalleryLoader />;
-    case "users":
-      return <UsersLoading />;
-    case "groups":
-      return <GroupsLoader />;
-    case "noItem":
-      return <NoItemLoader />;
-    case "severalItems":
-      return <SeveralItemsLoader />;
-    case "aiChat":
-      return <AIChatLoader />;
-    case "metadata":
-      return <MetadataLoader />;
-    default:
-      return <DetailsLoader />;
-  }
-};
+const PROPERTIES = [
+  { label: "88px", value: "164px" },
+  { label: "56px", value: "120px" },
+  { label: "72px", value: "144px" },
+];
 
-export default InfoPanelViewLoader;
+const MetadataLoader = () => (
+  <div className={styles.metadataLoader} data-testid="metadata-loader">
+    <div className={styles.metadataLoaderHeader}>
+      <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
+      <RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
+    </div>
+
+    <div className={styles.metadataLoaderCard}>
+      <div className={styles.metadataLoaderCardHeader}>
+        <RectangleSkeleton width="120px" height="16px" borderRadius="3px" />
+        <RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
+      </div>
+
+      {PROPERTIES.map(({ label, value }) => (
+        <div key={label} className={styles.metadataLoaderProperty}>
+          <RectangleSkeleton width={label} height="16px" borderRadius="3px" />
+          <RectangleSkeleton width={value} height="20px" borderRadius="3px" />
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+export default MetadataLoader;

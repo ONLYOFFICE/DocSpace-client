@@ -33,45 +33,34 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
-import MembersLoader from "./views/MembersLoader";
-import HistoryLoader from "./views/HistoryLoader";
-import DetailsLoader from "./views/DetailsLoader";
-import UsersLoading from "./views/UsersLoader";
-import GalleryLoader from "./views/GalleryLoader";
-import NoItemLoader from "./views/NoItemLoader";
-import SeveralItemsLoader from "./views/SeveralItemsLoader";
-import GroupsLoader from "./views/GroupsLoader";
-import AIChatLoader from "./views/AIChatLoader";
-import MetadataLoader from "./views/MetadataLoader";
+import { useTranslation } from "react-i18next";
 
-import type { InfoPanelViewLoaderProps } from "./body.types";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-const InfoPanelViewLoader = ({ view }: InfoPanelViewLoaderProps) => {
-  switch (view) {
-    case "members":
-      return <MembersLoader />;
-    case "history":
-      return <HistoryLoader />;
-    case "details":
-      return <DetailsLoader />;
-    case "gallery":
-      return <GalleryLoader />;
-    case "users":
-      return <UsersLoading />;
-    case "groups":
-      return <GroupsLoader />;
-    case "noItem":
-      return <NoItemLoader />;
-    case "severalItems":
-      return <SeveralItemsLoader />;
-    case "aiChat":
-      return <AIChatLoader />;
-    case "metadata":
-      return <MetadataLoader />;
-    default:
-      return <DetailsLoader />;
-  }
+import styles from "../../Metadata.module.scss";
+
+const CascadeProgress = ({ progress }: { progress: number }) => {
+  const { t } = useTranslation(["Metadata"]);
+
+  return (
+    <div className={styles.cascadeProgress}>
+      <Text fontSize="12px" lineHeight="16px">
+        {t("Metadata:ApplyingMetadata")}
+      </Text>
+      <div
+        className={styles.progressTrack}
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={progress}
+      >
+        <div
+          className={styles.progressFill}
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+    </div>
+  );
 };
 
-export default InfoPanelViewLoader;
+export default CascadeProgress;

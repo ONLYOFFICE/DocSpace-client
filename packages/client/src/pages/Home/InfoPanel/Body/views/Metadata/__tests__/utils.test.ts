@@ -52,6 +52,7 @@ import {
   createTemplateForm,
   filterTemplatesByName,
   formatMetadataValue,
+  getCascadeState,
   getChangedValues,
   getCustomFieldChanges,
   getEntryKind,
@@ -316,5 +317,42 @@ describe("custom fields", () => {
     expect(
       isValidCustomFieldDraft(newDraft("new-4", "Region", " "), fields, []),
     ).toBe(false);
+  });
+});
+
+describe("cascade", () => {
+  const running = { id: "a", progress: 40, isCompleted: false };
+
+  it("shows a run on the template that started it", () => {
+    const context = { appliedIds: new Set([1]), runningTemplateId: 1 };
+
+    expect(getCascadeState(running, { ...context, templateId: 1 })).toEqual({
+      isRunning: true,
+      isApplied: true,
+      progress: 40,
+    });
+    expect(getCascadeState(running, { ...context, templateId: 2 })).toEqual({
+      isRunning: false,
+      isApplied: false,
+      progress: 40,
+    });
+  });
+
+  it("shows a run of an unknown template on every template", () => {
+    expect(getCascadeState(running, { templateId: 2 }).isRunning).toBe(true);
+  });
+
+  it("keeps a template applied once its cascade has run", () => {
+    expect(
+      getCascadeState(
+        { id: "a", progress: 100, isCompleted: true },
+        { templateId: 1, appliedIds: new Set([1]) },
+      ),
+    ).toEqual({ isRunning: false, isApplied: true, progress: 100 });
+    expect(getCascadeState(null, { templateId: 1 })).toEqual({
+      isRunning: false,
+      isApplied: false,
+      progress: 0,
+    });
   });
 });

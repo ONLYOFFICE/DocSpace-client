@@ -472,7 +472,9 @@ const FilesView = ({
                   ? "members"
                   : currentView === InfoPanelView.infoHistory
                     ? "history"
-                    : "details"
+                    : currentView === InfoPanelView.infoMetadata
+                      ? "metadata"
+                      : "details"
               }
               data-testid="info_panel_files_view_loader"
             />

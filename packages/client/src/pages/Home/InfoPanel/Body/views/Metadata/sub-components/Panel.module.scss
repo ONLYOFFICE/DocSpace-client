@@ -169,3 +169,47 @@
   flex-direction: column;
   gap: 12px;
 }
+
+.applyDialog {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-block-end: 8px;
+}
+
+.infoBlock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background-color: var(--info-block-background);
+}
+
+.warningIcon {
+  flex-shrink: 0;
+
+  path {
+    fill: var(--status-warning);
+  }
+}
+
+.conflictActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.conflictOption {
+  display: flex;
+  flex-direction: column;
+
+  :global(.radio-button_text) {
+    line-height: 20px;
+  }
+}
+
+.optionDescription {
+  padding-inline-start: 24px;
+  color: var(--param-description-color);
+}

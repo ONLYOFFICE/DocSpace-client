@@ -55,6 +55,11 @@ import type {
 import type { TMetadataSelection } from "../types";
 import { getEntryKind } from "../utils";
 
+type TLoadedMetadata = {
+  entryKey: string;
+  metadata: TEntryMetadata | null;
+};
+
 type TEntryUpdate = {
   cmd?: string;
   type?: string;
@@ -64,27 +69,34 @@ type TEntryUpdate = {
 export const useEntryMetadata = (item: TMetadataSelection) => {
   const kind = getEntryKind(item);
   const entryId = Number(item.id);
+  const entryKey = `${kind}-${entryId}`;
 
-  const [metadata, setMetadata] = useState<TEntryMetadata | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loaded, setLoaded] = useState<TLoadedMetadata | null>(null);
   const lastRequest = useRef(0);
+
+  const isLoading = loaded?.entryKey !== entryKey;
+  const metadata = loaded?.entryKey === entryKey ? loaded.metadata : null;
 
   const loadMetadata = useCallback(async () => {
     const request = ++lastRequest.current;
+    const key = `${kind}-${entryId}`;
 
     try {
       const data = await getEntryMetadata(kind, entryId);
-      if (request === lastRequest.current) setMetadata(data);
+      if (request === lastRequest.current) {
+        setLoaded({ entryKey: key, metadata: data });
+      }
     } catch (e) {
-      if (request === lastRequest.current) toastr.error(e as string);
-    } finally {
-      if (request === lastRequest.current) setIsLoading(false);
+      if (request !== lastRequest.current) return;
+
+      toastr.error(e as string);
+      setLoaded((prev) =>
+        prev?.entryKey === key ? prev : { entryKey: key, metadata: null },
+      );
     }
   }, [kind, entryId]);
 
   useEffect(() => {
-    setMetadata(null);
-    setIsLoading(true);
     loadMetadata();
   }, [loadMetadata]);
 
@@ -106,7 +118,7 @@ export const useEntryMetadata = (item: TMetadataSelection) => {
     try {
       const data = await action();
       lastRequest.current += 1;
-      setMetadata(data);
+      setLoaded({ entryKey, metadata: data });
       return true;
     } catch (e) {
       toastr.error(e as string);

@@ -155,3 +155,66 @@
   flex-wrap: wrap;
   gap: 4px;
 }
+
+.cascadeBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 6px;
+  background-color: var(--info-block-background);
+}
+
+.cascadeToggle {
+  display: flex;
+  flex-shrink: 0;
+  padding-block: 2px;
+
+  .toggle {
+    position: static;
+    gap: 0;
+  }
+}
+
+.cascadeContent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.cascadeText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cascadeProgress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progressTrack {
+  position: relative;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 2px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--icon-button-color);
+    opacity: 0.4;
+  }
+}
+
+.progressFill {
+  position: relative;
+  height: 100%;
+  border-radius: 2px;
+  background-color: var(--accent-main);
+  transition: width 0.3s ease-out;
+}

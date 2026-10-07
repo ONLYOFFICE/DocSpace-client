@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -41,7 +41,10 @@ import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 
 import ConfirmDeleteDialog from "SRC_DIR/components/ConfirmDeleteDialog";
 
+import { useLoader } from "../../helpers/useLoader";
+
 import { useEntryMetadata } from "./hooks/useEntryMetadata";
+import { useMetadataCascade } from "./hooks/useMetadataCascade";
 import type {
   TAddMetadataActions,
   TMetadataDeletion,
@@ -55,6 +58,7 @@ import {
   isEmptyMetadata,
   sortTemplates,
 } from "./utils";
+import CascadeBlock from "./sub-components/CascadeBlock";
 import CustomFieldsCard from "./sub-components/CustomFieldsCard";
 import CustomFieldsPanel from "./sub-components/CustomFieldsPanel";
 import MetadataEmpty from "./sub-components/MetadataEmpty";
@@ -78,18 +82,27 @@ const Metadata = ({ selection }: MetadataProps) => {
     saveCustomFields,
   } = useEntryMetadata(selection);
 
+  const canEdit = canEditMetadata(selection);
+  const itemType = getMetadataItemType(selection);
+  const isCascadable = itemType !== "file" && canEdit;
+
+  const cascade = useMetadataCascade(
+    isCascadable ? Number(selection.id) : null,
+  );
+
   const [panel, setPanel] = useState<TMetadataPanel | null>(null);
   const [deletion, setDeletion] = useState<TMetadataDeletion | null>(null);
 
-  if (isLoading) return <InfoPanelViewLoader view="details" />;
+  const { showLoading } = useLoader({ isFirstLoading: isLoading });
+
+  if (showLoading) return <InfoPanelViewLoader view="metadata" />;
+  if (isLoading) return null;
 
   if (!metadata) {
     return (
       <Text className={styles.error}>{t("Common:SomethingWentWrong")}</Text>
     );
   }
-
-  const canEdit = canEditMetadata(selection);
 
   const addActions: TAddMetadataActions | undefined = canEdit
     ? {
@@ -116,35 +129,54 @@ const Metadata = ({ selection }: MetadataProps) => {
 
   const closePanel = () => setPanel(null);
 
+  const getDeletionDescription = () => {
+    if (deletion?.type === "customFields") {
+      return t("Metadata:DeleteCustomFieldsDescription");
+    }
+
+    return itemType === "file"
+      ? t("Metadata:DeleteTemplateMetadataDescription")
+      : t("Metadata:DeleteFolderTemplateMetadataDescription");
+  };
+
   return (
     <div className={styles.metadata} data-testid="info_panel_metadata">
       {isEmptyMetadata(metadata) ? (
-        <MetadataEmpty
-          itemType={getMetadataItemType(selection)}
-          addActions={addActions}
-        />
+        <MetadataEmpty itemType={itemType} addActions={addActions} />
       ) : (
         <>
           <MetadataHeader addActions={addActions} />
 
           <div className={styles.blocks}>
             {sortTemplates(metadata.templates).map((template) => (
-              <TemplateCard
-                key={template.id}
-                template={template}
-                actions={
-                  canEdit && template.visible
-                    ? {
-                        onEdit: () => setPanel({ type: "template", template }),
-                        onDelete: () =>
-                          setDeletion({
-                            type: "template",
-                            templateId: template.id,
-                          }),
-                      }
-                    : undefined
-                }
-              />
+              <Fragment key={template.id}>
+                {isCascadable && template.visible ? (
+                  <CascadeBlock
+                    itemType={itemType}
+                    templateName={template.name}
+                    {...cascade.getTemplateState(template.id)}
+                    onApply={(conflict) =>
+                      cascade.start(template.id, conflict)
+                    }
+                  />
+                ) : null}
+                <TemplateCard
+                  template={template}
+                  actions={
+                    canEdit && template.visible
+                      ? {
+                          onEdit: () =>
+                            setPanel({ type: "template", template }),
+                          onDelete: () =>
+                            setDeletion({
+                              type: "template",
+                              templateId: template.id,
+                            }),
+                        }
+                      : undefined
+                  }
+                />
+              </Fragment>
             ))}
 
             {metadata.customFields.length ? (
@@ -189,11 +221,7 @@ const Metadata = ({ selection }: MetadataProps) => {
       {deletion ? (
         <ConfirmDeleteDialog
           title={t("Metadata:DeleteMetadataTitle")}
-          description={
-            deletion.type === "template"
-              ? t("Metadata:DeleteTemplateMetadataDescription")
-              : t("Metadata:DeleteCustomFieldsDescription")
-          }
+          description={getDeletionDescription()}
           onDelete={onDelete}
           onClose={() => setDeletion(null)}
         />

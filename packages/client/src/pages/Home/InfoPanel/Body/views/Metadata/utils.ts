@@ -45,6 +45,7 @@ import type {
   TEntryMetadataTemplate,
   TMetadataEntryKind,
   TMetadataFieldOption,
+  TMetadataOperation,
   TMetadataTemplate,
   TMetadataValueRequest,
 } from "@docspace/shared/api/metadata/types";
@@ -59,6 +60,7 @@ import {
 import { isFile, isRoom } from "@docspace/shared/utils/typeGuards";
 
 import type {
+  TCascadeContext,
   TCustomFieldDraft,
   TMetadataItemType,
   TMetadataSelection,
@@ -85,6 +87,22 @@ export const canEditMetadata = (item: TMetadataSelection) => {
 
 export const isEmptyMetadata = ({ templates, customFields }: TEntryMetadata) =>
   !templates.length && !customFields.length;
+
+export const getCascadeState = (
+  operation: TMetadataOperation | null,
+  { templateId, appliedIds, runningTemplateId }: TCascadeContext,
+) => {
+  const isRunning =
+    !!operation &&
+    !operation.isCompleted &&
+    (runningTemplateId === undefined || runningTemplateId === templateId);
+
+  return {
+    isRunning,
+    isApplied: isRunning || !!appliedIds?.has(templateId),
+    progress: operation?.progress ?? 0,
+  };
+};
 
 export const canAddCustomField = (count: number) =>
   count < METADATA_CUSTOM_FIELDS_MAX;

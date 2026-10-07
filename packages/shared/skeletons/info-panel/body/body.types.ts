@@ -43,5 +43,6 @@ export type InfoPanelViewLoaderProps = {
     | "severalItems"
     | "groups"
     | "users"
-    | "aiChat";
+    | "aiChat"
+    | "metadata";
 };

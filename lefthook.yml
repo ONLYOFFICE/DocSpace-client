@@ -23,7 +23,7 @@ pre-push:
       skip_on_fail: false
       fail_text: See report ./common/tests/reports/tests-results.html
     unit-tests:
-      run: pnpm run test
+      run: CI=true FORCE_COLOR=0 pnpm run test
       skip_empty: true
       follow: true
       skip_on_fail: false

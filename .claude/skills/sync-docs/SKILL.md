@@ -7,16 +7,47 @@ argument-hint: "<area or rule name>"
 # Docs sync
 
 Three places describe the same behavior and age independently: the code,
-the `.claude/rules/*.md` files, and Storybook prose — any `.mdx` page
-the ui-kit Storybook glob picks up (see `libs/ui-kit/.storybook/main.ts`;
-that includes the unattached pages under `libs/ui-kit/docs/`), plus story
-descriptions in `*.stories.tsx`. Storybook lives only in `libs/ui-kit`
-today — `packages/shared` keeps a `storybook` script but has no
-`.storybook` config, so it contributes stories only if that changes.
-This skill finds where they disagree,
-reports the findings, and — only after the user approves — fixes the
-stale side in the right repository. Never edit anything before the
-report is shown and answered.
+the `.claude/rules/*.md` files, and Storybook prose. The Storybook lives
+in `docspace-ui-kit-react`, a separate repository consumed here only as
+a prebuilt tarball — its prose is any `.mdx` page the glob in that
+repo's `.storybook/main.ts` picks up (including the unattached pages
+under its `docs/`), plus story descriptions in `*.stories.tsx`. Pages
+parked as `*.bak` next to a component (the billing pages are, while
+hidden from Storybook) still make claims and are still checked.
+`packages/shared` keeps a `storybook` script but has no `.storybook`
+config, so it contributes stories only if that changes. This skill
+finds where the three disagree, reports the findings, and — only after
+the user approves — fixes the stale side in the right repository. Never
+edit anything before the report is shown and answered.
+
+## 0. Locate the ui-kit clone
+
+```bash
+node .claude/scripts/ui-kit/locate.mjs --status [--uikit-src <path>]
+```
+
+It prints the clone's path (`--uikit-src`, then `DOCSPACE_UI_KIT_SRC`,
+then its gitignored `config.local.json`, then
+`../../docspace-ui-kit-react` next to this repo), both branches with
+their release lines, whether the clone is clean, and a `status:` line —
+or exits 1 when no clone is found. Two outcomes need the user, both
+asked with the interactive option dialog, never in prose:
+
+- **exit 1** — ask where the `docspace-ui-kit-react` clone is: "enter
+  the path" first, "check the rule against the code only, no
+  Storybook" second; offer to remember the answer with
+  `node .claude/scripts/ui-kit/locate.mjs --save <path>`. Without the
+  clone, Storybook claims are simply not collected; say so in the
+  report.
+- **`status: MISMATCH`** — the clone is on another release line than
+  the client, so its Storybook prose describes another release. Ask:
+  "use the clone as it is", "switch the clone to <client line>",
+  "point to another clone". Switch only on that explicit choice and
+  only when the status says the clone is clean; a dirty clone is never
+  checked out from under the user.
+
+The report's first line names the clone's path and branch, so the
+reader knows which Storybook it was checked against.
 
 The typical failure mode: a docs page keeps claiming an action is
 role-restricted long after the code opened it to everyone.
@@ -36,7 +67,8 @@ role-restricted long after the code opened it to everyone.
   built-in "Other" cover the rest. Never start a full sweep of every
   rule unless the user explicitly asks for it.
 - Resolve the area from the argument: the matching rule file(s) in
-  `.claude/rules/`, and the area's Storybook files in `libs/ui-kit/**`.
+  `.claude/rules/`, and the area's Storybook files inside the ui-kit
+  clone.
 - Extract every checkable claim each document makes: "X is payer-only",
   "route Y redirects to Z", "component hides A when B". Skip pure
   style/convention notes — only behavior claims are checkable.
@@ -89,9 +121,10 @@ until the user answers.
 ## 4. Fix what was approved, in the place it belongs
 
 - `.claude/rules/*.md` — edit here, in this repo.
-- `.mdx` / `*.stories.tsx` under `libs/ui-kit/` — edit in the
-  submodule working tree and say the commit belongs to the submodule's
-  own repository, not to this one.
+- `.mdx` / `*.stories.tsx` — edit in the ui-kit clone and say the
+  commit belongs to the `docspace-ui-kit-react` repository, on its own
+  branch, not to this one; nothing here records it beyond a later
+  tarball bump.
 - Rules that defer to an external source of truth — report the
   mismatch to the user; the source is not ours to edit.
 - **code suspect** findings go to the user as potential bugs, with the

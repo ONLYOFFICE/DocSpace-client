@@ -5,7 +5,6 @@ paths:
   - "packages/client/src/components/MainBar/**"
   - "packages/shared/routes/Route.private.tsx"
   - "packages/shared/store/CurrentTariffStatusStore.ts"
-  - "libs/ui-kit/billing/**"
   - "packages/client/__tests__/payments.spec.ts"
   - "packages/client/__tests__/wallet-low-balance.spec.ts"
   - "packages/client/__tests__/billing-access.spec.ts"
@@ -36,7 +35,8 @@ scope here. The room-role side of permissions lives in
 
 ## The payer is an email, not a role
 
-`getIsPayer` (`libs/ui-kit/billing/utils/paymentSelectors.ts`) simply
+`getIsPayer` (`billing/utils/paymentSelectors.ts` in the separate
+`docspace-ui-kit-react` repository, consumed here as a tarball) simply
 compares the signed-in user's email with `walletCustomerEmail` returned
 by `GET /portal/payment/customerinfo`. This has three consequences:
 

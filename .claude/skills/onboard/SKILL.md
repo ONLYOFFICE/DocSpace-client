@@ -343,15 +343,41 @@ this section says otherwise.
   ```bash
   node .claude/skills/onboard/collect-changes.mjs \
     [--base master] [--locales <en-json,...>] [--key-filter <regex>] \
-    [--uikit <path,...>] <client pathspec>...
+    [--uikit <path,...>] [--uikit-src <path>] <client pathspec>...
   ```
 
   Resolve the area's pathspecs from its rule file or a quick survey.
   Pass the area's `en` namespaces via `--locales`; for shared
   namespaces (`Common`) always add a `--key-filter`, or the digest
-  drowns in unrelated keys. The script handles the ui-kit submodule
-  range itself — including the "submodule absent at base" case, which
-  means client code **moved** there and is not a behavior change.
+  drowns in unrelated keys.
+- **ui-kit is a separate repository**, consumed here as a tarball, so
+  its half of the digest comes from a clone of `docspace-ui-kit-react`
+  on disk. The script finds it through
+  `.claude/scripts/ui-kit/locate.mjs` (`--uikit-src`, then
+  `DOCSPACE_UI_KIT_SRC`, then its gitignored `config.local.json`, then
+  `../../docspace-ui-kit-react` next to this repo) and walks the same
+  base ref name there — the two repositories mirror branch names. The
+  digest's ui-kit section opens with the clone's path, its branch, the
+  client's branch and a `status:` line; two statuses need the user, and
+  both are asked with the interactive option dialog, never in prose:
+  - **clone not found** — ask where the `docspace-ui-kit-react` clone
+    is: "enter the path" first, "continue without ui-kit (the page will
+    cover the client only)" second. Rerun with `--uikit-src <path>` and
+    offer to remember it with
+    `node .claude/scripts/ui-kit/locate.mjs --save <path>` (local,
+    never committed).
+  - **`status: MISMATCH`** — the clone sits on another release line
+    than the client (`master` vs `release/v4.0.0`), so its history
+    would describe the wrong release. Ask: "use the clone as it is",
+    "switch the clone to <client line>", "point to another clone".
+    Switch only on that explicit choice, and only when the status line
+    says the clone is clean — a dirty clone is never checked out from
+    under the user; say so and offer the other two options.
+
+  The page's changes section names the clone's path and branch in its
+  first line, so the reader knows which ui-kit history it reflects.
+  `--uikit <path,...>` scopes the ui-kit log to folders inside the
+  clone (`billing`, `components/...`).
 - **The base is the state users actually run** — usually
   `origin/master` or the latest release tag, never a local `master`
   (may be years stale) and never the previous release *branch* taken on

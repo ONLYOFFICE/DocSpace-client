@@ -19,12 +19,14 @@
  *                         (case-insensitive); useful for huge namespaces
  *   --shots <path,...>    screenshot baseline dirs (repeatable; default:
  *                         packages/client/__tests__/screenshots)
- *   --uikit <path,...>    pathspecs inside libs/ui-kit to scope its log
- *                         (repeatable; default: whole submodule)
+ *   --uikit <path,...>    pathspecs inside the ui-kit clone to scope its log
+ *                         (repeatable; default: the whole clone)
+ *   --uikit-src <path>    the docspace-ui-kit-react clone; default resolution
+ *                         is in .claude/scripts/ui-kit/locate.mjs
  *   --deep <path,...>     print the full base->worktree diff of these
  *                         paths (capped per path) for close reading
  *
- * The BASE STATE (locales, screenshots, ui-kit gitlink, hotspots) is read
+ * The BASE STATE (locales, screenshots, tarball version, hotspots) is read
  * from the base ref's tip - what that release actually holds - while the
  * commit list walks merge-base..HEAD (the work new on this side). Pick the
  * base as the state users actually run (a release tag, origin/master), not
@@ -33,12 +35,17 @@
  * Output: markdown on stdout — base info, scoped commits, hotspots (most
  * churned files; READ THEIR DIFFS before judging what changed), uncommitted
  * changes, locale key delta (added/removed/changed), screenshot baseline
- * delta, deep diffs, and the ui-kit submodule range with its own log and
- * hotspots.
+ * delta, deep diffs, and the ui-kit range. ui-kit is a separate repository
+ * consumed here as a tarball, so its range comes from a clone on disk (found
+ * by .claude/scripts/ui-kit/locate.mjs) and is walked against the same base
+ * ref name there - the two repositories mirror branch names. Without a clone
+ * the section is skipped with a note, never guessed.
  */
 
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
+
+import { statusLines, uiKitStatus } from "../../scripts/ui-kit/locate.mjs";
 
 const LIST_CAP = 200;
 
@@ -49,6 +56,7 @@ const uikitPaths = [];
 const deepPaths = [];
 let base = "master";
 let keyFilter = null;
+let uikitSrc;
 const shots = [];
 
 for (let i = 0; i < args.length; i++) {
@@ -58,6 +66,7 @@ for (let i = 0; i < args.length; i++) {
   else if (a === "--key-filter") keyFilter = new RegExp(args[++i], "i");
   else if (a === "--shots") shots.push(...args[++i].split(","));
   else if (a === "--uikit") uikitPaths.push(...args[++i].split(","));
+  else if (a === "--uikit-src") uikitSrc = args[++i];
   else if (a === "--deep") deepPaths.push(...args[++i].split(","));
   else if (a.startsWith("--")) fail(`Unknown flag: ${a}`);
   else paths.push(a);
@@ -103,7 +112,7 @@ const mbDate = git(["show", "-s", "--format=%ad", "--date=short", mergeBase]);
 const baseDate = git(["show", "-s", "--format=%ad", "--date=short", baseTip]);
 
 console.log(`# Change digest: ${base} -> ${branch} (working tree)`);
-console.log(`\n- base state: \`${base}\` tip = \`${baseTip.slice(0, 11)}\` (${baseDate}) — locales, screenshots, gitlink and hotspots compare against THIS`);
+console.log(`\n- base state: \`${base}\` tip = \`${baseTip.slice(0, 11)}\` (${baseDate}) — locales, screenshots, tarball version and hotspots compare against THIS`);
 console.log(`- merge-base with HEAD: \`${mergeBase.slice(0, 11)}\` (${mbDate}) — the commit list walks from here`);
 if (baseTip !== mergeBase)
   console.log(`- NOTE: the base tip is not the merge-base — the base line has its own commits; state diffs may include their reversals`);
@@ -273,63 +282,88 @@ if (deepPaths.length) {
   }
 }
 
-// --- ui-kit submodule ------------------------------------------------------
+// --- ui-kit (separate repository) ------------------------------------------
 
-section("ui-kit submodule (libs/ui-kit)");
-const gitlink = git(["ls-tree", baseTip, "libs/ui-kit"], { allowFail: true });
-if (!gitlink) {
-  console.log(
-    `Submodule does not exist at the base (${base}). The whole libs/ui-kit tree ` +
-      "is new in this range - code in it likely MOVED here from packages/client, " +
-      "so a client-side deletion may not be a behavior change.",
-  );
-} else {
-  const oldSha = gitlink.split(/\s+/)[2];
-  const newSha = git(["-C", "libs/ui-kit", "rev-parse", "HEAD"]);
-  console.log(`- at base: \`${oldSha.slice(0, 11)}\`\n- now: \`${newSha.slice(0, 11)}\``);
-  if (oldSha !== newSha) {
-    const subLog = git(
-      [
-        "-C",
-        "libs/ui-kit",
-        "log",
-        "--no-merges",
-        "--date=short",
-        "--pretty=%h|%ad|%s",
-        `${oldSha}..${newSha}`,
-        "--",
-        ...(uikitPaths.length ? uikitPaths : ["."]),
-      ],
-      { allowFail: true },
-    );
-    if (subLog == null) {
-      console.log(
-        "(cannot walk the submodule range - the base commit may not be fetched in libs/ui-kit)",
-      );
-    } else if (subLog) {
-      const lines = subLog.split("\n");
-      console.log(`\n${lines.length} submodule commits in range:\n`);
-      capped(lines, (l) => {
-        const [h, d, ...s] = l.split("|");
-        return `- \`${h}\` ${d} ${s.join("|")}`;
-      });
-    } else {
-      console.log("(no submodule commits touch the given paths)");
-    }
-    hotspots(
-      git(
-        ["-C", "libs/ui-kit", "diff", "--numstat", oldSha, "--", ...(uikitPaths.length ? uikitPaths : ["."])],
-        { allowFail: true },
-      ),
-      "ui-kit scope",
-    );
+section("ui-kit (separate repository, consumed as a tarball)");
+
+const TARBALL = "onlyoffice-apps-ui-kit.tgz";
+
+function tarballVersion(bytes) {
+  if (!bytes) return null;
+  try {
+    const pkg = execFileSync("tar", ["-xOf", "-", "package/package.json"], {
+      input: bytes,
+      encoding: "utf8",
+    });
+    return JSON.parse(pkg).version ?? null;
+  } catch {
+    return null;
   }
 }
-const subStatus = git(
-  ["-C", "libs/ui-kit", "status", "--porcelain", "--", ...(uikitPaths.length ? uikitPaths : ["."])],
-  { allowFail: true },
+
+function baseTarball() {
+  try {
+    // Silent when the base predates the tarball (a pre-split master).
+    return execFileSync("git", ["show", `${baseTip}:${TARBALL}`], {
+      maxBuffer: 256 * 1024 * 1024,
+      stdio: ["ignore", "pipe", "ignore"],
+    });
+  } catch {
+    return null;
+  }
+}
+
+const fmtVersion = (v) => (v ? `\`${v}\`` : "(none - no tarball at that commit)");
+console.log(
+  `- tarball version: at base ${fmtVersion(tarballVersion(baseTarball()))}, now ${fmtVersion(
+    tarballVersion(existsSync(TARBALL) ? readFileSync(TARBALL) : null),
+  )} - informational only; the version is not bumped per change, so the range below comes from the clone`,
 );
-if (subStatus) {
-  console.log("\nUncommitted in the submodule:");
-  console.log(subStatus);
+
+const uk = uiKitStatus({ explicit: uikitSrc });
+if (uk.error) {
+  console.log(`\n${uk.error}\n\nui-kit section skipped - this digest covers the client only.`);
+} else {
+  const ukGit = (argv, opts) => git(["-C", uk.path, ...argv], opts);
+  // The same lines `locate.mjs --status` prints; a MISMATCH is the skill's cue to ask.
+  statusLines(uk).forEach((l) => console.log(`- ${l}`));
+  const ukBaseTip = ukGit(["rev-parse", "--verify", "--quiet", `${base}^{commit}`], { allowFail: true });
+  if (!ukBaseTip) {
+    console.log(
+      `\nBase ref \`${base}\` does not exist in the clone - fetch it there, or pass a --base both repositories have. ui-kit section skipped.`,
+    );
+  } else {
+    const ukMergeBase = ukGit(["merge-base", base, "HEAD"]);
+    const ukHead = ukGit(["rev-parse", "--short", "HEAD"]);
+    const ukBranch = ukGit(["rev-parse", "--abbrev-ref", "HEAD"]);
+    console.log(
+      `- base state: \`${base}\` tip = \`${ukBaseTip.slice(0, 11)}\`; merge-base with HEAD: \`${ukMergeBase.slice(0, 11)}\`; head: \`${ukHead}\` on \`${ukBranch}\``,
+    );
+    const scope = uikitPaths.length ? uikitPaths : ["."];
+    const ukLog = ukGit([
+      "log",
+      "--no-merges",
+      "--date=short",
+      "--pretty=%h|%ad|%s",
+      `${ukMergeBase}..HEAD`,
+      "--",
+      ...scope,
+    ]);
+    if (ukLog) {
+      const lines = ukLog.split("\n");
+      console.log(`\n${lines.length} ui-kit commits in range, newest first:\n`);
+      capped(lines, (l) => {
+        const [h, d, ...t] = l.split("|");
+        return `- \`${h}\` ${d} ${t.join("|")}`;
+      });
+    } else {
+      console.log("\n(no ui-kit commits touch the given paths)");
+    }
+    hotspots(ukGit(["diff", "--numstat", ukBaseTip, "--", ...scope], { allowFail: true }), "ui-kit scope");
+    const ukStatus = ukGit(["status", "--porcelain", "--", ...scope]);
+    if (ukStatus) {
+      console.log("\nUncommitted in the ui-kit clone:");
+      console.log(ukStatus);
+    }
+  }
 }

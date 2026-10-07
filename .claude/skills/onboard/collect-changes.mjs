@@ -252,8 +252,6 @@ if (shotDiff) {
   console.log("(no baseline changes)");
 }
 
-// --- ui-kit submodule ------------------------------------------------------
-
 // --- deep diffs -------------------------------------------------------------
 
 if (deepPaths.length) {

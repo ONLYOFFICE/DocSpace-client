@@ -45,17 +45,24 @@ git diff <base>...HEAD
 
 Three dots — our side only, not the base's own movement.
 
-**A ui-kit change shows up here only as a swapped tarball.** A stat like
+**A ui-kit change shows up here only as a version bump.** A stat like
 
 ```
-onlyoffice-apps-ui-kit.tgz    | Bin
-pnpm-lock.yaml                | 4 +-
+packages/client/package.json  | 2 +-
+...                             (the other five apps alike)
+pnpm-lock.yaml                | 40 +-
 ```
 
-means the change under review lives in `docspace-ui-kit-react` and is opaque in
-this diff — there is nothing reviewable on this side beyond the version bump.
-Review it in a checkout of that repository instead; ui-kit code can never be
-fixed here.
+where the manifests only move `@onlyoffice/apps-ui-kit` (or
+`@onlyoffice/ai-chat`) to a new version, means the change under review lives in
+`docspace-ui-kit-react` and is opaque in this diff — there is nothing
+reviewable on this side beyond the version bump. Review it in a checkout of
+that repository instead; ui-kit code can never be fixed here.
+
+Flag a manifest that points either package at `file:../../<name>.tgz`, or a
+root `*.tgz` added to the branch: that is the local tarball mode of
+`pnpm run update-ui-kit` / `update-ai-chat`, meant for trying an unpublished
+build, and committing it ships an artifact no registry release backs.
 
 ## Step 3 — read the changed files whole, then trace reachability
 

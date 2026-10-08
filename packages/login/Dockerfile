@@ -27,8 +27,8 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
 
 # `--frozen-lockfile` installs every package the lockfile names, not just the
-# ones the workspace projects present in this image depend on. Two of them are
-# tarballs under packages/client, so they have to be here even though this image
+# ones the workspace projects present in this image depend on. One of them is a
+# tarball under packages/client, so it has to be here even though this image
 # never builds the client.
 COPY packages/client/*.tgz ./packages/client/
 

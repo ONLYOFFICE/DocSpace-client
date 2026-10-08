@@ -36,7 +36,7 @@
 
 /**
  * Starts the usual dev servers with the client resolving @onlyoffice/apps-ui-kit
- * from a checkout instead of the installed tarball, so edits in ui-kit show up
+ * from a checkout instead of the installed package, so edits in ui-kit show up
  * through HMR with no build, pack or install in between.
  *
  * It exists at the repo root because that is where the dev servers are actually

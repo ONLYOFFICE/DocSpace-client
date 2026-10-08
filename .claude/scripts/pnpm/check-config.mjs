@@ -50,7 +50,7 @@ const UPDATE = argv.has("--update-baseline");
 
 /**
  * Every pnpm-workspace.yaml that belongs to this repo. ui-kit is a separate
- * repository consumed as a prebuilt tarball, so its config is checked there.
+ * repository consumed as a published npm package, so its config is checked there.
  */
 const CONFIGS = ["pnpm-workspace.yaml"];
 

@@ -74,7 +74,6 @@
   "ItemsCount": "Број ставки на једној страници",
   "ItemsCountDescription": "Можете да одредите број датотека / фолдера приказаних на једној страници, као и да одредите која страница ц́е почети да се приказује",
   "JavaScriptCodeDescription": "Уграђивање радног простора или његовог дела помоћу JavaScript. Копирајте JavaScript код испод.",
-  "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Ограничење временским периодом",
   "LinkSetDescription": "Овај линк је заштићен са {{parameter}}. Да бисте конфигурисали овај линк,",
   "LinkSetDescription2": "{{parameter1}} и {{parameter2}} су постављени за овај линк. Да бисте их конфигурисали,",

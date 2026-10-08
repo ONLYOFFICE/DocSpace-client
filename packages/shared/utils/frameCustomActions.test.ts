@@ -41,6 +41,7 @@ import {
   getVisibleCreateActions,
   getVisibleGroupContextActions,
   sendCustomAction,
+  getCustomActionIconProps,
 } from "./frameCustomActions";
 
 const config: TFrameCustomActions = {
@@ -147,6 +148,35 @@ describe("sendCustomAction", () => {
     expect(frameCallEvent).toHaveBeenCalledWith({
       event: "onCustomAction",
       data: { action: "any", type: "create", folderId: 4 },
+    });
+  });
+});
+
+describe("getCustomActionIconProps", () => {
+  it("keeps a missing icon as an empty string", () => {
+    expect(getCustomActionIconProps(undefined)).toEqual({ icon: "" });
+  });
+
+  it("keeps a data url as the icon to inline", () => {
+    const icon = "data:image/svg+xml;base64,PHN2Zy8+";
+
+    expect(getCustomActionIconProps(icon)).toEqual({ icon });
+  });
+
+  it("adds an image node for an icon url", () => {
+    const { icon, iconNode } = getCustomActionIconProps(
+      "https://host.example/icons/star.svg",
+    );
+
+    expect(icon).toBe("https://host.example/icons/star.svg");
+    expect(iconNode).toMatchObject({
+      type: "img",
+      props: {
+        src: "https://host.example/icons/star.svg",
+        alt: "",
+        width: 16,
+        height: 16,
+      },
     });
   });
 });

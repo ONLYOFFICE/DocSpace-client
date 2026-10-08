@@ -58,6 +58,7 @@ import type { EditorAction } from "../_store/FormsNavigationStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
+import { toFrameEntity } from "@/utils/frameEntity";
 
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
@@ -88,6 +89,14 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         return;
       }
 
+      if (sdkConfig?.events?.onEditorOpen) {
+        frameCallEvent({
+          event: "onEditorOpen",
+          data: { ...toFrameEntity(file), action },
+        });
+        return;
+      }
+
       const openInSameTab =
         sdkConfig?.openEditorInSameTab ??
         filesSettingsStore.filesSettings?.openEditorInSameTab ??
@@ -112,6 +121,7 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     },
     [
       sdkConfig?.events?.onFileManagerClick,
+      sdkConfig?.events?.onEditorOpen,
       sdkConfig?.openEditorInSameTab,
       filesSettingsStore.filesSettings?.openEditorInSameTab,
       openEditor,

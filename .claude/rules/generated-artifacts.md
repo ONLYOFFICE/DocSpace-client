@@ -30,10 +30,10 @@ run the command and `git add` every output before committing.
 
 ui-kit keeps its own copies of the biome plugins and its own lockfile, but they
 are generated and committed **in the `docspace-ui-kit-react` repository**, not
-here. This repo consumes ui-kit only as a prebuilt tarball
-(`onlyoffice-apps-ui-kit.tgz`), so nothing on this side writes into it and
-nothing here needs to be regenerated when ui-kit changes — swapping the tarball
-and re-running `pnpm install` is the whole client-side update.
+here. This repo consumes ui-kit only as the published npm package, so nothing
+on this side writes into it and nothing here needs to be regenerated when
+ui-kit changes — `pnpm -r update @onlyoffice/apps-ui-kit@^<version>` is the
+whole client-side update.
 
 ui-kit's `publishConfig.exports` is no longer generated: a single `./*`
 wildcard replaced the ~900 exact keys and the script that wrote them, because

@@ -74,7 +74,6 @@
   "ItemsCount": "ຈໍານວນລາຍການ",
   "ItemsCountDescription": "ທ່ານສາມາດກໍານົດຈໍານວນຂອງໄຟລ໌ / ໂຟນເດີທີ່ສະແດງຢູ່ໃນຫນ້າຫນຶ່ງ, ເຊັ່ນດຽວກັນກັບລະບຸວ່າຫນ້າໃດທີ່ຈະເລີ່ມສະແດງ",
   "JavaScriptCodeDescription": "ການຝັງພື້ນທີ່ເຮັດວຽກ ຫຼື ສ່ວນໜຶ່ງຂອງມັນໂດຍໃຊ້ JavaScript. ຄັດລອກລະຫັດ JavaScript ດ້ານລຸ່ມນີ້.",
-  "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "ຈໍາກັດໂດຍໄລຍະເວລາ",
   "LinkSetDescription": "ລິ້ງນີ້ຖືກປົກປ້ອງດ້ວຍ {{parameter}}. ເພື່ອຕັ້ງຄ່າການເຊື່ອມຕໍ່,",
   "LinkSetDescription2": "A {{parameter1}} ແລະ {{parameter2}} ຖືກຕັ້ງໄວ້ສຳລັບລິ້ງນີ້. ເພື່ອ​ຕັ້ງ​ຄ່າ​ມັນ​,",

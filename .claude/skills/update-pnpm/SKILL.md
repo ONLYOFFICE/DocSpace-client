@@ -185,8 +185,8 @@ deleting the `.bak` files is the portable option. Check the result either way �
 a mis-quoted `-i` silently writes to a file named `''`.
 
 The ui-kit files live in `docspace-ui-kit-react`, a **separate repository**
-that is not checked out inside this one — this repo consumes only its prebuilt
-tarball. Edit, lock, commit and push there; nothing on the client side records
+that is not checked out inside this one — this repo consumes only its published
+npm package. Edit, lock, commit and push there; nothing on the client side records
 its pnpm version. Like buildtools, the checkout is optional, so guard for it
 rather than assuming a path:
 
@@ -197,7 +197,7 @@ UI_KIT=${DOCSPACE_UI_KIT_SRC:-../../docspace-ui-kit-react}
 
 That repo carries its own lockfile, which also records the pinned pnpm (see
 §4), so refresh it there with a plain `pnpm install` — there is no wrapper on
-this side any more, and a bumped tarball is a separate change from a pnpm bump.
+this side any more, and a ui-kit release is a separate change from a pnpm bump.
 
 ---
 

@@ -74,7 +74,6 @@
   "ItemsCount": "Broj stavki na jednoj stranici",
   "ItemsCountDescription": "Možete da odredite broj datoteka / foldera prikazanih na jednoj stranici, kao i da odredite koja stranica će početi da se prikazuje",
   "JavaScriptCodeDescription": "Ugrađivanje radnog prostora ili njegovog dela pomoću JavaScript. Kopirajte JavaScript kod ispod.",
-  "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Ograničenje vremenskim periodom",
   "LinkSetDescription": "Ovaj link je zaštićen sa {{parameter}}. Da biste konfigurisali ovaj link,",
   "LinkSetDescription2": "{{parameter1}} i {{parameter2}} su postavljeni za ovaj link. Da biste ih konfigurisali,",

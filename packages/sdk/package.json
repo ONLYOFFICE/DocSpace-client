@@ -1,6 +1,6 @@
 {
   "name": "@docspace/sdk",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "private": true,
   "scripts": {
     "build:translations": "node ./scripts/buildTranslations.js",
@@ -39,7 +39,7 @@
     "@docspace/shared": "workspace:*",
     "@google/genai": "catalog:",
     "@mistralai/mistralai": "catalog:",
-    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-0.6.39.tgz",
+    "@onlyoffice/ai-chat": "^1.0.0",
     "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tgz",
     "@radix-ui/react-dialog": "catalog:",
     "@radix-ui/react-dropdown-menu": "catalog:",

@@ -33,43 +33,58 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { redirect } from "next/navigation";
+"use client";
 
-import { DocsSection, DOCS_SECTION_FOLDER_ALIAS } from "@/types/docs";
+import React, { useEffect, useState } from "react";
 
-const NAVIGABLE_SECTIONS = new Set<string>([
-  DocsSection.MyDocuments,
-  DocsSection.Favorites,
-  DocsSection.Recent,
-  DocsSection.SharedWithMe,
-  DocsSection.Trash,
-]);
+import { ApiProvider } from "@onlyoffice/apps-ui-kit/providers/api";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getAuthToken, resolveOAuthToken } from "@docspace/shared/api/client";
+import { isOAuthFrame, onAuthTokenPush } from "@docspace/shared/utils/oauthToken";
 
-export default async function PersonalFilesDestination({
-  params,
-  searchParams,
-}: {
-  params: Promise<{ destination: string }>;
-  searchParams: Promise<Record<string, string>>;
-}) {
-  const { destination } = await params;
-  const sp = await searchParams;
-
-  const section = (
-    NAVIGABLE_SECTIONS.has(destination) ? destination : DocsSection.MyDocuments
-  ) as DocsSection;
-
-  const out = new URLSearchParams();
-
-  for (const [key, value] of Object.entries(sp)) {
-    if (value) out.set(key, value);
+const getApiUrl = () => {
+  if (typeof window === "undefined") {
+    return "";
   }
+  const origin = window.ClientConfig?.api?.origin || window.location.origin;
+  const proxy = window.ClientConfig?.proxy?.url || "";
 
-  out.delete("id");
-  out.delete("count");
-  out.set("folder", sp.id || DOCS_SECTION_FOLDER_ALIAS[section]);
+  return combineUrl(origin, proxy);
+};
 
-  if (sp.count) out.set("pageCount", sp.count);
+const EditorApiProvider = ({ children }: { children: React.ReactNode }) => {
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
-  redirect(`/personal-files?${out.toString()}`);
-}
+  useEffect(() => {
+    if (!isOAuthFrame()) return;
+
+    let active = true;
+    const apply = (token: string | null) => {
+      if (active && token) setAccessToken(token);
+    };
+
+    const current = getAuthToken();
+    if (current) apply(current);
+    else resolveOAuthToken().then(apply, () => undefined);
+
+    const unsubscribe = onAuthTokenPush(apply);
+
+    return () => {
+      active = false;
+      unsubscribe();
+    };
+  }, []);
+
+  const apiKey = isOAuthFrame()
+    ? (accessToken ?? "")
+    : getCookie("asc_auth_key") || "";
+
+  return (
+    <ApiProvider url={getApiUrl()} apiKey={apiKey} initSocket={false}>
+      {children}
+    </ApiProvider>
+  );
+};
+
+export default EditorApiProvider;

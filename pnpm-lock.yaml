@@ -370,14 +370,14 @@ importers:
         specifier: 'catalog:'
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:../../onlyoffice-ai-chat-0.6.39.tgz
-        version: file:onlyoffice-ai-chat-0.6.39.tgz(c29224622a15ec02a8a1188528da0c35)
+        specifier: ^1.0.0
+        version: 1.0.0(c29224622a15ec02a8a1188528da0c35)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(5accb4eb56a6d64783590ae5343deead)
+        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@1.0.0(c29224622a15ec02a8a1188528da0c35))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@25.10.10(typescript@5.9.3))(katex@0.17.0)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@15.7.4(i18next@25.10.10(typescript@5.9.3))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
       '@onlyoffice/docspace-sdk-js':
-        specifier: file:onlyoffice-docspace-sdk-js-2.2.0.tgz
-        version: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz
+        specifier: ^2.2.0
+        version: 2.2.0
       '@onlyoffice/document-editor-react':
         specifier: 2.1.1
         version: 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -717,7 +717,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(5accb4eb56a6d64783590ae5343deead)
+        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@1.0.0(c29224622a15ec02a8a1188528da0c35))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@25.10.10(typescript@5.9.3))(katex@0.17.0)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@15.7.4(i18next@25.10.10(typescript@5.9.3))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
       '@onlyoffice/document-editor-react':
         specifier: 2.1.1
         version: 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -814,7 +814,7 @@ importers:
         version: 10.1.0
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
-        version: 7.0.4(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0))
+        version: 7.0.4(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
       prettier:
         specifier: ^3.9.6
         version: 3.9.9
@@ -826,7 +826,7 @@ importers:
         version: 0.4.0
       terser-webpack-plugin:
         specifier: 5.3.16
-        version: 5.3.16(esbuild@0.28.2)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0))
+        version: 5.3.16(esbuild@0.28.2)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -841,7 +841,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(5accb4eb56a6d64783590ae5343deead)
+        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@1.0.0(c29224622a15ec02a8a1188528da0c35))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@25.10.10(typescript@5.9.3))(katex@0.17.0)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@15.7.4(i18next@25.10.10(typescript@5.9.3))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -962,7 +962,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(5accb4eb56a6d64783590ae5343deead)
+        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@1.0.0(c29224622a15ec02a8a1188528da0c35))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@25.10.10(typescript@5.9.3))(katex@0.17.0)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@15.7.4(i18next@25.10.10(typescript@5.9.3))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
       axios:
         specifier: '>=1.15.2'
         version: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -1080,7 +1080,7 @@ importers:
         version: 10.1.0
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
-        version: 7.0.4(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0))
+        version: 7.0.4(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
       prettier:
         specifier: ^3.9.6
         version: 3.9.9
@@ -1092,7 +1092,7 @@ importers:
         version: 0.4.0
       terser-webpack-plugin:
         specifier: 5.3.16
-        version: 5.3.16(esbuild@0.28.2)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0))
+        version: 5.3.16(esbuild@0.28.2)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1127,11 +1127,11 @@ importers:
         specifier: 'catalog:'
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:../../onlyoffice-ai-chat-0.6.39.tgz
-        version: file:onlyoffice-ai-chat-0.6.39.tgz(c29224622a15ec02a8a1188528da0c35)
+        specifier: ^1.0.0
+        version: 1.0.0(c29224622a15ec02a8a1188528da0c35)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(5accb4eb56a6d64783590ae5343deead)
+        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@1.0.0(c29224622a15ec02a8a1188528da0c35))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@25.10.10(typescript@5.9.3))(katex@0.17.0)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@15.7.4(i18next@25.10.10(typescript@5.9.3))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
       '@radix-ui/react-dialog':
         specifier: 'catalog:'
         version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1345,7 +1345,7 @@ importers:
         version: 10.1.0
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
-        version: 7.0.4(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0))
+        version: 7.0.4(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
       jsdom:
         specifier: ^27.4.0
         version: 27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1)
@@ -1360,7 +1360,7 @@ importers:
         version: 0.4.0
       terser-webpack-plugin:
         specifier: 5.3.16
-        version: 5.3.16(esbuild@0.28.2)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0))
+        version: 5.3.16(esbuild@0.28.2)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1390,7 +1390,7 @@ importers:
         version: 2.4.0
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(5accb4eb56a6d64783590ae5343deead)
+        version: file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@1.0.0(c29224622a15ec02a8a1188528da0c35))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@25.10.10(typescript@5.9.3))(katex@0.17.0)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@15.7.4(i18next@25.10.10(typescript@5.9.3))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1553,7 +1553,7 @@ importers:
         version: 1.58.1
       '@storybook/addon-docs':
         specifier: 10.2.8
-        version: 10.2.8(@types/react@19.2.10)(esbuild@0.28.2)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0))
+        version: 10.2.8(@types/react@19.2.10)(esbuild@0.28.2)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
       '@storybook/react':
         specifier: ^10.5.5
         version: 10.6.1(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(supports-color@8.1.1)(typescript@5.9.3)
@@ -3509,9 +3509,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.6.39.tgz':
-    resolution: {integrity: sha512-ABamSr+edeqc93zxjZ+SwB+Fj6xQkiTlSCIii6jMHZKWuEJzfu+Ap0rGwbcK4FRwnbEPwmXv4yvlVwYfYJGHAA==, tarball: file:onlyoffice-ai-chat-0.6.39.tgz}
-    version: 0.6.39
+  '@onlyoffice/ai-chat@1.0.0':
+    resolution: {integrity: sha512-KAIwc3kofvem8fv8TzTw/IO3jEc5fT7Dbgiy+vAceSH1eaUUYfl5Q6oMvi0R094RlEBBb6l+3RJogYN6327N5g==}
     peerDependencies:
       '@anthropic-ai/sdk': ^0.60.0
       '@assistant-ui/react': ^0.11.0
@@ -3607,7 +3606,7 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-E+IRGoe2k3YRpPaAZgz3Jty4JNUr9OLbIl+IjiHIy2ros0FCe0Q03ioBu68od7ZikcpqlZA3jh+6Xpko2U2DDg==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-jVD0o492MqOcdsdUYVPp9jGQu2N1RZRUP13adlcbcP2dGym1yhUgP0cCa/kodFV5F2Ej9Qp5b5nH/FCeieppkg==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.0.0
     engines: {node: '>=22'}
     peerDependencies:
@@ -3675,9 +3674,8 @@ packages:
       react:
         optional: true
 
-  '@onlyoffice/docspace-sdk-js@file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz':
-    resolution: {integrity: sha512-0HY0VPeqZkqdNiYSPVuOQVwGNvUX0wE/Ue5poPu5tPnXsDwN7xK8yO8XYRVa5kBzuq1NfdG1siFQibJulJf24g==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
-    version: 2.2.0
+  '@onlyoffice/docspace-sdk-js@2.2.0':
+    resolution: {integrity: sha512-voWzd8Xsm128XBrPicbsp8QNHGS1n9lMYlUrsEnZ4/HISRPUFhSOmTk3u2nnAvPk1ITtzqPD9Vml64nFEGAwWA==}
     engines: {node: '>=18'}
 
   '@onlyoffice/document-editor-react@2.1.1':
@@ -11819,7 +11817,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@23.2.1':
     optional: true
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-0.6.39.tgz(c29224622a15ec02a8a1188528da0c35)':
+  '@onlyoffice/ai-chat@1.0.0(c29224622a15ec02a8a1188528da0c35)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
       assistant-stream: 0.2.47
@@ -11857,8 +11855,8 @@ snapshots:
       tailwind-merge: 3.6.0
       zustand: 5.0.7(@types/react@19.2.10)(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
 
-  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(5accb4eb56a6d64783590ae5343deead)':
-    dependencies:
+  ? '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(@onlyoffice/ai-chat@1.0.0(c29224622a15ec02a8a1188528da0c35))(@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@socket.io/component-emitter@3.1.2)(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(debug@4.4.3(supports-color@8.1.1))(i18next@25.10.10(typescript@5.9.3))(katex@0.17.0)(mobx-react@9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react-i18next@15.7.4(i18next@25.10.10(typescript@5.9.3))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3))(react-markdown@10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1))(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-syntax-highlighter@16.1.1(react@19.2.8))(react@19.2.8)(rehype-katex@7.0.1)(rehype-raw@7.0.0)(remark-gfm@4.0.1(supports-color@8.1.1))(remark-math@6.0.0(supports-color@8.1.1))(socket.io-client@4.8.3(supports-color@8.1.1))(supports-color@8.1.1)'
+  : dependencies:
       '@floating-ui/dom': 1.6.13
       '@onlyoffice/docspace-api-sdk': 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
       classnames: 2.5.1
@@ -11896,7 +11894,7 @@ snapshots:
       xss: 1.0.15
       zoom-level: 2.5.0
     optionalDependencies:
-      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-0.6.39.tgz(c29224622a15ec02a8a1188528da0c35)
+      '@onlyoffice/ai-chat': 1.0.0(c29224622a15ec02a8a1188528da0c35)
       '@onlyoffice/document-editor-react': 2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@socket.io/component-emitter': 3.1.2
       axios: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -11932,7 +11930,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@onlyoffice/docspace-sdk-js@file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz': {}
+  '@onlyoffice/docspace-sdk-js@2.2.0': {}
 
   '@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
@@ -12983,10 +12981,10 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@storybook/addon-docs@10.2.8(@types/react@19.2.10)(esbuild@0.28.2)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0))':
+  '@storybook/addon-docs@10.2.8(@types/react@19.2.10)(esbuild@0.28.2)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))':
     dependencies:
       '@mdx-js/react': 3.1.1(@types/react@19.2.10)(react@19.2.8)
-      '@storybook/csf-plugin': 10.2.8(esbuild@0.28.2)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0))
+      '@storybook/csf-plugin': 10.2.8(esbuild@0.28.2)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
       '@storybook/icons': 2.1.0(react@19.2.8)
       '@storybook/react-dom-shim': 10.2.8(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))
       react: 19.2.8
@@ -13000,14 +12998,14 @@ snapshots:
       - vite
       - webpack
 
-  '@storybook/csf-plugin@10.2.8(esbuild@0.28.2)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0))':
+  '@storybook/csf-plugin@10.2.8(esbuild@0.28.2)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))':
     dependencies:
       storybook: 10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8)
       unplugin: 2.3.11
     optionalDependencies:
       esbuild: 0.28.2
       vite: 8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1)
-      webpack: 5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0)
+      webpack: 5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0)
 
   '@storybook/global@5.0.0': {}
 
@@ -14212,20 +14210,6 @@ snapshots:
       schema-utils: 4.5.0
       serialize-javascript: 7.1.2
       webpack: 5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0)
-    optionalDependencies:
-      csso: 5.0.5
-      esbuild: 0.28.2
-      lightningcss: 1.33.0
-
-  css-minimizer-webpack-plugin@7.0.4(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0)):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.31
-      cssnano: 7.1.9(postcss@8.5.28)
-      jest-worker: 30.5.1
-      postcss: 8.5.28
-      schema-utils: 4.5.0
-      serialize-javascript: 7.1.2
-      webpack: 5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0)
     optionalDependencies:
       csso: 5.0.5
       esbuild: 0.28.2
@@ -16071,21 +16055,6 @@ snapshots:
       sharp: 0.35.5(@types/node@24.10.7)
       svgo: 4.1.0
 
-  minimizer-webpack-plugin@5.13.0(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0)):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.31
-      jest-worker: 27.5.1
-      schema-utils: 4.5.0
-      terser: 5.51.2
-      webpack: 5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0)
-    optionalDependencies:
-      cssnano: 7.1.9(postcss@8.5.28)
-      csso: 5.0.5
-      esbuild: 0.28.2
-      lightningcss: 1.33.0
-      postcss: 8.5.28
-      svgo: 4.1.0
-
   mobx-react-lite@4.1.1(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       mobx: 6.16.1
@@ -17756,17 +17725,6 @@ snapshots:
     optionalDependencies:
       esbuild: 0.28.2
 
-  terser-webpack-plugin@5.3.16(esbuild@0.28.2)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0)):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.31
-      jest-worker: 27.5.1
-      schema-utils: 4.5.0
-      serialize-javascript: 7.1.2
-      terser: 5.46.0
-      webpack: 5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0)
-    optionalDependencies:
-      esbuild: 0.28.2
-
   terser@5.46.0:
     dependencies:
       '@jridgewell/source-map': 0.3.11
@@ -18164,43 +18122,6 @@ snapshots:
       graceful-fs: 4.2.11
       mime-db: 1.54.0
       minimizer-webpack-plugin: 5.13.0(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
-      schema-utils: 4.5.0
-      tapable: 2.3.3
-      watchpack: 2.5.2
-      webpack-sources: 3.6.0
-    transitivePeerDependencies:
-      - '@minify-html/node'
-      - '@napi-rs/image'
-      - '@swc/core'
-      - '@swc/css'
-      - '@swc/html'
-      - clean-css
-      - cssnano
-      - csso
-      - esbuild
-      - html-minifier-terser
-      - imagemin
-      - lightningcss
-      - postcss
-      - sharp
-      - svgo
-      - uglify-js
-
-  webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0):
-    dependencies:
-      '@types/estree': 1.0.9
-      '@types/json-schema': 7.0.15
-      '@webassemblyjs/ast': 1.14.1
-      '@webassemblyjs/wasm-edit': 1.14.1
-      '@webassemblyjs/wasm-parser': 1.14.1
-      browserslist: 4.29.3
-      chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.26.0
-      es-module-lexer: 2.3.2
-      events: 3.3.0
-      graceful-fs: 4.2.11
-      mime-db: 1.54.0
-      minimizer-webpack-plugin: 5.13.0(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@4.1.0))
       schema-utils: 4.5.0
       tapable: 2.3.3
       watchpack: 2.5.2

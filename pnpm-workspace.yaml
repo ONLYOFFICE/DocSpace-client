@@ -61,6 +61,7 @@ minimumReleaseAgeExclude:
   - '@next/swc-win32-arm64-msvc@16.3.6'
   - '@next/swc-win32-x64-msvc@16.3.6'
   - next@16.3.6
+  - '@onlyoffice/docspace-sdk-js@2.2.0'
 
 # The peers an app has to carry for @onlyoffice/ai-chat. ai-chat declares the
 # libraries it is built on -- the assistant-ui widgets, the radix primitives,

@@ -58,6 +58,7 @@ import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers
 
 import { FormsSection } from "@/types/forms";
 import { useSdkCustomActions } from "@/providers/SdkCustomActionsProvider";
+import { toFrameEntity } from "@/utils/frameEntity";
 
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
@@ -163,14 +164,16 @@ export default function useFormsContextMenu() {
           label: action.label,
           icon: action.icon ?? "",
           disabled: false,
-          onClick: () =>
+          onClick: () => {
+            const entity = toFrameEntity(item);
             sendCustomAction({
               action: action.key,
               type,
-              item,
-              items: [item],
+              item: entity,
+              items: [entity],
               folderId,
-            }),
+            });
+          },
         }),
       ),
     [customActions, activeSection, folderId],

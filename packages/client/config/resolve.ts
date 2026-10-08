@@ -42,7 +42,7 @@ import {
   uiKitPeerDependencies,
 } from "./ui-kit-dev";
 
-// One prefix alias is enough: the checkout mirrors the tarball's layout, so
+// One prefix alias is enough: the checkout mirrors the package's layout, so
 // `@onlyoffice/apps-ui-kit/components/text` lands on `components/text` in both.
 // Nothing imports the `styles.css` bundle any more -- components carry their
 // own stylesheet, and ThemeProvider's source imports its SCSS directly.

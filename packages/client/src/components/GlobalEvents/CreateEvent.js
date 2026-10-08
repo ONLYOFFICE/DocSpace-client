@@ -211,7 +211,11 @@ const CreateEvent = ({
           if (withEditor) {
             openDocEditor(created.fileId, preview, null, actionEdit, false, editorWindow);
           } else if (isFrame && frameConfig?.events?.onEditorOpen) {
-            frameCallEvent({ event: "onEditorOpen", data: created });
+            const file = await api.files.getFileInfo(created.fileId);
+            frameCallEvent({
+              event: "onEditorOpen",
+              data: { ...file, action: "edit" },
+            });
           }
 
           fetchFiles(parentId).catch(() => {});
@@ -285,7 +289,7 @@ const CreateEvent = ({
               if (isFrame && frameConfig?.events?.onEditorOpen) {
                 frameCallEvent({
                   event: "onEditorOpen",
-                  data,
+                  data: { ...data, action: "edit" },
                 });
               }
             })

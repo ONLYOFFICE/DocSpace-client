@@ -35,7 +35,7 @@
 
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, type ReactNode } from "react";
 
 import type {
   TFrameCustomActionEvent,
@@ -43,6 +43,7 @@ import type {
   TFrameCustomContextMenuAction,
 } from "@docspace/shared/types/Frame";
 import {
+  getCustomActionIconProps,
   getVisibleContextActions,
   getVisibleGroupContextActions,
   sendCustomAction,
@@ -64,6 +65,7 @@ type TCustomMenuItem = {
   key: string;
   label: string;
   icon: string;
+  iconNode?: ReactNode;
   disabled: boolean;
   onClick: () => void;
 };
@@ -78,7 +80,7 @@ const toMenuItem = (
   id: `option_sdk-action-${action.key}`,
   key: `sdk-action-${action.key}`,
   label: action.label,
-  icon: action.icon ?? "",
+  ...getCustomActionIconProps(action.icon),
   disabled: false,
   onClick: () => sendCustomAction({ action: action.key, ...event }),
 });

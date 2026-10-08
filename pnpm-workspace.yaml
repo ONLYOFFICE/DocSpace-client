@@ -17,7 +17,7 @@ packages:
 # Dependency install/postinstall scripts (pnpm >= 11 requires an explicit
 # decision per package; unreviewed packages fail the install).
 allowBuilds:
-  # No-op preinstall echo only (transitive via the ui-kit tarball dependency)
+  # No-op preinstall echo only (transitive via the ui-kit dependency)
   '@google/genai': false
   # Native file watcher used by the Nx daemon
   '@parcel/watcher': true
@@ -33,14 +33,10 @@ allowBuilds:
   sharp: true
 
 minimumReleaseAgeExclude:
-  # Vendored tarball (onlyoffice-ai-chat-*.tgz at the repo root), never
-  # published to npm, so the age check 404s on the registry. Listed without a
-  # version so it survives tarball bumps; the artifact is committed in the
-  # ui-kit repo, which builds against it, and `pnpm run update-ui-kit` copies
-  # the version ui-kit requires here (`pnpm run update-ai-chat` bumps it alone).
+  # First-party packages published from our own repos and picked up here the
+  # day they are released, so a new version is always younger than the
+  # release-age window. Listed without a version so they survive bumps.
   - '@onlyoffice/ai-chat'
-  # Vendored tarball (onlyoffice-apps-ui-kit-*.tgz at the repo root), never
-  # published to npm, so the age check 404s on the registry.
   - '@onlyoffice/apps-ui-kit'
   - '@rolldown/binding-android-arm64@1.2.2'
   - '@rolldown/binding-linux-arm-gnueabihf@1.2.2'
@@ -61,6 +57,7 @@ minimumReleaseAgeExclude:
   - '@next/swc-win32-arm64-msvc@16.3.6'
   - '@next/swc-win32-x64-msvc@16.3.6'
   - next@16.3.6
+  - '@onlyoffice/docspace-sdk-js@2.2.0'
 
 # The peers an app has to carry for @onlyoffice/ai-chat. ai-chat declares the
 # libraries it is built on -- the assistant-ui widgets, the radix primitives,
@@ -111,7 +108,7 @@ catalog:
 
 overrides:
   pnpm: ">=10.33.0"
-  # Single mobx instance across the workspace (the ui-kit tarball pins 6.13.5)
+  # Single mobx instance across the workspace (ui-kit and the apps share it)
   mobx: "6.16.1"
   mobx-react: "9.2.2"
   # Single react instance across the workspace; react-router 8 needs >=19.2.7
@@ -176,8 +173,8 @@ overrides:
   # link-preview image and pins this same version - keep the two in step, an
   # open range here would silently replace that manifest's exact pin.
   sharp: "0.35.5"
-  # Guards against ui-kit tarball drift until it is rebuilt/repacked; every
-  # manifest now pins 8.3.0 directly, so this can be dropped afterwards
+  # Guards against ui-kit drift until its peer range matches; every manifest
+  # now pins 8.3.0 directly, so this can be dropped afterwards
   react-router: "8.3.0"
   # nx (23.2.1 included) pins smol-toml 1.6.1 exactly; drop once nx lifts it
   smol-toml: "^1.7.1"

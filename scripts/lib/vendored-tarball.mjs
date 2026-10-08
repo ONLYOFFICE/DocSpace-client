@@ -34,9 +34,10 @@
  */
 
 /**
- * Shared by update-ui-kit.mjs and update-ai-chat.mjs: both drop a vendored
- * tarball at the repo root, make pnpm install it, and then prove that what
- * landed in node_modules and pnpm-lock.yaml is what was copied in.
+ * Shared by update-ui-kit.mjs and update-ai-chat.mjs. ui-kit and ai-chat are
+ * normally installed from npm; both scripts switch the apps over to a locally
+ * packed tarball at the repo root instead, make pnpm install it, and then prove
+ * that what landed in node_modules and pnpm-lock.yaml is what was copied in.
  */
 
 import { createHash } from "node:crypto";
@@ -265,12 +266,21 @@ export const lockDrift = (key, packed) => {
 
   // `last`: a key with no peer suffix appears twice, under `packages:` first
   // and `snapshots:` second.
+  //
+  // A key longer than 1024 characters -- a snapshot with a long peer suffix --
+  // is written as an explicit YAML key, `? '<key>'` with its value after a
+  // `  : ` line, so both spellings are looked for, and the explicit one is
+  // reshaped so the fields below read the same way.
   const lockEntry = (suffix, last = false) => {
-    const needle = `\n  '${key}${suffix}`;
-    const start = last ? lockText.lastIndexOf(needle) : lockText.indexOf(needle);
-    if (start === -1) return null;
+    const find = (needle) => (last ? lockText.lastIndexOf(needle) : lockText.indexOf(needle));
+    const plain = find(`\n  '${key}${suffix}`);
+    const explicit = find(`\n  ? '${key}${suffix}`);
+    const starts = [plain, explicit].filter((index) => index !== -1);
+    if (starts.length === 0) return null;
+    const start = last ? Math.max(...starts) : Math.min(...starts);
     const end = lockText.indexOf("\n\n", start + 1);
-    return lockText.slice(start + 1, end === -1 ? undefined : end);
+    const entry = lockText.slice(start + 1, end === -1 ? undefined : end);
+    return start === explicit ? entry.replace(/^ {2}: /m, "    ") : entry;
   };
 
   const fieldOf = (entry, field) => {
@@ -318,18 +328,46 @@ export const lockDrift = (key, packed) => {
 /** `onlyoffice-ai-chat-<version>.tgz`: the version is part of the filename. */
 export const AI_CHAT_TARBALL = /^onlyoffice-ai-chat-(.+)\.tgz$/;
 
-const AI_CHAT_SPECIFIER =
-  /"@onlyoffice\/ai-chat": "file:\.\.\/\.\.\/onlyoffice-ai-chat-[^"]+\.tgz"/g;
+/**
+ * Points `packageName` at `specifier` in every app manifest that depends on
+ * it, whatever it named before -- a registry range or an earlier tarball.
+ *
+ * Returns the apps that changed and a `restore` that puts their manifests
+ * back.
+ */
+export const repointManifests = (packageName, specifier) => {
+  const pattern = new RegExp(`"${escapeRegExp(packageName)}": "[^"]+"`, "g");
+  const previous = [];
+  const touched = [];
+
+  for (const app of fs.readdirSync(path.join(ROOT, "packages"))) {
+    const manifest = path.join(ROOT, "packages", app, "package.json");
+    if (!fs.existsSync(manifest)) continue;
+
+    const text = fs.readFileSync(manifest, "utf8");
+    const next = text.replace(pattern, `"${packageName}": "${specifier}"`);
+
+    if (next === text) continue;
+    previous.push([manifest, text]);
+    fs.writeFileSync(manifest, next);
+    touched.push(app);
+  }
+
+  const restore = () => {
+    for (const [manifest, text] of previous) fs.writeFileSync(manifest, text);
+  };
+
+  return { touched, restore };
+};
 
 /**
  * Puts `source` at the repo root as the only ai-chat tarball there and
- * repoints every app manifest at it.
+ * repoints every app manifest at it, away from the registry range or from an
+ * earlier tarball.
  *
- * The ai-chat tarball is versioned in its filename, so a bump is not just a
+ * The ai-chat tarball is versioned in its filename, so a new one is not just a
  * file swap -- every app manifest naming it has to change with it, or the
- * install fails on a path that no longer exists. Doing that by hand is how the
- * repositories once drifted apart: ui-kit required 0.5.113 while this repo
- * still vendored, and every app still named, 0.5.110.
+ * install fails on a path that no longer exists.
  *
  * Returns the new filename, the repointed apps, and a `restore` that puts the
  * previous tarball(s) and every rewritten manifest back -- the install that
@@ -342,34 +380,21 @@ export const placeAiChat = (source) => {
   const current = fs.readdirSync(ROOT).filter((f) => AI_CHAT_TARBALL.test(f));
 
   // Snapshot before touching anything: the bytes of every tarball about to be
-  // removed or overwritten, and the text of every manifest about to change.
+  // removed or overwritten.
   const previousTarballs = current.map((f) => [f, fs.readFileSync(path.join(ROOT, f))]);
-  const previousManifests = [];
 
   if (path.resolve(source) !== target) fs.copyFileSync(source, target);
   for (const stale of current) {
     if (stale !== file) fs.rmSync(path.join(ROOT, stale), { force: true });
   }
 
-  const touched = [];
-  for (const app of fs.readdirSync(path.join(ROOT, "packages"))) {
-    const manifest = path.join(ROOT, "packages", app, "package.json");
-    if (!fs.existsSync(manifest)) continue;
-
-    const text = fs.readFileSync(manifest, "utf8");
-    const next = text.replace(AI_CHAT_SPECIFIER, `"@onlyoffice/ai-chat": "file:../../${file}"`);
-
-    if (next === text) continue;
-    previousManifests.push([manifest, text]);
-    fs.writeFileSync(manifest, next);
-    touched.push(app);
-  }
+  const manifests = repointManifests("@onlyoffice/ai-chat", `file:../../${file}`);
 
   const restore = () => {
-    for (const [manifest, text] of previousManifests) fs.writeFileSync(manifest, text);
+    manifests.restore();
     if (!current.includes(file)) fs.rmSync(target, { force: true });
     for (const [f, bytes] of previousTarballs) fs.writeFileSync(path.join(ROOT, f), bytes);
   };
 
-  return { file, touched, restore };
+  return { file, touched: manifests.touched, restore };
 };

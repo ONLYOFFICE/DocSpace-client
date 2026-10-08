@@ -84,7 +84,7 @@ const DOCSPACE_EVENT_TYPES = [
 const DocSpace = (props) => {
   const { t, theme, currentColorScheme } = props;
 
-  setDocumentTitle(t("JavascriptSdk"));
+  setDocumentTitle(t("Settings:EmbedSDK"));
 
   const [version, onSetVersion] = useState(sdkVersion[220]);
 
@@ -255,6 +255,7 @@ export const Component = inject(({ settingsStore }) => {
 })(
   withTranslation([
     "JavascriptSdk",
+    "Settings",
     "Files",
     "Common",
     "Files",

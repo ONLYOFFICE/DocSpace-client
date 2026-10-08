@@ -96,18 +96,73 @@ describe("useAiAgentsPickerActions", () => {
     mockAgents([agent(1, "Alpha")]);
 
     const { result } = renderHook(() =>
-      useAiAgentsPickerActions(false, vi.fn()),
+      useAiAgentsPickerActions(false, true, vi.fn()),
     );
 
     expect(getAIAgents).not.toHaveBeenCalled();
     expect(result.current.actions).toEqual([]);
   });
 
+  it("does not load agents while the chat is hidden", () => {
+    mockAgents([agent(1, "Alpha")]);
+
+    const { result } = renderHook(() =>
+      useAiAgentsPickerActions(true, false, vi.fn()),
+    );
+
+    expect(getAIAgents).not.toHaveBeenCalled();
+    expect(result.current.actions).toEqual([]);
+  });
+
+  it("loads once the chat is shown and keeps the list across hide/show", async () => {
+    mockAgents([agent(1, "Alpha")]);
+
+    const { result, rerender } = renderHook(
+      ({ active }) => useAiAgentsPickerActions(true, active, vi.fn()),
+      { initialProps: { active: false } },
+    );
+
+    rerender({ active: true });
+    await waitFor(() => expect(agentTitles(result.current)).toEqual(["Alpha"]));
+
+    // Closing and reopening the panel is not a reason to ask again.
+    rerender({ active: false });
+    rerender({ active: true });
+    await Promise.resolve();
+
+    expect(getAIAgents).toHaveBeenCalledTimes(1);
+    expect(agentTitles(result.current)).toEqual(["Alpha"]);
+  });
+
+  it("defers the reload after a disabled spell until the chat is shown", async () => {
+    mockAgents([agent(1, "Alpha")]);
+
+    const { result, rerender } = renderHook(
+      ({ enabled, active }) =>
+        useAiAgentsPickerActions(enabled, active, vi.fn()),
+      { initialProps: { enabled: true, active: true } },
+    );
+
+    await waitFor(() => expect(agentTitles(result.current)).toEqual(["Alpha"]));
+
+    // Into the AI Agents section (chat unavailable), back to Files with the
+    // panel closed: nothing is fetched until the panel opens.
+    rerender({ enabled: false, active: false });
+    mockAgents([agent(2, "Beta")]);
+    rerender({ enabled: true, active: false });
+    await Promise.resolve();
+    expect(getAIAgents).toHaveBeenCalledTimes(1);
+
+    rerender({ enabled: true, active: true });
+    await waitFor(() => expect(agentTitles(result.current)).toEqual(["Beta"]));
+    expect(getAIAgents).toHaveBeenCalledTimes(2);
+  });
+
   it("reloads the list each time it is enabled again", async () => {
     mockAgents([agent(1, "Alpha"), agent(2, "Beta")]);
 
     const { result, rerender } = renderHook(
-      ({ enabled }) => useAiAgentsPickerActions(enabled, vi.fn()),
+      ({ enabled }) => useAiAgentsPickerActions(enabled, true, vi.fn()),
       { initialProps: { enabled: true } },
     );
 
@@ -131,7 +186,7 @@ describe("useAiAgentsPickerActions", () => {
     mockAgents([agent(1, "Alpha")]);
 
     const { result, rerender } = renderHook(
-      ({ enabled }) => useAiAgentsPickerActions(enabled, vi.fn()),
+      ({ enabled }) => useAiAgentsPickerActions(enabled, true, vi.fn()),
       { initialProps: { enabled: true } },
     );
 
@@ -158,7 +213,7 @@ describe("useAiAgentsPickerActions", () => {
     );
 
     const { result, rerender } = renderHook(
-      ({ enabled }) => useAiAgentsPickerActions(enabled, vi.fn()),
+      ({ enabled }) => useAiAgentsPickerActions(enabled, true, vi.fn()),
       { initialProps: { enabled: true } },
     );
 
@@ -180,7 +235,7 @@ describe("useAiAgentsPickerActions", () => {
     const renderLoaded = async () => {
       mockAgents([agent(1, "Alpha")]);
       const rendered = renderHook(
-        ({ enabled }) => useAiAgentsPickerActions(enabled, vi.fn()),
+        ({ enabled }) => useAiAgentsPickerActions(enabled, true, vi.fn()),
         { initialProps: { enabled: true } },
       );
       await waitFor(() =>

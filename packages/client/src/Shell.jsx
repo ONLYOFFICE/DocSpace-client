@@ -111,6 +111,7 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import { AskAIChatBridge } from "./components/AskAIChatBridge";
+import { AiChatVisibilityBridge } from "./components/AiChatVisibilityBridge";
 import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
@@ -817,11 +818,22 @@ const Shell = ({ page = "home", ...rest }) => {
   const canUseAi =
     isAuthenticated && !isGuest && !isNotPaidPeriod && aiServicesEnabled;
 
+  // Whether the side chat panel is open — reported from inside the providers
+  // by AiChatVisibilityBridge, since the panel store lives there.
+  const [isChatPanelVisible, setIsChatPanelVisible] = useState(false);
+
+  // The chat is on screen either in the side panel or inline, as the body of
+  // an AI agent room. While it is not, the providers only remember the scope
+  // (entityId) and the agents list below is not refreshed: entering a folder
+  // must not cost AI requests — they wait for the chat to open.
+  const isChatOpen = isChatPanelVisible || isInsideAgentRoom;
+
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.
   const { actions: profilePickerActions, getAgentByRoomId } =
     useAiAgentsPickerActions(
       isLoaded && isAiChatAvailable && canUseAi,
+      isChatOpen,
       setPickedAgent,
     );
 
@@ -977,6 +989,7 @@ const Shell = ({ page = "home", ...rest }) => {
           hideProfilePicker={false}
           profilePickerReadOnly={isInsideAgentRoom && !canEditAgentRoom}
           isAgentRoom={isInsideAgentRoom}
+          isChatOpen={isChatOpen}
           profilePickerActions={
             isInsideAgentRoom ? undefined : profilePickerActions
           }
@@ -996,6 +1009,7 @@ const Shell = ({ page = "home", ...rest }) => {
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
+          <AiChatVisibilityBridge onChange={setIsChatPanelVisible} />
           <ModelUpdatedBanner
             key={agentEntityId}
             entityId={agentEntityId}

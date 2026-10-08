@@ -35,7 +35,7 @@
 
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
 
@@ -51,6 +51,7 @@ import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import {
+  getCustomActionIconProps,
   getVisibleContextActions,
   sendCustomAction,
 } from "@docspace/shared/utils/frameCustomActions";
@@ -71,6 +72,7 @@ type ContextMenuItem = {
   key: string;
   label: string;
   icon: string;
+  iconNode?: ReactNode;
   onClick: () => void;
   disabled: boolean;
   isSeparator?: false;
@@ -162,7 +164,7 @@ export default function useFormsContextMenu() {
           id: `option_sdk-action-${action.key}`,
           key: `sdk-action-${action.key}`,
           label: action.label,
-          icon: action.icon ?? "",
+          ...getCustomActionIconProps(action.icon),
           disabled: false,
           onClick: () => {
             const entity = toFrameEntity(item);

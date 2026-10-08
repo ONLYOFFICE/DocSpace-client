@@ -91,6 +91,7 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import {
   getVisibleCreateActions,
   sendCustomAction,
+  getCustomActionIconProps,
 } from "@docspace/shared/utils/frameCustomActions";
 
 import { useSdkCustomActions } from "@/providers/SdkCustomActionsProvider";
@@ -123,7 +124,7 @@ export function useDocsMenuModels({
       ).map((action) => ({
         key: `sdk-action-${action.key}`,
         label: action.label,
-        icon: action.icon ?? "",
+        ...getCustomActionIconProps(action.icon),
         onClick: () =>
           sendCustomAction({ action: action.key, type: "create", folderId }),
       })),

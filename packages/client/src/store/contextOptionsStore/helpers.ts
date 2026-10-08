@@ -126,6 +126,7 @@ export type TContextOption = {
   key: string;
   label?: React.ReactNode;
   icon?: string;
+  iconNode?: React.ReactNode;
   disabled?: boolean | string;
   isSeparator?: boolean;
   onClick?: (...args: never[]) => unknown;

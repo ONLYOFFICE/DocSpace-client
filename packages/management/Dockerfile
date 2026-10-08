@@ -18,12 +18,10 @@ WORKDIR /app
 
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
-
-# ui-kit and ai-chat ship as prebuilt tarballs at the repo root; every app's
-# `file:../../*.tgz` dependency resolves against these, so they must be present
-# before `pnpm install --frozen-lockfile` runs.
-COPY *.tgz ./
+# `*.tgz` is optional: ui-kit and ai-chat come from npm, but a locally packed
+# tarball at the repo root can be referenced as `file:../../<name>.tgz` for
+# local development. A glob matching nothing is fine next to real sources.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
 
 # `--frozen-lockfile` installs every package the lockfile names, not just the
 # ones the workspace projects present in this image depend on. Two of them are

@@ -33,14 +33,10 @@ allowBuilds:
   sharp: true
 
 minimumReleaseAgeExclude:
-  # Vendored tarball (onlyoffice-ai-chat-*.tgz at the repo root), never
-  # published to npm, so the age check 404s on the registry. Listed without a
-  # version so it survives tarball bumps; the artifact is committed in the
-  # ui-kit repo, which builds against it, and `pnpm run update-ui-kit` copies
-  # the version ui-kit requires here (`pnpm run update-ai-chat` bumps it alone).
+  # First-party packages published from our own repos and picked up here the
+  # day they are released, so a new version is always younger than the
+  # release-age window. Listed without a version so they survive bumps.
   - '@onlyoffice/ai-chat'
-  # Vendored tarball (onlyoffice-apps-ui-kit-*.tgz at the repo root), never
-  # published to npm, so the age check 404s on the registry.
   - '@onlyoffice/apps-ui-kit'
   - '@rolldown/binding-android-arm64@1.2.2'
   - '@rolldown/binding-linux-arm-gnueabihf@1.2.2'

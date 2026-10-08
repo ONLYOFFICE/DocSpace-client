@@ -67,7 +67,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
-import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
+import TourReactSvgUrl from "PUBLIC_DIR/images/icons/16/tour.react.svg?url";
 
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 
@@ -157,7 +157,7 @@ const Header = ({
       {onOpenTour ? (
         <IconButton
           className={styles.helpButton}
-          iconName={QuestionReactSvgUrl}
+          iconName={TourReactSvgUrl}
           size={16}
           isClickable
           title={t("Common:WelcomeStartTour")}

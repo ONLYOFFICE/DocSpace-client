@@ -243,7 +243,11 @@ const GroupIconDialog = ({
       displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}
       onClose={onClose}
     >
-      <ModalDialog.Header>{t("GroupingRooms:GroupIcon")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {editingGroupId
+          ? t("GroupingRooms:GroupIcon")
+          : t("GroupingRooms:CreateAGroup")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.name}>
           <Text

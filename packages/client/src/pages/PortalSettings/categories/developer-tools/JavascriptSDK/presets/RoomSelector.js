@@ -91,7 +91,7 @@ const ROOM_SELECTOR_EVENT_TYPES = [
 const RoomSelector = (props) => {
   const { t, theme } = props;
 
-  setDocumentTitle(t("JavascriptSdk"));
+  setDocumentTitle(t("Settings:EmbedSDK"));
 
   const roomTypeOptions = [
     {
@@ -344,6 +344,7 @@ export const Component = inject(({ settingsStore }) => {
 })(
   withTranslation([
     "JavascriptSdk",
+    "Settings",
     "Files",
     "Common",
     "CreateEditRoomDialog",

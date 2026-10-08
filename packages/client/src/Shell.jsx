@@ -992,7 +992,7 @@ const Shell = ({ page = "home", ...rest }) => {
           // The room the user is in, connected as chat context (with the
           // skills of its .ai folder) when the chat opens — see
           // ContextRoomSync in ui-kit.
-          contextRoom={aiContextRoom}
+          contextRoom={canUseAi ? aiContextRoom : undefined}
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />

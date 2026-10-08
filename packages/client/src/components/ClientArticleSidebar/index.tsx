@@ -98,6 +98,7 @@ type ClientArticleSidebarProps = FolderIds & {
   // former Rooms/Templates submenu (and the Use template quick action).
   canUseTemplates?: boolean;
   isTemplatesFolderRoot?: boolean;
+  isDocumentsFolder?: boolean;
   isNavLoading?: boolean;
   // The portal-wide AI switch (Settings -> Integration -> AI services). With it
   // off there is no AI in the portal at all, so the AI Agents app is dropped
@@ -112,6 +113,7 @@ const ClientArticleSidebar = ({
   isVisitor,
   canUseTemplates,
   isTemplatesFolderRoot,
+  isDocumentsFolder,
   isNavLoading,
   aiServicesEnabled = true,
   onFolderNavigate,
@@ -200,8 +202,15 @@ const ClientArticleSidebar = ({
         folderIds,
         location.search,
         isTemplatesFolderRoot,
+        isDocumentsFolder,
       ),
-    [location.pathname, location.search, folderIds, isTemplatesFolderRoot],
+    [
+      location.pathname,
+      location.search,
+      folderIds,
+      isTemplatesFolderRoot,
+      isDocumentsFolder,
+    ],
   );
 
   const groups = React.useMemo<NavMenuGroup[]>(() => {
@@ -610,6 +619,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
     // Matches Home's canCreateRooms — room admins and admins can use templates.
     canUseTemplates: authStore.isAdmin || authStore.isRoomAdmin,
     isTemplatesFolderRoot: treeFoldersStore.isTemplatesFolderRoot,
+    isDocumentsFolder: treeFoldersStore.isDocumentsFolder,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
     // Same signal the old article used to show <ArticleFolderLoader />.
     isNavLoading: clientLoadingStore.showArticleLoader,

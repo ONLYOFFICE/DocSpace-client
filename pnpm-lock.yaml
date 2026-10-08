@@ -3607,20 +3607,20 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-E+IRGoe2k3YRpPaAZgz3Jty4JNUr9OLbIl+IjiHIy2ros0FCe0Q03ioBu68od7ZikcpqlZA3jh+6Xpko2U2DDg==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-fTnt71ZmuS56SGnGEtx+41HjUdt5O9ACsx3Pl9tuBZcso7LTRLz17eG6H/6WWDRTk9g0IamqpII+MXhbH6rXFA==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.0.0
     engines: {node: '>=22'}
     peerDependencies:
       '@onlyoffice/ai-chat': ^0.6.32
       '@onlyoffice/document-editor-react': 2.1.1
       '@socket.io/component-emitter': 3.1.2
-      axios: '>=1.15.2'
+      axios: ^1.19.0
       i18next: ^25.5.2
       katex: ^0.17.0
       mobx: 6.16.1
       mobx-react: 9.2.2
-      react: 19.2.8
-      react-dom: 19.2.8
+      react: ^19.0.0
+      react-dom: ^19.0.0
       react-i18next: ^15.7.3
       react-markdown: ^10.1.0
       react-router: 8.3.0

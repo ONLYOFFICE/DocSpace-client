@@ -39,7 +39,7 @@
     "@docspace/shared": "workspace:*",
     "@google/genai": "catalog:",
     "@mistralai/mistralai": "catalog:",
-    "@onlyoffice/ai-chat": "^1.0.0",
+    "@onlyoffice/ai-chat": "^1.0.1",
     "@onlyoffice/apps-ui-kit": "^4.0.0",
     "@radix-ui/react-dialog": "catalog:",
     "@radix-ui/react-dropdown-menu": "catalog:",

@@ -38,6 +38,7 @@ minimumReleaseAgeExclude:
   # release-age window. Listed without a version so they survive bumps.
   - '@onlyoffice/ai-chat'
   - '@onlyoffice/apps-ui-kit'
+  - '@onlyoffice/docspace-plugin-sdk'
   - '@rolldown/binding-android-arm64@1.2.2'
   - '@rolldown/binding-linux-arm-gnueabihf@1.2.2'
   - '@rolldown/binding-linux-arm64-musl@1.2.2'

@@ -40,7 +40,6 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
 COPY packages/client/package.json ./packages/client/package.json
-COPY packages/client/*.tgz ./packages/client/
 COPY packages/login/package.json ./packages/login/package.json
 COPY packages/doceditor/package.json ./packages/doceditor/package.json
 COPY packages/sdk/package.json ./packages/sdk/package.json

@@ -50,18 +50,24 @@ const uiKitAlias: Record<string, string> = uiKitDevRoot
   ? { [UI_KIT_PACKAGE]: uiKitDevRoot }
   : {};
 
+// UI_KIT_PACKAGE is listed because pnpm installs it once per peer set: client
+// declares ai-chat's optional peers and shared does not, so the two get
+// different copies, and a selector imported through @docspace/shared would read
+// another ApiContext than the ApiProvider App.js mounts ("useApi must be used
+// within an ApiProvider"). Deduping resolves every import from this package's
+// copy. In source mode the alias below intercepts it first.
 const baseDedupe = [
   "styled-components",
   "react",
   "react-dom",
   "@onlyoffice/ai-chat",
+  UI_KIT_PACKAGE,
 ];
 
 // The checkout sits next to this repo, so every bare specifier in ui-kit source
 // resolves against the checkout's own node_modules. For a package both trees
 // carry that means two copies, and for anything holding module state -- a
 // context, a store, a socket -- two copies is a silent behaviour change.
-// UI_KIT_PACKAGE itself is not listed: the alias above intercepts it first.
 const dedupe = [...new Set([...baseDedupe, ...uiKitPeerDependencies])];
 
 export const resolve: UserConfig["resolve"] = {

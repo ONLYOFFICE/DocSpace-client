@@ -54,7 +54,11 @@ export default defineConfig({
     typecheck: {
       tsconfig: "./tsconfig.vitest.json",
     },
-    include: ["src/**/*.{test,spec}.{js,ts,jsx,tsx}"],
+    include: [
+      "src/**/*.{test,spec}.{js,ts,jsx,tsx}",
+      // Checks the webpack hook in next.config.js.
+      "next.config.test.ts",
+    ],
     exclude: ["node_modules", ".next", "__tests__/**"],
     testTimeout: 20000,
   },

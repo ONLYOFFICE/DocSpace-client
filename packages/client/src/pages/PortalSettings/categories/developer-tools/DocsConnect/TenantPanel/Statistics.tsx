@@ -168,7 +168,7 @@ const Statistics = ({
   const getSubscriptionNote = () => {
     if (!scheduledChange)
       return t("Common:RenewsOnDate", {
-        date: formatDocsConnectDate(tenant.endDate),
+        date: formatDocsConnectDate(tenant.endDate, i18n.language),
       });
 
     if (isCancellation)
@@ -362,12 +362,14 @@ const Statistics = ({
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("Common:Start")}</Text>
                 <Text fontWeight={600}>
-                  {formatDocsConnectDate(trialStart)}
+                  {formatDocsConnectDate(trialStart, i18n.language)}
                 </Text>
               </div>
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("Common:ValidUntil")}</Text>
-                <Text fontWeight={600}>{formatDocsConnectDate(trialEnd)}</Text>
+                <Text fontWeight={600}>
+                  {formatDocsConnectDate(trialEnd, i18n.language)}
+                </Text>
               </div>
             </div>
             <div
@@ -510,7 +512,7 @@ const Statistics = ({
             <div className={styles.detailRow}>
               <Text className={styles.muted}>{t("DocsConnect:Released")}</Text>
               <Text fontWeight={600}>
-                {formatDocsConnectDate(tenantInfo.license.buildDate)}
+                {formatDocsConnectDate(tenantInfo.license.buildDate, i18n.language)}
               </Text>
             </div>
           </div>

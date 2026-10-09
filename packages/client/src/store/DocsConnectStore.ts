@@ -121,6 +121,8 @@ class DocsConnectStore {
 
   depositedTopUp: number = 0;
 
+  depositBaseCredits: number = 0;
+
   isPortalConnectionAvailable: boolean = false;
 
   isStatisticsRefreshing: boolean = false;
@@ -166,6 +168,7 @@ class DocsConnectStore {
       const info = await getDocsConnectInfo();
       runInAction(() => {
         this.info = info;
+        if (info) this.settleDepositedTopUp(info);
         // The page's own request answers the question too, so a card rendered
         // next to it never has to ask again.
         this.hasInstance = info != null;
@@ -292,7 +295,20 @@ class DocsConnectStore {
 
     runInAction(() => {
       this.info = info;
+      this.settleDepositedTopUp(info);
     });
+  };
+
+  private settleDepositedTopUp = (info: TDocsConnectInfo) => {
+    const credits = info.wallet?.availableCredits;
+
+    if (
+      this.depositedTopUp > 0 &&
+      credits != null &&
+      credits + 0.005 >= this.depositBaseCredits + this.depositedTopUp
+    ) {
+      this.depositedTopUp = 0;
+    }
   };
 
   private refreshInfo = () =>
@@ -304,8 +320,11 @@ class DocsConnectStore {
     const amount = Math.round(((topUp ?? 0) - this.depositedTopUp) * 100) / 100;
     if (amount <= 0) return;
 
+    const baseCredits = this.info?.wallet?.availableCredits ?? 0;
+
     await saveDeposite(amount, this.info?.wallet?.currency ?? "USD");
     runInAction(() => {
+      if (this.depositedTopUp === 0) this.depositBaseCredits = baseCredits;
       this.depositedTopUp += amount;
     });
   };

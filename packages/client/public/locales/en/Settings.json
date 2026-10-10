@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "AI agent quota has been successfully disabled.",
   "AIAgentQuotaEnabled": "AI agent quota has been successfully enabled.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Turn AI features on or off across {{productName}} and {{organizationName}} editors. When disabled, the {{aiSettings}} section is hidden, {{aiAgents}} become unavailable to all users, and paid {{organizationName}} {{aiServices}} can no longer be accessed. Your interaction history is kept safe and fully restored if you turn {{aiServices}} back on.",
+  "AiServicesManagementDescription": "Turn AI agents & tools on or off across {{productName}} and {{organizationName}} editors. When disabled, the {{aiSettings}} section is hidden, {{aiAgents}} become unavailable to all users, and paid {{organizationName}} {{aiServices}} can no longer be accessed. Your interaction history is kept safe and fully restored if you turn {{aiServices}} back on.",
   "AISettings": "AI settings",
   "AllDomains": "Any domains",
   "AllowExistingUntilRemoved": "Allow existing links until removed",

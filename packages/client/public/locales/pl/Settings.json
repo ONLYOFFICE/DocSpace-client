@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Limit agenta AI został pomyślnie wyłączony.",
   "AIAgentQuotaEnabled": "Limit agenta AI został pomyślnie włączony.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Włącz lub wyłącz funkcje AI w edytorach {{productName}} i {{organizationName}}. Po wyłączeniu sekcja {{aiSettings}} zostanie ukryta, {{aiAgents}} staną się niedostępne dla wszystkich użytkowników, a płatne {{aiServices}} {{organizationName}} nie będą już dostępne. Historia Twoich interakcji pozostanie bezpiecznie zapisana i zostanie w pełni przywrócona po ponownym włączeniu {{aiServices}}.",
+  "AiServicesManagementDescription": "Włącz lub wyłącz agentów i narzędzia AI we wszystkich edytorach {{productName}} i {{organizationName}}. Po wyłączeniu sekcja {{aiSettings}} jest ukryta, {{aiAgents}} staje się niedostępny dla wszystkich użytkowników, a płatne {{organizationName}} {{aiServices}} nie są już dostępne. Historia interakcji jest bezpiecznie przechowywana i w pełni przywracana po ponownym włączeniu {{aiServices}}.",
   "AISettings": "Ustawienia AI",
   "AllDomains": "Wszystkie domeny",
   "AllowExistingUntilRemoved": "Zezwalaj na istniejące linki do czasu ich usunięcia",

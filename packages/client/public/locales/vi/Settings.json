@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Hạn mức tác nhân AI đã được tắt thành công.",
   "AIAgentQuotaEnabled": "Hạn mức tác nhân AI đã được bật thành công.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Bật hoặc tắt các tính năng AI trên trình soạn thảo {{productName}} và {{organizationName}}. Khi bị vô hiệu hóa, phần {{aiSettings}} sẽ bị ẩn, {{aiAgents}} sẽ không khả dụng với tất cả người dùng, và {{aiServices}} trả phí của {{organizationName}} sẽ không thể truy cập được nữa. Lịch sử tương tác của bạn được lưu trữ an toàn và khôi phục đầy đủ khi bạn bật lại {{aiServices}}.",
+  "AiServicesManagementDescription": "Bật hoặc tắt các tác nhân và công cụ AI trên tất cả các trình soạn thảo {{productName}} và {{organizationName}}. Khi bị vô hiệu hóa, phần {{aiSettings}} bị ẩn, {{aiAgents}} không còn khả dụng với tất cả người dùng và các {{organizationName}} {{aiServices}} trả phí không còn có thể truy cập. Lịch sử tương tác của bạn được giữ an toàn và khôi phục hoàn toàn nếu bạn bật lại {{aiServices}}.",
   "AISettings": "Cài đặt AI",
   "AllDomains": "Tên miền bất kỳ",
   "AllowExistingUntilRemoved": "Cho phép các liên kết hiện có cho đến khi bị xóa",

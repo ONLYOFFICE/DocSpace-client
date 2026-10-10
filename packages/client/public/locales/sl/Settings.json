@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Kvota AI agenta je bila uspešno onemogočena.",
   "AIAgentQuotaEnabled": "Kvota AI agenta je bila uspešno omogočena.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Vklopite ali izklopite funkcije AI v urednikih {{productName}} in {{organizationName}}. Ko je funkcija onemogočena, je razdelek {{aiSettings}} skrit, {{aiAgents}} postanejo nedostopni vsem uporabnikom, plačljive storitve {{organizationName}} {{aiServices}} pa niso več dostopne. Vaša zgodovina interakcij ostane varno shranjena in se v celoti obnovi, če {{aiServices}} znova vklopite.",
+  "AiServicesManagementDescription": "Vklopite ali izklopite AI agente in orodja v vseh urednikih {{productName}} in {{organizationName}}. Ko so onemogočeni, je razdelek {{aiSettings}} skrit, {{aiAgents}} postane nedostopen vsem uporabnikom in plačljivi {{organizationName}} {{aiServices}} niso več dostopni. Vaša zgodovina interakcij je varno shranjena in v celoti obnovljena, če {{aiServices}} spet vklopite.",
   "AISettings": "AI nastavitve",
   "AllDomains": "Kakršna koli domena",
   "AllowExistingUntilRemoved": "Dovoli obstoječe povezave do ročne odstranitve",

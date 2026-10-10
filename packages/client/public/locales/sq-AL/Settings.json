@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Kuota e agjentit IA është çaktivizuar me sukses.",
   "AIAgentQuotaEnabled": "Kuota e agjentit IA është aktivizuar me sukses.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Aktivizoni ose çaktivizoni funksionet IA në redaktorët e {{productName}} dhe {{organizationName}}. Kur çaktivizohet, seksioni {{aiSettings}} fshihet, {{aiAgents}} bëhen të padisponueshëm për të gjithë përdoruesit, dhe {{aiServices}} e paguara e {{organizationName}} nuk mund të aksesohen më. Historiku juaj i ndërveprimit ruhet i sigurt dhe rikuperohet plotësisht nëse riaktivizoni {{aiServices}}.",
+  "AiServicesManagementDescription": "Aktivizoni ose çaktivizoni agjentët dhe mjetet e AI në të gjithë redaktorët e {{productName}} dhe {{organizationName}}. Kur çaktivizohen, seksioni {{aiSettings}} fshihet, {{aiAgents}} bëhet i padisponueshëm për të gjithë përdoruesit dhe {{organizationName}} {{aiServices}} me pagesë nuk mund të aksesohen më. Historia e ndërveprimeve tuaja mbahet e sigurt dhe restaurohet plotësisht nëse aktivizoni përsëri {{aiServices}}.",
   "AISettings": "Cilësimet e inteligjencës artificiale",
   "AllDomains": "Çdo domen",
   "AllowExistingUntilRemoved": "Lejo lidhjet ekzistuese deri sa të hiqen",

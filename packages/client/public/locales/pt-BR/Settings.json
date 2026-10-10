@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "A cota do agente de IA foi desativada com sucesso.",
   "AIAgentQuotaEnabled": "A cota do agente de IA foi ativada com sucesso.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Ative ou desative os recursos de IA em todos os editores {{productName}} e {{organizationName}}. Quando desativado, a seção {{aiSettings}} fica oculta, {{aiAgents}} ficam indisponíveis para todos os usuários e os {{aiServices}} pagos do {{organizationName}} não podem mais ser acessados. Seu histórico de interação é mantido em segurança e totalmente restaurado se você reativar os {{aiServices}}.",
+  "AiServicesManagementDescription": "Ative ou desative os agentes e ferramentas de IA em todos os editores do {{productName}} e {{organizationName}}. Quando desativados, a seção {{aiSettings}} fica oculta, o {{aiAgents}} fica indisponível para todos os usuários e os {{organizationName}} {{aiServices}} pagos não podem mais ser acessados. Seu histórico de interações é mantido com segurança e totalmente restaurado se você reativar o {{aiServices}}.",
   "AISettings": "Configurações de IA",
   "AllDomains": "Todos os domínios",
   "AllowExistingUntilRemoved": "Permitir links existentes até serem removidos",

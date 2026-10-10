@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "تم تعطيل حصة وكيل الذكاء الاصطناعي بنجاح.",
   "AIAgentQuotaEnabled": "تم تفعيل حصة وكيل الذكاء الاصطناعي بنجاح.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "فعّل ميزات الذكاء الاصطناعي أو عطّلها عبر محررات {{productName}} و{{organizationName}}. عند التعطيل، يتم إخفاء قسم {{aiSettings}}، وتصبح {{aiAgents}} غير متاحة لجميع المستخدمين، ولم يعد بالإمكان الوصول إلى {{aiServices}} المدفوعة الخاصة بـ {{organizationName}}. يتم الحفاظ على سجل تفاعلك بأمان واستعادته بالكامل عند إعادة تفعيل {{aiServices}}.",
+  "AiServicesManagementDescription": "قم بتشغيل وكلاء وأدوات الذكاء الاصطناعي أو إيقافها عبر محررات {{productName}} و{{organizationName}}. عند التعطيل، يتم إخفاء قسم {{aiSettings}}، ويصبح {{aiAgents}} غير متاح لجميع المستخدمين، ولا يمكن الوصول إلى {{organizationName}} {{aiServices}} المدفوعة. يتم الاحتفاظ بسجل تفاعلاتك بأمان ويُستعاد بالكامل عند تشغيل {{aiServices}} مرة أخرى.",
   "AISettings": "إعدادات الذكاء الاصطناعي",
   "AllDomains": "أي نطاقات",
   "AllowExistingUntilRemoved": "السماح بالروابط الحالية حتى يتم حذفها",

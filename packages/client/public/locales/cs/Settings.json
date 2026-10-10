@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Kvóta AI agenta byla úspěšně deaktivována.",
   "AIAgentQuotaEnabled": "Kvóta AI agenta byla úspěšně aktivována.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Zapněte nebo vypněte funkce AI napříč editory {{productName}} a {{organizationName}}. Po deaktivaci se sekce {{aiSettings}} skryje, {{aiAgents}} budou nedostupní pro všechny uživatele a placené {{organizationName}} {{aiServices}} už nebude možné používat. Historie vaší interakce zůstane bezpečně uložena a plně se obnoví, jakmile {{aiServices}} znovu zapnete.",
+  "AiServicesManagementDescription": "Zapněte nebo vypněte AI agenty a nástroje ve všech editorech {{productName}} a {{organizationName}}. Při deaktivaci je sekce {{aiSettings}} skryta, {{aiAgents}} se stane nedostupným pro všechny uživatele a placené {{organizationName}} {{aiServices}} již nebudou dostupné. Historie interakcí je bezpečně uložena a plně obnovena, pokud {{aiServices}} znovu zapnete.",
   "AISettings": "Nastavení AI",
   "AllDomains": "Libovolné domény",
   "AllowExistingUntilRemoved": "Ponechat existující odkazy do jejich odebrání",

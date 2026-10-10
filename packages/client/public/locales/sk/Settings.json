@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Kvóta AI agenta bola úspešne deaktivovaná.",
   "AIAgentQuotaEnabled": "Kvóta AI agenta bola úspešne aktivovaná.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Zapnite alebo vypnite funkcie AI naprieč editormi {{productName}} a {{organizationName}}. Pri vypnutí sa sekcia {{aiSettings}} skryje, {{aiAgents}} sa stanú nedostupnými pre všetkých používateľov a platené {{organizationName}} {{aiServices}} už nebudú dostupné. Vaša interakčná história zostane bezpečne uložená a po opätovnom zapnutí {{aiServices}} bude plne obnovená.",
+  "AiServicesManagementDescription": "Zapnite alebo vypnite AI agentov a nástroje vo všetkých editoroch {{productName}} a {{organizationName}}. Po deaktivácii sa sekcia {{aiSettings}} skryje, {{aiAgents}} prestane byť dostupný pre všetkých používateľov a platené {{organizationName}} {{aiServices}} už nebudú dostupné. História vašich interakcií je bezpečne uložená a úplne obnovená, ak znova zapnete {{aiServices}}.",
   "AISettings": "Nastavenia AI",
   "AllDomains": "Všetky domény",
   "AllowExistingUntilRemoved": "Ponechať existujúce prepojenia do ich odstránenia",

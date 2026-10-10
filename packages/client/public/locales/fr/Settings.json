@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Le quota de l'agent IA a été désactivé avec succès.",
   "AIAgentQuotaEnabled": "Le quota de l'agent IA a été activé avec succès.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Activez ou désactivez les fonctionnalités IA dans les éditeurs {{productName}} et {{organizationName}}. Lorsqu'elles sont désactivées, la section {{aiSettings}} est masquée, {{aiAgents}} devient indisponible pour tous les utilisateurs, et les {{aiServices}} payants de {{organizationName}} ne sont plus accessibles. Votre historique d'interaction est conservé en toute sécurité et entièrement restauré si vous réactivez {{aiServices}}.",
+  "AiServicesManagementDescription": "Activez ou désactivez les agents et outils IA dans tous les éditeurs de {{productName}} et {{organizationName}}. Lorsqu’ils sont désactivés, la section {{aiSettings}} est masquée, {{aiAgents}} devient indisponible pour tous les utilisateurs et les {{organizationName}} {{aiServices}} payants ne sont plus accessibles. Votre historique d’interactions est conservé en sécurité et entièrement restauré si vous réactivez {{aiServices}}.",
   "AISettings": "Paramètres IA",
   "AllDomains": "Tous les domaines",
   "AllowExistingUntilRemoved": "Autoriser les liens existants jusqu'à leur suppression",

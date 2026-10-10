@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Het AI-agent quotum is succesvol uitgeschakeld.",
   "AIAgentQuotaEnabled": "Het AI-agent quotum is succesvol ingeschakeld.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Schakel AI-functies in of uit voor de editors van {{productName}} en {{organizationName}}. Wanneer uitgeschakeld, wordt de sectie {{aiSettings}} verborgen, zijn {{aiAgents}} niet meer beschikbaar voor alle gebruikers, en is de betaalde {{organizationName}} {{aiServices}} niet langer toegankelijk. Uw interactiegeschiedenis blijft veilig bewaard en wordt volledig hersteld wanneer u {{aiServices}} weer inschakelt.",
+  "AiServicesManagementDescription": "Schakel AI-agenten en -tools in of uit in alle editors van {{productName}} en {{organizationName}}. Wanneer uitgeschakeld, wordt de sectie {{aiSettings}} verborgen, wordt {{aiAgents}} niet beschikbaar voor alle gebruikers en zijn betaalde {{organizationName}} {{aiServices}} niet meer toegankelijk. Uw interactiegeschiedenis wordt veilig bewaard en volledig hersteld als u {{aiServices}} weer inschakelt.",
   "AISettings": "AI-instellingen",
   "AllDomains": "Alle domeinen",
   "AllowExistingUntilRemoved": "Bestaande links toestaan totdat ze worden verwijderd",

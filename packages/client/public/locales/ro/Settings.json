@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Cota agentului IA a fost dezactivată cu succes.",
   "AIAgentQuotaEnabled": "Cota agentului IA a fost activată cu succes.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Activați sau dezactivați funcțiile IA în {{productName}} și în editorii {{organizationName}}. Când sunt dezactivate, secțiunea {{aiSettings}} este ascunsă, {{aiAgents}} devin indisponibile pentru toți utilizatorii, iar serviciile plătite {{aiServices}} pentru {{organizationName}} nu mai pot fi accesate. Istoricul dvs. de interacțiune este păstrat în siguranță și restaurat integral dacă reactivați {{aiServices}}.",
+  "AiServicesManagementDescription": "Activați sau dezactivați agenții și instrumentele IA în toate editorele {{productName}} și {{organizationName}}. Când sunt dezactivați, secțiunea {{aiSettings}} este ascunsă, {{aiAgents}} devine indisponibil pentru toți utilizatorii și serviciile {{organizationName}} {{aiServices}} cu plată nu mai sunt accesibile. Istoricul interacțiunilor dvs. este păstrat în siguranță și restaurat complet dacă reactivați {{aiServices}}.",
   "AISettings": "Setări IA",
   "AllDomains": "Orice domeniu",
   "AllowExistingUntilRemoved": "Permite linkurile existente până la ștergerea lor",

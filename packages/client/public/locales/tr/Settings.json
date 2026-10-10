@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "AI ajanı kotası başarıyla devre dışı bırakıldı.",
   "AIAgentQuotaEnabled": "AI ajanı kotası başarıyla etkinleştirildi.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "{{productName}} ve {{organizationName}} düzenleyicilerinde yapay zeka özelliklerini açın veya kapatın. Devre dışı bırakıldığında {{aiSettings}} bölümü gizlenir, {{aiAgents}} tüm kullanıcılar için kullanılamaz hale gelir ve ücretli {{organizationName}} {{aiServices}} artık erişilemez. Etkileşim geçmişiniz güvenle saklanır ve {{aiServices}}'i tekrar açtığınızda tamamen geri yüklenir.",
+  "AiServicesManagementDescription": "{{productName}} ve {{organizationName}} editörlerinin tamamında AI aracılarını ve araçlarını açın veya kapatın. Devre dışı bırakıldığında {{aiSettings}} bölümü gizlenir, {{aiAgents}} tüm kullanıcılar için kullanılamaz hale gelir ve ücretli {{organizationName}} {{aiServices}}’e artık erişilemez. {{aiServices}}’i yeniden açarsanız etkileşim geçmişiniz güvende tutulur ve tamamen geri yüklenir.",
   "AISettings": "Yapay zeka ayarları",
   "AllDomains": "Herhangi bir alan adı",
   "AllowExistingUntilRemoved": "Mevcut bağlantılara kaldırılana kadar izin ver",

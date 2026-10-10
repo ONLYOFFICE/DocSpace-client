@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "AI-agentin kiintiö on poistettu käytöstä onnistuneesti.",
   "AIAgentQuotaEnabled": "AI-agentin kiintiö on otettu käyttöön onnistuneesti.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Ota tekoälyominaisuudet käyttöön tai pois käytöstä kaikkialla {{productName}}- ja {{organizationName}}-muokkaajissa. Kun ominaisuus on pois käytöstä, {{aiSettings}}-osio piilotetaan, {{aiAgents}} ei ole enää käytettävissä kenellekään käyttäjälle, ja maksulliset {{organizationName}} {{aiServices}} eivät ole enää käytettävissä. Vuorovaikutushistoriasi säilyy turvallisesti tallennettuna ja palautetaan kokonaan, kun otat {{aiServices}} -palvelut uudelleen käyttöön.",
+  "AiServicesManagementDescription": "Ota käyttöön tai poista käytöstä AI-agentit ja -työkalut kaikissa {{productName}}- ja {{organizationName}}-editoreissa. Kun ne on poistettu käytöstä, {{aiSettings}}-osio piilotetaan, {{aiAgents}} ei ole kaikkien käyttäjien käytettävissä ja maksullisiin {{organizationName}} {{aiServices}} -palveluihin ei enää pääse. Vuorovaikutushistoriasi säilyy turvassa ja palautuu täysin, jos otat {{aiServices}}-palvelun uudelleen käyttöön.",
   "AISettings": "AI-asetukset",
   "AllDomains": "Kaikki verkkotunnukset",
   "AllowExistingUntilRemoved": "Salli olemassa olevat linkit, kunnes ne poistetaan",

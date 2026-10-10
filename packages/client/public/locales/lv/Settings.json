@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "MI aģenta kvota veiksmīgi atspējota.",
   "AIAgentQuotaEnabled": "MI aģenta kvota veiksmīgi iespējota.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Ieslēdziet vai izslēdziet MI funkcijas {{productName}} un {{organizationName}} redaktoros. Ja tās ir izslēgtas, {{aiSettings}} sadaļa tiek paslēpta, {{aiAgents}} kļūst nepieejami visiem lietotājiem, un maksas {{organizationName}} {{aiServices}} vairs nav pieejami. Jūsu mijiedarbības vēsture tiek droši saglabāta un pilnībā atjaunota, ja atkal ieslēdzat {{aiServices}}.",
+  "AiServicesManagementDescription": "Ieslēdziet vai izslēdziet AI agentus un rīkus visos {{productName}} un {{organizationName}} redaktoros. Kad ir atspējoti, {{aiSettings}} sadaļa tiek paslēpta, {{aiAgents}} kļūst nepieejams visiem lietotājiem un maksas {{organizationName}} {{aiServices}} vairs nav pieejami. Jūsu mijiedarbības vēsture tiek droši saglabāta un pilnībā atjaunota, ja ieslēdzat {{aiServices}} atpakaļ.",
   "AISettings": "MI iestatījumi",
   "AllDomains": "Jebkurš domēns",
   "AllowExistingUntilRemoved": "Atļaut esošās saites līdz to noņemšanai",

@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "AIエージェントのクォータが正常に無効化されました。",
   "AIAgentQuotaEnabled": "AIエージェントのクォータが正常に有効化されました。",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "{{productName}} および {{organizationName}} エディター全体でAI機能のオン・オフを切り替えます。無効にすると、{{aiSettings}} セクションは非表示になり、{{aiAgents}} はすべてのユーザーから利用できなくなり、有料の {{organizationName}} の {{aiServices}} にもアクセスできなくなります。やり取りの履歴は安全に保存されており、{{aiServices}} を再度有効にすると完全に復元されます。",
+  "AiServicesManagementDescription": "{{productName}}および{{organizationName}}のすべてのエディターでAIエージェントとツールのオン/オフを切り替えます。無効にすると、{{aiSettings}}セクションが非表示になり、{{aiAgents}}はすべてのユーザーが利用できなくなり、有料の{{organizationName}} {{aiServices}}にはアクセスできなくなります。{{aiServices}}を再度オンにすると、インタラクション履歴は安全に保存され、完全に復元されます。",
   "AISettings": "AI設定",
   "AllDomains": "任意のドメイン",
   "AllowExistingUntilRemoved": "削除されるまで既存のリンクを許可する",

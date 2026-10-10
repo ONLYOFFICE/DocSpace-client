@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "ໂຄຕາ AI agent ຖືກປິດໃຊ້ງານສຳເລັດແລ້ວ.",
   "AIAgentQuotaEnabled": "ໂຄຕາ AI agent ຖືກເປີດໃຊ້ງານສຳເລັດແລ້ວ.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "ເປີດ ຫຼື ປິດການໃຊ້ງານຄຸນສົມບັດ AI ໃນບັນນາທິການ {{productName}} ແລະ {{organizationName}}. ເມື່ອປິດການໃຊ້ງານ, ພາກສ່ວນ {{aiSettings}} ຈະຖືກເຊື່ອງໄວ້, {{aiAgents}} ຈະບໍ່ສາມາດໃຊ້ໄດ້ສຳລັບຜູ້ໃຊ້ທຸກຄົນ, ແລະ {{aiServices}} ຂອງ {{organizationName}} ທີ່ຈ່າຍເງິນແລ້ວຈະບໍ່ສາມາດເຂົ້າເຖິງໄດ້ອີກຕໍ່ໄປ. ປະຫວັດການໂຕ້ຕອບຂອງທ່ານຈະຖືກເກັບຮັກສາຢ່າງປອດໄພ ແລະ ຈະຖືກກູ້ຄືນຢ່າງເຕັມທີ່ຫາກທ່ານເປີດໃຊ້ງານ {{aiServices}} ອີກຄັ້ງ.",
+  "AiServicesManagementDescription": "ເປີດ ຫຼື ປິດ AI ຕົວແທນ ແລະ ເຄື່ອງມືຂ້າມບັນນາທິການ {{productName}} ແລະ {{organizationName}}. ເມື່ອປິດໃຊ້ງານ, ພາກ {{aiSettings}} ຈະຖືກເຊື່ອງໄວ້, {{aiAgents}} ຈະບໍ່ສາມາດໃຊ້ງານໄດ້ສຳລັບຜູ້ໃຊ້ທັງໝົດ, ແລະ {{organizationName}} {{aiServices}} ທີ່ຕ້ອງຊຳລະເງິນຈະບໍ່ສາມາດເຂົ້າເຖິງໄດ້ອີກ. ປະຫວັດການໂຕ້ຕອບຂອງທ່ານຈະຖືກເກັບຮັກສາໄວ້ຢ່າງປອດໄພ ແລະ ຟື້ນຟູຢ່າງເຕັມທີ່ຫາກທ່ານເປີດ {{aiServices}} ຄືນ.",
   "AISettings": "ການຕັ້ງຄ່າ AI",
   "AllDomains": "ທຸກໆໂດເມນ",
   "AllowExistingUntilRemoved": "ອະນຸຍາດໃຫ້ລິ້ງທີ່ມີຢູ່ແລ້ວຈົນກວ່າຈະຖືກລຶບ",

@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "没有 AI 代理。",
   "AIAgentQuotaEnabled": "AI 代理配额已成功禁用。",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "在 {{productName}} 和 {{organizationName}} 编辑器中开启或关闭 AI 功能。禁用后，{{aiSettings}} 部分将被隐藏，所有用户将无法使用 {{aiAgents}}，付费的 {{organizationName}} {{aiServices}} 也将无法访问。您的交互历史记录会被安全保存，并在重新启用 {{aiServices}} 后完全恢复。",
+  "AiServicesManagementDescription": "在 {{productName}} 和 {{organizationName}} 的所有编辑器中开启或关闭 AI 代理和工具。禁用后，{{aiSettings}} 部分将被隐藏，{{aiAgents}} 对所有用户不可用，付费的 {{organizationName}} {{aiServices}} 也将无法访问。如果您重新开启 {{aiServices}}，您的交互历史记录将被安全保存并完全恢复。",
   "AISettings": "AI 设置",
   "AllDomains": "任意域",
   "AllowExistingUntilRemoved": "保留现有链接直至手动删除",

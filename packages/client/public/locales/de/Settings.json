@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Das KI-Agenten-Kontingent wurde erfolgreich deaktiviert.",
   "AIAgentQuotaEnabled": "Das KI-Agenten-Kontingent wurde erfolgreich aktiviert.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Aktivieren oder deaktivieren Sie KI-Funktionen in {{productName}} und {{organizationName}} Editoren. Wenn deaktiviert, wird der {{aiSettings}} Abschnitt ausgeblendet, {{aiAgents}} wird für alle Benutzer nicht mehr verfügbar, und die kostenpflichtigen {{organizationName}} {{aiServices}} sind nicht mehr zugänglich. Ihr Interaktionsverlauf bleibt sicher gespeichert und wird vollständig wiederhergestellt, wenn Sie {{aiServices}} wieder aktivieren.",
+  "AiServicesManagementDescription": "Schalten Sie KI-Agenten und Tools in allen Editoren von {{productName}} und {{organizationName}} ein oder aus. Wenn deaktiviert, wird der Abschnitt {{aiSettings}} ausgeblendet, {{aiAgents}} steht allen Benutzern nicht mehr zur Verfügung und kostenpflichtige {{organizationName}} {{aiServices}} können nicht mehr aufgerufen werden. Ihr Interaktionsverlauf wird sicher aufbewahrt und vollständig wiederhergestellt, wenn Sie {{aiServices}} wieder aktivieren.",
   "AISettings": "KI-Einstellungen",
   "AllDomains": "Alle Domains",
   "AllowExistingUntilRemoved": "Vorhandene Links bis zur Löschung zulassen",

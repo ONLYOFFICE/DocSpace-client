@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Квотата за AI агент е деактивирана успешно.",
   "AIAgentQuotaEnabled": "Квотата за AI агент е активирана успешно.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Включвайте или изключвайте AI функциите в редакторите на {{productName}} и {{organizationName}}. Когато са изключени, секцията {{aiSettings}} се скрива, {{aiAgents}} стават недостъпни за всички потребители, а платените {{organizationName}} {{aiServices}} вече не могат да бъдат достъпвани. Историята на взаимодействията ви се запазва в безопасност и се възстановява напълно, ако отново включите {{aiServices}}.",
+  "AiServicesManagementDescription": "Включете или изключете AI агентите и инструментите в редакторите на {{productName}} и {{organizationName}}. При деактивиране секцията {{aiSettings}} е скрита, {{aiAgents}} става недостъпен за всички потребители и платените {{organizationName}} {{aiServices}} вече не могат да бъдат достъпвани. Историята на взаимодействията ви се пази в безопасност и се възстановява напълно, ако включите {{aiServices}} отново.",
   "AISettings": "AI настройки",
   "AllDomains": "Всички домейни",
   "AllowExistingUntilRemoved": "Разрешаване на съществуващи линкове до тяхното премахване",

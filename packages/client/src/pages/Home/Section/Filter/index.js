@@ -1853,6 +1853,7 @@ const SectionFilterContent = ({
       const newFilter = FilesFilter.getDefault();
 
       newFilter.folder = filter.folder;
+      newFilter.folderType = filter.folderType;
 
       const path = location.pathname.split("/filter")[0];
 

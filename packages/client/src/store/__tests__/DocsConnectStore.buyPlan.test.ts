@@ -48,6 +48,14 @@ vi.mock("@docspace/shared/api/docs-connect", () => ({
   startDocsConnectReport: vi.fn(),
   getDocsConnectReportStatus: vi.fn(),
   getDocsConnectConnection: vi.fn(),
+  DocsConnectDeclinedError: class extends Error {
+    action: string;
+
+    constructor(action: string) {
+      super(action);
+      this.action = action;
+    }
+  },
 }));
 
 vi.mock("@docspace/shared/api/portal", () => ({
@@ -79,6 +87,9 @@ vi.mock("../../i18n", () => ({
 
 import {
   buyDocsConnectPlan,
+  cancelDocsConnectPlan,
+  cancelDocsConnectScheduledChange,
+  DocsConnectDeclinedError,
   getDocsConnectInfo,
   switchDocsConnectToDevPack,
 } from "@docspace/shared/api/docs-connect";
@@ -448,6 +459,61 @@ describe("DocsConnectStore.buyPlanViaStripe", () => {
 
     expect(result).toBeNull();
     expect(store.buyPlanPanelVisible).toBe(true);
+  });
+});
+
+describe("DocsConnectStore declined requests", () => {
+  it("reports a declined cancellation with a translated message", async () => {
+    const store = createStore(makeInfo());
+    vi.mocked(cancelDocsConnectPlan).mockRejectedValueOnce(
+      new DocsConnectDeclinedError("cancelPlan"),
+    );
+
+    await expect(store.cancelPlan()).rejects.toThrow(
+      "DocsConnect:PlanCancellationFailed",
+    );
+  });
+
+  it("reports a declined scheduled change cancellation with a translated message", async () => {
+    const store = createStore(makeInfo());
+    vi.mocked(cancelDocsConnectScheduledChange).mockRejectedValueOnce(
+      new DocsConnectDeclinedError("cancelScheduledChange"),
+    );
+
+    await expect(store.cancelScheduledChange()).rejects.toThrow(
+      "DocsConnect:ScheduledChangeCancellationFailed",
+    );
+  });
+
+  it("reports a declined purchase with a translated message", async () => {
+    const store = createStore(makeInfo());
+    mockedBuyPlan.mockRejectedValueOnce(
+      new DocsConnectDeclinedError("buyPlan"),
+    );
+
+    await expect(
+      store.buyPlan({ users: USERS, devPack: false, topUp: 0 }),
+    ).rejects.toThrow("DocsConnect:PlanUpdateFailed");
+  });
+
+  it("reports a declined Dev Pack switch with a translated message", async () => {
+    const store = createStore(makeInfo());
+    mockedSwitchToDevPack.mockRejectedValueOnce(
+      new DocsConnectDeclinedError("switchToDevPack"),
+    );
+
+    await expect(
+      store.switchToDevPack({ quantity: USERS, topUp: 0 }),
+    ).rejects.toThrow("DocsConnect:DevPackSwitchFailed");
+  });
+
+  it("passes other errors through unchanged", async () => {
+    const store = createStore(makeInfo());
+    vi.mocked(cancelDocsConnectPlan).mockRejectedValueOnce(
+      new Error("Tariff is not paid"),
+    );
+
+    await expect(store.cancelPlan()).rejects.toThrow("Tariff is not paid");
   });
 });
 

@@ -58,6 +58,22 @@ const DOCS_CLOUD_DEVPACK_PRODUCT = "docsclouddevpack";
 const QUANTITY_TYPE_SET = 0;
 const QUANTITY_TYPE_ADD = 1;
 
+export type TDocsConnectDeclinedAction =
+  | "cancelPlan"
+  | "cancelScheduledChange"
+  | "buyPlan"
+  | "switchToDevPack";
+
+export class DocsConnectDeclinedError extends Error {
+  action: TDocsConnectDeclinedAction;
+
+  constructor(action: TDocsConnectDeclinedAction) {
+    super(`Docs Connect ${action} was declined`);
+    this.name = "DocsConnectDeclinedError";
+    this.action = action;
+  }
+}
+
 export type BuyDocsConnectPlanData = {
   users: number;
   devPackEnabled: boolean;
@@ -465,7 +481,7 @@ export const cancelDocsConnectPlan = async (
   })) as boolean;
 
   if (ok === false) {
-    throw new Error("Docs Connect plan cancellation failed");
+    throw new DocsConnectDeclinedError("cancelPlan");
   }
 
   return getDocsConnectInfo(true);
@@ -488,7 +504,7 @@ export const cancelDocsConnectScheduledChange = async (
   })) as boolean;
 
   if (ok === false) {
-    throw new Error("Docs Connect scheduled change cancellation failed");
+    throw new DocsConnectDeclinedError("cancelScheduledChange");
   }
 
   return getDocsConnectInfo(true);
@@ -532,7 +548,7 @@ export const buyDocsConnectPlan = async (
   })) as boolean;
 
   if (ok === false) {
-    throw new Error("Docs Connect plan purchase failed");
+    throw new DocsConnectDeclinedError("buyPlan");
   }
 
   return getDocsConnectInfo(true);
@@ -559,7 +575,7 @@ export const switchDocsConnectToDevPack = async ({
   })) as boolean;
 
   if (ok === false) {
-    throw new Error("Docs Connect switch to Dev Pack failed");
+    throw new DocsConnectDeclinedError("switchToDevPack");
   }
 
   return getDocsConnectInfo(true);

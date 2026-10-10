@@ -51,8 +51,12 @@ import {
   getDocsConnectReportStatus,
   getDocsConnectConnection,
   hasDocsConnectTenant,
+  DocsConnectDeclinedError,
 } from "@docspace/shared/api/docs-connect";
-import type { TDocsConnectConnection } from "@docspace/shared/api/docs-connect";
+import type {
+  TDocsConnectConnection,
+  TDocsConnectDeclinedAction,
+} from "@docspace/shared/api/docs-connect";
 import { saveDeposite } from "@docspace/shared/api/portal";
 import {
   changeDocumentServiceLocation,
@@ -77,10 +81,30 @@ import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { isDocsConnectPaid } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
 
+import i18n from "../i18n";
+
 import type DocumentBuilderReportStore from "./DocumentBuilderReportStore";
 import { ReportType } from "./DocumentBuilderReportStore";
 
 export type BuyPlanMode = "trial" | "edit";
+
+const getDeclinedMessage = (action: TDocsConnectDeclinedAction) => {
+  switch (action) {
+    case "cancelPlan":
+      return i18n.t("DocsConnect:PlanCancellationFailed");
+    case "cancelScheduledChange":
+      return i18n.t("DocsConnect:ScheduledChangeCancellationFailed");
+    case "buyPlan":
+      return i18n.t("DocsConnect:PlanUpdateFailed");
+    case "switchToDevPack":
+      return i18n.t("DocsConnect:DevPackSwitchFailed");
+  }
+};
+
+const localizeDeclinedError = (error: unknown) =>
+  error instanceof DocsConnectDeclinedError
+    ? new Error(getDeclinedMessage(error.action))
+    : error;
 
 class DocsConnectStore {
   settingsStore: Nullable<SettingsStore> = null;
@@ -368,7 +392,7 @@ class DocsConnectStore {
       this.applyPurchase(info);
     } catch (error) {
       await this.refreshInfo();
-      throw error;
+      throw localizeDeclinedError(error);
     }
   };
 
@@ -473,14 +497,16 @@ class DocsConnectStore {
       this.applyPurchase(info);
     } catch (error) {
       await this.refreshInfo();
-      throw error;
+      throw localizeDeclinedError(error);
     }
   };
 
   cancelPlan = async () => {
     const info = await cancelDocsConnectPlan(
       this.info?.devPackEnabled ?? false,
-    );
+    ).catch((error) => {
+      throw localizeDeclinedError(error);
+    });
     runInAction(() => {
       this.info = info;
     });
@@ -492,7 +518,9 @@ class DocsConnectStore {
       this.info?.scheduledChange?.scheduledOnDevPack ??
         this.info?.devPackEnabled ??
         false,
-    );
+    ).catch((error) => {
+      throw localizeDeclinedError(error);
+    });
     runInAction(() => {
       this.info = info;
     });

@@ -67,5 +67,5 @@ export const useSocket = ({
     return () => {
       SocketHelper?.off(SocketEvents.UpdateHistory, updateHistory);
     };
-  }, []);
+  }, [selectionId, infoPanelSelectionType, fetchHistory]);
 };

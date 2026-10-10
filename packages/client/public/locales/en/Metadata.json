@@ -32,7 +32,7 @@
   "FieldTypeNumber": "Number",
   "FieldTypeSingleChoice": "Single select",
   "FieldTypeText": "Text",
-  "HiddenTemplateHint": "Hidden templates can be assigned via API only and are not shown in template pickers.",
+  "HiddenTemplateHint": "Hidden templates can be used via API only. They are not shown in template pickers or on files, folders, and rooms.",
   "MetadataAppliedToItems": "{{template}} metadata has been applied to all items in {{title}}",
   "MetadataTemplatesDescription": "Create and manage metadata templates — named sets of typed fields (Text, Number, Date, Single and Multi select) assigned to files, folders and rooms. Field values power list filtering, global search and AI autofill.",
   "MoveDown": "Move down",

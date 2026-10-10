@@ -58,8 +58,8 @@ import {
   canAddCustomField,
   canEditMetadata,
   getMetadataItemType,
+  getVisibleTemplates,
   isEmptyMetadata,
-  sortTemplates,
 } from "./utils";
 import CascadeBlock from "./sub-components/CascadeBlock";
 import CustomFieldsCard from "./sub-components/CustomFieldsCard";
@@ -155,7 +155,7 @@ const Metadata = ({ selection }: MetadataProps) => {
   const getTemplateActions = (
     template: TEntryMetadataTemplate,
   ): TCardActions | undefined =>
-    canEdit && template.visible
+    canEdit
       ? {
           onEdit: () => setPanel({ type: "template", template }),
           onDelete: () =>
@@ -189,9 +189,9 @@ const Metadata = ({ selection }: MetadataProps) => {
           <MetadataHeader addActions={addActions} />
 
           <div className={styles.blocks}>
-            {sortTemplates(metadata.templates).map((template) => (
+            {getVisibleTemplates(metadata.templates).map((template) => (
               <Fragment key={template.id}>
-                {isCascadable && template.visible ? (
+                {isCascadable ? (
                   <CascadeBlock
                     itemType={itemType}
                     templateName={template.name}

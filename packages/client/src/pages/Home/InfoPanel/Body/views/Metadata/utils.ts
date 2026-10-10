@@ -86,7 +86,7 @@ export const canEditMetadata = (item: TMetadataSelection) => {
 };
 
 export const isEmptyMetadata = ({ templates, customFields }: TEntryMetadata) =>
-  !templates.length && !customFields.length;
+  !templates.some(({ visible }) => visible) && !customFields.length;
 
 export const getCascadeState = (
   operation: TMetadataOperation | null,
@@ -112,8 +112,10 @@ export const getLaunchResult = (
 export const canAddCustomField = (count: number) =>
   count < METADATA_CUSTOM_FIELDS_MAX;
 
-export const sortTemplates = (templates: TEntryMetadataTemplate[]) =>
-  [...templates].sort((a, b) => a.name.localeCompare(b.name));
+export const getVisibleTemplates = (templates: TEntryMetadataTemplate[]) =>
+  templates
+    .filter(({ visible }) => visible)
+    .sort((a, b) => a.name.localeCompare(b.name));
 
 export const getUnassignedTemplates = (
   templates: TMetadataTemplate[],

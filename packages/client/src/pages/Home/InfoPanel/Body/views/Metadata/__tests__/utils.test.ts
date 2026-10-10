@@ -59,12 +59,12 @@ import {
   getEntryKind,
   getMetadataItemType,
   getUnassignedTemplates,
+  getVisibleTemplates,
   isEmptyMetadata,
   isSameInput,
   isTemplateFormValid,
   isValidCustomFieldDraft,
   isValidNumberInput,
-  sortTemplates,
   toCustomFieldDrafts,
   toggleOption,
 } from "../utils";
@@ -130,8 +130,14 @@ describe("canEditMetadata", () => {
 });
 
 describe("entry metadata state", () => {
-  it("is empty without templates and custom fields", () => {
+  it("is empty without visible templates and custom fields", () => {
     expect(isEmptyMetadata({ templates: [], customFields: [] })).toBe(true);
+    expect(
+      isEmptyMetadata({
+        templates: [{ ...entryTemplate(1, "Sync"), visible: false }],
+        customFields: [],
+      }),
+    ).toBe(true);
     expect(
       isEmptyMetadata({
         templates: [],
@@ -147,13 +153,14 @@ describe("entry metadata state", () => {
 });
 
 describe("templates", () => {
-  it("sorts assigned templates by name", () => {
-    const sorted = sortTemplates([
+  it("shows only visible templates, sorted by name", () => {
+    const shown = getVisibleTemplates([
       entryTemplate(1, "Invoice"),
+      { ...entryTemplate(3, "Sync"), visible: false },
       entryTemplate(2, "Case file"),
     ]);
 
-    expect(sorted.map((item) => item.name)).toEqual(["Case file", "Invoice"]);
+    expect(shown.map((item) => item.name)).toEqual(["Case file", "Invoice"]);
   });
 
   it("offers only templates that are not assigned yet", () => {

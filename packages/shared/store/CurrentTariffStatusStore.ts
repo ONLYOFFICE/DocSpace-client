@@ -39,11 +39,11 @@ import axios from "axios";
 import api from "../api";
 import { getServiceAccountingPrices, getWalletPayer } from "../api/portal";
 
-import { PaymentMethodStatus, QuotaState, TariffState } from "../enums";
+import { PaymentMethodStatus, TariffState } from "../enums";
 
-import { TCustomerInfo, TPortalTariff, TQuotas } from "../api/portal/types";
+import { TCustomerInfo, TPortalTariff } from "../api/portal/types";
 import { isValidDate } from "../utils";
-import { getDaysLeft, getDaysRemaining, isAdmin } from "../utils/common";
+import { getDaysLeft, getDaysRemaining } from "../utils/common";
 import {
   parseToDateTime,
   formatDateLocalized,
@@ -68,14 +68,6 @@ class CurrentTariffStatusStore {
   serviceFeePercents = new Map<string, number>();
 
   language: string = "en";
-
-  walletQuotas: TQuotas[] = [];
-
-  previousWalletQuota: TQuotas[] = [];
-
-  storageServiceId: Nullable<number> = null;
-
-  walletServicesResolved = false;
 
   payerInfo: TCustomerInfo = {
     portalId: null,
@@ -264,73 +256,22 @@ class CurrentTariffStatusStore {
     }
   };
 
-  resolveWalletServiceIds = async () => {
-    if (this.walletServicesResolved) return;
-
-    try {
-      const services = await api.portal.getWalletServices();
-      const storageService = (services ?? []).find((service) =>
-        (service.features ?? []).some((feature) => feature.id === "total_size"),
-      );
-
-      runInAction(() => {
-        this.storageServiceId = storageService?.id ?? null;
-        this.walletServicesResolved = true;
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   fetchPortalTariff = async (refresh?: boolean) => {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
     return api.portal
       .getPortalTariff(refresh, abortController.signal)
-      .then(async (res) => {
+      .then((res) => {
         if (!res) return;
-
-        const { user } = this.userStore;
-
-        const isAdminUser = user && isAdmin(user);
-        const tariffWalletQuotas = (res.quotas ?? []).filter(
-          (q) => q.wallet === true,
-        );
-
-        if (isAdminUser && tariffWalletQuotas.length > 0) {
-          await this.resolveWalletServiceIds();
-        }
 
         runInAction(() => {
           this.portalTariffStatus = res;
-
-          if (isAdminUser) {
-            const quota = this.walletServicesResolved
-              ? tariffWalletQuotas.find((q) => q.id === this.storageServiceId)
-              : tariffWalletQuotas[0];
-
-            if (quota) {
-              if (quota.state === QuotaState.Overdue) {
-                this.previousWalletQuota = [quota];
-                this.walletQuotas = [];
-              } else {
-                this.walletQuotas = [quota];
-                this.previousWalletQuota = [];
-              }
-            } else {
-              this.walletQuotas = [];
-              this.previousWalletQuota = [];
-            }
-          }
         });
 
         this.setIsLoaded(true);
 
-        return {
-          res: this.portalTariffStatus,
-          walletQuotas: this.walletQuotas,
-        };
+        return { res: this.portalTariffStatus };
       })
       .catch((err) => {
         if (axios.isCancel(err)) return;

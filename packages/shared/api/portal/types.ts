@@ -46,12 +46,6 @@ export type TQuotas = {
   state?: QuotaState;
 };
 
-export type TPortalWalletService = {
-  id?: number;
-  serviceName?: string;
-  features?: { id?: string }[];
-};
-
 export type TPortalTariff = {
   id: number;
   state: TariffState;

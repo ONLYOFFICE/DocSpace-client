@@ -37,6 +37,7 @@ import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import type { TEntryMetadataTemplate } from "@docspace/shared/api/metadata/types";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 
 import ConfirmDeleteDialog from "SRC_DIR/components/ConfirmDeleteDialog";
@@ -47,6 +48,8 @@ import { useEntryMetadata } from "./hooks/useEntryMetadata";
 import { useMetadataCascade } from "./hooks/useMetadataCascade";
 import type {
   TAddMetadataActions,
+  TCardActions,
+  TCascadeConflict,
   TMetadataDeletion,
   TMetadataPanel,
   TMetadataSelection,
@@ -77,6 +80,7 @@ const Metadata = ({ selection }: MetadataProps) => {
   const {
     metadata,
     isLoading,
+    reload,
     saveTemplate,
     deleteTemplate,
     saveCustomFields,
@@ -88,6 +92,7 @@ const Metadata = ({ selection }: MetadataProps) => {
 
   const cascade = useMetadataCascade(
     isCascadable ? Number(selection.id) : null,
+    reload,
   );
 
   const [panel, setPanel] = useState<TMetadataPanel | null>(null);
@@ -129,6 +134,42 @@ const Metadata = ({ selection }: MetadataProps) => {
 
   const closePanel = () => setPanel(null);
 
+  const closeDeletion = () => setDeletion(null);
+
+  const enableCascade = (
+    template: TEntryMetadataTemplate,
+    conflictResolveType: TCascadeConflict,
+  ) =>
+    cascade.setCascade(
+      template.id,
+      { cascade: true, conflictResolveType },
+      t("Metadata:MetadataAppliedToItems", {
+        template: template.name,
+        title: selection.title,
+      }),
+    );
+
+  const disableCascade = (template: TEntryMetadataTemplate) =>
+    cascade.setCascade(template.id, { cascade: false });
+
+  const getTemplateActions = (
+    template: TEntryMetadataTemplate,
+  ): TCardActions | undefined =>
+    canEdit && template.visible
+      ? {
+          onEdit: () => setPanel({ type: "template", template }),
+          onDelete: () =>
+            setDeletion({ type: "template", templateId: template.id }),
+        }
+      : undefined;
+
+  const customFieldsActions: TCardActions | undefined = canEdit
+    ? {
+        onEdit: () => setPanel({ type: "customFields", withNewField: false }),
+        onDelete: () => setDeletion({ type: "customFields" }),
+      }
+    : undefined;
+
   const getDeletionDescription = () => {
     if (deletion?.type === "customFields") {
       return t("Metadata:DeleteCustomFieldsDescription");
@@ -154,27 +195,15 @@ const Metadata = ({ selection }: MetadataProps) => {
                   <CascadeBlock
                     itemType={itemType}
                     templateName={template.name}
+                    isApplied={template.cascade}
                     {...cascade.getTemplateState(template.id)}
-                    onApply={(conflict) =>
-                      cascade.start(template.id, conflict)
-                    }
+                    onApply={(conflict) => enableCascade(template, conflict)}
+                    onDisable={() => disableCascade(template)}
                   />
                 ) : null}
                 <TemplateCard
                   template={template}
-                  actions={
-                    canEdit && template.visible
-                      ? {
-                          onEdit: () =>
-                            setPanel({ type: "template", template }),
-                          onDelete: () =>
-                            setDeletion({
-                              type: "template",
-                              templateId: template.id,
-                            }),
-                        }
-                      : undefined
-                  }
+                  actions={getTemplateActions(template)}
                 />
               </Fragment>
             ))}
@@ -182,18 +211,7 @@ const Metadata = ({ selection }: MetadataProps) => {
             {metadata.customFields.length ? (
               <CustomFieldsCard
                 fields={metadata.customFields}
-                actions={
-                  canEdit
-                    ? {
-                        onEdit: () =>
-                          setPanel({
-                            type: "customFields",
-                            withNewField: false,
-                          }),
-                        onDelete: () => setDeletion({ type: "customFields" }),
-                      }
-                    : undefined
-                }
+                actions={customFieldsActions}
               />
             ) : null}
           </div>
@@ -223,7 +241,7 @@ const Metadata = ({ selection }: MetadataProps) => {
           title={t("Metadata:DeleteMetadataTitle")}
           description={getDeletionDescription()}
           onDelete={onDelete}
-          onClose={() => setDeletion(null)}
+          onClose={closeDeletion}
         />
       ) : null}
     </div>

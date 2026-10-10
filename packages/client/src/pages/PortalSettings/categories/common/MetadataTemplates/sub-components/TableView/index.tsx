@@ -56,7 +56,6 @@ const emptyAsyncCallback = async () => {};
 
 const TableView = ({
   items,
-  authors,
   sectionWidth,
   ...actions
 }: TTemplatesListProps) => {
@@ -96,7 +95,6 @@ const TableView = ({
           <TableRow
             key={item.id}
             item={item}
-            author={authors[item.createBy] ?? ""}
             hideColumns={hideColumns}
             {...actions}
           />

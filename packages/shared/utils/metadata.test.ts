@@ -179,4 +179,21 @@ describe("isMetadataSupported", () => {
       isMetadataSupported({ id: 5, rootFolderType: FolderType.AIAgents }),
     ).toBe(false);
   });
+
+  it("rejects section roots", () => {
+    expect(
+      isMetadataSupported({
+        id: 5,
+        parentId: 0,
+        rootFolderType: FolderType.USER,
+      }),
+    ).toBe(false);
+    expect(
+      isMetadataSupported({
+        id: 6,
+        parentId: 5,
+        rootFolderType: FolderType.USER,
+      }),
+    ).toBe(true);
+  });
 });

@@ -53,6 +53,7 @@ import {
   filterTemplatesByName,
   formatMetadataValue,
   getCascadeState,
+  getLaunchResult,
   getChangedValues,
   getCustomFieldChanges,
   getEntryKind,
@@ -84,6 +85,7 @@ const entryTemplate = (id: number, name: string): TEntryMetadataTemplate => ({
   id,
   name,
   visible: true,
+  cascade: false,
   fields: [],
 });
 
@@ -218,6 +220,7 @@ describe("template form", () => {
     id: 5,
     name: "Case file",
     visible: true,
+    cascade: false,
     fields: [
       {
         id: 1,
@@ -321,37 +324,40 @@ describe("custom fields", () => {
 });
 
 describe("cascade", () => {
-  const running = { id: "a", progress: 40, isCompleted: false };
+  const running = {
+    id: "a",
+    progress: 40,
+    isCompleted: false,
+    templateIds: [1],
+  };
 
-  it("shows a run on the template that started it", () => {
-    const context = { appliedIds: new Set([1]), runningTemplateId: 1 };
-
-    expect(getCascadeState(running, { ...context, templateId: 1 })).toEqual({
+  it("shows a run only on the templates it applies", () => {
+    expect(getCascadeState(running, 1)).toEqual({
       isRunning: true,
-      isApplied: true,
       progress: 40,
     });
-    expect(getCascadeState(running, { ...context, templateId: 2 })).toEqual({
-      isRunning: false,
-      isApplied: false,
-      progress: 40,
-    });
+    expect(getCascadeState(running, 2).isRunning).toBe(false);
   });
 
-  it("shows a run of an unknown template on every template", () => {
-    expect(getCascadeState(running, { templateId: 2 }).isRunning).toBe(true);
+  it("tells how a launched run ended", () => {
+    const completed = { ...running, progress: 100, isCompleted: true };
+
+    expect(getLaunchResult(running, "a")).toBe("pending");
+    expect(getLaunchResult({ ...running, id: "b" }, "a")).toBe("pending");
+    expect(getLaunchResult(completed, "a")).toBe("done");
+    expect(getLaunchResult({ ...completed, error: "Failed" }, "a")).toBe(
+      "failed",
+    );
+    expect(getLaunchResult({ ...completed, id: "b" }, "a")).toBe("lost");
   });
 
-  it("keeps a template applied once its cascade has run", () => {
+  it("shows nothing once the run is over or without one", () => {
     expect(
-      getCascadeState(
-        { id: "a", progress: 100, isCompleted: true },
-        { templateId: 1, appliedIds: new Set([1]) },
-      ),
-    ).toEqual({ isRunning: false, isApplied: true, progress: 100 });
-    expect(getCascadeState(null, { templateId: 1 })).toEqual({
+      getCascadeState({ ...running, progress: 100, isCompleted: true }, 1)
+        .isRunning,
+    ).toBe(false);
+    expect(getCascadeState(null, 1)).toEqual({
       isRunning: false,
-      isApplied: false,
       progress: 0,
     });
   });

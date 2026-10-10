@@ -60,8 +60,8 @@ import {
 import { isFile, isRoom } from "@docspace/shared/utils/typeGuards";
 
 import type {
-  TCascadeContext,
   TCustomFieldDraft,
+  TLaunchResult,
   TMetadataItemType,
   TMetadataSelection,
   TTemplateForm,
@@ -90,18 +90,23 @@ export const isEmptyMetadata = ({ templates, customFields }: TEntryMetadata) =>
 
 export const getCascadeState = (
   operation: TMetadataOperation | null,
-  { templateId, appliedIds, runningTemplateId }: TCascadeContext,
-) => {
-  const isRunning =
+  templateId: number,
+) => ({
+  isRunning:
     !!operation &&
     !operation.isCompleted &&
-    (runningTemplateId === undefined || runningTemplateId === templateId);
+    operation.templateIds.includes(templateId),
+  progress: operation?.progress ?? 0,
+});
 
-  return {
-    isRunning,
-    isApplied: isRunning || !!appliedIds?.has(templateId),
-    progress: operation?.progress ?? 0,
-  };
+export const getLaunchResult = (
+  { id, isCompleted, error }: TMetadataOperation,
+  launchedId: string,
+): TLaunchResult => {
+  if (!isCompleted) return "pending";
+  if (id !== launchedId) return "lost";
+
+  return error ? "failed" : "done";
 };
 
 export const canAddCustomField = (count: number) =>
@@ -141,6 +146,7 @@ export const toEntryTemplate = ({
   id,
   name,
   visible,
+  cascade: false,
   fields,
 });
 

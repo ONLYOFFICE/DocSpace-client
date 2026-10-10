@@ -37,25 +37,48 @@ import { useEffect, useState } from "react";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
-  assignMetadataTemplates,
   getMetadataCascadeProgress,
+  updateFolderMetadataTemplate,
 } from "@docspace/shared/api/metadata";
-import type { TMetadataOperation } from "@docspace/shared/api/metadata/types";
+import type {
+  TMetadataOperation,
+  TUpdateFolderMetadataTemplateRequest,
+} from "@docspace/shared/api/metadata/types";
 
-import type { TCascadeConflict } from "../types";
-import { getCascadeState } from "../utils";
+import { getCascadeState, getLaunchResult } from "../utils";
 
 const POLL_INTERVAL = 1000;
-
-const cascadedTemplates = new Map<number, Set<number>>();
-const runningTemplates = new Map<number, number>();
 
 type TFolderOperation = {
   folderId: number;
   operation: TMetadataOperation;
 };
 
-export const useMetadataCascade = (folderId: number | null) => {
+const notifyWhenDone = (
+  folderId: number,
+  launchedId: string,
+  doneMessage?: string,
+) => {
+  const poll = async () => {
+    const operation = await getMetadataCascadeProgress(folderId).catch(
+      () => null,
+    );
+    if (!operation) return;
+
+    const result = getLaunchResult(operation, launchedId);
+
+    if (result === "pending") setTimeout(poll, POLL_INTERVAL);
+    if (result === "done" && doneMessage) toastr.success(doneMessage);
+    if (result === "failed") toastr.error(operation.error);
+  };
+
+  poll();
+};
+
+export const useMetadataCascade = (
+  folderId: number | null,
+  onChange: () => Promise<void>,
+) => {
   const [state, setState] = useState<TFolderOperation | null>(null);
   const [launches, setLaunches] = useState(0);
 
@@ -74,13 +97,7 @@ export const useMetadataCascade = (folderId: number | null) => {
 
         setState({ folderId, operation: data });
 
-        if (!data.isCompleted) {
-          timer = setTimeout(poll, POLL_INTERVAL);
-          return;
-        }
-
-        runningTemplates.delete(folderId);
-        if (data.error && launches) toastr.error(data.error);
+        if (!data.isCompleted) timer = setTimeout(poll, POLL_INTERVAL);
       } catch (e) {
         if (isActive) toastr.error(e as string);
       }
@@ -94,28 +111,27 @@ export const useMetadataCascade = (folderId: number | null) => {
     };
   }, [folderId, launches]);
 
-  const start = async (
+  const setCascade = async (
     templateId: number,
-    conflictResolveType: TCascadeConflict,
+    request: TUpdateFolderMetadataTemplateRequest,
+    doneMessage?: string,
   ) => {
     if (folderId === null) return false;
 
     try {
-      const data = await assignMetadataTemplates("folder", folderId, {
-        templateIds: [templateId],
-        cascade: true,
-        conflictResolveType,
-      });
-
-      cascadedTemplates.set(
+      const data = await updateFolderMetadataTemplate(
         folderId,
-        new Set(cascadedTemplates.get(folderId)).add(templateId),
+        templateId,
+        request,
       );
-      runningTemplates.set(folderId, templateId);
 
-      if (data) setState({ folderId, operation: data });
+      if (data.id) {
+        setState({ folderId, operation: data });
+        notifyWhenDone(folderId, data.id, doneMessage);
+      }
       setLaunches((count) => count + 1);
 
+      await onChange();
       return true;
     } catch (e) {
       toastr.error(e as string);
@@ -124,13 +140,7 @@ export const useMetadataCascade = (folderId: number | null) => {
   };
 
   const getTemplateState = (templateId: number) =>
-    getCascadeState(operation, {
-      templateId,
-      appliedIds:
-        folderId === null ? undefined : cascadedTemplates.get(folderId),
-      runningTemplateId:
-        folderId === null ? undefined : runningTemplates.get(folderId),
-    });
+    getCascadeState(operation, templateId);
 
-  return { getTemplateState, start };
+  return { getTemplateState, setCascade };
 };

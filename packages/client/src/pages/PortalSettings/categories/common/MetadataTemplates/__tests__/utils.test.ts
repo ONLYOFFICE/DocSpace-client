@@ -54,13 +54,21 @@ import {
 } from "../utils";
 import type { TFieldDraft } from "../types";
 
+const author = {
+  id: "user",
+  displayName: "Author",
+  avatarSmall: "",
+  hasAvatar: false,
+  profileUrl: "",
+};
+
 const template: TMetadataTemplate = {
   id: 1,
   name: "Case file",
   visible: true,
-  createBy: "user",
+  createBy: author,
   createOn: "2026-10-03T10:00:00.0000000+03:00",
-  modifiedBy: "user",
+  modifiedBy: author,
   modifiedOn: "2026-10-03T10:00:00.0000000+03:00",
   fields: [
     {

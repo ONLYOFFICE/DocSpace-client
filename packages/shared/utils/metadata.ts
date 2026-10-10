@@ -55,14 +55,17 @@ const UNSUPPORTED_ROOT_TYPES: (FolderType | undefined)[] = [
 
 export const isMetadataSupported = ({
   id,
+  parentId,
   providerKey,
   rootFolderType,
 }: {
   id?: number | string;
+  parentId?: number;
   providerKey?: string | null;
   rootFolderType?: FolderType;
 }) =>
   typeof id === "number" &&
+  parentId !== 0 &&
   !providerKey &&
   !UNSUPPORTED_ROOT_TYPES.includes(rootFolderType);
 

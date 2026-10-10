@@ -159,6 +159,7 @@ export const useEntryMetadata = (item: TMetadataSelection) => {
   return {
     metadata,
     isLoading,
+    reload: loadMetadata,
     saveTemplate,
     deleteTemplate,
     saveCustomFields,

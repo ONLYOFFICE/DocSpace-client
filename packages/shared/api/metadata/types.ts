@@ -34,6 +34,7 @@
  */
 
 import type { ConflictResolveType, MetadataFieldType } from "../../enums";
+import type { TCreatedBy } from "../../types";
 
 export type TMetadataEntryKind = "file" | "folder";
 
@@ -55,9 +56,9 @@ export type TMetadataTemplate = {
   id: number;
   name: string;
   visible: boolean;
-  createBy: string;
+  createBy: TCreatedBy;
   createOn: string;
-  modifiedBy: string;
+  modifiedBy: TCreatedBy;
   modifiedOn: string;
   fields?: TMetadataField[];
 };
@@ -77,10 +78,16 @@ export type TEntryMetadataField = Omit<TMetadataField, "templateId"> & {
   value?: TMetadataValue;
 };
 
+export type TMetadataConflictResolveType =
+  | ConflictResolveType.Skip
+  | ConflictResolveType.Overwrite;
+
 export type TEntryMetadataTemplate = Pick<
   TMetadataTemplate,
   "id" | "name" | "visible"
 > & {
+  cascade: boolean;
+  conflictResolveType?: TMetadataConflictResolveType;
   fields: TEntryMetadataField[];
 };
 
@@ -104,6 +111,7 @@ export type TMetadataOperation = {
   progress: number;
   isCompleted: boolean;
   error?: string;
+  templateIds: number[];
 };
 
 export type TMetadataFieldRequest = {
@@ -122,7 +130,10 @@ export type TMetadataTemplateRequest = {
 export type TAssignMetadataTemplatesRequest = {
   templateIds: number[];
   cascade?: boolean;
-  conflictResolveType?:
-    | ConflictResolveType.Skip
-    | ConflictResolveType.Overwrite;
+  conflictResolveType?: TMetadataConflictResolveType;
+};
+
+export type TUpdateFolderMetadataTemplateRequest = {
+  cascade: boolean;
+  conflictResolveType?: TMetadataConflictResolveType;
 };

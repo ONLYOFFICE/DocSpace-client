@@ -52,7 +52,7 @@ import styles from "./MetadataTemplates.module.scss";
 const MetadataTemplates = () => {
   const { t, ready } = useTranslation(["Metadata", "Settings", "Files"]);
 
-  const { templates, authors, loadTemplates, toggleVisible, removeTemplate } =
+  const { templates, loadTemplates, toggleVisible, removeTemplate } =
     useMetadataTemplates();
 
   const [editingTemplate, setEditingTemplate] =
@@ -89,7 +89,6 @@ const MetadataTemplates = () => {
       {templates.length ? (
         <TemplatesView
           items={templates}
-          authors={authors}
           onEdit={setEditingTemplate}
           onDelete={setDeletingTemplate}
           onToggleVisible={toggleVisible}

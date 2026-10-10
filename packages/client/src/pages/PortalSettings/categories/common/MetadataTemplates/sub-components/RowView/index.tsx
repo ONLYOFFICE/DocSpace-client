@@ -41,7 +41,6 @@ import styles from "./RowView.module.scss";
 
 const RowView = ({
   items,
-  authors,
   sectionWidth,
   ...actions
 }: TTemplatesListProps) => (
@@ -50,7 +49,6 @@ const RowView = ({
       <RowItem
         key={item.id}
         item={item}
-        author={authors[item.createBy] ?? ""}
         sectionWidth={sectionWidth}
         {...actions}
       />

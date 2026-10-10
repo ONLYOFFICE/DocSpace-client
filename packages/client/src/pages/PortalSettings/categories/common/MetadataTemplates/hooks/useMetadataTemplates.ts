@@ -43,35 +43,15 @@ import {
   updateMetadataTemplate,
 } from "@docspace/shared/api/metadata";
 import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
-import { getUserById } from "@docspace/shared/api/people";
-
-const getAuthorNames = async (templates: TMetadataTemplate[]) => {
-  const ids = [...new Set(templates.map((template) => template.createBy))];
-
-  const entries = await Promise.all(
-    ids.map((id) =>
-      getUserById(id).then(
-        (user) => [id, user.displayName] as const,
-        () => [id, ""] as const,
-      ),
-    ),
-  );
-
-  return Object.fromEntries(entries);
-};
 
 export const useMetadataTemplates = () => {
   const { t } = useTranslation(["Metadata"]);
 
   const [templates, setTemplates] = useState<TMetadataTemplate[]>([]);
-  const [authors, setAuthors] = useState<Record<string, string>>({});
 
   const loadTemplates = useCallback(async () => {
     try {
-      const list = await getMetadataTemplates();
-
-      setTemplates(list);
-      setAuthors(await getAuthorNames(list));
+      setTemplates(await getMetadataTemplates());
     } catch (e) {
       toastr.error(e as string);
     }
@@ -111,5 +91,5 @@ export const useMetadataTemplates = () => {
     [t],
   );
 
-  return { templates, authors, loadTemplates, toggleVisible, removeTemplate };
+  return { templates, loadTemplates, toggleVisible, removeTemplate };
 };

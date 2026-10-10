@@ -36,8 +36,8 @@
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type {
-  TAssignMetadataTemplatesRequest,
   TEntryMetadataTemplate,
+  TMetadataConflictResolveType,
   TMetadataFieldOption,
 } from "@docspace/shared/api/metadata/types";
 import type { TMetadataInput } from "@docspace/shared/utils/metadata";
@@ -48,15 +48,9 @@ export type TMetadataItemType = "file" | "folder" | "room";
 
 export type TCascadeItemType = Exclude<TMetadataItemType, "file">;
 
-export type TCascadeContext = {
-  templateId: number;
-  appliedIds?: Set<number>;
-  runningTemplateId?: number;
-};
+export type TCascadeConflict = TMetadataConflictResolveType;
 
-export type TCascadeConflict = NonNullable<
-  TAssignMetadataTemplatesRequest["conflictResolveType"]
->;
+export type TLaunchResult = "pending" | "done" | "failed" | "lost";
 
 export type TAddMetadataActions = {
   onAddTemplate: () => void;

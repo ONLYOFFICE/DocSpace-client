@@ -49,7 +49,6 @@ type RowItemProps = TTemplateItemProps & {
 
 const RowItem = ({
   item,
-  author,
   sectionWidth,
   onEdit,
   onDelete,
@@ -75,7 +74,7 @@ const RowItem = ({
             fontWeight={600}
             truncate
           >
-            {author ? `${fieldsCount} | ${author}` : fieldsCount}
+            {`${fieldsCount} | ${item.createBy.displayName}`}
           </Text>
         </div>
 

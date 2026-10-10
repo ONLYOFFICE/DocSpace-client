@@ -54,7 +54,6 @@ type TableRowProps = TTemplateItemProps & {
 
 const TableRow = ({
   item,
-  author,
   hideColumns,
   onEdit,
   onDelete,
@@ -84,7 +83,7 @@ const TableRow = ({
       </TableCell>
       <TableCell>
         <Text className={styles.secondaryText} fontWeight={600} truncate>
-          {author}
+          {item.createBy.displayName}
         </Text>
       </TableCell>
       <TableCell>

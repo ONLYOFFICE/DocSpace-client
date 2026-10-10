@@ -51,6 +51,7 @@ type CascadeBlockProps = {
   isApplied: boolean;
   progress: number;
   onApply: (conflict: TCascadeConflict) => Promise<boolean>;
+  onDisable: () => void;
 };
 
 const CascadeBlock = ({
@@ -60,6 +61,7 @@ const CascadeBlock = ({
   isApplied,
   progress,
   onApply,
+  onDisable,
 }: CascadeBlockProps) => {
   const { t } = useTranslation(["Metadata"]);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
@@ -83,8 +85,7 @@ const CascadeBlock = ({
         <ToggleButton
           className={styles.toggle}
           isChecked={isApplied}
-          isDisabled={isApplied}
-          onChange={() => setIsDialogVisible(true)}
+          onChange={() => (isApplied ? onDisable() : setIsDialogVisible(true))}
           dataTestId="info_panel_metadata_cascade_toggle"
         />
       </div>

@@ -85,7 +85,6 @@ export type TTemplateActions = {
 
 export type TTemplatesViewProps = TTemplateActions & {
   items: TMetadataTemplate[];
-  authors: Record<string, string>;
 };
 
 export type TTemplatesListProps = TTemplatesViewProps & {
@@ -94,5 +93,4 @@ export type TTemplatesListProps = TTemplatesViewProps & {
 
 export type TTemplateItemProps = TTemplateActions & {
   item: TMetadataTemplate;
-  author: string;
 };

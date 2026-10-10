@@ -46,6 +46,7 @@ import type {
   TMetadataTemplate,
   TMetadataTemplateRequest,
   TMetadataValueRequest,
+  TUpdateFolderMetadataTemplateRequest,
 } from "./types";
 
 const baseUrl = "/files/metadata";
@@ -154,6 +155,20 @@ export async function assignMetadataTemplates(
   });
 
   return (res ?? null) as TMetadataOperation | null;
+}
+
+export async function updateFolderMetadataTemplate(
+  folderId: number,
+  templateId: number,
+  data: TUpdateFolderMetadataTemplateRequest,
+) {
+  const res = await request({
+    method: "put",
+    url: `${baseUrl}/folder/${folderId}/templates/${templateId}`,
+    data,
+  });
+
+  return res as TMetadataOperation;
 }
 
 export async function getMetadataCascadeProgress(folderId: number) {

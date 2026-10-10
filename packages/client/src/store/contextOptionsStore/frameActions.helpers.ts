@@ -36,6 +36,7 @@
 import type { TFrameCustomActionType } from "@docspace/shared/types/Frame";
 import {
   getManagerSection,
+  getCustomActionIconProps,
   getVisibleContextActions,
   getVisibleCreateActions,
   getVisibleGroupContextActions,
@@ -81,7 +82,7 @@ export const onLoadFrameActionsImpl = (
       id: `option_sdk-action-${action.key}`,
       key: `sdk-action-${action.key}`,
       label: action.label,
-      icon: action.icon,
+      ...getCustomActionIconProps(action.icon),
       disabled: false,
       onClick: () =>
         sendCustomAction({
@@ -110,7 +111,7 @@ export const onMultiLoadFrameActionsImpl = (
       id: `option_sdk-action-${action.key}`,
       key: `sdk-action-${action.key}`,
       label: action.label,
-      icon: action.icon,
+      ...getCustomActionIconProps(action.icon),
       disabled: false,
       onClick: () =>
         sendCustomAction({
@@ -133,7 +134,7 @@ export const getFrameCreateActionsImpl = (
     id: `personal_sdk-action-${action.key}`,
     key: `sdk-action-${action.key}`,
     label: action.label,
-    icon: action.icon,
+    ...getCustomActionIconProps(action.icon),
     onClick: () =>
       sendCustomAction({ action: action.key, type: "create", folderId }),
   }));

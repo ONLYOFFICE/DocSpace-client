@@ -49,6 +49,8 @@ import { getDaysRemaining } from "@docspace/shared/utils/common";
 import RoomsContent from "./sub-components/RoomsContent";
 import UsersContent from "./sub-components/UsersContent";
 
+import styles from "./InviteQuotaWarningDialog.module.scss";
+
 const InviteQuotaWarningDialog = (props) => {
   const {
     t,
@@ -168,6 +170,8 @@ const InviteQuotaWarningDialog = (props) => {
 
   return (
     <ModalDialog
+      className={styles.dialog}
+      dataTestId="invite-quota-warning-dialog"
       isLarge={isGracePeriod}
       isLoading={!tReady}
       visible={visible}
@@ -193,6 +197,7 @@ const InviteQuotaWarningDialog = (props) => {
           primary
           onClick={canUpgrade ? onUpgradePlan : onClose}
           scale
+          testId="invite-quota-warning-primary"
         />
 
         <Button
@@ -201,6 +206,7 @@ const InviteQuotaWarningDialog = (props) => {
           size="normal"
           onClick={onClose}
           scale
+          testId="invite-quota-warning-cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

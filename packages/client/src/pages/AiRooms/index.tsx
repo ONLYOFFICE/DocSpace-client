@@ -70,6 +70,7 @@ import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 
 type AiRoomsProps = {
   roomsFolderId?: number | null;
+  logoText?: string;
 };
 
 // Sections that live inside the SDK `(rooms)` route group — served by the
@@ -108,9 +109,9 @@ const getPersonalSrc = (
   }
 };
 
-const AiRooms = ({ roomsFolderId }: AiRoomsProps) => {
+const AiRooms = ({ roomsFolderId, logoText }: AiRoomsProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:Rooms");
+  useDocumentTitle("Common:Rooms", logoText);
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
   // Default (no `?section=`) is the rooms list.
@@ -185,9 +186,12 @@ const AiRooms = ({ roomsFolderId }: AiRoomsProps) => {
   return null;
 };
 
-const AiRoomsConnected = inject<TStore>(({ treeFoldersStore }) => ({
-  roomsFolderId: treeFoldersStore.roomsFolderId,
-}))(observer(AiRooms));
+const AiRoomsConnected = inject<TStore>(
+  ({ treeFoldersStore, settingsStore }) => ({
+    roomsFolderId: treeFoldersStore.roomsFolderId,
+    logoText: settingsStore.logoText,
+  }),
+)(observer(AiRooms));
 
 export { AiRoomsConnected as AiRooms };
 export default AiRoomsConnected;

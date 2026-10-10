@@ -56,7 +56,7 @@ import HistoryMainTextFolderInfo from "./MainTextFolderInfo";
 
 const getDateTime = (date: Date | string) => {
   const locale = getCookie(LANGUAGE) || "en";
-  const dt = parseToDateTime(date);
+  const dt = parseToDateTime(date)?.setZone(window.timezone);
   if (!dt) return "";
   return formatDateLocalized(dt, "TIME_SIMPLE", { locale });
 };

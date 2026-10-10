@@ -2584,21 +2584,7 @@
 
   --template-tile-icon-fill: #{$gray};
 
-  --submit-gallery-tile-border: var(--color-scheme-main-accent);
-  --submit-gallery-tile-color-close-icon-fill: #{$light-gray-dark};
-  --submit-gallery-tile-background: #{$white};
-
-  --submit-gallery-tile-text: var(--color-scheme-main-accent);
-  --submit-gallery-tile-text-body: #{$gray-text};
-  --submit-gallery-tile-text-background: #{$white};
-
-  --submit-gallery-tile-text-background: #{$white};
-
   --template-gallery-empty-screen: #{$gray-text};
-
-  --template-gallery-sort-background: #{$white};
-  --template-gallery-sort-fill: #{$light-gray-dark};
-  --template-gallery-sort-hover: #{$gray-light};
 
   --template-gallery-view-button-border: #{$gray-strong};
 }
@@ -2620,18 +2606,7 @@
 
   --template-tile-icon-fill: #{$gray-dark};
 
-  --submit-gallery-tile-border: #{$white};
-  --submit-gallery-tile-color-close-icon-fill: #{$dark-gray-dark};
-  --submit-gallery-tile-background: #{$dark-gray-light};
-
-  --submit-gallery-tile-text: #{$white};
-  --submit-gallery-tile-text-body: #{$dark-gray-dark};
-
   --template-gallery-empty-screen: #{$dark-gray-dark};
-
-  --template-gallery-sort-background: #{$black};
-  --template-gallery-sort-fill: #{$dark-gray-dark};
-  --template-gallery-sort-hover: #{$black};
 
   --template-gallery-view-button-border: #{$gray-dark-strong};
 }

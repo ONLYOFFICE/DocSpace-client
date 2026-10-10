@@ -55,7 +55,7 @@ const MobileQuotasComponent = ({ isDisabled, aiServicesEnabled }) => {
       <CategoryItem
         title={t("QuotaPerRoom")}
         onClickLink={onClickLink}
-        url="portal-settings/management/disk-space/quota-per-room"
+        url="/portal-settings/management/disk-space/quota-per-room"
         subtitle={t("SetDefaultRoomQuota")}
         isDisabled={isDisabled}
       />

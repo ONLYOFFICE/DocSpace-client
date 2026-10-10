@@ -47,14 +47,10 @@ import type {
 } from "@onlyoffice/apps-ui-kit/providers/translation";
 import { ThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
 import type { TThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
-import { ApiProvider } from "@onlyoffice/apps-ui-kit/providers/api";
-import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
-import { getAuthToken } from "@docspace/shared/api/client";
 
 import EncryptionProviderWrapper from "@/components/EncryptionProviderWrapper";
 
+import EditorApiProvider from "./EditorApiProvider";
 import ErrorProvider from "./ErrorProvider";
 
 export type TContextData = {
@@ -72,16 +68,6 @@ export type TProviders = {
   contextData: TContextData;
 };
 
-const getApiUrl = () => {
-  if (typeof window === "undefined") {
-    return "";
-  }
-  const origin = window.ClientConfig?.api?.origin || window.location.origin;
-  const proxy = window.ClientConfig?.proxy?.url || "";
-
-  return combineUrl(origin, proxy);
-};
-
 const Providers = ({ children, contextData }: TProviders) => {
   const {
     user,
@@ -93,13 +79,8 @@ const Providers = ({ children, contextData }: TProviders) => {
     translations,
   } = contextData;
 
-  const apiUrl = getApiUrl();
-  const apiKey = isOAuthFrame()
-    ? (getAuthToken() ?? "")
-    : getCookie("asc_auth_key") || "";
-
   return (
-    <ApiProvider url={apiUrl} apiKey={apiKey} initSocket={false}>
+    <EditorApiProvider>
       <TranslationProvider
         settings={settings as TTranslationProvider["settings"]}
         user={user as TTranslationProvider["user"]}
@@ -120,7 +101,7 @@ const Providers = ({ children, contextData }: TProviders) => {
           </ErrorProvider>
         </ThemeProvider>
       </TranslationProvider>
-    </ApiProvider>
+    </EditorApiProvider>
   );
 };
 

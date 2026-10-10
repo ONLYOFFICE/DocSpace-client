@@ -58,6 +58,7 @@ type AiArbiterProps = {
   ) => Promise<T | null>;
   canManageAgents: boolean;
   theme: TTheme;
+  logoText: string;
 };
 
 const AiArbiter = ({
@@ -65,9 +66,10 @@ const AiArbiter = ({
   fetchAppSettings,
   canManageAgents,
   theme,
+  logoText,
 }: AiArbiterProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:DashboardAIArbiterTitle");
+  useDocumentTitle("Common:DashboardAIArbiterTitle", logoText);
   const [settingsChecked, setSettingsChecked] = React.useState(false);
   const [showSetupDialog, setShowSetupDialog] = React.useState(false);
 
@@ -138,6 +140,7 @@ const AiArbiterConnected = inject<TStore>(
       userStore.user?.isRoomAdmin
     ),
     theme: settingsStore.theme,
+    logoText: settingsStore.logoText,
   }),
 )(observer(AiArbiter));
 

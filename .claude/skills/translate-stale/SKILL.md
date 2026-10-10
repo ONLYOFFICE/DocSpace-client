@@ -104,6 +104,6 @@ cd common/tests && npx vitest run test/locales.test.js
 ## Out of scope
 
 ui-kit's `locales/` are not scanned — they live in the separate
-`docspace-ui-kit-react` repository (consumed here only as a prebuilt tarball)
+`docspace-ui-kit-react` repository (consumed here only as a published npm package)
 and are loaded only by a Storybook story; ui-kit components resolve their
 strings from the host app's namespaces at runtime.

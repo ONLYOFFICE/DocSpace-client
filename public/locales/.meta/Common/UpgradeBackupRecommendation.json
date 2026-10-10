@@ -3,7 +3,7 @@
   "content": "We recommend backing up your data before you start.",
   "content_en_sha1_hash": "5edb900c9274b8d724eabc58af96c0cfda47bd6e",
   "created_at": "2026-09-29T10:10:19.038Z",
-  "updated_at": "2026-10-02T12:15:32.524Z",
+  "updated_at": "2026-10-06T13:35:39.047Z",
   "comment": {
     "text": "Instructional note text in an upgrade dialog or a variable within a larger note, advising users to perform a data backup before proceeding.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/index.tsx",
-      "line_number": 80,
+      "line_number": 84,
       "context": "<UpgradeNote\n title={t(\"Common:UpgradeBeforeYouUpgrade\")}\n text={t(\"Common:UpgradeNoteWithBackupRecommendation\", {\n note: t(\"Common:UpgradeEditorsUnavailableNote\"),\n backup: t(\"Common:UpgradeBackupRecommendation\"),\n })}\n dataTestId=\"bonus-upgrade-note\"\n />\n \n <HelpLinks",
       "module": "/packages/shared"
     }

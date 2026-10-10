@@ -41,7 +41,7 @@ const { getAllFiles, getWorkSpaces, BASE_DIR, convertPathToOS } = require("../ut
 const { findImagesIntoFiles } = require("../utils/images");
 const { resolveUiKitDist } = require("../utils/ui-kit");
 
-// ui-kit ships as a prebuilt tarball and is not checked out here, but its
+// ui-kit ships as an npm package and is not checked out here, but its
 // components reference images that live in this repo's public/images. Scan the
 // built bundle so those are not reported as unused.
 const getUiKitBuiltFiles = () =>
@@ -59,7 +59,7 @@ let fileContentsCache = new Map();
  * Every copy beyond the first is a violation.
  *
  * This used to allow a 1:1 mirror between libs/ui-kit and the rest of the
- * project. ui-kit now ships as a prebuilt tarball from its own repository and
+ * project. ui-kit now ships as an npm package from its own repository and
  * its images are not in this tree, so there is nothing left to mirror.
  *
  * @param {Array} val - Array of image objects with path and md5Hash

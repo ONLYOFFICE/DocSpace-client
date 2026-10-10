@@ -153,6 +153,9 @@ type TemplateGalleryProps = {
   setGallerySelected: (item: TOformFile | null) => void;
   isFormsOnlyGallery: boolean;
   setCreateRoomFromTemplate: (createRoomFromTemplate: boolean) => void;
+  filterPanelVisible: boolean;
+  setFilterPanelVisible: (isVisible: boolean) => void;
+  canSubmitToFormGallery: () => boolean;
 };
 
 const useTemplateGalleryScrollLocks = (templateGalleryVisible: boolean) => {
@@ -208,6 +211,9 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
     setGallerySelected,
     isFormsOnlyGallery,
     setCreateRoomFromTemplate,
+    filterPanelVisible,
+    setFilterPanelVisible,
+    canSubmitToFormGallery,
   } = props;
 
   const isMobileView = useMobileDetection();
@@ -249,7 +255,10 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
   };
 
   useEventListener("keydown", (e: KeyboardEvent) => {
-    if (e.key === "Escape") onCloseClick();
+    if (e.key !== "Escape") return;
+
+    if (filterPanelVisible) setFilterPanelVisible(false);
+    else onCloseClick();
   });
 
   const onSelect = (element: TTabItem) => {
@@ -268,7 +277,9 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
       <div className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.headerText}>{t("Common:TemplateGallery")}</div>
-          {!oformsLoadError && !oformsNetworkError ? (
+          {!oformsLoadError &&
+          !oformsNetworkError &&
+          canSubmitToFormGallery() ? (
             <Button
               className={styles.headerButton}
               onClick={onOpenSubmitToGalleryDialog}
@@ -292,6 +303,7 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
       oformsNetworkError,
       onOpenSubmitToGalleryDialog,
       onCloseClick,
+      canSubmitToFormGallery,
     ],
   );
 
@@ -383,7 +395,7 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
 };
 
 export default inject<TStore>(
-  ({ oformsStore, dialogsStore }) => {
+  ({ oformsStore, dialogsStore, accessRightsStore }) => {
     const {
       templateGalleryVisible,
       setTemplateGalleryVisible,
@@ -399,6 +411,8 @@ export default inject<TStore>(
       setGallerySelected,
       isFormsOnlyGallery,
       setCreateRoomFromTemplate,
+      filterPanelVisible,
+      setFilterPanelVisible,
     } = oformsStore;
 
     const { setSubmitToGalleryDialogVisible } = dialogsStore;
@@ -419,6 +433,9 @@ export default inject<TStore>(
       setGallerySelected,
       isFormsOnlyGallery,
       setCreateRoomFromTemplate,
+      filterPanelVisible,
+      setFilterPanelVisible,
+      canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
     };
   },
 )(withTranslation("Common")(observer(TemplateGallery)));

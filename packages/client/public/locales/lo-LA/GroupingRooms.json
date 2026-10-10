@@ -8,6 +8,7 @@
   "DeleteGroup": "ລຶບກຸ່ມ",
   "DisablingRoomGroups": "ການປິດກຸ່ມຫ້ອງ",
   "DisablingRoomGroupsDescription": "ກຸ່ມຈະຖືກບັນທຶກແຕ່ຖືກເຊື່ອງໄວ້. ກະລຸນາເປີດໃຊ້ງານຄືນໃນ Profile, ການຈັດການໄຟລ໌.",
+  "DisablingSpaceGroups": "ການປິດກຸ່ມສະເປສ",
   "EditRoomGroups": "ແກ້ໄຂກຸ່ມຫ້ອງ",
   "EditSpaceGroups": "ແກ້ໄຂກຸ່ມສະເປສ",
   "EmptyGroupRoomsDescription": "ບໍ່ມີຫ້ອງຢູ່ທີ່ນີ້. ລອງເພີ່ມຫ້ອງ ຫຼື ຍົກເລີກກຸ່ມນີ້.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "ຫ້ອງທີ່ເລືອກໄດ້ຖືກເພີ່ມເຂົ້າໃນ <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "ຫ້ອງທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກ <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "ສະເປສທີ່ເລືອກໄດ້ຖືກເພີ່ມເຂົ້າໃນ <1>{{groupName}}</1> ແລ້ວ.",
+  "SpaceGrouping": "ການຈັດກຸ່ມສະເປສ",
+  "SpaceGroupingDisabled": "ການຈັດກຸ່ມສະເປສຖືກປິດການໃຊ້ງານ",
+  "SpaceGroupingEnabled": "ການຈັດກຸ່ມສະເປສໄດ້ຖືກເປີດໃຊ້ງານແລ້ວ",
+  "SpaceGroupingSettingDescription": "ທ່ານສາມາດຈັດກຸ່ມສະເປສເປັນໂຟນເດີ ແລະສະຫຼັບລະຫວ່າງພວກມັນໄດ້ງ່າຍ.",
   "SpaceRemovedFromGroup": "ສະເປສທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກ <1>{{groupName}}</1> ແລ້ວ.",
   "SpacesAddedToGroup": "ສະເປສທີ່ເລືອກທັງໝົດໄດ້ຖືກເພີ່ມເຂົ້າໃນ <1>{{groupName}}</1> ແລ້ວ.",
   "SpacesRemovedFromGroup": "ສະເປສທີ່ເລືອກທັງໝົດໄດ້ຖືກລຶບອອກຈາກ <1>{{groupName}}</1> ແລ້ວ."

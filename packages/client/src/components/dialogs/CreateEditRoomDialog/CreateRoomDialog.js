@@ -74,6 +74,7 @@ const CreateRoomDialog = ({
   enableThirdParty,
   startRoomType,
   isFormsCreate,
+  onOpenTemplateGallery,
   processCreatingRoomFromData,
   setProcessCreatingRoomFromData,
   selectionItems,
@@ -409,6 +410,7 @@ const CreateRoomDialog = ({
               isExternalShareRestricted={isExternalShareRestricted}
               processCreatingRoomFromData={processCreatingRoomFromData}
               isFormsCreate={isFormsCreate}
+              onOpenTemplateGallery={onOpenTemplateGallery}
               setTemplateDialogIsVisible={setTemplateDialogIsVisible}
             />
           ) : (

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import classNames from "classnames";
@@ -53,7 +53,6 @@ import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-s
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import type OformsFilter from "@docspace/shared/api/oforms/filter";
-import type { TOformParentCategory } from "@docspace/shared/api/oforms/types";
 import styles from "../TemplateGallery.module.scss";
 import FilterContent from "../Filter";
 import Tiles from "../Tiles";
@@ -67,17 +66,10 @@ interface TilesContainerOwnProps {
 
 interface FilterProps {
   oformsFilter: OformsFilter;
-  noLocales: boolean;
-  menuItems: TOformParentCategory[];
   filterOformsByLocaleIsLoading: boolean;
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
-  setLanguageFilterLoaded: (isLoaded: boolean) => void;
-  oformsLocal: string;
-  oformLocales: string[] | null;
-  filterOformsByLocale: (locale: string) => Promise<void>;
   filterOformsBySearch: (search: string) => void;
-  sortOforms: (sortBy: string, sortOrder: "asc" | "desc") => void;
 }
 
 interface TilesContainerInjectedProps extends FilterProps {
@@ -86,6 +78,8 @@ interface TilesContainerInjectedProps extends FilterProps {
   t: TTranslation;
   isFormsOnlyGallery: boolean;
   oformsIsRefetching: boolean;
+  oformLocales: string[] | null;
+  setLanguageFilterLoaded: (isLoaded: boolean) => void;
 }
 
 interface TilesContainerProps
@@ -101,6 +95,8 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
     t,
     isFormsOnlyGallery,
     oformsIsRefetching,
+    oformLocales,
+    setLanguageFilterLoaded,
     ...filterProps
   } = props;
 
@@ -108,7 +104,17 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
   const isMobileView = useMobileDetection();
 
   const [isShowOneTile, setShowOneTile] = useState(false);
+  const [selectedFiltersHeight, setSelectedFiltersHeight] = useState(0);
   const scrollRef = useRef<ScrollbarType>(null);
+
+  const onSelectedFiltersHeightChange = useCallback(
+    (height: number) => setSelectedFiltersHeight(height),
+    [],
+  );
+
+  useEffect(() => {
+    setLanguageFilterLoaded(oformLocales !== null);
+  }, [oformLocales, setLanguageFilterLoaded]);
 
   useEffect(() => {
     scrollRef.current?.scrollToTop();
@@ -179,7 +185,10 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
       ? SCROLL_HEIGHTS.DESKTOP_FORMS_ONLY
       : SCROLL_HEIGHTS.DESKTOP;
 
-    const scrollHeight = isMobileView ? mobileHeight : desktopHeight;
+    const baseHeight = isMobileView ? mobileHeight : desktopHeight;
+    const scrollHeight = selectedFiltersHeight
+      ? `calc(${baseHeight} - ${selectedFiltersHeight}px)`
+      : baseHeight;
 
     const showOneTile = isMobileView ? isShowOneTile : false;
 
@@ -192,11 +201,9 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
         {...filterProps}
         isShowOneTile={isShowOneTile}
         setShowOneTile={setShowOneTile}
-        viewMobile={isMobileView}
         isShowInitSkeleton={isShowInitSkeleton}
+        onSelectedFiltersHeightChange={onSelectedFiltersHeightChange}
       />
-      {/* A filter change keeps the current tiles on screen and dims them
-          until the new list arrives; loading the next page does not. */}
       <div
         className={classNames(styles.galleryContent, {
           [styles.dimmed]: oformsIsRefetching && !isShowInitSkeleton,
@@ -213,35 +220,26 @@ export default inject<TStore>(({ oformsStore }) => {
     hasGalleryFiles,
     resetFilters,
     oformsFilter,
-    parentCategories,
     categoryFilterLoaded,
-    filterOformsByLocale,
     filterOformsByLocaleIsLoading,
     languageFilterLoaded,
     setLanguageFilterLoaded,
     filterOformsBySearch,
-    sortOforms,
     isFormsOnlyGallery,
     oformsIsRefetching,
+    oformLocales,
   } = oformsStore;
 
-  const oformLocales = oformsStore.oformLocales as string[] | null;
-
   return {
-    noLocales: !oformLocales || oformLocales.length === 0,
     oformLocales,
-    oformsLocal: oformsStore.oformsFilter.locale ?? "",
     hasGalleryFiles,
     resetFilters,
     oformsFilter,
-    menuItems: parentCategories,
     categoryFilterLoaded,
-    filterOformsByLocale,
     filterOformsByLocaleIsLoading,
     languageFilterLoaded,
     setLanguageFilterLoaded,
     filterOformsBySearch,
-    sortOforms,
     isFormsOnlyGallery,
     oformsIsRefetching,
   };

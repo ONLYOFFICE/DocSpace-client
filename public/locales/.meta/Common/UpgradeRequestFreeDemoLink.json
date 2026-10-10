@@ -3,7 +3,7 @@
   "content": "Request a free demo",
   "content_en_sha1_hash": "85f58db96af95b69d95959f72ccffd0dd217d385",
   "created_at": "2026-09-29T10:10:20.233Z",
-  "updated_at": "2026-10-01T11:15:27.923Z",
+  "updated_at": "2026-10-06T13:35:39.045Z",
   "comment": {
     "text": "Link label within the upgrade path dialog that directs users to a demo request page.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/dialogs/upgrade-path-dialog/index.tsx",
       "line_number": 162,
-      "context": "const links = [\n {\n id: \"demo\",\n href: demoOrderUrl,\n label: t(\"Common:UpgradeRequestFreeDemoLink\"),\n },\n {\n id: \"support\",\n href: feedbackAndSupportUrl,\n label: t(\"Common:UpgradeGetTechAssistanceLink\"),",
+      "context": "const links = [\n {\n id: \"demo\",\n href: demoOrderUrl,\n label: t(\"Common:UpgradeRequestFreeDemoLink\"),\n },\n {\n id: \"support\",\n href: supportUrl,\n label: t(\"Common:UpgradeGetTechAssistanceLink\"),",
       "module": "/packages/shared"
     }
   ],

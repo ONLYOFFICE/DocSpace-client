@@ -39,7 +39,7 @@ const { createRequire } = require("module");
 
 const { BASE_DIR } = require("./files");
 
-// ui-kit is no longer checked out here: it ships as a prebuilt tarball and is
+// ui-kit is no longer checked out here: it ships as an npm package and is
 // only present under node_modules. Its components own a large share of the
 // Common namespace and reference images that live in this repo's
 // public/images, so callers that need either have to read the built package

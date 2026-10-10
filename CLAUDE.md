@@ -69,20 +69,25 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
   for EE/DE). `pnpm deploy` writes to `../publish/web`; SSR apps expect
   `../buildtools/config` for appsettings
 
-### ui-kit: separate repo, consumed as a prebuilt tarball
+### ui-kit: separate repo, consumed from npm
 
 `@onlyoffice/apps-ui-kit` lives in its own repository (`docspace-ui-kit-react`)
 and is **not** a git submodule, a pnpm workspace member, or a checkout inside
-this repo. Its code is fixed there, never here. This repo consumes only the
-committed tarball `onlyoffice-apps-ui-kit.tgz` at the root, which the six apps
-depend on via `"file:../../onlyoffice-apps-ui-kit.tgz"`.
+this repo. Its code is fixed there, never here. The six apps install the
+published package from npm (`"@onlyoffice/apps-ui-kit": "^<version>"`); a new
+release is picked up with `pnpm -r update @onlyoffice/apps-ui-kit@^<version>`,
+committing the manifests together with `pnpm-lock.yaml`. Both first-party
+packages sit in `minimumReleaseAgeExclude`, since they are adopted on release
+day.
 
-The tarball is built **in the ui-kit repository** (`pnpm build && pnpm pack`
-there) and copied here. To pick up a new ui-kit version run
-`pnpm run update-ui-kit`, then commit `onlyoffice-apps-ui-kit.tgz` together
-with the `pnpm-lock.yaml` change. Do not copy the file and run `pnpm install`
-yourself - the specifier never changes, so pnpm keeps the cached copy and the
-update silently does not happen; see `.claude/rules/pnpm.md`.
+To try a ui-kit build **before it is published**, `pnpm run update-ui-kit`
+(newest `pnpm pack` in `../../docspace-ui-kit-react`, or a path) switches every
+app to `file:../../onlyoffice-apps-ui-kit.tgz` at the repo root, installs it
+and verifies by hash what landed. Do not do this by hand: once the specifier is
+`file:`, copying a new pack over and running `pnpm install` silently keeps the
+cached copy. The Dockerfiles copy root `*.tgz` optionally, so an image builds
+in either mode. Go back with `pnpm -r update @onlyoffice/apps-ui-kit@^<version>`
+and delete the tarball; see `.claude/rules/pnpm.md`.
 
 For local work on ui-kit itself, `pnpm run start:ui-kit-src` (root script, or
 the "Start (ui-kit src)" workspace button) points every app's dev server at a
@@ -93,23 +98,24 @@ path, and both `vite build` and `next build` refuse to run while it is set. In
 the client an import that escapes the checkout fails (any JS/TS import, and a
 bare `@docspace/shared` load in SCSS; sass resolves relative `@use` paths
 itself, unchecked); the Next apps have no such check. Run the apps once
-**without** the variable before committing a new tarball: source mode does not
+**without** the variable before publishing a ui-kit release: source mode does not
 exercise the stylesheet order, `"use client"`, the exports wildcard or the
 generated types. Details in `.claude/rules/pnpm.md`.
 
-The tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's `main`,
-`module`, `types` and `exports` fields live under `publishConfig`, which only
-pnpm promotes to the top level when packing. An npm-packed tarball has no entry
-points at all.
+A local tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's
+`main`, `module`, `types` and `exports` fields live under `publishConfig`, which
+only pnpm promotes to the top level when packing. An npm-packed tarball has no
+entry points at all.
 
 `@onlyoffice/ai-chat` is an **optional peer** of ui-kit that ui-kit statically
-imports from its `ai-agent/*` and `api/ai` subpaths without bundling it. Its
-own tarball (`onlyoffice-ai-chat-<version>.tgz`) is therefore committed here
-too and declared by the apps that render the AI agent — that `file:` dependency
-is what satisfies ui-kit's peer, so it cannot be dropped while those subpaths
-are used. `update-ui-kit` moves it along with ui-kit; to bump it alone, from a
-`../../onlyoffice-ai-chat` checkout, run `pnpm run update-ai-chat`. ai-chat's own optional peers (LLM SDKs, radix, codemirror, ...) must
-be declared by those same apps; their versions sit in the `catalog:` block of
+imports from its `ai-agent/*` and `api/ai` subpaths without bundling it. The
+apps that render the AI agent (client, sdk) therefore declare it themselves,
+from npm as well — that dependency is what satisfies ui-kit's peer, so it
+cannot be dropped while those subpaths are used. `pnpm run update-ai-chat`
+switches them to a local pack from `../../onlyoffice-ai-chat` the same way
+(`update-ui-kit` also takes one that sits next to the ui-kit checkout).
+ai-chat's own optional peers (LLM SDKs, radix, codemirror, ...) must be
+declared by those same apps; their versions sit in the `catalog:` block of
 `pnpm-workspace.yaml` - see `.claude/rules/pnpm.md`.
 
 ### buildtools sibling repo
@@ -164,10 +170,10 @@ hardcoded.
 ### Branch review
 
 Use the `review-branch` skill to review a branch against its parent. ui-kit is a
-separate repository that this repo consumes only as a prebuilt tarball, so a
+separate repository that this repo consumes only as a published package, so a
 ui-kit change must be reviewed inside a `docspace-ui-kit-react` checkout (its
 own base branch, via `git config branch.<name>.reviewBase` or auto-detect) —
-nothing in this repo's diff reflects it beyond the swapped tarball.
+nothing in this repo's diff reflects it beyond the version bump.
 
 ### Dependency audits
 

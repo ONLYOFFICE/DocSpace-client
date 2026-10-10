@@ -131,9 +131,14 @@ const onMessage = (e: MessageEvent) => {
     return;
   }
 
-  let payload:
-    | { type?: string; callId?: unknown; data?: { accessToken?: unknown } }
-    | null = null;
+  let payload: {
+    type?: string;
+    callId?: unknown;
+    data?: {
+      accessToken?: unknown;
+      error?: { code?: unknown; message?: unknown };
+    };
+  } | null = null;
   try {
     payload = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
   } catch {
@@ -143,6 +148,13 @@ const onMessage = (e: MessageEvent) => {
   if (!payload || payload.type !== AUTH_TOKEN_RETURN_TYPE) return;
 
   const token = payload.data?.accessToken;
+  const error = payload.data?.error;
+
+  if (error && typeof error === "object") {
+    console.warn(
+      `[OAuth] host rejected the token request: ${String(error.code ?? "UNKNOWN")} ${String(error.message ?? "")}`.trimEnd(),
+    );
+  }
 
   if (typeof payload.callId !== "number") {
     if (typeof token === "string" && token) {

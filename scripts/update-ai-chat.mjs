@@ -35,13 +35,14 @@
  */
 
 /**
- * Drops a freshly packed @onlyoffice/ai-chat tarball into this repo on its
- * own, without a ui-kit bump, and makes pnpm actually install it.
+ * Switches the apps from the npm release of @onlyoffice/ai-chat to a locally
+ * packed tarball, for trying an ai-chat build before it is published, and
+ * makes pnpm actually install it.
  *
- * `update-ui-kit` already moves ai-chat when ui-kit moves, taking whatever
- * tarball sits next to the ui-kit checkout. This is for the other case: an
- * ai-chat fix packed in the ai-chat checkout (`npm run pack:docs -- <n>`) that
- * ui-kit does not need to be rebuilt for.
+ * `update-ui-kit` moves ai-chat along when a tarball of it sits next to the
+ * ui-kit checkout. This is for the other case: an ai-chat fix packed in the
+ * ai-chat checkout (`npm run pack:docs -- <n>`) that ui-kit does not need to
+ * be rebuilt for.
  *
  * The tarball is versioned in its filename, so a new version means a new
  * `file:` specifier in every app manifest, and pnpm re-resolves it on its own.
@@ -53,6 +54,9 @@
  *   node scripts/update-ai-chat.mjs                    # newest pack in the sibling checkout
  *   node scripts/update-ai-chat.mjs path/to/pack.tgz   # an explicit tarball
  *   DOCSPACE_AI_CHAT_SRC=... node scripts/update-ai-chat.mjs
+ *
+ * Back to the registry: `pnpm -r update @onlyoffice/ai-chat@^<version>`, then
+ * delete the tarball.
  */
 
 import fs from "node:fs";
@@ -240,6 +244,6 @@ if (fs.existsSync(uiKitTarball)) {
 }
 
 console.log(
-  `Commit ${file} (and the removal of the previous one) together with ` +
-    "pnpm-lock.yaml and packages/*/package.json.",
+  "The apps now use the tarball instead of the npm release. To go back, run " +
+    `\`pnpm -r update @onlyoffice/ai-chat@^<version>\` and delete ${file}.`,
 );

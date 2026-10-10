@@ -8,6 +8,7 @@
   "DeleteGroup": "Видалити групу",
   "DisablingRoomGroups": "Вимкнення груп кімнат",
   "DisablingRoomGroupsDescription": "Групи будуть збережені, але приховані. Увімкнути в Профілі, керуванні файлами.",
+  "DisablingSpaceGroups": "Вимкнення груп просторів",
   "EditRoomGroups": "Редагувати групи кімнат",
   "EditSpaceGroups": "Редагувати групи просторів",
   "EmptyGroupRoomsDescription": "Тут немає кімнат. Спробуйте додати кімнату або видалити цю групу.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Обрані кімнати додано до <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Вибрані кімнати були видалені з <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Вибраний простір додано до <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Групування просторів",
+  "SpaceGroupingDisabled": "Групування просторів вимкнено",
+  "SpaceGroupingEnabled": "Групування просторів увімкнено",
+  "SpaceGroupingSettingDescription": "Ви можете групувати простори в папки та легко перемикатися між ними.",
   "SpaceRemovedFromGroup": "Вибраний простір видалено з <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Вибрані простори додано до <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Вибрані простори видалено з <1>{{groupName}}</1>."

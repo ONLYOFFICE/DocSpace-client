@@ -189,6 +189,21 @@ export type TFrameEvents = {
       }) => void);
 };
 
+export type TFrameFormsSection =
+  | "my-forms"
+  | "in-progress"
+  | "completed-forms"
+  | "library"
+  | "settings";
+
+export type TFramePersonalSection =
+  | "my-documents"
+  | "favorites"
+  | "recent"
+  | "shared-with-me"
+  | "trash"
+  | "settings";
+
 export type TFrameConfig = {
   acceptButtonLabel?: string;
   customActions?: TFrameCustomActions;
@@ -196,6 +211,7 @@ export type TFrameConfig = {
   cancelButtonLabel?: string;
   checkCSP?: boolean;
   destroyText?: string;
+  methodTimeout?: number;
   disableActionButton?: boolean;
   downloadToEvent?: boolean;
   editorCustomization?: TEditorCustomization;
@@ -219,12 +235,16 @@ export type TFrameConfig = {
   id?: string | number | null;
   infoPanelVisible?: boolean;
   init?: boolean | null;
-  integrationUrl?: string;
   isSDK?: boolean;
   locale?: string | null;
   mode?: TFrameMode;
   name?: string;
   requestToken?: string | null;
+  tokenExpiresAt?: number;
+  providerName?: string;
+  inviteKey?: string;
+  emplType?: string;
+  uid?: string;
   roomType?: RoomsType | RoomsType[];
   rootPath?: string;
   selectorType?: TFrameSelectorType;
@@ -250,4 +270,18 @@ export type TFrameConfig = {
   withSearch?: boolean;
   withSubtitle?: boolean;
   openEditorInSameTab?: boolean;
+  destination?: TFrameFormsSection;
+  personalDestination?: TFramePersonalSection;
+  linkMainText?: string;
+  secondaryText?: string;
+  extensionsText?: string;
+  acceptExtensions?: string;
+  isFolderUpload?: boolean;
+  isMultipleUpload?: boolean;
+  maxPerUploadSize?: string;
+  maxTotalUploadSize?: string;
+  agentId?: string | number;
+  entityId?: string | number;
+  fileId?: string | number;
+  threadId?: string;
 };

@@ -66,7 +66,6 @@ import { useNavigate } from "react-router";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 
@@ -87,6 +86,7 @@ type HeaderProps = {
   isAdminOrOwner?: boolean;
   standalone?: boolean;
   isCommunity?: boolean;
+  logoText?: string;
 };
 
 const Header = ({
@@ -96,6 +96,7 @@ const Header = ({
   isAdminOrOwner = false,
   standalone = false,
   isCommunity = false,
+  logoText = "",
 }: HeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -109,7 +110,7 @@ const Header = ({
       <div className={styles.planHeaderText}>
         <Text className={styles.planTitle}>
           {t("Common:WelcomeToOrganization", {
-            organizationName: getBrandName("OrganizationName"),
+            organizationName: logoText,
           })}
         </Text>
 
@@ -181,6 +182,7 @@ const HeaderConnected = inject<TStore>(
       (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
     standalone: settingsStore.standalone,
     isCommunity: currentTariffStatusStore.isCommunity,
+    logoText: settingsStore.logoText,
   }),
 )(observer(Header));
 

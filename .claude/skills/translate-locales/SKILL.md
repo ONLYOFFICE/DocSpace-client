@@ -173,4 +173,4 @@ All languages present under each workspace's `locales/` directory must be transl
 
 `NotTranslatedOnBaseLanguages` only enforces `de, es, fr, hy-AM, it, ja-JP, pt-BR, ro, ru, sr-Cyrl-RS, sr-Latn-RS, zh-CN`. The remaining 19 languages are covered by `NotTranslatedOnAllLanguages` — never treat a green `NotTranslatedOnBaseLanguages` as proof that all languages are done.
 
-Not covered by any test: ui-kit's `locales/` — ui-kit is a separate repository consumed here as a prebuilt tarball, and its locale gaps have to be fixed in `docspace-ui-kit-react`.
+Not covered by any test: ui-kit's `locales/` — ui-kit is a separate repository consumed here as a published npm package, and its locale gaps have to be fixed in `docspace-ui-kit-react`.

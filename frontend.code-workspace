@@ -115,12 +115,12 @@
           {
             "label": "Update ui-kit",
             "task": "Frontend | update ui-kit",
-            "tooltip": "🛠️ Install the committed ui-kit tarball and refresh pnpm-lock.yaml"
+            "tooltip": "🛠️ Switch the apps to the newest ui-kit pack from ../../docspace-ui-kit-react instead of the npm release"
           },
           {
             "label": "Update ai-chat",
             "task": "Frontend | update ai-chat",
-            "tooltip": "🛠️ Install the newest ai-chat tarball from ../../onlyoffice-ai-chat and refresh pnpm-lock.yaml"
+            "tooltip": "🛠️ Switch the apps to the newest ai-chat pack from ../../onlyoffice-ai-chat instead of the npm release"
           },
           {
             "label": "Build",

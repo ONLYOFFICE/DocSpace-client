@@ -52,6 +52,7 @@ export type WelcomeDialogProps = {
   onTakeTour: () => void;
   /** Fired by "Later", the close icon and Esc — dismiss without a tour. */
   onClose: () => void;
+  organizationName: string;
 };
 
 /**
@@ -66,7 +67,11 @@ export type WelcomeDialogProps = {
  * whether it is shown is the page's own state. This component is layout and
  * copy, and both of its actions close.
  */
-const WelcomeDialog = ({ onTakeTour, onClose }: WelcomeDialogProps) => {
+const WelcomeDialog = ({
+  onTakeTour,
+  onClose,
+  organizationName,
+}: WelcomeDialogProps) => {
   const { t } = useTranslation(["DashboardTour", "Common"]);
 
   const productName = getBrandName("ProductName");
@@ -80,7 +85,7 @@ const WelcomeDialog = ({ onTakeTour, onClose }: WelcomeDialogProps) => {
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {t("DashboardTour:WelcomeDashboardTitle", { organizationName: getBrandName("OrganizationName"), productName })}
+        {t("DashboardTour:WelcomeDashboardTitle", { organizationName, productName })}
       </ModalDialog.Header>
 
       <ModalDialog.Body>

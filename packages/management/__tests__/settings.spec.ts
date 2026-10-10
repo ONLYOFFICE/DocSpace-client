@@ -38,6 +38,7 @@ import {
   encryptionSettingsHandler,
   getPortalHandler,
   quotaHandler,
+  tariffHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
@@ -259,4 +260,68 @@ test.describe("Settings", () => {
       "settings-branding-without-customization-render.png",
     ]);
   });
+});
+
+// Branding is a paid feature: the Community (opensource) edition has no
+// license at all, so it must not show the Branding tab or let a direct link
+// open any of the Branding pages.
+test.describe("Settings in the Community edition", () => {
+  const BRANDING_PATHS = [
+    "branding",
+    "branding/brand-name",
+    "branding/white-label",
+    "branding/company-info",
+    "branding/additional-resources",
+  ];
+
+  test.beforeEach(async ({ serverRequestInterceptor, port }) => {
+    serverRequestInterceptor.use(
+      colorThemeHandler(port),
+      getPortalHandler(port, false, true),
+      tariffHandler(port, true),
+    );
+  });
+
+  test("should open Data backup without the Branding tab", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/management/settings`);
+
+    await expect(page).toHaveURL(/\/management\/settings\/data-backup$/);
+    await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
+    await expect(page.getByTestId("data-backup_tab")).toBeVisible();
+    await expect(page.getByTestId("branding_tab")).toHaveCount(0);
+
+    await expectScreenshot(page, [
+      "desktop",
+      "settings",
+      "settings-community-render.png",
+    ]);
+  });
+
+  test("should lead the article Settings item to Data backup", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/management/spaces`);
+
+    await page.locator("#management_catalog-settings").click();
+
+    await expect(page).toHaveURL(/\/management\/settings\/data-backup$/);
+    await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
+  });
+
+  for (const path of BRANDING_PATHS) {
+    test(`should redirect ${path} to Data backup`, async ({
+      page,
+      baseUrl,
+    }) => {
+      await page.goto(`${baseUrl}/management/settings/${path}`);
+
+      await expect(page).toHaveURL(/\/management\/settings\/data-backup$/);
+      await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
+      await expect(page.getByTestId("branding_tab")).toHaveCount(0);
+    });
+  }
 });

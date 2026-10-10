@@ -47,7 +47,7 @@ const os = require("os");
 const packagePath = path.resolve(__dirname, "package.json");
 const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
 
-const BannerPlugin = require("webpack").BannerPlugin;
+const { BannerPlugin, NormalModuleReplacementPlugin } = require("webpack");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
@@ -69,7 +69,7 @@ if (!isDev) refuseBuildFromSource(__dirname);
 
 const monorepoRoot = path.resolve(__dirname, "../..");
 // @onlyoffice/docspace-api-sdk is a dependency of @onlyoffice/apps-ui-kit
-// (installed from the tarball at the repo root), not of this app directly --
+// (installed from npm), not of this app directly --
 // resolve it starting from wherever ui-kit itself actually landed rather than
 // a hardcoded path.
 const uiKitDir = path.dirname(
@@ -146,6 +146,22 @@ const nextConfig = {
     const uiKitSrc = applyUiKitSourceMode(config, __dirname);
 
     if (uiKitSrc) console.log(`ui-kit: serving source from ${uiKitSrc}`);
+    else {
+      // pnpm installs ui-kit once per peer set: this app declares ai-chat's
+      // optional peers and @docspace/shared does not, so the two get different
+      // copies, and a selector imported through shared would read another
+      // ApiContext than the ApiProvider this app mounts ("useApi must be used
+      // within an ApiProvider"). Resolving every ui-kit import from this app's
+      // directory keeps a single copy -- the webpack side of Vite's dedupe.
+      config.plugins.push(
+        new NormalModuleReplacementPlugin(
+          /^@onlyoffice\/apps-ui-kit(\/|$)/,
+          (resource) => {
+            resource.context = __dirname;
+          },
+        ),
+      );
+    }
 
     config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
 

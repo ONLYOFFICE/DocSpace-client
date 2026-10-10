@@ -3,7 +3,7 @@
   "content": "Enterprise",
   "content_en_sha1_hash": "b4afff317fb189b9020c5c4b47338ed3d2b0662a",
   "created_at": "2025-05-19T21:30:45.018Z",
-  "updated_at": "2026-10-02T12:15:32.445Z",
+  "updated_at": "2026-10-06T13:35:38.893Z",
   "comment": {
     "text": "This is a short label for the \"Enterprise\" license type, used in various headers and banners related to billing, upgrades, and product features.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/UpgradePathLine.tsx",
-      "line_number": 96,
+      "line_number": 93,
       "context": "<Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"UnlockMoreWithSolutions\"\n values={{\n enterprise: t(\"Common:EnterpriseLicense\"),\n developer: t(\"Common:DeveloperLicense\"),\n }}\n components={{\n 1: (\n <Link",
       "module": "/packages/client"
     },
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/index.tsx",
-      "line_number": 62,
+      "line_number": 66,
       "context": "}: IBonusProps) => {\n const { t, ready } = useTranslation(\"Common\");\n \n if (!ready) return <PaymentsStandaloneLoader />;\n \n const license = t(\"Common:EnterpriseLicense\");\n \n return (\n <div data-testid=\"bonus\" className={styles.bonus}>\n <div className={styles.cards}>\n <EnterpriseFeatures license={license} />",
       "module": "/packages/shared"
     },

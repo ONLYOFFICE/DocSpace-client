@@ -3,7 +3,7 @@
   "content": "Something went wrong.",
   "content_en_sha1_hash": "bee54c9cc30c539ab2ed15c0c936e055cf8ef67e",
   "created_at": "2025-05-19T21:30:48.934Z",
-  "updated_at": "2026-10-01T16:17:09.992Z",
+  "updated_at": "2026-10-06T10:42:37.455Z",
   "comment": {
     "text": "This is an error message displayed in a toast notification or as a title in an empty state view. It appears when an unexpected error occurs during an operation, such as submitting to a form gallery, server communication, or data import.",
     "is_auto": true,
@@ -230,13 +230,13 @@
     {
       "file_path": "/packages/shared/components/errors/Error520.tsx",
       "line_number": 101,
-      "context": "zendeskAPI.addChanges(\"webWidget\", \"show\");\n \n if (!firebaseHelper?.isEnabledDB)\n return (\n <ErrorContainer\n headerText={t(\"SomethingWentWrong\")}\n customizedBodyText={errorLog?.message ?? customErrorLog?.message}\n />\n );\n \n return (",
+      "context": "zendeskAPI.addChanges(\"messenger\", \"show\");\n \n if (!firebaseHelper?.isEnabledDB)\n return (\n <ErrorContainer\n headerText={t(\"SomethingWentWrong\")}\n customizedBodyText={errorLog?.message ?? customErrorLog?.message}\n />\n );\n \n return (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/errors/Error520.tsx",
       "line_number": 101,
-      "context": "zendeskAPI.addChanges(\"webWidget\", \"show\");\n \n if (!firebaseHelper?.isEnabledDB)\n return (\n <ErrorContainer\n headerText={t(\"SomethingWentWrong\")}\n customizedBodyText={errorLog?.message ?? customErrorLog?.message}\n />\n );\n \n return (",
+      "context": "zendeskAPI.addChanges(\"messenger\", \"show\");\n \n if (!firebaseHelper?.isEnabledDB)\n return (\n <ErrorContainer\n headerText={t(\"SomethingWentWrong\")}\n customizedBodyText={errorLog?.message ?? customErrorLog?.message}\n />\n );\n \n return (",
       "module": "/packages/shared"
     }
   ],

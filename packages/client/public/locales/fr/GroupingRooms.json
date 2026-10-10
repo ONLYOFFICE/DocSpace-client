@@ -8,6 +8,7 @@
   "DeleteGroup": "Supprimer le groupe",
   "DisablingRoomGroups": "Désactiver les groupes de salles",
   "DisablingRoomGroupsDescription": "Les groupes seront enregistrés mais masqués. Réactiver dans Profil, Gestion des fichiers.",
+  "DisablingSpaceGroups": "Désactiver les groupes d'espaces",
   "EditRoomGroups": "Modifier les groupes de salles",
   "EditSpaceGroups": "Modifier les groupes d'espaces",
   "EmptyGroupRoomsDescription": "Il n'y a aucune salle ici. Essayez d'en ajouter une ou de supprimer ce groupe.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Les salles sélectionnées ont été ajoutées à <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Les pièces sélectionnées ont été supprimées de <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "L'espace sélectionné a été ajouté à <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Regroupement d'espaces",
+  "SpaceGroupingDisabled": "Le regroupement d'espaces est désactivé",
+  "SpaceGroupingEnabled": "Le regroupement d'espaces est activé",
+  "SpaceGroupingSettingDescription": "Vous pouvez regrouper les espaces dans des dossiers et basculer facilement entre eux.",
   "SpaceRemovedFromGroup": "L'espace sélectionné a été retiré de <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Les espaces sélectionnés ont été ajoutés à <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Les espaces sélectionnés ont été retirés de <1>{{groupName}}</1>."

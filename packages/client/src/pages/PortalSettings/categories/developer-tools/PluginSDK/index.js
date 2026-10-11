@@ -100,14 +100,14 @@ const PluginSDK = ({
             alt="Plugin logo"
           />
           <div className={styles.pluginInfoContainer}>
-            <Text>{p.name}</Text>
+            <Text>{p.nameLocale}</Text>
             <Text className={styles.description}>
               {t("Common:VersionShort")} {p.version}
             </Text>
           </div>
         </div>
-        <Text className={styles.descriptionText} title={p.description}>
-          {p.description}
+        <Text className={styles.descriptionText} title={p.descriptionLocale}>
+          {p.descriptionLocale}
         </Text>
         <Button
           icon={icon}

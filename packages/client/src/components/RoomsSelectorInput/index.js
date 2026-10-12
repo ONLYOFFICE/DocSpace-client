@@ -37,12 +37,12 @@ import { useState } from "react";
 import { observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { FileInput } from "@docspace/ui-kit/components/file-input";
+import { FileInput } from "@onlyoffice/apps-ui-kit/components/file-input";
 
-import RoomSelector from "@docspace/ui-kit/selectors/Room";
+import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
 
-import { Aside } from "@docspace/ui-kit/components/aside";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { Aside } from "@onlyoffice/apps-ui-kit/components/aside";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 const RoomsSelectorInput = (props) => {

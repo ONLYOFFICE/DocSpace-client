@@ -34,12 +34,12 @@
  */
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { withTranslation, Trans } from "react-i18next";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router";
@@ -47,11 +47,11 @@ import { isMobileDevice } from "@docspace/shared/utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { PortalRenamingDialog } from "SRC_DIR/components/dialogs";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";

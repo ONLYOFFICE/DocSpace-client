@@ -34,7 +34,7 @@
  */
 import { memo, useState } from "react";
 import isNil from "lodash/isNil";
-import { useIsomorphicLayoutEffect } from "@docspace/ui-kit/hooks/useIsomorphicLayoutEffect";
+import { useIsomorphicLayoutEffect } from "@onlyoffice/apps-ui-kit/hooks/useIsomorphicLayoutEffect";
 import { Trans } from "react-i18next";
 import { isTablet as isTabletDevice } from "react-device-detect";
 import equal from "fast-deep-equal";
@@ -58,12 +58,12 @@ import {
   ShareAccessRights,
   VectorizationStatus,
 } from "../../enums";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getDate, isExpired } from "../share/Share.helpers";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { isRoom } from "../../utils/typeGuards";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
 import { FailedVectorizationBadge } from "../failed-vectorization-badge";

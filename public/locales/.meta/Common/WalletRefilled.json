@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletRefilledModal.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletRefilledModal.tsx",
       "line_number": 110,
       "context": "onClose={onCloseDialog}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {wasChangeBalance ? t(\"WalletRefilled\") : t(\"TopUpCredits\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.modalContent}>\n {wasChangeBalance ? (\n <>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

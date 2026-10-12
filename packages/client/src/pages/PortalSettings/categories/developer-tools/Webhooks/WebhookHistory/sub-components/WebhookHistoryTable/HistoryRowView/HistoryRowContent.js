@@ -36,11 +36,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RowContent } from "@docspace/ui-kit/components/rows";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 
 import StatusBadge from "../../../../sub-components/StatusBadge";
 

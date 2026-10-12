@@ -37,18 +37,18 @@ import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
-import { getDocsConnectScheduleFlags } from "@docspace/ui-kit/billing/utils/docs-connect";
-import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Heading, HeadingLevel } from "@onlyoffice/apps-ui-kit/components/heading";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { ProgressBar } from "@onlyoffice/apps-ui-kit/components/progress-bar";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import StorageWarning from "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/StorageWarning";
+import { getDocsConnectScheduleFlags } from "@onlyoffice/apps-ui-kit/billing/utils/docs-connect";
+import { formatDateLocalized } from "@onlyoffice/apps-ui-kit/utils/date";
 
-import AlertIcon from "@docspace/ui-kit/assets/plugin.incompatible.react.svg";
+import AlertIcon from "PUBLIC_DIR/images/plugin.incompatible.react.svg";
 
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import { getBrandName } from "@docspace/shared/constants/brands";
@@ -168,7 +168,7 @@ const Statistics = ({
   const getSubscriptionNote = () => {
     if (!scheduledChange)
       return t("Common:RenewsOnDate", {
-        date: formatDocsConnectDate(tenant.endDate),
+        date: formatDocsConnectDate(tenant.endDate, i18n.language),
       });
 
     if (isCancellation)
@@ -362,12 +362,14 @@ const Statistics = ({
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("Common:Start")}</Text>
                 <Text fontWeight={600}>
-                  {formatDocsConnectDate(trialStart)}
+                  {formatDocsConnectDate(trialStart, i18n.language)}
                 </Text>
               </div>
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("Common:ValidUntil")}</Text>
-                <Text fontWeight={600}>{formatDocsConnectDate(trialEnd)}</Text>
+                <Text fontWeight={600}>
+                  {formatDocsConnectDate(trialEnd, i18n.language)}
+                </Text>
               </div>
             </div>
             <div
@@ -510,7 +512,7 @@ const Statistics = ({
             <div className={styles.detailRow}>
               <Text className={styles.muted}>{t("DocsConnect:Released")}</Text>
               <Text fontWeight={600}>
-                {formatDocsConnectDate(tenantInfo.license.buildDate)}
+                {formatDocsConnectDate(tenantInfo.license.buildDate, i18n.language)}
               </Text>
             </div>
           </div>

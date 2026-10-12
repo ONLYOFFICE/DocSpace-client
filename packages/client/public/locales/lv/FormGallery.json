@@ -4,11 +4,9 @@
   "ErrorViewDescription": "Mēģiniet vēlreiz vēlāk",
   "ErrorViewDescriptionNetworkError": "Šķiet, nav pieejams interneta savienojums.",
   "ErrorViewHeader": "Galerija ir īslaicīgi pieejama.",
-  "GalleryTitle": "{{organizationName}} Šablonu galerija",
+  "Purpose": "Mērķis",
   "SelectTemplate": "Izvēlieties veidni",
   "SubmitToGalleryDialogMainInfo": "Iesniegiet savu šablonu publisajā galerijā, lai citi varētu izmantot to savā darbam. Pēc moderācijas apstiprināšanas jums paziņosim un atbalstīsiet par jūsu ieguldījumu.",
   "SuggestChanges": "Ieteikt izmaiņas",
-  "TemplateInfo": "Informācija par veidni",
-  "UploadGallery": "Augšupielādēt Galerijā",
-  "ViewAllTemplates": "Skatīt visas veidnes"
+  "TemplateInfo": "Informācija par veidni"
 }

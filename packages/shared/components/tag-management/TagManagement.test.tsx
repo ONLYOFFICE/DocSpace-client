@@ -60,8 +60,12 @@ vi.mock("../../utils/useClickOutside", () => ({
   useClickOutside: vi.fn(),
 }));
 
-vi.mock("@docspace/ui-kit/hooks/use-is-mobile", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/hooks/use-is-mobile", () => ({
   useIsMobile: vi.fn(() => false),
+}));
+
+vi.mock("@onlyoffice/apps-ui-kit/utils/use-click-outside", () => ({
+  useClickOutside: vi.fn(),
 }));
 
 const createQueryClient = () =>
@@ -157,9 +161,9 @@ describe("<TagManagementPopup />", () => {
 
   it("calls onClose when clicking outside", async () => {
     const onClose = vi.fn();
-    const useClickOutside =
-      await import("@docspace/ui-kit/utils/use-click-outside");
-    const mockUseClickOutside = vi.spyOn(useClickOutside, "useClickOutside");
+    const { useClickOutside: mockUseClickOutside } = await import(
+      "@onlyoffice/apps-ui-kit/utils/use-click-outside"
+    );
 
     vi.spyOn(useTagsQueryModule, "useTagsQuery").mockReturnValue({
       data: ["tag1"],
@@ -222,7 +226,7 @@ describe("<TagManagementPopup />", () => {
   });
 
   it("handles mobile view correctly", async () => {
-    const useIsMobile = await import("@docspace/ui-kit/hooks/use-is-mobile");
+    const useIsMobile = await import("@onlyoffice/apps-ui-kit/hooks/use-is-mobile");
     vi.spyOn(useIsMobile, "useIsMobile").mockReturnValue(true);
 
     vi.spyOn(useTagsQueryModule, "useTagsQuery").mockReturnValue({

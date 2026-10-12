@@ -33,12 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type {
   FilesSelectorProps,
   FilesSettingsDto,
-} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
-import type { TGetIcon } from "@docspace/ui-kit/selectors/utils/types";
+} from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
+import type { TGetIcon } from "@onlyoffice/apps-ui-kit/selectors/utils/types";
 import type { DeviceType } from "../../enums";
 import type { BackupToPublicRoomOptionType } from "../../types";
 

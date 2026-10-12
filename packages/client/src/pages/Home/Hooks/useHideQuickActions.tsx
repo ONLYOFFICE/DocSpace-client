@@ -36,14 +36,14 @@
 import React from "react";
 import { Trans } from "react-i18next";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TFunction } from "i18next";
 import type { TTranslation } from "@docspace/shared/types";
 
 type UseHideQuickActionsProps = {
   t: TTranslation;
-  setShowQuickActions?: (value: boolean) => void;
+  setShowQuickActions?: (value: boolean) => Promise<boolean> | void;
 };
 
 /**
@@ -58,8 +58,9 @@ export const useHideQuickActions = ({
   t,
   setShowQuickActions,
 }: UseHideQuickActionsProps) => {
-  return React.useCallback(() => {
-    setShowQuickActions?.(false);
+  return React.useCallback(async () => {
+    const saved = await setShowQuickActions?.(false);
+    if (saved === false) return;
 
     // The Undo handler runs long after this call returns, so it can read the id
     // it is nested in: it dismisses this toast alone and leaves any other
@@ -105,3 +106,4 @@ export const useHideQuickActions = ({
 };
 
 export default useHideQuickActions;
+

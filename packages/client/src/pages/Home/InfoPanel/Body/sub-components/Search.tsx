@@ -41,8 +41,8 @@ import {
 	InputSize,
 	InputType,
 	TextInput,
-} from "@docspace/ui-kit/components/text-input";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import commonStyles from "../helpers/Common.module.scss";
 

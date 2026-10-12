@@ -37,12 +37,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
 	ModalDialog,
 	ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import api from "@docspace/shared/api";
 import { ButtonKeys } from "@docspace/shared/enums";
 

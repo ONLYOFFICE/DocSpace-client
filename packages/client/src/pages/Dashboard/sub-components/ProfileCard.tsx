@@ -64,10 +64,16 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
 import { DeviceType } from "@docspace/shared/enums";
+import {
+  getUserTypeName,
+  getUserTypeDescription,
+} from "@docspace/shared/utils/common";
 
 import ChangePasswordDialog from "SRC_DIR/components/dialogs/ChangePasswordDialog";
 
@@ -90,6 +96,8 @@ interface ProfileCardProps {
    */
   isAdmin?: boolean;
   isOwner?: boolean;
+  isRoomAdmin?: boolean;
+  isCollaborator?: boolean;
 }
 
 const ProfileCardComponent = ({
@@ -99,9 +107,12 @@ const ProfileCardComponent = ({
   currentDeviceType,
   isAdmin = false,
   isOwner = false,
+  isRoomAdmin = false,
+  isCollaborator = false,
 }: ProfileCardProps) => {
   const { t } = useTranslation(["SocialAuthWelcomeDialog", "Common"]);
   const navigate = useNavigate();
+  const { isRTL } = useInterfaceDirection();
 
   const [hidden, setHidden] = React.useState(
     () => localStorage.getItem(PROFILE_CARD_HIDDEN_KEY) === "true",
@@ -193,6 +204,44 @@ const ProfileCardComponent = ({
 
           <div className={styles.profileCardField}>
             <Text as="span" className={styles.profileCardLabel}>
+              {t("Common:Type")}
+            </Text>
+            <span className={styles.profileCardValueRow}>
+              <Text
+                as="span"
+                className={styles.profileCardValue}
+                dataTestId="dashboard-profile-type"
+              >
+                {getUserTypeName(
+                  isOwner,
+                  isAdmin,
+                  isRoomAdmin,
+                  isCollaborator,
+                  t,
+                )}
+              </Text>
+              {/* Same as the profile page: the owner's type has no description
+                  to explain. */}
+              {!isOwner ? (
+                <HelpButton
+                  className={styles.profileCardHelp}
+                  size={12}
+                  offsetRight={0}
+                  place={isRTL ? "left" : "right"}
+                  tooltipContent={getUserTypeDescription(
+                    isAdmin,
+                    isRoomAdmin,
+                    isCollaborator,
+                    t,
+                  )}
+                  dataTestId="dashboard-profile-type-help"
+                />
+              ) : null}
+            </span>
+          </div>
+
+          <div className={styles.profileCardField}>
+            <Text as="span" className={styles.profileCardLabel}>
               {t("Common:Password")}
             </Text>
             <Link
@@ -226,6 +275,8 @@ export const ProfileCard = inject<TStore>(({ userStore, settingsStore }) => ({
   currentDeviceType: settingsStore.currentDeviceType,
   isAdmin: userStore.user?.isAdmin ?? false,
   isOwner: userStore.user?.isOwner ?? false,
+  isRoomAdmin: userStore.user?.isRoomAdmin ?? false,
+  isCollaborator: userStore.user?.isCollaborator ?? false,
 }))(observer(ProfileCardComponent));
 
 export default ProfileCard;

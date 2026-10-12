@@ -18,14 +18,17 @@ WORKDIR /app
 
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+# `*.tgz` is optional: ui-kit and ai-chat come from npm, but a locally packed
+# tarball at the repo root can be referenced as `file:../../<name>.tgz` for
+# local development. A glob matching nothing is fine next to real sources.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
 
 COPY common/ ./common/
-COPY packages/client/*.tgz ./packages/client/
 COPY packages/management/ ./packages/management/
 COPY packages/shared/ ./packages/shared/
+# next.config.js requires scripts/ui-kit-dev.cjs at load time.
+COPY scripts/ ./scripts/
 COPY public/ ./public/
-COPY libs/ui-kit/ ./libs/ui-kit/
 
 # CI=true is scoped to this one command on purpose. It skips the
 # `lefthook install` in the workspace prepare scripts, which cannot work

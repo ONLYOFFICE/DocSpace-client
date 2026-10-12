@@ -41,7 +41,7 @@ import {
   loadRoomMemberKeysSafe,
 } from "@docspace/shared/services/private-room/room-member-keys";
 import { AnalyticsEvents, UrlActionType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   downloadAndDecryptFile,
   downloadAndDecryptFileToBuffer,

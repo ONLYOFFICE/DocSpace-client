@@ -41,15 +41,15 @@ import { ChangeEvent, useContext, useState } from "react";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { checkConfirmLink } from "@docspace/shared/api/user";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Text } from "@docspace/ui-kit/components/text";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/ui-kit/components/text-input";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";

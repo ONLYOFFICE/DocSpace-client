@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import styles from "./HistoryText.module.scss";
 

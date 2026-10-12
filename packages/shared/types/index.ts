@@ -33,21 +33,26 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export * from "@docspace/ui-kit/types";
+// `export type *`, not `export *`: ui-kit's `types` subpath is declarations
+// only -- it has no dist/esm/types/index.js -- so a value re-export would
+// resolve for tsc and fail for the bundler. Today esbuild drops the whole
+// statement because nothing imports a value through it, which would stop
+// being true the moment ui-kit exported one.
+export type * from "@onlyoffice/apps-ui-kit/types";
 
 import type { TFile, TFileLink, TFolder } from "../api/files/types";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type {
   FolderType,
   RoomsType,
   ShareAccessRights,
   ShareRights,
 } from "../enums";
-import type { TTheme, TColorScheme } from "@docspace/ui-kit/providers/theme";
+import type { TTheme, TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme";
 import type FirebaseHelper from "../utils/firebase";
 import type { TRoom } from "../api/rooms/types";
 
-export type { TDirectionX, TDirectionY } from "@docspace/ui-kit/types";
+export type { TDirectionX, TDirectionY } from "@onlyoffice/apps-ui-kit/types";
 
 export type Option = {
   key: string;
@@ -335,10 +340,10 @@ declare global {
   }
 
   export type ContextMenuModel =
-    import("@docspace/ui-kit/components/context-menu").ContextMenuModel;
+    import("@onlyoffice/apps-ui-kit/components/context-menu").ContextMenuModel;
 
   export type SeparatorType =
-    import("@docspace/ui-kit/components/context-menu").SeparatorType;
+    import("@onlyoffice/apps-ui-kit/components/context-menu").SeparatorType;
 }
 
 export type TDefaultTemplateItem = {

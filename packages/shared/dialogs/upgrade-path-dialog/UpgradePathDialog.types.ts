@@ -37,7 +37,7 @@ export type UpgradePathDialogProps = {
   visible: boolean;
   onClose: () => void;
   demoOrderUrl: string;
-  feedbackAndSupportUrl: string;
+  supportUrl: string;
   salesEmail: string;
   onStartEnterpriseTrial?: () => void;
   onStartDeveloperTrial?: () => void;

@@ -36,7 +36,7 @@
 
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("@docspace/ui-kit/utils/socket", async (io) => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (io) => ({
   ...((await io()) as Record<string, unknown>),
   default: { on: vi.fn(), off: vi.fn(), emit: vi.fn() },
 }));

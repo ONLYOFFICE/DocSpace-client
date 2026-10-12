@@ -38,10 +38,10 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import styles from "./MetadataUrlField.module.scss";
 

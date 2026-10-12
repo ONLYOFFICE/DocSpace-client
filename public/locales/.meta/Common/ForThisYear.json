@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/usage/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/index.tsx",
       "line_number": 211,
       "context": "components={{ 1: dateRangeSpan }}\n />\n ),\n thisYear: (\n <CommonTrans\n i18nKey=\"ForThisYear\"\n values={{ startDate, endDate }}\n components={{ 1: dateRangeSpan }}\n />\n ),\n lastYear: (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

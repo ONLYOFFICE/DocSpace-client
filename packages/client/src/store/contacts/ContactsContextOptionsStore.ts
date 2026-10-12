@@ -44,7 +44,7 @@ import {
 } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import type { TContextMenuValueTypeOnClick } from "@docspace/ui-kit/components/context-menu";
+import type { TContextMenuValueTypeOnClick } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { UserStore } from "@docspace/shared/store/UserStore";

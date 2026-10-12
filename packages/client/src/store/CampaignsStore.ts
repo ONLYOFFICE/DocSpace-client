@@ -41,7 +41,7 @@ import { UserStore } from "@docspace/shared/store/UserStore";
 
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getLanguage } from "@docspace/shared/utils";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import {
   getCampaignsLs,
   getImage,

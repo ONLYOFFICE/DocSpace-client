@@ -37,13 +37,13 @@ import { inject, observer } from "mobx-react";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
-import { RowContainer } from "@docspace/ui-kit/components/rows";
+import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import EmptyScreenGroups from "../../EmptyScreenGroups";
 

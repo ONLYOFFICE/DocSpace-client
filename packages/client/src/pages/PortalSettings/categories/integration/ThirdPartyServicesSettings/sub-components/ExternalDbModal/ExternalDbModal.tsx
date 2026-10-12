@@ -42,10 +42,10 @@ import { useForm, Controller, useWatch } from "react-hook-form";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components";
 import { testExternalDbConnection } from "@docspace/shared/api/settings";
 
 import styles from "./ExternalDbModal.module.scss";

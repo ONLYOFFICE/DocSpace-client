@@ -47,7 +47,7 @@ import {
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import { RoomsTypes, isDesktop } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
@@ -106,7 +106,7 @@ import type { VectorizationStatus } from "@docspace/shared/enums";
 import type {
   TOptSocket,
   TUnmappedSocketListener,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import type { default as TFilesFilter } from "@docspace/shared/api/files/filter";
 import type { default as TRoomsFilter } from "@docspace/shared/api/rooms/filter";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
@@ -575,7 +575,7 @@ class FilesStore {
 
     SocketHelper?.on(SocketEvents.ModifyRoom, (option) => {
       // the ui-kit TOptSocket.cmd union does not include
-      // "create-form" (ui-kit is a separate submodule); the erased cast
+      // "create-form" (ui-kit is a separate repository); the erased cast
       // keeps the original switch.
       switch (option.cmd as string) {
         case "create-form":

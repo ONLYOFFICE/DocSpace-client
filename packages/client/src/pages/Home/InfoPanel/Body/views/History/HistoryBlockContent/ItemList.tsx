@@ -46,12 +46,12 @@ import {
   TFeedData,
   TRoom,
 } from "@docspace/shared/api/rooms/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getFileExtension } from "@docspace/shared/utils/common";
 import { getCachedEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { useFilenameCacheVersion } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 

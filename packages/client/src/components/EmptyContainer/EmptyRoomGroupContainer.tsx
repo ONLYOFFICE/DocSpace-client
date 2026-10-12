@@ -34,7 +34,7 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@docspace/ui-kit/context";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import type { EmptyViewOptionsType } from "@docspace/shared/components/empty-view";

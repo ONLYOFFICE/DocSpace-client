@@ -36,10 +36,10 @@
 import { useTranslation, Trans } from "react-i18next";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
-import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import EmptyScreenOauthLightSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.light.svg";
 import EmptyScreenOauthDarkSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.dark.svg";

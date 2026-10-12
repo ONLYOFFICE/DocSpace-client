@@ -8,6 +8,7 @@
   "DeleteGroup": "グループを削除",
   "DisablingRoomGroups": "ルームグループの無効化",
   "DisablingRoomGroupsDescription": "グループは保存されますが、非表示になります。「プロフィール」の「ファイル管理」で再度有効にしてください。",
+  "DisablingSpaceGroups": "スペースグループの無効化",
   "EditRoomGroups": "ルームグループの編集",
   "EditSpaceGroups": "スペースグループの編集",
   "EmptyGroupRoomsDescription": "ここに部屋はありません。部屋を追加するか、このグループを削除してみてください。",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "選択された部屋が<1>{{groupName}}</1>に追加されました。",
   "RoomsRemovedFromGroup": "選択された部屋は<1>{{groupName}}</1>から削除されました。",
   "SpaceAddedToGroup": "選択されたスペースが<1>{{groupName}}</1>に追加されました。",
+  "SpaceGrouping": "スペースのグループ化",
+  "SpaceGroupingDisabled": "スペースのグループ化は無効になっています",
+  "SpaceGroupingEnabled": "スペースのグループ化が有効になっています",
+  "SpaceGroupingSettingDescription": "スペースをフォルダにグループ化し、簡単に切り替えることができます。",
   "SpaceRemovedFromGroup": "選択されたスペースは<1>{{groupName}}</1>から削除されました。",
   "SpacesAddedToGroup": "選択された複数のスペースが<1>{{groupName}}</1>に追加されました。",
   "SpacesRemovedFromGroup": "選択された複数のスペースは<1>{{groupName}}</1>から削除されました。"

@@ -35,7 +35,7 @@
 
 import type { EditorProps, IInitialConfig, TGoBack } from "@/types";
 import { useTranslation } from "react-i18next";
-import { FolderType } from "@docspace/ui-kit/enums";
+import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 
 import { isFormRoomFile, toFormsSectionUrl } from "@/utils";
 

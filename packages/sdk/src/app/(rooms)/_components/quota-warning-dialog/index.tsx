@@ -42,18 +42,20 @@ import { Trans, useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   parseToDateTime,
   formatDateLocalized,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
 
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 import { useRoomsQuotaStore } from "../../_store/RoomsQuotaStore";
+
+import styles from "./QuotaWarningDialog.module.scss";
 
 type QuotaWarningDialogProps = {
   isPaymentPageAvailable: boolean;
@@ -191,6 +193,7 @@ const QuotaWarningDialog = observer(
 
     return (
       <ModalDialog
+        className={styles.dialog}
         isLarge={isGracePeriod}
         isLoading={!ready}
         visible={visible}

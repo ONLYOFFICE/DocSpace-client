@@ -64,7 +64,7 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import type { Operation } from "@docspace/ui-kit/components/operations-progress-button/OperationsProgressButton.types";
+import type { Operation } from "@onlyoffice/apps-ui-kit/components/operations-progress-button/OperationsProgressButton.types";
 
 class RoomsOperationsStore {
   operations: Operation[] = [];

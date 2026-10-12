@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/table/table-group-menu/TableGroupMenu.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/table/table-group-menu/TableGroupMenu.tsx",
       "line_number": 138,
       "context": "\"table-container_group-menu-checkbox\",\n )}\n onChange={onCheckboxChange}\n isChecked={isChecked}\n isIndeterminate={isIndeterminate}\n title={t(\"MainHeaderSelectAll\")}\n />\n )}\n \n {withComboBox ? (\n <ComboBox",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

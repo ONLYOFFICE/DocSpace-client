@@ -42,9 +42,9 @@ import {
   setDefaultAIAgentQuota,
 } from "../api/settings";
 
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { EmployeeType } from "../enums";
-import { PortalFeaturesLimitations } from "@docspace/ui-kit/enums";
+import { PortalFeaturesLimitations } from "@onlyoffice/apps-ui-kit/enums";
 import api from "../api";
 import {
   TPaymentFeature,
@@ -58,7 +58,7 @@ import {
   ROOM,
   YEAR_KEY,
   FREE_BACKUP,
-} from "@docspace/ui-kit/billing/constants";
+} from "@onlyoffice/apps-ui-kit/billing/constants";
 import {
   FILE_SIZE,
   USERS,

@@ -38,15 +38,15 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { copyToFolder } from "@docspace/shared/api/files";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { ConflictResolveType } from "@docspace/shared/enums";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { FormsSection } from "@/types/forms";
 import { sectionToPath } from "../../../../../../_utils/sectionFromPathname";

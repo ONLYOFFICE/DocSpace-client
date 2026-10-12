@@ -37,8 +37,8 @@ import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 
 import { isMobile } from "@docspace/shared/utils";
-import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
-import { TOption } from "@docspace/ui-kit/components/combobox";
+import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
+import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { TTranslation } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";

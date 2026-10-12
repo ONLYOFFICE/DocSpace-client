@@ -39,7 +39,7 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { renameFolder, updateFile } from "@docspace/shared/api/files";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import type { TFileItem, TFolderItem } from "@/app/(docspace)/_hooks/useItemList";

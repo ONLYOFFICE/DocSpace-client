@@ -35,7 +35,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 const useEndAnimation = () => {
   const pathname = usePathname();

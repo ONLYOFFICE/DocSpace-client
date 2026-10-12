@@ -40,9 +40,9 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { DeviceType } from "@docspace/shared/enums";
 
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 
 import FolderLocationIconSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";

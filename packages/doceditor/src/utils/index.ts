@@ -41,7 +41,7 @@ import { TEditHistory, TFile } from "@docspace/shared/api/files/types";
 import { TTranslation } from "@docspace/shared/types";
 import { FolderType } from "@docspace/shared/enums";
 import { TFormRole } from "@/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 export const convertDocumentUrl = async (fileId: number | string) => {
   const convert = await convertFile(fileId, null, null, true);

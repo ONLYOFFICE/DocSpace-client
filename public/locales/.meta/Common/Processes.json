@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/operations-progress-button/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/operations-progress-button/index.tsx",
       "line_number": 319,
       "context": "const getTooltipLabel = () => {\n if (isSeveralOperations) {\n return (\n <Text fontWeight={600}>\n {t(\"Processes\", { count: allOperationsLength })}\n </Text>\n );\n }\n \n if (operationsStopped) {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -38,8 +38,8 @@
 import { useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Link } from "@docspace/ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import type {

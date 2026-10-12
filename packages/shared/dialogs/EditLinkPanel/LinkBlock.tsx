@@ -35,12 +35,12 @@
 
 import type { FC, ChangeEvent } from "react";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
 	InputSize,
 	InputType,
 	TextInput,
-} from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
 
 import type { LinkBlockProps } from "./EditLinkPanel.types";
 import styles from "./EditLinkPanel.module.scss";

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/People/index.tsx",
       "line_number": 708,
       "context": "},\n ],\n ...[\n withGuests && {\n id: GUESTS_TAB_ID,\n name: t(\"Guests\"),\n onClick: () => changeActiveTab(GUESTS_TAB_ID),\n content: null,\n },\n ],\n ].filter((i) => !!i),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/AccountsSidebar/index.tsx",

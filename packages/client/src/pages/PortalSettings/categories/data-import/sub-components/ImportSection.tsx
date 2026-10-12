@@ -35,11 +35,11 @@
 
 import { ReactSVG } from "react-svg";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { ImportItemProps, ImportSectionProps } from "../types";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import classNames from "classnames";
 import styles from "../StyledDataImport.module.scss";
 

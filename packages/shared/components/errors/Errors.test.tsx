@@ -9,7 +9,7 @@ import { ErrorOfflineContainer } from "./ErrorOffline";
 import ErrorUnavailable from "./ErrorUnavailable";
 import { AccessRestricted } from "./AccessRestricted";
 import FirebaseHelper from "../../utils/firebase";
-import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
+import type { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme";
 import { DeviceType } from "../../enums";
 
 // Mock react-svg
@@ -36,7 +36,7 @@ vi.mock("react-i18next", () => ({
 }));
 
 // Mock loader components
-vi.mock("@docspace/ui-kit/components/loader", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/loader", () => ({
 	default: () => <div>Loading...</div>,
 }));
 

@@ -42,12 +42,12 @@ import isEqual from "lodash/isEqual";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { DeviceType, DeepLinkType } from "@docspace/shared/enums";
 import { saveDeepLinkSettings } from "@docspace/shared/api/settings";
 

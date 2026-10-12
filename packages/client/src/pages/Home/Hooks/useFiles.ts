@@ -44,7 +44,7 @@ import {
   MEDIA_VIEW_URL,
   CategoryType,
 } from "@docspace/shared/constants";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   Events,
   FolderType,

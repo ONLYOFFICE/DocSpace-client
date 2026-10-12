@@ -35,8 +35,8 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import styles from "./consumerToggle.module.scss";
 

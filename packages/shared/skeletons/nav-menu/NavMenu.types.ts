@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { RectangleSkeletonProps } from "@docspace/ui-kit/components/rectangle";
+import type { RectangleSkeletonProps } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 export type NavMenuHeaderLoaderProps = RectangleSkeletonProps & {
 	id?: string;

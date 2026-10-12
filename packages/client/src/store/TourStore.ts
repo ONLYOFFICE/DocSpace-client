@@ -65,6 +65,12 @@ export const safeRemove = (key: string): void => {
   }
 };
 
+const pendingKeys = new Set<string>();
+
+export const clearPendingTours = (): void => {
+  pendingKeys.forEach(safeRemove);
+};
+
 /**
  * Per-section onboarding tour state.
  *
@@ -86,6 +92,7 @@ class TourStore {
 
   constructor(pendingKey: string) {
     this._pendingKey = pendingKey;
+    pendingKeys.add(pendingKey);
     makeObservable(this, {
       isRunning: observable,
       isPending: observable,

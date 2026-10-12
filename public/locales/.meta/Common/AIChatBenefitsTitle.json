@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-ai-benefits/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/new-chat/components/chat-ai-benefits/index.tsx",
       "line_number": 67,
       "context": "const t = useCommonTranslation();\n \n return (\n <div className={styles.benefits} data-testid=\"chat-ai-benefits\">\n <Text as=\"p\" fontSize=\"12px\" lineHeight=\"16px\" className={styles.intro}>\n {t(\"AIChatBenefitsTitle\")}\n </Text>\n \n <ul className={styles.list}>\n <li className={styles.item}>\n <AiChatReactSvg className={styles.icon} />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

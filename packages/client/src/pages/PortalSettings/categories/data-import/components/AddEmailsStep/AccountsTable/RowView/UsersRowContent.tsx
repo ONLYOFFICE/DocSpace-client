@@ -37,10 +37,10 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RowContent } from "@docspace/ui-kit/components/rows";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
 
-import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
+import { EmailInput, TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
 
 import { isMobile } from "@docspace/shared/utils";
 
@@ -48,10 +48,10 @@ import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvgUrl from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 import CheckSvgUrl from "PUBLIC_DIR/images/check.edit.react.svg?url";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import EmailChangeDialog from "SRC_DIR/components/dialogs/EmailChangeDialog";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import {
 	AddEmailRowContentProps,
 	InjectedAddEmailRowContentProps,

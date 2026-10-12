@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
       "line_number": 100,
       "context": "};\n \n const getPlanButtonLabel = () => {\n if (!isGracePeriod) return t(\"UpgradePlan\");\n if (isDelayedPaymentTopUp) return t(\"TopUpWallet\");\n if (isBalanceInsufficient) return t(\"TopUpAndRenew\");\n return t(\"PayNow\");\n };\n \n const getPlanButtonAction = () => {\n if (isDelayedPaymentTopUp) return openTopUpDialog;",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 223,
       "context": "const isDelayedPaymentTopUp = isDelayedPaymentMethod && renewalShortfall > 0;\n \n const getRenewLabel = () => {\n if (renewalShortfall <= 0) return t(\"RenewSubscription\");\n if (isDelayedPaymentMethod) return t(\"TopUpWallet\");\n return t(\"TopUpAndRenew\");\n };\n const balance = formatWalletCurrency();\n \n const contextMenuItems = [\n {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 137,
       "context": "const isDelayedPaymentTopUp = isDelayedPaymentMethod && renewalShortfall > 0;\n \n const getRenewLabel = () => {\n if (renewalShortfall <= 0) return t(\"Common:RenewSubscription\");\n if (isDelayedPaymentMethod) return t(\"Common:TopUpWallet\");\n return t(\"Common:TopUpAndRenew\");\n };\n const formatCurrency = (value: number, digits: number) =>\n paymentStore.formatWalletCurrency(value, digits, currency);\n \n const trialLow =",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",

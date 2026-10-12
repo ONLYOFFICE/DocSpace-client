@@ -36,7 +36,7 @@
 import { headers } from "next/headers";
 import sharp from "sharp";
 
-import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
+import { WhiteLabelLogoType } from "@onlyoffice/apps-ui-kit/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import {
   LINK_PREVIEW_IMAGE_HEIGHT,

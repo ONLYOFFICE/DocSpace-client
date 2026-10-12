@@ -36,7 +36,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@docspace/ui-kit/context";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context";
 
 import { Events } from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";

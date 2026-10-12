@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
       "line_number": 232,
       "context": "emptyDescription: t(\"SubscriptionsEmptyDesc\"),\n },\n {\n key: \"payAsYouGo\",\n items: payAsYouGo,\n label: t(\"PayAsYouGo\"),\n sectionTotal: payAsYouGoTotal,\n dotClass: styles.spendDotPayg,\n emptyDescription: t(\"PayAsYouGoEmptyDesc\"),\n },\n ]",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

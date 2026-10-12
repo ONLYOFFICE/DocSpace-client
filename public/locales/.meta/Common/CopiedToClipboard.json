@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/markdown/code-block/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/markdown/code-block/index.tsx",
       "line_number": 68,
       "context": "const { isBase } = useTheme();\n \n const onCopy = () => {\n copy(content);\n toastr.success(\n successCopyMessage ?? t(\"CopiedToClipboard\"),\n );\n };\n \n return (\n <div className={styles.codeContainer} data-testid=\"code-block\">",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/helpers/plugins/WrappedComponent.tsx",

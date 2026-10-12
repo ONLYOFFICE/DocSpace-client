@@ -35,7 +35,7 @@
 
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { FolderType } from "@docspace/ui-kit/enums";
+import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 
 const sendCustomAction = vi.fn();
 vi.mock("@docspace/shared/utils/frameCustomActions", async (importOriginal) => ({

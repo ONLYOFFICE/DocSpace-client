@@ -40,5 +40,5 @@ export const getSinglePDFTitle = (t: TTranslation, isForm: boolean) => {
 };
 
 export const getManyPDFTitle = (t: TTranslation, isForms: boolean) => {
-  return `PDF-${(isForms ? t("Common:Forms") : t("Common:Documents")).toLowerCase()}`;
+  return isForms ? t("Common:PDFForms") : t("Common:PDFDocuments");
 };

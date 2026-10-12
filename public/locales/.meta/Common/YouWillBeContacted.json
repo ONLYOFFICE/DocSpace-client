@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
       "line_number": 180,
       "context": "key=\"text-body\"\n className=\"text-body\"\n isBold={false}\n fontSize=\"13px\"\n >\n {t(\"YouWillBeContacted\")}\n </Text>\n \n <br />\n <FieldContainer\n className=\"name_field\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

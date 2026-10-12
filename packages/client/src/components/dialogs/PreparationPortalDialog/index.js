@@ -34,7 +34,7 @@
  */
 
 import React from "react";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";

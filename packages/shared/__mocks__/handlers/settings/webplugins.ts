@@ -691,6 +691,11 @@ export const webPluginsWithLocaleSample = {
   statusCode: 200,
 };
 
+export const webPluginsWithSystemLocaleSample = {
+  ...webPluginsWithLocaleSample,
+  response: [{ ...mockLocaleSamplePlugin, system: true }],
+};
+
 // Plugin upload response (for add operations)
 export const webPluginsUploadResponse = {
   count: 1,
@@ -735,6 +740,7 @@ type TWebPluginType =
   | "empty"
   | "withData"
   | "withLocaleSample"
+  | "withSystemLocaleSample"
   | "withContextMenuPlugin"
   | "withInfoPanelPlugin"
   | "withSelectorPlugin"
@@ -762,6 +768,9 @@ export const webPluginsResolver = (type: TWebPluginType = "empty") => {
   switch (type) {
     case "withLocaleSample":
       data = webPluginsWithLocaleSample;
+      break;
+    case "withSystemLocaleSample":
+      data = webPluginsWithSystemLocaleSample;
       break;
     case "withData":
       data = webPluginsWithData;

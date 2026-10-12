@@ -39,9 +39,9 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { getConvertedQuota } from "@docspace/shared/utils/common";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import api from "@docspace/shared/api";
 
 import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";

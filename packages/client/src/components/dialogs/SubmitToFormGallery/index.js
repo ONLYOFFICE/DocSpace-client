@@ -33,16 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { useState, useRef, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import FilesSelector from "SRC_DIR/components/FilesSelector";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useEventListener } from "@onlyoffice/apps-ui-kit/hooks/useEventListener";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 

@@ -34,7 +34,7 @@
  */
 
 import type { Page } from "@playwright/test";
-import { RoomsType } from "@docspace/ui-kit/enums";
+import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 import {
   settingsHandler,
   TypeSettings,

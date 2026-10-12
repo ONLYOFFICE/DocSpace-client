@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { TFilterSortBy } from "@docspace/shared/api/people/types";
-import { TableHeader, TTableColumn } from "@docspace/ui-kit/components/table";
+import { TableHeader, TTableColumn } from "@onlyoffice/apps-ui-kit/components/table";
 
 import { Events, SortByFieldName } from "@docspace/shared/enums";
 
@@ -238,7 +238,7 @@ class PeopleTableHeader extends React.Component<
         sorted={sorted}
         sortBy={sortBy}
         // fix types for table header and remove this
-        containerRef={containerRef as unknown as { current: HTMLDivElement }}
+        containerRef={containerRef}
         columns={columns as TTableColumn[]}
         columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName!}

@@ -40,12 +40,12 @@ import { TFunction } from "i18next";
 import { useEffect, useRef } from "react";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
-import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
+import { Tabs, TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
 
-import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/section/Section.constants";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 import { UserStore } from "@docspace/shared/store/UserStore";

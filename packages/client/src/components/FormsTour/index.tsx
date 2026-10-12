@@ -157,7 +157,7 @@ const FormsTour = ({
     if (!previous) return;
     sectionLocation.current = null;
 
-    window.DocSpace?.navigate(previous);
+    window.DocSpace?.navigate(previous, { replace: true });
   }, []);
 
   const spaceHooks = useMemo(

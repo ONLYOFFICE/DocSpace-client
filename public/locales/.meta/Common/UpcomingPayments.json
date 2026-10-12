@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/UpcomingPayments.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/UpcomingPayments.tsx",
       "line_number": 67,
       "context": "return (\n <div className={styles.card}>\n <div className={styles.cardHeader}>\n <Text fontSize=\"14px\" fontWeight={700}>\n {t(\"UpcomingPayments\")}\n </Text>\n {onUpcomingDetails ? (\n <Link\n onClick={onUpcomingDetails}\n textDecoration=\"underline\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletContainer.tsx",
       "line_number": 199,
       "context": "</div>\n ),\n },\n {\n id: \"upcoming-payments\",\n name: t(\"UpcomingPayments\"),\n content: <UpcomingPayments />,\n },\n ];\n \n return (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -37,9 +37,9 @@ import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
 import styles from "../Webhooks.styled.module.scss";
 
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { useTranslation } from "react-i18next";
 

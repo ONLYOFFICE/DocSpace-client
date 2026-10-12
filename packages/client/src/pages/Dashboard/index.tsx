@@ -64,21 +64,21 @@ import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation, Trans } from "react-i18next";
 
-import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { FloatingButton } from "@onlyoffice/apps-ui-kit/components/floating-button";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 import { DeviceType } from "@docspace/shared/enums";
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
-import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
-import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
-import ChatPanelView from "@docspace/ui-kit/components/section/sub-components/ChatPanel";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
+import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
+import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
+import ChatPanelView from "@onlyoffice/apps-ui-kit/components/section/sub-components/ChatPanel";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
@@ -129,6 +129,7 @@ type DashboardProps = ChatNoAccessStoreProps & {
   /** Rooms quota exhausted or portal in its grace period. */
   isWarningRoomsDialog: boolean;
   setQuotaWarningDialogVisible: (visible: boolean) => void;
+  logoText: string;
 };
 
 const UPLOAD_LINK_ID = "dashboard-upload-link";
@@ -150,9 +151,10 @@ const Dashboard = (props: DashboardProps) => {
     standalone,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
+    logoText,
   } = props;
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:Home");
+  useDocumentTitle("Common:Home", logoText);
 
   // Gates every tour entry point on this page. The tours walk through desktop
   // chrome (`useTour` refuses to run on mobile outright), so on a phone the
@@ -409,6 +411,7 @@ const Dashboard = (props: DashboardProps) => {
           <WelcomeDialog
             onTakeTour={onWelcomeTakeTour}
             onClose={onWelcomeClose}
+            organizationName={logoText}
           />
         ) : null}
 
@@ -496,6 +499,7 @@ const DashboardConnected = inject((stores: TStore) => {
     standalone: settingsStore.standalone,
     isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,
     setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
+    logoText: settingsStore.logoText,
   };
 })(observer(Dashboard));
 

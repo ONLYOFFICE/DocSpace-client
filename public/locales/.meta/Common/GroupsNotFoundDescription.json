@@ -12,28 +12,28 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Groups/index.tsx",
       "line_number": 212,
       "context": "items={itemsList}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmitAction}\n emptyScreenImage={emptyScreenImg}\n emptyScreenHeader={t(\"NotFoundGroups\")}\n emptyScreenDescription={t(\"GroupsNotFoundDescription\")}\n searchEmptyScreenImage={emptyScreenImg}\n searchEmptyScreenHeader={t(\"NotFoundGroups\")}\n searchEmptyScreenDescription={t(\"GroupsNotFoundDescription\")}\n totalItems={totalRef.current}\n hasNextPage={hasNextPage}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Groups/index.tsx",
       "line_number": 212,
       "context": "items={itemsList}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmitAction}\n emptyScreenImage={emptyScreenImg}\n emptyScreenHeader={t(\"NotFoundGroups\")}\n emptyScreenDescription={t(\"GroupsNotFoundDescription\")}\n searchEmptyScreenImage={emptyScreenImg}\n searchEmptyScreenHeader={t(\"NotFoundGroups\")}\n searchEmptyScreenDescription={t(\"GroupsNotFoundDescription\")}\n totalItems={totalRef.current}\n hasNextPage={hasNextPage}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/People/index.tsx",
       "line_number": 778,
       "context": "? isAgent\n ? t(\"NotFoundGuestsDescriptionAgent\")\n : t(\"NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"EmptyDescription\")\n : t(\"GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"NotFoundGuestsFilter\")",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/People/index.tsx",
       "line_number": 778,
       "context": "? isAgent\n ? t(\"NotFoundGuestsDescriptionAgent\")\n : t(\"NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"EmptyDescription\")\n : t(\"GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"NotFoundGuestsFilter\")",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreenGroups.tsx",

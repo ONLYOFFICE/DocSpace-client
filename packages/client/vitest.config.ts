@@ -72,11 +72,24 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./vitest/setupTests.ts"],
+    // ui-kit modules each import their own CSS file. Vitest externalizes
+    // node_modules by default, which hands those modules to Node as-is, and
+    // Node rejects the .css import (ERR_UNKNOWN_FILE_EXTENSION). Inlining
+    // routes them through Vite, which treats the stylesheet like any other.
+    server: {
+      deps: {
+        inline: [/@onlyoffice[\\/]apps-ui-kit/],
+      },
+    },
     globals: true,
     clearMocks: true,
     pool: process.env.POOL || "threads",
     testTimeout: 30000,
-    include: ["src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    include: [
+      "src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}",
+      // Vite config plugins are plain functions; their tests sit next to them.
+      "config/**/*.{test,spec}.{ts,mts}",
+    ],
     // Playwright e2e specs live under __tests__/; never let vitest pick them up.
     exclude: [
       "node_modules",
@@ -95,7 +108,6 @@ export default defineConfig({
       PACKAGE_FILE: path.resolve(__dirname, "./package.json"),
       COMMON_DIR: path.resolve(__dirname, "../common"),
       "@docspace/shared": path.resolve(__dirname, "../shared"),
-      "@docspace/ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
       "PUBLIC_DIR/scripts/config.json": path.resolve(
         __dirname,
         "../shared/__mocks__/configMock.js",

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/AIAgent/index.tsx",
       "line_number": 282,
       "context": "<EmptyScreenAIAgentsSelectorLight />\n ) : (\n <EmptyScreenAIAgentsSelectorDark />\n )\n }\n emptyScreenHeader={t(\"NoAIAgents\", {\n aiAgents: t(\"AIAgents\"),\n })}\n emptyScreenDescription={t(\"NoAIAgentsDescription\")}\n searchEmptyScreenImage={\n isBase ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

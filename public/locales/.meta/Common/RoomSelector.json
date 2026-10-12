@@ -3,7 +3,7 @@
   "content": "Room selector",
   "content_en_sha1_hash": "19415158fe52171efbd6c6c03e13605aae21b7db",
   "created_at": "2025-05-19T21:30:48.245Z",
-  "updated_at": "2026-09-22T10:56:05.139Z",
+  "updated_at": "2026-09-16T18:53:34.508Z",
   "comment": {
     "text": "This is a button label that, when clicked, navigates the user to a page for selecting or managing rooms within DocSpace.",
     "is_auto": true,

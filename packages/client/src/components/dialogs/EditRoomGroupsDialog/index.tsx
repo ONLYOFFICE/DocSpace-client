@@ -34,7 +34,7 @@
  */
 
 import { useState, useEffect, useCallback } from "react";
-import { Portal } from "@docspace/ui-kit/components/portal";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
@@ -42,13 +42,13 @@ import { inject, observer } from "mobx-react";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { AddButton } from "@docspace/ui-kit/components/add-button";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
-import { toastr } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { ButtonKeys, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -60,7 +60,7 @@ import RoomListPanel from "./sub-components/RoomListPanel";
 import GroupItem from "./sub-components/GroupItem";
 import { EditRoomGroupsDialogProps } from "./EditRoomGroupsDialog.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector/Selector.types";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector/Selector.types";
 
 const TOOLTIP_DISMISSED_KEY = "roomGroupingTooltipDismissed";
 
@@ -164,7 +164,7 @@ const EditRoomGroupsDialog = ({
     setIsSaving(true);
     try {
       if (setOrganizeRoomsGrouping) {
-        await setOrganizeRoomsGrouping(localGroupingEnabled);
+        await setOrganizeRoomsGrouping(localGroupingEnabled, isFormsSection);
       }
 
       setHasGroupingChanged(false);
@@ -379,7 +379,9 @@ const EditRoomGroupsDialog = ({
                     lineHeight: "16px",
                   }}
                 >
-                  {t("GroupingRooms:DisablingRoomGroups")}
+                  {isFormsSection
+                    ? t("GroupingRooms:DisablingSpaceGroups")
+                    : t("GroupingRooms:DisablingRoomGroups")}
                 </span>
               }
               bodyText={
@@ -395,7 +397,9 @@ const EditRoomGroupsDialog = ({
           <div className={styles.settingRoomGroups}>
             <div className={styles.roomGroups}>
               <div className={styles.title}>
-                {t("GroupingRooms:RoomGrouping")}
+                {isFormsSection
+                  ? t("GroupingRooms:SpaceGrouping")
+                  : t("GroupingRooms:RoomGrouping")}
               </div>
               <ToggleButton
                 className={styles.roomGroupsToggle}
@@ -406,7 +410,9 @@ const EditRoomGroupsDialog = ({
             </div>
 
             <Text className={styles.description}>
-              {t("GroupingRooms:RoomGroupingSettingDescription")}
+              {isFormsSection
+                ? t("GroupingRooms:SpaceGroupingSettingDescription")
+                : t("GroupingRooms:RoomGroupingSettingDescription")}
             </Text>
           </div>
           <AddButton

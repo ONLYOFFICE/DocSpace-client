@@ -37,8 +37,8 @@
 import { useNavigate } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import WarningComponent from "@onlyoffice/apps-ui-kit/components/navigation/sub-components/WarningComponent";
 
 import { PAYMENT_ROUTES } from "../utils";
 

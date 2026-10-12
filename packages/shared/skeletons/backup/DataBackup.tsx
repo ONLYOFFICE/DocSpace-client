@@ -34,7 +34,7 @@
  */
 
 import React from "react";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 import styles from "./Backup.module.scss";
 import type { BackupLoaderProps } from "./Backup.types";

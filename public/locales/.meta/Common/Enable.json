@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 286,
       "context": "<>\n <Text fontWeight={600}>{t(\"AdditionalBackupsDisabled\")}</Text>\n <Button\n className={styles.cardEnableButton}\n size={ButtonSize.small}\n label={t(\"Enable\")}\n onClick={onConfirm}\n isDisabled={isDisabled}\n primary\n scale\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",

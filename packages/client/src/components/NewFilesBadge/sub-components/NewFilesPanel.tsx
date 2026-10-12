@@ -40,19 +40,19 @@ import classNames from "classnames";
 
 import api from "@docspace/shared/api";
 import type { TNewFiles } from "@docspace/shared/api/rooms/types";
-import { Portal } from "@docspace/ui-kit/components/portal";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import type { Nullable } from "@docspace/shared/types";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import { ButtonKeys, RoomsType } from "@docspace/shared/enums";
 
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
 import type {
   NewFilesPanelInjectStore,
   NewFilesPanelProps,

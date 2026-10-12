@@ -34,9 +34,9 @@
  */
 
 import React, { useState } from "react";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
 
 import CheckIcon from "PUBLIC_DIR/images/check.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/12/cross.react.svg";

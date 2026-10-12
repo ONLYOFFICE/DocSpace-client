@@ -51,9 +51,9 @@ import {
   getUserType,
   getUserTypeTranslation,
 } from "@docspace/shared/utils/common";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import MembersEmptyContainer from "@/app/(docspace)/_components/info-panel/views/Members/sub-components/EmptyContainer";
 

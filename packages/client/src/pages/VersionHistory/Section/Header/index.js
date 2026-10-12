@@ -34,8 +34,8 @@
  */
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import styles from "./VersionHistoryHeader.module.scss";
 

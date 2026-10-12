@@ -85,7 +85,7 @@ const ROOMS_URL = "/rooms/shared/";
 /** Above 1024: the sidebar is wide and the chat button sits in its own row. */
 const DESKTOP = { width: 1440, height: 900 };
 /**
- * The tablet band is 600.1px - 1023.9px (`libs/ui-kit/utils/device`). Three
+ * The tablet band is 600.1px - 1023.9px (ui-kit's `utils/device`). Three
  * widths across it, because the failure was reported at "tablet" without one.
  */
 const TABLET_WIDTHS = [1000, 900, 700];

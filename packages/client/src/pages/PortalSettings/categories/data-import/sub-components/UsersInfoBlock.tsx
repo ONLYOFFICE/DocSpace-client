@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { UsersInfoBlockProps } from "../types";
 import styles from "../StyledDataImport.module.scss";
 

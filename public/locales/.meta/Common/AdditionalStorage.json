@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
       "line_number": 177,
       "context": "<div className={styles.planInfoIcon}>\n <UpgradeWalletIcon />\n </div>\n <div className={styles.planInfoBody}>\n <Text fontWeight={600}>\n {t(\"AdditionalStorage\", {\n amount: `${calculateDifference(amount, currentStoragePlanSize!)} ${t(\"Gigabyte\")}`,\n })}\n </Text>\n <Text\n fontWeight=\"600\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

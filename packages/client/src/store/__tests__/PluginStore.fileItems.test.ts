@@ -36,12 +36,12 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { runInAction } from "mobx";
 
-vi.mock("@docspace/ui-kit/utils/socket", async (importOriginal) => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (importOriginal) => ({
   ...((await importOriginal()) as Record<string, unknown>),
   default: { emit: vi.fn(), on: vi.fn() },
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn(), info: vi.fn() },
 }));
 

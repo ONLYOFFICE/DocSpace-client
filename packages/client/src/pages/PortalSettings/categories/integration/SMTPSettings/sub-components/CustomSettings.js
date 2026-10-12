@@ -40,14 +40,14 @@ import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/ui-kit/components/text-input";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 
-import { EmailInput } from "@docspace/ui-kit/components/email-input";
+import { EmailInput } from "@onlyoffice/apps-ui-kit/components/email-input";
 import { StyledComponent } from "../StyledComponent";
 import { SMTPSettingsFields } from "../constants";
 import ButtonContainer from "./ButtonContainer";

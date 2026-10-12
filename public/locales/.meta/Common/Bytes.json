@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/utils/common.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/utils/common.ts",
       "line_number": 82,
       "context": ") => {\n let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/utils/common.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/utils/common.ts",
       "line_number": 82,
       "context": ") => {\n let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/shared/components/quota-form/index.tsx",

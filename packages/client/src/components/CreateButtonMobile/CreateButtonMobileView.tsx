@@ -33,12 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { MainButtonMobile } from "@docspace/ui-kit/components/main-button-mobile";
+import { MainButtonMobile } from "@onlyoffice/apps-ui-kit/components/main-button-mobile";
 import type {
   ActionOption,
   ButtonOption,
-} from "@docspace/ui-kit/components/main-button-mobile/MainButtonMobile.types";
-import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
+} from "@onlyoffice/apps-ui-kit/components/main-button-mobile/MainButtonMobile.types";
+import type { MainButtonProps } from "@onlyoffice/apps-ui-kit/components/main-button/MainButton.types";
 
 import styles from "./CreateButtonMobile.module.scss";
 

@@ -74,7 +74,6 @@
   "ItemsCount": "Bir sayfadaki öğe sayısı",
   "ItemsCountDescription": "Bir sayfada görüntülenen dosya / klasör sayısını ve ayrıca hangi sayfanın görüntülenmeye başlayacağını belirleyebilirsiniz.",
   "JavaScriptCodeDescription": "Çalışma alanını veya bir bölümünü JavaScript kullanarak gömme. Aşağıdaki JavaScript kodunu kopyalayın.",
-  "JavascriptSdk": "Javascript SDK'sı",
   "LimitByTime": "Zaman dilimine göre sınırlama",
   "LinkSetDescription": "Bu bağlantı bir {{parameter}} ile korunmaktadır. Bağlantıyı yapılandırmak için,",
   "LinkSetDescription2": "Bu bağlantı için bir {{parameter1}} ve {{parameter2}} ayarlanmıştır. Yapılandırmak için,",

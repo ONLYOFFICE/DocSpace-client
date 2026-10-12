@@ -57,7 +57,7 @@ import {
   TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
 import type { ILogo } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import {
   TConfirmLinkParams,
   TConfirmLinkResult,

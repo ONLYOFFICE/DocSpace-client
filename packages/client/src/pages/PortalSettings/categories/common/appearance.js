@@ -39,25 +39,25 @@ import LightSvgUrl from "PUBLIC_DIR/images/icons/16/light.svg?url";
 import DarkSvgUrl from "PUBLIC_DIR/images/icons/16/dark.svg?url";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { withTranslation } from "react-i18next";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { inject, observer } from "mobx-react";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Tabs, TabsTypes } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Link } from "@docspace/ui-kit/components/link";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import api from "@docspace/shared/api";
 
 import { ReactSVG } from "react-svg";
 import { isMobile, getTextColor } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { ColorPicker } from "@docspace/ui-kit/components/color-picker";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { ColorPicker } from "@onlyoffice/apps-ui-kit/components/color-picker";
 
 import classnames from "classnames";
 

@@ -38,11 +38,11 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { EmptyView } from "@docspace/shared/components/empty-view";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.14.react.svg";
 import EmptyScreenServerErrorLightSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.light.svg";

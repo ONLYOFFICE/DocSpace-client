@@ -14,7 +14,7 @@ This repository contains the **frontend** for [ONLYOFFICE DocSpace](https://gith
 
 - [Technology Stack](#technology-stack)
 - [Project Structure](#project-structure)
-- [Git Submodules](#git-submodules)
+- [UI Component Library](#ui-component-library)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Quick Start](#quick-start)
@@ -166,16 +166,12 @@ All applications depend on `@docspace/shared`, which provides:
 - Shared types and utilities
 - Common business logic
 
-### Git Submodules
+### UI Component Library
 
-This repository uses a git submodule for the UI component library:
-
-#### `libs/ui-kit` - UI Component Library
-
-**Purpose:** Shared UI component library for DocSpace applications
+`@onlyoffice/apps-ui-kit` is developed in a **separate repository** and is not
+checked out, vendored as source, or tracked as a git submodule here.
 
 **Repository:** [docspace-ui-kit-react](https://github.com/ONLYOFFICE/docspace-ui-kit-react)
-**Location:** `libs/ui-kit/`
 
 **Features:**
 - 90+ React components (Button, Input, Modal, Table, etc.)
@@ -184,27 +180,65 @@ This repository uses a git submodule for the UI component library:
 - Internationalization support
 - TypeScript types and utilities
 
-**Working with the submodule:**
+**How it is consumed:** each app installs the published package from npm,
+[`@onlyoffice/apps-ui-kit`](https://www.npmjs.com/package/@onlyoffice/apps-ui-kit),
+and the apps that render the AI agent also install
+[`@onlyoffice/ai-chat`](https://www.npmjs.com/package/@onlyoffice/ai-chat). A
+normal `git clone` plus `pnpm install` is all that is needed — there are no
+submodules to initialize.
+
+**Updating it:** once a new version is published, bump it in every app and
+commit the manifests together with the lockfile:
 
 ```bash
-# Clone repository with submodules
-git clone --recurse-submodules https://github.com/ONLYOFFICE/DocSpace.git
-
-# If already cloned without submodules, initialize them
-git submodule update --init --recursive
-
-# Update submodule to latest commit
-cd libs/ui-kit
-git pull origin develop
-cd ../..
-git add libs/ui-kit
-git commit -m "Update ui-kit submodule"
-
-# Check submodule status
-git submodule status
+pnpm -r update @onlyoffice/apps-ui-kit@^<version>
+git add pnpm-lock.yaml packages/*/package.json
 ```
 
-**Documentation:** See [libs/ui-kit/README.md](https://github.com/ONLYOFFICE/docspace-ui-kit-react#readme) for component documentation and usage examples.
+**Trying an unpublished build:** pack the library in the ui-kit repository
+(`pnpm build && pnpm pack` — it must be `pnpm pack`, since ui-kit's entry
+points live under `publishConfig`), then switch the apps to that tarball:
+
+```bash
+pnpm run update-ui-kit          # newest pack in ../../docspace-ui-kit-react, or pass a path
+pnpm run update-ai-chat         # the same for ai-chat: newest pack in ../../onlyoffice-ai-chat, or a path
+```
+
+They copy the tarball to the repository root, point every app manifest at it
+(`file:../../<name>.tgz`), reinstall and verify every installed copy against
+the tarball. Do not copy the tarball and run `pnpm install` yourself: once the
+specifier is `file:`, pnpm keeps the cached copy and a new pack under the same
+name silently does not install. The Dockerfiles pick up root `*.tgz` files when
+they exist, so images build in this mode too. To go back to the registry:
+
+```bash
+pnpm -r update @onlyoffice/apps-ui-kit@^<version>   # or @onlyoffice/ai-chat
+rm onlyoffice-apps-ui-kit.tgz                       # or onlyoffice-ai-chat-*.tgz
+```
+
+**Working on the kit itself:** waiting for a build, a pack and an install on
+every edit is the cost of consuming a prebuilt package. `DOCSPACE_UI_KIT_SRC`
+removes it for local work — the dev servers of all five apps then serve the kit
+from a checkout, with HMR:
+
+```bash
+pnpm run start:ui-kit-src                   # same app set as `pnpm start`
+pnpm run start:ui-kit-src start:lite        # any other start script
+DOCSPACE_UI_KIT_SRC=../elsewhere pnpm run start:ui-kit-src
+```
+
+The path is resolved against the repo root and defaults to
+`../../docspace-ui-kit-react`, i.e. a sibling of the `DocSpace` directory. The
+checkout resolves its own dependencies, so **run `pnpm install` in it first** —
+a bare clone is not enough.
+
+It is a dev-server switch only: `vite build` and `next build` both refuse to
+run while the variable is set, because a build must come from the installed
+package. Run the apps once without it before publishing a ui-kit release — source
+mode does not exercise the stylesheet order, `"use client"`, the exports
+wildcard or the generated types. Details in `.claude/rules/pnpm.md`.
+
+**Documentation:** See the [ui-kit README](https://github.com/ONLYOFFICE/docspace-ui-kit-react#readme) for component documentation and usage examples.
 
 ## Getting Started
 
@@ -221,7 +255,7 @@ git submodule status
 
 ### Quick Start
 
-> **Note:** This repository uses git submodules. If you haven't cloned with `--recurse-submodules`, run `git submodule update --init --recursive` first. See [Git Submodules](#git-submodules) for details.
+> **Note:** The UI component library is installed from npm — there are no git submodules to initialize. See [UI Component Library](#ui-component-library) for details.
 
 **Terminal 1 - Start backend:**
 ```bash

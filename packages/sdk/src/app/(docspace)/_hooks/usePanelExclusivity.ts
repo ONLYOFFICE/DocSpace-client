@@ -38,7 +38,7 @@
 import React from "react";
 import { reaction } from "mobx";
 
-import { useAiChatStoreOptional } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
+import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 

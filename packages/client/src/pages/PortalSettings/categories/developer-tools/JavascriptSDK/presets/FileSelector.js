@@ -42,12 +42,12 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { EventLogBlock } from "../sub-components/EventLogBlock";
 
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Label } from "@docspace/ui-kit/components/label";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { FilterType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { getSdkScriptUrl, loadScript } from "@docspace/shared/utils/common";
 
@@ -105,7 +105,7 @@ const FILE_SELECTOR_EVENT_TYPES = [
 const FileSelector = (props) => {
   const { t, fetchExternalLinks, theme, logoText } = props;
 
-  setDocumentTitle(t("JavascriptSdk"));
+  setDocumentTitle(t("Settings:EmbedSDK"));
 
   const fileTypeDisplay = [
     {
@@ -547,6 +547,7 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
 })(
   withTranslation([
     "JavascriptSdk",
+    "Settings",
     "Files",
     "Common",
     "Translations",

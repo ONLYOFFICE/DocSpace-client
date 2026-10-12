@@ -36,12 +36,12 @@
 import classNames from "classnames";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
 import { IconSizeType } from "@docspace/shared/utils";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { TTranslation } from "@docspace/shared/types";
 import { TApiKey } from "@docspace/shared/api/api-keys/types";
-import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { now, parseToDateTime, isAfter } from "@onlyoffice/apps-ui-kit/utils/date";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import styles from "./ApiKeysLifetimeIcon.module.scss";
 
 export const ApiKeysLifetimeIcon = ({

@@ -43,10 +43,10 @@ import { useTranslation } from "react-i18next";
 import {
   QuickActions,
   type QuickActionItem,
-} from "@docspace/ui-kit/components/quick-actions";
-import { CreateAgentIcon } from "@docspace/ui-kit/components/quick-actions/icons";
-import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/quick-actions";
+import { CreateAgentIcon } from "@onlyoffice/apps-ui-kit/components/quick-actions/icons";
+import type { MainButtonProps } from "@onlyoffice/apps-ui-kit/components/main-button/MainButton.types";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 

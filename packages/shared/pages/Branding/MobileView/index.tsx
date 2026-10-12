@@ -36,7 +36,7 @@
 import React, { MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 
-import { CategoryItem } from "@docspace/ui-kit/components/category-item";
+import { CategoryItem } from "@onlyoffice/apps-ui-kit/components/category-item";
 
 import styles from "./MobileView.module.scss";
 

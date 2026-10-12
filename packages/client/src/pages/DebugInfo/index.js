@@ -38,11 +38,11 @@ import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { Loader } from "@docspace/ui-kit/components/loader";
-import { Link } from "@docspace/ui-kit/components/link";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { Loader } from "@onlyoffice/apps-ui-kit/components/loader";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import styles from "./DebugInfo.module.scss";
 

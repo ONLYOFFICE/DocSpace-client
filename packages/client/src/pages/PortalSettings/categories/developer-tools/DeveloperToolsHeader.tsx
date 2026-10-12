@@ -37,8 +37,8 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import { getBrandName } from "@docspace/shared/constants/brands";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";

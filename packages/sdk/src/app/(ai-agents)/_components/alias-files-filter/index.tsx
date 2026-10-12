@@ -39,9 +39,9 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import FilterComponent from "@docspace/ui-kit/components/filter";
+import FilterComponent from "@onlyoffice/apps-ui-kit/components/filter";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
-import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
+import type { MainButtonProps } from "@onlyoffice/apps-ui-kit/components/main-button/MainButton.types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";

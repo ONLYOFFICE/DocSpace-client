@@ -49,10 +49,20 @@ const HeaderNav = ({
   userIsUpdate,
   setUserIsUpdate,
   getActions,
+  isShowLiveChat,
   hideProfileMenu,
 }) => {
   const { t } = useTranslation(["Common"]);
-  const userActions = useMemo(() => getActions(t), [getActions, t]);
+  // `isShowLiveChat` is not read here - it is a dependency so the menu model is
+  // rebuilt when the flag flips. `getActions` is a MobX action and actions run
+  // untracked, so the `checked` it reads there subscribes no one, and a memo
+  // keyed only on the stable function would hold the switch at whatever it was
+  // when the header first rendered. Same reason AppsSidebar/ProfileBlock
+  // observes the flag.
+  const userActions = useMemo(
+    () => getActions(t),
+    [getActions, t, isShowLiveChat],
+  );
 
   return (
     <nav className={classNames(styles.nav, "profileMenuIcon", "hidingHeader")}>
@@ -76,13 +86,14 @@ HeaderNav.propTypes = {
   userIsUpdate: PropTypes.bool,
   setUserIsUpdate: PropTypes.func,
   getActions: PropTypes.func,
+  isShowLiveChat: PropTypes.bool,
   hideProfileMenu: PropTypes.bool,
 };
 
 export default inject(({ authStore, profileActionsStore, userStore }) => {
   const { isAuthenticated } = authStore;
   const { user, userIsUpdate, setUserIsUpdate } = userStore;
-  const { getActions } = profileActionsStore;
+  const { getActions, isShowLiveChat } = profileActionsStore;
 
   return {
     user,
@@ -90,5 +101,6 @@ export default inject(({ authStore, profileActionsStore, userStore }) => {
     userIsUpdate,
     setUserIsUpdate,
     getActions,
+    isShowLiveChat,
   };
 })(observer(HeaderNav));

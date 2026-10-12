@@ -35,10 +35,10 @@
 
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { ModalDialogType } from "@onlyoffice/apps-ui-kit/components/modal-dialog/ModalDialog.enums";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 import styles from "../TenantPanel.module.scss";

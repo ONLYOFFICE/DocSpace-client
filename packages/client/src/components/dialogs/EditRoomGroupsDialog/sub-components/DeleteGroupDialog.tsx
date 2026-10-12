@@ -35,11 +35,11 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { ButtonKeys } from "@docspace/shared/enums";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "../EditRoomGroupsDialog.module.scss";
 import type { DeleteGroupDialogProps } from "../EditRoomGroupsDialog.types";

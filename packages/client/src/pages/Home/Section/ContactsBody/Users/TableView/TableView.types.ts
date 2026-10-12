@@ -40,8 +40,8 @@ import { TFilterSortBy, TUser } from "@docspace/shared/api/people/types";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { Nullable, TTranslation } from "@docspace/shared/types";
-import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import { TTranslation } from "@docspace/shared/types";
+import { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
@@ -154,7 +154,7 @@ export type TableHeaderProps = {
 
   sectionWidth: number;
 
-  containerRef: React.RefObject<Nullable<React.ForwardedRef<HTMLDivElement>>>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
 
   navigate: NavigateFunction;
   location: Location;

@@ -139,6 +139,13 @@ const SPECIFIER_MAP: Record<string, string> = {
   "react-dom": REACT_DOM_SHIM_URL,
   "react/jsx-runtime": JSX_RUNTIME_SHIM_URL,
   "@onlyoffice/docspace-plugin-sdk/react": PLUGIN_SDK_REACT_SHIM_URL,
+  "@onlyoffice/apps-ui-kit": PLUGIN_UI_KIT_SHIM_URL,
+};
+
+// The kit's name before it was renamed. Plugin SDK 3.0.0 documents it as the
+// external to keep, so plugins built by the book still import it; resolved, but
+// left out of the list an error message offers.
+const LEGACY_SPECIFIER_MAP: Record<string, string> = {
   "@docspace/ui-kit": PLUGIN_UI_KIT_SHIM_URL,
 };
 
@@ -160,7 +167,8 @@ const STATIC_IMPORT_RE =
 export function rewritePluginImports(code: string): string {
   const unresolved = new Set<string>();
 
-  const resolve = (specifier: string) => SPECIFIER_MAP[specifier];
+  const resolve = (specifier: string) =>
+    SPECIFIER_MAP[specifier] ?? LEGACY_SPECIFIER_MAP[specifier];
 
   let rewritten = code.replace(
     STATIC_IMPORT_RE,

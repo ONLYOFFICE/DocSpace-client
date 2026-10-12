@@ -36,9 +36,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
-import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
+import { InputSize, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
 
 interface IPasswordContainer {
   passwordValid: boolean;

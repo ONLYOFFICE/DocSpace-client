@@ -38,11 +38,11 @@
 import { ChangeEvent, KeyboardEvent, Ref } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { EmailInput, TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 type EmailInputFormProps = {
   ref: Ref<HTMLInputElement>;

@@ -35,9 +35,9 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Tooltip, usePinnedTooltip } from "@docspace/ui-kit/components/tooltip";
-import type { TGetTooltipContent } from "@docspace/ui-kit/components/tooltip";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip, usePinnedTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import type { TGetTooltipContent } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import {
   CACHE_PRICE_TOOLTIP_ID,

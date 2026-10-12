@@ -34,8 +34,8 @@
  */
 
 import type { TTranslation } from "@docspace/shared/types";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import type { MainButtonProps } from "@onlyoffice/apps-ui-kit/components/main-button/MainButton.types";
 
 type TGetCreateModel = (
   t: TTranslation,

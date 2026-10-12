@@ -42,27 +42,27 @@ import {
   subtractFromDate,
   parseToDateTime,
   isAfter,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { DateTimePicker } from "@docspace/ui-kit/components/date-time-picker";
-import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { DateTimePicker } from "@onlyoffice/apps-ui-kit/components/date-time-picker";
+import { InputType, TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
 import LinkRolesDropdown from "./sub-components/LinkRolesDropdown";
 import styles from "./LinkSettingsPanel.module.scss";
 import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { TOption } from "@docspace/ui-kit/components/combobox";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getConstName } from "@docspace/shared/constants/consts";
 

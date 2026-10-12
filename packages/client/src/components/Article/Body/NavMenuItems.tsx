@@ -38,12 +38,12 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
-import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
+import { NavMenu } from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import type {
   NavMenuGroup,
   NavMenuItem,
   NavSubItem,
-} from "@docspace/ui-kit/components/nav-menu";
+} from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import { FolderType, DeviceType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 

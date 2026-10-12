@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
       "line_number": 136,
       "context": "case ErrorKeys.LocalDomain:\n return t(\"LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n return t(\"IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",

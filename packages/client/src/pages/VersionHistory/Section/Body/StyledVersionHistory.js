@@ -35,7 +35,7 @@
 
 import React from "react";
 import classnames from "classnames";
-import { Row } from "@docspace/ui-kit/components/rows";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import styles from "./StyledVersionHistory.module.scss";
 

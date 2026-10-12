@@ -42,9 +42,9 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { LoadingButton } from "@docspace/ui-kit/components/loading-button";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { LoadingButton } from "@onlyoffice/apps-ui-kit/components/loading-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import ClearSvgUrl from "PUBLIC_DIR/images/icons/17/clear.react.svg?url";
 

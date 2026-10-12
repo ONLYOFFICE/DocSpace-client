@@ -35,13 +35,13 @@
 
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RowContent } from "@docspace/ui-kit/components/rows";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/ui-kit/components/combobox";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
 import {
   TypeSelectRowContentProps,
   InjectedTypeSelectRowContentProps,

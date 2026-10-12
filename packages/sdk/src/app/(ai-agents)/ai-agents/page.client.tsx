@@ -65,12 +65,12 @@ import React from "react";
 import { observer } from "mobx-react";
 import dynamic from "next/dynamic";
 
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
   type TOptSocket,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import {
   useAgentsListStore,

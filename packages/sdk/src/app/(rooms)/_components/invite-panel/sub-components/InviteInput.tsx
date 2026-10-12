@@ -70,20 +70,20 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 
-import { Avatar } from "@docspace/ui-kit/components/avatar";
+import { Avatar } from "@onlyoffice/apps-ui-kit/components/avatar";
 import {
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar/Avatar.enums";
-import { Link } from "@docspace/ui-kit/components/link";
-import { LinkType } from "@docspace/ui-kit/components/link/Link.enums";
-import { Text } from "@docspace/ui-kit/components/text";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { InputType } from "@docspace/ui-kit/components/text-input/TextInput.enums";
+} from "@onlyoffice/apps-ui-kit/components/avatar/Avatar.enums";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { LinkType } from "@onlyoffice/apps-ui-kit/components/link/Link.enums";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { InputType } from "@onlyoffice/apps-ui-kit/components/text-input/TextInput.enums";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { parseAddresses, getParts } from "@docspace/shared/utils";
 import type { TTranslation } from "@docspace/shared/types";
 import Filter from "@docspace/shared/api/people/filter";
@@ -96,7 +96,7 @@ import {
 } from "@docspace/shared/enums";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { getUserType } from "@docspace/shared/utils/common";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import type { InviteItem } from "../index";
 import AccessSelector from "./AccessSelector";

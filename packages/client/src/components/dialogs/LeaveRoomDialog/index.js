@@ -34,9 +34,9 @@
  */
 
 import { useEffect, useState } from "react";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";

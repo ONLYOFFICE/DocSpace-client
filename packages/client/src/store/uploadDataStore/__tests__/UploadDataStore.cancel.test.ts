@@ -35,7 +35,7 @@ import {
   installWindowGlobals,
   makeUploadFile,
 } from "./testHarness";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 const t = ((key: string) => key) as unknown as TTranslation;
 

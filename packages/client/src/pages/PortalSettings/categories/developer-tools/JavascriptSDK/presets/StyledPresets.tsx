@@ -62,7 +62,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { isMobile } from "@docspace/ui-kit/utils/device";
+import { isMobile } from "@onlyoffice/apps-ui-kit/utils/device";
 import styles from "./StyledPresets.module.scss";
 
 export const SDKContainer = ({

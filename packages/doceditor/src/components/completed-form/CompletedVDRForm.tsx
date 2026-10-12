@@ -45,9 +45,9 @@ import EyeIcon from "PUBLIC_DIR/images/eye.react.svg";
 import FormFillIcon from "PUBLIC_DIR/images/form.fill.rect.svg";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import {
   FileFillingFormStatus,
   FileStatus,
@@ -58,24 +58,24 @@ import {
   mobile,
   mobileMore,
 } from "@docspace/shared/utils";
-import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Heading, HeadingLevel } from "@onlyoffice/apps-ui-kit/components/heading";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { InputSize, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
 import {
   RoleStep,
   StatusIndicator,
 } from "@docspace/shared/components/filling-role-process";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import type { TFile } from "@docspace/shared/api/files/types";
-import type { TEditFileData } from "@docspace/ui-kit/utils/socket";
+import type { TEditFileData } from "@onlyoffice/apps-ui-kit/utils/socket";
 import { getFolderUrl } from "./CompletedForm.helper";
 import type { CompletedVDRFormProps } from "./CompletedForm.types";
 import styles from "./completed-form.module.scss";

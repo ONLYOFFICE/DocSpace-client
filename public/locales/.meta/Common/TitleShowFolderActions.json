@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/tiles/base-tile/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/tiles/base-tile/index.tsx",
       "line_number": 222,
       "context": "displayType={ContextMenuButtonDisplayType.toggle}\n onClick={(e) => {\n e.stopPropagation();\n onContextMenu(e);\n }}\n title={t(\"TitleShowFolderActions\")}\n />\n ) : (\n <div className=\"expandButton\" />\n )}\n <ContextMenu",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/ContextButton.tsx",

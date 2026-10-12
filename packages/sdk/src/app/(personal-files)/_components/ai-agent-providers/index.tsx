@@ -64,12 +64,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "@docspace/ui-kit";
+import { useTheme } from "@onlyoffice/apps-ui-kit";
 import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
-} from "@docspace/ui-kit/ai-agent/providers/themes";
-import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
+import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 type PersonalFilesAiAgentProvidersProps = {
   myFolderId?: number | string;

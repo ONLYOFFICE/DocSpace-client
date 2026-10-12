@@ -38,10 +38,10 @@ import { isDesktop } from "react-device-detect";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";
-import { isMobile } from "@docspace/ui-kit/utils/device";
+import { isMobile } from "@onlyoffice/apps-ui-kit/utils/device";
 
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";

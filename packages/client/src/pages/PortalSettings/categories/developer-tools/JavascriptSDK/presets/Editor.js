@@ -36,7 +36,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useEventLog } from "../sub-components/useEventLog";
 import { withTranslation } from "react-i18next";
-import { Label } from "@docspace/ui-kit/components/label";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { inject, observer } from "mobx-react";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
@@ -89,7 +89,7 @@ const EDITOR_EVENT_TYPES = [
 const Editor = (props) => {
   const { t, theme } = props;
 
-  setDocumentTitle(t("JavascriptSdk"));
+  setDocumentTitle(t("Settings:EmbedSDK"));
 
   const [version, onSetVersion] = useState(sdkVersion[220]);
 
@@ -326,7 +326,7 @@ export const Component = inject(({ settingsStore }) => {
     theme,
   };
 })(
-  withTranslation(["JavascriptSdk", "Files", "Common"])(
+  withTranslation(["JavascriptSdk", "Settings", "Files", "Common"])(
     observer(Editor),
   ),
 );

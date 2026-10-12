@@ -38,7 +38,7 @@ import { useTranslation } from "react-i18next";
 import RoomType from "@docspace/shared/components/room-type";
 import { getCreateRoomTypes } from "@docspace/shared/utils/rooms";
 import { RoomsType } from "@docspace/shared/enums";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import styles from "./RoomTypeList.module.scss";
 
@@ -47,6 +47,9 @@ type RoomTypeListProps = {
   isExternalShareRestricted?: boolean;
   processCreatingRoomFromData?: boolean;
   isFormsCreate?: boolean;
+  // Set only when the OForms gallery is available; offers a form space built
+  // around a gallery template even with the Forms quick actions turned off.
+  onOpenTemplateGallery?: () => void;
 
   setRoomType: (roomType: RoomsType) => void;
   setTemplateDialogIsVisible: (isVisible: boolean) => void;
@@ -57,6 +60,7 @@ const RoomTypeList = ({
   isExternalShareRestricted,
   processCreatingRoomFromData,
   isFormsCreate,
+  onOpenTemplateGallery,
 
   setRoomType,
   setTemplateDialogIsVisible,
@@ -113,6 +117,16 @@ const RoomTypeList = ({
           isOpen={false}
           selectedId="Template"
         />
+        {onOpenTemplateGallery ? (
+          <RoomType
+            id="TemplateGallery"
+            isTemplateGallery
+            type="listItem"
+            onClick={onOpenTemplateGallery}
+            isOpen={false}
+            selectedId="TemplateGallery"
+          />
+        ) : null}
       </div>
     );
   }

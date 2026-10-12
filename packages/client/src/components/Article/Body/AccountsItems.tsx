@@ -41,7 +41,7 @@ import { Link } from "react-router";
 import { PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import { ArticleItem } from "@docspace/ui-kit/components/article/item";
+import { ArticleItem } from "@onlyoffice/apps-ui-kit/components/article/item";
 
 interface IAccountsItem {
   showText: boolean;

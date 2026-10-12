@@ -43,9 +43,9 @@ import { useTranslation } from "react-i18next";
 import {
   FloatingButton,
   FloatingButtonIcons,
-} from "@docspace/ui-kit/components/floating-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+} from "@onlyoffice/apps-ui-kit/components/floating-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 

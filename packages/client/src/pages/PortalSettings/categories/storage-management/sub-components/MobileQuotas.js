@@ -37,7 +37,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { CategoryItem } from "@docspace/ui-kit/components/category-item";
+import { CategoryItem } from "@onlyoffice/apps-ui-kit/components/category-item";
 
 import styles from "../StyledComponent.module.scss";
 
@@ -55,7 +55,7 @@ const MobileQuotasComponent = ({ isDisabled, aiServicesEnabled }) => {
       <CategoryItem
         title={t("QuotaPerRoom")}
         onClickLink={onClickLink}
-        url="portal-settings/management/disk-space/quota-per-room"
+        url="/portal-settings/management/disk-space/quota-per-room"
         subtitle={t("SetDefaultRoomQuota")}
         isDisabled={isDisabled}
       />

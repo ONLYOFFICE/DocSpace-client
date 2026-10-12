@@ -37,15 +37,15 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { manageFormFilling } from "../../api/files";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { FormFillingManageAction } from "../../enums";
 
 import type { StopFillingDialogProps } from "./StopFillingDialog.types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 const StopFillingDialog = ({
   onClose,

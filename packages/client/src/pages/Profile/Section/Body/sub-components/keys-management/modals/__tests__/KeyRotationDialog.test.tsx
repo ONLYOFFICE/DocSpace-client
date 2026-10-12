@@ -56,7 +56,7 @@ import { PASSPHRASE_MIN_LENGTH } from "@docspace/shared/services/encryption/pass
 // Mock heavy UI-kit dependencies — factories must be self-contained
 // ---------------------------------------------------------------------------
 
-vi.mock("@docspace/ui-kit/components/modal-dialog", () => {
+vi.mock("@onlyoffice/apps-ui-kit/components/modal-dialog", () => {
   const ModalDialog = ({
     children,
     visible,
@@ -73,7 +73,7 @@ vi.mock("@docspace/ui-kit/components/modal-dialog", () => {
   return { ModalDialog, ModalDialogType: { modal: "modal" } };
 });
 
-vi.mock("@docspace/ui-kit/components/button", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/button", () => ({
   Button: ({
     onClick,
     isDisabled,
@@ -92,7 +92,7 @@ vi.mock("@docspace/ui-kit/components/button", () => ({
   ButtonSize: { normal: "normal" },
 }));
 
-vi.mock("@docspace/ui-kit/components/password-input", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/password-input", () => ({
   PasswordInput: ({
     inputValue,
     onChange,
@@ -112,11 +112,11 @@ vi.mock("@docspace/ui-kit/components/password-input", () => ({
     }),
 }));
 
-vi.mock("@docspace/ui-kit/components/text-input", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/text-input", () => ({
   InputSize: { base: "base" },
 }));
 
-vi.mock("@docspace/ui-kit/components/field-container", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/field-container", () => ({
   FieldContainer: ({
     children,
     errorMessage,
@@ -136,13 +136,13 @@ vi.mock("@docspace/ui-kit/components/field-container", () => ({
     ),
 }));
 
-vi.mock("@docspace/ui-kit/components/link", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/link", () => ({
   Link: ({ children }: { children?: React.ReactNode }) =>
     React.createElement("span", null, children),
   LinkType: { action: "action" },
 }));
 
-vi.mock("@docspace/ui-kit/components/text", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/text", () => ({
   Text: ({ children }: { children?: React.ReactNode }) =>
     React.createElement("span", null, children),
 }));

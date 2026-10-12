@@ -56,10 +56,6 @@ export const getI18NInstance = (portalLng: string) => {
 
         interpolation: {
           escapeValue: false,
-          format(value, format) {
-            if (format === "lowercase") return value.toLowerCase();
-            return value;
-          },
         },
 
         ns: ["Login", "Common", "Errors", "Wizard", "Confirm"],

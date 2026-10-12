@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { createElement } from "react";
 import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
@@ -46,6 +47,7 @@ import {
   rewindQuickActions,
 } from "SRC_DIR/components/Tour/stepBuilders";
 import { ROOMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
+import TourList from "SRC_DIR/components/Tour/TourList";
 
 // The room-type tiles, in the banner order the quick-actions hook builds them
 // (VDR first). The template and AI chat tiles share their container and get a
@@ -80,12 +82,12 @@ export const FIRST_ITEM_SELECTOR =
 // class alongside its CSS-module one). Only mounted while the panel is open,
 // which is why the step that points at it opens it first.
 const INFO_PANEL_SELECTOR = ".info-panel";
-
-// The first action of the empty screen, which on the rooms root is "create a
 // The panel's "Contacts" tab (ui-kit Tabs names it `${InfoPanelView.infoMembers}_tab`)
 // and the member list under it.
 const MEMBERS_TAB_SELECTOR = '[data-testid="info_members_tab"]';
 const MEMBERS_LIST_SELECTOR = '[data-testid="info_panel_members_list"]';
+
+// The first action of the empty screen, which on the rooms root is "create a
 // room" (EmptyViewContainer.helpers builds the list as
 // [createRoom, inviteRootRoom, migrationData]). ui-kit's EmptyView gives its
 // options no testid of their own, so the anchor is positional.
@@ -154,14 +156,24 @@ export function getTourSteps(
         '[data-testid="quick-actions"]',
         ROOM_TYPE_TILE_SELECTORS,
         t("RoomsTour:RoomsTypesTitle"),
-        // Each type is named by the label its own tile carries (the same
-        // Common keys `useQuickActions` builds the banner from), so the
+        // One line per type, each named by the label its own tile carries (the
+        // same Common keys `useQuickActions` builds the banner from), so the
         // tooltip and the tiles under the spotlight never drift apart.
-        t("RoomsTour:RoomsTypes", {
-          collaboration: t("Common:CollaborationRoomTitle"),
-          vdr: t("Common:VirtualDataRoom"),
-          publicRoom: t("Common:PublicRoom"),
-          custom: t("Common:CustomRoomTitle"),
+        createElement(TourList, {
+          items: [
+            t("RoomsTour:RoomsTypesCollaboration", {
+              roomType: t("Common:CollaborationRoomTitle"),
+            }),
+            t("RoomsTour:RoomsTypesVdr", {
+              roomType: t("Common:VirtualDataRoom"),
+            }),
+            t("RoomsTour:RoomsTypesPublic", {
+              roomType: t("Common:PublicRoom"),
+            }),
+            t("RoomsTour:RoomsTypesCustom", {
+              roomType: t("Common:CustomRoomTitle"),
+            }),
+          ],
         }),
         callbacks,
         ROOMS_TOUR_LABEL,
@@ -223,6 +235,8 @@ export function getTourSteps(
         infoPanelHooks,
         [MEMBERS_TAB_SELECTOR],
         FIRST_ITEM_SELECTOR,
+        4,
+        INFO_PANEL_SELECTOR,
       ),
 
     // 6. The sidebar sub-items: what each of the section's shortcuts holds.
@@ -235,15 +249,16 @@ export function getTourSteps(
     // meant to spot. The wording of each is unchanged.
     showQuickAccess &&
       sidebarListStep(
-        4,
-        INFO_PANEL_SELECTOR,
         "rooms-recent",
         t("RoomsTour:RoomsPlacesTitle"),
         [
-          t("RoomsTour:RoomsPlacesFiles", {
-            recent: t("Common:Recent"),
-            favorites: t("Common:Favorites"),
-            trash: t("Common:TrashSection"),
+          // The file shortcuts are described the same way the Files tour does.
+          t("FilesTour:TourPlacesRecent", { sectionName: t("Common:Recent") }),
+          t("FilesTour:TourPlacesFavorites", {
+            sectionName: t("Common:Favorites"),
+          }),
+          t("FilesTour:TourPlacesTrash", {
+            sectionName: t("Common:TrashSection"),
           }),
           t("RoomsTour:RoomsPlacesTemplates", {
             templates: t("Common:Templates"),

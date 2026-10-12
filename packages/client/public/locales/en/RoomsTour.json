@@ -5,14 +5,16 @@
   "RoomsEmptyTitle": "Your list is empty for now",
   "RoomsGroups": "Organize rooms by specific features to quickly find what you need. Create groups and switch between them right above the list.",
   "RoomsGroupsTitle": "Group your rooms",
-  "RoomsMembers": "Every room has its member list in the Info panel. Add workspace contacts and set a role for each member — from viewing files to managing the entire room.",
+  "RoomsMembers": "The Contacts tab holds everyone in the room. Add contacts from your workspace here and give each one a role — from viewing files to managing the room.",
   "RoomsMembersTitle": "Work together",
   "RoomsPlacesArchive": "{{archive}} — rooms you no longer work in, restorable anytime.",
-  "RoomsPlacesFiles": "{{recent}}, {{favorites}} and {{trash}} gather files from your rooms: recently opened, starred and deleted.",
   "RoomsPlacesTemplates": "{{templates}} — your room templates.",
   "RoomsPlacesTitle": "Everything in its place",
   "RoomsTemplates": "Turn any room into a template — its settings, structure and files are saved. Create a new room from it in a click, all that's left is to add members.",
   "RoomsTemplatesTitle": "Reuse what works",
-  "RoomsTypes": "{{collaboration}} for teamwork, {{vdr}} for secure file sharing, {{publicRoom}} for external access, {{custom}} for your own scenarios.",
-  "RoomsTypesTitle": "A room for every task"
+  "RoomsTypesCollaboration": "{{roomType}} — edit documents together with your team.",
+  "RoomsTypesCustom": "{{roomType}} — flexible setup for your own scenario.",
+  "RoomsTypesPublic": "{{roomType}} — access for external users via a link.",
+  "RoomsTypesTitle": "A room for every task",
+  "RoomsTypesVdr": "{{roomType}} — secure file storage and sharing."
 }

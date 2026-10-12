@@ -5,14 +5,12 @@
   "RoomsEmptyTitle": "Váš zoznam je zatiaľ prázdny",
   "RoomsGroups": "Usporiadajte miestnosti podľa konkrétnych vlastností, aby ste rýchlo našli, čo potrebujete. Vytvárajte skupiny a prepínajte medzi nimi hneď nad zoznamom.",
   "RoomsGroupsTitle": "Zoskupte si miestnosti",
-  "RoomsMembers": "Každá miestnosť má svoj zoznam členov v informačnom paneli. Pridajte kontakty z pracovného priestoru a nastavte každému členovi rolu — od prezerania súborov až po správu celej miestnosti.",
+  "RoomsMembers": "Na karte „Kontakty“ sú všetci členovia miestnosti. Tu môžete pridať kontakty z pracovného priestoru a každému nastaviť rolu — od prezerania súborov až po správu miestnosti.",
   "RoomsMembersTitle": "Pracujte spoločne",
   "RoomsPlacesArchive": "{{archive}} — miestnosti, v ktorých už nepracujete, kedykoľvek obnoviteľné.",
-  "RoomsPlacesFiles": "{{recent}}, {{favorites}} a {{trash}} zhromažďujú súbory z vašich miestností: nedávno otvorené, označené hviezdičkou a zmazané.",
   "RoomsPlacesTemplates": "{{templates}} — vaše šablóny miestností.",
   "RoomsPlacesTitle": "Všetko na svojom mieste",
   "RoomsTemplates": "Premeňte ľubovoľnú miestnosť na šablónu — jej nastavenia, štruktúra aj súbory sa uložia. Vytvorte z nej jedným kliknutím novú miestnosť, zostáva už len pridať členov.",
   "RoomsTemplatesTitle": "Využite znova to, čo funguje",
-  "RoomsTypes": "{{collaboration}} pre tímovú prácu, {{vdr}} pre bezpečné zdieľanie súborov, {{publicRoom}} pre prístup zvonku, {{custom}} pre vaše vlastné scenáre.",
   "RoomsTypesTitle": "Miestnosť pre každú úlohu"
 }

@@ -1,20 +1,20 @@
 {
   "key_path": "RoomsMembers",
-  "content": "Every room has its member list in the Info panel. Add workspace contacts and set a role for each member — from viewing files to managing the entire room.",
-  "content_en_sha1_hash": "70242a7085537104d7a665ed54da415b2ea11955",
-  "created_at": "2026-08-12T11:00:46.669Z",
-  "updated_at": "2026-09-14T20:38:41.359Z",
+  "content": "The Contacts tab holds everyone in the room. Add contacts from your workspace here and give each one a role — from viewing files to managing the room.",
+  "content_en_sha1_hash": "138712e3b505b1450f09f4537f84233df8183384",
+  "created_at": "2026-10-12T10:51:00.884Z",
+  "updated_at": "2026-10-12T10:51:25.899Z",
   "comment": {
-    "text": "Description text for a step in the Rooms onboarding tour, explaining how to manage members within the Info panel.",
+    "text": "Body text of the \"Work together\" step of the Rooms onboarding tour, shown in the tour tooltip while the info panel is open on the Contacts tab of a room and that tab with its member list is highlighted. Describes what the tab holds and that roles are assigned there; \"Contacts\" is the tab's own label, use the same word the Contacts tab has in this language.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:58:12.483Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-12T10:51:25.899Z",
+    "model": "claude-fable-5-1"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 219,
-      "context": "isDesktop &&\n infoPanelHooks &&\n revealStep(\n INFO_PANEL_SELECTOR,\n t(\"RoomsTour:RoomsMembersTitle\"),\n t(\"RoomsTour:RoomsMembers\"),\n callbacks,\n LOG_LABEL,\n infoPanelHooks,\n [FIRST_ITEM_SELECTOR],\n FIRST_ITEM_SELECTOR,",
+      "line_number": 232,
+      "context": "isDesktop &&\n infoPanelHooks &&\n revealStep(\n MEMBERS_LIST_SELECTOR,\n t(\"RoomsTour:RoomsMembersTitle\"),\n t(\"RoomsTour:RoomsMembers\"),\n callbacks,\n ROOMS_TOUR_LABEL,\n infoPanelHooks,\n [MEMBERS_TAB_SELECTOR],\n FIRST_ITEM_SELECTOR,",
       "module": "/packages/client"
     }
   ],

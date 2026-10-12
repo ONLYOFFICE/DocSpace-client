@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomsTypesVdr",
+  "content": "{{roomType}} — secure file storage and sharing.",
+  "content_en_sha1_hash": "936832f74169565214cc9516e780e5b57ce92527",
+  "created_at": "2026-10-12T10:51:00.905Z",
+  "updated_at": "2026-10-12T10:51:06.465Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 167,
+      "context": "createElement(TourList, {\n items: [\n t(\"RoomsTour:RoomsTypesCollaboration\", {\n roomType: t(\"Common:CollaborationRoomTitle\"),\n }),\n t(\"RoomsTour:RoomsTypesVdr\", {\n roomType: t(\"Common:VirtualDataRoom\"),\n }),\n t(\"RoomsTour:RoomsTypesPublic\", {\n roomType: t(\"Common:PublicRoom\"),\n }),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

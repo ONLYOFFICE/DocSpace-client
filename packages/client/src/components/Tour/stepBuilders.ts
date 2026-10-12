@@ -382,7 +382,11 @@ const UNION_SPOTLIGHT_ID = "tour-spotlight-union";
  * of its own; it is recomputed on every call, because joyride re-resolves the
  * target on scroll and resize.
  */
-function unionSpotlight(selectors: string[], anchorSelector: string) {
+function unionSpotlight(
+  selectors: string[],
+  anchorSelector: string,
+  withinSelector?: string,
+) {
   // The fallback when nothing measurable is on the page: the whole region the
   // step is about, rather than a degenerate rect in the viewport corner.
   const anchor = match(anchorSelector) as HTMLElement | null;
@@ -395,10 +399,30 @@ function unionSpotlight(selectors: string[], anchorSelector: string) {
 
   if (!rects.length) return anchor;
 
-  const top = Math.min(...rects.map((rect) => rect.top));
-  const left = Math.min(...rects.map((rect) => rect.left));
-  const height = Math.max(...rects.map((rect) => rect.bottom)) - top;
-  const width = Math.max(...rects.map((rect) => rect.right)) - left;
+  // A list taller than the panel it scrolls in would spill the spotlight past
+  // the panel's edge: the union is cut down to the box of `withinSelector`.
+  const bounds = withinSelector
+    ? match(withinSelector)?.getBoundingClientRect()
+    : undefined;
+
+  const top = Math.max(
+    Math.min(...rects.map((rect) => rect.top)),
+    bounds?.top ?? -Infinity,
+  );
+  const left = Math.max(
+    Math.min(...rects.map((rect) => rect.left)),
+    bounds?.left ?? -Infinity,
+  );
+  const height =
+    Math.min(
+      Math.max(...rects.map((rect) => rect.bottom)),
+      bounds?.bottom ?? Infinity,
+    ) - top;
+  const width =
+    Math.min(
+      Math.max(...rects.map((rect) => rect.right)),
+      bounds?.right ?? Infinity,
+    ) - left;
 
   let node = document.getElementById(UNION_SPOTLIGHT_ID);
 
@@ -527,6 +551,8 @@ export function revealStep(
   spotlightWith: string[] = [],
   presence?: string,
   spotlightPadding = 4,
+  // What the spotlight is kept inside of, for a target that overflows it.
+  spotlightWithin?: string,
 ): Step {
   const timeout = hooks.navigates
     ? NAVIGATION_TARGET_TIMEOUT
@@ -537,7 +563,8 @@ export function revealStep(
     // no box of its own (see `measurableTarget`).
     target: () => measurableTarget(target),
     spotlightTarget: spotlightWith.length
-      ? () => unionSpotlight([target, ...spotlightWith], target)
+      ? () =>
+          unionSpotlight([target, ...spotlightWith], target, spotlightWithin)
       : () => measurableTarget(target),
     spotlightPadding,
     placement: "auto" as const,

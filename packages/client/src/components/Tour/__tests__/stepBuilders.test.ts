@@ -563,6 +563,37 @@ describe("revealStep", () => {
     expect(restore).toHaveBeenCalledTimes(2);
   });
 
+  it("keeps a union spotlight inside the box it was given", () => {
+    // The rooms tour lights up the member list with the tab above it. The list
+    // is as tall as its members, so in a room with many it runs on below the
+    // panel's bottom edge; the spotlight stops where the panel does.
+    mount(
+      '<div id="panel"><i id="tab"></i><div id="list"></div></div>',
+    );
+    withRect("#panel", { top: 0, left: 500, width: 300, height: 600 });
+    withRect("#tab", { top: 40, left: 520, width: 80, height: 30 });
+    withRect("#list", { top: 90, left: 500, width: 300, height: 2000 });
+
+    const step = revealStep(
+      "#list",
+      "title",
+      "body",
+      undefined,
+      LOG_LABEL,
+      { reveal: () => {}, restore: () => {} },
+      ["#tab"],
+      undefined,
+      4,
+      "#panel",
+    );
+    const node = spotlight(step)!;
+
+    expect(node.style.top).toBe("40px");
+    expect(node.style.left).toBe("500px");
+    expect(node.style.width).toBe("300px");
+    expect(node.style.height).toBe("560px");
+  });
+
   it("fades the section through a swap and brings it back", async () => {
     vi.useFakeTimers();
 

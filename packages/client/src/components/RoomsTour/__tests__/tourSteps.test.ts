@@ -229,10 +229,11 @@ describe("getTourSteps — walking back out of the closing step", () => {
     const hooksForRun = panelHooks();
     const members = steps({ ...demoFlags, infoPanelHooks: hooksForRun })[4];
 
-    // The panel this step points at is only ever put up by its own reveal, so
-    // the row arriving is the only thing that can move it along.
+    // The member list this step points at is only ever put up by its own
+    // reveal, so the row arriving is the only thing that can move it along.
     hooksForRun.reveal.mockImplementation(() => {
-      document.body.innerHTML += `<div class="info-panel"></div>`;
+      document.body.innerHTML +=
+        '<div class="info-panel"><div data-testid="info_panel_members_list"></div></div>';
     });
 
     const startedAt = Date.now();

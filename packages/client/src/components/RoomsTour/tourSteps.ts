@@ -82,6 +82,10 @@ export const FIRST_ITEM_SELECTOR =
 const INFO_PANEL_SELECTOR = ".info-panel";
 
 // The first action of the empty screen, which on the rooms root is "create a
+// The panel's "Contacts" tab (ui-kit Tabs names it `${InfoPanelView.infoMembers}_tab`)
+// and the member list under it.
+const MEMBERS_TAB_SELECTOR = '[data-testid="info_members_tab"]';
+const MEMBERS_LIST_SELECTOR = '[data-testid="info_panel_members_list"]';
 // room" (EmptyViewContainer.helpers builds the list as
 // [createRoom, inviteRootRoom, migrationData]). ui-kit's EmptyView gives its
 // options no testid of their own, so the anchor is positional.
@@ -205,18 +209,19 @@ export function getTourSteps(
 
     // 5. Members — the single most useful thing in the section, and the one
     // that makes a room a room. The step opens the info panel on the first
-    // room's member list and lights up the row and the panel together.
+    // room's member list and lights up the "Contacts" tab and the list, kept
+    // inside the panel: a long list scrolls past its edge.
     hasItems &&
       isDesktop &&
       infoPanelHooks &&
       revealStep(
-        INFO_PANEL_SELECTOR,
+        MEMBERS_LIST_SELECTOR,
         t("RoomsTour:RoomsMembersTitle"),
         t("RoomsTour:RoomsMembers"),
         callbacks,
         ROOMS_TOUR_LABEL,
         infoPanelHooks,
-        [FIRST_ITEM_SELECTOR],
+        [MEMBERS_TAB_SELECTOR],
         FIRST_ITEM_SELECTOR,
       ),
 
@@ -230,6 +235,8 @@ export function getTourSteps(
     // meant to spot. The wording of each is unchanged.
     showQuickAccess &&
       sidebarListStep(
+        4,
+        INFO_PANEL_SELECTOR,
         "rooms-recent",
         t("RoomsTour:RoomsPlacesTitle"),
         [

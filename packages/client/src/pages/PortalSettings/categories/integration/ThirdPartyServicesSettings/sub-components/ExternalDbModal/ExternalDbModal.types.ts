@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export type DatabaseType = "mysql" | "sqlite";
+export type DatabaseType = "mysql" | "sqlite" | "postgresql";
 
 export type ValueType = string | number | boolean;
 
@@ -41,7 +41,8 @@ export type BaseConsumerProp = {
   name: string;
   title: string;
   dependsOn?: string;
-  dependsOnValue?: string;
+  dependsOnValue?: DatabaseType;
+  dependsOnValues?: DatabaseType[];
 };
 
 export interface ConsumerPropNumber extends BaseConsumerProp {

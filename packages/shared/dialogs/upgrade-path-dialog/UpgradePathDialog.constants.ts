@@ -33,8 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export const ENTERPRISE_TRIAL_PATH = "/download#docspace-enterprise";
-export const DEVELOPER_TRIAL_PATH = "/download-developer#docspace-developer";
+export const ENTERPRISE_TRIAL_PATH = "/download#for-enterprises";
+export const DEVELOPER_TRIAL_PATH = "/download#for-developers";
+export const DOCS_ENTERPRISE_PATH = "/docs-enterprise";
+export const SUPPORT_CONTACT_PATH = "/support-contact-form";
 
-export const getUpgradeTrialUrl = (siteDomain: string, path: string) =>
-  `${siteDomain.replace(/\/$/, "")}${path}`;
+export const getUpgradeSiteUrl = (siteDomain: string, path: string) =>
+  siteDomain ? `${siteDomain.replace(/\/$/, "")}${path}` : "";

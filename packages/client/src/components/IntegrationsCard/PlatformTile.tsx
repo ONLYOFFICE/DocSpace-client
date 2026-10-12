@@ -35,7 +35,7 @@
 
 import React from "react";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 import PluginIcon from "PUBLIC_DIR/images/icons/20/catalog.devtools-plugin-sdk.react.svg";

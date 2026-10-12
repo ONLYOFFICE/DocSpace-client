@@ -8,6 +8,7 @@
   "DeleteGroup": "Smazat skupinu",
   "DisablingRoomGroups": "Zrušení skupin místností",
   "DisablingRoomGroupsDescription": "Skupiny budou uloženy, ale skryté. Opětovně povolte v Profilu, Správa souborů.",
+  "DisablingSpaceGroups": "Zrušení skupin prostorů",
   "EditRoomGroups": "Upravit skupiny místností",
   "EditSpaceGroups": "Upravit skupiny prostorů",
   "EmptyGroupRoomsDescription": "Nejsou zde žádné místnosti. Zkuste přidat místnost nebo odstranit tuto skupinu.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Vybrané místnosti byly přidány do <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Vybrané místnosti byly odstraněny z <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Vybraný prostor byl přidán do <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Seskupování prostorů",
+  "SpaceGroupingDisabled": "Seskupování prostorů je zakázáno",
+  "SpaceGroupingEnabled": "Seskupování prostorů je povoleno",
+  "SpaceGroupingSettingDescription": "Prostory můžete seskupovat do složek a snadno mezi nimi přepínat.",
   "SpaceRemovedFromGroup": "Vybraný prostor byl odebrán z <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Vybrané prostory byly přidány do <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Vybrané prostory byly odebrány z <1>{{groupName}}</1>."

@@ -34,9 +34,9 @@
  */
 
 import { useState } from "react";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Tabs, TabsTypes } from "@onlyoffice/apps-ui-kit/components/tabs";
 import CodeBlock from "./CodeBlock";
 
 import { CategorySubHeader, CodeWrapper } from "../presets/StyledPresets";

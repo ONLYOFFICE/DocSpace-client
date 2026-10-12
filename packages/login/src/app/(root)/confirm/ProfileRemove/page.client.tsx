@@ -38,13 +38,13 @@
 import { useContext, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { FormWrapper } from "@onlyoffice/apps-ui-kit/components/form-wrapper";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { deleteSelf } from "@docspace/shared/api/people";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
@@ -53,7 +53,7 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 type ProfileRemoveFormProps = {

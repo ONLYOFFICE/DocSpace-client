@@ -8,6 +8,7 @@
   "DeleteGroup": "කණ්ඩායම මකාදාලන්න",
   "DisablingRoomGroups": "කාමර කණ්ඩායම් අක්‍රිය කිරීම",
   "DisablingRoomGroupsDescription": "කණ්ඩායම් සුරැකෙනු ඇත, නමුත් ඒවා සඟවා ඇත. Profile, File management වෙත ගොස් නැවත සක්‍රීය කරන්න.",
+  "DisablingSpaceGroups": "අවකාශ කණ්ඩායම් අක්‍රිය කිරීම",
   "EditRoomGroups": "කාමර කණ්ඩායම් සංස්කරණය කරන්න",
   "EditSpaceGroups": "අවකාශ කණ්ඩායම් සංස්කරණය කරන්න",
   "EmptyGroupRoomsDescription": "මෙතැන කාමර නැත. කාමරයක් එකතු කිරීමට උත්සාහ කරන්න හෝ මෙම කණ්ඩායම ඉවත් කරන්න.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "තෝරාගත් කාමර <1>{{groupName}}</1> වෙත එකතු කර ඇත.",
   "RoomsRemovedFromGroup": "තෝරාගත් කාමර <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත.",
   "SpaceAddedToGroup": "තෝරාගත් අවකාශය <1>{{groupName}}</1> වෙත එකතු කර ඇත.",
+  "SpaceGrouping": "අවකාශ කණ්ඩායම්කරණය",
+  "SpaceGroupingDisabled": "අවකාශ සමූහගත කිරීම අක්‍රිය කර ඇත",
+  "SpaceGroupingEnabled": "අවකාශ සමූහගත කිරීම සක්‍රීය කර ඇත",
+  "SpaceGroupingSettingDescription": "ඔබට අවකාශ ෆෝල්ඩර් වලට කණ්ඩායම් කර ඒවා අතර පහසුවෙන් මාරු විය හැකිය.",
   "SpaceRemovedFromGroup": "තෝරාගත් අවකාශය <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත.",
   "SpacesAddedToGroup": "තෝරාගත් අවකාශ <1>{{groupName}}</1> වෙත එකතු කර ඇත.",
   "SpacesRemovedFromGroup": "තෝරාගත් අවකාශ <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත."

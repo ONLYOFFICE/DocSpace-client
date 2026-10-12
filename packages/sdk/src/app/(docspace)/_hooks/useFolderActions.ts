@@ -39,7 +39,7 @@ import { useRouter } from "next/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import api from "@docspace/shared/api";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 
 import { OpenFolderContext } from "../_contexts/OpenFolderContext";

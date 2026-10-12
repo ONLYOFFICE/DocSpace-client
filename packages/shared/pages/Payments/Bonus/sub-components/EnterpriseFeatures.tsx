@@ -42,7 +42,7 @@ import MobileEditingReactSvgUrl from "PUBLIC_DIR/images/mobile_editing.react.svg
 import ScalabilityReactSvgUrl from "PUBLIC_DIR/images/scalability.react.svg?url";
 import TechSupportReactSvgUrl from "PUBLIC_DIR/images/tech_support.react.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import {
   type TEnterpriseFeatureId,

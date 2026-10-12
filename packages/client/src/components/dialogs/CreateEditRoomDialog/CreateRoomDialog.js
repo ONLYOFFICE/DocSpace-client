@@ -40,10 +40,10 @@ import {
   getRoomCreationAdditionalParams,
   getStartRoomParams,
 } from "@docspace/shared/utils/rooms";
-import { Button } from "@docspace/ui-kit/components/button";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import RoomSelector from "@docspace/ui-kit/selectors/Room";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
 import {
   FolderType,
   RoomsType,
@@ -74,6 +74,7 @@ const CreateRoomDialog = ({
   enableThirdParty,
   startRoomType,
   isFormsCreate,
+  onOpenTemplateGallery,
   processCreatingRoomFromData,
   setProcessCreatingRoomFromData,
   selectionItems,
@@ -409,6 +410,7 @@ const CreateRoomDialog = ({
               isExternalShareRestricted={isExternalShareRestricted}
               processCreatingRoomFromData={processCreatingRoomFromData}
               isFormsCreate={isFormsCreate}
+              onOpenTemplateGallery={onOpenTemplateGallery}
               setTemplateDialogIsVisible={setTemplateDialogIsVisible}
             />
           ) : (

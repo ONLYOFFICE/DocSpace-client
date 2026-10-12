@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { LinkTarget } from "@docspace/ui-kit/components/link";
+import type { LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
 
 export interface FileItem {
   isPlugin?: boolean;

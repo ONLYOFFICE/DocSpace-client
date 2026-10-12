@@ -246,6 +246,9 @@ class FilesFilter {
       case CategoryType.Favorite:
         filter.folder = "@favorites";
         break;
+      case CategoryType.Trash:
+        filter.folder = "@trash";
+        break;
       default:
     }
 
@@ -478,9 +481,10 @@ class FilesFilter {
 
     const dtoFilter: { [key: string]: unknown } = {};
 
-    const previewParam = new URLSearchParams(window.location.search).get(
-      PREVIEW,
-    );
+    // The query, not the whole href: passing the href to a query parser made
+    // the first parameter's key the entire URL up to it, so `preview` was read
+    // only when something else came first in the query string.
+    const preview = new URLSearchParams(window.location.search).get(PREVIEW);
 
     if (filterType) dtoFilter[FILTER_TYPE] = filterType;
     if (withSubfolders) dtoFilter[SEARCH_TYPE] = withSubfolders;
@@ -490,7 +494,7 @@ class FilesFilter {
     if (sharedBy) dtoFilter[SHARED_BY] = sharedBy;
     if (folder) dtoFilter[FOLDER] = folder;
     if (pageCount !== DEFAULT_PAGE_COUNT) dtoFilter[PAGE_COUNT] = pageCount;
-    if (previewParam) dtoFilter[PREVIEW] = previewParam;
+    if (preview) dtoFilter[PREVIEW] = preview;
     if (searchInContent) dtoFilter[SEARCH_IN_CONTENT] = searchInContent;
     if (excludeSubject) dtoFilter[EXCLUDE_SUBJECT] = excludeSubject;
     if (applyFilterOption) dtoFilter[APPLY_FILTER_OPTION] = applyFilterOption;

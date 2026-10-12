@@ -39,11 +39,11 @@ import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Link } from "@docspace/ui-kit/components/link";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { EncryptionStatus } from "@docspace/shared/enums";
 import type { TPortals } from "@docspace/shared/api/management/types";

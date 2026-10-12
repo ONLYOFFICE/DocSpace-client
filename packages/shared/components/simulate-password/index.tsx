@@ -40,9 +40,9 @@ import classNames from "classnames";
 import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme";
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { InputType } from "@docspace/ui-kit/components/text-input";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
 
 import styles from "./SimulatePassword.module.scss";
 import type { SimulatePasswordProps } from "./SimulatePassword.types";

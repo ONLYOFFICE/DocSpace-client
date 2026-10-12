@@ -8,6 +8,7 @@
   "DeleteGroup": "删除群组",
   "DisablingRoomGroups": "禁用房间组",
   "DisablingRoomGroupsDescription": "群组将被保存但隐藏。请在“个人资料”>“文件管理”中重新启用。",
+  "DisablingSpaceGroups": "禁用空间组",
   "EditRoomGroups": "编辑房间组",
   "EditSpaceGroups": "编辑空间组",
   "EmptyGroupRoomsDescription": "此处没有房间。请尝试添加房间或移除此组。",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "已将选定的房间添加到 <1>{{groupName}}</1>。",
   "RoomsRemovedFromGroup": "已从 <1>{{groupName}}</1> 中移除选定的房间。",
   "SpaceAddedToGroup": "选定的空间已添加到<1>{{groupName}}</1>中。",
+  "SpaceGrouping": "空间分组",
+  "SpaceGroupingDisabled": "空间分组已禁用",
+  "SpaceGroupingEnabled": "空间分组已启用",
+  "SpaceGroupingSettingDescription": "您可以将空间分组到文件夹中，并轻松地在它们之间切换。",
   "SpaceRemovedFromGroup": "已从 <1>{{groupName}}</1> 中移除选定的空间。",
   "SpacesAddedToGroup": "选定的多个空间已添加到<1>{{groupName}}</1>中。",
   "SpacesRemovedFromGroup": "已从 <1>{{groupName}}</1> 中移除选定的多个空间。"

@@ -35,8 +35,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { Text } from "@docspace/ui-kit/components/text";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { DeviceType } from "@docspace/shared/enums";
 
 import type { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";

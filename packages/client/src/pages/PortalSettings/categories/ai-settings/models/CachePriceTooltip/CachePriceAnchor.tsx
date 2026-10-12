@@ -38,7 +38,7 @@ import type React from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import CacheIcon from "@docspace/ui-kit/assets/icons/16/statistics.react.svg";
+import CacheIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/statistics.react.svg";
 
 import {
   CACHE_PRICE_TOOLTIP_ID,

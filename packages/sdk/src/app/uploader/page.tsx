@@ -41,7 +41,7 @@ import { logger } from "../../../logger.mjs";
 
 import UploaderClient from "./page.client";
 import UploaderOAuthPage from "./page.oauth.client";
-import type { UploaderFilesSettings } from "@docspace/ui-kit/uploader/Uploader.types";
+import type { UploaderFilesSettings } from "@onlyoffice/apps-ui-kit/uploader/Uploader.types";
 import { formatExtensions } from "./_utils";
 
 export default async function Page({

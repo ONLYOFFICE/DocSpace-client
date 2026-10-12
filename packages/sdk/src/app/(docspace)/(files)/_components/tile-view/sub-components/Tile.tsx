@@ -38,12 +38,12 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { FileTile } from "@docspace/ui-kit/components/tiles/file-tile";
-import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
-import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { FileTile } from "@onlyoffice/apps-ui-kit/components/tiles/file-tile";
+import { FolderTile } from "@onlyoffice/apps-ui-kit/components/tiles/folder-tile";
+import { DragAndDrop } from "@onlyoffice/apps-ui-kit/components/drag-and-drop";
 
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
 import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 import { FolderType } from "@docspace/shared/enums";

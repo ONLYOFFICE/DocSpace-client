@@ -38,15 +38,15 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { decode } from "he";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";

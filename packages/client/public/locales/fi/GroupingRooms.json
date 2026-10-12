@@ -8,6 +8,7 @@
   "DeleteGroup": "Poista ryhmä",
   "DisablingRoomGroups": "Poistetaan huoneryhmät",
   "DisablingRoomGroupsDescription": "Ryhmät tallennetaan, mutta ne ovat piilotettuina. Aktivoi ne uudelleen Profiilissa, Tiedostojen hallinnassa.",
+  "DisablingSpaceGroups": "Tilaryhmien poistaminen käytöstä",
   "EditRoomGroups": "Muokkaa huoneryhmiä",
   "EditSpaceGroups": "Muokkaa tilaryhmiä",
   "EmptyGroupRoomsDescription": "Täällä ei ole huoneita. Kokeile lisätä huone tai poistaa tämä ryhmä.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Valitut huoneet on lisätty <1>{{groupName}}</1>:een.",
   "RoomsRemovedFromGroup": "Valitut huoneet on poistettu <1>{{groupName}}</1>:sta.",
   "SpaceAddedToGroup": "Valittu tila on lisätty ryhmään <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Tilojen ryhmittely",
+  "SpaceGroupingDisabled": "Tilojen ryhmittely on poistettu käytöstä",
+  "SpaceGroupingEnabled": "Tilojen ryhmittely on käytössä",
+  "SpaceGroupingSettingDescription": "Voit ryhmitellä tilat kansioihin ja vaihtaa niiden välillä helposti.",
   "SpaceRemovedFromGroup": "Valittu tila on poistettu ryhmästä <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Valitut tilat on lisätty ryhmään <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Valitut tilat on poistettu ryhmästä <1>{{groupName}}</1>."

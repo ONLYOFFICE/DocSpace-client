@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/unlinked-card-banner/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/unlinked-card-banner/index.tsx",
       "line_number": 82,
       "context": "),\n }}\n />\n ) : (\n <CommonTrans\n i18nKey=\"PaymentMethodUnlinkedEmailBanner\"\n values={{ email: walletCustomerEmail }}\n components={{\n 1: <Text as=\"span\" fontWeight={600} />,\n 2: (\n <Link",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

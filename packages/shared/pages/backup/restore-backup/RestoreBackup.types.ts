@@ -43,10 +43,10 @@ import type {
 	ThirdPartyAccountType,
 	TTranslation,
 } from "../../../types";
-import type { ButtonSize } from "@docspace/ui-kit/components/button";
+import type { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import type { TenantStatus } from "../../../enums";
 import type { FilesSelectorSettings } from "../../../components/files-selector-input";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type { TThirdParties, TUploadBackup } from "../../../api/files/types";
 
 export interface RestoreBackupProps {

@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import api from "@docspace/shared/api";
 import { AnalyticsEvents } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -211,7 +211,11 @@ const CreateEvent = ({
           if (withEditor) {
             openDocEditor(created.fileId, preview, null, actionEdit, false, editorWindow);
           } else if (isFrame && frameConfig?.events?.onEditorOpen) {
-            frameCallEvent({ event: "onEditorOpen", data: created });
+            const file = await api.files.getFileInfo(created.fileId);
+            frameCallEvent({
+              event: "onEditorOpen",
+              data: { ...file, action: "edit" },
+            });
           }
 
           fetchFiles(parentId).catch(() => {});
@@ -285,7 +289,7 @@ const CreateEvent = ({
               if (isFrame && frameConfig?.events?.onEditorOpen) {
                 frameCallEvent({
                   event: "onEditorOpen",
-                  data,
+                  data: { ...data, action: "edit" },
                 });
               }
             })

@@ -65,18 +65,18 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { getConstName } from "@docspace/shared/constants/consts";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type {
   ActionOption,
   ButtonOption,
-} from "@docspace/ui-kit/components/main-button-mobile/MainButtonMobile.types";
-import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
+} from "@onlyoffice/apps-ui-kit/components/main-button-mobile/MainButtonMobile.types";
+import type { QuickActionItem } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import {
   CreateDocumentIcon,
   CreateSpreadsheetIcon,
   CreatePresentationIcon,
   BlankPdfIcon,
-} from "@docspace/ui-kit/components/quick-actions/icons";
+} from "@onlyoffice/apps-ui-kit/components/quick-actions/icons";
 
 import CreateNewFolderIllustration from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import UploadDeviceIllustration from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
@@ -91,6 +91,7 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import {
   getVisibleCreateActions,
   sendCustomAction,
+  getCustomActionIconProps,
 } from "@docspace/shared/utils/frameCustomActions";
 
 import { useSdkCustomActions } from "@/providers/SdkCustomActionsProvider";
@@ -123,7 +124,7 @@ export function useDocsMenuModels({
       ).map((action) => ({
         key: `sdk-action-${action.key}`,
         label: action.label,
-        icon: action.icon ?? "",
+        ...getCustomActionIconProps(action.icon),
         onClick: () =>
           sendCustomAction({ action: action.key, type: "create", folderId }),
       })),

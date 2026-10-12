@@ -59,9 +59,9 @@ import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 import classNames from "classnames";
 
-import { MainButton } from "@docspace/ui-kit/components/main-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Button } from "@docspace/ui-kit/components/button";
+import { MainButton } from "@onlyoffice/apps-ui-kit/components/main-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { isDesktop } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";

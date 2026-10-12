@@ -34,12 +34,12 @@
  */
 
 import React, { useEffect } from "react";
-import { formatDate } from "@docspace/ui-kit/utils/date";
+import { formatDate } from "@onlyoffice/apps-ui-kit/utils/date";
 import { inject, observer } from "mobx-react";
 
-import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
-import { Link } from "@docspace/ui-kit/components/link";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 
 import styles from "../WebhookHistory.styled.module.scss";

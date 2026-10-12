@@ -69,7 +69,7 @@ import Editor from "./Editor";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ErrorContainer = dynamic(
-  () => import("@docspace/ui-kit/components/error-container/ErrorContainer"),
+  () => import("@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer"),
   {
     ssr: false,
   },

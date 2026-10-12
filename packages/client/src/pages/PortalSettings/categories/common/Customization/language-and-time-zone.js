@@ -35,21 +35,21 @@
 
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
-import { setCookie } from "@docspace/ui-kit/utils/cookie";
+import { setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { useNavigate } from "react-router";
 import { isMobileDevice, isBetaLanguage } from "@docspace/shared/utils";
 import { getCultureLabel } from "@docspace/shared/constants/cultures";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import LoaderCustomization from "../sub-components/loaderCustomization";

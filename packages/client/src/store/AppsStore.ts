@@ -65,7 +65,7 @@ import SocketHelper, {
   SocketCommands,
   SocketEvents,
   type TChangeAppEnabledData,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   getApps,
   getAppSettings,

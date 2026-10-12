@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/article/sub-components/BackButton/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/article/sub-components/BackButton/index.tsx",
       "line_number": 108,
       "context": "data-show-article={showText ? \"true\" : \"false\"}\n data-arrow-type={isDesktop ? \"desktop\" : \"tablet\"}\n onClick={onClickBack}\n >\n <IconButton className={styles.arrowIcon} iconNode={icon} isClickable />\n {showText ? <Text truncate>{label ?? t(\"Back\")}</Text> : null}\n </div>\n );\n };\n \n export default BackButton;",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/selector/sub-components/EmptyScreen.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/selector/sub-components/EmptyScreen.tsx",
       "line_number": 206,
       "context": "}\n isFill\n />\n \n <Link {...linkStyles}>\n {withSearch ? t(\"ClearFilter\") || \"\" : t(\"Back\") || \"\"}\n </Link>\n </div>\n ) : null}\n </div>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/Tour/useTour.ts",

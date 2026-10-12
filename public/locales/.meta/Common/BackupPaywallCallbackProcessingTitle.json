@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
       "line_number": 208,
       "context": "errorButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),\n redirectUrl: DOCS_CONNECT_ROUTE,\n };\n case PaymentFlavor.Backup:\n return {\n processingTitle: t(\"Common:BackupPaywallCallbackProcessingTitle\"),\n processingHint: t(\"Common:BackupPaywallCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:BackupPaywallCallbackStepActivate\"),\n successTitle: t(\"Common:BackupPaywallCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:GoToAddon\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

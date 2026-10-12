@@ -3,7 +3,7 @@
   "content": "Files generated in {{aiChat}} show up here automatically. Start a chat, generate content, or send a message with output, and the result gets saved to this section.",
   "content_en_sha1_hash": "d092e9175fcc4b9bf57ae246e5c8e6bbfb1aa15f",
   "created_at": "2026-08-31T18:23:03.843Z",
-  "updated_at": "2026-08-31T19:10:46.492Z",
+  "updated_at": "2026-10-06T10:42:37.460Z",
   "comment": {
     "text": "Placeholder text for an empty state in the results tab or storage folder, explaining that files generated via {{aiChat}} are automatically saved here. The {{aiChat}} variable refers to the AI Chat feature.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 142,
+      "line_number": 144,
       "context": "</>\n );\n \n if (isResultsTab)\n return security && \"UseChat\" in security && security.UseChat\n ? t(\"Common:EmptyResultsDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })\n : t(\"Common:EmptyResultsViewerDescription\", {\n aiChat: t(\"Common:AIChat\"),\n });",
       "module": "/packages/client"
     },

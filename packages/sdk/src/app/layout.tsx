@@ -37,12 +37,12 @@ import path from "path";
 import { headers, cookies } from "next/headers";
 import type { Metadata } from "next";
 
-import { ThemeKeys } from "@docspace/ui-kit/enums";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
+import { SYSTEM_THEME_KEY } from "@onlyoffice/apps-ui-kit/providers/theme/themes/constants";
 import {
   getDirectionByLanguage,
   getFontFamilyDependingOnLanguage,
-} from "@docspace/ui-kit/providers/theme/rtl-utils";
+} from "@onlyoffice/apps-ui-kit/providers/theme/rtl-utils";
 
 import "@docspace/shared/styles/theme.scss";
 
@@ -108,13 +108,16 @@ export default async function RootLayout({
 
   const initialLocaleResources = await loadTranslationsForLocale(locale, {
     namespaces: [],
-    appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
-    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
+    appLocalesDir:
+      process.env.NEXT_APP_LOCALES_DIR ??
+      path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir:
+      process.env.NEXT_SHARED_LOCALES_DIR ??
+      path.join(process.cwd(), "../../public/locales"),
   });
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
-    | ThemeKeys
-    | undefined;
+    ThemeKeys | undefined;
 
   const currentColorScheme = colorTheme?.themes.find(
     (t) => t.id === colorTheme.selected,

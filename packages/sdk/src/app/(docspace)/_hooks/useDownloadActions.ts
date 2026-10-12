@@ -37,7 +37,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { openUrl } from "@docspace/shared/utils/common";
 import { UrlActionType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";

@@ -45,11 +45,13 @@ export interface IAppStateContext {
   user: TUser | undefined;
   settings: TSettings | undefined;
   isAdmin: boolean;
+  isCommunity: boolean;
 }
 
 export interface AppStateProviderProps {
   user: TUser | undefined;
   settings: TSettings | undefined;
+  isCommunity: boolean;
 }
 
 const AppStateContext = createContext<IAppStateContext | null>(null);
@@ -57,6 +59,7 @@ const AppStateContext = createContext<IAppStateContext | null>(null);
 const AppStateProvider = ({
   user,
   settings,
+  isCommunity,
   children,
 }: PropsWithChildren<AppStateProviderProps>) => {
   const isAdmin = !!user && isAdminUtils(user);
@@ -66,8 +69,9 @@ const AppStateProvider = ({
       user,
       settings,
       isAdmin,
+      isCommunity,
     };
-  }, [user, settings, isAdmin]);
+  }, [user, settings, isAdmin, isCommunity]);
 
   return (
     <AppStateContext.Provider value={value}>

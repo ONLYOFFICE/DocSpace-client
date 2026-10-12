@@ -50,7 +50,7 @@ import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
-import Navigation from "@docspace/ui-kit/components/navigation";
+import Navigation from "@onlyoffice/apps-ui-kit/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
@@ -58,8 +58,8 @@ import {
   getCheckboxItemId,
   getCheckboxItemLabel,
 } from "@docspace/shared/utils";
-import { Context } from "@docspace/ui-kit/utils/context";
-import { TableGroupMenu } from "@docspace/ui-kit/components/table";
+import { Context } from "@onlyoffice/apps-ui-kit/utils/context";
+import { TableGroupMenu } from "@onlyoffice/apps-ui-kit/components/table";
 import {
   RoomsType,
   DeviceType,
@@ -84,11 +84,11 @@ import {
   getCategoryType,
 } from "@docspace/shared/utils/common";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { useAiChatStoreOptional } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
-import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
+import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHeader";
 

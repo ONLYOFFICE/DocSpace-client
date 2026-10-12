@@ -124,7 +124,7 @@ import type {
   OptionActions,
   UploadType,
 } from "./EmptyViewContainer.types";
-import { Text } from "@docspace/ui-kit/components";
+import { Text } from "@onlyoffice/apps-ui-kit/components";
 
 export const isUser = (access: AccessType) => {
   return (

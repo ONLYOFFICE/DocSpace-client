@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat-toolbar/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar/index.tsx",
       "line_number": 87,
       "context": "<ActionButton\n icon={<HistoriesIcon />}\n className={classNames(styles.button, {\n [styles.active]: isHistoryActive,\n })}\n aria-label={t(\"Common:ChatHistory\")}\n data-tooltip-id={TOOLBAR_TOOLTIP_ID}\n data-tooltip-content={t(\"Common:ChatHistory\")}\n onClick={handleNavigateToHistory}\n />\n {hasProfile ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat-toolbar/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar/index.tsx",
       "line_number": 87,
       "context": "<ActionButton\n icon={<HistoriesIcon />}\n className={classNames(styles.button, {\n [styles.active]: isHistoryActive,\n })}\n aria-label={t(\"Common:ChatHistory\")}\n data-tooltip-id={TOOLBAR_TOOLTIP_ID}\n data-tooltip-content={t(\"Common:ChatHistory\")}\n onClick={handleNavigateToHistory}\n />\n {hasProfile ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

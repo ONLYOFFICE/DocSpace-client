@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
       "line_number": 271,
       "context": "</div>\n \n <ol className={styles.steps}>\n {renderStep(\n 1,\n t(\"MigrateStep1Title\"),\n <>\n <div className={styles.card}>\n {renderRow(\n t(\"MigrateCurrentTariff\"),\n t(\"MigratePerMonth\", {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

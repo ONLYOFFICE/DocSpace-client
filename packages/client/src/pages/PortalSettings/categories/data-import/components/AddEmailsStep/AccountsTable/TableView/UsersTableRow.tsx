@@ -37,17 +37,17 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
+import { TableRow, TableCell } from "@onlyoffice/apps-ui-kit/components/table";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { EmailInput, TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
 
 import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvgUrl from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 import CheckSvgUrl from "PUBLIC_DIR/images/check.edit.react.svg?url";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import {
   AddEmailTableRowProps,
   InjectedAddEmailTableRowProps,

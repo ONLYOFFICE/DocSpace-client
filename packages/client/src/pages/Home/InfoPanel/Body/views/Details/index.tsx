@@ -40,16 +40,16 @@ import classNames from "classnames";
 
 import { isMobile } from "@docspace/shared/utils";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
 import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 

@@ -102,7 +102,7 @@ const collect = (dir, out) => {
 };
 
 beforeAll(() => {
-  const roots = ["packages", "libs/ui-kit", "common"]
+  const roots = ["packages", "common"]
     .map((rel) => path.resolve(BASE_DIR, rel))
     .filter((abs) => fs.existsSync(abs));
 

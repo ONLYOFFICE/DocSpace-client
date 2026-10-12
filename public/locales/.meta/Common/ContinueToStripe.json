@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
       "line_number": 287,
       "context": "<ModalDialog.Footer>\n <div className={styles.footerButtons}>\n <Button\n key=\"ContinueToStripeButton\"\n label={isStripeFlow ? t(\"ContinueToStripe\") : t(\"TopUp\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onContinue}\n isLoading={isLoading}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

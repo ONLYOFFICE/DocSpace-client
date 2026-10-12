@@ -38,7 +38,7 @@ import React from "react";
 import { cookies, headers } from "next/headers";
 
 import { getBgPattern } from "@docspace/shared/utils/common";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 
 import SimpleNav from "@/components/SimpleNav";
 import LanguageComboboxWrapper from "@/components/LanguageCombobox";

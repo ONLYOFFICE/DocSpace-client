@@ -37,7 +37,7 @@ import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router";
 
-import { Consumer } from "@docspace/ui-kit/utils/context";
+import { Consumer } from "@onlyoffice/apps-ui-kit/utils/context";
 import { RowsSkeleton, TableSkeleton } from "@docspace/shared/skeletons";
 
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";

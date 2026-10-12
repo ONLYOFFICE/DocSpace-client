@@ -33,13 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
 	Avatar,
 	AvatarRole,
 	AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 import styles from "../TableView.styled.module.scss";
 

@@ -45,16 +45,16 @@ import { isMobileOnly, isMobile } from "react-device-detect";
 import api from "@docspace/shared/api";
 import { RoomsType } from "@docspace/shared/enums";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
-import { Avatar, AvatarRole, AvatarSize } from "@docspace/ui-kit/components/avatar";
-import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Avatar, AvatarRole, AvatarSize } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   ComboBoxSize,
   type TOption,
-} from "@docspace/ui-kit/components/combobox";
-import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
+import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";

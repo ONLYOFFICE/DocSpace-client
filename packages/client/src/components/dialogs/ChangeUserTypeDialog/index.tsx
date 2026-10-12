@@ -36,13 +36,13 @@
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
 import { getChangeTypeKey } from "./getChangeTypeKey";

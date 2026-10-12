@@ -80,6 +80,10 @@
   }
 }
 
+.locationTooltipPath {
+  overflow-wrap: anywhere;
+}
+
 .restrictedLabel {
   color: var(--info-panel-link-blocked);
 }

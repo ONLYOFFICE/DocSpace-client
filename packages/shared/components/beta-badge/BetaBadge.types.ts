@@ -34,7 +34,7 @@
  */
 
 import type { PlacesType } from "react-tooltip";
-import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
+import type { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 export type BetaBadgeProps = {
 	forumLinkUrl?: string;

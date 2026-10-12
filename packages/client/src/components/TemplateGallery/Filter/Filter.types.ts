@@ -34,23 +34,15 @@
  */
 
 import OformsFilter from "@docspace/shared/api/oforms/filter";
-import type { TOformParentCategory } from "@docspace/shared/api/oforms/types";
 
 export interface FilterContentProps {
   oformsFilter: OformsFilter;
-  noLocales: boolean;
-  menuItems: TOformParentCategory[];
+  filterOformsBySearch: (search: string) => void;
   filterOformsByLocaleIsLoading: boolean;
-  setLanguageFilterLoaded: (isLoaded: boolean) => void;
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
   setShowOneTile: (show: boolean) => void;
   isShowOneTile: boolean;
-  viewMobile: boolean;
   isShowInitSkeleton: boolean;
-  oformsLocal: string;
-  oformLocales: string[] | null;
-  filterOformsByLocale: (key: string) => Promise<void>;
-  filterOformsBySearch: (search: string) => void;
-  sortOforms: (sortBy: string, sortOrder: "asc" | "desc") => void;
+  onSelectedFiltersHeightChange: (height: number) => void;
 }

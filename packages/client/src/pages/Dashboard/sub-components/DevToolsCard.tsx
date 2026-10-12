@@ -63,9 +63,9 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
-import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Text } from "@docspace/ui-kit/components/text";
+import { CollapsibleCard } from "@onlyoffice/apps-ui-kit/components/collapsible-card";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import {
   hasDevToolsAccess,

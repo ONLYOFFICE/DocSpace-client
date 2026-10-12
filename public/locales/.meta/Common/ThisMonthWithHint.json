@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/usage/sub-components/PeriodSelect.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/sub-components/PeriodSelect.tsx",
       "line_number": 68,
       "context": "switch (period) {\n case \"thisMonth\":\n return (\n <CommonTrans\n i18nKey=\"ThisMonthWithHint\"\n values={{ month: current.toFormat(\"LLLL\") }}\n components={{ 1: hintSpan }}\n />\n );\n case \"lastMonth\":",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

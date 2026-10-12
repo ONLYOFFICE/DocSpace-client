@@ -40,8 +40,8 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
-import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
-import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
+import { Tabs, type TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
+import { LoaderWrapper } from "@onlyoffice/apps-ui-kit/components/loader-wrapper";
 import { getRoomMembers } from "@docspace/shared/api/rooms";
 import type { RoomMember } from "@docspace/shared/api/rooms/types";
 
@@ -52,7 +52,7 @@ import {
 } from "../../_utils/sectionFromPathname";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsTourStore } from "../../_store/FormsTourStore";
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 import { createMockRoomMembers } from "../../_utils/mockFormFiles";
 import styles from "../../_components/settings/category/SettingsPanel.module.scss";
 

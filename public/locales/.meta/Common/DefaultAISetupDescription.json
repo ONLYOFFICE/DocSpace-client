@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/settings/model-assignment/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/settings/model-assignment/index.tsx",
       "line_number": 61,
       "context": "className={styles.defaultSetupTitle}\n >\n {t(\"Common:DefaultAISetupTitle\")}\n </Heading>\n <Text lineHeight=\"20px\" className={styles.defaultSetupDescription}>\n {t(\"Common:DefaultAISetupDescription\")}\n </Text>\n </>\n }\n />\n );",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

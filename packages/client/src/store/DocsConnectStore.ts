@@ -51,8 +51,12 @@ import {
   getDocsConnectReportStatus,
   getDocsConnectConnection,
   hasDocsConnectTenant,
+  DocsConnectDeclinedError,
 } from "@docspace/shared/api/docs-connect";
-import type { TDocsConnectConnection } from "@docspace/shared/api/docs-connect";
+import type {
+  TDocsConnectConnection,
+  TDocsConnectDeclinedAction,
+} from "@docspace/shared/api/docs-connect";
 import { saveDeposite } from "@docspace/shared/api/portal";
 import {
   changeDocumentServiceLocation,
@@ -63,13 +67,13 @@ import type {
   TDocsConnectInfo,
   TDocsConnectConfigUpdate,
 } from "@docspace/shared/api/docs-connect/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   openStripeCheckout,
   pollUntil,
-} from "@docspace/ui-kit/billing/utils/stripe-flow";
-import type { TStripeCheckoutDeps } from "@docspace/ui-kit/billing/utils/stripe-flow";
-import { DOCS_CONNECT } from "@docspace/ui-kit/billing/constants";
+} from "@onlyoffice/apps-ui-kit/billing/utils/stripe-flow";
+import type { TStripeCheckoutDeps } from "@onlyoffice/apps-ui-kit/billing/utils/stripe-flow";
+import { DOCS_CONNECT } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
@@ -77,10 +81,30 @@ import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { isDocsConnectPaid } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
 
+import i18n from "../i18n";
+
 import type DocumentBuilderReportStore from "./DocumentBuilderReportStore";
 import { ReportType } from "./DocumentBuilderReportStore";
 
 export type BuyPlanMode = "trial" | "edit";
+
+const getDeclinedMessage = (action: TDocsConnectDeclinedAction) => {
+  switch (action) {
+    case "cancelPlan":
+      return i18n.t("DocsConnect:PlanCancellationFailed");
+    case "cancelScheduledChange":
+      return i18n.t("DocsConnect:ScheduledChangeCancellationFailed");
+    case "buyPlan":
+      return i18n.t("DocsConnect:PlanUpdateFailed");
+    case "switchToDevPack":
+      return i18n.t("DocsConnect:DevPackSwitchFailed");
+  }
+};
+
+const localizeDeclinedError = (error: unknown) =>
+  error instanceof DocsConnectDeclinedError
+    ? new Error(getDeclinedMessage(error.action))
+    : error;
 
 class DocsConnectStore {
   settingsStore: Nullable<SettingsStore> = null;
@@ -120,6 +144,8 @@ class DocsConnectStore {
   connection: Nullable<TDocsConnectConnection> = null;
 
   depositedTopUp: number = 0;
+
+  depositBaseCredits: number = 0;
 
   isPortalConnectionAvailable: boolean = false;
 
@@ -166,6 +192,7 @@ class DocsConnectStore {
       const info = await getDocsConnectInfo();
       runInAction(() => {
         this.info = info;
+        if (info) this.settleDepositedTopUp(info);
         // The page's own request answers the question too, so a card rendered
         // next to it never has to ask again.
         this.hasInstance = info != null;
@@ -292,7 +319,20 @@ class DocsConnectStore {
 
     runInAction(() => {
       this.info = info;
+      this.settleDepositedTopUp(info);
     });
+  };
+
+  private settleDepositedTopUp = (info: TDocsConnectInfo) => {
+    const credits = info.wallet?.availableCredits;
+
+    if (
+      this.depositedTopUp > 0 &&
+      credits != null &&
+      credits + 0.005 >= this.depositBaseCredits + this.depositedTopUp
+    ) {
+      this.depositedTopUp = 0;
+    }
   };
 
   private refreshInfo = () =>
@@ -304,8 +344,11 @@ class DocsConnectStore {
     const amount = Math.round(((topUp ?? 0) - this.depositedTopUp) * 100) / 100;
     if (amount <= 0) return;
 
+    const baseCredits = this.info?.wallet?.availableCredits ?? 0;
+
     await saveDeposite(amount, this.info?.wallet?.currency ?? "USD");
     runInAction(() => {
+      if (this.depositedTopUp === 0) this.depositBaseCredits = baseCredits;
       this.depositedTopUp += amount;
     });
   };
@@ -349,7 +392,7 @@ class DocsConnectStore {
       this.applyPurchase(info);
     } catch (error) {
       await this.refreshInfo();
-      throw error;
+      throw localizeDeclinedError(error);
     }
   };
 
@@ -454,14 +497,16 @@ class DocsConnectStore {
       this.applyPurchase(info);
     } catch (error) {
       await this.refreshInfo();
-      throw error;
+      throw localizeDeclinedError(error);
     }
   };
 
   cancelPlan = async () => {
     const info = await cancelDocsConnectPlan(
       this.info?.devPackEnabled ?? false,
-    );
+    ).catch((error) => {
+      throw localizeDeclinedError(error);
+    });
     runInAction(() => {
       this.info = info;
     });
@@ -473,7 +518,9 @@ class DocsConnectStore {
       this.info?.scheduledChange?.scheduledOnDevPack ??
         this.info?.devPackEnabled ??
         false,
-    );
+    ).catch((error) => {
+      throw localizeDeclinedError(error);
+    });
     runInAction(() => {
       this.info = info;
     });

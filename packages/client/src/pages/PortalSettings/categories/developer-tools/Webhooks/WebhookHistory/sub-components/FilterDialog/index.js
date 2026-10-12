@@ -35,11 +35,11 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { now, formatDate } from "@docspace/ui-kit/utils/date";
+import { now, formatDate } from "@onlyoffice/apps-ui-kit/utils/date";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
-import { Button } from "@docspace/ui-kit/components/button";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { useParams, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";

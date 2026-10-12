@@ -8,6 +8,7 @@
   "DeleteGroup": "Удалить группу",
   "DisablingRoomGroups": "Отключение групп комнат",
   "DisablingRoomGroupsDescription": "Группы будут сохранены, но скрыты. Включите их снова в разделе «Профиль» — «Управление файлами».",
+  "DisablingSpaceGroups": "Отключение групп пространств",
   "EditRoomGroups": "Редактировать группы комнат",
   "EditSpaceGroups": "Редактировать группы пространств",
   "EmptyGroupRoomsDescription": "Здесь нет комнат. Попробуйте добавить комнату или удалить эту группу.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Выбранные комнаты добавлены в <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Выбранные комнаты удалены из <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Выбранное пространство добавлено в <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Группировка пространств",
+  "SpaceGroupingDisabled": "Группировка пространств отключена",
+  "SpaceGroupingEnabled": "Группировка пространств включена",
+  "SpaceGroupingSettingDescription": "Вы можете группировать пространства по папкам и легко переключаться между ними.",
   "SpaceRemovedFromGroup": "Выбранное пространство удалено из <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Выбранные пространства добавлены в <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Выбранные пространства удалены из <1>{{groupName}}</1>."

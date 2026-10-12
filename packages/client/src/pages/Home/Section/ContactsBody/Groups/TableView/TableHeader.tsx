@@ -38,9 +38,9 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { NavigateFunction, Location } from "react-router";
 
-import { TableHeader, TTableColumn } from "@docspace/ui-kit/components/table";
+import { TableHeader, TTableColumn } from "@onlyoffice/apps-ui-kit/components/table";
 import { Events } from "@docspace/shared/enums";
-import { Nullable, TTranslation } from "@docspace/shared/types";
+import { TTranslation } from "@docspace/shared/types";
 
 import TableStore from "SRC_DIR/store/TableStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
@@ -73,7 +73,7 @@ type GroupsTableHeaderProps = {
   navigate: NavigateFunction;
   location: Location;
 
-  containerRef: React.RefObject<Nullable<React.ForwardedRef<HTMLDivElement>>>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
 };
 
 type GroupTableHeaderState = { columns: TableHeaderColumn[] };
@@ -195,7 +195,7 @@ class GroupsTableHeader extends React.Component<
       <TableHeader
         sorted={sorted}
         sortBy={sortBy}
-        containerRef={containerRef as unknown as { current: HTMLDivElement }}
+        containerRef={containerRef}
         columns={columns as TTableColumn[]}
         columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName!}

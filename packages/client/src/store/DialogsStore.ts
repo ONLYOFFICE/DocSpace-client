@@ -84,7 +84,7 @@ import type {
   IUpdateRoomGroup,
 } from "SRC_DIR/components/dialogs/EditRoomGroupsDialog/EditRoomGroupsDialog.types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
-import type { TModel } from "@docspace/ui-kit/components/room-icon";
+import type { TModel } from "@onlyoffice/apps-ui-kit/components/room-icon";
 
 import type InfoPanelStore from "./InfoPanelStore";
 import type SelectedFolderStore from "./SelectedFolderStore";
@@ -520,6 +520,8 @@ class DialogsStore {
   roomGroups: IRoomGroup[] = [];
 
   roomGroupsArea: RoomSearchArea = RoomSearchArea.Active;
+
+  private roomGroupsRequestId = 0;
 
   syncDbData: {
     operationId: Nullable<number>;
@@ -1381,9 +1383,12 @@ class DialogsStore {
   ) => {
     if (searchArea !== this.roomGroupsArea) this.setRoomGroups([], searchArea);
 
+    this.roomGroupsRequestId += 1;
+    const requestId = this.roomGroupsRequestId;
+
     const response = (await getRoomGroups(searchArea)) as IRoomGroup[];
 
-    if (searchArea !== this.roomGroupsArea) return;
+    if (requestId !== this.roomGroupsRequestId) return;
 
     this.setRoomGroups(response, searchArea);
   };

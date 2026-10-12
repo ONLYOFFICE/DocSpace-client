@@ -39,7 +39,7 @@ import {
   Events,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { splitFileAndFolderIds } from "@docspace/shared/utils/common";

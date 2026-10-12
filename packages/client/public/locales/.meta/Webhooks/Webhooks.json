@@ -3,7 +3,7 @@
   "content": "Webhooks",
   "content_en_sha1_hash": "fdfe2da709ca2c4f3b21ce6ad01969c1158e9db6",
   "created_at": "2025-05-19T21:30:49.888Z",
-  "updated_at": "2026-08-27T15:37:55.718Z",
+  "updated_at": "2026-09-16T20:56:59.537Z",
   "comment": {
     "text": "This is a page title and a card title in the Developer Tools settings. It refers to the functionality for configuring webhooks.",
     "is_auto": true,
@@ -11,6 +11,18 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/Body/DeveloperToolsItems.tsx",
+      "line_number": 86,
+      "context": "},\n {\n id: \"devtools-webhooks\",\n path: \"/developer-tools/webhooks\",\n pageType: PageType.devToolsWebhooks,\n translationKey: \"Webhooks:Webhooks\",\n },\n {\n id: \"devtools-oauth\",\n path: \"/developer-tools/oauth\",\n pageType: PageType.devToolsOAuth,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/DeveloperToolsSidebar/index.tsx",
+      "line_number": 109,
+      "context": "},\n {\n id: \"devtools-webhooks\",\n path: \"/developer-tools/webhooks\",\n pageType: PageType.devToolsWebhooks,\n translationKey: \"Webhooks:Webhooks\" as const,\n },\n {\n id: \"devtools-oauth\",\n path: \"/developer-tools/oauth\",\n pageType: PageType.devToolsOAuth,",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
       "line_number": 165,

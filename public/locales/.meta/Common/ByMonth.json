@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
       "line_number": 317,
       "context": "</div>\n );\n \n const items: TTabItem[] = [\n { id: \"services\", name: t(\"ByServices\"), content: null },\n { id: \"month\", name: t(\"ByMonth\"), content: null },\n ];\n \n return (\n <div className={styles.breakdown}>\n <div className={styles.breakdownHeader}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

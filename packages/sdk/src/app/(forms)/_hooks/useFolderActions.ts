@@ -44,8 +44,8 @@ import {
   startUploadSession,
   uploadChunkParallel,
 } from "@docspace/shared/api/files";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { createChunks, runWithConcurrency } from "@docspace/ui-kit/uploader";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { createChunks, runWithConcurrency } from "@onlyoffice/apps-ui-kit/uploader";
 import { usePathname } from "next/navigation";
 
 import { FormsSection } from "@/types/forms";

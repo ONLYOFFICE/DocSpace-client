@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
       "line_number": 325,
       "context": "return (\n <div className={styles.breakdown}>\n <div className={styles.breakdownHeader}>\n <div className={styles.breakdownTitle}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"SpendingBreakdown\")}\n </Text>\n <Text fontSize=\"13px\">{dateRangeText}</Text>\n </div>\n \n <Tabs",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

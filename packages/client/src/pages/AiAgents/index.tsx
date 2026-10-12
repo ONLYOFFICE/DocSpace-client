@@ -69,7 +69,7 @@ import AiAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.d
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
-import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import { AI_SETTINGS_URL } from "SRC_DIR/helpers/constants";
@@ -144,11 +144,16 @@ const navKeyFromPath = (
 type AiAgentsProps = {
   canManageAgents?: boolean;
   theme?: TTheme;
+  logoText?: string;
 };
 
-const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
+const AiAgentsComponent = ({
+  canManageAgents,
+  theme,
+  logoText,
+}: AiAgentsProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:AIAgents");
+  useDocumentTitle("Common:AIAgents", logoText);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const lastSdkKeyRef = React.useRef<string | null>(null);
@@ -265,6 +270,7 @@ export const AiAgents = inject<TStore>(
       userStore.user?.isRoomAdmin
     ),
     theme: settingsStore.theme,
+    logoText: settingsStore.logoText,
   }),
 )(observer(AiAgentsComponent));
 

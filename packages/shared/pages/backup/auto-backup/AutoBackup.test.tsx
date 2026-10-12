@@ -4,7 +4,7 @@ import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { BackupStorageType, FolderType } from "../../../enums";
-import { ButtonSize } from "@docspace/ui-kit/components/button";
+import { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import * as portalApi from "../../../api/portal";
 
 import AutomaticBackup from "./index";
@@ -20,14 +20,14 @@ vi.mock("../../../api/settings", () => ({
   getBackupStorage: vi.fn().mockResolvedValue(undefined),
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: {
     success: vi.fn(),
     error: vi.fn(),
   },
 }));
 
-vi.mock("@docspace/ui-kit/utils/socket", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
   default: {
     on: vi.fn(),
     off: vi.fn(),

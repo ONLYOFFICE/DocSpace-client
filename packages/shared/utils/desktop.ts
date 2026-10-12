@@ -36,13 +36,13 @@
 import isEmpty from "lodash/isEmpty";
 import omit from "lodash/omit";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { Nullable, TTranslation } from "../types";
 import type { TUser } from "../api/people/types";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
 
 import { desktopConstants, getEditorTheme } from "./common";
-import { checkIsSSR } from "@docspace/ui-kit/utils/device";
+import { checkIsSSR } from "@onlyoffice/apps-ui-kit/utils/device";
 import { createApiKey } from "../api/api-keys";
 import type { TApiKeyRequest } from "../api/api-keys/types";
 

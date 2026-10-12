@@ -60,11 +60,11 @@ vi.mock("../../utils/useClickOutside", () => ({
   useClickOutside: vi.fn(),
 }));
 
-vi.mock("@docspace/ui-kit/hooks/use-is-mobile", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/hooks/use-is-mobile", () => ({
   useIsMobile: vi.fn(() => false),
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { error: vi.fn(), success: vi.fn() },
 }));
 
@@ -153,3 +153,4 @@ describe("opening the list again", () => {
     });
   });
 });
+

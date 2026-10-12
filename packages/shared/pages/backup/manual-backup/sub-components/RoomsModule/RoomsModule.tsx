@@ -37,15 +37,15 @@ import { useTranslation } from "react-i18next";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { getFromLocalStorage } from "../../../../../utils";
 import { BackupStorageType, DeviceType } from "../../../../../enums";
 import { FilesSelectorInput } from "../../../../../components/files-selector-input";
 import { isNullOrUndefined } from "../../../../../utils/typeGuards";
 import BackupToPublicRoom from "../../../../../dialogs/backup-to-public-room-dialog";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type { FilesSelectorSettings } from "../../../../../components/files-selector-input";
 import type {
   BackupToPublicRoomOptionType,

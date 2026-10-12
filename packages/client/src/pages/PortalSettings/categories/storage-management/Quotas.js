@@ -35,13 +35,13 @@
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { isMobile } from "@docspace/shared/utils";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import styles from "./StyledComponent.module.scss";
 import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/Amount.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/Amount.tsx",
       "line_number": 146,
       "context": "<Text\n fontWeight=\"700\"\n fontSize=\"16px\"\n className={styles.amountTitleMain}\n >\n {t(\"AmountSelection\")}\n </Text>\n <div className={styles.amountTabItemsContainer}>\n {amountTabs.map((item) => (\n <TabItem\n key={item.id}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

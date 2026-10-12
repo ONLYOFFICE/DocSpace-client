@@ -47,11 +47,11 @@ import {
 import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import { ArticleItem } from "@docspace/ui-kit/components/article/item";
-import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
+import { ArticleItem } from "@onlyoffice/apps-ui-kit/components/article/item";
+import { DragAndDrop } from "@onlyoffice/apps-ui-kit/components/drag-and-drop";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import BonusItem from "./BonusItem";

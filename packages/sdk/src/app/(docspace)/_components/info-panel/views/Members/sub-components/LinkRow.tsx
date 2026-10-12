@@ -38,9 +38,9 @@
 import React from "react";
 import copy from "copy-to-clipboard";
 import type { DateTime } from "luxon";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { ShareAccessRights } from "@docspace/ui-kit/enums";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import type { TFileLink } from "@docspace/shared/api/files/types";
@@ -58,7 +58,7 @@ import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 import type { LinkRowProps } from "../Members.types";
 import styles from "../Members.module.scss";
 import DeleteLinkDialog from "./DeleteLinkDialog";
-import { addToDate, now } from "@docspace/ui-kit/utils/date";
+import { addToDate, now } from "@onlyoffice/apps-ui-kit/utils/date";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 
 const MIN_LOADER_TIME = 200;

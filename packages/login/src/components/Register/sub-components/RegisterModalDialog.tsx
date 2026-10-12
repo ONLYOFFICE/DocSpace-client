@@ -36,15 +36,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { EmailInput } from "@docspace/ui-kit/components/email-input";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { EmailInput } from "@onlyoffice/apps-ui-kit/components/email-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { TenantTrustedDomainsType } from "@docspace/shared/enums";
 
 import { RegisterModalDialogProps } from "@/types";

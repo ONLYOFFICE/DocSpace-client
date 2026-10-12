@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageContent.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageContent.tsx",
       "line_number": 101,
       "context": ");\n \n return (\n <div className={styles.content} data-testid=\"token_usage_content\">\n <div className={styles.title}>\n {t(\"TokenUsageTitle\", { total: format(usage.totalTokens) })}\n </div>\n <div className={styles.bar}>\n {bar.map((segment) => (\n <span\n key={segment}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

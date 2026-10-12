@@ -38,7 +38,7 @@ import { isMobile, isIOS } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router";
 import SmartBanner from "react-smartbanner";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import "./main.css";
 
 const ReactSmartBanner = (props) => {

@@ -36,10 +36,10 @@ import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { RoomLogoCover as UIKitRoomLogoCover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
-import { getRoomTitle } from "@docspace/ui-kit/components";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import type { ICover } from "@docspace/ui-kit/types";
+import { RoomLogoCover as UIKitRoomLogoCover } from "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog";
+import { getRoomTitle } from "@onlyoffice/apps-ui-kit/components";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import type { ICover } from "@onlyoffice/apps-ui-kit/types";
 
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 

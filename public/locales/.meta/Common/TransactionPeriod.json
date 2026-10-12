@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
       "line_number": 136,
       "context": "<div className={styles.filterDialogDivider} />\n </>\n ) : null}\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"TransactionPeriod\")}\n </Text>\n <div>{datesComponent}</div>\n </div>\n <div className={styles.filterDialogDivider} />\n <div className={styles.filterDialogSection}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

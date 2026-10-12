@@ -40,7 +40,7 @@ import { useTranslation } from "react-i18next";
 
 import type { TUser } from "@docspace/shared/api/people/types";
 import { RoomsType } from "@docspace/shared/enums";
-import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
+import { ProgressBar } from "@onlyoffice/apps-ui-kit/components/progress-bar";
 
 import InvitePanel from "@/app/(rooms)/_components/invite-panel";
 

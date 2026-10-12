@@ -46,7 +46,7 @@ import { getGroupById } from "@docspace/shared/api/groups";
 import {
   TGroupItem,
   TItem,
-} from "@docspace/ui-kit/components/filter/Filter.types";
+} from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
 import {
   AccountLoginType,
   EmployeeStatus,

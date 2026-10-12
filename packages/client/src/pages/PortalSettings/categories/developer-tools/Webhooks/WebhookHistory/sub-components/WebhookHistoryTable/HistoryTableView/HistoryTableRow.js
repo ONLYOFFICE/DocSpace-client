@@ -43,12 +43,12 @@ import { useTranslation } from "react-i18next";
 
 import { retryWebhook } from "@docspace/shared/api/settings";
 
-import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { TableRow, TableCell } from "@onlyoffice/apps-ui-kit/components/table";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 

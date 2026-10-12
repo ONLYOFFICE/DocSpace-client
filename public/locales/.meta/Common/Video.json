@@ -3,7 +3,7 @@
   "content": "Video",
   "content_en_sha1_hash": "bc17c1f0179a888f2a7e8389f67d4f2cf5cf4531",
   "created_at": "2025-05-19T21:30:49.512Z",
-  "updated_at": "2026-07-07T08:59:21.823Z",
+  "updated_at": "2026-09-16T20:56:59.739Z",
   "comment": {
     "text": "This is a file type label, appearing in lists or details to identify a video file.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
       "line_number": 61,
       "context": "case FileType.Unknown:\n return fileTypeName || t(\"Common:Unknown\");\n case FileType.Archive:\n return t(\"Common:Archive\");\n case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/constants/index.ts",
+      "line_number": 71,
+      "context": "export const FILE_TYPE_CATEGORIES: FileTypeCategory[] = [\n { key: \"document\", labelKey: \"Common:Documents\" },\n { key: \"spreadsheet\", labelKey: \"Common:Spreadsheets\" },\n { key: \"presentation\", labelKey: \"Common:Presentations\" },\n { key: \"image\", labelKey: \"Common:Images\" },\n { key: \"video\", labelKey: \"Common:Video\" },\n { key: \"audio\", labelKey: \"Common:Audio\" },\n { key: \"archive\", labelKey: \"Common:Archives\" },\n { key: \"pdf\", constLabelKey: \"PDF\" },\n ];",
       "module": "/packages/client"
     },
     {

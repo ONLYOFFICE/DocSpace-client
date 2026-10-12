@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
       "line_number": 185,
       "context": "}: { plan: string; service: string; storage: string },\n ): TFlavorContent => {\n switch (flavor) {\n case PaymentFlavor.Tariff:\n return {\n processingTitle: t(\"Common:WalletTopUpCallbackProcessingTitle\"),\n processingHint: t(\"Common:WalletTopUpCallbackProcessingHint\"),\n activateStepLabel: \"\",\n successTitle: t(\"Common:PlanActivated\", { planName: plan }),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:GoToTariffPlan\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
       "line_number": 185,
       "context": "}: { plan: string; service: string; storage: string },\n ): TFlavorContent => {\n switch (flavor) {\n case PaymentFlavor.Tariff:\n return {\n processingTitle: t(\"Common:WalletTopUpCallbackProcessingTitle\"),\n processingHint: t(\"Common:WalletTopUpCallbackProcessingHint\"),\n activateStepLabel: \"\",\n successTitle: t(\"Common:PlanActivated\", { planName: plan }),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:GoToTariffPlan\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
       "line_number": 185,
       "context": "}: { plan: string; service: string; storage: string },\n ): TFlavorContent => {\n switch (flavor) {\n case PaymentFlavor.Tariff:\n return {\n processingTitle: t(\"Common:WalletTopUpCallbackProcessingTitle\"),\n processingHint: t(\"Common:WalletTopUpCallbackProcessingHint\"),\n activateStepLabel: \"\",\n successTitle: t(\"Common:PlanActivated\", { planName: plan }),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:GoToTariffPlan\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

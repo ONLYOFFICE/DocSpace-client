@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/uploader/index.tsx",
       "line_number": 325,
       "context": "const uploadedFiles = await uploadFiles(filesToUpload);\n const folderUrl = getFolderUrl?.(folderTargetId);\n \n toastr.success(\n <>\n {getCommonTranslation(\"ItemsSuccessfullyUploaded\", {\n count: filesToUpload.length,\n })}\n {folderUrl && (\n <>\n <br />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/store/uploadDataStore/finish.helpers.tsx",

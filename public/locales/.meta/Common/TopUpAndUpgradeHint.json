@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
       "line_number": 206,
       "context": "{canTopUpAndBuy ? (\n <Text as=\"span\">\n <Trans\n ns=\"Common\"\n i18nKey=\"TopUpAndUpgradeHint\"\n components={{\n 1: <Text fontWeight=\"600\" as=\"span\"></Text>,\n }}\n values={{\n currency: formatWalletCurrency(recommendedAmount, 2),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

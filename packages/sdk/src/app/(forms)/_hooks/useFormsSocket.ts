@@ -42,7 +42,7 @@ import SocketHelper, {
   SocketCommands,
   SocketEvents,
   type TOptSocket,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 export default function useFormsSocket(
   socketUrl: string,

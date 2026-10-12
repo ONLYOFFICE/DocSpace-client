@@ -38,13 +38,13 @@
 import React, { useState, useCallback } from "react";
 
 import { EDITOR_ID } from "@docspace/shared/constants";
-import { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import {
 	TFileSecurity,
 	TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { TSelectedFileInfo } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import { TSelectedFileInfo } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 
 import { TEventData } from "@/types";
 import { saveAs } from "@/utils";

@@ -36,7 +36,7 @@ import { useState, useEffect } from "react";
 import {
   tablet,
   isTablet as isTabletUtil,
-} from "@docspace/ui-kit/utils/device";
+} from "@onlyoffice/apps-ui-kit/utils/device";
 
 export function useIsTable() {
   const [isTable, setIsTable] = useState<boolean>(() => isTabletUtil());

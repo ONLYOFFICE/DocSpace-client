@@ -67,7 +67,7 @@ import isEqual from "lodash/isEqual";
 import type { TFunction } from "i18next";
 
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { Nullable } from "@docspace/shared/types";
 import {
   addEntityMcpServer,

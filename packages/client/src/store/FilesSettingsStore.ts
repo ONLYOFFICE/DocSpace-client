@@ -63,9 +63,9 @@ import {
   isPublicPreview,
   insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
-import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
+import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import i18n from "../i18n";
@@ -193,6 +193,10 @@ class FilesSettingsStore {
   // resolves and overwrites it with the stored one.
   showQuickActions = true;
 
+  private quickActionsRequest = 0;
+
+  private quickActionsApplied = 0;
+
   extsFilesVectorized: string[] = [];
 
   externalShare = true;
@@ -233,7 +237,7 @@ class FilesSettingsStore {
       // in ui-kit's TListenEventCallbackMap, so `on` expects a zero-argument
       // listener, while the server actually sends the access-control settings
       // payload. The cast keeps the original callback untouched without
-      // modifying libs/ui-kit.
+      // modifying ui-kit.
       ((settings: TAccessControlSettings) => {
         this.externalShare = settings.externalShare;
         this.defaultShareLinkInternal = settings.defaultShareLinkInternal;
@@ -421,31 +425,34 @@ class FilesSettingsStore {
       .catch((e) => toastr.error(e as string));
   };
 
-  // Applied before the request resolves: the caller hides the banner and
-  // raises its toast in the same gesture, so waiting for the round trip would
-  // leave the tiles on screen under a toast announcing they are gone. A
-  // rejected request puts the previous value back.
   setShowQuickActions = async (data: boolean) => {
-    const previous = this.showQuickActions;
-    this.showQuickActions = data;
+    const request = ++this.quickActionsRequest;
 
     try {
       const res = await api.files.changeShowQuickActions(data);
-      this.setFilesSetting("showQuickActions", res);
+      if (request > this.quickActionsApplied) {
+        this.quickActionsApplied = request;
+        this.setFilesSetting("showQuickActions", res);
+      }
+      return true;
     } catch (e) {
-      this.showQuickActions = previous;
-      toastr.error(e as string);
+      if (request === this.quickActionsRequest) toastr.error(e as string);
+      return false;
     }
   };
 
-  setOrganizeRoomsGrouping = async (data: boolean) => {
+  setOrganizeRoomsGrouping = async (data: boolean, isSpaces = false) => {
     try {
       const res = await setOrganizeGrouping(data);
       this.setFilesSetting("organizeRoomsGrouping", res);
 
-      const message = res
-        ? i18n.t("GroupingRooms:RoomGroupingEnabled")
-        : i18n.t("GroupingRooms:RoomGroupingDisabled");
+      const message = isSpaces
+        ? res
+          ? i18n.t("GroupingRooms:SpaceGroupingEnabled")
+          : i18n.t("GroupingRooms:SpaceGroupingDisabled")
+        : res
+          ? i18n.t("GroupingRooms:RoomGroupingEnabled")
+          : i18n.t("GroupingRooms:RoomGroupingDisabled");
       toastr.success(message);
 
       return res;

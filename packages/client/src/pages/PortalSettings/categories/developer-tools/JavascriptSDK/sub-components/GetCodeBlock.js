@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 import { useState } from "react";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import GetCodeDialog from "./GetCodeDialog";
 
 import { GetCodeButtonWrapper } from "../presets/StyledPresets";

@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/PaymentContainer.tsx",
       "line_number": 339,
       "context": "fontSize=\"14px\"\n className={styles.paymentInfoManagersPrice}\n >\n {isYearTariff ? (\n <CommonTrans\n i18nKey=\"PerUserYear\"\n values={{ price: formatPaymentCurrency(startValue) }}\n components={{ 1: <span key=\"price-span\" /> }}\n />\n ) : (\n <CommonTrans",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/PriceCalculation.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/PriceCalculation.tsx",
       "line_number": 128,
       "context": "[styles.isDisabled]: isDisabled,\n })}\n >\n {isYearTariff ? (\n <CommonTrans\n i18nKey=\"PerUserYear\"\n values={{ price: formatPaymentCurrency(priceManagerPerMonth) }}\n components={{\n 1: <strong key=\"price-year\" style={{ fontSize: \"16px\" }} />,\n }}\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
       "line_number": 128,
       "context": "// saas admin: activation is one click (or a top-up) away\n .with([false, true], () =>\n t(\"EmptyAIChatNotActiveYetAdminDescription\", { aiChat }),\n )\n // saas user\n .otherwise(() => t(\"EmptyAIChatNotActiveYetUserDescription\", { aiChat }));\n \n // The OpenRouter models / pricing / wallet rows only describe the SaaS\n // offering; a standalone portal pays its own AI provider directly.\n return { title, description, showBenefits: !standalone };\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

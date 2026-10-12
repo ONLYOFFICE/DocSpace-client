@@ -45,7 +45,7 @@ import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { PlaylistType } from "@docspace/shared/components/media-viewer/MediaViewer.types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { matchesUserRole } from "SRC_DIR/helpers/plugins/roles";
@@ -76,9 +76,9 @@ type TMediaViewerData = {
 
 // `pdfViewer` exists in public/scripts/config.json but is
 // missing from the duplicated Window.ClientConfig declarations
-// (packages/shared/types/index.ts and the libs/ui-kit submodule's
+// (packages/shared/types/index.ts and ui-kit's
 // utils/openingNewTab/index.ts). Both declarations must be updated in sync
-// (TS2717) and ui-kit is a separate submodule, so a local cast is used here
+// (TS2717) and ui-kit is a separate repository, so a local cast is used here
 // until the field can be added to both.
 type TClientConfigWithPdfViewer = NonNullable<Window["ClientConfig"]> & {
   pdfViewer?: boolean;

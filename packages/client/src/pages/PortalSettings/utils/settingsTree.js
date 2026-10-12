@@ -493,6 +493,13 @@ export const settingsTree = [
             link: "quota-per-user",
             tKey: "QuotaPerUser",
           },
+          {
+            id: "portal-settings_catalog-storageManagement_quota-per-ai-agent",
+            key: "6-0-3",
+            icon: "",
+            link: "quota-per-ai-agent",
+            tKey: "QuotaPerAIAgent",
+          },
         ],
       },
     ],

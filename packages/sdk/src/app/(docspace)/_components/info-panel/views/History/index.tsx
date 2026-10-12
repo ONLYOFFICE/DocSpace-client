@@ -77,7 +77,7 @@ import {
   now as dateNow,
   parseToDateTime,
   subtractFromDate,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";
 

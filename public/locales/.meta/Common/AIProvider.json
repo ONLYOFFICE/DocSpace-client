@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
       "line_number": 67,
       "context": "}: Omit<NoAccessCopyProps, \"isAgents\">): NoAccessCopy => {\n const title = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"AIProvider\"),\n }),\n )\n // saas (admin + user)\n .with([false, P._], () => t(\"EmptyAIAgentsNotActiveYetTitle\"))\n // standalone user",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",

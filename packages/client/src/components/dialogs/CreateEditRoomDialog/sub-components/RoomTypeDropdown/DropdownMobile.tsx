@@ -37,8 +37,8 @@ import React from "react";
 
 import RoomType from "@docspace/shared/components/room-type";
 import { getCreateRoomTypes } from "@docspace/shared/utils/rooms";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { Portal } from "@docspace/ui-kit/components/portal";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { RoomsType } from "@docspace/shared/enums";
 
 import styles from "../../CreateEditRoomDialog.module.scss";

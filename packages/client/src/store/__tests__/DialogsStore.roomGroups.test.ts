@@ -95,6 +95,26 @@ describe("DialogsStore — room groups per section", () => {
     expect(store.roomGroups.map((g) => g.id)).toEqual(["forms-1"]);
   });
 
+  it("drops a stale response for the same section", async () => {
+    const store = createStore();
+
+    let resolveFirst: (value: unknown) => void = () => {};
+    const firstResponse = new Promise((resolve) => {
+      resolveFirst = resolve;
+    });
+
+    getRoomGroups.mockReturnValueOnce(firstResponse);
+    const firstRequest = store.getAllRoomGroups(RoomSearchArea.Forms);
+
+    getRoomGroups.mockResolvedValueOnce([group("forms-new")]);
+    await store.getAllRoomGroups(RoomSearchArea.Forms);
+
+    resolveFirst([group("forms-old")]);
+    await firstRequest;
+
+    expect(store.roomGroups.map((g) => g.id)).toEqual(["forms-new"]);
+  });
+
   it("clears the previous section's groups before fetching", async () => {
     const store = createStore();
     getRoomGroups.mockResolvedValueOnce([group("active-1")]);

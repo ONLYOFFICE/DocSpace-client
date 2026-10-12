@@ -38,8 +38,8 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import Section from "@docspace/ui-kit/components/section";
-import type { TViewAs } from "@docspace/ui-kit/types";
+import Section from "@onlyoffice/apps-ui-kit/components/section";
+import type { TViewAs } from "@onlyoffice/apps-ui-kit/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import useShowFilterParam from "@/hooks/useShowFilterParam";

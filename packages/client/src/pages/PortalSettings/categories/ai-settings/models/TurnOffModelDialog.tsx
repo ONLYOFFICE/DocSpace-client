@@ -36,14 +36,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import styles from "./TurnOffModelDialog.module.scss";
 

@@ -40,12 +40,12 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 
 import type { TRoom } from "@docspace/shared/api/rooms/types";

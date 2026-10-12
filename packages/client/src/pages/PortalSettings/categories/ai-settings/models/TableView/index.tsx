@@ -37,8 +37,8 @@ import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
-import { Text } from "@docspace/ui-kit/components/text";
+import { TableBody, TableContainer } from "@onlyoffice/apps-ui-kit/components/table";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
@@ -77,8 +77,8 @@ type ModelSettingsTableViewProps = {
 
   userId?: string;
   aiToolsPrices?: ServicesStore["aiToolsPrices"];
+  formatAiModelPrice?: ServicesStore["formatAiModelPrice"];
   aiModelsCurrencySymbol?: ServicesStore["aiModelsCurrencySymbol"];
-  formatAiModelsCurrency?: ServicesStore["formatAiModelsCurrency"];
   setAiModelAvailability?: ServicesStore["setAiModelAvailability"];
   aiModelAvailabilityMap?: ServicesStore["aiModelAvailabilityMap"];
   aiModelAvailabilityUpdatingSet?: ServicesStore["aiModelAvailabilityUpdatingSet"];
@@ -89,8 +89,8 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     sectionWidth,
     userId,
     aiToolsPrices,
+    formatAiModelPrice = () => "",
     aiModelsCurrencySymbol = "$",
-    formatAiModelsCurrency,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
@@ -110,11 +110,8 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     requestToggle({ id: modelId, title: model?.alias ?? modelId }, enabled);
   };
 
-  const formatPrice = (value?: number) =>
-    value == null ? "" : (formatAiModelsCurrency?.(value) ?? "");
-
   const cacheBreakdown = (price?: TAiModelPrice) =>
-    buildCachePriceBreakdown(price, aiModelsCurrencySymbol, formatPrice);
+    buildCachePriceBreakdown(price, aiModelsCurrencySymbol, formatAiModelPrice);
 
   const chatRows: TModelRow[] = chatModels.map((m) => ({
     id: m.id,
@@ -122,11 +119,11 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     image: m.image,
     link: m.link,
     prices: [
-      { key: "input", value: formatPrice(m.price?.prompt) },
-      { key: "output", value: formatPrice(m.price?.completion) },
+      { key: "input", value: formatAiModelPrice(m.price?.prompt) },
+      { key: "output", value: formatAiModelPrice(m.price?.completion) },
       {
         key: "cachedInput",
-        value: formatPrice(m.price?.promptCacheRead),
+        value: formatAiModelPrice(m.price?.promptCacheRead),
         breakdown: cacheBreakdown(m.price),
       },
     ],
@@ -138,9 +135,9 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     image: m.image,
     link: m.link,
     prices: [
-      { key: "imageInput", value: formatPrice(m.price?.prompt) },
-      { key: "imageOutput", value: formatPrice(m.price?.image) },
-      { key: "output", value: formatPrice(m.price?.completion) },
+      { key: "imageInput", value: formatAiModelPrice(m.price?.prompt) },
+      { key: "imageOutput", value: formatAiModelPrice(m.price?.image) },
+      { key: "output", value: formatAiModelPrice(m.price?.completion) },
     ],
   }));
 
@@ -235,8 +232,8 @@ const TableView = (props: ModelSettingsTableViewProps) => {
 export default inject<TStore>(({ servicesStore, userStore }) => {
   const {
     aiToolsPrices,
+    formatAiModelPrice,
     aiModelsCurrencySymbol,
-    formatAiModelsCurrency,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
@@ -247,8 +244,8 @@ export default inject<TStore>(({ servicesStore, userStore }) => {
   return {
     userId: user?.id,
     aiToolsPrices,
+    formatAiModelPrice,
     aiModelsCurrencySymbol,
-    formatAiModelsCurrency,
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,

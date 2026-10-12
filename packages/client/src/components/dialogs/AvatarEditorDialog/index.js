@@ -37,8 +37,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { AvatarEditorDialog as AvatarEditorDialogUI } from "@docspace/ui-kit/components/avatar-editor-dialog";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { AvatarEditorDialog as AvatarEditorDialogUI } from "@onlyoffice/apps-ui-kit/components/avatar-editor-dialog";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { loadAvatar } from "@docspace/shared/api/people";
 import { dataUrlToFile } from "@docspace/shared/utils/dataUrlToFile";

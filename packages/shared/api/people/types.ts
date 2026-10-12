@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { ThemeKeys } from "@docspace/ui-kit/enums";
+import type { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
 import type {
   EmployeeActivationStatus,
   EmployeeStatus,

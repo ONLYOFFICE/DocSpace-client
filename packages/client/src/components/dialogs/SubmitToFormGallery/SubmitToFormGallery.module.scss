@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@docspace/ui-kit/styles/variables/colors" as *;
+@use "@onlyoffice/apps-ui-kit/styles/variables/colors" as *;
 
 .submitToFormGalleryModal {
   :global(.info) {
@@ -58,6 +58,8 @@
     border-radius: 6px;
     padding: 4px;
     width: max-content;
+    max-width: 100%;
+    box-sizing: border-box;
     user-select: none;
 
     :global(.dark) & {
@@ -66,6 +68,7 @@
   }
 
   :global(.icon) {
+    flex-shrink: 0;
     width: 24px;
     height: 24px;
     margin-inline-end: 4px;

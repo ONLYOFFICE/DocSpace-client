@@ -8,6 +8,7 @@
   "DeleteGroup": "Grup sil",
   "DisablingRoomGroups": "Oda gruplarını devre dışı bırakma",
   "DisablingRoomGroupsDescription": "Gruplar kaydedilecek ancak gizlenecektir. Profil, Dosya yönetimi'nden yeniden etkinleştirin.",
+  "DisablingSpaceGroups": "Alan gruplarını devre dışı bırakma",
   "EditRoomGroups": "Oda gruplarını düzenle",
   "EditSpaceGroups": "Alan gruplarını düzenle",
   "EmptyGroupRoomsDescription": "Burada oda yok. Bir oda eklemeyi veya bu grubu kaldırmayı deneyin.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Seçilen odalar <1>{{groupName}}</1>'a eklendi.",
   "RoomsRemovedFromGroup": "Seçilen odalar <1>{{groupName}}</1>'dan kaldırıldı.",
   "SpaceAddedToGroup": "Seçilen alan <1>{{groupName}}</1> grubuna eklendi.",
+  "SpaceGrouping": "Alan gruplama",
+  "SpaceGroupingDisabled": "Alan gruplama devre dışı",
+  "SpaceGroupingEnabled": "Alan gruplama etkinleştirildi",
+  "SpaceGroupingSettingDescription": "Alanları klasörlere gruplayabilir ve aralarında kolayca geçiş yapabilirsiniz.",
   "SpaceRemovedFromGroup": "Seçilen alan <1>{{groupName}}</1> grubundan kaldırıldı.",
   "SpacesAddedToGroup": "Seçilen alanlar <1>{{groupName}}</1> grubuna eklendi.",
   "SpacesRemovedFromGroup": "Seçilen alanlar <1>{{groupName}}</1> grubundan kaldırıldı."

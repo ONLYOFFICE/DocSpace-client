@@ -482,7 +482,7 @@ test.describe("Room header crowding - invariants", () => {
    * first, the AI chat button drops to its bare icon second, and only then may
    * anything else start losing text. What sequences the last two is which side
    * of the header row carries the larger flex-shrink
-   * (libs/ui-kit/components/navigation/Navigation.module.scss): the button row
+   * (ui-kit's components/navigation/Navigation.module.scss): the button row
    * does, so the first ~64px of any deficit is spent on the chat label and the
    * title is only squeezed after that. This used to be inverted, and the chat
    * button kept its label while its neighbours were cut.

@@ -34,7 +34,7 @@
  */
 
 import React, { useEffect } from "react";
-import Section from "@docspace/ui-kit/components/section";
+import Section from "@onlyoffice/apps-ui-kit/components/section";
 import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";

@@ -8,6 +8,7 @@
   "DeleteGroup": "Fshij grupin",
   "DisablingRoomGroups": "Disaktivizimi i grupeve të dhomave",
   "DisablingRoomGroupsDescription": "Grupet do të ruhen por të fshehura. Riaktivizoni në Profil, Menaxhimi i skedarëve.",
+  "DisablingSpaceGroups": "Çaktivizimi i grupeve të hapësirave",
   "EditRoomGroups": "Redaktoni grupet e dhomave",
   "EditSpaceGroups": "Redaktoni grupet e hapësirave",
   "EmptyGroupRoomsDescription": "Nuk ka dhoma këtu. Provoni të shtoni një dhomë ose hiqni këtë grup.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Dhoma të zgjedhura u shtoën në <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Dhomat e zgjedhura u janë hequr nga <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Hapësira e zgjedhur është shtuar në <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Grupimi i hapësirave",
+  "SpaceGroupingDisabled": "Grupimi i hapësirave është çaktivizuar",
+  "SpaceGroupingEnabled": "Grupimi i hapësirave është aktivizuar",
+  "SpaceGroupingSettingDescription": "Ju mund të gruponi hapësirat në dosje dhe të kaloni lehtësisht ndërmjet tyre.",
   "SpaceRemovedFromGroup": "Hapësira e zgjedhur është hequr nga <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Hapësirat e zgjedhura janë shtuar në <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Hapësirat e zgjedhura janë hequr nga <1>{{groupName}}</1>."

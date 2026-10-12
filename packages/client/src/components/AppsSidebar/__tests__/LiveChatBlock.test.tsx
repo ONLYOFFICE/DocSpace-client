@@ -38,7 +38,8 @@
  *
  * The unified sidebar replaced the old article, and with it the only place that
  * mounted the Zendesk widget, so the switch had nothing to show. These tests pin
- * the widget to the sidebar and the store flag that drives it.
+ * the widget to the sidebar, the store flag that drives it, and the corner
+ * flags that keep its launcher off the create and progress buttons.
  */
 
 import React from "react";
@@ -47,16 +48,25 @@ import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock(
-  "@docspace/ui-kit/components/article/sub-components/LiveChat",
+  "@onlyoffice/apps-ui-kit/components/article/sub-components/LiveChat",
   () => ({
     default: ({
       zendeskKey,
       isShowLiveChat,
+      withFloatingButton,
+      isInfoPanelVisible,
     }: {
       zendeskKey: string;
       isShowLiveChat: boolean;
+      withFloatingButton: boolean;
+      isInfoPanelVisible: boolean;
     }) => (
-      <span data-testid="zendesk" data-show={String(isShowLiveChat)}>
+      <span
+        data-testid="zendesk"
+        data-show={String(isShowLiveChat)}
+        data-with-floating-button={String(withFloatingButton)}
+        data-with-info-panel={String(isInfoPanelVisible)}
+      >
         {zendeskKey}
       </span>
     ),
@@ -65,18 +75,27 @@ vi.mock(
 
 import LiveChatBlock from "../LiveChatBlock";
 
-const renderComponent = (isLiveChatAvailable: boolean) =>
+const renderComponent = (
+  isLiveChatAvailable: boolean,
+  mainButtonVisible = false,
+  {
+    isPrimaryProgressVisbile = false,
+    isSecondaryProgressVisbile = false,
+    downloadingProgress = 0,
+    isInfoPanelVisible = false,
+  } = {},
+) =>
   render(
     <Provider
       authStore={{ isLiveChatAvailable, languageBaseName: "en" }}
-      settingsStore={{ zendeskKey: "zendesk-key", isMobileArticle: false }}
-      userStore={{ user: { email: "user@example.com", displayName: "User" } }}
+      settingsStore={{ zendeskKey: "zendesk-key" }}
+      filesStore={{ mainButtonVisible }}
       uploadDataStore={{
-        primaryProgressDataStore: { isPrimaryProgressVisbile: false },
-        secondaryProgressDataStore: { isSecondaryProgressVisbile: false },
+        primaryProgressDataStore: { isPrimaryProgressVisbile },
+        secondaryProgressDataStore: { isSecondaryProgressVisbile },
       }}
-      infoPanelStore={{ isVisible: false }}
-      backup={{ downloadingProgress: 0 }}
+      infoPanelStore={{ isVisible: isInfoPanelVisible }}
+      backup={{ downloadingProgress }}
       profileActionsStore={{ isShowLiveChat: true }}
     >
       <LiveChatBlock />
@@ -91,6 +110,51 @@ describe("AppsSidebar LiveChatBlock", () => {
 
     expect(zendesk).toHaveTextContent("zendesk-key");
     expect(zendesk).toHaveAttribute("data-show", "true");
+  });
+
+  it("tells the widget to step aside for the mobile create button", () => {
+    // The widget is placed by script, in the same corner as the create button,
+    // so the button's own visibility flag is the only thing that keeps the two
+    // off each other.
+    renderComponent(true, true);
+
+    expect(screen.getByTestId("zendesk")).toHaveAttribute(
+      "data-with-floating-button",
+      "true",
+    );
+  });
+
+  it.each([
+    ["an upload", { isPrimaryProgressVisbile: true }],
+    ["a file operation", { isSecondaryProgressVisbile: true }],
+    ["a backup download", { downloadingProgress: 40 }],
+  ])("steps aside from the progress button during %s", (_, progress) => {
+    // OperationsProgressButton is pinned to the same corner on desktop, where
+    // there is no create button, and would otherwise sit under the launcher.
+    renderComponent(true, false, progress);
+
+    expect(screen.getByTestId("zendesk")).toHaveAttribute(
+      "data-with-floating-button",
+      "true",
+    );
+  });
+
+  it("keeps the widget in the corner while nothing else is there", () => {
+    renderComponent(true);
+
+    expect(screen.getByTestId("zendesk")).toHaveAttribute(
+      "data-with-floating-button",
+      "false",
+    );
+  });
+
+  it("tells the widget when the info panel is docked beside the corner", () => {
+    renderComponent(true, false, { isInfoPanelVisible: true });
+
+    expect(screen.getByTestId("zendesk")).toHaveAttribute(
+      "data-with-info-panel",
+      "true",
+    );
   });
 
   it("stays out of the page when live chat is not available", () => {

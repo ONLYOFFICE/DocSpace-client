@@ -37,7 +37,7 @@
 // Data: public/locales/.constants/brands.json
 import { parseLocaleConstants } from "./parse-locale-constants";
 import rawData from "../../../public/locales/.constants/brands.json";
-import { setBrandLookup } from "@docspace/ui-kit/constants/brands";
+import { setBrandLookup } from "@onlyoffice/apps-ui-kit/constants/brands";
 
 const { get, keys } = parseLocaleConstants(rawData as Record<string, string>);
 

@@ -37,15 +37,15 @@ import path from "path";
 
 import { cookies, headers } from "next/headers";
 
-import { Toast } from "@docspace/ui-kit/components/toast";
+import { Toast } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TenantStatus } from "@docspace/shared/enums";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { SYSTEM_THEME_KEY } from "@onlyoffice/apps-ui-kit/providers/theme/themes/constants";
 import {
   getDirectionByLanguage,
   getFontFamilyDependingOnLanguage,
-} from "@docspace/ui-kit/providers/theme/rtl-utils";
+} from "@onlyoffice/apps-ui-kit/providers/theme/rtl-utils";
 import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { getLinkPreview } from "@docspace/shared/utils/link-preview";
@@ -60,6 +60,7 @@ import {
   getUser,
   getWhiteLabelLogos,
 } from "@/utils/actions";
+
 import "../styles/globals.scss";
 import "@docspace/shared/styles/theme.scss";
 import Scripts from "@/components/Scripts";
@@ -169,8 +170,12 @@ export default async function RootLayout({
 
   const translations = await loadTranslationsForLocale(locale || "en", {
     namespaces: LOGIN_NAMESPACES,
-    appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
-    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
+    appLocalesDir:
+      process.env.NEXT_APP_LOCALES_DIR ??
+      path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir:
+      process.env.NEXT_SHARED_LOCALES_DIR ??
+      path.join(process.cwd(), "../../public/locales"),
   });
 
   const dirClass = getDirectionByLanguage(locale || "en");
@@ -248,3 +253,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

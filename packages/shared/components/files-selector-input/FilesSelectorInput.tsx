@@ -37,16 +37,16 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Portal } from "@docspace/ui-kit/components/portal";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 
 import { DeviceType, FolderType } from "../../enums";
-import FilesSelector from "@docspace/ui-kit/selectors/Files";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { FileInput } from "@docspace/ui-kit/components/file-input";
-import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
+import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { FileInput } from "@onlyoffice/apps-ui-kit/components/file-input";
+import { useUnmount } from "@onlyoffice/apps-ui-kit/hooks/useUnmount";
 
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
-import type { FilesSelectorProps } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
+import type { FilesSelectorProps } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 
 import {
   getAcceptButtonLabel,

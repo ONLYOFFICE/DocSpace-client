@@ -39,7 +39,7 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import Share from "@docspace/shared/components/share";
 import { getPortalPasswordSettings } from "@docspace/shared/api/settings";
 import EditLinkPanel, {
@@ -56,7 +56,7 @@ import ShareDialogHeader from "./ShareDialog.header";
 import type { SharingDialogProps } from "./ShareDialog.types";
 
 import styles from "./ShareDialog.module.scss";
-import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
+import SocketHelper, { SocketCommands } from "@onlyoffice/apps-ui-kit/utils/socket";
 
 const SharingDialog = ({
   fileInfo,

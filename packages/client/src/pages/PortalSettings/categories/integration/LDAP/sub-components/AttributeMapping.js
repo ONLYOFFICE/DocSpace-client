@@ -38,16 +38,16 @@ import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-// import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+// import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 // import { EmployeeType } from "@docspace/shared/enums";
 
 import AccessSelector from "SRC_DIR/components/AccessSelector";
 import { isMobile } from "@docspace/shared/utils";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import LdapFieldComponent from "./LdapFieldComponent";
 
 const FIRST_NAME = "firstName";

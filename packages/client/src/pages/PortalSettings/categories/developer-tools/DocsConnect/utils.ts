@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { formatDateLocalized } from "@onlyoffice/apps-ui-kit/utils/date";
+
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -131,14 +133,12 @@ export const signDocsConnectToken = async (
   return `${header}.${body}.${base64UrlEncode(new Uint8Array(signature))}`;
 };
 
-export const formatDocsConnectDate = (iso?: string): string => {
-  if (!iso) return "";
-  const ms = new Date(iso).getTime();
-  if (Number.isNaN(ms)) return "";
-  const date = new Date(ms);
-  const dd = String(date.getDate()).padStart(2, "0");
-  const mm = String(date.getMonth() + 1).padStart(2, "0");
-  return `${dd}.${mm}.${date.getFullYear()}`;
+export const formatDocsConnectDate = (
+  iso: string | undefined,
+  locale: string,
+): string => {
+  if (!iso || Number.isNaN(new Date(iso).getTime())) return "";
+  return formatDateLocalized(iso, "DATE_MED", { locale });
 };
 
 export const getDocsConnectDaysLeft = (endDate: string): number => {

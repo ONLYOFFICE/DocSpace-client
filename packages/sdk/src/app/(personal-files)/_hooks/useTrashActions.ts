@@ -42,7 +42,7 @@ import { useTranslation } from "react-i18next";
 import { removeFiles, emptyTrash } from "@docspace/shared/api/files";
 import { FolderType } from "@docspace/shared/enums";
 import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";

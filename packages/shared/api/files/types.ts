@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TFile as TFileBase } from "@docspace/ui-kit/types";
+import type { TFile as TFileBase } from "@onlyoffice/apps-ui-kit/types";
 
 import type {
   TAvailableShareRights,

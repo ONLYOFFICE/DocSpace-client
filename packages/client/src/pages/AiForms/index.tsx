@@ -98,15 +98,17 @@ type AiFormsProps = {
   fetchAppSettings: <T extends Record<string, unknown>>(
     id: string,
   ) => Promise<T | null>;
+  logoText: string;
 };
 
 const AiForms = ({
   roomId,
   ensureAppsLoaded,
   fetchAppSettings,
+  logoText,
 }: AiFormsProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:Forms");
+  useDocumentTitle("Common:Forms", logoText);
   const [searchParams, setSearchParams] = useSearchParams();
   const [settingsChecked, setSettingsChecked] = React.useState(false);
   const [showSetupDialog, setShowSetupDialog] = React.useState(false);
@@ -204,10 +206,11 @@ const AiForms = ({
   return null;
 };
 
-const AiFormsConnected = inject<TStore>(({ appsStore }) => ({
+const AiFormsConnected = inject<TStore>(({ appsStore, settingsStore }) => ({
   roomId: appsStore.getSettings<AiFormsSettings>("ai-forms")?.roomId ?? null,
   ensureAppsLoaded: appsStore.ensureLoaded,
   fetchAppSettings: appsStore.fetchAppSettings,
+  logoText: settingsStore.logoText,
 }))(observer(AiForms));
 
 export { AiFormsConnected as AiForms };

@@ -70,6 +70,7 @@ import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 
 type AiFilesProps = {
   myFolderId?: number | null;
+  logoText?: string;
 };
 
 // Host `?section=` -> the SDK `DocsSection` value the personal-files frame
@@ -125,9 +126,9 @@ const getSrc = (
   }
 };
 
-const AiFiles = ({ myFolderId }: AiFilesProps) => {
+const AiFiles = ({ myFolderId, logoText }: AiFilesProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:Files");
+  useDocumentTitle("Common:Files", logoText);
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
   const lastSdkSectionRef = React.useRef<string | null>(null);
@@ -203,9 +204,12 @@ const AiFiles = ({ myFolderId }: AiFilesProps) => {
   return null;
 };
 
-const AiFilesConnected = inject<TStore>(({ treeFoldersStore }) => ({
-  myFolderId: treeFoldersStore.myFolderId,
-}))(observer(AiFiles));
+const AiFilesConnected = inject<TStore>(
+  ({ treeFoldersStore, settingsStore }) => ({
+    myFolderId: treeFoldersStore.myFolderId,
+    logoText: settingsStore.logoText,
+  }),
+)(observer(AiFiles));
 
 export { AiFilesConnected as AiFiles };
 export default AiFilesConnected;

@@ -7,6 +7,23 @@ const path = require('path');
 // Allowed licenses regex
 const allowedLicenses = /\b(mit|apache-2\.0|bsd|0BSD|CC0-1\.0|CC-BY-4\.0|Public Domain|Python-2\.0|bsd-2-clause|bsd-3-clause|isc|unlicense|unknown|LGPL-3\.0-or-later|Unicode-DFS-2016|MPL-2\.0)\b/i;
 
+// This audit exists to keep third-party copyleft out of the product: an AGPL
+// dependency from another author would impose its terms on everything shipped
+// with it. A first-party package carries no such risk -- same copyright holder,
+// and this product is itself AGPL-3.0-only, so an AGPL dependency from our own
+// scope adds no obligation that is not already there. @onlyoffice/apps-ui-kit
+// declares AGPL-3.0-only for exactly that reason.
+//
+// Deliberately narrow: only our own scopes, and only AGPL-3.0-only. Anything
+// else from anyone, including a different copyleft license from our own scope,
+// still fails.
+const firstPartyScopes = /^@(onlyoffice|docspace)\//;
+const firstPartyLicense = /^AGPL-3\.0-only$/i;
+
+const isAllowed = (licenseName, dependencyName) =>
+  allowedLicenses.test(licenseName) ||
+  (firstPartyScopes.test(dependencyName) && firstPartyLicense.test(licenseName));
+
 // Get all workspace packages
 const packagesDir = path.join(__dirname, '../packages');
 const packages = fs.readdirSync(packagesDir).filter(dir => {
@@ -68,7 +85,7 @@ packages.forEach((pkg, index) => {
         packages.forEach(pkgInfo => {
           depCount++;
           
-          if (licenseName && !allowedLicenses.test(licenseName)) {
+          if (licenseName && !isAllowed(licenseName, pkgInfo.name)) {
             hasInvalid = true;
             invalidLicenses.push({
               package: pkgJson.name || pkg,

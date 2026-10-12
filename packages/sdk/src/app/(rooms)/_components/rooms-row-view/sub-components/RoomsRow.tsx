@@ -67,19 +67,19 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import {
   FilesRow,
   FilesRowWrapper,
 } from "@docspace/shared/components/files-row";
-import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { DragAndDrop } from "@onlyoffice/apps-ui-kit/components/drag-and-drop";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
 import Badges from "@docspace/shared/components/badges";
 
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";

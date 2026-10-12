@@ -76,7 +76,7 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSortBy, TCreatedBy } from "@docspace/shared/types";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import {
   DeviceType,
@@ -98,7 +98,7 @@ import {
   useInfoPanelStore,
 } from "@/app/(docspace)/_store/InfoPanelStore";
 import { useRoomsOperationsStore } from "../../_store/RoomsOperationsStore";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useItemList, {

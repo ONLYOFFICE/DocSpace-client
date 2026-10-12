@@ -65,16 +65,16 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { isMobile, removeEmojiCharacters } from "@docspace/shared/utils";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import type {
   TAgentIconParams,
   TAgentParams,
 } from "@docspace/shared/utils/aiAgents";
 import type { TAgent } from "@docspace/shared/api/ai/types";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 
 import type TagHandler from "../../../_helpers/TagHandler";
 import TagInput from "../../tag-input";

@@ -39,16 +39,16 @@ import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 
 import {
 	LogoutSessionDialog,
 	LogoutAllSessionDialog,
 } from "SRC_DIR/components/dialogs";
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 
 import SessionsTable from "./SessionsTable";
 import styles from "./active-sessions.module.scss";

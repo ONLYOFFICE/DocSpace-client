@@ -151,7 +151,7 @@
   "AISearchEnabled": "AI-hakupalvelu otettiin käyttöön onnistuneesti.",
   "AISearchEnabledDescription": "Yksityiskohtainen tapahtumahistoria, käyttötilastot ja palvelunhallinta ovat saatavilla kohdassa Laskutus > Palvelut > AI-haku.",
   "AISearchEnabledTitle": "AI-haku käytössä",
-  "AISearchRequiresAIFeatures": "La recherche IA nécessite des agents et outils IA.",
+  "AISearchRequiresAIFeatures": "AI-haku vaatii AI-agentit ja -työkalut.",
   "AISearchSpendMonth": "Kuukaudelle {{month}}",
   "AISearchUsedInMonth": "AI-hakua ei käytetty kuussa {{month}}",
   "AIServices": "AI-palvelut",

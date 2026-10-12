@@ -122,7 +122,7 @@
   "AIFeatures": "MI aģenti un rīki",
   "AIFeaturesActivateDescription": "<1>MI aģenti un rīki nav aktīvi.</1> Aktivizējiet tās, lai izveidotu aģentus ar savu zināšanu bāzi, kopīgotu tos ar savu komandu un ļautu tiem izpildīt uzdevumus visās jūsu lietotnēs.",
   "AIFeaturesAreCurrentlyDisabled": "MI aģenti un rīki pašlaik ir atspējoti",
-  "AIFeaturesEnabled": "AI aģenti un rīki ir iespējoti",
+  "AIFeaturesEnabled": "MI aģenti un rīki ir iespējoti",
   "AIFeaturesEnabledDescription": "Detalizēta darījumu vēsture, lietošanas statistika un pakalpojumu pārvaldība ir pieejama sadaļā Norēķini > Pakalpojumi > MI aģenti un rīki.",
   "AIFeaturesNotActive": "MI aģenti un rīki nav aktīvi",
   "AIFeatureSummarizeDocuments": "Apkopot garus dokumentus",

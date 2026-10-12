@@ -122,7 +122,7 @@
   "AIFeatures": "AI agenti i alati",
   "AIFeaturesActivateDescription": "<1>AI agenti i alati nisu aktivni.</1> Aktivirajte ih da kreirate agente sa sopstvenom bazom znanja, podelite ih sa svojim timom i pustite ih da obavljaju zadatke u svim vašim aplikacijama.",
   "AIFeaturesAreCurrentlyDisabled": "AI agenti i alati su trenutno onemogućeni",
-  "AIFeaturesEnabled": "AI agenti i alati su aktivirani",
+  "AIFeaturesEnabled": "AI agenti i alati su omogućene",
   "AIFeaturesEnabledDescription": "Detaljna istorija transakcija, statistika korišćenja i upravljanje uslugama dostupni su u Naplata > Usluge > AI agenti i alati.",
   "AIFeaturesNotActive": "AI agenti i alati nisu aktivni",
   "AIFeatureSummarizeDocuments": "Sažimanje dugih dokumenata",

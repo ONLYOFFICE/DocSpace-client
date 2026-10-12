@@ -42,13 +42,13 @@ import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType, LinkTarget } from "@docspace/ui-kit/components/link";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import styles from "../Notifications.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";

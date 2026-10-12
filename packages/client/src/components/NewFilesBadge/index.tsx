@@ -36,8 +36,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import type { Nullable } from "@docspace/shared/types";
 import { isMobile } from "@docspace/shared/utils";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";

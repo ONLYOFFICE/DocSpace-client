@@ -37,8 +37,8 @@ import React from "react";
 import {
 	RectangleSkeleton,
 	RectangleSkeletonProps,
-} from "@docspace/ui-kit/components/rectangle";
-import { CircleSkeleton } from "@docspace/ui-kit/components/circle";
+} from "@onlyoffice/apps-ui-kit/components/rectangle";
+import { CircleSkeleton } from "@onlyoffice/apps-ui-kit/components/circle";
 
 import styles from "./Profile.module.scss";
 

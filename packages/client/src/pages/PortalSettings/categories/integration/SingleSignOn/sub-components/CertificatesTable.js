@@ -40,10 +40,10 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
+import { now, parseToDateTime, isAfter } from "@onlyoffice/apps-ui-kit/utils/date";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 
 import certTableStyles from "../styled-containers/StyledCertificatesTable.module.scss";
 

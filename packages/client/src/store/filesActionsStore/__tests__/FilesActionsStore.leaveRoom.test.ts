@@ -43,7 +43,7 @@ import type { TTranslation } from "@docspace/shared/types";
 import { createTestFilesActionsStore } from "./testHarness";
 // After the harness on purpose: the harness re-mocks the toast module, and
 // this import must resolve to the instance the store under test uses.
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 declare function allowConsoleError(matcher: RegExp | string): void;
 

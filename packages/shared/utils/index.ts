@@ -36,18 +36,18 @@
 "use client";
 
 import type { TTranslation } from "../types";
-import { parseToDateTime } from "@docspace/ui-kit/utils/date";
+import { parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";
 
 import { isArrayEqual } from "./array";
 import * as email from "./email";
 import { EmailSettings, parseAddress, parseAddresses, getParts } from "./email";
 import useId from "./useId";
 
-import { useClickOutside } from "@docspace/ui-kit/utils";
+import { useClickOutside } from "@onlyoffice/apps-ui-kit/utils";
 import { handleAnyClick } from "./event";
-import { uuid, getTextColor, trimSeparator } from "@docspace/ui-kit/utils";
+import { uuid, getTextColor, trimSeparator } from "@onlyoffice/apps-ui-kit/utils";
 
-import { DomHelpers } from "@docspace/ui-kit/utils";
+import { DomHelpers } from "@onlyoffice/apps-ui-kit/utils";
 import {
   size,
   mobile,
@@ -62,11 +62,11 @@ import {
   checkIsSSR,
   INFO_PANEL_WIDTH,
   isMobileDevice,
-} from "@docspace/ui-kit/utils/device";
+} from "@onlyoffice/apps-ui-kit/utils/device";
 import {
   IconSizeType,
   isIconSizeType,
-} from "@docspace/ui-kit/utils/common-icons-style";
+} from "@onlyoffice/apps-ui-kit/utils/common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
 import {

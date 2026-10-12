@@ -70,7 +70,7 @@ import BillingForm from "@/app/(personal-files)/_components/settings/category/Bi
 import {
   McpServers,
   WebSearch,
-} from "@docspace/ui-kit/ai-agent/settings";
+} from "@onlyoffice/apps-ui-kit/ai-agent/settings";
 
 import { Knowledge } from "../../../_components/ai-settings/knowledge";
 import { useAgentsUserStore } from "../../../_store/AgentsUserStore";

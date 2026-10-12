@@ -37,8 +37,8 @@ import React from "react";
 
 import { isMobile } from "../../utils";
 
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
-import { CircleSkeleton } from "@docspace/ui-kit/components/circle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
+import { CircleSkeleton } from "@onlyoffice/apps-ui-kit/components/circle";
 
 import MobileViewLoader from "./Profile.mobile-view";
 import styles from "./Profile.module.scss";

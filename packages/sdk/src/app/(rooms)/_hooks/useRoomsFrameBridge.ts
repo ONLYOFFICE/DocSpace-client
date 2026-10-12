@@ -64,12 +64,9 @@
 import React from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
-import {
-  frameCallEvent,
-  frameCallbackData,
-  frameHandlePing,
-  getFrameId,
-} from "@docspace/shared/utils/common";
+import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
+
+import { useSdkMethods } from "@/providers/sdkMethods";
 
 // Sections that live inside the (rooms) route group. The host can switch
 // between these via `navigateSection` without reloading the iframe.
@@ -138,53 +135,16 @@ export const useRoomsFrameBridge = (isReady: boolean) => {
     }
   }, [activeSection, pathname, searchParams]);
 
-  React.useEffect(() => {
-    const handler = (e: MessageEvent) => {
-      // SDK iframes are embedded by arbitrary third-party origins, so we
-      // intentionally do not validate `event.origin` — same posture as the
-      // ai-agents / forms / personal-files bridges. We only filter by
-      // `e.source === window.parent`.
-      if (window.self === window.parent || e.source !== window.parent) return;
-
-      let eventData: Record<string, unknown> | undefined;
-      try {
-        eventData =
-          typeof e.data === "string"
-            ? JSON.parse(e.data)
-            : (e.data as Record<string, unknown>);
-      } catch {
-        return;
+  useSdkMethods({
+    navigateSection: (data) => {
+      const section = (data as { section?: string } | undefined)?.section;
+      if (!section || !VALID_SECTIONS.has(section)) {
+        throw new Error(`Unknown section: ${String(section)}`);
       }
-
-      if (!eventData) return;
-      if (frameHandlePing(eventData)) return;
-
-      const dataEnvelope = eventData?.data as
-        | Record<string, unknown>
-        | undefined;
-      const methodName = dataEnvelope?.methodName as string | undefined;
-      const callId = dataEnvelope?.callId as number | undefined;
-      const payload = dataEnvelope?.data as Record<string, unknown> | undefined;
-
-      if (methodName === "navigateSection") {
-        const section = payload?.section as string | undefined;
-        if (section && VALID_SECTIONS.has(section)) {
-          router.replace(SECTION_TO_PATH[section]);
-          frameCallbackData({ section }, callId);
-        } else {
-          frameCallbackData(
-            { error: `Unknown section: ${String(section)}` },
-            callId,
-          );
-        }
-      }
-    };
-
-    window.addEventListener("message", handler, false);
-    return () => {
-      window.removeEventListener("message", handler, false);
-    };
-  }, [router]);
+      router.replace(SECTION_TO_PATH[section]);
+      return { section };
+    },
+  });
 };
 
 export default useRoomsFrameBridge;

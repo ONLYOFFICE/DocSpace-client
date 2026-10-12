@@ -37,7 +37,7 @@
 
 import { useCallback, useState, useLayoutEffect, useMemo } from "react";
 
-import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
+import { ThemeProviderComponent } from "@onlyoffice/apps-ui-kit/components/theme-provider";
 import { Error520SSR } from "@docspace/shared/components/errors/Error520";
 import { getSettings } from "@docspace/shared/api/settings";
 import type { TUser } from "@docspace/shared/api/people/types";

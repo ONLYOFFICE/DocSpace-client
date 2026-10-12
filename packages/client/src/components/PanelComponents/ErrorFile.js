@@ -35,8 +35,8 @@
 
 import React from "react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
 
 import { StyledLoadErrorIcon } from "./StyledComponents";
 

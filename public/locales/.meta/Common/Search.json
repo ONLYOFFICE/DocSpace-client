@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2026-09-04T07:59:41.577Z",
+  "updated_at": "2026-10-06T10:42:37.510Z",
   "comment": {
     "text": "This is a placeholder text for a search input field, prompting the user to type their search query.",
     "is_auto": true,
@@ -12,39 +12,39 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/AIAgent/index.tsx",
       "line_number": 240,
       "context": "onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFullLoadActive && !searchValue && !afterSearch.current,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
       "line_number": 182,
       "context": "const searchProps: TSelectorSearch = withSearch\n ? {\n withSearch,\n searchLoader: <SearchLoader />,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n isSearchLoading: showSearchLoader,\n onSearch: onSearch!,\n onClearSearch: onClearSearch!,\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Groups/index.tsx",
       "line_number": 200,
       "context": "onCloseClick: headerProps?.onCloseClick ?? onClose ?? (() => {}),\n headerLabel: headerProps?.headerLabel || t(\"Groups\"),\n }}\n alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}\n withSearch\n searchPlaceholder={t(\"Search\")}\n onSearch={onSearch}\n searchValue={searchValue}\n onClearSearch={onClearSearch}\n isSearchLoading={false}\n disableSubmitButton={!selectedItem}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/People/index.tsx",
       "line_number": 593,
       "context": "}\n : ({} as TSelectorCancelButton);\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n onSearch,\n onClearSearch,\n searchLoader: <SearchLoader />,\n isSearchLoading:",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Room/index.tsx",
       "line_number": 322,
       "context": ": {};\n \n const searchSelectorProps: TSelectorSearch = withSearch\n ? {\n withSearch: true,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFullLoadActive && !searchValue && !afterSearch.current,",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/TemplateGallery/Filter/SearchFilter/index.tsx",
-      "line_number": 90,
-      "context": "return (\n <SearchInput\n forwardedRef={ref}\n scale\n size={InputSize.base}\n placeholder={t(\"Common:Search\")}\n value={value}\n onChange={onChangeValue}\n onClick={onInputClick}\n onClearSearch={onClear}\n isDisabled={isLanguageFilterChange}",
+      "line_number": 81,
+      "context": "return (\n <SearchInput\n forwardedRef={ref}\n scale\n size={InputSize.base}\n placeholder={t(\"Common:Search\")}\n value={value}\n onChange={onChangeValue}\n onClick={onInputClick}\n onClearSearch={onClear}\n isDisabled={isDisabled}",
       "module": "/packages/client"
     },
     {
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1920,
+      "line_number": 1929,
       "context": "getViewSettingsData={getViewSettingsData}\n onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}",
       "module": "/packages/client"
     },

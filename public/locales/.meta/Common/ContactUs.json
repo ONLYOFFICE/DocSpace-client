@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/ContactContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/ContactContainer.tsx",
       "line_number": 52,
       "context": "return (\n <div className={styles.contactContainer}>\n {salesEmail ? (\n <Text as=\"span\" fontWeight={600}>\n {t(\"ContactUs\")}\n <Link\n className=\"sales-email-link\"\n tag=\"a\"\n fontWeight=\"600\"\n href={`mailto:${salesEmail}`}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/ContactContainer.tsx",

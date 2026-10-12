@@ -40,12 +40,12 @@ import {
   getSpaceQuotaAsText,
   getUserTypeName,
 } from "@docspace/shared/utils/common";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import Badges from "../../Badges";
 
-import { RowContent } from "@docspace/ui-kit/components/rows";
+import { RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import { UserContentProps } from "./RowView.types";
 import styles from "./RowView.module.scss";

@@ -42,9 +42,9 @@ import {
 	TBreadCrumb,
 	TSelectorHeader,
 	TSelectorItem,
-} from "@docspace/ui-kit/components/selector";
+} from "@onlyoffice/apps-ui-kit/components/selector";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
-import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 export type FilesSelectorProps = TSelectorHeader & {
 	isPanelVisible: boolean;
@@ -80,6 +80,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 	isFormRoom?: boolean;
 
 	filterParam?: string;
+	withSubFolders?: boolean;
 
 	currentFolderId: number | string;
 	fromFolderId?: number;

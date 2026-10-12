@@ -36,9 +36,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 
 const PortalRenamingDialog = (props) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);

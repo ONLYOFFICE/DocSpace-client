@@ -29,8 +29,8 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import "../../filesStore/__tests__/testHarness";
 import { createTestUploadDataStore, makeUploadFile } from "./testHarness";
 
-import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import SocketHelper, { SocketCommands } from "@onlyoffice/apps-ui-kit/utils/socket";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import type { TTranslation } from "@docspace/shared/types";
 

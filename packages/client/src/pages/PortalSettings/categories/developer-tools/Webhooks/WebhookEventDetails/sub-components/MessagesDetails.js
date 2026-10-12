@@ -34,7 +34,7 @@
  */
 
 import React, { useState } from "react";
-import { Tabs } from "@docspace/ui-kit/components/tabs";
+import { Tabs } from "@onlyoffice/apps-ui-kit/components/tabs";
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";

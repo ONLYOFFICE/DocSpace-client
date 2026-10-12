@@ -40,19 +40,21 @@ import { useTranslation } from "react-i18next";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { DeviceType } from "@docspace/shared/enums";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { CommonTrans } from "@docspace/ui-kit/utils/i18n/CommonTrans";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { CommonTrans } from "@onlyoffice/apps-ui-kit/utils/i18n/CommonTrans";
 
 // 16px icons reused from the ui-kit icon set (matches AI services pages).
-import AIIcon from "@docspace/ui-kit/assets/icons/16/AI.svg";
-import PriceIcon from "@docspace/ui-kit/assets/icons/16/price.react.svg";
-import WalletIcon from "@docspace/ui-kit/assets/icons/16/wallet.react.svg";
-import WebSearchIcon from "@docspace/ui-kit/assets/icons/16/ai-feature-web-search.react.svg";
+// AI.svg is imported from here instead: the ui-kit package only ships the
+// assets its own components import, and nothing there imports that one.
+import AIIcon from "PUBLIC_DIR/images/icons/16/AI.svg";
+import PriceIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/price.react.svg";
+import WalletIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/wallet.react.svg";
+import WebSearchIcon from "@onlyoffice/apps-ui-kit/assets/icons/16/ai-feature-web-search.react.svg";
 
-import { AI_SEARCH, AI_TOOLS } from "@docspace/ui-kit/billing/constants";
+import { AI_SEARCH, AI_TOOLS } from "@onlyoffice/apps-ui-kit/billing/constants";
 
 import InfoIcon from "PUBLIC_DIR/images/info.react.svg";
 import EnabledIcon from "PUBLIC_DIR/images/tick.rounded.svg";
@@ -104,8 +106,7 @@ const useAnimatedHeight = (ref, key) => {
     heightRef.current = next;
 
     if (prev === null || prev === next) return;
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches)
-      return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
 
     el.style.height = `${prev}px`;
     void el.offsetHeight;
@@ -125,15 +126,16 @@ const useAnimatedHeight = (ref, key) => {
 // what the page as a whole switches on, without repeating each other. What each
 // tab adds is said between them, by the description.
 const getBannerTexts = (t, isWebSearchTab) => ({
-  activateTitle: t("Common:ActivateAIFeaturesToGetStarted"),
   activateLabel: t("Common:Activate"),
   ...(isWebSearchTab
     ? {
+        activateTitle: t("Common:ActivateAISearchToGetStarted"),
         activateDescription: t("Common:ActivateAISearchDescription"),
         enabledTitle: t("Common:AISearchEnabledTitle"),
         enabledDescription: t("Common:AISearchEnabledDescription"),
       }
     : {
+        activateTitle: t("Common:ActivateAIFeaturesToGetStarted"),
         activateDescription: t("Common:GetAccessToAIModels"),
         enabledTitle: t("Common:AIFeaturesEnabled"),
         enabledDescription: t("Common:AIFeaturesEnabledDescription"),
@@ -218,29 +220,36 @@ const AIFeaturesBanner = ({
 
   const feePercent = isWebSearchTab ? aiSearchFeePercent : aiToolsFeePercent;
 
+  const pricingLink = (
+    <Link
+      type={LinkType.page}
+      href={isWebSearchTab ? EXA_PRICING_URL : OPENROUTER_PRICING_URL}
+      target={LinkTarget.blank}
+      color="accent"
+      fontSize="12px"
+      isHovered
+      fontWeight={600}
+    />
+  );
+
   const pricingNote =
     feePercent == null ? null : (
       <Text as="div" fontSize="12px" fontWeight={600}>
-        <CommonTrans
-          i18nKey={
-            isWebSearchTab ? "AIExaPricingNote" : "AIOpenRouterPricingNote"
-          }
-          namespaces={["Common"]}
-          values={{ percent: feePercent }}
-          components={{
-            1: (
-              <Link
-                type={LinkType.page}
-                href={isWebSearchTab ? EXA_PRICING_URL : OPENROUTER_PRICING_URL}
-                target={LinkTarget.blank}
-                color="accent"
-                fontSize="12px"
-                isHovered
-                fontWeight={600}
-              />
-            ),
-          }}
-        />
+        {isWebSearchTab ? (
+          <CommonTrans
+            i18nKey="AIExaPricingNote"
+            namespaces={["Common"]}
+            values={{ percent: feePercent }}
+            components={{ 1: pricingLink }}
+          />
+        ) : (
+          <CommonTrans
+            i18nKey="AIOpenRouterPricingNote"
+            namespaces={["Common"]}
+            values={{ percent: feePercent }}
+            components={{ 1: pricingLink }}
+          />
+        )}
       </Text>
     );
 
@@ -261,7 +270,7 @@ const AIFeaturesBanner = ({
             <div className={styles.featureRow}>
               <AIIcon className={styles.payIcon} />
               <Text fontSize="12px" fontWeight={600}>
-                {t("Common:AIModelsWebSearchKnowledgeBase")}
+                {t("Common:AIModelsAndKnowledgeBase")}
               </Text>
             </div>
           )}

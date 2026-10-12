@@ -74,6 +74,10 @@ let nextCallId = 1;
 const pending = new Map<number, PendingEntry>();
 let listenerInstalled = false;
 
+type PushListener = (token: string) => void;
+
+const pushListeners = new Set<PushListener>();
+
 const isInIframe = (): boolean => {
   if (typeof window === "undefined") return false;
   try {
@@ -127,9 +131,14 @@ const onMessage = (e: MessageEvent) => {
     return;
   }
 
-  let payload:
-    | { type?: string; callId?: unknown; data?: { accessToken?: unknown } }
-    | null = null;
+  let payload: {
+    type?: string;
+    callId?: unknown;
+    data?: {
+      accessToken?: unknown;
+      error?: { code?: unknown; message?: unknown };
+    };
+  } | null = null;
   try {
     payload = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
   } catch {
@@ -137,7 +146,22 @@ const onMessage = (e: MessageEvent) => {
   }
 
   if (!payload || payload.type !== AUTH_TOKEN_RETURN_TYPE) return;
-  if (typeof payload.callId !== "number") return;
+
+  const token = payload.data?.accessToken;
+  const error = payload.data?.error;
+
+  if (error && typeof error === "object") {
+    console.warn(
+      `[OAuth] host rejected the token request: ${String(error.code ?? "UNKNOWN")} ${String(error.message ?? "")}`.trimEnd(),
+    );
+  }
+
+  if (typeof payload.callId !== "number") {
+    if (typeof token === "string" && token) {
+      pushListeners.forEach((listener) => listener(token));
+    }
+    return;
+  }
 
   const entry = pending.get(payload.callId);
   if (!entry) return;
@@ -145,7 +169,6 @@ const onMessage = (e: MessageEvent) => {
   pending.delete(payload.callId);
   clearTimeout(entry.timer);
 
-  const token = payload.data?.accessToken;
   entry.resolve(typeof token === "string" ? token : null);
 };
 
@@ -184,9 +207,18 @@ export const requestAuthToken = (
   });
 };
 
+export const onAuthTokenPush = (listener: PushListener): (() => void) => {
+  installListener();
+  pushListeners.add(listener);
+  return () => {
+    pushListeners.delete(listener);
+  };
+};
+
 export const __resetOAuthTokenForTests = () => {
   pending.forEach((entry) => clearTimeout(entry.timer));
   pending.clear();
+  pushListeners.clear();
   nextCallId = 1;
   latchedFromUrl = null;
   if (listenerInstalled && typeof window !== "undefined") {

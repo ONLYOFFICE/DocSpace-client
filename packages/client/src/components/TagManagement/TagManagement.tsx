@@ -37,7 +37,7 @@ import { FC, useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { runInAction } from "mobx";
 
-import { ShareAccessRights } from "@docspace/ui-kit/enums";
+import { ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 
 import {
   AccessTagManagement,

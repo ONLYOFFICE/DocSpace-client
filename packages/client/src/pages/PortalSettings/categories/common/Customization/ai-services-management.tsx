@@ -40,11 +40,11 @@ import { useNavigate, useLocation } from "react-router";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
 import { setAiAccessSettings } from "@docspace/shared/api/settings";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -56,7 +56,7 @@ import LoaderCustomization from "../sub-components/loaderCustomization";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 import useCommon from "../useCommon";
 import DisableAiServicesDialog from "SRC_DIR/components/dialogs/DisableAiServicesDialog";
-import { AI_ENUM } from "@docspace/ui-kit/billing/constants";
+import { AI_ENUM } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface AiServicesManagementProps {

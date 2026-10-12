@@ -4,9 +4,9 @@ import { fireEvent, screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { BackupStorageType, DeviceType, FolderType } from "../../../enums";
-import { ButtonSize } from "@docspace/ui-kit/components/button";
+import { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import * as portalApi from "../../../api/portal";
-import * as socketModule from "@docspace/ui-kit/utils/socket";
+import * as socketModule from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import ManualBackup from "./index";
 import { selectedStorages, mockThirdPartyAccounts } from "../mockData";
@@ -16,14 +16,14 @@ vi.mock("../../../api/portal", () => ({
   saveDeposite: vi.fn().mockResolvedValue("ok"),
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: {
     success: vi.fn(),
     error: vi.fn(),
   },
 }));
 
-vi.mock("@docspace/ui-kit/utils/socket", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
   default: {
     on: vi.fn(),
     off: vi.fn(),
@@ -188,9 +188,10 @@ describe("ManualBackup", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.spyOn(portalApi, "startBackup").mockResolvedValue(undefined);
-    if (socketModule.default) {
-      vi.spyOn(socketModule.default, "on").mockImplementation(() => {});
-      vi.spyOn(socketModule.default, "off").mockImplementation(() => {});
+    const socket = socketModule.default;
+    if (socket) {
+      vi.spyOn(socket, "on").mockImplementation(() => {});
+      vi.spyOn(socket, "off").mockImplementation(() => {});
     }
   });
 

@@ -35,10 +35,10 @@
 
 import { Trans } from "react-i18next";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
-import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import SocketHelper, { SocketCommands } from "@onlyoffice/apps-ui-kit/utils/socket";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import type { TFunction } from "i18next";
 import type { TFolder } from "@docspace/shared/api/files/types";

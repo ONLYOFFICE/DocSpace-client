@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-method/index.tsx",
       "line_number": 194,
       "context": "<div className={styles.buttonWrapper}>\n <Button\n label={\n walletCustomerStatusNotActive && isPayer\n ? t(\"AddPaymentMethod\")\n : t(\"GoToStripe\")\n }\n size={ButtonSize.small}\n primary\n onClick={\n walletCustomerStatusNotActive && isPayer",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
       "line_number": 145,
       "context": "[styles.disabledLink]: isDisabled || isLoading,\n })}\n >\n {walletCustomerStatusNotActive\n ? t(\"AddPaymentMethod\")\n : t(\"GoToStripe\")}\n </Link>\n ) : null}\n </div>\n \n {!walletCustomerEmail ? (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

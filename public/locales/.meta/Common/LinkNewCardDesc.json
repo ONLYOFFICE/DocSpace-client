@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-method/index.tsx",
       "line_number": 184,
       "context": "<CardInformation />\n \n {!isNotPaidPeriod && walletCustomerStatusNotActive && isPayer ? (\n <Text className={styles.linkNewCardDescription} lineHeight=\"20px\">\n {t(\"LinkNewCardDesc\")}\n </Text>\n ) : null}\n \n {isAlreadyPaid && isStripePortalAvailable ? (\n <div className={styles.buttonWrapper}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
       "line_number": 336,
       "context": "t(\"MigratePerMonth\", {\n price: formatFuturePaymentCurrency(newSubscriptionAmount),\n }),\n )}\n {renderRow(\n t(\"MigrateFromWallet\"),\n withLoader(\n `- ${formatWalletCurrency(walletApplied, 2, walletCurrency)}`,\n ),\n styles.positive,\n )}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

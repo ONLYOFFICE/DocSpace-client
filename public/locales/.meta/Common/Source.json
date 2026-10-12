@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
       "line_number": 70,
       "context": "minWidth: 150,\n },\n ...(isAiTools\n ? [\n {\n key: \"Source\",\n title: t(\"Source\"),\n enable: true,\n resizable: true,\n minWidth: 150,\n },",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

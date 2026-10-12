@@ -39,7 +39,7 @@ import React from "react";
 import { makeAutoObservable } from "mobx";
 
 import { TViewAs } from "@docspace/shared/types";
-import { setCookie } from "@docspace/ui-kit/utils/cookie";
+import { setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { DeviceType } from "@docspace/shared/enums";
 import { getDeviceTypeByWidth } from "@docspace/shared/utils";
 

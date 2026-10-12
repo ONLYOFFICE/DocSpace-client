@@ -35,10 +35,10 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { Aside } from "@docspace/ui-kit/components/aside";
-import RoomSelector from "@docspace/ui-kit/selectors/Room";
-import { convertToItems } from "@docspace/ui-kit/selectors/Room/RoomSelector.utils";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
+import { Aside } from "@onlyoffice/apps-ui-kit/components/aside";
+import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
+import { convertToItems } from "@onlyoffice/apps-ui-kit/selectors/Room/RoomSelector.utils";
 
 import type { RoomListPanelProps } from "../EditRoomGroupsDialog.types";
 
@@ -52,6 +52,7 @@ const RoomListPanel = ({
   disableSubmitUntilChanged = false,
   sortSelectedFirst = false,
   withoutBackdropBackground = false,
+  isFormsSection = false,
 }: RoomListPanelProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -83,7 +84,7 @@ const RoomListPanel = ({
             withoutBackButton: false,
           }}
           withSearch={withSearch}
-          isForms={false}
+          isForms={isFormsSection}
           isMultiSelect
           forceIsMultiSelect
           selectedItems={

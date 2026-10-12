@@ -1,0 +1,29 @@
+{
+  "key_path": "CachePricingTitle",
+  "content": "Cache pricing ({{currency}}/1M)",
+  "content_en_sha1_hash": "74fefa3d2ac0776313fc32d6ff749175b6e69690",
+  "created_at": "2026-10-01T08:22:39.748Z",
+  "updated_at": "2026-10-01T08:29:15.338Z",
+  "comment": {
+    "text": "Tooltip title showing the cost of cache per 1 million units. The {{currency}} variable represents the currency symbol or code.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T08:29:15.338Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/CachePriceTooltip/CachePriceTooltip.tsx",
+      "line_number": 71,
+      "context": "const { t } = useTranslation([\"Common\"]);\n \n return (\n <div className={styles.content} data-testid=\"ai_cache_price_content\">\n <div className={styles.title}>\n {t(\"Common:CachePricingTitle\", { currency: breakdown.currency })}\n </div>\n <div className={styles.lines}>\n {breakdown.fromCache ? (\n <PriceLine\n label={t(\"Common:CacheRead\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

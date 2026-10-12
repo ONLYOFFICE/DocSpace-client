@@ -37,12 +37,12 @@ import React, { useState, useCallback, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile, isIOS } from "react-device-detect";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Button } from "@docspace/ui-kit/components/button";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 
 import { removeEmojiCharacters } from "@docspace/shared/utils";
 import { getCreateModalEntityType } from "SRC_DIR/helpers/filesUtils";
@@ -68,10 +68,13 @@ const Dialog = ({
   setKeepNewFileName,
   withForm,
   errorText,
+  withDontAskAgain = true,
 }) => {
   const createEntityType = isCreateDialog
     ? getCreateModalEntityType(extension)
     : null;
+
+  const isDontAskAgainAvailable = isCreateDialog && withDontAskAgain;
 
   const [value, setValue] = useState("");
 
@@ -102,14 +105,14 @@ const Dialog = ({
     async (e) => {
       setIsDisabled(true);
       const keepNewFileNamePromise =
-        isCreateDialog && isChecked && setKeepNewFileName(isChecked);
+        isDontAskAgainAvailable && isChecked && setKeepNewFileName(isChecked);
 
       const savePromise = onSave && onSave(e, value);
 
       await Promise.all([keepNewFileNamePromise, savePromise]);
       setIsDisabled(false);
     },
-    [onSave, isCreateDialog, value, isChecked, setKeepNewFileName],
+    [onSave, isDontAskAgainAvailable, value, isChecked, setKeepNewFileName],
   );
 
   const onKeyUpHandler = useCallback(
@@ -136,8 +139,10 @@ const Dialog = ({
   );
 
   useEffect(() => {
-    keepNewFileName && isCreateDialog && setIsChecked(keepNewFileName);
-  }, [isCreateDialog, keepNewFileName]);
+    keepNewFileName &&
+      isDontAskAgainAvailable &&
+      setIsChecked(keepNewFileName);
+  }, [isDontAskAgainAvailable, keepNewFileName]);
 
   useEffect(() => {
     const input = document?.getElementById("create-text-input");
@@ -180,7 +185,7 @@ const Dialog = ({
   }, []);
 
   const onChangeCheckbox = () => {
-    isCreateDialog && setIsChecked((val) => !val);
+    isDontAskAgainAvailable && setIsChecked((val) => !val);
   };
 
   return (
@@ -219,7 +224,7 @@ const Dialog = ({
             testId={`${idPrefix}_text_input`}
           />
         </FieldContainer>
-        {isCreateDialog && extension ? (
+        {isDontAskAgainAvailable && extension ? (
           <div
             style={{
               boxSizing: "border-box",

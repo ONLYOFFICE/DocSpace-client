@@ -37,7 +37,7 @@ import React from "react";
 import axios from "axios";
 
 import api from "@docspace/shared/api";
-import { formatDate, parseToDateTime } from "@docspace/ui-kit/utils/date";
+import { formatDate, parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { RoomsType } from "@docspace/shared/enums";
 import type { Nullable } from "@docspace/shared/types";

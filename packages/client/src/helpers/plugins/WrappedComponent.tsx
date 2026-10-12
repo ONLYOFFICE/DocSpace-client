@@ -56,17 +56,17 @@ import type {
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import type { TextProps } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { TextInput, InputSize } from "@docspace/ui-kit/components/text-input";
-import { Label } from "@docspace/ui-kit/components/label";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import type { TextProps } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { TextInput, InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import type PluginStore from "SRC_DIR/store/PluginStore";
 
@@ -321,28 +321,34 @@ const PluginComponentBase = inject(
                 if (isSaveButton) setSettingsModalRequestRunning?.(true);
               }
 
-              const message = await onClick?.();
-              dispatch(message);
-
-              setIsRequestRunning?.(false);
-              setModalRequestRunning?.(false);
-              if (isSaveButton) {
-                setSettingsModalRequestRunning?.(false);
-                onCloseAction?.();
+              try {
+                const message = await onClick?.();
+                dispatch(message);
+              } catch (error) {
+                console.error(
+                  `[Plugin: ${pluginName}] Button click failed:`,
+                  error,
+                );
+                return;
+              } finally {
+                setIsRequestRunning?.(false);
+                setModalRequestRunning?.(false);
+                if (isSaveButton) setSettingsModalRequestRunning?.(false);
               }
+
+              if (isSaveButton) onCloseAction?.();
             };
 
-            const isLoading = withLoadingAfterClick
-              ? isSaveButton
-                ? settingsModalRequestRunning
-                : isRequestRunning || rest.isLoading || modalRequestRunning
-              : rest.isLoading;
+            const isRequestPending = isSaveButton
+              ? settingsModalRequestRunning
+              : isRequestRunning || modalRequestRunning;
 
-            const isDisabled = disableWhileRequestRunning
-              ? isSaveButton
-                ? settingsModalRequestRunning
-                : isRequestRunning || rest.isDisabled || modalRequestRunning
-              : rest.isDisabled;
+            const isLoading =
+              rest.isLoading || (withLoadingAfterClick && isRequestPending);
+
+            const isDisabled =
+              rest.isDisabled ||
+              (disableWhileRequestRunning && isRequestPending);
 
             return (
               <Button

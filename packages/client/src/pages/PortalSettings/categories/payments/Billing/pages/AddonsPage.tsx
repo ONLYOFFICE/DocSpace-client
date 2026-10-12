@@ -37,8 +37,8 @@ import { inject, observer } from "mobx-react";
 import { useMemo } from "react";
 import { useNavigate } from "react-router";
 
-import { ServicesList } from "@docspace/ui-kit/billing";
-import type { TDocsConnectCardState } from "@docspace/ui-kit/billing/types";
+import { ServicesList } from "@onlyoffice/apps-ui-kit/billing";
+import type { TDocsConnectCardState } from "@onlyoffice/apps-ui-kit/billing/types";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
@@ -169,6 +169,9 @@ const AddonsPage = (props: AddonsPageProps) => {
         onOpenSupportedModels={() =>
           navigateToRoute("/portal-settings/ai-settings/ai-models")
         }
+        onOpenWebSearch={() =>
+          navigateToRoute("/portal-settings/ai-settings/web-search")
+        }
       />
       <DocsConnectGetStartedModal
         visible={getStartedVisible ?? false}
@@ -180,16 +183,18 @@ const AddonsPage = (props: AddonsPageProps) => {
   );
 };
 
-export const Component = inject(({ settingsStore, docsConnectStore }: TStore) => ({
-  getAIConfig: settingsStore.getAIConfig,
-  docsConnectInfo: docsConnectStore.info,
-  getStartedVisible: docsConnectStore.getStartedVisible,
-  openGetStarted: docsConnectStore.openGetStarted,
-  closeGetStarted: docsConnectStore.closeGetStarted,
-  openBuyPlan: docsConnectStore.openBuyPlan,
-  buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
-  openCancelPlanDialog: docsConnectStore.openCancelPlanDialog,
-  cancelPlanDialogVisible: docsConnectStore.cancelPlanDialogVisible,
-}))(observer(AddonsPage));
+export const Component = inject(
+  ({ settingsStore, docsConnectStore }: TStore) => ({
+    getAIConfig: settingsStore.getAIConfig,
+    docsConnectInfo: docsConnectStore.info,
+    getStartedVisible: docsConnectStore.getStartedVisible,
+    openGetStarted: docsConnectStore.openGetStarted,
+    closeGetStarted: docsConnectStore.closeGetStarted,
+    openBuyPlan: docsConnectStore.openBuyPlan,
+    buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
+    openCancelPlanDialog: docsConnectStore.openCancelPlanDialog,
+    cancelPlanDialogVisible: docsConnectStore.cancelPlanDialogVisible,
+  }),
+)(observer(AddonsPage));
 
 export default Component;

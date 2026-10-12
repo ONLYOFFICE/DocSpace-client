@@ -493,6 +493,13 @@ export const settingsTree = [
             link: "quota-per-user",
             tKey: "QuotaPerUser",
           },
+          {
+            id: "portal-settings_catalog-storageManagement_quota-per-ai-agent",
+            key: "6-0-3",
+            icon: "",
+            link: "quota-per-ai-agent",
+            tKey: "QuotaPerAIAgent",
+          },
         ],
       },
     ],
@@ -651,7 +658,7 @@ export const settingsTree = [
     key: "11",
     type: PageType.bonus,
     link: "bonus",
-    tKey: "Common:Bonus",
+    tKey: "Common:Upgrade",
     isHeader: true,
     children: [
       {
@@ -659,7 +666,7 @@ export const settingsTree = [
         key: "11-0",
         icon: "",
         link: "",
-        tKey: "Common:FreeAccessToLicensedVersion",
+        tKey: "Common:UpgradePageTitle",
         isCategory: true,
       },
     ],

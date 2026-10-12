@@ -35,14 +35,14 @@
 
 import { useEffect, useRef } from "react";
 
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
 import { inject, observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";

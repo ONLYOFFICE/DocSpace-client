@@ -41,8 +41,8 @@ import {
   ComboBox,
   ComboBoxSize,
   type TOption,
-} from "@docspace/ui-kit/components/combobox";
-import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
+import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
 
 import { IconDisplay } from "./IconDisplay";
 

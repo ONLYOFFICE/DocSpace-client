@@ -49,7 +49,7 @@ import RecoverAccess from "@/components/RecoverAccess";
 import Register from "@/components/Register";
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import { LoginContainer } from "@/components/LoginContainer";
-import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
+import { FormWrapper } from "@onlyoffice/apps-ui-kit/components/form-wrapper";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

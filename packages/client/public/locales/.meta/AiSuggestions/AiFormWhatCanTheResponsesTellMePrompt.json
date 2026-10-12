@@ -1,0 +1,29 @@
+{
+  "key_path": "AiFormWhatCanTheResponsesTellMePrompt",
+  "content": "What can you tell me about the responses collected in this form? List the questions you can answer, naming the actual fields. Don't run the analysis yet.",
+  "content_en_sha1_hash": "207d865b8dafc0127f6ab218667e1685a3e48c8f",
+  "created_at": "2026-09-14T19:16:00.086Z",
+  "updated_at": "2026-09-14T19:18:04.423Z",
+  "comment": {
+    "text": "An AI prompt used to instruct the assistant to identify which specific form fields it can analyze without performing the actual analysis.",
+    "is_auto": true,
+    "updated_at": "2026-09-14T19:18:04.423Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 856,
+      "context": "// until the backend's own per-form questions arrive, which name the\n // form's real fields (see `SuggestionSet.analyzableForm` in the ui-kit).\n attachedForm: [\n {\n name: t(\"AiSuggestions:AiFormWhatCanTheResponsesTellMe\"),\n prompt: t(\"AiSuggestions:AiFormWhatCanTheResponsesTellMePrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormBreakDownTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormBreakDownTheAnswersPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -38,9 +38,9 @@ import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 
 import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
-import { type TOption } from "@docspace/ui-kit/components/combobox";
+import { type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import styles from "../Share.module.scss";
 

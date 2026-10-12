@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import api from "@docspace/shared/api";
 import { enableCustomFilter } from "@docspace/shared/api/files";
 import { FolderType } from "@docspace/shared/enums";

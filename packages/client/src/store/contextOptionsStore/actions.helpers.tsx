@@ -39,17 +39,19 @@ import copy from "copy-to-clipboard";
 import { isMobile } from "react-device-detect";
 import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { copyShareLink as copyToBuffer } from "@docspace/shared/utils/copy";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
-import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
-import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
+import { showRoomGroupChangedToast } from "SRC_DIR/helpers/toast-helpers";
+import { getOAuthToken } from "@onlyoffice/apps-ui-kit/utils/get-oauth-token";
+import { OPERATIONS_NAME } from "@onlyoffice/apps-ui-kit/constants";
 import {
   AnalyticsEvents,
+  RoomSearchArea,
   RoomsType,
   Events,
   FolderType,
@@ -544,22 +546,12 @@ export const onAddRoomsToGroupImpl = async (
       roomsToAdd: roomIds,
     });
     await self.dialogsStore.getAllRoomGroups();
-    const transProps = {
-      t: t as unknown as TFunction,
-      values: { groupName },
-      components: { 1: React.createElement("strong") },
-    };
-    const keys = {
-      single: { tKey: "GroupingRooms:RoomAddedToGroup" },
-      multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
-    };
-    const i18nKey =
-      roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
-    toastr.success(
-      React.createElement(Trans, {
-        i18nKey,
-        ...transProps,
-      }),
+    showRoomGroupChangedToast(
+      t,
+      "add",
+      self.dialogsStore.roomGroupsArea === RoomSearchArea.Forms,
+      roomIds.length,
+      groupName,
     );
   } catch (error) {
     console.error("Error adding rooms to group:", error);
@@ -589,22 +581,12 @@ export const onRemoveRoomsFromGroupImpl = async (
     // Remove the rooms from the current view
     self.filesStore.removeFiles(null, roomIds);
 
-    const transProps = {
-      t: t as unknown as TFunction,
-      values: { groupName },
-      components: { 1: React.createElement("strong") },
-    };
-    const keys = {
-      single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
-      multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
-    };
-    const i18nKey =
-      roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
-    toastr.success(
-      React.createElement(Trans, {
-        i18nKey,
-        ...transProps,
-      }),
+    showRoomGroupChangedToast(
+      t,
+      "remove",
+      self.dialogsStore.roomGroupsArea === RoomSearchArea.Forms,
+      roomIds.length,
+      groupName,
     );
   } catch (error) {
     console.error("Error removing rooms from group:", error);
@@ -635,7 +617,7 @@ const onCreateRoomFromTemplateImpl = (self: ContextOptionsStore) => {
   if (!gallerySelected) return;
 
   const extension = self.oformsStore.currentExtensionGallery.replace(".", "");
-  const title = gallerySelected.attributes.name_form;
+  const title = gallerySelected.title;
 
   setFormTemplateForNewRoom({ id: gallerySelected.id, title, extension });
 
@@ -687,7 +669,7 @@ export const onCreateTemplateImpl = async (
     extension,
     id: -1,
     fromTemplate: true,
-    title: gallerySelected.attributes.name_form,
+    title: gallerySelected.title,
     openEditor: true,
     edit: true,
   };
@@ -828,11 +810,14 @@ export const _syncInfoPanelRoomImpl = (
 export const askAIImpl = async (
   self: ContextOptionsStore,
   item: TContextItem,
+  // The request is about the form's responses, not the document — see
+  // `askAIActionImpl`. Passed through every branch below unchanged.
+  analyze = false,
 ) => {
   const skipAi = getPersisted(PersistenceKeys.skipAiModal, false);
 
   if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
-    self.filesActionsStore.askAIAction(item);
+    self.filesActionsStore.askAIAction(item, analyze);
     return;
   }
 
@@ -847,7 +832,7 @@ export const askAIImpl = async (
     if (!room) return;
 
     if (room.sendFormToExternalDB || !room.security?.EditRoom) {
-      self.filesActionsStore.askAIAction(item);
+      self.filesActionsStore.askAIAction(item, analyze);
       return;
     }
 
@@ -855,7 +840,7 @@ export const askAIImpl = async (
       if (action === "connect") {
         onEditRoomTemplate(room, self._syncInfoPanelRoom);
       } else if (action === "continue") {
-        self.filesActionsStore.askAIAction(item);
+        self.filesActionsStore.askAIAction(item, analyze);
       }
     });
   } catch (error) {

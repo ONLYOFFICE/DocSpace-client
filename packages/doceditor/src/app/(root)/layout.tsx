@@ -38,11 +38,11 @@ import { redirect } from "next/navigation";
 import { headers, cookies } from "next/headers";
 
 import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { getLinkPreview } from "@docspace/shared/utils/link-preview";
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { SYSTEM_THEME_KEY } from "@onlyoffice/apps-ui-kit/providers/theme/themes/constants";
 
 import "@docspace/shared/styles/theme.scss";
 
@@ -88,8 +88,7 @@ export default async function RootLayout({
   ]);
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
-    | ThemeKeys
-    | undefined;
+    ThemeKeys | undefined;
 
   const theme =
     (hdrs.get("x-sdk-config-theme") as ThemeKeys | null) ||
@@ -122,8 +121,12 @@ export default async function RootLayout({
 
   const translations = await loadTranslationsForLocale(locale || "en", {
     namespaces: DOCEDITOR_NAMESPACES,
-    appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
-    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
+    appLocalesDir:
+      process.env.NEXT_APP_LOCALES_DIR ??
+      path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir:
+      process.env.NEXT_SHARED_LOCALES_DIR ??
+      path.join(process.cwd(), "../../public/locales"),
   });
 
   const linkPreview = getLinkPreview(
@@ -176,3 +179,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

@@ -41,7 +41,7 @@ import {
   getFetchedRoomParams,
   TRoomParams,
 } from "@docspace/shared/utils/rooms";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { RoomsType } from "@docspace/shared/enums";
@@ -56,6 +56,7 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import type OformsStore from "SRC_DIR/store/OformsStore";
+import type ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
 
 import { CreateRoomDialog } from "../dialogs";
 
@@ -75,6 +76,9 @@ type CreateRoomEventProps = {
   setProcessCreatingRoomFromData: FilesActionStore["setProcessCreatingRoomFromData"];
 
   setFormTemplateForNewRoom: OformsStore["setFormTemplateForNewRoom"];
+
+  templateGalleryAvailable: boolean;
+  onShowTemplateGallery: ContextOptionsStore["onShowTemplateGallery"];
 
   fetchTags: TagsStore["fetchTags"];
 
@@ -142,6 +146,8 @@ const CreateRoomEvent = ({
   processCreatingRoomFromData,
   setProcessCreatingRoomFromData,
   setFormTemplateForNewRoom,
+  templateGalleryAvailable,
+  onShowTemplateGallery,
   selectionItems,
   setSelectedRoomType,
   getThirdPartyIcon,
@@ -215,6 +221,17 @@ const CreateRoomEvent = ({
     };
   }, []);
 
+  // The gallery is the dialog's replacement, not a step inside it: close first
+  // so the gallery is not stacked under the modal. Picking a template there
+  // reopens this dialog on a form space built around it.
+  const onOpenTemplateGallery =
+    isFormsCreate && templateGalleryAvailable
+      ? () => {
+          onClose();
+          onShowTemplateGallery(true);
+        }
+      : undefined;
+
   const roomParams = item
     ? {
         fetchedRoomParams: getFetchedRoomParams(
@@ -238,6 +255,7 @@ const CreateRoomEvent = ({
       onCreate={onCreate}
       startRoomType={startRoomType}
       isFormsCreate={isFormsCreate}
+      onOpenTemplateGallery={onOpenTemplateGallery}
       withTemplateSelector={withTemplateSelector}
       fetchedTags={fetchedTags}
       isLoading={isLoading}
@@ -272,6 +290,8 @@ export default inject(
     currentQuotaStore,
     userStore,
     oformsStore,
+    settingsStore,
+    contextOptionsStore,
   }: TStore) => {
     const { fetchTags } = tagsStore;
     const { selections } = filesStore;
@@ -340,6 +360,8 @@ export default inject(
       setSelectedRoomType,
       setProcessCreatingRoomFromData,
       setFormTemplateForNewRoom: oformsStore.setFormTemplateForNewRoom,
+      templateGalleryAvailable: settingsStore.templateGalleryAvailable,
+      onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
       encryptionKeys,

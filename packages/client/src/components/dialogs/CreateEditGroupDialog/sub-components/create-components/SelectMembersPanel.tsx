@@ -36,7 +36,7 @@
 import React from "react";
 
 import { TUser } from "@docspace/shared/api/people/types";
-import { TOnSubmit } from "@docspace/ui-kit/components/selector";
+import { TOnSubmit } from "@onlyoffice/apps-ui-kit/components/selector";
 
 import { MembersSelector } from "../MembersSelector/MembersSelector";
 

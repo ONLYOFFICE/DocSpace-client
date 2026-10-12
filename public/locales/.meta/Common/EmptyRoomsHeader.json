@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
       "line_number": 246,
       "context": "if (isEmptyFilesRootScreen) return t(\"SelectorEmptyScreenHeader\");\n \n if (isEmptyAgentsRootScreen) return t(\"EmptyRoomsHeaderAgent\");\n \n return t(\"EmptyRoomsHeader\");\n }, [isKnowledgeFolder, isEmptyFilesRootScreen, isEmptyAgentsRootScreen, t]);\n \n const emptyScreenDescription = isEmptyFilesRootScreen\n ? \"\"\n : isEmptyAgentsRootScreen",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Room/index.tsx",
       "line_number": 354,
       "context": "onSubmit={onSubmit}\n isMultiSelect={isMultiSelect}\n emptyScreenImage={\n isBase ? <EmptyScreenRoomsLight /> : <EmptyScreenRoomsDark />\n }\n emptyScreenHeader={emptyScreenHeader ?? t(\"EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ??\n t(\"EmptyRoomsDescriptionText\", {\n sectionName: isForms ? t(\"Forms\") : t(\"Rooms\"),\n })",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",

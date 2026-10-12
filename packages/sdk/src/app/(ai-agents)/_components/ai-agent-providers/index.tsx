@@ -39,16 +39,16 @@ import React from "react";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "@docspace/ui-kit";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { useTheme } from "@onlyoffice/apps-ui-kit";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import AiAgentProviders, {
   useStores,
-} from "@docspace/ui-kit/ai-agent/providers";
-import type { Profile } from "@docspace/ui-kit/ai-agent/providers";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import type { Profile } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
-} from "@docspace/ui-kit/ai-agent/providers/themes";
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import { editAIAgent } from "@docspace/shared/api/ai";
 
 import {

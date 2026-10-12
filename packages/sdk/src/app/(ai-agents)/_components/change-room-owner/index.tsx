@@ -70,9 +70,9 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import type { TCreatedBy } from "@docspace/shared/types";
 
 import { useAgentsUserStore } from "../../_store";

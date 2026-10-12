@@ -67,10 +67,10 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   frameCallCommand,
   frameCallEvent,
-  frameCallbackData,
-  frameHandlePing,
   getFrameId,
 } from "@docspace/shared/utils/common";
+
+import { useSdkMethods } from "@/providers/sdkMethods";
 
 import { useAiRoomStore } from "../_store";
 
@@ -124,116 +124,61 @@ export const useAiAgentsFrameBridge = (isReady: boolean) => {
     });
   }, [pathname, searchParams, currentTab]);
 
-  React.useEffect(() => {
-    const handler = (e: MessageEvent) => {
-      // SDK iframes are embedded by arbitrary third-party origins (that is
-      // the entire point of the SDK), so we intentionally do not validate
-      // `event.origin` here — same posture as the (forms) layout bridge.
-      // We only filter by `e.source === window.parent` to ignore messages
-      // posted by other windows / unrelated postMessage senders.
-      if (window.self === window.parent || e.source !== window.parent) return;
-      let eventData: Record<string, unknown> | undefined;
-      try {
-        eventData =
-          typeof e.data === "string"
-            ? JSON.parse(e.data)
-            : (e.data as Record<string, unknown>);
-      } catch {
-        return;
-      }
-      if (!eventData) return;
-      if (frameHandlePing(eventData)) return;
+  useSdkMethods({
+    getAgentRoomId: () => ({ roomId: aiRoomStore.roomId }),
+    navigateSection: (data) => {
+      const payload = (data ?? {}) as Record<string, unknown>;
+      const section =
+        typeof payload.section === "string" ? payload.section : undefined;
+      const agentIdRaw = payload.agentId;
+      const agentId =
+        typeof agentIdRaw === "number"
+          ? String(agentIdRaw)
+          : typeof agentIdRaw === "string" && agentIdRaw !== ""
+            ? agentIdRaw
+            : undefined;
+      const tab = typeof payload.tab === "string" ? payload.tab : "chat";
 
-      const dataEnvelope = eventData?.data as
-        | Record<string, unknown>
-        | undefined;
-      const methodName = dataEnvelope?.methodName as string | undefined;
-      const callId = dataEnvelope?.callId as number | undefined;
-      const payload = dataEnvelope?.data as Record<string, unknown> | undefined;
-
-      // Mirror Shell.jsx callbacks (lines 703–727).
-      if (methodName === "getAgentRoomId") {
-        frameCallbackData({ roomId: aiRoomStore.roomId }, callId);
-        return;
+      let path: string;
+      if (agentId) {
+        path = `/ai-agents/${agentId}?tab=${encodeURIComponent(tab)}`;
+      } else if (
+        section &&
+        (section === "recent" ||
+          section === "favorites" ||
+          section === "trash" ||
+          section === "settings")
+      ) {
+        path = `/ai-agents/${section}`;
+      } else {
+        path = "/ai-agents";
       }
 
-      // Parent-driven navigation: the embedder posts the target section
-      // (root/recent/favorites/trash/settings) or an agent detail
-      // (agentId + optional tab) and we route the iframe internally via
-      // Next.js' router instead of letting the embedder change the iframe
-      // `src` — that would remount the SDK and lose the warmed runtime /
-      // MobX stores / socket connection. Mirrors the (forms) bridge's
-      // navigateSection handler.
-      if (methodName === "navigateSection") {
-        const section =
-          typeof payload?.section === "string" ? payload.section : undefined;
-        const agentIdRaw = payload?.agentId;
-        const agentId =
-          typeof agentIdRaw === "number"
-            ? String(agentIdRaw)
-            : typeof agentIdRaw === "string" && agentIdRaw !== ""
-              ? agentIdRaw
-              : undefined;
-        const tab = typeof payload?.tab === "string" ? payload.tab : "chat";
-
-        let path: string;
-        if (agentId) {
-          path = `/ai-agents/${agentId}?tab=${encodeURIComponent(tab)}`;
-        } else if (
-          section &&
-          (section === "recent" ||
-            section === "favorites" ||
-            section === "trash" ||
-            section === "settings")
-        ) {
-          path = `/ai-agents/${section}`;
-        } else {
-          path = "/ai-agents";
-        }
-
-        router.replace(path);
-        frameCallbackData({ section, agentId, tab }, callId);
-        return;
+      router.replace(path);
+      return { section, agentId, tab };
+    },
+    openResultFile: (data) => {
+      const fileIdRaw = (data as { fileId?: unknown } | undefined)?.fileId;
+      const fileId =
+        typeof fileIdRaw === "number"
+          ? fileIdRaw
+          : typeof fileIdRaw === "string"
+            ? Number(fileIdRaw)
+            : NaN;
+      const roomId = aiRoomStore.roomId;
+      if (!roomId || !Number.isFinite(fileId)) {
+        throw new Error("Invalid roomId or fileId");
       }
-
-      if (methodName === "openResultFile") {
-        const fileIdRaw = payload?.fileId;
-        const fileId =
-          typeof fileIdRaw === "number"
-            ? fileIdRaw
-            : typeof fileIdRaw === "string"
-              ? Number(fileIdRaw)
-              : NaN;
-        const roomId = aiRoomStore.roomId;
-        if (!roomId || !Number.isFinite(fileId)) {
-          frameCallbackData({ error: "Invalid roomId or fileId" }, callId);
-          return;
-        }
-        aiRoomStore.setCurrentTab("result");
-        aiRoomStore.setSelectedResultFileId(fileId);
-        router.replace(`/ai-agents/${roomId}?tab=result&fileId=${fileId}`);
-        frameCallbackData({ roomId, fileId }, callId);
-        return;
-      }
-
-      if (methodName === "closeEditorPanel") {
-        aiRoomStore.setSelectedResultFileId(null);
-        frameCallbackData({ ok: true }, callId);
-        return;
-      }
-
-      // Unknown method — reply with an error so the parent frame's pending
-      // promise resolves instead of hanging forever.
-      if (methodName !== undefined) {
-        frameCallbackData({ error: "unknown method", methodName }, callId);
-      }
-    };
-
-    window.addEventListener("message", handler, false);
-    return () => {
-      window.removeEventListener("message", handler, false);
-    };
-  }, [router, aiRoomStore]);
+      aiRoomStore.setCurrentTab("result");
+      aiRoomStore.setSelectedResultFileId(fileId);
+      router.replace(`/ai-agents/${roomId}?tab=result&fileId=${fileId}`);
+      return { roomId, fileId };
+    },
+    closeEditorPanel: () => {
+      aiRoomStore.setSelectedResultFileId(null);
+      return { ok: true };
+    },
+  });
 };
 
 export default useAiAgentsFrameBridge;

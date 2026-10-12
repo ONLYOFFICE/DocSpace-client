@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { RectangleSkeletonProps } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeletonProps } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 export type TilesSkeletonProps = RectangleSkeletonProps & {
 	foldersCount?: number;

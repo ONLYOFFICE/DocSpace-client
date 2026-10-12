@@ -37,11 +37,11 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { isMobile } from "@docspace/shared/utils";
 import styles from "../CreateEditAgentDialog.module.scss";
 
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 
 import { removeEmojiCharacters } from "@docspace/shared/utils";
 import TagHandler from "SRC_DIR/helpers/TagHandler";
@@ -58,15 +58,13 @@ import {
   TAgentIconParams,
   TAgentParams,
 } from "@docspace/shared/utils/aiAgents";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import { Nullable } from "@docspace/shared/types";
 import { TAgent, TAIConfig } from "@docspace/shared/api/ai/types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
-import CreateEditAgentStore from "SRC_DIR/store/CreateEditAgentStore";
-import { AgentDialogContext } from "SRC_DIR/helpers/enums";
-import { TLogo } from "@docspace/ui-kit/types";
+import { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import RoomQuota from "SRC_DIR/components/RoomQuota";
@@ -119,10 +117,6 @@ type setAgentParamsProps = {
   isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
-  recommendedModelForForms?: TAIConfig["recommendedModelForForms"];
-  isUserAdmin?: boolean;
-  openContext?: CreateEditAgentStore["openContext"];
-  standalone?: SettingsStore["standalone"];
 };
 
 const SetAgentParams = ({
@@ -159,10 +153,6 @@ const SetAgentParams = ({
   selectedServers,
   setSelectedServers,
   systemAiEnabled,
-  recommendedModelForForms,
-  isUserAdmin,
-  openContext,
-  standalone,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -331,7 +321,7 @@ const SetAgentParams = ({
   };
 
   // The editor dialog hands the cropped image out only through this callback
-  // (`onSave(image, preview)` in @docspace/ui-kit AvatarEditorDialog) — the
+  // (`onSave(image, preview)` in @onlyoffice/apps-ui-kit AvatarEditorDialog) — the
   // `setPreview` prop below is not a live channel — so dropping `preview`
   // here leaves the dialog without a cover until the agent is saved
   // (Bug 83476).
@@ -498,10 +488,6 @@ const SetAgentParams = ({
 
       <ProfileSettings
         agentParams={agentParams}
-        isAdmin={!!isUserAdmin}
-        recommendedModelForForms={recommendedModelForForms}
-        openedFromChat={openContext === AgentDialogContext.Chat}
-        standalone={standalone}
         setAgentParams={setAgentParams}
       />
 
@@ -559,13 +545,9 @@ export default inject(
     infoPanelStore,
     avatarEditorDialogStore,
     currentQuotaStore,
-    userStore,
-    createEditAgentStore,
   }: TStore) => {
     const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
-    const { openContext } = createEditAgentStore;
-    const { folderFormValidation, maxImageUploadSize, aiConfig, standalone } =
-      settingsStore;
+    const { folderFormValidation, maxImageUploadSize, aiConfig } = settingsStore;
 
     const { bufferSelection } = filesStore;
     const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
@@ -612,11 +594,6 @@ export default inject(
       infoPanelSelection,
 
       systemAiEnabled: aiConfig?.systemAiEnabled,
-      recommendedModelForForms: aiConfig?.recommendedModelForForms,
-      isUserAdmin:
-        !!userStore?.user && (userStore.user.isOwner || userStore.user.isAdmin),
-      openContext,
-      standalone,
     };
   },
 )(observer(SetAgentParams));

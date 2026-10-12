@@ -49,15 +49,15 @@ import {
   getSizeFromBytes,
 } from "../../utils/common";
 import { NO_QUOTA } from "../../constants";
-import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";
+import { TextInput, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/ui-kit/components/combobox";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
 import { SaveCancelButtons } from "../save-cancel-buttons";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { TTranslation } from "../../types";
 
 import { QuotaFormProps } from "./QuotaForm.types";

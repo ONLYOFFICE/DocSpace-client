@@ -34,26 +34,15 @@
  */
 
 import OformsFilter from "@docspace/shared/api/oforms/filter";
-import { Category } from "./CategoryFilter/CategoryFilter.types";
 
 export interface FilterContentProps {
   oformsFilter: OformsFilter;
-  noLocales: boolean;
-  fetchCategoryTypes: () => Promise<Category[]>;
-  fetchCategoriesOfCategoryType: (categoryId: string) => Promise<Category[]>;
+  filterOformsBySearch: (search: string) => void;
   filterOformsByLocaleIsLoading: boolean;
-  setFilterOformsByLocaleIsLoading: (isLoading: boolean) => void;
-  setCategoryFilterLoaded: (isLoaded: boolean) => void;
-  setLanguageFilterLoaded: (isLoaded: boolean) => void;
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
   setShowOneTile: (show: boolean) => void;
   isShowOneTile: boolean;
-  viewMobile: boolean;
   isShowInitSkeleton: boolean;
-  oformsLocal: string;
-  oformLocales: string[] | null;
-  filterOformsByLocale: (key: string) => Promise<void>;
-  filterOformsBySearch: (search: string) => void;
-  sortOforms: (sortBy: string, sortOrder: "asc" | "desc") => void;
+  onSelectedFiltersHeightChange: (height: number) => void;
 }

@@ -38,7 +38,7 @@ import { useTranslation } from "react-i18next";
 import { TLicenseQuota } from "../../../../../api/portal/types";
 import { createLicenseQuotaReport } from "../../../../../api/management";
 import { openUrlWithExportToast } from "../../../../../utils/openUrlWithExportToast";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 type TUserStatisticsDialogProps = {
   openOnNewPage?: boolean;

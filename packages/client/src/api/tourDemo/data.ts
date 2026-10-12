@@ -39,7 +39,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import type {
   TRoom,
   TRoomSecurity,

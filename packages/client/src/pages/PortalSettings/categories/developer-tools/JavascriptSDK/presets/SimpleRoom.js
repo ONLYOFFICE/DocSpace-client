@@ -36,17 +36,17 @@
 import { useState, useEffect, useMemo } from "react";
 import { useEventLog } from "../sub-components/useEventLog";
 import { withTranslation } from "react-i18next";
-import { Label } from "@docspace/ui-kit/components/label";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
 import { inject, observer } from "mobx-react";
 import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { EventLogBlock } from "../sub-components/EventLogBlock";
 
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 
 import { useNavigate } from "react-router";
 import { getPrimaryLink } from "@docspace/shared/api/rooms";
@@ -109,7 +109,7 @@ const SimpleRoom = (props) => {
   const { t, fetchExternalLinks, currentColorScheme, theme } = props;
   const navigate = useNavigate();
 
-  setDocumentTitle(t("JavascriptSdk"));
+  setDocumentTitle(t("Settings:EmbedSDK"));
 
   const [version, onSetVersion] = useState(sdkVersion[220]);
 
@@ -491,6 +491,7 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
 })(
   withTranslation([
     "JavascriptSdk",
+    "Settings",
     "Files",
     "Common",
     "Files",

@@ -37,7 +37,7 @@
 
 import React from "react";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Logo } from "../Logo";
 
 export const GreetingContainer = ({

@@ -89,9 +89,9 @@ vi.mock("react-router", () => ({
   Outlet: () => null,
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({ toastr: toastrMock }));
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr: toastrMock }));
 
-vi.mock("@docspace/ui-kit/components/section", () => {
+vi.mock("@onlyoffice/apps-ui-kit/components/section", () => {
   const Passthrough = ({ children }: { children?: React.ReactNode }) =>
     React.createElement("div", null, children);
 
@@ -104,12 +104,12 @@ vi.mock("@docspace/ui-kit/components/section", () => {
   };
 });
 
-vi.mock("@docspace/ui-kit/components/text", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/text", () => ({
   Text: ({ children }: { children?: React.ReactNode }) =>
     React.createElement("span", null, children),
 }));
 
-vi.mock("@docspace/ui-kit/components/link", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/link", () => ({
   Link: ({ children }: { children?: React.ReactNode }) =>
     React.createElement("a", null, children),
 }));

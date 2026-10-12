@@ -21,7 +21,7 @@
   "BasicInfo": "Información básica",
   "Client": "Cliente",
   "ClientCopy": "El ID del cliente se ha copiado correctamente en el portapapeles",
-  "ClientHelpButton": "Credenciales para utilizar OAth 2.0 como su tipo de autenticación.<br/> <strong>Ojo:</strong> Cualquier administrador empresarial que conozca el ID del cliente de la aplicación podrá recuperar información sobre la misma, como el nombre, el tipo de autenticación, los ámbitos y el URI de redirección.",
+  "ClientHelpButton": "Credenciales para utilizar OAuth 2.0 como su tipo de autenticación.<br/> <strong>Ojo:</strong> Cualquier administrador empresarial que conozca el ID del cliente de la aplicación podrá recuperar información sobre la misma, como el nombre, el tipo de autenticación, los ámbitos y el URI de redirección.",
   "ClientSecretResetSuccessfully": "El secreto del cliente se ha restablecido correctamente",
   "CodeVerifier": "Verificador de código",
   "Creator": "Creador",

@@ -34,7 +34,7 @@
  */
 
 import React from "react";
-import { TableHeader } from "@docspace/ui-kit/components/table";
+import { TableHeader } from "@onlyoffice/apps-ui-kit/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Events, SortByFieldName } from "@docspace/shared/enums";

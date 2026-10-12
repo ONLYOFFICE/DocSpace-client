@@ -34,7 +34,7 @@
  */
 
 import type React from "react";
-import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
+import type { MainButtonProps } from "@onlyoffice/apps-ui-kit/components/main-button/MainButton.types";
 
 export type FilterProps = {
   filesFilter: string;

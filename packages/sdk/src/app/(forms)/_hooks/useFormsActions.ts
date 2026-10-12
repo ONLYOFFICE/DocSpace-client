@@ -46,7 +46,7 @@ import {
   manageFormFilling,
 } from "@docspace/shared/api/files";
 import { FormFillingManageAction } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
@@ -58,6 +58,7 @@ import type { EditorAction } from "../_store/FormsNavigationStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
+import { toFrameEntity } from "@/utils/frameEntity";
 
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
@@ -88,6 +89,14 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         return;
       }
 
+      if (sdkConfig?.events?.onEditorOpen) {
+        frameCallEvent({
+          event: "onEditorOpen",
+          data: { ...toFrameEntity(file), action },
+        });
+        return;
+      }
+
       const openInSameTab =
         sdkConfig?.openEditorInSameTab ??
         filesSettingsStore.filesSettings?.openEditorInSameTab ??
@@ -112,6 +121,7 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     },
     [
       sdkConfig?.events?.onFileManagerClick,
+      sdkConfig?.events?.onEditorOpen,
       sdkConfig?.openEditorInSameTab,
       filesSettingsStore.filesSettings?.openEditorInSameTab,
       openEditor,

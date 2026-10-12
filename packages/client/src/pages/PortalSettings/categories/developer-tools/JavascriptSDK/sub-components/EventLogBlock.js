@@ -35,15 +35,15 @@
 
 import { useRef, useEffect, useState, useMemo } from "react";
 import classNames from "classnames";
-import { Link } from "@docspace/ui-kit/components/link";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
-import { DropDownItem } from "@docspace/ui-kit/components/drop-down-item";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
+import { DropDownItem } from "@onlyoffice/apps-ui-kit/components/drop-down-item";
 import copy from "copy-to-clipboard";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import styles from "./EventLogBlock.module.scss";
 

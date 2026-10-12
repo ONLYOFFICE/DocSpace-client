@@ -37,18 +37,20 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import PluginSettingsIconUrl from "PUBLIC_DIR/images/plugin.settings.react.svg?url";
+import PluginIncompatibleSvg from "PUBLIC_DIR/images/plugin.incompatible.react.svg";
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
 
 import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
+import { getPluginErrorText } from "SRC_DIR/helpers/plugins/errors";
 
 import styles from "../Plugins.module.scss";
 import { PluginItemProps } from "../Plugins.types";
@@ -68,10 +70,12 @@ const PluginItem = ({
 
   image,
   url,
+  loadError,
+  initError,
   dataTestId,
   theme,
 }: PluginItemProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "WebPlugins"]);
 
   const descriptionRef = useRef<HTMLDivElement>(null);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
@@ -144,6 +148,21 @@ const PluginItem = ({
     />
   );
 
+  const error = loadError ?? initError;
+
+  const errorIcon = error ? (
+    <div
+      className={classNames(styles.pluginLoadError, {
+        [styles.pluginInitError]: !loadError,
+      })}
+      data-tooltip-id="system-tooltip"
+      data-tooltip-content={getPluginErrorText(t, error)}
+      data-tooltip-place="bottom"
+      data-testid={`plugin_${loadError ? "load" : "init"}_error_${name}_icon`}
+    >
+      <PluginIncompatibleSvg />
+    </div>
+  ) : null;
 
   return (
     <div className={styles.pluginItem} data-testid={dataTestId}>
@@ -166,24 +185,27 @@ const PluginItem = ({
             <ToggleButton
               className={styles.pluginToggleButton}
               onChange={onChangeStatus}
-              isChecked={enabled}
+              isChecked={enabled && !loadError}
+              isDisabled={!!loadError}
               dataTestId="enable_plugin_toggle_button"
             />
           </div>
         </div>
 
-        {!compatible ? (
-          <div
-            className={styles.pluginBadge}
-            data-tooltip-id="system-tooltip"
-            data-tooltip-content={incompatibleTooltip}
-            data-tooltip-place="bottom"
-          >
-            {badge}
-          </div>
-        ) : (
-          <div className={styles.pluginBadge}>{badge}</div>
-        )}
+        <div className={styles.pluginBadges}>
+          {!compatible ? (
+            <div
+              data-tooltip-id="system-tooltip"
+              data-tooltip-content={incompatibleTooltip}
+              data-tooltip-place="bottom"
+            >
+              {badge}
+            </div>
+          ) : (
+            badge
+          )}
+          {errorIcon}
+        </div>
 
         {descriptionLocale ? (
           <>

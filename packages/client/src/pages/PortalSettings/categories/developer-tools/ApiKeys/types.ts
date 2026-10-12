@@ -41,7 +41,7 @@ import {
 } from "@docspace/shared/api/api-keys/types";
 import { DeviceType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 export type ApiKeysProps = {
   t: TTranslation;

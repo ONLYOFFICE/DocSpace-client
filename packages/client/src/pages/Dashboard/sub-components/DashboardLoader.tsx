@@ -62,8 +62,8 @@
 import type { ReactNode } from "react";
 import { inject, observer } from "mobx-react";
 
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
-import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
+import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import { DeviceType } from "@docspace/shared/enums";
 import { isDevToolsOffered } from "@docspace/shared/utils/devToolsAccess";
 

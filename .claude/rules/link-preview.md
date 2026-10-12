@@ -46,8 +46,10 @@ Every value on the card comes from the portal itself, so there is no
 
 - **title** — `logoText` from the anonymous `/api/2.0/settings` response,
   falling back to `getBrandName("OrganizationName")`.
-- **description** — `Common:LinkPreviewDescription`, localized, with the same
-  `logoText` fed in as `{{organizationName}}`.
+- **description** — `Common:LinkPreviewDescription`, localized. It names no
+  brand and no product. Keep it that way: title and image are overridden by the
+  portal's own branding, this line is not, so a brand word here appears on every
+  rebranded portal's card next to the client's own name.
 - **image** — `/login/link-preview` rasterizes the portal's own
   `logo.ashx?logotype=2` (`WhiteLabelLogoType.LoginPage`) with sharp onto a
   white 1200x630 canvas.

@@ -250,6 +250,7 @@
   "QuotasDescription": "İstifadəçilər və otaqlar üçün yaddaş limitlərini təyin edin.",
   "Recalculate": "Yenidən hesablayın",
   "RegisterApp": "Qeydiyyatdan keçir",
+  "ReportFormatDescription": "Hadisələr çox olduqda XLSX hesabatında yalnız ən son hadisələr saxlanılır. Bütün hadisələri ixrac etmək üçün CSV seçin.",
   "ResetTemplateDescription": "Əminsiniz ki, boş sahənin cari vəziyyətini onun standart vəziyyətinə sıfırlamaq istəyirsiniz?\nBu əməliyyatı geri qaytarmaq mümkün olmayacaq.",
   "ResetToDefault": "Standart vəziyyətə qaytar",
   "RestAPI": "REST API",

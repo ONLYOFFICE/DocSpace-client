@@ -65,15 +65,15 @@ import {
   KnowledgeType,
   SYSTEM_AI_PROFILE_PROVIDER_TYPE,
 } from "@docspace/shared/api/ai/enums";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { observer } from "mobx-react";
 import React from "react";
 import { useTranslation } from "react-i18next";

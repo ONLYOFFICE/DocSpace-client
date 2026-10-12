@@ -3,7 +3,7 @@
   "content": "Chat outputs",
   "content_en_sha1_hash": "d47fb95f31919a667d954c9146a2e391667d000a",
   "created_at": "2026-08-31T18:23:26.050Z",
-  "updated_at": "2026-08-31T18:42:17.632Z",
+  "updated_at": "2026-09-22T10:56:05.127Z",
   "comment": {
     "text": "Tab label in the AI Room interface that displays the results of chat interactions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Tabs/AiRoomTabs/index.tsx",
-      "line_number": 151,
+      "line_number": 162,
       "context": "name: t(\"Knowledge\"),\n content: null,\n },\n {\n id: \"result\",\n name: t(\"ResultStorage\"),\n content: null,\n },\n ];\n \n const isChat = currentClientView === \"chat\";",
       "module": "/packages/client"
     },

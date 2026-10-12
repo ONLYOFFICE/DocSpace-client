@@ -37,8 +37,8 @@ import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
 
 import capitalize from "lodash/capitalize";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Avatar } from "@docspace/ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Avatar } from "@onlyoffice/apps-ui-kit/components/avatar";
 
 import styles from "SRC_DIR/components/dialogs/ChangePortalOwnerDialog/ChangePortalOwner.module.scss";
 

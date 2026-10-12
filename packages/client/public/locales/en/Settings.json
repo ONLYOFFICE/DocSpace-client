@@ -250,6 +250,7 @@
   "QuotasDescription": "Set storage limits for users and rooms.",
   "Recalculate": "Recalculate",
   "RegisterApp": "Register app",
+  "ReportFormatDescription": "An XLSX report keeps only the most recent events when there are too many of them. Choose CSV to export every event.",
   "ResetTemplateDescription": "Are you sure you want to reset the current state of the blank to its default state?\n You will not be able to undo this action.",
   "ResetToDefault": "Reset to default",
   "RestAPI": "REST API",

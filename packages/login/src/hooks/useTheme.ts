@@ -40,19 +40,19 @@ import {
   Dark,
   type TColorScheme,
   type TTheme,
-} from "@docspace/ui-kit/providers/theme/themes";
+} from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { getEditorTheme } from "@docspace/shared/utils/common";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { getSystemTheme } from "@onlyoffice/apps-ui-kit/utils/get-system-theme";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
 import type { TGetColorTheme } from "@docspace/shared/api/settings/types";
-import { setCookie } from "@docspace/ui-kit/utils/cookie";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { SYSTEM_THEME_KEY } from "@onlyoffice/apps-ui-kit/providers/theme/themes/constants";
 import type { TUser } from "@docspace/shared/api/people/types";
 import {
   getDirectionByLanguage,
   getFontFamilyDependingOnLanguage,
-} from "@docspace/ui-kit/providers/theme/rtl-utils";
+} from "@onlyoffice/apps-ui-kit/providers/theme/rtl-utils";
 
 export interface UseThemeProps {
   user?: TUser;

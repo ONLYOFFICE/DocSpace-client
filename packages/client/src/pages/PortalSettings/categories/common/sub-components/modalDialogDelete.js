@@ -34,8 +34,8 @@
  */
 
 import { useEffect } from "react";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { withTranslation } from "react-i18next";
 
 import styles from "./modalDialogDelete.module.scss";

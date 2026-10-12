@@ -39,7 +39,7 @@ import { useId } from "react";
 import type { TooltipRenderProps } from "react-joyride";
 
 import { ReactSVG } from "react-svg";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
 import styles from "./TourTooltip.module.scss";

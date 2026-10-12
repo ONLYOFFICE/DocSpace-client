@@ -36,8 +36,8 @@
 import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import LoaderSectionHeader from "SRC_DIR/pages/PortalSettings/Layout/Section/loaderSectionHeader";

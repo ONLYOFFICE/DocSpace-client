@@ -36,10 +36,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { useTranslation } from "react-i18next";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 import styles from "../Webhooks.styled.module.scss";

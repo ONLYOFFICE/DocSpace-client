@@ -39,7 +39,7 @@ import {
   getEncryptionAccess,
 } from "@docspace/shared/api/files";
 import { TUser } from "@docspace/shared/api/people/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 

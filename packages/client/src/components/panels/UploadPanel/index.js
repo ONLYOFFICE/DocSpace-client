@@ -44,8 +44,8 @@ import {
   ModalDialog,
   ModalDialogType,
   DialogAsideSkeleton,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { LoadingButton } from "@docspace/ui-kit/components/loading-button";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { LoadingButton } from "@onlyoffice/apps-ui-kit/components/loading-button";
 
 import styles from "./UploadPanel.module.scss";
 import FileList from "./FileList";

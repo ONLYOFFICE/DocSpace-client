@@ -74,7 +74,7 @@ import {
   addToDate,
   parseToDateTime,
   isAfter,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 
 import {
   EmployeeType,
@@ -83,25 +83,25 @@ import {
 } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
 
-import { Button } from "@docspace/ui-kit/components/button";
-import { ButtonSize } from "@docspace/ui-kit/components/button/Button.enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button/Button.enums";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import {
   checkIfAccessPaid,
   filterPaidRoleOptions,
 } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { getDate } from "@docspace/shared/components/share/Share.helpers";
 
 import ExternalLinks from "./sub-components/ExternalLinks";

@@ -12,28 +12,28 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 462,
       "context": ") : scheduledChange ? (\n isCancellation ? (\n <div className={styles.actionsRow}>\n <Button\n size={ButtonSize.small}\n label={t(\"Settings:Statistics\")}\n onClick={onGoToTenant}\n />\n <Text className={styles.renewalText}>\n <CommonTrans\n i18nKey=\"DocsConnect:TariffPlanAutoCanceled\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 462,
       "context": ") : scheduledChange ? (\n isCancellation ? (\n <div className={styles.actionsRow}>\n <Button\n size={ButtonSize.small}\n label={t(\"Settings:Statistics\")}\n onClick={onGoToTenant}\n />\n <Text className={styles.renewalText}>\n <CommonTrans\n i18nKey=\"DocsConnect:TariffPlanAutoCanceled\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 462,
       "context": ") : scheduledChange ? (\n isCancellation ? (\n <div className={styles.actionsRow}>\n <Button\n size={ButtonSize.small}\n label={t(\"Settings:Statistics\")}\n onClick={onGoToTenant}\n />\n <Text className={styles.renewalText}>\n <CommonTrans\n i18nKey=\"DocsConnect:TariffPlanAutoCanceled\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 462,
       "context": ") : scheduledChange ? (\n isCancellation ? (\n <div className={styles.actionsRow}>\n <Button\n size={ButtonSize.small}\n label={t(\"Settings:Statistics\")}\n onClick={onGoToTenant}\n />\n <Text className={styles.renewalText}>\n <CommonTrans\n i18nKey=\"DocsConnect:TariffPlanAutoCanceled\"",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Statistics.js",

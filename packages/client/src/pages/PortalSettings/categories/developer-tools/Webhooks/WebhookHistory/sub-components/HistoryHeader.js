@@ -41,20 +41,20 @@ import { inject, observer } from "mobx-react";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import { isMobile } from "@docspace/shared/utils";
 
-import { TableGroupMenu } from "@docspace/ui-kit/components/table";
+import { TableGroupMenu } from "@onlyoffice/apps-ui-kit/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useTranslation } from "react-i18next";
 
-import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
+import { FloatingButton } from "@onlyoffice/apps-ui-kit/components/floating-button";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { retryWebhooks } from "@docspace/shared/api/settings";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";

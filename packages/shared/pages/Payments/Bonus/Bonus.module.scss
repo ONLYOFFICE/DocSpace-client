@@ -33,28 +33,142 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+
 .bonus {
-  max-width: 660px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 940px;
 
-  .officialDocumentation {
-    margin: 15px 0 12px 0;
-
+  .cards {
     display: grid;
-    row-gap: 6px;
-    grid-template-columns: 20px 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: minmax(0, 540px) minmax(0, 384px);
+    gap: 16px;
 
-    a {
-      text-decoration: underline;
+    @include mixins.tablet-and-below {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 
-  .upgradeInfo {
-    margin-bottom: 21px;
+  .description {
+    color: var(--upgrade-description-color);
   }
 
-  :global(.benefits-container) {
-    margin: 0 0 19px 0;
+  .featuresCard {
+    padding: 18px;
+    border-radius: 8px;
+    background: var(--upgrade-card-bg);
+  }
+
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .feature {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+
+  .featureIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: var(--upgrade-icon-color);
+
+    div {
+      display: flex;
+    }
+
+    svg [fill]:not([fill="none"]):not(rect) {
+      fill: currentColor;
+    }
+
+    svg [stroke] {
+      stroke: currentColor;
+    }
+  }
+
+  .featureText {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .trialCard {
+    display: flex;
+    flex-direction: column;
+    // Figma draws the stroke inside the frame: 17px + 1px border = mockup's 18px.
+    padding: 17px 17px 23px;
+    border-radius: 8px;
+    border: var(--upgrade-trial-card-border);
+    background: var(--upgrade-trial-card-bg);
+  }
+
+  .chooseDeployment {
+    margin: 32px 0 16px;
+    color: var(--upgrade-description-color);
+  }
+
+  .deployments {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .deployment {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 6px;
+    background: var(--upgrade-card-bg);
+  }
+
+  .deploymentIcon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .deploymentLabel {
+    flex: 1;
+  }
+
+  .readNow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .readNowIcon {
+    display: flex;
+    color: var(--accent-main);
+
+    div {
+      display: flex;
+    }
+
+    @include mixins.flip-in-rtl;
+  }
+
+  .help {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .helpLines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 }
 

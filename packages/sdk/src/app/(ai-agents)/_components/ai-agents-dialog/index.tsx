@@ -61,8 +61,8 @@
 
 "use client";
 
-import AIAgentsSelector from "@docspace/ui-kit/selectors/AIAgent";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import AIAgentsSelector from "@onlyoffice/apps-ui-kit/selectors/AIAgent";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 
 // SDK port of client AIAgentsDialog. The client version overlays a
 // "Connect Database" banner driven by InfoPanelStore/ROOM_EDIT events that

@@ -65,17 +65,17 @@ import React from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
-import type { PeopleFilter } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
-import type { TOnSubmit } from "@docspace/ui-kit/components/selector";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
+import type { PeopleFilter } from "@onlyoffice/apps-ui-kit/selectors/People/PeopleSelector.types";
+import type { TOnSubmit } from "@onlyoffice/apps-ui-kit/components/selector";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { toastr } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import api from "@docspace/shared/api";
 import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
-import { ShareAccessRights } from "@docspace/ui-kit/enums";
+import { ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 
 import styles from "./ChangeRoomOwnerDialog.module.scss";
 

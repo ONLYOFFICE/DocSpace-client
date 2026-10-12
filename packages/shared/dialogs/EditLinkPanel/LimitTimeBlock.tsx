@@ -37,8 +37,8 @@ import { type FC, useId } from "react";
 import { useTranslation } from "react-i18next";
 import type { DateTime } from "luxon";
 
-import { DateTimePicker } from "@docspace/ui-kit/components/date-time-picker";
-import { subtractFromDate, now } from "@docspace/ui-kit/utils/date";
+import { DateTimePicker } from "@onlyoffice/apps-ui-kit/components/date-time-picker";
+import { subtractFromDate, now } from "@onlyoffice/apps-ui-kit/utils/date";
 
 import ToggleBlock from "./ToggleBlock";
 import type { LimitTimeBlockProps } from "./EditLinkPanel.types";

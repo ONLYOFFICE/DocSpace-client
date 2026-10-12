@@ -34,8 +34,8 @@
  */
 
 import classNames from "classnames";
-import { TableRow } from "@docspace/ui-kit/components/table";
-import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
+import { TableRow } from "@onlyoffice/apps-ui-kit/components/table";
+import { DragAndDrop } from "@onlyoffice/apps-ui-kit/components/drag-and-drop";
 
 import styles from "./StyledTable.module.scss";
 

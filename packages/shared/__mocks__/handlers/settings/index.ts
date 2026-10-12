@@ -63,6 +63,11 @@ import {
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
+  webPluginsTestBundleHandler,
+  webPluginsBrokenBundleHandler,
+  webPluginsInitErrorBundleHandler,
+  BROKEN_PLUGIN_MISSING_PACKAGE,
+  INIT_ERROR_PLUGIN_MESSAGE,
 } from "./webplugins";
 import { activeConnectionsHandler } from "./activeconnections";
 import { backupStorageHandler } from "./backupStorage";
@@ -104,6 +109,11 @@ export {
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
+  webPluginsTestBundleHandler,
+  webPluginsBrokenBundleHandler,
+  webPluginsInitErrorBundleHandler,
+  BROKEN_PLUGIN_MISSING_PACKAGE,
+  INIT_ERROR_PLUGIN_MESSAGE,
   ldapHandler,
   ldapDefaultHandler,
   ldapCronHandler,

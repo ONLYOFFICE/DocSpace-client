@@ -99,11 +99,30 @@ describe("ContextOptionsStore — action handler delegation (batch 6)", () => {
 
   it("onShowTemplateGallery -> oformsStore.setTemplateGalleryVisible(true)", () => {
     const setTemplateGalleryVisible = vi.fn();
+    const setCreateRoomFromTemplate = vi.fn();
     const store = createTestContextOptionsStore({
-      oformsStore: { setTemplateGalleryVisible, setOformFromFolderId: vi.fn() },
+      oformsStore: {
+        setTemplateGalleryVisible,
+        setCreateRoomFromTemplate,
+        setOformFromFolderId: vi.fn(),
+      },
     });
     store.onShowTemplateGallery();
     expect(setTemplateGalleryVisible).toHaveBeenCalledWith(true);
+    expect(setCreateRoomFromTemplate).toHaveBeenCalledWith(false);
+  });
+
+  it("onShowTemplateGallery(true) -> gallery creates a form space, not a file", () => {
+    const setCreateRoomFromTemplate = vi.fn();
+    const store = createTestContextOptionsStore({
+      oformsStore: {
+        setTemplateGalleryVisible: vi.fn(),
+        setCreateRoomFromTemplate,
+        setOformFromFolderId: vi.fn(),
+      },
+    });
+    store.onShowTemplateGallery(true);
+    expect(setCreateRoomFromTemplate).toHaveBeenCalledWith(true);
   });
 
   it("onPreviewClick -> filesStore.openDocEditor (preview)", () => {

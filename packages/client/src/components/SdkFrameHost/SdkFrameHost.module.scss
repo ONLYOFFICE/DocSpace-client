@@ -11,10 +11,14 @@
 // Gating UI (EmptyView / install dialogs) renders here, above the frame.
 // When a live app is shown the page returns null, so this is empty and the
 // frame underneath is interactive. Disable hits except on actual children.
+//
+// No z-index on purpose: it would make this layer a stacking context and trap
+// everything the routed page renders — the AI chat panel, whose mobile overlay
+// must paint above the NavMenu bar, included. The layer still paints above the
+// frame because it follows the isolated `.host` in DOM order.
 .outletLayer {
   position: absolute;
   inset: 0;
-  z-index: 2;
   pointer-events: none;
 
   > * {
@@ -24,6 +28,9 @@
 
 .host {
   position: relative;
+  // Keeps the slots' z-index (`.hidden`) inside the host, so it cannot lift
+  // the frame above the outlet layer.
+  isolation: isolate;
   flex: 1 1 auto;
   width: 100%;
   height: 100%;

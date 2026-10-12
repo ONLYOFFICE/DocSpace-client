@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
       "line_number": 71,
       "context": ": t(\"SelectorVDREmptyScreenDescription\") || \"\";\n \n const buttonLabel =\n createDefineRoomType === RoomType.FillingFormsRoom\n ? t(\"CreateFormFillingRoom\") || \"\"\n : t(\"CreateVirtualDataRoom\") || \"\";\n \n return (\n <section className={styles.newEmptyScreen}>\n <FormRoomEmptyScreenImage className=\"empty-image\" />\n <Heading level={3} className=\"empty-header\">",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",

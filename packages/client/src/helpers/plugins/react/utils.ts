@@ -35,13 +35,24 @@
 
 // Narrows portal entities down to the fields the plugin runtime exposes.
 
+import { RoomsType } from "@docspace/shared/enums";
+import { isFolder, isRoom } from "@docspace/shared/utils/typeGuards";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { RoomsType as PluginRoomsType } from "@onlyoffice/docspace-plugin-sdk";
 import type {
   TCurrentUser,
   TCurrentFile,
 } from "@onlyoffice/docspace-plugin-sdk/react";
+
+const pluginRoomTypes: Partial<Record<RoomsType, PluginRoomsType>> = {
+  [RoomsType.FormRoom]: PluginRoomsType.FormRoom,
+  [RoomsType.EditingRoom]: PluginRoomsType.EditingRoom,
+  [RoomsType.CustomRoom]: PluginRoomsType.CustomRoom,
+  [RoomsType.PublicRoom]: PluginRoomsType.PublicRoom,
+  [RoomsType.VirtualDataRoom]: PluginRoomsType.VirtualDataRoom,
+};
 
 export function toCurrentUser(user: TUser): TCurrentUser {
   return {
@@ -57,14 +68,16 @@ export function toCurrentUser(user: TUser): TCurrentUser {
 export function toCurrentFile(
   selection: TRoom | TFile | TFolder,
 ): TCurrentFile {
-  const isFolder = "isFolder" in selection && !!selection.isFolder;
-  const isRoom = "roomType" in selection && !!selection.roomType;
+  const room = isRoom(selection);
+
   return {
     id: selection.id,
     title: selection.title,
     fileExst: "fileExst" in selection ? selection.fileExst : undefined,
-    isFolder,
-    isRoom,
-    roomType: isRoom ? String((selection as TRoom).roomType) : undefined,
+    isFolder: isFolder(selection),
+    isRoom: room,
+    roomType: room
+      ? (pluginRoomTypes[selection.roomType] ?? String(selection.roomType))
+      : undefined,
   };
 }

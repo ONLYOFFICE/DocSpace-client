@@ -51,6 +51,8 @@ import CreatePDFFormIcon from "PUBLIC_DIR/images/emptyview/create.pdf.form.svg";
 import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spreadsheet.svg";
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
+import CreateFromTemplateIcon from "PUBLIC_DIR/images/emptyview/create.from.template.svg";
+import CreateFromGalleryIcon from "PUBLIC_DIR/images/emptyview/create.from.gallery.svg";
 import CreateAIAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
 import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
 import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
@@ -71,7 +73,7 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import type {
   EmptyViewItemType,
@@ -294,6 +296,7 @@ export const getOptions = (
   isCardLinkedToPortal: boolean = false,
   isActivating: boolean = false,
   isAiChatAvailable: boolean = false,
+  isTemplateGalleryAvailable: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -412,6 +415,30 @@ export const getOptions = (
     onClick: actions.onCreateRoom,
     disabled: false,
   };
+
+  // The same two ways in as the Forms quick actions, so a form space can still
+  // be started from a template when those tiles are turned off.
+  const createFormSpaceFromTemplate = {
+    title: t("Common:FromTemplate"),
+    description: t("Common:SetTemplateDescription"),
+    icon: <CreateFromTemplateIcon />,
+    key: "create-form-space-from-template",
+    onClick: actions.onCreateRoomFromTemplate,
+    disabled: false,
+  };
+
+  const createFormSpaceFromGallery = {
+    title: t("Common:FromTemplateGallery"),
+    description: t("Common:FromTemplateGalleryDescription"),
+    icon: <CreateFromGalleryIcon />,
+    key: "create-form-space-from-gallery",
+    onClick: actions.onOpenTemplateGallery,
+    disabled: false,
+  };
+
+  const templateGalleryOption = isTemplateGalleryAvailable
+    ? [createFormSpaceFromGallery]
+    : [];
 
   const createAIAgent = {
     title: t("Common:CreateAIAgentTitle"),
@@ -593,6 +620,8 @@ export const getOptions = (
       .with([FolderType.Forms, P.when(isUser), P._], () => [])
       .with([FolderType.Forms, P._, P._], () => [
         createFormSpace,
+        createFormSpaceFromTemplate,
+        ...templateGalleryOption,
         ...aiChatOption,
       ])
       .with([FolderType.USER, ShareAccessRights.None, P._], () => [

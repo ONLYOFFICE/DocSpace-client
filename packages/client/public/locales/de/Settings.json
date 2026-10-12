@@ -250,6 +250,7 @@
   "QuotasDescription": "Legen Sie Speicherlimits für Benutzer und Räume fest.",
   "Recalculate": "Neu berechnen",
   "RegisterApp": "Anwendung registrieren",
+  "ReportFormatDescription": "Bei sehr vielen Ereignissen enthält ein XLSX-Bericht nur die neuesten davon. Wählen Sie CSV, um alle Ereignisse zu exportieren.",
   "ResetTemplateDescription": "Sind Sie sicher, dass Sie den aktuellen Zustand der leeren Vorlage auf ihren Standardzustand zurücksetzen möchten?\nSie können diese Aktion nicht rückgängig machen.",
   "ResetToDefault": "Zurücksetzen auf Standard",
   "RestAPI": "REST API",

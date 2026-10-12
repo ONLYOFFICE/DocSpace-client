@@ -42,15 +42,15 @@ import type {
   TFilesSelector,
 } from "@onlyoffice/docspace-plugin-sdk";
 
-import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
 import {
   THeaderBackButton,
   TSelectorHeader,
-} from "@docspace/ui-kit/components/selector";
-import { FilesSelectorProps } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+} from "@onlyoffice/apps-ui-kit/components/selector";
+import { FilesSelectorProps } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
-import type { SdkFolderType } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { SdkFolderType } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";

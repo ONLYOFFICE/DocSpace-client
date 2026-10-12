@@ -38,7 +38,7 @@ import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject } from "mobx-react";
 
-import { Consumer } from "@docspace/ui-kit/utils";
+import { Consumer } from "@onlyoffice/apps-ui-kit/utils";
 
 import { ReportType } from "SRC_DIR/store/DocumentBuilderReportStore";
 import { useReportPageLeft } from "SRC_DIR/Hooks/useReportPageLeft";

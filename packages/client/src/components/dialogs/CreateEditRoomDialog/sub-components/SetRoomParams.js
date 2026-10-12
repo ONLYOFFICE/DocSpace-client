@@ -38,13 +38,13 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { RoomsType } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { isMobile, mobile } from "@docspace/shared/utils";
 
 import styles from "../CreateEditRoomDialog.module.scss";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
 
 import { removeEmojiCharacters } from "@docspace/shared/utils";

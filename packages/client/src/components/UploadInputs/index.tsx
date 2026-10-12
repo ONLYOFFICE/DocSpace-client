@@ -37,7 +37,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import type { TTranslation } from "@docspace/shared/types";
 

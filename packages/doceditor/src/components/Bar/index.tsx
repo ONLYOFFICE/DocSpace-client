@@ -35,8 +35,8 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { SnackBar } from "@docspace/ui-kit/components/snackbar";
-import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
+import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
+import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
 
 interface QuotaInfo {
   header: string;

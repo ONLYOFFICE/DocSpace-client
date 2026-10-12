@@ -47,7 +47,7 @@ import {
   VectorizationStatus,
 } from "@docspace/shared/enums";
 import { runInAction } from "mobx";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isFile as isFileCheck } from "@docspace/shared/utils/typeGuards";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import {
@@ -717,9 +717,12 @@ self: FilesActionStore,fileIds: number[], t: TTranslation
 
 
 export const askAIActionImpl = (
-self: FilesActionStore,item: TActionItem
+self: FilesActionStore,item: TActionItem, analyze = false
 )=> {
-  self.dialogsStore.setAskAIFile(item as unknown as TFile);
+  // `analyze` marks the request as being about the form's responses, so the
+  // chat attaches the file as the subject of the message (see
+  // AskAIChatBridge). Plain "Ask AI" leaves it false.
+  self.dialogsStore.setAskAIFile(item as unknown as TFile, analyze);
 };
 
 

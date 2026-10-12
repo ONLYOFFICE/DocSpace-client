@@ -250,6 +250,7 @@
   "QuotasDescription": "Aseta tallennusrajat käyttäjille ja huoneille.",
   "Recalculate": "Laske uudelleen",
   "RegisterApp": "Rekisteröi sovellus",
+  "ReportFormatDescription": "Jos tapahtumia on liikaa, XLSX-raportti säilyttää vain uusimmat niistä. Valitse CSV, jos haluat viedä kaikki tapahtumat.",
   "ResetTemplateDescription": "Oletko varma, että haluat nollata tyhjän sivun nykyisen tilan sen oletustilaan?\nEt voi peruuttaa tätä toimintoa.",
   "ResetToDefault": "Nollaa oletusarvoon",
   "RestAPI": "REST API",

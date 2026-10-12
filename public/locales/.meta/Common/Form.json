@@ -3,7 +3,7 @@
   "content": "Form",
   "content_en_sha1_hash": "80446347ede53cf9ce56b3d59fda4b5c96dc25c4",
   "created_at": "2025-05-19T21:30:45.461Z",
-  "updated_at": "2026-05-15T14:00:06.969Z",
+  "updated_at": "2026-09-16T20:56:59.982Z",
   "comment": {
     "text": "This is a short label identifying a form. It appears in the title of a PDF when the PDF is a form.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/utils/getPDFTite.ts",
       "line_number": 39,
-      "context": "*/\n \n import { TTranslation } from \"../types\";\n \n export const getSinglePDFTitle = (t: TTranslation, isForm: boolean) => {\n return isForm ? t(\"Common:Form\") : t(\"Common:Document\");\n };\n \n export const getManyPDFTitle = (t: TTranslation, isForms: boolean) => {\n return `PDF-${(isForms ? t(\"Common:Forms\") : t(\"Common:Documents\")).toLowerCase()}`;\n };",
+      "context": "*/\n \n import { TTranslation } from \"../types\";\n \n export const getSinglePDFTitle = (t: TTranslation, isForm: boolean) => {\n return isForm ? t(\"Common:Form\") : t(\"Common:Document\");\n };\n \n export const getManyPDFTitle = (t: TTranslation, isForms: boolean) => {\n return isForms ? t(\"Common:PDFForms\") : t(\"Common:PDFDocuments\");\n };",
       "module": "/packages/shared"
     }
   ],

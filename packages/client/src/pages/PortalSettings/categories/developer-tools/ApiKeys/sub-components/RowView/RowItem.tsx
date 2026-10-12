@@ -34,10 +34,10 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { Row, RowContent } from "@docspace/ui-kit/components/rows";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import { isMobile } from "@docspace/shared/utils";
 
 import { useContextOptions } from "../useContextOptions";

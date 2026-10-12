@@ -30,7 +30,10 @@ WORKDIR /app
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
 # Copy package files first for better layer caching
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+# `*.tgz` is optional: ui-kit and ai-chat come from npm, but a locally packed
+# tarball at the repo root can be referenced as `file:../../<name>.tgz` for
+# local development. A glob matching nothing is fine next to real sources.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
 
 ENV NODE_OPTIONS="--max-old-space-size=8192"
 
@@ -38,10 +41,7 @@ ENV NODE_OPTIONS="--max-old-space-size=8192"
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
 COPY packages/client/package.json ./packages/client/package.json
-COPY packages/client/*.tgz ./packages/client/
 COPY packages/shared/package.json ./packages/shared/package.json
-COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
-COPY libs/ui-kit/*.tgz ./libs/ui-kit/
 
 # Install dependencies
 # CI=true is scoped to this one command on purpose. It skips the
@@ -54,7 +54,6 @@ RUN CI=true pnpm install --frozen-lockfile
 COPY common/ ./common/
 COPY packages/client/ ./packages/client/
 COPY packages/shared/ ./packages/shared/
-COPY libs/ui-kit ./libs/ui-kit
 COPY public/ ./public/
 
 # Run build:translations

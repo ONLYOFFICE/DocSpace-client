@@ -48,13 +48,13 @@ import {
 import {
   getFilterType,
   getAuthorType,
-} from "@docspace/ui-kit/components/filter/Filter.utils";
+} from "@onlyoffice/apps-ui-kit/components/filter/Filter.utils";
 import { getUser as _getUser } from "@docspace/shared/api/people";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 import type {
   TItem,
   TOnFilter,
-} from "@docspace/ui-kit/components/filter/Filter.types";
+} from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
 import type { TSortBy } from "@docspace/shared/types";
 
 import ViewRowsReactSvg from "PUBLIC_DIR/images/view-rows.react.svg";

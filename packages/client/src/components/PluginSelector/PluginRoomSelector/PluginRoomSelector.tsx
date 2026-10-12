@@ -38,14 +38,14 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { TRoomSelector } from "@onlyoffice/docspace-plugin-sdk";
 
-import RoomSelector from "@docspace/ui-kit/selectors/Room";
-import { RoomSelectorProps } from "@docspace/ui-kit/selectors/Room/RoomSelector.types";
+import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
+import { RoomSelectorProps } from "@onlyoffice/apps-ui-kit/selectors/Room/RoomSelector.types";
 import {
   HeaderProps,
   THeaderBackButton,
   TSelectorCancelButton,
   TSelectorHeader,
-} from "@docspace/ui-kit/components/selector";
+} from "@onlyoffice/apps-ui-kit/components/selector";
 import { RoomsType } from "@docspace/shared/enums";
 
 import PluginStore from "SRC_DIR/store/PluginStore";

@@ -33,15 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
@@ -57,7 +57,6 @@ const SettingsPluginDialog = ({
   plugin,
   withDelete,
 
-  pluginSettings,
   reactSettingsSaveButtonState,
 
   settingsPluginDialogVisible,
@@ -66,6 +65,11 @@ const SettingsPluginDialog = ({
   onDelete,
 }: SettingsPluginDialogProps) => {
   const { t } = useTranslation(["WebPlugins", "Common", "Files", "People"]);
+
+  const pluginSettings = useMemo(
+    () => plugin?.getAdminPluginSettings?.(),
+    [plugin],
+  );
 
   const { saveButton, settings, onLoad, component } = pluginSettings
     ? pluginSettings
@@ -78,7 +82,7 @@ const SettingsPluginDialog = ({
   const [modalRequestRunning, setModalRequestRunning] = useState(false);
 
   const reactSaveButton =
-    reactSettingsSaveButtonState?.pluginName === plugin?.name
+    plugin && reactSettingsSaveButtonState?.pluginName === plugin.name
       ? reactSettingsSaveButtonState.button
       : null;
 
@@ -208,8 +212,6 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
     ? pluginOptions.delete
     : pluginOptions.delete && !plugin?.system;
 
-  const pluginSettings = plugin?.getAdminPluginSettings?.();
-
   const onClose = () => {
     setSettingsPluginDialogVisible(false);
     setCurrentSettingsDialogPlugin(null);
@@ -223,7 +225,6 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
   return {
     plugin,
     withDelete,
-    pluginSettings,
     reactSettingsSaveButtonState,
     settingsPluginDialogVisible,
 

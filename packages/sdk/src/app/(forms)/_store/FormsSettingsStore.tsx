@@ -38,7 +38,7 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import { ShareAccessRights } from "@docspace/ui-kit/enums";
+import { ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 
 import type {
   TFilesSettings,

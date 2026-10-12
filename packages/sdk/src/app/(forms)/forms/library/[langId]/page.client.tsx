@@ -41,7 +41,7 @@ import { useRouter } from "next/navigation";
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 import { useLibraryParams } from "../../../_hooks/useLibraryParams";
 import useLibraryLandingData from "../../../_hooks/useLibraryLandingData";

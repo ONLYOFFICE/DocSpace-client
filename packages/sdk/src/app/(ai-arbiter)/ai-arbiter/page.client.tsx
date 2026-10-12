@@ -39,21 +39,21 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import AIAgentSelector from "@docspace/ui-kit/selectors/AIAgent";
-import FilesSelector from "@docspace/ui-kit/selectors/Files";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import AIAgentSelector from "@onlyoffice/apps-ui-kit/selectors/AIAgent";
+import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   Heading,
   HeadingLevel,
   HeadingSize,
-} from "@docspace/ui-kit/components/heading";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
-import { Tag } from "@docspace/ui-kit/components/tag";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import useGetIcon from "@docspace/ui-kit/ai-agent/hooks/useGetIcon";
+} from "@onlyoffice/apps-ui-kit/components/heading";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
+import { Tag } from "@onlyoffice/apps-ui-kit/components/tag";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import useGetIcon from "@onlyoffice/apps-ui-kit/ai-agent/hooks/useGetIcon";
 import {
   FolderType,
   DeviceType,

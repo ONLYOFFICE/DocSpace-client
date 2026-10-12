@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/PaymentContainer.tsx",
       "line_number": 248,
       "context": "if (isGracePeriod)\n return (\n <Text fontSize=\"14px\" lineHeight=\"16px\">\n <CommonTrans\n i18nKey=\"GracePeriodActivatedNotice\"\n values={{\n fromDate: paymentDate,\n byDate: gracePeriodEndDate,\n delayDaysCount,\n productName: getBrandName(\"ProductName\"),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/utils/index.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/utils/index.ts",
       "line_number": 306,
       "context": "items.push(\n build(\n \"recent\",\n recentFolder,\n CatalogRecentSvg,\n t(\"Recent\"),\n FolderType.Recent,\n ),\n );\n \n if (withFavorites && favoritesFolder)",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",

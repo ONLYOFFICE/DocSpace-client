@@ -34,12 +34,12 @@
  */
 
 import { useState, useEffect } from "react";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Label } from "@docspace/ui-kit/components/label";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 
 import {
   ControlsGroup,

@@ -3,7 +3,7 @@
   "content": "Unpin",
   "content_en_sha1_hash": "2eba6a03b89a9ddb19e9cb15699a8737f8bab076",
   "created_at": "2025-05-19T21:30:56.284Z",
-  "updated_at": "2026-08-26T16:06:02.348Z",
+  "updated_at": "2026-10-02T12:15:32.502Z",
   "comment": {
     "text": "This is a button label that removes a pinned item from its current location, making it no longer easily accessible.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 334,
+      "line_number": 318,
       "context": "};\n case \"unpin\":\n return {\n id: \"menu-unpin\",\n key: \"unpin\",\n label: t(\"Common:Unpin\"),\n iconUrl: UnpinReactSvgUrl,\n onClick: this.unpinHandle,\n disabled: false,\n };\n case \"create-group\":",
       "module": "/packages/client"
     },
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 699,
+      "line_number": 702,
       "context": "(i) => \"pinned\" in i && (i as { pinned?: boolean }).pinned,\n );\n return {\n id: allPinned ? \"option_unpin\" : \"option_pin\",\n key: allPinned ? \"unpin\" : \"pin\",\n label: allPinned ? t(\"Common:Unpin\") : t(\"Common:Pin\"),\n icon: allPinned ? UnpinReactSvgUrl : PinReactSvgUrl,\n onClick: () => {\n onPinSelectedClick?.(filesSelectionStore.selection);\n },\n disabled: !onPinSelectedClick,",
       "module": "/packages/sdk"
     },

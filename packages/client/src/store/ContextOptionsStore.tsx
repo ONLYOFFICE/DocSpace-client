@@ -38,10 +38,10 @@ import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.s
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
 import { isMobile } from "react-device-detect";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type {
   ContextMenuModel,
-} from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
@@ -108,6 +108,11 @@ import {
   onMultiLoadPluginsImpl,
   onLoadPluginsImpl,
 } from "./contextOptionsStore/plugins.helpers";
+import {
+  getFrameCreateActionsImpl,
+  onLoadFrameActionsImpl,
+  onMultiLoadFrameActionsImpl,
+} from "./contextOptionsStore/frameActions.helpers";
 import {
   onClickReconnectStorageImpl,
   onClickMakeFormImpl,
@@ -725,6 +730,12 @@ class ContextOptionsStore {
 
   onLoadPlugins = (item: TContextItem): TContextOption[]=> onLoadPluginsImpl(this, item);
 
+  onLoadFrameActions = (item: TContextItem): TContextOption[] =>
+    onLoadFrameActionsImpl(this, item);
+
+  onMultiLoadFrameActions = (items: TSelectionItem[]): TContextOption[] =>
+    onMultiLoadFrameActionsImpl(this, items);
+
   // call sites may pass an undefined roomType which the
   // original .js forwarded as-is to getDefaultAccessUser — the cast keeps
   // that behavior.
@@ -862,11 +873,8 @@ class ContextOptionsStore {
     this.oformsStore.setGallerySelected(item);
   };
 
-  // the Gallery ItemTitle consumer passes either a full
-  // TOformFile or a minimal { attributes } shape (and forwards it as-is);
-  // the casts below keep the original unchecked usage.
   getFormGalleryContextOptions = (
-    item: TOformFile | { attributes: { name_form: string } } | null,
+    item: TOformFile | null,
     t: TTranslation,
     navigate?: unknown,
   ): ContextMenuModel[]=> getFormGalleryContextOptionsImpl(this, item, t, navigate);
@@ -948,7 +956,8 @@ class ContextOptionsStore {
 
   _syncInfoPanelRoom = (newRoom: TRoom)=> _syncInfoPanelRoomImpl(this, newRoom);
 
-  askAI = async (item: TContextItem)=> askAIImpl(this, item);
+  askAI = async (item: TContextItem, analyze = false)=>
+    askAIImpl(this, item, analyze);
 
   getFilesContextOptions = (
     item: TContextItem,
@@ -1045,7 +1054,13 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileDialogVisible(true);
   };
 
-  onShowTemplateGallery = () => {
+  // `createRoomFromTemplate` is set from the Forms root, where there is no
+  // folder to create a file in: the picked template must produce a form space
+  // built around it instead of a bare PDF (see onCreateTemplateImpl). Without
+  // it the create falls through to the file branch and the editor opens on a
+  // file the user may not create there -- "Access denied".
+  onShowTemplateGallery = (createRoomFromTemplate = false) => {
+    this.oformsStore.setCreateRoomFromTemplate(createRoomFromTemplate);
     this.oformsStore.setTemplateGalleryVisible(true);
     // the original .js passed a possibly-null selected folder
     // id through unchecked — the non-null assertion keeps that behavior.
@@ -1073,7 +1088,18 @@ class ContextOptionsStore {
     },
   ) => getContextOptionsPlusFormRoomImpl(this, t, models);
 
-  getFolderModel = (t: TTranslation, isSectionMenu?: boolean)=> getFolderModelImpl(this, t, isSectionMenu);
+  getFolderModel = (t: TTranslation, isSectionMenu?: boolean) => {
+    const options = getFolderModelImpl(this, t, isSectionMenu);
+    const frameActions = getFrameCreateActionsImpl(this);
+
+    if (!options || frameActions.length === 0) return options;
+
+    return [
+      ...options,
+      { key: "separator-custom-actions", isSeparator: true },
+      ...frameActions,
+    ];
+  };
 
   getModel = (item: TContextItem, t: TTranslation) => {
     const { selection } = this.filesStore;

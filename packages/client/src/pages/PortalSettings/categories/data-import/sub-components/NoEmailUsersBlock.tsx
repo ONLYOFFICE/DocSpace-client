@@ -35,7 +35,7 @@
 
 import { Trans } from "react-i18next";
 import { NoEmailUsersProps } from "../types";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 export const NoEmailUsersBlock = ({
   t,

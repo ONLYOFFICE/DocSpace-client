@@ -34,7 +34,7 @@
  */
 
 import type { TTranslation } from "@docspace/shared/types";
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 

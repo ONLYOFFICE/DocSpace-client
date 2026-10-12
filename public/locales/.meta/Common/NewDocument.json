@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/Files/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/index.tsx",
       "line_number": 568,
       "context": "if (checkCreating && item.id) {\n try {\n const res = await filesApi.createFile({\n folderId: Number(item.id),\n createFileJsonElement: {\n title: t(\"NewDocument\"),\n },\n });\n const fileId = res.data.response?.id;\n if (fileId != null) {\n await filesApi.deleteFile({",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
       "line_number": 117,
       "context": ": t(\"EmptyAIChatNotActiveYetTitle\", { aiChat });\n \n const description = match([standalone, isPortalAdmin])\n // standalone admin: connect an AI service of your own\n .with([true, true], () =>\n t(\"EmptyAIChatNotAvailableYetAdminDescription\", { aiChat }),\n )\n // standalone user: nothing to connect without admin rights\n .with([true, false], () =>\n t(\"EmptyAIChatNotAvailableYetUserDescription\", { aiChat }),\n )",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

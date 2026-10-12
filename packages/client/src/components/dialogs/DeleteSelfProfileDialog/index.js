@@ -37,13 +37,13 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { sendInstructionsToDelete } from "@docspace/shared/api/people";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 class DeleteSelfProfileDialogComponent extends React.Component {
 	constructor(props) {

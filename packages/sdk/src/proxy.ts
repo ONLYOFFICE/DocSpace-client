@@ -312,6 +312,10 @@ export const config = {
     "/rooms/:path*",
     "/private",
     "/private/:path*",
+    "/archive",
+    "/archive/:path*",
+    "/settings",
+    "/uploader",
   ],
 };
 

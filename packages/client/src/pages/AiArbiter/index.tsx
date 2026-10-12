@@ -42,7 +42,7 @@ import AiAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.d
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
-import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import { InstallAiArbiterDialog } from "SRC_DIR/pages/Dashboard/InstallAiArbiterDialog";
@@ -58,6 +58,7 @@ type AiArbiterProps = {
   ) => Promise<T | null>;
   canManageAgents: boolean;
   theme: TTheme;
+  logoText: string;
 };
 
 const AiArbiter = ({
@@ -65,9 +66,10 @@ const AiArbiter = ({
   fetchAppSettings,
   canManageAgents,
   theme,
+  logoText,
 }: AiArbiterProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:DashboardAIArbiterTitle");
+  useDocumentTitle("Common:DashboardAIArbiterTitle", logoText);
   const [settingsChecked, setSettingsChecked] = React.useState(false);
   const [showSetupDialog, setShowSetupDialog] = React.useState(false);
 
@@ -138,6 +140,7 @@ const AiArbiterConnected = inject<TStore>(
       userStore.user?.isRoomAdmin
     ),
     theme: settingsStore.theme,
+    logoText: settingsStore.logoText,
   }),
 )(observer(AiArbiter));
 

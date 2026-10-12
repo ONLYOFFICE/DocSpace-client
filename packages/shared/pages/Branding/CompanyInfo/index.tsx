@@ -37,15 +37,15 @@ import React, { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import {
 	TextInput,
 	InputType,
 	InputSize,
-} from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
 
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { AboutDialog } from "../../../components/about-dialog";

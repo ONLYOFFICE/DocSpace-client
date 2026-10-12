@@ -37,10 +37,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Button } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { RoomsType } from "@docspace/shared/enums";
 
 import { getDialogContent } from "./DeleteDialog.helper";
@@ -207,12 +207,14 @@ const DeleteDialogComponent = (props) => {
 
     if (unsubscribe) return t("Common:Remove");
 
-    return t("Common:MoveTo");
+    return t("Common:Move");
   };
 
   const getDialogTitle = () => {
     if (isAIAgent) {
-      return t("Common:DeleteAIAgentTitle");
+      return selection.length > 1
+        ? t("Common:DeleteAIAgentsTitle")
+        : t("Common:DeleteAIAgentTitle");
     }
 
     if (isTemplate) {
@@ -276,7 +278,9 @@ const DeleteDialogComponent = (props) => {
             style={{ marginTop: "16px" }}
             label={
               isAIAgent
-                ? t("Common:DeleteAIAgentWarning")
+                ? selection.length > 1
+                  ? t("Common:DeleteAIAgentsWarning")
+                  : t("Common:DeleteAIAgentWarning")
                 : isTemplate
                   ? t("DeleteTemplateWarning")
                   : isFormSpace

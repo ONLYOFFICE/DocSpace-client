@@ -35,9 +35,9 @@
 
 import type { ReactNode } from "react";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
 import { terminateOperation } from "@docspace/shared/api/files";
 import type { TFolder, TOperation } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";

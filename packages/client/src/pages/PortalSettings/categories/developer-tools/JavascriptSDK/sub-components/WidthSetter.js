@@ -35,9 +35,9 @@
 
 import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Label } from "@docspace/ui-kit/components/label";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import { ControlsGroup, RowContainer } from "../presets/StyledPresets";
 

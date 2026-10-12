@@ -43,22 +43,22 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import pkg from "PACKAGE_FILE";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TFunction } from "i18next";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
-import { type TData } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { ComboBox, TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TFileLink } from "@docspace/shared/api/files/types";
 import type { LinkParamsType, TTranslation } from "@docspace/shared/types";
-import { TColorScheme, TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TColorScheme, TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import {
 	ModalDialog,
 	ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { getExternalLinks } from "@docspace/shared/api/files";
 

@@ -12,34 +12,34 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
       "line_number": 153,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n onClick={onApplyFilter}\n size={ButtonSize.medium}\n label={t(\"ApplyButton\")}\n isDisabled={!isChanged}\n primary\n scale\n testId=\"apply_filter_button\"\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/filter/sub-components/FilterBlock.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/filter/sub-components/FilterBlock.tsx",
       "line_number": 564,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"filter_apply-button\"\n size={ButtonSize.normal}\n primary\n label={t(\"ApplyButton\") ?? \"\"}\n scale\n onClick={onFilterAction}\n isDisabled={!showFooter}\n testId=\"filter_apply_button\"\n />",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog/index.tsx",
       "line_number": 198,
       "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:ApplyButton\")}\n onClick={handleSubmit}\n testId=\"room_logo_cover_apply_button\"\n />\n <Button\n scale",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
       "line_number": 177,
       "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </ModalDialog>\n ) : (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
       "line_number": 177,
       "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </ModalDialog>\n ) : (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",

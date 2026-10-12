@@ -33,11 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useMemo, useRef } from "react";
-import {
-  PluginFileType,
-  PluginComponents,
-} from "SRC_DIR/helpers/plugins/enums";
+import { useCallback, useEffect, useMemo } from "react";
+import { PluginActions, PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
@@ -48,6 +45,9 @@ import {
   PlaylistType,
 } from "@docspace/shared/components/media-viewer/MediaViewer.types";
 import { IContextMenuItemClient } from "SRC_DIR/helpers/plugins/types";
+import { isSameId } from "SRC_DIR/helpers/plugins/utils";
+import type MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
+import type FilesStore from "SRC_DIR/store/FilesStore";
 import type { TCurrentFile } from "@onlyoffice/docspace-plugin-sdk/react";
 import { BoxGroup } from "@onlyoffice/docspace-plugin-sdk";
 
@@ -56,13 +56,17 @@ interface UsePluginProps {
   pluginMediaViewerProps: PluginStore["pluginMediaViewerProps"];
   dispatchMessage: PluginStore["dispatchMessage"];
   contextMenuItemsList: PluginStore["contextMenuItemsList"];
-  getContextMenuKeysByType: PluginStore["getContextMenuKeysByType"];
+  files: FilesStore["files"];
+  getFilesContextOptions: FilesStore["getFilesContextOptions"];
   currentMediaFileId: NumberOrString;
   playlist: PlaylistType[];
-  setMediaViewerData: (data: {
-    visible: boolean;
-    id: NumberOrString | null;
-  }) => void;
+  isPluginFileOutsidePlaylist: MediaViewerDataStore["isPluginFileOutsidePlaylist"];
+  isOpenedByPlugin: MediaViewerDataStore["isOpenedByPlugin"];
+  isPluginViewerClosing: MediaViewerDataStore["isPluginViewerClosing"];
+  openPluginViewer: MediaViewerDataStore["openPluginViewer"];
+  closePluginViewer: MediaViewerDataStore["closePluginViewer"];
+  pendingPluginFileId: MediaViewerDataStore["pendingPluginFileId"];
+  showPluginFile: MediaViewerDataStore["showPluginFile"];
 }
 
 export const usePlugin = ({
@@ -70,20 +74,34 @@ export const usePlugin = ({
   pluginMediaViewerProps,
   dispatchMessage,
   contextMenuItemsList,
-  getContextMenuKeysByType,
+  files,
+  getFilesContextOptions,
   currentMediaFileId,
   playlist,
-  setMediaViewerData,
+  isPluginFileOutsidePlaylist,
+  isOpenedByPlugin,
+  isPluginViewerClosing,
+  openPluginViewer,
+  closePluginViewer,
+  pendingPluginFileId,
+  showPluginFile,
 }: UsePluginProps) => {
-  const isLoaded = useRef(false);
-
   const handlePluginClose = useCallback(async () => {
-    if (!pluginMediaViewerVisible || !pluginMediaViewerProps?.onClose) {
+    if (!pluginMediaViewerVisible || !pluginMediaViewerProps) {
       return null;
     }
 
-    const pluginName = pluginMediaViewerProps.pluginName;
-    const message = await pluginMediaViewerProps.onClose();
+    const { pluginName, onClose } = pluginMediaViewerProps;
+
+    if (!onClose) {
+      dispatchMessage({
+        message: { actions: [PluginActions.closeMediaViewer] },
+        pluginName,
+      });
+      return null;
+    }
+
+    const message = await onClose();
 
     dispatchMessage({ message, pluginName });
   }, [pluginMediaViewerProps, pluginMediaViewerVisible, dispatchMessage]);
@@ -104,33 +122,61 @@ export const usePlugin = ({
         });
       }
     },
-    [pluginMediaViewerProps, dispatchMessage, setMediaViewerData],
+    [pluginMediaViewerProps, dispatchMessage],
   );
 
   useEffect(() => {
-    if (!pluginMediaViewerVisible) {
-      isLoaded.current = false;
-      return;
-    }
+    if (!isPluginFileOutsidePlaylist || !pluginMediaViewerProps) return;
+
+    const { pluginName, fileId } = pluginMediaViewerProps;
+
+    console.warn(
+      `[Plugin: ${pluginName}] The media viewer was not opened: file ${fileId} is not in the open folder`,
+    );
+
+    dispatchMessage({
+      message: { actions: [PluginActions.closeMediaViewer] },
+      pluginName,
+    });
+  }, [isPluginFileOutsidePlaylist, pluginMediaViewerProps, dispatchMessage]);
+
+  useEffect(() => {
+    if (!pluginMediaViewerVisible || isOpenedByPlugin) return;
+
+    if (isPluginFileOutsidePlaylist) return;
 
     const fileId = pluginMediaViewerProps?.fileId || currentMediaFileId;
 
-    if (!isLoaded.current && fileId) {
-      isLoaded.current = true;
-      setMediaViewerData({ visible: true, id: fileId });
-      onLoad?.(fileId);
-    }
+    if (!fileId) return;
+
+    openPluginViewer(fileId);
+    onLoad?.(fileId);
   }, [
     pluginMediaViewerVisible,
+    isOpenedByPlugin,
+    isPluginFileOutsidePlaylist,
     onLoad,
     pluginMediaViewerProps,
     currentMediaFileId,
+    openPluginViewer,
   ]);
+
+  useEffect(() => {
+    if (pendingPluginFileId === undefined) return;
+
+    if (isPluginFileOutsidePlaylist) return;
+
+    showPluginFile(pendingPluginFileId);
+  }, [pendingPluginFileId, isPluginFileOutsidePlaylist, showPluginFile]);
+
+  useEffect(() => {
+    if (isPluginViewerClosing) closePluginViewer();
+  }, [isPluginViewerClosing, closePluginViewer]);
 
   // The file on screen in the shape `useCurrentFile` returns, so a component
   // reads it directly instead of being handed the id through `onLoad`.
   const currentFile = useMemo<TCurrentFile | null>(() => {
-    const item = playlist.find((p) => p.fileId === currentMediaFileId);
+    const item = playlist.find((p) => isSameId(p.fileId, currentMediaFileId));
     if (!item) return null;
 
     return {
@@ -175,27 +221,25 @@ export const usePlugin = ({
 
   // Get plugin context menu items
   const pluginContextMenuItems = useMemo(() => {
-    const item = playlist.find((p) => p.fileId === currentMediaFileId);
-    const fileExst = item?.fileExst;
+    const file = files.find((item) => isSameId(item.id, currentMediaFileId));
 
-    // plugins fetch the file themselves and cannot decrypt it, so an encrypted
-    // file must not be offered to them from the viewer either
-    if (item?.encrypted) return [];
+    if (!file) return [];
 
-    const pluginContextMenuKeys = [
-      ...(getContextMenuKeysByType(PluginFileType.image, fileExst) || []),
-      ...(getContextMenuKeysByType(PluginFileType.video, fileExst) || []),
-    ];
+    const contextOptions = getFilesContextOptions(file);
 
     const items: IContextMenuItemClient[] = [];
 
     contextMenuItemsList?.forEach(({ value }) => {
-      if (pluginContextMenuKeys.includes(value.key)) {
+      if (value.isGroupAction) return;
+
+      if (contextOptions.includes(value.key)) {
         if (value.items && value.items.length > 0) {
           const processedOptionValues: IContextMenuItemClient[] = [];
 
           value.items.forEach((nestedItem: IContextMenuItemClient) => {
-            if (pluginContextMenuKeys.includes(nestedItem.key)) {
+            if (nestedItem.isGroupAction) return;
+
+            if (contextOptions.includes(nestedItem.key)) {
               processedOptionValues.push(nestedItem);
             }
           });
@@ -212,12 +256,7 @@ export const usePlugin = ({
     });
 
     return items;
-  }, [
-    contextMenuItemsList,
-    getContextMenuKeysByType,
-    currentMediaFileId,
-    playlist,
-  ]);
+  }, [contextMenuItemsList, getFilesContextOptions, currentMediaFileId, files]);
 
   return {
     handlePluginClose,

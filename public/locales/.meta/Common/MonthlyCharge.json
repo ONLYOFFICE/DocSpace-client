@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 355,
       "context": "className={`${styles.summaryGrid} ${\n isShowPreviousStoragePlan ? styles.summaryGridMuted : \"\"\n }`}\n >\n <div className={styles.summaryCard}>\n <Text className={styles.cardLabel}>{t(\"MonthlyCharge\")}</Text>\n <BalanceAmount\n amount={monthlyPrice}\n currency={walletCodeCurrency}\n language={paymentStore.language}\n showRefresh={false}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 391,
       "context": "}`}\n >\n {isPaid ? (\n <div className={styles.summaryCard}>\n <Text className={styles.cardLabel}>\n {t(\"Common:MonthlyCharge\")}\n </Text>\n <Text className={styles.cardValue}>\n {formatCurrency(monthlyCharge, 2)}\n </Text>\n <Text className={styles.cardCaption}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",

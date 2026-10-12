@@ -42,10 +42,10 @@ import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg"
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
 import ShareWeixinReactSvg from "PUBLIC_DIR/images/share.weixin.react.svg";
 import ShareNextCloudReactSvg from "PUBLIC_DIR/images/share.nextcloud.react.svg";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { FileFillingFormStatus } from "../enums";
 
-export { LOADER_STYLE } from "@docspace/ui-kit/constants";
+export { LOADER_STYLE } from "@onlyoffice/apps-ui-kit/constants";
 
 export const TOAST_FOLDER_PUBLIC_KEY = "toast_folder_public_key";
 export const FILE_SIZE = "file_size";
@@ -275,4 +275,4 @@ export const TEMPLATE_GALLERY_FORMATS = [".docx", ".xlsx", ".pptx", ".pdf"];
 export const NO_QUOTA = -1;
 export const UNSET_QUOTA = -2;
 
-export * from "@docspace/ui-kit/constants";
+export * from "@onlyoffice/apps-ui-kit/constants";

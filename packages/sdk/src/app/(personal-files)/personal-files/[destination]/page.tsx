@@ -61,17 +61,15 @@ export default async function PersonalFilesDestination({
 
   const out = new URLSearchParams();
 
-  out.set("folder", sp.id || DOCS_SECTION_FOLDER_ALIAS[section]);
-
-  if (sp.count) out.set("pageCount", sp.count);
-  else if (sp.pageCount) out.set("pageCount", sp.pageCount);
-
-  for (const key of ["page", "sortBy", "sortOrder", "search", "parentId"] as const) {
-    const value = sp[key];
+  for (const [key, value] of Object.entries(sp)) {
     if (value) out.set(key, value);
   }
 
-  if (sp.auth) out.set("auth", sp.auth);
+  out.delete("id");
+  out.delete("count");
+  out.set("folder", sp.id || DOCS_SECTION_FOLDER_ALIAS[section]);
+
+  if (sp.count) out.set("pageCount", sp.count);
 
   redirect(`/personal-files?${out.toString()}`);
 }

@@ -40,7 +40,7 @@ import Filter from "@docspace/shared/api/people/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getPortal, getPortalUsersCount } from "@docspace/shared/api/portal";
 import { getFilesUsedSpace } from "@docspace/shared/api/files";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   checkRecalculateQuota,
   getQuotaSettings,

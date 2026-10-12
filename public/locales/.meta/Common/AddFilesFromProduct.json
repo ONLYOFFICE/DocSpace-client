@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/use-integration.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/use-integration.tsx",
       "line_number": 108,
       "context": "const composerActions = React.useMemo<ComposerAction[]>(\n () => [\n {\n id: \"add-files-from-product\",\n text: t(\"Common:AddFilesFromProduct\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue: \"Add files from {{productName}}\",\n }),\n icon: <CatalogDocuments className={styles.composerActionIcon} />,\n onClick: () => setPickerVisible(true),",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

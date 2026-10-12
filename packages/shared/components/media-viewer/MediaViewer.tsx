@@ -238,19 +238,6 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           if (item.withActiveItem) setActiveFiles?.([]);
         };
 
-        if (
-          item.fileType &&
-          item.fileType.includes("image") &&
-          !targetFile.viewAccessibility.ImageView
-        )
-          return;
-        if (
-          item.fileType &&
-          item.fileType.includes("video") &&
-          !targetFile.viewAccessibility.MediaView
-        )
-          return;
-
         model.unshift({
           id: item.key,
           disabled: false,
@@ -682,7 +669,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
   return canOpen ? (
     <ViewerWrapper
-      title={title}
+      title={pluginTitle || title}
       isPdf={isPdf}
       visible={visible}
       isImage={isImage}

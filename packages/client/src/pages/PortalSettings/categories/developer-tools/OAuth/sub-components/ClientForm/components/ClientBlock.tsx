@@ -38,7 +38,7 @@ import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
 import copy from "copy-to-clipboard";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 
 import styles from "../ClientForm.styled.module.scss";

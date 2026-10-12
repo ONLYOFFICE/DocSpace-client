@@ -12,16 +12,16 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat-info-block/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/chat-info-block/index.tsx",
       "line_number": 69,
       "context": "}: ChatInfoBlockProps) => {\n const t = useCommonTranslation();\n \n const headerText =\n standalone && isPortalAdmin\n ? t(\"AIFeaturesAreCurrentlyDisabled\")\n : t(\"AIFeaturesNotActive\");\n \n // shared intro for the SaaS admin variants: what AI gives + wallet notice\n const activateIntro = (\n <Text as=\"span\">{`${t(\"AIDisabledInfoBlockActivateWalletDescription\")} `}</Text>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
       "line_number": 73,
       "context": "}),\n )\n // saas (admin + user)\n .with([false, P._], () => t(\"EmptyAIAgentsNotActiveYetTitle\"))\n // standalone user\n .otherwise(() => t(\"AIFeaturesAreCurrentlyDisabled\"));\n \n const description = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

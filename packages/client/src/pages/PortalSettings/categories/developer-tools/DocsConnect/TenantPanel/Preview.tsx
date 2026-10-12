@@ -38,11 +38,11 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
-import { EmptyView } from "@docspace/ui-kit/components/empty-view";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { DocumentEditor, type IConfig } from "@docspace/ui-kit/document-editor";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Tabs, TabsTypes } from "@onlyoffice/apps-ui-kit/components/tabs";
+import { EmptyView } from "@onlyoffice/apps-ui-kit/components/empty-view";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { DocumentEditor, type IConfig } from "@onlyoffice/apps-ui-kit/document-editor";
 
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";

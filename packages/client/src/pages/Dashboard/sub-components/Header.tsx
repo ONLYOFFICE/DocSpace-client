@@ -63,16 +63,16 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { getBrandName } from "@docspace/shared/constants/brands";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
-import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
+import TourReactSvgUrl from "PUBLIC_DIR/images/icons/16/tour.react.svg?url";
 
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 
 import styles from "../Dashboard.module.scss";
+import UpgradePathLine from "./UpgradePathLine";
 
 type HeaderProps = {
   /**
@@ -85,6 +85,8 @@ type HeaderProps = {
   paymentDate?: string;
   isAdminOrOwner?: boolean;
   standalone?: boolean;
+  isCommunity?: boolean;
+  logoText?: string;
 };
 
 const Header = ({
@@ -93,6 +95,8 @@ const Header = ({
   paymentDate = "",
   isAdminOrOwner = false,
   standalone = false,
+  isCommunity = false,
+  logoText = "",
 }: HeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -106,7 +110,7 @@ const Header = ({
       <div className={styles.planHeaderText}>
         <Text className={styles.planTitle}>
           {t("Common:WelcomeToOrganization", {
-            organizationName: getBrandName("OrganizationName"),
+            organizationName: logoText,
           })}
         </Text>
 
@@ -143,13 +147,17 @@ const Header = ({
             </Link>
           </div>
         ) : null}
+
+        {isAdminOrOwner && standalone && isCommunity ? (
+          <UpgradePathLine />
+        ) : null}
       </div>
 
       {/* Pinned to the far edge of the header row, opposite the greeting. */}
       {onOpenTour ? (
         <IconButton
           className={styles.helpButton}
-          iconName={QuestionReactSvgUrl}
+          iconName={TourReactSvgUrl}
           size={16}
           isClickable
           title={t("Common:WelcomeStartTour")}
@@ -173,6 +181,8 @@ const HeaderConnected = inject<TStore>(
     isAdminOrOwner:
       (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
     standalone: settingsStore.standalone,
+    isCommunity: currentTariffStatusStore.isCommunity,
+    logoText: settingsStore.logoText,
   }),
 )(observer(Header));
 

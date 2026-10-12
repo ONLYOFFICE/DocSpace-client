@@ -1,0 +1,29 @@
+{
+  "key_path": "TokensReasoning",
+  "content": "Thinking",
+  "content_en_sha1_hash": "d08d8da0b3e11289424be3c1bb9a5c234b24ea17",
+  "created_at": "2026-10-01T08:23:10.382Z",
+  "updated_at": "2026-10-01T08:25:20.566Z",
+  "comment": {
+    "text": "Label in a token usage summary list representing the number of tokens used for reasoning processes.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T08:25:20.566Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageContent.tsx",
+      "line_number": 135,
+      "context": "<UsageLine\n label={t(\"TokensWrittenToCache\")}\n value={format(usage.cacheWriteTokens)}\n />\n <UsageLine\n label={t(\"TokensReasoning\")}\n value={format(usage.reasoningTokens)}\n />\n <UsageLine label={t(\"Images\")} value={format(usage.imageTokens)} />\n </div>\n </div>",
+      "module": "@onlyoffice/apps-ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
       "line_number": 82,
       "context": "<Text fontSize=\"12px\" fontWeight={600}>\n {t(\"AutoTopUp\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" fontWeight={400} className={styles.infoDescription}>\n {t(\"WhenBalanceDropsTo\", {\n min: formatWalletCurrency!(minBalance, 0),\n max: formatWalletCurrency!(upToBalance, 0),\n })}\n </Text>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -59,6 +59,7 @@ type TDialogProps = {
   isCreateDisabled?: boolean;
   extension?: string;
   errorText?: string;
+  withDontAskAgain?: boolean;
   options?: IComboBoxItem[];
   selectedOption?: IComboBoxItem;
   onSave?: (e: unknown, value: string) => Promise<void>;
@@ -102,14 +103,14 @@ const CreatePluginFile = ({
 }: TCreatePluginFileProps) => {
   const { t } = useTranslation(["Translations", "Common", "Files"]);
 
-  const onCloseAction = () => {
+  const onCancelAction = () => {
     onCancel?.();
     onClose?.();
   };
 
   const onSaveAction = async (e: unknown, value: string) => {
     if (!onSave) {
-      onCloseAction();
+      onClose?.();
       return;
     }
 
@@ -122,7 +123,7 @@ const CreatePluginFile = ({
         updateCreateDialogProps: updateCreatePluginFileProps,
       });
 
-      if (isCloseAfterCreate) onCloseAction();
+      if (isCloseAfterCreate) onClose?.();
     } catch (error) {
       if (!onError) return;
 
@@ -183,8 +184,8 @@ const CreatePluginFile = ({
       startValue={startValue}
       onSave={onSaveAction}
       onChange={onChangeAction}
-      onCancel={onCloseAction}
-      onClose={onCloseAction}
+      onCancel={onCancelAction}
+      onClose={onCancelAction}
       isCreateDialog={isCreateDialog}
       options={options}
       selectedOption={selectedOption}
@@ -192,6 +193,7 @@ const CreatePluginFile = ({
       extension={extension}
       errorText={errorText}
       isCreateDisabled={isCreateDisabled}
+      withDontAskAgain={false}
     />
   );
 };

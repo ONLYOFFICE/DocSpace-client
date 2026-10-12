@@ -37,8 +37,8 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TFunction } from "i18next";
 
-import { SearchInput } from "@docspace/ui-kit/components/search-input";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { SearchInput } from "@onlyoffice/apps-ui-kit/components/search-input";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { searchMigrationUsers } from "SRC_DIR/pages/PortalSettings/utils/importUtils";
 import AccountsTable from "./AccountsTable";

@@ -84,7 +84,18 @@ describe("FilesActionsStore — simple methods (batch 3)", () => {
       dialogsStore: { setAskAIFile },
     });
     store.askAIAction({ id: 1 } as never);
-    expect(setAskAIFile).toHaveBeenCalledWith({ id: 1 });
+    expect(setAskAIFile).toHaveBeenCalledWith({ id: 1 }, false);
+  });
+
+  // The results folder's "Analyze responses" button says what it is instead
+  // of leaving the chat to infer it from the fetched row.
+  it("askAIAction carries the analyze intent through", () => {
+    const setAskAIFile = vi.fn();
+    const store = createTestFilesActionsStore({
+      dialogsStore: { setAskAIFile },
+    });
+    store.askAIAction({ id: 1 } as never, true);
+    expect(setAskAIFile).toHaveBeenCalledWith({ id: 1 }, true);
   });
 
   it("setThirdpartyInfo opens the connect dialog with the matched provider", () => {

@@ -61,7 +61,7 @@
 
 import React from "react";
 
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import styles from "./SdkIframe.module.scss";
 

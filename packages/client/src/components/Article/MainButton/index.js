@@ -59,9 +59,9 @@ import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 import classNames from "classnames";
 
-import { MainButton } from "@docspace/ui-kit/components/main-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Button } from "@docspace/ui-kit/components/button";
+import { MainButton } from "@onlyoffice/apps-ui-kit/components/main-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { isDesktop } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
@@ -82,6 +82,12 @@ import { getFolderInfo } from "@docspace/shared/api/files";
 import MobileView from "./MobileView";
 import ActivateAIDialog from "../../dialogs/ActivateAIDialog";
 import ClientSimpleTopUpDialog from "../../EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
+
+import {
+  getManagerSection,
+  getVisibleCreateActions,
+  sendCustomAction,
+} from "@docspace/shared/utils/frameCustomActions";
 
 import styles from "./main-button.module.scss";
 
@@ -165,7 +171,39 @@ const ArticleMainButtonContent = (props) => {
     setSecurity,
     isEmptyFilesList,
     language,
+    frameCustomActions,
+    rootFolderType,
   } = props;
+
+  const frameCreateActions = React.useMemo(
+    () =>
+      getVisibleCreateActions(
+        frameCustomActions,
+        getManagerSection(rootFolderType),
+      ).map((action) => ({
+        id: `actions_sdk-action-${action.key}`,
+        className: "main-button_drop-down",
+        icon: action.icon,
+        label: action.label,
+        key: `sdk-action-${action.key}`,
+        onClick: () =>
+          sendCustomAction({
+            action: action.key,
+            type: "create",
+            folderId: currentFolderId,
+          }),
+      })),
+    [frameCustomActions, rootFolderType, currentFolderId],
+  );
+
+  const withFrameActions = (items) =>
+    frameCreateActions.length > 0 && !isAccountsPage && !isSettingsPage
+      ? [
+          ...items,
+          { key: "separator-custom-actions", isSeparator: true },
+          ...frameCreateActions,
+        ]
+      : items;
 
   const location = useLocation();
 
@@ -780,7 +818,7 @@ const ArticleMainButtonContent = (props) => {
         <MobileView
           t={t}
           titleProp={t("Common:Upload")}
-          actionOptions={actions}
+          actionOptions={withFrameActions(actions)}
           buttonOptions={!isAccountsPage ? uploadActions : null}
           withoutButton={
             isRoomsFolder ||
@@ -833,7 +871,7 @@ const ArticleMainButtonContent = (props) => {
           isDisabled={isDisabled}
           isDropdown={isDropdownMainButton}
           text={mainButtonText}
-          model={model}
+          model={withFrameActions(model)}
           title={mainButtonText}
         />
       )}
@@ -1022,6 +1060,8 @@ export default inject(
 
       isFrame,
       disableActionButton: frameConfig?.disableActionButton,
+      frameCustomActions: isFrame ? settingsStore.frameCustomActions : null,
+      rootFolderType: selectedFolderStore.rootFolderType,
 
       parentRoomType,
       isFolder,

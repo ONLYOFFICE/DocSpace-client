@@ -64,9 +64,9 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 
 import ChangePasswordDialog from "SRC_DIR/components/dialogs/ChangePasswordDialog";

@@ -34,7 +34,7 @@
  */
 import React from "react";
 
-import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
+import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import { useHistory } from "../../FilesView/hooks/useHistory";
 
@@ -67,5 +67,5 @@ export const useSocket = ({
     return () => {
       SocketHelper?.off(SocketEvents.UpdateHistory, updateHistory);
     };
-  }, []);
+  }, [selectionId, infoPanelSelectionType, fetchHistory]);
 };

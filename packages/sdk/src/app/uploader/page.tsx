@@ -33,11 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { headers } from "next/headers";
+
 import { getFilesSettings } from "@/api/files";
+import { OAUTH_FRAME_HEADER } from "@/utils/constants";
 import { logger } from "../../../logger.mjs";
 
 import UploaderClient from "./page.client";
-import type { UploaderFilesSettings } from "@docspace/ui-kit/uploader/Uploader.types";
+import UploaderOAuthPage from "./page.oauth.client";
+import type { UploaderFilesSettings } from "@onlyoffice/apps-ui-kit/uploader/Uploader.types";
 import { formatExtensions } from "./_utils";
 
 export default async function Page({
@@ -57,11 +61,25 @@ export default async function Page({
     }),
   );
 
-  const filesSettings = (await getFilesSettings()) as UploaderFilesSettings;
-
   const { accept, shortText, fullText, badgeValue } = formatExtensions(
     baseConfig?.acceptExtensions,
   );
+
+  const hdrs = await headers();
+
+  if (hdrs.get(OAUTH_FRAME_HEADER)) {
+    return (
+      <UploaderOAuthPage
+        accept={accept}
+        shortText={shortText}
+        fullText={fullText}
+        badgeValue={badgeValue}
+        baseConfig={baseConfig}
+      />
+    );
+  }
+
+  const filesSettings = (await getFilesSettings()) as UploaderFilesSettings;
 
   return (
     <UploaderClient

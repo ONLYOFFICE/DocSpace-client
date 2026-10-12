@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/use-integration.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/use-integration.tsx",
       "line_number": 117,
       "context": "icon: <CatalogDocuments className={styles.composerActionIcon} />,\n onClick: () => setPickerVisible(true),\n },\n {\n id: \"upload-from-device\",\n text: t(\"Common:UploadFromDevice\", {\n defaultValue: \"Upload from device\",\n }),\n icon: <UploadIcon className={styles.composerActionIcon} />,\n onClick: () => deviceUploaderRef.current?.open(),\n },",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

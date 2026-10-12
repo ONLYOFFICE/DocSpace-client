@@ -250,6 +250,7 @@
   "QuotasDescription": "ユーザーとルームのストレージ容量制限を設定します。",
   "Recalculate": "再計算",
   "RegisterApp": "アプリを登録",
+  "ReportFormatDescription": "イベントが多すぎる場合、XLSXレポートには最新のイベントのみが含まれます。すべてのイベントをエクスポートするには、CSVを選択してください。",
   "ResetTemplateDescription": "現在の空白の状態をデフォルトにリセットしてもよろしいですか？\nこの操作は元に戻すことはできません。",
   "ResetToDefault": "初期設定にリセット",
   "RestAPI": "REST API",

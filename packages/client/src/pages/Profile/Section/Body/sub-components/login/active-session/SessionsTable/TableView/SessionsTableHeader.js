@@ -34,7 +34,7 @@
  */
 
 import { useEffect, useState } from "react";
-import { TableHeader } from "@docspace/ui-kit/components/table";
+import { TableHeader } from "@onlyoffice/apps-ui-kit/components/table";
 
 const TABLE_VERSION = "5";
 const TABLE_COLUMNS = `SessionsColumns_ver-${TABLE_VERSION}`;

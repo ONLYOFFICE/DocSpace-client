@@ -55,17 +55,17 @@ import {
 	Avatar,
 	AvatarRole,
 	AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
 import {
 	ComboBoxSize,
 	type TOption,
-} from "@docspace/ui-kit/components/combobox";
-import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
+import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import styles from "../Share.module.scss";
 import type { UserProps } from "../Share.types";

@@ -38,17 +38,17 @@
 import React from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
+import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TranslationProvider } from "@docspace/ui-kit/providers/translation";
+import { TranslationProvider } from "@onlyoffice/apps-ui-kit/providers/translation";
 import type {
   TTranslations,
   TTranslationProvider,
-} from "@docspace/ui-kit/providers/translation";
-import { ThemeProvider } from "@docspace/ui-kit/providers/theme";
-import type { TThemeProvider } from "@docspace/ui-kit/providers/theme";
+} from "@onlyoffice/apps-ui-kit/providers/translation";
+import { ThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
+import type { TThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 import { TDataContext } from "@/types";
 

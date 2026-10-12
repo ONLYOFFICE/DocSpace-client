@@ -37,8 +37,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { getBgPattern } from "@docspace/shared/utils/common";
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
-import PaymentCompletePage from "@docspace/ui-kit/billing/payment-complete/PaymentCompletePage";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import PaymentCompletePage from "@onlyoffice/apps-ui-kit/billing/payment-complete/PaymentCompletePage";
 
 import styles from "./PaymentComplete.module.scss";
 

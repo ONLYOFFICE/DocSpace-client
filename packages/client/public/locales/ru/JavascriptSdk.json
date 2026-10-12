@@ -74,7 +74,6 @@
   "ItemsCount": "Количество элементов на странице",
   "ItemsCountDescription": "Вы можете указать количество файлов/папок, отображаемых на одной странице, а также указать, с какой страницы начать отображение",
   "JavaScriptCodeDescription": "Встраивание рабочего пространства или его части с помощью JavaScript. Скопируйте приведенный ниже код JavaScript.",
-  "JavascriptSdk": "Пакет SDK для Javascript",
   "LimitByTime": "Ограничение по времени",
   "LinkSetDescription": "Эта ссылка защищена при помощи {{parameter}}. Чтобы настроить ссылку,",
   "LinkSetDescription2": "Для этой ссылки заданы {{parameter1}} и {{parameter2}}. Чтобы настроить,",

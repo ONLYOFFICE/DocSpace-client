@@ -65,7 +65,7 @@ import React from "react";
 
 import api from "@docspace/shared/api";
 import { isRequestAborted } from "@docspace/shared/utils/axios/isRequestAborted";
-import { formatDate, parseToDateTime } from "@docspace/ui-kit/utils/date";
+import { formatDate, parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type {
   TFeedAction,

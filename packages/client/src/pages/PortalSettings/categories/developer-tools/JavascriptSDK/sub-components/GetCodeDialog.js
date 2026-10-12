@@ -35,10 +35,10 @@
 
 import React from "react";
 import copy from "copy-to-clipboard";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { Button } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import styles from "./GetCodeDialog.module.scss";
 

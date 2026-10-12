@@ -41,18 +41,18 @@ import { observer } from "mobx-react";
 import { useRouter } from "next/navigation";
 import toLower from "lodash/toLower";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import {
   TextInput,
   InputType,
   InputSize,
-} from "@docspace/ui-kit/components/text-input";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { validatePortalName } from "@docspace/shared/utils/common";
 
 import type { TDomainValidator } from "@docspace/shared/api/settings/types";

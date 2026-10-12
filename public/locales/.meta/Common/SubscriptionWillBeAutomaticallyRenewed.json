@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 244,
       "context": "},\n ];\n \n const keyProp = isScheduled\n ? { tKey: \"SubscriptionAutoCancellation\" }\n : { tKey: \"SubscriptionWillBeAutomaticallyRenewed\" };\n \n if (shouldShowLoader) return <AdditionalStoragePageLoader />;\n \n const getTotalNextStoragePrice = () => {\n if (!nextStoragePlanSize) return;",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

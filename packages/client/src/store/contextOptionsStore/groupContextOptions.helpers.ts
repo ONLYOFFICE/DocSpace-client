@@ -49,10 +49,10 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url
 import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import copy from "copy-to-clipboard";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type {
   ContextMenuModel,
-} from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import { onShowEditingToast } from "./helpers";
 import type { TContextOption } from "./helpers";
@@ -199,6 +199,14 @@ self: ContextOptionsStore,t: TTranslation
 
     if (archiveOptions) options.push(archiveOptions);
     options.push(...pluginOptions);
+
+    const roomFrameActions = self.onMultiLoadFrameActions(selection);
+    if (roomFrameActions.length > 0) {
+      options.push(
+        { key: "separator-custom-actions", isSeparator: true },
+        ...roomFrameActions,
+      );
+    }
 
     canDelete &&
       options.push({
@@ -363,6 +371,21 @@ self: ContextOptionsStore,t: TTranslation
   const pluginOptions = self.onMultiLoadPlugins(selection);
 
   options.splice(1, 0, ...pluginOptions);
+
+  const frameActions = self.onMultiLoadFrameActions(selection);
+
+  if (frameActions.length > 0) {
+    const deleteBlockIndex = options.findIndex(
+      (option) => option.key === "separator1",
+    );
+
+    options.splice(
+      deleteBlockIndex === -1 ? options.length : deleteBlockIndex,
+      0,
+      { key: "separator-custom-actions", isSeparator: true },
+      ...frameActions,
+    );
+  }
 
   const newOptions = options.filter(
     (option, index) =>

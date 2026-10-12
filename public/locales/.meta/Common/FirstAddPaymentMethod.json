@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/Amount.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/Amount.tsx",
       "line_number": 130,
       "context": "};\n \n const textTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"FirstAddPaymentMethod\")}\n </Text>\n );\n };\n \n const amountTabs = getAmountTabs();",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

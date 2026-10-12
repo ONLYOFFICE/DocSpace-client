@@ -37,14 +37,14 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import classNames from "classnames";
-import { Row, RowContent } from "@docspace/ui-kit/components/rows";
-import type { TData } from "@docspace/ui-kit/components/rows/row/Row.types";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
+import type { TData } from "@onlyoffice/apps-ui-kit/components/rows/row/Row.types";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";

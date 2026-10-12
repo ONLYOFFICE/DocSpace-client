@@ -76,18 +76,18 @@ import {
   subtractFromDate,
   parseToDateTime,
   isAfter,
-} from "@docspace/ui-kit/utils/date";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/utils/date";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { DateTimePicker } from "@docspace/ui-kit/components/date-time-picker";
-import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { DateTimePicker } from "@onlyoffice/apps-ui-kit/components/date-time-picker";
+import { InputType, TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getConstName } from "@docspace/shared/constants/consts";
 

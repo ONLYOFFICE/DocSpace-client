@@ -37,12 +37,13 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TableHeader } from "@docspace/ui-kit/components/table";
+import { TableHeader } from "@onlyoffice/apps-ui-kit/components/table";
 
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 
 type TableHeaderProps = {
   containerRef: React.RefObject<HTMLDivElement>;
+  isImage?: boolean;
   columnStorageName: string;
   columnInfoPanelStorageName: string;
   sectionWidth: number;
@@ -52,39 +53,81 @@ type TableHeaderProps = {
 };
 
 const ModelSettingsTableHeader = (props: TableHeaderProps) => {
-  const { aiModelsCurrencySymbol, ...rest } = props;
+  const { aiModelsCurrencySymbol, isImage, ...rest } = props;
 
   const { t } = useTranslation(["Common"]);
 
+  const outputColumn = {
+    key: "Output",
+    title: t("Common:OutputCurrency", { currency: aiModelsCurrencySymbol }),
+    enable: true,
+    resizable: true,
+    minWidth: 90,
+  };
+
+  const priceColumns = isImage
+    ? [
+        {
+          key: "ImageInput",
+          title: t("Common:ImageInputCurrency", {
+            currency: aiModelsCurrencySymbol,
+          }),
+          enable: true,
+          resizable: true,
+          minWidth: 90,
+        },
+        {
+          key: "ImageOutput",
+          title: t("Common:ImageOutputCurrency", {
+            currency: aiModelsCurrencySymbol,
+          }),
+          enable: true,
+          resizable: true,
+          minWidth: 90,
+        },
+        outputColumn,
+      ]
+    : [
+        {
+          key: "Input",
+          title: t("Common:InputCurrency", {
+            currency: aiModelsCurrencySymbol,
+          }),
+          enable: true,
+          resizable: true,
+          minWidth: 90,
+        },
+        outputColumn,
+        {
+          key: "CachedInput",
+          title: t("Common:CachedInputCurrency", {
+            currency: aiModelsCurrencySymbol,
+          }),
+          enable: true,
+          resizable: true,
+          minWidth: 90,
+        },
+      ];
+
   const defaultColumns = [
     {
+      // Key "Name" would trigger ui-kit min-width handling.
       key: "Model",
-      title: t("Common:AIModel"),
+      title: t("Common:Name"),
       enable: true,
       resizable: true,
       default: true,
       active: true,
       minWidth: 180,
     },
-    {
-      key: "Input",
-      title: t("Common:InputCurrency", { currency: aiModelsCurrencySymbol }),
-      enable: true,
-      resizable: true,
-      minWidth: 90,
-    },
-    {
-      key: "Output",
-      title: t("Common:OutputCurrency", { currency: aiModelsCurrencySymbol }),
-      enable: true,
-      resizable: true,
-      minWidth: 90,
-    },
+    ...priceColumns,
+    // Fixed so both tables align on the right.
     {
       key: "OffOn",
       title: t("Common:OffOn"),
       enable: true,
       resizable: true,
+      isShort: true,
       minWidth: 76,
     },
     {
@@ -92,7 +135,8 @@ const ModelSettingsTableHeader = (props: TableHeaderProps) => {
       title: t("Common:ModelDetails"),
       enable: true,
       resizable: true,
-      minWidth: 110,
+      defaultSize: 120,
+      minWidth: 120,
     },
   ];
 
@@ -101,6 +145,8 @@ const ModelSettingsTableHeader = (props: TableHeaderProps) => {
       columns={defaultColumns}
       showSettings={false}
       useReactWindow
+      // Recompute on every visit so both tables line up.
+      resetColumnsSize
       {...rest}
     />
   );

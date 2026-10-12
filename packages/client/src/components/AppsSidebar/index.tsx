@@ -65,27 +65,27 @@ import { Link, useNavigate } from "react-router";
 
 import { useEffect, useMemo } from "react";
 
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { NavMenu } from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import type {
   NavMenuGroup,
   NavMenuItem,
   NavSubItem,
-} from "@docspace/ui-kit/components/nav-menu";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { Portal } from "@docspace/ui-kit/components/portal";
-import { getLogoUrl } from "@docspace/ui-kit/utils/getLogoUrl";
-import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
-import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
+} from "@onlyoffice/apps-ui-kit/components/nav-menu";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
+import { getLogoUrl } from "@onlyoffice/apps-ui-kit/utils/getLogoUrl";
+import { WhiteLabelLogoType } from "@onlyoffice/apps-ui-kit/enums";
+import articleStyles from "@onlyoffice/apps-ui-kit/components/article/Article.module.scss";
 import { DeviceType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { hasDevToolsAccess } from "@docspace/shared/utils/devToolsAccess";
-import type { ArticleProfileProps } from "@docspace/ui-kit/components/article";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import type { ArticleProfileProps } from "@onlyoffice/apps-ui-kit/components/article";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import BackButton from "@docspace/ui-kit/components/article/sub-components/BackButton";
-import ArticleDevToolsBar from "@docspace/ui-kit/components/article/sub-components/DevToolsBar";
-import { ArticleProfileLoader } from "@docspace/ui-kit/components/article/skeletons";
+import BackButton from "@onlyoffice/apps-ui-kit/components/article/sub-components/BackButton";
+import ArticleDevToolsBar from "@onlyoffice/apps-ui-kit/components/article/sub-components/DevToolsBar";
+import { ArticleProfileLoader } from "@onlyoffice/apps-ui-kit/components/article/skeletons";
 import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
 import type { Section } from "SRC_DIR/helpers/plugins/enums";
 import CollapseButton from "./CollapseButton";

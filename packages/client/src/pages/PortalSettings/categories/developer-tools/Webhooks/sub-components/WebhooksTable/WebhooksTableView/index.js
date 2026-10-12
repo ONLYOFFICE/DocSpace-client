@@ -35,9 +35,9 @@
 
 import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 
-import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
+import { TableBody, TableContainer } from "@onlyoffice/apps-ui-kit/components/table";
 
 import WebhooksTableRow from "./WebhooksTableRow";
 import WebhookTableHeader from "./WebhookTableHeader";

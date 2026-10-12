@@ -38,7 +38,7 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import { VariableSizeList as List } from "react-window";
 import { inject, observer } from "mobx-react";
 
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 import FileRow from "./FileRow";

@@ -37,9 +37,9 @@ import FormGalleryEmptyInfoReactSvgUrl from "PUBLIC_DIR/images/emptyview/empty.f
 import FormGalleryEmptyInfoReactSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.form.templates.dark.svg?url";
 
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./NoItem.module.scss";
 

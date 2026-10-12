@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/CurrentSubscription.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/additional-storage/CurrentSubscription.tsx",
       "line_number": 87,
       "context": "})}\n </Text>\n </div>\n </div>\n <Text fontSize=\"12px\" className={styles.renewalInfo}>\n {t(\"SubscriptionAutoRenewedOn\", { finalDate: storageExpiryDate })}\n </Text>\n </div>\n </div>\n );\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

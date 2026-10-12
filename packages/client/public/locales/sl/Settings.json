@@ -250,6 +250,7 @@
   "QuotasDescription": "Nastavite kvoto prostora za shranjevanje za uporabnike in sobe.",
   "Recalculate": "Preračunaj",
   "RegisterApp": "Registrirajte aplikacijo",
+  "ReportFormatDescription": "Kadar je dogodkov preveč, poročilo XLSX ohrani le najnovejše. Za izvoz vseh dogodkov izberite CSV.",
   "ResetTemplateDescription": "Ali ste prepričani, da želite resetirati trenutno stanje praznega na njegovo privzerno stanje?\nTo dejanje ne boste mogli preklicati.",
   "ResetToDefault": "Ponastavi na privzeto",
   "RestAPI": "REST API",

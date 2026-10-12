@@ -43,11 +43,11 @@ import type {
 	Option,
 	TWeekdaysLabel,
 } from "../../../types";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
-import type { ButtonSize } from "@docspace/ui-kit/components/button";
-import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import type { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import type { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme";
 import type { FilesSelectorSettings } from "../../../components/files-selector-input";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type { TStorageBackup } from "../../../api/settings/types";
 import type { TThirdParties } from "../../../api/files/types";
 

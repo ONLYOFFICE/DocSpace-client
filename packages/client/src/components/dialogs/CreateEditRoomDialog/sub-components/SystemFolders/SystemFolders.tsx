@@ -35,8 +35,8 @@
 
 import React from "react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
 import styles from "../../CreateEditRoomDialog.module.scss";
 

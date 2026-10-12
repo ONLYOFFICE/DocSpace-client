@@ -43,10 +43,10 @@ import type {
 	ThirdPartyAccountType,
 	TTranslation,
 } from "../../../types";
-import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
-import type { ButtonSize } from "@docspace/ui-kit/components/button";
+import type { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme";
+import type { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import type { FilesSelectorSettings } from "../../../components/files-selector-input";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import {
 	DOCUMENTS,
 	TEMPORARY_STORAGE,

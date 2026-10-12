@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
       "line_number": 88,
       "context": "<div className={styles.cardIcon}>\n <AIChatIcon />\n </div>\n ),\n title: t(\"AIChatInAnyApp\"),\n description: t(\"AIChatInAnyAppDescription\"),\n },\n {\n id: \"agents\",\n icon: (\n <div className={styles.cardIcon}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

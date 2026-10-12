@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@docspace/ui-kit/styles/mixins";
-@use "@docspace/ui-kit/styles/variables/colors";
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+@use "@onlyoffice/apps-ui-kit/styles/variables/colors";
 
 .container {
   position: absolute;
@@ -140,4 +140,13 @@
     margin-block: 0;
     margin-inline: 0 7px;
   }
+}
+
+.galleryContent {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.dimmed {
+  opacity: 0.5;
+  pointer-events: none;
 }

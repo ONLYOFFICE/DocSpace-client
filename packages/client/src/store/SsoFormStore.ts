@@ -53,8 +53,8 @@ import type {
 } from "@docspace/shared/api/settings/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TTranslation } from "@docspace/shared/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { EmployeeType } from "@docspace/shared/enums";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import type { ChangeEvent } from "react";

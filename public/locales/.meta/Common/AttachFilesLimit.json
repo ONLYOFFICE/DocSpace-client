@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/providers/files/notices.ts",
+      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/providers/files/notices.ts",
       "line_number": 76,
       "context": "* Slavic locales.\n */\n export const notifyAttachmentLimit = (t: TFunction, count: number) => {\n if (count <= 0) return;\n toastr.warning(\n t(\"Common:AttachFilesLimit\", {\n limit: CHAT_ATTACHMENT_LIMIT,\n defaultValue: \"You can attach up to {{limit}} files\",\n }),\n );\n };",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

@@ -11,7 +11,6 @@
   "AiSuggestions: FormsTemplatesSaveAsTemplate, RoomsTemplatesSaveAsTemplate",
   "AiSuggestions: FormsTrashDeletePermanently, RoomsTrashDeletePermanently",
   "AiSuggestions: FormsTrashWhatSDeleted, RoomsTrashWhatSDeleted",
-  "Common: AIAgentModel, AIModel",
   "Common: AIChat, AIChatButton",
   "Common: AboutCompanyTitle, AboutHeader",
   "Common: AddTag, TagsPlaceholder",
@@ -43,6 +42,6 @@
   "Common: SelectAction, TitleSelectFile",
   "Common: Skip, SkipTitle",
   "Common: SubscriptionDeactivated, SubscriptionDeactivatedNonPayment",
-  "Common: WebSearch, WebSearchAI",
+  "Common: Thinking, TokensReasoning",
   "OAuth: DeleteApplicationDescription, DeleteApplicationsDescription"
 ]

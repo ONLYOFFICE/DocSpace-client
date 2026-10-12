@@ -36,7 +36,7 @@
 import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router";
 
-import Section, { SectionProps } from "@docspace/ui-kit/components/section";
+import Section, { SectionProps } from "@onlyoffice/apps-ui-kit/components/section";
 
 const SectionWrapper = ({
   children,

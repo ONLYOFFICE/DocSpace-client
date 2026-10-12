@@ -38,7 +38,7 @@ import { useTranslation } from "react-i18next";
 
 import { isFile } from "../../../utils/typeGuards";
 import { AnalyticsEvents, EmployeeStatus, ShareAccessRights } from "../../../enums";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 import { ShareLinkService } from "../../../services/share-link.service";
 import type { TShareToUser } from "../../../api/files/types";
 
@@ -47,10 +47,10 @@ import type { TShareToUser } from "../../../api/files/types";
 import type {
 	TAccessRight,
 	TOnSubmit,
-} from "@docspace/ui-kit/components/selector";
+} from "@onlyoffice/apps-ui-kit/components/selector";
 
 import { getShareAccessRightOptions } from "../Share.helpers";
-import { toastr, TData } from "@docspace/ui-kit/components/toast";
+import { toastr, TData } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import type { ShareSelectorProps } from "./Selector.types";
 

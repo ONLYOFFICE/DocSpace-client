@@ -250,6 +250,7 @@
   "QuotasDescription": "Kullanıcılar ve odalar için depolama kotası ayarlayın.",
   "Recalculate": "Yeniden hesapla",
   "RegisterApp": "Uygulama kaydet",
+  "ReportFormatDescription": "Çok fazla olay olduğunda XLSX raporu yalnızca en son olayları içerir. Tüm olayları dışa aktarmak için CSV'yi seçin.",
   "ResetTemplateDescription": "Boşluğun mevcut durumunu varsayılan durumuna sıfırlamak istediğinizden emin misiniz?\nBu işlemi geri alamayacaksınız.",
   "ResetToDefault": "Varsayılana sıfırla",
   "RestAPI": "REST API",

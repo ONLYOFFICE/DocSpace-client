@@ -43,8 +43,8 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import type { TCreatedBy } from "@docspace/shared/types";
 
 import styles from "./AuthorCell.module.scss";

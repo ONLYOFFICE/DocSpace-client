@@ -62,7 +62,7 @@
 import classNames from "classnames";
 
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Badge } from "@docspace/ui-kit/components/badge";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 
 import type { LinkRolesDropdownItemProps } from "../LinkSettingsPanel.types";
 import styles from "./LinkRolesDropdown.module.scss";

@@ -45,13 +45,12 @@ import {
   TPaymentQuota,
   TPortal,
   TPortalTariff,
-  TPortalWalletService,
   TRestoreProgress,
   TLicenseQuota,
 } from "./types";
 import { Nullable } from "../../types";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
-import type { TAccountingPrice } from "@docspace/ui-kit/billing/types";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
+import type { TAccountingPrice } from "@onlyoffice/apps-ui-kit/billing/types";
 
 const baseURL = "/apisystem";
 
@@ -368,16 +367,6 @@ export async function getPortalTariff(refresh = false, signal?: AbortSignal) {
     params,
     signal,
   })) as TPortalTariff;
-
-  return res;
-}
-
-export async function getWalletServices(signal?: AbortSignal) {
-  const res = (await request({
-    method: "get",
-    url: "/portal/payment/walletservices",
-    signal,
-  })) as TPortalWalletService[] | null;
 
   return res;
 }

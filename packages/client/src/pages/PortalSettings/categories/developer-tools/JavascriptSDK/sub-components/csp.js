@@ -37,14 +37,14 @@ import React, { useEffect, useState, useCallback } from "react";
 import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
-import { AddButton } from "@docspace/ui-kit/components/add-button";
-import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
+import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
 import { InfoBar } from "@docspace/shared/components/info-bar";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import styles from "./csp.module.scss";
 

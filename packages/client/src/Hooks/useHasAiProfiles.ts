@@ -35,7 +35,7 @@
 
 import { useEffect, useState } from "react";
 
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 /**
  * "AI profiles exist" flag that survives chat store rebuilds. The zustand

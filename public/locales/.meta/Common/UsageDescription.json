@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/usage/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/usage/index.tsx",
       "line_number": 307,
       "context": "}\n };\n \n return (\n <div className={styles.usage}>\n <Text className={styles.description}>{t(\"UsageDescription\")}</Text>\n \n <div className={styles.controls}>\n <PeriodSelect value={period} onSelect={onSelectPeriod} />\n {!isLoading && isCardLinkedToPortal && serviceUsage.length > 0 ? (\n <div className={styles.downloadReportLink}>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

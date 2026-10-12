@@ -19,7 +19,7 @@ is a generated matrix rather than a set of hand-written cases.
 |------|--------|-----------------|
 | role | owner, full-admin, room-admin, user, guest | profile-card pencil, plan line, create rights, guest restrictions |
 | edition | SaaS, standalone | integrations card and Docs Connect exist in SaaS only; standalone is offered no SaaS billing at all |
-| plan | SaaS: paid / free · standalone: community / enterprise / developer | plan line and apps subtitle name Startup or Business (SaaS only) |
+| plan | SaaS: paid / free · standalone: community / enterprise / developer | plan line and apps subtitle name Startup or Business (SaaS only); standalone Community admins/owner get the "Unlock more with Enterprise or Developer" line instead |
 | AI | on / off | AI Chat quick action, AI Agents card and sidebar item |
 | Developer Tools | offered / limited to admins | Developer Tools and integrations cards |
 | width | desktop 1440, tablet 900, mobile 390 | apps grid re-flows 4 → 2 → 1 |
@@ -51,12 +51,15 @@ never reaches that far down and `fullPage` does not help.
   refuses the action — a disabled control with an explanation, or a toast.
 - Assertions cover both halves of every rule and hold on a local run;
   screenshots only compare truthfully in Docker (see `e2e-tests.md`).
-- **Screenshot only where frames differ.** Standalone editions render alike
-  (nothing on this page reads the `developer` flag, and standalone shows no
-  billing), so Enterprise carries the full set and Community/Developer keep one
-  canary each — `withScreenshot` on the case. Every case still runs every
-  assertion. Prove equality by comparing frames pixel-wise before dropping any;
-  a diff of a few dozen pixels at channel level 1 is antialiasing, not content.
+- **Screenshot only where frames differ.** Enterprise and Developer render
+  alike (nothing on this page reads the `developer` flag, and standalone shows
+  no billing), so Enterprise carries the full set and Developer keeps one
+  canary — `withScreenshot` on the case. Community differs only for its admins
+  and owner (the upgrade path line), so only `owner` and `full-admin` get
+  Community frames; its room-admin, user and guest frames matched Enterprise
+  pixel for pixel and are not kept. Every case still runs every assertion.
+  Prove equality by comparing frames pixel-wise before dropping any; a diff of
+  a few dozen pixels at channel level 1 is antialiasing, not content.
 - **The clock is pinned** (`FIXED_NOW`). Tariff and Docs Connect mocks answer
   with fixed calendar dates, so an unpinned frame silently becomes an
   expired-subscription one the day a date passes.

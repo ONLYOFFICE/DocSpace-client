@@ -59,7 +59,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TComboboxProps, TOption } from "@docspace/ui-kit/components/combobox";
+import type { TComboboxProps, TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import type { ShareAccessRights } from "@docspace/shared/enums";
 
 export type LinkRolesDropdownItemProps = {

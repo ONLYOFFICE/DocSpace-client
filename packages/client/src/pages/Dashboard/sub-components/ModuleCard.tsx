@@ -62,12 +62,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import TickSvg from "PUBLIC_DIR/images/icons/12/tick.svg";
-import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
+import TourReactSvgUrl from "PUBLIC_DIR/images/icons/16/tour.react.svg?url";
 
 import styles from "../Dashboard.module.scss";
 
@@ -149,7 +149,7 @@ export const ModuleCard = ({ mod, onTakeTour }: ModuleCardProps) => {
         {onTakeTour ? (
           <IconButton
             className={styles.moduleTourButton}
-            iconName={QuestionReactSvgUrl}
+            iconName={TourReactSvgUrl}
             size={16}
             isClickable
             title={t("Common:WelcomeStartTour")}

@@ -42,7 +42,7 @@ import { useTranslation } from "react-i18next";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import CreateEditRoomDialog, {
   type EditableRoom,

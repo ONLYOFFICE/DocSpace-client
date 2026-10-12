@@ -37,13 +37,13 @@ import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
 import TrashIcon from "PUBLIC_DIR/images/icons/16/trash.react.svg";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import {
 	TextInput,
 	InputSize,
 	InputType,
-} from "@docspace/ui-kit/components/text-input";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import { useTranslation } from "react-i18next";
 
 import styles from "./user-fields.module.scss";

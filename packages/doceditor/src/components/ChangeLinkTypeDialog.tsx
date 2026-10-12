@@ -33,11 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Button } from "@docspace/ui-kit/components/button";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

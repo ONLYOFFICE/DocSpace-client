@@ -34,9 +34,9 @@
  */
 
 import { TUser } from "@docspace/shared/api/people/types";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
-import { TSelectorItem } from "@docspace/ui-kit/components/selector";
-import { Portal } from "@docspace/ui-kit/components/portal";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
+import { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 
 interface SelectGroupManagerPanelProps {
   onClose: () => void;

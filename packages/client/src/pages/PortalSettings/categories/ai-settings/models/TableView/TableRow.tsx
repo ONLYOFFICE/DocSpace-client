@@ -36,12 +36,17 @@
 import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableCell, TableRow } from "@docspace/ui-kit/components/table";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { TableCell, TableRow } from "@onlyoffice/apps-ui-kit/components/table";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
 
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.14.react.svg";
+
+import {
+  CachePriceAnchor,
+  type TCachePriceBreakdown,
+} from "../CachePriceTooltip";
 
 import styles from "./ModelSettingsTable.module.scss";
 
@@ -49,8 +54,11 @@ type ModelSettingsRowProps = {
   modelId: string;
   image: string;
   title: string;
-  inputPrice: string;
-  outputPrice?: string;
+  prices: {
+    key: string;
+    value: string;
+    breakdown?: TCachePriceBreakdown | null;
+  }[];
   enabled: boolean;
   isUpdating: boolean;
   link?: string;
@@ -61,8 +69,7 @@ type ModelSettingsRowProps = {
 const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
   modelId,
   title,
-  inputPrice,
-  outputPrice,
+  prices,
   enabled,
   isUpdating,
   link,
@@ -96,16 +103,15 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
           </div>
         </div>
       </TableCell>
-      <TableCell>
-        <Text fontSize="12px" fontWeight={600} className={styles.priceCell}>
-          {inputPrice}
-        </Text>
-      </TableCell>
-      <TableCell>
-        <Text fontSize="12px" fontWeight={600} className={styles.priceCell}>
-          {outputPrice ?? "—"}
-        </Text>
-      </TableCell>
+      {prices.map(({ key, value, breakdown }) => (
+        <TableCell key={key}>
+          <CachePriceAnchor breakdown={breakdown}>
+            <Text fontSize="12px" fontWeight={600} className={styles.priceCell}>
+              {value || "—"}
+            </Text>
+          </CachePriceAnchor>
+        </TableCell>
+      ))}
       <TableCell>
         <div className={styles.toggleCell}>
           <div className={styles.toggleWrapper}>

@@ -39,7 +39,7 @@ import { useCallback, useEffect, useRef } from "react";
 
 import { moveToFolder } from "@docspace/shared/api/files";
 import { ConflictResolveType, DeviceType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";

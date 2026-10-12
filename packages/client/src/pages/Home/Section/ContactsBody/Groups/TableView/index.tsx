@@ -40,10 +40,10 @@ import { useNavigate, useLocation } from "react-router";
 import {
   TableBody,
   TableContainer,
-} from "@docspace/ui-kit/components/table";
+} from "@onlyoffice/apps-ui-kit/components/table";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";

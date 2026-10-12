@@ -35,7 +35,7 @@
 
 import { describe, it, expect, vi } from "vitest";
 
-import { RoomsType } from "@docspace/ui-kit/enums";
+import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 import { Events } from "@docspace/shared/enums";
 
 import { createTestContextOptionsStore, t } from "./testHarness";
@@ -65,7 +65,7 @@ describe("ContextOptionsStore — action handler delegation (batch 8)", () => {
       oformsStore: {
         setIsVisibleInfoPanelTemplateGallery,
         currentExtensionGallery: ".docx",
-        gallerySelected: { attributes: { name_form: "Form" } },
+        gallerySelected: { title: "Form" },
       },
     });
     store.onCreateTemplate();
@@ -88,7 +88,7 @@ describe("ContextOptionsStore — action handler delegation (batch 8)", () => {
         setGallerySelected,
         createRoomFromTemplate: true,
         currentExtensionGallery: ".pdf",
-        gallerySelected: { id: 7, attributes: { name_form: "Form" } },
+        gallerySelected: { id: 7, title: "Form" },
       },
     });
 

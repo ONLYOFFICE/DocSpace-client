@@ -41,6 +41,7 @@ import {
 } from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test } from "./fixtures/base";
+import { callSdkMethod, openInSdkHost, readSdkEvents } from "./fixtures/sdkHost";
 
 const path = "/sdk/forms/my-forms";
 const roomId = 42;
@@ -114,5 +115,74 @@ describe("SDK forms mode — AI chat panel", () => {
       "Something went wrong",
     );
     await expect(page.locator("#ai-chat-button")).toHaveCount(0);
+  });
+});
+
+test.describe("SDK forms mode — frame methods and custom actions", () => {
+  const formsRoomId = 5;
+  const formName = "ONLYOFFICE Sample Form";
+  const framePath = `${path}?theme=Base&locale=en&roomId=${formsRoomId}`;
+
+  const openForms = async (
+    page: import("@playwright/test").Page,
+    baseUrl: string,
+    config: object = {},
+  ) => {
+    await seedAuthCookie(page, baseUrl);
+    return openInSdkHost(page, baseUrl, framePath, {
+      mode: "forms",
+      id: String(formsRoomId),
+      ...config,
+    });
+  };
+
+  test("answers the list methods and rejects the folder info", async ({
+    page,
+    baseUrl,
+  }) => {
+    const frame = await openForms(page, baseUrl);
+    await expect(frame.getByText(formName, { exact: true })).toBeVisible();
+
+    const files = (await callSdkMethod(page, "getFiles")) as unknown[];
+    const list = (await callSdkMethod(page, "getList")) as unknown[];
+
+    expect(files.length).toBeGreaterThan(0);
+    expect(list.length).toBeGreaterThanOrEqual(files.length);
+    await expect(callSdkMethod(page, "getFolderInfo")).resolves.toBe(
+      "Wrong method for this mode",
+    );
+  });
+
+  test("shows the custom file action and reports the room as the folder", async ({
+    page,
+    baseUrl,
+  }) => {
+    const frame = await openForms(page, baseUrl, {
+      customActions: {
+        contextMenu: {
+          file: [
+            { key: "send", label: "Send to CRM" },
+            { key: "completed-only", label: "Completed only", section: ["completed-forms"] },
+          ],
+        },
+      },
+    });
+
+    await frame.getByText(formName, { exact: true }).click({ button: "right" });
+
+    await expect(frame.locator("#option_sdk-action-send")).toBeVisible();
+    await expect(frame.locator("#option_sdk-action-completed-only")).toHaveCount(0);
+
+    await frame.locator("#option_sdk-action-send").click();
+
+    await expect
+      .poll(() => readSdkEvents(page, "onCustomAction"))
+      .toEqual([
+        expect.objectContaining({
+          action: "send",
+          type: "file",
+          folderId: formsRoomId,
+        }),
+      ]);
   });
 });

@@ -57,7 +57,7 @@ import {
 } from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import { FILTER_DOCUMENTS } from "@docspace/shared/utils/filterConstants";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import i18n from "../../i18n";
 
@@ -270,11 +270,6 @@ export function fetchFilesImpl(
 
       let navigationPath = await Promise.all(
         data.pathParts.map(async (folder, idx) => {
-          // FolderType is a ui-kit `const enum` and may
-          // not be destructured (TS2475); the runtime object exists in the
-          // babel/esbuild build, so the original statement is kept under a
-          // suppression.
-          // @ts-expect-error TS2475 — const enum destructuring, see above.
           const { Rooms, Archive, AIAgents } = FolderType;
 
           // if (
@@ -416,14 +411,19 @@ export function fetchFilesImpl(
               currentFolder.security!.Create &&
               !self.settingsStore.aiConfig?.aiReadyNeedReset,
             Download: aiRoom.security!.Download,
+            // Membership and room-management rights belong to the AI room
+            // itself, not to the Knowledge/ResultStorage subfolder the user
+            // is standing in -- read them from `aiRoom`, like Download/Pin
+            // below. Reading them off `currentFolder` yielded undefined and
+            // hid the info panel's Contacts actions on these tabs.
             EditAccess:
-              currentFolder.security!.security?.EditAccess &&
+              aiRoom.security!.EditAccess &&
               !self.settingsStore.aiConfig?.aiReadyNeedReset,
             EditRoom:
-              currentFolder.security!.security?.EditRoom &&
+              aiRoom.security!.EditRoom &&
               !self.settingsStore.aiConfig?.aiReadyNeedReset,
             ChangeOwner:
-              currentFolder.security!.security?.ChangeOwner &&
+              aiRoom.security!.ChangeOwner &&
               !self.settingsStore.aiConfig?.aiReadyNeedReset,
             Delete: aiRoom.security!.Delete,
 

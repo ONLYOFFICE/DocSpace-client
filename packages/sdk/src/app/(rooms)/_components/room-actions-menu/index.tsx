@@ -44,11 +44,11 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 import {
   ContextMenu,
   type ContextMenuRefType,
-} from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/ui-kit/components/context-menu-button";
+} from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 

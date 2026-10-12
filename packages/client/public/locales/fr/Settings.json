@@ -250,6 +250,7 @@
   "QuotasDescription": "Définissez des limites de stockage pour les utilisateurs et les salles.",
   "Recalculate": "Recalculer",
   "RegisterApp": "Enregistrer une application",
+  "ReportFormatDescription": "Lorsqu’il y a trop d’événements, un rapport XLSX ne conserve que les plus récents. Choisissez CSV pour exporter tous les événements.",
   "ResetTemplateDescription": "Êtes-vous sûr de vouloir réinitialiser l'état actuel du modèle à son état par défaut ?\n Vous ne pourrez pas annuler cette action.",
   "ResetToDefault": "Réinitialiser aux valeurs par défaut",
   "RestAPI": "REST API",

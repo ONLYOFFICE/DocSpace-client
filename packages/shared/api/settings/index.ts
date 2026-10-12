@@ -40,7 +40,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { Nullable } from "../../types";
 import { ILogo } from "../../pages/Branding/WhiteLabel/WhiteLabel.types";
 import { request } from "../client";
-import { FolderType, RecaptchaType } from "../../enums";
+import { AuditReportFormat, FolderType, RecaptchaType } from "../../enums";
 import {
   TCustomSchema,
   TGetCSPSettings,
@@ -249,10 +249,11 @@ export function deleteBruteForceProtection() {
     url: `settings/security/loginSettings`,
   });
 }
-export async function startLoginHistoryReport() {
+export async function startLoginHistoryReport(format?: AuditReportFormat) {
   const res = (await request({
     method: "post",
     url: "/security/audit/login/report",
+    params: { format },
   })) as TDocumentBuilderTask;
 
   return res;
@@ -267,10 +268,11 @@ export async function getLoginHistoryReportStatus() {
   return res;
 }
 
-export async function startAuditTrailReport() {
+export async function startAuditTrailReport(format?: AuditReportFormat) {
   const res = (await request({
     method: "post",
     url: "/security/audit/events/report",
+    params: { format },
   })) as TDocumentBuilderTask;
 
   return res;

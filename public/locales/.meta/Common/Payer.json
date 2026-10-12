@@ -12,22 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/PaymentMethod.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/PaymentMethod.tsx",
       "line_number": 99,
       "context": "<Text fontSize=\"12px\" className={styles.mutedTitle} truncate>\n {walletCustomerEmail}\n </Text>\n </div>\n <Text fontSize=\"13px\" fontWeight={600} className={styles.pmPayerLabel}>\n {t(\"Payer\")}\n </Text>\n </div>\n );\n \n return (",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-method/index.tsx",
       "line_number": 142,
       "context": "className=\"payer-tooltip\"\n iconNode={<HelpReactSvg />}\n style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\")}\n </Text>\n </>\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/payment-method/index.tsx",
       "line_number": 142,
       "context": "className=\"payer-tooltip\"\n iconNode={<HelpReactSvg />}\n style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\")}\n </Text>\n </>\n }",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

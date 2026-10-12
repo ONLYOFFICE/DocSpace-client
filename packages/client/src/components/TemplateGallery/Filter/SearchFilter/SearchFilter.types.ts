@@ -40,9 +40,6 @@ export interface SearchFilterProps {
   t: TFunction;
   oformsFilter: OformsFilter;
   filterOformsBySearch: (search: string) => void;
-  filterOformsByLocaleIsLoading: boolean;
-  categoryFilterLoaded: boolean;
-  languageFilterLoaded: boolean;
-  isShowInitSkeleton: boolean;
-  isLanguageFilterChange: boolean;
+  isLoading: boolean;
+  isDisabled: boolean;
 }

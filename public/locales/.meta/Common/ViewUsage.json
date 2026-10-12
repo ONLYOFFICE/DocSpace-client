@@ -12,28 +12,28 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
       "line_number": 183,
       "context": "textDecoration=\"underline\"\n color=\"accent\"\n fontWeight={600}\n dataTestId=\"overview_view_usage_link\"\n >\n {t(\"ViewUsage\")}\n </Link>\n ) : null}\n </div>\n <Text fontSize=\"18px\" fontWeight={700} className={styles.cardValue}>\n {formatWalletCurrency(total, 2, walletCodeCurrency)}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 195,
       "context": "const contextMenuItems = scheduledChange\n ? [\n {\n key: \"usage\",\n label: t(\"Common:ViewUsage\"),\n iconNode: <StatisticsIcon />,\n onClick: onViewUsage,\n },\n ]\n : [",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 195,
       "context": "const contextMenuItems = scheduledChange\n ? [\n {\n key: \"usage\",\n label: t(\"Common:ViewUsage\"),\n iconNode: <StatisticsIcon />,\n onClick: onViewUsage,\n },\n ]\n : [",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletContainer.tsx",
       "line_number": 305,
       "context": "color=\"accent\"\n className={styles.viewUsageLink}\n dataTestId=\"wallet_view_usage_link\"\n fontWeight={600}\n >\n {t(\"ViewUsage\")}\n </Link>\n ) : null}\n </div>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

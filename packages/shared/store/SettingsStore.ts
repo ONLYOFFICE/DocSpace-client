@@ -41,16 +41,16 @@ import SocketHelper, {
   SocketCommands,
   SocketCommandsRoomParts,
   SocketEvents,
-} from "@docspace/ui-kit/utils/socket";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   Base,
   Dark,
   type TColorScheme,
-} from "@docspace/ui-kit/providers/theme";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+} from "@onlyoffice/apps-ui-kit/providers/theme";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
+import { getCookie, setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { getSystemTheme } from "@onlyoffice/apps-ui-kit/utils/get-system-theme";
 
 import api from "../api";
 import type { TAIConfig } from "../api/ai/types";
@@ -89,7 +89,7 @@ import { version } from "../package.json";
 import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
 
 import type { Nullable } from "../types";
-import type { TFrameConfig } from "../types/Frame";
+import type { TFrameConfig, TFrameCustomActions } from "../types/Frame";
 
 import { size as deviceSize, getDeviceTypeByWidth, isTablet } from "../utils";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
@@ -198,7 +198,6 @@ class SettingsStore {
     domain: "",
     uploadPath: "",
     uploadDomain: "",
-    uploadDashboard: "",
   };
 
   logoUrl: Nullable<ILogo> = null;
@@ -280,6 +279,8 @@ class SettingsStore {
   hotkeyPanelVisible = false;
 
   frameConfig: Nullable<TFrameConfig> = null;
+
+  frameCustomActions: Nullable<TFrameCustomActions> = null;
 
   appearanceTheme: TColorScheme[] = [];
 
@@ -447,6 +448,14 @@ class SettingsStore {
     return this.helpCenterDomain && this.helpCenterEntries?.aiservicesmanagement
       ? `${this.helpCenterDomain}${this.helpCenterEntries.aiservicesmanagement}`
       : this.helpCenterDomain;
+  }
+
+  /**
+   * Admin panel of the editors, shown in the profile menu of a server
+   * (standalone) installation. Absent on backends that do not publish it yet.
+   */
+  get docsAdminPanelUrl() {
+    return this.externalResources?.adminPanel?.domain;
   }
 
   get apiDomain() {
@@ -1682,9 +1691,14 @@ class SettingsStore {
     this.hotkeyPanelVisible = hotkeyPanelVisible;
   };
 
+  setFrameCustomActions = (actions: Nullable<TFrameCustomActions>) => {
+    this.frameCustomActions = actions ?? null;
+  };
+
   setFrameConfig = async (frameConfig: TFrameConfig) => {
     runInAction(() => {
       this.frameConfig = frameConfig;
+      this.frameCustomActions = frameConfig?.customActions ?? null;
     });
 
     applyCustomStyles(frameConfig?.stylesUrl);

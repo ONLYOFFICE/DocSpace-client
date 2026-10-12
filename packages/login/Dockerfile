@@ -21,14 +21,15 @@ WORKDIR /app
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
 # Copy package files first for better layer caching
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+# `*.tgz` is optional: ui-kit and ai-chat come from npm, but a locally packed
+# tarball at the repo root can be referenced as `file:../../<name>.tgz` for
+# local development. A glob matching nothing is fine next to real sources.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
 
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
 COPY packages/login/package.json ./packages/login/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
-COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
-COPY libs/ui-kit/*.tgz ./libs/ui-kit/
 
 # Install dependencies
 # CI=true is scoped to this one command on purpose. It skips the
@@ -41,8 +42,9 @@ RUN CI=true pnpm install --frozen-lockfile
 COPY common/ ./common/
 COPY packages/login/ ./packages/login/
 COPY packages/shared/ ./packages/shared/
+# next.config.js requires scripts/ui-kit-dev.cjs at load time.
+COPY scripts/ ./scripts/
 COPY public/ ./public/
-COPY libs/ui-kit/ ./libs/ui-kit/
 
 # Run build:translations
 RUN pnpm --filter @docspace/login run build:translations

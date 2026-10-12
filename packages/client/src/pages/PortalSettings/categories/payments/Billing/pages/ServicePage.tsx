@@ -53,6 +53,7 @@ import type { TDocsConnectPageState } from "@onlyoffice/apps-ui-kit/billing/type
 import config from "PACKAGE_FILE";
 
 import {
+  getDocsConnectPlanDevPack,
   getDocsConnectPricePerUser,
   getDocsConnectScheduledState,
   getDocsConnectTrialState,
@@ -151,7 +152,7 @@ const ServicePage = (props: ServicePageProps) => {
       planUsers,
       pricePerUser,
       basePricePerUser: docsConnectInfo.prices?.pricePerUser ?? 0,
-      devPackEnabled: docsConnectInfo.devPackEnabled ?? false,
+      devPackEnabled: getDocsConnectPlanDevPack(docsConnectInfo),
       monthlyCharge: planUsers * pricePerUser,
       scheduledChange:
         scheduled.scheduledUsers == null

@@ -70,9 +70,14 @@ export const isDocsConnectLocked = (
     : isDocsConnectTrialExpired(info.tenant.endDate ?? "");
 };
 
+export const getDocsConnectPlanDevPack = (info: TDocsConnectInfo): boolean =>
+  info.deactivated
+    ? (info.previousPlan?.devPackEnabled ?? info.devPackEnabled)
+    : info.devPackEnabled;
+
 export const getDocsConnectPricePerUser = (
   info: TDocsConnectInfo,
-  devPackEnabled: boolean = info.devPackEnabled,
+  devPackEnabled: boolean = getDocsConnectPlanDevPack(info),
 ): number =>
   (info.prices?.pricePerUser ?? 0) +
   (devPackEnabled ? (info.prices?.devPackPrice ?? 0) : 0);
@@ -93,7 +98,8 @@ export const getDocsConnectScheduledState = (
   return {
     scheduledUsers: change?.nextUsers ?? null,
     scheduledDate: change?.dueDate ?? "",
-    nextDevPackEnabled: change?.nextDevPackEnabled ?? info.devPackEnabled,
+    nextDevPackEnabled:
+      change?.nextDevPackEnabled ?? getDocsConnectPlanDevPack(info),
     scheduledOnDevPack: change?.scheduledOnDevPack ?? false,
   };
 };

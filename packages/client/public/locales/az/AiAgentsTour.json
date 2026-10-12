@@ -22,7 +22,7 @@
   "AgentStartTitle": "İndi öz agentinizi qurun",
   "AgentSwitchOn": "İndicə tanış olduğunuz agentlər ilkin baxış idi — bu iş sahəsində süni intellekt hələ qoşulmayıb. O düymə sizinlə ilk əsl agent arasındakı yeganə maneədir.",
   "AgentSwitchOnTitle": "Qoşun və əsl halını görün",
-  "AgentWhatIs": "Süni intellekt agenti açıb itirdiyiniz bir söhbət deyil, bir dəfə qurub saxladığınız köməkçidir. Onların hər birinin öz söhbəti, sənədlərinizdən qurulmuş bilik bazası və sizin üçün yazdığı hər şey var.",
-  "AgentWhatIsShared": "Süni intellekt agenti komandanızın artıq qurduğu və tənzimlədiyi, sizin işə salmağınızı gözləyən bir köməkçidir. Hər birinin öz söhbəti və sənədlərinizdən qurulmuş bilik bazası var — siz giriş verildiyiniz agentləri görürsünüz.",
+  "AgentWhatIs": "Adi söhbətdən fərqli olaraq, süni intellekt agenti siyahınızda qalır və ona istənilən vaxt qayıda bilərsiniz. Hər agentin öz söhbət tarixçəsi, parametrləri və əlavə etdiyiniz sənədlərdən qurulmuş bilik bazası var.",
+  "AgentWhatIsShared": "Adi söhbətdən fərqli olaraq, süni intellekt agenti siyahınızda qalır və ona istənilən vaxt qayıda bilərsiniz. Agentləri komandanız qurur: hər birinin öz söhbət tarixçəsi, parametrləri və ona əlavə edilmiş sənədlərdən qurulmuş bilik bazası var, siz isə giriş verildiyiniz agentləri görürsünüz.",
   "AgentWhatIsTitle": "Söhbət yox, agent"
 }

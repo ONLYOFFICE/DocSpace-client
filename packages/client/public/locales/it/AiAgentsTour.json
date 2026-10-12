@@ -22,7 +22,7 @@
   "AgentStartTitle": "Ora costruite il vostro",
   "AgentSwitchOn": "Gli agenti che avete appena percorso erano un'anteprima: in questo spazio di lavoro l'IA non è ancora attiva. Quel pulsante è tutto ciò che vi separa dal primo agente vero.",
   "AgentSwitchOnTitle": "Attivatela e vedetelo davvero",
-  "AgentWhatIs": "Un agente IA è un assistente che configurate una volta e conservate, non una chat che aprite e poi perdete. Ognuno ha una conversazione propria, una base di conoscenza costruita a partire dai vostri documenti e tutto ciò che ha scritto per voi.",
-  "AgentWhatIsShared": "Un agente IA è un assistente che il vostro team ha già configurato e messo a punto, pronto per essere messo al lavoro. Ognuno ha una conversazione propria e una base di conoscenza costruita a partire dai vostri documenti: vedete gli agenti a cui vi è stato dato accesso.",
+  "AgentWhatIs": "A differenza di una chat qualsiasi, un agente IA resta nel vostro elenco e potete tornarci in qualsiasi momento. Ogni agente ha la propria cronologia delle conversazioni, le proprie impostazioni e una base di conoscenza costruita a partire dai documenti che aggiungete.",
+  "AgentWhatIsShared": "A differenza di una chat qualsiasi, un agente IA resta nel vostro elenco e potete tornarci in qualsiasi momento. Gli agenti li configura il vostro team: ognuno ha la propria cronologia delle conversazioni, le proprie impostazioni e una base di conoscenza costruita a partire dai documenti aggiunti, e voi vedete quelli a cui vi è stato dato accesso.",
   "AgentWhatIsTitle": "Un agente, non una chat"
 }

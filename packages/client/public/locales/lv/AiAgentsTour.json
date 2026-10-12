@@ -22,7 +22,7 @@
   "AgentStartTitle": "Tagad izveidojiet savējo",
   "AgentSwitchOn": "Aģenti, kurus tikko izstaigājāt, bija priekšskatījums — šajā darbvietā MI vēl nav ieslēgts. Tā poga ir viss, kas jūs šķir no pirmā īstā aģenta.",
   "AgentSwitchOnTitle": "Ieslēdziet un ieraugiet pa īstam",
-  "AgentWhatIs": "MI aģents ir palīgs, kuru iestatāt vienreiz un paturat, nevis tērzēšana, kuru atverat un pazaudējat. Katram no tiem ir sava saruna, no jūsu dokumentiem izveidota zināšanu bāze un viss, ko tas jums ir uzrakstījis.",
-  "AgentWhatIsShared": "MI aģents ir palīgs, kuru jūsu komanda jau ir iestatījusi un noregulējusi un kurš gaida, kad jūs to nodarbināsiet. Katram ir sava saruna un no jūsu dokumentiem izveidota zināšanu bāze — jūs redzat tos aģentus, kuriem jums ir piešķirta piekļuve.",
+  "AgentWhatIs": "Atšķirībā no parastas tērzēšanas MI aģents paliek jūsu sarakstā, un pie tā var atgriezties jebkurā brīdī. Katram aģentam ir sava sarunu vēsture, iestatījumi un zināšanu bāze, kas izveidota no jūsu pievienotajiem dokumentiem.",
+  "AgentWhatIsShared": "Atšķirībā no parastas tērzēšanas MI aģents paliek jūsu sarakstā, un pie tā var atgriezties jebkurā brīdī. Aģentus iestata jūsu komanda: katram ir sava sarunu vēsture, iestatījumi un zināšanu bāze, kas izveidota no tam pievienotajiem dokumentiem, un jūs redzat tos aģentus, kuriem jums ir piešķirta piekļuve.",
   "AgentWhatIsTitle": "Aģents, nevis tērzēšana"
 }

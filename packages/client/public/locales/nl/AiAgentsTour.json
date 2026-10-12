@@ -22,7 +22,7 @@
   "AgentStartTitle": "Bouw nu uw eigen agent",
   "AgentSwitchOn": "De agenten die u zojuist hebt doorlopen waren een voorproefje — in deze werkruimte staat AI nog niet aan. Die knop is alles wat u scheidt van de eerste echte agent.",
   "AgentSwitchOnTitle": "Zet het aan en zie het echt",
-  "AgentWhatIs": "Een AI-agent is een assistent die u eenmalig instelt en behoudt, en geen chat die u opent en weer kwijtraakt. Elke agent heeft een eigen gesprek, een kennisbank opgebouwd uit uw documenten en alles wat hij voor u heeft geschreven.",
-  "AgentWhatIsShared": "Een AI-agent is een assistent die uw team al heeft ingesteld en bijgesteld, klaar om door u aan het werk te worden gezet. Elke agent heeft een eigen gesprek en een kennisbank opgebouwd uit uw documenten — u ziet de agenten waartoe u toegang hebt gekregen.",
+  "AgentWhatIs": "Anders dan een gewone chat blijft een AI-agent in uw lijst staan en kunt u er op elk moment naar terugkeren. Elke agent heeft een eigen gespreksgeschiedenis, eigen instellingen en een kennisbank die is opgebouwd uit de documenten die u toevoegt.",
+  "AgentWhatIsShared": "Anders dan een gewone chat blijft een AI-agent in uw lijst staan en kunt u er op elk moment naar terugkeren. De agenten worden door uw team ingesteld: elke agent heeft een eigen gespreksgeschiedenis, eigen instellingen en een kennisbank uit de documenten die eraan zijn toegevoegd, en u ziet de agenten waartoe u toegang hebt gekregen.",
   "AgentWhatIsTitle": "Een agent, geen chat"
 }

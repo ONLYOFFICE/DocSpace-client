@@ -22,7 +22,7 @@
   "AgentStartTitle": "Giờ hãy tạo tác nhân của riêng bạn",
   "AgentSwitchOn": "Những tác nhân bạn vừa đi qua chỉ là bản xem trước — không gian làm việc này chưa bật AI. Nút đó là tất cả những gì ngăn cách bạn với tác nhân thật đầu tiên.",
   "AgentSwitchOnTitle": "Bật lên và xem thực tế",
-  "AgentWhatIs": "Tác nhân AI là một trợ lý mà bạn thiết lập một lần rồi giữ lại, chứ không phải một cuộc trò chuyện mở ra rồi mất đi. Mỗi tác nhân có cuộc hội thoại riêng, một cơ sở tri thức dựng từ tài liệu của bạn, và toàn bộ những gì nó đã viết cho bạn.",
-  "AgentWhatIsShared": "Tác nhân AI là một trợ lý mà nhóm của bạn đã thiết lập và tinh chỉnh sẵn, chỉ chờ bạn giao việc. Mỗi tác nhân có cuộc hội thoại riêng và một cơ sở tri thức dựng từ tài liệu của bạn — bạn thấy những tác nhân mà mình được cấp quyền.",
+  "AgentWhatIs": "Khác với một cuộc trò chuyện thông thường, tác nhân AI luôn nằm trong danh sách của bạn và bạn có thể quay lại bất cứ lúc nào. Mỗi tác nhân có lịch sử hội thoại, thiết lập riêng và một cơ sở tri thức dựng từ những tài liệu bạn thêm vào.",
+  "AgentWhatIsShared": "Khác với một cuộc trò chuyện thông thường, tác nhân AI luôn nằm trong danh sách của bạn và bạn có thể quay lại bất cứ lúc nào. Các tác nhân do nhóm của bạn thiết lập: mỗi tác nhân có lịch sử hội thoại, thiết lập riêng và một cơ sở tri thức dựng từ những tài liệu đã thêm vào, và bạn thấy những tác nhân mà mình được cấp quyền.",
   "AgentWhatIsTitle": "Một tác nhân, không phải một cuộc trò chuyện"
 }

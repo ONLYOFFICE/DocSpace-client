@@ -22,7 +22,7 @@
   "AgentStartTitle": "Teď si postavte vlastního",
   "AgentSwitchOn": "Agenti, kterými jste právě prošli, byli ukázka — v tomto pracovním prostoru zatím není zapnutá AI. To tlačítko je vše, co vás dělí od prvního skutečného agenta.",
   "AgentSwitchOnTitle": "Zapněte to a uvidíte doopravdy",
-  "AgentWhatIs": "AI agent je asistent, kterého jednou nastavíte a máte ho pořád, ne chat, který otevřete a zase ztratíte. Každý z nich má vlastní konverzaci, znalostní bázi vytvořenou z vašich dokumentů a všechno, co pro vás napsal.",
-  "AgentWhatIsShared": "AI agent je asistent, kterého váš tým už nastavil a doladil a který čeká, až mu dáte práci. Každý z nich má vlastní konverzaci a znalostní bázi vytvořenou z vašich dokumentů — vidíte ty agenty, ke kterým vás pustili.",
+  "AgentWhatIs": "Na rozdíl od běžného chatu zůstává AI agent ve vašem seznamu a můžete se k němu kdykoli vrátit. Každý agent má vlastní historii konverzace, nastavení a znalostní bázi vytvořenou z dokumentů, které přidáte.",
+  "AgentWhatIsShared": "Na rozdíl od běžného chatu zůstává AI agent ve vašem seznamu a můžete se k němu kdykoli vrátit. Agenty nastavuje váš tým: každý má vlastní historii konverzace, nastavení a znalostní bázi vytvořenou z dokumentů, které do něj byly přidány, a vy vidíte ty, ke kterým jste dostali přístup.",
   "AgentWhatIsTitle": "Agent, ne chat"
 }

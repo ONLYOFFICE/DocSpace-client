@@ -22,7 +22,7 @@
   "AgentStartTitle": "Acum construiți-l pe al dumneavoastră",
   "AgentSwitchOn": "Agenții pe care tocmai i-ați parcurs au fost o previzualizare — în acest spațiu de lucru nu este încă activată inteligența artificială. Butonul acela este tot ce vă desparte de primul agent adevărat.",
   "AgentSwitchOnTitle": "Activați-o și vedeți pe bune",
-  "AgentWhatIs": "Un agent IA este un asistent pe care îl configurați o dată și îl păstrați, nu o conversație pe care o deschideți și o pierdeți. Fiecare are propria conversație, o bază de cunoștințe construită din documentele dumneavoastră și tot ce a scris pentru dumneavoastră.",
-  "AgentWhatIsShared": "Un agent IA este un asistent pe care echipa dumneavoastră l-a configurat și l-a reglat deja, așteptând să îl puneți la treabă. Fiecare are propria conversație și o bază de cunoștințe construită din documentele dumneavoastră — vedeți agenții la care ați primit acces.",
+  "AgentWhatIs": "Spre deosebire de o conversație obișnuită, un agent IA rămâne în lista dumneavoastră și puteți reveni la el oricând. Fiecare agent are propriul istoric al conversațiilor, propriile setări și o bază de cunoștințe construită din documentele pe care le adăugați.",
+  "AgentWhatIsShared": "Spre deosebire de o conversație obișnuită, un agent IA rămâne în lista dumneavoastră și puteți reveni la el oricând. Agenții sunt configurați de echipa dumneavoastră: fiecare are propriul istoric al conversațiilor, propriile setări și o bază de cunoștințe construită din documentele adăugate la el, iar dumneavoastră îi vedeți pe cei la care ați primit acces.",
   "AgentWhatIsTitle": "Un agent, nu o conversație"
 }

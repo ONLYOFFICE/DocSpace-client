@@ -218,7 +218,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         ((!user?.isOwner || (baseDomain && baseDomain === "localhost")) &&
           isPortalDeletionUrl) ||
         (isCommunity && isPaymentsSection) ||
-        (isEnterprise && isBonusPage))
+        ((isEnterprise || !standalone) && isBonusPage))
     ) {
       return <Navigate replace to="/" />;
     }

@@ -135,13 +135,15 @@ test.describe("Rooms tour", () => {
     mockRequest,
     baseUrl,
   }) => {
+    // The members handler goes first: the room list's pattern covers the
+    // members endpoint too, and MSW answers from the first match.
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
+      ...roomOwnerMembers(),
       // The list has to come back the way the server would answer it for
       // somebody who cannot create rooms, or the section puts up a "New room"
       // button this walkthrough is specifically about not having.
       roomListHandler(TEST_PORT, TypeRoomList.IsDefault, { canCreate: false }),
-      ...roomOwnerMembers(),
     );
 
     await startTour(page, baseUrl);
@@ -160,13 +162,35 @@ test.describe("Rooms tour", () => {
     // to agree with it — see the user run above.
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "visitor"),
-      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, { canCreate: false }),
       ...roomOwnerMembers(),
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, { canCreate: false }),
     );
 
     await startTour(page, baseUrl);
 
     await walkTour(page, ["desktop", "rooms-tour", "guest"]);
+  });
+
+  test("ends on the New room button when the section has rooms of its own", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "admin"),
+      ...roomOwnerMembers(),
+    );
+
+    await startTour(page, baseUrl);
+    await goToStep(page, CREATE_FIRST_STEP);
+
+    // Nothing to hand back here: the list is the user's own, so the closing
+    // step points at the button that adds to it.
+    await expect(page.locator(EMPTY_SCREEN)).toBeHidden();
+    await expect(page.locator('[data-testid="main-button"]')).toBeVisible();
+    await expect(
+      tourTooltip(page).getByRole("button", { name: "Done" }),
+    ).toBeVisible();
   });
 
   test("opens the info panel for the member step and puts it away afterwards", async ({

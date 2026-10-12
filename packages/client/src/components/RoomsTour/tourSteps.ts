@@ -70,6 +70,10 @@ const INFO_PANEL_SELECTOR = ".info-panel";
 const MEMBERS_TAB_SELECTOR = '[data-testid="info_members_tab"]';
 const MEMBERS_LIST_SELECTOR = '[data-testid="info_panel_members_list"]';
 
+// The "New room" button of the filter bar; the test id covers its label alone.
+const NEW_BUTTON_SELECTOR =
+  '#filter_search-input > div:has(> [data-testid="main-button"])';
+
 // EmptyView gives its options no test id, so "create a room" is positional.
 const EMPTY_SCREEN_CREATE_SELECTOR =
   '[data-testid="empty-view-body"] > *:first-child';
@@ -216,11 +220,10 @@ export function getTourSteps(
         ROOMS_TOUR_LABEL,
       ),
 
-    // 7. Demo only: drop the stand-in rooms and point at what the empty screen
-    // offers; `restore` puts them back, the steps before anchor on them.
-    isDemo &&
-      demoHooks &&
-      (canCreate
+    // 7. Closing action: what the empty screen offers once the stand-in rooms
+    // are dropped (`restore` puts them back), or the "New room" button.
+    isDemo && demoHooks
+      ? canCreate
         ? revealStep(
             EMPTY_SCREEN_CREATE_SELECTOR,
             t("RoomsTour:RoomsCreateFirstTitle"),
@@ -236,6 +239,16 @@ export function getTourSteps(
             callbacks,
             ROOMS_TOUR_LABEL,
             demoHooks,
-          )),
+          )
+      : canCreate &&
+        showFilter &&
+        isDesktop &&
+        elementStep(
+          NEW_BUTTON_SELECTOR,
+          t("RoomsTour:RoomsCreateFirstTitle"),
+          t("RoomsTour:RoomsCreateOwn"),
+          callbacks,
+          ROOMS_TOUR_LABEL,
+        ),
   ].filter(Boolean) as Step[];
 }

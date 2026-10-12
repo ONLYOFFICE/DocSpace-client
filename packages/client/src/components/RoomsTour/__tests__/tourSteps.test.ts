@@ -103,7 +103,7 @@ const memberFlags: TourStepFlags = {
 const memberDemoFlags: TourStepFlags = { ...memberFlags, isDemo: true };
 
 describe("getTourSteps — room admin", () => {
-  it("walks the types, templates, AI chat, groups, members and the sidebar", () => {
+  it("walks the types, templates, AI chat, groups, members, the sidebar and the New button", () => {
     expect(titles(adminFlags)).toEqual([
       "RoomsTour:RoomsTypesTitle",
       "RoomsTour:RoomsTemplatesTitle",
@@ -111,7 +111,22 @@ describe("getTourSteps — room admin", () => {
       "RoomsTour:RoomsGroupsTitle",
       "RoomsTour:RoomsMembersTitle",
       "RoomsTour:RoomsPlacesTitle",
+      "RoomsTour:RoomsCreateFirstTitle",
     ]);
+  });
+
+  it("closes a run on the section's own rooms on the New room button", () => {
+    const closing = steps(adminFlags).at(-1)!;
+
+    expect(closing.title).toBe("RoomsTour:RoomsCreateFirstTitle");
+    expect(closing.target).toBe(
+      '#filter_search-input > div:has(> [data-testid="main-button"])',
+    );
+
+    // The filter bar holds that button on desktop only.
+    expect(titles({ ...adminFlags, isDesktop: false })).not.toContain(
+      "RoomsTour:RoomsCreateFirstTitle",
+    );
   });
 
   it("closes a stood-in run on the real create button", () => {
@@ -125,8 +140,8 @@ describe("getTourSteps — room admin", () => {
     expect(closing.title).toBe("RoomsTour:RoomsCreateFirstTitle");
     expect((closing.target as () => Element | null)()).toBe(createButton);
 
-    // A section that kept its own list ends on the sidebar step instead.
-    expect(steps(adminFlags).at(-1)?.title).toBe("RoomsTour:RoomsPlacesTitle");
+    // A section that kept its own list ends on the filter bar's button instead.
+    expect(steps(adminFlags).at(-1)?.target).not.toBe(closing.target);
 
     document.body.innerHTML = "";
   });

@@ -34,9 +34,9 @@
  */
 
 import { DeviceType } from "@docspace/shared/enums";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 
-import { StyledButtonContainer } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 interface ButtonsBlockProps {
   saveLabel: string;
@@ -67,7 +67,7 @@ const ButtonsBlock = ({
 
   const buttonSize = isDesktop ? ButtonSize.small : ButtonSize.normal;
   return (
-    <StyledButtonContainer>
+    <div className={styles.styledButtonContainer}>
       <Button
         label={saveLabel}
         isLoading={isRequestRunning}
@@ -87,7 +87,7 @@ const ButtonsBlock = ({
         onClick={onCancelClick}
         testId="oauth_cancel_button"
       />
-    </StyledButtonContainer>
+    </div>
   );
 };
 

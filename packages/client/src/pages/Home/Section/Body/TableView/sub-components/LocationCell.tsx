@@ -34,15 +34,17 @@
  */
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router";
 
 import type { TFile } from "@docspace/shared/api/files/types";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { Text } from "@docspace/ui-kit/components/text";
+import { FolderType } from "@docspace/shared/enums";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getFolderPath } from "@docspace/shared/api/files";
 
-import { StyledText } from "./CellStyles";
+import styles from "./CellStyles.module.scss";
 
 type TPath = {
 	id: number;
@@ -64,8 +66,12 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
 	} = item;
 
 	const { t } = useTranslation("Common");
+	const { pathname } = useLocation();
 	const [path, setPath] = useState<TPath[]>([]);
 	const [isPathLoading, setIsPathLoading] = useState(false);
+
+	const isFormsSectionRoot =
+		pathname.startsWith("/forms") && item.rootFolderType === FolderType.Rooms;
 
 	const title = item.requestToken
 		? t("Common:ViaLink")
@@ -89,18 +95,18 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
 	}, [path, originId, title]);
 
 	return [
-		<StyledText
+		<Text
 			key="cell"
 			fontSize="12px"
 			fontWeight={600}
 			color={sideColor}
-			className="row_update-text"
+			className={`${styles.styledText} row_update-text`}
 			truncate
 			data-tooltip-id={`${id}`}
 			data-tip=""
 		>
 			{title || "—"}
-		</StyledText>,
+		</Text>,
 
 		withTooltip ? (
 			<Tooltip
@@ -117,16 +123,23 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
 								type={LoaderTypes.track}
 							/>
 						) : (
-							path.map((pathPart, i) => (
-								<Text
-									key={pathPart.id}
-									isBold={i === 0}
-									isInline
-									fontSize="12px"
-								>
-									{i === 0 ? pathPart.title : `/${pathPart.title}`}
-								</Text>
-							))
+							path.map((pathPart, i) => {
+								const partTitle =
+									i === 0 && isFormsSectionRoot
+										? t("Common:Forms")
+										: pathPart.title;
+
+								return (
+									<Text
+										key={pathPart.id}
+										isBold={i === 0}
+										isInline
+										fontSize="12px"
+									>
+										{i === 0 ? partTitle : `/${partTitle}`}
+									</Text>
+								);
+							})
 						)}
 					</span>
 				)}

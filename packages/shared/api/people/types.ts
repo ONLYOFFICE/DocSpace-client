@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { ThemeKeys } from "@docspace/ui-kit/enums";
+import type { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
 import type {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -97,6 +97,7 @@ export type TUser = {
   groups?: TUserGroup[];
   shared?: boolean;
   loginEventId?: number;
+  authCookieLifetime?: number;
   notes?: string;
   isCustomQuota?: string;
   title?: string;
@@ -106,6 +107,7 @@ export type TUser = {
   isAnonim: boolean;
   tfaAppEnabled?: boolean;
   sharedTo?: object;
+  publicKey?: string;
 };
 
 export type TGetUserList = {

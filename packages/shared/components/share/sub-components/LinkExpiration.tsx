@@ -38,7 +38,7 @@ import type { DateTime } from "luxon";
 import type { TFileLink } from "../../../api/files/types";
 import type { TTranslation } from "../../../types";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "../Share.module.scss";
 

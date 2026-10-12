@@ -1,20 +1,20 @@
 {
   "key_path": "PortalDeactivateTitle",
-  "content": "Please confirm that you want to deactivate your {{productName}}.",
-  "content_en_sha1_hash": "da17744d60503ecd55fccbc18967f3793adce799",
-  "created_at": "2025-05-19T21:30:57.380Z",
-  "updated_at": "2026-05-15T14:00:06.911Z",
+  "content": "Please confirm that you want to deactivate your workspace.",
+  "content_en_sha1_hash": "fe08eb6fb9fc54a5598f5352ef7458a5316c0e2a",
+  "created_at": "2026-08-13T22:44:34.288Z",
+  "updated_at": "2026-08-14T15:43:30.612Z",
   "comment": {
-    "text": "This is the title of a confirmation dialog that appears when a user attempts to deactivate their ONLYOFFICE DocSpace portal. The `{{productName}}` variable will be replaced with the brand name of the product.",
+    "text": "Subtitle in a confirmation dialog appearing when a user is about to deactivate their workspace.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:30:08.696Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:43:30.612Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalSuspend/page.client.tsx",
-      "line_number": 109,
-      "context": "</Trans>\n </Text>\n ) : (\n <>\n <Text className=\"subtitle\">\n {t(\"PortalDeactivateTitle\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <div className={styles.buttonsWrapper}>\n <Button",
+      "line_number": 108,
+      "context": "</Trans>\n </Text>\n ) : (\n <>\n <Text className=\"subtitle\">\n {t(\"PortalDeactivateTitle\")}\n </Text>\n <div className={styles.buttonsWrapper}>\n <Button\n scale\n primary",
       "module": "/packages/login"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.629887Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

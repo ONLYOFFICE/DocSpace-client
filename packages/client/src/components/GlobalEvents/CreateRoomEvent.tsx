@@ -41,8 +41,9 @@ import {
   getFetchedRoomParams,
   TRoomParams,
 } from "@docspace/shared/utils/rooms";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
 import { RoomsType } from "@docspace/shared/enums";
 import { TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
@@ -54,6 +55,8 @@ import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
+import type OformsStore from "SRC_DIR/store/OformsStore";
+import type ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
 
 import { CreateRoomDialog } from "../dialogs";
 
@@ -61,12 +64,21 @@ type CreateRoomEventProps = {
   title: string;
   visible: boolean;
   startRoomType: RoomsType;
+  isFormsCreate?: boolean;
+  // Opens the dialog on the "from template" picker instead of the room-type
+  // chooser.
+  withTemplateSelector?: boolean;
   item: TFolder;
   context: string;
   onClose: VoidFunction;
 
   processCreatingRoomFromData: FilesActionStore["processCreatingRoomFromData"];
   setProcessCreatingRoomFromData: FilesActionStore["setProcessCreatingRoomFromData"];
+
+  setFormTemplateForNewRoom: OformsStore["setFormTemplateForNewRoom"];
+
+  templateGalleryAvailable: boolean;
+  onShowTemplateGallery: ContextOptionsStore["onShowTemplateGallery"];
 
   fetchTags: TagsStore["fetchTags"];
 
@@ -96,6 +108,11 @@ type CreateRoomEventProps = {
   selectionItems: FilesStore["selection"];
 
   isDefaultRoomsQuotaSet: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
+
+  encryptionKeys: UserStore["encryptionKeys"];
+  setUserEncryptionKeys: UserStore["setUserEncryptionKeys"];
+  userId: string | undefined;
+  accountEmail: string | undefined;
 };
 
 const CreateRoomEvent = ({
@@ -123,15 +140,24 @@ const CreateRoomEvent = ({
   enableThirdParty,
   deleteThirdParty,
   startRoomType,
+  isFormsCreate,
+  withTemplateSelector,
   isCorrectWatermark,
   processCreatingRoomFromData,
   setProcessCreatingRoomFromData,
+  setFormTemplateForNewRoom,
+  templateGalleryAvailable,
+  onShowTemplateGallery,
   selectionItems,
   setSelectedRoomType,
   getThirdPartyIcon,
   isDefaultRoomsQuotaSet,
   isExternalShareRestricted,
   item,
+  encryptionKeys,
+  setUserEncryptionKeys,
+  userId,
+  accountEmail,
 }: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
@@ -188,8 +214,23 @@ const CreateRoomEvent = ({
     return () => {
       setCreateRoomDialogVisible(false);
       setCover();
+      // Drop any Forms-root gallery pick that never became a room. A successful
+      // creation has already consumed it, so this only matters on cancel --
+      // without it the template would land in the next room the user creates.
+      setFormTemplateForNewRoom(null);
     };
   }, []);
+
+  // The gallery is the dialog's replacement, not a step inside it: close first
+  // so the gallery is not stacked under the modal. Picking a template there
+  // reopens this dialog on a form space built around it.
+  const onOpenTemplateGallery =
+    isFormsCreate && templateGalleryAvailable
+      ? () => {
+          onClose();
+          onShowTemplateGallery(true);
+        }
+      : undefined;
 
   const roomParams = item
     ? {
@@ -213,6 +254,9 @@ const CreateRoomEvent = ({
       onClose={onClose}
       onCreate={onCreate}
       startRoomType={startRoomType}
+      isFormsCreate={isFormsCreate}
+      onOpenTemplateGallery={onOpenTemplateGallery}
+      withTemplateSelector={withTemplateSelector}
       fetchedTags={fetchedTags}
       isLoading={isLoading}
       setIsLoading={setIsLoading}
@@ -225,6 +269,10 @@ const CreateRoomEvent = ({
       setSelectedRoomType={setSelectedRoomType}
       getThirdPartyIcon={getThirdPartyIcon}
       isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
+      encryptionKeys={encryptionKeys}
+      setUserEncryptionKeys={setUserEncryptionKeys}
+      userId={userId}
+      accountEmail={accountEmail}
       isExternalShareRestricted={isExternalShareRestricted}
       {...roomParams}
     />
@@ -240,6 +288,10 @@ export default inject(
     filesStore,
     filesActionsStore,
     currentQuotaStore,
+    userStore,
+    oformsStore,
+    settingsStore,
+    contextOptionsStore,
   }: TStore) => {
     const { fetchTags } = tagsStore;
     const { selections } = filesStore;
@@ -279,6 +331,9 @@ export default inject(
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
+    const { encryptionKeys, setUserEncryptionKeys, user } = userStore;
+    const userId = user?.id ? String(user.id) : undefined;
+
     const selectionItems = selections;
 
     return {
@@ -304,9 +359,17 @@ export default inject(
       processCreatingRoomFromData,
       setSelectedRoomType,
       setProcessCreatingRoomFromData,
+      setFormTemplateForNewRoom: oformsStore.setFormTemplateForNewRoom,
+      templateGalleryAvailable: settingsStore.templateGalleryAvailable,
+      onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
-      isExternalShareRestricted: isExternalShareRestricted && externalShareApplyToRooms,
+      encryptionKeys,
+      setUserEncryptionKeys,
+      userId,
+      accountEmail: user?.email,
+      isExternalShareRestricted:
+        isExternalShareRestricted && externalShareApplyToRooms,
     };
   },
 )(observer(CreateRoomEvent));

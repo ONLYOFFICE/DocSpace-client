@@ -40,15 +40,16 @@ import { useNavigate, useLocation } from "react-router";
 import {
   parseToDateTime,
   formatDateLocalized,
-} from "@docspace/ui-kit/utils/date";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/utils/date";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
 
 import RoomsContent from "./sub-components/RoomsContent";
 import UsersContent from "./sub-components/UsersContent";
-import { getBrandName } from "@docspace/shared/constants/brands";
+
+import styles from "./InviteQuotaWarningDialog.module.scss";
 
 const InviteQuotaWarningDialog = (props) => {
   const {
@@ -63,6 +64,7 @@ const InviteQuotaWarningDialog = (props) => {
     isGracePeriod,
     currentTariffPlanTitle,
     isPaymentPageAvailable,
+    isCommunity,
     standalone,
   } = props;
 
@@ -110,6 +112,10 @@ const InviteQuotaWarningDialog = (props) => {
     setIsVisible(false);
   };
 
+  // Community has no payments page to send anyone to: the button stays a
+  // plain OK there, whoever is looking at the dialog.
+  const canUpgrade = isPaymentPageAvailable && !isCommunity;
+
   const onUpgradePlan = () => {
     onClose();
 
@@ -156,18 +162,16 @@ const InviteQuotaWarningDialog = (props) => {
       <br />
       <Text>
         {standalone
-          ? t("LicenseGracePeriodInfo", {
-              productName: getBrandName("ProductName"),
-            })
-          : t("Common:GracePeriodActivatedDescription", {
-              productName: getBrandName("ProductName"),
-            })}
+          ? t("LicenseGracePeriodInfo")
+          : t("Common:GracePeriodActivatedDescription")}
       </Text>
     </>
   );
 
   return (
     <ModalDialog
+      className={styles.dialog}
+      dataTestId="invite-quota-warning-dialog"
       isLarge={isGracePeriod}
       isLoading={!tReady}
       visible={visible}
@@ -188,15 +192,12 @@ const InviteQuotaWarningDialog = (props) => {
       <ModalDialog.Footer>
         <Button
           key="OKButton"
-          label={
-            isPaymentPageAvailable
-              ? t("Common:UpgradePlan")
-              : t("Common:OKButton")
-          }
+          label={canUpgrade ? t("Common:UpgradePlan") : t("Common:OKButton")}
           size="normal"
           primary
-          onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}
+          onClick={canUpgrade ? onUpgradePlan : onClose}
           scale
+          testId="invite-quota-warning-primary"
         />
 
         <Button
@@ -205,6 +206,7 @@ const InviteQuotaWarningDialog = (props) => {
           size="normal"
           onClick={onClose}
           scale
+          testId="invite-quota-warning-cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -220,7 +222,8 @@ export default inject(
     settingsStore,
   }) => {
     const { isPaymentPageAvailable } = authStore;
-    const { dueDate, delayDueDate, isGracePeriod } = currentTariffStatusStore;
+    const { dueDate, delayDueDate, isGracePeriod, isCommunity } =
+      currentTariffStatusStore;
     const { currentTariffPlanTitle } = currentQuotaStore;
 
     const { inviteQuotaWarningDialogVisible, setQuotaWarningDialogVisible } =
@@ -229,6 +232,7 @@ export default inject(
 
     return {
       isPaymentPageAvailable,
+      isCommunity,
       currentTariffPlanTitle,
       language: authStore.language,
       visible: inviteQuotaWarningDialogVisible,
@@ -240,4 +244,3 @@ export default inject(
     };
   },
 )(observer(withTranslation(["Payments", "Common"])(InviteQuotaWarningDialog)));
-

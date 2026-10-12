@@ -35,12 +35,13 @@
 
 import { defineConfig, type UserConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import svgr from "vite-plugin-svgr";
+import svgr, { type VitePluginSvgrOptions } from "vite-plugin-svgr";
 
 import { pkg, getBuildDate } from "./config/utils";
 import { jsxInJsPlugin } from "./config/plugins/jsx-in-js";
 import { staticUrlPlugin } from "./config/plugins/static-url";
 import { htmlTransformPlugin } from "./config/plugins/html-transform";
+import { chunkRetryPlugin } from "./config/plugins/chunk-retry";
 import { bannerPlugin } from "./config/plugins/banner";
 import {
   copyLocalesPlugin,
@@ -48,17 +49,44 @@ import {
 } from "./config/plugins/copy-locales";
 import { copyFontsPlugin } from "./config/plugins/copy-fonts";
 import { serveRootPublicPlugin } from "./config/plugins/serve-root-public";
+import { uiKitBoundaryPlugin } from "./config/plugins/ui-kit-boundary";
+import {
+  UI_KIT_SRC_ENV,
+  logUiKitMode,
+  uiKitDevRoot,
+} from "./config/ui-kit-dev";
 import { resolve } from "./config/resolve";
 import { css } from "./config/css";
 import { server } from "./config/server";
 import { getBuildConfig } from "./config/build";
 
+type SvgrOptions = NonNullable<VitePluginSvgrOptions["svgrOptions"]>;
+
+/** Plugin list accepted by the svgo instance svgr runs. */
+type SvgoConfig = NonNullable<SvgrOptions["svgoConfig"]>;
+type SvgoPlugins = NonNullable<SvgoConfig["plugins"]>;
+
 // ===========================================================================
 // Main Vite configuration
 // ===========================================================================
-export default defineConfig(async ({ mode }): Promise<UserConfig> => {
+export default defineConfig(async ({ mode, command }): Promise<UserConfig> => {
   const isProduction = mode === "production";
   const isAnalyze = mode === "analyze";
+
+  // `resolve` and `css` are shared by both commands, so an exported
+  // DOCSPACE_UI_KIT_SRC would silently bundle ui-kit from the checkout. The
+  // output would also differ: the chunking rules in config/build.ts match
+  // node_modules paths, which a checkout does not have, so ui-kit would leave
+  // its chunk group. Neither the boundary plugin nor optimizeDeps applies to a
+  // build, so refuse instead of producing a quietly different artifact.
+  if (command === "build" && uiKitDevRoot) {
+    throw new Error(
+      `${UI_KIT_SRC_ENV} is a dev-server switch and is set to ${uiKitDevRoot}. ` +
+        "Unset it to build: a build must come from the installed package.",
+    );
+  }
+
+  logUiKitMode();
 
   return {
     root: __dirname,
@@ -85,6 +113,17 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
           exportType: "default",
           svgo: true,
           svgoConfig: {
+            // Keep the viewBox so imported icons stay scalable.
+            //
+            // The cast covers a version split, not a wrong value: svgr runs
+            // svgo 3 (pinned as `@svgr/plugin-svgo>svgo` in
+            // pnpm-workspace.yaml), where `removeViewBox` is part of
+            // preset-default and has to be switched off here. The types come
+            // from svgo 4 instead, because @svgr/core's declarations import
+            // "svgo" without depending on it, so TypeScript picks whichever
+            // copy pnpm hoists. svgo 4 dropped `removeViewBox` from
+            // preset-default, so its types reject an override that is
+            // required for the svgo that actually runs.
             plugins: [
               {
                 name: "preset-default",
@@ -94,7 +133,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
                   },
                 },
               },
-            ],
+            ] as SvgoPlugins,
           },
         },
         include: "**/*.svg",
@@ -102,7 +141,9 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
       }),
       react(),
       htmlTransformPlugin(),
+      chunkRetryPlugin(),
       serveRootPublicPlugin(),
+      uiKitDevRoot ? uiKitBoundaryPlugin(uiKitDevRoot) : null,
       isProduction && bannerPlugin(),
       isProduction && copyLocalesPlugin(),
       isProduction && copyFontsPlugin(),
@@ -126,7 +167,6 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
         "react-router",
         "mobx",
         "mobx-react",
-        "styled-components",
         "i18next",
         "react-i18next",
         "axios",
@@ -135,6 +175,36 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
         "firebase/compat/remote-config",
         "firebase/compat/storage",
         "firebase/compat/database",
+        // @onlyoffice/apps-ui-kit ships ~1200 unbundled ESM files behind a
+        // single "./*" exports wildcard, and the app imports it almost
+        // exclusively through deep subpaths (.../components/text,
+        // .../components/toast). As a node_modules dependency each of those
+        // subpaths is a separate optimizable entry, so without these globs a
+        // cold start pre-bundles them one by one -- the single biggest
+        // dev-server cost after the move off the pnpm workspace, where the
+        // package was source and never pre-bundled at all. The globs collapse
+        // them into a few chunks.
+        //
+        // DOCSPACE_UI_KIT_SRC drops them: an aliased checkout is not a
+        // dependency, pre-bundling it would freeze the very files being
+        // edited, and serving them as source is what restores HMR.
+        ...(uiKitDevRoot
+          ? []
+          : [
+              "@onlyoffice/apps-ui-kit",
+              "@onlyoffice/apps-ui-kit/components/*",
+              "@onlyoffice/apps-ui-kit/utils/*",
+              "@onlyoffice/apps-ui-kit/context/*",
+              "@onlyoffice/apps-ui-kit/providers/*",
+            ]),
+        // Must stay pre-bundled: assistant-stream (pulled in through the AI
+        // stack) does `import sjson from "secure-json-parse"`, and that package
+        // is plain CommonJS with no ESM build. Only esbuild's CJS-to-ESM
+        // interop during pre-bundling gives it a `default` export -- served raw
+        // it fails at runtime with "does not provide an export named 'default'".
+        // optimizeDeps affects the dev server only, so this does not interfere
+        // with the lazy AI chunking in config/build.ts.
+        "@onlyoffice/ai-chat",
       ],
     },
   };

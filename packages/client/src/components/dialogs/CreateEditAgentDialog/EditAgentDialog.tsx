@@ -39,13 +39,13 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import type {
   TAgentParams,
   TAgentTagsParams,
 } from "@docspace/shared/utils/aiAgents";
-import MCPServersSelector from "@docspace/ui-kit/selectors/MCPServers";
+import MCPServersSelector from "@onlyoffice/apps-ui-kit/selectors/MCPServers";
 import type { TCreatedBy } from "@docspace/shared/types";
 
 import type { ICover } from "SRC_DIR/components/dialogs/RoomLogoCoverDialog/RoomLogoCoverDialog.types";
@@ -55,7 +55,6 @@ import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
 
 import SetAgentParams from "./sub-components/SetAgentParams";
 import { useMCP } from "./hooks/useMCP";
-import { modelCache } from "./sub-components/modelCache";
 
 type EditAgentDialogProps = {
   visible: boolean;
@@ -95,6 +94,22 @@ const EditAgentDialog = ({
     }),
   );
 
+  // The agent's bound profile arrives asynchronously (EditAgentEvent
+  // fetches GET /ai/agents/:id) after the initial params were copied
+  // into state above, so merge it in and extend the pristine snapshot —
+  // otherwise the profile combobox keeps the preselected default and the
+  // Save button lights up with a phantom profile change.
+  const fetchedProfileId = fetchedAgentParams.profileId;
+  React.useEffect(() => {
+    if (!fetchedProfileId) return;
+
+    prevRoomParams.current = Object.freeze({
+      ...prevRoomParams.current,
+      profileId: fetchedProfileId,
+    });
+    setAgentParams((value) => ({ ...value, profileId: fetchedProfileId }));
+  }, [fetchedProfileId]);
+
   const compareRoomParams = (
     prevParams: TAgentParams,
     currentParams: TAgentParams,
@@ -117,9 +132,10 @@ const EditAgentDialog = ({
           currentParams.icon.uploadedFile === undefined)) ||
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
       prevParams.quota === currentParams.quota &&
+      prevParams.prompt === currentParams.prompt &&
+      prevParams.profileId === currentParams.profileId &&
       prevParams.modelId === currentParams.modelId &&
       prevParams.providerId === currentParams.providerId &&
-      prevParams.prompt === currentParams.prompt &&
       currentParams.mcpServers?.every((id) =>
         currentParams.mcpServersInitial?.includes(id),
       ) &&
@@ -127,8 +143,6 @@ const EditAgentDialog = ({
         currentParams.mcpServersInitial?.length
     );
   };
-
-  const isModelSelected = !!agentParams?.modelId;
 
   const setAgentParamsAction = React.useCallback(
     (newParams: Partial<TAgentParams>) => {
@@ -176,7 +190,6 @@ const EditAgentDialog = ({
   const onCloseAction = () => {
     if (isLoading) return;
 
-    modelCache.clear();
     onClose && onClose();
   };
 
@@ -261,11 +274,11 @@ const EditAgentDialog = ({
           scale
           onClick={onEditRoom}
           isDisabled={
-            !cover
+            (!agentParams.profileId && !agentParams.modelId) ||
+            (!cover
               ? isWrongTitle ||
-                compareRoomParams(prevRoomParams.current, agentParams) ||
-                !isModelSelected
-              : false
+                compareRoomParams(prevRoomParams.current, agentParams)
+              : false)
           }
           isLoading={isLoading}
         />

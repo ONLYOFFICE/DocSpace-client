@@ -1,0 +1,29 @@
+{
+  "key_path": "TourBringFilesTitle",
+  "content": "Bring your files",
+  "content_en_sha1_hash": "65ff8f5e2e725904f355312bc82d54b12625ca65",
+  "created_at": "2026-08-06T14:20:53.788Z",
+  "updated_at": "2026-08-07T15:05:26.422Z",
+  "comment": {
+    "text": "Title for a feature tour step that highlights the \"New\" button and its menu to guide users on how to upload files.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:36:57.328Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 277,
+      "context": "showFilter &&\n isDesktop &&\n menuStep(\n NEW_BUTTON_TRIGGER_SELECTOR,\n NEW_MENU_SELECTOR,\n t(\"FilesTour:TourBringFilesTitle\"),\n t(\"FilesTour:TourBringFiles\"),\n callbacks,\n LOG_LABEL,\n // The button and its menu read as one thing, so they share a spotlight.\n [NEW_BUTTON_SELECTOR],",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

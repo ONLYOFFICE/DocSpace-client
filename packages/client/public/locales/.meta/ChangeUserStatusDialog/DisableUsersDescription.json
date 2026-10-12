@@ -1,20 +1,20 @@
 {
   "key_path": "DisableUsersDescription",
-  "content": "If you Disable these users, they won’t be able to log in to {{productName}}, while their documents and data will remain intact.",
-  "content_en_sha1_hash": "2f72747c134d6f27fe2f9ae5dc69eb20b8c55ee6",
-  "created_at": "2025-05-19T21:30:56.961Z",
-  "updated_at": "2026-05-15T14:00:06.646Z",
+  "content": "If you Disable these users, they won’t be able to log in to the workspace, while their documents and data will remain intact.",
+  "content_en_sha1_hash": "f07238ca84ef359360508e9612424b66e573c680",
+  "created_at": "2026-08-13T22:44:32.889Z",
+  "updated_at": "2026-08-26T14:08:32.984Z",
   "comment": {
-    "text": "This is a descriptive text within a dialog box, explaining the consequences of disabling users. It appears when an administrator chooses to disable one or more users, and includes the variable `{{productName}}` which will be replaced by the product's brand name.",
+    "text": "Body text in a confirmation dialog explaining the consequences of disabling selected users, specifically regarding their login access and data retention.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:03:44.325Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:22:21.896Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 187,
-      "context": ": t(\"DisableUserDescription\", { productName: getBrandName(\"ProductName\") })\n : isGuests\n ? t(\"DisableGuestsDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"DisableUsersDescription\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n bodyText += isGuests\n ? t(\"DisableGuestsGeneralDescription\")",
+      "line_number": 186,
+      "context": "? isGuests\n ? t(\"DisableGuestDescription\")\n : t(\"DisableUserDescription\")\n : isGuests\n ? t(\"DisableGuestsDescription\")\n : t(\"DisableUsersDescription\");\n \n bodyText += isGuests\n ? t(\"DisableGuestsGeneralDescription\")\n : t(\"DisableGeneralDescription\");",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -44,7 +44,7 @@ import {
   MEDIA_VIEW_URL,
   CategoryType,
 } from "@docspace/shared/constants";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   Events,
   FolderType,
@@ -64,6 +64,7 @@ import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
+import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 
 export type UseFilesProps = {
   fetchFiles: FilesStore["fetchFiles"];
@@ -84,6 +85,7 @@ export type UseFilesProps = {
 
   selectedFolderStore: SelectedFolderStore;
   currentExtensionGallery: OformsStore["currentExtensionGallery"];
+  setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
 };
 
 const useFiles = ({
@@ -102,6 +104,7 @@ const useFiles = ({
   isVisibleInfoPanelTemplateGallery,
   currentExtensionGallery,
   userId,
+  setIsSectionHeaderLoading,
 
   selectedFolderStore,
 }: UseFilesProps) => {
@@ -157,6 +160,16 @@ const useFiles = ({
     navigate(`${url}?${filter.toUrlParams()}`);
   };
 
+  const fetchDefaultForms = () => {
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);
+
+    const categoryType = getCategoryType(location) as number;
+
+    const url = getCategoryUrl(categoryType);
+
+    navigate(`${url}?${filter.toUrlParams()}`);
+  };
+
   const getFiles = React.useCallback(async () => {
     if (isPublicRoom()) return;
 
@@ -165,12 +178,33 @@ const useFiles = ({
     let filterObj = null;
     let isRooms = false;
 
-    if (
-      window.location.href.indexOf(MEDIA_VIEW_URL) > 1 &&
-      playlist.length < 1
-    ) {
+    const isMediaViewUrl = window.location.href.indexOf(MEDIA_VIEW_URL) > 1;
+
+    // The viewer owns the URL while it is open: it swaps the path for
+    // `/media/view/{id}` with a raw `history.pushState`, so the router's
+    // location still points at the section underneath. With a playlist already
+    // loaded there is nothing to fetch -- and nothing to redirect to either.
+    // Falling through here used to reach the filter lookup below, which finds
+    // no filter in a media-view URL and navigated to the default Files
+    // section, pulling the viewer onto an unrelated file. A phone rotated into
+    // landscape hit exactly that: crossing the mobile breakpoint remounts the
+    // section subtree and re-runs this.
+    //
+    // Clear the header loader on the way out. Every other path here ends in a
+    // fetch, and it is the fetch helpers that switch it back off, so returning
+    // without one would leave the section covered by the loader that View's
+    // mount effect had just switched on -- the chat underneath would never
+    // come back after the viewer was closed.
+    if (isMediaViewUrl && playlist.length > 0) {
+      setIsSectionHeaderLoading(false, false);
+      return;
+    }
+
+    if (isMediaViewUrl) {
       setTimeout(() => {
-        getFileInfo(id)
+        // `id` comes from the media-view URL and may be
+        // undefined; the erased cast keeps the old unchecked call.
+        getFileInfo(id as string)
           .then((data) => {
             const canOpenPlayer =
               data.viewAccessibility.ImageView ||
@@ -190,6 +224,7 @@ const useFiles = ({
 
     const isRoomFolder = getObjectByLocation(location)?.folder;
     const isAIAgents = categoryType === CategoryType.AIAgents;
+    const isForms = categoryType === CategoryType.Forms;
 
     if (isAIAgents) {
       filterObj = RoomsFilter.getFilter(window.location);
@@ -199,9 +234,20 @@ const useFiles = ({
 
         return;
       }
+    } else if (isForms && !isRoomFolder) {
+      filterObj = RoomsFilter.getFilter(window.location);
+
+      isRooms = true;
+
+      if (!filterObj) {
+        fetchDefaultForms();
+
+        return;
+      }
     } else if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
+        categoryType == CategoryType.Form ||
         categoryType == CategoryType.Archive) &&
       !isRoomFolder
     ) {
@@ -300,13 +346,19 @@ const useFiles = ({
 
         if (newFilter) {
           if (isAIAgents) {
-            return fetchAgents(null, newFilter, false, false);
+            return fetchAgents(null, newFilter as RoomsFilter, false, false);
           }
           if (isRooms) {
-            return fetchRooms(null, newFilter, undefined, undefined, false);
+            return fetchRooms(
+              null,
+              newFilter as RoomsFilter,
+              undefined,
+              undefined,
+              false,
+            );
           }
           const folderId = (newFilter as FilesFilter).folder;
-          return fetchFiles(folderId, newFilter)?.finally(() => {
+          return fetchFiles(folderId, newFilter as FilesFilter)?.finally(() => {
             const itemData = sessionStorage.getItem(CREATED_FORM_KEY);
             if (itemData) {
               wsCreatedPDFForm({
@@ -331,13 +383,7 @@ const useFiles = ({
             extension: currentExtensionGallery.replace(".", ""),
             id: -1,
             fromTemplate: true,
-            title: (
-              gallerySelected as {
-                attributes: {
-                  name_form: string;
-                };
-              }
-            ).attributes.name_form,
+            title: gallerySelected.title,
             openEditor: !isFormRoom,
             edit: !isFormRoom,
           };
@@ -370,6 +416,7 @@ const useFiles = ({
     userId,
 
     selectedFolderStore,
+    setIsSectionHeaderLoading,
   ]);
 
   return { getFiles };

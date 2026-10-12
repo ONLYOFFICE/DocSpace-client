@@ -2,7 +2,7 @@
   "ActiveSessions": "Aktívne relácie",
   "AutoDeleteTitle": "Všetky relácie staršie ako 60 dní sa automaticky odstránia.",
   "ChangePasswordAfterLoggingOut": "Zmeniť heslo po odhlásení",
-  "ConnectSocialNetworks": "Pripojte svoje sociálne siete",
+  "ConnectSocialNetworks": "Pripojte svoje účty",
   "DescriptionForSecurity": "Pre väčšiu bezpečnosť si musíte zmeniť heslo.",
   "DesktopTheme": "Synchronizácia s nastaveniami Editora pre počítač",
   "DesktopThemeDescription": "Automatické prepínanie medzi svetlými a tmavými témami v závislosti od aktuálnej témy editorov na počítači.",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "E-mail nie je overený",
   "ErrorAccountAlreadyUse": "Prepojený účet už používa iný používateľ",
   "LogoutActiveConnection": "Odhlásiť sa z aktívneho pripojenia",
-  "LogoutAllActiveSessionsDescription": "Budú odhlásené všetky aktívne pripojenia okrem tohto pripojenia, keďže sa práve používa.",
+  "LogoutAllActiveSessionsDescription": "Všetky aktívne relácie okrem aktuálnej budú ukončené. Aktuálna relácia zostane aktívna.",
   "LogoutBtn": "Odhlásiť sa",
-  "LogoutDescription": "Poznámka. Budú odhlásené všetky aktívne pripojenia okrem tohto pripojenia, keďže sa práve používa.",
+  "LogoutDescription": "Poznámka. Všetky aktívne relácie okrem aktuálnej budú ukončené. Aktuálna relácia zostane aktívna.",
   "LogoutFrom": "Odhlásiť sa z {{platform}} {{browser}}?",
   "MyProfile": "Môj profil",
   "NotificationsChannels": "Kanály upozornení",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Zobraziť záložné kódy",
   "SuccessLogout": "Aktívne pripojenie bolo odhlásené: {{platform}}, {{browser}}",
   "TelegramAccount": "Telegram účet",
-  "TelegramAccountDescription": "Ak chcete pripojiť TelegramBot k svojmu účtu, postupujte podľa tajného odkazu a kliknite na tlačidlo „Connect Telegram“.",
+  "TelegramAccountDescription": "Ak chcete dostávať upozornenia o svojom účte v Telegrame, postupujte podľa odkazu nižšie alebo kliknite na tlačidlo Pripojiť.",
   "TelegramAccountDisconnect": "Odpojiť Telegram",
   "TelegramAccountDisconnectDescription": "Váš účet @{{username}} je prepojený na telegramové notifikácie. Môžete sa odpojiť od tohto účtu. V tomto prípade nebudete dostávať notifikácie.",
   "TerminateAllSessions": "Ukončenie všetkých relácií okrem aktuálnej",
-  "TwoFactorDescription": "Správca povolil všetkým používateľom dvojfaktorovú autentifikáciu prostredníctvom aplikácie generujúcej kód."
+  "TwoFactorDescription": "Správca povolil všetkým používateľom dvojfaktorovú autentifikáciu prostredníctvom aplikácie na overenie totožnosti."
 }

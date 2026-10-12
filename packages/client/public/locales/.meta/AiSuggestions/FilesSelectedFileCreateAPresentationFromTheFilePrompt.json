@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesSelectedFileCreateAPresentationFromTheFilePrompt",
+  "content": "Create a presentation based on the selected file and show the proposed slide outline before generating it. If this information is not provided, ask me for the audience, purpose, preferred length, and visual style.",
+  "content_en_sha1_hash": "d72dc4974d38c6e75368143f41a63c09e3eddd42",
+  "created_at": "2026-08-04T09:58:55.132Z",
+  "updated_at": "2026-08-05T18:00:21.528Z",
+  "comment": {
+    "text": "An instruction sent to the AI assistant when generating a presentation from a selected file, specifying how to handle slide outlines and what details to request if missing.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:00:21.528Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 392,
+      "context": "{\n name: t(\n \"AiSuggestions:FilesSelectedFileCreateAPresentationFromTheFile\",\n ),\n prompt: t(\n \"AiSuggestions:FilesSelectedFileCreateAPresentationFromTheFilePrompt\",\n ),\n },\n {\n name: t(\"AiSuggestions:FilesSelectedFileTranslateAndSaveACopy\"),\n prompt: t(\"AiSuggestions:FilesSelectedFileTranslateAndSaveACopyPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

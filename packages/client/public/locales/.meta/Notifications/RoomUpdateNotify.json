@@ -1,20 +1,20 @@
 {
   "key_path": "RoomUpdateNotify",
-  "content": "Shared content, {{rooms}} and {{aiAgents}} activity",
-  "content_en_sha1_hash": "3157d93cd19ed778427fe954ff27035eab6ace13",
-  "created_at": "2025-11-27T11:56:59.226Z",
-  "updated_at": "2026-05-15T14:00:06.881Z",
+  "content": "{{files}}, {{rooms}}, {{forms}}, and {{aiAgents}} activity",
+  "content_en_sha1_hash": "af2fb28e20572bca18b35f11cbfb9cdd3b34ea36",
+  "created_at": "2026-08-31T18:23:43.461Z",
+  "updated_at": "2026-08-31T20:05:17.033Z",
   "comment": {
-    "text": "This is a subscription title on the user's profile page. It describes the type of activity notifications the user will receive, specifically regarding shared content, rooms, and AI agents. The variables `{{rooms}}` and `{{aiAgents}}` will be replaced with localized terms for \"Rooms\" and \"AI Agents\".",
+    "text": "Title for the rooms activity section in the notifications container, summarizing recent activity across {{files}}, {{rooms}}, {{forms}}, and {{aiAgents}}.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:17:57.104Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:05:17.033Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
       "line_number": 77,
-      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n rooms: t(\"Common:Rooms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton",
+      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

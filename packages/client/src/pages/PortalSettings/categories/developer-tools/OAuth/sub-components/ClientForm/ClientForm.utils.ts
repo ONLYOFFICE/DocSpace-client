@@ -36,6 +36,8 @@
 import { TTranslation } from "@docspace/shared/types";
 
 export function isValidUrl(url: string, withoutParams?: boolean) {
+  if (/\s/.test(url)) return false;
+
   try {
     const newUrl = new URL(url);
     if (withoutParams && (newUrl.search || newUrl.hash)) return false;
@@ -62,3 +64,4 @@ export function getOAuthValidationCodeTranslation(
       return t("Common:Error");
   }
 }
+

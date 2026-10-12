@@ -40,14 +40,14 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TOnSubmit } from "@docspace/ui-kit/components/selector";
+import { TOnSubmit } from "@onlyoffice/apps-ui-kit/components/selector";
 
-import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
+import styles from "./CreateEditGroupDialog.module.scss";
 import { GroupParams } from "./types";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
@@ -66,11 +66,7 @@ const CreateGroupDialog = ({
   onClose,
   currentUserId,
 }: CreateGroupDialogProps) => {
-  const { t } = useTranslation([
-    "Common",
-    "PeopleTranslations",
-    "InviteDialog",
-  ]);
+  const { t } = useTranslation(["Common", "PeopleTranslations"]);
 
   const [groupParams, setGroupParams] = useState<GroupParams>({
     groupName: "",
@@ -128,7 +124,7 @@ const CreateGroupDialog = ({
     });
 
     if (showErrorWasSelected) {
-      toastr.warning(t("InviteDialog:UsersAlreadyAdded"));
+      toastr.warning(t("Common:UsersAlreadyAdded"));
     }
 
     setGroupMembers(resultGroupMembers);
@@ -171,7 +167,7 @@ const CreateGroupDialog = ({
         <ModalDialog.Header>{t("Common:CreateGroup")}</ModalDialog.Header>
 
         <ModalDialog.Body>
-          <StyledBodyContent>
+          <div className={styles.bodyContent}>
             <GroupNameParam
               groupName={groupParams.groupName}
               onChangeGroupName={onChangeGroupName}
@@ -187,7 +183,7 @@ const CreateGroupDialog = ({
               removeMember={removeMember}
               onShowSelectMembersPanel={onShowSelectMembersPanel}
             />
-          </StyledBodyContent>
+          </div>
         </ModalDialog.Body>
 
         <ModalDialog.Footer>

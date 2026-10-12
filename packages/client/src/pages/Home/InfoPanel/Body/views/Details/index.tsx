@@ -39,15 +39,17 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { isMobile } from "@docspace/shared/utils";
-import { Text } from "@docspace/ui-kit/components/text";
-import { FileType, FolderType } from "@docspace/shared/enums";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
 import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 
@@ -79,6 +81,7 @@ type DetailsProps = {
 
   isVisitor?: boolean;
   isCollaborator?: boolean;
+  isAdmin?: boolean;
 
   onCreateRoomFromTemplate?: FilesActionStore["onCreateRoomFromTemplate"];
 
@@ -101,6 +104,7 @@ const Details = ({
   openUser,
   isVisitor,
   isCollaborator,
+  isAdmin,
   isArchive,
   isDefaultRoomsQuotaSet,
   isDefaultAIAgentsQuotaSet,
@@ -116,7 +120,6 @@ const Details = ({
     "Common",
     "Translations",
     "Files",
-    "RoomLogoCover",
   ]);
   const [itemProperties, setItemProperties] = useState<
     ReturnType<DetailsHelper["getPropertyList"]>
@@ -135,6 +138,8 @@ const Details = ({
     isDefaultRoomsQuotaSet: isDefaultRoomsQuotaSet!,
     isDefaultAIAgentsQuotaSet: isDefaultAIAgentsQuotaSet!,
     isAIAgentsFolder: isAIAgentsFolderRoot!,
+    isAdmin: isAdmin!,
+    isArchiveFolder: isArchive,
     roomLifetime: roomLifetime!,
   });
 
@@ -165,7 +170,10 @@ const Details = ({
         selection.fileType === FileType.Presentation ||
         selection.fileType === FileType.Document)
     ) {
-      await createThumbnail?.(selection.id);
+      // createThumbnail expects a TFile but has always been
+      // given the id here — its guards then bail out (file.id undefined);
+      // erased cast preserves that no-op behavior.
+      await createThumbnail?.(selection.id as unknown as TFile);
     }
   }, [selection]);
 
@@ -193,6 +201,11 @@ const Details = ({
   const badgeUrl =
     "external" in selection ? getRoomBadgeUrl(selection, 24) : undefined;
 
+  const badgeIconColor =
+    "private" in selection && selection.private === true
+      ? globalColors.lightStatusPositive
+      : undefined;
+
   const isLoadedRoomIcon =
     "logo" in selection && !!(selection.logo?.cover || selection.logo?.large);
 
@@ -216,8 +229,15 @@ const Details = ({
     "isRoom" in selection &&
     selection.isRoom;
 
+  const isFormSpaceTemplate =
+    "roomType" in selection && selection.roomType === RoomsType.FormRoom;
+
   const color = "logo" in selection ? selection.logo?.color : undefined;
-  const title = "title" in selection ? selection.title : "";
+  const resolvedTitle = useResolvedFileTitle(
+    selection as { id?: number | string; title?: string; encrypted?: boolean },
+  );
+  const title =
+    "title" in selection ? resolvedTitle || selection.title : "";
 
   return (
     <>
@@ -237,7 +257,11 @@ const Details = ({
                   {t("Files:RoomTemplateDescription")}
                 </Text>
                 <Button
-                  label={t("Common:CreateRoom")}
+                  label={
+                    isFormSpaceTemplate
+                      ? t("Common:CreateFormSpaceAction")
+                      : t("Common:CreateRoom")
+                  }
                   className={styles.roomTemplateButton}
                   onClick={onCreateRoom}
                   size={ButtonSize.extraSmall}
@@ -286,6 +310,7 @@ const Details = ({
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
             badgeUrl={badgeUrl ?? undefined}
+            badgeIconColor={badgeIconColor}
             tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
             // When EditRoom is true, RoomIcon hides the badge in favour of the edit affordance.
@@ -300,7 +325,7 @@ const Details = ({
       )}
       <div className={commonStyles.subtitle}>
         <Text fontWeight="600" fontSize="14px">
-          {t("Properties")}
+          {t("Common:Properties")}
         </Text>
       </div>
       <div className={commonStyles.properties}>
@@ -346,6 +371,7 @@ export default inject(
 
     const isVisitor = user?.isVisitor;
     const isCollaborator = user?.isCollaborator;
+    const isAdmin = user?.isAdmin;
 
     const { isDefaultRoomsQuotaSet, isDefaultAIAgentsQuotaSet } =
       currentQuotaStore;
@@ -359,6 +385,7 @@ export default inject(
       openUser,
       isVisitor,
       isCollaborator,
+      isAdmin,
       isDefaultRoomsQuotaSet,
       isDefaultAIAgentsQuotaSet,
       isAIAgentsFolderRoot,

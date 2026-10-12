@@ -1,19 +1,19 @@
 {
   "key_path": "ManualBackupDescription",
-  "content": "Use this option if you want to get all data contained in the space as a file.",
-  "content_en_sha1_hash": "72b06ec623764ca1cdcbbdbe125f16fc48240dee",
-  "created_at": "2025-05-26T07:15:44.992Z",
-  "updated_at": "2026-05-15T14:00:06.960Z",
+  "content": "Download all the data in your workspace as a single file.",
+  "content_en_sha1_hash": "99a8defd7c9ef60dc9dbd0e61a67444e7696156b",
+  "created_at": "2026-08-31T18:23:15.720Z",
+  "updated_at": "2026-09-10T16:17:50.336Z",
   "comment": {
-    "text": "This is a description displayed on the manual backup page, explaining that this option allows users to download all space data as a file.",
+    "text": "Description text for the manual backup module explaining the result of performing a backup.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:48:59.124Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:53:05.166Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 456,
+      "line_number": 545,
       "context": "className={classNames(\n styles.backupModulesDescription,\n \"backup_modules-description\",\n )}\n >\n {t(\"Common:ManualBackupDescription\")}\n </Text>\n {!isManagement ? (\n <Link\n className={classNames(styles.linkLearnMore, \"link-learn-more\")}\n href={dataBackupUrl}",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

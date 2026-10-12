@@ -136,6 +136,7 @@ export const createDefaultHookSettingsProps = ({
     isBackupPaid: currentQuotaStore?.isBackupPaid,
     maxFreeBackups: currentQuotaStore?.maxFreeBackups,
     handleServiceQuota: paymentStore?.handleServiceQuota,
+    fetchWalletBalance: paymentStore?.fetchWalletBalance,
     fetchPayerInfo: currentTariffStatusStore?.fetchPayerInfo,
     setBackupsCount: backupStore?.setBackupsCount,
     setIsInited: backupStore?.setIsInited,

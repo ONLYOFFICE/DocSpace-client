@@ -1,0 +1,35 @@
+{
+  "key_path": "ArbiterTitle",
+  "content": "AI Arbiter",
+  "content_en_sha1_hash": "542571c512268a0755f7361f633efe00b416b5cf",
+  "created_at": "2026-05-24T17:27:18.729Z",
+  "updated_at": "2026-08-28T14:38:40.313Z",
+  "comment": {
+    "text": "Heading/title for the AI Arbiter feature page and its introduction screen.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:40:45.799Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/IntroBackdrop.tsx",
+      "line_number": 68,
+      "context": "<div className={styles.introBackdrop}>\n <div className={styles.introIllustration} aria-hidden=\"true\">\n {isBase ? <AiAgentsLightIllustration /> : <AiAgentsDarkIllustration />}\n </div>\n <Heading level={HeadingLevel.h1} size={HeadingSize.medium}>\n {t(\"Common:ArbiterTitle\")}\n </Heading>\n <Text\n className={styles.introDescription}\n fontSize=\"14px\"\n lineHeight=\"20px\"",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
+      "line_number": 208,
+      "context": "return (\n <div className={styles.layout}>\n <div className={styles.pageHeader}>\n <div className={styles.pageHeaderText}>\n <Heading level={HeadingLevel.h1} size={HeadingSize.small}>\n {t(\"Common:ArbiterTitle\")}\n </Heading>\n <Text fontSize=\"12px\" lineHeight=\"16px\" color=\"var(--arbiter-muted)\">\n {t(\"Common:ArbiterPageDescription\")}\n </Text>\n </div>",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

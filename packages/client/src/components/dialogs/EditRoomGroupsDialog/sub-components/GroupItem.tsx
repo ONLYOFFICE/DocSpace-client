@@ -41,19 +41,20 @@ import { ButtonKeys } from "@docspace/shared/enums";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import type { GroupItemProps } from "../EditRoomGroupsDialog.types";
 import styles from "../EditRoomGroupsDialog.module.scss";
 
 const GroupItem = ({
   group,
+  isFormsSection,
   onClickGroup,
   onClickEditIcon,
   onClickDeleteGroup,
   disabled,
 }: GroupItemProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "GroupingRooms"]);
 
   const iconData = group?.icon?.data.small;
 
@@ -106,7 +107,10 @@ const GroupItem = ({
           <div className={styles.titleContainer}>
             <div className={styles.nameGroup}>{group.name}</div>
             <div className={styles.countRooms}>
-              {group.totalRooms} {t("Common:Rooms")}
+              {group.totalRooms}{" "}
+              {isFormsSection
+                ? t("GroupingRooms:FormSpaces")
+                : t("Common:Rooms")}
             </div>
           </div>
         </div>

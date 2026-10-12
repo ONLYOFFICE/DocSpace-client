@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsShowRoomsIManage",
+  "content": "Show rooms I manage",
+  "content_en_sha1_hash": "8949dec6873b6d188939b1fb60b975cfa3a509d1",
+  "created_at": "2026-08-04T09:58:55.210Z",
+  "updated_at": "2026-08-05T16:52:54.658Z",
+  "comment": {
+    "text": "Actionable label for an AI suggestion item that filters the room list to display only those managed by the current user.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:52:54.658Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 443,
+      "context": "{\n name: t(\"AiSuggestions:RoomsFindARoomByFile\"),\n prompt: t(\"AiSuggestions:RoomsFindARoomByFilePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsShowRoomsIManage\"),\n prompt: t(\"AiSuggestions:RoomsShowRoomsIManagePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsShowRoomsWithExternalAccess\"),\n prompt: t(\"AiSuggestions:RoomsShowRoomsWithExternalAccessPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

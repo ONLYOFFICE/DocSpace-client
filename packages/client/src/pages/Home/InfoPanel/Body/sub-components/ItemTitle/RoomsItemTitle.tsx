@@ -38,12 +38,14 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
-import { Text } from "@docspace/ui-kit/components/text";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
@@ -53,7 +55,6 @@ import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
-import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import commonStyles from "../../helpers/Common.module.scss";
@@ -79,16 +80,15 @@ type RoomsItemHeaderProps = {
 
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   getIcon?: FilesSettingsStore["getIcon"];
-  isRoomMembersPanel?: boolean;
   hasExternalLinks?: boolean;
   isExternalShareRestricted?: boolean;
 } & (
   | {
-      roomsView: InfoPanelView.infoMembers;
+      isRoomMembersPanel: true;
       searchProps: SearchProps;
     }
   | {
-      roomsView?: InfoPanelStore["roomsView"];
+      isRoomMembersPanel?: undefined;
       searchProps?: undefined;
     }
 );
@@ -110,13 +110,7 @@ const RoomsItemHeader = ({
   hasExternalLinks,
   isExternalShareRestricted,
 }: RoomsItemHeaderProps) => {
-  const { t } = useTranslation([
-    "Files",
-    "Common",
-    "Translations",
-    "InfoPanel",
-    "RoomLogoCover",
-  ]);
+  const { t } = useTranslation(["Files", "Common", "Translations"]);
 
   const [showSearchBlock, setShowSearchBlock] = useState(false);
 
@@ -151,8 +145,11 @@ const RoomsItemHeader = ({
         )
       : null;
 
-  const badgeIconColor =
-    isExternalShareRestricted && hasExternalLinks && badgeUrl
+  const isPrivateRoom = "private" in selection && selection.private === true;
+
+  const badgeIconColor = isPrivateRoom
+    ? globalColors.lightStatusPositive
+    : isExternalShareRestricted && hasExternalLinks && badgeUrl
       ? "var(--info-panel-link-blocked)"
       : undefined;
 
@@ -162,10 +159,16 @@ const RoomsItemHeader = ({
       : null;
 
   const isFile = "fileExst" in selection && !!selection.fileExst;
-  let title = selection.title;
+  const resolvedTitle = useResolvedFileTitle(
+    selection as { id?: number | string; title?: string; encrypted?: boolean },
+  );
+  let title = resolvedTitle || selection.title;
 
   if (isFile) {
-    title = getTitleWithoutExtension(selection, false);
+    title = getTitleWithoutExtension(
+      { ...selection, title: resolvedTitle || selection.title },
+      false,
+    );
   }
 
   const onChangeFileContext = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -314,7 +317,7 @@ export default inject(
     publicRoomStore,
     avatarEditorDialogStore,
   }: TStore) => {
-    const { roomsView, setIsMobileHidden } = infoPanelStore;
+    const { setIsMobileHidden } = infoPanelStore;
 
     const {
       displayFileExtension,
@@ -334,7 +337,6 @@ export default inject(
       isShareRestricted;
 
     return {
-      roomsView,
       setIsMobileHidden,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,

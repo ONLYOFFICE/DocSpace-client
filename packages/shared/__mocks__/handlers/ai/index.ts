@@ -33,111 +33,73 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { aiAgentsHandler } from "./agents";
+import { aiAgentGetByIdHandler, aiAgentsHandler } from "./agents";
+import {
+  AI_ARBITER_PANEL_FOLDERS,
+  AI_ARBITER_SESSION_ID,
+  aiArbiterPanelHandler,
+} from "./arbiter";
 import { aiConfigHandler } from "./config";
-import { aiModelsHandler } from "./models";
-import {
-  aiProvidersHandler,
-  aiProvidersDeleteHandler,
-  aiProvidersPostHandler,
-  aiProvidersPutHandler,
-  aiProvidersPreviewHandler,
-} from "./providers";
-import {
-  aiServerHandler,
-  aiServerPutHandler,
-  aiServerStatusPutHandler,
-} from "./server";
-import {
-  aiServersGetHandler,
-  aiServersPostHandler,
-  aiServersDeleteHandler,
-  aiServersAvailableHandler,
-} from "./servers";
-import { aiChatHandler, aiChatPutHandler, aiChatDeleteHandler } from "./chat";
-import {
-  aiChatMessagesExportHandler,
-  aiChatMessagesHandler,
-} from "./chatMessages";
-import { aiMessagesExportHandler } from "./messages";
-import { aiProvidersAvailableHandler } from "./providersAvailable";
-import { aiRoomsChatsHandler, aiRoomsChatsStreamHandler } from "./roomsChats";
-import {
-  aiRoomsChatsConfigHandler,
-  aiRoomsChatsConfigPutHandler,
-} from "./roomsChatsConfig";
-import { aiRoomsServersHandler } from "./roomsServers";
 import {
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
 } from "./vectorization";
-import { aiWebSearchGetHandler, aiWebSearchPutHandler } from "./webSearch";
-import { aiProvidersDefaultHandler } from "./providersDefault";
+import {
+  aiChatAssignmentsHandler,
+  aiChatCustomServersHandler,
+  aiChatDeepModeHandler,
+  aiChatDisabledToolsHandler,
+  aiChatEmptyStoreHandlers,
+  aiChatProfilesListHandler,
+  aiChatPromptsFoldersHandler,
+  aiChatReadMessagesHandler,
+  aiChatThreadGetByIdHandler,
+  aiChatPromptsListHandler,
+  aiChatReasoningLevelHandler,
+  aiChatStoreHandlers,
+  aiChatSystemToolsHandler,
+  aiChatThreadsListHandler,
+  aiChatWebSearchConfiguredHandler,
+} from "./chatStores";
 
 export {
+  aiAgentGetByIdHandler,
   aiAgentsHandler,
+  aiArbiterPanelHandler,
+  AI_ARBITER_PANEL_FOLDERS,
+  AI_ARBITER_SESSION_ID,
   aiConfigHandler,
-  aiModelsHandler,
-  aiProvidersHandler,
-  aiProvidersDeleteHandler,
-  aiProvidersPostHandler,
-  aiProvidersPutHandler,
-  aiProvidersPreviewHandler,
-  aiServerHandler,
-  aiServersGetHandler,
-  aiServersPostHandler,
-  aiServersDeleteHandler,
-  aiServersAvailableHandler,
-  aiChatHandler,
-  aiChatPutHandler,
-  aiChatDeleteHandler,
-  aiChatMessagesExportHandler,
-  aiChatMessagesHandler,
-  aiMessagesExportHandler,
-  aiProvidersAvailableHandler,
-  aiRoomsChatsHandler,
-  aiRoomsChatsStreamHandler,
-  aiRoomsChatsConfigHandler,
-  aiRoomsChatsConfigPutHandler,
-  aiRoomsServersHandler,
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
-  aiWebSearchGetHandler,
-  aiWebSearchPutHandler,
-  aiServerPutHandler,
-  aiServerStatusPutHandler,
-  aiProvidersDefaultHandler,
+  aiChatAssignmentsHandler,
+  aiChatCustomServersHandler,
+  aiChatDeepModeHandler,
+  aiChatDisabledToolsHandler,
+  aiChatEmptyStoreHandlers,
+  aiChatProfilesListHandler,
+  aiChatPromptsFoldersHandler,
+  aiChatReadMessagesHandler,
+  aiChatThreadGetByIdHandler,
+  aiChatPromptsListHandler,
+  aiChatReasoningLevelHandler,
+  aiChatStoreHandlers,
+  aiChatSystemToolsHandler,
+  aiChatThreadsListHandler,
+  aiChatWebSearchConfiguredHandler,
 };
+
+export {
+  AI_CHAT_ASSIGNED,
+  AI_CHAT_AUTO_PICKED,
+  AI_CHAT_PROFILES,
+  AiActionType,
+} from "./chatStores";
+export type { AiChatProfile, AssignmentMap } from "./chatStores";
 
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),
   aiConfigHandler(port),
-  aiModelsHandler(port),
-  aiProvidersHandler(port),
-  aiProvidersDeleteHandler(port),
-  aiProvidersPostHandler(port),
-  aiProvidersPutHandler(port),
-  aiProvidersPreviewHandler(port),
-  aiServersGetHandler(port),
-  aiServersPostHandler(port),
-  aiServersDeleteHandler(port),
-  aiServersAvailableHandler(port),
-  aiServerHandler(port),
-  aiChatMessagesExportHandler(port),
-  aiChatMessagesHandler(port),
-  aiChatHandler(port),
-  aiChatPutHandler(port),
-  aiChatDeleteHandler(port),
-  aiMessagesExportHandler(port),
-  aiProvidersAvailableHandler(port),
-  aiRoomsChatsHandler(port),
-  aiRoomsChatsStreamHandler(port),
-  aiRoomsChatsConfigHandler(port),
-  aiRoomsServersHandler(port),
   aiVectorizationGetHandler(port),
   aiVectorizationPutHandler(port),
-  aiWebSearchGetHandler(port),
-  aiWebSearchPutHandler(port),
-  aiServerStatusPutHandler(port),
-  aiServerPutHandler(port),
+  ...aiChatEmptyStoreHandlers(port),
 ];

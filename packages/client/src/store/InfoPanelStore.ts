@@ -35,6 +35,10 @@
 
 import { makeAutoObservable, toJS } from "mobx";
 import { getUserById } from "@docspace/shared/api/people";
+import {
+  getFolderLogReportStatus,
+  startFolderLogReport,
+} from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { FolderType } from "@docspace/shared/enums";
@@ -44,12 +48,16 @@ import { getTemplateAvailable } from "@docspace/shared/api/rooms";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import {
+  TFile,
+  TFolder,
+  TFolderLogReportDateRange,
+} from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { getUserType } from "@docspace/shared/utils/common";
 import { LANGUAGE, SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
@@ -66,12 +74,15 @@ import FilesSettingsStore from "./FilesSettingsStore";
 import FilesStore from "./FilesStore";
 import PeopleStore from "./contacts/PeopleStore";
 import TreeFoldersStore from "./TreeFoldersStore";
+import { isPluginPage } from "SRC_DIR/helpers/plugins/utils";
+import DocumentBuilderReportStore, {
+  ReportType,
+} from "./DocumentBuilderReportStore";
 
 export type InfoPanelViewType = InfoPanelView | `info_plugin-${string}`;
 
 type TSelection =
-  | Nullable<TRoom | TFolder | TFile>
-  | Array<TRoom | TFolder | TFile>;
+  Nullable<TRoom | TFolder | TFile> | Array<TRoom | TFolder | TFile>;
 
 class InfoPanelStore {
   isVisible = false;
@@ -102,9 +113,27 @@ class InfoPanelStore {
 
   shareChanged = false;
 
+  documentBuilderReportStore = {} as DocumentBuilderReportStore;
+
   constructor(public userStore: UserStore) {
     makeAutoObservable(this);
   }
+
+  get isRoomHistoryReportBuilding() {
+    return this.documentBuilderReportStore.isReportBuilding(
+      ReportType.RoomHistory,
+    );
+  }
+
+  getRoomHistoryReport = (
+    folderId: number | string,
+    dateRange?: TFolderLogReportDateRange,
+  ) => {
+    return this.documentBuilderReportStore.buildReport(ReportType.RoomHistory, {
+      start: () => startFolderLogReport(folderId, dateRange),
+      getStatus: () => getFolderLogReportStatus(folderId),
+    });
+  };
 
   setIsVisible = (visiable: boolean) => {
     const selectedFolderIsAgentOrFolderInAgent =
@@ -268,7 +297,14 @@ class InfoPanelStore {
       return item.logo?.cover ? item.logo : item.logo?.medium;
 
     if (isFolder(item))
-      return this.filesSettingsStore.getIconByFolderType(folderType, size);
+      // type-only cast — `folderType` is
+      // `false | FolderType | undefined` here and was passed to the untyped
+      // .js store unchanged; getIconPathByFolderType falls back to the
+      // default folder icon for non-FolderType values.
+      return this.filesSettingsStore.getIconByFolderType(
+        folderType as FolderType,
+        size,
+      );
 
     const fileExst = "fileExst" in item && item.fileExst;
 
@@ -276,11 +312,17 @@ class InfoPanelStore {
   };
 
   get infoPanelSelection(): TSelection {
-    const selection = this.filesStore.selection.length
+    // FilesStore selection/bufferSelection are filesList
+    // view-model items (TItem) and the fallback is a spread of the selected
+    // folder store; the erased casts keep the old JS values while this
+    // getter keeps its raw-entity TSelection facade.
+    const selection = (this.filesStore.selection.length
       ? this.filesStore.selection.length === 1
         ? this.filesStore.selection[0]
         : this.filesStore.selection
-      : (this.filesStore.bufferSelection ?? { ...this.selectedFolderStore });
+      : (this.filesStore.bufferSelection ?? {
+          ...this.selectedFolderStore,
+        })) as unknown as TSelection;
 
     if (!selection) return null;
 
@@ -290,7 +332,7 @@ class InfoPanelStore {
 
     const icon = this.getInfoPanelItemIcon(selection, 32);
 
-    return { ...selection, icon };
+    return { ...selection, icon } as unknown as TSelection;
   }
 
   get infoPanelRoomSelection(): Nullable<TRoom> {
@@ -300,7 +342,7 @@ class InfoPanelStore {
       "isRoom" in this.infoPanelSelection &&
       this.infoPanelSelection.isRoom
     ) {
-      return this.infoPanelSelection;
+      return this.infoPanelSelection as TRoom;
     }
 
     return this.infoPanelRoom;
@@ -345,19 +387,27 @@ class InfoPanelStore {
   // Routing helpers //
 
   getCanDisplay = () => {
+    if (isPluginPage()) return false;
+
     const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
+    const isForms = this.getIsForms();
     const isAccounts =
       this.peopleStore.usersStore.contactsTab !== false ||
       getContactsView(window.location) !== false;
 
-    return isRooms || isFiles || isAccounts || isAIAgent;
+    return isRooms || isFiles || isForms || isAccounts || isAIAgent;
   };
 
   getIsAIAgent = () => {
     const pathname = window.location.pathname.toLowerCase();
     return pathname.indexOf("ai-agent") !== -1;
+  };
+
+  getIsForms = () => {
+    const pathname = window.location.pathname.toLowerCase();
+    return pathname.indexOf("forms") !== -1;
   };
 
   getIsFiles = () => {

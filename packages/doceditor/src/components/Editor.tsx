@@ -39,12 +39,13 @@ import React, { useMemo } from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
 
-import { DocumentEditor, type IConfig } from "@docspace/ui-kit/document-editor";
+import { DocumentEditor, type IConfig } from "@onlyoffice/apps-ui-kit/document-editor";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
 import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
@@ -62,6 +63,7 @@ import {
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
 import useGoBackAndClose from "@/hooks/useGoBackAndClose";
+import useFileEncryptionKeys from "@/hooks/useFileEncryptionKeys";
 import { isPDFDocument } from "@/utils";
 
 import Bar from "./Bar";
@@ -79,7 +81,6 @@ const Editor = ({
   isSkipError,
 
   sdkConfig,
-  generationToolCallState,
 
   organizationName = "",
   filesSettings,
@@ -147,8 +148,7 @@ const Editor = ({
     openShareFormDialog,
     onOpenRoleMappingPanel,
     shareKey,
-    generationToolCallState,
-    disconnectUsers,
+      disconnectUsers,
   });
 
   useInit({
@@ -173,17 +173,32 @@ const Editor = ({
     config,
   );
 
+  const encryption = useFileEncryptionKeys(config, user);
+
+  // For encrypted files config.document.title is an opaque server placeholder;
+  // the real name is decrypted into the filename cache by useFileEncryptionKeys
+  // before the editor mounts.
+  const resolvedTitle = useResolvedFileTitle(
+    config
+      ? {
+          id: config.file?.id,
+          title: config.document?.title,
+          encrypted: config.file?.encrypted,
+        }
+      : null,
+  );
+
   const newConfig: IConfig = useMemo(() => {
     return config
       ? {
-          document: config.document,
+          document: { ...config.document, title: resolvedTitle },
           documentType: config.documentType,
           token: config.token,
           type: config.type,
           editorConfig: { ...config.editorConfig },
         }
       : {};
-  }, [config]);
+  }, [config, resolvedTitle]);
 
   // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
@@ -227,6 +242,16 @@ const Editor = ({
       goback: { ...goBack },
       close,
     };
+  }
+
+  if (
+    encryption.status === "ready" &&
+    encryption.encryptionKeys &&
+    newConfig.editorConfig
+  ) {
+    Object.assign(newConfig.editorConfig, {
+      encryptionKeys: encryption.encryptionKeys,
+    });
   }
 
   newConfig.events = {
@@ -322,6 +347,50 @@ const Editor = ({
 
   if (config?.fillingStatus) {
     newConfig.events.onRequestFillingStatus = onRequestFillingStatus;
+  }
+
+  const isEncryptionGating =
+    !!config?.file?.encrypted &&
+    !errorMessage &&
+    !isSkipError &&
+    encryption.status !== "ready";
+
+  if (isEncryptionGating) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          width: "100%",
+        }}
+      >
+        <div
+          style={{
+            height: "auto",
+            overflow: "visible",
+            position: "relative",
+            zIndex: 1000,
+          }}
+        >
+          <Bar quotaExceededScope={config?.quotaExceededScope} />
+        </div>
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            padding: "24px",
+          }}
+        >
+          {encryption.status === "error"
+            ? t("Common:SomethingWentWrong")
+            : t("Common:LoadingProcessing")}
+        </div>
+      </div>
+    );
   }
 
   return (

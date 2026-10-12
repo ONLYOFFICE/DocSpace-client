@@ -1,20 +1,20 @@
 {
   "DisableGeneralDescription": "Se necessario, è possibile eliminare o abilitare successivamente gli utenti disabilitati. Tieni presente che non puoi disabilitare utenti come il Proprietario e te stesso.",
   "DisableGuest": "Disabilita ospite",
-  "DisableGuestDescription": "Se disabiliti questo ospite, non sarà in grado di accedere a {{productName}}.",
+  "DisableGuestDescription": "Se disabiliti questo ospite, non sarà in grado di accedere allo spazio di lavoro.",
   "DisableGuests": "Disabilita ospiti",
-  "DisableGuestsDescription": "Se disabiliti questi ospiti, non saranno in grado di accedere a {{productName}}.",
+  "DisableGuestsDescription": "Se disabiliti questi ospiti, non saranno in grado di accedere allo spazio di lavoro.",
   "DisableGuestsGeneralDescription": "Se necessario, è possibile cancellare o abilitare in seguito gli ospiti disabilitati.",
   "DisableUser": "Disabilita utente",
-  "DisableUserDescription": "Se disabiliti questo utente, non sarà in grado di accedere a {{productName}}, mentre i suoi documenti e dati rimarranno intatti.",
+  "DisableUserDescription": "Se disabiliti questo utente, non sarà in grado di accedere allo spazio di lavoro, mentre i suoi documenti e dati rimarranno intatti.",
   "DisableUsers": "Disabilita utenti",
-  "DisableUsersDescription": "Se disabiliti questi utenti, non saranno in grado di accedere a  {{productName}}, mentre i loro documenti e dati rimarranno intatti.",
+  "DisableUsersDescription": "Se disabiliti questi utenti, non saranno in grado di accedere allo spazio di lavoro, mentre i loro documenti e dati rimarranno intatti.",
   "EnableGuest": "Abilita ospite",
-  "EnableGuestDescription": "Se abiliti questo ospite potrà accedere di nuovo a {{productName}}.",
+  "EnableGuestDescription": "Se abiliti questo ospite potrà accedere di nuovo allo spazio di lavoro.",
   "EnableGuests": "Abilita ospiti",
-  "EnableGuestsDescription": "Se abiliti questi ospiti potranno accedere di nuovo a {{productName}}",
+  "EnableGuestsDescription": "Se abiliti questi ospiti potranno accedere di nuovo allo spazio di lavoro",
   "EnableUser": "Abilita utente",
-  "EnableUserDescription": "Se abiliti questo utente, potrà accedere nuovamente a {{productName}} e accedere ai propri documenti e dati.",
+  "EnableUserDescription": "Se abiliti questo utente, potrà accedere nuovamente allo spazio di lavoro e accedere ai propri documenti e dati.",
   "EnableUsers": "Abilita utenti",
-  "EnableUsersDescription": "Se abiliti questi utenti, potranno accedere nuovamente a {{productName}} e accedere ai propri documenti e dati."
+  "EnableUsersDescription": "Se abiliti questi utenti, potranno accedere nuovamente allo spazio di lavoro e accedere ai propri documenti e dati."
 }

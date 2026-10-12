@@ -34,26 +34,15 @@
  */
 
 import React, { useEffect } from "react";
-import { formatDate } from "@docspace/ui-kit/utils/date";
-import styled from "styled-components";
+import { formatDate } from "@onlyoffice/apps-ui-kit/utils/date";
 import { inject, observer } from "mobx-react";
 
-import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
-import { Link } from "@docspace/ui-kit/components/link";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 
-const StatusBarWrapper = styled.div`
-  margin-top: 9px;
-
-  .statusBarItem:last-of-type {
-    margin-inline-end: 0;
-  }
-
-  .statusActionItem {
-    margin-inline-start: 12px;
-  }
-`;
+import styles from "../WebhookHistory.styled.module.scss";
 
 const SelectedDateTime = ({ historyFilters, clearDate }) => {
   return (
@@ -122,7 +111,7 @@ const StatusBar = (props) => {
     historyFilters.status.length === 0 ? (
     ""
   ) : (
-    <StatusBarWrapper>
+    <div className={styles.statusBarWrapper}>
       {historyFilters.deliveryDate !== null ? (
         !isEqualDates(
           historyFilters.deliveryFrom,
@@ -157,7 +146,7 @@ const StatusBar = (props) => {
           Clear all
         </Link>
       ) : null}
-    </StatusBarWrapper>
+    </div>
   );
 };
 

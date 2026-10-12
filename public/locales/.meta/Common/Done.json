@@ -3,7 +3,7 @@
   "content": "Done",
   "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
   "created_at": "2025-05-19T21:30:44.608Z",
-  "updated_at": "2026-05-28T15:46:18.548Z",
+  "updated_at": "2026-08-28T14:38:40.197Z",
   "comment": {
     "text": "Button label or toast message indicating the completion of an action.",
     "is_auto": true,
@@ -12,15 +12,21 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/uploader/index.tsx",
       "line_number": 342,
       "context": "{getCommonTranslation(\"Open\")}\n </a>\n </>\n )}\n </>,\n getCommonTranslation(\"Done\"),\n );\n \n onUploadSuccess?.(uploadedFiles);\n } catch (err) {\n const message =",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
-      "line_number": 127,
+      "line_number": 128,
       "context": "\"en\",\n abortControllerRef.current?.signal,\n )\n .then((res) => {\n if (!res.data) throw new Error(res.statusText);\n toastr.success(t(\"Common:Done\"));\n window.location.replace(res.data);\n })\n .catch(() => {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n onClose();",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/Tour/useTour.ts",
+      "line_number": 179,
+      "context": "...JOYRIDE_TIMEOUTS,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n },\n });\n \n useEffect(() => {",
       "module": "/packages/client"
     },
     {
@@ -31,13 +37,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader.js",
-      "line_number": 123,
-      "context": "navigate(`/developer-tools/webhooks/${id}`);\n };\n \n const handleRetryEvent = async () => {\n await retryWebhook(eventId);\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n return (\n <HeaderContainer>\n <div className=\"headerNavigation\">",
+      "line_number": 66,
+      "context": "navigate(`/developer-tools/webhooks/${id}`);\n };\n \n const handleRetryEvent = async () => {\n await retryWebhook(eventId);\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n return (\n <div className={styles.headerContainer}>\n <div className=\"headerNavigation\">",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader.js",
-      "line_number": 234,
+      "line_number": 144,
       "context": "...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(\n `${t(\"WebhookRedilivered\")}: ${checkedEventIds.length}`,\n <b>{t(\"Common:Done\")}</b>,\n );\n } catch (error) {\n console.error(error);\n toastr.error(error);\n } finally {",
       "module": "/packages/client"
     },
@@ -49,13 +55,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryTableView/HistoryTableRow.js",
-      "line_number": 116,
+      "line_number": 85,
       "context": "await retryWebhook(item.id);\n await fetchHistoryItems({\n ...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n const contextOptions = [\n {\n id: \"webhook-details\",",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/PanelView.tsx",
+      "line_number": 82,
+      "context": "const { t } = useTranslation([\"Common\"]);\n const { status } = panel;\n const statusLabels: Record<PanelState[\"status\"], string> = {\n idle: \"\",\n streaming: t(\"Common:ArbiterRunning\"),\n done: t(\"Common:Done\"),\n error: t(\"Common:Error\"),\n aborted: t(\"Common:ArbiterStopped\"),\n };\n const label = statusLabels[status];\n const collapsible = !isArbiter && !!onToggleCollapse;",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
+      "line_number": 292,
+      "context": "</Link>\n ) : null}\n {runStatus !== \"idle\" ? (\n <Text fontSize=\"12px\" color=\"var(--arbiter-muted)\" noSelect>\n {runStatus === \"running\" && t(\"Common:ArbiterRunning\")}\n {runStatus === \"done\" && t(\"Common:Done\")}\n {runStatus === \"error\" && t(\"Common:Error\")}\n {runStatus === \"aborted\" && t(\"Common:ArbiterStopped\")}\n </Text>\n ) : null}\n </div>",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",
-      "line_number": 147,
+      "line_number": 146,
       "context": "targetWaitTimeout: 15000,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },\n });",
       "module": "/packages/sdk"
     }

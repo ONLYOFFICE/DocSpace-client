@@ -35,7 +35,7 @@
 
 import { match } from "ts-pattern";
 import { createPortal } from "react-dom";
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useCallback, useLayoutEffect, useMemo, useRef } from "react";
 import { isTablet } from "react-device-detect";
 import {
   computePosition,
@@ -45,17 +45,17 @@ import {
   shift,
 } from "@floating-ui/dom";
 
-import { useClickOutside } from "@docspace/ui-kit/utils/use-click-outside";
-import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
+import { useClickOutside } from "@onlyoffice/apps-ui-kit/utils/use-click-outside";
+import { useEventListener } from "@onlyoffice/apps-ui-kit/hooks/useEventListener";
 
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
-import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
-import { useKeyboardAwareSheet } from "@docspace/ui-kit/hooks/useKeyboardAwareSheet";
-import { isReliableAndroidViewport } from "@docspace/ui-kit/utils/device";
+import { useIsMobile } from "@onlyoffice/apps-ui-kit/hooks/use-is-mobile";
+import { useKeyboardAwareSheet } from "@onlyoffice/apps-ui-kit/hooks/useKeyboardAwareSheet";
+import { isReliableAndroidViewport } from "@onlyoffice/apps-ui-kit/utils/device";
 
 import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementFilter } from "./TagManagement.filter";
@@ -73,11 +73,11 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   roomId,
   onClose,
   anchor,
-  onSelectTag,
   tags: roomTags,
   access,
-  onDeleteTag,
-  onEditTag,
+  confirmDeleteTag,
+  confirmEditTag,
+  onTagsChanged,
   roomName,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -96,6 +96,29 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   useKeyboardAwareSheet(sheetRef, isMobile && isReliableAndroidViewport());
 
   const { data: fetchedTags, status } = useTagsQuery();
+
+  // Escape while the list is up walks the ladder in the service - close the
+  // editor, then the filter, then the popup - because only the list knows
+  // whether a row is being edited. With no list there is nothing to walk:
+  // Escape on the loader, or on a list that never arrived, just closes.
+  const closeOptions = useMemo(
+    () => ({ ...EVENT_OPTIONS, enabled: status !== "success" }),
+    [status],
+  );
+
+  const closeOnEscape = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      onClose();
+    },
+    [onClose],
+  );
+
+  useEventListener("keydown", closeOnEscape, undefined, closeOptions);
 
   useLayoutEffect(() => {
     if (isMobile) return;
@@ -155,14 +178,18 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
           <TagManagementProvider
             fetchedTags={fetchedTags ?? []}
             roomTags={roomTags}
+            roomId={roomId}
             access={access}
           >
-            <TagManagementFilter roomId={roomId} roomName={roomName} />
+            <TagManagementFilter
+              roomName={roomName}
+              onTagsChanged={onTagsChanged}
+            />
             <TagManagementContent
-              roomId={roomId}
-              onEditTag={onEditTag}
-              onDeleteTag={onDeleteTag}
-              onSelectTag={onSelectTag}
+              confirmEditTag={confirmEditTag}
+              confirmDeleteTag={confirmDeleteTag}
+              onTagsChanged={onTagsChanged}
+              onClose={onClose}
             />
           </TagManagementProvider>
         ))

@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "POST-pyynnön otsikko onnistuneesti kopioitu leikepöydälle",
   "RequestPostBody": "POST-pyynnön runko",
   "RequestPostHeader": "POST-pyynnön otsikko",
-  "ResetKey": "Nollausavain",
   "Response": "Vastaus",
   "ResponseBodyCopied": "POST-vastauksen runko onnistuneesti kopioitu leikepöydälle",
   "ResponseHeaderCopied": "POST-pyynnön otsikko onnistuneesti kopioitu leikepöydälle",
@@ -75,7 +74,7 @@
   "SelectDeliveryTime": "Valitse toimitusaika",
   "SendEverything": "Lähetä kaikki",
   "SettingsWebhook": "Webhook-asetukset",
-  "SSLHint": "Varmennamme SSL-sertifikaatit oletuksena tietosisältöjä toimitettaessa. ",
+  "SSLHint": "Varmennamme SSL-sertifikaatit oletuksena tietosisältöjä toimitettaessa.",
   "SSLVerification": "SSL-varmennus",
   "State": "Tila",
   "TargetId": "Kohdetunnus",
@@ -97,5 +96,5 @@
   "WebhookRemoved": "Webhook poistettu",
   "Webhooks": "Webhookit",
   "WebhooksGuide": "Webhooks-opas",
-  "WebhooksInfo": "Webhookien avulla voit  suorittaa mukautettuja toimintoja millä tahansa sovelluksella tai verkkosivulla {{organizationName}} {{productName}}:n tapahtumien perusteella.\nTässä voit luoda ja hallita kaikkia webhookeja, määrittää ne ja selata kaikkien webhookien historiaa tarkastaaksesi niiden suoritusta."
+  "WebhooksInfo": "Webhookien avulla voit suorittaa mukautettuja toimintoja millä tahansa sovelluksella tai verkkosivulla {{organizationName}} {{productName}}:n tapahtumien perusteella.\nTässä voit luoda ja hallita kaikkia webhookeja, määrittää ne ja selata kaikkien webhookien historiaa tarkastaaksesi niiden suoritusta."
 }

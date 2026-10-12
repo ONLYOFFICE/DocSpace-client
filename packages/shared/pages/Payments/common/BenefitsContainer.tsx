@@ -45,7 +45,7 @@ import ScalabilityReactSvgUrl from "PUBLIC_DIR/images/scalability.react.svg?url"
 import RegularUpdatesReactSvgUrl from "PUBLIC_DIR/images/regular_updates.react.svg?url";
 import CustomizationReactSvgUrl from "PUBLIC_DIR/images/customization_updates.react.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./BenefitsContainer.module.scss";
 import type { TBenefitsContainerProps } from "./BenefitsContainer.types";

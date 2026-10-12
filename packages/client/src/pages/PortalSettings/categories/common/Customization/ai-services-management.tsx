@@ -40,11 +40,11 @@ import { useNavigate, useLocation } from "react-router";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
 import { setAiAccessSettings } from "@docspace/shared/api/settings";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -56,7 +56,7 @@ import LoaderCustomization from "../sub-components/loaderCustomization";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 import useCommon from "../useCommon";
 import DisableAiServicesDialog from "SRC_DIR/components/dialogs/DisableAiServicesDialog";
-import { AI_ENUM } from "@docspace/ui-kit/billing/constants";
+import { AI_ENUM } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface AiServicesManagementProps {
@@ -72,9 +72,10 @@ interface AiServicesManagementProps {
   currentColorScheme?: SettingsStore["currentColorScheme"];
   fetchTreeFolders: TreeFoldersStore["fetchTreeFolders"];
   handleServiceQuota: (serviceName?: string) => Promise<unknown>;
-  fetchAiServiceBalance: () => Promise<void>;
+  standalone: boolean;
   defaultFolderType: SettingsStore["defaultFolderType"];
   updateDefaultFolderType: SettingsStore["updateDefaultFolderType"];
+  getAIConfig: SettingsStore["getAIConfig"];
 }
 
 const AiServicesManagementComponent = ({
@@ -90,11 +91,12 @@ const AiServicesManagementComponent = ({
   currentColorScheme,
   fetchTreeFolders,
   handleServiceQuota,
-  fetchAiServiceBalance,
+  standalone,
   defaultFolderType,
   updateDefaultFolderType,
+  getAIConfig,
 }: AiServicesManagementProps) => {
-  const { t, ready } = useTranslation(["Settings", "Common", "AISettings"]);
+  const { t, ready } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -166,10 +168,10 @@ const AiServicesManagementComponent = ({
   const onSave = async () => {
     if (type === false) {
       try {
-        await Promise.all([
-          handleServiceQuota(AI_ENUM),
-          fetchAiServiceBalance(),
-        ]);
+        // The AI service quota lives in the SaaS wallet/billing API, which
+        // does not exist on standalone portals - skip the request there and
+        // go straight to the confirmation dialog.
+        if (!standalone) await handleServiceQuota(AI_ENUM);
         setShowDisableDialog(true);
       } catch (e) {
         toastr.error(e as string);
@@ -181,6 +183,9 @@ const AiServicesManagementComponent = ({
       setIsSaving(true);
       await setAiAccessSettings(type);
       setAiServicesEnabled(type);
+      // The boot probe is skipped while AI is off, so the config the rest of
+      // the UI reads is stale (or was never loaded) the moment it comes back.
+      await getAIConfig();
       await fetchTreeFolders();
       setShowReminder(false);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
@@ -198,7 +203,7 @@ const AiServicesManagementComponent = ({
       setAiServicesEnabled(false);
 
       if (defaultFolderType === FolderType.AIAgents) {
-        await updateDefaultFolderType(FolderType.Rooms);
+        await updateDefaultFolderType(FolderType.DEFAULT);
       }
 
       await fetchTreeFolders();
@@ -320,11 +325,13 @@ export const AiServicesManagement = inject<TStore>(
       aiServicesManagementUrl,
       defaultFolderType,
       updateDefaultFolderType,
+      standalone,
+      getAIConfig,
     } = settingsStore;
     const { isLoaded, initSettings, setIsLoadedAiServicesManagement } = common;
     const { fetchTreeFolders } = treeFoldersStore;
     const { handleServiceQuota } = paymentStore;
-    const { fetchAiServiceBalance } = servicesStore;
+
     const isMobileView = deviceType === DeviceType.mobile;
     return {
       isMobileView,
@@ -340,9 +347,10 @@ export const AiServicesManagement = inject<TStore>(
       common,
       fetchTreeFolders,
       handleServiceQuota,
-      fetchAiServiceBalance,
+      standalone,
       defaultFolderType,
       updateDefaultFolderType,
+      getAIConfig,
     };
   },
 )(withLoading(observer(AiServicesManagementComponent)));

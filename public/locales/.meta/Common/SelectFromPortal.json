@@ -1,20 +1,20 @@
 {
   "key_path": "SelectFromPortal",
-  "content": "Select from {{productName}}",
-  "content_en_sha1_hash": "3365d131cf57bbe561f947df5ac7dcf4feb0ca97",
-  "created_at": "2025-05-19T21:30:48.440Z",
-  "updated_at": "2026-05-15T14:00:06.611Z",
+  "content": "Select from workspace",
+  "content_en_sha1_hash": "804b09ed71bd9979934544531b6e4603a9ca14a3",
+  "created_at": "2026-08-13T22:44:21.197Z",
+  "updated_at": "2026-08-14T15:02:16.886Z",
   "comment": {
-    "text": "This is a button label or dialog title that appears when selecting a file from the portal. `{{productName}}` will be replaced with the brand name of the product (e.g., ONLYOFFICE DocSpace).",
+    "text": "Label in the file selector used when a form room is active, indicating the selection source.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:43:36.273Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:02:16.886Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 69,
-      "context": "if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: getBrandName(\"ProductName\"),\n });\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)",
+      "line_number": 68,
+      "context": "if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\");\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

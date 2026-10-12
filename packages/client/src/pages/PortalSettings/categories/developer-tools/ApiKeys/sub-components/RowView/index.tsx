@@ -34,15 +34,11 @@
  */
 
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
-import { RowContainer } from "@docspace/ui-kit/components/rows";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
+import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows";
 import { TableViewProps } from "../../types";
 import RowItem from "./RowItem";
-
-const StyledRowContainer = styled(RowContainer)`
-  margin-top: 16px;
-`;
+import styles from "./RowView.module.scss";
 
 const RowView = (props: TableViewProps) => {
   const { items, viewAs, setViewAs, sectionWidth, currentDeviceType, ...rest } =
@@ -55,7 +51,7 @@ const RowView = (props: TableViewProps) => {
   });
 
   return (
-    <StyledRowContainer useReactWindow={false}>
+    <RowContainer className={styles.rowContainer} useReactWindow={false}>
       {items.map((item) => (
         <RowItem
           key={item.id}
@@ -64,7 +60,7 @@ const RowView = (props: TableViewProps) => {
           {...rest}
         />
       ))}
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 

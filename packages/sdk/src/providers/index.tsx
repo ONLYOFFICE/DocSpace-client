@@ -37,7 +37,8 @@
 
 import React from "react";
 
-import { Toast } from "@docspace/ui-kit/components/toast";
+import { Toast } from "@onlyoffice/apps-ui-kit/components/toast";
+import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type {
   TGetColorTheme,
@@ -45,17 +46,26 @@ import type {
 } from "@docspace/shared/api/settings/types";
 import type { ThemeKeys } from "@docspace/shared/enums";
 import { ThemeKeys as ThemeKeysEnum } from "@docspace/shared/enums";
-import { TranslationProvider } from "@docspace/ui-kit/providers/translation";
+import { TranslationProvider } from "@onlyoffice/apps-ui-kit/providers/translation";
 import type {
   TTranslations,
   TTranslationProvider,
-} from "@docspace/ui-kit/providers/translation";
-import { ThemeProvider } from "@docspace/ui-kit/providers/theme";
-import type { TThemeProvider } from "@docspace/ui-kit/providers/theme";
-import { ApiProvider } from "@docspace/ui-kit/providers/api";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+} from "@onlyoffice/apps-ui-kit/providers/translation";
+import { ThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
+import type { TThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
+import { ApiProvider } from "@onlyoffice/apps-ui-kit/providers/api";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+import {
+  isOAuthFrame,
+  requestAuthToken,
+} from "@docspace/shared/utils/oauthToken";
+import {
+  setAuthToken,
+  setWithCredentialsStatus,
+} from "@docspace/shared/api/client";
+import { installOAuthFetchInterceptor } from "@docspace/shared/utils/oauthFetchInterceptor";
+import { getSystemTheme } from "@onlyoffice/apps-ui-kit/utils/get-system-theme";
 
 import {
   createInitialTranslations,
@@ -64,6 +74,7 @@ import {
 
 import ErrorProvider from "./ErrorProvider";
 import { SDKConfigProvider } from "./SDKConfigProvider";
+import { SdkCustomActionsProvider } from "./SdkCustomActionsProvider";
 
 export const ThemeChangeContext = React.createContext<
   ((theme: ThemeKeys) => void) | null
@@ -84,6 +95,7 @@ export type TContextData = {
 export type TProviders = {
   children: React.ReactNode;
   contextData: TContextData;
+  oauthFrame?: boolean;
 };
 
 const getApiUrl = () => {
@@ -96,7 +108,7 @@ const getApiUrl = () => {
   return combineUrl(origin, proxy);
 };
 
-const Providers = ({ children, contextData }: TProviders) => {
+const Providers = ({ children, contextData, oauthFrame }: TProviders) => {
   const { user, settings, systemTheme, colorTheme, locale } = contextData;
 
   const requestedLng =
@@ -141,8 +153,39 @@ const Providers = ({ children, contextData }: TProviders) => {
     document.body.classList.add(themeClass);
   }, []);
 
+  const oauthActive =
+    oauthFrame ?? (typeof window !== "undefined" && isOAuthFrame());
+
+  const [oauthToken, setOauthToken] = React.useState<string | null>(
+    oauthActive ? null : "",
+  );
+
+  React.useEffect(() => {
+    if (!oauthActive) return undefined;
+
+    let cancelled = false;
+    setWithCredentialsStatus(false);
+    installOAuthFetchInterceptor();
+
+    requestAuthToken().then((token) => {
+      if (cancelled) return;
+      if (token) setAuthToken(token);
+      setOauthToken(token ?? "");
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [oauthActive]);
+
   const apiUrl = getApiUrl();
-  const apiKey = getCookie("asc_auth_key") || contextData.authToken || "";
+  const apiKey = oauthActive
+    ? (oauthToken ?? "")
+    : getCookie("asc_auth_key") || contextData.authToken || "";
+
+  if (oauthActive && oauthToken === null) {
+    return null;
+  }
 
   return (
     <ApiProvider url={apiUrl} apiKey={apiKey} initSocket={false}>
@@ -161,8 +204,11 @@ const Providers = ({ children, contextData }: TProviders) => {
           >
             <ErrorProvider {...contextData}>
               <SDKConfigProvider>
-                {children}
-                <Toast isSSR />
+                <SdkCustomActionsProvider>
+                  {children}
+                  <Toast isSSR />
+                  <RootTooltip />
+                </SdkCustomActionsProvider>
               </SDKConfigProvider>
             </ErrorProvider>
           </ThemeProvider>

@@ -39,20 +39,20 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { MemoryRouter } from "react-router";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { BillingRoot, Wallet, PaymentMethod } from "@docspace/ui-kit/billing";
-import AdditionalStoragePage from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
-import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { BillingRoot, Wallet, PaymentMethod } from "@onlyoffice/apps-ui-kit/billing";
+import AdditionalStoragePage from "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
+import type { TPaymentConfig } from "@onlyoffice/apps-ui-kit/billing/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { useDocsUserStore } from "../../../_store/DocsUserStore";
 
 import { BillingCards, type BillingCardTab } from "@/components/BillingCards";
 import cardStyles from "@/components/BillingCards/BillingCards.module.scss";
 
-import WalletIcon from "@docspace/ui-kit/assets/icons/16/wallet.react.svg";
-import StorageIcon from "@docspace/ui-kit/assets/icons/16/catalog-settings-storage-management.svg";
-import CardIcon from "@docspace/ui-kit/assets/icons/16/card.react.svg";
+import WalletIcon from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
+import StorageIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg";
+import CardIcon from "PUBLIC_DIR/images/icons/16/card.react.svg";
 
 import styles from "./SettingsPanel.module.scss";
 
@@ -70,31 +70,34 @@ const TAB_DEFS: {
 }[] = [
   {
     id: "wallet",
-    titleKey: "Wallet",
-    tKey: "BillingWalletCardDesc",
+    titleKey: "Common:Wallet",
+    tKey: "Common:BillingWalletCardDesc",
     iconClass: cardStyles.billingIconWallet,
     icon: <WalletIcon />,
   },
   {
     id: "storage",
-    titleKey: "AdditionalDiskStorage",
-    tKey: "BillingAdditionalStorageCardDesc",
+    titleKey: "Common:AdditionalDiskStorage",
+    tKey: "Common:BillingAdditionalStorageCardDesc",
     iconClass: cardStyles.billingIconStorage,
     icon: <StorageIcon />,
   },
   {
     id: "payment-method",
-    titleKey: "PaymentMethod",
-    tKey: "BillingPaymentMethodCardDesc",
+    titleKey: "Common:PaymentMethod",
+    tKey: "Common:BillingPaymentMethodCardDesc",
     iconClass: cardStyles.billingIconPayment,
     icon: <CardIcon />,
     nativeIcon: true,
   },
 ];
 
-const BillingForm = () => {
+type BillingFormProps = {
+  user?: TUser | null;
+};
+
+const BillingForm = ({ user }: BillingFormProps) => {
   const { t, i18n } = useTranslation();
-  const { user } = useDocsUserStore();
   const [activeTab, setActiveTab] = React.useState<BillingTab>("wallet");
 
   const onOpenBilling = React.useCallback(() => {
@@ -133,7 +136,7 @@ const BillingForm = () => {
   return (
     <div className={styles.billingWrapper}>
       <Text fontSize="12px" lineHeight="16px" className={styles.billingNotice}>
-        {t("BillingPortalNotice")}{" "}
+        {t("Common:BillingPortalNotice")}{" "}
         <Link
           type={LinkType.action}
           fontSize="12px"
@@ -141,7 +144,7 @@ const BillingForm = () => {
           className={styles.billingPortalLink}
           onClick={onOpenBilling}
         >
-          {t("OpenPortalBilling")}
+          {t("Common:OpenPortalBilling")}
         </Link>
       </Text>
 

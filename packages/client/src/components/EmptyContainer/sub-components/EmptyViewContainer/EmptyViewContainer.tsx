@@ -33,15 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
-import { FolderType } from "@docspace/shared/enums";
+import AIFeaturesDialog from "@onlyoffice/apps-ui-kit/billing/services/panels/ai-service/AIFeaturesDialog";
+import { getFolderInfo } from "@docspace/shared/api/files";
+import ClientSimpleTopUpDialog from "./ClientSimpleTopUpDialog";
 
-import SocialAuthWelcomePanel from "./SocialAuthWelcomePanel";
+import EmptyPrivateRoomView from "../../EmptyPrivateRoomView";
 
 import { useEmptyView, useOptions } from "./EmptyViewContainer.hooks";
 import type {
@@ -51,68 +52,50 @@ import type {
 } from "./EmptyViewContainer.types";
 
 const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
-  const { t } = useTranslation([
-    "EmptyView",
-    "Files",
-    "Common",
-    "Translations",
-    "AIRoom",
-    "SocialAuthWelcomeDialog",
-  ]);
+  const { t } = useTranslation(["EmptyView", "Files", "Common", "Translations"]);
 
-  const navigate = useNavigate();
+  const { isCardLinkedToPortal } = props;
 
   const {
-    isRootEmptyPage,
-    rootFolderType,
-    socialAuthWelcomeVisible,
-    onSocialAuthWelcomeClose,
-    tenantAlias,
-    baseDomain,
-    socialAuthUser,
-  } = props;
-
-  const options = useOptions(props, t);
+    options,
+    aiFeaturesDialogVisible,
+    onCloseAIFeaturesDialog,
+    onDialogActivate,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+    onAIActivated,
+    isActivating,
+  } = useOptions(props, t);
   const emptyViewOptions = useEmptyView(props, t);
 
-  const { description: baseDescription, title, icon } = emptyViewOptions;
+  const { description, title, icon } = emptyViewOptions;
 
-  const showSocialAuthBar =
-    isRootEmptyPage &&
-    rootFolderType === FolderType.Rooms &&
-    socialAuthWelcomeVisible;
-
-  const description = showSocialAuthBar
-    ? t("SocialAuthWelcomeDialog:WelcomeSubtitle")
-    : baseDescription;
-
-  const onChangeDomainClick = () => {
-    navigate("/portal-settings/customization/general#portal-renaming");
-  };
-
-  const onChangePasswordClick = () => {
-    navigate("/profile/login?changePassword=true");
-  };
-
-  const extraContent = showSocialAuthBar ? (
-    <SocialAuthWelcomePanel
-      onClose={onSocialAuthWelcomeClose}
-      tenantAlias={tenantAlias}
-      baseDomain={baseDomain}
-      user={socialAuthUser}
-      onChangeDomainClick={onChangeDomainClick}
-      onChangePasswordClick={onChangePasswordClick}
-    />
-  ) : null;
+  if (props.isPrivacyFolder) {
+    return <EmptyPrivateRoomView />;
+  }
 
   return (
-    <EmptyView
-      icon={icon}
-      title={title}
-      options={options}
-      description={description}
-      extraContent={extraContent}
-    />
+    <>
+      <EmptyView
+        icon={icon}
+        title={title}
+        options={options}
+        description={description}
+      />
+      <AIFeaturesDialog
+        visible={aiFeaturesDialogVisible}
+        onClose={onCloseAIFeaturesDialog}
+        onActivate={onDialogActivate}
+        isCardLinkedToPortal={isCardLinkedToPortal ?? false}
+        isActivating={isActivating}
+      />
+      <ClientSimpleTopUpDialog
+        visible={simpleTopUpDialogVisible}
+        onClose={onCloseSimpleTopUpDialog}
+        onConfirm={onAIActivated}
+        language={props.language}
+      />
+    </>
   );
 });
 
@@ -132,18 +115,27 @@ const InjectedEmptyViewContainer = inject<
     currentQuotaStore,
     publicRoomStore,
     peopleStore,
+    paymentStore,
     settingsStore,
     authStore,
     currentTariffStatusStore,
+    uploadDataStore,
+    filesActionsStore,
+    aiRoomStore,
+    filesStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isGracePeriod } = currentTariffStatusStore;
+    const { startUpload } = uploadDataStore;
+    const { createFoldersTree } = filesActionsStore;
+    const { knowledgeId } = aiRoomStore;
 
     const { isPublicRoom } = publicRoomStore;
-    const { isFrame, logoText, aiConfig, standalone, tenantAlias, baseDomain } =
-      settingsStore;
+    const { isFrame, logoText, standalone } = settingsStore;
+    const language = authStore.language ?? "en";
 
-    const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
+    const { myFolderId, myFolder, roomsFolder, isPrivacyFolder } =
+      treeFoldersStore;
 
     const { setIsSectionFilterLoading } = clientLoadingStore;
 
@@ -163,8 +155,6 @@ const InjectedEmptyViewContainer = inject<
       setQuotaWarningDialogVisible,
       setSelectFileAiKnowledgeDialogVisible,
       setTemplateAccessSettingsVisible,
-      socialAuthWelcomeDialogVisible,
-      setSocialAuthWelcomeDialogVisible,
     } = dialogsStore;
 
     const {
@@ -179,6 +169,12 @@ const InjectedEmptyViewContainer = inject<
 
     const userId = userStore?.user?.id;
 
+    const refreshCurrentFolder = async () => {
+      if (!selectedFolder?.id) return;
+      const updated = await getFolderInfo(selectedFolder.id);
+      if (updated.security) selectedFolderStore.setSecurity(updated.security);
+    };
+
     return {
       access,
       security,
@@ -188,6 +184,7 @@ const InjectedEmptyViewContainer = inject<
       myFolderId,
       myFolder,
       roomsFolder,
+      isPrivacyFolder,
       userId,
       isPublicRoom,
       isWarningRoomsDialog,
@@ -206,18 +203,23 @@ const InjectedEmptyViewContainer = inject<
       logoText,
       isKnowledgeTab: isInsideKnowledge,
       isResultsTab: isInsideResultStorage,
+      filterFolderType: filesStore.filter.folderType,
+      roomsFilterSearchArea: filesStore.roomsFilter.searchArea,
       isPortalAdmin: authStore.isAdmin,
-      aiReady: aiConfig?.aiReady,
+      aiReady: paymentStore.isAIReady,
       standalone,
-      socialAuthWelcomeVisible: socialAuthWelcomeDialogVisible,
-      onSocialAuthWelcomeClose: () => {
-        localStorage.removeItem("socialAuthWelcomeBar");
-        setSocialAuthWelcomeDialogVisible(false);
-      },
-      tenantAlias,
-      baseDomain,
-      socialAuthUser: userStore?.user,
+      isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
+      enableAIService: paymentStore.enableAIService,
+      getAIConfig: settingsStore.getAIConfig,
+      refreshCurrentFolder,
+      refreshPaymentInfo: authStore.getPaymentInfo,
+      language,
       isGracePeriod,
+      knowledgeId,
+      startUpload,
+      createFoldersTree,
+      templateGalleryAvailable: settingsStore.templateGalleryAvailable,
+      onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

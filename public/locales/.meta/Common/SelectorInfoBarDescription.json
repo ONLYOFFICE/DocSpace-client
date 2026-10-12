@@ -1,9 +1,9 @@
 {
   "key_path": "SelectorInfoBarDescription",
-  "content": "Share your form and collect responses via a Form filling room. Select an existing room or create a new one.",
-  "content_en_sha1_hash": "0d0b4ad7012ef309d8c328d4b8c1b2c9e756aa25",
+  "content": "Share your form and collect responses via a Form filling space. Select an existing space or create a new one.",
+  "content_en_sha1_hash": "6c097afdf56c7e849cad3edff4bbbf70ba2720ba",
   "created_at": "2025-05-19T21:30:48.468Z",
-  "updated_at": "2026-05-15T14:00:06.623Z",
+  "updated_at": "2026-08-17T19:42:56.947Z",
   "comment": {
     "text": "This is the description text within an info bar. It appears when a user is prompted to share a form and explains how to collect responses using a Form filling room.",
     "is_auto": true,

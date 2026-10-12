@@ -1,20 +1,20 @@
 {
   "key_path": "BackupPortal",
-  "content": "Backup {{productName}} data",
-  "content_en_sha1_hash": "3db5ded2b0c3e43a4ca0b59ae5c4bed84a35dcab",
-  "created_at": "2025-05-19T21:30:56.982Z",
-  "updated_at": "2026-05-15T14:00:06.643Z",
+  "content": "Backup the data",
+  "content_en_sha1_hash": "c93b36232038c1c0371835c659efaa0e6642820c",
+  "created_at": "2026-08-13T14:37:19.540Z",
+  "updated_at": "2026-08-14T14:58:32.690Z",
   "comment": {
-    "text": "This is a button label that initiates the process of backing up the DocSpace data. `{{productName}}` will be replaced with the product's brand name (e.g., \"ONLYOFFICE DocSpace\").",
+    "text": "Menu option or button label within a management dialog used to initiate a data backup for the portal.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:03:33.961Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:01:58.969Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 124,
-      "context": "t(\"ManagePortal\", { productName: getBrandName(\"ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"BackupPortal\", { productName: getBrandName(\"ProductName\") }),\n t(\"DeactivateOrDeleteSpace\", { productName: getBrandName(\"ProductName\") }),\n ];\n \n const filter = React.useMemo(() => {\n const newFilter = new Filter();",
+      "line_number": 121,
+      "context": "t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\"),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\"),\n t(\"BackupPortal\"),\n t(\"DeactivateOrDeleteSpace\"),\n ];\n \n const filter = React.useMemo(() => {\n const newFilter = new Filter();",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

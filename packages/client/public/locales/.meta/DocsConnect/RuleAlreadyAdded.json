@@ -1,0 +1,29 @@
+{
+  "key_path": "RuleAlreadyAdded",
+  "content": "This address has already been added",
+  "content_en_sha1_hash": "1d40c542bb95fba6788f6635ca286cac2fdb9a68",
+  "created_at": "2026-07-31T15:04:16.214Z",
+  "updated_at": "2026-07-31T15:04:44.149Z",
+  "comment": {
+    "text": "Validation error message shown below the address text input when a duplicate entry is detected.",
+    "is_auto": true,
+    "updated_at": "2026-07-31T15:04:44.149Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/AddRuleDialog.tsx",
+      "line_number": 132,
+      "context": "isVertical\n removeMargin\n labelVisible\n labelText={t(\"Common:Address\")}\n hasError={isDuplicate}\n errorMessage={t(\"DocsConnect:RuleAlreadyAdded\")}\n >\n <TextInput\n type={InputType.text}\n value={address}\n onChange={(e) => setAddress(e.target.value)}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

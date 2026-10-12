@@ -182,7 +182,24 @@ export const createLinksRouteHandler = (
   method?: MethodType,
   withTotal?: boolean,
 ) => {
+  let items: ReturnType<typeof createLink>[];
+  if (Array.isArray(option)) {
+    items = (option as LinkTemplateOptions[]).map(createLink);
+  } else if (option) {
+    items = [createLink(option as LinkTemplateOptions)];
+  } else {
+    items = [];
+  }
+  const itemCount = items.length;
+
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${LINKS_FILE_PATH}`, () =>
-    createLinkRouteResolver(option, method, "", withTotal),
+    new Response(
+      JSON.stringify({
+        response: { items, total: itemCount },
+        count: itemCount,
+        status: 0,
+        statusCode: 200,
+      }),
+    ),
   );
 };

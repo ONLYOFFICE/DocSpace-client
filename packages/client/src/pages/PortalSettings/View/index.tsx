@@ -38,9 +38,11 @@ import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
+import { LoaderWrapper } from "@onlyoffice/apps-ui-kit/components/loader-wrapper";
+import { AI_ENUM, AI_SEARCH_ENUM } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { DeviceType } from "@docspace/shared/enums";
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+import componentLoader from "@docspace/shared/utils/component-loader";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import { Component as Customization } from "../categories/common";
 import { Component as Security } from "../categories/security";
@@ -52,7 +54,6 @@ import { Component as DeleteData } from "../categories/delete-data";
 import { Component as StorageManagement } from "../categories/storage-management";
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
-import { Component as AISettings } from "../categories/ai-settings";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -61,11 +62,23 @@ import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
-import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
 import { Component as ServicesPage } from "../categories/payments/ServicesPage";
+
+// Loaded on demand: the AI settings category statically imports the ai-agent
+// settings pages from @onlyoffice/ai-chat, and this View is part of the entry
+// graph (routes/portalSettings.js imports ViewComponent statically) — a
+// static import here would drag the chat stack onto the initial-load
+// critical path. The chunk is fetched only when the tab is opened.
+const AISettings = React.lazy(() =>
+  // See the AIAgentView lazy in pages/Home/View: componentLoader recovers
+  // from a chunk that no longer exists after a deploy.
+  componentLoader(() => import("../categories/ai-settings")).then((m) => ({
+    default: m.Component,
+  })),
+);
 
 const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("customization")) return "customization";
@@ -80,6 +93,7 @@ const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("backup")) return "backup-service";
   if (pathname.includes("disk-storage")) return "disk-storage";
   if (pathname.includes("ai-services")) return "ai-services";
+  if (pathname.includes("ai-search")) return "ai-search";
 
   if (pathname.includes("payments")) return "payments";
 
@@ -112,16 +126,11 @@ const View = ({
   ldapStore,
   common,
   paymentStore,
+  servicesStore,
   currentTariffStatusStore,
   defaultTemplatesStore,
 
   clearAbortControllerArr,
-
-  fetchAIProviders,
-  fetchMCPServers,
-  fetchWebSearch,
-  fetchKnowledge,
-  initDefaultProvider,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation();
@@ -169,15 +178,6 @@ const View = ({
   const { getDataImportInitialValue } = useDataImport(defaultProps.dataImport);
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
-
-  const { getAiSettingsInitialValue } = useAiSettings({
-    fetchAIProviders,
-    initDefaultProvider,
-    fetchMCPServers,
-    fetchWebSearch,
-    fetchKnowledge,
-    standalone: true,
-  });
 
   useEffect(() => {
     clearAbortControllerArrRef.current = clearAbortControllerArr;
@@ -301,7 +301,12 @@ const View = ({
             break;
 
           case "ai-settings":
-            await getAiSettingsInitialValue();
+            if (!settingsStore.standalone) {
+              paymentStore.handleServiceQuota(AI_ENUM);
+              paymentStore.handleServiceQuota(AI_SEARCH_ENUM);
+              servicesStore.fetchAiPrices();
+              servicesStore.fetchAiModelRestrictions();
+            }
             break;
         }
 
@@ -317,6 +322,7 @@ const View = ({
         }
 
         if (requestId === activeRequestIdRef.current) {
+          setCurrentView(getViewFromPathname(location.pathname));
           setIsPortalSettingsLoading(false);
           setIsLoading(false);
         }
@@ -338,9 +344,15 @@ const View = ({
       {currentView === "delete-data" ? <DeleteData /> : null}
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}
-      {currentView === "ai-settings" ? <AISettings /> : null}
+      {currentView === "ai-settings" ? (
+        // No fallback: LoaderWrapper above already covers loading states.
+        <React.Suspense fallback={null}>
+          <AISettings />
+        </React.Suspense>
+      ) : null}
       {currentView === "ai-services" ||
       currentView === "backup-service" ||
+      currentView === "ai-search" ||
       currentView === "disk-storage" ? (
         <ServicesPage />
       ) : null}
@@ -368,8 +380,8 @@ export const ViewComponent = inject(
     storageManagement,
     ldapStore,
     paymentStore,
+    servicesStore,
     currentTariffStatusStore,
-    aiSettingsStore,
     defaultTemplatesStore,
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
@@ -408,6 +420,7 @@ export const ViewComponent = inject(
       ldapStore,
       common,
       paymentStore,
+      servicesStore,
       currentTariffStatusStore,
       ssoFormStore: ssoStore,
       defaultTemplatesStore,
@@ -417,13 +430,6 @@ export const ViewComponent = inject(
       loadBaseInfo,
 
       clearAbortControllerArr,
-
-      fetchAIProviders: aiSettingsStore.fetchAIProviders,
-      fetchMCPServers: aiSettingsStore.fetchMCPServers,
-      fetchWebSearch: aiSettingsStore.fetchWebSearch,
-      fetchKnowledge: aiSettingsStore.fetchKnowledge,
-      initDefaultProvider: aiSettingsStore.initDefaultProvider,
     };
   },
 )(observer(View));
-

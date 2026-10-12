@@ -37,7 +37,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { getBgPattern } from "@docspace/shared/utils/common";
-import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
+import { FormWrapper } from "@onlyoffice/apps-ui-kit/components/form-wrapper";
 
 import { getColorTheme } from "@/api/settings";
 import AuthClient from "./AuthClient";
@@ -70,7 +70,7 @@ export default async function AuthPage({
   ) as Record<string, string>;
   const confirmParams = new URLSearchParams(definedParams);
   if (confirmParams.has("inviteKey")) {
-    confirmParams.set("key", confirmParams.get("inviteKey")!);
+    confirmParams.set("key", confirmParams.get("inviteKey") ?? "");
     confirmParams.delete("inviteKey");
   }
   const confirmHeader = confirmParams.toString();

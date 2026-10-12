@@ -39,17 +39,16 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { FilesRowContent } from "@docspace/shared/components/files-row";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { SortByFieldName } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
+import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 
 import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
 
@@ -64,13 +63,18 @@ const RowContent = observer(
     displayFileExtension,
     badgesComponent,
   }: RowContentProps) => {
-    const { title, createdBy, created, updated } = item;
+    const { title: rawTitle, createdBy, created, updated } = item;
 
-    const { isBase } = useTheme();
     const { t, i18n } = useTranslation(["Common"]);
 
     const { openFolder } = useFolderActions({ t });
     const { openFile } = useFilesActions({ t });
+
+    const title = useDecryptedFilename(
+      item.id,
+      rawTitle,
+      "encrypted" in item ? item.encrypted : false,
+    );
 
     const titleWithoutExt =
       "fileExst" in item ? getTitleWithoutExt(title, item.fileExst) : title;
@@ -111,7 +115,7 @@ const RowContent = observer(
 
     return (
       <FilesRowContent
-        sideColor={isBase ? globalColors.gray : globalColors.grayDark}
+        sideColor="var(--row-side-color)"
       >
         <Link
           className="row-content-link"
@@ -140,8 +144,6 @@ const RowContent = observer(
 
         {mainInfo ? (
           <Text
-            containerMinWidth="200px"
-            containerWidth="15%"
             fontSize="12px"
             fontWeight={400}
             className="row_update-text"

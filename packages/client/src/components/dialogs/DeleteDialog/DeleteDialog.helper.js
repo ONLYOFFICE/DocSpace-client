@@ -34,7 +34,7 @@
  */
 
 import { Trans } from "react-i18next";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { isFile, isFolder } from "@docspace/shared/utils/typeGuards";
 
 const separateItems = (selection) => {
@@ -57,6 +57,8 @@ export const getDialogContent = (
   isAIAgent,
   isAIAgentsFolderRoot,
   unsubscribe,
+  isPrivacyFolder,
+  isFormSpace = false,
 ) => {
   if (!selection) return null;
 
@@ -85,13 +87,25 @@ export const getDialogContent = (
   }
 
   if (isAIAgent) {
-    return (
+    return isSingle ? (
       <>
         <Trans
           t={t}
           i18nKey="DeleteAIAgentDescription"
-          ns="DeleteDialog"
+          ns="Common"
           values={{ agentName: selection[0]?.title }}
+          components={{ 1: <Text fontWeight={600} as="span" /> }}
+        />{" "}
+        {t("Common:WantToContinue")}
+      </>
+    ) : (
+      <>
+        <Trans
+          t={t}
+          i18nKey="DeleteAIAgentsDescription"
+          ns="Common"
+          values={{ count: selection.length }}
+          components={{ 1: <Text fontWeight={600} as="span" /> }}
         />{" "}
         {t("Common:WantToContinue")}
       </>
@@ -115,23 +129,48 @@ export const getDialogContent = (
   if (isRoomDelete) {
     return isSingle ? (
       <>
-        <Trans t={t} i18nKey="DeleteRoomConfirm" ns="DeleteDialog">
-          The room <strong>\"{{ roomName: selection[0]?.title }}\"</strong>
-          will be permanently deleted. All data and user accesses will be lost.
-        </Trans>{" "}
+        {isFormSpace ? (
+          <Trans t={t} i18nKey="DeleteFormSpaceConfirm" ns="Common">
+            The space <strong>\"{{ roomName: selection[0]?.title }}\"</strong>
+            will be permanently deleted. All data and user accesses will be
+            lost.
+          </Trans>
+        ) : (
+          <Trans t={t} i18nKey="DeleteRoomConfirm" ns="Common">
+            The room <strong>\"{{ roomName: selection[0]?.title }}\"</strong>
+            will be permanently deleted. All data and user accesses will be
+            lost.
+          </Trans>
+        )}{" "}
         {t("Common:WantToContinue")}
       </>
     ) : (
       <>
         <Trans
           i18nKey="DeleteRooms"
-          ns="DeleteDialog"
+          ns="Common"
           t={t}
           values={{ count: selection.length }}
           components={{ 1: <Text fontWeight={600} as="span" /> }}
         />{" "}
         {t("Common:WantToContinue")}
       </>
+    );
+  }
+
+  // A private room bypasses the recycle bin (see delete.helpers.ts), so the note
+  // must not promise Trash or a 30-day grace period.
+  if (isPrivacyFolder) {
+    return isSingle ? (
+      <>
+        <Trans t={t} i18nKey="DeleteItemForeverConfirm" ns="DeleteDialog">
+          You are about to delete{" "}
+          <strong>{{ name: selection[0]?.title }}</strong>.
+        </Trans>{" "}
+        {t("Common:DeleteItemForever")}
+      </>
+    ) : (
+      t("Common:DeleteItemsForever", { itemCount: selection.length })
     );
   }
 
@@ -283,3 +322,4 @@ export const getDialogContent = (
     }
   }
 };
+

@@ -36,21 +36,20 @@
 import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
 
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { ColorInput } from "@docspace/ui-kit/components/color-input";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Label } from "@docspace/ui-kit/components/label";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { ColorInput } from "@onlyoffice/apps-ui-kit/components/color-input";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import {
   CategorySubHeader,
   ControlsGroup,
   ControlsSection,
   RowContainer,
 } from "../presets/StyledPresets";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const MainElementParameter = ({
   t,
@@ -145,9 +144,7 @@ export const MainElementParameter = ({
               scale
               name="button_text"
               onChange={setButtonText}
-              placeholder={t("SelectToPortal", {
-                productName: getBrandName("ProductName"),
-              })}
+              placeholder={t("SelectToPortal")}
               value={buttonValue}
               tabIndex={3}
               testId="button_mode_text_input"

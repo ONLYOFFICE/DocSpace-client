@@ -35,7 +35,7 @@
 
 import React from "react";
 
-import Section from "@docspace/ui-kit/components/section";
+import Section from "@onlyoffice/apps-ui-kit/components/section";
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import { withTranslation } from "react-i18next";
 
@@ -45,7 +45,7 @@ import { SectionHeaderContent, SectionBodyContent } from "./Section";
 
 class PureVersionHistory extends React.Component {
   render() {
-    const { isLoading, versions } = this.props;
+    const { isLoading, versions, fileTitle } = this.props;
 
     return (
       <SectionWrapper
@@ -56,7 +56,7 @@ class PureVersionHistory extends React.Component {
         <Section.SectionHeader>
           {versions && !isLoading ? (
             <SectionHeaderContent
-              title={versions[0].title}
+              title={fileTitle}
               onClickBack={this.redirectToHomepage}
             />
           ) : (
@@ -72,7 +72,7 @@ class PureVersionHistory extends React.Component {
   }
 }
 
-const VersionHistory = withTranslation("VersionHistory")(PureVersionHistory);
+const VersionHistory = withTranslation("Common")(PureVersionHistory);
 
 VersionHistory.propTypes = {};
 
@@ -80,15 +80,17 @@ export default inject(
   ({ settingsStore, filesStore, clientLoadingStore, versionHistoryStore }) => {
     const { filter } = filesStore;
     const { isLoading } = clientLoadingStore;
-    const { setIsVerHistoryPanel, versions } = versionHistoryStore;
+    const { setIsVerHistoryPanel, versions, fileTitle } = versionHistoryStore;
 
     return {
       isTabletView: settingsStore.isTabletView,
       isLoading,
       filter,
       versions,
+      fileTitle,
 
       setIsVerHistoryPanel,
     };
   },
 )(observer(VersionHistory));
+

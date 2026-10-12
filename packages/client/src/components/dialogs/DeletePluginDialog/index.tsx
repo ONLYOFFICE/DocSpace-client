@@ -37,11 +37,10 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TData, toastr } from "@docspace/ui-kit/components/toast";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { TData, toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { TTranslation } from "@docspace/shared/types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type Props = {
   isVisible: boolean;
@@ -72,7 +71,7 @@ const DeletePluginDialog = (props: Props) => {
     <ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>
       <ModalDialog.Header>{t("DeletePluginTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {t("DeletePluginDescription", { productName: getBrandName("ProductName") })}
+        {t("DeletePluginDescription")}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

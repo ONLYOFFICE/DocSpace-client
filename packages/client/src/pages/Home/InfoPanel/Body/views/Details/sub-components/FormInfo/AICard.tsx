@@ -37,11 +37,11 @@ import { Link } from "react-router";
 import { useMemo } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Card } from "@docspace/ui-kit/components/card";
-import { ActionButton } from "@docspace/ui-kit/components/action-button";
-import { getBrandName } from "@docspace/ui-kit/constants/brands";
+import { Card } from "@onlyoffice/apps-ui-kit/components/card";
+import { ActionButton } from "@onlyoffice/apps-ui-kit/components/action-button";
+import { getBrandName } from "@onlyoffice/apps-ui-kit/constants/brands";
 
-import SettingsSvg from "@docspace/ui-kit/assets/settings.desc.react.svg";
+import SettingsSvg from "PUBLIC_DIR/images/settings.desc.react.svg";
 
 import AIReactSvg from "PUBLIC_DIR/images/icons/16/AI.svg";
 import GridSvg from "PUBLIC_DIR/images/icons/12/grid.svg";
@@ -98,9 +98,7 @@ export const AICard = ({
 
     if (!aiReady) {
       if (isAdmin) {
-        return t("InfoPanel:FormRoomAIProviderNotConnected", {
-          productName: getBrandName("ProductName"),
-        });
+        return t("InfoPanel:FormRoomAIProviderNotConnected");
       }
 
       return (
@@ -163,7 +161,7 @@ export const AICard = ({
           as={Link}
           icon={<SettingsSvg />}
           label={t("Common:GoToSettings")}
-          to="/portal-settings/ai-settings/providers"
+          to="/portal-settings/ai-settings/ai-models"
         />
       );
     }

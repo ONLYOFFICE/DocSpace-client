@@ -1,0 +1,18 @@
+{
+  "DashboardApps": "From storage to collaboration, data collection, automation, and AI — each app is built for a different job. Open any of them for a short tour of that section.",
+  "DashboardAppsTitle": "Explore your apps",
+  "DashboardCreate": "Choose a text document, spreadsheet, presentation, PDF form, or start an AI chat. New documents are saved to {{files}}, ready whenever you need them.",
+  "DashboardCreateTitle": "Start creating",
+  "DashboardDevTools": "This is your developer hub: APIs, SDKs, plugins, webhooks, and more. Click into any card to learn more or get started.",
+  "DashboardDevToolsTitle": "Build with {{organizationName}}",
+  "DashboardIntegrations": "Already using another platform? Connect it and bring editors and apps right into the tools your team already uses — no code, nothing to migrate.",
+  "DashboardIntegrationsTitle": "Connect your platform",
+  "DashboardOverview": "This page is just one click away — open {{overview}} in the sidebar whenever you need it.",
+  "DashboardOverviewTitle": "Come back anytime",
+  "DashboardProfile": "Here's your workspace name and profile summary: name, email, and password. Rename your workspace or update your password anytime from here. To update other settings, go to your Profile page.",
+  "DashboardProfileTitle": "Check your profile details",
+  "WelcomeDashboardSubtitle": "Everything starts here",
+  "WelcomeDashboardTitle": "Welcome to {{organizationName}}",
+  "WelcomeDescription": "Create documents, collaborate in rooms, collect data with forms, and let AI handle the busywork all in one place. Ready for a quick tour?",
+  "WelcomeLater": "Maybe later"
+}

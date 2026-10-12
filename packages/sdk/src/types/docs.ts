@@ -37,6 +37,7 @@ export enum DocsSection {
   MyDocuments = "my-documents",
   Favorites = "favorites",
   Recent = "recent",
+  SharedWithMe = "shared-with-me",
   Trash = "trash",
   Settings = "settings",
 }
@@ -45,6 +46,7 @@ export const DOCS_SECTION_FOLDER_ALIAS: Record<DocsSection, string> = {
   [DocsSection.MyDocuments]: "@my",
   [DocsSection.Favorites]: "@favorites",
   [DocsSection.Recent]: "@recent",
+  [DocsSection.SharedWithMe]: "@share",
   [DocsSection.Trash]: "@trash",
   [DocsSection.Settings]: "@settings",
 };

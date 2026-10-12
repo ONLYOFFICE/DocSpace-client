@@ -1,14 +1,14 @@
 {
   "key_path": "BruteForceProtectionDescription",
-  "content": "Set up the limit of unsuccessful login attempts by the user to protect the space against brute-force attacks. When the limit is reached, attempts coming from the associated IP address will be banned for specified period of time, or captcha will be requested if enabled.",
-  "content_en_sha1_hash": "8d779beeb43e299e317c89a6b51492bc342a5d56",
-  "created_at": "2025-05-19T21:30:50.827Z",
-  "updated_at": "2026-05-15T14:00:06.863Z",
+  "content": "Set a limit on failed login attempts to protect your workspace from brute-force attacks. Once the limit is reached, the associated IP address is temporarily banned or shown a CAPTCHA, if enabled.",
+  "content_en_sha1_hash": "f2ca609597de7c140491dca096a6b19b87a8ef8e",
+  "created_at": "2026-08-31T18:23:40.548Z",
+  "updated_at": "2026-08-31T20:44:40.287Z",
   "comment": {
-    "text": "This is a description of the brute-force protection settings, explaining how it limits login attempts and bans IP addresses or requests a CAPTCHA.",
+    "text": "Subtitle in the security settings section explaining the functionality and consequences of enabling brute-force protection.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:25.905Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:44:40.287Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

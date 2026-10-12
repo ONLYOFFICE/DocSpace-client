@@ -3,7 +3,7 @@
   "content": "Enable",
   "content_en_sha1_hash": "20063ad9053289cecaa20ae630ed2dd758282a07",
   "created_at": "2025-05-19T21:30:44.923Z",
-  "updated_at": "2026-05-27T14:11:50.649Z",
+  "updated_at": "2026-09-14T20:38:41.365Z",
   "comment": {
     "text": "This is a button label. It appears in various contexts, such as enabling a backup service, changing a user's status, or activating an ad management setting.",
     "is_auto": true,
@@ -12,32 +12,32 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
-      "line_number": 244,
-      "context": "</>\n ) : (\n <Button\n className={styles.backupButton}\n size={ButtonSize.small}\n label={!isFreeTariff ? t(\"EnablePaidBackup\") : t(\"Enable\")}\n onClick={onConfirm}\n isDisabled={isDisabled}\n primary\n scale\n />",
-      "module": "/libs/ui-kit"
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "line_number": 286,
+      "context": "<>\n <Text fontWeight={600}>{t(\"AdditionalBackupsDisabled\")}</Text>\n <Button\n className={styles.cardEnableButton}\n size={ButtonSize.small}\n label={t(\"Enable\")}\n onClick={onConfirm}\n isDisabled={isDisabled}\n primary\n scale\n />",
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 215,
-      "context": ": t(\"EnableUserDescription\", { productName: getBrandName(\"ProductName\") })\n : isGuests\n ? t(\"EnableGuestsDescription\", { productName: getBrandName(\"ProductName\") })\n : t(\"EnableUsersDescription\", { productName: getBrandName(\"ProductName\") });\n \n buttonLabelSave = t(\"Common:Enable\");\n }\n \n return (\n <ModalDialog\n visible={visible}",
+      "line_number": 212,
+      "context": ": t(\"EnableUserDescription\")\n : isGuests\n ? t(\"EnableGuestsDescription\")\n : t(\"EnableUsersDescription\");\n \n buttonLabelSave = t(\"Common:Enable\");\n }\n \n return (\n <ModalDialog\n visible={visible}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
-      "line_number": 204,
+      "line_number": 203,
       "context": "value: 0,\n dataTestId: \"ad_management_disable\",\n },\n {\n id: \"enable\",\n label: t(\"Common:Enable\"),\n value: 1,\n dataTestId: \"ad_management_enable\",\n },\n ]}\n selected={type}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 269,
+      "line_number": 274,
       "context": "spacing=\"8px\"\n dataTestId=\"ai_services_management_radio_button_group\"\n options={[\n {\n id: \"enable\",\n label: t(\"Common:Enable\"),\n value: \"true\",\n dataTestId: \"ai_services_management_enable\",\n },\n {\n id: \"disabled\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
-      "line_number": 328,
+      "line_number": 319,
       "context": "<ModalDialog.Footer>\n <Button\n primary\n size=\"normal\"\n id=\"enable-button\"\n label={isLoading ? t(\"Common:Sending\") : t(\"Common:Enable\")}\n isLoading={isLoading}\n isDisabled={isLoading || isDisabled}\n scale\n onClick={updateConsumerValues}\n testId=\"consumer_dialog_enable_button\"",
       "module": "/packages/client"
     },
@@ -48,32 +48,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 205,
-      "context": "value: \"disabled\",\n dataTestId: \"administrator_message_disabled\",\n },\n {\n id: \"admin-message-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n dataTestId: \"administrator_message_enabled\",\n },\n ]}\n selected={type}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 240,
-      "context": "value: \"true\",\n dataTestId: \"developer_tools_access_disabled\",\n },\n {\n id: \"dev-tools-access-enable\",\n label: t(\"Common:Enable\"),\n value: \"false\",\n dataTestId: \"developer_tools_access_enabled\",\n },\n ]}\n selected={accessEnabled}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 305,
-      "context": "value: \"disabled\",\n dataTestId: \"ip_security_disabled\",\n },\n {\n id: \"ip-security-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n dataTestId: \"ip_security_enabled\",\n },\n ]}\n selected={enable ? \"enable\" : \"disabled\"}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 286,
-      "context": "value: \"disabled\",\n dataTestId: \"session_lifetime_disabled\",\n },\n {\n id: \"session-lifetime-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n dataTestId: \"session_lifetime_enabled\",\n },\n ]}\n selected={type ? \"enable\" : \"disabled\"}",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 485,
+      "line_number": 493,
       "context": "onClick: () => setSendInviteDialogVisible(true),\n icon: InviteAgainReactSvgUrl,\n },\n {\n key: \"cm-enable\",\n label: t(\"Common:Enable\"),\n disabled: !hasUsersToActivate || (isRoomAdmin && isGuests),\n onClick: () => onChangeStatus(EmployeeStatus.Active),\n icon: EnableReactSvgUrl,\n },\n {",
       "module": "/packages/client"
     },
@@ -85,13 +61,13 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 784,
+      "line_number": 819,
       "context": "};\n \n const enableOption = {\n key: \"enable\",\n icon: EnableReactSvgUrl,\n label: t(\"Common:Enable\"),\n onClick: () => this.onEnable(t, clientId),\n };\n \n const disableOption = {\n key: \"disable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 784,
+      "line_number": 819,
       "context": "};\n \n const enableOption = {\n key: \"enable\",\n icon: EnableReactSvgUrl,\n label: t(\"Common:Enable\"),\n onClick: () => this.onEnable(t, clientId),\n };\n \n const disableOption = {\n key: \"disable\",",
       "module": "/packages/client"
     }

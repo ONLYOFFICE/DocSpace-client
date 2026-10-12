@@ -3,7 +3,7 @@
   "content": "Use system theme",
   "content_en_sha1_hash": "b416b727b7b81cc355879b99623709aaf02f49bb",
   "created_at": "2026-04-03T21:51:34.685Z",
-  "updated_at": "2026-05-15T14:00:06.878Z",
+  "updated_at": "2026-06-03T09:30:05.098Z",
   "comment": {
     "text": "This is a checkbox label in the user's profile settings. When checked, the application's theme will automatically match the operating system's theme.",
     "is_auto": true,

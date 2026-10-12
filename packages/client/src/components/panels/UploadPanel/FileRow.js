@@ -35,16 +35,17 @@
 
 import React, { Component } from "react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { Button } from "@docspace/ui-kit/components/button";
-import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ProgressBar } from "@onlyoffice/apps-ui-kit/components/progress-bar";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SimulatePassword } from "@docspace/shared/components/simulate-password";
+import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 
 import CloseSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
@@ -363,7 +364,12 @@ export default inject(
 			}
 		} else {
 			ext = item?.fileInfo?.fileExst;
-			splitted = item.fileInfo?.title?.split(".");
+			const resolvedTitle = resolveDisplayTitle({
+				id: item.fileId,
+				title: item.fileInfo?.title,
+				encrypted: item.encrypted,
+			});
+			splitted = resolvedTitle.split(".");
 			if (ext) splitted.splice(-1);
 		}
 

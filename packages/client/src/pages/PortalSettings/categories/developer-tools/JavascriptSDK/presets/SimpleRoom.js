@@ -36,17 +36,17 @@
 import { useState, useEffect, useMemo } from "react";
 import { useEventLog } from "../sub-components/useEventLog";
 import { withTranslation } from "react-i18next";
-import { Label } from "@docspace/ui-kit/components/label";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
 import { inject, observer } from "mobx-react";
 import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { EventLogBlock } from "../sub-components/EventLogBlock";
 
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 
 import { useNavigate } from "react-router";
 import { getPrimaryLink } from "@docspace/shared/api/rooms";
@@ -69,7 +69,6 @@ import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { SharedLinkHint } from "../sub-components/SharedLinkHint";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
-import Integration from "../sub-components/Integration";
 import { VersionSelector } from "../sub-components/VersionSelector";
 
 import {
@@ -424,7 +423,7 @@ const SimpleRoom = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <CategorySubHeader>{t("InterfaceElements")}</CategorySubHeader>
+            <CategorySubHeader>{t("Common:InterfaceElements")}</CategorySubHeader>
 
             <CheckboxGroup>
               <LabelGroup>
@@ -452,7 +451,7 @@ const SimpleRoom = (props) => {
               <LabelGroup>
                 <Checkbox
                   className="checkbox"
-                  label={t("SearchFilterAndSort")}
+                  label={t("Common:SearchFilterAndSort")}
                   onChange={onChangeShowFilter}
                   isChecked={config.showFilter}
                   dataTestId="filter_checkbox"
@@ -464,8 +463,8 @@ const SimpleRoom = (props) => {
                   dataTestId="filter_help_button"
                   tooltipContent={
                     <TooltipContent
-                      title={t("SearchBlock")}
-                      description={t("ManagerSearchBlockDescription")}
+                      title={t("Common:SearchBlock")}
+                      description={t("Common:ManagerSearchBlockDescription")}
                       img={theme.isBase ? SearchUrl : SearchDarkUrl}
                     />
                   }
@@ -473,12 +472,8 @@ const SimpleRoom = (props) => {
               </LabelGroup>
             </CheckboxGroup>
           </ControlsSection>
-
-          <Integration className="integration-examples" />
         </Controls>
       </Container>
-
-      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };
@@ -497,7 +492,6 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "Files",
     "Translations",

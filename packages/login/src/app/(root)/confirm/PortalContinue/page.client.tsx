@@ -38,16 +38,15 @@
 import { useContext, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { continuePortal } from "@docspace/shared/api/portal";
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import styles from "../confirm.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ContinuePortalForm = () => {
   const { t } = useTranslation(["Confirm", "Common"]);
@@ -96,9 +95,7 @@ const ContinuePortalForm = () => {
   ) : (
     <>
       <Text className="subtitle">
-        {t("PortalContinueTitle", {
-          productName: getBrandName("ProductName"),
-        })}
+        {t("PortalContinueTitle")}
       </Text>
       <div className={styles.buttonsWrapper}>
         <Button

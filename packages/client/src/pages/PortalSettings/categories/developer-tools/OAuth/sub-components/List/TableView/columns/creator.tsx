@@ -33,24 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
-
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
 	Avatar,
 	AvatarRole,
 	AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
-const StyledAvatar = styled(Avatar)`
-  width: 16px !important;
-  margin-inline-end: 4px;
-  max-width: 16px !important;
-  height: 16px !important;
-
-  min-width: unset !important;
-`;
+import styles from "../TableView.styled.module.scss";
 
 interface CreatorCellProps {
 	avatar: string;
@@ -62,11 +53,11 @@ const CreatorCell = ({ avatar, displayName }: CreatorCellProps) => {
 
 	return (
 		<>
-			<StyledAvatar
+			<Avatar
 				source={avatar}
 				size={AvatarSize.small}
 				role={AvatarRole.user}
-				className="textOverflow"
+				className={`textOverflow ${styles.creatorAvatar}`}
 			/>
 
 			<Text

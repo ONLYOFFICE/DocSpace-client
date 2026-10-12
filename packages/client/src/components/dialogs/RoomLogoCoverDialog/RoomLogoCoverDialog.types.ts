@@ -34,7 +34,7 @@
  */
 
 import type { TTranslation } from "@docspace/shared/types";
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 
@@ -53,7 +53,7 @@ export interface ILogoCover {
   cover: string;
 }
 
-interface IRoomCoverDialogProps {
+export interface IRoomCoverDialogProps {
   icon: string | null | ILogo;
   color: string | null;
   title: string | null;
@@ -64,11 +64,13 @@ interface IRoomCoverDialogProps {
 
 export interface RoomLogoCoverProps {
   isBaseTheme?: boolean;
-  logo?: ILogo;
   title?: string;
   covers?: ICover[] | undefined;
-  setCover: (color: string, icon: string | ICover) => void;
-  cover: ILogoCover;
+  logoColor?: string;
+  logoCover?: ICover | null;
+  coverColor?: string;
+  coverId?: string;
+  withSelection?: boolean;
   setRoomCoverDialogProps: (params: IRoomCoverDialogProps) => void;
   roomCoverDialogProps: IRoomCoverDialogProps;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
@@ -81,6 +83,7 @@ export interface RoomLogoCoverProps {
 }
 
 export type CoverDialogProps = RoomLogoCoverProps & {
+  setCover: (color: string, icon: string | ICover) => void;
   setRoomLogoCover: VoidFunction;
   covers?: ICover[] | undefined;
   getCovers: VoidFunction;

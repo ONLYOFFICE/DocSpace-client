@@ -58,7 +58,7 @@ import {
 } from "@docspace/shared/utils/filterConstants";
 
 import Banner from "./Banner";
-import Items from "./Items";
+import NavMenuItems from "./NavMenuItems";
 import AccountsItems from "./AccountsItems";
 import DeveloperToolsItems from "./DeveloperToolsItems";
 
@@ -459,12 +459,13 @@ const ArticleBodyContent = (props) => {
           activeItemId={activeItemId}
         />
       ) : (
-        <Items
-          onClick={onClick}
-          getLinkData={getLinkData}
-          showText={showText}
-          onHide={toggleArticleOpen}
+        <NavMenuItems
           activeItemId={activeItemId}
+          onFolderNavigate={() => {
+            setSelection?.([]);
+            setIsLoading(true, !!selectedFolderId);
+            if (currentDeviceType === DeviceType.mobile) toggleArticleOpen();
+          }}
         />
       )}
       {!isDesktopClient &&

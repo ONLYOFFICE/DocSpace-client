@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2026-06-02T08:43:27.501Z",
+  "updated_at": "2026-09-14T20:38:41.353Z",
   "comment": {
     "text": "This is a link label that, when clicked, directs the user to a help page or settings page for more information about the current feature or setting.",
     "is_auto": true,
@@ -12,62 +12,80 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 188,
-      "context": "fontWeight={600}\n href={walletHelpUrl}\n className={styles.learnMoreLink}\n dataTestId=\"wallet_learn_more_link\"\n >\n {t(\"LearnMore\")}\n </Link>\n ) : null}\n \n <div className={styles.balanceWrapper}>\n <BalanceAmount",
-      "module": "/libs/ui-kit"
+      "file_path": "@onlyoffice/apps-ui-kit/billing/wallet/WalletContainer.tsx",
+      "line_number": 230,
+      "context": "fontWeight={600}\n href={walletHelpUrl}\n className={styles.learnMoreLink}\n dataTestId=\"wallet_learn_more_link\"\n >\n {t(\"LearnMore\")}\n </Link>\n ) : null}\n \n <div className={styles.summaryGrid}>\n <div className={`${styles.summaryCard} ${styles.summaryCardBalance}`}>",
+      "module": "@onlyoffice/apps-ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/IntegrationsCard/IntegrationDialog.tsx",
+      "line_number": 169,
+      "context": "target={LinkTarget.blank}\n isHovered\n fontSize=\"13px\"\n fontWeight={600}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 154,
+      "context": "{\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),\n path: \"/developer-tools/javascript-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"plugins-sdk\",\n title: t(\"WebPlugins:PluginSDK\"),\n description: t(\"Settings:PluginDescription\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 154,
+      "context": "{\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),\n path: \"/developer-tools/javascript-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"plugins-sdk\",\n title: t(\"WebPlugins:PluginSDK\"),\n description: t(\"Settings:PluginDescription\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 154,
+      "context": "{\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),\n path: \"/developer-tools/javascript-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"plugins-sdk\",\n title: t(\"WebPlugins:PluginSDK\"),\n description: t(\"Settings:PluginDescription\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 154,
+      "context": "{\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),\n path: \"/developer-tools/javascript-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"plugins-sdk\",\n title: t(\"WebPlugins:PluginSDK\"),\n description: t(\"Settings:PluginDescription\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 154,
+      "context": "{\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),\n path: \"/developer-tools/javascript-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"plugins-sdk\",\n title: t(\"WebPlugins:PluginSDK\"),\n description: t(\"Settings:PluginDescription\"),",
+      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 285,
+      "line_number": 293,
       "context": "fontWeight={600}\n isHovered\n href={knowledgeSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <div className={styles.knowledgeForm} data-testid=\"knowledge-form\">\n <FieldContainer\n labelVisible",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/index.tsx",
-      "line_number": 201,
-      "context": "fontWeight={600}\n isHovered\n href={aiProviderSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <Button\n testId=\"add-provider-button\"\n primary",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/KnowledgeBaseSaas.tsx",
+      "line_number": 120,
+      "context": "color=\"accent\"\n href={knowledgeSettingsUrl}\n target={LinkTarget.blank}\n textDecoration=\"underline\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n \n <div className={styles.list}>\n {items.map((item) => (",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 236,
-      "context": "fontWeight={600}\n isHovered\n href={webSearchSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <div className={styles.searchForm} data-testid=\"web-search-form\">\n <FieldContainer\n labelVisible",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/add/index.tsx",
-      "line_number": 155,
-      "context": "fontWeight={600}\n isHovered\n href={mcpServersSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n {iconComponent}\n {baseParamsComponent}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/edit/index.tsx",
-      "line_number": 181,
-      "context": "fontWeight={600}\n isHovered\n href={mcpServersSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n {iconComponent}\n {baseParamsComponent}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
-      "line_number": 251,
-      "context": "fontWeight={600}\n isHovered\n href={mcpServersSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <Button\n primary\n size={ButtonSize.small}",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/WebSearchSaas.tsx",
+      "line_number": 127,
+      "context": "color=\"accent\"\n href={webSearchSettingsUrl}\n target={LinkTarget.blank}\n textDecoration=\"underline\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n \n <Tooltip id=\"ws-pricing-tooltip\" place=\"bottom\" />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 782,
+      "line_number": 788,
       "context": "type=\"page\"\n href={appearanceBlockHelpUrl}\n target=\"_blank\"\n dataTestId=\"appearance_preview_help_button_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n </div>\n }\n />\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 256,
+      "line_number": 261,
       "context": "isHovered\n href={aiServicesManagementUrl}\n fontWeight={600}\n dataTestId=\"ai_services_management_learn_more\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <RadioButtonGroup\n className={styles.radioButtonGroup}\n fontSize=\"13px\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 221,
+      "line_number": 205,
       "context": "target={LinkTarget.blank}\n isHovered\n href={configureDeepLinkUrl}\n fontWeight={600}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <RadioButtonGroup\n className=\"radio-button-group\"\n fontSize=\"13px\"",
       "module": "/packages/client"
     },
@@ -79,13 +97,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 556,
+      "line_number": 553,
       "context": "target=\"_blank\"\n isHovered\n dataTestId=\"language_and_time_zone_link\"\n href={languageAndTimeZoneSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n {settingsBlock}\n <SaveCancelButtons",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 409,
+      "line_number": 408,
       "context": "target=\"_blank\"\n isHovered\n href={renamingSettingsUrl}\n dataTestId=\"portal_renaming_learn_more\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n {settingsBlock}\n <SaveCancelButtons",
       "module": "/packages/client"
     },
@@ -109,37 +127,37 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 214,
+      "line_number": 165,
       "context": "fontSize=\"13px\"\n fontWeight=\"400\"\n onClick={() => window.open(installationGuidesUrl, \"_blank\")}\n dataTestId=\"csp_info_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </>\n }\n />",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 109,
-      "context": "organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n })}\n url={apiBasicLink}\n color={globalColors.lightBlueMain}\n linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
+      "line_number": 364,
+      "context": "isHovered\n target=\"_blank\"\n href={documentServiceSettingsUrl}\n dataTestId=\"integration_settings_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </Styled.LocationHeader>\n \n <Styled.LocationForm onSubmit={onSubmit}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 261,
+      "line_number": 364,
       "context": "isHovered\n target=\"_blank\"\n href={documentServiceSettingsUrl}\n dataTestId=\"integration_settings_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </Styled.LocationHeader>\n \n <Styled.LocationForm onSubmit={onSubmit}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 134,
+      "line_number": 132,
       "context": "target=\"_blank\"\n href={ldapSettingsUrl}\n dataTestId=\"ldap_settings_link\"\n fontWeight={600}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n {isMobileView ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/UploadDescription.tsx",
-      "line_number": 26,
+      "line_number": 60,
       "context": "isHovered\n target={LinkTarget.blank}\n href={pluginsSdkUrl}\n dataTestId=\"api_plugins_sdk_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/index.js",
-      "line_number": 96,
+      "line_number": 102,
       "context": "target=\"_blank\"\n isHovered\n href={singleSignOnUrl}\n fontWeight={600}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n \n {isMobileView ? (\n <MobileView isSSOAvailable={isSSOAvailable} logoText={logoText} />",
       "module": "/packages/client"
     },
@@ -151,13 +169,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 248,
-      "context": "isHovered\n target=\"_blank\"\n href={integrationSettingsUrl}\n dataTestId=\"integration_settings_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n <div className=\"consumer-item-wrapper request-block\">\n <img",
+      "line_number": 178,
+      "context": "isHovered\n target=\"_blank\"\n href={integrationSettingsUrl}\n dataTestId=\"integration_settings_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n <div className={`${styles.consumerItemWrapper} ${styles.requestBlock}`}>\n <img",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 183,
+      "line_number": 180,
       "context": "color={currentColorScheme.main?.accent}\n target=\"_blank\"\n isHovered\n href={administratorMessageSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
       "module": "/packages/client"
     },
@@ -169,61 +187,61 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 218,
+      "line_number": 215,
       "context": "color={currentColorScheme?.main?.accent ?? undefined}\n target={LinkTarget.blank}\n isHovered\n href={limitedDevToolsBlockHelpUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 277,
+      "line_number": 274,
       "context": "target={LinkTarget.blank}\n isHovered\n href={invitationSettingsUrl}\n fontWeight={600}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <div className={styles.content}>",
       "module": "/packages/client"
     },
@@ -247,7 +265,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 261,
+      "line_number": 258,
       "context": "target=\"_blank\"\n isHovered\n href={tfaSettingsUrl}\n dataTestId=\"tfa_component_learn_more\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
       "module": "/packages/client"
     },
@@ -259,25 +277,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 338,
+      "line_number": 339,
       "context": "fontSize=\"13px\"\n href={becometranslatorUrl}\n target={LinkTarget.blank}\n dataTestId=\"language_becometranslator_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </Text>\n );",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
+      "line_number": 313,
+      "context": "fontWeight={600}\n isHovered\n href={knowledgeSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <div className={styles.knowledgeForm} data-testid=\"knowledge-form\">\n <FieldContainer\n labelVisible",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 278,
+      "line_number": 287,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n href={customFilterExternalLink}\n isHovered\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </>\n );",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 445,
+      "line_number": 443,
       "context": "fontSize=\"13px\"\n color={currentColorScheme?.main?.accent ?? undefined}\n isHovered\n dataTestId=\"automatic_backup_learn_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <div",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 468,
+      "line_number": 557,
       "context": "fontSize=\"13px\"\n color={currentColorScheme?.main?.accent ?? undefined}\n isHovered\n dataTestId=\"creating_backup_learn_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <div className={styles.modules}>",
       "module": "/packages/shared"
     }

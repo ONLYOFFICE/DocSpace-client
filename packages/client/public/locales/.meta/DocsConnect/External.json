@@ -1,0 +1,29 @@
+{
+  "key_path": "External",
+  "content": "External",
+  "content_en_sha1_hash": "8d10c693b773b327ecf17fbda7591feccda0c54d",
+  "created_at": "2026-07-27T13:07:48.504Z",
+  "updated_at": "2026-07-27T14:20:57.262Z",
+  "comment": {
+    "text": "Label for a statistical column in the DocsConnect usage summary, representing the count of external connections or users.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:20:57.262Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/UsageBlock.tsx",
+      "line_number": 94,
+      "context": "</div>\n <ProgressBar percent={percent} className={styles.usageProgress} />\n <div className={styles.statRow}>\n <StatColumn value={usage.active} label={t(\"Common:Active\")} />\n <StatColumn value={usage.internal} label={t(\"DocsConnect:Internal\")} />\n <StatColumn value={usage.external} label={t(\"DocsConnect:External\")} />\n <StatColumn\n value={usage.remaining}\n label={t(\"DocsConnect:Remaining\")}\n highlight\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

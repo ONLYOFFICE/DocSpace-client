@@ -33,23 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
+import classNames from "classnames";
 import { inject, observer } from "mobx-react";
+
+import styles from "./HideButton.module.scss";
 import { useTranslation } from "react-i18next";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: ${(props) => (props.isAdditionalParameters ? "0" : "24px 0")};
-
-  .hide-button {
-    margin-inline-start: 12px;
-  }
-`;
 
 const HideButton = (props) => {
 	const { t } = useTranslation("SingleSignOn");
@@ -68,7 +60,7 @@ const HideButton = (props) => {
 	};
 
 	return (
-		<StyledWrapper isAdditionalParameters={isAdditionalParameters}>
+		<div className={classNames(styles.styledWrapper, { [styles.additionalParameters]: isAdditionalParameters })}>
 			{!isAdditionalParameters ? (
 				<Text
 					as="h2"
@@ -82,7 +74,7 @@ const HideButton = (props) => {
 
 			<Link
 				id={id}
-				className="hide-button settings_unavailable"
+				className={`${styles.hideButton} settings_unavailable`}
 				isHovered
 				onClick={onClick}
 				type="action"
@@ -91,12 +83,12 @@ const HideButton = (props) => {
 				{value
 					? isAdditionalParameters
 						? t("HideAdditionalParameters")
-						: t("Hide")
+						: t("Common:Hide")
 					: isAdditionalParameters
 						? t("ShowAdditionalParameters")
-						: t("Show")}
+						: t("Common:Show")}
 			</Link>
-		</StyledWrapper>
+		</div>
 	);
 };
 

@@ -34,7 +34,26 @@
  */
 
 import { roomTagsHandler } from "./tags";
+import {
+  createPrivateRoomHandler,
+  createPrivateRoomHandlers,
+} from "./createRoom";
+import { roomMembersHandlers } from "./roomMembers";
 
 export { roomTagsHandler };
+export {
+  createPrivateRoomHandler,
+  createPrivateRoomHandlers,
+  type CreateRoomBody,
+  type CreatedRoomRecord,
+  type CreateRoomHandlerHandle,
+  type CreateRoomHandlerOptions,
+} from "./createRoom";
+export {
+  roomMembersHandlers,
+  type RoomMember,
+  type RoomMembersHandlerHandle,
+  type RoomMembersHandlerOptions,
+} from "./roomMembers";
 
 export const roomsHandlers = (port: string) => [roomTagsHandler(port)];

@@ -1,0 +1,29 @@
+{
+  "key_path": "SwitchToEditorsDescription",
+  "content": "{{organizationName}} {{editorsName}} will start using the editors included with your {{service}} subscription. Your current Document Service settings will be replaced, and the new settings will be saved automatically.",
+  "content_en_sha1_hash": "c0149996c2cb8ddc64d001cbe1e34ca87aa10aa4",
+  "created_at": "2026-07-30T16:14:09.760Z",
+  "updated_at": "2026-07-30T16:16:41.942Z",
+  "comment": {
+    "text": "Informational text in a confirmation dialog explaining that switching to integrated editors will overwrite current Document Service settings. It contains placeholders for {{organizationName}}, {{editorsName}}, and {{service}}.",
+    "is_auto": true,
+    "updated_at": "2026-07-30T16:16:41.942Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/ApplyToPortalDialog.tsx",
+      "line_number": 77,
+      "context": "{t(\"DocsConnect:SwitchToEditorsQuestion\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:SwitchToEditorsDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

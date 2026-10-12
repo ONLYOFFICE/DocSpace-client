@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "ຄໍາຮ້ອງສະຫມັກນີ້ຖືກປິດງານແລ້ວ",
   "OAuthApplicationEmpty": "ຄໍາຮ້ອງສະຫມັກບໍ່ພົບ",
   "OAuthClientEmpty": "ບໍ່ພົບ ID ຂອງລູກຄ້າ",
+  "OAuthInvalidRequest": "ຄໍາຮ້ອງຂໍການອະນຸຍາດບໍ່ຖືກຕ້ອງ. ກວດສອບ URI ການປ່ຽນເສັ້ນທາງໃນການຕັ້ງຄ່າຄໍາຮ້ອງສະຫມັກ",
   "RecaptchaInvalid": "Recaptcha ບໍ່ຖືກຕ້ອງ",
   "SsoAttributesNotFound": "ການກວດສອບບໍ່ສຳເລັດ (ບໍ່ພົບຄຸນສົມບັດການຢືນຢັນ)",
   "SsoAuthFailed": "ການພິສູດຢືນຢັນຕົວວຕົນລົ້ມເຫລວ",

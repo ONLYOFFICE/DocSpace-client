@@ -1,20 +1,20 @@
 {
   "key_path": "StatisticDescription",
-  "content": "Here, you can view the detailed storage usage data in this {{productName}}.",
-  "content_en_sha1_hash": "c25e93f04d549177e51dc81450d226b9b0dfe235",
-  "created_at": "2025-05-19T21:30:52.761Z",
-  "updated_at": "2026-05-15T14:00:06.872Z",
+  "content": "See a detailed breakdown of storage usage across your workspace.",
+  "content_en_sha1_hash": "894e8015f6d50d7f1e5e601255be4290d04e51a1",
+  "created_at": "2026-08-31T18:23:42.253Z",
+  "updated_at": "2026-08-31T20:16:15.944Z",
   "comment": {
-    "text": "This is a descriptive text that appears below the storage usage statistics, explaining that the user can view detailed storage data for the product. `{{productName}}` will be replaced with the brand name of the product (e.g., ONLYOFFICE DocSpace).",
+    "text": "Subtitle text on the storage statistics page within Portal Settings, providing context for the storage usage breakdown.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:22:02.394Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:16:15.944Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Statistics.js",
-      "line_number": 119,
-      "context": "isPaidBadge\n />\n ) : null}\n </div>\n <Text className=\"statistics-description\">\n {t(\"StatisticDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n {isStatisticsAvailable ? (\n <>\n <RoomsList\n buttonProps={buttonProps}",
+      "line_number": 118,
+      "context": "isPaidBadge\n />\n ) : null}\n </div>\n <Text className=\"statistics-description\">\n {t(\"StatisticDescription\")}\n </Text>\n {isStatisticsAvailable ? (\n <>\n <RoomsList\n buttonProps={buttonProps}",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

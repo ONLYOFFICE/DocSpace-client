@@ -42,23 +42,79 @@ import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.a
 import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
-import { getBrandName } from "@docspace/shared/constants/brands";
+import { Text } from "@onlyoffice/apps-ui-kit/components";
+import AIFeaturesDialog from "@onlyoffice/apps-ui-kit/billing/services/panels/ai-service/AIFeaturesDialog";
+
+import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
+import ClientSimpleTopUpDialog from "./sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 
 const KnowledgeDisabledContainer = (props) => {
-  const { t, theme, isFrame, isAdmin, setKnowledgeId, setCurrentTab } = props;
-
-  const titleRoomNoAccess = t("AIRoom:KnowledgeUnavailable");
-  const descriptionRoomNoAccess = isAdmin
-    ? t("AIRoom:KnowledgeUnavailableDescription", {
-        productName: getBrandName("ProductName"),
-        aiAgents: t("Common:AIAgents"),
-      })
-    : t("AIRoom:KnowledgeUnavailableDescriptionUser", {
-        productName: getBrandName("ProductName"),
-        aiAgents: t("Common:AIAgents"),
-      });
+  const {
+    t,
+    theme,
+    isFrame,
+    isAdmin,
+    standalone,
+    isCardLinkedToPortal,
+    enableAIService,
+    getAIConfig,
+    refreshPaymentInfo,
+    language,
+    setKnowledgeId,
+    setCurrentTab,
+  } = props;
 
   const navigate = useNavigate();
+
+  const {
+    onActivateAI,
+    onTopUpAndActivateAI,
+    // onShowAIBenefits,
+    onDialogActivate,
+    onAIActivated,
+    isActivating,
+    aiFeaturesDialogVisible,
+    onCloseAIFeaturesDialog,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+  } = useAIActivation({
+    enableAIService,
+    getAIConfig,
+    refreshPaymentInfo,
+    isCardLinkedToPortal,
+    context: "knowledge",
+    createAgentOnActivate: false,
+  });
+
+  let titleRoomNoAccess;
+  let descriptionRoomNoAccess;
+
+  if (standalone) {
+    titleRoomNoAccess = t("Common:KnowledgeUnavailable");
+    descriptionRoomNoAccess = isAdmin
+      ? t("Common:KnowledgeUnavailableDescription", {
+          aiAgents: t("Common:AIAgents"),
+        })
+      : t("Common:KnowledgeUnavailableDescriptionUser", {
+          aiAgents: t("Common:AIAgents"),
+        });
+  } else if (isAdmin) {
+    titleRoomNoAccess = t("Common:EmptyAIAgentsNotActiveYetTitle");
+    descriptionRoomNoAccess = (
+      <>
+        <Text as="span">
+          {t("Common:EmptyAIAgentsNotActiveYetDescription")}
+        </Text>
+        <Text as="span" style={{ display: "block", marginTop: "8px" }}>
+          {t("Common:EmptyAIAgentsNotActiveYetDescriptionLine2")}
+        </Text>
+      </>
+    );
+  } else {
+    // saas user — same text as the empty AI agents view
+    titleRoomNoAccess = t("Common:AIFeaturesNotActive");
+    descriptionRoomNoAccess = t("Common:EmptyAIDisabledContactAdminDesc");
+  }
 
   const goToSettings = (event) => {
     event?.preventDefault();
@@ -71,6 +127,46 @@ const KnowledgeDisabledContainer = (props) => {
     navigate("/portal-settings/ai-settings/knowledge");
   };
 
+  const getOptions = () => {
+    if (isFrame || !isAdmin) return [];
+
+    if (standalone)
+      return [
+        {
+          type: "button",
+          onClick: goToSettings,
+          key: "disabled-view-go-to-settings",
+          title: t("Common:GoToSettings"),
+        },
+      ];
+
+    const activateOrTopUpAI = isCardLinkedToPortal
+      ? {
+          type: "button",
+          title: t("Common:Activate"),
+          key: "activate-ai",
+          onClick: onActivateAI,
+          isLoading: isActivating,
+        }
+      : {
+          type: "button",
+          title: t("Common:TopUpAndActivate"),
+          key: "top-up-and-activate-ai",
+          onClick: onTopUpAndActivateAI,
+        };
+
+    return [
+      activateOrTopUpAI,
+      // {
+      //   type: "button",
+      //   title: t("Common:Benefits"),
+      //   key: "ai-benefits",
+      //   primary: false,
+      //   onClick: onShowAIBenefits,
+      // },
+    ];
+  };
+
   const propsRoomNotFoundOrMoved = {
     title: titleRoomNoAccess,
     description: isFrame ? "" : descriptionRoomNoAccess,
@@ -79,30 +175,46 @@ const KnowledgeDisabledContainer = (props) => {
     ) : (
       <ChatNoAccessRightsDarkIcon />
     ),
-    options:
-      isFrame || !isAdmin
-        ? []
-        : [
-            {
-              type: "button",
-              onClick: goToSettings,
-              key: "disabled-view-go-to-settings",
-              title: t("Common:GoToSettings"),
-            },
-          ],
+    options: getOptions(),
   };
 
-  return <EmptyView {...propsRoomNotFoundOrMoved} />;
+  return (
+    <>
+      <EmptyView {...propsRoomNotFoundOrMoved} />
+      <AIFeaturesDialog
+        visible={aiFeaturesDialogVisible}
+        onClose={onCloseAIFeaturesDialog}
+        onActivate={onDialogActivate}
+        isCardLinkedToPortal={isCardLinkedToPortal ?? false}
+        isActivating={isActivating}
+      />
+      <ClientSimpleTopUpDialog
+        visible={simpleTopUpDialogVisible}
+        onClose={onCloseSimpleTopUpDialog}
+        onConfirm={onAIActivated}
+        language={language}
+      />
+    </>
+  );
 };
 
-export default inject(({ settingsStore, userStore, aiRoomStore }) => {
-  const { isFrame, theme } = settingsStore;
-  return {
-    theme,
-    isFrame,
-    isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
-    setKnowledgeId: aiRoomStore.setKnowledgeId,
-    setCurrentTab: aiRoomStore.setCurrentTab,
-  };
-})(withTranslation(["Common", "AIRoom"])(observer(KnowledgeDisabledContainer)));
+export default inject(
+  ({ settingsStore, userStore, aiRoomStore, paymentStore, authStore }) => {
+    const { isFrame, theme, standalone, getAIConfig } = settingsStore;
+    return {
+      theme,
+      isFrame,
+      standalone,
+      isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
+      isCardLinkedToPortal: paymentStore?.isCardLinkedToPortal,
+      isCardMissingOrInactive: paymentStore?.isCardMissingOrInactive,
+      enableAIService: paymentStore?.enableAIService,
+      getAIConfig,
+      refreshPaymentInfo: authStore?.getPaymentInfo,
+      language: authStore?.language ?? "en",
+      setKnowledgeId: aiRoomStore.setKnowledgeId,
+      setCurrentTab: aiRoomStore.setCurrentTab,
+    };
+  },
+)(withTranslation(["Common"])(observer(KnowledgeDisabledContainer)));
 

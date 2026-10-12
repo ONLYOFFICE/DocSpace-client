@@ -35,7 +35,7 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { Consumer } from "@docspace/ui-kit/utils/context";
+import { Consumer } from "@onlyoffice/apps-ui-kit/utils/context";
 
 import TableView from "./TableView";
 import RowView from "./RowView";
@@ -43,7 +43,6 @@ import {
   AccountsTableProps,
   InjectedTypeSelectTableProps,
 } from "../../../types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const checkedAccountType = "result";
 
@@ -89,9 +88,7 @@ const AccountsTable = (props: AccountsTableProps) => {
   if (isOwner) {
     typeOptions.unshift({
       key: UserTypes.PortalAdmin,
-      label: t("Common:PortalAdmin", {
-        productName: getBrandName("ProductName"),
-      }),
+      label: t("Common:PortalAdmin"),
       onClick: setTypePortalAdmin,
     });
   }

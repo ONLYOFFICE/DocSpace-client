@@ -34,20 +34,20 @@
  */
 
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import styles from "./configure-deep-link.module.scss";
 import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { DeviceType, DeepLinkType } from "@docspace/shared/enums";
 import { saveDeepLinkSettings } from "@docspace/shared/api/settings";
 
@@ -73,22 +73,6 @@ interface Props {
   configureDeepLinkUrl: string;
   currentColorScheme: TColorScheme;
 }
-
-const StyledWrapper = styled.div`
-  max-width: 700px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  .radio-button-group {
-    width: fit-content;
-    margin-top: 8px;
-  }
-
-  .save-cancel-buttons {
-    margin-top: 16px;
-  }
-`;
 
 const ConfigureDeepLinkComponent = (props: Props) => {
   const {
@@ -202,7 +186,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
   if (!isLoadedPage) return <LoaderCustomization deepLink />;
 
   return (
-    <StyledWrapper>
+    <div className={styles.wrapper}>
       {!isMobileView ? (
         <Text fontSize="16px" fontWeight={700}>
           {t("ConfigureDeepLink")}
@@ -265,7 +249,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
         saveButtonDataTestId="configure_deep_link_save_button"
         cancelButtonDataTestId="configure_deep_link_cancel_button"
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

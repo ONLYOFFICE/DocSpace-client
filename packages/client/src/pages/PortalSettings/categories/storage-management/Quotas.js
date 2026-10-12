@@ -35,50 +35,56 @@
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "styled-components";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { isMobile } from "@docspace/shared/utils";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
-import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";
+import styles from "./StyledComponent.module.scss";
 import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
 import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
 import { QuotaPerAIAgentComponentSection } from "./sub-components/QuotaPerAIAgent";
 
-const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
+const QuotaPerItemsComponent = ({ isStatisticsAvailable, aiServicesEnabled }) => {
   if (isMobile())
-    return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;
+    return (
+      <MobileQuotasComponent
+        isDisabled={!isStatisticsAvailable}
+        aiServicesEnabled={aiServicesEnabled}
+      />
+    );
 
   return (
     <>
       <QuotaPerRoomComponentSection />
       <QuotaPerUserComponentSection />
-      <QuotaPerAIAgentComponentSection />
+      {aiServicesEnabled ? <QuotaPerAIAgentComponentSection /> : null}
     </>
   );
 };
 
 const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
-  const { isStatisticsAvailable, storageManagementUrl } = props;
+  const { isStatisticsAvailable, storageManagementUrl, aiServicesEnabled } =
+    props;
 
   return (
-    <StyledBaseQuotaComponent>
+    <div className={styles.baseQuotaComponent}>
       <div className="title-container">
-        <StyledMainTitle fontSize="16px" fontWeight={700}>
+        <Text className={styles.mainTitle} fontSize="16px" fontWeight={700}>
           {t("Quotas")}
-        </StyledMainTitle>
+        </Text>
 
         {!isStatisticsAvailable ? (
           <Badge
             backgroundColor={
-              theme.isBase
+              isBase
                 ? globalColors.favoritesStatus
                 : globalColors.favoriteStatusDark
             }
@@ -104,17 +110,21 @@ const QuotasComponent = (props) => {
         ) : null}
       </Text>
 
-      <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />
-    </StyledBaseQuotaComponent>
+      <QuotaPerItemsComponent
+        isStatisticsAvailable={isStatisticsAvailable}
+        aiServicesEnabled={aiServicesEnabled}
+      />
+    </div>
   );
 };
 
 export default inject(({ currentQuotaStore, settingsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
-  const { storageManagementUrl } = settingsStore;
+  const { storageManagementUrl, aiServicesEnabled } = settingsStore;
 
   return {
     isStatisticsAvailable,
     storageManagementUrl,
+    aiServicesEnabled,
   };
 })(observer(QuotasComponent));

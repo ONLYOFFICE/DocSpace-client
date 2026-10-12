@@ -40,8 +40,8 @@ import { useTranslation } from "react-i18next";
 import AutomaticBackup from "@docspace/shared/pages/backup/auto-backup";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 
-import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
-import type { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import { useUnmount } from "@onlyoffice/apps-ui-kit/hooks/useUnmount";
+import type { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import type {
@@ -106,7 +106,12 @@ export default inject(
   }: TStore) => {
     const language = authStore.language;
 
-    const { getIcon, filesSettings } = filesSettingsStore;
+    const {
+      getIcon,
+      filesSettings,
+      isExternalShareRestricted,
+      externalShareApplyToRooms,
+    } = filesSettingsStore;
 
     const settingsFileSelector = { getIcon, filesSettings };
     const {
@@ -231,6 +236,8 @@ export default inject(
     return {
       removeItem,
       settingsFileSelector,
+      disabledCreatePublicRoom:
+        isExternalShareRestricted && externalShareApplyToRooms,
       isEnableAuto,
       // authStore
       language,

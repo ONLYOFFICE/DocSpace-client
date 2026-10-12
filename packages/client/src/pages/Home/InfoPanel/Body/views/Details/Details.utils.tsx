@@ -37,9 +37,9 @@ import React from "react";
 import { decode } from "he";
 import type { TFunction } from "i18next";
 
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { isRoom } from "@docspace/shared/utils/typeGuards";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
@@ -54,7 +54,10 @@ import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
   getRoomTypeName,
 } from "SRC_DIR/helpers/filesUtils";
-import { TagManagement } from "SRC_DIR/components/TagManagement";
+import {
+  TagManagement,
+  getTagManagementAccess,
+} from "SRC_DIR/components/TagManagement";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
@@ -119,6 +122,8 @@ type DetailsHelperProps = {
   isDefaultRoomsQuotaSet: boolean;
   isDefaultAIAgentsQuotaSet: boolean;
   isAIAgentsFolder: boolean;
+  isAdmin: boolean;
+  isArchiveFolder: boolean;
   roomLifetime: TRoomLifetime;
 };
 
@@ -141,6 +146,10 @@ class DetailsHelper {
 
   isAIAgentsFolder: boolean;
 
+  isAdmin: boolean;
+
+  isArchiveFolder: boolean;
+
   roomLifetime: TRoomLifetime;
 
   constructor(props: DetailsHelperProps) {
@@ -153,6 +162,8 @@ class DetailsHelper {
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
     this.isDefaultAIAgentsQuotaSet = props.isDefaultAIAgentsQuotaSet;
     this.isAIAgentsFolder = props.isAIAgentsFolder;
+    this.isAdmin = props.isAdmin;
+    this.isArchiveFolder = props.isArchiveFolder;
     this.roomLifetime = props.roomLifetime;
   }
 
@@ -170,13 +181,22 @@ class DetailsHelper {
       "isRoom" in this.item && this.item.isRoom
         ? [
             "Owner",
-            this.item.providerKey && "Storage Type",
+            (this.item as TRoom).providerKey && "Storage Type",
             "Type",
             "Content",
             "Date modified",
             "Last modified by",
             "Creation date",
-            this.item.tags?.length && "Tags",
+            // Also for a room with no tags yet, as long as the user could
+            // add one - otherwise the info panel has no way to attach the
+            // first tag at all.
+            ((this.item as TRoom).tags?.length ||
+              getTagManagementAccess(
+                this.item.access,
+                this.isAdmin,
+                this.isArchiveFolder,
+              ).canCreate) &&
+              "Tags",
             "Storage",
           ]
         : "isFolder" in this.item && this.item.isFolder
@@ -239,7 +259,7 @@ class DetailsHelper {
         return this.t("InfoPanel:StorageType");
 
       case "File extension":
-        return this.t("FileExtension");
+        return this.t("Common:FileExtension");
 
       case "Content":
         return this.t("Common:Content");
@@ -248,11 +268,11 @@ class DetailsHelper {
       case "Resolution":
         return this.t("InfoPanel:Resolution");
       case "Date modified":
-        return this.t("DateModified");
+        return this.t("Common:DateModified");
       case "Last modified by":
-        return this.t("LastModifiedBy");
+        return this.t("Common:LastModifiedBy");
       case "Creation date":
-        return this.t("CreationDate");
+        return this.t("Common:CreationDate");
       case "Lifetime ends":
         return this.t("LifetimeEnds");
 
@@ -260,18 +280,18 @@ class DetailsHelper {
         return this.t("Files:Index");
 
       case "Versions":
-        return this.t("InfoPanel:Versions");
+        return this.t("Common:Versions");
       case "Comments":
         return this.t("Common:Comments");
       case "Tags":
         return this.t("Common:Tags");
 
       case "Author":
-        return this.t("Files:ByAuthor");
+        return this.t("Common:ByAuthor");
       case "Shared by":
-        return this.t("Files:SharedBy");
+        return this.t("Common:SharedBy");
       case "Access level":
-        return this.t("Files:AccessLevel");
+        return this.t("Common:AccessLevel");
       case "externalDbTableName":
         return this.t("Files:TableName");
 
@@ -491,3 +511,4 @@ class DetailsHelper {
 }
 
 export default DetailsHelper;
+

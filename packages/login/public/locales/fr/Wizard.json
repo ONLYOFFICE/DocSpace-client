@@ -1,5 +1,5 @@
 {
-  "Desc": "Veuillez configurer les données d'enregistrement de {{productName}}.",
+  "Desc": "Veuillez configurer les données d'enregistrement de l'espace de travail.",
   "ErrorEmail": "Adresse mail invalide",
   "ErrorInstanceId": "Identité d'instance non valide",
   "ErrorLicenseBody": "La licence n'est pas valide. Vérifiez que vous avez sélectionné le bon fichier.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Accords de licence",
   "PlaceholderLicense": "Votre fichier de licence",
   "Timezone": "Fuseau horaire :",
-  "WelcomeTitle": "Bienvenue dans votre {{productName}} !"
+  "WelcomeTitle": "Bienvenue dans votre espace de travail !"
 }

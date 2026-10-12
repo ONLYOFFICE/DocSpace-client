@@ -33,15 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
+import styles from "./StyledSettingsSeparator.module.scss";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-const StyledSettingsSeparator = styled.hr.attrs(injectDefaultTheme)`
-  margin: 24px 0;
-  border: none;
-  border-top: ${(props) => props.theme.client.settings.separatorBorder};
-  max-width: 700px;
-`;
+const StyledSettingsSeparator = () => <hr className={styles.settingsSeparator} />;
 
 export default StyledSettingsSeparator;

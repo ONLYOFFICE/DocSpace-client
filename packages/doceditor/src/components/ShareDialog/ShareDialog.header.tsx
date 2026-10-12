@@ -38,10 +38,11 @@ import { useTranslation } from "react-i18next";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { useItemIcon } from "@docspace/shared/hooks/useItemIcon";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import styles from "./ShareDialog.module.scss";
 import type { ShareDialogHeaderProps } from "./ShareDialog.types";
@@ -58,9 +59,11 @@ const ShareDialogHeader: FC<ShareDialogHeaderProps> = ({
 
   const icon = useMemo(() => getIcon(file.fileExst, 32), [file.fileExst]);
 
+  const resolvedTitle = useResolvedFileTitle(file);
+
   const title = useMemo(
-    () => file.title.replace(/\.[^/.]+$/, ""),
-    [file.title],
+    () => resolvedTitle.replace(/\.[^/.]+$/, ""),
+    [resolvedTitle],
   );
 
   return (

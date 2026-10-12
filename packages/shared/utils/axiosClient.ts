@@ -43,7 +43,10 @@ import axios, {
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import { combineUrl } from "./combineUrl";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { isOAuthFrame, onAuthTokenPush, requestAuthToken } from "./oauthToken";
+import { frameCallEvent } from "./common";
+import { isPortalNotFoundRedirectClaimed } from "./portalNotFound";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix, timeout: apiTimeout } = apiConf;
@@ -82,6 +85,28 @@ export type TReqOption = {
   skipForbidden?: boolean;
 };
 
+/**
+ * A request the client handles itself rather than passing straight through —
+ * the same idea as Playwright's `page.route`, and the same two ways of doing
+ * it: answer in place of the server, or let the request go and rewrite what
+ * comes back.
+ *
+ * Both work on the raw payload, i.e. what sits in `data`, so they deal in the
+ * envelope the real endpoint uses (`{ response }`, plus `total` for the list
+ * endpoints) — `request` unwraps the result exactly as it unwraps a real one.
+ *
+ * Prefer `transform` whenever the real answer is worth having: rewriting one
+ * field of a genuine response cannot get the other fields wrong, and a
+ * fabricated payload always can.
+ */
+export type TRouteMock = {
+  match: (config: InternalAxiosRequestConfig) => boolean;
+  /** Answer without sending anything. */
+  fulfill?: (config: InternalAxiosRequestConfig) => unknown | Promise<unknown>;
+  /** Send as usual, then rewrite the payload that came back. */
+  transform?: (data: unknown, config: InternalAxiosRequestConfig) => unknown;
+};
+
 class AxiosClient {
   isSSR = false;
 
@@ -91,9 +116,86 @@ class AxiosClient {
 
   authToken: string | null = null;
 
+  private routeMocks: TRouteMock[] = [];
+
+  private oauthReady: Promise<void> | null = null;
+
+  private oauthRefreshing: Promise<string | null> | null = null;
+
+  private oauthGeneration = 0;
+
+  private oauthUnavailable = false;
+
+  private oauthSignedOut = false;
+
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
   }
+
+  /**
+   * Take over the requests `mock.match` claims, for as long as the returned
+   * function has not been called. Nothing is intercepted until something
+   * registers, so the cost of this when no mock is up is one empty-array check
+   * per request.
+   */
+  interceptRoute = (mock: TRouteMock) => {
+    this.routeMocks.push(mock);
+
+    return () => {
+      this.routeMocks = this.routeMocks.filter((item) => item !== mock);
+    };
+  };
+
+  /**
+   * Answers the request from a registered mock by swapping in an adapter — the
+   * one place axios lets a request be resolved without going to the network,
+   * and the reason this hangs off the request interceptor rather than the
+   * response one (by then the request has already been sent).
+   */
+  private applyRouteMock = (config: InternalAxiosRequestConfig) => {
+    if (!this.routeMocks.length) return false;
+
+    const mock = this.routeMocks.find(
+      (item) => item.fulfill && item.match(config),
+    );
+    if (!mock?.fulfill) return false;
+
+    const { fulfill } = mock;
+
+    config.adapter = async () =>
+      ({
+        data: await fulfill(config),
+        status: 200,
+        statusText: "OK",
+        headers: {},
+        config,
+      }) as AxiosResponse;
+
+    return true;
+  };
+
+  /**
+   * Hands a real response to the mock that claimed it, so it can rewrite the
+   * payload. Runs on the way back, which is the whole point: everything the
+   * mock does not touch is what the server actually said.
+   */
+  private applyRouteTransform = (response: AxiosResponse) => {
+    if (!this.routeMocks.length) return response;
+
+    const mock = this.routeMocks.find(
+      (item) =>
+        item.transform &&
+        item.match(response.config as InternalAxiosRequestConfig),
+    );
+    if (!mock?.transform) return response;
+
+    response.data = mock.transform(
+      response.data,
+      response.config as InternalAxiosRequestConfig,
+    );
+
+    return response;
+  };
 
   initCSR = () => {
     this.isSSR = false;
@@ -138,12 +240,29 @@ class AxiosClient {
 
     this.client = axios.create(apxiosConfig);
 
+    if (isOAuthFrame()) onAuthTokenPush((token) => this.setAuthToken(token));
+
     this.client.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
         if (typeof window === "undefined") return config;
 
+        // A mocked request never leaves the browser, so it needs none of the
+        // auth work below — and must not wait on an OAuth token to be issued.
+        if (this.applyRouteMock(config)) return config;
+
         const urlParams = new URLSearchParams(window.location.search);
         const publicRoomKey = urlParams.get("key") || urlParams.get("share");
+
+        if (isOAuthFrame()) {
+          config.withCredentials = false;
+          return this.ensureOAuthToken().then(() => {
+            if (this.authToken) {
+              config.headers = config.headers || {};
+              config.headers["Authorization"] = `Bearer ${this.authToken}`;
+            }
+            return config;
+          });
+        }
 
         if (publicRoomKey) {
           config.headers = config.headers || {};
@@ -160,6 +279,8 @@ class AxiosClient {
         return config;
       },
     );
+
+    this.client.interceptors.response.use(this.applyRouteTransform);
   };
 
   initSSR = (headersParam: Record<string, string>) => {
@@ -192,7 +313,76 @@ class AxiosClient {
   };
 
   setAuthToken = (token: string | null) => {
+    if (this.oauthSignedOut) return;
     this.authToken = token;
+    this.oauthGeneration += 1;
+    if (token) this.oauthUnavailable = false;
+  };
+
+  signOutOAuth = () => {
+    this.authToken = null;
+    this.oauthGeneration += 1;
+    this.oauthSignedOut = true;
+  };
+
+  getOAuthToken = async (): Promise<string | null> => {
+    if (typeof window !== "undefined" && isOAuthFrame())
+      await this.ensureOAuthToken();
+    return this.authToken;
+  };
+
+  refreshOAuthToken = (): Promise<string | null> => {
+    if (typeof window === "undefined" || !isOAuthFrame() || this.oauthSignedOut)
+      return Promise.resolve(null);
+    if (this.oauthRefreshing !== null) return this.oauthRefreshing;
+
+    this.oauthGeneration += 1;
+    this.oauthRefreshing = requestAuthToken()
+      .then((token) => {
+        if (token) {
+          this.authToken = token;
+          this.oauthUnavailable = false;
+        } else {
+          frameCallEvent({
+            event: "onAuthError",
+            data: { code: "TOKEN_REFRESH_FAILED", message: "unauthorized" },
+          });
+        }
+        return token;
+      })
+      .finally(() => {
+        this.oauthRefreshing = null;
+      });
+
+    return this.oauthRefreshing;
+  };
+
+  private ensureOAuthToken = (): Promise<void> => {
+    if (this.authToken) return Promise.resolve();
+    if (this.oauthUnavailable || this.oauthSignedOut) return Promise.resolve();
+    if (this.oauthReady !== null) return this.oauthReady;
+
+    const generation = this.oauthGeneration;
+    const ready = requestAuthToken()
+      .then((token) => {
+        if (generation !== this.oauthGeneration) return;
+        if (token) {
+          this.authToken = token;
+          this.oauthUnavailable = false;
+        } else {
+          this.oauthUnavailable = true;
+          frameCallEvent({
+            event: "onAuthError",
+            data: { code: "TOKEN_UNAVAILABLE", message: "unauthorized" },
+          });
+        }
+      })
+      .finally(() => {
+        if (this.oauthReady === ready) this.oauthReady = null;
+      });
+
+    this.oauthReady = ready;
+    return ready;
   };
 
   setWithCredentialsStatus = (state: boolean) => {
@@ -287,10 +477,42 @@ class AxiosClient {
 
       if (!this.isSSR) {
         const w = window as unknown as { __redirectToLogin?: boolean };
-        if (w.__redirectToLogin) return Promise.resolve();
+        if (w.__redirectToLogin || isPortalNotFoundRedirectClaimed())
+          return Promise.resolve();
 
         switch (error.response?.status) {
           case 401: {
+            if (isOAuthFrame()) {
+              const opts = options as TReqOption &
+                AxiosRequestConfig & { _oauthRetried?: boolean };
+
+              const settle = (): Promise<void> =>
+                options.skipUnauthorized
+                  ? Promise.resolve()
+                  : Promise.reject(error);
+
+              if (opts._oauthRetried) {
+                frameCallEvent({
+                  event: "onAuthError",
+                  data: { code: "UNAUTHORIZED", message: "unauthorized" },
+                });
+                return settle();
+              }
+
+              opts._oauthRetried = true;
+
+              return this.refreshOAuthToken().then((token) => {
+                if (token)
+                  return this.request<T>(
+                    opts,
+                    skipRedirect,
+                    isOAuth,
+                  ) as unknown as Promise<void>;
+
+                return settle();
+              });
+            }
+
             if (options.skipUnauthorized) return Promise.resolve();
 
             if (options.skipLogout) return Promise.reject(error);
@@ -308,6 +530,12 @@ class AxiosClient {
 
             w.__redirectToLogin = true;
             this.request(opt)?.then(() => {
+              // Re-check: the guard at the top of onError ran before the
+              // logout roundtrip, and /settings may have answered 404 in the
+              // meantime. The wrong-portal-name navigation started by that
+              // 404 must not be cancelled with a trip to the login page.
+              if (isPortalNotFoundRedirectClaimed()) return;
+
               this.setWithCredentialsStatus(false);
               window.location.href = `${loginURL}?authError=true`;
             });
@@ -356,10 +584,8 @@ class AxiosClient {
       return Promise.reject(error);
     };
     return this.client?.(options).then(onSuccess).catch(onError) as
-      | Promise<T>
-      | undefined;
+      Promise<T> | undefined;
   };
 }
 
 export default AxiosClient;
-

@@ -1,0 +1,15 @@
+.iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  transition: opacity 0.3s ease-in-out;
+}
+
+// While the SDK routes to a new section we keep the current content on
+// screen and dim it (instead of a white flash). Pointer events are
+// disabled so the user can't interact with the stale content mid-switch.
+.dimmed {
+  opacity: 0.5;
+  pointer-events: none;
+}

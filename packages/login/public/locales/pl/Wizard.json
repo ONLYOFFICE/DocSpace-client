@@ -1,5 +1,5 @@
 {
-  "Desc": "Skonfiguruj dane rejestracyjne {{productName}}.",
+  "Desc": "Skonfiguruj dane rejestracyjne przestrzeni roboczej.",
   "ErrorEmail": "Nieprawidłowy adres e-mail",
   "ErrorInstanceId": "Nieprawidłowy identyfikator instancji",
   "ErrorLicenseBody": "Licencja jest nieważna. Upewnij się, że wybrano właściwy plik.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Umowy licencyjne",
   "PlaceholderLicense": "Twój plik licencyjny",
   "Timezone": "Strefa czasowa:",
-  "WelcomeTitle": "Witaj w Twoim {{productName}}!"
+  "WelcomeTitle": "Witaj w Twojej przestrzeni roboczej!"
 }

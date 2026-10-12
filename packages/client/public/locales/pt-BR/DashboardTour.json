@@ -1,0 +1,18 @@
+{
+  "DashboardApps": "Do armazenamento à colaboração, coleta de dados, automação e IA — cada aplicativo é feito para uma tarefa diferente. Abra qualquer um deles para um tour rápido daquela seção.",
+  "DashboardAppsTitle": "Explore seus aplicativos",
+  "DashboardCreate": "Escolha um documento de texto, planilha, apresentação, formulário PDF ou inicie um chat de IA. Os novos documentos são salvos em {{files}}, prontos sempre que você precisar deles.",
+  "DashboardCreateTitle": "Comece a criar",
+  "DashboardDevTools": "Este é o seu centro de desenvolvedor: APIs, SDKs, plugins, webhooks e muito mais. Clique em qualquer cartão para saber mais ou começar.",
+  "DashboardDevToolsTitle": "Desenvolva com {{organizationName}}",
+  "DashboardIntegrations": "Já usa outra plataforma? Conecte-a e leve os editores e aplicativos diretamente para as ferramentas que sua equipe já usa — sem código e sem nada para migrar.",
+  "DashboardIntegrationsTitle": "Conecte sua plataforma",
+  "DashboardOverview": "Esta página está a apenas um clique de distância — abra {{overview}} na barra lateral sempre que precisar dela.",
+  "DashboardOverviewTitle": "Volte quando quiser",
+  "DashboardProfile": "Aqui está o nome do seu espaço de trabalho e um resumo do perfil: nome, e-mail e senha. Renomeie seu espaço de trabalho ou atualize sua senha a qualquer momento por aqui. Para atualizar outras configurações, acesse sua página de Perfil.",
+  "DashboardProfileTitle": "Confira os dados do seu perfil",
+  "WelcomeDashboardSubtitle": "Tudo começa aqui",
+  "WelcomeDashboardTitle": "Bem-vindo ao {{organizationName}}",
+  "WelcomeDescription": "Crie documentos, colabore em salas, colete dados com formulários e deixe a IA cuidar do trabalho repetitivo — tudo em um só lugar. Pronto para um tour rápido?",
+  "WelcomeLater": "Talvez mais tarde"
+}

@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsStartFromAFormTemplatePrompt",
+  "content": "Recommend a suitable form template and use it as the starting point for a new Form Space. If this information is not provided, ask me for the use case, target respondents, and information to collect.",
+  "content_en_sha1_hash": "35ef7c7c89040ff0213b322fc89b3c4cc7d1567f",
+  "created_at": "2026-08-04T09:58:55.171Z",
+  "updated_at": "2026-08-05T17:26:05.389Z",
+  "comment": {
+    "text": "An instruction prompt for an AI assistant that appears when a user chooses to create a Form Space using a template, directing how the AI should handle missing information.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:26:05.389Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 691,
+      "context": "prompt: t(\"AiSuggestions:FormsCreateAFormSpacePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsStartFromAFormTemplate\"),\n prompt: t(\"AiSuggestions:FormsStartFromAFormTemplatePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsCreateAFormWithAI\"),\n prompt: t(\"AiSuggestions:FormsCreateAFormWithAIPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

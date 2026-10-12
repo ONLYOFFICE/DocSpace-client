@@ -33,70 +33,27 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled, { css } from "styled-components";
-import { ReactSVG } from "react-svg";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
+import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 
-import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg";
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-const TileContainer = styled.div.attrs(injectDefaultTheme)`
-  box-sizing: border-box;
-
-  width: 100%;
-  max-width: 342px;
-
-  padding: 12px 16px;
-
-  border-radius: 6px;
-  border: 1px solid ${(props) => props.theme.sdkPresets.borderColor};
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 12px;
-
-  cursor: pointer;
-
-  .tileContent {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .navigationButton {
-    border: none;
-
-    .button-content {
-      flex-direction: row-reverse;
-    }
-
-    .icon {
-      ${({ theme }) =>
-        theme.interfaceDirection === "ltr" && "transform: scale(-1, 1);"}
-    }
-
-    :hover {
-      ${() => css`
-        border: ${(props) => props.theme.button.border.baseHover};
-        box-sizing: ${(props) => props.theme.button.boxSizing};
-      `}
-    }
-  }
-`;
+import styles from "./PresetTile.module.scss";
 
 const PresetTile = (props) => {
   const { t, title, description, image, handleOnClick, dataTestId } = props;
 
   return (
-    <TileContainer onClick={handleOnClick} data-testid={dataTestId}>
-      <div className="tileContent">
+    <div
+      className={styles.tileContainer}
+      onClick={handleOnClick}
+      data-testid={dataTestId}
+    >
+      <div className={styles.tileContent}>
         <Text fontSize="16px" lineHeight="22px" fontWeight={700} noSelect>
           {title}
         </Text>
-        <ReactSVG src={image} />
+        <img className={styles.tileImage} src={image} alt="" />
         <Text noSelect lineHeight="20px">
           {description}
         </Text>
@@ -104,15 +61,16 @@ const PresetTile = (props) => {
 
       <Button
         testId={`sdk_preset_${title}_button`}
-        className="navigationButton"
+        className={styles.navigationButton}
         label={t("SetUp")}
         icon={<ArrowIcon />}
         scale
         isClicked
         size="small"
       />
-    </TileContainer>
+    </div>
   );
 };
 
 export default PresetTile;
+

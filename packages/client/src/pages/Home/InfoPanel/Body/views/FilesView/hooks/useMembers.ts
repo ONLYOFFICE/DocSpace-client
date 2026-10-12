@@ -37,6 +37,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 
+import type { TFileLink } from "@docspace/shared/api/files/types";
 import type { RoomMember } from "@docspace/shared/api/rooms/types";
 import {
   EmployeeActivationStatus,
@@ -46,7 +47,7 @@ import {
 } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 import { Nullable } from "@docspace/shared/types";
-import { TOption } from "@docspace/ui-kit/components/combobox";
+import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import type {
   TInfoPanelMember,
@@ -265,7 +266,9 @@ export const useMembers = ({
 
     try {
       const [data, links] = await Promise.all(requests);
-      if (links) setExternalLinks(links);
+      // getRoomMembers with filterType 2 (external links)
+      // returns link-shaped items, but its return type is RoomMember[].
+      if (links) setExternalLinks(links as unknown as TFileLink[]);
       else setExternalLinks([]);
 
       const convertedMembers = convertMembers(data, true);

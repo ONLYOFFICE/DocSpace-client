@@ -1,10 +1,48 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
 import { http } from "msw";
 
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_PORTAL_PAYMENT_QUOTAS = "portal/payment/quotas";
 
-export const portalPaymentQuotasSuccess = () => {
+// The tariff the subscription renews into (ui-kit FUTURE_TARIFF_QUOTA_ID); without it renewal prices fall back to USD.
+const FUTURE_TARIFF_QUOTA_ID = -14;
+
+const purchasableQuotas = () => {
   return {
     response: [
       {
@@ -299,7 +337,7 @@ export const portalPaymentQuotasSuccess = () => {
     count: 2,
     links: [
       {
-        href: "https://uzbekistan.onlyoffice.io/api/2.0/portal/payment/quotas",
+        href: `${BASE_URL}/${API_PREFIX}/${PATH_PORTAL_PAYMENT_QUOTAS}`,
         action: "GET",
       },
     ],
@@ -308,15 +346,38 @@ export const portalPaymentQuotasSuccess = () => {
   };
 };
 
-export const portalPaymentQuotasResolver = () => {
-  return new Response(JSON.stringify(portalPaymentQuotasSuccess()));
+export type TQuotaCurrency = {
+  currencySymbol: string;
+  isoCurrencySymbol: string;
 };
 
-export const portalPaymentQuotasHandler = (port: string) => {
+// currency: overrides the price currency of every quota, e.g. to match the wallet.
+export const portalPaymentQuotasSuccess = (currency?: TQuotaCurrency) => {
+  const body = purchasableQuotas();
+  const paidTariff = body.response[1];
+  const quotas = [...body.response, { ...paidTariff, id: FUTURE_TARIFF_QUOTA_ID }];
+
+  return {
+    ...body,
+    response: currency
+      ? quotas.map((quota) => ({ ...quota, price: { ...quota.price, ...currency } }))
+      : quotas,
+    count: quotas.length,
+  };
+};
+
+export const portalPaymentQuotasResolver = (currency?: TQuotaCurrency) => {
+  return new Response(JSON.stringify(portalPaymentQuotasSuccess(currency)));
+};
+
+export const portalPaymentQuotasHandler = (
+  port: string,
+  currency?: TQuotaCurrency,
+) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_PORTAL_PAYMENT_QUOTAS}`,
     () => {
-      return portalPaymentQuotasResolver();
+      return portalPaymentQuotasResolver(currency);
     },
   );
 };

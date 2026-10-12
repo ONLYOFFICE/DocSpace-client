@@ -1,0 +1,25 @@
+.changeOwnerDisplay {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 8px 0;
+
+	.changeOwnerDisplayName {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+
+		.meLabel {
+			color: var(--text-disable-color);
+		}
+	}
+}
+
+.changeOwnerDisplayWrapper {
+	display: block;
+	align-items: center;
+
+	.changeOwnerLink {
+		margin-left: auto;
+	}
+}

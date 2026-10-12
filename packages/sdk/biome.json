@@ -3,10 +3,6 @@
   "extends": [
     "../shared/biome.json"
   ],
-  "plugins": [
-    "../shared/biome-plugins/no-dynamic-i18n-key.grit",
-    "../shared/biome-plugins/no-constants-via-i18n.grit"
-  ],
   "linter": {
     "rules": {
       "performance": {
@@ -36,5 +32,33 @@
       "!webpack.config.js",
       "!tests/*"
     ]
-  }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "src/app/(private)/**",
+        "!src/app/(private)/_utils/parity-check.ts"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "error"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "src/api/**",
+        "src/app/**/page.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noNonNullAssertion": "error"
+          }
+        }
+      }
+    }
+  ]
 }

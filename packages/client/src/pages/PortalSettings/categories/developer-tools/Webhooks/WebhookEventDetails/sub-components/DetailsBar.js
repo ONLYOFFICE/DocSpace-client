@@ -25,9 +25,10 @@
  * Creative Commons Attribution-ShareAlike 4.0 International License:
  * https://creativecommons.org/licenses/by-sa/4.0/legalcode
  *
- * This program is distributed WITHOUT ANY WARRANTY; without even the implied
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
- * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
@@ -36,16 +37,27 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ColumnarInfoBar } from "@docspace/ui-kit/components/columnar-info-bar";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 
 import StatusBadge from "../../sub-components/StatusBadge";
 import { getTriggerTranslate } from "../../Webhooks.helpers";
 
+import styles from "../WebhookEventDetails.styled.module.scss";
+
+const BarItemHeader = ({ children }) => (
+  <Text as="h3" fontSize="12px" fontWeight={600} className="barItemHeader">
+    {children}
+  </Text>
+);
+
 const DetailsBar = ({ eventDetails }) => {
   const { t, i18n } = useTranslation(["Webhooks", "People"]);
 
-  const formattedDelivery = getCorrectDate(i18n.language, eventDetails.delivery);
+  const formattedDelivery = getCorrectDate(
+    i18n.language,
+    eventDetails.delivery,
+  );
   const formattedCreationTime = getCorrectDate(
     i18n.language,
     eventDetails.creationTime,
@@ -53,18 +65,40 @@ const DetailsBar = ({ eventDetails }) => {
 
   const trigger = getTriggerTranslate(eventDetails.trigger, t);
 
-  const columns = [
-    {
-      label: t("People:UserStatus"),
-      value: <StatusBadge status={eventDetails.status} />,
-    },
-    { label: t("EventID"), value: eventDetails.id },
-    { label: t("EventType"), value: trigger },
-    { label: t("EventTime"), value: formattedCreationTime },
-    { label: t("DeliveryTime"), value: formattedDelivery },
-  ];
-
-  return <ColumnarInfoBar columns={columns} variant="neutral" />;
+  return (
+    <div className={styles.barWrapper}>
+      <div className={styles.barItem}>
+        <BarItemHeader>{t("People:UserStatus")}</BarItemHeader>
+        <div className={styles.barFlexWrapper}>
+          <StatusBadge status={eventDetails.status} />
+        </div>
+      </div>
+      <div className={styles.barItem}>
+        <BarItemHeader>{t("EventID")}</BarItemHeader>
+        <Text isInline fontWeight={600}>
+          {eventDetails.id}
+        </Text>
+      </div>
+      <div className={styles.barItem}>
+        <BarItemHeader>{t("EventType")}</BarItemHeader>
+        <Text isInline fontWeight={600}>
+          {trigger}
+        </Text>
+      </div>
+      <div className={styles.barItem}>
+        <BarItemHeader>{t("EventTime")}</BarItemHeader>
+        <Text isInline fontWeight={600}>
+          {formattedCreationTime}
+        </Text>
+      </div>
+      <div className={styles.barItem}>
+        <BarItemHeader>{t("DeliveryTime")}</BarItemHeader>
+        <Text isInline fontWeight={600}>
+          {formattedDelivery}
+        </Text>
+      </div>
+    </div>
+  );
 };
 
 export default inject(({ webhooksStore }) => {

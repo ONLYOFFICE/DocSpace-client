@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useTheme } from "styled-components";
 import React, { memo, useCallback } from "react";
+import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
 import AutoSizer from "react-virtualized-auto-sizer";
 import InfiniteLoader from "react-window-infinite-loader";
 import { areEqual, FixedSizeList as List } from "react-window";
@@ -45,7 +45,7 @@ import { TGroupMemberInvitedInRoom } from "../../../../api/groups/types";
 import {
   Scrollbar,
   ScrollbarProps,
-} from "@docspace/ui-kit/components/scrollbar";
+} from "@onlyoffice/apps-ui-kit/components/scrollbar";
 
 import GroupMember from "../GroupMember";
 
@@ -98,7 +98,7 @@ const GroupMembersList = ({
   total,
   isNextPageLoading,
 }: GroupMembersListProps) => {
-  const { interfaceDirection } = useTheme();
+  const { interfaceDirection } = useInterfaceDirection();
 
   const itemCount = hasNextPage ? members.length + 1 : members.length;
 

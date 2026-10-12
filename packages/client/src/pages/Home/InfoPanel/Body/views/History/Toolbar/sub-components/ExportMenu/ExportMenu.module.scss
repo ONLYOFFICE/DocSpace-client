@@ -1,0 +1,147 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "../../toolbar-mixins" as toolbar;
+
+$popup-width: 375px;
+$popup-inset-start: 5px;
+$popup-inset-end: 20px;
+$popup-padding: 16px;
+$expander-icon-size: 6px;
+$loader-size: 16px;
+
+.container {
+  flex-shrink: 0;
+}
+
+.button {
+  @include toolbar.plain-button;
+
+  gap: 4px;
+  height: 28px;
+  padding: 4px 8px;
+  border-radius: 3px;
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--info-panel-toolbar-button-hover-color);
+  }
+
+  &.opened:not(:disabled) {
+    background: var(--info-panel-toolbar-button-selected-color);
+  }
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.indicator {
+  position: relative;
+  flex-shrink: 0;
+  align-self: stretch;
+  width: $expander-icon-size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Kept out of the flow so the wider loader does not resize the button when it
+// replaces the expander.
+.loader {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: $loader-size;
+  height: $loader-size;
+}
+
+.icon {
+  @include toolbar.action-icon($expander-icon-size);
+
+  .opened & {
+    transform: rotate(180deg);
+  }
+}
+
+.popup {
+  @include toolbar.popup-top;
+
+  position: absolute;
+  inset-inline-end: $popup-inset-end;
+  z-index: toolbar.$popup-z-index;
+
+  box-sizing: border-box;
+  width: $popup-width;
+  max-width: calc(100% - #{$popup-inset-start + $popup-inset-end});
+  display: flex;
+  flex-direction: column;
+
+  border: var(--dropdown-border);
+  border-radius: 6px;
+  background: var(--dropdown-background);
+  box-shadow: var(--dropdown-box-shadow);
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: $popup-padding;
+}
+
+.description {
+  margin-top: 8px;
+  color: var(--info-panel-subtitle-color);
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-top: 16px;
+  padding: $popup-padding;
+  border-top: 1px solid var(--info-panel-border-color);
+
+  .submitButton {
+    flex: 1;
+  }
+}

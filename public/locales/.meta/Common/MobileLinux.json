@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/article/sub-components/Apps.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/article/sub-components/Apps.tsx",
       "line_number": 118,
       "context": "className={styles.linuxIcon}\n onClick={() => window.open(downloaddesktopUrl)}\n iconNode={<LinuxReactSvgUrl />}\n size={32}\n isFill\n title={t(\"MobileLinux\", {\n organizationName: logoText,\n })}\n />\n ) : null}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

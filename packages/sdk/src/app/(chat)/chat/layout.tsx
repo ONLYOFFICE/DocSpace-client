@@ -72,11 +72,14 @@ export default async function ChatServerLayout({
 
     if (agentId) returnParams.set("agentId", agentId);
 
+    const entityId = filterParams.get("entityId");
+    if (entityId) returnParams.set("entityId", entityId);
+
     const fileId = filterParams.get("fileId");
     if (fileId) returnParams.set("fileId", fileId);
 
-    const chatId = filterParams.get("chatId");
-    if (chatId) returnParams.set("chatId", chatId);
+    const threadId = filterParams.get("threadId");
+    if (threadId) returnParams.set("threadId", threadId);
 
     const returnQs = returnParams.toString();
     const successRedirectURL = `${proto}://${host}/sdk${pathname}${returnQs ? `?${returnQs}` : ""}`;

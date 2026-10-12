@@ -1,20 +1,20 @@
 {
   "key_path": "DeactivateOrDeleteSpace",
-  "content": "Deactivate or delete space.",
-  "content_en_sha1_hash": "b70998fc4817a45d4d7119737e6a46662004d7ed",
-  "created_at": "2025-05-19T21:30:51.081Z",
-  "updated_at": "2026-05-15T14:00:06.643Z",
+  "content": "Deactivate or delete workspace.",
+  "content_en_sha1_hash": "cb8f21560463fd0f4e701f3d9a74b4f9d89a01dc",
+  "created_at": "2026-08-12T11:00:45.630Z",
+  "updated_at": "2026-08-14T14:58:32.690Z",
   "comment": {
-    "text": "This is a menu item label in a dialog. It allows the user to deactivate or delete their workspace.",
+    "text": "A descriptive label in an action list describing the ability to deactivate or delete the workspace.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:24:58.969Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T13:31:28.929Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 125,
-      "context": "t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"BackupPortal\", { productName: getBrandName(\"ProductName\") }),\n t(\"DeactivateOrDeleteSpace\", { productName: getBrandName(\"ProductName\") }),\n ];\n \n const filter = React.useMemo(() => {\n const newFilter = new Filter();",
+      "line_number": 122,
+      "context": "t(\"SetAccessRights\"),\n t(\"ManagePortal\"),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\"),\n t(\"BackupPortal\"),\n t(\"DeactivateOrDeleteSpace\"),\n ];\n \n const filter = React.useMemo(() => {\n const newFilter = new Filter();",
       "module": "/packages/client"
     }
   ],
@@ -34,15 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \"n\"",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:49:10.332Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -157,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -172,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -208,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Overwrite with version update",
   "content_en_sha1_hash": "85c42df31bdf2069fe66ddcdd0fbefbdae0a2df4",
   "created_at": "2025-05-19T21:30:47.196Z",
-  "updated_at": "2026-05-15T14:00:06.650Z",
+  "updated_at": "2026-07-07T08:59:21.718Z",
   "comment": {
     "text": "This is a dialog title or button label. It appears when a user is prompted to resolve a conflict, indicating an option to replace an existing file with a newer version.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 289,
+      "line_number": 297,
       "context": ": t(\"Common:FilesAndFoldersAlreadyContains\");\n };\n \n const getOverwriteTitle = () => {\n return isFileDialog\n ? t(\"Common:OverwriteTitle\")\n : isFolderDialog\n ? t(\"Common:MergeFolders\")\n : t(\"Common:MergeAndOverwrite\");\n };",
       "module": "/packages/client"
     },
@@ -22,6 +22,12 @@
       "line_number": 71,
       "context": "values={{ fileName }}\n components={{ 1: <strong key=\"component_key\" className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}\n overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}\n skipDescription={t(\"SkipDescription\")}",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/conflict-resolve-dialog/index.tsx",
+      "line_number": 93,
+      "context": "messageText = t(\"Common:FilesAlreadyContains\");\n }\n \n const overwriteTitle = hasFolders\n ? t(\"Common:MergeAndOverwrite\")\n : t(\"Common:OverwriteTitle\");\n const overwriteDescription = hasFolders\n ? t(\"Common:MergeFoldersDescription\")\n : t(\"Common:OverwriteDescription\");\n \n const duplicateTitle = hasFolders",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

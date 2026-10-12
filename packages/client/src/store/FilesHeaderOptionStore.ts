@@ -33,9 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
 import type { TFunction } from "i18next";
-import { Trans } from "react-i18next";
 import { makeAutoObservable } from "mobx";
 
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -57,22 +55,21 @@ import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 
 import { isDesktop } from "@docspace/shared/utils";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { RoomSearchArea } from "@docspace/shared/enums";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
-import type { TRoomGroup } from "@docspace/ui-kit/components/filter/Filter.types";
+import type { TRoomGroup } from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
 
 import { showInfoPanel } from "SRC_DIR/helpers/info-panel";
+import { showRoomGroupChangedToast } from "SRC_DIR/helpers/toast-helpers";
 
 import type FilesActionsStore from "./FilesActionsStore";
+import type { TActionItem } from "./FilesActionsStore";
 import type FilesStore from "./FilesStore";
 import type DialogsStore from "./DialogsStore";
 
 type DialogsStoreWithRoomGroups = DialogsStore & {
   roomGroups?: TRoomGroup[];
-  setEditRoomGroupsDialogVisible: (
-    visible: boolean,
-    roomIds?: number[] | null,
-  ) => void;
 };
 
 export default class FilesHeaderOptionStore {
@@ -108,26 +105,47 @@ export default class FilesHeaderOptionStore {
   private unarchiveHandle = () =>
     this.filesActionsStore.archiveRooms("unarchive");
 
+  // FilesStore.selection holds filesList view-model items
+  // (TItem); FilesActionsStore still types its inputs with its own minimal
+  // TActionItem — the erased casts below adapt between the two (type-only)
+  // until FilesActionsStore is rewired to the real FilesStore types.
   private changeRoomQuotaHandle = () =>
-    this.filesActionsStore.changeRoomQuota(this.filesStore.selection);
+    this.filesActionsStore.changeRoomQuota(
+      this.filesStore.selection as unknown as TActionItem[],
+    );
 
   private changeAIAgentsQuotaHandle = () =>
-    this.filesActionsStore.changeAIAgentsQuota(this.filesStore.selection);
+    this.filesActionsStore.changeAIAgentsQuota(
+      this.filesStore.selection as unknown as TActionItem[],
+    );
 
   private resetRoomQuotaHandle = () =>
-    this.filesActionsStore.resetRoomQuota(this.filesStore.selection, this.t);
+    this.filesActionsStore.resetRoomQuota(
+      this.filesStore.selection as unknown as TActionItem[],
+      this.t,
+    );
 
   private resetAIAgentQuotaHandle = () =>
-    this.filesActionsStore.resetAIAgentQuota(this.filesStore.selection, this.t);
+    this.filesActionsStore.resetAIAgentQuota(
+      this.filesStore.selection as unknown as TActionItem[],
+      this.t,
+    );
 
   private disableRoomQuotaHandle = () =>
-    this.filesActionsStore.disableRoomQuota(this.filesStore.selection, this.t);
+    this.filesActionsStore.disableRoomQuota(
+      this.filesStore.selection as unknown as TActionItem[],
+      this.t,
+    );
 
   private disableAIAgentQuotaHandle = () =>
     this.filesActionsStore.disableAIAgentQuota(
-      this.filesStore.selection,
+      this.filesStore.selection as unknown as TActionItem[],
       this.t,
     );
+
+  private get isFormsGroupsArea() {
+    return this.dialogsStore.roomGroupsArea === RoomSearchArea.Forms;
+  }
 
   private isAvailableOption = (option: string) =>
     this.filesActionsStore.isAvailableOption(option);
@@ -135,32 +153,22 @@ export default class FilesHeaderOptionStore {
   private onClickCreateRoom = () => this.filesActionsStore.onClickCreateRoom();
 
   private createGroupHandle = () => {
-    const roomIds = this.filesStore.selection.map((room) => room.id as number);
+    const roomIds = this.filesStore.selection.map((room) => room.id!);
     this.filesStore.resetSelections();
     this.dialogsStore.setEditRoomGroupsDialogVisible(true, roomIds);
   };
 
   private addToGroupHandle = async (groupId: string, groupName: string) => {
-    const roomIds = this.filesStore.selection.map((room) => room.id);
+    const roomIds = this.filesStore.selection.map((room) => room.id!);
     try {
       await this.dialogsStore.updateRoomGroup(groupId, { roomsToAdd: roomIds });
       await this.dialogsStore.getAllRoomGroups();
-      const transProps = {
-        t: this.t,
-        values: { groupName },
-        components: { 1: React.createElement("strong") },
-      };
-      const keys = {
-        single: { tKey: "GroupingRooms:RoomAddedToGroup" },
-        multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
-      };
-      const i18nKey =
-        roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
-      toastr.success(
-        React.createElement(Trans, {
-          i18nKey,
-          ...transProps,
-        }),
+      showRoomGroupChangedToast(
+        this.t,
+        "add",
+        this.isFormsGroupsArea,
+        roomIds.length,
+        groupName,
       );
       this.filesStore.resetSelections();
     } catch (error) {
@@ -170,7 +178,7 @@ export default class FilesHeaderOptionStore {
   };
 
   private removeFromGroupHandle = async () => {
-    const roomIds = this.filesStore.selection.map((room) => room.id);
+    const roomIds = this.filesStore.selection.map((room) => room.id!);
     const currentGroupId = this.filesStore.roomsFilter?.groupId;
     if (!currentGroupId) return;
 
@@ -188,22 +196,12 @@ export default class FilesHeaderOptionStore {
       // Remove the rooms from the current view
       this.filesStore.removeFiles(null, roomIds);
 
-      const transProps = {
-        t: this.t,
-        values: { groupName },
-        components: { 1: React.createElement("strong") },
-      };
-      const keys = {
-        single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
-        multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
-      };
-      const i18nKey =
-        roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
-      toastr.success(
-        React.createElement(Trans, {
-          i18nKey,
-          ...transProps,
-        }),
+      showRoomGroupChangedToast(
+        this.t,
+        "remove",
+        this.isFormsGroupsArea,
+        roomIds.length,
+        groupName,
       );
       this.filesStore.resetSelections();
     } catch (error) {
@@ -236,12 +234,14 @@ export default class FilesHeaderOptionStore {
 
   private onClickRemoveFromRecent = (t: TFunction) =>
     this.filesActionsStore.onClickRemoveFromRecent(
-      this.filesStore.selection,
+      this.filesStore.selection as unknown as TActionItem[],
       t,
     );
 
   private retryVectorization = () =>
-    this.filesActionsStore.retryVectorization(this.filesStore.selection);
+    this.filesActionsStore.retryVectorization(
+      this.filesStore.selection as unknown as TActionItem[],
+    );
 
   public getOption = (option: string, t: TFunction) => {
     const { showStorageInfo } = this.currentQuotaStore;
@@ -306,7 +306,7 @@ export default class FilesHeaderOptionStore {
         return {
           id: "menu-pin",
           key: "pin",
-          label: t("Pin"),
+          label: t("Common:Pin"),
           iconUrl: PinReactSvgUrl,
           onClick: this.pinHandle,
           disabled: false,
@@ -315,7 +315,7 @@ export default class FilesHeaderOptionStore {
         return {
           id: "menu-unpin",
           key: "unpin",
-          label: t("Unpin"),
+          label: t("Common:Unpin"),
           iconUrl: UnpinReactSvgUrl,
           onClick: this.unpinHandle,
           disabled: false,
@@ -374,7 +374,7 @@ export default class FilesHeaderOptionStore {
         return {
           id: "menu-archive",
           key: "archive",
-          label: t("MoveToArchive"),
+          label: t("Common:MoveToArchive"),
           iconUrl: RoomArchiveSvgUrl,
           onClick: this.archiveHandle,
           disabled: false,
@@ -487,7 +487,7 @@ export default class FilesHeaderOptionStore {
         if (!this.isAvailableOption("vectorization")) return null;
         return {
           id: "menu-vectorization",
-          label: t("Files:Vectorization"),
+          label: t("Common:Vectorization"),
           iconUrl: RefreshReactSvgUrl,
           onClick: this.retryVectorization,
         };
@@ -496,3 +496,4 @@ export default class FilesHeaderOptionStore {
     }
   };
 }
+

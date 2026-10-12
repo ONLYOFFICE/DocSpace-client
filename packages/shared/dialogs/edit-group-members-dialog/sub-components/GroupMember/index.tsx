@@ -40,16 +40,17 @@ import { isMobile, isMobileOnly } from "react-device-detect";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Avatar, AvatarSize } from "@docspace/ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Avatar, AvatarSize } from "@onlyoffice/apps-ui-kit/components/avatar";
 import {
 	ComboBoxSize,
 	type TOption,
-} from "@docspace/ui-kit/components/combobox";
-import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
+import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
 import { getShareAccessRightOptions } from "../../../../components/share/Share.helpers";
 
 import {
@@ -77,7 +78,7 @@ import { getUserRoleOptions } from "../../../../utils/room-members/getUserRoleOp
 
 import { EditGroupMembersDialogContext } from "../../EditGroupMembersDialog.provider";
 
-import * as Styled from "./index.styled";
+import styles from "./GroupMember.module.scss";
 
 interface GroupMemberProps {
 	member: TGroupMemberInvitedInRoom;
@@ -176,10 +177,13 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 	};
 
 	return (
-		<Styled.GroupMember isExpect={isExpect} key={user.id}>
+		<div
+			className={`${styles.groupMember}${isExpect ? ` ${styles.groupMemberExpect}` : ""}`}
+			key={user.id}
+		>
 			<Avatar
 				role={avatarRole}
-				className="avatar"
+				className={styles.avatar}
 				size={AvatarSize.min}
 				userName={isExpect ? "" : user.displayName}
 				source={
@@ -191,26 +195,28 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 				}
 			/>
 
-			<div className="user_body-wrapper">
-				<div className="info">
-					<div className="info-box">
+			<div className={styles.userBodyWrapper}>
+				<div className={styles.info}>
+					<div className={styles.infoBox}>
 						<Text
-							className="name"
+							className={styles.name}
 							data-tooltip-id={`userTooltip_${Math.random()}`}
 							noSelect
 						>
 							{decode(user.displayName)}
 						</Text>
-						{isExpect ? <Styled.StyledSendClockIcon /> : null}
+						{isExpect ? (
+							<SendClockIcon className={styles.sendClockIcon} />
+						) : null}
 					</div>
-					<Text className="email" noSelect>
+					<Text className={styles.email} noSelect>
 						<span dir="auto">{typeLabel}</span> |{" "}
 						<span dir="ltr">{user.email}</span>
 					</Text>
 				</div>
 			</div>
 
-			<div className="individual-rights-tooltip">
+			<div className={styles.individualRightsTooltip}>
 				{hasIndividualRightsInRoom ? (
 					<HelpButton
 						place="left"
@@ -228,7 +234,7 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 			</div>
 
 			{selectedAccessRight && options ? (
-				<div className="role-wrapper">
+				<div className={styles.roleWrapper}>
 					{member.canEditAccess ? (
 						<AccessRightSelect
 							className="role-combobox"
@@ -248,7 +254,7 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 						/>
 					) : (
 						<Text
-							className="disabled-role-combobox"
+							className={styles.disabledRoleCombobox}
 							title={t("Common:Role")}
 							fontWeight={600}
 							noSelect
@@ -260,7 +266,7 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 					)}
 				</div>
 			) : null}
-		</Styled.GroupMember>
+		</div>
 	);
 };
 

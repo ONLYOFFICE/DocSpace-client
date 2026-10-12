@@ -35,40 +35,15 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/ui-kit/components/text";
-import styled from "styled-components";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { inject, observer } from "mobx-react";
 
-import { Button } from "@docspace/ui-kit/components/button";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
-import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
-import { Link } from "@docspace/ui-kit/components/link";
-import { getBrandName } from "@docspace/shared/constants/brands";
+import ErrorContainer from "@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
-const StyledBodyContent = styled.div`
-  max-width: 480px;
-  text-align: center;
-  button {
-    margin-top: 24px;
-    max-width: 320px;
-  }
-`;
-const StyledBody = styled.div`
-  width: 100%;
-
-  .portal-unavailable_container {
-    .portal-unavailable_contact-text {
-      display: block;
-      text-decoration: underline;
-      cursor: pointer;
-      margin-top: 26px;
-    }
-  }
-
-  .portal-unavailable_text {
-    color: ${(props) => props.theme.portalUnavailable.textDescription};
-  }
-`;
+import styles from "./PortalUnavailable.module.scss";
 
 const PortalUnavailable = ({ onLogoutClick }) => {
   const { t } = useTranslation(["Errors", "PortalUnavailable", "Common"]);
@@ -84,27 +59,21 @@ const PortalUnavailable = ({ onLogoutClick }) => {
     setIsVisible(false);
   };
   return (
-    <StyledBody>
+    <div className={styles.body}>
       <RecoverAccessModalDialog
         visible={isVisible}
         t={t}
         emailPlaceholderText={t("Common:RegistrationEmail")}
-        textBody={t("PortalUnavailable:AccessingProblemContact", {
-          productName: getBrandName("ProductName"),
-        })}
+        textBody={t("PortalUnavailable:AccessingProblemContact")}
         onClose={onCloseDialog}
       />
       <ErrorContainer
         className="portal-unavailable_container"
-        headerText={t("ErrorUnavailableText", {
-          productName: getBrandName("ProductName"),
-        })}
+        headerText={t("ErrorUnavailableText")}
       >
-        <StyledBodyContent>
+        <div className={styles.bodyContent}>
           <Text textAlign="center" className="portal-unavailable_text">
-            {t("PortalUnavailable:AccessingProblemContact", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("PortalUnavailable:AccessingProblemContact")}
           </Text>
           {!window.navigator.userAgent.includes("ZoomWebKit") &&
           !window.navigator.userAgent.includes("ZoomApps") ? (
@@ -122,13 +91,11 @@ const PortalUnavailable = ({ onLogoutClick }) => {
             onClick={onClickToContact}
             color="accent"
           >
-            {t("PortalUnavailable:ContactAdministrator", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("PortalUnavailable:ContactAdministrator")}
           </Link>
-        </StyledBodyContent>
+        </div>
       </ErrorContainer>
-    </StyledBody>
+    </div>
   );
 };
 

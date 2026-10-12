@@ -1,0 +1,29 @@
+{
+  "key_path": "StorageDescriptionFormSpace",
+  "content": "Storage quota set per space. You can change this value or turn off storage limit.",
+  "content_en_sha1_hash": "e3c4daf2a38283570d08c1240a5de8ae9078e9e8",
+  "created_at": "2026-08-17T17:23:18.904Z",
+  "updated_at": "2026-08-17T17:30:58.266Z",
+  "comment": {
+    "text": "Helper text in the Room Quota settings explaining the storage limit configuration for a Form Space.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:30:58.266Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomQuota/index.tsx",
+      "line_number": 80,
+      "context": "label={t(\"Common:StorageQuota\")}\n description={\n isAgent\n ? t(\"StorageDescriptionAgent\")\n : isFormSpace\n ? t(\"StorageDescriptionFormSpace\")\n : t(\"StorageDescription\")\n }\n checkboxLabel={\n isAgent\n ? t(\"DisableRoomQuotaAgent\")",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

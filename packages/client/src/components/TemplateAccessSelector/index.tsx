@@ -37,13 +37,12 @@ import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import { EmployeeType } from "@docspace/shared/enums";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
-import type { TOnSubmit } from "@docspace/ui-kit/components/selector";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
+import type { TOnSubmit } from "@onlyoffice/apps-ui-kit/components/selector";
 import type {
 	PeopleSelectorProps,
 	PeopleFilter,
-} from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
-import { getBrandName } from "@docspace/shared/constants/brands";
+} from "@onlyoffice/apps-ui-kit/selectors/People/PeopleSelector.types";
 
 const PEOPLE_TAB_ID = "0";
 
@@ -78,7 +77,6 @@ const TemplateAccessSelector = ({
 				t={t}
 				ns="Files"
 				i18nKey="AddUsersOrGroupsInfo"
-				values={{ productName: getBrandName("ProductName") }}
 				components={{ 1: <strong /> }}
 			/>
 		) : (
@@ -86,7 +84,6 @@ const TemplateAccessSelector = ({
 				t={t}
 				ns="Files"
 				i18nKey="AddUsersOrGroupsInfoGroups"
-				values={{ productName: getBrandName("ProductName") }}
 				components={{ 1: <strong /> }}
 			/>
 		);

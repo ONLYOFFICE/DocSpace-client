@@ -5,10 +5,10 @@
   "created_at": "2025-05-19T21:30:53.463Z",
   "updated_at": "2026-05-15T14:00:06.882Z",
   "comment": {
-    "text": "Button label. This action permanently disables the user's account.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:20:19.651Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "Button label. This action permanently disables the user's account. Warning for translators: the key name says \"delete profile\", but the action disables the account and does not delete it. Translate the value, not the key name.",
+    "is_auto": false,
+    "updated_at": "2026-08-17T00:00:00.000Z",
+    "model": null
   },
   "usage": [
     {

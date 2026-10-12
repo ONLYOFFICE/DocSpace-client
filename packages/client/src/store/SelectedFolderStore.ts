@@ -36,7 +36,15 @@
 import { makeAutoObservable } from "mobx";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
+// From the leaves, not the folder's barrel: that one re-exports the component.
+import {
+  applyTagChangeToRoomTags,
+  isSharedTagChange,
+} from "@docspace/shared/components/tag-management/TagManagement.utils";
+import type { TagChange } from "@docspace/shared/components/tag-management/TagManagement.types";
+import SocketHelper, {
+  SocketCommands,
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   FolderType,
   RoomsType,
@@ -58,11 +66,12 @@ import {
 } from "@docspace/shared/api/files/types";
 import {
   TAIRoomChatSettings,
+  TRoom,
   TRoomLifetime,
   TRoomSecurity,
   TWatermark,
 } from "@docspace/shared/api/rooms/types";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 
 import { setDocumentTitle } from "../helpers/utils";
 
@@ -70,11 +79,25 @@ export type TNavigationPath = {
   id: number | string;
   title: string;
   isRoom: boolean;
-  roomType: RoomsType;
+  /** Optional: FilesStore builds path entries for plain folders where the
+   * fetched info has no roomType. */
+  roomType?: RoomsType;
   isRootRoom: boolean;
-  shared: boolean;
+  /** Optional: only resolved for the room level (idx 1) in FilesStore. */
+  shared?: boolean;
   quotaLimit?: number;
   usedSpace?: number;
+  private?: boolean;
+  /** Set by FilesStore.fetchFiles for external (shared-with-me) rooms. */
+  external?: boolean;
+  /** Set by FilesStore.fetchFiles for the room-templates root entry. */
+  isRootTemplates?: boolean;
+  /** Folder type of the path part (used to drop Knowledge/ResultStorage
+   * entries). */
+  folderType?: FolderType;
+  /** Set by the .js FilesStore for template folders; read by
+   * FilesActionsStore.moveToRoomsPage. */
+  isTemplatesFolder?: boolean;
 };
 
 type ExcludeTypes = SettingsStore | CallableFunction;
@@ -85,14 +108,15 @@ export type TSelectedFolder = NonFunctionProperties<
 >;
 
 export type TSetSelectedFolder = {
-  [key in NonFunctionPropertyNames<
-    SelectedFolderStore,
-    ExcludeTypes
-  >]?: TSelectedFolder[key];
+  [
+    key in NonFunctionPropertyNames<SelectedFolderStore, ExcludeTypes>
+  ]?: TSelectedFolder[key];
 };
 
 class SelectedFolderStore {
-  folders: TFolder[] | null = null;
+  // Rooms/agents listings store TRoom entries here (FilesStore.fetchRooms /
+  // fetchAgents pass data.folders through setSelectedFolder).
+  folders: (TFolder | TRoom)[] | null = null;
 
   parentId = 0;
 
@@ -112,11 +136,12 @@ class SelectedFolderStore {
 
   shared = false;
 
-  created: Date | null = null;
+  // The files API returns ISO strings; some callers set Date objects.
+  created: Date | string | null = null;
 
   createdBy: TCreatedBy | null = null;
 
-  updated: Date | null = null;
+  updated: Date | string | null = null;
 
   updatedBy: TCreatedBy | null = null;
 
@@ -130,11 +155,11 @@ class SelectedFolderStore {
 
   navigationPath: TNavigationPath[] = [];
 
-  providerItem = null;
+  providerItem: Nullable<boolean> = null;
 
-  providerKey = null;
+  providerKey: Nullable<string> = null;
 
-  providerId = null;
+  providerId: Nullable<number> = null;
 
   roomType: RoomsType | null = null;
 
@@ -152,7 +177,13 @@ class SelectedFolderStore {
 
   rootFolderId: number = 0;
 
-  security: TFolderSecurity | TRoomSecurity | null = null;
+  // The Partial variant covers FilesStore's merged AI room/sub-folder
+  // security view-model.
+  security:
+    | TFolderSecurity
+    | TRoomSecurity
+    | Partial<TFolderSecurity & TRoomSecurity>
+    | null = null;
 
   type: Nullable<FolderType> = null;
 
@@ -211,6 +242,19 @@ class SelectedFolderStore {
   constructor(protected settingsStore: SettingsStore) {
     makeAutoObservable(this);
   }
+
+  // The room the user is standing in keeps its own tags here, beside the copy
+  // in the rooms list, so a tag bound from inside the room has to reach both.
+  // A rename or a removal names no room and reaches this one like any other -
+  // if it carries the tag, which the helper decides.
+  applyTagChange = (change: TagChange) => {
+    if (!isSharedTagChange(change) && String(change.roomId) !== String(this.id))
+      return;
+
+    const next = applyTagChangeToRoomTags(this.tags, change);
+
+    if (next !== this.tags) this.tags = next;
+  };
 
   getSelectedFolder: () => TSelectedFolder = () => {
     return {
@@ -275,6 +319,7 @@ class SelectedFolderStore {
       parentShared: this.parentShared,
       ownedBy: this.ownedBy,
       sharedBy: this.sharedBy,
+      isThirdPartyStorage: this.isThirdPartyStorage,
       isRoomStorageQuotaExceeded: this.isRoomStorageQuotaExceeded,
       roomUsedSpace: this.roomUsedSpace,
       roomQuotaLimit: this.roomQuotaLimit,
@@ -289,7 +334,10 @@ class SelectedFolderStore {
   }
 
   get isRootFolder() {
-    return this.pathParts && this.pathParts.length <= 1;
+    return (
+      this.id === this.rootFolderId ||
+      (this.pathParts && this.pathParts.length <= 1)
+    );
   }
 
   toDefault = () => {
@@ -323,6 +371,7 @@ class SelectedFolderStore {
     this.security = null;
     this.type = null;
     this.inRoom = false;
+    this.private = false;
     this.parentRoomType = null;
     this.lifetime = null;
     this.indexing = false;
@@ -548,8 +597,14 @@ class SelectedFolderStore {
       : this.usedSpace;
   }
 
+  get isThirdPartyStorage() {
+    return !!(this.providerItem || this.providerKey);
+  }
+
   get isRoomStorageQuotaExceeded() {
     if (this.rootFolderType !== FolderType.Rooms) return false;
+
+    if (this.isThirdPartyStorage) return false;
 
     const { roomQuotaLimit, roomUsedSpace } = this;
 
@@ -576,3 +631,4 @@ class SelectedFolderStore {
 }
 
 export default SelectedFolderStore;
+

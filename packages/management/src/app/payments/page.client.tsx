@@ -37,12 +37,12 @@
 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { parseToDateTime, formatDateLocalized } from "@docspace/ui-kit/utils/date";
+import { parseToDateTime, formatDateLocalized } from "@onlyoffice/apps-ui-kit/utils/date";
 import { useRouter } from "next/navigation";
 
-import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
+import { LoaderWrapper } from "@onlyoffice/apps-ui-kit/components/loader-wrapper";
 import { StandalonePage } from "@docspace/shared/pages/Payments/Standalone";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { setLicense, acceptLicense } from "@docspace/shared/api/settings";
 
 import { useEndAnimation } from "@/hooks/useEndAnimation";
@@ -86,7 +86,7 @@ const PaymentsPage = ({
   delayDaysCount: string;
   feedbackAndSupportUrl: string;
 }) => {
-  const { t } = useTranslation("Common");
+  const { t, i18n } = useTranslation("Common");
   const router = useRouter();
   const isLoading = useEndAnimation();
 
@@ -141,12 +141,13 @@ const PaymentsPage = ({
     }
   };
 
+  const timezone = typeof window !== "undefined" ? window.timezone : "UTC";
+
   useEffect(() => {
-    const timezone = typeof window !== "undefined" ? window.timezone : "UTC";
     setIsLicenseDateExpired(getIsLicenseDateExpired(dueDate, timezone));
-    setPaymentDate(getPaymentDate(dueDate, timezone));
+    setPaymentDate(getPaymentDate(dueDate, timezone, i18n.language));
     setTrialDaysLeft(getDaysLeft(dueDate));
-  }, [dueDate]);
+  }, [dueDate, timezone, i18n.language]);
 
   return (
     <div className={styles.wrapper}>
@@ -171,8 +172,9 @@ const PaymentsPage = ({
           isGracePeriod={isGracePeriod}
           isNotPaidPeriod={isNotPaidPeriod}
           gracePeriodEndDate={formatDateLocalized(
-            parseToDateTime(gracePeriodEndDate)?.setZone(window.timezone),
-            "DATE_MED",
+            parseToDateTime(gracePeriodEndDate)?.setZone(timezone),
+            "DATE_FULL",
+            { locale: i18n.language },
           )}
           delayDaysCount={delayDaysCount}
           feedbackAndSupportUrl={feedbackAndSupportUrl}

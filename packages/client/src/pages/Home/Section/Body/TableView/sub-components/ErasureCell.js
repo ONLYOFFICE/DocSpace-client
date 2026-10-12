@@ -34,24 +34,27 @@
  */
 
 import React from "react";
-import { StyledText } from "./CellStyles";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+
+import styles from "./CellStyles.module.scss";
 
 const ErasureCell = ({ t, sideColor, item }) => {
   const { daysRemaining } = item;
-  const title = t("Files:DaysRemaining", { daysRemaining });
+  const title = t("Common:DaysRemaining", { daysRemaining });
 
   return (
-    <StyledText
+    <Text
       title={title}
       fontSize="12px"
       fontWeight={600}
       color={sideColor}
-      className="row_update-text"
+      className={`${styles.styledText} row_update-text`}
       truncate
     >
       {title}
-    </StyledText>
+    </Text>
   );
 };
 
 export default React.memo(ErasureCell);
+

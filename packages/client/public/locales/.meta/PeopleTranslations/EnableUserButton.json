@@ -3,7 +3,7 @@
   "content": "Enable",
   "content_en_sha1_hash": "20063ad9053289cecaa20ae630ed2dd758282a07",
   "created_at": "2025-05-19T21:30:53.472Z",
-  "updated_at": "2026-05-15T14:00:06.901Z",
+  "updated_at": "2026-09-04T07:59:41.705Z",
   "comment": {
     "text": "This is the label for a button that, when clicked, activates a user's account or permissions.",
     "is_auto": true,

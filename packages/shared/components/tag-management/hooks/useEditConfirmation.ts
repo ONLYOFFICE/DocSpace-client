@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { EDIT_TAG_DONT_SHOW_AGAIN_KEY } from "../TagManagement.constants";
@@ -60,17 +60,33 @@ export function useEditConfirmation(): UseEditConfirmationReturn {
 
   const [modalState, setModalState] = useState<ModalState>({ isOpen: false });
 
+  // The question, for as long as it is unanswered. Kept beside the state so
+  // that going away can answer it: the caller is waiting on this promise, and
+  // a promise that never settles leaves it waiting for the rest of the page's
+  // life - with the rename it was about never sent and never abandoned.
+  const pending = useRef<((value: boolean) => void) | null>(null);
+
+  useEffect(() => {
+    return () => {
+      pending.current?.(false);
+      pending.current = null;
+    };
+  }, []);
+
   const requestConfirmation = useCallback(async (): Promise<boolean> => {
     if (isChecked) {
       return true;
     }
 
     return new Promise<boolean>((resolve) => {
+      pending.current = resolve;
       setModalState({ isOpen: true, resolve });
     });
   }, [isChecked]);
 
   const handleConfirm = useCallback(() => {
+    pending.current = null;
+
     setModalState((prev) => {
       if (prev.resolve) {
         prev.resolve(true);
@@ -80,6 +96,8 @@ export function useEditConfirmation(): UseEditConfirmationReturn {
   }, []);
 
   const handleCancel = useCallback(() => {
+    pending.current = null;
+
     setModalState((prev) => {
       if (prev.resolve) {
         prev.resolve(false);

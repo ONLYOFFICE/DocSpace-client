@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentStart",
+  "content": "Take the job you keep doing by hand, write it down as instructions, add the files that answer it — and let the agent take the next round.",
+  "content_en_sha1_hash": "484ea023824ff3a6cfe34c276c8dd0274b2cb7d8",
+  "created_at": "2026-08-06T14:20:56.251Z",
+  "updated_at": "2026-08-07T15:05:26.410Z",
+  "comment": {
+    "text": "Instructional text within an onboarding tour step that appears on an empty screen when initiating the creation of a new AI agent.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:23:01.331Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 292,
+      "context": "EMPTY_SCREEN_CREATE_SELECTOR,\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStartTitle\")\n : t(\"AiAgentsTour:AgentSwitchOnTitle\"),\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStart\")\n : t(\"AiAgentsTour:AgentSwitchOn\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "RoomsCreateFirst": "Izvēlieties veidu, uzaiciniet cilvēkus, ar kuriem strādājat, un ielieciet savus failus. Tas aizņem minūti — un viss, ko tikko redzējāt, sāk darboties ar jūsu pašu dokumentiem.",
+  "RoomsCreateFirstTitle": "Tagad izveidojiet savējo",
+  "RoomsEmpty": "Telpas, ko tikko redzējāt, bija priekšskatījums. Telpas, uz kurām jūs kāds uzaicina, parādās šajā sarakstā, un viss parādītais tajās darbojas tieši tāpat.",
+  "RoomsEmptyTitle": "Jūsu saraksts pagaidām ir tukšs",
+  "RoomsGroups": "Sakārtojiet telpas pēc noteiktām pazīmēm, lai ātri atrastu vajadzīgo. Veidojiet grupas un pārslēdzieties starp tām tieši virs saraksta.",
+  "RoomsGroupsTitle": "Grupējiet savas telpas",
+  "RoomsMembers": "Katrai telpai ir savs dalībnieku saraksts informācijas panelī. Pievienojiet darbvietas kontaktpersonas un iestatiet katram dalībniekam lomu — no failu skatīšanas līdz visas telpas pārvaldībai.",
+  "RoomsMembersTitle": "Strādājiet kopā",
+  "RoomsPlacesArchive": "{{archive}} — telpas, kurās vairs nestrādājat, atjaunojamas jebkurā brīdī.",
+  "RoomsPlacesFiles": "{{recent}}, {{favorites}} un {{trash}} apkopo failus no jūsu telpām: nesen atvērtos, ar zvaigznīti atzīmētos un dzēstos.",
+  "RoomsPlacesTemplates": "{{templates}} — jūsu telpu veidnes.",
+  "RoomsPlacesTitle": "Viss savā vietā",
+  "RoomsTemplates": "Pārvērtiet jebkuru telpu par veidni — tās iestatījumi, struktūra un faili tiek saglabāti. Izveidojiet no tās jaunu telpu ar vienu klikšķi, atliek vien pievienot dalībniekus.",
+  "RoomsTemplatesTitle": "Izmantojiet atkārtoti to, kas darbojas",
+  "RoomsTypes": "{{collaboration}} komandas darbam, {{vdr}} drošai failu kopīgošanai, {{publicRoom}} ārējai piekļuvei, {{custom}} jūsu pašu scenārijiem.",
+  "RoomsTypesTitle": "Telpa katram uzdevumam"
+}

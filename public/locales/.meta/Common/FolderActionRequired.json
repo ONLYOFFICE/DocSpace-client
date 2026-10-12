@@ -3,7 +3,7 @@
   "content": "The destination already contains a folder named «<1>{{folderName}}</1>».",
   "content_en_sha1_hash": "84e03768c28e7d8864816ce977c8c2b9f91a4f66",
   "created_at": "2025-05-19T21:30:45.425Z",
-  "updated_at": "2026-05-15T14:00:06.649Z",
+  "updated_at": "2026-07-07T08:59:21.717Z",
   "comment": {
     "text": "This is an error message displayed in a dialog. It informs the user that a folder with the specified name ({{folderName}}) already exists at the destination. The folder name is highlighted in bold.",
     "is_auto": true,
@@ -13,9 +13,15 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 270,
-      "context": "const singleFolderMessage = (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FolderActionRequired\"\n values={{ folderName: items[0].title }}\n components={{ 1: <span className=\"bold\" /> }}\n />\n );",
+      "line_number": 278,
+      "context": "const singleFolderMessage = (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FolderActionRequired\"\n values={{ folderName: conflictTitle }}\n components={{ 1: <span className=\"bold\" /> }}\n />\n );",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/conflict-resolve-dialog/index.tsx",
+      "line_number": 78,
+      "context": "/>\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FolderActionRequired\"\n values={{ folderName: single.title }}\n components={{ 1: <span key=\"folder-name\" className=\"bold\" /> }}\n />\n );\n } else if (hasFiles && hasFolders) {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

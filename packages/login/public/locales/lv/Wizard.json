@@ -1,5 +1,5 @@
 {
-  "Desc": "Lūdzu, iestatiet {{productName}} reģistrācijas datus.",
+  "Desc": "Lūdzu, iestatiet darbvietas reģistrācijas datus.",
   "ErrorEmail": "Nederīga e-pasta adrese",
   "ErrorInstanceId": "Nederīgs instances ID",
   "ErrorLicenseBody": "Licence nav derīga. Pārliecinieties, ka esat izvēlējies pareizo failu.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Licences līgumi",
   "PlaceholderLicense": "Jūsu licences fails",
   "Timezone": "Laika zona:",
-  "WelcomeTitle": "Laipni lūdzam jūsu {{productName}}!"
+  "WelcomeTitle": "Laipni lūdzam jūsu darbvietā!"
 }

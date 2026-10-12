@@ -3,7 +3,7 @@
   "content": "Revoke token",
   "content_en_sha1_hash": "9b8466169cf13a97ddbd21c83909af55a5a8e71a",
   "created_at": "2025-05-19T21:30:54.026Z",
-  "updated_at": "2026-05-15T14:00:06.827Z",
+  "updated_at": "2026-07-07T08:59:21.862Z",
   "comment": {
     "text": "This is the title of a dialog box that appears when a user is about to revoke an OAuth token. It also serves as the label for the menu option that triggers this action.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 808,
+      "line_number": 843,
       "context": "};\n \n const revokeDeveloperTokenOption = {\n key: \"revoke-token\",\n icon: RevokeIconUrl,\n label: t(\"OAuth:RevokeDialogHeader\"),\n onClick: onRevokeDeveloperToken,\n disabled: !item.enabled,\n dataTestId: \"oauth_revoke_token_option\",\n };",
       "module": "/packages/client"
     }

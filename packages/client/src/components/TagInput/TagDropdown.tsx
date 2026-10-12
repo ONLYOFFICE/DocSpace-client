@@ -36,9 +36,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import classNames from "classnames";
 
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import { isMobile, DomHelpers } from "@docspace/shared/utils";
 import { TagDropDownProps } from "./TagInput.types";
 import styles from "./TagInput.module.scss";

@@ -1,0 +1,29 @@
+{
+  "key_path": "RealtimeCollaborationDescription",
+  "content": "Co-edit with comments, mentions, review, version history and a built-in chat.",
+  "content_en_sha1_hash": "f77f9283fbbf36720d01a1882df7bf7fb2912500",
+  "created_at": "2026-07-27T13:07:48.465Z",
+  "updated_at": "2026-08-13T14:37:21.759Z",
+  "comment": {
+    "text": "Description for a feature item within the DocsConnect \"Get Started\" modal, detailing available collaboration tools.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:04:09.261Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/DocsConnectGetStartedModal.tsx",
+      "line_number": 93,
+      "context": "description: t(\"DocsConnect:FourEditorsDescription\"),\n },\n {\n Icon: CollaborationIcon,\n title: t(\"DocsConnect:RealtimeCollaborationTitle\"),\n description: t(\"DocsConnect:RealtimeCollaborationDescription\"),\n },\n {\n Icon: IntegrationIcon,\n title: t(\"DocsConnect:DropInIntegrationTitle\"),\n description: t(\"DocsConnect:DropInIntegrationDescription\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

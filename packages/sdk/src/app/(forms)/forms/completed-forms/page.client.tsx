@@ -43,7 +43,6 @@ import { FormsSection } from "@/types/forms";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsTourStore } from "../../_store/FormsTourStore";
 import { useFormsDataContext } from "../../_context/FormsDataContext";
 import FormsGrid from "../../_components/forms-grid";
@@ -51,17 +50,13 @@ import FormsGrid from "../../_components/forms-grid";
 const CompletedPage = () => {
   const formsListStore = useFormsListStore();
   const formsSettingsStore = useFormsSettingsStore();
-  const { hasManagementAccess } = formsSettingsStore;
   const { editingFile, completedFolder, goBackToCompletedRoot } =
     useFormsNavigationStore();
-  const aiStore = useFormsAiAgentStore();
   const tourStore = useFormsTourStore();
   const { fetchSection, fetchMore, fetchSubfolder } = useFormsDataContext();
 
   const fetchSectionRef = React.useRef(fetchSection);
   fetchSectionRef.current = fetchSection;
-  const aiStoreRef = React.useRef(aiStore);
-  aiStoreRef.current = aiStore;
   React.useEffect(() => {
     if (tourStore.showMockItems) return;
     if (completedFolder) return;
@@ -74,14 +69,6 @@ const CompletedPage = () => {
 
     fetchSectionRef.current(FormsSection.CompletedForms);
   }, [completedFolder, tourStore.showMockItems, formsListStore]);
-
-  React.useEffect(() => {
-    if (tourStore.showMockItems) return;
-    if (completedFolder) return;
-    if (hasManagementAccess) {
-      aiStoreRef.current.setCurrentFolder(null);
-    }
-  }, [completedFolder, hasManagementAccess, tourStore.showMockItems]);
 
   React.useEffect(() => {
     if (!completedFolder || editingFile) return;
@@ -99,58 +86,20 @@ const CompletedPage = () => {
     };
   }, [completedFolder, editingFile, goBackToCompletedRoot]);
 
-  const fetchIdRef = React.useRef(0);
   React.useEffect(() => {
     if (!completedFolder || tourStore.showMockItems) return;
 
     const controller = new AbortController();
-    const currentFetchId = ++fetchIdRef.current;
 
     (async () => {
       try {
         await fetchSubfolder(completedFolder.id, controller.signal);
-        if (
-          controller.signal.aborted ||
-          currentFetchId !== fetchIdRef.current
-        )
-          return;
-
-        if (hasManagementAccess) {
-          await aiStore.setCurrentFolder(completedFolder.id);
-          if (currentFetchId !== fetchIdRef.current) return;
-
-          const files = formsListStore.items.map((f) => ({
-            id: f.id,
-            title: f.title,
-          }));
-
-          if (aiStore.aiAgentEnabled && !aiStore.currentAgentId) {
-            aiStore.setPreparingAgent(true);
-            try {
-              const entry = await aiStore.createAgentForFolder(
-                { id: completedFolder.id, title: completedFolder.title },
-                files,
-              );
-              if (currentFetchId !== fetchIdRef.current) return;
-              if (entry) {
-                await aiStore.setCurrentFolder(completedFolder.id);
-                if (currentFetchId !== fetchIdRef.current) return;
-              }
-            } finally {
-              aiStore.setPreparingAgent(false);
-            }
-          }
-
-          if (files.length > 0) {
-            aiStore.syncCompletedForms(files);
-          }
-        }
       } catch {
       }
     })();
 
     return () => controller.abort();
-  }, [completedFolder, fetchSubfolder, hasManagementAccess, aiStore, formsListStore]);
+  }, [completedFolder, fetchSubfolder]);
 
   return (
     <FormsGrid

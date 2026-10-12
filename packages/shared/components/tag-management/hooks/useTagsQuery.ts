@@ -44,7 +44,12 @@ import {
 } from "../../../api/rooms";
 
 import type { TTag, UpdateTagNameParams } from "../TagManagement.types";
-import { TAGS_QUERY_KEY } from "../TagManagement.constants";
+import {
+  TAGS_QUERY_KEY,
+  RENAME_TAG_MUTATION_KEY,
+  REMOVE_TAG_MUTATION_KEY,
+  roomTagMutationKey,
+} from "../TagManagement.constants";
 
 export function useTagsQuery() {
   return useQuery({
@@ -58,6 +63,7 @@ export function useUpdateTagNameMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
+    mutationKey: RENAME_TAG_MUTATION_KEY,
     mutationFn: ({ oldLabel, newLabel }: UpdateTagNameParams) =>
       updateTagName(oldLabel, newLabel),
 
@@ -85,19 +91,18 @@ export function useCreateTagMutation(roomId: string | number) {
   const queryClient = useQueryClient();
 
   return useMutation({
+    // The room's own key: a tag created here is added to this room.
+    mutationKey: roomTagMutationKey(roomId),
     mutationFn: (newTag: string) => addTagsToRoom(roomId, [newTag]),
 
     onMutate: async (newTag: string) => {
       await queryClient.cancelQueries({ queryKey: TAGS_QUERY_KEY });
-
       const previousData: string[] | undefined =
         queryClient.getQueryData(TAGS_QUERY_KEY);
-
       queryClient.setQueryData(TAGS_QUERY_KEY, [
         newTag,
         ...(previousData || []),
       ]);
-
       return { previousData };
     },
     onError: (_, __, context) => {
@@ -110,31 +115,34 @@ export function useRemoveTagMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
+    mutationKey: REMOVE_TAG_MUTATION_KEY,
     mutationFn: (removeTag: string) => removeTagRequest([removeTag]),
 
-    onMutate: async (removeTag: string) => {
-      await queryClient.cancelQueries({ queryKey: TAGS_QUERY_KEY });
+    // Nothing is written yet - but a list already on its way is stopped, or it
+    // would land after the delete and put the tag back into the cache.
+    onMutate: () => queryClient.cancelQueries({ queryKey: TAGS_QUERY_KEY }),
 
+    // Taken out on the answer, not before it: unlike a create or a rename, the
+    // row this is about stays on screen with its loader until the tag is
+    // really gone, and the cached list has to say the same - otherwise
+    // reopening the popup mid-request would show it already gone.
+    onSuccess: (_, removeTag: string) => {
       const previousData: string[] | undefined =
         queryClient.getQueryData(TAGS_QUERY_KEY);
 
-      if (previousData) {
-        queryClient.setQueryData(
-          TAGS_QUERY_KEY,
-          previousData.filter((tag) => removeTag !== tag),
-        );
-      }
+      if (!previousData) return;
 
-      return { previousData };
-    },
-    onError: (_, __, context) => {
-      queryClient.setQueryData(TAGS_QUERY_KEY, context?.previousData);
+      queryClient.setQueryData(
+        TAGS_QUERY_KEY,
+        previousData.filter((tag) => removeTag !== tag),
+      );
     },
   });
 }
 
 export function useUpdateTag(roomId: string | number) {
   return useMutation({
+    mutationKey: roomTagMutationKey(roomId),
     mutationFn: (tag: TTag) => {
       const requestApi = tag.checked ? addTagsToRoom : removeTagsFromRoom;
 

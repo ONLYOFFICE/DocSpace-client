@@ -31,7 +31,7 @@ RUN apt-get -y update && \
     apt-get install -yq
     
 # Install PNPM
-RUN npm install -g pnpm@10.33.0
+RUN npm install -g pnpm@12.4.1
 
 WORKDIR /app
 
@@ -39,18 +39,26 @@ WORKDIR /app
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
 # Copy package files first for better layer caching
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+# `*.tgz` is optional: ui-kit and ai-chat come from npm, but a locally packed
+# tarball at the repo root can be referenced as `file:../../<name>.tgz` for
+# local development. A glob matching nothing is fine next to real sources.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml *.tgz ./
 
 # Copy the source code with correct directory structure
 COPY ../common/ ./common/
 COPY ../packages/ ./packages/
+# next.config.js requires scripts/ui-kit-dev.cjs at load time.
+COPY ../scripts/ ./scripts/
 COPY ../public/ ./public/
-COPY ../libs/ ./libs/
 
 # ENV NODE_OPTIONS="--max-old-space-size=8192"
 
-# Install dependencies with recursive installation and ignore scripts (prevents running scripts that may not be needed in production)
-RUN pnpm install --frozen-lockfile
+# Install dependencies
+# CI=true is scoped to this one command on purpose. It skips the
+# `lefthook install` in the workspace prepare scripts, which cannot work
+# because the image has no .git. A persistent `ENV CI=true` would also
+# change Playwright's runtime defaults (retries, workers, forbidOnly).
+RUN CI=true pnpm install --frozen-lockfile
 
 # Run build apps
 RUN pnpm run build

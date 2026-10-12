@@ -35,7 +35,7 @@
 
 import { useTranslation } from "react-i18next";
 
-import { TileContainer } from "@docspace/ui-kit/components/tiles/tile-container";
+import { TileContainer } from "@onlyoffice/apps-ui-kit/components/tiles/tile-container";
 import { useIsServer } from "@docspace/shared/hooks/useIsServer";
 
 import type { TileViewProps } from "./TileView.types";
@@ -49,6 +49,9 @@ const TileView = ({
   hasMoreFiles,
   currentFolderId,
   filesLength,
+  isPrivate,
+  hasEncryptionKeys,
+  currentUserId,
 }: TileViewProps) => {
   const { t } = useTranslation();
   const isServer = useIsServer();
@@ -77,6 +80,9 @@ const TileView = ({
           item={item}
           getIcon={getIcon}
           index={index}
+          isPrivate={isPrivate}
+          hasEncryptionKeys={hasEncryptionKeys}
+          currentUserId={currentUserId}
         />
       ))}
     </TileContainer>

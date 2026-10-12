@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentStartTitle",
+  "content": "Now build your own",
+  "content_en_sha1_hash": "f0b9dffe8f6e1c915f2e1ad60c0e4ef2c6b979c5",
+  "created_at": "2026-08-06T14:20:56.252Z",
+  "updated_at": "2026-08-07T15:05:26.409Z",
+  "comment": {
+    "text": "Title of a step in the AI Agents guided tour, appearing when prompting the user to create an agent on an empty screen.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:22:41.264Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 289,
+      "context": "demoHooks &&\n (emptyScreenAction\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStartTitle\")\n : t(\"AiAgentsTour:AgentSwitchOnTitle\"),\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStart\")\n : t(\"AiAgentsTour:AgentSwitchOn\"),\n callbacks,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

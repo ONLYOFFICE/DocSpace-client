@@ -37,7 +37,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
 
 import api from "../api";
-import { getWalletPayer } from "../api/portal";
+import { getServiceAccountingPrices, getWalletPayer } from "../api/portal";
 
 import { PaymentMethodStatus, QuotaState, TariffState } from "../enums";
 
@@ -50,7 +50,8 @@ import {
   getAppTimezone,
   isAfter,
   now,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
+import { AI_SEARCH, AI_TOOLS } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
 import { SettingsStore } from "./SettingsStore";
@@ -64,11 +65,17 @@ class CurrentTariffStatusStore {
 
   isLoaded = false;
 
+  serviceFeePercents = new Map<string, number>();
+
   language: string = "en";
 
   walletQuotas: TQuotas[] = [];
 
   previousWalletQuota: TQuotas[] = [];
+
+  storageServiceId: Nullable<number> = null;
+
+  walletServicesResolved = false;
 
   payerInfo: TCustomerInfo = {
     portalId: null,
@@ -213,6 +220,10 @@ class CurrentTariffStatusStore {
     return this.payerInfo.payer;
   }
 
+  get isDelayedPaymentMethod() {
+    return this.payerInfo.isDelayedPaymentMethod === true;
+  }
+
   fetchPayerInfo = async (isRefresh?: boolean) => {
     try {
       const res = await getWalletPayer(isRefresh);
@@ -230,22 +241,74 @@ class CurrentTariffStatusStore {
     }
   };
 
+  get aiToolsFeePercent() {
+    return this.serviceFeePercents.get(AI_TOOLS) ?? null;
+  }
+
+  get aiSearchFeePercent() {
+    return this.serviceFeePercents.get(AI_SEARCH) ?? null;
+  }
+
+  setServiceFeePercent = (serviceName: string, value: number) => {
+    this.serviceFeePercents.set(serviceName, value);
+  };
+
+  fetchServiceFeePercent = async (serviceName: string) => {
+    try {
+      const prices = await getServiceAccountingPrices(serviceName);
+      const percent = prices?.[0]?.extraCharge;
+      if (percent !== undefined)
+        this.setServiceFeePercent(serviceName, percent);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  resolveWalletServiceIds = async () => {
+    if (this.walletServicesResolved) return;
+
+    try {
+      const services = await api.portal.getWalletServices();
+      const storageService = (services ?? []).find((service) =>
+        (service.features ?? []).some((feature) => feature.id === "total_size"),
+      );
+
+      runInAction(() => {
+        this.storageServiceId = storageService?.id ?? null;
+        this.walletServicesResolved = true;
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   fetchPortalTariff = async (refresh?: boolean) => {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
     return api.portal
       .getPortalTariff(refresh, abortController.signal)
-      .then((res) => {
+      .then(async (res) => {
         if (!res) return;
 
         const { user } = this.userStore;
 
+        const isAdminUser = user && isAdmin(user);
+        const tariffWalletQuotas = (res.quotas ?? []).filter(
+          (q) => q.wallet === true,
+        );
+
+        if (isAdminUser && tariffWalletQuotas.length > 0) {
+          await this.resolveWalletServiceIds();
+        }
+
         runInAction(() => {
           this.portalTariffStatus = res;
 
-          if (user && isAdmin(user)) {
-            const quota = res.quotas.find((q) => q.wallet === true);
+          if (isAdminUser) {
+            const quota = this.walletServicesResolved
+              ? tariffWalletQuotas.find((q) => q.id === this.storageServiceId)
+              : tariffWalletQuotas[0];
 
             if (quota) {
               if (quota.state === QuotaState.Overdue) {

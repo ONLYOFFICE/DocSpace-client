@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndoneGuests": "Utilizatorii dezactivați pe care le-ați selectat vor fi șterși din {{productName}}. Această acțiune nu poate fi anulată.",
-  "ActionCannotBeUndoneUsers": "Utilizatorii dezactivați pe care i-ați selectat vor fi șterși din {{productName}}. Această acțiune nu poate fi anulată.",
+  "ActionCannotBeUndoneGuests": "Invitații dezactivați pe care i-ați selectat vor fi șterși din spațiul de lucru. Această acțiune nu poate fi anulată.",
+  "ActionCannotBeUndoneUsers": "Utilizatorii dezactivați pe care i-ați selectat vor fi șterși din spațiul de lucru. Această acțiune nu poate fi anulată.",
   "CannotReassignFiles": "Dacă ștergeți mai mulți utilizatori deodată, nu puteți reafecta fișierele lor altor utilizatori.",
   "DeleteGroupGuestsSuccessMessage": "Invitații au fost șterse cu succes.",
   "DeleteGroupUsersSuccessMessage": "Utilizatorii au fost șterse cu succes.",
@@ -12,7 +12,7 @@
   "DeleteUser": "Șterge utilizatorul",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> va fi șters. Această acțiune nu poate fi anulată.",
   "DeletingUsers": "Ștergere utilizatori",
-  "PersonalDataDeletionInfo": "Datele personale, toate fișierele și dosarele personale din secțiunile* {{sectionNameFirst}} și {{sectionNameSecond}} ale utilizatorilor selectați vor fi șterse definitiv. Fișierele și folderele ai utilizatorilor selectate care sunt stocate în secțiunile comune*, cum ar fi săli,  vor rămâne în {{productName}}.",
+  "PersonalDataDeletionInfo": "Datele personale, toate fișierele și dosarele personale din secțiunile* {{sectionNameFirst}} și {{sectionNameSecond}} ale utilizatorilor selectați vor fi șterse definitiv. Fișierele și folderele ai utilizatorilor selectate care sunt stocate în secțiunile comune*, cum ar fi săli,  vor rămâne în spațiul de lucru.",
   "PleaseNote": "Vă rugăm să rețineți că:",
   "ReassignDataToAnotherUser": "Reatribuiți datele unui alt utilizator",
   "SuccessfullyDeleteGuestInfoMessage": "Invitatul a fost șters cu succes",

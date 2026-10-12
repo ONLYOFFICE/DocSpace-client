@@ -35,33 +35,18 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { now, formatDate } from "@docspace/ui-kit/utils/date";
+import { now, formatDate } from "@onlyoffice/apps-ui-kit/utils/date";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import styled from "styled-components";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
-import { Button } from "@docspace/ui-kit/components/button";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { useParams, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import DeliveryDatePicker from "./DeliveryDatePicker";
 import StatusPicker from "./StatusPicker";
 
-const DialogBodyWrapper = styled.div`
-  margin-top: 16px;
-`;
-
-const Footer = styled.div`
-  width: 100%;
-  display: flex;
-
-  button {
-    width: 100%;
-  }
-  button:first-of-type {
-    margin-inline-end: 10px;
-  }
-`;
+import styles from "../../WebhookHistory.styled.module.scss";
 
 const constructUrl = (baseUrl, filters) => {
   const url = new URL(baseUrl, "http://127.0.0.1:8092/");
@@ -147,9 +132,9 @@ const FilterDialog = (props) => {
 
   return (
     <ModalDialog visible={visible} onClose={closeModal} displayType="aside">
-      <ModalDialog.Header>{t("Files:Filter")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:Filter")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <DialogBodyWrapper>
+        <div className={styles.dialogBodyWrapper}>
           <DeliveryDatePicker
             isApplied={isApplied}
             setIsApplied={setIsApplied}
@@ -157,11 +142,11 @@ const FilterDialog = (props) => {
             setFilters={setFilters}
           />
           <StatusPicker filters={filters} setFilters={setFilters} />
-        </DialogBodyWrapper>
+        </div>
       </ModalDialog.Body>
       {!areFiltersChanged ? (
         <ModalDialog.Footer>
-          <Footer>
+          <div className={styles.filterDialogFooter}>
             <Button
               className="apply-button"
               label={t("Common:ApplyButton")}
@@ -178,7 +163,7 @@ const FilterDialog = (props) => {
               onClick={closeModal}
               testId="cancel_filter_button"
             />
-          </Footer>
+          </div>
         </ModalDialog.Footer>
       ) : null}
     </ModalDialog>

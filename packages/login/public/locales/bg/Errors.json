@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Това приложение е деактивирано",
   "OAuthApplicationEmpty": "Приложението не е открито",
   "OAuthClientEmpty": "Клиентската идентификация не е открита",
+  "OAuthInvalidRequest": "Заявката за оторизация е невалидна. Проверете URI адреса за пренасочване в настройките на приложението",
   "RecaptchaInvalid": "Невалидна Recaptcha",
   "SsoAttributesNotFound": "Неуспешно удостоверяване (атрибутите на твърдението не са намерени)",
   "SsoAuthFailed": "Неуспешна идентификация",

@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsSpace",
+  "content": "A form space is one collection from end to end: the blank PDF form, the people filling it in, and every answer that comes back. Let's create one and look inside.",
+  "content_en_sha1_hash": "70f148457fcb17d80019053c06e6bbac45fcdfba",
+  "created_at": "2026-08-06T14:20:53.758Z",
+  "updated_at": "2026-08-13T10:58:03.049Z",
+  "comment": {
+    "text": "Description text for an onboarding tour step that explains the concept of a \"form space\" and encourages users to create one.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:39:30.833Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 175,
+      "context": "canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-form-room\"]',\n t(\"FormsTour:FormsSpaceTitle\"),\n t(\"FormsTour:FormsSpace\"),\n callbacks,\n LOG_LABEL,\n 6,\n leaveSpace,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

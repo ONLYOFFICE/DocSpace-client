@@ -52,6 +52,7 @@ export enum TypeSettings {
   EnableAdmMess = "enableAdmMess",
   WithHCaptcha = "withHCaptcha",
   Connected = "connected",
+  PortalNotFound = "portalNotFound",
 }
 
 export const settingsWizzard = {
@@ -89,6 +90,7 @@ export const settingsWizzard = {
     },
     cookieSettingsEnabled: false,
     limitedAccessSpace: false,
+    limitedAccessDevToolsForUsers: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
     maxImageUploadSize: 0,
     isAmi: false,
@@ -245,6 +247,7 @@ export const settingsNoAuth = {
     },
     cookieSettingsEnabled: false,
     limitedAccessSpace: false,
+    limitedAccessDevToolsForUsers: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
     maxImageUploadSize: 0,
     externalResources: {
@@ -536,6 +539,7 @@ export const settingsNoAuthNoStandalone = {
 
     cookieSettingsEnabled: false,
     limitedAccessSpace: false,
+    limitedAccessDevToolsForUsers: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
     maxImageUploadSize: 0,
     externalResources: {
@@ -679,42 +683,61 @@ export const settingsConnected = {
   },
 };
 
+/**
+ * Portal switches a spec needs to flip on top of one of the presets above.
+ *
+ * The presets answer "which portal is this" (wizard, standalone, deleted); a
+ * switch like the AI services toggle or "limit Developer Tools to admins" is
+ * orthogonal to every one of them and to each other, so folding them in would
+ * mean a preset per combination. Patched into the chosen preset's `response`,
+ * which is the shape the client reads its settings from.
+ */
+export type SettingsOverrides = Record<string, unknown>;
+
+const settingsByType: Partial<Record<TypeSettings, unknown>> = {
+  [TypeSettings.Wizard]: settingsWizzard,
+  [TypeSettings.WizardWithAmi]: settingsWizzardWithAmi,
+  [TypeSettings.PortalDeactivate]: settingsPortalDeactivate,
+  [TypeSettings.NoStandalone]: settingsNoAuthNoStandalone,
+  [TypeSettings.Authenticated]: settingsAuth,
+  [TypeSettings.AuthenticatedNoStandalone]: settingsAuthNoStandalone,
+  [TypeSettings.AuthenticatedWithSocket]: settingAuthWithSocket,
+  [TypeSettings.EnabledJoin]: settingsWithEnabledJoin,
+  [TypeSettings.EnableAdmMess]: settingsWithEnableAdmMess,
+  [TypeSettings.WithHCaptcha]: settingsWithHCaptcha,
+  [TypeSettings.AuthenticatedWithPlugins]: settingsWithPlugins,
+  [TypeSettings.Connected]: settingsConnected,
+};
+
 export const settingsResolver = (
   type: TypeSettings = TypeSettings.NoAuth,
+  overrides?: SettingsOverrides,
 ): Response => {
-  if (type === TypeSettings.Wizard)
-    return new Response(JSON.stringify(settingsWizzard));
-  if (type === TypeSettings.WizardWithAmi)
-    return new Response(JSON.stringify(settingsWizzardWithAmi));
-  if (type === TypeSettings.PortalDeactivate)
-    return new Response(JSON.stringify(settingsPortalDeactivate));
-  if (type === TypeSettings.NoStandalone)
-    return new Response(JSON.stringify(settingsNoAuthNoStandalone));
-  if (type === TypeSettings.Authenticated)
-    return new Response(JSON.stringify(settingsAuth));
-  if (type === TypeSettings.AuthenticatedNoStandalone)
-    return new Response(JSON.stringify(settingsAuthNoStandalone));
-  if (type === TypeSettings.AuthenticatedWithSocket)
-    return new Response(JSON.stringify(settingAuthWithSocket));
-  if (type === TypeSettings.EnabledJoin)
-    return new Response(JSON.stringify(settingsWithEnabledJoin));
-  if (type === TypeSettings.EnableAdmMess)
-    return new Response(JSON.stringify(settingsWithEnableAdmMess));
-  if (type === TypeSettings.WithHCaptcha)
-    return new Response(JSON.stringify(settingsWithHCaptcha));
-  if (type === TypeSettings.AuthenticatedWithPlugins)
-    return new Response(JSON.stringify(settingsWithPlugins));
-  if (type === TypeSettings.Connected)
-    return new Response(JSON.stringify(settingsConnected));
+  // A deleted portal: the API no longer knows this tenant at all, so there is
+  // no payload to patch either.
+  if (type === TypeSettings.PortalNotFound)
+    return new Response(null, { status: 404 });
 
-  return new Response(JSON.stringify(settingsNoAuth));
+  const settings = (settingsByType[type] ?? settingsNoAuth) as {
+    response: Record<string, unknown>;
+  };
+
+  if (!overrides) return new Response(JSON.stringify(settings));
+
+  return new Response(
+    JSON.stringify({
+      ...settings,
+      response: { ...settings.response, ...overrides },
+    }),
+  );
 };
 
 export const settingsHandler = (
   port: string,
   type: TypeSettings = TypeSettings.NoAuth,
+  overrides?: SettingsOverrides,
 ) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
-    return settingsResolver(type);
+    return settingsResolver(type, overrides);
   });
 };

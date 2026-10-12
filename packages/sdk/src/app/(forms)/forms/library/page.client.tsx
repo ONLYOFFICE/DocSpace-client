@@ -42,7 +42,7 @@ import { observer } from "mobx-react";
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFolder } from "@docspace/shared/api/files/types";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsTourStore } from "../../_store/FormsTourStore";

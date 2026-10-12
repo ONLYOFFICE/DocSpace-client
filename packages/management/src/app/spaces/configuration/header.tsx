@@ -35,10 +35,9 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./configuration.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const Header = () => {
   const { t } = useTranslation(["Management", "Common"]);
@@ -52,9 +51,7 @@ export const Header = () => {
         {t("ConfigurationHeader")}
       </Text>
       <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
-        {t("ConfigurationDescription", {
-          productName: getBrandName("ProductName"),
-        })}
+        {t("ConfigurationDescription")}
       </Text>
     </div>
   );

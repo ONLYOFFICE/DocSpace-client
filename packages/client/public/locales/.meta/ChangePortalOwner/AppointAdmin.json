@@ -3,7 +3,7 @@
   "content": "Appoint administrators",
   "content_en_sha1_hash": "f027ebe781241c5adff25381c1382ded8b1277d1",
   "created_at": "2025-05-19T21:30:56.977Z",
-  "updated_at": "2026-05-15T14:00:06.643Z",
+  "updated_at": "2026-08-14T14:58:32.689Z",
   "comment": {
     "text": "This is a label for a checkbox or list item within a dialog, indicating the permission to assign administrative roles to other users.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 117,
-      "context": "setSelectedUser(null);\n };\n \n const ownerRights = [\n t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\", { productName: getBrandName(\"ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: getBrandName(\"ProductName\"),",
+      "line_number": 116,
+      "context": "setSelectedUser(null);\n };\n \n const ownerRights = [\n t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\"),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\"),\n t(\"BackupPortal\"),",
       "module": "/packages/client"
     }
   ],

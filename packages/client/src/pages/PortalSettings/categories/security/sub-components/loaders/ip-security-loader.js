@@ -33,67 +33,30 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const StyledLoader = styled.div`
-  padding-inline-end: 8px;
-
-  .header {
-    width: 273px;
-    margin-bottom: 16px;
-  }
-
-  .description {
-    margin-bottom: 12px;
-  }
-
-  .checkboxs {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 50px;
-    margin-bottom: 15px;
-  }
-
-  .add-button {
-    width: 85px;
-    margin-bottom: 16px;
-  }
-
-  .block {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .buttons {
-    width: calc(100% - 32px);
-    position: absolute;
-    bottom: 16px;
-  }
-`;
+import styles from "./ip-security-loader.module.scss";
 
 const IpSecurityLoader = () => {
   return (
-    <StyledLoader>
-      <RectangleSkeleton className="header" height="37px" />
-      <RectangleSkeleton className="description" height="80px" />
+    <div className={styles.loader}>
+      <RectangleSkeleton className={styles.header} height="37px" />
+      <RectangleSkeleton className={styles.description} height="80px" />
 
-      <div className="checkboxs">
+      <div className={styles.checkboxs}>
         <RectangleSkeleton height="20px" />
         <RectangleSkeleton height="20px" />
       </div>
 
-      <RectangleSkeleton className="add-button" height="20px" />
+      <RectangleSkeleton className={styles["add-button"]} height="20px" />
 
-      <div className="block">
+      <div className={styles.block}>
         <RectangleSkeleton height="22px" width="72px" />
         <RectangleSkeleton height="64px" />
       </div>
 
-      <RectangleSkeleton className="buttons" height="40px" />
-    </StyledLoader>
+      <RectangleSkeleton className={styles.buttons} height="40px" />
+    </div>
   );
 };
 

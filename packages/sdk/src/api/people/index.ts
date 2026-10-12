@@ -33,13 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { cache } from "react";
 import { cookies } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { logger } from "@/../logger.mjs";
 
-export async function getSelf(): Promise<TUser | undefined> {
+export const getSelf = cache(async (): Promise<TUser | undefined> => {
   logger.debug("Start GET /people/@self");
 
   try {
@@ -50,7 +51,7 @@ export async function getSelf(): Promise<TUser | undefined> {
 
     const [req] = await createRequest([`/people/@self`], [["", ""]], "GET");
     const res = await fetch(req, {
-      next: { revalidate: 900 },
+      cache: "no-store",
       signal: AbortSignal.timeout(8000),
     });
 
@@ -65,4 +66,4 @@ export async function getSelf(): Promise<TUser | undefined> {
   } catch (error) {
     logger.error(`Error in getSelf: ${error}`);
   }
-}
+});

@@ -3,7 +3,7 @@
   "content": "Enter domain name",
   "content_en_sha1_hash": "4aad4fadabc0049631d44b1adfbfcc29e2437e12",
   "created_at": "2025-05-19T21:30:57.452Z",
-  "updated_at": "2026-05-28T15:46:18.676Z",
+  "updated_at": "2026-08-14T14:58:32.913Z",
   "comment": {
     "text": "This is a placeholder text for an input field where the user needs to type in a domain name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/configuration/body.tsx",
-      "line_number": 158,
+      "line_number": 157,
       "context": "errorMessage={domainErrorMessage}\n >\n <TextInput\n type={InputType.text}\n size={InputSize.base}\n placeholder={t(\"EnterDomainName\")}\n value={domain}\n onChange={onChangeDomain}\n tabIndex={1}\n scale\n />",
       "module": "/packages/management"
     },

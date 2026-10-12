@@ -1,9 +1,9 @@
 {
   "key_path": "Favorites",
-  "content": "Favorites",
-  "content_en_sha1_hash": "07b3e447db02b7cc20a78a57c316febae22ed72b",
+  "content": "Favorite files",
+  "content_en_sha1_hash": "2c3e71c8bc44fde8dff5efc87b140e933c09d30e",
   "created_at": "2025-08-29T14:33:19.030Z",
-  "updated_at": "2026-06-05T11:04:11.846Z",
+  "updated_at": "2026-09-14T20:38:41.337Z",
   "comment": {
     "text": "This is a label for a folder or section in the file management interface, indicating items that have been marked as favorites. It appears in navigation menus and settings for default page display.",
     "is_auto": true,
@@ -12,38 +12,92 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
-      "line_number": 174,
-      "context": "break;\n case FolderType.VirtualRooms:\n title = t(\"Rooms\");\n break;\n case FolderType.Favorites:\n title = t(\"Favorites\");\n break;\n case FolderType.Recent:\n title = t(\"Recent\");\n break;\n case FolderType.AiAgents:",
-      "module": "/libs/ui-kit"
+      "file_path": "@onlyoffice/apps-ui-kit/selectors/utils/index.ts",
+      "line_number": 317,
+      "context": "items.push(\n build(\n \"favorites\",\n favoritesFolder,\n CatalogFavoritesSvg,\n t(\"Favorites\"),\n FolderType.Favorites,\n ),\n );\n \n if (items.length && withSeparator)",
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
-      "line_number": 90,
-      "context": "{\n label: t(\"Common:SharedWithMe\"),\n key: FolderType.SHARE,\n },\n {\n label: t(\"Common:Favorites\"),\n key: FolderType.Favorites,\n },\n {\n label: t(\"Common:Recent\"),\n key: FolderType.Recent,",
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 167,
+      "context": "// are named.\n const places = [\n (hasRecent || hasFavorites) &&\n t(\"AiAgentsTour:AgentPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n hasTrash &&\n t(\"AiAgentsTour:AgentPlacesTrash\", { trash: t(\"Common:TrashSection\") }),\n ].filter(Boolean) as string[];",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/TreeFoldersStore.js",
-      "line_number": 94,
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 368,
+      "context": "),\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n ...nav(\n scopedUrl(\n CategoryType.Favorite,\n \"/rooms/favorite\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 368,
+      "context": "),\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n ...nav(\n scopedUrl(\n CategoryType.Favorite,\n \"/rooms/favorite\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 200,
+      "context": "}),\n recentId &&\n t(\"FilesTour:TourPlacesRecent\", { sectionName: t(\"Common:Recent\") }),\n favoritesId &&\n t(\"FilesTour:TourPlacesFavorites\", {\n sectionName: t(\"Common:Favorites\"),\n }),\n trashId &&\n t(\"FilesTour:TourPlacesTrash\", {\n sectionName: t(\"Common:TrashSection\"),\n }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 149,
+      "context": "// here, so for everyone else its bullet drops rather than pointing at an item\n // they do not have.\n const places = [\n t(\"FormsTour:FormsPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 289,
+      "context": "icon: CatalogRestoreReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=recent\"),\n },\n {\n id: \"ai-files-favorites\",\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 289,
+      "context": "icon: CatalogRestoreReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=recent\"),\n },\n {\n id: \"ai-files-favorites\",\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 289,
+      "context": "icon: CatalogRestoreReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=recent\"),\n },\n {\n id: \"ai-files-favorites\",\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 289,
+      "context": "icon: CatalogRestoreReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=recent\"),\n },\n {\n id: \"ai-files-favorites\",\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 243,
+      "context": "t(\"RoomsTour:RoomsPlacesTitle\"),\n createElement(TourList, {\n items: [\n t(\"RoomsTour:RoomsPlacesFiles\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n trash: t(\"Common:TrashSection\"),\n }),\n t(\"RoomsTour:RoomsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/TreeFoldersStore.ts",
+      "line_number": 123,
       "context": "break;\n case FolderType.TRASH:\n folder.title = i18n.t(\"Common:TrashSection\");\n break;\n case FolderType.Favorites:\n folder.title = i18n.t(\"Common:Favorites\");\n break;\n case FolderType.Recent:\n folder.title = i18n.t(\"Common:Recent\");\n break;\n default:",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/sidebar/index.tsx",
-      "line_number": 135,
-      "context": "label: t(\"Common:Documents\"),\n icon: CatalogDocumentsReactSvgUrl,\n },\n {\n key: DocsSection.Favorites,\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n },\n {\n key: DocsSection.Recent,\n label: t(\"Common:Recent\"),",
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
+      "line_number": 155,
+      "context": "if (route === \"recent\") {\n return <AgentsHeader title={t(\"Common:Recent\")} isEmptyList={isEmpty} />;\n }\n if (route === \"favorites\") {\n return <AgentsHeader title={t(\"Common:Favorites\")} isEmptyList={isEmpty} />;\n }\n if (route === \"root\") {\n return (\n <AgentsHeader\n title={t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" })}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 634,
+      "line_number": 643,
       "context": "iconName={FavoriteFillReactSvgUrl}\n className={classNames(\"badge icons-group\")}\n size={IconSizeType.medium}\n onClick={onClickFavorite}\n color=\"accent\"\n title={t(\"Common:Favorites\")}\n />\n ) : null}\n </div>\n );\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 376,
+      "line_number": 381,
       "context": "className={classNames(\"badge icons-group\")}\n size={sizeQuickButton}\n onClick={onClickFavorite}\n color=\"accent\"\n isDisabled={isDisabled}\n title={t(\"Common:Favorites\")}\n />\n ) : null}\n \n {showFailedVectorizationBadge ? (\n <FailedVectorizationBadge",
       "module": "/packages/shared"
     }

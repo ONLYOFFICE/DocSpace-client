@@ -40,11 +40,13 @@ import { useNavigate } from "react-router";
 
 import { TABLE_ROOMS_COLUMNS } from "SRC_DIR/helpers/constants";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
-import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
+
+import styles from "../StyledComponent.module.scss";
 
 const RoomsListComponent = (props) => {
   const {
@@ -87,7 +89,7 @@ const RoomsListComponent = (props) => {
     if (index === 5) return;
 
     return (
-      <StyledSimpleFilesRow key={item.id}>
+      <Row key={item.id} className={styles.simpleFilesRow}>
         {iconElement(
           id,
           icon,
@@ -101,14 +103,14 @@ const RoomsListComponent = (props) => {
         )}
         {textElement(title)}
         {quotaElement(item)}
-      </StyledSimpleFilesRow>
+      </Row>
     );
   });
 
   if (roomsListLength === 0) return null;
 
   return (
-    <StyledStatistics>
+    <div className={styles.statistics}>
       <div className="statistics-container">
         <Text fontWeight={600} className="item-statistic">
           {t("Top5rooms")}
@@ -124,7 +126,7 @@ const RoomsListComponent = (props) => {
           />
         ) : null}
       </div>
-    </StyledStatistics>
+    </div>
   );
 };
 

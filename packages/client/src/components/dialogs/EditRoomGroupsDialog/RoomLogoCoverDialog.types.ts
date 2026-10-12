@@ -33,7 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import type { RoomSearchArea } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 
 import {
@@ -47,7 +48,7 @@ export interface CoverDialogProps {
   getCovers: () => void;
   covers: ICover[] | null;
   currentColorScheme: TColorScheme;
-  arrIdsRooms: string[] | null;
+  arrIdsRooms: (string | number)[] | null;
   setIsOpenGroupIcon: (visible: boolean) => void;
   onCloseEditRoomGroupsDialog: () => void;
   setCreateGroupRooms: (newGroup: ICreateRoomGroup) => Promise<void>;
@@ -59,6 +60,7 @@ export interface CoverDialogProps {
   currentGroupIcon: ILogo | string | null;
   currentGroupName: string | null;
   isOpenedFromContextMenu?: boolean;
+  searchArea: RoomSearchArea;
 }
 
 export interface SelectIconProps {

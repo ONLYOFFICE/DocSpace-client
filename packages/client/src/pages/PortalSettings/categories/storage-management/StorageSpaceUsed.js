@@ -37,22 +37,19 @@ import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
-import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
-import { ContextMenu } from "@docspace/ui-kit/components/context-menu";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
+import { ContextMenu } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import { ChangeStorageQuotaDialog } from "@docspace/shared/dialogs/change-storage-quota";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
 
 import Diagram from "./sub-components/Diagram";
 import RecalculateButton from "./sub-components/RecalculateButton";
-import {
-  StyledDiscSpaceUsedComponent,
-  StyledMainTitle,
-} from "./StyledComponent";
+import styles from "./StyledComponent.module.scss";
 
 const DiskSpaceUsedComponent = (props) => {
   const {
@@ -111,7 +108,7 @@ const DiskSpaceUsedComponent = (props) => {
   };
 
   return (
-    <StyledDiscSpaceUsedComponent>
+    <div className={styles.discSpaceUsed}>
       {standalone && isVisibleDialog ? (
         <ChangeStorageQuotaDialog
           isDisableQuota={isDisableQuota}
@@ -121,9 +118,9 @@ const DiskSpaceUsedComponent = (props) => {
           portalInfo={portalInfo}
         />
       ) : null}
-      <StyledMainTitle fontSize="16px" fontWeight={700}>
+      <Text className={styles.mainTitle} fontSize="16px" fontWeight={700}>
         {t("DiskSpaceUsed")}
-      </StyledMainTitle>
+      </Text>
       <div className="disk-space_content">
         <div className="disk-space_size-info">
           {!standalone || (standalone && isTenantCustomQuotaSet) ? (
@@ -169,7 +166,7 @@ const DiskSpaceUsedComponent = (props) => {
       </div>
       <Diagram />
       <RecalculateButton />
-    </StyledDiscSpaceUsedComponent>
+    </div>
   );
 };
 

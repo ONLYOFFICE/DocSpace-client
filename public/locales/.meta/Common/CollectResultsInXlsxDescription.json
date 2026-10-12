@@ -1,14 +1,14 @@
 {
   "key_path": "CollectResultsInXlsxDescription",
-  "content": "Automatic collection of form results into spreadsheets. Spreadsheets are created in the same folder where filled form copies are stored. A separate XLSX file is generated for each form. Each row represents a single filled form, and columns correspond to form fields.",
-  "content_en_sha1_hash": "4bb02cceb171f7eb039d48f9e80a983b55c65ca8",
-  "created_at": "2026-03-20T09:07:28.003Z",
-  "updated_at": "2026-05-15T14:00:06.659Z",
+  "content": "Form responses are automatically saved to spreadsheets. Spreadsheets are created in the same folder where filled form copies are stored. A separate XLSX file is generated for each form. Each row represents a single filled form, and columns correspond to form fields.",
+  "content_en_sha1_hash": "bc663adcefeee4d03fc5f774ce8fb1e27b8b57ff",
+  "created_at": "2026-08-31T18:22:55.074Z",
+  "updated_at": "2026-08-31T19:26:18.553Z",
   "comment": {
-    "text": "This is the descriptive text for a toggle switch that enables automatic collection of form results into separate XLSX spreadsheets. It explains where the spreadsheets are created and their structure.",
+    "text": "Subtext for a toggle parameter in form settings that explains how form responses are automatically converted into XLSX spreadsheets.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:57:04.665Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T19:26:18.553Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

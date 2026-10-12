@@ -33,7 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export * from "@docspace/ui-kit/enums";
+export * from "@onlyoffice/apps-ui-kit/enums";
+
+import type { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
+
+/** Private room type (extends RoomsType enum from ui-kit) */
+export const RoomsTypePrivate = 13 as RoomsType;
 
 export const enum ScopeType {
   read = "read",
@@ -75,6 +80,14 @@ export enum EmployeeTypeString {
   Admin = "admin",
   User = "user",
   Owner = "owner",
+}
+/**
+ * Enum for the file format of the login history and audit trail reports.
+ * @readonly
+ */
+export enum AuditReportFormat {
+  Xlsx = 0,
+  Csv = 1,
 }
 /**
  * Enum for user payments type.
@@ -191,6 +204,13 @@ export const enum RoomSearchArea {
   Archive = "Archive",
   Templates = "Templates",
   AIAgents = "AiAgents",
+  Forms = "Forms",
+  FormTemplates = "FormTemplates",
+}
+export const enum RoomPrivacyFilter {
+  None = 0,
+  Private = 1,
+  NotPrivate = 2,
 }
 /**
  * Enum for file action.
@@ -215,6 +235,7 @@ export const enum PageType {
   integration = "integration",
   developerTools = "developerTools",
   devToolsOverview = "devToolsOverview",
+  devToolsDocsConnect = "devToolsDocsConnect",
   devToolsJavascriptSdk = "devToolsJavascriptSdk",
   devToolsPluginSdk = "devToolsPluginSdk",
   devToolsWebhooks = "devToolsWebhooks",
@@ -481,6 +502,14 @@ export const enum ExportRoomIndexTaskStatus {
   Failed = 4,
 }
 
+export const enum FileOperationStatus {
+  Created = 0,
+  Running = 1,
+  Completed = 2,
+  Canceled = 3,
+  Failed = 4,
+}
+
 export enum FileExtensions {
   PDF = "pdf",
   DOC = "doc",
@@ -527,14 +556,6 @@ export enum FormFillingManageAction {
   Stop,
   Resume,
   Start,
-}
-
-export enum FormFillingTipsState {
-  Starting = 1,
-  Sharing = 2,
-  Submitting = 3,
-  Complete = 4,
-  Uploading = 5,
 }
 
 export enum FillingFormStatusHistory {

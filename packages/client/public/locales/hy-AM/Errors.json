@@ -1,4 +1,4 @@
 {
   "ErrorEmptyResponse": "Դատարկ պատասխան",
-  "ErrorUnavailableText": "{{productName}}-ը առկա չէ"
+  "ErrorUnavailableText": "Աշխատանքային տարածքը հասանելի չէ"
 }

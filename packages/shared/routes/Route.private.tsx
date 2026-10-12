@@ -35,10 +35,16 @@
 
 import { Navigate, useLocation } from "react-router";
 
-import AppLoader from "@docspace/ui-kit/components/app-loader";
+import AppLoader from "@onlyoffice/apps-ui-kit/components/app-loader";
 
 import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";
+import { isOAuthFrame } from "../utils/oauthToken";
+import { isPortalNotFoundRedirectClaimed } from "../utils/portalNotFound";
+import {
+  hasDevToolsAccess,
+  canOpenDocsConnect,
+} from "../utils/devToolsAccess";
 
 import type { PrivateRouteProps } from "./Routers.types";
 
@@ -76,6 +82,13 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
   const location = useLocation();
 
   const renderComponent = () => {
+    // A deleted portal fails every request, this route among them, so the
+    // branches below would send the visitor to the login page — which bounces
+    // a still-present auth cookie back to the portal root, where the same
+    // thing happens again. The wrong-portal-name redirect is already under
+    // way, and nothing may render or navigate over it.
+    if (isPortalNotFoundRedirectClaimed()) return null;
+
     if (!user && isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(
@@ -111,7 +124,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     const isEncryptionUrl = location.pathname === "/encryption-portal";
 
     const isPaymentsUrl =
-      location.pathname === "/portal-settings/payments/portal-payments";
+      location.pathname === "/portal-settings/payments/portal-payments" ||
+      location.pathname === "/billing/tariff-plan";
     const isBackupUrl =
       location.pathname === "/portal-settings/backup/data-backup";
 
@@ -122,8 +136,18 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname === "/portal-settings/delete-data/deactivation";
 
     const isBonusPage = location.pathname === "/portal-settings/bonus";
-    const isServicesPage =
-      location.pathname === "/portal-settings/payments/services";
+
+    // SaaS billing lives under its own /billing article (the Stripe callback
+    // included); standalone has the license page under portal-payments and
+    // nothing else - no wallet, no addons, no payment method. Community has
+    // neither, so the whole section is closed there.
+    const isPaymentsSection =
+      location.pathname === "/billing" ||
+      location.pathname.startsWith("/billing/") ||
+      location.pathname.startsWith("/portal-settings/payments");
+    const isSaasOnlyPaymentsUrl =
+      isPaymentsSection &&
+      location.pathname !== "/portal-settings/payments/portal-payments";
 
     const isPortalRenameUrl =
       location.pathname ===
@@ -140,6 +164,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       "/portal-settings/management",
     );
     const isFileManagement = location.pathname.includes("file-management");
+    const isKeysManagement = location.pathname.includes("keys-management");
     const isManagement =
       location.pathname.includes("management") &&
       !location.pathname.includes("ad-management");
@@ -149,12 +174,19 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname.includes("bonus") && !isCommunity;
 
     const isDeveloperToolsPage = location.pathname.includes("/developer-tools");
+    const isDocsConnectPage = location.pathname.includes(
+      "/developer-tools/docs-connect",
+    );
 
     if (location.pathname === "/shared/invalid-link") {
       return children;
     }
 
     if (isLoaded && !isAuthenticated) {
+      if (isOAuthFrame()) {
+        return <AppLoader />;
+      }
+
       if (isPortalDeactivate) {
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),
@@ -185,11 +217,30 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       ((!isNotPaidPeriod && isPortalUnavailableUrl) ||
         ((!user?.isOwner || (baseDomain && baseDomain === "localhost")) &&
           isPortalDeletionUrl) ||
-        (isCommunity && isPaymentsUrl) ||
-        (isEnterprise && isBonusPage) ||
-        (standalone && isServicesPage))
+        (isCommunity && isPaymentsSection) ||
+        (isEnterprise && isBonusPage))
     ) {
       return <Navigate replace to="/" />;
+    }
+
+    if (isLoaded && standalone && isSaasOnlyPaymentsUrl) {
+      // Community is already home by now; the license page left here is the
+      // standalone counterpart of SaaS billing, and it is admin-only.
+      const canOpenLicensePage = user?.isOwner || user?.isAdmin;
+
+      return (
+        <Navigate
+          replace
+          to={
+            canOpenLicensePage
+              ? combineUrl(
+                  window.ClientConfig?.proxy?.url,
+                  "/portal-settings/payments/portal-payments",
+                )
+              : "/"
+          }
+        />
+      );
     }
 
     if (
@@ -238,7 +289,9 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
           replace
           to={combineUrl(
             window.ClientConfig?.proxy?.url,
-            "/portal-settings/payments/portal-payments",
+            standalone
+              ? "/portal-settings/payments/portal-payments"
+              : "/billing/tariff-plan",
           )}
         />
       );
@@ -274,7 +327,12 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       );
     }
 
-    if (isManagement && !isPortalManagement && !isFileManagement) {
+    if (
+      isManagement &&
+      !isPortalManagement &&
+      !isFileManagement &&
+      !isKeysManagement
+    ) {
       if (isLoaded && !isAuthenticated) return <Navigate replace to="/" />;
       if ((user && !user?.isAdmin && !user?.isOwner) || limitedAccessSpace)
         return <Navigate replace to="/error/403" />;
@@ -311,7 +369,20 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     }
 
     if (isDeveloperToolsPage) {
-      if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin && !user?.isOwner))
+      if (!hasDevToolsAccess(user, limitedAccessDevToolsForUsers))
+        return <Navigate replace to="/error/403" />;
+
+      // Docs Connect is SaaS-only and admin/owner-only even when the rest of
+      // the section is open, so a standalone portal, a room admin or a user who
+      // guesses the URL is bounced too.
+      // Docs Connect is SaaS-only. Within SaaS it opens for whoever the
+      // section opens for - a room admin or a user reads it with the
+      // configure action refused and an explanation above it, which is the
+      // page's own job (see `canManageDocsConnect`).
+      if (
+        isDocsConnectPage &&
+        !canOpenDocsConnect(user, standalone, limitedAccessDevToolsForUsers)
+      )
         return <Navigate replace to="/error/403" />;
     }
 

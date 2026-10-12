@@ -33,51 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 
-import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
-import { injectDefaultTheme } from "@docspace/shared/utils";
+import { TableBody, TableContainer } from "@onlyoffice/apps-ui-kit/components/table";
 
 import WebhooksTableRow from "./WebhooksTableRow";
 import WebhookTableHeader from "./WebhookTableHeader";
 
-const TableWrapper = styled(TableContainer).attrs(injectDefaultTheme)`
-  margin-top: 16px;
-
-  .header-container-text {
-    font-size: 12px;
-  }
-
-  .table-container_header {
-    position: absolute;
-  }
-
-  .table-list-item {
-    margin-top: -1px;
-    &:hover {
-      cursor: pointer;
-      background-color: ${(props) =>
-        props.theme.filesSection.tableView.row.backgroundActive};
-
-      .table-container_cell {
-        margin-top: -1px;
-        border-top: ${(props) =>
-          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-
-        margin-inline-start: -24px;
-        padding-inline-start: 24px;
-      }
-
-      .table-container_row-context-menu-wrapper {
-        margin-inline-end: -20px;
-        padding-inline-end: 20px;
-      }
-    }
-  }
-`;
+import styles from "../WebhooksTable.styled.module.scss";
 
 const TABLE_VERSION = "5";
 const COLUMNS_SIZE = `webhooksConfigColumnsSize_ver-${TABLE_VERSION}`;
@@ -109,7 +74,7 @@ const WebhooksTableView = (props) => {
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   return (
-    <TableWrapper forwardedRef={tableRef} useReactWindow>
+    <TableContainer className={styles.tableWrapper} forwardedRef={tableRef} useReactWindow>
       <WebhookTableHeader
         sectionWidth={sectionWidth}
         tableRef={tableRef}
@@ -139,7 +104,7 @@ const WebhooksTableView = (props) => {
           />
         ))}
       </TableBody>
-    </TableWrapper>
+    </TableContainer>
   );
 };
 

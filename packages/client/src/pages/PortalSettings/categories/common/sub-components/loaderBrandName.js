@@ -33,50 +33,31 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const StyledLoader = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-
-  .header_loader {
-    margin-bottom: 16px;
-  }
-
-  .description_loader {
-    max-width: 700px;
-    margin-bottom: 5px;
-  }
-
-  .text-input_loader {
-    margin-top: 16px;
-    margin-bottom: 20px;
-  }
-`;
+import styles from "./loaderBrandName.module.scss";
 
 const LoaderBrandName = () => {
   return (
-    <StyledLoader>
-      <RectangleSkeleton height="22px" width="98px" className="header_loader" />
-      <RectangleSkeleton height="16px" className="description_loader" />
+    <div className={styles.loader}>
+      <RectangleSkeleton
+        height="22px"
+        width="98px"
+        className={styles.headerLoader}
+      />
+      <RectangleSkeleton height="16px" className={styles.descriptionLoader} />
       <RectangleSkeleton
         height="16px"
         width="70px"
-        className="description_loader"
+        className={styles.descriptionLoader}
       />
       <RectangleSkeleton
         height="32px"
         width="350px"
-        className="text-input_loader"
+        className={styles.textInputLoader}
       />
-      <RectangleSkeleton
-        height="32px"
-        width="192px"
-        className="buttons_loader"
-      />
-    </StyledLoader>
+      <RectangleSkeleton height="32px" width="192px" />
+    </div>
   );
 };
 

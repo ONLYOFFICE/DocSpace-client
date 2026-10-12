@@ -1,0 +1,29 @@
+{
+  "key_path": "PublicRoomFindOutdatedContentPrompt",
+  "content": "Find content in the current public room that may be outdated and explain what should be reviewed or updated. If this information is not provided, ask me for the age threshold and content scope.",
+  "content_en_sha1_hash": "0917c25b20163d085da7fece28bb684b22c2ca44",
+  "created_at": "2026-08-04T09:58:55.190Z",
+  "updated_at": "2026-08-05T17:08:08.627Z",
+  "comment": {
+    "text": "An instruction prompt sent to the AI assistant when a user selects the \"Find outdated content\" suggestion within a public room.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:08:08.627Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 652,
+      "context": "// +\n publicRoom: [\n {\n name: t(\"AiSuggestions:PublicRoomFindOutdatedContent\"),\n prompt: t(\"AiSuggestions:PublicRoomFindOutdatedContentPrompt\"),\n requires: \"create\",\n },\n ...insideRoom,\n ],",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

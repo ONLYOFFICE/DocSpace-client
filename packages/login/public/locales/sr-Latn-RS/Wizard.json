@@ -1,5 +1,5 @@
 {
-  "Desc": "Molimo postavite {{productName}} podatke za registraciju.",
+  "Desc": "Molimo postavite podatke za registraciju radnog prostora.",
   "ErrorEmail": "Nevažeća email adresa",
   "ErrorInstanceId": "Nevažeći ID instance",
   "ErrorLicenseBody": "Licenca nije važeća. Uverite se da ste izabrali ispravnu datoteku.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Ugovori licence",
   "PlaceholderLicense": "Vaša datoteka licence",
   "Timezone": "Vremenska zona",
-  "WelcomeTitle": "Dobrodošli na vaš {{productName}}!"
+  "WelcomeTitle": "Dobrodošli u vaš radni prostor!"
 }

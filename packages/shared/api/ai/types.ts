@@ -36,7 +36,7 @@
 import type { TPathParts } from "../../types";
 import type { TFile, TFolder } from "../files/types";
 import type { TRoom } from "../rooms/types";
-import { KnowledgeType, ProviderType, WebSearchType } from "./enums";
+import { KnowledgeType, ProviderType } from "./enums";
 
 import {
   TMessage,
@@ -45,17 +45,9 @@ import {
   TMCPTool,
   TServer,
   TModelCapabilities,
-} from "@docspace/ui-kit/types/ai";
+} from "@onlyoffice/apps-ui-kit/types/ai";
 
 export type { TMessage, TChat, TAIConfig, TMCPTool, TServer, TModelCapabilities };
-
-export type TCreateAiProvider = {
-  type: ProviderType;
-  title: string;
-  key: string;
-  url: string;
-  modelSettings?: TModelSettingsItem[];
-};
 
 export type TAiProvider = {
   id: number;
@@ -67,17 +59,6 @@ export type TAiProvider = {
   isDefault: boolean;
   needReset?: boolean;
 };
-
-export type TUpdateAiProvider = {
-  title?: TCreateAiProvider["title"];
-  key?: TCreateAiProvider["key"];
-  url?: TCreateAiProvider["url"];
-  modelSettings?: TModelSettingsItem[];
-};
-
-export type TDeleteAiProviders = { ids: TAiProvider["id"][] };
-
-export type TProviderTypeWithUrl = Pick<TAiProvider, "type" | "url">;
 
 export type TModel = {
   providerId: TAiProvider["id"];
@@ -95,7 +76,37 @@ export type TModel = {
   };
 };
 
-export type TModelList = TModel[];
+
+export type TProfile = {
+  id: string;
+  name: string;
+  providerType: string;
+  baseUrl: string;
+  modelId: string;
+  key?: string | null;
+  headers?: Record<string, string>;
+  reasoning?: TProfileReasoning | null;
+  capabilities?: number;
+  canUseTool?: boolean;
+  useResponsesApi?: boolean;
+  createdAt?: number;
+};
+
+/**
+ * Extended-thinking capabilities of a profile's model as the server stores
+ * them (`ReasoningConfig` on the C# side). Replaces the former boolean:
+ * `thinks` is what that boolean used to say.
+ */
+export type TProfileReasoning = {
+  thinks: boolean;
+  canDisable: boolean;
+  depths: TReasoningDepth[];
+  defaultDepth?: TReasoningDepth | null;
+};
+
+export type TReasoningDepth = "none" | "low" | "medium" | "high" | "xhigh" | "max";
+
+export type TProfilesList = TProfile[];
 
 export type TVectorizeOperation = {
   error: string;
@@ -105,37 +116,16 @@ export type TVectorizeOperation = {
   status: number;
 };
 
-export type TAddNewServer = {
-  endpoint: string;
-  name: string;
-  description: string;
-  headers: Record<string, string>;
-  icon: string;
-};
-
-export type TUpdateServer = {
-  endpoint?: string;
-  name?: string;
-  description?: string;
-  headers?: Record<string, string>;
-  icon?: string;
-  updateIcon?: boolean;
-};
-
-export type WebSearchConfig = {
-  enabled: boolean;
-  type: WebSearchType;
-  key?: string;
-  needReset?: boolean;
-};
-
 export type KnowledgeConfig = {
   type: KnowledgeType;
   key?: string;
   needReset?: boolean;
 };
 
-export type TAgent = TRoom;
+// `profileId` is injected by the Node AI service on GET /ai/agents/:id
+// (resolved from the Chat-action assignment), so it isn't part of the base
+// room contract.
+export type TAgent = TRoom & { profileId?: string };
 
 export type TAgentLogo = {
   tmpFile: string;
@@ -173,55 +163,26 @@ export type TGetAgents = {
   new: number;
 };
 
-export type TEditAgentData = Partial<TCreateAgentData>;
-
-export type TDefaultProvider = {
-  providerId: TAiProvider["id"];
-  providerTitle: TAiProvider["title"];
-  providerType?: ProviderType;
-  defaultModel: TModel["modelId"];
-  defaultModelAlias?: string;
+// Edit goes through the Node AI service (PUT /ai/agents/:id): room fields
+// (incl. `chatSettings.prompt`) are forwarded to .NET, and an optional
+// `profileId` rebinds the agent's Chat-action profile server-side.
+export type TEditAgentData = Partial<TCreateAgentData> & {
+  profileId?: string;
 };
 
-export type TUpdateDefaultProviderData = {
-  providerId: TAiProvider["id"];
-  defaultModel: TModel["modelId"];
+// Payload of the new agent-creation endpoint (POST /ai/agents, Node AI
+// service). The service forwards everything except `profileId`/`prompt` to
+// the .NET endpoint and binds the profile to the created agent itself, so
+// `chatSettings` must not be sent by the caller.
+export type TCreateAgentWithProfileData = Omit<
+  TCreateAgentData,
+  "chatSettings"
+> & {
+  profileId: string;
+  prompt: string;
 };
 
 export type TAIUserConfig = {
   chatRecommendedModelVisible: boolean;
 };
 
-export type TModelSettingsItem = {
-  modelId: string;
-  isEnabled: boolean;
-  alias?: string;
-  capabilities?: TModelCapabilities;
-};
-
-export type TModelSettingsDto = {
-  id: string;
-  alias?: string;
-  isEnabled: boolean;
-  isRecommended: boolean;
-  capabilities: TModelCapabilities;
-};
-
-export type TProviderModelInfo = {
-  modelId: string;
-  displayName: string;
-  isRecommended: boolean;
-  capabilities: TModelCapabilities;
-};
-
-export type TSelectedModelData = {
-  modelId: string;
-  displayName?: string;
-  capabilities?: TModelCapabilities;
-};
-
-export type TPreviewModelsRequest = {
-  type: ProviderType;
-  key: string;
-  url?: string;
-};

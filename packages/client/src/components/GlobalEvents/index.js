@@ -33,23 +33,24 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
 import { FileAction, Events } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { getStartAgentParams } from "@docspace/shared/utils/aiAgents";
 import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
 
 import CreateEvent from "./CreateEvent";
 import RenameEvent from "./RenameEvent";
 import CreateRoomEvent from "./CreateRoomEvent";
 import EditRoomEvent from "./EditRoomEvent";
 import CreateAgentEvent from "./AgentEvents/CreateAgentEvent";
+import ActivateAIEvent from "./AgentEvents/ActivateAIEvent";
 import EditAgentEvent from "./AgentEvents/EditAgentEvent";
 import CreateGroupEvent from "./GroupEvents/CreateGroupEvent";
 import EditGroupEvent from "./GroupEvents/EditGroupEvent";
@@ -57,6 +58,8 @@ import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
 import SaveAsTemplateEvent from "./SaveAsTemplateEvent";
+import { useHasAiProfiles } from "../../Hooks/useHasAiProfiles";
+import { AI_SETTINGS_URL } from "../../helpers/constants";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { isAIAgents } from "../../helpers/plugins/utils";
 
@@ -76,7 +79,12 @@ const GlobalEvents = ({
   setCreatePDFFormFile,
   createPDFFormFileProps,
   userId,
+  getIsAIReady,
+  standalone,
+  canOpenAISettings,
 }) => {
+  const navigate = useNavigate();
+
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
     id: null,
@@ -127,7 +135,12 @@ const GlobalEvents = ({
     onClose: null,
   });
 
-  const eventHandlersList = useRef([]);
+  const [activateAIProps, setActivateAIProps] = useState({ visible: false });
+
+  // Not `profiles.length` off the store: that flaps to false while a rebuilt
+  // chat bundle hydrates, and on standalone a false negative here navigates
+  // the user off the page. The hook holds the last hydrated value instead.
+  const hasAiProfiles = useHasAiProfiles();
 
   const onCreate = useCallback((e) => {
     const { payload } = e;
@@ -191,6 +204,13 @@ const GlobalEvents = ({
     );
     setCreateRoomDialogProps({
       ...startRoomParams,
+      // CreateRoomEvent reads `startRoomType` (not `type`) to open the dialog
+      // straight on a preset room type and lock the chooser.
+      startRoomType: e?.payload?.startRoomType,
+      isFormsCreate: e?.payload?.isFormsCreate,
+      // Opens the dialog straight on the "from template" picker instead of the
+      // room-type chooser (quick-actions "Room template" tile).
+      withTemplateSelector: e?.payload?.withTemplateSelector,
       item: e.item,
       context: e.context || e.detail?.context || "",
       visible: true,
@@ -199,6 +219,8 @@ const GlobalEvents = ({
           visible: false,
           onClose: null,
           startRoomType: undefined,
+          isFormsCreate: undefined,
+          withTemplateSelector: undefined,
         }),
     });
   }, []);
@@ -221,21 +243,57 @@ const GlobalEvents = ({
     });
   }, []);
 
-  const onCreateAgent = useCallback((e) => {
-    const startAgentParams = getStartAgentParams();
-    setCreateAgentDialogProps({
-      ...startAgentParams,
-      item: e.item,
-      context: e.context || e.detail?.context || "",
-      visible: true,
-      onClose: () => {
-        setCreateAgentDialogProps({
-          visible: false,
-          onClose: null,
+  const onCreateAgent = useCallback(
+    (e) => {
+      const context = e.context || e.detail?.context || "";
+
+      const isAIReady = standalone ? hasAiProfiles : getIsAIReady();
+
+      if (!isAIReady) {
+        // Standalone connects its own AI provider in the settings: there is no
+        // service to switch on and no wallet to top up, so the activation
+        // dialog would offer an action that does not exist there. Whoever
+        // cannot open the settings still gets it - that branch only tells them
+        // to contact the admin.
+        if (standalone && canOpenAISettings) {
+          navigate(AI_SETTINGS_URL);
+          return;
+        }
+
+        setActivateAIProps({
+          visible: true,
+          parentId: e.detail?.parentId,
+          context,
+          onClose: () => setActivateAIProps({ visible: false }),
         });
-      },
-    });
-  }, []);
+        return;
+      }
+
+      setActivateAIProps({ visible: false });
+
+      const startAgentParams = getStartAgentParams();
+      setCreateAgentDialogProps({
+        ...startAgentParams,
+        item: e.item,
+        context,
+        visible: true,
+        onClose: () => {
+          setCreateAgentDialogProps({
+            visible: false,
+            onClose: null,
+          });
+        },
+      });
+    },
+    [
+      standalone,
+      canOpenAISettings,
+      navigate,
+      getIsAIReady,
+      hasAiProfiles,
+      setCreateAgentDialogProps,
+    ],
+  );
 
   const onEditAgent = useCallback((e) => {
     const visible = !!e.item;
@@ -342,12 +400,8 @@ const GlobalEvents = ({
         );
       }
 
-      const closedFormFillingTips = localStorage.getItem(
-        getFormFillingTipsStorageName(userId),
-      );
-
       setCreatePDFFormFile({
-        visible: closedFormFillingTips,
+        visible: true,
         file,
         localKey,
         onClose: () => {
@@ -389,7 +443,7 @@ const GlobalEvents = ({
     });
   }, []);
 
-  const onSaveAsTemplate = (e) => {
+  const onSaveAsTemplate = useCallback((e) => {
     const visible = !!e.item;
 
     setSaveAsTemplateDialog({
@@ -403,7 +457,7 @@ const GlobalEvents = ({
         });
       },
     });
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener(
@@ -420,6 +474,8 @@ const GlobalEvents = ({
   }, [handleCreatePDFFormFile]);
 
   useEffect(() => {
+    const pluginEventHandlers = [];
+
     window.addEventListener(Events.CREATE, onCreate);
     window.addEventListener(Events.RENAME, onRename);
     window.addEventListener(Events.ROOM_CREATE, onCreateRoom);
@@ -440,12 +496,12 @@ const GlobalEvents = ({
       if (eventListenerItemsList) {
         eventListenerItemsList.forEach((item) => {
           const eventHandler = (e) => {
-            item.eventHandler(e);
+            item.value.eventHandler(e);
           };
 
-          eventHandlersList.current.push(eventHandler);
+          pluginEventHandlers.push(eventHandler);
 
-          window.addEventListener(item.eventType, eventHandler);
+          window.addEventListener(item.value.eventType, eventHandler);
         });
       }
     }
@@ -460,7 +516,8 @@ const GlobalEvents = ({
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
-      window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
+      window.removeEventListener(Events.CHANGE_QUOTA, onChangeQuota);
+      window.removeEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
       if (!isAIAgents() && enablePlugins) {
         window.removeEventListener(
@@ -471,8 +528,8 @@ const GlobalEvents = ({
         if (eventListenerItemsList) {
           eventListenerItemsList.forEach((item, index) => {
             window.removeEventListener(
-              item.eventType,
-              eventHandlersList.current[index],
+              item.value.eventType,
+              pluginEventHandlers[index],
             );
           });
         }
@@ -488,8 +545,11 @@ const GlobalEvents = ({
     onCreateGroup,
     onEditGroup,
     onChangeUserType,
+    onChangeQuota,
+    onSaveAsTemplate,
     onCreatePluginFileDialog,
     enablePlugins,
+    eventListenerItemsList,
   ]);
 
   return [
@@ -507,6 +567,9 @@ const GlobalEvents = ({
     ),
     createAgentDialogProps.visible && (
       <CreateAgentEvent key={Events.AGENT_CREATE} {...createAgentDialogProps} />
+    ),
+    activateAIProps.visible && (
+      <ActivateAIEvent key="activate-ai" {...activateAIProps} />
     ),
     editAgentDialogProps.visible && (
       <EditAgentEvent key={Events.AGENT_EDIT} {...editAgentDialogProps} />
@@ -548,7 +611,7 @@ const GlobalEvents = ({
 };
 
 export default inject(
-  ({ settingsStore, pluginStore, dialogsStore, userStore }) => {
+  ({ settingsStore, pluginStore, dialogsStore, userStore, paymentStore }) => {
     const { enablePlugins } = settingsStore;
 
     const {
@@ -582,6 +645,11 @@ export default inject(
       setCreatePDFFormFile,
       createPDFFormFileProps,
       userId: userStore?.user?.id,
+      getIsAIReady: () => paymentStore.isAIReady,
+      standalone: settingsStore.standalone,
+      canOpenAISettings: Boolean(
+        userStore?.user?.isAdmin || userStore?.user?.isOwner,
+      ),
     };
   },
 )(observer(GlobalEvents));

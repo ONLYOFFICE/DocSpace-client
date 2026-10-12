@@ -38,8 +38,8 @@ import {
   ComboBox,
   ComboBoxSize,
   type TOption,
-} from "@docspace/ui-kit/components/combobox";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import { IconDisplay } from "./IconDisplay";
 

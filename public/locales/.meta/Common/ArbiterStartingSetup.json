@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterStartingSetup",
+  "content": "Starting setup...",
+  "content_en_sha1_hash": "ab8256839dcc33f3d3f6058303420c0d5a06e52d",
+  "created_at": "2026-05-24T17:27:18.657Z",
+  "updated_at": "2026-05-24T18:42:05.235Z",
+  "comment": {
+    "text": "Placeholder text in the chat window that appears when the AI Arbiter is initiating the setup process and no messages are yet visible.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:42:05.235Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/ChatPhase.tsx",
+      "line_number": 138,
+      "context": "return (\n <div className={styles.chatLayout}>\n <div className={styles.messagesScroll} ref={scrollRef}>\n {visible.length === 0 ? (\n <div className={styles.chatPlaceholder}>{t(\"Common:ArbiterStartingSetup\")}</div>\n ) : (\n visible.map((m) => {\n if (m.role === \"wizard\" && m.pendingConfig) {\n return <PreparingProgress key={m.id} text={m.text} />;\n }",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

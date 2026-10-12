@@ -36,6 +36,7 @@
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TNewFilesItem, TRoom } from "@docspace/shared/api/rooms/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { DeviceType } from "@docspace/shared/enums";
 import type { Nullable } from "@docspace/shared/types";
 
 import type FilesActionStore from "SRC_DIR/store/FilesActionsStore";
@@ -45,6 +46,7 @@ import type FilesStore from "SRC_DIR/store/FilesStore";
 export type NewFilesBadgeProps = {
   newFilesCount: number;
   folderId: string | number;
+  folderIds?: (string | number)[];
 
   isRoom?: boolean;
   mute?: boolean;
@@ -75,6 +77,7 @@ export type NewFilesPanelInjectStore = {
 export type NewFilesPanelProps = {
   position: TPanelPosition;
   folderId: string | number;
+  folderIds?: (string | number)[];
 
   isRoom?: boolean;
 
@@ -107,9 +110,12 @@ export type NewFilesPanelItemRoomProps = {
   onClose: VoidFunction;
   openItemAction?: FilesActionStore["openItemAction"];
   getFolderInfo?: FilesStore["getFolderInfo"];
+  currentDeviceType?: DeviceType;
+  setArticleOpen?: SettingsStore["setArticleOpen"];
 };
 
 export type NewFilesPanelItemFileInjectStore = {
+  settingsStore: SettingsStore;
   filesSettingsStore: FilesSettingsStore;
   filesActionsStore: FilesActionStore;
   filesStore: FilesStore;
@@ -127,6 +133,8 @@ export type NewFilesPanelItemFileProps = {
   markAsRead?: FilesActionStore["markAsRead"];
   openDocEditor?: FilesStore["openDocEditor"];
   openItemAction?: FilesActionStore["openItemAction"];
+  currentDeviceType?: DeviceType;
+  setArticleOpen?: SettingsStore["setArticleOpen"];
 
   displayFileExtension?: boolean;
 };

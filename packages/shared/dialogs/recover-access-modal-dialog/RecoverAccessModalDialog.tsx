@@ -35,19 +35,19 @@
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { EmailInput, TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import {
 	ModalDialog,
 	ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 
 import { sendRecoverRequest } from "../../api/settings";
 import { useCaptcha } from "../../hooks/useCaptcha";
@@ -97,7 +97,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
 	);
 
 	const { t } = useTranslation(["Login", "Common"]);
-	const theme = useTheme();
+	const { isBase } = useTheme();
 
 	const captcha = useCaptcha({
 		publicKey: reCaptchaPublicKey,
@@ -245,6 +245,11 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
 		}
 	};
 
+	const emailErrorText = emailErrorMessage
+		? // biome-ignore lint/plugin/no-dynamic-i18n-key: keys come from the email validator's error enum (translated in Common)
+			t(`Common:${emailErrorMessage}`)
+		: t("Common:RequiredField");
+
 	return (
 		<ModalDialog
 			id={id}
@@ -274,11 +279,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
 						key="e-mail"
 						labelVisible={false}
 						hasError={isShowError ? emailErr : undefined}
-						errorMessage={
-							emailErrorMessage
-								? t(`Common:${emailErrorMessage}`)
-								: t("Common:RequiredField")
-						}
+errorMessage={emailErrorText}
 						dataTestId="recover_access_modal_email_container"
 					>
 						<EmailInput
@@ -335,7 +336,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
 							id="recover-access-captcha-widget"
 							type={captcha.captchaType}
 							publicKey={reCaptchaPublicKey}
-							themeMode={theme.isBase ? "light" : "dark"}
+							themeMode={isBase ? "light" : "dark"}
 							visible={captcha.isVisible}
 							hasError={captcha.isError}
 							errorText={t("Errors:LoginWithBruteForceCaptcha")}

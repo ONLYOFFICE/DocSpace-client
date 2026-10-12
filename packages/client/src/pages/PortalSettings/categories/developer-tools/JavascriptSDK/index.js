@@ -33,14 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { inject, observer } from "mobx-react";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import PortalImg from "PUBLIC_DIR/images/sdk-presets_portal.react.svg?url";
 import PublicRoomImg from "PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url";
@@ -65,18 +65,13 @@ import Integration from "./sub-components/Integration";
 import PresetTile from "./sub-components/PresetTile";
 import CSPSetting from "./sub-components/csp";
 
-import {
-  SDKContainer,
-  CategoryHeader,
-  CategoryDescription,
-  PresetsContainer,
-} from "./sub-components/StyledPortalIntegration";
+import { isMobile } from "@onlyoffice/apps-ui-kit/utils/device";
+import classNames from "classnames";
+import styles from "./sub-components/StyledPortalIntegration.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PortalIntegration = (props) => {
   const { t, currentColorScheme, sdkLink, theme, tReady } = props;
-
-  const [isFlex, setIsFlex] = useState(false);
 
   const navigate = useNavigate();
 
@@ -92,9 +87,7 @@ const PortalIntegration = (props) => {
   const presetsData = [
     {
       title: getBrandName("ProductName"),
-      description: t("PortalDescription", {
-        productName: getBrandName("ProductName"),
-      }),
+      description: t("PortalDescription"),
       image: theme.isBase ? PortalImg : PortalImgDark,
       handleOnClick: navigateToPortal,
     },
@@ -130,9 +123,7 @@ const PortalIntegration = (props) => {
     },
     {
       title: t("Common:Custom"),
-      description: t("CustomDescription", {
-        productName: getBrandName("ProductName"),
-      }),
+      description: t("CustomDescription"),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,
     },
@@ -148,26 +139,11 @@ const PortalIntegration = (props) => {
     if (tReady) setDocumentTitle(t("JavascriptSdk"));
   }, [tReady]);
 
-  useEffect(() => {
-    const content = document.querySelector(".section-wrapper-content");
-    if (!content) return;
-
-    const onResize = (entries) => {
-      setIsFlex(entries[0].contentRect.width <= 600);
-    };
-
-    const rObserver = new ResizeObserver(onResize);
-    rObserver.observe(content);
-    return () => {
-      rObserver.disconnect();
-    };
-  }, []);
-
   return (
-    <SDKContainer>
-      <CategoryDescription theme={theme}>
+    <div className={classNames(styles.sdkContainer, { [styles.isMobile]: isMobile() })}>
+      <div className={styles.categoryDescription}>
         <Text className="sdk-description">
-          {t("SDKDescription", { productName: getBrandName("ProductName") })}
+          {t("SDKDescription")}
         </Text>
         <Link
           color={currentColorScheme?.main?.accent}
@@ -180,14 +156,14 @@ const PortalIntegration = (props) => {
           {t("APILink")}.
         </Link>
         <CSPSetting t={t} theme={theme} />
-      </CategoryDescription>
-      <CategoryHeader>
-        {t("SelectModeEmbedding", { productName: getBrandName("ProductName") })}
-      </CategoryHeader>
+      </div>
+      <div className={classNames(styles.categoryHeader, { [styles.isMobile]: isMobile() })}>
+        {t("SelectModeEmbedding")}
+      </div>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}
       </Text>
-      <PresetsContainer className={`${isFlex ? "presets-flex" : ""}`}>
+      <div className={styles.presetsContainer}>
         {presetsData.map((data) => (
           <PresetTile
             t={t}
@@ -199,9 +175,9 @@ const PortalIntegration = (props) => {
             dataTestId={`sdk_preset_${data.title}_container`}
           />
         ))}
-      </PresetsContainer>
-      <Integration />
-    </SDKContainer>
+      </div>
+      <Integration narrow />
+    </div>
   );
 };
 
@@ -217,7 +193,6 @@ export default inject(({ settingsStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "CreateEditRoomDialog",
     "Common",
   ])(observer(PortalIntegration)),

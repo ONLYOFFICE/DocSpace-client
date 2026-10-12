@@ -44,11 +44,15 @@ export type RowContentProps = {
   timezone: string;
   displayFileExtension: boolean;
   badgesComponent?: React.ReactNode;
+  currentUserId?: string;
 };
 
 export type RowProps = RowContentProps & {
   index: number;
   isSSR: boolean;
+  isPrivate?: boolean;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
 };
 
 export type RowViewProps = Pick<
@@ -58,6 +62,9 @@ export type RowViewProps = Pick<
   total: number;
   hasMoreFiles: boolean;
   items: (TFolderItem | TFileItem)[];
-
+  currentUserId?: string;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
+  isPrivate?: boolean;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
 };

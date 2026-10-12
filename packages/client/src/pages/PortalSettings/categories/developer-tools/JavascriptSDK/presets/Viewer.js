@@ -38,7 +38,7 @@ import { useEventLog } from "../sub-components/useEventLog";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { Label } from "@docspace/ui-kit/components/label";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 import api from "@docspace/shared/api";
@@ -55,7 +55,6 @@ import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { VersionSelector } from "../sub-components/VersionSelector";
-import Integration from "../sub-components/Integration";
 
 import {
   dimensionsModel,
@@ -282,12 +281,8 @@ const Viewer = (props) => {
               setConfig={setConfig}
             />
           </ControlsSection>
-
-          <Integration className="integration-examples" />
         </Controls>
       </Container>
-
-      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };
@@ -302,7 +297,6 @@ export const Component = inject(({ settingsStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "CreateEditRoomDialog",
   ])(observer(Viewer)),

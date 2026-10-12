@@ -35,10 +35,11 @@
 
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
+import { match } from "ts-pattern";
 
 import { FolderType } from "@docspace/shared/enums";
-import { AsideHeader } from "@docspace/ui-kit/components/aside";
-import { Tabs } from "@docspace/ui-kit/components/tabs";
+import { AsideHeader } from "@onlyoffice/apps-ui-kit/components/aside";
+import { Tabs } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 
@@ -110,21 +111,20 @@ const InfoPanelHeaderGeneral = ({
     : (availableTabs[0] ?? InfoPanelView.infoDetails);
 
   const tabItems = availableTabs.map((id) => {
-    let name: string;
-    if (id === InfoPanelView.infoMembers) {
-      name = isTemplate ? t("Common:Accesses") : t("Common:Contacts");
-    } else if (id === InfoPanelView.infoHistory) {
-      name = t("InfoPanel:SubmenuHistory");
-    } else if (id === InfoPanelView.infoDetails) {
-      name = t("InfoPanel:SubmenuDetails");
-    } else if (id === InfoPanelView.infoShare) {
-      name = t("Common:Share");
-    } else {
-      const key = id.replace("info_plugin-", "");
-      name =
-        infoPanelItemsList.find((item) => item.key === key)?.value.subMenu
-          .name ?? id;
-    }
+    const name = match(id)
+      .with(InfoPanelView.infoMembers, () =>
+        isTemplate ? t("Common:Accesses") : t("Common:Contacts"),
+      )
+      .with(InfoPanelView.infoShare, () => t("Common:Share"))
+      .with(InfoPanelView.infoHistory, () => t("Common:SubmenuHistory"))
+      .with(InfoPanelView.infoDetails, () => t("Common:SubmenuDetails"))
+      .otherwise(() => {
+        const key = id.replace("info_plugin-", "");
+        return (
+          infoPanelItemsList.find((item) => item.key === key)?.value.subMenu
+            .name ?? id
+        );
+      });
 
     return { id, name, onClick: () => setView(id), content: null };
   });

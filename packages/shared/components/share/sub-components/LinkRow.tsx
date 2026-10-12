@@ -41,21 +41,14 @@ import LinkIcon from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import ExternalLinkWarningIconUrl from "PUBLIC_DIR/images/external-link-warning.react.svg?url";
 
 import { RowSkeleton } from "../../../skeletons/share";
-import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+import { useIsMobile } from "@onlyoffice/apps-ui-kit/hooks/use-is-mobile";
 import type { TFileLink } from "../../../api/files/types";
 
-import type { TOption } from "@docspace/ui-kit/components/combobox";
-import {
-  ContextMenuButton,
-  ContextMenuButtonDisplayType,
-} from "@docspace/ui-kit/components/context-menu-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import {
-  getAccessTypeOptions,
-  getLinkAccessRightOptions,
-  getRoomLinkAccessOptions,
-} from "../Share.helpers";
+import { getAccessTypeOptions, getLinkAccessRight } from "../Share.helpers";
 import type { LinkRowProps } from "../Share.types";
 
 import styles from "../Share.module.scss";
@@ -123,14 +116,14 @@ const LinkRow = ({
     if (("isLoaded" in link && link.isLoaded) || "isLoaded" in link)
       return <RowSkeleton key="loading-link" />;
 
-    const accessOptions = getLinkAccessRightOptions(
+    const {
+      accessOptions,
+      selectedAccessOption,
+      roomAccessOptions,
+      roomSelectedOptions,
+    } = getLinkAccessRight(
       t,
-      availableShareRights,
-      link.sharedTo.primary,
-    );
-
-    const roomAccessOptions = getRoomLinkAccessOptions(
-      t,
+      link.access,
       availableShareRights,
       link.sharedTo.primary,
     );
@@ -150,14 +143,6 @@ const LinkRow = ({
     };
 
     const shareOption = getShareOption();
-
-    const selectedAccessOption = accessOptions.find(
-      (option) => option && "access" in option && option.access === link.access,
-    );
-
-    const roomSelectedOptions = roomAccessOptions.find(
-      (option) => option && "access" in option && option.access === link.access,
-    );
 
     const isExpiredLink = link.sharedTo.isExpired;
     const isLocked = !!link.sharedTo.password;

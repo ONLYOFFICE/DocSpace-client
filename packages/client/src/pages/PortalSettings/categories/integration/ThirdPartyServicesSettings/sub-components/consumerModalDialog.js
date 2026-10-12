@@ -38,23 +38,14 @@ import PropTypes from "prop-types";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { format } from "react-string-format";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
-import { mobile } from "@docspace/shared/utils";
-import styled from "styled-components";
-
-const StyledBox = styled.div`
-  box-sizing: border-box;
-  padding: 20px 0 8px;
-  @media ${mobile} {
-    padding-top: 0;
-  }
-`;
+import styles from "./consumerModalDialog.module.scss";
 
 const maxLength = {
   json: Infinity,
@@ -70,7 +61,7 @@ class ConsumerModalDialog extends React.Component {
     required.current = [];
     this.requiredRef = required.current;
 
-    const { selectedConsumer, t, theme, feedbackAndSupportUrl } = this.props;
+    const { selectedConsumer, t, feedbackAndSupportUrl } = this.props;
 
     this.consumerInstruction =
       selectedConsumer.instruction &&
@@ -84,7 +75,7 @@ class ConsumerModalDialog extends React.Component {
         Detailed instructions in our{" "}
         <Link
           id="help-center-link"
-          color={theme.client.settings.integration.linkColor}
+          color="var(--settings-integration-link-color)"
           isHovered={false}
           target="_blank"
           href={this.thirdPartyServicesUrl()}
@@ -96,13 +87,13 @@ class ConsumerModalDialog extends React.Component {
     );
 
     this.supportTeamDescription = (
-      <StyledBox>
+      <div className={styles.styledBox}>
         <Trans t={t} i18nKey="ThirdPartyBottomDescription" ns="Settings">
           If you still have some questions on how to connect this service or
           need technical assistance, please feel free to contact our{" "}
           <Link
             id="support-team-link"
-            color={theme.client.settings.integration.linkColor}
+            color="var(--settings-integration-link-color)"
             isHovered={false}
             target="_blank"
             href={feedbackAndSupportUrl}
@@ -111,7 +102,7 @@ class ConsumerModalDialog extends React.Component {
             Support Team
           </Link>
         </Trans>
-      </StyledBox>
+      </div>
     );
 
     this.description =
@@ -122,7 +113,7 @@ class ConsumerModalDialog extends React.Component {
         </>
       ) : !feedbackAndSupportUrl && this.thirdPartyServicesUrl() ? (
         <Text as="div">
-          <StyledBox>{this.helpCenterDescription}</StyledBox>
+          <div className={styles.styledBox}>{this.helpCenterDescription}</div>
         </Text>
       ) : feedbackAndSupportUrl && !this.thirdPartyServicesUrl() ? (
         <Text as="div">{this.supportTeamDescription}</Text>
@@ -361,7 +352,6 @@ ConsumerModalDialog.propTypes = {
 
 export default inject(({ setup, settingsStore }) => {
   const {
-    theme,
     feedbackAndSupportUrl,
     portalSettingsUrl,
     dropboxUrl,
@@ -385,7 +375,6 @@ export default inject(({ setup, settingsStore }) => {
   const { selectedConsumer } = integration;
 
   return {
-    theme,
     selectedConsumer,
     feedbackAndSupportUrl,
     portalSettingsUrl,

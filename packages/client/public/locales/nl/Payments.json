@@ -5,7 +5,7 @@
   "ChooseNewPlan": "Wilt u een nieuw prijsplan kiezen?",
   "GracePeriodActive": "De grace-periode is actief <1>vanaf {{fromDate}} tot {{byDate}}</1> (resterende dagen: {{delayDaysCount}}).",
   "LicenseExpiredRestriction": "Kan geen nieuwe gebruikers toevoegen en nieuwe ruimtes aanmaken. Licentie is verlopen.",
-  "LicenseGracePeriodInfo": "Gedurende deze tijd kunnen beheerders geen nieuwe ruimtes aanmaken of nieuwe gebruikers toevoegen. Nadat de grace period is afgelopen, zal {{productName}} onbeschikbaar zijn totdat een nieuwe licentie is geactiveerd.",
+  "LicenseGracePeriodInfo": "Gedurende deze tijd kunnen beheerders geen nieuwe ruimtes aanmaken of nieuwe gebruikers toevoegen. Nadat de respijtperiode is afgelopen, zal de werkruimte onbeschikbaar zijn totdat een nieuwe licentie is geactiveerd.",
   "NewRoomWillExceedLimit": "Deze kamer kan niet worden aangemaakt omdat de limiet is bereikt voor het aantal kamers in uw huidige plan.",
   "NewUsersWillExceedMembersLimit": "Nieuwe betaalde gebruikers toevoegen is niet mogelijk omdat de limiet is bereikt voor het aantal beheerders in uw huidige plan.",
   "NotPossibleRoomRestoring": "Het is niet mogelijk om deze kamer te herstellen omdat de limiet is bereikt voor het aantal kamers in uw huidige plan.",

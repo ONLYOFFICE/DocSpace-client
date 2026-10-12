@@ -1,0 +1,41 @@
+{
+  "key_path": "KnowledgeSelectIn",
+  "content": "Select in the workspace",
+  "content_en_sha1_hash": "0dd6af521db1142abc438e1f2e1f5cff17bda191",
+  "created_at": "2026-08-12T11:00:25.877Z",
+  "updated_at": "2026-08-14T14:58:32.698Z",
+  "comment": {
+    "text": "Button label in the AI agent creation dialog used to trigger file selection within the workspace, including the {{productName}} variable.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T11:13:11.554Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Knowledge.tsx",
+      "line_number": 89,
+      "context": "onClick={onClickAction}\n />\n <Button\n size={ButtonSize.small}\n icon={<ReactSVG className=\"ai-button-icon\" src={MoveReactSvgUrl} />}\n label={t(\"KnowledgeSelectIn\")}\n scale\n filled\n onClick={onClickAction}\n />\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/Knowledge.tsx",
+      "line_number": 121,
+      "context": "<Button\n size={ButtonSize.small}\n icon={\n <ReactSVG className=\"ai-button-icon\" src={MoveReactSvgUrl} />\n }\n label={t(\"Common:KnowledgeSelectIn\", {\n defaultValue: \"Select files\",\n })}\n scale\n filled\n onClick={onClickAction}",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

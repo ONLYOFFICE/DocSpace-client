@@ -1,6 +1,10 @@
 {
   "HideInput": "Ausblenden",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} von {{total}}</0> hochgeladen. Speicherplatz überschritten — <1>Details anzeigen</1>.",
+  "QuotaExceededTooltip": "Speicherplatz überschritten. Geben Sie Speicherplatz frei oder upgraden Sie Ihren Plan, und versuchen Sie es dann erneut.",
   "Ready": "Fertig",
+  "RetryAfterQuotaUpgrade": "Nach Kontingent-Upgrade erneut versuchen",
+  "RetryUpload": "Wiederholen",
   "UploadingAndConversion": "Hochladen & Konvertieren",
   "UploadingError": "Fehler beim Hochladen"
 }

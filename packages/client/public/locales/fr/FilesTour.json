@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Lancez un chat IA pour poser des questions, résumer des documents, générer des textes et vous faire aider dans votre travail — directement dans {{sectionName}}.",
+  "TourAiAssistantTitle": "Votre assistant IA",
+  "TourBringFiles": "Téléversez des fichiers depuis votre ordinateur ou faites-les simplement glisser n'importe où dans cette fenêtre.",
+  "TourBringFilesTitle": "Apportez vos fichiers",
+  "TourCreateAnything": "Créez des documents, des feuilles de calcul, des présentations et des formulaires PDF directement dans votre navigateur — aucun logiciel requis.",
+  "TourCreateAnythingTitle": "Créez tout ce que vous voulez",
+  "TourFindFast": "Recherchez par nom, filtrez par type ou par auteur, triez la liste et basculez entre l'affichage en liste et en vignettes.",
+  "TourFindFastTitle": "Trouvez tout rapidement",
+  "TourPlacesFavorites": "{{sectionName}} — les fichiers marqués d'une étoile.",
+  "TourPlacesRecent": "{{sectionName}} — ce sur quoi vous avez travaillé dernièrement.",
+  "TourPlacesShared": "{{sectionName}} — les fichiers que d'autres ont partagés avec vous.",
+  "TourPlacesTitle": "Chaque chose à sa place",
+  "TourPlacesTrash": "{{sectionName}} — les fichiers supprimés que vous pouvez encore restaurer.",
+  "TourShare": "Survolez un fichier pour voir les actions rapides. Cliquez sur l'icône de partage pour accorder l'accès aux contacts de votre espace de travail avec différents niveaux d'autorisation — ou créez un lien externe pour toute autre personne.",
+  "TourSharedAccess": "{{sharedBy}} indique de qui provient le fichier, {{accessLevel}} indique ce que vous pouvez en faire — consulter, commenter ou modifier. Seul le propriétaire peut changer cela.",
+  "TourSharedAccessTitle": "Qui l'a partagé, et ce que vous pouvez faire",
+  "TourSharedEmpty": "Rien n'a encore été partagé avec vous. Les fichiers et dossiers apparaîtront ici dès que quelqu'un vous y donnera accès.",
+  "TourSharedEmptyTitle": "Votre liste est vide pour l'instant",
+  "TourSharedList": "Tout ce à quoi d'autres personnes vous donnent accès arrive dans {{sectionName}}. Ouvrez un fichier pour y travailler dans votre navigateur — l'original reste où il est, si bien que tout le monde voit toujours la même version.",
+  "TourSharedListTitle": "Partagés avec vous",
+  "TourShareTitle": "Partagez et collaborez"
+}

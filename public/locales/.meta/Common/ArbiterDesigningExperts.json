@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterDesigningExperts",
+  "content": "Designing your AI experts",
+  "content_en_sha1_hash": "cd0376ec2aec12db41db88369dbc1b2c4c2f303e",
+  "created_at": "2026-05-24T17:27:18.137Z",
+  "updated_at": "2026-05-24T18:56:57.102Z",
+  "comment": {
+    "text": "Title for a progress indicator header shown during the AI expert creation process.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:56:57.102Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/ChatPhase.tsx",
+      "line_number": 63,
+      "context": "function PreparingProgress({ text }: { text: string }) {\n const { t } = useTranslation([\"Common\"]);\n return (\n <div className={styles.preparing}>\n <div className={styles.preparingHeader}>\n <span className={styles.preparingTitle}>{t(\"Common:ArbiterDesigningExperts\")}</span>\n <span className={styles.preparingStage}>\n {inferPreparingStage(text, t)}\n </span>\n </div>\n <div className={styles.preparingBar} aria-hidden=\"true\">",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

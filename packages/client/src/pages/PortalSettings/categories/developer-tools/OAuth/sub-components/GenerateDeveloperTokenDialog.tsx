@@ -35,7 +35,6 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "styled-components";
 import { i18n } from "i18next";
 import { useTranslation, Trans } from "react-i18next";
 import copy from "copy-to-clipboard";
@@ -45,21 +44,22 @@ import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { InputSize, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { Link } from "@docspace/ui-kit/components/link";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
-import { StyledGenerateDevelopTokenContainer } from "../OAuth.styled";
+import styles from "../OAuth.styled.module.scss";
 
 type GenerateDeveloperTokenDialogProps = {
   client?: IClientProps;
@@ -86,7 +86,7 @@ const GenerateDeveloperTokenDialog = ({
     "Webhooks",
     "Files",
   ]);
-  const theme = useTheme();
+  const { currentColorScheme } = useTheme();
 
   const [token, setToken] = React.useState("");
   const [dates, setDates] = React.useState({
@@ -193,7 +193,7 @@ const GenerateDeveloperTokenDialog = ({
         {token ? t("Token") : t("GenerateToken")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledGenerateDevelopTokenContainer>
+        <div className={styles.styledGenerateDevelopTokenContainer}>
           {!token ? (
             <>
               <Text style={{ marginBottom: "16px" }}>
@@ -220,7 +220,7 @@ const GenerateDeveloperTokenDialog = ({
                     1: (
                       <Link
                         href={`mailto:${email}`}
-                        color={theme?.currentColorScheme?.main?.accent ?? undefined}
+                        color={currentColorScheme?.main?.accent ?? undefined}
                         dataTestId="generate_token_email_link"
                       />
                     ),
@@ -244,13 +244,13 @@ const GenerateDeveloperTokenDialog = ({
                 testId="generate_token_input"
               />
               <Text dataTestId="generate_token_dates" className="dates">
-                <strong>{t("Files:ByCreation")}</strong>: {dates.created}
+                <strong>{t("Common:ByCreation")}</strong>: {dates.created}
                 <br />
                 <strong>{t("Expires")}</strong>: {dates.expires}
               </Text>
             </>
           )}
-        </StyledGenerateDevelopTokenContainer>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -307,3 +307,4 @@ export default inject(
     };
   },
 )(observer(GenerateDeveloperTokenDialog));
+

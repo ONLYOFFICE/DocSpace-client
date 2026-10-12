@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { ContextMenuRefType } from "@docspace/ui-kit/components/context-menu";
+import { ContextMenuRefType } from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 interface MobileDetailsProps {
   ref?: React.RefObject<ContextMenuRefType | null>;

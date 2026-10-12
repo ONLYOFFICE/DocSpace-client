@@ -39,7 +39,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 
 import { getOAuthValidationCodeTranslation } from "../ClientForm.utils";
-import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
@@ -84,13 +84,13 @@ const SupportBlock = ({
   const termsError = errorFields.includes("terms_url");
 
   return (
-    <StyledBlock>
+    <div className={styles.styledBlock}>
       <BlockHeader header={t("SupportAndLegalInfo")} />
-      <StyledInputBlock>
+      <div className={styles.styledInputBlock}>
         <InputGroup
           label={t("PrivacyPolicyURL")}
           name="policy_url"
-          placeholder={t("EnterURL")}
+          placeholder={t("Common:EnterURL")}
           value={policyUrlValue}
           error={
             policyError
@@ -98,7 +98,7 @@ const SupportBlock = ({
                   t,
                   serverFieldErrors?.["policy_url"] ?? "ErrorWrongURL",
                 )
-              : t("ThisRequiredField")
+              : t("Common:ThisRequiredField")
           }
           onChange={onChange}
           helpButtonText={t("PrivacyPolicyURLHelpButton")}
@@ -111,7 +111,7 @@ const SupportBlock = ({
         <InputGroup
           label={t("TermsOfServiceURL")}
           name="terms_url"
-          placeholder={t("EnterURL")}
+          placeholder={t("Common:EnterURL")}
           value={termsUrlValue}
           error={
             termsError
@@ -119,7 +119,7 @@ const SupportBlock = ({
                   t,
                   serverFieldErrors?.["terms_url"] ?? "ErrorWrongURL",
                 )
-              : t("ThisRequiredField")
+              : t("Common:ThisRequiredField")
           }
           onChange={onChange}
           helpButtonText={t("TermsOfServiceURLHelpButton")}
@@ -129,8 +129,8 @@ const SupportBlock = ({
           onBlur={onBlur}
           dataTestId="terms_url_input_group"
         />
-      </StyledInputBlock>
-    </StyledBlock>
+      </div>
+    </div>
   );
 };
 

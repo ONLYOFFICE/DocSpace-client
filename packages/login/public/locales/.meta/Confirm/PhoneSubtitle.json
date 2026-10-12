@@ -1,20 +1,20 @@
 {
   "key_path": "PhoneSubtitle",
-  "content": "The two-factor authentication is enabled to provide additional security. Enter your mobile phone number to continue working in the {{productName}}. Mobile phone number must be entered using an international format with the country code.",
-  "content_en_sha1_hash": "278e2e7917f39bdf597e5758e552fdbe95b7626a",
-  "created_at": "2025-05-19T21:30:57.376Z",
-  "updated_at": "2026-05-15T14:00:06.910Z",
+  "content": "The two-factor authentication is enabled to provide additional security. Enter your mobile phone number to continue working in the workspace. Mobile phone number must be entered using an international format with the country code.",
+  "content_en_sha1_hash": "535ddbfef96d74495d34dd785caa3eea423e4ddf",
+  "created_at": "2026-08-13T22:44:34.284Z",
+  "updated_at": "2026-08-14T15:44:26.438Z",
   "comment": {
-    "text": "This is a paragraph of text displayed on the phone activation screen during two-factor authentication setup. It informs the user about the security benefits and instructs them to enter their mobile number in international format, using the `productName` variable to refer to the application.",
+    "text": "Instructional subtitle on the phone activation screen that explains the purpose of two-factor authentication and provides formatting instructions for the phone number input.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:30:11.048Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:44:26.438Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PhoneActivation/page.client.tsx",
-      "line_number": 64,
-      "context": "</Text>\n <Text>\n {t(\"CurrentNumber\")}: {currentNumber}\n </Text>\n <Text>\n {t(\"PhoneSubtitle\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n </div>\n \n <TextInput\n className=\"phone-input\"",
+      "line_number": 63,
+      "context": "</Text>\n <Text>\n {t(\"CurrentNumber\")}: {currentNumber}\n </Text>\n <Text>\n {t(\"PhoneSubtitle\")}\n </Text>\n </div>\n \n <TextInput\n className=\"phone-input\"",
       "module": "/packages/login"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.629887Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

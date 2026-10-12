@@ -38,21 +38,20 @@ import { isDesktop } from "react-device-detect";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";
-import { isMobile } from "@docspace/ui-kit/utils/device";
+import { isMobile } from "@onlyoffice/apps-ui-kit/utils/device";
 
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import StyledLdapPage from "./styled-components/StyledLdapPage";
+import StyledLdapPage from "./styled-containers/StyledLdapPage";
 
 import ToggleLDAP from "./sub-components/ToggleLDAP";
 import { SyncContainerSection } from "./sub-components/SyncContainer";
 import LdapMobileView from "./sub-components/LdapMobileView";
 import { SettingsContainerSection } from "./sub-components/SettingsContainer";
 import LdapLoader from "./sub-components/LdapLoader";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const LDAP = ({
 	ldapSettingsUrl,
@@ -102,7 +101,6 @@ const LDAP = ({
 					i18nKey="LdapIntegrationDescription"
 					ns="Ldap"
 					values={{
-						productName: getBrandName("ProductName"),
 						sectionName: t("Common:Contacts"),
 						link,
 					}}

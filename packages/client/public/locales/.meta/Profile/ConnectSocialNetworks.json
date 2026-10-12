@@ -1,14 +1,14 @@
 {
   "key_path": "ConnectSocialNetworks",
-  "content": "Connect your social networks",
-  "content_en_sha1_hash": "3a18b50746f026e86d03625c28c76cefe4402bb9",
-  "created_at": "2025-05-19T21:30:53.342Z",
-  "updated_at": "2026-05-15T14:00:06.879Z",
+  "content": "Connect your accounts",
+  "content_en_sha1_hash": "0907d2500d9009be6fed21c2783cd0c9578fa4ce",
+  "created_at": "2026-08-31T18:23:42.704Z",
+  "updated_at": "2026-08-31T20:09:22.326Z",
   "comment": {
-    "text": "This is a section heading on the user's profile page. It introduces a section where users can link their social media accounts to their ONLYOFFICE DocSpace profile.",
+    "text": "Section heading in the user profile that introduces the social media integration options.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:20:52.960Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:09:22.326Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

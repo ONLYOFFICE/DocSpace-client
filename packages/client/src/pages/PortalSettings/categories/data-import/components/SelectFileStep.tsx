@@ -37,110 +37,20 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
-import { isMobile, isTablet, mobile } from "@docspace/ui-kit/utils/device";
-import styled from "styled-components";
+import { isMobile, isTablet } from "@onlyoffice/apps-ui-kit/utils/device";
 
 import { WarningQuotaDialog } from "SRC_DIR/components/dialogs/WarningQuotaDialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { FileInput } from "@docspace/ui-kit/components/file-input";
-import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { FileInput } from "@onlyoffice/apps-ui-kit/components/file-input";
+import { ProgressBar } from "@onlyoffice/apps-ui-kit/components/progress-bar";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { InjectedSelectFileStepProps, SelectFileStepProps } from "../types";
 import { TMigrationStatusResult } from "@docspace/shared/api/settings/types";
-
-const Wrapper = styled.div`
-  max-width: 700px;
-  margin-top: 16px;
-
-  .choose-backup-file {
-    font-weight: 600;
-    line-height: 20px;
-    margin-bottom: 4px;
-  }
-
-  .upload-backup-input {
-    height: 32px;
-    margin-bottom: 12px;
-
-    .icon-button_svg {
-      svg {
-        path {
-          fill: ${(props) =>
-            props.theme.client.settings.migration.fileInputIconColor};
-        }
-      }
-    }
-  }
-
-  .upload-back-buttons {
-    margin-top: 16px;
-  }
-
-  .select-file-progress-text {
-    margin: 12px 0;
-  }
-
-  .select-file-progress-bar {
-    margin: 12px 0 16px;
-
-    .progress-bar_percent,
-    .progress-bar_animation {
-      background: ${(props) => props.theme.progressBar.animation.background};
-    }
-  }
-`;
-
-const FileUploadContainer = styled.div`
-  max-width: 350px;
-
-  .cancel-btn {
-    @media ${mobile} {
-      height: 40px;
-    }
-  }
-
-  .cancelUploadButton {
-    @media ${mobile} {
-      margin-bottom: 0;
-      width: auto;
-      position: fixed;
-      inset-inline: 0px;
-      bottom: 0px;
-      padding: 16px;
-      background: ${(props) =>
-        props.theme.client.settings.migration.workspaceBackground};
-      gap: 0;
-    }
-  }
-`;
-
-const ErrorBlock = styled.div`
-  max-width: 700px;
-
-  .complete-progress-bar {
-    margin: 12px 0 16px;
-    max-width: 350px;
-
-    .progress-bar_percent,
-    .progress-bar_animation {
-      background: ${(props) => props.theme.progressBar.animation.background};
-    }
-  }
-
-  .error-text {
-    font-size: 12px;
-    margin-bottom: 10px;
-    color: ${(props) => props.theme.client.settings.migration.errorTextColor};
-  }
-
-  .save-cancel-buttons {
-    margin-top: 16px;
-  }
-`;
+import styles from "../StyledDataImport.module.scss";
 
 const FAIL_TRIES = 2;
 
@@ -199,7 +109,9 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       isDefaultUsersQuotaSet ||
       isDefaultRoomsQuotaSet ||
       isTenantCustomQuotaSet;
-    setWarningQuotaDialogVisible(isQuotaWarningVisible);
+    // type-only cast — the quota flags can be undefined, which
+    // the original .js store setter stored as-is (both are falsy).
+    setWarningQuotaDialogVisible(isQuotaWarningVisible as boolean);
   }, [isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet, isTenantCustomQuotaSet]);
 
   const onClickRedirect = () => {
@@ -407,8 +319,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   }, [fileLoadingStatus, poolStatus]);
 
   return (
-    <Wrapper>
-      <FileUploadContainer>
+    <div className={styles.selectFileWrapper}>
+      <div className={styles.fileUploadContainer}>
         <Text className="choose-backup-file">
           {t("Settings:ChooseBackupFile")}
         </Text>
@@ -428,9 +340,9 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           isMultiple={migratorName === "GoogleWorkspace"}
           data-test-id="upload_backup_file_input"
         />
-      </FileUploadContainer>
+      </div>
       {fileLoadingStatus === "upload" || fileLoadingStatus === "proceed" ? (
-        <FileUploadContainer>
+        <div className={styles.fileUploadContainer}>
           <ProgressBar
             percent={progress}
             isInfiniteProgress={isInfiniteProgress}
@@ -447,9 +359,9 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               data-test-id="cancel_upload_backup_button"
             />
           </div>
-        </FileUploadContainer>
+        </div>
       ) : (
-        <ErrorBlock>
+        <div className={styles.errorBlock}>
           {isFileError ? (
             <div>
               <ProgressBar
@@ -524,7 +436,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               cancelButtonDataTestId="back_to_providers_button"
             />
           )}
-        </ErrorBlock>
+        </div>
       )}
 
       {cancelUploadDialogVisible ? (
@@ -552,7 +464,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           isTenantCustomQuotaSet={isTenantCustomQuotaSet}
         />
       ) : null}
-    </Wrapper>
+    </div>
   );
 };
 

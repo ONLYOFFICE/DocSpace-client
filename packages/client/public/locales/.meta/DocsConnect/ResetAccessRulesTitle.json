@@ -1,0 +1,29 @@
+{
+  "key_path": "ResetAccessRulesTitle",
+  "content": "Reset access rules",
+  "content_en_sha1_hash": "230c554c9889400524b10c91db9b0679e5d4633b",
+  "created_at": "2026-07-30T16:14:09.729Z",
+  "updated_at": "2026-07-30T16:17:20.252Z",
+  "comment": {
+    "text": "Dialog title for a confirmation modal used to reset access rules within the DocsConnect settings.",
+    "is_auto": true,
+    "updated_at": "2026-07-30T16:17:20.252Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/ResetRulesDialog.tsx",
+      "line_number": 66,
+      "context": "displayType={ModalDialogType.modal}\n onClose={onClose}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {t(\"DocsConnect:ResetAccessRulesTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">{t(\"DocsConnect:ResetAccessRulesWarning\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -45,7 +45,7 @@ import StatisticsComponent from "./Statistics";
 import DiskSpaceUsedComponent from "./StorageSpaceUsed";
 import MainInfoComponent from "./MainInfo";
 import RegionComponent from "./Region";
-import { StyledBody } from "./StyledComponent";
+import styles from "./StyledComponent.module.scss";
 import StyledSettingsSeparator from "../../StyledSettingsSeparator";
 
 const StorageManagementWrapper = (props) => {
@@ -70,7 +70,7 @@ const StorageManagementWrapper = (props) => {
   if (showPortalSettingsLoader) return <SettingsStorageManagementSkeleton />;
 
   return (
-    <StyledBody>
+    <div className={styles.body}>
       <MainInfoComponent />
       {!standalone ? <RegionComponent /> : null}
       <StyledSettingsSeparator />
@@ -79,7 +79,7 @@ const StorageManagementWrapper = (props) => {
       <QuotasComponent />
       <StyledSettingsSeparator />
       <StatisticsComponent />
-    </StyledBody>
+    </div>
   );
 };
 

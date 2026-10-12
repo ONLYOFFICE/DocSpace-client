@@ -37,10 +37,10 @@ import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 import { useLocation, Outlet } from "react-router";
-import Section from "@docspace/ui-kit/components/section";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
+import Section from "@onlyoffice/apps-ui-kit/components/section";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { isPublicRoom } from "@docspace/shared/utils/common";
 
@@ -52,7 +52,6 @@ import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
 import { usePublic, useSDK } from "../Home/Hooks";
 import styles from "./PublicRoom.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PUBLIC_SIGN_IN_TOAST = "showPublicSignInToast";
 
@@ -76,15 +75,17 @@ const PublicRoomPage = (props) => {
     secondaryOperationsCompleted,
     clearSecondaryProgressData,
     secondaryActiveOperations,
+    secondaryOperationsStopped,
     secondaryOperationsAlert,
     onOpenSignInWindow,
     windowIsOpen,
     isAuthenticated,
+    culture,
   } = props;
 
   const location = useLocation();
 
-  const { t, ready } = useTranslation(["Common"]);
+  const { t, i18n, ready } = useTranslation(["Common"]);
 
   useSDK({ frameConfig, setFrameConfig, isLoading });
 
@@ -112,11 +113,25 @@ const PublicRoomPage = (props) => {
     }
   };
 
+  // Anonymous visits boot i18n in the browser language and only switch to the
+  // portal culture once settings arrive (AuthStore.init). The toast below is a
+  // one-shot snapshot handed to toastr, so building it before that switch
+  // lands leaves it in the browser language for good, while the rest of the
+  // page re-renders in the portal culture.
+  const isPortalCultureApplied = !culture || i18n.language === culture;
+
   useEffect(() => {
     const toastIsDisabled =
       sessionStorage.getItem(PUBLIC_SIGN_IN_TOAST) === access?.toString();
 
-    if (!access || !ready || toastIsDisabled || isFrame || isAuthenticated)
+    if (
+      !access ||
+      !ready ||
+      !isPortalCultureApplied ||
+      toastIsDisabled ||
+      isFrame ||
+      isAuthenticated
+    )
       return;
 
     const roomMode = getAccessTranslation().toLowerCase();
@@ -128,11 +143,11 @@ const PublicRoomPage = (props) => {
         t={t}
         ns="Common"
         i18nKey="PublicAuthorizeToast"
-        values={{ roomMode, productName: getBrandName("ProductName") }}
+        values={{ roomMode }}
         components={{
           1: (
             <Text
-              key="productName"
+              key="roomMode"
               as="span"
               fontSize="12px"
               fontWeight={700}
@@ -159,13 +174,21 @@ const PublicRoomPage = (props) => {
     );
 
     toastr.info(toastText);
-  }, [access, ready, roomType, parentRoomType, isAuthenticated]);
+  }, [
+    access,
+    ready,
+    isPortalCultureApplied,
+    roomType,
+    parentRoomType,
+    isAuthenticated,
+  ]);
 
   const sectionProps = {
     isSecondaryProgressVisbile,
     secondaryOperationsCompleted,
     clearSecondaryProgressData,
     secondaryActiveOperations,
+    secondaryOperationsStopped,
     secondaryOperationsAlert,
   };
 
@@ -220,7 +243,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
   }) => {
-    const { frameConfig, setFrameConfig, isFrame } = settingsStore;
+    const { frameConfig, setFrameConfig, isFrame, culture } = settingsStore;
     const {
       isLoaded,
       roomStatus,
@@ -240,6 +263,7 @@ export default inject(
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
       secondaryActiveOperations,
+      secondaryOperationsStopped,
       secondaryOperationsAlert,
     } = uploadDataStore.secondaryProgressDataStore;
 
@@ -260,6 +284,7 @@ export default inject(
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
       secondaryActiveOperations,
+      secondaryOperationsStopped,
       secondaryOperationsAlert,
 
       isAuthenticated,
@@ -270,6 +295,7 @@ export default inject(
       frameConfig,
       setFrameConfig,
       isFrame,
+      culture,
       access,
       roomType,
       parentRoomType,

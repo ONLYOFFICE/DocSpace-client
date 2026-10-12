@@ -34,34 +34,59 @@
  */
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
-import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
+import type RoomsFilter from "@docspace/shared/api/rooms/filter";
+import type { TAIConfig, TGetAgents } from "@docspace/shared/api/ai/types";
 import { logger } from "@/../logger.mjs";
 
-export async function getDefaultProvider(): Promise<
-  TDefaultProvider | undefined
-> {
-  logger.debug("Start GET /ai/providers/default");
+export async function getAIAgents(
+  filter: RoomsFilter,
+): Promise<TGetAgents | undefined> {
+  // Node AI service: returns the DocSpace envelope for /ai/agents and
+  // injects profile bindings; product (ai-agents) reads agents from here.
+  const path = `/ai/agents?${filter.toApiUrlParams()}`;
+  logger.debug(`Start GET ${path}`);
 
   try {
-    const [req] = await createRequest(
-      ["/ai/providers/default"],
-      [["", ""]],
-      "GET",
-    );
+    const [req] = await createRequest([path], [["", ""]], "GET");
     const res = await fetch(req, {
-      next: { revalidate: 900 },
+      // List of agents is user-specific and mutates from anywhere — don't
+      // cache. Same posture as the client-side fetchAgents (no revalidate).
+      cache: "no-store",
       signal: AbortSignal.timeout(8000),
     });
 
     if (!res.ok) {
-      logger.error(`GET /ai/providers/default failed: ${res.status}`);
+      logger.error(`GET ${path} failed: ${res.status}`);
       return;
     }
 
     const json = await res.json();
-
-    return json.response as TDefaultProvider;
+    return json.response as TGetAgents;
   } catch (error) {
-    logger.error(`Error in getDefaultProvider: ${error}`);
+    logger.error(`Error in getAIAgents: ${error}`);
+  }
+}
+
+export async function getAIConfig(): Promise<TAIConfig | undefined> {
+  logger.debug("Start GET /ai/config");
+
+  try {
+    const [req] = await createRequest(["/ai/config"], [["", ""]], "GET");
+    const res = await fetch(req, {
+      // Provider/AI portal config can flip via socket `change-ai-config` —
+      // a short revalidate keeps SSR fresh while still saving most hits.
+      next: { revalidate: 60 },
+      signal: AbortSignal.timeout(8000),
+    });
+
+    if (!res.ok) {
+      logger.error(`GET /ai/config failed: ${res.status}`);
+      return;
+    }
+
+    const json = await res.json();
+    return json.response as TAIConfig;
+  } catch (error) {
+    logger.error(`Error in getAIConfig: ${error}`);
   }
 }

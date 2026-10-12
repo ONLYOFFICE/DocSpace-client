@@ -1,0 +1,29 @@
+{
+  "key_path": "OverviewFindATemplateFromTheLibrary",
+  "content": "Find a template from the library",
+  "content_en_sha1_hash": "8db92cc9893721ad4fe37e7a14f3f0c545a72155",
+  "created_at": "2026-08-05T16:31:58.703Z",
+  "updated_at": "2026-08-05T17:10:14.818Z",
+  "comment": {
+    "text": "Label for an AI suggestion item describing the action of searching for a template within the library.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:10:14.818Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 235,
+      "context": "{\n name: t(\"AiSuggestions:OverviewPrepareADocumentForPDF\"),\n prompt: t(\"AiSuggestions:OverviewPrepareADocumentForPDFPrompt\"),\n },\n {\n name: t(\"AiSuggestions:OverviewFindATemplateFromTheLibrary\"),\n prompt: t(\"AiSuggestions:OverviewFindATemplateFromTheLibraryPrompt\"),\n },\n ],\n \n // +",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

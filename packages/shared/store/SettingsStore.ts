@@ -36,20 +36,21 @@
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 
+import { connectFrameSocket } from "../utils/oauthFrameSocket";
 import SocketHelper, {
   SocketCommands,
   SocketCommandsRoomParts,
   SocketEvents,
-} from "@docspace/ui-kit/utils/socket";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   Base,
   Dark,
   type TColorScheme,
-} from "@docspace/ui-kit/providers/theme";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+} from "@onlyoffice/apps-ui-kit/providers/theme";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
+import { getCookie, setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { getSystemTheme } from "@onlyoffice/apps-ui-kit/utils/get-system-theme";
 
 import api from "../api";
 import type { TAIConfig } from "../api/ai/types";
@@ -88,12 +89,13 @@ import { version } from "../package.json";
 import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
 
 import type { Nullable } from "../types";
-import type { TFrameConfig } from "../types/Frame";
+import type { TFrameConfig, TFrameCustomActions } from "../types/Frame";
 
 import { size as deviceSize, getDeviceTypeByWidth, isTablet } from "../utils";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import {
   frameCallEvent,
+  getFrameInitialTheme,
   getShowText,
   insertDataLayer,
   insertTagManager,
@@ -103,6 +105,7 @@ import {
 } from "../utils/common";
 import { applyCustomStyles } from "../utils/customStyles";
 import FirebaseHelper from "../utils/firebase";
+import { claimPortalNotFoundRedirect } from "../utils/portalNotFound";
 
 const themes = {
   Dark,
@@ -111,6 +114,11 @@ const themes = {
 
 const isDesktopEditors = window.AscDesktopEditor !== undefined;
 const systemTheme = getSystemTheme();
+const frameInitialTheme = getFrameInitialTheme();
+const initialTheme =
+  frameInitialTheme && frameInitialTheme !== ThemeKeys.SystemStr
+    ? (frameInitialTheme as ThemeKeys.BaseStr | ThemeKeys.DarkStr)
+    : systemTheme;
 
 class SettingsStore {
   isFirstLoaded = false;
@@ -135,7 +143,7 @@ class SettingsStore {
 
   cultures: string[] = [];
 
-  theme = themes[systemTheme];
+  theme = themes[initialTheme];
 
   trustedDomains: string[] = [];
 
@@ -159,7 +167,7 @@ class SettingsStore {
 
   utcHoursOffset = 0;
 
-  defaultFolderType = FolderType.Rooms;
+  defaultFolderType = FolderType.DEFAULT;
 
   homepage = "";
 
@@ -190,7 +198,6 @@ class SettingsStore {
     domain: "",
     uploadPath: "",
     uploadDomain: "",
-    uploadDashboard: "",
   };
 
   logoUrl: Nullable<ILogo> = null;
@@ -202,7 +209,7 @@ class SettingsStore {
   // isDesktopEncryption: desktopEncryption;
   isEncryptionSupport = false;
 
-  encryptionKeys: { [key: string]: string | boolean } = {};
+  legacyEncryptionKeys: { [key: string]: string | boolean } = {};
 
   roomsMode = false;
 
@@ -272,6 +279,8 @@ class SettingsStore {
   hotkeyPanelVisible = false;
 
   frameConfig: Nullable<TFrameConfig> = null;
+
+  frameCustomActions: Nullable<TFrameCustomActions> = null;
 
   appearanceTheme: TColorScheme[] = [];
 
@@ -365,6 +374,13 @@ class SettingsStore {
 
   aiConfig: Nullable<TAIConfig> = null;
 
+  /** Comes from the settings response, so a missed socket event is recovered. */
+  walletLowBalance = false;
+
+  setWalletLowBalance = (walletLowBalance: boolean) => {
+    this.walletLowBalance = walletLowBalance;
+  };
+
   externalDbEnabled: boolean = false;
 
   constructor() {
@@ -434,6 +450,14 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  /**
+   * Admin panel of the editors, shown in the profile menu of a server
+   * (standalone) installation. Absent on backends that do not publish it yet.
+   */
+  get docsAdminPanelUrl() {
+    return this.externalResources?.adminPanel?.domain;
+  }
+
   get apiDomain() {
     return this.externalResources?.api?.domain;
   }
@@ -448,6 +472,10 @@ class SettingsStore {
 
   get siteEntries() {
     return this.externalResources?.site?.entries;
+  }
+
+  get integrationsEntries() {
+    return this.externalResources?.integrations?.entries;
   }
 
   get feedbackAndSupportUrl() {
@@ -788,9 +816,21 @@ class SettingsStore {
       : this.apiDomain;
   }
 
+  get docsConnectUrl() {
+    return this.apiDomain && this.apiEntries?.["docs-connect"]
+      ? `${this.apiDomain}${this.apiEntries["docs-connect"]}`
+      : this.apiDomain;
+  }
+
   get forEnterprisesUrl() {
     return this.siteDomain && this.siteEntries?.forenterprises
       ? `${this.siteDomain}${this.siteEntries.forenterprises}`
+      : this.siteDomain;
+  }
+
+  get docspacePricesUrl() {
+    return this.siteDomain && this.siteEntries?.docspaceprices
+      ? `${this.siteDomain}${this.siteEntries.docspaceprices}`
       : this.siteDomain;
   }
 
@@ -818,21 +858,39 @@ class SettingsStore {
       : this.siteDomain;
   }
 
-  get zoomUrl() {
-    return this.siteDomain && this.siteEntries?.officeforzoom
-      ? `${this.siteDomain}${this.siteEntries.officeforzoom}`
+  get nextcloudUrl() {
+    return this.siteDomain && this.siteEntries?.nextcloud
+      ? `${this.siteDomain}${this.siteEntries.nextcloud}`
       : this.siteDomain;
   }
 
-  get wordPressUrl() {
-    return this.siteDomain && this.siteEntries?.officeforwordpress
-      ? `${this.siteDomain}${this.siteEntries.officeforwordpress}`
+  get owncloudUrl() {
+    return this.siteDomain && this.siteEntries?.owncloud
+      ? `${this.siteDomain}${this.siteEntries.owncloud}`
       : this.siteDomain;
   }
 
-  get drupalUrl() {
-    return this.siteDomain && this.siteEntries?.officefordrupal
-      ? `${this.siteDomain}${this.siteEntries.officefordrupal}`
+  get confluenceUrl() {
+    return this.siteDomain && this.siteEntries?.confluence
+      ? `${this.siteDomain}${this.siteEntries.confluence}`
+      : this.siteDomain;
+  }
+
+  get alfrescoUrl() {
+    return this.siteDomain && this.siteEntries?.alfresco
+      ? `${this.siteDomain}${this.siteEntries.alfresco}`
+      : this.siteDomain;
+  }
+
+  get moodleUrl() {
+    return this.siteDomain && this.siteEntries?.moodle
+      ? `${this.siteDomain}${this.siteEntries.moodle}`
+      : this.siteDomain;
+  }
+
+  get odooUrl() {
+    return this.siteDomain && this.siteEntries?.odoo
+      ? `${this.siteDomain}${this.siteEntries.odoo}`
       : this.siteDomain;
   }
 
@@ -1045,6 +1103,12 @@ class SettingsStore {
         const url = new URL(wrongportalname);
         url.searchParams.append("url", window.location.hostname);
         url.searchParams.append("ref", window.location.href);
+
+        // Claim the navigation before it starts: PrivateRoute and the request
+        // layer both react to the same deletion by redirecting to the login
+        // page, which would cancel it.
+        claimPortalNotFoundRedirect();
+
         return window.location.replace(url);
       }
 
@@ -1147,7 +1211,7 @@ class SettingsStore {
   };
 
   setCultures = (cultures: string[]) => {
-    this.cultures = cultures;
+    this.cultures = cultures ?? [];
   };
 
   setAdditionalResourcesData = (data: TAdditionalResources) => {
@@ -1193,15 +1257,17 @@ class SettingsStore {
     this.setIsEncryptionSupport(isEncryptionSupport);
   };
 
-  updateEncryptionKeys = (encryptionKeys: {
+  updateLegacyEncryptionKeys = (encryptionKeys: {
     [key: string]: string | boolean;
   }) => {
-    this.encryptionKeys = encryptionKeys ?? {};
+    this.legacyEncryptionKeys = encryptionKeys ?? {};
   };
 
-  setEncryptionKeys = async (keys: { [key: string]: string | boolean }) => {
+  setLegacyEncryptionKeys = async (keys: {
+    [key: string]: string | boolean;
+  }) => {
     await api.files.setEncryptionKeys(keys);
-    this.updateEncryptionKeys(keys);
+    this.updateLegacyEncryptionKeys(keys);
   };
 
   setCompanyInfoSettingsData = (data: TCompanyInfo) => {
@@ -1271,9 +1337,9 @@ class SettingsStore {
     await this.getAllPortals();
   };
 
-  getEncryptionKeys = async () => {
+  getLegacyEncryptionKeys = async () => {
     const encryptionKeys = await api.files.getEncryptionKeys();
-    this.updateEncryptionKeys(encryptionKeys);
+    this.updateLegacyEncryptionKeys(encryptionKeys);
   };
 
   setModuleInfo = (homepage: string, productId: string) => {
@@ -1363,7 +1429,7 @@ class SettingsStore {
   };
 
   setTimezones = (timezones: TTimeZone[]) => {
-    this.timezones = timezones;
+    this.timezones = timezones ?? [];
   };
 
   getPortalTimezones = async (token = undefined) => {
@@ -1427,7 +1493,7 @@ class SettingsStore {
     const socketUrl =
       isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
 
-    SocketHelper?.connect(socketUrl, this.publicRoomKey);
+    void connectFrameSocket(socketUrl, this.publicRoomKey);
   };
 
   setPublicRoomKey = (key: string) => {
@@ -1435,7 +1501,7 @@ class SettingsStore {
 
     const socketUrl = isPublicRoom() && !key ? "" : this.socketUrl;
 
-    SocketHelper?.connect(socketUrl, key);
+    void connectFrameSocket(socketUrl, key);
   };
 
   getBuildVersionInfo = async () => {
@@ -1625,9 +1691,14 @@ class SettingsStore {
     this.hotkeyPanelVisible = hotkeyPanelVisible;
   };
 
+  setFrameCustomActions = (actions: Nullable<TFrameCustomActions>) => {
+    this.frameCustomActions = actions ?? null;
+  };
+
   setFrameConfig = async (frameConfig: TFrameConfig) => {
     runInAction(() => {
       this.frameConfig = frameConfig;
+      this.frameCustomActions = frameConfig?.customActions ?? null;
     });
 
     applyCustomStyles(frameConfig?.stylesUrl);
@@ -1685,7 +1756,10 @@ class SettingsStore {
     this.setAIConfig(res);
   };
 
-  setAIConfig = (config: TAIConfig) => {
+  // `null` is accepted so a caller that borrowed the config can hand back
+  // exactly what it found, including "nothing was loaded yet" — the field's own
+  // starting value, and the one state a non-null setter could not restore.
+  setAIConfig = (config: Nullable<TAIConfig>) => {
     this.aiConfig = config;
   };
 

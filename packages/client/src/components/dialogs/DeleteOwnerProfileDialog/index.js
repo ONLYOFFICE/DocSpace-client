@@ -37,11 +37,10 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { withTranslation } from "react-i18next";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 class DeleteOwnerProfileDialogComponent extends React.Component {
   onClick = () => {
@@ -60,15 +59,13 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
         <ModalDialog.Header>{t("DeleteProfileTitle")}</ModalDialog.Header>
         <ModalDialog.Body>
           <Text fontSize="13px">
-            {t("DeleteOwnerRestrictionText", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("DeleteOwnerRestrictionText")}
           </Text>
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button
             key="OwnerChangeBtn"
-            label={t("Translations:OwnerChange")}
+            label={t("Common:OwnerChange")}
             size="normal"
             scale
             primary

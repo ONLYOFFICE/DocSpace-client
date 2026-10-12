@@ -56,6 +56,7 @@ const mockRoomGroups = [
   {
     id: "group-1",
     name: "Marketing",
+    searchArea: "Active",
     totalRooms: 3,
     icon: {
       id: "folder",
@@ -125,6 +126,7 @@ const mockRoomGroups = [
   {
     id: "group-2",
     name: "Engineering",
+    searchArea: "Active",
     totalRooms: 2,
     icon: {
       id: "folder",
@@ -173,16 +175,55 @@ const mockRoomGroups = [
       },
     ],
   },
+  {
+    id: "group-3",
+    name: "Onboarding",
+    searchArea: "Forms",
+    totalRooms: 1,
+    icon: {
+      id: "folder",
+      data: {
+        small: FOLDER_ICON_SVG_SMALL,
+        medium: FOLDER_ICON_SVG_MEDIUM,
+        default: FOLDER_ICON_SVG,
+      },
+    },
+    rooms: [
+      {
+        id: 301,
+        title: "Onboarding Space 1",
+        roomType: 1,
+        logo: mockRoomLogo,
+        shared: false,
+        parentId: 2002,
+        filesCount: 0,
+        foldersCount: 0,
+        rootFolderType: 14,
+        security: { Read: true },
+        tags: [],
+        pinned: false,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        inRoom: true,
+      },
+    ],
+  },
 ];
 
 const emptyRoomGroups: typeof mockRoomGroups = [];
 
 export const roomGroupsHandler = (port: string, withGroups: boolean = true) => {
-  const groups = withGroups ? mockRoomGroups : emptyRoomGroups;
-
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ROOM_GROUPS}`,
-    () => {
+    ({ request }) => {
+      const searchArea =
+        new URL(request.url).searchParams.get("searchArea") || "Active";
+
+      const groups = withGroups
+        ? mockRoomGroups.filter((group) => group.searchArea === searchArea)
+        : emptyRoomGroups;
+
       return new Response(
         JSON.stringify({
           response: groups,

@@ -36,13 +36,19 @@ import { makeAutoObservable, when } from "mobx";
 import isEqual from "lodash/isEqual";
 import { TFunction } from "i18next";
 
-import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
+import { OPERATIONS_NAME } from "@onlyoffice/apps-ui-kit/constants";
 
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { AnalyticsEvents, FolderType, RoomsType } from "@docspace/shared/enums";
+import { createFile } from "@docspace/shared/api/files";
+import {
+  AnalyticsEvents,
+  FolderType,
+  RoomsType,
+  RoomsTypePrivate,
+} from "@docspace/shared/enums";
 import { CategoryType } from "@docspace/shared/constants";
 import {
   createTemplate,
@@ -55,19 +61,21 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable } from "@docspace/shared/types";
 import { TRoomIconParams, TRoomParams } from "@docspace/shared/utils/rooms";
 import { TRoom, TWatermark } from "@docspace/shared/api/rooms/types";
-import { addServersForRoom } from "@docspace/shared/api/ai";
+import { addEntityMcpServer } from "@docspace/shared/api/ai";
 import { startDbSync } from "@docspace/shared/api/rooms";
 import { DbSyncService } from "@docspace/shared/services/db-sync.service";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
+import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import FilesStore from "./FilesStore";
+import type { TActionItem } from "./FilesActionsStore";
 import ClientLoadingStore from "./ClientLoadingStore";
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 import DialogsStore from "./DialogsStore";
 import FilesActionsStore from "./FilesActionsStore";
+import type OformsStore from "./OformsStore";
 import SelectedFolderStore from "./SelectedFolderStore";
 import TagsStore from "./TagsStore";
 import { ThirdPartyStore } from "./ThirdPartyStore";
@@ -107,6 +115,7 @@ class CreateEditRoomStore {
     public clientLoadingStore: ClientLoadingStore,
     public dialogsStore: DialogsStore,
     public avatarEditorDialogStore: AvatarEditorDialogStore,
+    public oformsStore: OformsStore,
   ) {
     makeAutoObservable(this);
   }
@@ -413,21 +422,13 @@ class CreateEditRoomStore {
 
     setRoomCreated(true);
 
-    const {
-      title,
-      icon,
-      tags,
-      invitations,
-      roomType,
-      isAvailable,
-      quota,
-      logo,
-    } = roomParams;
+    const { title, icon, tags, invitations, isAvailable, quota, logo } =
+      roomParams;
 
     const logoCover = cover
       ? {
-          cover: (cover as { cover: object }).cover,
-          color: (cover as { color: string }).color,
+          cover: cover.cover,
+          color: cover.color,
         }
       : logo
         ? {
@@ -519,7 +520,7 @@ class CreateEditRoomStore {
       await this.onOpenNewRoom({
         id: progressData.templateId,
         title,
-        roomType,
+        roomType: item.roomType,
         rootFolderType: FolderType.RoomTemplates,
       } as unknown as TRoom);
     }
@@ -580,6 +581,7 @@ class CreateEditRoomStore {
       prompt,
       providerId,
       modelId,
+      isPrivate,
       saveFormAsXLSX,
       sendFormToExternalDB,
     } = roomParams;
@@ -595,8 +597,8 @@ class CreateEditRoomStore {
 
     const logoCover = cover
       ? {
-          cover: (cover as { cover: object }).cover,
-          color: (cover as { color: string }).color,
+          cover: cover.cover,
+          color: cover.color,
         }
       : logo
         ? {
@@ -604,9 +606,34 @@ class CreateEditRoomStore {
             color: (logo as { color: string }).color,
           }
         : null;
+
+    // RoomsTypePrivate (13) is a client-only virtual type for UI.
+    // Server expects CustomRoom (5) with private: true flag.
+    const isPrivateRoom = isPrivate || type === RoomsTypePrivate;
+    const serverRoomType = isPrivateRoom ? RoomsType.CustomRoom : type;
+
+    if (isPrivateRoom) {
+      const userStore = this.filesStore!.userStore;
+      let keys = userStore?.encryptionKeys;
+
+      if (!keys || keys.length === 0) {
+        try {
+          keys = (await userStore?.getEncryptionKeys?.()) ?? null;
+        } catch {
+          keys = null;
+        }
+      }
+
+      if (!keys || keys.length === 0) {
+        toastr.error(t("Common:EncryptionKeysRequiredForPrivateRoom"));
+        return;
+      }
+    }
+
     const createRoomData = {
       roomId,
-      roomType: type,
+      roomType: serverRoomType,
+      private: isPrivateRoom,
       title: title || t("Common:NewRoom"),
       ...(isThirdPartyRoom && {
         createAsNewFolder: createAsNewFolder ?? true,
@@ -687,7 +714,13 @@ class CreateEditRoomStore {
         );
 
       if (roomParams.mcpServers) {
-        addServersForRoom(room.id, roomParams.mcpServers);
+        // Servers are keyed by name in the chat-lib model; the service
+        // resolves the stored config (system or portal-level copy) itself.
+        Promise.all(
+          roomParams.mcpServers.map((name) =>
+            addEntityMcpServer(name, String(room.id)),
+          ),
+        ).catch((err) => console.error(err));
       }
 
       if (processCreatingRoomFromData) {
@@ -698,10 +731,20 @@ class CreateEditRoomStore {
               ? [bufferSelection]
               : [];
 
-        preparingDataForCopyingToRoom(room.id, selections, room).catch(
-          (error) => console.error(error),
-        );
+        // selections are FilesStore view-model items (TItem);
+        // FilesActionsStore still types this input with its own minimal
+        // TActionItem — erased cast (type-only).
+        preparingDataForCopyingToRoom(
+          room.id,
+          selections as unknown as TActionItem[],
+          room,
+        ).catch((error) => console.error(error));
       }
+
+      // Forms-root gallery flow: materialize the picked template inside the
+      // room. Awaited before navigating so the room's first listing already
+      // contains the form, rather than racing the route's own fetch.
+      await this.createFormFromTemplate(room);
 
       await this.onOpenNewRoom(room);
 
@@ -776,6 +819,28 @@ class CreateEditRoomStore {
     };
   };
 
+  // Creates the form a Forms-root gallery pick selected, inside the room that
+  // was just created to hold it. Nothing was requested when the template was
+  // picked, so this is the only call the flow makes for the form itself.
+  createFormFromTemplate = async (room: TRoom) => {
+    const { formTemplateForNewRoom, setFormTemplateForNewRoom } =
+      this.oformsStore;
+
+    if (!formTemplateForNewRoom) return;
+
+    const { id, title, extension } = formTemplateForNewRoom;
+
+    // Consumed up front, so a failure here cannot leak into the next room the
+    // user creates.
+    setFormTemplateForNewRoom(null);
+
+    try {
+      await createFile(room.id, `${title}.${extension}`, undefined, id);
+    } catch (error) {
+      toastr.error(error as string);
+    }
+  };
+
   onOpenNewRoom = async (room: TRoom) => {
     const { setIsSectionBodyLoading } = this.clientLoadingStore!;
     const { setSelection, selectedFolderStore } = this.filesStore!;
@@ -794,7 +859,11 @@ class CreateEditRoomStore {
 
     setIsSectionBodyLoading(true);
 
-    const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
+    const isFormRoom = room.roomType === RoomsType.FormRoom;
+    const path = getCategoryUrl(
+      isFormRoom ? CategoryType.Form : CategoryType.SharedRoom,
+      room.id,
+    );
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 
@@ -886,3 +955,4 @@ class CreateEditRoomStore {
 }
 
 export default CreateEditRoomStore;
+

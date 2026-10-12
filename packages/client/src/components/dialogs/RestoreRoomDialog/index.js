@@ -34,9 +34,9 @@
  */
 
 import { useEffect } from "react";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RoomsType } from "@docspace/shared/enums";
@@ -85,15 +85,15 @@ const RestoreRoomDialogComponent = (props) => {
   const getDescription = () => {
     if (hasPublicRoom) {
       return items.length > 1
-        ? t("Files:WantToRestoreTheRooms")
-        : t("Files:WantToRestoreTheRoom");
+        ? t("Common:WantToRestoreTheRooms")
+        : t("Common:WantToRestoreTheRoom");
     }
 
-    if (restoreAll) return t("ArchiveDialog:RestoreAllRooms");
+    if (restoreAll) return t("Common:RestoreAllRooms");
 
     return items.length > 1
-      ? t("ArchiveDialog:RestoreRooms")
-      : t("ArchiveDialog:RestoreRoom");
+      ? t("Common:RestoreRooms")
+      : t("Common:RestoreRoom");
   };
 
   const description = getDescription();
@@ -134,7 +134,7 @@ const RestoreRoomDialogComponent = (props) => {
   );
 };
 
-const RestoreRoomDialog = withTranslation(["Files", "ArchiveDialog", "Common"])(
+const RestoreRoomDialog = withTranslation(["Files", "Common"])(
   RestoreRoomDialogComponent,
 );
 
@@ -172,3 +172,4 @@ export default inject(
     };
   },
 )(observer(RestoreRoomDialog));
+

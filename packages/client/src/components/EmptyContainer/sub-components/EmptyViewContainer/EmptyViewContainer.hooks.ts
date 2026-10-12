@@ -33,27 +33,36 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useMemo, useCallback } from "react";
-import { useNavigate, LinkProps } from "react-router";
+import { useMemo, useCallback, useRef } from "react";
+import { useNavigate, useLocation, LinkProps } from "react-router";
+import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 import { isMobile } from "react-device-detect";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
+import { useStores as useAiChatStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import {
   Events,
   FileExtensions,
   FilesSelectorFilterTypes,
   FilterType,
+  FolderType,
   RoomSearchArea,
   RoomsType,
+  SearchArea,
 } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import type { TTranslation } from "@docspace/shared/types";
 import { CategoryType } from "@docspace/shared/constants";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
+import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
+import { AI_SETTINGS_URL } from "SRC_DIR/helpers/constants";
 
 import {
   getDescription,
@@ -61,6 +70,7 @@ import {
   getOptions,
   getTitle,
 } from "./EmptyViewContainer.helpers";
+import { isFormsSectionScope } from "./EmptyViewContainer.utils";
 
 import type {
   CreateEvent,
@@ -87,11 +97,22 @@ export const useEmptyView = (
     isPortalAdmin,
     aiReady,
     standalone,
+    isCardLinkedToPortal,
+    filterFolderType,
+    roomsFilterSearchArea,
   }: EmptyViewContainerProps,
 
   t: TTranslation,
 ) => {
   const { isBase } = useTheme();
+
+  const hasAiProfiles = useHasAiProfiles();
+  const isAiReady = standalone ? hasAiProfiles : aiReady;
+
+  const isFormsScope =
+    rootFolderType === FolderType.RoomTemplates
+      ? roomsFilterSearchArea === RoomSearchArea.FormTemplates
+      : isFormsSectionScope(filterFolderType);
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -114,9 +135,11 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
-      aiReady,
+      isAiReady,
       standalone,
       isPortalAdmin,
+      isFormsScope,
+      filterFolderType,
     );
     const title = getTitle(
       type,
@@ -132,9 +155,10 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
-      aiReady,
+      isAiReady,
       standalone,
       isPortalAdmin,
+      isFormsScope,
     );
     const icon = getIcon(
       type,
@@ -147,6 +171,8 @@ export const useEmptyView = (
       rootFolderType,
       security,
       isResultsTab,
+      isKnowledgeTab,
+      isAIRoom,
     );
 
     return { description, title, icon };
@@ -165,6 +191,11 @@ export const useEmptyView = (
     isAIRoom,
     isKnowledgeTab,
     isResultsTab,
+    isAiReady,
+    standalone,
+    isPortalAdmin,
+    isFormsScope,
+    filterFolderType,
   ]);
 
   return emptyViewOptions;
@@ -208,10 +239,62 @@ export const useOptions = (
     standalone,
     isPortalAdmin,
     isGracePeriod,
+    knowledgeId,
+    startUpload,
+    createFoldersTree,
+    isCardLinkedToPortal,
+    enableAIService,
+    getAIConfig,
+    refreshCurrentFolder,
+    refreshPaymentInfo,
+    templateGalleryAvailable,
+    onShowTemplateGallery,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const getTrashSection = () => {
+    if (pathname.includes("/ai-agents/trash")) return "agents";
+    if (pathname.includes("/forms/trash")) return "forms";
+    if (pathname.includes("/rooms/trash")) return "rooms";
+    return "personal";
+  };
+
+  const trashSectionRef = useRef<"personal" | "rooms" | "forms" | "agents">(
+    "personal",
+  );
+  if (pathname.includes("/trash")) trashSectionRef.current = getTrashSection();
+  const trashSection = trashSectionRef.current;
+
+  const hasAiProfiles = useHasAiProfiles();
+  const isAiReady = standalone ? hasAiProfiles : aiReady;
+
+  const onOpenAiChat = useOpenAiChat();
+  const isAiChatAvailable = useIsAiChatAvailable();
+
+  // `useThreadsStore` / `useRouter` are Zustand stores (callable as hooks
+  // elsewhere); here only their imperative `.getState()` API is needed, so the
+  // `use` prefix is aliased away to avoid implying a hook call in a callback.
+  const { useThreadsStore: threadsStore, useRouter: chatRouterStore } =
+    useAiChatStores();
+
+  // The agent room's chat tab keeps the thread from the previous visit, so
+  // reset it before navigating — the Results tab option must always land on a
+  // fresh conversation.
+  const onStartNewChat = useCallback(() => {
+    threadsStore.getState().onSwitchToNewThread();
+    chatRouterStore.getState().setCurrentPage("chat");
+
+    const filesFilter = FilesFilter.getFilter(window.location);
+
+    filesFilter.searchArea = SearchArea.Any;
+
+    const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);
+
+    navigate(`${path}?${filesFilter.toUrlParams()}`);
+  }, [threadsStore, chatRouterStore, navigate]);
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -239,13 +322,58 @@ export const useOptions = (
     };
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
 
+  const onGoToForms = useCallback((): LinkProps => {
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);
+    newFilter.searchArea = RoomSearchArea.Forms;
+
+    return {
+      to: {
+        pathname: "/forms/filter",
+        search: newFilter.toUrlParams(userId, false),
+      },
+    };
+  }, [userId]);
+
+  const onGoToAgents = useCallback((): LinkProps => {
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents);
+    newFilter.searchArea = RoomSearchArea.AIAgents;
+
+    return {
+      to: {
+        pathname: getCategoryUrl(CategoryType.AIAgents),
+        search: newFilter.toUrlParams(userId, false),
+      },
+    };
+  }, [userId]);
+
   const onGoToServices = useCallback(() => {
     return navigate("/portal-settings/payments/services");
   }, []);
 
   const onGoToAIProviderSettings = useCallback(() => {
-    return navigate("/portal-settings/ai-settings/providers");
+    return navigate(AI_SETTINGS_URL);
   }, []);
+
+  const {
+    onActivateAI,
+    onTopUpAndActivateAI,
+    onShowAIBenefits,
+    onDialogActivate,
+    onAIActivated,
+    isActivating,
+    aiFeaturesDialogVisible,
+    onCloseAIFeaturesDialog,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+  } = useAIActivation({
+    enableAIService,
+    getAIConfig,
+    refreshCurrentFolder,
+    refreshPaymentInfo,
+    isCardLinkedToPortal,
+    parentId: selectedFolder?.id,
+    context: "empty_state",
+  });
 
   const onGoToPersonal = useCallback((): LinkProps => {
     const newFilter = FilesFilter.getDefault();
@@ -277,9 +405,41 @@ export const useOptions = (
 
     const event = new CustomEvent(Events.ROOM_CREATE, {
       detail: { parentId: selectedFolder?.id, context: "empty_state" },
-    });
+    }) as CustomEvent & { payload?: { startRoomType: RoomsType } };
+    // In the "Forms" section only Form Filling Rooms can be created.
+    if (window.location.pathname.startsWith("/forms")) {
+      event.payload = { startRoomType: RoomsType.FormRoom };
+    }
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
+
+  // Opens the create dialog straight on its template picker, scoped to form
+  // templates -- the Forms "Space template" quick action.
+  const onCreateRoomFromTemplate = useCallback(() => {
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
+
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: selectedFolder?.id, context: "empty_state" },
+    }) as CustomEvent & {
+      payload?: { withTemplateSelector: boolean; isFormsCreate: boolean };
+    };
+    event.payload = { withTemplateSelector: true, isFormsCreate: true };
+    window.dispatchEvent(event);
+  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
+
+  // The picked gallery template becomes the first form of a new form space
+  // (see onCreateRoomFromTemplateImpl) -- the Forms "Template gallery" tile.
+  const onOpenTemplateGallery = useCallback(() => {
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
+
+    onShowTemplateGallery(true);
+  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, onShowTemplateGallery]);
 
   const onCreateAIAgent = useCallback(() => {
     if (isGracePeriod) {
@@ -319,7 +479,14 @@ export const useOptions = (
       filterParam: FilesSelectorFilterTypes | FilterType | string,
       openRoot: boolean = true,
     ) => {
-      setSelectFileFormRoomDialogVisible?.(true, filterParam, openRoot);
+      // type-only cast — this hook's signature also accepts a
+      // plain string; every actual caller passes a FilesSelectorFilterTypes /
+      // FilterType value, which is what the store expects.
+      setSelectFileFormRoomDialogVisible?.(
+        true,
+        filterParam as FilesSelectorFilterTypes | FilterType,
+        openRoot,
+      );
     },
     [setSelectFileFormRoomDialogVisible],
   );
@@ -327,6 +494,35 @@ export const useOptions = (
   const uploadFromDocspaceAiKnowledge = useCallback(() => {
     setSelectFileAiKnowledgeDialogVisible?.(true);
   }, [setSelectFileAiKnowledgeDialogVisible]);
+
+  // Device upload for the agent knowledge tab. The new-concept client has no
+  // article main button (its hidden `.custom-file-input-article` that
+  // `onUploadAction` relies on), so build a transient file input and upload
+  // straight into the knowledge folder (`knowledgeId`) — same target the SDK
+  // knowledge device upload uses.
+  const uploadFromDeviceAiKnowledge = useCallback(() => {
+    if (!knowledgeId) return;
+
+    const input = document.createElement("input");
+    input.type = "file";
+    input.multiple = true;
+    input.style.display = "none";
+
+    input.onchange = async (e) => {
+      try {
+        const files = await getFilesFromEvent(e);
+        const tree = await createFoldersTree(t, files);
+        if (tree.length > 0) startUpload(tree, knowledgeId, t);
+      } catch (err) {
+        toastr.error(err as string, undefined, 0, true);
+      } finally {
+        input.remove();
+      }
+    };
+
+    document.body.appendChild(input);
+    input.click();
+  }, [knowledgeId, createFoldersTree, startUpload, t]);
 
   const onCreate = useCallback(
     (extension: ExtensionType, withoutDialog?: boolean) => {
@@ -355,7 +551,15 @@ export const useOptions = (
   const createAndCopySharedLink = useCallback(() => {
     if (!selectedFolder) return;
 
-    onCreateAndCopySharedLink?.(selectedFolder, t);
+    // TSelectedFolder (id: number | null) is consumed by the
+    // ContextOptionsStore item view-model type — the cast keeps the original
+    // unchecked call from the .js era.
+    onCreateAndCopySharedLink?.(
+      selectedFolder as unknown as Parameters<
+        NonNullable<typeof onCreateAndCopySharedLink>
+      >[0],
+      t,
+    );
   }, [selectedFolder, onCreateAndCopySharedLink, t]);
 
   const onOpenAccessSettings = () => {
@@ -380,18 +584,28 @@ export const useOptions = (
           onCreate,
           uploadFromDocspace,
           uploadFromDocspaceAiKnowledge,
+          uploadFromDeviceAiKnowledge,
           onUploadAction,
           createAndCopySharedLink,
           openInfoPanel,
           onCreateRoom,
+          onCreateRoomFromTemplate,
+          onOpenTemplateGallery,
           inviteRootUser,
           navigate,
           onGoToPersonal,
           onGoToShared,
+          onGoToForms,
+          onGoToAgents,
           onOpenAccessSettings,
           onCreateAIAgent,
+          onOpenAiChat,
+          onStartNewChat,
           onGoToServices,
           onGoToAIProviderSettings,
+          onTopUpAndActivateAI,
+          onActivateAI,
+          onShowAIBenefits,
         },
         logoText,
         isVisitor,
@@ -399,9 +613,14 @@ export const useOptions = (
         isKnowledgeTab,
         isResultsTab,
         isAIRoom,
-        aiReady,
+        isAiReady,
         standalone,
         isPortalAdmin,
+        trashSection,
+        isCardLinkedToPortal,
+        isActivating,
+        isAiChatAvailable,
+        templateGalleryAvailable,
       ),
     [
       type,
@@ -418,24 +637,47 @@ export const useOptions = (
       onOpenAccessSettings,
       uploadFromDocspace,
       uploadFromDocspaceAiKnowledge,
+      uploadFromDeviceAiKnowledge,
       onUploadAction,
       createAndCopySharedLink,
       onCreate,
       openInfoPanel,
       onCreateRoom,
+      onCreateRoomFromTemplate,
+      onOpenTemplateGallery,
       inviteRootUser,
       navigate,
       onGoToPersonal,
       onGoToShared,
+      onGoToForms,
+      onGoToAgents,
+      trashSection,
       isVisitor,
       isFrame,
       logoText,
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
+      isAiReady,
+      standalone,
+      isPortalAdmin,
+      isCardLinkedToPortal,
+      isActivating,
+      onOpenAiChat,
+      onStartNewChat,
+      isAiChatAvailable,
+      templateGalleryAvailable,
     ],
   );
 
-  return options;
+  return {
+    options,
+    aiFeaturesDialogVisible,
+    onCloseAIFeaturesDialog,
+    onDialogActivate,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+    onAIActivated,
+    isActivating,
+  };
 };
-

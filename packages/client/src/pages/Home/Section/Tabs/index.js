@@ -34,13 +34,10 @@
  */
 import { inject, observer } from "mobx-react";
 
-import RoomTemplatesTabs from "./RoomTemplatesTabs";
 import AiRoomTabs from "./AiRoomTabs";
 
 const SectionSubmenuContent = ({
   isAIRoom,
-  isRoomsFolderRoot,
-  isTemplatesFolder,
   allowInvitingGuests,
   checkGuests,
   currentClientView,
@@ -62,22 +59,19 @@ const SectionSubmenuContent = ({
   )
     return <AiRoomTabs />;
 
-  if (!isContacts && (isRoomsFolderRoot || isTemplatesFolder))
-    return <RoomTemplatesTabs />;
+  // The Rooms/Templates submenu was replaced by the Templates item in the
+  // sidebar (ClientArticleSidebar → Rooms → Templates).
   return null;
 };
 
 export default inject(
   ({
-    treeFoldersStore,
     settingsStore,
     clientLoadingStore,
     selectedFolderStore,
     accessRightsStore,
   }) => {
     const { canUseChat } = accessRightsStore;
-
-    const { isRoomsFolderRoot, isTemplatesFolder } = treeFoldersStore;
 
     const { allowInvitingGuests, checkGuests } = settingsStore;
 
@@ -86,8 +80,6 @@ export default inject(
 
     return {
       isAIRoom: selectedFolderStore.isAIRoom,
-      isRoomsFolderRoot,
-      isTemplatesFolder,
       allowInvitingGuests,
       checkGuests,
       currentClientView,

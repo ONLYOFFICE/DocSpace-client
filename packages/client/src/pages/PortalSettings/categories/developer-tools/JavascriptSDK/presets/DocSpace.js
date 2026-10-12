@@ -49,7 +49,6 @@ import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
-import Integration from "../sub-components/Integration";
 import { VersionSelector } from "../sub-components/VersionSelector";
 
 import {
@@ -67,7 +66,6 @@ import {
   Container,
   ControlsSection,
 } from "./StyledPresets";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const DOCSPACE_EVENT_TYPES = [
   "onAppReady",
@@ -200,12 +198,8 @@ const DocSpace = (props) => {
 
   return (
     <PresetWrapper
-      description={t("PortalDescription", {
-        productName: getBrandName("ProductName"),
-      })}
-      header={t("CreateSamplePortal", {
-        productName: getBrandName("ProductName"),
-      })}
+      description={t("PortalDescription")}
+      header={t("CreateSamplePortal")}
     >
       <Container>
         <PreviewBlock
@@ -245,12 +239,8 @@ const DocSpace = (props) => {
               setConfig={setConfig}
             />
           </ControlsSection>
-
-          <Integration className="integration-examples" />
         </Controls>
       </Container>
-
-      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };
@@ -266,7 +256,6 @@ export const Component = inject(({ settingsStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "Files",
     "Translations",

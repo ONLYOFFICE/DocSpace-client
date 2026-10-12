@@ -42,11 +42,12 @@ import { FilterType, FolderType } from "@docspace/shared/enums";
 import { getFilesSettings } from "@/api/files";
 import { getFormsFolder } from "@/api/forms";
 import { getSelf } from "@/api/people";
-import { getDefaultProvider } from "@/api/ai";
 import { getSettings } from "@/api/settings";
+import { getAppSettings } from "@/api/apps";
 import {
   FILTER_HEADER,
   LIBRARY_ID_HEADER,
+  OAUTH_FRAME_HEADER,
   PAGE_COUNT,
   ROOM_ID_HEADER,
   PATHNAME_HEADER,
@@ -54,6 +55,7 @@ import {
 import { FormsSection } from "@/types/forms";
 
 import FormsShell from "./layout.client";
+import FormsOAuthShell from "./layout.oauth.client";
 
 export const dynamic = "force-dynamic";
 
@@ -63,10 +65,30 @@ export default async function FormsServerLayout({
   children: React.ReactNode;
 }) {
   const hdrs = await headers();
+
+  if (hdrs.get(OAUTH_FRAME_HEADER) === "1")
+    return <FormsOAuthShell>{children}</FormsOAuthShell>;
+
   const cookieStore = await cookies();
 
-  const roomId = hdrs.get(ROOM_ID_HEADER) || "";
-  const libraryId = hdrs.get(LIBRARY_ID_HEADER) || "";
+  let roomId = hdrs.get(ROOM_ID_HEADER) || "";
+  let libraryId = hdrs.get(LIBRARY_ID_HEADER) || "";
+
+  // The host client (packages/client) always passes roomId via the iframe URL
+  // but never libraryId — it lives only in the ai-forms app settings. Read
+  // settings whenever any required id is still missing.
+  if (!roomId || !libraryId) {
+    const appSettings = await getAppSettings<{
+      roomId?: string | number;
+      libraryId?: string | number;
+    }>("ai-forms");
+    if (!roomId && appSettings?.roomId) {
+      roomId = String(appSettings.roomId);
+    }
+    if (!libraryId && appSettings?.libraryId) {
+      libraryId = String(appSettings.libraryId);
+    }
+  }
   const authToken = cookieStore.get("asc_auth_key")?.value || "";
   const pathname = hdrs.get(PATHNAME_HEADER) ?? "";
 
@@ -87,11 +109,10 @@ export default async function FormsServerLayout({
   const emplType = filterParams.get("emplType") || "";
   const uid = filterParams.get("uid") || "";
 
-  const [filesSettings, user, defaultProvider, portalSettings, roomData] =
+  const [filesSettings, user, portalSettings, roomData] =
     await Promise.all([
       getFilesSettings(),
       getSelf(),
-      getDefaultProvider(),
       getSettings().catch(() => undefined),
       roomId
         ? getFormsFolder(
@@ -182,7 +203,6 @@ export default async function FormsServerLayout({
         socketUrl,
         filesSettings: filesSettings!,
         user,
-        defaultProvider,
         roomSecurity,
         roomAccess,
         saveFormAsXLSX: Boolean(roomCurrent?.saveFormAsXLSX),
@@ -193,6 +213,10 @@ export default async function FormsServerLayout({
         initialTotal,
         initialFolders,
         initialSection,
+        standalone:
+          !!portalSettings &&
+          typeof portalSettings !== "string" &&
+          Boolean(portalSettings.standalone),
       }}
     >
       {children}

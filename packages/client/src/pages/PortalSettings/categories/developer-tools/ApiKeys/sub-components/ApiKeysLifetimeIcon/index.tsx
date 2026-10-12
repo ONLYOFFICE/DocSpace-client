@@ -33,35 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled, { css } from "styled-components";
+import classNames from "classnames";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
 import { IconSizeType } from "@docspace/shared/utils";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { TTranslation } from "@docspace/shared/types";
 import { TApiKey } from "@docspace/shared/api/api-keys/types";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-
-const StyledApiKeysLifetimeIcon = styled.div<{ isExpired: boolean }>`
-  ${({ isExpired }) =>
-    !isExpired &&
-    css`
-      .api-keys_lifetime {
-        svg {
-          path,
-          rect {
-            fill: ${globalColors.gray};
-            stroke: ${globalColors.gray};
-          }
-          circle {
-            stroke: ${globalColors.gray};
-          }
-        }
-      }
-    `}
-`;
+import { now, parseToDateTime, isAfter } from "@onlyoffice/apps-ui-kit/utils/date";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import styles from "./ApiKeysLifetimeIcon.module.scss";
 
 export const ApiKeysLifetimeIcon = ({
   t,
@@ -86,7 +67,11 @@ export const ApiKeysLifetimeIcon = ({
   );
 
   return showLifetimeIcon ? (
-    <StyledApiKeysLifetimeIcon isExpired={isExpired}>
+    <div
+      className={classNames(styles.lifetimeIcon, {
+        [styles.notExpired]: !isExpired,
+      })}
+    >
       <IconButton
         iconName={LifetimeReactSvgUrl}
         className="api-keys_lifetime"
@@ -101,6 +86,6 @@ export const ApiKeysLifetimeIcon = ({
         getContent={getTooltipContent}
         maxWidth="300px"
       />
-    </StyledApiKeysLifetimeIcon>
+    </div>
   ) : null;
 };

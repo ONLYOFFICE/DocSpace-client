@@ -40,7 +40,7 @@ import { observer } from "mobx-react";
 import { usePathname } from "next/navigation";
 
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useItemList from "@/app/(docspace)/_hooks/useItemList";
@@ -63,7 +63,9 @@ type FormsGridProps = {
 
 const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   const formsListStore = useFormsListStore();
-  const { items, folders, hasMore, isLoading } = formsListStore;
+  const { hasMore, isLoading } = formsListStore;
+  const items = formsListStore.filteredItems;
+  const folders = formsListStore.filteredFolders;
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
   const {

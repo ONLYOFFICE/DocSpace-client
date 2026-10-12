@@ -1,14 +1,14 @@
 {
   "key_path": "NewCertificate",
-  "content": "New Certificate",
-  "content_en_sha1_hash": "f90a564cc3dc5f0e1b0e2896c28acb669529af25",
-  "created_at": "2025-05-19T21:30:50.114Z",
-  "updated_at": "2026-05-15T14:00:06.859Z",
+  "content": "New certificate",
+  "content_en_sha1_hash": "18795de18fff7e5e56e769a75eb14524b4ce4242",
+  "created_at": "2026-08-31T18:23:40.048Z",
+  "updated_at": "2026-08-31T21:03:57.179Z",
   "comment": {
-    "text": "This is the title of a modal dialog for adding a new certificate, either for an Identity Provider or a Service Provider.",
+    "text": "Dialog title for the modal window used when adding a new certificate for Identity Provider (IdP) or Service Provider (SP) configuration.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:40.690Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T21:03:57.179Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

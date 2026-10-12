@@ -1,20 +1,20 @@
 {
   "DisableGeneralDescription": "U kunt de uitgeschakelde gebruikers later verwijderen of inschakelen als dat nodig is. U kunt gebruikers zoals de Eigenaar en uzelf niet uitschakelen.",
   "DisableGuest": "Gast uitschakelen",
-  "DisableGuestDescription": "Als u deze gast uitschakelt, kunnen ze niet inloggen op {{productName}}.",
+  "DisableGuestDescription": "Als u deze gast uitschakelt, kunnen ze niet inloggen op de werkruimte.",
   "DisableGuests": "Gasten uitschakelen",
-  "DisableGuestsDescription": "Als u deze gasten uitschakelt, kunnen ze niet inloggen op {{productName}}.",
+  "DisableGuestsDescription": "Als u deze gasten uitschakelt, kunnen ze niet inloggen op de werkruimte.",
   "DisableGuestsGeneralDescription": "U kunt de uitgeschakelde gasten later verwijderen of inschakelen als dat nodig is.",
   "DisableUser": "Gebruiker uitschakelen",
-  "DisableUserDescription": "Als u deze gebruiker uitschakelt, kan hij/zij zich niet meer aanmelden bij {{productName}}, terwijl zijn/haar documenten en gegevens intact blijven.",
+  "DisableUserDescription": "Als u deze gebruiker uitschakelt, kan hij/zij zich niet meer aanmelden bij de werkruimte, terwijl zijn/haar documenten en gegevens intact blijven.",
   "DisableUsers": "Gebruikers uitschakelen",
-  "DisableUsersDescription": "Als u deze gebruikers uitschakelt, kunnen zij zich niet meer aanmelden bij  {{productName}}, terwijl hun documenten en gegevens intact blijven.",
+  "DisableUsersDescription": "Als u deze gebruikers uitschakelt, kunnen zij zich niet meer aanmelden bij de werkruimte, terwijl hun documenten en gegevens intact blijven.",
   "EnableGuest": "Gast inschakelen",
-  "EnableGuestDescription": "Als u deze gast inschakelt, kunnen zij weer inloggen op {{productName}}.",
+  "EnableGuestDescription": "Als u deze gast inschakelt, kunnen zij weer inloggen op de werkruimte.",
   "EnableGuests": "Gasten inschakelen",
-  "EnableGuestsDescription": "Als u deze gasten inschakelt, kunnen zij weer inloggen op {{productName}}.",
+  "EnableGuestsDescription": "Als u deze gasten inschakelt, kunnen zij weer inloggen op de werkruimte.",
   "EnableUser": "Gebruiker inschakelen",
-  "EnableUserDescription": "Als u deze gebruiker inschakelt, kan hij/zij zich weer aanmelden bij {{productName}} en toegang krijgen tot zijn/haar documenten en gegevens.",
+  "EnableUserDescription": "Als u deze gebruiker inschakelt, kan hij/zij zich weer aanmelden bij de werkruimte en toegang krijgen tot zijn/haar documenten en gegevens.",
   "EnableUsers": "Gebruikers inschakelen",
-  "EnableUsersDescription": "Als u deze gebruikers inschakelt, kunnen zij zich weer aanmelden bij {{productName}} en toegang krijgen tot hun documenten en gegevens."
+  "EnableUsersDescription": "Als u deze gebruikers inschakelt, kunnen zij zich weer aanmelden bij de werkruimte en toegang krijgen tot hun documenten en gegevens."
 }

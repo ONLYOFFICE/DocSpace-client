@@ -36,10 +36,10 @@
 import { inject, observer } from "mobx-react";
 import { TFunction } from "i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { NotificationsType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
@@ -93,9 +93,9 @@ const RoomsActionsContainer = ({
       </div>
       <Text {...textDescriptionsProps}>
         {t("ActionsWithFilesDescription", {
+          files: t("Common:Files"),
           rooms: t("Common:Rooms"),
-          shared: t("Common:SharedWithMe"),
-          documents: t("Common:MyDocuments"),
+          forms: t("Common:Forms"),
           aiAgents: t("Common:AIAgents"),
         })}
       </Text>

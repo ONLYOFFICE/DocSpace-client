@@ -35,21 +35,20 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import ItemIcon from "SRC_DIR/components/ItemIcon";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
-import { StyledStatistics, StyledMainTitle } from "./StyledComponent";
+import styles from "./StyledComponent.module.scss";
 
 import RoomsList from "./sub-components/RoomsList";
 import UsersList from "./sub-components/UsersList";
 import AIAgentList from "./sub-components/AIAgentList.js";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const buttonProps = {
   className: "button-element",
@@ -57,8 +56,8 @@ const buttonProps = {
 };
 const StatisticsComponent = (props) => {
   const { t } = useTranslation("Settings");
-  const theme = useTheme();
-  const { isStatisticsAvailable } = props;
+  const { isBase } = useTheme();
+  const { isStatisticsAvailable, aiServicesEnabled } = props;
 
   const iconElement = (
     id,
@@ -97,15 +96,15 @@ const StatisticsComponent = (props) => {
   );
 
   return (
-    <StyledStatistics>
+    <div className={styles.statistics}>
       <div className="title-container">
-        <StyledMainTitle fontWeight={700} fontSize="16px">
+        <Text className={styles.mainTitle} fontWeight={700} fontSize="16px">
           {t("Statistics")}
-        </StyledMainTitle>
+        </Text>
         {!isStatisticsAvailable ? (
           <Badge
             backgroundColor={
-              theme.isBase
+              isBase
                 ? globalColors.favoritesStatus
                 : globalColors.favoriteStatusDark
             }
@@ -116,7 +115,7 @@ const StatisticsComponent = (props) => {
         ) : null}
       </div>
       <Text className="statistics-description">
-        {t("StatisticDescription", { productName: getBrandName("ProductName") })}
+        {t("StatisticDescription")}
       </Text>
       {isStatisticsAvailable ? (
         <>
@@ -132,22 +131,26 @@ const StatisticsComponent = (props) => {
             quotaElement={quotaElement}
             iconElement={iconElement}
           />
-          <AIAgentList
-            buttonProps={buttonProps}
-            textElement={textElement}
-            quotaElement={quotaElement}
-            iconElement={iconElement}
-          />
+          {aiServicesEnabled ? (
+            <AIAgentList
+              buttonProps={buttonProps}
+              textElement={textElement}
+              quotaElement={quotaElement}
+              iconElement={iconElement}
+            />
+          ) : null}
         </>
       ) : null}
-    </StyledStatistics>
+    </div>
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export default inject(({ currentQuotaStore, settingsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
+  const { aiServicesEnabled } = settingsStore;
 
   return {
     isStatisticsAvailable,
+    aiServicesEnabled,
   };
 })(observer(StatisticsComponent));

@@ -33,98 +33,21 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import classNames from "classnames";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import elementResizeDetectorMaker from "element-resize-detector";
 import React, { useEffect, useRef, useCallback, useMemo, use } from "react";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 
-import { TableContainer, TableBody } from "@docspace/ui-kit/components/table";
-import { injectDefaultTheme } from "@docspace/shared/utils";
-import { Context } from "@docspace/ui-kit/utils/context";
+import { TableContainer, TableBody } from "@onlyoffice/apps-ui-kit/components/table";
+import { Context } from "@onlyoffice/apps-ui-kit/utils/context";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import withContainer from "../../../../../HOCs/withContainer";
 
-const fileNameCss = css`
-  margin-inline-start: -24px;
-  padding-inline-start: 24px;
-`;
-
-const contextCss = css`
-  margin-inline-end: -20px;
-  padding-inline-end: 20px;
-`;
-
-const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
-  .table-row-selected {
-    .table-container_file-name-cell {
-      ${fileNameCss}
-    }
-    .table-container_index-cell {
-      ${fileNameCss}
-    }
-
-    .table-container_row-context-menu-wrapper {
-      ${contextCss}
-    }
-  }
-  .table-container_index-cell {
-    margin-inline-end: 0;
-    padding-inline-end: 0;
-  }
-
-  .table-row-selected + .table-row-selected {
-    .table-row {
-      .table-container_file-name-cell,
-      .table-container_index-cell,
-      .table-container_row-context-menu-wrapper {
-        border-image-slice: 1;
-      }
-      .table-container_file-name-cell,
-      .table-container_index-cell {
-        ${fileNameCss}
-        border-inline: 0; //for Safari macOS
-
-        border-image-source: ${(props) => `linear-gradient(to right, 
-          ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
-      }
-      .table-container_row-context-menu-wrapper {
-        ${contextCss}
-
-        border-image-source: ${(props) => `linear-gradient(to left,
-          ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
-      }
-    }
-  }
-
-  .files-item:not(.table-row-selected) + .table-row-selected {
-    .table-row {
-      .table-container_file-name-cell,
-      .table-container_index-cell {
-        ${fileNameCss}
-      }
-
-      .table-container_row-context-menu-wrapper {
-        ${contextCss}
-      }
-    }
-  }
-
-  .resize-handle {
-    ${(props) =>
-      props.isIndexEditingMode &&
-      css`
-        cursor: default;
-        &:hover {
-          border-inline-end: ${({ theme }) => theme.tableContainer.borderRight};
-        }
-      `}
-  }
-`;
+import styles from "./TableContainer.module.scss";
 
 const elementResizeDetector = elementResizeDetectorMaker({
   strategy: "scroll",
@@ -152,9 +75,6 @@ const Table = ({
   currentDeviceType,
   onEditIndex,
   isIndexing,
-  isTutorialEnabled,
-  setRefMap,
-  deleteRefMap,
   selectedFolderTitle,
   canCreateSecurity,
   setDropTargetPreview,
@@ -248,9 +168,6 @@ const Table = ({
             ? highlightFile.isExst === !item.fileExst
             : null
         }
-        isTutorialEnabled={isTutorialEnabled}
-        setRefMap={setRefMap}
-        deleteRefMap={deleteRefMap}
         selectedFolderTitle={selectedFolderTitle}
         canCreateSecurity={canCreateSecurity}
         setDropTargetPreview={setDropTargetPreview}
@@ -271,18 +188,17 @@ const Table = ({
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
-    isTutorialEnabled,
-    setRefMap,
-    deleteRefMap,
     disableDrag,
   ]);
 
   return (
-    <StyledTableContainer
+    <TableContainer
+      className={classNames(styles.tableContainer, {
+        [styles.isIndexEditingMode]: isIndexEditingMode,
+      })}
       noSelect={!withContentSelection}
       useReactWindow
       forwardedRef={ref}
-      isIndexEditingMode={isIndexEditingMode}
     >
       <TableHeader
         sectionWidth={sectionWidth}
@@ -310,7 +226,7 @@ const Table = ({
       >
         {filesListNode}
       </TableBody>
-    </StyledTableContainer>
+    </TableContainer>
   );
 };
 
@@ -322,7 +238,6 @@ export default inject(
     tableStore,
     userStore,
     settingsStore,
-    guidanceStore,
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
@@ -340,8 +255,10 @@ export default inject(
       isSharedWithMeFolder,
       isInSharedFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = treeFoldersStore;
-    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
+    const isRooms =
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 
@@ -356,6 +273,7 @@ export default inject(
       highlightFile,
       filter,
       disableDrag,
+      filesList,
     } = filesStore;
 
     const { isIndexEditingMode } = indexingStore;
@@ -366,7 +284,6 @@ export default inject(
       security,
     } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
-    const { setRefMap, deleteRefMap } = guidanceStore;
     const { withContentSelection } = hotkeyStore;
 
     const { primaryProgressDataStore } = uploadDataStore;
@@ -375,6 +292,7 @@ export default inject(
     const canCreateSecurity = security?.Create;
 
     return {
+      list: filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -396,8 +314,6 @@ export default inject(
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
-      setRefMap,
-      deleteRefMap,
       selectedFolderTitle,
       canCreateSecurity,
       setDropTargetPreview,
@@ -409,4 +325,4 @@ export default inject(
       isAIAgentsFolder,
     };
   },
-)(withContainer(observer(Table)));
+)(observer(Table));

@@ -1173,6 +1173,7 @@ const getFilesSettings = (): TFilesSettings => {
     chunkUploadSize: 10485760,
     openEditorInSameTab: false,
     organizeRoomsGrouping: false,
+    showQuickActions: true,
   };
 };
 
@@ -1191,4 +1192,22 @@ export const filesSettingsHandler = (
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     return filesSettingsResolver(overrides);
   });
+};
+
+export const PATH_SHOW_QUICK_ACTIONS = "files/showquickactions";
+
+// Answers with the value it was sent, the way the portal does. Pass a status to
+// refuse instead: the banner is hidden optimistically, so how the client
+// behaves when the write fails is its own case.
+export const showQuickActionsHandler = (port: string, status?: number) => {
+  return http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_SHOW_QUICK_ACTIONS}`,
+    async ({ request }) => {
+      if (status) return new Response(null, { status });
+
+      const body = (await request.json()) as { set: boolean };
+
+      return new Response(JSON.stringify({ response: body.set }));
+    },
+  );
 };

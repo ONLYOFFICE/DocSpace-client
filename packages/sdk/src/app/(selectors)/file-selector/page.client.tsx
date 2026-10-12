@@ -38,7 +38,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
 import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 import {
   DeviceType,
@@ -48,9 +48,9 @@ import {
 } from "@docspace/shared/enums";
 import { getFileLink } from "@docspace/shared/api/files";
 import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type { Nullable } from "@docspace/shared/types";
-import SocketHelper from "@docspace/ui-kit/utils/socket";
+import { connectFrameSocket } from "@docspace/shared/utils/oauthFrameSocket";
 import type {
   TFile,
   TFilesSettings,
@@ -64,7 +64,7 @@ import type {
   FilesSelectorProps,
   FolderDtoInteger,
   SdkFolderType,
-} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+} from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import { getSelectFormatTranslation } from "@docspace/shared/utils";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
@@ -235,7 +235,7 @@ export default function FilesSelectorClient({
     if (isInit.current) return;
 
     isInit.current = true;
-    SocketHelper?.connect(socketUrl, "");
+    void connectFrameSocket(socketUrl, "");
   }, [socketUrl]);
 
   const getFilesArchiveError = useCallback(() => "", []);

@@ -39,21 +39,20 @@ import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
 import { withTranslation } from "react-i18next";
 
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 
 import Filter from "@docspace/shared/api/people/filter";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Avatar } from "@docspace/ui-kit/components/avatar";
-import { Text } from "@docspace/ui-kit/components/text";
-import { AddButton } from "@docspace/ui-kit/components/add-button";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Avatar } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import styles from "./ChangePortalOwner.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ChangePortalOwnerDialog = ({
   t,
@@ -116,13 +115,11 @@ const ChangePortalOwnerDialog = ({
     t("DoTheSame"),
     t("AppointAdmin"),
     t("SetAccessRights"),
-    t("ManagePortal", { productName: getBrandName("ProductName") }),
+    t("ManagePortal"),
     t("ManageUser"),
-    t("ChangePortalOwner:ChangeOwner", {
-      productName: getBrandName("ProductName"),
-    }),
-    t("BackupPortal", { productName: getBrandName("ProductName") }),
-    t("DeactivateOrDeleteSpace", { productName: getBrandName("ProductName") }),
+    t("ChangePortalOwner:ChangeOwner"),
+    t("BackupPortal"),
+    t("DeactivateOrDeleteSpace"),
   ];
 
   const filter = React.useMemo(() => {
@@ -165,7 +162,7 @@ const ChangePortalOwnerDialog = ({
           />
         </ModalDialog.Container>
       ) : null}
-      <ModalDialog.Header>{t("Translations:OwnerChange")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:OwnerChange")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.ownerInfo}>
           <Avatar className="avatar" role="owner" source={avatar} size="big" />
@@ -182,19 +179,15 @@ const ChangePortalOwnerDialog = ({
         <div className={styles.peopleSelectorInfo}>
           <Text
             className={styles.newOwner}
-            title={t("NewPortalOwner", {
-              productName: getBrandName("ProductName"),
-            })}
+            title={t("NewPortalOwner")}
           >
-            {t("NewPortalOwner", { productName: getBrandName("ProductName") })}
+            {t("NewPortalOwner")}
           </Text>
           <Text
             className={styles.description}
-            title={t("ChangeInstruction", {
-              productName: getBrandName("ProductName"),
-            })}
+            title={t("ChangeInstruction")}
           >
-            {t("ChangeInstruction", { productName: getBrandName("ProductName") })}
+            {t("ChangeInstruction")}
           </Text>
         </div>
 
@@ -225,9 +218,9 @@ const ChangePortalOwnerDialog = ({
             <AddButton
               className="selector-add-button"
               onClick={onTogglePeopleSelector}
-              label={t("Translations:ChooseFromList")}
+              label={t("Common:ChooseFromList")}
               noSelect
-              titleText={t("Translations:ChooseFromList")}
+              titleText={t("Common:ChooseFromList")}
               testId="change_portal_owner_choose_from_list_button"
             />
           </div>
@@ -236,11 +229,9 @@ const ChangePortalOwnerDialog = ({
         <div className={styles.availableList}>
           <Text
             className={styles.listHeader}
-            title={t("PortalOwnerCan", {
-              productName: getBrandName("ProductName"),
-            })}
+            title={t("PortalOwnerCan")}
           >
-            {t("PortalOwnerCan", { productName: getBrandName("ProductName") })}
+            {t("PortalOwnerCan")}
           </Text>
 
           {ownerRights?.map((item) => (

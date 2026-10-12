@@ -35,10 +35,11 @@
 
 "use client";
 
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
-import FilterComponent from "@docspace/ui-kit/components/filter";
+import FilterComponent from "@onlyoffice/apps-ui-kit/components/filter";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
@@ -49,10 +50,11 @@ import useFilesFilter from "./useFilesFilter";
 
 export type { FilterProps };
 
-export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
+export const Filter = observer(({ filesFilter, shareKey, currentFolderId, showMainButton, mainButtonProps, mainButtonIcon }: FilterProps) => {
   const { t } = useTranslation(["Common"]);
   const { filesViewAs, setFilesViewAs } = useSettingsStore();
   const { currentDeviceType } = useDeviceType();
+  const [clearSearch, setClearSearch] = React.useState(false);
 
   const {
     getFilterData,
@@ -72,8 +74,10 @@ export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
   } = useFilesFilter({
     filesFilter,
     shareKey,
+    currentFolderId,
     filesViewAs,
     setFilesViewAs,
+    setClearSearch,
   });
 
   const initSearchValue = getSelectedInputValue();
@@ -86,8 +90,8 @@ export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
       onFilter={onFilter}
       onSort={onSort}
       onSortButtonClick={() => {}}
-      clearSearch={false}
-      setClearSearch={() => {}}
+      clearSearch={clearSearch}
+      setClearSearch={setClearSearch}
       getSelectedFilterData={getSelectedFilterData}
       getViewSettingsData={getViewSettingsData}
       clearAll={clearAll}
@@ -111,13 +115,16 @@ export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
       filterHeader={t("Common:AdvancedFilter")}
       placeholder={t("Common:Search")}
       view={t("Common:View")}
-      filterTitle={t("Files:Filter")}
+      filterTitle={t("Common:Filter")}
       sortByTitle={t("Common:SortBy")}
       selectorLabel=""
       isIndexing={false}
       initSearchValue={initSearchValue}
       initSelectedFilterData={initSelectedFilterData}
       renderSelector={renderFilterSelector}
+      showMainButton={showMainButton}
+      mainButtonProps={mainButtonProps}
+      mainButtonIcon={mainButtonIcon}
     />
   );
 });

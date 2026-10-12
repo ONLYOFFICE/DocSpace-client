@@ -69,7 +69,6 @@ const SETTINGS_PREFIX = "/forms/settings/";
 
 const SETTINGS_SUB_MAP: Record<string, SettingsSubSection> = {
   [SettingsSubSection.Billing]: SettingsSubSection.Billing,
-  [SettingsSubSection.AiAgent]: SettingsSubSection.AiAgent,
   [SettingsSubSection.Access]: SettingsSubSection.Access,
   [SettingsSubSection.CollectData]: SettingsSubSection.CollectData,
 };

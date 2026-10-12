@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Šī lietojumprogramma ir atspējota",
   "OAuthApplicationEmpty": "Lietojumprogrammu nevarēja atrast",
   "OAuthClientEmpty": "Klienta ID nevarēja atrast",
+  "OAuthInvalidRequest": "Autorizācijas pieprasījums nav derīgs. Pārbaudiet novirzīšanas URI lietojumprogrammas iestatījumos",
   "RecaptchaInvalid": "Nederīga Recaptcha",
   "SsoAttributesNotFound": "Neizdevās autentificēt (apgalvojuma atribūti netika atrasti)",
   "SsoAuthFailed": "Autentifikācija neizdevās",

@@ -34,6 +34,7 @@
  */
 
 import DevToolsSvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-api.react.svg";
+import DocsConnectSvg from "PUBLIC_DIR/images/icons/16/docs-connect.editors.react.svg";
 import EmbedSvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-javascript-sdk.react.svg";
 import PluginSvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-plugin-sdk.react.svg";
 import WebhookSvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-webhooks.react.svg";
@@ -44,8 +45,9 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/ui-kit/providers";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers";
+import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 
 import ConfirmWrapper from "SRC_DIR/components/ConfirmWrapper";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -55,7 +57,10 @@ import Card from "./card";
 import styles from "./main.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-const Main = (props: { apiBasicLink: string }) => {
+const Main = (props: {
+  apiBasicLink: string;
+  canOpenDocsConnect: boolean;
+}) => {
   const { t, ready } = useTranslation([
     "Common",
     "Settings",
@@ -63,8 +68,11 @@ const Main = (props: { apiBasicLink: string }) => {
     "WebPlugins",
     "Webhooks",
     "OAuth",
+    "DocsConnect",
   ]);
-  const { apiBasicLink } = props;
+  const { apiBasicLink, canOpenDocsConnect } = props;
+
+  const docsName = `${getBrandName("OrganizationName")} ${getBrandName("ProductEditorsName")}`;
 
   useEffect(() => {
     if (ready) setDocumentTitle(t("Common:DeveloperTools"));
@@ -92,11 +100,25 @@ const Main = (props: { apiBasicLink: string }) => {
           <Text fontSize="13px" fontWeight={400} lineHeight="20px">
             {t("Settings:DeveloperToolsDescription", {
               organizationName: getBrandName("OrganizationName"),
+              editorsName: getBrandName("ProductEditorsName"),
               productName: getBrandName("ProductName"),
             })}
           </Text>
         </div>
         <div className={styles.grid}>
+          {canOpenDocsConnect ? (
+            <Card
+              className={styles.featured}
+              icon={<DocsConnectSvg />}
+              title={t("DocsConnect:DocsConnect")}
+              description={t("DocsConnect:CardDescription", {
+                productName: docsName,
+              })}
+              url="/developer-tools/docs-connect"
+              color={globalColors.docsConnectAccent}
+              linkTitle={t("DocsConnect:GetStarted")}
+            />
+          ) : null}
           <Card
             icon={<DevToolsSvg />}
             title={t("Settings:RestAPI")}
@@ -106,15 +128,13 @@ const Main = (props: { apiBasicLink: string }) => {
             })}
             url={apiBasicLink}
             color={globalColors.lightBlueMain}
-            linkTitle={t("Common:LearnMore")}
+            linkTitle={t("Common:ReadApiDocumentation")}
             isBlank
           />
           <Card
             icon={<EmbedSvg />}
             title={t("Settings:EmbedSDK")}
-            description={t("Settings:EmbedSDKDescription", {
-              productName: getBrandName("ProductName"),
-            })}
+            description={t("Settings:EmbedSDKDescription")}
             url="/developer-tools/javascript-sdk"
             color={globalColors.mainOrange}
             linkTitle={t("Settings:StartEmbedding")}
@@ -122,9 +142,7 @@ const Main = (props: { apiBasicLink: string }) => {
           <Card
             icon={<PluginSvg />}
             title={t("WebPlugins:PluginSDK")}
-            description={t("Settings:PluginDescription", {
-              productName: getBrandName("ProductName"),
-            })}
+            description={t("Settings:PluginDescription")}
             url="/developer-tools/plugin-sdk"
             color={globalColors.secondGreen}
             linkTitle={t("Common:ReadInstructions")}
@@ -171,11 +189,18 @@ const Main = (props: { apiBasicLink: string }) => {
   );
 };
 
-export default inject(({ settingsStore }: TStore) => {
+export default inject(({ settingsStore, userStore }: TStore) => {
   const { apiBasicLink } = settingsStore;
 
   return {
     apiBasicLink,
+    // Docs Connect is SaaS-only and admin/owner-only - see
+    // `canOpenDocsConnect`.
+    canOpenDocsConnect: canOpenDocsConnect(
+      userStore?.user,
+      settingsStore?.standalone,
+      settingsStore?.limitedAccessDevToolsForUsers,
+    ),
   };
 })(observer(Main));
 

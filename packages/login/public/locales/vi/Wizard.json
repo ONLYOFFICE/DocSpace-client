@@ -1,5 +1,5 @@
 {
-  "Desc": "Vui lòng thiết lập dữ liệu đăng ký {{productName}}.",
+  "Desc": "Vui lòng thiết lập dữ liệu đăng ký không gian làm việc.",
   "ErrorEmail": "Địa chỉ email không hợp lệ",
   "ErrorInstanceId": "Mã phiên bản (instance id) không hợp lệ",
   "ErrorLicenseBody": "Giấy phép không hợp lệ. Hãy đảm bảo rằng bạn chọn đúng tệp.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Thỏa thuận giấy phép",
   "PlaceholderLicense": "Tệp giấy phép của bạn",
   "Timezone": "Múi giờ",
-  "WelcomeTitle": "Chào mừng đến với {{productName}} của bạn!"
+  "WelcomeTitle": "Chào mừng đến với không gian làm việc của bạn!"
 }

@@ -33,30 +33,41 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export default function componentLoader(lazyComponent: () => Promise<unknown>) {
-  return new Promise((resolve) => {
-    const hasRefreshed = JSON.parse(
-      window.sessionStorage.getItem("retry-lazy-refreshed") || "false",
-    );
+import {
+  canReloadOnChunkError,
+  scheduleChunkErrorReload,
+} from "./chunk-load-error";
 
+const RELOAD_KEY = "retry-lazy-refreshed";
+
+// Generic so callers keep the module's type: React.lazy needs a
+// Promise<{ default: ComponentType }>, not Promise<unknown>.
+export default function componentLoader<T>(
+  lazyComponent: () => Promise<T>,
+): Promise<T> {
+  // Never rejects: a chunk error either reloads the page or navigates to
+  // /error/520, so the returned promise simply stays pending in that case.
+  return new Promise<T>((resolve) => {
     lazyComponent()
-      .then((component: unknown) => {
+      .then((component) => {
         resolve(component);
       })
       .catch((error: unknown) => {
-        const { message, stack } = error as Error;
-
-        const isChunkError = message?.includes("Loading chunk");
-
-        if (!hasRefreshed && isChunkError) {
-          window.sessionStorage.setItem("retry-lazy-refreshed", "true");
-          return window.location.reload();
+        if (canReloadOnChunkError(error, RELOAD_KEY)) {
+          scheduleChunkErrorReload(RELOAD_KEY);
+          return;
         }
 
-        window.sessionStorage.setItem(
-          "errorLog",
-          JSON.stringify({ message, stack }),
-        );
+        const { message, stack } = error as Error;
+
+        try {
+          window.sessionStorage.setItem(
+            "errorLog",
+            JSON.stringify({ message, stack }),
+          );
+        } catch {
+          // sessionStorage unavailable: navigate without the error log.
+        }
 
         window.location.replace(`/error/520`);
       });

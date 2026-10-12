@@ -35,7 +35,6 @@
 
 import React, { useState, useEffect, useTransition, Suspense } from "react";
 import { DateTime } from "luxon";
-import styled from "styled-components";
 
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router";
@@ -46,9 +45,7 @@ import { WebhookHistoryLoader } from "../sub-components/Loaders";
 
 import EmptyFilter from "./sub-components/EmptyFilter";
 
-const WebhookWrapper = styled.div`
-  width: 100%;
-`;
+import styles from "./WebhookHistory.styled.module.scss";
 
 const parseUrl = (url) => {
   const urlObj = new URL(url);
@@ -119,7 +116,7 @@ const WebhookHistory = (props) => {
   };
 
   return (
-    <WebhookWrapper>
+    <div className={styles.webhookWrapper}>
       <Suspense fallback={<WebhookHistoryLoader />}>
         <main>
           <HistoryFilterHeader applyFilters={applyFilters} />
@@ -130,7 +127,7 @@ const WebhookHistory = (props) => {
           )}
         </main>
       </Suspense>
-    </WebhookWrapper>
+    </div>
   );
 };
 

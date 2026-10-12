@@ -1,20 +1,20 @@
 {
   "key_path": "HtmlCodeDescription",
-  "content": "Embedding {{productName}} or its part using the <script> tag. Copy the HTML code below and insert it into your HTML file.",
-  "content_en_sha1_hash": "4efa1322ac1505133007a6a20916ec7d8c6e9c89",
-  "created_at": "2025-05-19T21:30:54.522Z",
-  "updated_at": "2026-05-15T14:00:06.809Z",
+  "content": "Embed the workspace or its part using the <script> tag. Copy the HTML code below and insert it into your HTML file.",
+  "content_en_sha1_hash": "237d0db8537b2a73d31bdebc5868b8dce09eef30",
+  "created_at": "2026-08-26T16:05:57.874Z",
+  "updated_at": "2026-08-26T16:07:19.957Z",
   "comment": {
-    "text": "This is a descriptive text that appears below the \"HTML Code\" header in the Developer Tools section. It explains how to embed ONLYOFFICE DocSpace or its parts using a `<script>` tag, and instructs the user to copy the provided HTML code. `{{productName}}` will be replaced with the product's brand name (e.g., \"ONLYOFFICE DocSpace\").",
+    "text": "Instructional text in the Javascript SDK settings explaining how to embed the workspace using the provided `<script>` tag and code block.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:15:32.626Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T16:07:19.957Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
-      "line_number": 59,
-      "context": "<CodeWrapper height=\"fit-content\">\n <CategorySubHeader className=\"copy-window-code\">\n {`HTML ${t(\"CodeTitle\")}`}\n </CategorySubHeader>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"HtmlCodeDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <Textarea value={codeBlock} heightTextArea={153} isReadOnly enableCopy />\n </CodeWrapper>\n );\n const js = (",
+      "line_number": 58,
+      "context": "<CodeWrapper height=\"fit-content\">\n <CategorySubHeader className=\"copy-window-code\">\n {`HTML ${t(\"CodeTitle\")}`}\n </CategorySubHeader>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"HtmlCodeDescription\")}\n </Text>\n <Textarea value={codeBlock} heightTextArea={153} isReadOnly enableCopy />\n </CodeWrapper>\n );\n const js = (",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

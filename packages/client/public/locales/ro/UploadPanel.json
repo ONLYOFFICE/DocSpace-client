@@ -1,6 +1,10 @@
 {
   "HideInput": "Ascunde",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} din {{total}}</0> încărcate. Cota de stocare a fost depășită — <1>vizualizați detaliile</1>.",
+  "QuotaExceededTooltip": "Cota de stocare a fost depășită. Eliberați spațiu sau actualizați planul, apoi reîncercați.",
   "Ready": "Gata",
+  "RetryAfterQuotaUpgrade": "Reîncercați după actualizarea cotei",
+  "RetryUpload": "Reîncercare",
   "UploadingAndConversion": "Încărcare și conversie",
   "UploadingError": "Eroare de încărcare"
 }

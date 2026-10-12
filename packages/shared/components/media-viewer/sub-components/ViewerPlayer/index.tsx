@@ -660,7 +660,7 @@ export const ViewerPlayer = ({
               autoPlay,
               preload: "metadata",
               style: omit(style, ["x", "y"]),
-              src: thumbnailSrc ? src : `${src}#t=0.001`,
+              src: src ? (thumbnailSrc ? src : `${src}#t=0.001`) : undefined,
               poster: posterUrl,
               onError: hadleError,
               onClick: handleClickVideo,

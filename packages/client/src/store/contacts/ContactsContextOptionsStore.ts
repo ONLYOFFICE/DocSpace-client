@@ -44,13 +44,14 @@ import {
 } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import type { TContextMenuValueTypeOnClick } from "@docspace/ui-kit/components/context-menu";
+import type { TContextMenuValueTypeOnClick } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import { getUserTypeDescriptionByType } from "@docspace/shared/utils/getUserTypeDescription";
 import { CategoryType } from "@docspace/shared/constants";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
@@ -75,7 +76,7 @@ import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg
 import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
 import PersonShareReactSvgUrl from "PUBLIC_DIR/images/person.share.react.svg?url";
 import PersonInviteReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
-import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
+import CatalogGuestReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.guest.react.svg?url";
 import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -95,7 +96,6 @@ import SettingsSetupStore from "../SettingsSetupStore";
 import UsersStore from "./UsersStore";
 import DialogStore from "./DialogStore";
 import TargetUserStore from "./TargetUserStore";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 
@@ -216,7 +216,7 @@ class ContactsConextOptionsStore {
             id: "option_change-owner",
             key: option,
             icon: RefreshReactSvgUrl,
-            label: t("Translations:OwnerChange"),
+            label: t("Common:OwnerChange"),
             onClick: () => this.toggleChangeOwnerDialog(),
           };
         case "room-list":
@@ -357,12 +357,16 @@ class ContactsConextOptionsStore {
 
     const options = [];
 
+    const getDescription = (type: EmployeeType) =>
+      getUserTypeDescriptionByType(type, t);
+
     const adminOption = {
       id: "menu_change-user_administrator",
       className: "group-menu_drop-down",
       label: getUserTypeTranslation(EmployeeType.Admin, t),
       title: getUserTypeTranslation(EmployeeType.Admin, t),
-      icon: isGuests ? PersonAdminReactSvgUrl : null,
+      description: getDescription(EmployeeType.Admin),
+      icon: PersonAdminReactSvgUrl,
       badgeLabel: isGuests && !standalone ? t("Common:Paid") : undefined,
       isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
@@ -377,7 +381,8 @@ class ContactsConextOptionsStore {
       className: "group-menu_drop-down",
       label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
-      icon: isGuests ? PersonManagerReactSvgUrl : null,
+      description: getDescription(EmployeeType.RoomAdmin),
+      icon: PersonManagerReactSvgUrl,
       badgeLabel: isGuests && !standalone? t("Common:Paid") : undefined,
       isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
@@ -394,7 +399,8 @@ class ContactsConextOptionsStore {
       key: EmployeeType.User,
       label: getUserTypeTranslation(EmployeeType.User, t),
       title: getUserTypeTranslation(EmployeeType.User, t),
-      icon: isGuests ? CatalogUserReactSvgUrl : null,
+      description: getDescription(EmployeeType.User),
+      icon: PersonDefaultReactSvgUrl,
       "data-action": EmployeeType.User,
       action: EmployeeType.User,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
@@ -406,6 +412,8 @@ class ContactsConextOptionsStore {
       key: EmployeeType.Guest,
       label: getUserTypeTranslation(EmployeeType.Guest, t),
       title: getUserTypeTranslation(EmployeeType.Guest, t),
+      description: getDescription(EmployeeType.Guest),
+      icon: CatalogGuestReactSvgUrl,
       "data-action": EmployeeType.Guest,
       action: EmployeeType.Guest,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
@@ -673,6 +681,9 @@ class ContactsConextOptionsStore {
     )
       return null;
 
+    const getDescription = (type: EmployeeType) =>
+      getUserTypeDescriptionByType(type, t);
+
     const accountsUserOptions = [
       ...(isOwner
         ? [
@@ -680,10 +691,9 @@ class ContactsConextOptionsStore {
               id: "accounts-add_administrator",
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
-              label: t("Common:PortalAdmin", {
-                productName: getBrandName("ProductName"),
-              }),
+              label: t("Common:PortalAdmin"),
               onClick: () => this.inviteUser(EmployeeType.Admin),
+              description: getDescription(EmployeeType.Admin),
               "data-type": EmployeeType.Admin,
               action: EmployeeType.Admin,
               key: "administrator",
@@ -699,6 +709,7 @@ class ContactsConextOptionsStore {
               icon: PersonManagerReactSvgUrl,
               label: t("Common:RoomAdmin"),
               onClick: () => this.inviteUser(EmployeeType.RoomAdmin),
+              description: getDescription(EmployeeType.RoomAdmin),
               "data-type": EmployeeType.RoomAdmin,
               action: EmployeeType.RoomAdmin,
               key: "manager",
@@ -712,6 +723,7 @@ class ContactsConextOptionsStore {
         icon: PersonDefaultReactSvgUrl,
         label: t("Common:User"),
         onClick: () => this.inviteUser(EmployeeType.User),
+        description: getDescription(EmployeeType.User),
         "data-type": EmployeeType.User,
         action: EmployeeType.User,
         key: "collaborator",

@@ -1,26 +1,26 @@
 {
   "key_path": "UserDefaultQuotaDescription",
-  "content": "Set the storage quota for users of this {{productName}}. User quota affects storage limit for the {{sectionName}} folder of each user.",
-  "content_en_sha1_hash": "f458865eae0c8ae790107a81c760cf27584a9b51",
-  "created_at": "2025-05-19T21:30:53.116Z",
-  "updated_at": "2026-05-15T14:00:06.873Z",
+  "content": "Set a storage quota for users — this limits how much space each user's {{sectionName}} folder can use.",
+  "content_en_sha1_hash": "8a3539e73d55b9f0e21e0b019f618c036539108e",
+  "created_at": "2026-09-04T07:59:36.526Z",
+  "updated_at": "2026-09-14T20:38:41.444Z",
   "comment": {
-    "text": "This is a subtitle or toggle description explaining the user storage quota setting. It describes how the quota affects the \"My Documents\" folder for each user within the specified product. `{{productName}}` is the name of the product (e.g., ONLYOFFICE DocSpace), and `{{sectionName}}` is the name of the \"My Documents\" folder.",
+    "text": "Subtitle for a settings category item that explains the purpose of the user storage quota; includes a variable {{sectionName}} representing the folder type.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:21:28.711Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-09-04T08:05:57.519Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 69,
-      "context": "/>\n <CategoryItem\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n })}\n isDisabled={isDisabled}\n />",
+      "line_number": 66,
+      "context": "/>\n <CategoryItem\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n sectionName: t(\"Common:Files\"),\n })}\n isDisabled={isDisabled}\n />\n {aiServicesEnabled ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerUser.js",
-      "line_number": 62,
-      "context": "saveQuota={(size) => setUserQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultUsersQuotaSet}\n tabIndex={2}\n dataTestId=\"quota_user\"\n toggleDescription={t(\"UserDefaultQuotaDescription\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n })}\n />\n );",
+      "line_number": 63,
+      "context": "saveQuota={(size) => setUserQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultUsersQuotaSet}\n tabIndex={2}\n dataTestId=\"quota_user\"\n toggleDescription={t(\"UserDefaultQuotaDescription\", {\n sectionName: t(\"Common:Files\"),\n })}\n />\n );\n };",
       "module": "/packages/client"
     }
   ],
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -37,10 +37,11 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Button } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { RoomsType } from "@docspace/shared/enums";
 
 import { getDialogContent } from "./DeleteDialog.helper";
 import styles from "./DeleteDialog.module.scss";
@@ -85,6 +86,7 @@ const DeleteDialogComponent = (props) => {
 
   const isTemplate = selection[0]?.isTemplate;
   const isAIAgent = selection[0]?.isAIAgent;
+  const isFormSpace = selection[0]?.roomType === RoomsType.FormRoom;
 
   const onClose = () => {
     if (
@@ -128,11 +130,11 @@ const DeleteDialogComponent = (props) => {
   const onDeleteRoom = async () => {
     const translations = {
       successRemoveRoom: isAIAgent
-        ? t("Files:AgentRemoved")
-        : t("Files:RoomRemoved"),
+        ? t("Common:AgentRemoved")
+        : t("Common:RoomRemoved"),
       successRemoveRooms: isAIAgent
-        ? t("Files:AgentsRemoved")
-        : t("Files:RoomsRemoved"),
+        ? t("Common:AgentsRemoved")
+        : t("Common:RoomsRemoved"),
     };
 
     if (isTemplate) {
@@ -198,20 +200,21 @@ const DeleteDialogComponent = (props) => {
       return t("Common:DeletePermanently");
     }
 
-    if (isRecycleBinFolder)
-      return t("Common:DeleteForeverButton");
+    if (isRecycleBinFolder) return t("Common:DeleteForeverButton");
 
     if (isPrivacyFolder || selection[0]?.providerKey)
       return t("Common:OKButton");
 
     if (unsubscribe) return t("Common:Remove");
 
-    return t("Common:MoveTo");
+    return t("Common:Move");
   };
 
   const getDialogTitle = () => {
     if (isAIAgent) {
-      return t("DeleteDialog:DeleteAIAgentTitle");
+      return selection.length > 1
+        ? t("Common:DeleteAIAgentsTitle")
+        : t("Common:DeleteAIAgentTitle");
     }
 
     if (isTemplate) {
@@ -219,11 +222,12 @@ const DeleteDialogComponent = (props) => {
     }
 
     if (isRoomDelete) {
-      if (selection.length > 1) return t("DeleteRoomsTitle");
-      return t("DeleteRoomTitle");
+      if (selection.length > 1) return t("Common:DeleteRoomsTitle");
+      if (isFormSpace) return t("Common:DeleteFormSpaceTitle");
+      return t("Common:DeleteRoomTitle");
     }
 
-    if (isRecycleBinFolder) return t("EmptyTrashDialog:DeleteForeverTitle");
+    if (isRecycleBinFolder) return t("Common:DeleteForeverTitle");
 
     if (isPrivacyFolder || selection[0]?.providerKey)
       return t("Common:Confirmation");
@@ -248,6 +252,8 @@ const DeleteDialogComponent = (props) => {
     isAIAgent,
     isAIAgentsFolderRoot,
     unsubscribe,
+    isPrivacyFolder,
+    isFormSpace,
   );
 
   const title = getDialogTitle();
@@ -272,10 +278,14 @@ const DeleteDialogComponent = (props) => {
             style={{ marginTop: "16px" }}
             label={
               isAIAgent
-                ? t("DeleteAIAgentWarning")
+                ? selection.length > 1
+                  ? t("Common:DeleteAIAgentsWarning")
+                  : t("Common:DeleteAIAgentWarning")
                 : isTemplate
                   ? t("DeleteTemplateWarning")
-                  : t("DeleteRoomWarning")
+                  : isFormSpace
+                    ? t("Common:DeleteFormSpaceWarning")
+                    : t("Common:DeleteRoomWarning")
             }
             dataTestId="delete_warning_checkbox"
             isChecked={isChecked}
@@ -316,7 +326,6 @@ const DeleteDialog = withTranslation([
   "Common",
   "Translations",
   "Files",
-  "EmptyTrashDialog",
 ])(DeleteDialogComponent);
 
 export default inject(
@@ -390,3 +399,4 @@ export default inject(
     };
   },
 )(observer(DeleteDialog));
+

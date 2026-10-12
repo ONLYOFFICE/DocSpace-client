@@ -38,10 +38,10 @@ import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
 import copy from "copy-to-clipboard";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 
-import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
@@ -87,9 +87,9 @@ const ClientBlock = ({
   );
 
   return (
-    <StyledBlock>
+    <div className={styles.styledBlock}>
       <BlockHeader header={t("Client")} helpButtonText={helpButtonText} />
-      <StyledInputBlock>
+      <div className={styles.styledInputBlock}>
         <InputGroup
           label={t("ID")}
           name=""
@@ -108,13 +108,13 @@ const ClientBlock = ({
           onChange={onChange}
           withCopy
           isPassword
-          buttonLabel={t("Reset")}
+          buttonLabel={t("Common:Reset")}
           onButtonClick={onResetClick}
           onCopyClick={() => onCopyClick("secret")}
           dataTestId="secret_input_group"
         />
-      </StyledInputBlock>
-    </StyledBlock>
+      </div>
+    </div>
   );
 };
 

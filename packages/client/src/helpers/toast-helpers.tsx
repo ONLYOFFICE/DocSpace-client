@@ -36,10 +36,11 @@
 import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
 
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 import { TFolder } from "@docspace/shared/api/files/types";
+import { showFileExportToast } from "@docspace/shared/utils/openUrlWithExportToast";
 
 export const showSuccessExportRoomIndexToast = (
   t: TTranslation,
@@ -47,26 +48,13 @@ export const showSuccessExportRoomIndexToast = (
   fileUrl: string,
   openOnNewPage: boolean,
 ) => {
-  const toastMessage = (
-    <Trans
-      t={t as TFunction}
-      i18nKey="FileExportDestination"
-      ns="Files"
-      values={{ fileName, sectionName: t("Common:MyDocuments") }}
-      components={{
-        1: (
-          <Link
-            tag="a"
-            href={fileUrl}
-            target={openOnNewPage ? LinkTarget.blank : LinkTarget.self}
-            color="accent"
-          />
-        ),
-      }}
-    />
-  );
-
-  toastr.success(toastMessage);
+  showFileExportToast({
+    url: fileUrl,
+    openOnNewPage,
+    t,
+    fileName,
+    sectionName: t("Common:Files"),
+  });
 };
 
 export const showSuccessCreateFolder = (
@@ -94,4 +82,46 @@ export const showSuccessCreateFolder = (
   );
 
   toastr.success(toastMessage);
+};
+
+const ROOM_GROUP_TOAST_KEYS = {
+  add: {
+    rooms: {
+      single: { tKey: "GroupingRooms:RoomAddedToGroup" },
+      multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
+    },
+    spaces: {
+      single: { tKey: "GroupingRooms:SpaceAddedToGroup" },
+      multiple: { tKey: "GroupingRooms:SpacesAddedToGroup" },
+    },
+  },
+  remove: {
+    rooms: {
+      single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
+      multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
+    },
+    spaces: {
+      single: { tKey: "GroupingRooms:SpaceRemovedFromGroup" },
+      multiple: { tKey: "GroupingRooms:SpacesRemovedFromGroup" },
+    },
+  },
+};
+
+export const showRoomGroupChangedToast = (
+  t: TTranslation | TFunction,
+  action: "add" | "remove",
+  isFormsArea: boolean,
+  count: number,
+  groupName: string,
+) => {
+  const keys = ROOM_GROUP_TOAST_KEYS[action][isFormsArea ? "spaces" : "rooms"];
+
+  toastr.success(
+    <Trans
+      t={t as TFunction}
+      i18nKey={count === 1 ? keys.single.tKey : keys.multiple.tKey}
+      values={{ groupName }}
+      components={{ 1: <strong /> }}
+    />,
+  );
 };

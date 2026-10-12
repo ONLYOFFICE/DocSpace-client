@@ -39,7 +39,7 @@ import { ShareAccessRights, FileStatus } from "@docspace/shared/enums";
 
 import config from "PACKAGE_FILE";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import Badges from "@docspace/shared/components/badges";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
@@ -71,7 +71,9 @@ export default function withBadges(WrappedComponent) {
       setIsVerHistoryPanel(true);
     };
 
-    onBadgeClick = () => {
+    onBadgeClick = (e) => {
+      e?.stopPropagation?.();
+
       const { disableBadgeClick } = this.state;
       if (disableBadgeClick) return;
 
@@ -186,7 +188,7 @@ export default function withBadges(WrappedComponent) {
 
       this.setState({ isLoading: true });
       return lockFileAction(id, !locked)
-        .then(() => toastr.success(t("Translations:FileUnlocked")))
+        .then(() => toastr.success(t("Common:FileUnlocked")))
         .catch((err) => toastr.error(err))
         .finally(() => this.setState({ isLoading: false }));
     };
@@ -403,3 +405,4 @@ export default function withBadges(WrappedComponent) {
     },
   )(observer(WithBadges));
 }
+

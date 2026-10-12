@@ -39,11 +39,11 @@ import { useTranslation } from "react-i18next";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
+import { ScrollbarContext } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import HistoryItemLoader from "@docspace/shared/skeletons/info-panel/body/views/HistoryItemLoader";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { TTranslation } from "@docspace/shared/types";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import {
   parseToDateTime,
   now as dateNow,
@@ -53,7 +53,7 @@ import {
   formatDate,
   getWeekdayName,
   isSameDay,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 
 import { useHistory } from "../FilesView/hooks/useHistory";
 

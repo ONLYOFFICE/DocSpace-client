@@ -1,0 +1,53 @@
+{
+  "key_path": "RenewSubscription",
+  "content": "Renew subscription",
+  "content_en_sha1_hash": "9f8e65758249c349385d2ddcf458f3f056c64837",
+  "created_at": "2026-08-12T11:00:34.750Z",
+  "updated_at": "2026-09-16T18:53:34.508Z",
+  "comment": {
+    "text": "Button label used to initiate the renewal of an existing DocsConnect subscription.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T11:05:21.627Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 221,
+      "context": "const monthlyPrice = calculateTotalPrice(planSize, storagePriceIncrement);\n const renewalShortfall = Math.max(0, Math.ceil(monthlyPrice - walletBalance));\n const isDelayedPaymentTopUp = isDelayedPaymentMethod && renewalShortfall > 0;\n \n const getRenewLabel = () => {\n if (renewalShortfall <= 0) return t(\"RenewSubscription\");\n if (isDelayedPaymentMethod) return t(\"TopUpWallet\");\n return t(\"TopUpAndRenew\");\n };\n const balance = formatWalletCurrency();",
+      "module": "@onlyoffice/apps-ui-kit"
+    },
+    {
+      "file_path": "@onlyoffice/apps-ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 135,
+      "context": "const { isDelayedPaymentMethod } = paymentStore.tariff;\n const renewalShortfall = Math.max(0, Math.ceil(monthlyCharge - credits));\n const isDelayedPaymentTopUp = isDelayedPaymentMethod && renewalShortfall > 0;\n \n const getRenewLabel = () => {\n if (renewalShortfall <= 0) return t(\"Common:RenewSubscription\");\n if (isDelayedPaymentMethod) return t(\"Common:TopUpWallet\");\n return t(\"Common:TopUpAndRenew\");\n };\n const formatCurrency = (value: number, digits: number) =>\n paymentStore.formatWalletCurrency(value, digits, currency);",
+      "module": "@onlyoffice/apps-ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 490,
+      "context": "? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }\n \n if (!insufficientFunds || isTopUpUnavailable)\n return isRenew ? t(\"Common:RenewSubscription\") : t(\"Common:Upgrade\");\n \n if (isDelayedPaymentTopUp) return t(\"Common:TopUpWallet\");\n \n return info.deactivated\n ? t(\"Common:TopUpAndPay\")",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 490,
+      "context": "? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }\n \n if (!insufficientFunds || isTopUpUnavailable)\n return isRenew ? t(\"Common:RenewSubscription\") : t(\"Common:Upgrade\");\n \n if (isDelayedPaymentTopUp) return t(\"Common:TopUpWallet\");\n \n return info.deactivated\n ? t(\"Common:TopUpAndPay\")",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
+      "line_number": 198,
+      "context": "{canceled ? (\n <>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:RenewSubscription\")}\n onClick={() => openBuyPlan?.(\"edit\")}\n isDisabled={!canManage}\n className={styles.buyButton}\n testId=\"docs_connect_buy_button\"\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -43,7 +43,7 @@ import {
   IClientReqDTO,
 } from "@docspace/shared/utils/oauth/types";
 import { AuthenticationMethod } from "@docspace/shared/enums";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { addClient, getClient, updateClient } from "@docspace/shared/api/oauth";
 
 import ResetDialog from "../ResetDialog";
@@ -55,7 +55,7 @@ import OAuthBlock from "./components/OAuthBlock";
 import ScopesBlock from "./components/ScopesBlock";
 import ButtonsBlock from "./components/ButtonsBlock";
 
-import { StyledContainer } from "./ClientForm.styled";
+import styles from "./ClientForm.styled.module.scss";
 import { ClientFormProps, ClientStore } from "./ClientForm.types";
 import { isValidUrl } from "./ClientForm.utils";
 
@@ -434,7 +434,7 @@ const ClientForm = ({
 
   return (
     <>
-      <StyledContainer>
+      <div className={styles.styledContainer}>
         {isLoading ? (
           <ClientFormLoader
             isEdit={isEdit}
@@ -503,7 +503,7 @@ const ClientForm = ({
             />
           </>
         )}
-      </StyledContainer>
+      </div>
       {resetDialogVisible ? <ResetDialog /> : null}
     </>
   );

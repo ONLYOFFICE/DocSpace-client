@@ -381,5 +381,5 @@ export const feedInfo = [
 ] as const;
 
 export const getFeedInfo = (feed: TFeedAction<TFeedData | RoomMember>) => {
-  return feedInfo.find((info) => info.key === feed.action.key)!;
+  return feedInfo.find((info) => info.key === feed.action.key);
 };

@@ -37,8 +37,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { isMobile } from "@docspace/shared/utils";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { Aside } from "@docspace/ui-kit/components/aside";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
+import { Aside } from "@onlyoffice/apps-ui-kit/components/aside";
 
 import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
@@ -53,6 +53,10 @@ import HeaderUnAuth from "./sub-components/header-unauth";
 import HeaderNav from "./sub-components/header-nav";
 import Header from "./sub-components/header";
 import styles from "./nav.module.scss";
+
+// Minimum scroll delta (px) that counts as a deliberate direction change.
+// Below this the movement is momentum/rubber-band noise rather than a gesture.
+const SCROLL_THRESHOLD = 5;
 
 const NavMenu = (props) => {
   const {
@@ -76,6 +80,7 @@ const NavMenu = (props) => {
 
   const timeout = React.useRef(null);
   const scrollTopRef = React.useRef(0);
+  const headerRef = React.useRef(null);
 
   const location = useLocation();
 
@@ -88,25 +93,47 @@ const NavMenu = (props) => {
     isNavHoverEnabledProp,
   );
   const [isFixed, setIsFixed] = useState(true);
+  // Bumped on every scroll that clears the threshold, so the --nav-offset effect
+  // re-measures the bar as it slides in and out of its sticky range instead of
+  // only when isFixed flips.
+  const [scrollTick, setScrollTick] = useState(0);
 
   const onScroll = useCallback((e) => {
     const eventTarget = e.target;
-    const currentScrollTop = Math.max(0, eventTarget.scrollTop);
     const scrollHeight = eventTarget.scrollHeight;
     const clientHeight = eventTarget.clientHeight;
 
+    // Clamp to the real scrollable range: iOS rubber-banding reports scrollTop
+    // beyond both ends during overscroll, and those out-of-range values would
+    // otherwise register as direction changes once the bounce settles back.
+    const maxScrollTop = Math.max(0, scrollHeight - clientHeight);
+    const currentScrollTop = Math.min(
+      Math.max(0, eventTarget.scrollTop),
+      maxScrollTop,
+    );
+
     const scrollShift = scrollTopRef.current - currentScrollTop;
+
+    // Ignore sub-threshold jitter without losing the reference point: momentum
+    // scrolling emits a stream of tiny deltas (and iOS re-fires events with an
+    // unchanged scrollTop while the URL bar animates), so reacting to every one
+    // of them would toggle the bar on noise. Keeping scrollTopRef untouched
+    // here lets small deltas accumulate until they add up to a real gesture.
+    if (Math.abs(scrollShift) < SCROLL_THRESHOLD) return;
+
     scrollTopRef.current = currentScrollTop;
+    setScrollTick((tick) => tick + 1);
 
     const isNearBottom = scrollHeight - (currentScrollTop + clientHeight) < 100;
 
     const isAtTop = currentScrollTop < 20;
 
-    if (isAtTop) {
-      setIsFixed(false);
-    } else if (scrollShift > 0 && !isNearBottom) {
+    // An upward scroll wins over isAtTop: while the bar is pinned it occupies
+    // the first 48px of the scroller, so a gesture that ends near the top still
+    // reports scrollTop < 20 — checking isAtTop first would unpin mid-gesture.
+    if (scrollShift > 0 && !isNearBottom) {
       setIsFixed(true);
-    } else if (scrollShift <= 0) {
+    } else if (isAtTop || scrollShift <= 0) {
       setIsFixed(false);
     }
   }, []);
@@ -122,9 +149,36 @@ const NavMenu = (props) => {
     };
   }, [onScroll]);
 
+  // --nav-offset must describe the space the bar actually occupies at the top of
+  // the viewport, because the section header (top: var(--nav-offset)) and the
+  // filter (top: calc(53px + var(--nav-offset))) both stack against it.
+  //
+  // isFixed alone is not that answer. `position: sticky` only pins an element
+  // inside its own scroll range, so far down a long list the bar is scrolled
+  // thousands of pixels above the viewport and cannot reach top: 0 no matter
+  // what isFixed says. Publishing 48px there reserved room for a bar that is not
+  // on screen, and the header and filter came to rest 48px too low -- the gap
+  // that showed up after scrolling to the bottom of the list and back up.
+  //
+  // Measuring the rendered element collapses both conditions into one: the
+  // offset is whatever height the bar really covers, and it is 0 whenever the
+  // bar is unpinned or out of view.
   useEffect(() => {
-    if (isFixed) {
-      document.documentElement.style.setProperty("--nav-offset", "48px");
+    const element = headerRef.current;
+
+    if (!element) {
+      document.documentElement.style.removeProperty("--nav-offset");
+      return undefined;
+    }
+
+    const { top, height } = element.getBoundingClientRect();
+    const visibleHeight = Math.round(Math.min(height, Math.max(0, top + height)));
+
+    if (isFixed && top <= 0.5 && visibleHeight > 0) {
+      document.documentElement.style.setProperty(
+        "--nav-offset",
+        `${visibleHeight}px`,
+      );
     } else {
       document.documentElement.style.removeProperty("--nav-offset");
     }
@@ -132,7 +186,7 @@ const NavMenu = (props) => {
     return () => {
       document.documentElement.style.removeProperty("--nav-offset");
     };
-  }, [isFixed]);
+  }, [isFixed, scrollTick]);
 
   useEffect(() => {
     setIsFixed(false);
@@ -194,6 +248,7 @@ const NavMenu = (props) => {
 
   return (
     <header
+      ref={headerRef}
       className={classNames(styles.header, {
         [styles.isFixed]: isFixed,
       })}

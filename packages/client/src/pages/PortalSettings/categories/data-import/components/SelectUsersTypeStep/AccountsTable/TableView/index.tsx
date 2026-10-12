@@ -40,67 +40,25 @@ import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import {
+  TableContainer,
   TableGroupMenu,
   TableBody,
   TGroupMenuItem,
-} from "@docspace/ui-kit/components/table";
-import { injectDefaultTheme } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+} from "@onlyoffice/apps-ui-kit/components/table";
 
-import { StyledTableContainer } from "../../../../StyledDataImport";
+import styles from "../../../../StyledDataImport.module.scss";
 import UsersTableRow from "./UsersTableRow";
 import UsersTableHeader from "./UsersTableHeader";
 import {
   TypeSelectTableViewProps,
   InjectedTypeSelectTableViewProps,
 } from "../../../../types";
-
-const UserSelectTableContainer = styled(StyledTableContainer).attrs(
-  injectDefaultTheme,
-)`
-  .table-group-menu {
-    height: 69px;
-    position: sticky;
-    z-index: 201;
-    width: calc(100% + 40px);
-    margin-top: -33px;
-    margin-inline-start: -20px;
-    top: 0;
-
-    margin-bottom: -36px;
-
-    .table-container_group-menu {
-      border-image-slice: 0;
-      border-image-source: none;
-      border-bottom: ${(props) =>
-        props.theme.client.settings.migration.workspaceBorder};
-      box-shadow: ${globalColors.menuShadow} 0px 15px 20px;
-      padding: 0px;
-    }
-
-    .table-container_group-menu-separator {
-      margin: 0 16px;
-    }
-
-    .table-container_header {
-      position: absolute;
-      padding-block: 0;
-      padding-inline: 28px 15px;
-    }
-  }
-
-  .buttons-box {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-  }
-`;
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudFourthColumnsSize_ver-${TABLE_VERSION}`;
@@ -152,7 +110,8 @@ const TableView = (props: TypeSelectTableViewProps) => {
   ];
 
   return (
-    <UserSelectTableContainer
+    <TableContainer
+      className={`${styles.styledTableContainer} ${styles.userSelectTableContainer}`}
       forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
       useReactWindow
     >
@@ -234,7 +193,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
           }
         />
       )}
-    </UserSelectTableContainer>
+    </TableContainer>
   );
 };
 

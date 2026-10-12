@@ -63,7 +63,7 @@ test.describe("Invite", () => {
   test("Create invitation link", async ({ page, mockRequest, baseUrl }) => {
     await page.goto(`${baseUrl}/accounts/people`);
 
-    const plusButton = page.getByTestId("plus-button");
+    const plusButton = page.getByTestId("main-button");
     await expect(plusButton).toBeVisible();
 
     await plusButton.click();
@@ -73,7 +73,9 @@ test.describe("Invite", () => {
     mockRequest.use(getEmptyPortalInvitationLink(TEST_PORT, EmployeeType.User));
     await menuItem.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
+    const inviteDialog = page
+      .locator("#invite_panel_modal")
+      .getByTestId("modal-dialog");
     await expect(inviteDialog).toBeVisible();
 
     await expect(inviteDialog).toHaveScreenshot([
@@ -97,7 +99,7 @@ test.describe("Invite", () => {
   test("Delete invitation link", async ({ page, mockRequest, baseUrl }) => {
     await page.goto(`${baseUrl}/accounts/people`);
 
-    const plusButton = page.getByTestId("plus-button");
+    const plusButton = page.getByTestId("main-button");
     await expect(plusButton).toBeVisible();
     await plusButton.click();
 
@@ -106,7 +108,9 @@ test.describe("Invite", () => {
     mockRequest.use(getPortalInvitationLink(TEST_PORT, EmployeeType.User));
     await menuItem.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
+    const inviteDialog = page
+      .locator("#invite_panel_modal")
+      .getByTestId("modal-dialog");
     await expect(inviteDialog).toBeVisible();
 
     await expect(inviteDialog).toHaveScreenshot([
@@ -131,7 +135,7 @@ test.describe("Invite", () => {
   test("Update invitation link", async ({ page, mockRequest, baseUrl }) => {
     await page.goto(`${baseUrl}/accounts/people`);
 
-    const plusButton = page.getByTestId("plus-button");
+    const plusButton = page.getByTestId("main-button");
     await expect(plusButton).toBeVisible();
 
     await plusButton.click();
@@ -141,7 +145,9 @@ test.describe("Invite", () => {
     mockRequest.use(getPortalInvitationLink(TEST_PORT, EmployeeType.User));
     await menuItem.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
+    const inviteDialog = page
+      .locator("#invite_panel_modal")
+      .getByTestId("modal-dialog");
     await expect(inviteDialog).toBeVisible();
 
     await expect(inviteDialog).toHaveScreenshot([
@@ -154,7 +160,9 @@ test.describe("Invite", () => {
     await expect(settingsIcon).toBeVisible();
     await settingsIcon.click();
 
-    const settingsDialog = page.getByTestId("modal-dialog").last();
+    const settingsDialog = page
+      .locator("#invite_panel_modal")
+      .getByTestId("modal-dialog");
     await expect(settingsDialog).toBeVisible();
 
     await expect(settingsDialog).toHaveScreenshot([
@@ -187,7 +195,7 @@ test.describe("Invite", () => {
   test("Invitation link expired", async ({ page, mockRequest, baseUrl }) => {
     await page.goto(`${baseUrl}/accounts/people`);
 
-    const plusButton = page.getByTestId("plus-button");
+    const plusButton = page.getByTestId("main-button");
     await expect(plusButton).toBeVisible();
 
     await plusButton.click();
@@ -199,7 +207,9 @@ test.describe("Invite", () => {
     );
     await menuItem.click();
 
-    const settingsDialog = page.getByTestId("modal-dialog").last();
+    const settingsDialog = page
+      .locator("#invite_panel_modal")
+      .getByTestId("modal-dialog");
     await expect(settingsDialog).toBeVisible();
 
     await expect(settingsDialog).toHaveScreenshot([
@@ -226,7 +236,7 @@ test.describe("Invite", () => {
   }) => {
     await page.goto(`${baseUrl}/accounts/people`);
 
-    const plusButton = page.getByTestId("plus-button");
+    const plusButton = page.getByTestId("main-button");
     await expect(plusButton).toBeVisible();
 
     await plusButton.click();
@@ -238,7 +248,9 @@ test.describe("Invite", () => {
     );
     await menuItem.click();
 
-    const settingsDialog = page.getByTestId("modal-dialog").last();
+    const settingsDialog = page
+      .locator("#invite_panel_modal")
+      .getByTestId("modal-dialog");
     await expect(settingsDialog).toBeVisible();
 
     await expect(settingsDialog).toHaveScreenshot([

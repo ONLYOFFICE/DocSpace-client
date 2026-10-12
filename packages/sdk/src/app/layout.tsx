@@ -37,22 +37,24 @@ import path from "path";
 import { headers, cookies } from "next/headers";
 import type { Metadata } from "next";
 
-import { ThemeKeys } from "@docspace/ui-kit/enums";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
+import { SYSTEM_THEME_KEY } from "@onlyoffice/apps-ui-kit/providers/theme/themes/constants";
 import {
   getDirectionByLanguage,
   getFontFamilyDependingOnLanguage,
-} from "@docspace/ui-kit/providers/theme/rtl-utils";
+} from "@onlyoffice/apps-ui-kit/providers/theme/rtl-utils";
 
 import "@docspace/shared/styles/theme.scss";
 
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
 import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
+import ChunkRetryScript from "@docspace/shared/components/chunk-retry-script";
 
 import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
 import {
   LOCALE_HEADER,
+  OAUTH_FRAME_HEADER,
   STYLES_URL_HEADER,
   THEME_HEADER,
 } from "@/utils/constants";
@@ -106,13 +108,16 @@ export default async function RootLayout({
 
   const initialLocaleResources = await loadTranslationsForLocale(locale, {
     namespaces: [],
-    appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
-    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
+    appLocalesDir:
+      process.env.NEXT_APP_LOCALES_DIR ??
+      path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir:
+      process.env.NEXT_SHARED_LOCALES_DIR ??
+      path.join(process.cwd(), "../../public/locales"),
   });
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
-    | ThemeKeys
-    | undefined;
+    ThemeKeys | undefined;
 
   const currentColorScheme = colorTheme?.themes.find(
     (t) => t.id === colorTheme.selected,
@@ -140,6 +145,7 @@ export default async function RootLayout({
       <head>
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
         <meta charSet="utf-8" />
+        <ChunkRetryScript />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
@@ -163,6 +169,7 @@ export default async function RootLayout({
           </style>
         )}
         <Providers
+          oauthFrame={hdrs.get(OAUTH_FRAME_HEADER) === "1"}
           contextData={{
             initialTheme: theme,
             user: self,

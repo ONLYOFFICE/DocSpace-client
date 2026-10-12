@@ -1,26 +1,26 @@
 {
   "key_path": "SetDefaultRoomQuota",
-  "content": "Set the default storage quota for rooms in this {{productName}}. It can later be adjusted for each room individually by the room admin.",
-  "content_en_sha1_hash": "70a076e65a43bd6bbbe50850d4834ecd8ec75cad",
-  "created_at": "2025-05-19T21:30:52.660Z",
-  "updated_at": "2026-05-15T14:00:06.873Z",
+  "content": "Set a default storage quota for rooms in this workspace — room admins can adjust it later for individual rooms.",
+  "content_en_sha1_hash": "c93c23e62c99483f8768c7a0eb60181f8305f52d",
+  "created_at": "2026-09-04T07:59:36.298Z",
+  "updated_at": "2026-10-07T14:48:38.552Z",
   "comment": {
-    "text": "This string is used as a subtitle for a \"Quota Per Room\" setting and as a toggle description within the \"Quota Per Room\" settings page. It describes the functionality of setting a default storage quota for rooms, which can be overridden by room admins. `{{productName}}` will be replaced with the product's brand name.",
+    "text": "Subtitle for a menu item and a description for a toggle in the storage management settings, explaining the default storage quota for rooms.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:22:12.098Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-09-04T08:06:21.304Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 60,
-      "context": "<StyledBaseQuotaComponent>\n <CategoryItem\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\", {\n productName: getBrandName(\"ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <CategoryItem",
+      "line_number": 59,
+      "context": "<div className={styles.baseQuotaComponent}>\n <CategoryItem\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\")}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom.js",
-      "line_number": 60,
-      "context": "saveQuota={(size) => setRoomQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultRoomsQuotaSet}\n tabIndex={1}\n dataTestId=\"quota_room\"\n toggleDescription={t(\"SetDefaultRoomQuota\", {\n productName: getBrandName(\"ProductName\"),\n })}\n />\n );\n };",
+      "line_number": 61,
+      "context": "saveQuota={(size) => setRoomQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultRoomsQuotaSet}\n tabIndex={1}\n dataTestId=\"quota_room\"\n toggleDescription={t(\"SetDefaultRoomQuota\")}\n />\n );\n };\n \n export const QuotaPerRoomComponentSection = inject(({ currentQuotaStore }) => {",
       "module": "/packages/client"
     }
   ],
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

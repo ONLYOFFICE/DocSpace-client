@@ -35,14 +35,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 
 import { inject, observer } from "mobx-react";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";
-import { isDesktop } from "@docspace/ui-kit/utils/device";
+import { isDesktop } from "@onlyoffice/apps-ui-kit/utils/device";
 import { MainContainer } from "../StyledSecurity";
 import { TfaSection } from "./tfa";
 import { PasswordStrengthSection } from "./passwordStrength";
@@ -56,7 +56,6 @@ import { DevToolsAccessSection } from "./devToolsAccess";
 import { AccessControlSection } from "./accessControl";
 
 import MobileView from "./mobileView";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const HEADER_HEIGHT_DESKTOP = 69;
 const HEADER_HEIGHT_TABLET = 61;
@@ -97,7 +96,7 @@ const AccessPortal = (props) => {
 
   useEffect(() => {
     setDocumentTitle(
-      t("PortalAccess", { productName: getBrandName("ProductName") }),
+      t("PortalAccess"),
     );
 
     return () => {
@@ -189,9 +188,7 @@ const AccessPortal = (props) => {
 
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          {t("TwoFactorAuthEnableDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("TwoFactorAuthEnableDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="TwoFactorAuthSave" />
@@ -248,7 +245,6 @@ const AccessPortal = (props) => {
           <Trans
             t={t}
             i18nKey="DeveloperToolsAccessDescription"
-            values={{ productName: getBrandName("ProductName") }}
             components={{ strong: <strong /> }}
           />
         </Text>
@@ -273,9 +269,7 @@ const AccessPortal = (props) => {
       </Text>
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          {t("InvitationSettingsDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("InvitationSettingsDescription")}
         </Text>
 
         {invitationSettingsUrl ? (
@@ -335,9 +329,7 @@ const AccessPortal = (props) => {
       </Text>
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          {t("AdminsMessageSettingDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("AdminsMessageSettingDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="SaveToApply" />

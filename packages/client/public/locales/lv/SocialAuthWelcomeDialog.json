@@ -1,6 +1,9 @@
 {
-  "ProductNameDetail": "{{productName}} nosaukums",
-  "SetEmailPassword": "Iestatīt paroli",
-  "WelcomeSubtitle": "Jūsu vieta ir veiksmīgi izveidota. Pārskatiet sava profila informāciju un sāciet darbu.",
+  "ChangeData": "Izmainīt datus un paroli",
+  "ClickButtonBelow": "Ja vēlaties pieslēgties, izmantojot savu e-pastu, lūdzu, norīciet savu paroli. <br/> Kad būsiet gatavs, lūdzu, noklikšķiniet uz tālāk esošās pogas.",
+  "ContinueToProduct": "Turpiniet uz darbvietu",
+  "GeneratedPassword": "Ģenerēta parole",
+  "ProductNameDetail": "Darbvietas nosaukums",
+  "ReviewAccountDetails": "Lūdzu, atcerieties pārskatīt savus konta datus:",
   "YourProfileDetails": "Jūsu profila informācija"
 }

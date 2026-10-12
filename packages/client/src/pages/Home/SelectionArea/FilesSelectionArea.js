@@ -36,7 +36,7 @@
 import React, { useState, useLayoutEffect, useMemo, useCallback } from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
-import { SelectionArea as SelectionAreaComponent } from "@docspace/ui-kit/components/selection-area";
+import { SelectionArea as SelectionAreaComponent } from "@onlyoffice/apps-ui-kit/components/selection-area";
 import { getCountTilesInRow } from "@docspace/shared/utils";
 
 const getCountOfMissingFilesTiles = (itemsLength, countTilesInRow) => {
@@ -149,12 +149,12 @@ export default inject(
     hotkeyStore,
   }) => {
     const { dragging, viewAs, setSelections, folders, files } = filesStore;
-    const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isFormsFolder } = treeFoldersStore;
     const { isVisible: isInfoPanelVisible } = infoPanelStore;
     const { isIndexEditingMode } = indexingStore;
     const { selectionAreaIsEnabled, setWithContentSelection } = hotkeyStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
 
     return {
       dragging,

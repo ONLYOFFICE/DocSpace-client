@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesMultipleConvertSelectedFiles",
+  "content": "Convert selected files",
+  "content_en_sha1_hash": "2e5b582699838828d85e6fff8f36e5f57906a313",
+  "created_at": "2026-08-04T09:58:55.121Z",
+  "updated_at": "2026-08-05T18:10:13.409Z",
+  "comment": {
+    "text": "Action label in the AI suggestions menu used to trigger the conversion process for all currently selected files.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:10:13.409Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 423,
+      "context": "{\n name: t(\"AiSuggestions:FilesMultipleCreateACombinedSummary\"),\n prompt: t(\"AiSuggestions:FilesMultipleCreateACombinedSummaryPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesMultipleConvertSelectedFiles\"),\n prompt: t(\"AiSuggestions:FilesMultipleConvertSelectedFilesPrompt\"),\n },\n ],\n \n // +",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -41,16 +41,16 @@ import classNames from "classnames";
 
 import LockedReactSvg from "PUBLIC_DIR/images/icons/16/locked.react.svg";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { DropDownItem } from "../../../../../components/drop-down-item";
 import { BackupStorageType, ThirdPartyStorages } from "../../../../../enums";
 import { getOptions } from "../../../../../utils/getThirdPartyStoragesOptions";
 import { getFromLocalStorage } from "../../../../../utils";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { THIRD_PARTY_SERVICES_URL } from "../../../../../constants";
-import type { ButtonSize } from "@docspace/ui-kit/components/button";
+import type { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import type {
   SelectedStorageType,
   StorageRegionsType,
@@ -78,6 +78,9 @@ interface ThirdPartyStorageModuleProps {
   buttonSize?: ButtonSize;
   isBackupPaid?: boolean;
   isFreeBackupsLimitReached?: boolean;
+  copyButtonLabel?: string;
+  isToppingUp?: boolean;
+  isCopyBlocked?: boolean;
   thirdPartyStorage: SelectedStorageType[];
   formSettings: Record<string, string>;
   errorsFieldsBeforeSafe: Record<string, boolean>;
@@ -122,6 +125,9 @@ const ThirdPartyStorageModule = ({
   isThirdPartyAvailable,
   isBackupPaid,
   isFreeBackupsLimitReached,
+  copyButtonLabel,
+  isToppingUp,
+  isCopyBlocked,
 }: ThirdPartyStorageModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -189,6 +195,9 @@ const ThirdPartyStorageModule = ({
     selectedId,
     buttonSize,
     onMakeCopyIntoStorage,
+    copyButtonLabel,
+    isToppingUp,
+    isCopyBlocked,
     t,
     isValidForm,
     isNeedFilePath,
@@ -281,7 +290,9 @@ const ThirdPartyStorageModule = ({
           className={classNames(styles.backupCombo, "backup_combo")}
           advancedOptions={advancedOptions}
           selectedOption={{ key: 0, label: selectedStorageTitle }}
-          isDisabled={!isMaxProgress || isStartCopy || !thirdPartyStorage}
+          isDisabled={
+            !isMaxProgress || isStartCopy || !thirdPartyStorage || isCopyBlocked
+          }
           dataTestId="backup_storage_combobox"
           dropDownTestId="backup_storage_dropdown"
         />

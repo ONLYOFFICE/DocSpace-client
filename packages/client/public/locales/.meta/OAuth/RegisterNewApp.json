@@ -1,14 +1,14 @@
 {
   "key_path": "RegisterNewApp",
-  "content": "Register a new application",
-  "content_en_sha1_hash": "a837b93db395ef80c1fdcc0f221a96f5a578b9b7",
-  "created_at": "2025-05-19T21:30:53.992Z",
-  "updated_at": "2026-05-15T14:00:06.826Z",
+  "content": "Register new application",
+  "content_en_sha1_hash": "b08f6007932cf95722e13f1e8956cbd2c971fa09",
+  "created_at": "2026-08-26T16:05:57.297Z",
+  "updated_at": "2026-08-26T16:10:43.370Z",
   "comment": {
-    "text": "This is a button label. It allows users to register a new application within the developer tools settings.",
+    "text": "Button label in the OAuth developer tools section used to initiate the process of registering a new application.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:18:32.190Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T16:10:43.370Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

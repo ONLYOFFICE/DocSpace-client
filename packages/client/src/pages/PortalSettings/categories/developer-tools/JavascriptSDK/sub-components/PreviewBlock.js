@@ -36,7 +36,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { objectToGetParams } from "@docspace/shared/utils/common";
-import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
+import { Tabs, TabsTypes } from "@onlyoffice/apps-ui-kit/components/tabs";
 
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
@@ -60,7 +60,6 @@ export const PreviewBlock = ({
   const { t, ready } = useTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "Translations",
     "CreateEditRoomDialog",
@@ -69,8 +68,8 @@ export const PreviewBlock = ({
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
-  const { events: _, ...configWithoutEvents } = config;
-  const params = objectToGetParams(configWithoutEvents);
+  const { events: _, customActions: __, ...scriptTagConfig } = config;
+  const params = objectToGetParams(scriptTagConfig);
 
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
@@ -93,7 +92,7 @@ export const PreviewBlock = ({
     },
     {
       id: "code",
-      name: t("Code"),
+      name: t("Common:Code"),
       content: code,
       iconName: CodeReactSvgUrl,
     },

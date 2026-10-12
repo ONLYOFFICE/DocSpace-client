@@ -1,4 +1,4 @@
 {
   "ErrorEmptyResponse": "Không có hồi đáp",
-  "ErrorUnavailableText": "{{productName}} không khả dụng"
+  "ErrorUnavailableText": "Không gian làm việc không khả dụng"
 }

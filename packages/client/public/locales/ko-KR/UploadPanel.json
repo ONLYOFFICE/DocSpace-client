@@ -1,6 +1,10 @@
 {
   "HideInput": "숨기기",
+  "QuotaExceededDuringUpload": "<0>{{total}} 중 {{uploaded}}</0> 업로드됨. 저장 공간 할당량 초과 — <1>자세히 보기</1>.",
+  "QuotaExceededTooltip": "저장 공간 할당량을 초과했습니다. 공간을 확보하거나 플랜을 업그레이드한 후 다시 시도하세요.",
   "Ready": "완료",
+  "RetryAfterQuotaUpgrade": "할당량 업그레이드 후 재시도",
+  "RetryUpload": "재시도",
   "UploadingAndConversion": "업로드 & 변환",
   "UploadingError": "업로드 오류"
 }

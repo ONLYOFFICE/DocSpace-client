@@ -51,12 +51,12 @@ import type {
   TGetColorTheme,
   TSettings,
 } from "@docspace/shared/api/settings/types";
+import type { ILogo } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
 
 import { logger } from "@/../logger.mjs";
 
 import type {
   ActionType,
-  TGenerationToolCallState,
   IInitialConfig,
   TCatchError,
   TError,
@@ -256,12 +256,12 @@ export async function createFile(
       };
     }
 
-    if (!fileRes.ok && fileRes.status !== 403) {
+    const file = await fileRes.json().catch(() => undefined);
+
+    if (!file || (!fileRes.ok && !file.error)) {
       logger.error(`POST /files/${parentId}/file failed: ${fileRes.status}`);
       return;
     }
-
-    const file = await fileRes.json();
 
     if (file.error) {
       const hdrs = await headers();
@@ -279,10 +279,10 @@ export async function createFile(
           ? file.error
           : {
               message: file.error?.message,
-              status: file.error?.statusCode,
+              status: file.error?.statusCode ?? fileRes.status,
               type: file.error?.type,
               stack: file.error?.stack,
-              statusCode: file?.statusCode,
+              statusCode: file?.statusCode ?? fileRes.status,
             }
         : undefined,
     };
@@ -515,9 +515,7 @@ export async function openEdit(
         config.response.editorUrl = (
           config.response as IInitialConfig
         ).editorUrl.replace(REPLACED_URL_PATH, "");
-        return { ...config.response } as IInitialConfig & {
-          generationToolCallState?: TGenerationToolCallState;
-        };
+        return { ...config.response } as IInitialConfig;
       }
 
       const isAuth = share ? true : await checkIsAuthenticated();
@@ -599,6 +597,37 @@ export async function getColorTheme() {
     return colorTheme.response as TGetColorTheme;
   } catch (error) {
     logger.error(`Error in getColorTheme: ${error}`);
+  }
+}
+
+export async function getWhiteLabelLogos() {
+  logger.debug(`Start GET /settings/whitelabel/logos`);
+
+  try {
+    const [getLogosRes] = await createRequest(
+      [`/settings/whitelabel/logos`],
+      [["", ""]],
+      "GET",
+    );
+
+    const res = await fetch(getLogosRes);
+
+    if (!res.ok) {
+      const hdrs = await headers();
+
+      const hostname = hdrs.get("x-forwarded-host");
+
+      logger.error(
+        `error: ${res} url: ${hostname} GET /settings/whitelabel/logos failed`,
+      );
+      return;
+    }
+
+    const logos = await res.json();
+
+    return logos.response as ILogo[];
+  } catch (error) {
+    logger.error(`Error in getWhiteLabelLogos: ${error}`);
   }
 }
 
@@ -736,7 +765,6 @@ export async function getData(
   action?: ActionType,
   share?: string,
   editorType?: string,
-  withTool?: string,
 ) {
   const view = action === "view";
 
@@ -768,9 +796,6 @@ export async function getData(
         isSharingAccess: false,
         doc,
         fileId: newFileId !== fileId ? newFileId : fileId,
-        generationToolCallState: withTool
-          ? config.generationToolCallState
-          : undefined,
       };
 
       const successAuth = !!user;
@@ -797,6 +822,10 @@ export async function getData(
 
       if (view) {
         response.config.editorConfig.mode = "view";
+      }
+
+      if (response.config.file.encrypted) {
+        response.config.editorConfig.canCoAuthoring = false;
       }
 
       response.successAuth = successAuth;

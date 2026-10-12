@@ -33,12 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
+
+import styles from "./IdpSettings.module.scss";
 import { useTranslation } from "react-i18next";
 
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { Text } from "@docspace/ui-kit/components/text";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import SsoComboBox from "./sub-components/SsoComboBox";
 import SsoFormField from "./sub-components/SsoFormField";
@@ -51,18 +52,6 @@ import {
 
 const PROVIDER_URL = "https://idpservice/idp";
 
-const StyledWrapper = styled.div`
-  .radio-button-box {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    margin: 5px 0;
-  }
-  .radio-button-group {
-    margin-inline-start: 24px;
-  }
-`;
 
 const IdpSettings = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Settings"]);
@@ -87,7 +76,7 @@ const IdpSettings = (props) => {
   } = props;
 
   return (
-    <StyledWrapper>
+    <div className={styles.styledWrapper}>
       <UploadXML />
 
       <SsoFormField
@@ -135,13 +124,13 @@ const IdpSettings = (props) => {
         }
         dataTestId="sso_endpoint_url"
       >
-        <div className="radio-button-box">
+        <div className={styles.radioButtonBox}>
           <Text fontSize="12px" fontWeight={400} noSelect>
             {t("Binding")}
           </Text>
 
           <RadioButtonGroup
-            className="radio-button-group"
+            className={styles.radioButtonGroup}
             isDisabled={!enableSso}
             name="ssoBinding"
             onClick={setInput}
@@ -175,13 +164,13 @@ const IdpSettings = (props) => {
         }
         dataTestId="slo_endpoint_url"
       >
-        <div className="radio-button-box">
+        <div className={styles.radioButtonBox}>
           <Text fontSize="12px" fontWeight={400}>
             {t("Binding")}
           </Text>
 
           <RadioButtonGroup
-            className="radio-button-group"
+            className={styles.radioButtonGroup}
             isDisabled={!enableSso}
             name="sloBinding"
             onClick={setInput}
@@ -201,7 +190,7 @@ const IdpSettings = (props) => {
         tabIndex={8}
         dataTestId="name_id_format_combobox"
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

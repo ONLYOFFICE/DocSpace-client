@@ -35,25 +35,33 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { Label } from "@docspace/ui-kit/components/label";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import * as Styled from "./index.styled";
+import styles from "./index.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
+import ApplyToPortalDialog from "../../developer-tools/DocsConnect/TenantPanel/sub-components/ApplyToPortalDialog";
+
+const DOCS_CONNECT_PATH = "/developer-tools/docs-connect";
 
 const URL_REGEX =
   /^(?:https?:\/\/(?:[^\/]+\/)?|^\/)[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
 const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/`;
+const SECRET_KEY_MASK_CHAR = "•";
+const SECRET_KEY_MASK = SECRET_KEY_MASK_CHAR.repeat(16);
 
 const DocumentService = ({
   changeDocumentServiceLocation,
@@ -61,18 +69,27 @@ const DocumentService = ({
   documentServiceSettingsUrl,
   initialDocumentServiceData,
   showPortalSettingsLoader,
+  apiBasicLink,
+  docsConnectConnection,
+  fetchDocsConnectConnection,
+  applyDocsConnectToPortal,
+  isDocsConnectAvailable,
+  showDocsConnectHint,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
+  const navigate = useNavigate();
 
   const [isSaveLoading, setSaveIsLoading] = useState(false);
   const [isResetLoading, setResetIsLoading] = useState(false);
+  const [connectDialogVisible, setConnectDialogVisible] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
 
   const [docServiceUrl, setDocServiceUrl] = useState("");
   const [docServiceUrlIsValid, setDocServiceUrlIsValid] = useState(true);
 
   const [isDisabledCertificat, setIsDisabledCertificat] = useState(false);
 
-  const [secretKey, setSecretKey] = useState("");
+  const [secretKey, setSecretKey] = useState(SECRET_KEY_MASK);
   const [authHeader, setAuthHeader] = useState("");
 
   const [portalUrl, setPortalUrl] = useState("");
@@ -81,11 +98,10 @@ const DocumentService = ({
   const [internalUrlIsValid, setInternalUrlIsValid] = useState(true);
 
   const [isDefaultSettings, setIsDefaultSettings] = useState(false);
-  const [secretKeyVersion, setSecretKeyVersion] = useState(0);
   const [isShowAdvancedSettings, setIsShowAdvancedSettings] = useState(false);
 
   const [initPortalUrl, setInitPortalUrl] = useState("");
-  const [initSecretKey, setInitSecretKey] = useState("");
+  const [initSecretKey, setInitSecretKey] = useState(SECRET_KEY_MASK);
   const [initAuthHeader, setInitAuthHeader] = useState("");
   const [initDocServiceUrl, setInitDocServiceUrl] = useState("");
   const [initInternalUrl, setInitInternalUrl] = useState("");
@@ -97,24 +113,36 @@ const DocumentService = ({
   }, [t]);
 
   useEffect(() => {
+    if (isDocsConnectAvailable) fetchDocsConnectConnection?.();
+  }, [fetchDocsConnectConnection, isDocsConnectAvailable]);
+
+  const applySecretKey = (value) => {
+    const nextValue = value || SECRET_KEY_MASK;
+    setSecretKey(nextValue);
+    setInitSecretKey(nextValue);
+  };
+
+  useEffect(() => {
     if (initialDocumentServiceData) {
       const result = initialDocumentServiceData;
       setIsDefaultSettings(result?.isDefault || false);
       setPortalUrl(result?.docServicePortalUrl);
-      setSecretKey(result?.docServiceSignatureSecret);
+      applySecretKey(result?.docServiceSignatureSecret);
       setAuthHeader(result?.docServiceSignatureHeader);
       setInternalUrl(result?.docServiceUrlInternal);
       setDocServiceUrl(result?.docServiceUrl);
       setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
       setInitPortalUrl(result?.docServicePortalUrl);
-      setInitSecretKey(result?.docServiceSignatureSecret);
       setInitAuthHeader(result?.docServiceSignatureHeader);
       setInitDocServiceUrl(result?.docServiceUrl);
       setInitInternalUrl(result?.docServiceUrlInternal);
       setInitIsDisabledCertificat(!result?.docServiceSslVerification || false);
     }
   }, [initialDocumentServiceData]);
+
+  const isSecretKeyMasked = secretKey === SECRET_KEY_MASK;
+  const secretKeyToSave = isSecretKeyMasked ? undefined : secretKey;
 
   const onChangeDocServiceUrl = (e) => {
     setDocServiceUrl(e.target.value);
@@ -131,7 +159,14 @@ const DocumentService = ({
   };
 
   const onChangeSecretKey = (e) => {
-    setSecretKey(e.target.value);
+    const { value } = e.target;
+
+    if (isSecretKeyMasked) {
+      setSecretKey(value.split(SECRET_KEY_MASK_CHAR).join(""));
+      return;
+    }
+
+    setSecretKey(value);
   };
 
   const onChangeIsShowAdvancedSettings = () => {
@@ -156,7 +191,7 @@ const DocumentService = ({
 
     changeDocumentServiceLocation(
       docServiceUrl,
-      secretKey,
+      secretKeyToSave,
       authHeader ?? initAuthHeader,
       internalUrl,
       portalUrl,
@@ -168,14 +203,12 @@ const DocumentService = ({
         setIsDefaultSettings(result?.isDefault || false);
         setPortalUrl(result?.docServicePortalUrl);
         setAuthHeader(result?.docServiceSignatureHeader);
-        // API omits secret key from response for security; preserve current value
-        setSecretKey(result?.docServiceSignatureSecret ?? secretKey);
+        applySecretKey(result?.docServiceSignatureSecret);
         setInternalUrl(result?.docServiceUrlInternal);
         setDocServiceUrl(result?.docServiceUrl);
         setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
         setInitPortalUrl(result?.docServicePortalUrl);
-        setInitSecretKey(result?.docServiceSignatureSecret ?? secretKey); // keep in sync with secretKey above
         setInitAuthHeader(result?.docServiceSignatureHeader);
         setInitDocServiceUrl(result?.docServiceUrl);
         setInitInternalUrl(result?.docServiceUrlInternal);
@@ -200,13 +233,12 @@ const DocumentService = ({
         setIsDefaultSettings(result?.isDefault || false);
         setPortalUrl(result?.docServicePortalUrl);
         setAuthHeader(result?.docServiceSignatureHeader);
-        setSecretKey(result?.docServiceSignatureSecret || "");
+        applySecretKey(result?.docServiceSignatureSecret);
         setInternalUrl(result?.docServiceUrlInternal);
         setDocServiceUrl(result?.docServiceUrl);
         setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
         setInitPortalUrl(result?.docServicePortalUrl);
-        setInitSecretKey(result?.docServiceSignatureSecret || "");
         setInitAuthHeader(result?.docServiceSignatureHeader);
         setInitDocServiceUrl(result?.docServiceUrl);
         setInitInternalUrl(result?.docServiceUrlInternal);
@@ -215,14 +247,62 @@ const DocumentService = ({
         );
 
         setIsShowAdvancedSettings(false);
-        setSecretKeyVersion((v) => v + 1);
       })
       .catch((e) => toastr.error(e))
       .finally(() => setResetIsLoading(false));
   };
 
+  const onConnectDocsConnect = async () => {
+    setIsConnecting(true);
+    try {
+      const result = await applyDocsConnectToPortal();
+
+      setIsDefaultSettings(result?.isDefault || false);
+      setPortalUrl(result?.docServicePortalUrl);
+      setAuthHeader(result?.docServiceSignatureHeader);
+      applySecretKey(
+        result?.docServiceSignatureSecret ?? docsConnectConnection?.secret,
+      );
+      setInternalUrl(result?.docServiceUrlInternal);
+      setDocServiceUrl(result?.docServiceUrl);
+      setIsDisabledCertificat(!result?.docServiceSslVerification || false);
+
+      setInitPortalUrl(result?.docServicePortalUrl);
+      setInitAuthHeader(result?.docServiceSignatureHeader);
+      setInitDocServiceUrl(result?.docServiceUrl);
+      setInitInternalUrl(result?.docServiceUrlInternal);
+      setInitIsDisabledCertificat(!result?.docServiceSslVerification || false);
+
+      toastr.success(t("Common:ChangesSavedSuccessfully"));
+      setConnectDialogVisible(false);
+    } catch (e) {
+      toastr.error(e);
+    } finally {
+      setIsConnecting(false);
+    }
+  };
+
+  const normalizeAddress = (value) =>
+    (value ?? "")
+      .replace(/^https?:\/\//i, "")
+      .replace(/\/+$/, "")
+      .toLowerCase();
+
+  const isConnectedToDocsConnect =
+    !!docsConnectConnection?.address &&
+    !!docServiceUrl &&
+    normalizeAddress(docServiceUrl) ===
+      normalizeAddress(docsConnectConnection.address);
+
+  const showConnectEditorsBanner =
+    !!docsConnectConnection && !isConnectedToDocsConnect;
+
   const isFormEmpty =
-    !docServiceUrl && !internalUrl && !portalUrl && !authHeader && !secretKey;
+    !docServiceUrl &&
+    !internalUrl &&
+    !portalUrl &&
+    !authHeader &&
+    !secretKeyToSave;
   const allInputsValid =
     docServiceUrlIsValid && internalUrlIsValid && portalUrlIsValid;
 
@@ -246,12 +326,35 @@ const DocumentService = ({
   return (
     <Styled.Location>
       <Styled.LocationHeader>
-        <div className="main">
+        <div className={styles.main}>
           {t("Settings:DocumentServiceLocationHeaderHelp")}
+          {/* Docs Connect is SaaS-only: a standalone portal has nothing to
+              connect to, so the sentence that points at it is dropped rather
+              than left as a link nobody here can follow. */}
+          {showDocsConnectHint ? (
+            <>
+              {" "}
+              <Trans
+                t={t}
+                ns="Settings"
+                i18nKey="DocumentServiceConnectOwnPlatform"
+                components={{
+                  1: (
+                    <Link
+                      color={currentColorScheme.main?.accent}
+                      isHovered
+                      onClick={() => navigate(DOCS_CONNECT_PATH)}
+                      dataTestId="integration_docs_connect_link"
+                    />
+                  ),
+                }}
+              />
+            </>
+          ) : null}
         </div>
         {documentServiceSettingsUrl ? (
           <Link
-            className="third-party-link"
+            className={styles.thirdPartyLink}
             color={currentColorScheme.main?.accent}
             isHovered
             target="_blank"
@@ -264,8 +367,54 @@ const DocumentService = ({
       </Styled.LocationHeader>
 
       <Styled.LocationForm onSubmit={onSubmit}>
-        <div className="form-inputs">
-          <div className="input-wrapper">
+        {!isDocsConnectAvailable ? null : showConnectEditorsBanner ? (
+          <div className={styles.docsConnectPromo}>
+            <div className={styles.docsConnectPromoText}>
+              <Text className={styles.docsConnectPromoTitle}>
+                {t("Settings:DocsConnectReadyTitle")}
+              </Text>
+              <Text className={styles.docsConnectPromoDescription}>
+                {t("Settings:DocsConnectReadyDescription", {
+                  organizationName: getBrandName("OrganizationName"),
+                  editorsName: getBrandName("ProductEditorsName"),
+                })}
+              </Text>
+            </div>
+            <Button
+              className={styles.docsConnectPromoButton}
+              size={ButtonSize.small}
+              primary
+              label={t("Settings:ConnectEditors")}
+              onClick={() => setConnectDialogVisible(true)}
+              isDisabled={isSaveLoading || isResetLoading || isConnecting}
+              dataTestId="docs_connect_connect_editors"
+            />
+          </div>
+        ) : (
+          <div className={styles.docsConnectPromo}>
+            <div className={styles.docsConnectPromoText}>
+              <Text className={styles.docsConnectPromoTitle}>
+                {t("Settings:DocsConnectPromoTitle")}
+              </Text>
+              <Text className={styles.docsConnectPromoDescription}>
+                {t("Settings:DocsConnectPromoDescription", {
+                  organizationName: getBrandName("OrganizationName"),
+                  editorsName: getBrandName("ProductEditorsName"),
+                })}
+              </Text>
+            </div>
+            <Button
+              className={styles.docsConnectPromoButton}
+              size={ButtonSize.small}
+              primary
+              label={t("Common:LearnMore")}
+              onClick={() => window.open(apiBasicLink, "_blank")}
+            />
+          </div>
+        )}
+
+        <div className={styles.formInputs}>
+          <div className={styles.inputWrapper}>
             <Label
               htmlFor="docServiceAdress"
               text={t("Settings:DocumentServiceLocationUrlApi")}
@@ -284,7 +433,7 @@ const DocumentService = ({
               isDisabled={isSaveLoading || isResetLoading}
               dataTestId="editor_url_input_block"
             />
-            <Text className="subtitle">
+            <Text className={styles.subtitle}>
               {t("Common:Example", {
                 example: EDITOR_URL_PLACEHOLDER,
               })}
@@ -292,44 +441,43 @@ const DocumentService = ({
             <Checkbox
               id="isDisabledCertificat"
               label={t("Settings:DocumentServiceDisableCertificat")}
-              className="checkbox"
+              className={styles.checkbox}
               isChecked={isDisabledCertificat}
               onChange={onChangeIsDisabledCertificat}
               isDisabled={isSaveLoading || isResetLoading}
               dataTestId="disable_certificat_checkbox"
             />
           </div>
-          <div className="input-wrapper">
-            <div className="group-label">
+          <div className={styles.inputWrapper}>
+            <div className={styles.groupLabel}>
               <Label
                 htmlFor="secretKey"
                 text={t("Settings:DocumentServiceSecretKey")}
               />
-              <Text className="label-subtitle">
+              <Text className={styles.labelSubtitle}>
                 {`(${t("Settings:DocumentServiceSecretKeySubtitle")})`}
               </Text>
             </div>
-            <PasswordInput
-              key={secretKeyVersion}
+            <InputBlock
               id="secretKey"
-              inputName="secret_key"
-              type="password"
-              simpleView
+              name="secret_key"
+              type="text"
+              autoComplete="off"
               tabIndex={2}
               scale
-              inputValue={secretKey}
+              noIcon
+              value={secretKey}
               onChange={onChangeSecretKey}
               isDisabled={isSaveLoading || isResetLoading}
-              className="password-input"
-              testId="secret_key_input"
+              dataTestId="secret_key_input"
             />
-            <Text className="subtitle">
+            <Text className={styles.subtitle}>
               {t("Settings:DocumentServiceSecretKeySubtitle")}
             </Text>
           </div>
         </div>
 
-        <div className="form-inputs">
+        <div className={styles.formInputs}>
           <Styled.LocationSubheader>
             {t("Settings:DocumentServiceAdvancedSettings")}
             <Link
@@ -347,7 +495,7 @@ const DocumentService = ({
 
           {isShowAdvancedSettings ? (
             <>
-              <div className="input-wrapper">
+              <div className={styles.inputWrapper}>
                 <Label
                   htmlFor="authHeader"
                   text={t("Settings:DocumentServiceAuthHeader")}
@@ -364,16 +512,14 @@ const DocumentService = ({
                   isDisabled={isSaveLoading || isResetLoading}
                   dataTestId="auth_header_input_block"
                 />
-                <Text className="subtitle">
+                <Text className={styles.subtitle}>
                   {t("Settings:DocumentServiceAuthHeaderSubtitle")}
                 </Text>
               </div>
-              <div className="input-wrapper">
+              <div className={styles.inputWrapper}>
                 <Label
                   htmlFor="internalAdress"
-                  text={t("Settings:DocumentServiceLocationUrlInternal", {
-                    productName: getBrandName("ProductName"),
-                  })}
+                  text={t("Settings:DocumentServiceLocationUrlInternal")}
                 />
                 <InputBlock
                   id="internalAdress"
@@ -389,18 +535,16 @@ const DocumentService = ({
                   isDisabled={isSaveLoading || isResetLoading}
                   dataTestId="editor_url_input_block"
                 />
-                <Text className="subtitle">
+                <Text className={styles.subtitle}>
                   {t("Common:Example", {
                     example: EDITOR_URL_PLACEHOLDER,
                   })}
                 </Text>
               </div>
-              <div className="input-wrapper">
+              <div className={styles.inputWrapper}>
                 <Label
                   htmlFor="portalAdress"
-                  text={t("Settings:DocumentServiceLocationUrlPortal", {
-                    productName: getBrandName("ProductName"),
-                  })}
+                  text={t("Settings:DocumentServiceLocationUrlPortal")}
                 />
                 <InputBlock
                   id="portalAdress"
@@ -416,7 +560,7 @@ const DocumentService = ({
                   isDisabled={isSaveLoading || isResetLoading}
                   dataTestId="dns_input_block"
                 />
-                <Text className="subtitle">
+                <Text className={styles.subtitle}>
                   {t("Common:Example", {
                     example: `${window.location.origin}`,
                   })}
@@ -443,16 +587,34 @@ const DocumentService = ({
           cancelButtonDataTestId="default_settings_button"
         />
       </Styled.LocationForm>
+
+      {connectDialogVisible ? (
+        <ApplyToPortalDialog
+          visible
+          isSaving={isConnecting}
+          onApply={onConnectDocsConnect}
+          onClose={() => setConnectDialogVisible(false)}
+        />
+      ) : null}
     </Styled.Location>
   );
 };
 
 export default inject(
-  ({ settingsStore, filesSettingsStore, clientLoadingStore }) => {
+  ({
+    settingsStore,
+    filesSettingsStore,
+    clientLoadingStore,
+    docsConnectStore,
+    userStore,
+  }) => {
     const {
       currentColorScheme,
       documentServiceSettingsUrl,
       currentDeviceType,
+      apiBasicLink,
+      standalone,
+      limitedAccessDevToolsForUsers,
     } = settingsStore;
     const {
       changeDocumentServiceLocation,
@@ -467,6 +629,16 @@ export default inject(
       currentDeviceType,
       showPortalSettingsLoader,
       initialDocumentServiceData,
+      apiBasicLink,
+      docsConnectConnection: docsConnectStore.connectionData,
+      fetchDocsConnectConnection: docsConnectStore.fetchConnection,
+      applyDocsConnectToPortal: docsConnectStore.applyToDocumentService,
+      isDocsConnectAvailable: docsConnectStore.isPortalConnectionAvailable,
+      showDocsConnectHint: canOpenDocsConnect(
+        userStore?.user,
+        standalone,
+        limitedAccessDevToolsForUsers,
+      ),
     };
   },
 )(observer(DocumentService));

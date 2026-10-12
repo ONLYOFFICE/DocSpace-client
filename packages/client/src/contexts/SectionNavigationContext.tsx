@@ -43,12 +43,17 @@ const SECTION_PREFIXES = [
   "/portal-settings",
   "/developer-tools",
   "/accounts",
+  "/dashboard",
+  "/billing",
+  "/forms",
+  "/ai-files",
+  "/ai-forms",
+  "/ai-arbiter",
+  "/ai-rooms",
 ] as const;
 
 function getSectionPrefix(pathname: string): string {
-  const match = SECTION_PREFIXES.find((prefix) =>
-    pathname.startsWith(prefix),
-  );
+  const match = SECTION_PREFIXES.find((prefix) => pathname.startsWith(prefix));
   return match ?? "/";
 }
 
@@ -89,13 +94,16 @@ export const SectionNavigationProvider = ({
   const navigateBack = () => {
     const prev = stackRef.current.pop();
 
-    if (prev) {
-      prevSectionRef.current = getSectionPrefix(prev);
-      prevPathRef.current = prev;
-      navigate(prev);
-    } else {
-      navigate("/");
-    }
+    // When we have a recorded origin (the path we were on before entering the
+    // current section) return there. Otherwise — e.g. after a page reload or a
+    // direct deep-link into the section, when no boundary crossing was observed
+    // — fall back to the home section instead of `navigate(-1)`, which would
+    // step backwards through the in-section tree history one entry at a time.
+    const target = prev ?? "/";
+
+    prevSectionRef.current = getSectionPrefix(target);
+    prevPathRef.current = target;
+    navigate(target);
   };
 
   return (
@@ -116,3 +124,4 @@ export const useSectionNavigation = (): SectionNavigationContextValue => {
 
   return ctx;
 };
+

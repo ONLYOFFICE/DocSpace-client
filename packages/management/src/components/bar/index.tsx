@@ -35,7 +35,7 @@
 
 import React from "react";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./bar.module.scss";
 

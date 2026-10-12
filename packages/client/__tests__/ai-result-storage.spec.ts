@@ -67,7 +67,9 @@ test.describe("AI result storage", () => {
 
     await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=6`);
 
-    const emptyView = await page.getByTestId("empty-view");
+    const emptyView = page
+      .getByTestId("empty-view")
+      .filter({ visible: true });
 
     await expect(emptyView).toBeVisible();
 
@@ -87,7 +89,9 @@ test.describe("AI result storage", () => {
 
     await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=6`);
 
-    const emptyView = await page.getByTestId("empty-view");
+    const emptyView = page
+      .getByTestId("empty-view")
+      .filter({ visible: true });
 
     await expect(emptyView).toBeVisible();
 
@@ -109,7 +113,9 @@ test.describe("AI result storage", () => {
 
     await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=6`);
 
-    const emptyView = await page.getByTestId("empty-view");
+    const emptyView = page
+      .getByTestId("empty-view")
+      .filter({ visible: true });
 
     await expect(emptyView).toBeVisible();
 

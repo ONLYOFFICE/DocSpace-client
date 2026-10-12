@@ -36,13 +36,13 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   parseToDateTime,
   formatDateLocalized,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 
-import { StyledMainInfo } from "./StyledComponent";
+import styles from "./StyledComponent.module.scss";
 
 const MainInfoComponent = (props) => {
   const { portalInfo, activeUsersCount } = props;
@@ -54,14 +54,14 @@ const MainInfoComponent = (props) => {
   );
 
   return (
-    <StyledMainInfo>
+    <div className={styles.mainInfo}>
       <Text fontSize="14px" fontWeight={400} dataTestId="portal_created_date">
         {t("PortalCreatedDate", { date: creationDate })}
       </Text>
       <Text fontSize="14px" fontWeight={400}>
         {t("NumberOfActiveEmployees", { count: activeUsersCount })}
       </Text>
-    </StyledMainInfo>
+    </div>
   );
 };
 

@@ -1,0 +1,35 @@
+{
+  "key_path": "ArbiterAnalyzingAnswers",
+  "content": "Analyzing your answers...",
+  "content_en_sha1_hash": "390ee0502527f61a994bd0dd298dc490f98b2fa2",
+  "created_at": "2026-05-24T17:27:18.041Z",
+  "updated_at": "2026-05-24T18:59:23.419Z",
+  "comment": {
+    "text": "Status message in the AI arbiter wizard that appears while the system is processing user responses.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:59:23.419Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/ChatPhase.tsx",
+      "line_number": 47,
+      "context": "import type { ChatMessage } from \"./useWizardChat\";\n \n type TFunc = (key: string, opts?: Record<string, unknown>) => string;\n \n function inferPreparingStage(text: string, t: TFunc): string {\n if (!text) return t(\"Common:ArbiterAnalyzingAnswers\");\n const roleMatches = text.match(/\"role_title\"\\s*:/g);\n const roleCount = roleMatches ? roleMatches.length : 0;\n if (text.includes('\"arbiter\"')) {\n if (text.trimEnd().endsWith(\"}\")) return t(\"Common:ArbiterFinalizingPanel\");\n return t(\"Common:ArbiterComposingArbiter\");",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/ChatPhase.tsx",
+      "line_number": 47,
+      "context": "import type { ChatMessage } from \"./useWizardChat\";\n \n type TFunc = (key: string, opts?: Record<string, unknown>) => string;\n \n function inferPreparingStage(text: string, t: TFunc): string {\n if (!text) return t(\"Common:ArbiterAnalyzingAnswers\");\n const roleMatches = text.match(/\"role_title\"\\s*:/g);\n const roleCount = roleMatches ? roleMatches.length : 0;\n if (text.includes('\"arbiter\"')) {\n if (text.trimEnd().endsWith(\"}\")) return t(\"Common:ArbiterFinalizingPanel\");\n return t(\"Common:ArbiterComposingArbiter\");",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

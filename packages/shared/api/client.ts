@@ -36,9 +36,16 @@
 // @ts-nocheck
 
 import { AxiosRequestConfig } from "axios";
-import AxiosClient, { TReqOption } from "../utils/axiosClient";
+import AxiosClient, { TReqOption, TRouteMock } from "../utils/axiosClient";
 
 const client = new AxiosClient();
+
+/**
+ * Answer matching requests locally instead of sending them, the way
+ * `page.route` does in the Playwright suite. Returns the function that takes
+ * the mock back down again.
+ */
+export const interceptRoute = (mock: TRouteMock) => client.interceptRoute(mock);
 
 export const initSSR = (headers: Record<string, string>) => {
   client.initSSR(headers);
@@ -60,6 +67,22 @@ export const setAuthToken = (token: string | null) => {
   client.setAuthToken(token);
 };
 
+export const signOutOAuth = () => {
+  client.signOutOAuth();
+};
+
 export const getAuthToken = (): string | null => {
   return client.authToken;
+};
+
+export const getApiBaseUrl = (): string => {
+  return client.client?.defaults.baseURL ?? "";
+};
+
+export const resolveOAuthToken = (): Promise<string | null> => {
+  return client.getOAuthToken();
+};
+
+export const refreshOAuthToken = (): Promise<string | null> => {
+  return client.refreshOAuthToken();
 };

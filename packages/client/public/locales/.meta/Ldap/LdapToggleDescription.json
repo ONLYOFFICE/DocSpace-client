@@ -1,20 +1,20 @@
 {
   "key_path": "LdapToggleDescription",
-  "content": "Enable this option if you want to add users from LDAP server to {{productName}} automatically. The added users will be able to authorize using their LDAP server credentials. {{productName}} does not save the user passwords locally and will authenticate users sending their login and password to LDAP server.",
-  "content_en_sha1_hash": "da5fb1c0bb22d780f948c5590af28e3858662dfd",
-  "created_at": "2025-05-19T21:30:54.320Z",
-  "updated_at": "2026-05-15T14:00:06.852Z",
+  "content": "Turn this on to automatically add users from your LDAP server to the workspace. They'll be able to sign in using their LDAP credentials: passwords aren't stored locally, and sign-ins are verified directly with the LDAP server.",
+  "content_en_sha1_hash": "d287bd395be34d1f5f180e7b0ca5c96266adc9aa",
+  "created_at": "2026-08-31T18:23:43.878Z",
+  "updated_at": "2026-08-31T20:00:45.024Z",
   "comment": {
-    "text": "This is a descriptive text explaining the functionality of an LDAP integration toggle. It appears below the toggle and describes how automatic user provisioning and authentication from an LDAP server works, including the use of `{{productName}}` as a variable.",
+    "text": "Explanatory subtext for the LDAP integration toggle switch in the portal settings, describing the automatic user synchronization and authentication process.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:16:31.891Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:00:45.024Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleLDAP.js",
-      "line_number": 143,
-      "context": "fontSize=\"12px\"\n fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n >\n {t(\"LdapToggleDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </div>\n </StyledWrapper>",
+      "line_number": 108,
+      "context": "fontSize=\"12px\"\n fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n >\n {t(\"LdapToggleDescription\")}\n </Text>\n </div>\n </div>\n );",
       "module": "/packages/client"
     }
   ],
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

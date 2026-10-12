@@ -35,15 +35,15 @@
 
 import React from "react";
 
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
-import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
+import { InputSize, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
-import { StyledInputGroup } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 interface InputGroupProps {
 	label: string;
@@ -113,7 +113,7 @@ const InputGroup = ({
 	};
 
 	return (
-		<StyledInputGroup>
+		<div className={styles.styledInputGroup}>
 			<FieldContainer
 				className={buttonLabel ? "input-block-with-button" : ""}
 				isVertical
@@ -167,7 +167,7 @@ const InputGroup = ({
 					</>
 				)}
 			</FieldContainer>
-		</StyledInputGroup>
+		</div>
 	);
 };
 

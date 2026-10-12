@@ -40,7 +40,10 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { usePathname, useRouter } from "next/navigation";
 
-import Navigation from "@docspace/ui-kit/components/navigation";
+import Navigation from "@onlyoffice/apps-ui-kit/components/navigation";
+import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
+import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 import api from "@docspace/shared/api";
 import { DeviceType } from "@docspace/shared/enums";
 
@@ -50,45 +53,15 @@ import { FormsSection } from "@/types/forms";
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useLibraryParams } from "../../_hooks/useLibraryParams";
 import { libraryUrl } from "../../_utils/libraryUrl";
-import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
-import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
-import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
-
 import styles from "../forms-layout/FormsLayout.module.scss";
 
 type FormsHeaderProps = {
-  onUploadFiles: () => void;
-  onCreateBlankForm: () => void;
-  showMenu: boolean;
   headerOffset?: number;
 };
 
-const BurgerButton = ({
-  onClick,
-  label,
-}: {
-  onClick: () => void;
-  label: string;
-}) => (
-  <button
-    type="button"
-    className={styles.burgerButton}
-    onClick={onClick}
-    aria-label={label}
-  >
-    <MenuIcon className={styles.burgerIcon} />
-  </button>
-);
-
-const FormsHeader = ({
-  onUploadFiles,
-  onCreateBlankForm,
-  showMenu,
-  headerOffset = 0,
-}: FormsHeaderProps) => {
+const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
@@ -100,7 +73,6 @@ const FormsHeader = ({
     closeEditor,
     goBackToCompletedRoot,
     goBackToInProgressRoot,
-    toggleSidebar,
   } = useFormsNavigationStore();
 
   const router = useRouter();
@@ -133,14 +105,23 @@ const FormsHeader = ({
   }, [libParams.categoryId]);
 
   const { items, folders } = useFormsListStore();
-  const formsSettingsStore = useFormsSettingsStore();
   const { currentDeviceType } = useDeviceType();
 
-  const isMyForms = activeSection === FormsSection.MyForms;
   const isLibrary = activeSection === FormsSection.Library;
-  const canCreateForms = isMyForms && !!formsSettingsStore.folderSecurity?.Create;
   const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
+  const aiChatStore = useAiChatStoreOptional();
+  const openAiChat = useOpenAiChat();
+  const isAiChatAvailable = useIsAiChatAvailable();
+  const chatNavProps = {
+    toggleChatPanel: () => {
+      if (aiChatStore?.isVisible) aiChatStore.close();
+      else openAiChat();
+    },
+    isChatPanelVisible: !!aiChatStore?.isVisible,
+    hideChatButton: !isAiChatAvailable || isSettings || isEditing,
+    titles: { aiChat: t("Common:AIChatButton") },
+  };
   const isInsideCompletedFolder =
     activeSection === FormsSection.CompletedForms && !!completedFolder;
   const isInsideInProgressFolder =
@@ -151,7 +132,7 @@ const FormsHeader = ({
   const getSectionTitle = React.useCallback(() => {
     switch (activeSection) {
       case FormsSection.MyForms:
-        return t("Common:MyForms");
+        return t("Common:Forms");
       case FormsSection.Library:
         return t("Common:Library");
       case FormsSection.InProgress:
@@ -302,28 +283,6 @@ const FormsHeader = ({
     };
   }, [headerOffset]);
 
-  const getContextOptionsPlus = React.useCallback(() => {
-    const security = formsSettingsStore.folderSecurity;
-    if (!security?.Create) return [];
-
-    return [
-      {
-        id: "upload-forms",
-        key: "upload-forms",
-        label: t("Common:UploadPDFForm"),
-        icon: ActionsUploadReactSvgUrl,
-        onClick: onUploadFiles,
-      },
-      {
-        id: "create-blank-form",
-        key: "create-blank-form",
-        label: t("Common:NewPDFForm"),
-        icon: FormPlusReactSvgUrl,
-        onClick: onCreateBlankForm,
-      },
-    ];
-  }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);
-
   const handleEditorBack = React.useCallback(() => {
     closeEditor();
   }, [closeEditor]);
@@ -383,12 +342,6 @@ const FormsHeader = ({
         className={styles.headerRow}
         style={headerStyle}
       >
-        {showMenu && (
-          <BurgerButton
-            onClick={toggleSidebar}
-            label={t("Common:ShowArticleMenu")}
-          />
-        )}
         <div className={styles.headerNavigation}>
           <Navigation
             showText
@@ -419,6 +372,7 @@ const FormsHeader = ({
             isPublicRoom={false}
             isRoom={false}
             isInfoPanelVisible={false}
+            {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
             hideInfoPanel={() => {}}
@@ -461,6 +415,7 @@ const FormsHeader = ({
         isPublicRoom={false}
         isRoom={false}
         isInfoPanelVisible={false}
+        {...chatNavProps}
         toggleInfoPanel={() => {}}
         onLogoClick={() => {}}
         hideInfoPanel={() => {}}
@@ -516,6 +471,7 @@ const FormsHeader = ({
             isPublicRoom={false}
             isRoom={false}
             isInfoPanelVisible={false}
+            {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
             hideInfoPanel={() => {}}
@@ -563,6 +519,7 @@ const FormsHeader = ({
             isPublicRoom={false}
             isRoom={false}
             isInfoPanelVisible={false}
+            {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
             hideInfoPanel={() => {}}
@@ -625,6 +582,7 @@ const FormsHeader = ({
             isPublicRoom={false}
             isRoom={false}
             isInfoPanelVisible={false}
+            {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
             hideInfoPanel={() => {}}
@@ -641,12 +599,6 @@ const FormsHeader = ({
       className={styles.headerRow}
       style={headerStyle}
     >
-      {showMenu && (
-        <BurgerButton
-          onClick={toggleSidebar}
-          label={t("Common:ShowArticleMenu")}
-        />
-      )}
       <div className={styles.headerNavigation}>
         <span data-tour={`section-${activeSection}`} className={styles.tourAnchor}>
           {getSectionTitle()}
@@ -654,14 +606,14 @@ const FormsHeader = ({
         <Navigation
           showText
           isRootFolder
-          canCreate={canCreateForms}
-          isPlusButtonVisible={canCreateForms}
+          canCreate={false}
+          isPlusButtonVisible={false}
           title={getSectionTitle()}
           rootRoomTitle=""
           isDesktop={currentDeviceType === DeviceType.desktop}
           isFrame
           navigationItems={[]}
-          getContextOptionsPlus={getContextOptionsPlus}
+          getContextOptionsPlus={() => []}
           getContextOptionsFolder={() => []}
           onClickFolder={() => {}}
           isTrashFolder={false}
@@ -681,6 +633,7 @@ const FormsHeader = ({
           isPublicRoom={false}
           isRoom={false}
           isInfoPanelVisible={false}
+          {...chatNavProps}
           toggleInfoPanel={() => {}}
           onLogoClick={() => {}}
           hideInfoPanel={() => {}}

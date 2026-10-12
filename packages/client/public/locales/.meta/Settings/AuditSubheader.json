@@ -1,26 +1,26 @@
 {
   "key_path": "AuditSubheader",
-  "content": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your {{productName}}.",
-  "content_en_sha1_hash": "14dcf30f13f317e2c76ba01c199429d2e0ccc37a",
-  "created_at": "2025-05-19T21:30:50.592Z",
-  "updated_at": "2026-05-15T14:00:06.870Z",
+  "content": "Browse a list of recent changes users have made across your workspace, like creating, editing, or deleting rooms, files, and other items.",
+  "content_en_sha1_hash": "01d1f1614712307d22ccbc869e87a860eb02f4bb",
+  "created_at": "2026-08-31T18:23:40.440Z",
+  "updated_at": "2026-08-31T20:46:29.637Z",
   "comment": {
-    "text": "This is the descriptive text displayed in an empty state for the Audit Trail section of the portal settings. It explains what the audit trail feature does, with `{{productName}}` being replaced by the product's brand name.",
+    "text": "Description text for the empty state screen in the Audit Trail section, explaining the purpose of the audit log.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:37.059Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:46:29.637Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 98,
-      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: getBrandName(\"ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
+      "line_number": 101,
+      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\")}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }\n headerText={t(\"NoEventsHereYet\")}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 98,
-      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: getBrandName(\"ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
+      "line_number": 101,
+      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\")}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }\n headerText={t(\"NoEventsHereYet\")}\n />",
       "module": "/packages/client"
     }
   ],
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

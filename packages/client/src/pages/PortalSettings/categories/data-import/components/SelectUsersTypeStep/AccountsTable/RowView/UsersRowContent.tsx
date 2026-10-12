@@ -34,79 +34,19 @@
  */
 
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { RowContent } from "@docspace/ui-kit/components/rows";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/ui-kit/components/combobox";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
 import {
   TypeSelectRowContentProps,
   InjectedTypeSelectRowContentProps,
 } from "../../../../types";
-
-const StyledRowContent = styled(RowContent)`
-  display: flex;
-
-  .row-main-container-wrapper {
-    width: 100%;
-    margin-inline-end: 0;
-  }
-
-  .rowMainContainer {
-    height: 100%;
-    width: 100%;
-  }
-
-  .content-data-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .username {
-    font-size: 14px;
-    font-weight: 600;
-    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
-  }
-
-  .user-email {
-    margin-inline-end: 5px;
-    font-size: 12px;
-    font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
-  }
-
-  .user-type {
-    .combo-button {
-      border: none;
-      padding: 4px 8px;
-      justify-content: flex-end;
-      background-color: transparent;
-    }
-
-    .combo-button-label {
-      color: ${(props) =>
-        props.theme.client.settings.migration.tableRowTextColor};
-    }
-
-    .combo-buttons_arrow-icon {
-      flex: initial;
-      margin-inline-end: 0px;
-    }
-
-    svg {
-      path {
-        fill: ${(props) =>
-          props.theme.client.settings.migration.tableRowTextColor};
-      }
-    }
-  }
-`;
+import styles from "../../../../StyledDataImport.module.scss";
 
 const UsersRowContent = (props: TypeSelectRowContentProps) => {
   const {
@@ -153,9 +93,9 @@ const UsersRowContent = (props: TypeSelectRowContentProps) => {
   ];
 
   return (
-    <StyledRowContent sectionWidth={sectionWidth}>
+    <RowContent className={styles.styledRowContentType} sectionWidth={sectionWidth}>
       {contentData}
-    </StyledRowContent>
+    </RowContent>
   );
 };
 

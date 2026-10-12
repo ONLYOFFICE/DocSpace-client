@@ -1,6 +1,10 @@
 {
   "HideInput": "Ocultar",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} de {{total}}</0> cargados. Se ha superado la cuota de almacenamiento — <1>ver detalles</1>.",
+  "QuotaExceededTooltip": "Se ha superado la cuota de almacenamiento. Libere espacio o actualice su plan e inténtelo de nuevo.",
   "Ready": "Listo",
+  "RetryAfterQuotaUpgrade": "Reintentar tras ampliar la cuota",
+  "RetryUpload": "Reintentar",
   "UploadingAndConversion": "Carga y conversión",
   "UploadingError": "Error al cargar"
 }

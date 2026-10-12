@@ -40,6 +40,13 @@ export interface InjectedTagManagementProps {
   onSelectTag: TStore["filesActionsStore"]["selectTag"];
   isArchiveFolder: TStore["treeFoldersStore"]["isArchiveFolder"];
   isAdmin: boolean;
+  /**
+   * The three places the client keeps tags: the rooms on screen, the room the
+   * user is standing in, and the list of tags the filter offers.
+   */
+  applyTagChangeToRooms: TStore["filesStore"]["applyTagChange"];
+  applyTagChangeToOpenRoom: TStore["selectedFolderStore"]["applyTagChange"];
+  applyTagChangeToTags: TStore["tagsStore"]["applyTagChange"];
 }
 
 export interface TagManagementProps extends Omit<

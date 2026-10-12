@@ -38,7 +38,7 @@
 import React, { useLayoutEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { getInvitationLinkData } from "@/utils";
@@ -106,6 +106,7 @@ export const GreetingLoginContainer = ({
             i18nKey="ConfirmEmailChangeText"
             ns="Login"
             values={{
+              organizationName: getBrandName("OrganizationName"),
               productName: getBrandName("ProductName"),
             }}
           />

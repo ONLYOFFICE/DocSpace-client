@@ -1,5 +1,5 @@
 {
-  "Desc": "Ju lutem konfiguroni të dhënat e regjistrimit të {{productName}}.",
+  "Desc": "Ju lutem konfiguroni të dhënat e regjistrimit të hapësirës së punës.",
   "ErrorEmail": "Adresë e pavlefshme emaili",
   "ErrorInstanceId": "ID e pavlefshme e shembullit",
   "ErrorLicenseBody": "Licenca nuk është e vlefshme. Sigurohuni që të zgjidhni skedarin e duhur.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Marrëveshjet e licencës",
   "PlaceholderLicense": "Dosja juaj e licencës",
   "Timezone": "Zona kohore",
-  "WelcomeTitle": "Mirë se vini në {{productName}} tuaj!"
+  "WelcomeTitle": "Mirë se vini në hapësirën tuaj të punës!"
 }

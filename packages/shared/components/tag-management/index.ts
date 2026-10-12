@@ -34,4 +34,18 @@
  */
 
 export { TagManagement } from "./TagManagement";
-export type { AccessTagManagement } from "./TagManagement.types";
+export type {
+  AccessTagManagement,
+  TagChange,
+  TagsChangedHandler,
+} from "./TagManagement.types";
+export { TagChangeType } from "./TagManagement.types";
+// What a change means for a list of tags, so every host applies it the same
+// way instead of writing the same rules again.
+// `inverseTagChange` is not among them on purpose: undoing a change is the
+// list's own business - see undoTagChange - and no host has asked for it.
+export {
+  applyTagChangeToRoomTags,
+  applyTagChangeToTagList,
+  isSharedTagChange,
+} from "./TagManagement.utils";

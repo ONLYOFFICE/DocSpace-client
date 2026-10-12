@@ -1,0 +1,29 @@
+{
+  "key_path": "PlanCost",
+  "content": "{{admins}} admins | {{price}} / mo",
+  "content_en_sha1_hash": "433e77c50d6c94942e84690ad4cff67869fe6910",
+  "created_at": "2026-07-07T08:59:01.352Z",
+  "updated_at": "2026-09-10T16:17:50.362Z",
+  "comment": {
+    "text": "Text label in the current plan overview section, displaying the number of {{admins}} and the monthly subscription {{price}}.",
+    "is_auto": true,
+    "updated_at": "2026-07-07T09:00:22.185Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
+      "line_number": 121,
+      "context": ": isGracePeriod\n ? t(\"OverduePaymentBlockedAfter\", {\n price: planPrice,\n date: gracePeriodEndDate,\n })\n : t(\"PlanCost\", { admins: limitValue(MANAGER), price: planPrice });\n \n return (\n <div className={`${styles.card} ${styles.planCard}`}>\n <div className={styles.planInfo}>\n <Text fontSize=\"14px\" fontWeight={700}>",
+      "module": "@onlyoffice/apps-ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

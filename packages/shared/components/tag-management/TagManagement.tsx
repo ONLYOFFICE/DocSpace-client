@@ -33,27 +33,20 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useTranslation, Trans } from "react-i18next";
 import { FC, useCallback, useRef, useState } from "react";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-import { Tags } from "@docspace/ui-kit/components/tags";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
-import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
-import { useCloseOnAnchorCovered } from "@docspace/ui-kit/hooks/useCloseOnAnchorCovered";
+import { Tags } from "@onlyoffice/apps-ui-kit/components/tags";
+import { useUnmount } from "@onlyoffice/apps-ui-kit/hooks/useUnmount";
+import { useIsMobile } from "@onlyoffice/apps-ui-kit/hooks/use-is-mobile";
+import { useCloseOnAnchorCovered } from "@onlyoffice/apps-ui-kit/hooks/useCloseOnAnchorCovered";
 
 import { useIsTable } from "../../hooks/useIsTable";
 
 import { TagManagementPopup } from "./TagManagement.popup";
-import { EDIT_CANCELLED, DELETE_CANCELLED } from "./TagManagement.constants";
 
 import type { TagManagementProps } from "./TagManagement.types";
 import { EditTagModal, DeleteTagModal } from "./modals";
-import {
-  useUpdateTagNameMutation,
-  useRemoveTagMutation,
-} from "./hooks/useTagsQuery";
 import { useEditConfirmation } from "./hooks/useEditConfirmation";
 import { useDeleteConfirmation } from "./hooks/useDeleteConfirmation";
 
@@ -66,6 +59,7 @@ export const TagManagement: FC<TagManagementProps> = ({
   className,
   access,
   roomName,
+  onTagsChanged,
 }) => {
   const {
     isModalOpen,
@@ -75,8 +69,6 @@ export const TagManagement: FC<TagManagementProps> = ({
     handleConfirm,
     handleCancel,
   } = useEditConfirmation();
-
-  const { t } = useTranslation();
 
   const {
     isModalOpen: isDeleteModalOpen,
@@ -92,9 +84,6 @@ export const TagManagement: FC<TagManagementProps> = ({
   const anchorRef = useRef<HTMLDivElement>(null);
   const editTagModalRef = useRef<HTMLDivElement>(null);
   const deleteTagModalRef = useRef<HTMLDivElement>(null);
-
-  const updateTagName = useUpdateTagNameMutation();
-  const removeTag = useRemoveTagMutation();
 
   const onClose = useCallback((event?: Event) => {
     if (
@@ -114,55 +103,13 @@ export const TagManagement: FC<TagManagementProps> = ({
   useUnmount(onClose);
 
   const confirmEditTag = useCallback(
-    async (oldLabel: string, newLabel: string) => {
-      const confirmed = await requestConfirmation();
-
-      if (!confirmed) {
-        return Promise.reject(EDIT_CANCELLED);
-      }
-
-      try {
-        await updateTagName.mutateAsync({
-          oldLabel,
-          newLabel,
-        });
-      } catch (error) {
-        console.error("Failed to update tag name:", error);
-        throw error;
-      }
-    },
-    [requestConfirmation, updateTagName],
+    () => requestConfirmation(),
+    [requestConfirmation],
   );
 
   const confirmDeleteTag = useCallback(
-    async (tag: string) => {
-      const confirmed = await requestDeleteConfirmation(tag);
-
-      if (!confirmed) {
-        return Promise.reject(DELETE_CANCELLED);
-      }
-
-      try {
-        await removeTag.mutateAsync(tag);
-        toastr.success(
-          <Trans
-            t={t}
-            i18nKey="RemoveTag"
-            ns="TagManagement"
-            components={{
-              1: <strong key="removed-tag" />,
-            }}
-            values={{
-              tag,
-            }}
-          />,
-        );
-      } catch (error) {
-        console.error("Failed to delete tag:", error);
-        throw error;
-      }
-    },
-    [requestDeleteConfirmation, removeTag, t],
+    (tag: string) => requestDeleteConfirmation(tag),
+    [requestDeleteConfirmation],
   );
 
   const isTableView = useIsTable();
@@ -200,9 +147,9 @@ export const TagManagement: FC<TagManagementProps> = ({
           onClose={onClose}
           anchor={anchorRef}
           roomName={roomName}
-          onSelectTag={onSelectTag}
-          onEditTag={confirmEditTag}
-          onDeleteTag={confirmDeleteTag}
+          confirmEditTag={confirmEditTag}
+          confirmDeleteTag={confirmDeleteTag}
+          onTagsChanged={onTagsChanged}
         />
       ) : null}
 
@@ -229,3 +176,4 @@ export const TagManagement: FC<TagManagementProps> = ({
     </>
   );
 };
+

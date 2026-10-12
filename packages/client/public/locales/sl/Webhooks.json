@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "Zaglavje POST zahteve je bilo uspešno kopirano v odložišče",
   "RequestPostBody": "POST telo zahteve",
   "RequestPostHeader": "POST glava zahteve",
-  "ResetKey": "Ponastavi ključ",
   "Response": "Odgovor",
   "ResponseBodyCopied": "Telo odgovora POST je bilo uspešno kopirano v odložišče",
   "ResponseHeaderCopied": "Glava odgovora POST je bila uspešno kopirana v odložišče",

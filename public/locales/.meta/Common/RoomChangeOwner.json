@@ -1,0 +1,41 @@
+{
+  "key_path": "RoomChangeOwner",
+  "content": "Room owner changed.",
+  "content_en_sha1_hash": "ffdedb92da07ba30233530eea5d2218296401905",
+  "created_at": "2025-12-15T14:04:18.509Z",
+  "updated_at": "2026-08-17T17:23:21.767Z",
+  "comment": {
+    "text": "This is a toast message confirming that the ownership of a room has been successfully transferred to another user.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:12:57.325Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 431,
+      "context": "case FeedActionKeys.RoomIndexExportSaved:\n return t(\"Common:RoomIndexExportLocation\", {\n sectionName: t(\"Common:Files\"),\n });\n case FeedActionKeys.RoomChangeOwner:\n return t(\"Common:RoomChangeOwner\");\n case FeedActionKeys.FormSubmit:\n return t(\"Common:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"Common:StartedFillingItOut\");\n case FeedActionKeys.FileCustomFilterEnabled:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/history.tsx",
+      "line_number": 103,
+      "context": "return t(\"Common:RoomRenamed\", {\n oldRoomTitle: oldTitle,\n roomTitle: title,\n });\n case FeedActionKeys.RoomChangeOwner:\n return t(\"Common:RoomChangeOwner\");\n case FeedActionKeys.RoomCreateUser:\n return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"Common:RoomRemoveUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
+      "line_number": 274,
+      "context": "case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.RoomChangeOwner:\n return t(\"Common:RoomChangeOwner\");\n case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems) return t(\"Common:RoomCreateUserCount\", { count });\n return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"Common:RoomRemoveUser\");",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

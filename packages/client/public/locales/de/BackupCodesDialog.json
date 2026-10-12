@@ -1,8 +1,8 @@
 {
   "BackupCodesDescription": "Benutzen Sie Back-up-Codes, wenn Sie keinen Zugriff auf das Handy haben.",
-  "BackupCodesSecondDescription": "Man darf jeden Code nur einmal benutzen. Sie können neue Codes immer erhalten. Nur am letzten generierten Codes sind gültig.",
+  "BackupCodesSecondDescription": "Jeder Code kann nur einmal verwendet werden. Sie können jederzeit neue Codes erhalten. Nur der zuletzt generierte Code ist gültig.",
   "BackupCodesTitle": "Back-up-Codes",
-  "CodesCounter": "Codes:",
+  "CodesCounter": "Back-up-Codes:",
   "PrintButton": "Drucken",
   "RequestNewButton": "Neu anfordern"
 }

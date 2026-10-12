@@ -37,16 +37,16 @@ import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { TFunction } from "i18next";
 
-import { SearchInput } from "@docspace/ui-kit/components/search-input";
-import { Text } from "@docspace/ui-kit/components/text";
+import { SearchInput } from "@onlyoffice/apps-ui-kit/components/search-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { searchMigrationUsers } from "SRC_DIR/pages/PortalSettings/utils/importUtils";
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../sub-components/AccountsPaging";
 
-import { Wrapper } from "../../StyledDataImport";
+import styles from "../../StyledDataImport.module.scss";
 
 import {
 	SelectUsersStepProps,
@@ -142,7 +142,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
 	);
 
 	return (
-		<Wrapper>
+		<div className={styles.wrapper}>
 			{withoutEmailUsers.length > 0 ? (
 				<NoEmailUsersBlock
 					t={t as TFunction}
@@ -202,7 +202,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
 					isSixthStep={false}
 				/>
 			) : null}
-		</Wrapper>
+		</div>
 	);
 };
 

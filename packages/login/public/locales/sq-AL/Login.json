@@ -1,8 +1,8 @@
 {
   "ChangePasswordSuccess": "Fjalëkalimi është ndryshuar me sukses",
   "ConfirmEmailChange": "Konfirmoni ndryshimin e emailit",
-  "ConfirmEmailChangeText": "Keni kërkuar të ndryshoni adresën e emailit në llogarinë tuaj të {{productName}}. Për të vazhduar, ju lutemi identifikohuni me kredencialet aktuale.",
-  "ErrorInvalidText": "për 10 sekonda do të ridrejtoheni te <1>{{productName}}</1>",
+  "ConfirmEmailChangeText": "Keni kërkuar të ndryshoni adresën e emailit në llogarinë tuaj të {{organizationName}} {{productName}}. Për të vazhduar, ju lutemi identifikohuni me kredencialet aktuale.",
+  "ErrorInvalidText": "për 10 sekonda do të ridrejtoheni te <1>hapësirës së punës</1>",
   "ForgotPassword": "Keni harruar fjalëkalimin tuaj?",
   "LDAPUsernamePlaceholder": "Emri i përdoruesit të {{ldap_domain}}",
   "MessageAuthorize": "Identifikohu për të vazhduar",
@@ -11,7 +11,7 @@
   "PasswordRecoveryTitle": "Rikuperimi i fjalëkalimit",
   "RecoverAccess": "Rikuperoni aksesin",
   "RecoverContactEmailPlaceholder": "Email kontakti",
-  "RecoverTextBody": "Nëse nuk mund të identifikoheni me llogarinë tuaj ekzistuese ose dëshironi të regjistroheni si përdorues i ri, kontaktoni administratorin e portalit.",
+  "RecoverTextBody": "Nëse nuk mund të identifikoheni me llogarinë tuaj ekzistuese ose dëshironi të regjistroheni si përdorues i ri, kontaktoni superadministratorin.",
   "Register": "Regjistrohuni",
   "RegisterTextBodyAfterDomainsList": "Për t'u regjistruar, shkruani adresën tuaj të emailit dhe klikoni Dërgo kërkesën. Një mesazh me një lidhje për të aktivizuar llogarinë tuaj do të dërgohet në adresën e specifikuar.",
   "RegisterTextBodyBeforeDomainsList": "Regjistrimi është i disponueshëm për përdoruesit me një llogari emaili në",
@@ -20,5 +20,5 @@
   "RememberHelper": "Jetëgjatësia e parazgjedhur e sesionit është 20 minuta. Kontrolloni këtë opsion për ta vendosur atë në 1 vit. Për të vendosur vlerën tuaj, shkoni te Cilësimet.",
   "SignInLDAP": "Identifikohuni në: {{ldap_domain}}",
   "SignInLdapHelper": "Përdorni kredencialet për domenin e korporatës",
-  "UserIsAlreadyRegistered": "Përdoruesi <1>{{email}}</1> është regjistruar tashmë në këtë {{productName}}, fut fjalëkalimin tënd ose kthehu për të vazhduar me një email tjetër."
+  "UserIsAlreadyRegistered": "Përdoruesi <1>{{email}}</1> është regjistruar tashmë në këtë hapësirë pune, fut fjalëkalimin tënd ose kthehu për të vazhduar me një email tjetër."
 }

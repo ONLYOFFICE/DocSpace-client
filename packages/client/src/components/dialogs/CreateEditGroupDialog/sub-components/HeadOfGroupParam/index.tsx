@@ -35,11 +35,11 @@
 
 import { useTranslation } from "react-i18next";
 
-import { AddButton } from "@docspace/ui-kit/components/add-button";
+import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
 import { TUser } from "@docspace/shared/api/people/types";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 
-import * as Styled from "./index.styled";
+import styles from "../../CreateEditGroupDialog.module.scss";
 import GroupMemberRow from "../GroupMemberRow";
 
 interface HeadOfGroupProps {
@@ -57,16 +57,16 @@ const HeadOfGroup = ({
 
   return (
     <div>
-      <Styled.Header>{t("Common:HeadOfGroup")}</Styled.Header>
+      <div className={styles.headOfGroupHeader}>{t("Common:HeadOfGroup")}</div>
 
       {!groupManager ? (
-        <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>
+        <div className={styles.selectGroupManager} onClick={onShowSelectGroupManagerPanel}>
           <AddButton
             iconName={PlusSvgUrl}
             label={t("Common:SelectAction")}
             testId="select_group_manager"
           />
-        </Styled.SelectGroupManager>
+        </div>
       ) : (
         <GroupMemberRow
           groupMember={groupManager}

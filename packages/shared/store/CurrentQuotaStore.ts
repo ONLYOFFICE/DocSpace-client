@@ -42,9 +42,9 @@ import {
   setDefaultAIAgentQuota,
 } from "../api/settings";
 
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { EmployeeType } from "../enums";
-import { PortalFeaturesLimitations } from "@docspace/ui-kit/enums";
+import { PortalFeaturesLimitations } from "@onlyoffice/apps-ui-kit/enums";
 import api from "../api";
 import {
   TPaymentFeature,
@@ -58,13 +58,14 @@ import {
   ROOM,
   YEAR_KEY,
   FREE_BACKUP,
-} from "@docspace/ui-kit/billing/constants";
+} from "@onlyoffice/apps-ui-kit/billing/constants";
 import {
   FILE_SIZE,
   USERS,
   USERS_IN_ROOM,
   COUNT_FOR_SHOWING_BAR,
   PERCENTAGE_FOR_SHOWING_BAR,
+  NO_QUOTA,
 } from "../constants";
 import { Nullable, TTranslation } from "../types";
 import { UserStore } from "./UserStore";
@@ -438,6 +439,10 @@ class CurrentQuotasStore {
   }
 
   get defaultRoomsQuota() {
+    console.log(
+      "his.currentPortalQuota?.roomsQuota",
+      this.currentPortalQuota?.roomsQuota,
+    );
     return this.currentPortalQuota?.roomsQuota?.defaultQuota;
   }
 
@@ -508,7 +513,7 @@ class CurrentQuotasStore {
   };
 
   setUserQuota = async (quota: string | number, t: (key: string) => string) => {
-    const isEnable = +quota !== -1;
+    const isEnable = +quota !== NO_QUOTA;
 
     try {
       await setDefaultUserQuota(isEnable, +quota);
@@ -523,7 +528,7 @@ class CurrentQuotasStore {
   };
 
   setRoomQuota = async (quota: string | number, t: (key: string) => string) => {
-    const isEnable = +quota !== -1;
+    const isEnable = +quota !== NO_QUOTA;
 
     try {
       await setDefaultRoomQuota(isEnable, +quota);
@@ -538,7 +543,7 @@ class CurrentQuotasStore {
   };
 
   setAIAgentQuota = async (quota: string | number, t: TTranslation) => {
-    const isEnable = +quota !== -1;
+    const isEnable = +quota !== NO_QUOTA;
 
     try {
       await setDefaultAIAgentQuota(isEnable, +quota);
@@ -554,3 +559,4 @@ class CurrentQuotasStore {
 }
 
 export { CurrentQuotasStore };
+

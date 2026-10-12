@@ -1,14 +1,14 @@
 {
   "key_path": "DefaultTemplatesDescription",
-  "content": "Admins can assign default templates for DOCX, XLSX, and other formats. When users create new documents, these templates are applied automatically based on language and region. Admins can upload or reset templates to default. Each template shows its status, last modified date, and file size.",
-  "content_en_sha1_hash": "a69271c260bdb74fce8be26cdc6a3b62b54ede4f",
-  "created_at": "2026-02-18T14:56:26.355Z",
-  "updated_at": "2026-05-15T14:00:06.774Z",
+  "content": "Set default templates for DOCX, XLSX, PPTX and PDF forms. These templates are applied automatically when users create new documents, based on their language and region. Upload new templates or reset them to default.",
+  "content_en_sha1_hash": "94d490f24845339329a8fb4f0a388c358266f5a4",
+  "created_at": "2026-08-31T18:23:40.836Z",
+  "updated_at": "2026-08-31T20:35:58.327Z",
   "comment": {
-    "text": "This is a descriptive text displayed below the \"Default Templates\" heading in the portal settings. It explains how administrators can manage default document templates for various file types, and how these templates are automatically applied to new documents based on user language and region.",
+    "text": "Description text on the Default Templates settings page explaining how templates are automatically applied based on user locale and how to manage them.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:24:54.347Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:35:58.327Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

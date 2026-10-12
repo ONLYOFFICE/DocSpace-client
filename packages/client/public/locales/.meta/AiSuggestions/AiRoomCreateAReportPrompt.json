@@ -1,0 +1,29 @@
+{
+  "key_path": "AiRoomCreateAReportPrompt",
+  "content": "Create a structured report from the available documents, remove repetition, and reference the source of key facts. If this information is not provided, ask me for the audience, scope, reporting period, and preferred output format.",
+  "content_en_sha1_hash": "0af1b410dc5ebc7ab69ceda5efee47e27d91cbf1",
+  "created_at": "2026-08-04T09:58:55.094Z",
+  "updated_at": "2026-08-05T18:31:59.392Z",
+  "comment": {
+    "text": "Prompt text for the \"Create a report\" AI suggestion, providing detailed instructions to the AI model on how to process documents and what additional information to request if needed.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:31:59.392Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 601,
+      "context": "name: t(\"AiSuggestions:AiRoomFindContradictions\"),\n prompt: t(\"AiSuggestions:AiRoomFindContradictionsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomCreateAReport\"),\n prompt: t(\"AiSuggestions:AiRoomCreateAReportPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomCreateAPresentation\"),\n prompt: t(\"AiSuggestions:AiRoomCreateAPresentationPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

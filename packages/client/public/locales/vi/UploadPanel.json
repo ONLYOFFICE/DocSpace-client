@@ -1,6 +1,10 @@
 {
   "HideInput": "Ẩn",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} trong số {{total}}</0> đã tải lên. Đã vượt quá hạn ngạch lưu trữ — <1>xem chi tiết</1>.",
+  "QuotaExceededTooltip": "Đã vượt quá hạn ngạch lưu trữ. Hãy giải phóng dung lượng hoặc nâng cấp gói, rồi thử lại.",
   "Ready": "Xong",
+  "RetryAfterQuotaUpgrade": "Thử lại sau khi nâng cấp hạn ngạch",
+  "RetryUpload": "Thử lại",
   "UploadingAndConversion": "Tải lên & Chuyển đổi",
   "UploadingError": "Lỗi tải lên"
 }

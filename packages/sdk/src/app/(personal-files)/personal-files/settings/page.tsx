@@ -42,8 +42,19 @@ import { getSettings } from "@/api/settings";
 import { getSelf } from "@/api/people";
 
 import DocsSettingsPage from "./page.client";
+import DocsSettingsOAuth from "./page.oauth.client";
 
-export default async function DocsSettings() {
+export default async function DocsSettings({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string>>;
+}) {
+  const params = await searchParams;
+
+  if (params.auth === "oauth") {
+    return <DocsSettingsOAuth />;
+  }
+
   const cookieStore = await cookies();
   const authToken = cookieStore.get("asc_auth_key")?.value || "";
 

@@ -37,7 +37,7 @@ import { TFileLink } from "@docspace/shared/api/files/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
-import { TOption } from "@docspace/ui-kit/components/combobox";
+import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import { Nullable } from "@docspace/shared/types";
 
@@ -150,6 +150,8 @@ export type UserProps = {
   setEditMembersGroup?: DialogsStore["setEditMembersGroup"];
   setEditGroupMembersDialogVisible?: DialogsStore["setEditGroupMembersDialogVisible"];
   setRemoveUserConfirmation?: DialogsStore["setRemoveUserConfirmation"];
+
+  getActiveUploadCountForRoom?: (roomId: string | number) => number;
 };
 
 export type LinkRowProps = {

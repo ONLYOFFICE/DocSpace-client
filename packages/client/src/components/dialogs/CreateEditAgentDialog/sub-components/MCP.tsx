@@ -38,20 +38,19 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { AddButton } from "@docspace/ui-kit/components/add-button";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { MCPIcon, MCPIconSize } from "@docspace/ui-kit/components/mcp-icon";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { MCPIcon, MCPIconSize } from "@onlyoffice/apps-ui-kit/components/mcp-icon";
 
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 
 interface MCPSettingsProps {
   agentParams: TAgentParams;
   setAgentParams: (value: Partial<TAgentParams>) => void;
-  portalMcpServerId?: string;
   onClickAction?: () => void;
   selectedServers?: TSelectorItem[];
   setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
@@ -60,12 +59,11 @@ interface MCPSettingsProps {
 const MCPSettings = ({
   agentParams,
   setAgentParams,
-  portalMcpServerId,
   onClickAction,
   selectedServers,
   setSelectedServers,
 }: MCPSettingsProps) => {
-  const { t } = useTranslation(["AIRoom", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   return (
     <StyledParam increaseGap>
@@ -111,11 +109,6 @@ const MCPSettings = ({
                   setSelectedServers?.((prev) =>
                     prev.filter((item) => item.id !== server.id),
                   );
-                  if (portalMcpServerId && server.id === portalMcpServerId) {
-                    setAgentParams({
-                      attachDefaultTools: false,
-                    });
-                  }
                 }}
                 dataTestId="remove-mcp-button"
               />
@@ -128,3 +121,4 @@ const MCPSettings = ({
 };
 
 export default MCPSettings;
+

@@ -42,13 +42,17 @@ import {
   SelectionArea as SelectionAreaComponent,
   type TArrayTypes,
   type TOnMove,
-} from "@docspace/ui-kit/components/selection-area";
+} from "@onlyoffice/apps-ui-kit/components/selection-area";
 import { checkIsSSR, getCountTilesInRow } from "@docspace/shared/utils";
 import useFilesSelection from "@/app/(docspace)/_hooks/useFilesSelection";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
-const SelectionArea = observer(() => {
+type SelectionAreaProps = {
+  isRooms?: boolean;
+};
+
+const SelectionArea = observer(({ isRooms }: SelectionAreaProps) => {
   const [countTilesInRow, setCountTilesInRow] = useState(0);
   const [isSSR, setIsSSR] = useState(true);
 
@@ -67,6 +71,10 @@ const SelectionArea = observer(() => {
     return division ? countTilesInRow - division : 0;
   };
 
+  // Rooms are stored as folders in the value attribute (isFolder=true),
+  // but they have a different visual row gap (16px) vs regular folders (12px).
+  const folderRowGap = isRooms ? 16 : 12;
+
   const arrayTypes: TArrayTypes[] = [
     {
       type: "file",
@@ -77,7 +85,7 @@ const SelectionArea = observer(() => {
     },
     {
       type: "folder",
-      rowGap: 12,
+      rowGap: folderRowGap,
       itemHeight: 0,
       rowCount: Math.ceil(foldersLength / countTilesInRow),
       countOfMissingTiles: getCountOfMissingFilesTiles(foldersLength),
@@ -142,6 +150,7 @@ const SelectionArea = observer(() => {
       folderHeaderHeight={35}
       countTilesInRow={countTilesInRow}
       defaultHeaderHeight={46}
+      isRooms={isRooms}
     />
   );
 });

@@ -36,20 +36,22 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { useState } from "react";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 type Props = {
   setRemoveUserConfirmation: (
     visible: boolean,
     callback?: () => Promise<void>,
+    isEncryptedRoom?: boolean,
   ) => void;
   removeUserConfirmation: {
     visible: boolean;
     callback: () => Promise<void> | null;
+    isEncryptedRoom?: boolean;
   };
 };
 
@@ -60,6 +62,8 @@ const RemoveUserConfirmationDialog = ({
   const { t, ready } = useTranslation(["People", "Common"]);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const isEncryptedRoom = !!removeUserConfirmation.isEncryptedRoom;
 
   const onClose = () => {
     if (isLoading) return;
@@ -89,7 +93,11 @@ const RemoveUserConfirmationDialog = ({
     >
       <ModalDialog.Header>{t("People:RemoveUser")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{t("People:RemoveUserConfirmationText")}</Text>
+        <Text>
+          {isEncryptedRoom
+            ? t("Common:RemoveUserFromEncryptedRoomWarning")
+            : t("People:RemoveUserConfirmationText")}
+        </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

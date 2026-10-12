@@ -1,6 +1,9 @@
 {
-  "ProductNameDetail": "{{productName}} nimi",
-  "SetEmailPassword": "Aseta salasana",
-  "WelcomeSubtitle": "Tilasi on luotu onnistuneesti. Tarkista profiilitietosi ja aloita työskentely.",
+  "ChangeData": "Vaihda tiedot ja salasana",
+  "ClickButtonBelow": "Jos haluat kirjautua sähköpostiosoitteellasi, määritä itsellesi salasana. <br/> Kun olet valmis, napsauta alla olevaa painiketta.",
+  "ContinueToProduct": "Jatka työtilaan",
+  "GeneratedPassword": "Luotu salasana",
+  "ProductNameDetail": "Työtilan nimi",
+  "ReviewAccountDetails": "Ole hyvä ja tarkista tilisi tiedot hetken ajan:",
   "YourProfileDetails": "Profiilitietosi"
 }

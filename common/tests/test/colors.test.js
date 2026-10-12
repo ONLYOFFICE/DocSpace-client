@@ -73,11 +73,9 @@ beforeAll(() => {
     "themes",
     ".test.",
     ".stories.",
-    path.normalize("libs/ui-kit/utils/encoder/index.ts"),
-    path.normalize("libs/ui-kit/components/error-container/ErrorContainer.tsx"),
-    path.normalize("libs/ui-kit/styles/variables/_colors.scss"),
     path.normalize("packages/client/src/components/SmartBanner/main.css"),
     path.normalize("packages/sdk/src/styles/customization-theme.scss"),
+    path.normalize("packages/shared/dialogs/key-generation/recovery-kit.ts"),
   ];
 
   const javascripts = workspaces.flatMap((wsPath) => {

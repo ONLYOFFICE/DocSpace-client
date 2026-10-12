@@ -1,0 +1,29 @@
+{
+  "key_path": "FormSpaceAddAFormFromTheGalleryPrompt",
+  "content": "Add a form from the gallery to the current Form Space after showing the selected template and proposed name. If this information is not provided, ask me for the exact scope, desired outcome, and any important constraints.",
+  "content_en_sha1_hash": "8047e75e603a4153bc172dca9a6d10bdb93de8d2",
+  "created_at": "2026-08-04T09:58:55.143Z",
+  "updated_at": "2026-08-05T17:50:18.799Z",
+  "comment": {
+    "text": "An instructional prompt for the AI feature that defines how to add a form from the gallery and how to request missing information.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:50:18.799Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 822,
+      "context": "prompt: t(\"AiSuggestions:FormSpaceConvertAFileIntoAFormPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceAddAFormFromTheGallery\"),\n prompt: t(\"AiSuggestions:FormSpaceAddAFormFromTheGalleryPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceOrganizeForms\"),\n prompt: t(\"AiSuggestions:FormSpaceOrganizeFormsPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

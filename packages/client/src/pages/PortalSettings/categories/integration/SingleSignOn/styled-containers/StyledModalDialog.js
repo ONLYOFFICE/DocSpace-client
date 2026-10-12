@@ -33,36 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
-import { mobile } from "@docspace/shared/utils";
+import classnames from "classnames";
+import styles from "./StyledModalDialog.module.scss";
 
-const StyledBodyContent = styled.div`
-  display: contents;
-
-  .generate {
-    font-weight: 600;
-  }
-
-  .text-area {
-    width: 488px !important;
-    margin-top: 4px;
-
-    &-label {
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    @media ${mobile} {
-      width: 100% !important;
-    }
-  }
-  .text-area-label {
-    margin-top: 16px;
-  }
-
-  .modal-combo {
-    margin: 16px 0 0;
-  }
-`;
+const StyledBodyContent = ({ className, style, children, ...rest }) => {
+  return (
+    <div className={classnames(styles.styledBodyContent, className)} style={style} {...rest}>
+      {children}
+    </div>
+  );
+};
 
 export default StyledBodyContent;

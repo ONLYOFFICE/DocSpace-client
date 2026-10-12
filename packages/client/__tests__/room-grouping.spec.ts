@@ -33,6 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { http } from "msw";
+import type { Locator, Page } from "@playwright/test";
+
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { API_PREFIX, BASE_URL } from "@docspace/shared/__mocks__/e2e/utils";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import {
   settingsHandler,
@@ -47,7 +52,65 @@ import {
   updateRoomGroupHandler,
   deleteRoomGroupHandler,
   updateRoomGroupIconHandler,
+  roomListResolver,
 } from "@docspace/shared/__mocks__/handlers";
+
+// Rooms of the default list that get a file lifetime: a short title and the
+// one whose title is far wider than the selector.
+const SHORT_LIFETIME_ROOM_ID = 40;
+const LONG_LIFETIME_ROOM_ID = 33;
+
+const roomListWithLifetimeHandler = () =>
+  http.get(
+    `${BASE_URL}:${TEST_PORT}/${API_PREFIX}/files/rooms*`,
+    async () => {
+      const { response } = await roomListResolver(TypeRoomList.IsDefault).json();
+
+      response.folders = response.folders.map((room: { id: number }) =>
+        room.id === SHORT_LIFETIME_ROOM_ID || room.id === LONG_LIFETIME_ROOM_ID
+          ? {
+              ...room,
+              lifetime: { value: 1, period: 0, deletePermanently: false },
+            }
+          : room,
+      );
+
+      return new Response(JSON.stringify({ response }));
+    },
+  );
+
+const openCreateGroupRoomSelector = async (page: Page, baseUrl: string) => {
+  await page.goto(`${baseUrl}/rooms/shared/`);
+  await expect(page.getByTestId("table-body")).toBeVisible();
+
+  await page.locator('[class*="groupManagementButton"]').click();
+
+  const dialog = page
+    .getByTestId("modal-dialog")
+    .filter({ hasText: "Edit room groups" });
+  await expect(dialog).toBeVisible();
+
+  await dialog.getByTestId("create_new_group_button").click();
+
+  const roomSelector = page.getByTestId("room_selector");
+  await expect(roomSelector).toBeVisible();
+
+  return roomSelector;
+};
+
+const getLifetimeRow = (roomSelector: Locator, roomId: number) => {
+  const iconSelector = `[data-tooltip-id="${roomId}_iconTooltip"]`;
+  const row = roomSelector
+    .locator('[data-testid^="selector-item-"]')
+    .filter({ has: roomSelector.page().locator(iconSelector) });
+
+  return {
+    row,
+    icon: row.locator(iconSelector),
+    label: row.locator('[class*="selectorItemLabel"]'),
+    checkbox: row.locator(".checkbox").first(),
+  };
+};
 
 test.describe("Room grouping", () => {
   // Set up authenticated user and room list for all tests in this suite
@@ -89,6 +152,10 @@ test.describe("Room grouping", () => {
       const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
+
       // Screenshot: Edit room groups panel with grouping enabled and groups listed
       await expect(dialog).toHaveScreenshot([
         "desktop",
@@ -124,6 +191,10 @@ test.describe("Room grouping", () => {
       const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
+
       // Screenshot: Edit room groups panel with no groups (empty state)
       await expect(dialog).toHaveScreenshot([
         "desktop",
@@ -155,7 +226,7 @@ test.describe("Room grouping", () => {
       await expect(groupTagsRow).not.toBeVisible();
 
       // Screenshot: Rooms page without grouping row when grouping is disabled
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "rooms-page-grouping-disabled.png",
@@ -203,6 +274,10 @@ test.describe("Room grouping", () => {
 
       const cancelButton = dialog.locator('button:has-text("Cancel")');
       await expect(cancelButton).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Panel with grouping toggled off showing Save/Cancel buttons
       await expect(dialog).toHaveScreenshot([
@@ -286,6 +361,10 @@ test.describe("Room grouping", () => {
       await expect(toggle).toBeVisible();
       await toggle.click();
 
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
+
       // Screenshot: Groups should appear disabled/grayed out
       await expect(dialog).toHaveScreenshot([
         "desktop",
@@ -333,6 +412,10 @@ test.describe("Room grouping", () => {
       // The info bar/tooltip should be visible
       const infoBar = dialog.locator('[class*="infoBar"]');
       await expect(infoBar).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Panel with dismissible tooltip visible
       await expect(dialog).toHaveScreenshot([
@@ -387,6 +470,10 @@ test.describe("Room grouping", () => {
       // Tooltip should be dismissed
       await expect(infoBar).not.toBeVisible();
 
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
+
       // Screenshot: Panel after tooltip is dismissed
       await expect(dialog).toHaveScreenshot([
         "desktop",
@@ -423,7 +510,7 @@ test.describe("Room grouping", () => {
       await expect(allRoomsTag).toBeVisible();
 
       // Screenshot: Filter area with group tags row visible
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "group-tags-row-visible.png",
@@ -458,7 +545,7 @@ test.describe("Room grouping", () => {
         await secondTag.click();
 
         // Screenshot: Rooms filtered by selected group
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "room-grouping",
           "rooms-filtered-by-group.png",
@@ -535,7 +622,7 @@ test.describe("Room grouping", () => {
       await page.getByTestId("create_group_tag").waitFor({ state: "visible" });
 
       // Screenshot: Tags row with Create group button (no groups)
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "create-group-button-in-tags.png",
@@ -570,7 +657,7 @@ test.describe("Room grouping", () => {
         await checkbox.click();
 
         // Screenshot: Header menu with group actions visible
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "room-grouping",
           "header-menu-group-actions.png",
@@ -654,7 +741,7 @@ test.describe("Room grouping", () => {
       await expect(roomSelector).toBeVisible();
 
       // Screenshot: Room selector panel for creating a new group
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "room-selector-create-group.png",
@@ -707,7 +794,7 @@ test.describe("Room grouping", () => {
         await expect(submitButton).toBeDisabled();
 
         // Screenshot: Room selector with disabled Select button
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "room-grouping",
           "room-selector-select-disabled.png",
@@ -751,6 +838,10 @@ test.describe("Room grouping", () => {
       // The "Create a new group" button should be disabled
       const createButton = dialog.getByTestId("create_new_group_button");
       await expect(createButton).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Create new group button disabled when grouping is off
       await expect(dialog).toHaveScreenshot([
@@ -798,8 +889,14 @@ test.describe("Room grouping", () => {
         await deleteIcon.click();
 
         // Delete confirmation dialog should appear
-        const confirmDialog = page.getByTestId("modal-dialog").last();
+        const confirmDialog = page
+          .getByTestId("modal-dialog")
+          .filter({ hasText: "Remove group" });
         await expect(confirmDialog).toBeVisible();
+
+        // Park the cursor: the dialog opens under it, and a row left in its
+        // hover state is a one-icon difference against the baseline.
+        await page.mouse.move(0, 0);
 
         // Screenshot: Delete group confirmation dialog
         await expect(confirmDialog).toHaveScreenshot([
@@ -844,8 +941,16 @@ test.describe("Room grouping", () => {
       if (await deleteIcon.isVisible()) {
         await deleteIcon.click();
 
-        // Click Cancel in the confirmation dialog
-        const cancelButton = page.locator('button:has-text("Cancel")').last();
+        // Click Cancel in the delete confirmation dialog (scope to it so we
+        // don't match Cancel buttons in other mounted dialogs)
+        const confirmDialog = page
+          .getByTestId("modal-dialog")
+          .filter({ hasText: "Remove group" });
+        await expect(confirmDialog).toBeVisible();
+
+        const cancelButton = confirmDialog.getByRole("button", {
+          name: "Cancel",
+        });
         await expect(cancelButton).toBeVisible();
         await cancelButton.click();
 
@@ -896,11 +1001,117 @@ test.describe("Room grouping", () => {
       await expect(roomSelector).toBeVisible();
 
       // Screenshot: Room list panel for editing group rooms
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "edit-group-room-list.png",
       ]);
+    });
+  });
+
+  test.describe("Room list lifetime icon", () => {
+    test.beforeEach(({ mockRequest }) => {
+      mockRequest.use(
+        filesSettingsHandler(TEST_PORT, { organizeRoomsGrouping: true }),
+        roomGroupsHandler(TEST_PORT, true),
+        roomGroupByIdHandler(TEST_PORT),
+        roomListWithLifetimeHandler(),
+      );
+    });
+
+    // The multi-select row lays the title out without a flex wrapper unless
+    // the selector styles give it one; the icon then drops under the title.
+    test("should keep the lifetime icon on the title line", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      const { icon, label } = getLifetimeRow(
+        roomSelector,
+        SHORT_LIFETIME_ROOM_ID,
+      );
+
+      await expect(icon).toBeVisible();
+
+      const labelBox = (await label.boundingBox())!;
+      const iconBox = (await icon.boundingBox())!;
+
+      // Same line: the icon sits after the title, vertically centred on it.
+      expect(iconBox.x).toBeGreaterThanOrEqual(labelBox.x + labelBox.width);
+      expect(
+        Math.abs(
+          iconBox.y + iconBox.height / 2 - (labelBox.y + labelBox.height / 2),
+        ),
+      ).toBeLessThanOrEqual(2);
+
+      // Park the cursor so no row is left in its hover state.
+      await page.mouse.move(0, 0);
+
+      // Screenshot: both lifetime rooms (short and long title) with the icon
+      // on the title line
+      await expect(roomSelector).toHaveScreenshot([
+        "desktop",
+        "room-grouping",
+        "room-list-lifetime-icon.png",
+      ]);
+    });
+
+    // A title wider than the panel must be ellipsised, not push the icon
+    // under the checkbox or out of the row.
+    test("should truncate a long title and keep the icon before the checkbox", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      const { row, icon, label, checkbox } = getLifetimeRow(
+        roomSelector,
+        LONG_LIFETIME_ROOM_ID,
+      );
+
+      await expect(icon).toBeVisible();
+
+      // The text sits in an inner dir="auto" span that clips on its own, so
+      // the label's scrollWidth never exceeds its clientWidth; measure the
+      // laid-out text instead.
+      const isTruncated = await label.evaluate((el) => {
+        const range = document.createRange();
+        range.selectNodeContents(el);
+
+        return (
+          range.getBoundingClientRect().width > el.getBoundingClientRect().width
+        );
+      });
+      expect(isTruncated).toBe(true);
+
+      const rowBox = (await row.boundingBox())!;
+      const labelBox = (await label.boundingBox())!;
+      const iconBox = (await icon.boundingBox())!;
+      const checkboxBox = (await checkbox.boundingBox())!;
+
+      expect(iconBox.x).toBeGreaterThanOrEqual(labelBox.x + labelBox.width);
+      expect(iconBox.x + iconBox.width).toBeLessThanOrEqual(checkboxBox.x);
+      expect(iconBox.x + iconBox.width).toBeLessThanOrEqual(
+        rowBox.x + rowBox.width,
+      );
+      expect(
+        Math.abs(
+          iconBox.y + iconBox.height / 2 - (labelBox.y + labelBox.height / 2),
+        ),
+      ).toBeLessThanOrEqual(2);
+    });
+
+    test("should show the lifetime tooltip on hover", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      const { icon } = getLifetimeRow(roomSelector, SHORT_LIFETIME_ROOM_ID);
+
+      await icon.hover();
+
+      await expect(
+        page.getByText("The file lifetime is set to 1 days in this room"),
+      ).toBeVisible();
     });
   });
 });

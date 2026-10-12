@@ -42,9 +42,9 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { EventLogBlock } from "../sub-components/EventLogBlock";
 
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { Label } from "@docspace/ui-kit/components/label";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
 import { RoomsType } from "@docspace/shared/enums";
 import { getSdkScriptUrl, loadScript } from "@docspace/shared/utils/common";
 
@@ -61,7 +61,6 @@ import {
 import { CancelTextInput } from "../sub-components/CancelTextInput";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
-import Integration from "../sub-components/Integration";
 import { MainElementParameter } from "../sub-components/MainElementParameter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
@@ -302,7 +301,7 @@ const RoomSelector = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <Label className="label">{t("InterfaceElements")}</Label>
+            <Label className="label">{t("Common:InterfaceElements")}</Label>
             <Checkbox
               className="checkbox"
               label={t("Common:Search")}
@@ -330,12 +329,8 @@ const RoomSelector = (props) => {
               dropDownTestId="room_type_dropdown"
             />
           </ControlsSection>
-
-          <Integration className="integration-examples" />
         </Controls>
       </Container>
-
-      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };
@@ -350,7 +345,6 @@ export const Component = inject(({ settingsStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "CreateEditRoomDialog",
   ])(observer(RoomSelector)),

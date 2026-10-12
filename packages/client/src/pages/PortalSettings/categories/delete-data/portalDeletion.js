@@ -36,18 +36,17 @@
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject } from "mobx-react";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DeletePortalDialog } from "SRC_DIR/components/dialogs";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
-import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
-import { getBrandName } from "@docspace/shared/constants/brands";
+import styles from "./StyledDeleteData.module.scss";
 
 const PortalDeletion = (props) => {
   const {
@@ -69,7 +68,7 @@ const PortalDeletion = (props) => {
 
   useEffect(() => {
     setDocumentTitle(
-      t("Common:DeletePortal", { productName: getBrandName("ProductName") }),
+      t("Common:DeletePortal"),
     );
     onCheckView();
     window.addEventListener("resize", onCheckView);
@@ -99,14 +98,14 @@ const PortalDeletion = (props) => {
     owner?.activationStatus === EmployeeActivationStatus.NotActivated;
 
   return (
-    <MainContainer>
-      <Text fontSize="13px" className="description">
+    <div className={styles.mainContainer}>
+      <Text fontSize="13px" className={styles.description}>
         {t("PortalDeletionDescription")}
       </Text>
-      <Text className="helper">{t("PortalDeletionHelper")}</Text>
-      <ButtonWrapper>
+      <Text className={styles.helper}>{t("PortalDeletionHelper")}</Text>
+      <div className={styles.buttonWrapper}>
         <Button
-          className="delete-button button"
+          className={`delete-button ${styles.button}`}
           label={t("Common:Delete")}
           primary
           size={isDesktopView ? "small" : "normal"}
@@ -118,10 +117,9 @@ const PortalDeletion = (props) => {
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
-              productName: getBrandName("ProductName"),
             })}
             <Link
-              className="request-again-link"
+              className={styles.requestAgainLink}
               color={currentColorScheme?.main?.accent}
               fontSize="12px"
               fontWeight="400"
@@ -132,14 +130,14 @@ const PortalDeletion = (props) => {
             </Link>
           </Text>
         ) : null}
-      </ButtonWrapper>
+      </div>
       <DeletePortalDialog
         visible={isDialogVisible}
         onClose={() => setIsDialogVisible(false)}
         owner={owner}
         stripeUrl={stripeUrl}
       />
-    </MainContainer>
+    </div>
   );
 };
 

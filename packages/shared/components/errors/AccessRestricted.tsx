@@ -36,9 +36,8 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
+import ErrorContainer from "@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer";
 import styles from "./Errors.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const AccessRestricted = () => {
   const { t, ready } = useTranslation("Common");
@@ -52,9 +51,7 @@ export const AccessRestricted = () => {
       <div className={styles.accessRestrictedWrapper}>
         <ErrorContainer
           headerText={t("AccessDenied")}
-          bodyText={t("PortalRestriction", {
-            productName: getBrandName("ProductName"),
-          })}
+          bodyText={t("PortalRestriction")}
         />
       </div>
     )

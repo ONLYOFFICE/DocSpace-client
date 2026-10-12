@@ -42,20 +42,20 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import { Trans, withTranslation } from "react-i18next";
 import { createApiKey, getApiKeys } from "@docspace/shared/api/api-keys";
 import { TApiKey, TApiKeyRequest } from "@docspace/shared/api/api-keys/types";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Tabs, TabsTypes, TTabItem } from "@docspace/ui-kit/components/tabs";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { InputType, TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Tabs, TabsTypes, TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { CreateApiKeyDialogProps, TPermissionsList } from "../../types";
 import {
   getCategoryTranslation,
@@ -66,7 +66,7 @@ import {
   sortPermissions,
 } from "../../utils";
 
-import { StyledBodyContent } from "./StyledCreateApiKeys";
+import styles from "./StyledCreateApiKeys.module.scss";
 
 const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const {
@@ -373,7 +373,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     : false;
 
   const createBody = (
-    <StyledBodyContent>
+    <div className={styles.styledBodyContent}>
       {!isEdit ? (
         <Text>{t("Settings:CreateNewSecretKeyDialogDescription")}</Text>
       ) : null}
@@ -476,11 +476,11 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           ) : null}
         </div>
       ) : null}
-    </StyledBodyContent>
+    </div>
   );
 
   const keyBody = (
-    <StyledBodyContent>
+    <div className={styles.styledBodyContent}>
       <Text>{t("Settings:CreateNewSecretKeyDialogDescription")}</Text>
       <div className="api-key_name">
         <InputBlock
@@ -514,7 +514,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           />
         </Text>
       ) : null}
-    </StyledBodyContent>
+    </div>
   );
 
   const createFooter = (

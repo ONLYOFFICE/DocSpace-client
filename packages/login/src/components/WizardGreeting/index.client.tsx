@@ -37,16 +37,13 @@
 
 import { useTranslation } from "react-i18next";
 import { GreetingContainer } from "../GreetingContainer";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const WizardGreeting = ({ culture }: { culture?: string }) => {
   const { t } = useTranslation(["Wizard", "Common"]);
 
   return (
     <GreetingContainer
-      greetingText={t("Wizard:WelcomeTitle", {
-        productName: getBrandName("ProductName"),
-      })}
+      greetingText={t("Wizard:WelcomeTitle")}
       culture={culture}
     />
   );

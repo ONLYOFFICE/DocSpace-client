@@ -60,6 +60,7 @@ type NoItemsProps = {
   isGuests?: boolean;
   isGallery?: boolean;
   isRooms?: boolean;
+  isForms?: boolean;
   isAgents?: boolean;
   isFiles?: boolean;
   isTemplatesRoom?: boolean;
@@ -72,6 +73,7 @@ const NoItem = ({
   isGuests,
   isGallery,
   isRooms,
+  isForms,
   isFiles,
   isTemplatesRoom,
   isAgents,
@@ -84,6 +86,7 @@ const NoItem = ({
     isGuests,
     isGallery,
     isRooms,
+    isForms,
     isFiles,
     isTemplatesRoom,
     isAgents,
@@ -96,6 +99,7 @@ const NoItem = ({
     isGuests ||
     isGallery ||
     isRooms ||
+    isForms ||
     isFiles ||
     isTemplatesRoom ||
     isAgents ||
@@ -107,6 +111,7 @@ const NoItem = ({
       isGuests,
       isGallery,
       isRooms,
+      isForms,
       isFiles,
       isTemplatesRoom,
       isAgents,
@@ -131,6 +136,7 @@ const NoItem = ({
   if (prevNoItemsRef.current.isFiles) return <NoFileOrFolderItem />;
   if (prevNoItemsRef.current.isTemplatesRoom) return <NoGalleryItem />;
   if (prevNoItemsRef.current.isRooms) return <NoRoomItem />;
+  if (prevNoItemsRef.current.isForms) return <NoRoomItem />;
   if (prevNoItemsRef.current.isAgents) return <NoAgentItem />;
 
   return null;

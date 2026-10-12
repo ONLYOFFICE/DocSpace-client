@@ -1,0 +1,18 @@
+{
+  "DashboardApps": "ストレージからコラボレーション、データ収集、自動化、AIまで — それぞれのアプリが異なる役割を担っています。どれかを開けば、そのセクションの短いツアーも始まります。",
+  "DashboardAppsTitle": "アプリを見てみましょう",
+  "DashboardCreate": "テキスト文書、スプレッドシート、プレゼンテーション、PDFフォームを選ぶか、AIチャットを始めましょう。新しく作成したものは{{files}}に保存され、いつでも利用できます。",
+  "DashboardCreateTitle": "作成を始めましょう",
+  "DashboardDevTools": "ここは開発者向けのハブです。API、SDK、プラグイン、Webhookなど、さまざまなツールが揃っています。カードをクリックすると、詳細を確認したり、すぐに使い始めたりできます。",
+  "DashboardDevToolsTitle": "{{organizationName}}で開発する",
+  "DashboardIntegrations": "すでに他のプラットフォームをお使いですか？接続すれば、エディターやアプリを、チームがすでに使っているツールの中でそのまま利用できます。コードの記述も移行も不要です。",
+  "DashboardIntegrationsTitle": "プラットフォームを接続",
+  "DashboardOverview": "このページはいつでもワンクリックで開けます。戻りたくなったら、サイドバーの{{overview}}を開いてください。",
+  "DashboardOverviewTitle": "いつでも戻ってこられます",
+  "DashboardProfile": "ワークスペース名とプロフィールの概要（名前、メールアドレス、パスワード）です。ここからワークスペース名やパスワードをいつでも変更できます。その他の設定を変更するには、プロフィールページをご覧ください。",
+  "DashboardProfileTitle": "プロフィールの詳細を確認",
+  "WelcomeDashboardSubtitle": "すべてはこのページから始まります",
+  "WelcomeDashboardTitle": "{{organizationName}}へようこそ",
+  "WelcomeDescription": "ドキュメントを作成し、ルームで共同作業し、フォームでデータを集め、面倒な作業はAIに任せる。そのすべてが一つの場所で完結します。クイックツアーを始めますか？",
+  "WelcomeLater": "また後で"
+}

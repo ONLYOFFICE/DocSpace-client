@@ -39,6 +39,7 @@ import type {
   FilesSelectorFilterTypes,
   FilterType,
   FolderType,
+  RoomSearchArea,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -97,7 +98,10 @@ export interface InjectedEmptyViewContainerProps
       TStore["selectedFolderStore"],
       "access" | "security" | "rootFolderType"
     >,
-    Pick<TStore["treeFoldersStore"], "myFolder" | "myFolderId" | "roomsFolder">,
+    Pick<
+      TStore["treeFoldersStore"],
+      "myFolder" | "myFolderId" | "roomsFolder" | "isPrivacyFolder"
+    >,
     Pick<TStore["clientLoadingStore"], "setIsSectionFilterLoading"> {
   selectedFolder: ReturnType<
     TStore["selectedFolderStore"]["getSelectedFolder"]
@@ -114,15 +118,23 @@ export interface InjectedEmptyViewContainerProps
   isKnowledgeTab?: boolean;
   isResultsTab?: boolean;
   isAIRoom?: boolean;
+  filterFolderType: Nullable<number[]>;
+  roomsFilterSearchArea: RoomSearchArea | string;
   isPortalAdmin: AuthStore["isAdmin"];
   aiReady?: boolean;
   standalone: SettingsStore["standalone"];
-  socialAuthWelcomeVisible: boolean;
-  onSocialAuthWelcomeClose: () => void;
-  tenantAlias: string;
-  baseDomain: string | null;
-  socialAuthUser: TStore["userStore"]["user"];
+  isCardLinkedToPortal?: boolean;
+  enableAIService?: (onSuccess?: () => void | Promise<void>) => Promise<void>;
+  getAIConfig?: () => Promise<void>;
+  refreshCurrentFolder?: () => Promise<void>;
+  refreshPaymentInfo?: () => Promise<void>;
+  language?: string;
   isGracePeriod: boolean;
+  knowledgeId: number | null;
+  startUpload: TStore["uploadDataStore"]["startUpload"];
+  createFoldersTree: TStore["filesActionsStore"]["createFoldersTree"];
+  templateGalleryAvailable: boolean;
+  onShowTemplateGallery: TStore["contextOptionsStore"]["onShowTemplateGallery"];
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &
@@ -142,14 +154,24 @@ export type OptionActions = {
     openRoot?: boolean,
   ) => void;
   uploadFromDocspaceAiKnowledge: VoidFunction;
+  uploadFromDeviceAiKnowledge: VoidFunction;
   onUploadAction: (type: UploadType) => void;
   createAndCopySharedLink: VoidFunction;
   openInfoPanel: VoidFunction;
   onCreateRoom: VoidFunction;
+  onCreateRoomFromTemplate: VoidFunction;
+  onOpenTemplateGallery: VoidFunction;
   inviteRootUser: ContactsConextOptionsStore["inviteUser"];
   onGoToPersonal: () => LinkProps;
   onGoToShared: () => LinkProps;
+  onGoToForms: () => LinkProps;
+  onGoToAgents: () => LinkProps;
   onCreateAIAgent: VoidFunction;
+  onOpenAiChat: VoidFunction;
+  onStartNewChat: VoidFunction;
   onGoToServices: VoidFunction;
   onGoToAIProviderSettings: VoidFunction;
+  onTopUpAndActivateAI: VoidFunction;
+  onActivateAI: VoidFunction;
+  onShowAIBenefits: VoidFunction;
 };

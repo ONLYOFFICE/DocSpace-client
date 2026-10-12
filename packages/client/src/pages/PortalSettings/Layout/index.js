@@ -35,48 +35,19 @@
 
 import React, { useEffect } from "react";
 import { useLocation } from "react-router";
-import Article from "@docspace/ui-kit/components/article";
+import Article from "@onlyoffice/apps-ui-kit/components/article";
 import { inject, observer } from "mobx-react";
-import Section from "@docspace/ui-kit/components/section";
+import Section from "@onlyoffice/apps-ui-kit/components/section";
 import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
+import { isPluginPage } from "SRC_DIR/helpers/plugins/utils";
 
 import SectionWrapper from "SRC_DIR/components/Section";
+import PortalSettingsSidebar from "SRC_DIR/components/PortalSettingsSidebar";
 
 import SectionHeaderContent from "./Section/Header";
-import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
 import Warning from "./WarningComponent";
-
-
-const ArticleSettings = React.memo(
-  ({ showArticleLoader, needPageReload, isNotPaidPeriod }) => {
-    const onLogoClickAction = () => {
-      if (needPageReload) {
-        window.location.replace("/");
-      }
-    };
-
-    return (
-      <ArticleWrapper
-        showArticleLoader={showArticleLoader}
-        onLogoClickAction={onLogoClickAction}
-        showBackButton={!isNotPaidPeriod}
-      >
-        <Article.Header>
-          <ArticleHeaderContent />
-        </Article.Header>
-
-        <Article.Body>
-          <ArticleBodyContent />
-        </Article.Body>
-      </ArticleWrapper>
-    );
-  },
-);
-
-ArticleSettings.displayName = "ArticleSettings";
 
 const Layout = ({
   currentProductId,
@@ -87,10 +58,8 @@ const Layout = ({
   enablePlugins,
   isInitPlugins,
   initPlugins,
+  setIsPortalSettingsLoading,
 
-  isLoadedArticleBody,
-  needPageReload,
-  isNotPaidPeriod,
   currentDeviceType,
 }) => {
   const location = useLocation();
@@ -99,6 +68,10 @@ const Layout = ({
     const sel = window.getSelection?.();
     if (sel?.rangeCount) sel.removeAllRanges();
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (isPluginPage()) setIsPortalSettingsLoading(false);
+  }, [location.pathname, setIsPortalSettingsLoading]);
 
   useEffect(() => {
     currentProductId !== "settings" && setCurrentProductId("settings");
@@ -110,16 +83,14 @@ const Layout = ({
 
   return (
     <>
-      <ArticleSettings
-        showArticleLoader={!isLoadedArticleBody}
-        needPageReload={needPageReload}
-        isNotPaidPeriod={isNotPaidPeriod}
-      />
+      <PortalSettingsSidebar />
       {!isGeneralPage ? (
         <SectionWrapper viewAs="settings" withBodyScroll settingsStudio>
-          <Section.SectionHeader>
-            <SectionHeaderContent />
-          </Section.SectionHeader>
+          {!isPluginPage() ? (
+            <Section.SectionHeader>
+              <SectionHeaderContent />
+            </Section.SectionHeader>
+          ) : null}
 
           {currentDeviceType !== DeviceType.desktop ? (
             <Section.SectionWarning>
@@ -140,7 +111,7 @@ export default inject(
     settingsStore,
     setup,
     pluginStore,
-    currentTariffStatusStore,
+    clientLoadingStore,
   }) => {
     const { language } = authStore;
     const { addUsers } = setup.headerAction;
@@ -149,10 +120,9 @@ export default inject(
       setCurrentProductId,
       enablePlugins,
       currentDeviceType,
-      isLoadedArticleBody,
     } = settingsStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
-    const { isInit: isInitPlugins, initPlugins, needPageReload } = pluginStore;
+    const { isInit: isInitPlugins, initPlugins } = pluginStore;
+    const { setIsPortalSettingsLoading } = clientLoadingStore;
 
     return {
       language,
@@ -162,10 +132,8 @@ export default inject(
       enablePlugins,
       isInitPlugins,
       initPlugins,
+      setIsPortalSettingsLoading,
 
-      isLoadedArticleBody,
-      needPageReload,
-      isNotPaidPeriod,
       currentDeviceType,
     };
   },

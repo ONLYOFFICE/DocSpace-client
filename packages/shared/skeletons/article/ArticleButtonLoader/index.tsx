@@ -34,7 +34,7 @@
  */
 
 import React from "react";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
 import styles from "./ArticleButtonLoader.module.scss";
 import { ButtonLoaderProps } from "./ArticleButtonLoader.types";

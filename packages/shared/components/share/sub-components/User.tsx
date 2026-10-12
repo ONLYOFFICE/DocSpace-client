@@ -36,7 +36,6 @@
 import { decode } from "he";
 import { useId, useState } from "react";
 import classNames from "classnames";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly, isMobile } from "react-device-detect";
 
@@ -56,21 +55,20 @@ import {
 	Avatar,
 	AvatarRole,
 	AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
 import {
 	ComboBoxSize,
 	type TOption,
-} from "@docspace/ui-kit/components/combobox";
-import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
+import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import styles from "../Share.module.scss";
 import type { UserProps } from "../Share.types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const User = ({
 	user,
@@ -87,7 +85,6 @@ export const User = ({
 	onSelectOption,
 }: UserProps) => {
 	const id = useId();
-	const theme = useTheme();
 	const { t } = useTranslation(["Common"]);
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -142,8 +139,8 @@ export const User = ({
 
 	const tooltipContent = `${
 		"isOwner" in user && user.isOwner
-			? t("Common:PortalOwner", { productName: getBrandName("ProductName") })
-			: t("Common:PortalAdmin", { productName: getBrandName("ProductName") })
+			? t("Common:PortalOwner")
+			: t("Common:PortalAdmin")
 	}. ${t("Common:HasFullAccess")}`;
 
 	const itemAvatar = isSystem
@@ -234,7 +231,7 @@ export const User = ({
 							fontWeight={400}
 							fontSize="12px"
 							truncate
-							color={theme.infoPanel.members.subtitleColor}
+							color="var(--info-panel-members-subtitle-color)"
 							dir="auto"
 						>
 							{`${typeLabel} | ${(user as TUser).email}`}

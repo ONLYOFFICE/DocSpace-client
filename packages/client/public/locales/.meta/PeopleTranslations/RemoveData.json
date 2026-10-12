@@ -3,7 +3,7 @@
   "content": "Delete personal data",
   "content_en_sha1_hash": "2e4e7c500fa5907186961d30b139010ce32e15ed",
   "created_at": "2025-05-19T21:30:53.494Z",
-  "updated_at": "2026-05-15T14:00:06.901Z",
+  "updated_at": "2026-09-04T07:59:41.705Z",
   "comment": {
     "text": "This is a button label in the Contacts module. It allows the user to delete their personal data.",
     "is_auto": true,

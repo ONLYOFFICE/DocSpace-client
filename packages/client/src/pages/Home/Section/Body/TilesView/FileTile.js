@@ -35,19 +35,17 @@
 
 import classNames from "classnames";
 import { use, useRef, useEffect, useState, useCallback, useMemo } from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
-import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import { DragAndDrop } from "@onlyoffice/apps-ui-kit/components/drag-and-drop";
+import { RoomsType } from "@docspace/shared/enums";
 
-import { FileTile as FileTileComponent } from "@docspace/ui-kit/components/tiles/file-tile";
-import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
-import { RoomTile } from "@docspace/ui-kit/components/tiles/room-tile";
-import { TemplateTile } from "@docspace/ui-kit/components/tiles/template-tile";
+import { FileTile as FileTileComponent } from "@onlyoffice/apps-ui-kit/components/tiles/file-tile";
+import { FolderTile } from "@onlyoffice/apps-ui-kit/components/tiles/folder-tile";
+import { RoomTile } from "@onlyoffice/apps-ui-kit/components/tiles/room-tile";
+import { TemplateTile } from "@onlyoffice/apps-ui-kit/components/tiles/template-tile";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
@@ -55,15 +53,12 @@ import { TagManagement } from "SRC_DIR/components/TagManagement";
 
 import FilesTileContent from "./FilesTileContent";
 import { FileTileContext } from "./FileTile.provider";
+import styles from "./FileTile.module.scss";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import ItemIcon from "../../../../../components/ItemIcon";
 import withBadges from "../../../../../HOCs/withBadges";
-
-const StyledDragAndDrop = styled(DragAndDrop)`
-  border-radius: 12px;
-`;
 
 const FileTile = (props) => {
   const {
@@ -105,8 +100,6 @@ const FileTile = (props) => {
     openUser,
     isBlockingOperation,
     showStorageInfo,
-    setRefMap,
-    deleteRefMap,
     dataTestId,
     setDropTargetPreview,
     selectedFolderTitle,
@@ -140,22 +133,6 @@ const FileTile = (props) => {
   const isDragDisabled = dragging && !isDragging;
 
   useEffect(() => {
-    if (!tileRef?.current) return;
-
-    if (item?.isPDF) {
-      setRefMap(GuidanceRefKey.Pdf, tileRef);
-    }
-    if (item?.type === FolderType.Done) {
-      setRefMap(GuidanceRefKey.Ready, tileRef);
-    }
-
-    return () => {
-      deleteRefMap(GuidanceRefKey.Pdf);
-      deleteRefMap(GuidanceRefKey.Ready);
-    };
-  }, [setRefMap, deleteRefMap]);
-
-  useEffect(() => {
     if (dragging) {
       if (isDragging) {
         if (isDragActive) setDropTargetPreview(item.title);
@@ -179,6 +156,7 @@ const FileTile = (props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
+      isPrivateRoom={item.isPrivateRoom}
       showDefault={
         !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
       }
@@ -188,6 +166,7 @@ const FileTile = (props) => {
       isArchive={item.isArchive}
       isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
+      encrypted={item.encrypted}
       badgeIconColor={badgeIconColor}
     />
   );
@@ -334,10 +313,10 @@ const FileTile = (props) => {
 
   return (
     <div ref={selectableRef} id={id}>
-      <StyledDragAndDrop
+      <DragAndDrop
         data-title={item.title}
         value={value}
-        className={classNameMemo}
+        className={classNames(styles.dragAndDrop, classNameMemo)}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging ? isDragging : null}
@@ -347,7 +326,7 @@ const FileTile = (props) => {
         data-document-title={documentTitle}
       >
         {renderTile()}
-      </StyledDragAndDrop>
+      </DragAndDrop>
     </div>
   );
 };
@@ -359,7 +338,6 @@ export default inject(
       filesStore,
       treeFoldersStore,
       infoPanelStore,
-      guidanceStore,
       currentQuotaStore,
     },
     { item },
@@ -368,17 +346,16 @@ export default inject(
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
 
-    const { setRefMap, deleteRefMap } = guidanceStore;
-
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
 
-    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder, isFormsFolder } =
       treeFoldersStore;
 
     const { showStorageInfo } = currentQuotaStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
+    const isRooms =
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
 
     return {
       getIcon,
@@ -387,8 +364,6 @@ export default inject(
       withCtrlSelect,
       withShiftSelect,
       isHighlight,
-      setRefMap,
-      deleteRefMap,
       openUser: infoPanelStore.openUser,
       showStorageInfo,
     };
@@ -402,3 +377,4 @@ export default inject(
     "GroupingRooms",
   ])(withFileActions(withBadges(withQuickButtons(observer(FileTile))))),
 );
+

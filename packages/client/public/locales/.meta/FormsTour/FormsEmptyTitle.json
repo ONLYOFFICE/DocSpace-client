@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsEmptyTitle",
+  "content": "Your list is empty for now",
+  "content_en_sha1_hash": "6825ed70df352332c3cafd4f841d5d1adf5e2597",
+  "created_at": "2026-08-06T14:20:53.753Z",
+  "updated_at": "2026-08-13T10:58:03.050Z",
+  "comment": {
+    "text": "Heading for an empty state screen displayed when the forms list contains no items.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:44:17.369Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 294,
+      "context": "LOG_LABEL,\n demoHooks,\n )\n : revealStep(\n EMPTY_SCREEN_SELECTOR,\n t(\"FormsTour:FormsEmptyTitle\"),\n t(\"FormsTour:FormsEmpty\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

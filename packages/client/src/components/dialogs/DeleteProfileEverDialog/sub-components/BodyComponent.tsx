@@ -37,14 +37,13 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
 
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import { TFunction } from "i18next";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type BodyComponentProps = {
   needReassignData: boolean;
@@ -68,7 +67,7 @@ const BodyComponent = ({
   onlyGuests,
 }: BodyComponentProps) => {
   const warningMessageMyDocuments = t("UserFilesRemovalScope", {
-    sectionNameFirst: t("Common:MyDocuments"),
+    sectionNameFirst: t("Common:Files"),
     sectionNameSecond: t("Common:TrashSection"),
   });
 
@@ -119,18 +118,13 @@ const BodyComponent = ({
       <>
         <Text className="user-delete">
           {onlyGuests
-            ? t("ActionCannotBeUndoneGuests", {
-                productName: getBrandName("ProductName"),
-              })
-            : t("ActionCannotBeUndoneUsers", {
-                productName: getBrandName("ProductName"),
-              })}
+            ? t("ActionCannotBeUndoneGuests")
+            : t("ActionCannotBeUndoneUsers")}
         </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
           {t("PersonalDataDeletionInfo", {
-            productName: getBrandName("ProductName"),
-            sectionNameFirst: t("Common:MyDocuments"),
+            sectionNameFirst: t("Common:Files"),
             sectionNameSecond: t("Common:TrashSection"),
           })}
         </Text>
@@ -152,12 +146,8 @@ const BodyComponent = ({
       <>
         <Text className="user-delete">
           {onlyGuests
-            ? t("ActionCannotBeUndoneGuests", {
-                productName: getBrandName("ProductName"),
-              })
-            : t("ActionCannotBeUndoneUsers", {
-                productName: getBrandName("ProductName"),
-              })}
+            ? t("ActionCannotBeUndoneGuests")
+            : t("ActionCannotBeUndoneUsers")}
         </Text>
 
         <Text className="text-warning">{t("Common:Warning")}</Text>

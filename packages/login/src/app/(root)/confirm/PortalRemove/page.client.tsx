@@ -38,16 +38,15 @@
 import { Trans, useTranslation } from "react-i18next";
 import { useContext, useState } from "react";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { deletePortal } from "@docspace/shared/api/portal";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import styles from "../confirm.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type RemovePortalFormProps = {
   siteUrl?: string;
@@ -110,9 +109,7 @@ const RemovePortalForm = ({
   ) : (
     <>
       <Text className="subtitle">
-        {t("PortalRemoveTitle", {
-          productName: getBrandName("ProductName"),
-        })}
+        {t("PortalRemoveTitle")}
       </Text>
       <div className={styles.buttonsWrapper}>
         <Button

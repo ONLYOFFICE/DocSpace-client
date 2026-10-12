@@ -1,14 +1,14 @@
 {
   "key_path": "TwoFactorDescription",
-  "content": "Two-factor authentication via a code-generating app was enabled for all users by the admin.",
-  "content_en_sha1_hash": "135c56c81388f3c625d431c75ce2a727e277b481",
-  "created_at": "2025-05-19T21:30:53.402Z",
-  "updated_at": "2026-05-15T14:00:06.879Z",
+  "content": "Two-factor authentication using an authenticator app has been enabled for all users by the admin.",
+  "content_en_sha1_hash": "c64fa4be75c434fbf7c275f8288b27a1f3a9f371",
+  "created_at": "2026-08-31T18:23:42.817Z",
+  "updated_at": "2026-08-31T20:07:31.047Z",
   "comment": {
-    "text": "This is a descriptive text that appears below the \"Two-Factor Authentication\" heading in the user's profile settings. It informs the user that two-factor authentication via an app has been enabled for all users by the administrator.",
+    "text": "Description text in the login settings section informing users that the administrator has enabled two-factor authentication via an authenticator app for all users.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:20:31.150Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:07:31.047Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

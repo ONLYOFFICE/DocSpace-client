@@ -235,6 +235,41 @@ export const quotaResolver = (
   );
 };
 
+/**
+ * The free plan a portal sits on until it is paid for: SaaS Startup, and a
+ * standalone portal running without a license.
+ *
+ * Only `free` is load-bearing for most callers - `currentQuotaStore.isFreeTariff`
+ * reads exactly that flag, and the UI words itself from it ("Startup" vs
+ * "Business", upgrade link vs customize link). The title and price come along
+ * so the object stays a truthful free plan rather than a paid one with a flag
+ * flipped.
+ */
+export const freeQuotaSuccess = () => {
+  const paid = quotaSuccess();
+
+  return {
+    ...paid,
+    response: {
+      ...paid.response,
+      id: -1,
+      title: "Startup",
+      free: true,
+      price: { value: 0 },
+    },
+  };
+};
+
+export const freeQuotaResolver = () => {
+  return new Response(JSON.stringify(freeQuotaSuccess()));
+};
+
+export const freeQuotaHandler = (port: string) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_QUOTA}`, () => {
+    return freeQuotaResolver();
+  });
+};
+
 export const quotaHandler = (
   port: string,
   withCustomization: boolean = true,

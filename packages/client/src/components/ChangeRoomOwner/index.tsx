@@ -41,9 +41,9 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TCreatedBy } from "@docspace/shared/types";
 
@@ -76,7 +76,7 @@ const ChangeRoomOwner = ({
   return (
     <div>
       <Text className="change-owner-label" fontWeight={600} fontSize="13px">
-        {isAgent ? t("Common:AgentOwner") : t("Files:RoomOwner")}
+        {isAgent ? t("Common:AgentOwner") : t("Common:RoomOwner")}
       </Text>
 
       <div className={styles.changeOwnerDisplayWrapper}>
@@ -123,3 +123,4 @@ export default inject(({ settingsStore, userStore }: TStore) => ({
   currentUserId: userStore.user?.id,
   currentColorScheme: settingsStore.currentColorScheme,
 }))(observer(ChangeRoomOwner));
+

@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/article/sub-components/Apps.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/article/sub-components/Apps.tsx",
       "line_number": 131,
       "context": "className={styles.androidIcon}\n onClick={() => window.open(officeforandroidUrl)}\n iconNode={<AndroidReactSvgUrl />}\n size={32}\n isFill\n title={t(\"MobileAndroid\", {\n organizationName: logoText,\n })}\n />\n ) : null}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

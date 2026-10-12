@@ -1,0 +1,29 @@
+{
+  "key_path": "CacheRead",
+  "content": "Cache read",
+  "content_en_sha1_hash": "62df4f2afce3f54dec95c0973ec7df345e5c204f",
+  "created_at": "2026-10-01T08:22:39.765Z",
+  "updated_at": "2026-10-01T08:28:56.262Z",
+  "comment": {
+    "text": "Label in a pricing breakdown list within a tooltip, representing the amount of data processed via cache reading.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T08:28:56.262Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/CachePriceTooltip/CachePriceTooltip.tsx",
+      "line_number": 76,
+      "context": "{t(\"Common:CachePricingTitle\", { currency: breakdown.currency })}\n </div>\n <div className={styles.lines}>\n {breakdown.fromCache ? (\n <PriceLine\n label={t(\"Common:CacheRead\")}\n value={breakdown.fromCache}\n />\n ) : null}\n <PriceLine\n label={t(\"Common:CacheWrite\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

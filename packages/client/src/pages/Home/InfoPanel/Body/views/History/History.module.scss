@@ -46,7 +46,7 @@
 .historySubtitle {
   position: sticky;
   background: var(--info-panel-background-color);
-  top: 80px;
+  top: calc(80px + var(--info-panel-title-offset, 0px));
   z-index: 99;
 
   padding: 16px 0 12px;

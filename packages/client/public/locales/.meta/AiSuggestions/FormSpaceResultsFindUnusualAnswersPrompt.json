@@ -1,0 +1,29 @@
+{
+  "key_path": "FormSpaceResultsFindUnusualAnswersPrompt",
+  "content": "Identify responses that differ significantly from the common pattern and explain why they stand out. If this information is not provided, ask me for the form, date range, respondent segment, and questions to include.",
+  "content_en_sha1_hash": "a24a0246a02a387b54cd1c2b06bce933b8456fd6",
+  "created_at": "2026-08-04T09:58:55.154Z",
+  "updated_at": "2026-08-05T17:41:03.335Z",
+  "comment": {
+    "text": "Instructional prompt for the AI assistant when suggesting how to identify unusual responses in FormSpace results, providing guidance on required input details.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:41:03.335Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 190,
+      "context": "name: t(\"AiSuggestions:FormSpaceResultsFindCommonAnswers\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsFindCommonAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsFindUnusualAnswers\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsFindUnusualAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsConvertToATableOrChart\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsConvertToATableOrChartPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

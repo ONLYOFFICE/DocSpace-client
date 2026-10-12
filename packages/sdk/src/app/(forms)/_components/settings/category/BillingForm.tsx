@@ -40,15 +40,13 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { MemoryRouter } from "react-router";
 
-import { BillingRoot } from "@docspace/ui-kit/billing";
-import AiPaywallPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPaywallPage";
-import AiPageLoader from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPageLoader";
-import { useServicesStore } from "@docspace/ui-kit/billing/store/ServicesStoreProvider";
-import { AI_TOOLS, AI_ENUM } from "@docspace/ui-kit/billing/constants";
-import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { BillingRoot } from "@onlyoffice/apps-ui-kit/billing";
+import AiPageLoader from "@onlyoffice/apps-ui-kit/billing/services/pages/ai-tools/AiPageLoader";
+import { useServicesStore } from "@onlyoffice/apps-ui-kit/billing/store/ServicesStoreProvider";
+import { AI_TOOLS, AI_ENUM } from "@onlyoffice/apps-ui-kit/billing/constants";
+import type { TPaymentConfig } from "@onlyoffice/apps-ui-kit/billing/types";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useFormsUserStore } from "../../../_store/FormsUserStore";
-import { useFormsTourStore } from "../../../_store/FormsTourStore";
 
 import styles from "./SettingsPanel.module.scss";
 
@@ -56,44 +54,29 @@ import AiBillingDashboard from "./AiBillingDashboard";
 
 const PAYMENT_CALLBACK_PATH = "/billing/payment-complete";
 
-type RenderTarget = "loading" | "paywall" | "dashboard";
-
 const AiBillingContent = observer(
   ({ integrationUrl }: { integrationUrl?: string }) => {
     const { t } = useTranslation();
     const servicesStore = useServicesStore();
 
-    const [renderTarget, setRenderTarget] =
-      React.useState<RenderTarget>("loading");
+    const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
       let cancelled = false;
 
       (async () => {
         try {
-          const hadTopUp = await servicesStore.aiPaywallInit(t);
-
-          if (cancelled) return;
-
-          if (hadTopUp) {
-            await servicesStore.initServiceData(
-              t,
-              AI_TOOLS,
-              AI_ENUM,
-              integrationUrl,
-            );
-
-            if (cancelled) return;
-            setRenderTarget("dashboard");
-          } else {
-            setRenderTarget("paywall");
-          }
+          await servicesStore.initServiceData(
+            t,
+            AI_TOOLS,
+            AI_ENUM,
+            integrationUrl,
+          );
         } catch (e) {
           console.error("[ai-billing-content] bootstrap failed", e);
-          if (!cancelled) {
-            toastr.error(t("UnexpectedError"));
-            setRenderTarget("paywall");
-          }
+          if (!cancelled) toastr.error(t("Common:UnexpectedError"));
+        } finally {
+          if (!cancelled) setIsLoading(false);
         }
       })();
 
@@ -105,31 +88,17 @@ const AiBillingContent = observer(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const onPaywallCompleted = React.useCallback(() => {
-      setRenderTarget("dashboard");
-    }, []);
-
-    if (renderTarget === "loading") {
+    if (isLoading) {
       return <AiPageLoader />;
     }
 
-    if (renderTarget === "dashboard") {
-      return <AiBillingDashboard integrationUrl={integrationUrl} />;
-    }
-
-    return (
-      <AiPaywallPage
-        integrationUrl={integrationUrl}
-        onCompleted={onPaywallCompleted}
-      />
-    );
+    return <AiBillingDashboard integrationUrl={integrationUrl} />;
   },
 );
 
 const BillingForm = () => {
   const { i18n } = useTranslation();
   const { user } = useFormsUserStore();
-  const tourStore = useFormsTourStore();
 
   const billingConfig = React.useMemo<TPaymentConfig>(
     () => ({
@@ -152,15 +121,13 @@ const BillingForm = () => {
 
   return (
     <div className={styles.billingWrapper}>
-      {!tourStore.showMockItems && (
-        <MemoryRouter>
-          <BillingRoot config={billingConfig}>
-            <div className={styles.billingContent}>
-              <AiBillingContent integrationUrl={integrationUrl} />
-            </div>
-          </BillingRoot>
-        </MemoryRouter>
-      )}
+      <MemoryRouter>
+        <BillingRoot config={billingConfig}>
+          <div className={styles.billingContent}>
+            <AiBillingContent integrationUrl={integrationUrl} />
+          </div>
+        </BillingRoot>
+      </MemoryRouter>
     </div>
   );
 };

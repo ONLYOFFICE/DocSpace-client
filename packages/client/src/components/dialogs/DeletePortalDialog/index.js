@@ -34,12 +34,11 @@
  */
 
 import { Trans, useTranslation } from "react-i18next";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Link } from "@docspace/ui-kit/components/link";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const DeletePortalDialog = (props) => {
 	const { t, ready } = useTranslation("Settings", "Common");
@@ -65,7 +64,7 @@ const DeletePortalDialog = (props) => {
 			displayType="modal"
 		>
 			<ModalDialog.Header>
-				{t("Common:DeletePortal", { productName: getBrandName("ProductName") })}
+				{t("Common:DeletePortal")}
 			</ModalDialog.Header>
 			<ModalDialog.Body>
 				<Trans t={t} i18nKey="DeletePortalInfo" ns="Settings">

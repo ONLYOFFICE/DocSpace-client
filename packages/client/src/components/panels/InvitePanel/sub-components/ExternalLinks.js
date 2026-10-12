@@ -42,16 +42,16 @@ import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Heading } from "@docspace/ui-kit/components/heading";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
@@ -65,9 +65,8 @@ import styles from "../InvitePanel.module.scss";
 
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 import { deleteInviteLink } from "@docspace/shared/api/portal";
-import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
+import { now, parseToDateTime, isAfter } from "@onlyoffice/apps-ui-kit/utils/date";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ExternalLinks = ({
   t,
@@ -100,7 +99,10 @@ const ExternalLinks = ({
   const showLifetimeBlock = !!activeLink?.expirationDate;
   const showUsersLimitWarning =
     activeLink?.currentUseCount >= activeLink?.maxUseCount;
-  const linkIsExpired = isAfter(now(), parseToDateTime(activeLink?.expirationDate));
+  const linkIsExpired = isAfter(
+    now(),
+    parseToDateTime(activeLink?.expirationDate),
+  );
 
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 
@@ -179,20 +181,16 @@ const ExternalLinks = ({
 
   const description =
     roomId === -1
-      ? t("InviteViaLinkDescriptionAccounts", {
-          productName: getBrandName("ProductName"),
-        })
+      ? t("InviteViaLinkDescriptionAccounts")
       : roomType === RoomsType.AIRoom
         ? allowInvitingGuests
-          ? t("InviteViaLinkDescriptionAgentGuest")
-          : t("InviteViaLinkDescriptionAgentMembers", {
-              productName: getBrandName("ProductName"),
-            })
+          ? t("Common:InviteViaLinkDescriptionAgentGuest")
+          : t("Common:InviteViaLinkDescriptionAgentMembers")
         : allowInvitingGuests
-          ? t("InviteViaLinkDescriptionRoomGuest")
-          : t("InviteViaLinkDescriptionRoomMembers", {
-              productName: getBrandName("ProductName"),
-            });
+          ? roomType === RoomsType.FormRoom
+            ? t("Common:InviteViaLinkDescriptionFormSpaceGuest")
+            : t("Common:InviteViaLinkDescriptionRoomGuest")
+          : t("Common:InviteViaLinkDescriptionRoomMembers");
 
   return (
     <div className={styles.externalLink} ref={inputsRef}>
@@ -201,7 +199,7 @@ const ExternalLinks = ({
           [styles.inline]: true,
         })}
       >
-        {t("InviteViaLink")}
+        {t("Common:InviteViaLink")}
 
         <IconButton
           iconName={SettingsReactSvgUrl}
@@ -274,7 +272,7 @@ const ExternalLinks = ({
                     fontSize="12px"
                     fontWeight={400}
                   >
-                    {t("Files:ValidUntil")}
+                    {t("Common:ValidUntil")}
                   </Text>
                   <Text
                     fontSize="12px"
@@ -294,7 +292,7 @@ const ExternalLinks = ({
                         <>
                           <Text>{t("Common:LinkSettingsExpired")}</Text>
                           <Text>
-                            {t("Files:LinkSettingsExpiredToastDescription")}
+                            {t("Common:LinkSettingsExpiredToastDescription")}
                           </Text>
                         </>
                       }
@@ -316,7 +314,7 @@ const ExternalLinks = ({
                     fontSize="12px"
                     fontWeight={400}
                   >
-                    {t("Files:UsersJoined")}
+                    {t("Common:UsersJoined")}
                   </Text>
                   <Text
                     fontSize="12px"
@@ -333,9 +331,9 @@ const ExternalLinks = ({
                       iconNode={<ButtonAlertIcon />}
                       tooltipContent={
                         <>
-                          <Text>{t("Files:LinkSettingsUsersLimitToast")}</Text>
+                          <Text>{t("Common:LinkSettingsUsersLimitToast")}</Text>
                           <Text>
-                            {t("Files:LinkSettingsUsersLimitToastDescription")}
+                            {t("Common:LinkSettingsUsersLimitToastDescription")}
                           </Text>
                         </>
                       }
@@ -375,3 +373,4 @@ export default inject(
     };
   },
 )(observer(ExternalLinks));
+

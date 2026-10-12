@@ -32,138 +32,101 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-import { ReactSVG } from "react-svg";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import React from "react";
 import { inject, observer } from "mobx-react";
-import { TColorScheme, TTheme } from "@docspace/ui-kit/providers/theme/themes";
 import { useTranslation } from "react-i18next";
-import ZoomIcon from "PUBLIC_DIR/images/zoom.integration.react.svg?url";
-import WordpressIcon from "PUBLIC_DIR/images/wordpress.integration.react.svg?url";
-import DrupalIcon from "PUBLIC_DIR/images/drupal.integration.react.svg?url";
-import ArrowIcon from "PUBLIC_DIR/images/arrow.integration.react.svg?url";
+import classNames from "classnames";
 
-import {
-  IntegrationContainer,
-  CategoryHeader,
-} from "./StyledPortalIntegration";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { isMobile } from "@onlyoffice/apps-ui-kit/utils/device";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import type { TIntegrationsEntries } from "@docspace/shared/api/settings/types";
 
-const zoomTitle = "Zoom";
-const wordPressTitle = "WordPress";
-const drupalTitle = "Drupal";
+import { IntegrationDialog } from "SRC_DIR/components/IntegrationsCard/IntegrationDialog";
+import {
+  PlatformTile,
+  PlatformTileGrid,
+} from "SRC_DIR/components/IntegrationsCard/PlatformTile";
+import type { IntegrationPlatform } from "SRC_DIR/components/IntegrationsCard/integrations-catalog";
 
-const Integration: React.FC<{
-  theme: TTheme;
-  currentColorScheme: TColorScheme;
-  className: string;
-  allConnectorsUrl: string;
-  zoomUrl: string;
-  wordPressUrl: string;
-  drupalUrl: string;
-}> = ({
-  theme,
-  currentColorScheme,
-  className,
-  allConnectorsUrl,
-  zoomUrl,
-  wordPressUrl,
-  drupalUrl,
-}) => {
-  const { t } = useTranslation(["JavascriptSdk"]);
+import { useSdkConnectors } from "./sdk-connectors-catalog";
+
+import styles from "./StyledPortalIntegration.module.scss";
+
+type IntegrationProps = {
+  className?: string;
+  narrow?: boolean;
+  integrationsEntries?: TIntegrationsEntries;
+  moodleUrl?: string;
+  allConnectorsUrl?: string;
+};
+
+const Integration = ({ className, narrow, ...urls }: IntegrationProps) => {
+  const { t } = useTranslation(["JavascriptSdk", "Common"]);
+
+  const connectors = useSdkConnectors(t, urls);
+
+  const [openConnector, setOpenConnector] =
+    React.useState<IntegrationPlatform | null>(null);
+
+  const closeDialog = React.useCallback(() => setOpenConnector(null), []);
 
   return (
-    <IntegrationContainer
-      className={className}
-      theme={theme}
-      color={currentColorScheme?.main?.accent ?? ""}
+    <div
+      className={classNames(
+        styles.connectors,
+        { [styles.narrow]: narrow },
+        className,
+      )}
     >
-      <CategoryHeader className="integration-header">
-        {t("IntegrationExamples")}
-      </CategoryHeader>
-      <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
-        {t("IntegrationDescription", { productName: getBrandName("ProductName") })}
+      <div
+        className={classNames(styles.categoryHeader, {
+          [styles.isMobile]: isMobile(),
+        })}
+      >
+        {t("JavascriptSdk:ConnectorsTitle")}
+      </div>
+      <Text lineHeight="20px" className={styles.connectorsDescription}>
+        {t("JavascriptSdk:ConnectorsDescription", {
+          organizationName: getBrandName("OrganizationName"),
+        })}
       </Text>
-      <div className="icons">
-        <TooltipContainer
-          as="div"
-          data-testid="integration_zoom_container"
-          className="icon"
-          title={zoomTitle}
-        >
-          <ReactSVG
-            className="icon-zoom"
-            src={ZoomIcon}
-            onClick={() => window.open(zoomUrl, "_blank")}
-          />
-        </TooltipContainer>
 
-        <TooltipContainer
-          as="div"
-          data-testid="integration_wordpress_container"
-          className="icon"
-          title={wordPressTitle}
-        >
-          <ReactSVG
-            className="icon-wordpress"
-            src={WordpressIcon}
-            onClick={() => window.open(wordPressUrl, "_blank")}
+      <PlatformTileGrid
+        columns={narrow ? 2 : undefined}
+        testId="sdk-connectors-grid"
+      >
+        {connectors.map((connector) => (
+          <PlatformTile
+            key={connector.id}
+            name={connector.name}
+            iconUrl={connector.iconUrl}
+            iconAlt={connector.name}
+            onClick={() => setOpenConnector(connector)}
+            testId={`sdk-connector-${connector.id}`}
           />
-        </TooltipContainer>
+        ))}
+        <PlatformTile
+          hideIcon
+          isBold
+          name={t("JavascriptSdk:SeeAllConnectors")}
+          href={urls.allConnectorsUrl}
+          testId="sdk-connector-all"
+        />
+      </PlatformTileGrid>
 
-        <TooltipContainer
-          as="div"
-          data-testid="integration_drupal_container"
-          className="icon"
-          title={drupalTitle}
-        >
-          <ReactSVG
-            className="icon-drupal"
-            src={DrupalIcon}
-            onClick={() => window.open(drupalUrl, "_blank")}
-          />
-        </TooltipContainer>
-      </div>
-      <div className="link-container">
-        <Link
-          data-testid="all_connectors_link"
-          className="link"
-          noHover
-          color={currentColorScheme?.main?.accent ?? undefined}
-          onClick={() => window.open(allConnectorsUrl, "_blank")}
-        >
-          {t("SeeAllConnectors")}
-        </Link>
-
-        <div data-testid="all_connectors_icon" className="icon">
-          <ReactSVG
-            className="icon-arrow"
-            src={ArrowIcon}
-            onClick={() => window.open(allConnectorsUrl, "_blank")}
-          />
-        </div>
-      </div>
-    </IntegrationContainer>
+      <IntegrationDialog
+        platform={openConnector}
+        onClose={closeDialog}
+        hideInstanceAction
+      />
+    </div>
   );
 };
 
 export default inject<TStore>(({ settingsStore }) => {
-  const {
-    allConnectorsUrl,
-    zoomUrl,
-    wordPressUrl,
-    drupalUrl,
-    theme,
-    currentColorScheme,
-  } = settingsStore;
-  return {
-    allConnectorsUrl,
-    zoomUrl,
-    wordPressUrl,
-    drupalUrl,
-    theme,
-    currentColorScheme,
-  };
+  const { integrationsEntries, moodleUrl, allConnectorsUrl } = settingsStore;
+
+  return { integrationsEntries, moodleUrl, allConnectorsUrl };
 })(observer(Integration));

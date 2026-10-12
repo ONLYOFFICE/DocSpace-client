@@ -39,20 +39,20 @@ import { withTranslation } from "react-i18next";
 import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
 
-import { Avatar } from "@docspace/ui-kit/components/avatar";
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Avatar } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   parseAddresses,
   getParts,
   isBetaLanguage,
 } from "@docspace/shared/utils";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
@@ -74,7 +74,7 @@ import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?ur
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import styles from "../InvitePanel.module.scss";
 
@@ -87,7 +87,6 @@ import {
   makeFreeRole,
   makeViewerRole,
 } from "../utils";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const minSearchValue = 2;
 const filterSeparator = ";";
@@ -120,6 +119,7 @@ const InviteInput = ({
   usersList,
   setUsersList,
   allowInvitingGuests,
+  isPrivateRoom,
 }) => {
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
@@ -276,7 +276,13 @@ const InviteInput = ({
       const users =
         roomId === -1
           ? await getUserList(filter)
-          : await getMembersList(AccountsSearchArea.Any, roomId, filter);
+          : await getMembersList(
+              isPrivateRoom
+                ? AccountsSearchArea.People
+                : AccountsSearchArea.Any,
+              roomId,
+              filter,
+            );
 
       setUsersList(
         roomId === -1
@@ -335,9 +341,9 @@ const InviteInput = ({
     const isDisabled = status === EmployeeStatus.Disabled;
 
     if (isDisabled) {
-      toastr.warning(t("UsersCannotBeAdded"));
+      toastr.warning(t("Common:UsersCannotBeAdded"));
     } else if (shared) {
-      toastr.warning(t("UsersAlreadyAdded"));
+      toastr.warning(t("Common:UsersAlreadyAdded"));
     } else {
       const guestWrongRoleInAgent =
         isVisitor &&
@@ -459,6 +465,8 @@ const InviteInput = ({
       return;
     }
 
+    if (isPrivateRoom) return;
+
     const items = toUserItems(inputValue);
 
     const filteredItems = items
@@ -521,7 +529,7 @@ const InviteInput = ({
       });
 
     if (filteredItems.length !== items.length) {
-      toastr.warning(t("UsersAlreadyAdded"));
+      toastr.warning(t("Common:UsersAlreadyAdded"));
     }
 
     if (!filteredItems.length) {
@@ -561,7 +569,7 @@ const InviteInput = ({
       prevDropDownContent.current = usersList.map((user) =>
         getItemContent(user),
       );
-    } else if (roomId !== -1 && !allowInvitingGuests)
+    } else if (roomId !== -1 && (!allowInvitingGuests || isPrivateRoom))
       prevDropDownContent.current = (
         <DropDownItem disabled className={styles.noUsersList}>
           <Text truncate fontSize="13px" fontWeight={400} lineHeight="20px">
@@ -609,7 +617,7 @@ const InviteInput = ({
       );
     }
     return prevDropDownContent.current;
-  }, [usersList, inputValue, selectedAccess]);
+  }, [usersList, inputValue, selectedAccess, isPrivateRoom]);
 
   const onSelectAccess = (item) => {
     setSelectedAccess(item.access);
@@ -640,7 +648,7 @@ const InviteInput = ({
   return (
     <>
       <Heading className={styles.subHeader}>
-        {t("AddManually")}
+        {t("Common:AddManually")}
         {!hideSelector ? (
           <Link
             className={classNames(styles.styledLink, "link-list")}
@@ -650,7 +658,7 @@ const InviteInput = ({
             onClick={openUsersPanel}
             dataTestId="invite_panel_choose_from_list_link"
           >
-            {t("Translations:ChooseFromList")}
+            {t("Common:ChooseFromList")}
           </Link>
         ) : null}
       </Heading>
@@ -661,16 +669,10 @@ const InviteInput = ({
         })}
       >
         {roomId === -1
-          ? t("InviteMembersManuallyDescription", {
-              productName: getBrandName("ProductName"),
-            })
+          ? t("InviteMembersManuallyDescription")
           : !allowInvitingGuests
-            ? t("InviteToRoomManuallyInfoMembers", {
-                productName: getBrandName("ProductName"),
-              })
-            : t("InviteToRoomManuallyInfoGuest", {
-                productName: getBrandName("ProductName"),
-              })}
+            ? t("Common:InviteToRoomManuallyInfoMembers")
+            : t("Common:InviteToRoomManuallyInfoGuest")}
       </Text>
       {roomId === -1 || allowInvitingGuests ? (
         <div className={styles.inviteLanguage}>
@@ -728,8 +730,8 @@ const InviteInput = ({
               roomId === -1
                 ? t("InviteMembersSearchPlaceholder")
                 : !allowInvitingGuests
-                  ? t("InviteToRoomAddPlaceholder")
-                  : t("InviteToRoomSearchPlaceholder")
+                  ? t("Common:InviteToRoomAddPlaceholder")
+                  : t("Common:InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
             onKeyDown={onKeyDown}
@@ -823,3 +825,4 @@ export default inject(
     ),
   ),
 );
+

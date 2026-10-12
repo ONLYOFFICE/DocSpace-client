@@ -36,8 +36,8 @@
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import InfoPanelRoomEmptyScreenSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.light.svg?url";
 import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.dark.svg?url";
@@ -62,11 +62,11 @@ const NoAgentItem = () => {
       <div className="no-thumbnail-img-wrapper">
         <img
           src={imageSrc}
-          alt={t("NoAgent", { aiAgent: t("Common:AIAgent") })}
+          alt={t("Common:NoAgent", { aiAgent: t("Common:AIAgent") })}
         />
       </div>
       <Text className="no-item-text" textAlign="center">
-        {t("AIAgentsEmptyScreenTent", { aiAgents: t("Common:AIAgents") })}
+        {t("Common:AIAgentsEmptyScreenTent", { aiAgents: t("Common:AIAgents") })}
       </Text>
     </div>
   );

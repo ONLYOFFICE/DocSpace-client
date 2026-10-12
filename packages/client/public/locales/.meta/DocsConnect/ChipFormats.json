@@ -1,0 +1,29 @@
+{
+  "key_path": "ChipFormats",
+  "content": "50+ formats",
+  "content_en_sha1_hash": "ed341168ac1d9ccbbe0956e3d97b6b1597517163",
+  "created_at": "2026-07-27T13:07:48.467Z",
+  "updated_at": "2026-08-13T14:37:21.759Z",
+  "comment": {
+    "text": "A short label for a feature chip in a \"Get Started\" modal, indicating the number of supported file formats.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:30:43.372Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/DocsConnectGetStartedModal.tsx",
+      "line_number": 103,
+      "context": "description: t(\"DocsConnect:DropInIntegrationDescription\"),\n },\n ];\n \n const chips = [\n { Icon: FormatsIcon, label: t(\"DocsConnect:ChipFormats\") },\n { Icon: RebrandingIcon, label: t(\"DocsConnect:ChipWhiteLabel\") },\n { Icon: IntegrationIcon, label: t(\"DocsConnect:ChipAutomationApi\") },\n { Icon: TenantsKeysIcon, label: t(\"DocsConnect:ChipTenantsKeys\") },\n { Icon: CloudIcon, label: t(\"DocsConnect:ChipCloudHosted\") },\n { Icon: AutoUpdatesIcon, label: t(\"DocsConnect:ChipAutoUpdates\") },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

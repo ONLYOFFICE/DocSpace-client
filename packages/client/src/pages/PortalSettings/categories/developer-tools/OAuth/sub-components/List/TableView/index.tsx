@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 import elementResizeDetectorMaker from "element-resize-detector";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { TableBody } from "@docspace/ui-kit/components/table";
+import { TableBody, TableContainer } from "@onlyoffice/apps-ui-kit/components/table";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 
@@ -46,7 +46,7 @@ import Row from "./sub-components/Row";
 import Header from "./sub-components/Header";
 
 import { TableViewProps } from "./TableView.types";
-import { TableWrapper } from "./TableView.styled";
+import styles from "./TableView.styled.module.scss";
 
 const TABLE_VERSION = "1";
 const COLUMNS_NAME = `oauthConfigColumnsSize_ver-${TABLE_VERSION}`;
@@ -157,7 +157,8 @@ const TableView = ({
   if (!items.length) return null;
 
   return (
-    <TableWrapper
+    <TableContainer
+      className={styles.tableWrapper}
       forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
       useReactWindow
     >
@@ -193,7 +194,7 @@ const TableView = ({
           />
         ))}
       </TableBody>
-    </TableWrapper>
+    </TableContainer>
   );
 };
 

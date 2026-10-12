@@ -33,28 +33,20 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { mobileMore } from "@docspace/shared/utils";
 
-const StyledLoader = styled.div`
-  margin-top: -4px;
-
-  .loader {
-    padding-inline-end: 4px;
-  }
-
-  @media ${mobileMore} {
-    margin-top: -9px;
-  }
-`;
+import styles from "./loaderTabs.module.scss";
 
 const LoaderTabs = () => {
   return (
-    <StyledLoader>
-      <RectangleSkeleton width="100px" height="28px" className="loader" />
+    <div className={styles.loader}>
+      <RectangleSkeleton
+        width="100px"
+        height="28px"
+        className={styles.loaderItem}
+      />
       <RectangleSkeleton width="100px" height="28px" />
-    </StyledLoader>
+    </div>
   );
 };
 

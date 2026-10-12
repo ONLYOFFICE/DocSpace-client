@@ -1,10 +1,10 @@
 {
   "name": "docspace",
-  "version": "3.7.1",
+  "version": "4.0.0",
   "private": true,
   "engines": {
     "node": ">=24",
-    "pnpm": ">=10"
+    "pnpm": ">=12"
   },
   "scripts": {
     "build": "pnpm nx run-many -t build -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
@@ -24,12 +24,16 @@
     "storybook-build": "pnpm nx storybook-build @docspace/shared",
     "storybook-serve": "pnpm nx storybook-serve @docspace/shared",
     "test": "pnpm nx test @docspace/shared",
+    "test:client": "pnpm nx test @docspace/client",
+    "test:sdk": "pnpm nx test @docspace/sdk",
+    "test:store": "pnpm --filter @docspace/client exec vitest run src/store",
     "wipe": "pnpm nx reset && shx rm -rf node_modules pnpm-lock.yaml packages/**/node_modules",
     "translation-stats": "node common/scripts/translation-stats.js",
     "verify-translations": "node common/translation-app/backend/src/scripts/verify-translations-spell-check.js",
     "licenses-audit": "node scripts/check-licenses.js",
     "licenses-aggregate": "node scripts/aggregate-licenses.js",
     "biome-plugins:generate": "node scripts/generate-biome-i18n-constants-plugin.js",
+    "update-fonts": "node scripts/update-open-sans-fonts.js",
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
     "fallow": "fallow dead-code",
@@ -41,26 +45,28 @@
     "lint:fix": "pnpm nx run-many -t lint:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
     "format": "pnpm nx run-many -t format -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
     "format:fix": "pnpm nx run-many -t format:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
-    "tsc": "pnpm nx run-many -t tsc @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
-    "prepare": "node -e \"if (!process.env.CI) { try { require('child_process').execSync('git --version', {stdio: 'ignore'}); require('child_process').execSync('lefthook install', {stdio: 'inherit'}); } catch (e) { console.error('Lefthook installation skipped:', e.message); } }\" && npm --prefix ./common/tests ci",
-    "update-ui-kit-lock": "mv pnpm-workspace.yaml pnpm-workspace.yaml.bak && cd libs/ui-kit && pnpm install --lockfile-only; cd ../.. && mv pnpm-workspace.yaml.bak pnpm-workspace.yaml",
-    "update-translation-app-lock": "npm --prefix common/translation-app/frontend install --package-lock-only && npm --prefix common/translation-app/backend install --package-lock-only"
+    "tsc": "pnpm nx run-many -t tsc",
+    "prepare": "node -e \"if (!process.env.CI) { try { require('child_process').execSync('git --version', {stdio: 'ignore'}); require('child_process').execSync('lefthook install', {stdio: 'inherit'}); } catch (e) { console.error('Lefthook installation skipped:', e.message); } }\" && npm --prefix ./common/tests ci --no-audit --no-fund",
+    "update-translation-app-lock": "npm --prefix common/translation-app/frontend install --package-lock-only && npm --prefix common/translation-app/backend install --package-lock-only",
+    "update-ui-kit": "node scripts/update-ui-kit.mjs",
+    "update-ai-chat": "node scripts/update-ai-chat.mjs",
+    "start:ui-kit-src": "node scripts/start-ui-kit-src.mjs"
   },
   "devDependencies": {
     "@types/node": "24.10.7",
     "@types/react-text-mask": "5.4.14",
     "babel-plugin-react-compiler": "^1.0.0",
-    "fallow": "^2.88.2",
+    "fallow": "^2.104.0",
     "he": "1.2.0",
-    "lefthook": "^2.1.4",
+    "lefthook": "^2.1.10",
     "madge": "8.0.0",
-    "nx": "22.4.5",
-    "prettier": "^3.8.1",
-    "react": "19.2.4",
+    "nx": "23.2.1",
+    "prettier": "^3.9.6",
+    "react": "19.2.8",
     "shx": "0.4.0",
     "terser": "5.46.0",
     "ts-node": "10.9.2",
     "typescript": "5.9.3"
   },
-  "packageManager": "pnpm@10.30.0"
+  "packageManager": "pnpm@12.4.1"
 }

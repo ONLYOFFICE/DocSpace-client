@@ -33,21 +33,21 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
+import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 import {
   TableRow as TableRowComponent,
   TableCell,
-} from "@docspace/ui-kit/components/table";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+} from "@onlyoffice/apps-ui-kit/components/table";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
 import { TableRowProps } from "../../types";
 import {
   getItemPermissions,
@@ -56,52 +56,7 @@ import {
 } from "../../utils";
 import { useContextOptions } from "../useContextOptions";
 import { ApiKeysLifetimeIcon } from "../ApiKeysLifetimeIcon";
-
-const StyledWrapper = styled.div`
-  display: contents;
-
-  .toggleButton {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-`;
-
-const StyledTableRow = styled(TableRowComponent)`
-  .table-container_cell {
-    padding-inline-end: ${({ hideColumns }) => (hideColumns ? "0px" : "30px")};
-    text-overflow: ellipsis;
-  }
-
-  .api-keys_name {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    overflow: hidden;
-  }
-
-  .api-keys_text {
-    color: ${({ theme }) => theme.filesSection.rowView.sideColor};
-  }
-
-  .api-keys_text-overflow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .author-cell {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .author-avatar-cell {
-    width: 16px;
-    height: 16px;
-    min-width: 16px;
-  }
-`;
+import styles from "./TableView.module.scss";
 
 const TableRow = (props: TableRowProps) => {
   const {
@@ -140,8 +95,14 @@ const TableRow = (props: TableRowProps) => {
     : "";
 
   return (
-    <StyledWrapper>
-      <StyledTableRow contextOptions={contextOptions} hideColumns={hideColumns}>
+    <div className={styles.wrapper}>
+      <TableRowComponent
+        className={classNames(styles.tableRow, {
+          [styles.hideColumns]: hideColumns,
+        })}
+        contextOptions={contextOptions}
+        hideColumns={hideColumns}
+      >
         <TableCell>
           <div className="api-keys_name">
             <Text truncate fontWeight={600}>
@@ -214,8 +175,8 @@ const TableRow = (props: TableRowProps) => {
             />
           </div>
         </TableCell>
-      </StyledTableRow>
-    </StyledWrapper>
+      </TableRowComponent>
+    </div>
   );
 };
 

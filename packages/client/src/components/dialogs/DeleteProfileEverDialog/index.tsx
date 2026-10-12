@@ -37,12 +37,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
 	ModalDialog,
 	ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import api from "@docspace/shared/api";
 import { ButtonKeys } from "@docspace/shared/enums";
 
@@ -51,7 +51,7 @@ import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 
 import BodyComponent from "./sub-components/BodyComponent";
-import { StyledBodyContent } from "./DeleteProfileEverDialog.styled";
+import styles from "./DeleteProfileEverDialog.module.scss";
 
 export type DeleteProfileEvenerDialogComponentsProps = {
 	userIds: UsersStore["getUsersToRemoveIds"];
@@ -281,7 +281,9 @@ const DeleteProfileEverDialogComponent = ({
 						: t("DeletingUsers")}
 			</ModalDialog.Header>
 			<ModalDialog.Body>
-				<StyledBodyContent needReassignData={needReassignData}>
+				<div
+					className={`${styles.bodyContent}${!needReassignData ? ` ${styles.noReassign}` : ""}`}
+				>
 					<BodyComponent
 						needReassignData={needReassignData}
 						onClickReassignData={onClickReassignData}
@@ -291,7 +293,7 @@ const DeleteProfileEverDialogComponent = ({
 						onlyGuests={onlyGuests}
 						t={t}
 					/>
-				</StyledBodyContent>
+				</div>
 			</ModalDialog.Body>
 			<ModalDialog.Footer>
 				<Button

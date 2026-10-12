@@ -37,10 +37,13 @@ import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router";
 
-import { TableBody } from "@docspace/ui-kit/components/table";
+import {
+  TableBody,
+  TableContainer,
+} from "@onlyoffice/apps-ui-kit/components/table";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
@@ -50,7 +53,7 @@ import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
 import EmptyScreenGroups from "../../EmptyScreenGroups";
 
-import { GroupsTableContainer } from "./TableView.styled";
+import styles from "./TableView.module.scss";
 
 import GroupsTableItem from "./TableItem";
 import GroupsTableHeader from "./TableHeader";
@@ -117,7 +120,8 @@ const GroupsTableView = ({
   });
 
   return groups?.length ? (
-    <GroupsTableContainer
+    <TableContainer
+      className={styles.groupsTableContainer}
       noSelect={!withContentSelection}
       useReactWindow
       forwardedRef={ref as React.RefObject<HTMLDivElement>}
@@ -153,7 +157,7 @@ const GroupsTableView = ({
           />
         ))}
       </TableBody>
-    </GroupsTableContainer>
+    </TableContainer>
   ) : (
     <EmptyScreenGroups />
   );

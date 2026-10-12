@@ -1,6 +1,10 @@
 {
   "HideInput": "Skrij",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} od {{total}}</0> naloženo. Presežena kvota za shranjevanje — <1>ogled podrobnosti</1>.",
+  "QuotaExceededTooltip": "Presežena kvota za shranjevanje. Sprostite prostor ali nadgradite načrt, nato poskusite znova.",
   "Ready": "Končano",
+  "RetryAfterQuotaUpgrade": "Ponovni poskus po nadgradnji kvote",
+  "RetryUpload": "Ponovni poskus",
   "UploadingAndConversion": "Nalaganje in pretvorba",
   "UploadingError": "Napaka pri nalaganju"
 }

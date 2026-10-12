@@ -41,7 +41,8 @@ import SelectedFolderStore from "./SelectedFolderStore";
 
 type IndexingItem = {
   id: string | number;
-  order?: number;
+  /** FilesActionsStore.setListOrder stores dotted order strings here. */
+  order?: number | string;
   isFolder?: boolean;
   fileExst?: string;
 };
@@ -133,7 +134,7 @@ class IndexingStore {
   getIndexingArray = () => {
     const items = this.updateSelection.reduce<
       Array<{
-        order: number | undefined;
+        order: number | string | undefined;
         entryId: string | number;
         entryType: number;
       }>

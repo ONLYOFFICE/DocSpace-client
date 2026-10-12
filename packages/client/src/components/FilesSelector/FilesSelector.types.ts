@@ -42,9 +42,9 @@ import {
 	TBreadCrumb,
 	TSelectorHeader,
 	TSelectorItem,
-} from "@docspace/ui-kit/components/selector";
+} from "@onlyoffice/apps-ui-kit/components/selector";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
-import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 export type FilesSelectorProps = TSelectorHeader & {
 	isPanelVisible: boolean;
@@ -61,6 +61,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 	setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
 	getIcon: (size: number, fileExst: string) => string;
 	isExternalShareEnabled: boolean;
+	disabledCreatePublicRoom?: boolean;
 
 	onClose?: () => void;
 
@@ -79,6 +80,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 	isFormRoom?: boolean;
 
 	filterParam?: string;
+	withSubFolders?: boolean;
 
 	currentFolderId: number | string;
 	fromFolderId?: number;
@@ -90,6 +92,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 	withRecentTreeFolder?: boolean;
 	withFavoritesTreeFolder?: boolean;
 	withAIAgentsTreeFolder?: boolean;
+	withFormsTreeFolder?: boolean;
 
 	theme: TTheme;
 
@@ -104,6 +107,14 @@ export type FilesSelectorProps = TSelectorHeader & {
 	setSelected: (selected: "close" | "none", clearBuffer?: boolean) => void;
 	setConflictDialogData: (conflicts: unknown, operationData: unknown) => void;
 	itemOperationToFolder: (operationData: unknown) => Promise<void>;
+	copyEncryptedFilesToFolder: (
+		items: TFile[],
+		destFolderId: string | number,
+		destInfo: { private?: boolean; rootFolderId?: number; roomType?: number },
+	) => Promise<void>;
+	sourceIsPrivate?: boolean;
+	sourceInPrivateRoom?: boolean;
+	privateRoomId?: number | string;
 	clearActiveOperations: (
 		folderIds: string[] | number[],
 		fileIds: string[] | number[],

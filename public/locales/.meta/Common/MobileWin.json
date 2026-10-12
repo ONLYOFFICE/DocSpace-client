@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/article/sub-components/Apps.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/components/article/sub-components/Apps.tsx",
       "line_number": 92,
       "context": "className={styles.windowsIcon}\n onClick={() => window.open(downloaddesktopUrl)}\n iconNode={<WindowsReactSvgUrl />}\n size={32}\n isFill\n title={t(\"MobileWin\", {\n organizationName: logoText,\n })}\n />\n ) : null}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

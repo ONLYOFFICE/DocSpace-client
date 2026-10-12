@@ -44,13 +44,13 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { createPasswordHash } from "@docspace/shared/utils/common";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { InputSize, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
 import {
   TPasswordHash,
   TPasswordSettings,

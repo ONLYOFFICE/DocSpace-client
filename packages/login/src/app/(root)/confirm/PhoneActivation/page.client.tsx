@@ -37,14 +37,13 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/ui-kit/components/text-input";
-import { Text } from "@docspace/ui-kit/components/text";
-import { getBrandName } from "@docspace/shared/constants/brands";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 const currentNumber = "+00000000000";
 
@@ -61,7 +60,7 @@ const ChangePhoneForm = () => {
           {t("CurrentNumber")}: {currentNumber}
         </Text>
         <Text>
-          {t("PhoneSubtitle", { productName: getBrandName("ProductName") })}
+          {t("PhoneSubtitle")}
         </Text>
       </div>
 

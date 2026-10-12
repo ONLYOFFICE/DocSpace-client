@@ -43,7 +43,7 @@ import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelpe
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { ArticleItem } from "@docspace/ui-kit/components/article/item";
+import { ArticleItem } from "@onlyoffice/apps-ui-kit/components/article/item";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import {
   // getKeyByLink,
@@ -52,7 +52,6 @@ import {
   // selectKeyOfTreeElement,
   getCurrentSettingsCategory,
 } from "../../../utils";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -210,7 +209,7 @@ const ArticleBodyContent = (props) => {
       case "ManagementCategorySecurity":
         return t("ManagementCategorySecurity");
       case "PortalAccess":
-        return t("PortalAccess", { productName: getBrandName("ProductName") });
+        return t("PortalAccess");
       case "TwoFactorAuth":
         return t("TwoFactorAuth");
       case "ManagementCategoryIntegration":
@@ -232,11 +231,11 @@ const ArticleBodyContent = (props) => {
       case "Common:RestoreBackup":
         return t("Common:RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion", { productName: getBrandName("ProductName") });
-      case "Common:Bonus":
-        return t("Common:Bonus");
-      case "Common:FreeAccessToLicensedVersion":
-        return "Common:FreeAccessToLicensedVersion";
+        return t("PortalDeletion");
+      case "Common:Upgrade":
+        return t("Common:Upgrade");
+      case "Common:UpgradePageTitle":
+        return "Common:UpgradePageTitle";
       case "DataImport":
         return t("DataImport");
       case "StorageManagement":
@@ -245,6 +244,8 @@ const ArticleBodyContent = (props) => {
         return t("Services");
       case "AISettings":
         return t("Settings:AISettings");
+      case "OAuth:Apps":
+        return t("OAuth:Apps");
       default:
         throw new Error("Unexpected translation key");
     }
@@ -272,7 +273,7 @@ const ArticleBodyContent = (props) => {
     if (standalone) {
       const deletionTKey = isCommunity
         ? ["Common:PaymentsTitle", "Services"]
-        : ["Common:Bonus", "Services"];
+        : ["Common:Upgrade", "Services"];
 
       deletionTKey.forEach((key) => {
         const index = resultTree.findIndex((el) => el.tKey === key);
@@ -281,7 +282,7 @@ const ArticleBodyContent = (props) => {
         }
       });
     } else {
-      const index = resultTree.findIndex((n) => n.tKey === "Common:Bonus");
+      const index = resultTree.findIndex((n) => n.tKey === "Common:Upgrade");
       if (index !== -1) {
         resultTree.splice(index, 1);
       }
@@ -308,7 +309,10 @@ const ArticleBodyContent = (props) => {
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
       const title = mapKeys(item.tKey);
-      const linkData = getLinkData(item.key);
+      const linkData =
+        !standalone && item.alternativeUrl
+          ? { path: item.alternativeUrl, state: {} }
+          : getLinkData(item.key);
 
       const style = {
         marginTop: `${item.key.includes(standalone ? 9 : 10) ? "16px" : "0"}`,
@@ -344,9 +348,7 @@ const ArticleBodyContent = (props) => {
   return !isLoadedArticleBody || isProfileLoading ? (
     <ArticleFolderLoader />
   ) : (
-    <>
-      {items}
-    </>
+    <>{items}</>
   );
 };
 
@@ -399,7 +401,7 @@ export default inject(
   },
 )(
   withLoading(
-    withTranslation(["Settings", "Common", "Ldap"])(
+    withTranslation(["Settings", "Common", "Ldap", "OAuth"])(
       observer(ArticleBodyContent),
     ),
   ),

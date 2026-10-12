@@ -1,0 +1,29 @@
+{
+  "key_path": "GoToDate",
+  "content": "Go to date",
+  "content_en_sha1_hash": "7b2a10fa5b12410ed9b1c6ae4ab3d80110be1944",
+  "created_at": "2026-08-05T16:31:56.285Z",
+  "updated_at": "2026-08-06T06:41:13.520Z",
+  "comment": {
+    "text": "Button label in the history info panel's date filter, shown when no specific date has been selected.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T06:41:13.520Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/Toolbar/sub-components/DateFilter/DateFilter.tsx",
+      "line_number": 114,
+      "context": ">\n <CalendarIcon className={styles.icon} />\n <span className={styles.label}>\n {selectedDate\n ? formatDate(selectedDate, SELECTED_DAY_FORMAT, { locale })\n : t(\"InfoPanel:GoToDate\")}\n </span>\n </button>\n \n {selectedDate ? (\n <IconButton",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

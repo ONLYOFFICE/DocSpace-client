@@ -48,9 +48,9 @@ import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { ArticleItem } from "@docspace/ui-kit/components/article/item";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { Portal } from "@docspace/ui-kit/components/portal";
+import { ArticleItem } from "@onlyoffice/apps-ui-kit/components/article/item";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { useStores } from "@/hooks/useStores";
 import useDeviceType from "@/hooks/useDeviceType";
 
@@ -71,6 +71,11 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
   const { currentDeviceType } = useDeviceType();
 
   const [activePath, setActivePath] = useState(pathname);
+
+  // Branding is a paid feature, so the Community edition has no Branding tab
+  const settingsPath = isCommunity
+    ? "settings/data-backup"
+    : "settings/branding";
 
   useEffect(() => {
     if (currentDeviceType === DeviceType.mobile) {
@@ -118,10 +123,10 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
           text={t("Common:Settings")}
           iconNode={<SettingsReactSvg />}
           showText={showText}
-          onClick={() => onItemClick("settings/branding")}
+          onClick={() => onItemClick(settingsPath)}
           isActive={activePath.includes("settings")}
           folderId="management_catalog-settings"
-          linkData={{ path: "/settings/branding", state: {} }}
+          linkData={{ path: `/${settingsPath}`, state: {} }}
           withAnimation
         />
         {!isCommunity ? (
@@ -139,7 +144,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
         ) : (
           <ArticleItem
             key="bonus"
-            text={t("Common:Bonus")}
+            text={t("Common:Upgrade")}
             iconNode={<GiftReactSvg />}
             showText={showText}
             onClick={() => onItemClick("bonus")}

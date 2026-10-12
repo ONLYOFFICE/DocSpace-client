@@ -37,11 +37,19 @@ import React from "react";
 import { FileType, RoomsType } from "@docspace/shared/enums";
 import { getSinglePDFTitle } from "@docspace/shared/utils/getPDFTite";
 
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+
 import styles from "./CellStyles.module.scss";
-import { StyledTypeCell } from "./CellStyles";
+
 import { getRoomTypeName } from "../../../../../../helpers/filesUtils";
 
-const TypeCell = ({ t, item, sideColor, isExternalShareRestricted = false, blockExistingLinksOnRestrict = true }) => {
+const TypeCell = ({
+  t,
+  item,
+  sideColor,
+  isExternalShareRestricted = false,
+  blockExistingLinksOnRestrict = true,
+}) => {
   const { fileExst, fileTypeName, fileType, roomType, isPDFForm } = item;
   const getItemType = () => {
     switch (fileType) {
@@ -85,10 +93,11 @@ const TypeCell = ({ t, item, sideColor, isExternalShareRestricted = false, block
     roomType === RoomsType.PublicRoom;
 
   return (
-    <StyledTypeCell
+    <Text
       fontSize="12px"
       fontWeight="600"
       color={sideColor}
+      className={styles.styledTypeCell}
       truncate
       title={data}
     >
@@ -106,7 +115,8 @@ const TypeCell = ({ t, item, sideColor, isExternalShareRestricted = false, block
           &nbsp;({t("Common:Restricted")})
         </span>
       ) : null}
-    </StyledTypeCell>
+    </Text>
   );
 };
 export default React.memo(TypeCell);
+

@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentEmptyTitle",
+  "content": "Your list is empty for now",
+  "content_en_sha1_hash": "6825ed70df352332c3cafd4f841d5d1adf5e2597",
+  "created_at": "2026-08-06T14:20:56.247Z",
+  "updated_at": "2026-08-07T15:05:26.410Z",
+  "comment": {
+    "text": "Heading for an empty state screen shown during the AI Agents onboarding tour when no agents have been created.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:26:10.059Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 301,
+      "context": "demoHooks,\n )\n : !isAdmin &&\n revealStep(\n EMPTY_SCREEN_SELECTOR,\n t(\"AiAgentsTour:AgentEmptyTitle\"),\n t(\"AiAgentsTour:AgentEmpty\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -35,13 +35,13 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import { inject, observer } from "mobx-react";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -59,7 +59,7 @@ const ResetKnowledgeDialogComponent = ({
   restoreKnowledge,
   getAIConfig,
 }: ResetKnowledgeDialogProps) => {
-  const { t } = useTranslation(["AISettings", "Common", "OAuth", "Settings"]);
+  const { t } = useTranslation(["Common"]);
 
   const [loading, setLoading] = React.useState(false);
 
@@ -68,7 +68,7 @@ const ResetKnowledgeDialogComponent = ({
 
     try {
       await restoreKnowledge?.();
-      toastr.success(t("AISettings:KnowledgeDisabledSuccess"));
+      toastr.success(t("Common:KnowledgeDisabledSuccess"));
       onSuccess?.();
       getAIConfig?.();
     } catch (error) {
@@ -82,17 +82,17 @@ const ResetKnowledgeDialogComponent = ({
 
   return (
     <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
-      <ModalDialog.Header>{t("Settings:ResetSettings")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:ResetSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>
-          <Trans t={t} i18nKey="ResetKnowledgeDescription" ns="AISettings" />
+          <Trans t={t} i18nKey="ResetKnowledgeDescription" ns="Common" />
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("OAuth:Reset")}
+          label={t("Common:Reset")}
           scale
           onClick={onSubmitAction}
           isLoading={loading}

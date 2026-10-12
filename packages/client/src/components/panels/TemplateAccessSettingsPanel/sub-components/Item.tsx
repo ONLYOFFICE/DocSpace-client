@@ -40,14 +40,14 @@ import {
 	Avatar,
 	AvatarRole,
 	AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/avatar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import cloneDeep from "lodash/cloneDeep";
 import { TTranslation } from "@docspace/shared/types";
-import { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
-import { StyledInviteUserBody } from "../StyledInvitePanel";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
+import styles from "../TemplateAccessSettingsPanel.module.scss";
 
 type ItemProps = {
 	t: TTranslation;
@@ -106,7 +106,7 @@ const Item = ({
 				className="invite-input-avatar"
 				data-testid={`template_access_settings_avatar_${index ?? id}`}
 			/>
-			<StyledInviteUserBody>
+			<div className={styles.inviteUserBody}>
 				<div className="invite-input-item">
 					<Text truncate className="invite-input-text">
 						{Encoder.htmlDecode(name ?? "")}
@@ -115,7 +115,7 @@ const Item = ({
 						{item.isOwner ? `(${t("Common:MeLabel")})` : null}
 					</Text>
 				</div>
-			</StyledInviteUserBody>
+			</div>
 			{canDelete ? (
 				<ReactSVG
 					className="remove-icon"

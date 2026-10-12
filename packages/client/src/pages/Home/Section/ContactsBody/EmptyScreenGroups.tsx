@@ -36,7 +36,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context";
 
 import { Events } from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";
@@ -72,7 +72,7 @@ const EmptyScreenGroups = ({
     "Common",
   ]);
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const onCreateGroup = () => {
     const event = new CustomEvent(Events.GROUP_CREATE, {
@@ -94,14 +94,14 @@ const EmptyScreenGroups = ({
 
   const getIcon = () => {
     if (groupsIsFiltered) {
-      return theme.isBase ? (
+      return isBase ? (
         <EmptyScreenPersonSvgLight />
       ) : (
         <EmptyScreenPersonSvgDark />
       );
     }
 
-    return theme.isBase ? <EmptyGroupLightIcon /> : <EmptyGroupDarkIcon />;
+    return isBase ? <EmptyGroupLightIcon /> : <EmptyGroupDarkIcon />;
   };
 
   const getDescription = () => {

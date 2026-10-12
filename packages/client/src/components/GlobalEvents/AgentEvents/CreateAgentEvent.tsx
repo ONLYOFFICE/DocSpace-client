@@ -37,12 +37,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import TagsStore from "SRC_DIR/store/TagsStore";
-import CreateEditAgentStore from "SRC_DIR/store/CreateEditAgentStore";
-import FilesStore from "SRC_DIR/store/FilesStore";
+import type CreateEditAgentStore from "SRC_DIR/store/CreateEditAgentStore";
+import type FilesStore from "SRC_DIR/store/FilesStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 import { CreateAgentDialog } from "../../dialogs";
@@ -66,7 +65,6 @@ type CreateRoomEventProps = {
 
   selectionItems: FilesStore["selection"];
 
-  aiConfig: SettingsStore["aiConfig"];
 };
 
 const CreateRoomEvent = ({
@@ -87,12 +85,11 @@ const CreateRoomEvent = ({
 
   selectionItems,
 
-  aiConfig,
 }: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
 
-  const onCreate = (agentParams: TAgentParams) => {
+  const onCreate = async (agentParams: TAgentParams) => {
     const itemLogo = agentParams.logo
       ? agentParams.logo
       : selectionItems.length
@@ -133,7 +130,6 @@ const CreateRoomEvent = ({
       onCreate={onCreate}
       fetchedTags={fetchedTags}
       isLoading={isLoading}
-      portalMcpServerId={aiConfig?.portalMcpServerId ?? ""}
     />
   );
 };
@@ -144,8 +140,6 @@ export default inject(
     tagsStore,
     dialogsStore,
     filesStore,
-    currentQuotaStore,
-    settingsStore,
   }: TStore) => {
     const { fetchTags } = tagsStore;
     const { selections } = filesStore;
@@ -155,10 +149,6 @@ export default inject(
     const { setAgentParams, onCreateAgent, isLoading, setOnClose, setOpenContext } =
       createEditAgentStore;
 
-    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
-
-    const selectionItems = selections;
-
     return {
       fetchTags,
       setAgentParams,
@@ -167,12 +157,8 @@ export default inject(
       setOnClose,
       setOpenContext,
       setCreateAgentDialogVisible,
-
       setCover,
-      selectionItems,
-      isDefaultRoomsQuotaSet,
-
-      aiConfig: settingsStore.aiConfig,
+      selectionItems: selections,
     };
   },
 )(observer(CreateRoomEvent));

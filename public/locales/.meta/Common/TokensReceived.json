@@ -1,0 +1,29 @@
+{
+  "key_path": "TokensReceived",
+  "content": "Model reply",
+  "content_en_sha1_hash": "d21402dc96723f206ce92625e33ea3d2febfee18",
+  "created_at": "2026-10-01T08:23:10.399Z",
+  "updated_at": "2026-10-01T08:25:00.792Z",
+  "comment": {
+    "text": "Label in a token usage breakdown list, indicating the number of tokens from the model's response.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T08:25:00.792Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageContent.tsx",
+      "line_number": 125,
+      "context": "label={t(\"TokensNotFromCache\")}\n value={format(segments.notFromCache)}\n />\n <UsageLine\n segment=\"received\"\n label={t(\"TokensReceived\")}\n value={format(segments.received)}\n />\n </div>\n <div className={classNames(styles.lines, styles.details)}>\n <UsageLine",
+      "module": "@onlyoffice/apps-ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -37,15 +37,15 @@ import { useTranslation } from "react-i18next";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { getFromLocalStorage } from "../../../../../utils";
 import { BackupStorageType, DeviceType } from "../../../../../enums";
 import { FilesSelectorInput } from "../../../../../components/files-selector-input";
 import { isNullOrUndefined } from "../../../../../utils/typeGuards";
 import BackupToPublicRoom from "../../../../../dialogs/backup-to-public-room-dialog";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type { FilesSelectorSettings } from "../../../../../components/files-selector-input";
 import type {
   BackupToPublicRoomOptionType,
@@ -76,6 +76,10 @@ export interface RoomsModuleProps {
 
   isBackupPaid?: boolean;
   isFreeBackupsLimitReached?: boolean;
+  copyButtonLabel?: string;
+  isToppingUp?: boolean;
+  isCopyBlocked?: boolean;
+  disabledCreatePublicRoom?: boolean;
 
   toDefault: VoidFunction;
   setBasePath: (folders: TBreadCrumb[]) => void;
@@ -103,6 +107,10 @@ const RoomsModule = ({
   settingsFileSelector,
   isBackupPaid,
   isFreeBackupsLimitReached,
+  copyButtonLabel,
+  isToppingUp,
+  isCopyBlocked,
+  disabledCreatePublicRoom,
 }: RoomsModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -162,7 +170,7 @@ const RoomsModule = ({
     }
   };
 
-  const isModuleDisabled = !isMaxProgress || isStartCopy;
+  const isModuleDisabled = !isMaxProgress || isStartCopy || isCopyBlocked;
 
   const formProps = useMemo(
     () => ({
@@ -196,6 +204,7 @@ const RoomsModule = ({
           onSelectFolder={onSelectFolder}
           withoutInitPath={!selectedFolder}
           currentDeviceType={currentDeviceType}
+          disabledCreatePublicRoom={disabledCreatePublicRoom}
           filesSelectorSettings={settingsFileSelector}
           setBackupToPublicRoomVisible={setBackupToPublicRoomVisible}
           {...(selectedFolder ? { id: selectedFolder } : { openRoot: true })}
@@ -221,8 +230,9 @@ const RoomsModule = ({
           id="create-copy"
           size={buttonSize}
           onClick={handleMakeCopy}
-          label={t("Common:CreateCopy")}
-          isDisabled={isModuleDisabled || !selectedFolder}
+          label={copyButtonLabel ?? t("Common:CreateCopy")}
+          isDisabled={isModuleDisabled || !selectedFolder || isToppingUp}
+          isLoading={isToppingUp}
           testId="create_backup_room_button"
         />
       </div>

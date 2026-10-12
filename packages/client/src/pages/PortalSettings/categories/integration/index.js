@@ -34,14 +34,14 @@
  */
 
 import { useEffect, useState } from "react";
-import { Tabs } from "@docspace/ui-kit/components/tabs";
+import { Tabs } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
-import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/section/Section.constants";
 
 import SsoSettings from "./SingleSignOn";
 import LdapSettings from "./LDAP";
@@ -57,7 +57,6 @@ const IntegrationWrapper = (props) => {
   const {
     t,
     currentDeviceType,
-    standalone,
     enablePlugins,
 
     setup,
@@ -69,8 +68,6 @@ const IntegrationWrapper = (props) => {
     clearAbortControllerArr,
   } = props;
   const navigate = useNavigate();
-
-  const [currentTabId, setCurrentTabId] = useState();
 
   const defaultProps = createDefaultHookSettingsProps({
     setup,
@@ -129,10 +126,7 @@ const IntegrationWrapper = (props) => {
         await getSMTPSettingsData();
       },
     },
-  ];
-
-  if (standalone) {
-    const documentServiceData = {
+    {
       id: "document-service",
       name: t("Settings:DocumentService"),
       content: <DocumentService />,
@@ -140,10 +134,8 @@ const IntegrationWrapper = (props) => {
         clearAbortControllerArr();
         await getDocumentServiceData();
       },
-    };
-
-    data.push(documentServiceData);
-  }
+    },
+  ];
 
   if (enablePlugins) {
     const pluginLabel = (
@@ -163,10 +155,16 @@ const IntegrationWrapper = (props) => {
     });
   }
 
-  useEffect(() => {
+  const getCurrentTabId = () => {
     const path = window.location.pathname;
-    const currentTab = data.find((item) => path.includes(item.id));
-    if (currentTab && data.length) setCurrentTabId(currentTab.id);
+    return data.find((item) => path.includes(item.id))?.id;
+  };
+
+  const [currentTabId, setCurrentTabId] = useState(getCurrentTabId);
+
+  useEffect(() => {
+    const tabId = getCurrentTabId();
+    if (tabId) setCurrentTabId(tabId);
   }, [location.pathname]);
 
   const onSelect = (e) => {

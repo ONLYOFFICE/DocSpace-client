@@ -33,9 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import type { RoomSearchArea } from "@docspace/shared/enums";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector/Selector.types";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector/Selector.types";
 
 export interface ILogoData {
   small: string;
@@ -58,12 +59,14 @@ export interface IRoomGroup {
   icon: ILogo;
   rooms: TRoom[];
   totalRooms: number;
+  searchArea?: RoomSearchArea;
 }
 
 export interface ICreateRoomGroup {
   name: string;
   icon: string | null;
-  rooms: string[] | null;
+  rooms: (string | number)[] | null;
+  searchArea: RoomSearchArea;
 }
 
 export interface IUpdateRoomGroup {
@@ -78,7 +81,7 @@ export interface EditRoomGroupsDialogProps {
   covers: ICover[] | null;
   setEditRoomGroupsDialogVisible: (
     visible: boolean,
-    roomIds?: number[] | null,
+    roomIds?: (string | number)[] | null,
     openInCreateMode?: boolean,
   ) => void;
   roomGroups: IRoomGroup[];
@@ -88,7 +91,7 @@ export interface EditRoomGroupsDialogProps {
   updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
   updateRoomGroup: (groupId: string, data: IUpdateRoomGroup) => Promise<void>;
   deleteRoomGroup: (groupId: string) => Promise<void>;
-  createGroupFromRoomIds?: number[] | null;
+  createGroupFromRoomIds?: (string | number)[] | null;
   currentFilterGroupId?: string | number | null;
   /** When true, opens the dialog with room list panel visible for creating a new group */
   openInCreateMode?: boolean;
@@ -105,7 +108,12 @@ export interface EditRoomGroupsDialogProps {
   /** Whether room grouping is enabled in portal settings */
   organizeRoomsGrouping?: boolean;
   /** Function to toggle room grouping setting */
-  setOrganizeRoomsGrouping?: (enabled: boolean) => Promise<boolean>;
+  setOrganizeRoomsGrouping?: (
+    enabled: boolean,
+    isSpaces?: boolean,
+  ) => Promise<boolean>;
+  /** Section the groups belong to: the Rooms section or the Forms section */
+  searchArea: RoomSearchArea;
 }
 
 export interface IRoomItem {
@@ -120,10 +128,12 @@ export interface DeleteGroupDialogProps {
   deleteRoomGroup: (groupId: string) => Promise<void>;
   getAllRoomGroups: () => Promise<void>;
   currentFilterGroupId?: string | number | null;
+  isFormsSection?: boolean;
 }
 
 export interface GroupItemProps {
   group: IRoomGroup;
+  isFormsSection?: boolean;
   onClickGroup?: (groupId: string) => void;
   onClickEditIcon?: (groupId: string) => void;
   onClickDeleteGroup?: (groupId: string) => void;
@@ -140,4 +150,5 @@ export interface RoomListPanelProps {
   disableSubmitUntilChanged?: boolean;
   sortSelectedFirst?: boolean;
   withoutBackdropBackground?: boolean;
+  isFormsSection?: boolean;
 }

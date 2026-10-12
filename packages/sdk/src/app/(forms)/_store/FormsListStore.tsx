@@ -47,6 +47,7 @@ class FormsListStore {
   folders: TFolder[] = [];
   total: number = 0;
   isLoading: boolean = true;
+  searchValue: string = "";
 
   section: FormsSection | null = null;
 
@@ -76,16 +77,37 @@ class FormsListStore {
     this.section = section;
   };
 
+  setSearchValue = (value: string) => {
+    this.searchValue = value;
+  };
+
   reset = () => {
     this.items = [];
     this.folders = [];
     this.total = 0;
     this.isLoading = false;
     this.section = null;
+    this.searchValue = "";
   };
 
   get hasMore(): boolean {
     return this.items.length < this.total;
+  }
+
+  get filteredItems(): TFile[] {
+    const query = this.searchValue.trim().toLowerCase();
+    if (!query) return this.items;
+    return this.items.filter((file) =>
+      file.title?.toLowerCase().includes(query),
+    );
+  }
+
+  get filteredFolders(): TFolder[] {
+    const query = this.searchValue.trim().toLowerCase();
+    if (!query) return this.folders;
+    return this.folders.filter((folder) =>
+      folder.title?.toLowerCase().includes(query),
+    );
   }
 }
 

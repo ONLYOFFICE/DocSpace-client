@@ -1,14 +1,14 @@
 {
   "key_path": "ThisSectionIsEmpty",
-  "content": "This section is empty",
-  "content_en_sha1_hash": "2b06a278224aa9ce04d45d59105ba0394f86ef15",
-  "created_at": "2025-05-19T21:30:49.289Z",
-  "updated_at": "2026-05-28T15:46:18.577Z",
+  "content": "Groups you create will show up here",
+  "content_en_sha1_hash": "a8b7c8669b6db4feea146b0920b9c6ac447d331f",
+  "created_at": "2026-08-31T18:23:33.826Z",
+  "updated_at": "2026-08-31T18:35:46.197Z",
   "comment": {
-    "text": "This text appears when a section of the UI, such as a list of contacts or groups, contains no items. It informs the user that the current view is empty.",
+    "text": "Empty state message displayed in the Groups section when no groups have been created.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:41:05.361Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:35:46.197Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

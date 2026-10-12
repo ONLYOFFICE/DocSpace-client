@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FilesStore.getFilesChecked — characterization > captures the full selected-value → result mapping for a document 1`] = `
+{
+  "1": 7,
+  "10": false,
+  "12": false,
+  "2": 10,
+  "3": true,
+  "4": false,
+  "5": false,
+  "7": false,
+  "all": true,
+  "none": false,
+  "room-5": false,
+  "room-6": false,
+}
+`;

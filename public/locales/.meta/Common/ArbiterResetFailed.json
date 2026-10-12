@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterResetFailed",
+  "content": "Failed to reset: {{error}}",
+  "content_en_sha1_hash": "13b4eff293bafdd5a2bfde3ba5ef0417e3ba4860",
+  "created_at": "2026-05-24T17:27:18.474Z",
+  "updated_at": "2026-05-24T18:47:18.355Z",
+  "comment": {
+    "text": "Error text in a modal dialog that appears when the Arbiter reset process fails, where {{error}} represents the specific error message.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:47:18.355Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/ResetPanelDialog.tsx",
+      "line_number": 101,
+      "context": "</Text>\n ) : null}\n {phase === \"deleting\" ? <Text as=\"p\">{t(\"Common:ArbiterRemovingAgents\")}</Text> : null}\n {phase === \"failed\" ? (\n <Text as=\"p\">\n {t(\"Common:ArbiterResetFailed\", { error: error ?? \"unknown error\" })}\n </Text>\n ) : null}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n {phase === \"confirm\" ? (",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

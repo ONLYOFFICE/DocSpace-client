@@ -1,14 +1,14 @@
 {
   "key_path": "ResetApplication",
-  "content": "Reset application",
-  "content_en_sha1_hash": "93e3b88bc025a8b58df20fb4ea9f533c792cfd53",
-  "created_at": "2025-05-19T21:30:47.892Z",
-  "updated_at": "2026-05-15T14:00:06.693Z",
+  "content": "Reset authenticator app",
+  "content_en_sha1_hash": "db19ef3d938276ae5170fed0bfa18deadd51ef99",
+  "created_at": "2026-08-31T18:23:25.317Z",
+  "updated_at": "2026-08-31T18:45:35.262Z",
   "comment": {
-    "text": "This is the label for a button that opens a dialog to reset the application, and also the label for the button within that dialog that performs the reset.",
+    "text": "Button label and link text that initiates the process of resetting the authenticator app.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:45:01.376Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:45:35.262Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

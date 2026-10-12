@@ -37,9 +37,8 @@ import { useMemo, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 import { getLoginHistoryConfig } from "../components/campaigns-banner/campaign/LoginHistoryCampaign";
-import { TColorScheme } from "@docspace/ui-kit/providers/theme";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme";
 import { size } from "../utils";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const useTwoFactorCampaignBanner = (
 	isBaseTheme: boolean,
@@ -62,9 +61,7 @@ export const useTwoFactorCampaignBanner = (
 
 	const loginHistoryTranslates = useMemo(
 		() => ({
-			Header: t("LoginHistoryCampaignHeader", {
-				productName: getBrandName("ProductName"),
-			}),
+			Header: t("LoginHistoryCampaignHeader"),
 			SubHeader: t("LoginHistoryCampaignTitle"),
 			Text: t("LoginHistoryCampaignText"),
 			Link: isMobile

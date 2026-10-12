@@ -269,6 +269,32 @@ describe("email", () => {
     expect(parsed.email).toBe(emailAddress);
   });
 
+  it("strict local part: accepts consecutive separators (e.g. test--tire@test.com)", () => {
+    const strictSettings = EmailSettings.parse({
+      ...emailSettingsObj,
+      allowStrictLocalPart: true,
+    });
+
+    for (const local of ["test--tire", "test---tire", "test-_-tire"]) {
+      const parsed = parseAddress(`${local}@test.com`, strictSettings);
+
+      expect(parsed.isValid()).toBe(true);
+    }
+  });
+
+  it("strict local part: still rejects leading/trailing separators", () => {
+    const strictSettings = EmailSettings.parse({
+      ...emailSettingsObj,
+      allowStrictLocalPart: true,
+    });
+
+    for (const local of ["-test", "test-", "--test", "test--"]) {
+      const parsed = parseAddress(`${local}@test.com`, strictSettings);
+
+      expect(parsed.isValid()).toBe(false);
+    }
+  });
+
   it("parsing two addresses through function for parsing single email", () => {
     const emailAddress = "test@test.com, test2@test.com";
     const parsed = parseAddress(emailAddress);

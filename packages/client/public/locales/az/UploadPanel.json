@@ -1,6 +1,10 @@
 {
   "HideInput": "Gizlət",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}}/{{total}}</0> yükləndi. Yaddaş kvotası aşıldı — <1>ətraflı baxın</1>.",
+  "QuotaExceededTooltip": "Yaddaş kvotası aşıldı. Yer boşaldın və ya planı təkmilləşdirin, sonra yenidən cəhd edin.",
   "Ready": "Hazırdır",
+  "RetryAfterQuotaUpgrade": "Kvota artırıldıqdan sonra yenidən cəhd edin",
+  "RetryUpload": "Yenidən cəhd edin",
   "UploadingAndConversion": "Yükləmə və Dönüşüm",
   "UploadingError": "Yükləmə xətası"
 }

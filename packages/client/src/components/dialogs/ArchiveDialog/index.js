@@ -35,9 +35,9 @@
 
 import { useEffect, useState } from "react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -84,11 +84,11 @@ const ArchiveDialogComponent = (props) => {
   }, []);
 
   const getDescription = () => {
-    if (restoreAll) return t("ArchiveDialog:RestoreAllRooms");
+    if (restoreAll) return t("Common:RestoreAllRooms");
 
     return items.length > 1
-      ? `${t("ArchiveDialog:ArchiveRooms")} ${t("Common:WantToContinue")}`
-      : `${t("ArchiveDialog:ArchiveRoom")} ${t("Common:WantToContinue")}`;
+      ? `${t("Common:ArchiveRooms")} ${t("Common:WantToContinue")}`
+      : `${t("Common:ArchiveRoom")} ${t("Common:WantToContinue")}`;
   };
 
   const description = getDescription();
@@ -136,7 +136,7 @@ const ArchiveDialogComponent = (props) => {
   );
 };
 
-const ArchiveDialog = withTranslation(["Files", "ArchiveDialog", "Common"])(
+const ArchiveDialog = withTranslation(["Files", "Common"])(
   ArchiveDialogComponent,
 );
 
@@ -176,3 +176,4 @@ export default inject(
     };
   },
 )(observer(ArchiveDialog));
+

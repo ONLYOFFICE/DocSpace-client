@@ -1,0 +1,18 @@
+{
+  "RoomsCreateFirst": "Wählen Sie einen Typ, laden Sie die Personen ein, mit denen Sie arbeiten, und legen Sie Ihre Dateien hinein. Das dauert eine Minute – und alles, was Sie gerade gesehen haben, beginnt an Ihren eigenen Dokumenten zu wirken.",
+  "RoomsCreateFirstTitle": "Jetzt machen Sie es zu Ihrem",
+  "RoomsEmpty": "Die Räume, die Sie gerade gesehen haben, waren eine Vorschau. Räume, zu denen Sie jemand einlädt, erscheinen in dieser Liste, und alles, was Ihnen gezeigt wurde, funktioniert dort genauso.",
+  "RoomsEmptyTitle": "Ihre Liste ist vorerst leer",
+  "RoomsGroups": "Ordnen Sie Räume nach bestimmten Merkmalen, um schnell zu finden, was Sie brauchen. Erstellen Sie Gruppen und wechseln Sie direkt über der Liste zwischen ihnen.",
+  "RoomsGroupsTitle": "Gruppieren Sie Ihre Räume",
+  "RoomsMembers": "Jeder Raum hat seine Mitgliederliste im Info-Panel. Fügen Sie Kontakte des Arbeitsbereichs hinzu und legen Sie für jedes Mitglied eine Rolle fest – vom Ansehen der Dateien bis zur Verwaltung des gesamten Raums.",
+  "RoomsMembersTitle": "Gemeinsam arbeiten",
+  "RoomsPlacesArchive": "{{archive}} – Räume, in denen Sie nicht mehr arbeiten, jederzeit wiederherstellbar.",
+  "RoomsPlacesFiles": "{{recent}}, {{favorites}} und {{trash}} sammeln Dateien aus Ihren Räumen: zuletzt geöffnete, mit Sternchen markierte und gelöschte.",
+  "RoomsPlacesTemplates": "{{templates}} – Ihre Raumvorlagen.",
+  "RoomsPlacesTitle": "Alles an seinem Platz",
+  "RoomsTemplates": "Machen Sie aus jedem Raum eine Vorlage – seine Einstellungen, seine Struktur und seine Dateien werden gespeichert. Erstellen Sie daraus mit einem Klick einen neuen Raum, und es bleibt nur noch, Mitglieder hinzuzufügen.",
+  "RoomsTemplatesTitle": "Wiederverwenden, was funktioniert",
+  "RoomsTypes": "{{collaboration}} für Teamarbeit, {{vdr}} für sichere Dateifreigabe, {{publicRoom}} für externen Zugriff, {{custom}} für Ihre eigenen Szenarien.",
+  "RoomsTypesTitle": "Ein Raum für jede Aufgabe"
+}

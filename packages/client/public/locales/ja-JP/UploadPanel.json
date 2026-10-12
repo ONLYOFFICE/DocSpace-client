@@ -1,6 +1,10 @@
 {
   "HideInput": "隠す",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} / {{total}}</0> アップロード済み。ストレージの容量制限を超えました — <1>詳細を確認</1>。",
+  "QuotaExceededTooltip": "ストレージの容量制限を超えました。空き容量を確保するかプランをアップグレードしてから再試行してください。",
   "Ready": "完了",
+  "RetryAfterQuotaUpgrade": "容量をアップグレードしてから再試行",
+  "RetryUpload": "再試行",
   "UploadingAndConversion": "アップロード＆変換",
   "UploadingError": "アップロードエラー"
 }

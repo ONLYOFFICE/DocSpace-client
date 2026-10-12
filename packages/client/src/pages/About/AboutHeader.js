@@ -34,34 +34,12 @@
  */
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { tablet } from "@docspace/shared/utils";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
-const HeaderContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  max-width: calc(100vw - 32px);
-
-  .arrow-button {
-    margin-inline-end: 12px;
-
-    @media ${tablet} {
-      padding-block: 8px;
-      padding-inline: 8px 0;
-      margin-inline-start: -8px;
-    }
-
-    svg {
-      ${({ theme }) =>
-				theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    }
-  }
-`;
+import styles from "./AboutHeader.module.scss";
 
 const AboutHeader = () => {
 	const { t, ready } = useTranslation("Common");
@@ -73,7 +51,7 @@ const AboutHeader = () => {
 	};
 
 	return (
-		<HeaderContainer>
+		<div className={styles.headerContainer}>
 			<IconButton
 				iconName={ArrowPathReactSvgUrl}
 				size="17"
@@ -84,7 +62,7 @@ const AboutHeader = () => {
 			<Heading type="content" truncate>
 				{!ready ? "" : t("AboutHeader")}
 			</Heading>
-		</HeaderContainer>
+		</div>
 	);
 };
 

@@ -33,19 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+
+import styles from "./MobileView.module.scss";
 import { useNavigate } from "react-router";
 
-import { CategoryItem } from "@docspace/ui-kit/components/category-item";
+import { CategoryItem } from "@onlyoffice/apps-ui-kit/components/category-item";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-const StyledWrapper = styled.div`
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
 
 const MobileView = ({ isSSOAvailable, logoText }) => {
   const { t } = useTranslation(["SingleSignOn", "Settings"]);
@@ -57,7 +52,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
   };
 
   return (
-    <StyledWrapper>
+    <div className={styles.styledWrapper}>
       <CategoryItem
         title={t("ServiceProviderSettings", {
           organizationName: logoText,
@@ -83,7 +78,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
         onClickLink={onClickLink}
         dataTestId="sp_metadata"
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

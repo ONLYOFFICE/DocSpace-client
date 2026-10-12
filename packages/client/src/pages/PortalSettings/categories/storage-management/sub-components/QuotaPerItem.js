@@ -36,11 +36,11 @@
 import { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { QuotaForm } from "@docspace/shared/components/quota-form";
 
-import { StyledBaseQuotaComponent } from "../StyledComponent";
+import styles from "../StyledComponent.module.scss";
 
 let timerId = null;
 const QuotaPerItemComponent = (props) => {
@@ -109,7 +109,9 @@ const QuotaPerItemComponent = (props) => {
   };
 
   return (
-    <StyledBaseQuotaComponent isDisabled={isDisabled}>
+    <div
+      className={`${styles.baseQuotaComponent}${isDisabled ? ` ${styles.disabled}` : ""}`}
+    >
       <div className="toggle-container">
         <ToggleButton
           fontWeight={600}
@@ -140,7 +142,7 @@ const QuotaPerItemComponent = (props) => {
           />
         ) : null}
       </div>
-    </StyledBaseQuotaComponent>
+    </div>
   );
 };
 

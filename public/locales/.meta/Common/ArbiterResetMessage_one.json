@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterResetMessage_one",
+  "content": "This will delete your {{count}} expert agent and arbiter, then start a new setup conversation. The setup wizard itself will be preserved. This cannot be undone.",
+  "content_en_sha1_hash": "9b6cd81d40ff73906b2a826e26b8611accb59e45",
+  "created_at": "2026-05-24T17:27:18.488Z",
+  "updated_at": "2026-05-24T18:46:56.320Z",
+  "comment": {
+    "text": "Warning text in a modal dialog body describing the consequences of resetting the arbiter; {{count}} represents the number of expert agents.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:46:56.320Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/ResetPanelDialog.tsx",
+      "line_number": 94,
+      "context": "<ModalDialog.Header>{t(\"Common:ArbiterResetConfigurationTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {phase === \"confirm\" ? (\n <Text as=\"p\">\n {expertCount === 1\n ? t(\"Common:ArbiterResetMessage_one\", { count: expertCount })\n : t(\"Common:ArbiterResetMessage_other\", { count: expertCount })}\n </Text>\n ) : null}\n {phase === \"deleting\" ? <Text as=\"p\">{t(\"Common:ArbiterRemovingAgents\")}</Text> : null}\n {phase === \"failed\" ? (",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

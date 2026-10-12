@@ -35,14 +35,14 @@
 
 import { useState, useEffect, useRef, memo, useCallback } from "react";
 import { FixedSizeList as List } from "react-window";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
-import { useTheme } from "styled-components";
+import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
 import { TTranslation } from "@docspace/shared/types";
-import { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import Item from "./Item";
-import { StyledRow, ScrollList } from "../StyledInvitePanel";
+import styles from "../TemplateAccessSettingsPanel.module.scss";
 
 const USER_ITEM_HEIGHT = 48;
 
@@ -76,10 +76,10 @@ const Row = memo(({ data, index, style }: RowProps) => {
 	const item = listItems[index];
 
 	return (
-		<StyledRow
+		<div
 			key={item.id}
 			style={style}
-			className="row-item"
+			className={`${styles.row} row-item`}
 			data-testid={`template_access_settings_row_${index}`}
 		>
 			<Item
@@ -90,7 +90,7 @@ const Row = memo(({ data, index, style }: RowProps) => {
 				isDisabled={isDisabled}
 				index={index}
 			/>
-		</StyledRow>
+		</div>
 	);
 });
 
@@ -110,7 +110,7 @@ const ItemsList = ({
 	const { height } = useResizeObserver({
 		ref: bodyRef as React.RefObject<HTMLDivElement>,
 	});
-	const { interfaceDirection } = useTheme();
+	const { interfaceDirection } = useInterfaceDirection();
 
 	const listItems = [...inviteItems].filter(
 		(l) => l.templateAccess !== ShareAccessRights.None,
@@ -149,16 +149,22 @@ const ItemsList = ({
 	const overflowStyle = scrollAllPanelContent ? "hidden" : "unset";
 
 	return (
-		<ScrollList
-			offsetTop={offsetTop}
+		<div
 			ref={bodyRef}
-			scrollAllPanelContent={scrollAllPanelContent}
-			isTotalListHeight={isTotalListHeight}
+			className={styles.scrollList}
+			style={{
+				height:
+					scrollAllPanelContent && isTotalListHeight
+						? "auto"
+						: offsetTop
+							? `calc(100% - ${offsetTop}px)`
+							: undefined,
+			}}
 			data-testid="template_access_settings_scroll_list"
 		>
 			<List
 				style={{ overflow: overflowStyle, willChange: "transform" }}
-				direction={interfaceDirection as "ltr" | "rtl"}
+				direction={interfaceDirection}
 				height={bodyHeight}
 				width="auto"
 				itemCount={listItems.length}
@@ -175,7 +181,7 @@ const ItemsList = ({
 			>
 				{Row}
 			</List>
-		</ScrollList>
+		</div>
 	);
 };
 

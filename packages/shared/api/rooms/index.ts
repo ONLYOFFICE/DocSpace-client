@@ -41,6 +41,7 @@ import { Nullable } from "types";
 import {
   FolderType,
   MembersSubjectType,
+  RoomSearchArea,
   ShareAccessRights,
   ShareLinkType,
 } from "../../enums";
@@ -163,7 +164,13 @@ export function updateFileMemberAccess(id, data) {
 export function getHistory(
   selectionType: "file" | "folder",
   id: number | string,
-  filter: { page: number; startIndex: number; count: number },
+  filter: {
+    page: number;
+    startIndex: number;
+    count: number;
+    fromDate?: string;
+    toDate?: string;
+  },
   signal: Nullable<AbortSignal> = null,
   requestToken?: string,
 ) {
@@ -714,10 +721,10 @@ export function createGroupRooms(newGroup) {
   return request(options);
 }
 
-export function getRoomGroups() {
+export function getRoomGroups(searchArea = RoomSearchArea.Active) {
   const options = {
     method: "get",
-    url: "/files/group?includeMembers=false",
+    url: `/files/group?searchArea=${searchArea}&includeMembers=false`,
   };
 
   return request(options);

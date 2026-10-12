@@ -35,12 +35,8 @@
 
 import { TTranslation } from "@docspace/shared/types";
 import { Dispatch, SetStateAction } from "react";
-import {
-  ISettings,
-  TButtonGroup,
-  TPlugin,
-} from "SRC_DIR/helpers/plugins/types";
-import PluginStore from "SRC_DIR/store/PluginStore";
+import { TButtonGroup, TPlugin } from "SRC_DIR/helpers/plugins/types";
+import type PluginStore from "SRC_DIR/store/PluginStore";
 
 export type HeaderProps = {
   t: TTranslation;
@@ -54,7 +50,6 @@ export type FooterProps = {
   modalRequestRunning: boolean;
   setModalRequestRunning: Dispatch<SetStateAction<boolean>>;
   onCloseAction: () => void;
-  updatePlugin: PluginStore["updatePlugin"];
 };
 
 export type InfoProps = {
@@ -67,9 +62,8 @@ export type InfoProps = {
 export type SettingsPluginDialogProps = {
   plugin: TPlugin;
   withDelete: boolean;
-  pluginSettings?: ISettings | null;
   settingsPluginDialogVisible: boolean;
-  updatePlugin: PluginStore["updatePlugin"];
+  reactSettingsSaveButtonState: PluginStore["reactSettingsSaveButtonState"];
   onClose: () => void;
   onDelete: () => void;
 };

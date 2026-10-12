@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { parseToDateTime, now, formatDateLocalized, dateDiff } from "@docspace/ui-kit/utils/date";
+import { parseToDateTime, now, formatDateLocalized, dateDiff } from "@onlyoffice/apps-ui-kit/utils/date";
 
 import { TTranslation } from "@docspace/shared/types";
 import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
@@ -75,7 +75,7 @@ export const getHeaderByPathname = (pathname: string, t: TTranslation) => {
     case "brand-name":
       return { key: t("Common:BrandName"), isSubPage: true };
     case "bonus":
-      return { key: t("Common:Bonus"), isSubPage: false };
+      return { key: t("Common:Upgrade"), isSubPage: false };
     default:
       return { key: t("Common:Spaces"), isSubPage: false };
   }
@@ -117,9 +117,17 @@ export const getIsLicenseDateExpired = (
   return dueDateDt ? now() > dueDateDt : true;
 };
 
-export const getPaymentDate = (dueDate: string | Date, timezone: string) => {
+// Same format and locale the portal settings page uses for this date
+// (CurrentTariffStatusStore.paymentDate) - without an explicit locale Luxon
+// falls back to the browser's, which reads as a foreign language next to the
+// rest of the UI.
+export const getPaymentDate = (
+  dueDate: string | Date,
+  timezone: string,
+  locale?: string,
+) => {
   const dt = parseToDateTime(dueDate)?.setZone(timezone);
-  return dt ? formatDateLocalized(dt, "DATE_MED") : "";
+  return dt ? formatDateLocalized(dt, "DATE_FULL", { locale }) : "";
 };
 
 export const getDaysLeft = (dueDate: string | Date) => {

@@ -34,25 +34,24 @@
  */
 
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { TFunction } from "i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { TConnectingStorage } from "@docspace/shared/api/files/types";
-import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
+import { getOAuthToken } from "@onlyoffice/apps-ui-kit/utils/get-oauth-token";
 
 import {
 	THIRD_PARTY_SERVICES_URL,
 	ThirdPartyServicesUrlName,
 } from "@docspace/shared/constants";
-import { injectDefaultTheme, isDesktop } from "@docspace/shared/utils";
+import { isDesktop } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
 import { TRoomStorageLocation } from "@docspace/shared/utils/rooms";
 
@@ -61,83 +60,8 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "SRC_DIR/helpers/filesUtils";
 import { ThirdPartyStore } from "SRC_DIR/store/ThirdPartyStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
-const StyledStorageLocation = styled.div.attrs(injectDefaultTheme)`
-  display: flex;
-  flex-direction: column;
-
-  .thirdparty-combobox {
-    padding: 0px;
-
-    .dropdown-container {
-      border: ${(props) =>
-				`1px solid ${props.theme.createEditRoomDialog.thirdpartyStorage.combobox.dropdownBorderColor}`};
-    }
-
-    .combo-button {
-      padding-inline-start: 8px;
-    }
-  }
-
-  .set_room_params-thirdparty {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-  }
-
-  .storage-unavailable {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
-
-    .drop-down-item_icon {
-      svg {
-        path[fill] {
-          fill: ${(props) => props.theme.dropDownItem.disableColor};
-        }
-
-        path[stroke] {
-          stroke: ${(props) => props.theme.dropDownItem.disableColor};
-        }
-
-        circle[fill] {
-          fill: ${(props) => props.theme.dropDownItem.disableColor};
-        }
-
-        rect[fill] {
-          fill: ${(props) => props.theme.dropDownItem.disableColor};
-        }
-      }
-    }
-
-    color: ${(props) => props.theme.dropDownItem.disableColor};
-  }
-`;
-
-const StyledComboBoxItem = styled.div<{ isDisabled?: boolean }>`
-  display: flex;
-
-  .drop-down-item_text {
-    color: ${({ theme, isDisabled }) =>
-			isDisabled ? theme.dropDownItem.disableColor : theme.dropDownItem.color};
-  }
-  .drop-down-item_icon {
-    display: flex;
-    align-items: center;
-
-    div {
-      display: flex;
-    }
-
-    margin-inline-start: auto;
-
-    svg {
-      min-height: 16px;
-      min-width: 16px;
-    }
-  }
-`;
+import styles from "../../CreateEditRoomDialog.module.scss";
 
 type ThirdPartyComboBoxProps = {
 	t: TFunction;
@@ -288,9 +212,7 @@ const ThirdPartyComboBox = ({
 	const getTextTooltip = () => {
 		return (
 			<Text fontSize="12px" noSelect>
-				{t("Common:EnableThirdPartyIntegration", {
-					productName: getBrandName("ProductName"),
-				})}
+				{t("Common:EnableThirdPartyIntegration")}
 			</Text>
 		);
 	};
@@ -310,7 +232,10 @@ const ThirdPartyComboBox = ({
 				: {};
 
 			return (
-				<StyledComboBoxItem isDisabled={disabled} key={item.id}>
+				<div
+					className={`${styles.comboBoxItem}${disabled ? ` ${styles.isDisabled}` : ""}`}
+					key={item.id}
+				>
 					<DropDownItem
 						onClick={onSelect}
 						data-third-party-id={item.id}
@@ -337,12 +262,12 @@ const ThirdPartyComboBox = ({
 							place="bottom"
 						/>
 					) : null}
-				</StyledComboBoxItem>
+				</div>
 			);
 		});
 
 	return (
-		<StyledStorageLocation>
+		<div className={styles.storageLocation}>
 			<div className="set_room_params-thirdparty">
 				<ComboBox
 					className="thirdparty-combobox"
@@ -384,7 +309,7 @@ const ThirdPartyComboBox = ({
 					testId="create_edit_room_thirdparty_connect"
 				/>
 			</div>
-		</StyledStorageLocation>
+		</div>
 	);
 };
 

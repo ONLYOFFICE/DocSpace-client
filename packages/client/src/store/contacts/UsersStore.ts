@@ -39,7 +39,7 @@ import api from "@docspace/shared/api";
 import Filter from "@docspace/shared/api/people/filter";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
-import { EmployeeFullDto } from "@docspace/ui-kit/types";
+import { EmployeeFullDto } from "@onlyoffice/apps-ui-kit/types";
 
 import {
   EmployeeStatus,
@@ -50,8 +50,8 @@ import {
 } from "@docspace/shared/enums";
 import { getUserType } from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import {
   getUserFilter,
   setUserFilter,
@@ -67,7 +67,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   downgradeUserType,
   getReassignmentProgress,
@@ -256,7 +256,7 @@ class UsersStore {
         setReducedRightsData(true, admin);
 
         if (defaultFolderType === FolderType.USER) {
-          setDefaultFolderType(FolderType.Rooms);
+          setDefaultFolderType(FolderType.DEFAULT);
         }
       }
 
@@ -302,7 +302,10 @@ class UsersStore {
           id,
           isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
         );
-        fetchRooms(roomsFilter);
+        // fetchRooms(folderId, filter) — this caller has
+        // always passed the filter in the folderId slot (the filter argument
+        // falls back to the default); erased cast preserves that behavior.
+        fetchRooms(roomsFilter as unknown as string);
       }
     };
 
@@ -669,7 +672,9 @@ class UsersStore {
             }
           }
 
-          options.push("reset-auth");
+          if (isOwner) {
+            options.push("reset-auth");
+          }
 
           if (!isUserLDAP) {
             options.push("separator-2");
@@ -1407,3 +1412,4 @@ class UsersStore {
 }
 
 export default UsersStore;
+

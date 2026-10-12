@@ -1,0 +1,42 @@
+// Skeleton geometry mirrors NavMenu.module.scss (36px rows, 12px inset, 8px
+// icon/text gap, 16px gap between the Overview group and the apps group) so the
+// placeholders line up with the real content and there is no layout shift once
+// it loads.
+
+.navMenu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px;
+  box-sizing: border-box;
+
+  &[data-show-text="false"],
+  .navMenu[data-show-text="false"] & {
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+.navMenu[data-show-text="false"] .navItem {
+  justify-content: center;
+  padding-block: 2px;
+  height: 40px;
+}
+
+.navItemText {
+  flex: 1;
+  min-width: 0;
+}

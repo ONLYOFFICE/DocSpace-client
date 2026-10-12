@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Bu tətbiq deaktiv edilib",
   "OAuthApplicationEmpty": "Tətbiq tapılmadı",
   "OAuthClientEmpty": "Müştəri ID-si tapılmadı",
+  "OAuthInvalidRequest": "Avtorizasiya sorğusu etibarsızdır. Tətbiq parametrlərində yönləndirmə URI-sini yoxlayın",
   "RecaptchaInvalid": "Yanlış Recaptcha",
   "SsoAttributesNotFound": "İdentifikasiya uğursuz oldu (təsdiq atributları tapılmadı)",
   "SsoAuthFailed": "İdentifikasiya uğursuz oldu",

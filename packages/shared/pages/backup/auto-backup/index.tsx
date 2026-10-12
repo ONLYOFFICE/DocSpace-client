@@ -46,22 +46,22 @@ import {
 } from "../../../api/portal";
 import { BackupStorageType, AutoBackupPeriod } from "../../../enums";
 import { OPERATIONS_NAME } from "../../../constants";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { getBackupStorage } from "../../../api/settings";
 import AutoBackupLoader from "../../../skeletons/backup/AutoBackup";
-import StatusMessage from "@docspace/ui-kit/components/status-message";
+import StatusMessage from "@onlyoffice/apps-ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   type TSocketListener,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import { getBackupProgressInfo } from "../../../utils/common";
 import { useStateCallback } from "../../../hooks/useStateCallback";
 import type { Nullable, Option } from "../../../types";
-import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Text } from "@docspace/ui-kit/components/text";
-import { RadioButton } from "@docspace/ui-kit/components/radio-button";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import OperationsProgressButton from "@onlyoffice/apps-ui-kit/components/operations-progress-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RadioButton } from "@onlyoffice/apps-ui-kit/components/radio-button";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
 import { ThirdPartyModule } from "./sub-components/ThirdPartyModule";
@@ -70,7 +70,6 @@ import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModul
 import { useDefaultOptions } from "./hooks";
 import type { AutomaticBackupProps } from "./AutoBackup.types";
 import styles from "./AutoBackup.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const hoursArray = Array(24)
   .fill(null)
@@ -183,6 +182,7 @@ const AutomaticBackup = ({
   isBackupPaid,
   backupProgressWarning,
   setBackupProgressWarning,
+  disabledCreatePublicRoom = false,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -428,9 +428,7 @@ const AutomaticBackup = ({
             "backup_modules-description",
           )}
         >
-          {t("Common:AutoBackupDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("Common:AutoBackupDescription")}
         </Text>
         {!isManagement ? (
           <Link
@@ -513,7 +511,7 @@ const AutomaticBackup = ({
               )}
             >
               {t("Common:RoomsModuleDescription", {
-                roomName: t("Common:MyDocuments"),
+                roomName: t("Common:Files"),
               })}
             </Text>
             {isCheckedDocuments ? (
@@ -543,6 +541,7 @@ const AutomaticBackup = ({
                 isError={isError}
                 setIsError={setIsError}
                 isBackupPaid={isBackupPaid}
+                disabledCreatePublicRoom={disabledCreatePublicRoom}
               />
             ) : null}
           </div>

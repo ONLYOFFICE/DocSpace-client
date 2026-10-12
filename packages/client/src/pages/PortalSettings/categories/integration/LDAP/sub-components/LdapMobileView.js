@@ -33,17 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { CategoryItem } from "@docspace/ui-kit/components/category-item";
-
-const StyledWrapper = styled.div`
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
+import { CategoryItem } from "@onlyoffice/apps-ui-kit/components/category-item";
+import styles from "./LdapMobileView.module.scss";
 
 const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
   const { t } = useTranslation(["Ldap", "Settings"]);
@@ -55,7 +48,7 @@ const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
   };
 
   return (
-    <StyledWrapper>
+    <div className={styles.styledWrapper}>
       <CategoryItem
         title={t("Ldap:LdapSettings")}
         subtitle={t("Ldap:LdapMobileSettingsDescription")}
@@ -76,7 +69,7 @@ const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
         disabled={!isLdapEnabled}
         dataTestId="sync_data"
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

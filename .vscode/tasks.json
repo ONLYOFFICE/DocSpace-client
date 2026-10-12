@@ -28,6 +28,12 @@
     {
       "label": "Backend | run CE (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
+      "options": {
+        "env": {
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
+        }
+      },
       "type": "shell",
       "group": {
         "kind": "build",
@@ -45,7 +51,8 @@
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
       "options": {
         "env": {
-          "SKIP_CLIENT": "true"
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
       "type": "shell",
@@ -63,12 +70,14 @@
     {
       "label": "Backend | run EE (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
-      "type": "shell",
       "options": {
         "env": {
-          "APP_EDITION": "enterprise"
+          "APP_EDITION": "enterprise",
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -83,13 +92,14 @@
     {
       "label": "Backend | run EE - full (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
-      "type": "shell",
       "options": {
         "env": {
           "APP_EDITION": "enterprise",
-          "SKIP_CLIENT": "true"
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -104,12 +114,16 @@
     {
       "label": "Backend | run DE (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
-      "type": "shell",
       "options": {
         "env": {
-          "APP_EDITION": "developer"
+          "APP_EDITION": "developer",
+          "APP_EDITOR_TEST": "true",
+          "APP_EDITOR_VERSION": "10.0.0.133",
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -123,14 +137,17 @@
     },
     {
       "label": "Backend | run DE - full (Aspire)",
-      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; SKIP_CLIENT=true dotnet run --launch-profile development",
-      "type": "shell",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
       "options": {
         "env": {
           "APP_EDITION": "developer",
-          "SKIP_CLIENT": "true"
+          "APP_EDITOR_TEST": "true",
+          "APP_EDITOR_VERSION": "10.0.0.133",
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -145,6 +162,12 @@
     {
       "label": "Backend | run SAAS (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev --APP_HOSTING_STANDALONE false",
+      "options": {
+        "env": {
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
+        }
+      },
       "type": "shell",
       "group": {
         "kind": "build",
@@ -160,13 +183,16 @@
     {
       "label": "Backend | run SAAS - full (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development --APP_HOSTING_STANDALONE false",
-      "type": "shell",
       "options": {
         "env": {
-          "APP_EDITION": "developer",
-          "SKIP_CLIENT": "true"
+          "APP_EDITOR_TEST": "true",
+          "APP_EDITOR_VERSION": "10.0.0.133",
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false",
+          "APP_EDITION": "developer"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -180,9 +206,9 @@
     },
     {
       "label": "Backend | clear Aspire (Docker)",
-      "command": "docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker stop && docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker rm && docker volume prune -f && docker network prune -f",
+      "command": "docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker stop && docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker rm && docker volume ls --format '{{.Name}}' | grep -E '^docspace' | xargs -r docker volume rm && docker volume prune -f && docker network prune -f",
       "windows": {
-        "command": "$c = docker ps -a --format '{{.Names}}' | Where-Object { $_ -match 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' }; if ($c) { $c | ForEach-Object { docker stop $_ }; $c | ForEach-Object { docker rm $_ } }; docker volume prune -f; docker network prune -f"
+        "command": "$c = docker ps -a --format '{{.Names}}' | Where-Object { $_ -match 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' }; if ($c) { $c | ForEach-Object { docker stop $_ }; $c | ForEach-Object { docker rm $_ } }; $v = docker volume ls --format '{{.Name}}' | Where-Object { $_ -match '^docspace' }; if ($v) { $v | ForEach-Object { docker volume rm $_ } }; docker volume prune -f; docker network prune -f"
       },
       "type": "shell",
       "group": {
@@ -227,21 +253,6 @@
       }
     },
     {
-      "label": "Frontend | update ui-kit lock",
-      "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm run update-ui-kit-lock",
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
       "label": "Frontend | update translation-app lock",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run update-translation-app-lock",
@@ -259,7 +270,7 @@
     {
       "label": "Frontend | update all lock files",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm run wipe ; pnpm install ; pnpm run update-ui-kit-lock ; pnpm run update-translation-app-lock",
+      "command": "cd ${workspaceFolder} ; pnpm run wipe ; pnpm install ; pnpm run update-translation-app-lock",
       "group": {
         "kind": "build",
         "isDefault": false
@@ -275,6 +286,36 @@
       "label": "Frontend | update deps",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm update --recursive",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update ui-kit",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run update-ui-kit",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update ai-chat",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run update-ai-chat",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -320,6 +361,21 @@
       "label": "Frontend | start",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run start",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start (ui-kit source)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run start:ui-kit-src",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -437,21 +493,6 @@
       }
     },
     {
-      "label": "Frontend | storybook (ui-kit)",
-      "type": "shell",
-      "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm run storybook",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
       "label": "Frontend | storybook",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run storybook",
@@ -482,7 +523,7 @@
       }
     },
     {
-      "label": "Test | Jest:common",
+      "label": "Test | Vitest:common",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test ; npm run open-report",
       "group": {
@@ -497,7 +538,7 @@
       }
     },
     {
-      "label": "Test | Jest:translations",
+      "label": "Test | Vitest:translations",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:locales ; npm run open-report",
       "group": {
@@ -512,7 +553,22 @@
       }
     },
     {
-      "label": "Test | Jest:translations:clear-wrong",
+      "label": "Test | Vitest:translations:missing-keys",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:only-missing-keys ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Vitest:translations:clear-wrong",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; CLEAR_WRONG_VALUES=true FIX_MOVED_KEYS=true npm run test:locales ; npm run open-report",
       "group": {
@@ -527,7 +583,7 @@
       }
     },
     {
-      "label": "Test | Jest:images",
+      "label": "Test | Vitest:images",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images ; npm run open-report",
       "group": {
@@ -542,7 +598,7 @@
       }
     },
     {
-      "label": "Test | Jest:colors",
+      "label": "Test | Vitest:colors",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:colors ; npm run open-report",
       "group": {
@@ -557,7 +613,7 @@
       }
     },
     {
-      "label": "Test | Jest:ascii",
+      "label": "Test | Vitest:ascii",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:ascii ; npm run open-report",
       "group": {
@@ -572,7 +628,22 @@
       }
     },
     {
-      "label": "Test | Jest:dependencies",
+      "label": "Test | Vitest:license",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:license ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Vitest:dependencies",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:dependencies ; npm run open-report",
       "group": {
@@ -587,7 +658,7 @@
       }
     },
     {
-      "label": "Test | Jest:dependencies:audit",
+      "label": "Test | Audit:dependencies",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm audit --audit-level=moderate",
       "group": {
@@ -602,7 +673,7 @@
       }
     },
     {
-      "label": "Test | Jest:licenses:audit",
+      "label": "Test | Audit:licenses",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run licenses-audit",
       "group": {
@@ -617,7 +688,7 @@
       }
     },
     {
-      "label": "Test | Jest:unit",
+      "label": "Test | Vitest:unit",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm test",
       "group": {
@@ -632,9 +703,24 @@
       }
     },
     {
-      "label": "Test | Jest:unit:ui-kit",
+      "label": "Test | Vitest:client",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm test",
+      "command": "cd ${workspaceFolder} ; pnpm run test:client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Vitest:store",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run test:store",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -857,6 +943,81 @@
       }
     },
     {
+      "label": "Test | Test e2e run ui (client plugins)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:ui:plugins",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker start (client plugins)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:plugins ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker update-screenshots (client plugins)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:plugins:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev (client plugins)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:dev:plugins ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev update-screenshots (client plugins)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:dev:plugins:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker clear (client)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:clear",
@@ -904,7 +1065,7 @@
     {
       "label": "Test | Test e2e docker start (login)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/login",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9326 ${workspaceFolder}/playwright-report/login",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -934,7 +1095,7 @@
     {
       "label": "Test | Test e2e docker dev (login)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/login",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9326 ${workspaceFolder}/playwright-report/login",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1009,7 +1170,7 @@
     {
       "label": "Test | Test e2e docker start (SDK)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/sdk",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9328 ${workspaceFolder}/playwright-report/sdk",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1039,7 +1200,7 @@
     {
       "label": "Test | Test e2e docker dev (SDK)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/sdk",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9328 ${workspaceFolder}/playwright-report/sdk",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1114,7 +1275,7 @@
     {
       "label": "Test | Test e2e docker start (management)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/management",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9329 ${workspaceFolder}/playwright-report/management",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1144,7 +1305,7 @@
     {
       "label": "Test | Test e2e docker dev (management)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/management",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9329 ${workspaceFolder}/playwright-report/management",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1219,7 +1380,7 @@
     {
       "label": "Test | Test e2e docker start (editor)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/doceditor",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9327 ${workspaceFolder}/playwright-report/doceditor",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1249,7 +1410,7 @@
     {
       "label": "Test | Test e2e docker dev (editor)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/doceditor",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9327 ${workspaceFolder}/playwright-report/doceditor",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1405,6 +1566,17 @@
       }
     },
     {
+      "label": "Translation App | translation stats (missing keys)",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/translation-stats.js' --no-meta --missing",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
       "label": "Translation App | translation stats (Markdown)",
       "type": "shell",
       "command": "node '${workspaceFolder}/common/scripts/translation-stats.js' --md='${workspaceFolder}/translation-stats.md'",
@@ -1462,7 +1634,7 @@
     {
       "label": "Translation App | update metadata",
       "type": "shell",
-      "command": "node '${workspaceFolder}/common/scripts/clean-empty-locales.js' && cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage && npm run generate-auto-comments-metadata",
+      "command": "node '${workspaceFolder}/common/scripts/clean-empty-locales.js' && cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage",
       "group": "build",
       "presentation": {
         "reveal": "always",

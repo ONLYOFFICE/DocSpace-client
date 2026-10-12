@@ -1,0 +1,29 @@
+{
+  "key_path": "SharedWithMeWhatNeedsMyActionPrompt",
+  "content": "Review files shared with me and identify items that require my action, approval, or reply. If this information is not provided, ask me for the exact scope, desired outcome, and any important constraints.",
+  "content_en_sha1_hash": "eb388ea4f503caa7e8fe3adcf28c4101e67d780c",
+  "created_at": "2026-08-04T09:58:55.226Z",
+  "updated_at": "2026-08-05T16:38:29.102Z",
+  "comment": {
+    "text": "Instructional prompt for an AI feature that provides detailed guidance on how to analyze shared files for pending actions, approvals, or replies.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:38:29.102Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 276,
+      "context": "name: t(\"AiSuggestions:SharedWithMeWhatSSharedWithMe\"),\n prompt: t(\"AiSuggestions:SharedWithMeWhatSSharedWithMePrompt\"),\n },\n {\n name: t(\"AiSuggestions:SharedWithMeWhatNeedsMyAction\"),\n prompt: t(\"AiSuggestions:SharedWithMeWhatNeedsMyActionPrompt\"),\n },\n {\n name: t(\"AiSuggestions:SharedWithMeFindFilesFromAPerson\"),\n prompt: t(\"AiSuggestions:SharedWithMeFindFilesFromAPersonPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

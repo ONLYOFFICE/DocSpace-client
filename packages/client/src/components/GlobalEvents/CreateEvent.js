@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import api from "@docspace/shared/api";
 import { AnalyticsEvents } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -49,6 +49,11 @@ import {
   getDefaultFileName,
   getDefaultFileTestIdPrefix,
 } from "SRC_DIR/helpers/filesUtils";
+import {
+  getDisplayFileNames,
+  getUniqueFileTitle,
+  runEncryptedFileCreation,
+} from "SRC_DIR/helpers/encryptedFileCreation";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { frameCallEvent } from "@docspace/shared/utils/common";
@@ -92,6 +97,13 @@ const CreateEvent = ({
 
   isFrame,
   frameConfig,
+
+  isPrivacy,
+  getUserEncryptionKeys,
+  encryptionRoomId,
+  filesList,
+  fetchFiles,
+  openDocEditor,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -164,6 +176,56 @@ const CreateEvent = ({
             clearActiveOperations(null, folderIds);
             onCloseAction();
           });
+      } else if (isPrivacy) {
+        const withEditor =
+          openEditor && !(isFrame && frameConfig?.events?.onEditorOpen);
+        const editorWindow =
+          withEditor && openOnNewPage ? window.open("", "_blank") : null;
+
+        try {
+          const keys = getUserEncryptionKeys();
+
+          const created = await runEncryptedFileCreation({
+            extension,
+            title: newValue.trimEnd(),
+            parentId,
+            roomId: encryptionRoomId,
+            userId: keys.userId,
+            publicKey: keys.publicKey,
+            publicKeyId: keys.publicKeyId,
+          });
+
+          if (!created) {
+            editorWindow?.close();
+            return;
+          }
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: AnalyticsEvents.FileCreated,
+            id: created.fileId,
+            parentId,
+            file_type: extension,
+          });
+
+          if (withEditor) {
+            openDocEditor(created.fileId, preview, null, actionEdit, false, editorWindow);
+          } else if (isFrame && frameConfig?.events?.onEditorOpen) {
+            const file = await api.files.getFileInfo(created.fileId);
+            frameCallEvent({
+              event: "onEditorOpen",
+              data: { ...file, action: "edit" },
+            });
+          }
+
+          fetchFiles(parentId).catch(() => {});
+        } catch (error) {
+          editorWindow?.close();
+          isPaymentRequiredError(error);
+          toastr.error(error);
+        } finally {
+          onCloseAction();
+        }
       } else {
         try {
           if (openEditor && !(isFrame && frameConfig?.events?.onEditorOpen)) {
@@ -227,7 +289,7 @@ const CreateEvent = ({
               if (isFrame && frameConfig?.events?.onEditorOpen) {
                 frameCallEvent({
                   event: "onEditorOpen",
-                  data,
+                  data: { ...data, action: "edit" },
                 });
               }
             })
@@ -258,18 +320,32 @@ const CreateEvent = ({
       publicRoomKey,
       createFile,
       onCloseAction,
+      isPrivacy,
+      getUserEncryptionKeys,
+      encryptionRoomId,
+      fetchFiles,
+      openDocEditor,
+      actionEdit,
     ],
   );
 
   React.useEffect(() => {
     const defaultName = getDefaultFileName(extension);
+    const suggestedName =
+      isPrivacy && extension
+        ? getUniqueFileTitle(
+            defaultName,
+            extension,
+            getDisplayFileNames(filesList ?? []),
+          )
+        : defaultName;
 
     if (title) {
       const item = { fileExst: extension, title };
 
       setStartValue(getTitleWithoutExtension(item, fromTemplate));
     } else {
-      setStartValue(defaultName);
+      setStartValue(suggestedName);
     }
 
     setHeaderTitle(defaultName);
@@ -279,7 +355,7 @@ const CreateEvent = ({
     if (!keepNewFileName && !withoutDialog) {
       setEventDialogVisible(true);
     } else {
-      onSave(null, title || defaultName);
+      onSave(null, title || suggestedName);
     }
 
     return () => {
@@ -326,17 +402,25 @@ export default inject(
 
       setIsUpdatingRowItem,
       setCreatedItem,
+      files,
+      fetchFiles,
+      openDocEditor,
     } = filesStore;
 
     const { gallerySelected, setGallerySelected } = oformsStore;
 
     const { completeAction, openItemAction } = filesActionsStore;
 
-    const { clearActiveOperations, fileCopyAs } = uploadDataStore;
+    const { clearActiveOperations, fileCopyAs, getUserEncryptionKeys } =
+      uploadDataStore;
 
     const { isRecycleBinFolder, isPrivacyFolder } = treeFoldersStore;
 
     const { id: parentId, isIndexedFolder } = selectedFolderStore;
+
+    const encryptionRoomId =
+      selectedFolderStore.navigationPath?.find((r) => r.isRoom)?.id ??
+      (selectedFolderStore.isRoom ? selectedFolderStore.id : null);
 
     const { isDesktopClient, isFrame, frameConfig } = settingsStore;
 
@@ -385,6 +469,12 @@ export default inject(
 
       isFrame,
       frameConfig,
+
+      getUserEncryptionKeys,
+      encryptionRoomId,
+      filesList: files,
+      fetchFiles,
+      openDocEditor,
     };
   },
 )(observer(CreateEvent));

@@ -42,15 +42,15 @@ import type {
   TFilesSelector,
 } from "@onlyoffice/docspace-plugin-sdk";
 
-import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
 import {
   THeaderBackButton,
   TSelectorHeader,
-} from "@docspace/ui-kit/components/selector";
-import { FilesSelectorProps } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+} from "@onlyoffice/apps-ui-kit/components/selector";
+import { FilesSelectorProps } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
-import type { SdkFolderType } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { SdkFolderType } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
@@ -65,6 +65,7 @@ type Props = {
 type InjectedProps = {
   getIcon: FilesSettingsStore["getIcon"];
   rootFolderType: SelectedFolderStore["rootFolderType"];
+  disabledCreatePublicRoom: boolean;
 };
 
 const PluginFilesSelector = ({
@@ -72,6 +73,7 @@ const PluginFilesSelector = ({
   dispatchMessage,
   getIcon,
   rootFolderType,
+  disabledCreatePublicRoom,
   pluginName,
 }: Props) => {
   const { t } = useTranslation(["Common"]);
@@ -220,6 +222,7 @@ const PluginFilesSelector = ({
       cancelButtonLabel={cancelButtonLabel ?? t("Common:CancelButton")}
       submitButtonLabel={submitButtonLabel ?? t("Common:AddButton")}
       withCreate={!!withCreate}
+      disabledCreatePublicRoom={disabledCreatePublicRoom}
       withFooterCheckbox={!!withFooterCheckbox}
       withFooterInput={!!withFooterInput}
       disabledItems={[]}
@@ -251,11 +254,14 @@ const PluginFilesSelector = ({
 };
 
 export default inject<TStore>(({ filesSettingsStore, selectedFolderStore }) => {
-  const { getIcon } = filesSettingsStore;
+  const { getIcon, isExternalShareRestricted, externalShareApplyToRooms } =
+    filesSettingsStore;
   const { rootFolderType } = selectedFolderStore;
 
   return {
     getIcon,
     rootFolderType,
+    disabledCreatePublicRoom:
+      isExternalShareRestricted && externalShareApplyToRooms,
   };
 })(observer(PluginFilesSelector));

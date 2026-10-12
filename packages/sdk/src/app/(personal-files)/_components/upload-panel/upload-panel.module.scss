@@ -1,0 +1,122 @@
+/*
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+.uploadBody {
+  width: calc(100% + 16px);
+  height: 100%;
+
+  :global(.scroll-body) {
+    padding-inline-end: 0px !important;
+  }
+}
+
+.headerActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clearButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fileRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 48px;
+  padding-block: 8px;
+  padding-inline-end: 16px;
+
+  :global {
+    .upload-panel_file-name {
+      max-width: 412px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      align-items: center;
+      display: flex;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .file-exst {
+      color: var(--files-panels-upload-color);
+    }
+
+    .actions-wrapper {
+      display: flex;
+      margin-inline-start: auto;
+      padding-inline-start: 16px;
+      align-items: center;
+      flex: 0 0 auto;
+
+      .upload-panel_percent-text {
+        margin-inline-start: 16px;
+        color: var(--files-panels-upload-progress-color);
+      }
+
+      .upload-panel_close-button,
+      .upload-panel_check-button {
+        margin-inline-start: 16px;
+      }
+
+      .upload-panel_check-button {
+        width: 16px;
+        height: 16px;
+
+        path {
+          fill: var(--files-panels-upload-positive-status-color);
+        }
+      }
+    }
+
+    .img_error {
+      filter: grayscale(1);
+    }
+  }
+
+  &[data-error] {
+    :global(.upload-panel-file-error_text) {
+      color: var(--files-panels-upload-color);
+    }
+  }
+}
+
+.fileIconWrap {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: 8px;
+}
+
+.fileIcon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.errorText {
+  color: var(--files-panels-upload-color);
+  text-decoration: underline dashed;
+  cursor: default;
+}
+
+.progressWrap {
+  position: absolute;
+  inset-inline: 48px 16px;
+  bottom: 0;
+}
+
+.phaseLabel {
+  display: block;
+  margin-top: 2px;
+  color: var(--files-panels-upload-progress-color);
+  font-size: 11px;
+  line-height: 1.2;
+}

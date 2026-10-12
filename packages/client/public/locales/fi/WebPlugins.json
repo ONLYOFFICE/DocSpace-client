@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Poista liitännäinen",
-  "DeletePluginDescription": "Tämä liitännäinen ei ole enää saatavilla {{productName}}-n käyttäjille. Haluatko varmasti jatkaa?",
+  "DeletePluginDescription": "Tämä liitännäinen ei ole enää saatavilla työtilan käyttäjille. Haluatko varmasti jatkaa?",
   "DeletePluginTitle": "Poistetaanko liitännäinen?",
   "ExpandFunctionality": "Laajenna toimintoja SDK-laajennuksen avulla",
   "GoToRepo": "Siirry arkistoon",
@@ -8,13 +8,19 @@
   "NeedSettings": "Asetukset vaaditaan",
   "NoPlugins": "Ei liitännäisiä lisätty",
   "NotNeedSettings": "Asetuksia ei tarvitse syöttää",
+  "PluginBundleRequestFailed": "Pyyntö osoitteeseen {{url}} epäonnistui (HTTP {{status}})",
   "PluginCacheWarningDescription": "Lisäosat välimuistetaan niiden versionumeron perusteella. Jotta muutoksesi tulevat voimaan, lisää versionumeroa <1>package.json</1>-tiedostossasi ennen lataamista. Järjestelmä ei päivitä lisäosaa, jos versio pysyy samana.",
   "PluginDeletedSuccessfully": "Lisäosa poistettu onnistuneesti",
-  "PluginIsNotCompatible": "Lisäosan SDK-versio ei täsmää {{productName}}-version kanssa. Päivitä yhteensopivaan versioon.",
+  "PluginInitFailed": "Alustus epäonnistui",
+  "PluginIsNotCompatible": "Lisäosan SDK-versio ei täsmää {{organizationName}} {{productName}}-version kanssa. Päivitä yhteensopivaan versioon.",
   "PluginLoadedSuccessfully": "Lisäosa ladattu onnistuneesti",
+  "PluginLoadFailed": "Lataus epäonnistui",
+  "PluginNoDefaultExport": "Laajennusmoduulilla ei ole oletusvientiä",
+  "PluginNotRegistered": "Skripti suoritettiin, mutta se ei rekisteröinyt lisäosaa nimeltä \"{{pluginName}}\"",
   "PluginSamples": "Laajennusmallit",
+  "PluginScriptLoadFailed": "Skriptin {{url}} lataus epäonnistui",
   "PluginSDK": "SDK-laajennus",
-  "PluginSDKDescription": "Käyttämällä SDK-laajennusta voit laajentaa {{productName}}-n toiminnallisuutta, yhdistää kolmansien osapuolien palveluihin tai parantaa olemassaolevaa käyttäjäkokemusta. Täältä löydät GitHubissa saatavilla olevat laajennusmallit lähdekoodin kera.",
-  "PluginSDKInstruction": "Klikkaa painiketta saadaksesi yksityiskohtaiset ohjeet omien laajennusten luomiseen.",
-  "UploadDescription": "Voit lisätä lisäosia laajentaaksesi {{productName}}-n toiminnallisuutta lisätoiminnoilla. Klikkaa Lataa lisäosa tai pudota ZIP-arkisto."
+  "PluginSDKDescription": "Käytä SDK-laajennusta lisätäksesi uusia toimintoja, yhdistääksesi kolmannen osapuolen palveluita tai parantaaksesi nykyistä käyttökokemusta. Selaa alla olevia esimerkkilisäosia, joiden lähdekoodi on saatavilla GitHubissa. Siirry <1>Lisäosat</1>-sivulle ottaaksesi ne käyttöön työtilassasi.",
+  "PluginSDKInstruction": "<1>Lue ohjeet</1> luodaksesi omia lisäosia.",
+  "UploadDescription": "Lisää lisäosia laajentaaksesi työtilaasi lisätoiminnoilla. Ota käyttöön jokin alla olevasta listasta tai klikkaa Lataa lisäosa (tai pudota ZIP-tiedosto) lisätäksesi oman."
 }

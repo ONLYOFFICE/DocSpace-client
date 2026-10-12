@@ -1,20 +1,20 @@
 {
   "key_path": "SsoIntro",
-  "content": "The Single Sign-On section allows you to enable/disable third-party authentication using SAML, thereby providing a quicker, easier and more secure way to access the space for users.",
-  "content_en_sha1_hash": "934dd1dc1e384a2a4a53a740d7eba5216ea9f77b",
-  "created_at": "2025-05-19T21:30:50.185Z",
-  "updated_at": "2026-05-15T14:00:06.859Z",
+  "content": "Enable third-party authentication via SAML giving users a faster, easier, and more secure way to access the workspace.",
+  "content_en_sha1_hash": "97d54cde1e785072056fe44bef1f777028e036d0",
+  "created_at": "2026-08-31T18:23:40.173Z",
+  "updated_at": "2026-08-31T20:57:41.376Z",
   "comment": {
-    "text": "This is an introductory paragraph displayed on the Single Sign-On settings page. It explains the purpose of the section, which is to manage third-party authentication via SAML for easier and more secure user access.",
+    "text": "Introductory text in the Single Sign-On settings section describing the benefits of enabling SAML-based authentication.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:16.522Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:57:41.376Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/index.js",
-      "line_number": 85,
-      "context": "<StyledSsoPage\n hideSettings={serviceProviderSettings}\n hideMetadata={spMetadata}\n withoutExternalLink={!singleSignOnUrl}\n >\n <Text className=\"intro-text settings_unavailable\">{t(\"SsoIntro\")}</Text>\n \n {singleSignOnUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
+      "line_number": 91,
+      "context": "style={{\n \"--service-provider-display\": serviceProviderSettings ? \"block\" : \"none\",\n \"--sp-metadata-display\": spMetadata ? \"block\" : \"none\",\n }}\n >\n <Text className=\"intro-text settings_unavailable\">{t(\"SsoIntro\")}</Text>\n \n {singleSignOnUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -37,10 +37,10 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
-import { isMobile } from "@docspace/ui-kit/utils/device";
+import { isMobile } from "@onlyoffice/apps-ui-kit/utils/device";
 
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import HideButton from "./HideButton";
@@ -56,7 +56,7 @@ import GroupMembership from "./GroupMembership";
 import CertificateDialog from "./CertificateDialog";
 import ToggleLDAP from "./ToggleLDAP";
 
-import StyledLdapPage from "../styled-components/StyledLdapPage";
+import StyledLdapPage from "../styled-containers/StyledLdapPage";
 
 import { onChangeUrl } from "../utils";
 

@@ -34,13 +34,13 @@
  */
 
 import React, { useEffect, useState } from "react";
-import { Tabs } from "@docspace/ui-kit/components/tabs";
+import { Tabs } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/section/Section.constants";
 import config from "PACKAGE_FILE";
 import MobileSecurityLoader from "./sub-components/loaders/mobile-security-loader";
 import AccessLoader from "./sub-components/loaders/access-loader";
@@ -53,7 +53,6 @@ import LoginHistory from "./login-history";
 import AuditTrail from "./audit-trail";
 import { resetSessionStorage } from "../../utils";
 import useSecurity from "./useSecurity";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const SecurityWrapper = (props) => {
   const {
@@ -85,7 +84,7 @@ const SecurityWrapper = (props) => {
   const data = [
     {
       id: "access-portal",
-      name: t("PortalAccess", { productName: getBrandName("ProductName") }),
+      name: t("PortalAccess"),
       content: <AccessPortal />,
       onClick: async () => {
         clearAbortControllerArr();

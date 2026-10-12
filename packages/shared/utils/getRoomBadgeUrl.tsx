@@ -35,32 +35,37 @@
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import RestrictedAlert12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/restricted.alert.react.svg?url";
 import Link12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/link.svg?url";
+import Security12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/security.private.react.svg?url";
 
 import SharedLinkIconURL from "PUBLIC_DIR/images/icons/24/shared.svg?url";
 import PlanetIconURL from "PUBLIC_DIR/images/icons/24/planet.react.svg?url";
+import SecurityIconURL from "PUBLIC_DIR/images/icons/24/security.private.react.svg?url";
 
 import { RoomsType } from "../enums";
 import type { Nullable } from "../types";
 
 type ItemType = {
   shared: boolean;
+  private?: boolean;
   roomType?: RoomsType;
   external?: boolean;
 };
 
 type SizeIcon = 12 | 24;
-type IconsURLType = "link" | "planet" | "alert";
+type IconsURLType = "link" | "planet" | "security" | "alert";
 type IconsType = Record<SizeIcon, Record<IconsURLType, string>>;
 
 const icons: IconsType = {
   12: {
     link: Link12ReactSvgUrl,
     planet: Planet12ReactSvgUrl,
+    security: Security12ReactSvgUrl,
     alert: RestrictedAlert12ReactSvgUrl,
   },
   24: {
     link: SharedLinkIconURL,
     planet: PlanetIconURL,
+    security: SecurityIconURL,
     alert: RestrictedAlert12ReactSvgUrl,
   },
 };
@@ -73,9 +78,11 @@ export const getRoomBadgeUrl = (
 ) => {
   if (!item || !item.roomType) return null;
 
-  const { link, planet, alert } = icons[size];
+  const { link, planet, security, alert } = icons[size];
 
   if (item.external) return link;
+
+  if (item.private) return security;
 
   const showPlanetIcon =
     (item.roomType === RoomsType.PublicRoom ||
@@ -89,3 +96,4 @@ export const getRoomBadgeUrl = (
 
   return null;
 };
+

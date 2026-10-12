@@ -59,6 +59,8 @@ type TSearchParams = {
   toForm?: string;
   editorGoBack?: string;
   withoutGoBackText?: string;
+  returnUrl?: string;
+  isSDK?: string;
 };
 
 async function Page(props: { searchParams: Promise<TSearchParams> }) {
@@ -87,6 +89,8 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
     share,
     editorGoBack,
     withoutGoBackText,
+    returnUrl,
+    isSDK,
   } = searchParams;
 
   if (!parentId || !fileTitle) redirect(baseURL);
@@ -139,12 +143,15 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
 
   if (!res) {
     logger.error(
-      `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, File create failed, open empty editor`,
+      `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, File create failed`,
     );
-    const documentServerUrl = await getEditorUrl();
 
     return (
-      <Editor documentServerUrl={documentServerUrl?.docServiceUrl ?? ""} />
+      <CreateFileError
+        error={new Error()}
+        fileInfo={fileInfo}
+        fromFile={!!fromFile}
+      />
     );
   }
 
@@ -194,6 +201,14 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
 
     if (withoutGoBackText) {
       newSearchParams.append("withoutGoBackText", withoutGoBackText);
+    }
+
+    if (returnUrl) {
+      newSearchParams.append("returnUrl", returnUrl);
+    }
+
+    if (isSDK) {
+      newSearchParams.append("isSDK", isSDK);
     }
 
     logger.debug(

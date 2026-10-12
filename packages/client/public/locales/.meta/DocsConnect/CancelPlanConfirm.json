@@ -1,0 +1,29 @@
+{
+  "key_path": "CancelPlanConfirm",
+  "content": "Are you sure you want to cancel your current {{service}} subscription?",
+  "content_en_sha1_hash": "4197b8b156e46d66992b83b6ba38931f4ae96010",
+  "created_at": "2026-07-27T13:07:48.530Z",
+  "updated_at": "2026-07-27T14:33:22.188Z",
+  "comment": {
+    "text": "Confirmation message within a modal dialog body used to verify the cancellation of a subscription, including the {{service}} variable which represents the product name.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:33:22.188Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/CancelPlanDialog/index.tsx",
+      "line_number": 109,
+      "context": "{t(\"Common:SubscriptionCancellation\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.body}>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:CancelPlanConfirm\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"DocsConnect:YourCurrentPlanLabel\")}{\" \"}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

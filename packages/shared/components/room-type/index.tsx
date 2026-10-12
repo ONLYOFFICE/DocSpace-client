@@ -34,16 +34,19 @@
  */
 
 import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
+import PrivateRoomLogoUrl from "PUBLIC_DIR/images/icons/32/room/private.svg?url";
+import TemplateGalleryLogoUrl from "PUBLIC_DIR/images/icons/32/room/template-gallery.svg?url";
 
-import { RoomsType } from "../../enums";
+import { RoomsType, RoomsTypePrivate } from "../../enums";
 
-import { RoomLogo } from "@docspace/ui-kit/components/room-logo";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { RoomLogo } from "@onlyoffice/apps-ui-kit/components/room-logo";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import {
   getRoomTypeDescriptionTranslation,
@@ -63,16 +66,29 @@ const RoomType = ({
   disabledPublicRoom,
   isTemplate,
   isTemplateRoom,
+  isFormSection,
+  isTemplateGallery,
 }: RoomTypeProps) => {
   const { t } = useTranslation(["Common"]);
 
   const room = {
     type: roomType,
-    title: getRoomTypeTitleTranslation(t, roomType, isTemplate),
-    description: getRoomTypeDescriptionTranslation(t, roomType, isTemplate),
+    title: isTemplateGallery
+      ? t("Common:FromTemplateGallery")
+      : getRoomTypeTitleTranslation(t, roomType, isTemplate, isFormSection),
+    description: isTemplateGallery
+      ? t("Common:FromTemplateGalleryDescription")
+      : getRoomTypeDescriptionTranslation(
+          t,
+          roomType,
+          isTemplate,
+          isFormSection,
+        ),
   };
 
   const isFormRoom = roomType === RoomsType.FormRoom;
+  const isPrivateRoom =
+    roomType === RoomsTypePrivate && !isTemplate && !isTemplateRoom;
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   const disabled =
@@ -89,18 +105,30 @@ const RoomType = ({
   const content = (
     <>
       <div className="choose_room-logo_wrapper">
-        <RoomLogo
-          type={room.type}
-          isTemplate={isTemplate}
-          isTemplateRoom={isTemplateRoom}
-        />
+        {isTemplateGallery ? (
+          <ReactSVG
+            className="choose_room-private-logo"
+            src={TemplateGalleryLogoUrl}
+          />
+        ) : isPrivateRoom ? (
+          <ReactSVG
+            className="choose_room-private-logo"
+            src={PrivateRoomLogoUrl}
+          />
+        ) : (
+          <RoomLogo
+            type={room.type}
+            isTemplate={isTemplate}
+            isTemplateRoom={isTemplateRoom}
+          />
+        )}
       </div>
 
       <div className="choose_room-info_wrapper">
         <div className="choose_room-title">
-          <Text className="choose_room-title-text">{t(room.title)}</Text>
+          <Text className="choose_room-title-text">{room.title}</Text>
         </div>
-        <Text className="choose_room-description">{t(room.description)}</Text>
+        <Text className="choose_room-description">{room.description}</Text>
       </div>
 
       <IconButton
@@ -120,7 +148,7 @@ const RoomType = ({
         [styles.disabled]: disabled,
       })}
       id={id}
-      title={disabled ? "" : t(room.title)}
+      title={disabled ? "" : room.title}
       onClick={onClick}
       data-tooltip-id={disabled ? "create-room-tooltip" : undefined}
       data-testid="room-type-list-item"
@@ -132,7 +160,7 @@ const RoomType = ({
     <TooltipContainer
       as="div"
       id={id}
-      title={t(room.title)}
+      title={room.title}
       onClick={onClick}
       className={classNames(styles.roomType, styles.dropDownButton, {
         [styles.isOpen]: isOpen,
@@ -146,7 +174,7 @@ const RoomType = ({
     <TooltipContainer
       as="div"
       id={id}
-      title={t(room.title)}
+      title={room.title}
       onClick={onClick}
       data-selected-id={selectedId}
       className={classNames(styles.roomType, styles.dropDownItem, {
@@ -160,7 +188,7 @@ const RoomType = ({
     <TooltipContainer
       as="div"
       id={id}
-      title={t(room.title)}
+      title={room.title}
       data-selected-id={selectedId}
       className={classNames(styles.roomType, styles.displayItem, {
         [styles.isOpen]: isOpen,
@@ -172,3 +200,4 @@ const RoomType = ({
 };
 
 export default RoomType;
+

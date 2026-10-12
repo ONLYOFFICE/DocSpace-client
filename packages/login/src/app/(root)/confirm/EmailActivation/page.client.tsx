@@ -38,7 +38,7 @@
 import { useContext, useEffect, useState } from "react";
 
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
-import AppLoader from "@docspace/ui-kit/components/app-loader";
+import AppLoader from "@onlyoffice/apps-ui-kit/components/app-loader";
 import { updateActivationStatus } from "@docspace/shared/api/people";
 
 import { TError } from "@/types";

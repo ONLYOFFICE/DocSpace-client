@@ -36,61 +36,63 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
 import { PaymentsStandaloneLoader } from "../../../skeletons/payments";
+import {
+  DOCS_ENTERPRISE_PATH,
+  SUPPORT_CONTACT_PATH,
+  getUpgradeSiteUrl,
+} from "../../../dialogs/upgrade-path-dialog/UpgradePathDialog.constants";
+import { UpgradeNote } from "../common/UpgradeNote";
 
-import { BenefitsContainer } from "../common/BenefitsContainer";
-import { ContactContainer } from "../common/ContactContainer";
+import { EnterpriseFeatures } from "./sub-components/EnterpriseFeatures";
 import { OfficialDocumentation } from "./sub-components/OfficialDocumentation";
+import { HelpLinks } from "./sub-components/HelpLinks";
 
 import { IBonusProps } from "./Bonus.types";
 import styles from "./Bonus.module.scss";
 
 export const Bonus = ({
-  isEnterprise,
-  isTrial,
-  isDeveloper,
-  isCommunity,
   salesEmail,
-  dataBackupUrl,
   logoText,
   enterpriseInstallScriptUrl,
   enterpriseInstallWindowsUrl,
-  forEnterprisesUrl,
+  siteDomain,
   demoOrderUrl,
-  feedbackAndSupportUrl,
 }: IBonusProps) => {
   const { t, ready } = useTranslation("Common");
 
   if (!ready) return <PaymentsStandaloneLoader />;
 
+  const license = t("Common:EnterpriseLicense");
+
   return (
     <div data-testid="bonus" className={styles.bonus}>
-      <BenefitsContainer
-        isTrial={isTrial}
-        isEnterprise={isEnterprise}
-        isDeveloper={isDeveloper}
-      />
-      <Text fontWeight={600}>
-        {t("UpgradeToProBannerInstructionHeader", {
-          organizationName: logoText,
-          license: t("Common:EnterpriseLicense"),
+      <div className={styles.cards}>
+        <EnterpriseFeatures license={license} />
+        <OfficialDocumentation
+          organizationName={logoText}
+          license={license}
+          enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
+          enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
+        />
+      </div>
+
+      <UpgradeNote
+        title={t("Common:UpgradeBeforeYouUpgrade")}
+        text={t("Common:UpgradeNoteWithBackupRecommendation", {
+          note: t("Common:UpgradeEditorsUnavailableNote"),
+          backup: t("Common:UpgradeBackupRecommendation"),
         })}
-      </Text>
-      <Text>{t("UpgradeToProBannerInstructionDescr")}</Text>
-
-      <OfficialDocumentation
-        dataBackupUrl={dataBackupUrl}
-        enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
-        enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
+        dataTestId="bonus-upgrade-note"
       />
 
-      <ContactContainer
+      <HelpLinks
+        organizationName={logoText}
+        license={license}
         salesEmail={salesEmail}
-        isCommunity={isCommunity}
-        forEnterprisesUrl={forEnterprisesUrl}
+        docsEnterpriseUrl={getUpgradeSiteUrl(siteDomain, DOCS_ENTERPRISE_PATH)}
         demoOrderUrl={demoOrderUrl}
-        feedbackAndSupportUrl={feedbackAndSupportUrl}
+        supportUrl={getUpgradeSiteUrl(siteDomain, SUPPORT_CONTACT_PATH)}
       />
     </div>
   );

@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "POST pieprasījuma galvene ir veiksmīgi nokopēta starpliktuvē",
   "RequestPostBody": "POST pieprasījuma pamatteksts",
   "RequestPostHeader": "POST pieprasījuma galvene",
-  "ResetKey": "Atiestatīšanas atslēga",
   "Response": "Atbilde",
   "ResponseBodyCopied": "POST atbildes pamatteksts ir veiksmīgi nokopēts starpliktuvē",
   "ResponseHeaderCopied": "POST atbildes galvene ir veiksmīgi nokopēta starpliktuvē",

@@ -1,5 +1,5 @@
 {
-  "Desc": "Lütfen {{productName}} kayıt verilerini ayarlayın.",
+  "Desc": "Lütfen çalışma alanı kayıt verilerini ayarlayın.",
   "ErrorEmail": "Geçersiz e-posta adresi",
   "ErrorInstanceId": "Geçersiz örnek kimliği",
   "ErrorLicenseBody": "Lisans geçerli değil. Doğru dosyayı seçtiğinizden emin olun.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Lisans anlaşması",
   "PlaceholderLicense": "Lisans dosyanız",
   "Timezone": "Saat Dilimi:",
-  "WelcomeTitle": "{{productName}}’inize hoş geldiniz!"
+  "WelcomeTitle": "Çalışma alanınıza hoş geldiniz!"
 }

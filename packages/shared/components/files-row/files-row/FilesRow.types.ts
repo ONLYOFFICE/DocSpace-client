@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { RowProps } from "@docspace/ui-kit/components/rows/row/Row.types";
+import { RowProps } from "@onlyoffice/apps-ui-kit/components/rows/row/Row.types";
 
 export type FilesRowProps = RowProps & {
   isThirdPartyFolder?: boolean;

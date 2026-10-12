@@ -35,41 +35,31 @@
 
 "use client";
 
-import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
+import { LoaderWrapper } from "@onlyoffice/apps-ui-kit/components/loader-wrapper";
 import { Bonus } from "@docspace/shared/pages/Payments/Bonus";
 import { IBonusProps } from "@docspace/shared/pages/Payments/Bonus/Bonus.types";
 
 import { useEndAnimation } from "@/hooks/useEndAnimation";
 
 const BonusPage = ({
-  isEnterprise,
-  isTrial,
-  isDeveloper,
-  isCommunity,
-  feedbackAndSupportUrl,
+  siteDomain,
   salesEmail,
-  dataBackupUrl,
   logoText,
   enterpriseInstallScriptUrl,
   enterpriseInstallWindowsUrl,
+  demoOrderUrl,
 }: IBonusProps) => {
   const isLoading = useEndAnimation();
 
   return (
     <LoaderWrapper isLoading={isLoading}>
       <Bonus
-        isEnterprise={isEnterprise}
-        isTrial={isTrial}
-        isDeveloper={isDeveloper}
-        isCommunity={isCommunity}
-        feedbackAndSupportUrl={feedbackAndSupportUrl}
+        siteDomain={siteDomain}
         salesEmail={salesEmail}
-        dataBackupUrl={dataBackupUrl}
         logoText={logoText}
         enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
         enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
-        forEnterprisesUrl=""
-        demoOrderUrl=""
+        demoOrderUrl={demoOrderUrl}
       />
     </LoaderWrapper>
   );

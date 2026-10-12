@@ -280,10 +280,10 @@ export default inject(
       filesStore;
 
     const { isLoading } = clientLoadingStore;
-    const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isFormsFolder } = treeFoldersStore;
 
     const filesLength = filesList.length;
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
 
     const currentFolderId = selectedFolderStore.id;
 

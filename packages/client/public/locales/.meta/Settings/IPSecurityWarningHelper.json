@@ -1,14 +1,14 @@
 {
   "key_path": "IPSecurityWarningHelper",
-  "content": "First, you need to specify your current IP or the IP range your current IP address belongs to, otherwise your space access will be blocked right after you save the settings. The space owner will have the space access from any IP address.",
-  "content_en_sha1_hash": "25490f5125cf44c29790cae04b3c1e1a30e87500",
-  "created_at": "2025-05-19T21:30:51.742Z",
-  "updated_at": "2026-05-15T14:00:06.868Z",
+  "content": "First, you need to specify your current IP or the IP range your current IP address belongs to, otherwise your workspace access will be blocked right after you save the settings. The owner will have the workspace access from any IP address.",
+  "content_en_sha1_hash": "f079ee6cf4d94d57a5141eab2e17920579f6d6e1",
+  "created_at": "2026-08-13T14:37:16.121Z",
+  "updated_at": "2026-08-13T15:17:16.328Z",
   "comment": {
-    "text": "This is a warning message displayed to users when configuring IP security settings. It informs them that they must specify their IP address or range to avoid being locked out of their space, and clarifies that the space owner is exempt from this restriction.",
+    "text": "Instructional warning text in the IP security settings that cautions users about potential workspace lockout if they fail to include their current IP or range before saving changes.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:23:37.897Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:17:16.328Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

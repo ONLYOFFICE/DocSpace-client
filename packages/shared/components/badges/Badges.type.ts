@@ -34,7 +34,7 @@
  */
 
 import type { TTranslation, TViewAs } from "../../types";
-import type { TTheme } from "@docspace/ui-kit/providers/theme";
+import type { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme";
 import {
   FileFillingFormStatus,
   type RoomsType,
@@ -74,6 +74,7 @@ type ItemData = {
   isAIAgent?: boolean;
   startFilling?: boolean;
   isFillingPreparing?: boolean;
+  encrypted?: boolean;
 };
 
 export type BadgesProps = {

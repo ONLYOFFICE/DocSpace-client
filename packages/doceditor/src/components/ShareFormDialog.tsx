@@ -44,7 +44,7 @@ import { ShareFormDialog as ShareFormDialogComponent } from "@docspace/shared/di
 import { ShareSelector } from "@docspace/shared/components/share/selector";
 
 import type { TFile } from "@docspace/shared/api/files/types";
-import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { FilesSettingsDto } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import {
   FolderType,
   RoomsType,
@@ -53,14 +53,13 @@ import {
 
 import { addExternalLink, getExternalLinks } from "@docspace/shared/api/files";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Nullable, TResolver } from "@docspace/shared/types";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 import { StartFillingSelectorDialogProps } from "@/types";
 
 import StartFillingSelectorDialog from "./StartFillingSelectDialog";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type SubmitFn = StartFillingSelectorDialogProps["onSubmit"];
 
@@ -187,12 +186,8 @@ const ShareFormDialog = ({
     },
     {
       id: "share-with-users",
-      title: t("Common:ShareWithPortalUsers", {
-        productName: getBrandName("ProductName"),
-      }),
-      description: t("Common:ShareWithPortalUsersDescription", {
-        productName: getBrandName("ProductName"),
-      }),
+      title: t("Common:ShareWithPortalUsers"),
+      description: t("Common:ShareWithPortalUsersDescription"),
       buttonLabel: t("Common:Share"),
       onClick: shareFileToUsers,
       icon: <ShareFileToUsersIcon />,

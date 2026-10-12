@@ -36,13 +36,13 @@
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 
 import { DELETE_TAG_MODAL_ID } from "../TagManagement.constants";
 import styles from "../TagManagement.module.scss";
@@ -64,7 +64,7 @@ export const DeleteTagModal = ({
   // tagName,
   ref,
 }: DeleteTagModalProps) => {
-  const { t } = useTranslation(["ConvertDialog", "TagManagement", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const onChangeCheckbox = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,17 +82,17 @@ export const DeleteTagModal = ({
       id={DELETE_TAG_MODAL_ID}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("TagManagement:DeleteTag")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:DeleteTag")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text className={styles.deleteTagModalText}>
-          {t("TagManagement:DeleteTagConfirmation")}
+          {t("Common:DeleteTagConfirmation")}
         </Text>
         <Text className={styles.deleteTagModalText}>
-          {t("TagManagement:DeleteTagCannotBeUndone")}
+          {t("Common:DeleteTagCannotBeUndone")}
         </Text>
         <Checkbox
           key="dont-show-again"
-          label={t("ConvertDialog:HideMessage")}
+          label={t("Common:HideMessage")}
           isChecked={isChecked}
           onChange={onChangeCheckbox}
           dataTestId="delete_tag_checkbox"

@@ -52,23 +52,23 @@ export const KnowledgeLoader = () => {
         height="19px"
       />
       <div className={styles.knowledgeForm}>
-        <div className={generalStyles.fieldContainer}>
+        <div className={styles.fieldContainer}>
           <RectangleSkeleton width="119px" height="20px" />
           <RectangleSkeleton width="340px" height="32px" />
         </div>
-        <div className={generalStyles.fieldContainer}>
+        <div className={styles.fieldContainer}>
           <RectangleSkeleton width="48px" height="32px" />
           <RectangleSkeleton width="340px" height="32px" />
         </div>
       </div>
       <div className={styles.buttonContainer}>
         <RectangleSkeleton
-          className={styles.addProviderButton}
+          className={generalStyles.addProviderButton}
           width="128px"
           height="32px"
         />
         <RectangleSkeleton
-          className={styles.learnMoreLink}
+          className={generalStyles.learnMoreLink}
           width="322px"
           height="32px"
         />

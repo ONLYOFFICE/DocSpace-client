@@ -1,0 +1,18 @@
+{
+  "DashboardApps": "저장소부터 협업, 데이터 수집, 자동화, AI까지 — 각 앱은 서로 다른 업무를 위해 만들어졌습니다. 어느 것이든 열어 보시면 해당 섹션에 대한 짧은 투어가 시작됩니다.",
+  "DashboardAppsTitle": "앱 둘러보기",
+  "DashboardCreate": "텍스트 문서, 스프레드시트, 프레젠테이션, PDF 양식 중에서 선택하거나 AI 채팅을 시작하세요. 새 문서는 {{files}}에 저장되어 필요할 때 언제든지 찾을 수 있습니다.",
+  "DashboardCreateTitle": "만들기 시작하기",
+  "DashboardDevTools": "여기는 개발자 허브입니다: API, SDK, 플러그인, 웹훅 등. 카드를 클릭하면 자세히 알아보거나 바로 시작할 수 있습니다.",
+  "DashboardDevToolsTitle": "{{organizationName}} 기반으로 개발하기",
+  "DashboardIntegrations": "이미 다른 플랫폼을 사용하고 계신가요? 연결하면 편집기와 앱을 팀이 이미 사용 중인 도구 안으로 그대로 가져올 수 있습니다. 별도의 코드도, 데이터 이전도 필요 없습니다.",
+  "DashboardIntegrationsTitle": "플랫폼 연결하기",
+  "DashboardOverview": "이 페이지는 언제나 클릭 한 번이면 열립니다. 다시 돌아오고 싶을 때는 사이드바에서 {{overview}}를 여세요.",
+  "DashboardOverviewTitle": "언제든지 돌아오기",
+  "DashboardProfile": "워크스페이스 이름과 프로필 요약 정보입니다: 이름, 이메일, 비밀번호. 여기에서 언제든지 워크스페이스 이름을 변경하거나 비밀번호를 업데이트할 수 있습니다. 다른 설정을 변경하려면 프로필 페이지로 이동하세요.",
+  "DashboardProfileTitle": "프로필 정보 확인하기",
+  "WelcomeDashboardSubtitle": "모든 것은 이 페이지에서 시작됩니다",
+  "WelcomeDashboardTitle": "{{organizationName}}에 오신 것을 환영합니다",
+  "WelcomeDescription": "문서를 만들고, 방에서 협업하고, 양식으로 데이터를 모으고, 귀찮은 일은 AI에 맡기세요 — 이 모든 것을 한곳에서 할 수 있습니다. 간단한 투어를 시작할까요?",
+  "WelcomeLater": "나중에 하기"
+}

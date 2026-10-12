@@ -1,0 +1,29 @@
+{
+  "key_path": "TokensFromCache",
+  "content": "From cache",
+  "content_en_sha1_hash": "6e6da2f3a69148b1b2117289776d5da8f84d9556",
+  "created_at": "2026-10-01T08:23:10.331Z",
+  "updated_at": "2026-10-01T08:25:57.120Z",
+  "comment": {
+    "text": "A label in the token usage breakdown within the transaction history, indicating the portion of tokens used from the cache.",
+    "is_auto": true,
+    "updated_at": "2026-10-01T08:25:57.120Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/transaction-history/sub-components/TokenUsage/sub-components/TokenUsageContent.tsx",
+      "line_number": 115,
+      "context": "))}\n </div>\n <div className={styles.lines}>\n <UsageLine\n segment=\"fromCache\"\n label={t(\"TokensFromCache\")}\n value={fromCache}\n />\n <UsageLine\n segment=\"notFromCache\"\n label={t(\"TokensNotFromCache\")}",
+      "module": "@onlyoffice/apps-ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

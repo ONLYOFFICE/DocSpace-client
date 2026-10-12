@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndoneGuests": "Izbrani onemogočeni gostje bodo odstranjeni iz {{productName}}. Tega dejanja ni mogoče razveljaviti.",
-  "ActionCannotBeUndoneUsers": "Izbrani onemogočeni uporabniki bodo odstranjeni iz {{productName}}. Tega dejanja ni mogoče razveljaviti.",
+  "ActionCannotBeUndoneGuests": "Izbrani onemogočeni gostje bodo odstranjeni iz delovnega prostora. Tega dejanja ni mogoče razveljaviti.",
+  "ActionCannotBeUndoneUsers": "Izbrani onemogočeni uporabniki bodo odstranjeni iz delovnega prostora. Tega dejanja ni mogoče razveljaviti.",
   "CannotReassignFiles": "Če izbrišete več uporabnikov hkrati, ne morete dodeliti njihovih datotek drugim uporabnikom.",
   "DeleteGroupGuestsSuccessMessage": "Gostje so bili uspešno izbrisani.",
   "DeleteGroupUsersSuccessMessage": "Uporabniki so bili uspešno izbrisani.",
@@ -12,7 +12,7 @@
   "DeleteUser": "Izbriši uporabnika",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> bo izbrisan. Tega dejanja ni mogoče razveljaviti.",
   "DeletingUsers": "Brisanje uporabnikov",
-  "PersonalDataDeletionInfo": "Osebni podatki, vse osebne datoteke in mape v oddelkih {{sectionNameFirst}} in {{sectionNameSecond}}* izbranih uporabnikov bodo trajno izbrisane. Datoteke in mape izbranih uporabnikov v skupnih oddelkih* (kot so sobe) bodo ostale v {{productName}}.",
+  "PersonalDataDeletionInfo": "Osebni podatki, vse osebne datoteke in mape v oddelkih {{sectionNameFirst}} in {{sectionNameSecond}}* izbranih uporabnikov bodo trajno izbrisane. Datoteke in mape izbranih uporabnikov v skupnih oddelkih* (kot so sobe) bodo ostale v delovnem prostoru.",
   "PleaseNote": "Prosimo, upoštevajte:",
   "ReassignDataToAnotherUser": "Ponovno dodelite podatke drugemu uporabniku",
   "SuccessfullyDeleteGuestInfoMessage": "Gost je bil uspešno izbrisan",

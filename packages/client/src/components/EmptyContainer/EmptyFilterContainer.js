@@ -64,14 +64,20 @@ const EmptyFilterContainer = ({
   isArchiveFolder,
   isRoomsFolder,
   isAIAgentsFolder,
+  isFormsFolder,
+  isTemplatesFolder,
   isRecentFolder,
   setClearSearch,
+  clientSearchActive,
+  clearClientSearch,
   theme,
   isPublicRoom,
   publicRoomKey,
   userId,
   isInsideKnowledge,
   isInsideResultStorage,
+  folderType,
+  roomsFilterSearchArea,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -114,18 +120,37 @@ const EmptyFilterContainer = ({
 
     setIsLoading(true);
 
+    // Client-side search (private rooms) lives outside FilesFilter and must
+    // be dropped explicitly.
+    if (clientSearchActive) {
+      clearClientSearch();
+      setClearSearch(true);
+    }
+
     if (isArchiveFolder) {
       setClearSearch(true);
       return;
     }
-    if (isRoomsFolder || isAIAgentsFolder) {
+    if (
+      isRoomsFolder ||
+      isAIAgentsFolder ||
+      isFormsFolder ||
+      isTemplatesFolder
+    ) {
       const newFilter = RoomsFilter.clean();
+      newFilter.searchArea = roomsFilterSearchArea;
 
       navigate(`${location.pathname}?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = FilesFilter.getDefault({ isRecentFolder });
 
       newFilter.folder = selectedFolderId;
+
+      // Preserve the section scope (Recent/Favorites/Trash are aggregate
+      // roots scoped to a set of FolderTypes). Without this, clearing the
+      // filter drops the scope and leaks entries from other sections
+      // (e.g. room files showing up under Favorites).
+      newFilter.folderType = folderType;
 
       if (isInsideResultStorage) {
         newFilter.searchArea = SearchArea.ResultStorage;
@@ -177,10 +202,17 @@ export default inject(
     publicRoomStore,
     userStore,
   }) => {
-    const { isRoomsFolder, isArchiveFolder, isRecentFolder, isAIAgentsFolder } =
-      treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isRecentFolder,
+      isAIAgentsFolder,
+      isFormsFolder,
+      isTemplatesFolder,
+    } = treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms =
+      isRoomsFolder || isArchiveFolder || isFormsFolder || isTemplatesFolder;
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
     const { user } = userStore;
 
@@ -191,12 +223,18 @@ export default inject(
       isArchiveFolder,
       isAIAgentsFolder,
       isRoomsFolder,
+      isFormsFolder,
+      isTemplatesFolder,
       isRecentFolder,
       setClearSearch: filesStore.setClearSearch,
+      clientSearchActive: !!filesStore.clientSearchQuery,
+      clearClientSearch: filesStore.clearClientSearch,
       theme: settingsStore.theme,
       userId: user?.id,
       isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
       isInsideResultStorage: selectedFolderStore.isInsideResultStorage,
+      folderType: filesStore.filter.folderType,
+      roomsFilterSearchArea: filesStore.roomsFilter.searchArea,
 
       isPublicRoom,
       publicRoomKey,

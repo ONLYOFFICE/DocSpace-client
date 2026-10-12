@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/ChangePricingPlanDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/ChangePricingPlanDialog.tsx",
       "line_number": 120,
       "context": "{planUsersLimitations}\n <br />\n {storagePlanLimitations}\n \n <Text fontSize=\"13px\" className={styles.saveOrChange}>\n {t(\"SaveOrChange\")}\n </Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

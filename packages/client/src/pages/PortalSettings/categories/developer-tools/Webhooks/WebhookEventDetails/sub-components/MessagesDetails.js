@@ -34,22 +34,14 @@
  */
 
 import React, { useState } from "react";
-import styled from "styled-components";
-import { Tabs } from "@docspace/ui-kit/components/tabs";
+import { Tabs } from "@onlyoffice/apps-ui-kit/components/tabs";
 
 import { useTranslation } from "react-i18next";
-import { isMobile } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 import ResponseDetails from "./ResponseDetails";
 import RequestDetails from "./RequestDetails";
 
-const TabsWrapper = styled.div`
-  .sticky {
-    z-index: 3;
-
-    top: ${isMobile() ? "68px" : "0px"};
-  }
-`;
+import styles from "../WebhookEventDetails.styled.module.scss";
 
 const MessagesDetails = ({ eventDetails }) => {
   const { t } = useTranslation(["Webhooks"]);
@@ -72,13 +64,13 @@ const MessagesDetails = ({ eventDetails }) => {
   const [selectedItemId, setSelectedItemId] = useState(menuData[0].id);
 
   return (
-    <TabsWrapper>
+    <div className={styles.tabsWrapper}>
       <Tabs
         items={menuData}
         selectedItemId={selectedItemId}
         onSelect={(e) => setSelectedItemId(e.id)}
       />
-    </TabsWrapper>
+    </div>
   );
 };
 

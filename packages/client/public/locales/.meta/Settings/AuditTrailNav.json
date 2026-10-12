@@ -3,7 +3,7 @@
   "content": "Audit Trail",
   "content_en_sha1_hash": "e01eacc119b7bc154d3fc47e8d5dca2a54b1af3f",
   "created_at": "2025-05-19T21:30:50.600Z",
-  "updated_at": "2026-06-02T08:43:27.534Z",
+  "updated_at": "2026-08-14T14:58:32.835Z",
   "comment": {
     "text": "This is a navigation item and page title for the \"Audit Trail\" section within the portal settings, where users can view a log of actions.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 66,
-      "context": "isLoadingDownloadReport,\n resetIsInit,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(t(\"AuditTrailNav\"));\n \n return () => resetIsInit();\n }, []);\n \n const getContent = () => {",
+      "line_number": 69,
+      "context": "} = props;\n \n useReportPageLeft(ReportType.AuditTrail);\n \n useEffect(() => {\n setDocumentTitle(t(\"AuditTrailNav\"));\n \n return () => resetIsInit();\n }, []);\n \n const getContent = () => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/index.js",
-      "line_number": 106,
+      "line_number": 105,
       "context": "await getLoginHistoryData();\n },\n },\n {\n id: \"audit-trail\",\n name: t(\"AuditTrailNav\"),\n content: <AuditTrail />,\n onClick: async () => {\n clearAbortControllerArr();\n await getAuditTrailData();\n },",
       "module": "/packages/client"
     },

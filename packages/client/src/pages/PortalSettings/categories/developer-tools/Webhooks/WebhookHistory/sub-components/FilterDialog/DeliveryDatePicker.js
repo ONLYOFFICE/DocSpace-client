@@ -34,61 +34,20 @@
  */
 
 import React, { useState, useEffect, useRef } from "react";
-import styled, { css } from "styled-components";
-import { now, formatDate } from "@docspace/ui-kit/utils/date";
+import { now, formatDate } from "@onlyoffice/apps-ui-kit/utils/date";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { useTranslation } from "react-i18next";
-import { DatePicker } from "@docspace/ui-kit/components/date-picker";
-import { Calendar } from "@docspace/ui-kit/components/calendar";
-import { TimePicker } from "@docspace/ui-kit/components/time-picker";
-import { AddButton } from "@docspace/ui-kit/components/add-button";
-import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
+import { DatePicker } from "@onlyoffice/apps-ui-kit/components/date-picker";
+import { Calendar } from "@onlyoffice/apps-ui-kit/components/calendar";
+import { TimePicker } from "@onlyoffice/apps-ui-kit/components/time-picker";
+import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
+import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
 
 import { isMobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
-const Selectors = styled.div`
-  position: relative;
-  margin-top: 8px;
-  margin-bottom: 16px;
-  padding-bottom: 16px;
-  border-bottom: ${(props) => `1px solid ${props.theme.infoPanel.borderColor}`};
-  height: 32px;
-  display: flex;
-  align-items: center;
-
-  .mr-8 {
-    margin-inline-end: 8px;
-  }
-
-  .selectedItem {
-    margin-bottom: 0;
-  }
-`;
-
-const TimePickerCell = styled.span`
-  margin-inline-start: 8px;
-  display: inline-flex;
-  align-items: center;
-
-  .timePickerItem {
-    display: inline-flex;
-    align-items: center;
-    margin-inline-end: 16px;
-  }
-`;
-
-const StyledCalendar = styled(Calendar)`
-  position: absolute;
-  ${(props) =>
-    props.isMobile &&
-    css`
-      position: fixed;
-      bottom: 0;
-      inset-inline-start: 0;
-    `}
-`;
+import styles from "../../WebhookHistory.styled.module.scss";
 
 const CalendarElement = ({
   filters,
@@ -97,13 +56,14 @@ const CalendarElement = ({
   calendarRef,
   i18n,
 }) => (
-  <StyledCalendar
+  <Calendar
     selectedDate={filters.deliveryDate}
     setSelectedDate={onDateSet}
     onChange={closeCalendar}
     isMobile={isMobile()}
     forwardedRef={calendarRef}
     locale={i18n.language}
+    className={isMobile() ? styles.calendarMobile : styles.calendarDesktop}
   />
 );
 
@@ -245,7 +205,7 @@ const DeliveryDatePicker = ({
       <Text fontWeight={600} fontSize="15px">
         {t("DeliveryDate")}
       </Text>
-      <Selectors ref={selectorRef}>
+      <div className={styles.deliverySelectors} ref={selectorRef}>
         {filters.deliveryDate ? (
           <SelectedDateTime
             isTimeEqual={isTimeEqual}
@@ -271,7 +231,7 @@ const DeliveryDatePicker = ({
         )}
         {filters.deliveryDate !== null && isDefaultTime ? (
           isTimeOpen && !isApplied ? (
-            <TimePickerCell>
+            <span className={styles.timePickerCell}>
               <span className="timePickerItem">
                 <Text
                   isInline
@@ -310,19 +270,19 @@ const DeliveryDatePicker = ({
                 initialTime={filters.deliveryTo}
                 dataTestId="delivery_time_picker_to"
               />
-            </TimePickerCell>
+            </span>
           ) : (
-            <TimePickerCell>
+            <span className={styles.timePickerCell}>
               <AddButton
                 title={t("Common:AddButton")}
                 onClick={showTimePicker}
                 className="mr-8 add-delivery-time-button"
                 label={t("SelectDeliveryTime")}
               />
-            </TimePickerCell>
+            </span>
           )
         ) : null}
-      </Selectors>
+      </div>
     </>
   );
 };

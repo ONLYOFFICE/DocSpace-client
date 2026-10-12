@@ -36,7 +36,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useEventLog } from "../sub-components/useEventLog";
 import { withTranslation } from "react-i18next";
-import { Label } from "@docspace/ui-kit/components/label";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { inject, observer } from "mobx-react";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
@@ -54,7 +54,6 @@ import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
-import Integration from "../sub-components/Integration";
 import { VersionSelector } from "../sub-components/VersionSelector";
 
 import {
@@ -282,7 +281,7 @@ const Editor = (props) => {
             />
 
             {/* <InterfaceElements>
-            <Label className="label">{t("InterfaceElements")}</Label>
+            <Label className="label">{t("Common:InterfaceElements")}</Label>
             <Checkbox
               className="checkbox"
               label={t("RightPanelCollapsed")}
@@ -314,12 +313,8 @@ const Editor = (props) => {
             </FilesSelectorInputWrapper>
           </ControlsGroup> */}
           </ControlsSection>
-
-          <Integration className="integration-examples" />
         </Controls>
       </Container>
-
-      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };
@@ -331,7 +326,7 @@ export const Component = inject(({ settingsStore }) => {
     theme,
   };
 })(
-  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(
+  withTranslation(["JavascriptSdk", "Files", "Common"])(
     observer(Editor),
   ),
 );

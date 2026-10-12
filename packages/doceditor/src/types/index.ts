@@ -41,15 +41,16 @@ import {
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
+import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
-import { HeaderProps, TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import { HeaderProps, TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type {
   TSelectedFileInfo,
   FilesSettingsDto,
   FolderDtoInteger,
   SdkFolderType,
   FileEntryDtoIntegerAllOfSecurity,
-} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+} from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
@@ -58,7 +59,7 @@ import type {
 } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
-import type { RoomsType } from "@docspace/ui-kit/enums";
+import type { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 
 export type TGoBack = {
   requestClose: boolean;
@@ -78,14 +79,10 @@ export type SdkSearchParams = {
   locale?: string | null | undefined;
   theme?: string | undefined;
   editorGoBack?: boolean | "event";
+  returnUrl?: string;
   withoutGoBackText?: boolean;
   is_file?: boolean;
   isSDK?: boolean;
-};
-
-export type TGenerationToolCallState = {
-  toolName: string;
-  parameters: Record<string, string>;
 };
 
 export type RootPageProps = {
@@ -99,7 +96,6 @@ export type RootPageProps = {
       share: string;
       editorType: string;
       error?: string;
-      withTool?: string;
     }> &
       SdkSearchParams
   >;
@@ -210,7 +206,7 @@ export type TEditorConfig = {
   recent: [];
   templates: [];
   user: { id: string; name: string };
-  encryptionKeys?: { [key: string]: string | boolean };
+  encryptionKeys?: TEncryptionKeyPair[];
 };
 
 export interface IInitialConfig {
@@ -254,8 +250,6 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
-
-      generationToolCallState?: TGenerationToolCallState;
     }
   | {
       error: TError;
@@ -271,8 +265,6 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
-
-      generationToolCallState?: TGenerationToolCallState;
     };
 
 export type EditorProps = {
@@ -289,8 +281,6 @@ export type EditorProps = {
   filesSettings?: TFilesSettings;
   organizationName?: string;
   shareKey?: string;
-
-  generationToolCallState?: TGenerationToolCallState;
 
   onDownloadAs?: (obj: object) => void;
   openShareFormDialog?: () => void;
@@ -363,6 +353,7 @@ export interface SelectFolderDialogProps {
   filesSettings: FilesSettingsDto;
   fileSaveAsExtension?: string;
   selectedFolderId?: string | number;
+  disabledCreatePublicRoom?: boolean;
 }
 
 export interface SelectFileDialogProps {
@@ -427,7 +418,6 @@ export interface UseEventsProps {
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
   shareKey?: string;
-  generationToolCallState?: TGenerationToolCallState;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   openShareFormDialog?: VoidFunction;
   onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
@@ -444,7 +434,6 @@ export interface UseInitProps {
   setDocTitle: (value: string) => void;
   documentReady: boolean;
   organizationName: string;
-  generationToolCallState?: TGenerationToolCallState;
 }
 
 export type THistoryData =

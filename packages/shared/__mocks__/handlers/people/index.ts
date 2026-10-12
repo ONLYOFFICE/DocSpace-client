@@ -46,6 +46,7 @@ import {
   selfByTypeHandler,
   selfHandlerWithCulture,
   userExistsHandler,
+  usersByType,
 } from "./self";
 export type { UserType } from "./self";
 import { thirdPartyProvidersHandler } from "./thirdPartyProviders";
@@ -73,6 +74,7 @@ export {
   themeProviderHandler,
   userPhotoHandler,
   userExistsHandler,
+  usersByType,
 };
 
 export const peopleHandlers = (port: string) => [

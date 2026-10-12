@@ -1,21 +1,21 @@
 {
   "key_path": "TopUpCreditsChargeHint",
-  "content": "The entered amount will be charged after you attach your payment method",
-  "content_en_sha1_hash": "d9994e0b1091d2aa899dbeb572a897d4e4f3fb29",
-  "created_at": "2026-05-27T14:11:43.015Z",
-  "updated_at": "2026-06-02T15:03:00.439Z",
+  "content": "The entered amount will be charged after you add your payment method",
+  "content_en_sha1_hash": "5cd8953206cd9dfe79a2aac6950c76e6cde663a1",
+  "created_at": "2026-08-31T18:23:34.384Z",
+  "updated_at": "2026-09-10T16:17:50.384Z",
   "comment": {
-    "text": "Helper text in the First Top Up dialog explaining when the transaction will be processed.",
+    "text": "Helper text in a top-up modal dialog that informs the user when the transaction will be processed.",
     "is_auto": true,
-    "updated_at": "2026-05-27T14:14:08.549Z",
+    "updated_at": "2026-08-31T18:35:08.791Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/FirstTopUpDialog.tsx",
-      "line_number": 211,
-      "context": "minValue={MIN_AMOUNT}\n withoutCustomerCheck\n />\n \n <Text fontSize=\"12px\" className={styles.helperText}>\n {t(\"TopUpCreditsChargeHint\")}\n </Text>\n </div>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>",
-      "module": "/libs/ui-kit"
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
+      "line_number": 277,
+      "context": "/>\n \n <Text fontSize=\"12px\" className={styles.helperText}>\n {helperText ??\n (isStripeFlow\n ? t(\"TopUpCreditsChargeHint\")\n : t(\"TopUpTakeSomeTimeToComplete\"))}\n </Text>\n </div>\n </ModalDialog.Body>",
+      "module": "@onlyoffice/apps-ui-kit"
     }
   ],
   "languages": {

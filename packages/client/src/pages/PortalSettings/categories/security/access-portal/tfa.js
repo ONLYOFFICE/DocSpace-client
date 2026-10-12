@@ -37,10 +37,10 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { size, isMobileDevice } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -53,7 +53,6 @@ import { LearnMoreWrapper } from "../StyledSecurity";
 import useSecurity from "../useSecurity";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 import styles from "./tfa.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const TFA_HASH = "#tfa-section";
 const SCROLL_MARGIN_TOP =
@@ -245,9 +244,7 @@ const TwoFactorAuth = (props) => {
     <div id="tfa-section" ref={targetRef} className={styles.container}>
       <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
-          {t("TwoFactorAuthEnableDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("TwoFactorAuthEnableDescription")}
         </Text>
         {tfaSettingsUrl ? (
           <Link

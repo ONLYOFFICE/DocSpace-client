@@ -33,38 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled, { css } from "styled-components";
+import classNames from "classnames";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { TableCell } from "@docspace/ui-kit/components/table";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { TableCell } from "@onlyoffice/apps-ui-kit/components/table";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 
-const StyledContainer = styled.div`
-  .table-container_row-checkbox {
-    margin-inline-start: -8px;
-
-    width: 16px;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 16px 16px 16px 8px;
-          `
-        : css`
-            padding: 16px 8px 16px 16px;
-          `}
-  }
-`;
-
-const StyledImage = styled.img`
-  width: 32px;
-  height: 32px;
-
-  border-radius: 3px;
-
-  object-fit: cover;
-`;
+import styles from "../TableView.styled.module.scss";
 
 interface NameCellProps {
   name: string;
@@ -102,9 +78,16 @@ const NameCell = ({
           hasAccess
           checked={isChecked}
         >
-          <StyledContainer className="table-container_element-container">
+          <div
+            className={classNames(
+              "table-container_element-container",
+              styles.nameContainer,
+            )}
+          >
             <div className="table-container_element">
-              {icon ? <StyledImage src={icon} alt="App icon" /> : null}
+              {icon ? (
+                <img className={styles.nameImage} src={icon} alt="App icon" />
+              ) : null}
             </div>
             <Checkbox
               className="table-container_row-checkbox"
@@ -113,11 +96,11 @@ const NameCell = ({
               title={name}
               dataTestId={`${name}_checkbox`}
             />
-          </StyledContainer>
+          </div>
         </TableCell>
       )}
 
-      <Text title={name} fontWeight="600" fontSize="13px">
+      <Text title={name} fontWeight="600" fontSize="13px" truncate>
         {name}
       </Text>
     </>

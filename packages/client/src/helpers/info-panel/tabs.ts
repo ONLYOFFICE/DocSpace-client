@@ -34,7 +34,10 @@
  */
 
 import { FolderType } from "@docspace/shared/enums";
-import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
+import {
+  isFile as isFileUtil,
+  isRoom as isRoomUtil,
+} from "@docspace/shared/utils/typeGuards";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
@@ -43,12 +46,7 @@ import type { InfoPanelViewType } from "SRC_DIR/store/InfoPanelStore";
 
 import { InfoPanelView } from "./index";
 
-type TSelection =
-  | TRoom
-  | TFolder
-  | TFile
-  | null
-  | (TRoom | TFolder | TFile)[];
+type TSelection = TRoom | TFolder | TFile | null | (TRoom | TFolder | TFile)[];
 
 type TPluginItem = {
   key: string;
@@ -62,7 +60,9 @@ type TPluginItem = {
 export type TGetAvailableInfoPanelTabsParams = {
   selection: TSelection;
   isTrash: boolean;
-  isRecentFolder: boolean;
+  // `undefined` is allowed because TreeFoldersStore.isRecentFolder is
+  // `boolean | undefined`; the flag is only used for truthiness checks.
+  isRecentFolder: boolean | undefined;
   enablePlugins: boolean;
   infoPanelItemsList: TPluginItem[];
 };
@@ -128,12 +128,17 @@ export function getAvailableInfoPanelTabs({
 
   const tabs: InfoPanelViewType[] = [];
 
+  const isPrivateItem =
+    ("private" in selection && selection.private === true) ||
+    ("encrypted" in selection && selection.encrypted === true);
+
   if (useRoomsView) {
     tabs.push(InfoPanelView.infoMembers);
   } else if (
     "canShare" in selection &&
     selection.canShare &&
-    !isRoomUtil(selection)
+    !isRoomUtil(selection) &&
+    !isPrivateItem
   ) {
     tabs.push(InfoPanelView.infoShare);
   }
@@ -141,8 +146,25 @@ export function getAvailableInfoPanelTabs({
   tabs.push(InfoPanelView.infoHistory, InfoPanelView.infoDetails);
 
   if (!isAIAgentsSection && enablePlugins && infoPanelItemsList.length > 0) {
-    const hasRoomType = "roomType" in selection && !!selection.roomType;
+    const isRoomSelection = isRoomUtil(selection);
+    const isFileSelection = isFileUtil(selection);
+
     const fileExst = "fileExst" in selection ? (selection.fileExst ?? "") : "";
+
+    const viewAccessibility =
+      isFileSelection && "viewAccessibility" in selection
+        ? selection.viewAccessibility
+        : null;
+
+    const isImage =
+      !!viewAccessibility &&
+      !viewAccessibility.MediaView &&
+      viewAccessibility.ImageView;
+
+    const isVideo =
+      !!viewAccessibility &&
+      viewAccessibility.MediaView &&
+      !viewAccessibility.ImageView;
 
     for (const item of infoPanelItemsList) {
       if (!item.value.filesType) {
@@ -150,12 +172,27 @@ export function getAvailableInfoPanelTabs({
         continue;
       }
 
-      if (hasRoomType && item.value.filesType.includes(PluginFileType.room)) {
+      if (isRoomSelection) {
+        if (item.value.filesType.includes(PluginFileType.room)) {
+          tabs.push(`info_plugin-${item.key}`);
+        }
+        continue;
+      }
+
+      if (isImage && item.value.filesType.includes(PluginFileType.image)) {
         tabs.push(`info_plugin-${item.key}`);
         continue;
       }
 
-      if (fileExst && item.value.filesType.includes(PluginFileType.file)) {
+      if (isVideo && item.value.filesType.includes(PluginFileType.video)) {
+        tabs.push(`info_plugin-${item.key}`);
+        continue;
+      }
+
+      if (
+        isFileSelection &&
+        item.value.filesType.includes(PluginFileType.file)
+      ) {
         if (
           item.value.filesExsts &&
           !item.value.filesExsts.includes(fileExst)
@@ -166,7 +203,10 @@ export function getAvailableInfoPanelTabs({
         continue;
       }
 
-      if (item.value.filesType.includes(PluginFileType.folder)) {
+      if (
+        !isFileSelection &&
+        item.value.filesType.includes(PluginFileType.folder)
+      ) {
         tabs.push(`info_plugin-${item.key}`);
       }
     }

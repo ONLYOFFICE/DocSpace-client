@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback } from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -41,114 +41,47 @@ import ViewChangeReactUrl from "PUBLIC_DIR/images/view-change.react.svg?url";
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import CategoryFilter from "./CategoryFilter";
-import LanguageFilter from "./LanguageFilter";
+import FilterPanel from "./FilterPanel";
 import SearchFilter from "./SearchFilter";
-import SortFilter from "./SortFilter";
+import SelectedFilters from "./SelectedFilters";
 import { useMobileDetection } from "../hooks/useMobileDetection";
 import styles from "./Filter.module.scss";
 import { FilterContentProps } from "./Filter.types";
 
-const FilterContent: FC<FilterContentProps> = (props) => {
-  const {
-    setShowOneTile,
-    isShowOneTile,
-    isShowInitSkeleton,
-
-    oformsFilter,
-    noLocales,
-    fetchCategoryTypes,
-    fetchCategoriesOfCategoryType,
-    setCategoryFilterLoaded,
-    categoryFilterLoaded,
-
-    filterOformsByLocaleIsLoading,
-    setFilterOformsByLocaleIsLoading,
-    setLanguageFilterLoaded,
-    languageFilterLoaded,
-    oformsLocal,
-    oformLocales,
-    filterOformsByLocale,
-    filterOformsBySearch,
-    sortOforms,
-  } = props;
-
+const FilterContent: FC<FilterContentProps> = ({
+  setShowOneTile,
+  isShowOneTile,
+  isShowInitSkeleton,
+  oformsFilter,
+  filterOformsBySearch,
+  filterOformsByLocaleIsLoading,
+  categoryFilterLoaded,
+  languageFilterLoaded,
+  onSelectedFiltersHeightChange,
+}) => {
   const isMobileView = useMobileDetection();
-  const [isLanguageFilterChange, setIsLanguageFilterChange] = useState(false);
 
   const handleViewToggle = useCallback(() => {
     setShowOneTile(!isShowOneTile);
   }, [setShowOneTile, isShowOneTile]);
 
-  const categoryFilterProps = {
-    oformsFilter,
-    noLocales,
-    fetchCategoryTypes,
-    fetchCategoriesOfCategoryType,
-    filterOformsByLocaleIsLoading,
-    setFilterOformsByLocaleIsLoading,
-    setCategoryFilterLoaded,
-    categoryFilterLoaded,
-    languageFilterLoaded,
-    isShowInitSkeleton,
-    viewMobile: isMobileView,
-    isLanguageFilterChange,
-  };
-
-  const languageFilterProps = {
-    filterOformsByLocaleIsLoading,
-    setLanguageFilterLoaded,
-    isShowInitSkeleton,
-    oformLocales,
-    filterOformsByLocale,
-    categoryFilterLoaded,
-    languageFilterLoaded,
-    oformsLocal,
-    viewMobile: isMobileView,
-    isLanguageFilterChange,
-    setIsLanguageFilterChange,
-  };
-
-  const searchFilterProps = {
-    filterOformsByLocaleIsLoading,
-    categoryFilterLoaded,
-    languageFilterLoaded,
-    isShowInitSkeleton,
-    oformsFilter,
-    filterOformsBySearch,
-    isLanguageFilterChange,
-  };
-
-  const sortFilterProps = {
-    filterOformsByLocaleIsLoading,
-    categoryFilterLoaded,
-    languageFilterLoaded,
-    isShowInitSkeleton,
-    oformsFilter,
-    sortOforms,
-    isLanguageFilterChange,
-  };
+  const isLoading =
+    isShowInitSkeleton || !(categoryFilterLoaded && languageFilterLoaded);
 
   const renderViewToggleButton = () => {
     if (!isMobileView) return null;
 
-    if (
-      (isShowInitSkeleton ||
-        filterOformsByLocaleIsLoading ||
-        !(categoryFilterLoaded && languageFilterLoaded)) &&
-      !isLanguageFilterChange
-    )
-      return <RectangleSkeleton height="32px" width="32px" />;
+    if (isLoading) return <RectangleSkeleton height="32px" width="32px" />;
 
     return (
       <div
         className={classNames(styles.viewButton, {
-          [styles.isDisabled]: isLanguageFilterChange,
+          [styles.isDisabled]: filterOformsByLocaleIsLoading,
         })}
         onClick={handleViewToggle}
       >
         <ReactSVG
-          src={isShowOneTile ? ViewTilesReactSvg : ViewChangeReactUrl}
+          src={isShowOneTile ? ViewChangeReactUrl : ViewTilesReactSvg}
           className={styles.iconView}
         />
       </div>
@@ -157,15 +90,19 @@ const FilterContent: FC<FilterContentProps> = (props) => {
 
   return (
     <div className={styles.filter}>
-      <div className={styles.formOnlyFilters}>
-        <CategoryFilter {...categoryFilterProps} />
-        <LanguageFilter {...languageFilterProps} />
-      </div>
-      <div className={styles.generalFilters}>
-        <SearchFilter {...searchFilterProps} />
-        <SortFilter {...sortFilterProps} />
+      <div className={styles.searchRow}>
+        <SearchFilter
+          oformsFilter={oformsFilter}
+          filterOformsBySearch={filterOformsBySearch}
+          isLoading={isLoading}
+          isDisabled={filterOformsByLocaleIsLoading}
+        />
+        <FilterPanel isLoading={isLoading} viewMobile={isMobileView} />
         {renderViewToggleButton()}
       </div>
+      {isLoading ? null : (
+        <SelectedFilters onHeightChange={onSelectedFiltersHeightChange} />
+      )}
     </div>
   );
 };

@@ -39,13 +39,15 @@ import { useNavigate } from "react-router";
 
 import { TABLE_PEOPLE_COLUMNS } from "SRC_DIR/helpers/constants";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import Filter from "@docspace/shared/api/people/filter";
 import { removeUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import { FILTER_PEOPLE } from "@docspace/shared/utils/filterConstants";
 
-import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
+import { Row } from "@onlyoffice/apps-ui-kit/components/rows";
+
+import styles from "../StyledComponent.module.scss";
 
 const StatisticsComponent = (props) => {
   const {
@@ -85,7 +87,7 @@ const StatisticsComponent = (props) => {
     if (index === 5) return;
 
     return (
-      <StyledSimpleFilesRow key={id}>
+      <Row key={id} className={styles.simpleFilesRow}>
         {iconElement(
           id,
           avatar,
@@ -97,12 +99,12 @@ const StatisticsComponent = (props) => {
         )}
         {textElement(displayName)}
         {quotaElement(item, "user")}
-      </StyledSimpleFilesRow>
+      </Row>
     );
   });
 
   return (
-    <StyledStatistics>
+    <div className={styles.statistics}>
       <div className="statistics-container">
         <Text fontWeight={600} className="item-statistic">
           {t("Top5Users")}
@@ -118,7 +120,7 @@ const StatisticsComponent = (props) => {
           />
         ) : null}
       </div>
-    </StyledStatistics>
+    </div>
   );
 };
 

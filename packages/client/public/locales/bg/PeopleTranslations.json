@@ -1,7 +1,7 @@
 {
   "AccountLoginType": "Тип вход в акаунта",
   "AddMembers": "Добави членове",
-  "DeleteSelfProfile": "Изтрий профил",
+  "DeleteSelfProfile": "Деактивирай профила",
   "DisabledEmployeeStatus": "Деактивиран",
   "DisableUserButton": "Деактивирай",
   "EditGroup": "Редактирай група",

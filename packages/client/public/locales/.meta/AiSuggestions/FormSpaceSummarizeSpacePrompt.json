@@ -1,0 +1,29 @@
+{
+  "key_path": "FormSpaceSummarizeSpacePrompt",
+  "content": "Summarize the current Form Space, including its purpose, forms, participants, collection status, results, and pending actions. If this information is not provided, ask me for the desired scope, focus, and summary length.",
+  "content_en_sha1_hash": "a3249364def7a5593494b291b683b25e2f053060",
+  "created_at": "2026-08-04T09:58:55.159Z",
+  "updated_at": "2026-08-05T17:36:58.226Z",
+  "comment": {
+    "text": "Instructional prompt for an AI suggestion that directs the assistant to summarize a Form Space's details and status.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:36:58.226Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 808,
+      "context": "// +\n formSpace: [\n {\n name: t(\"AiSuggestions:FormSpaceSummarizeSpace\"),\n prompt: t(\"AiSuggestions:FormSpaceSummarizeSpacePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceCreateAFormWithAI\"),\n prompt: t(\"AiSuggestions:FormSpaceCreateAFormWithAIPrompt\"),\n requires: \"create\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

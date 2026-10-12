@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2026-06-05T11:04:11.771Z",
+  "updated_at": "2026-09-04T07:59:41.562Z",
   "comment": {
     "text": "This is a button label or dialog title. It prompts the user to choose a file, appearing in contexts like attaching a file to a chat message or selecting a file within a file selector.",
     "is_auto": true,
@@ -12,26 +12,20 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/attachment/index.tsx",
-      "line_number": 133,
-      "context": "toggleAttachment();\n }}\n onSelectItem={onSelectItem}\n withHeader\n headerProps={{\n headerLabel: t(\"SelectFile\"),\n isCloseable: true,\n onCloseClick: toggleAttachment,\n }}\n withSearch\n withBreadCrumbs",
-      "module": "/libs/ui-kit"
-    },
-    {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 65,
-      "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: getBrandName(\"ProductName\"),",
+      "line_number": 64,
+      "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 65,
-      "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: getBrandName(\"ProductName\"),",
+      "line_number": 64,
+      "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/PluginSelector/PluginFilesSelector/PluginFilesSelector.tsx",
-      "line_number": 200,
+      "line_number": 202,
       "context": "const headerProps: TSelectorHeader = selectorProps.withHeader\n ? {\n withHeader: true,\n headerProps: {\n headerLabel: label ?? t(\"Common:SelectFile\"),\n isCloseable: isCloseable,\n onCloseClick: onCancel,\n ...headerBackButtonProps,\n },\n }",
       "module": "/packages/client"
     },
@@ -44,25 +38,25 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
       "line_number": 59,
-      "context": "isTypeSelectEmpty: boolean,\n logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionWorkspace\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n component: (",
+      "context": "isTypeSelectEmpty: boolean,\n logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionWorkspace\", {\n organizationName: logoText,\n }),\n component: (\n <SelectFileStep",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 248,
+      "line_number": 247,
       "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"FileId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFile\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput\n onSelectFile={onChangeFileId}\n filterParam={FilesSelectorFilterTypes.ALL}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer.js",
-      "line_number": 249,
+      "line_number": 248,
       "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"FileId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFile\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput\n onSelectFile={onChangeFileId}\n filterParam={FilesSelectorFilterTypes.ALL}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/UploadXML.js",
-      "line_number": 188,
-      "context": "<Text className=\"or-text\">{t(\"Common:Or\")}</Text>\n \n <FileInput\n idButton=\"select-file\"\n accept={[\".xml\"]}\n buttonLabel={t(\"Common:SelectFile\")}\n className=\"xml-upload-file\"\n isDisabled={!enableSso || isLoadingXml}\n onInput={uploadXml}\n size=\"middle\"\n tabIndex={3}",
+      "line_number": 135,
+      "context": "<Text className=\"or-text\">{t(\"Common:Or\")}</Text>\n \n <FileInput\n idButton=\"select-file\"\n accept={[\".xml\"]}\n buttonLabel={t(\"Common:SelectFile\")}\n className={styles.xmlUploadFile}\n isDisabled={!enableSso || isLoadingXml}\n onInput={uploadXml}\n size=\"middle\"\n tabIndex={3}",
       "module": "/packages/client"
     },
     {

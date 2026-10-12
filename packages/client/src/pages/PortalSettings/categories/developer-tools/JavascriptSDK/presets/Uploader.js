@@ -39,11 +39,11 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import debounce from "lodash.debounce";
-import { Label } from "@docspace/ui-kit/components/label";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
@@ -58,7 +58,6 @@ import { FileTypesFilter } from "../sub-components/FileTypesFilter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { VersionSelector } from "../sub-components/VersionSelector";
-import Integration from "../sub-components/Integration";
 import { EventLogBlock } from "../sub-components/EventLogBlock";
 
 import {
@@ -595,12 +594,8 @@ const Uploader = (props) => {
               setConfig={setConfig}
             />
           </ControlsSection>
-
-          <Integration className="integration-examples" />
         </Controls>
       </Container>
-
-      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };
@@ -618,7 +613,6 @@ export const Component = inject(({ settingsStore, treeFoldersStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "CreateEditRoomDialog",
   ])(observer(Uploader)),

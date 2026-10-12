@@ -35,9 +35,9 @@
 
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { withTranslation } from "react-i18next";
 
@@ -91,14 +91,10 @@ const DeleteVersionDialogComponent: React.FC<DeleteVersionDialogProps> = (
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
-      <ModalDialog.Header>
-        {t("VersionHistory:DeleteVersion")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:DeleteVersion")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text lineHeight="20px">
-            {t("VersionHistory:DeleteVersionDescription")}
-          </Text>
+          <Text lineHeight="20px">{t("Common:DeleteVersionDescription")}</Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -126,7 +122,7 @@ const DeleteVersionDialogComponent: React.FC<DeleteVersionDialogProps> = (
   );
 };
 
-const DeleteVersionDialog = withTranslation(["Common", "VersionHistory"])(
+const DeleteVersionDialog = withTranslation(["Common"])(
   DeleteVersionDialogComponent,
 );
 
@@ -147,3 +143,4 @@ export default inject(({ versionHistoryStore, filesActionsStore }: TStore) => {
     fileId,
   };
 })(observer(DeleteVersionDialog));
+

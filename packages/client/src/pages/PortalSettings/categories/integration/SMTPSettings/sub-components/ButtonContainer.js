@@ -36,8 +36,8 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import { Button } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   getSendingTestMailStatus,
   sendingTestMail,

@@ -35,8 +35,8 @@
 
 import { Trans } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 
 import type { TFunction } from "i18next";
 import SelectFileStep from "../../components/SelectFileStep";
@@ -90,9 +90,7 @@ export const getStepsData = (
         <>
           <b>{t("Settings:RolesAreSet")}</b>
           <div>
-            {t("Settings:UsersAreRegistered", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("Settings:UsersAreRegistered")}
           </div>
         </>
       ) : (
@@ -101,9 +99,6 @@ export const getStepsData = (
             t={t}
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
-            values={{
-              productName: getBrandName("ProductName"),
-            }}
             components={{
               1: <b />,
             }}
@@ -118,7 +113,6 @@ export const getStepsData = (
                   i18nKey="TypesAndPrivileges"
                   ns="Settings"
                   t={t}
-                  values={{ productName: getBrandName("ProductName") }}
                   components={{
                     1: <b />,
                     2: <b />,
@@ -141,9 +135,7 @@ export const getStepsData = (
     },
     {
       title: t("Settings:DataImport"),
-      description: t("Settings:ImportSectionDescription", {
-        productName: getBrandName("ProductName"),
-      }),
+      description: t("Settings:ImportSectionDescription"),
       component: (
         <ImportStep
           t={t}

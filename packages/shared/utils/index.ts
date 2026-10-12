@@ -36,19 +36,18 @@
 "use client";
 
 import type { TTranslation } from "../types";
-import { parseToDateTime } from "@docspace/ui-kit/utils/date";
+import { parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";
 
 import { isArrayEqual } from "./array";
 import * as email from "./email";
 import { EmailSettings, parseAddress, parseAddresses, getParts } from "./email";
 import useId from "./useId";
 
-import { useClickOutside } from "@docspace/ui-kit/utils";
+import { useClickOutside } from "@onlyoffice/apps-ui-kit/utils";
 import { handleAnyClick } from "./event";
-import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
-import { uuid, getTextColor, trimSeparator } from "@docspace/ui-kit/utils";
+import { uuid, getTextColor, trimSeparator } from "@onlyoffice/apps-ui-kit/utils";
 
-import { DomHelpers } from "@docspace/ui-kit/utils";
+import { DomHelpers } from "@onlyoffice/apps-ui-kit/utils";
 import {
   size,
   mobile,
@@ -63,15 +62,13 @@ import {
   checkIsSSR,
   INFO_PANEL_WIDTH,
   isMobileDevice,
-} from "@docspace/ui-kit/utils/device";
-import commonIconsStyles, {
+} from "@onlyoffice/apps-ui-kit/utils/device";
+import {
   IconSizeType,
   isIconSizeType,
-} from "@docspace/ui-kit/utils/common-icons-style";
+} from "@onlyoffice/apps-ui-kit/utils/common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
-import { NoUserSelect } from "./commonStyles";
-import { commonInputStyles } from "./commonInputStyles";
 import {
   RoomsTypeValues,
   RoomsTypes,
@@ -90,11 +87,9 @@ import {
 import { getTitleWithoutExtension } from "./getTitleWithoutExtension";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
-import { injectDefaultTheme } from "./injectDefaultTheme";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
 import { getFromLocalStorage } from "./getFromLocalStorage";
-import { fakeFormFillingList } from "./formFillingTourData";
 import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 import * as userFilterUtils from "./userFilterUtils";
@@ -111,8 +106,6 @@ export {
   RoomsTypes,
   parseAddresses,
   getParts,
-  NoUserSelect,
-  commonInputStyles,
   INFO_PANEL_WIDTH,
   EmailSettings,
   parseAddress,
@@ -122,7 +115,6 @@ export {
   isArrayEqual,
   getBannerAttribute,
   classNames,
-  commonIconsStyles,
   IconSizeType,
   isIconSizeType,
   size,
@@ -143,12 +135,9 @@ export {
   isMobileDevice,
   onEdgeScrolling,
   clearEdgeScrollingTimer,
-  injectDefaultTheme,
   getFromSessionStorage,
   saveToSessionStorage,
   getFromLocalStorage,
-  getFormFillingTipsStorageName,
-  fakeFormFillingList,
   getCountTilesInRow,
   getSelectFormatTranslation,
   userFilterUtils,

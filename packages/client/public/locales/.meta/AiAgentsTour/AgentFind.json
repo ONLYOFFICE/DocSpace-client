@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentFind",
+  "content": "Type a name to narrow the list — search looks at agent names, not at the messages inside their chats. Open the filter when the name is not what you remember, and find one by tag, by owner, or by who was let in.",
+  "content_en_sha1_hash": "b1850b118001cc8c183a1b55f6ff9638a09e8d21",
+  "created_at": "2026-08-06T14:20:56.248Z",
+  "updated_at": "2026-08-07T15:05:26.409Z",
+  "comment": {
+    "text": "Instructional text within a guided tour step that explains how to use the agent search bar and filtering options.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:25:53.130Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 251,
+      "context": "showFilter &&\n elementGroupStep(\n SEARCH_SELECTOR,\n [SEARCH_SELECTOR, FILTER_BUTTON_SELECTOR],\n t(\"AiAgentsTour:AgentFindTitle\"),\n t(\"AiAgentsTour:AgentFind\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 6. The sidebar sub-items, one bullet each.",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -44,3 +44,7 @@ export const GUESTS_ROUTE_WITH_FILTER = "accounts/guests/filter";
 export const INSIDE_GROUP_ROUTE_WITH_FILTER = "accounts/groups/:groupId/filter";
 
 export const GUESTS_TAB_VISITED_NAME = "guests-tab-visited";
+
+/** The user type dropdowns show a description under every type, so they are
+ * sized by the design instead of hugging the labels. */
+export const USER_TYPE_DROPDOWN_WIDTH = "354px";

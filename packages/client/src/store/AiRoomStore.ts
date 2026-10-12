@@ -36,8 +36,8 @@
 import { makeAutoObservable } from "mobx";
 
 import type { Nullable } from "@docspace/shared/types";
-import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
-import type { TChatPlaylistImage } from "@docspace/ui-kit/ai-agent/chat/Chat.types";
+import SocketHelper, { SocketCommands } from "@onlyoffice/apps-ui-kit/utils/socket";
+import type { TChatPlaylistImage } from "@onlyoffice/apps-ui-kit/types/ai";
 
 class AiRoomStore {
   roomId: Nullable<number> = null;
@@ -45,7 +45,11 @@ class AiRoomStore {
   knowledgeId: Nullable<number> = null;
   resultId: Nullable<number> = null;
 
-  currentTab: "chat" | "knowledge" | "result" = "chat";
+  // Nullable: FilesStore resets the tab with `setCurrentTab(null)` when
+  // leaving AI-room contexts (fetchRooms/fetchAgents/plain folders).
+  currentTab: Nullable<"chat" | "knowledge" | "result"> = "chat";
+
+  selectedResultFileId: Nullable<number> = null;
 
   aiPlaylistImages: TChatPlaylistImage[] = [];
 
@@ -61,8 +65,13 @@ class AiRoomStore {
     this.roomId = roomId;
   };
 
-  setCurrentTab = (currentTab: "chat" | "knowledge" | "result") => {
+  setCurrentTab = (currentTab: Nullable<"chat" | "knowledge" | "result">) => {
     this.currentTab = currentTab;
+    if (currentTab !== "result") this.selectedResultFileId = null;
+  };
+
+  setSelectedResultFileId = (id: Nullable<number>) => {
+    this.selectedResultFileId = id;
   };
 
   setKnowledgeId = (knowledgeId: Nullable<number>) => {

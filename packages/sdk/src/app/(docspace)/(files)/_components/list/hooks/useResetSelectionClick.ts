@@ -48,6 +48,7 @@ export default function useResetSelectionClick({
 }: UseResetSelectionClickProps) {
   const onMouseDown = useCallback(
     (e: MouseEvent) => {
+      if (e.button !== 0) return;
       if (!(e.target instanceof HTMLElement)) return;
 
       if (

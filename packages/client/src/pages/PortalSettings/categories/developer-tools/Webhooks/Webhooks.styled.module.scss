@@ -1,0 +1,180 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+// index.js
+.webhookInfoWrapper {
+  margin-bottom: 25px;
+
+  &.error {
+    margin-bottom: 0;
+  }
+}
+
+.mainWrapper {
+  width: 100%;
+
+  :global(.toggleButton) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.buttonSeating {
+  position: fixed;
+  z-index: 2;
+  width: 100vw;
+  height: 73px;
+  bottom: 0;
+  inset-inline-start: 0;
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.styledCreateButton {
+  width: calc(100% - 32px);
+}
+
+// TriggersForm.tsx
+.triggersWrapper {
+  margin-top: 22px;
+}
+
+.triggersTitle {
+  margin-bottom: 10px;
+}
+
+.triggersCheckboxGroup {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 10px;
+  margin-inline-start: 24px;
+}
+
+// WebhookInfo.js
+.infoText {
+  max-width: 660px;
+  white-space: break-spaces;
+  margin: 0 0 8px;
+  line-height: 20px;
+  color: var(--settings-common-description-color);
+}
+
+// DeleteWebhookDialog.js / WebhookDialog.js
+.styledBodyText {
+  line-height: 20px;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+
+  :global(button) {
+    width: 100%;
+  }
+
+  :global(button:first-of-type) {
+    margin-inline-end: 10px;
+  }
+}
+
+// WebhookDialog.js
+.styledWebhookForm {
+  margin-top: 7px;
+
+  :global(.margin-0) {
+    margin: 0;
+  }
+}
+
+// SecretKeyInput.js
+.secretKeyWrapper {
+  :global(.link) {
+    display: inline-block;
+    margin-top: 6px;
+    color: var(--tooltip-text);
+  }
+
+  :global(.dotted) {
+    text-decoration: underline dotted;
+  }
+}
+
+.secretKeyHeader {
+  margin-top: 21px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  cursor: default;
+
+  :global(.secretKeyHelpButton) {
+    margin-inline-start: 4px;
+  }
+
+  img {
+    margin-inline-start: 4px;
+  }
+}
+
+// SSLVerification.js
+.sslHeader {
+  font-weight: 600;
+  margin-top: 22px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  cursor: default;
+
+  :global(.verificationHelpButton) {
+    margin-inline-start: 4px;
+  }
+
+  img {
+    margin-inline-start: 4px;
+  }
+}
+
+// StatusBadge.js
+.styledBadge {
+  :global(p) {
+    background-color: transparent;
+  }
+}
+
+// LabledInput.js
+.styledLabel {
+  display: block;
+  margin-top: 20px;
+  line-height: 20px;
+
+  :global(input) {
+    margin-top: 4px;
+    width: 100%;
+  }
+}

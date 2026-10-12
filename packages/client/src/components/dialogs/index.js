@@ -77,7 +77,6 @@ import RoomLogoCoverDialog from "./RoomLogoCoverDialog";
 import RemoveGuestDialog from "./RemoveGuest";
 import DeleteVersionDialog from "./DeleteVersionDialog";
 import CancelOperationDialog from "./CancelOperationDialog";
-import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
 import ConnectAccountDialog from "./ConnectAccountDialog";
 import DisconnectAccountDialog from "./DisconnectAccountDialog";
@@ -132,7 +131,6 @@ export {
   RemoveGuestDialog,
   DeleteVersionDialog,
   CancelOperationDialog,
-  FormFillingTipsDialog,
   ReducedRightsDialog,
   ConnectAccountDialog,
   DisconnectAccountDialog,

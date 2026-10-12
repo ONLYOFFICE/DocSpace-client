@@ -1,0 +1,29 @@
+{
+  "key_path": "Remaining",
+  "content": "Remaining",
+  "content_en_sha1_hash": "cc632b5e2fd25e472765bc5ff12eb8477a7019f4",
+  "created_at": "2026-07-27T13:07:48.504Z",
+  "updated_at": "2026-07-27T14:01:23.065Z",
+  "comment": {
+    "text": "Label for a statistic column in the DocsConnect usage block, representing the number of available or unused units.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:01:23.065Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/UsageBlock.tsx",
+      "line_number": 97,
+      "context": "<StatColumn value={usage.active} label={t(\"Common:Active\")} />\n <StatColumn value={usage.internal} label={t(\"DocsConnect:Internal\")} />\n <StatColumn value={usage.external} label={t(\"DocsConnect:External\")} />\n <StatColumn\n value={usage.remaining}\n label={t(\"DocsConnect:Remaining\")}\n highlight\n />\n </div>\n </div>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

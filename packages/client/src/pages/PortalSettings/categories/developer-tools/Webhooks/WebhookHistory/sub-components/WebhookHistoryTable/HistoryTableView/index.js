@@ -33,69 +33,18 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
 import { useParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 
-import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
+import { TableBody, TableContainer } from "@onlyoffice/apps-ui-kit/components/table";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
-import { injectDefaultTheme } from "@docspace/shared/utils";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryTableRow from "./HistoryTableRow";
 import HistoryTableHeader from "./HistoryTableHeader";
 
-const TableWrapper = styled(TableContainer).attrs(injectDefaultTheme)`
-  margin-top: -2px;
-
-  .table-container_header {
-    position: absolute;
-  }
-
-  .header-container-text {
-    font-size: 12px;
-  }
-
-  .checkboxWrapper {
-    padding: 0;
-    padding-inline-start: 8px;
-  }
-
-  .table-list-item {
-    cursor: pointer;
-
-    padding-inline-start: 20px;
-
-    &:hover {
-      background-color: ${(props) =>
-        props.theme.filesSection.tableView.row.backgroundActive};
-
-      .table-container_cell {
-        margin-top: -1px;
-        border-top: ${(props) =>
-          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-
-        margin-inline-start: -24px;
-        padding-inline-start: 24px;
-      }
-
-      .checkboxWrapper {
-        padding-inline-start: 32px;
-      }
-
-      .table-container_row-context-menu-wrapper {
-        margin-inline-end: -20px;
-        padding-inline-end: 20px;
-      }
-    }
-  }
-
-  .table-list-item:has(.selected-table-row) {
-    background-color: ${(props) =>
-      props.theme.filesSection.tableView.row.backgroundActive};
-  }
-`;
+import styles from "../../../WebhookHistory.styled.module.scss";
 
 const TABLE_VERSION = "5";
 const COLUMNS_SIZE = `webhooksHistoryColumnsSize_ver-${TABLE_VERSION}`;
@@ -135,11 +84,9 @@ const HistoryTableView = (props) => {
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   return (
-    <TableWrapper
+    <TableContainer
+      className={styles.historyTableWrapper}
       forwardedRef={tableRef}
-      style={{
-        gridTemplateColumns: "300px 100px 400px 24px",
-      }}
       useReactWindow
     >
       <HistoryTableHeader
@@ -168,7 +115,7 @@ const HistoryTableView = (props) => {
           />
         ))}
       </TableBody>
-    </TableWrapper>
+    </TableContainer>
   );
 };
 

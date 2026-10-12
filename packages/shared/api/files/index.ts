@@ -38,7 +38,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import type { DateTime } from "luxon";
 
-import type { TFile } from "@docspace/ui-kit/types";
+import type { TFile } from "@onlyoffice/apps-ui-kit/types";
 
 import {
   ConflictResolveType,
@@ -51,6 +51,7 @@ import {
   decodeDisplayName,
   getFolderClassNameByType,
   sortInDisplayOrder,
+  toUrlParams,
 } from "../../utils/common";
 
 import type { RoomMember, TGetRoomMembers, TNewFiles } from "../rooms/types";
@@ -87,6 +88,8 @@ import type {
   TShareToUser,
   TDefaultTemplate,
   UpdateXlsxResponse,
+  TDocumentBuilderTask,
+  TFolderLogReportDateRange,
 } from "./types";
 
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
@@ -243,6 +246,8 @@ export async function getFoldersTree() {
 
     const name = getFolderClassNameByType(type);
 
+    const newCount = type === FolderType.Forms ? current.new : newItems;
+
     return {
       ...current,
       id,
@@ -255,9 +260,9 @@ export async function getFoldersTree() {
       pathParts,
       foldersCount,
       filesCount,
-      newItems,
+      newItems: newCount,
       security,
-      new: newItems,
+      new: newCount,
     } as TFolder;
   });
 }
@@ -401,6 +406,18 @@ export async function getTrashFolderList() {
 //   return request(options);
 // }
 
+/**
+ * The one folder title the server refuses with 403 for a reason other than
+ * access: a second `.ai` folder in a room's root ("The room already contains
+ * the .ai folder", `InvalidOperationException` -> Forbidden). The shared
+ * client reads a 403 inside a room as lost access and leaves for the root,
+ * so for this title alone the redirect is skipped and the toast stands.
+ */
+const AI_FOLDER_TITLE = ".ai";
+
+const skipRedirectForTitle = (title: string): boolean =>
+  title.trim() === AI_FOLDER_TITLE;
+
 export async function createFolder(
   parentFolderId: number | string,
   title: string,
@@ -412,7 +429,34 @@ export async function createFolder(
     data,
   };
 
-  const res = (await request(options)) as TFolder;
+  const res = (await request(options, skipRedirectForTitle(title))) as TFolder;
+
+  return res;
+}
+
+export async function startFolderLogReport(
+  folderId: number | string,
+  dateRange?: TFolderLogReportDateRange,
+) {
+  const params = dateRange ? `?${toUrlParams(dateRange, false)}` : "";
+
+  const options: AxiosRequestConfig = {
+    method: "post",
+    url: `/files/folder/${folderId}/log/report${params}`,
+  };
+
+  const res = (await request(options)) as TDocumentBuilderTask;
+
+  return res;
+}
+
+export async function getFolderLogReportStatus(folderId: number | string) {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    url: `/files/folder/${folderId}/log/report`,
+  };
+
+  const res = (await request(options)) as TDocumentBuilderTask | null;
 
   return res;
 }
@@ -425,7 +469,7 @@ export async function renameFolder(folderId: number, title: string) {
     data,
   };
 
-  const res = (await request(options)) as TFolder;
+  const res = (await request(options, skipRedirectForTitle(title))) as TFolder;
 
   return res;
 }
@@ -606,12 +650,30 @@ export async function deleteFile(
   return res;
 }
 
-export async function emptyTrash() {
+/**
+ * Empty the trash. Each root section (Files/Rooms/Forms/AI Agents) shows the
+ * same trash folder scoped by the `folderType` filter, so the same scope must
+ * be sent here — otherwise the whole trash is cleared and the other sections
+ * lose their items too. Without a scope the server keeps clearing everything.
+ */
+export async function emptyTrash(folderType?: FolderType[] | null) {
+  const scope =
+    folderType && folderType.length > 0
+      ? `&${toUrlParams({ folderType }, true)}`
+      : "";
+
   const res = (await request({
     method: "put",
-    url: "/files/fileops/emptytrash?single=true",
+    url: `/files/fileops/emptytrash?single=true${scope}`,
   })) as TOperation[];
   return res;
+}
+
+export async function terminateOperation(id: string) {
+  await request({
+    method: "put",
+    url: `/files/fileops/terminate/${id}`,
+  });
 }
 
 export async function enableCustomFilter(fileId: number, enabled: boolean) {
@@ -715,8 +777,9 @@ export async function startUploadSession(
   encrypted: boolean,
   createOn: unknown,
   CreateNewIfExist: boolean,
+  signal?: AbortSignal,
 ) {
-  const data = {
+  const data: Record<string, unknown> = {
     fileName,
     fileSize,
     relativePath,
@@ -730,6 +793,7 @@ export async function startUploadSession(
     url: `/files/${folderId}/session`,
     data,
     skipForbidden: true,
+    signal,
   }) as TUploadOperation;
 }
 
@@ -738,11 +802,13 @@ export async function uploadChunkParallel(
   sessionId: string,
   chunkNumber: number,
   data: FormData,
+  signal?: AbortSignal,
 ) {
   return request({
     method: "post",
     url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
     data,
+    signal,
   });
 }
 
@@ -761,10 +827,12 @@ export async function uploadChunkSequential(
 export async function finalizeUploadSession(
   folderId: string | number,
   sessionId: string,
+  signal?: AbortSignal,
 ) {
   const res = await request({
     method: "put",
     url: `/files/${folderId}/session/${sessionId}/finalize`,
+    signal,
   });
   return res;
 }
@@ -902,7 +970,12 @@ export async function moveToFolder(
   return res;
 }
 
-export async function getFileVersionInfo(fileId: number, shareKey?: string) {
+export async function getFileVersionInfo(
+  /** Callers pass both numeric and string ids (e.g. `${item.id}`); the id is
+   * only interpolated into the URL. */
+  fileId: number | string,
+  shareKey?: string,
+) {
   const res = (await request({
     method: "get",
     url: `/files/file/${fileId}/history`,
@@ -936,6 +1009,8 @@ export async function getNewFiles(folderId: number | string) {
 }
 
 export async function getNewFilesAgents() {
+  // Agents are served by the Node AI service now; its /news endpoint forwards
+  // to the same .NET endpoint, so the response shape is identical.
   const res = (await request({
     method: "get",
     url: `/ai/agents/news`,
@@ -956,8 +1031,8 @@ export async function getNewFolderFiles(folderId: number | string) {
 // TODO: update res type
 export async function convertFile(
   fileId: string | number | null,
-  outputType = null,
-  password = null,
+  outputType: string | null = null,
+  password: string | null = null,
   sync = false,
 ) {
   const data = { password, sync, outputType };
@@ -966,7 +1041,13 @@ export async function convertFile(
     method: "put",
     url: `/files/file/${fileId}/checkconversion`,
     data,
-  })) as { result: { webUrl: string; title: string } }[];
+  })) as {
+    result: { webUrl: string; title: string };
+    /** Conversion progress percent (0-100). */
+    progress?: number;
+    /** Conversion error text; empty when the conversion succeeded. */
+    error?: string;
+  }[];
 
   return res;
 }
@@ -1107,6 +1188,17 @@ export async function enableDisplayFileExtension(val: boolean) {
   const res = (await request({
     method: "put",
     url: "files/displayfileextension",
+    data,
+  })) as boolean;
+
+  return res;
+}
+
+export async function changeShowQuickActions(val: boolean) {
+  const data = { set: val };
+  const res = (await request({
+    method: "put",
+    url: "files/showquickactions",
     data,
   })) as boolean;
 
@@ -1334,6 +1426,53 @@ export async function getEncryptionAccess(fileId: number | string) {
   return res;
 }
 
+export async function getFileEncryptionAccess(fileId: number | string) {
+  const res = await request({
+    method: "get",
+    url: `files/${fileId}/access`,
+  });
+
+  return res as import("./types").TFileEncryptionInfo;
+}
+
+export async function setFileEncryptionKeys(
+  fileId: number | string,
+  keys: Array<{
+    userId: string;
+    publicKeyId: string;
+    privateKeyEnc: string;
+  }>,
+) {
+  const res = await request({
+    method: "put",
+    url: `files/${fileId}/access`,
+    data: keys,
+  });
+
+  return res;
+}
+
+export async function updateFileStream(
+  fileId: number | string,
+  file: File,
+  encrypted: boolean,
+  forcesave: boolean,
+) {
+  const fd = new FormData();
+
+  fd.append("file", file);
+  fd.append("encrypted", String(encrypted));
+  fd.append("forcesave", String(forcesave));
+
+  const res = await request({
+    method: "put",
+    url: `/files/${fileId}/update`,
+    data: fd,
+  });
+
+  return res;
+}
+
 // export function updateFileStream(file, fileId, encrypted, forcesave) {
 //   let fd = new FormData();
 //   fd.append("file", file);
@@ -1540,11 +1679,11 @@ export async function getDocumentServiceLocation(
 }
 
 export async function changeDocumentServiceLocation(
-  docServiceUrl: string,
-  secretKey: string,
-  authHeader: string,
-  internalUrl: string,
-  portalUrl: string,
+  docServiceUrl: string | null,
+  secretKey: string | null,
+  authHeader: string | null,
+  internalUrl: string | null,
+  portalUrl: string | null,
   sslVerification: boolean,
 ) {
   const res = (await request({

@@ -1,0 +1,96 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// SPDX-License-Identifier: AGPL-3.0-only
+
+.membersList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.publicRoomBarContainer {
+  position: sticky;
+  top: 80px;
+  background: var(--background-color);
+  overflow: hidden;
+  z-index: 2;
+
+  :global(.public-room-bar) {
+    margin-top: 0;
+  }
+}
+
+.linksBlock {
+  display: flex;
+  height: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 3px;
+
+  :global(.link-to-viewing-icon) {
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.linkRowWrapper {
+  :global(.avatar-wrapper) {
+    svg path {
+      fill: var(--info-panel-links-primary-color) !important;
+    }
+  }
+}
+
+.createLinkRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.createLinkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  padding: 10px;
+  background: var(--avatar-icon-background);
+  flex-shrink: 0;
+}
+
+.memberGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.groupTitle {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 16px 0 12px;
+  color: var(--info-panel-subtitle-color);
+  position: sticky;
+  top: 80px;
+  z-index: 1;
+  background: var(--info-panel-background-color);
+}
+
+.emptyScreen {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 45px 3px 0;
+  --empty-screen-width: 100%;
+}
+
+.deleteLinkDialogContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+

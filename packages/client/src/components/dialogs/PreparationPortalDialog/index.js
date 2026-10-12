@@ -34,12 +34,11 @@
  */
 
 import React from "react";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
 import styles from "./PreparationPortal.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PreparationPortalDialog = (props) => {
   const { t, tReady, preparationPortalVisible, setVisible } = props;
@@ -56,7 +55,7 @@ const PreparationPortalDialog = (props) => {
       isLarge
     >
       <ModalDialog.Header>
-        {t("PortalRestoring", { productName: getBrandName("ProductName") })}
+        {t("PortalRestoring")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.wrapper}>

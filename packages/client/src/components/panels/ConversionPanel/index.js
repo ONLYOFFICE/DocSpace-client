@@ -45,9 +45,9 @@ import {
   ModalDialog,
   ModalDialogType,
   DialogAsideSkeleton
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
-import { StyledUploadBody } from "../StyledPanels";
+import styles from "../UploadPanel/UploadPanel.module.scss";
 import FileList from "./FileList";
 import withLoader from "../../../HOCs/withLoader";
 
@@ -105,9 +105,9 @@ const ConversionPanelComponent = ({
     >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledUploadBody>
+        <div className={styles.uploadBody}>
           <FileList />
-        </StyledUploadBody>
+        </div>
       </ModalDialog.Body>
     </ModalDialog>
   );

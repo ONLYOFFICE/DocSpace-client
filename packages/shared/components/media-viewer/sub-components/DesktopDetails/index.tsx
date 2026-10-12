@@ -38,12 +38,12 @@ import classNames from "classnames";
 
 import ViewerMediaCloseSvgUrl from "PUBLIC_DIR/images/viewer.media.close.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import type { DesktopDetailsProps } from "./DesktopDetails.type";
 import styles from "./DesktopDetails.module.scss";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 export const DesktopDetails = ({
 	onMaskClick,

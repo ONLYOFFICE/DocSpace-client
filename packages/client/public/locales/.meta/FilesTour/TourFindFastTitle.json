@@ -1,0 +1,35 @@
+{
+  "key_path": "TourFindFastTitle",
+  "content": "Find anything fast",
+  "content_en_sha1_hash": "69157d331417cd105c3341d031fcb7d8a17cbe84",
+  "created_at": "2026-08-06T14:20:53.790Z",
+  "updated_at": "2026-08-07T15:05:26.423Z",
+  "comment": {
+    "text": "Title for a product tour step introducing the search functionality and its associated controls.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:35:12.155Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 289,
+      "context": "// 4. Search, with the filter, sort and view controls that sit beside it.\n showFilter &&\n elementStep(\n SEARCH_SELECTOR,\n t(\"FilesTour:TourFindFastTitle\"),\n t(\"FilesTour:TourFindFast\"),\n callbacks,\n LOG_LABEL,\n ),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 289,
+      "context": "// 4. Search, with the filter, sort and view controls that sit beside it.\n showFilter &&\n elementStep(\n SEARCH_SELECTOR,\n t(\"FilesTour:TourFindFastTitle\"),\n t(\"FilesTour:TourFindFast\"),\n callbacks,\n LOG_LABEL,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

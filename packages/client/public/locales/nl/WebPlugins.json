@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Plugin verwijderen",
-  "DeletePluginDescription": "Deze plug-in zal niet langer beschikbaar zijn voor {{productName}} gebruikers. Weet u zeker dat u door wilt gaan?",
+  "DeletePluginDescription": "Deze plug-in zal niet langer beschikbaar zijn voor gebruikers van de werkruimte. Weet u zeker dat u door wilt gaan?",
   "DeletePluginTitle": "Plug-in verwijderen?",
   "ExpandFunctionality": "Functionaliteit uitbreiden met Plugin SDK",
   "GoToRepo": "Ga naar repository",
@@ -8,13 +8,19 @@
   "NeedSettings": "Instellingen vereist",
   "NoPlugins": "Geen plug-ins toegevoegd",
   "NotNeedSettings": "Instellingen invoeren is niet nodig",
+  "PluginBundleRequestFailed": "De aanvraag naar {{url}} is mislukt met HTTP {{status}}",
   "PluginCacheWarningDescription": "Plugins worden gecached op basis van hun versienummer. Om ervoor te zorgen dat uw wijzigingen worden toegepast, verhoogt u het versienummer in uw <1>package.json</1> bestand voordat u het uploadt. Het systeem zal een plugin niet bijwerken als het versienummer hetzelfde blijft.",
   "PluginDeletedSuccessfully": "Plugin succesvol verwijderd",
-  "PluginIsNotCompatible": "De plugin SDK-versie komt niet overeen met de versie van {{productName}}. Werk alsjeblieft bij naar een compatibele versie.",
+  "PluginInitFailed": "Initialisatie mislukt",
+  "PluginIsNotCompatible": "De plugin SDK-versie komt niet overeen met de versie van {{organizationName}} {{productName}}. Werk alsjeblieft bij naar een compatibele versie.",
   "PluginLoadedSuccessfully": "Plugin succesvol geladen",
+  "PluginLoadFailed": "Laden mislukt",
+  "PluginNoDefaultExport": "De pluginmodule heeft geen standaardexport",
+  "PluginNotRegistered": "Het script is uitgevoerd, maar heeft geen plugin met de naam \"{{pluginName}}\" geregistreerd",
   "PluginSamples": "Plugin-voorbeelden",
+  "PluginScriptLoadFailed": "Laden van het script {{url}} mislukt",
   "PluginSDK": "Plugin SDK",
-  "PluginSDKDescription": "Met behulp van Plugin SDK kunt u uw {{productName}} functionaliteit uitbreiden, services van derden aansluiten of de bestaande gebruikerservaring verbeteren. Hier vindt u de plug-ins met broncode die beschikbaar is op GitHub.",
-  "PluginSDKInstruction": "Klik op de knop voor de gedetailleerde instructies om uw eigen plug-ins te maken.",
-  "UploadDescription": "U kunt plug-ins toevoegen om de functionaliteit van {{productName}} uit te breiden met extra functies. Klik op Plug-in uploaden of plaats een bestand in het ZIP-archief."
+  "PluginSDKDescription": "Gebruik de Plugin SDK om nieuwe functionaliteit toe te voegen, services van derden te koppelen of de bestaande ervaring te verbeteren. Bekijk hieronder de voorbeeldplugins, waarvan de broncode beschikbaar is op GitHub. Ga naar de pagina <1>Plugins</1> om ze te activeren voor uw werkruimte.",
+  "PluginSDKInstruction": "<1>Lees de instructies</1> om uw eigen plugins te bouwen.",
+  "UploadDescription": "Voeg plugins toe om uw werkruimte uit te breiden met extra functies. Schakel er een in vanuit de lijst hieronder, of klik op \"Plugin uploaden\" (of sleep een ZIP-bestand hierheen) om uw eigen plugin toe te voegen."
 }

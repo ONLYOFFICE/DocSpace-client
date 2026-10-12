@@ -38,11 +38,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { FileFillingFormStatus } from "@docspace/shared/enums";
 import { FILLING_FORM_STATUS_COLORS } from "@docspace/shared/constants";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import {
   getFillingStatusLabel,
   getFillingStatusTitle,

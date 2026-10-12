@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2026-06-05T11:04:11.771Z",
+  "updated_at": "2026-10-02T12:15:32.393Z",
   "comment": {
     "text": "This is a button label or dialog title. It appears when restoring a file, folder, or room from the trash.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 63,
+      "line_number": 62,
       "context": ") => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {",
       "module": "/packages/client"
     },
@@ -42,32 +42,32 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2728,
-      "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 861,
+      "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: self.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2728,
-      "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 861,
+      "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: self.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2728,
-      "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
+      "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
+      "line_number": 125,
+      "context": "};\n }\n if (canRestoreRoom) {\n archiveOptions = {\n key: \"unarchive-room\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: () => self.onClickArchive(\"unarchive\"),\n disabled: false,\n };\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2728,
-      "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
+      "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
+      "line_number": 125,
+      "context": "};\n }\n if (canRestoreRoom) {\n archiveOptions = {\n key: \"unarchive-room\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: () => self.onClickArchive(\"unarchive\"),\n disabled: false,\n };\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2634,
+      "file_path": "/packages/client/src/store/filesActionsStore/menu.helpers.ts",
+      "line_number": 199,
       "context": "itemsCollection\n .set(\"download\", download)\n .set(\"downloadAs\", downloadAs)\n .set(\"restore\", {\n id: \"menu-restore\",\n label: t(\"Common:Restore\"),\n onClick: () => setRestorePanelVisible(true),\n iconUrl: MoveReactSvgUrl,\n })\n .set(\"delete\", deleteOption)\n .set(\"showInfo\", showInfo);",
       "module": "/packages/client"
     },
@@ -79,19 +79,49 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 341,
+      "line_number": 567,
       "context": "const getRestoreItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: () => onRestoreClick?.(i),\n disabled: !onRestoreClick,\n };\n },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 341,
+      "line_number": 567,
       "context": "const getRestoreItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: () => onRestoreClick?.(i),\n disabled: !onRestoreClick,\n };\n },",
       "module": "/packages/sdk"
     },
     {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/version-history-panel/index.tsx",
+      "line_number": 425,
+      "context": "const anonymousLabel = t(\"Common:Anonymous\");\n const openLabel = t(\"Common:Open\");\n const downloadLabel = t(\"Common:Download\");\n const actionsLabel = t(\"Common:Actions\");\n const editCommentLabel = t(\"Common:EditComment\");\n const restoreLabel = t(\"Common:Restore\");\n const title = useResolvedFileTitle(\n versions && versions.length > 0 ? versions[0] : file,\n );\n \n const onDeleteRequest = React.useCallback(",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/restore-room-dialog/index.tsx",
+      "line_number": 124,
+      "context": "<ModalDialog\n visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:Restore\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{getBody()}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/restore-room-dialog/index.tsx",
+      "line_number": 124,
+      "context": "<ModalDialog\n visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:Restore\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{getBody()}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
+      "line_number": 245,
+      "context": "},\n { key: \"separator-restore\", isSeparator: true },\n {\n id: \"option_unarchive-room\",\n key: \"unarchive-room\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: () => onRestoreRoom?.(room),\n },\n {\n id: \"option_delete-room\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
+      "line_number": 245,
+      "context": "},\n { key: \"separator-restore\", isSeparator: true },\n {\n id: \"option_unarchive-room\",\n key: \"unarchive-room\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: () => onRestoreRoom?.(room),\n },\n {\n id: \"option_delete-room\",",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 348,
+      "line_number": 343,
       "context": ">\n <Button\n className=\"restore\"\n primary\n size={ButtonSize.normal}\n label={t(\"Common:Restore\")}\n onClick={onRestorePortal}\n isDisabled={\n isCopyingToLocal ||\n !isChecked ||\n filesList.length === 0 ||",
       "module": "/packages/shared"
     },
@@ -103,19 +133,19 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/restore-confirm-modal/index.tsx",
-      "line_number": 117,
+      "line_number": 114,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:Restore\")}\n onClick={onConfirm}\n isDisabled={!isRestoreAcknowledged || isLoading}\n isLoading={isLoading}\n testId=\"restore_backup_confirm_button\"\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
-      "line_number": 131,
+      "line_number": 128,
       "context": "</div>\n <SaveCancelButtons\n onSaveClick={onSaveAction}\n onCancelClick={onRestore}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n showReminder={(isSettingPaid && hasChanges) || isLoading}\n disableRestoreToDefault={additionalResourcesIsDefault || isLoading}\n additionalClassSaveButton=\"additional-resources-save\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 317,
+      "line_number": 314,
       "context": "\"save-cancel-buttons\",\n )}\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDisabled}\n hasScroll\n hideBorder",
       "module": "/packages/shared"
     },

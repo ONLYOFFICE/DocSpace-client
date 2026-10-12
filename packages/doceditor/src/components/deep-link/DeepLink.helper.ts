@@ -35,6 +35,7 @@
 
 import { isSafari } from "react-device-detect";
 import { TFile } from "@docspace/shared/api/files/types";
+import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 
 export type TDeepLinkConfig = {
   iosPackageId: string;
@@ -90,13 +91,16 @@ const openDeepLink = (
   }
 };
 
-export const redirectToStore = (deepLinkConfig?: TDeepLinkConfig) => {
+export const redirectToStore = (
+  deepLinkConfig?: TDeepLinkConfig,
+  deepLinkData?: string,
+) => {
   const nav = navigator.userAgent;
   const isIOS = nav.includes("iPhone;") || nav.includes("iPad;");
 
   const storeUrl = isIOS
     ? `https://apps.apple.com/app/id${deepLinkConfig?.iosPackageId}`
-    : `https://play.google.com/store/apps/details?id=${deepLinkConfig?.androidPackageName}`;
+    : `https://play.google.com/store/apps/details?id=${deepLinkConfig?.androidPackageName}&referrer=${deepLinkData}`;
 
   window.location.replace(storeUrl);
 };
@@ -118,7 +122,9 @@ export const getDeepLink = (
     email,
     file: {
       id: file?.id,
-      title: file?.title,
+      // for encrypted files the server title is an opaque placeholder;
+      // send the decrypted display name when it is available
+      title: resolveDisplayTitle(file),
       extension: file?.fileExst,
     },
     folder: {
@@ -136,6 +142,9 @@ export const getDeepLink = (
   openDeepLink(`${deepLinkConfig?.url}?data=${deepLinkData}`, {
     onOpen: () =>
       (window.location.href = `${deepLinkConfig?.url}?data=${deepLinkData}`),
-    onFail: isOpenOnlyApp ? undefined : () => redirectToStore(deepLinkConfig),
+    onFail: isOpenOnlyApp
+      ? undefined
+      : () => redirectToStore(deepLinkConfig, deepLinkData),
   });
 };
+

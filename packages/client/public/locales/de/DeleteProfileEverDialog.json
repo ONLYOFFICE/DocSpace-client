@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndoneGuests": "Die ausgewählten deaktivierten Gäste werden aus {{productName}} entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
-  "ActionCannotBeUndoneUsers": "Die ausgewählten deaktivierten Benutzer werden aus {{productName}} entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
+  "ActionCannotBeUndoneGuests": "Die ausgewählten deaktivierten Gäste werden aus dem Arbeitsbereich entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
+  "ActionCannotBeUndoneUsers": "Die ausgewählten deaktivierten Benutzer werden aus dem Arbeitsbereich entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
   "CannotReassignFiles": "Wenn Sie mehrere Benutzer gleichzeitig löschen, können Sie deren Dateien nicht anderen Benutzern neu zuweisen.",
   "DeleteGroupGuestsSuccessMessage": "Gäste wurden erfolgreich gelöscht.",
   "DeleteGroupUsersSuccessMessage": "Benutzer wurden erfolgreich gelöscht.",
@@ -12,7 +12,7 @@
   "DeleteUser": "Benutzer löschen",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> wird gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden.",
   "DeletingUsers": "Löschen von Benutzern",
-  "PersonalDataDeletionInfo": "Persönliche Daten, alle persönlichen Dateien und Ordner in den Abschnitten {{sectionNameFirst}} und {{sectionNameSecond}}* der ausgewählten Benutzer werden dauerhaft gelöscht. Dateien und Ordner der ausgewählten Benutzer in gemeinsamen Abschnitten* wie Räumen verbleiben in {{productName}}.",
+  "PersonalDataDeletionInfo": "Persönliche Daten, alle persönlichen Dateien und Ordner in den Abschnitten {{sectionNameFirst}} und {{sectionNameSecond}}* der ausgewählten Benutzer werden dauerhaft gelöscht. Dateien und Ordner der ausgewählten Benutzer in gemeinsamen Abschnitten* wie Räumen verbleiben im Arbeitsbereich.",
   "PleaseNote": "Bitte beachten:",
   "ReassignDataToAnotherUser": "Daten an einen anderen Benutzer neu zuweisen",
   "SuccessfullyDeleteGuestInfoMessage": "Der Gast wurde erfolgreich gelöscht",

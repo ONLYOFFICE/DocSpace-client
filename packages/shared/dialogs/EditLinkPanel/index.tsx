@@ -44,17 +44,17 @@ import React, {
   useDeferredValue,
 } from "react";
 
-import { Portal } from "@docspace/ui-kit/components/portal";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useEventListener } from "@onlyoffice/apps-ui-kit/hooks/useEventListener";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import {
   getLinkAccessRightOptions,
   getRoomLinkAccessOptions,
@@ -68,12 +68,12 @@ import {
   isFolderOrRoom,
   isRoom,
 } from "../../utils/typeGuards";
-import { parseToDateTime } from "@docspace/ui-kit/utils/date";
+import { parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";
 
 import { ShareLinkService } from "../../services/share-link.service";
 import type { TFileLink } from "../../api/files/types";
 import type { TError } from "../../utils/axiosClient";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 
@@ -83,7 +83,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "../../enums";
-import { StyledEditLinkBodyContent } from "./EditLinkPanel.styled";
+import styles from "./EditLinkPanel.module.scss";
 
 import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
@@ -130,37 +130,35 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   const isDenyDownload = link?.sharedTo?.denyDownload ?? false;
   const isPrimaryLink = link?.sharedTo?.primary ?? false;
 
-  const { isPublic, isFormRoom, isCustomRoom } = useMemo(() => {
+  const { isPublic, isFormRoom } = useMemo(() => {
     if (!isRoom(item))
       return {
         isPublic: false,
         isFormRoom: false,
-        isCustomRoom: false,
       };
 
     return {
       isPublic: item.roomType === RoomsType.PublicRoom,
       isFormRoom: item.roomType === RoomsType.FormRoom,
-      isCustomRoom: item.roomType === RoomsType.CustomRoom,
     };
   }, [item]);
 
   const accessOptions = useMemo(() => {
-    if (!item.availableShareRights) return [];
-
     if (isFolderOrRoom(item))
       return getRoomLinkAccessOptions(
         t,
+        accessLink,
         item.availableShareRights,
         isPrimaryLink,
       );
 
     return getLinkAccessRightOptions(
       t,
+      accessLink,
       item.availableShareRights,
       isPrimaryLink,
     );
-  }, [t, item, isPrimaryLink]);
+  }, [t, item, accessLink, isPrimaryLink]);
 
   const linkAccessOptions = useMemo(() => {
     const options = getAccessTypeOptions(t, false);
@@ -200,11 +198,10 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
       };
     }
 
-    return (
-      accessOptions.find((option) => option.access === accessLink) ??
-      accessOptions[accessOptions.length - 1] ??
-      {}
-    );
+    // Always the link's own access: getLinkAccessRightOptions appends it as a
+    // disabled option when it is not available any more, so the panel never
+    // replaces the access with an unrelated one behind the user's back.
+    return accessOptions.selectedOption;
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -343,33 +340,20 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   const executeApiCall = useCallback(
     async (updatedLink: TFileLink) => {
-      try {
-        const response = await ShareLinkService.editLink(item, updatedLink);
+      const response = await ShareLinkService.editLink(item, updatedLink);
 
-        setLinkParams({ link: response, item });
+      setLinkParams({ link: response, item });
 
-        if (isRoom(item)) {
-          setExternalLink?.(response);
-          copyShareLink(item, response, t);
-        } else {
-          updateLink?.(response);
-        }
-
-        return response;
-      } catch (err) {
-        console.error(err);
+      if (isRoom(item)) {
+        setExternalLink?.(response);
+        copyShareLink(item, response, t);
+      } else {
+        updateLink?.(response);
       }
+
+      return response;
     },
-    [
-      t,
-      item,
-      searchParams,
-      isCustomRoom,
-      updateLink,
-      setLinkParams,
-      setExternalLink,
-      setSearchParams,
-    ],
+    [t, item, updateLink, setLinkParams, setExternalLink],
   );
 
   const handleApiError = (err: TError) => {
@@ -390,11 +374,15 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
       const updatedLink = buildUpdatedLink();
 
       await executeApiCall(updatedLink);
+
+      onClose();
     } catch (err) {
+      // Keep the panel open on failure: the edited values survive and the user
+      // can react to the error, for example pick a role that is still
+      // available when the current one has been revoked.
       handleApiError(err as TError);
     } finally {
       setIsLoading(false);
-      onClose();
     }
   }, [validateInputs, buildUpdatedLink, executeApiCall, onClose]);
 
@@ -483,8 +471,18 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   const isValidLinkTitle = !!deferredLinkTitle.trim();
 
+  // The link carries a role that is not among the available rights any more, so
+  // the server would reject any save - even a password-only one. Require the
+  // user to pick a role that is still available instead of failing the request.
+  const isRevokedAccess =
+    "disabled" in selectedAccessOption && !!selectedAccessOption.disabled;
+
   const isDisabledSaveButton =
-    !hasChanges || isLoading || isExpired || !isValidLinkTitle;
+    !hasChanges ||
+    isLoading ||
+    isExpired ||
+    !isValidLinkTitle ||
+    isRevokedAccess;
 
   const canChangeLifetime = link?.canEditExpirationDate;
 
@@ -532,14 +530,22 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
               : t("Common:EditLink")}
         </ModalDialog.Header>
         <ModalDialog.Body>
-          <StyledEditLinkBodyContent className="edit-link_body">
-            {accessOptions.length > 1 ? (
+          <div className={`${styles.editLinkBodyContent} edit-link_body`}>
+            {/* A revoked access is worth showing even when it is the only
+                option left: the block carries the warning that explains why
+                the save button stays disabled. */}
+            {accessOptions.options.length > 1 || isRevokedAccess ? (
               <RoleLinkBlock
                 t={t}
-                accessOptions={accessOptions}
+                accessOptions={accessOptions.options}
                 selectedOption={selectedAccessOption}
                 currentDeviceType={currentDeviceType}
                 onSelect={handleSelectAccessOption}
+                warningText={
+                  isRevokedAccess
+                    ? t("Common:RoleForLinkNotAvailable")
+                    : undefined
+                }
               />
             ) : null}
             <LinkBlock
@@ -594,7 +600,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
               canChangeLifetime={canChangeLifetime}
               headerText={t("Common:LimitByTimePeriod")}
             />
-          </StyledEditLinkBodyContent>
+          </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button

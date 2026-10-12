@@ -3,7 +3,7 @@
   "content": "Change name",
   "content_en_sha1_hash": "e46692e648f154006587c9c0afcf732e4e650982",
   "created_at": "2025-05-19T21:30:53.484Z",
-  "updated_at": "2026-05-15T14:00:06.641Z",
+  "updated_at": "2026-09-04T07:59:41.581Z",
   "comment": {
     "text": "This is a button label that allows users to change a person's name. It appears in a dialog header and in a context menu for user profiles.",
     "is_auto": true,

@@ -1,5 +1,5 @@
 {
-  "Desc": "Nastavte prosím registrační {{productName}}.",
+  "Desc": "Nastavte prosím registrační údaje pracovního prostoru.",
   "ErrorEmail": "Neplatná e-mailová adresa",
   "ErrorInstanceId": "Nesprávné ID instance",
   "ErrorLicenseBody": "Licence není platná. Ujistěte se, že jste vybrali správný soubor.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Licenční ujednání",
   "PlaceholderLicense": "Váš licenční soubor",
   "Timezone": "Časové pásmo:",
-  "WelcomeTitle": "Vítejte ve svém {{productName}}!"
+  "WelcomeTitle": "Vítejte ve svém pracovním prostoru!"
 }

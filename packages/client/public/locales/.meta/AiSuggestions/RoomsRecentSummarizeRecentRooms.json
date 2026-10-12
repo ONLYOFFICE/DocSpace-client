@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsRecentSummarizeRecentRooms",
+  "content": "Summarize recent rooms",
+  "content_en_sha1_hash": "6b6ef9400e0f583ea6f3fc260216888320736c06",
+  "created_at": "2026-08-04T09:58:55.208Z",
+  "updated_at": "2026-08-05T16:54:52.069Z",
+  "comment": {
+    "text": "Button label for an AI suggestion that triggers a summary of recently visited rooms.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:54:52.069Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 461,
+      "context": "],\n \n // +\n roomsRecent: [\n {\n name: t(\"AiSuggestions:RoomsRecentSummarizeRecentRooms\"),\n prompt: t(\"AiSuggestions:RoomsRecentSummarizeRecentRoomsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsRecentWhereMyActionIsNeeded\"),\n prompt: t(\"AiSuggestions:RoomsRecentWhereMyActionIsNeededPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

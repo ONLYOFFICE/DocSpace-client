@@ -54,7 +54,9 @@ const AssignRolesWrapper = ({
   const onClose = () => setAssignRolesDialogData(false);
 
   const onSubmit = () => {
-    onClickStartFilling(file);
+    // the original .js passed a possibly-null dialog file
+    // through unchecked — the non-null assertion keeps that behavior.
+    onClickStartFilling(file!);
     onClose();
   };
 

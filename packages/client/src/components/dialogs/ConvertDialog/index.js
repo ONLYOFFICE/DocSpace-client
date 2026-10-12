@@ -38,11 +38,11 @@ import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
 
 import styles from "./ConvertDialog.module.scss";
 
@@ -90,7 +90,7 @@ const ConvertDialogComponent = (props) => {
 
   if (convertSingleFile && sortedFolder) {
     rootFolderTitle = isSharedWithMeFolder
-      ? t("Common:MyDocuments")
+      ? t("Common:Files")
       : rootFoldersTitles[convertItem.rootFolderType]?.title;
   }
 
@@ -153,21 +153,21 @@ const ConvertDialogComponent = (props) => {
     >
       <ModalDialog.Header>
         {convertSingleFile
-          ? t("DocumentConversionTitle")
+          ? t("Common:DocumentConversionTitle")
           : t("FileUploadTitle")}
       </ModalDialog.Header>
       <ModalDialog.Body style={{ paddingBottom: "0px" }}>
         <Text>
           {convertSingleFile
             ? isXML
-              ? t("ConversionXmlMessage")
-              : t("OpenFileMessage")
+              ? t("Common:ConversionXmlMessage")
+              : t("Common:OpenFileMessage")
             : t("ConversionMessage")}
         </Text>
 
         {isXML ? (
           <div style={{ boxSizing: "border-box", padding: "16px 0 0" }}>
-            <Text>{t("SelectFileType")}</Text>
+            <Text>{t("Common:SelectFileType")}</Text>
             <RadioButtonGroup
               orientation="vertical"
               options={options}
@@ -186,7 +186,7 @@ const ConvertDialogComponent = (props) => {
           <div className={styles.convertDialogCheckboxes}>
             <Checkbox
               className="convert_dialog_checkbox"
-              label={t("SaveOriginalFormatMessage")}
+              label={t("Common:SaveOriginalFormatMessage")}
               isChecked={storeOriginalFiles}
               onChange={onChangeFormat}
               dataTestId="convert_dialog_save_original_checkbox"
@@ -210,7 +210,7 @@ const ConvertDialogComponent = (props) => {
             {!convertSingleFile ? (
               <Checkbox
                 className="convert_dialog_checkbox"
-                label={t("HideMessage")}
+                label={t("Common:HideMessage")}
                 isChecked={hideMessage}
                 onChange={onChangeMessageVisible}
                 dataTestId="convert_dialog_hide_message_checkbox"
@@ -300,3 +300,4 @@ export default inject(
     };
   },
 )(observer(ConvertDialog));
+

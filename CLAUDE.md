@@ -9,30 +9,19 @@ ONLYOFFICE DocSpace frontend client - a document collaboration hub built with Re
 ## Common Commands
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Development (full stack - all 5 apps)
-pnpm start
-
-# Development (core apps only - client, login, doceditor)
-pnpm start:lite
-
-# Production build
-pnpm build
-
-# Linting (Biome)
-pnpm lint
-pnpm lint:fix
-
-# Type checking
-pnpm tsc
-
 # Unit tests (shared package, Vitest)
 pnpm test
 
+# Unit tests (client package, Vitest)
+pnpm test:client               # all @docspace/client unit tests
+pnpm test:store                # only client store tests (src/store, incl. FilesStore)
+
+# Unit tests (sdk package, Vitest)
+pnpm test:sdk
+
 # Run single unit test file
 cd packages/shared && pnpm vitest run path/to/file.test.ts
+cd packages/client && pnpm exec vitest run src/store/filesStore
 
 # E2E tests (Playwright, requires Docker)
 cd packages/client
@@ -45,47 +34,11 @@ cd packages/client && pnpm exec playwright test path/to/test.spec.ts
 # Update E2E screenshots
 pnpm test:e2e:docker:update-screenshots
 
-# Storybook (component documentation)
-pnpm storybook
-
-# Check circular dependencies
-pnpm check-circular
+# Translation tests (run after any locale changes)
+cd common/tests && npx vitest run test/locales.test.js
 ```
 
 ## Architecture
-
-### Monorepo Structure
-
-```
-packages/
-├── client/      # Main web application (Vite 6)
-├── login/       # Authentication application
-├── doceditor/   # Document editor application
-├── management/  # Admin management panel
-├── sdk/         # JavaScript SDK for external integrations
-└── shared/      # Shared components, hooks, stores, utilities
-```
-
-### Tech Stack
-
-- **React 19** with React Compiler (babel-plugin-react-compiler)
-- **TypeScript 5.9** (strict mode)
-- **MobX 6** for state management
-- **Styled-Components 5** + SCSS for styling
-- **i18next** for internationalization
-- **Biome** for linting/formatting (replaces ESLint/Prettier)
-
-### Shared Package (`@docspace/shared`)
-
-The shared package is the core dependency for all applications:
-
-- `components/` - 130+ reusable React components
-- `hooks/` - Custom React hooks
-- `store/` - MobX stores (AuthStore, UserStore, SettingsStore, etc.)
-- `api/` - API client and service definitions
-- `utils/` - Utility functions
-- `types/` - TypeScript type definitions
-- `dialogs/` - Modal/dialog components
 
 ### State Management
 
@@ -93,12 +46,6 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
 - AuthStore - Authentication state
 - UserStore - User information
 - SettingsStore - Application settings
-
-### Testing
-
-- **Unit Tests**: Vitest in `packages/shared/`, run with `pnpm test`
-- **E2E Tests**: Playwright in `packages/client/__tests__/`, run via Docker
-- **Visual Regression**: Screenshot comparison with 0.16 threshold
 
 ### Build Pipeline
 
@@ -111,31 +58,213 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
 
 - Client (Vite): `http://localhost:5001` — served behind nginx proxy at port 8092
 - Static assets (images, fonts, scripts): served by nginx from `/var/www/public/` at `/static/` prefix
+  — the routing lives in `../buildtools/config/nginx/onlyoffice.conf` (see the
+  buildtools section below); a new asset kind needs a `location` there
+- Other dev ports: login 5011, doceditor 5013, management 5015, sdk 5099;
+  Storybook: shared 8082, ui-kit 6006; E2E serve: client 5110, login 5111,
+  sdk 5112, doceditor 5113, management 5115; Playwright reports 9325–9329
+- Backend is a **sibling repo**: `../server` (run via VSCode tasks →
+  `cd ../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev`
+  with `SKIP_CLIENT=true`; `APP_EDITION` unset = CE, `enterprise`/`developer`
+  for EE/DE). `pnpm deploy` writes to `../publish/web`; SSR apps expect
+  `../buildtools/config` for appsettings
+
+### ui-kit: separate repo, consumed from npm
+
+`@onlyoffice/apps-ui-kit` lives in its own repository (`docspace-ui-kit-react`)
+and is **not** a git submodule, a pnpm workspace member, or a checkout inside
+this repo. Its code is fixed there, never here. The six apps install the
+published package from npm (`"@onlyoffice/apps-ui-kit": "^<version>"`); a new
+release is picked up with `pnpm -r update @onlyoffice/apps-ui-kit@^<version>`,
+committing the manifests together with `pnpm-lock.yaml`. Both first-party
+packages sit in `minimumReleaseAgeExclude`, since they are adopted on release
+day.
+
+To try a ui-kit build **before it is published**, `pnpm run update-ui-kit`
+(newest `pnpm pack` in `../../docspace-ui-kit-react`, or a path) switches every
+app to `file:../../onlyoffice-apps-ui-kit.tgz` at the repo root, installs it
+and verifies by hash what landed. Do not do this by hand: once the specifier is
+`file:`, copying a new pack over and running `pnpm install` silently keeps the
+cached copy. The Dockerfiles copy root `*.tgz` optionally, so an image builds
+in either mode. Go back with `pnpm -r update @onlyoffice/apps-ui-kit@^<version>`
+and delete the tarball; see `.claude/rules/pnpm.md`.
+
+For local work on ui-kit itself, `pnpm run start:ui-kit-src` (root script, or
+the "Start (ui-kit src)" workspace button) points every app's dev server at a
+checkout and restores HMR, with no build, pack or install in the loop - the
+Vite client through `packages/client/config/`, the four Next apps through
+`scripts/ui-kit-dev.cjs`. It is a dev-server alias only - never a tsconfig
+path, and both `vite build` and `next build` refuse to run while it is set. In
+the client an import that escapes the checkout fails (any JS/TS import, and a
+bare `@docspace/shared` load in SCSS; sass resolves relative `@use` paths
+itself, unchecked); the Next apps have no such check. Run the apps once
+**without** the variable before publishing a ui-kit release: source mode does not
+exercise the stylesheet order, `"use client"`, the exports wildcard or the
+generated types. Details in `.claude/rules/pnpm.md`.
+
+A local tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's
+`main`, `module`, `types` and `exports` fields live under `publishConfig`, which
+only pnpm promotes to the top level when packing. An npm-packed tarball has no
+entry points at all.
+
+`@onlyoffice/ai-chat` is an **optional peer** of ui-kit that ui-kit statically
+imports from its `ai-agent/*` and `api/ai` subpaths without bundling it. The
+apps that render the AI agent (client, sdk) therefore declare it themselves,
+from npm as well — that dependency is what satisfies ui-kit's peer, so it
+cannot be dropped while those subpaths are used. `pnpm run update-ai-chat`
+switches them to a local pack from `../../onlyoffice-ai-chat` the same way
+(`update-ui-kit` also takes one that sits next to the ui-kit checkout).
+ai-chat's own optional peers (LLM SDKs, radix, codemirror, ...) must be
+declared by those same apps; their versions sit in the `catalog:` block of
+`pnpm-workspace.yaml` - see `.claude/rules/pnpm.md`.
+
+### buildtools sibling repo
+
+`../buildtools` (ONLYOFFICE Apps Build Tools) is a **separate, optional repo**,
+not a submodule. The client clones, installs, builds and tests without it — so
+treat every path below as "only if `../buildtools` exists", and never block or
+fail client work because it is missing. It owns the nginx routing, the
+appsettings and the build/install scripts the client runs behind, so when it
+*is* checked out, client work regularly needs changes there. It has its own
+`../buildtools/CLAUDE.md` with the full layout — the parts that matter here:
+
+- **`config/nginx/onlyoffice.conf`** — the routing source of truth for
+  everything the browser requests. `/` proxies to the client dev server; each
+  `/static/<kind>/` subpath (`css`, `fonts`, `locales`, `scripts`, `images`,
+  `offline`, `plugins`, `campaigns`) is served from the public root by its own
+  `location`, and login / doceditor / management / sdk / confirm / wizard are
+  mounted under their prefixes with their own `_next/static` handling. A new
+  asset kind, locale directory or app route is **not** served until it gets a
+  `location` here. The same file carries the `$cache_control` and
+  `$content_security_policy` maps, so a new asset type also needs a cache rule,
+  and a new external origin needs a CSP entry.
+- **`config/nginx/includes/onlyoffice-upstream-map.conf`** — maps every service
+  to its dev port (client 5001, login 5011, doceditor 5013, management 5015,
+  sdk 5099, storybook 6006, backend 5000/5007/…). Generated from the
+  `.template` next to it; edit the template.
+- **`config/appsettings*.json`** — what `pnpm deploy`'d SSR apps read
+  (base / `developer` / `enterprise` / `test` overlays, matching `APP_EDITION`).
+- **`install/docker/build/Dockerfile`** — builds the client in CI. It must keep
+  a bare `corepack enable` so the pinned `packageManager` decides the pnpm
+  version (see the pnpm version section below).
+- **Frontend build entry points** — `build.frontend.bat`, `build.static.sh`,
+  `install/common/packages-build.sh` (also builds the sibling `mcp` repo) and
+  `install/win/frontend-build.bat`. None of these are covered by the client's
+  pre-push gate or CI, so a flag or script change here is only caught at
+  release-build time.
+
+Changes to any of this are committed **in the buildtools repo**, on its own
+branch (`master` / `develop`, `feature/*`, `bugfix/*`), never from the client
+repo. Check its branch state before editing — a fix may already exist on an
+unmerged branch.
 
 ## Code Quality
 
-### Pre-push Hooks (Lefthook)
+### Language
 
-Automatically runs before push:
-1. TypeScript type checking
-2. Biome linting
-3. Translation validation tests
-4. Unit tests
+All files committed to the repository — source code, comments, docs, Markdown,
+commit messages, and planning notes — must be written in English. User-facing
+strings are the only exception and must go through the i18n system, never
+hardcoded.
 
-### Biome Configuration
+### Branch review
 
-- 80 character line width
-- Double quotes
-- Trailing commas
-- CRLF line endings
-- Strict React and TypeScript rules
+Use the `review-branch` skill to review a branch against its parent. ui-kit is a
+separate repository that this repo consumes only as a published package, so a
+ui-kit change must be reviewed inside a `docspace-ui-kit-react` checkout (its
+own base branch, via `git config branch.<name>.reviewBase` or auto-detect) —
+nothing in this repo's diff reflects it beyond the version bump.
 
-## Requirements
+### Dependency audits
 
-- Node.js >= 24
-- pnpm >= 10.28.0
-- Docker (for E2E tests)
+The repo has several independent lockfiles, so a clean `pnpm audit` at the root
+covers only the pnpm workspace. Use the `audit-deps` skill (or run
+`node .claude/scripts/audit/audit-deps.mjs`) to audit every tree at once -
+including the npm sub-projects under `common/` - and to get the override line
+that fixes each finding. Overrides go in `pnpm-workspace.yaml` for pnpm trees
+and in the project's own `package.json` for npm trees; ui-kit is a separate
+repository and its findings belong there, not here.
 
-## Settings and Permissions
+### pnpm version
 
-When adding entries to `.claude/settings.json` permissions, never include absolute paths (e.g. `/Users/username/...` or `/home/username/...`). All allowed commands must use paths relative to the project root or generic glob patterns. Entries with hardcoded absolute paths or specific commit hashes must not be added.
+The pnpm version is hardcoded in three repos: `packageManager` and
+`engines.pnpm` in `package.json`, seven Dockerfiles here, and two files in the
+separate `docspace-ui-kit-react` repository. Only CI (`pnpm/action-setup`) and the buildtools build
+image follow `packageManager` on their own — the Dockerfiles use
+`npm install -g pnpm@…` and drift silently. buildtools must keep a bare
+`corepack enable` and needs a flag audit on every major, since no gate or CI
+covers it — `.claude/rules/pnpm.md` has the reasoning. Use the `update-pnpm`
+skill to bump them together and regenerate both lockfiles.
+
+### License headers
+
+Every new source file (`.ts`, `.tsx`, `.js`, `.jsx`; `.scss` by convention)
+must start with the standard AGPL header — copy it from any neighboring file,
+or run `python3 common/scripts/update-license-headers.py` to fix headers in
+bulk. Enforced for `.ts/.tsx/.js/.jsx` by `common/tests/test/license.test.js`
+in the pre-push gate (tests, stories, configs and `.d.ts` are exempt); its
+allowlist JSONs freeze pre-existing debt and must only ever shrink — see
+`.claude/rules/source-checks.md` for details.
+
+### Commit messages
+
+Do not add `Co-Authored-By` trailers or any other AI-attribution lines to
+commit messages.
+
+### Git hooks (lefthook)
+
+`lefthook.yml` runs a blocking pre-push gate — six sequential commands, any
+failure aborts the push:
+
+1. `pnpm run tsc` — type checking, all packages
+2. `pnpm run lint` — Biome, all packages
+3. `npm --prefix ./common/tests run test:lefthook` — locale, asset, color,
+   license-header and dependency checks (translation-completeness suites are
+   skipped here, so a green push does **not** mean locales are complete)
+4. `pnpm run test` — shared unit tests
+5. `pnpm run test:client` — client unit tests (incl. store tests)
+6. `pnpm run test:sdk` — sdk unit tests
+
+Expect a push to take several minutes. To debug a blocked push, run the
+failing command individually. Never bypass the gate with `git push --no-verify`.
+
+CI lives in Gitea Actions (`.gitea/workflows/frontend-common-tests.yaml`) but
+is **manual-dispatch only** — there is no automatic PR/push CI, so the
+pre-push gate is the only automatic check. CI additionally covers what
+lefthook skips: full locale completeness, `pnpm licenses-audit`, and all
+Playwright E2E suites.
+
+## Internationalization (i18n)
+
+User-facing strings always go through `t()`. **Never hardcode brand names or
+product names** — neither in code nor in translation strings. Pass them as
+`{{variables}}` via `getBrandName()` (`@docspace/shared/constants/brands`),
+`getConstName()` (`@docspace/shared/constants/consts`) or `getCultureLabel()`
+(`@docspace/shared/constants/cultures`).
+
+Full reference (locale file locations, test rules, completeness reports,
+supported languages) is in `.claude/rules/i18n.md`, loaded automatically when
+editing locale files. For translation work use the `translate-locales`,
+`translate-key` and `translate-progress` skills; `translate-stale` finds keys
+whose English was reworded while the translations stayed behind — no test
+catches that. `translate-comments` writes the translator comment in
+`.meta` from the real call sites — run it before translating new keys, since
+the translation skills use that comment as context.
+
+## Detailed rules (auto-loaded by path)
+
+| Rule | Loaded when editing |
+|------|---------------------|
+| `.claude/rules/client-architecture.md` | `packages/client/src/**`, `packages/shared/**` |
+| `.claude/rules/source-checks.md` | `packages/**`, `public/images/**` |
+| `.claude/rules/generated-artifacts.md` | `public/locales/.constants/**`, `**/biome-plugins/**`, `**/package.json` |
+| `.claude/rules/unit-tests.md` | `**/*.test.*`, `**/__tests__/**` (unit), vitest configs |
+| `.claude/rules/i18n.md` | `public/locales/**`, `common/tests/**` |
+| `.claude/rules/bulk-locale-edits.md` | `public/locales/**`, `packages/*/public/locales/**`, `common/scripts/**` |
+| `.claude/rules/e2e-tests.md` | `packages/client/__tests__/**`, `packages/shared/__mocks__/**` |
+| `.claude/rules/link-preview.md` | `packages/client/index.html`, `packages/shared/utils/link-preview.ts`, `packages/shared/components/link-preview-meta/**`, `packages/login/src/app/link-preview/**` |
+| `.claude/rules/access-matrix.md` | access rules for user types and room roles, and their specs |
+| `.claude/rules/dashboard-matrix.md` | `packages/client/src/pages/Dashboard/**`, `dashboard-appearance.spec.ts`, its screenshots |
+| `.claude/rules/pnpm.md` | `package.json`, `pnpm-workspace.yaml`, Dockerfiles, CI workflows |
+| `.claude/rules/claude-settings.md` | `.claude/settings*.json` |
+| `.claude/rules/vscode-tasks.md` | `.vscode/**`, `frontend.code-workspace` |

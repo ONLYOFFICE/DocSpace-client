@@ -46,6 +46,40 @@ body.no-select {
   user-select: none;
 }
 
+body.drag-cursor * {
+  cursor: grabbing !important;
+}
+
+// DnD color tokens (matched to ui-kit DragAndDrop.module.scss variables)
+.light {
+  --sdk-dnd-bg: rgba(255, 249, 219, 1);
+  --sdk-dnd-accept-bg: rgba(255, 239, 175, 1);
+}
+
+.dark {
+  --sdk-dnd-bg: rgba(78, 70, 54, 1);
+  --sdk-dnd-accept-bg: rgba(168, 143, 86, 1);
+}
+
+// Row / Tile view: hover target highlight
+.droppable.droppable-hover {
+  background: var(--sdk-dnd-accept-bg, rgba(255, 239, 175, 1));
+  border-radius: 4px;
+}
+
+// Table view: highlight all droppable rows during drag (base color).
+// drag-cursor = internal file-move drag; os-drag = OS file upload drag.
+body.drag-cursor .droppable .table-container_cell,
+body.os-drag .droppable .table-container_cell {
+  background: var(--sdk-dnd-bg, rgba(255, 249, 219, 1)) !important;
+}
+
+// Table view: hover target — stronger color
+body.drag-cursor .droppable.droppable-hover .table-container_cell,
+body.os-drag .droppable.droppable-hover .table-container_cell {
+  background: var(--sdk-dnd-accept-bg, rgba(255, 239, 175, 1)) !important;
+}
+
 html,
 body {
   height: 100%;
@@ -79,4 +113,9 @@ body {
 
 body.loading * {
   cursor: wait !important;
+}
+
+.files-item,
+.files-item * {
+  user-select: none;
 }

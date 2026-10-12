@@ -32,7 +32,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { DELETE_TAG_DONT_SHOW_AGAIN_KEY } from "../TagManagement.constants";
@@ -61,6 +61,19 @@ export function useDeleteConfirmation(): UseDeleteConfirmationReturn {
 
   const [modalState, setModalState] = useState<ModalState>({ isOpen: false });
 
+  // The question, for as long as it is unanswered. Kept beside the state so
+  // that going away can answer it: the caller is waiting on this promise, and
+  // a promise that never settles leaves it waiting for the rest of the page's
+  // life - with the delete it was about neither sent nor abandoned.
+  const pending = useRef<((value: boolean) => void) | null>(null);
+
+  useEffect(() => {
+    return () => {
+      pending.current?.(false);
+      pending.current = null;
+    };
+  }, []);
+
   const requestConfirmation = useCallback(
     async (tag: string): Promise<boolean> => {
       if (isChecked) {
@@ -68,6 +81,7 @@ export function useDeleteConfirmation(): UseDeleteConfirmationReturn {
       }
 
       return new Promise<boolean>((resolve) => {
+        pending.current = resolve;
         setModalState({ isOpen: true, tagToDelete: tag, resolve });
       });
     },
@@ -75,6 +89,8 @@ export function useDeleteConfirmation(): UseDeleteConfirmationReturn {
   );
 
   const handleConfirm = useCallback(() => {
+    pending.current = null;
+
     setModalState((prev) => {
       if (prev.resolve) {
         prev.resolve(true);
@@ -84,6 +100,8 @@ export function useDeleteConfirmation(): UseDeleteConfirmationReturn {
   }, []);
 
   const handleCancel = useCallback(() => {
+    pending.current = null;
+
     setModalState((prev) => {
       if (prev.resolve) {
         prev.resolve(false);

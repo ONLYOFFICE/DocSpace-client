@@ -1,6 +1,10 @@
 {
   "HideInput": "Gizle",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} / {{total}}</0> yüklendi. Depolama kotası aşıldı — <1>ayrıntıları görüntüle</1>.",
+  "QuotaExceededTooltip": "Depolama kotası aşıldı. Alan açın veya planınızı yükseltin, ardından tekrar deneyin.",
   "Ready": "Bitti",
+  "RetryAfterQuotaUpgrade": "Kota yükseltildikten sonra yeniden dene",
+  "RetryUpload": "Yeniden dene",
   "UploadingAndConversion": "Yükleme ve Dönüştürme",
   "UploadingError": "Yükleme hatası"
 }

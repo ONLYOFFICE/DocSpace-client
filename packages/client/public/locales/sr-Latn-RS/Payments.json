@@ -5,7 +5,7 @@
   "ChooseNewPlan": "Da li biste želeli da izaberete novi cenovni plan?",
   "GracePeriodActive": "Period gracioznosti je aktivan <1>od {{fromDate}} do {{byDate}}</1> (preostalo dana: {{delayDaysCount}}).",
   "LicenseExpiredRestriction": "Nije moguće dodati nove korisnike i kreirati nove sobe. Licenca je istekao.",
-  "LicenseGracePeriodInfo": "Tokom ovog perioda, administratorima nije omogućeno kreiranje novih soba ili dodavanje novih korisnika. Kada prođe period gracioznosti, {{productName}} neće biti dostupan dok se ne aktivira nova licence.",
+  "LicenseGracePeriodInfo": "Tokom ovog perioda, administratorima nije omogućeno kreiranje novih soba ili dodavanje novih korisnika. Kada prođe grejs period, radni prostor neće biti dostupan dok se ne aktivira nova licenca.",
   "NewRoomWillExceedLimit": "Kreiranje ove prostorije nije moguće jer je dostignut limit za broj prostorija uključenih u vaš trenutni plan.",
   "NewUsersWillExceedMembersLimit": "Dodavanje novih plaćenih korisnika nije moguće jer je dostignut limit za broj admina uključenih u vaš trenutni plan.",
   "NotPossibleRoomRestoring": "Obnavljanje ove prostorije nije moguće jer je dostignut limit za broj prostorija uključenih u vaš trenutni plan.",

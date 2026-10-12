@@ -34,38 +34,16 @@
  */
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
-import styled from "styled-components";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { InputBlock } from "@onlyoffice/apps-ui-kit/components/input-block";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import { mobile } from "@docspace/shared/utils";
-
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 16px;
-  max-width: 520px;
-
-  .input {
-    width: 100%;
-  }
-
-  @media ${mobile} {
-    max-width: 100%;
-  }
-
-  .label > div {
-    display: inline-flex;
-    margin-inline-start: 4px;
-  }
-`;
+import styles from "./MetadataUrlField.module.scss";
 
 const MetadataUrlField = ({
   labelText,
@@ -83,8 +61,8 @@ const MetadataUrlField = ({
   };
 
   return (
-    <StyledWrapper>
-      <Text className="label" fontSize="13px" as="div" fontWeight={600}>
+    <div className={styles.styledWrapper}>
+      <Text className={styles.label} fontSize="13px" as="div" fontWeight={600}>
         {labelText}
         <HelpButton
           place="right"
@@ -95,7 +73,7 @@ const MetadataUrlField = ({
         />
       </Text>
       <InputBlock
-        className="input"
+        className={styles.input}
         iconButtonClassName={name}
         isDisabled
         name={name}
@@ -105,7 +83,7 @@ const MetadataUrlField = ({
         onIconClick={onCopyClick}
         testId={dataTestId ? `${dataTestId}_input` : undefined}
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

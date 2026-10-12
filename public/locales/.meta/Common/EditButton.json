@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2026-06-05T11:04:11.795Z",
+  "updated_at": "2026-10-01T08:23:21.777Z",
   "comment": {
     "text": "This is a button label. It allows users to edit settings, such as auto-payments or submission configurations.",
     "is_auto": true,
@@ -12,21 +12,21 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
       "line_number": 323,
       "context": "<CurrentPaymentSettings\n autoPayments={autoPayments!}\n formatWalletCurrency={formatWalletCurrency}\n />\n <Button\n key=\"EditButton\"\n label={t(\"EditButton\")}\n size={ButtonSize.small}\n onClick={onEditClick}\n isDisabled={isDisabled}\n testId=\"edit_auto_payment_button\"",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/libs/ui-kit/billing/wallet/sub-components/AutoPaymentInfo.tsx",
-      "line_number": 94,
-      "context": "<Link\n onClick={onOpen}\n textDecoration=\"underline\"\n dataTestId=\"auto_edit_button\"\n >\n {t(\"EditButton\")}\n </Link>\n ) : null}\n </Text>\n </div>\n </div>",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/PauseSubmissionsDialog/index.tsx",
       "line_number": 105,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"pause-submissions-dialog_edit\"\n key=\"EditButton\"\n label={t(\"Common:EditButton\")}\n size={ButtonSize.normal}\n primary\n onClick={handleEdit}\n isLoading={isLoading}\n isDisabled={isLoading}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx",
+      "line_number": 169,
+      "context": "<IconButton\n className={styles.profileCardEdit}\n iconName={PencilReactSvgUrl}\n size={12}\n onClick={handleEditPortalName}\n title={t(\"Common:EditButton\")}\n dataTestId=\"dashboard-profile-rename\"\n />\n ) : null}\n </span>\n </div>",
       "module": "/packages/client"
     },
     {
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 810,
+      "line_number": 816,
       "context": "testId=\"appearance_save_button\"\n />\n \n <Button\n className=\"edit-current-theme button\"\n label={t(\"Common:EditButton\")}\n onClick={onClickEdit}\n size={buttonSize}\n isDisabled={isDisabledEditButton}\n testId=\"appearance_edit_button\"\n />",
       "module": "/packages/client"
     },
@@ -54,26 +54,32 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 427,
+      "context": "fontWeight={600}\n textDecoration=\"underline dashed\"\n onClick={() => openBuyPlan?.(\"edit\")}\n dataTestId=\"docs_connect_edit_subscription_link\"\n >\n {t(\"Common:EditButton\")}\n </Link>\n )}\n </div>\n <div className={styles.detailRows}>\n <div className={styles.detailRow}>",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/CertificatesTable.js",
       "line_number": 79,
       "context": "const contextOptions = [\n {\n id: \"edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: onEdit,\n },\n {\n id: \"delete\",",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2254,
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 366,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2254,
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 366,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 767,
+      "line_number": 802,
       "context": "}\n \n const editOption = {\n key: \"edit\",\n icon: PencilReactSvgUrl,\n label: t(\"Common:EditButton\"),\n onClick: () => this.editClient(clientId),\n dataTestId: \"oauth_edit_option\",\n };\n \n const authButtonOption = {",
       "module": "/packages/client"
     },
@@ -85,7 +91,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 192,
+      "line_number": 345,
       "context": "const getEditItem = useCallback(\n (i: TFileItem) => {\n return {\n id: \"option_edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n const isPdf = i.fileExst === \".pdf\";\n if (isPdf && isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));",
       "module": "/packages/sdk"
     },
@@ -97,7 +103,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 207,
+      "line_number": 214,
       "context": ": null,\n edit: canEdit\n ? {\n id: \"option_edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: PencilReactSvgUrl,\n onClick: () => openForm(file, \"edit\"),\n disabled: false,\n }\n : null,",
       "module": "/packages/sdk"
     },
@@ -109,13 +115,13 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 340,
+      "line_number": 444,
       "context": "};\n \n export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {\n switch (access) {\n case ShareAccessRights.Editing:\n return t(\"Common:EditButton\");\n case ShareAccessRights.CustomFilter:\n return t(\"Common:UseCustomFilter\");\n case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 340,
+      "line_number": 444,
       "context": "};\n \n export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {\n switch (access) {\n case ShareAccessRights.Editing:\n return t(\"Common:EditButton\");\n case ShareAccessRights.CustomFilter:\n return t(\"Common:UseCustomFilter\");\n case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:",
       "module": "/packages/shared"
     }

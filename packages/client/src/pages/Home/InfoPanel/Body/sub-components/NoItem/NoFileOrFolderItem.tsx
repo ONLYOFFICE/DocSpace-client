@@ -35,7 +35,7 @@
 
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.light.svg?url";
 import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.dark.svg?url";
@@ -43,7 +43,7 @@ import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.files.in
 import styles from "./NoItem.module.scss";
 
 const NoFileOrFolderItem = () => {
-  const { t } = useTranslation(["InfoPanel"]);
+  const { t } = useTranslation(["Common"]);
 
   const { isBase } = useTheme();
 
@@ -61,3 +61,4 @@ const NoFileOrFolderItem = () => {
 };
 
 export default NoFileOrFolderItem;
+

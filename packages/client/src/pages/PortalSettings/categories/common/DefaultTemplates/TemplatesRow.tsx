@@ -43,18 +43,18 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { TDefaultTemplateItem } from "@docspace/shared/types";
 import { UrlActionType } from "@docspace/shared/enums";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import {
   getTitleWithoutExtension,
   getUpperCaseExtension,
 } from "@docspace/shared/utils";
 import { getConvertedSize } from "@docspace/shared/utils/common";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
@@ -62,7 +62,6 @@ import { ResetTemplateDialog } from "SRC_DIR/components/dialogs";
 
 import { TFile } from "./TemplatesRow.types";
 import styles from "./DefaultTemplates.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type Props = {
   item: TDefaultTemplateItem;
@@ -98,16 +97,14 @@ const TemplatesRow = ({
     const selectOption = [
       {
         key: "upload-from-docspace",
-        label: t("EmptyView:UploadFromPortalTitle", {
-          productName: getBrandName("ProductName"),
-        }),
+        label: t("EmptyView:UploadFromPortalTitle"),
         onClick: () => setIsSelectorVisible(true),
         disabled: false,
         icon: UploadIcon,
       },
       {
         key: "upload-from-device",
-        label: t("EmptyView:UploadDevicePDFFormOptionTitle"),
+        label: t("EmptyView:UploadDeviceOptionTitle"),
         onClick: () => {
           setTimeout(() => {
             fileInputRef.current?.click();
@@ -128,7 +125,9 @@ const TemplatesRow = ({
         {
           key: "preview",
           label: t("Common:Preview"),
-          onClick: () => openDocEditor?.(item.id, true),
+          // item.id may be null in the row model; the erased
+          // cast keeps the old unchecked call.
+          onClick: () => openDocEditor?.(item.id as number, true),
           disabled: false,
           icon: EyeIcon,
         },
@@ -190,7 +189,10 @@ const TemplatesRow = ({
         onReset={() => onResetFile()}
         onClose={() => setIsDialogVisible(false)}
       />
-      <ReactSVG src={icon} className={styles.icon} />
+      {/* type-only assertion — `icon` is undefined only when
+          the optional getFileIcon prop is not injected, and the original code
+          passed it to ReactSVG unchanged. */}
+      <ReactSVG src={icon!} className={styles.icon} />
       <div className={styles.rowContent}>
         <div className={styles.mainContent}>
           <Text fontWeight={600} fontSize="13px" truncate>
@@ -220,6 +222,7 @@ const TemplatesRow = ({
           fontWeight={700}
           lineHeight="100%"
           padding="2px 5px"
+          maxWidth="none"
         />
       </div>
       <ContextMenuButton
@@ -233,6 +236,7 @@ const TemplatesRow = ({
         <FilesSelector
           key="select-default-template-dialog"
           filterParam={filterParam}
+          withSubFolders={false}
           isPanelVisible={isSelectorVisible}
           onSelectFile={(file) => onSelectFile(file as TFile)}
           onClose={() => setIsSelectorVisible(false)}

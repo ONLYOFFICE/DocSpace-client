@@ -33,79 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { mobile } from "@docspace/ui-kit/utils/device";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { ImageEditor } from "@docspace/ui-kit/components/image-editor";
+import { AvatarEditorDialog as AvatarEditorDialogUI } from "@onlyoffice/apps-ui-kit/components/avatar-editor-dialog";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { loadAvatar } from "@docspace/shared/api/people";
 import { dataUrlToFile } from "@docspace/shared/utils/dataUrlToFile";
-
-const IMAGE_CROPPER_HEIGHT = 448;
-const HEADER = 70;
-const BUTTONS = 72;
-
-const StyledModalDialog = styled(ModalDialog)`
-  #modal-dialog {
-    max-height: fit-content;
-
-    .modal-header {
-      height: 54px;
-      min-height: 54px;
-    }
-
-    .modal-footer {
-      box-sizing: border-box;
-      max-height: 72px;
-    }
-
-    ${(props) =>
-      props.scrollBodyHeight &&
-      css`
-        .modal-body {
-          height: ${`${props.scrollBodyHeight}px`};
-        }
-      `}
-  }
-  .wrapper-image-editor {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    .avatar-editor {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-
-      @media ${mobile} {
-        justify-content: center;
-      }
-    }
-  }
-`;
-
-const StyledBodyContent = styled.div`
-  display: contents;
-
-  .wrapper-image-editor {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    .avatar-editor {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
-  }
-`;
 
 const AvatarEditorDialog = (props) => {
   const { t } = useTranslation([
@@ -114,7 +50,6 @@ const AvatarEditorDialog = (props) => {
     "Common",
     "CreateEditRoomDialog",
     "Ldap",
-    "RoomLogoCover",
   ]);
 
   const {
@@ -135,8 +70,6 @@ const AvatarEditorDialog = (props) => {
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [preview, setPreviewState] = useState(null);
-  const [scrollBodyHeight, setScrollBodyHeight] = useState(null);
 
   const editorBorderRadius = isProfileUpload ? 400 : 110;
 
@@ -144,25 +77,7 @@ const AvatarEditorDialog = (props) => {
     ? t("Ldap:LdapAvatar")
     : isAIAgentsFolderRoot
       ? t("RoomLogoCover:AgentCover")
-      : t("RoomLogoCover:RoomCover");
-
-  const onResize = () => {
-    const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;
-    const screenHeight = document.documentElement.clientHeight;
-
-    if (screenHeight < imageCropperModalHeight)
-      setScrollBodyHeight(screenHeight - HEADER - BUTTONS);
-    else setScrollBodyHeight(null);
-  };
-
-  useEffect(() => {
-    onResize();
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
+      : t("Common:RoomCover");
 
   const onCloseModal = () => {
     onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
@@ -170,7 +85,7 @@ const AvatarEditorDialog = (props) => {
     onClose && onClose();
   };
 
-  const onSaveClick = async () => {
+  const onSaveClick = async (img, preview) => {
     setIsLoading(true);
 
     const file = await dataUrlToFile(preview);
@@ -200,68 +115,27 @@ const AvatarEditorDialog = (props) => {
     }
   };
 
-  const onSaveAction = async (img) => {
+  const onSaveAction = async (image, preview) => {
     setIsLoading(true);
-
-    await onSave(img);
-
+    await onSave(image, preview);
     setIsLoading(false);
   };
 
   return (
-    <StyledModalDialog
-      displayType="modal"
-      withBodyScroll
+    <AvatarEditorDialogUI
+      t={t}
       visible={visible}
-      onClose={onCloseModal}
-      withFooterBorder
-      withBodyScrollForcibly={!!scrollBodyHeight}
-      scrollBodyHeight={scrollBodyHeight}
+      title={avatarTitle}
+      image={image}
+      isLoading={isLoading}
+      editorBorderRadius={editorBorderRadius}
+      maxImageSize={maxImageUploadSize}
       dataTestId={dataTestId}
-    >
-      <ModalDialog.Header>
-        <Text fontSize="21px" fontWeight={700}>
-          {avatarTitle}
-        </Text>
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        <StyledBodyContent>
-          <ImageEditor
-            t={t}
-            className="wrapper-image-editor"
-            classNameWrapperImageCropper="avatar-editor"
-            image={image}
-            setPreview={setPreview || setPreviewState}
-            onChangeImage={onChangeImage}
-            onChangeFile={onChangeFile}
-            maxImageSize={maxImageUploadSize}
-            editorBorderRadius={editorBorderRadius}
-          />
-        </StyledBodyContent>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          className="save"
-          key="AvatarEditorSaveBtn"
-          label={t("Common:SaveButton")}
-          size="normal"
-          scale
-          primary
-          onClick={onSave ? () => onSaveAction(image) : onSaveClick}
-          isLoading={isLoading}
-          testId="avatar_editor_save_button"
-        />
-        <Button
-          className="cancel-button"
-          key="AvatarEditorCloseBtn"
-          label={t("Common:CancelButton")}
-          size="normal"
-          scale
-          onClick={onCloseModal}
-          testId="avatar_editor_cancel_button"
-        />
-      </ModalDialog.Footer>
-    </StyledModalDialog>
+      onClose={onCloseModal}
+      onSave={isProfileUpload ? onSaveClick : onSaveAction}
+      onChangeImage={onChangeImage}
+      onChangeFile={onChangeFile}
+    />
   );
 };
 
@@ -284,3 +158,4 @@ export default inject(
     };
   },
 )(observer(AvatarEditorDialog));
+

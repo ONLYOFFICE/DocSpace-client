@@ -51,8 +51,13 @@ export type TConflictResolveDialogData = {
   translations: { [key: string]: string };
   isUploadConflict: boolean;
   newUploadData: {
-    files: { file: { name: string; size: string } }[];
+    /** Browser File objects report size as a number; some still-.js callers
+     * pass it as a string. */
+    files: { file: { name: string; size: string | number } }[];
     filesSize: number;
+    /** Set by UploadDataStore.startUpload for upload conflicts; consumed by
+     * UploadDataStore.cancelUploadAction. */
+    allNewFiles?: { uniqueId: string }[];
   };
 
   selectedFolder?: TFolder;
@@ -101,7 +106,7 @@ export interface ConflictResolveDialogProps {
       files: {
         file: {
           name: string;
-          size: string;
+          size: string | number;
         };
       }[];
       filesSize: number;

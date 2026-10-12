@@ -42,7 +42,14 @@ export type TQuotas = {
   wallet?: boolean;
   dueDate?: string;
   nextQuantity?: number;
+  nextQuota?: number;
   state?: QuotaState;
+};
+
+export type TPortalWalletService = {
+  id?: number;
+  serviceName?: string;
+  features?: { id?: string }[];
 };
 
 export type TPortalTariff = {
@@ -139,6 +146,8 @@ export type TPortal = {
   trustedDomainsType: number;
   version: number;
   versionChanged: Date;
+  /** Custom DNS name; present when a mapped domain is configured */
+  mappedDomain?: string;
 };
 
 export type TTariff = {
@@ -222,6 +231,7 @@ export type TLicenseQuota = {
 
 export type TCustomerInfo = {
   paymentMethodStatus: number;
+  isDelayedPaymentMethod?: boolean;
   email: string | null;
   portalId: string | null;
   payer: {

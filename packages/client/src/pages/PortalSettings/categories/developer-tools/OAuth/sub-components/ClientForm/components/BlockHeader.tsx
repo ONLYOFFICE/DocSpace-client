@@ -33,11 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import classNames from "classnames";
 
-import { StyledHeaderRow } from "../ClientForm.styled";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+
+import styles from "../ClientForm.styled.module.scss";
 
 interface BlockHeaderProps {
   header: string;
@@ -53,7 +55,7 @@ const BlockHeader = ({
   isRequired,
 }: BlockHeaderProps) => {
   return (
-    <StyledHeaderRow className={className}>
+    <div className={classNames(styles.styledHeaderRow, className)}>
       <Text
         fontSize="16px"
         fontWeight={700}
@@ -84,7 +86,7 @@ const BlockHeader = ({
           tooltipContent={helpButtonText}
         />
       ) : null}
-    </StyledHeaderRow>
+    </div>
   );
 };
 

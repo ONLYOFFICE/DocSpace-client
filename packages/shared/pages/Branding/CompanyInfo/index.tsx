@@ -37,15 +37,15 @@ import React, { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import {
 	TextInput,
 	InputType,
 	InputSize,
-} from "@docspace/ui-kit/components/text-input";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
 
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { AboutDialog } from "../../../components/about-dialog";
@@ -53,7 +53,6 @@ import { AboutDialog } from "../../../components/about-dialog";
 import { ICompanyInfo } from "./CompanyInfo.types";
 import { useCompanySettings } from "./useCompanySettings";
 import styles from "./CompanyInfo.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const CompanyInfo = ({
 	isSettingPaid,
@@ -151,9 +150,7 @@ export const CompanyInfo = ({
 						"section-description",
 					)}
 				>
-					{t("BrandingSectionDescription", {
-						productName: getBrandName("ProductName"),
-					})}
+					{t("BrandingSectionDescription")}
 				</div>
 				<div className={classNames(styles.header, "header")}>
 					{t("CompanyInfoSettings")}

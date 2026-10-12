@@ -40,9 +40,9 @@ import { useTranslation, Trans } from "react-i18next";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
+import ErrorContainer from "@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer";
 
 import {
   getMessageFromKey,
@@ -50,7 +50,6 @@ import {
   getOAuthMessageKeyTranslation,
 } from "@/utils";
 import { OAuth2ErrorKey } from "@/utils/enums";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const homepage = "/";
 
@@ -93,9 +92,6 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
         <Trans
           t={t}
           i18nKey="ErrorInvalidText"
-          values={{
-            productName: getBrandName("ProductName"),
-          }}
           components={{
             1: (
               <Link

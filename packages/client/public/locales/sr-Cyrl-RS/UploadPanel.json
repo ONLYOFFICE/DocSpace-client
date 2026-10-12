@@ -1,6 +1,10 @@
 {
   "HideInput": "Сакриј",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} од {{total}}</0> отпремљено. Прекорачена квота складишта — <1>погледај детаље</1>.",
+  "QuotaExceededTooltip": "Прекорачена квота складишта. Ослободите простор или надоградите план, па покушајте поново.",
   "Ready": "Готово",
+  "RetryAfterQuotaUpgrade": "Покушајте поново након надоградње квоте",
+  "RetryUpload": "Покушај поново",
   "UploadingAndConversion": "Отпремање и конверзија",
   "UploadingError": "Грешка приликом отпремања"
 }

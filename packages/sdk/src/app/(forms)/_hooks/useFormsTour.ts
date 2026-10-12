@@ -40,8 +40,8 @@ import { useEffect, useMemo, useRef } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useJoyride, EVENTS, STATUS, ACTIONS } from "react-joyride";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { DeviceType } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
@@ -65,7 +65,6 @@ export default function useFormsTour(showMenu = true) {
   const router = useRouter();
   const { currentDeviceType } = useDeviceType();
   const isMobile = currentDeviceType === DeviceType.mobile;
-  const isTablet = currentDeviceType === DeviceType.tablet;
   const pathname = usePathname();
   const pathnameRef = useRef(pathname);
   pathnameRef.current = pathname;
@@ -114,8 +113,8 @@ export default function useFormsTour(showMenu = true) {
   const showSettings = !!(user?.isOwner || user?.isAdmin);
 
   const tourFlags = useMemo<TourStepFlags>(
-    () => ({ canCreate, showLibrary, showSettings, showMenu, isTouch: isTablet }),
-    [canCreate, showLibrary, showSettings, showMenu, isTablet],
+    () => ({ canCreate, showLibrary, showSettings, showMenu }),
+    [canCreate, showLibrary, showSettings, showMenu],
   );
 
   const steps = useMemo(
@@ -172,7 +171,6 @@ export default function useFormsTour(showMenu = true) {
     if (showSettings) {
       routes.push(
         `/forms/settings/billing${qs_suffix}`,
-        `/forms/settings/ai-agent${qs_suffix}`,
         `/forms/settings/access${qs_suffix}`,
         `/forms/settings/collect-data${qs_suffix}`,
       );

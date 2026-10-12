@@ -1,0 +1,509 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import React from "react";
+import { inject, observer } from "mobx-react";
+import { useLocation, useNavigate } from "react-router";
+import { useTranslation, Trans } from "react-i18next";
+
+import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { FloatingButton } from "@onlyoffice/apps-ui-kit/components/floating-button";
+import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
+import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
+import { getBrandName } from "@docspace/shared/constants/brands";
+import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
+import { DeviceType } from "@docspace/shared/enums";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
+import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
+import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
+import ChatPanelView from "@onlyoffice/apps-ui-kit/components/section/sub-components/ChatPanel";
+
+import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
+import type { AppId } from "SRC_DIR/helpers/apps-catalog";
+import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
+import { IntegrationsCard } from "SRC_DIR/components/IntegrationsCard";
+import {
+  useChatNoAccess,
+  mapChatNoAccessStores,
+  type ChatNoAccessStoreProps,
+} from "SRC_DIR/Hooks/useChatNoAccess";
+
+import { WelcomeDialog } from "./WelcomeDialog";
+import { DashboardTourHost } from "./DashboardTourHost";
+import { ModuleCard } from "./sub-components/ModuleCard";
+import { ProfileCard } from "./sub-components/ProfileCard";
+import { DevToolsCard } from "./sub-components/DevToolsCard";
+import { Header } from "./sub-components/Header";
+import { DashboardLoader } from "./sub-components/DashboardLoader";
+import { GuestRestrictionTooltip } from "./sub-components/GuestRestrictionTooltip";
+import { useUploadToMyDocuments } from "./hooks/useUploadToMyDocuments";
+import { useCreateActions } from "./hooks/useCreateActions";
+import { useModuleItems } from "./hooks/useModuleItems";
+import { useMyFolderId } from "./hooks/useMyFolderId";
+import { modulesGridStyle } from "./utils";
+import styles from "./Dashboard.module.scss";
+
+type DashboardProps = ChatNoAccessStoreProps & {
+  isGuest: boolean;
+  showLoader: boolean;
+  currentDeviceType?: TStore["settingsStore"]["currentDeviceType"];
+  requestAppTour: (appId: AppId) => void;
+  /** Arms the dashboard's own tour, which `DashboardTour` then starts. */
+  requestDashboardTour: () => void;
+  /** Admins / owners / room admins — the set allowed to create rooms. */
+  canCreateRooms: boolean;
+  /** Portal admins and the owner, which the apps subtitle wording follows. */
+  isAdminOrOwner: boolean;
+  /** Whether Docs Connect can be offered at all — SaaS, admin or owner. */
+  canOpenDocsConnect: boolean;
+  /** Whether the portal's AI is set up, which agent creation also needs. */
+  aiReady: boolean;
+  /** The portal-wide AI switch: with it off the AI Agents card is dropped. */
+  aiServicesEnabled: boolean;
+  /** Names the plan in the apps subtitle: Startup when free, Business when paid. */
+  isFreeTariff: boolean;
+  /** Startup and Business are SaaS tariffs; standalone gets the neutral copy. */
+  standalone: boolean;
+  /** Rooms quota exhausted or portal in its grace period. */
+  isWarningRoomsDialog: boolean;
+  setQuotaWarningDialogVisible: (visible: boolean) => void;
+  logoText: string;
+};
+
+const UPLOAD_LINK_ID = "dashboard-upload-link";
+const DOCS_CONNECT_PATH = "/developer-tools/docs-connect";
+
+const Dashboard = (props: DashboardProps) => {
+  const {
+    isGuest,
+    showLoader,
+    currentDeviceType,
+    requestAppTour,
+    requestDashboardTour,
+    canCreateRooms,
+    isAdminOrOwner,
+    canOpenDocsConnect,
+    aiReady,
+    aiServicesEnabled,
+    isFreeTariff,
+    standalone,
+    isWarningRoomsDialog,
+    setQuotaWarningDialogVisible,
+    logoText,
+  } = props;
+  const { t } = useTranslation(["Common"]);
+  useDocumentTitle("Common:Home", logoText);
+
+  // Gates every tour entry point on this page. The tours walk through desktop
+  // chrome (`useTour` refuses to run on mobile outright), so on a phone the
+  // welcome is not offered and neither help icon is rendered — the CSS in
+  // `Dashboard.module.scss` hides them too, but a button that cannot do
+  // anything should not be in the tree to begin with.
+  const isMobile = currentDeviceType === DeviceType.mobile;
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const myFolderId = useMyFolderId();
+  const openFiles = React.useCallback(() => {
+    navigate("/rooms/personal/filter");
+  }, [navigate]);
+  const openDocsConnect = React.useCallback(() => {
+    navigate(DOCS_CONNECT_PATH);
+  }, [navigate]);
+  const { openUploadDialog, progress, clearProgress } = useUploadToMyDocuments(
+    myFolderId,
+    openFiles,
+  );
+  // Availability is computed once by the host (Shell) — it already accounts for
+  // the portal's AI services being switched off in settings — and shared
+  // through AiAgentProviders' context, the same signal Home reads.
+  const isAiChatAvailable = useIsAiChatAvailable();
+
+  const createItems = useCreateActions(myFolderId, isGuest, isAiChatAvailable);
+
+  // Agent creation needs AI to be set up on top of the create right. `aiReady`
+  // (portal /ai/config) can lag behind the chat-lib profiles, so existing
+  // profiles count as ready too — the same signal Home and the agents EmptyView
+  // use to decide whether to offer agent creation.
+  const hasAiProfiles = useHasAiProfiles();
+  const moduleItems = useModuleItems({
+    isGuest,
+    canCreateRooms,
+    canCreateAgents: (aiReady || hasAiProfiles) && canCreateRooms,
+    aiServicesEnabled,
+    isWarningRoomsDialog,
+    setQuotaWarningDialogVisible,
+  });
+
+  // The dashboard renders its own content (no SDK iframe). Tell the
+  // persistent host to drop the previous app's frame so it doesn't linger
+  // behind the dashboard.
+  useSdkFrame({ appId: "dashboard", enabled: false });
+
+  /**
+   * Whether the welcome is on screen. The help button in the header is its only
+   * entry point — the modal is never offered on its own, not even on a first
+   * visit, so nothing but this state decides it.
+   */
+  const [isWelcomeOpen, setIsWelcomeOpen] = React.useState(false);
+
+  const onWelcomeClose = React.useCallback(() => {
+    setIsWelcomeOpen(false);
+  }, []);
+
+  // Closes and arms the tour on the way out. The host below is what starts it,
+  // once the page has settled.
+  const onWelcomeTakeTour = React.useCallback(() => {
+    setIsWelcomeOpen(false);
+    requestDashboardTour();
+  }, [requestDashboardTour]);
+
+  // AI chat panel, mirroring the Home page: the "AI Chat" quick action opens
+  // the shared panel (AiChatStore), which the dashboard hosts itself since it
+  // doesn't render inside a Section.
+  const {
+    aiReady: aiChatReady,
+    noAccessProps: aiChatNoAccessProps,
+    topUpDialog: aiChatTopUpDialog,
+  } = useChatNoAccess(props);
+
+  const aiChatPanel = useAiChatPanel(true, {
+    aiReady: aiChatReady,
+    noAccessProps: aiChatNoAccessProps,
+  });
+
+  // The panel is shared state, so a portal that turns AI services off while a
+  // chat is open must not leave it on screen. Home does the same in
+  // `usePanelExclusivity`; the dashboard has no Info Panel to coordinate with,
+  // so only this half of that hook applies here. `useAiChatPanel` returns a new
+  // object each render, so the effect keys on its two reactive values rather
+  // than on the bindings themselves.
+  const { isChatPanelVisible, closeChatPanel } = aiChatPanel;
+  React.useEffect(() => {
+    if (!isAiChatAvailable && isChatPanelVisible) closeChatPanel();
+  }, [isAiChatAvailable, isChatPanelVisible, closeChatPanel]);
+
+  const isDesktop = useIsDesktop();
+  const isAiChatFullscreen =
+    isAiChatAvailable &&
+    aiChatPanel.isChatPanelVisible &&
+    (aiChatPanel.isChatPanelFullscreen || !isDesktop);
+
+  // The dashboard has no async content to load, so finish the sidebar's
+  // Overview item progress animation immediately (other pages dispatch this
+  // once their content is ready). Keyed on location so re-clicking Overview
+  // while already on it (same path, new location.key) ends the animation
+  // again instead of leaving it stuck in "progress".
+  React.useEffect(() => {
+    window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+  }, [location.key]);
+
+  // On first app load the sidebar shows its nav skeleton until initFiles
+  // resolves; render the matching body skeleton so the Overview doesn't pop in
+  // ahead of the navigation it sits next to.
+  if (showLoader) return <DashboardLoader />;
+
+  return (
+    <div
+      className={styles.dashboardLayout}
+      data-layout-mode={isAiChatFullscreen ? "ai-fullscreen" : undefined}
+    >
+      <div className={styles.dashboard} inert={isAiChatFullscreen}>
+        <Scrollbar className={styles.dashboardScrollbar}>
+          <div className={styles.dashboardInner}>
+            <Header
+              onOpenTour={isMobile ? undefined : () => setIsWelcomeOpen(true)}
+            />
+            <ProfileCard />
+
+            <section data-tour-id="dashboard-create" className={styles.section}>
+              <div className={styles.sectionHeading}>
+                <Text fontSize="18px" fontWeight={700} lineHeight="24px">
+                  <Trans
+                    t={t}
+                    ns="Common"
+                    i18nKey="CreateNewOrUpload"
+                    components={{
+                      1: (
+                        <Link
+                          id={UPLOAD_LINK_ID}
+                          type={LinkType.action}
+                          color="accent"
+                          isHovered
+                          isSemitransparent={isGuest}
+                          fontSize="18px"
+                          fontWeight={700}
+                          lineHeight="24px"
+                          onClick={isGuest ? undefined : openUploadDialog}
+                        />
+                      ),
+                    }}
+                  />
+                </Text>
+                <Text as="p" className={styles.sectionSubtitle}>
+                  {t("Common:NewFilesDefaultPlace", {
+                    sectionName: t("Common:Files"),
+                  })}
+                  {canOpenDocsConnect ? (
+                    <>
+                      {" - "}
+                      <Trans
+                        t={t}
+                        ns="Common"
+                        i18nKey="OrConnectDocs"
+                        values={{
+                          docsName: getBrandName("ProductEditorsName"),
+                        }}
+                        components={{
+                          1: (
+                            <Link
+                              type={LinkType.page}
+                              color="accent"
+                              isHovered
+                              className={styles.createSubtitleLink}
+                              onClick={openDocsConnect}
+                            />
+                          ),
+                        }}
+                      />
+                      {"."}
+                    </>
+                  ) : null}
+                </Text>
+              </div>
+              {isGuest ? (
+                <Tooltip
+                  id={`${UPLOAD_LINK_ID}-tooltip`}
+                  anchorSelect={`#${UPLOAD_LINK_ID}`}
+                  place="bottom"
+                  getContent={() => <GuestRestrictionTooltip />}
+                />
+              ) : null}
+              <QuickActions
+                items={createItems}
+                className={styles.quickActions}
+                prevLabel={t("Common:Previous")}
+                nextLabel={t("Common:Next")}
+              />
+            </section>
+
+            {moduleItems.length > 0 ? (
+              <section data-tour-id="dashboard-apps" className={styles.section}>
+                <div className={styles.sectionHeading}>
+                  <Text className={styles.sectionTitle}>
+                    {t("Common:DiscoverApps")}
+                  </Text>
+                  <Text className={styles.sectionSubtitle}>
+                    {isAdminOrOwner && !standalone
+                      ? t("Common:DiscoverAppsDescription", {
+                          planName: isFreeTariff
+                            ? t("Common:StartupPlan")
+                            : t("Common:BusinessPlan"),
+                        })
+                      : t("Common:DiscoverAppsWorkspaceDescription")}
+                  </Text>
+                </div>
+                <div
+                  className={styles.modulesGrid}
+                  style={modulesGridStyle(moduleItems.length)}
+                >
+                  {moduleItems.map((mod) => (
+                    <ModuleCard
+                      key={mod.id}
+                      mod={mod}
+                      onTakeTour={
+                        isMobile
+                          ? undefined
+                          : () => {
+                              requestAppTour(mod.id as AppId);
+                              // The tour runs inside the app's section, so this
+                              // navigates even when the button next to it
+                              // creates.
+                              navigate(mod.href);
+                            }
+                      }
+                    />
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
+            <IntegrationsCard dataTourId="dashboard-integrations" />
+            <DevToolsCard />
+          </div>
+        </Scrollbar>
+
+        {progress.isUploading ? (
+          <FloatingButton
+            icon="upload"
+            percent={progress.percent}
+            completed={progress.completed}
+            alert={progress.alert}
+            showCancelButton={progress.completed || progress.alert}
+            clearUploadedFilesHistory={clearProgress}
+          />
+        ) : null}
+
+        {isWelcomeOpen ? (
+          <WelcomeDialog
+            onTakeTour={onWelcomeTakeTour}
+            onClose={onWelcomeClose}
+            organizationName={logoText}
+          />
+        ) : null}
+
+        <DashboardTourHost />
+      </div>
+
+      {isAiChatAvailable ? (
+        <ChatPanelView
+          isVisible={aiChatPanel.isChatPanelVisible}
+          setIsVisible={(visible) => {
+            if (!visible) aiChatPanel.closeChatPanel();
+          }}
+          currentDeviceType={currentDeviceType}
+          isResizable
+          isFullscreen={isAiChatFullscreen}
+          width={aiChatPanel.chatPanelWidth}
+          onResize={aiChatPanel.setChatPanelWidth}
+          onRequestFullscreen={aiChatPanel.setChatPanelFullscreen}
+          onExitFullscreen={aiChatPanel.unsetChatPanelFullscreen}
+        >
+          {aiChatPanel.chatPanelContent}
+        </ChatPanelView>
+      ) : null}
+
+      {isAiChatAvailable ? aiChatTopUpDialog : null}
+    </div>
+  );
+};
+
+const DashboardConnected = inject((stores: TStore) => {
+  const {
+    authStore,
+    userStore,
+    clientLoadingStore,
+    settingsStore,
+    currentQuotaStore,
+    dialogsStore,
+    filesTourStore,
+    roomsTourStore,
+    formsTourStore,
+    aiAgentsTourStore,
+    dashboardTourStore,
+  } = stores;
+
+  // The app cards an onboarding tour can be started from. An app that isn't
+  // here simply gets no "Take a tour" button on its card.
+  const appTourStores = {
+    "ai-files": filesTourStore,
+    "ai-rooms": roomsTourStore,
+    "ai-forms": formsTourStore,
+    "ai-agents": aiAgentsTourStore,
+  } as const;
+
+  return {
+    ...mapChatNoAccessStores(stores),
+    isGuest: userStore.user?.isVisitor ?? false,
+    showLoader: clientLoadingStore.showArticleLoader,
+    currentDeviceType: settingsStore.currentDeviceType,
+    requestAppTour: (appId: AppId) => {
+      if (appId in appTourStores)
+        appTourStores[appId as keyof typeof appTourStores].requestTour();
+    },
+    requestDashboardTour: dashboardTourStore.requestTour,
+    // Same set the Home quick actions and the agents header button gate on.
+    canCreateRooms: authStore.isAdmin || authStore.isRoomAdmin,
+    // Room admins are excluded here: the apps subtitle names the portal's plan,
+    // which only admins and the owner see. Same flags the Header and
+    // ProfileCard gate on.
+    isAdminOrOwner:
+      (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
+    // Stricter still: Docs Connect is a SaaS-only service, so a standalone
+    // portal is not offered the link at all — see `canOpenDocsConnect`.
+    canOpenDocsConnect: canOpenDocsConnect(
+      userStore.user,
+      settingsStore.standalone,
+      settingsStore.limitedAccessDevToolsForUsers,
+    ),
+    aiReady: settingsStore.aiConfig?.aiReady ?? false,
+    // The portal's own AI switch, which is a stronger statement than `aiReady`:
+    // AI that is off is not "not set up yet", it is not on offer at all.
+    aiServicesEnabled: settingsStore.aiServicesEnabled,
+    // Undefined until the tariff loads; the plan is free by default, matching
+    // the header's own fallback.
+    isFreeTariff: currentQuotaStore.isFreeTariff ?? true,
+    standalone: settingsStore.standalone,
+    isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,
+    setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
+    logoText: settingsStore.logoText,
+  };
+})(observer(Dashboard));
+
+export { DashboardConnected as Dashboard };
+
+export default DashboardConnected;
+

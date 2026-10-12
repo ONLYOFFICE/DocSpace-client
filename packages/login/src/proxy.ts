@@ -37,8 +37,11 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { OAuth2ErrorKey } from "./utils/enums";
 
-// This function can be marked `async` if using `await` inside
-export function proxy(request: NextRequest) {
+// Caps the wait an authenticated visitor pays on /login before the redirect
+// to the portal root.
+const AUTH_CHECK_TIMEOUT = 1500;
+
+export async function proxy(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
 
   const host = request.headers.get("x-forwarded-host");
@@ -108,10 +111,63 @@ export function proxy(request: NextRequest) {
       );
     }
   } else {
-    const url = request.nextUrl.clone();
-    url.pathname = "/";
+    // The client app appends authError=true after a request came back 401 and
+    // the logout that follows it could not clear the cookie — on a deleted
+    // portal even POST /authentication/logout answers 404. Sending such a
+    // visitor back to the portal root only makes it fail the same way and
+    // return here, so the cookie must not be trusted in that case.
+    const hasAuthError =
+      request.nextUrl.searchParams.get("authError") === "true";
 
-    if (isAuth && redirectUrl) return NextResponse.redirect(redirectUrl);
+    // The cookie's presence proves nothing by itself: a portal restore
+    // resets every session while the browser keeps the cookie, and bouncing
+    // such a visitor to the portal root only brings them straight back
+    // here. Only the API can tell whether the session behind the cookie is
+    // still alive, so ask it before leaving the login page.
+    if (isAuth && !hasAuthError && host && proto) {
+      // The internal API_HOST when the deployment provides one (every real
+      // installer sets it), the public origin otherwise — effectively dev
+      // only. The forwarded headers keep tenant resolution and the tenant's
+      // IP-restriction check working on both paths.
+      const apiBase = process.env.API_HOST?.trim() || redirectUrl;
+      const forwardedFor = request.headers.get("x-forwarded-for");
+
+      try {
+        const authRes = await fetch(`${apiBase}/api/2.0/authentication`, {
+          headers: {
+            cookie: request.headers.get("cookie") ?? "",
+            "x-forwarded-host": host,
+            "x-forwarded-proto": proto,
+            ...(forwardedFor ? { "x-forwarded-for": forwardedFor } : {}),
+          },
+          cache: "no-store",
+          signal: AbortSignal.timeout(AUTH_CHECK_TIMEOUT),
+        });
+
+        if (authRes.ok) {
+          if ((await authRes.json())?.response === true) {
+            return NextResponse.redirect(redirectUrl);
+          }
+
+          // The session is confirmed dead. No anonymous endpoint ever clears
+          // the cookie server-side, so drop it here. This clears the
+          // host-only entry — the common case; Domain-scoped and Partitioned
+          // variants (see the server's CookiesManager.ClearCookies) survive
+          // until a real logout and repeat this round-trip on their rare
+          // deployments.
+          const response = NextResponse.next();
+          response.cookies.delete("asc_auth_key");
+          return response;
+        }
+
+        // No answer about the session (404 on a deleted portal, 403 while a
+        // restore is running, 5xx): keep the cookie and show the login form
+        // rather than guessing.
+      } catch {
+        // Unreachable or slow API (timeout, DNS, refused): keep the cookie
+        // and show the login form.
+      }
+    }
   }
 }
 

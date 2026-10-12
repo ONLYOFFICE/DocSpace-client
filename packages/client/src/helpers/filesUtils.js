@@ -112,6 +112,9 @@ export const getDefaultFileTestIdPrefix = (format) => {
   }
 };
 
+export const getPluginFileTestIdPrefix = (extension) =>
+  extension ? `new_${extension.replace(/^\./, "")}` : "new_folder";
+
 export const getCreateModalEntityType = (extension) => {
   switch (extension) {
     case "docx":
@@ -232,31 +235,6 @@ export const connectedCloudsTypeIcon = (key) => {
   }
 };
 
-export const calculateRoomLogoParams = (img, x, y, zoom) => {
-  let imgWidth;
-  let imgHeight;
-  let dimensions;
-  if (img.width > img.height) {
-    imgWidth = Math.min(1280, img.width);
-    imgHeight = Math.round(img.height / (img.width / imgWidth));
-    dimensions = Math.round(imgHeight / zoom);
-  } else {
-    imgHeight = Math.min(1280, img.height);
-    imgWidth = Math.round(img.width / (img.height / imgHeight));
-    dimensions = Math.round(imgWidth / zoom);
-  }
-
-  const croppedX = Math.round(x * imgWidth - dimensions / 2);
-  const croppedY = Math.round(y * imgHeight - dimensions / 2);
-
-  return {
-    x: croppedX,
-    y: croppedY,
-    width: dimensions,
-    height: dimensions,
-  };
-};
-
 export const removeSeparator = (options) => {
   const newOptions = options.map((o, index) => {
     if (index === 0 && o.includes("separator")) {
@@ -305,6 +283,7 @@ export const getOperationsProgressTitle = (type, progress) => {
     upload,
     convert,
     deleteVersionFile,
+    roomReencryption,
   } = OPERATIONS_NAME;
   switch (type) {
     case trash:
@@ -326,13 +305,16 @@ export const getOperationsProgressTitle = (type, progress) => {
     case upload:
       if (progress > 0 && progress < 100)
         return i18n.t("Files:UploadingProgress", { progress });
-      return i18n.t("Files:Uploading");
+      return i18n.t("Common:Uploading");
     case convert:
       return i18n.t("Files:Converting");
     case deleteVersionFile:
       return i18n.t("Files:DeletingVersion");
+    case roomReencryption:
+      return i18n.t("Common:ReEncryptingFiles");
 
     default:
       return i18n.t("Files:OtherProcesses");
   }
 };
+

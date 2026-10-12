@@ -33,25 +33,25 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@docspace/ui-kit/styles/mixins";
-@use "@docspace/ui-kit/styles/variables/colors" as *;
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+@use "@onlyoffice/apps-ui-kit/styles/variables/colors" as *;
 
 .editRoomGroupsDialog {
   :global {
+    // !important overrides modal component default padding/margin.
     .modal-body {
-      margin-inline-end: 0px !important;
-      padding: 0px !important;
+      margin-inline-end: 0 !important;
+      padding: 0 !important;
     }
   }
 
+  // !important overrides modal component default padding/margin.
   :global(#modal-scroll > .scroll-wrapper > .scroller > .scroll-body) {
-    padding-inline-end: 0px !important;
+    padding-inline-end: 0 !important;
   }
 
   .infoBar {
     &:global(.public-room-bar) {
-      margin: 16px;
-      margin-bottom: 0;
       margin: 17px 15px 0 16px;
 
       path {
@@ -294,7 +294,7 @@
       justify-content: center;
       align-items: center;
       margin-bottom: 16px;
-      padding-right: 16px;
+      padding-inline-end: 16px;
     }
 
     .color-select-container {
@@ -340,7 +340,7 @@
       }
 
       .room-logo-container {
-        padding-right: 0px;
+        padding-inline-end: 0;
       }
 
       .icon-select-container {

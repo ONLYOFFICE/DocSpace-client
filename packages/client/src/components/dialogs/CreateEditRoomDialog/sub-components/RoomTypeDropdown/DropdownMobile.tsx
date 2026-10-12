@@ -34,29 +34,14 @@
  */
 
 import React from "react";
-import styled from "styled-components";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { RoomsTypeValues } from "@docspace/shared/utils/common";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { Portal } from "@docspace/ui-kit/components/portal";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { injectDefaultTheme } from "@docspace/shared/utils";
+import { getCreateRoomTypes } from "@docspace/shared/utils/rooms";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { RoomsType } from "@docspace/shared/enums";
 
-const StyledDropdownMobile = styled.div.attrs(injectDefaultTheme)<{
-  isOpen: boolean;
-}>`
-  visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
-  position: fixed;
-  bottom: 0;
-  z-index: 500;
-  padding-top: 6px;
-  box-shadow: 0px -4px 60px ${globalColors.popupShadow};
-  border-radius: 6px 6px 0px 0px;
-  background: ${(props) =>
-    props.theme.createEditRoomDialog.roomTypeDropdown.mobile.background};
-`;
+import styles from "../../CreateEditRoomDialog.module.scss";
 
 type DropdownMobileProps = {
   open: boolean;
@@ -84,8 +69,10 @@ const DropdownMobile = ({
             zIndex={450}
           />
           {!forceHideDropdown ? (
-            <StyledDropdownMobile className="dropdown-mobile" isOpen={open}>
-              {RoomsTypeValues.map((roomType) => (
+            <div
+              className={`${styles.dropdownMobile}${open ? ` ${styles.isOpen}` : ""} dropdown-mobile`}
+            >
+              {getCreateRoomTypes().map((roomType) => (
                 <RoomType
                   id={roomType.toString()}
                   key={roomType}
@@ -96,7 +83,7 @@ const DropdownMobile = ({
                   selectedId={roomType.toString()}
                 />
               ))}
-            </StyledDropdownMobile>
+            </div>
           ) : null}
         </>
       }

@@ -10,7 +10,6 @@ name: Frontend common tests
 
 env:
   NODE_VERSION: 24.x
-  PNPM_VERSION: 10.30.0
 
 jobs:
   # Detect changes to optimize job execution
@@ -39,17 +38,10 @@ jobs:
       dependencies: ${{ steps.changes.outputs.packages }}
       licenses: ${{ steps.changes.outputs.packages }}
     steps:
-      - name: Add known hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
-
-      - name: Checkout repository with submodules
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: 'true'
           path: "."
-          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Detect file changes
         id: changes
         shell: bash
@@ -229,21 +221,13 @@ jobs:
       dependencies_result: ${{ steps.dependencies.outputs.result }}
       licenses_result: ${{ steps.licenses.outputs.result }}
     steps:
-      - name: Add known hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
-
-      - name: Checkout repository with submodules
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: 'true'
           path: "."
-          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Install pnpm
+        # Version comes from the "packageManager" field in package.json
         uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
@@ -460,20 +444,13 @@ jobs:
     name: "Client e2e tests"
     runs-on: ubuntu-latest
     needs: [changes, static-analysis-and-tests]
-    if: needs.changes.outputs.playwright_client == 'true' || needs.changes.outputs.workflow == 'true'
+    if: always() && (needs.changes.outputs.playwright_client == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
     timeout-minutes: 15
     steps:
-      - name: Add known hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
-
-      - name: Checkout repository with submodules
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: 'true'
           path: "."
-          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
         run: docker rm -f playwright-client-${{ github.run_id }} 2>/dev/null || true
       - name: Build test image
@@ -522,17 +499,10 @@ jobs:
     if: always() && (needs.changes.outputs.playwright_login == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
     timeout-minutes: 15
     steps:
-      - name: Add known hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
-
-      - name: Checkout repository with submodules
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: 'true'
           path: "."
-          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
         run: docker rm -f playwright-login-${{ github.run_id }} 2>/dev/null || true
       - name: Build test image
@@ -581,17 +551,10 @@ jobs:
     if: always() && (needs.changes.outputs.playwright_doceditor == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
     timeout-minutes: 15
     steps:
-      - name: Add known hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
-
-      - name: Checkout repository with submodules
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: 'true'
           path: "."
-          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
         run: docker rm -f playwright-doceditor-${{ github.run_id }} 2>/dev/null || true
       - name: Build test image
@@ -640,17 +603,10 @@ jobs:
     if: always() && (needs.changes.outputs.playwright_sdk == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
     timeout-minutes: 15
     steps:
-      - name: Add known hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
-
-      - name: Checkout repository with submodules
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: 'true'
           path: "."
-          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
         run: docker rm -f playwright-sdk-${{ github.run_id }} 2>/dev/null || true
       - name: Build test image
@@ -699,17 +655,10 @@ jobs:
     if: always() && (needs.changes.outputs.playwright_management == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
     timeout-minutes: 15
     steps:
-      - name: Add known hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
-
-      - name: Checkout repository with submodules
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: 'true'
           path: "."
-          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
         run: docker rm -f playwright-management-${{ github.run_id }} 2>/dev/null || true
       - name: Build test image

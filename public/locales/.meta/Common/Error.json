@@ -3,7 +3,7 @@
   "content": "Error",
   "content_en_sha1_hash": "7f2f6a15cf8da2b27e5a4af47b58e7ad71c0b3d9",
   "created_at": "2025-05-19T21:30:45.027Z",
-  "updated_at": "2026-06-02T08:43:27.516Z",
+  "updated_at": "2026-10-02T12:15:32.479Z",
   "comment": {
     "text": "This is a general error message displayed in toast notifications or as part of a larger error message when an unexpected issue occurs.",
     "is_auto": true,
@@ -13,61 +13,61 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/ClientForm.utils.ts",
-      "line_number": 62,
+      "line_number": 64,
       "context": "return `${t(\"ErrorName\")} 3`;\n \n case \"EmptyFieldError\":\n return t(\"Common:EmptyFieldError\");\n default:\n return t(\"Common:Error\");\n }\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1355,
-      "context": "...transProps,\n }),\n );\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(t(\"Common:Error\"));\n }\n };\n \n onRemoveRoomsFromGroup = async (roomIds, t) => {\n const currentGroupId = this.filesStore.roomsFilter?.groupId;",
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 558,
+      "context": "roomIds.length,\n groupName,\n );\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(t(\"Common:Error\"));\n }\n };\n \n export const onRemoveRoomsFromGroupImpl = async (\n self: ContextOptionsStore,",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1355,
-      "context": "...transProps,\n }),\n );\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(t(\"Common:Error\"));\n }\n };\n \n onRemoveRoomsFromGroup = async (roomIds, t) => {\n const currentGroupId = this.filesStore.roomsFilter?.groupId;",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 168,
-      "context": "}),\n );\n this.filesStore.resetSelections();\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(this.t(\"Common:Error\"));\n }\n };\n \n private removeFromGroupHandle = async () => {\n const roomIds = this.filesStore.selection.map((room) => room.id);",
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 558,
+      "context": "roomIds.length,\n groupName,\n );\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(t(\"Common:Error\"));\n }\n };\n \n export const onRemoveRoomsFromGroupImpl = async (\n self: ContextOptionsStore,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 168,
-      "context": "}),\n );\n this.filesStore.resetSelections();\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(this.t(\"Common:Error\"));\n }\n };\n \n private removeFromGroupHandle = async () => {\n const roomIds = this.filesStore.selection.map((room) => room.id);",
+      "line_number": 176,
+      "context": "groupName,\n );\n this.filesStore.resetSelections();\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(this.t(\"Common:Error\"));\n }\n };\n \n private removeFromGroupHandle = async () => {\n const roomIds = this.filesStore.selection.map((room) => room.id!);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 176,
+      "context": "groupName,\n );\n this.filesStore.resetSelections();\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(this.t(\"Common:Error\"));\n }\n };\n \n private removeFromGroupHandle = async () => {\n const roomIds = this.filesStore.selection.map((room) => room.id!);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 106,
+      "line_number": 107,
       "context": "getTemplates = async () => {\n try {\n const res = await getDefaultTemplates();\n this.formTemplatesArray(res);\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };\n \n setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 106,
+      "line_number": 107,
       "context": "getTemplates = async () => {\n try {\n const res = await getDefaultTemplates();\n this.formTemplatesArray(res);\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };\n \n setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 106,
+      "line_number": 107,
       "context": "getTemplates = async () => {\n try {\n const res = await getDefaultTemplates();\n this.formTemplatesArray(res);\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };\n \n setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 106,
+      "line_number": 107,
       "context": "getTemplates = async () => {\n try {\n const res = await getDefaultTemplates();\n this.formTemplatesArray(res);\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };\n \n setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/Root.tsx",
-      "line_number": 345,
+      "line_number": 346,
       "context": "setIsShowDeepLink={setIsShowDeepLink}\n deepLinkSettings={deepLinkSettings ?? 0}\n />\n ) : error && error.message === \"restore-backup\" && !isSkipError ? (\n <ErrorContainer\n headerText={t(\"Common:Error\")}\n customizedBodyText={getErrorMessage()}\n isEditor\n />\n ) : (\n <div style={{ width: \"100%\", height: \"100%\" }}>",
       "module": "/packages/doceditor"
     },
@@ -96,8 +96,26 @@
       "module": "/packages/login"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/PanelView.tsx",
+      "line_number": 83,
+      "context": "const { status } = panel;\n const statusLabels: Record<PanelState[\"status\"], string> = {\n idle: \"\",\n streaming: t(\"Common:ArbiterRunning\"),\n done: t(\"Common:Done\"),\n error: t(\"Common:Error\"),\n aborted: t(\"Common:ArbiterStopped\"),\n };\n const label = statusLabels[status];\n const collapsible = !isArbiter && !!onToggleCollapse;",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
+      "line_number": 293,
+      "context": ") : null}\n {runStatus !== \"idle\" ? (\n <Text fontSize=\"12px\" color=\"var(--arbiter-muted)\" noSelect>\n {runStatus === \"running\" && t(\"Common:ArbiterRunning\")}\n {runStatus === \"done\" && t(\"Common:Done\")}\n {runStatus === \"error\" && t(\"Common:Error\")}\n {runStatus === \"aborted\" && t(\"Common:ArbiterStopped\")}\n </Text>\n ) : null}\n </div>\n </div>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/upload-panel/file-row.tsx",
+      "line_number": 123,
+      "context": "fontWeight={600}\n type={LinkType.action}\n className={styles.errorText}\n title={item.error}\n >\n {t(\"Common:Error\")}\n </Link>\n ) : (\n <>\n {item.percent >= 0 ? (\n <Text className=\"upload-panel_percent-text\">",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 131,
+      "line_number": 130,
       "context": "maxLength: 40,\n });\n case \"SpecSymbols\":\n return t(\"Common:BrandNameForbidden\");\n default:\n return t(\"Common:Error\");\n }\n };\n \n return (\n <div",
       "module": "/packages/shared"
     },
@@ -109,7 +127,7 @@
     },
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 156,
+      "line_number": 155,
       "context": "if (!isDialog) getRecoveryProgress();\n }, [ready, getRecoveryProgress, isDialog]);\n \n const headerText = errorMessage\n ? t(\"Common:Error\")\n : t(\"Common:PreparationPortalTitle\");\n \n const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (",
       "module": "/packages/shared"
     }

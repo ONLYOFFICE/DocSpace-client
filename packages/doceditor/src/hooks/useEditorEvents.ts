@@ -34,7 +34,7 @@
  */
 
 import React, { useCallback } from "react";
-import { match, Pattern } from "ts-pattern";
+import { match } from "ts-pattern";
 import isUndefined from "lodash/isUndefined";
 import { useSearchParams } from "next/navigation";
 
@@ -59,14 +59,13 @@ import type {
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
 import {
-  getProviders,
-  getModels,
-  getDefaultProvider,
+  getProfilesList,
+  getProfileAssignments,
+  getWebSearchConfigured,
 } from "@docspace/shared/api/ai";
-import type {
-  TAiProvider,
-  TDefaultProvider,
-} from "@docspace/shared/api/ai/types";
+// import { DEFAULT_SERVER_API_ROUTES } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+// import type { ServerAPIConfig } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import {
   CREATED_FORM_KEY,
   EDITOR_ID,
@@ -82,8 +81,8 @@ import {
   FormFillingManageAction,
   StartFillingMode,
 } from "@docspace/shared/enums";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { FolderType } from "@docspace/ui-kit/enums";
+import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
+import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 import type { Nullable } from "@docspace/shared/types";
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
@@ -91,8 +90,11 @@ import { isMobile } from "react-device-detect";
 
 import {
   getCurrentDocumentVersion,
+  getFormsSectionFolderUrl,
   isFormRole,
+  isFormRoomFile,
   setDocumentTitle,
+  toFormsSectionUrl,
 } from "@/utils";
 
 import type {
@@ -105,11 +107,11 @@ import type {
 } from "@/types";
 import { onSDKInfo } from "@/utils/events";
 import externalAIFetch, { abortAllRequests } from "@/utils/aiProxy";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 let docEditor: TDocEditor | null = null;
 
 const useEditorEvents = ({
+  user,
   successAuth,
   fileInfo,
   config,
@@ -121,7 +123,6 @@ const useEditorEvents = ({
   sdkConfig,
   organizationName,
   shareKey,
-  generationToolCallState,
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onOpenRoleMappingPanel,
@@ -134,6 +135,7 @@ const useEditorEvents = ({
   const [usersInRoom, setUsersInRoom] = React.useState<TSharedUsers[]>([]);
   const [docTitle, setDocTitle] = React.useState("");
   const [docSaved, setDocSaved] = React.useState(false);
+  const aiInitedRef = React.useRef(false);
 
   const onSDKRequestReferenceData = React.useCallback(
     async (event: object) => {
@@ -279,102 +281,246 @@ const useEditorEvents = ({
 
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
-    const connector = docEditor?.createConnector?.();
+    if (!aiInitedRef.current) {
+      // AI is not available to guests (and anonymous share-link viewers):
+      // don't init the editor's AI plugin for them at all — mirrors the
+      // portal, where guests get no AI chat, and the backend gateway
+      // rejects guest calls anyway.
+      const aiAllowed = Boolean(user) && !user?.isVisitor;
+      const connector = aiAllowed ? docEditor?.createConnector?.() : undefined;
 
-    if (connector && successAuth) {
-      try {
-        const defaultPortalProvider = (await getDefaultProvider()) as
-          | TDefaultProvider
-          | undefined;
+      if (connector && !isOAuthFrame()) {
+        aiInitedRef.current = true;
 
-        if (defaultPortalProvider) {
-          const DEFAULT_MODEL = "gpt-5.2";
-          let provider: TAiProvider | undefined;
-          let model = defaultPortalProvider.defaultModel || DEFAULT_MODEL;
+        let aiAvailable = false;
+        const modelProfileMap = new Map<string, string>();
 
-          if (defaultPortalProvider.providerId === -1) {
-            provider = {
-              id: defaultPortalProvider.providerId,
-              title: defaultPortalProvider.providerTitle,
-            } as TAiProvider;
-          } else {
-            const providers = await getProviders();
-
-            provider = providers.find(
-              (p: TAiProvider) =>
-                p.id === defaultPortalProvider?.providerId && !p.needReset,
+        // The host posts callEditorTool as soon as we signal document
+        // readiness, but the editor's AI plugin attaches its ai_onCallTool
+        // handler only once its Actions are initialized (whenAiReady).
+        // Queue early calls and flush them when the plugin is ready so
+        // they aren't dispatched into the void.
+        let aiActionsReady = false;
+        const pendingEditorToolCalls: Array<{
+          name: string;
+          arguments: Record<string, unknown>;
+        }> = [];
+        const markAiActionsReady = () => {
+          aiActionsReady = true;
+          const pending = pendingEditorToolCalls.splice(0);
+          if (pending.length) {
+            console.log(
+              `[doceditor] AI actions ready, flushing ${pending.length} queued tool call(s)`,
             );
-
-            if (provider) {
-              const models = await getModels(provider.id);
-              provider.title = `${getBrandName("ProductName")} [${provider.title}]`;
-              model = models[0]?.modelId || model;
-            }
           }
+          pending.forEach((call) => connector.sendEvent("ai_onCallTool", call));
+        };
 
-          if (provider) {
-            const providerTitle = provider.title;
-            const modelName = `${providerTitle} [${model}]`;
-            const providerId = provider.id;
+        const isEncrypted = !!config?.file?.encrypted;
 
-            const sendProviders = () => {
-              connector.sendEvent("ai_onCustomProviders", [
-                { name: providerTitle },
-              ]);
+        if (successAuth && !isEncrypted) {
+          try {
+            const hasError = (data: unknown) =>
+              !!data &&
+              typeof data === "object" &&
+              "error" in data &&
+              !!data.error;
 
-              connector.sendEvent("ai_onCustomInit", {
-                settingsLock: undefined,
-                actionsOverride: true,
-                actions: {
-                  Chat: { model },
-                  Summarization: { model },
-                  Translation: { model },
-                  TextAnalyze: { model },
-                },
-                models: [
-                  {
-                    capabilities: 255,
-                    provider: providerTitle,
-                    name: modelName,
-                    id: model,
-                  },
-                ],
+            const whenAiReady = (
+              type: "Tools" | "Actions",
+              onReady: (data?: unknown) => void,
+            ) => {
+              connector.executeMethod("AI", [{ type }], (data) => {
+                if (hasError(data)) connector.attachEvent("ai_onInit", onReady);
+                else onReady(data);
               });
-
-              if (generationToolCallState) {
-                connector.sendEvent("ai_onCallTool", {
-                  name: generationToolCallState.toolName,
-                  arguments: {
-                    ...generationToolCallState.parameters,
-                  },
-                });
-
-                const url = new URL(window.location.href);
-                url.searchParams.delete("withTool");
-                window.history.replaceState(null, "", url.toString());
-              }
             };
 
-            connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
-              if (
-                data &&
-                typeof data === "object" &&
-                "error" in data &&
-                data.error
-              ) {
-                connector.attachEvent("ai_onInit", sendProviders);
-              } else {
-                sendProviders();
-              }
-            });
+            const sendTools = (data?: unknown) =>
+              window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
 
-            connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
-              externalAIFetch(connector, e as TEditorAIEvent, providerId),
-            );
+            // const editorOrigin = (() => {
+            //   try {
+            //     return config?.editorUrl
+            //       ? new URL(config.editorUrl).origin
+            //       : "";
+            //   } catch {
+            //     return "";
+            //   }
+            // })();
+            // const sameOrigin =
+            //   typeof window !== "undefined" &&
+            //   editorOrigin === window.location.origin;
+
+            // if (sameOrigin) {
+            //   aiAvailable = true;
+            //   whenAiReady("Tools", sendTools);
+            //   whenAiReady("Actions", () => {
+            //     connector.sendEvent("ai_onCustomInit", {
+            //       actionsOverride: true,
+            //       apiConfig: {
+            //         origin: window.location.origin,
+            //         baseUrl: "/api/2.0/ai",
+            //         routes: DEFAULT_SERVER_API_ROUTES,
+            //       } satisfies ServerAPIConfig,
+            //     });
+            //     markAiActionsReady();
+            //   });
+            // } else {
+            {
+              const profiles = await getProfilesList();
+
+              if (profiles && profiles.length > 0) {
+                aiAvailable = true;
+
+                profiles.forEach((p) => {
+                  if (modelProfileMap.has(p.modelId)) {
+                    console.warn(
+                      `Duplicate modelId "${p.modelId}" across AI profiles; external fetch may resolve to the wrong profile.`,
+                    );
+                  }
+                  modelProfileMap.set(p.modelId, p.id);
+                });
+
+                const aiProfiles = profiles.map((p) => ({
+                  id: p.id,
+                  name: p.name,
+                  modelId: p.modelId,
+                  headers: p.headers,
+                  // The plugin expects the legacy boolean ("can this model
+                  // think"); the server now describes reasoning as an object,
+                  // and an object is truthy even when `thinks` is false.
+                  reasoning: p.reasoning?.thinks ?? false,
+                  capabilities: p.capabilities,
+                  canUseTool: p.canUseTool ?? false,
+                  useResponsesApi: p.useResponsesApi,
+                  providerType: p.providerType,
+                }));
+
+                const validProfileIds = new Set(profiles.map((p) => p.id));
+
+                const [assignments, webSearchConfigured] = await Promise.all([
+                  getProfileAssignments(),
+                  getWebSearchConfigured(),
+                ]);
+
+                const actions: Record<string, { model: string }> = {};
+                Object.entries(assignments ?? {}).forEach(
+                  ([action, profileId]) => {
+                    if (validProfileIds.has(profileId))
+                      actions[action] = { model: profileId };
+                  },
+                );
+
+                // Older editor AI plugins resolve the Chat action without
+                // falling back to Default (current adapters do fall back),
+                // and generate tools silently no-op with no Chat model.
+                // Mirror the fallback here so generation works against a
+                // not-yet-updated document server.
+                if (!actions.Chat && actions.Default)
+                  actions.Chat = actions.Default;
+
+                // Placeholder config only — the real provider and its key
+                // stay on the server. The .invalid host makes the plugin's
+                // web_search/web_crawling requests travel the
+                // ai_onExternalFetch bridge, where aiProxy maps them to the
+                // NewAi web-search passthrough.
+                const webSearch = webSearchConfigured
+                  ? {
+                      provider: "onlyoffice",
+                      baseUrl:
+                        "https://onlyoffice-external.invalid/websearch/v1",
+                    }
+                  : undefined;
+
+                whenAiReady("Tools", sendTools);
+                whenAiReady("Actions", () => {
+                  connector.sendEvent("ai_onCustomInit", {
+                    actionsOverride: true,
+                    // AI settings are managed in DocSpace: hide the plugin's
+                    // own settings entry points entirely (toolbar button and
+                    // the chat window's settings dialog). The composer's
+                    // profile pick stays available.
+                    settingsLock: "removed",
+                    profiles: aiProfiles,
+                    actions,
+                    webSearch,
+                  });
+                  markAiActionsReady();
+                });
+
+                connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
+                  externalAIFetch(
+                    connector,
+                    e as TEditorAIEvent,
+                    modelProfileMap,
+                    fileInfo?.id,
+                  ),
+                );
+              }
+            }
+          } catch (error) {
+            console.error("Failed to initialize AI provider:", error);
           }
         }
-      } catch (error) {
-        console.error("Failed to initialize AI provider:", error);
+
+        // The editor may be hosted either in an iframe (host is `window.parent`)
+        // or in a new tab opened via `window.open` (host is `window.opener`,
+        // while `window.parent` === self). Resolve the real host window so the
+        // ready signal and tool results reach the opener in both cases.
+        const hostWindow =
+          window.opener && window.opener !== window
+            ? (window.opener as Window)
+            : window.parent;
+
+        const onParentMessage = (event: MessageEvent) => {
+          if (event.source !== hostWindow) return;
+          const payload = event.data;
+          if (
+            !payload ||
+            typeof payload !== "object" ||
+            (payload as { type?: unknown }).type !== "callEditorTool"
+          )
+            return;
+
+          const {
+            callId,
+            name,
+            arguments: args,
+          } = payload as {
+            callId?: string;
+            name?: string;
+            arguments?: Record<string, unknown>;
+          };
+          if (typeof name !== "string") return;
+
+          if (aiAvailable) {
+            const call = { name, arguments: args ?? {} };
+            if (aiActionsReady) {
+              connector.sendEvent("ai_onCallTool", call);
+            } else {
+              console.log(
+                `[doceditor] AI plugin not ready yet, queueing tool call "${name}"`,
+              );
+              pendingEditorToolCalls.push(call);
+            }
+            hostWindow?.postMessage(
+              { type: "editorToolResult", callId, result: "" },
+              "*",
+            );
+          } else {
+            hostWindow?.postMessage(
+              {
+                type: "editorToolResult",
+                callId,
+                result: JSON.stringify({ error: "AI provider not configured" }),
+              },
+              "*",
+            );
+          }
+        };
+        window.addEventListener("message", onParentMessage);
+        hostWindow?.postMessage({ type: "editorDocumentReady" }, "*");
       }
     }
 
@@ -388,11 +534,12 @@ const useEditorEvents = ({
     }
   }, [
     config?.errorMessage,
+    config?.file?.encrypted,
     sdkConfig?.frameId,
     checkAndRequestRoles,
     t,
     successAuth,
-    generationToolCallState,
+    fileInfo?.id,
   ]);
 
   const onUserActionRequired = React.useCallback(() => {
@@ -401,17 +548,31 @@ const useEditorEvents = ({
 
   const onSDKRequestClose = React.useCallback(() => {
     const editorGoBack = sdkConfig?.editorGoBack;
+    const returnUrl = sdkConfig?.returnUrl;
 
-    if (editorGoBack === "event") {
+    // Editor opened at the top level (broken out of an SDK iframe): return
+    // to the originating listing instead of emitting a close event (which
+    // only works inside the SDK editor frame).
+    if (returnUrl) {
+      window.location.replace(returnUrl);
+    } else if (editorGoBack === "event") {
       frameCallEvent({ event: "onEditorCloseCallback" });
     } else {
       const backUrl = config?.editorConfig?.customization?.goback?.url;
 
-      if (backUrl) window.location.replace(backUrl);
+      if (!backUrl) return;
+
+      window.location.replace(
+        isFormRoomFile(fileInfo)
+          ? (toFormsSectionUrl(backUrl, fileInfo?.folderId) ?? backUrl)
+          : backUrl,
+      );
     }
   }, [
     sdkConfig?.editorGoBack,
+    sdkConfig?.returnUrl,
     config?.editorConfig?.customization?.goback?.url,
+    fileInfo,
   ]);
 
   const getDefaultFileName = React.useCallback(
@@ -957,9 +1118,7 @@ const useEditorEvents = ({
 
           sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(fileInfo));
 
-          const url = new URL(`${window.location.origin}/rooms/shared/filter`);
-          url.searchParams.set("folder", fileInfo!.folderId.toString());
-          window.location.replace(url.toString());
+          window.location.replace(getFormsSectionFolderUrl(fileInfo!.folderId));
         })
         .otherwise(() => {
           console.error("Unknown start filling mode");

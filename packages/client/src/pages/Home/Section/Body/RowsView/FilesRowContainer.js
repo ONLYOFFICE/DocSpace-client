@@ -36,12 +36,11 @@
 import { useMemo, use } from "react";
 import { inject, observer } from "mobx-react";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 
-import { Context } from "@docspace/ui-kit/utils/context";
+import { Context } from "@onlyoffice/apps-ui-kit/utils/context";
 import { FilesRowContainer as RowContainer } from "@docspace/shared/components/files-row";
 
-import withContainer from "../../../../../HOCs/withContainer";
 
 import SimpleFilesRow from "./SimpleFilesRow";
 
@@ -59,9 +58,6 @@ const FilesRowContainer = ({
   currentDeviceType,
   isIndexEditingMode,
   changeIndex,
-  isTutorialEnabled,
-  setRefMap,
-  deleteRefMap,
   selectedFolderTitle,
   setDropTargetPreview,
   disableDrag,
@@ -96,9 +92,6 @@ const FilesRowContainer = ({
             : null
         }
         isIndexEditingMode={isIndexEditingMode}
-        isTutorialEnabled={isTutorialEnabled}
-        setRefMap={setRefMap}
-        deleteRefMap={deleteRefMap}
         selectedFolderTitle={selectedFolderTitle}
         setDropTargetPreview={setDropTargetPreview}
         disableDrag={disableDrag}
@@ -113,7 +106,6 @@ const FilesRowContainer = ({
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
-    isTutorialEnabled,
   ]);
 
   return (
@@ -141,7 +133,6 @@ export default inject(
     treeFoldersStore,
     indexingStore,
     filesActionsStore,
-    guidanceStore,
     selectedFolderStore,
     uploadDataStore,
     hotkeyStore,
@@ -155,13 +146,18 @@ export default inject(
       roomsFilter,
       highlightFile,
       disableDrag,
+      filesList,
     } = filesStore;
 
     const { title: selectedFolderTitle, security } = selectedFolderStore;
-    const { setRefMap, deleteRefMap } = guidanceStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAIAgentsFolder } =
-      treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isAIAgentsFolder,
+      isFormsFolder,
+    } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
     const { withContentSelection } = hotkeyStore;
@@ -169,10 +165,11 @@ export default inject(
     const { primaryProgressDataStore } = uploadDataStore;
     const { setDropTargetPreview } = primaryProgressDataStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
     const canCreateSecurity = security?.Create;
 
     return {
+      list: filesList,
       viewAs,
       setViewAs,
       infoPanelVisible,
@@ -187,8 +184,6 @@ export default inject(
       currentDeviceType,
       isIndexEditingMode,
       changeIndex: filesActionsStore.changeIndex,
-      setRefMap,
-      deleteRefMap,
       selectedFolderTitle,
       setDropTargetPreview,
       disableDrag,
@@ -196,4 +191,4 @@ export default inject(
       withContentSelection,
     };
   },
-)(withContainer(observer(FilesRowContainer)));
+)(observer(FilesRowContainer));

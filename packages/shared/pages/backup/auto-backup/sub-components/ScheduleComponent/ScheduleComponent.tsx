@@ -39,14 +39,13 @@ import classNames from "classnames";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { AutoBackupPeriod } from "../../../../../enums";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 
 import type { ScheduleComponentProps } from "./ScheduleComponent.types";
 import styles from "./ScheduleComponent.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ScheduleComponent = ({
   selectedPeriodLabel,
@@ -85,7 +84,7 @@ const ScheduleComponent = ({
       className={classNames(styles.scheduleDescription, "schedule_description")}
       fontSize="12px"
     >
-      {t("Common:AutoSavePeriodHelp", { productName: getBrandName("ProductName") })}
+      {t("Common:AutoSavePeriodHelp")}
     </Text>
   );
 

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import type { DeviceType, ShareAccessRights } from "../../../enums";
 import type { TTranslation } from "../../../types";
 
@@ -43,6 +43,7 @@ export type AccessOption = {
   key: string;
   label: string;
   icon: string;
+  disabled?: boolean;
 };
 
 export interface RoleLinkBlockProps {
@@ -50,6 +51,8 @@ export interface RoleLinkBlockProps {
   accessOptions: AccessOption[];
   selectedOption: AccessOption;
   currentDeviceType: DeviceType;
+  /** Explains why the currently selected role blocks saving the link. */
+  warningText?: string;
 
   onSelect?: (option: TOption) => void;
 }

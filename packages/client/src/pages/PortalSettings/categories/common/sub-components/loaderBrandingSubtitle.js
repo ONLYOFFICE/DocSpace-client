@@ -34,26 +34,18 @@
  */
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import styled from "styled-components";
 
-const StyledLoader = styled.div`
-  padding-bottom: 18px;
-
-  .loader-sibtitle {
-    display: block;
-    padding-bottom: 8px;
-  }
-`;
+import styles from "./loaderBrandingSubtitle.module.scss";
 
 const LoaderBrandingSubtitle = () => {
   return (
-    <StyledLoader>
+    <div className={styles.loader}>
       <RectangleSkeleton
         width="700px"
         height="16px"
-        className="loader-sibtitle"
+        className={styles.loaderSibtitle}
       />
-    </StyledLoader>
+    </div>
   );
 };
 

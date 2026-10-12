@@ -1,0 +1,18 @@
+{
+  "RoomsCreateFirst": "Wybierz typ, zaproś osoby, z którymi pracujesz, i wrzuć swoje pliki. Zajmuje to minutę — a wszystko, co właśnie zobaczyłeś, zaczyna działać na twoich własnych dokumentach.",
+  "RoomsCreateFirstTitle": "Teraz zrób go swoim",
+  "RoomsEmpty": "Pokoje, które właśnie zobaczyłeś, były podglądem. Pokoje, do których ktoś cię zaprosi, pojawią się na tej liście, a wszystko, co ci pokazano, działa w nich tak samo.",
+  "RoomsEmptyTitle": "Twoja lista jest na razie pusta",
+  "RoomsGroups": "Porządkuj pokoje według wybranych cech, aby szybko znaleźć to, czego potrzebujesz. Twórz grupy i przełączaj się między nimi tuż nad listą.",
+  "RoomsGroupsTitle": "Grupuj swoje pokoje",
+  "RoomsMembers": "Każdy pokój ma swoją listę członków w panelu informacyjnym. Dodawaj kontakty z przestrzeni roboczej i ustaw rolę każdemu członkowi — od przeglądania plików po zarządzanie całym pokojem.",
+  "RoomsMembersTitle": "Pracujcie razem",
+  "RoomsPlacesArchive": "{{archive}} — pokoje, w których już nie pracujesz, możliwe do przywrócenia w każdej chwili.",
+  "RoomsPlacesFiles": "{{recent}}, {{favorites}} i {{trash}} zbierają pliki z twoich pokoi: ostatnio otwierane, oznaczone gwiazdką i usunięte.",
+  "RoomsPlacesTemplates": "{{templates}} — twoje szablony pokoi.",
+  "RoomsPlacesTitle": "Wszystko na swoim miejscu",
+  "RoomsTemplates": "Zamień dowolny pokój w szablon — jego ustawienia, struktura i pliki zostaną zapisane. Utwórz z niego nowy pokój jednym kliknięciem, pozostanie tylko dodać członków.",
+  "RoomsTemplatesTitle": "Wykorzystuj ponownie to, co działa",
+  "RoomsTypes": "{{collaboration}} do pracy zespołowej, {{vdr}} do bezpiecznego udostępniania plików, {{publicRoom}} do dostępu z zewnątrz, {{custom}} do twoich własnych scenariuszy.",
+  "RoomsTypesTitle": "Pokój do każdego zadania"
+}

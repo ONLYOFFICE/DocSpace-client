@@ -35,10 +35,13 @@
 
 import { headers } from "next/headers";
 
-import { AGENT_ID_HEADER } from "@/utils/constants";
+import { AGENT_ID_HEADER, OAUTH_FRAME_HEADER } from "@/utils/constants";
+import { getSelf } from "@/api/people";
+import { getSettings } from "@/api/settings";
 import { logger } from "../../../../logger.mjs";
 
 import ChatPage from "./page.client";
+import ChatOAuthPage from "./page.oauth.client";
 
 export const dynamic = "force-dynamic";
 
@@ -53,8 +56,37 @@ export default async function Page({
   const params = await searchParams;
 
   const agentId = hdrs.get(AGENT_ID_HEADER) || params.agentId || "";
+  const entityId = params.entityId || "";
   const fileId = params.fileId || "";
-  const chatId = params.chatId || "";
+  const threadId = params.threadId || "";
 
-  return <ChatPage agentId={agentId} fileId={fileId} chatId={chatId} />;
+  if (hdrs.get(OAUTH_FRAME_HEADER)) {
+    return (
+      <ChatOAuthPage
+        agentId={agentId}
+        entityId={entityId}
+        fileId={fileId}
+        threadId={threadId}
+      />
+    );
+  }
+
+  const [user, portalSettings] = await Promise.all([getSelf(), getSettings()]);
+
+  const canUseAi = !!user && !user.isVisitor;
+  const isPortalAdmin = !!user && (!!user.isAdmin || !!user.isOwner);
+  const isStandalone =
+    typeof portalSettings === "object" && !!portalSettings?.standalone;
+
+  return (
+    <ChatPage
+      agentId={agentId}
+      entityId={entityId}
+      fileId={fileId}
+      threadId={threadId}
+      canUseAi={canUseAi}
+      isPortalAdmin={isPortalAdmin}
+      isStandalone={isStandalone}
+    />
+  );
 }

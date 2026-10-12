@@ -1,5 +1,5 @@
 {
   "PDFform": "PDF form",
   "PDFFormIsReadyToast": "PDF form <1>{{filename}}</1> is ready to be filled out.",
-  "PDFFormSuccessfullyCreatedDescription": "Your PDF form is ready to be filled out. Copy public link to start the form filling process or Invite other users to this room."
+  "PDFFormSuccessfullyCreatedDescription": "Your PDF form is ready to be filled out. Copy public link to start the form filling process or Invite other users to this space."
 }

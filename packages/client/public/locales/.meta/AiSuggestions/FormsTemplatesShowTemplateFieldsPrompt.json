@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsTemplatesShowTemplateFieldsPrompt",
+  "content": "Show all fields in the selected form template with their type, required status, and validation rules. If this information is not provided, ask me for the scope, time range, and desired level of detail.",
+  "content_en_sha1_hash": "cf64f2799b5f530e1d9275a80ed70def0630127a",
+  "created_at": "2026-08-04T09:58:55.178Z",
+  "updated_at": "2026-08-05T17:21:57.924Z",
+  "comment": {
+    "text": "Instructional prompt for an AI assistant that specifies how to display form template field details, such as types and validation rules.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:21:57.924Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 771,
+      "context": "),\n requires: \"contentCreator\",\n },\n {\n name: t(\"AiSuggestions:FormsTemplatesShowTemplateFields\"),\n prompt: t(\"AiSuggestions:FormsTemplatesShowTemplateFieldsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsTemplatesSaveAsTemplate\"),\n prompt: t(\"AiSuggestions:FormsTemplatesSaveAsTemplatePrompt\"),\n requires: \"roomAdmin\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

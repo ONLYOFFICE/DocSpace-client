@@ -34,10 +34,24 @@
  */
 
 import React, { useCallback } from "react";
-import { useLocation, Outlet } from "react-router";
+import classnames from "classnames";
+import { useLocation, Outlet, Navigate } from "react-router";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
+
+import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
+import {
+  useChatNoAccess,
+  mapChatNoAccessStores,
+} from "SRC_DIR/Hooks/useChatNoAccess";
+import {
+  useIsAiChatAvailable,
+  useStores,
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import {
   addTagsToRoom,
@@ -45,13 +59,18 @@ import {
   createTag,
 } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
-import Section from "@docspace/ui-kit/components/section";
+import Section from "@onlyoffice/apps-ui-kit/components/section";
+import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getCategoryType } from "@docspace/shared/utils/common";
+import { CategoryType } from "@docspace/shared/constants";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
+import SectionTours from "SRC_DIR/components/Tour/SectionTours";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { isPluginSectionPath } from "SRC_DIR/helpers/plugins/navigation";
 
 import {
   SectionFilterContent,
@@ -60,6 +79,8 @@ import {
   SectionWarningContent,
 } from "./Section";
 import AccountsDialogs from "./Section/ContactsBody/Dialogs";
+import UploadFileInputs from "SRC_DIR/components/UploadInputs";
+import CreateButtonMobile from "SRC_DIR/components/CreateButtonMobile";
 
 import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
 import ContactsSelectionArea from "./SelectionArea/ContactsSelectionArea";
@@ -72,10 +93,21 @@ import {
 
 import MediaViewer from "./MediaViewer";
 
-import { useSDK, useOperations, usePluginOperations } from "./Hooks";
-import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+import {
+  useSDK,
+  useOperations,
+  usePluginOperations,
+  usePanelExclusivity,
+} from "./Hooks";
+import { useQuickActions } from "./Hooks/useQuickActions";
+import { useHideQuickActions } from "./Hooks/useHideQuickActions";
 
-const PureHome = (props) => {
+import styles from "./Home.module.scss";
+
+// `observer` is required because we read MobX observables from the shared
+// AiChatStore directly here (via `useAiChatPanel`): without it, the AI chat
+// panel's visibility changes (e.g. closing) would not re-render Home.
+const PureHome = observer((props) => {
   const {
     currentClientView,
     isChangePageRequestRunning,
@@ -89,6 +121,7 @@ const PureHome = (props) => {
     startUpload,
     setDragging,
     dragging,
+    isChatDropTarget,
     createFoldersTree,
     disableDrag,
     clearPrimaryProgressData,
@@ -97,6 +130,7 @@ const PureHome = (props) => {
     refreshFiles,
 
     setFrameConfig,
+    setFrameCustomActions,
     folders,
     files,
     selection,
@@ -111,7 +145,6 @@ const PureHome = (props) => {
 
     firstLoad,
 
-    isPrivacyFolder,
     isRecycleBinFolder,
     isErrorRoomNotAvailable,
     isErrorAIAgentNotAvailable,
@@ -134,8 +167,9 @@ const PureHome = (props) => {
     getSettings,
     logout,
     login,
+    loginWithCode,
     loadCurrentUser,
-    updateProfileCulture,
+    i18n,
     getRooms,
     setSelectedFolder,
     userId,
@@ -150,6 +184,9 @@ const PureHome = (props) => {
     clearSecondaryProgressData,
     primaryOperationsArray,
     cancelUpload,
+    cancelSecondaryOperation,
+    cancelSecondaryOperationById,
+    secondaryOperationsStopped,
     secondaryOperationsAlert,
     clearUploadData,
     clearUploadedFiles,
@@ -160,8 +197,8 @@ const PureHome = (props) => {
     isErrorChecking,
     setOperationCancelVisible,
     hideConfirmCancelOperation,
-    welcomeFormFillingTipsVisible,
-    formFillingTipsVisible,
+    quickActionsEnabled,
+    setShowQuickActions,
     chatFiles,
 
     allowInvitingGuests,
@@ -176,17 +213,51 @@ const PureHome = (props) => {
 
     aiConfig,
     currentTab,
+    selectedResultFileId,
     setIsAboutDialogVisible,
 
     pluginFloatingOperationsArray,
     removePluginFloatingOperations,
     dispatchMessage,
     getPluginIconUrl,
+
+    currentFolderId,
+    canCreateFiles,
+    canCreateEncrypted,
+    canCreateRooms,
+    isDocumentsFolder,
+    isRoom,
+    isRoomsFolder,
+    isFormsFolder,
+    isPrivacyFolder,
+    isArchiveFolder,
+    isTemplatesFolder,
+    isFavoritesFolder,
+    isRecentFolder,
+    isAIAgentsFolder,
+    templateGalleryAvailable,
+    setTemplateGalleryVisible,
+    setOformFromFolderId,
+    setCreateRoomFromTemplate,
+
+    infoPanelStore,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
+  const isDesktop = useIsDesktop();
 
   const location = useLocation();
+
+  const {
+    aiReady: aiChatReady,
+    noAccessProps: aiChatNoAccessProps,
+    topUpDialog: aiChatTopUpDialog,
+  } = useChatNoAccess(props.aiNoAccessStores);
+
+  const aiChatPanel = useAiChatPanel(true, {
+    aiReady: aiChatReady,
+    noAccessProps: aiChatNoAccessProps,
+  });
 
   React.useEffect(() => {
     if (location.state?.openAboutDialog && setIsAboutDialogVisible) {
@@ -202,6 +273,8 @@ const PureHome = (props) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
+  const isPluginSection = isPluginSectionPath(location.pathname);
+
   const view = getContactsView(location);
   if (allowInvitingGuests === false && view === "guests") checkGuests();
 
@@ -209,8 +282,97 @@ const PureHome = (props) => {
     currentClientView === "users" || currentClientView === "groups";
   const isProfile = currentClientView === "profile";
   const isContactsEmptyView =
-    currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
+    contactsTab === "groups" ? isEmptyGroups : isUsersEmptyView;
   const isChat = currentClientView === "chat";
+
+  // Availability is computed once by the host (Shell) and shared through
+  // AiAgentProviders' context.
+  const isAiChatAvailable = useIsAiChatAvailable();
+
+  usePanelExclusivity(infoPanelStore);
+
+  const isAiChatFullscreen =
+    isAiChatAvailable &&
+    aiChatPanel.isChatPanelVisible &&
+    (aiChatPanel.isChatPanelFullscreen || !isDesktop);
+
+  // On tablets/phones the opened AI chat panel takes over the whole main
+  // area, so navigating to another section via the left panel must hide it —
+  // otherwise the new section stays covered by the chat overlay. Desktop
+  // keeps the docked panel open across navigation by design.
+  const prevPathnameRef = React.useRef(location.pathname);
+  React.useEffect(() => {
+    if (prevPathnameRef.current === location.pathname) return;
+    prevPathnameRef.current = location.pathname;
+
+    if (!isDesktop && aiChatPanel.isChatPanelVisible)
+      aiChatPanel.closeChatPanel();
+  }, [location.pathname, isDesktop, aiChatPanel]);
+
+  // The "Forms" section root gets its own quick-actions tile set (collect
+  // forms + from template), resolved by the hook below.
+  //
+  // Taken from the selected folder rather than the URL, unlike `isFormRoom`
+  // below, because this flag has to fall in step with the flags for the
+  // sections one navigates *to*, all of which are folder-derived. Reading it
+  // from the route made it the only one that dropped the instant the URL
+  // changed, while the destination's flag was still false and its folder still
+  // loading: for that gap no section resolved at all, so the banner unmounted,
+  // the Section left its scrollable-banner mode, and the list jumped up and
+  // back down again. That showed on every navigation out of Forms.
+  const isFormsSection = isFormsFolder;
+
+  // Inside a Form Filling room (or its subfolders) we offer the form-only tile
+  // set. Derive this from the URL (CategoryType.Form ⇔ `/forms/{id}`) rather
+  // than the selected-folder store: the store's roomType/parentRoomType load
+  // asynchronously, so during navigation `isRoom` flips true before the form
+  // type is known and the banner briefly flashes the regular-room file tiles.
+  // The pathname changes atomically with the route, so this never lags.
+  const isFormRoom = getCategoryType(location) === CategoryType.Form;
+
+  // AI-agents create gating: AI must be ready and the user able to manage
+  // agents (admins / owners / room admins — same set as canCreateRooms).
+  // `aiReady` (portal /ai/config) can lag behind the chat-lib profiles, so
+  // treat the presence of profiles as ready too — same signal the agents
+  // EmptyView uses to decide whether to offer agent creation.
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  const canCreateAgents =
+    (aiConfig?.aiReady || hasAiProfiles) && canCreateRooms;
+
+  // Quick-actions banner (ported from the SDK): create tiles above the
+  // files/rooms list. The hook resolves which tile set applies (or none) from
+  // the current section + create permission.
+  const quickActions = useQuickActions({
+    currentFolderId,
+    canCreateFiles,
+    canCreateEncrypted,
+    canCreateRooms,
+    canCreateAgents,
+    templateGalleryAvailable,
+    setTemplateGalleryVisible,
+    setOformFromFolderId,
+    setCreateRoomFromTemplate,
+    isDocumentsFolder,
+    isRoom,
+    isFormRoom,
+    isRoomsFolder,
+    isPrivacyFolder,
+    isArchiveFolder,
+    isRecycleBinFolder,
+    isTemplatesFolder,
+    isFavoritesFolder,
+    isRecentFolder,
+    isAIAgentsFolder,
+    isFormsSection,
+    isContactsPage,
+    isProfile,
+    isSettingsPage,
+  });
+  const showQuickActions =
+    quickActionsEnabled && quickActions.show && !isChat && !isEmptyPage;
+
+  const onHideQuickActions = useHideQuickActions({ t, setShowQuickActions });
 
   const onDrop = useEventCallback((f, uploadToFolder) => {
     if (isContactsPage || isProfile) return;
@@ -260,6 +422,7 @@ const PureHome = (props) => {
   useSDK({
     frameConfig,
     setFrameConfig,
+    setFrameCustomActions,
     selectedFolderStore,
     folders,
     files,
@@ -274,23 +437,25 @@ const PureHome = (props) => {
     getSettings,
     logout,
     login,
+    loginWithCode,
     addTagsToRoom,
     createTag,
     removeTagsFromRoom,
     loadCurrentUser,
-    updateProfileCulture,
+    i18n,
     getRooms,
     isLoading,
   });
 
   const getContextModel = useCallback(() => {
-    if (isFrame || isProfile) return null;
+    if (isFrame || isProfile || isPluginSection) return null;
 
     if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
   }, [
     isFrame,
     isProfile,
+    isPluginSection,
     isContactsPage,
     getContactsModel,
     getFolderModel,
@@ -303,6 +468,14 @@ const PureHome = (props) => {
       return;
     }
 
+    if (
+      secondaryActiveOperations?.length > 0 &&
+      !primaryOperationsArray?.length
+    ) {
+      cancelSecondaryOperation();
+      return;
+    }
+
     if (hideConfirmCancelOperation) {
       cancelUpload();
       return;
@@ -312,6 +485,9 @@ const PureHome = (props) => {
   }, [
     hideConfirmCancelOperation,
     cancelUpload,
+    cancelSecondaryOperation,
+    secondaryActiveOperations,
+    primaryOperationsArray,
     setOperationCancelVisible,
     handlePluginCancelOperation,
     pluginOperations,
@@ -365,8 +541,7 @@ const PureHome = (props) => {
     if (!isContactsPage) {
       sectionProps.dragging = dragging;
       sectionProps.uploadFiles = !isChat;
-      sectionProps.onDrop =
-        isRecycleBinFolder || isPrivacyFolder ? null : onDrop;
+      sectionProps.onDrop = isRecycleBinFolder ? null : onDrop;
 
       sectionProps.viewAs = viewAs;
       sectionProps.hideAside =
@@ -374,7 +549,7 @@ const PureHome = (props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
-      sectionProps.fullHeightBody = isChat;
+      sectionProps.fullHeightBody = isChat || !!selectedResultFileId;
     } else {
       sectionProps.isAccounts = isContactsPage;
     }
@@ -425,11 +600,13 @@ const PureHome = (props) => {
   sectionProps.secondaryOperationsCompleted = secondaryOperationsCompleted;
   sectionProps.dropTargetPreview = dropTargetPreview;
   sectionProps.clearSecondaryProgressData = onClearSecondaryProgressData;
+  sectionProps.cancelSecondaryOperationById = cancelSecondaryOperationById;
   sectionProps.primaryOperationsArray = primaryOperationsArray;
   sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
   sectionProps.clearDropPreviewLocation = clearDropPreviewLocation;
   sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
   sectionProps.cancelUpload = onCancelUpload;
+  sectionProps.secondaryOperationsStopped = secondaryOperationsStopped;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
   sectionProps.primaryOperationsAlert = primaryOperationsAlert;
   sectionProps.primaryOperationsCanceled = primaryOperationsCanceled;
@@ -441,6 +618,31 @@ const PureHome = (props) => {
   sectionProps.dragging = dragging;
   sectionProps.startDropPreview = startDropPreview;
 
+  sectionProps.isChatPanelAvailable = isAiChatAvailable;
+  sectionProps.isChatPanelVisible = aiChatPanel.isChatPanelVisible;
+  sectionProps.chatPanelDropTargetLabel = isChatDropTarget
+    ? t("Common:DropFilesToAttach")
+    : undefined;
+  sectionProps.setIsChatPanelVisible = (visible) => {
+    if (!visible) aiChatPanel.closeChatPanel();
+  };
+  // Edge resizer for the docked panel: desktop only. It stays mounted in
+  // fullscreen — where the width is owned by the `ai-fullscreen` layout rules —
+  // purely as the drag back out of it. The width itself is session state on
+  // AiChatStore (reset to 400px on every open), so nothing is persisted here.
+  sectionProps.isChatPanelResizable = true;
+  sectionProps.isChatPanelFullscreen = isAiChatFullscreen;
+  sectionProps.chatPanelWidth = aiChatPanel.chatPanelWidth;
+  sectionProps.setChatPanelWidth = aiChatPanel.setChatPanelWidth;
+  // Dragging the resizer past the widest docked width asks for fullscreen —
+  // the same state the panel header's button produces; dragging it back inwards
+  // in fullscreen leaves again and goes on resizing.
+  sectionProps.setChatPanelFullscreen = aiChatPanel.setChatPanelFullscreen;
+  sectionProps.unsetChatPanelFullscreen = aiChatPanel.unsetChatPanelFullscreen;
+  // In fullscreen the #section is collapsed to zero width but stays mounted, so
+  // mark it inert (drops its content from tab order / pointer interaction).
+  sectionProps.inert = isAiChatFullscreen;
+
   // Plugin operations
   sectionProps.pluginOperations = pluginOperations;
   sectionProps.pluginOperationsCompleted = pluginOperationsCompleted;
@@ -448,17 +650,14 @@ const PureHome = (props) => {
   sectionProps.pluginShowCancelButton = pluginShowCancelButton;
 
   const hasVisibleContent =
-    !isEmptyPage ||
-    welcomeFormFillingTipsVisible ||
-    formFillingTipsVisible ||
-    showFilterLoader ||
-    roomsFilterGroupId;
+    !isEmptyPage || showFilterLoader || roomsFilterGroupId;
 
   const isValidMainContent = hasVisibleContent && !isErrorRoomNotAvailable;
   const isValidContactsContent = !isContactsEmptyView && isContactsPage;
 
   const shouldRenderSectionFilter =
-    (isValidMainContent || isValidContactsContent) && !isSettingsPage;
+    (isContactsPage ? isValidContactsContent : isValidMainContent) &&
+    !isSettingsPage;
 
   React.useEffect(() => {
     if (isChangePageRequestRunning) return;
@@ -474,7 +673,7 @@ const PureHome = (props) => {
 
   return (
     <>
-      {isSettingsPage ? null : isContactsPage || isProfile ? (
+      {isSettingsPage || isPluginSection ? null : isContactsPage || isProfile ? (
         <>
           <AccountsDialogs />
           {isProfile ? null : <ContactsSelectionArea />}
@@ -483,56 +682,124 @@ const PureHome = (props) => {
         <>
           <DragTooltip />
           <FilesSelectionArea />
+          <SectionTours />
         </>
       )}
-      <MediaViewer />
-      <SectionWrapper {...sectionProps} withoutFooter={isChat}>
-        {!isErrorAvailable ||
-        isContactsPage ||
-        isProfile ||
-        isSettingsPage ||
-        showHeaderLoader ? (
-          <Section.SectionHeader>
-            <SectionHeaderContent />
-          </Section.SectionHeader>
-        ) : null}
+      {isPluginSection ? null : (
+        <>
+          <MediaViewer />
+          <UploadFileInputs />
+          <CreateButtonMobile />
+        </>
+      )}
+      {/* When the quick-actions banner shows, switch the Section to the SDK's
+          stickyTableHeader mode so the banner renders above the (now in-body,
+          sticky) filter. The host is always `display: contents` (no layout
+          impact); the geometry CSS vars are layered on only when active. */}
+      <div
+        className={classnames(styles.sectionVarsHost, {
+          [styles.stickyBannerVars]: showQuickActions,
+        })}
+        data-layout-mode={isAiChatFullscreen ? "ai-fullscreen" : undefined}
+      >
+        <SectionWrapper
+          {...sectionProps}
+          withoutFooter={isChat}
+          scrollableBanner={showQuickActions}
+          stickyTableHeader={showQuickActions}
+        >
+          {!isPluginSection &&
+          (!isErrorAvailable ||
+            isContactsPage ||
+            isProfile ||
+            isSettingsPage ||
+            showHeaderLoader) ? (
+            <Section.SectionHeader>
+              <SectionHeaderContent />
+            </Section.SectionHeader>
+          ) : null}
 
-        <Section.SectionSubmenu>
-          <SectionSubmenuContent />
-        </Section.SectionSubmenu>
+          <Section.SectionSubmenu>
+            <SectionSubmenuContent />
+          </Section.SectionSubmenu>
 
-        <Section.SectionWarning>
-          <SectionWarningContent />
-        </Section.SectionWarning>
+          <Section.SectionWarning>
+            <SectionWarningContent />
+          </Section.SectionWarning>
 
-        {!isChat &&
-        !isErrorAvailable &&
-        !isDisabledKnowledge &&
-        shouldShowFilter &&
-        !isProfile &&
-        (!isFrame || showFilter) ? (
-          <Section.SectionFilter>
-            <SectionFilterContent />
-          </Section.SectionFilter>
-        ) : null}
+          {!isPluginSection &&
+          !isChat &&
+          !isErrorAvailable &&
+          !isDisabledKnowledge &&
+          shouldShowFilter &&
+          !isProfile &&
+          !selectedResultFileId &&
+          (!isFrame || showFilter) ? (
+            <Section.SectionFilter>
+              <SectionFilterContent />
+            </Section.SectionFilter>
+          ) : null}
 
-        <Section.SectionBody>
-          <Outlet />
-        </Section.SectionBody>
+          {showQuickActions ? (
+            <Section.SectionBanner>
+              <QuickActions
+                items={quickActions.items}
+                className={styles.quickActions}
+                isLoading={showFilterLoader}
+                onClose={onHideQuickActions}
+                closeLabel={t("Common:DisableQuickActionsOnAllPages")}
+                prevLabel={t("Common:Previous")}
+                nextLabel={t("Common:Next")}
+                dataTestId="quick-actions"
+              />
+            </Section.SectionBanner>
+          ) : null}
 
-        <Section.InfoPanelHeader>
-          <InfoPanelHeaderContent />
-        </Section.InfoPanelHeader>
-        <Section.InfoPanelBody>
-          <InfoPanelBodyContent />
-        </Section.InfoPanelBody>
-      </SectionWrapper>
+          <Section.SectionBody>
+            <Outlet />
+          </Section.SectionBody>
+
+          <Section.InfoPanelHeader>
+            <InfoPanelHeaderContent />
+          </Section.InfoPanelHeader>
+          <Section.InfoPanelBody>
+            <InfoPanelBodyContent />
+          </Section.InfoPanelBody>
+          <Section.ChatPanel>{aiChatPanel.chatPanelContent}</Section.ChatPanel>
+        </SectionWrapper>
+      </div>
       <InfoPanelActions />
+      {aiChatTopUpDialog}
     </>
   );
-};
+});
 
 const Home = withTranslation(["UploadPanel", "Files", "People"])(PureHome);
+
+const PASS_THROUGH_PREFIXES = [
+  "/accounts",
+  "/contacts",
+  "/developer-tools",
+  "/p/",
+  "/portal-settings",
+  "/profile",
+];
+
+const HomeWithGuard = (props) => {
+  // Always treat as legacy mode — the new-design article is shown via
+  // ClientArticleSidebar regardless of this flag.
+  const isLegacyMode = true;
+  const { pathname } = useLocation();
+
+  if (
+    !isLegacyMode &&
+    !isOAuthFrame() &&
+    !PASS_THROUGH_PREFIXES.some((p) => pathname.startsWith(p))
+  )
+    return <Navigate to="/dashboard" replace />;
+
+  return <Home {...props} />;
+};
 
 export const Component = inject(
   ({
@@ -554,6 +821,10 @@ export const Component = inject(
     aiRoomStore,
     profileActionsStore,
     pluginStore,
+    infoPanelStore,
+    oformsStore,
+    paymentStore,
+    currentTariffStatusStore,
   }) => {
     const {
       setSelectedFolder,
@@ -596,6 +867,7 @@ export const Component = inject(
       selection,
       dragging,
       setDragging,
+      isChatDropTarget,
 
       viewAs,
       getFileInfo,
@@ -627,7 +899,6 @@ export const Component = inject(
 
     const {
       isRecycleBinFolder,
-      isPrivacyFolder,
 
       setExpandedKeys,
       isRoomsFolder,
@@ -636,6 +907,15 @@ export const Component = inject(
       isRoomsFolderRoot,
       isTemplatesFolder,
       isRoot,
+
+      // Quick-actions banner section classification.
+      isDocumentsFolder,
+      isRoom,
+      isPrivacyFolder,
+      isFavoritesFolder,
+      isRecentFolder,
+      isAIAgentsFolder,
+      isFormsFolder,
     } = treeFoldersStore;
 
     const {
@@ -657,7 +937,10 @@ export const Component = inject(
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
       secondaryActiveOperations,
+      secondaryOperationsStopped,
       secondaryOperationsAlert,
+      cancelSecondaryOperation,
+      cancelSecondaryOperationById,
     } = secondaryProgressDataStore;
 
     const { startUpload } = uploadDataStore;
@@ -666,10 +949,15 @@ export const Component = inject(
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
-    const { hideConfirmCancelOperation } = filesSettingsStore;
+    const {
+      hideConfirmCancelOperation,
+      showQuickActions: quickActionsEnabled,
+      setShowQuickActions,
+    } = filesSettingsStore;
     const { setOperationCancelVisible } = dialogsStore;
     const {
       setFrameConfig,
+      setFrameCustomActions,
       frameConfig,
       isFrame,
       enablePlugins,
@@ -682,10 +970,8 @@ export const Component = inject(
     const {
       usersStore,
       groupsStore,
-      targetUserStore,
       viewAs: contactsViewAs,
     } = peopleStore;
-    const { updateProfileCulture } = targetUserStore;
     const {
       getUsersList,
       setContactsTab,
@@ -698,9 +984,6 @@ export const Component = inject(
 
     const isEmptyGroups =
       !groupsIsFiltered && ((groups && groups.length === 0) || !groups);
-
-    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
-      dialogsStore;
 
     const { isRoomAdmin, isAdmin } = authStore;
 
@@ -725,14 +1008,21 @@ export const Component = inject(
     // }
 
     return {
+      aiNoAccessStores: mapChatNoAccessStores({
+        settingsStore,
+        userStore,
+        paymentStore,
+        currentTariffStatusStore,
+        authStore,
+      }),
       currentClientView,
       isChangePageRequestRunning,
       // homepage: config.homepage,
       firstLoad,
       dragging,
+      isChatDropTarget,
       viewAs,
       isRecycleBinFolder,
-      isPrivacyFolder,
       isVisitor: userStore.user.isVisitor,
       userId: userStore?.user?.id,
       folderSecurity,
@@ -746,6 +1036,7 @@ export const Component = inject(
 
       isErrorRoomNotAvailable,
       isRoomsFolder,
+      isFormsFolder,
       isArchiveFolder,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
 
@@ -771,6 +1062,7 @@ export const Component = inject(
       setIsUpdatingRowItem,
 
       setFrameConfig,
+      setFrameCustomActions,
       frameConfig,
       isFrame,
       showTitle: frameConfig?.showTitle,
@@ -796,6 +1088,7 @@ export const Component = inject(
       getSettings,
       logout: authStore.logout,
       login: authStore.login,
+      loginWithCode: authStore.loginWithCode,
 
       loadCurrentUser: userStore.loadCurrentUser,
       getRooms,
@@ -813,18 +1106,18 @@ export const Component = inject(
       getGroups,
       updateCurrentGroup,
       isEmptyGroups,
-      updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
-      welcomeFormFillingTipsVisible,
-      formFillingTipsVisible,
 
       secondaryActiveOperations,
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
+      secondaryOperationsStopped,
       secondaryOperationsAlert,
       primaryOperationsArray,
       primaryOperationsCompleted,
       cancelUpload,
+      cancelSecondaryOperation,
+      cancelSecondaryOperationById,
       clearUploadData,
       clearUploadedFiles,
       mainButtonVisible,
@@ -834,6 +1127,8 @@ export const Component = inject(
       isErrorChecking,
       setOperationCancelVisible,
       hideConfirmCancelOperation,
+      quickActionsEnabled,
+      setShowQuickActions,
 
       removeActiveItem,
       allowInvitingGuests,
@@ -848,8 +1143,27 @@ export const Component = inject(
       canCreateSecurity,
       startDropPreview,
 
+      // Quick-actions banner inputs. (isRoomsFolder / isArchiveFolder /
+      // isRecycleBinFolder are already returned above.)
+      currentFolderId: selectedFolderStore.id,
+      canCreateFiles: folderSecurity?.Create,
+      canCreateEncrypted: uploadDataStore.shouldEncryptCurrentUpload(),
+      canCreateRooms: isAdmin || isRoomAdmin,
+      isDocumentsFolder,
+      isRoom,
+      isPrivacyFolder,
+      isTemplatesFolder,
+      isFavoritesFolder,
+      isRecentFolder,
+      isAIAgentsFolder,
+      templateGalleryAvailable: settingsStore.templateGalleryAvailable,
+      setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
+      setOformFromFolderId: oformsStore.setOformFromFolderId,
+      setCreateRoomFromTemplate: oformsStore.setCreateRoomFromTemplate,
+
       isErrorAIAgentNotAvailable,
       currentTab: aiRoomStore.currentTab,
+      selectedResultFileId: aiRoomStore.selectedResultFileId,
       aiConfig: settingsStore.aiConfig,
 
       setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
@@ -858,7 +1172,8 @@ export const Component = inject(
       removePluginFloatingOperations,
       dispatchMessage,
       getPluginIconUrl,
+
+      infoPanelStore,
     };
   },
-)(observer(Home));
-
+)(observer(HomeWithGuard));

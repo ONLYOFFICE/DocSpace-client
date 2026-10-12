@@ -37,13 +37,13 @@ import React from "react";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
 
-import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
-import { Text } from "@docspace/ui-kit/components/text";
+import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { isMobile } from "../../../utils";
 import { DeviceType } from "../../../enums";
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
-import { RoleLinkBlockWrapper } from "./RoleLinkBlock.styled";
+import styles from "./RoleLinkBlock.module.scss";
 import type { RoleLinkBlockProps } from "./RoleLinkBlock.types";
 
 const RoleLinkBlock = ({
@@ -52,6 +52,7 @@ const RoleLinkBlock = ({
 	selectedOption,
 	accessOptions = [],
 	currentDeviceType,
+	warningText,
 }: RoleLinkBlockProps) => {
 	const isMobileView = isMobile() || currentDeviceType === DeviceType.mobile;
 
@@ -62,7 +63,7 @@ const RoleLinkBlock = ({
 	};
 
 	return (
-		<RoleLinkBlockWrapper>
+		<div className={styles.roleLinkBlockWrapper}>
 			<Text fontSize="16px" fontWeight={700}>
 				{t("Common:RoleForLink")}
 			</Text>
@@ -85,7 +86,16 @@ const RoleLinkBlock = ({
 				comboIcon={ArrowIcon}
 				dataTestId="edit_link_panel_role_access_select"
 			/>
-		</RoleLinkBlockWrapper>
+			{warningText ? (
+				<Text
+					fontSize="12px"
+					className={styles.roleLinkBlockWarning}
+					dataTestId="edit_link_panel_role_warning"
+				>
+					{warningText}
+				</Text>
+			) : null}
+		</div>
 	);
 };
 

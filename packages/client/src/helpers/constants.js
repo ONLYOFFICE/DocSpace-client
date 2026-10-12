@@ -105,6 +105,7 @@ export const QuotaBarTypes = Object.freeze({
   PersonalUserQuota: "personal-user-quota",
   StorageQuota: "tenant-custom-quota",
   StorageQuotaLimit: "tenant-custom-quota-limit",
+  WalletLowBalance: "wallet-low-balance",
 });
 
 export const BINDING_POST = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
@@ -176,6 +177,8 @@ export const ThirdPartyServicesUrlName = Object.freeze({
   ownCloud: "owncloud",
   WebDav: "webdav",
 });
+
+export const AI_SETTINGS_URL = "/portal-settings/ai-settings";
 
 export const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 export const TABLE_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;

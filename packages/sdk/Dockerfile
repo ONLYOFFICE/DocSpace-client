@@ -23,7 +23,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install PNPM
-RUN npm install -g pnpm@10.33.0
+RUN npm install -g pnpm@12.4.1
 
 WORKDIR /app
 
@@ -31,25 +31,37 @@ WORKDIR /app
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
 # Copy package files first for better layer caching
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+# `*.tgz` is optional: ui-kit and ai-chat come from npm, but a locally packed
+# tarball at the repo root can be referenced as `file:../../<name>.tgz` for
+# local development. A glob matching nothing is fine next to real sources.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
+
+# `--frozen-lockfile` installs every package the lockfile names, not just the
+# ones the workspace projects present in this image depend on. One of them is a
+# tarball under packages/client, so it has to be here even though this image
+# never builds the client.
+COPY packages/client/*.tgz ./packages/client/
 
 # Copy the source code with correct directory structure
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
 COPY packages/sdk/package.json ./packages/sdk/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
-COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
-COPY libs/ui-kit/onlyoffice-docspace-api-sdk-*.tgz ./libs/ui-kit/
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile
+# CI=true is scoped to this one command on purpose. It skips the
+# `lefthook install` in the workspace prepare scripts, which cannot work
+# because the image has no .git. A persistent `ENV CI=true` would also
+# change Playwright's runtime defaults (retries, workers, forbidOnly).
+RUN CI=true pnpm install --frozen-lockfile
 
 # Copy the source code with correct directory structure
 COPY common/ ./common/
 COPY packages/sdk/ ./packages/sdk/
 COPY packages/shared/ ./packages/shared/
+# next.config.js requires scripts/ui-kit-dev.cjs at load time.
+COPY scripts/ ./scripts/
 COPY public/ ./public/
-COPY libs/ui-kit/ ./libs/ui-kit/
 
 # Run build:translations
 RUN pnpm --filter @docspace/sdk run build:translations
@@ -57,4 +69,5 @@ RUN pnpm --filter @docspace/sdk run build:translations
 WORKDIR /app/packages/sdk
 
 # Run test:build
-RUN pnpm --filter @docspace/sdk run test:build
+RUN NODE_OPTIONS="--max-old-space-size=8192" \
+    pnpm --filter @docspace/sdk run test:build

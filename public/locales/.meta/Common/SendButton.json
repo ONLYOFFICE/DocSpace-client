@@ -3,7 +3,7 @@
   "content": "Send",
   "content_en_sha1_hash": "9bc2575c3930437e80555f78757b783c842e8e66",
   "created_at": "2025-05-19T21:30:48.532Z",
-  "updated_at": "2026-05-15T14:00:06.641Z",
+  "updated_at": "2026-08-07T15:05:26.439Z",
   "comment": {
     "text": "This is the label for a button that initiates an action, such as sending a request or confirming a change (e.g., email or password).",
     "is_auto": true,
@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "file_path": "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
       "line_number": 259,
       "context": "</FieldContainer>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"\n label={isLoading ? t(\"Sending\") : t(\"SendButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onSendRequest}\n isLoading={isLoading}\n isDisabled={isLoading}",
-      "module": "/libs/ui-kit"
+      "module": "@onlyoffice/apps-ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
@@ -54,6 +54,12 @@
       "module": "/packages/login"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/ChatPhase.tsx",
+      "line_number": 207,
+      "context": "type=\"button\"\n className={styles.chatSendBtn}\n onClick={submit}\n disabled={!draft.trim()}\n >\n {t(\"Common:SendButton\")}\n </button>\n )}\n </div>\n </div>\n );",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/components/report-dialog/index.tsx",
       "line_number": 165,
       "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n key=\"SendButton\"\n onClick={onClickSend}\n label={t(\"SendButton\")}\n size={ButtonSize.normal}\n scale={currentDeviceType === DeviceType.mobile}\n data-id=\"send-report\"",
@@ -61,7 +67,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 359,
+      "line_number": 360,
       "context": "isDisabled={loading}\n key=\"RecoverySendBtn\"\n size={ButtonSize.normal}\n id=\"recover-access-modal_send\"\n className={styles.recoverButtonDialog}\n label={loading ? t(\"Common:Sending\") : t(\"Common:SendButton\")}\n onClick={onSendRecoverRequest}\n aria-label=\"Send recover request\"\n testId=\"recover_access_modal_submit_button\"\n />\n <Button",
       "module": "/packages/shared"
     }

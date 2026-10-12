@@ -41,6 +41,7 @@ import ManageAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.acces
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { withoutInjected } from "SRC_DIR/helpers/injected";
 import { useNavigate } from "react-router";
 
 import { RoomSearchArea } from "@docspace/shared/enums";
@@ -49,9 +50,9 @@ import { EmptyView } from "@docspace/shared/components/empty-view";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
-import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { TTranslation } from "@docspace/shared/types";
-import { EmptyViewProps } from "@docspace/ui-kit/components/empty-view";
+import { EmptyViewProps } from "@onlyoffice/apps-ui-kit/components/empty-view";
 
 export enum NoAccessContainerType {
   Room,
@@ -137,7 +138,7 @@ const NoAccessContainer = (props: Props) => {
                 icon: <FolderIcon />,
                 onClick: onGoTo,
                 key: "empty-view-goto-rooms",
-                description: t("GoToMyRooms"),
+                description: t("Common:GoToMyRooms"),
               },
             ],
       };
@@ -145,10 +146,10 @@ const NoAccessContainer = (props: Props) => {
     // TODO: for AI agents
     case NoAccessContainerType.Agent:
       emptyViewProps = {
-        title: t("AIRoom:NoAccessAIAgentTitle", {
+        title: t("Common:NoAccessAIAgentTitle", {
           aiAgent: t("Common:AIAgent"),
         }),
-        description: t("AIRoom:AIAgentAccessRedirectNote", {
+        description: t("Common:AIAgentAccessRedirectNote", {
           sectionName: t("Common:AIAgents"),
         }),
         icon: theme.isBase ? (
@@ -164,7 +165,7 @@ const NoAccessContainer = (props: Props) => {
                 icon: <AIAgentsIcon />,
                 onClick: onGoTo,
                 key: "empty-view-goto-agents",
-                description: t("GoToSection", {
+                description: t("Common:GoToSection", {
                   sectionName: t("Common:AIAgents"),
                 }),
               },
@@ -183,22 +184,31 @@ const NoAccessContainer = (props: Props) => {
   return <EmptyView {...emptyViewProps} />;
 };
 
-export default inject<TStore>(
-  ({ settingsStore, filesStore, clientLoadingStore, userStore }) => {
-    const { setIsSectionFilterLoading } = clientLoadingStore;
+const injectStores = ({
+  settingsStore,
+  filesStore,
+  clientLoadingStore,
+  userStore,
+}: TStore) => {
+  const { setIsSectionFilterLoading } = clientLoadingStore;
 
-    const setIsLoading = (param: boolean) => {
-      setIsSectionFilterLoading(param);
-    };
-    const { isEmptyPage } = filesStore;
-    const { isFrame, theme } = settingsStore;
-    return {
-      setIsLoading,
+  const setIsLoading = (param: boolean) => {
+    setIsSectionFilterLoading(param);
+  };
+  const { isEmptyPage } = filesStore;
+  const { isFrame, theme } = settingsStore;
 
-      isEmptyPage,
-      theme,
-      isFrame,
-      userId: userStore?.user?.id,
-    };
-  },
-)(withTranslation(["Files", "AIRoom"])(observer(NoAccessContainer)));
+  return {
+    setIsLoading,
+    isEmptyPage,
+    theme,
+    isFrame,
+    userId: userStore?.user?.id,
+  };
+};
+
+export default withoutInjected<Props, ReturnType<typeof injectStores>>(
+  inject<TStore>(injectStores)(
+    withTranslation(["Files", "Common"])(observer(NoAccessContainer)),
+  ),
+);

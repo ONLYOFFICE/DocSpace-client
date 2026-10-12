@@ -1,0 +1,29 @@
+{
+  "key_path": "ChangeUserPermissionsOnly",
+  "content": "Change user permissions to the invited people.",
+  "content_en_sha1_hash": "e3418b78aaaa5b3ddc6c54e9b0f40fb0eb934ae9",
+  "created_at": "2026-08-26T14:07:51.787Z",
+  "updated_at": "2026-08-26T14:09:39.601Z",
+  "comment": {
+    "text": "A descriptive hint in the Invite Panel for Community users, explaining that they can only modify the permissions of people who have already been invited.",
+    "is_auto": true,
+    "updated_at": "2026-08-26T14:09:39.601Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
+      "line_number": 410,
+      "context": "// Community has no tariff to upgrade, but lowering the invited roles is\n // still a way out - keep that half of the sentence.\n const getHint = () => {\n if (isRoomAdmin) return null;\n if (isCommunity) return t(\"Common:ChangeUserPermissionsOnly\");\n \n return paymentLink;\n };\n \n const hint = getHint();",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

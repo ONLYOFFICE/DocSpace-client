@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesTrashFindADeletedFilePrompt",
+  "content": "Find a deleted file in Trash and return the most relevant results. If this information is not provided, ask me for the search term and any useful filters such as owner, date, type, or status.",
+  "content_en_sha1_hash": "56b366582347e57e44e0afbb5f09d3def84c249e",
+  "created_at": "2026-08-04T09:58:55.139Z",
+  "updated_at": "2026-08-05T17:53:32.679Z",
+  "comment": {
+    "text": "AI assistant instruction prompt that defines how to handle user requests for finding deleted files in the Trash, including instructions to request missing search terms or filters.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:53:32.679Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 334,
+      "context": "name: t(\"AiSuggestions:FilesTrashWhatSInTrash\"),\n prompt: t(\"AiSuggestions:FilesTrashWhatSInTrashPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesTrashFindADeletedFile\"),\n prompt: t(\"AiSuggestions:FilesTrashFindADeletedFilePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesTrashRestoreSelectedItems\"),\n prompt: t(\"AiSuggestions:FilesTrashRestoreSelectedItemsPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

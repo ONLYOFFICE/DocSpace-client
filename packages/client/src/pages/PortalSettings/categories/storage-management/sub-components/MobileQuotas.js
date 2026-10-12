@@ -37,12 +37,11 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { CategoryItem } from "@docspace/ui-kit/components/category-item";
+import { CategoryItem } from "@onlyoffice/apps-ui-kit/components/category-item";
 
-import { StyledBaseQuotaComponent } from "../StyledComponent";
-import { getBrandName } from "@docspace/shared/constants/brands";
+import styles from "../StyledComponent.module.scss";
 
-const MobileQuotasComponent = ({ isDisabled }) => {
+const MobileQuotasComponent = ({ isDisabled, aiServicesEnabled }) => {
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
 
@@ -52,14 +51,12 @@ const MobileQuotasComponent = ({ isDisabled }) => {
   };
 
   return (
-    <StyledBaseQuotaComponent>
+    <div className={styles.baseQuotaComponent}>
       <CategoryItem
         title={t("QuotaPerRoom")}
         onClickLink={onClickLink}
-        url="portal-settings/management/disk-space/quota-per-room"
-        subtitle={t("SetDefaultRoomQuota", {
-          productName: getBrandName("ProductName"),
-        })}
+        url="/portal-settings/management/disk-space/quota-per-room"
+        subtitle={t("SetDefaultRoomQuota")}
         isDisabled={isDisabled}
       />
       <CategoryItem
@@ -67,25 +64,25 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         onClickLink={onClickLink}
         url="/portal-settings/management/disk-space/quota-per-user"
         subtitle={t("UserDefaultQuotaDescription", {
-          productName: getBrandName("ProductName"),
-          sectionName: t("Common:MyDocuments"),
+          sectionName: t("Common:Files"),
         })}
         isDisabled={isDisabled}
       />
-      <CategoryItem
-        title={t("QuotaPerAIAgent", {
-          aiAgent: t("Common:AIAgent"),
-        })}
-        onClickLink={onClickLink}
-        url="/portal-settings/management/disk-space/quota-per-ai-agent"
-        subtitle={t("SetDefaultAIAgentQuota", {
-          productName: getBrandName("ProductName"),
-          aiAgents: t("Common:AIAgents"),
-          aiAgent: t("Common:AIAgent"),
-        })}
-        isDisabled={isDisabled}
-      />
-    </StyledBaseQuotaComponent>
+      {aiServicesEnabled ? (
+        <CategoryItem
+          title={t("QuotaPerAIAgent", {
+            aiAgent: t("Common:AIAgent"),
+          })}
+          onClickLink={onClickLink}
+          url="/portal-settings/management/disk-space/quota-per-ai-agent"
+          subtitle={t("SetDefaultAIAgentQuota", {
+            aiAgents: t("Common:AIAgents"),
+            aiAgent: t("Common:AIAgent"),
+          })}
+          isDisabled={isDisabled}
+        />
+      ) : null}
+    </div>
   );
 };
 

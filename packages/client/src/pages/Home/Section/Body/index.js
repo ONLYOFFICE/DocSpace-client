@@ -39,7 +39,6 @@ import { observer, inject } from "mobx-react";
 
 import {
   clearEdgeScrollingTimer,
-  getFormFillingTipsStorageName,
   isMobile,
   isTablet,
   onEdgeScrolling,
@@ -47,13 +46,16 @@ import {
 
 import { isElementInViewport } from "@docspace/shared/utils/common";
 import { EMPTY_ARRAY } from "@docspace/shared/constants";
+import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
-  DeviceType,
-  VDRIndexingAction,
-  RoomsType,
-} from "@docspace/shared/enums";
+  useAttachHostFilesToChat,
+  notifyAlreadyAttached,
+  notifyAttachmentLimit,
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/files";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
+import ClientSearchProgress from "./ClientSearchProgress";
 import { NoAccessContainerType } from "../../../../components/EmptyContainer/NoAccessContainer";
 import KnowledgeDisabledContainer from "../../../../components/EmptyContainer/KnowledgeDisabledContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
@@ -65,6 +67,9 @@ import NoAccessContainer from "../../../../components/EmptyContainer/NoAccessCon
 
 const separatorStyles = `width: 100vw;  position: absolute; height: 3px; z-index: 1;`;
 const sectionClass = "section-wrapper-content";
+// The AI chat panel region (Section.ChatPanel). Dropping a file-list drag here
+// attaches the dragged files to the chat composer instead of moving them.
+const chatPanelSelector = "#ChatPanelWrapper";
 
 let currentDroppable = null;
 let droppableSeparator = null;
@@ -107,12 +112,6 @@ const SectionBodyContent = (props) => {
     changeIndex,
     isErrorRoomNotAvailable,
     getSelectedFolder,
-    welcomeFormFillingTipsVisible,
-    formFillingTipsVisible,
-    roomType,
-    userId,
-    onEnableFormFillingGuid,
-    isArchiveFolderRoot,
     setDropTargetPreview,
     aiConfig,
     isInsideKnowledge,
@@ -122,30 +121,16 @@ const SectionBodyContent = (props) => {
     setEditRoomGroupsDialogVisible,
     isFilterOrSearchActive,
     isRoomsFolder,
+    isFormsFolder,
+    draggedFiles,
+    setIsChatDropTarget,
   } = props;
+
+  const attachFilesToChat = useAttachHostFilesToChat();
 
   useEffect(() => {
     return () => window?.getSelection()?.removeAllRanges();
   }, []);
-
-  useEffect(() => {
-    const storageName = getFormFillingTipsStorageName(userId);
-
-    const closedFormFillingTips = localStorage.getItem(storageName);
-
-    if (isMobile()) {
-      return window.localStorage.setItem(storageName, "true");
-    }
-
-    if (
-      roomType === RoomsType.FormRoom &&
-      !closedFormFillingTips &&
-      userId &&
-      !isArchiveFolderRoot
-    ) {
-      onEnableFormFillingGuid(t, roomType);
-    }
-  }, [roomType, onEnableFormFillingGuid]);
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
@@ -245,6 +230,10 @@ const SectionBodyContent = (props) => {
     if (!wrapperElement) {
       return;
     }
+
+    setIsChatDropTarget(
+      draggedFiles.length > 0 && !!wrapperElement.closest(chatPanelSelector),
+    );
 
     droppableSeparator && droppableSeparator.remove();
 
@@ -355,6 +344,9 @@ const SectionBodyContent = (props) => {
   const onMouseUp = (e) => {
     clearEdgeScrollingTimer();
     setStartDrag(false);
+    setIsChatDropTarget(false);
+
+    const droppedOnChatPanel = !!e.target.closest(chatPanelSelector);
 
     setTimeout(() => {
       isDragActive = false;
@@ -362,6 +354,24 @@ const SectionBodyContent = (props) => {
       document.body.classList.remove("drag-cursor");
       droppableSeparator && droppableSeparator.remove();
     }, 0);
+
+    if (droppedOnChatPanel) {
+      // A folder-only drag lands here as a no-op: nothing to attach, and the
+      // panel is not a `.droppable`, so the move path below must not run either.
+      if (isDragActive && draggedFiles.length > 0) {
+        attachFilesToChat(draggedFiles)
+          .then(({ skippedOverLimit, duplicates, cap }) => {
+            // Files that did not make it onto the composer — capped or
+            // already there — must not vanish without a word. The cap is
+            // per section, so quote the one that applied.
+            notifyAlreadyAttached(t, duplicates);
+            notifyAttachmentLimit(t, skippedOverLimit, cap);
+          })
+          .catch((error) => toastr.error(error));
+      }
+
+      return;
+    }
 
     const treeElem = e.target.closest(".tree-drag");
     const treeDataValue = treeElem?.dataset?.value;
@@ -459,7 +469,7 @@ const SectionBodyContent = (props) => {
 
     document.addEventListener("dragover", onDragOver);
     document.addEventListener("dragleave", onDragLeaveDoc);
-    document.addEventListener("drop", onDropEvent);
+    document.addEventListener("drop", onDropEvent, true);
 
     return () => {
       window.removeEventListener("beforeunload", onBeforeunload);
@@ -469,7 +479,7 @@ const SectionBodyContent = (props) => {
 
       document.removeEventListener("dragover", onDragOver);
       document.removeEventListener("dragleave", onDragLeaveDoc);
-      document.removeEventListener("drop", onDropEvent);
+      document.removeEventListener("drop", onDropEvent, true);
     };
   }, [
     onMouseUp,
@@ -496,24 +506,34 @@ const SectionBodyContent = (props) => {
   )
     return <KnowledgeDisabledContainer />;
 
-  if (
-    isEmptyFilesList &&
-    !welcomeFormFillingTipsVisible &&
-    !formFillingTipsVisible
-  ) {
-    if (roomsFilterGroupId && !isFilterOrSearchActive && isRoomsFolder) {
+  if (isEmptyFilesList) {
+    if (
+      roomsFilterGroupId &&
+      !isFilterOrSearchActive &&
+      (isRoomsFolder || isFormsFolder)
+    ) {
       const onManageGroups = () => {
         setEditRoomGroupsDialogVisible?.(true);
       };
 
-      return <EmptyRoomGroupContainer onManageGroups={onManageGroups} />;
+      return (
+        <EmptyRoomGroupContainer
+          onManageGroups={onManageGroups}
+          isFormsSection={isFormsFolder}
+        />
+      );
     }
     return <EmptyContainer isEmptyPage={isEmptyPage} />;
   }
 
   const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
-  return <FileViewComponent />;
+  return (
+    <>
+      <ClientSearchProgress />
+      <FileViewComponent />
+    </>
+  );
 };
 
 export default inject(
@@ -526,8 +546,6 @@ export default inject(
     uploadDataStore,
     indexingStore,
     dialogsStore,
-    userStore,
-    contextOptionsStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -549,17 +567,14 @@ export default inject(
       isEmptyPage,
       isErrorRoomNotAvailable,
       isErrorAIAgentNotAvailable,
+      draggedFiles,
+      setIsChatDropTarget,
     } = filesStore;
 
-    const {
-      welcomeFormFillingTipsVisible,
-      formFillingTipsVisible,
-      setEditRoomGroupsDialogVisible,
-    } = dialogsStore;
+    const { setEditRoomGroupsDialogVisible } = dialogsStore;
 
     const { roomsFilter } = filesStore;
 
-    const { onEnableFormFillingGuid } = contextOptionsStore;
     const { primaryProgressDataStore, uploaded } = uploadDataStore;
     const { setDropTargetPreview } = primaryProgressDataStore;
 
@@ -571,17 +586,18 @@ export default inject(
       isEmptyFilesList,
       setDragging,
       folderId: selectedFolderStore.id,
-      roomType: selectedFolderStore.roomType,
       selectedFolderChatSettings: selectedFolderStore.chatSettings,
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
-      isArchiveFolderRoot: treeFoldersStore.isArchiveFolderRoot,
       isRoomsFolder: treeFoldersStore.isRoomsFolder,
+      isFormsFolder: treeFoldersStore.isFormsFolder,
       moveDragItems: filesActionsStore.moveDragItems,
       changeIndex: filesActionsStore.changeIndex,
       viewAs,
+      draggedFiles,
       setSelection,
       setBufferSelection,
+      setIsChatDropTarget,
       tooltipPageX,
       tooltipPageY,
       setHotkeyCaretStart,
@@ -599,10 +615,6 @@ export default inject(
       isErrorAIAgentNotAvailable,
       getSelectedFolder: selectedFolderStore.getSelectedFolder,
       isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
-      welcomeFormFillingTipsVisible,
-      formFillingTipsVisible,
-      userId: userStore?.user?.id,
-      onEnableFormFillingGuid,
       setDropTargetPreview,
       roomsFilterGroupId: roomsFilter?.groupId,
       setEditRoomGroupsDialogVisible,
@@ -620,7 +632,7 @@ export default inject(
     };
   },
 )(
-  withTranslation(["Files", "Common", "Translations", "FormFillingTipsDialog"])(
+  withTranslation(["Files", "Common", "Translations"])(
     withHotkeys(withLoader(observer(SectionBodyContent))()),
   ),
 );

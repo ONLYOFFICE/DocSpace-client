@@ -33,80 +33,23 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
 import { observer } from "mobx-react";
 
 import { retryWebhook } from "@docspace/shared/api/settings";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useNavigate, useParams, useLocation } from "react-router";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
-import { tablet, mobile } from "@docspace/shared/utils";
 import { useTranslation } from "react-i18next";
 
-const HeaderContainer = styled.div`
-  position: sticky;
-  top: 0;
-  background-color: ${(props) => props.theme.backgroundColor};
-  z-index: 310;
-  display: flex;
-  align-items: center;
-  max-width: calc(100vw - 32px);
-  min-height: 69px;
-
-  @media ${tablet} {
-    margin-top: -5px;
-    margin-bottom: 5px;
-  }
-  @media ${mobile} {
-    margin-top: 0;
-    justify-content: space-between;
-  }
-
-  .headerNavigation {
-    display: flex;
-    align-items: center;
-  }
-
-  .arrow-button {
-    margin-inline-end: 18.5px;
-
-    @media ${tablet} {
-      padding-block: 8px;
-      padding-inline: 8px 0;
-
-      margin-inline-start: -8px;
-    }
-    @media ${mobile} {
-      margin-inline-end: 13px;
-    }
-
-    svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    }
-  }
-
-  .headline {
-    font-size: 18px;
-    margin-inline-end: 16px;
-
-    @media ${tablet} {
-      font-size: 21px;
-    }
-
-    @media ${mobile} {
-      font-size: 18px;
-    }
-  }
-`;
+import styles from "../WebhookEventDetails.styled.module.scss";
 
 const DetailsNavigationHeader = () => {
   const { id, eventId } = useParams();
@@ -124,7 +67,7 @@ const DetailsNavigationHeader = () => {
   };
 
   return (
-    <HeaderContainer>
+    <div className={styles.headerContainer}>
       <div className="headerNavigation">
         <IconButton
           iconName={ArrowPathReactSvgUrl}
@@ -145,7 +88,7 @@ const DetailsNavigationHeader = () => {
         isFill
         onClick={handleRetryEvent}
       />
-    </HeaderContainer>
+    </div>
   );
 };
 

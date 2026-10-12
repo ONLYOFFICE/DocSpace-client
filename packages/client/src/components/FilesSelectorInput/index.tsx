@@ -35,7 +35,7 @@
 import { inject, observer } from "mobx-react";
 
 import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
-import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { FilesSettingsDto } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import type {
   ExternalFilesSelectorInputWrapperProps,
   FilesSelectorInputWrapperProps,
@@ -55,7 +55,12 @@ export default inject<
     filesSelectorInput;
 
   const { currentDeviceType } = settingsStore;
-  const { getIcon, filesSettings } = filesSettingsStore;
+  const {
+    getIcon,
+    filesSettings,
+    isExternalShareRestricted,
+    externalShareApplyToRooms,
+  } = filesSettingsStore;
   const { setBackupToPublicRoomVisible } = dialogsStore;
 
   const filesSelectorSettings = {
@@ -74,6 +79,8 @@ export default inject<
     currentDeviceType,
     filesSelectorSettings,
     setBackupToPublicRoomVisible,
+    disabledCreatePublicRoom:
+      isExternalShareRestricted && externalShareApplyToRooms,
   };
 })(
   observer(

@@ -33,18 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 
-import { RowContainer } from "@docspace/ui-kit/components/rows";
+import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import WebhookRow from "./WebhookRow";
 
-const StyledRowContainer = styled(RowContainer)`
-  margin-top: 16px;
-`;
+import styles from "../WebhooksTable.styled.module.scss";
 
 const WebhooksRowView = (props) => {
   const {
@@ -64,7 +61,7 @@ const WebhooksRowView = (props) => {
   });
 
   return (
-    <StyledRowContainer useReactWindow={false}>
+    <RowContainer className={styles.styledRowContainer} useReactWindow={false}>
       {webhooks.map((webhook) => (
         <WebhookRow
           key={webhook.id}
@@ -74,7 +71,7 @@ const WebhooksRowView = (props) => {
           openDeleteModal={openDeleteModal}
         />
       ))}
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 

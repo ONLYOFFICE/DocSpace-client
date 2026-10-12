@@ -34,22 +34,12 @@
  */
 
 import React from "react";
-import styled from "styled-components";
+import classNames from "classnames";
 
-import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
 
-import { Label } from "@docspace/ui-kit/components/label";
-
-const StyledLabel = styled(Label)`
-  display: block;
-  margin-top: 20px;
-  line-height: 20px;
-
-  input {
-    margin-top: 4px;
-    width: 100%;
-  }
-`;
+import styles from "../Webhooks.styled.module.scss";
 
 export const LabledInput = ({
 	label,
@@ -67,7 +57,10 @@ export const LabledInput = ({
 	dataTestId,
 }) => {
 	return (
-		<StyledLabel text={label} className={className}>
+		<Label
+			text={label}
+			className={classNames(styles.styledLabel, className)}
+		>
 			<TextInput
 				id={id}
 				name={name}
@@ -83,6 +76,6 @@ export const LabledInput = ({
 				{...(mask ? { mask } : {})}
 				testId={dataTestId}
 			/>
-		</StyledLabel>
+		</Label>
 	);
 };

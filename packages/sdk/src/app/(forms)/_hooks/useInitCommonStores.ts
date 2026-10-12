@@ -44,8 +44,7 @@ import type {
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
-import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
-import { ShareAccessRights } from "@docspace/ui-kit/enums";
+import { ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 import { FormsSection } from "@/types/forms";
 
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
@@ -53,7 +52,6 @@ import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
-import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 
@@ -63,7 +61,6 @@ export type CommonData = {
   socketUrl: string;
   filesSettings: TFilesSettings;
   user?: TUser;
-  defaultProvider?: TDefaultProvider;
   roomSecurity?: TFolderSecurity;
   roomAccess?: ShareAccessRights;
   saveFormAsXLSX?: boolean;
@@ -74,12 +71,12 @@ export type CommonData = {
   initialTotal?: number;
   initialFolders?: TFolder[];
   initialSection?: FormsSection;
+  standalone?: boolean;
 };
 
 export default function useInitCommonStores(commonData: CommonData): boolean {
   const formsSettingsStore = useFormsSettingsStore();
   const formsUserStore = useFormsUserStore();
-  const formsAiAgentStore = useFormsAiAgentStore();
   const formsDbSettingsStore = useFormsDbSettingsStore();
   const formsListStore = useFormsListStore();
   const filesSettingsStore = useFilesSettingsStore();
@@ -113,12 +110,8 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
       formsUserStore.setUser(commonData.user);
     }
 
-    if (commonData.defaultProvider) {
-      formsAiAgentStore.setDefaultProvider(commonData.defaultProvider);
-    }
-
     if (commonData.doneFolderId) {
-      formsAiAgentStore.setDoneFolderId(commonData.doneFolderId);
+      formsSettingsStore.setDoneFolderId(commonData.doneFolderId);
     }
     if (commonData.inProgressFolderId) {
       formsSettingsStore.setInProgressFolderId(commonData.inProgressFolderId);

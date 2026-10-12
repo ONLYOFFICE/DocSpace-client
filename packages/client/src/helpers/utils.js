@@ -35,7 +35,7 @@
 
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { toCommunityHostname } from "@docspace/shared/utils/common";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { CategoryType } from "@docspace/shared/constants";
 
 import {
@@ -120,6 +120,9 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
     case FolderType.AIAgents:
       return parentId > 0 ? CategoryType.AIAgent : CategoryType.AIAgents;
 
+    case FolderType.Forms:
+      return parentId > 0 ? CategoryType.Form : CategoryType.Forms;
+
     case FolderType.Archive:
       return CategoryType.Archive;
 
@@ -140,6 +143,45 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
   }
 };
 
+/**
+ * Resolves the category a room/folder must open under, keeping the Forms
+ * section intact.
+ *
+ * Form filling rooms live in the VirtualRooms tree, so the server reports
+ * `rootFolderType = Rooms (14)` for the room and everything inside it --
+ * `FolderType.Forms (36)` only ever appears on the bare Forms section root.
+ * Deriving the URL from `rootFolderType` alone therefore yields
+ * `/rooms/shared/...`, and both the sidebar and the breadcrumb (which resolve
+ * the active section from the pathname) then highlight Rooms instead of Forms.
+ *
+ * `roomType` is the reliable signal: it identifies a form room even when the
+ * user enters it from another section (e.g. Files -> "Form data collection" ->
+ * "Share in the room"), where the `/forms` route prefix is not set yet. The
+ * pathname is the fallback for folders *inside* a form room, which carry no
+ * room type of their own.
+ *
+ * @param {import("@docspace/shared/enums").FolderType|null} [folderType]
+ * @param {number|string|null} [parentId]
+ * @param {{
+ *   roomType?: import("@docspace/shared/enums").RoomsType,
+ *   pathname?: string,
+ * }} [options]
+ */
+export const getCategoryTypeByFolderTypeInSection = (
+  folderType,
+  parentId,
+  { roomType, pathname = window.location.pathname } = {},
+) => {
+  const categoryType = getCategoryTypeByFolderType(folderType, parentId);
+
+  if (categoryType !== CategoryType.SharedRoom) return categoryType;
+
+  const isFormRoom = roomType === RoomsType.FormRoom;
+  const isFormsRoute = pathname.startsWith("/forms");
+
+  return isFormRoom || isFormsRoute ? CategoryType.Form : categoryType;
+};
+
 export const getCategoryUrl = (categoryType, folderId) => {
   const cType = categoryType;
 
@@ -158,6 +200,12 @@ export const getCategoryUrl = (categoryType, folderId) => {
 
     case CategoryType.Shared:
       return "/rooms/shared/filter";
+
+    case CategoryType.Forms:
+      return "/forms/filter";
+
+    case CategoryType.Form:
+      return `/forms/${folderId}/filter`;
 
     case CategoryType.SharedRoom:
       return `/rooms/shared/${folderId}/filter`;
@@ -201,6 +249,32 @@ export const getCategoryUrl = (categoryType, folderId) => {
 };
 
 export const getUrlByDefaultFolderType = (folderType) => {
+  if (folderType === FolderType.DEFAULT) return "/dashboard";
+
   const categoryType = getCategoryTypeByFolderType(folderType);
   return getCategoryUrl(categoryType);
+};
+
+export const getNewViewUrlByFolderType = (folderType) => {
+  switch (folderType) {
+    case FolderType.SHARE:
+      return "/ai-files?section=shared-with-me";
+    case FolderType.Recent:
+      return "/ai-files?section=recent";
+    case FolderType.Favorites:
+      return "/ai-files?section=favorites";
+    case FolderType.TRASH:
+      return "/ai-files?section=trash";
+    case FolderType.USER:
+      return "/ai-files";
+    case FolderType.Rooms:
+    case FolderType.RoomTemplates:
+      return "/ai-rooms?section=rooms";
+    case FolderType.Archive:
+      return "/ai-rooms?section=archive";
+    case FolderType.AIAgents:
+      return "/agents";
+    default:
+      return "/ai-files";
+  }
 };

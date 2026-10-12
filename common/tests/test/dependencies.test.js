@@ -45,6 +45,31 @@ const {
 } = require("../utils/files");
 
 let workspaces = [];
+
+// Peer dependency names declared by the installed copies of a workspace's
+// direct dependencies, read straight from node_modules/<dep>/package.json:
+// pnpm links every declared dependency there, and require.resolve is no use
+// because a package with an `exports` map (ai-chat among them) does not
+// expose its package.json.
+const peerNamesOf = (wsDepsItem) => {
+  const names = new Set();
+  const nodeModules = path.join(path.dirname(wsDepsItem.path), "node_modules");
+
+  for (const dep of wsDepsItem.deps) {
+    try {
+      const manifest = JSON.parse(
+        fs.readFileSync(path.join(nodeModules, dep.name, "package.json"), "utf8"),
+      );
+      for (const peer of Object.keys(manifest.peerDependencies ?? {})) {
+        names.add(peer);
+      }
+    } catch {
+      // Not installed, or no manifest: nothing to learn from it.
+    }
+  }
+
+  return names;
+};
 let workspaceCodeImports = [];
 let workspaceDeps = [];
 
@@ -325,46 +350,50 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       return !success;
     });
 
+    // A dependency nothing imports can still be load-bearing. pnpm does not
+    // install optional peers, so an app that renders a library's optional
+    // module has to declare that module's peers itself: client and sdk carry
+    // ai-chat's LLM SDKs, radix and codemirror this way, and ui-kit's
+    // markdown stack. Such an entry is used by the package that lists it as
+    // a peer, and the installed manifest says which ones do.
+    const peersOfDeclared = peerNamesOf(wsDepsItem);
+
+    missing = missing.filter((m) => {
+      const success = peersOfDeclared.has(m.name);
+
+      if (success) {
+        usedSomeWhere.add(m.name);
+      }
+
+      return !success;
+    });
+
     // Filter out allowed unused dependencies
     const allowedUnusedDeps = [
-      "@aws-sdk/client-cloudwatch-logs",
-      "@storybook/addon-docs",
-      "@storybook/addon-links",
-      "@storybook/react",
-      "babel-jest",
-      "babel-plugin-styled-components",
-      "@babel/core",
-      "@babel/runtime",
+      // packages/shared tooling that is configured rather than imported: the
+      // Babel preset chain (babel.config), Storybook (.storybook), the Vitest
+      // module mock and its types, ts-node for the config loaders, Biome and
+      // open-cli behind package scripts of the root, and two runtime shims
+      // (linkifyjs, path-browserify) that host bundles resolve by name.
+      "@babel/plugin-proposal-export-default-from",
+      "@babel/plugin-transform-class-properties",
+      "@babel/plugin-transform-export-namespace-from",
+      "@babel/plugin-transform-private-property-in-object",
+      "@babel/plugin-transform-runtime",
       "@babel/preset-env",
       "@babel/preset-react",
       "@babel/preset-typescript",
-      "@babel/plugin-transform-runtime",
-      "@babel/plugin-transform-private-property-in-object",
-      "@babel/plugin-transform-export-namespace-from",
-      "@babel/plugin-transform-class-properties",
-      "@babel/plugin-proposal-export-default-from",
-      "webpack-dev-server",
-      "resolve-url-loader",
-      "typescript",
-      "local-web-server",
-      "identity-obj-proxy",
-      "@types/identity-obj-proxy",
-      "@types/element-resize-detector",
-      "@types/node",
-      "jest-environment-jsdom",
-      "jest-styled-components",
-      "jsdom",
-      "ts-jest",
-      "ts-node",
-      "jest-html-reporter",
-      "linkifyjs",
+      "@babel/runtime",
       "@biomejs/biome",
-      "@vitest/ui",
-      "@vitest/coverage-v8",
+      "@storybook/addon-docs",
+      "@storybook/react",
+      "@types/element-resize-detector",
+      "@types/identity-obj-proxy",
+      "identity-obj-proxy",
+      "linkifyjs",
       "open-cli",
-      "postcss",
       "path-browserify",
-      "sass",
+      "ts-node",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));
@@ -451,4 +480,42 @@ it("DifferentDependencyVersionsTest: Verify that all workspaces use same depende
       `Found ${mismatchedDeps.length} dependencies with version mismatch:\n\n ${report}`,
     );
   }
+});
+
+it("SplitDependencyCopiesTest: Verify that apps without a bundler dedupe share every common dependency's copy with shared", () => {
+  const { findSplitCopies } = require(
+    path.join(BASE_DIR, "scripts", "split-copies.cjs"),
+  );
+
+  // These apps resolve split dependencies from their own copy at build time
+  // and test that in their bundler config: packages/client/config/resolve.test.ts
+  // (Vite resolve.dedupe) and packages/sdk/next.config.test.ts (webpack).
+  const dedupedApps = new Set(["client", "sdk"]);
+
+  const packagesDir = path.join(BASE_DIR, "packages");
+  const apps = fs
+    .readdirSync(packagesDir)
+    .filter(
+      (name) =>
+        name !== "shared" &&
+        !dedupedApps.has(name) &&
+        fs.existsSync(path.join(packagesDir, name, "package.json")),
+    );
+
+  const report = apps.flatMap((app) =>
+    findSplitCopies(path.join(packagesDir, app)).map(
+      ({ name, appCopy, sharedCopy }) =>
+        `❌ ${app}: ${name} is installed twice\n` +
+        `  - ${app}: ${path.relative(BASE_DIR, appCopy)}\n` +
+        `  - shared: ${path.relative(BASE_DIR, sharedCopy)}`,
+    ),
+  );
+
+  // pnpm installs a package once per peer set. An app that declares a peer of
+  // a common dependency which shared does not gets its own copy, and imports
+  // from shared's sources then load the other one: a React context or store
+  // in it is no longer shared (ui-kit's ScrollbarContext split emptied the
+  // info panel Share tab). Align the declared peers, or dedupe the package in
+  // the app's bundler and cover it with a test like the two above.
+  expect(report, report.join("\n\n")).toEqual([]);
 });

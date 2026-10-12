@@ -34,10 +34,10 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { ModalDialog, ModalDialogType } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { TUserStatisticsDialogProps } from "./UserStatisticsDialog.types";
 import styles from "./UserStatisticsDialog.module.scss";
 import { UserStatisticsInfo } from "./sub-components/UserStatisticsInfo";
@@ -45,6 +45,7 @@ import { UserStatisticsInfo } from "./sub-components/UserStatisticsInfo";
 const UserStatisticsDialog = ({
   onClose,
   isLoading,
+  isReportLoading,
   isVisible,
   statistics,
   docspaceFaqUrl,
@@ -101,6 +102,7 @@ const UserStatisticsDialog = ({
           label={t("DownloadAndOpenReport")}
           size={ButtonSize.normal}
           primary
+          isLoading={isReportLoading}
           onClick={onDownloadAndReport}
           testId="download_and_open_report_button"
         />

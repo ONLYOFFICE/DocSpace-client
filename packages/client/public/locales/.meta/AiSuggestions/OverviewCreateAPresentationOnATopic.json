@@ -1,0 +1,29 @@
+{
+  "key_path": "OverviewCreateAPresentationOnATopic",
+  "content": "Create a presentation on a topic",
+  "content_en_sha1_hash": "8daf8c826d0c5efe12f1b8f401a25b7fab35a4d3",
+  "created_at": "2026-08-05T16:31:58.688Z",
+  "updated_at": "2026-08-05T17:12:04.990Z",
+  "comment": {
+    "text": "Label for an AI suggestion item in the overview section used to initiate presentation generation.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:12:04.990Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 227,
+      "context": "{\n name: t(\"AiSuggestions:OverviewCreateASpreadsheetForMyTask\"),\n prompt: t(\"AiSuggestions:OverviewCreateASpreadsheetForMyTaskPrompt\"),\n },\n {\n name: t(\"AiSuggestions:OverviewCreateAPresentationOnATopic\"),\n prompt: t(\"AiSuggestions:OverviewCreateAPresentationOnATopicPrompt\"),\n },\n {\n name: t(\"AiSuggestions:OverviewPrepareADocumentForPDF\"),\n prompt: t(\"AiSuggestions:OverviewPrepareADocumentForPDFPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

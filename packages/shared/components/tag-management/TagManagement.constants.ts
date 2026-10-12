@@ -37,8 +37,27 @@ export const ROW_HEIGHT = 30;
 export const MARGIN_BOTTOM = 10;
 export const MAX_BODY_HEIGHT = 220;
 export const ICON_SIZE = 16;
+export const LOADER_SIZE = 16;
 
 export const TAGS_QUERY_KEY = ["tags"];
+
+// Keys for the mutations, so what is in flight can be read back out of the
+// mutation cache - which belongs to the query client above the popup and
+// outlives it. Component state could not: it goes when the popup closes.
+//
+// Binding a tag and creating one are sent for a single room, so their key
+// carries it and one room does not wait on another's requests. Renaming and
+// removing change the tag itself, wherever it is used.
+export const TAG_MUTATION_KEY = ["tag-mutation"];
+
+export const roomTagMutationKey = (roomId: string | number) => [
+  ...TAG_MUTATION_KEY,
+  "room",
+  String(roomId),
+];
+
+export const RENAME_TAG_MUTATION_KEY = [...TAG_MUTATION_KEY, "rename"];
+export const REMOVE_TAG_MUTATION_KEY = [...TAG_MUTATION_KEY, "remove"];
 
 export const EVENT_OPTIONS: AddEventListenerOptions = {
   capture: true,
@@ -50,6 +69,6 @@ export const EDIT_TAG_MODAL_ID = "edit-tag-modal";
 export const DELETE_TAG_DONT_SHOW_AGAIN_KEY = "delete-tag-dont-show-again";
 export const DELETE_TAG_MODAL_ID = "delete-tag-modal";
 
-export const EDIT_CANCELLED = Symbol("EDIT_CANCELLED");
-export const DELETE_CANCELLED = Symbol("DELETE_CANCELLED");
 export const EDIT_TAG_FORM_NAME = "edit-tag-form";
+
+export const REGEX_TAG_NAME_PATTERN = /^(?!.*\s{2,}).+$/; // No double spaces allowed, but leading/trailing spaces are fine.

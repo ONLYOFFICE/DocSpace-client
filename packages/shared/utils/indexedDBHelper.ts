@@ -36,7 +36,8 @@
 const DB_VERSION = 1;
 const MAX_COUNT_STORE = 30;
 
-const idb = window?.indexedDB;
+const idb =
+  typeof window !== "undefined" ? window.indexedDB : undefined;
 
 class IndexedDBHelper {
   db: IDBDatabase | null = null;
@@ -50,6 +51,7 @@ class IndexedDBHelper {
       if (!idb) {
         this.setDB(null);
         reject();
+        return;
       }
 
       const request = idb.open(`${userId}`, DB_VERSION);
@@ -84,7 +86,7 @@ class IndexedDBHelper {
   };
 
   deleteDatabase = (dbName: string) => {
-    idb.deleteDatabase(`${dbName}`);
+    idb?.deleteDatabase(`${dbName}`);
   };
 
   clearStore = (storeName: string) => {
@@ -152,6 +154,63 @@ class IndexedDBHelper {
     });
   };
 
+  putItem = (storeName: string, item: { id: IDBValidKey }) => {
+    return new Promise<void>((resolve, reject) => {
+      try {
+        const transaction = this.db?.transaction(storeName, "readwrite");
+
+        const store = transaction?.objectStore(storeName);
+
+        store?.put(item);
+        resolve();
+      } catch (e) {
+        reject(e);
+      }
+    });
+  };
+
+  deleteItem = (storeName: string, id: IDBValidKey) => {
+    return new Promise<void>((resolve, reject) => {
+      try {
+        const transaction = this.db?.transaction(storeName, "readwrite");
+
+        const store = transaction?.objectStore(storeName);
+
+        store?.delete(id);
+        resolve();
+      } catch (e) {
+        reject(e);
+      }
+    });
+  };
+
+  getAllItems = (storeName: string) => {
+    return new Promise<unknown[]>((resolve, reject) => {
+      try {
+        const transaction = this.db?.transaction(storeName, "readonly");
+
+        const store = transaction?.objectStore(storeName);
+
+        const request = store?.getAll();
+
+        if (request) {
+          request.onsuccess = () => {
+            resolve(request.result);
+          };
+
+          request.onerror = () => {
+            console.error("Error", request.error);
+            reject(request.error);
+          };
+        } else {
+          resolve([]);
+        }
+      } catch (e) {
+        reject(e);
+      }
+    });
+  };
+
   checkStore = (store: IDBObjectStore | undefined) => {
     let newIgnoreIds = [...this.ignoreIds];
 
@@ -183,6 +242,8 @@ class IndexedDBHelper {
     }
   };
 }
+
+export { IndexedDBHelper };
 
 const indexedDbHelper = new IndexedDBHelper();
 

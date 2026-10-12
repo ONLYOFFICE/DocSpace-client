@@ -39,7 +39,7 @@ import {
   getEncryptionAccess,
 } from "@docspace/shared/api/files";
 import { TUser } from "@docspace/shared/api/people/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 
@@ -49,7 +49,19 @@ const initDesktop = (
   fileId: string | number,
   t: Nullable<TTranslation>,
 ) => {
-  const encryptionKeys = cfg?.editorConfig?.encryptionKeys;
+  const keyPairs = cfg?.editorConfig?.encryptionKeys;
+  const keyPair =
+    keyPairs?.find((k) => String(k.userId) === String(user.id)) ??
+    keyPairs?.[0];
+  const encryptionKeys = keyPair
+    ? {
+        privateKeyEnc: keyPair.privateKeyEnc,
+        publicKey: keyPair.publicKey,
+        ...(keyPair.cryptoEngineId
+          ? { cryptoEngineId: keyPair.cryptoEngineId }
+          : {}),
+      }
+    : undefined;
   regDesktop(
     user,
     !!encryptionKeys,
@@ -57,6 +69,7 @@ const initDesktop = (
     (keys) => {
       setEncryptionKeys(keys);
     },
+    undefined,
     true,
     (callback) => {
       getEncryptionAccess?.(fileId)

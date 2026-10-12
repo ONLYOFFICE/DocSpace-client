@@ -1,20 +1,20 @@
 {
   "key_path": "InviteViaContacts",
-  "content": "Invite {{productName}} members via {{sectionName}}",
-  "content_en_sha1_hash": "765a98edeba63516946d5c30ad36a3a47d6a5736",
-  "created_at": "2025-06-02T10:19:19.698Z",
-  "updated_at": "2026-05-15T14:00:06.867Z",
+  "content": "Invite members via {{sectionName}}",
+  "content_en_sha1_hash": "17a5fa0243de14a926e94d7d18ab563ba42181e4",
+  "created_at": "2026-08-31T18:23:41.468Z",
+  "updated_at": "2026-08-31T20:28:13.015Z",
   "comment": {
-    "text": "This is a button label that allows users to invite members to the product via their contacts. `{{productName}}` is the name of the product (e.g., ONLYOFFICE DocSpace), and `{{sectionName}}` refers to the \"Contacts\" section.",
+    "text": "Clickable text label in the portal invitation settings that initiates the invitation process via a specific contact source. The {{sectionName}} variable represents the name of the contact section.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:23:41.492Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:28:13.015Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 298,
-      "context": "fontWeight=\"600\"\n lineHeight=\"20px\"\n onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>",
+      "line_number": 295,
+      "context": "fontWeight=\"600\"\n lineHeight=\"20px\"\n onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

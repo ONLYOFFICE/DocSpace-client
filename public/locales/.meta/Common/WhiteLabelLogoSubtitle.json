@@ -1,13 +1,13 @@
 {
   "key_path": "WhiteLabelLogoSubtitle",
-  "content": "Upload logos with a transparent background (PNG, SVG, JPG) for light and dark themes, or generate one instantly by entering your Your logo below.",
-  "content_en_sha1_hash": "e61d8428cf859d3858fc88a9afffb78e6116a9dd",
-  "created_at": "2026-05-08T13:10:39.273Z",
-  "updated_at": "2026-05-15T14:00:06.952Z",
+  "content": "Upload your logo with a transparent background (PNG, SVG, or JPG) for both light and dark themes or just enter your text below and we'll generate one for you.",
+  "content_en_sha1_hash": "da2e6cfa5529b000d24dd399f76a869e67c0426a",
+  "created_at": "2026-08-31T18:23:38.900Z",
+  "updated_at": "2026-08-31T18:24:44.563Z",
   "comment": {
-    "text": "Instructional helper text in the WhiteLabel branding settings providing guidance on uploading or generating logos for light and dark themes.",
+    "text": "Instructional helper text in the WhiteLabel branding settings providing guidance on uploading a logo or generating one via text input.",
     "is_auto": true,
-    "updated_at": "2026-05-08T13:11:09.405Z",
+    "updated_at": "2026-08-31T18:24:44.563Z",
     "model": "gemma4:26b"
   },
   "usage": [

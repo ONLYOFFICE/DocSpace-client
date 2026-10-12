@@ -3,7 +3,7 @@
   "content": "Files are stored in a third-party {{thirdpartyTitle}} storage in the \"{{thirdpartyFolderName}}\" folder.\n<strong>{{thirdpartyPath}}</strong>",
   "content_en_sha1_hash": "239bfc851724cfc88af2a746c35bbbec17b7aee4",
   "created_at": "2025-05-19T21:30:56.846Z",
-  "updated_at": "2026-05-15T14:00:06.660Z",
+  "updated_at": "2026-06-09T09:43:10.827Z",
   "comment": {
     "text": "This is a descriptive text within a dialog, informing the user about the storage location of files. It appears when configuring permanent settings for a room, indicating that files are stored in a third-party service ({{thirdpartyTitle}}) within a specific folder ({{thirdpartyFolderName}}) and displaying the full path ({{thirdpartyPath}}).",
     "is_auto": true,

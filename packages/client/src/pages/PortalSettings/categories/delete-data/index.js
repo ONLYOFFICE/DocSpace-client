@@ -36,7 +36,7 @@
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
-import { Tabs } from "@docspace/ui-kit/components/tabs";
+import { Tabs } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import PortalDeactivationSection from "./portalDeactivation";
@@ -44,7 +44,6 @@ import PortalDeletionSection from "./portalDeletion";
 import DeleteDataLoader from "./DeleteDataLoader";
 import config from "../../../../../package.json";
 import useDeleteData from "./useDeleteData";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const DeleteData = (props) => {
   const {
@@ -69,7 +68,7 @@ const DeleteData = (props) => {
   const data = [
     {
       id: "deletion",
-      name: t("Common:DeletePortal", { productName: getBrandName("ProductName") }),
+      name: t("Common:DeletePortal"),
       content: <PortalDeletionSection stripeUrl={stripeUrl} />,
       onClick: async () => {
         clearAbortControllerArr();
@@ -78,7 +77,7 @@ const DeleteData = (props) => {
     },
     {
       id: "deactivation",
-      name: t("PortalDeactivation", { productName: getBrandName("ProductName") }),
+      name: t("PortalDeactivation"),
       content: <PortalDeactivationSection />,
       onClick: async () => {
         clearAbortControllerArr();

@@ -35,7 +35,7 @@
 
 import { http, HttpResponse } from "msw";
 import type { DateTime } from "luxon";
-import { uuid } from "@docspace/ui-kit/utils/uuid";
+import { uuid } from "@onlyoffice/apps-ui-kit/utils/uuid";
 
 import { TFileLink } from "../../../api/files/types";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
@@ -130,6 +130,45 @@ export const primaryLinkHandler = (port?: string) => {
 
     return HttpResponse.json({ response });
   });
+};
+
+export const folderSharedUsersHandler = (port?: string) => {
+  const baseUrl = port
+    ? `${BASE_URL}:${port}`
+    : typeof window !== "undefined"
+      ? window.location.origin
+      : BASE_URL;
+
+  return http.get(
+    `${baseUrl}/${API_PREFIX}/files/folder/:id/share`,
+    () => HttpResponse.json({ response: { items: [], total: 0 } }),
+  );
+};
+
+export const externalFolderLinksHandler = (port?: string) => {
+  const baseUrl = port
+    ? `${BASE_URL}:${port}`
+    : typeof window !== "undefined"
+      ? window.location.origin
+      : BASE_URL;
+
+  return http.get(
+    `${baseUrl}/${API_PREFIX}/files/folder/:id/links`,
+    () => HttpResponse.json({ response: { items: [], total: 0 } }),
+  );
+};
+
+export const fileSharedUsersHandler = (port?: string) => {
+  const baseUrl = port
+    ? `${BASE_URL}:${port}`
+    : typeof window !== "undefined"
+      ? window.location.origin
+      : BASE_URL;
+
+  return http.get(
+    `${baseUrl}/${API_PREFIX}/files/file/:id/share`,
+    () => HttpResponse.json({ response: { items: [], total: 0 } }),
+  );
 };
 
 export const editExternalLinkHandler = (port?: string) => {

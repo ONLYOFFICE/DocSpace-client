@@ -37,8 +37,8 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Link } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { getTwoDotsReplacing } from "../Standalone.helpers";
 import { IPaymentsProps } from "../Standalone.types";
@@ -67,6 +67,7 @@ export const TariffTitleContainer = ({
 
   const {
     isUserStatisticsVisible,
+    isReportLoading,
     openUserStatistics,
     closeUserStatistics,
     downloadAndOpenReport,
@@ -215,7 +216,6 @@ export const TariffTitleContainer = ({
               fromDate: paymentDate,
               byDate: gracePeriodEndDate,
               delayDaysCount,
-              productName: getBrandName("ProductName"),
             }}
             components={{
               1: <Text as="span" isBold dataTestId="grace-period-date-range" />,
@@ -243,15 +243,17 @@ export const TariffTitleContainer = ({
         !isLicenseDateExpired ? (
           <div className={styles.title}>
             {getDescription()}
-
             {!isLicenseDateExpired ? (
-              <Text
-                fontSize="13px"
-                as="span"
-                dataTestId="license_expires_date_text"
-              >
-                {expiresDate()}
-              </Text>
+              <>
+                {" "}
+                <Text
+                  fontSize="13px"
+                  as="span"
+                  dataTestId="license_expires_date_text"
+                >
+                  {expiresDate()}
+                </Text>
+              </>
             ) : null}
           </div>
         ) : null}
@@ -263,6 +265,7 @@ export const TariffTitleContainer = ({
         isVisible={isUserStatisticsVisible}
         statistics={usersStatistics}
         onClose={closeUserStatistics}
+        isReportLoading={isReportLoading}
         onDownloadAndReport={downloadAndOpenReport}
       />
     </div>

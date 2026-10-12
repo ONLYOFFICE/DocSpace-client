@@ -37,7 +37,7 @@
 
 import { useCallback, useState, useLayoutEffect, useMemo } from "react";
 
-import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
+import { ThemeProviderComponent } from "@onlyoffice/apps-ui-kit/components/theme-provider";
 import { Error520SSR } from "@docspace/shared/components/errors/Error520";
 import { getUser } from "@docspace/shared/api/people";
 import { getSettings } from "@docspace/shared/api/settings";
@@ -52,14 +52,27 @@ import useDeviceType from "@/hooks/useDeviceType";
 import useI18N from "@/hooks/useI18N";
 
 import FirebaseHelper from "@docspace/shared/utils/firebase";
+import {
+  canReloadOnChunkError,
+  scheduleChunkErrorReload,
+} from "@docspace/shared/utils/chunk-load-error";
 
 import pkg from "../../package.json";
+
+const CHUNK_RELOAD_KEY = "retry-chunk-reload";
 
 export default function GlobalError({ error }: { error: Error }) {
   const [user, setUser] = useState<TUser>();
   const [settings, setSettings] = useState<TSettings>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setError] = useState<boolean>(false);
+  const [isReloading] = useState<boolean>(() =>
+    canReloadOnChunkError(error, CHUNK_RELOAD_KEY),
+  );
+
+  useLayoutEffect(() => {
+    if (isReloading) scheduleChunkErrorReload(CHUNK_RELOAD_KEY);
+  }, [isReloading]);
 
   const { i18n } = useI18N({ settings, user });
   const { currentDeviceType } = useDeviceType();
@@ -89,6 +102,8 @@ export default function GlobalError({ error }: { error: Error }) {
   useLayoutEffect(() => {
     getData();
   }, [getData]);
+
+  if (isReloading) return null;
 
   if (isError) return;
 

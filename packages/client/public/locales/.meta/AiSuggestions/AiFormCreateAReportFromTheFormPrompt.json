@@ -1,0 +1,29 @@
+{
+  "key_path": "AiFormCreateAReportFromTheFormPrompt",
+  "content": "Create a report from the attached form: what it collects, what the answers say, and the conclusions that follow. Show the proposed structure before saving anything. If this information is not provided, ask me for the audience and the preferred length.",
+  "content_en_sha1_hash": "2676cd4f30a5f8430410b319653b92fa41b4afed",
+  "created_at": "2026-09-14T19:16:00.078Z",
+  "updated_at": "2026-09-14T19:18:55.452Z",
+  "comment": {
+    "text": "An AI prompt instruction used when a user selects the suggestion to generate a report from an attached form.",
+    "is_auto": true,
+    "updated_at": "2026-09-14T19:18:55.452Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 872,
+      "context": "name: t(\"AiSuggestions:AiFormCollectResponsesIntoATable\"),\n prompt: t(\"AiSuggestions:AiFormCollectResponsesIntoATablePrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormCreateAReportFromTheForm\"),\n prompt: t(\"AiSuggestions:AiFormCreateAReportFromTheFormPrompt\"),\n },\n ],\n \n default: [],\n // `satisfies` (rather than an annotation) keeps the literal section keys",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

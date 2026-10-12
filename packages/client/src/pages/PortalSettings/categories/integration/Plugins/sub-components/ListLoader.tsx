@@ -41,11 +41,16 @@ import { ListLoaderProps } from "../Plugins.types";
 const ListLoader = ({ withUpload }: ListLoaderProps) => {
   return (
     <>
-      {withUpload ? <RectangleSkeleton width="144px" height="32px" /> : null}
+      {withUpload ? (
+        <>
+          <RectangleSkeleton width="100%" height="68px" />
+          <RectangleSkeleton width="100%" height="135px" />
+        </>
+      ) : null}
       <div className={styles.pluginListContainer}>
-        <RectangleSkeleton width="340px" height="135px" />
-        <RectangleSkeleton width="340px" height="135px" />
-        <RectangleSkeleton width="340px" height="135px" />
+        <RectangleSkeleton width="100%" height="135px" />
+        <RectangleSkeleton width="100%" height="135px" />
+        <RectangleSkeleton width="100%" height="135px" />
       </div>
     </>
   );

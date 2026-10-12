@@ -36,8 +36,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import type { Nullable } from "@docspace/shared/types";
 import { isMobile } from "@docspace/shared/utils";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
@@ -59,6 +59,7 @@ const PANEL_HEIGHT = 500;
 const NewFilesBadge = ({
   newFilesCount,
   folderId,
+  folderIds,
 
   isRoom,
   mute,
@@ -180,7 +181,9 @@ const NewFilesBadge = ({
     );
   }, []);
 
-  const onBadgeClickAction = () => {
+  const onBadgeClickAction = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+
     if (showPanel) return;
 
     setOpenWithClick(true);
@@ -414,6 +417,7 @@ const NewFilesBadge = ({
         <NewFilesPanel
           position={panelPosition}
           folderId={folderId}
+          folderIds={folderIds}
           isRoom={isRoom}
           onClose={onPanelHide}
         />

@@ -33,15 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { UsersInfoBlockProps } from "../types";
-import { StyledInfoBlock } from "../StyledDataImport";
+import styles from "../StyledDataImport.module.scss";
 
 const UsersInfoBlock = ({ selectedUsers, totalUsers }: UsersInfoBlockProps) => {
   const { t } = useTranslation(["Settings"]);
 
   return (
-    <StyledInfoBlock>
+    <div className={styles.styledInfoBlock}>
       <div className="info-block-wrapper">
         <Text className="selected-users-count" truncate>
           {t("SelectedUsersCounter", {
@@ -50,7 +50,7 @@ const UsersInfoBlock = ({ selectedUsers, totalUsers }: UsersInfoBlockProps) => {
           })}
         </Text>
       </div>
-    </StyledInfoBlock>
+    </div>
   );
 };
 

@@ -39,10 +39,10 @@ import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { size } from "@docspace/shared/utils";
 
@@ -51,7 +51,6 @@ import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStor
 
 import { LearnMoreWrapper } from "../StyledSecurity";
 import styles from "./adminMessage.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const AdminMessage = (props) => {
   const {
@@ -163,9 +162,7 @@ const AdminMessage = (props) => {
     <div className={styles.container}>
       <LearnMoreWrapper withoutExternalLink={!administratorMessageSettingsUrl}>
         <Text>
-          {t("AdminsMessageSettingDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("AdminsMessageSettingDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
           <Trans t={t} i18nKey="SaveToApply" />
@@ -202,7 +199,7 @@ const AdminMessage = (props) => {
           },
           {
             id: "admin-message-enable",
-            label: t("Common:Enable"),
+            label: t("Common:Enabled"),
             value: "enable",
             dataTestId: "administrator_message_enabled",
           },

@@ -41,7 +41,6 @@ import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const getHeaderLabel = (
   t: TTranslation,
@@ -66,9 +65,7 @@ export const getHeaderLabel = (
   }
 
   if (isFormRoom) {
-    return t("Common:SelectFromPortal", {
-      productName: getBrandName("ProductName"),
-    });
+    return t("Common:SelectFromPortal");
   }
 
   if (filterParam === FilesSelectorFilterTypes.DOCX)
@@ -122,6 +119,8 @@ export const getIsDisabled = (
   isInsideKnowledge?: boolean,
   isInsideResultStorage?: boolean,
   isAgents?: boolean,
+  isInsidePrivateRoom?: boolean,
+  sourceIsPrivate?: boolean,
 ) => {
   if (isFirstLoad) return true;
   if (isRequestRunning) return true;
@@ -132,8 +131,18 @@ export const getIsDisabled = (
   if (isRooms) return true;
   if (isRoot) return true;
   if (isSelectedParentFolder) return true;
+  if (
+    (isMove || isCopy || isRestore || isRestoreAll) &&
+    !sourceIsPrivate &&
+    isInsidePrivateRoom
+  )
+    return true;
   if (isCopy) {
     if (isInsideResultStorage || isAgents) return true;
+
+    if (sourceIsPrivate && isInsidePrivateRoom) {
+      return security && "Create" in security ? !security.Create : false;
+    }
 
     return security && "CopyTo" in security
       ? !security?.CopyTo || !security?.Create

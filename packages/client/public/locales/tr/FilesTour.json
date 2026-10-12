@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Soru sormak, belgeleri özetlemek, metin üretmek ve işinizde yardım almak için bir yapay zeka sohbeti başlatın — hem de doğrudan {{sectionName}} içinde.",
+  "TourAiAssistantTitle": "Yapay zeka asistanınız",
+  "TourBringFiles": "Dosyaları bilgisayarınızdan yükleyin ya da bu pencerede herhangi bir yere sürükleyip bırakın.",
+  "TourBringFilesTitle": "Dosyalarınızı getirin",
+  "TourCreateAnything": "Belgeleri, elektronik tabloları, sunuları ve PDF formlarını doğrudan tarayıcınızda oluşturun — hiçbir yazılıma gerek yok.",
+  "TourCreateAnythingTitle": "Her şeyi oluşturun",
+  "TourFindFast": "Ada göre arayın, türe veya yazara göre filtreleyin, listeyi sıralayın ve liste ile döşeme görünümü arasında geçiş yapın.",
+  "TourFindFastTitle": "Her şeyi hızlıca bulun",
+  "TourPlacesFavorites": "{{sectionName}} — yıldızlanmış dosyalar.",
+  "TourPlacesRecent": "{{sectionName}} — son zamanlarda üzerinde çalıştıklarınız.",
+  "TourPlacesShared": "{{sectionName}} — başkalarının sizinle paylaştığı dosyalar.",
+  "TourPlacesTitle": "Her şey yerli yerinde",
+  "TourPlacesTrash": "{{sectionName}} — hâlâ geri getirebileceğiniz silinmiş dosyalar.",
+  "TourShare": "Hızlı eylemleri görmek için herhangi bir dosyanın üzerine gelin. Çalışma alanı kişilerinize farklı izin düzeyleriyle erişim vermek için paylaşım simgesine tıklayın — ya da diğer herkes için harici bir bağlantı oluşturun.",
+  "TourSharedAccess": "{{sharedBy}} dosyanın kimden geldiğini, {{accessLevel}} ise onunla ne yapabileceğinizi söyler — görüntüleme, yorumlama veya düzenleme. Bunu yalnızca sahibi değiştirebilir.",
+  "TourSharedAccessTitle": "Kim paylaştı ve neler yapabilirsiniz",
+  "TourSharedEmpty": "Sizinle henüz hiçbir şey paylaşılmadı. Biri size erişim verdiği anda dosyalar ve klasörler burada görünecek.",
+  "TourSharedEmptyTitle": "Listeniz şimdilik boş",
+  "TourSharedList": "Başkalarının size erişim verdiği her şey {{sectionName}} bölümüne düşer. Tarayıcınızda üzerinde çalışmak için bir dosya açın — özgün dosya olduğu yerde kalır, böylece herkes hep aynı sürümü görür.",
+  "TourSharedListTitle": "Sizinle paylaşıldı",
+  "TourShareTitle": "Paylaşın ve birlikte çalışın"
+}

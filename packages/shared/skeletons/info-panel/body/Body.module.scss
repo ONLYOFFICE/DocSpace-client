@@ -32,8 +32,8 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-@use "@docspace/ui-kit/styles/mixins";
-@use "@docspace/ui-kit/styles/variables/colors";
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+@use "@onlyoffice/apps-ui-kit/styles/variables/colors";
 
 .usersLoader {
   width: 100%;
@@ -257,6 +257,41 @@
   flex-direction: column;
   justify-content: center;
   align-items: start;
+}
+
+.aiChatLoader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 16px;
+  padding-top: 16px;
+}
+
+.aiChatMessageLoader {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+
+  :global {
+    .avatar {
+      min-height: 32px;
+      min-width: 32px;
+    }
+    .message {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+  }
+}
+
+.aiChatInputLoader {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 16px;
 }
 
 .groupMemberLoader {

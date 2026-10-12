@@ -1,5 +1,5 @@
 {
-  "Desc": "Määritä {{productName}}-n rekisteröintitiedot.",
+  "Desc": "Määritä työtilan rekisteröintitiedot.",
   "ErrorEmail": "Epäkelpo sähköpostiosoite",
   "ErrorInstanceId": "Virheellinen tunnus",
   "ErrorLicenseBody": "Lisenssi ei ole voimassa. Varmista, että valitset oikean tiedoston.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Lisenssisopimukset",
   "PlaceholderLicense": "Lisenssitiedosto",
   "Timezone": "Aikavyöhyke:",
-  "WelcomeTitle": "Tervetuloa {{productName}}:n!"
+  "WelcomeTitle": "Tervetuloa työtilaasi!"
 }

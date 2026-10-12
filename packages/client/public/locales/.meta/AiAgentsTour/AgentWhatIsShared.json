@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentWhatIsShared",
+  "content": "An AI agent is an assistant your team has already set up and tuned, waiting for you to put it to work. Each one holds a conversation of its own and a knowledge base built from your documents — you see the agents you were let into.",
+  "content_en_sha1_hash": "3e2de895ac4d38536937ae9c35471e8729db9cce",
+  "created_at": "2026-08-06T14:20:56.253Z",
+  "updated_at": "2026-08-07T15:05:26.408Z",
+  "comment": {
+    "text": "A descriptive text block within an onboarding tour step that explains the nature and visibility of shared AI agents to users who do not have permission to create them.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:21:33.965Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 187,
+      "context": "// The same mental model either way — but somebody who cannot add to the\n // list is told where the list they are looking at comes from instead of\n // what an agent keeps for them.\n isAdmin\n ? t(\"AiAgentsTour:AgentWhatIs\")\n : t(\"AiAgentsTour:AgentWhatIsShared\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 2. Create. The agents banner holds a single \"New agent\" tile, so",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

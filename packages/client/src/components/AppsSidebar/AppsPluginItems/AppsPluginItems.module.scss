@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+
+  &[data-with-dev-tools="false"] {
+    margin-bottom: 16px;
+  }
+
+  &[data-show-text="false"] {
+    justify-content: center;
+
+    .item:not(:first-child) {
+      display: none;
+    }
+  }
+}
+
+.item {
+  width: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  height: 32px;
+  overflow: hidden;
+}
+

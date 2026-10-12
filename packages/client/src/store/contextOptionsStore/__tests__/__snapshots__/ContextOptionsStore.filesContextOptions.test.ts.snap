@@ -1,0 +1,145 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ContextOptionsStore.getFilesContextOptions — characterization > maps a folder option set 1`] = `
+[
+  {
+    "key": "open",
+    "label": "Common:Open",
+  },
+  {
+    "key": "rename",
+    "label": "Common:Rename",
+  },
+  {
+    "key": "separator1",
+  },
+  {
+    "key": "delete",
+    "label": "Common:Delete",
+  },
+]
+`;
+
+exports[`ContextOptionsStore.getFilesContextOptions — characterization > maps a typical document option set to a stable menu shape 1`] = `
+[
+  {
+    "key": "select",
+    "label": "Common:SelectAction",
+  },
+  {
+    "key": "rename",
+    "label": "Common:Rename",
+  },
+  {
+    "key": "separator0",
+  },
+  {
+    "key": "delete",
+    "label": "Common:Delete",
+  },
+]
+`;
+
+exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps a recycle-bin item (restore/delete only) 1`] = `
+[
+  {
+    "key": "restore",
+    "label": "Common:Restore",
+  },
+  {
+    "key": "separator1",
+  },
+  {
+    "key": "delete",
+    "label": "Common:Delete",
+  },
+]
+`;
+
+exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps a room option set 1`] = `
+[
+  {
+    "key": "delete",
+    "label": "Common:Delete",
+  },
+  {
+    "key": "edit-room",
+    "label": "Common:EditRoom",
+  },
+  {
+    "key": "invite-users-to-room",
+    "label": "Common:InviteContacts",
+  },
+  {
+    "key": "room-info",
+    "label": "Common:RoomInfo",
+  },
+  {
+    "key": "archive-room",
+    "label": "Common:MoveToArchive",
+  },
+]
+`;
+
+exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps a room template 1`] = `
+[
+  {
+    "key": "delete",
+    "label": "Common:Delete",
+  },
+  {
+    "key": "room-info",
+    "label": "Common:RoomInfo",
+  },
+]
+`;
+
+exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps an AI agent room 1`] = `
+[
+  {
+    "key": "delete",
+    "label": "Common:DeleteAgent",
+  },
+  {
+    "key": "edit-room",
+    "label": "Common:EditRoom",
+  },
+  {
+    "key": "room-info",
+    "label": "Common:RoomInfo",
+  },
+]
+`;
+
+exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps an archived room 1`] = `
+[
+  {
+    "key": "delete",
+    "label": "Common:Delete",
+  },
+  {
+    "key": "room-info",
+    "label": "Common:RoomInfo",
+  },
+  {
+    "key": "unarchive-room",
+    "label": "Common:Restore",
+  },
+]
+`;
+
+exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps an encrypted file 1`] = `
+[
+  {
+    "key": "rename",
+    "label": "Common:Rename",
+  },
+  {
+    "key": "separator0",
+  },
+  {
+    "key": "delete",
+    "label": "Common:Delete",
+  },
+]
+`;

@@ -36,8 +36,14 @@
 import { Navigate } from "react-router";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
+import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
 import PrivateRouteWrapper from "SRC_DIR/components/PrivateRouteWrapper";
+
+// Keys management serves private rooms only, so its routes exist just for the
+// testers who opted in (see @docspace/shared/utils/privateRooms). The tables
+// below are built once per page load, so flipping the flag needs a reload.
+const withPrivateRooms = (routes) => (isPrivateRoomsEnabled() ? routes : []);
 
 export const profileClientRoutes = [
   {
@@ -72,6 +78,16 @@ export const profileClientRoutes = [
       </PrivateRouteWrapper>
     ),
   },
+  ...withPrivateRooms([
+    {
+      path: "profile/keys-management",
+      element: (
+        <PrivateRouteWrapper>
+          <ViewComponent />
+        </PrivateRouteWrapper>
+      ),
+    },
+  ]),
   {
     path: "profile/interface-theme",
     element: (
@@ -116,6 +132,13 @@ export const generalClientRoutes = [
         lazy: () =>
           import(
             "SRC_DIR/pages/PortalSettings/categories/developer-tools/Main"
+          ).then((m) => ({ Component: m.default })),
+      },
+      {
+        path: "docs-connect/:tab?",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect"
           ).then((m) => ({ Component: m.default })),
       },
       {
@@ -275,6 +298,123 @@ export const generalClientRoutes = [
       },
     ],
   },
+  {
+    path: "billing/",
+    lazy: () =>
+      componentLoader(
+        () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/Wrapper"
+          ),
+      ),
+    children: [
+      {
+        index: true,
+        Component: () => (
+          <Navigate
+            to="overview"
+            state={window.DocSpace?.location?.state}
+            replace
+          />
+        ),
+      },
+      {
+        path: "overview",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/OverviewPage"
+          ).then((m) => ({ Component: m.default })),
+      },
+      {
+        path: "wallet",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/WalletPage"
+          ).then((m) => ({ Component: m.default })),
+      },
+      {
+        path: "tariff-plan",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/MainTariffPage"
+          ).then((m) => ({ Component: m.default })),
+      },
+      {
+        path: "addons",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/AddonsPage"
+              ),
+          ),
+      },
+      {
+        path: "addons/ai-services",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/ServicePage"
+              ),
+          ),
+      },
+      {
+        path: "addons/ai-search",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/ServicePage"
+              ),
+          ),
+      },
+      {
+        path: "addons/backup",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/ServicePage"
+              ),
+          ),
+      },
+      {
+        path: "addons/disk-storage",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/ServicePage"
+              ),
+          ),
+      },
+      {
+        path: "addons/docs-connect",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/ServicePage"
+              ),
+          ),
+      },
+      {
+        path: "payment-method",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/PaymentMethodPage"
+          ).then((m) => ({ Component: m.default })),
+      },
+      {
+        path: "usage",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/UsagePage"
+          ).then((m) => ({ Component: m.default })),
+      },
+    ],
+  },
 ];
 
 const generalRoutes = [
@@ -303,6 +443,12 @@ const generalRoutes = [
         path: "file-management",
         lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
+      ...withPrivateRooms([
+        {
+          path: "keys-management",
+          lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+        },
+      ]),
       {
         path: "interface-theme",
         lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),

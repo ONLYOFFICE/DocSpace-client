@@ -1,5 +1,5 @@
 {
   "PDFform": "Formulár PDF",
   "PDFFormIsReadyToast": "PDF formulár <1>{{filename}}</1> je pripravený na vyplnenie.",
-  "PDFFormSuccessfullyCreatedDescription": "Váš formulár PDF je pripravený na vyplnenie. Skopírujte verejné prepojenie a odštartujte proces vyplňovania formulára alebo pozvite ďalších používateľov do tejto miestnosti."
+  "PDFFormSuccessfullyCreatedDescription": "Váš PDF formulár je pripravený na vyplnenie. Skopírujte verejný odkaz a začnite proces vypĺňania formulára alebo pozvite do tohto priestoru ďalších používateľov."
 }

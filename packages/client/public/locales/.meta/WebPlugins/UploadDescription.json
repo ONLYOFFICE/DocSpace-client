@@ -1,20 +1,20 @@
 {
   "key_path": "UploadDescription",
-  "content": "You can add plugins to extend the functionality of {{productName}} with extra features. Click Upload plugin or drop file in the ZIP archive.",
-  "content_en_sha1_hash": "dacf9512f3550b50c54e9898f5427ca019da6e73",
-  "created_at": "2025-05-19T21:30:49.925Z",
-  "updated_at": "2026-04-13T14:59:05.889Z",
+  "content": "Add plugins to extend your workspace with extra features. Enable one from the list below, or click \"Upload plugin\" (or drop a ZIP file) to add your own.",
+  "content_en_sha1_hash": "f37d779138d8a2042ceb4bc753e9b97e81721e81",
+  "created_at": "2026-08-31T18:23:39.843Z",
+  "updated_at": "2026-08-31T21:07:56.709Z",
   "comment": {
-    "text": "This is a descriptive text explaining how to add plugins. It appears on the plugin settings page and includes `{{productName}}` which will be replaced by the product's brand name (e.g., ONLYOFFICE DocSpace).",
+    "text": "Instructional text on the Plugins settings page explaining how to enable existing plugins or upload a new ZIP file.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:27:46.458Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T21:07:56.709Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/UploadDescription.tsx",
-      "line_number": 15,
-      "context": "t,\n }: UploadDecsriptionProps) => {\n return (\n <div className={styles.uploadDescription}>\n <Text className={styles.uploadDescriptionText}>\n {t(\"UploadDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n {pluginsSdkUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme?.main?.accent ?? undefined}",
+      "line_number": 49,
+      "context": "t,\n }: UploadDecsriptionProps) => {\n return (\n <div className={styles.uploadDescription}>\n <Text className={styles.uploadDescriptionText}>\n {t(\"UploadDescription\")}\n </Text>\n {pluginsSdkUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme?.main?.accent ?? undefined}",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -34,7 +34,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import styled from "styled-components";
+import classNames from "classnames";
 import debounce from "lodash.debounce";
 
 import { FilterType, RoomsType } from "@docspace/shared/enums";
@@ -42,78 +42,20 @@ import { FilterType, RoomsType } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { getUserList } from "@docspace/shared/api/people";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Avatar } from "@docspace/ui-kit/components/avatar";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Label } from "@docspace/ui-kit/components/label";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { Avatar } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Label } from "@onlyoffice/apps-ui-kit/components/label";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 
-import { DropDown } from "@docspace/ui-kit/components/drop-down";
-import { Text } from "@docspace/ui-kit/components/text";
+import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
-const UserInputContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-
-  .header_aside-panel {
-    max-width: 100% !important;
-  }
-`;
-
-const UserInput = styled.div`
-  width: 100%;
-  width: -moz-available;
-  width: -webkit-fill-available;
-  width: stretch;
-
-  .input-link {
-    height: 32px;
-
-    > input {
-      height: 30px;
-    }
-  }
-`;
-
-const StyledDropDown = styled(DropDown)`
-  ${(props) => props.width && `width: ${props.width}px`};
-  inset-inline-start: 0;
-
-  .list-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    height: 48px;
-
-    .list-item_content {
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
-  }
-`;
-
-const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
-  line-height: 16px;
-
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-size: ${(props) =>
-    props.primary ? "14px" : props.info ? "11px" : "12px"};
-  font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
-
-  color: ${(props) =>
-    (props.primary && !props.disabled) || props.info
-      ? props.theme.text.color
-      : props.theme.text.emailColor};
-  ${(props) => props.info && `margin-inline-start: auto`}
-`;
+import styles from "./FilterBlock.module.scss";
 
 const minSearchValue = 3;
 
@@ -328,8 +270,10 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       >
         <Avatar size="min" role="user" source={avatar} />
         <div className="list-item_content">
-          <SearchItemText primary>{displayName}</SearchItemText>
-          <SearchItemText>{email}</SearchItemText>
+          <Text className={classNames(styles.searchItemText, styles.primary)}>
+            {displayName}
+          </Text>
+          <Text className={styles.searchItemText}>{email}</Text>
         </div>
       </DropDownItem>
     );
@@ -403,7 +347,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       <Label className="label" text={t("FileFilter")} />
       <ToggleButton
         className="toggle"
-        label={t("Files:ByAuthor")}
+        label={t("Common:ByAuthor")}
         onChange={toggleAuthor}
         isChecked={isUserFilterSet}
         isDisabled={!!config.requestToken}
@@ -417,8 +361,8 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             label={selectedUser}
           />
         ) : (
-          <UserInputContainer>
-            <UserInput ref={searchRef}>
+          <div className={styles.userInputContainer}>
+            <div className={styles.userInput} ref={searchRef}>
               <TextInput
                 scale
                 onChange={onChangeAuthor}
@@ -430,10 +374,15 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 tabIndex={5}
                 testId="files_author_text_input"
               />
-            </UserInput>
+            </div>
             {author.length >= minSearchValue ? (
-              <StyledDropDown
-                width={searchRef?.current?.offsetWidth}
+              <DropDown
+                className={styles.dropDown}
+                style={
+                  searchRef?.current?.offsetWidth
+                    ? { width: `${searchRef.current.offsetWidth}px` }
+                    : undefined
+                }
                 isDefaultMode={false}
                 open={searchPanelVisible}
                 manualX="16px"
@@ -444,9 +393,9 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 dataTestId="files_author_dropdown"
               >
                 {usersList.length ? foundUsers : ""}
-              </StyledDropDown>
+              </DropDown>
             ) : null}
-          </UserInputContainer>
+          </div>
         )
       ) : null}
       <ToggleButton
@@ -497,8 +446,8 @@ export const FilterBlock = ({ t, config, setConfig }) => {
               label={selectedUser}
             />
           ) : (
-            <UserInputContainer>
-              <UserInput ref={searchRef}>
+            <div className={styles.userInputContainer}>
+              <div className={styles.userInput} ref={searchRef}>
                 <TextInput
                   scale
                   onChange={onChangeAuthor}
@@ -510,10 +459,15 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   tabIndex={5}
                   testId="author_text_input"
                 />
-              </UserInput>
+              </div>
               {author.length >= minSearchValue ? (
-                <StyledDropDown
-                  width={searchRef?.current?.offsetWidth}
+                <DropDown
+                  className={styles.dropDown}
+                  style={
+                    searchRef?.current?.offsetWidth
+                      ? { width: `${searchRef.current.offsetWidth}px` }
+                      : undefined
+                  }
                   isDefaultMode={false}
                   open={searchPanelVisible}
                   manualX="16px"
@@ -524,9 +478,9 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   {...dropDownMaxHeight}
                 >
                   {usersList.length ? foundUsers : ""}
-                </StyledDropDown>
+                </DropDown>
               ) : null}
-            </UserInputContainer>
+            </div>
           )}
 
           <Checkbox
@@ -568,3 +522,4 @@ export const FilterBlock = ({ t, config, setConfig }) => {
     </>
   );
 };
+

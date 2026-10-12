@@ -37,13 +37,18 @@
 
 import { useEffect, useState } from "react";
 
-import { PreparationPortalProgress } from "@docspace/ui-kit/components/progress-bar";
-import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { RoomsType, ShareAccessRights } from "@docspace/ui-kit/enums";
+import { PreparationPortalProgress } from "@onlyoffice/apps-ui-kit/components/progress-bar";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { RoomsType, ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 
 import { createApiKey } from "@docspace/shared/api/api-keys";
 import { createRoom, setRoomSecurity } from "@docspace/shared/api/rooms";
+import {
+  getAppSettings,
+  setAppSettings,
+  setAppEnabled,
+} from "@docspace/shared/api/apps";
 
 export default function CreatePortalClient() {
   const [status, setStatus] = useState("Preparing...");
@@ -53,11 +58,40 @@ export default function CreatePortalClient() {
   useEffect(() => {
     const run = async () => {
       try {
-        setStatus("Creating API key and rooms...");
+        setStatus("Checking existing configuration...");
         setPercent(10);
 
-        const [apiKeyResult, formRoom, customRoom] = await Promise.all([
-          createApiKey({ name: "nextcloud-integration" }),
+        const existing = await getAppSettings<{
+          roomId?: number;
+          libraryId?: number;
+        }>("ai-forms");
+
+        if (existing?.roomId) {
+          // Existing portal: Nextcloud already has the API key — no new key needed.
+          setStatus("Done!");
+          setPercent(100);
+
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage(
+              {
+                type: "aiform-portal-data",
+                roomId: existing.roomId,
+                libraryId: existing.libraryId,
+              },
+              "*",
+            );
+          }
+          return;
+        }
+
+        // New portal: create API key and set up rooms.
+        const apiKeyResult = await createApiKey({ name: "nextcloud-integration" });
+        const apiKey = apiKeyResult.key;
+
+        setStatus("Creating rooms...");
+        setPercent(30);
+
+        const [formRoom, customRoom] = await Promise.all([
           createRoom({
             title: "Form Filling Room",
             roomType: RoomsType.FormRoom,
@@ -70,7 +104,6 @@ export default function CreatePortalClient() {
 
         const formRoomId = (formRoom as { id: number }).id;
         const customRoomId = (customRoom as { id: number }).id;
-        const apiKey = apiKeyResult.key;
 
         setStatus("Inviting everyone to the room...");
         setPercent(60);
@@ -85,6 +118,17 @@ export default function CreatePortalClient() {
           notify: false,
           message: "",
         });
+
+        setStatus("Saving configuration...");
+        setPercent(80);
+
+        await Promise.all([
+          setAppSettings("ai-forms", {
+            roomId: formRoomId,
+            libraryId: customRoomId,
+          }),
+          setAppEnabled("ai-forms", true),
+        ]);
 
         setStatus("Done!");
         setPercent(100);

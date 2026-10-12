@@ -35,25 +35,25 @@
 
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TFunction } from "i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { RadioButton } from "@docspace/ui-kit/components/radio-button";
-import { startBackup } from "../../../api/portal";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { RadioButton } from "@onlyoffice/apps-ui-kit/components/radio-button";
+import { saveDeposite, startBackup } from "../../../api/portal";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { BackupStorageLocalKey, BackupStorageType } from "../../../enums";
-import StatusMessage from "@docspace/ui-kit/components/status-message";
+import StatusMessage from "@onlyoffice/apps-ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import { OPERATIONS_NAME } from "../../../constants";
-import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
+import OperationsProgressButton from "@onlyoffice/apps-ui-kit/components/operations-progress-button";
 import DataBackupLoader from "../../../skeletons/backup/DataBackup";
 import { getBackupProgressInfo, getErrorInfo } from "../../../utils/common";
 import { getFromLocalStorage } from "../../../utils";
@@ -194,8 +194,15 @@ const ManualBackup = ({
   backupServicePrice,
   isBackupPaid = false,
   isFreeBackupsLimitReached = false,
+  disabledCreatePublicRoom = false,
   setBackupProgressWarning,
   backupProgressWarning,
+  walletBalance = 0,
+  walletCodeCurrency,
+  isCardLinked = false,
+  isDelayedPaymentMethod = false,
+  fetchWalletBalance,
+  onOpenTopUpDialog,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -208,6 +215,75 @@ const ManualBackup = ({
 
   const [showCancelOperation, setShowCancelOperation] = useState(false);
   const [isCancelOperation, setIsCancelOperation] = useState(false);
+  const [isToppingUp, setIsToppingUp] = useState(false);
+
+  const isChargeableBackup = isBackupPaid && isFreeBackupsLimitReached;
+  const isBalanceInsufficient =
+    isChargeableBackup &&
+    !!backupServicePrice &&
+    walletBalance < backupServicePrice;
+
+  const isDelayedPaymentTopUp =
+    isBalanceInsufficient &&
+    isPayer &&
+    isDelayedPaymentMethod &&
+    !!onOpenTopUpDialog;
+
+  const isTopUpBeforeCopy =
+    isBalanceInsufficient && isPayer && isCardLinked && !isDelayedPaymentTopUp;
+
+  const isTopUpDialogBeforeCopy =
+    isBalanceInsufficient && !isCardLinked && !!onOpenTopUpDialog;
+
+  const isCopyBlocked = isBalanceInsufficient && isCardLinked && !isPayer;
+
+  // Memoized: StatusMessage replays its show animation whenever the message
+  // identity changes, so a fresh element on every render makes it blink.
+  const insufficientFundsMessage = useMemo(
+    () =>
+      isCopyBlocked
+        ? getPaymentError(
+            t,
+            false,
+            walletCustomerEmail ?? "",
+            backupServicePrice ?? 0,
+          )
+        : "",
+    [isCopyBlocked, t, walletCustomerEmail, backupServicePrice],
+  );
+
+  const topUpAmount = Math.ceil((backupServicePrice ?? 0) - walletBalance);
+
+  const getCopyButtonLabel = () => {
+    if (isDelayedPaymentTopUp) return t("Common:TopUpWallet");
+    if (isTopUpBeforeCopy || isTopUpDialogBeforeCopy)
+      return t("Common:TopUpAndMakeCopy");
+    return undefined;
+  };
+
+  const copyButtonLabel = getCopyButtonLabel();
+
+  const topUpIfNeeded = async () => {
+    if (isDelayedPaymentTopUp || isTopUpDialogBeforeCopy) {
+      onOpenTopUpDialog?.();
+      return false;
+    }
+
+    if (!isTopUpBeforeCopy) return true;
+
+    setIsToppingUp(true);
+
+    try {
+      await saveDeposite(topUpAmount, walletCodeCurrency || "USD");
+      await fetchWalletBalance?.(true);
+      return true;
+    } catch (error) {
+      toastr.error(error as Error);
+      return false;
+    } finally {
+      setIsToppingUp(false);
+    }
+  };
 
   const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;
   const isCheckedDocuments = storageType === DOCUMENTS;
@@ -270,6 +346,8 @@ const ManualBackup = ({
   ]);
 
   const onMakeTemporaryBackup = async () => {
+    if (!(await topUpIfNeeded())) return;
+
     setErrorMessage("");
     setBackupProgressError("");
     setBackupProgressWarning("");
@@ -339,6 +417,8 @@ const ManualBackup = ({
     selectedStorageId?: string,
     selectedStorageTitle?: string,
   ) => {
+    if (!(await topUpIfNeeded())) return;
+
     clearLocalStorage();
 
     setErrorMessage("");
@@ -412,6 +492,9 @@ const ManualBackup = ({
     isMaxProgress,
     onMakeCopy,
     buttonSize,
+    copyButtonLabel,
+    isToppingUp,
+    isCopyBlocked,
   };
 
   const onCancelOperation = async () => {
@@ -420,6 +503,7 @@ const ManualBackup = ({
     const res = await cancelBackup();
 
     if (!res) {
+      setIsCancelOperation(false);
       setShowCancelOperation(true);
     }
   };
@@ -428,9 +512,9 @@ const ManualBackup = ({
 
   if (isInitialLoading) return <DataBackupLoader />;
 
-  const mainDisabled = !isMaxProgress || pageIsDisabled;
+  const mainDisabled = !isMaxProgress || pageIsDisabled || isCopyBlocked;
   const additionalDisabled =
-    !isMaxProgress || isNotPaidPeriod || pageIsDisabled;
+    !isMaxProgress || isNotPaidPeriod || pageIsDisabled || isCopyBlocked;
   const isDownloadButton =
     temporaryLink && temporaryLink.length > 0 && isMaxProgress;
   const isCreateButtonDisabled = mainDisabled && !isDownloadButton;
@@ -438,8 +522,13 @@ const ManualBackup = ({
   return (
     <div className={styles.manualBackup} data-testid="manual-backup-wrapper">
       <StatusMessage
-        message={errorMessage || errorInformation || backupProgressWarning}
-        isWarning={!!backupProgressWarning}
+        message={
+          errorMessage ||
+          insufficientFundsMessage ||
+          errorInformation ||
+          backupProgressWarning
+        }
+        isWarning={!!backupProgressWarning && !insufficientFundsMessage}
       />
       <div
         className={classNames(
@@ -504,10 +593,11 @@ const ManualBackup = ({
               >
                 <Button
                   id="create-button"
-                  label={t("Common:Create")}
+                  label={copyButtonLabel ?? t("Common:Create")}
                   onClick={onMakeTemporaryBackup}
                   primary
-                  isDisabled={mainDisabled}
+                  isDisabled={mainDisabled || isToppingUp}
+                  isLoading={isToppingUp}
                   size={buttonSize}
                   testId="create_temporary_backup_button"
                 />
@@ -562,7 +652,7 @@ const ManualBackup = ({
           )}
         >
           {t("Common:RoomsModuleDescription", {
-            roomName: t("Common:MyDocuments"),
+            roomName: t("Common:Files"),
           })}
         </Text>
         {isCheckedDocuments ? (
@@ -579,6 +669,7 @@ const ManualBackup = ({
             maxWidth={maxWidth}
             isBackupPaid={isBackupPaid}
             isFreeBackupsLimitReached={isFreeBackupsLimitReached}
+            disabledCreatePublicRoom={disabledCreatePublicRoom}
           />
         ) : null}
       </div>
@@ -684,10 +775,14 @@ const ManualBackup = ({
         <OperationsProgressButton
           operationsAlert={Boolean(backupProgressError)}
           operationsCompleted={downloadingProgress === 100}
+          operationsCanceled={isCancelOperation}
           operations={[
             {
-              label:
-                downloadingProgress === 100
+              label: isCancelOperation
+                ? t("Common:CanceledOperation", {
+                    operationName: t("Common:Backup"),
+                  })
+                : downloadingProgress === 100
                   ? t("Common:Backup")
                   : downloadingProgress === 0
                     ? t("Common:PreparingBackup")

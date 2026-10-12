@@ -1,0 +1,29 @@
+{
+  "key_path": "AiFormBreakDownTheAnswers",
+  "content": "Break down the answers",
+  "content_en_sha1_hash": "840b9f7845533e20be391ec0095bc140451c2fef",
+  "created_at": "2026-09-14T19:16:00.049Z",
+  "updated_at": "2026-09-14T19:20:27.914Z",
+  "comment": {
+    "text": "Label for an AI suggestion option that triggers a detailed analysis and categorization of form responses.",
+    "is_auto": true,
+    "updated_at": "2026-09-14T19:20:27.914Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 859,
+      "context": "{\n name: t(\"AiSuggestions:AiFormWhatCanTheResponsesTellMe\"),\n prompt: t(\"AiSuggestions:AiFormWhatCanTheResponsesTellMePrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormBreakDownTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormBreakDownTheAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormCheckTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormCheckTheAnswersPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

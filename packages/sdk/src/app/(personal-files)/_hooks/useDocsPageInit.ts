@@ -36,6 +36,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { setAuthToken } from "@docspace/shared/api/client";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
@@ -92,7 +93,7 @@ export const useDocsPageInit = ({
     const prevIsFrame = window.ClientConfig.isFrame;
     window.ClientConfig.isFrame = true;
 
-    if (authToken) {
+    if (!isOAuthFrame() && authToken) {
       document.cookie = `asc_auth_key=${encodeURIComponent(authToken)}; path=/; SameSite=Lax`;
       setAuthToken(authToken);
     }

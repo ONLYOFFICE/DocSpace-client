@@ -1,0 +1,29 @@
+{
+  "key_path": "FormSpaceResultsConvertToATableOrChartPrompt",
+  "content": "Convert results to a table or chart across completed submissions in the current Form Space and show the proposed structure before saving it. If this information is not provided, ask me for the form or space, date range, segments, and metrics to include.",
+  "content_en_sha1_hash": "162fcc0506d28bbcd4ce577876dfa17789dbe296",
+  "created_at": "2026-08-04T09:58:55.150Z",
+  "updated_at": "2026-08-05T17:44:56.594Z",
+  "comment": {
+    "text": "Instructional prompt sent to the AI when a user selects the option to convert Form Space results into a table or chart. It defines how the AI should process the request and which specific details to ask for if information is missing.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:44:56.594Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 194,
+      "context": "name: t(\"AiSuggestions:FormSpaceResultsFindUnusualAnswers\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsFindUnusualAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsConvertToATableOrChart\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsConvertToATableOrChartPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsCreateAPresentation\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCreateAPresentationPrompt\"),\n requires: \"create\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

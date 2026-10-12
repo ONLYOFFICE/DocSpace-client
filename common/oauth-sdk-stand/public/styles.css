@@ -1,0 +1,215 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font: 14px/1.45 system-ui, sans-serif;
+  color: #222;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#steps {
+  width: 430px;
+  min-width: 430px;
+  overflow-y: auto;
+  border-right: 1px solid #dcdee0;
+  background: #f7f8fa;
+  padding: 12px;
+}
+
+#center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+#ds-frame {
+  flex: 1;
+  min-height: 0;
+  background: #fff;
+}
+
+#log {
+  height: 34%;
+  min-height: 140px;
+  overflow: auto;
+  padding: 8px 10px;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font: 12px/1.5 ui-monospace, monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border-top: 1px solid #000;
+}
+
+.step {
+  background: #fff;
+  border: 1px solid #dcdee0;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+
+.step.locked { opacity: 0.55; pointer-events: none; }
+
+.step .body { display: none; }
+.step.open .body { display: block; }
+
+.step h2 {
+  margin: 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.step.open h2 { margin-bottom: 8px; }
+.step:not(.locked):not(.open) h2:hover { color: #4781d1; }
+
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 10px;
+  background: #e3e5e8;
+  color: #555;
+}
+.badge.ok { background: #dcf2dc; color: #1c7c1c; }
+.badge.err { background: #fde3e3; color: #b42323; }
+.badge.warn { background: #fdf3d7; color: #8a6d00; }
+
+.muted { color: #75797e; font-weight: 400; }
+.small { font-size: 12px; }
+.ok-text { color: #1c7c1c; }
+.err-text { color: #b42323; }
+.warn-text { color: #8a6d00; }
+
+label { font-weight: 600; display: block; margin: 8px 0 3px; }
+
+input[type="text"], input[type="password"], input[type="email"], select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #c5c8cc;
+  border-radius: 4px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  background: #fff;
+}
+
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
+.row > input[type="text"] { flex: 1; width: auto; }
+
+button {
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 4px;
+  background: #4781d1;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 13px;
+}
+button.secondary { background: #6e7378; }
+button.danger { background: #c74040; }
+button.ghost {
+  background: transparent;
+  color: #4781d1;
+  border: 1px solid #4781d1;
+}
+button:disabled { opacity: 0.5; cursor: default; }
+
+ul.checks { list-style: none; margin: 0; padding: 0; }
+ul.checks li { margin: 3px 0; }
+
+.client {
+  border: 1px solid #dcdee0;
+  border-radius: 6px;
+  padding: 7px 9px;
+  margin: 6px 0;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  cursor: pointer;
+}
+.client.selected { border-color: #4781d1; background: #f0f6ff; }
+.client .info { flex: 1; min-width: 0; }
+.client .name { font-weight: 600; }
+.client code {
+  font-size: 11px;
+  color: #75797e;
+  word-break: break-all;
+}
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: #e8eefb;
+  color: #2f5fae;
+  margin-left: 6px;
+}
+
+.scopes { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; }
+.scopes label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 400;
+  margin: 0;
+  font-size: 12px;
+  font-family: ui-monospace, monospace;
+}
+
+#log .ok { color: #6ac46a; }
+#log .err { color: #ff6b6b; }
+#log .dim { color: #8a8d91; }
+
+.methods { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.methods button {
+  background: #eef1f5;
+  color: #2b2f33;
+  font-weight: 500;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-family: ui-monospace, monospace;
+}
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10px; }

@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesSelectedFileCreateAPresentationFromTheFile",
+  "content": "Create a presentation from the file",
+  "content_en_sha1_hash": "cf1cdb38cb5371e9d5804a7e10efebecd91acf18",
+  "created_at": "2026-08-04T09:58:55.132Z",
+  "updated_at": "2026-08-05T18:00:54.013Z",
+  "comment": {
+    "text": "Action label in the AI suggestions menu appearing when files are selected, representing the command to generate a presentation from the chosen file.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:00:54.013Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 389,
+      "context": "name: t(\"AiSuggestions:FilesSelectedFileConvertFile\"),\n prompt: t(\"AiSuggestions:FilesSelectedFileConvertFilePrompt\"),\n },\n {\n name: t(\n \"AiSuggestions:FilesSelectedFileCreateAPresentationFromTheFile\",\n ),\n prompt: t(\n \"AiSuggestions:FilesSelectedFileCreateAPresentationFromTheFilePrompt\",\n ),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
   "BackupCodesDescription": "Use códigos de backup para fazer login quando você não tiver acesso ao seu telefone.",
-  "BackupCodesSecondDescription": "Cada código pode ser usado uma vez. Você pode obter novos códigos a qualquer momento. Apenas os códigos gerados por último são válidos.",
+  "BackupCodesSecondDescription": "Cada código pode ser usado apenas uma vez. Você pode obter novos códigos a qualquer momento. Apenas os códigos gerados mais recentemente são válidos.",
   "BackupCodesTitle": "Códigos de backup",
-  "CodesCounter": "códigos:",
+  "CodesCounter": "códigos de backup:",
   "PrintButton": "Imprimir",
   "RequestNewButton": "Solicitar novo"
 }

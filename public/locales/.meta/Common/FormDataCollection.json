@@ -3,7 +3,7 @@
   "content": "Form data collection",
   "content_en_sha1_hash": "3d5d135c8ecaa49feb2eb2292d2853c68b62d6ea",
   "created_at": "2025-05-19T21:30:45.482Z",
-  "updated_at": "2026-05-15T14:00:06.683Z",
+  "updated_at": "2026-08-14T14:58:32.716Z",
   "comment": {
     "text": "This is a title for a feature that allows users to collect data using forms. It appears in dialogs and panels related to sharing or creating forms.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 204,
+      "line_number": 199,
       "context": "// HACK: Hide share option for rooms — remove after implementation is ready\n disabled: !file.canShare || file.rootFolderType === FolderType.Rooms,\n },\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },",
       "module": "/packages/doceditor"
     }

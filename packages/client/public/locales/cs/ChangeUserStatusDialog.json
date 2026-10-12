@@ -1,20 +1,20 @@
 {
   "DisableGeneralDescription": "Zakázané uživatele můžete později v případě potřeby odstranit nebo povolit. Všimněte si, že nemůžete zakázat uživatele, jako je Vlastník a vy sami.",
   "DisableGuest": "Zakázat hosta",
-  "DisableGuestDescription": "Pokud tohoto hosta zakážete, nebude se moci přihlásit k {{productName}}.",
+  "DisableGuestDescription": "Pokud tohoto hosta zakážete, nebude se moci přihlásit k pracovnímu prostoru.",
   "DisableGuests": "Zakázat hosta",
-  "DisableGuestsDescription": "Pokud tyto hosty zakážete, nebudou se moci přihlásit k {{productName}}.",
+  "DisableGuestsDescription": "Pokud tyto hosty zakážete, nebudou se moci přihlásit k pracovnímu prostoru.",
   "DisableGuestsGeneralDescription": "Zakázané hosty můžete později v případě potřeby odstranit nebo povolit.",
   "DisableUser": "Zakázat uživatele",
-  "DisableUserDescription": "Pokud tohoto uživatele zakážete, nebude se moci přihlásit do služby {{productName}}, zatímco jeho dokumenty a data zůstanou nedotčeny.",
+  "DisableUserDescription": "Pokud tohoto uživatele zakážete, nebude se moci přihlásit do pracovního prostoru, zatímco jeho dokumenty a data zůstanou nedotčeny.",
   "DisableUsers": "Zakázat uživatele",
-  "DisableUsersDescription": "Pokud tyto uživatele zakážete, nebudou se moci přihlásit do služby {{productName}}, zatímco jejich dokumenty a data zůstanou nedotčeny.",
+  "DisableUsersDescription": "Pokud tyto uživatele zakážete, nebudou se moci přihlásit do pracovního prostoru, zatímco jejich dokumenty a data zůstanou nedotčeny.",
   "EnableGuest": "Povolit hosta",
-  "EnableGuestDescription": "Pokud tohoto hosta povolíte, bude se moci znovu přihlásit k {{productName}}.",
+  "EnableGuestDescription": "Pokud tohoto hosta povolíte, bude se moci znovu přihlásit k pracovnímu prostoru.",
   "EnableGuests": "Povolení hostů",
-  "EnableGuestsDescription": "Pokud tyto hosty povolíte, budou se moci znovu přihlásit do {{productName}}.",
+  "EnableGuestsDescription": "Pokud tyto hosty povolíte, budou se moci znovu přihlásit do pracovního prostoru.",
   "EnableUser": "Povolit uživatele",
-  "EnableUserDescription": "Pokud tohoto uživatele povolíte, bude se moci znovu přihlásit do služby {{productName}} a získat přístup ke svým dokumentům a datům.",
+  "EnableUserDescription": "Pokud tohoto uživatele povolíte, bude se moci znovu přihlásit do pracovního prostoru a získat přístup ke svým dokumentům a datům.",
   "EnableUsers": "Povolit uživatele",
-  "EnableUsersDescription": "Pokud tyto uživatele povolíte, budou se moci znovu přihlásit do služby {{productName}} a získat přístup ke svým dokumentům a datům."
+  "EnableUsersDescription": "Pokud tyto uživatele povolíte, budou se moci znovu přihlásit do pracovního prostoru a získat přístup ke svým dokumentům a datům."
 }

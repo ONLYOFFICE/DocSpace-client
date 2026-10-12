@@ -1,0 +1,38 @@
+{
+  "key_path": "LinkSettingsJoinedUsers",
+  "content": "Users have joined via this link",
+  "content_en_sha1_hash": "8d9cf65833243dcc0964dffcbf523611c2168ab1",
+  "created_at": "2026-02-19T13:36:27.563Z",
+  "updated_at": "2026-07-07T08:59:21.772Z",
+  "comment": {
+    "text": "This text appears below a link in the link settings panel, indicating that users have accessed the shared file using that specific link.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:09:10.793Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
+      "line_number": 289,
+      "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className={styles.linkSettingsDescriptionText}\n >\n {t(\"Common:LinkSettingsJoinedUsers\")}\n </Text>\n </div>\n </div>\n ) : null}\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/link-settings-panel/index.tsx",
+      "line_number": 317,
+      "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className={styles.linkSettingsDescriptionText}\n >\n {t(\"Common:LinkSettingsJoinedUsers\")}\n </Text>\n </div>\n </div>\n ) : null}\n </div>",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
+    }
+  }
+}

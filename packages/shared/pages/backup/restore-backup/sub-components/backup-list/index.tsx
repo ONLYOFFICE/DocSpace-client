@@ -38,24 +38,24 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
-import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
+import SocketHelper, { SocketCommands } from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Link } from "@docspace/ui-kit/components/link";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import {
   deleteBackup,
   deleteBackupHistory,
   getBackupHistory,
   startRestore,
 } from "../../../../../api/portal";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import ListLoader from "../../../../../skeletons/list";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { isManagement } from "../../../../../utils/common";
 
 import { TenantStatus } from "../../../../../enums";
@@ -67,7 +67,6 @@ import type {
 } from "./BackupList.types";
 import { initState } from "./BackupList.constants";
 import styles from "../../RestoreBackup.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const BackupListModalDialog = ({
   isNotify,
@@ -211,9 +210,7 @@ const BackupListModalDialog = ({
         "restore-backup_warning-description",
       )}
     >
-      {t("Common:RestoreBackupWarningText", {
-        productName: getBrandName("ProductName"),
-      })}{" "}
+      {t("Common:RestoreBackupWarningText")}{" "}
       {!standalone ? (
         <Text
           as="span"
@@ -222,9 +219,7 @@ const BackupListModalDialog = ({
             "restore-backup_warning-link",
           )}
         >
-          {t("Common:RestoreBackupResetInfoWarningText", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("Common:RestoreBackupResetInfoWarningText")}
         </Text>
       ) : null}
     </Text>

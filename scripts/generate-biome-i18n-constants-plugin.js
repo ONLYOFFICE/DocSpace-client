@@ -18,14 +18,16 @@ const CONSTANTS_DIR = path.join(
   "locales",
   ".constants",
 );
-const OUT_FILE = path.join(
-  __dirname,
-  "..",
-  "packages",
-  "shared",
-  "biome-plugins",
-  "no-constants-via-i18n.grit",
-);
+const OUT_FILES = [
+  path.join(
+    __dirname,
+    "..",
+    "packages",
+    "shared",
+    "biome-plugins",
+    "no-constants-via-i18n.grit",
+  ),
+];
 
 function loadKeys(fileName) {
   const filePath = path.join(CONSTANTS_DIR, fileName);
@@ -83,7 +85,9 @@ ${alternatives}
 }
 `;
 
-fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
-fs.writeFileSync(OUT_FILE, grit);
-console.log(`Wrote ${OUT_FILE}`);
+for (const outFile of OUT_FILES) {
+  fs.mkdirSync(path.dirname(outFile), { recursive: true });
+  fs.writeFileSync(outFile, grit);
+  console.log(`Wrote ${outFile}`);
+}
 console.log(`Forbidden patterns: ${forbidden.length}`);

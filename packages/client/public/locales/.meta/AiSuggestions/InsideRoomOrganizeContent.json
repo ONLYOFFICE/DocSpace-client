@@ -1,0 +1,29 @@
+{
+  "key_path": "InsideRoomOrganizeContent",
+  "content": "Organize content",
+  "content_en_sha1_hash": "6bfb910e168edcfff0af7a494d8403617f6f3b58",
+  "created_at": "2026-08-04T09:58:55.186Z",
+  "updated_at": "2026-08-05T17:15:02.569Z",
+  "comment": {
+    "text": "Button label for an AI suggestion feature used to trigger the reorganization of files or items within a room.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:15:02.569Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 139,
+      "context": "{\n name: t(\"AiSuggestions:InsideRoomSummarizeRoom\"),\n prompt: t(\"AiSuggestions:InsideRoomSummarizeRoomPrompt\"),\n },\n {\n name: t(\"AiSuggestions:InsideRoomOrganizeContent\"),\n prompt: t(\"AiSuggestions:InsideRoomOrganizeContentPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:InsideRoomFindADocument\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

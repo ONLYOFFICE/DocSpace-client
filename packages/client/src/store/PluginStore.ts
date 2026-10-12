@@ -33,30 +33,45 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, observable, runInAction } from "mobx";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
+
+import type React from "react";
+import type {
+  PluginRuntime,
+  TCurrentFile,
+} from "@onlyoffice/docspace-plugin-sdk/react";
+import { Actions } from "@onlyoffice/docspace-plugin-sdk";
+import type {
+  ButtonGroup,
+  IModalDialog,
+  TSelector,
+  IMediaViewer,
+  IFloatingOperationsButton,
+} from "@onlyoffice/docspace-plugin-sdk";
 
 import api from "@docspace/shared/api";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { TData, toastr } from "@docspace/ui-kit/components/toast";
+import { TData, toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type {
   TFile,
   TFileSecurity,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
-import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.types";
+
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import SocketHelper, {
   SocketEvents,
   TChangeWebPluginData,
-} from "@docspace/ui-kit/utils/socket";
+  SocketCommands,
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -78,24 +93,33 @@ import type {
   IProfileMenuItemClient,
   IArticleButtonItem,
   IArticleButtonItemClient,
+  IArticleNavigationItem,
+  IArticleNavigationItemClient,
   IframeWindow,
   TPlugin,
+  TPluginError,
   IPostMessageCallbackMessage,
   IMediaViewerClient,
+  IModalDialogClient,
+  TMessageActionsParams,
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
+import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
+import { matchesUserRole } from "../helpers/plugins/roles";
+import { createPluginApi } from "../helpers/plugins/react/api";
+import { toCurrentUser } from "../helpers/plugins/react/utils";
 import {
   PluginFileType,
   PluginScopes,
-  PluginUsersType,
+  PluginUserRole,
   PluginStatus,
   type PluginDevices,
 } from "../helpers/plugins/enums";
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
-import { SocketCommands } from "@docspace/ui-kit/utils/socket";
+import { TUser } from "@docspace/shared/api/people/types";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -106,12 +130,19 @@ const origin =
 const proxy = window.ClientConfig?.proxy?.url || proxyURL;
 const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
 
-type TDispatchMessage = {
+// One client for every plugin: it holds no per-plugin state, and a plugin that
+// lists `api` in a dependency array must not see a new object on every render.
+const pluginApi = createPluginApi();
+
+type TDispatchMessage = Pick<
+  TMessageActionsParams,
+  | "pluginName"
+  | "setElementProps"
+  | "updateCreateDialogProps"
+  | "updatePropsContext"
+> & {
   message: IMessage | void;
-  pluginName: string;
-  setElementProps?: React.Dispatch<unknown>;
-  updateCreateDialogProps?: React.Dispatch<unknown>;
-  updatePropsContext?: (props: unknown) => void;
+  currentFile?: TCurrentFile | null;
 };
 
 class PluginStore {
@@ -139,9 +170,13 @@ class PluginStore {
 
   articleButtonItems: Map<string, IArticleButtonItemClient> = new Map();
 
+  articleNavigationItems: Map<string, IArticleNavigationItemClient> = new Map();
+
   pluginFrame: HTMLIFrameElement | null = null;
 
   isInit = false;
+
+  isLoaded = false;
 
   settingsPluginDialogVisible = false;
 
@@ -156,7 +191,7 @@ class PluginStore {
     IFloatingOperationsButtonClient
   > = new Map();
 
-  pluginDialogProps: null | ModalDialogProps = null;
+  pluginDialogProps: null | IModalDialogClient = null;
 
   pluginSelectorProps: null | TSelectorProps = null;
 
@@ -172,6 +207,18 @@ class PluginStore {
 
   pluginMediaViewerProps: null | IMediaViewerClient = null;
 
+  reactSettingsSaveButtonState: null | {
+    pluginName: string;
+    button: ButtonGroup;
+  } = null;
+
+  reactPluginModalState: null | {
+    pluginName: string;
+    component: React.ComponentType<object>;
+    options?: Omit<Partial<IModalDialog>, "dialogBodyComponent">;
+    currentFile: TCurrentFile | null;
+  } = null;
+
   constructor(
     settingsStore: SettingsStore,
     selectedFolderStore: SelectedFolderStore,
@@ -183,7 +230,10 @@ class PluginStore {
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
 
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      reactPluginModalState: observable.ref,
+      reactSettingsSaveButtonState: observable.ref,
+    });
 
     // Subscribe to plugin state changes via WebSocket
     this.wsChangeWebPlugin();
@@ -203,19 +253,13 @@ class PluginStore {
   handlePluginStateChange = (data: TChangeWebPluginData) => {
     const { webPluginName, enabled } = data;
 
-    runInAction(() => {
-      const plugin = this.plugins.find((p) => p.name === webPluginName);
+    const plugin = this.plugins.find((p) => p.name === webPluginName);
 
-      if (!plugin) return;
+    if (!plugin || plugin.enabled === enabled) return;
 
-      plugin.enabled = enabled;
-
-      if (enabled) {
-        this.activatePlugin(webPluginName);
-      } else {
-        this.deactivatePlugin(webPluginName);
-      }
-    });
+    return enabled
+      ? this.activatePlugin(webPluginName)
+      : this.deactivatePlugin(webPluginName);
   };
 
   dispatchMessage = ({
@@ -224,13 +268,15 @@ class PluginStore {
     setElementProps,
     updateCreateDialogProps,
     updatePropsContext,
+    currentFile,
   }: TDispatchMessage) => {
+    if (!message) return;
+
     messageActions({
       message,
       pluginName,
       setElementProps,
       setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-      setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
       updatePluginStatus: this.updatePluginStatus,
       updatePropsContext: updatePropsContext,
       setPluginDialogVisible: this.setPluginDialogVisible,
@@ -240,8 +286,9 @@ class PluginStore {
       updateMainButtonItems: this.updateMainButtonItems,
       updateProfileMenuItems: this.updateProfileMenuItems,
       updateEventListenerItems: this.updateEventListenerItems,
-      updateFileItems: this.updateFileItems,
       updateArticleButtonItems: this.updateArticleButtonItems,
+      updateArticleNavigationItems: this.updateArticleNavigationItems,
+      updateFileItems: this.updateFileItems,
       updateCreateDialogProps: updateCreateDialogProps,
       updatePlugin: this.updatePlugin,
       setPluginSelectorVisible: this.setPluginSelectorVisible,
@@ -251,7 +298,22 @@ class PluginStore {
       updatePluginFloatingOperations: this.updatePluginFloatingOperations,
       setPluginMediaViewerVisible: this.setPluginMediaViewerVisible,
       setPluginMediaViewerProps: this.setPluginMediaViewerProps,
+      setReactPluginModalState: this.setReactPluginModalState,
+      reactPluginCurrentFile: currentFile,
     });
+  };
+
+  setReactPluginModalState = (
+    value: PluginStore["reactPluginModalState"],
+  ): void => {
+    this.reactPluginModalState = value;
+  };
+
+  setReactSettingsSaveButtonState = (
+    pluginName: string,
+    button: ButtonGroup | null,
+  ): void => {
+    this.reactSettingsSaveButtonState = button ? { pluginName, button } : null;
   };
 
   setNeedPageReload = (value: boolean) => {
@@ -264,6 +326,7 @@ class PluginStore {
 
   setCurrentSettingsDialogPlugin = (value: null | { pluginName: string }) => {
     this.currentSettingsDialogPlugin = value;
+    this.reactSettingsSaveButtonState = null;
   };
 
   setSettingsPluginDialogVisible = (value: boolean) => {
@@ -278,13 +341,11 @@ class PluginStore {
     this.pluginSelectorVisible = value;
   };
 
-  setPluginSelectorProps = (
-    value: null | (TSelectorProps & { pluginName: string }),
-  ) => {
+  setPluginSelectorProps = (value: null | TSelectorProps) => {
     this.pluginSelectorProps = value;
   };
 
-  setPluginDialogProps = (value: null | ModalDialogProps) => {
+  setPluginDialogProps = (value: null | IModalDialogClient) => {
     this.pluginDialogProps = value;
   };
 
@@ -327,54 +388,28 @@ class PluginStore {
   }
 
   updatePluginStatus = (name: string) => {
-    const plugin = this.plugins.find((p) => p.name === name);
-
-    const newStatus = plugin?.getStatus?.();
-
     const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
-    if (pluginIdx !== -1) {
-      if (this.plugins[pluginIdx].status === newStatus) return;
+    if (pluginIdx === -1) return;
 
-      this.plugins[pluginIdx].status = newStatus || PluginStatus.active;
+    const plugin = this.plugins[pluginIdx];
 
-      if (
-        newStatus === PluginStatus.active &&
-        this.plugins[pluginIdx].enabled
-      ) {
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.ContextMenu)) {
-          this.updateContextMenuItems(name);
-        }
+    // A plugin that reports no status of its own is always shown.
+    const newStatus = plugin.getStatus?.() || PluginStatus.active;
 
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.InfoPanel)) {
-          this.updateInfoPanelItems(name);
-        }
+    plugin.status = newStatus;
 
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.MainButton)) {
-          this.updateMainButtonItems(name);
-        }
+    if (!plugin.enabled) return;
 
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.ProfileMenu)) {
-          this.updateProfileMenuItems(name);
-        }
+    if (newStatus === PluginStatus.active) {
+      this.installPluginCss(plugin);
+      this.registerPluginItems(plugin);
 
-        if (
-          this.plugins[pluginIdx].scopes.includes(PluginScopes.EventListener)
-        ) {
-          this.updateEventListenerItems(name);
-        }
-
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.File)) {
-          this.updateFileItems(name);
-        }
-
-        if (
-          this.plugins[pluginIdx].scopes.includes(PluginScopes.ArticleButton)
-        ) {
-          this.updateArticleButtonItems(name);
-        }
-      }
+      return;
     }
+
+    this.uninstallPluginCss(plugin);
+    this.unregisterPluginItems(plugin);
   };
 
   setPluginFrame = (frame: HTMLIFrameElement) => {
@@ -389,8 +424,15 @@ class PluginStore {
     this.isInit = isInit;
   };
 
+  setIsLoaded = (isLoaded: boolean) => {
+    this.isLoaded = isLoaded;
+  };
+
   initPlugins = async () => {
-    if (this.isNotPaidPeriod) return;
+    if (this.isNotPaidPeriod) {
+      this.setIsLoaded(true);
+      return;
+    }
 
     const frame = document.createElement("iframe");
     frame.id = "plugin-iframe";
@@ -409,7 +451,10 @@ class PluginStore {
   };
 
   updatePlugins = async (fromList?: boolean) => {
-    if (this.isNotPaidPeriod) return;
+    if (this.isNotPaidPeriod) {
+      this.setIsLoaded(true);
+      return;
+    }
 
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
@@ -424,13 +469,19 @@ class PluginStore {
 
       this.setIsEmptyList(plugins.length === 0);
       await Promise.allSettled(
-        plugins.map((plugin) => this.initPlugin(plugin, undefined, fromList)),
+        plugins.map((plugin) =>
+          plugin.runtime === "module"
+            ? this.initModulePlugin(plugin)
+            : this.initPlugin(plugin, undefined, fromList),
+        ),
       );
     } catch (e) {
       if (axios.isCancel(e)) {
         return;
       }
       console.log(e);
+    } finally {
+      this.setIsLoaded(true);
     }
   };
 
@@ -473,11 +524,30 @@ class PluginStore {
 
       this.setNeedPageReload(true);
 
-      this.initPlugin(plugin);
+      let thrownInitError: TPluginError | undefined;
+
+      try {
+        if (plugin.runtime === "module") {
+          await this.initModulePlugin(plugin);
+        } else {
+          await this.initPlugin(plugin);
+        }
+      } catch (e) {
+        console.error(
+          `[Plugin: ${plugin.name}] Plugin initialization failed:`,
+          e,
+        );
+
+        thrownInitError = toPluginError(e);
+      }
+
+      const storedPlugin = this.plugins.find((p) => p.name === plugin.name);
 
       return {
         isPluginCompatible,
         isPluginInCache,
+        loadError: storedPlugin?.loadError,
+        initError: storedPlugin?.initError ?? thrownInitError,
       };
     } catch (e) {
       toastr.error(e as TData);
@@ -511,13 +581,12 @@ class PluginStore {
     const currentLanguage = (getCookie(LANGUAGE) || culture) as string;
     plugin.setLanguage?.(currentLanguage);
 
-    const language = plugin.getLanguage?.();
+    const language = plugin.getLanguage?.() ?? currentLanguage;
 
-    plugin.nameLocale =
-      (language && plugin.nameLocaleMap?.[language]) || plugin.name;
+    plugin.nameLocale = plugin.nameLocaleMap?.[language] || plugin.name;
 
     plugin.descriptionLocale =
-      (language && plugin.descriptionLocaleMap?.[language]) ||
+      plugin.descriptionLocaleMap?.[language] ||
       plugin.description;
   };
 
@@ -529,15 +598,53 @@ class PluginStore {
     if (!plugin.enabled && !fromList) return;
 
     return new Promise((resolve, reject) => {
-      const onLoad = async () => {
-        try {
-          const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
+      const iWindow = this.pluginFrame?.contentWindow as
+        IframeWindow | undefined;
+      const scriptUrl = new URL(plugin.url, window.location.href).href;
 
-          const newPlugin = cloneDeep({
+      let scriptError: unknown;
+
+      const onScriptError = (event: ErrorEvent) => {
+        if (event.filename !== scriptUrl) return;
+
+        scriptError =
+          event.error instanceof Error ? event.error : new Error(event.message);
+      };
+
+      if (iWindow?.Plugins) delete iWindow.Plugins[plugin.pluginName];
+
+      iWindow?.addEventListener?.("error", onScriptError);
+
+      const stopListening = () =>
+        iWindow?.removeEventListener?.("error", onScriptError);
+
+      const onLoad = async () => {
+        stopListening();
+
+        const registered = iWindow?.Plugins?.[plugin.pluginName];
+
+        if (!registered) {
+          const error: TPluginError = scriptError
+            ? toPluginError(scriptError)
+            : { kind: "unregistered", pluginName: plugin.pluginName };
+
+          console.error(
+            `[Plugin: ${plugin.name}] Failed to load plugin:`,
+            scriptError ?? error,
+          );
+
+          resolve(this.installBrokenPlugin(plugin, error));
+          return;
+        }
+
+        try {
+          const newPlugin: TPlugin = cloneDeep({
             ...plugin,
             nameLocaleMap: plugin.nameLocale,
             descriptionLocaleMap: plugin.descriptionLocale,
-            ...iWindow?.Plugins?.[plugin.pluginName],
+            ...registered,
+            nameLocale: plugin.name,
+            descriptionLocale: plugin.description,
           });
 
           newPlugin.scopes =
@@ -551,22 +658,34 @@ class PluginStore {
             plugin.minDocSpaceVersion,
           );
 
-          this.initLocalePlugin(newPlugin);
+          const storedPlugin = await this.runPluginInit(
+            newPlugin,
+            plugin.settings || null,
+          );
 
-          this.installPlugin(newPlugin);
-
-          if (newPlugin.scopes.includes(PluginScopes.Settings)) {
-            newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
-          }
-
-          callback?.(newPlugin);
-          resolve(newPlugin);
+          callback?.(storedPlugin);
+          resolve(storedPlugin);
         } catch (error) {
+          console.error(
+            `[Plugin: ${plugin.name}] Plugin initialization failed:`,
+            error,
+          );
+
+          this.setInitError(plugin.name, toPluginError(error));
+
           reject(error);
         }
       };
 
-      const onError = () => {};
+      const onError = () => {
+        stopListening();
+
+        const error: TPluginError = { kind: "script", url: plugin.url };
+
+        console.error(`[Plugin: ${plugin.name}] Failed to load plugin:`, error);
+
+        resolve(this.installBrokenPlugin(plugin, error));
+      };
 
       const frameDoc = this.pluginFrame?.contentDocument;
       const script = frameDoc?.createElement("script");
@@ -583,6 +702,8 @@ class PluginStore {
 
         frameDoc?.body.appendChild(script);
       } else {
+        stopListening();
+
         reject(new Error("Failed to create script element"));
       }
     });
@@ -617,22 +738,169 @@ class PluginStore {
     }
   };
 
-  installPlugin = async (plugin: TPlugin, addToList = true) => {
-    if (addToList) {
-      const idx = this.plugins.findIndex((p) => p.name === plugin.name);
+  /** Publishes every item the plugin's scopes provide to the portal. */
+  private registerPluginItems = (plugin: TPlugin) => {
+    const { name, scopes } = plugin;
 
-      if (idx === -1) {
-        runInAction(() => {
-          this.plugins = [{ ...plugin }, ...this.plugins];
-        });
+    if (scopes.includes(PluginScopes.ContextMenu)) {
+      this.updateContextMenuItems(name);
+    }
 
-        this.setIsEmptyList(false);
-      } else {
-        this.plugins[idx] = plugin;
+    if (scopes.includes(PluginScopes.InfoPanel)) {
+      this.updateInfoPanelItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.MainButton)) {
+      this.updateMainButtonItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.ProfileMenu)) {
+      this.updateProfileMenuItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.EventListener)) {
+      this.updateEventListenerItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.File)) {
+      this.updateFileItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleButton)) {
+      this.updateArticleButtonItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleNavigation)) {
+      this.updateArticleNavigationItems(name);
+    }
+  };
+
+  /** Takes back everything `registerPluginItems` published. */
+  private unregisterPluginItems = (plugin: TPlugin) => {
+    const { scopes } = plugin;
+
+    if (scopes.includes(PluginScopes.ContextMenu)) {
+      this.deactivateContextMenuItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.InfoPanel)) {
+      this.deactivateInfoPanelItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.ProfileMenu)) {
+      this.deactivateProfileMenuItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.MainButton)) {
+      this.deactivateMainButtonItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.EventListener)) {
+      this.deactivateEventListenerItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.File)) {
+      this.deactivateFileItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleButton)) {
+      this.deactivateArticleButtonItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleNavigation)) {
+      this.deactivateArticleNavigationItems(plugin);
+    }
+  };
+
+  private addToPluginList = (plugin: TPlugin) => {
+    const idx = this.plugins.findIndex((p) => p.name === plugin.name);
+
+    if (idx === -1) {
+      runInAction(() => {
+        this.plugins = [plugin, ...this.plugins];
+      });
+
+      this.setIsEmptyList(false);
+
+      return this.plugins[0];
+    }
+
+    runInAction(() => {
+      this.plugins[idx] = plugin;
+    });
+
+    return this.plugins[idx];
+  };
+
+  private setInitError = (
+    name: string,
+    initError: TPluginError | undefined,
+  ) => {
+    const idx = this.plugins.findIndex((p) => p.name === name);
+
+    if (idx === -1) return;
+
+    runInAction(() => {
+      this.plugins[idx].initError = initError;
+      this.plugins.splice(idx, 1, this.plugins[idx]);
+    });
+  };
+
+  private installBrokenPlugin = (plugin: TAPIPlugin, error: TPluginError) => {
+    const scopes =
+      typeof plugin.scopes === "string"
+        ? (plugin.scopes.split(",") as PluginScopes[])
+        : plugin.scopes;
+
+    const brokenPlugin = {
+      ...plugin,
+      nameLocaleMap: plugin.nameLocale,
+      descriptionLocaleMap: plugin.descriptionLocale,
+      scopes,
+      iconUrl: getPluginUrl(plugin.url, ""),
+      compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
+      loadError: error,
+    } as unknown as TPlugin;
+
+    const previous = this.plugins.find((p) => p.name === plugin.name);
+
+    if (previous) {
+      try {
+        this.uninstallPluginCss(previous);
+        this.unregisterPluginItems(previous);
+      } catch (e) {
+        console.error(`[Plugin: ${plugin.name}] Failed to unregister:`, e);
       }
     }
 
-    if (!plugin || !plugin.enabled) return;
+    this.initLocalePlugin(brokenPlugin);
+
+    return this.addToPluginList(brokenPlugin);
+  };
+
+  private runPluginInit = async (
+    plugin: TPlugin,
+    settings: string | null,
+    addToList = true,
+  ) => {
+    const storedPlugin = addToList ? this.addToPluginList(plugin) : plugin;
+
+    this.initLocalePlugin(storedPlugin);
+
+    await this.installPlugin(storedPlugin);
+
+    if (storedPlugin.loadError) return storedPlugin;
+
+    if (storedPlugin.scopes.includes(PluginScopes.Settings)) {
+      storedPlugin.setAdminPluginSettingsValue?.(settings);
+      this.updatePluginStatus(storedPlugin.name);
+    }
+
+    return storedPlugin;
+  };
+
+  installPlugin = async (plugin: TPlugin) => {
+    if (!plugin || !plugin.enabled || plugin.loadError) return;
 
     if (plugin.scopes.includes(PluginScopes.API)) {
       plugin.setAPI?.(origin, proxy, prefix);
@@ -650,63 +918,37 @@ class PluginStore {
 
     this.installPluginCss(plugin);
 
-    if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
-      this.updateContextMenuItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.InfoPanel)) {
-      this.updateInfoPanelItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.MainButton)) {
-      this.updateMainButtonItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ProfileMenu)) {
-      this.updateProfileMenuItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.EventListener)) {
-      this.updateEventListenerItems(name);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.File)) {
-      this.updateFileItems(name);
-    }
+    this.registerPluginItems(plugin);
 
     if (plugin.scopes.includes(PluginScopes.PostMessage)) {
       this.initPostMessagePlugin(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
-      this.updateArticleButtonItems(name);
     }
   };
 
   updatePlugin = async (
     name: string,
-    status: boolean,
-    settings: string,
+    status: boolean | null,
+    settings?: string | null,
     t?: TTranslation,
   ) => {
     try {
-      let currentSettings = settings;
-      let currentStatus = status;
-
       const oldPlugin = this.pluginList.find((p) => p.name === name);
 
-      if (!currentSettings) currentSettings = oldPlugin?.settings || "";
+      const currentSettings = settings ?? oldPlugin?.settings ?? "";
 
-      if (typeof status !== "boolean")
-        currentStatus = oldPlugin?.enabled || false;
-
-      currentSettings = currentStatus ? settings : "";
+      const currentStatus =
+        typeof status === "boolean" ? status : (oldPlugin?.enabled ?? false);
 
       const plugin = await api.plugins.updatePlugin(
         name,
         currentStatus,
         currentSettings,
       );
+
+      if (oldPlugin)
+        runInAction(() => {
+          oldPlugin.settings = currentSettings;
+        });
 
       if (typeof status !== "boolean") return plugin;
 
@@ -726,72 +968,63 @@ class PluginStore {
   };
 
   activatePlugin = async (name: string) => {
-    const plugin = this.plugins.find((p) => p.name === name);
+    const idx = this.plugins.findIndex((p) => p.name === name);
 
-    if (!plugin) return;
+    if (idx === -1) return;
 
-    plugin.enabled = true;
+    runInAction(() => {
+      this.plugins[idx].enabled = true;
+      this.plugins.splice(idx, 1, this.plugins[idx]);
+    });
 
     this.setNeedPageReload(true);
 
-    this.installPlugin(plugin, false);
+    const plugin = this.plugins[idx];
+
+    try {
+      await this.runPluginInit(plugin, plugin.settings || null, false);
+
+      this.setInitError(name, undefined);
+    } catch (e) {
+      console.error(`[Plugin: ${name}] Plugin initialization failed:`, e);
+
+      this.setInitError(name, toPluginError(e));
+    }
   };
 
   deactivatePlugin = async (name: string) => {
-    const plugin = this.plugins.find((p) => p.name === name);
+    const idx = this.plugins.findIndex((p) => p.name === name);
 
-    if (!plugin) return;
+    if (idx === -1) return;
 
-    plugin.enabled = false;
-    plugin.settings = "";
+    runInAction(() => {
+      this.plugins[idx].enabled = false;
+      this.plugins.splice(idx, 1, this.plugins[idx]);
+    });
+
+    const plugin = this.plugins[idx];
 
     this.uninstallPluginCss(plugin);
 
-    if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
-      this.deactivateContextMenuItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.InfoPanel)) {
-      this.deactivateInfoPanelItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ProfileMenu)) {
-      this.deactivateProfileMenuItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.MainButton)) {
-      this.deactivateMainButtonItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.EventListener)) {
-      this.deactivateEventListenerItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.File)) {
-      this.deactivateFileItems(plugin);
-    }
-
-    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
-      this.deactivateArticleButtonItems(plugin);
-    }
+    this.unregisterPluginItems(plugin);
   };
 
   getUserRole = () => {
     const { user } = this.userStore;
 
-    if (!user) return PluginUsersType.user;
+    if (!user) return PluginUserRole.guest;
 
     const { isOwner, isAdmin, isCollaborator, isVisitor } = user;
 
     const userRole = isOwner
-      ? PluginUsersType.owner
+      ? PluginUserRole.owner
       : isAdmin
-        ? PluginUsersType.docSpaceAdmin
+        ? PluginUserRole.fullAdmin
         : isCollaborator
-          ? PluginUsersType.collaborator
+          ? PluginUserRole.user
           : isVisitor
-            ? PluginUsersType.user
-            : PluginUsersType.roomAdmin;
+            ? PluginUserRole.guest
+            : PluginUserRole.roomAdmin;
 
     return userRole;
   };
@@ -803,7 +1036,7 @@ class PluginStore {
   };
 
   getValidContextMenuItemKeys = (
-    item: IContextMenuItem,
+    item: IContextMenuItemClient,
     ctx: IContextMenuItemValidation,
   ) => {
     const keys: string[] = [];
@@ -814,8 +1047,7 @@ class PluginStore {
 
     if (fileExst && item.fileExt && !item.fileExt.includes(fileExst)) return;
 
-    if (userRole && item.usersTypes && !item.usersTypes.includes(userRole))
-      return;
+    if (userRole && !matchesUserRole(item.usersTypes, userRole)) return;
 
     if (device && item.devices && !item.devices.includes(device)) return;
 
@@ -835,11 +1067,7 @@ class PluginStore {
     )
       return;
 
-    if (
-      itemId !== undefined &&
-      item.itemId &&
-      !item.itemId.includes(itemId)
-    )
+    if (itemId !== undefined && item.itemId && !item.itemId.includes(itemId))
       return;
 
     if (item.items && item.items.length > 0) {
@@ -861,9 +1089,17 @@ class PluginStore {
 
   getContextMenuKeysByType = (
     type: PluginFileType,
-    fileExst?: string,
-    security?: TRoomSecurity | TFolderSecurity,
-    itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity,
+    fileExst?: string | null,
+    security?:
+      | TRoomSecurity
+      | TFolderSecurity
+      | Partial<TRoomSecurity & TFolderSecurity>
+      | null,
+    itemSecurity?:
+      | TFileSecurity
+      | TRoomSecurity
+      | TFolderSecurity
+      | Partial<TFileSecurity & TRoomSecurity & TFolderSecurity>,
     itemId?: number | string,
   ) => {
     if (this.contextMenuItems.size === 0) return;
@@ -965,6 +1201,19 @@ class PluginStore {
     return `${plugin.iconUrl}/assets/${icon}?hash=${plugin.version}`;
   };
 
+  /** Drops this plugin's items that the finished `update*Items` pass did not produce. */
+  private removeMissingItems = <T extends { pluginName: string }>(
+    items: Map<string, T>,
+    pluginName: string,
+    actualKeys: Set<string>,
+  ) => {
+    Array.from(items).forEach(([key, value]) => {
+      if (value.pluginName === pluginName && !actualKeys.has(key)) {
+        items.delete(key);
+      }
+    });
+  };
+
   updateContextMenuItems = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
@@ -1031,12 +1280,17 @@ class PluginStore {
       return processedItem;
     };
 
+    const actualKeys = new Set<string>();
+
     // Process all top-level items
     Array.from(items).forEach(([key, value]: [string, IContextMenuItem]) => {
       const contextMenuItem = processContextMenuItem(value);
       this.contextMenuItems.set(key, contextMenuItem);
+      actualKeys.add(key);
       currentDepth = 1;
     });
+
+    this.removeMissingItems(this.contextMenuItems, plugin.name, actualKeys);
   };
 
   deactivateContextMenuItems = (plugin: TPlugin) => {
@@ -1065,10 +1319,10 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     Array.from(items).forEach(([key, value]: [string, IInfoPanelItem]) => {
-      const correctUserType = value.usersTypes
-        ? value.usersTypes.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersTypes, userRole);
 
       const correctDevice = value.devices
         ? value.devices.includes(device)
@@ -1092,7 +1346,10 @@ class PluginStore {
         subMenu: { ...value.subMenu, onClick },
         pluginName: plugin.name,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.infoPanelItems, plugin.name, actualKeys);
   };
 
   deactivateInfoPanelItems = (plugin: TPlugin) => {
@@ -1121,10 +1378,10 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     Array.from(items).forEach(([key, value]) => {
-      const correctUserType = value.usersType
-        ? value.usersType.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersType, userRole);
 
       const correctDevice = value.devices
         ? value.devices.includes(device)
@@ -1159,9 +1416,7 @@ class PluginStore {
         };
       };
 
-      const storeId = this.selectedFolderStore.id;
-
-      if (value.items && storeId) {
+      if (value.items) {
         value.items.forEach((i) => {
           const onClick = createMainButtonClickHandler(i, plugin.name);
 
@@ -1185,7 +1440,10 @@ class PluginStore {
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
         items: newItems.length > 0 ? newItems : undefined,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.mainButtonItems, plugin.name, actualKeys);
   };
 
   deactivateMainButtonItems = (plugin: TPlugin) => {
@@ -1214,10 +1472,10 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     Array.from(items).forEach(([key, value]) => {
-      const correctUserType = value.usersType
-        ? value.usersType.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersType, userRole);
 
       const correctDevice = value.devices
         ? value.devices.includes(device)
@@ -1239,7 +1497,10 @@ class PluginStore {
         pluginName: plugin.name,
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.profileMenuItems, plugin.name, actualKeys);
   };
 
   deactivateProfileMenuItems = (plugin: TPlugin) => {
@@ -1268,10 +1529,10 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     Array.from(items).forEach(([key, value]) => {
-      const correctUserType = value.usersTypes
-        ? value.usersTypes.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersTypes, userRole);
 
       const correctDevice = value.devices
         ? value.devices.includes(device)
@@ -1291,7 +1552,10 @@ class PluginStore {
         eventHandler,
         pluginName: plugin.name,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.eventListenerItems, plugin.name, actualKeys);
   };
 
   deactivateEventListenerItems = (plugin: TPlugin) => {
@@ -1318,15 +1582,19 @@ class PluginStore {
 
     const userRole = this.getUserRole();
 
+    const actualKeys = new Set<string>();
+
     Array.from(items).forEach(([key, value]) => {
-      const correctUserType = value.usersType
-        ? value.usersType.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersType, userRole);
 
       if (!correctUserType) return;
 
-      const fileIcon = `${plugin.iconUrl}/assets/${value.fileRowIcon}?hash=${plugin.version}`;
-      const fileIconTile = `${plugin.iconUrl}/assets/${value.fileTileIcon}?hash=${plugin.version}`;
+      const fileIcon = value.fileRowIcon
+        ? `${plugin.iconUrl}/assets/${value.fileRowIcon}?hash=${plugin.version}`
+        : undefined;
+      const fileIconTile = value.fileTileIcon
+        ? `${plugin.iconUrl}/assets/${value.fileTileIcon}?hash=${plugin.version}`
+        : fileIcon;
 
       const onClick = async (item: TFile) => {
         const device = this.getCurrentDevice();
@@ -1368,7 +1636,10 @@ class PluginStore {
         fileIconTile,
         pluginName: plugin.name,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.fileItems, plugin.name, actualKeys);
   };
 
   deactivateFileItems = (plugin: TPlugin) => {
@@ -1404,10 +1675,10 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     for (const [key, value] of Array.from(items)) {
-      const correctUserType = value.usersTypes
-        ? value.usersTypes.includes(userRole)
-        : true;
+      const correctUserType = matchesUserRole(value.usersTypes, userRole);
 
       const correctDevice = value.devices
         ? value.devices.includes(device)
@@ -1419,7 +1690,64 @@ class PluginStore {
         ...value,
         pluginName: plugin.name,
       });
+      actualKeys.add(key);
     }
+
+    this.removeMissingItems(this.articleButtonItems, plugin.name, actualKeys);
+  };
+
+  updateArticleNavigationItems = async (name: string) => {
+    const plugin = this.plugins.find((p) => p.name === name);
+
+    if (!plugin || !plugin.enabled) return;
+
+    const items: Map<string, IArticleNavigationItem> | undefined =
+      plugin.getArticleNavigationItems && plugin.getArticleNavigationItems();
+
+    if (!items) return;
+
+    const userRole = this.getUserRole();
+    const device = this.getCurrentDevice();
+
+    const actualItems = new Map<string, IArticleNavigationItemClient>();
+
+    for (const [key, value] of Array.from(items)) {
+      const correctUserType = matchesUserRole(value.usersTypes, userRole);
+
+      const correctDevice = value.devices
+        ? value.devices.includes(device)
+        : true;
+
+      if (!correctUserType || !correctDevice) continue;
+
+      const icon = `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`;
+
+      actualItems.set(key, {
+        ...value,
+        icon,
+        pluginName: plugin.name,
+      });
+    }
+
+    this.removeMissingItems(
+      this.articleNavigationItems,
+      plugin.name,
+      new Set(actualItems.keys()),
+    );
+
+    actualItems.forEach((value, key) => {
+      this.articleNavigationItems.set(key, value);
+    });
+  };
+
+  deactivateArticleNavigationItems = (plugin: TPlugin) => {
+    if (!plugin) return;
+
+    Array.from(this.articleNavigationItems).forEach(([key, value]) => {
+      if (value.pluginName === plugin.name) {
+        this.articleNavigationItems.delete(key);
+      }
+    });
   };
 
   deactivateArticleButtonItems = (plugin: TPlugin) => {
@@ -1546,6 +1874,283 @@ class PluginStore {
 
   get articleButtonItemsList() {
     const items = Array.from(this.articleButtonItems, ([key, value]) => {
+      return {
+        key,
+        value: {
+          ...value,
+        },
+      };
+    });
+
+    if (items.length > 0) {
+      return items;
+    }
+
+    return null;
+  }
+
+  closeReactPluginModal = (): void => {
+    this.reactPluginModalState = null;
+  };
+
+  buildReactPluginRuntime = (
+    pluginName: string,
+    currentFile: TCurrentFile | null,
+    user: TUser | null,
+  ): PluginRuntime => {
+    // Bare redraw requests: the plugin has already mutated its own item, and the
+    // message only tells the portal to re-read the collection.
+    const redraw = (action: Actions) => () =>
+      this.dispatchMessage({ message: { actions: [action] }, pluginName });
+
+    return {
+      currentFile,
+      currentUser: user ? toCurrentUser(user) : null,
+      actions: {
+        showToast: (props) =>
+          this.dispatchMessage({
+            message: { actions: [Actions.showToast], toastProps: [props] },
+            pluginName,
+          }),
+        showModal: (props) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.showModal],
+              modalDialogProps: props,
+            },
+            pluginName,
+            currentFile,
+          }),
+        closeModal: () =>
+          this.dispatchMessage({
+            message: { actions: [Actions.closeModal] },
+            pluginName,
+          }),
+        showSelector: (props: TSelector) =>
+          this.dispatchMessage({
+            message: { actions: [Actions.showSelector], selectorProps: props },
+            pluginName,
+          }),
+        updateSelector: (props: TSelector) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.updateSelector],
+              selectorProps: props,
+            },
+            pluginName,
+          }),
+        closeSelector: () =>
+          this.dispatchMessage({
+            message: { actions: [Actions.closeSelector] },
+            pluginName,
+          }),
+        navigate: (path: string) =>
+          this.dispatchMessage({
+            message: { actions: [Actions.navigate], navigatePath: path },
+            pluginName,
+          }),
+        openInfoPanel: (tab) =>
+          this.dispatchMessage({
+            message: { actions: [Actions.openInfoPanel], infoPanelTab: tab },
+            pluginName,
+          }),
+        showCreateDialog: (props) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.showCreateDialogModal],
+              createDialogProps: props,
+            },
+            pluginName,
+          }),
+        showMediaViewer: (props: IMediaViewer) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.showMediaViewer],
+              mediaViewerProps: props,
+            },
+            pluginName,
+          }),
+        closeMediaViewer: () =>
+          this.dispatchMessage({
+            message: { actions: [Actions.closeMediaViewer] },
+            pluginName,
+          }),
+        updateMediaViewer: (props: IMediaViewer) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.updateMediaViewer],
+              mediaViewerProps: props,
+            },
+            pluginName,
+          }),
+        addFloatingOperationsButton: (props: IFloatingOperationsButton) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.addFloatingOperationsButton],
+              floatingOperationsButtonProps: props,
+            },
+            pluginName,
+          }),
+        removeFloatingOperationsButton: (id: string) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.removeFloatingOperationsButton],
+              floatingOperationsButtonPropsId: id,
+            },
+            pluginName,
+          }),
+        updateFloatingOperationsButton: (props: IFloatingOperationsButton) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.updateFloatingOperationsButton],
+              floatingOperationsButtonProps: props,
+            },
+            pluginName,
+          }),
+        updateContextMenuItems: redraw(Actions.updateContextMenuItems),
+        updateInfoPanelItems: redraw(Actions.updateInfoPanelItems),
+        updateMainButtonItems: redraw(Actions.updateMainButtonItems),
+        updateProfileMenuItems: redraw(Actions.updateProfileMenuItems),
+        updateFileItems: redraw(Actions.updateFileItems),
+        updateEventListenerItems: redraw(Actions.updateEventListenerItems),
+        updateArticleButtonItems: redraw(Actions.updateArticleButtonItems),
+        updateArticleNavigationItems: redraw(
+          Actions.updateArticleNavigationItems,
+        ),
+      },
+      api: pluginApi,
+      settings: {
+        load: () => {
+          const entry = this.plugins.find((p) => p.name === pluginName);
+          if (!entry?.settings) return null;
+          try {
+            return JSON.parse(entry.settings);
+          } catch {
+            return null;
+          }
+        },
+        save: async (data: Record<string, unknown>) => {
+          const entry = this.plugins.find((p) => p.name === pluginName);
+          if (!entry) return;
+          const settingsStr = JSON.stringify(data);
+          await api.plugins.updatePlugin(
+            pluginName,
+            entry.enabled,
+            settingsStr,
+          );
+          runInAction(() => {
+            entry.settings = settingsStr;
+          });
+          entry.setAdminPluginSettingsValue?.(settingsStr);
+
+          this.updatePluginStatus(pluginName);
+        },
+        setSaveButton: (props: ButtonGroup) => {
+          this.setReactSettingsSaveButtonState(pluginName, props);
+        },
+      },
+    };
+  };
+
+  private loadModulePlugin = async (
+    plugin: TAPIPlugin,
+  ): Promise<Partial<TPlugin>> => {
+    const res = await fetch(plugin.url);
+    if (!res.ok) {
+      throw new PluginLoadError({
+        kind: "http",
+        status: res.status,
+        url: plugin.url,
+      });
+    }
+
+    const rawCode = await res.text();
+
+    const { rewritePluginImports } =
+      await import("../helpers/plugins/react/shim");
+
+    const code = rewritePluginImports(rawCode);
+    const blob = new Blob([code], { type: "application/javascript" });
+    const blobUrl = URL.createObjectURL(blob);
+
+    let mod: { default?: Partial<TPlugin> };
+    try {
+      mod = await import(/* @vite-ignore */ blobUrl);
+    } finally {
+      URL.revokeObjectURL(blobUrl);
+    }
+
+    const exported = mod?.default;
+    if (!exported) throw new PluginLoadError({ kind: "no-default-export" });
+
+    return exported;
+  };
+
+  initLoadedModulePlugin = async (
+    plugin: TAPIPlugin,
+    exported: Partial<TPlugin>,
+    callback?: (plugin: TPlugin) => void,
+  ): Promise<TPlugin> => {
+    const scopes =
+      typeof plugin.scopes === "string"
+        ? (plugin.scopes.split(",") as PluginScopes[])
+        : plugin.scopes;
+
+    const newPlugin = Object.assign(exported as TPlugin, {
+      ...plugin,
+      nameLocaleMap: plugin.nameLocale,
+      descriptionLocaleMap: plugin.descriptionLocale,
+      nameLocale: plugin.name,
+      descriptionLocale: plugin.description,
+      scopes,
+      iconUrl: getPluginUrl(plugin.url, ""),
+      compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
+    });
+
+    try {
+      const storedPlugin = await this.runPluginInit(
+        newPlugin,
+        plugin.settings || null,
+      );
+
+      callback?.(storedPlugin);
+
+      return storedPlugin;
+    } catch (e) {
+      console.error(
+        `[Plugin: ${plugin.name}] Plugin initialization failed:`,
+        e,
+      );
+
+      this.setInitError(plugin.name, toPluginError(e));
+
+      throw e;
+    }
+  };
+
+  initModulePlugin = async (
+    plugin: TAPIPlugin,
+    callback?: (plugin: TPlugin) => void,
+  ): Promise<void> => {
+    let exported: Partial<TPlugin>;
+
+    try {
+      exported = await this.loadModulePlugin(plugin);
+    } catch (e) {
+      console.error(
+        `[Plugin: ${plugin.name}] Failed to load module plugin:`,
+        e,
+      );
+
+      this.installBrokenPlugin(plugin, toPluginError(e));
+      return;
+    }
+
+    await this.initLoadedModulePlugin(plugin, exported, callback);
+  };
+
+  get articleNavigationItemsList() {
+    const items = Array.from(this.articleNavigationItems, ([key, value]) => {
       return {
         key,
         value: {

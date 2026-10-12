@@ -34,15 +34,14 @@
  */
 
 import { inject, observer } from "mobx-react";
-import styled, { css, useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context";
 
 import Filter from "@docspace/shared/api/people/filter";
 import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { commonIconsStyles, IconSizeType } from "@docspace/shared/utils";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 
 import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
 
@@ -50,32 +49,7 @@ import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import { getConstName } from "@docspace/shared/constants/consts";
 
-const StyledBadgesContainer = styled.div<{ infoPanelVisible?: boolean }>`
-  height: 100%;
-
-  display: flex;
-
-  align-items: center;
-
-  ${(props) =>
-    props.infoPanelVisible &&
-    css`
-      .accounts-badge:last-child {
-        margin-inline-end: 12px;
-      }
-    `}
-`;
-
-const StyledPaidBadge = styled(Badge)`
-  margin-inline-end: 8px;
-`;
-
-const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) => props.theme.accountsBadges.disabledColor};
-  }
-`;
+import styles from "./Badges.module.scss";
 
 type BadgeProps = {
   statusType?: string;
@@ -98,7 +72,7 @@ const Badges = ({
 }: BadgeProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const { t } = useTranslation(["Common"]);
 
   const onClickPaid = () => {
@@ -123,20 +97,23 @@ const Badges = ({
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
+  const containerClass = [
+    "badges additional-badges",
+    styles.badgesContainer,
+    infoPanelVisible && styles.infoPanelVisible,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <StyledBadgesContainer
-      className="badges additional-badges"
-      infoPanelVisible={infoPanelVisible}
-    >
+    <div className={containerClass}>
       {isLDAP ? (
         <Badge
           className="accounts-badge"
           label={getConstName("LDAP")}
           color={globalColors.white}
           backgroundColor={
-            theme.isBase
-              ? globalColors.secondPurple
-              : globalColors.secondPurpleDark
+            isBase ? globalColors.secondPurple : globalColors.secondPurpleDark
           }
           fontSize="9px"
           fontWeight={800}
@@ -149,9 +126,7 @@ const Badges = ({
           label={getConstName("SSO")}
           color={globalColors.white}
           backgroundColor={
-            theme.isBase
-              ? globalColors.secondGreen
-              : globalColors.secondGreenDark
+            isBase ? globalColors.secondGreen : globalColors.secondGreenDark
           }
           fontSize="9px"
           fontWeight={800}
@@ -159,11 +134,11 @@ const Badges = ({
         />
       ) : null}
       {!withoutPaid && isPaid ? (
-        <StyledPaidBadge
+        <Badge
           className="paid-badge accounts-badge"
           label={t("Paid")}
           backgroundColor={
-            theme.isBase
+            isBase
               ? globalColors.favoritesStatus
               : globalColors.favoriteStatusDark
           }
@@ -173,18 +148,18 @@ const Badges = ({
           onClick={onClickPaid}
           isPaidBadge
           maxWidth="65px"
+          style={{ marginInlineEnd: "8px" }}
         />
       ) : null}
       {statusType === "pending" ? (
         <StyledSendClockIcon className="pending-badge accounts-badge" />
       ) : null}
       {statusType === "disabled" ? (
-        <StyledCatalogSpamIcon
-          className="disabled-badge accounts-badge"
-          size={IconSizeType.small}
+        <CatalogSpamIcon
+          className={`${styles.catalogSpamIcon} disabled-badge accounts-badge`}
         />
       ) : null}
-    </StyledBadgesContainer>
+    </div>
   );
 };
 

@@ -36,15 +36,20 @@
 import { useTranslation } from "react-i18next";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { RoomsTypeValues } from "@docspace/shared/utils/common";
+import { getCreateRoomTypes } from "@docspace/shared/utils/rooms";
 import { RoomsType } from "@docspace/shared/enums";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import styles from "./RoomTypeList.module.scss";
 
 type RoomTypeListProps = {
   disabledFormRoom: boolean;
   isExternalShareRestricted?: boolean;
+  processCreatingRoomFromData?: boolean;
+  isFormsCreate?: boolean;
+  // Set only when the OForms gallery is available; offers a form space built
+  // around a gallery template even with the Forms quick actions turned off.
+  onOpenTemplateGallery?: () => void;
 
   setRoomType: (roomType: RoomsType) => void;
   setTemplateDialogIsVisible: (isVisible: boolean) => void;
@@ -53,11 +58,24 @@ type RoomTypeListProps = {
 const RoomTypeList = ({
   disabledFormRoom = true,
   isExternalShareRestricted,
+  processCreatingRoomFromData,
+  isFormsCreate,
+  onOpenTemplateGallery,
 
   setRoomType,
   setTemplateDialogIsVisible,
 }: RoomTypeListProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Files", "Common"]);
+
+  // Form Filling Rooms are created from the dedicated "Forms" section (which
+  // opens straight into the FFR form via startRoomType). The only place the
+  // FFR card still belongs in this generic chooser is the "create room from
+  // selected PDF data" flow.
+  const availableRoomTypes = getCreateRoomTypes();
+
+  const roomTypeValues = processCreatingRoomFromData
+    ? availableRoomTypes
+    : availableRoomTypes.filter((roomType) => roomType !== RoomsType.FormRoom);
 
   const handleClick = (roomType: RoomsType | "template") => {
     if (disabledFormRoom && roomType === RoomsType.FormRoom) return;
@@ -78,9 +96,44 @@ const RoomTypeList = ({
 
   const publicRoomTooltipContent = t("Common:PublicRoomCreationDisabled");
 
+  if (isFormsCreate) {
+    return (
+      <div className={styles.roomTypeList}>
+        <RoomType
+          id={RoomsType.FormRoom.toString()}
+          roomType={RoomsType.FormRoom}
+          type="listItem"
+          isFormSection
+          onClick={() => handleClick(RoomsType.FormRoom)}
+          isOpen={false}
+          selectedId={RoomsType.FormRoom.toString()}
+        />
+        <RoomType
+          id="Template"
+          isTemplate
+          isFormSection
+          type="listItem"
+          onClick={() => handleClick("template")}
+          isOpen={false}
+          selectedId="Template"
+        />
+        {onOpenTemplateGallery ? (
+          <RoomType
+            id="TemplateGallery"
+            isTemplateGallery
+            type="listItem"
+            onClick={onOpenTemplateGallery}
+            isOpen={false}
+            selectedId="TemplateGallery"
+          />
+        ) : null}
+      </div>
+    );
+  }
+
   return (
     <div className={styles.roomTypeList}>
-      {RoomsTypeValues.map((roomType) => {
+      {roomTypeValues.map((roomType) => {
         const isFormRoom = roomType === RoomsType.FormRoom;
         const isPublicRoom = roomType === RoomsType.PublicRoom;
 

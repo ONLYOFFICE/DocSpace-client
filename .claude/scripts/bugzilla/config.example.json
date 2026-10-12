@@ -1,0 +1,6 @@
+{
+  "host": "https://your-bugzilla.example.com",
+  "assigned": "you@example.com",
+  "keychainService": "bugzilla",
+  "attachDir": ""
+}

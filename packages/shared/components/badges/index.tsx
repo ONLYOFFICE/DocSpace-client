@@ -36,11 +36,12 @@
 import equal from "fast-deep-equal";
 import React, { useMemo, useState } from "react";
 import { isMobile as isMobileDevice } from "react-device-detect";
+import { useIsomorphicLayoutEffect } from "@onlyoffice/apps-ui-kit/hooks/useIsomorphicLayoutEffect";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
-import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
+// import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
+// import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
 import Mute12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/mute.react.svg?url";
 import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
@@ -54,13 +55,17 @@ import FormFillIcon from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { Badge } from "@docspace/ui-kit/components/badge";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 
-import { RoomsType, ShareAccessRights, VectorizationStatus } from "../../enums";
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+import {
+  // RoomsType,
+  // ShareAccessRights,
+  VectorizationStatus,
+} from "../../enums";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 import {
   classNames,
@@ -74,7 +79,7 @@ import {
 
 import styles from "./Badges.module.scss";
 import type { BadgesProps, BadgeWrapperProps } from "./Badges.type";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
 const BadgeWrapper = ({
@@ -126,8 +131,8 @@ const Badges = ({
   onUnmuteClick,
   isMutedBadge,
   isArchiveFolderRoot,
-  onCopyPrimaryLink,
-  isArchiveFolder,
+  // onCopyPrimaryLink,
+  // isArchiveFolder,
   isTemplatesFolder,
   onCreateRoom,
   newFilesBadge,
@@ -168,11 +173,15 @@ const Badges = ({
   const countVersions =
     versionGroup && versionGroup > 999 ? "999+" : versionGroup;
 
-  const isLargeTabletDevice =
-    isMobileDevice && window.innerWidth >= size.desktop;
+  const [mounted, setMounted] = useState(false);
+  useIsomorphicLayoutEffect(() => setMounted(true), []);
 
-  const tabletViewBadge = !isTile && (isTablet() || isLargeTabletDevice);
-  const desktopView = !isTile && isDesktop();
+  const isLargeTabletDevice =
+    mounted && isMobileDevice && window.innerWidth >= size.desktop;
+
+  const tabletViewBadge =
+    mounted && !isTile && (isTablet() || isLargeTabletDevice);
+  const desktopView = mounted && !isTile && isDesktop();
 
   const sizeBadge =
     isTile || tabletViewBadge ? IconSizeType.medium : IconSizeType.small;
@@ -226,21 +235,21 @@ const Badges = ({
       ? { onClick: onShowVersionHistory }
       : {};
 
-  const isPublicRoomType =
-    item.roomType === RoomsType.PublicRoom ||
-    item.roomType === RoomsType.FormRoom ||
-    item.roomType === RoomsType.CustomRoom;
+  // const isPublicRoomType =
+  //   item.roomType === RoomsType.PublicRoom ||
+  //   item.roomType === RoomsType.FormRoom ||
+  //   item.roomType === RoomsType.CustomRoom;
 
-  const haveLinksRight =
-    item?.access === ShareAccessRights.RoomManager ||
-    item?.access === ShareAccessRights.None;
+  // const haveLinksRight =
+  //   item?.access === ShareAccessRights.RoomManager ||
+  //   item?.access === ShareAccessRights.None;
 
-  const showCopyLinkIcon =
-    isPublicRoomType &&
-    haveLinksRight &&
-    item.shared &&
-    !isArchiveFolder &&
-    !isTile;
+  // const showCopyLinkIcon =
+  //   isPublicRoomType &&
+  //   haveLinksRight &&
+  //   item.shared &&
+  //   !isArchiveFolder &&
+  //   !isTile;
 
   const hasRetryVectorizationAccess =
     security && "Vectorization" in security && security.Vectorization;
@@ -263,7 +272,7 @@ const Badges = ({
   const getTooltipContent = () => (
     <>
       <Text fontSize="12px" fontWeight={400} noSelect>
-        {t("CustomFilterEnableDiscription")}
+        {t("Common:CustomFilterEnableDiscription")}
       </Text>
       {customFilterExternalLink ? (
         <Link
@@ -555,7 +564,7 @@ const Badges = ({
         room__badges: isRoom,
       })}
     >
-      {showCopyLinkIcon ? (
+      {/* {showCopyLinkIcon ? (
         <IconButton
           iconName={LinkReactSvgUrl}
           className={classNames(
@@ -566,9 +575,9 @@ const Badges = ({
           title={t("Common:CopySharedLink")}
           hoverColor="accent"
         />
-      ) : null}
+      ) : null} */}
 
-      {showCopyLinkIcon ? (
+      {/* {showCopyLinkIcon ? (
         <IconButton
           iconName={TabletLinkReactSvgUrl}
           className={classNames(
@@ -579,7 +588,7 @@ const Badges = ({
           title={t("Common:CopySharedLink")}
           hoverColor="accent"
         />
-      ) : null}
+      ) : null} */}
 
       {isRoom && mute && !isTile ? (
         <IconButton
@@ -639,3 +648,4 @@ const Badges = ({
 };
 
 export default React.memo(Badges, equal);
+

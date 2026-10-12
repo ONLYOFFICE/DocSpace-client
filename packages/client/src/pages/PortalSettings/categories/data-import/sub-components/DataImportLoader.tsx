@@ -33,90 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { tablet } from "@docspace/ui-kit/utils/device";
-
-const StyledLoader = styled.div`
-  padding-inline-end: 8px;
-
-  .header {
-    display: flex;
-    flex-direction: column;
-    max-width: 700px;
-
-    @media ${tablet} {
-      max-width: 675px;
-    }
-  }
-
-  .title {
-    margin-bottom: 20px;
-    width: 675px;
-
-    @media ${tablet} {
-      width: 100%;
-    }
-  }
-
-  .subtitle {
-    margin-bottom: 20px;
-    width: 675px;
-
-    @media ${tablet} {
-      width: 100%;
-    }
-  }
-
-  .content {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 20px;
-
-    .link {
-      color: ${(props) => props.theme.client.settings.migration.linkColor};
-    }
-  }
-
-  .workspace-item {
-    background: ${(props) =>
-      props.theme.client.settings.migration.workspaceBackground};
-    border: ${(props) => props.theme.client.settings.migration.workspaceBorder};
-    border-radius: 6px;
-    width: 340px;
-    height: 64px;
-    box-sizing: border-box;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-
-    &:hover {
-      border-color: ${(props) =>
-        props.theme.client.settings.migration.workspaceHover};
-    }
-
-    &:active {
-      background-color: ${(props) =>
-        props.theme.client.settings.migration.workspaceBackground};
-    }
-    max-width: 700px;
-
-    @media ${tablet} {
-      max-width: 675px;
-      .item {
-        width: 327.5px;
-      }
-    }
-  }
-`;
+import styles from "../StyledDataImport.module.scss";
 
 const DataImportLoader = () => {
   return (
-    <StyledLoader>
+    <div className={styles.dataImportLoader}>
       <div className="header">
         <RectangleSkeleton className="title" height="40px" />
         <RectangleSkeleton className="subtitle" height="20px" />
@@ -127,7 +49,7 @@ const DataImportLoader = () => {
         <RectangleSkeleton className="item" width="340px" height="64px" />
         <RectangleSkeleton className="item" width="340px" height="64px" />
       </div>
-    </StyledLoader>
+    </div>
   );
 };
 

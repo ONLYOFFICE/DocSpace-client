@@ -1,5 +1,3 @@
-"use client";
-
 /*
  * Copyright (C) Ascensio System SIA, 2009-2026
  *
@@ -35,177 +33,180 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
+"use client";
 
+import React from "react";
+import dynamic from "next/dynamic";
+import { useTranslation } from "react-i18next";
+
+import { useTheme } from "@onlyoffice/apps-ui-kit";
+import AiAgentProviders, {
+  useApi,
+  useStores,
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import {
+  useAttachHostFilesToChat,
+  notifyAlreadyAttached,
+  notifyAttachmentLimit,
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/files";
+import { ChatToolbar } from "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar";
+import {
+  PORTAL_BASE_THEME_ID,
+  PORTAL_DARK_THEME_ID,
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import { getFileInfo } from "@docspace/shared/api/files";
-import type { TFile } from "@docspace/ui-kit/types";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
+import {
+  frameCallCommand,
+  frameCallEvent,
+  getFrameId,
+} from "@docspace/shared/utils/common";
+
 import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 
-const Chat = dynamic(() => import("@docspace/ui-kit/ai-agent/chat"), {
+import styles from "./page.module.scss";
+
+const NewChat = dynamic(() => import("@onlyoffice/apps-ui-kit/ai-agent/new-chat"), {
   ssr: false,
 });
 
-const fullSize: React.CSSProperties = { width: "100%", height: "100%" };
+type ChatParamsBridgeProps = {
+  fileId: string;
+  threadId: string;
+};
+
+const ChatParamsBridge = ({ fileId, threadId }: ChatParamsBridgeProps) => {
+  const { t } = useTranslation(["Common"]);
+  const api = useApi();
+  const stores = useStores();
+  const attachFilesToChat = useAttachHostFilesToChat();
+  const switchToThread = stores.useThreadsStore((s) => s.onSwitchToThread);
+
+  const appliedRef = React.useRef(false);
+
+  React.useEffect(() => {
+    if (appliedRef.current) return;
+    appliedRef.current = true;
+
+    const resumeThread = threadId
+      ? api.threads
+          .getById(threadId)
+          .then((thread) => {
+            if (thread) switchToThread(threadId);
+          })
+          .catch(() => {})
+      : Promise.resolve();
+
+    if (!fileId) return;
+
+    resumeThread
+      .then(() => getFileInfo(fileId))
+      .then((file) =>
+        attachFilesToChat([
+          {
+            id: file.id,
+            title: file.title,
+            fileExst: file.fileExst,
+            fileType: file.fileType,
+            // Carry the form metadata: the hook reads it to decide whether
+            // the chat offers the form-specific hints.
+            isForm: file.isForm,
+            externalDbTableName: file.externalDbTableName,
+          },
+        ]),
+      )
+      .then(({ duplicates, skippedOverLimit, cap }) => {
+        // Resuming a thread can land on a composer that already holds this
+        // file, and the cap applies here as anywhere else — both drop the
+        // chip silently, so say which one happened.
+        notifyAlreadyAttached(t, duplicates);
+        notifyAttachmentLimit(t, skippedOverLimit, cap);
+      })
+      .catch((error: unknown) => {
+        frameCallEvent({
+          event: "onAppError",
+          data: error instanceof Error ? error.message : String(error),
+        });
+      });
+  }, [api, attachFilesToChat, fileId, switchToThread, threadId, t]);
+
+  return null;
+};
 
 type ChatPageProps = {
   agentId: string;
+  entityId: string;
   fileId: string;
-  chatId: string;
+  threadId: string;
+  canUseAi: boolean;
+  isPortalAdmin: boolean;
+  isStandalone: boolean;
 };
 
-const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
+const ChatPage = ({
+  agentId,
+  entityId,
+  fileId,
+  threadId,
+  canUseAi,
+  isPortalAdmin,
+  isStandalone,
+}: ChatPageProps) => {
+  const { i18n } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
   const { headerOffset, headerHeight } = useFrameHeaderConfig();
 
-  const [attachmentFile, setAttachmentFile] = useState<Partial<TFile> | null>(
-    null,
-  );
-  const [isFileLoading, setIsFileLoading] = useState(!!fileId);
-  const [isChatReady, setIsChatReady] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!agentId) {
-      frameCallEvent({
-        event: "onAppError",
-        data: "agentId is required",
-      });
-      return;
-    }
-
+  React.useEffect(() => {
     frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
+    frameCallCommand("setIsLoaded");
+    if (!canUseAi) frameCallEvent({ event: "onNoAccess" });
+  }, [canUseAi]);
+
+  const getAgentRoomId = React.useCallback(() => {
+    if (!agentId) return null;
+
+    const id = Number(agentId);
+    return Number.isFinite(id) ? id : null;
   }, [agentId]);
 
-  useEffect(() => {
-    if (!fileId) return;
+  const chatEntityId = agentId || entityId || undefined;
 
-    let cancelled = false;
-
-    setIsFileLoading(true);
-
-    getFileInfo(fileId)
-      .then((file) => {
-        if (!cancelled) setAttachmentFile(file as unknown as Partial<TFile>);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch file info:", err);
-        frameCallEvent({
-          event: "onAppError",
-          data: String(err),
-        });
-      })
-      .finally(() => {
-        if (!cancelled) setIsFileLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [fileId]);
-
-  // Detect when Chat finishes internal initialization.
-  // ChatContainer sets data-testid="chat-container" (without "-loading" suffix)
-  // when isLoadingChat becomes false. We watch both attribute changes (normal
-  // transition) and childList (ChatCore may swap the entire ChatContainer element
-  // in the error/no-access path).
-  useEffect(() => {
-    const el = wrapperRef.current;
-    if (!el || !agentId) return;
-
-    const check = () =>
-      !!el.querySelector('[data-testid="chat-container"]');
-
-    if (check()) {
-      setIsChatReady(true);
-      return;
-    }
-
-    const observer = new MutationObserver(() => {
-      if (check()) {
-        setIsChatReady(true);
-        observer.disconnect();
-      }
-    });
-
-    observer.observe(el, {
-      subtree: true,
-      childList: true,
-      attributes: true,
-      attributeFilter: ["data-testid"],
-    });
-
-    // Fallback: if Chat gets stuck loading, reveal it after 15 s so the user
-    // can at least see whatever state it ended up in.
-    const timerId = window.setTimeout(() => {
-      if (!isChatReady) {
-        setIsChatReady(true);
-        observer.disconnect();
-      }
-    }, 15_000);
-
-    return () => {
-      observer.disconnect();
-      window.clearTimeout(timerId);
-    };
-  }, [agentId]);
-
-  const clearAttachmentFile = useCallback(() => setAttachmentFile(null), []);
-
-  if (!agentId) {
-    return null;
-  }
+  const frameInsets: React.CSSProperties | undefined =
+    headerOffset > 0 || headerHeight > 0
+      ? {
+          paddingInlineStart: headerOffset > 0 ? headerOffset : undefined,
+          paddingBlockStart: headerHeight > 0 ? headerHeight : undefined,
+        }
+      : undefined;
 
   return (
-    <div
-      ref={wrapperRef}
-      style={{ ...fullSize, position: "relative" }}
-    >
-      {headerOffset > 0 && (
-        <style>
-          {`.chat-header { padding-inline-start: ${headerOffset}px; }`}
-        </style>
-      )}
-      {headerHeight > 0 && (
-        <style>{`.chat-header { height: ${headerHeight}px; }`}</style>
-      )}
-      {!isChatReady && (
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 1,
-          }}
-        >
-          <Loader type={LoaderTypes.dualRing} size="40px" />
-        </div>
-      )}
-      <div
-        style={{
-          ...fullSize,
-          visibility: isChatReady ? "visible" : "hidden",
-        }}
+    <div className={styles.chatRoot} style={frameInsets}>
+      <AiAgentProviders
+        key={chatEntityId ?? "user-chat"}
+        theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
+        locale={i18n.language}
+        isStandalone={isStandalone}
+        canUseAi={canUseAi}
+        entityId={chatEntityId}
+        getAgentRoomId={getAgentRoomId}
       >
-        <Chat
-          agentId={agentId}
-          selectedModel=""
-          standalone
-          attachmentFile={attachmentFile}
-          clearAttachmentFile={clearAttachmentFile}
-          allowAttachFiles
-          allowSelectChat
-          isLoading={isFileLoading}
-          width="100%"
-          height="100%"
-          style={fullSize}
-        />
-      </div>
+        {canUseAi ? (
+          <ChatParamsBridge fileId={fileId} threadId={threadId} />
+        ) : null}
+        <div className={styles.chat}>
+          {canUseAi ? <ChatToolbar /> : null}
+          <div className={styles.chatBody}>
+            <NewChat
+              aiReady={canUseAi}
+              noAccessProps={{
+                standalone: isStandalone,
+                isPortalAdmin,
+              }}
+            />
+          </div>
+        </div>
+      </AiAgentProviders>
     </div>
   );
 };
 
-export default ChatPageClient;
+export default ChatPage;

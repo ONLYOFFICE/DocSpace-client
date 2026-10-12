@@ -36,7 +36,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableHeader, TTableColumn } from "@docspace/ui-kit/components/table";
+import { TableHeader, TTableColumn } from "@onlyoffice/apps-ui-kit/components/table";
 
 import { UsersTableHeaderProps } from "../../../../types";
 

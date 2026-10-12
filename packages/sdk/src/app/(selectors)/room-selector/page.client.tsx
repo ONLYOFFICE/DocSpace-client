@@ -41,12 +41,12 @@ import React, { useCallback, useEffect } from "react";
 import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
 import { getPrimaryLink } from "@docspace/shared/api/rooms";
-import RoomSelector from "@docspace/ui-kit/selectors/Room";
-import type { FolderDtoInteger } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
+import type { FolderDtoInteger } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
 import type { TGetRooms } from "@docspace/shared/api/rooms/types";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 
 import { getRoomsIcon } from "@/utils";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";

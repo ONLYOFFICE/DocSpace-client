@@ -71,19 +71,19 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ComboBox, TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { FileInput } from "@docspace/ui-kit/components/file-input";
+import { FileInput } from "@onlyoffice/apps-ui-kit/components/file-input";
 import { imageProcessing } from "@docspace/shared/utils/common";
-import { ButtonDelete } from "@docspace/ui-kit/components/image-editor";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { ButtonDelete } from "@onlyoffice/apps-ui-kit/components/image-editor";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 
-import { StyledWatermark } from "./StyledComponent";
+import styles from "../../CreateEditRoomDialog.module.scss";
 
 const scaleOptions = [
   { key: 100, label: "100" },
@@ -287,9 +287,14 @@ const ImageWatermark = ({
   };
 
   return (
-    <StyledWatermark
-      rotate={selectedRotate.key}
-      scale={selectedScale!.key / 100}
+    <div
+      className={styles.watermark}
+      style={
+        {
+          "--watermark-rotate": `${selectedRotate.key}deg`,
+          "--watermark-scale": `${selectedScale!.key / 100}`,
+        } as React.CSSProperties
+      }
     >
       {!selectedImageUrl ? (
         <FileInput
@@ -366,7 +371,7 @@ const ImageWatermark = ({
           </div>
         </div>
       ) : null}
-    </StyledWatermark>
+    </div>
   );
 };
 

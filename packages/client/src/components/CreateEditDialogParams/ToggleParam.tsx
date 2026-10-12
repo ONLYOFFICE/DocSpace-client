@@ -34,29 +34,10 @@
  */
 
 import React from "react";
-import styled from "styled-components";
 
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
-import { StyledParam } from "./StyledParam";
-
-const StyledToggleParam = styled(StyledParam)`
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 8px;
-  box-sizing: border-box;
-  max-width: 100%;
-
-  .set_room_params-info-description {
-    box-sizing: border-box;
-    max-width: 100%;
-  }
-
-  .set_room_params-toggle {
-    width: 28px;
-    min-width: 28px;
-  }
-`;
+import styles from "./CreateEditDialogParams.module.scss";
 
 type ToggleParamProps = {
   id: string;
@@ -76,7 +57,7 @@ const ToggleParam = ({
   onCheckedChange,
 }: ToggleParamProps) => {
   return (
-    <StyledToggleParam>
+    <div className={styles.toggleParam}>
       <div className="set_room_params-info">
         <div className="set_room_params-info-title">
           <div className="set_room_params-info-title-text">{title}</div>
@@ -91,7 +72,7 @@ const ToggleParam = ({
         dataTestId="create_edit_room_toggle"
         isDisabled={isDisabled}
       />
-    </StyledToggleParam>
+    </div>
   );
 };
 

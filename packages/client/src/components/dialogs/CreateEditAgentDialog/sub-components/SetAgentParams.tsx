@@ -34,14 +34,14 @@
  */
 
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { isMobile, mobile } from "@docspace/shared/utils";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { isMobile } from "@docspace/shared/utils";
+import styles from "../CreateEditAgentDialog.module.scss";
 
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 
 import { removeEmojiCharacters } from "@docspace/shared/utils";
 import TagHandler from "SRC_DIR/helpers/TagHandler";
@@ -51,84 +51,25 @@ import AvatarEditorDialog from "../../AvatarEditorDialog";
 import TagInput from "../../../TagInput";
 import InputParam from "../../../CreateEditDialogParams/InputParam";
 
-import ModelSettings from "../sub-components/Model";
+import ProfileSettings from "../sub-components/Profile";
 import InstructionsSettings from "../sub-components/Instructions";
 import MCPSettings from "../sub-components/MCP";
 import {
   TAgentIconParams,
   TAgentParams,
 } from "@docspace/shared/utils/aiAgents";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import { Nullable } from "@docspace/shared/types";
 import { TAgent, TAIConfig } from "@docspace/shared/api/ai/types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
-import CreateEditAgentStore from "SRC_DIR/store/CreateEditAgentStore";
-import { AgentDialogContext } from "SRC_DIR/helpers/enums";
-import { TLogo } from "@docspace/ui-kit/types";
+import { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import RoomQuota from "SRC_DIR/components/RoomQuota";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import type { TRoom } from "@docspace/shared//api/rooms/types";
-
-const StyledSetAgentParams = styled.div<{ disableImageRescaling?: boolean }>`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 22px;
-  margin-top: 20px;
-
-  .icon-editor_text {
-    margin-bottom: 6px;
-  }
-
-  .icon-editor {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: start;
-    gap: 16px;
-
-    ${(props) =>
-      props.disableImageRescaling &&
-      css`
-        margin-bottom: 24px;
-      `};
-  }
-
-  .logo-name-container {
-    display: flex;
-    align-items: end;
-    gap: 16px;
-
-    @media ${mobile} {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .room-params-icon,
-    .react-svg-icon {
-      min-width: 64px;
-      min-height: 64px;
-      @media ${mobile} {
-        min-width: 96px;
-        min-height: 96px;
-      }
-    }
-    .room-title {
-      font-size: 32px;
-      font-weight: 700;
-      line-height: 37px;
-      user-select: none;
-      @media ${mobile} {
-        font-size: 42px;
-        line-height: 56px;
-      }
-    }
-  }
-`;
 
 type TServerCover = {
   id: string;
@@ -153,7 +94,6 @@ type setAgentParamsProps = {
   setIsWrongTitle: (value: boolean) => void;
   onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onOwnerChange?: VoidFunction;
-  portalMcpServerId?: string;
   onClickAction?: () => void;
   selectedServers?: TSelectorItem[];
   setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
@@ -177,12 +117,9 @@ type setAgentParamsProps = {
   isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
-  recommendedModelForForms?: TAIConfig["recommendedModelForForms"];
-  isUserAdmin?: boolean;
-  openContext?: CreateEditAgentStore["openContext"];
 };
 
-const setAgentParams = ({
+const SetAgentParams = ({
   agentParams,
   setAgentParams,
   tagHandler,
@@ -212,20 +149,15 @@ const setAgentParams = ({
   onOwnerChange,
   isDefaultAIAgentsQuotaSet,
   infoPanelSelection,
-  portalMcpServerId,
   onClickAction,
   selectedServers,
   setSelectedServers,
   systemAiEnabled,
-  recommendedModelForForms,
-  isUserAdmin,
-  openContext,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
     "Translations",
     "Common",
-    "RoomLogoCover",
   ]);
 
   const [previewIcon, setPreviewIcon] = useState(agentParams.previewIcon);
@@ -285,7 +217,9 @@ const setAgentParams = ({
 
   React.useEffect(() => {
     setRoomCoverDialogProps?.({
-      ...roomCoverDialogProps,
+      // type-only assertion — the prop is always injected
+      // alongside setRoomCoverDialogProps; the original .js spread it as-is.
+      ...roomCoverDialogProps!,
       title: previewTitle,
     });
   }, []);
@@ -326,7 +260,7 @@ const setAgentParams = ({
       iconWasUpdated: agentParams.iconWasUpdated,
     };
 
-    const uploadedFile = await uploadFile?.(t, e);
+    const uploadedFile = (await uploadFile?.(t, e)) as File | null;
 
     setAgentParams({
       ...agentParams,
@@ -370,7 +304,9 @@ const setAgentParams = ({
     }
 
     setRoomCoverDialogProps?.({
-      ...roomCoverDialogProps,
+      // type-only assertion — the prop is always injected
+      // alongside setRoomCoverDialogProps; the original .js spread it as-is.
+      ...roomCoverDialogProps!,
       title: newValue,
     });
 
@@ -384,9 +320,15 @@ const setAgentParams = ({
     }
   };
 
-  const onSaveAvatar = () => {
+  // The editor dialog hands the cropped image out only through this callback
+  // (`onSave(image, preview)` in @onlyoffice/apps-ui-kit AvatarEditorDialog) — the
+  // `setPreview` prop below is not a live channel — so dropping `preview`
+  // here leaves the dialog without a cover until the agent is saved
+  // (Bug 83476).
+  const onSaveAvatar = (_image: unknown, preview?: string) => {
     setAvatarEditorDialogVisible?.(false);
     setCover?.();
+    if (preview) setPreviewIcon(preview);
   };
 
   const onDeleteAvatar = () => {
@@ -501,7 +443,9 @@ const setAgentParams = ({
   const inputTitle = `${t("Common:AgentName")}:`;
 
   return (
-    <StyledSetAgentParams disableImageRescaling={disableImageRescaling}>
+    <div
+      className={`${styles.setAgentParams}${disableImageRescaling ? ` ${styles.disableImageRescaling}` : ""}`}
+    >
       <div className="logo-name-container">
         {element}
         <InputParam
@@ -542,14 +486,11 @@ const setAgentParams = ({
         />
       ) : null}
 
-      <ModelSettings
+      <ProfileSettings
         agentParams={agentParams}
-        systemAiEnabled={systemAiEnabled}
-        recommendedModelForForms={recommendedModelForForms}
-        isAdmin={!!isUserAdmin}
-        openedFromChat={openContext === AgentDialogContext.Chat}
         setAgentParams={setAgentParams}
       />
+
       <InstructionsSettings
         agentParams={agentParams}
         setAgentParams={setAgentParams}
@@ -558,7 +499,6 @@ const setAgentParams = ({
       <MCPSettings
         setAgentParams={setAgentParams}
         agentParams={agentParams}
-        portalMcpServerId={portalMcpServerId}
         onClickAction={onClickAction}
         selectedServers={selectedServers}
         setSelectedServers={setSelectedServers}
@@ -593,7 +533,7 @@ const setAgentParams = ({
           />
         ) : null}
       </div>
-    </StyledSetAgentParams>
+    </div>
   );
 };
 
@@ -605,13 +545,9 @@ export default inject(
     infoPanelStore,
     avatarEditorDialogStore,
     currentQuotaStore,
-    userStore,
-    createEditAgentStore,
   }: TStore) => {
     const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
-    const { openContext } = createEditAgentStore;
-    const { folderFormValidation, maxImageUploadSize, aiConfig } =
-      settingsStore;
+    const { folderFormValidation, maxImageUploadSize, aiConfig } = settingsStore;
 
     const { bufferSelection } = filesStore;
     const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
@@ -634,7 +570,9 @@ export default inject(
       setCover,
     } = dialogsStore;
 
-    setCoverSelection(bufferSelection);
+    // bufferSelection is a FilesStore view-model item
+    // (TItem); erased cast adapts it to the raw-entity dialog param.
+    setCoverSelection(bufferSelection as Nullable<TRoom>);
 
     return {
       folderFormValidation,
@@ -656,11 +594,6 @@ export default inject(
       infoPanelSelection,
 
       systemAiEnabled: aiConfig?.systemAiEnabled,
-      recommendedModelForForms: aiConfig?.recommendedModelForForms,
-      isUserAdmin:
-        !!userStore?.user && (userStore.user.isOwner || userStore.user.isAdmin),
-      openContext,
     };
   },
-)(observer(setAgentParams));
-
+)(observer(SetAgentParams));

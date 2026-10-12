@@ -39,7 +39,7 @@ import { deletePortalHandler } from "./delete";
 import { restoreProgressHandler } from "./restoreProgress";
 import { tariffHandler, TARIFF_DUE_DATE_EXPIRED } from "./tariff";
 import { getPortalHandler, getPortalApiHandler } from "./getPortal";
-import { quotaHandler } from "./quota";
+import { freeQuotaHandler, quotaHandler } from "./quota";
 import { backupProgressHandler } from "./backupprogress";
 import { backupScheduleHandler } from "./backupshedule";
 import { licenseQuotaHandler } from "./licensequota";
@@ -47,6 +47,7 @@ import { portalPaymentQuotasHandler } from "./paymentQuotas";
 import { paymentCustomerInfoHandler } from "./paymentCustomerInfo";
 import { paymentAccountHandler } from "./paymentAccount";
 import { paymentUrlHandler } from "./paymentUrl";
+import { portalInfoHandler, portalUsersCountHandler } from "./portalInfo";
 
 export {
   suspendPortalHandler,
@@ -58,6 +59,7 @@ export {
   getPortalHandler,
   getPortalApiHandler,
   quotaHandler,
+  freeQuotaHandler,
   backupProgressHandler,
   backupScheduleHandler,
   licenseQuotaHandler,
@@ -65,6 +67,8 @@ export {
   paymentCustomerInfoHandler,
   paymentAccountHandler,
   paymentUrlHandler,
+  portalInfoHandler,
+  portalUsersCountHandler,
 };
 
 export const portalHandlers = (port: string) => [
@@ -83,4 +87,6 @@ export const portalHandlers = (port: string) => [
   paymentCustomerInfoHandler(port),
   paymentAccountHandler(port),
   paymentUrlHandler(port),
+  portalInfoHandler(port),
+  portalUsersCountHandler(port),
 ];

@@ -38,14 +38,14 @@ import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 import { TTranslation } from "@docspace/shared/types";
-import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { size, isMobileDevice } from "@docspace/shared/utils";
-import { type TData } from "@docspace/ui-kit/components/toast";
+import { type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { DeviceType } from "@docspace/shared/enums";
@@ -57,7 +57,6 @@ import { LearnMoreWrapper } from "../StyledSecurity";
 import InvitationLoader from "../sub-components/loaders/invitation-loader";
 import useSecurity from "../useSecurity";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const InvitationSettings = ({
   t,
@@ -259,9 +258,7 @@ const InvitationSettings = ({
     <>
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400" className={styles.contentText}>
-          {t("InvitationSettingsDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("InvitationSettingsDescription")}
         </Text>
 
         {invitationSettingsUrl ? (
@@ -296,7 +293,6 @@ const InvitationSettings = ({
               noSelect
             >
               {t("InviteViaContacts", {
-                productName: getBrandName("ProductName"),
                 sectionName: t("Common:Contacts"),
               })}
             </Text>
@@ -309,7 +305,6 @@ const InvitationSettings = ({
             className={styles.checkboxDescription}
           >
             {t("ContactsInviteNote", {
-              productName: getBrandName("ProductName"),
               sectionName: t("Common:Contacts"),
             })}
           </Text>
@@ -340,9 +335,7 @@ const InvitationSettings = ({
             lineHeight="16px"
             className={styles.checkboxDescription}
           >
-            {t("InvitationSettingsGuestsDescription", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("InvitationSettingsGuestsDescription")}
           </Text>
         </div>
       </div>

@@ -38,10 +38,12 @@ import classNames from "classnames";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 
 import FolderLocationIconSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import config from "PACKAGE_FILE";
@@ -62,14 +64,25 @@ const NewFilesPanelItemFileComponent = ({
   checkAndOpenLocationAction,
   markAsRead,
   openItemAction,
+  currentDeviceType,
+  setArticleOpen,
 
   displayFileExtension,
 }: NewFilesPanelItemFileProps) => {
   const icon = getIcon?.(24, item.fileExst);
 
+  const resolvedTitle = useResolvedFileTitle(item);
+
+  // On mobile the panel is opened from the article, which overlays the content
+  // and stays open on its own. Navigating away has to close it too.
+  const closeMobileArticle = () => {
+    if (currentDeviceType === DeviceType.mobile) setArticleOpen?.(false);
+  };
+
   const onOpenFileLocation = () => {
-    checkAndOpenLocationAction!(item);
+    checkAndOpenLocationAction!({ ...item, title: resolvedTitle });
     onClose();
+    closeMobileArticle();
   };
 
   const isFolder = !item.fileExst;
@@ -79,6 +92,7 @@ const NewFilesPanelItemFileComponent = ({
       openItemAction!({ ...item, isFolder: true });
       markAsRead!([item.id], []);
       onClose();
+      closeMobileArticle();
       return;
     }
 
@@ -109,7 +123,7 @@ const NewFilesPanelItemFileComponent = ({
           className="file-icon"
           logo={icon!}
           showDefault={false}
-          title={item.title}
+          title={resolvedTitle}
         />
         <Text
           noSelect
@@ -118,7 +132,7 @@ const NewFilesPanelItemFileComponent = ({
           fontWeight={600}
           lineHeight="16px"
         >
-          {item.title.replace(item.fileExst, "")}
+          {resolvedTitle.replace(item.fileExst, "")}
           {displayFileExtension ? (
             <span className="file-exst">{item.fileExst}</span>
           ) : null}
@@ -136,6 +150,7 @@ const NewFilesPanelItemFileComponent = ({
 
 export const NewFilesPanelItemFile = inject(
   ({
+    settingsStore,
     filesSettingsStore,
     filesActionsStore,
     filesStore,
@@ -144,6 +159,7 @@ export const NewFilesPanelItemFile = inject(
     const { checkAndOpenLocationAction, markAsRead, openItemAction } =
       filesActionsStore;
     const { openDocEditor } = filesStore;
+    const { currentDeviceType, setArticleOpen } = settingsStore;
 
     return {
       displayFileExtension,
@@ -152,6 +168,8 @@ export const NewFilesPanelItemFile = inject(
       markAsRead,
       openDocEditor,
       openItemAction,
+      currentDeviceType,
+      setArticleOpen,
     };
   },
 )(observer(NewFilesPanelItemFileComponent));

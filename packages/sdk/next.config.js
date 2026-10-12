@@ -36,6 +36,10 @@
 /** @type {import('next').NextConfig} */
 
 const path = require("path");
+const {
+  applyUiKitSourceMode,
+  refuseBuildFromSource,
+} = require("../../scripts/ui-kit-dev.cjs");
 const fs = require("fs");
 const os = require("os");
 
@@ -43,7 +47,7 @@ const os = require("os");
 const packagePath = path.resolve(__dirname, "package.json");
 const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
 
-const BannerPlugin = require("webpack").BannerPlugin;
+const { BannerPlugin, NormalModuleReplacementPlugin } = require("webpack");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
@@ -60,10 +64,20 @@ const version = pkg.version;
 const banner = getBanner(version);
 const isDev = process.env.NODE_ENV !== productionMode;
 
+// `next build` must come from the installed package; see scripts/ui-kit-dev.cjs.
+if (!isDev) refuseBuildFromSource(__dirname);
+
 const monorepoRoot = path.resolve(__dirname, "../..");
+// @onlyoffice/docspace-api-sdk is a dependency of @onlyoffice/apps-ui-kit
+// (installed from npm), not of this app directly --
+// resolve it starting from wherever ui-kit itself actually landed rather than
+// a hardcoded path.
+const uiKitDir = path.dirname(
+  require.resolve("@onlyoffice/apps-ui-kit/package.json"),
+);
 const docspaceApiSdkDir = path.dirname(
   require.resolve("@onlyoffice/docspace-api-sdk/package.json", {
-    paths: [path.resolve(__dirname, "../../libs/ui-kit")],
+    paths: [uiKitDir],
   }),
 );
 const docspaceApiSdkTraceGlob = `${path
@@ -75,8 +89,12 @@ const nextConfig = {
   basePath: "/sdk",
   outputFileTracingRoot: monorepoRoot,
   outputFileTracingIncludes: {
-    "/forms/**": ["./src/app/(forms)/_styles/*.scss"],
-    "/*": [docspaceApiSdkTraceGlob, "public/locales/*/*.json", "../../public/locales/*/Common.json"],
+    "/forms/**": ["./src/app/(forms)/_styles/*.scss", "./data.zip"],
+    "/*": [
+      docspaceApiSdkTraceGlob,
+      "public/locales/*/*.json",
+      "../../public/locales/*/Common.json",
+    ],
   },
   serverExternalPackages: [
     "nconf",
@@ -114,9 +132,36 @@ const nextConfig = {
       alias: {
         ...config.resolve?.alias,
         "@docspace/shared": path.resolve(__dirname, "../shared"),
-        "@docspace/ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
+      },
+      fallback: {
+        ...config.resolve?.fallback,
+        // hash-wasm dynamically tries to fall back to node:fs / node:crypto on
+        // server bundles. We're encryption-client-only — stub them out so the
+        // bundle doesn't pull in Node polyfills.
+        fs: false,
+        crypto: false,
       },
     };
+
+    const uiKitSrc = applyUiKitSourceMode(config, __dirname);
+
+    if (uiKitSrc) console.log(`ui-kit: serving source from ${uiKitSrc}`);
+    else {
+      // pnpm installs ui-kit once per peer set: this app declares ai-chat's
+      // optional peers and @docspace/shared does not, so the two get different
+      // copies, and a selector imported through shared would read another
+      // ApiContext than the ApiProvider this app mounts ("useApi must be used
+      // within an ApiProvider"). Resolving every ui-kit import from this app's
+      // directory keeps a single copy -- the webpack side of Vite's dedupe.
+      config.plugins.push(
+        new NormalModuleReplacementPlugin(
+          /^@onlyoffice\/apps-ui-kit(\/|$)/,
+          (resource) => {
+            resource.context = __dirname;
+          },
+        ),
+      );
+    }
 
     config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
 
@@ -146,6 +191,16 @@ const nextConfig = {
             firebase: {
               test: /[\\/](?:@firebase|firebase[\\/]compat)[\\/]/,
               name: "firebase-vendor",
+              chunks: "async",
+              priority: 30,
+              reuseExistingChunk: true,
+              enforce: true,
+            },
+            // Argon2 (hash-wasm) + HPKE only loaded inside (private). Async-only
+            // so the rooms-list view does not pay the ~200 KB cost on first paint.
+            encryption: {
+              test: /[\\/](?:hash-wasm|@hpke[\\/])[\\/]/,
+              name: "encryption-vendor",
               chunks: "async",
               priority: 30,
               reuseExistingChunk: true,

@@ -1,0 +1,332 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+import {
+  addCopySuffix,
+  decryptEncryptedItemToFile,
+  tagFileForCopy,
+} from "../encrypted-copy";
+import type { IdentityKeyPair } from "../../encryption/types";
+
+// TS lib.dom rejects Uint8Array<ArrayBufferLike> as BodyInit on some lib versions.
+const respond = (bytes: number | Uint8Array, init?: ResponseInit): Response => {
+  const body = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+  return new Response(body as unknown as BodyInit, init);
+};
+
+vi.mock("../../encryption/file-keys", () => ({
+  decryptFile: vi.fn(),
+  wipeDek: vi.fn(),
+}));
+vi.mock("../../encryption/room-file-access", () => ({
+  unwrapDekForCurrentUser: vi.fn(),
+}));
+vi.mock("../../../api/files", () => ({
+  getFileEncryptionAccess: vi.fn(),
+}));
+vi.mock("../../../api/privacy", () => ({
+  getRoomEncryptionKeys: vi.fn().mockResolvedValue([]),
+}));
+
+import { decryptFile, wipeDek } from "../../encryption/file-keys";
+import { getFileEncryptionAccess } from "../../../api/files";
+import { unwrapDekForCurrentUser } from "../../encryption/room-file-access";
+
+const ROOM_ID = 9100;
+
+const identity: IdentityKeyPair = {
+  publicKey: new Uint8Array(32),
+  privateKey: new Uint8Array(32),
+} as IdentityKeyPair;
+
+const baseItem = {
+  id: 1,
+  title: "fallback.docx",
+  viewUrl: "https://files/1/view",
+  contentType: "application/x-doc",
+};
+
+describe("encryptedCopy", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  describe("decryptEncryptedItemToFile — early throws (no crypto / network on bad input)", () => {
+    it("throws when getFileEncryptionAccess returns null", async () => {
+      vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
+        null as never,
+      );
+      await expect(
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
+      ).rejects.toThrow(/Encryption access info missing/);
+      expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
+      expect(wipeDek).not.toHaveBeenCalled();
+    });
+
+    it("throws when fileKeys is missing", async () => {
+      vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce({
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+      } as any);
+      await expect(
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
+      ).rejects.toThrow(/Encryption access info missing/);
+    });
+
+    it("throws when the current user has no entry in fileKeys", async () => {
+      vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce({
+        fileKeys: [{ userId: "other-user" }],
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+      } as any);
+      await expect(
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
+      ).rejects.toThrow(/no decrypt access/);
+      expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
+      expect(wipeDek).not.toHaveBeenCalled();
+    });
+
+    it("hasOwnEntry uses String() coercion on both sides", async () => {
+      vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce({
+        fileKeys: [{ userId: 42 }],
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+      } as any);
+      vi.stubGlobal(
+        "fetch",
+        vi
+          .fn()
+          .mockResolvedValue(respond(new Uint8Array([1, 2, 3]))),
+      );
+      vi.mocked(unwrapDekForCurrentUser).mockResolvedValueOnce(
+        new Uint8Array(32),
+      );
+      vi.mocked(decryptFile).mockResolvedValueOnce({
+        data: new Blob([new Uint8Array([9])]),
+        fileName: "ok.docx",
+      });
+
+      const out = await decryptEncryptedItemToFile(
+        baseItem,
+        "42",
+        identity,
+        ROOM_ID,
+      );
+      expect(out.name).toBe("ok.docx");
+    });
+  });
+
+  describe("decryptEncryptedItemToFile — fetch & decrypt", () => {
+    const validAccess = {
+      fileKeys: [{ userId: "u1" }],
+      userKeys: [],
+    } as const;
+
+    it("throws when the viewUrl fetch is not ok", async () => {
+      vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+        validAccess as any,
+      );
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue(new Response(null, { status: 403 })),
+      );
+
+      await expect(
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
+      ).rejects.toThrow(/Failed to fetch encrypted blob: 403/);
+      expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
+      expect(wipeDek).not.toHaveBeenCalled();
+    });
+
+    it("returns a File with the decrypted name and correct MIME on success", async () => {
+      vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+        validAccess as any,
+      );
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue(respond(16)),
+      );
+      vi.mocked(unwrapDekForCurrentUser).mockResolvedValueOnce(
+        new Uint8Array(32),
+      );
+      vi.mocked(decryptFile).mockResolvedValueOnce({
+        data: new Blob([new Uint8Array([5, 6])]),
+        fileName: "real.docx",
+      });
+
+      const file = await decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID);
+      expect(file.name).toBe("real.docx");
+      expect(file.type).toBe("application/x-doc");
+      expect(wipeDek).toHaveBeenCalledTimes(1);
+    });
+
+    it("falls back to item.title when the DSE3 header has no encryptedName", async () => {
+      vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+        validAccess as any,
+      );
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue(respond(16)),
+      );
+      vi.mocked(unwrapDekForCurrentUser).mockResolvedValueOnce(
+        new Uint8Array(32),
+      );
+      vi.mocked(decryptFile).mockResolvedValueOnce({
+        data: new Blob([new Uint8Array([5])]),
+        fileName: null,
+      });
+
+      const file = await decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID);
+      expect(file.name).toBe("fallback.docx");
+    });
+
+    it("wipes the DEK even if decryptFile throws", async () => {
+      vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+        validAccess as any,
+      );
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue(respond(16)),
+      );
+      vi.mocked(unwrapDekForCurrentUser).mockResolvedValueOnce(
+        new Uint8Array(32),
+      );
+      vi.mocked(decryptFile).mockRejectedValueOnce(
+        new Error("auth tag mismatch"),
+      );
+
+      await expect(
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
+      ).rejects.toThrow(/auth tag mismatch/);
+      expect(wipeDek).toHaveBeenCalledTimes(1);
+    });
+
+    it("does NOT wipe when the failure is BEFORE the DEK is unwrapped", async () => {
+      vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+        validAccess as any,
+      );
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue(respond(16)),
+      );
+      vi.mocked(unwrapDekForCurrentUser).mockRejectedValueOnce(
+        new Error("no access"),
+      );
+
+      await expect(
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
+      ).rejects.toThrow(/no access/);
+      expect(wipeDek).not.toHaveBeenCalled();
+    });
+
+    it("falls back contentType to octet-stream when item.contentType is missing", async () => {
+      vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+        validAccess as any,
+      );
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue(respond(8)),
+      );
+      vi.mocked(unwrapDekForCurrentUser).mockResolvedValueOnce(
+        new Uint8Array(32),
+      );
+      vi.mocked(decryptFile).mockResolvedValueOnce({
+        data: new Blob([new Uint8Array([1])]),
+        fileName: "x.bin",
+      });
+
+      const file = await decryptEncryptedItemToFile(
+        { ...baseItem, contentType: undefined },
+        "u1",
+        identity,
+        ROOM_ID,
+      );
+      expect(file.type).toBe("application/octet-stream");
+    });
+  });
+
+  describe("addCopySuffix", () => {
+    it("inserts ` (n)` before the last extension", () => {
+      expect(addCopySuffix("doc.pdf")).toBe("doc (1).pdf");
+      expect(addCopySuffix("doc.pdf", 3)).toBe("doc (3).pdf");
+    });
+
+    it("appends the suffix when there is no extension", () => {
+      expect(addCopySuffix("Makefile")).toBe("Makefile (1)");
+    });
+
+    it("treats leading-dot files as ext-less (dotIdx > 0)", () => {
+      expect(addCopySuffix(".env")).toBe(".env (1)");
+    });
+
+    it("splits on the LAST dot for multi-dot names", () => {
+      expect(addCopySuffix("archive.tar.gz")).toBe("archive.tar (1).gz");
+    });
+  });
+
+  describe("tagFileForCopy", () => {
+    it("mutates the file in place and returns the same reference", () => {
+      const f = new File([new Uint8Array(4)], "a.txt");
+      const tagged = tagFileForCopy(f, 42, {
+        roomType: 5,
+        isPrivate: true,
+      });
+      expect(tagged).toBe(f);
+      expect(tagged.parentFolderId).toBe(42);
+      expect(tagged.uploadContext).toEqual({
+        roomType: 5,
+        isPrivate: true,
+      });
+    });
+
+    it("supports string folder ids (some store paths use string ids)", () => {
+      const f = new File([new Uint8Array(4)], "a.txt");
+      const tagged = tagFileForCopy(f, "root-personal", {
+        isPrivate: false,
+      });
+      expect(tagged.parentFolderId).toBe("root-personal");
+      expect(tagged.uploadContext?.isPrivate).toBe(false);
+    });
+  });
+});

@@ -1,20 +1,20 @@
 {
   "key_path": "InvitationSettingsGuestsDescription",
-  "content": "Enable this option to allow all {{productName}} members to invite external guests to rooms.",
-  "content_en_sha1_hash": "fd538e3b4365662acfad838486a8e1b6925b6d53",
-  "created_at": "2025-05-26T07:15:51.100Z",
-  "updated_at": "2026-05-15T14:00:06.868Z",
+  "content": "Turn this on to let all members invite external guests to rooms.",
+  "content_en_sha1_hash": "c60b042014a0c0e8757dd6046a030e21b95beb60",
+  "created_at": "2026-08-31T18:23:41.446Z",
+  "updated_at": "2026-08-31T20:28:40.421Z",
   "comment": {
-    "text": "This is a description for a checkbox option in the portal settings. It explains that enabling the option allows all members to invite external guests to rooms. `{{productName}}` will be replaced with the product's brand name.",
+    "text": "Description for a checkbox in the Portal Settings security section, explaining the permission for members to invite external guests to rooms.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:23:44.982Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:28:40.421Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 343,
-      "context": "fontSize=\"12px\"\n fontWeight=\"400\"\n lineHeight=\"16px\"\n className={styles.checkboxDescription}\n >\n {t(\"InvitationSettingsGuestsDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </div>\n </div>",
+      "line_number": 338,
+      "context": "fontSize=\"12px\"\n fontWeight=\"400\"\n lineHeight=\"16px\"\n className={styles.checkboxDescription}\n >\n {t(\"InvitationSettingsGuestsDescription\")}\n </Text>\n </div>\n </div>\n \n <SaveCancelButtons",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

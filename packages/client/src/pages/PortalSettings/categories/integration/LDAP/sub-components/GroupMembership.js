@@ -36,12 +36,11 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 
 import LdapFieldComponent from "./LdapFieldComponent";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const FIELD_STYLE = { marginBottom: "0px" };
 
@@ -109,9 +108,7 @@ const GroupMembership = (props) => {
           dataTestId="group_membership_toggle_button"
         />
         <HelpButton
-          tooltipContent={t("LdapGroupMembershipTooltip", {
-            productName: getBrandName("ProductName"),
-          })}
+          tooltipContent={t("LdapGroupMembershipTooltip")}
           dataTestId="group_membership_help_button"
         />
       </div>

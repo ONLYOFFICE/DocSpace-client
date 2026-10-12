@@ -32,13 +32,10 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-import { Trans } from "react-i18next";
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 import type { TTranslation } from "../types";
 import { getUserTypeTranslation } from "./common";
 import { EmployeeType, RoomsType, ShareAccessRights } from "../enums";
-import { TFunction } from "i18next";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export type AccessOptionType = {
 	key: string | EmployeeType;
@@ -68,20 +65,9 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
 				aiAgent: t("Common:AIAgent"),
 			});
 		case None:
-			return (
-				<Trans
-					t={t as TFunction}
-					ns="Common"
-					i18nKey="RoleRoomAdminDescription"
-					components={{
-						1: <strong></strong>,
-					}}
-					values={{
-						sectionName: t("Common:Documents"),
-						agentSection: t("Common:AIAgents"),
-					}}
-				/>
-			) as unknown as string;
+			return t("Common:RoleRoomAdminDescription", {
+				sectionName: t("Common:Files"),
+			});
 		default:
 			return t("Common:RoleRoomManagerDescription");
 	}
@@ -94,20 +80,9 @@ const getUserDescription = (roomType: RoomsType, t: TTranslation) => {
 		case RoomsType.AIRoom:
 			return t("Common:RoleAIAgentContentCreatorDescription");
 		case None:
-			return (
-				<Trans
-					t={t as TFunction}
-					ns="Common"
-					i18nKey="RoleNewUserDescription"
-					components={{
-						1: <strong></strong>,
-					}}
-					values={{
-						agentSection: t("Common:AIAgents"),
-						aiAgent: t("Common:AIAgent"),
-					}}
-				/>
-			) as unknown as string;
+			return t("Common:RoleNewUserDescription", {
+				sectionName: t("Common:Files"),
+			});
 		default:
 			return t("Common:RoleContentCreatorDescription");
 	}
@@ -138,21 +113,9 @@ export const getAccessOptions = (
 		portalAdmin: {
 			key: EmployeeType.Admin,
 			label: getUserTypeTranslation(EmployeeType.Admin, t),
-			description: (
-				<Trans
-					t={t as TFunction}
-					ns="Common"
-					i18nKey="RolePortalAdminDescription"
-					components={{
-						1: <strong></strong>,
-					}}
-					values={{
-						productName: getBrandName("ProductName"),
-						sectionName: t("Common:Documents"),
-						agentSection: t("Common:AIAgents"),
-					}}
-				/>
-			) as unknown as string,
+			description: t("Common:RolePortalAdminDescription", {
+				sectionName: t("Common:Files"),
+			}),
 			...(!standalone && isNone && { quota: t("Common:Paid") }),
 			color: globalColors.favoritesStatus,
 			access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,
@@ -171,9 +134,7 @@ export const getAccessOptions = (
 			key: "roomManager",
 			label: t("Common:RoomManager"),
 			description: getRoomAdminDescription(roomType, t),
-			tooltip: t("UserMaxAvailableRoleWarning", {
-				productName: getBrandName("ProductName"),
-			}),
+			tooltip: t("Common:UserMaxAvailableRoleWarning"),
 			...(!standalone && isNone && { quota: t("Common:Paid") }),
 			color: globalColors.favoritesStatus,
 			access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,
@@ -183,9 +144,7 @@ export const getAccessOptions = (
 			key: "agentManager",
 			label: t("Common:AgentManager"),
 			description: getRoomAdminDescription(roomType, t),
-			tooltip: t("UserAgentMaxAvailableRoleWarning", {
-				productName: getBrandName("ProductName"),
-			}),
+			tooltip: t("Common:UserAgentMaxAvailableRoleWarning"),
 			...(!standalone && isNone && { quota: t("Common:Paid") }),
 			color: globalColors.favoritesStatus,
 			access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,
@@ -204,9 +163,7 @@ export const getAccessOptions = (
 			description: getUserDescription(roomType, t),
 			tooltip:
 				roomType === RoomsType.AIRoom
-					? t("GuestAgentMaxAvailableRoleWarning", {
-							productName: getBrandName("ProductName"),
-						})
+					? t("Common:GuestAgentMaxAvailableRoleWarning")
 					: undefined,
 			access: isNone ? EmployeeType.User : ShareAccessRights.Collaborator,
 			type: EmployeeType.User,

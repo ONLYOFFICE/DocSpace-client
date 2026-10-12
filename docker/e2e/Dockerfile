@@ -23,7 +23,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 # Install PNPM
-RUN npm install -g pnpm@10.33.0 && npm cache clean --force
+RUN npm install -g pnpm@12.4.1 && npm cache clean --force
 
 WORKDIR /app
 
@@ -31,7 +31,10 @@ WORKDIR /app
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
 # Copy package files first for better layer caching
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+# `*.tgz` is optional: ui-kit and ai-chat come from npm, but a locally packed
+# tarball at the repo root can be referenced as `file:../../<name>.tgz` for
+# local development. A glob matching nothing is fine next to real sources.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
 
 # Copy all package.json files for dependency installation
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
@@ -43,8 +46,6 @@ COPY packages/doceditor/package.json ./packages/doceditor/package.json
 COPY packages/sdk/package.json ./packages/sdk/package.json
 COPY packages/management/package.json ./packages/management/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
-COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
-COPY libs/ui-kit/*.tgz ./libs/ui-kit/
 
 # Install dependencies and clean cache in same layer
 RUN pnpm install --frozen-lockfile && \
@@ -59,8 +60,9 @@ COPY packages/doceditor/ ./packages/doceditor/
 COPY packages/sdk/ ./packages/sdk/
 COPY packages/management/ ./packages/management/
 COPY packages/shared/ ./packages/shared/
+# next.config.js requires scripts/ui-kit-dev.cjs at load time.
+COPY scripts/ ./scripts/
 COPY public/ ./public/
-COPY libs/ui-kit/ ./libs/ui-kit/
 
 # Build translations for all packages in single layer
 RUN pnpm --filter @docspace/client run build:translations && \

@@ -34,89 +34,45 @@
  */
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-import FilesFilter from "@docspace/shared/api/files/filter";
-import type { TSettings } from "@docspace/shared/api/settings/types";
-
-import { getFilesSettings, getFolder } from "@/api/files";
+import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
 import { getSettings } from "@/api/settings";
 import { getSelf } from "@/api/people";
-import { PAGE_COUNT } from "@/utils/constants";
 
 import DocsPage from "./page.client";
+import DocsOAuth from "./page.oauth.client";
+import {
+  loadPersonalFilesData,
+  type PersonalFilesDeps,
+} from "./loadData";
 
-const serializeFilter = (filter: FilesFilter) => {
-  const params = new URLSearchParams();
-
-  const entries: [string, string | number | null | undefined][] = [
-    ["folder", filter.folder],
-    ["page", filter.page],
-    ["pageCount", filter.pageCount],
-    ["sortBy", filter.sortBy],
-    ["sortOrder", filter.sortOrder],
-    ["filterType", filter.filterType?.toString()],
-    ["search", filter.search],
-    ["key", filter.key],
-  ];
-
-  for (const [key, value] of entries) {
-    if (value !== undefined && value !== null && value !== "") {
-      params.set(key, String(value));
-    }
-  }
-
-  return params.toString();
-};
+const ssrDeps = {
+  getFoldersTree,
+  getFolder,
+  getFilesSettings,
+  getSettings,
+  getSelf,
+} as unknown as PersonalFilesDeps;
 
 export default async function Docs({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string>>;
 }) {
-  const cookieStore = await cookies();
-  const authToken = cookieStore.get("asc_auth_key")?.value || "";
   const params = await searchParams;
 
-  const filter = FilesFilter.getDefault();
-  filter.folder = params.folder || "@my";
-  filter.pageCount = params.pageCount ? Number(params.pageCount) : PAGE_COUNT;
-  if (params.page) filter.page = Math.max(0, Number(params.page) - 1);
-  if (params.sortBy) filter.sortBy = params.sortBy as typeof filter.sortBy;
-  if (params.sortOrder) filter.sortOrder = params.sortOrder as typeof filter.sortOrder;
-  if (params.search) filter.search = params.search;
-
-  const filesFilter = serializeFilter(filter);
-
-  let filesSettings;
-  let folderData;
-  let portalSettings;
-  let user;
-
-  try {
-    [filesSettings, folderData, portalSettings, user] = await Promise.all([
-      getFilesSettings(),
-      getFolder(filter.folder, filter),
-      getSettings(),
-      getSelf(),
-    ]);
-  } catch (error) {
-    throw new Error(
-      `Failed to load docs page data: ${error instanceof Error ? error.message : String(error)}`,
-    );
+  if (params.auth === "oauth") {
+    return <DocsOAuth params={params} />;
   }
 
-  if (!filesSettings || !portalSettings) {
-    throw new Error("Failed to load required settings");
-  }
+  const cookieStore = await cookies();
+  const authToken = cookieStore.get("asc_auth_key")?.value || "";
 
-  return (
-    <DocsPage
-      authToken={authToken}
-      filesSettings={filesSettings}
-      folderData={folderData}
-      portalSettings={portalSettings as TSettings}
-      filesFilter={filesFilter}
-      user={user}
-    />
-  );
+  const result = await loadPersonalFilesData(ssrDeps, params);
+
+  if (!result) throw new Error("Failed to load required settings");
+  if ("redirectTo" in result) redirect(result.redirectTo);
+
+  return <DocsPage authToken={authToken} {...result.data} />;
 }

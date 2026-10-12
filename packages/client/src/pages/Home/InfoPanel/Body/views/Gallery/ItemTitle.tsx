@@ -40,15 +40,15 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 import classNames from "classnames";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   ContextMenu,
   ContextMenuRefType,
-} from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/ui-kit/components/context-menu-button";
+} from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 
 import OformsStore from "SRC_DIR/store/OformsStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
@@ -59,11 +59,7 @@ import commonStyles from "../../helpers/Common.module.scss";
 import styles from "./Gallery.module.scss";
 
 type ItemTitleProps = {
-  gallerySelected:
-    | OformsStore["gallerySelected"]
-    | {
-        attributes: { name_form: string };
-      };
+  gallerySelected: OformsStore["gallerySelected"];
   getIcon?: FilesSettingsStore["getIcon"];
   currentColorScheme?: SettingsStore["currentColorScheme"];
   getFormGalleryContextOptions?: ContextOptionsStore["getFormGalleryContextOptions"];
@@ -110,7 +106,7 @@ const ItemTitle = ({
         src={getIcon?.(32, currentExtensionGallery) ?? ""}
       />
       <Text className={classNames(styles.select, "text")}>
-        {gallerySelected?.attributes?.name_form}
+        {gallerySelected?.title}
       </Text>
 
       <Text

@@ -42,7 +42,7 @@ import type { TFile, TFileLink, TFolder } from "../../api/files/types";
 import type { LinkParamsType, TAvailableShareRights } from "../../types";
 import type { ShareAccessRights } from "../../enums";
 
-import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import type { TUser } from "../../api/people/types";
 import type { TGroup } from "../../api/groups/types";
 import type { RoomMember } from "../../api/rooms/types";

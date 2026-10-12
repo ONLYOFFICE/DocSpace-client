@@ -40,12 +40,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
+import { now, parseToDateTime, isAfter } from "@onlyoffice/apps-ui-kit/utils/date";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 
-import StyledCertificatesTable from "../styled-containers/StyledCertificatesTable";
+import certTableStyles from "../styled-containers/StyledCertificatesTable.module.scss";
 
 const CertificatesTable = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Common"]);
@@ -131,7 +131,7 @@ const CertificatesTable = (props) => {
   };
 
   return (
-    <StyledCertificatesTable>
+    <div className={certTableStyles.styledCertificatesTable}>
       <div className="body">
         {prefix === "idp"
           ? idpCertificates.map((cert, index) => renderRow(cert, index))
@@ -141,7 +141,7 @@ const CertificatesTable = (props) => {
           ? spCertificates.map((cert, index) => renderRow(cert, index))
           : null}
       </div>
-    </StyledCertificatesTable>
+    </div>
   );
 };
 

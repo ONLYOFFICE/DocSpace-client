@@ -36,21 +36,19 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import {
-  StyledDiagramComponent,
-  StyledFolderTagColor,
-  StyledFolderTagSection,
-} from "../StyledComponent";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import styles from "../StyledComponent.module.scss";
 
 const calculateSize = (size, common) => {
   if (common === -1) return 0;
 
   return (size * 100) / common;
 };
+
+const MIN_USED_SHARE = 25;
 
 const getTags = (
   t,
@@ -60,41 +58,39 @@ const getTags = (
   maxTotalSizeByQuota,
   usedPortalSpace,
 ) => {
-  const array = [];
   const colors = [
     globalColors.mainBlueLight,
     globalColors.secondGreen,
     globalColors.secondOrange,
     globalColors.mainYellow,
+    globalColors.purple,
     globalColors.coralPink,
   ];
 
-  let i = 0;
   let commonSize = standalone ? tenantCustomQuota : maxTotalSizeByQuota;
 
   if (standalone && tenantCustomQuota < usedPortalSpace)
     commonSize = usedPortalSpace;
 
-  Object.keys(catalogs).forEach((key) => {
-    const item = catalogs[key];
-    const { usedSpace, title } = item;
+  const items = Object.values(catalogs).map(({ usedSpace, title }, i) => ({
+    name: title,
+    color: colors[i],
+    share: calculateSize(usedSpace, commonSize),
+    size: getConvertedSize(t, usedSpace),
+  }));
 
-    let percentageSize = calculateSize(usedSpace, commonSize);
+  const usedShare = items.reduce((sum, item) => sum + item.share, 0);
+  const scale =
+    usedShare > 0 && usedShare < MIN_USED_SHARE
+      ? MIN_USED_SHARE / usedShare
+      : 1;
+
+  return items.map(({ share, ...item }) => {
+    let percentageSize = share * scale;
     if (percentageSize < 0.05 && percentageSize !== 0) percentageSize = 0.5;
 
-    const size = getConvertedSize(t, usedSpace);
-
-    array.push({
-      name: title,
-      color: colors[i],
-      percentageSize,
-      size,
-    });
-
-    i++;
+    return { ...item, percentageSize };
   });
-
-  return array;
 };
 const Diagram = (props) => {
   const {
@@ -120,14 +116,24 @@ const Diagram = (props) => {
   const hidingSlider = standalone && tenantCustomQuota === -1;
 
   return (
-    <StyledDiagramComponent maxWidth={maxWidth}>
+    <div
+      className={styles.diagramComponent}
+      style={{ "--diagram-slider-max-width": `${maxWidth}px` }}
+    >
       {!hidingSlider ? (
         <div className="diagram_slider">
           {elementsTags.map((tag) => (
-            <StyledFolderTagSection
-              width={tag.percentageSize}
+            <div
               key={tag.name}
-              color={tag.color}
+              className={styles.folderTagSection}
+              style={{
+                background: tag.color,
+                width: `${tag.percentageSize}%`,
+                borderInlineEnd:
+                  tag.percentageSize !== 0
+                    ? "1px solid var(--settings-payment-bg-color)"
+                    : undefined,
+              }}
             />
           ))}
         </div>
@@ -135,13 +141,16 @@ const Diagram = (props) => {
       <div className="diagram_description">
         {elementsTags.map((tag) => (
           <div className="diagram_folder-tag" key={tag.name}>
-            <StyledFolderTagColor color={tag.color} />
+            <div
+              className={styles.folderTagColor}
+              style={{ background: tag.color }}
+            />
             <Text fontWeight={600}>{tag.name}</Text>:
             <Text className="tag_text">{tag.size}</Text>
           </div>
         ))}
       </div>
-    </StyledDiagramComponent>
+    </div>
   );
 };
 

@@ -34,7 +34,7 @@
  */
 
 import { useState, useEffect } from "react";
-import { TableHeader } from "@docspace/ui-kit/components/table";
+import { TableHeader } from "@onlyoffice/apps-ui-kit/components/table";
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -90,7 +90,7 @@ const WebhookTableHeader = (props) => {
   const authorBlock = isAdmin
     ? {
         key: "Author",
-        title: t("Files:ByAuthor"),
+        title: t("Common:ByAuthor"),
         enable: true,
         resizable: true,
         onChange: onColumnChange,
@@ -152,3 +152,4 @@ export default inject(({ userStore }) => {
     isAdmin: userStore.user.isAdmin || userStore.user.isOwner,
   };
 })(observer(WebhookTableHeader));
+

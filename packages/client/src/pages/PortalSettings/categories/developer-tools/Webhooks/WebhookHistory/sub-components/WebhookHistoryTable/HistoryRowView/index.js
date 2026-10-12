@@ -33,33 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
 import { useParams } from "react-router";
 import { inject, observer } from "mobx-react";
-import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
+import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
-import { RowContainer } from "@docspace/ui-kit/components/rows";
+import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryRow from "./HistoryRow";
 
-const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
-  margin-top: 12px;
-
-  .row-list-item {
-    cursor: pointer;
-    padding-inline-end: 16px;
-  }
-  .row-item::after {
-    bottom: -3px;
-  }
-
-  .row-list-item:has(.selected-row-item) {
-    background-color: ${(props) =>
-      props.theme.client.settings.webhooks.historyRowBackground};
-  }
-`;
+import styles from "../../../WebhookHistory.styled.module.scss";
 
 const HistoryRowView = (props) => {
   const {
@@ -87,7 +70,8 @@ const HistoryRowView = (props) => {
   };
 
   return (
-    <StyledRowContainer
+    <RowContainer
+      className={styles.historyRowContainer}
       filesLength={historyItems.length}
       fetchMoreFiles={fetchMoreFiles}
       hasMoreFiles={hasMoreItems}
@@ -103,7 +87,7 @@ const HistoryRowView = (props) => {
           sectionWidth={sectionWidth}
         />
       ))}
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 

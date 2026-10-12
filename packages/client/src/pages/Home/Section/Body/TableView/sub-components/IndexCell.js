@@ -33,21 +33,24 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { StyledIndexCell } from "./CellStyles";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+
+import styles from "./CellStyles.module.scss";
 
 const IndexCell = ({ item, sideColor }) => {
   const { order } = item;
 
   return (
-    <StyledIndexCell
+    <Text
       color={sideColor}
       fontSize="12px"
       fontWeight={600}
       title={order}
+      className={styles.styledIndexCell}
       style={{ marginRight: 0 }}
     >
       {order}
-    </StyledIndexCell>
+    </Text>
   );
 };
 

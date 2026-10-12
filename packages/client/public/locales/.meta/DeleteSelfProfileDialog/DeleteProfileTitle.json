@@ -3,18 +3,18 @@
   "content": "Disable account",
   "content_en_sha1_hash": "198562d776cf89feb842e248f463dff4797e7cd5",
   "created_at": "2025-05-19T21:30:56.638Z",
-  "updated_at": "2026-05-15T14:00:06.675Z",
+  "updated_at": "2026-08-14T14:58:32.712Z",
   "comment": {
-    "text": "This is the title of a dialog box that appears when a user attempts to disable their account or the owner's account.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:06:12.304Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "This is the title of a dialog box that appears when a user attempts to disable their account or the owner's account. Warning for translators: the key name says \"delete profile\", but the dialog disables the account and does not delete it. Translate the value, not the key name.",
+    "is_auto": false,
+    "updated_at": "2026-08-17T00:00:00.000Z",
+    "model": null
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteOwnerProfileDialog/index.js",
-      "line_number": 60,
-      "context": "console.log(\"DeleteOwnerProfileDialog render\");\n const { t, tReady, visible, onClose } = this.props;\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteOwnerRestrictionText\", {\n productName: getBrandName(\"ProductName\"),\n })}",
+      "line_number": 59,
+      "context": "console.log(\"DeleteOwnerProfileDialog render\");\n const { t, tReady, visible, onClose } = this.props;\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteOwnerRestrictionText\")}\n </Text>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {

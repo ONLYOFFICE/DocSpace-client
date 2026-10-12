@@ -37,7 +37,7 @@ import { observer, inject } from "mobx-react";
 import React, { useEffect, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { mapCulturesToArray } from "@docspace/shared/utils/cultures";
 
 interface ComponentWithCultureNamesProps {

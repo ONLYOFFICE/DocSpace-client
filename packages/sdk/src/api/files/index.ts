@@ -33,8 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { headers } from "next/headers";
-
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import {
 	TFilesSettings,
@@ -50,7 +48,6 @@ import {
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { TValidateShareRoom } from "@docspace/shared/api/rooms/types";
 import { FolderType } from "@docspace/shared/enums";
-import { SHARE_KEY_HEADER } from "@/utils/constants";
 import { logger } from "@/../logger.mjs";
 
 export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
@@ -60,7 +57,7 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
 		const [req] = await createRequest([`/files/settings`], [["", ""]], "GET");
 
 		const res = await fetch(req, {
-			next: { revalidate: 900 },
+			cache: "no-store",
 			signal: AbortSignal.timeout(8000),
 		});
 
@@ -88,7 +85,7 @@ export async function getFoldersTree(): Promise<TFolder[]> {
 		);
 
 		const res = await fetch(req, {
-			next: { revalidate: 300 },
+			cache: "no-store",
 			signal: AbortSignal.timeout(8000),
 		});
 
@@ -153,10 +150,6 @@ export async function getFolder(
 	logger.debug(`Start GET /files/params`);
 
 	try {
-		const hdrs = await headers();
-
-		const shareKey = hdrs.get(SHARE_KEY_HEADER);
-
 		let params = folderIdParam;
 		let folderId = folderIdParam;
 
@@ -170,10 +163,9 @@ export async function getFolder(
 			params = `${folderId}?${filter.toApiUrlParams()}`;
 		}
 
-		const shareHeader: [string, string] =
-			share || shareKey
-				? ["Request-Token", share || shareKey || ""]
-				: ["", ""];
+		const shareHeader: [string, string] = share
+			? ["Request-Token", share]
+			: ["", ""];
 
 		logger.debug(`Start GET /files/${params}`);
 
@@ -187,7 +179,7 @@ export async function getFolder(
 		);
 
 		const res = await fetch(req, {
-			next: { revalidate: 300 },
+			cache: "no-store",
 			signal: AbortSignal.timeout(8000),
 		});
 
@@ -226,7 +218,7 @@ export async function getFolderInfo(
 		);
 
 		const res = await fetch(req, {
-			next: { revalidate: 300 },
+			cache: "no-store",
 			signal: AbortSignal.timeout(8000),
 		});
 
@@ -258,7 +250,7 @@ export async function validateShareFolder(share: string) {
 		);
 
 		const res = await fetch(req, {
-			next: { revalidate: 300 },
+			cache: "no-store",
 			signal: AbortSignal.timeout(8000),
 		});
 

@@ -1,14 +1,14 @@
 {
   "key_path": "LdapSyncDescription",
-  "content": "Sync LDAP data is a way to synchronize data changes between your portal and the LDAP server. Enable the ‘Auto Sync’ option and set a time period to automatically update the information.",
-  "content_en_sha1_hash": "d74da14d2a38d2e42dac8606b14ba3b7e3528973",
-  "created_at": "2025-05-19T21:30:54.313Z",
-  "updated_at": "2026-05-15T14:00:06.851Z",
+  "content": "Keep your data up to date with changes from your LDAP server. Turn on 'Auto sync' and set a schedule to update automatically.",
+  "content_en_sha1_hash": "1271e8c8ffb9b802541182e3a3ee48a291c9f264",
+  "created_at": "2026-08-31T18:23:43.869Z",
+  "updated_at": "2026-08-31T20:01:14.049Z",
   "comment": {
-    "text": "This is a descriptive text explaining the purpose of LDAP data synchronization. It appears below the \"Sync LDAP data\" heading in the LDAP integration settings.",
+    "text": "Description text in the LDAP integration settings explaining the LDAP synchronization process and the auto-sync scheduling feature.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:16:34.342Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:01:14.049Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

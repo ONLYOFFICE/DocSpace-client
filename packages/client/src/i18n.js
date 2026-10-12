@@ -38,7 +38,7 @@ import { initReactI18next } from "react-i18next";
 import Backend from "@docspace/shared/utils/i18next-http-backend";
 import config from "PACKAGE_FILE";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 
 import {
   loadLanguagePath,
@@ -77,10 +77,6 @@ newInstance
 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
-      format(value, format) {
-        if (format === "lowercase") return value.toLowerCase();
-        return value;
-      },
     },
 
     ns: [
@@ -89,7 +85,6 @@ newInstance
       "InviteDialog",
       "FormGallery",
       "DeleteDialog",
-      "EmptyTrashDialog",
       "ConvertDialog",
       "CreateEditRoomDialog",
       "PortalUnavailable",
@@ -97,8 +92,8 @@ newInstance
       "Files",
       "Errors",
       "Translations",
-      "FormFillingTipsDialog",
       "Settings",
+      "DocsConnect",
     ],
 
     backend: {
@@ -120,3 +115,4 @@ newInstance
   });
 
 export default newInstance;
+

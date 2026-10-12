@@ -39,16 +39,15 @@ import { useState, useEffect, useCallback } from "react";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { QuotaForm } from "../../components/quota-form";
 import { setTenantQuotaSettings } from "../../api/settings";
 
 import { ChangeStorageQuotaDialogProps } from "./ChangeStorageQuotaDialog.types";
 import styles from "./ChangeStorageQuotaDialog.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const ChangeStorageQuotaDialog = ({
   initialSize,
@@ -149,12 +148,8 @@ export const ChangeStorageQuotaDialog = ({
       <ModalDialog.Body>
         <Text className={styles.description}>
           {isDisableQuota
-            ? t("Common:TurnOffDiskSpaceLimit", {
-                productName: getBrandName("ProductName"),
-              })
-            : t("Common:SetDiskSpaceQuota", {
-                productName: getBrandName("ProductName"),
-              })}
+            ? t("Common:TurnOffDiskSpaceLimit")
+            : t("Common:SetDiskSpaceQuota")}
         </Text>
         {!isDisableQuota ? (
           <QuotaForm

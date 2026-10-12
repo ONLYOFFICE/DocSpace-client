@@ -36,22 +36,21 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { EmailInput } from "@docspace/ui-kit/components/email-input";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { EmailInput } from "@onlyoffice/apps-ui-kit/components/email-input";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import {
 	InputSize,
 	InputType,
 	TextInput,
-} from "@docspace/ui-kit/components/text-input";
-import { TValidate } from "@docspace/ui-kit/components/email-input";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 
 import { DEFAULT_EMAIL_TEXT } from "@/utils/constants";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface IEmailContainer {
 	emailFromInvitation?: string;
@@ -119,7 +118,6 @@ const EmailContainer = ({
 						defaults={DEFAULT_EMAIL_TEXT}
 						values={{
 							email: emailFromInvitation,
-							productName: getBrandName("ProductName"),
 						}}
 						components={{
 							1: (

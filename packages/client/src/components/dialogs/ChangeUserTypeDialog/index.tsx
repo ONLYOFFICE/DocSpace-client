@@ -36,13 +36,13 @@
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
 import { getChangeTypeKey } from "./getChangeTypeKey";
@@ -98,7 +98,7 @@ const ChangeUserTypeDialog = ({
   const translationValues = {
     userName: isSingleUser ? userNames[0] : undefined,
     membersSection: t("Common:Members"),
-    documentsSection: t("Common:MyDocuments"),
+    documentsSection: t("Common:Files"),
     productName: getBrandName("ProductName"),
     secondType,
   };
@@ -157,7 +157,7 @@ const ChangeUserTypeDialog = ({
                 i18nKey="PersonalDataDeletion"
                 ns="ChangeUserTypeDialog"
                 t={t}
-                values={{ sectionName: t("Common:MyDocuments") }}
+                values={{ sectionName: t("Common:Files") }}
                 components={{
                   1: <span style={{ fontWeight: 600 }} />,
                 }}
@@ -168,7 +168,7 @@ const ChangeUserTypeDialog = ({
                   i18nKey="DataReassignmentWithFilesDeletion"
                   ns="ChangeUserTypeDialog"
                   t={t}
-                  values={{ sectionName: t("Common:MyDocuments") }}
+                  values={{ sectionName: t("Common:Files") }}
                   components={{
                     1: <span style={{ fontWeight: 600 }} />,
                   }}
@@ -221,7 +221,6 @@ const ChangeUserTypeDialog = ({
               i18nKey="ChangeUserTypeNote"
               ns="ChangeUserTypeDialog"
               t={t}
-              values={{ productName: getBrandName("ProductName") }}
               components={{
                 1: <span style={{ fontWeight: 600 }} />,
               }}

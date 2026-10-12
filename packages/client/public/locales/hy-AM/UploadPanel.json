@@ -1,6 +1,10 @@
 {
   "HideInput": "Թաքցնել",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} / {{total}}</0> վերբեռնված: Պահեստի սահմանաչափը գերազանցված է — <1>տեսնել մանրամասները</1>:",
+  "QuotaExceededTooltip": "Պահեստի սահմանաչափը գերազանցված է: Ազատեք տարածք կամ թարմացրեք ձեր պլանը, ապա կրկնակի փորձեք:",
   "Ready": "Կատարված",
+  "RetryAfterQuotaUpgrade": "Կրկնել փորձը սահմանաչափի թարմացումից հետո",
+  "RetryUpload": "Կրկնել",
   "UploadingAndConversion": "Վերբեռնում և փոխարկում",
   "UploadingError": "Վերբեռնման սխալ"
 }

@@ -34,143 +34,36 @@
  */
 
 import { useEffect, useState } from "react";
-import { Text } from "@docspace/ui-kit/components/text";
-// import { TextInput } from "@docspace/ui-kit/components/text-input";
-// import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import styled, { useTheme } from "styled-components";
-import { Button } from "@docspace/ui-kit/components/button";
+import classNames from "classnames";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-campaign";
-// import { toastr } from "@docspace/ui-kit/components/toast";
-import { mobile, tablet } from "@docspace/shared/utils";
-import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
-import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
+import { AuditReportFormat } from "@docspace/shared/enums";
 
-// const StyledTextInput = styled(TextInput)`
-//   margin-top: 4px;
-//   margin-bottom: 24px;
-//   width: 350px;
+import styles from "./HistoryMainContent.module.scss";
 
-//   @media ${mobile} {
-//     width: 100%;
-//   }
-// `;
+// The server cuts an XLSX report at 200,000 rows; CSV carries every event.
+const reportFormatOptions = [
+  { key: AuditReportFormat.Xlsx, label: "XLSX" },
+  { key: AuditReportFormat.Csv, label: "CSV" },
+];
 
-const MainContainer = styled.div`
-  width: 100%;
+const REPORT_FORMAT_STORAGE_KEY = "auditReportFormat";
 
-  .main-wrapper {
-    max-width: 700px;
-  }
+const getInitialReportFormat = () => {
+  const savedFormat = getFromSessionStorage(REPORT_FORMAT_STORAGE_KEY);
 
-  .paid-badge {
-    cursor: auto;
-    margin-bottom: 8px;
-    margin-inline-start: -2px;
-  }
-
-  .login-history-description {
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
-    padding-bottom: 24px;
-  }
-
-  .save-cancel {
-    padding: 0;
-    position: static;
-
-    .buttons-flex {
-      padding: 0;
-    }
-  }
-
-  .login-subheader {
-    font-size: 13px;
-    color: ${(props) =>
-      props.theme.client.settings.security.loginHistory.subheaderColor};
-  }
-
-  .latest-text {
-    font-size: 13px;
-    padding: 20px 0 16px;
-  }
-
-  .storage-label {
-    font-weight: 600;
-  }
-
-  .content-wrapper {
-    margin-top: 16px;
-    margin-bottom: 24px;
-    .table-container_header {
-      position: absolute;
-      z-index: 0;
-    }
-
-    .history-row-container {
-      max-width: 700px;
-    }
-  }
-
-  ${(props) => props.isSettingNotPaid && UnavailableStyles}
-`;
-
-const DownLoadWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  padding-block: 16px 30px;
-  position: sticky;
-  bottom: 0;
-  margin-top: 32px;
-  background-color: ${({ theme }) => theme.backgroundColor};
-
-  @media ${mobile} {
-    position: fixed;
-    padding-inline: 16px;
-    inset-inline: 0;
-  }
-
-  .download-report_button {
-    width: auto;
-    height: auto;
-    font-size: 13px;
-    line-height: 20px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-
-    @media ${tablet} {
-      font-size: 14px;
-      line-height: 16px;
-      padding-top: 11px;
-      padding-bottom: 11px;
-    }
-
-    @media ${mobile} {
-      width: 100%;
-    }
-  }
-
-  .download-report_description {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-
-    height: 16px;
-
-    margin: 0;
-    color: ${(props) =>
-      props.theme.client.settings.security.auditTrail
-        .downloadReportDescriptionColor};
-  }
-
-  @media ${mobile} {
-    flex-direction: column-reverse;
-  }
-`;
+  return (
+    reportFormatOptions.find((option) => option.key === savedFormat) ||
+    reportFormatOptions[0]
+  );
+};
 
 const HistoryMainContent = (props) => {
   const {
@@ -191,6 +84,7 @@ const HistoryMainContent = (props) => {
 
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
   const [auditLifeTime, setAuditLifeTime] = useState(String(lifetime) || "180");
+  const [reportFormat, setReportFormat] = useState(getInitialReportFormat);
 
   const theme = useTheme();
 
@@ -223,15 +117,24 @@ const HistoryMainContent = (props) => {
     saveToSessionStorage("storagePeriod", newSettings);
   }, [loginLifeTime, auditLifeTime]);
 
+  const onSelectReportFormat = (option) => {
+    setReportFormat(option);
+    saveToSessionStorage(REPORT_FORMAT_STORAGE_KEY, option.key);
+  };
+
   const handleMouseDown = (e) => {
     if (e.button === 0 || e.button === 1) {
-      getReport();
+      getReport(reportFormat.key);
       e.preventDefault();
     }
   };
 
   return (
-    <MainContainer isSettingNotPaid={isSettingNotPaid}>
+    <div
+      className={classNames(styles["main-container"], {
+        [styles.unavailable]: isSettingNotPaid,
+      })}
+    >
       <TwoFactorCampaignBanner
         tfaEnabled={tfaEnabled}
         currentColorScheme={currentColorScheme}
@@ -315,7 +218,7 @@ const HistoryMainContent = (props) => {
         )} */}
       </div>
       {content}
-      <DownLoadWrapper>
+      <div className={styles["download-wrapper"]}>
         <Button
           className="download-report_button"
           dataTestId={
@@ -331,11 +234,28 @@ const HistoryMainContent = (props) => {
           isDisabled={isSettingNotPaid}
           isLoading={isLoadingDownloadReport}
         />
+        <ComboBox
+          className="download-report_format"
+          dataTestId={
+            loginHistory
+              ? "login_history_report_format_combobox"
+              : "audit_trail_report_format_combobox"
+          }
+          options={reportFormatOptions}
+          selectedOption={reportFormat}
+          onSelect={onSelectReportFormat}
+          scaled={false}
+          size="content"
+          directionY="top"
+          displaySelectedOption
+          isDisabled={isSettingNotPaid || isLoadingDownloadReport}
+        />
         <span className="download-report_description">
-          {downloadReportDescription}
+          <span>{downloadReportDescription}</span>
+          <span>{t("Settings:ReportFormatDescription")}</span>
         </span>
-      </DownLoadWrapper>
-    </MainContainer>
+      </div>
+    </div>
   );
 };
 

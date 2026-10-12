@@ -34,22 +34,25 @@
  */
 import React from "react";
 
-import { StyledText } from "./CellStyles";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+
+import styles from "./CellStyles.module.scss";
 
 const SizeCell = ({ item, sideColor }) => {
   const { fileExst, contentLength } = item;
   const date = fileExst || contentLength ? contentLength : "";
 
   return (
-    <StyledText
+    <Text
       color={sideColor}
       fontSize="12px"
       fontWeight={600}
       title={date}
+      className={styles.styledText}
       truncate
     >
       {date}
-    </StyledText>
+    </Text>
   );
 };
 

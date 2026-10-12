@@ -38,7 +38,7 @@
 import { useContext } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import {
@@ -50,7 +50,6 @@ import { GreetingCreateUserContainerProps } from "@/types";
 
 import { Logo } from "@/components/Logo";
 import styles from "./GreetingCreateUserContainer.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const GreetingCreateUserContainer = ({
   type,
@@ -116,7 +115,6 @@ export const GreetingCreateUserContainer = ({
         defaults={DEFAULT_PORTAL_TEXT}
         values={{
           displayName,
-          productName: getBrandName("ProductName"),
           ...(roomData.title
             ? { roomName: roomData.title }
             : { spaceAddress: hostName }),

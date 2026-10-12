@@ -49,6 +49,8 @@ import { MediaViewerStoreContextProvider } from "../../_store/MediaViewerStore";
 import { DialogsStoreContextProvider } from "../../_store/DialogsStore";
 import { DownloadDialogStoreContextProvider } from "../../_store/DownloadDialogStore";
 import { ActiveItemsStoreContextProvider } from "../../_store/ActiveItemsStore";
+import { InfoPanelStoreContextProvider } from "../../_store/InfoPanelStore";
+import { DocsUserStoreContextProvider } from "@/app/(personal-files)/_store/DocsUserStore";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -67,7 +69,11 @@ export const Layout = ({ children, initSettingsStoreData }: LayoutProps) => {
                   <DialogsStoreContextProvider>
                     <DownloadDialogStoreContextProvider>
                       <ActiveItemsStoreContextProvider>
-                        {children}
+                        <DocsUserStoreContextProvider>
+                          <InfoPanelStoreContextProvider>
+                            {children}
+                          </InfoPanelStoreContextProvider>
+                        </DocsUserStoreContextProvider>
                       </ActiveItemsStoreContextProvider>
                     </DownloadDialogStoreContextProvider>
                   </DialogsStoreContextProvider>

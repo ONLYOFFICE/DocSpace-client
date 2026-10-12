@@ -35,12 +35,12 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 const ResetTemplateDialog = ({
   isVisible,
@@ -69,7 +69,7 @@ const ResetTemplateDialog = ({
         <Button
           testId="reset-button"
           id="reset-button"
-          label={t("OAuth:Reset")}
+          label={t("Common:Reset")}
           onClick={onReset}
           primary
           scale

@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "开启 AI 对话即可提问、总结文档、生成文本并获得工作上的帮助——就在 {{sectionName}} 中完成。",
+  "TourAiAssistantTitle": "你的 AI 助手",
+  "TourBringFiles": "从电脑上传文件，或直接把它们拖放到本窗口的任意位置。",
+  "TourBringFilesTitle": "把文件带进来",
+  "TourCreateAnything": "在浏览器中直接创建文档、电子表格、演示文稿和 PDF 表单——无需安装任何软件。",
+  "TourCreateAnythingTitle": "想创建什么都行",
+  "TourFindFast": "按名称搜索，按类型或作者筛选，对列表排序，并在列表视图与平铺视图之间切换。",
+  "TourFindFastTitle": "快速找到任何内容",
+  "TourPlacesFavorites": "{{sectionName}} — 已加星标的文件。",
+  "TourPlacesRecent": "{{sectionName}} — 你最近处理过的内容。",
+  "TourPlacesShared": "{{sectionName}} — 他人与你共享的文件。",
+  "TourPlacesTitle": "各归其位",
+  "TourPlacesTrash": "{{sectionName}} — 已删除但仍可恢复的文件。",
+  "TourShare": "将鼠标悬停在任意文件上即可看到快捷操作。点击共享图标，即可按不同权限级别向工作区联系人开放访问——或为其他任何人创建外部链接。",
+  "TourSharedAccess": "{{sharedBy}} 显示文件来自谁，{{accessLevel}} 显示你能对它做什么——查看、评论或编辑。只有所有者可以更改这一点。",
+  "TourSharedAccessTitle": "谁共享的，以及你能做什么",
+  "TourSharedEmpty": "目前还没有人与你共享任何内容。一旦有人向你开放访问权限，文件和文件夹就会出现在这里。",
+  "TourSharedEmptyTitle": "你的列表暂时是空的",
+  "TourSharedList": "他人向你开放访问权限的一切内容都会汇入 {{sectionName}}。打开文件即可在浏览器中处理——原件仍留在原处，因此所有人看到的始终是同一个版本。",
+  "TourSharedListTitle": "与你共享",
+  "TourShareTitle": "共享与协作"
+}

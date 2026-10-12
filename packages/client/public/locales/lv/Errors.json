@@ -1,4 +1,4 @@
 {
   "ErrorEmptyResponse": "Tukša atbilde",
-  "ErrorUnavailableText": "{{productName}} nav pieejams"
+  "ErrorUnavailableText": "Darbvieta nav pieejama"
 }

@@ -38,10 +38,10 @@
 import { useMemo } from "react";
 import { observer } from "mobx-react";
 
-import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
+import { useUnmount } from "@onlyoffice/apps-ui-kit/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import type { FilesSettingsDto } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import { TariffState } from "@docspace/shared/enums";
@@ -173,6 +173,10 @@ const DataBackup = ({
       settingsFileSelector={{
         filesSettings: filesSettings as unknown as FilesSettingsDto,
       }}
+      disabledCreatePublicRoom={
+        !filesSettings?.externalShare &&
+        !!filesSettings?.externalShareApplyToRooms
+      }
       defaultRegion={defaultRegion}
       downloadingProgress={downloadingProgress}
       temporaryLink={temporaryLink}

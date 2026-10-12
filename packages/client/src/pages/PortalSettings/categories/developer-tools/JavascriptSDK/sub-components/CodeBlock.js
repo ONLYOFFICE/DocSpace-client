@@ -34,30 +34,18 @@
  */
 
 import React from "react";
-import styled from "styled-components";
 
 import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { githubLightInit, githubDarkInit } from "@uiw/codemirror-theme-github";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
+import copy from "copy-to-clipboard";
 
-const StyledContainer = styled.div.attrs(injectDefaultTheme)`
-  border: 1px solid ${(props) => props.theme.plugins.borderColor};
-  border-radius: 6px;
-  max-width: 800px;
-  width: 100%;
-  overflow: hidden;
-  background-color: ${(props) => props.theme.sdkPresets.previewBackgroundColor};
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
-  .cm-scroller {
-    overflow-x: hidden;
-  }
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
-  .cm-gutters {
-    ${NoUserSelect}
-  }
-`;
+import styles from "./CodeBlock.module.scss";
 
 const CodeBlock = ({ config, scriptUrl, theme }) => {
   const configWithoutEvents = { ...config };
@@ -91,8 +79,16 @@ const CodeBlock = ({ config, scriptUrl, theme }) => {
     },
   });
 
+  const onCopyCode = () => copy(codeString);
+
   return (
-    <StyledContainer dir="ltr">
+    <div className={styles.container} dir="ltr">
+      <IconButton
+        className={styles.copyButton}
+        iconName={CopyReactSvgUrl}
+        size={16}
+        onClick={onCopyCode}
+      />
       <CodeMirror
         value={codeString}
         theme={theme.isBase ? baseTheme : darkTheme}
@@ -100,7 +96,7 @@ const CodeBlock = ({ config, scriptUrl, theme }) => {
         editable
         readOnly
       />
-    </StyledContainer>
+    </div>
   );
 };
 

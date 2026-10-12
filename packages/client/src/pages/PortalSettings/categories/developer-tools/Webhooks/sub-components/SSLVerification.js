@@ -33,34 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import styled from "styled-components";
-
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { Text } from "@docspace/ui-kit/components/text";
+import styles from "../Webhooks.styled.module.scss";
+
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { useTranslation } from "react-i18next";
-
-const Header = styled.h4`
-  font-weight: 600;
-  margin-top: 22px;
-  margin-bottom: 10px;
-
-  display: flex;
-  align-items: center;
-
-  cursor: default;
-
-  .verificationHelpButton {
-    margin-inline-start: 4px;
-  }
-
-  img {
-    margin-inline-start: 4px;
-  }
-`;
 
 export const SSLVerification = ({ onChange, value, isDisabled }) => {
   const { t } = useTranslation(["Webhooks"]);
@@ -73,7 +54,7 @@ export const SSLVerification = ({ onChange, value, isDisabled }) => {
 
   return (
     <div>
-      <Header>
+      <h4 className={styles.sslHeader}>
         {t("SSLVerification")}{" "}
         <HelpButton
           className="verificationHelpButton"
@@ -82,7 +63,7 @@ export const SSLVerification = ({ onChange, value, isDisabled }) => {
           place="bottom"
           dataTestId="ssl_verification_help_button"
         />
-      </Header>
+      </h4>
       <RadioButtonGroup
         fontSize="13px"
         fontWeight="400"

@@ -39,10 +39,14 @@ import { makeAutoObservable, runInAction } from "mobx";
 import SocketHelper, {
   SocketEvents,
   TOptSocket,
-} from "@docspace/ui-kit/utils/socket";
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import api from "../api";
-import { setWithCredentialsStatus } from "../api/client";
+import {
+  getAuthToken,
+  signOutOAuth,
+  setWithCredentialsStatus,
+} from "../api/client";
 import { loginWithTfaCode } from "../api/user";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
@@ -54,7 +58,9 @@ import {
   isPublicPreview,
 } from "../utils/common";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
+import { isOAuthFrame } from "../utils/oauthToken";
+import { getCookie, setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { AI_SEARCH, AI_TOOLS } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import { Nullable, TI18n } from "../types";
@@ -89,9 +95,14 @@ class AuthStore {
   isPortalInfoLoaded = false;
 
   constructor(
-    private userStore: UserStore,
+    /** Public: consumed as `authStore.userStore.user` by client stores
+     * (AccessRightsStore); was reached externally even while `private`. */
+    public userStore: UserStore,
     private currentTariffStatusStore: CurrentTariffStatusStore,
-    private currentQuotaStore: CurrentQuotasStore,
+    /** Public: consumed as `authStore.currentQuotaStore` by client stores
+     * (FilesStore quota getters). Visibility change only — the parameter
+     * property assignment is identical at runtime. */
+    public currentQuotaStore: CurrentQuotasStore,
     public settingsStore: SettingsStore,
   ) {
     makeAutoObservable(this);
@@ -166,7 +177,7 @@ class AuthStore {
 
     const user = this.userStore?.user;
 
-    if (user && isAdmin(user)) {
+    if (user && isAdmin(user) && !this.settingsStore?.standalone) {
       await this.currentTariffStatusStore?.fetchPayerInfo();
     }
 
@@ -182,6 +193,18 @@ class AuthStore {
     if (window.location.pathname === "/shared/invalid-link") return;
 
     await this.settingsStore?.init();
+
+    if (
+      isOAuthFrame() &&
+      getAuthToken() &&
+      !this.isAuthenticated &&
+      !this.settingsStore?.isPortalDeactivate
+    ) {
+      frameCallEvent({
+        event: "onAuthError",
+        data: { code: "UNAUTHORIZED", message: "unauthorized" },
+      });
+    }
 
     const requests = [];
 
@@ -208,7 +231,11 @@ class AuthStore {
         this.userStore
           ?.init(i18n, this.settingsStore.culture)
           .then(async () => {
-            if (!isPortalRestore) {
+            if (isOAuthFrame()) {
+              runInAction(() => {
+                this.isPortalInfoLoaded = true;
+              });
+            } else if (!isPortalRestore) {
               await this.getPaymentInfo();
 
               if (
@@ -217,7 +244,14 @@ class AuthStore {
                 this.isAuthenticated &&
                 !skipRequest
               ) {
-                this.settingsStore?.getAIConfig();
+                // /ai/config sits behind `[AiFeature]` like the rest of the AI
+                // API and answers 403 while the portal's AI switch is off. The
+                // config describes an AI setup such a portal is not running,
+                // so skip the probe instead of logging a 403 on every boot;
+                // turning the switch back on refetches it (see the AI services
+                // setting).
+                if (this.settingsStore?.aiServicesEnabled)
+                  this.settingsStore?.getAIConfig();
                 this.settingsStore?.getAdditionalResources();
               }
             } else {
@@ -237,6 +271,19 @@ class AuthStore {
     return Promise.all(requests)
       .then(() => {
         const user = this.userStore?.user;
+
+        // Load encryption keys for the authenticated user (needed for private rooms)
+        if (
+          user?.id &&
+          this.isAuthenticated &&
+          !this.currentTariffStatusStore?.isNotPaidPeriod
+        ) {
+          requests.push(
+            this.userStore?.getEncryptionKeys().catch(() => {
+              // Encryption keys not available — not critical for app init
+            }),
+          );
+        }
 
         if (this.isAuthenticated && !skipRequest) {
           if (!this.settingsStore?.passwordSettings) {
@@ -276,6 +323,10 @@ class AuthStore {
       refresh = true;
     }
     const user = this.userStore?.user?.isVisitor;
+    const isAdmin =
+      this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner;
+
+    const isSaasAdmin = isAdmin && !this.settingsStore?.standalone;
 
     const request = [];
 
@@ -285,7 +336,18 @@ class AuthStore {
       request.push(this.currentQuotaStore?.fetchPortalQuota(refresh));
     }
 
+    if (isSaasAdmin) {
+      request.push(this.currentTariffStatusStore?.fetchPayerInfo(refresh));
+    }
+
     await Promise.all(request);
+
+    // An unpaid portal cannot reach the pages that show the AI fees, and the
+    // banner re-renders when the percent arrives, so the boot does not wait for it.
+    if (isSaasAdmin && !this.currentTariffStatusStore?.isNotPaidPeriod) {
+      this.currentTariffStatusStore?.fetchServiceFeePercent(AI_TOOLS);
+      this.currentTariffStatusStore?.fetchServiceFeePercent(AI_SEARCH);
+    }
 
     runInAction(() => {
       this.isPortalInfoLoaded = true;
@@ -477,14 +539,35 @@ class AuthStore {
       const w = window as unknown as { __redirectToLogin?: boolean };
       w.__redirectToLogin = true;
     }
+    const isOAuth = isOAuthFrame();
+
     let ssoLogoutUrl;
     try {
-      ssoLogoutUrl = await api.user.logout();
+      ssoLogoutUrl = isOAuth ? undefined : await api.user.logout();
     } catch {
       ssoLogoutUrl = undefined;
     }
 
     this.isLogout = true;
+
+    // Clear encryption state: MobX store + in-memory unlocked-identity cache
+    // + the persisted device unlock for the signed-out user
+    this.userStore?.clearEncryptionKeys();
+    try {
+      const userId = this.userStore?.user?.id
+        ? String(this.userStore.user.id)
+        : undefined;
+      const { SecretStorage } =
+        await import("../services/encryption/secret-storage");
+      SecretStorage.lock();
+      if (userId) {
+        const { forgetDeviceUnlock } =
+          await import("../services/encryption/device-unlock-store");
+        await forgetDeviceUnlock(userId);
+      }
+    } catch {
+      // Encryption module may not be loaded — safe to ignore
+    }
 
     const isDesktop = this.settingsStore?.isDesktopClient;
     const isFrame = this.settingsStore?.isFrame;
@@ -493,6 +576,11 @@ class AuthStore {
     if (isFrame) frameCallEvent({ event: "onSignOut" });
 
     if (ssoLogoutUrl) return ssoLogoutUrl;
+
+    if (isOAuth) {
+      signOutOAuth();
+      return;
+    }
 
     if (!reset) return;
 

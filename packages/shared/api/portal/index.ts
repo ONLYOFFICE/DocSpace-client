@@ -45,11 +45,13 @@ import {
   TPaymentQuota,
   TPortal,
   TPortalTariff,
+  TPortalWalletService,
   TRestoreProgress,
   TLicenseQuota,
 } from "./types";
 import { Nullable } from "../../types";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
+import type { TAccountingPrice } from "@onlyoffice/apps-ui-kit/billing/types";
 
 const baseURL = "/apisystem";
 
@@ -370,6 +372,16 @@ export async function getPortalTariff(refresh = false, signal?: AbortSignal) {
   return res;
 }
 
+export async function getWalletServices(signal?: AbortSignal) {
+  const res = (await request({
+    method: "get",
+    url: "/portal/payment/walletservices",
+    signal,
+  })) as TPortalWalletService[] | null;
+
+  return res;
+}
+
 export async function getPaymentAccount(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
@@ -439,7 +451,7 @@ export function getPaymentTariff() {
   return request({ method: "get", url: "/portal/payment/tariff" });
 }
 
-export async function getServiceQuotaBalance(
+export async function getWalletBalance(
   refresh?: boolean,
   signal?: AbortSignal,
 ) {
@@ -447,7 +459,7 @@ export async function getServiceQuotaBalance(
 
   return request({
     method: "get",
-    url: `/portal/payment/customer/aibalance`,
+    url: `/portal/payment/customer/balance`,
     params,
     signal,
   }) as TBalance;
@@ -459,6 +471,18 @@ export async function getAiPrices(signal?: AbortSignal) {
     url: `/portal/payment/ai-prices`,
     signal,
   });
+}
+
+export async function getServiceAccountingPrices(
+  serviceName: string,
+  signal?: AbortSignal,
+) {
+  return (await request({
+    method: "get",
+    url: `/portal/payment/accounting/prices/${serviceName}`,
+    params: { active: true },
+    signal,
+  })) as TAccountingPrice[];
 }
 
 export async function getWalletPayer(refresh?: boolean, signal?: AbortSignal) {
@@ -488,8 +512,6 @@ export async function saveDeposite(amount: number, currency: string) {
     },
   }) as string;
 }
-
-
 
 export async function startTransactionHistoryReport(
   startDate: string,

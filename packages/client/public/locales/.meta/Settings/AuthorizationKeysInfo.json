@@ -1,20 +1,20 @@
 {
   "key_path": "AuthorizationKeysInfo",
-  "content": "With Authorization keys, you can connect third-party services to your space. Sign in easily with Facebook, Google, or LinkedIn. Add Dropbox, OneDrive, and other accounts to work with files stored there.",
-  "content_en_sha1_hash": "dd9feaeb132234a03c190fb0d06cdfd14c0f9fb7",
-  "created_at": "2025-05-19T21:30:50.608Z",
-  "updated_at": "2026-05-15T14:00:06.861Z",
+  "content": "Enable third-party services for your workspace.",
+  "content_en_sha1_hash": "90e80d073115bef88c9b306e1dc089f573c8a5ca",
+  "created_at": "2026-08-31T18:23:40.452Z",
+  "updated_at": "2026-08-31T20:46:01.714Z",
   "comment": {
-    "text": "This is a descriptive text displayed on the Third-Party Services settings page. It explains the purpose of authorization keys, which allow users to connect external services like social media logins and cloud storage to their DocSpace.",
+    "text": "Instructional description text located in the Third-party services section of the Portal Settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:35.141Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T20:46:01.714Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 236,
-      "context": "{!consumers.length || !tReady ? (\n <ThirdPartyLoader />\n ) : (\n <RootContainer className=\"RootContainer\">\n <Text className=\"third-party-description\">\n {t(\"AuthorizationKeysInfo\")}\n </Text>\n <div className=\"third-party-box\">\n {integrationSettingsUrl ? (\n <Link\n className=\"third-party-link\"",
+      "line_number": 166,
+      "context": "{!consumers.length || !tReady ? (\n <ThirdPartyLoader />\n ) : (\n <div className={styles.rootContainer}>\n <Text className={styles.thirdPartyDescription}>\n {t(\"AuthorizationKeysInfo\")}\n </Text>\n <div className={styles.thirdPartyBox}>\n {integrationSettingsUrl ? (\n <Link\n className={styles.thirdPartyLink}",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

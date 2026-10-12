@@ -1,14 +1,14 @@
 {
   "key_path": "OpenCertificate",
-  "content": "Public Certificate",
-  "content_en_sha1_hash": "aea63e2f05925daedf345ab7abde382b62df4287",
-  "created_at": "2025-05-19T21:30:50.116Z",
-  "updated_at": "2026-05-15T14:00:06.859Z",
+  "content": "Public certificate",
+  "content_en_sha1_hash": "aa35864acae2013af27a841c785464c819cb2ce5",
+  "created_at": "2026-08-31T18:23:40.053Z",
+  "updated_at": "2026-08-31T21:03:28.272Z",
   "comment": {
-    "text": "This is a label for a text area where users can input or view a public certificate, appearing in modals for adding IdP or SP certificates within Single Sign-On settings.",
+    "text": "Label for a textarea in SSO configuration modals (IDP/SP) that identifies the field for the certificate content.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:39.930Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T21:03:28.272Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

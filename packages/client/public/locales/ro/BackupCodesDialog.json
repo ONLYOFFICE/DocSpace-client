@@ -1,8 +1,8 @@
 {
   "BackupCodesDescription": "Utilizați coduri de rezervă când intrați în cont fără acces la telefonul dvs.",
-  "BackupCodesSecondDescription": "Fiecare cod poate fi utilizat o singură dată. Puteți obține oricând coduri noi. Numai codurile care au fost gererate ultima dată sunt valabile.",
+  "BackupCodesSecondDescription": "Fiecare cod poate fi utilizat o singură dată. Puteți obține oricând coduri noi. Doar cel mai recent cod generat este valabil.",
   "BackupCodesTitle": "Coduri de rezervă",
-  "CodesCounter": "coduri:",
+  "CodesCounter": "coduri de rezervă:",
   "PrintButton": "Imprimare",
   "RequestNewButton": "Solicitare unui nou"
 }

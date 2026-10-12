@@ -36,11 +36,10 @@
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { getBrandName } from "@docspace/shared/constants/brands";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 const DeleteGroupDialog = (props) => {
 	const {
@@ -93,11 +92,8 @@ const DeleteGroupDialog = (props) => {
 			<ModalDialog.Body>
 				<Text>
 					{hasMoreGroups
-						? t("DeleteDialog:DeleteAllGroupDescription", {
-								productName: getBrandName("ProductName"),
-							})
+						? t("DeleteDialog:DeleteAllGroupDescription")
 						: t("DeleteDialog:DeleteGroupDescription", {
-								productName: getBrandName("ProductName"),
 								groupName,
 							})}
 				</Text>

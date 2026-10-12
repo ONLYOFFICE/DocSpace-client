@@ -46,42 +46,61 @@ import { MediaViewerStoreContextProvider } from "@/app/(docspace)/_store/MediaVi
 import { DialogsStoreContextProvider } from "@/app/(docspace)/_store/DialogsStore";
 import { DownloadDialogStoreContextProvider } from "@/app/(docspace)/_store/DownloadDialogStore";
 import { ActiveItemsStoreContextProvider } from "@/app/(docspace)/_store/ActiveItemsStore";
+import { UploadStoreContextProvider } from "@/app/(docspace)/_store/UploadStore";
+import { InfoPanelStoreContextProvider } from "@/app/(docspace)/_store/InfoPanelStore";
 
 import type { TViewAs } from "@docspace/shared/types";
 
 import { DocsSettingsStoreContextProvider } from "./DocsSettingsStore";
 import { DocsUserStoreContextProvider } from "./DocsUserStore";
-import { InfoPanelStoreContextProvider } from "./InfoPanelStore";
+import PersonalFilesAiAgentProviders from "../_components/ai-agent-providers";
+import { VersionHistoryStoreContextProvider } from "./VersionHistoryStore";
+import { DragStoreContextProvider } from "./DragStore";
 
 export const DocsStoreProviders = ({
   children,
   initViewAs = "row",
+  myFolderId,
+  canUseAi,
 }: {
   children: React.ReactNode;
   initViewAs?: TViewAs;
+  myFolderId?: number | string;
+  canUseAi?: boolean;
 }) => {
   return (
     <SettingsStoreContextProvider initData={{ viewAs: initViewAs }}>
       <FilesSettingsStoreContextProvider>
         <FilesListStoreContextProvider>
           <FilesSelectionStoreContextProvider>
-            <NavigationStoreContextProvider>
-              <MediaViewerStoreContextProvider>
-                <DialogsStoreContextProvider>
-                  <DownloadDialogStoreContextProvider>
-                    <ActiveItemsStoreContextProvider>
-                      <DocsSettingsStoreContextProvider>
-                        <DocsUserStoreContextProvider>
-                          <InfoPanelStoreContextProvider>
-                            {children}
-                          </InfoPanelStoreContextProvider>
-                        </DocsUserStoreContextProvider>
-                      </DocsSettingsStoreContextProvider>
-                    </ActiveItemsStoreContextProvider>
-                  </DownloadDialogStoreContextProvider>
-                </DialogsStoreContextProvider>
-              </MediaViewerStoreContextProvider>
-            </NavigationStoreContextProvider>
+            <DragStoreContextProvider>
+              <NavigationStoreContextProvider>
+                <MediaViewerStoreContextProvider>
+                  <DialogsStoreContextProvider>
+                    <DownloadDialogStoreContextProvider>
+                      <ActiveItemsStoreContextProvider>
+                        <UploadStoreContextProvider>
+                          <DocsSettingsStoreContextProvider>
+                            <DocsUserStoreContextProvider>
+                              <InfoPanelStoreContextProvider>
+                                <VersionHistoryStoreContextProvider>
+                                  <PersonalFilesAiAgentProviders
+                                    myFolderId={myFolderId}
+                                    canUseAi={canUseAi}
+                                  >
+                                    {children}
+                                  </PersonalFilesAiAgentProviders>
+                                </VersionHistoryStoreContextProvider>
+                              </InfoPanelStoreContextProvider>
+                            </DocsUserStoreContextProvider>
+                          </DocsSettingsStoreContextProvider>
+                        </UploadStoreContextProvider>
+                      </ActiveItemsStoreContextProvider>
+                    </DownloadDialogStoreContextProvider>
+                  </DialogsStoreContextProvider>
+                </MediaViewerStoreContextProvider>
+              </NavigationStoreContextProvider>
+            </DragStoreContextProvider>
           </FilesSelectionStoreContextProvider>
         </FilesListStoreContextProvider>
       </FilesSettingsStoreContextProvider>

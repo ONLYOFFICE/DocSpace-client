@@ -33,10 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { AdminsInfoBlockProps } from "../types";
-import { StyledInfoBlock } from "../StyledDataImport";
+import classNames from "classnames";
+import styles from "../StyledDataImport.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 const AdminsInfoBlock = ({
@@ -50,7 +51,7 @@ const AdminsInfoBlock = ({
   const limitText = `${totalUsedUsers}/${limitAdmins}`;
 
   return (
-    <StyledInfoBlock isAdmins isLimitReached={isLimitReached}>
+    <div className={classNames(styles.styledInfoBlock, styles.isAdmins, { [styles.limitReached]: isLimitReached })}>
       {isLimitReached ? (
         <Text className="info-error-text" fontSize="12px" fontWeight={600}>
           {t("DataImportAdminLimitExceeded")}
@@ -73,6 +74,7 @@ const AdminsInfoBlock = ({
           tooltipContent={
             <Text fontSize="12px">
               {t("LicenseLimitDescription", {
+                organizationName: getBrandName("OrganizationName"),
                 productName: getBrandName("ProductName"),
                 maxLimit: limitAdmins,
               })}
@@ -80,7 +82,7 @@ const AdminsInfoBlock = ({
           }
         />
       </div>
-    </StyledInfoBlock>
+    </div>
   );
 };
 

@@ -73,6 +73,7 @@ const DEFAULT_TYPE: Nullable<string | string[]> = null;
 const DEFAULT_WITHOUT_TAGS: Nullable<string | boolean> = false;
 const DEFAULT_GROUP_ID: Nullable<string> = null;
 const DEFAULT_SUBJECT_OWNER_ID: Nullable<string> = null;
+const DEFAULT_PRIVACY_FILTER: Nullable<string | number> = null;
 
 const EXCLUDE_SUBJECT = "excludeSubject";
 const FILTER_VALUE = "filterValue";
@@ -94,6 +95,7 @@ const WITHOUT_TAGS = "withoutTags";
 const GROUP_ID = "groupId";
 const START_INDEX = "startIndex";
 const SUBJECT_OWNER_ID = "subjectOwnerId";
+const PRIVACY_FILTER = "privacyFilter";
 
 class RoomsFilter {
   page: number;
@@ -135,6 +137,8 @@ class RoomsFilter {
   groupId: Nullable<string>;
 
   subjectOwnerId: Nullable<string>;
+
+  privacyFilter: Nullable<string | number>;
 
   static getDefault(userId?: string, searchArea: string = DEFAULT_SEARCH_AREA) {
     const defaultFilter = new RoomsFilter(
@@ -197,6 +201,7 @@ class RoomsFilter {
       [STORAGE_FILTER]: urlStorageFilter,
       [GROUP_ID]: urlGroupId,
       [SUBJECT_OWNER_ID]: urlSubjectOwnerId,
+      [PRIVACY_FILTER]: urlPrivacyFilter,
     } = urlFilter;
 
     const {
@@ -217,6 +222,7 @@ class RoomsFilter {
       storageFilter: defaultStorageFilter,
       groupId: defaultGroupId,
       subjectOwnerId: defaultSubjectOwnerId,
+      privacyFilter: defaultPrivacyFilter,
     } = defaultFilter;
 
     const page = (urlPage && +urlPage - 1) || defaultPage;
@@ -241,6 +247,7 @@ class RoomsFilter {
     const groupId = (urlGroupId as string) || defaultGroupId;
     const subjectOwnerId =
       (urlSubjectOwnerId as string) || defaultSubjectOwnerId;
+    const privacyFilter = (urlPrivacyFilter as string) || defaultPrivacyFilter;
 
     // TODO: remove it if search with subfolders and in content will be available and add it to the urlFilter and the defaultFilter
     // const searchInContent = urlSearchInContent || defaultSearchInContent;
@@ -267,6 +274,7 @@ class RoomsFilter {
       storageFilter,
       groupId,
       subjectOwnerId,
+      privacyFilter,
     );
 
     return newFilter;
@@ -293,6 +301,7 @@ class RoomsFilter {
     storageFilter = DEFAULT_STORAGE_FILTER,
     groupId = DEFAULT_GROUP_ID,
     subjectOwnerId = DEFAULT_SUBJECT_OWNER_ID,
+    privacyFilter = DEFAULT_PRIVACY_FILTER,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -314,6 +323,7 @@ class RoomsFilter {
     this.storageFilter = storageFilter;
     this.groupId = groupId;
     this.subjectOwnerId = subjectOwnerId;
+    this.privacyFilter = privacyFilter;
   }
 
   getStartIndex = () => {
@@ -352,6 +362,7 @@ class RoomsFilter {
       groupId,
       startIndex,
       subjectOwnerId,
+      privacyFilter,
     } = fixedValidObject;
 
     const dtoFilter = {
@@ -375,6 +386,7 @@ class RoomsFilter {
       [STORAGE_FILTER]: storageFilter,
       [GROUP_ID]: groupId,
       [SUBJECT_OWNER_ID]: subjectOwnerId,
+      [PRIVACY_FILTER]: privacyFilter,
     };
 
     return toUrlParams(dtoFilter, true);
@@ -403,6 +415,7 @@ class RoomsFilter {
       storageFilter,
       groupId,
       subjectOwnerId,
+      privacyFilter,
     } = fixedValidObject;
 
     const dtoFilter: Record<string, unknown> = {
@@ -423,6 +436,7 @@ class RoomsFilter {
       ...(storageFilter && { [STORAGE_FILTER]: storageFilter }),
       ...(groupId && { [GROUP_ID]: groupId }),
       ...(subjectOwnerId && { [SUBJECT_OWNER_ID]: subjectOwnerId }),
+      ...(privacyFilter && { [PRIVACY_FILTER]: privacyFilter }),
       [PAGE]: page + 1,
       [SORT_BY]: sortBy,
       [SORT_ORDER]: sortOrder,
@@ -521,6 +535,7 @@ class RoomsFilter {
       this.storageFilter,
       this.groupId,
       this.subjectOwnerId,
+      this.privacyFilter,
     );
   }
 
@@ -549,6 +564,7 @@ class RoomsFilter {
       this.subjectFilter === filter.subjectFilter &&
       this.groupId === filter.groupId &&
       this.subjectOwnerId === filter.subjectOwnerId &&
+      this.privacyFilter === filter.privacyFilter &&
       typeEqual &&
       tagsEqual;
 

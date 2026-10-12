@@ -49,16 +49,15 @@ import {
   TApiKeyParamsRequest,
 } from "@docspace/shared/api/api-keys/types";
 import { isMobile } from "@docspace/shared/utils";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import CreateApiKeyDialog from "./sub-components/CreateApiKeyDialog";
 import DeleteApiKeyDialog from "./sub-components/DeleteApiKeyDialog";
 import ApiKeysView from "./sub-components";
 import { ApiKeysProps } from "./types";
 import styles from "./ApiKeys.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ApiKeys = (props: ApiKeysProps) => {
   const {
@@ -166,9 +165,7 @@ const ApiKeys = (props: ApiKeysProps) => {
         })}
       >
         <Text lineHeight="20px" className={styles.apiKeysText}>
-          {t("Settings:ApiKeysDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("Settings:ApiKeysDescription")}
         </Text>
         <Text
           className={classNames(
@@ -179,11 +176,6 @@ const ApiKeys = (props: ApiKeysProps) => {
           {t("Settings:ApiKeysShareDescription")}
         </Text>
 
-        <Text
-          className={classNames(styles.apiKeysText, styles.apiKeysUsageText)}
-        >
-          {t("Settings:ApiKeyViewUsage")}
-        </Text>
         {apiKeysUrl ? (
           <Link
             isHovered

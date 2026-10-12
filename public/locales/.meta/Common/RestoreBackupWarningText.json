@@ -1,26 +1,26 @@
 {
   "key_path": "RestoreBackupWarningText",
-  "content": "{{productName}} will become unavailable during the restore process. After the restore is complete all the changes made after the date of the selected restore point will be lost.",
-  "content_en_sha1_hash": "95f4959d72ad296d2309ba5ebff78078d35592ae",
-  "created_at": "2025-05-26T07:15:46.930Z",
-  "updated_at": "2026-05-15T14:00:06.961Z",
+  "content": "Your workspace will be unavailable during the restore process. Once it's done, any changes made after the selected restore point will be lost.",
+  "content_en_sha1_hash": "36d37bf9b2b35d184e75c4b3acdb792d477ee97e",
+  "created_at": "2026-08-31T18:23:25.904Z",
+  "updated_at": "2026-08-31T18:43:12.923Z",
   "comment": {
-    "text": "This is a warning message displayed when initiating a backup restore. It informs the user that the product will be unavailable and recent changes will be lost. `{{productName}}` will be replaced with the product's brand name.",
+    "text": "Warning description text shown during the backup restoration process to alert the user about workspace unavailability and potential data loss.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:44:51.964Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-31T18:43:12.923Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 379,
-      "context": "styles.restoreBackupWarningDescription,\n styles.settingsUnavailable,\n \"restore-backup_warning-description\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n {!standalone ? (\n <Text",
+      "line_number": 378,
+      "context": "styles.restoreBackupWarningDescription,\n styles.settingsUnavailable,\n \"restore-backup_warning-description\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\")}\n </Text>\n {!standalone ? (\n <Text\n className={classNames(\n styles.restoreBackupWarningLink,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 214,
-      "context": "className={classNames(\n styles.restoreBackupWarningDescription,\n \"restore-backup_warning-description\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: getBrandName(\"ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text\n as=\"span\"",
+      "line_number": 213,
+      "context": "className={classNames(\n styles.restoreBackupWarningDescription,\n \"restore-backup_warning-description\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\")}{\" \"}\n {!standalone ? (\n <Text\n as=\"span\"\n className={classNames(\n styles.restoreBackupWarningLink,",
       "module": "/packages/shared"
     }
   ],
@@ -155,7 +155,13 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
     },
     "sk": {
       "ai_translated": false,
@@ -164,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,18 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "si": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

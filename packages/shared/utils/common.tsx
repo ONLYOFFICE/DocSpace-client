@@ -41,7 +41,7 @@ import {
   parseToDateTime,
   startOf,
   dateDiffAbs,
-} from "@docspace/ui-kit/utils/date";
+} from "@onlyoffice/apps-ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
 import resizeImage from "resize-image";
 import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
@@ -72,8 +72,8 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import { AvatarRole } from "@docspace/ui-kit/components/avatar";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { AvatarRole } from "@onlyoffice/apps-ui-kit/components/avatar";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
 
 import { parseAddress } from "./email";
 
@@ -85,6 +85,7 @@ import {
   EmployeeType,
   EmployeeTypeString,
   UrlActionType,
+  RoomsTypePrivate,
 } from "../enums";
 import {
   CategoryType,
@@ -103,19 +104,19 @@ import {
   TPasswordHash,
   TTimeZone,
 } from "../api/settings/types";
-import { TopLoaderService } from "@docspace/ui-kit/components/top-loading-indicator";
+import { TopLoaderService } from "@onlyoffice/apps-ui-kit/components/top-loading-indicator";
 
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import { combineUrl } from "./combineUrl";
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
-import { checkIsSSR } from "@docspace/ui-kit/utils/device";
+import { getCookie, setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { checkIsSSR } from "@onlyoffice/apps-ui-kit/utils/device";
 
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
 import { isFile, isFolder } from "./typeGuards";
 import { getUserTypeDescriptionClient } from "./getUserTypeDescription";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
-import { isLanguageRtl } from "@docspace/ui-kit/providers/theme";
+import { getSystemTheme } from "@onlyoffice/apps-ui-kit/utils/get-system-theme";
+import { isLanguageRtl } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -354,9 +355,7 @@ export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
     case EmployeeType.Owner:
       return t("Common:Owner");
     case EmployeeType.Admin:
-      return t("Common:PortalAdmin", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("Common:PortalAdmin");
     case EmployeeType.RoomAdmin:
       return t("Common:RoomAdmin");
     case EmployeeType.User:
@@ -593,7 +592,7 @@ export function convertLanguage(key: string) {
   }
 }
 
-export function convertToLanguage(key: string) {
+export function convertToLanguage(key?: string) {
   if (!key) return;
 
   const splittedKey = key.split("-");
@@ -653,6 +652,27 @@ export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
 
+export const getFrameInitialTheme = (): ThemeKeys | null => {
+  if (typeof window === "undefined" || !window.name.includes(FRAME_NAME))
+    return null;
+
+  const param = new URLSearchParams(window.location.search).get("theme");
+
+  switch (param) {
+    case ThemeKeys.Base:
+    case ThemeKeys.BaseStr:
+      return ThemeKeys.BaseStr;
+    case ThemeKeys.Dark:
+    case ThemeKeys.DarkStr:
+      return ThemeKeys.DarkStr;
+    case ThemeKeys.System:
+    case ThemeKeys.SystemStr:
+      return ThemeKeys.SystemStr;
+    default:
+      return ThemeKeys.BaseStr;
+  }
+};
+
 export const frameCallbackData = (
   methodReturnData: unknown,
   callId?: number,
@@ -666,6 +686,50 @@ export const frameCallbackData = (
     }),
     "*",
   );
+};
+
+export type TFrameMethodError = {
+  isError: true;
+  status?: number;
+  message: string;
+  name?: string;
+  code?: string | number;
+};
+
+export const toFrameMethodError = (error: unknown): TFrameMethodError => {
+  if (!error || typeof error !== "object") {
+    return { isError: true, message: String(error) };
+  }
+
+  const err = error as {
+    status?: unknown;
+    response?: { status?: unknown };
+    message?: unknown;
+    name?: unknown;
+    code?: unknown;
+  };
+  const status =
+    typeof err.status === "number"
+      ? err.status
+      : typeof err.response?.status === "number"
+        ? err.response.status
+        : undefined;
+  const message =
+    typeof err.message === "string" && err.message
+      ? err.message
+      : typeof err.name === "string"
+        ? err.name
+        : "Unknown error";
+
+  return {
+    isError: true,
+    ...(status !== undefined && { status }),
+    message,
+    ...(typeof err.name === "string" && { name: err.name }),
+    ...((typeof err.code === "string" || typeof err.code === "number") && {
+      code: err.code,
+    }),
+  };
 };
 
 export const frameCallEvent = (eventReturnData: unknown) => {
@@ -701,12 +765,14 @@ export {
   calculateTotalPrice,
   truncateNumberToFraction,
   formatCurrencyValue,
-} from "@docspace/ui-kit/billing/utils/common";
+} from "@onlyoffice/apps-ui-kit/billing/utils/common";
 
 export const frameHandlePing = (eventData: {
   type?: string;
   frameId?: string;
 }): boolean => {
+  if (eventData?.type === "onAuthTokenReturn") return true;
+
   if (eventData?.type === "ping") {
     window.parent.postMessage(
       JSON.stringify({
@@ -720,7 +786,7 @@ export const frameHandlePing = (eventData: {
   return false;
 };
 
-import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
+import { getConvertedSize } from "@onlyoffice/apps-ui-kit/billing/utils/common";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { getConstName } from "@docspace/shared/constants/consts";
 
@@ -820,6 +886,12 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
     (folder) => folder.current.rootFolderType === FolderType.Rooms,
   );
   if (shareRoom) sorted.push(shareRoom);
+
+  const formsFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Forms,
+  );
+  if (formsFolder) sorted.push(formsFolder);
 
   const sharedWithMeFolder = find(
     folders,
@@ -959,8 +1031,11 @@ export const toUrlParams = (
 
     const item = obj[key];
 
-    // added for double employeetype or room type
-    if (Array.isArray(item) && (key === "employeetypes" || key === "type")) {
+    // added for double employeetype, room type or folder type
+    if (
+      Array.isArray(item) &&
+      (key === "employeetypes" || key === "type" || key === "folderType")
+    ) {
       for (let i = 0; i < item.length; i += 1) {
         str += `${key}=${encodeURIComponent(item[i])}`;
         if (i !== item.length - 1) {
@@ -1040,10 +1115,13 @@ export function tryParseArray(str: string) {
   }
 }
 
-export const RoomsTypeValues = Object.values(RoomsType).filter(
-  (item): item is number =>
-    typeof item === "number" && item !== RoomsType.AIRoom,
-);
+export const RoomsTypeValues = [
+  ...Object.values(RoomsType).filter(
+    (item): item is number =>
+      typeof item === "number" && item !== RoomsType.AIRoom,
+  ),
+  RoomsTypePrivate,
+];
 
 export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
   (acc, current) => {
@@ -1233,9 +1311,7 @@ export const getUserTypeName = (
   if (isOwner) return t("Common:Owner");
 
   if (isPortalAdmin)
-    return t("Common:PortalAdmin", {
-      productName: getBrandName("ProductName"),
-    });
+    return t("Common:PortalAdmin");
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 
@@ -1495,15 +1571,51 @@ export const getErrorInfo = (
   return message ?? t("Common:UnexpectedError");
 };
 
+/**
+ * A room or agent id in a route.
+ *
+ * Negative ids are matched on purpose. A section tour can walk the user into a
+ * stand-in room whose id is negative by design (client's `api/tourDemo`, where
+ * the sign is what keeps a demo id from ever addressing a real room), and a
+ * `\d+` here reads `/forms/-1000` as the section list rather than as a room —
+ * which leaves the list's own title, create button and quick-actions on a page
+ * that is standing inside a room.
+ *
+ * Only the forms tour walks into a stand-in room today; the rooms and agents
+ * patterns are written the same way so that adding such a step there is not a
+ * silent trap.
+ */
+const ROUTE_ID = "-?\\d+";
+
 export const getCategoryType = (location: { pathname: string }) => {
   let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
   const { pathname } = location;
 
-  if (pathname.startsWith("/rooms")) {
+  if (pathname.startsWith("/forms")) {
+    const formRoomRegexp = new RegExp(`(forms)/(${ROUTE_ID})`);
+
+    if (formRoomRegexp.test(pathname)) {
+      categoryType = CategoryType.Form;
+    } else if (pathname.indexOf("/recent") > -1) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.indexOf("/favorite") > -1) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.indexOf("/trash") > -1) {
+      categoryType = CategoryType.Trash;
+    } else {
+      categoryType = CategoryType.Forms;
+    }
+  } else if (pathname.startsWith("/rooms")) {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
+    } else if (pathname.indexOf("recent") > -1) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.indexOf("favorite") > -1) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.indexOf("trash") > -1) {
+      categoryType = CategoryType.Trash;
     } else if (pathname.indexOf("shared") > -1) {
-      const regexp = /(rooms)\/shared\/(\d+)/;
+      const regexp = new RegExp(`(rooms)/shared/(${ROUTE_ID})`);
 
       categoryType = !regexp.test(location.pathname)
         ? CategoryType.Shared
@@ -1528,10 +1640,20 @@ export const getCategoryType = (location: { pathname: string }) => {
   } else if (pathname.startsWith("/shared-with-me")) {
     categoryType = CategoryType.SharedWithMe;
   } else if (pathname.startsWith("/ai-agents")) {
-    const agentRegexp = /(ai-agents)\/(\d+)/;
-    const chatRegexp = /(ai-agents)\/(\d+)\/chat/;
+    const agentRegexp = new RegExp(`(ai-agents)/(${ROUTE_ID})`);
+    const chatRegexp = new RegExp(`(ai-agents)/(${ROUTE_ID})/chat`);
 
-    if (chatRegexp.test(location.pathname)) {
+    // Agent-scoped alias sections reuse the file recent/favorites/trash data
+    // (same as the global sections), but live under /ai-agents/* so the
+    // sidebar keeps them under AI Agents. Detect them before the agent-detail
+    // patterns.
+    if (pathname.startsWith("/ai-agents/recent")) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.startsWith("/ai-agents/favorites")) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.startsWith("/ai-agents/trash")) {
+      categoryType = CategoryType.Trash;
+    } else if (chatRegexp.test(location.pathname)) {
       categoryType = CategoryType.Chat;
     } else if (agentRegexp.test(location.pathname)) {
       categoryType = CategoryType.AIAgent;

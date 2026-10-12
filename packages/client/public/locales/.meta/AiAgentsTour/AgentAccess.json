@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentAccess",
+  "content": "The info panel is where an agent stops being yours alone. Invite people to it, or give view-only access so they can read what it produced without touching how it works. The history says what changed in the agent, and when.",
+  "content_en_sha1_hash": "a83bde21b2ca5841e1d20cc61ea6390df307b5fe",
+  "created_at": "2026-08-06T14:20:56.243Z",
+  "updated_at": "2026-08-07T15:05:26.409Z",
+  "comment": {
+    "text": "Description text for an onboarding tour step explaining how the Info Panel manages agent sharing, access permissions, and activity history.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:29:39.502Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 234,
+      "context": "INFO_PANEL_SELECTOR,\n isAdmin\n ? t(\"AiAgentsTour:AgentAccessTitle\")\n : t(\"AiAgentsTour:AgentAccessMemberTitle\"),\n isAdmin\n ? t(\"AiAgentsTour:AgentAccess\")\n : t(\"AiAgentsTour:AgentAccessMember\"),\n callbacks,\n LOG_LABEL,\n infoPanelHooks,\n [FIRST_ITEM_SELECTOR],",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

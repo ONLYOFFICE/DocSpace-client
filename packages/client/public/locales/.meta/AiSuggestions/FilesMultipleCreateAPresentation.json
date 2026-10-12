@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesMultipleCreateAPresentation",
+  "content": "Create a presentation",
+  "content_en_sha1_hash": "febc2fd74310111778c1df69b256329c1e19521c",
+  "created_at": "2026-08-04T09:58:55.124Z",
+  "updated_at": "2026-08-05T18:07:21.680Z",
+  "comment": {
+    "text": "Label for an AI suggestion option that appears when multiple files are selected to initiate presentation generation.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:07:21.680Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 403,
+      "context": "},\n ],\n \n filesMultiple: [\n {\n name: t(\"AiSuggestions:FilesMultipleCreateAPresentation\"),\n prompt: t(\"AiSuggestions:FilesMultipleCreateAPresentationPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesMultipleCreateACombinedReport\"),\n prompt: t(\"AiSuggestions:FilesMultipleCreateACombinedReportPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

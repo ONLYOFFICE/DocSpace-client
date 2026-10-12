@@ -2,7 +2,7 @@
   "ActiveSessions": "Aktivne sesije",
   "AutoDeleteTitle": "Sve sesije starije od 60 dana će biti automatski izbrisane.",
   "ChangePasswordAfterLoggingOut": "Promeni lozinku posle odjavljivanja",
-  "ConnectSocialNetworks": "Poveži svoje društvene mreže",
+  "ConnectSocialNetworks": "Poveži svoje naloge",
   "DescriptionForSecurity": "Za veću bezbednost, morate promeniti vašu lozinku.",
   "DesktopTheme": "Sinhronizacija sa podešavanjima Desktop Uređivača",
   "DesktopThemeDescription": "Automatski menjaj između svetlih i tamnih tema u zavisnosti od trenutne teme Desktop Uređivača.",
@@ -11,9 +11,9 @@
   "EmailNotVerified": "Email nije potvrđen",
   "ErrorAccountAlreadyUse": "Povezani nalog već koristi drugi korisnik",
   "LogoutActiveConnection": "Odjavi se sa aktivnih konekcija",
-  "LogoutAllActiveSessionsDescription": "Sve aktivne konekcije osim ove konekcije će biti odjavljene, zato što je trenutno u upotrebi.",
+  "LogoutAllActiveSessionsDescription": "Sve aktivne sesije, osim trenutne, biće prekinute. Trenutna sesija će ostati aktivna.",
   "LogoutBtn": "Odjavi se",
-  "LogoutDescription": "Obratite pažnju. Sve aktivne konekcije osim ove konekcije će biti odjavljene, zato što je trenutno u upotrebi.",
+  "LogoutDescription": "Obratite pažnju. Sve aktivne sesije, osim trenutne, biće prekinute. Trenutna sesija će ostati aktivna.",
   "LogoutFrom": "Odjavite se sa {{platform}} {{browser}}?",
   "MyProfile": "Moj profil",
   "NotificationsChannels": "Kanali za obaveštenja",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Prikaži rezervne kodove",
   "SuccessLogout": "Aktivna konekcija je odjavljena: {{platform}}, {{browser}}",
   "TelegramAccount": "Telegram nalog",
-  "TelegramAccountDescription": "Da povežeš TelegramBot sa svojim nalogom, isprati tajni link i klikni na dugme “Poveži Telegram”.",
+  "TelegramAccountDescription": "Da bi primao obaveštenja o svom nalogu na Telegramu, prati link ispod ili klikni na „Poveži“.",
   "TelegramAccountDisconnect": "Isključi Telegram",
   "TelegramAccountDisconnectDescription": "Tvoj @{{username}} nalog je povezan za Telegram obaveštenja. Možeš se isključiti sa ovog naloga. U tom slučaju, nećeš primati obaveštenja.",
   "TerminateAllSessions": "Prekini sve sesije osim trenutne",
-  "TwoFactorDescription": "Dvofaktorska autentifikacija preko aplikacije za generisanje koda je omogućena za sve korisnike od strane administratora."
+  "TwoFactorDescription": "Dvofaktorska autentifikacija putem aplikacije za autentifikaciju je omogućena za sve korisnike od strane administratora."
 }

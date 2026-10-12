@@ -38,7 +38,7 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import type { FloatingButtonIcons } from "@docspace/ui-kit/components/floating-button";
+import type { FloatingButtonIcons } from "@onlyoffice/apps-ui-kit/components/floating-button";
 
 export type FormsProgressIcon = keyof typeof FloatingButtonIcons;
 

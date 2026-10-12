@@ -36,10 +36,10 @@
 import { inject, observer } from "mobx-react";
 import { TFunction } from "i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { NotificationsType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import styles from "../Notifications.module.scss";
@@ -75,7 +75,8 @@ const UsefulTipsContainer = ({
     <div className={styles.notificationContainer}>
       <div className={styles.row}>
         <Text {...textProps} className="subscription-title">
-          {t("UsefulTips", { productName: getBrandName("ProductName") })}
+          {t("UsefulTips", { organizationName: getBrandName("OrganizationName"),
+            productName: getBrandName("ProductName") })}
         </Text>
         <ToggleButton
           className="useful-tips toggle-btn"
@@ -85,7 +86,8 @@ const UsefulTipsContainer = ({
         />
       </div>
       <Text {...textDescriptionsProps}>
-        {t("UsefulTipsDescription", { productName: getBrandName("ProductName") })}
+        {t("UsefulTipsDescription", { organizationName: getBrandName("OrganizationName"),
+          productName: getBrandName("ProductName") })}
       </Text>
     </div>
   );

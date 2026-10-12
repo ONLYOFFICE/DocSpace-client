@@ -1,26 +1,26 @@
 {
   "key_path": "SpaceUsersOnly",
-  "content": "{{productName}} users only",
-  "content_en_sha1_hash": "0beea2f05fa9af55a0c63adb5ee8fc835cf3d5e9",
-  "created_at": "2025-05-19T21:30:48.990Z",
-  "updated_at": "2026-05-15T14:00:06.933Z",
+  "content": "workspace users only",
+  "content_en_sha1_hash": "e5c524b006a5e9c08b1a543ab14a02b1d0d47095",
+  "created_at": "2026-08-13T22:44:22.840Z",
+  "updated_at": "2026-08-26T14:08:33.175Z",
   "comment": {
-    "text": "This is a label for a sharing option. It indicates that access is restricted to users within the current DocSpace, with `{{productName}}` being replaced by the product's brand name.",
+    "text": "A label for a menu option in the sharing settings that indicates access is restricted to members of the current workspace.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:42:14.804Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:01:00.676Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 107,
-      "context": "icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: getBrandName(\"ProductName\"),\n }),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];",
+      "line_number": 212,
+      "context": "icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\"),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 107,
-      "context": "icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: getBrandName(\"ProductName\"),\n }),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];",
+      "line_number": 212,
+      "context": "icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\"),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];\n };",
       "module": "/packages/shared"
     }
   ],
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,0 +1,29 @@
+{
+  "key_path": "AiFormCreateAReportFromTheForm",
+  "content": "Create a report from the form",
+  "content_en_sha1_hash": "8ef0528514a36cad23a13740b81402af1a31d807",
+  "created_at": "2026-09-14T19:16:00.074Z",
+  "updated_at": "2026-09-14T19:19:10.428Z",
+  "comment": {
+    "text": "Label for an AI suggestion option that initiates the generation of a report based on form data.",
+    "is_auto": true,
+    "updated_at": "2026-09-14T19:19:10.428Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 871,
+      "context": "{\n name: t(\"AiSuggestions:AiFormCollectResponsesIntoATable\"),\n prompt: t(\"AiSuggestions:AiFormCollectResponsesIntoATablePrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormCreateAReportFromTheForm\"),\n prompt: t(\"AiSuggestions:AiFormCreateAReportFromTheFormPrompt\"),\n },\n ],\n \n default: [],",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

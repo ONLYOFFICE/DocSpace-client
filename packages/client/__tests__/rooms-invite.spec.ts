@@ -82,7 +82,7 @@ test.describe("Room invite", () => {
     mockRequest.use(getEmptyInvitationLink(TEST_PORT));
     await inviteOption.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
+    const inviteDialog = page.locator("#invite_panel_modal").getByTestId("modal-dialog");
     await expect(inviteDialog).toBeVisible();
 
     await page.waitForTimeout(300); // invite panel min loader timeout
@@ -127,7 +127,7 @@ test.describe("Room invite", () => {
     mockRequest.use(getInvitationLink(TEST_PORT));
     await inviteOption.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
+    const inviteDialog = page.locator("#invite_panel_modal").getByTestId("modal-dialog");
     await expect(inviteDialog).toBeVisible();
 
     await page.waitForTimeout(300); // invite panel min loader timeout
@@ -173,7 +173,7 @@ test.describe("Room invite", () => {
     mockRequest.use(getInvitationLink(TEST_PORT));
     await inviteOption.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
+    const inviteDialog = page.locator("#invite_panel_modal").getByTestId("modal-dialog");
     await expect(inviteDialog).toBeVisible();
 
     await page.waitForTimeout(300); // invite panel min loader timeout
@@ -188,7 +188,9 @@ test.describe("Room invite", () => {
     await expect(settingsIcon).toBeVisible();
     await settingsIcon.click();
 
-    const settingsDialog = page.getByTestId("modal-dialog").last();
+    const settingsDialog = page
+      .getByTestId("modal-dialog")
+      .filter({ hasText: "Link settings" });
     await expect(settingsDialog).toBeVisible();
     await expect(settingsDialog).toHaveScreenshot([
       "desktop",
@@ -224,7 +226,9 @@ test.describe("Room invite", () => {
     mockRequest.use(updateInvitationLink(TEST_PORT));
     saveButton.click();
 
-    await expect(settingsDialog).toHaveScreenshot([
+    // After saving, the settings panel closes and we return to the invite
+    // panel showing the applied link state.
+    await expect(inviteDialog).toHaveScreenshot([
       "desktop",
       "room-invite",
       "invite-settings-apply.png",
@@ -253,7 +257,7 @@ test.describe("Room invite", () => {
     mockRequest.use(getInvitationLink(TEST_PORT, true));
     await inviteOption.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
+    const inviteDialog = page.locator("#invite_panel_modal").getByTestId("modal-dialog");
     await expect(inviteDialog).toBeVisible();
 
     await page.waitForTimeout(300); // invite panel min loader timeout
@@ -267,7 +271,9 @@ test.describe("Room invite", () => {
     await expect(settingsIcon).toBeVisible();
     await settingsIcon.click();
 
-    const settingsDialog = page.getByTestId("modal-dialog").last();
+    const settingsDialog = page
+      .getByTestId("modal-dialog")
+      .filter({ hasText: "Link settings" });
     await expect(settingsDialog).toBeVisible();
     await expect(settingsDialog).toHaveScreenshot([
       "desktop",
@@ -302,7 +308,7 @@ test.describe("Room invite", () => {
     mockRequest.use(getInvitationLink(TEST_PORT, false, true));
     await inviteOption.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
+    const inviteDialog = page.locator("#invite_panel_modal").getByTestId("modal-dialog");
     await expect(inviteDialog).toBeVisible();
 
     await page.waitForTimeout(300); // invite panel min loader timeout
@@ -312,12 +318,14 @@ test.describe("Room invite", () => {
       "invite_limit.png",
     ]);
 
-    const settingsDialog = page.getByTestId("modal-dialog").last();
-    await expect(settingsDialog).toBeVisible();
-
     const settingsIcon = page.getByTestId("link-settings_icon");
     await expect(settingsIcon).toBeVisible();
     await settingsIcon.click();
+
+    const settingsDialog = page
+      .getByTestId("modal-dialog")
+      .filter({ hasText: "Link settings" });
+    await expect(settingsDialog).toBeVisible();
 
     await expect(settingsDialog).toHaveScreenshot([
       "desktop",

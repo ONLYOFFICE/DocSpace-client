@@ -34,12 +34,12 @@
  */
 
 import { useEffect, useState } from "react";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
 const LeaveRoomDialog = (props) => {
   const {
@@ -50,6 +50,7 @@ const LeaveRoomDialog = (props) => {
     setChangeRoomOwnerIsVisible,
     isRoomOwner,
     isAIAgent,
+    isFormSpace,
     isFormFiller,
     onLeaveRoomAction,
   } = props;
@@ -84,25 +85,27 @@ const LeaveRoomDialog = (props) => {
   }, []);
 
   const titleText = isAIAgent
-    ? t("Files:LeaveTheAgent")
-    : t("Files:LeaveTheRoom");
+    ? t("Common:LeaveTheAgent")
+    : isFormSpace
+      ? t("Common:LeaveTheFormSpace")
+      : t("Common:LeaveTheRoom");
 
   const roomDescription = isRoomOwner
-    ? t("Files:LeaveRoomDescription")
-    : t("Files:WantLeaveRoom");
+    ? t("Common:LeaveRoomDescription")
+    : t("Common:WantLeaveRoom");
 
   const agentDescription = isRoomOwner
-    ? t("Files:LeaveAgentDescription")
-    : t("Files:WantLeaveAgent");
+    ? t("Common:LeaveAgentDescription")
+    : t("Common:WantLeaveAgent");
 
   const descriptionText = isAIAgent ? agentDescription : roomDescription;
 
   const showFormFillingWarning = isFormFiller && !isAIAgent && !isRoomOwner;
 
   const okButtonLabel = isRoomOwner
-    ? t("Files:AssignOwner")
+    ? t("Common:AssignOwner")
     : showFormFillingWarning
-      ? t("Files:LeaveButton")
+      ? t("Common:LeaveButton")
       : t("Common:OKButton");
 
   return (
@@ -114,7 +117,7 @@ const LeaveRoomDialog = (props) => {
             <>
               <Text>{t("Files:LeaveRoomFormFillingWarning")}</Text>
               <Text style={{ marginTop: "12px" }}>
-                {t("Files:AreYouSureWantLeaveRoom")}
+                {t("Common:AreYouSureWantLeaveRoom")}
               </Text>
             </>
           ) : (
@@ -168,8 +171,8 @@ export default inject(
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
     const isAIAgent = folderItem?.isAIAgent;
-    const isFormFiller =
-      folderItem?.access === ShareAccessRights.FormFilling;
+    const isFormSpace = folderItem?.roomType === RoomsType.FormRoom;
+    const isFormFiller = folderItem?.access === ShareAccessRights.FormFilling;
 
     return {
       visible,
@@ -177,8 +180,10 @@ export default inject(
       setChangeRoomOwnerIsVisible,
       isRoomOwner,
       isAIAgent,
+      isFormSpace,
       isFormFiller,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,
     };
   },
 )(observer(withTranslation(["Common", "Files"])(LeaveRoomDialog)));
+

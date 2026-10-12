@@ -35,13 +35,15 @@
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 const PaidQuotaLimitError = ({
 	isRoomAdmin,
+	isCommunity,
+	standalone,
 	setInvitePanelOptions,
 	invitePanelVisible,
 }) => {
@@ -67,21 +69,25 @@ const PaidQuotaLimitError = ({
 	return (
 		<>
 			<Text>{t("Common:QuotaPaidUserLimitError")}</Text>
-			{!isRoomAdmin ? (
+			{!isRoomAdmin && !isCommunity ? (
 				<Link isHovered onClick={onClickPayments} color="accent">
-					{t("Common:Billing")}
+					{standalone ? t("Common:PaymentsTitle") : t("Common:Billing")}
 				</Link>
 			) : null}
 		</>
 	);
 };
 
-export default inject(({ authStore, dialogsStore }) => {
-	const { isRoomAdmin } = authStore;
-	const { setInvitePanelOptions, invitePanelOptions } = dialogsStore;
-	return {
-		isRoomAdmin,
-		setInvitePanelOptions,
-		invitePanelVisible: invitePanelOptions.visible,
-	};
-})(observer(PaidQuotaLimitError));
+export default inject(
+	({ authStore, dialogsStore, settingsStore, currentTariffStatusStore }) => {
+		const { isRoomAdmin } = authStore;
+		const { setInvitePanelOptions, invitePanelOptions } = dialogsStore;
+		return {
+			isRoomAdmin,
+			isCommunity: currentTariffStatusStore.isCommunity,
+			standalone: settingsStore.standalone,
+			setInvitePanelOptions,
+			invitePanelVisible: invitePanelOptions.visible,
+		};
+	},
+)(observer(PaidQuotaLimitError));

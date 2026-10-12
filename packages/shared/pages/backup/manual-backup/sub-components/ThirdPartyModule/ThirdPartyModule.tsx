@@ -39,7 +39,7 @@ import classNames from "classnames";
 
 import { BackupStorageType, ProvidersType } from "../../../../../enums";
 import { isNullOrUndefined } from "../../../../../utils/typeGuards";
-import { Button, type ButtonSize } from "@docspace/ui-kit/components/button";
+import { Button, type ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { getFromLocalStorage } from "../../../../../utils";
 import { DirectThirdPartyConnection } from "../../../../../components/direct-third-party-connection";
 
@@ -49,7 +49,7 @@ import type {
 	ThirdPartyAccountType,
 	TTranslation,
 } from "../../../../../types";
-import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type { FilesSelectorSettings } from "../../../../../components/files-selector-input";
 import type { TThirdParties } from "../../../../../api/files/types";
 
@@ -68,6 +68,9 @@ interface ThirdPartyModuleProps {
 	buttonSize?: ButtonSize;
 	isBackupPaid?: boolean;
 	isFreeBackupsLimitReached?: boolean;
+	copyButtonLabel?: string;
+	isToppingUp?: boolean;
+	isCopyBlocked?: boolean;
 
 	connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
 	isTheSameThirdPartyAccount: boolean;
@@ -136,6 +139,9 @@ const ThirdPartyModule = ({
 	toDefault,
 	isBackupPaid,
 	isFreeBackupsLimitReached,
+	copyButtonLabel,
+	isToppingUp,
+	isCopyBlocked,
 }: ThirdPartyModuleProps) => {
 	const isMountRef = useRef(false);
 	const folderRef = useRef("");
@@ -187,7 +193,7 @@ const ThirdPartyModule = ({
 		setIsStartCopy(false);
 	};
 
-	const isModuleDisabled = !isMaxProgress || isStartCopy;
+	const isModuleDisabled = !isMaxProgress || isStartCopy || isCopyBlocked;
 
 	const checkCreating = selectedThirdPartyAccount?.key === ProvidersType.WebDav;
 
@@ -241,8 +247,9 @@ const ThirdPartyModule = ({
 						primary
 						size={buttonSize}
 						onClick={handleMakeCopy}
-						label={t("Common:CreateCopy")}
-						isDisabled={isModuleDisabled || selectedFolder === ""}
+						label={copyButtonLabel ?? t("Common:CreateCopy")}
+						isDisabled={isModuleDisabled || selectedFolder === "" || isToppingUp}
+						isLoading={isToppingUp}
 						testId="third_party_create_copy_button"
 					/>
 				) : null}

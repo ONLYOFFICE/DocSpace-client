@@ -1,0 +1,18 @@
+{
+  "DashboardApps": "Od skladišta do saradnje, prikupljanja podataka, automatizacije i AI — svaka aplikacija je napravljena za drugačiji posao. Otvorite bilo koju od njih za kratak obilazak tog odeljka.",
+  "DashboardAppsTitle": "Istražite svoje aplikacije",
+  "DashboardCreate": "Izaberite tekstualni dokument, tabelu, prezentaciju, PDF obrazac ili pokrenite AI razgovor. Novi dokumenti se čuvaju u {{files}}, spremni kad god vam zatrebaju.",
+  "DashboardCreateTitle": "Počnite da stvarate",
+  "DashboardDevTools": "Ovo je vaš centar za programere: API-ji, SDK-ovi, dodaci, webhooks i još mnogo toga. Kliknite na bilo koju karticu da saznate više ili počnete.",
+  "DashboardDevToolsTitle": "Razvijajte uz {{organizationName}}",
+  "DashboardIntegrations": "Već koristite drugu platformu? Povežite je i unesite uređivače i aplikacije direktno u alatke koje vaš tim već koristi — bez koda, bez migracije.",
+  "DashboardIntegrationsTitle": "Povežite svoju platformu",
+  "DashboardOverview": "Ova stranica je uvek udaljena jedan klik — otvorite {{overview}} u bočnoj traci kad god poželite da joj se vratite.",
+  "DashboardOverviewTitle": "Vratite se bilo kada",
+  "DashboardProfile": "Ovde su naziv vašeg radnog prostora i kratak pregled profila: ime, imejl i lozinka. Odavde možete preimenovati radni prostor ili promeniti lozinku u bilo kom trenutku. Za ostala podešavanja, idite na stranicu Profil.",
+  "DashboardProfileTitle": "Proverite podatke svog profila",
+  "WelcomeDashboardSubtitle": "Sve počinje ovde",
+  "WelcomeDashboardTitle": "Dobrodošli u {{organizationName}}",
+  "WelcomeDescription": "Pravite dokumente, sarađujte u sobama, prikupljajte podatke obrascima i prepustite AI-u rutinske zadatke — sve na jednom mestu. Da li ste spremni za kratak obilazak?",
+  "WelcomeLater": "Možda kasnije"
+}

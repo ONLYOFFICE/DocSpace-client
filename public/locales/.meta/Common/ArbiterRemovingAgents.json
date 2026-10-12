@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterRemovingAgents",
+  "content": "Removing agents...",
+  "content_en_sha1_hash": "b0ce2578e5142329c41215b10755316dccbdd1ce",
+  "created_at": "2026-05-24T17:27:18.432Z",
+  "updated_at": "2026-05-24T18:48:19.984Z",
+  "comment": {
+    "text": "Status text in a dialog that appears during the deletion phase of an Arbiter reset process.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:48:19.984Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/ResetPanelDialog.tsx",
+      "line_number": 98,
+      "context": "{expertCount === 1\n ? t(\"Common:ArbiterResetMessage_one\", { count: expertCount })\n : t(\"Common:ArbiterResetMessage_other\", { count: expertCount })}\n </Text>\n ) : null}\n {phase === \"deleting\" ? <Text as=\"p\">{t(\"Common:ArbiterRemovingAgents\")}</Text> : null}\n {phase === \"failed\" ? (\n <Text as=\"p\">\n {t(\"Common:ArbiterResetFailed\", { error: error ?? \"unknown error\" })}\n </Text>\n ) : null}",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

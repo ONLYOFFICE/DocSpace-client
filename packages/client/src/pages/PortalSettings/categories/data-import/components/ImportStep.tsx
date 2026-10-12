@@ -35,7 +35,6 @@
 
 import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
-import styled from "styled-components";
 
 import SharedOutlineIcon from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg?url";
 import GroupsIcon from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
@@ -57,13 +56,8 @@ import {
   InjectedImportStepProps,
 } from "../types";
 import { MigrationButtons } from "../sub-components/MigrationButtons";
+import styles from "../StyledDataImport.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
 
 const ImportStep = (props: ImportStepProps) => {
   const {
@@ -130,7 +124,7 @@ const ImportStep = (props: ImportStepProps) => {
   const hideCancelDialog = () => setCancelUploadDialogVisible(false);
 
   return (
-    <Wrapper>
+    <div className={styles.importWrapper}>
       <ImportSection
         isChecked
         sectionName={t("InfoPanel:Users")}
@@ -191,7 +185,7 @@ const ImportStep = (props: ImportStepProps) => {
             ns="Settings"
             values={{
               serviceName,
-              sectionName: t("Common:MyDocuments"),
+              sectionName: t("Common:Files"),
             }}
             components={{
               1: <span />,
@@ -204,7 +198,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: personalExportDetails.icon,
         }}
         importSection={{
-          sectionName: t("Common:MyDocuments"),
+          sectionName: t("Common:Files"),
           workspace: getBrandName("ProductName"),
           sectionIcon: DocumentsIcon,
         }}
@@ -266,7 +260,6 @@ const ImportStep = (props: ImportStepProps) => {
           sectionName={t("Common:CommonFiles")}
           description={t("Settings:CommonFilesDescription", {
             user: user?.displayName,
-            productName: getBrandName("ProductName"),
           })}
           exportSection={{
             sectionName: t("Common:Common"),
@@ -326,7 +319,7 @@ const ImportStep = (props: ImportStepProps) => {
           isSixthStep={false}
         />
       ) : null}
-    </Wrapper>
+    </div>
   );
 };
 

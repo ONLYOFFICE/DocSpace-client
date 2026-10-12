@@ -1,0 +1,29 @@
+{
+  "key_path": "OAuthInvalidRequest",
+  "content": "The authorization request is invalid. Check the redirect URI in the application settings",
+  "content_en_sha1_hash": "fb897ce5237c69cfe037df2864b91a4185077e3b",
+  "created_at": "2026-09-08T08:44:09.240Z",
+  "updated_at": "2026-09-08T08:46:48.865Z",
+  "comment": {
+    "text": "Error message displayed during the OAuth2 authentication process when a request error occurs. It provides troubleshooting instructions regarding the redirect URI.",
+    "is_auto": true,
+    "updated_at": "2026-09-08T08:46:48.865Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/utils/index.ts",
+      "line_number": 139,
+      "context": "case OAuth2ErrorKey.client_not_found_error:\n return t(\"Errors:OAuthApplicationEmpty\");\n case OAuth2ErrorKey.client_permission_denied_error:\n return t(\"Common:AccessDenied\");\n case OAuth2ErrorKey.invalid_request:\n return t(\"Errors:OAuthInvalidRequest\");\n case OAuth2ErrorKey.missing_client_id_error:\n return t(\"Errors:OAuthClientEmpty\");\n case OAuth2ErrorKey.something_went_wrong_error:\n return t(\"Common:UnknownError\");\n case OAuth2ErrorKey.missing_asc_cookie_error:",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

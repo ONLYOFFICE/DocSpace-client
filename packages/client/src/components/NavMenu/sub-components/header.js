@@ -39,9 +39,9 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Link as LinkWithoutRedirect } from "react-router";
 import { isDesktop, getLogoUrl } from "@docspace/shared/utils";
-import { FolderType, WhiteLabelLogoType } from "@docspace/shared/enums";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import HeaderCatalogBurger from "./header-catalog-burger";
-import { getUrlByDefaultFolderType } from "SRC_DIR/helpers/utils";
+import { getDefaultStartPageUrl } from "SRC_DIR/helpers/defaultStartPage";
 
 import styles from "../nav.module.scss";
 
@@ -55,10 +55,13 @@ const HeaderComponent = ({
   toggleArticleOpen,
   customHeader,
   defaultFolderType,
+  aiServicesEnabled,
+  isGuest,
 }) => {
-  const defaultUrl = getUrlByDefaultFolderType(
-    defaultFolderType || FolderType.Rooms,
-  );
+  const defaultUrl = getDefaultStartPageUrl(defaultFolderType, {
+    aiServicesEnabled,
+    isGuest,
+  });
   const [isDesktopView, setIsDesktopView] = useState(isDesktop());
 
   const onResize = () => {
@@ -114,7 +117,7 @@ HeaderComponent.propTypes = {
   isAuthenticated: PropTypes.bool,
 };
 
-export default inject(({ settingsStore, authStore }) => {
+export default inject(({ settingsStore, authStore, userStore }) => {
   const {
     isLoaded,
     isAuthenticated,
@@ -128,6 +131,7 @@ export default inject(({ settingsStore, authStore }) => {
     theme,
     toggleArticleOpen,
     defaultFolderType,
+    aiServicesEnabled,
   } = settingsStore;
 
   return {
@@ -142,6 +146,8 @@ export default inject(({ settingsStore, authStore }) => {
     currentProductId,
     toggleArticleOpen,
     defaultFolderType,
+    aiServicesEnabled,
+    isGuest: userStore.user?.isVisitor ?? false,
     // currentProductName: (product && product.title) || "",
   };
 })(observer(HeaderComponent));

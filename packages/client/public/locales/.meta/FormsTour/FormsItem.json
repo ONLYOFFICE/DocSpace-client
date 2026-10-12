@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsItem",
+  "content": "Every row is a whole collection. Open one to work inside it, pin the ones you are running, or use the three dots to invite people, copy the link that opens the form, and save the setup as a template.",
+  "content_en_sha1_hash": "bf1104c249cd4eaa03e8639f28644beeffddf258",
+  "created_at": "2026-08-06T14:20:53.755Z",
+  "updated_at": "2026-08-13T10:58:03.049Z",
+  "comment": {
+    "text": "Instructional text within a product tour step explaining how to interact with individual rows (collections) in the Forms interface.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:42:57.217Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 202,
+      "context": "// worth doing to one without opening it.\n hasItems &&\n fileItemStep(\n FIRST_ITEM_SELECTOR,\n t(\"FormsTour:FormsItemTitle\"),\n t(\"FormsTour:FormsItem\"),\n callbacks,\n LOG_LABEL,\n leaveSpace,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

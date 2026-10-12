@@ -1,5 +1,5 @@
 {
   "PDFform": "PDF-Formular",
   "PDFFormIsReadyToast": "Das PDF-Formular <1>{{filename}}</1> ist bereit zum Ausfüllen.",
-  "PDFFormSuccessfullyCreatedDescription": "Ihr PDF-Formular ist bereit zum Ausfüllen. Kopieren Sie den öffentlichen Link, um mit dem Ausfüllen des Formulars zu beginnen, oder laden Sie andere Benutzer zu diesem Raum ein."
+  "PDFFormSuccessfullyCreatedDescription": "Ihr PDF-Formular ist bereit zum Ausfüllen. Kopieren Sie den öffentlichen Link, um mit dem Ausfüllen zu beginnen, oder laden Sie andere Nutzer in diesen Space ein."
 }

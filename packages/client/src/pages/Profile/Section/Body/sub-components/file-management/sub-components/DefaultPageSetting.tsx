@@ -37,22 +37,26 @@ import React, { startTransition, useOptimistic } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { EmployeeType, FolderType } from "@docspace/shared/enums";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { isMobile } from "@docspace/shared/utils";
 
+import { isStartPageAvailable } from "SRC_DIR/helpers/defaultStartPage";
+
 type Props = {
   defaultFolderType?: SettingsStore["defaultFolderType"];
   updateDefaultFolderType?: SettingsStore["updateDefaultFolderType"];
+  aiServicesEnabled?: SettingsStore["aiServicesEnabled"];
   userType?: UserStore["userType"];
 };
 
 const StartPageSettingComponent = ({
   defaultFolderType,
   updateDefaultFolderType,
+  aiServicesEnabled,
   userType,
 }: Props) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
@@ -63,19 +67,17 @@ const StartPageSettingComponent = ({
   const getStartPageOptions = () => {
     const isGuest = userType === EmployeeType.Guest;
 
-    const unavailableOptions: FolderType[] = [];
-
-    if (isGuest) {
-      unavailableOptions.push(FolderType.USER);
-    }
-
     const options = [
+      {
+        label: t("Common:Home"),
+        key: FolderType.DEFAULT,
+      },
       {
         label: t("Common:AIAgents"),
         key: FolderType.AIAgents,
       },
       {
-        label: t("Common:MyDocuments"),
+        label: t("Common:Files"),
         key: FolderType.USER,
       },
       {
@@ -83,20 +85,14 @@ const StartPageSettingComponent = ({
         key: FolderType.Rooms,
       },
       {
-        label: t("Common:SharedWithMe"),
-        key: FolderType.SHARE,
-      },
-      {
-        label: t("Common:Favorites"),
-        key: FolderType.Favorites,
-      },
-      {
-        label: t("Common:Recent"),
-        key: FolderType.Recent,
+        label: t("Common:Forms"),
+        key: FolderType.Forms,
       },
     ];
 
-    return options.filter((option) => !unavailableOptions.includes(option.key));
+    return options.filter((option) =>
+      isStartPageAvailable(option.key, { aiServicesEnabled, isGuest }),
+    );
   };
 
   const startPageOptions = getStartPageOptions();
@@ -139,11 +135,17 @@ const StartPageSettingComponent = ({
 
 export const DefaultPageSetting = inject(
   ({ settingsStore, userStore }: TStore) => {
-    const { defaultFolderType, updateDefaultFolderType } = settingsStore;
+    const { defaultFolderType, updateDefaultFolderType, aiServicesEnabled } =
+      settingsStore;
 
     const { userType } = userStore;
 
-    return { defaultFolderType, updateDefaultFolderType, userType };
+    return {
+      defaultFolderType,
+      updateDefaultFolderType,
+      aiServicesEnabled,
+      userType,
+    };
   },
 )(observer(StartPageSettingComponent));
 

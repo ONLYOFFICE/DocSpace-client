@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "POSTリクエストヘッダが正常にクリップボードにコピーされました",
   "RequestPostBody": "POSTリクエスト本文",
   "RequestPostHeader": "POSTリクエストヘッダ",
-  "ResetKey": "リセットキー",
   "Response": "レスポンス",
   "ResponseBodyCopied": "POSTレスポンスボディがクリップボードに正常にコピーされました。",
   "ResponseHeaderCopied": "POSTレスポンスヘッダがクリップボードに正常にコピーされました",

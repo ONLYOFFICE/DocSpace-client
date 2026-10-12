@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsRecentContinueFormSetupPrompt",
+  "content": "Review the current form setup, identify what is incomplete, and guide me through the next step. If this information is not provided, ask me for the intended outcome and any known incomplete settings.",
+  "content_en_sha1_hash": "bf8e442955108c7e5e159b31a101ae7bc4fc24ec",
+  "created_at": "2026-08-04T09:58:55.167Z",
+  "updated_at": "2026-08-05T17:29:48.355Z",
+  "comment": {
+    "text": "An instructional prompt sent to the AI assistant when a user selects a suggestion to continue configuring a recent form, directing the AI to identify incomplete settings and ask follow-up questions if necessary.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:29:48.355Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 723,
+      "context": "prompt: t(\"AiSuggestions:FormsRecentWhereActionIsNeededPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsRecentContinueFormSetup\"),\n prompt: t(\"AiSuggestions:FormsRecentContinueFormSetupPrompt\"),\n requires: \"contentCreator\",\n },\n ],\n \n // +",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

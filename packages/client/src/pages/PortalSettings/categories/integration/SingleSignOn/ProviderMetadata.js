@@ -35,33 +35,19 @@
 
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 
-import { mobile, size } from "@docspace/shared/utils";
+import { size } from "@docspace/shared/utils";
+
+import styles from "./ProviderMetadata.module.scss";
 import { DeviceType } from "@docspace/shared/enums";
 
 import MetadataUrlField from "./sub-components/MetadataUrlField";
 
-const StyledWrapper = styled.div`
-  .button-wrapper {
-    padding-block: 16px;
-    position: sticky;
-    bottom: 0;
-    margin-top: 32px;
-    background-color: ${({ theme }) => theme.backgroundColor};
-
-    @media ${mobile} {
-      position: fixed;
-      padding-inline: 16px;
-      inset-inline: 0;
-    }
-  }
-`;
 
 const ProviderMetadata = (props) => {
   const { t, ready } = useTranslation("SingleSignOn");
@@ -87,7 +73,7 @@ const ProviderMetadata = (props) => {
   if (!ready) return null;
 
   return (
-    <StyledWrapper>
+    <div className={styles.styledWrapper}>
       <MetadataUrlField
         labelText={t("SPEntityId")}
         name="spEntityId"
@@ -119,7 +105,7 @@ const ProviderMetadata = (props) => {
         dataTestId="sp_single_logout_url"
       />
 
-      <div className="button-wrapper">
+      <div className={styles.buttonWrapper}>
         <Button
           id="download-metadata-xml"
           label={t("DownloadMetadataXML")}
@@ -132,7 +118,7 @@ const ProviderMetadata = (props) => {
           testId="download_metadata_xml_button"
         />
       </div>
-    </StyledWrapper>
+    </div>
   );
 };
 

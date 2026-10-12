@@ -4,25 +4,26 @@ import { fireEvent, screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { BackupStorageType, DeviceType, FolderType } from "../../../enums";
-import { ButtonSize } from "@docspace/ui-kit/components/button";
+import { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import * as portalApi from "../../../api/portal";
-import * as socketModule from "@docspace/ui-kit/utils/socket";
+import * as socketModule from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import ManualBackup from "./index";
 import { selectedStorages, mockThirdPartyAccounts } from "../mockData";
 
 vi.mock("../../../api/portal", () => ({
   startBackup: vi.fn().mockResolvedValue(undefined),
+  saveDeposite: vi.fn().mockResolvedValue("ok"),
 }));
 
-vi.mock("@docspace/ui-kit/components/toast", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: {
     success: vi.fn(),
     error: vi.fn(),
   },
 }));
 
-vi.mock("@docspace/ui-kit/utils/socket", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
   default: {
     on: vi.fn(),
     off: vi.fn(),
@@ -187,9 +188,10 @@ describe("ManualBackup", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.spyOn(portalApi, "startBackup").mockResolvedValue(undefined);
-    if (socketModule.default) {
-      vi.spyOn(socketModule.default, "on").mockImplementation(() => {});
-      vi.spyOn(socketModule.default, "off").mockImplementation(() => {});
+    const socket = socketModule.default;
+    if (socket) {
+      vi.spyOn(socket, "on").mockImplementation(() => {});
+      vi.spyOn(socket, "off").mockImplementation(() => {});
     }
   });
 
@@ -422,6 +424,119 @@ describe("ManualBackup", () => {
     expect(consoleErrorSpy).toHaveBeenCalledWith(error);
 
     consoleErrorSpy.mockRestore();
+  });
+
+  describe("paid copy with insufficient wallet balance", () => {
+    const paidProps = {
+      ...defaultProps,
+      isBackupPaid: true,
+      isFreeBackupsLimitReached: true,
+      backupServicePrice: 10,
+      walletBalance: 2.5,
+      walletCodeCurrency: "EUR",
+      isPayer: true,
+      isCardLinked: true,
+    };
+
+    it("tops up the wallet and then creates the copy", async () => {
+      const saveDeposite = vi
+        .spyOn(portalApi, "saveDeposite")
+        .mockResolvedValue("ok");
+      const fetchWalletBalance = vi.fn().mockResolvedValue(10);
+
+      render(
+        <ManualBackup
+          {...paidProps}
+          fetchWalletBalance={fetchWalletBalance}
+        />,
+      );
+
+      const createButton = screen.getByText("Common:TopUpAndMakeCopy");
+
+      await userEvent.click(createButton);
+
+      // 10 - 2.5, rounded up to the next whole unit
+      expect(saveDeposite).toHaveBeenCalledWith(8, "EUR");
+      expect(fetchWalletBalance).toHaveBeenCalledWith(true);
+      expect(portalApi.startBackup).toHaveBeenCalledWith(
+        `${BackupStorageType.TemporaryModuleType}`,
+        null,
+        false,
+        false,
+      );
+    });
+
+    it("does not create the copy when the top-up fails", async () => {
+      const saveDeposite = vi
+        .spyOn(portalApi, "saveDeposite")
+        .mockRejectedValue(new Error("card declined"));
+
+      render(<ManualBackup {...paidProps} />);
+
+      await userEvent.click(screen.getByText("Common:TopUpAndMakeCopy"));
+
+      expect(saveDeposite).toHaveBeenCalled();
+      expect(portalApi.startBackup).not.toHaveBeenCalled();
+    });
+
+    it("keeps the plain button when the balance is enough", () => {
+      render(<ManualBackup {...paidProps} walletBalance={12} />);
+
+      expect(screen.getByText("Common:Create")).toBeInTheDocument();
+    });
+
+    it("keeps the plain button for a non-payer", () => {
+      render(<ManualBackup {...paidProps} isPayer={false} />);
+
+      expect(screen.getByText("Common:Create")).toBeInTheDocument();
+    });
+
+    it("blocks the copy for a non-payer and explains why", () => {
+      render(<ManualBackup {...paidProps} isPayer={false} />);
+
+      expect(
+        screen.getByText("InsufficientFundsWithContact"),
+      ).toBeInTheDocument();
+      expect(screen.getByText("Common:Create").closest("button")).toBeDisabled();
+      expect(screen.getByLabelText("Common:RoomsModule")).toBeDisabled();
+      expect(screen.getByLabelText("Common:ThirdPartyResource")).toBeDisabled();
+      expect(screen.getByLabelText("Common:ThirdPartyStorage")).toBeDisabled();
+    });
+
+    it("does not block the copy for the payer", () => {
+      render(<ManualBackup {...paidProps} />);
+
+      expect(
+        screen.queryByText("InsufficientFundsWithContact"),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText("Common:TopUpAndMakeCopy").closest("button"),
+      ).not.toBeDisabled();
+    });
+
+    it("keeps the plain button when no card is linked", () => {
+      render(<ManualBackup {...paidProps} isCardLinked={false} />);
+
+      expect(screen.getByText("Common:Create")).toBeInTheDocument();
+    });
+
+    it("sends a delayed payment method to the wallet top-up instead of the copy", async () => {
+      const onOpenTopUpDialog = vi.fn();
+
+      render(
+        <ManualBackup
+          {...paidProps}
+          isDelayedPaymentMethod
+          onOpenTopUpDialog={onOpenTopUpDialog}
+        />,
+      );
+
+      await userEvent.click(screen.getByText("Common:TopUpWallet"));
+
+      expect(onOpenTopUpDialog).toHaveBeenCalled();
+      expect(portalApi.saveDeposite).not.toHaveBeenCalled();
+      expect(portalApi.startBackup).not.toHaveBeenCalled();
+    });
   });
 
   it("sets up and cleans up socket listeners", () => {

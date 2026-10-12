@@ -38,15 +38,21 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+
+import { getDeleteVariant } from "./getDeleteVariant";
 
 type DeleteDialogProps = {
   visible: boolean;
   isLoading: boolean;
   itemCount: number;
   isTrash: boolean;
+  /** Empty-trash variant: trash-wide permanent deletion wording. */
+  isEmptyTrash?: boolean;
+  /** The recycle bin is bypassed outside the trash too — e.g. a private room. */
+  isPermanentDelete?: boolean;
   onClose: () => void;
   onConfirm: () => void;
 };
@@ -56,28 +62,55 @@ const DeleteDialog = ({
   isLoading,
   itemCount,
   isTrash,
+  isEmptyTrash,
+  isPermanentDelete,
   onClose,
   onConfirm,
 }: DeleteDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const message = isTrash
-    ? itemCount === 1
-      ? t("Common:DeleteItemForever")
-      : t("Common:DeleteItemsForever", { itemCount })
-    : itemCount === 1
-      ? t("Common:MoveToTrashItem")
-      : t("Common:MoveToTrashItems", { itemCount });
+  const variant = getDeleteVariant({
+    isEmptyTrash,
+    isPermanent: isTrash || !!isPermanentDelete,
+    itemCount,
+  });
+
+  const getMessage = () => {
+    switch (variant) {
+      case "empty-trash":
+        return t("Common:DeleteForeverNote", {
+          sectionName: t("Common:TrashSection"),
+        });
+      case "permanent-one":
+        return t("Common:DeleteItemForever");
+      case "permanent-many":
+        return t("Common:DeleteItemsForever", { itemCount });
+      case "trash-one":
+        return t("Common:MoveToTrashItem");
+      default:
+        return t("Common:MoveToTrashItems", { itemCount });
+    }
+  };
+
+  const message = getMessage();
+
+  const header = isEmptyTrash
+    ? t("Common:DeleteForeverTitle")
+    : t("Common:Delete");
+
+  const confirmLabel = isEmptyTrash
+    ? t("Common:DeleteForeverButton")
+    : t("Common:Delete");
 
   return (
     <ModalDialog visible={visible} onClose={onClose} autoMaxHeight>
-      <ModalDialog.Header>{t("Common:Delete")}</ModalDialog.Header>
+      <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{message}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          label={t("Common:Delete")}
+          label={confirmLabel}
           size={ButtonSize.normal}
           primary
           scale

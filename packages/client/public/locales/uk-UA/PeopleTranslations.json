@@ -1,7 +1,7 @@
 {
   "AccountLoginType": "Тип входу до облікового запису",
   "AddMembers": "Додати учасників",
-  "DeleteSelfProfile": "Видалити профіль",
+  "DeleteSelfProfile": "Деактивувати обліковий запис",
   "DisabledEmployeeStatus": "Відключено",
   "DisableUserButton": "Відключити",
   "EditGroup": "Редагувати групу",

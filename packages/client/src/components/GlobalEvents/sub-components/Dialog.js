@@ -37,12 +37,12 @@ import React, { useState, useCallback, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile, isIOS } from "react-device-detect";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Button } from "@docspace/ui-kit/components/button";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Button } from "@onlyoffice/apps-ui-kit/components/button";
+import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 
 import { removeEmojiCharacters } from "@docspace/shared/utils";
 import { getCreateModalEntityType } from "SRC_DIR/helpers/filesUtils";
@@ -68,10 +68,13 @@ const Dialog = ({
   setKeepNewFileName,
   withForm,
   errorText,
+  withDontAskAgain = true,
 }) => {
   const createEntityType = isCreateDialog
     ? getCreateModalEntityType(extension)
     : null;
+
+  const isDontAskAgainAvailable = isCreateDialog && withDontAskAgain;
 
   const [value, setValue] = useState("");
 
@@ -82,11 +85,7 @@ const Dialog = ({
 
   const hasError = Boolean(errorText) || isError;
 
-  const getTestIdPrefix = useCallback(() => {
-    if (testIdPrefix) return testIdPrefix;
-    if (!title) return "dialog";
-    return title.toLowerCase().replace(/\s+/g, "_");
-  }, [testIdPrefix, title]);
+  const idPrefix = testIdPrefix || "dialog";
 
   const onCancelAction = useCallback(
     (e) => {
@@ -106,14 +105,14 @@ const Dialog = ({
     async (e) => {
       setIsDisabled(true);
       const keepNewFileNamePromise =
-        isCreateDialog && isChecked && setKeepNewFileName(isChecked);
+        isDontAskAgainAvailable && isChecked && setKeepNewFileName(isChecked);
 
       const savePromise = onSave && onSave(e, value);
 
       await Promise.all([keepNewFileNamePromise, savePromise]);
       setIsDisabled(false);
     },
-    [onSave, isCreateDialog, value, isChecked, setKeepNewFileName],
+    [onSave, isDontAskAgainAvailable, value, isChecked, setKeepNewFileName],
   );
 
   const onKeyUpHandler = useCallback(
@@ -140,8 +139,10 @@ const Dialog = ({
   );
 
   useEffect(() => {
-    keepNewFileName && isCreateDialog && setIsChecked(keepNewFileName);
-  }, [isCreateDialog, keepNewFileName]);
+    keepNewFileName &&
+      isDontAskAgainAvailable &&
+      setIsChecked(keepNewFileName);
+  }, [isDontAskAgainAvailable, keepNewFileName]);
 
   useEffect(() => {
     const input = document?.getElementById("create-text-input");
@@ -184,7 +185,7 @@ const Dialog = ({
   }, []);
 
   const onChangeCheckbox = () => {
-    isCreateDialog && setIsChecked((val) => !val);
+    isDontAskAgainAvailable && setIsChecked((val) => !val);
   };
 
   return (
@@ -196,6 +197,7 @@ const Dialog = ({
       onClose={onCloseAction}
       onSubmit={withForm ? onSaveAction : undefined}
       zIndex={405}
+      dataTestId={`${idPrefix}_dialog`}
     >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -219,10 +221,10 @@ const Dialog = ({
             onFocus={onFocus}
             isDisabled={isDisabled}
             maxLength={165}
-            testId={`${getTestIdPrefix()}_text_input`}
+            testId={`${idPrefix}_text_input`}
           />
         </FieldContainer>
-        {isCreateDialog && extension ? (
+        {isDontAskAgainAvailable && extension ? (
           <div
             style={{
               boxSizing: "border-box",
@@ -236,7 +238,7 @@ const Dialog = ({
               label={t("Common:DontAskAgain")}
               isChecked={isChecked}
               onChange={onChangeCheckbox}
-              dataTestId={`${getTestIdPrefix()}_dont_ask_again`}
+              dataTestId={`${idPrefix}_dont_ask_again`}
             />
           </div>
         ) : null}
@@ -247,7 +249,7 @@ const Dialog = ({
             options={options}
             selectedOption={selectedOption}
             onSelect={onSelect}
-            dataTestId={`${getTestIdPrefix()}_combobox`}
+            dataTestId={`${idPrefix}_combobox`}
           />
         ) : null}
       </ModalDialog.Body>
@@ -268,7 +270,7 @@ const Dialog = ({
           isLoading={isDisabled}
           isDisabled={isCreateDisabled || isDisabled || isError}
           onClick={withForm ? undefined : onSaveAction}
-          testId={`${getTestIdPrefix()}_save_button`}
+          testId={`${idPrefix}_save_button`}
         />
         <Button
           className="cancel-button"
@@ -283,7 +285,7 @@ const Dialog = ({
           scale
           isDisabled={isDisabled}
           onClick={onCancelAction}
-          testId={`${getTestIdPrefix()}_cancel_button`}
+          testId={`${idPrefix}_cancel_button`}
         />
       </ModalDialog.Footer>
     </ModalDialog>

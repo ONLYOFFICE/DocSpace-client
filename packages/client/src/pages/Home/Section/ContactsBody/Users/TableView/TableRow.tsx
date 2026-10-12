@@ -34,35 +34,33 @@
  */
 
 import React from "react";
-import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TableCell } from "@docspace/ui-kit/components/table";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { TableCell, TableRow } from "@onlyoffice/apps-ui-kit/components/table";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { EmployeeType } from "@docspace/shared/enums";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/ui-kit/components/combobox";
-import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+} from "@onlyoffice/apps-ui-kit/components/combobox";
+import { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import { USER_TYPE_DROPDOWN_WIDTH } from "SRC_DIR/helpers/contacts";
 
 import Badges from "../../Badges";
 
+import classNames from "classnames";
+
 import { TableRowProps, TableRowStores } from "./TableView.types";
-import {
-  StyledGroupsComboBox,
-  StyledWrapper,
-  StyledPeopleRow,
-} from "./TableView.styled";
+import styles from "./TableView.module.scss";
 
 const PeopleTableRow = ({
   item,
@@ -99,7 +97,6 @@ const PeopleTableRow = ({
   withContentSelection,
   isMe,
 }: TableRowProps) => {
-  const theme = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
 
   const {
@@ -123,9 +120,9 @@ const PeopleTableRow = ({
   const isPending = statusType === "pending" || statusType === "disabled";
 
   const nameColor = isPending
-    ? theme.peopleTableRow.pendingNameColor
-    : theme.peopleTableRow.nameColor;
-  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
+    ? "var(--people-table-row-pending-name-color)"
+    : "var(--people-table-row-name-color)";
+  const sideInfoColor = "var(--people-table-row-side-info-color)";
 
   const getTypesOptions = React.useCallback(() => {
     const options = getUsersChangeTypeOptions!(t, item);
@@ -165,8 +162,8 @@ const PeopleTableRow = ({
 
     if (groups.length > 1)
       return (
-        <StyledGroupsComboBox
-          className="groups-combobox"
+        <ComboBox
+          className={classNames(styles.styledGroupsComboBox, "groups-combobox")}
           selectedOption={{
             key: "first-group",
             title: groups[0].name,
@@ -221,7 +218,7 @@ const PeopleTableRow = ({
         size={ComboBoxSize.content}
         displaySelectedOption
         modernView
-        manualWidth="auto"
+        manualWidth={USER_TYPE_DROPDOWN_WIDTH}
       />
     );
 
@@ -266,21 +263,21 @@ const PeopleTableRow = ({
   const isPaidUser = !standalone && !isVisitor && !isCollaborator;
 
   return (
-    <StyledWrapper
-      id={item.id}
-      className={`user-item ${
-        isChecked || isActive ? "table-row-selected" : ""
-      } ${item.id}`}
-      value={value}
+    <div
+      id={String(item.id)}
+      className={classNames(styles.styledWrapper, "user-item", {
+        "table-row-selected": isChecked || isActive,
+      }, String(item.id))}
+      {...({ value } as unknown as { value?: string })}
     >
-      <StyledPeopleRow
+      <TableRow
         key={item.id}
-        className="table-row"
-        checked={isChecked}
-        isActive={isActive!}
+        className={classNames(styles.styledPeopleRow, "table-row", {
+          [styles.checked]: isChecked || isActive,
+          [styles.hideColumns]: hideColumns,
+        })}
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
-        hideColumns={hideColumns}
         contextOptions={item.options as unknown as ContextMenuModel[]}
         getContextModel={getContextModel!}
         isIndexEditingMode={false}
@@ -454,8 +451,8 @@ const PeopleTableRow = ({
             ) : (
               <div />
             ))}
-      </StyledPeopleRow>
-    </StyledWrapper>
+      </TableRow>
+    </div>
   );
 };
 

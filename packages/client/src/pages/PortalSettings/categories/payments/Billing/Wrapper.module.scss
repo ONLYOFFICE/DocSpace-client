@@ -1,0 +1,10 @@
+/* The warning comes from the navigation component, so its header-specific
+   bottom margin is replaced with the spacing this page needs. */
+.payerWarning {
+  display: flex;
+  margin-bottom: 16px;
+
+  > div {
+    margin-bottom: 0;
+  }
+}

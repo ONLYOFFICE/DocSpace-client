@@ -39,18 +39,18 @@ import { Trans } from "react-i18next";
 import resizeImage from "resize-image";
 
 import { TTranslation } from "@docspace/shared/types";
-import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
 
-// import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-// import { Text } from "@docspace/ui-kit/components/text";
+// import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+// import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { getOAuthValidationCodeTranslation } from "../ClientForm.utils";
-import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
@@ -145,9 +145,9 @@ const BasicBlock = ({
   const isLogoRequiredError = requiredErrorFields.includes("logo");
 
   return (
-    <StyledBlock>
+    <div className={styles.styledBlock}>
       <BlockHeader header={t("BasicInfo")} />
-      <StyledInputBlock>
+      <div className={styles.styledInputBlock}>
         <InputGroup
           label={t("OAuth:AppName")}
           name="name"
@@ -159,7 +159,7 @@ const BasicBlock = ({
                   t,
                   serverFieldErrors?.["name"] ?? "ErrorName",
                 )
-              : t("ThisRequiredField")
+              : t("Common:ThisRequiredField")
           }
           onChange={onChange}
           isRequired
@@ -170,7 +170,7 @@ const BasicBlock = ({
         <InputGroup
           label={t("WebsiteUrl")}
           name="website_url"
-          placeholder={t("EnterURL")}
+          placeholder={t("Common:EnterURL")}
           value={websiteUrlValue}
           error={
             isWebsiteError
@@ -178,7 +178,7 @@ const BasicBlock = ({
                   t,
                   serverFieldErrors?.["website_url"] ?? "ErrorWrongURL",
                 )
-              : t("ThisRequiredField")
+              : t("Common:ThisRequiredField")
           }
           onChange={onChange}
           disabled={isEdit}
@@ -190,7 +190,7 @@ const BasicBlock = ({
         <FieldContainer
           isVertical
           labelVisible={false}
-          errorMessage={t("ThisRequiredField")}
+          errorMessage={t("Common:ThisRequiredField")}
           hasError={isLogoRequiredError}
           className="icon-field"
           dataTestId="app_icon_field"
@@ -198,7 +198,7 @@ const BasicBlock = ({
           <SelectGroup
             label={t("AppIcon")}
             value={logoValue}
-            selectLabel={t("SelectNewImage")}
+            selectLabel={t("Common:SelectNewImage")}
             description={t("IconDescription")}
             onSelect={onSelect}
             dataTestId="select_new_image_container"
@@ -208,7 +208,7 @@ const BasicBlock = ({
         <TextAreaGroup
           label={t("Common:DescriptionLabel")}
           name="description"
-          placeholder={t("EnterDescription")}
+          placeholder={t("Common:EnterDescription")}
           value={descriptionValue}
           onChange={onChange}
           increaseHeight={isLogoRequiredError}
@@ -217,7 +217,7 @@ const BasicBlock = ({
         <InputGroup
           label={t("AuthenticationMethod")}
           name="auth_method"
-          placeholder={t("EnterURL")}
+          placeholder={t("Common:EnterURL")}
           value={websiteUrlValue}
           error=""
           onChange={() => {}}
@@ -238,8 +238,8 @@ const BasicBlock = ({
             />
           </div>
         </InputGroup>
-      </StyledInputBlock>
-    </StyledBlock>
+      </div>
+    </div>
   );
 };
 

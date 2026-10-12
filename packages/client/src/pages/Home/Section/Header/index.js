@@ -36,6 +36,7 @@
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import PublicRoomRestrictedIconUrl from "PUBLIC_DIR/images/public-room.restricted.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
+import EncryptedRoomIconUrl from "PUBLIC_DIR/images/icons/16/security.private.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
@@ -49,7 +50,7 @@ import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
-import Navigation from "@docspace/ui-kit/components/navigation";
+import Navigation from "@onlyoffice/apps-ui-kit/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
@@ -57,8 +58,8 @@ import {
   getCheckboxItemId,
   getCheckboxItemLabel,
 } from "@docspace/shared/utils";
-import { Context } from "@docspace/ui-kit/utils/context";
-import { TableGroupMenu } from "@docspace/ui-kit/components/table";
+import { Context } from "@onlyoffice/apps-ui-kit/utils/context";
+import { TableGroupMenu } from "@onlyoffice/apps-ui-kit/components/table";
 import {
   RoomsType,
   DeviceType,
@@ -78,11 +79,16 @@ import {
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
-import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
-import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import {
+  getLifetimePeriodTranslation,
+  getCategoryType,
+} from "@docspace/shared/utils/common";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
+import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHeader";
 
@@ -147,6 +153,8 @@ const SectionHeaderContent = (props) => {
     setGroupsSelected,
     isRoomAdmin,
     isEmptyPage,
+    isGroupsEmpty,
+    groupsIsFiltered,
 
     isLoading,
 
@@ -164,7 +172,6 @@ const SectionHeaderContent = (props) => {
     showNavigationButton,
     startUpload,
     getFolderModel,
-    getContactsModel,
     contactsCanCreate,
     onCreateRoom,
     onCreateAgent,
@@ -184,14 +191,9 @@ const SectionHeaderContent = (props) => {
     getIndexingArray,
     setCloseEditIndexDialogVisible,
     rootFolderId,
-    guidAnimationVisible,
-    setGuidAnimationVisible,
-    setRefMap,
-    deleteRefMap,
     isPersonalReadOnly,
+    isPrivacyFolder,
     showTemplateBadge,
-
-    allowInvitingMembers,
 
     isAIRoom,
     isAIAgent,
@@ -231,25 +233,21 @@ const SectionHeaderContent = (props) => {
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isProfile = currentClientView === "profile";
+
+  // The "Forms" section reuses the Rooms folder; detect it from the route to
+  // adjust section labels (title, create-button caption) accordingly. This is
+  // the bare forms LIST only (CategoryType.Forms); inside a form room the
+  // route is /forms/{id}/... (CategoryType.Form) where the room-level labels
+  // apply instead.
+  const isFormsSection = getCategoryType(location) === CategoryType.Forms;
+
+  // The whole Forms route tree — the list AND any folder opened inside a
+  // form-filling room. Breadcrumb navigation uses this to keep the /forms
+  // scope: form rooms live in the VirtualRooms tree, so their folders report
+  // rootFolderType = Rooms (14); deriving the URL from that alone would send
+  // the crumb to /rooms/shared/... and switch the section to Rooms.
+  const isFormsRoute = location.pathname.startsWith("/forms");
   const currentGroupName = currentGroup?.name;
-
-  const addButtonRefCallback = React.useCallback(
-    (ref) => {
-      if (ref) {
-        setRefMap(GuidanceRefKey.Uploading, ref);
-      }
-    },
-    [setRefMap],
-  );
-
-  const buttonRefCallback = React.useCallback(
-    (ref) => {
-      if (ref) {
-        setRefMap(GuidanceRefKey.Share, ref);
-      }
-    },
-    [setRefMap],
-  );
 
   const { getContactsMenuItems, onContactsChange } = useContactsHeader({
     setUsersSelected,
@@ -305,26 +303,24 @@ const SectionHeaderContent = (props) => {
     // setIsInfoPanelVisible(!isInfoPanelVisible);
   }, [hideInfoPanelEvent, isInfoPanelVisible, showInfoPanel]);
 
-  const contextButtonAnimation = React.useCallback(
-    (setAnimationClasses) => {
-      setAnimationClasses(["guid-animation-after"]);
+  // The AI chat panel is hosted by Home (see `useAiChatPanel` there), but the
+  // provider mounts only after auth init: a cold start straight into this
+  // header (a public room link in a fresh session) renders it before Shell
+  // wraps the layout in AiAgentProviders, so the strict hook would throw and
+  // flash the route error boundary (Bug 83319). `usePanelExclusivity` takes
+  // care of closing the info panel when the chat opens, so the toggle only
+  // has to flip its own panel.
+  const aiChatStore = useAiChatStoreOptional();
+  const openAiChat = useOpenAiChat();
+  const isAiChatAvailable = useIsAiChatAvailable();
 
-      const beforeTimer = setTimeout(() => {
-        setAnimationClasses(["guid-animation-after", "guid-animation-before"]);
-      }, 1000);
-
-      const removeTimer = setTimeout(() => {
-        setAnimationClasses([]);
-        setGuidAnimationVisible(false);
-      }, 3000);
-
-      return () => {
-        clearTimeout(beforeTimer);
-        clearTimeout(removeTimer);
-      };
-    },
-    [setGuidAnimationVisible],
-  );
+  const onToggleChatPanel = React.useCallback(() => {
+    if (aiChatStore?.isVisible) {
+      aiChatStore.close();
+    } else {
+      openAiChat();
+    }
+  }, [aiChatStore, openAiChat]);
 
   const getContextOptionsFolder = React.useCallback(() => {
     if (isProfile) return getUserContextOptions();
@@ -432,10 +428,17 @@ const SectionHeaderContent = (props) => {
 
       setSelectedNode(id);
 
-      const path = getCategoryUrl(
-        getCategoryTypeByFolderType(rootFolderType, id),
-        id,
-      );
+      // The Forms section resolves its rooms from the VirtualRooms tree, so
+      // folders opened inside a form-filling room report rootFolderType =
+      // Rooms (14), not Forms. Deriving the category from rootFolderType would
+      // send the breadcrumb to /rooms/shared/... and highlight Rooms. Detect
+      // the Forms route instead and keep the /forms scope (id is always a real
+      // folder/room id here, so it maps to CategoryType.Form → /forms/{id}).
+      const categoryType = isFormsRoute
+        ? CategoryType.Form
+        : getCategoryTypeByFolderType(rootFolderType, id);
+
+      const path = getCategoryUrl(categoryType, id);
 
       const filter = FilesFilter.getDefault();
 
@@ -483,17 +486,39 @@ const SectionHeaderContent = (props) => {
       isAIRoom,
       setSelected,
       setIsLoading,
+      isFormsRoute,
     ],
   );
 
-  const getContextOptionsPlus = React.useCallback(() => {
-    if (isContactsPage) return getContactsModel(t);
-    return getFolderModel(t);
-  }, [isContactsPage, getContactsModel, getFolderModel, t, contactsTab]);
+  const getContextOptionsPlus = React.useCallback(
+    () => getFolderModel(t),
+    [getFolderModel, t],
+  );
+
+  const onPlusClick = React.useCallback(() => {
+    if (isContactsGroupsPage) return createGroup();
+    if (isAIAgentsFolder) return onCreateAgent();
+    return onCreateRoom();
+  }, [isContactsGroupsPage, isAIAgentsFolder, onCreateAgent, onCreateRoom]);
+
+  const isPlusButtonVisible =
+    (isEmptyPage && !isContactsPage) ||
+    (isContactsGroupsPage && isGroupsEmpty && !groupsIsFiltered);
 
   const onNavigationButtonClick = React.useCallback(() => {
-    onCreateAndCopySharedLink(selectedFolder, t);
-  }, [onCreateAndCopySharedLink, selectedFolder, t]);
+    const roomInPath = navigationPath?.find((item) => item.isRoom);
+
+    const shareTarget =
+      !selectedFolder?.isRoom && roomInPath
+        ? {
+            ...roomInPath,
+            isRoom: true,
+            rootFolderType: selectedFolder?.rootFolderType,
+          }
+        : selectedFolder;
+
+    onCreateAndCopySharedLink(shareTarget, t);
+  }, [onCreateAndCopySharedLink, navigationPath, selectedFolder, t]);
 
   const onCloseIndexMenu = React.useCallback(() => {
     const items = getIndexingArray();
@@ -534,9 +559,12 @@ const SectionHeaderContent = (props) => {
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
   const sharedType =
     (location.state?.isExternal || selectedFolder?.external) && !isPublicRoom;
+  const isEncryptedRoom = selectedFolder?.private === true || isPrivacyFolder;
 
   const titleIcon = React.useMemo(() => {
     if (sharedType) return SharedLinkSvgUrl;
+
+    if (isEncryptedRoom) return EncryptedRoomIconUrl;
 
     if (navigationButtonIsVisible && !isPublicRoom) {
       const roomInPath = (
@@ -565,6 +593,7 @@ const SectionHeaderContent = (props) => {
     return "";
   }, [
     sharedType,
+    isEncryptedRoom,
     navigationButtonIsVisible,
     isPublicRoom,
     isArchive,
@@ -602,6 +631,8 @@ const SectionHeaderContent = (props) => {
   const titleIconTooltip = React.useMemo(() => {
     if (sharedType) return t("Files:RecentlyOpenedTooltip");
 
+    if (isEncryptedRoom) return t("Common:PrivateRoomDescription");
+
     if (lifetime)
       return `${t("Common:RoomFilesLifetime", {
         days: lifetime.value,
@@ -615,7 +646,7 @@ const SectionHeaderContent = (props) => {
       }`;
 
     return null;
-  }, [sharedType, lifetime, t]);
+  }, [sharedType, isEncryptedRoom, lifetime, t]);
 
   const onLogoClick = React.useCallback(() => {
     if (isFrame) return;
@@ -747,6 +778,11 @@ const SectionHeaderContent = (props) => {
 
     if (isSettingsPage) return t("Common:Settings");
 
+    if (getCategoryType(location) === CategoryType.Forms)
+      return selectedFolder?.rootFolderType === FolderType.RoomTemplates
+        ? t("Common:Templates")
+        : t("Common:Forms");
+
     if (isContactsPage) {
       switch (contactsTab) {
         case "people":
@@ -776,12 +812,17 @@ const SectionHeaderContent = (props) => {
     insideGroupTempTitle,
     currentGroupName,
     title,
+    location,
+    selectedFolder?.rootFolderType,
   ]);
 
   const contextMenuHeader = React.useMemo(() => {
     const srcLogo = selectedFolder?.logo || null;
     const title = currentTitle || selectedFolder?.title || "";
-    const headerBadgeUrl = titleIcon.includes("public-room") ? titleIcon : "";
+    const headerBadgeUrl =
+      titleIcon.includes("public-room") || titleIcon.includes("security")
+        ? titleIcon
+        : "";
 
     const iconUrl = getIcon(
       32,
@@ -853,17 +894,11 @@ const SectionHeaderContent = (props) => {
     return [];
   }, [isContactsInsideGroupPage, t]);
 
-  React.useEffect(() => {
-    return () => {
-      deleteRefMap(GuidanceRefKey.Share);
-      deleteRefMap(GuidanceRefKey.Uploading);
-    };
-  }, [deleteRefMap]);
-
   const isCurrentRoom = isRoom;
 
   const insideTheRoom =
     (categoryType === CategoryType.SharedRoom ||
+      categoryType === CategoryType.Form ||
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
@@ -928,35 +963,6 @@ const SectionHeaderContent = (props) => {
     isRecycleBinFolder,
     isEmptyFilesList,
     isRootFolder,
-  ]);
-
-  const onPlusClick = React.useCallback(() => {
-    if (isAIAgentsFolder) return onCreateAgent();
-    if (!isContactsPage) return onCreateRoom();
-    if (isContactsGroupsPage) return createGroup(selectedFolder?.id, "sidebar");
-  }, [
-    isAIAgentsFolder,
-    isContactsPage,
-    isContactsGroupsPage,
-    onCreateAgent,
-    onCreateRoom,
-    createGroup,
-  ]);
-
-  const isPlusButtonVisible = React.useMemo(() => {
-    if (allowInvitingMembers) return true;
-
-    if (!isContactsPage || isContactsGroupsPage) return true;
-
-    const lengthList = getContextOptionsPlus()?.length;
-    if (!lengthList || lengthList === 0) return false;
-
-    return true;
-  }, [
-    getContextOptionsPlus,
-    isContactsPage,
-    isContactsGroupsPage,
-    allowInvitingMembers,
   ]);
 
   const withMenu = !isRoomsFolder && !isContactsGroupsPage && !isAIAgentsFolder;
@@ -1024,16 +1030,27 @@ const SectionHeaderContent = (props) => {
               }
               toggleInfoPanel={isProfile ? undefined : onToggleInfoPanel}
               isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}
+              toggleChatPanel={onToggleChatPanel}
+              isChatPanelVisible={!!aiChatStore?.isVisible}
+              hideChatButton={
+                !isAiChatAvailable ||
+                isSettingsPage ||
+                isPublicRoom ||
+                isProfile
+              }
               titles={{
                 warningText,
                 warningIcon: isRoomStorageQuotaExceeded
                   ? WarningQuotaExceededUrl
                   : undefined,
-                actions: isRoomsFolder
-                  ? t("Common:NewRoom")
-                  : t("Common:Actions"),
+                actions: isFormsSection
+                  ? t("Common:CreateFormSet")
+                  : isRoomsFolder
+                    ? t("Common:NewRoom")
+                    : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
+                aiChat: t("Common:AIChatButton"),
               }}
               withMenu={withMenu}
               onPlusClick={onPlusClick}
@@ -1069,11 +1086,6 @@ const SectionHeaderContent = (props) => {
               badgeLabel={badgeLabel}
               onContextOptionsClick={onContextOptionsClick}
               onLogoClick={onLogoClick}
-              buttonRef={buttonRefCallback}
-              addButtonRef={addButtonRefCallback}
-              contextButtonAnimation={contextButtonAnimation}
-              guidAnimationVisible={guidAnimationVisible}
-              setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
               isPlusButtonVisible={isPlusButtonVisible}
               showBackButton={isProfile}
@@ -1141,7 +1153,6 @@ export default inject(
     uploadDataStore,
     indexingStore,
     dialogsStore,
-    guidanceStore,
     aiRoomStore,
     profileActionsStore,
     mediaViewerDataStore,
@@ -1171,8 +1182,6 @@ export default inject(
       selection: filesSelection,
     } = filesStore;
 
-    const { setRefMap, deleteRefMap } = guidanceStore;
-
     const {
       setIsSectionBodyLoading,
       showHeaderLoader,
@@ -1193,14 +1202,12 @@ export default inject(
       isPersonalReadOnly,
       isSharedWithMeFolderRoot,
       isAIAgentsFolder,
+      isPrivacyFolder,
     } = treeFoldersStore;
 
     const {
       setReorderDialogVisible,
       setCloseEditIndexDialogVisible,
-      welcomeFormFillingTipsVisible,
-      setGuidAnimationVisible,
-      guidAnimationVisible,
     } = dialogsStore;
 
     const {
@@ -1234,14 +1241,8 @@ export default inject(
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const {
-      theme,
-      frameConfig,
-      isFrame,
-      currentDeviceType,
-      displayAbout,
-      allowInvitingMembers,
-    } = settingsStore;
+    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
+      settingsStore;
 
     const isRoom = !!roomType;
 
@@ -1276,6 +1277,8 @@ export default inject(
       setSelected: setGroupsSelected,
       setBufferSelection: setGroupsBufferSelection,
       insideGroupTempTitle,
+      groups,
+      groupsIsFiltered,
     } = groupsStore;
 
     const {
@@ -1291,8 +1294,7 @@ export default inject(
       getContactsHeaderMenu,
     } = headerMenuStore;
 
-    const { getContactsModel, contactsCanCreate } =
-      peopleStore.contextOptionsStore;
+    const { contactsCanCreate } = peopleStore.contextOptionsStore;
 
     const { setSelected: setUsersSelected, contactsTab } = usersStore;
 
@@ -1390,6 +1392,7 @@ export default inject(
       isEmptyFilesList,
       isEmptyArchive,
       isArchiveFolder,
+      isPrivacyFolder,
 
       setIsLoading,
 
@@ -1423,6 +1426,8 @@ export default inject(
       isCollaborator,
       isVisitor,
       isEmptyPage,
+      isGroupsEmpty: groups?.length === 0,
+      groupsIsFiltered,
       categoryType,
       theme,
       isFrame,
@@ -1445,7 +1450,6 @@ export default inject(
       setReorderDialogVisible,
       setGroupsBufferSelection,
       createFoldersTree,
-      getContactsModel,
       contactsCanCreate,
       revokeFilesOrder,
       saveIndexOfFiles,
@@ -1455,13 +1459,7 @@ export default inject(
       infoPanelRoom: infoPanelRoomSelection,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
-      welcomeFormFillingTipsVisible,
-      guidAnimationVisible,
-      setGuidAnimationVisible,
-      setRefMap,
-      deleteRefMap,
       showTemplateBadge: isTemplate && !isRoot,
-      allowInvitingMembers,
 
       isAIRoom,
       isAIAgent,
@@ -1507,4 +1505,3 @@ export default inject(
     "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
-

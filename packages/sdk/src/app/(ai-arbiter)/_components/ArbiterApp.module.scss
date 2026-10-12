@@ -1,0 +1,378 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@onlyoffice/apps-ui-kit/styles/variables/colors";
+
+.tokens {
+  :global(.light) & {
+    --arbiter-panel-bg: #{colors.$white};
+    --arbiter-panel-border: #{colors.$gray-light-mid};
+    --arbiter-panel-header-bg: #{colors.$gray-light};
+    --arbiter-divider: #{colors.$gray-light-mid};
+    --arbiter-muted: #{colors.$gray};
+    --arbiter-accent: #{colors.$light-blue-main};
+    --arbiter-status-positive: #{colors.$light-status-positive};
+    --arbiter-status-negative: #{colors.$light-error-status};
+  }
+
+  :global(.dark) & {
+    --arbiter-panel-bg: #{colors.$black};
+    --arbiter-panel-border: #{colors.$gray-dark-strong};
+    --arbiter-panel-header-bg: #{colors.$dark-gray-light};
+    --arbiter-divider: #{colors.$gray-dark-strong};
+    --arbiter-muted: #{colors.$gray-dark};
+    --arbiter-accent: #{colors.$light-blue-main};
+    --arbiter-status-positive: #{colors.$dark-status-positive};
+    --arbiter-status-negative: #{colors.$dark-error-status};
+  }
+}
+
+.shell {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+
+  > :global(.theme-portal-base),
+  > :global(.theme-portal-dark) {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.layout {
+  composes: tokens;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.pageHeader {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--arbiter-divider);
+}
+
+.pageHeaderText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pageHeaderActions {
+  flex: 0 0 auto;
+}
+
+.inputArea {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--arbiter-divider);
+}
+
+.questionRow {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.questionField {
+  flex: 1;
+  min-width: 0;
+  --textarea-width: 100%;
+}
+
+.runButton {
+  flex: 0 0 auto;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+.metaRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-inline-start: auto;
+}
+
+.pickerBar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--arbiter-divider);
+}
+
+.pickerLabel {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.agentItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 320px;
+  min-width: 0;
+}
+
+.agentItemArbiter {
+  composes: agentItem;
+  max-width: 480px;
+}
+
+.panelsArea {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 16px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.expertSection {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.arbiterSection {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 260px;
+}
+
+.sectionTitle {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.expertsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: clamp(180px, 30vh, 320px);
+  gap: 12px;
+}
+
+.emptyHint {
+  padding: 48px 24px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--arbiter-panel-border);
+  border-radius: 6px;
+  background: var(--arbiter-panel-bg);
+
+  &[data-status="aborted"] {
+    opacity: 0.6;
+  }
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--arbiter-panel-header-bg);
+  border-bottom: 1px solid var(--arbiter-panel-border);
+  user-select: none;
+}
+
+.panelHeaderClickable {
+  composes: panelHeader;
+  cursor: pointer;
+}
+
+.panelTitle {
+  flex: 1;
+  min-width: 0;
+}
+
+.panelStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.panelBody {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+
+  :global(h1) {
+    font-size: 15px;
+    margin: 0 0 8px;
+  }
+  :global(h2) {
+    font-size: 14px;
+    margin: 12px 0 6px;
+  }
+  :global(h3),
+  :global(h4),
+  :global(h5),
+  :global(h6) {
+    font-size: 13px;
+    margin: 8px 0 4px;
+  }
+  :global(p) {
+    margin: 0 0 8px;
+  }
+  :global(ul),
+  :global(ol) {
+    margin: 0 0 8px;
+    padding-inline-start: 18px;
+  }
+  :global(li) {
+    margin-bottom: 3px;
+  }
+}
+
+.panelArbiter {
+  composes: panel;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.panelBodyArbiter {
+  composes: panelBody;
+  padding: 16px;
+}
+
+.fullscreenBody {
+  composes: tokens;
+  padding-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+
+  :global(h1) {
+    font-size: 20px;
+    margin: 0 0 12px;
+  }
+  :global(h2) {
+    font-size: 17px;
+    margin: 20px 0 8px;
+  }
+  :global(h3) {
+    font-size: 15px;
+    margin: 16px 0 6px;
+  }
+  :global(h4),
+  :global(h5),
+  :global(h6) {
+    font-size: 14px;
+    margin: 12px 0 4px;
+  }
+  :global(p) {
+    margin: 0 0 10px;
+  }
+  :global(ul),
+  :global(ol) {
+    margin: 0 0 10px;
+    padding-inline-start: 20px;
+  }
+  :global(li) {
+    margin-bottom: 4px;
+  }
+}
+
+.fullscreenTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.reasoningSection {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--arbiter-divider);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.spinnerDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--arbiter-accent);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}

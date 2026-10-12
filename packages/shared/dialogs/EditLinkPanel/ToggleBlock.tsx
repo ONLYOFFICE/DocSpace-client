@@ -35,11 +35,12 @@
 
 import { type FC, type PropsWithChildren, useId } from "react";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
 import type { ToggleBlockProps } from "./EditLinkPanel.types";
+import styles from "./EditLinkPanel.module.scss";
 
 const ToggleBlock: FC<PropsWithChildren<ToggleBlockProps>> = ({
   headerText,
@@ -58,20 +59,20 @@ const ToggleBlock: FC<PropsWithChildren<ToggleBlockProps>> = ({
 
   return (
     <>
-      <div className="edit-link-toggle-block">
-        <div className="edit-link-toggle-header">
+      <div className={styles.toggleBlock}>
+        <div className={styles.toggleHeader}>
           <Text fontSize="16px" fontWeight={700}>
             {headerText}
           </Text>
           {withToggle ? (
-            <div className="edit-link-toggle--wrapper" id={tooltipId}>
+            <div className={styles.toggleWrapper} id={tooltipId}>
               <ToggleButton
                 isLoading={isLoading}
                 isDisabled={isDisabled}
                 isChecked={isChecked}
                 onChange={onChange}
                 dataTestId={dataTestId}
-                className="edit-link-toggle"
+                className={styles.toggle}
               />
             </div>
           ) : null}
@@ -80,8 +81,8 @@ const ToggleBlock: FC<PropsWithChildren<ToggleBlockProps>> = ({
           <Text
             className={
               isExpired
-                ? "edit-link-toggle-description_expired"
-                : "edit-link-toggle-description"
+                ? styles.toggleDescriptionExpired
+                : styles.toggleDescription
             }
             fontSize="12px"
             fontWeight={400}

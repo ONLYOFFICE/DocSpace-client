@@ -140,7 +140,7 @@ const TagInput = ({
         ref={inputRef}
         id="shared_tags-input"
         title={title ? `${title}:` : `${t("Common:Tags")}:`}
-        placeholder={t("TagsPlaceholder")}
+        placeholder={t("Common:TagsPlaceholder")}
         value={tagInput}
         onChange={onTagInputChange}
         onFocus={handleFocus}
@@ -158,7 +158,7 @@ const TagInput = ({
         tagHandler={tagHandler}
         tagInputValue={tagInput}
         setTagInputValue={setTagInput}
-        createTagLabel={t("CreateTagOption")}
+        createTagLabel={t("Common:CreateTagOption")}
         closeDropdown={closeDropdown}
       />
 
@@ -168,3 +168,4 @@ const TagInput = ({
 };
 
 export default TagInput;
+

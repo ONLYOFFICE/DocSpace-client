@@ -46,8 +46,9 @@ import {
   manageFormFilling,
 } from "@docspace/shared/api/files";
 import { FormFillingManageAction } from "@docspace/shared/enums";
-import { toastr } from "@docspace/ui-kit/components/toast";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { frameCallEvent } from "@docspace/shared/utils/common";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
@@ -56,8 +57,9 @@ import type { TTranslation } from "@docspace/shared/types";
 import type { EditorAction } from "../_store/FormsNavigationStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
+import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
+import { toFrameEntity } from "@/utils/frameEntity";
 
-import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsDeleteDialogStore } from "../_store/FormsDeleteDialogStore";
@@ -69,8 +71,8 @@ type UseFormsActionsProps = { t: TTranslation };
 
 export default function useFormsActions({ t }: UseFormsActionsProps) {
   const { sdkConfig } = useSDKConfig();
+  const filesSettingsStore = useFilesSettingsStore();
   const { openEditor } = useFormsNavigationStore();
-  const { closePanel } = useFormsAiAgentStore();
   const formsListStore = useFormsListStore();
   const deleteDialogStore = useFormsDeleteDialogStore();
   const progressStore = useFormsProgressStore();
@@ -87,10 +89,43 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         return;
       }
 
-      closePanel();
+      if (sdkConfig?.events?.onEditorOpen) {
+        frameCallEvent({
+          event: "onEditorOpen",
+          data: { ...toFrameEntity(file), action },
+        });
+        return;
+      }
+
+      const openInSameTab =
+        sdkConfig?.openEditorInSameTab ??
+        filesSettingsStore.filesSettings?.openEditorInSameTab ??
+        true;
+
+      if (!openInSameTab) {
+        const editorOrigin =
+          window.ClientConfig?.proxy?.url ||
+          window.ClientConfig?.api?.origin ||
+          window.location.origin;
+        const params = new URLSearchParams();
+        params.set("fileId", file.id.toString());
+        params.append("action", action);
+        window.open(
+          combineUrl(editorOrigin, `/doceditor?${params.toString()}`),
+          "_blank",
+        );
+        return;
+      }
+
       openEditor(file, action);
     },
-    [sdkConfig?.events?.onFileManagerClick, closePanel, openEditor],
+    [
+      sdkConfig?.events?.onFileManagerClick,
+      sdkConfig?.events?.onEditorOpen,
+      sdkConfig?.openEditorInSameTab,
+      filesSettingsStore.filesSettings?.openEditorInSameTab,
+      openEditor,
+    ],
   );
 
   const downloadFile = useCallback(

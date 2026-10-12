@@ -41,18 +41,18 @@ import { observer } from "mobx-react";
 import { useRouter } from "next/navigation";
 import toLower from "lodash/toLower";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import {
   TextInput,
   InputType,
   InputSize,
-} from "@docspace/ui-kit/components/text-input";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+} from "@onlyoffice/apps-ui-kit/components/text-input";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { validatePortalName } from "@docspace/shared/utils/common";
 
 import type { TDomainValidator } from "@docspace/shared/api/settings/types";
@@ -60,7 +60,6 @@ import type { TUser } from "@docspace/shared/api/people/types";
 
 import { useStores } from "@/hooks/useStores";
 import styles from "../dialogs.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const CreatePortalDialog = observer(
   ({
@@ -155,13 +154,11 @@ export const CreatePortalDialog = observer(
         displayType={ModalDialogType.modal}
       >
         <ModalDialog.Header>
-          {t("CreatingPortal", { productName: getBrandName("ProductName") })}
+          {t("CreatingPortal")}
         </ModalDialog.Header>
         <ModalDialog.Body>
           <Text>
-            {t("CreateSpaceDescription", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("CreateSpaceDescription")}
           </Text>
           <div className={styles.createPortalInputBlock}>
             <Text
@@ -169,9 +166,7 @@ export const CreatePortalDialog = observer(
               fontWeight="600"
               style={{ paddingBottom: "5px" }}
             >
-              {t("PortalName", {
-                productName: getBrandName("ProductName"),
-              })}
+              {t("PortalName")}
             </Text>
             <TextInput
               testId="create-portal-input"

@@ -35,7 +35,7 @@
 
 import { useTranslation } from "react-i18next";
 
-import { TTableColumn, TableHeader } from "@docspace/ui-kit/components/table";
+import { TTableColumn, TableHeader } from "@onlyoffice/apps-ui-kit/components/table";
 
 import { HeaderProps } from "../TableView.types";
 
@@ -62,7 +62,7 @@ const Header = (props: HeaderProps) => {
     },
     {
       key: "Modified",
-      title: t("Files:ByLastModified"),
+      title: t("Common:ByLastModified"),
       resizable: true,
       enable: true,
       minWidth: 150,
@@ -100,3 +100,4 @@ const Header = (props: HeaderProps) => {
 };
 
 export default Header;
+

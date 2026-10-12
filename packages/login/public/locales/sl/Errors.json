@@ -11,6 +11,7 @@
   "OAuthApplicationDisabled": "Ta aplikacija je onemogočena",
   "OAuthApplicationEmpty": "Aplikacije ni bilo mogoče najti",
   "OAuthClientEmpty": "ID-ja stranke ni bilo mogoče najti",
+  "OAuthInvalidRequest": "Zahteva za avtorizacijo ni veljavna. Preverite preusmeritveni URI v nastavitvah aplikacije",
   "RecaptchaInvalid": "Neveljaven Recaptcha",
   "SsoAttributesNotFound": "Preverjanje ni uspelo (potrditvenih atributov ni mogoče najti)",
   "SsoAuthFailed": "Preverjanje ni uspelo",

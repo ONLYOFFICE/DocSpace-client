@@ -50,6 +50,16 @@ vi.mock("../ViewerPlayer", () => ({
   ViewerPlayer: () => <div data-testid="viewer-player">Viewer Player</div>,
 }));
 
+vi.mock("../ViewerLoader", () => ({
+  ViewerLoader: () => <div data-testid="viewer-loader">Loading</div>,
+}));
+
+vi.mock("../MessageError", () => ({
+  MessageError: ({ errorTitle }: { errorTitle: string }) => (
+    <div data-testid="message-error">{errorTitle}</div>
+  ),
+}));
+
 vi.mock("../PDFViewer", () => ({
   PDFViewer: () => <div data-testid="pdf-viewer">PDF Viewer</div>,
 }));
@@ -256,6 +266,67 @@ describe("Viewer", () => {
   it("renders PDF viewer when isPdf is true", () => {
     render(<Viewer {...defaultProps} isImage={false} isPdf />);
     expect(screen.getByTestId("pdf-viewer")).toBeInTheDocument();
+  });
+
+  // A file from a private room has no URL until it is decrypted. Mounting the
+  // player meanwhile leaves an empty frame, so show the loader instead.
+  it("shows the loader while a file is being decrypted", () => {
+    render(
+      <Viewer
+        {...defaultProps}
+        isImage={false}
+        isVideo
+        isDecrypting
+        fileUrl={undefined}
+      />,
+    );
+    expect(screen.getByTestId("viewer-loader")).toBeInTheDocument();
+    expect(screen.queryByTestId("viewer-player")).not.toBeInTheDocument();
+  });
+
+  it("replaces the media with the standard error when decryption failed", () => {
+    render(
+      <Viewer
+        {...defaultProps}
+        isImage={false}
+        isVideo
+        fileUrl={undefined}
+        decryptionError="Failed to decrypt: secret.mp4"
+      />,
+    );
+    expect(screen.getByTestId("message-error")).toHaveTextContent(
+      "Failed to decrypt: secret.mp4",
+    );
+    expect(screen.queryByTestId("viewer-player")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("viewer-loader")).not.toBeInTheDocument();
+  });
+
+  it("keeps showing the loader while decryption is still running", () => {
+    render(
+      <Viewer
+        {...defaultProps}
+        isImage={false}
+        isVideo
+        isDecrypting
+        decryptionError="stale failure of the previous file"
+      />,
+    );
+    expect(screen.getByTestId("viewer-loader")).toBeInTheDocument();
+    expect(screen.queryByTestId("message-error")).not.toBeInTheDocument();
+  });
+
+  it("renders the player once decryption produced a URL", () => {
+    render(
+      <Viewer
+        {...defaultProps}
+        isImage={false}
+        isVideo
+        isDecrypting={false}
+        fileUrl="blob:decrypted"
+      />,
+    );
+    expect(screen.getByTestId("viewer-player")).toBeInTheDocument();
+    expect(screen.queryByTestId("viewer-loader")).not.toBeInTheDocument();
   });
 
   it("hides navigation buttons when playlist has single item", () => {

@@ -1,4 +1,4 @@
 {
   "ErrorEmptyResponse": "Пуста відповідь",
-  "ErrorUnavailableText": "{{productName}} недоступний"
+  "ErrorUnavailableText": "Робочий простір недоступний"
 }

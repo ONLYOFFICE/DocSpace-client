@@ -119,8 +119,6 @@ const RoomsTour = ({
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
-  // The info panel is a piece of the user's own workspace, not the tour's, so
-  // the step that borrows it records everything it overwrites first.
   const borrowedPanel = useRef<InfoPanelState | null>(null);
 
   const openInfoPanel = useCallback(() => {
@@ -134,8 +132,7 @@ const RoomsTour = ({
       isVisible: infoPanelStore.isVisible,
     };
 
-    // Selecting the room is what points the panel at it — `infoPanelSelection`
-    // reads the file list's selection, it has no setter of its own.
+    // The panel follows the file list's selection; it has no setter of its own.
     filesStore.setSelection([room]);
     infoPanelStore.openMembersTab();
   }, [filesStore, infoPanelStore]);
@@ -155,15 +152,8 @@ const RoomsTour = ({
     () => ({
       reveal: openInfoPanel,
       restore: closeInfoPanel,
-      // The panel is opened *on* the first room, which `openInfoPanel` reads
-      // out of the file list. Walking back into this step from the closing one
-      // means the stand-in rooms are being fetched again right now, so the row
-      // is waited for rather than assumed — without it the reveal reads an
-      // empty list, gives up, and the step is left with no panel to point at.
+      // The reveal reads the first room off a list that may still be loading.
       awaitBefore: FIRST_ITEM_SELECTOR,
-      // That row can be coming back from the server (the closing step's
-      // `restore` re-fetches the stand-in list), which is a round trip rather
-      // than a re-render.
       navigates: true,
     }),
     [openInfoPanel, closeInfoPanel],
@@ -174,21 +164,12 @@ const RoomsTour = ({
     [filesStore],
   );
 
-  // What the section is stood in for with. Built once for both the arming
-  // effect below and the closing step's `restore`, which puts the stand-in
-  // rooms back when the user walks back out of that step — the config has to
-  // be the same one either way, or the tour would resume on a different list
-  // than the one it walked through.
+  // Shared by the arming effect and the closing step's `restore`.
   const demoConfig = useMemo(
     () => ({
       list: "rooms" as const,
-      // The rooms tour never walks into a room, so the stand-in list is the
-      // whole of what it borrows — and it only ever borrows it when the real
-      // one came back empty.
       standInForList: true,
-      // Each stand-in room is named after its own type, with the very keys the
-      // banner's tiles are built from — so the demo adds no strings of its own
-      // to translate — and listed in the order those tiles sit in.
+      // Named by the tiles' own keys, in the banner order.
       rooms: [
         {
           roomType: RoomsType.EditingRoom,
@@ -202,8 +183,6 @@ const RoomsTour = ({
         { roomType: RoomsType.CustomRoom, title: t("Common:CustomRoomTitle") },
       ],
       owner: user as unknown as TCreatedBy,
-      // What the members step is about: a room is people with different
-      // reaches into it.
       memberAccess: [ShareAccessRights.Editing, ShareAccessRights.ReadOnly],
     }),
     [user, t],
@@ -226,13 +205,7 @@ const RoomsTour = ({
     [reloadSection],
   );
 
-  // Puts the stand-in rooms back, for a user who walks back out of the closing
-  // step. Without it that step is a one-way door: it drops the demo to show the
-  // real empty screen, and the steps before it anchor on a banner and a room
-  // row that the empty screen does not have. react-joyride answers a step whose
-  // target has gone by moving one further in the direction of travel, so a
-  // single Back skipped a step, and from there the index walked off the start
-  // of the list and closed the tour outright.
+  // Walking back out of the closing step needs the list its steps anchor on.
   const restoreDemo = useCallback(() => {
     if (tourDemo.isActive || !user) return;
     tourDemo.activate(demoConfig);
@@ -244,38 +217,20 @@ const RoomsTour = ({
       reveal: endDemo,
       restore: restoreDemo,
       swapsList: true,
-      // Both directions swap the list through a re-fetch, so the screen this
-      // step points at — and the one the step before it points back at —
-      // arrives on a round trip rather than on a re-render.
       navigates: true,
     }),
     [endDemo, restoreDemo],
   );
 
-  // A portal with no rooms of its own shows a tour reduced to its sidebar
-  // steps, so the section is stood in for while the tour runs. Armed on the
-  // pending request, before `usePendingTour` starts anything: the reload has
-  // to have landed by the time joyride freezes the step list against the DOM.
+  // Stands in for an empty section before `usePendingTour` starts anything.
   useEffect(() => {
     if (!roomsTourStore.isPending || roomsTourStore.isRunning) return;
     if (tourDemo.isActive || hasItems) return;
     if (isMobileView || firstLoad || isSectionLoading || !isRoomsRoot) return;
     if (!user) return;
-    // `demoConfig` names the stand-in rooms, and the demo keeps whatever it was
-    // armed with: the next run of this effect finds it active and returns. The
-    // names are `Common` keys, which i18n preloads (SRC_DIR/i18n.js), so the
-    // window is narrower than a tour with a namespace of its own — but with
-    // `useSuspense: false` it is still a window, and what it leaves behind is a
-    // list of raw keys for as long as the tour is up.
+    // The demo keeps the names it was armed with, so they must be loaded.
     if (!ready) return;
 
-    // Whatever the audience. Somebody who cannot create a room has the most to
-    // gain from this and the least without it: their empty section renders
-    // neither the banner nor the filter bar, so their tour is one sidebar step
-    // — nothing about what a room row does, and nothing about the member list
-    // that is the whole point of the section for them. The closing step is what
-    // keeps that honest: it forks on `canCreate` and names the empty list for
-    // anyone who has no "create a room" button to be sent at.
     tourDemo.activate(demoConfig);
 
     void reloadSection();
@@ -293,10 +248,7 @@ const RoomsTour = ({
     demoConfig,
   ]);
 
-  // A tour that ends while a step is still up — closed, skipped, its anchor
-  // gone — never reaches that step's `after`, so the panel would stay borrowed
-  // and the stand-in rooms would outlive the tour that put them there. Both
-  // calls are no-ops when there is nothing to hand back.
+  // A tour closed mid-step never reaches that step's `after`.
   const hasStarted = useRef(false);
 
   useEffect(() => {
@@ -312,15 +264,7 @@ const RoomsTour = ({
     endDemo({ fade: true });
   }, [roomsTourStore.isRunning, closeInfoPanel, endDemo]);
 
-  // The effect above only fires while this component is around to see the tour
-  // stop. Leaving the section takes it down instead — and the interceptors are
-  // module state, so they would outlive it and keep answering for a section the
-  // user has already walked away from, while the borrowed info panel would stay
-  // pointed at a stand-in room that no longer exists. Whatever mounts next
-  // fetches its own list, so there is nothing to reload here.
-  //
-  // `closeInfoPanelRef` keeps the current implementation reachable from a
-  // cleanup that must run on unmount and on nothing else.
+  // The effect above never fires when the section unmounts instead.
   const closeInfoPanelRef = useRef(closeInfoPanel);
   closeInfoPanelRef.current = closeInfoPanel;
 
@@ -332,12 +276,7 @@ const RoomsTour = ({
     [],
   );
 
-  // Read in the render body rather than inside the memo: a value only `useMemo`
-  // reads is a value `observer` does not track, so arming the demo would not
-  // re-render the component — and a value missing from the deps is one a cached
-  // memo never picks up even if it did. Here the demo is only ever armed on an
-  // empty list, so the `hasItems` flip that the reload brings happens to
-  // recompute this anyway; the dependency is spelled out so it does not have to.
+  // Read in the render body, where `observer` tracks it.
   const isDemo = tourDemo.isActive;
 
   const flags = useMemo<TourStepFlags>(
@@ -377,14 +316,7 @@ const RoomsTour = ({
     ROOMS_TOUR_LABEL,
   );
 
-  // `.group-tags` mounts behind its own async gates inside ui-kit's `Filter`
-  // (a `getAllRoomGroups()` round trip, then a layout measurement pass) that
-  // the section's loading flags know nothing about. `useTour` freezes the step
-  // list against the DOM the instant the tour starts, with no retry — so
-  // without this wait, the groups step is dropped for good whenever that row
-  // is still settling when `usePendingTour`'s fixed settle delay runs out.
-  // Bounded rather than indefinite: grouping can be genuinely off, in which
-  // case the row never mounts and the step is meant to be skipped.
+  // ui-kit mounts the groups row after a round trip the loading flags miss.
   const [groupsRowSettled, setGroupsRowSettled] = useState(
     !showFilter || !organizeRoomsGrouping,
   );
@@ -410,10 +342,7 @@ const RoomsTour = ({
     !firstLoad &&
       !isSectionLoading &&
       isRoomsRoot &&
-      // With the section stood in for, "ready" also means the stand-in rooms
-      // have actually landed. Without this the reload above and the start
-      // timer race, and joyride can freeze its step list against the empty
-      // page the reload is on its way to replace.
+      // With a stand-in, ready also means its rooms have landed.
       (!isDemo || hasItems) &&
       groupsRowSettled,
     isMobileView,
@@ -443,34 +372,21 @@ export default inject(
 
     return {
       roomsTourStore,
-      // The member step drives both of these directly: it selects a room and
-      // opens the panel on it, then puts each back the way it found it.
       filesStore,
       infoPanelStore,
-      // The stand-in rooms are owned by the user themselves — the less of the
-      // section is invented, the less of it can be wrong.
       user: userStore?.user,
       userId: userStore?.user?.id,
       currentDeviceType: settingsStore.currentDeviceType,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,
-      // Nothing in the section is behind a loader any more, so the anchors the
-      // steps point at are the ones actually on screen.
       isSectionLoading: clientLoadingStore.showBodyLoader,
       isRoomsRoot: isRoomsFolderRoot && isRoot && !publicRoomStore.isPublicRoom,
-      // Only room admins / admins see the rooms creation banner and the
-      // Templates sidebar item (same gate as ClientArticleSidebar).
+      // Same gate as ClientArticleSidebar.
       canCreate: isAdminAudience && !!roomsFolder,
       canUseTemplates: isAdminAudience,
       showFilter: !filesStore.isEmptyPage,
       hasItems: filesStore.filesList?.length > 0,
-      // Sidebar anchor (ClientArticleSidebar → NavMenu data-item-id). The
-      // Rooms parent item id is the tree folder id; its sub-items use static
-      // ids ("rooms-recent", "rooms-trash").
       roomsId: roomsFolderId != null ? String(roomsFolderId) : null,
-      // Whether ui-kit's `Filter` will attempt to mount `.group-tags` at all —
-      // used to hold the tour start for that row instead of waiting on a
-      // permanently-disabled feature.
       organizeRoomsGrouping: filesSettingsStore.organizeRoomsGrouping,
     };
   },

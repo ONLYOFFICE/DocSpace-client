@@ -49,9 +49,7 @@ import {
 import { ROOMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import TourList from "SRC_DIR/components/Tour/TourList";
 
-// The room-type tiles, in the banner order the quick-actions hook builds them
-// (VDR first). The template and AI chat tiles share their container and get a
-// step each, so the spotlight covers this run of tiles rather than the banner.
+// Banner order; the template and AI chat tiles get steps of their own.
 const ROOM_TYPE_TILE_SELECTORS = [
   '[data-testid="quick-vdr-room"]',
   '[data-testid="quick-collaboration-room"]',
@@ -59,66 +57,35 @@ const ROOM_TYPE_TILE_SELECTORS = [
   '[data-testid="quick-custom-room"]',
 ];
 
-// The room-grouping row above the list ("All rooms", the group chips, and the
-// button that creates the first group). ui-kit renders it behind three gates —
-// the grouping setting, the rooms root, and no active filter — so the step is
-// dropped by the start-of-run DOM check whenever it is not on screen.
-//
-// Exported because the host waits on it too: mounting this row also depends on
-// a `getAllRoomGroups()` round trip and a layout measurement pass inside
-// ui-kit's `Filter`, neither of which the section's own loading flags cover —
-// so the tour start is held until this selector resolves (see
-// `usePendingTour`'s caller in RoomsTour/index.tsx).
+// Rendered only with grouping on, at the rooms root and with no filter active.
 export const GROUPS_SELECTOR = ".group-tags";
 
-// The first room of the list, in whichever view is active (only one of the
-// three is mounted at a time). Exported because the host waits on it too: the
-// members step's reveal reads the room out of the file list, so it needs the
-// row to be there before it runs (`RevealHooks.awaitBefore`).
+// One selector per view; the host waits on it before the members step.
 export const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
-// The info panel's outer wrapper (ui-kit Section/InfoPanel keeps this plain
-// class alongside its CSS-module one). Only mounted while the panel is open,
-// which is why the step that points at it opens it first.
+// Only mounted while the panel is open.
 const INFO_PANEL_SELECTOR = ".info-panel";
-// The panel's "Contacts" tab (ui-kit Tabs names it `${InfoPanelView.infoMembers}_tab`)
-// and the member list under it.
+// ui-kit Tabs names the tab `${InfoPanelView.infoMembers}_tab`.
 const MEMBERS_TAB_SELECTOR = '[data-testid="info_members_tab"]';
 const MEMBERS_LIST_SELECTOR = '[data-testid="info_panel_members_list"]';
 
-// The first action of the empty screen, which on the rooms root is "create a
-// room" (EmptyViewContainer.helpers builds the list as
-// [createRoom, inviteRootRoom, migrationData]). ui-kit's EmptyView gives its
-// options no testid of their own, so the anchor is positional.
+// EmptyView gives its options no test id, so "create a room" is positional.
 const EMPTY_SCREEN_CREATE_SELECTOR =
   '[data-testid="empty-view-body"] > *:first-child';
 
-// The empty screen itself, for the closing step of anyone with no action on it
-// to point at. Nothing is offered to somebody who cannot create a room, so the
-// body may hold no options at all — the screen around them always exists.
 const EMPTY_SCREEN_SELECTOR = '[data-testid="empty-view"]';
 
 export type TourStepFlags = {
   isDesktop: boolean;
-  // Room creation and templates are room-admin powers; everyone else only ever
-  // joins rooms someone else set up, so those steps are dropped for them.
   canCreate: boolean;
   canUseTemplates: boolean;
   showFilter: boolean;
-  // Whether the room list has at least one room — the step that points at a
-  // row (and at the panel describing it) is skipped on an empty section.
   hasItems: boolean;
-  // Sidebar anchor: the Rooms parent item id is the tree folder id, and its
-  // quick-access sub-items use static string ids ("rooms-recent" etc.).
+  // Sidebar `data-item-id` of the Rooms item: its tree folder id.
   roomsId: string | null;
-  // Opens the info panel on the first room's member list, and puts back what
-  // it changed. Supplied by the host component, which holds the stores.
   infoPanelHooks?: { reveal: () => void; restore: () => void };
-  // Whether the section the tour is walking through is stood in for. The
-  // closing step exists only then: it drops the stand-in and hands the user
-  // over to the real "create a room" button on the empty screen they are
-  // about to be left looking at.
+  // The closing step exists only when the list is stood in for.
   isDemo: boolean;
   demoHooks?: { reveal: () => void; restore: () => void };
 };
@@ -140,25 +107,18 @@ export function getTourSteps(
     demoHooks,
   } = flags;
 
-  // The quick-access sub-items are nested under Rooms and rendered expanded
-  // while the section is active. Skipped on tablet: the collapsed icon-only
-  // sidebar flattens sub-items into the main list.
+  // The collapsed tablet sidebar has no sub-items to point at.
   const showQuickAccess = isDesktop && !!roomsId;
 
   return [
-    // 1. The room types, named by what each one is for. Picking the right type
-    // up front matters: the type fixes what members can do and cannot be
-    // changed afterwards. The banner is a carousel, so every tile step scrolls
-    // its target into the strip before measuring anything.
+    // 1. Room types. The banner is a carousel, so each tile step scrolls first.
     canCreate &&
       showFilter &&
       elementGroupStep(
         '[data-testid="quick-actions"]',
         ROOM_TYPE_TILE_SELECTORS,
         t("RoomsTour:RoomsTypesTitle"),
-        // One line per type, each named by the label its own tile carries (the
-        // same Common keys `useQuickActions` builds the banner from), so the
-        // tooltip and the tiles under the spotlight never drift apart.
+        // Each type is named by its own tile's label.
         createElement(TourList, {
           items: [
             t("RoomsTour:RoomsTypesCollaboration", {
@@ -181,8 +141,7 @@ export function getTourSteps(
         rewindQuickActions,
       ),
 
-    // 2. Templates — the fastest path for teams that spin up similar rooms
-    // repeatedly, and the least obvious of the tiles.
+    // 2. Templates.
     canCreate &&
       canUseTemplates &&
       showFilter &&
@@ -196,8 +155,7 @@ export function getTourSteps(
         revealQuickActionTile('[data-testid="quick-use-template"]'),
       ),
 
-    // 3. AI chat — the same tile, and the same thing to say about it, as in the
-    // files tour; the wording is shared rather than duplicated per namespace.
+    // 3. AI chat tile, worded as in the Files tour.
     showFilter &&
       elementStep(
         '[data-testid="quick-ai-chat"]',
@@ -209,7 +167,7 @@ export function getTourSteps(
         revealQuickActionTile('[data-testid="quick-ai-chat"]'),
       ),
 
-    // 4. Room groups — the row of chips above the list.
+    // 4. Room groups.
     showFilter &&
       elementStep(
         GROUPS_SELECTOR,
@@ -219,10 +177,7 @@ export function getTourSteps(
         ROOMS_TOUR_LABEL,
       ),
 
-    // 5. Members — the single most useful thing in the section, and the one
-    // that makes a room a room. The step opens the info panel on the first
-    // room's member list and lights up the "Contacts" tab and the list, kept
-    // inside the panel: a long list scrolls past its edge.
+    // 5. Members: the Contacts tab and the list, kept inside the panel.
     hasItems &&
       isDesktop &&
       infoPanelHooks &&
@@ -239,20 +194,12 @@ export function getTourSteps(
         INFO_PANEL_SELECTOR,
       ),
 
-    // 6. The sidebar sub-items: what each of the section's shortcuts holds.
-    // Each is named by the sidebar's own label, so the wording in the tooltip
-    // is the wording on screen and the names are not translated twice.
-    //
-    // Bulleted rather than one paragraph: the three things this step covers
-    // (the file shortcuts, templates, the archive) are unrelated to each
-    // other, and running them together buried the sidebar names the user is
-    // meant to spot. The wording of each is unchanged.
+    // 6. Sidebar shortcuts, named by the sidebar's own labels.
     showQuickAccess &&
       sidebarListStep(
         "rooms-recent",
         t("RoomsTour:RoomsPlacesTitle"),
         [
-          // The file shortcuts are described the same way the Files tour does.
           t("FilesTour:TourPlacesRecent", { sectionName: t("Common:Recent") }),
           t("FilesTour:TourPlacesFavorites", {
             sectionName: t("Common:Favorites"),
@@ -269,25 +216,8 @@ export function getTourSteps(
         ROOMS_TOUR_LABEL,
       ),
 
-    // 7. Only when the section was stood in for. The stand-in rooms are the
-    // last thing the user saw, and dropping them lands them on the empty
-    // screen — so rather than let that happen behind their back, the closing
-    // step does it deliberately.
-    //
-    // `restore` puts the stand-in rooms back, because the user can walk back
-    // out of this step and everything before it is anchored on the section it
-    // just dismantled — the banner's tiles, the groups row, a room row and the
-    // panel opened on it. react-joyride answers a step whose target has gone
-    // by moving one further in the direction of travel, so leaving the empty
-    // screen up made a single Back skip a step, and from there the index
-    // walked off the start of the list and closed the tour outright.
-    //
-    // What it points at, and what it says, is whatever that screen actually
-    // offers. Somebody who can create a room is a click away from everything
-    // they were just shown, so the step lands on that button. Somebody who
-    // cannot has no button there at all — the honest ending for them is to name
-    // what the empty list means and who fills it, rather than to send them at
-    // an action that is not theirs.
+    // 7. Demo only: drop the stand-in rooms and point at what the empty screen
+    // offers; `restore` puts them back, the steps before anchor on them.
     isDemo &&
       demoHooks &&
       (canCreate

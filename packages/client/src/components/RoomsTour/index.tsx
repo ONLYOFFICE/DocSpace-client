@@ -56,6 +56,10 @@ import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
 import { getTourAudience } from "SRC_DIR/components/Tour/audience";
 import { tourDemo } from "SRC_DIR/api/tourDemo";
 import { waitForElement } from "SRC_DIR/components/Tour/waitForElement";
+import {
+  fadeSectionIn,
+  fadeSectionOut,
+} from "SRC_DIR/components/Tour/sectionFade";
 
 import type { TCreatedBy } from "@docspace/shared/types";
 
@@ -205,14 +209,22 @@ const RoomsTour = ({
     [user, t],
   );
 
-  // Hands the section back: the mocks come down and the real (empty) list is
-  // fetched again, which is what puts the empty screen up. The closing step
-  // does this on purpose, to point at the button that lives there.
-  const endDemo = useCallback(() => {
-    if (!tourDemo.isActive) return;
-    tourDemo.deactivate();
-    void reloadSection();
-  }, [reloadSection]);
+  // `fade` is for an early close: the closing step fades the section itself.
+  const endDemo = useCallback(
+    async ({ fade = false } = {}) => {
+      if (!tourDemo.isActive) return;
+
+      if (fade) await fadeSectionOut();
+      tourDemo.deactivate();
+
+      try {
+        await reloadSection();
+      } finally {
+        if (fade) fadeSectionIn();
+      }
+    },
+    [reloadSection],
+  );
 
   // Puts the stand-in rooms back, for a user who walks back out of the closing
   // step. Without it that step is a one-way door: it drops the demo to show the
@@ -297,7 +309,7 @@ const RoomsTour = ({
     hasStarted.current = false;
 
     closeInfoPanel();
-    endDemo();
+    endDemo({ fade: true });
   }, [roomsTourStore.isRunning, closeInfoPanel, endDemo]);
 
   // The effect above only fires while this component is around to see the tour

@@ -88,25 +88,30 @@ export type TPickedAgent = {
 };
 
 /**
- * Loads the AI agents list (each time `enabled` turns true) and builds the
- * "Choose AI Agent" entry for the chat model picker (`actions` is empty until
- * the first load and when no agent has a bound profile — picking an agent is a
- * distinct action even with a single one, since it also switches the request
- * context to the agent's room). `getAgentByRoomId` resolves a loaded agent by
- * its room id — used to restore the picked agent from a thread's persisted
- * context.
+ * Loads the AI agents list and builds the "Choose AI Agent" entry for the
+ * chat model picker (`actions` is empty until the first load and when no
+ * agent has a bound profile — picking an agent is a distinct action even with
+ * a single one, since it also switches the request context to the agent's
+ * room). `getAgentByRoomId` resolves a loaded agent by its room id — used to
+ * restore the picked agent from a thread's persisted context.
  *
- * The list is reloaded, rather than loaded once, on two signals:
- * - `enabled` turning true again. Agents are created, edited and deleted in
- *   the AI Agents section, where the side chat is unavailable, so leaving it
- *   is the moment the picker must catch up.
+ * The list is only ever fetched while the chat is shown (`active`): the
+ * picker lives in the composer, so nothing reads it behind a closed panel,
+ * and folder navigation must not cost AI requests. Until then the list is
+ * marked stale, and the first `active` moment loads it. It goes stale again,
+ * rather than being reloaded each time the chat is shown, on two signals:
+ * - `enabled` turning false. Agents are created, edited and deleted in the
+ *   AI Agents section, where the side chat is unavailable, so coming back
+ *   from it is the moment the picker must catch up.
  * - a socket change to an agent while the chat is available (another user,
  *   another tab, a restore from Trash). The AI Agents root is one of the tree
  *   folders, whose parts TreeFoldersStore keeps subscribed for the whole
  *   session, so the hook only listens — it never subscribes or unsubscribes.
+ *   With the chat shown the reload runs right away; otherwise it waits.
  */
 export const useAiAgentsPickerActions = (
   enabled: boolean,
+  active: boolean,
   onAgentPick: (agent: TPickedAgent) => void,
 ): {
   actions: ProfilePickerAction[];
@@ -114,6 +119,11 @@ export const useAiAgentsPickerActions = (
 } => {
   const [agents, setAgents] = useState<TAgent[] | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
+
+  // Whether the loaded list (if any) may be behind the server. Starts stale
+  // (nothing loaded), and is raised by the two signals above; the fetch
+  // effect clears it when it starts and raises it back if it is cut short.
+  const isStale = useRef(true);
 
   // Where the socket handler looks for agent events: the AI Agents root
   // (a created or restored agent) and the agents already listed (an update or
@@ -137,6 +147,7 @@ export const useAiAgentsPickerActions = (
       if (timer) clearTimeout(timer);
       timer = setTimeout(() => {
         timer = null;
+        isStale.current = true;
         setReloadKey((key) => key + 1);
       }, AGENTS_RELOAD_DELAY_MS);
     };
@@ -150,9 +161,16 @@ export const useAiAgentsPickerActions = (
   }, [enabled]);
 
   useEffect(() => {
-    if (!enabled) return undefined;
+    if (!enabled) isStale.current = true;
+  }, [enabled]);
+
+  useEffect(() => {
+    if (!enabled || !active || !isStale.current) return undefined;
+    isStale.current = false;
 
     const controller = new AbortController();
+    // Whether this load settled (landed or failed) before the cleanup ran.
+    let settled = false;
     const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AIAgents);
     filter.pageCount = AGENTS_PAGE_COUNT;
 
@@ -176,16 +194,28 @@ export const useAiAgentsPickerActions = (
         // The detail requests take no signal, so a load superseded while
         // they were in flight must not overwrite the newer list.
         if (controller.signal.aborted) return;
+        settled = true;
         agentIds.current = new Set(detailed.map((agent) => String(agent.id)));
         setAgents(detailed);
       })
       .catch(() => {
         // The menu entry is optional — swallow the error (incl. aborts) and
-        // keep the last loaded list; the next reload signal retries.
+        // keep the last loaded list. A failed load leaves the list stale so
+        // the next signal retries; an aborted one is handled by the cleanup.
+        if (controller.signal.aborted) return;
+        settled = true;
+        isStale.current = true;
       });
 
-    return () => controller.abort();
-  }, [enabled, reloadKey]);
+    return () => {
+      // Cut short (the chat hidden, the AI Agents section entered, a socket
+      // reload) before it landed: nothing trustworthy was loaded. Runs before
+      // the next effect pass, which clears the flag again if it starts a
+      // load. A load that already landed stays good across hide/show.
+      if (!settled) isStale.current = true;
+      controller.abort();
+    };
+  }, [enabled, active, reloadKey]);
 
   const actions = useMemo<ProfilePickerAction[]>(() => {
     // Only agents bound to an AI profile are pickable — selecting an agent

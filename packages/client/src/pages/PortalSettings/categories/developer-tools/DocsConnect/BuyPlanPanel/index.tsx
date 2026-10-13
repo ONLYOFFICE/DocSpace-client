@@ -606,7 +606,7 @@ const BuyPlanPanel = ({
             i18nKey="NextMonthlyBillNote"
             values={{
               amount: formatCurrency(totalMonthly),
-              date: nextBillingDateLocalized,
+              date: periodEndDateLocalized,
             }}
             components={{
               1: <Text as="span" fontWeight={600} />,

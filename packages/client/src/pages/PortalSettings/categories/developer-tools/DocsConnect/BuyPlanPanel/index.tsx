@@ -55,6 +55,8 @@ import StorageWarning from "@onlyoffice/apps-ui-kit/billing/services/panels/addi
 import SalesDepartmentRequestDialog from "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog";
 import { formatDateLocalized } from "@onlyoffice/apps-ui-kit/utils/date";
 import { isInsufficientFundsError } from "@onlyoffice/apps-ui-kit/billing/utils/insufficientFunds";
+import { usePaymentStore } from "@onlyoffice/apps-ui-kit/billing/store/PaymentStoreProvider";
+import { DOCS_CONNECT_SERVICE } from "@onlyoffice/apps-ui-kit/billing/constants";
 
 import WalletSvg from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
 import AutomationApiSvg from "PUBLIC_DIR/images/icons/16/docs-connect.automation-api.react.svg";
@@ -153,6 +155,7 @@ const BuyPlanPanel = ({
 }: BuyPlanPanelProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
   const { paymentApi } = useApi();
+  const { fetchTransactionHistory } = usePaymentStore();
 
   const [devPack, setDevPack] = useState<boolean>(
     info?.devPackEnabled || (info?.previousPlan?.devPackEnabled ?? false),
@@ -414,6 +417,7 @@ const BuyPlanPanel = ({
 
   const onTopUpConfirm = async () => {
     await switchToDevPack?.({ quantity: users, topUp: 0 });
+    fetchTransactionHistory(DOCS_CONNECT_SERVICE);
     toastr.success(t("DocsConnect:PlanPurchased"));
   };
 
@@ -465,6 +469,7 @@ const BuyPlanPanel = ({
           topUp: insufficientFunds ? topUpRequired : 0,
         });
       }
+      if (!isScheduled) fetchTransactionHistory(DOCS_CONNECT_SERVICE);
       toastr.success(
         isScheduled
           ? t("DocsConnect:ChangeScheduled")

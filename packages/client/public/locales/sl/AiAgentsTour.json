@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Informacijski panel je mesto, kjer agent preneha biti samo vaš. Vanj povabite ljudi ali jim dajte dostop samo za ogled, da lahko preberejo, kar je ustvaril, ne da bi posegali v to, kako deluje. Zgodovina pove, kaj se je v agentu spremenilo in kdaj.",
-  "AgentAccessMember": "Isti panel vam pove, kdo še dela s tem agentom, kakšen dostop ima vsak od njih — da veste, koga vprašati, ko je treba spremeniti nastavitve — in kaj se je v njem nazadnje spremenilo.",
   "AgentAccessMemberTitle": "Kdo je še tukaj",
-  "AgentAccessTitle": "Kdo ga sme uporabljati",
   "AgentBuild": "Ustvariti agenta pomeni opisati nalogo, ne odpreti praznega klepeta. Navodila določajo, kaj počne in kako odgovarja, priložene datoteke postanejo znanje, iz katerega odgovarja, vi pa izberete model za njim skupaj s povezanimi orodji, po katerih lahko poseže.",
   "AgentBuildTitle": "Dajte mu nalogo",
   "AgentDemoContracts": "Pregledovalnik pogodb",

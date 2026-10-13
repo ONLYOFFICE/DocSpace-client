@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Paneli i informacionit është vendi ku një agjent pushon së qeni vetëm i juaji. Ftoni njerëz aty ose jepuni akses vetëm për shikim, që të mund të lexojnë atë që ai ka prodhuar pa prekur mënyrën si funksionon. Historiku tregon çfarë ka ndryshuar te agjenti dhe kur.",
-  "AgentAccessMember": "I njëjti panel ju tregon kush tjetër punon me këtë agjent, çfarë aksesi ka secili prej tyre — që të dini kujt t'i drejtoheni kur duhet ndryshuar konfigurimi — dhe çfarë ka ndryshuar së fundmi tek ai.",
   "AgentAccessMemberTitle": "Kush tjetër është këtu",
-  "AgentAccessTitle": "Kush lejohet ta përdorë",
   "AgentBuild": "Të krijosh një agjent do të thotë të përshkruash një punë, jo të hapësh një bisedë bosh. Udhëzimet përcaktojnë çfarë bën dhe si përgjigjet, skedarët që bashkëngjitni bëhen njohuria nga e cila ai përgjigjet, kurse ju zgjidhni modelin pas tij bashkë me mjetet e lidhura te të cilat mund t'i drejtohet.",
   "AgentBuildTitle": "Jepini një punë",
   "AgentDemoContracts": "Rishikues kontratash",

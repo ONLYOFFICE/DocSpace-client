@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "El panel de información es donde un agente deja de ser solo suyo. Invite a otras personas o concédales acceso de solo lectura para que puedan ver lo que ha producido sin tocar su funcionamiento. El historial indica qué ha cambiado en el agente y cuándo.",
-  "AgentAccessMember": "Ese mismo panel le indica quién más trabaja con este agente, el acceso que tiene cada uno —para que sepa a quién dirigirse cuando haya que cambiar la configuración— y qué se ha modificado en él últimamente.",
   "AgentAccessMemberTitle": "Quién más está aquí",
-  "AgentAccessTitle": "Quién puede usarlo",
   "AgentBuild": "Crear un agente consiste en describir un trabajo, no en abrir un chat en blanco. Las instrucciones fijan lo que hace y cómo responde, los archivos que adjunte se convierten en el conocimiento desde el que responde, y usted elige el modelo que lo impulsa junto con las herramientas conectadas a las que puede recurrir.",
   "AgentBuildTitle": "Encárguele un trabajo",
   "AgentDemoContracts": "Revisor de contratos",

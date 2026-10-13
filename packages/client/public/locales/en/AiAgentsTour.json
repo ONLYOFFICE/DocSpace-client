@@ -1,10 +1,9 @@
 {
-  "AgentAccess": "The info panel is where an agent stops being yours alone. Invite people to it, or give view-only access so they can read what it produced without touching how it works. The history says what changed in the agent, and when.",
-  "AgentAccessMember": "The same panel tells you who else works with this agent, the access each of them holds — so you know whom to ask when the setup needs a change — and what has changed in it lately.",
   "AgentAccessMemberTitle": "Who else is in here",
-  "AgentAccessTitle": "Who gets to use it",
   "AgentBuild": "Creating an agent is describing a job, not opening a blank chat. The instructions fix what it does and how it replies, the files you attach become the knowledge it answers from, and you pick the model behind it along with the connected tools it may reach for.",
   "AgentBuildTitle": "Give it a job",
+  "AgentContacts": "The Contacts tab holds everyone who may use the agent. Add contacts from your workspace here and give each one a role — from viewing the results it produced to managing the agent itself.",
+  "AgentContactsMember": "The Contacts tab shows who has access to this agent and their roles — from viewing results to managing the agent. Use it to see who to contact if the agent's settings need to change.",
   "AgentDemoContracts": "Contract reviewer",
   "AgentDemoOnboarding": "Onboarding buddy",
   "AgentDemoSupport": "Support desk assistant",

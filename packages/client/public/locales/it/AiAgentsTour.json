@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Il pannello delle informazioni è il punto in cui un agente smette di essere solo vostro. Invitatevi altre persone oppure concedete l'accesso in sola lettura, così potranno vedere ciò che ha prodotto senza toccarne il funzionamento. La cronologia indica che cosa è cambiato nell'agente e quando.",
-  "AgentAccessMember": "Lo stesso pannello vi dice chi altro lavora con questo agente, quale accesso ha ciascuno — così sapete a chi rivolgervi quando la configurazione va modificata — e che cosa è cambiato di recente.",
   "AgentAccessMemberTitle": "Chi altro c'è qui",
-  "AgentAccessTitle": "Chi può usarlo",
   "AgentBuild": "Creare un agente significa descrivere un compito, non aprire una chat vuota. Le istruzioni stabiliscono che cosa fa e come risponde, i file che allegate diventano le conoscenze da cui attinge per rispondere, e voi scegliete il modello che lo alimenta insieme agli strumenti collegati a cui può ricorrere.",
   "AgentBuildTitle": "Assegnategli un compito",
   "AgentDemoContracts": "Revisore di contratti",

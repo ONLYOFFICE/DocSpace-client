@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Informācijas panelis ir vieta, kur aģents pārstāj būt tikai jūsu. Uzaiciniet uz to cilvēkus vai piešķiriet piekļuvi tikai skatīšanai, lai viņi varētu lasīt tā radīto, neaiztiekot to, kā tas darbojas. Vēsture rāda, kas aģentā ir mainījies un kad.",
-  "AgentAccessMember": "Tas pats panelis parāda, kas vēl strādā ar šo aģentu, kāda piekļuve ir katram no viņiem — lai jūs zinātu, pie kā vērsties, kad jāmaina iestatījumi — un kas tajā mainīts pēdējā laikā.",
   "AgentAccessMemberTitle": "Kas vēl te ir",
-  "AgentAccessTitle": "Kam to atļauts lietot",
   "AgentBuild": "Izveidot aģentu nozīmē aprakstīt darbu, nevis atvērt tukšu tērzēšanu. Norādījumi nosaka, ko tas dara un kā atbild, pievienotie faili kļūst par zināšanām, no kurām tas atbild, bet jūs izvēlaties modeli, kas darbojas aiz tā, kā arī pievienotos rīkus, pie kuriem tas drīkst ķerties.",
   "AgentBuildTitle": "Uzdodiet tam darbu",
   "AgentDemoContracts": "Līgumu pārbaudītājs",

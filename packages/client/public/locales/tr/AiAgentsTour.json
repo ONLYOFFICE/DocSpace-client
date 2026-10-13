@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Bilgi paneli, bir ajanın yalnızca size ait olmaktan çıktığı yerdir. Buraya kişileri davet edin ya da yalnızca görüntüleme erişimi verin; böylece çalışma biçimine dokunmadan ürettiklerini okuyabilirler. Geçmiş, ajanda neyin ne zaman değiştiğini söyler.",
-  "AgentAccessMember": "Aynı panel, bu ajanla başka kimlerin çalıştığını, her birinin hangi erişime sahip olduğunu — böylece yapılandırma değiştirilmesi gerektiğinde kime soracağınızı bilirsiniz — ve son zamanlarda neyin değiştiğini gösterir.",
   "AgentAccessMemberTitle": "Burada başka kimler var",
-  "AgentAccessTitle": "Onu kimler kullanabilir",
   "AgentBuild": "Bir ajan oluşturmak, boş bir sohbet açmak değil, bir iş tanımlamaktır. Talimatlar ne yapacağını ve nasıl yanıt vereceğini belirler, eklediğiniz dosyalar yanıt verirken dayandığı bilgi haline gelir; arkasındaki modeli ve başvurabileceği bağlı araçları da siz seçersiniz.",
   "AgentBuildTitle": "Ona bir iş verin",
   "AgentDemoContracts": "Sözleşme inceleyici",

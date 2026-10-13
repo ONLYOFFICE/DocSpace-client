@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Bảng thông tin là nơi một tác nhân không còn chỉ thuộc về riêng bạn. Hãy mời người khác vào đó, hoặc cấp quyền chỉ xem để họ đọc được những gì nó tạo ra mà không đụng đến cách nó hoạt động. Lịch sử cho biết điều gì đã thay đổi trong tác nhân và vào lúc nào.",
-  "AgentAccessMember": "Cũng bảng đó cho bạn biết còn ai đang làm việc với tác nhân này, mỗi người có quyền gì — để bạn biết cần hỏi ai khi cần thay đổi thiết lập — và gần đây có gì thay đổi trong nó.",
   "AgentAccessMemberTitle": "Còn ai ở đây",
-  "AgentAccessTitle": "Ai được phép dùng nó",
   "AgentBuild": "Tạo một tác nhân là mô tả một công việc, chứ không phải mở một cuộc trò chuyện trống. Hướng dẫn xác định nó làm gì và trả lời ra sao, các tệp bạn đính kèm trở thành kiến thức mà nó dựa vào để trả lời, còn bạn chọn mô hình đứng sau nó cùng những công cụ đã kết nối mà nó được phép dùng.",
   "AgentBuildTitle": "Giao cho nó một công việc",
   "AgentDemoContracts": "Người rà soát hợp đồng",

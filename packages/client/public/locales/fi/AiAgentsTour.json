@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Tietopaneelissa agentti lakkaa olemasta pelkästään sinun. Kutsu sinne ihmisiä tai anna vain katseluoikeus, jotta he voivat lukea agentin tuotokset koskematta siihen, miten se toimii. Historia kertoo, mitä agentissa on muuttunut ja milloin.",
-  "AgentAccessMember": "Sama paneeli kertoo, ketkä muut työskentelevät tämän agentin kanssa, millainen käyttöoikeus kullakin on — jotta tiedät, keneltä kysyä, kun asetuksia pitää muuttaa — ja mitä siinä on viime aikoina muuttunut.",
   "AgentAccessMemberTitle": "Ketkä muut ovat mukana",
-  "AgentAccessTitle": "Kuka saa käyttää sitä",
   "AgentBuild": "Agentin luominen on työn kuvaamista, ei tyhjän keskustelun avaamista. Ohjeet määrittävät, mitä se tekee ja miten se vastaa, liittämistäsi tiedostoista tulee tieto, jonka pohjalta se vastaa, ja sinä valitset sen taustalla olevan mallin sekä liitetyt työkalut, joihin se saa turvautua.",
   "AgentBuildTitle": "Anna sille tehtävä",
   "AgentDemoContracts": "Sopimusten tarkastaja",

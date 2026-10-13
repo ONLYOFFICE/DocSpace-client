@@ -61,6 +61,10 @@ const FIRST_ITEM_SELECTOR =
 // class alongside its CSS-module one). Only mounted while the panel is open,
 // which is why the step that points at it opens it first.
 const INFO_PANEL_SELECTOR = ".info-panel";
+// The panel's "Contacts" tab (ui-kit Tabs names it `${InfoPanelView.infoMembers}_tab`)
+// and the member list under it.
+const MEMBERS_TAB_SELECTOR = '[data-testid="info_members_tab"]';
+const MEMBERS_LIST_SELECTOR = '[data-testid="info_panel_members_list"]';
 
 // The search box and the advanced filter beside it. One step covers both: they
 // are the same errand — finding an agent again once there are more than a
@@ -217,27 +221,29 @@ export function getTourSteps(
       ),
 
     // 4. Who may use the agent. The step opens the info panel on the first
-    // agent's member list and lights up the row and the panel together, rather
-    // than pointing at the button that would have opened it — an agent has no
-    // public link, only a members one, so what the panel is for has to be seen
-    // to land. For everyone else the same panel answers "who else uses this,
-    // and what changed in it".
+    // agent's member list and lights up the "Contacts" tab and the list, kept
+    // inside the panel, rather than pointing at the button that would have
+    // opened it — an agent has no public link, only a members one, so what the
+    // panel is for has to be seen to land. For everyone else the same panel
+    // answers "who else uses this, and what changed in it".
     hasItems &&
       isDesktop &&
       infoPanelHooks &&
       revealStep(
-        INFO_PANEL_SELECTOR,
+        MEMBERS_LIST_SELECTOR,
         isAdmin
-          ? t("AiAgentsTour:AgentAccessTitle")
+          ? t("RoomsTour:RoomsMembersTitle")
           : t("AiAgentsTour:AgentAccessMemberTitle"),
         isAdmin
-          ? t("AiAgentsTour:AgentAccess")
-          : t("AiAgentsTour:AgentAccessMember"),
+          ? t("AiAgentsTour:AgentContacts")
+          : t("AiAgentsTour:AgentContactsMember"),
         callbacks,
         AI_AGENTS_TOUR_LABEL,
         infoPanelHooks,
-        [FIRST_ITEM_SELECTOR],
+        [MEMBERS_TAB_SELECTOR],
         FIRST_ITEM_SELECTOR,
+        4,
+        INFO_PANEL_SELECTOR,
       ),
 
     // 5. Finding one again. Search and the advanced filter share a step because

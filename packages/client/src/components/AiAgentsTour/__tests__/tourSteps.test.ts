@@ -93,7 +93,7 @@ describe("getTourSteps — admin", () => {
       "AiAgentsTour:AgentWhatIsTitle",
       "AiAgentsTour:AgentBuildTitle",
       "AiAgentsTour:AgentRowTitle",
-      "AiAgentsTour:AgentAccessTitle",
+      "RoomsTour:RoomsMembersTitle",
       "AiAgentsTour:AgentFindTitle",
       "AiAgentsTour:AgentPlacesTitle",
       "RoomsTour:RoomsCreateFirstTitle",
@@ -179,9 +179,26 @@ describe("getTourSteps — the info panel step", () => {
     expect(access.before).toBeTypeOf("function");
   });
 
+  it("points at the member list, not the whole panel", () => {
+    document.body.innerHTML =
+      '<div class="info-panel">' +
+      '<div data-testid="info_members_tab"></div>' +
+      '<div data-testid="info_panel_members_list"></div>' +
+      "</div>";
+    const list = document.querySelector(
+      '[data-testid="info_panel_members_list"]',
+    );
+
+    const access = steps(adminFlags)[3];
+
+    expect((access.target as () => Element | null)()).toBe(list);
+
+    document.body.innerHTML = "";
+  });
+
   it("is dropped when there is no agent to open it on", () => {
     expect(titles({ ...adminFlags, hasItems: false })).not.toContain(
-      "AiAgentsTour:AgentAccessTitle",
+      "RoomsTour:RoomsMembersTitle",
     );
   });
 });

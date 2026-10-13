@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Məlumat paneli agentin yalnız sizə məxsus olmaqdan çıxdığı yerdir. Ora adamları dəvət edin və ya yalnız baxış icazəsi verin ki, işləmə qaydasına toxunmadan onun yaratdıqlarını oxuya bilsinlər. Tarixçə agentdə nəyin və nə vaxt dəyişdiyini göstərir.",
-  "AgentAccessMember": "Həmin panel bu agentlə başqa kimlərin işlədiyini, hər birinin hansı icazəyə sahib olduğunu — quraşdırmanı dəyişmək lazım olanda kimə müraciət edəcəyinizi bilməniz üçün — və son vaxtlar orada nəyin dəyişdiyini göstərir.",
   "AgentAccessMemberTitle": "Burada daha kim var",
-  "AgentAccessTitle": "Ondan kim istifadə edə bilər",
   "AgentBuild": "Agent yaratmaq boş bir söhbət açmaq deyil, bir iş təsvir etmək deməkdir. Təlimatlar onun nə etdiyini və necə cavab verdiyini müəyyən edir, əlavə etdiyiniz fayllar cavab verdiyi biliyə çevrilir, arxasındakı modeli və müraciət edə biləcəyi qoşulmuş alətləri isə siz seçirsiniz.",
   "AgentBuildTitle": "Ona bir iş tapşırın",
   "AgentDemoContracts": "Müqavilə yoxlayıcısı",

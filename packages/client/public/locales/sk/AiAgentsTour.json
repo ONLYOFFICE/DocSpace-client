@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Informačný panel je miesto, kde agent prestáva byť len váš. Pozvite doň ľudí alebo im dajte prístup len na čítanie, aby si mohli prečítať, čo vytvoril, bez zasahovania do toho, ako funguje. História hovorí, čo sa v agentovi zmenilo a kedy.",
-  "AgentAccessMember": "Ten istý panel vám ukáže, kto ďalší s týmto agentom pracuje, aký prístup má každý z nich — aby ste vedeli, koho osloviť, keď treba zmeniť nastavenia — a čo sa v ňom v poslednom čase zmenilo.",
   "AgentAccessMemberTitle": "Kto tu ešte je",
-  "AgentAccessTitle": "Kto ho smie používať",
   "AgentBuild": "Vytvoriť agenta znamená opísať úlohu, nie otvoriť prázdny chat. Inštrukcie určujú, čo robí a ako odpovedá, priložené súbory sa stanú znalosťami, z ktorých odpovedá, a vy vyberáte model, ktorý za ním stojí, spolu s pripojenými nástrojmi, po ktorých môže siahnuť.",
   "AgentBuildTitle": "Zadajte mu úlohu",
   "AgentDemoContracts": "Kontrolór zmlúv",

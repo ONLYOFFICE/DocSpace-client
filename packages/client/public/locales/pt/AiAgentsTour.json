@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "O painel de informação é onde um agente deixa de ser apenas seu. Convide pessoas para ele ou conceda acesso só de leitura, para que possam ver o que foi produzido sem mexer no seu funcionamento. O histórico indica o que mudou no agente e quando.",
-  "AgentAccessMember": "Esse mesmo painel indica quem mais trabalha com este agente, o acesso que cada um tem — para que saiba a quem recorrer quando a configuração precisar de ser alterada — e o que foi alterado recentemente.",
   "AgentAccessMemberTitle": "Quem mais está aqui",
-  "AgentAccessTitle": "Quem o pode utilizar",
   "AgentBuild": "Criar um agente é descrever uma tarefa, não abrir uma conversa em branco. As instruções definem o que ele faz e como responde, os ficheiros que anexar tornam-se o conhecimento a partir do qual responde, e é você que escolhe o modelo por trás dele e as ferramentas ligadas a que pode recorrer.",
   "AgentBuildTitle": "Atribua-lhe uma tarefa",
   "AgentDemoContracts": "Revisor de contratos",

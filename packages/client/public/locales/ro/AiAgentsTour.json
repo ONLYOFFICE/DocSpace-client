@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Panoul de informații este locul în care un agent încetează să mai fie doar al dumneavoastră. Invitați aici alte persoane sau acordați acces doar pentru vizualizare, ca să poată citi ceea ce a produs fără a-i atinge modul de funcționare. Istoricul arată ce s-a schimbat în agent și când.",
-  "AgentAccessMember": "Același panou vă arată cine mai lucrează cu acest agent, ce acces are fiecare — ca să știți pe cine să întrebați când configurarea trebuie modificată — și ce s-a schimbat recent în el.",
   "AgentAccessMemberTitle": "Cine mai este aici",
-  "AgentAccessTitle": "Cine îl poate folosi",
   "AgentBuild": "A crea un agent înseamnă a descrie o sarcină, nu a deschide o conversație goală. Instrucțiunile stabilesc ce face și cum răspunde, fișierele pe care le atașați devin cunoștințele din care răspunde, iar dumneavoastră alegeți modelul din spatele lui, împreună cu instrumentele conectate la care poate apela.",
   "AgentBuildTitle": "Dați-i o sarcină",
   "AgentDemoContracts": "Verificator de contracte",

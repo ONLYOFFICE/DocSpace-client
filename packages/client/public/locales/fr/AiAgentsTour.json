@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Le panneau d'information est l'endroit où un agent cesse de n'appartenir qu'à vous. Invitez-y des personnes, ou accordez un accès en lecture seule pour qu'elles puissent consulter ce qu'il a produit sans toucher à son fonctionnement. L'historique indique ce qui a changé dans l'agent, et quand.",
-  "AgentAccessMember": "Ce même panneau vous indique qui d'autre travaille avec cet agent, l'accès dont chacun dispose — afin que vous sachiez à qui vous adresser lorsque la configuration doit être modifiée — et ce qui y a changé récemment.",
   "AgentAccessMemberTitle": "Qui d'autre est ici",
-  "AgentAccessTitle": "Qui peut l'utiliser",
   "AgentBuild": "Créer un agent, c'est décrire une mission, pas ouvrir un chat vide. Les instructions déterminent ce qu'il fait et comment il répond, les fichiers que vous joignez deviennent les connaissances à partir desquelles il répond, et vous choisissez le modèle qui l'anime ainsi que les outils connectés auxquels il peut faire appel.",
   "AgentBuildTitle": "Confiez-lui une mission",
   "AgentDemoContracts": "Relecteur de contrats",

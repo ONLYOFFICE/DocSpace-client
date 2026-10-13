@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Panel informacyjny to miejsce, w którym agent przestaje być wyłącznie twój. Zaproś do niego innych albo nadaj dostęp tylko do odczytu, aby mogli czytać to, co wytworzył, bez ingerowania w sposób jego działania. Historia mówi, co i kiedy zmieniło się w agencie.",
-  "AgentAccessMember": "Ten sam panel pokazuje, kto jeszcze pracuje z tym agentem, jaki dostęp ma każda z tych osób — dzięki czemu wiesz, kogo poprosić, gdy trzeba zmienić konfigurację — oraz co ostatnio się w nim zmieniło.",
   "AgentAccessMemberTitle": "Kto jeszcze tu jest",
-  "AgentAccessTitle": "Kto może z niego korzystać",
   "AgentBuild": "Tworzenie agenta to opisanie zadania, a nie otwarcie pustego czatu. Instrukcje ustalają, co robi i jak odpowiada, dołączone pliki stają się wiedzą, z której odpowiada, a ty wybierasz model stojący za nim oraz podłączone narzędzia, po które może sięgnąć.",
   "AgentBuildTitle": "Powierz mu zadanie",
   "AgentDemoContracts": "Recenzent umów",

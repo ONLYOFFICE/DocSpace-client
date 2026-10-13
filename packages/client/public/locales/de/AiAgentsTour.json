@@ -1,8 +1,5 @@
 {
-  "AgentAccess": "Im Info-Panel hört ein Agent auf, allein Ihnen zu gehören. Laden Sie Personen dazu ein oder vergeben Sie reinen Lesezugriff, damit sie die Ergebnisse lesen können, ohne die Funktionsweise anzutasten. Der Verlauf zeigt, was sich am Agenten geändert hat und wann.",
-  "AgentAccessMember": "Dasselbe Panel zeigt Ihnen, wer sonst noch mit diesem Agenten arbeitet, welchen Zugriff die einzelnen Personen haben – damit Sie wissen, wen Sie ansprechen müssen, wenn die Konfiguration geändert werden soll – und was sich zuletzt daran geändert hat.",
   "AgentAccessMemberTitle": "Wer sonst noch dabei ist",
-  "AgentAccessTitle": "Wer ihn nutzen darf",
   "AgentBuild": "Einen Agenten zu erstellen bedeutet, eine Aufgabe zu beschreiben, und nicht, einen leeren Chat zu öffnen. Die Anweisungen legen fest, was er tut und wie er antwortet, die angehängten Dateien werden zu dem Wissen, aus dem er antwortet, und Sie wählen das Modell dahinter sowie die verbundenen Tools, auf die er zugreifen darf.",
   "AgentBuildTitle": "Geben Sie ihm eine Aufgabe",
   "AgentDemoContracts": "Vertragsprüfer",

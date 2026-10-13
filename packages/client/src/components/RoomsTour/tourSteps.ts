@@ -188,7 +188,7 @@ export function getTourSteps(
       revealStep(
         MEMBERS_LIST_SELECTOR,
         t("RoomsTour:RoomsMembersTitle"),
-        t("RoomsTour:RoomsMembers"),
+        t("RoomsTour:RoomsContacts"),
         callbacks,
         ROOMS_TOUR_LABEL,
         infoPanelHooks,

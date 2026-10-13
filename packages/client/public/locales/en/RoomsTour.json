@@ -1,4 +1,5 @@
 {
+  "RoomsContacts": "The Contacts tab holds everyone in the room. Add contacts from your workspace here and give each one a role — from viewing files to managing the room.",
   "RoomsCreateFirst": "Pick a type, invite the people you work with, and drop in your files. It takes a minute — and everything you have just seen starts working on your own documents.",
   "RoomsCreateFirstTitle": "Now make it yours",
   "RoomsCreateOwn": "Pick a type, invite the people you work with, and drop in your files. It takes a minute — and everything you have just seen starts working in rooms of your own.",
@@ -6,7 +7,6 @@
   "RoomsEmptyTitle": "Your list is empty for now",
   "RoomsGroups": "Organize rooms by specific features to quickly find what you need. Create groups and switch between them right above the list.",
   "RoomsGroupsTitle": "Group your rooms",
-  "RoomsMembers": "The Contacts tab holds everyone in the room. Add contacts from your workspace here and give each one a role — from viewing files to managing the room.",
   "RoomsMembersTitle": "Work together",
   "RoomsPlacesArchive": "{{archive}} — rooms you no longer work in, restorable anytime.",
   "RoomsPlacesTemplates": "{{templates}} — your room templates.",

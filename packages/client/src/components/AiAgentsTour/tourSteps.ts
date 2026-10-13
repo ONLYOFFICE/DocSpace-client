@@ -193,15 +193,13 @@ export function getTourSteps(
         AI_AGENTS_TOUR_LABEL,
       ),
 
-    // 2. Create. The agents banner holds a single "New agent" tile, so
-    // spotlighting the banner is the same as spotlighting the tile. The step
-    // names what the create dialog actually asks for: AI Instructions,
-    // Knowledge, Profile (model) and MCP tools.
+    // 2. Create. The step names what the create dialog actually asks for: AI
+    // Instructions, Knowledge, Profile (model) and MCP tools.
     isAdmin &&
       canCreate &&
       showFilter &&
       elementStep(
-        '[data-testid="quick-actions"]',
+        '[data-testid="quick-new-agent"]',
         t("AiAgentsTour:AgentBuildTitle"),
         t("AiAgentsTour:AgentBuild"),
         callbacks,

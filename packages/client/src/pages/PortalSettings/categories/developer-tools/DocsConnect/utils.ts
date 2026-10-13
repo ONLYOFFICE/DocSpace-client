@@ -156,14 +156,6 @@ export const getDocsConnectDaysLeft = (endDate: string): number => {
   );
 };
 
-export const getDocsConnectPeriodDays = (endDate: string): number => {
-  const end = new Date(endDate).getTime();
-  if (Number.isNaN(end)) return 0;
-
-  const start = addMonths(end, -1);
-  return Math.max(1, Math.round((startOfDay(end) - startOfDay(start)) / DAY_MS));
-};
-
 export const getDocsConnectNextBillingDate = (): string =>
   new Date(addMonths(startOfDay(Date.now()), 1)).toISOString();
 

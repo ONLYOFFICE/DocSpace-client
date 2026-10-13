@@ -44,6 +44,7 @@ import {
   docsConnectTariffSuccess,
   docsConnectTenantInfoSuccess,
   docsConnectTenantSuccess,
+  docsConnectUpgradeCalcSuccess,
   docsConnectWalletBalanceSuccess,
   docsConnectWalletServicesSuccess,
 } from "./data";
@@ -62,6 +63,7 @@ export const PATH_DOCS_CONNECT_SWITCH_DEVPACK =
 export const PATH_WALLET_SERVICES = "portal/payment/walletservices";
 export const PATH_WALLET_BALANCE = "portal/payment/customer/balance";
 export const PATH_UPDATE_WALLET = "portal/payment/updatewallet";
+export const PATH_CALCULATE_WALLET = "portal/payment/calculatewallet";
 export const PATH_PAYMENT_QUOTA = "portal/payment/quota";
 export const PATH_PORTAL_TARIFF = "portal/tariff";
 
@@ -146,6 +148,12 @@ export const docsConnectPaymentHandlers = (
     new Response(JSON.stringify(docsConnectTariffSuccess(preset))),
   ),
   http.put(apiUrl(port, PATH_UPDATE_WALLET), () => jsonResponse(true)),
+  http.put(apiUrl(port, PATH_CALCULATE_WALLET), async ({ request }) => {
+    const body = (await request.json()) as {
+      quantity: Record<string, number>;
+    };
+    return jsonResponse(docsConnectUpgradeCalcSuccess(body.quantity));
+  }),
 ];
 
 export const docsConnectHandlers = (

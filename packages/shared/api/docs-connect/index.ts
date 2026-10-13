@@ -563,6 +563,28 @@ export const calculateDocsConnectDevPack = async (
     data: { quantity },
   })) as TDocsConnectDevPackCalculation | null;
 
+export const calculateDocsConnectUpgrade = async ({
+  addedUsers,
+  devPackEnabled,
+  signal,
+}: {
+  addedUsers: number;
+  devPackEnabled: boolean;
+  signal?: AbortSignal;
+}): Promise<TDocsConnectDevPackCalculation | null> =>
+  (await request({
+    method: "put",
+    url: "/portal/payment/calculatewallet",
+    data: {
+      quantity: {
+        [devPackEnabled ? DOCS_CLOUD_DEVPACK_PRODUCT : DOCS_CLOUD_PRODUCT]:
+          addedUsers,
+      },
+      productQuantityType: QUANTITY_TYPE_ADD,
+    },
+    signal,
+  })) as TDocsConnectDevPackCalculation | null;
+
 export const switchDocsConnectToDevPack = async ({
   quantity,
 }: {

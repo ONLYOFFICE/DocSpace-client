@@ -42,6 +42,7 @@ import {
   docsConnectPayerHandler,
   DOCS_CONNECT_FROZEN_NOW,
   PATH_DOCS_CONNECT_CALC_DEVPACK,
+  PATH_CALCULATE_WALLET,
   PATH_DOCS_CONNECT_SWITCH_DEVPACK,
   PATH_UPDATE_WALLET,
 } from "@docspace/shared/__mocks__/handlers";
@@ -247,10 +248,24 @@ test.describe("Docs Connect buy plan panel", () => {
 
       await openFromPaid(page, baseUrl);
 
+      const calculateRequest = page.waitForRequest(
+        (request) =>
+          request.method() === "PUT" &&
+          request.url().includes(PATH_CALCULATE_WALLET),
+      );
+
       await setUsers(page, "60");
 
+      const calculateBody = (await calculateRequest).postDataJSON() as {
+        quantity: Record<string, number>;
+        productQuantityType: number;
+      };
+
+      expect(calculateBody.quantity).toEqual({ docscloud: 10 });
+      expect(calculateBody.productQuantityType).toBe(1);
+
       await expect(page.getByText("Total due today")).toBeVisible();
-      await expect(page.getByText("$13.33")).toBeVisible();
+      await expect(page.getByText("$13.44")).toBeVisible();
       await expect(
         page.getByTestId("docs_connect_buy_plan_submit"),
       ).toHaveText("Upgrade");

@@ -96,7 +96,25 @@ describe("getTourSteps — admin", () => {
       "AiAgentsTour:AgentAccessTitle",
       "AiAgentsTour:AgentFindTitle",
       "AiAgentsTour:AgentPlacesTitle",
+      "RoomsTour:RoomsCreateFirstTitle",
     ]);
+  });
+
+  it("closes a run on the section's own agents on the New agent button", () => {
+    const closing = steps(adminFlags).at(-1)!;
+
+    expect(closing.title).toBe("RoomsTour:RoomsCreateFirstTitle");
+    expect(closing.target).toBe(
+      '#filter_search-input > div:has(> [data-testid="main-button"])',
+    );
+
+    expect(titles({ ...adminFlags, isDesktop: false })).not.toContain(
+      "RoomsTour:RoomsCreateFirstTitle",
+    );
+    expect(titles({ ...adminFlags, canCreate: false })).not.toContain(
+      "RoomsTour:RoomsCreateFirstTitle",
+    );
+    expect(titles(userFlags)).not.toContain("RoomsTour:RoomsCreateFirstTitle");
   });
 
   it("stays inside the seven-step budget on the longest run there is", () => {
@@ -107,7 +125,7 @@ describe("getTourSteps — admin", () => {
   });
 
   it("names every sidebar shortcut it points at, one bullet each", () => {
-    const places = steps(adminFlags).at(-1);
+    const places = steps(adminFlags).at(-2);
 
     expect(bullets(places)).toEqual([
       "AiAgentsTour:AgentPlacesRecent",
@@ -123,7 +141,7 @@ describe("getTourSteps — user", () => {
     const userTitles = titles(userFlags);
 
     expect(userTitles).not.toContain("AiAgentsTour:AgentBuildTitle");
-    expect(userTitles).not.toContain("AiAgentsTour:AgentStartTitle");
+    expect(userTitles).not.toContain("RoomsTour:RoomsCreateFirstTitle");
   });
 
   it("still covers what to do with the agents they were let into", () => {
@@ -190,7 +208,7 @@ describe("getTourSteps — what the page allows", () => {
     const withoutTrash = steps({
       ...adminFlags,
       hasTrash: false,
-    }).at(-1);
+    }).at(-2);
 
     expect(bullets(withoutTrash)).toEqual(["AiAgentsTour:AgentPlacesRecent"]);
 
@@ -212,13 +230,11 @@ describe("getTourSteps — what the page allows", () => {
     const createButton = document.querySelector(EMPTY_SCREEN_TARGET);
 
     const closing = steps(demoFlags).at(-1)!;
-    expect(closing.title).toBe("AiAgentsTour:AgentStartTitle");
+    expect(closing.title).toBe("RoomsTour:RoomsCreateFirstTitle");
     expect((closing.target as () => Element | null)()).toBe(createButton);
 
     // A section that kept its own list ends on the sidebar step instead.
-    expect(steps(adminFlags).at(-1)?.title).toBe(
-      "AiAgentsTour:AgentPlacesTitle",
-    );
+    expect(steps(adminFlags).at(-1)?.target).not.toBe(closing.target);
 
     document.body.innerHTML = "";
   });
@@ -256,7 +272,7 @@ describe("getTourSteps — what the page allows", () => {
   it("never sends someone who cannot create an agent at the create button", () => {
     const userTitles = titles(userDemoFlags);
 
-    expect(userTitles).not.toContain("AiAgentsTour:AgentStartTitle");
+    expect(userTitles).not.toContain("RoomsTour:RoomsCreateFirstTitle");
     expect(userTitles).not.toContain("AiAgentsTour:AgentSwitchOnTitle");
   });
 

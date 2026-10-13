@@ -72,7 +72,7 @@ const EMPTY_SCREEN = '[data-testid="empty-view"]';
 // what the portal has switched on, so an index would quietly point at a
 // different step as those flags move.
 const CREATE_STEP = "Give it a job";
-const CREATE_FIRST_STEP = "Now build your own";
+const CREATE_FIRST_STEP = "Now make it yours";
 const SWITCH_ON_STEP = "Switch it on and see for real";
 // The closing step of anyone with no button on the empty screen to be sent at —
 // the stand-in is dropped the same way, but what is left under the spotlight is
@@ -131,6 +131,26 @@ test.describe("AI Agents tour", () => {
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
     await walkTour(page, ["desktop", "ai-agents-tour", "admin"]);
+  });
+
+  test("ends on the New agent button when the section has agents of its own", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "admin"),
+      ...agentOwnerMembers(),
+    );
+
+    await startTour(page, baseUrl);
+    await goToStep(page, CREATE_FIRST_STEP);
+
+    await expect(page.locator(EMPTY_SCREEN)).toBeHidden();
+    await expect(page.locator('[data-testid="main-button"]')).toBeVisible();
+    await expect(
+      tourTooltip(page).getByRole("button", { name: "Done" }),
+    ).toBeVisible();
   });
 
   test("user sees the reduced, role-appropriate walkthrough", async ({

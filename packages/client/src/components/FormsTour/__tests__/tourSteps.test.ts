@@ -94,7 +94,24 @@ describe("getTourSteps — room admin", () => {
       "FormsTour:FormsInProgressTitle",
       "FormsTour:FormsCompleteTitle",
       "FormsTour:FormsPlacesTitle",
+      "FormsTour:FormsCreateFirstTitle",
     ]);
+  });
+
+  it("closes a run on the section's own spaces on the New Form space button", () => {
+    const closing = steps(adminFlags).at(-1)!;
+
+    expect(closing.title).toBe("FormsTour:FormsCreateFirstTitle");
+    expect(closing.target).toBe(
+      '#filter_search-input > div:has(> [data-testid="main-button"])',
+    );
+
+    expect(titles({ ...adminFlags, isDesktop: false })).not.toContain(
+      "FormsTour:FormsCreateFirstTitle",
+    );
+    expect(titles(fillerFlags)).not.toContain(
+      "FormsTour:FormsCreateFirstTitle",
+    );
   });
 
   it("stays inside the ten-step budget on the longest run there is", () => {
@@ -102,7 +119,7 @@ describe("getTourSteps — room admin", () => {
   });
 
   it("names every sidebar shortcut it points at, one bullet each", () => {
-    const places = steps(adminFlags).at(-1);
+    const places = steps(adminFlags).at(-2);
 
     expect(bullets(places)).toEqual([
       "FormsTour:FormsPlacesRecent",
@@ -293,7 +310,7 @@ describe("getTourSteps — what the page allows", () => {
 
     // A section that kept its own list ends on the sidebar step instead, which
     // names its anchor with a plain selector.
-    expect(steps(adminFlags).at(-1)?.title).toBe("FormsTour:FormsPlacesTitle");
+    expect(steps(adminFlags).at(-1)?.target).not.toBe(closing.target);
 
     document.body.innerHTML = "";
   });

@@ -63,6 +63,8 @@ const itemSelector = (id: number, isFolder = true) =>
 const BLANK_FORM_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.form, false);
 const IN_PROGRESS_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.inProgress);
 const COMPLETE_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.complete);
+const NEW_BUTTON_SELECTOR =
+  '#filter_search-input > div:has(> [data-testid="main-button"])';
 
 // The only action of the Forms empty screen, which is "create a room" — the
 // dialog it opens is already scoped to a form space (EmptyViewContainer.helpers
@@ -273,9 +275,8 @@ export function getTourSteps(
     // no button there at all — the honest ending for them is to name what the
     // empty list means and who fills it, rather than to send them at an action
     // that is not theirs.
-    isStandIn &&
-      demoHooks &&
-      (canCreate
+    isStandIn && demoHooks
+      ? canCreate
         ? revealStep(
             EMPTY_SCREEN_CREATE_SELECTOR,
             t("FormsTour:FormsCreateFirstTitle"),
@@ -291,6 +292,18 @@ export function getTourSteps(
             callbacks,
             FORMS_TOUR_LABEL,
             demoHooks,
-          )),
+          )
+      : canCreate &&
+        showFilter &&
+        isDesktop &&
+        elementStep(
+          NEW_BUTTON_SELECTOR,
+          t("FormsTour:FormsCreateFirstTitle"),
+          t("FormsTour:FormsCreateOwn"),
+          callbacks,
+          FORMS_TOUR_LABEL,
+          6,
+          leaveSpace,
+        ),
   ].filter(Boolean) as Step[];
 }

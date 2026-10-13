@@ -67,6 +67,8 @@ const INFO_PANEL_SELECTOR = ".info-panel";
 // handful — and separating them costs a step the budget does not have.
 const SEARCH_SELECTOR = "#filter_search-input";
 const FILTER_BUTTON_SELECTOR = "#filter-button";
+const NEW_BUTTON_SELECTOR =
+  '#filter_search-input > div:has(> [data-testid="main-button"])';
 
 // The single action of the agents empty screen — "create an agent" on a portal
 // with AI on, the way to switch it on otherwise (EmptyViewContainer.helpers,
@@ -277,13 +279,12 @@ export function getTourSteps(
     // empty screen is bare for them — so their ending names what the empty list
     // means and who fills it instead. `restore` is a no-op in every case: the
     // section is the user's own from here on.
-    isStandIn &&
-      demoHooks &&
-      (emptyScreenAction
+    isStandIn && demoHooks
+      ? emptyScreenAction
         ? revealStep(
             EMPTY_SCREEN_CREATE_SELECTOR,
             emptyScreenAction === "create"
-              ? t("AiAgentsTour:AgentStartTitle")
+              ? t("RoomsTour:RoomsCreateFirstTitle")
               : t("AiAgentsTour:AgentSwitchOnTitle"),
             emptyScreenAction === "create"
               ? t("AiAgentsTour:AgentStart")
@@ -300,6 +301,17 @@ export function getTourSteps(
             callbacks,
             AI_AGENTS_TOUR_LABEL,
             demoHooks,
-          )),
+          )
+      : isAdmin &&
+        canCreate &&
+        showFilter &&
+        isDesktop &&
+        elementStep(
+          NEW_BUTTON_SELECTOR,
+          t("RoomsTour:RoomsCreateFirstTitle"),
+          t("AiAgentsTour:AgentStart"),
+          callbacks,
+          AI_AGENTS_TOUR_LABEL,
+        ),
   ].filter(Boolean) as Step[];
 }

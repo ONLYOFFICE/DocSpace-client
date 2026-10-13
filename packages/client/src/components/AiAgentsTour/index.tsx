@@ -145,7 +145,7 @@ const AiAgentsTour = ({
   hasFavorites,
   hasTrash,
 }: AiAgentsTourProps) => {
-  const { t, ready } = useTranslation(["AiAgentsTour", "Common"]);
+  const { t, ready } = useTranslation(["AiAgentsTour", "RoomsTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
 

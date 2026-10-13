@@ -72,10 +72,9 @@ const EMPTY_LIST_STEP = "Your list is empty for now";
 
 // What an admin on a portal that already has form spaces walks through
 // (SRC_DIR/components/FormsTour/tourSteps): the two create tiles, a space row,
-// the three things inside the stand-in space that row step walks into, and the
-// sidebar sub-items. Not the closing step — that one only exists when the list
-// itself was stood in for, and this portal's list is its own.
-const ADMIN_STEP_COUNT = 7;
+// the three things inside the stand-in space that row step walks into, the
+// sidebar sub-items, and the "New Form space" button to close on.
+const ADMIN_STEP_COUNT = 8;
 
 // The first stand-in space the demo puts up on an empty portal
 // (FormsTour:FormsDemoOnboarding), and the three things waiting inside it
@@ -236,6 +235,23 @@ test.describe("Forms tour", () => {
     // that is missing three steps in the middle is a walkthrough of four steps
     // that all look right.
     expect(steps).toBe(ADMIN_STEP_COUNT);
+  });
+
+  test("ends on the New Form space button when the section has spaces of its own", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+    await goToStep(page, CREATE_FIRST_STEP);
+
+    await expect(page.locator(EMPTY_SCREEN)).toBeHidden();
+    await expect(page.locator('[data-testid="main-button"]')).toBeVisible();
+    await expect(
+      tourTooltip(page).getByRole("button", { name: "Done" }),
+    ).toBeVisible();
   });
 
   test("user (form filler) sees the reduced, role-appropriate walkthrough", async ({

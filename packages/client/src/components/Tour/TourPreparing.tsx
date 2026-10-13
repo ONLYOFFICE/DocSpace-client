@@ -36,8 +36,8 @@
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { sectionBox } from "./sectionFade";
 import styles from "./TourPreparing.module.scss";

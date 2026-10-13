@@ -18,7 +18,5 @@
   "AgentStart": "Ota työ, jota jatkuvasti teet käsin, kirjoita se ohjeiksi, lisää tiedostot, joista vastaus löytyy — ja anna agentin hoitaa seuraava kierros.",
   "AgentSwitchOn": "Juuri läpikäymäsi agentit olivat esikatselu — tässä työtilassa tekoälyä ei ole vielä otettu käyttöön. Tuo painike on kaikki, mikä erottaa sinut ensimmäisestä oikeasta agentista.",
   "AgentSwitchOnTitle": "Kytke se päälle ja näe oikeasti",
-  "AgentWhatIs": "Toisin kuin tavallinen keskustelu, AI-agentti pysyy luettelossasi, ja voit palata siihen milloin tahansa. Jokaisella agentilla on oma keskusteluhistoriansa, omat asetuksensa ja lisäämistäsi asiakirjoista rakennettu tietopohja.",
-  "AgentWhatIsShared": "Toisin kuin tavallinen keskustelu, AI-agentti pysyy luettelossasi, ja voit palata siihen milloin tahansa. Agentit määrittää tiimisi: jokaisella on oma keskusteluhistoriansa, omat asetuksensa ja siihen lisätyistä asiakirjoista rakennettu tietopohja, ja sinä näet ne agentit, joihin sinulle on annettu pääsy.",
   "AgentWhatIsTitle": "Agentti, ei keskustelu"
 }

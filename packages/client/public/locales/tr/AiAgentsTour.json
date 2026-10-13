@@ -18,7 +18,5 @@
   "AgentStart": "Elle yapmayı sürdürdüğünüz işi alın, talimat olarak yazın, ona yanıt veren dosyaları ekleyin — ve bir sonraki turu ajana bırakın.",
   "AgentSwitchOn": "Az önce gezdiğiniz ajanlar bir ön izlemeydi — bu çalışma alanında yapay zeka henüz açık değil. O düğme, sizinle ilk gerçek ajan arasındaki tek şey.",
   "AgentSwitchOnTitle": "Açın ve gerçekten görün",
-  "AgentWhatIs": "Sıradan bir sohbetten farklı olarak yapay zeka ajanı listenizde kalır ve ona istediğiniz zaman geri dönebilirsiniz. Her ajanın kendi konuşma geçmişi, ayarları ve eklediğiniz belgelerden oluşturulmuş bir bilgi tabanı vardır.",
-  "AgentWhatIsShared": "Sıradan bir sohbetten farklı olarak yapay zeka ajanı listenizde kalır ve ona istediğiniz zaman geri dönebilirsiniz. Ajanları ekibiniz kurar: her birinin kendi konuşma geçmişi, ayarları ve ona eklenen belgelerden oluşturulmuş bir bilgi tabanı vardır, siz de erişim verilen ajanları görürsünüz.",
   "AgentWhatIsTitle": "Sohbet değil, ajan"
 }

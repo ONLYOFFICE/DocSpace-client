@@ -18,7 +18,5 @@
   "AgentStart": "Uzmite posao koji stalno radite ručno, zapišite ga kao uputstva, dodajte datoteke koje na njega odgovaraju — i prepustite agentu sledeći krug.",
   "AgentSwitchOn": "Agenti kroz koje ste upravo prošli bili su prikaz — u ovom radnom prostoru AI još nije uključen. To dugme je sve što vas deli od prvog pravog agenta.",
   "AgentSwitchOnTitle": "Uključite ga i vidite uživo",
-  "AgentWhatIs": "Za razliku od običnog razgovora, AI agent ostaje na vašem spisku i možete mu se vratiti u bilo kom trenutku. Svaki agent ima sopstvenu istoriju prepiske, podešavanja i bazu znanja izgrađenu od dokumenata koje dodate.",
-  "AgentWhatIsShared": "Za razliku od običnog razgovora, AI agent ostaje na vašem spisku i možete mu se vratiti u bilo kom trenutku. Agente podešava vaš tim: svaki ima sopstvenu istoriju prepiske, podešavanja i bazu znanja izgrađenu od dokumenata koji su mu dodati, a vi vidite one agente u koje ste pušteni.",
   "AgentWhatIsTitle": "Agent, a ne razgovor"
 }

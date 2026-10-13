@@ -18,7 +18,5 @@
   "AgentStart": "Vzemite delo, ki ga vedno znova opravljate ročno, ga zapišite kot navodila, dodajte datoteke, ki nanj odgovarjajo — in naslednji krog prepustite agentu.",
   "AgentSwitchOn": "Agenti, skozi katere ste pravkar šli, so bili predogled — v tem delovnem prostoru AI še ni vklopljen. Tisti gumb je vse, kar vas loči od prvega pravega agenta.",
   "AgentSwitchOnTitle": "Vklopite in poglejte v živo",
-  "AgentWhatIs": "Za razliko od običajnega klepeta agent AI ostane na vašem seznamu in se lahko k njemu kadar koli vrnete. Vsak agent ima svojo zgodovino pogovorov, nastavitve in bazo znanja, zgrajeno iz dokumentov, ki jih dodate.",
-  "AgentWhatIsShared": "Za razliko od običajnega klepeta agent AI ostane na vašem seznamu in se lahko k njemu kadar koli vrnete. Agente nastavi vaša ekipa: vsak ima svojo zgodovino pogovorov, nastavitve in bazo znanja, zgrajeno iz dokumentov, ki so mu bili dodani, vi pa vidite tiste, do katerih so vam odobrili dostop.",
   "AgentWhatIsTitle": "Agent, ne klepet"
 }

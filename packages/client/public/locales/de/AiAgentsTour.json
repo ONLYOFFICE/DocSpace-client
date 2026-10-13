@@ -18,7 +18,5 @@
   "AgentStart": "Nehmen Sie die Aufgabe, die Sie immer wieder von Hand erledigen, schreiben Sie sie als Anweisungen auf, fügen Sie die Dateien hinzu, die sie beantworten – und überlassen Sie dem Agenten die nächste Runde.",
   "AgentSwitchOn": "Die Agenten, die Sie gerade durchlaufen haben, waren eine Vorschau – in diesem Arbeitsbereich ist noch keine KI aktiviert. Diese Schaltfläche ist alles, was zwischen Ihnen und dem ersten echten Agenten steht.",
   "AgentSwitchOnTitle": "Schalten Sie sie ein und sehen Sie es in echt",
-  "AgentWhatIs": "Anders als ein gewöhnlicher Chat bleibt ein KI-Agent in Ihrer Liste, und Sie können jederzeit zu ihm zurückkehren. Jeder Agent hat seinen eigenen Unterhaltungsverlauf, eigene Einstellungen und eine Wissensdatenbank, die aus den von Ihnen hinzugefügten Dokumenten aufgebaut wird.",
-  "AgentWhatIsShared": "Anders als ein gewöhnlicher Chat bleibt ein KI-Agent in Ihrer Liste, und Sie können jederzeit zu ihm zurückkehren. Die Agenten richtet Ihr Team ein: Jeder hat seinen eigenen Unterhaltungsverlauf, eigene Einstellungen und eine Wissensdatenbank aus den ihm hinzugefügten Dokumenten, und Sie sehen die Agenten, zu denen Sie Zugang erhalten haben.",
   "AgentWhatIsTitle": "Ein Agent, kein Chat"
 }

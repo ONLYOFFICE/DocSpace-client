@@ -18,7 +18,5 @@
   "AgentStart": "Weź pracę, którą wciąż wykonujesz ręcznie, zapisz ją w formie instrukcji, dodaj pliki, które dają na nią odpowiedź — i pozwól agentowi przejąć następną rundę.",
   "AgentSwitchOn": "Agenci, przez których właśnie przeszedłeś, byli podglądem — w tej przestrzeni roboczej AI nie jest jeszcze włączone. Ten przycisk to wszystko, co dzieli cię od pierwszego prawdziwego agenta.",
   "AgentSwitchOnTitle": "Włącz i zobacz na żywo",
-  "AgentWhatIs": "W odróżnieniu od zwykłego czatu agent AI pozostaje na twojej liście i możesz do niego wrócić w dowolnej chwili. Każdy agent ma własną historię rozmów, ustawienia i bazę wiedzy zbudowaną z dodanych przez ciebie dokumentów.",
-  "AgentWhatIsShared": "W odróżnieniu od zwykłego czatu agent AI pozostaje na twojej liście i możesz do niego wrócić w dowolnej chwili. Agentów konfiguruje twój zespół: każdy ma własną historię rozmów, ustawienia i bazę wiedzy zbudowaną z dodanych do niego dokumentów, a ty widzisz tych, do których dano ci dostęp.",
   "AgentWhatIsTitle": "Agent, a nie czat"
 }

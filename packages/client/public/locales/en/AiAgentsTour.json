@@ -11,6 +11,8 @@
   "AgentEmptyTitle": "Your list is empty for now",
   "AgentFind": "Type a name to narrow the list — search looks at agent names, not at the messages inside their chats. Open the filter when the name is not what you remember, and find one by tag, by owner, or by who was let in.",
   "AgentFindTitle": "Picking one out later",
+  "AgentIntro": "Unlike an ordinary chat, an AI agent stays in your list, and you can come back to it at any time. Each agent has its own conversation history, settings and a knowledge base built from the documents you add.",
+  "AgentIntroShared": "Unlike an ordinary chat, an AI agent stays in your list, and you can come back to it at any time. Your team sets the agents up: each has its own conversation history, settings and a knowledge base built from the documents added to it, and you see the ones you were given access to.",
   "AgentPlacesRecent": "{{recent}} and {{favorites}} keep the agents you actually work with at the top of the sidebar.",
   "AgentPlacesTitle": "Kept within reach",
   "AgentPlacesTrash": "{{trash}} holds the ones you deleted, restorable until you empty it.",
@@ -20,7 +22,5 @@
   "AgentStart": "Take the job you keep doing by hand, write it down as instructions, add the files that answer it — and let the agent take the next round.",
   "AgentSwitchOn": "The agents you have just walked through were a preview — this workspace has no AI switched on yet. That button is the whole of what stands between you and the first real one.",
   "AgentSwitchOnTitle": "Switch it on and see for real",
-  "AgentWhatIs": "Unlike an ordinary chat, an AI agent stays in your list, and you can come back to it at any time. Each agent has its own conversation history, settings and a knowledge base built from the documents you add.",
-  "AgentWhatIsShared": "Unlike an ordinary chat, an AI agent stays in your list, and you can come back to it at any time. Your team sets the agents up: each has its own conversation history, settings and a knowledge base built from the documents added to it, and you see the ones you were given access to.",
   "AgentWhatIsTitle": "An agent, not a chat"
 }

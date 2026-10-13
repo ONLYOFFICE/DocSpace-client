@@ -187,8 +187,8 @@ export function getTourSteps(
         // list is told where the list they are looking at comes from instead of
         // what an agent keeps for them.
         isAdmin
-          ? t("AiAgentsTour:AgentWhatIs")
-          : t("AiAgentsTour:AgentWhatIsShared"),
+          ? t("AiAgentsTour:AgentIntro")
+          : t("AiAgentsTour:AgentIntroShared"),
         callbacks,
         AI_AGENTS_TOUR_LABEL,
       ),

@@ -18,7 +18,5 @@
   "AgentStart": "Prenez la tâche que vous refaites sans cesse à la main, rédigez-la sous forme d'instructions, ajoutez les fichiers qui y répondent — et laissez l'agent prendre le relais.",
   "AgentSwitchOn": "Les agents que vous venez de parcourir n'étaient qu'un aperçu — aucune IA n'est encore activée dans cet espace de travail. Ce bouton est tout ce qui vous sépare du premier agent réel.",
   "AgentSwitchOnTitle": "Activez-la et voyez pour de vrai",
-  "AgentWhatIs": "Contrairement à un chat ordinaire, un agent IA reste dans votre liste et vous pouvez y revenir à tout moment. Chaque agent possède son propre historique de conversation, ses propres paramètres et une base de connaissances construite à partir des documents que vous ajoutez.",
-  "AgentWhatIsShared": "Contrairement à un chat ordinaire, un agent IA reste dans votre liste et vous pouvez y revenir à tout moment. Les agents sont configurés par votre équipe : chacun possède son propre historique de conversation, ses propres paramètres et une base de connaissances construite à partir des documents qui lui ont été ajoutés, et vous voyez ceux auxquels on vous a donné accès.",
   "AgentWhatIsTitle": "Un agent, pas un chat"
 }

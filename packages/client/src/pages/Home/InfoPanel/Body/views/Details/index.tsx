@@ -316,7 +316,7 @@ const Details = ({
             // When EditRoom is true, RoomIcon hides the badge in favour of the edit affordance.
             withEditing={
               "isRoom" in selection && selection.isRoom
-                ? selection.security.EditRoom
+                ? Boolean(selection.security?.EditRoom)
                 : false
             }
             dataTestId="info_panel_details_room_icon"

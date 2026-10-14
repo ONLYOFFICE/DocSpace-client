@@ -1,15 +1,10 @@
 {
-  "RoomsCreateFirst": "Kies een type, nodig de mensen uit met wie u werkt en zet uw bestanden erin. Het kost een minuut — en alles wat u zojuist hebt gezien gaat werken op uw eigen documenten.",
   "RoomsCreateFirstTitle": "Maak hem nu van uzelf",
-  "RoomsEmpty": "De kamers die u zojuist hebt gezien waren een voorproefje. Kamers waarvoor iemand u uitnodigt verschijnen in deze lijst, en alles wat u is getoond werkt daar op dezelfde manier.",
   "RoomsEmptyTitle": "Uw lijst is voorlopig leeg",
-  "RoomsGroups": "Orden kamers op specifieke kenmerken om snel te vinden wat u nodig hebt. Maak groepen aan en wissel er vlak boven de lijst tussen.",
   "RoomsGroupsTitle": "Groepeer uw kamers",
   "RoomsMembersTitle": "Werk samen",
-  "RoomsPlacesArchive": "{{archive}} — kamers waarin u niet meer werkt, altijd herstelbaar.",
   "RoomsPlacesTemplates": "{{templates}} — uw kamersjablonen.",
   "RoomsPlacesTitle": "Alles op zijn plek",
-  "RoomsTemplates": "Maak van elke kamer een sjabloon — de instellingen, de structuur en de bestanden worden bewaard. Maak er met één klik een nieuwe kamer van; alleen de leden toevoegen blijft over.",
   "RoomsTemplatesTitle": "Hergebruik wat werkt",
   "RoomsTypesTitle": "Een kamer voor elke taak"
 }

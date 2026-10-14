@@ -1,15 +1,10 @@
 {
-  "RoomsCreateFirst": "Alegeți un tip, invitați persoanele cu care lucrați și adăugați-vă fișierele. Durează un minut — și tot ce tocmai ați văzut începe să funcționeze pe propriile dumneavoastră documente.",
   "RoomsCreateFirstTitle": "Acum faceți-o a dumneavoastră",
-  "RoomsEmpty": "Sălile pe care tocmai le-ați văzut au fost o previzualizare. Sălile la care vă invită cineva apar în această listă, iar tot ce vi s-a arătat funcționează la fel în ele.",
   "RoomsEmptyTitle": "Lista dumneavoastră este goală deocamdată",
-  "RoomsGroups": "Organizați sălile după caracteristici anume, ca să găsiți rapid ce vă trebuie. Creați grupuri și comutați între ele chiar deasupra listei.",
   "RoomsGroupsTitle": "Grupați-vă sălile",
   "RoomsMembersTitle": "Lucrați împreună",
-  "RoomsPlacesArchive": "{{archive}} — sălile în care nu mai lucrați, recuperabile oricând.",
   "RoomsPlacesTemplates": "{{templates}} — șabloanele dumneavoastră de sală.",
   "RoomsPlacesTitle": "Fiecare lucru la locul lui",
-  "RoomsTemplates": "Transformați orice sală într-un șablon — setările, structura și fișierele ei sunt salvate. Creați dintr-un clic o sală nouă pornind de la el, nu mai rămâne decât să adăugați membri.",
   "RoomsTemplatesTitle": "Refolosiți ce funcționează",
   "RoomsTypesTitle": "O sală pentru fiecare sarcină"
 }

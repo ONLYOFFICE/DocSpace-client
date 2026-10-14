@@ -1,15 +1,10 @@
 {
-  "RoomsCreateFirst": "Scegliete un tipo, invitate le persone con cui lavorate e inseritevi i vostri file. Ci vuole un minuto, e tutto ciò che avete appena visto inizia a funzionare sui vostri documenti.",
   "RoomsCreateFirstTitle": "Ora rendetela vostra",
-  "RoomsEmpty": "Le stanze che avete appena visto erano un'anteprima. Le stanze a cui qualcuno vi invita compaiono in questo elenco, e tutto ciò che vi è stato mostrato funziona allo stesso modo al loro interno.",
   "RoomsEmptyTitle": "Il vostro elenco per ora è vuoto",
-  "RoomsGroups": "Organizzate le stanze in base a caratteristiche specifiche per trovare rapidamente ciò che vi serve. Create gruppi e passate dall'uno all'altro proprio sopra l'elenco.",
   "RoomsGroupsTitle": "Raggruppate le vostre stanze",
   "RoomsMembersTitle": "Lavorate insieme",
-  "RoomsPlacesArchive": "{{archive}}: le stanze in cui non lavorate più, ripristinabili in qualsiasi momento.",
   "RoomsPlacesTemplates": "{{templates}}: i vostri modelli di stanza.",
   "RoomsPlacesTitle": "Ogni cosa al suo posto",
-  "RoomsTemplates": "Trasformate qualsiasi stanza in un modello: le sue impostazioni, la sua struttura e i suoi file vengono salvati. Createne una nuova con un clic, non resta che aggiungere i membri.",
   "RoomsTemplatesTitle": "Riutilizzate ciò che funziona",
   "RoomsTypesTitle": "Una stanza per ogni attività"
 }

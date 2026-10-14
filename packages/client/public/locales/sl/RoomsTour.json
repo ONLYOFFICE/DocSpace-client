@@ -1,15 +1,10 @@
 {
-  "RoomsCreateFirst": "Izberite vrsto, povabite ljudi, s katerimi delate, in vanjo odložite svoje datoteke. Traja minuto — in vse, kar ste pravkar videli, začne delovati na vaših lastnih dokumentih.",
   "RoomsCreateFirstTitle": "Zdaj naredite svojo",
-  "RoomsEmpty": "Sobe, ki ste jih pravkar videli, so bile predogled. Sobe, v katere vas nekdo povabi, se pojavijo na tem seznamu, in vse, kar ste videli, v njih deluje enako.",
   "RoomsEmptyTitle": "Vaš seznam je zaenkrat prazen",
-  "RoomsGroups": "Sobe uredite po določenih značilnostih, da hitro najdete, kar potrebujete. Ustvarite skupine in preklapljajte med njimi tik nad seznamom.",
   "RoomsGroupsTitle": "Združite svoje sobe",
   "RoomsMembersTitle": "Delajte skupaj",
-  "RoomsPlacesArchive": "{{archive}} — sobe, v katerih ne delate več, obnovljive kadar koli.",
   "RoomsPlacesTemplates": "{{templates}} — vaše predloge sob.",
   "RoomsPlacesTitle": "Vse na svojem mestu",
-  "RoomsTemplates": "Katero koli sobo spremenite v predlogo — njene nastavitve, struktura in datoteke se shranijo. Iz nje z enim klikom ustvarite novo sobo, preostane le še dodajanje članov.",
   "RoomsTemplatesTitle": "Znova uporabite tisto, kar deluje",
   "RoomsTypesTitle": "Soba za vsako nalogo"
 }

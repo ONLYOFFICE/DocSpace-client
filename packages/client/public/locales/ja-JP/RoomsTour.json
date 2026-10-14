@@ -1,15 +1,10 @@
 {
-  "RoomsCreateFirst": "種類を選び、一緒に働く人を招待して、ファイルを入れるだけです。1分もかかりません。ここまで見てきたすべてが、あなた自身のドキュメントで動き始めます。",
   "RoomsCreateFirstTitle": "さあ、自分のものにしましょう",
-  "RoomsEmpty": "ここまでご覧いただいたルームはプレビューです。誰かに招待されたルームがこのリストに表示され、お見せした内容はそこでも同じように機能します。",
   "RoomsEmptyTitle": "リストは今のところ空です",
-  "RoomsGroups": "特定の条件でルームを整理して、必要なものをすばやく見つけましょう。グループを作成し、リストのすぐ上で切り替えられます。",
   "RoomsGroupsTitle": "ルームをグループ分け",
   "RoomsMembersTitle": "一緒に作業する",
-  "RoomsPlacesArchive": "{{archive}} — もう使っていないルームで、いつでも復元できます。",
   "RoomsPlacesTemplates": "{{templates}} — ルームテンプレート。.",
   "RoomsPlacesTitle": "すべてがあるべき場所に",
-  "RoomsTemplates": "どのルームもテンプレートに変えられます。設定、構成、ファイルがそのまま保存されます。そこからワンクリックで新しいルームを作成でき、あとはメンバーを追加するだけです。",
   "RoomsTemplatesTitle": "うまくいったものを再利用",
   "RoomsTypesTitle": "あらゆる用途にルームを"
 }

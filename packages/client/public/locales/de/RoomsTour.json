@@ -1,15 +1,10 @@
 {
-  "RoomsCreateFirst": "Wählen Sie einen Typ, laden Sie die Personen ein, mit denen Sie arbeiten, und legen Sie Ihre Dateien hinein. Das dauert eine Minute – und alles, was Sie gerade gesehen haben, beginnt an Ihren eigenen Dokumenten zu wirken.",
   "RoomsCreateFirstTitle": "Jetzt machen Sie es zu Ihrem",
-  "RoomsEmpty": "Die Räume, die Sie gerade gesehen haben, waren eine Vorschau. Räume, zu denen Sie jemand einlädt, erscheinen in dieser Liste, und alles, was Ihnen gezeigt wurde, funktioniert dort genauso.",
   "RoomsEmptyTitle": "Ihre Liste ist vorerst leer",
-  "RoomsGroups": "Ordnen Sie Räume nach bestimmten Merkmalen, um schnell zu finden, was Sie brauchen. Erstellen Sie Gruppen und wechseln Sie direkt über der Liste zwischen ihnen.",
   "RoomsGroupsTitle": "Gruppieren Sie Ihre Räume",
   "RoomsMembersTitle": "Gemeinsam arbeiten",
-  "RoomsPlacesArchive": "{{archive}} – Räume, in denen Sie nicht mehr arbeiten, jederzeit wiederherstellbar.",
   "RoomsPlacesTemplates": "{{templates}} – Ihre Raumvorlagen.",
   "RoomsPlacesTitle": "Alles an seinem Platz",
-  "RoomsTemplates": "Machen Sie aus jedem Raum eine Vorlage – seine Einstellungen, seine Struktur und seine Dateien werden gespeichert. Erstellen Sie daraus mit einem Klick einen neuen Raum, und es bleibt nur noch, Mitglieder hinzuzufügen.",
   "RoomsTemplatesTitle": "Wiederverwenden, was funktioniert",
   "RoomsTypesTitle": "Ein Raum für jede Aufgabe"
 }

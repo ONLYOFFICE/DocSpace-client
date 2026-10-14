@@ -11,7 +11,7 @@
   "NotPossibleRoomRestoring": "Неможливо відновити цю кімнату, оскільки досягнуто обмеження кількості кімнат, включених у ваш поточний план.",
   "NumberOfRoomsAccordingToTariff": "Кількість кімнат згідно з вашим тарифним планом: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Кількість адміністраторів згідно з вашим тарифним планом: {{currentValue}}/{{maxValue}}",
-  "PlanPaymentOverdue": "Не вдається додати нових користувачів, створювати нові кімнати чи AI-агентів. Оплата плану {{planName}} прострочена.",
+  "PlanPaymentOverdue": "Не вдається додати нових користувачів, створювати нові кімнати чи ШI-агентів. Оплата плану {{planName}} прострочена.",
   "RoomsQuotaAlmostExhausted": "Квоту кімнат майже вичерпано.",
   "UsersQuotaAlmostExhausted": "Квоту платних користувачів майже вичерпано."
 }

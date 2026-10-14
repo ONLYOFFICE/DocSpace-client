@@ -22,7 +22,7 @@
   "AIAgentQuotaDisabled": "Квота для ИИ-агента успешно отключена.",
   "AIAgentQuotaEnabled": "Квота для ИИ-агента успешно включена.",
   "AiServicesManagement": "{{aiServices}}",
-  "AiServicesManagementDescription": "Включите или отключите ИИ-агентов и ИИ-инструменты во всех редакторах {{productName}} и {{organizationName}}. При отключении раздел {{aiSettings}} скрывается, {{aiAgents}} становятся недоступными для всех пользователей, а платные {{organizationName}} {{aiServices}} больше не доступны. История взаимодействий надёжно сохраняется и полностью восстанавливается при повторном включении {{aiServices}}.",
+  "AiServicesManagementDescription": "Включите или отключите ИИ-агентов и инструменты во всех редакторах {{productName}} и {{organizationName}}. При отключении раздел {{aiSettings}} скрывается, {{aiAgents}} становятся недоступными для всех пользователей, а платные {{aiServices}} {{organizationName}} больше не доступны. История взаимодействий надёжно сохраняется и полностью восстанавливается при повторном включении {{aiServices}}.",
   "AISettings": "Настройки ИИ",
   "AllDomains": "Любые домены",
   "AllowExistingUntilRemoved": "Разрешить существующие ссылки до их удаления",

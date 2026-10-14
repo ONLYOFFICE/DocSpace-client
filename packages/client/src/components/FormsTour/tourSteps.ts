@@ -299,7 +299,7 @@ export function getTourSteps(
         elementStep(
           NEW_BUTTON_SELECTOR,
           t("FormsTour:FormsCreateFirstTitle"),
-          t("FormsTour:FormsCreateOwn"),
+          t("FormsTour:FormsCreateFirst"),
           callbacks,
           FORMS_TOUR_LABEL,
           6,

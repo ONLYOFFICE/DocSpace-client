@@ -97,7 +97,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 4px;
-  padding-block-start: 4px;
 }
 
 .dateInput {
@@ -107,6 +106,7 @@
 .multiChoiceAnchor {
   position: relative;
   display: flex;
+  padding-block: 4px;
 }
 
 .addOptionButton {
@@ -136,7 +136,6 @@
   --tag-border-style: 1px solid var(--template-tile-container-border);
 
   min-width: 254px;
-  margin-block-start: 4px;
 
   .choiceOption {
     --checkbox-gap: 0;

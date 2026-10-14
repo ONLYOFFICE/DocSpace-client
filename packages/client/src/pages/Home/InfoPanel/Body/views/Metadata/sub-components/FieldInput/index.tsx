@@ -44,17 +44,23 @@ import SingleChoiceInput from "./SingleChoiceInput";
 import TextValueInput from "./TextValueInput";
 
 type FieldInputProps = TValueInputProps<TMetadataInput> & {
-  field: TEntryMetadataField;
+  field: Pick<TEntryMetadataField, "type" | "options">;
+  emptyLabel?: string;
 };
 
-const FieldInput = ({ field, value, onChange }: FieldInputProps) => {
+const FieldInput = ({ field, value, onChange, emptyLabel }: FieldInputProps) => {
   const options = field.options ?? [];
 
   if (Array.isArray(value)) {
     return field.type === MetadataFieldType.MultiChoice ? (
       <MultiChoiceInput options={options} value={value} onChange={onChange} />
     ) : (
-      <SingleChoiceInput options={options} value={value} onChange={onChange} />
+      <SingleChoiceInput
+        options={options}
+        value={value}
+        onChange={onChange}
+        emptyLabel={emptyLabel}
+      />
     );
   }
 

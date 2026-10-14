@@ -2359,14 +2359,16 @@ class FilesStore {
           subjectOwnerId ||
           tags ||
           withoutTags ||
-          quotaFilter
+          quotaFilter ||
+          this.roomsFilter.hasMetadataFilter()
         : authorType ||
           roomId ||
           search ||
           withSubfolders ||
           filterType ||
           searchInContent ||
-          sharedBy;
+          sharedBy ||
+          this.filter.hasMetadataFilter();
 
     return isFiltered;
   }

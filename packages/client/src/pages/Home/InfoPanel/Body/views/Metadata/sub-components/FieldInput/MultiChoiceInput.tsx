@@ -73,7 +73,9 @@ const MultiChoiceInput = ({ options, value, onChange }: TChoiceInputProps) => {
         <DropDown
           className={styles.choiceDropdown}
           open={isOpen}
-          isDefaultMode={false}
+          forwardedRef={anchorRef}
+          directionY="both"
+          withDynamicScrollbar
           withBackdrop={false}
           eventTypes="click"
           clickOutsideAction={onClickOutside}

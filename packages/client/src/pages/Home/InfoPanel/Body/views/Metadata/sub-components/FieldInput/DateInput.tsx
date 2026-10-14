@@ -56,6 +56,7 @@ const DateInput = ({ value, onChange }: TValueInputProps<string>) => {
       selectDateText={t("Common:SelectDate")}
       onChange={(next) => onChange(next?.toISODate() ?? "")}
       isMobile={isMobile()}
+      autoPosition
       testId="metadata_date_input"
     />
   );

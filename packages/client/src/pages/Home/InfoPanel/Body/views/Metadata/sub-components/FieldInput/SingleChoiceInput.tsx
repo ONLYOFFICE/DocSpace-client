@@ -40,20 +40,35 @@ import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 import type { TChoiceInputProps } from "../../types";
 import { toComboOptions } from "../../utils";
 
-const SingleChoiceInput = ({ options, value, onChange }: TChoiceInputProps) => {
+type SingleChoiceInputProps = TChoiceInputProps & {
+  emptyLabel?: string;
+};
+
+const SingleChoiceInput = ({
+  options,
+  value,
+  onChange,
+  emptyLabel,
+}: SingleChoiceInputProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const comboOptions = toComboOptions(options);
+  const emptyOption = {
+    key: "",
+    label: emptyLabel ?? t("Common:SelectAction"),
+  };
 
-  const selectedOption = comboOptions.find(
-    (option) => option.key === value[0],
-  ) ?? { key: "", label: t("Common:SelectAction") };
+  const comboOptions = emptyLabel
+    ? [emptyOption, ...toComboOptions(options)]
+    : toComboOptions(options);
+
+  const selectedOption =
+    comboOptions.find((option) => option.key === value[0]) ?? emptyOption;
 
   return (
     <ComboBox
       options={comboOptions}
       selectedOption={selectedOption}
-      onSelect={(option) => onChange([String(option.key)])}
+      onSelect={(option) => onChange(option.key ? [String(option.key)] : [])}
       displaySelectedOption
       scaled
       scaledOptions

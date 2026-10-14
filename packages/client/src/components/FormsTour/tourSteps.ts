@@ -49,77 +49,47 @@ import {
 import { FORMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import { DEMO_SPACE_ITEM_IDS } from "SRC_DIR/api/tourDemo/data";
 
-// The first form space of the list, in whichever view is active (only one of
-// the three is mounted at a time). Same wrappers as the files list — in the
-// table view the row has no geometry of its own (`display: contents`), which
-// `fileItemStep` handles by falling back to the row's widest cell.
 const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
-// The three things inside a stand-in space, addressed by the element id every
-// view puts on a row (`folder_{id}` / `file_{id}`). Their positions in the list
-// move with the sort order; their ids do not.
+// Rows inside the stand-in space, by the element id every view puts on them.
 const itemSelector = (id: number, isFolder = true) =>
   `#${isFolder ? "folder" : "file"}_${id}`;
 
 const BLANK_FORM_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.form, false);
-// The blank form's own three-dots button, and the menu it opens.
 const BLANK_FORM_MENU_TRIGGER_SELECTOR = `${BLANK_FORM_SELECTOR} [data-testid="context-menu-button"]`;
 const CONTEXT_MENU_SELECTOR = ".p-contextmenu";
 // ContextMenu renders each entry with the option's own id.
 const START_FILLING_OPTION_SELECTOR = "#option_start-filling";
-// The badge a launched form carries on its row.
 const LAUNCHED_BADGE_SELECTOR = `${BLANK_FORM_SELECTOR} .badge.is-editing`;
 const IN_PROGRESS_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.inProgress);
 const COMPLETE_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.complete);
 const NEW_BUTTON_SELECTOR =
   '#filter_search-input > div:has(> [data-testid="main-button"])';
 
-// The only action of the Forms empty screen, which is "create a room" — the
-// dialog it opens is already scoped to a form space (EmptyViewContainer.helpers
-// answers [createRoom] for FolderType.Forms). ui-kit's EmptyView gives its
-// options no testid of their own, so the anchor is positional.
+// The empty screen's only option, "create a room"; it carries no test id.
 const EMPTY_SCREEN_CREATE_SELECTOR =
   '[data-testid="empty-view-body"] > *:first-child';
 
-// The empty screen itself, for the closing step of anyone with no action on it
-// to point at. Nothing is offered to somebody who cannot create a space, so the
-// body may hold no options at all — the screen around them always exists.
 const EMPTY_SCREEN_SELECTOR = '[data-testid="empty-view"]';
 
 export type TourStepFlags = {
   isDesktop: boolean;
-  // Creating a form space and saving one as a template are room-admin powers;
-  // everyone else only ever fills in the forms inside spaces they were added
-  // to, so those steps are dropped for them.
+  // Room-admin powers; everyone else only fills forms in.
   canCreate: boolean;
   canUseTemplates: boolean;
   showFilter: boolean;
-  // Whether the list has at least one form space — the step that points at a
-  // row (and at the panel describing it) is skipped on an empty section.
   hasItems: boolean;
-  // Whether the sidebar renders the Forms item at all. Its id is the static
-  // "forms"; its quick-access sub-items use static ids ("forms-recent" etc.).
   hasForms: boolean;
-  // Whether a stand-in space is available to walk into, which is what the
-  // block of steps inside a space needs — only a stand-in space is guaranteed
-  // to hold a form and the two folders answers travel between.
   isDemo: boolean;
-  // Whether the section's own list is the one being stood in for. Only then
-  // does the closing step exist: it drops the stand-in and hands the user over
-  // to the real "create" button on the empty screen they are left looking at.
+  // Whether the list itself is stood in for; only then is there a closing step.
   isStandIn: boolean;
-  // Walks into the stand-in space. `reveal` is idempotent — every in-room step
-  // calls it, so stepping between them does not navigate again — and `restore`
-  // is a no-op, because the way back out belongs to the steps that need the
-  // section root (they all `prepare` with `leaveSpace`).
+  // Walks into the stand-in space; idempotent, `restore` is a no-op.
   spaceHooks?: RevealHooks;
   // Fakes the launch of the stand-in form on its row, and undoes it.
   launchHooks?: { reveal: () => void; restore: () => void };
   demoHooks?: RevealHooks;
-  // Returns the tour to the section root. Every step anchored outside a space
-  // runs this first, so walking backwards out of the in-room block lands on a
-  // page that has the anchor it is about to point at.
+  // Returns the tour to the section root; every step outside a space runs it.
   leaveSpace?: () => void;
 };
 
@@ -143,16 +113,11 @@ export function getTourSteps(
     leaveSpace,
   } = flags;
 
-  // The quick-access sub-items are nested under Forms and rendered expanded
-  // while the section is active. Skipped on tablet: the collapsed icon-only
-  // sidebar flattens sub-items into the main list.
+  // The collapsed tablet sidebar has no sub-items to point at.
   const showQuickAccess = isDesktop && hasForms;
 
-  // The section's sub-items, each named by the sidebar's own label so the
-  // wording in the tooltip is the wording on screen. One bullet each; Templates
-  // is behind the same admin gate in the sidebar (ClientArticleSidebar) as
-  // here, so for everyone else its bullet drops rather than pointing at an item
-  // they do not have.
+  // One bullet per sub-item, named by the sidebar's own labels; Templates is
+  // admin-only there too.
   const places = [
     t("FormsTour:FormsPlacesRecent", {
       recent: t("Common:Recent"),
@@ -165,18 +130,11 @@ export function getTourSteps(
     t("FormsTour:FormsPlacesTrash", { trash: t("Common:TrashSection") }),
   ].filter(Boolean) as string[];
 
-  // The block of steps that runs inside a space. It walks into a stand-in one
-  // rather than into the user's: a real space grows its `In progress` and
-  // `Complete` folders only once a form has been uploaded and started, so on a
-  // portal that already collects forms the tour would be walking into a room
-  // whose shape it cannot predict — and on a brand-new one, into an empty
-  // room. The stand-in space always holds exactly what these steps are about.
+  // Always a stand-in space: only it is sure to hold a form and both folders.
   const showInsideSpace = isDemo && !!spaceHooks;
 
   return [
-    // 1. What this section holds. The mental model that trips people up is
-    // that a row here is a whole collection, not a single PDF — so the step
-    // that says so is the one pointing at the tile that creates one.
+    // 1. What a form space is, on the tile that creates one.
     canCreate &&
       showFilter &&
       elementStep(
@@ -189,7 +147,7 @@ export function getTourSteps(
         leaveSpace,
       ),
 
-    // 2. Space templates — for the collection you run again every quarter.
+    // 2. Space templates.
     canCreate &&
       canUseTemplates &&
       showFilter &&
@@ -203,7 +161,7 @@ export function getTourSteps(
         leaveSpace,
       ),
 
-    // 3. Only when the whole list is a sample, as in the Rooms tour.
+    // 3. The sample notice, only when the whole list is one, as in Rooms.
     showInsideSpace &&
       isStandIn &&
       hasItems &&
@@ -216,7 +174,7 @@ export function getTourSteps(
         leaveSpace,
       ),
 
-    // 4. A space row, the door into a collection; a filler gets other wording.
+    // 4. A space row; a filler gets other wording.
     hasItems &&
       fileItemStep(
         FIRST_ITEM_SELECTOR,
@@ -229,11 +187,7 @@ export function getTourSteps(
         leaveSpace,
       ),
 
-    // 4. Inside the space, on the blank form itself: what everyone who follows
-    // the link actually opens, and where the form comes from in the first
-    // place. This is the step that walks the tour in — step 3 has just named
-    // the row as the door, so a step of its own pointing at the same row again
-    // only says the same thing twice.
+    // 5. The blank form inside the space; this step walks the tour in.
     showInsideSpace &&
       revealStep(
         BLANK_FORM_SELECTOR,
@@ -244,7 +198,7 @@ export function getTourSteps(
         spaceHooks,
       ),
 
-    // 4a. The blank form's menu, with Start filling in it; never chosen.
+    // 6. The blank form's menu, with Start filling in it; never chosen.
     showInsideSpace &&
       menuStep(
         BLANK_FORM_MENU_TRIGGER_SELECTOR,
@@ -260,7 +214,7 @@ export function getTourSteps(
         START_FILLING_OPTION_SELECTOR,
       ),
 
-    // 4b. The form as Start filling leaves it: faked for the step, undone after.
+    // 7. The form as Start filling leaves it: faked for the step, undone after.
     showInsideSpace &&
       launchHooks &&
       revealStep(
@@ -281,11 +235,7 @@ export function getTourSteps(
         },
       ),
 
-    // 5. In progress — the half of the answer nobody sees but its author. A
-    // copy per person, saved as they go, so a form left half-filled is not
-    // lost and not yet counted. This is also where the privacy of the whole
-    // thing is worth saying: a Form filler only ever sees their own copy
-    // (Common:RoleFormFillerFormRoomDescription).
+    // 8. In progress.
     showInsideSpace &&
       revealStep(
         IN_PROGRESS_SELECTOR,
@@ -299,10 +249,7 @@ export function getTourSteps(
         spaceHooks,
       ),
 
-    // 6. Complete — where a submission lands, and the spreadsheet that adds up
-    // all of them. The two result options are set when the space is created
-    // (Common:CollectResultsInXlsx / Common:ExportResultsToDatabase), which is
-    // why this is the last thing said about the inside.
+    // 9. Complete.
     showInsideSpace &&
       revealStep(
         COMPLETE_SELECTOR,
@@ -313,9 +260,7 @@ export function getTourSteps(
         spaceHooks,
       ),
 
-    // 7. Back out at the section root: the sidebar sub-items, each named by
-    // the sidebar's own label so the wording in the tooltip is the wording on
-    // screen and the names are not translated twice.
+    // 10. Back at the section root: the sidebar sub-items.
     showQuickAccess &&
       sidebarListStep(
         "forms-recent",
@@ -326,18 +271,8 @@ export function getTourSteps(
         leaveSpace,
       ),
 
-    // 8. Only when the list was stood in for. The stand-in spaces are the last
-    // thing the user saw, and dropping them lands them on the empty screen —
-    // so rather than let that happen behind their back, the closing step does
-    // it deliberately. `restore` is a no-op either way: the section is the
-    // user's own from here on.
-    //
-    // What it points at, and what it says, is whatever that screen actually
-    // offers. Somebody who can create a space is a click away from everything
-    // they were just shown, so the step lands on that button. A form filler has
-    // no button there at all — the honest ending for them is to name what the
-    // empty list means and who fills it, rather than to send them at an action
-    // that is not theirs.
+    // 11. Closing: drop the stand-in list and point at the empty screen's
+    // create button, or name the empty list for a filler; else the New button.
     isStandIn && demoHooks
       ? canCreate
         ? revealStep(

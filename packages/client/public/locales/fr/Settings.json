@@ -37,6 +37,7 @@
   "ApiKeysDescription": "En tant que propriétaire/administrateur, vous pouvez consulter et gérer toutes les clés API de cet espace de travail.",
   "ApiKeysShareDescription": "Ne partagez pas votre clé API avec d'autres personnes et ne l'exposez pas dans le navigateur ou dans un autre code côté client.",
   "Appearance": "Apparence",
+  "AppsDescription": "Gérez les applications disponibles dans votre espace de travail. Les applications activées apparaîtront dans le menu principal pour les utilisateurs qui y ont accès.",
   "AppliesTo": "S'applique à :",
   "AppliesToDocuments": "{{myDocuments}} (Incluant les dossiers/fichiers partagés depuis {{myDocuments}})",
   "AppliesToDocumentsDescription": "En interdisant la création de liens dans {{myDocuments}}, les nouveaux liens seront créés uniquement avec le type « Utilisateurs de l'espace de travail uniquement ».",

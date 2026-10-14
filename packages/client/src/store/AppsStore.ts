@@ -73,6 +73,7 @@ import {
   setAppSettings,
 } from "@docspace/shared/api/apps";
 import type { TApp } from "@docspace/shared/api/apps/types";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isAppTemporarilyDisabled } from "SRC_DIR/helpers/disabled-apps";
 
 class AppsStore {
@@ -82,7 +83,11 @@ class AppsStore {
 
   isLoading = false;
 
-  constructor() {
+  settingsStore: SettingsStore;
+
+  constructor(settingsStore: SettingsStore) {
+    this.settingsStore = settingsStore;
+
     makeAutoObservable(this);
 
     this.subscribeToSocket();
@@ -141,6 +146,23 @@ class AppsStore {
   isEnabled = (id: string): boolean => {
     if (isAppTemporarilyDisabled(id)) return false;
     return this.apps.find((a) => a.id === id)?.enabled ?? false;
+  };
+
+  // Apps can be switched off only on a standalone installation. In SaaS every
+  // app is on and stays on: the switch is not offered and the server's enabled
+  // flags are not consulted.
+  get canManageApps() {
+    return this.settingsStore.standalone;
+  }
+
+  // Whether the app is on offer - in the sidebar, on the dashboard and at its
+  // URL. Optimistic until the list arrives, since every app ships enabled by
+  // default: the sidebar must not flash the whole catalog under "Not installed"
+  // on load. A route that has to decide for real waits for `isLoaded` itself.
+  isInstalled = (id: string): boolean => {
+    if (isAppTemporarilyDisabled(id)) return false;
+    if (!this.canManageApps || !this.isLoaded) return true;
+    return this.isEnabled(id);
   };
 
   getSettings = <T = Record<string, unknown>>(id: string): T | undefined => {

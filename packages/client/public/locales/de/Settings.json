@@ -37,6 +37,7 @@
   "ApiKeysDescription": "Als Besitzer/Administrator können Sie alle API-Schlüssel in diesem Arbeitsbereich einsehen und verwalten.",
   "ApiKeysShareDescription": "Geben Sie Ihren API-Schlüssel nicht an Dritte weiter und legen Sie ihn nicht im Browser oder anderem clientseitigen Code offen.",
   "Appearance": "Erscheinungsbild",
+  "AppsDescription": "Verwalten Sie, welche Apps in Ihrem Arbeitsbereich verfügbar sind. Aktivierte Apps werden im Hauptmenü für Benutzer angezeigt, die Zugriff darauf haben.",
   "AppliesTo": "Gilt für:",
   "AppliesToDocuments": "{{myDocuments}} (Einschließlich freigegebener Ordner/Dateien aus dem {{myDocuments}})",
   "AppliesToDocumentsDescription": "Wenn die Linkerstellung in {{myDocuments}} untersagt wird, werden neue Links nur noch mit dem Typ Nur Arbeitsbereichsbenutzer erstellt.",

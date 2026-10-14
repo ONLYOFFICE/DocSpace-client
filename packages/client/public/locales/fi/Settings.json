@@ -37,6 +37,7 @@
   "ApiKeysDescription": "Omistajana/pääkäyttäjänä voit katsella ja hallita kaikkia API-avaimia tässä työtilassa.",
   "ApiKeysShareDescription": "Älä jaa API-avaintasi muille tai vie sitä selaimeen tai muuten asiakaspuolelle.",
   "Appearance": "Ulkoasu",
+  "AppsDescription": "Hallitse, mitkä sovellukset ovat käytettävissä työtilassasi. Käytössä olevat sovellukset näkyvät päävalikossa käyttäjille, joilla on niihin oikeus.",
   "AppliesTo": "Koskee:",
   "AppliesToDocuments": "{{myDocuments}} (sisältäen jaetut kansiot/tiedostot kohteesta {{myDocuments}})",
   "AppliesToDocumentsDescription": "Kieltämällä linkin luominen kohteessa {{myDocuments}}, uudet linkit luodaan vain tyypillä työtilan käyttäjät.",

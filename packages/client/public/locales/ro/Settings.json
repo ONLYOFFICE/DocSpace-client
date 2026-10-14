@@ -37,6 +37,7 @@
   "ApiKeysDescription": "În calitate de proprietar/administrator puteți vedea și gestiona toate cheile API în acest spațiu de lucru.",
   "ApiKeysShareDescription": "Nu împărtășiți cheile dvs API nimănui și nu expuneți cheile în browser sau în codul pe partea client.",
   "Appearance": "Aspect",
+  "AppsDescription": "Gestionați aplicațiile disponibile în spațiul dvs. de lucru. Aplicațiile activate vor apărea în meniul principal pentru utilizatorii care au acces la ele.",
   "AppliesTo": "Se aplică pentru:",
   "AppliesToDocuments": "{{myDocuments}} (Inclusiv folderele/fișierele partajate din {{myDocuments}})",
   "AppliesToDocumentsDescription": "Prin interzicerea creării de linkuri în {{myDocuments}}, noile linkuri vor fi create numai cu tipul Doar utilizatorii spațiului de lucru.",

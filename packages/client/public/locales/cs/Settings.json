@@ -37,6 +37,7 @@
   "ApiKeysDescription": "Jako vlastník/admin můžete zobrazit a spravovat všechny klíče API v tomto pracovním prostoru.",
   "ApiKeysShareDescription": "Nesdílejte svůj klíč API s ostatními ani jej nezveřejňujte v prohlížeči nebo jiném kódu na straně klienta.",
   "Appearance": "Vzhled",
+  "AppsDescription": "Spravujte, které aplikace jsou dostupné ve vašem pracovním prostoru. Aktivní aplikace se zobrazí v hlavní nabídce uživatelům, kteří k nim mají přístup.",
   "AppliesTo": "Platí pro:",
   "AppliesToDocuments": "{{myDocuments}} (včetně sdílených složek/souborů z {{myDocuments}})",
   "AppliesToDocumentsDescription": "Zákazem vytváření odkazů v {{myDocuments}} budou nové odkazy vytvářeny pouze s typem Pouze uživatelé pracovního prostoru.",

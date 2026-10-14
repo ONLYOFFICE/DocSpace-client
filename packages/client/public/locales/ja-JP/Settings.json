@@ -37,6 +37,7 @@
   "ApiKeysDescription": "オーナー/管理者として、あなたはこのワークスペース内のすべての API キーを表示および管理できます。",
   "ApiKeysShareDescription": "APIキーを他の人と共有したり、ブラウザや他のクライアントサイドのコードにさらしたりしないでください。",
   "Appearance": "外観",
+  "AppsDescription": "ワークスペースで利用可能なアプリを管理します。有効なアプリは、アクセス権限を持つユーザーのメインメニューに表示されます。",
   "AppliesTo": "適用対象：",
   "AppliesToDocuments": "{{myDocuments}}（{{myDocuments}}からの共有フォルダー/ファイルを含む）",
   "AppliesToDocumentsDescription": "{{myDocuments}}でのリンク作成を禁止すると、新しいリンクはタイプ「ワークスペースユーザーのみ」としてのみ作成されます。",

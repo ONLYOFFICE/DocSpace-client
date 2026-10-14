@@ -37,6 +37,7 @@
   "ApiKeysDescription": "作为所有者/管理员，您可以查看并管理此工作区中的所有 API 密钥。",
   "ApiKeysShareDescription": "请勿将 API 密钥共享给他人，或公开在浏览器及其他客户端代码中。",
   "Appearance": "外观",
+  "AppsDescription": "管理哪些应用在您的工作区中可用。已启用的应用将出现在有权访问的用户的主菜单中。",
   "AppliesTo": "适用范围：",
   "AppliesToDocuments": "{{myDocuments}}（包括来自 {{myDocuments}} 的共享文件夹/文件）",
   "AppliesToDocumentsDescription": "在 {{myDocuments}} 中禁止创建链接后，新链接将仅以「工作区用户专用」类型创建。",

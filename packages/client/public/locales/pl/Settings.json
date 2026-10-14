@@ -37,6 +37,7 @@
   "ApiKeysDescription": "Jako właściciel/administrator możesz przeglądać wszystkie klucze API i zarządzać nimi w tej przestrzeni roboczej.",
   "ApiKeysShareDescription": "Nie udostępniaj swojego klucza API innym osobom ani nie ujawniaj go w przeglądarce czy innym kodzie po stronie klienta.",
   "Appearance": "Wygląd",
+  "AppsDescription": "Zarządzaj tym, które aplikacje są dostępne w Twojej przestrzeni roboczej. Aktywne aplikacje pojawią się w menu głównym dla użytkowników mających do nich dostęp.",
   "AppliesTo": "Dotyczy:",
   "AppliesToDocuments": "{{myDocuments}} (w tym udostępnione foldery/pliki z {{myDocuments}})",
   "AppliesToDocumentsDescription": "Zabraniając tworzenia linków w {{myDocuments}}, nowe linki będą tworzone wyłącznie z typem tylko użytkownicy przestrzeni roboczej.",

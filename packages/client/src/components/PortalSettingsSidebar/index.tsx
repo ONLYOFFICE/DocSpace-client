@@ -84,6 +84,7 @@ type PortalSettingsSidebarProps = {
   isCommunity: boolean;
   baseDomain?: string;
   aiServicesEnabled: boolean;
+  canManageApps: boolean;
   setIsLoadedArticleBody: (value: boolean) => void;
   showPortalSettingsLoader?: boolean;
   showProfileLoader?: boolean;
@@ -96,6 +97,7 @@ const PortalSettingsSidebar = ({
   isCommunity,
   baseDomain,
   aiServicesEnabled,
+  canManageApps,
   setIsLoadedArticleBody,
   showPortalSettingsLoader,
   showProfileLoader,
@@ -128,6 +130,8 @@ const PortalSettingsSidebar = ({
         return t("Settings:Services");
       case "AISettings":
         return t("Settings:AISettings");
+      case "OAuth:Apps":
+        return t("OAuth:Apps");
       case "PortalDeletion":
         return t("Settings:PortalDeletion");
       case "Common:PaymentsTitle":
@@ -150,6 +154,7 @@ const PortalSettingsSidebar = ({
     if (pathname.includes("storage-management")) return "6-1";
     if (pathname.includes("management")) return "6";
     if (pathname.includes("ai-settings")) return "7";
+    if (pathname.includes("/portal-settings/apps")) return "8";
     if (pathname.includes("delete-data")) return "9";
     if (pathname.includes("payments")) return "10";
     if (pathname.includes("bonus")) return "11";
@@ -161,6 +166,11 @@ const PortalSettingsSidebar = ({
 
     if (!aiServicesEnabled) {
       resultTree = resultTree.filter((e) => e.tKey !== "AISettings");
+    }
+
+    // In SaaS every app is always on, so there is nothing to manage.
+    if (!canManageApps) {
+      resultTree = resultTree.filter((e) => e.tKey !== "OAuth:Apps");
     }
 
     if (isNotPaidPeriod) {
@@ -218,6 +228,7 @@ const PortalSettingsSidebar = ({
     isCommunity,
     baseDomain,
     aiServicesEnabled,
+    canManageApps,
   ]);
 
   const isNavLoading = location.pathname.includes("/profile")
@@ -244,6 +255,7 @@ export default inject<TStore>(
     currentTariffStatusStore,
     common,
     clientLoadingStore,
+    appsStore,
   }) => ({
     isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
     isCommunity: currentTariffStatusStore.isCommunity,
@@ -251,6 +263,7 @@ export default inject<TStore>(
     standalone: settingsStore.standalone,
     baseDomain: settingsStore.baseDomain,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
+    canManageApps: appsStore.canManageApps,
     setIsLoadedArticleBody: common.setIsLoadedArticleBody,
     showPortalSettingsLoader: clientLoadingStore.showPortalSettingsLoader,
     showProfileLoader: clientLoadingStore.showProfileLoader,

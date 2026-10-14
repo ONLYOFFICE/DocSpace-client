@@ -37,6 +37,7 @@
   "ApiKeysDescription": "Kot lastnik/skrbnik si lahko ogledate in upravljate vse ključe API v tem delovnem prostoru.",
   "ApiKeysShareDescription": "Ne delite svojega ključa API z drugimi in ga ne razkrijte v brskalniku ali drugi kodi na strani odjemalca.",
   "Appearance": "Videz",
+  "AppsDescription": "Upravljajte, katere aplikacije so na voljo v vašem delovnem prostoru. Omogočene aplikacije bodo vidne v glavnem meniju za uporabnike, ki do njih dostopajo.",
   "AppliesTo": "Velja za:",
   "AppliesToDocuments": "{{myDocuments}} (Vključno s skupnimi mapami/datotekami iz {{myDocuments}})",
   "AppliesToDocumentsDescription": "S prepovedjo ustvarjanja povezav v {{myDocuments}} bodo nove povezave ustvarjene samo z vrsto samo za uporabnike delovnega prostora.",

@@ -159,6 +159,10 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["7-0"]);
       }
 
+      if (location.pathname.includes("/portal-settings/apps")) {
+        setSelectedKeys(["8-0"]);
+      }
+
       if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["9-0"]);
       }

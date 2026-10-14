@@ -37,6 +37,7 @@
   "ApiKeysDescription": "소유자/관리자로서 이 워크스페이스의 모든 API 키를 확인 및 관리할 수 있습니다.",
   "ApiKeysShareDescription": "API 키를 다른 사람과 공유하거나 브라우저나 다른 클라이언트 측 코드에 노출하지 마세요.",
   "Appearance": "테마",
+  "AppsDescription": "워크스페이스에서 사용 가능한 앱을 관리하세요. 활성화된 앱은 접근 권한이 있는 사용자의 기본 메뉴에 표시됩니다.",
   "AppliesTo": "적용 대상:",
   "AppliesToDocuments": "{{myDocuments}} ({{myDocuments}}의 공유 폴더/파일 포함)",
   "AppliesToDocumentsDescription": "{{myDocuments}}에서 링크 생성을 금지하면 새 링크는 워크스페이스 사용자 전용 유형으로만 생성됩니다.",

@@ -37,6 +37,7 @@
   "ApiKeysDescription": "Kā īpašnieks/administrators varat apskatīt un pārvaldīt visas API atslēgas šajā darbvietā.",
   "ApiKeysShareDescription": "Nedalieties ar citiem ar savu API atslēgu un neizpaudiet to pārlūkprogrammā vai citā klienta puses kodā.",
   "Appearance": "Izskats",
+  "AppsDescription": "Pārvaldiet, kuras lietotnes ir pieejamas jūsu darbvietā. Iespējotas lietotnes parādīsies galvenajā izvēlnē lietotājiem, kuriem ir piekļuve tām.",
   "AppliesTo": "Attiecas uz:",
   "AppliesToDocuments": "{{myDocuments}} (Ieskaitot koplietotās mapes/failus no {{myDocuments}})",
   "AppliesToDocumentsDescription": "Aizliedzot saišu izveidi sadaļā {{myDocuments}}, jaunas saites tiks veidotas tikai ar tipu \"Tikai darbvietas lietotāji\".",

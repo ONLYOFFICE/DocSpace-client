@@ -37,6 +37,7 @@
   "ApiKeysDescription": "In qualità di proprietario/amministratore puoi visualizzare e gestire tutte le chiavi API in questo spazio di lavoro.",
   "ApiKeysShareDescription": "Non condividere la tua chiave API con altri, né esporla nel browser o in codice lato client.",
   "Appearance": "Aspetto",
+  "AppsDescription": "Gestisci le app disponibili nel tuo spazio di lavoro. Le app abilitate verranno visualizzate nel menu principale per gli utenti che vi hanno accesso.",
   "AppliesTo": "Si applica a:",
   "AppliesToDocuments": "{{myDocuments}} (incluse cartelle/file condivisi da {{myDocuments}})",
   "AppliesToDocumentsDescription": "Vietando la creazione di link in {{myDocuments}}, i nuovi link verranno creati solo con il tipo Solo utenti dello spazio di lavoro.",

@@ -37,6 +37,7 @@
   "ApiKeysDescription": "Sahib/administrator kimi siz bu iş sahəsində bütün API açarlarına baxa və idarə edə bilərsiniz.",
   "ApiKeysShareDescription": "API açarınızı başqaları ilə paylaşmayın və ya onu brauzerdə və ya digər müştəri kodunda açıqlamayın.",
   "Appearance": "Xarici görünüş",
+  "AppsDescription": "İş sahənizdə hansı tətbiqlərin mövcud olduğunu idarə edin. Aktivləşdirilmiş tətbiqlər onlara giriş hüququ olan istifadəçilər üçün əsas menyuda görünəcək.",
   "AppliesTo": "Tətbiq olunur:",
   "AppliesToDocuments": "{{myDocuments}} ({{myDocuments}} bölməsindən paylaşılan qovluqlar/fayllar daxil olmaqla)",
   "AppliesToDocumentsDescription": "{{myDocuments}} bölməsində keçid yaradılması qadağan edildikdə, yeni keçidlər yalnız iş sahəsi istifadəçiləri üçün növü ilə yaradılacaq.",

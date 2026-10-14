@@ -37,6 +37,7 @@
   "ApiKeysDescription": "Bir sahip/yönetici olarak bu çalışma alanındaki tüm API anahtarlarını görüntüleyebilir ve yönetebilirsiniz.",
   "ApiKeysShareDescription": "API anahtarınızı başkalarıyla paylaşmayın veya tarayıcı ya da istemci tarafı kodda açık hale getirmeyin.",
   "Appearance": "Görünüm",
+  "AppsDescription": "Çalışma alanınızda hangi uygulamaların kullanılabileceğini yönetin. Etkin uygulamalar, bunlara erişimi olan kullanıcılar için ana menüde görünecektir.",
   "AppliesTo": "Şunlar için geçerlidir:",
   "AppliesToDocuments": "{{myDocuments}} ({{myDocuments}} bölümündeki paylaşılan klasörler/dosyalar dahil)",
   "AppliesToDocumentsDescription": "{{myDocuments}} bölümünde bağlantı oluşturmayı yasaklayarak yeni bağlantılar yalnızca çalışma alanı kullanıcılarına özel türde oluşturulacaktır.",

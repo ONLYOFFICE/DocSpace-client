@@ -37,6 +37,7 @@
   "ApiKeysDescription": "Ako vlastník/administrátor môžete zobraziť a spravovať všetky kľúče API v tomto pracovnom priestore.",
   "ApiKeysShareDescription": "Svoj kľúč API nezdieľajte s ostatnými ani ho nezverejňujte v prehliadači alebo inom kóde na strane klienta.",
   "Appearance": "Vzhľad",
+  "AppsDescription": "Spravujte, ktoré aplikácie sú dostupné vo vašom pracovnom priestore. Povolené aplikácie sa zobrazia v hlavnom menu pre používateľov, ktorí k nim majú prístup.",
   "AppliesTo": "Vzťahuje sa na:",
   "AppliesToDocuments": "{{myDocuments}} (vrátane zdieľaných priečinkov/súborov z {{myDocuments}})",
   "AppliesToDocumentsDescription": "Zákazom vytvárania prepojení v {{myDocuments}} budú nové prepojenia vytvárané iba s typom Len používatelia pracovného priestoru.",

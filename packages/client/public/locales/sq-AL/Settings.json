@@ -37,6 +37,7 @@
   "ApiKeysDescription": "Si zotërues/administrator, mund të shikoni dhe menaxhoni të gjithë çelësat API në këtë hapësirë pune.",
   "ApiKeysShareDescription": "Mos e ndani çelësin tuaj API me të tjerët dhe mos e ekspozoni atë në shfletuesin ose kodin tjetër të klientit.",
   "Appearance": "Paraqitja",
+  "AppsDescription": "Menaxhoni se cilat aplikacione janë të disponueshme në hapësirën tuaj të punës. Aplikacionet e aktivizuara do të shfaqen në menunë kryesore për përdoruesit që kanë qasje në to.",
   "AppliesTo": "Zbatohet për:",
   "AppliesToDocuments": "{{myDocuments}} (Duke përfshirë dosjet/skedarët e ndarë nga {{myDocuments}})",
   "AppliesToDocumentsDescription": "Duke ndaluar krijimin e lidhjeve në {{myDocuments}}, lidhjet e reja do të krijohen vetëm me llojin vetëm përdoruesit e hapësirës së punës.",

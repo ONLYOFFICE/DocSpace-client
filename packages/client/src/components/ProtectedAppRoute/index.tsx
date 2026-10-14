@@ -38,10 +38,13 @@ import { Navigate } from "react-router";
 import { inject, observer } from "mobx-react";
 
 type ProtectedAppRouteProps = {
-  appId: string;
-  isEnabled: (id: string) => boolean;
+  // Several ids let a route shared by two apps through as long as either of
+  // them is on.
+  appId: string | string[];
+  isInstalled: (id: string) => boolean;
   isAppsLoaded: boolean;
   ensureAppsLoaded: () => void;
+  canManageApps: boolean;
   isGuest: boolean;
   children: React.ReactNode;
 };
@@ -50,9 +53,10 @@ const GUEST_RESTRICTED_APPS = new Set(["ai-files"]);
 
 const ProtectedAppRoute = ({
   appId,
-  isEnabled,
+  isInstalled,
   isAppsLoaded,
   ensureAppsLoaded,
+  canManageApps,
   isGuest,
   children,
 }: ProtectedAppRouteProps) => {
@@ -60,17 +64,26 @@ const ProtectedAppRoute = ({
     ensureAppsLoaded();
   }, [ensureAppsLoaded]);
 
-  if (!isAppsLoaded) return null;
+  // `isInstalled` is optimistic until the list arrives, so a route that can
+  // actually be switched off (standalone) has to wait for the real answer.
+  if (canManageApps && !isAppsLoaded) return null;
 
-  if (isGuest && GUEST_RESTRICTED_APPS.has(appId))
+  const appIds = Array.isArray(appId) ? appId : [appId];
+
+  if (isGuest && appIds.every((id) => GUEST_RESTRICTED_APPS.has(id)))
     return <Navigate to="/dashboard" replace />;
 
-  return isEnabled(appId) ? children : <Navigate to="/dashboard" replace />;
+  return appIds.some(isInstalled) ? (
+    children
+  ) : (
+    <Navigate to="/dashboard" replace />
+  );
 };
 
 export default inject<TStore>(({ appsStore, userStore }) => ({
-  isEnabled: appsStore.isEnabled,
+  isInstalled: appsStore.isInstalled,
   isAppsLoaded: appsStore.isLoaded,
   ensureAppsLoaded: appsStore.ensureLoaded,
+  canManageApps: appsStore.canManageApps,
   isGuest: userStore.user?.isVisitor ?? false,
 }))(observer(ProtectedAppRoute));

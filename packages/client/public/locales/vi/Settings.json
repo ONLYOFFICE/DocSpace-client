@@ -37,6 +37,7 @@
   "ApiKeysDescription": "Là chủ sở hữu/quản trị viên, bạn có thể xem và quản lý tất cả các khóa API trong không gian làm việc này.",
   "ApiKeysShareDescription": "Không chia sẻ khóa API của bạn với người khác hoặc để lộ nó trong trình duyệt hoặc mã phía máy khách (client-side).",
   "Appearance": "Giao diện",
+  "AppsDescription": "Quản lý các ứng dụng nào có sẵn trong không gian làm việc của bạn. Các ứng dụng đã bật sẽ xuất hiện trong menu chính cho những người dùng có quyền truy cập vào chúng.",
   "AppliesTo": "Áp dụng cho:",
   "AppliesToDocuments": "{{myDocuments}} (Bao gồm các thư mục/tệp được chia sẻ từ {{myDocuments}})",
   "AppliesToDocumentsDescription": "Bằng cách cấm tạo liên kết trong {{myDocuments}}, các liên kết mới sẽ chỉ được tạo với loại chỉ dành cho người dùng không gian làm việc.",

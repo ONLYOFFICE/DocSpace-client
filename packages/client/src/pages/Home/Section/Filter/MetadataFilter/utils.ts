@@ -35,6 +35,7 @@
 
 import { DateTime } from "luxon";
 
+import { formatDateLocalized } from "@onlyoffice/apps-ui-kit/utils/date";
 import { MetadataFieldType } from "@docspace/shared/enums";
 import type {
   TMetadataField,
@@ -327,9 +328,7 @@ export const getInputLabel = (
   }
 
   return type === MetadataFieldType.Date
-    ? DateTime.fromISO(input, { zone: "utc" })
-        .setLocale(locale)
-        .toFormat("dd MMM yyyy")
+    ? formatDateLocalized(input, "DATE_MED", { locale })
     : input;
 };
 

@@ -48,6 +48,7 @@ import {
 import { METADATA_NAME_MAX_LENGTH } from "@docspace/shared/utils/metadata";
 
 import type { TFieldOptionDraft } from "../../types";
+import { getDuplicateOptions } from "../../utils";
 import styles from "./TemplatePanel.module.scss";
 
 type OptionsListProps = {
@@ -64,6 +65,7 @@ const OptionsList = ({
   onRemove,
 }: OptionsListProps) => {
   const { t } = useTranslation(["Metadata"]);
+  const duplicates = getDuplicateOptions(options);
 
   return (
     <div className={styles.section}>
@@ -79,21 +81,29 @@ const OptionsList = ({
       {options.length ? (
         <div className={styles.optionList}>
           {options.map((option, index) => (
-            <div className={styles.optionRow} key={option.id ?? index}>
-              <TextInput
-                type={InputType.text}
-                value={option.value}
-                onChange={(e) => onChange(index, e.target.value)}
-                placeholder={t("Metadata:OptionValue")}
-                maxLength={METADATA_NAME_MAX_LENGTH}
-                scale
-              />
-              <IconButton
-                iconName={CatalogTrashReactSvgUrl}
-                size={16}
-                isClickable
-                onClick={() => onRemove(index)}
-              />
+            <div key={option.id ?? index}>
+              <div className={styles.optionRow}>
+                <TextInput
+                  type={InputType.text}
+                  value={option.value}
+                  hasError={duplicates[index]}
+                  onChange={(e) => onChange(index, e.target.value)}
+                  placeholder={t("Metadata:OptionValue")}
+                  maxLength={METADATA_NAME_MAX_LENGTH}
+                  scale
+                />
+                <IconButton
+                  iconName={CatalogTrashReactSvgUrl}
+                  size={16}
+                  isClickable
+                  onClick={() => onRemove(index)}
+                />
+              </div>
+              {duplicates[index] ? (
+                <Text className={styles.optionError} fontSize="12px">
+                  {t("Metadata:OptionExists")}
+                </Text>
+              ) : null}
             </div>
           ))}
         </div>

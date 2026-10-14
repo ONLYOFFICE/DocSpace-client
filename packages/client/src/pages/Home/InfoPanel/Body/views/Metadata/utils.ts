@@ -33,9 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { DateTime } from "luxon";
-
 import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
+import { formatDateLocalized } from "@onlyoffice/apps-ui-kit/utils/date";
 import { MetadataFieldType } from "@docspace/shared/enums";
 import type {
   TCustomField,
@@ -210,15 +209,10 @@ export const formatMetadataValue = (
   switch (type) {
     case MetadataFieldType.Number:
       return value.numberValue?.toLocaleString(locale) ?? "";
-    case MetadataFieldType.Date: {
-      const date = getMetadataDate(value.dateValue);
-
-      return date
-        ? DateTime.fromISO(date)
-            .setLocale(locale)
-            .toLocaleString(DateTime.DATE_MED)
-        : "";
-    }
+    case MetadataFieldType.Date:
+      return formatDateLocalized(getMetadataDate(value.dateValue), "DATE_MED", {
+        locale,
+      });
     case MetadataFieldType.SingleChoice:
     case MetadataFieldType.MultiChoice:
       return getSelectedOptions(options, value.optionIds)

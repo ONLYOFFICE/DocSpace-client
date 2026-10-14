@@ -150,8 +150,8 @@ describe("conditions", () => {
     });
   });
 
-  it("writes dates the way the date picker does", () => {
-    expect(getInputLabel(hearing, "2026-09-15", "en")).toBe("15 Sep 2026");
+  it("writes dates the way the info panel does", () => {
+    expect(getInputLabel(hearing, "2026-09-15", "en")).toBe("Sep 15, 2026");
     expect(getInputLabel(areas, ["x", "y"], "en")).toBe("Tax, IP");
   });
 

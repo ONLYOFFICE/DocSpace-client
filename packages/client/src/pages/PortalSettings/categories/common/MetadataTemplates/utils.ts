@@ -46,6 +46,7 @@ import type {
   TDropLine,
   TFieldDraft,
   TFieldForm,
+  TFieldOptionDraft,
   TTemplateChanges,
   TTemplateDraft,
 } from "./types";
@@ -156,15 +157,29 @@ export const removeOption = (form: TFieldForm, index: number): TFieldForm => ({
   options: form.options.filter((_, i) => i !== index),
 });
 
+const toOptionKey = ({ value }: TFieldOptionDraft) => value.trim().toLowerCase();
+
+export const getDuplicateOptions = (options: TFieldOptionDraft[]) => {
+  const seen = new Set<string>();
+
+  return options.map((option) => {
+    const key = toOptionKey(option);
+    const isDuplicate = !!key && seen.has(key);
+
+    seen.add(key);
+
+    return isDuplicate;
+  });
+};
+
 export const isValidField = (form: TFieldForm): form is TFieldDraft => {
   if (!form.name.trim() || form.type === undefined) return false;
   if (!isChoiceType(form.type)) return true;
 
-  const values = form.options
-    .map((option) => option.value.trim().toLowerCase())
-    .filter(Boolean);
-
-  return values.length > 0 && new Set(values).size === values.length;
+  return (
+    form.options.some(toOptionKey) &&
+    !getDuplicateOptions(form.options).includes(true)
+  );
 };
 
 export const isFieldNameTaken = (fields: TFieldDraft[], form: TFieldForm) => {

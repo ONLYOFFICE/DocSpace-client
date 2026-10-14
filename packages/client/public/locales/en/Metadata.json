@@ -63,6 +63,7 @@
   "OperatorIsAnyOf": "is any of",
   "OperatorLessThan": "less than",
   "OperatorOn": "on",
+  "OptionExists": "An option with this value already exists",
   "Options": "Options",
   "OptionValue": "Option value",
   "OverwriteExistingRoomValuesDescription": "Room values replace existing ones on all items",

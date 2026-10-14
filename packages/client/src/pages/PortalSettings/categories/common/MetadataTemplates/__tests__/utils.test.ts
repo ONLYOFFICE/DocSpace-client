@@ -42,6 +42,7 @@ import {
   canSaveTemplate,
   createFieldForm,
   getDropLine,
+  getDuplicateOptions,
   getInsertPosition,
   getTemplateChanges,
   isFieldNameTaken,
@@ -157,6 +158,19 @@ describe("field form", () => {
     expect(
       isValidField({ ...choice, options: [{ value: "Tax" }, { value: "" }] }),
     ).toBe(true);
+  });
+
+  it("marks every repeat of an option after its first entry", () => {
+    expect(
+      getDuplicateOptions([
+        { value: "Tax" },
+        { value: " tax" },
+        { value: "" },
+        { value: "" },
+        { value: "IP" },
+        { value: "TAX" },
+      ]),
+    ).toEqual([false, true, false, false, false, true]);
   });
 
   it("replaces an edited field and appends a new one", () => {

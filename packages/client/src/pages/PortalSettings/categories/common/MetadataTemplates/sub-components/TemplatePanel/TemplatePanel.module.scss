@@ -158,3 +158,8 @@
   align-items: center;
   gap: 12px;
 }
+
+.optionError {
+  padding-top: 4px;
+  color: var(--input-error-color);
+}

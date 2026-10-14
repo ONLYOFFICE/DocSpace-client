@@ -40,8 +40,11 @@ import type { TFunction } from "i18next";
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
 import {
   sidebarListStep,
+  sidebarSelector,
   elementStep,
   elementGroupStep,
+  fileItemStep,
+  navItemStep,
   revealStep,
   revealQuickActionTile,
   rewindQuickActions,
@@ -115,6 +118,17 @@ export function getTourSteps(
   const showQuickAccess = isDesktop && !!roomsId;
 
   return [
+    // 0. What a room is, anchored on the section's sidebar item. The collapsed
+    // tablet sidebar keeps the section items, only their sub-items go.
+    roomsId &&
+      navItemStep(
+        sidebarSelector(roomsId),
+        t("RoomsTour:RoomsOverviewTitle"),
+        t("RoomsTour:RoomsOverview"),
+        callbacks,
+        ROOMS_TOUR_LABEL,
+      ),
+
     // 1. Room types. The banner is a carousel, so each tile step scrolls first.
     canCreate &&
       showFilter &&
@@ -177,6 +191,18 @@ export function getTourSteps(
         GROUPS_SELECTOR,
         t("RoomsTour:RoomsGroupsTitle"),
         t("RoomsTour:RoomsGroups"),
+        callbacks,
+        ROOMS_TOUR_LABEL,
+      ),
+
+    // 4a. Stood-in list only: the first room the tour is about to open is a
+    // sample, and the step says so before pointing at it.
+    isDemo &&
+      hasItems &&
+      fileItemStep(
+        FIRST_ITEM_SELECTOR,
+        t("RoomsTour:RoomsDemoPreviewTitle"),
+        t("RoomsTour:RoomsDemoPreview"),
         callbacks,
         ROOMS_TOUR_LABEL,
       ),

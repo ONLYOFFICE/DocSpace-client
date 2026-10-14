@@ -52,6 +52,9 @@ const t = ((key: string) => key) as unknown as TFunction;
 
 const steps = (flags: TourStepFlags) => getTourSteps(t, undefined, flags);
 
+const stepTitled = (flags: TourStepFlags, title: string) =>
+  steps(flags).find((step) => step.title === title)!;
+
 const titles = (flags: TourStepFlags) => steps(flags).map((step) => step.title);
 
 const EMPTY_SCREEN_TARGET = '[data-testid="empty-view-body"] > *:first-child';
@@ -103,8 +106,9 @@ const memberFlags: TourStepFlags = {
 const memberDemoFlags: TourStepFlags = { ...memberFlags, isDemo: true };
 
 describe("getTourSteps — room admin", () => {
-  it("walks the types, templates, AI chat, groups, members, the sidebar and the New button", () => {
+  it("walks the section, types, templates, AI chat, groups, members, the sidebar and the New button", () => {
     expect(titles(adminFlags)).toEqual([
+      "RoomsTour:RoomsOverviewTitle",
       "RoomsTour:RoomsTypesTitle",
       "RoomsTour:RoomsTemplatesTitle",
       "FilesTour:TourAiAssistantTitle",
@@ -113,6 +117,31 @@ describe("getTourSteps — room admin", () => {
       "RoomsTour:RoomsPlacesTitle",
       "RoomsTour:RoomsCreateFirstTitle",
     ]);
+  });
+
+  it("opens on the section item, saying what a room is", () => {
+    const [overview] = steps(adminFlags);
+
+    expect(overview.target).toBe('[data-item-id="2002"]');
+    expect(overview.content).toBe("RoomsTour:RoomsOverview");
+  });
+
+  it("keeps the opening step on a narrow screen, where the section item stays", () => {
+    expect(titles({ ...adminFlags, isDesktop: false })[0]).toBe(
+      "RoomsTour:RoomsOverviewTitle",
+    );
+  });
+
+  it("names the stand-in rooms as samples right before opening one", () => {
+    const demoTitles = titles(demoFlags);
+    const preview = demoTitles.indexOf("RoomsTour:RoomsDemoPreviewTitle");
+
+    expect(preview).toBeGreaterThan(0);
+    expect(demoTitles[preview + 1]).toBe("RoomsTour:RoomsMembersTitle");
+    // The section's own rooms need no such warning.
+    expect(titles(adminFlags)).not.toContain(
+      "RoomsTour:RoomsDemoPreviewTitle",
+    );
   });
 
   it("closes a run on the section's own rooms on the New room button", () => {
@@ -157,6 +186,7 @@ describe("getTourSteps — member", () => {
 
   it("still covers what to do with the rooms they were invited into", () => {
     expect(titles(memberFlags)).toEqual([
+      "RoomsTour:RoomsOverviewTitle",
       "FilesTour:TourAiAssistantTitle",
       "RoomsTour:RoomsGroupsTitle",
       "RoomsTour:RoomsMembersTitle",
@@ -242,7 +272,10 @@ describe("getTourSteps — walking back out of the closing step", () => {
     // of the file list. Firing the reveal before the row lands reads an empty
     // list and leaves the step with no panel to point at.
     const hooksForRun = panelHooks();
-    const members = steps({ ...demoFlags, infoPanelHooks: hooksForRun })[4];
+    const members = stepTitled(
+      { ...demoFlags, infoPanelHooks: hooksForRun },
+      "RoomsTour:RoomsMembersTitle",
+    );
 
     // The member list this step points at is only ever put up by its own
     // reveal, so the row arriving is the only thing that can move it along.
@@ -276,7 +309,7 @@ describe("getTourSteps — what the page allows", () => {
     // No filter bar and no banner: nothing to create with, no groups row.
     expect(
       titles({ ...adminFlags, showFilter: false, hasItems: false }),
-    ).toEqual(["RoomsTour:RoomsPlacesTitle"]);
+    ).toEqual(["RoomsTour:RoomsOverviewTitle", "RoomsTour:RoomsPlacesTitle"]);
   });
 
   it("drops the members step when there is no room to open it on", () => {
@@ -293,7 +326,7 @@ describe("getTourSteps — what the page allows", () => {
   });
 
   it("opens the info panel itself rather than pointing at the button that would", () => {
-    const members = steps(adminFlags)[4];
+    const members = stepTitled(adminFlags, "RoomsTour:RoomsMembersTitle");
 
     // The panel is only up while the step runs, so the start-of-run DOM check
     // has to look at the row instead — a rooms list with no row in it has

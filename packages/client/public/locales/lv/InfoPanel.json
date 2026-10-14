@@ -28,7 +28,7 @@
   "FormRoomCollectionNotConnectedDescription": "Datu vākšana nav iestatīta. Konfigurējiet šo funkciju telpas iestatījumos, lai automātiski saglabātu veidlapu atbildes kā tabulu.",
   "FormRoomCollectionTitle": "Atbildes kolekcija",
   "FormRoomConnectDatabase": "Pievienojiet datu bāzi sadaļā \"Integrācijas\", lai analizētu veidlapu datus ar \"Pajautāt MI\", izveidotu diagrammas un atklātu vērtīgu informāciju.",
-  "FormRoomConnectDatabaseAskAdmin": "Lūdziet <1>superadministratoram</1> savienot datubāzi sadaļā Integrācijas, lai analizētu veidlapu datus ar Ask AI, izveidotu diagrammas un atklātu ieskatus.",
+  "FormRoomConnectDatabaseAskAdmin": "Lūdziet <1>superadministratoram</1> savienot datubāzi sadaļā Integrācijas, lai analizētu veidlapu datus ar \"Pajautāt MI\", izveidotu diagrammas un atklātu ieskatus.",
   "FormRoomGoToCompleteFolder": "Dot un mapni Complete",
   "FormRoomNoSubmissionsYet": "Vēl nav nevienas iesnieguma.",
   "FormRoomResultsFolderNote": "Rezultā mapeādīsies pēc pirmā veiktās formas iesnieg.",

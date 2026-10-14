@@ -554,14 +554,14 @@ export const settingsTree = [
     key: "8",
     type: PageType.apps,
     link: "apps",
-    tKey: "OAuth:Apps",
+    tKey: "Common:AppsSectionTitle",
     isHeader: true,
     children: [
       {
         id: "portal-settings_catalog-apps-list",
         key: "8-0",
         link: "",
-        tKey: "OAuth:Apps",
+        tKey: "Common:AppsSectionTitle",
         isCategory: true,
       },
     ],

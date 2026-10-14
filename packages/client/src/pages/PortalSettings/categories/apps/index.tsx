@@ -65,7 +65,7 @@ const Apps = ({
   ensureLoaded,
   aiServicesEnabled = true,
 }: AppsProps) => {
-  const { t, ready } = useTranslation(["Settings", "Common", "OAuth"]);
+  const { t, ready } = useTranslation(["Settings", "Common"]);
   const apps = useAppsCatalog({ aiServicesEnabled });
   // The app whose switch is being saved, so it cannot be flipped twice.
   const [pendingId, setPendingId] = React.useState<string | null>(null);
@@ -75,7 +75,7 @@ const Apps = ({
   }, [ensureLoaded]);
 
   useEffect(() => {
-    if (ready) setDocumentTitle(t("OAuth:Apps"));
+    if (ready) setDocumentTitle(t("Common:AppsSectionTitle"));
   }, [ready, t]);
 
   const handleToggle = async (id: string, next: boolean) => {

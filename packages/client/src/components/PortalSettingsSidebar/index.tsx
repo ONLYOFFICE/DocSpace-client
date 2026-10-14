@@ -130,8 +130,8 @@ const PortalSettingsSidebar = ({
         return t("Settings:Services");
       case "AISettings":
         return t("Settings:AISettings");
-      case "OAuth:Apps":
-        return t("OAuth:Apps");
+      case "Common:AppsSectionTitle":
+        return t("Common:AppsSectionTitle");
       case "PortalDeletion":
         return t("Settings:PortalDeletion");
       case "Common:PaymentsTitle":
@@ -170,7 +170,9 @@ const PortalSettingsSidebar = ({
 
     // In SaaS every app is always on, so there is nothing to manage.
     if (!canManageApps) {
-      resultTree = resultTree.filter((e) => e.tKey !== "OAuth:Apps");
+      resultTree = resultTree.filter(
+        (e) => e.tKey !== "Common:AppsSectionTitle",
+      );
     }
 
     if (isNotPaidPeriod) {

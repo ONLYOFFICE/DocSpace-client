@@ -250,6 +250,8 @@ const ArticleBodyContent = (props) => {
         return t("Settings:AISettings");
       case "OAuth:Apps":
         return t("OAuth:Apps");
+      case "Common:AppsSectionTitle":
+        return t("Common:AppsSectionTitle");
       default:
         throw new Error("Unexpected translation key");
     }

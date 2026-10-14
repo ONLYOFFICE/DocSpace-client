@@ -43,6 +43,7 @@
   "AppliesToRooms": "{{rooms}} (Duke përfshirë dosjet/skedarët e ndarë nga dhoma)",
   "AppliesToRoomsDescription": "Duke ndaluar krijimin e lidhjeve në {{rooms}}, lidhjet e reja do të krijohen vetëm me llojin vetëm përdoruesit e hapësirës së punës.",
   "AppliesToRoomsWarning": "Dhomat publike do të bëhen gjithashtu vetëm për përdorim të brendshëm dhe nuk do të jenë të aksesueshme për përdoruesit e jashtëm.",
+  "AppsDescription": "Menaxhoni se cilat aplikacione janë të disponueshme në hapësirën tuaj të punës. Aplikacionet e aktivizuara do të shfaqen në menunë kryesore për përdoruesit që kanë qasje në to.",
   "AuditSubheader": "Shfletoni një listë të ndryshimeve të fundit që përdoruesit kanë bërë në të gjithë hapësirën tuaj të punës, si krijimi, modifikimi ose fshirja e dhomave, skedarëve dhe artikujve të tjerë.",
   "AuditTrailNav": "Gjurma e Auditimit",
   "AuthorizationKeysInfo": "Aktivizoni shërbimet e palëve të treta për hapësirën tuaj të punës.",

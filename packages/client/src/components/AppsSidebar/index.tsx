@@ -227,15 +227,18 @@ export const AppsSidebarView = ({
   // On mobile the article overlays the content, so it must close itself after a
   // navigation click. Wrap every item/sub-item onClick to run its own handler
   // first (navigate) and then close the article. Off mobile the article is
-  // pinned, so handlers pass through untouched.
+  // pinned, so handlers pass through untouched. A handler that returns `false`
+  // did not navigate (e.g. a switched-off app explaining itself in a tooltip),
+  // so the article stays open and the `false` reaches NavMenu as before.
   const mobileGroups = useMemo(() => {
     if (!isMobile) return navGroups;
 
     const closeAfter =
-      <T,>(handler?: (item: T) => void) =>
+      <T, R>(handler?: (item: T) => R) =>
       (item: T) => {
-        handler?.(item);
-        toggleArticleOpen?.();
+        const result = handler?.(item);
+        if (result !== false) toggleArticleOpen?.();
+        return result;
       };
 
     return navGroups.map((group) => ({

@@ -43,6 +43,7 @@
   "AppliesToRooms": "{{rooms}} (Vključno s skupnimi mapami/datotekami iz sobe)",
   "AppliesToRoomsDescription": "S prepovedjo ustvarjanja povezav v {{rooms}} bodo nove povezave ustvarjene samo z vrsto samo za uporabnike delovnega prostora.",
   "AppliesToRoomsWarning": "Javne sobe bodo postale samo za interno uporabo in ne bodo dostopne zunanjim uporabnikom.",
+  "AppsDescription": "Upravljajte, katere aplikacije so na voljo v vašem delovnem prostoru. Omogočene aplikacije bodo vidne v glavnem meniju za uporabnike, ki do njih dostopajo.",
   "AuditSubheader": "Prebrskajte seznam nedavnih sprememb, ki so jih uporabniki naredili v vašem delovnem prostoru, na primer ustvarjanje, urejanje ali brisanje sob, datotek in drugih elementov.",
   "AuditTrailNav": "Revizijska pot",
   "AuthorizationKeysInfo": "Omogočite storitve tretjih oseb za svoj delovni prostor.",

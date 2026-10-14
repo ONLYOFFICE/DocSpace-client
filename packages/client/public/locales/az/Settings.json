@@ -43,6 +43,7 @@
   "AppliesToRooms": "{{rooms}} (otaqdan paylaşılan qovluqlar/fayllar daxil olmaqla)",
   "AppliesToRoomsDescription": "{{rooms}} bölməsində keçid yaradılması qadağan edildikdə, yeni keçidlər yalnız iş sahəsi istifadəçiləri üçün növü ilə yaradılacaq.",
   "AppliesToRoomsWarning": "İctimai otaqlar da yalnız daxili istifadəçilər üçün əlçatan olacaq və xarici istifadəçilər üçün mövcud olmayacaq.",
+  "AppsDescription": "İş sahənizdə hansı tətbiqlərin mövcud olduğunu idarə edin. Aktivləşdirilmiş tətbiqlər onlara giriş hüququ olan istifadəçilər üçün əsas menyuda görünəcək.",
   "AuditSubheader": "İş sahənizdə istifadəçilərin etdiyi son dəyişikliklərin siyahısına baxın: otaqların, faylların və digər elementlərin yaradılması, redaktəsi və ya silinməsi kimi.",
   "AuditTrailNav": "Audit jurnalı",
   "AuthorizationKeysInfo": "İş sahəniz üçün üçüncü tərəf xidmətlərini aktivləşdirin.",

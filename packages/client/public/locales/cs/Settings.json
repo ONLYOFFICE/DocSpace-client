@@ -43,6 +43,7 @@
   "AppliesToRooms": "{{rooms}} (včetně sdílených složek/souborů z místnosti)",
   "AppliesToRoomsDescription": "Zákazem vytváření odkazů v {{rooms}} budou nové odkazy vytvářeny pouze s typem Pouze uživatelé pracovního prostoru.",
   "AppliesToRoomsWarning": "Veřejné místnosti se také stanou pouze interními a nebudou přístupné externím uživatelům.",
+  "AppsDescription": "Spravujte, které aplikace jsou dostupné ve vašem pracovním prostoru. Aktivní aplikace se zobrazí v hlavní nabídce uživatelům, kteří k nim mají přístup.",
   "AuditSubheader": "Prohlédněte si seznam nedávných změn, které uživatelé provedli napříč vaším pracovním prostorem, například vytvoření, úpravu nebo odstranění místností, souborů a dalších položek.",
   "AuditTrailNav": "Auditní stopa",
   "AuthorizationKeysInfo": "Povolte služby třetích stran pro svůj pracovní prostor.",

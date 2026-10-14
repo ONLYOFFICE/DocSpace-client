@@ -1,8 +1,11 @@
 {
-  "pnpmVersion": "12.4.1",
-  "capturedAt": "2026-09-11",
+  "pnpmVersion": "12.11.2",
+  "capturedAt": "2026-10-14",
   "source": "https://json.schemastore.org/pnpm-workspace.json",
   "properties": {
+    "addMissingPeerTypes": {
+      "description": "When true, every peer dependency of a dependency also makes the matching @types package an optional peer of it: pnpm links the project's @types package (e.g. @types/react for a peer dependency on react) next to every package that peer-depends on the library, as with any optional peer dependency. This lets TypeScript find the types of a peer dependency when the global virtual store is on. A package that already declares the @types package keeps its own declaration, and no @types package nothing in the workspace depends on is installed. Changing this setting changes the lockfile. Added in pnpm v12.12.0."
+    },
     "allowBuilds": {
       "description": "A map of package matchers to explicitly allow (`true`) or disallow (`false`) script execution. This field replaces `onlyBuiltDependencies` and `ignoredBuiltDependencies` (which are also deprecated by this new setting), providing a single source of truth."
     },
@@ -24,6 +27,9 @@
     "auditLevel": {
       "description": "Controls the level of issues reported by `pnpm audit`. When set to 'low', all vulnerabilities are reported. When set to 'moderate', 'high', or 'critical', only vulnerabilities with that severity or higher are reported."
     },
+    "autoDedupe": {
+      "description": "When set to true, pnpm install and pnpm add deduplicate compatible dependency versions during installation. If a dependency appears at multiple versions and one version satisfies every range in the workspace, pnpm picks that version for all of them. Frozen installs (--frozen-lockfile) leave the lockfile unchanged; deduplication only runs when the lockfile is being written. Added in pnpm v12.6.0."
+    },
     "autoInstallPeers": {
       "description": "When true, any missing non-optional peer dependencies are automatically installed."
     },
@@ -38,6 +44,9 @@
     },
     "cafile": {
       "description": "A path to a file containing one or multiple Certificate Authority signing certificates."
+    },
+    "cargo": {
+      "description": "Cargo (Rust) dependencies support: when enabled, `pnpm install` resolves and installs the workspace's Cargo dependencies next to the npm packages. Multi-ecosystem support is experimental. Added in: v12.4.0 (pnpm v12 only)."
     },
     "catalog": {
       "description": "Define dependency version ranges as reusable constants,\nfor later reference in package.json files.\nThis (singular) field creates a catalog named default.\n"
@@ -65,6 +74,9 @@
     },
     "color": {
       "description": "Controls colors in the output."
+    },
+    "concurrencyGroups": {
+      "description": "Machine-wide concurrency limits for named groups of tasks (assigned via `tasks.<name>.concurrencyGroup`). At most the given number of tasks in a group run at once across pnpm processes sharing the same stateDir, including pnpm pipeline. A missing or zero group limit does not restrict execution. Added in pnpm v12.5.0."
     },
     "configDependencies": {
       "description": "Config dependencies allow you to share and centralize configuration files, settings, and hooks across multiple projects. They are installed before all regular dependencies ('dependencies', 'devDependencies', 'optionalDependencies'), making them ideal for setting up custom hooks, patches, and catalog entries."
@@ -141,8 +153,14 @@
     "fetchWarnTimeoutMs": {
       "description": "A warning message is displayed if a metadata request to the registry takes longer than the specified threshold (in milliseconds). Added in pnpm v10.18.0."
     },
+    "forceIgnoresPlatform": {
+      "description": "When true, pnpm install --force also installs optional dependencies whose os, cpu, or libc do not match the host. When false, --force refetches every package but still skips optional dependencies built for other platforms. pnpm v11 behaved as if this setting were true; prefer supportedArchitectures to install optional dependencies for other platforms on purpose. Added in pnpm v12.7.0."
+    },
     "forceLegacyDeploy": {
       "description": "By default, pnpm deploy will try creating a dedicated lockfile from a shared lockfile for deployment. If this setting is set to true, the legacy deploy behavior will be used."
+    },
+    "frozenLockfile": {
+      "description": "When true, installation fails if the lockfile is missing or needs to be updated."
     },
     "frozenStore": {
       "description": "Makes pnpm install work against a read-only package store (such as a Nix store or OCI image layer). When enabled, pnpm opens the store's SQLite database in immutable mode and never writes to the store. Works best together with --offline and --frozen-lockfile; incompatible with --force. Added in pnpm v11.7.0."
@@ -236,6 +254,9 @@
     },
     "loglevel": {
       "description": "Any logs at or higher than the given level will be shown. "
+    },
+    "macosBackup": {
+      "description": "On macOS, exclude newly created pnpm directories from Time Machine backups by marking them with the com.apple.metadata:com_apple_backup_excludeItem extended attribute. Read from the global configuration file or the PNPM_CONFIG_MACOS_BACKUP_* environment variables; ignored in project pnpm-workspace.yaml files. Added in pnpm v12.6.0."
     },
     "managePackageManagerVersions": {
       "description": "When enabled, pnpm will automatically download and run the version of pnpm specified in the packageManager field of package.json."
@@ -345,6 +366,15 @@
     "peersSuffixMaxLength": {
       "description": "Max length of the peer IDs suffix added to dependency keys in the lockfile. If the suffix is longer, it is replaced with a hash."
     },
+    "permissions": {
+      "description": "What each dependency may do, keyed by package. The keys have the same forms as the keys of allowBuilds. false records a denial, so the package is not offered for approval again. pnpm approve writes these entries. Added in pnpm v12.11.0."
+    },
+    "pipelineBase": {
+      "description": "The git ref the affected selection of `pnpm pipeline` resolves its merge base against. Overridden by the `--base <ref>` option."
+    },
+    "pipelines": {
+      "description": "Named sets of task names, keyed by pipeline name, run by `pnpm pipeline [name]`. A pipeline is a set, not a sequence: the order in which its tasks run comes from `tasks.<name>.dependsOn`. The pipeline named `default` runs when no name is given. Added in pnpm v12.4.0 (experimental, pnpm v12 only)."
+    },
     "pmOnFail": {
       "description": "Overrides the `onFail` behavior of both the `packageManager` field and `devEngines.packageManager` when the running pnpm version does not match the declared one."
     },
@@ -363,6 +393,9 @@
     "preferWorkspacePackages": {
       "description": "If this is enabled, local packages from the workspace are preferred over packages from the registry, even if there is a newer version of the package in the registry."
     },
+    "progress": {
+      "description": "Controls whether dependency and download progress lines are printed during installation. When set to false (or --no-progress is passed), progress output is suppressed. Warnings, lifecycle script output, and the dependency summary are still printed. Added in pnpm v12.6.0."
+    },
     "provenance": {
       "description": "When publishing from a supported cloud CI/CD system, the package will be publicly linked to where it was built and published from."
     },
@@ -375,6 +408,9 @@
     "publishBranch": {
       "description": "The primary branch of the repository which is used for publishing the latest changes."
     },
+    "publishWaitTimeout": {
+      "description": "After uploading a package, wait up to this many milliseconds for the published version and its tarball to become available from the registry. If they are not available in time, the command fails. 0 disables the check. When publishing recursively, pnpm confirms that a package is available before it publishes the packages that depend on it. Added in pnpm v12.7.0."
+    },
     "recursiveInstall": {
       "description": "If this is enabled, the primary behaviour of pnpm install becomes that of pnpm install -r, meaning the install is performed on all workspace or subdirectory packages."
     },
@@ -386,6 +422,9 @@
     },
     "registrySupportsTimeField": {
       "description": "Set this to true if the registry that you are using returns the \"time\" field in the abbreviated metadata."
+    },
+    "remoteCache": {
+      "description": "The server that shares task results and dependency builds between machines, and the keys every shared artifact is signed and verified with. Read by both sideEffectsCache.remote and the task cache of pnpm pipeline. Only org may be set in pnpm-workspace.yaml; the fields naming the server and its trust material (url, team, trustedKeys, publish, privateKey, keyId, builderId, imageDigest, architectureBaseline, buildEnv) are read from the global configuration file or the PNPM_REMOTE_CACHE_* environment variables instead, and setting them here fails with ERR_PNPM_WORKSPACE_REMOTE_CACHE_TRUST. Added in pnpm v12.12.0."
     },
     "reporter": {
       "description": "Allows you to customize the output style of the logs.\nhttps://pnpm.io/cli/install#--reportername"
@@ -411,6 +450,9 @@
     "savePrefix": {
       "description": "Configure how versions of packages installed to a package.json file get prefixed."
     },
+    "saveTypes": {
+      "description": "When set to true, pnpm add saves available @types/* packages in devDependencies alongside registry dependencies. Packages that declare bundled TypeScript types are skipped. Added in pnpm v12.6.0."
+    },
     "saveWorkspaceProtocol": {
       "description": "This setting controls how dependencies that are linked from the workspace are added to package.json."
     },
@@ -431,6 +473,9 @@
     },
     "sideEffectsCacheReadonly": {
       "description": "Only use the side effects cache if present, do not create it for new packages. The older spelling of sideEffectsCache: { read: true, write: false }."
+    },
+    "skills": {
+      "description": "Agent skills that approved dependencies ship. Added in pnpm v12.11.0."
     },
     "stateDir": {
       "description": "The location where all the packages are saved on the disk."

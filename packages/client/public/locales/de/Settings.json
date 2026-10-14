@@ -43,6 +43,7 @@
   "AppliesToRooms": "{{rooms}} (Einschließlich freigegebener Ordner/Dateien aus dem Raum)",
   "AppliesToRoomsDescription": "Wenn die Linkerstellung in {{rooms}} untersagt wird, werden neue Links nur noch mit dem Typ Nur Arbeitsbereichsbenutzer erstellt.",
   "AppliesToRoomsWarning": "Öffentliche Räume werden ebenfalls auf internen Zugriff beschränkt und sind für externe Benutzer nicht mehr zugänglich.",
+  "AppsDescription": "Verwalten Sie, welche Apps in Ihrem Arbeitsbereich verfügbar sind. Aktivierte Apps werden im Hauptmenü für Benutzer angezeigt, die Zugriff darauf haben.",
   "AuditSubheader": "Durchsuchen Sie eine Liste der letzten Änderungen, die Benutzer in Ihrem Arbeitsbereich vorgenommen haben, z. B. das Erstellen, Bearbeiten oder Löschen von Räumen, Dateien und anderen Elementen.",
   "AuditTrailNav": "Audit-Trail",
   "AuthorizationKeysInfo": "Aktivieren Sie Drittanbieterdienste für Ihren Arbeitsbereich.",

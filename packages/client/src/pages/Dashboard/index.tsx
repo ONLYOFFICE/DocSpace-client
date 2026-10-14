@@ -81,6 +81,7 @@ import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers
 import ChatPanelView from "@onlyoffice/apps-ui-kit/components/section/sub-components/ChatPanel";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
+import { AppDisabledTooltip } from "SRC_DIR/components/AppDisabledTooltip";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
 import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 import { IntegrationsCard } from "SRC_DIR/components/IntegrationsCard";
@@ -92,7 +93,10 @@ import {
 
 import { WelcomeDialog } from "./WelcomeDialog";
 import { DashboardTourHost } from "./DashboardTourHost";
-import { ModuleCard } from "./sub-components/ModuleCard";
+import {
+  APP_DISABLED_CARD_ATTR,
+  ModuleCard,
+} from "./sub-components/ModuleCard";
 import { ProfileCard } from "./sub-components/ProfileCard";
 import { DevToolsCard } from "./sub-components/DevToolsCard";
 import { Header } from "./sub-components/Header";
@@ -130,6 +134,12 @@ type DashboardProps = ChatNoAccessStoreProps & {
   isWarningRoomsDialog: boolean;
   setQuotaWarningDialogVisible: (visible: boolean) => void;
   logoText: string;
+  /** Whether an app is switched on; always true in SaaS. */
+  isAppInstalled: (id: string) => boolean;
+  /** Apps can be switched on and off on this portal (standalone only). */
+  canManageApps: boolean;
+  /** Fetches the apps list once, which `isAppInstalled` reads. */
+  ensureAppsLoaded: () => void;
 };
 
 const UPLOAD_LINK_ID = "dashboard-upload-link";
@@ -152,6 +162,9 @@ const Dashboard = (props: DashboardProps) => {
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
     logoText,
+    isAppInstalled,
+    canManageApps,
+    ensureAppsLoaded,
   } = props;
   const { t } = useTranslation(["Common"]);
   useDocumentTitle("Common:Home", logoText);
@@ -189,6 +202,11 @@ const Dashboard = (props: DashboardProps) => {
   // profiles count as ready too — the same signal Home and the agents EmptyView
   // use to decide whether to offer agent creation.
   const hasAiProfiles = useHasAiProfiles();
+
+  React.useEffect(() => {
+    ensureAppsLoaded();
+  }, [ensureAppsLoaded]);
+
   const moduleItems = useModuleItems({
     isGuest,
     canCreateRooms,
@@ -196,6 +214,10 @@ const Dashboard = (props: DashboardProps) => {
     aiServicesEnabled,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
+    isAppInstalled,
+    // Settings -> Apps, where an app is switched on, is open to portal admins
+    // and the owner only.
+    canEnableApps: isAdminOrOwner && canManageApps,
   });
 
   // The dashboard renders its own content (no SDK iframe). Tell the
@@ -375,7 +397,9 @@ const Dashboard = (props: DashboardProps) => {
                       key={mod.id}
                       mod={mod}
                       onTakeTour={
-                        isMobile
+                        // An app that is not installed has no section for its
+                        // tour to run in.
+                        isMobile || !mod.installed
                           ? undefined
                           : () => {
                               requestAppTour(mod.id as AppId);
@@ -388,6 +412,12 @@ const Dashboard = (props: DashboardProps) => {
                     />
                   ))}
                 </div>
+                {moduleItems.some((mod) => !mod.installed && !mod.onAction) ? (
+                  <AppDisabledTooltip
+                    id="dashboard-app-disabled-tooltip"
+                    anchorSelect={`[${APP_DISABLED_CARD_ATTR}]`}
+                  />
+                ) : null}
               </section>
             ) : null}
 
@@ -454,6 +484,7 @@ const DashboardConnected = inject((stores: TStore) => {
     formsTourStore,
     aiAgentsTourStore,
     dashboardTourStore,
+    appsStore,
   } = stores;
 
   // The app cards an onboarding tour can be started from. An app that isn't
@@ -500,6 +531,9 @@ const DashboardConnected = inject((stores: TStore) => {
     isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,
     setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
     logoText: settingsStore.logoText,
+    isAppInstalled: appsStore.isInstalled,
+    canManageApps: appsStore.canManageApps,
+    ensureAppsLoaded: appsStore.ensureLoaded,
   };
 })(observer(Dashboard));
 

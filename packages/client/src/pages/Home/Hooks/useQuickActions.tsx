@@ -354,6 +354,7 @@ export const useQuickActions = (
     const items: QuickActionItem[] = [
       {
         id: "quick-blank-pdf-form",
+        dataTestId: "quick-blank-pdf-form",
         icon: <BlankPdfIcon />,
         label: t("Common:BlankPDFForm"),
         onClick: () => dispatchCreate(currentFolderId, "pdf", t),
@@ -363,6 +364,7 @@ export const useQuickActions = (
     if (templateGalleryAvailable) {
       items.push({
         id: "quick-form-template",
+        dataTestId: "quick-form-template",
         icon: <CreateFromTemplateIcon />,
         label: t("Common:TemplateGallery"),
         onClick: () => {

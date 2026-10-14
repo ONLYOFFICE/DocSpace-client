@@ -114,7 +114,7 @@ import TelegramStore from "./TelegramStore";
 
 const aiRoomStore = new AiRoomStore();
 
-const appsStore = new AppsStore();
+const appsStore = new AppsStore(settingsStore);
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 

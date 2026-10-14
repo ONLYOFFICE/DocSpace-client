@@ -43,6 +43,7 @@
   "AppliesToRooms": "{{rooms}} (vrátane zdieľaných priečinkov/súborov z miestnosti)",
   "AppliesToRoomsDescription": "Zákazom vytvárania prepojení v {{rooms}} budú nové prepojenia vytvárané iba s typom Len používatelia pracovného priestoru.",
   "AppliesToRoomsWarning": "Verejné miestnosti sa tiež stanú len internými a nebudú prístupné externým používateľom.",
+  "AppsDescription": "Spravujte, ktoré aplikácie sú dostupné vo vašom pracovnom priestore. Povolené aplikácie sa zobrazia v hlavnom menu pre používateľov, ktorí k nim majú prístup.",
   "AuditSubheader": "Prezerajte si zoznam nedávnych zmien, ktoré používatelia vykonali vo vašom pracovnom priestore, napríklad vytváranie, úpravu alebo odstraňovanie miestností, súborov a ďalších položiek.",
   "AuditTrailNav": "Auditné záznamy",
   "AuthorizationKeysInfo": "Povoľte služby tretích strán pre váš pracovný priestor.",

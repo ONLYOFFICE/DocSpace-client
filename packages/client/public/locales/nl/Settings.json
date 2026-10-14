@@ -43,6 +43,7 @@
   "AppliesToRooms": "{{rooms}} (inclusief gedeelde mappen/bestanden uit de kamer)",
   "AppliesToRoomsDescription": "Door het aanmaken van links te verbieden in {{rooms}}, worden nieuwe links uitsluitend aangemaakt met het type Alleen werkruimte-gebruikers.",
   "AppliesToRoomsWarning": "Openbare kamers worden ook intern en zijn niet langer toegankelijk voor externe gebruikers.",
+  "AppsDescription": "Beheer welke apps beschikbaar zijn in uw werkruimte. Ingeschakelde apps verschijnen in het hoofdmenu voor gebruikers die er toegang toe hebben.",
   "AuditSubheader": "Blader door een lijst met recente wijzigingen die gebruikers in uw werkruimte hebben aangebracht, zoals het aanmaken, bewerken of verwijderen van kamers, bestanden en andere items.",
   "AuditTrailNav": "Audit Trail",
   "AuthorizationKeysInfo": "Schakel diensten van derden in voor uw werkruimte.",

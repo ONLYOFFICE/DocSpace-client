@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
+import { describe, it, expect, beforeAll, afterAll, vi } from "vitest";
 import { Settings } from "luxon";
 
 import { FolderType, MetadataFieldType } from "../enums";
@@ -42,7 +42,10 @@ import {
   getMetadataDate,
   getMetadataInput,
   isMetadataNumber,
+  isMetadataRootSupported,
   isMetadataSupported,
+  parseMetadataFilters,
+  parseMetadataTemplateId,
   toMetadataValue,
 } from "./metadata";
 
@@ -180,6 +183,11 @@ describe("isMetadataSupported", () => {
     ).toBe(false);
   });
 
+  it("leaves section roots to the listings, which filter there", () => {
+    expect(isMetadataRootSupported(FolderType.USER)).toBe(true);
+    expect(isMetadataRootSupported(FolderType.AIAgents)).toBe(false);
+  });
+
   it("rejects section roots", () => {
     expect(
       isMetadataSupported({
@@ -195,5 +203,35 @@ describe("isMetadataSupported", () => {
         rootFolderType: FolderType.USER,
       }),
     ).toBe(true);
+  });
+});
+
+describe("metadata filter URL values", () => {
+  it("reads a template id only when it is a positive integer", () => {
+    expect(parseMetadataTemplateId("5")).toBe(5);
+    expect(parseMetadataTemplateId(undefined)).toBeNull();
+    expect(parseMetadataTemplateId("abc")).toBeNull();
+    expect(parseMetadataTemplateId("0")).toBeNull();
+  });
+
+  it("reads conditions from JSON and drops empty or broken lists", () => {
+    const conditions = [{ fieldId: 1, op: "eq", value: "ACME" }];
+
+    expect(parseMetadataFilters(JSON.stringify(conditions))).toEqual(
+      conditions,
+    );
+    expect(parseMetadataFilters("[]")).toBeNull();
+    expect(parseMetadataFilters(JSON.stringify([null, 5, ...conditions]))).toEqual(
+      conditions,
+    );
+    expect(parseMetadataFilters("[null]")).toBeNull();
+    expect(parseMetadataFilters(undefined)).toBeNull();
+
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      expect(parseMetadataFilters("not json")).toBeNull();
+    } finally {
+      error.mockRestore();
+    }
   });
 });

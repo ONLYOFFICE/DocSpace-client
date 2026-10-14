@@ -38,8 +38,10 @@ import { DateTime } from "luxon";
 import { FolderType, MetadataFieldType } from "../enums";
 import type {
   TEntryMetadataField,
+  TMetadataFilterCondition,
   TMetadataValueRequest,
 } from "../api/metadata/types";
+import { tryParseArray } from "./common";
 
 export type TMetadataInput = string | string[];
 
@@ -52,6 +54,9 @@ const UNSUPPORTED_ROOT_TYPES: (FolderType | undefined)[] = [
   FolderType.Privacy,
   FolderType.AIAgents,
 ];
+
+export const isMetadataRootSupported = (rootFolderType?: FolderType) =>
+  !UNSUPPORTED_ROOT_TYPES.includes(rootFolderType);
 
 export const isMetadataSupported = ({
   id,
@@ -67,7 +72,27 @@ export const isMetadataSupported = ({
   typeof id === "number" &&
   parentId !== 0 &&
   !providerKey &&
-  !UNSUPPORTED_ROOT_TYPES.includes(rootFolderType);
+  isMetadataRootSupported(rootFolderType);
+
+export const parseMetadataTemplateId = (value: unknown) => {
+  const id = Number(value);
+
+  return Number.isInteger(id) && id > 0 ? id : null;
+};
+
+const isFilterCondition = (item: unknown): item is TMetadataFilterCondition =>
+  typeof item === "object" &&
+  item !== null &&
+  (Number.isInteger((item as TMetadataFilterCondition).fieldId) ||
+    typeof (item as TMetadataFilterCondition).name === "string");
+
+export const parseMetadataFilters = (value: unknown) => {
+  const conditions = (tryParseArray(value as string) ?? []).filter(
+    isFilterCondition,
+  );
+
+  return conditions.length ? conditions : null;
+};
 
 export const getMetadataDate = (value?: string) =>
   value ? (DateTime.fromISO(value, { zone: "utc" }).toISODate() ?? "") : "";

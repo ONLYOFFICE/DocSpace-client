@@ -133,6 +133,18 @@ export type TAssignMetadataTemplatesRequest = {
   conflictResolveType?: TMetadataConflictResolveType;
 };
 
+export type TMetadataFilterOperator = "eq" | "range" | "in";
+
+export type TMetadataFilterCondition = {
+  fieldId?: number;
+  name?: string;
+  op: TMetadataFilterOperator;
+  value?: string;
+  from?: string;
+  to?: string;
+  optionIds?: string[];
+};
+
 export type TUpdateFolderMetadataTemplateRequest = {
   cascade: boolean;
   conflictResolveType?: TMetadataConflictResolveType;

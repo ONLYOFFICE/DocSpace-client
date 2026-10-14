@@ -3504,7 +3504,7 @@ packages:
     os: [win32]
 
   '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.4.tgz':
-    resolution: {integrity: sha512-QtjhA9jqe+SCaWQjrpgYIKiPVfxs+1sk4TXBWn8M3KzHT9gfaHXEy+o5HKYTjnLsg2LTuMkdIWyyn150+RFjjA==, tarball: file:onlyoffice-ai-chat-1.0.4.tgz}
+    resolution: {integrity: sha512-ej11+5Atzs+qVK7eyfWGnkG5tGC4f+8REn1sEvwCyJ2XO0bLJWIH/o0iwBTKt362dlg05iN26hTKlchdrC/GOA==, tarball: file:onlyoffice-ai-chat-1.0.4.tgz}
     version: 1.0.4
     peerDependencies:
       '@anthropic-ai/sdk': ^0.60.0
@@ -3601,11 +3601,11 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-0MVsEbRRJ7b5FmxwD0ZmvHrOaQB/JxgjZwfyoLghDn9O587qJTIA2HDqJb8aqtbIm6v1hp18IPNSKlBgyN62Cg==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-wnIBybYgx0xrN1/2lKi6lgsh6IQklWwAbP6N5+UaxuFfwSzQ8dEAR6AnMws/a4Hhohhca03QpNjFAiPN+D7ing==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.0.2
     engines: {node: '>=22'}
     peerDependencies:
-      '@onlyoffice/ai-chat': ^1.0.3
+      '@onlyoffice/ai-chat': ^1.0.4
       '@onlyoffice/document-editor-react': 2.1.1
       '@socket.io/component-emitter': 3.1.2
       axios: '>=1.15.2'

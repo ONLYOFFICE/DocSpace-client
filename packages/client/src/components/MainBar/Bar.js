@@ -45,6 +45,10 @@ import { AnalyticsEvents } from "@onlyoffice/apps-ui-kit/enums";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getBannerAttribute } from "@docspace/shared/utils";
+import {
+  getBannerTheme,
+  withBannerTheme,
+} from "@docspace/shared/utils/banner";
 import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
@@ -337,10 +341,11 @@ const Bar = (props) => {
 
     try {
       const [htmlUrl, currentBar] = await loadLanguagePath(
-        isBaseThemeRef.current ? "light" : "dark",
+        getBannerTheme(isBaseThemeRef.current),
       );
 
-      setHtmlLink(htmlUrl);
+      // The theme may have flipped while the page was being checked.
+      setHtmlLink(withBannerTheme(htmlUrl, isBaseThemeRef.current));
       setCampaigns(currentBar);
     } catch (e) {
       console.error(e);
@@ -361,7 +366,13 @@ const Bar = (props) => {
 
   useEffect(() => {
     updateBanner();
-  }, [t, isBaseTheme]);
+  }, [t]);
+
+  // A theme switch re-themes the campaign on screen rather than calling
+  // updateBanner, which would advance the rotation to the next campaign.
+  useEffect(() => {
+    setHtmlLink((link) => withBannerTheme(link, isBaseTheme));
+  }, [isBaseTheme]);
 
   // The backend re-arms its own notification once the balance recovers, so the
   // dismissal is dropped on the same edge. Guarded on the true -> false

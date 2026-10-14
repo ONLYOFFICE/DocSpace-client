@@ -57,6 +57,24 @@ export function getLanguage(lng: string) {
   }
 }
 
+export type TBannerTheme = "light" | "dark";
+
+export const getBannerTheme = (isBaseTheme?: boolean): TBannerTheme =>
+  isBaseTheme === false ? "dark" : "light";
+
+// Sets the theme param on a campaign page URL; empty links pass through.
+export const withBannerTheme = <T extends string | null | undefined>(
+  link: T,
+  isBaseTheme?: boolean,
+): T => {
+  if (!link) return link;
+
+  const url = new URL(link);
+  url.searchParams.set("theme", getBannerTheme(isBaseTheme));
+
+  return url.toString() as T;
+};
+
 export const getBannerAttribute = () => {
   const bar = document.getElementById("bar-banner");
   const mainBar = document.getElementById("main-bar");
@@ -80,7 +98,7 @@ export const getBannerAttribute = () => {
       ? `${rects.height + 36}px`
       : "46px";
 
-  const loadLanguagePath = async (theme: "light" | "dark" = "light") => {
+  const loadLanguagePath = async (theme: TBannerTheme = "light") => {
     if (!window?.firebaseHelper) return;
 
     const lng: string[] | string = getCookie(LANGUAGE) || "en";

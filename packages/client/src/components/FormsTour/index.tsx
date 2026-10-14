@@ -36,6 +36,7 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 import { inject, observer } from "mobx-react";
+import { runInAction } from "mobx";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -58,6 +59,10 @@ import { FORMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
 import { getTourAudience } from "SRC_DIR/components/Tour/audience";
 import { tourDemo } from "SRC_DIR/api/tourDemo";
+import {
+  DEMO_SPACE_ITEM_IDS,
+  withDemoFormLaunched,
+} from "SRC_DIR/api/tourDemo/data";
 
 import type { TCreatedBy } from "@docspace/shared/types";
 
@@ -169,6 +174,29 @@ const FormsTour = ({
     // rendered before any row inside it exists to point at.
     () => ({ reveal: enterSpace, restore: () => {}, navigates: true }),
     [enterSpace],
+  );
+
+  // The launch the tour cannot do for real, faked on the loaded row.
+  const setFormLaunched = useCallback(
+    (launched: boolean) => {
+      const form = filesStore.files.find(
+        (file) => file.id === DEMO_SPACE_ITEM_IDS.form,
+      );
+      if (!form || !!form.startFilling === launched) return;
+
+      runInAction(() => {
+        Object.assign(form, withDemoFormLaunched(form, launched));
+      });
+    },
+    [filesStore],
+  );
+
+  const launchHooks = useMemo(
+    () => ({
+      reveal: () => setFormLaunched(true),
+      restore: () => setFormLaunched(false),
+    }),
+    [setFormLaunched],
   );
 
   // The section's own filter is passed back rather than left to default: it is
@@ -388,6 +416,7 @@ const FormsTour = ({
       isDemo,
       isStandIn,
       spaceHooks,
+      launchHooks,
       demoHooks,
       leaveSpace,
     }),
@@ -401,6 +430,7 @@ const FormsTour = ({
       isDemo,
       isStandIn,
       spaceHooks,
+      launchHooks,
       demoHooks,
       leaveSpace,
     ],

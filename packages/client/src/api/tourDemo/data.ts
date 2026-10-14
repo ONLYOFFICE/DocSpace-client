@@ -570,6 +570,19 @@ const fullFolderSecurity = {
   HistoryExport: false,
 };
 
+/** The stand-in form as Start filling would leave it, or as it was. */
+export function withDemoFormLaunched(form: TFile, launched: boolean): TFile {
+  return {
+    ...form,
+    startFilling: launched,
+    viewAccessibility: {
+      ...form.viewAccessibility,
+      WebRestrictedEditing: launched,
+    },
+    security: { ...form.security, StartFilling: !launched },
+  };
+}
+
 /**
  * The inside of a stand-in form space: the blank form and the two system
  * folders the answers move between. A real space only grows them once a form

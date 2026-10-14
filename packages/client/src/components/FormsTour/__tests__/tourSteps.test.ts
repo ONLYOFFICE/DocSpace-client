@@ -35,6 +35,7 @@
 
 import { describe, it, expect, vi } from "vitest";
 import type { TFunction } from "i18next";
+import type { TourData } from "react-joyride";
 
 import { bullets } from "SRC_DIR/components/Tour/__tests__/bullets";
 
@@ -46,6 +47,28 @@ const t = ((key: string) => key) as unknown as TFunction;
 const steps = (flags: TourStepFlags) => getTourSteps(t, undefined, flags);
 
 const titles = (flags: TourStepFlags) => steps(flags).map((step) => step.title);
+
+const stepTitled = (flags: TourStepFlags, title: string) =>
+  steps(flags).find((step) => step.title === title)!;
+
+const FULL_RUN = [
+  "FormsTour:FormsSpaceTitle",
+  "FormsTour:FormsTemplatesTitle",
+  "FormsTour:FormsDemoPreviewTitle",
+  "FormsTour:FormsItemTitle",
+  "FormsTour:FormsBlankTitle",
+  "FormsTour:FormsShareTitle",
+  "FormsTour:FormsFillYourselfTitle",
+  "FormsTour:FormsInProgressTitle",
+  "FormsTour:FormsCompleteTitle",
+  "FormsTour:FormsPlacesTitle",
+  "FormsTour:FormsCreateFirstTitle",
+];
+
+// The same run on a list of the user's own: nothing in it is a sample.
+const OWN_LIST_RUN = FULL_RUN.filter(
+  (title) => title !== "FormsTour:FormsDemoPreviewTitle",
+);
 
 const EMPTY_SCREEN_TARGET = '[data-testid="empty-view-body"] > *:first-child';
 const EMPTY_SCREEN = '[data-testid="empty-view"]';
@@ -63,6 +86,7 @@ const adminFlags: TourStepFlags = {
   isDemo: true,
   isStandIn: false,
   spaceHooks: hooks(),
+  launchHooks: hooks(),
   demoHooks: hooks(),
   leaveSpace: vi.fn(),
 };
@@ -86,16 +110,7 @@ const fillerDemoFlags: TourStepFlags = { ...fillerFlags, isStandIn: true };
 
 describe("getTourSteps — room admin", () => {
   it("walks the section, then the inside of a space, then the sidebar", () => {
-    expect(titles(adminFlags)).toEqual([
-      "FormsTour:FormsSpaceTitle",
-      "FormsTour:FormsTemplatesTitle",
-      "FormsTour:FormsItemTitle",
-      "FormsTour:FormsBlankTitle",
-      "FormsTour:FormsInProgressTitle",
-      "FormsTour:FormsCompleteTitle",
-      "FormsTour:FormsPlacesTitle",
-      "FormsTour:FormsCreateFirstTitle",
-    ]);
+    expect(titles(adminFlags)).toEqual(OWN_LIST_RUN);
   });
 
   it("closes a run on the section's own spaces on the New Form space button", () => {
@@ -114,8 +129,8 @@ describe("getTourSteps — room admin", () => {
     );
   });
 
-  it("stays inside the ten-step budget on the longest run there is", () => {
-    expect(steps(demoFlags).length).toBeLessThanOrEqual(10);
+  it("stays inside the eleven-step budget on the longest run there is", () => {
+    expect(steps(demoFlags).length).toBeLessThanOrEqual(11);
   });
 
   it("names every sidebar shortcut it points at, one bullet each", () => {
@@ -142,8 +157,13 @@ describe("getTourSteps — filler", () => {
   it("still covers what a filler does with the spaces they were added to", () => {
     const fillerTitles = titles(fillerFlags);
 
-    expect(fillerTitles).toContain("FormsTour:FormsItemTitle");
     expect(fillerTitles).toContain("FormsTour:FormsPlacesTitle");
+    // The row step reads differently: what to find inside, not how to run it.
+    expect(fillerTitles).toContain("FormsTour:FormsItemMemberTitle");
+    expect(fillerTitles).not.toContain("FormsTour:FormsItemTitle");
+    expect(
+      stepTitled(fillerFlags, "FormsTour:FormsItemMemberTitle").content,
+    ).toBe("FormsTour:FormsItemMember");
   });
 
   it("keeps Templates out of the sidebar step", () => {
@@ -156,29 +176,58 @@ describe("getTourSteps — filler", () => {
 });
 
 describe("getTourSteps — inside a space", () => {
-  it("walks the blank form and the two folders an answer travels between", () => {
-    expect(titles(demoFlags)).toEqual([
-      "FormsTour:FormsSpaceTitle",
-      "FormsTour:FormsTemplatesTitle",
-      "FormsTour:FormsItemTitle",
-      "FormsTour:FormsBlankTitle",
-      "FormsTour:FormsInProgressTitle",
-      "FormsTour:FormsCompleteTitle",
-      "FormsTour:FormsPlacesTitle",
-      "FormsTour:FormsCreateFirstTitle",
-    ]);
+  it("walks the blank form, its menu, and the two folders an answer travels between", () => {
+    expect(titles(demoFlags)).toEqual(FULL_RUN);
   });
 
-  it("names the row as the door, then walks straight in through it", () => {
-    // The row step is the only one pointing at a row out in the list: a second
-    // step spotlighting the same row to say "step inside" repeats the accent
-    // the row step already put there, so the tour opens the space on the step
-    // that describes what is inside it.
+  it("says the list is a sample, names the row as the door, then walks in", () => {
     const titleList = titles(demoFlags);
+    const preview = titleList.indexOf("FormsTour:FormsDemoPreviewTitle");
 
-    expect(titleList.indexOf("FormsTour:FormsItemTitle")).toBe(
-      titleList.indexOf("FormsTour:FormsBlankTitle") - 1,
+    expect(titleList[preview + 1]).toBe("FormsTour:FormsItemTitle");
+    expect(titleList[preview + 2]).toBe("FormsTour:FormsBlankTitle");
+    // Not said on a list of the user's own.
+    expect(titles(adminFlags)).not.toContain(
+      "FormsTour:FormsDemoPreviewTitle",
     );
+  });
+
+  it("opens the blank form's own menu for the launch step", () => {
+    const share = stepTitled(demoFlags, "FormsTour:FormsShareTitle");
+
+    expect(share.target).toBe(".p-contextmenu");
+    expect(share.content).toBe("FormsTour:FormsShare");
+    // One entry lit up, not the whole menu.
+    expect(share.spotlightTarget).toBe("#option_start-filling");
+    // The menu is not up when the tour starts, so the DOM check leaves it be.
+    expect(share.data).toEqual({ revealsTarget: true });
+  });
+
+  it("launches the form for the Fill step and puts it back afterwards", async () => {
+    // The badge only a launched form carries: faked before, undone after.
+    const launchHooks = hooks();
+    const flags = { ...demoFlags, launchHooks };
+    const fill = stepTitled(flags, "FormsTour:FormsFillYourselfTitle");
+
+    document.body.innerHTML = `
+      <div id="file_-1102"><span class="badge is-editing">badge</span></div>
+    `;
+    expect((fill.target as () => Element | null)()).toBe(
+      document.querySelector(".badge"),
+    );
+
+    await fill.before?.({} as TourData);
+    expect(launchHooks.reveal).toHaveBeenCalledTimes(1);
+
+    fill.after?.({
+      action: "next",
+      status: "running",
+      index: 6,
+      size: 11,
+    } as TourData);
+    expect(launchHooks.restore).toHaveBeenCalledTimes(1);
+
+    document.body.innerHTML = "";
   });
 
   it("anchors on ids rather than on where a row happens to sort", () => {
@@ -191,9 +240,13 @@ describe("getTourSteps — inside a space", () => {
       <div id="folder_-1101"></div>
     `;
 
-    const resolved = steps(adminFlags)
-      .slice(3, 6)
-      .map((step) => (step.target as () => Element | null)());
+    const resolved = [
+      "FormsTour:FormsBlankTitle",
+      "FormsTour:FormsInProgressTitle",
+      "FormsTour:FormsCompleteTitle",
+    ].map((title) =>
+      (stepTitled(adminFlags, title).target as () => Element | null)(),
+    );
 
     expect(resolved).toEqual([
       document.querySelector("#file_-1102"),
@@ -225,7 +278,10 @@ describe("getTourSteps — inside a space", () => {
     inner.getBoundingClientRect = () => new DOMRect(0, 0, 0, 0);
     cell.getBoundingClientRect = () => new DOMRect(0, 100, 400, 40);
 
-    const inProgress = steps(adminFlags)[4];
+    const inProgress = stepTitled(
+      adminFlags,
+      "FormsTour:FormsInProgressTitle",
+    );
 
     expect((inProgress.target as () => Element | null)()).toBe(cell);
 
@@ -236,8 +292,13 @@ describe("getTourSteps — inside a space", () => {
     // The section is still at its root when the tour starts, so none of these
     // anchors exists yet. Without the flag every one of them would be dropped
     // before the tour had a chance to walk into the space.
-    for (const step of steps(adminFlags).slice(3, 6)) {
-      expect(step.data).toEqual({
+    for (const title of [
+      "FormsTour:FormsBlankTitle",
+      "FormsTour:FormsFillYourselfTitle",
+      "FormsTour:FormsInProgressTitle",
+      "FormsTour:FormsCompleteTitle",
+    ]) {
+      expect(stepTitled(adminFlags, title).data).toEqual({
         revealsTarget: true,
         presence: undefined,
       });
@@ -262,7 +323,9 @@ describe("getTourSteps — inside a space", () => {
     // Walking backwards out of the in-room block has to land on a page that
     // has the anchor the step is about to point at.
     const outside = steps(demoFlags).filter(
-      (step) => !String(step.target).startsWith("#"),
+      (step) =>
+        !String(step.target).startsWith("#") &&
+        step.target !== ".p-contextmenu",
     );
 
     for (const step of outside) expect(step.before).toBeTypeOf("function");
@@ -280,6 +343,8 @@ describe("getTourSteps — what the page allows", () => {
 
     expect(emptyPage).toEqual([
       "FormsTour:FormsBlankTitle",
+      "FormsTour:FormsShareTitle",
+      "FormsTour:FormsFillYourselfTitle",
       "FormsTour:FormsInProgressTitle",
       "FormsTour:FormsCompleteTitle",
       "FormsTour:FormsPlacesTitle",

@@ -485,6 +485,9 @@ export function elementGroupStep(
  * Both hooks check whether the menu is up first. The trigger toggles, and a
  * step's hooks run again when the user walks back through the tour — a blind
  * second click would close the very menu the step is about to spotlight.
+ *
+ * `prepare` runs before the trigger is awaited and must be idempotent;
+ * `spotlightItem` narrows the spotlight to one entry of the menu.
  */
 export function menuStep(
   triggerSelector: string,
@@ -497,16 +500,33 @@ export function menuStep(
   // that opens it to light up the pair as one region.
   spotlightWith: string[] = [],
   spotlightPadding = 4,
+  prepare?: () => void,
+  triggerTimeout = STEP_TARGET_TIMEOUT,
+  spotlightItem?: string,
 ): Step {
   const isOpen = () => !!document.querySelector(menuSelector);
-  const toggle = () =>
-    document.querySelector<HTMLElement>(triggerSelector)?.click();
+  // A row menu is laid out at the pointer; a bare `click()` has no coordinates.
+  const toggle = () => {
+    const trigger = document.querySelector<HTMLElement>(triggerSelector);
+    if (!trigger) return;
+    const rect = trigger.getBoundingClientRect();
+    trigger.dispatchEvent(
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+        clientX: rect.left + rect.width / 2,
+        clientY: rect.top + rect.height / 2,
+      }),
+    );
+  };
 
   return {
     target: menuSelector,
-    spotlightTarget: spotlightWith.length
-      ? () => unionSpotlight([menuSelector, ...spotlightWith], menuSelector)
-      : undefined,
+    spotlightTarget: spotlightItem
+      ? spotlightItem
+      : spotlightWith.length
+        ? () => unionSpotlight([menuSelector, ...spotlightWith], menuSelector)
+        : undefined,
     spotlightPadding,
     placement: "auto" as const,
     content: body,
@@ -517,6 +537,8 @@ export function menuStep(
     data: { revealsTarget: true },
     before: async () => {
       const signal = callbacks?.getSignal();
+      prepare?.();
+      await awaitAnchor(triggerSelector, triggerTimeout, signal, logLabel);
       // The trigger, not the menu: a dropdown floats above the scroll
       // container, so scrolling to it would drag the trigger out from under it.
       scrollTargetIntoView(triggerSelector, signal);
@@ -525,6 +547,12 @@ export function menuStep(
     },
     after: () => {
       if (isOpen()) toggle();
+      // A pointer-placed menu re-shows on its button; only an outside press hides it.
+      if (isOpen()) {
+        document.body.dispatchEvent(
+          new MouseEvent("mousedown", { bubbles: true }),
+        );
+      }
       removeUnionSpotlight();
     },
   };

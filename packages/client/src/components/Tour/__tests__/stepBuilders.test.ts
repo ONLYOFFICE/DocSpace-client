@@ -344,6 +344,66 @@ describe("menuStep", () => {
     expect(document.querySelector(".p-contextmenu")).toBeNull();
   });
 
+  it("presses outside to close a menu that only re-shows on its trigger", async () => {
+    // A row's ContextMenu re-shows on its button; only an outside press hides it.
+    mount('<button id="trigger"></button>');
+    const trigger = document.querySelector<HTMLElement>("#trigger")!;
+    const showMenu = () => {
+      if (document.querySelector(".p-contextmenu")) return;
+      const menu = document.createElement("div");
+      menu.className = "p-contextmenu";
+      document.body.appendChild(menu);
+    };
+    trigger.addEventListener("click", showMenu);
+    document.addEventListener("mousedown", (event) => {
+      if (event.target !== trigger) {
+        document.querySelector(".p-contextmenu")?.remove();
+      }
+    });
+
+    const menuOpener = step();
+    await menuOpener.before?.(HOOK_DATA);
+    expect(document.querySelector(".p-contextmenu")).not.toBeNull();
+
+    menuOpener.after?.(HOOK_DATA);
+
+    expect(document.querySelector(".p-contextmenu")).toBeNull();
+  });
+
+  it("clicks the trigger where it is, so a pointer-placed menu opens beside it", async () => {
+    // A row menu is laid out at the click's coordinates.
+    mountToggle();
+    const trigger = document.querySelector<HTMLElement>("#trigger")!;
+    trigger.getBoundingClientRect = () => new DOMRect(100, 200, 20, 10);
+    const clicks: MouseEvent[] = [];
+    trigger.addEventListener("click", (event) => clicks.push(event));
+
+    await step().before?.(HOOK_DATA);
+
+    expect(clicks).toHaveLength(1);
+    expect(clicks[0].clientX).toBe(110);
+    expect(clicks[0].clientY).toBe(205);
+  });
+
+  it("can narrow the spotlight to one entry of the menu", () => {
+    const narrowed = menuStep(
+      "#trigger",
+      ".p-contextmenu",
+      "title",
+      "body",
+      undefined,
+      LOG_LABEL,
+      [],
+      4,
+      undefined,
+      undefined,
+      "#option_start-filling",
+    );
+
+    expect(narrowed.spotlightTarget).toBe("#option_start-filling");
+    expect(narrowed.target).toBe(".p-contextmenu");
+  });
+
   it("leaves an already-open menu alone", async () => {
     // Walking back to the step runs its hooks again; a blind second click on a
     // toggle would close the menu the step is about to spotlight.

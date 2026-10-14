@@ -41,7 +41,9 @@ import {
   sidebarListStep,
   elementStep,
   fileItemStep,
+  menuStep,
   revealStep,
+  NAVIGATION_TARGET_TIMEOUT,
   type RevealHooks,
 } from "SRC_DIR/components/Tour/stepBuilders";
 import { FORMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
@@ -61,6 +63,13 @@ const itemSelector = (id: number, isFolder = true) =>
   `#${isFolder ? "folder" : "file"}_${id}`;
 
 const BLANK_FORM_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.form, false);
+// The blank form's own three-dots button, and the menu it opens.
+const BLANK_FORM_MENU_TRIGGER_SELECTOR = `${BLANK_FORM_SELECTOR} [data-testid="context-menu-button"]`;
+const CONTEXT_MENU_SELECTOR = ".p-contextmenu";
+// ContextMenu renders each entry with the option's own id.
+const START_FILLING_OPTION_SELECTOR = "#option_start-filling";
+// The badge a launched form carries on its row.
+const LAUNCHED_BADGE_SELECTOR = `${BLANK_FORM_SELECTOR} .badge.is-editing`;
 const IN_PROGRESS_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.inProgress);
 const COMPLETE_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.complete);
 const NEW_BUTTON_SELECTOR =
@@ -105,6 +114,8 @@ export type TourStepFlags = {
   // is a no-op, because the way back out belongs to the steps that need the
   // section root (they all `prepare` with `leaveSpace`).
   spaceHooks?: RevealHooks;
+  // Fakes the launch of the stand-in form on its row, and undoes it.
+  launchHooks?: { reveal: () => void; restore: () => void };
   demoHooks?: RevealHooks;
   // Returns the tour to the section root. Every step anchored outside a space
   // runs this first, so walking backwards out of the in-room block lands on a
@@ -127,6 +138,7 @@ export function getTourSteps(
     isDemo,
     isStandIn,
     spaceHooks,
+    launchHooks,
     demoHooks,
     leaveSpace,
   } = flags;
@@ -191,13 +203,27 @@ export function getTourSteps(
         leaveSpace,
       ),
 
-    // 3. A space row — the door into a collection, and the handful of things
-    // worth doing to one without opening it.
+    // 3. Only when the whole list is a sample, as in the Rooms tour.
+    showInsideSpace &&
+      isStandIn &&
+      hasItems &&
+      fileItemStep(
+        FIRST_ITEM_SELECTOR,
+        t("FormsTour:FormsDemoPreviewTitle"),
+        t("FormsTour:FormsDemoPreview"),
+        callbacks,
+        FORMS_TOUR_LABEL,
+        leaveSpace,
+      ),
+
+    // 4. A space row, the door into a collection; a filler gets other wording.
     hasItems &&
       fileItemStep(
         FIRST_ITEM_SELECTOR,
-        t("FormsTour:FormsItemTitle"),
-        t("FormsTour:FormsItem"),
+        canCreate
+          ? t("FormsTour:FormsItemTitle")
+          : t("FormsTour:FormsItemMemberTitle"),
+        canCreate ? t("FormsTour:FormsItem") : t("FormsTour:FormsItemMember"),
         callbacks,
         FORMS_TOUR_LABEL,
         leaveSpace,
@@ -216,6 +242,43 @@ export function getTourSteps(
         callbacks,
         FORMS_TOUR_LABEL,
         spaceHooks,
+      ),
+
+    // 4a. The blank form's menu, with Start filling in it; never chosen.
+    showInsideSpace &&
+      menuStep(
+        BLANK_FORM_MENU_TRIGGER_SELECTOR,
+        CONTEXT_MENU_SELECTOR,
+        t("FormsTour:FormsShareTitle"),
+        t("FormsTour:FormsShare", { formFiller: t("Common:RoleFormFiller") }),
+        callbacks,
+        FORMS_TOUR_LABEL,
+        [],
+        4,
+        spaceHooks.reveal,
+        NAVIGATION_TARGET_TIMEOUT,
+        START_FILLING_OPTION_SELECTOR,
+      ),
+
+    // 4b. The form as Start filling leaves it: faked for the step, undone after.
+    showInsideSpace &&
+      launchHooks &&
+      revealStep(
+        LAUNCHED_BADGE_SELECTOR,
+        t("FormsTour:FormsFillYourselfTitle"),
+        t("FormsTour:FormsFillYourself", {
+          inProgress: t("Common:InProgress"),
+        }),
+        callbacks,
+        FORMS_TOUR_LABEL,
+        {
+          reveal: () => {
+            spaceHooks.reveal();
+            launchHooks.reveal();
+          },
+          restore: launchHooks.restore,
+          navigates: true,
+        },
       ),
 
     // 5. In progress — the half of the answer nobody sees but its author. A

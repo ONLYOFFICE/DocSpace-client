@@ -49,6 +49,7 @@ import styles from "./Apps.module.scss";
 
 type AppsProps = {
   isInstalled?: AppsStore["isInstalled"];
+  isLoaded?: boolean;
   enable?: AppsStore["enable"];
   ensureLoaded?: AppsStore["ensureLoaded"];
   aiServicesEnabled?: boolean;
@@ -59,6 +60,7 @@ type AppsProps = {
 // "Not installed" group, and its URLs redirect to the dashboard.
 const Apps = ({
   isInstalled,
+  isLoaded = false,
   enable,
   ensureLoaded,
   aiServicesEnabled = true,
@@ -97,6 +99,10 @@ const Apps = ({
       <div className={styles.list}>
         {apps.map((app) => {
           const enabled = app.alwaysOn || (isInstalled?.(app.id) ?? true);
+          // `isInstalled` is optimistic until the list arrives (and stays so
+          // if it fails to load), so a switch is locked until it shows the
+          // real state rather than letting an admin flip a guess.
+          const isLocked = app.alwaysOn || !isLoaded || pendingId === app.id;
 
           return (
             <div
@@ -118,7 +124,7 @@ const Apps = ({
               <ToggleButton
                 className={styles.toggle}
                 isChecked={enabled}
-                isDisabled={app.alwaysOn || pendingId === app.id}
+                isDisabled={isLocked}
                 onChange={() => handleToggle(app.id, !enabled)}
                 dataTestId={`settings-app-toggle-${app.id}`}
               />
@@ -132,6 +138,7 @@ const Apps = ({
 
 export const Component = inject(({ appsStore, settingsStore }: TStore) => ({
   isInstalled: appsStore.isInstalled,
+  isLoaded: appsStore.isLoaded,
   enable: appsStore.enable,
   ensureLoaded: appsStore.ensureLoaded,
   aiServicesEnabled: settingsStore.aiServicesEnabled,

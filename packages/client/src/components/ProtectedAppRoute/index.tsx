@@ -43,6 +43,7 @@ type ProtectedAppRouteProps = {
   appId: string | string[];
   isInstalled: (id: string) => boolean;
   isAppsLoaded: boolean;
+  isAppsLoadFailed: boolean;
   ensureAppsLoaded: () => void;
   canManageApps: boolean;
   isGuest: boolean;
@@ -55,6 +56,7 @@ const ProtectedAppRoute = ({
   appId,
   isInstalled,
   isAppsLoaded,
+  isAppsLoadFailed,
   ensureAppsLoaded,
   canManageApps,
   isGuest,
@@ -65,8 +67,9 @@ const ProtectedAppRoute = ({
   }, [ensureAppsLoaded]);
 
   // `isInstalled` is optimistic until the list arrives, so a route that can
-  // actually be switched off (standalone) has to wait for the real answer.
-  if (canManageApps && !isAppsLoaded) return null;
+  // actually be switched off (standalone) has to wait for the real answer -
+  // but not past a failed load, which would leave the section blank for good.
+  if (canManageApps && !isAppsLoaded && !isAppsLoadFailed) return null;
 
   const appIds = Array.isArray(appId) ? appId : [appId];
 
@@ -83,6 +86,7 @@ const ProtectedAppRoute = ({
 export default inject<TStore>(({ appsStore, userStore }) => ({
   isInstalled: appsStore.isInstalled,
   isAppsLoaded: appsStore.isLoaded,
+  isAppsLoadFailed: appsStore.isLoadFailed,
   ensureAppsLoaded: appsStore.ensureLoaded,
   canManageApps: appsStore.canManageApps,
   isGuest: userStore.user?.isVisitor ?? false,

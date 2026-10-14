@@ -83,6 +83,11 @@ class AppsStore {
 
   isLoading = false;
 
+  // The last fetch of the list failed. A route that waits for the list stops
+  // waiting then, and lets the optimistic `isInstalled` decide, rather than
+  // leaving its section blank until the page is reloaded.
+  isLoadFailed = false;
+
   settingsStore: SettingsStore;
 
   constructor(settingsStore: SettingsStore) {
@@ -116,9 +121,13 @@ class AppsStore {
       runInAction(() => {
         this.apps = apps ?? [];
         this.isLoaded = true;
+        this.isLoadFailed = false;
       });
     } catch (err) {
       console.error("Failed to load apps", err);
+      runInAction(() => {
+        this.isLoadFailed = true;
+      });
     } finally {
       runInAction(() => {
         this.isLoading = false;
@@ -158,7 +167,8 @@ class AppsStore {
   // Whether the app is on offer - in the sidebar, on the dashboard and at its
   // URL. Optimistic until the list arrives, since every app ships enabled by
   // default: the sidebar must not flash the whole catalog under "Not installed"
-  // on load. A route that has to decide for real waits for `isLoaded` itself.
+  // on load. A route that has to decide for real waits for `isLoaded` itself,
+  // unless the list failed to load (`isLoadFailed`).
   isInstalled = (id: string): boolean => {
     if (isAppTemporarilyDisabled(id)) return false;
     if (!this.canManageApps || !this.isLoaded) return true;

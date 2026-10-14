@@ -85,6 +85,7 @@ const Bar = (props) => {
     isUserTariffAlmostLimit,
 
     currentColorScheme,
+    isBaseTheme,
 
     setMainBarVisible,
     isPersonalQuotaLimit,
@@ -129,6 +130,9 @@ const Bar = (props) => {
   const [campaigns, setCampaigns] = useState();
 
   const { loadLanguagePath } = getBannerAttribute();
+
+  const isBaseThemeRef = React.useRef(isBaseTheme);
+  isBaseThemeRef.current = isBaseTheme;
 
   const onCloseQuota = (currentBar) => {
     // The tariff bars stay closed for good — they are resolved by an upgrade.
@@ -332,7 +336,9 @@ const Bar = (props) => {
     }
 
     try {
-      const [htmlUrl, currentBar] = await loadLanguagePath();
+      const [htmlUrl, currentBar] = await loadLanguagePath(
+        isBaseThemeRef.current ? "light" : "dark",
+      );
 
       setHtmlLink(htmlUrl);
       setCampaigns(currentBar);
@@ -355,7 +361,7 @@ const Bar = (props) => {
 
   useEffect(() => {
     updateBanner();
-  }, [t]);
+  }, [t, isBaseTheme]);
 
   // The backend re-arms its own notification once the balance recovers, so the
   // dismissal is dropped on the same edge. Guarded on the true -> false
@@ -636,7 +642,7 @@ export default inject(
       isRoomsTariffLimit,
     } = currentQuotaStore;
 
-    const { currentColorScheme, setMainBarVisible } = settingsStore;
+    const { currentColorScheme, setMainBarVisible, theme } = settingsStore;
 
     const { formatWalletCurrency, isPayer } = paymentStore;
     const { walletLowBalance } = settingsStore;
@@ -667,6 +673,7 @@ export default inject(
       isUserTariffAlmostLimit,
 
       currentColorScheme,
+      isBaseTheme: theme?.isBase,
       setMainBarVisible,
 
       isPersonalQuotaLimit,

@@ -80,7 +80,7 @@ export const getBannerAttribute = () => {
       ? `${rects.height + 36}px`
       : "46px";
 
-  const loadLanguagePath = async () => {
+  const loadLanguagePath = async (theme: "light" | "dark" = "light") => {
     if (!window?.firebaseHelper) return;
 
     const lng: string[] | string = getCookie(LANGUAGE) || "en";
@@ -105,7 +105,7 @@ export const getBannerAttribute = () => {
 
     let htmlUrl =
       currentBar && window.firebaseHelper?.config?.authDomain
-        ? `https://${window.firebaseHelper.config.authDomain}/${language}/${currentBar}/index.html`
+        ? `https://${window.firebaseHelper.config.authDomain}/${language}/${currentBar}/index.html?theme=${theme}`
         : null;
 
     if (htmlUrl) {

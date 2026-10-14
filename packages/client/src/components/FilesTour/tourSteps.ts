@@ -45,7 +45,9 @@ import {
   menuStep,
   hoverRevealStep,
   revealStep,
+  navItemStep,
   sidebarListStep,
+  sidebarSelector,
   revealQuickActionTile,
   rewindQuickActions,
   type RevealHooks,
@@ -70,14 +72,13 @@ const NEW_MENU_SELECTOR = ".p-contextmenu";
 // The field, not the block around it: the "New" button lives in there too.
 const SEARCH_SELECTOR = "#filter_search-input .search-input-block";
 
-// What the step promises besides search: filtering, sorting, and the view
-// switch. Each is dropped from the spotlight when the bar does not show it.
-const FILTER_CONTROL_SELECTORS = [
-  SEARCH_SELECTOR,
-  "#filter-button",
+const FILTER_BUTTON_SELECTOR = "#filter-button";
+
+const SORT_AND_VIEW_SELECTORS = [
   "#sort-by-button",
   '[data-testid="view-selector"]',
 ];
+const SORT_AND_VIEW_TARGET = SORT_AND_VIEW_SELECTORS.join(", ");
 
 // One selector per view; the first match wins, so a row without the button is
 // stepped over. The table view hides it until the row is hovered.
@@ -126,19 +127,35 @@ export type TourStepFlags = {
   demoHooks?: RevealHooks;
 };
 
-/** Search, with the filter, sort and view controls beside it. */
-function searchStep(
+/** The filter bar, one step per errand: search, the filter, sorting and view. */
+function findSteps(
   t: TFunction,
   callbacks: TourStepCallbacks | undefined,
-): Step {
-  return elementGroupStep(
-    SEARCH_SELECTOR,
-    FILTER_CONTROL_SELECTORS,
-    t("FilesTour:TourFindFastTitle"),
-    t("FilesTour:TourFindFast"),
-    callbacks,
-    FILES_TOUR_LABEL,
-  );
+): Step[] {
+  return [
+    elementStep(
+      SEARCH_SELECTOR,
+      t("FilesTour:TourFindFastTitle"),
+      t("FilesTour:TourFindFast"),
+      callbacks,
+      FILES_TOUR_LABEL,
+    ),
+    elementStep(
+      FILTER_BUTTON_SELECTOR,
+      t("FilesTour:TourFilterTitle"),
+      t("FilesTour:TourFilter"),
+      callbacks,
+      FILES_TOUR_LABEL,
+    ),
+    elementGroupStep(
+      SORT_AND_VIEW_TARGET,
+      SORT_AND_VIEW_SELECTORS,
+      t("FilesTour:TourViewTitle"),
+      t("FilesTour:TourView"),
+      callbacks,
+      FILES_TOUR_LABEL,
+    ),
+  ];
 }
 
 /** The sidebar shortcuts, named by the sidebar's own labels. */
@@ -196,6 +213,7 @@ function getPersonalSteps(
     canCreate,
     showFilter,
     hasItems,
+    sectionId,
     isDemo,
     demoHooks,
   } = flags;
@@ -206,6 +224,16 @@ function getPersonalSteps(
   const canOpenNewMenu = canCreateFiles && isDesktop;
 
   return [
+    audience !== "guest" &&
+      sectionId &&
+      navItemStep(
+        sidebarSelector(sectionId),
+        t("FilesTour:TourFilesOverviewTitle"),
+        t("FilesTour:TourFilesOverview"),
+        callbacks,
+        FILES_TOUR_LABEL,
+      ),
+
     // 1. Create tiles. Rewind the carousel: stepping back from the AI chat tile
     // leaves it scrolled.
     canCreateFiles &&
@@ -245,7 +273,7 @@ function getPersonalSteps(
       ),
 
     // 4. Search and filter bar.
-    showFilter && searchStep(t, callbacks),
+    ...(showFilter ? findSteps(t, callbacks) : []),
 
     // 5. Share badge on a row; the table view shows it only on hover.
     hasItems &&
@@ -318,7 +346,7 @@ function getSharedWithMeSteps(
       ),
 
     // 3. Search and filter bar.
-    showFilter && searchStep(t, callbacks),
+    ...(showFilter ? findSteps(t, callbacks) : []),
 
     // 4. Sidebar shortcuts.
     placesStep(t, callbacks, flags),

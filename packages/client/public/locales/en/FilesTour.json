@@ -7,6 +7,10 @@
   "TourCreateAnythingTitle": "Create anything",
   "TourCreateFirst": "Start a document, a spreadsheet or a presentation, or upload the files you already have. One click, and you are working — with everything you have just seen at hand.",
   "TourCreateFirstEmpty": "Start a document, a spreadsheet or a presentation. One click, and you are working — with everything you have just seen at hand.",
+  "TourFilesOverview": "Files is your place to create, upload and organize documents. Open a file to work on it in your browser, or share it when someone else needs access.",
+  "TourFilesOverviewTitle": "Your everyday files",
+  "TourFilter": "Use the filter to narrow the list by file type or author. Clear the filters to return to the full list.",
+  "TourFilterTitle": "Narrow the list",
   "TourFindFast": "Type part of a file name to narrow the list and find what you need.",
   "TourFindFastTitle": "Find anything fast",
   "TourPlacesFavorites": "{{sectionName}} — starred files.",
@@ -21,5 +25,7 @@
   "TourSharedEmptyTitle": "Your list is empty for now",
   "TourSharedList": "Files and folders others share with you appear in {{sectionName}}. Open a file to work on it in your browser — the original stays where it is, so everyone works with the same shared file.",
   "TourSharedListTitle": "Shared with you",
-  "TourShareTitle": "Share and collaborate"
+  "TourShareTitle": "Share and collaborate",
+  "TourView": "Use the sort control to order the list, and the view control to switch between list and tile view.",
+  "TourViewTitle": "Choose your view"
 }

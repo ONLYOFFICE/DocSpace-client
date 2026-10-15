@@ -96,17 +96,22 @@ const HistoryMainTextFolderInfo = ({
 
   const isFromFolder = fromParentType === FolderType.DEFAULT;
 
+  const roomLabel =
+    parentType === FolderType.FormRoom
+      ? t("FeedLocationSpaceLabel", { folderTitle: parentTitle })
+      : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
+
   const destination = isFolder
     ? t("FeedLocationLabel", {
         folderTitle: isReorderFolder ? title! : parentTitle,
       })
     : isSection
       ? t("FeedLocationSectionLabel", { folderTitle: parentTitle })
-      : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
+      : roomLabel;
 
   const sourceDestination = isFromFolder
     ? t("FeedLocationLabelFrom", { folderTitle: fromParentTitle })
-    : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
+    : roomLabel;
 
   const className = isFromFolder ? "source-folder-label" : "folder-label";
 

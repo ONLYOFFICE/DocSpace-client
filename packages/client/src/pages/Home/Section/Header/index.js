@@ -170,6 +170,7 @@ const SectionHeaderContent = (props) => {
     showMenu,
     onCreateAndCopySharedLink,
     showNavigationButton,
+    isFormRoomRoot,
     startUpload,
     getFolderModel,
     contactsCanCreate,
@@ -916,7 +917,9 @@ const SectionHeaderContent = (props) => {
   );
 
   const navigationButtonLabel = showNavigationButton
-    ? t("Files:ShareRoom")
+    ? isFormRoomRoot
+      ? t("Files:ShareSpace")
+      : t("Files:ShareRoom")
     : null;
 
   const headerProps = React.useMemo(
@@ -1203,6 +1206,7 @@ export default inject(
       isSharedWithMeFolderRoot,
       isAIAgentsFolder,
       isPrivacyFolder,
+      isFormRoomRoot,
     } = treeFoldersStore;
 
     const {
@@ -1440,6 +1444,7 @@ export default inject(
       getGroupContextOptions,
       onCreateAndCopySharedLink,
       showNavigationButton,
+      isFormRoomRoot,
       startUpload,
       getFolderModel,
       onCreateRoom,

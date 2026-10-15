@@ -40,7 +40,7 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { FormFillingManageAction, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { CREATED_FORM_KEY, EDITOR_ID } from "@docspace/shared/constants";
+import { CREATED_FORM_KEY } from "@docspace/shared/constants";
 import { getFileInfo, manageFormFilling } from "@docspace/shared/api/files";
 import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 
@@ -55,7 +55,7 @@ import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type { TSelectedFileInfo } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import type { TData } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import { getFormsSectionFolderUrl, saveAs } from "@/utils";
+import { getDocEditor, getFormsSectionFolderUrl, saveAs } from "@/utils";
 import type { ConflictStateType } from "@/types";
 import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
 
@@ -132,8 +132,7 @@ const useStartFillingSelectDialog = (
   };
 
   const getFileUrl = useCallback(async () => {
-    const docEditor =
-      typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+    const docEditor = getDocEditor();
 
     docEditor?.downloadAs("pdf");
 

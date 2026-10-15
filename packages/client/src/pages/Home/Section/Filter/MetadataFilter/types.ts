@@ -37,6 +37,7 @@ import type { TMetadataFilterCondition } from "@docspace/shared/api/metadata/typ
 import type { TMetadataInput } from "@docspace/shared/utils/metadata";
 
 export type TFilterOperator =
+  | "contains"
   | "is"
   | "isAnyOf"
   | "equals"

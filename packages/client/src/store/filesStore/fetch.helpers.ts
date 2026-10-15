@@ -90,28 +90,6 @@ const { FilesFilter, RoomsFilter } = api;
 // FilesStore, where it was only referenced by fetchFiles).
 let requestCounter = 0;
 
-const SECTION_ALIASES = {
-  "@my": "myFolderId",
-  "@share": "sharedWithMeFolderId",
-} as const;
-
-const resolveRequestFolderId = async (
-  self: FilesStore,
-  folderId: Nullable<number | string>,
-  filter: TFilesFilter,
-) => {
-  const alias =
-    SECTION_ALIASES[String(folderId) as keyof typeof SECTION_ALIASES];
-
-  if (!alias || !filter.hasMetadataFilter()) return folderId as string;
-
-  if (!self.treeFoldersStore.treeFolders.length) {
-    await self.treeFoldersStore.fetchTreeFolders();
-  }
-
-  return String(self.treeFoldersStore[alias] ?? folderId);
-};
-
 // Network-fetch orchestration extracted from the FilesStore methods. These are
 // side-effectful actions (not computeds), so they are moved verbatim into free
 // functions taking the store instance as `self` — no reactivity implications.
@@ -202,12 +180,8 @@ export function fetchFilesImpl(
 
   let room: Nullable<TItem> = null;
 
-  const { signal } = self.filesController;
-
-  return resolveRequestFolderId(self, folderId, filterData)
-    .then((requestFolderId) =>
-      api.files.getFolder(requestFolderId, filterData, signal),
-    )
+  return api.files
+    .getFolder(folderId as string, filterData, self.filesController.signal)
     .then(async (data) => {
       let newTotal = data.total;
 

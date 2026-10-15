@@ -76,7 +76,7 @@ export const METADATA_FILTER_GROUP = "filter-metadata";
 export const TEMPLATE_CHIP_KEY = "metadata-template";
 
 const OPERATORS: Record<MetadataFieldType, TFilterOperator[]> = {
-  [MetadataFieldType.String]: ["is"],
+  [MetadataFieldType.String]: ["contains", "is"],
   [MetadataFieldType.Number]: ["equals", "greaterThan", "lessThan"],
   [MetadataFieldType.Date]: ["on", "before", "after"],
   [MetadataFieldType.SingleChoice]: ["is"],
@@ -114,22 +114,20 @@ export const toFilterCondition = (
   if (!value) return null;
 
   switch (operator) {
+    case "contains":
+      return { fieldId, op: "contains", value };
     case "equals":
       return isMetadataNumber(value) ? { fieldId, op: "eq", value } : null;
     case "greaterThan":
-      return isMetadataNumber(value)
-        ? { fieldId, op: "range", from: shiftNumber(value, 1) }
-        : null;
+      return isMetadataNumber(value) ? { fieldId, op: "gt", value } : null;
     case "lessThan":
-      return isMetadataNumber(value)
-        ? { fieldId, op: "range", to: shiftNumber(value, -1) }
-        : null;
+      return isMetadataNumber(value) ? { fieldId, op: "lt", value } : null;
     case "on":
       return { fieldId, op: "range", from: value, to: value };
     case "before":
-      return { fieldId, op: "range", to: shiftDay(value, -1) };
+      return { fieldId, op: "lt", value };
     case "after":
-      return { fieldId, op: "range", from: shiftDay(value, 1) };
+      return { fieldId, op: "gt", value };
     default:
       return { fieldId, op: "eq", value };
   }
@@ -153,7 +151,19 @@ export const fromFilterCondition = (
     };
   }
 
+  if (op === "contains") return { operator: "contains", input: value ?? "" };
+
   const isDate = type === MetadataFieldType.Date;
+
+  if (op === "gt") {
+    return { operator: isDate ? "after" : "greaterThan", input: value ?? "" };
+  }
+
+  if (op === "lt") {
+    return { operator: isDate ? "before" : "lessThan", input: value ?? "" };
+  }
+
+  if (op !== "range") return null;
 
   if (from && from === to) {
     return { operator: isDate ? "on" : "equals", input: from };
@@ -296,6 +306,8 @@ export const getOperatorLabel = (
   operator: TFilterOperator,
 ) => {
   switch (operator) {
+    case "contains":
+      return t("Metadata:OperatorContains");
     case "isAnyOf":
       return t("Metadata:OperatorIsAnyOf");
     case "equals":

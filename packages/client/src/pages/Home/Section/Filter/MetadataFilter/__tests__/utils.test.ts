@@ -89,7 +89,7 @@ const t = ((key: string, options?: Record<string, string>) =>
 
 describe("operators", () => {
   it("offers what the server can evaluate for each field type", () => {
-    expect(getOperators(MetadataFieldType.String)).toEqual(["is"]);
+    expect(getOperators(MetadataFieldType.String)).toEqual(["contains", "is"]);
     expect(getOperators(MetadataFieldType.Number)).toEqual([
       "equals",
       "greaterThan",
@@ -105,19 +105,35 @@ describe("operators", () => {
 });
 
 describe("conditions", () => {
-  it("turns strict comparisons into inclusive ranges", () => {
+  it("sends strict comparisons as gt and lt and text search as contains", () => {
     expect(
       toFilterCondition(amount, { operator: "greaterThan", input: "100" }),
-    ).toEqual({ fieldId: 2, op: "range", from: "101" });
+    ).toEqual({ fieldId: 2, op: "gt", value: "100" });
     expect(
       toFilterCondition(amount, { operator: "lessThan", input: "100" }),
-    ).toEqual({ fieldId: 2, op: "range", to: "99" });
+    ).toEqual({ fieldId: 2, op: "lt", value: "100" });
     expect(
       toFilterCondition(hearing, { operator: "before", input: "2026-09-15" }),
-    ).toEqual({ fieldId: 3, op: "range", to: "2026-09-14" });
+    ).toEqual({ fieldId: 3, op: "lt", value: "2026-09-15" });
     expect(
       toFilterCondition(hearing, { operator: "after", input: "2026-12-31" }),
-    ).toEqual({ fieldId: 3, op: "range", from: "2027-01-01" });
+    ).toEqual({ fieldId: 3, op: "gt", value: "2026-12-31" });
+    expect(
+      toFilterCondition(client, { operator: "contains", input: " acm " }),
+    ).toEqual({ fieldId: 1, op: "contains", value: "acm" });
+  });
+
+  it("still reads links saved with shifted inclusive ranges", () => {
+    expect(
+      fromFilterCondition(amount, { fieldId: 2, op: "range", from: "101" }),
+    ).toEqual({ operator: "greaterThan", input: "100" });
+    expect(
+      fromFilterCondition(hearing, {
+        fieldId: 3,
+        op: "range",
+        to: "2026-09-14",
+      }),
+    ).toEqual({ operator: "before", input: "2026-09-15" });
   });
 
   it("skips empty and invalid values", () => {
@@ -133,6 +149,7 @@ describe("conditions", () => {
   it("restores every draft it produced", () => {
     const drafts: [TMetadataField, TConditionDraft][] = [
       [client, { operator: "is", input: "ACME" }],
+      [client, { operator: "contains", input: "ACM" }],
       [amount, { operator: "equals", input: "42" }],
       [amount, { operator: "greaterThan", input: "100" }],
       [amount, { operator: "lessThan", input: "100" }],
@@ -155,7 +172,7 @@ describe("conditions", () => {
     expect(getInputLabel(areas, ["x", "y"], "en")).toBe("Tax, IP");
   });
 
-  it("leaves a two-sided range it cannot show unread", () => {
+  it("leaves conditions it cannot show unread", () => {
     expect(
       fromFilterCondition(hearing, {
         fieldId: 3,
@@ -163,6 +180,9 @@ describe("conditions", () => {
         from: "2026-01-01",
         to: "2026-06-30",
       }),
+    ).toBe(null);
+    expect(
+      fromFilterCondition(amount, { fieldId: 2, op: "gte", value: "100" }),
     ).toBe(null);
   });
 });

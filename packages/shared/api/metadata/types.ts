@@ -133,7 +133,15 @@ export type TAssignMetadataTemplatesRequest = {
   conflictResolveType?: TMetadataConflictResolveType;
 };
 
-export type TMetadataFilterOperator = "eq" | "range" | "in";
+export type TMetadataFilterOperator =
+  | "eq"
+  | "contains"
+  | "range"
+  | "gt"
+  | "gte"
+  | "lt"
+  | "lte"
+  | "in";
 
 export type TMetadataFilterCondition = {
   fieldId?: number;

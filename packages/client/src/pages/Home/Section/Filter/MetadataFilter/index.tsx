@@ -106,9 +106,13 @@ const MetadataFilterSection = ({
     <div className={styles.section} data-testid="metadata_filter_section">
       <div className={styles.header}>
         <Heading size={HeadingSize.xsmall} level={HeadingLevel.h1}>
-          {state?.conditions.length
-            ? t("Metadata:ConditionsCount", { count: state.conditions.length })
-            : t("Common:SubmenuMetadata")}
+          {!state?.conditions.length
+            ? t("Common:SubmenuMetadata")
+            : state.conditions.length === 1
+              ? t("Metadata:ConditionsCount_one", { count: 1 })
+              : t("Metadata:ConditionsCount_other", {
+                  count: state.conditions.length,
+                })}
         </Heading>
       </div>
 

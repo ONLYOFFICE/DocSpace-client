@@ -39,7 +39,7 @@ import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-contain
 import type { TMetadataInput } from "@docspace/shared/utils/metadata";
 
 import type { TTemplateForm } from "../../types";
-import { isValidFieldInput } from "../../utils";
+import { getFieldInputError } from "../../utils";
 import FieldInput from "../FieldInput";
 import styles from "../Panel.module.scss";
 
@@ -49,27 +49,36 @@ type TemplateFormProps = {
 };
 
 const TemplateForm = ({ form, onChange }: TemplateFormProps) => {
-  const { t } = useTranslation(["Metadata"]);
+  const { t, i18n } = useTranslation(["Metadata"]);
 
   return (
     <div className={styles.form}>
-      {form.template.fields.map((field) => (
-        <FieldContainer
-          key={field.id}
-          labelVisible
-          isVertical
-          removeMargin
-          labelText={field.name}
-          hasError={!isValidFieldInput(field, form.inputs[field.id])}
-          errorMessage={t("Metadata:WholeNumberError")}
-        >
-          <FieldInput
-            field={field}
-            value={form.inputs[field.id]}
-            onChange={(input) => onChange(field.id, input)}
-          />
-        </FieldContainer>
-      ))}
+      {form.template.fields.map((field) => {
+        const error = getFieldInputError(
+          t,
+          field,
+          form.inputs[field.id],
+          i18n.language,
+        );
+
+        return (
+          <FieldContainer
+            key={field.id}
+            labelVisible
+            isVertical
+            removeMargin
+            labelText={field.name}
+            hasError={!!error}
+            errorMessage={error ?? undefined}
+          >
+            <FieldInput
+              field={field}
+              value={form.inputs[field.id]}
+              onChange={(input) => onChange(field.id, input)}
+            />
+          </FieldContainer>
+        );
+      })}
     </div>
   );
 };

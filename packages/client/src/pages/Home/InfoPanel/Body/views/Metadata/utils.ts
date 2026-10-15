@@ -56,6 +56,7 @@ import {
   toMetadataValue,
   type TMetadataInput,
 } from "@docspace/shared/utils/metadata";
+import type { TTranslation } from "@docspace/shared/types";
 import { isFile, isRoom } from "@docspace/shared/utils/typeGuards";
 
 import type {
@@ -164,8 +165,16 @@ export const toggleOption = (optionIds: string[], optionId: string) =>
     ? optionIds.filter((id) => id !== optionId)
     : [...optionIds, optionId];
 
+export const getNumberInputError = (input: string) => {
+  const value = input.trim();
+
+  if (!value || isMetadataNumber(value)) return null;
+
+  return /^-?\d+$/.test(value) ? "outOfRange" : "notWhole";
+};
+
 export const isValidNumberInput = (input: string) =>
-  !input.trim() || isMetadataNumber(input.trim());
+  !getNumberInputError(input);
 
 const normalizeInput = (input: TMetadataInput) =>
   Array.isArray(input) ? [...input].sort() : input.trim();
@@ -196,6 +205,32 @@ export const isValidFieldInput = (
 ) =>
   type !== MetadataFieldType.Number ||
   (typeof input === "string" && isValidNumberInput(input));
+
+export const getFieldInputError = (
+  t: TTranslation,
+  { type }: Pick<TEntryMetadataField, "type">,
+  input: TMetadataInput,
+  locale: string,
+) => {
+  if (type !== MetadataFieldType.Number || typeof input !== "string") {
+    return null;
+  }
+
+  const error = getNumberInputError(input);
+
+  if (error === "notWhole") return t("Metadata:WholeNumberError");
+
+  if (error === "outOfRange") {
+    const { format } = new Intl.NumberFormat(locale);
+
+    return t("Metadata:NumberOutOfRangeError", {
+      min: format(Number.MIN_SAFE_INTEGER),
+      max: format(Number.MAX_SAFE_INTEGER),
+    });
+  }
+
+  return null;
+};
 
 export const isTemplateFormValid = ({ template, inputs }: TTemplateForm) =>
   template.fields.every((field) => isValidFieldInput(field, inputs[field.id]));

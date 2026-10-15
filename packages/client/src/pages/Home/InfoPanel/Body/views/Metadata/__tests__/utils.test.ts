@@ -42,6 +42,7 @@ import type {
   TEntryMetadataTemplate,
   TMetadataTemplate,
 } from "@docspace/shared/api/metadata/types";
+import type { TTranslation } from "@docspace/shared/types";
 import { METADATA_CUSTOM_FIELDS_MAX } from "@docspace/shared/utils/metadata";
 
 import type { TCustomFieldDraft, TMetadataSelection } from "../types";
@@ -57,6 +58,7 @@ import {
   getChangedValues,
   getCustomFieldChanges,
   getEntryKind,
+  getFieldInputError,
   getMetadataItemType,
   getUnassignedTemplates,
   getVisibleTemplates,
@@ -278,6 +280,23 @@ describe("template form", () => {
     ).toBe(false);
     expect(isValidNumberInput(" -42 ")).toBe(true);
     expect(isValidNumberInput("1e3")).toBe(false);
+  });
+
+  it("tells a fraction from a whole number that is too large", () => {
+    const t = ((key: string, options?: Record<string, string>) =>
+      options ? `${key}:${options.min}..${options.max}` : key) as TTranslation;
+    const number = { type: MetadataFieldType.Number };
+
+    expect(getFieldInputError(t, number, "1.5", "en")).toBe(
+      "Metadata:WholeNumberError",
+    );
+    expect(getFieldInputError(t, number, "54444444444444444444444", "en")).toBe(
+      "Metadata:NumberOutOfRangeError:-9,007,199,254,740,991..9,007,199,254,740,991",
+    );
+    expect(getFieldInputError(t, number, "9007199254740991", "en")).toBe(null);
+    expect(
+      getFieldInputError(t, { type: MetadataFieldType.String }, "1.5", "en"),
+    ).toBe(null);
   });
 
   it("toggles options in and out of a multi select", () => {

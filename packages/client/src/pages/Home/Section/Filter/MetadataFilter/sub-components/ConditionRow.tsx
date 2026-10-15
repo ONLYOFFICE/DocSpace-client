@@ -40,7 +40,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import type { TMetadataField } from "@docspace/shared/api/metadata/types";
 
 import FieldInput from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/sub-components/FieldInput";
-import { isValidFieldInput } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/utils";
+import { getFieldInputError } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/utils";
 
 import type { TConditionDraft, TFilterOperator } from "../types";
 import { getOperatorLabel, getOperators } from "../utils";
@@ -54,7 +54,9 @@ type ConditionRowProps = {
 };
 
 const ConditionRow = ({ field, draft, onChange }: ConditionRowProps) => {
-  const { t } = useTranslation(["Metadata"]);
+  const { t, i18n } = useTranslation(["Metadata"]);
+
+  const error = getFieldInputError(t, field, draft.input, i18n.language);
 
   const operatorOptions = getOperators(field.type).map((operator) => ({
     key: operator,
@@ -87,11 +89,11 @@ const ConditionRow = ({ field, draft, onChange }: ConditionRowProps) => {
           emptyLabel={t("Metadata:AnyValue")}
         />
 
-        {isValidFieldInput(field, draft.input) ? null : (
+        {error ? (
           <Text className={styles.error} fontSize="12px">
-            {t("Metadata:WholeNumberError")}
+            {error}
           </Text>
-        )}
+        ) : null}
       </div>
     </FilterField>
   );

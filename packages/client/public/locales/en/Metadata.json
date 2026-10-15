@@ -56,6 +56,7 @@
   "NotFoundTemplates": "No templates found",
   "NotFoundTemplatesDescription": "No templates match your search. Try a different name or clear the search field to see all templates.",
   "NotImmediateOperation": "This operation is not immediate and may take some time",
+  "NumberOutOfRangeError": "Enter a number from {{min}} to {{max}}",
   "OperatorAfter": "after",
   "OperatorBefore": "before",
   "OperatorContains": "contains",

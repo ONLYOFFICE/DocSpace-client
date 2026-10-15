@@ -409,7 +409,7 @@ test.describe("Files tour on an emptied personal space", () => {
     await expect(page.locator('[data-testid="quick-actions"]')).toBeVisible();
     await expect(page.locator('[data-testid^="table-row-"]')).toHaveCount(3);
 
-    await walkTour(page, ["desktop", "files-tour", "personal-empty"]);
+    await walkTour(page, ["desktop", "files-tour", "admin-empty"]);
   });
 
   test("hands the section back before the closing step", async ({

@@ -251,7 +251,7 @@ test.describe("Rooms tour on an empty portal", () => {
       page.getByRole("main").getByText("Collaboration room").first(),
     ).toBeVisible();
 
-    await walkTour(page, ["desktop", "rooms-tour", "empty"]);
+    await walkTour(page, ["desktop", "rooms-tour", "admin-empty"]);
   });
 
   test("hands the section back before the closing step", async ({

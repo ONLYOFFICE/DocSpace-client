@@ -238,7 +238,7 @@ test.describe("AI Agents tour on an empty portal", () => {
       page.getByRole("main").getByText(DEMO_AGENT_TITLE),
     ).toBeVisible();
 
-    await walkTour(page, ["desktop", "ai-agents-tour", "empty"]);
+    await walkTour(page, ["desktop", "ai-agents-tour", "admin-empty"]);
   });
 
   test("hands the section back before the closing step", async ({

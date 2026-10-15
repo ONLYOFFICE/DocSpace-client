@@ -318,7 +318,7 @@ test.describe("Forms tour on an empty portal", () => {
       page.getByRole("main").getByText(DEMO_SPACE_TITLE).first(),
     ).toBeVisible();
 
-    await walkTour(page, ["desktop", "forms-tour", "empty"]);
+    await walkTour(page, ["desktop", "forms-tour", "admin-empty"]);
   });
 
   test("walks into a stand-in space and back out again", async ({

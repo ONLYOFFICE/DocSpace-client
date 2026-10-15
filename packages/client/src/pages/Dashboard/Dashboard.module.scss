@@ -477,6 +477,23 @@
   }
 }
 
+// An app switched off on a standalone portal, shown only to admins who can
+// switch it on: outlined rather than filled, so it reads as a status rather
+// than as the "Installed" one.
+.moduleNotInstalledBadge {
+  :global(.light) & {
+    background-color: transparent;
+    box-shadow: inset 0 0 0 1px $gray-strong;
+    color: $gray;
+  }
+
+  :global(.dark) & {
+    background-color: transparent;
+    box-shadow: inset 0 0 0 1px $gray-dark-strong;
+    color: $gray-dark;
+  }
+}
+
 // Action row, pinned to the bottom of the card so buttons line up across a row
 // of cards whose descriptions differ in length (`margin-block-start: auto`
 // needs the description above not to grow, hence the `flex: 1` there).

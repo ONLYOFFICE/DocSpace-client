@@ -43,6 +43,7 @@
   "AppliesToRooms": "{{rooms}} (sisältäen jaetut kansiot/tiedostot huoneesta)",
   "AppliesToRoomsDescription": "Kieltämällä linkin luominen kohteessa {{rooms}}, uudet linkit luodaan vain tyypillä työtilan käyttäjät.",
   "AppliesToRoomsWarning": "Julkisista huoneista tulee myös vain sisäisiä, eivätkä ne ole ulkoisten käyttäjien käytettävissä.",
+  "AppsDescription": "Hallitse, mitkä sovellukset ovat käytettävissä työtilassasi. Käytössä olevat sovellukset näkyvät päävalikossa käyttäjille, joilla on niihin oikeus.",
   "AuditSubheader": "Selaa listaa viimeaikaisista muutoksista, joita käyttäjät ovat tehneet työtilassasi, kuten huoneiden, tiedostojen ja muiden kohteiden luominen, muokkaaminen tai poistaminen.",
   "AuditTrailNav": "Tapahtumien seuranta",
   "AuthorizationKeysInfo": "Ota kolmannen osapuolen palvelut käyttöön työtilassasi.",

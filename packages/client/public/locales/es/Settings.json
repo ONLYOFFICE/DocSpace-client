@@ -43,6 +43,7 @@
   "AppliesToRooms": "{{rooms}} (incluidas las carpetas/archivos compartidos de la sala)",
   "AppliesToRoomsDescription": "Al prohibir la creación de enlaces en {{rooms}}, los nuevos enlaces solo se crearán con el tipo Solo usuarios del espacio de trabajo.",
   "AppliesToRoomsWarning": "Las salas públicas también pasarán a ser solo de uso interno y no serán accesibles para usuarios externos.",
+  "AppsDescription": "Gestione qué aplicaciones están disponibles en su espacio de trabajo. Las aplicaciones habilitadas aparecerán en el menú principal para los usuarios que tengan acceso a ellas.",
   "AuditSubheader": "Consulte una lista de los cambios recientes realizados por los usuarios en todo su espacio de trabajo, como la creación, edición o eliminación de salas, archivos y otros elementos.",
   "AuditTrailNav": "Rastro de auditoría",
   "AuthorizationKeysInfo": "Active los servicios de terceros para su espacio de trabajo.",

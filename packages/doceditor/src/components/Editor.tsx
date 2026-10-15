@@ -45,6 +45,7 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
@@ -62,6 +63,7 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
+import useAIAttachFile from "@/hooks/useAIAttachFile";
 import useGoBackAndClose from "@/hooks/useGoBackAndClose";
 import useFileEncryptionKeys from "@/hooks/useFileEncryptionKeys";
 import { isPDFDocument } from "@/utils";
@@ -96,6 +98,7 @@ const Editor = ({
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
+  onAIRequestStorageFile,
   onOpenRoleMappingPanel,
   setFillingStatusDialogVisible,
   openShareFormDialog,
@@ -151,6 +154,14 @@ const Editor = ({
     onOpenRoleMappingPanel,
     shareKey,
       disconnectUsers,
+  });
+
+  // AI is not available to guests and anonymous viewers — the same rule the
+  // editor's AI plugin init follows in useEditorEvents.
+  useAIAttachFile({
+    documentServerUrl,
+    enabled: Boolean(user) && !user?.isVisitor && !isOAuthFrame(),
+    requestStorageFile: onAIRequestStorageFile,
   });
 
   useInit({

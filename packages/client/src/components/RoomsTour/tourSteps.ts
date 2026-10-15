@@ -48,6 +48,7 @@ import {
   revealStep,
   revealQuickActionTile,
   rewindQuickActions,
+  STAND_IN_ROW_SELECTORS,
 } from "SRC_DIR/components/Tour/stepBuilders";
 import { ROOMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import TourList from "SRC_DIR/components/Tour/TourList";
@@ -67,8 +68,6 @@ export const GROUPS_SELECTOR = ".group-tags";
 export const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
-const SECOND_ITEM_SELECTOR =
-  '[data-testid="table-row-1"], [data-testid="files_row_1"], [data-testid="tile_1"]';
 
 // Only mounted while the panel is open.
 const INFO_PANEL_SELECTOR = ".info-panel";
@@ -202,12 +201,16 @@ export function getTourSteps(
     // sample, and the step says so before pointing at it.
     isDemo &&
       hasItems &&
-      fileItemStep(
-        SECOND_ITEM_SELECTOR,
+      elementGroupStep(
+        FIRST_ITEM_SELECTOR,
+        STAND_IN_ROW_SELECTORS,
         t("RoomsTour:RoomsDemoPreviewTitle"),
         t("RoomsTour:RoomsDemoPreview"),
         callbacks,
         ROOMS_TOUR_LABEL,
+        4,
+        undefined,
+        true,
       ),
 
     // 5. Members: the Contacts tab and the list, kept inside the panel.

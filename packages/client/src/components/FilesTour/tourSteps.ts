@@ -51,6 +51,7 @@ import {
   revealQuickActionTile,
   rewindQuickActions,
   type RevealHooks,
+  STAND_IN_ROW_SELECTORS,
 } from "SRC_DIR/components/Tour/stepBuilders";
 import { FILES_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 
@@ -260,6 +261,21 @@ function getPersonalSteps(
         revealQuickActionTile('[data-testid="quick-ai-chat"]'),
       ),
 
+    // 2a. The sample notice, on a stood-in list only.
+    isDemo &&
+      hasItems &&
+      elementGroupStep(
+        FIRST_ITEM_SELECTOR,
+        STAND_IN_ROW_SELECTORS,
+        t("RoomsTour:RoomsDemoPreviewTitle"),
+        t("FilesTour:TourDemoPreview"),
+        callbacks,
+        FILES_TOUR_LABEL,
+        4,
+        undefined,
+        true,
+      ),
+
     // 3. Upload lives in the "New" menu.
     canOpenNewMenu &&
       menuStep(
@@ -319,6 +335,21 @@ function getSharedWithMeSteps(
   const { showFilter, hasItems, isDemo, demoHooks } = flags;
 
   return [
+    // 0. The sample notice, on a stood-in list only.
+    isDemo &&
+      hasItems &&
+      elementGroupStep(
+        FIRST_ITEM_SELECTOR,
+        STAND_IN_ROW_SELECTORS,
+        t("RoomsTour:RoomsDemoPreviewTitle"),
+        t("FilesTour:TourDemoPreview"),
+        callbacks,
+        FILES_TOUR_LABEL,
+        4,
+        undefined,
+        true,
+      ),
+
     // 1. What the section is, anchored on the first row.
     hasItems &&
       fileItemStep(

@@ -144,18 +144,14 @@ describe("getTourSteps — room admin", () => {
     );
   });
 
-  it("names the list as a sample on its second row, leaving the first to the next step", () => {
-    document.body.innerHTML =
-      '<div data-testid="table-row-0"></div><div data-testid="table-row-1"></div>';
+  it("names the list as a sample over all three stand-in rows", () => {
     const sample = steps(demoFlags).find(
       (step) => step.title === "RoomsTour:RoomsDemoPreviewTitle",
     )!;
 
-    expect((sample.target as () => Element | null)()).toBe(
-      document.querySelector('[data-testid="table-row-1"]'),
-    );
-
-    document.body.innerHTML = "";
+    // One spotlight over the three rows, and the tooltip anchored on it.
+    expect(sample.spotlightTarget).toBeTypeOf("function");
+    expect(sample.target).toBe(sample.spotlightTarget);
   });
 
   it("closes a run on the section's own rooms on the New room button", () => {

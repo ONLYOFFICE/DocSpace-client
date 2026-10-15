@@ -173,6 +173,20 @@ describe("getTourSteps — owner", () => {
     expect(closing?.target).toBe(NEW_BUTTON_TARGET);
   });
 
+  it("names a stood-in list as a sample over its three rows, before any row step", () => {
+    const demoTitles = titles(ownerDemoFlags);
+    const sample = demoTitles.indexOf("RoomsTour:RoomsDemoPreviewTitle");
+
+    expect(sample).toBeGreaterThan(-1);
+    expect(demoTitles[sample + 1]).toBe("FilesTour:TourBringFilesTitle");
+    // One spotlight over the three rows, and the tooltip anchored on it.
+    const step = steps(ownerDemoFlags)[sample];
+    expect(step.spotlightTarget).toBeTypeOf("function");
+    expect(step.target).toBe(step.spotlightTarget);
+    // Not said on a list of the user's own.
+    expect(titles(ownerFlags)).not.toContain("RoomsTour:RoomsDemoPreviewTitle");
+  });
+
   it("closes on the empty screen's own options when the list was stood in for", () => {
     const closing = steps(ownerDemoFlags).at(-1);
 
@@ -377,6 +391,11 @@ describe("getTourSteps — guest on Shared with me", () => {
     expect(
       titles({ ...sharedFlags, hasItems: false, showFilter: false }),
     ).toEqual(["FilesTour:TourPlacesTitle"]);
+  });
+
+  it("opens a stood-in Shared with me on the sample notice", () => {
+    expect(titles(sharedDemoFlags)[0]).toBe("RoomsTour:RoomsDemoPreviewTitle");
+    expect(titles(sharedFlags)).not.toContain("RoomsTour:RoomsDemoPreviewTitle");
   });
 
   it("closes on the empty screen only when the list was stood in for", () => {

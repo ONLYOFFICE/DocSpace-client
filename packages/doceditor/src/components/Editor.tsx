@@ -45,6 +45,7 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
@@ -62,11 +63,14 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
+import useAIAttachFile from "@/hooks/useAIAttachFile";
 import useGoBackAndClose from "@/hooks/useGoBackAndClose";
 import useFileEncryptionKeys from "@/hooks/useFileEncryptionKeys";
 import { isPDFDocument } from "@/utils";
 
 import Bar from "./Bar";
+
+type TCustomization = NonNullable<IConfig["editorConfig"]>["customization"];
 
 const Editor = ({
   config,
@@ -94,6 +98,7 @@ const Editor = ({
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
+  onAIRequestStorageFile,
   onOpenRoleMappingPanel,
   setFillingStatusDialogVisible,
   openShareFormDialog,
@@ -151,6 +156,14 @@ const Editor = ({
       disconnectUsers,
   });
 
+  // AI is not available to guests and anonymous viewers — the same rule the
+  // editor's AI plugin init follows in useEditorEvents.
+  useAIAttachFile({
+    documentServerUrl,
+    enabled: Boolean(user) && !user?.isVisitor && !isOAuthFrame(),
+    requestStorageFile: onAIRequestStorageFile,
+  });
+
   useInit({
     config,
     successAuth,
@@ -188,15 +201,17 @@ const Editor = ({
       : null,
   );
 
+  // The server sends `fileType`, `type` and the like as plain strings; their
+  // values are the editor's own, so the config is handed over as `IConfig`.
   const newConfig: IConfig = useMemo(() => {
     return config
-      ? {
+      ? ({
           document: { ...config.document, title: resolvedTitle },
           documentType: config.documentType,
           token: config.token,
           type: config.type,
           editorConfig: { ...config.editorConfig },
-        }
+        } as IConfig)
       : {};
   }, [config, resolvedTitle]);
 
@@ -204,9 +219,7 @@ const Editor = ({
 
   // if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
-  const sdkCustomization: NonNullable<
-    IConfig["editorConfig"]
-  >["customization"] = sdkConfig?.editorCustomization;
+  const sdkCustomization = sdkConfig?.editorCustomization as TCustomization;
 
   try {
     if (
@@ -424,8 +437,6 @@ const Editor = ({
               }
             : newConfig
         }
-        height="100%"
-        width="100%"
       />
     </div>
   );

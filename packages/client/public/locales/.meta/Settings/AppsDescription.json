@@ -1,19 +1,19 @@
 {
-  "key_path": "Installed",
-  "content": "Installed",
-  "content_en_sha1_hash": "7bb4405cdfc9a15a3759bb0a3bbc05c3aadb95d3",
-  "created_at": "2026-08-20T15:38:18.642Z",
-  "updated_at": "2026-08-28T14:38:40.232Z",
+  "key_path": "AppsDescription",
+  "content": "Manage which apps are available in your workspace. Enabled apps will appear in the main menu for users who have access to them.",
+  "content_en_sha1_hash": "45a818015699c64c0d7d383f026a4ebcaf36b779",
+  "created_at": "2026-10-14T14:53:16.000Z",
+  "updated_at": "2026-10-14T15:11:10.029Z",
   "comment": {
-    "text": "Badge shown on a module card in the apps catalog when the module is already installed, displayed next to the module title with a tick icon.",
+    "text": "Intro paragraph at the top of the Settings -> Apps page of a self-hosted portal, above the list of apps (Rooms, Forms, AI Agents) with an on/off switch for each. Explains that the administrator decides here which apps the portal offers. \"Main menu\" is the left sidebar of the portal.",
     "is_auto": false,
-    "updated_at": "2026-08-20T15:38:18.642Z"
+    "updated_at": "2026-10-14T14:53:16.000Z"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/ModuleCard.tsx",
-      "line_number": 131,
-      "context": "{mod.title}\n </Text>\n {mod.installed ? (\n <Text as=\"span\" className={styles.moduleInstalledBadge}>\n <TickSvg />\n {t(\"Common:Installed\")}\n </Text>\n ) : null}\n </div>\n </div>",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/apps/index.tsx",
+      "line_number": 96,
+      "context": "};\n \n return (\n <div className={styles.body}>\n <Text as=\"p\" className={styles.description}>\n {t(\"Settings:AppsDescription\")}\n </Text>\n \n <div className={styles.list}>\n {apps.map((app) => {\n const enabled = app.alwaysOn || (isInstalled?.(app.id) ?? true);",
       "module": "/packages/client"
     }
   ],

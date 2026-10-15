@@ -84,12 +84,21 @@ export type AppCatalogItem = {
   icon: React.ReactNode;
   title: string;
   description: string;
-  href?: string;
-  supported: boolean;
+  /** Files is the core of the portal and cannot be switched off. */
   alwaysOn: boolean;
 };
 
-export const useAppsCatalog = (): AppCatalogItem[] => {
+/**
+ * The apps an administrator can switch on and off in Settings -> Apps. The
+ * arbiter and private rooms are still unreleased: they stay behind their opt-in
+ * flags (see disabled-apps) and are filtered out below without them.
+ */
+export const useAppsCatalog = ({
+  aiServicesEnabled,
+}: {
+  /** With AI switched off portal-wide, AI Agents is not on offer at all. */
+  aiServicesEnabled: boolean;
+}): AppCatalogItem[] => {
   const { t } = useTranslation(["Common"]);
 
   const catalog: AppCatalogItem[] = [
@@ -98,8 +107,6 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
       icon: <CatalogFolderIcon />,
       title: t("Common:Files"),
       description: t("Common:DashboardFilesDescription"),
-      href: "/ai-files",
-      supported: true,
       alwaysOn: true,
     },
     {
@@ -107,8 +114,6 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
       icon: <CatalogRoomsIcon />,
       title: t("Common:Rooms"),
       description: t("Common:DashboardRoomsDescription"),
-      href: "/ai-rooms",
-      supported: true,
       alwaysOn: false,
     },
     {
@@ -116,26 +121,24 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
       icon: <CatalogDocumentsIcon />,
       title: t("Common:Forms"),
       description: t("Common:DashboardFormsDescription"),
-      href: "/ai-forms",
-      supported: true,
       alwaysOn: false,
     },
-    {
-      id: "ai-agents",
-      icon: <AiAgentsIcon />,
-      title: t("Common:AIAgents"),
-      description: t("Common:DashboardAIChatAgentsDescription"),
-      href: "/agents",
-      supported: true,
-      alwaysOn: false,
-    },
+    ...(aiServicesEnabled
+      ? [
+          {
+            id: "ai-agents" as const,
+            icon: <AiAgentsIcon />,
+            title: t("Common:AIAgents"),
+            description: t("Common:DashboardAIChatAgentsDescription"),
+            alwaysOn: false,
+          },
+        ]
+      : []),
     {
       id: "ai-arbiter",
       icon: <CatalogAiArbiterIcon />,
       title: t("Common:DashboardAIArbiterTitle"),
       description: t("Common:DashboardAIArbiterDescription"),
-      href: "/ai-arbiter",
-      supported: true,
       alwaysOn: false,
     },
     {
@@ -143,13 +146,9 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
       icon: <CatalogPrivateIcon />,
       title: t("Common:DashboardE2eRoomsTitle"),
       description: t("Common:DashboardE2eRoomsDescription"),
-      href: "/e2e-rooms",
-      supported: true,
       alwaysOn: false,
     },
   ];
 
-  // Apps that are disabled or still unreleased (private rooms) must not be
-  // offered anywhere, so they never reach the catalog either.
   return catalog.filter((app) => !isAppTemporarilyDisabled(app.id));
 };

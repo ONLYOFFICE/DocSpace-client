@@ -102,6 +102,7 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
 			color={sideColor}
 			className={`${styles.styledText} row_update-text`}
 			truncate
+			dir="auto"
 			data-tooltip-id={`${id}`}
 			data-tip=""
 		>

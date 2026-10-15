@@ -43,6 +43,7 @@
   "AppliesToRooms": "{{rooms}} (incluse cartelle/file condivisi dalla stanza)",
   "AppliesToRoomsDescription": "Vietando la creazione di link in {{rooms}}, i nuovi link verranno creati solo con il tipo Solo utenti dello spazio di lavoro.",
   "AppliesToRoomsWarning": "Anche le Stanze pubbliche diventeranno solo interne e non saranno accessibili agli utenti esterni.",
+  "AppsDescription": "Gestisci le app disponibili nel tuo spazio di lavoro. Le app abilitate verranno visualizzate nel menu principale per gli utenti che vi hanno accesso.",
   "AuditSubheader": "Sfoglia un elenco delle modifiche recenti apportate dagli utenti nel tuo spazio di lavoro, come la creazione, la modifica o l'eliminazione di stanze, file e altri elementi.",
   "AuditTrailNav": "Registro di controllo",
   "AuthorizationKeysInfo": "Abilita servizi di terze parti per il tuo spazio di lavoro.",

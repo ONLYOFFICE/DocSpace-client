@@ -103,13 +103,13 @@ const PlanHeaderLoader = ({
   </div>
 );
 
-// Mirrors the profile card ({@link ./ProfileCard}): title + a 4-field grid,
+// Mirrors the profile card ({@link ./ProfileCard}): title + a 5-field grid,
 // each field being a label + value line.
 const ProfileCardLoader = () => (
   <div className={styles.profileCard}>
     <RectangleSkeleton width="160px" height="16px" borderRadius="3px" />
     <div className={styles.profileCardGrid}>
-      {Array.from({ length: 4 }, (_, index) => (
+      {Array.from({ length: 5 }, (_, index) => (
         <div key={index} className={styles.profileCardField}>
           <RectangleSkeleton width="80px" height="12px" borderRadius="3px" />
           <RectangleSkeleton width="120px" height="16px" borderRadius="3px" />

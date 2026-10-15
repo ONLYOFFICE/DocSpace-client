@@ -59,6 +59,8 @@ minimumReleaseAgeExclude:
   - '@next/swc-win32-x64-msvc@16.3.6'
   - next@16.3.6
   - '@onlyoffice/docspace-sdk-js@2.2.0'
+  - '@onlyoffice/doceditor-types@10.0.0'
+  - '@onlyoffice/document-editor-react@2.3.0'
 
 # The peers an app has to carry for @onlyoffice/ai-chat. ai-chat declares the
 # libraries it is built on -- the assistant-ui widgets, the radix primitives,
@@ -78,8 +80,8 @@ catalog:
   '@assistant-ui/react': '^0.11.58'
   '@assistant-ui/react-markdown': '0.11.10'
   '@codemirror/lang-json': '6.0.2'
-  '@codemirror/state': '6.5.2'
-  '@codemirror/view': '6.38.2'
+  '@codemirror/state': '6.7.6'
+  '@codemirror/view': '6.43.13'
   '@google/genai': '1.52.0'
   '@mistralai/mistralai': '1.15.1'
   '@radix-ui/react-dialog': '1.1.15'

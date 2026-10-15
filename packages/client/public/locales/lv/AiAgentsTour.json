@@ -1,22 +1,12 @@
 {
   "AgentAccessMemberTitle": "Kas vēl te ir",
-  "AgentBuild": "Izveidot aģentu nozīmē aprakstīt darbu, nevis atvērt tukšu tērzēšanu. Norādījumi nosaka, ko tas dara un kā atbild, pievienotie faili kļūst par zināšanām, no kurām tas atbild, bet jūs izvēlaties modeli, kas darbojas aiz tā, kā arī pievienotos rīkus, pie kuriem tas drīkst ķerties.",
   "AgentBuildTitle": "Uzdodiet tam darbu",
   "AgentDemoContracts": "Līgumu pārbaudītājs",
   "AgentDemoOnboarding": "Ievadīšanas pavadonis",
   "AgentDemoSupport": "Atbalsta dienesta palīgs",
-  "AgentEmpty": "Aģenti, kurus tikko redzējāt, bija priekšskatījums. Aģenti parādās šajā sarakstā, tiklīdz kāds jums piešķir piekļuvi kādam no tiem — gatavi darbam.",
   "AgentEmptyTitle": "Jūsu saraksts pagaidām ir tukšs",
-  "AgentFind": "Ierakstiet nosaukumu, lai sašaurinātu sarakstu — meklēšana skatās aģentu nosaukumus, nevis ziņas viņu sarunās. Atveriet filtru, kad nosaukums neienāk prātā, un atrodiet aģentu pēc atzīmes, pēc īpašnieka vai pēc tā, kam piešķirta piekļuve.",
   "AgentFindTitle": "Kā to atrast vēlāk",
-  "AgentPlacesRecent": "{{recent}} un {{favorites}} tur aģentus, ar kuriem jūs patiešām strādājat, sānjoslas augšpusē.",
   "AgentPlacesTitle": "Vienmēr pa rokai",
-  "AgentPlacesTrash": "{{trash}} glabā dzēstos — tos var atjaunot, kamēr neesat to iztukšojuši.",
-  "AgentRow": "Lielāko daļu no tā, kas aģentam no jums vajadzīgs, var izdarīt, to neatverot. Noklikšķiniet uz nosaukuma, lai sāktu ar to sarunu, piespraudiet tos, kurus lietojat katru dienu, un ar trim punktiem mainiet iestatījumus, uzaiciniet cilvēkus vai dublējiet to līdzīgam darbam.",
-  "AgentRowMember": "Noklikšķiniet uz nosaukuma, lai sāktu ar to sarunu, un piespraudiet tos, kurus lietojat katru dienu, lai tie paliktu saraksta augšpusē. Pārējais ir trijos punktos: atvērt aģentu vai nokopēt saiti kolēģim, kuram piekļuve jau ir.",
   "AgentRowTitle": "Viena rinda, viens aģents",
-  "AgentStart": "Paņemiet darbu, ko joprojām darāt ar rokām, uzrakstiet to kā norādījumus, pievienojiet failus, kas uz to atbild — un nākamo apli atstājiet aģentam.",
-  "AgentSwitchOn": "Aģenti, kurus tikko izstaigājāt, bija priekšskatījums — šajā darbvietā MI vēl nav ieslēgts. Tā poga ir viss, kas jūs šķir no pirmā īstā aģenta.",
-  "AgentSwitchOnTitle": "Ieslēdziet un ieraugiet pa īstam",
-  "AgentWhatIsTitle": "Aģents, nevis tērzēšana"
+  "AgentSwitchOnTitle": "Ieslēdziet un ieraugiet pa īstam"
 }

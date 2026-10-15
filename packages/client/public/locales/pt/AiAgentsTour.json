@@ -1,22 +1,12 @@
 {
   "AgentAccessMemberTitle": "Quem mais está aqui",
-  "AgentBuild": "Criar um agente é descrever uma tarefa, não abrir uma conversa em branco. As instruções definem o que ele faz e como responde, os ficheiros que anexar tornam-se o conhecimento a partir do qual responde, e é você que escolhe o modelo por trás dele e as ferramentas ligadas a que pode recorrer.",
   "AgentBuildTitle": "Atribua-lhe uma tarefa",
   "AgentDemoContracts": "Revisor de contratos",
   "AgentDemoOnboarding": "Companheiro de integração",
   "AgentDemoSupport": "Assistente de apoio ao cliente",
-  "AgentEmpty": "Os agentes que acabou de ver eram uma pré-visualização. Os agentes surgem nesta lista assim que alguém lhe der acesso a um deles, prontos a ser postos a trabalhar.",
   "AgentEmptyTitle": "A sua lista está vazia por agora",
-  "AgentFind": "Escreva um nome para restringir a lista — a pesquisa olha para os nomes dos agentes, não para as mensagens dentro das suas conversas. Abra o filtro quando o nome não for o que recorda e encontre um agente por tag, por proprietário ou por quem recebeu acesso.",
   "AgentFindTitle": "Encontrar um mais tarde",
-  "AgentPlacesRecent": "{{recent}} e {{favorites}} mantêm no topo da barra lateral os agentes com que trabalha realmente.",
   "AgentPlacesTitle": "Sempre à mão",
-  "AgentPlacesTrash": "{{trash}} guarda os que eliminou, restauráveis até a esvaziar.",
-  "AgentRow": "A maior parte do que um agente precisa de si pode ser feita sem o abrir. Clique no nome para começar a falar com ele, afixe os que utiliza diariamente e use os três pontos para alterar a configuração, convidar pessoas ou duplicá-lo para uma tarefa semelhante.",
-  "AgentRowMember": "Clique no nome para começar a falar com ele e afixe os que utiliza diariamente, para que fiquem no topo da lista. Os três pontos guardam o resto: abrir o agente ou copiar uma ligação para um colega que já tenha acesso.",
   "AgentRowTitle": "Uma linha, um agente",
-  "AgentStart": "Pegue naquela tarefa que continua a fazer à mão, escreva-a sob a forma de instruções, junte os ficheiros que lhe dão resposta — e deixe o agente tratar da ronda seguinte.",
-  "AgentSwitchOn": "Os agentes que acabou de percorrer eram uma pré-visualização — este espaço de trabalho ainda não tem IA ativada. Aquele botão é tudo o que o separa do primeiro agente a sério.",
-  "AgentSwitchOnTitle": "Ative-a e veja a sério",
-  "AgentWhatIsTitle": "Um agente, não uma conversa"
+  "AgentSwitchOnTitle": "Ative-a e veja a sério"
 }

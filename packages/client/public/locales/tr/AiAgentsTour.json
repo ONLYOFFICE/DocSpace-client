@@ -1,22 +1,12 @@
 {
   "AgentAccessMemberTitle": "Burada başka kimler var",
-  "AgentBuild": "Bir ajan oluşturmak, boş bir sohbet açmak değil, bir iş tanımlamaktır. Talimatlar ne yapacağını ve nasıl yanıt vereceğini belirler, eklediğiniz dosyalar yanıt verirken dayandığı bilgi haline gelir; arkasındaki modeli ve başvurabileceği bağlı araçları da siz seçersiniz.",
   "AgentBuildTitle": "Ona bir iş verin",
   "AgentDemoContracts": "Sözleşme inceleyici",
   "AgentDemoOnboarding": "İşe alıştırma yardımcısı",
   "AgentDemoSupport": "Destek masası asistanı",
-  "AgentEmpty": "Az önce gördüğünüz ajanlar bir ön izlemeydi. Biri size bir ajana erişim verdiği anda, kullanıma hazır biçimde bu listede belirir.",
   "AgentEmptyTitle": "Listeniz şimdilik boş",
-  "AgentFind": "Listeyi daraltmak için bir ad yazın — arama, sohbetlerinin içindeki mesajlara değil, ajan adlarına bakar. Ad aklınıza gelmiyorsa filtreyi açın ve ajanı etikete, sahibine ya da kime erişim verildiğine göre bulun.",
   "AgentFindTitle": "Sonradan bulmak",
-  "AgentPlacesRecent": "{{recent}} ve {{favorites}}, gerçekten çalıştığınız ajanları kenar çubuğunun en üstünde tutar.",
   "AgentPlacesTitle": "Her zaman elinizin altında",
-  "AgentPlacesTrash": "{{trash}} sildiklerinizi saklar; siz boşaltana kadar geri getirilebilirler.",
-  "AgentRow": "Bir ajanın sizden istediklerinin çoğu, onu açmadan yapılabilir. Konuşmaya başlamak için adına tıklayın, her gün kullandıklarınızı sabitleyin ve üç noktayı kullanarak yapılandırmayı değiştirin, kişileri davet edin ya da benzer bir iş için çoğaltın.",
-  "AgentRowMember": "Konuşmaya başlamak için adına tıklayın ve her gün kullandıklarınızı sabitleyin ki listenin en üstünde kalsınlar. Geri kalanı üç noktada: ajanı açın ya da hâlihazırda erişimi olan bir iş arkadaşınız için bağlantıyı kopyalayın.",
   "AgentRowTitle": "Bir satır, bir ajan",
-  "AgentStart": "Elle yapmayı sürdürdüğünüz işi alın, talimat olarak yazın, ona yanıt veren dosyaları ekleyin — ve bir sonraki turu ajana bırakın.",
-  "AgentSwitchOn": "Az önce gezdiğiniz ajanlar bir ön izlemeydi — bu çalışma alanında yapay zeka henüz açık değil. O düğme, sizinle ilk gerçek ajan arasındaki tek şey.",
-  "AgentSwitchOnTitle": "Açın ve gerçekten görün",
-  "AgentWhatIsTitle": "Sohbet değil, ajan"
+  "AgentSwitchOnTitle": "Açın ve gerçekten görün"
 }

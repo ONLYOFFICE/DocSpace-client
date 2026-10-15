@@ -1,22 +1,12 @@
 {
   "AgentAccessMemberTitle": "Wer sonst noch dabei ist",
-  "AgentBuild": "Einen Agenten zu erstellen bedeutet, eine Aufgabe zu beschreiben, und nicht, einen leeren Chat zu öffnen. Die Anweisungen legen fest, was er tut und wie er antwortet, die angehängten Dateien werden zu dem Wissen, aus dem er antwortet, und Sie wählen das Modell dahinter sowie die verbundenen Tools, auf die er zugreifen darf.",
   "AgentBuildTitle": "Geben Sie ihm eine Aufgabe",
   "AgentDemoContracts": "Vertragsprüfer",
   "AgentDemoOnboarding": "Onboarding-Begleiter",
   "AgentDemoSupport": "Support-Assistent",
-  "AgentEmpty": "Die Agenten, die Sie gerade gesehen haben, waren eine Vorschau. Agenten erscheinen in dieser Liste, sobald Ihnen jemand Zugriff auf einen davon gibt – bereit für den Einsatz.",
   "AgentEmptyTitle": "Ihre Liste ist vorerst leer",
-  "AgentFind": "Geben Sie einen Namen ein, um die Liste einzugrenzen – die Suche berücksichtigt Agentennamen, nicht die Nachrichten in ihren Chats. Öffnen Sie den Filter, wenn Ihnen der Name gerade nicht einfällt, und finden Sie einen Agenten nach Tag, nach Besitzer oder danach, wer Zugriff erhalten hat.",
   "AgentFindTitle": "Später einen wiederfinden",
-  "AgentPlacesRecent": "{{recent}} und {{favorites}} halten die Agenten, mit denen Sie tatsächlich arbeiten, oben in der Seitenleiste.",
   "AgentPlacesTitle": "Immer in Reichweite",
-  "AgentPlacesTrash": "{{trash}} enthält die gelöschten Agenten – wiederherstellbar, bis Sie ihn leeren.",
-  "AgentRow": "Das meiste, was ein Agent von Ihnen braucht, lässt sich erledigen, ohne ihn zu öffnen. Klicken Sie auf den Namen, um mit ihm zu sprechen, heften Sie die täglich genutzten an und nutzen Sie die drei Punkte, um die Konfiguration zu ändern, Personen einzuladen oder ihn für eine ähnliche Aufgabe zu duplizieren.",
-  "AgentRowMember": "Klicken Sie auf den Namen, um mit ihm zu sprechen, und heften Sie die täglich genutzten an, damit sie oben in der Liste bleiben. Die drei Punkte enthalten den Rest: den Agenten öffnen oder einen Link für eine Person kopieren, die bereits Zugriff hat.",
   "AgentRowTitle": "Eine Zeile, ein Agent",
-  "AgentStart": "Nehmen Sie die Aufgabe, die Sie immer wieder von Hand erledigen, schreiben Sie sie als Anweisungen auf, fügen Sie die Dateien hinzu, die sie beantworten – und überlassen Sie dem Agenten die nächste Runde.",
-  "AgentSwitchOn": "Die Agenten, die Sie gerade durchlaufen haben, waren eine Vorschau – in diesem Arbeitsbereich ist noch keine KI aktiviert. Diese Schaltfläche ist alles, was zwischen Ihnen und dem ersten echten Agenten steht.",
-  "AgentSwitchOnTitle": "Schalten Sie sie ein und sehen Sie es in echt",
-  "AgentWhatIsTitle": "Ein Agent, kein Chat"
+  "AgentSwitchOnTitle": "Schalten Sie sie ein und sehen Sie es in echt"
 }

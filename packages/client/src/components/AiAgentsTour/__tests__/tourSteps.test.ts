@@ -157,7 +157,7 @@ describe("getTourSteps — user", () => {
   it("describes an agent from the using end rather than the owning one", () => {
     const [intro] = steps(userFlags);
 
-    expect(intro.content).toBe("AiAgentsTour:AgentIntroShared");
+    expect(intro.content).toBe("AiAgentsTour:AgentWhatIsShared");
 
     // The row step too: their context menu holds none of the admin entries.
     expect(steps(userFlags)[1].content).toBe("AiAgentsTour:AgentRowMember");

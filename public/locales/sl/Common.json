@@ -1475,7 +1475,7 @@
   "NoHistory": "Ni zgodovine",
   "NoItemsHereYet": "Tu še ni elementov",
   "NoKey": "Ni ključa",
-  "NoMCPServers": "Še ni povezanih {{mcpServers}}",
+  "NoMCPServers": "{{mcpServers}} še niso povezani",
   "NoMCPServersDescription": "Pojdite v Nastavitve >> Nastavitve AI >> {{mcpServers}}, da povežete strežnike za tega {{aiAgent}}.",
   "NoModelsFound": "Ni najdenih modelov",
   "NoPaymentMethod": "Ni povezane metode plačila",

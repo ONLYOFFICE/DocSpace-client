@@ -1475,7 +1475,7 @@
   "NoHistory": "Žádná historie",
   "NoItemsHereYet": "Zatím zde nejsou žádné položky",
   "NoKey": "Žádný klíč",
-  "NoMCPServers": "Zatím nejsou připojena žádná {{mcpServers}}",
+  "NoMCPServers": "{{mcpServers}} zatím nejsou připojeny",
   "NoMCPServersDescription": "Přejděte do Nastavení >> Nastavení AI >> {{mcpServers}} a připojte servery pro tohoto {{aiAgent}}.",
   "NoModelsFound": "Žádné modely nalezeny",
   "NoPaymentMethod": "Žádná platební metoda není připojena",

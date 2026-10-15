@@ -1475,7 +1475,7 @@
   "NoHistory": "Niciun istoric",
   "NoItemsHereYet": "Niciun element încă nu există aici",
   "NoKey": "Fără cheie",
-  "NoMCPServers": "Niciun {{mcpServers}} conectat încă",
+  "NoMCPServers": "{{mcpServers}} nu sunt conectate deocamdată",
   "NoMCPServersDescription": "Accesați Setări >> Setări IA >> {{mcpServers}} pentru a conecta servere pentru acest {{aiAgent}}.",
   "NoModelsFound": "Nu au fost găsite modele",
   "NoPaymentMethod": "Nici o metodă de plată legată",

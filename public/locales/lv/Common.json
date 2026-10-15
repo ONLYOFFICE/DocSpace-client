@@ -1475,7 +1475,7 @@
   "NoHistory": "Nav vēstures",
   "NoItemsHereYet": "Šeit vēl nav neviena elementa",
   "NoKey": "Nav atslēgas",
-  "NoMCPServers": "Nav atvienotās {{mcpServers}}",
+  "NoMCPServers": "{{mcpServers}} vēl nav pievienoti",
   "NoMCPServersDescription": "Dodieties uz Iestatījumi >> MI iestatījumi >> {{mcpServers}}, lai savienotu serverus šim {{aiAgent}}.",
   "NoModelsFound": "Modeļu nav atrasts",
   "NoPaymentMethod": "Nav saistīta maksājumu metode",

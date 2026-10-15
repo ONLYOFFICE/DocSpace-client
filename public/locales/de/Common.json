@@ -767,7 +767,7 @@
   "EmbeddingBarDescription": "Das Einbetten funktioniert nur für die URLs, die der Super-Administrator in den JavaScript-SDK-Einstellungen angegeben hat.",
   "EmbeddingSettings": "Einstellungen zum Einbetten",
   "EmptyAIAgentsAIDisabledDescription": "Dieser Abschnitt ermöglicht Benutzern die Arbeit mit {{aiAgents}} — intelligenten Assistenten für die Verarbeitung von Dokumenten und anderen Aufgaben.\nUm sie zu nutzen, muss der Dienst für KI-Agenten und Tools vom Super-Administrator aktiviert werden.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Um {{aiAgents}} zu erstellen und zu verwenden, verbinden Sie Ihre Wallet und aktivieren Sie den Dienst für KI-Agenten und Tools in den Arbeitsbereichseinstellungen.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Um {{aiAgents}} zu erstellen und zu verwenden, verbinden Sie Ihre Wallet und aktivieren Sie den Dienst für KI-Agenten und Tools in den Arbeitsbereichseinstellungen. Anschließend können Sie mit {{aiAgents}} arbeiten und mit Ihrem Team zusammenarbeiten.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Verbinden Sie Ihre Wallet und aktivieren Sie KI-Agenten und Tools",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Verbinden Sie Ihren eigenen KI-Dienst, um erweiterte Funktionen im Arbeitsbereich freizuschalten. Sobald er hinzugefügt wurde, ist er allen Benutzern in {{aiChats}} zugänglich.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} ist momentan nicht verfügbar",

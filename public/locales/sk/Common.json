@@ -1475,7 +1475,7 @@
   "NoHistory": "Žiadna história",
   "NoItemsHereYet": "Zatiaľ tu nie sú žiadne položky",
   "NoKey": "Žiadny kľúč",
-  "NoMCPServers": "Žiadne {{mcpServers}} pripojené",
+  "NoMCPServers": "{{mcpServers}} zatiaľ nie sú pripojené",
   "NoMCPServersDescription": "Prejdite do Nastavenia >> Nastavenia AI >> {{mcpServers}} a pripojte servery pre tohto {{aiAgent}}.",
   "NoModelsFound": "Žiadne modely nájdené",
   "NoPaymentMethod": "Žiadna forma platby priradená",

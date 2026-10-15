@@ -1475,7 +1475,7 @@
   "NoHistory": "Asnjë histori",
   "NoItemsHereYet": "Ende asnjë element këtu",
   "NoKey": "Pa çelës",
-  "NoMCPServers": "Nuk ka {{mcpServers}} të lidhur ende",
+  "NoMCPServers": "{{mcpServers}} nuk janë lidhur ende",
   "NoMCPServersDescription": "Shkoni te Cilësimet >> Cilësimet IA >> {{mcpServers}} për të lidhur serverë për këtë {{aiAgent}}.",
   "NoModelsFound": "Nuk u gjetën modele",
   "NoPaymentMethod": "Nuk ka metodë pagese të lidhur",

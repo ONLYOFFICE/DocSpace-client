@@ -1475,7 +1475,7 @@
   "NoHistory": "Няма история",
   "NoItemsHereYet": "Тук все още няма елементи",
   "NoKey": "Няма ключ",
-  "NoMCPServers": "Няма свързани {{mcpServers}}",
+  "NoMCPServers": "{{mcpServers}} все още не са свързани",
   "NoMCPServersDescription": "Отидете в Настройки >> ИИ настройки >> {{mcpServers}}, за да свържете сървъри за този {{aiAgent}}.",
   "NoModelsFound": "Няма намерени модели",
   "NoPaymentMethod": "Няма свързан метод за плащане",

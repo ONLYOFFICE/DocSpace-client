@@ -1475,7 +1475,7 @@
   "NoHistory": "Brak historii",
   "NoItemsHereYet": "Nie ma tu jeszcze elementów",
   "NoKey": "Brak klucza",
-  "NoMCPServers": "Nie ma jeszcze podłączonych {{mcpServers}}",
+  "NoMCPServers": "{{mcpServers}} nie są jeszcze podłączone",
   "NoMCPServersDescription": "Przejdź do Ustawienia >> Ustawienia AI >> {{mcpServers}}, aby połączyć serwery dla tego {{aiAgent}}.",
   "NoModelsFound": "Brak modeli",
   "NoPaymentMethod": "Brak powiążonej metody płatności",

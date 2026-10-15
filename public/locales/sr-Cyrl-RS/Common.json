@@ -1475,7 +1475,7 @@
   "NoHistory": "Нема историје",
   "NoItemsHereYet": "Нема ставки овде још",
   "NoKey": "Нема кључа",
-  "NoMCPServers": "Још увек нема повезаних {{mcpServers}}",
+  "NoMCPServers": "{{mcpServers}} још нису повезани",
   "NoMCPServersDescription": "Идите на Подешавања > АИ подешавања > {{mcpServers}} да повежете сервере за овог {{aiAgent}}.",
   "NoModelsFound": "Није пронађен ни један модел",
   "NoPaymentMethod": "Није везан метод плаћања",

@@ -104,7 +104,7 @@
   "AIAgentSpaceQuotaExceeded": "ໂຄຕ້າພື້ນທີ່ {{aiAgent}} ເກີນແລ້ວ ({{size}}).",
   "AIAgentsPinned": "{{aiAgents}} ຖືກປິ່ນ",
   "AIAgentsUnpinned": "{{aiAgents}} ບໍ່ໄດ້ປິ່ນ",
-  "AIAgentUnpinned": "AI aģents atsprausts",
+  "AIAgentUnpinned": "ຕົວແທນ AI ຖືກເອົາໝຸດອອກ",
   "AIChat": "AI-Chat",
   "AIChatBenefitsTitle": "ເຂົ້າໃຊ້ໂມເດວ AI ທີ່ຫຼາກຫຼາຍຜ່ານການເຊື່ອມໂຍງ OpenRouter:",
   "AIChatBenefitWorkWithContent": "ເຮັດວຽກກັບຫ້ອງ, ໄຟລ໌ ແລະ ໂຟນເດີ",

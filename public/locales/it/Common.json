@@ -1475,7 +1475,7 @@
   "NoHistory": "Nessuna cronologia",
   "NoItemsHereYet": "Nessun elemento ancora qui",
   "NoKey": "Nessuna chiave",
-  "NoMCPServers": "Nessun {{mcpServers}} connesso ancora",
+  "NoMCPServers": "{{mcpServers}} non ancora connessi",
   "NoMCPServersDescription": "Vai su Impostazioni >> Impostazioni IA >> {{mcpServers}} per collegare i server per questo {{aiAgent}}.",
   "NoModelsFound": "Nessun modello trovato",
   "NoPaymentMethod": "Nessun metodo di pagamento collegato",

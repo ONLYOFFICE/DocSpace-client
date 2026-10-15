@@ -2368,7 +2368,7 @@
   "UserAgentMaxAvailableRoleWarning": "Guests and Users cannot be assigned as Agent managers. Only Room and Full admins are suitable for the specified role.",
   "UserAgreement": "I confirm and want to proceed",
   "UseRecoveryPhrase": "Use recovery phrase",
-  "UserEmptyDescription": "Files and folders uploaded by admins will appeared here.",
+  "UserEmptyDescription": "Files and folders uploaded by admins will appear here.",
   "UserFileUpdated": "File updated.",
   "UserLimit": "User limit",
   "UserLimitDescription": "Define the number of users who can join via this invite link.",

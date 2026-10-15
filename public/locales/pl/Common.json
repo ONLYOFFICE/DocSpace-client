@@ -2366,7 +2366,7 @@
   "UserAgentMaxAvailableRoleWarning": "Gościom i użytkownikom nie można przypisać roli Menedżera agentów. Do wskazanej roli nadają się tylko administratorzy pokoju i superadministratorzy.",
   "UserAgreement": "Potwierdzam i chcę kontynuować",
   "UseRecoveryPhrase": "Użyj frazy odzyskiwania",
-  "UserEmptyDescription": "Tutaj pojawi się pliki i katalogi przesłane przez administratorów.",
+  "UserEmptyDescription": "Tutaj pojawią się pliki i katalogi przesłane przez administratorów.",
   "UserFileUpdated": "Plik został zaktualizowany.",
   "UserLimit": "Limit użytkowników",
   "UserLimitDescription": "Zdefiniuj liczbę użytkowników, którzy mogą dołączyć za pomocą tego linku zaproszenia.",

@@ -2366,7 +2366,7 @@
   "UserAgentMaxAvailableRoleWarning": "Los invitados y los usuarios no pueden asignarse como Gestores de agentes. Solo los administradores de sala y superadministradores son adecuados para el rol indicado.",
   "UserAgreement": "Confirmo y deseo proceder",
   "UseRecoveryPhrase": "Usar frase de recuperación",
-  "UserEmptyDescription": "Los archivos y carpetas cargados por los administradores aparecerá aquí.",
+  "UserEmptyDescription": "Los archivos y carpetas cargados por los administradores aparecerán aquí.",
   "UserFileUpdated": "Archivo actualizado.",
   "UserLimit": "Límite de usuarios",
   "UserLimitDescription": "Define el número de usuarios que pueden unirse a través de este enlace de invitación.",

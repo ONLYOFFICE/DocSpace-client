@@ -2366,7 +2366,7 @@
   "UserAgentMaxAvailableRoleWarning": "Invitații și utilizatorii nu pot fi atribuiți ca Administratori de agent. Doar administratorii sălii și superadministratorii sunt potriviți pentru rolul specificat.",
   "UserAgreement": "Agreez și doresc să continui",
   "UseRecoveryPhrase": "Utilizați fraza de recuperare",
-  "UserEmptyDescription": "Fişierele şi folderele încărcate de administratori vor appeared aici.",
+  "UserEmptyDescription": "Fişierele şi folderele încărcate de administratori vor apărea aici.",
   "UserFileUpdated": "Fişier actualizat.",
   "UserLimit": "Limita de utilizatori",
   "UserLimitDescription": "Definiți numărul de utilizatori care pot se alătura prin acest link de invitație.",

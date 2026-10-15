@@ -2366,7 +2366,7 @@
   "UserAgentMaxAvailableRoleWarning": "Vieraita ja käyttäjiä ei voi määrittää agentin hallinnoijiksi. Vain huoneen ja pääjärjestelmänvalvojat soveltuvat kyseiseen rooliin.",
   "UserAgreement": "Vahvistan ja haluan jatkaa",
   "UseRecoveryPhrase": "Käytä palautuslausetta",
-  "UserEmptyDescription": "Pääkäyttäjien lataamat tiedostot ja kansiot appeared tänne.",
+  "UserEmptyDescription": "Pääkäyttäjien lataamat tiedostot ja kansiot ilmestyvät tänne.",
   "UserFileUpdated": "Tiedosto päivitetty.",
   "UserLimit": "Käyttäjäraja",
   "UserLimitDescription": "Määritä käyttäjien määrä, jotka voivat liittyä tämän kutsu-/linkin kautta.",

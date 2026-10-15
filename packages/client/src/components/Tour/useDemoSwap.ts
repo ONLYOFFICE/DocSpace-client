@@ -37,10 +37,7 @@ import { useCallback, useLayoutEffect, useState } from "react";
 
 import { fadeSectionIn, hideSection } from "./sectionFade";
 
-/** Long enough for the caption to be read, not just seen. */
-const PREPARING_MS = 1500;
-
-/** Holds a loader over the section while the tour swaps its list for the demo. */
+/** Hides the section while the tour swaps its list for the demo. */
 export default function useDemoSwap(isStarting: boolean) {
   const [isSwapping, setIsSwapping] = useState(false);
 
@@ -55,13 +52,7 @@ export default function useDemoSwap(isStarting: boolean) {
       setIsSwapping(true);
 
       try {
-        await Promise.all([
-          swap(),
-          // Keeps the loader up when the swap answers instantly.
-          new Promise((resolve) => {
-            setTimeout(resolve, PREPARING_MS);
-          }),
-        ]);
+        await swap();
       } finally {
         setIsSwapping(false);
         // Shows what the swap brought in; the section was hidden above.

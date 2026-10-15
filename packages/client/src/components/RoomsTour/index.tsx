@@ -53,6 +53,7 @@ import useTour, {
 } from "SRC_DIR/components/Tour/useTour";
 import { ROOMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
+import useDemoSwap from "SRC_DIR/components/Tour/useDemoSwap";
 import { getTourAudience } from "SRC_DIR/components/Tour/audience";
 import { tourDemo } from "SRC_DIR/api/tourDemo";
 import { waitForElement } from "SRC_DIR/components/Tour/waitForElement";
@@ -191,12 +192,11 @@ const RoomsTour = ({
   // `fade` is for an early close: the closing step fades the section itself.
   const endDemo = useCallback(
     async ({ fade = false } = {}) => {
-      if (!tourDemo.isActive) return;
-
       if (fade) await fadeSectionOut();
-      tourDemo.deactivate();
 
       try {
+        if (!tourDemo.isActive) return;
+        tourDemo.deactivate();
         await reloadSection();
       } finally {
         if (fade) fadeSectionIn();
@@ -222,31 +222,30 @@ const RoomsTour = ({
     [endDemo, restoreDemo],
   );
 
-  // Stands in for an empty section before `usePendingTour` starts anything.
+  // Stands in for an empty section before `usePendingTour` starts anything,
+  // with the section hidden until the stand-in rooms are in.
+  const shouldStartDemo =
+    roomsTourStore.isPending &&
+    !roomsTourStore.isRunning &&
+    !tourDemo.isActive &&
+    !hasItems &&
+    !isMobileView &&
+    !firstLoad &&
+    !isSectionLoading &&
+    isRoomsRoot &&
+    !!user &&
+    ready;
+
+  const { isPreparing, runSwap } = useDemoSwap(shouldStartDemo);
+
   useEffect(() => {
-    if (!roomsTourStore.isPending || roomsTourStore.isRunning) return;
-    if (tourDemo.isActive || hasItems) return;
-    if (isMobileView || firstLoad || isSectionLoading || !isRoomsRoot) return;
-    if (!user) return;
-    // The demo keeps the names it was armed with, so they must be loaded.
-    if (!ready) return;
+    if (!shouldStartDemo) return;
 
-    tourDemo.activate(demoConfig);
-
-    void reloadSection();
-  }, [
-    roomsTourStore.isPending,
-    roomsTourStore.isRunning,
-    hasItems,
-    isMobileView,
-    firstLoad,
-    isSectionLoading,
-    isRoomsRoot,
-    user,
-    reloadSection,
-    ready,
-    demoConfig,
-  ]);
+    runSwap(() => {
+      tourDemo.activate(demoConfig);
+      return reloadSection();
+    });
+  }, [shouldStartDemo, demoConfig, reloadSection, runSwap]);
 
   // A tour closed mid-step never reaches that step's `after`.
   const hasStarted = useRef(false);
@@ -344,7 +343,8 @@ const RoomsTour = ({
       isRoomsRoot &&
       // With a stand-in, ready also means its rooms have landed.
       (!isDemo || hasItems) &&
-      groupsRowSettled,
+      groupsRowSettled &&
+      !isPreparing,
     isMobileView,
   );
 

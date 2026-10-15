@@ -49,7 +49,6 @@ import useTour, {
 import { FILES_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
 import useDemoSwap from "SRC_DIR/components/Tour/useDemoSwap";
-import TourPreparing from "SRC_DIR/components/Tour/TourPreparing";
 import {
   getTourAudience,
   type TourAudience,
@@ -149,12 +148,11 @@ const FilesTour = ({
   // Esc never reaches it, so there `fade` is this function's to do.
   const endDemo = useCallback(
     async ({ fade = false } = {}) => {
-      if (!tourDemo.isActive) return;
-
       if (fade) await fadeSectionOut();
-      tourDemo.deactivate();
 
       try {
+        if (!tourDemo.isActive) return;
+        tourDemo.deactivate();
         await reloadSection();
       } finally {
         if (fade) fadeSectionIn();
@@ -267,7 +265,6 @@ const FilesTour = ({
 
   return (
     <>
-      {isPreparing ? <TourPreparing /> : null}
       {Tour ? createPortal(Tour, document.body) : null}
     </>
   );

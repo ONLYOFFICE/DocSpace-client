@@ -43,6 +43,7 @@ import {
   selfActivationStatusHandler,
   selfByTypeHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 
@@ -94,6 +95,9 @@ const DEMO_COMPLETE = "#folder_-1101";
 // server answers it per role — the list fetched by somebody who only ever fills
 // forms in comes back with `false` — so the runs that stand in as one have to
 // say so, or the section puts up a "Create Form space" button they do not have.
+// Without the create right the root also comes back with `DenyAccess`, the way
+// the server answers anybody who is not an admin; that is what picks the user
+// variant of the empty screen.
 const formsRoomListHandler = (
   port: string,
   { empty = false, canCreate = true } = {},
@@ -115,7 +119,7 @@ const formsRoomListHandler = (
       canShare: false,
       security: { Read: true, Create: canCreate },
       title: "Forms",
-      access: 0,
+      access: canCreate ? ShareAccessRights.None : ShareAccessRights.DenyAccess,
       shared: false,
       created: "2025-01-15T12:00:00.000Z",
       updated: "2025-01-15T12:00:00.000Z",

@@ -44,6 +44,7 @@ import {
   roomMembersHandlers,
   TypeRoomList,
 } from "@docspace/shared/__mocks__/handlers";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 
@@ -80,6 +81,11 @@ const CREATE_FIRST_STEP = "Now make it yours";
 // is dropped the same way, but what is left under the spotlight is the bare
 // empty screen rather than an action.
 const EMPTY_LIST_STEP = "Your list is empty for now";
+
+const memberRoot = {
+  canCreate: false,
+  rootAccess: ShareAccessRights.DenyAccess,
+};
 
 const roomOwnerMembers = () =>
   roomMembersHandlers(TEST_PORT, FIRST_ROOM_ID, {
@@ -143,7 +149,7 @@ test.describe("Rooms tour", () => {
       // The list has to come back the way the server would answer it for
       // somebody who cannot create rooms, or the section puts up a "New room"
       // button this walkthrough is specifically about not having.
-      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, { canCreate: false }),
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, memberRoot),
     );
 
     await startTour(page, baseUrl);
@@ -163,7 +169,7 @@ test.describe("Rooms tour", () => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "visitor"),
       ...roomOwnerMembers(),
-      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, { canCreate: false }),
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, memberRoot),
     );
 
     await startTour(page, baseUrl);
@@ -338,7 +344,7 @@ test.describe("Rooms tour on an empty portal", () => {
     // list, which is the whole of what the section is for to them.
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
-      roomListHandler(TEST_PORT, undefined, { canCreate: false }),
+      roomListHandler(TEST_PORT, undefined, memberRoot),
       ...roomOwnerMembers(),
     );
 
@@ -358,7 +364,7 @@ test.describe("Rooms tour on an empty portal", () => {
   }) => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "visitor"),
-      roomListHandler(TEST_PORT, undefined, { canCreate: false }),
+      roomListHandler(TEST_PORT, undefined, memberRoot),
       ...roomOwnerMembers(),
     );
 
@@ -378,7 +384,7 @@ test.describe("Rooms tour on an empty portal", () => {
   }) => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
-      roomListHandler(TEST_PORT, undefined, { canCreate: false }),
+      roomListHandler(TEST_PORT, undefined, memberRoot),
       ...roomOwnerMembers(),
     );
 

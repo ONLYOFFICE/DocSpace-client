@@ -33,17 +33,25 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { http } from "msw";
 import type { Page } from "@playwright/test";
 
+import { BASE_URL, API_PREFIX } from "@docspace/shared/__mocks__/e2e/utils";
 import {
   settingsHandler,
   TypeSettings,
   selfActivationStatusHandler,
   selfByTypeHandler,
   aiAgentsHandler,
+  aiChatStoreHandlers,
   aiConfigHandler,
   roomMembersHandlers,
 } from "@docspace/shared/__mocks__/handlers";
+import {
+  PATH_AI_AGENTS,
+  aiAgentsResolver,
+} from "@docspace/shared/__mocks__/handlers/ai/agents";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 
@@ -72,6 +80,11 @@ const EMPTY_SCREEN = '[data-testid="empty-view"]';
 // what the portal has switched on, so an index would quietly point at a
 // different step as those flags move.
 const CREATE_STEP = "Give it a job";
+const memberRoot = {
+  canCreate: false,
+  rootAccess: ShareAccessRights.DenyAccess,
+};
+
 const CREATE_FIRST_STEP = "Now make it yours";
 const SWITCH_ON_STEP = "Switch it on and see for real";
 // The closing step of anyone with no button on the empty screen to be sent at —
@@ -220,7 +233,10 @@ test.describe("AI Agents tour on an empty portal", () => {
     mockRequest.use(
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
-      // No agents at all — the case the stand-in section exists for.
+      // No agents at all, with AI on: a standalone portal judges readiness by
+      // the chat models, and only then does the empty screen offer to create.
+      aiConfigHandler(TEST_PORT),
+      ...aiChatStoreHandlers(TEST_PORT, { assignments: {} }),
       aiAgentsHandler(TEST_PORT),
       selfByTypeHandler(TEST_PORT, "admin"),
     );
@@ -267,7 +283,7 @@ test.describe("AI Agents tour on an empty portal", () => {
     // what an agent row does, and nothing about who else works with it.
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
-      aiAgentsHandler(TEST_PORT, { canCreate: false }),
+      aiAgentsHandler(TEST_PORT, memberRoot),
     );
 
     await startTour(page, baseUrl);
@@ -286,7 +302,7 @@ test.describe("AI Agents tour on an empty portal", () => {
   }) => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "visitor"),
-      aiAgentsHandler(TEST_PORT, { canCreate: false }),
+      aiAgentsHandler(TEST_PORT, memberRoot),
     );
 
     await startTour(page, baseUrl);
@@ -305,7 +321,7 @@ test.describe("AI Agents tour on an empty portal", () => {
   }) => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
-      aiAgentsHandler(TEST_PORT, { canCreate: false }),
+      aiAgentsHandler(TEST_PORT, memberRoot),
     );
 
     await startTour(page, baseUrl);

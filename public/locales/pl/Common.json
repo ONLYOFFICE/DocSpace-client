@@ -900,6 +900,8 @@
   "Error401Text": "Przepraszamy, wybrany zasób jest w tej chwili niedostępny.",
   "Error403Text": "Przepraszamy, odmówiono dostępu.",
   "Error404Text": "Przepraszamy, nie znaleziono zasobu.",
+  "ErrorBlockedDescription": "Aby zachować przestrzeń roboczą i jej dane, właściciel przestrzeni roboczej może ją odblokować za pomocą linku z naszej wiadomości e-mail lub skontaktować się z działem obsługi przed datą usunięcia.",
+  "ErrorBlockedText": "Ta przestrzeń robocza została zablokowana",
   "ErrorDeactivatedText": "Ta przestrzeń robocza została dezaktywowana",
   "ErrorEmptyList": "Lista podmiotów została zmieniona. Sprawdź zawartość i spróbuj ponownie.",
   "ErrorInternalServer": "Wewnętrzny błąd serwera. Spróbuj ponownie później.",

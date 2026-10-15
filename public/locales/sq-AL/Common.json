@@ -900,6 +900,8 @@
   "Error401Text": "Na vjen keq, burimi nuk është aktualisht i aksesueshëm.",
   "Error403Text": "Na vjen keq, qasja u refuzua.",
   "Error404Text": "Na vjen keq, burimi nuk mund të gjendet.",
+  "ErrorBlockedDescription": "Për ta ruajtur atë dhe të dhënat e saj, pronari i hapësirës së punës mund ta zhbllokojë me lidhjen nga email-i ynë ose të kontaktojë mbështetjen përpara datës së fshirjes.",
+  "ErrorBlockedText": "Kjo hapësirë pune është bllokuar",
   "ErrorDeactivatedText": "Kjo hapësirë pune është çaktivizuar",
   "ErrorEmptyList": "Lista e subjekteve është ndryshuar. Ju lutem kontrolloni përmbajtjen dhe provoni përsëri.",
   "ErrorInternalServer": "Gabim i brendshëm i serverit. Provoni sërish më vonë.",

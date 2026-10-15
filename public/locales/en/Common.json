@@ -900,6 +900,8 @@
   "Error401Text": "Sorry, the resource is not currently accessible.",
   "Error403Text": "Sorry, access denied.",
   "Error404Text": "Sorry, the resource cannot be found.",
+  "ErrorBlockedDescription": "To keep it and its data, the workspace owner can unblock it with the link from our email, or contact support before the deletion date.",
+  "ErrorBlockedText": "This workspace is blocked",
   "ErrorDeactivatedText": "This workspace is deactivated",
   "ErrorEmptyList": "The list of entities has been changed. Please check the contents and try again.",
   "ErrorInternalServer": "Internal server error. Try again later.",

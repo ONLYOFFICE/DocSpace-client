@@ -1064,6 +1064,7 @@ const ShellWrapper = inject(
       isFrame,
       frameConfig,
       isPortalDeactivate,
+      isPortalBlocked,
       isPortalRestoring,
       logoText,
       setLogoText,
@@ -1100,6 +1101,7 @@ const ShellWrapper = inject(
     const pagesWithoutNavMenu =
       clientError ||
       isPortalDeactivate ||
+      isPortalBlocked ||
       isPortalRestoring ||
       (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
 

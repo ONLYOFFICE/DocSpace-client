@@ -900,6 +900,8 @@
   "Error401Text": "抱歉，资源目前无法访问。",
   "Error403Text": "对不起，拒绝访问。",
   "Error404Text": "对不起，找不到资源。",
+  "ErrorBlockedDescription": "如需保留工作区及其数据，工作区所有者可在删除日期之前通过我们邮件中的链接解锁工作区，或联系支持服务。",
+  "ErrorBlockedText": "此工作区已锁定",
   "ErrorDeactivatedText": "此工作区已停用",
   "ErrorEmptyList": "实体列表已更改。请检查内容并重试。",
   "ErrorInternalServer": "内部服务器错误。稍后再试。",

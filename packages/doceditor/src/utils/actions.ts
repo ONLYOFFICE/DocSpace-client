@@ -813,7 +813,8 @@ export async function getData(
 
       if (
         typeof response.settings !== "string" &&
-        response.settings?.tenantStatus === TenantStatus.PortalDeactivate
+        (response.settings?.tenantStatus === TenantStatus.PortalDeactivate ||
+          response.settings?.tenantStatus === TenantStatus.PortalBlocked)
       ) {
         response.error = { message: "unavailable" };
       }
@@ -851,7 +852,8 @@ export async function getData(
 
     if (
       typeof settings !== "string" &&
-      settings?.tenantStatus === TenantStatus.PortalDeactivate
+      (settings?.tenantStatus === TenantStatus.PortalDeactivate ||
+        settings?.tenantStatus === TenantStatus.PortalBlocked)
     ) {
       response.error = { message: "unavailable" };
     }

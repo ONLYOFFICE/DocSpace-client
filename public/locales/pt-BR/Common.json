@@ -900,6 +900,8 @@
   "Error401Text": "Desculpe, o recurso não está atualmente acessível.",
   "Error403Text": "Desculpe, acesso negado.",
   "Error404Text": "Desculpe, o recurso não pode ser encontrado.",
+  "ErrorBlockedDescription": "Para mantê-lo junto com seus dados, o proprietário do espaço de trabalho pode desbloqueá-lo pelo link do nosso e-mail ou entrar em contato com o suporte antes da data de exclusão.",
+  "ErrorBlockedText": "Este espaço de trabalho está bloqueado",
   "ErrorDeactivatedText": "Este espaço de trabalho está desativado",
   "ErrorEmptyList": "A lista de entidades foi alterada. Verifique o conteúdo e tente novamente.",
   "ErrorInternalServer": "Erro do servidor interno. Tente novamente depois.",

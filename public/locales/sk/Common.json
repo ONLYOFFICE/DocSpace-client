@@ -900,6 +900,8 @@
   "Error401Text": "Je nám ľúto, zdroj nie je momentálne dostupný.",
   "Error403Text": "Prepáčte, prístup odmietnutý.",
   "Error404Text": "Prepáčte, zdroj sa nedá nájsť.",
+  "ErrorBlockedDescription": "Aby sa pracovný priestor a jeho údaje zachovali, vlastník pracovného priestoru ho môže odblokovať pomocou odkazu z nášho e-mailu alebo pred dátumom odstránenia kontaktovať podporu.",
+  "ErrorBlockedText": "Tento pracovný priestor je zablokovaný",
   "ErrorDeactivatedText": "Tento pracovný priestor je deaktivovaný",
   "ErrorEmptyList": "Zoznam subjektov bol zmenený. Skontrolujte obsah a skúste znova.",
   "ErrorInternalServer": "Interná chyba servera. Skúste to znova neskôr.",

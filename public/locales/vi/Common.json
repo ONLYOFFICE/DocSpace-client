@@ -900,6 +900,8 @@
   "Error401Text": "Xin lỗi, hiện không thể truy cập tài nguyên.",
   "Error403Text": "Xin lỗi, truy cập bị từ chối.",
   "Error404Text": "Xin lỗi, không thể tìm thấy tài nguyên.",
+  "ErrorBlockedDescription": "Để giữ lại không gian làm việc và dữ liệu của nó, chủ sở hữu không gian làm việc có thể mở khóa bằng liên kết trong email của chúng tôi hoặc liên hệ với bộ phận hỗ trợ trước ngày xóa.",
+  "ErrorBlockedText": "Không gian làm việc này đã bị khóa",
   "ErrorDeactivatedText": "Không gian làm việc này đã bị vô hiệu hóa",
   "ErrorEmptyList": "Danh sách các thực thể đã được thay đổi. Vui lòng kiểm tra nội dung và thử lại.",
   "ErrorInternalServer": "Lỗi server nội bộ. Thử lại sau.",

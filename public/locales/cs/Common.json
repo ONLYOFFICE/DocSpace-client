@@ -900,6 +900,8 @@
   "Error401Text": "Omlouváme se, ale tento zdroj není v současné době přístupný.",
   "Error403Text": "Omlouváme se, přístup odepřen.",
   "Error404Text": "Omlouváme se, zdroj nelze najít.",
+  "ErrorBlockedDescription": "Aby byl pracovní prostor i jeho data zachovány, může jej vlastník pracovního prostoru odblokovat pomocí odkazu z našeho e-mailu nebo před datem smazání kontaktovat podporu.",
+  "ErrorBlockedText": "Tento pracovní prostor je zablokován",
   "ErrorDeactivatedText": "Tento pracovní prostor je deaktivován",
   "ErrorEmptyList": "Seznam entit byl změněn. Zkontrolujte prosím jeho obsah a zkuste to znovu.",
   "ErrorInternalServer": "Interní chyba serveru. Zkuste to později.",

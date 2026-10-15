@@ -900,6 +900,8 @@
   "Error401Text": "Désolé, la ressource n'est pas disponible actuellement.",
   "Error403Text": "Désolé, accès refusé.",
   "Error404Text": "Désolé, la ressource n'a pu être trouvée.",
+  "ErrorBlockedDescription": "Pour le conserver avec ses données, le propriétaire de l'espace de travail peut le débloquer à l'aide du lien figurant dans notre e-mail ou contacter l'équipe de support avant la date de suppression.",
+  "ErrorBlockedText": "Cet espace de travail est bloqué",
   "ErrorDeactivatedText": "Cet espace de travail est désactivé",
   "ErrorEmptyList": "La liste des entités a été modifiée. Veuillez vérifier le contenu et réessayer.",
   "ErrorInternalServer": "Erreur interne du serveur. Réessayez ultérieurement.",

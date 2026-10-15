@@ -51,6 +51,7 @@ import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import type AiAgentsTourStore from "SRC_DIR/store/AiAgentsTourStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
+import type AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import type InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
@@ -69,17 +70,23 @@ import { tourDemo } from "SRC_DIR/api/tourDemo";
 import {
   buildDemoFileList,
   type DemoAgentTab,
+  type TourDemoConfig,
 } from "SRC_DIR/api/tourDemo/data";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { NAVIGATION_TARGET_TIMEOUT } from "SRC_DIR/components/Tour/stepBuilders";
 
 import type { TCreatedBy } from "@docspace/shared/types";
 
-import { getTourSteps, type TourStepFlags } from "./tourSteps";
+import {
+  getTourSteps,
+  FIRST_ITEM_SELECTOR,
+  type TourStepFlags,
+} from "./tourSteps";
 
 type AiAgentsTourProps = {
   aiAgentsTourStore: AiAgentsTourStore;
   filesStore: FilesStore;
+  aiRoomStore: AiRoomStore;
   infoPanelStore: InfoPanelStore;
   settingsStore: SettingsStore;
   user: UserStore["user"];
@@ -134,6 +141,7 @@ const DEMO_AI_CONFIG: TAIConfig = {
 const AiAgentsTour = ({
   aiAgentsTourStore,
   filesStore,
+  aiRoomStore,
   infoPanelStore,
   settingsStore,
   user,
@@ -230,66 +238,104 @@ const AiAgentsTour = ({
   // the step that borrows it records everything it overwrites first.
   const borrowedPanel = useRef<InfoPanelState | null>(null);
 
+  type WalkedAgent = { id: number; title: string; rootFolderType?: number };
+  const walkedAgent = useRef<WalkedAgent | null>(null);
   const agentLocation = useRef<string | null>(null);
   const agentTab = useRef<DemoAgentTab | null>(null);
 
-  const enterAgent = useCallback((tab: DemoAgentTab) => {
-    const agent = tourDemo.space;
-    if (!agent || agentTab.current === tab) return;
+  const enterAgent = useCallback(
+    (tab: DemoAgentTab) => {
+      if (agentTab.current === tab) return;
 
-    if (!agentLocation.current) {
-      agentLocation.current = `${window.location.pathname}${window.location.search}`;
-    }
-    agentTab.current = tab;
+      if (!agentLocation.current) {
+        const own = filesStore.filesList?.[0] as WalkedAgent | undefined;
+        walkedAgent.current = tourDemo.isStandingInForList
+          ? (tourDemo.space as WalkedAgent | null)
+          : (own ?? null);
+        if (!walkedAgent.current) return;
+        agentLocation.current = `${window.location.pathname}${window.location.search}`;
+      }
+      const agent = walkedAgent.current;
+      if (!agent) return;
+      agentTab.current = tab;
 
-    const filter = FilesFilter.getDefault();
-    filter.folder = String(agent.id);
-    if (tab !== "chat") {
-      filter.searchArea =
-        tab === "knowledge" ? SearchArea.Knowledge : SearchArea.ResultStorage;
-    }
-    const category = tab === "chat" ? CategoryType.Chat : CategoryType.AIAgent;
+      const filter = FilesFilter.getDefault();
+      filter.folder = String(agent.id);
+      if (tab !== "chat") {
+        filter.searchArea =
+          tab === "knowledge" ? SearchArea.Knowledge : SearchArea.ResultStorage;
+      }
+      const category =
+        tab === "chat" ? CategoryType.Chat : CategoryType.AIAgent;
 
-    window.DocSpace?.navigate(
-      `${getCategoryUrl(category, agent.id)}?${filter.toUrlParams()}`,
-      {
-        state: {
-          title: agent.title,
-          isRoot: false,
-          rootFolderType: agent.rootFolderType,
+      window.DocSpace?.navigate(
+        `${getCategoryUrl(category, agent.id)}?${filter.toUrlParams()}`,
+        {
+          state: {
+            title: agent.title,
+            isRoot: false,
+            rootFolderType: agent.rootFolderType,
+          },
         },
-      },
-    );
-  }, []);
+      );
+    },
+    [filesStore],
+  );
 
   const leaveAgent = useCallback(() => {
     const previous = agentLocation.current;
     if (!previous) return;
     agentLocation.current = null;
     agentTab.current = null;
+    walkedAgent.current = null;
 
     window.DocSpace?.navigate(previous, { replace: true });
   }, []);
 
+  const settledOn = useCallback(
+    (tab: DemoAgentTab) => () =>
+      when(
+        () =>
+          aiRoomStore.currentTab ===
+          (tab === "outputs" ? "result" : tab),
+        { timeout: NAVIGATION_TARGET_TIMEOUT },
+      )
+        .catch(() => {})
+        .then(
+          () =>
+            new Promise<void>((resolve) => {
+              requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+            }),
+        ),
+    [aiRoomStore],
+  );
+
+  const standingIn = tourDemo.isStandingInForList;
   const agentHooks = useMemo(
     () => ({
       chat: {
         reveal: () => enterAgent("chat"),
         restore: () => {},
         navigates: true,
+        settled: settledOn("chat"),
       },
       knowledge: {
         reveal: () => enterAgent("knowledge"),
         restore: () => {},
         navigates: true,
+        settled: settledOn("knowledge"),
+        // A stand-in list comes back after the closing step; own tabs may be empty.
+        awaitBefore: standingIn ? FIRST_ITEM_SELECTOR : undefined,
       },
       outputs: {
         reveal: () => enterAgent("outputs"),
         restore: () => {},
         navigates: true,
+        settled: settledOn("outputs"),
+        awaitBefore: standingIn ? FIRST_ITEM_SELECTOR : undefined,
       },
     }),
-    [enterAgent],
+    [enterAgent, settledOn, standingIn],
   );
 
   const openInfoPanel = useCallback(() => {
@@ -361,56 +407,11 @@ const AiAgentsTour = ({
     void reloadSection();
   }, [restoreAi, reloadSection, leaveAgent]);
 
-  const demoHooks = useMemo(
-    // Nothing to restore afterwards: the section is already the user's own
-    // again by the time this step is done with it.
-    () => ({ reveal: endDemo, restore: () => {}, swapsList: true }),
-    [endDemo],
-  );
-
-  // A portal with no agents of its own shows a tour reduced to its sidebar
-  // step, so the section is stood in for while the tour runs. Armed on the
-  // pending request, before `usePendingTour` starts anything: the reload has to
-  // have landed by the time joyride freezes the step list against the DOM.
-  useEffect(() => {
-    if (!aiAgentsTourStore.isPending || aiAgentsTourStore.isRunning) return;
-    if (tourDemo.isActive || hasItems) return;
-    if (isMobileView || firstLoad || isSectionLoading || !isAiAgentsRoot)
-      return;
-    if (!user) return;
-    // The stand-in titles below are read once and frozen into the demo: the
-    // next run of this effect finds the demo active and returns. `AiAgentsTour`
-    // is not one of the preloaded namespaces (SRC_DIR/i18n.js), so with
-    // `useSuspense: false` it can still be a render behind the rest of the
-    // page — and a demo armed then keeps the raw keys for as long as it is up.
-    if (!ready) return;
-
-    // Whatever the audience. Somebody who cannot create an agent has the most
-    // to gain from this and the least without it: their empty section renders
-    // neither the banner nor the filter bar, so their tour is one sidebar step
-    // — nothing about what an agent row does, and nothing about the member list
-    // that says who else uses it. The closing step is what keeps that honest:
-    // it names the empty list for anyone with no button on that screen.
-
-    // Before the list, because the list is downstream of it: with AI off the
-    // section renders neither the banner nor the filter bar, and the reload
-    // would land on a page that has nowhere to put the stand-in agents.
-    standInForAi();
-
-    tourDemo.activate({
-      // The agents list is the one thing this section does not share with
-      // Rooms: it is answered by the AI service rather than by the files API.
+  // Shared by the arming effect and the closing step's `restore`.
+  const demoConfig = useMemo<TourDemoConfig>(
+    () => ({
       list: "agents",
-      // The tour never opens an agent — the chat, the knowledge base and the
-      // results all live behind a route of their own, and every one of them
-      // would have to be invented — so the stand-in list is the whole of what
-      // it borrows, and only ever when the real one came back empty.
       standInForList: true,
-      // Three jobs anybody recognizes as work an agent can take over, so the
-      // list reads as what the section is for at a glance. Unlike the rooms
-      // tour — where each room is named after its own type and the names
-      // already exist — an agent is named after its job, so these are the
-      // tour's own strings.
       rooms: [
         {
           roomType: RoomsType.AIRoom,
@@ -426,10 +427,7 @@ const AiAgentsTour = ({
         },
       ],
       owner: user as unknown as TCreatedBy,
-      // What the access step is about: an agent is set up by one person and
-      // used by several, some of whom only ever read what comes out of it.
       memberAccess: [ShareAccessRights.Editing, ShareAccessRights.ReadOnly],
-      // The two tabs the tour opens in the first stand-in agent.
       agentContents: {
         knowledgeTitle: t("Common:Knowledge"),
         outputsTitle: t("Common:ResultStorage"),
@@ -439,7 +437,42 @@ const AiAgentsTour = ({
           presentation: t("Common:Presentation"),
         }),
       },
-    });
+    }),
+    [t, user],
+  );
+
+  // Walked back out of the closing step: the stand-in list comes back.
+  const restoreDemo = useCallback(() => {
+    if (tourDemo.isActive || !user) return;
+    standInForAi();
+    tourDemo.activate(demoConfig);
+    void reloadSection();
+  }, [demoConfig, reloadSection, standInForAi, user]);
+
+  const demoHooks = useMemo(
+    () => ({
+      reveal: endDemo,
+      restore: restoreDemo,
+      swapsList: true,
+      navigates: true,
+    }),
+    [endDemo, restoreDemo],
+  );
+
+  // Armed on the pending request, when the section has no agents of its own.
+  useEffect(() => {
+    if (!aiAgentsTourStore.isPending || aiAgentsTourStore.isRunning) return;
+    if (tourDemo.isActive || hasItems) return;
+    if (isMobileView || firstLoad || isSectionLoading || !isAiAgentsRoot)
+      return;
+    if (!user) return;
+    if (!ready) return;
+
+
+    // With AI off the section has no banner or filter bar to stand the list in.
+    standInForAi();
+
+    tourDemo.activate(demoConfig);
 
     void reloadSection();
   }, [
@@ -591,6 +624,7 @@ export default inject(
     userStore,
     settingsStore,
     filesStore,
+    aiRoomStore,
     infoPanelStore,
     treeFoldersStore,
     clientLoadingStore,
@@ -615,6 +649,7 @@ export default inject(
       // opens the panel on it, then puts each back the way it found it. The
       // list is also what the tour reloads when it hands the stand-in back.
       filesStore,
+      aiRoomStore,
       infoPanelStore,
       // Borrowed the same way, for the length of the tour: with AI switched off
       // the section has nothing on it to point at.

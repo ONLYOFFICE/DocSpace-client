@@ -47,21 +47,20 @@ import {
   revealStep,
   sidebarSelector,
   type RevealHooks,
+  STAND_IN_ROW_SELECTORS,
 } from "SRC_DIR/components/Tour/stepBuilders";
 import { AI_AGENTS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import { DEMO_AGENT_FILE_IDS } from "SRC_DIR/api/tourDemo/data";
 
-const FIRST_ITEM_SELECTOR =
+export const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
-
-const SECOND_ITEM_SELECTOR =
-  '[data-testid="table-row-1"], [data-testid="files_row_1"], [data-testid="tile_1"]';
 
 // Only mounted while the panel is open; the step opens it first.
 const INFO_PANEL_SELECTOR = ".info-panel";
 // ui-kit Tabs names a tab `${id}_tab`.
 const MEMBERS_TAB_SELECTOR = '[data-testid="info_members_tab"]';
 const MEMBERS_LIST_SELECTOR = '[data-testid="info_panel_members_list"]';
+const MEMBER_ROW_SELECTOR = '[data-testid="info_panel_members_list_item_0"]';
 
 // Each file tab's step waits for its own first file, by element id: a tab
 // switch re-renders the list, so the row still on screen may be the old one.
@@ -107,7 +106,6 @@ export type TourStepFlags = {
   // What the empty screen offers once the stand-in is dropped; `null` for nothing.
   emptyScreenAction: "create" | "activate" | null;
   demoHooks?: RevealHooks;
-  // Walks into the stand-in agent, onto one of its three tabs.
   agentHooks?: { chat: RevealHooks; knowledge: RevealHooks; outputs: RevealHooks };
   // Returns the tour to the list; every step anchored outside an agent runs it.
   leaveAgent?: () => void;
@@ -191,13 +189,16 @@ export function getTourSteps(
     // 3. The sample notice, only when the whole list is one, as in Rooms.
     isStandIn &&
       hasItems &&
-      fileItemStep(
-        SECOND_ITEM_SELECTOR,
+      elementGroupStep(
+        FIRST_ITEM_SELECTOR,
+        STAND_IN_ROW_SELECTORS,
         t("AiAgentsTour:AgentDemoPreviewTitle"),
         t("AiAgentsTour:AgentDemoPreview"),
         callbacks,
         AI_AGENTS_TOUR_LABEL,
+        4,
         leaveAgent,
+        true,
       ),
 
     // 4. An agent row; a user gets other wording.
@@ -211,8 +212,9 @@ export function getTourSteps(
         leaveAgent,
       ),
 
-    // 5. Inside the stand-in agent: the chat.
-    isStandIn &&
+    // 5. The chat, in the user's own agent only: a stand-in cannot serve one.
+    hasItems &&
+      !isStandIn &&
       agentHooks &&
       revealStep(
         CHAT_SEND_SELECTOR,
@@ -224,30 +226,42 @@ export function getTourSteps(
         [CHAT_SUGGESTIONS_SELECTOR],
       ),
 
-    // 6. Knowledge: the tooltip under the list, the tab lit up with it.
-    isStandIn &&
+    // 6. Knowledge: a stand-in waits for its first file, an own agent for the tab.
+    hasItems &&
       agentHooks &&
       revealStep(
-        KNOWLEDGE_FILE_SELECTOR,
+        isStandIn ? KNOWLEDGE_FILE_SELECTOR : KNOWLEDGE_TAB_SELECTOR,
         t("AiAgentsTour:AgentKnowledgeBaseTitle"),
         t("AiAgentsTour:AgentKnowledgeBase"),
         callbacks,
         AI_AGENTS_TOUR_LABEL,
         agentHooks.knowledge,
-        [KNOWLEDGE_TAB_SELECTOR],
+        isStandIn
+          ? [KNOWLEDGE_TAB_SELECTOR]
+          : [FIRST_ITEM_SELECTOR, EMPTY_SCREEN_SELECTOR],
+        undefined,
+        4,
+        undefined,
+        true,
       ),
 
     // 7. Chat outputs, the same way.
-    isStandIn &&
+    hasItems &&
       agentHooks &&
       revealStep(
-        OUTPUTS_FILE_SELECTOR,
+        isStandIn ? OUTPUTS_FILE_SELECTOR : OUTPUTS_TAB_SELECTOR,
         t("AiAgentsTour:AgentOutputsTitle"),
         t("AiAgentsTour:AgentOutputs"),
         callbacks,
         AI_AGENTS_TOUR_LABEL,
         agentHooks.outputs,
-        [OUTPUTS_TAB_SELECTOR],
+        isStandIn
+          ? [OUTPUTS_TAB_SELECTOR]
+          : [FIRST_ITEM_SELECTOR, EMPTY_SCREEN_SELECTOR],
+        undefined,
+        4,
+        undefined,
+        true,
       ),
 
     // 8. Who may use the agent: the info panel, opened on the first agent.
@@ -255,7 +269,7 @@ export function getTourSteps(
       isDesktop &&
       infoPanelHooks &&
       revealStep(
-        MEMBERS_LIST_SELECTOR,
+        MEMBER_ROW_SELECTOR,
         isAdmin
           ? t("RoomsTour:RoomsMembersTitle")
           : t("AiAgentsTour:AgentAccessMemberTitle"),
@@ -265,10 +279,11 @@ export function getTourSteps(
         callbacks,
         AI_AGENTS_TOUR_LABEL,
         infoPanelHooks,
-        [MEMBERS_TAB_SELECTOR],
+        [MEMBERS_TAB_SELECTOR, MEMBERS_LIST_SELECTOR],
         FIRST_ITEM_SELECTOR,
         4,
         INFO_PANEL_SELECTOR,
+        true,
       ),
 
     // 9. Search and the filter, as one step.

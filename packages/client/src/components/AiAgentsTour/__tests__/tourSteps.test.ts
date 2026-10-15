@@ -95,6 +95,9 @@ describe("getTourSteps — admin", () => {
       "AiAgentsTour:AgentWhatIsTitle",
       "AiAgentsTour:AgentBuildTitle",
       "AiAgentsTour:AgentRowTitle",
+      "AiAgentsTour:AgentChatTitle",
+      "AiAgentsTour:AgentKnowledgeBaseTitle",
+      "AiAgentsTour:AgentOutputsTitle",
       "RoomsTour:RoomsMembersTitle",
       "AiAgentsTour:AgentFindTitle",
       "AiAgentsTour:AgentPlacesTitle",
@@ -119,15 +122,13 @@ describe("getTourSteps — admin", () => {
     expect(titles(userFlags)).not.toContain("RoomsTour:RoomsCreateFirstTitle");
   });
 
-  it("stays inside the eleven-step budget on the longest run there is", () => {
-    // The stand-in run is the long one: the sample notice, the three tabs
-    // inside the stand-in agent, and the closing step on the real create button.
+  it("stays inside the ten-step budget on the longest run there is", () => {
+    // The stand-in run: the sample notice and the two file tabs, no chat.
     expect(titles(demoFlags)).toEqual([
       "AiAgentsTour:AgentWhatIsTitle",
       "AiAgentsTour:AgentBuildTitle",
       "AiAgentsTour:AgentDemoPreviewTitle",
       "AiAgentsTour:AgentRowTitle",
-      "AiAgentsTour:AgentChatTitle",
       "AiAgentsTour:AgentKnowledgeBaseTitle",
       "AiAgentsTour:AgentOutputsTitle",
       "RoomsTour:RoomsMembersTitle",
@@ -135,7 +136,7 @@ describe("getTourSteps — admin", () => {
       "AiAgentsTour:AgentPlacesTitle",
       "RoomsTour:RoomsCreateFirstTitle",
     ]);
-    expect(steps(demoFlags).length).toBeLessThanOrEqual(11);
+    expect(steps(demoFlags).length).toBeLessThanOrEqual(10);
   });
 
   it("says the list is a sample right before pointing at a row of it", () => {
@@ -149,22 +150,18 @@ describe("getTourSteps — admin", () => {
     );
   });
 
-  it("names the list as a sample on its second row, leaving the first to the next step", () => {
-    document.body.innerHTML =
-      '<div data-testid="table-row-0"></div><div data-testid="table-row-1"></div>';
+  it("names the list as a sample over all three stand-in rows", () => {
     const sample = steps(demoFlags).find(
       (step) => step.title === "AiAgentsTour:AgentDemoPreviewTitle",
     )!;
 
-    expect((sample.target as () => Element | null)()).toBe(
-      document.querySelector('[data-testid="table-row-1"]'),
-    );
-
-    document.body.innerHTML = "";
+    // One spotlight over the three rows, and the tooltip anchored on it.
+    expect(sample.spotlightTarget).toBeTypeOf("function");
+    expect(sample.target).toBe(sample.spotlightTarget);
   });
 
-  it("walks into the stand-in agent's three tabs, and only into a stand-in", () => {
-    const chat = steps(demoFlags).find(
+  it("walks into the agent's tabs: three of the user's own, two of a stand-in", () => {
+    const chat = steps(adminFlags).find(
       (step) => step.title === "AiAgentsTour:AgentChatTitle",
     )!;
     const knowledge = steps(demoFlags).find(
@@ -194,10 +191,18 @@ describe("getTourSteps — admin", () => {
     expect(knowledge.spotlightTarget).toBeTypeOf("function");
     document.body.innerHTML = "";
 
-    // The user's own agents are never opened by the tour.
-    expect(titles(adminFlags)).not.toContain(
-      "AiAgentsTour:AgentKnowledgeBaseTitle",
+    // The user's own agent: the tabs anchor on the tab itself, no file ids.
+    document.body.innerHTML = '<div data-testid="knowledge_tab"></div>';
+    const ownKnowledge = steps(adminFlags).find(
+      (step) => step.title === "AiAgentsTour:AgentKnowledgeBaseTitle",
+    )!;
+    expect((ownKnowledge.target as () => Element | null)()).toBe(
+      document.querySelector('[data-testid="knowledge_tab"]'),
     );
+    document.body.innerHTML = "";
+
+    // A stand-in has no chat to open.
+    expect(titles(demoFlags)).not.toContain("AiAgentsTour:AgentChatTitle");
     expect(titles({ ...demoFlags, agentHooks: undefined })).not.toContain(
       "AiAgentsTour:AgentOutputsTitle",
     );
@@ -228,6 +233,9 @@ describe("getTourSteps — user", () => {
     expect(titles(userFlags)).toEqual([
       "AiAgentsTour:AgentWhatIsTitle",
       "AiAgentsTour:AgentRowTitle",
+      "AiAgentsTour:AgentChatTitle",
+      "AiAgentsTour:AgentKnowledgeBaseTitle",
+      "AiAgentsTour:AgentOutputsTitle",
       "AiAgentsTour:AgentAccessMemberTitle",
       "AiAgentsTour:AgentFindTitle",
       "AiAgentsTour:AgentPlacesTitle",
@@ -240,13 +248,19 @@ describe("getTourSteps — user", () => {
     expect(intro.content).toBe("AiAgentsTour:AgentWhatIsShared");
 
     // The row step too: their context menu holds none of the admin entries.
-    expect(steps(userFlags)[1].content).toBe("AiAgentsTour:AgentRowMember");
+    expect(
+      steps(userFlags).find(
+        (step) => step.title === "AiAgentsTour:AgentRowTitle",
+      )?.content,
+    ).toBe("AiAgentsTour:AgentRowMember");
   });
 });
 
 describe("getTourSteps — the info panel step", () => {
   it("opens the panel itself rather than pointing at the button that would", () => {
-    const access = steps(adminFlags)[3];
+    const access = steps(adminFlags).find(
+      (step) => step.title === "RoomsTour:RoomsMembersTitle",
+    )!;
 
     // The panel is only up while the step runs, so the start-of-run DOM check
     // has to look at the row instead — an agents list with no row in it has
@@ -259,19 +273,25 @@ describe("getTourSteps — the info panel step", () => {
     expect(access.before).toBeTypeOf("function");
   });
 
-  it("points at the member list, not the whole panel", () => {
+  it("waits for the first member, and lights up the tab with the list", () => {
+    // The list is on the page before its members arrive from the server, so
+    // the step anchors on the first row rather than on the empty list.
     document.body.innerHTML =
       '<div class="info-panel">' +
       '<div data-testid="info_members_tab"></div>' +
-      '<div data-testid="info_panel_members_list"></div>' +
+      '<div data-testid="info_panel_members_list">' +
+      '<div data-testid="info_panel_members_list_item_0"></div></div>' +
       "</div>";
-    const list = document.querySelector(
-      '[data-testid="info_panel_members_list"]',
+    const row = document.querySelector(
+      '[data-testid="info_panel_members_list_item_0"]',
     );
 
-    const access = steps(adminFlags)[3];
+    const access = steps(adminFlags).find(
+      (step) => step.title === "RoomsTour:RoomsMembersTitle",
+    )!;
 
-    expect((access.target as () => Element | null)()).toBe(list);
+    expect((access.target as () => Element | null)()).toBe(row);
+    expect(access.spotlightTarget).toBeTypeOf("function");
 
     document.body.innerHTML = "";
   });
@@ -343,7 +363,7 @@ describe("getTourSteps — what the page allows", () => {
     // The banner lets a room admin create an agent, but the empty screen only
     // offers a button to a portal admin — so the step that sends them at it has
     // a gate of its own, and there is nothing else to send an admin at.
-    expect(titles({ ...demoFlags, emptyScreenAction: null })).toHaveLength(10);
+    expect(titles({ ...demoFlags, emptyScreenAction: null })).toHaveLength(9);
     expect(titles({ ...demoFlags, emptyScreenAction: null }).at(-1)).toBe(
       "AiAgentsTour:AgentPlacesTitle",
     );

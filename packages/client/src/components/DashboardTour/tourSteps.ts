@@ -154,12 +154,9 @@ export function getTourSteps(
       DASHBOARD_TOUR_LABEL,
     ),
 
-    // 3. The whole row of apps, lit up as one region — every card named
-    // individually so the spotlight covers all of them rather than the first
-    // (see `appCardSelector`). The tooltip anchors on the section, so the
-    // heading above stays out of the spotlight while the text can still speak
-    // about the row as a whole: these are the products, and each one is a place
-    // to get something done.
+    // 3. The whole row of apps, every card named so the spotlight covers them
+    // all (see `appCardSelector`). The tooltip sits by the row, not by the
+    // section: the section's heading would push it up over the create tiles.
     appIds.length > 0 &&
       elementGroupStep(
         APPS_SECTION_SELECTOR,
@@ -168,6 +165,9 @@ export function getTourSteps(
         t("DashboardTour:DashboardApps"),
         callbacks,
         DASHBOARD_TOUR_LABEL,
+        6,
+        undefined,
+        true,
       ),
 
     // 4. The integrations card, which reads as an ad and is skipped as one —

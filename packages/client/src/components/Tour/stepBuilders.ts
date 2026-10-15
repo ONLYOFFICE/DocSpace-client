@@ -450,8 +450,8 @@ export function removeUnionSpotlight() {
 
 /**
  * Like `elementStep`, but the spotlight covers only the `members` inside the
- * target. The tooltip still anchors on `target`, so a group of siblings can be
- * highlighted without the container around them.
+ * target. The tooltip anchors on `target`, or with `anchorOnGroup` on the
+ * spotlight itself, for a container much taller than the group.
  */
 export function elementGroupStep(
   target: string,
@@ -462,7 +462,10 @@ export function elementGroupStep(
   logLabel: string,
   spotlightPadding = 6,
   prepare?: () => void,
+  anchorOnGroup = false,
 ): Step {
+  const group = () => unionSpotlight(members, target);
+
   return {
     ...elementStep(
       target,
@@ -473,7 +476,8 @@ export function elementGroupStep(
       spotlightPadding,
       prepare,
     ),
-    spotlightTarget: () => unionSpotlight(members, target),
+    ...(anchorOnGroup ? { target: group } : {}),
+    spotlightTarget: group,
     after: removeUnionSpotlight,
   };
 }

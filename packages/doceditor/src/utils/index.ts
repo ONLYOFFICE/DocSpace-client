@@ -46,9 +46,9 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 // The editor instance as DocSpace drives it. `@onlyoffice/doceditor-types` types
 // `window.DocEditor` strictly, but the editor also takes internal calls it does
-// not describe (`requestRoles`, `startFilling(true)`, the connector's
-// `sendEvent`) and the server config uses plain strings where it expects
-// literal unions, so the instance is read through `TDocEditor` instead.
+// not describe even in 10.0.0 (`requestRoles`, `startFilling(true)`, the
+// connector's `sendEvent`) and the server config uses plain strings where it
+// expects literal unions, so the instance is read through `TDocEditor` instead.
 export const getDocEditor = (): TDocEditor | undefined =>
   typeof window === "undefined"
     ? undefined

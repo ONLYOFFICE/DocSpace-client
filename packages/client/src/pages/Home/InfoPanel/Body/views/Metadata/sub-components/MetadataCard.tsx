@@ -49,10 +49,16 @@ import styles from "../Metadata.module.scss";
 type MetadataCardProps = {
   title: string;
   actions?: TCardActions;
+  prepend?: ReactNode;
   children: ReactNode;
 };
 
-const MetadataCard = ({ title, actions, children }: MetadataCardProps) => {
+const MetadataCard = ({
+  title,
+  actions,
+  prepend,
+  children,
+}: MetadataCardProps) => {
   const { t } = useTranslation(["Common"]);
 
   const getContextOptions = (): ContextMenuModel[] => [
@@ -76,6 +82,7 @@ const MetadataCard = ({ title, actions, children }: MetadataCardProps) => {
 
   return (
     <div className={styles.card} data-testid="info_panel_metadata_card">
+      {prepend}
       <div className={styles.cardHeader}>
         <Text fontSize="14px" fontWeight={600} lineHeight="16px" truncate>
           {title}

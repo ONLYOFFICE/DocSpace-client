@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { ReactNode } from "react";
+
 import type { TEntryMetadataTemplate } from "@docspace/shared/api/metadata/types";
 
 import type { TCardActions } from "../types";
@@ -43,10 +45,11 @@ import MetadataProperty from "./MetadataProperty";
 type TemplateCardProps = {
   template: TEntryMetadataTemplate;
   actions?: TCardActions;
+  cascade?: ReactNode;
 };
 
-const TemplateCard = ({ template, actions }: TemplateCardProps) => (
-  <MetadataCard title={template.name} actions={actions}>
+const TemplateCard = ({ template, actions, cascade }: TemplateCardProps) => (
+  <MetadataCard title={template.name} actions={actions} prepend={cascade}>
     {template.fields.map((field) => (
       <MetadataProperty key={field.id} label={field.name}>
         <FieldValue field={field} />

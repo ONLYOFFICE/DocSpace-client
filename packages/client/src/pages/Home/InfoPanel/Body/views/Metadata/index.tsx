@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -190,22 +190,23 @@ const Metadata = ({ selection }: MetadataProps) => {
 
           <div className={styles.blocks}>
             {getVisibleTemplates(metadata.templates).map((template) => (
-              <Fragment key={template.id}>
-                {isCascadable ? (
-                  <CascadeBlock
-                    itemType={itemType}
-                    templateName={template.name}
-                    isApplied={template.cascade}
-                    {...cascade.getTemplateState(template.id)}
-                    onApply={(conflict) => enableCascade(template, conflict)}
-                    onDisable={() => disableCascade(template)}
-                  />
-                ) : null}
-                <TemplateCard
-                  template={template}
-                  actions={getTemplateActions(template)}
-                />
-              </Fragment>
+              <TemplateCard
+                key={template.id}
+                template={template}
+                actions={getTemplateActions(template)}
+                cascade={
+                  isCascadable ? (
+                    <CascadeBlock
+                      itemType={itemType}
+                      templateName={template.name}
+                      isApplied={template.cascade}
+                      {...cascade.getTemplateState(template.id)}
+                      onApply={(conflict) => enableCascade(template, conflict)}
+                      onDisable={() => disableCascade(template)}
+                    />
+                  ) : undefined
+                }
+              />
             ))}
 
             {metadata.customFields.length ? (

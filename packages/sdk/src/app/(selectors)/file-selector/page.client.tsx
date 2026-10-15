@@ -62,7 +62,7 @@ import type {
   TFilesSelectorInit,
   TSelectedFileInfo,
   FilesSelectorProps,
-  FolderDtoInteger,
+  FolderDto,
   SdkFolderType,
 } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import { getSelectFormatTranslation } from "@docspace/shared/utils";
@@ -306,7 +306,7 @@ export default function FilesSelectorClient({
     roomsFolderId,
     rootFolderType: rootFolderType as SdkFolderType,
     submitButtonLabel: acceptLabel || t("SelectAction"),
-    treeFolders: foldersTree as unknown as FolderDtoInteger[],
+    treeFolders: foldersTree as unknown as FolderDto[],
     withBreadCrumbs: showBreadCrumbs as boolean,
     withCancelButton: cancel as boolean,
     withCreate: false,

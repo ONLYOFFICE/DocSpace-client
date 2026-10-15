@@ -327,8 +327,8 @@ test.describe("Billing wallet", () => {
     await page.getByTestId("transaction_type_combobox").click();
     await page.getByTestId("credit_transactions_option").click();
 
-    await expect.poll(() => requests.at(-1)).toContain("Credit=true");
-    expect(requests.at(-1)).toContain("Debit=false");
+    await expect.poll(() => requests.at(-1)).toContain("credit=true");
+    expect(requests.at(-1)).toContain("debit=false");
   });
 
   test("the type menu offers all transactions, credits and debits", async ({
@@ -423,7 +423,7 @@ test.describe("Billing wallet", () => {
     await expect(page.getByTestId("clear_filter_button")).toBeVisible();
     await expect
       .poll(() => requests.at(-1))
-      .toContain("ParticipantName=contact-user-id");
+      .toContain("participantName=contact-user-id");
 
     await expectScreenshot(page, ["desktop", "wallet", "contact-selected.png"]);
 
@@ -432,7 +432,7 @@ test.describe("Billing wallet", () => {
     await expect(page.getByText("Select contact")).toBeVisible();
     await expect
       .poll(() => requests.at(-1))
-      .not.toContain("ParticipantName=contact-user-id");
+      .not.toContain("participantName=contact-user-id");
   });
 
   test("the upcoming payments tab explains what will be charged", async ({

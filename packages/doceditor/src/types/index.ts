@@ -48,9 +48,9 @@ import { HeaderProps, TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/sel
 import type {
   TSelectedFileInfo,
   FilesSettingsDto,
-  FolderDtoInteger,
+  FolderDto,
   SdkFolderType,
-  FileEntryDtoIntegerAllOfSecurity,
+  TFileEntrySecurity,
 } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import type {
   ConflictResolveType,
@@ -331,7 +331,7 @@ export interface SelectFolderDialogProps {
     selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
-      | FileEntryDtoIntegerAllOfSecurity
+      | TFileEntrySecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
     isDisabledFolder?: boolean,
@@ -346,7 +346,7 @@ export interface SelectFolderDialogProps {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: FolderDtoInteger,
+    selectedTreeNode: FolderDto,
     selectedFileInfo: TSelectedFileInfo,
     isInsideKnowledge?: boolean,
     isInsideResultStorage?: boolean,
@@ -371,7 +371,7 @@ export interface SelectFileDialogProps {
     selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
-      | FileEntryDtoIntegerAllOfSecurity
+      | TFileEntrySecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
     isDisabledFolder?: boolean,
@@ -387,7 +387,7 @@ export interface SelectFileDialogProps {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: FolderDtoInteger,
+    selectedTreeNode: FolderDto,
     selectedFileInfo: TSelectedFileInfo,
     isInsideKnowledge?: boolean,
     isInsideResultStorage?: boolean,
@@ -518,7 +518,7 @@ export type StartFillingSelectorDialogProps = {
     selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
-      | FileEntryDtoIntegerAllOfSecurity
+      | TFileEntrySecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
     isDisabledFolder?: boolean,
@@ -533,7 +533,7 @@ export type StartFillingSelectorDialogProps = {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: FolderDtoInteger,
+    selectedTreeNode: FolderDto,
     selectedFileInfo: TSelectedFileInfo,
     isInsideKnowledge?: boolean,
     isInsideResultStorage?: boolean,

@@ -54,7 +54,7 @@ import {
 import { type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import type {
   TSelectedFileInfo,
-  FolderDtoInteger,
+  FolderDto,
   SdkFolderType,
   FilesSettingsDto,
 } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
@@ -548,7 +548,7 @@ const FilesSelectorWrapper = ({
   const isRoomDisabled = React.useMemo(
     () =>
       (isMove || isCopy || isRestore || isRestoreAll) && !sourceInPrivateRoom
-        ? (room: FolderDtoInteger) => room?.private === true
+        ? (room: FolderDto) => room?.private === true
         : undefined,
     [isMove, isCopy, isRestore, isRestoreAll, sourceInPrivateRoom],
   );
@@ -570,7 +570,7 @@ const FilesSelectorWrapper = ({
       withSubFolders={withSubFolders}
       getIcon={getIcon}
       setIsDataReady={setIsDataReady}
-      treeFolders={treeFolders as unknown as FolderDtoInteger[]}
+      treeFolders={treeFolders as unknown as FolderDto[]}
       withRecentTreeFolder={withRecentTreeFolder}
       withFavoritesTreeFolder={withFavoritesTreeFolder}
       withAIAgentsTreeFolder={withAIAgentsTreeFolder}

@@ -287,7 +287,7 @@ test.describe("Billing usage", () => {
     await page.getByTestId("usage_row_download").first().click();
 
     await expect.poll(() => posted.length).toBe(1);
-    expect(posted[0]).toContain('"serviceName":"admin"');
+    expect(posted[0]).toContain('"serviceName":["admin"]');
   });
 
   test("a service row opens the page that service is billed from", async ({

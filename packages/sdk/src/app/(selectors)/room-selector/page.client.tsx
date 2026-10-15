@@ -42,7 +42,7 @@ import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
 import { getPrimaryLink } from "@docspace/shared/api/rooms";
 import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
-import type { FolderDtoInteger } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
+import type { FolderDto } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
 import type { TGetRooms } from "@docspace/shared/api/rooms/types";
@@ -171,7 +171,7 @@ export default function RoomSelectorClient({
 			{...roomTypeProps}
 			{...searchProps}
 			initHasNextPage={total > pageCount}
-			initItems={folders as unknown as FolderDtoInteger[]}
+			initItems={folders as unknown as FolderDto[]}
 			initTotal={total}
 			isMultiSelect={false}
 			onSubmit={onSubmit}

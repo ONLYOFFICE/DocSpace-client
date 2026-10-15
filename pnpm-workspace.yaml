@@ -122,6 +122,9 @@ overrides:
   "@types/react-dom": "19.2.3"
   "@smithy/config-resolver": "4.4.6"
   diff: "4.0.4"
+  # Local trial of the unreleased API SDK 4.0.0 (release/v4.0.0 branch), packed
+  # from source; ui-kit is the only consumer. Remove together with the tarball.
+  "@onlyoffice/docspace-api-sdk": "file:onlyoffice-docspace-api-sdk-4.0.0.tgz"
   lodash: "4.18.1"
   lodash-es: "4.18.1"
   js-yaml: "^4.2.0"

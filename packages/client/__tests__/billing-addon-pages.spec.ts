@@ -799,7 +799,7 @@ test.describe("Backup page", () => {
     await page.getByTestId("download_report_button").click();
 
     await expect.poll(() => orders.length).toBe(1);
-    expect(orders[0]).toContain('"serviceName":"backup"');
+    expect(orders[0]).toContain('"serviceName":["backup"]');
     expect(orders[0]).toContain('"credit":true');
     expect(orders[0]).toContain('"debit":true');
     expect((await report).url()).toContain("/backup-report.xlsx");

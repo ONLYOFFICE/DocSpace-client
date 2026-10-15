@@ -50,9 +50,9 @@ import { RoomsType } from "@docspace/shared/enums";
 import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
 import type {
   FilesSelectorProps,
-  FolderDtoInteger,
+  FolderDto,
   TSelectedFileInfo,
-  FileEntryDtoIntegerAllOfSecurity,
+  TFileEntrySecurity,
 } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import { FloatingButton } from "@onlyoffice/apps-ui-kit/components/floating-button";
@@ -774,7 +774,7 @@ const DocsLayoutCore = observer(
                                   }
                                   treeFolders={
                                     (foldersTree ??
-                                      []) as unknown as FolderDtoInteger[]
+                                      []) as unknown as FolderDto[]
                                   }
                                   filesSettings={
                                     filesSettings as unknown as NonNullable<
@@ -789,7 +789,7 @@ const DocsLayoutCore = observer(
                                   openRoot={selectorMode === "restore"}
                                   // withInit
                                   // initItems={
-                                  //   selectorInitData.items as unknown as FolderDtoInteger[]
+                                  //   selectorInitData.items as unknown as FolderDto[]
                                   // }
                                   // initBreadCrumbs={selectorInitData.breadCrumbs}
                                   // initSelectedItemType="files"
@@ -832,7 +832,7 @@ const DocsLayoutCore = observer(
                                   disabledItems={disabledItems}
                                   isRoomDisabled={
                                     !isPrivate
-                                      ? (room: FolderDtoInteger) =>
+                                      ? (room: FolderDto) =>
                                           room?.private === true
                                       : undefined
                                   }

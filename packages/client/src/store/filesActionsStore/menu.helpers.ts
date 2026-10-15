@@ -35,7 +35,7 @@
 
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TTranslation } from "@docspace/shared/types";
 import FilesHeaderOptionStore from "../FilesHeaderOptionStore";
@@ -327,6 +327,10 @@ self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
   let pinName = "unpin";
   const { selection } = self.filesStore;
 
+  const hasFormRoom = selection.some(
+    (item) => item.roomType === RoomsType.FormRoom,
+  );
+
   selection.forEach((item) => {
     if (!item.pinned) pinName = "pin";
   });
@@ -335,7 +339,6 @@ self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
   const createGroup = self.getOption("create-group", t);
   const addToGroup = self.getOption("add-to-group", t);
   const removeFromGroup = self.getOption("remove-from-group", t);
-  const archive = self.getOption("archive", t);
   const changeQuota = self.getOption("change-quota", t);
   const disableQuota = self.getOption("disable-quota", t);
   const defaultQuota = self.getOption("default-quota", t);
@@ -345,8 +348,11 @@ self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
     .set(pinName, pin)
     .set("create-group", createGroup)
     .set("add-to-group", addToGroup)
-    .set("remove-from-group", removeFromGroup)
-    .set("archive", archive)
+    .set("remove-from-group", removeFromGroup);
+
+  if (!hasFormRoom) itemsCollection.set("archive", self.getOption("archive", t));
+
+  itemsCollection
     .set("change-quota", changeQuota)
     .set("default-quota", defaultQuota)
     .set("disable-quota", disableQuota)

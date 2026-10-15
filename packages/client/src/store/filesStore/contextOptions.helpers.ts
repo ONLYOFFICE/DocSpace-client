@@ -894,6 +894,10 @@ export const buildContextOptions = (
       ]);
     }
 
+    if (item.roomType === RoomsType.FormRoom) {
+      roomOptions = removeOptions(roomOptions, ["archive-room"]);
+    }
+
     if (!canRemoveRoom) {
       roomOptions = removeOptions(roomOptions, ["delete"]);
     }

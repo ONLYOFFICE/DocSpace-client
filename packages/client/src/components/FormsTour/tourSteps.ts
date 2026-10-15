@@ -38,7 +38,9 @@ import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
 import {
+  navItemStep,
   sidebarListStep,
+  sidebarSelector,
   elementStep,
   fileItemStep,
   menuStep,
@@ -51,6 +53,9 @@ import { DEMO_SPACE_ITEM_IDS } from "SRC_DIR/api/tourDemo/data";
 
 const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
+
+const SECOND_ITEM_SELECTOR =
+  '[data-testid="table-row-1"], [data-testid="files_row_1"], [data-testid="tile_1"]';
 
 // Rows inside the stand-in space, by the element id every view puts on them.
 const itemSelector = (id: number, isFolder = true) =>
@@ -119,21 +124,31 @@ export function getTourSteps(
   // One bullet per sub-item, named by the sidebar's own labels; Templates is
   // admin-only there too.
   const places = [
-    t("FormsTour:FormsPlacesRecent", {
-      recent: t("Common:Recent"),
-      favorites: t("Common:Favorites"),
-    }),
+    t("FilesTour:TourPlacesRecent", { sectionName: t("Common:Recent") }),
+    t("FilesTour:TourPlacesFavorites", { sectionName: t("Common:Favorites") }),
     canUseTemplates &&
       t("FormsTour:FormsPlacesTemplates", {
         templates: t("Common:Templates"),
       }),
-    t("FormsTour:FormsPlacesTrash", { trash: t("Common:TrashSection") }),
+    t("FilesTour:TourPlacesTrash", { sectionName: t("Common:TrashSection") }),
   ].filter(Boolean) as string[];
 
   // Always a stand-in space: only it is sure to hold a form and both folders.
   const showInsideSpace = isDemo && !!spaceHooks;
 
   return [
+    // 0. The section, on its sidebar item.
+    hasForms &&
+      navItemStep(
+        sidebarSelector("forms"),
+        t("FormsTour:FormsOverviewTitle"),
+        t("FormsTour:FormsOverview"),
+        callbacks,
+        FORMS_TOUR_LABEL,
+        false,
+        leaveSpace,
+      ),
+
     // 1. What a form space is, on the tile that creates one.
     canCreate &&
       showFilter &&
@@ -166,7 +181,7 @@ export function getTourSteps(
       isStandIn &&
       hasItems &&
       fileItemStep(
-        FIRST_ITEM_SELECTOR,
+        SECOND_ITEM_SELECTOR,
         t("FormsTour:FormsDemoPreviewTitle"),
         t("FormsTour:FormsDemoPreview"),
         callbacks,

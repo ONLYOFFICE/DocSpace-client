@@ -52,6 +52,7 @@ const stepTitled = (flags: TourStepFlags, title: string) =>
   steps(flags).find((step) => step.title === title)!;
 
 const FULL_RUN = [
+  "FormsTour:FormsOverviewTitle",
   "FormsTour:FormsSpaceTitle",
   "FormsTour:FormsTemplatesTitle",
   "FormsTour:FormsDemoPreviewTitle",
@@ -129,17 +130,18 @@ describe("getTourSteps — room admin", () => {
     );
   });
 
-  it("stays inside the eleven-step budget on the longest run there is", () => {
-    expect(steps(demoFlags).length).toBeLessThanOrEqual(11);
+  it("stays inside the twelve-step budget on the longest run there is", () => {
+    expect(steps(demoFlags).length).toBeLessThanOrEqual(12);
   });
 
   it("names every sidebar shortcut it points at, one bullet each", () => {
     const places = steps(adminFlags).at(-2);
 
     expect(bullets(places)).toEqual([
-      "FormsTour:FormsPlacesRecent",
+      "FilesTour:TourPlacesRecent",
+      "FilesTour:TourPlacesFavorites",
       "FormsTour:FormsPlacesTemplates",
-      "FormsTour:FormsPlacesTrash",
+      "FilesTour:TourPlacesTrash",
     ]);
     // The spotlight covers the sub-list the anchor item belongs to.
     expect(places?.spotlightTarget).toBeTypeOf("function");
@@ -190,6 +192,20 @@ describe("getTourSteps — inside a space", () => {
     expect(titles(adminFlags)).not.toContain(
       "FormsTour:FormsDemoPreviewTitle",
     );
+  });
+
+  it("names the list as a sample on its second row, leaving the first to the next step", () => {
+    document.body.innerHTML =
+      '<div data-testid="table-row-0"></div><div data-testid="table-row-1"></div>';
+    const sample = steps(demoFlags).find(
+      (step) => step.title === "FormsTour:FormsDemoPreviewTitle",
+    )!;
+
+    expect((sample.target as () => Element | null)()).toBe(
+      document.querySelector('[data-testid="table-row-1"]'),
+    );
+
+    document.body.innerHTML = "";
   });
 
   it("opens the blank form's own menu for the launch step", () => {
@@ -342,6 +358,7 @@ describe("getTourSteps — what the page allows", () => {
     });
 
     expect(emptyPage).toEqual([
+      "FormsTour:FormsOverviewTitle",
       "FormsTour:FormsBlankTitle",
       "FormsTour:FormsShareTitle",
       "FormsTour:FormsFillYourselfTitle",
@@ -349,6 +366,18 @@ describe("getTourSteps — what the page allows", () => {
       "FormsTour:FormsCompleteTitle",
       "FormsTour:FormsPlacesTitle",
     ]);
+  });
+
+  it("opens on the section item, for everyone the sidebar shows it to", () => {
+    const [overview] = steps(fillerFlags);
+
+    expect(overview.target).toBe('[data-item-id="forms"]');
+    expect(overview.content).toBe("FormsTour:FormsOverview");
+    // Walking back into it from inside the stand-in space leaves the space.
+    expect(overview.before).toBeTypeOf("function");
+    expect(titles({ ...adminFlags, hasForms: false })).not.toContain(
+      "FormsTour:FormsOverviewTitle",
+    );
   });
 
   it("drops the row step when the section has no spaces", () => {

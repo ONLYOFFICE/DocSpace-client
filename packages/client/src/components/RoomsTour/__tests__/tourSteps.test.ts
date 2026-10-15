@@ -36,6 +36,8 @@
 import { describe, it, expect, vi } from "vitest";
 import type { TFunction } from "i18next";
 
+import { bullets } from "SRC_DIR/components/Tour/__tests__/bullets";
+
 import {
   NAVIGATION_TARGET_TIMEOUT,
   STEP_TARGET_TIMEOUT,
@@ -291,7 +293,8 @@ describe("getTourSteps — walking back out of the closing step", () => {
     // reveal, so the row arriving is the only thing that can move it along.
     hooksForRun.reveal.mockImplementation(() => {
       document.body.innerHTML +=
-        '<div class="info-panel"><div data-testid="info_panel_members_list"></div></div>';
+        '<div class="info-panel"><div data-testid="info_panel_members_list">' +
+        '<div data-testid="info_panel_members_list_item_0"></div></div></div>';
     });
 
     const startedAt = Date.now();
@@ -325,6 +328,19 @@ describe("getTourSteps — what the page allows", () => {
   it("drops the members step when there is no room to open it on", () => {
     expect(titles({ ...adminFlags, hasItems: false })).not.toContain(
       "RoomsTour:RoomsMembersTitle",
+    );
+  });
+
+  it("keeps the Templates shortcut out of a member's sidebar step", () => {
+    // The sidebar shows Templates to admins only, so the bullet goes with it.
+    const places = (flags: TourStepFlags) =>
+      steps(flags).find((step) => step.title === "RoomsTour:RoomsPlacesTitle");
+
+    expect(bullets(places(adminFlags))).toContain(
+      "RoomsTour:RoomsPlacesTemplates",
+    );
+    expect(bullets(places(memberFlags))).not.toContain(
+      "RoomsTour:RoomsPlacesTemplates",
     );
   });
 

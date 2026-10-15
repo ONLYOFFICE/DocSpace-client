@@ -68,12 +68,12 @@ export const GROUPS_SELECTOR = ".group-tags";
 export const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
-
 // Only mounted while the panel is open.
 const INFO_PANEL_SELECTOR = ".info-panel";
 // ui-kit Tabs names the tab `${InfoPanelView.infoMembers}_tab`.
 const MEMBERS_TAB_SELECTOR = '[data-testid="info_members_tab"]';
 const MEMBERS_LIST_SELECTOR = '[data-testid="info_panel_members_list"]';
+const MEMBER_ROW_SELECTOR = '[data-testid="info_panel_members_list_item_0"]';
 
 // The "New room" button of the filter bar; the test id covers its label alone.
 const NEW_BUTTON_SELECTOR =
@@ -218,19 +218,20 @@ export function getTourSteps(
       isDesktop &&
       infoPanelHooks &&
       revealStep(
-        MEMBERS_LIST_SELECTOR,
+        MEMBER_ROW_SELECTOR,
         t("RoomsTour:RoomsMembersTitle"),
         t("RoomsTour:RoomsMembers"),
         callbacks,
         ROOMS_TOUR_LABEL,
         infoPanelHooks,
-        [MEMBERS_TAB_SELECTOR],
+        [MEMBERS_TAB_SELECTOR, MEMBERS_LIST_SELECTOR],
         FIRST_ITEM_SELECTOR,
         4,
         INFO_PANEL_SELECTOR,
+        true,
       ),
 
-    // 6. Sidebar shortcuts, named by the sidebar's own labels.
+    // 6. Sidebar shortcuts; Templates is admin-only there too.
     showQuickAccess &&
       sidebarListStep(
         "rooms-recent",
@@ -243,11 +244,12 @@ export function getTourSteps(
           t("FilesTour:TourPlacesTrash", {
             sectionName: t("Common:TrashSection"),
           }),
-          t("RoomsTour:RoomsPlacesTemplates", {
-            templates: t("Common:Templates"),
-          }),
+          canUseTemplates &&
+            t("RoomsTour:RoomsPlacesTemplates", {
+              templates: t("Common:Templates"),
+            }),
           t("RoomsTour:RoomsPlacesArchive", { archive: t("Common:Archive") }),
-        ],
+        ].filter(Boolean) as string[],
         callbacks,
         ROOMS_TOUR_LABEL,
       ),

@@ -67,6 +67,8 @@ const adminFlags: TourStepFlags = {
   isStandIn: false,
   emptyScreenAction: "create",
   demoHooks: hooks(),
+  agentHooks: { chat: hooks(), knowledge: hooks(), outputs: hooks() },
+  leaveAgent: vi.fn(),
 };
 
 /** The same admin on a portal whose agents list is stood in for. */
@@ -117,19 +119,97 @@ describe("getTourSteps — admin", () => {
     expect(titles(userFlags)).not.toContain("RoomsTour:RoomsCreateFirstTitle");
   });
 
-  it("stays inside the seven-step budget on the longest run there is", () => {
-    // The stand-in run is the long one: it is the only one that closes on the
-    // real create button.
-    expect(steps(demoFlags)).toHaveLength(7);
-    expect(steps(demoFlags).length).toBeLessThanOrEqual(7);
+  it("stays inside the eleven-step budget on the longest run there is", () => {
+    // The stand-in run is the long one: the sample notice, the three tabs
+    // inside the stand-in agent, and the closing step on the real create button.
+    expect(titles(demoFlags)).toEqual([
+      "AiAgentsTour:AgentWhatIsTitle",
+      "AiAgentsTour:AgentBuildTitle",
+      "AiAgentsTour:AgentDemoPreviewTitle",
+      "AiAgentsTour:AgentRowTitle",
+      "AiAgentsTour:AgentChatTitle",
+      "AiAgentsTour:AgentKnowledgeBaseTitle",
+      "AiAgentsTour:AgentOutputsTitle",
+      "RoomsTour:RoomsMembersTitle",
+      "AiAgentsTour:AgentFindTitle",
+      "AiAgentsTour:AgentPlacesTitle",
+      "RoomsTour:RoomsCreateFirstTitle",
+    ]);
+    expect(steps(demoFlags).length).toBeLessThanOrEqual(11);
+  });
+
+  it("says the list is a sample right before pointing at a row of it", () => {
+    const demoTitles = titles(demoFlags);
+    const preview = demoTitles.indexOf("AiAgentsTour:AgentDemoPreviewTitle");
+
+    expect(demoTitles[preview + 1]).toBe("AiAgentsTour:AgentRowTitle");
+    // Not said on a list of the user's own.
+    expect(titles(adminFlags)).not.toContain(
+      "AiAgentsTour:AgentDemoPreviewTitle",
+    );
+  });
+
+  it("names the list as a sample on its second row, leaving the first to the next step", () => {
+    document.body.innerHTML =
+      '<div data-testid="table-row-0"></div><div data-testid="table-row-1"></div>';
+    const sample = steps(demoFlags).find(
+      (step) => step.title === "AiAgentsTour:AgentDemoPreviewTitle",
+    )!;
+
+    expect((sample.target as () => Element | null)()).toBe(
+      document.querySelector('[data-testid="table-row-1"]'),
+    );
+
+    document.body.innerHTML = "";
+  });
+
+  it("walks into the stand-in agent's three tabs, and only into a stand-in", () => {
+    const chat = steps(demoFlags).find(
+      (step) => step.title === "AiAgentsTour:AgentChatTitle",
+    )!;
+    const knowledge = steps(demoFlags).find(
+      (step) => step.title === "AiAgentsTour:AgentKnowledgeBaseTitle",
+    )!;
+    const outputs = steps(demoFlags).find(
+      (step) => step.title === "AiAgentsTour:AgentOutputsTitle",
+    )!;
+
+    document.body.innerHTML =
+      '<div><button data-testid="send-button"></button></div>' +
+      '<div data-chat-active=""><button data-testid="send-button"></button></div>' +
+      '<div id="file_-1120"></div><div id="file_-1130"></div>';
+    // The active chat's button, not the hidden copy another tab keeps mounted.
+    expect((chat.target as () => Element | null)()).toBe(
+      document.querySelector('[data-chat-active] [data-testid="send-button"]'),
+    );
+    // Each file tab anchors on its own first file, so a tab switch is waited
+    // out rather than measured against the row the other tab left behind.
+    expect((knowledge.target as () => Element | null)()).toBe(
+      document.querySelector("#file_-1120"),
+    );
+    expect((outputs.target as () => Element | null)()).toBe(
+      document.querySelector("#file_-1130"),
+    );
+    // The tab is lit up together with the list under it.
+    expect(knowledge.spotlightTarget).toBeTypeOf("function");
+    document.body.innerHTML = "";
+
+    // The user's own agents are never opened by the tour.
+    expect(titles(adminFlags)).not.toContain(
+      "AiAgentsTour:AgentKnowledgeBaseTitle",
+    );
+    expect(titles({ ...demoFlags, agentHooks: undefined })).not.toContain(
+      "AiAgentsTour:AgentOutputsTitle",
+    );
   });
 
   it("names every sidebar shortcut it points at, one bullet each", () => {
     const places = steps(adminFlags).at(-2);
 
     expect(bullets(places)).toEqual([
-      "AiAgentsTour:AgentPlacesRecent",
-      "AiAgentsTour:AgentPlacesTrash",
+      "FilesTour:TourPlacesRecent",
+      "FilesTour:TourPlacesFavorites",
+      "FilesTour:TourPlacesTrash",
     ]);
     // The spotlight covers the sub-list the anchor item belongs to.
     expect(places?.spotlightTarget).toBeTypeOf("function");
@@ -227,7 +307,10 @@ describe("getTourSteps — what the page allows", () => {
       hasTrash: false,
     }).at(-2);
 
-    expect(bullets(withoutTrash)).toEqual(["AiAgentsTour:AgentPlacesRecent"]);
+    expect(bullets(withoutTrash)).toEqual([
+      "FilesTour:TourPlacesRecent",
+      "FilesTour:TourPlacesFavorites",
+    ]);
 
     // With none of the three aliases there is no sub-list to anchor on at all.
     expect(
@@ -260,7 +343,7 @@ describe("getTourSteps — what the page allows", () => {
     // The banner lets a room admin create an agent, but the empty screen only
     // offers a button to a portal admin — so the step that sends them at it has
     // a gate of its own, and there is nothing else to send an admin at.
-    expect(titles({ ...demoFlags, emptyScreenAction: null })).toHaveLength(6);
+    expect(titles({ ...demoFlags, emptyScreenAction: null })).toHaveLength(10);
     expect(titles({ ...demoFlags, emptyScreenAction: null }).at(-1)).toBe(
       "AiAgentsTour:AgentPlacesTitle",
     );

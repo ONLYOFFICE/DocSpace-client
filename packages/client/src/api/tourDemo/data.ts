@@ -128,6 +128,11 @@ export type TourDemoConfig = {
     inProgressTitle: string;
     completeTitle: string;
   };
+  agentContents?: {
+    knowledgeTitle: string;
+    outputsTitle: string;
+    files: TourDemoFile[];
+  };
 };
 
 /**
@@ -141,6 +146,17 @@ export const DEMO_SPACE_ITEM_IDS = {
   inProgress: DEMO_CONTENTS_ID_BASE,
   complete: DEMO_CONTENTS_ID_BASE - 1,
   form: DEMO_CONTENTS_ID_BASE - 2,
+} as const;
+
+export const DEMO_AGENT_ITEM_IDS = {
+  agent: DEMO_ID_BASE,
+  knowledge: DEMO_CONTENTS_ID_BASE - 10,
+  outputs: DEMO_CONTENTS_ID_BASE - 11,
+} as const;
+
+export const DEMO_AGENT_FILE_IDS = {
+  knowledge: DEMO_CONTENTS_ID_BASE - 20,
+  outputs: DEMO_CONTENTS_ID_BASE - 30,
 } as const;
 
 /**
@@ -569,6 +585,113 @@ const fullFolderSecurity = {
   IndexExport: false,
   HistoryExport: false,
 };
+
+export type DemoAgentTab = "chat" | "knowledge" | "outputs";
+
+export function buildDemoAgentContents(
+  room: TRoom,
+  sectionRoot: TFolder,
+  config: TourDemoConfig,
+  tab: DemoAgentTab,
+): TGetFolder {
+  const now = demoTimestamp();
+  const isKnowledge = tab === "knowledge";
+
+  if (tab === "chat") {
+    return {
+      files: [],
+      folders: [],
+      current: room as unknown as TFolder,
+      pathParts: [
+        { id: sectionRoot.id, title: sectionRoot.title },
+        { id: room.id, title: room.title },
+      ],
+      startIndex: 0,
+      count: 0,
+      total: 0,
+      new: 0,
+    };
+  }
+
+  const current = {
+    parentId: room.id,
+    filesCount: 0,
+    foldersCount: 0,
+    new: 0,
+    mute: false,
+    pinned: false,
+    private: false,
+    indexing: false,
+    denyDownload: false,
+    fileEntryType: 1,
+    id: isKnowledge
+      ? DEMO_AGENT_ITEM_IDS.knowledge
+      : DEMO_AGENT_ITEM_IDS.outputs,
+    rootFolderId: sectionRoot.id,
+    rootFolderType: sectionRoot.rootFolderType,
+    type: isKnowledge ? FolderType.Knowledge : FolderType.ResultStorage,
+    canShare: false,
+    security: fullFolderSecurity,
+    title: isKnowledge
+      ? (config.agentContents?.knowledgeTitle ?? "")
+      : (config.agentContents?.outputsTitle ?? ""),
+    access: ShareAccessRights.None,
+    shared: false,
+    created: now,
+    createdBy: config.owner,
+    updated: now,
+    updatedBy: config.owner,
+    isFolder: true,
+  } as unknown as TFolder;
+
+  // Reference files for the knowledge base; a shorter list of results.
+  const sources = config.agentContents?.files ?? [];
+  const files = (isKnowledge ? sources : sources.slice(0, 2)).map(
+    (file, index) =>
+      ({
+        ...demoFileFields(current, file, index, FolderType.AIAgents, now),
+        id:
+          (isKnowledge
+            ? DEMO_AGENT_FILE_IDS.knowledge
+            : DEMO_AGENT_FILE_IDS.outputs) - index,
+        canShare: false,
+        createdBy: config.owner,
+        updatedBy: config.owner,
+        access: ShareAccessRights.None,
+        security: ownFileSecurity,
+        viewAccessibility: {
+          ImageView: false,
+          MediaView: false,
+          WebView: true,
+          WebEdit: true,
+          WebReview: false,
+          WebCustomFilterEditing: false,
+          WebRestrictedEditing: false,
+          WebComment: true,
+          CoAuhtoring: true,
+          CanConvert: false,
+          MustConvert: false,
+        },
+      }) as unknown as TFile,
+  );
+
+  current.filesCount = files.length;
+
+  return {
+    files,
+    folders: [],
+    current,
+    pathParts: [
+      { id: sectionRoot.id, title: sectionRoot.title },
+      { id: room.id, title: room.title },
+      { id: current.id, title: current.title },
+    ],
+    startIndex: 0,
+    count: files.length,
+    total: files.length,
+    new: 0,
+  };
+}
 
 /** The stand-in form as Start filling would leave it, or as it was. */
 export function withDemoFormLaunched(form: TFile, launched: boolean): TFile {

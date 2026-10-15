@@ -36,6 +36,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import { interceptRoute } from "@docspace/shared/api/client";
+import { SearchArea } from "@docspace/shared/enums";
 import type { TGetRooms, TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFolder, TGetFolder } from "@docspace/shared/api/files/types";
 
@@ -45,6 +46,7 @@ import {
   buildDemoPersonalFiles,
   buildDemoSharedFiles,
   buildDemoSpaceContents,
+  buildDemoAgentContents,
   type TourDemoConfig,
 } from "./data";
 
@@ -87,6 +89,8 @@ const ROOM_MEMBERS_ROUTE = route("rooms/-\\d+/share(\\?|$)");
  * user on the "room not available" screen.
  */
 const ROOM_LINKS_ROUTE = route("rooms/-\\d+/links(\\?|$)");
+
+const FOLDER_INFO_ROUTE = route("folder/(-\\d+)(\\?|$)");
 
 /** `files/{file|folder}/{id}/log` — the activity feed of a room or folder. */
 const ROOM_HISTORY_ROUTE = route("(?:file|folder)/-\\d+/log(\\?|$)");
@@ -300,9 +304,36 @@ class TourDemo {
 
           if (!room || !this.sectionRoot) return { response: null };
 
+          if (config.list === "agents") {
+            const area = request.url?.match(/[?&]searchArea=(\d+)/)?.[1];
+            const tab =
+              area === String(SearchArea.ResultStorage)
+                ? "outputs"
+                : area === String(SearchArea.Knowledge)
+                  ? "knowledge"
+                  : "chat";
+
+            return {
+              response: buildDemoAgentContents(
+                room,
+                this.sectionRoot,
+                config,
+                tab,
+              ),
+            };
+          }
+
           return {
             response: buildDemoSpaceContents(room, this.sectionRoot, config),
           };
+        },
+      }),
+      interceptRoute({
+        match: matches(FOLDER_INFO_ROUTE),
+        fulfill: (request) => {
+          const id = idFromRoute(FOLDER_INFO_ROUTE, request.url);
+
+          return { response: this.rooms.find((item) => item.id === id) ?? null };
         },
       }),
     ];

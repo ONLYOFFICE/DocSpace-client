@@ -36,13 +36,17 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 import { inject, observer } from "mobx-react";
+import { when } from "mobx";
 import { useTranslation } from "react-i18next";
 
 import {
   DeviceType,
   RoomsType,
+  SearchArea,
   ShareAccessRights,
 } from "@docspace/shared/enums";
+import { CategoryType } from "@docspace/shared/constants";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import type AiAgentsTourStore from "SRC_DIR/store/AiAgentsTourStore";
@@ -62,6 +66,12 @@ import {
   type TourAudience,
 } from "SRC_DIR/components/Tour/audience";
 import { tourDemo } from "SRC_DIR/api/tourDemo";
+import {
+  buildDemoFileList,
+  type DemoAgentTab,
+} from "SRC_DIR/api/tourDemo/data";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { NAVIGATION_TARGET_TIMEOUT } from "SRC_DIR/components/Tour/stepBuilders";
 
 import type { TCreatedBy } from "@docspace/shared/types";
 
@@ -145,7 +155,12 @@ const AiAgentsTour = ({
   hasFavorites,
   hasTrash,
 }: AiAgentsTourProps) => {
-  const { t, ready } = useTranslation(["AiAgentsTour", "RoomsTour", "Common"]);
+  const { t, ready } = useTranslation([
+    "AiAgentsTour",
+    "RoomsTour",
+    "FilesTour",
+    "Common",
+  ]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
@@ -215,7 +230,79 @@ const AiAgentsTour = ({
   // the step that borrows it records everything it overwrites first.
   const borrowedPanel = useRef<InfoPanelState | null>(null);
 
+  const agentLocation = useRef<string | null>(null);
+  const agentTab = useRef<DemoAgentTab | null>(null);
+
+  const enterAgent = useCallback((tab: DemoAgentTab) => {
+    const agent = tourDemo.space;
+    if (!agent || agentTab.current === tab) return;
+
+    if (!agentLocation.current) {
+      agentLocation.current = `${window.location.pathname}${window.location.search}`;
+    }
+    agentTab.current = tab;
+
+    const filter = FilesFilter.getDefault();
+    filter.folder = String(agent.id);
+    if (tab !== "chat") {
+      filter.searchArea =
+        tab === "knowledge" ? SearchArea.Knowledge : SearchArea.ResultStorage;
+    }
+    const category = tab === "chat" ? CategoryType.Chat : CategoryType.AIAgent;
+
+    window.DocSpace?.navigate(
+      `${getCategoryUrl(category, agent.id)}?${filter.toUrlParams()}`,
+      {
+        state: {
+          title: agent.title,
+          isRoot: false,
+          rootFolderType: agent.rootFolderType,
+        },
+      },
+    );
+  }, []);
+
+  const leaveAgent = useCallback(() => {
+    const previous = agentLocation.current;
+    if (!previous) return;
+    agentLocation.current = null;
+    agentTab.current = null;
+
+    window.DocSpace?.navigate(previous, { replace: true });
+  }, []);
+
+  const agentHooks = useMemo(
+    () => ({
+      chat: {
+        reveal: () => enterAgent("chat"),
+        restore: () => {},
+        navigates: true,
+      },
+      knowledge: {
+        reveal: () => enterAgent("knowledge"),
+        restore: () => {},
+        navigates: true,
+      },
+      outputs: {
+        reveal: () => enterAgent("outputs"),
+        restore: () => {},
+        navigates: true,
+      },
+    }),
+    [enterAgent],
+  );
+
   const openInfoPanel = useCallback(() => {
+    if (agentLocation.current) {
+      leaveAgent();
+      when(() => !!filesStore.filesList?.[0]?.isRoom, {
+        timeout: NAVIGATION_TARGET_TIMEOUT,
+      })
+        .then(() => openInfoPanel())
+        .catch(() => {});
+      return;
+    }
+
     const agent = filesStore.filesList?.[0];
     if (!agent || borrowedPanel.current) return;
 
@@ -232,7 +319,7 @@ const AiAgentsTour = ({
     // members tab is the one it opens.
     filesStore.setSelection([agent]);
     infoPanelStore.openMembersTab();
-  }, [filesStore, infoPanelStore]);
+  }, [filesStore, infoPanelStore, leaveAgent]);
 
   const closeInfoPanel = useCallback(() => {
     const previous = borrowedPanel.current;
@@ -246,7 +333,8 @@ const AiAgentsTour = ({
   }, [filesStore, infoPanelStore]);
 
   const infoPanelHooks = useMemo(
-    () => ({ reveal: openInfoPanel, restore: closeInfoPanel }),
+    // `navigates`: the way back out of an agent is a route change.
+    () => ({ reveal: openInfoPanel, restore: closeInfoPanel, navigates: true }),
     [openInfoPanel, closeInfoPanel],
   );
 
@@ -269,8 +357,9 @@ const AiAgentsTour = ({
     if (!tourDemo.isActive) return;
     tourDemo.deactivate();
     restoreAi();
+    leaveAgent();
     void reloadSection();
-  }, [restoreAi, reloadSection]);
+  }, [restoreAi, reloadSection, leaveAgent]);
 
   const demoHooks = useMemo(
     // Nothing to restore afterwards: the section is already the user's own
@@ -340,6 +429,16 @@ const AiAgentsTour = ({
       // What the access step is about: an agent is set up by one person and
       // used by several, some of whom only ever read what comes out of it.
       memberAccess: [ShareAccessRights.Editing, ShareAccessRights.ReadOnly],
+      // The two tabs the tour opens in the first stand-in agent.
+      agentContents: {
+        knowledgeTitle: t("Common:Knowledge"),
+        outputsTitle: t("Common:ResultStorage"),
+        files: buildDemoFileList({
+          document: t("Common:Document"),
+          spreadsheet: t("Common:Spreadsheet"),
+          presentation: t("Common:Presentation"),
+        }),
+      },
     });
 
     void reloadSection();
@@ -434,6 +533,8 @@ const AiAgentsTour = ({
       isStandIn,
       emptyScreenAction,
       demoHooks,
+      agentHooks,
+      leaveAgent,
     }),
     [
       audience,
@@ -449,6 +550,8 @@ const AiAgentsTour = ({
       isStandIn,
       emptyScreenAction,
       demoHooks,
+      agentHooks,
+      leaveAgent,
     ],
   );
 

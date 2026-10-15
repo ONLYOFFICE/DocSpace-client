@@ -59,9 +59,7 @@ import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 const TOUR_KEY = "ai_agents_tour_pending";
 const AI_AGENTS_URL = "/ai-agents/filter";
 
-// The single agent of the mock list (aiAgentsHandler, withListCreate) — the one
-// the access step opens the info panel on.
-const AGENT_ID = 251365;
+const AGENT_ID = 2;
 // Admin user id from the settings/self mocks, used as that agent's owner.
 const ADMIN_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 
@@ -97,24 +95,53 @@ const agentOwnerMembers = () =>
     initial: [{ id: ADMIN_ID, displayName: "Administrator", access: 0 }],
   });
 
+const ownAgentsHandler = (port: string, { canCreate = true } = {}) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_AGENTS}`, async () => {
+    const body = await aiAgentsResolver({
+      withListCreate: true,
+      canCreate,
+    }).json();
+    body.response.folders[0].id = AGENT_ID;
+    return new Response(JSON.stringify(body));
+  });
+
+const MOCK_USER_IDS = [
+  ADMIN_ID,
+  "admin-user-id",
+  "regular-user-id",
+  "visitor-user-id",
+];
+
+const dismissModelNotice = (page: Page) =>
+  page.evaluate((ids) => {
+    for (const id of ids) {
+      window.localStorage.setItem(
+        `ai_chat_model_updated_bar_dismissed_${id}`,
+        "true",
+      );
+    }
+  }, MOCK_USER_IDS);
+
 /** Arms the tour and lands on the section that starts it by itself. */
 const startTour = async (page: Page, baseUrl: string) => {
   // The first visit sets an origin so localStorage is reachable.
   await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
   await armTour(page, TOUR_KEY);
+  await dismissModelNotice(page);
   await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
   await expect(tourTooltip(page)).toBeVisible();
 };
 
 /** Walks forward with the keyboard until the step titled `title` is up. */
-const goToStep = async (page: Page, title: string, maxSteps = 10) => {
+const goToStep = async (page: Page, title: string, maxSteps = 12) => {
   const tooltip = tourTooltip(page);
 
   for (let i = 0; i < maxSteps; i += 1) {
     if (await tooltip.getByText(title, { exact: true }).isVisible()) return;
     await page.keyboard.press("ArrowRight");
-    await expect(tooltip).toBeVisible();
+    // Walking into the agent is a route change and a fetch per tab.
+    await expect(tooltip).toBeVisible({ timeout: 10000 });
   }
 
   throw new Error(`step "${title}" never came up`);
@@ -125,7 +152,9 @@ test.describe("AI Agents tour", () => {
     mockRequest.use(
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
-      aiAgentsHandler(TEST_PORT, { withListCreate: true }),
+      ownAgentsHandler(TEST_PORT),
+      // The agent's chat needs models to put its request field up.
+      ...aiChatStoreHandlers(TEST_PORT, { assignments: {} }),
     );
   });
 
@@ -141,6 +170,7 @@ test.describe("AI Agents tour", () => {
 
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
     await armTour(page, TOUR_KEY);
+    await dismissModelNotice(page);
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
     await walkTour(page, ["desktop", "ai-agents-tour", "admin"]);
@@ -176,12 +206,13 @@ test.describe("AI Agents tour", () => {
       // The list has to come back the way the server would answer it for
       // somebody who cannot manage agents, or the section puts up a "New agent"
       // button this walkthrough is specifically about not having.
-      aiAgentsHandler(TEST_PORT, { withListCreate: true, canCreate: false }),
+      ownAgentsHandler(TEST_PORT, { canCreate: false }),
       ...agentOwnerMembers(),
     );
 
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
     await armTour(page, TOUR_KEY);
+    await dismissModelNotice(page);
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
     await walkTour(page, ["desktop", "ai-agents-tour", "user"]);
@@ -197,12 +228,13 @@ test.describe("AI Agents tour", () => {
     // managing access. The list has to agree with that; see the user run above.
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "visitor"),
-      aiAgentsHandler(TEST_PORT, { withListCreate: true, canCreate: false }),
+      ownAgentsHandler(TEST_PORT, { canCreate: false }),
       ...agentOwnerMembers(),
     );
 
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
     await armTour(page, TOUR_KEY);
+    await dismissModelNotice(page);
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
     await walkTour(page, ["desktop", "ai-agents-tour", "guest"]);

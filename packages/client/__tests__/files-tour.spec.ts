@@ -55,12 +55,10 @@ const MY_DOCUMENTS_URL = "/rooms/personal/filter?folder=12764";
 // personal space, which is every guest.
 const SHARED_WITH_ME_URL = "/shared-with-me/filter?folder=4";
 
-// The tour, step by step (FilesTour/tourSteps.ts): create tiles, AI chat, the
-// New menu, search, a row's share button, the sidebar shortcuts.
-const CREATE_STEP = 1;
-const NEW_MENU_STEP = 3;
-const SEARCH_STEP = 4;
-const SHARE_STEP = 5;
+const CREATE_STEP = 2;
+const NEW_MENU_STEP = 4;
+const SEARCH_STEP = 5;
+const SHARE_STEP = 8;
 
 // Who the stand-in shared files came from (SRC_DIR/api/tourDemo/data.ts) —
 // proof that the list the tour is walking is the borrowed one rather than the
@@ -102,7 +100,7 @@ const currentStep = (page: Page) =>
 
 /** Walks forward with the keyboard until `step` is the one on screen. */
 const goToStep = async (page: Page, step: number) => {
-  for (let i = CREATE_STEP; i < step; i += 1) {
+  for (let i = 1; i < step; i += 1) {
     await page.keyboard.press("ArrowRight");
   }
 
@@ -119,7 +117,7 @@ const goToStep = async (page: Page, step: number) => {
  * the page has on it — an index would quietly point at a different step as
  * those flags move.
  */
-const goToStepByTitle = async (page: Page, title: string, maxSteps = 10) => {
+const goToStepByTitle = async (page: Page, title: string, maxSteps = 12) => {
   const tooltip = tourTooltip(page);
 
   for (let i = 0; i < maxSteps; i += 1) {
@@ -229,7 +227,7 @@ test.describe("Files tour", () => {
 
     await startTour(page, baseUrl);
 
-    await goToStep(page, 2);
+    await goToStep(page, CREATE_STEP + 1);
     await page.keyboard.press("ArrowLeft");
     await expect(currentStep(page)).toHaveAttribute(
       "aria-valuenow",
@@ -261,7 +259,7 @@ test.describe("Files tour", () => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
 
     await startTour(page, baseUrl);
-    await goToStep(page, 3);
+    await goToStep(page, NEW_MENU_STEP);
 
     await expect(page.locator(".table-hotkey-border")).toHaveCount(0);
     await expect(page.locator(".table-row-selected")).toHaveCount(0);

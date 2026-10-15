@@ -71,11 +71,7 @@ const CREATE_FIRST_STEP = "Now make it yours";
 // empty screen rather than an action.
 const EMPTY_LIST_STEP = "Your list is empty for now";
 
-// What an admin on a portal that already has form spaces walks through
-// (SRC_DIR/components/FormsTour/tourSteps): the two create tiles, a space row,
-// the three things inside the stand-in space that row step walks into, the
-// sidebar sub-items, and the "New Form space" button to close on.
-const ADMIN_STEP_COUNT = 8;
+const ADMIN_STEP_COUNT = 12;
 
 // The first stand-in space the demo puts up on an empty portal
 // (FormsTour:FormsDemoOnboarding), and the three things waiting inside it

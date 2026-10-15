@@ -68,14 +68,14 @@ const KNOWLEDGE_TAB_SELECTOR = '[data-testid="knowledge_tab"]';
 const OUTPUTS_TAB_SELECTOR = '[data-testid="result_tab"]';
 const KNOWLEDGE_FILE_SELECTOR = `#file_${DEMO_AGENT_FILE_IDS.knowledge}`;
 const OUTPUTS_FILE_SELECTOR = `#file_${DEMO_AGENT_FILE_IDS.outputs}`;
-// The chat's send button and suggestions, in the active chat only: on the
+// The chat's request field and suggestions, in the active chat only: on the
 // other tabs the chat stays mounted, hidden.
-const CHAT_SEND_SELECTOR =
-  '[data-chat-active] [data-testid="send-button"]';
+const CHAT_COMPOSER_SELECTOR =
+  '[data-chat-active] [data-testid="composer-root"]';
 const CHAT_SUGGESTIONS_SELECTOR =
   '[data-chat-active] [data-testid="suggestions"]';
 
-const SEARCH_SELECTOR = "#filter_search-input";
+const SEARCH_SELECTOR = "#filter_search-input .search-input-block";
 const FILTER_BUTTON_SELECTOR = "#filter-button";
 const NEW_BUTTON_SELECTOR =
   '#filter_search-input > div:has(> [data-testid="main-button"])';
@@ -217,7 +217,7 @@ export function getTourSteps(
       !isStandIn &&
       agentHooks &&
       revealStep(
-        CHAT_SEND_SELECTOR,
+        CHAT_COMPOSER_SELECTOR,
         t("AiAgentsTour:AgentChatTitle"),
         t("AiAgentsTour:AgentChat"),
         callbacks,

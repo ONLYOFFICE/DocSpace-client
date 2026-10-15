@@ -172,12 +172,12 @@ describe("getTourSteps — admin", () => {
     )!;
 
     document.body.innerHTML =
-      '<div><button data-testid="send-button"></button></div>' +
-      '<div data-chat-active=""><button data-testid="send-button"></button></div>' +
+      '<div><div data-testid="composer-root"></div></div>' +
+      '<div data-chat-active=""><div data-testid="composer-root"></div></div>' +
       '<div id="file_-1120"></div><div id="file_-1130"></div>';
-    // The active chat's button, not the hidden copy another tab keeps mounted.
+    // The active chat's field, not the hidden copy another tab keeps mounted.
     expect((chat.target as () => Element | null)()).toBe(
-      document.querySelector('[data-chat-active] [data-testid="send-button"]'),
+      document.querySelector('[data-chat-active] [data-testid="composer-root"]'),
     );
     // Each file tab anchors on its own first file, so a tab switch is waited
     // out rather than measured against the row the other tab left behind.

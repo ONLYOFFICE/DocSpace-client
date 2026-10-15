@@ -27,7 +27,7 @@
   "ChipAutoUpdates": "Mises à jour automatiques et mise à l'échelle",
   "ChipCloudHosted": "Hébergé dans le cloud, sans maintenance",
   "ChipFormats": "50+ formats",
-  "ChipPlugins": "Plugins et macros",
+  "ChipPlugins": "Modules complémentaires et macros",
   "ChipTenantsKeys": "Vos propres instances et clés",
   "ChipWhiteLabel": "Marque blanche (Dev Pack)",
   "ConnectedBanner": "<1>Connecté à {{organizationName}} {{editorsName}}.</1> Votre {{organizationName}} {{editorsName}} utilise désormais les éditeurs fournis par {{service}}.",

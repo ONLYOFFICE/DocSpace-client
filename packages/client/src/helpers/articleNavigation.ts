@@ -222,6 +222,7 @@ export const getClientActiveId = (
   ids: FolderIds,
   search: string = typeof window !== "undefined" ? window.location.search : "",
   isTemplatesContext = false,
+  isDocumentsContext = false,
 ): string | undefined => {
   const match = (folderId?: number | null) =>
     folderId != null ? String(folderId) : undefined;
@@ -254,6 +255,11 @@ export const getClientActiveId = (
   if (pathname.includes("/recent")) return match(ids.recentFolderId);
   if (pathname.includes("/rooms/templates")) return "rooms-templates";
   if (pathname.includes("/rooms/shared") && isTemplates) return "rooms-templates";
+  if (
+    isDocumentsContext &&
+    /\/rooms\/shared\/(?!filter(\/|$))[^/]+/.test(pathname)
+  )
+    return match(ids.myFolderId);
   if (pathname.includes("/rooms/shared")) return match(ids.roomsFolderId);
   if (pathname.includes("/rooms/archived")) return match(ids.archiveFolderId);
   if (pathname.includes("/rooms/personal")) return match(ids.myFolderId);

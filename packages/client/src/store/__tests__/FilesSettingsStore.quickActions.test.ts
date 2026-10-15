@@ -96,15 +96,13 @@ describe("FilesSettingsStore quick-actions visibility", () => {
     expect(store.showQuickActions).toBe(false);
   });
 
-  it("hides before the request resolves", () => {
+  it("keeps the banner until the portal saves the change", () => {
     const store = createStore();
     changeShowQuickActions.mockReturnValue(new Promise(() => {}));
 
     store.setShowQuickActions(false);
 
-    // The caller raises its "hidden" toast in the same gesture, so the tiles
-    // have to be gone by then rather than one round trip later.
-    expect(store.showQuickActions).toBe(false);
+    expect(store.showQuickActions).toBe(true);
   });
 
   it("sends the new value to the portal", async () => {
@@ -138,19 +136,17 @@ describe("FilesSettingsStore quick-actions visibility", () => {
     expect(store.showQuickActions).toBe(true);
   });
 
-  it("puts the banner back when the request fails", async () => {
+  it("leaves the banner shown when the request fails", async () => {
     const store = createStore();
     changeShowQuickActions.mockRejectedValue(new Error("nope"));
 
     await store.setShowQuickActions(false);
 
-    // Leaving it hidden would look saved while the portal still has it shown,
-    // and the next reload would bring the banner back unexplained.
     expect(store.showQuickActions).toBe(true);
     expect(toastr.error).toHaveBeenCalled();
   });
 
-  it("reverts to the previous value, not to the default", async () => {
+  it("keeps the previous value, not the default, when the request fails", async () => {
     const store = createStore();
     store.setFilesSettings({ showQuickActions: false } as TFilesSettings);
     changeShowQuickActions.mockRejectedValue(new Error("nope"));
@@ -160,11 +156,80 @@ describe("FilesSettingsStore quick-actions visibility", () => {
     expect(store.showQuickActions).toBe(false);
   });
 
-  it("does not reject when the request fails", async () => {
+  it("resolves to false instead of rejecting when the request fails", async () => {
     const store = createStore();
     changeShowQuickActions.mockRejectedValue(new Error("nope"));
 
-    await expect(store.setShowQuickActions(false)).resolves.toBeUndefined();
+    await expect(store.setShowQuickActions(false)).resolves.toBe(false);
+  });
+
+  it("resolves to true when the change is saved", async () => {
+    const store = createStore();
+    changeShowQuickActions.mockResolvedValue(false);
+
+    await expect(store.setShowQuickActions(false)).resolves.toBe(true);
+  });
+
+  it("keeps Undo when the hide answers after it", async () => {
+    const store = createStore();
+    let answerHide: (value: boolean) => void = () => {};
+    changeShowQuickActions.mockReturnValueOnce(
+      new Promise<boolean>((resolve) => {
+        answerHide = resolve;
+      }),
+    );
+    changeShowQuickActions.mockResolvedValueOnce(true);
+
+    const hide = store.setShowQuickActions(false);
+    await store.setShowQuickActions(true);
+    answerHide(false);
+    await hide;
+
+    expect(store.showQuickActions).toBe(true);
+  });
+
+  it("does not report the earlier hide failing once Undo is sent", async () => {
+    const store = createStore();
+    let failHide: (error: Error) => void = () => {};
+    changeShowQuickActions.mockReturnValueOnce(
+      new Promise<boolean>((_, reject) => {
+        failHide = reject;
+      }),
+    );
+    changeShowQuickActions.mockResolvedValueOnce(true);
+
+    const hide = store.setShowQuickActions(false);
+    await store.setShowQuickActions(true);
+    failHide(new Error("nope"));
+
+    await expect(hide).resolves.toBe(false);
+    expect(store.showQuickActions).toBe(true);
+    expect(toastr.error).not.toHaveBeenCalled();
+  });
+
+  it("stays on what the portal saved last when Undo fails", async () => {
+    const store = createStore();
+    let answerHide: (value: boolean) => void = () => {};
+    let failUndo: (error: Error) => void = () => {};
+    changeShowQuickActions.mockReturnValueOnce(
+      new Promise<boolean>((resolve) => {
+        answerHide = resolve;
+      }),
+    );
+    changeShowQuickActions.mockReturnValueOnce(
+      new Promise<boolean>((_, reject) => {
+        failUndo = reject;
+      }),
+    );
+
+    const hide = store.setShowQuickActions(false);
+    const undo = store.setShowQuickActions(true);
+    answerHide(false);
+    await hide;
+    failUndo(new Error("nope"));
+
+    await expect(undo).resolves.toBe(false);
+    expect(store.showQuickActions).toBe(false);
   });
 });
 

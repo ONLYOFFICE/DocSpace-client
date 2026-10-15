@@ -1,6 +1,6 @@
 {
   "name": "@docspace/client",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "private": true,
   "homepage": "",
   "scripts": {
@@ -45,10 +45,11 @@
     "@docspace/shared": "workspace:*",
     "@google/genai": "catalog:",
     "@mistralai/mistralai": "catalog:",
-    "@onlyoffice/ai-chat": "^1.0.1",
+    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-1.0.4.tgz",
     "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tgz",
+    "@onlyoffice/doceditor-types": "^10.0.0",
     "@onlyoffice/docspace-sdk-js": "^2.2.0",
-    "@onlyoffice/document-editor-react": "2.1.1",
+    "@onlyoffice/document-editor-react": "2.3.0",
     "@radix-ui/react-dialog": "catalog:",
     "@radix-ui/react-dropdown-menu": "catalog:",
     "@radix-ui/react-slot": "catalog:",
@@ -129,7 +130,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.16",
-    "@onlyoffice/docspace-plugin-sdk": "file:onlyoffice-docspace-plugin-sdk-3.0.0.tgz",
+    "@onlyoffice/docspace-plugin-sdk": "^3.0.0",
     "@playwright/test": "1.58.1",
     "@testing-library/jest-dom": "6.6.4",
     "@testing-library/react": "16.3.0",

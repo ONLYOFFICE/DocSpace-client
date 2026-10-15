@@ -96,6 +96,7 @@ import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import type { IProfileMenuItemClient } from "SRC_DIR/helpers/plugins/types";
 import i18n from "SRC_DIR/i18n";
 
+import { clearPendingTours } from "./TourStore";
 import type ClientLoadingStore from "./ClientLoadingStore";
 import type InfoPanelStore from "./InfoPanelStore";
 import type PluginStore from "./PluginStore";
@@ -376,6 +377,7 @@ class ProfileActionsStore {
   onLogoutClick = async (t: TTranslationFn) => {
     try {
       const ssoLogoutUrl = await this.authStore.logout(false);
+      clearPendingTours();
       window.location.replace(
         combineUrl(window.ClientConfig?.proxy?.url, ssoLogoutUrl || "/login"),
       );

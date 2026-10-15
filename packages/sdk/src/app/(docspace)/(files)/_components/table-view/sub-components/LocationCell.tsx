@@ -107,7 +107,7 @@ const LocationCell = ({ item }: LocationCellProps) => {
           id={tooltipId}
           afterShow={getPath}
           getContent={() => (
-            <span>
+            <span className={styles.locationTooltipPath}>
               {isPathLoading ? (
                 <Loader
                   color={globalColors.black}

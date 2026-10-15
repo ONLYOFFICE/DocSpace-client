@@ -38,6 +38,7 @@ import {
   TFilesSettings,
   TGetReferenceData,
   TGetReferenceDataRequest,
+  TOpenEditRequest,
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -290,6 +291,7 @@ export type EditorProps = {
   onSDKRequestSelectSpreadsheet?: (event: object) => void;
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
+  onAIRequestStorageFile?: () => Promise<TSelectedFileInfo | null>;
   onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   disconnectUsers?: () => Promise<void>;
@@ -466,6 +468,15 @@ export type TDocEditor = {
   requestRoles?: VoidFunction;
   setFavorite?: (favorite: boolean) => void;
   createConnector?: () => TEditorConnector;
+  // Called with the payload the editor sent in its own request event, extended
+  // with the chosen file's url, type and token.
+  insertImage: (data: object) => void;
+  setRequestedSpreadsheet: (data: object) => void;
+  setRequestedDocument: (data: object) => void;
+  setReferenceSource: (data: TGetReferenceDataRequest) => void;
+  refreshFile: (config: TOpenEditRequest) => void;
+  denyEditingRights: (message?: string) => void;
+  downloadAs: (format?: string) => void;
 };
 
 export type TEditorConnector = {

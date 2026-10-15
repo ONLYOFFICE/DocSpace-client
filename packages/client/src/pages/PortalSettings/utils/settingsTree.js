@@ -567,6 +567,23 @@ export const settingsTree = [
     ],
   },
   {
+    id: "portal-settings_catalog-apps",
+    key: "8",
+    type: PageType.apps,
+    link: "apps",
+    tKey: "Common:AppsSectionTitle",
+    isHeader: true,
+    children: [
+      {
+        id: "portal-settings_catalog-apps-list",
+        key: "8-0",
+        link: "",
+        tKey: "Common:AppsSectionTitle",
+        isCategory: true,
+      },
+    ],
+  },
+  {
     id: "portal-settings_catalog-delete",
     key: "9",
     type: PageType.portalDeletion,

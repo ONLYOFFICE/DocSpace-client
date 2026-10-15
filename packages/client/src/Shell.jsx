@@ -1005,7 +1005,7 @@ const Shell = ({ page = "home", ...rest }) => {
           // The room the user is in, connected as chat context (with the
           // skills of its .ai folder) when the chat opens — see
           // ContextRoomSync in ui-kit.
-          contextRoom={aiContextRoom}
+          contextRoom={canUseAi ? aiContextRoom : undefined}
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
@@ -1202,10 +1202,15 @@ const ShellWrapper = inject(
       // room the server has never heard of, so every scoped AI request made
       // for it comes back 404 ("Entity not found") — the demo answers what the
       // section asks about the space, and the AI service is no part of that.
+      // And for a location whose id is not a room id (a third-party storage
+      // folder carries a string id): the AI service accepts only integer room
+      // ids as a scope, reads included (Bug 84417), and folds any other
+      // location to the global scope anyway, so send that scope outright.
       agentEntityId:
         (selectedFolderStore.isAIRoom && !accessRightsStore.canUseChat) ||
         !chatScopeId ||
-        isTourDemoId(chatScopeId)
+        isTourDemoId(chatScopeId) ||
+        !/^\d+$/.test(String(chatScopeId))
           ? undefined
           : String(chatScopeId),
       // Inside AI agent rooms the model is fixed by the agent's assigned

@@ -74,7 +74,6 @@
   "ItemsCount": "Vienumu skaits vienā lapā",
   "ItemsCountDescription": "Jūs varat norādīt vienā lapā parādīto failu / mapju skaitu, kā arī norādīt, kuru lapu sākt rādīt",
   "JavaScriptCodeDescription": "Darbvietas vai tās daļas iegulšana, izmantojot JavaScript. Nokopējiet tālāk norādīto JavaScript kodu.",
-  "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Ierobežojums pēc laika perioda",
   "LinkSetDescription": "Šī saite ir aizsargāta ar {{parameter}}. Lai konfigurētu saiti,",
   "LinkSetDescription2": "{{parameter1}} un {{parameter2}} ir iestatīts šai saitei. Lai to konfigurētu,",

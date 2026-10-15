@@ -193,6 +193,10 @@ class FilesSettingsStore {
   // resolves and overwrites it with the stored one.
   showQuickActions = true;
 
+  private quickActionsRequest = 0;
+
+  private quickActionsApplied = 0;
+
   extsFilesVectorized: string[] = [];
 
   externalShare = true;
@@ -421,20 +425,19 @@ class FilesSettingsStore {
       .catch((e) => toastr.error(e as string));
   };
 
-  // Applied before the request resolves: the caller hides the banner and
-  // raises its toast in the same gesture, so waiting for the round trip would
-  // leave the tiles on screen under a toast announcing they are gone. A
-  // rejected request puts the previous value back.
   setShowQuickActions = async (data: boolean) => {
-    const previous = this.showQuickActions;
-    this.showQuickActions = data;
+    const request = ++this.quickActionsRequest;
 
     try {
       const res = await api.files.changeShowQuickActions(data);
-      this.setFilesSetting("showQuickActions", res);
+      if (request > this.quickActionsApplied) {
+        this.quickActionsApplied = request;
+        this.setFilesSetting("showQuickActions", res);
+      }
+      return true;
     } catch (e) {
-      this.showQuickActions = previous;
-      toastr.error(e as string);
+      if (request === this.quickActionsRequest) toastr.error(e as string);
+      return false;
     }
   };
 

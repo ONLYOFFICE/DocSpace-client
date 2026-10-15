@@ -250,7 +250,7 @@
 
 .profileCardGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 16px 24px;
 
   @media (max-width: 900px) {
@@ -299,7 +299,8 @@
   white-space: nowrap;
 }
 
-.profileCardEdit {
+.profileCardEdit,
+.profileCardHelp {
   flex-shrink: 0;
 }
 

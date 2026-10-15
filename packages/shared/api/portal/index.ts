@@ -45,7 +45,6 @@ import {
   TPaymentQuota,
   TPortal,
   TPortalTariff,
-  TPortalWalletService,
   TRestoreProgress,
   TLicenseQuota,
 } from "./types";
@@ -368,16 +367,6 @@ export async function getPortalTariff(refresh = false, signal?: AbortSignal) {
     params,
     signal,
   })) as TPortalTariff;
-
-  return res;
-}
-
-export async function getWalletServices(signal?: AbortSignal) {
-  const res = (await request({
-    method: "get",
-    url: "/portal/payment/walletservices",
-    signal,
-  })) as TPortalWalletService[] | null;
 
   return res;
 }

@@ -74,7 +74,6 @@
   "ItemsCount": "Artikujt numërohen në një faqe",
   "ItemsCountDescription": "Ju mund të specifikoni numrin e skedarëve / dosjeve të shfaqura në një faqe, si dhe të specifikoni se cila faqe të fillojë të shfaqet",
   "JavaScriptCodeDescription": "Përfshirja e hapësirës së punës ose pjesës së saj duke përdorur JavaScript. Kopjoni kodin JavaScript më poshtë.",
-  "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Kufizimi sipas periudhës kohore",
   "LinkSetDescription": "Kjo lidhje është e mbrojtur me një {{parameter}}. Për të konfiguruar lidhjen,",
   "LinkSetDescription2": "Për këtë lidhje është caktuar një {{parameter1}} dhe {{parameter2}}. Për ta konfiguruar atë,",

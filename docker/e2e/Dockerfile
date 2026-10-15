@@ -23,7 +23,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 # Install PNPM
-RUN npm install -g pnpm@12.4.1 && npm cache clean --force
+RUN npm install -g pnpm@12.11.2 && npm cache clean --force
 
 WORKDIR /app
 
@@ -40,7 +40,6 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
 COPY packages/client/package.json ./packages/client/package.json
-COPY packages/client/*.tgz ./packages/client/
 COPY packages/login/package.json ./packages/login/package.json
 COPY packages/doceditor/package.json ./packages/doceditor/package.json
 COPY packages/sdk/package.json ./packages/sdk/package.json

@@ -86,6 +86,16 @@ const ProtectedAISettingsRoute = inject(({ settingsStore }) => ({
   }),
 );
 
+// Apps can be switched off only on a standalone installation; in SaaS every
+// app is always on, so the Apps section does not exist there.
+const ProtectedAppsSettingsRoute = inject(({ appsStore }) => ({
+  canManageApps: appsStore.canManageApps,
+}))(
+  observer(({ canManageApps, children }) => {
+    return canManageApps ? children : <Navigate to="/portal-settings" replace />;
+  }),
+);
+
 // Wraps a lazily loaded settings section in the AI switch guard, so a
 // bookmark or an old link cannot open a page the portal no longer has.
 const withAIServicesGuard = (Component) => () => (
@@ -420,6 +430,14 @@ const PortalSettingsRoutes = {
         <ProtectedAISettingsRoute>
           <ViewComponent />
         </ProtectedAISettingsRoute>
+      ),
+    },
+    {
+      path: "apps",
+      element: (
+        <ProtectedAppsSettingsRoute>
+          <ViewComponent />
+        </ProtectedAppsSettingsRoute>
       ),
     },
     {

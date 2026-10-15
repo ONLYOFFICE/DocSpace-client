@@ -55,6 +55,8 @@ import StorageWarning from "@onlyoffice/apps-ui-kit/billing/services/panels/addi
 import SalesDepartmentRequestDialog from "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog";
 import { formatDateLocalized } from "@onlyoffice/apps-ui-kit/utils/date";
 import { isInsufficientFundsError } from "@onlyoffice/apps-ui-kit/billing/utils/insufficientFunds";
+import { usePaymentStore } from "@onlyoffice/apps-ui-kit/billing/store/PaymentStoreProvider";
+import { DOCS_CONNECT_SERVICE } from "@onlyoffice/apps-ui-kit/billing/constants";
 
 import WalletSvg from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
 import AutomationApiSvg from "PUBLIC_DIR/images/icons/16/docs-connect.automation-api.react.svg";
@@ -75,7 +77,6 @@ import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-compo
 import {
   getDocsConnectDaysLeft,
   getDocsConnectNextBillingDate,
-  getDocsConnectPeriodDays,
   isDocsConnectCanceled,
   isDocsConnectPaid,
 } from "../utils";
@@ -102,6 +103,11 @@ interface BuyPlanPanelProps {
   calculateDevPack?: (
     quantity: number,
   ) => Promise<TDocsConnectDevPackCalculation | null>;
+  calculateUpgrade?: (opts: {
+    addedUsers: number;
+    devPackEnabled: boolean;
+    signal?: AbortSignal;
+  }) => Promise<TDocsConnectDevPackCalculation | null>;
   switchToDevPack?: (opts: {
     quantity: number;
     topUp?: number;
@@ -134,6 +140,7 @@ const BuyPlanPanel = ({
   info,
   buyPlan,
   calculateDevPack,
+  calculateUpgrade,
   switchToDevPack,
   buyPlanViaStripe,
   isCardMissingOrInactive,
@@ -148,6 +155,7 @@ const BuyPlanPanel = ({
 }: BuyPlanPanelProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
   const { paymentApi } = useApi();
+  const { fetchTransactionHistory } = usePaymentStore();
 
   const [devPack, setDevPack] = useState<boolean>(
     info?.devPackEnabled || (info?.previousPlan?.devPackEnabled ?? false),
@@ -169,6 +177,9 @@ const BuyPlanPanel = ({
   const [devPackCalc, setDevPackCalc] =
     useState<TDocsConnectDevPackCalculation | null>(null);
   const [calcLoading, setCalcLoading] = useState(false);
+  const [upgradeCalc, setUpgradeCalc] =
+    useState<TDocsConnectDevPackCalculation | null>(null);
+  const [upgradeCalcLoading, setUpgradeCalcLoading] = useState(false);
 
   const abortControllerRef = useRef<AbortController | null>(null);
 
@@ -217,6 +228,50 @@ const BuyPlanPanel = ({
       clearTimeout(timer);
     };
   }, [users, devPack, info, calculateDevPack]);
+
+  useEffect(() => {
+    setUpgradeCalc(null);
+
+    if (!info) return undefined;
+
+    const curUsers = info.deactivated
+      ? 0
+      : (info.tenant.payment?.quantity ?? 0);
+    const curDevPack = info.devPackEnabled ?? false;
+    const added = users - curUsers;
+    const isUp =
+      isDocsConnectPaid(info) &&
+      curUsers > 0 &&
+      devPack === curDevPack &&
+      added > 0;
+
+    if (!isUp || users > MAX_USERS) {
+      setUpgradeCalcLoading(false);
+      return undefined;
+    }
+
+    const controller = new AbortController();
+    setUpgradeCalcLoading(true);
+    const timer = setTimeout(async () => {
+      try {
+        const res = await calculateUpgrade?.({
+          addedUsers: added,
+          devPackEnabled: devPack,
+          signal: controller.signal,
+        });
+        if (!controller.signal.aborted) setUpgradeCalc(res ?? null);
+      } catch {
+        if (!controller.signal.aborted) setUpgradeCalc(null);
+      } finally {
+        if (!controller.signal.aborted) setUpgradeCalcLoading(false);
+      }
+    }, DEVPACK_CALC_DEBOUNCE_MS);
+
+    return () => {
+      controller.abort();
+      clearTimeout(timer);
+    };
+  }, [users, devPack, info, calculateUpgrade]);
 
   if (!info) return null;
 
@@ -278,25 +333,26 @@ const BuyPlanPanel = ({
     { locale: i18n.language },
   );
   const remainingDays = getDocsConnectDaysLeft(periodEndDate);
-  const periodDays = getDocsConnectPeriodDays(periodEndDate);
-  const prorationFactor =
-    periodDays > 0 ? Math.min(1, remainingDays / periodDays) : 0;
+
+  const addedUsers = Math.max(0, users - currentUsers);
+  const isUsersUpgrade = isUpgrade && !isDevPackUpgrade && addedUsers > 0;
 
   const calcPending =
-    !isOverLimit && isDevPackUpgrade && (calcLoading || devPackCalc === null);
+    !isOverLimit &&
+    ((isDevPackUpgrade && (calcLoading || devPackCalc === null)) ||
+      (isUsersUpgrade && (upgradeCalcLoading || upgradeCalc === null)));
   const devPackCharge = devPackCalc?.amount ?? 0;
   const unusedCredit = isDevPackUpgrade
     ? Math.max(0, totalMonthly - devPackCharge)
     : 0;
 
-  const addedUsers = Math.max(0, users - currentUsers);
   const chargeNow = isOverLimit
     ? 0
     : isEditActive
       ? isDevPackUpgrade
         ? devPackCharge
-        : isUpgrade
-          ? Math.round(addedUsers * perUser * prorationFactor * 100) / 100
+        : isUsersUpgrade
+          ? (upgradeCalc?.amount ?? 0)
           : 0
       : users * perUser;
 
@@ -361,6 +417,7 @@ const BuyPlanPanel = ({
 
   const onTopUpConfirm = async () => {
     await switchToDevPack?.({ quantity: users, topUp: 0 });
+    fetchTransactionHistory(DOCS_CONNECT_SERVICE);
     toastr.success(t("DocsConnect:PlanPurchased"));
   };
 
@@ -412,6 +469,7 @@ const BuyPlanPanel = ({
           topUp: insufficientFunds ? topUpRequired : 0,
         });
       }
+      if (!isScheduled) fetchTransactionHistory(DOCS_CONNECT_SERVICE);
       toastr.success(
         isScheduled
           ? t("DocsConnect:ChangeScheduled")
@@ -606,7 +664,7 @@ const BuyPlanPanel = ({
             i18nKey="NextMonthlyBillNote"
             values={{
               amount: formatCurrency(totalMonthly),
-              date: nextBillingDateLocalized,
+              date: periodEndDateLocalized,
             }}
             components={{
               1: <Text as="span" fontWeight={600} />,
@@ -620,7 +678,7 @@ const BuyPlanPanel = ({
   };
 
   const renderSummaryHint = () => {
-    if (isOverLimit) return null;
+    if (isOverLimit || calcPending) return null;
 
     if (isScheduled)
       return (
@@ -1088,13 +1146,17 @@ const BuyPlanPanel = ({
                               />
                             ) : null}
                           </div>
-                          <Text
-                            fontSize="14px"
-                            fontWeight={600}
-                            className={styles.summaryValue}
-                          >
-                            {formatCurrency(chargeNow)}
-                          </Text>
+                          {calcPending ? (
+                            priceLoader
+                          ) : (
+                            <Text
+                              fontSize="14px"
+                              fontWeight={600}
+                              className={styles.summaryValue}
+                            >
+                              {formatCurrency(chargeNow)}
+                            </Text>
+                          )}
                         </div>
                       </>
                     )
@@ -1185,6 +1247,7 @@ export default inject(
     info: docsConnectStore.info,
     buyPlan: docsConnectStore.buyPlan,
     calculateDevPack: docsConnectStore.calculateDevPack,
+    calculateUpgrade: docsConnectStore.calculateUpgrade,
     switchToDevPack: docsConnectStore.switchToDevPack,
     buyPlanViaStripe: docsConnectStore.buyPlanViaStripe,
     isCardMissingOrInactive: paymentStore.isCardMissingOrInactive,

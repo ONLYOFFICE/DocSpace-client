@@ -22,7 +22,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install PNPM
-RUN npm install -g pnpm@12.4.1
+RUN npm install -g pnpm@12.11.2
 
 WORKDIR /app
 
@@ -41,7 +41,6 @@ ENV NODE_OPTIONS="--max-old-space-size=8192"
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
 COPY packages/client/package.json ./packages/client/package.json
-COPY packages/client/*.tgz ./packages/client/
 COPY packages/shared/package.json ./packages/shared/package.json
 
 # Install dependencies

@@ -43,32 +43,24 @@ import {
   sidebarSelector,
   elementStep,
   fileItemStep,
+  elementGroupStep,
   menuStep,
   revealStep,
   NAVIGATION_TARGET_TIMEOUT,
   type RevealHooks,
+  STAND_IN_ROW_SELECTORS,
 } from "SRC_DIR/components/Tour/stepBuilders";
 import { FORMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
-import { DEMO_SPACE_ITEM_IDS } from "SRC_DIR/api/tourDemo/data";
 
-const FIRST_ITEM_SELECTOR =
+export const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
-const SECOND_ITEM_SELECTOR =
-  '[data-testid="table-row-1"], [data-testid="files_row_1"], [data-testid="tile_1"]';
-
-// Rows inside the stand-in space, by the element id every view puts on them.
 const itemSelector = (id: number, isFolder = true) =>
   `#${isFolder ? "folder" : "file"}_${id}`;
 
-const BLANK_FORM_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.form, false);
-const BLANK_FORM_MENU_TRIGGER_SELECTOR = `${BLANK_FORM_SELECTOR} [data-testid="context-menu-button"]`;
 const CONTEXT_MENU_SELECTOR = ".p-contextmenu";
 // ContextMenu renders each entry with the option's own id.
 const START_FILLING_OPTION_SELECTOR = "#option_start-filling";
-const LAUNCHED_BADGE_SELECTOR = `${BLANK_FORM_SELECTOR} .badge.is-editing`;
-const IN_PROGRESS_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.inProgress);
-const COMPLETE_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.complete);
 const NEW_BUTTON_SELECTOR =
   '#filter_search-input > div:has(> [data-testid="main-button"])';
 
@@ -89,6 +81,8 @@ export type TourStepFlags = {
   isDemo: boolean;
   // Whether the list itself is stood in for; only then is there a closing step.
   isStandIn: boolean;
+  usesStandInSpace: boolean;
+  spaceItemIds: { form: number; inProgress: number; complete: number };
   // Walks into the stand-in space; idempotent, `restore` is a no-op.
   spaceHooks?: RevealHooks;
   // Fakes the launch of the stand-in form on its row, and undoes it.
@@ -112,11 +106,19 @@ export function getTourSteps(
     hasForms,
     isDemo,
     isStandIn,
+    usesStandInSpace,
+    spaceItemIds,
     spaceHooks,
     launchHooks,
     demoHooks,
     leaveSpace,
   } = flags;
+
+  const BLANK_FORM_SELECTOR = itemSelector(spaceItemIds.form, false);
+  const BLANK_FORM_MENU_TRIGGER_SELECTOR = `${BLANK_FORM_SELECTOR} [data-testid="context-menu-button"]`;
+  const LAUNCHED_BADGE_SELECTOR = `${BLANK_FORM_SELECTOR} .badge.is-editing`;
+  const IN_PROGRESS_SELECTOR = itemSelector(spaceItemIds.inProgress);
+  const COMPLETE_SELECTOR = itemSelector(spaceItemIds.complete);
 
   // The collapsed tablet sidebar has no sub-items to point at.
   const showQuickAccess = isDesktop && hasForms;
@@ -176,17 +178,20 @@ export function getTourSteps(
         leaveSpace,
       ),
 
-    // 3. The sample notice, only when the whole list is one, as in Rooms.
+    // 3. The sample notice, on a stood-in list.
     showInsideSpace &&
       isStandIn &&
       hasItems &&
-      fileItemStep(
-        SECOND_ITEM_SELECTOR,
+      elementGroupStep(
+        FIRST_ITEM_SELECTOR,
+        STAND_IN_ROW_SELECTORS,
         t("FormsTour:FormsDemoPreviewTitle"),
         t("FormsTour:FormsDemoPreview"),
         callbacks,
         FORMS_TOUR_LABEL,
+        4,
         leaveSpace,
+        true,
       ),
 
     // 4. A space row; a filler gets other wording.
@@ -200,6 +205,25 @@ export function getTourSteps(
         callbacks,
         FORMS_TOUR_LABEL,
         leaveSpace,
+      ),
+
+    // 4a. The sample notice inside the stand-in space when the list is the
+    // user's own; this step walks the tour in.
+    showInsideSpace &&
+      usesStandInSpace &&
+      !isStandIn &&
+      revealStep(
+        BLANK_FORM_SELECTOR,
+        t("FormsTour:FormsDemoPreviewTitle"),
+        t("FormsTour:FormsDemoPreview"),
+        callbacks,
+        FORMS_TOUR_LABEL,
+        spaceHooks,
+        [IN_PROGRESS_SELECTOR, COMPLETE_SELECTOR],
+        undefined,
+        4,
+        undefined,
+        true,
       ),
 
     // 5. The blank form inside the space; this step walks the tour in.

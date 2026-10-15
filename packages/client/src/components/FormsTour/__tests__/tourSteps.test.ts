@@ -66,10 +66,26 @@ const FULL_RUN = [
   "FormsTour:FormsCreateFirstTitle",
 ];
 
-// The same run on a list of the user's own: nothing in it is a sample.
-const OWN_LIST_RUN = FULL_RUN.filter(
+// The same run inside the user's own space: nothing in it is a sample.
+const OWN_SPACE_RUN = FULL_RUN.filter(
   (title) => title !== "FormsTour:FormsDemoPreviewTitle",
 );
+
+// The user's own list, walked into the stand-in space.
+const OWN_LIST_RUN = [
+  "FormsTour:FormsOverviewTitle",
+  "FormsTour:FormsSpaceTitle",
+  "FormsTour:FormsTemplatesTitle",
+  "FormsTour:FormsItemTitle",
+  "FormsTour:FormsDemoPreviewTitle",
+  "FormsTour:FormsBlankTitle",
+  "FormsTour:FormsShareTitle",
+  "FormsTour:FormsFillYourselfTitle",
+  "FormsTour:FormsInProgressTitle",
+  "FormsTour:FormsCompleteTitle",
+  "FormsTour:FormsPlacesTitle",
+  "FormsTour:FormsCreateFirstTitle",
+];
 
 const EMPTY_SCREEN_TARGET = '[data-testid="empty-view-body"] > *:first-child';
 const EMPTY_SCREEN = '[data-testid="empty-view"]';
@@ -86,6 +102,8 @@ const adminFlags: TourStepFlags = {
   hasForms: true,
   isDemo: true,
   isStandIn: false,
+  usesStandInSpace: true,
+  spaceItemIds: { form: -1102, inProgress: -1100, complete: -1101 },
   spaceHooks: hooks(),
   launchHooks: hooks(),
   demoHooks: hooks(),
@@ -94,6 +112,12 @@ const adminFlags: TourStepFlags = {
 
 /** The same admin on a portal whose Forms list is stood in for as well. */
 const demoFlags: TourStepFlags = { ...adminFlags, isStandIn: true };
+
+const ownSpaceFlags: TourStepFlags = {
+  ...adminFlags,
+  usesStandInSpace: false,
+  spaceItemIds: { form: 501, inProgress: 502, complete: 503 },
+};
 
 /** Someone who was let into a space to fill the form in. */
 const fillerFlags: TourStepFlags = {
@@ -112,6 +136,17 @@ const fillerDemoFlags: TourStepFlags = { ...fillerFlags, isStandIn: true };
 describe("getTourSteps — room admin", () => {
   it("walks the section, then the inside of a space, then the sidebar", () => {
     expect(titles(adminFlags)).toEqual(OWN_LIST_RUN);
+  });
+
+  it("walks the user's own space without the sample notice, on its own ids", () => {
+    expect(titles(ownSpaceFlags)).toEqual(OWN_SPACE_RUN);
+
+    document.body.innerHTML = '<div id="file_501"></div>';
+    const blank = stepTitled(ownSpaceFlags, "FormsTour:FormsBlankTitle");
+    expect((blank.target as () => Element | null)()).toBe(
+      document.querySelector("#file_501"),
+    );
+    document.body.innerHTML = "";
   });
 
   it("closes a run on the section's own spaces on the New Form space button", () => {
@@ -188,24 +223,29 @@ describe("getTourSteps — inside a space", () => {
 
     expect(titleList[preview + 1]).toBe("FormsTour:FormsItemTitle");
     expect(titleList[preview + 2]).toBe("FormsTour:FormsBlankTitle");
-    // Not said on a list of the user's own.
-    expect(titles(adminFlags)).not.toContain(
+    // On the user's own list the notice moves inside, onto the stand-in form.
+    document.body.innerHTML = '<div id="file_-1102"></div>';
+    const sample = stepTitled(adminFlags, "FormsTour:FormsDemoPreviewTitle");
+    // Anchored on the form, lit up together with the two folders.
+    expect((sample.target as () => Element | null)()).toBe(
+      document.querySelector("#file_-1102"),
+    );
+    expect(sample.spotlightTarget).toBeTypeOf("function");
+    expect(sample.data).toEqual({ revealsTarget: true, presence: undefined });
+    document.body.innerHTML = "";
+    expect(titles(ownSpaceFlags)).not.toContain(
       "FormsTour:FormsDemoPreviewTitle",
     );
   });
 
-  it("names the list as a sample on its second row, leaving the first to the next step", () => {
-    document.body.innerHTML =
-      '<div data-testid="table-row-0"></div><div data-testid="table-row-1"></div>';
+  it("names the list as a sample over all three stand-in rows", () => {
     const sample = steps(demoFlags).find(
       (step) => step.title === "FormsTour:FormsDemoPreviewTitle",
     )!;
 
-    expect((sample.target as () => Element | null)()).toBe(
-      document.querySelector('[data-testid="table-row-1"]'),
-    );
-
-    document.body.innerHTML = "";
+    // One spotlight over the three rows, and the tooltip anchored on it.
+    expect(sample.spotlightTarget).toBeTypeOf("function");
+    expect(sample.target).toBe(sample.spotlightTarget);
   });
 
   it("opens the blank form's own menu for the launch step", () => {
@@ -359,6 +399,7 @@ describe("getTourSteps — what the page allows", () => {
 
     expect(emptyPage).toEqual([
       "FormsTour:FormsOverviewTitle",
+      "FormsTour:FormsDemoPreviewTitle",
       "FormsTour:FormsBlankTitle",
       "FormsTour:FormsShareTitle",
       "FormsTour:FormsFillYourselfTitle",

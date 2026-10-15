@@ -107,9 +107,9 @@ export type UseModuleItemsProps = {
   isAppInstalled: (id: string) => boolean;
   /**
    * The user can switch apps on: a portal admin or the owner, on a standalone
-   * installation. Such a user gets an "Enable" button on the card of an app
-   * that is off, leading to Settings -> Apps; everyone else gets the card with
-   * no button, and a tooltip pointing them to an administrator.
+   * installation. Such a user still gets the card of an app that is off, with
+   * a "Go to Settings" button leading to Settings -> Apps; everyone else does
+   * not see the card at all.
    */
   canEnableApps: boolean;
 };
@@ -124,8 +124,8 @@ const APPS_SETTINGS_PATH = "/portal-settings/apps";
  * which is the point of the card. A user who can't create there gets the plain
  * "Open" behaviour and label instead, so the card still leads somewhere useful.
  *
- * An app that is switched off keeps its card, badged "Not installed": its
- * button enables it for a user who can, and is left out for everyone else.
+ * An app that is switched off keeps its card, badged "Disabled", only for a
+ * user who can switch it on; its button then leads to the apps settings.
  */
 export const useModuleItems = ({
   isGuest,
@@ -173,21 +173,20 @@ export const useModuleItems = ({
 
     /**
      * The card's state and action for an app that may be switched off: as
-     * given while it is on; while it is off, an "Enable" button leading to the
-     * apps settings for a user who can switch it on, and no button otherwise.
+     * given while it is on, a "Go to Settings" button leading to the apps
+     * settings while it is off.
      */
     const withInstallState = (
       installed: boolean,
       actions: Pick<ModuleItem, "buttonLabel" | "onAction">,
-    ): Pick<ModuleItem, "installed" | "buttonLabel" | "onAction"> => {
-      if (installed) return { installed, ...actions };
-      if (!canEnableApps) return { installed };
-      return {
-        installed,
-        buttonLabel: t("Common:Enable"),
-        onAction: () => navigate(APPS_SETTINGS_PATH),
-      };
-    };
+    ) =>
+      installed
+        ? { installed, ...actions }
+        : {
+            installed,
+            buttonLabel: t("Common:GoToSettings"),
+            onAction: () => navigate(APPS_SETTINGS_PATH),
+          };
 
     const filesHref = isGuest
       ? "/shared-with-me/filter"
@@ -265,7 +264,7 @@ export const useModuleItems = ({
         : []),
     ];
 
-    return items;
+    return items.filter((mod) => mod.installed || canEnableApps);
   }, [
     t,
     navigate,

@@ -64,6 +64,14 @@ const awaitAnchor = (
 
 export const sidebarSelector = (id: string) => `[data-item-id="${id}"]`;
 
+export const listRowSelector = (index: number) =>
+  `[data-testid="table-row-${index}"], [data-testid="files_row_${index}"], [data-testid="tile_${index}"]`;
+
+// As many rows as a stand-in list can hold; a missing one is left out.
+export const STAND_IN_ROW_SELECTORS = Array.from({ length: 4 }, (_, index) =>
+  listRowSelector(index),
+);
+
 /**
  * How long a step waits for an anchor a `prepare` call reveals. Anchors that
  * were already on the page resolve on the first tick, so keep this short: the
@@ -92,6 +100,8 @@ export type RevealHooks = {
    * the list is still coming back opens on it rather than on nothing.
    */
   awaitBefore?: string;
+  /** Awaited after `reveal`, for a target already on the page in a stale state. */
+  settled?: () => Promise<void>;
 };
 
 /**
@@ -585,18 +595,24 @@ export function revealStep(
   spotlightPadding = 4,
   // What the spotlight is kept inside of, for a target that overflows it.
   spotlightWithin?: string,
+  // The tooltip anchors on the spotlight rather than on `target`.
+  anchorOnGroup = false,
 ): Step {
   const timeout = hooks.navigates
     ? NAVIGATION_TARGET_TIMEOUT
     : STEP_TARGET_TIMEOUT;
+  const group = () =>
+    unionSpotlight([target, ...spotlightWith], target, spotlightWithin);
 
   return {
     // Resolved, not handed over as a selector: a reveal can land on a row with
     // no box of its own (see `measurableTarget`).
-    target: () => measurableTarget(target),
+    target:
+      anchorOnGroup && spotlightWith.length
+        ? group
+        : () => measurableTarget(target),
     spotlightTarget: spotlightWith.length
-      ? () =>
-          unionSpotlight([target, ...spotlightWith], target, spotlightWithin)
+      ? group
       : () => measurableTarget(target),
     spotlightPadding,
     placement: "auto" as const,
@@ -615,6 +631,7 @@ export function revealStep(
 
       const showTarget = async () => {
         hooks.reveal();
+        await hooks.settled?.();
         await awaitAnchor(target, timeout, signal, logLabel);
         scrollTargetIntoView(target, signal);
       };

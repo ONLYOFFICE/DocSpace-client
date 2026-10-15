@@ -623,6 +623,23 @@ describe("revealStep", () => {
     expect(restore).toHaveBeenCalledTimes(2);
   });
 
+  it("waits for the reveal to settle before looking for the target", async () => {
+    // A tab is on the page all along; the wait keeps stale rows out.
+    mount('<div id="tab"></div>');
+    const order: string[] = [];
+    const step = revealStep("#tab", "title", "body", undefined, LOG_LABEL, {
+      reveal: () => order.push("reveal"),
+      restore: () => {},
+      settled: async () => {
+        order.push("settled");
+      },
+    });
+
+    await step.before?.(HOOK_DATA);
+
+    expect(order).toEqual(["reveal", "settled"]);
+  });
+
   it("keeps a union spotlight inside the box it was given", () => {
     // The rooms tour lights up the member list with the tab above it. The list
     // is as tall as its members, so in a room with many it runs on below the

@@ -177,7 +177,7 @@ describe("getTourSteps — owner", () => {
     const closing = steps(ownerDemoFlags).at(-1);
 
     expect(closing?.title).toBe("RoomsTour:RoomsCreateFirstTitle");
-    expect(closing?.content).toBe("FilesTour:TourCreateFirstEmpty");
+    expect(closing?.content).toBe("FilesTour:TourCreateFirst");
     expect(closing?.data).toEqual({ revealsTarget: true, presence: undefined });
     expect(targets(ownerDemoFlags)).not.toContain(NEW_BUTTON_TARGET);
   });

@@ -294,7 +294,7 @@ function getPersonalSteps(
       ? revealStep(
           EMPTY_SCREEN_CREATE_SELECTOR,
           t("RoomsTour:RoomsCreateFirstTitle"),
-          t("FilesTour:TourCreateFirstEmpty"),
+          t("FilesTour:TourCreateFirst", { sectionName: t("Common:Files") }),
           callbacks,
           FILES_TOUR_LABEL,
           demoHooks,
@@ -303,7 +303,7 @@ function getPersonalSteps(
         elementStep(
           NEW_BUTTON_SELECTOR,
           t("RoomsTour:RoomsCreateFirstTitle"),
-          t("FilesTour:TourCreateFirst"),
+          t("FilesTour:TourCreateFirst", { sectionName: t("Common:Files") }),
           callbacks,
           FILES_TOUR_LABEL,
         ),

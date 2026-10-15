@@ -59,8 +59,13 @@ import useTour, {
 } from "SRC_DIR/components/Tour/useTour";
 import { FORMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
+import useDemoSwap from "SRC_DIR/components/Tour/useDemoSwap";
 import { getTourAudience } from "SRC_DIR/components/Tour/audience";
 import { tourDemo } from "SRC_DIR/api/tourDemo";
+import {
+  fadeSectionIn,
+  fadeSectionOut,
+} from "SRC_DIR/components/Tour/sectionFade";
 import {
   DEMO_SPACE_ITEM_IDS,
   withDemoFormLaunched,
@@ -305,24 +310,26 @@ const FormsTour = ({
   // from here on — the navigation's included — goes to the server, so the
   // stand-in rooms cannot come back after the reload that was meant to
   // replace them.
-  const endDemo = useCallback(async () => {
-    if (!tourDemo.isActive) {
-      leaveSpace();
-      return;
-    }
+  const endDemo = useCallback(
+    async ({ fade = false } = {}) => {
+      if (fade) await fadeSectionOut();
 
-    // Only a section that was stood in for has anything to fetch back; when
-    // the list was the user's own all along, dropping the mocks is enough.
-    const wasStandingIn = tourDemo.isStandingInForList;
-    tourDemo.deactivate();
+      try {
+        if (!tourDemo.isActive) {
+          leaveSpace();
+          return;
+        }
 
-    leaveSpace();
-
-    // Awaited so the reload settles after the navigation's own load rather
-    // than alongside it — both now hit the server, and this one is the answer
-    // the section is left showing.
-    if (wasStandingIn) await reloadSection();
-  }, [leaveSpace, reloadSection]);
+        const wasStandingIn = tourDemo.isStandingInForList;
+        tourDemo.deactivate();
+        leaveSpace();
+        if (wasStandingIn) await reloadSection();
+      } finally {
+        if (fade) fadeSectionIn();
+      }
+    },
+    [leaveSpace, reloadSection],
+  );
 
   // Shared by the arming effect and the closing step's `restore`.
   const demoConfig = useMemo<TourDemoConfig>(
@@ -391,47 +398,36 @@ const FormsTour = ({
    * reload has to have landed by the time joyride freezes the step list
    * against the DOM.
    */
+  // Armed whatever the list holds: the stand-in space is built off the list
+  // response either way. The section is hidden only while an empty list is
+  // being replaced.
+  const shouldArmDemo =
+    formsTourStore.isPending &&
+    !formsTourStore.isRunning &&
+    !tourDemo.isActive &&
+    !isMobileView &&
+    !firstLoad &&
+    !isSectionLoading &&
+    isFormsRoot &&
+    !!user &&
+    ready;
+
+  const { isPreparing, runSwap } = useDemoSwap(shouldArmDemo && !hasItems);
+
   useEffect(() => {
-    if (!formsTourStore.isPending || formsTourStore.isRunning) return;
-    if (tourDemo.isActive) return;
-    if (isMobileView || firstLoad || isSectionLoading || !isFormsRoot) return;
-    if (!user) return;
-    // The stand-in titles below are read once and frozen into the demo: the
-    // next run of this effect finds the demo active and returns. `FormsTour` is
-    // not one of the preloaded namespaces (SRC_DIR/i18n.js), so with
-    // `useSuspense: false` it can still be a render behind the rest of the
-    // page — and a demo armed then keeps the raw keys for as long as it is up.
-    if (!ready) return;
+    if (!shouldArmDemo) return;
 
-    // Whatever the audience. A form filler with no spaces yet has the most to
-    // gain from this and the least without it: their empty section renders
-    // neither the banner nor the filter bar, so their tour is one sidebar step
-    // — nothing about what a space holds, and nothing about the form inside it.
-    // The closing step is what keeps that honest: it forks on `canCreate` and
-    // names the empty list for anyone who has no "create" button to be sent at.
-    tourDemo.activate(demoConfig);
+    const arm = () => {
+      tourDemo.activate(demoConfig);
+      return reloadSection();
+    };
 
-    // Fetched whether or not the list is being stood in for. The stand-in
-    // space the tour walks into is built by the list interceptor, off the
-    // `current` folder of a real answer (tourDemo.standInForRooms), so a list
-    // that was loaded before the mocks went up leaves `tourDemo.space` null —
-    // and `enterSpace` a no-op, which strands every step that stands inside a
-    // space. The response is passed through untouched when the list is the
-    // user's own, so this costs a request and changes nothing on screen.
-    void reloadSection();
-  }, [
-    formsTourStore.isPending,
-    formsTourStore.isRunning,
-    hasItems,
-    isMobileView,
-    firstLoad,
-    isSectionLoading,
-    isFormsRoot,
-    user,
-    reloadSection,
-    ready,
-    t,
-  ]);
+    if (hasItems) {
+      void arm();
+    } else {
+      runSwap(arm);
+    }
+  }, [shouldArmDemo, hasItems, demoConfig, reloadSection, runSwap]);
 
   // A tour that ends while a step is still up — closed, skipped, its anchor
   // gone — never reaches that step's `after`, so the user would be left
@@ -456,7 +452,7 @@ const FormsTour = ({
     if (!hasStarted.current) return;
     hasStarted.current = false;
 
-    void endDemoRef.current();
+    void endDemoRef.current({ fade: true });
     setOwnSpace(undefined);
   }, [formsTourStore.isRunning]);
 
@@ -540,6 +536,7 @@ const FormsTour = ({
       !isSectionLoading &&
       isFormsRoot &&
       ownSpace !== undefined &&
+      !isPreparing &&
       // With the list stood in for, "ready" also means the stand-in spaces have
       // actually landed. Without this the reload above and the start timer
       // race, and joyride can freeze its step list against the empty page the

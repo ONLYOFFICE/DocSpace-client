@@ -62,11 +62,16 @@ import useTour, {
 } from "SRC_DIR/components/Tour/useTour";
 import { AI_AGENTS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
+import useDemoSwap from "SRC_DIR/components/Tour/useDemoSwap";
 import {
   getTourAudience,
   type TourAudience,
 } from "SRC_DIR/components/Tour/audience";
 import { tourDemo } from "SRC_DIR/api/tourDemo";
+import {
+  fadeSectionIn,
+  fadeSectionOut,
+} from "SRC_DIR/components/Tour/sectionFade";
 import {
   buildDemoFileList,
   type DemoAgentTab,
@@ -399,13 +404,27 @@ const AiAgentsTour = ({
   // The AI config goes back before the reload, not after: it is what the empty
   // screen reads to decide whether to offer "create an agent" or "switch AI
   // on", and the closing step is pointing at the answer.
-  const endDemo = useCallback(() => {
-    if (!tourDemo.isActive) return;
-    tourDemo.deactivate();
-    restoreAi();
-    leaveAgent();
-    void reloadSection();
-  }, [restoreAi, reloadSection, leaveAgent]);
+  const endDemo = useCallback(
+    async ({ fade = false } = {}) => {
+      if (fade) await fadeSectionOut();
+
+      try {
+        if (!tourDemo.isActive) {
+          leaveAgent();
+          return;
+        }
+
+        const wasStandingIn = tourDemo.isStandingInForList;
+        tourDemo.deactivate();
+        restoreAi();
+        leaveAgent();
+        if (wasStandingIn) await reloadSection();
+      } finally {
+        if (fade) fadeSectionIn();
+      }
+    },
+    [restoreAi, reloadSection, leaveAgent],
+  );
 
   // Shared by the arming effect and the closing step's `restore`.
   const demoConfig = useMemo<TourDemoConfig>(
@@ -451,7 +470,9 @@ const AiAgentsTour = ({
 
   const demoHooks = useMemo(
     () => ({
-      reveal: endDemo,
+      reveal: () => {
+        void endDemo();
+      },
       restore: restoreDemo,
       swapsList: true,
       navigates: true,
@@ -459,36 +480,32 @@ const AiAgentsTour = ({
     [endDemo, restoreDemo],
   );
 
-  // Armed on the pending request, when the section has no agents of its own.
+  // Armed on the pending request, when the section has no agents of its own,
+  // with the section hidden until the stand-in agents are in.
+  const shouldStartDemo =
+    aiAgentsTourStore.isPending &&
+    !aiAgentsTourStore.isRunning &&
+    !tourDemo.isActive &&
+    !hasItems &&
+    !isMobileView &&
+    !firstLoad &&
+    !isSectionLoading &&
+    isAiAgentsRoot &&
+    !!user &&
+    ready;
+
+  const { isPreparing, runSwap } = useDemoSwap(shouldStartDemo);
+
   useEffect(() => {
-    if (!aiAgentsTourStore.isPending || aiAgentsTourStore.isRunning) return;
-    if (tourDemo.isActive || hasItems) return;
-    if (isMobileView || firstLoad || isSectionLoading || !isAiAgentsRoot)
-      return;
-    if (!user) return;
-    if (!ready) return;
+    if (!shouldStartDemo) return;
 
-
-    // With AI off the section has no banner or filter bar to stand the list in.
-    standInForAi();
-
-    tourDemo.activate(demoConfig);
-
-    void reloadSection();
-  }, [
-    aiAgentsTourStore.isPending,
-    aiAgentsTourStore.isRunning,
-    hasItems,
-    isMobileView,
-    firstLoad,
-    isSectionLoading,
-    isAiAgentsRoot,
-    user,
-    standInForAi,
-    reloadSection,
-    ready,
-    t,
-  ]);
+    runSwap(() => {
+      // With AI off the section has no banner or filter bar to stand the list in.
+      standInForAi();
+      tourDemo.activate(demoConfig);
+      return reloadSection();
+    });
+  }, [shouldStartDemo, demoConfig, reloadSection, runSwap, standInForAi]);
 
   // A tour that ends while a step is still up — closed, skipped, its anchor
   // gone — never reaches that step's `after`, so the panel would stay borrowed
@@ -506,7 +523,7 @@ const AiAgentsTour = ({
     hasStarted.current = false;
 
     closeInfoPanel();
-    endDemo();
+    void endDemo({ fade: true });
   }, [aiAgentsTourStore.isRunning, closeInfoPanel, endDemo]);
 
   // The effect above only fires while this component is around to see the tour
@@ -605,6 +622,7 @@ const AiAgentsTour = ({
     !firstLoad &&
       !isSectionLoading &&
       isAiAgentsRoot &&
+      !isPreparing &&
       // With the section stood in for, "ready" also means the stand-in agents
       // have actually landed. Without this the reload above and the start timer
       // race, and joyride can freeze its step list against the empty page the

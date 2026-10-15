@@ -40,6 +40,7 @@ import type {
 } from "@docspace/shared/api/metadata/types";
 
 export type TFieldOptionDraft = {
+  key: string;
   id?: string;
   value: string;
 };

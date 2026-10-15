@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import uniqueId from "lodash/uniqueId";
+
 import { MetadataFieldType } from "@docspace/shared/enums";
 import type {
   TMetadataField,
@@ -50,6 +52,11 @@ import type {
   TTemplateChanges,
   TTemplateDraft,
 } from "./types";
+
+const createOption = (): TFieldOptionDraft => ({
+  key: uniqueId("option-"),
+  value: "",
+});
 
 export const isChoiceType = (type?: MetadataFieldType) =>
   type === MetadataFieldType.SingleChoice ||
@@ -109,7 +116,8 @@ export const toFieldDrafts = (fields: TMetadataField[] = []): TFieldDraft[] =>
       order: field.order,
       name: field.name,
       type: field.type,
-      options: field.options?.map(({ id, value }) => ({ id, value })) ?? [],
+      options:
+        field.options?.map(({ id, value }) => ({ key: id, id, value })) ?? [],
     }));
 
 export const toTemplateDraft = (
@@ -133,12 +141,14 @@ export const setFieldType = (
   ...form,
   type,
   options:
-    isChoiceType(type) && !form.options.length ? [{ value: "" }] : form.options,
+    isChoiceType(type) && !form.options.length
+      ? [createOption()]
+      : form.options,
 });
 
 export const addOption = (form: TFieldForm): TFieldForm => ({
   ...form,
-  options: [...form.options, { value: "" }],
+  options: [...form.options, createOption()],
 });
 
 export const setOptionValue = (

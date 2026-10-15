@@ -122,14 +122,16 @@ const Metadata = ({ selection }: MetadataProps) => {
 
   const onDelete = async () => {
     if (deletion?.type === "template") {
-      await deleteTemplate(deletion.templateId);
+      return deleteTemplate(deletion.templateId);
     }
 
     if (deletion?.type === "customFields") {
-      await saveCustomFields(
+      return saveCustomFields(
         metadata.customFields.map(({ name }) => ({ name, value: null })),
       );
     }
+
+    return true;
   };
 
   const closePanel = () => setPanel(null);

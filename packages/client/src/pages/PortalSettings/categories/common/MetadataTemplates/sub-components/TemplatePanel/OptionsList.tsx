@@ -81,7 +81,7 @@ const OptionsList = ({
       {options.length ? (
         <div className={styles.optionList}>
           {options.map((option, index) => (
-            <div key={option.id ?? index}>
+            <div key={option.key}>
               <div className={styles.optionRow}>
                 <TextInput
                   type={InputType.text}

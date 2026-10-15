@@ -84,8 +84,10 @@ export const useMetadataTemplates = () => {
           list.filter((template) => template.id !== item.id),
         );
         toastr.success(t("Metadata:TemplateDeleted"));
+        return true;
       } catch (e) {
         toastr.error(e as string);
+        return false;
       }
     },
     [t],

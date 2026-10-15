@@ -39,6 +39,7 @@ import { MetadataFieldType } from "@docspace/shared/enums";
 import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
 
 import {
+  addOption,
   canSaveTemplate,
   createFieldForm,
   getDropLine,
@@ -48,6 +49,7 @@ import {
   isFieldNameTaken,
   isValidField,
   moveItem,
+  removeOption,
   toMoveIndex,
   setFieldType,
   toTemplateDraft,
@@ -96,6 +98,9 @@ const template: TMetadataTemplate = {
 const draft = toTemplateDraft(template);
 const [caseNumber, court] = draft.fields;
 
+const toOptions = (...values: string[]) =>
+  values.map((value, index) => ({ key: `option-${index}`, value }));
+
 describe("moveItem", () => {
   it("moves an item and keeps the source untouched", () => {
     const items = ["a", "b", "c"];
@@ -133,10 +138,23 @@ describe("field form", () => {
       MetadataFieldType.MultiChoice,
     );
 
-    expect(form.options).toEqual([{ value: "" }]);
+    expect(form.options).toEqual([{ key: expect.any(String), value: "" }]);
     expect(setFieldType(form, MetadataFieldType.Number).options).toBe(
       form.options,
     );
+  });
+
+  it("gives every new option a key of its own", () => {
+    const form = addOption(
+      setFieldType(createFieldForm("k"), MetadataFieldType.MultiChoice),
+    );
+    const keys = removeOption(addOption(form), 1).options.map(
+      ({ key }) => key,
+    );
+
+    expect(new Set(keys).size).toBe(2);
+    expect(keys).toEqual([form.options[0].key, expect.any(String)]);
+    expect(keys[1]).not.toBe(form.options[1].key);
   });
 
   it("needs a name, a type and unique non-empty options", () => {
@@ -148,28 +166,18 @@ describe("field form", () => {
     expect(
       isValidField({ ...form, name: " ", type: MetadataFieldType.Date }),
     ).toBe(false);
-    expect(isValidField({ ...choice, options: [{ value: " " }] })).toBe(false);
+    expect(isValidField({ ...choice, options: toOptions(" ") })).toBe(false);
     expect(
-      isValidField({
-        ...choice,
-        options: [{ value: "Tax" }, { value: "tax " }],
-      }),
+      isValidField({ ...choice, options: toOptions("Tax", "tax ") }),
     ).toBe(false);
-    expect(
-      isValidField({ ...choice, options: [{ value: "Tax" }, { value: "" }] }),
-    ).toBe(true);
+    expect(isValidField({ ...choice, options: toOptions("Tax", "") })).toBe(
+      true,
+    );
   });
 
   it("marks every repeat of an option after its first entry", () => {
     expect(
-      getDuplicateOptions([
-        { value: "Tax" },
-        { value: " tax" },
-        { value: "" },
-        { value: "" },
-        { value: "IP" },
-        { value: "TAX" },
-      ]),
+      getDuplicateOptions(toOptions("Tax", " tax", "", "", "IP", "TAX")),
     ).toEqual([false, true, false, false, false, true]);
   });
 
@@ -211,7 +219,10 @@ describe("getTemplateChanges", () => {
   });
 
   it("keeps option ids so a renamed option is not removed", () => {
-    const options = [{ id: "a", value: "Arbitration court" }, court.options[1]];
+    const options = [
+      { ...court.options[0], value: "Arbitration court" },
+      court.options[1],
+    ];
     const { updated } = getTemplateChanges(template, {
       ...draft,
       fields: [caseNumber, { ...court, options }],
@@ -223,7 +234,10 @@ describe("getTemplateChanges", () => {
         data: {
           name: "Court",
           type: MetadataFieldType.SingleChoice,
-          options,
+          options: [
+            { id: "a", value: "Arbitration court" },
+            { id: "b", value: "Civil" },
+          ],
           order: 1,
         },
       },
@@ -239,7 +253,7 @@ describe("getTemplateChanges", () => {
           key: "new-1",
           name: " Hearing date ",
           type: MetadataFieldType.Date,
-          options: [{ value: "leftover" }],
+          options: toOptions("leftover"),
         },
       ],
     });

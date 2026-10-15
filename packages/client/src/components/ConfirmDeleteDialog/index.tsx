@@ -47,7 +47,7 @@ type ConfirmDeleteDialogProps = {
   title: string;
   description: string;
   deleteLabel?: string;
-  onDelete: () => Promise<void>;
+  onDelete: () => Promise<boolean>;
   onClose: () => void;
 };
 
@@ -63,8 +63,13 @@ const ConfirmDeleteDialog = ({
 
   const onSubmit = async () => {
     setIsLoading(true);
-    await onDelete();
-    onClose();
+
+    if (await onDelete()) {
+      onClose();
+      return;
+    }
+
+    setIsLoading(false);
   };
 
   return (

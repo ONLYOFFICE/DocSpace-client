@@ -146,9 +146,11 @@ export const useTemplateEditor = (
 
       toastr.success(t("Common:ChangesSavedSuccessfully"));
       onSaved();
+      return true;
     } catch (e) {
       toastr.error(e as string);
       if (mayBePartial) onSaved();
+      return false;
     } finally {
       setIsSaving(false);
     }

@@ -192,10 +192,10 @@ const RoomsTour = ({
   // `fade` is for an early close: the closing step fades the section itself.
   const endDemo = useCallback(
     async ({ fade = false } = {}) => {
+      if (!tourDemo.isActive) return;
       if (fade) await fadeSectionOut();
 
       try {
-        if (!tourDemo.isActive) return;
         tourDemo.deactivate();
         await reloadSection();
       } finally {

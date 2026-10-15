@@ -312,7 +312,9 @@ const FormsTour = ({
   // replace them.
   const endDemo = useCallback(
     async ({ fade = false } = {}) => {
-      if (fade) await fadeSectionOut();
+      const swaps =
+        tourDemo.isStandingInForList || sectionLocation.current !== null;
+      if (fade && swaps) await fadeSectionOut();
 
       try {
         if (!tourDemo.isActive) {
@@ -325,7 +327,7 @@ const FormsTour = ({
         leaveSpace();
         if (wasStandingIn) await reloadSection();
       } finally {
-        if (fade) fadeSectionIn();
+        if (fade && swaps) fadeSectionIn();
       }
     },
     [leaveSpace, reloadSection],

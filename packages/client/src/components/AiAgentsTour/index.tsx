@@ -406,7 +406,11 @@ const AiAgentsTour = ({
   // on", and the closing step is pointing at the answer.
   const endDemo = useCallback(
     async ({ fade = false } = {}) => {
-      if (fade) await fadeSectionOut();
+      const swaps =
+        tourDemo.isStandingInForList ||
+        borrowedAiConfig.current !== undefined ||
+        agentLocation.current !== null;
+      if (fade && swaps) await fadeSectionOut();
 
       try {
         if (!tourDemo.isActive) {
@@ -420,7 +424,7 @@ const AiAgentsTour = ({
         leaveAgent();
         if (wasStandingIn) await reloadSection();
       } finally {
-        if (fade) fadeSectionIn();
+        if (fade && swaps) fadeSectionIn();
       }
     },
     [restoreAi, reloadSection, leaveAgent],

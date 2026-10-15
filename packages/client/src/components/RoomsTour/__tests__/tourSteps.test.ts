@@ -144,6 +144,20 @@ describe("getTourSteps — room admin", () => {
     );
   });
 
+  it("names the list as a sample on its second row, leaving the first to the next step", () => {
+    document.body.innerHTML =
+      '<div data-testid="table-row-0"></div><div data-testid="table-row-1"></div>';
+    const sample = steps(demoFlags).find(
+      (step) => step.title === "RoomsTour:RoomsDemoPreviewTitle",
+    )!;
+
+    expect((sample.target as () => Element | null)()).toBe(
+      document.querySelector('[data-testid="table-row-1"]'),
+    );
+
+    document.body.innerHTML = "";
+  });
+
   it("closes a run on the section's own rooms on the New room button", () => {
     const closing = steps(adminFlags).at(-1)!;
 

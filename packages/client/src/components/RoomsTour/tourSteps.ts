@@ -67,6 +67,9 @@ export const GROUPS_SELECTOR = ".group-tags";
 export const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
+const SECOND_ITEM_SELECTOR =
+  '[data-testid="table-row-1"], [data-testid="files_row_1"], [data-testid="tile_1"]';
+
 // Only mounted while the panel is open.
 const INFO_PANEL_SELECTOR = ".info-panel";
 // ui-kit Tabs names the tab `${InfoPanelView.infoMembers}_tab`.
@@ -200,7 +203,7 @@ export function getTourSteps(
     isDemo &&
       hasItems &&
       fileItemStep(
-        FIRST_ITEM_SELECTOR,
+        SECOND_ITEM_SELECTOR,
         t("RoomsTour:RoomsDemoPreviewTitle"),
         t("RoomsTour:RoomsDemoPreview"),
         callbacks,

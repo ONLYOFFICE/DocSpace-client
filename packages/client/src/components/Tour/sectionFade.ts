@@ -48,26 +48,13 @@ const wait = (ms: number) =>
     setTimeout(resolve, ms);
   });
 
+let fadeInTimer: ReturnType<typeof setTimeout> | undefined;
+
 /**
  * The box the loader is centred in: the section's own, run down to the bottom
  * of the window. An emptied section is only as tall as what it is showing,
  * which is nothing here.
  */
-export function sectionBox() {
-  const rect = document
-    .querySelector(SECTION_CONTENT_SELECTOR)
-    ?.getBoundingClientRect();
-
-  if (!rect) return undefined;
-
-  return {
-    top: rect.top,
-    left: rect.left,
-    width: rect.width,
-    height: Math.max(rect.height, window.innerHeight - rect.top),
-  };
-}
-
 /** No transition: the section must not paint what the swap is about to drop. */
 export function hideSection() {
   document
@@ -79,6 +66,7 @@ export async function fadeSectionOut() {
   const section = document.querySelector(SECTION_CONTENT_SELECTOR);
   if (!section) return;
 
+  clearTimeout(fadeInTimer);
   section.classList.add(FADE_CLASS, FADE_OUT_CLASS);
   await wait(SECTION_FADE_MS);
 }
@@ -89,7 +77,11 @@ export function fadeSectionIn() {
 
   section.classList.add(FADE_CLASS);
   section.classList.remove(FADE_OUT_CLASS);
-  setTimeout(() => section.classList.remove(FADE_CLASS), SECTION_FADE_MS);
+  clearTimeout(fadeInTimer);
+  fadeInTimer = setTimeout(
+    () => section.classList.remove(FADE_CLASS),
+    SECTION_FADE_MS,
+  );
 }
 
 /** Runs `swap` with the section hidden, and brings it back afterwards. */
@@ -105,6 +97,7 @@ export async function throughSectionFade(swap: () => Promise<void>) {
 
 /** For a tour that ended mid-fade. */
 export function clearSectionFade() {
+  clearTimeout(fadeInTimer);
   document
     .querySelector(`.${FADE_CLASS}, .${FADE_OUT_CLASS}`)
     ?.classList.remove(FADE_CLASS, FADE_OUT_CLASS);

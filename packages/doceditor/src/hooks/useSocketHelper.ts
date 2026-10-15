@@ -47,6 +47,7 @@ import { FolderType } from "@docspace/shared/enums";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
 import { UseSocketHelperProps } from "@/types";
+import { getDocEditor } from "@/utils";
 
 const useSocketHelper = ({
   socketUrl,
@@ -104,9 +105,7 @@ const useSocketHelper = ({
         // const message = t("Common:PreparationPortalTitle");
         const message = "Preparation portal title";
 
-        const docEditor =
-          typeof window !== "undefined" &&
-          window.DocEditor?.instances[EDITOR_ID];
+        const docEditor = getDocEditor();
 
         docEditor?.denyEditingRights(message);
       } catch (e) {

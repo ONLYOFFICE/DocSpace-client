@@ -43,6 +43,7 @@
   "AppliesToRooms": "{{rooms}} (Ieskaitot koplietotās mapes/failus no telpas)",
   "AppliesToRoomsDescription": "Aizliedzot saišu izveidi sadaļā {{rooms}}, jaunas saites tiks veidotas tikai ar tipu \"Tikai darbvietas lietotāji\".",
   "AppliesToRoomsWarning": "Publiskās telpas arī kļūs tikai iekšēji pieejamas un nebūs pieejamas ārējiem lietotājiem.",
+  "AppsDescription": "Pārvaldiet, kuras lietotnes ir pieejamas jūsu darbvietā. Iespējotas lietotnes parādīsies galvenajā izvēlnē lietotājiem, kuriem ir piekļuve tām.",
   "AuditSubheader": "Pārlūkojiet neseno izmaiņu sarakstu, ko lietotāji veikuši jūsu darbvietā, piemēram, telpu, failu un citu vienumu izveidi, rediģēšanu vai dzēšanu.",
   "AuditTrailNav": "Audita žurnāls",
   "AuthorizationKeysInfo": "Iespējojiet trešo pušu pakalpojumus savai darbvietai.",

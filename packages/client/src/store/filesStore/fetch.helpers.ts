@@ -64,6 +64,7 @@ import i18n from "../../i18n";
 import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
+  getCategoryTypeByFolderTypeInSection,
 } from "SRC_DIR/helpers/utils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
 
@@ -254,9 +255,14 @@ export function fetchFilesImpl(
 
       runInAction(() => {
         if (!self.publicRoomStore.isPublicRoom) {
-          self.categoryType = getCategoryTypeByFolderType(
+          const isInFormRoom =
+            data.current.roomType === RoomsType.FormRoom ||
+            data.current.parentRoomType === FolderType.FormRoom;
+
+          self.categoryType = getCategoryTypeByFolderTypeInSection(
             data.current.rootFolderType,
             data.current.parentId,
+            { roomType: isInFormRoom ? RoomsType.FormRoom : undefined },
           );
         }
       });

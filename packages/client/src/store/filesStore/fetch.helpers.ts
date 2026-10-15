@@ -1061,10 +1061,16 @@ export async function fetchMoreFilesImpl(self: FilesStore) {
   )
     return;
 
-  const { isRoomsFolder, isArchiveFolder, isAIAgentsFolder, isFormsFolder } =
-    self.treeFoldersStore;
+  const {
+    isRoomsFolder,
+    isArchiveFolder,
+    isTemplatesFolder,
+    isAIAgentsFolder,
+    isFormsFolder,
+  } = self.treeFoldersStore;
 
-  const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+  const isRooms =
+    isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
 
   self.setFilesIsLoading(true);
   // console.log("fetchMoreFiles");

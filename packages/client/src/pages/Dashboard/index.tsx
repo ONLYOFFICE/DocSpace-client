@@ -81,7 +81,6 @@ import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers
 import ChatPanelView from "@onlyoffice/apps-ui-kit/components/section/sub-components/ChatPanel";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
-import { AppDisabledTooltip } from "SRC_DIR/components/AppDisabledTooltip";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
 import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 import { IntegrationsCard } from "SRC_DIR/components/IntegrationsCard";
@@ -93,10 +92,7 @@ import {
 
 import { WelcomeDialog } from "./WelcomeDialog";
 import { DashboardTourHost } from "./DashboardTourHost";
-import {
-  APP_DISABLED_CARD_ATTR,
-  ModuleCard,
-} from "./sub-components/ModuleCard";
+import { ModuleCard } from "./sub-components/ModuleCard";
 import { ProfileCard } from "./sub-components/ProfileCard";
 import { DevToolsCard } from "./sub-components/DevToolsCard";
 import { Header } from "./sub-components/Header";
@@ -397,9 +393,9 @@ const Dashboard = (props: DashboardProps) => {
                       key={mod.id}
                       mod={mod}
                       onTakeTour={
-                        // An app that is not installed has no section for its
-                        // tour to run in.
-                        isMobile || !mod.installed
+                        // An app that is switched off has no section for its
+                        // tour to run in; ModuleCard disables the icon then.
+                        isMobile
                           ? undefined
                           : () => {
                               requestAppTour(mod.id as AppId);
@@ -412,12 +408,6 @@ const Dashboard = (props: DashboardProps) => {
                     />
                   ))}
                 </div>
-                {moduleItems.some((mod) => !mod.installed && !mod.onAction) ? (
-                  <AppDisabledTooltip
-                    id="dashboard-app-disabled-tooltip"
-                    anchorSelect={`[${APP_DISABLED_CARD_ATTR}]`}
-                  />
-                ) : null}
               </section>
             ) : null}
 

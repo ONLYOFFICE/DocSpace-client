@@ -209,6 +209,21 @@ export const upsertField = (fields: TFieldDraft[], field: TFieldDraft) =>
     ? fields.map((item) => (item.key === field.key ? field : item))
     : [...fields, field];
 
+export const settleRequests = async (
+  requests: Promise<unknown>[],
+  onApplied: () => void,
+) => {
+  const results = await Promise.allSettled(requests);
+
+  if (results.some(({ status }) => status === "fulfilled")) onApplied();
+
+  const failure = results.find(
+    (result): result is PromiseRejectedResult => result.status === "rejected",
+  );
+
+  if (failure) throw failure.reason;
+};
+
 export const toFieldRequest = (
   field: TFieldDraft,
   order: number,

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 
 import { MetadataFieldType } from "@docspace/shared/enums";
 import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
@@ -50,6 +50,7 @@ import {
   isValidField,
   moveItem,
   removeOption,
+  settleRequests,
   toMoveIndex,
   setFieldType,
   toTemplateDraft,
@@ -192,6 +193,43 @@ describe("field form", () => {
 
     expect(upsertField(draft.fields, renamed)).toEqual([caseNumber, renamed]);
     expect(upsertField(draft.fields, added)).toEqual([...draft.fields, added]);
+  });
+});
+
+describe("settleRequests", () => {
+  it("waits for every request and reports a partial write before failing", async () => {
+    const onApplied = vi.fn();
+    let isSlowDone = false;
+    const slow = new Promise((resolve) =>
+      setTimeout(() => {
+        isSlowDone = true;
+        resolve(null);
+      }, 10),
+    );
+
+    await expect(
+      settleRequests([Promise.reject(new Error("deleted")), slow], onApplied),
+    ).rejects.toThrow("deleted");
+    expect(isSlowDone).toBe(true);
+    expect(onApplied).toHaveBeenCalledTimes(1);
+  });
+
+  it("reports nothing written when every request fails", async () => {
+    const onApplied = vi.fn();
+
+    await expect(
+      settleRequests([Promise.reject(new Error("offline"))], onApplied),
+    ).rejects.toThrow("offline");
+    expect(onApplied).not.toHaveBeenCalled();
+  });
+
+  it("reports a full write and does not fail", async () => {
+    const onApplied = vi.fn();
+
+    await settleRequests([Promise.resolve(1), Promise.resolve(2)], onApplied);
+    expect(onApplied).toHaveBeenCalledTimes(1);
+    await settleRequests([], onApplied);
+    expect(onApplied).toHaveBeenCalledTimes(1);
   });
 });
 

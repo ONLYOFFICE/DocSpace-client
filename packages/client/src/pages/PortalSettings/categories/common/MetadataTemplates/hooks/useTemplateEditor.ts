@@ -58,6 +58,7 @@ import {
   getTemplateChanges,
   isValidField,
   moveItem,
+  settleRequests,
   toFieldRequest,
   toTemplateDraft,
   upsertField,
@@ -66,13 +67,19 @@ import {
 const applyFieldChanges = async (
   templateId: number,
   { updated, removed, created }: TTemplateChanges,
+  onApplied: () => void,
 ) => {
-  await Promise.all(
+  await settleRequests(
     updated.map(({ id, data }) => updateMetadataField(templateId, id, data)),
+    onApplied,
   );
-  await Promise.all(removed.map((id) => deleteMetadataField(templateId, id)));
-  await Promise.all(
+  await settleRequests(
+    removed.map((id) => deleteMetadataField(templateId, id)),
+    onApplied,
+  );
+  await settleRequests(
     created.map((data) => createMetadataField(templateId, data)),
+    onApplied,
   );
 };
 
@@ -119,7 +126,10 @@ export const useTemplateEditor = (
 
   const save = async () => {
     const name = draft.name.trim();
-    let mayBePartial = false;
+    let isApplied = false;
+    const markApplied = () => {
+      isApplied = true;
+    };
 
     setIsSaving(true);
 
@@ -138,10 +148,10 @@ export const useTemplateEditor = (
             name,
             visible: draft.visible,
           });
+          markApplied();
         }
 
-        mayBePartial = true;
-        await applyFieldChanges(template.id, changes);
+        await applyFieldChanges(template.id, changes, markApplied);
       }
 
       toastr.success(t("Common:ChangesSavedSuccessfully"));
@@ -149,7 +159,7 @@ export const useTemplateEditor = (
       return true;
     } catch (e) {
       toastr.error(e as string);
-      if (mayBePartial) onSaved();
+      if (isApplied) onSaved();
       return false;
     } finally {
       setIsSaving(false);

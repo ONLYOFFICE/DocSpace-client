@@ -199,7 +199,6 @@ describe("getTourSteps — member", () => {
   it("still covers what to do with the rooms they were invited into", () => {
     expect(titles(memberFlags)).toEqual([
       "RoomsTour:RoomsOverviewTitle",
-      "FilesTour:TourAiAssistantTitle",
       "RoomsTour:RoomsGroupsTitle",
       "RoomsTour:RoomsMembersTitle",
       "RoomsTour:RoomsPlacesTitle",

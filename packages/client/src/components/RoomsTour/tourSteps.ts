@@ -175,8 +175,9 @@ export function getTourSteps(
         revealQuickActionTile('[data-testid="quick-use-template"]'),
       ),
 
-    // 3. AI chat tile, worded as in the Files tour.
-    showFilter &&
+    // 3. AI chat tile, worded as in the Files tour; the banner is admin-only.
+    canCreate &&
+      showFilter &&
       elementStep(
         '[data-testid="quick-ai-chat"]',
         t("FilesTour:TourAiAssistantTitle"),

@@ -50,11 +50,6 @@ const wait = (ms: number) =>
 
 let fadeInTimer: ReturnType<typeof setTimeout> | undefined;
 
-/**
- * The box the loader is centred in: the section's own, run down to the bottom
- * of the window. An emptied section is only as tall as what it is showing,
- * which is nothing here.
- */
 /** No transition: the section must not paint what the swap is about to drop. */
 export function hideSection() {
   document

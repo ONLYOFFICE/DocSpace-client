@@ -37,7 +37,7 @@ import type { EditorProps, IInitialConfig, TGoBack } from "@/types";
 import { useTranslation } from "react-i18next";
 import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 
-import { isFormRoomFile, toFormsSectionUrl } from "@/utils";
+import { getSafeReturnUrl, isFormRoomFile, toFormsSectionUrl } from "@/utils";
 
 const useGoBackAndClose = (
   fileInfo: EditorProps["fileInfo"],
@@ -50,6 +50,7 @@ const useGoBackAndClose = (
   config: IInitialConfig | undefined,
 ) => {
   const goBackUrl = config?.editorConfig?.customization?.goback?.url;
+  const returnUrl = getSafeReturnUrl(sdkConfig?.returnUrl);
 
   const filling = fileInfo?.startFilling && config?.type === "embedded";
 
@@ -57,7 +58,6 @@ const useGoBackAndClose = (
 
   if (fileInfo) {
     const editorGoBack = sdkConfig?.editorGoBack;
-    const returnUrl = sdkConfig?.returnUrl;
 
     const openFileLocationText = (
       (
@@ -126,7 +126,7 @@ const useGoBackAndClose = (
   // (broken out of the SDK iframe), so the close button is meaningful again
   // and should navigate back to the originating listing.
   const close =
-    showClose && (!sdkConfig?.isSDK || !!sdkConfig?.returnUrl)
+    showClose && (!sdkConfig?.isSDK || !!returnUrl)
       ? {
           visible: true,
           text: t("Common:CloseButton"),

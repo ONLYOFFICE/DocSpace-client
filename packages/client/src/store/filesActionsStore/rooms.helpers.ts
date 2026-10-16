@@ -77,7 +77,7 @@ self: FilesActionStore,providerKey?: string
 export const setFavoriteActionImpl = (
 self: FilesActionStore,action: string, items: TActionItem[]
 )=> {
-  const { fetchFavoritesFolder, setSelected } = self.filesStore;
+  const { removeFiles, setSelected } = self.filesStore;
   const { fileIds, folderIds } = splitFileAndFolderIds(
     items as unknown as TFile[],
   );
@@ -94,7 +94,7 @@ self: FilesActionStore,action: string, items: TActionItem[]
         .removeFromFavorite(fileIds as number[], folderIds as number[])
         .then(() => {
           return self.treeFoldersStore.isFavoritesFolder
-            ? fetchFavoritesFolder(self.selectedFolderStore.id as number)
+            ? removeFiles(fileIds, folderIds)
             : self.getItemsInfo(items);
         })
         .then(() => setSelected("close"));

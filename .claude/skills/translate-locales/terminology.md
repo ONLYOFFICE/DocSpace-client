@@ -28,7 +28,7 @@ the service. Never translate it back to "AI features", "AI functions" or similar
 | ja-JP | AIエージェントとツール | sr-Cyrl-RS | АИ агенти и алати |
 | ko-KR | AI 에이전트 및 도구 | sr-Latn-RS | AI agenti i alati |
 | lo-LA | AI ຕົວແທນ ແລະ ເຄື່ອງມື | tr | AI aracıları ve araçları |
-| uk-UA | Агенти та інструменти ШІ | vi | Tác nhân và công cụ AI |
+| uk-UA | Агенти та інструменти AI | vi | Tác nhân và công cụ AI |
 | zh-CN | AI 智能体和工具 | | |
 
 Inflect the term as the sentence requires. In `ru` the prefix «ИИ-» is written once

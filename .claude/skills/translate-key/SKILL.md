@@ -100,7 +100,7 @@ Frame each translation as:
 **Script enforcement:**
 - `sr-Cyrl-RS` — 100% Cyrillic. Never use Latin letters. "AI" → "АИ"
 - `bg` — Bulgarian Cyrillic. "AI" → "ИИ"
-- `uk-UA` — Ukrainian Cyrillic. "AI" → "ШІ", and the "І" is Cyrillic (U+0406), never Latin "I": «ШI» looks the same but breaks search
+- `uk-UA` — Ukrainian Cyrillic, but "AI" stays as Latin "AI" (a native speaker's choice over "ШІ"; both letters must be Latin, never Cyrillic "А"/"І"). Use "з AI", not "зі AI"
 - `lv` — "AI" → "MI" (mākslīgais intelekts)
 - `ar-SA` — Arabic script, RTL. "AI" stays as "AI" (accepted loanword)
 - `hy-AM` — Armenian script only. "AI" → "ԱԲ" (Արհեստական Բանականություն)

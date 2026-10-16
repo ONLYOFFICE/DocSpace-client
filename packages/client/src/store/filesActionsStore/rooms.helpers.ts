@@ -92,10 +92,12 @@ self: FilesActionStore,action: string, items: TActionItem[]
     case "remove":
       return api.files
         .removeFromFavorite(fileIds as number[], folderIds as number[])
-        .then(() => {
-          return self.treeFoldersStore.isFavoritesFolder
-            ? removeFiles(fileIds, folderIds)
-            : self.getItemsInfo(items);
+        .then(async () => {
+          if (self.treeFoldersStore.isFavoritesFolder) {
+            removeFiles(fileIds, folderIds);
+          } else {
+            await self.getItemsInfo(items);
+          }
         })
         .then(() => setSelected("close"));
     default:

@@ -62,4 +62,5 @@ export const TYPE_LINK_WITHOUT_LNG_COMBOBOX = [
   "PortalRemove",
   "PortalSuspend",
   "PortalContinue",
+  "PortalUnblock",
 ];

@@ -37,6 +37,7 @@ import React from "react";
 import axios from "axios";
 import { useNavigate, useLocation, useParams } from "react-router";
 
+import { getFolder } from "@docspace/shared/api/files";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import {
@@ -59,6 +60,7 @@ import {
 import type { ValueOf } from "@docspace/shared/types";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getSectionTrashUrl } from "SRC_DIR/helpers/articleNavigation";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
@@ -267,6 +269,23 @@ const useFiles = ({
         fetchDefaultFiles(categoryType);
 
         return;
+      }
+
+      if (categoryType === CategoryType.Trash && !filterObj.folderType) {
+        try {
+          const { current } = await getFolder(
+            "@trash",
+            FilesFilter.getDefault({ pageCount: 1 }),
+          );
+
+          navigate(getSectionTrashUrl(current.id, location.pathname), {
+            replace: true,
+          });
+
+          return;
+        } catch (e) {
+          console.error(e);
+        }
       }
     }
 

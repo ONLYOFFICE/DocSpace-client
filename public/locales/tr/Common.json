@@ -900,6 +900,8 @@
   "Error401Text": "Üzgünüz, kaynak şu anda ulaşılabilir değil.",
   "Error403Text": "Üzgünüz, erişim reddedildi.",
   "Error404Text": "Üzgünüz, kaynak bulunamadı.",
+  "ErrorBlockedDescription": "Çalışma alanını ve verilerini korumak için çalışma alanı sahibi, e-postamızdaki bağlantıyı kullanarak engeli kaldırabilir veya silinme tarihinden önce destekle iletişime geçebilir.",
+  "ErrorBlockedText": "Bu çalışma alanı engellendi",
   "ErrorDeactivatedText": "Bu çalışma alanı devre dışı bırakıldı",
   "ErrorEmptyList": "Varlıkların listesi değiştirildi. Lütfen içeriği kontrol edip tekrar deneyin.",
   "ErrorInternalServer": "İç sunucu hatası. Daha sonra tekrar deneyin.",

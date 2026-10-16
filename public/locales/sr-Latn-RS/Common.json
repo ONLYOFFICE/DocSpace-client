@@ -900,6 +900,8 @@
   "Error401Text": "Izvinjavamo se, resurs trenutno nije dostupan.",
   "Error403Text": "Izvinjavamo se, pristup odbijen.",
   "Error404Text": "Izvinjavamo se, resurs ne može biti pronađen.",
+  "ErrorBlockedDescription": "Da bi sačuvao radni prostor i njegove podatke, vlasnik radnog prostora može da ga deblokira pomoću veze iz naše e-poruke ili da pre datuma brisanja kontaktira podršku.",
+  "ErrorBlockedText": "Ovaj radni prostor je blokiran",
   "ErrorDeactivatedText": "Ovaj radni prostor je deaktiviran",
   "ErrorEmptyList": "Spisak entiteta je promenjen. Proverite sadržaj i pokušajte ponovo.",
   "ErrorInternalServer": "Interna greška servera. Pokušajte ponovo kasnije.",

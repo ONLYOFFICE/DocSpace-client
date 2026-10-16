@@ -900,6 +900,8 @@
   "Error401Text": "Spiacente, la risorsa non è attualmente accessibile.",
   "Error403Text": "Spiacente, accesso negato.",
   "Error404Text": "Spiacente, impossibile trovare la risorsa.",
+  "ErrorBlockedDescription": "Per conservarlo insieme ai suoi dati, il proprietario dello spazio di lavoro può sbloccarlo tramite il link presente nella nostra email oppure contattare l'assistenza prima della data di eliminazione.",
+  "ErrorBlockedText": "Questo spazio di lavoro è bloccato",
   "ErrorDeactivatedText": "Questo spazio di lavoro è disattivato",
   "ErrorEmptyList": "L'elenco delle entità è stato cambiato. Controlla il contenuto e riprova.",
   "ErrorInternalServer": "Errore interno del server. Riprova più tardi.",

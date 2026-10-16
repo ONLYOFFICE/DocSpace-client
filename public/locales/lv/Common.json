@@ -900,6 +900,8 @@
   "Error401Text": "Diemžēl resurss pašlaik nav pieejams.",
   "Error403Text": "Diemžēl piekļuve liegta",
   "Error404Text": "Diemžēl resursu nevar atrast.",
+  "ErrorBlockedDescription": "Lai saglabātu darbvietu un tās datus, darbvietas īpašnieks var to atbloķēt, izmantojot saiti no mūsu e-pasta, vai pirms dzēšanas datuma sazināties ar atbalsta dienestu.",
+  "ErrorBlockedText": "Šī darbvieta ir bloķēta",
   "ErrorDeactivatedText": "Šī darbvieta ir deaktivizēta",
   "ErrorEmptyList": "Entītiju saraksts ir mainīts. Pārbaudiet saturu un mēģiniet vēlreiz.",
   "ErrorInternalServer": "Iekšējā servera kļūda. Mēģiniet vēlāk vēlreiz.",

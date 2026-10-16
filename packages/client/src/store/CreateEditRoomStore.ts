@@ -663,7 +663,8 @@ class CreateEditRoomStore {
         },
       }),
       saveFormAsXLSX,
-      sendFormToExternalDB,
+      sendFormToExternalDB:
+        sendFormToExternalDB && this.settingsStore.externalDbEnabled,
     };
 
     this.setIsLoading(true);

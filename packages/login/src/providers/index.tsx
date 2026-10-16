@@ -78,7 +78,12 @@ export const Providers = ({
   const confirmType = searchParams?.get("type");
 
   let shouldRedirect = true;
-  if (redirectURL === "/unavailable" && confirmType === "PortalContinue") {
+  // The links that bring a deactivated or a blocked portal back must open
+  // their confirmation page instead of the unavailable one.
+  if (
+    redirectURL === "/unavailable" &&
+    (confirmType === "PortalContinue" || confirmType === "PortalUnblock")
+  ) {
     shouldRedirect = false;
   }
 

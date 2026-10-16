@@ -357,6 +357,13 @@ export const getRootDescription = (
   filterFolderType: Nullable<number[]> = null,
 ) => {
   return match([rootFolderType, access])
+    .with([P._, P.when(() => isPublicRoom)], () => (
+      <>
+        <span>{t("Common:RoomEmptyAtTheMoment")}</span>
+        <br />
+        <span>{t("Common:FilesWillAppearHere")}</span>
+      </>
+    ))
     .with([FolderType.AIAgents, P._], () =>
       aiReady
         ? getAIAgentsAIEnabledDescription(t, access)
@@ -379,13 +386,6 @@ export const getRootDescription = (
     .with([FolderType.Forms, P._], () =>
       t("EmptyView:EmptyRootFormsDescription"),
     )
-    .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (
-      <>
-        <span>{t("Common:RoomEmptyAtTheMoment")}</span>
-        <br />
-        <span>{t("Common:FilesWillAppearHere")}</span>
-      </>
-    ))
     .with([FolderType.USER, P.when(() => security?.Create)], () =>
       t("Common:DefaultFolderDescription"),
     )

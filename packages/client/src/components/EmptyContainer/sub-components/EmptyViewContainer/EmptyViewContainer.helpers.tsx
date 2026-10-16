@@ -196,6 +196,7 @@ export const getTitle = (
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
   isFormsScope: boolean = false,
+  isPublicRoom: boolean = false,
 ): string => {
   const isNotAdmin = isUser(access);
 
@@ -207,6 +208,8 @@ export const getTitle = (
         ? t("Common:EmptyResultsTitle")
         : t("Common:NothingToShowYet");
   }
+
+  if (isRootEmptyPage && isPublicRoom) return t("Common:EmptyScreenFolder");
 
   if (isRootEmptyPage)
     return getRootTitle(
@@ -247,7 +250,11 @@ export const getIcon = (
   isResultsTab?: boolean,
   isKnowledgeTab?: boolean,
   isAIRoom?: boolean,
+  isPublicRoom: boolean = false,
 ): JSX.Element => {
+  if (isRootEmptyPage && isPublicRoom)
+    return isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />;
+
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
 
   // The knowledge tab shows a folder whose `folderType` isn't a default-folder

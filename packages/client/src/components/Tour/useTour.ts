@@ -47,6 +47,7 @@ import {
   isStepTargetPresent,
   removeRevealedControl,
   removeUnionSpotlight,
+  runStepTeardown,
   NAVIGATION_TARGET_TIMEOUT,
 } from "./stepBuilders";
 
@@ -197,6 +198,7 @@ export default function useTour(
       ?.classList.remove("tour-outline-item");
     removeUnionSpotlight();
     removeRevealedControl();
+    runStepTeardown();
     clearSectionFade();
   }, []);
 

@@ -534,6 +534,14 @@ export function menuStep(
     );
   };
 
+  const close = () => {
+    if (isOpen()) toggle();
+    // A pointer-placed menu re-shows on its button; only an outside press hides it.
+    if (isOpen()) {
+      document.body.dispatchEvent(new MouseEvent("mousedown", { bubbles: true }));
+    }
+  };
+
   return {
     target: menuSelector,
     spotlightTarget: spotlightItem
@@ -557,16 +565,11 @@ export function menuStep(
       // container, so scrolling to it would drag the trigger out from under it.
       scrollTargetIntoView(triggerSelector, signal);
       if (!isOpen()) toggle();
+      registerStepTeardown(close);
       await awaitAnchor(menuSelector, STEP_TARGET_TIMEOUT, signal, logLabel);
     },
     after: () => {
-      if (isOpen()) toggle();
-      // A pointer-placed menu re-shows on its button; only an outside press hides it.
-      if (isOpen()) {
-        document.body.dispatchEvent(
-          new MouseEvent("mousedown", { bubbles: true }),
-        );
-      }
+      runStepTeardown();
       removeUnionSpotlight();
     },
   };
@@ -630,6 +633,7 @@ export function revealStep(
       }
 
       const showTarget = async () => {
+        if (signal?.aborted) return;
         hooks.reveal();
         await hooks.settled?.();
         await awaitAnchor(target, timeout, signal, logLabel);
@@ -699,6 +703,19 @@ export function hoverRevealStep(
 /** Puts a control revealed by `hoverRevealStep` back the way it was. */
 export function removeRevealedControl() {
   document.querySelector(`.${REVEAL_CLASS}`)?.classList.remove(REVEAL_CLASS);
+}
+
+// What the running step would undo in `after`, kept for a tour that ends on it.
+let stepTeardown: (() => void) | null = null;
+
+export function registerStepTeardown(teardown: () => void) {
+  stepTeardown = teardown;
+}
+
+export function runStepTeardown() {
+  const teardown = stepTeardown;
+  stepTeardown = null;
+  teardown?.();
 }
 
 /**

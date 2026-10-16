@@ -353,7 +353,9 @@ const AiAgentsTour = ({
       when(() => !!filesStore.filesList?.[0]?.isRoom, {
         timeout: NAVIGATION_TARGET_TIMEOUT,
       })
-        .then(() => openInfoPanel())
+        .then(() => {
+          if (aiAgentsTourStore.isRunning) openInfoPanel();
+        })
         .catch(() => {});
       return;
     }

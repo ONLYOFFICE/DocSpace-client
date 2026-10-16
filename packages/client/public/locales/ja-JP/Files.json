@@ -118,6 +118,7 @@
   "SharePDFFormModalDescription": "新しいスペースが作成され、PDFフォームがそこにコピーされます。他のユーザーを招待して、そのスペースでフォームに記入してもらうことができます。",
   "SharePDFFormModalTitle": "PDFフォームを共有",
   "ShareRoom": "共有ルーム",
+  "ShareSpace": "スペースを共有",
   "ShowLinkActions": "リンクアクションの表示",
   "SyncWithDatabase": "データベースとの同期",
   "SyncWithDatabaseError": "データベースとの同期に失敗しました",

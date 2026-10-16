@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "방 유형을 선택하고, 함께 일하는 사람들을 초대하고, 파일을 추가하세요. 이제 함께 작업을 시작할 준비가 되었습니다.",
   "RoomsCreateFirstTitle": "이제 나만의 것으로",
+  "RoomsDemoPreview": "이 투어에서는 방이 어떻게 작동하는지 보여 주기 위해 샘플 콘텐츠를 사용합니다. 예시는 내 방과 별개입니다.",
+  "RoomsDemoPreviewTitle": "둘러볼 샘플",
+  "RoomsEmpty": "이 투어의 방은 예시였습니다. 초대받은 방은 여기에 표시되며 바로 작업할 수 있습니다.",
   "RoomsEmptyTitle": "목록이 아직 비어 있습니다",
+  "RoomsGroups": "관련된 방을 그룹으로 묶으면 더 빨리 찾을 수 있습니다. 방을 선택해 그룹을 만든 다음, 목록 위에서 그룹을 전환하세요.",
   "RoomsGroupsTitle": "방을 그룹으로 묶기",
+  "RoomsMembers": "정보 패널에서 방 멤버와 역할을 확인하세요. 멤버를 관리할 수 있다면 사람들을 초대하고 각자에게 필요한 접근 권한을 선택하세요.",
   "RoomsMembersTitle": "함께 일하기",
+  "RoomsOverview": "방은 프로젝트나 작업을 중심으로 파일과 사람을 한데 모읍니다. 방 유형과 멤버 역할에 따라 각자가 파일로 작업하는 방식이 정해집니다.",
+  "RoomsOverviewTitle": "함께 일하는 공간",
+  "RoomsPlacesArchive": "{{archive}} — 진행 중인 작업에서 따로 빼 둔 방. 다시 필요할 때 복원하세요.",
   "RoomsPlacesTemplates": "{{templates}} — 내 방 템플릿.",
   "RoomsPlacesTitle": "모든 것이 제자리에",
+  "RoomsTemplates": "방을 템플릿으로 저장해 설정, 폴더, 파일을 재사용하세요. 템플릿에서 새 방을 만든 다음, 작업을 시작하기 전에 멤버와 접근 권한을 확인하세요.",
   "RoomsTemplatesTitle": "잘 되는 방식은 다시 쓰기",
-  "RoomsTypesTitle": "모든 업무에 맞는 방"
+  "RoomsTypesCollaboration": "{{roomType}} — 공동 편집용.",
+  "RoomsTypesCustom": "{{roomType}} — 나만의 워크플로용.",
+  "RoomsTypesPublic": "{{roomType}} — 가입 없는 접근용.",
+  "RoomsTypesTitle": "모든 업무에 맞는 방",
+  "RoomsTypesVdr": "{{roomType}} — 통제된 파일 공유용."
 }

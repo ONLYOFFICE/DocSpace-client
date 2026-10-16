@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentDemoPreviewTitle",
+  "content": "A sample to explore",
+  "content_en_sha1_hash": "c9cf275ded12fc58c457c016b07738bbbb4821dd",
+  "created_at": "2026-10-16T12:15:11.890Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
+  "comment": {
+    "text": "Title of the AI Agents onboarding tour step that highlights the sample agent rows used for the tour; short heading, noun phrase (an example to look around in).",
+    "is_auto": true,
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 195,
+      "context": "isStandIn &&\n hasItems &&\n elementGroupStep(\n FIRST_ITEM_SELECTOR,\n STAND_IN_ROW_SELECTORS,\n t(\"AiAgentsTour:AgentDemoPreviewTitle\"),\n t(\"AiAgentsTour:AgentDemoPreview\"),\n callbacks,\n AI_AGENTS_TOUR_LABEL,\n 4,\n leaveAgent,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

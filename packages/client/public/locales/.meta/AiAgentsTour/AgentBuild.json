@@ -1,20 +1,20 @@
 {
   "key_path": "AgentBuild",
-  "content": "Creating an agent is describing a job, not opening a blank chat. The instructions fix what it does and how it replies, the files you attach become the knowledge it answers from, and you pick the model behind it along with the connected tools it may reach for.",
-  "content_en_sha1_hash": "00ced69cda2c8769169fa796f955cc6f20d04c53",
-  "created_at": "2026-08-06T14:20:56.245Z",
-  "updated_at": "2026-08-07T15:05:26.408Z",
+  "content": "Choose a model, describe the agent's role and tasks, and select any available tools it needs. After creating the agent, add reference files to its Knowledge base.",
+  "content_en_sha1_hash": "31f6f6cc51e77a6da940cde82c65fafc2c619c57",
+  "created_at": "2026-10-16T12:15:11.877Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
   "comment": {
-    "text": "Description text within an interactive onboarding tour step that explains the process of configuring an AI agent, including its instructions, knowledge base, and model selection.",
+    "text": "Body of the AI Agents onboarding tour step that highlights the New agent quick-action tile, shown to admins only. Knowledge base is the name of the agent's section with reference files and should match its UI translation.",
     "is_auto": true,
-    "updated_at": "2026-08-06T14:28:02.484Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 202,
-      "context": "canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-actions\"]',\n t(\"AiAgentsTour:AgentBuildTitle\"),\n t(\"AiAgentsTour:AgentBuild\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 3. An agent row: the per-agent actions people reach for most, none of",
+      "line_number": 182,
+      "context": "canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-new-agent\"]',\n t(\"AiAgentsTour:AgentBuildTitle\"),\n t(\"AiAgentsTour:AgentBuild\"),\n callbacks,\n AI_AGENTS_TOUR_LABEL,\n 6,\n leaveAgent,\n ),",
       "module": "/packages/client"
     }
   ],

@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "«{{folderTitle}}» වෙතින්",
   "FeedLocationRoomLabel": "කාමරය «{{folderTitle}}»",
   "FeedLocationSectionLabel": "කොටස «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "අවකාශය «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "AI සමඟ ප්‍රතිචාර විශ්ලේෂණය කරන්න",
   "FormRoomAIModalConnect": "දත්ත සමුදාය සම්බන්ධ කරන්න",
   "FormRoomAIModalDescription": "AI ගෙන් අහන්න' සමඟ එකතු කළ සියලු ප්‍රතිචාර විශ්ලේෂණය කිරීමට දත්ත ගබඩාවක් සම්බන්ධ කරන්න. ඔබට එය නොමැතිව ඉදිරියට යාමට සහ මෙම පෝරමය ගැන පමණක් අසාගත හැකිය.",

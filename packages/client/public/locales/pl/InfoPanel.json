@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "z katalogu «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Pokój «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Sekcja «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Obszar «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Analizuj odpowiedzi za pomocą AI",
   "FormRoomAIModalConnect": "Połącz z bazą danych",
   "FormRoomAIModalDescription": "Połącz baz danych, aby analizować wszystkie zebrane odpowiedzi pomocą AI. Możeszynuować bez i zadawać pytania tylko o ten formularz.",

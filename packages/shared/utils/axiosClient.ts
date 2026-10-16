@@ -473,6 +473,26 @@ class AxiosClient {
         };
       }
 
+      // The OAuth service answers with an RFC 7807 problem detail instead of
+      // the { error: { message } } envelope that toastr reads, so its
+      // explanation used to be replaced by axios's "status code 400" text.
+      const problem = error?.response?.data as
+        | { detail?: unknown; error?: unknown }
+        | undefined;
+      if (
+        isOAuth &&
+        error.response &&
+        problem &&
+        !problem.error &&
+        typeof problem.detail === "string" &&
+        problem.detail
+      ) {
+        error.response.data = {
+          ...problem,
+          error: { message: problem.detail },
+        };
+      }
+
       const loginURL = combineUrl(proxyURL, "/login");
 
       if (!this.isSSR) {

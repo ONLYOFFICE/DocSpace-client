@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Chọn loại phòng, mời những người bạn làm việc cùng và thêm tệp của bạn. Bạn đã sẵn sàng để bắt đầu cộng tác.",
   "RoomsCreateFirstTitle": "Giờ hãy làm của riêng bạn",
+  "RoomsDemoPreview": "Chuyến tham quan này dùng nội dung minh họa để cho thấy cách phòng hoạt động. Các ví dụ này tách biệt với các phòng của riêng bạn.",
+  "RoomsDemoPreviewTitle": "Một ví dụ để khám phá",
+  "RoomsEmpty": "Các phòng trong chuyến tham quan này chỉ là ví dụ. Những phòng bạn được mời vào sẽ xuất hiện ở đây, sẵn sàng để bạn làm việc.",
   "RoomsEmptyTitle": "Danh sách của bạn hiện đang trống",
+  "RoomsGroups": "Nhóm các phòng liên quan để tìm chúng nhanh hơn. Chọn phòng để tạo nhóm, sau đó chuyển đổi giữa các nhóm phía trên danh sách.",
   "RoomsGroupsTitle": "Nhóm các phòng của bạn",
+  "RoomsMembers": "Dùng Bảng thông tin để xem thành viên phòng và vai trò của họ. Nếu bạn có thể quản lý thành viên, hãy mời mọi người và chọn quyền truy cập mà mỗi người cần.",
   "RoomsMembersTitle": "Làm việc cùng nhau",
+  "RoomsOverview": "Phòng tập hợp tệp và mọi người xoay quanh một dự án hoặc nhiệm vụ. Loại phòng và vai trò thành viên xác định cách mọi người có thể làm việc với các tệp.",
+  "RoomsOverviewTitle": "Một nơi để làm việc cùng nhau",
+  "RoomsPlacesArchive": "{{archive}} — các phòng đã tạm gác khỏi công việc đang diễn ra. Khôi phục chúng khi bạn cần lại.",
   "RoomsPlacesTemplates": "{{templates}} — các mẫu phòng của bạn.",
   "RoomsPlacesTitle": "Mọi thứ đúng chỗ của nó",
+  "RoomsTemplates": "Lưu một phòng thành mẫu để dùng lại cài đặt, thư mục và tệp của phòng. Tạo phòng mới từ mẫu đó, rồi kiểm tra thành viên và quyền truy cập trước khi bắt đầu làm việc.",
   "RoomsTemplatesTitle": "Dùng lại thứ đã hiệu quả",
-  "RoomsTypesTitle": "Một phòng cho mọi nhiệm vụ"
+  "RoomsTypesCollaboration": "{{roomType}} — để cùng chỉnh sửa.",
+  "RoomsTypesCustom": "{{roomType}} — cho quy trình làm việc của riêng bạn.",
+  "RoomsTypesPublic": "{{roomType}} — để truy cập không cần đăng ký.",
+  "RoomsTypesTitle": "Một phòng cho mọi nhiệm vụ",
+  "RoomsTypesVdr": "{{roomType}} — để chia sẻ tệp có kiểm soát."
 }

@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Etykiety wyróżniają aktywność plików, taką jak przesłania, edycje i udostępnienia, w aplikacjach {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Etykiety wyróżniają aktywność plików, taką jak przesłania, edycje i udostępnienia, w aplikacjach {{files}}, {{rooms}}, {{forms}} i Agenci AI.",
   "AdminSetupRequired": "Wymagane skonfigurowanie administratora",
   "Badges": "Etykiety",
   "DailyFeed": "Codzienne aktualności {{organizationName}} {{productName}}",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "To konto użytkownika jest ładowane z LDAP. Adres e-mail użytkownika nie został określony, a aktualny został wygenerowany automatycznie i nie można go użyć do wysyłania powiadomień.",
   "NotConfigured": "Nie skonfigurowano",
   "Notifications": "Powiadomienia",
-  "RoomsActivityDescription": "Otrzymuj natychmiastowe powiadomienia e-mail o nowo udostępnionych plikach i folderach oraz o aktywności w {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}.",
-  "RoomUpdateNotify": "Aktywność w {{files}}, {{rooms}}, {{forms}} i {{aiAgents}}",
+  "RoomsActivityDescription": "Otrzymuj natychmiastowe powiadomienia e-mail o nowo udostępnionych plikach i folderach oraz o aktywności w {{files}}, {{rooms}}, {{forms}} i Agenci AI.",
+  "RoomUpdateNotify": "Aktywność w {{files}}, {{rooms}}, {{forms}} i Agenci AI",
   "SettingUpNotifications": "Ustawienia powiadomień",
   "SuccessConnected": "{{serviceName}} zostało pomyślnie podłączone jako kanał powiadomień. Teraz będziesz tam otrzymywać aktualizacje.",
   "SuccessDisconnected": "{{serviceName}} zostało pomyślnie odłączone jako kanał powiadomień. Powiadomienia nie będą już tam wysyłane.",

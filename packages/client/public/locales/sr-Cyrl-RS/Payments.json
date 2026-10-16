@@ -11,7 +11,7 @@
   "NotPossibleRoomRestoring": "Обнављање ове просторије није могуће јер је достигнут лимит за број просторија укључених у ваш тренутни план.",
   "NumberOfRoomsAccordingToTariff": "Број просторија према вашем тарифном плану: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Број админа према вашем тарифном плану: {{currentValue}}/{{maxValue}}",
-  "PlanPaymentOverdue": "Не можете додати нових користувачів, створювати нові кімнати або AI агентів. Оплата за план {{planName}} прострочена.",
+  "PlanPaymentOverdue": "Не можете додати нових користувачів, створювати нові кімнати або АИ агентів. Оплата за план {{planName}} прострочена.",
   "RoomsQuotaAlmostExhausted": "Квота просторија је скоро исцрпљена.",
   "UsersQuotaAlmostExhausted": "Квота плаћених корисника је скоро исцрпљена."
 }

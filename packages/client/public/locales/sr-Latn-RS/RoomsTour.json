@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Izaberite tip sobe, pozovite ljude sa kojima radite i dodajte svoje datoteke. Spremni ste da počnete sa zajedničkim radom.",
   "RoomsCreateFirstTitle": "Sada napravite svoju",
+  "RoomsDemoPreview": "Ovaj obilazak koristi primere sadržaja da pokaže kako sobe funkcionišu. Primeri su odvojeni od vaših sopstvenih soba.",
+  "RoomsDemoPreviewTitle": "Primer za istraživanje",
+  "RoomsEmpty": "Sobe u ovom obilasku bile su primeri. Sobe u koje ste pozvani pojaviće se ovde, spremne za rad.",
   "RoomsEmptyTitle": "Vaš spisak je za sada prazan",
+  "RoomsGroups": "Grupišite povezane sobe da biste ih brže pronašli. Izaberite sobe da biste kreirali grupu, a zatim se prebacujte između grupa iznad spiska.",
   "RoomsGroupsTitle": "Grupišite svoje sobe",
+  "RoomsMembers": "U Info panelu pogledajte članove sobe i njihove uloge. Ako možete da upravljate članovima, pozovite ljude i izaberite pristup koji je svakom od njih potreban.",
   "RoomsMembersTitle": "Radite zajedno",
+  "RoomsOverview": "Soba okuplja datoteke i ljude oko projekta ili zadatka. Njen tip i uloge članova određuju kako svako može da radi sa datotekama.",
+  "RoomsOverviewTitle": "Mesto za zajednički rad",
+  "RoomsPlacesArchive": "{{archive}} — sobe sklonjene iz aktivnog rada. Vratite ih kada vam ponovo zatrebaju.",
   "RoomsPlacesTemplates": "{{templates}} — vaši šabloni soba.",
   "RoomsPlacesTitle": "Sve na svom mestu",
+  "RoomsTemplates": "Sačuvajte sobu kao šablon da biste ponovo koristili njena podešavanja, fascikle i datoteke. Iz njega kreirajte novu sobu, a zatim pre početka rada proverite njene članove i pristup.",
   "RoomsTemplatesTitle": "Ponovo koristite ono što radi",
-  "RoomsTypesTitle": "Soba za svaki zadatak"
+  "RoomsTypesCollaboration": "{{roomType}} — za zajedničko uređivanje.",
+  "RoomsTypesCustom": "{{roomType}} — za vaše sopstvene tokove rada.",
+  "RoomsTypesPublic": "{{roomType}} — za pristup bez registracije.",
+  "RoomsTypesTitle": "Soba za svaki zadatak",
+  "RoomsTypesVdr": "{{roomType}} — za kontrolisano deljenje datoteka."
 }

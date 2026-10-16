@@ -252,7 +252,7 @@ test.describe("Billing overview", () => {
     await openOverview(page, baseUrl);
 
     await expect(
-      page.getByText("No spending activity for the selected period"),
+      page.getByText("No spending activity for this period"),
     ).toBeVisible();
     await expect(page.getByText("No active add-ons")).toBeVisible();
     await expect(page.getByText("No upcoming payments")).toBeVisible();

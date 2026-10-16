@@ -2364,7 +2364,7 @@
   "UserAgentMaxAvailableRoleWarning": "Convidados e usuários não podem ser atribuídos como Gerentes de agentes. Apenas administradores de sala e superadministradores são adequados para a função indicada.",
   "UserAgreement": "Confirmo e quero continuar",
   "UseRecoveryPhrase": "Usar frase de recuperação",
-  "UserEmptyDescription": "Arquivos e pastas enviados por administradores apareceram aqui.",
+  "UserEmptyDescription": "Arquivos e pastas enviados por administradores aparecerão aqui.",
   "UserFileUpdated": "Arquivo atualizado.",
   "UserLimit": "Limite de Usuários",
   "UserLimitDescription": "Defina o número de usuários que podem entrar por meio deste link de convite.",

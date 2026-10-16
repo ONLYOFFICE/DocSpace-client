@@ -419,6 +419,14 @@ const PortalSettingsRoutes = {
       ),
     },
     {
+      path: "ai-settings/limits",
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
       path: "integration",
       element: <Navigate to="integration/third-party-services" replace />,
     },

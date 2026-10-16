@@ -900,6 +900,8 @@
   "Error401Text": "Valitettavasti resurssi ei ole tällä hetkellä käytettävissä.",
   "Error403Text": "Valitettavasti pääsy on estetty.",
   "Error404Text": "Valitettavasti resurssia ei löydy.",
+  "ErrorBlockedDescription": "Säilyttääkseen työtilan ja sen tiedot työtilan omistaja voi poistaa eston sähköpostiviestimme linkin kautta tai ottaa yhteyttä tukeen ennen poistopäivää.",
+  "ErrorBlockedText": "Tämä työtila on estetty",
   "ErrorDeactivatedText": "Tämä työtila on poistettu käytöstä",
   "ErrorEmptyList": "Kohteiden luetteloa on muutettu. Ole hyvä, tarkista sisältö ja yritä uudelleen.",
   "ErrorInternalServer": "Palvelimen sisäinen virhe. Yritä myöhemmin uudelleen.",

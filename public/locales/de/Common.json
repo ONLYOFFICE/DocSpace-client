@@ -900,6 +900,8 @@
   "Error401Text": "Die Ressource ist zurzeit nicht zugänglich.",
   "Error403Text": "Entschuldigung, Zugriff verweigert.",
   "Error404Text": "Die Ressource kann nicht gefunden werden.",
+  "ErrorBlockedDescription": "Um den Arbeitsbereich und seine Daten zu behalten, kann der Arbeitsbereichsbesitzer ihn über den Link in unserer E-Mail entsperren oder sich vor dem Löschdatum an den Support wenden.",
+  "ErrorBlockedText": "Dieser Arbeitsbereich ist gesperrt",
   "ErrorDeactivatedText": "Dieser Arbeitsbereich ist deaktiviert",
   "ErrorEmptyList": "Die Liste der Entitäten wurde geändert. Bitte überprüfen Sie den Inhalt und versuchen Sie es erneut.",
   "ErrorInternalServer": "Interner Serverfehler. Versuchen Sie nochmals später.",

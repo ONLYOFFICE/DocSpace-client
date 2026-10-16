@@ -900,6 +900,8 @@
   "Error401Text": "Sorry, de bron is momenteel niet beschikbaar.",
   "Error403Text": "Sorry, toegang geweigerd.",
   "Error404Text": "Sorry, de bron kan niet worden gevonden.",
+  "ErrorBlockedDescription": "Om de werkruimte en de bijbehorende gegevens te behouden, kan de eigenaar van de werkruimte deze deblokkeren via de link in onze e-mail of vóór de verwijderingsdatum contact opnemen met de ondersteuning.",
+  "ErrorBlockedText": "Deze werkruimte is geblokkeerd",
   "ErrorDeactivatedText": "Deze werkruimte is gedeactiveerd",
   "ErrorEmptyList": "De lijst met entiteiten is gewijzigd. Controleer de inhoud en probeer het opnieuw.",
   "ErrorInternalServer": "Interne serverfout. Probeer het later opnieuw.",

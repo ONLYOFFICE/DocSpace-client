@@ -124,7 +124,8 @@ Frame each translation as:
 **Script enforcement:**
 - `sr-Cyrl-RS` — 100% Cyrillic. Never use Latin letters. "AI" → "АИ"
 - `bg` — Bulgarian Cyrillic. "AI" → "ИИ"
-- `uk-UA` — Ukrainian Cyrillic. "AI" → "ШІ"
+- `uk-UA` — Ukrainian Cyrillic. "AI" → "ШІ", and the "І" is Cyrillic (U+0406), never Latin "I": «ШI» looks the same but breaks search
+- `lv` — "AI" → "MI" (mākslīgais intelekts)
 - `ar-SA` — Arabic script, RTL. "AI" stays as "AI" (accepted loanword)
 - `hy-AM` — Armenian script only. "AI" → "ԱԲ" (Արհեստական Բանականություն)
 - `el-GR` — Greek script only
@@ -132,6 +133,8 @@ Frame each translation as:
 - `lo-LA` — Lao script only
 - `si` — Sinhala script only
 - All other languages — standard orthography of the target language
+
+**Fixed terms — read [terminology.md](terminology.md) first.** It fixes the per-language terms for "AI agents & tools", "Full admin", "AI agent" and the French add-ons/plugins, and they take precedence over older strings in the same file.
 
 **Product names — never translate:**
 - `Ask AI` — keep exactly as "Ask AI" in all languages
@@ -147,7 +150,9 @@ Frame each translation as:
 **Style:**
 - Match the grammatical register (formal/informal) of other strings in the same namespace for that language
 - Do not add or remove meaning relative to the English source
-- Do not truncate
+- Do not truncate. An existing translation that stops at an article, demonstrative or preposition («Créez votre», «Sie haben keinen Zugriff auf dieses») was made when the noun was still a `{{placeholder}}`. Retranslate the whole string from the current English, never keep the fragment
+- Place a `{{placeholder}}` where the target grammar needs it, not where it sits in English: "Available {{mcpServers}}" → «{{mcpServers}} disponibles», not «Disponibles {{mcpServers}}»
+- End with the same punctuation as the English: no trailing period on a title that has none in English
 
 ## Step 5 — apply fixes
 

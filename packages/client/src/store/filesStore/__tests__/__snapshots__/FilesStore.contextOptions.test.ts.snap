@@ -13,7 +13,6 @@ exports[`FilesStore.getFilesContextOptions — characterization > builds options
   "pin-room",
   "mute-room",
   "edit-index",
-  "short-tour",
   "export-room-index",
   "save-as-template",
   "separator1",

@@ -310,7 +310,6 @@
   "ThirdPartyPropsActivated": "更新成功",
   "ThirdPartyPropsDeactivated": "正常に解除された",
   "TimeLanguageSettingsDescription": "言語とタイムゾーンの設定を更新してワークスペースに合わせ、「保存」をクリックして変更を適用してください。",
-  "TimeLanguageSettingsSave": "一番下の「<strong>保存</strong>」ボタンをクリックしてください。",
   "TimeZone": "タイムゾーン",
   "Top5AIAgents": "ストレージ使用量による上位5つのAIエージェント:",
   "Top5rooms": "ストレージ使用量上位5ルーム：",

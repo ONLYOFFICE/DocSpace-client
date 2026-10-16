@@ -106,6 +106,8 @@ type AiAgentsTourProps = {
   aiConfig: Nullable<TAIConfig>;
   isPortalAdmin: boolean;
   canActivateAi: boolean;
+  standalone: boolean;
+  isAiToolsServiceOn: boolean;
   showFilter: boolean;
   hasItems: boolean;
   aiAgentsId: string | null;
@@ -162,6 +164,8 @@ const AiAgentsTour = ({
   aiConfig,
   isPortalAdmin,
   canActivateAi,
+  standalone,
+  isAiToolsServiceOn,
   showFilter,
   hasItems,
   aiAgentsId,
@@ -197,14 +201,19 @@ const AiAgentsTour = ({
 
   /**
    * Whether AI is really on for this portal, behind whatever the tour is
-   * currently claiming. The closing step is the one thing that has to know:
-   * it runs after the pretence is dropped, pointing at whichever button the
-   * empty screen puts up for the portal's own state.
+   * currently claiming, judged the way the empty screen judges it: by the
+   * chat models on a standalone portal, by the service or the config flag on
+   * a paid one. The closing step is the one thing that has to know: it runs
+   * after the pretence is dropped, pointing at whichever button the empty
+   * screen puts up for the portal's own state.
    */
-  const realAiReady =
+  const realAiConfigReady =
     borrowedAiConfig.current !== undefined
       ? !!borrowedAiConfig.current?.aiReady
       : !!aiConfig?.aiReady;
+  const realAiReady = standalone
+    ? hasAiProfiles
+    : isAiToolsServiceOn || realAiConfigReady;
 
   /**
    * Stands in for the AI config, so a portal that has not switched AI on still
@@ -280,6 +289,9 @@ const AiAgentsTour = ({
       window.DocSpace?.navigate(
         `${getCategoryUrl(category, agent.id)}?${filter.toUrlParams()}`,
         {
+          // One history entry for the whole walk: Back after the tour must not
+          // land on a tab of an agent that no longer exists.
+          replace: true,
           state: {
             title: agent.title,
             isRoot: false,
@@ -711,6 +723,8 @@ export default inject(
         settingsStore.standalone ||
         !paymentStore.isCardLinkedToPortal ||
         paymentStore.isPayer,
+      standalone: settingsStore.standalone,
+      isAiToolsServiceOn: !!paymentStore.isAiToolsServiceOn,
       showFilter: !filesStore.isEmptyPage,
       hasItems: filesStore.filesList?.length > 0,
       // Sidebar anchor (ClientArticleSidebar → NavMenu data-item-id). The AI

@@ -154,7 +154,11 @@ const FormsTour = ({
     getFolder(space.id, FilesFilter.getDefault())
       .then(({ files, folders }) => {
         if (cancelled) return;
-        const form = files.find((file) => file.fileExst === ".pdf");
+        // Not yet launched: the share step shows Start filling, the fill
+        // step fakes the launch and undoes it afterwards.
+        const form = files.find(
+          (file) => file.fileExst === ".pdf" && !file.startFilling,
+        );
         const inProgress = folders.find(
           (folder) => folder.type === FolderType.InProgress,
         );
@@ -232,6 +236,7 @@ const FormsTour = ({
     window.DocSpace?.navigate(
       `${getCategoryUrl(CategoryType.Form, space.id)}?${filter.toUrlParams()}`,
       {
+        replace: true,
         state: {
           title: space.title,
           isRoot: false,
@@ -273,19 +278,28 @@ const FormsTour = ({
       const form = filesStore.files.find(
         (file) => file.id === spaceItemIds.form,
       );
-      if (!form || !!form.startFilling === launched) return;
+      if (!form || !!form.startFilling === launched) return false;
 
       runInAction(() => {
         Object.assign(form, withDemoFormLaunched(form, launched));
       });
+      return true;
     },
     [filesStore, spaceItemIds],
   );
 
+  // Only a launch the tour faked is undone; a form launched for real stays so.
+  const launchedByTour = useRef(false);
   const launchHooks = useMemo(
     () => ({
-      reveal: () => setFormLaunched(true),
-      restore: () => setFormLaunched(false),
+      reveal: () => {
+        launchedByTour.current = setFormLaunched(true);
+      },
+      restore: () => {
+        if (!launchedByTour.current) return;
+        launchedByTour.current = false;
+        setFormLaunched(false);
+      },
     }),
     [setFormLaunched],
   );

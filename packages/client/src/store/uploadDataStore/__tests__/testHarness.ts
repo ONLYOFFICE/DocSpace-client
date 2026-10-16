@@ -149,6 +149,7 @@ const defaultFakes = (): UploadFakeStores => ({
   },
   secondaryProgressDataStore: {
     setSecondaryProgressBarData: vi.fn(),
+    isOperationStopped: vi.fn(() => false),
     secondaryOperationsArray: [],
   },
   primaryProgressDataStore: {

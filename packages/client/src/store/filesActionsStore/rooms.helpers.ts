@@ -179,7 +179,8 @@ self: FilesActionStore,
   const { secondaryProgressDataStore, clearActiveOperations } =
     self.uploadDataStore;
 
-  const { setSecondaryProgressBarData } = secondaryProgressDataStore;
+  const { setSecondaryProgressBarData, isOperationStopped } =
+    secondaryProgressDataStore;
 
   if (!myRoomsId || !archiveRoomsId) {
     console.error("Default categories not found");
@@ -239,7 +240,8 @@ self: FilesActionStore,
             await self.uploadDataStore.loopFilesOperations(data, pbData);
 
           const isCanceled =
-            operationData?.status === FileOperationStatus.Canceled;
+            operationData?.status === FileOperationStatus.Canceled ||
+            isOperationStopped(operation, operationId);
 
           if (
             !isCanceled &&
@@ -258,13 +260,22 @@ self: FilesActionStore,
 
           self.dialogsStore.setIsFolderActions(false);
 
+          if (isCanceled) {
+            await self.updateCurrentFolder(false, operationId, operation);
+            return true;
+          }
+
           setSecondaryProgressBarData({
             completed: true,
             ...pbData,
           });
+
+          return false;
         })
 
-        .then(() => {
+        .then((isCanceled) => {
+          if (isCanceled) return;
+
           const successTranslation =
             (folders as TActionItem[]).length !== 1 && Array.isArray(folders)
               ? t("Common:ArchivedRoomsAction")
@@ -331,17 +342,34 @@ self: FilesActionStore,
           // undefined here.
           console.log((pbData as { label?: string }).label, { data, res });
 
-          await self.uploadDataStore.loopFilesOperations(data, pbData);
+          const operationData =
+            await self.uploadDataStore.loopFilesOperations(data, pbData);
+
+          const isCanceled =
+            operationData?.status === FileOperationStatus.Canceled ||
+            isOperationStopped(operation, operationId);
 
           self.dialogsStore.setIsFolderActions(false);
+
+          if (isCanceled) {
+            await self.updateCurrentFolder(false, operationId, operation);
+            return true;
+          }
 
           setSecondaryProgressBarData({
             completed: true,
             ...pbData,
           });
+
+          return false;
         })
 
-        .then(() => {
+        .then((isCanceled) => {
+          if (isCanceled) {
+            setSelected("close");
+            return;
+          }
+
           const successTranslation =
             (folders as TActionItem[]).length !== 1 && Array.isArray(folders)
               ? t("Common:UnarchivedRoomsAction")
@@ -350,9 +378,9 @@ self: FilesActionStore,
                 : t("Common:UnarchivedRoomAction", { name: folders.title });
 
           toastr.success(successTranslation);
+          setSelected("close");
+          return self.moveToRoomsPage();
         })
-        .then(() => setSelected("close"))
-        .then(() => self.moveToRoomsPage())
         .catch((err) => {
           clearActiveOperations(null, items);
           setSecondaryProgressBarData({

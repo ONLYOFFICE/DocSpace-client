@@ -43,9 +43,10 @@ const ErrorUnavailableWrapper = (props: ErrorUnavailableProps) => {
 };
 
 export const Component = inject<TStore>(({ settingsStore }) => {
-  const { whiteLabelLogoUrls } = settingsStore;
+  const { whiteLabelLogoUrls, isPortalBlocked } = settingsStore;
 
   return {
     whiteLabelLogoUrls,
+    isPortalBlocked,
   };
 })(observer(ErrorUnavailableWrapper));

@@ -33,8 +33,27 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.content {
-  display: flex;
-  flex-direction: column;
-  max-width: 240px;
+import { FormWrapper } from "@onlyoffice/apps-ui-kit/components/form-wrapper";
+
+import { GreetingContainer } from "@/components/GreetingContainer";
+import { getSettings } from "@/utils/actions";
+
+import { logger } from "logger.mjs";
+import UnblockPortalForm from "./page.client";
+
+async function Page() {
+  logger.info("PortalUnblock page");
+
+  const settings = await getSettings();
+
+  return settings && typeof settings !== "string" ? (
+    <>
+      <GreetingContainer greetingText={settings?.greetingSettings} />
+      <FormWrapper id="portal-unblock-form">
+        <UnblockPortalForm />
+      </FormWrapper>
+    </>
+  ) : null;
 }
+
+export default Page;

@@ -468,6 +468,7 @@ export async function startUploadFilesImpl(
   createNewIfExist = true,
 ) {
   self.finishUploadFilesCalled = false;
+  self.quotaErrorRaised = false;
 
   const files = self.files;
 

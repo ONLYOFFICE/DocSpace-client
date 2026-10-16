@@ -139,7 +139,12 @@ self: FilesActionStore,
         clearActiveOperations(fileIds, folderIds);
         setDownloadItems([]);
 
-        const isCanceled = item?.status === FileOperationStatus.Canceled;
+        const isCanceled =
+          item?.status === FileOperationStatus.Canceled ||
+          secondaryProgressDataStore.isOperationStopped(
+            operationName,
+            operationId,
+          );
 
         // loopFilesOperations may resolve to undefined; the
         // old JS crashed here in that case, the `!` keeps that behavior.
@@ -167,7 +172,8 @@ self: FilesActionStore,
 
           !item!.url &&
             toastr.error(
-              (translations as TDownloadTranslations).error,
+              (translations as TDownloadTranslations).error ||
+                i18n.t("Common:UnexpectedError"),
               null,
               0,
               true,
@@ -179,7 +185,8 @@ self: FilesActionStore,
     clearActiveOperations(fileIds, folderIds);
 
     const isCanceled =
-      (err as TOperation)?.status === FileOperationStatus.Canceled;
+      (err as TOperation)?.status === FileOperationStatus.Canceled ||
+      secondaryProgressDataStore.isOperationStopped(operationName, operationId);
 
     if (!isCanceled) {
       setSecondaryProgressBarData({
@@ -213,7 +220,12 @@ self: FilesActionStore,
       }
       setDownloadItems([]);
 
-      return toastr.error(err as string, null, 0, true);
+      return toastr.error(
+        (err as string) || i18n.t("Common:UnexpectedError"),
+        null,
+        0,
+        true,
+      );
     }
   }
 };

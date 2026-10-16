@@ -86,7 +86,6 @@ export const GreetingCreateUserContainer = ({
           values={{
             displayName,
             agentName: roomData.title,
-            aiAgent: t("Common:AIAgent"),
           }}
         />
       );

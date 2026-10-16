@@ -105,14 +105,12 @@ const NoAgentItem = () => {
         <img
           src={imageSrc}
           alt={t("Common:NoAgent", {
-            aiAgent: t("Common:AIAgent"),
             defaultValue: "No AI agent",
           })}
         />
       </div>
       <Text className="no-item-text" textAlign="center">
         {t("Common:AIAgentsEmptyScreenTent", {
-          aiAgents: t("Common:AIAgents"),
           defaultValue: "Select an AI agent to start working with it.",
         })}
       </Text>

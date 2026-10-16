@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "选择房间类型，邀请与你共事的人并添加文件。现在你可以开始协作了。",
   "RoomsCreateFirstTitle": "现在做一个属于你的",
+  "RoomsDemoPreview": "本导览使用示例内容来展示房间的工作方式。这些示例与你自己的房间相互独立。",
+  "RoomsDemoPreviewTitle": "可供探索的示例",
+  "RoomsEmpty": "本导览中的房间只是示例。你受邀加入的房间将出现在这里，供你随时开展工作。",
   "RoomsEmptyTitle": "你的列表暂时是空的",
+  "RoomsGroups": "将相关房间分组，以便更快地找到它们。选择房间来创建分组，然后在列表上方切换分组。",
   "RoomsGroupsTitle": "为房间分组",
+  "RoomsMembers": "使用信息面板查看房间成员及其角色。如果你可以管理成员，请邀请他人并为每个人选择所需的访问权限。",
   "RoomsMembersTitle": "协同工作",
+  "RoomsOverview": "房间围绕项目或任务将文件和人员汇集在一起。房间类型和成员角色决定了每个人如何处理文件。",
+  "RoomsOverviewTitle": "一起工作的地方",
+  "RoomsPlacesArchive": "{{archive}} — 暂时搁置、不在活跃工作中的房间。需要时可将其恢复。",
   "RoomsPlacesTemplates": "{{templates}} — 你的房间模板。.",
   "RoomsPlacesTitle": "各归其位",
+  "RoomsTemplates": "将房间另存为模板，即可复用其设置、文件夹和文件。基于它创建新房间，然后在开始工作前检查其成员和访问权限。",
   "RoomsTemplatesTitle": "复用行之有效的做法",
-  "RoomsTypesTitle": "每项任务都有合适的房间"
+  "RoomsTypesCollaboration": "{{roomType}} — 用于协同编辑。",
+  "RoomsTypesCustom": "{{roomType}} — 用于你自己的工作流程。",
+  "RoomsTypesPublic": "{{roomType}} — 无需注册即可访问。",
+  "RoomsTypesTitle": "每项任务都有合适的房间",
+  "RoomsTypesVdr": "{{roomType}} — 用于受控的文件共享。"
 }

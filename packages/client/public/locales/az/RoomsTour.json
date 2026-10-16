@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Otaq növü seçin, birlikdə işlədiyiniz insanları dəvət edin və fayllarınızı əlavə edin. Birgə işə başlamağa hazırsınız.",
   "RoomsCreateFirstTitle": "İndi onu özünüzünkü edin",
+  "RoomsDemoPreview": "Bu səyahət otaqların necə işlədiyini göstərmək üçün nümunə məzmundan istifadə edir. Nümunələr sizin öz otaqlarınızdan ayrıdır.",
+  "RoomsDemoPreviewTitle": "Araşdırmaq üçün nümunə",
+  "RoomsEmpty": "Bu səyahətdəki otaqlar nümunə idi. Dəvət olunduğunuz otaqlar burada görünəcək və işə hazır olacaq.",
   "RoomsEmptyTitle": "Siyahınız hələlik boşdur",
+  "RoomsGroups": "Əlaqəli otaqları daha tez tapmaq üçün qruplaşdırın. Qrup yaratmaq üçün otaqları seçin, sonra siyahının yuxarısında qruplar arasında keçid edin.",
   "RoomsGroupsTitle": "Otaqlarınızı qruplaşdırın",
+  "RoomsMembers": "Otaq üzvlərini və onların rollarını görmək üçün Məlumat panelindən istifadə edin. Üzvləri idarə edə bilirsinizsə, insanları dəvət edin və hər birinə lazım olan girişi seçin.",
   "RoomsMembersTitle": "Birlikdə işləyin",
+  "RoomsOverview": "Otaq faylları və insanları layihə və ya tapşırıq ətrafında bir araya gətirir. Onun növü və üzv rolları hər kəsin fayllarla necə işləyə biləcəyini müəyyən edir.",
+  "RoomsOverviewTitle": "Birgə iş üçün məkan",
+  "RoomsPlacesArchive": "{{archive}} — aktiv işdən kənara qoyulmuş otaqlar. Yenidən lazım olduqda onları bərpa edin.",
   "RoomsPlacesTemplates": "{{templates}} — otaq şablonlarınız.",
   "RoomsPlacesTitle": "Hər şey öz yerində",
+  "RoomsTemplates": "Parametrlərini, qovluqlarını və fayllarını təkrar istifadə etmək üçün otağı şablon kimi saxlayın. Ondan yeni otaq yaradın, sonra işə başlamazdan əvvəl onun üzvlərini və girişini yoxlayın.",
   "RoomsTemplatesTitle": "İşə yarayanı təkrar istifadə edin",
-  "RoomsTypesTitle": "Hər tapşırığa bir otaq"
+  "RoomsTypesCollaboration": "{{roomType}} — birgə redaktə üçün.",
+  "RoomsTypesCustom": "{{roomType}} — öz iş axınlarınız üçün.",
+  "RoomsTypesPublic": "{{roomType}} — qeydiyyatsız giriş üçün.",
+  "RoomsTypesTitle": "Hər tapşırığa bir otaq",
+  "RoomsTypesVdr": "{{roomType}} — nəzarətli fayl paylaşımı üçün."
 }

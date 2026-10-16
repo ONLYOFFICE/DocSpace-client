@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Tətbiqlər uğurla aktivləşdirildi",
   "AppName": "Tətbiqin adı",
   "Apps": "Tətbiqlər",
+  "AppsLimitReached": "Yarada biləcəyiniz tətbiqlərin maksimum sayına çatmısınız. Yeni tətbiq əlavə etmək üçün artıq ehtiyacınız olmayan tətbiqi silin.",
+  "AppsLimitReachedWorkspace": "Bu iş sahəsi tətbiqlərin maksimum sayına çatıb. Yeni tətbiq əlavə etmək üçün artıq lazım olmayan tətbiqi silin.",
   "AuthButton": "Avtorizasiya düyməsi",
   "AuthenticationMethod": "Avtorizasiya üsulu",
   "AuthorizedApps": "İcazə verilmiş tətbiqlər",

@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Alegeți un tip de sală, invitați persoanele cu care lucrați și adăugați fișierele. Sunteți gata să începeți să lucrați împreună.",
   "RoomsCreateFirstTitle": "Acum faceți-o a dumneavoastră",
+  "RoomsDemoPreview": "Acest tur folosește conținut exemplu pentru a arăta cum funcționează sălile. Exemplele sunt separate de sălile dumneavoastră.",
+  "RoomsDemoPreviewTitle": "Un exemplu de explorat",
+  "RoomsEmpty": "Sălile din acest tur au fost exemple. Sălile în care sunteți invitat vor apărea aici, gata pentru lucru.",
   "RoomsEmptyTitle": "Lista dumneavoastră este goală deocamdată",
+  "RoomsGroups": "Grupați sălile asociate pentru a le găsi mai repede. Selectați săli pentru a crea un grup, apoi comutați între grupuri deasupra listei.",
   "RoomsGroupsTitle": "Grupați-vă sălile",
+  "RoomsMembers": "Folosiți Panou informații pentru a vedea membrii sălii și rolurile lor. Dacă puteți gestiona membrii, invitați persoane și alegeți accesul de care are nevoie fiecare dintre ele.",
   "RoomsMembersTitle": "Lucrați împreună",
+  "RoomsOverview": "O sală reunește fișiere și persoane în jurul unui proiect sau al unei sarcini. Tipul ei și rolurile membrilor definesc modul în care fiecare poate lucra cu fișierele.",
+  "RoomsOverviewTitle": "Un loc pentru a lucra împreună",
+  "RoomsPlacesArchive": "{{archive}} — săli puse deoparte din activitatea curentă. Restaurați-le când aveți din nou nevoie de ele.",
   "RoomsPlacesTemplates": "{{templates}} — șabloanele dumneavoastră de sală.",
   "RoomsPlacesTitle": "Fiecare lucru la locul lui",
+  "RoomsTemplates": "Salvați o sală ca șablon pentru a-i refolosi setările, folderele și fișierele. Creați o sală nouă din acesta, apoi verificați membrii și accesul înainte de a începe lucrul.",
   "RoomsTemplatesTitle": "Refolosiți ce funcționează",
-  "RoomsTypesTitle": "O sală pentru fiecare sarcină"
+  "RoomsTypesCollaboration": "{{roomType}} — pentru coeditare.",
+  "RoomsTypesCustom": "{{roomType}} — pentru propriile fluxuri de lucru.",
+  "RoomsTypesPublic": "{{roomType}} — pentru acces fără înregistrare.",
+  "RoomsTypesTitle": "O sală pentru fiecare sarcină",
+  "RoomsTypesVdr": "{{roomType}} — pentru partajarea controlată a fișierelor."
 }

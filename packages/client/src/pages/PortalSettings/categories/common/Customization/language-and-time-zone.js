@@ -34,7 +34,7 @@
  */
 
 import React from "react";
-import { withTranslation, Trans } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -537,9 +537,6 @@ const LanguageAndTimeZoneComponent = (props) => {
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("TimeLanguageSettingsDescription")}
-        </Text>
-        <Text>
-          <Trans t={t} i18nKey="TimeLanguageSettingsSave" />
         </Text>
         {languageAndTimeZoneSettingsUrl ? (
           <Link

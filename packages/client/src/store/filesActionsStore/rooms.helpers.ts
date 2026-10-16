@@ -149,12 +149,8 @@ self: FilesActionStore,action: string, item: TActionItem, t: TTranslation
   let notificationsEnabled = t("Common:RoomNotificationsEnabled");
 
   if (isAIAgent) {
-    notificationsDisabled = t("Common:AIAgentNotificationsDisabled", {
-      aiAgent: t("Common:AIAgent"),
-    });
-    notificationsEnabled = t("Common:AIAgentNotificationsEnabled", {
-      aiAgent: t("Common:AIAgent"),
-    });
+    notificationsDisabled = t("Common:AIAgentNotificationsDisabled");
+    notificationsEnabled = t("Common:AIAgentNotificationsEnabled");
   }
 
   (muteRoomNotification(id, muteStatus) as Promise<unknown>)

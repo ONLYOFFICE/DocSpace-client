@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "来自«{{folderTitle}}»",
   "FeedLocationRoomLabel": "房间«{{folderTitle}}»",
   "FeedLocationSectionLabel": "«{{folderTitle}}» 部分",
+  "FeedLocationSpaceLabel": "空间«{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "使用 AI 分析回复",
   "FormRoomAIModalConnect": "连接数据库",
   "FormRoomAIModalDescription": "连接数据库，通过\"询问 AI\"分析所有已收集的回答。您也可以不连接数据库继续操作，仅询问有关此表单的问题。",

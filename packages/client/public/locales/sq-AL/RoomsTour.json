@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Zgjidhni një lloj dhome, ftoni njerëzit me të cilët punoni dhe shtoni skedarët tuaj. Jeni gati të filloni të punoni së bashku.",
   "RoomsCreateFirstTitle": "Tani bëjeni tuajën",
+  "RoomsDemoPreview": "Ky tur përdor përmbajtje shembull për të treguar si funksionojnë dhomat. Shembujt janë të ndarë nga dhomat tuaja.",
+  "RoomsDemoPreviewTitle": "Një shembull për të eksploruar",
+  "RoomsEmpty": "Dhomat në këtë tur ishin shembuj. Dhomat ku jeni ftuar do të shfaqen këtu, gati që të punoni në to.",
   "RoomsEmptyTitle": "Lista juaj është bosh për momentin",
+  "RoomsGroups": "Gruponi dhomat e lidhura për t'i gjetur më shpejt. Zgjidhni dhomat për të krijuar një grup, pastaj kaloni midis grupeve mbi listë.",
   "RoomsGroupsTitle": "Grupojini dhomat tuaja",
+  "RoomsMembers": "Përdorni Panelin e informacionit për të parë anëtarët e dhomës dhe rolet e tyre. Nëse mund të menaxhoni anëtarët, ftoni njerëz dhe zgjidhni aksesin që i nevojitet secilit prej tyre.",
   "RoomsMembersTitle": "Punoni së bashku",
+  "RoomsOverview": "Një dhomë bashkon skedarët dhe njerëzit rreth një projekti ose detyre. Lloji i saj dhe rolet e anëtarëve përcaktojnë si mund të punojë secili me skedarët.",
+  "RoomsOverviewTitle": "Një vend për të punuar së bashku",
+  "RoomsPlacesArchive": "{{archive}} — dhoma të lëna mënjanë nga puna aktive. Riktheni ato kur t'ju nevojiten përsëri.",
   "RoomsPlacesTemplates": "{{templates}} — modelet tuaja të dhomave.",
   "RoomsPlacesTitle": "Gjithçka në vendin e vet",
+  "RoomsTemplates": "Ruajeni një dhomë si model për të ripërdorur cilësimet, dosjet dhe skedarët e saj. Krijoni një dhomë të re prej tij, pastaj kontrolloni anëtarët dhe aksesin e saj para se të filloni punën.",
   "RoomsTemplatesTitle": "Ripërdorni atë që funksionon",
-  "RoomsTypesTitle": "Një dhomë për çdo detyrë"
+  "RoomsTypesCollaboration": "{{roomType}} — për bashkëredaktim.",
+  "RoomsTypesCustom": "{{roomType}} — për rrjedhat tuaja të punës.",
+  "RoomsTypesPublic": "{{roomType}} — për akses pa regjistrim.",
+  "RoomsTypesTitle": "Një dhomë për çdo detyrë",
+  "RoomsTypesVdr": "{{roomType}} — për ndarje të kontrolluar të skedarëve."
 }

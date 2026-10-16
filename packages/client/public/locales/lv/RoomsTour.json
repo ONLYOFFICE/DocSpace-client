@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Izvēlieties telpas veidu, uzaiciniet cilvēkus, ar kuriem strādājat, un pievienojiet savus failus. Varat sākt strādāt kopā.",
   "RoomsCreateFirstTitle": "Tagad izveidojiet savējo",
+  "RoomsDemoPreview": "Šajā apskatē tiek izmantots parauga saturs, lai parādītu, kā darbojas telpas. Piemēri ir nošķirti no jūsu pašu telpām.",
+  "RoomsDemoPreviewTitle": "Paraugs izpētei",
+  "RoomsEmpty": "Šajā apskatē redzamās telpas bija piemēri. Telpas, uz kurām jūs uzaicinās, parādīsies šeit, gatavas darbam.",
   "RoomsEmptyTitle": "Jūsu saraksts pagaidām ir tukšs",
+  "RoomsGroups": "Grupējiet saistītās telpas, lai tās atrastu ātrāk. Atlasiet telpas, lai izveidotu grupu, pēc tam pārslēdzieties starp grupām virs saraksta.",
   "RoomsGroupsTitle": "Grupējiet savas telpas",
+  "RoomsMembers": "Izmantojiet informācijas paneli, lai redzētu telpas dalībniekus un viņu lomas. Ja varat pārvaldīt dalībniekus, uzaiciniet cilvēkus un izvēlieties katram nepieciešamo piekļuvi.",
   "RoomsMembersTitle": "Strādājiet kopā",
+  "RoomsOverview": "Telpa apvieno failus un cilvēkus ap projektu vai uzdevumu. Tās veids un dalībnieku lomas nosaka, kā katrs var strādāt ar failiem.",
+  "RoomsOverviewTitle": "Vieta kopīgam darbam",
+  "RoomsPlacesArchive": "{{archive}} — telpas, kas noliktas malā no aktīvā darba. Atjaunojiet tās, kad tās atkal būs vajadzīgas.",
   "RoomsPlacesTemplates": "{{templates}} — jūsu telpu veidnes.",
   "RoomsPlacesTitle": "Viss savā vietā",
+  "RoomsTemplates": "Saglabājiet telpu kā veidni, lai atkārtoti izmantotu tās iestatījumus, mapes un failus. Izveidojiet no tās jaunu telpu, pēc tam pārbaudiet tās dalībniekus un piekļuvi, pirms sākat darbu.",
   "RoomsTemplatesTitle": "Izmantojiet atkārtoti to, kas darbojas",
-  "RoomsTypesTitle": "Telpa katram uzdevumam"
+  "RoomsTypesCollaboration": "{{roomType}} — kopīgai rediģēšanai.",
+  "RoomsTypesCustom": "{{roomType}} — jūsu pašu darbplūsmām.",
+  "RoomsTypesPublic": "{{roomType}} — piekļuvei bez reģistrācijas.",
+  "RoomsTypesTitle": "Telpa katram uzdevumam",
+  "RoomsTypesVdr": "{{roomType}} — kontrolētai failu kopīgošanai."
 }

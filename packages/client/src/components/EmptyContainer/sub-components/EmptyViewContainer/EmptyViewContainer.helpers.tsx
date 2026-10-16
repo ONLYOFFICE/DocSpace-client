@@ -449,9 +449,7 @@ export const getOptions = (
 
   const createAIAgent = {
     title: t("Common:CreateAIAgentTitle"),
-    description: t("Common:CreateAIAgentDescription", {
-      aiAgent: t("Common:AIAgent"),
-    }),
+    description: t("Common:CreateAIAgentDescription"),
     icon: <CreateAIAgentIcon />,
     key: "create-ai-agent",
     onClick: actions.onCreateAIAgent,
@@ -694,7 +692,6 @@ export const getOptions = (
           files: t("Common:Files"),
           rooms: t("Common:Rooms"),
           forms: t("Common:Forms"),
-          aiAgents: t("Common:AIAgents"),
         }),
         "",
         true,

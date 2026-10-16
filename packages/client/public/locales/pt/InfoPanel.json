@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "de «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Sala «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Secção «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Espaço «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Analisar respostas com IA",
   "FormRoomAIModalConnect": "Conectar banco de dados",
   "FormRoomAIModalDescription": "Conecte um banco de dados para analisar todas as respostas coletadas com o \"Perguntar à IA\". Você pode continuar sem ele e perguntar apenas sobre este formulário.",

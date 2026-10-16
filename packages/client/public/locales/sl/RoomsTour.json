@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Izberite vrsto sobe, povabite ljudi, s katerimi delate, in dodajte svoje datoteke. Pripravljeni ste na skupno delo.",
   "RoomsCreateFirstTitle": "Zdaj naredite svojo",
+  "RoomsDemoPreview": "Ta ogled uporablja vzorčno vsebino, da pokaže, kako delujejo sobe. Primeri so ločeni od vaših lastnih sob.",
+  "RoomsDemoPreviewTitle": "Primer za raziskovanje",
+  "RoomsEmpty": "Sobe v tem ogledu so bile primeri. Sobe, v katere ste povabljeni, se bodo prikazale tukaj, pripravljene za delo.",
   "RoomsEmptyTitle": "Vaš seznam je zaenkrat prazen",
+  "RoomsGroups": "Združite sorodne sobe, da jih hitreje najdete. Izberite sobe, da ustvarite skupino, nato preklapljajte med skupinami nad seznamom.",
   "RoomsGroupsTitle": "Združite svoje sobe",
+  "RoomsMembers": "V Informacijskem panelu si oglejte člane sobe in njihove vloge. Če lahko upravljate člane, povabite ljudi in vsakemu izberite dostop, ki ga potrebuje.",
   "RoomsMembersTitle": "Delajte skupaj",
+  "RoomsOverview": "Soba združuje datoteke in ljudi okoli projekta ali naloge. Njena vrsta in vloge članov določajo, kako lahko kdo dela z datotekami.",
+  "RoomsOverviewTitle": "Mesto za skupno delo",
+  "RoomsPlacesArchive": "{{archive}} — sobe, umaknjene iz aktivnega dela. Obnovite jih, ko jih spet potrebujete.",
   "RoomsPlacesTemplates": "{{templates}} — vaše predloge sob.",
   "RoomsPlacesTitle": "Vse na svojem mestu",
+  "RoomsTemplates": "Shranite sobo kot predlogo, da znova uporabite njene nastavitve, mape in datoteke. Iz nje ustvarite novo sobo, nato pa pred začetkom dela preverite njene člane in dostop.",
   "RoomsTemplatesTitle": "Znova uporabite tisto, kar deluje",
-  "RoomsTypesTitle": "Soba za vsako nalogo"
+  "RoomsTypesCollaboration": "{{roomType}} — za skupno urejanje.",
+  "RoomsTypesCustom": "{{roomType}} — za vaše lastne poteke dela.",
+  "RoomsTypesPublic": "{{roomType}} — za dostop brez registracije.",
+  "RoomsTypesTitle": "Soba za vsako nalogo",
+  "RoomsTypesVdr": "{{roomType}} — za nadzorovano deljenje datotek."
 }

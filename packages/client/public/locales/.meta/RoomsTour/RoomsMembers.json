@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsMembers",
+  "content": "Use the Info panel to see room members and their roles. If you can manage members, invite people and choose the access each of them needs.",
+  "content_en_sha1_hash": "466de31fa6c045560dde4a7a05dc200c1e3fde3c",
+  "created_at": "2026-10-16T12:15:08.027Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
+  "comment": {
+    "text": "Body of the Rooms onboarding tour step that highlights the members list in the Info panel opened on the first room. Info panel is the UI name of the side panel.",
+    "is_auto": true,
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 224,
+      "context": "isDesktop &&\n infoPanelHooks &&\n revealStep(\n MEMBER_ROW_SELECTOR,\n t(\"RoomsTour:RoomsMembersTitle\"),\n t(\"RoomsTour:RoomsMembers\"),\n callbacks,\n ROOMS_TOUR_LABEL,\n infoPanelHooks,\n [MEMBERS_TAB_SELECTOR, MEMBERS_LIST_SELECTOR],\n FIRST_ITEM_SELECTOR,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

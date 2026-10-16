@@ -1,18 +1,19 @@
 {
   "key_path": "RoomsTypesPublic",
-  "content": "{{roomType}} — access for external users via a link.",
-  "content_en_sha1_hash": "b9c4f8d9b8b91607af00be0d745c6c3d799ca789",
-  "created_at": "2026-10-12T10:51:00.902Z",
-  "updated_at": "2026-10-12T10:51:06.465Z",
+  "content": "{{roomType}} — for access without registration.",
+  "content_en_sha1_hash": "428d35236584ea0cac67f11011e471f9270f8687",
+  "created_at": "2026-10-16T12:15:08.045Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Bullet in the Rooms onboarding tour step about room types, shown over the room-type tiles. {{roomType}} is the translated tile label (Public room); the text after the dash says what it is for (access by link without signing up).",
+    "is_auto": true,
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 170,
+      "line_number": 150,
       "context": "roomType: t(\"Common:CollaborationRoomTitle\"),\n }),\n t(\"RoomsTour:RoomsTypesVdr\", {\n roomType: t(\"Common:VirtualDataRoom\"),\n }),\n t(\"RoomsTour:RoomsTypesPublic\", {\n roomType: t(\"Common:PublicRoom\"),\n }),\n t(\"RoomsTour:RoomsTypesCustom\", {\n roomType: t(\"Common:CustomRoomTitle\"),\n }),",
       "module": "/packages/client"
     }

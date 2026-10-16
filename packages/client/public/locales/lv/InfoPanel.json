@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "no «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Telpa «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Sadaļā «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Veidlapu telpa «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Analizēt atbildes ar MI",
   "FormRoomAIModalConnect": "Pieskaitīt datāzi",
   "FormRoomAIModalDescription": "Pievojiet datubāzi lai \"Pajautāt MI\" analizētuusāktojos atbild. Jūs varatpināt bezāsaut tikai par šo formu",

@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "од «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Просторија «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Одељак «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Простор «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Анализа одговора уз помоћ АИ",
   "FormRoomAIModalConnect": "Повежите базу података",
   "FormRoomAIModalDescription": "Повежите базу података да бисте анализирали све прикупљене одговоре помоћу \"Питај АИ\". Можете наставити без ње и постављати питања само о овом обрасцу.",

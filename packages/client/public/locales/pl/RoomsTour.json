@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Wybierz typ pokoju, zaproś osoby, z którymi pracujesz, i dodaj swoje pliki. Możesz zacząć wspólną pracę.",
   "RoomsCreateFirstTitle": "Teraz zrób go swoim",
+  "RoomsDemoPreview": "Podczas tego oprowadzania używamy przykładowej zawartości, aby pokazać, jak działają pokoje. Przykłady są niezależne od twoich własnych pokoi.",
+  "RoomsDemoPreviewTitle": "Przykład do odkrycia",
+  "RoomsEmpty": "Pokoje w tym oprowadzaniu były przykładami. Pokoje, do których zostaniesz zaproszony, pojawią się tutaj, gotowe do pracy.",
   "RoomsEmptyTitle": "Twoja lista jest na razie pusta",
+  "RoomsGroups": "Grupuj powiązane pokoje, aby szybciej je znajdować. Zaznacz pokoje, aby utworzyć grupę, a następnie przełączaj się między grupami nad listą.",
   "RoomsGroupsTitle": "Grupuj swoje pokoje",
+  "RoomsMembers": "Użyj panelu informacyjnego, aby zobaczyć członków pokoju i ich role. Jeśli możesz zarządzać członkami, zapraszaj osoby i wybieraj dostęp, jakiego każda z nich potrzebuje.",
   "RoomsMembersTitle": "Pracujcie razem",
+  "RoomsOverview": "Pokój łączy pliki i ludzi wokół projektu lub zadania. Jego typ i role członków określają, jak każdy może pracować z plikami.",
+  "RoomsOverviewTitle": "Miejsce do wspólnej pracy",
+  "RoomsPlacesArchive": "{{archive}} — pokoje odłożone na bok z bieżącej pracy. Przywróć je, gdy znów będą potrzebne.",
   "RoomsPlacesTemplates": "{{templates}} — twoje szablony pokoi.",
   "RoomsPlacesTitle": "Wszystko na swoim miejscu",
+  "RoomsTemplates": "Zapisz pokój jako szablon, aby ponownie wykorzystać jego ustawienia, foldery i pliki. Utwórz z niego nowy pokój, a przed rozpoczęciem pracy sprawdź jego członków i dostęp.",
   "RoomsTemplatesTitle": "Wykorzystuj ponownie to, co działa",
-  "RoomsTypesTitle": "Pokój do każdego zadania"
+  "RoomsTypesCollaboration": "{{roomType}} — do wspólnej edycji.",
+  "RoomsTypesCustom": "{{roomType}} — do twoich własnych procesów pracy.",
+  "RoomsTypesPublic": "{{roomType}} — do dostępu bez rejestracji.",
+  "RoomsTypesTitle": "Pokój do każdego zadania",
+  "RoomsTypesVdr": "{{roomType}} — do kontrolowanego udostępniania plików."
 }

@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Escolha um tipo de sala, convide as pessoas com quem você trabalha e adicione seus arquivos. Você está pronto para começar a trabalhar em conjunto.",
   "RoomsCreateFirstTitle": "Agora faça a sua",
+  "RoomsDemoPreview": "Este tour usa conteúdo de exemplo para mostrar como as salas funcionam. Os exemplos são separados das suas próprias salas.",
+  "RoomsDemoPreviewTitle": "Um exemplo para explorar",
+  "RoomsEmpty": "As salas deste tour eram exemplos. As salas para as quais você for convidado aparecerão aqui, prontas para você trabalhar.",
   "RoomsEmptyTitle": "Sua lista está vazia por enquanto",
+  "RoomsGroups": "Agrupe salas relacionadas para encontrá-las mais rápido. Selecione salas para criar um grupo e depois alterne entre os grupos acima da lista.",
   "RoomsGroupsTitle": "Agrupe suas salas",
+  "RoomsMembers": "Use o Painel de informações para ver os membros da sala e suas funções. Se você puder gerenciar membros, convide pessoas e escolha o acesso de que cada uma precisa.",
   "RoomsMembersTitle": "Trabalhem juntos",
+  "RoomsOverview": "Uma sala reúne arquivos e pessoas em torno de um projeto ou tarefa. O tipo da sala e as funções dos membros definem como todos podem trabalhar com os arquivos.",
+  "RoomsOverviewTitle": "Um lugar para trabalhar em conjunto",
+  "RoomsPlacesArchive": "{{archive}} — salas deixadas de lado, fora do trabalho ativo. Restaure-as quando precisar delas novamente.",
   "RoomsPlacesTemplates": "{{templates}} — seus modelos de sala.",
   "RoomsPlacesTitle": "Cada coisa em seu lugar",
+  "RoomsTemplates": "Salve uma sala como modelo para reutilizar as configurações, pastas e arquivos dela. Crie uma nova sala a partir desse modelo e depois confira os membros e o acesso antes de começar a trabalhar.",
   "RoomsTemplatesTitle": "Reutilize o que funciona",
-  "RoomsTypesTitle": "Uma sala para cada tarefa"
+  "RoomsTypesCollaboration": "{{roomType}} — para coedição.",
+  "RoomsTypesCustom": "{{roomType}} — para seus próprios fluxos de trabalho.",
+  "RoomsTypesPublic": "{{roomType}} — para acesso sem cadastro.",
+  "RoomsTypesTitle": "Uma sala para cada tarefa",
+  "RoomsTypesVdr": "{{roomType}} — para compartilhamento controlado de arquivos."
 }

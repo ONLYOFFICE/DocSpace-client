@@ -118,6 +118,7 @@
   "SharePDFFormModalDescription": "Yeni bir alan oluşturulacak ve PDF formu oraya kopyalanacaktır. Daha sonra diğer kullanıcıları alandaki formu doldurmaya davet edebilirsiniz.",
   "SharePDFFormModalTitle": "PDF formunu paylaş",
   "ShareRoom": "Odayı paylaş",
+  "ShareSpace": "Alanı paylaş",
   "ShowLinkActions": "Bağlantı işlemlerini göster",
   "SyncWithDatabase": "Veritabanı ile senkronizasyon",
   "SyncWithDatabaseError": "Veritabanı ile senkronizasyon başarısız oldu",

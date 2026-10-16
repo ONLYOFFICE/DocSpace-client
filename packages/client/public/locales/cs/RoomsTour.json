@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Vyberte typ místnosti, pozvěte lidi, se kterými pracujete, a přidejte své soubory. Můžete začít spolupracovat.",
   "RoomsCreateFirstTitle": "Teď si to udělejte po svém",
+  "RoomsDemoPreview": "Tato prohlídka používá ukázkový obsah, aby předvedla, jak místnosti fungují. Ukázky jsou oddělené od vašich vlastních místností.",
+  "RoomsDemoPreviewTitle": "Ukázka k prozkoumání",
+  "RoomsEmpty": "Místnosti v této prohlídce byly jen ukázky. Místnosti, do kterých vás někdo pozve, se objeví tady, připravené k práci.",
   "RoomsEmptyTitle": "Váš seznam je zatím prázdný",
+  "RoomsGroups": "Seskupte související místnosti, abyste je našli rychleji. Vyberte místnosti a vytvořte skupinu, pak mezi skupinami přepínejte nad seznamem.",
   "RoomsGroupsTitle": "Seskupte si místnosti",
+  "RoomsMembers": "V Informačním panelu uvidíte členy místnosti a jejich role. Pokud můžete spravovat členy, pozvěte lidi a každému zvolte přístup, který potřebuje.",
   "RoomsMembersTitle": "Pracujte společně",
+  "RoomsOverview": "Místnost spojuje soubory a lidi kolem projektu nebo úkolu. Její typ a role členů určují, jak kdo může se soubory pracovat.",
+  "RoomsOverviewTitle": "Místo pro společnou práci",
+  "RoomsPlacesArchive": "{{archive}} — místnosti odložené z aktivní práce. Obnovte je, když je budete znovu potřebovat.",
   "RoomsPlacesTemplates": "{{templates}} — vaše šablony místností.",
   "RoomsPlacesTitle": "Všechno na svém místě",
+  "RoomsTemplates": "Uložte místnost jako šablonu a znovu použijte její nastavení, složky a soubory. Vytvořte z ní novou místnost a před zahájením práce zkontrolujte její členy a přístup.",
   "RoomsTemplatesTitle": "Využijte znovu to, co funguje",
-  "RoomsTypesTitle": "Místnost pro každý úkol"
+  "RoomsTypesCollaboration": "{{roomType}} — pro společné úpravy.",
+  "RoomsTypesCustom": "{{roomType}} — pro vaše vlastní pracovní postupy.",
+  "RoomsTypesPublic": "{{roomType}} — pro přístup bez registrace.",
+  "RoomsTypesTitle": "Místnost pro každý úkol",
+  "RoomsTypesVdr": "{{roomType}} — pro kontrolované sdílení souborů."
 }

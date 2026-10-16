@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "от «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Стая «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Раздел «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Пространство «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Анализирайте отговорите с ИИ",
   "FormRoomAIModalConnect": "Свързване на база данни",
   "FormRoomAIModalDescription": "Свържете база данни, за да анализирате всички събрани отговори с \"Попитай ИИ\". Можете да продължите и без нея и да питате само за тази форма.",

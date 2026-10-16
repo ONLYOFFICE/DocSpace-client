@@ -118,6 +118,7 @@
   "SharePDFFormModalDescription": "سيتم إنشاء مساحة جديدة وسيتم نسخ نموذج PDF هناك. يمكنك بعد ذلك دعوة مستخدمين آخرين لتعبئة النموذج الموجود في المساحة.",
   "SharePDFFormModalTitle": "مشاركة نموذج PDF",
   "ShareRoom": "مشاركة الغرفة",
+  "ShareSpace": "مشاركة المساحة",
   "ShowLinkActions": "عرض إجراءات الرابط",
   "SyncWithDatabase": "مزامنة مع قاعدة البيانات",
   "SyncWithDatabaseError": "فشل المزامنة مع قاعدة البيانات",

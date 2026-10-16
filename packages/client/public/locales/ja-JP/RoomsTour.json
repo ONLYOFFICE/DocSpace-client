@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "ルームの種類を選び、一緒に作業する人を招待して、ファイルを追加しましょう。これで共同作業を始める準備が整いました。",
   "RoomsCreateFirstTitle": "さあ、自分のものにしましょう",
+  "RoomsDemoPreview": "このツアーでは、ルームの仕組みを紹介するためにサンプルのコンテンツを使用しています。これらの例はあなた自身のルームとは別のものです。",
+  "RoomsDemoPreviewTitle": "見て回れるサンプル",
+  "RoomsEmpty": "このツアーのルームは例でした。招待されたルームはここに表示され、すぐに作業を始められます。",
   "RoomsEmptyTitle": "リストは今のところ空です",
+  "RoomsGroups": "関連するルームをグループにまとめると、すばやく見つけられます。ルームを選択してグループを作成し、リストの上でグループを切り替えます。",
   "RoomsGroupsTitle": "ルームをグループ分け",
+  "RoomsMembers": "インフォメーションパネルでルームのメンバーとそのロールを確認できます。メンバーを管理できる場合は、ユーザーを招待し、それぞれに必要なアクセス権を選択してください。",
   "RoomsMembersTitle": "一緒に作業する",
+  "RoomsOverview": "ルームは、プロジェクトやタスクを中心にファイルと人をまとめます。ルームの種類とメンバーのロールによって、各自がファイルをどのように扱えるかが決まります。",
+  "RoomsOverviewTitle": "一緒に作業する場所",
+  "RoomsPlacesArchive": "{{archive}} — 現在の作業から外したルーム。必要になったら復元できます。",
   "RoomsPlacesTemplates": "{{templates}} — ルームテンプレート。.",
   "RoomsPlacesTitle": "すべてがあるべき場所に",
+  "RoomsTemplates": "ルームをテンプレートとして保存すると、その設定、フォルダー、ファイルを再利用できます。そこから新しいルームを作成し、作業を始める前にメンバーとアクセス権を確認しましょう。",
   "RoomsTemplatesTitle": "うまくいったものを再利用",
-  "RoomsTypesTitle": "あらゆる用途にルームを"
+  "RoomsTypesCollaboration": "{{roomType}} — 共同編集用。",
+  "RoomsTypesCustom": "{{roomType}} — 独自のワークフロー用。",
+  "RoomsTypesPublic": "{{roomType}} — 登録不要のアクセス用。",
+  "RoomsTypesTitle": "あらゆる用途にルームを",
+  "RoomsTypesVdr": "{{roomType}} — 管理されたファイル共有用。"
 }

@@ -1,0 +1,29 @@
+{
+  "key_path": "SpacesRemoved",
+  "content": "Spaces removed",
+  "content_en_sha1_hash": "3b3d30afd2a0accd636851b2b3ba112f425e2330",
+  "created_at": "2026-10-16T12:14:59.286Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
+  "comment": {
+    "text": "Success toast shown after several form spaces (rooms of the Forms section) are deleted at once; short past-participle phrase. Singular counterpart: SpaceRemoved.",
+    "is_auto": true,
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 140,
+      "context": "? t(\"Common:SpaceRemoved\")\n : t(\"Common:RoomRemoved\"),\n successRemoveRooms: isAIAgent\n ? t(\"Common:AgentsRemoved\")\n : isFormSpace\n ? t(\"Common:SpacesRemoved\")\n : t(\"Common:RoomsRemoved\"),\n };\n \n if (isTemplate) {\n translations.successRemoveTemplate = t(\"Files:TemplateRemoved\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

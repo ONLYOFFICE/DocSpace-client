@@ -118,6 +118,7 @@
   "SharePDFFormModalDescription": "Se creará un nuevo espacio y allí se copiará el formulario PDF. Luego puede invitar a otros usuarios a rellenar el formulario en el espacio.",
   "SharePDFFormModalTitle": "Compartir formulario PDF",
   "ShareRoom": "Compartir sala",
+  "ShareSpace": "Compartir espacio",
   "ShowLinkActions": "Mostrar acciones de enlace",
   "SyncWithDatabase": "Sincronización con la base de datos",
   "SyncWithDatabaseError": "Error al sincronizar con la datos",

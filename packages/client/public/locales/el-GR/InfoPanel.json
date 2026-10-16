@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "από «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Δωμάτιο «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Ενότητα «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Χώρος «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Ανάλυση απαντήσεων με AI",
   "FormRoomAIModalConnect": "Σύνδεση δεδομένων",
   "FormRoomAIModalDescription": "Συνδέστε μια βάση δεδομένων για να αναλύσετε όλες τις συγκεντρωμένες απαντήσεις με το «Ρώτησε AI». Μπορείτε να συνεχίσετε χωρίς αυτήν και να ρωτήσετε μόνο για αυτή τη φόρμα.",

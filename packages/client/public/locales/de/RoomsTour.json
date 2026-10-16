@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Wählen Sie einen Raumtyp, laden Sie die Personen ein, mit denen Sie arbeiten, und fügen Sie Ihre Dateien hinzu. Schon können Sie mit der Zusammenarbeit beginnen.",
   "RoomsCreateFirstTitle": "Jetzt machen Sie es zu Ihrem",
+  "RoomsDemoPreview": "Diese Tour verwendet Beispielinhalte, um zu zeigen, wie Räume funktionieren. Die Beispiele sind von Ihren eigenen Räumen getrennt.",
+  "RoomsDemoPreviewTitle": "Ein Beispiel zum Erkunden",
+  "RoomsEmpty": "Die Räume in dieser Tour waren Beispiele. Räume, zu denen Sie eingeladen werden, erscheinen hier und sind bereit für Ihre Arbeit.",
   "RoomsEmptyTitle": "Ihre Liste ist vorerst leer",
+  "RoomsGroups": "Gruppieren Sie zusammengehörige Räume, um sie schneller zu finden. Wählen Sie Räume aus, um eine Gruppe zu erstellen, und wechseln Sie dann oberhalb der Liste zwischen den Gruppen.",
   "RoomsGroupsTitle": "Gruppieren Sie Ihre Räume",
+  "RoomsMembers": "Im Info-Panel sehen Sie die Mitglieder des Raums und ihre Rollen. Wenn Sie Mitglieder verwalten können, laden Sie Personen ein und wählen Sie für jede Person den Zugriff, den sie benötigt.",
   "RoomsMembersTitle": "Gemeinsam arbeiten",
+  "RoomsOverview": "Ein Raum bringt Dateien und Personen rund um ein Projekt oder eine Aufgabe zusammen. Sein Typ und die Rollen der Mitglieder bestimmen, wie alle mit den Dateien arbeiten können.",
+  "RoomsOverviewTitle": "Ein Ort für die Zusammenarbeit",
+  "RoomsPlacesArchive": "{{archive}} – Räume, die aus der aktiven Arbeit herausgenommen wurden. Stellen Sie sie wieder her, wenn Sie sie erneut brauchen.",
   "RoomsPlacesTemplates": "{{templates}} – Ihre Raumvorlagen.",
   "RoomsPlacesTitle": "Alles an seinem Platz",
+  "RoomsTemplates": "Speichern Sie einen Raum als Vorlage, um seine Einstellungen, Ordner und Dateien wiederzuverwenden. Erstellen Sie daraus einen neuen Raum und prüfen Sie dann seine Mitglieder und Zugriffsrechte, bevor Sie mit der Arbeit beginnen.",
   "RoomsTemplatesTitle": "Wiederverwenden, was funktioniert",
-  "RoomsTypesTitle": "Ein Raum für jede Aufgabe"
+  "RoomsTypesCollaboration": "{{roomType}} – für die gemeinsame Bearbeitung.",
+  "RoomsTypesCustom": "{{roomType}} – für Ihre eigenen Arbeitsabläufe.",
+  "RoomsTypesPublic": "{{roomType}} – für den Zugriff ohne Registrierung.",
+  "RoomsTypesTitle": "Ein Raum für jede Aufgabe",
+  "RoomsTypesVdr": "{{roomType}} – für die kontrollierte Freigabe von Dateien."
 }

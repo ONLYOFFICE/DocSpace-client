@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Scegliete un tipo di stanza, invitate le persone con cui lavorate e aggiungete i vostri file. Siete pronti per iniziare a lavorare insieme.",
   "RoomsCreateFirstTitle": "Ora rendetela vostra",
+  "RoomsDemoPreview": "Questo tour usa contenuti di esempio per mostrare come funzionano le stanze. Gli esempi sono separati dalle vostre stanze.",
+  "RoomsDemoPreviewTitle": "Un esempio da esplorare",
+  "RoomsEmpty": "Le stanze di questo tour erano esempi. Le stanze a cui sarete invitati compariranno qui, pronte per lavorarci.",
   "RoomsEmptyTitle": "Il vostro elenco per ora è vuoto",
+  "RoomsGroups": "Raggruppate le stanze correlate per trovarle più in fretta. Selezionate le stanze per creare un gruppo, poi passate da un gruppo all'altro sopra l'elenco.",
   "RoomsGroupsTitle": "Raggruppate le vostre stanze",
+  "RoomsMembers": "Usate il Pannello delle informazioni per vedere i membri della stanza e i loro ruoli. Se potete gestire i membri, invitate persone e scegliete l'accesso di cui ciascuno ha bisogno.",
   "RoomsMembersTitle": "Lavorate insieme",
+  "RoomsOverview": "Una stanza riunisce file e persone attorno a un progetto o a un'attività. Il suo tipo e i ruoli dei membri definiscono come ognuno può lavorare con i file.",
+  "RoomsOverviewTitle": "Un posto per lavorare insieme",
+  "RoomsPlacesArchive": "{{archive}}: le stanze messe da parte e fuori dal lavoro attivo. Ripristinatele quando vi servono di nuovo.",
   "RoomsPlacesTemplates": "{{templates}}: i vostri modelli di stanza.",
   "RoomsPlacesTitle": "Ogni cosa al suo posto",
+  "RoomsTemplates": "Salvate una stanza come modello per riutilizzarne impostazioni, cartelle e file. Create una nuova stanza a partire dal modello, poi controllate i membri e l'accesso prima di iniziare a lavorare.",
   "RoomsTemplatesTitle": "Riutilizzate ciò che funziona",
-  "RoomsTypesTitle": "Una stanza per ogni attività"
+  "RoomsTypesCollaboration": "{{roomType}}: per la modifica collaborativa.",
+  "RoomsTypesCustom": "{{roomType}}: per i vostri flussi di lavoro.",
+  "RoomsTypesPublic": "{{roomType}}: per l'accesso senza registrazione.",
+  "RoomsTypesTitle": "Una stanza per ogni attività",
+  "RoomsTypesVdr": "{{roomType}}: per la condivisione controllata dei file."
 }

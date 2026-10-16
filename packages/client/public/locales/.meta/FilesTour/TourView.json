@@ -1,0 +1,29 @@
+{
+  "key_path": "TourView",
+  "content": "Use the sort control to order the list, and the view control to switch between list and tile view.",
+  "content_en_sha1_hash": "279834bc898eb8f902db43d8a6ee252d92162aec",
+  "created_at": "2026-10-16T12:15:09.438Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
+  "comment": {
+    "text": "Body of the Files onboarding tour step that highlights the sort and view-switch controls above the file list.",
+    "is_auto": true,
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 155,
+      "context": "),\n elementGroupStep(\n SORT_AND_VIEW_TARGET,\n SORT_AND_VIEW_SELECTORS,\n t(\"FilesTour:TourViewTitle\"),\n t(\"FilesTour:TourView\"),\n callbacks,\n FILES_TOUR_LABEL,\n ),\n ];\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

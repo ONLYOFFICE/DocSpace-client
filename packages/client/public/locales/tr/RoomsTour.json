@@ -1,10 +1,24 @@
 {
+  "RoomsCreateFirst": "Bir oda türü seçin, birlikte çalıştığınız kişileri davet edin ve dosyalarınızı ekleyin. Birlikte çalışmaya başlamaya hazırsınız.",
   "RoomsCreateFirstTitle": "Şimdi kendinize göre yapın",
+  "RoomsDemoPreview": "Bu tur, odaların nasıl çalıştığını göstermek için örnek içerik kullanır. Örnekler kendi odalarınızdan ayrıdır.",
+  "RoomsDemoPreviewTitle": "Keşfedilecek bir örnek",
+  "RoomsEmpty": "Bu turdaki odalar örnekti. Davet edildiğiniz odalar burada görünecek ve içinde çalışmanıza hazır olacak.",
   "RoomsEmptyTitle": "Listeniz şimdilik boş",
+  "RoomsGroups": "İlgili odaları daha hızlı bulmak için gruplayın. Grup oluşturmak için odaları seçin, ardından listenin üstünde gruplar arasında geçiş yapın.",
   "RoomsGroupsTitle": "Odalarınızı gruplayın",
+  "RoomsMembers": "Oda üyelerini ve rollerini görmek için Bilgi panelini kullanın. Üyeleri yönetebiliyorsanız kişileri davet edin ve her birinin ihtiyaç duyduğu erişimi seçin.",
   "RoomsMembersTitle": "Birlikte çalışın",
+  "RoomsOverview": "Oda, dosyaları ve kişileri bir proje veya görev etrafında bir araya getirir. Odanın türü ve üye rolleri, herkesin dosyalarla nasıl çalışabileceğini belirler.",
+  "RoomsOverviewTitle": "Birlikte çalışmak için bir yer",
+  "RoomsPlacesArchive": "{{archive}} — aktif çalışmadan ayrılmış odalar. Yeniden ihtiyaç duyduğunuzda onları geri yükleyin.",
   "RoomsPlacesTemplates": "{{templates}} — oda şablonlarınız.",
   "RoomsPlacesTitle": "Her şey yerli yerinde",
+  "RoomsTemplates": "Ayarlarını, klasörlerini ve dosyalarını yeniden kullanmak için bir odayı şablon olarak kaydedin. Bu şablondan yeni bir oda oluşturun, ardından çalışmaya başlamadan önce odanın üyelerini ve erişimini kontrol edin.",
   "RoomsTemplatesTitle": "İşe yarayanı yeniden kullanın",
-  "RoomsTypesTitle": "Her göreve bir oda"
+  "RoomsTypesCollaboration": "{{roomType}} — birlikte düzenleme için.",
+  "RoomsTypesCustom": "{{roomType}} — kendi iş akışlarınız için.",
+  "RoomsTypesPublic": "{{roomType}} — kayıt olmadan erişim için.",
+  "RoomsTypesTitle": "Her göreve bir oda",
+  "RoomsTypesVdr": "{{roomType}} — denetimli dosya paylaşımı için."
 }

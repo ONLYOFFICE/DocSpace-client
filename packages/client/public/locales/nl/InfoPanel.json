@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "van «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Kamer «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Sectie «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Ruimte «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Antwoorden analyseren met AI",
   "FormRoomAIModalConnect": "Database verbinden",
   "FormRoomAIModalDescription": "Verbind een database om alle verzamelde antwoorden te analyseren met \"Vraag AI\". U kunt doorgaan zonder database en alleen vragen stellen over dit formulier.",

@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "Створено ШI-агента",
-  "AgentDeleted": "Видалено ШI-агента",
-  "AgentUpdated": "Оновлено ШI-агента",
+  "AgentCreated": "Створено AI-агента",
+  "AgentDeleted": "Видалено AI-агента",
+  "AgentUpdated": "Оновлено AI-агента",
   "Before": "До",
   "CreateWebhook": "Створити вебхук",
   "DeleteHint": "Вебхук буде видалено назавжди.\nВи не зможете скасувати цю дію.",

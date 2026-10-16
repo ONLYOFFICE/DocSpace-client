@@ -334,7 +334,10 @@ const useEditorEvents = ({
             };
 
             const sendTools = (data?: unknown) =>
-              window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
+              window.parent?.postMessage(
+                { type: "initedAiPlugin", data },
+                window.location.origin,
+              );
 
             // const editorOrigin = (() => {
             //   try {

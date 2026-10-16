@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Sovellukset on onnistuneesti otettu käyttöön",
   "AppName": "Sovellusnimi",
   "Apps": "Sovellukset",
+  "AppsLimitReached": "Olet saavuttanut luotavien sovellusten enimmäismäärän. Poista sovellus, jota et enää tarvitse, jotta voit lisätä uuden.",
+  "AppsLimitReachedWorkspace": "Tämä työtila on saavuttanut sovellusten enimmäismäärän. Poista sovellus, jota ei enää tarvita, jotta voit lisätä uuden.",
   "AuthButton": "Todennuspainike",
   "AuthenticationMethod": "Todennustapa",
   "AuthorizedApps": "Valtuutetut sovellukset",

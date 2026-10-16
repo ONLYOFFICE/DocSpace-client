@@ -3016,17 +3016,22 @@ const getContextMenuRoomList = ({
  * `Create: false`. `current` here is a single shared object that says `true`,
  * so a test standing in as anybody else has to say otherwise.
  */
-const withRootCreate = <T extends { current: { security?: object } }>(
+type RootParams = { canCreate?: boolean; rootAccess?: ShareAccessRights };
+
+const withRoot = <T extends { current: { access?: number; security?: object } }>(
   list: T,
-  canCreate?: boolean,
+  { canCreate, rootAccess }: RootParams,
 ): T => {
-  if (canCreate === undefined) return list;
+  if (canCreate === undefined && rootAccess === undefined) return list;
 
   return {
     ...list,
     current: {
       ...list.current,
-      security: { ...list.current.security, Create: canCreate },
+      ...(rootAccess !== undefined && { access: rootAccess }),
+      ...(canCreate !== undefined && {
+        security: { ...list.current.security, Create: canCreate },
+      }),
     },
   };
 };
@@ -3038,32 +3043,33 @@ export const roomListResolver = (
     inRoom?: boolean;
     isDocAdmin?: boolean;
     canCreate?: boolean;
+    rootAccess?: ShareAccessRights;
   },
 ) => {
-  const canCreate = params?.canCreate;
+  const root = { canCreate: params?.canCreate, rootAccess: params?.rootAccess };
 
   if (roomListType === TypeRoomList.IsFiltered) {
     return new Response(
-      JSON.stringify({ response: withRootCreate(getRoomList(true), canCreate) }),
+      JSON.stringify({ response: withRoot(getRoomList(true), root) }),
     );
   }
 
   if (roomListType === TypeRoomList.IsDefault) {
     return new Response(
-      JSON.stringify({ response: withRootCreate(getRoomList(), canCreate) }),
+      JSON.stringify({ response: withRoot(getRoomList(), root) }),
     );
   }
 
   if (roomListType === TypeRoomList.ContextMenu) {
     return new Response(
       JSON.stringify({
-        response: withRootCreate(getContextMenuRoomList(params ?? {}), canCreate),
+        response: withRoot(getContextMenuRoomList(params ?? {}), root),
       }),
     );
   }
 
   return new Response(
-    JSON.stringify({ response: withRootCreate(getEmptyRoomList(), canCreate) }),
+    JSON.stringify({ response: withRoot(getEmptyRoomList(), root) }),
   );
 };
 
@@ -3079,6 +3085,7 @@ export const roomListHandler = (
      * stands.
      */
     canCreate?: boolean;
+    rootAccess?: ShareAccessRights;
   },
 ) => {
   let baseUrl;

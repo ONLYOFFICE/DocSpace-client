@@ -44,6 +44,7 @@ import type DashboardTourStore from "SRC_DIR/store/DashboardTourStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import { DASHBOARD_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 
 import { getTourSteps, type TourStepFlags } from "./tourSteps";
 
@@ -144,7 +145,7 @@ const DashboardTour = ({
     dashboardTourStore,
     buildSteps,
     isMobileView,
-    "dashboard tour",
+    DASHBOARD_TOUR_LABEL,
   );
 
   // The request is made on this page, so there is nothing to hydrate — but it

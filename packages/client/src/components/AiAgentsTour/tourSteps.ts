@@ -33,91 +33,82 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { createElement } from "react";
 import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
 import type { TourAudience } from "SRC_DIR/components/Tour/audience";
-import TourList from "SRC_DIR/components/Tour/TourList";
 import {
   navItemStep,
+  sidebarListStep,
   elementStep,
   elementGroupStep,
   fileItemStep,
   revealStep,
   sidebarSelector,
   type RevealHooks,
+  STAND_IN_ROW_SELECTORS,
 } from "SRC_DIR/components/Tour/stepBuilders";
+import { AI_AGENTS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
+import { DEMO_AGENT_FILE_IDS } from "SRC_DIR/api/tourDemo/data";
 
-const LOG_LABEL = "ai agents tour";
-
-// The first agent of the list, in whichever view is active (only one of the
-// three is mounted at a time). Same wrappers as the files list — in the table
-// view the row has no geometry of its own (`display: contents`), which
-// `fileItemStep` handles by falling back to the row's widest cell.
-const FIRST_ITEM_SELECTOR =
+export const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
-// The info panel's outer wrapper (ui-kit Section/InfoPanel keeps this plain
-// class alongside its CSS-module one). Only mounted while the panel is open,
-// which is why the step that points at it opens it first.
+// Only mounted while the panel is open; the step opens it first.
 const INFO_PANEL_SELECTOR = ".info-panel";
+// ui-kit Tabs names a tab `${id}_tab`.
+const MEMBERS_TAB_SELECTOR = '[data-testid="info_members_tab"]';
+const MEMBERS_LIST_SELECTOR = '[data-testid="info_panel_members_list"]';
+const MEMBER_ROW_SELECTOR = '[data-testid="info_panel_members_list_item_0"]';
 
-// The search box and the advanced filter beside it. One step covers both: they
-// are the same errand — finding an agent again once there are more than a
-// handful — and separating them costs a step the budget does not have.
-const SEARCH_SELECTOR = "#filter_search-input";
+// Each file tab's step waits for its own first file, by element id: a tab
+// switch re-renders the list, so the row still on screen may be the old one.
+const KNOWLEDGE_TAB_SELECTOR = '[data-testid="knowledge_tab"]';
+const OUTPUTS_TAB_SELECTOR = '[data-testid="result_tab"]';
+const KNOWLEDGE_FILE_SELECTOR = `#file_${DEMO_AGENT_FILE_IDS.knowledge}`;
+const OUTPUTS_FILE_SELECTOR = `#file_${DEMO_AGENT_FILE_IDS.outputs}`;
+// The chat's request field and suggestions, in the active chat only: on the
+// other tabs the chat stays mounted, hidden.
+const CHAT_COMPOSER_SELECTOR =
+  '[data-chat-active] [data-testid="composer-root"]';
+const CHAT_SUGGESTIONS_SELECTOR =
+  '[data-chat-active] [data-testid="suggestions"]';
+
+const SEARCH_SELECTOR = "#filter_search-input .search-input-block";
 const FILTER_BUTTON_SELECTOR = "#filter-button";
+const NEW_BUTTON_SELECTOR =
+  '#filter_search-input > div:has(> [data-testid="main-button"])';
 
-// The single action of the agents empty screen — "create an agent" on a portal
-// with AI on, the way to switch it on otherwise (EmptyViewContainer.helpers,
-// FolderType.AIAgents). ui-kit's EmptyView gives its options no testid of their
-// own, so the anchor is positional either way.
+// The empty screen's only option, create or switch AI on; it carries no test id.
 const EMPTY_SCREEN_CREATE_SELECTOR =
   '[data-testid="empty-view-body"] > *:first-child';
 
-// The empty screen itself, for the closing step of anyone with no action on it
-// to point at. Nothing is offered to somebody who cannot manage agents, so the
-// body may hold no options at all — the screen around them always exists.
 const EMPTY_SCREEN_SELECTOR = '[data-testid="empty-view"]';
 
 export type TourStepFlags = {
-  // Which tour to build. Admins configure agents — instructions, knowledge
-  // base, model, who may use them. Users and guests consume agents somebody
-  // else configured, so the creation step is dropped for them and the shared
-  // anchors describe using an agent rather than owning one.
+  // Admins configure agents; users and guests only use them.
   audience: TourAudience;
   isDesktop: boolean;
   canCreate: boolean;
   showFilter: boolean;
-  // Whether the list has at least one agent — steps that point at a row are
-  // skipped on an empty section.
   hasItems: boolean;
-  // Sidebar anchor: the AI Agents parent item id is the tree folder id; the
-  // quick-access sub-items use static string ids ("agents-recent" etc.).
+  // The sidebar item's id: the tree folder id.
   aiAgentsId: string | null;
-  // Unlike the Rooms section, the agents sub-items are only rendered when the
-  // matching portal-wide alias folder exists (ClientArticleSidebar gates each
-  // one), so the tour has to mirror that — both to find an anchor at all and to
-  // avoid naming a shortcut that is not on screen.
+  // Each sub-item is rendered only when its alias folder exists.
   hasRecent: boolean;
   hasFavorites: boolean;
   hasTrash: boolean;
-  // Opens the info panel on the first agent's member list, and puts back what
-  // it changed. Supplied by the host component, which holds the stores.
+  // Opens the info panel on the first agent's member list, and puts it back.
   infoPanelHooks?: RevealHooks;
-  // Whether the section's own list is the one being stood in for. Only then is
-  // there a closing step: it drops the stand-in and hands the user over to the
-  // real button on the empty screen they are left looking at.
+  // Whether the list itself is stood in for; only then is there a closing step.
   isStandIn: boolean;
-  // Which button that is, once the pretence is dropped — and so what the
-  // closing step is for. A portal that has AI on is sent at "create an agent";
-  // one that has not is sent at the button that switches it on, which is the
-  // thing standing between the user and everything they were just shown.
-  // `null` when the empty screen offers nothing and there is no step to make.
+  // What the empty screen offers once the stand-in is dropped; `null` for nothing.
   emptyScreenAction: "create" | "activate" | null;
   demoHooks?: RevealHooks;
+  agentHooks?: { chat: RevealHooks; knowledge: RevealHooks; outputs: RevealHooks };
+  // Returns the tour to the list; every step anchored outside an agent runs it.
+  leaveAgent?: () => void;
 };
 
 export function getTourSteps(
@@ -139,17 +130,14 @@ export function getTourSteps(
     isStandIn,
     emptyScreenAction,
     demoHooks,
+    agentHooks,
+    leaveAgent,
   } = flags;
 
-  // Creating an agent is a room-admin power; everyone else only uses the agents
-  // they were given access to.
   const isAdmin = audience === "admin";
 
-  // The quick-access sub-items are nested under AI Agents and rendered expanded
-  // while the section is active. Skipped on tablet: the collapsed icon-only
-  // sidebar flattens sub-items into the main list. Anchored on whichever of
-  // them the sidebar actually built — the spotlight covers the sub-list they
-  // share, so any of the three lights up the same block.
+  // Anchored on whichever sub-item the sidebar built; the collapsed tablet
+  // sidebar has none.
   const quickAccessAnchor =
     (hasRecent && "agents-recent") ||
     (hasFavorites && "agents-favorites") ||
@@ -157,92 +145,148 @@ export function getTourSteps(
     null;
   const showQuickAccess = isDesktop && !!quickAccessAnchor;
 
-  // One bullet per shortcut, each named by the sidebar's own label so the
-  // wording in the tooltip is the wording on screen. Only the ones that exist
-  // are named.
+  // One bullet per sub-item the sidebar built, worded as in the Files tour.
   const places = [
-    (hasRecent || hasFavorites) &&
-      t("AiAgentsTour:AgentPlacesRecent", {
-        recent: t("Common:Recent"),
-        favorites: t("Common:Favorites"),
+    hasRecent &&
+      t("FilesTour:TourPlacesRecent", { sectionName: t("Common:Recent") }),
+    hasFavorites &&
+      t("FilesTour:TourPlacesFavorites", {
+        sectionName: t("Common:Favorites"),
       }),
     hasTrash &&
-      t("AiAgentsTour:AgentPlacesTrash", { trash: t("Common:TrashSection") }),
+      t("FilesTour:TourPlacesTrash", { sectionName: t("Common:TrashSection") }),
   ].filter(Boolean) as string[];
 
   return [
-    // 1. What an agent is, which is the one thing everything else rests on: not
-    // a chat window you open and lose, but a thing you set up and keep. The
-    // three tabs live inside an agent, so they can only be described here — the
-    // tour never opens one.
+    // 1. What an agent is, on the sidebar item; a user hears the using end.
     aiAgentsId &&
       navItemStep(
         sidebarSelector(aiAgentsId),
         t("AiAgentsTour:AgentWhatIsTitle"),
-        // The same mental model either way — but somebody who cannot add to the
-        // list is told where the list they are looking at comes from instead of
-        // what an agent keeps for them.
         isAdmin
           ? t("AiAgentsTour:AgentWhatIs")
           : t("AiAgentsTour:AgentWhatIsShared"),
         callbacks,
-        LOG_LABEL,
+        AI_AGENTS_TOUR_LABEL,
+        false,
+        leaveAgent,
       ),
 
-    // 2. Create. The agents banner holds a single "New agent" tile, so
-    // spotlighting the banner is the same as spotlighting the tile. The step
-    // names what the create dialog actually asks for: AI Instructions,
-    // Knowledge, Profile (model) and MCP tools.
+    // 2. Creating one, on the tile.
     isAdmin &&
       canCreate &&
       showFilter &&
       elementStep(
-        '[data-testid="quick-actions"]',
+        '[data-testid="quick-new-agent"]',
         t("AiAgentsTour:AgentBuildTitle"),
         t("AiAgentsTour:AgentBuild"),
         callbacks,
-        LOG_LABEL,
+        AI_AGENTS_TOUR_LABEL,
+        6,
+        leaveAgent,
       ),
 
-    // 3. An agent row: the per-agent actions people reach for most, none of
-    // which need the agent opened. Editing, inviting and duplicating are admin
-    // entries; a user's menu is short, so it is described separately.
+    // 3. The sample notice, only when the whole list is one, as in Rooms.
+    isStandIn &&
+      hasItems &&
+      elementGroupStep(
+        FIRST_ITEM_SELECTOR,
+        STAND_IN_ROW_SELECTORS,
+        t("AiAgentsTour:AgentDemoPreviewTitle"),
+        t("AiAgentsTour:AgentDemoPreview"),
+        callbacks,
+        AI_AGENTS_TOUR_LABEL,
+        4,
+        leaveAgent,
+        true,
+      ),
+
+    // 4. An agent row; a user gets other wording.
     hasItems &&
       fileItemStep(
         FIRST_ITEM_SELECTOR,
         t("AiAgentsTour:AgentRowTitle"),
         isAdmin ? t("AiAgentsTour:AgentRow") : t("AiAgentsTour:AgentRowMember"),
         callbacks,
-        LOG_LABEL,
+        AI_AGENTS_TOUR_LABEL,
+        leaveAgent,
       ),
 
-    // 4. Who may use the agent. The step opens the info panel on the first
-    // agent's member list and lights up the row and the panel together, rather
-    // than pointing at the button that would have opened it — an agent has no
-    // public link, only a members one, so what the panel is for has to be seen
-    // to land. For everyone else the same panel answers "who else uses this,
-    // and what changed in it".
+    // 5. The chat, in the user's own agent only: a stand-in cannot serve one.
+    hasItems &&
+      !isStandIn &&
+      agentHooks &&
+      revealStep(
+        CHAT_COMPOSER_SELECTOR,
+        t("AiAgentsTour:AgentChatTitle"),
+        t("AiAgentsTour:AgentChat"),
+        callbacks,
+        AI_AGENTS_TOUR_LABEL,
+        agentHooks.chat,
+        [CHAT_SUGGESTIONS_SELECTOR],
+      ),
+
+    // 6. Knowledge: a stand-in waits for its first file, an own agent for the tab.
+    hasItems &&
+      agentHooks &&
+      revealStep(
+        isStandIn ? KNOWLEDGE_FILE_SELECTOR : KNOWLEDGE_TAB_SELECTOR,
+        t("AiAgentsTour:AgentKnowledgeBaseTitle"),
+        t("AiAgentsTour:AgentKnowledgeBase"),
+        callbacks,
+        AI_AGENTS_TOUR_LABEL,
+        agentHooks.knowledge,
+        isStandIn
+          ? [KNOWLEDGE_TAB_SELECTOR]
+          : [FIRST_ITEM_SELECTOR, EMPTY_SCREEN_SELECTOR],
+        undefined,
+        4,
+        undefined,
+        true,
+      ),
+
+    // 7. Chat outputs, the same way.
+    hasItems &&
+      agentHooks &&
+      revealStep(
+        isStandIn ? OUTPUTS_FILE_SELECTOR : OUTPUTS_TAB_SELECTOR,
+        t("AiAgentsTour:AgentOutputsTitle"),
+        t("AiAgentsTour:AgentOutputs"),
+        callbacks,
+        AI_AGENTS_TOUR_LABEL,
+        agentHooks.outputs,
+        isStandIn
+          ? [OUTPUTS_TAB_SELECTOR]
+          : [FIRST_ITEM_SELECTOR, EMPTY_SCREEN_SELECTOR],
+        undefined,
+        4,
+        undefined,
+        true,
+      ),
+
+    // 8. Who may use the agent: the info panel, opened on the first agent.
     hasItems &&
       isDesktop &&
       infoPanelHooks &&
       revealStep(
-        INFO_PANEL_SELECTOR,
+        MEMBER_ROW_SELECTOR,
         isAdmin
-          ? t("AiAgentsTour:AgentAccessTitle")
+          ? t("RoomsTour:RoomsMembersTitle")
           : t("AiAgentsTour:AgentAccessMemberTitle"),
         isAdmin
           ? t("AiAgentsTour:AgentAccess")
           : t("AiAgentsTour:AgentAccessMember"),
         callbacks,
-        LOG_LABEL,
+        AI_AGENTS_TOUR_LABEL,
         infoPanelHooks,
-        [FIRST_ITEM_SELECTOR],
+        [MEMBERS_TAB_SELECTOR, MEMBERS_LIST_SELECTOR],
         FIRST_ITEM_SELECTOR,
+        4,
+        INFO_PANEL_SELECTOR,
+        true,
       ),
 
-    // 5. Finding one again. Search and the advanced filter share a step because
-    // they share an errand, and the spotlight covers the pair rather than the
-    // whole filter bar around them.
+    // 9. Search and the filter, as one step.
     showFilter &&
       elementGroupStep(
         SEARCH_SELECTOR,
@@ -250,49 +294,38 @@ export function getTourSteps(
         t("AiAgentsTour:AgentFindTitle"),
         t("AiAgentsTour:AgentFind"),
         callbacks,
-        LOG_LABEL,
+        AI_AGENTS_TOUR_LABEL,
+        6,
+        leaveAgent,
       ),
 
-    // 6. The sidebar sub-items, one bullet each.
+    // 10. The sidebar sub-items.
     showQuickAccess &&
       places.length > 0 &&
-      navItemStep(
-        sidebarSelector(quickAccessAnchor as string),
+      sidebarListStep(
+        quickAccessAnchor as string,
         t("AiAgentsTour:AgentPlacesTitle"),
-        createElement(TourList, { items: places }),
+        places,
         callbacks,
-        LOG_LABEL,
-        true,
+        AI_AGENTS_TOUR_LABEL,
+        leaveAgent,
       ),
 
-    // 7. Only when the list was stood in for. The stand-in agents are the last
-    // thing the user saw, and dropping them lands them on the empty screen — so
-    // rather than let that happen behind their back, the closing step does it
-    // deliberately and points at the button that starts the real thing.
-    //
-    // Which button that is decides what the step says. A portal with AI already
-    // on is a step away from its first agent. A portal without it has just been
-    // shown a section it cannot have yet, and the honest ending is to name the
-    // one thing standing in the way rather than to pretend it was never
-    // pretending.
-    //
-    // Somebody who does not administer the portal gets neither button — the
-    // empty screen is bare for them — so their ending names what the empty list
-    // means and who fills it instead. `restore` is a no-op in every case: the
-    // section is the user's own from here on.
-    isStandIn &&
-      demoHooks &&
-      (emptyScreenAction
+    // 11. Closing: drop the stand-in list and point at the empty screen's
+    // button, create or switch AI on, or name the empty list for a non-admin;
+    // else the New button.
+    isStandIn && demoHooks
+      ? emptyScreenAction
         ? revealStep(
             EMPTY_SCREEN_CREATE_SELECTOR,
             emptyScreenAction === "create"
-              ? t("AiAgentsTour:AgentStartTitle")
+              ? t("RoomsTour:RoomsCreateFirstTitle")
               : t("AiAgentsTour:AgentSwitchOnTitle"),
             emptyScreenAction === "create"
               ? t("AiAgentsTour:AgentStart")
               : t("AiAgentsTour:AgentSwitchOn"),
             callbacks,
-            LOG_LABEL,
+            AI_AGENTS_TOUR_LABEL,
             demoHooks,
           )
         : !isAdmin &&
@@ -301,8 +334,21 @@ export function getTourSteps(
             t("AiAgentsTour:AgentEmptyTitle"),
             t("AiAgentsTour:AgentEmpty"),
             callbacks,
-            LOG_LABEL,
+            AI_AGENTS_TOUR_LABEL,
             demoHooks,
-          )),
+          )
+      : isAdmin &&
+        canCreate &&
+        showFilter &&
+        isDesktop &&
+        elementStep(
+          NEW_BUTTON_SELECTOR,
+          t("RoomsTour:RoomsCreateFirstTitle"),
+          t("AiAgentsTour:AgentStart"),
+          callbacks,
+          AI_AGENTS_TOUR_LABEL,
+          6,
+          leaveAgent,
+        ),
   ].filter(Boolean) as Step[];
 }

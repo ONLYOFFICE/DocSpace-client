@@ -12,7 +12,10 @@ const titles = (flags: TourStepFlags) => steps(flags).map((step) => step.title);
 
 const PROFILE_TARGET = '[data-tour-id="dashboard-profile"]';
 const CREATE_TARGET = '[data-tour-id="dashboard-create"]';
-const APPS_TARGET = '[data-tour-id="dashboard-apps"]';
+const APPS_TARGET = "DashboardTour:DashboardAppsTitle";
+
+const anchorOf = (step: { target: unknown; title?: unknown }) =>
+  typeof step.target === "function" ? step.title : step.target;
 const INTEGRATIONS_TARGET = '[data-tour-id="dashboard-integrations"]';
 const DEVTOOLS_TARGET = '[data-tour-id="dashboard-devtools"]';
 const OVERVIEW_TARGET = '[data-item-id="dashboard"]';
@@ -30,7 +33,7 @@ const fullFlags: TourStepFlags = {
 
 describe("dashboard tour steps", () => {
   it("walks the page top to bottom and ends on the sidebar", () => {
-    expect(steps(fullFlags).map((step) => step.target)).toEqual([
+    expect(steps(fullFlags).map(anchorOf)).toEqual([
       PROFILE_TARGET,
       CREATE_TARGET,
       APPS_TARGET,
@@ -69,7 +72,7 @@ describe("dashboard tour steps", () => {
       // It is about what to do after the products have been introduced, and it
       // is still addressed to the same person — so it comes before the developer
       // tools, which are not.
-      const targets = steps(fullFlags).map((step) => step.target);
+      const targets = steps(fullFlags).map(anchorOf);
 
       expect(targets.indexOf(INTEGRATIONS_TARGET)).toBe(
         targets.indexOf(DEVTOOLS_TARGET) - 1,
@@ -108,7 +111,7 @@ describe("dashboard tour steps", () => {
       // It sits where the card does — below the integrations, at the bottom of
       // the page — and the Overview step is the tour's hand-off, so nothing
       // about the page may come after it.
-      const targets = steps(fullFlags).map((step) => step.target);
+      const targets = steps(fullFlags).map(anchorOf);
 
       expect(targets.indexOf(DEVTOOLS_TARGET)).toBe(
         targets.indexOf(OVERVIEW_TARGET) - 1,
@@ -132,7 +135,7 @@ describe("dashboard tour steps", () => {
       // does not change when one of them is absent.
       const flags = { ...fullFlags, hasIntegrations: false };
 
-      expect(steps(flags).map((step) => step.target)).toEqual([
+      expect(steps(flags).map(anchorOf)).toEqual([
         PROFILE_TARGET,
         CREATE_TARGET,
         APPS_TARGET,
@@ -190,7 +193,7 @@ describe("dashboard tour steps", () => {
       });
 
       const [appsStep] = steps(fullFlags).filter(
-        (step) => step.target === APPS_TARGET,
+        (step) => step.title === APPS_TARGET,
       );
 
       const spotlight = (
@@ -210,14 +213,15 @@ describe("dashboard tour steps", () => {
       expect(titles(flags)).not.toContain("DashboardTour:DashboardAppsTitle");
     });
 
-    it("anchors the tooltip on the section, not on a card", () => {
-      // The section heading has to stay outside the spotlight while the text
-      // speaks about the row as a whole.
+    it("anchors the tooltip on the row itself, not on the section", () => {
+      // The section is tall with its heading, which parked the tooltip up over
+      // the create tiles; anchored on the spotlight it stays by the cards.
       const [appsStep] = steps(fullFlags).filter(
         (step) => step.title === "DashboardTour:DashboardAppsTitle",
       );
 
-      expect(appsStep.target).toBe(APPS_TARGET);
+      expect(appsStep.target).toBeTypeOf("function");
+      expect(appsStep.target).toBe(appsStep.spotlightTarget);
     });
 
     it("covers however many cards the grid actually rendered", () => {

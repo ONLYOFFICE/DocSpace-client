@@ -1628,7 +1628,8 @@
   "PerStorage": "{{currency}} per {{amount}}/month",
   "PerStorageWitnMinValue": "{{currency}} per {{amount}}/month <1>(min {{minValue}}{{storageUnit}})</1>",
   "PerUserLimit": "Limit per user",
-  "PerUserLimitDescription": "Applies the same limit to every user. AI spending per user and individual limits are managed in <1>Contacts</1>.",
+  "PerUserLimitContactsHint": "AI spending per user and individual limits are managed in <1>Contacts</1>.",
+  "PerUserLimitDescription": "Applies the same limit to every user.",
   "PerUserMonth": "<1>{{price}}</1> per admin/month",
   "PerUserYear": "<1>{{price}}</1> per admin/year",
   "Petabyte": "PB",
@@ -2002,7 +2003,7 @@
   "ServerErrorEmptyDescription": "Please reload the page or come back later.",
   "ServerSideEncryptionMethod": "Server Side Encryption Method",
   "ServiceIsDisabled": "Service is disabled",
-  "ServiceLimitsDescription": "Set spending limits for the whole portal and per user.",
+  "ServiceLimitsDescription": "Set spending limits for the whole portal and per user. <1>One limit covers both AI features and AI search.</1>",
   "ServiceManagementUnavailable": "Add-on management is unavailable during the grace period, and no charges will apply to the add-ons during this time. To regain full functionality, please upgrade to a {{planName}} plan.",
   "ServiceUrl": "Service URL",
   "Sessions": "Sessions",
@@ -2489,5 +2490,6 @@
   "YourOwnPlatform": "Your own platform",
   "YourPrice": "Your price",
   "YourTurn": "Your turn",
-  "YouWillBeContacted": "The sales team will contact you after creating the request."
+  "YouWillBeContacted": "The sales team will contact you after creating the request.",
+  "SetSpendingLimit": "Set spending limit"
 }

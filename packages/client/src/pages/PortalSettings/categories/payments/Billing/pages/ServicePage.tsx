@@ -134,6 +134,9 @@ const ServicePage = (props: ServicePageProps) => {
 
   const onViewUsage = () => navigateToRoute("/billing/usage");
 
+  const onOpenLimits = () =>
+    navigateToRoute("/portal-settings/ai-settings/limits");
+
   const renderDocsConnect = () => {
     if (docsConnectLoading) return <BackupPageLoader />;
 
@@ -230,6 +233,8 @@ const ServicePage = (props: ServicePageProps) => {
           onOpenSupportedModels={() =>
             navigateToRoute("/portal-settings/ai-settings/ai-models")
           }
+        
+          onOpenLimits={onOpenLimits}
         />
       ) : null}
       {pathname.includes("ai-search") ? (
@@ -240,6 +245,8 @@ const ServicePage = (props: ServicePageProps) => {
           onOpenWebSearch={() =>
             navigateToRoute("/portal-settings/ai-settings/web-search")
           }
+        
+          onOpenLimits={onOpenLimits}
         />
       ) : null}
       {pathname.includes("backup") ? (

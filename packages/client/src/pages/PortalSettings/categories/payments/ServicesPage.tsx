@@ -83,6 +83,15 @@ const ServicesPage = (props: ServicesPageProps) => {
     navigate(combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url));
   };
 
+  const onOpenLimits = () =>
+    navigate(
+      combineUrl(
+        window.ClientConfig?.proxy?.url,
+        config.homepage,
+        "/portal-settings/ai-settings/limits",
+      ),
+    );
+
   const paymentConfig = useMemo(
     () => ({
       language,
@@ -112,6 +121,8 @@ const ServicesPage = (props: ServicesPageProps) => {
               ),
             )
           }
+        
+          onOpenLimits={onOpenLimits}
         />
       ) : null}
       {pathname.includes("ai-search") ? (
@@ -128,6 +139,8 @@ const ServicesPage = (props: ServicesPageProps) => {
               ),
             )
           }
+        
+          onOpenLimits={onOpenLimits}
         />
       ) : null}
       {pathname.includes("backup") ? (

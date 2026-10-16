@@ -41,6 +41,8 @@ import {
   selfActivationStatusHandler,
   selfByTypeHandler,
   sharedWithMeHandler,
+  folderHandler,
+  TypeFolder,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { armTour, tourTooltip, walkTour } from "./helpers/tour";
@@ -53,12 +55,10 @@ const MY_DOCUMENTS_URL = "/rooms/personal/filter?folder=12764";
 // personal space, which is every guest.
 const SHARED_WITH_ME_URL = "/shared-with-me/filter?folder=4";
 
-// The tour, step by step (FilesTour/tourSteps.ts): create tiles, AI chat, the
-// New menu, search, a row's share button, the sidebar shortcuts.
-const CREATE_STEP = 1;
-const NEW_MENU_STEP = 3;
-const SEARCH_STEP = 4;
-const SHARE_STEP = 5;
+const CREATE_STEP = 2;
+const NEW_MENU_STEP = 4;
+const SEARCH_STEP = 5;
+const SHARE_STEP = 8;
 
 // Who the stand-in shared files came from (SRC_DIR/api/tourDemo/data.ts) —
 // proof that the list the tour is walking is the borrowed one rather than the
@@ -68,8 +68,11 @@ const DEMO_SHARER = "colleague@example.com";
 // The step that hands the stand-in list back, from
 // public/locales/en/FilesTour.json.
 const EMPTY_STEP = "Your list is empty for now";
+const CREATE_FIRST_STEP = "Now make it yours";
 // The empty screen the closing step points at.
 const EMPTY_SCREEN = '[data-testid="empty-view"]';
+
+const QUICK_ACTIONS_TRACK = '[data-testid="quick-actions-track"]';
 
 // The dropdown MainButton opens, portalled to the body.
 const NEW_MENU = ".p-contextmenu";
@@ -97,7 +100,7 @@ const currentStep = (page: Page) =>
 
 /** Walks forward with the keyboard until `step` is the one on screen. */
 const goToStep = async (page: Page, step: number) => {
-  for (let i = CREATE_STEP; i < step; i += 1) {
+  for (let i = 1; i < step; i += 1) {
     await page.keyboard.press("ArrowRight");
   }
 
@@ -114,7 +117,7 @@ const goToStep = async (page: Page, step: number) => {
  * the page has on it — an index would quietly point at a different step as
  * those flags move.
  */
-const goToStepByTitle = async (page: Page, title: string, maxSteps = 10) => {
+const goToStepByTitle = async (page: Page, title: string, maxSteps = 12) => {
   const tooltip = tourTooltip(page);
 
   for (let i = 0; i < maxSteps; i += 1) {
@@ -224,7 +227,7 @@ test.describe("Files tour", () => {
 
     await startTour(page, baseUrl);
 
-    await goToStep(page, 2);
+    await goToStep(page, CREATE_STEP + 1);
     await page.keyboard.press("ArrowLeft");
     await expect(currentStep(page)).toHaveAttribute(
       "aria-valuenow",
@@ -244,6 +247,43 @@ test.describe("Files tour", () => {
     await page.keyboard.press("Escape");
 
     await expect(tourTooltip(page)).toBeHidden();
+  });
+
+  test("walking with the arrows leaves the list alone", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // The section's own hotkeys are bound to the document, and the arrows used
+    // to move the caret through the rows behind the tour.
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+    await goToStep(page, NEW_MENU_STEP);
+
+    await expect(page.locator(".table-hotkey-border")).toHaveCount(0);
+    await expect(page.locator(".table-row-selected")).toHaveCount(0);
+  });
+
+  test("leaves the quick-actions strip where it was when closed", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // Closing used to run the next step's prepare, which scrolls the strip.
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+
+    const scrollLeft = () =>
+      page.locator(QUICK_ACTIONS_TRACK).evaluate((el) => el.scrollLeft);
+
+    expect(await scrollLeft()).toBe(0);
+
+    await tourTooltip(page).getByRole("button", { name: "Close" }).click();
+    await expect(tourTooltip(page)).toBeHidden();
+
+    expect(await scrollLeft()).toBe(0);
   });
 
   // The guest walkthrough is not here but in "Files tour for a guest" below:
@@ -346,5 +386,38 @@ test.describe("Files tour for a guest with nothing shared yet", () => {
     // out behind the user's back once the tour is over.
     await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
     await expect(page.getByRole("main").getByText(DEMO_SHARER)).toHaveCount(0);
+  });
+});
+
+test.describe("Files tour on an emptied personal space", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      folderHandler(TEST_PORT, TypeFolder.IsEmpty),
+    );
+  });
+
+  test("walks a stood-in list instead of an empty section", async ({
+    page,
+    baseUrl,
+  }) => {
+    await startTour(page, baseUrl);
+
+    await expect(page.locator('[data-testid="quick-actions"]')).toBeVisible();
+    await expect(page.locator('[data-testid^="table-row-"]')).toHaveCount(3);
+
+    await walkTour(page, ["desktop", "files-tour", "admin-empty"]);
+  });
+
+  test("hands the section back before the closing step", async ({
+    page,
+    baseUrl,
+  }) => {
+    await startTour(page, baseUrl);
+    await goToStepByTitle(page, CREATE_FIRST_STEP);
+
+    await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
+    await expect(page.locator('[data-testid^="table-row-"]')).toHaveCount(0);
   });
 });

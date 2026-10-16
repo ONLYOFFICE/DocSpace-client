@@ -56,6 +56,7 @@ import type { TRoom } from "../rooms/types";
 
 export type TFile = TFileBase & {
   encrypted?: boolean;
+  startFilling?: boolean;
 };
 
 export type TFileEncryptionInfo = {

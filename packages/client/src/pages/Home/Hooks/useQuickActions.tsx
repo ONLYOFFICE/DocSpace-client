@@ -391,6 +391,7 @@ export const useQuickActions = (
     () => [
       {
         id: "quick-new-agent",
+        dataTestId: "quick-new-agent",
         icon: <CreateAgentIcon />,
         label: t("Common:NewAgent"),
         onClick: () => dispatchCreateAgent(currentFolderId),

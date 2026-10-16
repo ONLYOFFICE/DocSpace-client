@@ -68,8 +68,8 @@ import classNames from "classnames";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import InfoPanelRoomEmptyScreenSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.light.svg?url";
-import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.dark.svg?url";
+import InfoPanelAgentsEmptyScreenSvgUrl from "PUBLIC_DIR/images/emptyview/empty.agents.info.light.svg?url";
+import InfoPanelAgentsEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.agents.info.dark.svg?url";
 
 import styles from "./NoAgentItem.module.scss";
 
@@ -90,8 +90,8 @@ const NoAgentItem = () => {
   const useLightIcon = !mounted || isBase;
 
   const imageSrc = useLightIcon
-    ? InfoPanelRoomEmptyScreenSvgUrl
-    : InfoPanelRoomEmptyScreenDarkSvgUrl;
+    ? InfoPanelAgentsEmptyScreenSvgUrl
+    : InfoPanelAgentsEmptyScreenDarkSvgUrl;
 
   return (
     <div

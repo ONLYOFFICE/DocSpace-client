@@ -39,8 +39,8 @@ import classNames from "classnames";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import InfoPanelRoomEmptyScreenSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.light.svg?url";
-import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.dark.svg?url";
+import InfoPanelAgentsEmptyScreenSvgUrl from "PUBLIC_DIR/images/emptyview/empty.agents.info.light.svg?url";
+import InfoPanelAgentsEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.agents.info.dark.svg?url";
 
 import styles from "./NoItem.module.scss";
 
@@ -49,8 +49,8 @@ const NoAgentItem = () => {
   const { t } = useTranslation(["InfoPanel", "Common"]);
 
   const imageSrc = isBase
-    ? InfoPanelRoomEmptyScreenSvgUrl
-    : InfoPanelRoomEmptyScreenDarkSvgUrl;
+    ? InfoPanelAgentsEmptyScreenSvgUrl
+    : InfoPanelAgentsEmptyScreenDarkSvgUrl;
 
   return (
     <div
@@ -66,7 +66,9 @@ const NoAgentItem = () => {
         />
       </div>
       <Text className="no-item-text" textAlign="center">
-        {t("Common:AIAgentsEmptyScreenTent", { aiAgents: t("Common:AIAgents") })}
+        {t("Common:AIAgentsEmptyScreenTent", {
+          aiAgents: t("Common:AIAgents"),
+        })}
       </Text>
     </div>
   );

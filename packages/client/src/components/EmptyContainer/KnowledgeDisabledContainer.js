@@ -92,12 +92,8 @@ const KnowledgeDisabledContainer = (props) => {
   if (standalone) {
     titleRoomNoAccess = t("Common:KnowledgeUnavailable");
     descriptionRoomNoAccess = isAdmin
-      ? t("Common:KnowledgeUnavailableDescription", {
-          aiAgents: t("Common:AIAgents"),
-        })
-      : t("Common:KnowledgeUnavailableDescriptionUser", {
-          aiAgents: t("Common:AIAgents"),
-        });
+      ? t("Common:KnowledgeUnavailableDescription")
+      : t("Common:KnowledgeUnavailableDescriptionUser");
   } else if (isAdmin) {
     titleRoomNoAccess = t("Common:EmptyAIAgentsNotActiveYetTitle");
     descriptionRoomNoAccess = (

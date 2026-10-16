@@ -82,15 +82,13 @@ const KnowledgeDisabledContainer = observer(() => {
   const description = isAdmin
     ? t("Common:KnowledgeUnavailableDescription", {
         productName: getBrandName("ProductName"),
-        aiAgents: t("Common:AIAgents"),
         defaultValue:
-          "Configure a vectorization provider in {{productName}} to use Knowledge in {{aiAgents}}.",
+          "Configure a vectorization provider in {{productName}} to use Knowledge in AI agents.",
       })
     : t("Common:KnowledgeUnavailableDescriptionUser", {
         productName: getBrandName("ProductName"),
-        aiAgents: t("Common:AIAgents"),
         defaultValue:
-          "Ask your {{productName}} admin to enable vectorization to use Knowledge in {{aiAgents}}.",
+          "Ask your {{productName}} admin to enable vectorization to use Knowledge in AI agents.",
       });
 
   const goToSettings = (event: React.MouseEvent<HTMLElement>) => {

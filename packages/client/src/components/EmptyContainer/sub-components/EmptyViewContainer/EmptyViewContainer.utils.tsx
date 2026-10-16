@@ -268,12 +268,8 @@ export const getRoomDescription = (
 
 const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
   return isUser(access)
-    ? t("Common:EmptyAIAgentsUserTitle", {
-        aiAgents: t("Common:AIAgents"),
-      })
-    : t("Common:EmptyAIAgentsTitle", {
-        aiAgent: t("Common:AIAgent"),
-      });
+    ? t("Common:EmptyAIAgentsUserTitle")
+    : t("Common:EmptyAIAgentsTitle");
 };
 
 const getAIAgentsAIDisabledTitle = (
@@ -291,9 +287,7 @@ const getAIAgentsAIDisabledTitle = (
       .with([false, true], () => t("Common:EmptyAIAgentsNotActiveYetTitle"))
       // standalone user
       .with([true, false], () =>
-        t("Common:EmptyAIAgentsAIDisabledUserTitle", {
-          aiAgents: t("Common:AIAgents"),
-        }),
+        t("Common:EmptyAIAgentsAIDisabledUserTitle"),
       )
       // saas user
       .otherwise(() => t("Common:AIFeaturesNotActive"))
@@ -322,9 +316,7 @@ const getAIAgentsAIDisabledDescription = (
       </>
     ))
     .with([true, false], () =>
-      t("Common:EmptyAIAgentsAIDisabledDescription", {
-        aiAgents: t("Common:AIAgents"),
-      }),
+      t("Common:EmptyAIAgentsAIDisabledDescription"),
     )
     .otherwise(() => t("Common:EmptyAIDisabledContactAdminDesc"));
 };
@@ -334,9 +326,7 @@ const getAIAgentsAIEnabledDescription = (
   access: AccessType,
 ) => {
   return isUser(access)
-    ? t("Common:EmptyAIAgentsAIEnabledUserDescription", {
-        aiAgents: t("Common:AIAgents"),
-      })
+    ? t("Common:EmptyAIAgentsAIEnabledUserDescription")
     : t("Common:EmptyAIAgentsDescription", {
         mcpServer: t("Common:MCPServer"),
       });

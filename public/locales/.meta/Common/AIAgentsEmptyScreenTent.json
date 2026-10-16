@@ -1,26 +1,26 @@
 {
   "key_path": "AIAgentsEmptyScreenTent",
-  "content": "See {{aiAgents}} details here",
-  "content_en_sha1_hash": "a07a55c2387018588dc7f74c24bc55c8c19cdf99",
-  "created_at": "2025-12-19T13:03:44.751Z",
-  "updated_at": "2026-07-07T08:59:21.796Z",
+  "content": "See AI agents details here",
+  "content_en_sha1_hash": "01eb5a8dd58f70c44074a6b035be2e39b68b6f8a",
+  "created_at": "2026-10-16T12:02:50.449Z",
+  "updated_at": "2026-10-16T12:03:59.839Z",
   "comment": {
-    "text": "This is a text string displayed on an empty state screen for AI agents. It informs the user where to find more information about AI agents, with `{{aiAgents}}` being a plural noun referring to AI agents.",
+    "text": "Hint in the empty info panel of the AI agents section, telling the user that AI agent details appear here once an agent is selected.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:13:52.983Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-10-16T12:03:59.839Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoAgentItem.tsx",
       "line_number": 69,
-      "context": "src={imageSrc}\n alt={t(\"Common:NoAgent\", { aiAgent: t(\"Common:AIAgent\") })}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"Common:AIAgentsEmptyScreenTent\", { aiAgents: t(\"Common:AIAgents\") })}\n </Text>\n </div>\n );\n };",
+      "context": "src={imageSrc}\n alt={t(\"Common:NoAgent\")}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"Common:AIAgentsEmptyScreenTent\")}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/no-agent-item/index.tsx",
-      "line_number": 114,
-      "context": "defaultValue: \"No AI agent\",\n })}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"Common:AIAgentsEmptyScreenTent\", {\n aiAgents: t(\"Common:AIAgents\"),\n defaultValue: \"Select an AI agent to start working with it.\",\n })}\n </Text>\n </div>",
+      "line_number": 113,
+      "context": "defaultValue: \"No AI agent\",\n })}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"Common:AIAgentsEmptyScreenTent\", {\n defaultValue: \"Select an AI agent to start working with it.\",\n })}\n </Text>\n </div>\n );",
       "module": "/packages/sdk"
     }
   ],
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

@@ -363,12 +363,7 @@ export const getDocsConnectStatistics = async (
 export const getDocsConnectInfo = async (
   refresh?: boolean,
 ): Promise<TDocsConnectInfo | null> => {
-  let tenant: TDocsConnectTenant | null = null;
-  try {
-    tenant = await getDocsConnectTenant(refresh);
-  } catch {
-    tenant = null;
-  }
+  const tenant = await getDocsConnectTenant(refresh);
 
   if (!tenant) {
     return null;

@@ -126,10 +126,11 @@ type InfoPanelState = {
  * The AI config a portal that has never loaded one is given while the tour
  * runs, so the section can be shown switched on.
  *
- * Only `aiReady` is claimed. Everything else is left at the emptiest value its
- * type allows rather than invented: the fields name the tools an agent's chat
- * is wired to, and the tour never opens a chat — a made-up tool name would be a
- * lie with somewhere to leak to, where an empty one is plainly nothing.
+ * Only `aiReady` and vectorization are claimed (see `standInForAi`). Everything
+ * else is left at the emptiest value its type allows rather than invented: the
+ * fields name the tools an agent's chat is wired to, and the tour never opens a
+ * chat — a made-up tool name would be a lie with somewhere to leak to, where an
+ * empty one is plainly nothing.
  */
 const DEMO_AI_CONFIG: TAIConfig = {
   vectorizationEnabled: false,
@@ -227,6 +228,9 @@ const AiAgentsTour = ({
       // A portal mid-reset is offered nothing to create with either, so the
       // stand-in has to answer this one as well.
       aiReadyNeedReset: false,
+      // The Knowledge tab shows a "switched off" screen instead of its list
+      // without this; the stand-in files are never vectorized for real.
+      vectorizationEnabled: true,
     });
   }, [settingsStore]);
 

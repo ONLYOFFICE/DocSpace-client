@@ -78,6 +78,7 @@ const EMPTY_SCREEN = '[data-testid="empty-view"]';
 // what the portal has switched on, so an index would quietly point at a
 // different step as those flags move.
 const CREATE_STEP = "Give it a job";
+const KNOWLEDGE_STEP = "Give it the right context";
 const memberRoot = {
   canCreate: false,
   rootAccess: ShareAccessRights.DenyAccess,
@@ -395,6 +396,13 @@ test.describe("AI Agents tour with AI switched off", () => {
     // The banner is behind `aiReady`, so this step existing at all is the proof
     // that the stand-in reaches the AI config and not only the list.
     await goToStep(page, CREATE_STEP);
+
+    // The Knowledge tab is behind vectorization the same way: without the
+    // stand-in claiming it, the tab puts up its "switched off" screen and the
+    // step has no sample file to point at.
+    await goToStep(page, KNOWLEDGE_STEP);
+    await expect(page.locator("#file_-1120")).toBeVisible();
+    await expect(page.locator(EMPTY_SCREEN)).toBeHidden();
   });
 
   test("closes on switching AI on rather than on creating an agent", async ({

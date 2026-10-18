@@ -39,8 +39,8 @@ import classNames from "classnames";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import InfoPanelAgentsEmptyScreenSvgUrl from "PUBLIC_DIR/images/emptyview/empty.agents.info.light.svg?url";
-import InfoPanelAgentsEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.agents.info.dark.svg?url";
+import InfoPanelAgentsEmptyScreenSvg from "@onlyoffice/apps-ui-kit/assets/emptyview/empty.agents.info.light.svg";
+import InfoPanelAgentsEmptyScreenDarkSvg from "@onlyoffice/apps-ui-kit/assets/emptyview/empty.agents.info.dark.svg";
 
 import styles from "./NoItem.module.scss";
 
@@ -48,9 +48,9 @@ const NoAgentItem = () => {
   const { isBase } = useTheme();
   const { t } = useTranslation(["InfoPanel", "Common"]);
 
-  const imageSrc = isBase
-    ? InfoPanelAgentsEmptyScreenSvgUrl
-    : InfoPanelAgentsEmptyScreenDarkSvgUrl;
+  const ImageIcon = isBase
+    ? InfoPanelAgentsEmptyScreenSvg
+    : InfoPanelAgentsEmptyScreenDarkSvg;
 
   return (
     <div
@@ -60,7 +60,7 @@ const NoAgentItem = () => {
       )}
     >
       <div className="no-thumbnail-img-wrapper">
-        <img src={imageSrc} alt={t("Common:NoAgent")} />
+        <ImageIcon aria-label={t("Common:NoAgent")} role="img" />
       </div>
       <Text className="no-item-text" textAlign="center">
         {t("Common:AIAgentsEmptyScreenTent")}

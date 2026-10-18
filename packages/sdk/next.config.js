@@ -105,9 +105,6 @@ const nextConfig = {
     "@aws-sdk/client-cloudwatch-logs",
     "@onlyoffice/docspace-api-sdk",
   ],
-  compiler: {
-    styledComponents: true,
-  },
   generateBuildId: async () => {
     // This could be anything, using the latest git hash
     return `${pkg.name} - ${pkg.version} `;

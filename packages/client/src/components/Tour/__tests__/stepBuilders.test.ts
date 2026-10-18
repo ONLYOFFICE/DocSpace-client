@@ -51,6 +51,7 @@ import {
   NAVIGATION_TARGET_TIMEOUT,
   STEP_TARGET_TIMEOUT,
 } from "../stepBuilders";
+import { SECTION_FADE_MS } from "../sectionFade";
 
 const LOG_LABEL = "test tour";
 
@@ -82,8 +83,17 @@ const withRect = (
     }) as DOMRect;
 };
 
-/** The payload joyride hands its hooks; none of the builders here read it. */
+/** The payload joyride hands its hooks. */
 const HOOK_DATA = {} as Parameters<NonNullable<Step["before"]>>[0];
+
+const afterData = (over: Partial<{ action: string; index: number }> = {}) =>
+  ({
+    status: "running",
+    action: "next",
+    index: 0,
+    size: 3,
+    ...over,
+  }) as Parameters<NonNullable<Step["after"]>>[0];
 
 /** Resolves a step's spotlight target the way react-joyride does. */
 const spotlight = (step: Step) =>
@@ -334,6 +344,66 @@ describe("menuStep", () => {
     expect(document.querySelector(".p-contextmenu")).toBeNull();
   });
 
+  it("presses outside to close a menu that only re-shows on its trigger", async () => {
+    // A row's ContextMenu re-shows on its button; only an outside press hides it.
+    mount('<button id="trigger"></button>');
+    const trigger = document.querySelector<HTMLElement>("#trigger")!;
+    const showMenu = () => {
+      if (document.querySelector(".p-contextmenu")) return;
+      const menu = document.createElement("div");
+      menu.className = "p-contextmenu";
+      document.body.appendChild(menu);
+    };
+    trigger.addEventListener("click", showMenu);
+    document.addEventListener("mousedown", (event) => {
+      if (event.target !== trigger) {
+        document.querySelector(".p-contextmenu")?.remove();
+      }
+    });
+
+    const menuOpener = step();
+    await menuOpener.before?.(HOOK_DATA);
+    expect(document.querySelector(".p-contextmenu")).not.toBeNull();
+
+    menuOpener.after?.(HOOK_DATA);
+
+    expect(document.querySelector(".p-contextmenu")).toBeNull();
+  });
+
+  it("clicks the trigger where it is, so a pointer-placed menu opens beside it", async () => {
+    // A row menu is laid out at the click's coordinates.
+    mountToggle();
+    const trigger = document.querySelector<HTMLElement>("#trigger")!;
+    trigger.getBoundingClientRect = () => new DOMRect(100, 200, 20, 10);
+    const clicks: MouseEvent[] = [];
+    trigger.addEventListener("click", (event) => clicks.push(event));
+
+    await step().before?.(HOOK_DATA);
+
+    expect(clicks).toHaveLength(1);
+    expect(clicks[0].clientX).toBe(110);
+    expect(clicks[0].clientY).toBe(205);
+  });
+
+  it("can narrow the spotlight to one entry of the menu", () => {
+    const narrowed = menuStep(
+      "#trigger",
+      ".p-contextmenu",
+      "title",
+      "body",
+      undefined,
+      LOG_LABEL,
+      [],
+      4,
+      undefined,
+      undefined,
+      "#option_start-filling",
+    );
+
+    expect(narrowed.spotlightTarget).toBe("#option_start-filling");
+    expect(narrowed.target).toBe(".p-contextmenu");
+  });
+
   it("leaves an already-open menu alone", async () => {
     // Walking back to the step runs its hooks again; a blind second click on a
     // toggle would close the menu the step is about to spotlight.
@@ -534,6 +604,145 @@ describe("file-list row anchors", () => {
 
 describe("revealStep", () => {
   const TARGET = "#late-arrival";
+
+  it("restores only when another step follows", () => {
+    // Done on the last step used to run `restore`, which put the stand-in list
+    // back for a moment before the host handed the section over.
+    const restore = vi.fn();
+    const step = revealStep("#target", "title", "body", undefined, LOG_LABEL, {
+      reveal: () => {},
+      restore,
+    });
+
+    // Done on the last step: nothing follows, so the reveal stands.
+    step.after?.(afterData({ index: 2 }));
+    expect(restore).not.toHaveBeenCalled();
+
+    step.after?.(afterData({ action: "prev", index: 2 }));
+    step.after?.(afterData({ index: 1 }));
+    expect(restore).toHaveBeenCalledTimes(2);
+  });
+
+  it("waits for the reveal to settle before looking for the target", async () => {
+    // A tab is on the page all along; the wait keeps stale rows out.
+    mount('<div id="tab"></div>');
+    const order: string[] = [];
+    const step = revealStep("#tab", "title", "body", undefined, LOG_LABEL, {
+      reveal: () => order.push("reveal"),
+      restore: () => {},
+      settled: async () => {
+        order.push("settled");
+      },
+    });
+
+    await step.before?.(HOOK_DATA);
+
+    expect(order).toEqual(["reveal", "settled"]);
+  });
+
+  it("keeps a union spotlight inside the box it was given", () => {
+    // The rooms tour lights up the member list with the tab above it. The list
+    // is as tall as its members, so in a room with many it runs on below the
+    // panel's bottom edge; the spotlight stops where the panel does.
+    mount(
+      '<div id="panel"><i id="tab"></i><div id="list"></div></div>',
+    );
+    withRect("#panel", { top: 0, left: 500, width: 300, height: 600 });
+    withRect("#tab", { top: 40, left: 520, width: 80, height: 30 });
+    withRect("#list", { top: 90, left: 500, width: 300, height: 2000 });
+
+    const step = revealStep(
+      "#list",
+      "title",
+      "body",
+      undefined,
+      LOG_LABEL,
+      { reveal: () => {}, restore: () => {} },
+      ["#tab"],
+      undefined,
+      4,
+      "#panel",
+    );
+    const node = spotlight(step)!;
+
+    expect(node.style.top).toBe("40px");
+    expect(node.style.left).toBe("500px");
+    expect(node.style.width).toBe("300px");
+    expect(node.style.height).toBe("560px");
+  });
+
+  it("fades the section through a swap and brings it back", async () => {
+    vi.useFakeTimers();
+
+    try {
+      mount('<div class="section-wrapper-content"></div>');
+      const section = document.querySelector(".section-wrapper-content");
+      const reveal = vi.fn(() => {
+        mount('<div class="section-wrapper-content"><i id="swapped"></i></div>');
+      });
+
+      const step = revealStep(
+        "#swapped",
+        "title",
+        "body",
+        undefined,
+        LOG_LABEL,
+        { reveal, restore: () => {}, swapsList: true },
+      );
+
+      const pending = step.before?.(HOOK_DATA);
+
+      // Hidden before the swap runs, so the list does not blink out.
+      expect(section?.classList.contains("tour-section-fade-out")).toBe(true);
+      expect(reveal).not.toHaveBeenCalled();
+
+      await vi.advanceTimersByTimeAsync(SECTION_FADE_MS);
+      await pending;
+
+      expect(reveal).toHaveBeenCalled();
+      expect(
+        document
+          .querySelector(".section-wrapper-content")
+          ?.classList.contains("tour-section-fade-out"),
+      ).toBe(false);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("brings the section back even when the step is abandoned", async () => {
+    vi.useFakeTimers();
+
+    try {
+      mount('<div class="section-wrapper-content"></div>');
+      const controller = new AbortController();
+      const step = revealStep(
+        "#never-arrives",
+        "title",
+        "body",
+        { getSignal: () => controller.signal },
+        LOG_LABEL,
+        {
+          reveal: () => {},
+          restore: () => {},
+          swapsList: true,
+        },
+      );
+
+      const pending = step.before?.(HOOK_DATA);
+      await vi.advanceTimersByTimeAsync(SECTION_FADE_MS);
+      controller.abort();
+      await pending;
+
+      expect(
+        document
+          .querySelector(".section-wrapper-content")
+          ?.classList.contains("tour-section-fade-out"),
+      ).toBe(false);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 
   /**
    * How long the step actually waited before giving up. The wait is swallowed

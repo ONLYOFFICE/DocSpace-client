@@ -62,11 +62,11 @@ const NoAgentItem = () => {
       <div className="no-thumbnail-img-wrapper">
         <img
           src={imageSrc}
-          alt={t("Common:NoAgent", { aiAgent: t("Common:AIAgent") })}
+          alt={t("Common:NoAgent")}
         />
       </div>
       <Text className="no-item-text" textAlign="center">
-        {t("Common:AIAgentsEmptyScreenTent", { aiAgents: t("Common:AIAgents") })}
+        {t("Common:AIAgentsEmptyScreenTent")}
       </Text>
     </div>
   );

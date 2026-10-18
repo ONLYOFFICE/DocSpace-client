@@ -215,6 +215,7 @@ const Preview = ({
                     height="100%"
                     onLoadComponentError={() => setEditorError("load")}
                     events_onDocumentReady={() => setDocumentReady(true)}
+                    events_onError={() => setEditorError("sign")}
                   />
                 ) : null}
               </>

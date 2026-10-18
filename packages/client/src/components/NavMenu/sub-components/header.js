@@ -33,12 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Link as LinkWithoutRedirect } from "react-router";
-import { isDesktop, getLogoUrl } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import HeaderCatalogBurger from "./header-catalog-burger";
 import { getDefaultStartPageUrl } from "SRC_DIR/helpers/defaultStartPage";
@@ -46,11 +44,7 @@ import { getDefaultStartPageUrl } from "SRC_DIR/helpers/defaultStartPage";
 import styles from "../nav.module.scss";
 
 const HeaderComponent = ({
-  currentProductName,
   currentProductId,
-  isLoaded,
-  isAuthenticated,
-  isPreparationPortal,
   theme,
   toggleArticleOpen,
   customHeader,
@@ -62,18 +56,6 @@ const HeaderComponent = ({
     aiServicesEnabled,
     isGuest,
   });
-  const [isDesktopView, setIsDesktopView] = useState(isDesktop());
-
-  const onResize = () => {
-    const desktop = isDesktop();
-    setIsDesktopView((value) => (value !== desktop ? desktop : value));
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [onResize]);
-
   const logo = getLogoUrl(
     WhiteLabelLogoType.LightSmall,
     !theme.isBase,
@@ -85,17 +67,11 @@ const HeaderComponent = ({
   return (
     <>
       <header
-        module={currentProductName}
-        isLoaded={isLoaded}
-        isPreparationPortal={isPreparationPortal}
-        isAuthenticated={isAuthenticated}
         className={classNames(
           styles.mainHeader,
           "navMenuHeader",
           "hidingHeader",
         )}
-        needNavMenu={false}
-        isDesktopView={isDesktopView}
       >
         {currentProductId !== "home" ? (
           <HeaderCatalogBurger onClick={toggleArticleOpen} />
@@ -112,21 +88,8 @@ const HeaderComponent = ({
 
 HeaderComponent.displayName = "Header";
 
-HeaderComponent.propTypes = {
-  isLoaded: PropTypes.bool,
-  isAuthenticated: PropTypes.bool,
-};
-
-export default inject(({ settingsStore, authStore, userStore }) => {
+export default inject(({ settingsStore, userStore }) => {
   const {
-    isLoaded,
-    isAuthenticated,
-    isAdmin,
-
-    version,
-  } = authStore;
-  const {
-    logoUrl,
     currentProductId,
     theme,
     toggleArticleOpen,
@@ -136,13 +99,7 @@ export default inject(({ settingsStore, authStore, userStore }) => {
 
   return {
     theme,
-    isAdmin,
-    logoUrl,
-
     // totalNotifications,
-    isLoaded,
-    version,
-    isAuthenticated,
     currentProductId,
     toggleArticleOpen,
     defaultFolderType,

@@ -548,8 +548,8 @@ class CurrentQuotasStore {
     try {
       await setDefaultAIAgentQuota(isEnable, +quota);
       const toastrText = isEnable
-        ? t("AIAgentQuotaEnabled", { aiAgent: t("Common:AIAgent") })
-        : t("AIAgentQuotaDisabled", { aiAgent: t("Common:AIAgent") });
+        ? t("AIAgentQuotaEnabled")
+        : t("AIAgentQuotaDisabled");
 
       toastr.success(toastrText);
     } catch (e: unknown) {

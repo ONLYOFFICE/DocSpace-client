@@ -34,7 +34,12 @@
  */
 
 import React, { useEffect, useMemo, useCallback, useState } from "react";
-import { Outlet, useLocation, useNavigate, useSearchParams } from "react-router";
+import {
+  Outlet,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
@@ -59,7 +64,11 @@ import {
 import { getAiAccessSettings } from "@docspace/shared/api/settings";
 import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
-import { Toast, toastr, ToastType } from "@onlyoffice/apps-ui-kit/components/toast";
+import {
+  Toast,
+  toastr,
+  ToastType,
+} from "@onlyoffice/apps-ui-kit/components/toast";
 import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { getCookie, deleteCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
@@ -403,7 +412,10 @@ const Shell = ({ page = "home", ...rest }) => {
       fetchTreeFolders?.();
     };
 
-    SocketHelper?.on(SocketEvents.ChangeAiAccessSettings, handleAiAccessChanged);
+    SocketHelper?.on(
+      SocketEvents.ChangeAiAccessSettings,
+      handleAiAccessChanged,
+    );
 
     return () => {
       SocketHelper?.off(
@@ -1064,6 +1076,7 @@ const ShellWrapper = inject(
       isFrame,
       frameConfig,
       isPortalDeactivate,
+      isPortalBlocked,
       isPortalRestoring,
       logoText,
       setLogoText,
@@ -1100,6 +1113,7 @@ const ShellWrapper = inject(
     const pagesWithoutNavMenu =
       clientError ||
       isPortalDeactivate ||
+      isPortalBlocked ||
       isPortalRestoring ||
       (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
 
@@ -1107,7 +1121,11 @@ const ShellWrapper = inject(
       loadBaseInfo: async () => {
         await init(false, i18n);
 
-        if (settingsStore.walletLowBalance) {
+        if (
+          settingsStore.walletLowBalance &&
+          !settingsStore.isPortalDeactivate &&
+          !settingsStore.isPortalBlocked
+        ) {
           paymentStore.fetchWalletBalance().catch((e) => console.error(e));
         }
 
@@ -1257,3 +1275,4 @@ const Root = () => (
 );
 
 export default Root;
+

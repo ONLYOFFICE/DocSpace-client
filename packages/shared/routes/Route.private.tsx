@@ -58,6 +58,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     isNotPaidPeriod,
     isAuthenticated,
     isPortalDeactivate,
+    isPortalBlocked,
 
     withManager,
     withCollaborator,
@@ -81,6 +82,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
   const location = useLocation();
 
+  // Nobody can work in a deactivated or a blocked portal; both only show the
+  // unavailable page, which tells them apart by the status.
+  const isPortalUnavailable = isPortalDeactivate || isPortalBlocked;
+
   const renderComponent = () => {
     // A deleted portal fails every request, this route among them, so the
     // branches below would send the visitor to the login page — which bounces
@@ -90,7 +95,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (isPortalNotFoundRedirectClaimed()) return null;
 
     if (!user && isAuthenticated) {
-      if (isPortalDeactivate) {
+      if (isPortalUnavailable) {
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),
         );
@@ -187,7 +192,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return <AppLoader />;
       }
 
-      if (isPortalDeactivate) {
+      if (isPortalUnavailable) {
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),
         );
@@ -318,7 +323,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     // if (!isLoaded) {
     //   return <AppLoader />;
 
-    if (isPortalDeactivate && location.pathname !== "/unavailable") {
+    if (isPortalUnavailable && location.pathname !== "/unavailable") {
       return (
         <Navigate
           to={combineUrl(window.ClientConfig?.proxy?.url, "/unavailable")}

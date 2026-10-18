@@ -161,9 +161,9 @@ const trackRestrictionUpdates = (page: Page) => {
   return bodies;
 };
 
-const ACTIVATE_TITLE = "Activate AI features to get started";
+const ACTIVATE_TITLE = "Activate AI agents & tools to get started";
 const ACTIVATE_WEB_SEARCH_TITLE = "Activate AI Search to get started";
-const AI_ENABLED_TITLE = "AI features enabled";
+const AI_ENABLED_TITLE = "AI agents & tools enabled";
 const SEARCH_ENABLED_TITLE = "AI Search enabled";
 
 const activateButton = (page: Page) =>
@@ -329,7 +329,7 @@ test.describe("AI settings on SaaS", () => {
     await expect(page.getByText(AI_ENABLED_TITLE)).toBeVisible(FIRST_RENDER);
     await expect(
       page.getByText(
-        "service management are available in Billing > Services > AI features.",
+        "service management are available in Billing > Services > AI agents & tools.",
       ),
     ).toBeVisible();
     await expect(

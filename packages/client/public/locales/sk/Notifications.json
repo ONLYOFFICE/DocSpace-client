@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Menovky zvýrazňujú aktivitu súborov, ako sú nahrávania, úpravy a zdieľania, v aplikáciách {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Menovky zvýrazňujú aktivitu súborov, ako sú nahrávania, úpravy a zdieľania, v aplikáciách {{files}}, {{rooms}}, {{forms}} a AI agenti.",
   "AdminSetupRequired": "Vyžaduje sa nastavenie administrátora",
   "Badges": "Menovky",
   "DailyFeed": "Denný informačný kanál {{organizationName}} {{productName}}",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "Tento používateľský účet je načítaný z LDAP. Používateľova e-mailová adresa nebola zadaná a aktuálna bola generovaná automaticky a nemožno ju použiť na odosielanie upozornení.",
   "NotConfigured": "Nakonfigurované",
   "Notifications": "Upozornenia",
-  "RoomsActivityDescription": "Získajte okamžité e-mailové upozornenia na nové zdieľané súbory a priečinky a na aktivitu v {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}.",
-  "RoomUpdateNotify": "Aktivita v {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}",
+  "RoomsActivityDescription": "Získajte okamžité e-mailové upozornenia na nové zdieľané súbory a priečinky a na aktivitu v {{files}}, {{rooms}}, {{forms}} a AI agentoch.",
+  "RoomUpdateNotify": "Aktivita v {{files}}, {{rooms}}, {{forms}} a AI agentoch",
   "SettingUpNotifications": "Nastavenia upozornení",
   "SuccessConnected": "{{serviceName}} bol úspešne pripojený ako kanál pre upozornenia. Teraz tam budete dostávať aktualizácie.",
   "SuccessDisconnected": "{{serviceName}} bol úspešne odpojený ako kanál pre upozornenia. Upozornenia tam už nebudú zasielané.",

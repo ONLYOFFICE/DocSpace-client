@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "aus «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Raum «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Sektion «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Space «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Antworten mit KI analysieren",
   "FormRoomAIModalConnect": "Datenbank verbinden",
   "FormRoomAIModalDescription": "Verbinden Sie eine Datenbank, um alle gesammelten Antworten mit \"KI fragen\" zu analysieren. Sie können auch ohne sie fortfahren und nur Fragen zu diesem Formular stellen.",

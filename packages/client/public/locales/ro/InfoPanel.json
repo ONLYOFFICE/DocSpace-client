@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "din «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Sala «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Secțiune «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Spațiul «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Anal răspunsurilor cuul IA",
   "FormRoomAIModalConnect": "Conectarează baza de date",
   "FormRoomAIModalDescription": "Conectați o bază de date pentru a analiza toate răspunsurile colectate cu \"Întreabă IA\". Puteți continua fără aceasta și să puneți întrebări doar despre acest formular.",

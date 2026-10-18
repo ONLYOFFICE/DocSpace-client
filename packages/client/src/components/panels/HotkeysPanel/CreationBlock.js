@@ -87,7 +87,7 @@ const CreationBlock = ({ t, textStyles, keyTextStyles, AltKey }) => {
       <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>
-            {t("Common:CreateAIAgent", { aiAgent: t("Common:AIAgent") })}
+            {t("Common:CreateAIAgent")}
           </Text>
           <Text {...keyTextStyles}>{`Shift + a`}</Text>
         </>

@@ -1,20 +1,20 @@
 {
   "key_path": "AgentSwitchOn",
-  "content": "The agents you have just walked through were a preview — this workspace has no AI switched on yet. That button is the whole of what stands between you and the first real one.",
-  "content_en_sha1_hash": "f47d20f102b874dcbf1a0f62f5c8b71a5feb584b",
-  "created_at": "2026-08-12T11:00:50.581Z",
-  "updated_at": "2026-08-12T11:25:50.360Z",
+  "content": "The agents in this tour were examples. Enable AI agents & tools, then check the available models in AI settings to get your first agent ready.",
+  "content_en_sha1_hash": "0b3f09c507e4f5588acfb772c1cb57ba07b92c33",
+  "created_at": "2026-10-16T12:30:29.868Z",
+  "updated_at": "2026-10-16T12:30:51.415Z",
   "comment": {
-    "text": "A descriptive paragraph in an onboarding tour step that appears when no AI agents are active, explaining that previous agents were only previews and prompting the user to enable the first real one.",
+    "text": "Body of the closing AI Agents onboarding tour step for admins when AI agents & tools are not yet set up: the sample agents are removed and the step highlights the empty screen's button that leads to AI settings. \"AI agents & tools\" is the name of the paid AI service.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:25:50.360Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-16T12:30:51.415Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 293,
-      "context": "emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStartTitle\")\n : t(\"AiAgentsTour:AgentSwitchOnTitle\"),\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStart\")\n : t(\"AiAgentsTour:AgentSwitchOn\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )\n : !isAdmin &&",
+      "line_number": 326,
+      "context": "emptyScreenAction === \"create\"\n ? t(\"RoomsTour:RoomsCreateFirstTitle\")\n : t(\"AiAgentsTour:AgentSwitchOnTitle\"),\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStart\")\n : t(\"AiAgentsTour:AgentSwitchOn\"),\n callbacks,\n AI_AGENTS_TOUR_LABEL,\n demoHooks,\n )\n : !isAdmin &&",
       "module": "/packages/client"
     }
   ],

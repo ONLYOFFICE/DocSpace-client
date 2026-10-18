@@ -480,9 +480,11 @@ test.describe("Billing wallet", () => {
 
     await page.getByTestId("upcoming-payments_tab").click();
 
-    await expect(page.getByText("No upcoming payments")).toBeVisible();
     await expect(
-      page.getByText("You don’t have any active subscriptions"),
+      page.getByRole("heading", { name: "No upcoming payments" }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("No active subscriptions or scheduled payments yet"),
     ).toBeVisible();
   });
 

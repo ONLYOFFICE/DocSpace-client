@@ -54,21 +54,13 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import type { TCreatedBy } from "@docspace/shared/types";
 
 /**
- * The stand-in rooms the tour shows a portal that has none of its own.
- *
- * Their ids are negative so nothing can mistake one for a room the server
- * knows about: every real id is a positive integer, so a demo room that leaked
- * past the tour would fail loudly on the first request rather than quietly
- * addressing someone else's room.
+ * Demo ids count down from here. Negative, so a row that leaked past the tour
+ * fails loudly instead of addressing somebody else's room: every real id is a
+ * positive integer.
  */
 const DEMO_ID_BASE = -1000;
 
-/**
- * How many stand-in rooms the list may hold, which is what separates the two
- * ranges below: rooms count down from `DEMO_ID_BASE` and the things inside a
- * room count down from `DEMO_CONTENTS_ID_BASE`, so the two only meet if a tour
- * asks for more rooms than this. The sections ask for three.
- */
+/** Keeps the room ids clear of the ids of what is inside a room. */
 const DEMO_ROOM_ID_LIMIT = 100;
 
 /** Where the ids of a stand-in room's contents start, below every room id. */
@@ -104,80 +96,67 @@ export type TourDemoFile = {
  * a room as far as everything downstream is concerned (`RoomsType.AIRoom` under
  * `FolderType.AIAgents`).
  *
- * `shared` is the odd one out: Shared with me is a plain folder, so its list
- * comes back on `files/{id}` under the portal's own id and the rows arrive in
- * `files` rather than in `folders`.
+ * `shared` and `personal` are plain folders: the list comes back on
+ * `files/{id}` and the rows arrive in `files`. They differ only in who owns
+ * them.
  */
-export type TourDemoList = "rooms" | "agents" | "shared";
+export type TourDemoList = "rooms" | "agents" | "shared" | "personal";
 
 export type TourDemoConfig = {
   /** The endpoint whose answer the stand-in rows are put into. */
   list: TourDemoList;
-  /**
-   * The stand-in rooms, in list order. Built by the tour rather than here:
-   * what a section's list should be standing in for is the tour's business,
-   * and the titles are its translations to hold.
-   *
-   * Left out by a section that lists files rather than rooms.
-   */
+  /** In list order, and named by the tour: the titles are its translations. */
   rooms?: TourDemoRoom[];
-  /**
-   * The stand-in files, in list order — the `shared` list's counterpart to
-   * `rooms`.
-   */
   files?: TourDemoFile[];
-  /**
-   * The folder the stand-in files are put into. The room lists come back on an
-   * endpoint that names itself, but a file list is answered by `files/{id}`
-   * under an id only the portal knows, so the route the demo claims for the
-   * `shared` list has to be built from it.
-   */
+  /** Where the stand-in files go: a file list is answered by `files/{id}`. */
   folderId?: number;
   /**
-   * Whether the section's own list is replaced by them.
-   *
-   * Off, the stand-in rooms are still built — a tour that walks into one needs
-   * something to walk into — but the list the user sees stays their own. That
-   * is the line the demo does not cross: a portal with rooms of its own never
-   * sees a room it does not have *in its list*.
+   * Whether the user's own list is replaced by them. Off, the stand-in rooms
+   * are still built for a tour that walks into one, but the list stays theirs:
+   * a portal with rooms of its own never sees a room it does not have.
    */
   standInForList: boolean;
-  /** The signed-in user, who owns every demo room — real data, not invented. */
-  owner: TCreatedBy;
   /**
-   * The stand-in members every demo room shares, after the owner. Which roles
-   * are worth showing differs by section — a room has editors and viewers, a
-   * form space has the people filling the form in — so the tour picks them.
-   *
-   * Left out by a list of files, which has no members to speak of.
+   * The signed-in user, who owns every demo row — real data, not invented. The
+   * store hands it over as `TUser`, which the rows carry as their `TCreatedBy`.
    */
+  owner: TCreatedBy | TUser;
+  /** The roles worth showing in a room's member list, picked by the tour. */
   memberAccess?: ShareAccessRights[];
-  /**
-   * What the inside of a stand-in room is made of, when the tour walks into
-   * one. Only the forms tour does, and only the two system folders need
-   * naming — the blank form is named after the space it belongs to.
-   */
+  /** Named only by the forms tour, the one that walks into a stand-in room. */
   contents?: {
     inProgressTitle: string;
     completeTitle: string;
   };
+  agentContents?: {
+    knowledgeTitle: string;
+    outputsTitle: string;
+    files: TourDemoFile[];
+  };
 };
 
 /**
- * The ids of the stand-in form space and of the three things inside it. Fixed
- * rather than derived: the tour only ever walks into the first space, and steps
- * anchor on these ids through the row's `folder_{id}` / `file_{id}` element id,
- * which is the one handle that holds in all three views.
- *
- * `space` is the first room `buildDemoRooms` lays down (`DEMO_ID_BASE - 0`) and
- * the one `tourDemo.space` hands back — the step that walks in points at that
- * row, so the space the user is looking at is the space they end up inside.
+ * The stand-in form space and the three things inside it. Fixed rather than
+ * derived: steps anchor on these ids through the row's `folder_{id}` element
+ * id, the one handle that holds in all three views. `space` is the first room
+ * `buildDemoRooms` lays down, which is the one the tour walks into.
  */
 export const DEMO_SPACE_ITEM_IDS = {
   space: DEMO_ID_BASE,
   inProgress: DEMO_CONTENTS_ID_BASE,
   complete: DEMO_CONTENTS_ID_BASE - 1,
   form: DEMO_CONTENTS_ID_BASE - 2,
+} as const;
+
+export const DEMO_AGENT_ITEM_IDS = {
+  agent: DEMO_ID_BASE,
+  knowledge: DEMO_CONTENTS_ID_BASE - 10,
+  outputs: DEMO_CONTENTS_ID_BASE - 11,
+} as const;
+
+export const DEMO_AGENT_FILE_IDS = {
+  knowledge: DEMO_CONTENTS_ID_BASE - 20,
+  outputs: DEMO_CONTENTS_ID_BASE - 30,
 } as const;
 
 /**
@@ -232,14 +211,9 @@ const fullSecurity: TRoomSecurity = {
  * square, and the colour is part of what makes a row read as a room at all —
  * without one the list is initials floating on the page.
  *
- * The product picks one of these at random when a room is created
- * (SetRoomParams / SetAgentParams). The tour must not: a colour drawn per run
- * would make every screenshot comparison a coin toss. So the palette is walked
- * by list position instead — room 0 is always the first colour, room 1 always
- * the second — which is as distinct as three real rooms would be and is the
- * same on every run.
- *
- * Returned without the leading `#`, which is the form RoomIcon expects.
+ * Walked by list position rather than drawn at random the way the product does
+ * it: a colour per run would make every screenshot comparison a coin toss.
+ * Returned without the leading `#`, which is what RoomIcon expects.
  */
 const demoLogoColor = (index: number) =>
   globalColors.logoColors[index % globalColors.logoColors.length].replace(
@@ -248,11 +222,9 @@ const demoLogoColor = (index: number) =>
   );
 
 /**
- * The stand-in rooms that go into the real answer in place of its empty list.
- *
- * `current` is the folder the server itself named, so the rooms sit under the
- * ids the section actually lives at and nothing downstream has to be told this
- * list is not genuine.
+ * The stand-in rooms put into the real answer in place of its empty list.
+ * `current` is the folder the server named, so nothing downstream has to be
+ * told the list is not genuine.
  */
 export function buildDemoRooms(
   current: TFolder,
@@ -303,12 +275,8 @@ export function buildDemoRooms(
 }
 
 /**
- * What each stand-in member is called, by the role they hold.
- *
- * Addresses rather than names on purpose — an invented person's name would be
- * a user-facing string with nowhere to be translated, and `example.com` is the
- * reserved documentation domain, so nothing here can be mistaken for a real
- * contact.
+ * Addresses rather than names: an invented name would be a user-facing string
+ * with nowhere to be translated, and `example.com` is the reserved domain.
  */
 const MEMBER_ADDRESS: Partial<Record<ShareAccessRights, string>> = {
   [ShareAccessRights.Editing]: "editor@example.com",
@@ -316,10 +284,7 @@ const MEMBER_ADDRESS: Partial<Record<ShareAccessRights, string>> = {
   [ShareAccessRights.FormFilling]: "filler@example.com",
 };
 
-/**
- * The member list of a demo room: the signed-in user as its owner, plus the
- * stand-ins the tour asked for, which give the roles something to sit against.
- */
+/** The signed-in user as owner, plus the stand-ins the tour asked for. */
 export function buildDemoMembers(config: TourDemoConfig): RoomMember[] {
   const asUser = (id: string, email: string, isVisitor: boolean) =>
     ({
@@ -413,18 +378,49 @@ const sharedFileSecurity = (access: ShareAccessRights) => ({
   Vectorization: false,
 });
 
+/** What every stand-in file carries, whoever it belongs to. */
+function demoFileFields(
+  current: TFolder,
+  file: TourDemoFile,
+  index: number,
+  rootFolderType: FolderType,
+  now: string,
+) {
+  return {
+    id: DEMO_ID_BASE - index,
+    folderId: current.id,
+    rootFolderId: current.id,
+    // The section names its own root, so a stand-in file cannot end up filed
+    // as somebody's personal document.
+    rootFolderType: current.rootFolderType ?? rootFolderType,
+    title: `${file.title}${file.fileExst}`,
+    fileExst: file.fileExst,
+    fileType: file.fileType,
+    version: 1,
+    versionGroup: 1,
+    contentLength: "0 KB",
+    pureContentLength: 0,
+    fileStatus: 0,
+    mute: false,
+    comment: "",
+    viewUrl: "",
+    webUrl: "",
+    shortWebUrl: "",
+    thumbnailUrl: "",
+    thumbnailStatus: 1,
+    fileEntryType: 2,
+    shared: false,
+    sharedForUser: false,
+    parentShared: false,
+    created: now,
+    updated: now,
+  };
+}
+
 /**
- * The stand-in files of a Shared with me that has nothing in it yet.
- *
- * This is the section a guest lives in — they have no personal space and
- * nothing of their own anywhere — so an empty one leaves the tour with the
- * sidebar and nothing else: no row to point at, and no filter bar either
- * (`isEmptyPage` gates it). The three files stand in for what the section is
- * for, and carry the two things it exists to show: who a file came from, and
- * what the guest may do with it.
- *
- * `current` is the folder the server itself named, so the files sit under the
- * ids the section actually lives at.
+ * The stand-in files of a Shared with me that has nothing in it yet, carrying
+ * the two things the section exists to show: where a file came from, and what
+ * may be done with it.
  */
 export function buildDemoSharedFiles(
   current: TFolder,
@@ -442,64 +438,126 @@ export function buildDemoSharedFiles(
     isAnonim: false,
   } as unknown as TCreatedBy;
 
-  return (config.files ?? []).map(
-    ({ title, fileExst, fileType, access }, index) => {
-      const canEdit = access === ShareAccessRights.Editing;
+  return (config.files ?? []).map((file, index) => {
+    const { access } = file;
+    const canEdit = access === ShareAccessRights.Editing;
 
-      return {
-        id: DEMO_ID_BASE - index,
-        folderId: current.id,
-        rootFolderId: current.id,
-        // The section names its own root, so a stand-in file cannot end up
-        // filed as somebody's personal document.
-        rootFolderType: current.rootFolderType ?? FolderType.SHARE,
-        title: `${title}${fileExst}`,
-        fileExst,
-        fileType,
-        version: 1,
-        versionGroup: 1,
-        contentLength: "0 KB",
-        pureContentLength: 0,
-        fileStatus: 0,
-        mute: false,
-        comment: "",
-        viewUrl: "",
-        webUrl: "",
-        shortWebUrl: "",
-        thumbnailUrl: "",
-        thumbnailStatus: 1,
-        fileEntryType: 2,
-        // What was shared with the user is not theirs to pass on, which is also
-        // what keeps the row's share button off a demo row.
-        canShare: false,
-        shared: false,
-        sharedForUser: false,
-        parentShared: false,
-        // The one person in this section who is not the signed-in user: they
-        // own every file in it, and the list says so in two columns.
-        sharedBy,
-        createdBy: sharedBy,
-        updatedBy: sharedBy,
-        created: now,
-        updated: now,
-        access,
-        security: sharedFileSecurity(access),
+    return {
+      ...demoFileFields(current, file, index, FolderType.SHARE, now),
+      // Not theirs to pass on, which keeps the share button off the row.
+      canShare: false,
+      sharedBy,
+      createdBy: sharedBy,
+      updatedBy: sharedBy,
+      access,
+      security: sharedFileSecurity(access),
+      viewAccessibility: {
+        ImageView: false,
+        MediaView: false,
+        WebView: true,
+        WebEdit: canEdit,
+        WebReview: false,
+        WebCustomFilterEditing: false,
+        WebRestrictedEditing: false,
+        WebComment: canEdit || access === ShareAccessRights.Comment,
+        CoAuhtoring: canEdit,
+        CanConvert: false,
+        MustConvert: false,
+      },
+    };
+  }) as unknown as TFile[];
+}
+
+const ownFileSecurity = {
+  Read: true,
+  Edit: true,
+  Comment: true,
+  Review: true,
+  FillForms: true,
+  CustomFilter: true,
+  ReadHistory: true,
+  EditHistory: true,
+  Download: true,
+  Delete: true,
+  Rename: true,
+  Lock: true,
+  Copy: true,
+  Move: true,
+  Duplicate: true,
+  Convert: true,
+  SubmitToFormGallery: false,
+  CreateRoomFrom: true,
+  CopyLink: true,
+  Embed: false,
+  EditForm: false,
+  StartFilling: false,
+  OpenForm: false,
+  FillingStatus: false,
+  Vectorization: false,
+};
+
+/**
+ * The three formats every file section stands in with, named by the caller so
+ * the titles stay the tour's translations to hold.
+ */
+export function buildDemoFileList(titles: {
+  document: string;
+  spreadsheet: string;
+  presentation: string;
+}): TourDemoFile[] {
+  return [
+    {
+      title: titles.document,
+      fileExst: ".docx",
+      fileType: FileType.Document,
+      access: ShareAccessRights.Editing,
+    },
+    {
+      title: titles.spreadsheet,
+      fileExst: ".xlsx",
+      fileType: FileType.Spreadsheet,
+      access: ShareAccessRights.Comment,
+    },
+    {
+      title: titles.presentation,
+      fileExst: ".pptx",
+      fileType: FileType.Presentation,
+      access: ShareAccessRights.ReadOnly,
+    },
+  ];
+}
+
+/** The stand-in files of a personal space its owner has emptied. */
+export function buildDemoPersonalFiles(
+  current: TFolder,
+  config: TourDemoConfig,
+): TFile[] {
+  const now = demoTimestamp();
+
+  return (config.files ?? []).map(
+    (file, index) =>
+      ({
+        ...demoFileFields(current, file, index, FolderType.USER, now),
+        canShare: true,
+        createdBy: config.owner,
+        updatedBy: config.owner,
+        access: ShareAccessRights.None,
+        security: ownFileSecurity,
         viewAccessibility: {
           ImageView: false,
           MediaView: false,
           WebView: true,
-          WebEdit: canEdit,
-          WebReview: false,
-          WebCustomFilterEditing: false,
+          WebEdit: true,
+          WebReview: true,
+          WebCustomFilterEditing: true,
           WebRestrictedEditing: false,
-          WebComment: canEdit || access === ShareAccessRights.Comment,
-          CoAuhtoring: canEdit,
+          WebComment: true,
+          CoAuhtoring: true,
           CanConvert: false,
           MustConvert: false,
         },
-      };
-    },
-  ) as unknown as TFile[];
+      }) as unknown as TFile,
+  );
 }
 
 /** Everything anyone can do to something inside a room they administer. */
@@ -528,19 +586,130 @@ const fullFolderSecurity = {
   HistoryExport: false,
 };
 
+export type DemoAgentTab = "chat" | "knowledge" | "outputs";
+
+export function buildDemoAgentContents(
+  room: TRoom,
+  sectionRoot: TFolder,
+  config: TourDemoConfig,
+  tab: DemoAgentTab,
+): TGetFolder {
+  const now = demoTimestamp();
+  const isKnowledge = tab === "knowledge";
+
+  if (tab === "chat") {
+    return {
+      files: [],
+      folders: [],
+      current: room as unknown as TFolder,
+      pathParts: [
+        { id: sectionRoot.id, title: sectionRoot.title },
+        { id: room.id, title: room.title },
+      ],
+      startIndex: 0,
+      count: 0,
+      total: 0,
+      new: 0,
+    };
+  }
+
+  const current = {
+    parentId: room.id,
+    filesCount: 0,
+    foldersCount: 0,
+    new: 0,
+    mute: false,
+    pinned: false,
+    private: false,
+    indexing: false,
+    denyDownload: false,
+    fileEntryType: 1,
+    id: isKnowledge
+      ? DEMO_AGENT_ITEM_IDS.knowledge
+      : DEMO_AGENT_ITEM_IDS.outputs,
+    rootFolderId: sectionRoot.id,
+    rootFolderType: sectionRoot.rootFolderType,
+    type: isKnowledge ? FolderType.Knowledge : FolderType.ResultStorage,
+    canShare: false,
+    security: fullFolderSecurity,
+    title: isKnowledge
+      ? (config.agentContents?.knowledgeTitle ?? "")
+      : (config.agentContents?.outputsTitle ?? ""),
+    access: ShareAccessRights.None,
+    shared: false,
+    created: now,
+    createdBy: config.owner,
+    updated: now,
+    updatedBy: config.owner,
+    isFolder: true,
+  } as unknown as TFolder;
+
+  // Reference files for the knowledge base; a shorter list of results.
+  const sources = config.agentContents?.files ?? [];
+  const files = (isKnowledge ? sources : sources.slice(0, 2)).map(
+    (file, index) =>
+      ({
+        ...demoFileFields(current, file, index, FolderType.AIAgents, now),
+        id:
+          (isKnowledge
+            ? DEMO_AGENT_FILE_IDS.knowledge
+            : DEMO_AGENT_FILE_IDS.outputs) - index,
+        canShare: false,
+        createdBy: config.owner,
+        updatedBy: config.owner,
+        access: ShareAccessRights.None,
+        security: ownFileSecurity,
+        viewAccessibility: {
+          ImageView: false,
+          MediaView: false,
+          WebView: true,
+          WebEdit: true,
+          WebReview: false,
+          WebCustomFilterEditing: false,
+          WebRestrictedEditing: false,
+          WebComment: true,
+          CoAuhtoring: true,
+          CanConvert: false,
+          MustConvert: false,
+        },
+      }) as unknown as TFile,
+  );
+
+  current.filesCount = files.length;
+
+  return {
+    files,
+    folders: [],
+    current,
+    pathParts: [
+      { id: sectionRoot.id, title: sectionRoot.title },
+      { id: room.id, title: room.title },
+      { id: current.id, title: current.title },
+    ],
+    startIndex: 0,
+    count: files.length,
+    total: files.length,
+    new: 0,
+  };
+}
+
+/** The stand-in form as Start filling would leave it, or as it was. */
+export function withDemoFormLaunched(form: TFile, launched: boolean): TFile {
+  return {
+    ...form,
+    startFilling: launched,
+    viewAccessibility: {
+      ...form.viewAccessibility,
+      WebRestrictedEditing: launched,
+    },
+    security: { ...form.security, StartFilling: !launched },
+  };
+}
+
 /**
- * The inside of a stand-in form space: the blank form, and the two system
- * folders the answers move between.
- *
- * This is the part of the section the tour cannot borrow from the portal. A
- * form space only grows its `In progress` and `Complete` folders once a form
- * has been uploaded and started, so walking a real space would show a
- * different room to every user — and an empty one to anybody who has not
- * collected anything yet, which is exactly who the tour is for.
- *
- * `room` and `sectionRoot` are the objects the rest of the demo already built
- * from the server's own answer, so the ids, the path and the owner are the
- * same ones the section is really using.
+ * The inside of a stand-in form space: the blank form and the two system
+ * folders the answers move between. A real space only grows them once a form
+ * has been started, so walking one would show something different to everyone.
  */
 export function buildDemoSpaceContents(
   room: TRoom,

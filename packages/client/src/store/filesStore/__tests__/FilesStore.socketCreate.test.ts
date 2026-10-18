@@ -86,6 +86,74 @@ describe("FilesStore.wsModifyFolderCreate — characterization", () => {
   });
 });
 
+describe("FilesStore.wsModifyFolderCreate — form rooms", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  const roomsFolderId = 8;
+  const formsFolderId = 9;
+
+  const createRoom = (store: ReturnType<typeof createTestFilesStore>, roomType: RoomsType) => {
+    const room = {
+      id: 100,
+      title: "Room",
+      roomType,
+      parentId: roomsFolderId,
+      createdBy: { id: "other-user" },
+    };
+    vi.spyOn(api.files, "getFolderInfo").mockResolvedValue(room as never);
+
+    return store.wsModifyFolderCreate({
+      type: "folder",
+      id: room.id,
+      data: JSON.stringify(room),
+    } as never);
+  };
+
+  it("adds a form room created by another user to the Forms list", async () => {
+    const store = createTestFilesStore({
+      selectedFolderStore: { id: formsFolderId },
+      treeFoldersStore: { isFormsFolder: true },
+    });
+
+    await createRoom(store, RoomsType.FormRoom);
+
+    expect(store.folders.map((f) => f.id)).toEqual([100]);
+  });
+
+  it("does not add a form room created by another user to the Rooms list", async () => {
+    const store = createTestFilesStore({
+      selectedFolderStore: { id: roomsFolderId },
+      treeFoldersStore: { isFormsFolder: false },
+    });
+
+    await createRoom(store, RoomsType.FormRoom);
+
+    expect(store.folders).toEqual([]);
+  });
+
+  it("adds a regular room created by another user to the Rooms list", async () => {
+    const store = createTestFilesStore({
+      selectedFolderStore: { id: roomsFolderId },
+      treeFoldersStore: { isFormsFolder: false },
+    });
+
+    await createRoom(store, RoomsType.CustomRoom);
+
+    expect(store.folders.map((f) => f.id)).toEqual([100]);
+  });
+
+  it("does not add a regular room created by another user to the Forms list", async () => {
+    const store = createTestFilesStore({
+      selectedFolderStore: { id: formsFolderId },
+      treeFoldersStore: { isFormsFolder: true },
+    });
+
+    await createRoom(store, RoomsType.CustomRoom);
+
+    expect(store.folders).toEqual([]);
+  });
+});
+
 describe("FilesStore.redirectToParent — characterization", () => {
   const pathPart = (id: number) => ({ id }) as never;
 

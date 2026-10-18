@@ -57,7 +57,6 @@ const uiKitAlias: Record<string, string> = uiKitDevRoot
 // within an ApiProvider"). Deduping resolves every import from this package's
 // copy. In source mode the alias below intercepts it first.
 const baseDedupe = [
-  "styled-components",
   "react",
   "react-dom",
   "@onlyoffice/ai-chat",

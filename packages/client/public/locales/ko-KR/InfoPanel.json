@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "«{{folderTitle}}»에서",
   "FeedLocationRoomLabel": "룸 «{{folderTitle}}»",
   "FeedLocationSectionLabel": "섹션 «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "공간 «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "AI로 응답 분석",
   "FormRoomAIModalConnect": "데이터베이스 연결",
   "FormRoomAIModalDescription": "수집된 모든 응답을 \"AI에게 질문\"으로 분석하려면 데이터베이스를 연결하세요. 연결 없이 계속하여 이 양식에 대해서만 질문할 수도 있습니다.",

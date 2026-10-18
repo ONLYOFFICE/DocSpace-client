@@ -118,6 +118,7 @@
   "SharePDFFormModalDescription": "Es wird ein neuer Space erstellt und das PDF-Formular wird dorthin kopiert. Sie können dann andere Benutzer einladen, das Formular in dem Space auszufüllen.",
   "SharePDFFormModalTitle": "PDF-Formular freigeben",
   "ShareRoom": "Raum freigeben",
+  "ShareSpace": "Space freigeben",
   "ShowLinkActions": "Link-Optionen anzeigen",
   "SyncWithDatabase": "Synchronisierung mit der Datenbank",
   "SyncWithDatabaseError": "Synchronisierung mit der Datenbank fehlgeschlagen",

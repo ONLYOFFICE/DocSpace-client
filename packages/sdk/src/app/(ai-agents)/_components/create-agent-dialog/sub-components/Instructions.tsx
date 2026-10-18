@@ -109,7 +109,6 @@ const InstructionsSettings = ({
             noSelect
           >
             {t("Common:InstructionsDescriptionAgent", {
-              aiAgent: t("Common:AIAgent"),
               defaultValue:
                 "Describe how the AI agent should behave and respond. Define its role, tone, and main tasks.",
             })}

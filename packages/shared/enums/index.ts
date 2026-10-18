@@ -314,6 +314,7 @@ export const enum TenantStatus {
   PortalDeactivate = 1,
   PortalRestore = 4,
   EncryptionProcess = 6,
+  PortalBlocked = 7,
 }
 
 /**

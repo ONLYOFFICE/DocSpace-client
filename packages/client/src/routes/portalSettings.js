@@ -115,7 +115,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "customization",
-      element: <Navigate to="customization/general" replace />,
+      element: <Navigate to="/portal-settings/customization/general" replace />,
     },
     {
       path: "customization/general",
@@ -260,7 +260,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "security",
-      element: <Navigate to="security/access-portal" replace />,
+      element: <Navigate to="/portal-settings/security/access-portal" replace />,
     },
     {
       path: "security/access-portal",
@@ -442,7 +442,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "integration",
-      element: <Navigate to="integration/third-party-services" replace />,
+      element: <Navigate to="/portal-settings/integration/third-party-services" replace />,
     },
     {
       path: "integration/ldap",
@@ -576,7 +576,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "backup",
-      element: <Navigate to="backup/data-backup" replace />,
+      element: <Navigate to="/portal-settings/backup/data-backup" replace />,
     },
     {
       path: "backup/data-backup",
@@ -588,7 +588,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "delete-data",
-      element: <Navigate to="delete-data/deletion" replace />,
+      element: <Navigate to="/portal-settings/delete-data/deletion" replace />,
     },
     {
       path: "delete-data/deletion",
@@ -600,7 +600,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "restore",
-      element: <Navigate to="restore/restore-backup" replace />,
+      element: <Navigate to="/portal-settings/restore/restore-backup" replace />,
     },
     {
       path: "restore/restore-backup",

@@ -33,17 +33,25 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { http } from "msw";
 import type { Page } from "@playwright/test";
 
+import { BASE_URL, API_PREFIX } from "@docspace/shared/__mocks__/e2e/utils";
 import {
   settingsHandler,
   TypeSettings,
   selfActivationStatusHandler,
   selfByTypeHandler,
   aiAgentsHandler,
+  aiChatStoreHandlers,
   aiConfigHandler,
   roomMembersHandlers,
 } from "@docspace/shared/__mocks__/handlers";
+import {
+  PATH_AI_AGENTS,
+  aiAgentsResolver,
+} from "@docspace/shared/__mocks__/handlers/ai/agents";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 
@@ -51,9 +59,7 @@ import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 const TOUR_KEY = "ai_agents_tour_pending";
 const AI_AGENTS_URL = "/ai-agents/filter";
 
-// The single agent of the mock list (aiAgentsHandler, withListCreate) — the one
-// the access step opens the info panel on.
-const AGENT_ID = 251365;
+const AGENT_ID = 2;
 // Admin user id from the settings/self mocks, used as that agent's owner.
 const ADMIN_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 
@@ -72,7 +78,13 @@ const EMPTY_SCREEN = '[data-testid="empty-view"]';
 // what the portal has switched on, so an index would quietly point at a
 // different step as those flags move.
 const CREATE_STEP = "Give it a job";
-const CREATE_FIRST_STEP = "Now build your own";
+const KNOWLEDGE_STEP = "Give it the right context";
+const memberRoot = {
+  canCreate: false,
+  rootAccess: ShareAccessRights.DenyAccess,
+};
+
+const CREATE_FIRST_STEP = "Now make it yours";
 const SWITCH_ON_STEP = "Switch it on and see for real";
 // The closing step of anyone with no button on the empty screen to be sent at —
 // the stand-in is dropped the same way, but what is left under the spotlight is
@@ -84,24 +96,53 @@ const agentOwnerMembers = () =>
     initial: [{ id: ADMIN_ID, displayName: "Administrator", access: 0 }],
   });
 
+const ownAgentsHandler = (port: string, { canCreate = true } = {}) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_AGENTS}`, async () => {
+    const body = await aiAgentsResolver({
+      withListCreate: true,
+      canCreate,
+    }).json();
+    body.response.folders[0].id = AGENT_ID;
+    return new Response(JSON.stringify(body));
+  });
+
+const MOCK_USER_IDS = [
+  ADMIN_ID,
+  "admin-user-id",
+  "regular-user-id",
+  "visitor-user-id",
+];
+
+const dismissModelNotice = (page: Page) =>
+  page.evaluate((ids) => {
+    for (const id of ids) {
+      window.localStorage.setItem(
+        `ai_chat_model_updated_bar_dismissed_${id}`,
+        "true",
+      );
+    }
+  }, MOCK_USER_IDS);
+
 /** Arms the tour and lands on the section that starts it by itself. */
 const startTour = async (page: Page, baseUrl: string) => {
   // The first visit sets an origin so localStorage is reachable.
   await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
   await armTour(page, TOUR_KEY);
+  await dismissModelNotice(page);
   await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
   await expect(tourTooltip(page)).toBeVisible();
 };
 
 /** Walks forward with the keyboard until the step titled `title` is up. */
-const goToStep = async (page: Page, title: string, maxSteps = 10) => {
+const goToStep = async (page: Page, title: string, maxSteps = 12) => {
   const tooltip = tourTooltip(page);
 
   for (let i = 0; i < maxSteps; i += 1) {
     if (await tooltip.getByText(title, { exact: true }).isVisible()) return;
     await page.keyboard.press("ArrowRight");
-    await expect(tooltip).toBeVisible();
+    // Walking into the agent is a route change and a fetch per tab.
+    await expect(tooltip).toBeVisible({ timeout: 10000 });
   }
 
   throw new Error(`step "${title}" never came up`);
@@ -112,7 +153,9 @@ test.describe("AI Agents tour", () => {
     mockRequest.use(
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
-      aiAgentsHandler(TEST_PORT, { withListCreate: true }),
+      ownAgentsHandler(TEST_PORT),
+      // The agent's chat needs models to put its request field up.
+      ...aiChatStoreHandlers(TEST_PORT, { assignments: {} }),
     );
   });
 
@@ -128,9 +171,30 @@ test.describe("AI Agents tour", () => {
 
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
     await armTour(page, TOUR_KEY);
+    await dismissModelNotice(page);
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
     await walkTour(page, ["desktop", "ai-agents-tour", "admin"]);
+  });
+
+  test("ends on the New agent button when the section has agents of its own", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "admin"),
+      ...agentOwnerMembers(),
+    );
+
+    await startTour(page, baseUrl);
+    await goToStep(page, CREATE_FIRST_STEP);
+
+    await expect(page.locator(EMPTY_SCREEN)).toBeHidden();
+    await expect(page.locator('[data-testid="main-button"]')).toBeVisible();
+    await expect(
+      tourTooltip(page).getByRole("button", { name: "Done" }),
+    ).toBeVisible();
   });
 
   test("user sees the reduced, role-appropriate walkthrough", async ({
@@ -143,12 +207,13 @@ test.describe("AI Agents tour", () => {
       // The list has to come back the way the server would answer it for
       // somebody who cannot manage agents, or the section puts up a "New agent"
       // button this walkthrough is specifically about not having.
-      aiAgentsHandler(TEST_PORT, { withListCreate: true, canCreate: false }),
+      ownAgentsHandler(TEST_PORT, { canCreate: false }),
       ...agentOwnerMembers(),
     );
 
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
     await armTour(page, TOUR_KEY);
+    await dismissModelNotice(page);
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
     await walkTour(page, ["desktop", "ai-agents-tour", "user"]);
@@ -164,12 +229,13 @@ test.describe("AI Agents tour", () => {
     // managing access. The list has to agree with that; see the user run above.
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "visitor"),
-      aiAgentsHandler(TEST_PORT, { withListCreate: true, canCreate: false }),
+      ownAgentsHandler(TEST_PORT, { canCreate: false }),
       ...agentOwnerMembers(),
     );
 
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
     await armTour(page, TOUR_KEY);
+    await dismissModelNotice(page);
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
     await walkTour(page, ["desktop", "ai-agents-tour", "guest"]);
@@ -200,7 +266,10 @@ test.describe("AI Agents tour on an empty portal", () => {
     mockRequest.use(
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
-      // No agents at all — the case the stand-in section exists for.
+      // No agents at all, with AI on: a standalone portal judges readiness by
+      // the chat models, and only then does the empty screen offer to create.
+      aiConfigHandler(TEST_PORT),
+      ...aiChatStoreHandlers(TEST_PORT, { assignments: {} }),
       aiAgentsHandler(TEST_PORT),
       selfByTypeHandler(TEST_PORT, "admin"),
     );
@@ -218,7 +287,7 @@ test.describe("AI Agents tour on an empty portal", () => {
       page.getByRole("main").getByText(DEMO_AGENT_TITLE),
     ).toBeVisible();
 
-    await walkTour(page, ["desktop", "ai-agents-tour", "empty"]);
+    await walkTour(page, ["desktop", "ai-agents-tour", "admin-empty"]);
   });
 
   test("hands the section back before the closing step", async ({
@@ -247,7 +316,7 @@ test.describe("AI Agents tour on an empty portal", () => {
     // what an agent row does, and nothing about who else works with it.
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
-      aiAgentsHandler(TEST_PORT, { canCreate: false }),
+      aiAgentsHandler(TEST_PORT, memberRoot),
     );
 
     await startTour(page, baseUrl);
@@ -266,7 +335,7 @@ test.describe("AI Agents tour on an empty portal", () => {
   }) => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "visitor"),
-      aiAgentsHandler(TEST_PORT, { canCreate: false }),
+      aiAgentsHandler(TEST_PORT, memberRoot),
     );
 
     await startTour(page, baseUrl);
@@ -285,7 +354,7 @@ test.describe("AI Agents tour on an empty portal", () => {
   }) => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
-      aiAgentsHandler(TEST_PORT, { canCreate: false }),
+      aiAgentsHandler(TEST_PORT, memberRoot),
     );
 
     await startTour(page, baseUrl);
@@ -327,6 +396,13 @@ test.describe("AI Agents tour with AI switched off", () => {
     // The banner is behind `aiReady`, so this step existing at all is the proof
     // that the stand-in reaches the AI config and not only the list.
     await goToStep(page, CREATE_STEP);
+
+    // The Knowledge tab is behind vectorization the same way: without the
+    // stand-in claiming it, the tab puts up its "switched off" screen and the
+    // step has no sample file to point at.
+    await goToStep(page, KNOWLEDGE_STEP);
+    await expect(page.locator("#file_-1120")).toBeVisible();
+    await expect(page.locator(EMPTY_SCREEN)).toBeHidden();
   });
 
   test("closes on switching AI on rather than on creating an agent", async ({

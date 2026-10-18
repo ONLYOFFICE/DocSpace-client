@@ -11,7 +11,7 @@
   "NotPossibleRoomRestoring": "Възстановяването на тази стая не е възможно, тъй като лимитът за броя стаи, включени в текущия ви план, е достигнат.",
   "NumberOfRoomsAccordingToTariff": "Брой стаи според тарифния ви план: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Брой администратори според тарифния ви план: {{currentValue}}/{{maxValue}}",
-  "PlanPaymentOverdue": "Не е възможно да се добавят нови потребители, създават нови стаи или AI агенти. Плащането за плана {{planName}} е закъсняло.",
+  "PlanPaymentOverdue": "Не е възможно да се добавят нови потребители, създават нови стаи или ИИ агенти. Плащането за плана {{planName}} е закъсняло.",
   "RoomsQuotaAlmostExhausted": "Квотата от стаи е почти изчерпана.",
   "UsersQuotaAlmostExhausted": "Квотата за платени потребители е почти изчерпана."
 }

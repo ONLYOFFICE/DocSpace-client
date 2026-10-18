@@ -255,7 +255,7 @@ export const useModuleItems = ({
                 createOrOpen(
                   canCreateAgents,
                   "/ai-agents/filter",
-                  t("Common:CreateAIAgent", { aiAgent: t("Common:AIAgent") }),
+                  t("Common:CreateAIAgent"),
                   dispatchCreateAgent,
                 ),
               ),

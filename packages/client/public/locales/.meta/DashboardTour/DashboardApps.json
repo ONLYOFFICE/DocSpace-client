@@ -1,211 +1,25 @@
 {
   "key_path": "DashboardApps",
-  "content": "From storage to collaboration, data collection, automation, and AI — each app is built for a different job. Open any of them for a short tour of that section.",
-  "content_en_sha1_hash": "a045c67a6c5ab3e874a22b7e305313bcec0e90d3",
-  "created_at": "2026-08-31T18:23:46.740Z",
-  "updated_at": "2026-08-31T19:54:12.916Z",
+  "content": "From storage to collaboration, data collection, automation, and AI — each app is built for a different job. Use the graduation cap icon on an app card to take or replay its tour.",
+  "content_en_sha1_hash": "8bc867eff090434b1b74ec5648eec52aa3d25c35",
+  "created_at": "2026-10-16T12:15:10.487Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
   "comment": {
-    "text": "Description text for a step in the dashboard guided tour, explaining the purpose and variety of available apps.",
+    "text": "Body of the Dashboard onboarding tour step that highlights the row of app cards (Files, Rooms, Forms, AI agents, and so on). The graduation cap icon on each card starts that app's own tour.",
     "is_auto": true,
-    "updated_at": "2026-08-31T19:54:12.916Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
-      "line_number": 169,
-      "context": "appIds.length > 0 &&\n elementGroupStep(\n APPS_SECTION_SELECTOR,\n appIds.map(appCardSelector),\n t(\"DashboardTour:DashboardAppsTitle\"),\n t(\"DashboardTour:DashboardApps\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 4. The integrations card, which reads as an ad and is skipped as one —",
+      "line_number": 165,
+      "context": "appIds.length > 0 &&\n elementGroupStep(\n APPS_SECTION_SELECTOR,\n appIds.map(appCardSelector),\n t(\"DashboardTour:DashboardAppsTitle\"),\n t(\"DashboardTour:DashboardApps\"),\n callbacks,\n DASHBOARD_TOUR_LABEL,\n 6,\n undefined,\n true,",
       "module": "/packages/client"
     }
   ],
   "languages": {
     "en": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "ar-SA": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "az": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "bg": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "cs": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "de": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "el-GR": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "es": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "fi": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "fr": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "hy-AM": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "it": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "ja-JP": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "ko-KR": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "lo-LA": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "lv": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "nl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "pl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "pt": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "pt-BR": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "ro": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "ru": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "si": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sk": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sr-Cyrl-RS": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sr-Latn-RS": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "tr": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "uk-UA": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "vi": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

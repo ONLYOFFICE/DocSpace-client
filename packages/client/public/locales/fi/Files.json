@@ -118,6 +118,7 @@
   "SharePDFFormModalDescription": "Uusi tila luodaan ja PDF-lomake kopioidaan sinne. Sen jälkeen voit kutsua tilaan muita käyttäjiä täyttämään lomakkeen.",
   "SharePDFFormModalTitle": "Jaa PDF-lomake",
   "ShareRoom": "Jaa huone",
+  "ShareSpace": "Jaa tila",
   "ShowLinkActions": "Näytä linkin toiminnot",
   "SyncWithDatabase": "Synointi tietok kanssa",
   "SyncWithDatabaseError": "Tietokannan synkronointi epäonnistui",

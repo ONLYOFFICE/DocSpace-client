@@ -42,6 +42,7 @@ const PublicRouteWrapper = ({
   children,
   isAuthenticated = false,
   isPortalDeactivate,
+  isPortalBlocked,
   tenantStatus,
   isFirstLoaded,
   wizardCompleted,
@@ -53,6 +54,7 @@ const PublicRouteWrapper = ({
       isAuthenticated={isAuthenticated}
       wizardCompleted={wizardCompleted!}
       isPortalDeactivate={isPortalDeactivate!}
+      isPortalBlocked={isPortalBlocked!}
     >
       {children}
     </PublicRoute>
@@ -61,8 +63,13 @@ const PublicRouteWrapper = ({
 
 export default inject<TStore>(({ authStore, settingsStore }) => {
   const { isAuthenticated } = authStore;
-  const { wizardCompleted, tenantStatus, isPortalDeactivate, isFirstLoaded } =
-    settingsStore;
+  const {
+    wizardCompleted,
+    tenantStatus,
+    isPortalDeactivate,
+    isPortalBlocked,
+    isFirstLoaded,
+  } = settingsStore;
 
   return {
     tenantStatus,
@@ -70,5 +77,6 @@ export default inject<TStore>(({ authStore, settingsStore }) => {
     wizardCompleted,
     isAuthenticated,
     isPortalDeactivate,
+    isPortalBlocked,
   };
 })(observer(PublicRouteWrapper));

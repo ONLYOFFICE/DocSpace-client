@@ -58,7 +58,6 @@ const DisableAiServicesDialogComponent = ({
     productName: getBrandName("ProductName"),
     aiSettings: t("AISettings"),
     aiServices: t("Common:AIFeatures"),
-    aiAgents: t("Common:AIAgents"),
   };
 
   const effects = [

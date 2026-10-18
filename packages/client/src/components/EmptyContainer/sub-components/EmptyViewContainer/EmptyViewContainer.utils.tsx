@@ -268,12 +268,8 @@ export const getRoomDescription = (
 
 const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
   return isUser(access)
-    ? t("Common:EmptyAIAgentsUserTitle", {
-        aiAgents: t("Common:AIAgents"),
-      })
-    : t("Common:EmptyAIAgentsTitle", {
-        aiAgent: t("Common:AIAgent"),
-      });
+    ? t("Common:EmptyAIAgentsUserTitle")
+    : t("Common:EmptyAIAgentsTitle");
 };
 
 const getAIAgentsAIDisabledTitle = (
@@ -291,9 +287,7 @@ const getAIAgentsAIDisabledTitle = (
       .with([false, true], () => t("Common:EmptyAIAgentsNotActiveYetTitle"))
       // standalone user
       .with([true, false], () =>
-        t("Common:EmptyAIAgentsAIDisabledUserTitle", {
-          aiAgents: t("Common:AIAgents"),
-        }),
+        t("Common:EmptyAIAgentsAIDisabledUserTitle"),
       )
       // saas user
       .otherwise(() => t("Common:AIFeaturesNotActive"))
@@ -322,9 +316,7 @@ const getAIAgentsAIDisabledDescription = (
       </>
     ))
     .with([true, false], () =>
-      t("Common:EmptyAIAgentsAIDisabledDescription", {
-        aiAgents: t("Common:AIAgents"),
-      }),
+      t("Common:EmptyAIAgentsAIDisabledDescription"),
     )
     .otherwise(() => t("Common:EmptyAIDisabledContactAdminDesc"));
 };
@@ -334,9 +326,7 @@ const getAIAgentsAIEnabledDescription = (
   access: AccessType,
 ) => {
   return isUser(access)
-    ? t("Common:EmptyAIAgentsAIEnabledUserDescription", {
-        aiAgents: t("Common:AIAgents"),
-      })
+    ? t("Common:EmptyAIAgentsAIEnabledUserDescription")
     : t("Common:EmptyAIAgentsDescription", {
         mcpServer: t("Common:MCPServer"),
       });
@@ -357,6 +347,13 @@ export const getRootDescription = (
   filterFolderType: Nullable<number[]> = null,
 ) => {
   return match([rootFolderType, access])
+    .with([P._, P.when(() => isPublicRoom)], () => (
+      <>
+        <span>{t("Common:RoomEmptyAtTheMoment")}</span>
+        <br />
+        <span>{t("Common:FilesWillAppearHere")}</span>
+      </>
+    ))
     .with([FolderType.AIAgents, P._], () =>
       aiReady
         ? getAIAgentsAIEnabledDescription(t, access)
@@ -379,13 +376,6 @@ export const getRootDescription = (
     .with([FolderType.Forms, P._], () =>
       t("EmptyView:EmptyRootFormsDescription"),
     )
-    .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (
-      <>
-        <span>{t("Common:RoomEmptyAtTheMoment")}</span>
-        <br />
-        <span>{t("Common:FilesWillAppearHere")}</span>
-      </>
-    ))
     .with([FolderType.USER, P.when(() => security?.Create)], () =>
       t("Common:DefaultFolderDescription"),
     )

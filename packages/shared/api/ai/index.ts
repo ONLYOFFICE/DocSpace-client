@@ -293,6 +293,61 @@ export const getProfilesList = async () => {
   return (await response.json()) as TProfilesList;
 };
 
+// A draft attachment of the AI chat, as the chat's own
+// `attachments/save-files-many` route returns it: documents come with their
+// extracted text in `content`.
+export type TAIChatAttachment = {
+  id: string;
+  kind: "file" | "image";
+  title: string;
+  content?: string;
+};
+
+// Attaches portal files the way the AI chat does: the service reads each one
+// and extracts its text. `type` is the ONLYOFFICE file type code the chat
+// shows on the chip. Throws with the service's message when a file cannot be
+// attached (e.g. an unsupported format).
+export const createAIChatAttachments = async (
+  files: { id: number | string; title: string; type: number }[],
+) => {
+  const inputs = files.map((file) => ({
+    path: String(file.id),
+    title: file.title,
+    type: file.type,
+    content: "",
+  }));
+
+  // The route takes the library method's arguments: [inputs, entityId].
+  const response = await authFetch(
+    `/api/2.0/ai/attachments/save-files-many`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([inputs, null]),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Attaching failed (${response.status}): ${await response.text()}`,
+    );
+  }
+
+  return (await response.json()) as TAIChatAttachment[];
+};
+
+export const deleteAIChatAttachment = async (id: string) => {
+  await authFetch(`/api/2.0/ai/attachments/delete`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(id),
+  });
+};
+
 export const getWebSearchConfigured = async () => {
   const response = await authFetch(`/api/2.0/ai/web-search/is-configured`, {
     method: "GET",

@@ -44,6 +44,7 @@ import {
   roomMembersHandlers,
   TypeRoomList,
 } from "@docspace/shared/__mocks__/handlers";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 
@@ -80,6 +81,11 @@ const CREATE_FIRST_STEP = "Now make it yours";
 // is dropped the same way, but what is left under the spotlight is the bare
 // empty screen rather than an action.
 const EMPTY_LIST_STEP = "Your list is empty for now";
+
+const memberRoot = {
+  canCreate: false,
+  rootAccess: ShareAccessRights.DenyAccess,
+};
 
 const roomOwnerMembers = () =>
   roomMembersHandlers(TEST_PORT, FIRST_ROOM_ID, {
@@ -135,13 +141,15 @@ test.describe("Rooms tour", () => {
     mockRequest,
     baseUrl,
   }) => {
+    // The members handler goes first: the room list's pattern covers the
+    // members endpoint too, and MSW answers from the first match.
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
+      ...roomOwnerMembers(),
       // The list has to come back the way the server would answer it for
       // somebody who cannot create rooms, or the section puts up a "New room"
       // button this walkthrough is specifically about not having.
-      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, { canCreate: false }),
-      ...roomOwnerMembers(),
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, memberRoot),
     );
 
     await startTour(page, baseUrl);
@@ -160,13 +168,35 @@ test.describe("Rooms tour", () => {
     // to agree with it — see the user run above.
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "visitor"),
-      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, { canCreate: false }),
       ...roomOwnerMembers(),
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, memberRoot),
     );
 
     await startTour(page, baseUrl);
 
     await walkTour(page, ["desktop", "rooms-tour", "guest"]);
+  });
+
+  test("ends on the New room button when the section has rooms of its own", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "admin"),
+      ...roomOwnerMembers(),
+    );
+
+    await startTour(page, baseUrl);
+    await goToStep(page, CREATE_FIRST_STEP);
+
+    // Nothing to hand back here: the list is the user's own, so the closing
+    // step points at the button that adds to it.
+    await expect(page.locator(EMPTY_SCREEN)).toBeHidden();
+    await expect(page.locator('[data-testid="main-button"]')).toBeVisible();
+    await expect(
+      tourTooltip(page).getByRole("button", { name: "Done" }),
+    ).toBeVisible();
   });
 
   test("opens the info panel for the member step and puts it away afterwards", async ({
@@ -227,7 +257,7 @@ test.describe("Rooms tour on an empty portal", () => {
       page.getByRole("main").getByText("Collaboration room").first(),
     ).toBeVisible();
 
-    await walkTour(page, ["desktop", "rooms-tour", "empty"]);
+    await walkTour(page, ["desktop", "rooms-tour", "admin-empty"]);
   });
 
   test("hands the section back before the closing step", async ({
@@ -314,7 +344,7 @@ test.describe("Rooms tour on an empty portal", () => {
     // list, which is the whole of what the section is for to them.
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
-      roomListHandler(TEST_PORT, undefined, { canCreate: false }),
+      roomListHandler(TEST_PORT, undefined, memberRoot),
       ...roomOwnerMembers(),
     );
 
@@ -334,7 +364,7 @@ test.describe("Rooms tour on an empty portal", () => {
   }) => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "visitor"),
-      roomListHandler(TEST_PORT, undefined, { canCreate: false }),
+      roomListHandler(TEST_PORT, undefined, memberRoot),
       ...roomOwnerMembers(),
     );
 
@@ -354,7 +384,7 @@ test.describe("Rooms tour on an empty portal", () => {
   }) => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
-      roomListHandler(TEST_PORT, undefined, { canCreate: false }),
+      roomListHandler(TEST_PORT, undefined, memberRoot),
       ...roomOwnerMembers(),
     );
 

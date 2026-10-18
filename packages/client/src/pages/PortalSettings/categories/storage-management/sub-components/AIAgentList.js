@@ -114,7 +114,7 @@ const AIAgentListComponent = (props) => {
     <div className={styles.statistics}>
       <div className="statistics-container">
         <Text fontWeight={600} className="item-statistic">
-          {t("Top5AIAgents", { aiAgents: t("Common:AIAgents") })}
+          {t("Top5AIAgents")}
         </Text>
         {agentsList}
 

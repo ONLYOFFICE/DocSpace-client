@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Aplikace úspěšně povoleny",
   "AppName": "Název aplikace",
   "Apps": "Aplikace",
+  "AppsLimitReached": "Dosáhli jste maximálního počtu aplikací, které můžete vytvořit. Chcete-li přidat novou aplikaci, odstraňte aplikaci, kterou už nepotřebujete.",
+  "AppsLimitReachedWorkspace": "Tento pracovní prostor dosáhl maximálního počtu aplikací. Chcete-li přidat novou aplikaci, odstraňte aplikaci, která už není potřeba.",
   "AuthButton": "Tlačítko Auth",
   "AuthenticationMethod": "Metoda ověřování",
   "AuthorizedApps": "Autorizované aplikace",

@@ -1,20 +1,20 @@
 {
   "key_path": "AgentWhatIsShared",
-  "content": "An AI agent is an assistant your team has already set up and tuned, waiting for you to put it to work. Each one holds a conversation of its own and a knowledge base built from your documents — you see the agents you were let into.",
-  "content_en_sha1_hash": "3e2de895ac4d38536937ae9c35471e8729db9cce",
-  "created_at": "2026-08-06T14:20:56.253Z",
-  "updated_at": "2026-08-07T15:05:26.408Z",
+  "content": "An AI agent is an assistant configured for a task. Your role determines whether you can use its chat, add files to its Knowledge base or view saved results in Chat outputs.",
+  "content_en_sha1_hash": "efbbafabccb5908852fa9b40fc11573fb288116f",
+  "created_at": "2026-10-16T12:15:11.920Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
   "comment": {
-    "text": "A descriptive text block within an onboarding tour step that explains the nature and visibility of shared AI agents to users who do not have permission to create them.",
+    "text": "Body of the first AI Agents onboarding tour step, anchored on the AI agents item in the left sidebar; variant for non-admin users (admins see AgentWhatIs). Knowledge base and Chat outputs are UI section names.",
     "is_auto": true,
-    "updated_at": "2026-08-06T14:21:33.965Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 187,
-      "context": "// The same mental model either way — but somebody who cannot add to the\n // list is told where the list they are looking at comes from instead of\n // what an agent keeps for them.\n isAdmin\n ? t(\"AiAgentsTour:AgentWhatIs\")\n : t(\"AiAgentsTour:AgentWhatIsShared\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 2. Create. The agents banner holds a single \"New agent\" tile, so",
+      "line_number": 168,
+      "context": "navItemStep(\n sidebarSelector(aiAgentsId),\n t(\"AiAgentsTour:AgentWhatIsTitle\"),\n isAdmin\n ? t(\"AiAgentsTour:AgentWhatIs\")\n : t(\"AiAgentsTour:AgentWhatIsShared\"),\n callbacks,\n AI_AGENTS_TOUR_LABEL,\n false,\n leaveAgent,\n ),",
       "module": "/packages/client"
     }
   ],

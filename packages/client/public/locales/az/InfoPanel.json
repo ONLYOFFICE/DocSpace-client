@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "«{{folderTitle}}» qovluğundan",
   "FeedLocationRoomLabel": "Otaq «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Bölmə «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Sahə «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "AI ilə cavabları analiz edin",
   "FormRoomAIModalConnect": "Verilənlər bazasına qoşul",
   "FormRoomAIModalDescription": "Bütün toplanmış cavabları \"AI-ə soruşun\" ilə təhlil etmək üçün verilənlər bazasını qoşun. Onsuz davam edə və yalnız bu forma haqqında soruşa bilərsiniz.",

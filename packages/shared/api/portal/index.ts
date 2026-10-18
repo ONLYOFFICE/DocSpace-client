@@ -289,6 +289,20 @@ export function continuePortal(confirmKey: Nullable<string> = null) {
   return request(options);
 }
 
+export function unblockPortal(confirmKey: Nullable<string> = null) {
+  const options = {
+    method: "put",
+    url: "/portal/unblock",
+    // 401 here refuses the link (an earlier block, or the portal is no longer
+    // blocked), not a session: it must reach the caller instead of signing out.
+    skipLogout: true,
+  };
+
+  if (confirmKey) options.headers = { confirm: confirmKey };
+
+  return request(options);
+}
+
 export function deletePortal(confirmKey: Nullable<string> = null) {
   const options = {
     method: "delete",

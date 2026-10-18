@@ -118,6 +118,7 @@
   "SharePDFFormModalDescription": "Нови простор ће бити креиран и PDF формулар ће бити тамо копиран. Затим можете позвати друге кориснике да попуне формулар у простору.",
   "SharePDFFormModalTitle": "Подели PDF формулар",
   "ShareRoom": "Дели собу",
+  "ShareSpace": "Дели простор",
   "ShowLinkActions": "Прикажи радње линка",
   "SyncWithDatabase": "Синхронизација са базом података",
   "SyncWithDatabaseError": "Неуспешна синхронизација са базом података",

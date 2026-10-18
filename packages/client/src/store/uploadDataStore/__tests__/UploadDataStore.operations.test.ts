@@ -444,6 +444,7 @@ describe("UploadDataStore.loopFilesOperations — polling", () => {
       operationId: "cli-4",
       completed: true,
       alert: false,
+      stopped: true,
     });
   });
 

@@ -363,12 +363,7 @@ export const getDocsConnectStatistics = async (
 export const getDocsConnectInfo = async (
   refresh?: boolean,
 ): Promise<TDocsConnectInfo | null> => {
-  let tenant: TDocsConnectTenant | null = null;
-  try {
-    tenant = await getDocsConnectTenant(refresh);
-  } catch {
-    tenant = null;
-  }
+  const tenant = await getDocsConnectTenant(refresh);
 
   if (!tenant) {
     return null;
@@ -432,11 +427,8 @@ export const getDocsConnectConnection =
     return { address: tenant.address, secret, header };
   };
 
-export const startDocsConnectTrial =
-  async (): Promise<TDocsConnectInfo | null> => {
-    await request({ method: "post", url: `${BASE}/trial` });
-    return getDocsConnectInfo(true);
-  };
+export const startDocsConnectTrial = async () =>
+  request<boolean>({ method: "post", url: `${BASE}/trial` });
 
 export const updateDocsConnectConfig = async (
   data: TDocsConnectConfigUpdate,

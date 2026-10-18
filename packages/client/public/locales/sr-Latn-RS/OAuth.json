@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Aplikacije uspešno omogućene",
   "AppName": "Naziv aplikacije",
   "Apps": "Aplikacije",
+  "AppsLimitReached": "Dostigli ste maksimalan broj aplikacija koje možete da kreirate. Obrišite aplikaciju koja vam više nije potrebna da biste dodali novu.",
+  "AppsLimitReachedWorkspace": "Ovaj radni prostor je dostigao maksimalan broj aplikacija. Obrišite aplikaciju koja više nije potrebna da biste dodali novu.",
   "AuthButton": "Dugme za autentifikaciju",
   "AuthenticationMethod": "Metod autentifikacije",
   "AuthorizedApps": "Autorizovane aplikacije",

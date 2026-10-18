@@ -323,7 +323,7 @@ export const getFolderModelImpl = (
 
   const templateGallery: TContextOption[] = templateGalleryAvailable
     ? [
-        { key: "separator", isSeparator: true },
+        { key: "separator-template-gallery", isSeparator: true },
         {
           key: "template-gallery",
           label: t("Common:TemplateGallery"),

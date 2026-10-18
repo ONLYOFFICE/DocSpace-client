@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "nga «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Dhoma «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Seksion «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Hapësira «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Analizoni përgjigjetet me IA",
   "FormRoomAIModalConnect": "Lidheni databazën",
   "FormRoomAIModalDescription": "Lidheni një bazë të dhënash për të analizuar të gjitha përgjigjet e mbledhura me \"Pyet AI-në\". Ju mund të vazhdoni pa të dhe të bëni pyetje vetëm për këtë formë.",

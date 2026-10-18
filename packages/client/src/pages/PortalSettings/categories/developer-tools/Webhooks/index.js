@@ -71,14 +71,22 @@ const Webhooks = (props) => {
 
   setDocumentTitle(t("Webhooks"));
 
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isCreateOpened, setIsCreateOpened] = useState(
     () => searchParams.get("create") === "true",
   );
   const [isSettingsOpened, setIsSettingsOpened] = useState(false);
   const [isDeleteOpened, setIsDeleteOpened] = useState(false);
 
-  const closeCreateModal = () => setIsCreateOpened(false);
+  const closeCreateModal = () => {
+    setIsCreateOpened(false);
+
+    if (!searchParams.has("create")) return;
+
+    const params = new URLSearchParams(searchParams);
+    params.delete("create");
+    setSearchParams(params, { replace: true });
+  };
   const openCreateModal = () => setIsCreateOpened(true);
   const closeSettingsModal = () => setIsSettingsOpened(false);
   const openSettingsModal = () => setIsSettingsOpened(true);

@@ -43,6 +43,7 @@ import {
   selfActivationStatusHandler,
   selfByTypeHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 
@@ -70,12 +71,7 @@ const CREATE_FIRST_STEP = "Now make it yours";
 // empty screen rather than an action.
 const EMPTY_LIST_STEP = "Your list is empty for now";
 
-// What an admin on a portal that already has form spaces walks through
-// (SRC_DIR/components/FormsTour/tourSteps): the two create tiles, a space row,
-// the three things inside the stand-in space that row step walks into, and the
-// sidebar sub-items. Not the closing step — that one only exists when the list
-// itself was stood in for, and this portal's list is its own.
-const ADMIN_STEP_COUNT = 7;
+const ADMIN_STEP_COUNT = 12;
 
 // The first stand-in space the demo puts up on an empty portal
 // (FormsTour:FormsDemoOnboarding), and the three things waiting inside it
@@ -95,6 +91,9 @@ const DEMO_COMPLETE = "#folder_-1101";
 // server answers it per role — the list fetched by somebody who only ever fills
 // forms in comes back with `false` — so the runs that stand in as one have to
 // say so, or the section puts up a "Create Form space" button they do not have.
+// Without the create right the root also comes back with `DenyAccess`, the way
+// the server answers anybody who is not an admin; that is what picks the user
+// variant of the empty screen.
 const formsRoomListHandler = (
   port: string,
   { empty = false, canCreate = true } = {},
@@ -116,7 +115,7 @@ const formsRoomListHandler = (
       canShare: false,
       security: { Read: true, Create: canCreate },
       title: "Forms",
-      access: 0,
+      access: canCreate ? ShareAccessRights.None : ShareAccessRights.DenyAccess,
       shared: false,
       created: "2025-01-15T12:00:00.000Z",
       updated: "2025-01-15T12:00:00.000Z",
@@ -238,6 +237,23 @@ test.describe("Forms tour", () => {
     expect(steps).toBe(ADMIN_STEP_COUNT);
   });
 
+  test("ends on the New Form space button when the section has spaces of its own", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+    await goToStep(page, CREATE_FIRST_STEP);
+
+    await expect(page.locator(EMPTY_SCREEN)).toBeHidden();
+    await expect(page.locator('[data-testid="main-button"]')).toBeVisible();
+    await expect(
+      tourTooltip(page).getByRole("button", { name: "Done" }),
+    ).toBeVisible();
+  });
+
   test("user (form filler) sees the reduced, role-appropriate walkthrough", async ({
     page,
     mockRequest,
@@ -302,7 +318,7 @@ test.describe("Forms tour on an empty portal", () => {
       page.getByRole("main").getByText(DEMO_SPACE_TITLE).first(),
     ).toBeVisible();
 
-    await walkTour(page, ["desktop", "forms-tour", "empty"]);
+    await walkTour(page, ["desktop", "forms-tour", "admin-empty"]);
   });
 
   test("walks into a stand-in space and back out again", async ({

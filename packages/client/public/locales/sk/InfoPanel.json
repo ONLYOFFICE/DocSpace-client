@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "z «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Miestnosť «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Sekcia «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Priestor «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Analyzujte odpovede pomocou AI",
   "FormRoomAIModalConnect": "Pripojiť databázu",
   "FormRoomAIModalDescription": "Pripojte databázu na analýzu všetkých zhromaždených odpovedí pomocou \"Opýtať sa AI\". Môžete pokračovať aj bez nej a pýtať sa len na tento formulár.",

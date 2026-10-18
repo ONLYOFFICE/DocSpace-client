@@ -1,20 +1,26 @@
 {
   "key_path": "RoomsCreateFirst",
-  "content": "Pick a type, invite the people you work with, and drop in your files. It takes a minute — and everything you have just seen starts working on your own documents.",
-  "content_en_sha1_hash": "4a1d577629127dca8986386876324faf649e1954",
-  "created_at": "2026-08-06T14:20:52.334Z",
-  "updated_at": "2026-09-14T20:38:41.359Z",
+  "content": "Choose a room type, invite the people you work with and add your files. You're ready to start working together.",
+  "content_en_sha1_hash": "8a3aef7b65eb96b5385a7ad290797e590b823134",
+  "created_at": "2026-10-16T12:15:08.013Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
   "comment": {
-    "text": "Body text for a step in the Rooms onboarding tour that explains how to create and start using a room.",
+    "text": "Body of the closing Rooms onboarding tour step for users who can create rooms: highlights the empty screen's create options (after the sample rooms are removed) or the New room button.",
     "is_auto": true,
-    "updated_at": "2026-08-06T14:53:48.112Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 284,
-      "context": "demoHooks &&\n (canCreate\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"RoomsTour:RoomsCreateFirstTitle\"),\n t(\"RoomsTour:RoomsCreateFirst\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )\n : revealStep(",
+      "line_number": 265,
+      "context": "isDemo && demoHooks\n ? canCreate\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"RoomsTour:RoomsCreateFirstTitle\"),\n t(\"RoomsTour:RoomsCreateFirst\"),\n callbacks,\n ROOMS_TOUR_LABEL,\n demoHooks,\n )\n : revealStep(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 265,
+      "context": "isDemo && demoHooks\n ? canCreate\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"RoomsTour:RoomsCreateFirstTitle\"),\n t(\"RoomsTour:RoomsCreateFirst\"),\n callbacks,\n ROOMS_TOUR_LABEL,\n demoHooks,\n )\n : revealStep(",
       "module": "/packages/client"
     }
   ],

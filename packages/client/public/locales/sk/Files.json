@@ -118,6 +118,7 @@
   "SharePDFFormModalDescription": "Vytvorí sa nový priestor a PDF formulár sa doň skopíruje. Potom môžete pozvať ďalších používateľov, aby vyplnili formulár v priestore.",
   "SharePDFFormModalTitle": "Zdieľať formulár PDF",
   "ShareRoom": "Zdieľať miestnosť",
+  "ShareSpace": "Zdieľať priestor",
   "ShowLinkActions": "Zobraziť akcie odkazov",
   "SyncWithDatabase": "Synchronizácia s databázou",
   "SyncWithDatabaseError": "Chba synchronizácie s databázou",

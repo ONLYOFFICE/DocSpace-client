@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Applications enabled successfully",
   "AppName": "App name",
   "Apps": "Applications",
+  "AppsLimitReached": "You've reached the maximum number of applications you can create. Delete an application you no longer need to add a new one.",
+  "AppsLimitReachedWorkspace": "This workspace has reached the maximum number of applications. Delete an application that is no longer needed to add a new one.",
   "AuthButton": "Auth button",
   "AuthenticationMethod": "Authentication method",
   "AuthorizedApps": "Authorized apps",

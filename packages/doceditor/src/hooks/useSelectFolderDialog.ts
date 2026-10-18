@@ -37,7 +37,6 @@
 
 import React, { useState, useCallback } from "react";
 
-import { EDITOR_ID } from "@docspace/shared/constants";
 import { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import {
 	TFileSecurity,
@@ -47,7 +46,7 @@ import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TSelectedFileInfo } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 
 import { TEventData } from "@/types";
-import { saveAs } from "@/utils";
+import { getDocEditor, saveAs } from "@/utils";
 
 const useSelectFolderDialog = () => {
 	const [isVisible, setIsVisible] = useState(false);
@@ -96,13 +95,11 @@ const useSelectFolderDialog = () => {
 			const savingInfo = await saveAs(newTitle, url, selectedItemId, isChecked);
 
 			if (savingInfo) {
-				const docEditor =
-					typeof window !== "undefined" &&
-					window.DocEditor?.instances[EDITOR_ID];
+				const docEditor = getDocEditor();
 
 				const convertedInfo = savingInfo.split(": ").pop();
 
-				docEditor?.showMessage(convertedInfo);
+				if (convertedInfo) docEditor?.showMessage?.(convertedInfo);
 			}
 		}
 		requestRunning.current = false;

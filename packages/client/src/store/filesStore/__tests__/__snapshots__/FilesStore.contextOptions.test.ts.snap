@@ -7,6 +7,7 @@ exports[`FilesStore.getFilesContextOptions — characterization > builds options
   "separator0",
   "link-for-room-members",
   "separator-metadata-ai",
+  "fill-metadata-ai",
   "suggest-metadata-ai",
   "separator6",
   "edit-room",

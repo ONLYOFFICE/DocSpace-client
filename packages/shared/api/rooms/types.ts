@@ -103,7 +103,6 @@ export type TWatermark = {
 
 export type TRoom = {
   parentId: number;
-  assignedMetadataTemplates?: number[];
   filesCount: number;
   foldersCount: number;
   new: number;

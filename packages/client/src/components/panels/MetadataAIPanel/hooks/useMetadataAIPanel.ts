@@ -56,8 +56,10 @@ import type {
 } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
 import {
   getChangedValues,
+  getCustomFieldChanges,
   getEntryKind,
   isTemplateFormValid,
+  toCustomFieldDrafts,
 } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/utils";
 
 import type {
@@ -66,6 +68,7 @@ import type {
   TMetadataAISummary,
 } from "../types";
 import {
+  applyAICustomValues,
   applyAIValues,
   getFillNotFound,
   getMetadataAIError,
@@ -111,6 +114,7 @@ export const useMetadataAIPanel = ({
       .then((data) => {
         setMetadata(data);
         setForms(getTemplateForms(data));
+        if (mode === "fill") setDrafts(toCustomFieldDrafts(data.customFields));
       })
       .catch(() => {
         if (!abort.signal.aborted) setError(t("Common:SomethingWentWrong"));
@@ -133,12 +137,14 @@ export const useMetadataAIPanel = ({
       return;
     }
 
-    const next = applyAIValues(forms, result.filled);
+    const nextForms = applyAIValues(forms, result.filled);
+    const nextDrafts = applyAICustomValues(drafts, result.filled);
 
-    setForms(next.forms);
+    setForms(nextForms.forms);
+    setDrafts(nextDrafts.drafts);
     setSummary({
-      count: next.count,
-      notFound: getFillNotFound(result.unresolved, forms),
+      count: nextForms.count + nextDrafts.count,
+      notFound: getFillNotFound(result.unresolved, forms, drafts),
       skipped: getSkippedTitles(result.skipped),
     });
     setPhase("review");
@@ -198,11 +204,16 @@ export const useMetadataAIPanel = ({
     setDrafts((prev) => prev.filter((draft) => draft.key !== key));
 
   const values = forms.flatMap(getChangedValues);
+  const customChanges =
+    mode === "fill" && metadata
+      ? getCustomFieldChanges(metadata.customFields, drafts)
+      : [];
 
   const canSave =
     phase !== "analyzing" &&
     (mode === "fill"
-      ? forms.every(isTemplateFormValid) && values.length > 0
+      ? forms.every(isTemplateFormValid) &&
+        (values.length > 0 || customChanges.length > 0)
       : !!metadata &&
         drafts.length > 0 &&
         drafts.every((draft) => isValidSuggestion(draft, metadata, drafts)));
@@ -211,8 +222,12 @@ export const useMetadataAIPanel = ({
     setIsSaving(true);
 
     try {
-      if (mode === "fill") await setMetadataValues(kind, id, values);
-      else {
+      if (mode === "fill") {
+        if (values.length) await setMetadataValues(kind, id, values);
+        if (customChanges.length) {
+          await setMetadataCustomFields(kind, id, customChanges);
+        }
+      } else {
         await setMetadataCustomFields(kind, id, toCustomFieldRequests(drafts));
       }
 

@@ -43,6 +43,7 @@ import { getChangedValues } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metada
 
 import type { TMetadataAIContext, TMetadataAIItem } from "../types";
 import {
+  applyAICustomValues,
   applyAIValues,
   canReadAsText,
   getFillNotFound,
@@ -111,7 +112,6 @@ const file = (patch: Partial<TMetadataAIItem> = {}) =>
     fileExst: ".docx",
     rootFolderType: FolderType.USER,
     security: { Edit: true },
-    assignedMetadataTemplates: [1],
     ...patch,
   }) as unknown as TMetadataAIItem;
 
@@ -125,17 +125,11 @@ const room = (patch: Partial<TMetadataAIItem> = {}) =>
   }) as unknown as TMetadataAIItem;
 
 describe("context menu options", () => {
-  it("offers filling only when the item carries a template", () => {
-    expect(getMetadataAIOptions(file(), context)).toEqual([
-      "fill-metadata-ai",
-      "suggest-metadata-ai",
-    ]);
-    expect(
-      getMetadataAIOptions(file({ assignedMetadataTemplates: [] }), context),
-    ).toEqual(["suggest-metadata-ai"]);
-    expect(getMetadataAIOptions(room(), context)).toEqual([
-      "suggest-metadata-ai",
-    ]);
+  it("offers both actions on files, folders and rooms", () => {
+    const both = ["fill-metadata-ai", "suggest-metadata-ai"];
+
+    expect(getMetadataAIOptions(file(), context)).toEqual(both);
+    expect(getMetadataAIOptions(room(), context)).toEqual(both);
   });
 
   it("hides both where AI cannot read or write the metadata", () => {
@@ -184,6 +178,22 @@ describe("fill", () => {
     ]);
   });
 
+  it("puts the custom values AI found into their fields", () => {
+    const drafts = [
+      { key: "Reviewer", name: "Reviewer", value: "Ann", isNew: false },
+      { key: "Court", name: "Court", value: "Superior", isNew: false },
+    ];
+
+    const { drafts: filled, count } = applyAICustomValues(drafts, [
+      { fieldId: 12, name: "Reviewer", value: { stringValue: "Bob" } },
+      { name: "reviewer", value: " Bob " },
+      { name: "Court", value: "Superior" },
+    ]);
+
+    expect(count).toBe(1);
+    expect(filled.map(({ value }) => value)).toEqual(["Bob", "Superior"]);
+  });
+
   it("names the visible fields AI found nothing for", () => {
     expect(
       getFillNotFound(
@@ -191,10 +201,13 @@ describe("fill", () => {
           { fieldId: 14, name: "Hearing date", reason: "not_found" },
           { fieldId: 30, name: "Sync id", reason: "not_found" },
           { fieldId: 12, name: "Client", reason: "already_set" },
+          { name: "Reviewer", reason: "not_found" },
+          { name: "Gone", reason: "not_found" },
         ],
         forms,
+        [{ key: "Reviewer", name: "Reviewer", value: "Ann", isNew: false }],
       ),
-    ).toEqual(["Hearing date"]);
+    ).toEqual(["Hearing date", "Reviewer"]);
   });
 });
 
@@ -204,9 +217,10 @@ describe("suggest", () => {
     { name: "client", type: "text" as const, value: "Initech" },
     { name: "reviewer", type: "text" as const, value: "Bob" },
     { name: "Contract date", type: "date" as const },
+    { name: "Reviewer", type: "text" as const },
   ];
 
-  it("turns the proposals no template covers into custom field drafts", () => {
+  it("turns the proposals no template covers into custom field drafts, with or without a value", () => {
     expect(toSuggestionDrafts(fields, metadata)).toEqual([
       {
         key: "suggestion-counterparty",
@@ -220,20 +234,33 @@ describe("suggest", () => {
         value: "Bob",
         isNew: false,
       },
+      {
+        key: "suggestion-contract date",
+        name: "Contract date",
+        value: "",
+        isNew: true,
+      },
     ]);
-    expect(getSuggestNotFound(fields, metadata)).toEqual(["Contract date"]);
+    expect(getSuggestNotFound(fields, metadata)).toEqual([
+      "Contract date",
+      "Reviewer",
+    ]);
   });
 
-  it("saves the kept drafts as custom fields and refuses an empty value", () => {
+  it("saves new fields even without a value, but never empties an existing one", () => {
     const drafts = toSuggestionDrafts(fields, metadata);
 
     expect(toCustomFieldRequests(drafts)).toEqual([
       { name: "Counterparty", value: "Globex" },
       { name: "Reviewer", value: "Bob" },
+      { name: "Contract date", value: "" },
     ]);
-    expect(isValidSuggestion(drafts[0], metadata, drafts)).toBe(true);
+    expect(isValidSuggestion(drafts[2], metadata, drafts)).toBe(true);
     expect(
       isValidSuggestion({ ...drafts[1], value: " " }, metadata, drafts),
+    ).toBe(false);
+    expect(
+      isValidSuggestion({ ...drafts[0], name: "reviewer" }, metadata, drafts),
     ).toBe(false);
   });
 });

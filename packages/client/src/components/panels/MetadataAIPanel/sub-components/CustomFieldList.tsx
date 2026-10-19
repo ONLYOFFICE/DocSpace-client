@@ -41,21 +41,21 @@ import { isCustomFieldNameTaken } from "SRC_DIR/pages/Home/InfoPanel/Body/views/
 
 import styles from "../MetadataAIPanel.module.scss";
 
-type SuggestionListProps = {
+type CustomFieldListProps = {
   drafts: TCustomFieldDraft[];
   metadata: TEntryMetadata;
   onChange: (draft: TCustomFieldDraft) => void;
   onRemove: (key: string) => void;
 };
 
-const SuggestionList = ({
+const CustomFieldList = ({
   drafts,
   metadata,
   onChange,
   onRemove,
-}: SuggestionListProps) =>
+}: CustomFieldListProps) =>
   drafts.length ? (
-    <div className={styles.suggestions} data-testid="metadata_ai_suggestions">
+    <div className={styles.customFields} data-testid="metadata_ai_custom_fields">
       {drafts.map((draft) => (
         <CustomFieldRow
           key={draft.key}
@@ -65,6 +65,7 @@ const SuggestionList = ({
             metadata.customFields,
             drafts,
           )}
+          isAutoFocussed={false}
           onChange={onChange}
           onRemove={() => onRemove(draft.key)}
         />
@@ -72,4 +73,4 @@ const SuggestionList = ({
     </div>
   ) : null;
 
-export default SuggestionList;
+export default CustomFieldList;

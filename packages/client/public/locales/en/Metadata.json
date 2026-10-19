@@ -13,7 +13,7 @@
   "AINoChanges": "AI found no new values in the content.",
   "AINoModel": "No AI model is selected for metadata. Ask the administrator to choose one in the AI settings.",
   "AINotFound": "No values found for: {{fields}}",
-  "AINothingToFill": "Add a template to this item first, then fill it with AI.",
+  "AINothingToFill": "Add a template or custom fields to this item first, then fill it with AI.",
   "AINothingToRead": "AI could not read the content of this item.",
   "AIReviewAutofill": "Review autofill",
   "AIReviewSuggestions": "Review suggestions",

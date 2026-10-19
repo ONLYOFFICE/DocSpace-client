@@ -49,9 +49,9 @@ import { useStore } from "SRC_DIR/store/useStore";
 import { useMetadataAIPanel } from "./hooks/useMetadataAIPanel";
 import type { TMetadataAIMode } from "./types";
 import AICallout from "./sub-components/AICallout";
+import CustomFieldList from "./sub-components/CustomFieldList";
 import FillForms from "./sub-components/FillForms";
 import ReviewNotes from "./sub-components/ReviewNotes";
-import SuggestionList from "./sub-components/SuggestionList";
 import styles from "./MetadataAIPanel.module.scss";
 
 type MetadataAIDialogProps = {
@@ -82,7 +82,17 @@ const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
   const isFill = mode === "fill";
   const isAnalyzing = phase === "analyzing";
   const isReview = phase === "review" && !!summary;
-  const hasNothingToFill = isFill && phase !== "loading" && !forms.length;
+  const hasNothingToFill =
+    isFill && phase !== "loading" && !forms.length && !drafts.length;
+
+  const customFields = metadata ? (
+    <CustomFieldList
+      drafts={drafts}
+      metadata={metadata}
+      onChange={changeDraft}
+      onRemove={removeDraft}
+    />
+  ) : null;
 
   const getTitle = () => {
     if (isFill) {
@@ -151,6 +161,7 @@ const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
             {isFill ? (
               <FillForms
                 forms={forms}
+                customFields={drafts.length ? customFields : null}
                 isAnalyzing={isAnalyzing}
                 onChange={setInput}
               />
@@ -158,14 +169,7 @@ const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
 
             {!isFill && isAnalyzing ? loader : null}
 
-            {!isFill && isReview && metadata ? (
-              <SuggestionList
-                drafts={drafts}
-                metadata={metadata}
-                onChange={changeDraft}
-                onRemove={removeDraft}
-              />
-            ) : null}
+            {!isFill && isReview ? customFields : null}
           </div>
         )}
       </ModalDialog.Body>

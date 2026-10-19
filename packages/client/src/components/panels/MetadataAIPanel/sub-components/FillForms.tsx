@@ -33,7 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { ReactNode } from "react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -46,41 +48,63 @@ import styles from "../MetadataAIPanel.module.scss";
 
 type FillFormsProps = {
   forms: TTemplateForm[];
+  customFields: ReactNode;
   isAnalyzing: boolean;
   onChange: (templateId: number, fieldId: number, input: TMetadataInput) => void;
 };
 
-const FillForms = ({ forms, isAnalyzing, onChange }: FillFormsProps) => (
-  <div className={styles.forms}>
-    <div className={classNames({ [styles.disabled]: isAnalyzing })}>
-      {forms.map((form) => (
-        <div key={form.template.id}>
-          {forms.length > 1 ? (
-            <Text
-              className={styles.templateName}
-              fontSize="14px"
-              fontWeight={600}
-              lineHeight="16px"
-              truncate
-            >
-              {form.template.name}
-            </Text>
-          ) : null}
-          <TemplateForm
-            form={form}
-            onChange={(fieldId, input) =>
-              onChange(form.template.id, fieldId, input)
-            }
-          />
-        </div>
-      ))}
-    </div>
-    {isAnalyzing ? (
-      <div className={styles.overlay} data-testid="metadata_ai_analyzing">
-        <Loader type={LoaderTypes.track} size="32px" />
-      </div>
-    ) : null}
-  </div>
+const SectionTitle = ({ children }: { children: string }) => (
+  <Text
+    className={styles.templateName}
+    fontSize="14px"
+    fontWeight={600}
+    lineHeight="16px"
+    truncate
+  >
+    {children}
+  </Text>
 );
+
+const FillForms = ({
+  forms,
+  customFields,
+  isAnalyzing,
+  onChange,
+}: FillFormsProps) => {
+  const { t } = useTranslation(["Metadata"]);
+
+  const withTitles = forms.length > 1 || !!customFields;
+
+  return (
+    <div className={styles.forms}>
+      <div className={classNames({ [styles.disabled]: isAnalyzing })}>
+        {forms.map((form) => (
+          <div key={form.template.id}>
+            {withTitles ? <SectionTitle>{form.template.name}</SectionTitle> : null}
+            <TemplateForm
+              form={form}
+              onChange={(fieldId, input) =>
+                onChange(form.template.id, fieldId, input)
+              }
+            />
+          </div>
+        ))}
+        {customFields ? (
+          <div>
+            {forms.length ? (
+              <SectionTitle>{t("Metadata:CustomFields")}</SectionTitle>
+            ) : null}
+            {customFields}
+          </div>
+        ) : null}
+      </div>
+      {isAnalyzing ? (
+        <div className={styles.overlay} data-testid="metadata_ai_analyzing">
+          <Loader type={LoaderTypes.track} size="32px" />
+        </div>
+      ) : null}
+    </div>
+  );
+};
 
 export default FillForms;

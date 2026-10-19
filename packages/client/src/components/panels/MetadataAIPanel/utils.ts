@@ -60,8 +60,8 @@ import {
   canEditMetadata,
   createTemplateForm,
   getVisibleTemplates,
+  isCustomFieldNameTaken,
   isSameInput,
-  isValidCustomFieldDraft,
 } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/utils";
 
 import type { TMetadataAIContext, TMetadataAIItem } from "./types";
@@ -108,11 +108,7 @@ export const getMetadataAIOptions = (
     canEditMetadata(item) &&
     (!isFile(item) || canReadAsText(item.fileExst, extsConvertible));
 
-  if (!isAvailable) return [];
-
-  return item.assignedMetadataTemplates?.length
-    ? [FILL_METADATA_AI, SUGGEST_METADATA_AI]
-    : [SUGGEST_METADATA_AI];
+  return isAvailable ? METADATA_AI_OPTIONS : [];
 };
 
 export const getTemplateForms = ({ templates }: TEntryMetadata) =>
@@ -146,9 +142,33 @@ export const applyAIValues = (
   return { forms: next, count };
 };
 
+export const applyAICustomValues = (
+  drafts: TCustomFieldDraft[],
+  filled: TMetadataAIFilledField[],
+) => {
+  let count = 0;
+
+  const next = drafts.map((draft) => {
+    const value = filled.find(
+      (field) =>
+        field.fieldId === undefined && isSameName(field.name, draft.name),
+    )?.value;
+    const text = typeof value === "string" ? value.trim() : "";
+
+    if (!text || text === draft.value) return draft;
+
+    count += 1;
+
+    return { ...draft, value: text };
+  });
+
+  return { drafts: next, count };
+};
+
 export const getFillNotFound = (
   unresolved: TMetadataAIUnresolvedField[],
   forms: TTemplateForm[],
+  drafts: TCustomFieldDraft[],
 ) => {
   const fieldIds = forms.flatMap(({ template }) =>
     template.fields.map(({ id }) => id),
@@ -156,7 +176,11 @@ export const getFillNotFound = (
 
   return unresolved
     .filter(({ reason }) => NOT_FOUND_REASONS.includes(reason))
-    .filter(({ fieldId }) => fieldId !== undefined && fieldIds.includes(fieldId))
+    .filter(({ fieldId, name }) =>
+      fieldId === undefined
+        ? drafts.some((draft) => isSameName(draft.name, name))
+        : fieldIds.includes(fieldId),
+    )
     .map(({ name }) => name);
 };
 
@@ -181,7 +205,7 @@ export const toSuggestionDrafts = (
       isSameName(field.name, name),
     );
 
-    if (!text || text === current?.value) return [];
+    if (current && (!text || text === current.value)) return [];
 
     return [
       {
@@ -206,8 +230,10 @@ export const isValidSuggestion = (
   metadata: TEntryMetadata,
   drafts: TCustomFieldDraft[],
 ) =>
-  !!draft.value.trim() &&
-  isValidCustomFieldDraft(draft, metadata.customFields, drafts);
+  draft.isNew
+    ? !!draft.name.trim() &&
+      !isCustomFieldNameTaken(draft, metadata.customFields, drafts)
+    : !!draft.value.trim();
 
 export const toCustomFieldRequests = (
   drafts: TCustomFieldDraft[],

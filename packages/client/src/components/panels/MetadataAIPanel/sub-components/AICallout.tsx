@@ -63,20 +63,22 @@ const AICallout = ({
   children,
 }: AICalloutProps) => (
   <div className={styles.callout} data-testid="metadata_ai_callout">
-    <div className={styles.calloutTitle}>
-      <ReactSVG src={AISvgUrl} />
-      <Text
-        className={styles.accent}
-        fontSize="13px"
-        fontWeight={600}
-        lineHeight="20px"
-      >
-        {title}
+    <div className={styles.calloutText}>
+      <div className={styles.calloutTitle}>
+        <ReactSVG src={AISvgUrl} />
+        <Text
+          className={styles.accent}
+          fontSize="12px"
+          fontWeight={600}
+          lineHeight="16px"
+        >
+          {title}
+        </Text>
+      </div>
+      <Text className={styles.description} fontSize="13px" lineHeight="20px">
+        {description}
       </Text>
     </div>
-    <Text fontSize="13px" lineHeight="20px">
-      {description}
-    </Text>
     {children}
     <Button
       scale

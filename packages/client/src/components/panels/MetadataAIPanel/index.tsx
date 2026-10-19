@@ -116,7 +116,7 @@ const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
 
   const loader = (
     <div className={styles.loader}>
-      <Loader type={LoaderTypes.track} size="32px" />
+      <Loader type={LoaderTypes.track} size="64px" />
     </div>
   );
 

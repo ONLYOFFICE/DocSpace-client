@@ -101,8 +101,11 @@ import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.fo
 import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
 import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
 
-import EmptyAIAgentsDarkIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.dark.svg";
-import EmptyAIAgentsLightIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.light.svg";
+import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
+import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
+
+import AIChatNotAvailableDarkIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.dark.svg";
+import AIChatNotAvailableLightIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.light.svg";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components";
 
@@ -744,11 +747,24 @@ export const getRootIcon = (
   rootFolderType: Nullable<FolderType>,
   access: AccessType,
   isBaseTheme: boolean,
+  aiReady: boolean,
 ) => {
   return match([rootFolderType, access])
-    .with([FolderType.AIAgents, P._], () =>
-      isBaseTheme ? <EmptyAIAgentsLightIcon /> : <EmptyAIAgentsDarkIcon />,
-    )
+    .with([FolderType.AIAgents, P._], () => {
+      if (aiReady) {
+        return isBaseTheme ? (
+          <EmptyAIAgentsLightIcon />
+        ) : (
+          <EmptyAIAgentsDarkIcon />
+        );
+      }
+
+      return isBaseTheme ? (
+        <AIChatNotAvailableLightIcon />
+      ) : (
+        <AIChatNotAvailableDarkIcon />
+      );
+    })
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       isBaseTheme ? <EmptyRoomsRootLightIcon /> : <EmptyRoomsRootDarkIcon />,
     )
@@ -894,3 +910,4 @@ export const helperOptions = (
     createUploadFromDeviceOption,
   };
 };
+

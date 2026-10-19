@@ -98,10 +98,13 @@ import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.default.folder
 import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
 import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 
-import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
-import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
 import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
 import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
+
+import EmptyAIAgentsDarkIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.dark.svg";
+import EmptyAIAgentsLightIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.light.svg";
+
+import { Text } from "@onlyoffice/apps-ui-kit/components";
 
 import {
   FilesSelectorFilterTypes,
@@ -124,7 +127,6 @@ import type {
   OptionActions,
   UploadType,
 } from "./EmptyViewContainer.types";
-import { Text } from "@onlyoffice/apps-ui-kit/components";
 
 export const isUser = (access: AccessType) => {
   return (
@@ -286,9 +288,7 @@ const getAIAgentsAIDisabledTitle = (
       )
       .with([false, true], () => t("Common:EmptyAIAgentsNotActiveYetTitle"))
       // standalone user
-      .with([true, false], () =>
-        t("Common:EmptyAIAgentsAIDisabledUserTitle"),
-      )
+      .with([true, false], () => t("Common:EmptyAIAgentsAIDisabledUserTitle"))
       // saas user
       .otherwise(() => t("Common:AIFeaturesNotActive"))
   );
@@ -315,9 +315,7 @@ const getAIAgentsAIDisabledDescription = (
         </Text>
       </>
     ))
-    .with([true, false], () =>
-      t("Common:EmptyAIAgentsAIDisabledDescription"),
-    )
+    .with([true, false], () => t("Common:EmptyAIAgentsAIDisabledDescription"))
     .otherwise(() => t("Common:EmptyAIDisabledContactAdminDesc"));
 };
 
@@ -896,4 +894,3 @@ export const helperOptions = (
     createUploadFromDeviceOption,
   };
 };
-

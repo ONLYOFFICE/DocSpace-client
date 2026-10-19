@@ -69,6 +69,15 @@
   color: var(--accent-main);
 }
 
+.prompt {
+  resize: vertical;
+  overflow: hidden;
+}
+
+.promptField {
+  --textarea-height-custom: 100%;
+}
+
 .hint {
   color: var(--param-description-color);
 }

@@ -234,7 +234,7 @@ export type TMetadataAIFillResult = {
   unresolved: TMetadataAIUnresolvedField[];
   sources: TMetadataAISource[];
   skipped: TMetadataAISkipped[];
-  dryRun?: boolean;
+  dryRun: boolean;
 };
 
 export type TMetadataAIGenerateRequest = {
@@ -245,8 +245,7 @@ export type TMetadataAIGenerateRequest = {
 
 export type TMetadataAIField = {
   name: string;
-  type: "text" | "number" | "date";
-  value?: string;
+  value: string | null;
 };
 
 export type TMetadataAIGenerateResult = {

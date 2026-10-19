@@ -194,30 +194,29 @@ describe("fill", () => {
     expect(filled.map(({ value }) => value)).toEqual(["Bob", "Superior"]);
   });
 
-  it("names the visible fields AI found nothing for", () => {
+  it("names the empty visible fields AI found nothing for", () => {
     expect(
       getFillNotFound(
         [
           { fieldId: 14, name: "Hearing date", reason: "not_found" },
+          { fieldId: 12, name: "Client", reason: "not_found" },
           { fieldId: 30, name: "Sync id", reason: "not_found" },
-          { fieldId: 12, name: "Client", reason: "already_set" },
+          { fieldId: 15, name: "Claim amount", reason: "write_failed" },
           { name: "Reviewer", reason: "not_found" },
-          { name: "Gone", reason: "not_found" },
         ],
         forms,
-        [{ key: "Reviewer", name: "Reviewer", value: "Ann", isNew: false }],
       ),
-    ).toEqual(["Hearing date", "Reviewer"]);
+    ).toEqual(["Hearing date"]);
   });
 });
 
 describe("suggest", () => {
   const fields = [
-    { name: "Counterparty", type: "text" as const, value: " Globex " },
-    { name: "client", type: "text" as const, value: "Initech" },
-    { name: "reviewer", type: "text" as const, value: "Bob" },
-    { name: "Contract date", type: "date" as const },
-    { name: "Reviewer", type: "text" as const },
+    { name: "Counterparty", value: " Globex " },
+    { name: "client", value: "Initech" },
+    { name: "reviewer", value: "Bob" },
+    { name: "Contract date", value: null },
+    { name: "Reviewer", value: null },
   ];
 
   it("turns the proposals no template covers into custom field drafts, with or without a value", () => {
@@ -247,13 +246,12 @@ describe("suggest", () => {
     ]);
   });
 
-  it("saves new fields even without a value, but never empties an existing one", () => {
+  it("saves only the fields with a value and never empties an existing one", () => {
     const drafts = toSuggestionDrafts(fields, metadata);
 
     expect(toCustomFieldRequests(drafts)).toEqual([
       { name: "Counterparty", value: "Globex" },
       { name: "Reviewer", value: "Bob" },
-      { name: "Contract date", value: "" },
     ]);
     expect(isValidSuggestion(drafts[2], metadata, drafts)).toBe(true);
     expect(

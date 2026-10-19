@@ -69,6 +69,7 @@ import type { TMetadataAIContext, TMetadataAIItem } from "./types";
 export const FILL_METADATA_AI = "fill-metadata-ai";
 export const SUGGEST_METADATA_AI = "suggest-metadata-ai";
 export const METADATA_AI_OPTIONS = [FILL_METADATA_AI, SUGGEST_METADATA_AI];
+export const METADATA_AI_PROMPT_MAX_LENGTH = 2000;
 
 const TEXT_EXTENSIONS = [".txt", ".csv"];
 
@@ -168,18 +169,18 @@ export const applyAICustomValues = (
 export const getFillNotFound = (
   unresolved: TMetadataAIUnresolvedField[],
   forms: TTemplateForm[],
-  drafts: TCustomFieldDraft[],
 ) => {
-  const fieldIds = forms.flatMap(({ template }) =>
-    template.fields.map(({ id }) => id),
+  const emptyFieldIds = forms.flatMap(({ template, inputs }) =>
+    template.fields
+      .filter(({ id }) => !inputs[id]?.length)
+      .map(({ id }) => id),
   );
 
   return unresolved
     .filter(({ reason }) => NOT_FOUND_REASONS.includes(reason))
-    .filter(({ fieldId, name }) =>
-      fieldId === undefined
-        ? drafts.some((draft) => isSameName(draft.name, name))
-        : fieldIds.includes(fieldId),
+    .filter(
+      ({ fieldId }) =>
+        fieldId !== undefined && emptyFieldIds.includes(fieldId),
     )
     .map(({ name }) => name);
 };
@@ -238,7 +239,9 @@ export const isValidSuggestion = (
 export const toCustomFieldRequests = (
   drafts: TCustomFieldDraft[],
 ): TCustomFieldRequest[] =>
-  drafts.map(({ name, value }) => ({ name: name.trim(), value: value.trim() }));
+  drafts
+    .map(({ name, value }) => ({ name: name.trim(), value: value.trim() }))
+    .filter(({ value }) => value);
 
 export const getSkippedTitles = (skipped: TMetadataAISkipped[]) =>
   skipped

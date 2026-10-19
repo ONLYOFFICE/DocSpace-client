@@ -100,6 +100,8 @@ export const useMetadataAIPanel = ({
   const [summary, setSummary] = useState<TMetadataAISummary | null>(null);
   const [error, setError] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [prompt, setPrompt] = useState("");
+  const [overwrite, setOverwrite] = useState(false);
 
   const controller = useRef<AbortController | null>(null);
 
@@ -127,16 +129,10 @@ export const useMetadataAIPanel = ({
   }, [kind, id]);
 
   const fill = async (signal: AbortSignal) => {
-    const result = await fillMetadataWithAI({ kind, id, dryRun: true }, signal);
-
-    if (!result.dryRun) {
-      toastr.success(
-        t("Metadata:AIFilledCount", { count: result.filled.length }),
-      );
-      onClose();
-      return;
-    }
-
+    const result = await fillMetadataWithAI(
+      { kind, id, dryRun: true, overwrite, prompt: prompt.trim() || undefined },
+      signal,
+    );
     const nextForms = applyAIValues(forms, result.filled);
     const nextDrafts = applyAICustomValues(drafts, result.filled);
 
@@ -144,7 +140,7 @@ export const useMetadataAIPanel = ({
     setDrafts(nextDrafts.drafts);
     setSummary({
       count: nextForms.count + nextDrafts.count,
-      notFound: getFillNotFound(result.unresolved, forms, drafts),
+      notFound: getFillNotFound(result.unresolved, forms),
       skipped: getSkippedTitles(result.skipped),
     });
     setPhase("review");
@@ -152,7 +148,10 @@ export const useMetadataAIPanel = ({
 
   const suggest = async (signal: AbortSignal, data: TEntryMetadata) => {
     const result = await generateMetadataWithAI(
-      kind === "file" ? { files: [id] } : { folders: [id] },
+      {
+        ...(kind === "file" ? { files: [id] } : { folders: [id] }),
+        prompt: prompt.trim() || undefined,
+      },
       signal,
     );
     const suggestions = toSuggestionDrafts(result.fields, data);
@@ -215,7 +214,7 @@ export const useMetadataAIPanel = ({
       ? forms.every(isTemplateFormValid) &&
         (values.length > 0 || customChanges.length > 0)
       : !!metadata &&
-        drafts.length > 0 &&
+        toCustomFieldRequests(drafts).length > 0 &&
         drafts.every((draft) => isValidSuggestion(draft, metadata, drafts)));
 
   const save = async () => {
@@ -248,6 +247,10 @@ export const useMetadataAIPanel = ({
     error,
     isSaving,
     canSave,
+    prompt,
+    overwrite,
+    setPrompt,
+    setOverwrite,
     runAI,
     setInput,
     changeDraft,

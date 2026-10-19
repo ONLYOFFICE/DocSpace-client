@@ -35,6 +35,7 @@
 
 import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 
+import type { ReactNode } from "react";
 import { ReactSVG } from "react-svg";
 
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
@@ -49,6 +50,7 @@ type AICalloutProps = {
   error: string;
   isDisabled: boolean;
   onClick: () => void;
+  children?: ReactNode;
 };
 
 const AICallout = ({
@@ -58,6 +60,7 @@ const AICallout = ({
   error,
   isDisabled,
   onClick,
+  children,
 }: AICalloutProps) => (
   <div className={styles.callout} data-testid="metadata_ai_callout">
     <div className={styles.calloutTitle}>
@@ -74,6 +77,7 @@ const AICallout = ({
     <Text fontSize="13px" lineHeight="20px">
       {description}
     </Text>
+    {children}
     <Button
       scale
       size={ButtonSize.small}

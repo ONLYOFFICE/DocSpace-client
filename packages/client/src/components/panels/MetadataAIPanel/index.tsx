@@ -37,17 +37,20 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 
 import type { TMetadataSelection } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import { useMetadataAIPanel } from "./hooks/useMetadataAIPanel";
 import type { TMetadataAIMode } from "./types";
+import { METADATA_AI_PROMPT_MAX_LENGTH } from "./utils";
 import AICallout from "./sub-components/AICallout";
 import CustomFieldList from "./sub-components/CustomFieldList";
 import FillForms from "./sub-components/FillForms";
@@ -72,6 +75,10 @@ const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
     error,
     isSaving,
     canSave,
+    prompt,
+    overwrite,
+    setPrompt,
+    setOverwrite,
     runAI,
     setInput,
     changeDraft,
@@ -154,7 +161,29 @@ const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
                   }
                   isDisabled={isAnalyzing || isSaving || hasNothingToFill}
                   onClick={runAI}
-                />
+                >
+                  <Textarea
+                    wrapperClassName={styles.prompt}
+                    className={styles.promptField}
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    placeholder={t("Metadata:AIPromptPlaceholder")}
+                    maxLength={METADATA_AI_PROMPT_MAX_LENGTH}
+                    heightTextArea="64px"
+                    fontSize={13}
+                    isDisabled={isAnalyzing}
+                    dataTestId="metadata_ai_prompt_textarea"
+                  />
+                  {isFill ? (
+                    <Checkbox
+                      label={t("Metadata:OverwriteExistingValues")}
+                      isChecked={overwrite}
+                      isDisabled={isAnalyzing}
+                      onChange={() => setOverwrite(!overwrite)}
+                      dataTestId="metadata_ai_overwrite_checkbox"
+                    />
+                  ) : null}
+                </AICallout>
               )}
             </div>
 

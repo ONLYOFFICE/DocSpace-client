@@ -72,16 +72,15 @@ import {
 } from "@docspace/shared/components/empty-view";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+
+import EmptyAIAgentsDarkIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.dark.svg";
+import EmptyAIAgentsLightIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.light.svg";
+
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
-import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 import CreateAIAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
 
-import {
-  useAgentsUserStore,
-  useAgentDialogsStore,
-} from "../../_store";
+import { useAgentsUserStore, useAgentDialogsStore } from "../../_store";
 
 // Port of client EmptyViewContainer for the AI Agents root folder. Renders
 // the same <EmptyView> primitive with the same i18n keys + the same SVG

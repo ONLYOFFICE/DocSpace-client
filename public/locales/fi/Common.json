@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "Ei suosikkitiedostoja vielä",
   "EmptyFieldError": "Tyhjä kenttä",
   "EmptyFilterAIAgentsDescription": "Ei löytynyt vastaavia agentteja tälle suodattimelle. Kokeile toista tai poista suodatin nähdäksesi kaikki agentit.",
+  "EmptyFilterDescriptionText": "Yksikään tiedosto tai kansio ei vastaa tätä suodatinta. Kokeile toista suodatinta tai poista suodatin nähdäksesi kaikki tiedostot.",
   "EmptyFilterFilesDescription": "Mikään tiedosto tai kansio ei vastaa hakuehtoja. Kokeile toista tai poista hakuehdot nähdäksesi kaikki tiedostot.",
   "EmptyFilterRoomsDescription": "Mikään huone ei vastaa hakuehtoja. Kokeile toista tai poista hakuehdot nähdäksesi kaikki huoneet.",
   "EmptyFolder": "Tämä kansio on tyhjä",

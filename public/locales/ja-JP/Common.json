@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "お気に入りのファイルはまだありません",
   "EmptyFieldError": "空のフィールド",
   "EmptyFilterAIAgentsDescription": "このフィルターに一致するエージェントはありません。別のフィルターを試すか、フィルターを解除してすべてのエージェントを表示してください。",
+  "EmptyFilterDescriptionText": "このフィルターに一致するファイルやフォルダーはありません。別のフィルタを試すか、フィルタを解除してすべてのファイルを表示してください。",
   "EmptyFilterFilesDescription": "このフィルタに一致するファイルやフォルダはありません。別のフィルタを適用するか、フィルタを解除してすべてのファイルを表示してください。",
   "EmptyFilterRoomsDescription": "この条件に一致するルームはありません。別の条件で検索するか、フィルタをリセットしてすべてのルームを表示してください。",
   "EmptyFolder": "このフォルダは空です",

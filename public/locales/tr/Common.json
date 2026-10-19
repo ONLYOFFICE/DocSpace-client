@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "Henüz favori dosya yok",
   "EmptyFieldError": "Boş alan",
   "EmptyFilterAIAgentsDescription": "Bu filtreyle eşleşen aracı bulunamadı. Başka bir filtre deneyin veya tüm aracılar görünmesi için filtreyi kaldırın.",
+  "EmptyFilterDescriptionText": "Bu filtreyle eşleşen dosya veya klasör yok. Farklı bir filtre deneyin veya tüm dosyaları görüntülemek için filtreyi temizleyin.",
   "EmptyFilterFilesDescription": "Bu filtreyle eşleşen dosya veya klasör yok. Başka bir tane deneyin veya tüm dosyaları görüntülemek için filtreyi kaldırın.",
   "EmptyFilterRoomsDescription": "Bu filtreyle eşleşen oda yok. Tüm odaları görüntülemek için başka bir tane deneyin veya filtreyi sıfırlayın.",
   "EmptyFolder": "Bu klasör boş",

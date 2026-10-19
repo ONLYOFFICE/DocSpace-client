@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "Hələlik sevimli fayl yoxdur",
   "EmptyFieldError": "Boş sahə",
   "EmptyFilterAIAgentsDescription": "Bu filtrə uyğun agent yoxdur. Başqa birini sınayın və ya bütün agentləri görmək üçün filtri silin.",
+  "EmptyFilterDescriptionText": "Heç bir fayl və ya qovluq bu süzgəcə uyğun deyil. Xahiş edirik digər süzgəc parametrindən istifadə edin və ya bütün faylların göstərilməsi üçün süzgəci sıfırlayın.",
   "EmptyFilterFilesDescription": "Bu filtrə uyğun heç bir fayl və ya qovluq yoxdur. Başqasını yoxlayın və ya bütün fayllara baxmaq üçün filtri silin.",
   "EmptyFilterRoomsDescription": "Bu filtrə uyğun otaq yoxdur. Bütün otaqlara baxmaq üçün başqa filtri yoxlayın və ya filtri sıfırlayın.",
   "EmptyFolder": "Bu qovluq boşdur",

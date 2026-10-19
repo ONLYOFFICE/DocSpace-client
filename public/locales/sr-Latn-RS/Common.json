@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "Još nema omiljenih fajlova",
   "EmptyFieldError": "Prazno polje",
   "EmptyFilterAIAgentsDescription": "Nijedan agent ne odgovara ovom filteru. Probajte drugi ili uklonite filter da biste videli sve agente.",
+  "EmptyFilterDescriptionText": "Nijedna datoteka ili folder se poklapaju sa ovim filterom. Probajte drugačiji ili obrišite filter da biste videli sve datoteke.",
   "EmptyFilterFilesDescription": "Nijedna datoteka ili fascikla ne odgovara ovom filteru. Pokušajte sa drugim ili uklonite filter da biste videli sve datoteke.",
   "EmptyFilterRoomsDescription": "Nijedna soba ne odgovara ovom filteru. Pokušajte sa drugim ili resetujte filter da biste videli sve sobe.",
   "EmptyFolder": "Ovaj folder je prazan",

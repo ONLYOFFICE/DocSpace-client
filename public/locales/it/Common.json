@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "Nessun file preferito ancora",
   "EmptyFieldError": "Campo vuoto",
   "EmptyFilterAIAgentsDescription": "Nessun agente corrisponde a questo filtro. Prova un altro filtro o rimuovilo per visualizzare tutti gli agenti.",
+  "EmptyFilterDescriptionText": "Nessun file o cartella corrisponde a questo filtro. Provane uno diverso o cancella il filtro per visualizzare tutti i file.",
   "EmptyFilterFilesDescription": "Nessun file o cartella corrisponde a questo filtro. Prova con un altro o rimuovi il filtro per visualizzare tutti i file.",
   "EmptyFilterRoomsDescription": "Nessuna stanza corrisponde a questo filtro. Prova con un'altra o ripristina il filtro per visualizzare tutte le stanze.",
   "EmptyFolder": "Questa cartella è vuota",

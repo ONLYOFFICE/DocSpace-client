@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "Nog geen favoriete bestanden",
   "EmptyFieldError": "Leeg veld",
   "EmptyFilterAIAgentsDescription": "Geen agenten voldoen aan deze filter. Probeer een andere of verwijder de filter om alle agenten te bekijken.",
+  "EmptyFilterDescriptionText": "Geen bestanden of mappen komen overeen met dit filter. Probeer een andere of verwijder de filter om alle bestanden te zien.",
   "EmptyFilterFilesDescription": "Er komen geen bestanden of mappen overeen met dit filter. Probeer een ander filter of verwijder het filter om alle bestanden te bekijken.",
   "EmptyFilterRoomsDescription": "Er komt geen kamer overeen met dit filter. Probeer een andere of verwijder het filter om alle kamers te bekijken.",
   "EmptyFolder": "Deze map is leeg",

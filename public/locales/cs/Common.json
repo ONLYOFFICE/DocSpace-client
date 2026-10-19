@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "Zatím žádné oblíbené soubory",
   "EmptyFieldError": "Prázdné pole",
   "EmptyFilterAIAgentsDescription": "Žádní agenti neodpovídají tomuto filtru. Zkuste jiný nebo filtr odstraňte, abyste zobrazili všechny agenty.",
+  "EmptyFilterDescriptionText": "Tomuto filtru neodpovídají žádné soubory ani složky. Vyzkoušejte jiný nebo vymažte filtr pro zobrazení všech souborů.",
   "EmptyFilterFilesDescription": "Tomuto filtru neodpovídají žádné soubory ani složky. Zkuste jiný filtr nebo filtr odstraňte a zobrazte všechny soubory.",
   "EmptyFilterRoomsDescription": "Tomuto filtru neodpovídá žádná místnost. Zkuste jiný filtr nebo obnovte filtr pro zobrazení všech místností.",
   "EmptyFolder": "Tato složka je prázdná",

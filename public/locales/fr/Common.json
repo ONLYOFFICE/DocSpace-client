@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "Aucun fichier favori pour le moment",
   "EmptyFieldError": "Champ vide",
   "EmptyFilterAIAgentsDescription": "Aucun agent ne correspond à ce filtre. Essayez-en un autre ou supprimez le filtre pour afficher tous les agents.",
+  "EmptyFilterDescriptionText": "Aucun fichier ou dossier ne correspond à ce filtre. Essayez un autre filtre ou effacez le filtre pour afficher tous les fichiers.",
   "EmptyFilterFilesDescription": "Aucun fichier ou dossier ne correspond à ce filtre. Essayez-en un autre ou supprimez le filtre pour afficher tous les fichiers.",
   "EmptyFilterRoomsDescription": "Aucune salle ne correspond à ce filtre. Essayez un autre filtre ou réinitialisez le filtre pour afficher toutes les salles.",
   "EmptyFolder": "Ce dossier est vide",

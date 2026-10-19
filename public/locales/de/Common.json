@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "Noch keine favorisierten Dateien",
   "EmptyFieldError": "Leeres Feld",
   "EmptyFilterAIAgentsDescription": "Für diesen Filter wurden keine Agenten gefunden. Versuchen Sie einen anderen Filter oder entfernen Sie den Filter, um alle Agenten anzuzeigen.",
+  "EmptyFilterDescriptionText": "Keine Dateien oder Ordner entsprechen diesem Filter. Versuchen Sie einen anderen Filter oder entfernen Sie diesen, um alle Dateien zu sehen.",
   "EmptyFilterFilesDescription": "Keine Dateien oder Ordner entsprechen diesem Filter. Versuchen Sie es mit einem anderen Filter oder entfernen Sie den Filter, um alle Dateien anzuzeigen.",
   "EmptyFilterRoomsDescription": "Kein Raum entspricht diesem Filter. Versuchen Sie es mit einem anderen Filter oder setzen Sie den Filter zurück, um alle Räume anzuzeigen.",
   "EmptyFolder": "Dieser Ordner ist leer",

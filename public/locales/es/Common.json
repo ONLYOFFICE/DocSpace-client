@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "Aún no hay archivos favoritos",
   "EmptyFieldError": "Campo vacío",
   "EmptyFilterAIAgentsDescription": "Ningún agente coincide con este filtro. Pruebe con otro o elimine el filtro para ver todos los agentes.",
+  "EmptyFilterDescriptionText": "Ningún archivo o carpeta coincide con este filtro. Pruebe con otro o borre el filtro para ver todos los archivos.",
   "EmptyFilterFilesDescription": "Ningún archivo o carpeta coincide con este filtro. Pruebe con otro o elimine el filtro para ver todos los archivos.",
   "EmptyFilterRoomsDescription": "Ninguna sala coincide con este filtro. Pruebe con otro o restablezca el filtro para ver todas las salas.",
   "EmptyFolder": "Esta carpeta está vacía",

@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "暂无收藏的文件",
   "EmptyFieldError": "空字段",
   "EmptyFilterAIAgentsDescription": "没有智能体匹配此筛选条件。尝试其他条件或移除筛选以查看所有智能体。",
+  "EmptyFilterDescriptionText": "没有符合此过滤条件的文件或文件夹。请尝试另一个过滤条件或清除条件以查看所有文件。",
   "EmptyFilterFilesDescription": "没有文件或文件夹符合此筛选条件。请尝试其他筛选条件或移除筛选条件以查看所有文件。",
   "EmptyFilterRoomsDescription": "没有房间符合此筛选条件。请尝试其他筛选条件或重置筛选条件以查看所有房间。",
   "EmptyFolder": "此文件夹为空",

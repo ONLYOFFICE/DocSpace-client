@@ -796,6 +796,7 @@
   "EmptyFavoritesTitle": "Încă nu există fișiere favorite",
   "EmptyFieldError": "Câmpul gol",
   "EmptyFilterAIAgentsDescription": "Filtru de agenți nu a produs rezultate. Încercați un alt filtru sau anulați filtrul pentru a afișa toți agenții.",
+  "EmptyFilterDescriptionText": "Niciun fișier sau dosar nu corespunde setărilor filtru. Aplicați un alt filtru sau îl eliminați ca să afișați toate fișiere.",
   "EmptyFilterFilesDescription": "Filtru de fișier sau folder nu a produs rezultate. Încercați un alt filtru sau eliminați filtrul pentru a afișa toate fișierele.",
   "EmptyFilterRoomsDescription": "Filtru de sală nu a produs rezultate. Încercați un alt filtru sau resetați filtrul pentru a afișa toate sălile.",
   "EmptyFolder": "Acest folder este gol",

@@ -57,6 +57,7 @@ import type { TRoom } from "../rooms/types";
 export type TFile = TFileBase & {
   encrypted?: boolean;
   startFilling?: boolean;
+  assignedMetadataTemplates?: number[];
 };
 
 export type TFileEncryptionInfo = {
@@ -190,6 +191,7 @@ export type TFolderSecurity = {
 
 export type TFolder = {
   parentId: number;
+  assignedMetadataTemplates?: number[];
   filesCount: number;
   foldersCount: number;
   new: number;

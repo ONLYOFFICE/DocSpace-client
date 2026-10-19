@@ -89,6 +89,7 @@ import type { TTranslation } from "@docspace/shared/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { isLockedSharedRoom, trimSeparator } from "@docspace/shared/utils";
 import { removeOptions } from "SRC_DIR/helpers/filesUtils";
+import type { TMetadataSelection } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
 import {
   RoomsType,
   FolderType,
@@ -501,6 +502,36 @@ export const getFilesContextOptionsImpl = (
       label: t("Files:AnalyzeResponses"),
       icon: AISvgUrl,
       onClick: () => self.askAI(item, true),
+      disabled: false,
+    },
+    {
+      key: "separator-metadata-ai",
+      isSeparator: true,
+    },
+    {
+      id: "option_fill-metadata-ai",
+      key: "fill-metadata-ai",
+      label: t("Files:FillMetadataWithAI"),
+      icon: AISvgUrl,
+      onClick: () =>
+        self.dialogsStore.setMetadataAIPanelData({
+          visible: true,
+          item: item as TMetadataSelection,
+          mode: "fill",
+        }),
+      disabled: false,
+    },
+    {
+      id: "option_suggest-metadata-ai",
+      key: "suggest-metadata-ai",
+      label: t("Files:SuggestMetadataWithAI"),
+      icon: AISvgUrl,
+      onClick: () =>
+        self.dialogsStore.setMetadataAIPanelData({
+          visible: true,
+          item: item as TMetadataSelection,
+          mode: "suggest",
+        }),
       disabled: false,
     },
     {
@@ -1254,6 +1285,7 @@ export const getFilesContextOptionsImpl = (
     const groups = item.isFolder
       ? [
           ["select", "open", "mark-read", "open-location"],
+          ["fill-metadata-ai", "suggest-metadata-ai"],
           [
             "update-xlsx-data",
             "share",
@@ -1283,7 +1315,12 @@ export const getFilesContextOptionsImpl = (
             "open-location",
           ],
           ["filling-status", "reset-and-start-filling"],
-          ["ask-ai", "analyze-responses"],
+          [
+            "ask-ai",
+            "analyze-responses",
+            "fill-metadata-ai",
+            "suggest-metadata-ai",
+          ],
           [
             "update-xlsx-data",
             "share",
@@ -1342,7 +1379,11 @@ export const getFilesContextOptionsImpl = (
         const shouldAddSeparator =
           result.length > 0 && (groupItems.length >= 2 || isDeleteGroup);
 
-        if (group.includes("restore") || group.includes("ask-ai")) {
+        if (
+          group.includes("restore") ||
+          group.includes("ask-ai") ||
+          group.includes("suggest-metadata-ai")
+        ) {
           result.push({
             key: `separator${folderSeparatorIndex++}`,
             isSeparator: true,

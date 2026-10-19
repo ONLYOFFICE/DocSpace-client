@@ -88,6 +88,7 @@ import {
   getCurrentDocumentVersion,
   getDocEditor,
   getFormsSectionFolderUrl,
+  getSafeReturnUrl,
   isFormRole,
   isFormRoomFile,
   setDocumentTitle,
@@ -553,7 +554,7 @@ const useEditorEvents = ({
 
   const onSDKRequestClose = React.useCallback(() => {
     const editorGoBack = sdkConfig?.editorGoBack;
-    const returnUrl = sdkConfig?.returnUrl;
+    const returnUrl = getSafeReturnUrl(sdkConfig?.returnUrl);
 
     // Editor opened at the top level (broken out of an SDK iframe): return
     // to the originating listing instead of emitting a close event (which

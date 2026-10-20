@@ -11,7 +11,7 @@ The private-rooms client UI is functionally complete but ships several rough edg
 - "New PDF form" is withheld inside private rooms (forms cannot be filled there); the mobile PDF toast becomes unreachable and is removed with it.
 - Folders inside a private room get a decrypted "Download" that builds a zip on the client from decrypted files, reusing the multi-file zip path; "Download without decryption" stays as the alternative.
 - The delete-key confirmation lists the private rooms whose files become unreadable once the user's only key is deleted.
-- Key dialogs (passphrase, recovery phrase, key change, reset) get dialog roles, labelled inputs and an aside variant on narrow screens.
+- Key dialogs (passphrase, recovery phrase, key change, passphrase change, reset) get dialog roles, labelled inputs and an aside variant on narrow screens.
 - The bulk header menu in a private room gets "Download without decryption".
 
 Out of scope: any change to the encryption model or transfer rules (see `private-rooms-upload-fail-closed`), the SDK surface (see `private-rooms-sdk-gating-and-parity`), editor behaviour. No decision is needed from the user; "withhold New PDF form" is the recommendation and can be flipped to "keep" by editing one scenario before apply.

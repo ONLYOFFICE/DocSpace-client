@@ -18,7 +18,7 @@ The system SHALL delete a registered key only after a warning (Common:DeleteKeyW
 - **THEN** the warning states that no room is affected (Common:DeleteKeyNoAffectedRooms)
 
 ### Requirement: Key dialogs are accessible and adapt to narrow screens
-The system SHALL present the passphrase, recovery-phrase, key-change and reset dialogs as centred modals on wide screens and as aside panels on narrow screens; each dialog SHALL expose a dialog role, an accessible name and labelled inputs so screen readers announce it.
+The system SHALL present the passphrase, recovery-phrase, key-change, passphrase-change and reset dialogs as centred modals on wide screens and as aside panels on narrow screens; each dialog SHALL expose a dialog role, an accessible name and labelled inputs so screen readers announce it.
 
 #### Scenario: Mobile viewport
 - **WHEN** a key dialog opens on a narrow screen

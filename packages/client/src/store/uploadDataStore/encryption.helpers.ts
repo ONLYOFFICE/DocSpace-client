@@ -43,6 +43,10 @@ import {
 import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { selectMemberKeys } from "@docspace/shared/services/private-room/room-member-keys";
+import {
+  verifyMemberKeys,
+  type SkippedMemberKey,
+} from "@docspace/shared/services/private-room/member-key-verification";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { prepareEncryptedUpload } from "@docspace/shared/services/private-room/encrypted-upload";
@@ -133,7 +137,7 @@ export async function wrapForSelfThenRoomImpl(
       fileId,
     });
     await setFileEncryptionKeys(fileId, ownWraps);
-    await self.encryptKeysForRoomMembers(
+    return await self.encryptKeysForRoomMembers(
       fileId,
       currentUserId,
       roomId,
@@ -152,19 +156,19 @@ export async function encryptKeysForRoomMembersImpl(
   roomId: number | string | null,
   dek: Uint8Array,
   identity: IdentityKeyPair,
-) {
+): Promise<SkippedMemberKey[]> {
   try {
     if (!roomId) {
       console.error(
         "[ENCRYPTION] encryptKeysForRoomMembers called without roomId",
       );
-      return;
+      return [];
     }
     if (!dek || !identity) {
       console.error(
         "[ENCRYPTION] encryptKeysForRoomMembers called without dek/identity",
       );
-      return;
+      return [];
     }
     const [publicKeys, encryptionInfo] = await Promise.all([
       getRoomEncryptionKeys(roomId),
@@ -190,13 +194,18 @@ export async function encryptKeysForRoomMembersImpl(
         publicKeyId: key.publicKeyId || "",
       });
     }
-    if (recipients.length === 0) return;
+    if (recipients.length === 0) return [];
+
+    const { verified, skipped } = await verifyMemberKeys(recipients, {
+      scopeUserId: String(currentUserId),
+    });
+    if (verified.length === 0) return skipped;
 
     const newKeys = await wrapDekForRecipients({
       dek,
       senderIdentity: identity,
       senderUserId: String(currentUserId),
-      recipients,
+      recipients: verified,
       fileId,
     });
 
@@ -211,11 +220,13 @@ export async function encryptKeysForRoomMembersImpl(
       ];
       await setFileEncryptionKeys(fileId, allKeys);
     }
+    return skipped;
   } catch (error) {
     console.error(
       "[ENCRYPTION] Failed to encrypt keys for room members:",
       error,
     );
+    return [];
   }
 }
 

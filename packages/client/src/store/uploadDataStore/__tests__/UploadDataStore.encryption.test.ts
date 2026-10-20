@@ -319,6 +319,29 @@ describe("UploadDataStore.checkChunkUpload — encrypted final chunk", () => {
     expect(hasFileDek(store.files[0])).toBe(false);
   });
 
+  it("Member key mismatch on upload: the skipped members land on the file and its history entry", async () => {
+    const { store, serverFile } = setupEncryptedFinalChunk({
+      userStore: userWithKeys(),
+    });
+    const skipped = [
+      { userId: "bob", displayName: undefined, reason: "key-mismatch-refused" as const },
+    ];
+    const wrap = replaceAction(store, "wrapForSelfThenRoom");
+    wrap.mockResolvedValue(skipped);
+
+    callCheckChunkUpload(store, {
+      res: { uploaded: true, id: 555, file: serverFile },
+      index: 1,
+      indexOfFile: 0,
+      chunksLength: 1,
+      resolve: vi.fn(),
+    });
+
+    await vi.waitFor(() => expect(store.files[0].skippedMembers).toEqual(skipped));
+    expect(store.uploadedFilesHistory[0].skippedMembers).toEqual(skipped);
+    expect(store.files[0].error).toBeFalsy();
+  });
+
   it("marks the file and its history entry when wrapping rejects after upload", async () => {
     allowConsoleError("[ENCRYPTION] Failed to set file encryption keys");
     const { store, serverFile } = setupEncryptedFinalChunk({

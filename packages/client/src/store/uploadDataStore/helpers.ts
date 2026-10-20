@@ -39,6 +39,7 @@ import { suspendAutoLock } from "@docspace/shared/services/encryption/secret-sto
 
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { ItemUploadContext } from "@docspace/shared/services/private-room/encrypted-upload";
+import type { SkippedMemberKey } from "@docspace/shared/services/private-room/member-key-verification";
 
 export type TUploadBrowserFile = File & {
   parentFolderId?: number | string;
@@ -60,6 +61,8 @@ export type TUploadFile = {
   encrypted?: boolean;
   encryptionRoomId?: number | string | null;
   reimportRealName?: string | null;
+  /** Room members left out of the file's access list by the pin check. */
+  skippedMembers?: SkippedMemberKey[];
   percent: number;
   inAction?: boolean;
   inConversion?: boolean;

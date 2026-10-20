@@ -185,29 +185,46 @@ export function checkChunkUploadImpl(
           publicKeyId || "",
           dekForWrap!,
           roomIdForWrap,
-        ).catch((error: TAxiosLikeError) => {
-          const wrapMessage = i18n.t("Common:EncryptionUploadWrapFailed");
-          console.error("[ENCRYPTION] Failed to set file encryption keys", {
-            fileId,
-            status: error?.response?.status,
-            message: error?.message,
-          });
-          runInAction(() => {
-            if (self.files[indexOfFile]) {
-              self.files[indexOfFile].error = wrapMessage;
+        )
+          .then((skippedMembers) => {
+            if (!skippedMembers?.length) return;
+            runInAction(() => {
+              const uniqueId = self.files[indexOfFile]?.uniqueId;
+              if (self.files[indexOfFile]) {
+                self.files[indexOfFile].skippedMembers = skippedMembers;
+              }
+              const historyIndex = self.uploadedFilesHistory.findIndex(
+                (f) => f.uniqueId === uniqueId,
+              );
+              if (historyIndex > -1) {
+                self.uploadedFilesHistory[historyIndex].skippedMembers =
+                  skippedMembers;
+              }
+            });
+          })
+          .catch((error: TAxiosLikeError) => {
+            const wrapMessage = i18n.t("Common:EncryptionUploadWrapFailed");
+            console.error("[ENCRYPTION] Failed to set file encryption keys", {
+              fileId,
+              status: error?.response?.status,
+              message: error?.message,
+            });
+            runInAction(() => {
+              if (self.files[indexOfFile]) {
+                self.files[indexOfFile].error = wrapMessage;
+              }
+              const historyIndex = self.uploadedFilesHistory.findIndex(
+                (f) => f.uniqueId === self.files[indexOfFile]?.uniqueId,
+              );
+              if (historyIndex > -1) {
+                self.uploadedFilesHistory[historyIndex].error = wrapMessage;
+              }
+            });
+            try {
+              toastr.error(wrapMessage);
+            } catch {
             }
-            const historyIndex = self.uploadedFilesHistory.findIndex(
-              (f) => f.uniqueId === self.files[indexOfFile]?.uniqueId,
-            );
-            if (historyIndex > -1) {
-              self.uploadedFilesHistory[historyIndex].error = wrapMessage;
-            }
           });
-          try {
-            toastr.error(wrapMessage);
-          } catch {
-          }
-        });
       }
     }
     window.dataLayer = window.dataLayer || [];

@@ -27,7 +27,7 @@ Every task below is committed on its own (see "Commits" in `openspec/config.yaml
 
 ## 5. Locales
 
-- [ ] 5.1 Add `Common:UnusedEncryptionKeysNotice` and `Common:DeleteUnusedEncryptionKeys`; remove the keys used only by the multi-key UI from every language (`UseOnThisDevice`, `EncryptionKeyActivated`, `SwitchKeyPassphraseTitle`, `SwitchKeyPassphraseHint`, `ResumeReEncryptionHint`, `ResumeReEncryptionCta`, `RotatingIdentitySuccess`, `RotatingIdentityPartialFailure`, `RotatingIdentityFailed`, `EncryptionChooseKeyHint`, after confirming each has no remaining caller) with their `.meta`; run `/translate-comments` and `/translate-locales` for the new keys; verify `cd common/tests && npx vitest run test/locales.test.js`.
+- [ ] 5.1 Add `Common:UnusedEncryptionKeysNotice`, `Common:DeleteUnusedEncryptionKeys`, `Common:UnusedEncryptionKeysDeleted` and `Common:UnusedEncryptionKeysPartialFailure`; remove the keys used only by the multi-key UI from every language (`UseOnThisDevice`, `EncryptionKeyActivated`, `SwitchKeyPassphraseTitle`, `SwitchKeyPassphraseHint`, `ResumeReEncryptionHint`, `ResumeReEncryptionCta`, `RotatingIdentitySuccess`, `RotatingIdentityPartialFailure`, `RotatingIdentityFailed`, `EncryptionChooseKeyHint`, after confirming each has no remaining caller) with their `.meta`; run `/translate-comments` and `/translate-locales` for the new keys; verify `cd common/tests && npx vitest run test/locales.test.js`.
 
 ## 6. E2E and integration
 

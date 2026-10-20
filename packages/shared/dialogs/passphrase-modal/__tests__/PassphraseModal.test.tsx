@@ -93,6 +93,16 @@ describe("PassphraseModal", () => {
     expect(onSubmit).toHaveBeenCalledWith("correct horse battery", false);
   });
 
+  it("Option explains the trade-off: the remember option carries its hint", () => {
+    renderModal({ showRememberDevice: true });
+    expect(screen.getByText("Common:RememberDeviceHint")).toBeInTheDocument();
+  });
+
+  it("shows no remember hint when the option is not offered", () => {
+    renderModal();
+    expect(screen.queryByText("Common:RememberDeviceHint")).toBeNull();
+  });
+
   it("ignores Enter while the passphrase is too short", async () => {
     const user = userEvent.setup();
     const { onSubmit } = renderModal();

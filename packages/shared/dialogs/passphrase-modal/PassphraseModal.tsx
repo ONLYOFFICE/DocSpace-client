@@ -336,6 +336,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   label={t("Common:RememberDeviceLabel")}
                   tabIndex={4}
                 />
+                <Text fontSize="12px" color="var(--text-secondary)">
+                  {t("Common:RememberDeviceHint")}
+                </Text>
               </div>
             ) : null}
 

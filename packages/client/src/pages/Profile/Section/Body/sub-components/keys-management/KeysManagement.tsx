@@ -45,9 +45,13 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
 import {
+  DEVICE_UNLOCK_MAX_AGE_MS,
   forgetDeviceUnlock,
-  hasDeviceUnlock,
+  getDeviceUnlockWrittenAt,
 } from "@docspace/shared/services/encryption/device-unlock-store";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { LANGUAGE } from "@onlyoffice/apps-ui-kit/constants";
 import {
   enrollPasskeyUnlock,
   hasPasskeyUnlock,
@@ -87,7 +91,8 @@ const KeysManagement = ({
   const { t } = useTranslation(["Common"]);
   const { isUnlocked, lock, getIdentity, requireIdentity, publicKey } =
     useEncryption();
-  const [deviceRemembered, setDeviceRemembered] = useState(false);
+  /** Formatted date the remembered-device record expires, or null. */
+  const [rememberedUntil, setRememberedUntil] = useState<string | null>(null);
   const [passkeyPlatformOk, setPasskeyPlatformOk] = useState(false);
   const [passkeyEnrolled, setPasskeyEnrolled] = useState(false);
   const [passkeyBusy, setPasskeyBusy] = useState(false);
@@ -96,12 +101,20 @@ const KeysManagement = ({
 
   useEffect(() => {
     if (!userId) {
-      setDeviceRemembered(false);
+      setRememberedUntil(null);
       return undefined;
     }
     let cancelled = false;
-    void hasDeviceUnlock(userId).then((remembered) => {
-      if (!cancelled) setDeviceRemembered(remembered);
+    void getDeviceUnlockWrittenAt(userId).then((writtenAt) => {
+      if (cancelled) return;
+      setRememberedUntil(
+        writtenAt === null
+          ? null
+          : getCorrectDate(
+              getCookie(LANGUAGE) || "",
+              new Date(writtenAt + DEVICE_UNLOCK_MAX_AGE_MS).toISOString(),
+            ),
+      );
     });
     return () => {
       cancelled = true;
@@ -111,7 +124,7 @@ const KeysManagement = ({
   const handleForgetDevice = useCallback(() => {
     if (!userId) return;
     void forgetDeviceUnlock(userId).then(() => {
-      setDeviceRemembered(false);
+      setRememberedUntil(null);
       toastr.success(t("Common:DeviceUnlockForgotten"));
     });
   }, [userId, t]);
@@ -339,9 +352,13 @@ const KeysManagement = ({
               <Text>{t("Common:PasskeyUnlockLabel")}</Text>
             </div>
           ) : null}
-          {deviceRemembered ? (
+          {rememberedUntil ? (
             <div className={styles.deviceRow}>
-              <Text fontSize="13px">{t("Common:RememberDeviceLabel")}</Text>
+              <Text fontSize="13px">
+                {t("Common:DeviceUnlockRememberedUntil", {
+                  date: rememberedUntil,
+                })}
+              </Text>
               <Link
                 type={LinkType.action}
                 fontWeight="600"
@@ -366,7 +383,7 @@ const KeysManagement = ({
                 onClick={() => {
                   if (busy) return;
                   lock();
-                  setDeviceRemembered(false);
+                  setRememberedUntil(null);
                   toastr.success(t("Common:EncryptionLocked"));
                 }}
                 dataTestId="lock_now_link"

@@ -32,6 +32,32 @@ stashed `04-implementation-status.md` already recorded that `GET /privacyroom`
 does not exist and that "availability of private rooms = having keys", so the
 removal follows a decision the feature author made in June 2026.
 
+What the bridge served, read in the ONLYOFFICE repositories on 2026-10-20
+(`master`, release v10.0.0): the desktop application's own encryption, which
+is not the private-rooms scheme.
+
+- `desktop-sdk` `ChromiumBasedEditors/lib/src/cefwrapper/client_renderer_wrapper.cpp`
+  (`portal:login`): when the login data carries `encryptionKeys` with a
+  `cryptoEngineId`, the desktop generates an RSA key pair with OpenSSL,
+  encrypts the private key with AES-GCM under the portal login password and
+  asks the page to store it through `cloudCryptoCommand("encryptionKeys")` or
+  `"updateEncryptionKeys"`.
+- `desktop-sdk` `ChromiumBasedEditors/plugins/encrypt/advanced2/worker.js`:
+  documents are OOXML files with a per-document password, RSA-encrypted for
+  each user's public key into a `docinfo`; the users' public keys come from
+  the page through `getsharingkeys`.
+- `web-apps` `apps/documenteditor/main/app/controller/Main.js` and `sdkjs`
+  `common/apiBase.js`: the editor itself takes `editorConfig.encryptionKeys`
+  from its server configuration (`put_EncryptedInfo`) and hands it to the
+  crypto provider the desktop injects. That path does not go through the
+  client and is not touched here.
+
+Private rooms use X25519 keys with HPKE, the DSE3 container and an Argon2
+passphrase, so the two schemes are incompatible. The editor-side bridge also
+handed the user's X25519 key pair to the desktop engine under its crypto
+engine id. How the desktop application opens private-room files is an open
+product question outside this change.
+
 ## Goals / Non-Goals
 
 **Goals:**

@@ -11,7 +11,7 @@ The embeddable SDK carries its own private-rooms surface (`/sdk/private*`, also 
 - The archive page is verified against the private-room rules: Share tab hidden, encrypted download path, key check, empty view.
 - Key management becomes reachable from the SDK: the forgot-passphrase and device-setup links open the client keys-management page through a route that works while the client is flag-gated (the link carries the opt-in), and the SDK shows an in-place explanation when the client is not reachable from the host.
 - The locale namespaces the private surface needs are available in the SDK, by moving the handful of `People`, `UploadPanel`, `Files` keys it uses into Common (preferred) or bundling those namespaces.
-- Folder copy and move inside the SDK private surface go through re-encryption-aware logic for cross-room moves, or are withheld with a toast; same-room moves stay server-side.
+- Folder copy and move inside the SDK private surface go through re-encryption-aware logic for cross-room moves, or are withheld with a toast; same-room moves stay server-side. Same-room folder copy is refused by the server today (it allows only a move inside one private room); how the SDK handles it is an open decision recorded in design.md.
 - The device-setup hint waits for the key list to load before deciding the user has no keys.
 - The `test.fixme` SDK E2E tests that only lacked a logged-in session and the crypto fixture are enabled (unlock, upload, download, preview, duplicate, copy/move, copy-out blocked, invite); the editor-open test stays `fixme` until `private-rooms-editor-contract` lands.
 

@@ -48,7 +48,7 @@ Inside a private room in the SDK, the create menu SHALL offer "new document", "n
 - **THEN** an encrypted empty document appears in the list under the chosen name
 
 ### Requirement: Folder operations use the server path
-Folder copy and move within the same private room SHALL be executed by the server without client-side re-encryption. A folder copy or move across rooms, into a private room or out of a private room SHALL be withheld with Common:CannotTransferFolderFromPrivateRoom, so no folder transfer can leave files unreadable or unencrypted.
+A folder move within the same private room SHALL be executed by the server without client-side re-encryption. A folder copy or move across rooms, into a private room or out of a private room SHALL be withheld with Common:CannotTransferFolderFromPrivateRoom, so no folder transfer can leave files unreadable or unencrypted.
 
 #### Scenario: Folder moved within a private room
 - **WHEN** the user moves a folder inside the same private room

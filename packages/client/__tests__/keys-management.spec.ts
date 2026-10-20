@@ -188,4 +188,45 @@ test.describe("Profile > Keys Management", () => {
       .filter((r) => r.method === "POST" || r.method === "PUT");
     expect(writeRequests).toHaveLength(0);
   });
+
+  test("Leftover keys: one key card, no generate or import, and the unused-key notice", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const userId = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [
+          {
+            id: "11111111-1111-1111-1111-111111111111",
+            userId,
+            publicKey: "BASE64_PUBLIC_KEY_OLD",
+            privateKeyEnc: "BASE64_PRIVATE_KEY_ENC_OLD",
+            date: "2026-01-01T00:00:00",
+          },
+          {
+            id: "22222222-2222-2222-2222-222222222222",
+            userId,
+            publicKey: "BASE64_PUBLIC_KEY_NEW",
+            privateKeyEnc: "BASE64_PRIVATE_KEY_ENC_NEW",
+            date: "2026-10-01T00:00:00",
+          },
+        ],
+      }),
+    );
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const cards = page.getByTestId("key_details");
+    await expect(cards).toHaveCount(1, { timeout: 15_000 });
+    await expect(cards.first()).toContainText(
+      "22222222-2222-2222-2222-222222222222",
+    );
+    await expect(
+      page.getByRole("button", { name: "Generate new key", exact: true }),
+    ).toHaveCount(0);
+    await expect(page.getByTestId("import_key_link")).toHaveCount(0);
+    await expect(page.getByTestId("unused_keys_notice")).toBeVisible();
+  });
 });

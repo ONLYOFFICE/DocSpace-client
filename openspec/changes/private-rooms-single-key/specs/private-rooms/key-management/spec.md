@@ -82,4 +82,4 @@ The system SHALL show, once per session, a toast (Common:GhostStateDetected) lin
 
 ### Requirement: This device marker
 **Reason**: The key list shows the user's one key; there is no other key to tell apart.
-**Migration**: The single key card shows the lock state of this device instead of a per-key marker.
+**Migration**: The key card carries no per-device marker; the page's This device section keeps the device settings (auto-lock, passkey, remembered device, lock).

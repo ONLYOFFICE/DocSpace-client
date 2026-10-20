@@ -91,7 +91,7 @@ export interface OrchestrateEncryptedUploadArgs {
   identity: IdentityKeyPair;
   /** Current user id — overlays `encryptionKeys[].userId` which can be blank. */
   userId: string;
-  /** Active key id for the current user (from active-key-preference). */
+  /** Id of the current user's key (selectUserKey). */
   publicKeyId: string;
   /** Public key (base64) of the active envelope, used for self-wrap. */
   publicKey: string;

@@ -149,7 +149,7 @@ describe("useImportKeyFlow", () => {
       click.mockRestore();
     });
 
-    it("activates (activate=true) in the zero-keys bootstrap case", async () => {
+    it("applies the new key as the user's only key", async () => {
       happyImport();
       render(
         <Harness
@@ -169,7 +169,7 @@ describe("useImportKeyFlow", () => {
       });
 
       expect(applyNewIdentity).toHaveBeenCalledWith(
-        expect.objectContaining({ activate: true }),
+        expect.objectContaining({ userId: "42" }),
       );
     });
   });

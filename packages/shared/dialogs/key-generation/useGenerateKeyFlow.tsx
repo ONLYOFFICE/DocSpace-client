@@ -157,8 +157,6 @@ export function useGenerateKeyFlow({
         userId,
         newIdentity: keyPair,
         newPublicKeyB64: serialized.publicKey,
-        newPublicKeyId: payload.id,
-        activate: true,
       });
 
       await refreshKeysFromServer();

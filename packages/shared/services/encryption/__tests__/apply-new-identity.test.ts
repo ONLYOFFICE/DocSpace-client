@@ -39,20 +39,15 @@ const acceptKeyMock = vi.fn();
 vi.mock("../tofu-store", () => ({
   getTofuStore: () => ({ acceptKey: acceptKeyMock }),
 }));
-vi.mock("../active-key-preference", () => ({
-  setActiveKeyId: vi.fn(),
-}));
 vi.mock("../secret-storage", () => ({
   SecretStorage: { cacheUnlocked: vi.fn() },
 }));
 
-import { setActiveKeyId } from "../active-key-preference";
 import { SecretStorage } from "../secret-storage";
 import { applyNewIdentity } from "../apply-new-identity";
 import type { IdentityKeyPair } from "../types";
 
 const USER = "11111111-1111-1111-1111-111111111111";
-const KEY_ID = "aaaaaaaa-0000-0000-0000-00000000000a";
 
 const newIdentity = {
   publicKey: new Uint8Array(32).fill(1),
@@ -64,31 +59,14 @@ describe("applyNewIdentity", () => {
     vi.clearAllMocks();
   });
 
-  it("pins the new key for proof-of-possession but does NOT activate when activate=false", async () => {
+  it("pins the new key and unlocks it as the user's only key", async () => {
     await applyNewIdentity({
       userId: USER,
       newIdentity,
       newPublicKeyB64: "pub-b64",
-      newPublicKeyId: KEY_ID,
-      activate: false,
     });
 
     expect(acceptKeyMock).toHaveBeenCalledWith(USER, "pub-b64");
-    expect(setActiveKeyId).not.toHaveBeenCalled();
-    expect(SecretStorage.cacheUnlocked).not.toHaveBeenCalled();
-  });
-
-  it("activates the new key in the zero-keys bootstrap case (activate=true)", async () => {
-    await applyNewIdentity({
-      userId: USER,
-      newIdentity,
-      newPublicKeyB64: "pub-b64",
-      newPublicKeyId: KEY_ID,
-      activate: true,
-    });
-
-    expect(acceptKeyMock).toHaveBeenCalledWith(USER, "pub-b64");
-    expect(setActiveKeyId).toHaveBeenCalledWith(USER, KEY_ID);
     expect(SecretStorage.cacheUnlocked).toHaveBeenCalledWith(USER, newIdentity);
   });
 });

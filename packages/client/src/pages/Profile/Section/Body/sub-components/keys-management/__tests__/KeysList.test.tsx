@@ -1,12 +1,6 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 /**
- * Bug 82819: the "This device" badge marked a key on every device of the
- * profile, not on the device that actually holds it. Adoption is recorded per
- * device in localStorage (active-key-preference), so the badge has to follow
- * that record — and any key this device has not adopted must offer
- * "Use on this device", including when the profile has a single key.
- *
  * Heavy UI-kit components are replaced with lightweight stand-ins that expose
  * their label so the rendered variant can be asserted.
  */

@@ -283,7 +283,7 @@ describe("useGenerateKeyFlow", () => {
       expect(callOrder).toEqual(["api", "apply", "refresh"]);
     });
 
-    it("activates (activate=true) in the zero-keys bootstrap case", async () => {
+    it("applies the new key as the user's only key", async () => {
       happyMocks();
       render(
         <Harness
@@ -303,7 +303,7 @@ describe("useGenerateKeyFlow", () => {
       });
 
       expect(applyNewIdentity).toHaveBeenCalledWith(
-        expect.objectContaining({ activate: true }),
+        expect.objectContaining({ userId: "42" }),
       );
     });
 

@@ -16,7 +16,7 @@ Every task below is committed on its own (see "Commits" in `openspec/config.yaml
 ## 3. Own key everywhere
 
 - [x] 3.1 Replace `selectActiveKey`/`getActiveKeyId` with `selectUserKey` in the client `EncryptionProviderWrapper.jsx`, `uploadDataStore/selectors.helpers.ts` (`getUserEncryptionKeysImpl`), the doceditor `EncryptionProviderWrapper.tsx` and `utils/initDesktop.ts`, and the SDK `EncryptionIdentityStore.tsx` and `useEncryptedUpload.ts`; remove the "choose a key" hint branch (`Common:EncryptionChooseKeyHint`) and its SDK copy; verify with `selectors.helpers.test.ts` (two keys now resolve to the newer one) and the wrapper tests.
-- [ ] 3.2 Remove `active-key-preference.ts` and `rotation-state.ts` with their tests, the `activate` flag of `applyNewIdentity`, and the `currentPublicKeyId` ordering in `unwrapDekForCurrentUser` with its multi-key tests; keep the sender-candidate tests; verify with `pnpm test` (shared).
+- [x] 3.2 Remove `active-key-preference.ts` and `rotation-state.ts` with their tests, the `activate` flag of `applyNewIdentity`, and the `currentPublicKeyId` ordering in `unwrapDekForCurrentUser` with its multi-key tests; keep the sender-candidate tests; verify with `pnpm test` (shared).
 
 ## 4. Key management with one key
 

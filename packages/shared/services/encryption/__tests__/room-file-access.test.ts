@@ -264,7 +264,7 @@ describe("roomFileAccess wrap → unwrap → revoke roundtrip", () => {
   });
 });
 
-describe("multi-key user (several concurrent registered keys)", () => {
+describe("sender listed with several keys (leftover envelopes)", () => {
   const KEY_IDS = ["alice-key-1", "alice-key-2", "alice-key-3"];
 
   let aliceKeys: IdentityKeyPair[];
@@ -353,48 +353,6 @@ describe("multi-key user (several concurrent registered keys)", () => {
       fileId: FILE_ID,
     });
     expect(out).toEqual(dek);
-  });
-
-  it("a file carrying wraps for several of the user's keys opens with any of them", async () => {
-    const combined = wraps.flatMap((w) =>
-      w.filter((k) => String(k.userId) === ALICE_ID),
-    );
-    for (let i = 0; i < aliceKeys.length; i++) {
-      const out = await unwrapDekForCurrentUser({
-        fileKeys: combined,
-        roomMemberKeys,
-        currentUserId: ALICE_ID,
-        currentIdentity: aliceKeys[i],
-        fileId: FILE_ID,
-      });
-      expect(out).toEqual(dek);
-
-      const shuffled = await unwrapDekForCurrentUser({
-        fileKeys: [...combined].reverse(),
-        roomMemberKeys,
-        currentUserId: ALICE_ID,
-        currentIdentity: aliceKeys[i],
-        fileId: FILE_ID,
-      });
-      expect(shuffled).toEqual(dek);
-    }
-  });
-
-  it("currentPublicKeyId hint (correct, stale, or absent) never breaks the unwrap", async () => {
-    const combined = wraps.flatMap((w) =>
-      w.filter((k) => String(k.userId) === ALICE_ID),
-    );
-    for (const hint of [KEY_IDS[1], "no-such-key-id", undefined]) {
-      const out = await unwrapDekForCurrentUser({
-        fileKeys: combined,
-        roomMemberKeys,
-        currentUserId: ALICE_ID,
-        currentIdentity: aliceKeys[1],
-        fileId: FILE_ID,
-        currentPublicKeyId: hint,
-      });
-      expect(out).toEqual(dek);
-    }
   });
 
   it("peer side: resolver fires at most once per unwrap across N sender candidates", async () => {

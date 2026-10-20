@@ -144,8 +144,6 @@ export function useImportKeyFlow({
           userId,
           newIdentity: kp,
           newPublicKeyB64: imported.publicKey,
-          newPublicKeyId: id,
-          activate: true,
         });
         await refreshKeysFromServer();
         toastr.success(t("Common:EncryptionKeyImported"));

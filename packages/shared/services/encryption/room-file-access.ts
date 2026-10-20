@@ -64,7 +64,6 @@ export async function unwrapDekForCurrentUser(params: {
   fileId: number;
   onKeyChange?: KeyMismatchResolver;
   senderDisplayName?: string;
-  currentPublicKeyId?: string;
 }): Promise<Uint8Array> {
   const {
     fileKeys,
@@ -74,7 +73,6 @@ export async function unwrapDekForCurrentUser(params: {
     fileId,
     onKeyChange,
     senderDisplayName,
-    currentPublicKeyId,
   } = params;
 
   if (!Number.isFinite(fileId) || fileId <= 0) {
@@ -83,20 +81,13 @@ export async function unwrapDekForCurrentUser(params: {
     );
   }
 
-  const myEntries = fileKeys.filter(
+  // The server keeps at most one entry per (file, user).
+  const myEntry = fileKeys.find(
     (k) => String(k.userId) === String(currentUserId),
   );
-  if (myEntries.length === 0) {
+  if (!myEntry) {
     throw new NoAccessError(currentUserId);
   }
-
-  const ordered = currentPublicKeyId
-    ? [...myEntries].sort(
-        (a, b) =>
-          Number(b.publicKeyId === currentPublicKeyId) -
-          Number(a.publicKeyId === currentPublicKeyId),
-      )
-    : myEntries;
 
   let lastError: unknown = null;
 
@@ -142,34 +133,31 @@ export async function unwrapDekForCurrentUser(params: {
     return null;
   };
 
-  for (const myEntry of ordered) {
-    const inspection = inspectWrap(myEntry.privateKeyEnc);
-    const senderUserId = inspection.senderUserId;
+  const inspection = inspectWrap(myEntry.privateKeyEnc);
+  const senderUserId = inspection.senderUserId;
 
-    const liveCandidates = roomMemberKeys.filter(
-      (k) => String(k.userId) === String(senderUserId),
+  const liveCandidates = roomMemberKeys.filter(
+    (k) => String(k.userId) === String(senderUserId),
+  );
+
+  const dek = await tryCandidates(myEntry, senderUserId, liveCandidates);
+  if (dek) return dek;
+
+  // A sender who left the room disappears from both live key sources while
+  // their wraps stay valid; keys this device already trusts still apply.
+  const tofuCandidates = await loadTofuSenderCandidates(
+    currentUserId,
+    senderUserId,
+    liveCandidates,
+  );
+  if (liveCandidates.length === 0 && tofuCandidates.length === 0) {
+    throw new AuthenticationError(
+      `wrap claims sender ${senderUserId} but no public key was provided`,
     );
-
-    const dek = await tryCandidates(myEntry, senderUserId, liveCandidates);
-    if (dek) return dek;
-
-    // A sender who left the room disappears from both live key sources while
-    // their wraps stay valid; keys this device already trusts still apply.
-    const tofuCandidates = await loadTofuSenderCandidates(
-      currentUserId,
-      senderUserId,
-      liveCandidates,
-    );
-    if (liveCandidates.length === 0 && tofuCandidates.length === 0) {
-      lastError = new AuthenticationError(
-        `wrap claims sender ${senderUserId} but no public key was provided`,
-      );
-      continue;
-    }
-
-    const tofuDek = await tryCandidates(myEntry, senderUserId, tofuCandidates);
-    if (tofuDek) return tofuDek;
   }
+
+  const tofuDek = await tryCandidates(myEntry, senderUserId, tofuCandidates);
+  if (tofuDek) return tofuDek;
 
   throw lastError instanceof Error
     ? lastError

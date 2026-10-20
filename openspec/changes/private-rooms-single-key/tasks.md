@@ -32,7 +32,7 @@ Every task below is committed on its own (see "Commits" in `openspec/config.yaml
 ## 6. E2E and integration
 
 - [x] 6.1 Update `packages/client/__tests__/keys-management*.spec.ts` and `key-flow-edge-cases.spec.ts` for the removed controls and the hidden generate/import; verify with the keys-management E2E specs in Docker.
-- [ ] 6.2 Run the pre-push gate commands and the private-room E2E specs; verify all green.
+- [x] 6.2 Run the pre-push gate commands and the private-room E2E specs; verify all green.
 - [ ] 6.3 `npx -y @fission-ai/openspec@latest validate private-rooms-single-key --strict` passes; at archive, update the encryption-core and key-management Purpose texts (drop rotation-state, active-key-preference, "replacing" keys).
 
 ## Workflow follow-up

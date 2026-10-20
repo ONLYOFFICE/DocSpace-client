@@ -44,7 +44,6 @@ import {
   resolveItemRoomContext,
   resolveUploadGate,
   sniffDse3Upload,
-  UPLOAD_REFUSAL_I18N_KEYS,
   willEncryptUploadItem,
 } from "../encrypted-upload";
 
@@ -103,15 +102,6 @@ describe("resolveUploadGate", () => {
         { isPrivacyFolder: false, selectedRoomType: null },
       ),
     ).toEqual({ action: "plain" });
-  });
-
-  it("maps every refusal reason to a Common i18n key", () => {
-    expect(UPLOAD_REFUSAL_I18N_KEYS["no-key"]).toBe(
-      "Common:EncryptionKeysRequiredForUpload",
-    );
-    expect(UPLOAD_REFUSAL_I18N_KEYS.locked).toBe(
-      "Common:EncryptionLockedUpload",
-    );
   });
 });
 

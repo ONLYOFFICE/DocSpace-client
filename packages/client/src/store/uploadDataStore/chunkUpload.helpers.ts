@@ -47,7 +47,6 @@ import {
   recoverDekForReimport,
   resolveUploadGate,
   sniffDse3Upload,
-  UPLOAD_REFUSAL_I18N_KEYS,
 } from "@docspace/shared/services/private-room/encrypted-upload";
 import { requestDeviceSetupHint } from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
@@ -633,7 +632,9 @@ export async function startSessionFuncImpl(
     failUploadItem(
       self,
       indexOfFile,
-      i18n.t(UPLOAD_REFUSAL_I18N_KEYS[gate.reason]),
+      gate.reason === "locked"
+        ? i18n.t("Common:EncryptionLockedUpload")
+        : i18n.t("Common:EncryptionKeysRequiredForUpload"),
       t,
       createNewIfExist,
     );

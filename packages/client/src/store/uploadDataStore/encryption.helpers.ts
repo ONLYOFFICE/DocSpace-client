@@ -43,10 +43,7 @@ import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
-import {
-  prepareEncryptedUpload,
-  UPLOAD_REFUSAL_I18N_KEYS,
-} from "@docspace/shared/services/private-room/encrypted-upload";
+import { prepareEncryptedUpload } from "@docspace/shared/services/private-room/encrypted-upload";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
@@ -201,7 +198,7 @@ export async function ensureEncryptionUnlockedForBatchImpl(
 
 // Spec: private-rooms/file-operations, "Uploads into a private room are encrypted on the client".
 export function cancelEncryptedBatchUploadImpl(self: UploadDataStore) {
-  const errorMessage = i18n.t(UPLOAD_REFUSAL_I18N_KEYS.locked);
+  const errorMessage = i18n.t("Common:EncryptionLockedUpload");
 
   runInAction(() => {
     self.files.forEach((item) => {

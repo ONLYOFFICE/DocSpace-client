@@ -134,11 +134,6 @@ export type UploadGateOutcome =
   | { action: "plain" }
   | { action: "refuse"; reason: UploadRefusalReason };
 
-export const UPLOAD_REFUSAL_I18N_KEYS: Record<UploadRefusalReason, string> = {
-  "no-key": "Common:EncryptionKeysRequiredForUpload",
-  locked: "Common:EncryptionLockedUpload",
-};
-
 export function resolveUploadGate(
   params: UploadGateParams,
   folder: UploadFolderContext,

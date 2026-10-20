@@ -257,6 +257,28 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors S
     const res = await fetch(PUBLIC_KEYS_URL(99999));
     expect(res.status).toBe(404);
   });
+
+  it("answers 415 for a file outside a private room", async () => {
+    handle.current!.setFiles([{ id: 6, title: "plain.txt", encrypted: false }]);
+    handle.current!.setFileOutsidePrivateRoom(6);
+    const res = await fetch(PUBLIC_KEYS_URL(6));
+    expect(res.status).toBe(415);
+  });
+
+  it("drops entries without a public key and keeps the private half only on the caller's entries", async () => {
+    handle.current!.setFiles([{ id: 7, title: "s.txt", encrypted: true }]);
+    handle.current!.setRoomUserKeys([
+      { id: "a", userId: ALICE_ID, publicKey: "PK-A", privateKeyEnc: "ENC-A", date: "", cryptoEngineId: "" },
+      { id: "b", userId: BOB_ID, publicKey: "PK-B", privateKeyEnc: "ENC-B", date: "", cryptoEngineId: "" },
+      { id: "c", userId: BOB_ID, publicKey: "", privateKeyEnc: "ENC-C", date: "", cryptoEngineId: "" },
+    ]);
+    const body = (await (await fetch(PUBLIC_KEYS_URL(7))).json()) as {
+      response: Array<Record<string, unknown>>;
+    };
+    expect(body.response.map((k) => k.id)).toEqual(["a", "b"]);
+    expect(body.response[0].privateKeyEnc).toBe("ENC-A");
+    expect(body.response[1]).not.toHaveProperty("privateKeyEnc");
+  });
 });
 
 describe("PUT /files/fileops/delete", () => {

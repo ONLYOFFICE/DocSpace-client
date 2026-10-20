@@ -79,6 +79,8 @@ export type EncryptedFilesHandlerHandle = {
   setFiles: (files: EncryptedFileSeed[]) => void;
   setFileKeys: (fileId: number, keys: EncryptedFileKey[]) => void;
   setRoomUserKeys: (keys: RoomMemberKeyEntry[]) => void;
+  /** Marks a file as lying outside a private room (publickeys answers 415). */
+  setFileOutsidePrivateRoom: (fileId: number) => void;
   getSessions: () => UploadSessionRecord[];
   getRequests: () => RequestLog[];
   reset: () => void;
@@ -255,6 +257,7 @@ export const encryptedFilesHandlers = (
   let roomUserKeys: RoomMemberKeyEntry[] = [...(opts.roomUserKeys ?? [])];
   const currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
   const createdOn = new Map<string, string>();
+  const outsidePrivateRoom = new Set<number>();
   /** files_file_keys.create_on: set when the row is written. */
   const keyCreatedOn = (fileId: number, userId: string) => {
     const key = `${fileId}:${userId}`;
@@ -283,12 +286,16 @@ export const encryptedFilesHandlers = (
     setRoomUserKeys: (keys) => {
       roomUserKeys = [...keys];
     },
+    setFileOutsidePrivateRoom: (fileId) => {
+      outsidePrivateRoom.add(fileId);
+    },
     getSessions: () => Array.from(sessions.values()),
     getRequests: () => [...requests],
     reset: () => {
       files.clear();
       sessions.clear();
       createdOn.clear();
+      outsidePrivateRoom.clear();
       requests.length = 0;
       roomUserKeys = [];
       nextFileId = 1000;
@@ -442,12 +449,13 @@ export const encryptedFilesHandlers = (
     ),
 
     /**
-     * Mirrors SecurityController.GetEncryptionAccess.
-     * @see server/products/ASC.Files/Server/Api/SecurityController.cs (HttpGet "file/{fileId}/publickeys")
-     *
-     * Returns identity public keys of every user who currently has share/read
-     * access to the file. Used by re-wrap flow (UploadDataStore.encryptKeysForRoomMembers)
-     * to find new recipients AND to look up the sender's public key during unwrap.
+     * Mirrors SecurityController.GetEncryptionAccess ->
+     * EncryptionKeyPairDtoHelper.GetKeyPairAsync(fileId)
+     * (HttpGet "file/{fileId}/publickeys"): the keys of the users who reach
+     * the file through a direct user share (here: the room's member keys).
+     * 404 for a missing file, 415 for a file outside a private room
+     * (NotSupportedException); SanitizeAccessKeys drops entries without a
+     * public key and keeps the private half only on the caller's entries.
      */
     http.get(
       `${apiBase}/files/file/:fileId(\\d+)/publickeys`,
@@ -459,7 +467,18 @@ export const encryptedFilesHandlers = (
           url: new URL(request.url).pathname,
         });
         if (!f) return errorResponse(404, `file ${fileId} not found`);
-        return okResponse(roomUserKeys);
+        if (outsidePrivateRoom.has(fileId)) {
+          return errorResponse(415, "Unsupported Media Type");
+        }
+        return okResponse(
+          roomUserKeys
+            .filter((k) => !!k.publicKey?.trim())
+            .map((k) => {
+              if (String(k.userId) === currentUserId) return { ...k };
+              const { privateKeyEnc: _privateKeyEnc, ...rest } = k;
+              return rest;
+            }),
+        );
       },
     ),
 

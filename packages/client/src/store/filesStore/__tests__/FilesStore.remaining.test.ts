@@ -54,7 +54,6 @@ const authedSettings = {
   getPortalCultures: () => Promise.resolve(),
   getInvitationSettings: () => Promise.resolve(),
   getFilesSettings: () => Promise.resolve(),
-  getIsEncryptionSupport: () => Promise.resolve(),
   isDesktopClient: false,
 };
 
@@ -107,24 +106,6 @@ describe("FilesStore.initFiles — characterization", () => {
     await store.initFiles();
 
     expect(getLegacyEncryptionKeys).toHaveBeenCalledTimes(1);
-    expect(store.isInit).toBe(true);
-  });
-
-  it("does not block desktop init on the removed encryption-support endpoint", async () => {
-    const store = createTestFilesStore({
-      authStore: { isAuthenticated: true },
-      settingsStore: {
-        ...authedSettings,
-        isDesktopClient: true,
-        getLegacyEncryptionKeys: () => Promise.resolve(),
-        getIsEncryptionSupport: () => Promise.reject(new Error("404")),
-      },
-      filesSettingsStore: { getFilesSettings: () => Promise.resolve() },
-      treeFoldersStore: { fetchTreeFolders: () => Promise.resolve([]) },
-    });
-
-    await store.initFiles();
-
     expect(store.isInit).toBe(true);
   });
 });

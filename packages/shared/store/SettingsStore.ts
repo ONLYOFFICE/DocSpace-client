@@ -206,9 +206,6 @@ class SettingsStore {
 
   isDesktopClientInit = false;
 
-  // isDesktopEncryption: desktopEncryption;
-  isEncryptionSupport = false;
-
   legacyEncryptionKeys: { [key: string]: string | boolean } = {};
 
   roomsMode = false;
@@ -1253,10 +1250,6 @@ class SettingsStore {
       if (axios.isCancel(e)) return;
       throw e;
     }
-  };
-
-  setIsEncryptionSupport = (isEncryptionSupport: boolean) => {
-    this.isEncryptionSupport = isEncryptionSupport;
   };
 
   updateLegacyEncryptionKeys = (encryptionKeys: {

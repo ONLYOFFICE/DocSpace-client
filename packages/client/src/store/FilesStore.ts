@@ -1610,13 +1610,9 @@ class FilesStore {
           !this.selectedFolderStore.isRootFolder && canCreateInSharedFolder
         );
       }
-      case FolderType.Privacy:
-        return (
-          this.settingsStore.isDesktopClient &&
-          this.settingsStore.isEncryptionSupport
-        );
       case FolderType.COMMON:
         return this.authStore.isAdmin;
+      case FolderType.Privacy:
       case FolderType.Archive:
       case FolderType.TRASH:
       default:

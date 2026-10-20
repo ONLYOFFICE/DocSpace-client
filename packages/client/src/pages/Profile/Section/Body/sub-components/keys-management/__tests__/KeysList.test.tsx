@@ -63,7 +63,6 @@ describe("KeysList", () => {
     const cards = screen.getAllByTestId("key_details");
     expect(cards).toHaveLength(1);
     expect(within(cards[0]).getByText("new")).toBeInTheDocument();
-    expect(screen.queryByText("Common:UseOnThisDevice")).not.toBeInTheDocument();
     expect(screen.queryByText("Common:ThisDevice")).not.toBeInTheDocument();
   });
 });

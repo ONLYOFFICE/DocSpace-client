@@ -1,20 +1,26 @@
 {
-  "key_path": "RotatingIdentitySuccess",
-  "content": "Encryption keys have been updated in all your private rooms.",
-  "content_en_sha1_hash": "abe36ad4d9dc0477a88e1e76a53feebf4da38aa8",
-  "created_at": "2026-06-09T09:42:58.587Z",
-  "updated_at": "2026-07-31T12:36:29.540Z",
+  "key_path": "DeleteUnusedEncryptionKeys",
+  "content": "Delete unused keys",
+  "content_en_sha1_hash": "1d40d7333a40b568711aeb36b56706b142353a5c",
+  "created_at": "2026-10-20T11:57:55.819Z",
+  "updated_at": "2026-10-20T11:59:57.959Z",
   "comment": {
-    "text": "Success toast message appearing after encryption keys have been successfully rotated across all private rooms.",
+    "text": "Button label and dialog title on the Keys management page: deletes the user's encryption keys that are stored on the server but no longer used, keeping the current key. Verb phrase, keep it short.",
     "is_auto": true,
-    "updated_at": "2026-06-09T09:44:35.806Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-20T11:59:57.959Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useRotateIdentityForRooms.ts",
-      "line_number": 157,
-      "context": "});\n }\n \n if (summary.filesFailed === 0) {\n if (summary.filesDone > 0) {\n toastr.success(t(\"Common:RotatingIdentitySuccess\"));\n }\n // No files → no toast (user had empty rooms or no encrypted files).\n } else if (summary.filesDone > 0) {\n toastr.warning(\n t(\"Common:RotatingIdentityPartialFailure\", {",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useDeleteUnusedKeysFlow.tsx",
+      "line_number": 153,
+      "context": "const modals = (\n <>\n {confirming ? (\n <ConfirmationModal\n visible\n title={t(\"Common:DeleteUnusedEncryptionKeys\")}\n message={t(\"Common:UnusedEncryptionKeysNotice\", {\n count: unused.length,\n })}\n onConfirm={onConfirm}\n onCancel={() => setConfirming(false)}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
+      "line_number": 269,
+      "context": "</span>\n <Button\n className={styles.resetButton}\n size={ButtonSize.small}\n onClick={deleteUnused.request}\n label={t(\"Common:DeleteUnusedEncryptionKeys\")}\n isLoading={deleteUnused.isPending}\n isDisabled={busy}\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     }
   ],

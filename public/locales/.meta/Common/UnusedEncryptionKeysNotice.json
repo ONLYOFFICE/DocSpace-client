@@ -1,20 +1,26 @@
 {
-  "key_path": "UseOnThisDevice",
-  "content": "Use on this device",
-  "content_en_sha1_hash": "ec3b2ac85692826e6ca2fcd4d63a861da83b21f7",
-  "created_at": "2026-05-24T17:27:43.003Z",
-  "updated_at": "2026-08-13T10:58:03.274Z",
+  "key_path": "UnusedEncryptionKeysNotice",
+  "content": "{{count}} more encryption key(s) are stored for your account but not used. Files shared only with them cannot be opened.",
+  "content_en_sha1_hash": "f5c8a4d8b3a641a11846c11b0a24ab038b30b10c",
+  "created_at": "2026-10-20T11:58:35.359Z",
+  "updated_at": "2026-10-20T11:59:57.959Z",
   "comment": {
-    "text": "Button label in the keys management list used to activate a specific key for the current device.",
+    "text": "Notice on the Keys management page of the profile (also the message of the confirmation dialog) shown when the server stores more of the user's end-to-end encryption keys than the one in use. {{count}} is the number of unused keys; files that were shared only with those keys can no longer be opened.",
     "is_auto": true,
-    "updated_at": "2026-05-24T17:28:21.449Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-20T11:59:57.959Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
-      "line_number": 140,
-      "context": "maxWidth=\"none\"\n />\n ) : canSwitchActive ? (\n <Button\n size={ButtonSize.extraSmall}\n label={t(\"Common:UseOnThisDevice\")}\n onClick={handleSelectActive}\n isDisabled={isDeleting}\n />\n ) : null}\n </div>",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useDeleteUnusedKeysFlow.tsx",
+      "line_number": 154,
+      "context": "<>\n {confirming ? (\n <ConfirmationModal\n visible\n title={t(\"Common:DeleteUnusedEncryptionKeys\")}\n message={t(\"Common:UnusedEncryptionKeysNotice\", {\n count: unused.length,\n })}\n onConfirm={onConfirm}\n onCancel={() => setConfirming(false)}\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
+      "line_number": 261,
+      "context": "deletingKeyId={remove.pendingId}\n />\n {deleteUnused.unusedCount > 0 ? (\n <div className={styles.resetSection} data-testid=\"unused_keys_notice\">\n <span className={styles.resetHint}>\n {t(\"Common:UnusedEncryptionKeysNotice\", {\n count: deleteUnused.unusedCount,\n })}\n </span>\n <Button\n className={styles.resetButton}",
       "module": "/packages/client"
     }
   ],

@@ -4,7 +4,7 @@
 
 See proposal.md for motivation. Two fan-out implementations exist:
 
-- The shared orchestrator `wrapDekForSelfAndRoom` (`packages/shared/services/private-room/encrypted-upload-orchestrator.ts:215-300`) fetches `getRoomEncryptionKeys(roomId)` and the file's existing access list, builds the recipient list from every listed key (lines 253-275) and wraps for each; no call to the TOFU store.
+- The shared orchestrator `wrapDekForSelfAndRoom` (`packages/shared/services/private-room/encrypted-upload-orchestrator.ts:215-300`) fetches `getRoomEncryptionKeys(roomId)` and the file's existing access list, builds the recipient list from every listed key (lines 253-275) and wraps for each; no call to the TOFU store. Once `private-rooms-single-key` lands, both paths build one recipient per member from the selected key, and the pin check applies to that one key.
 - The client store path `encryptKeysForRoomMembersImpl` (`packages/client/src/store/uploadDataStore/encryption.helpers.ts:98-170`) does the same against `getRoomEncryptionKeys` and is the one the main upload pipeline uses.
 
 The invite path already does the check: `room-encryption.ts:130-156` calls `tofu.checkKey(userId, publicKey)` and resolves a mismatch through the per-call resolver or `getKeyMismatchHandler()` (registered by the key-change dialog, `tofu-store.ts:507-515`). The unwrap path does the same in `room-file-access.ts`. The stashed SECURITY.md records the unwrap check as "deferred item #3, done" and FORMAT.md §6 says every key response should be compared with the stored entry; neither mentions the fan-out, so this is an omission rather than a decision.

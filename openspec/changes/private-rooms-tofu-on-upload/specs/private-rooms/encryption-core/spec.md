@@ -7,7 +7,7 @@ The system SHALL store the per-member wraps in the file's access list on the ser
 
 #### Scenario: Upload fan-out
 - **WHEN** a member uploads a file into a private room
-- **THEN** the file's access list is written with a wrap for the uploader and one for every member public key the server lists that matches its pin or was pinned on first sight
+- **THEN** the file's access list is written with a wrap for the uploader and one per room member, for that member's selected key, when the key matches its pin or was pinned on first sight; at most one entry per user
 
 #### Scenario: Member key mismatch on upload
 - **WHEN** a listed member key differs from its pin and the uploader refuses it or no resolver is registered

@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Omistajuutta ei voi siirtää käyttäjälle {{user}}: he eivät ole vielä ottaneet salausavaimia käyttöön. Pyydä heitä luomaan avaimet profiilissaan ja yritä sitten uudelleen.",
   "EncryptedCopyFailed": "Salattujen tiedostojen kopiointi epäonnistui: {{names}}",
   "EncryptedFile": "Salattu tiedosto",
+  "EncryptedMovePartialFailure": "Näitä tiedostoja ei voitu siirtää pois yksityisestä huoneesta, ja ne jäävät sinne: {{names}}",
   "EncryptedReencryptFailed": "Olemassa olevien salattujen tiedostojen jakaminen uusille jäsenille epäonnistui. Yritä uudelleen Jäsenet-paneelista.",
   "EncryptedReencryptPartialFailure": "{{count}} salattua tiedostoa ei voitu jakaa uusille jäsenille. Yritä myöhemmin uudelleen tai jaa ne manuaalisesti.",
   "EncryptedRevokeCompleted": "Käyttäjä poistettu ja heidän pääsynsä olemassa oleviin salattuihin tiedostoihin on peruutettu.",

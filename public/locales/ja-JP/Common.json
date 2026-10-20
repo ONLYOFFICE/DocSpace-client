@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "{{user}}への所有権の移転はできません：相手がまだ暗号化キーを設定していません。プロフィールでキーを生成するよう伝えてから再試行してください。",
   "EncryptedCopyFailed": "暗号化ファイルのコピーに失敗しました：{{names}}",
   "EncryptedFile": "暗号化ファイル",
+  "EncryptedMovePartialFailure": "これらのファイルはプライベートルームの外に移動できなかったため、ルームに残っています：{{names}}",
   "EncryptedReencryptFailed": "新しいメンバーとの既存の暗号化ファイルの共有に失敗しました。メンバーパネルから再試行してください。",
   "EncryptedReencryptPartialFailure": "{{count}}件の暗号化ファイルを新しいメンバーと共有できませんでした。後で再試行するか、手動で共有してください。",
   "EncryptedRevokeCompleted": "ユーザーが削除され、既存の暗号化ファイルへのアクセスが取り消されました。",

@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "无法将所有权转让给 {{user}}：对方尚未设置加密密钥。请让其在个人资料中生成密钥后再试。",
   "EncryptedCopyFailed": "复制加密文件失败：{{names}}",
   "EncryptedFile": "加密文件",
+  "EncryptedMovePartialFailure": "这些文件无法移出私密房间，仍保留在房间中：{{names}}",
   "EncryptedReencryptFailed": "无法与新成员共享现有加密文件。请从成员面板重试。",
   "EncryptedReencryptPartialFailure": "{{count}} 个加密文件无法与新成员共享。请稍后重试或手动共享。",
   "EncryptedRevokeCompleted": "用户已移除，其对现有加密文件的访问权限已撤销。",

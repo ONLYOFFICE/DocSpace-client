@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Kan eigendom niet overdragen aan {{user}}: zij hebben nog geen versleutelingssleutels ingesteld. Vraag hen sleutels te genereren in hun profiel en probeer het dan opnieuw.",
   "EncryptedCopyFailed": "Kopiëren van versleutelde bestanden mislukt: {{names}}",
   "EncryptedFile": "Versleuteld bestand",
+  "EncryptedMovePartialFailure": "Deze bestanden konden niet uit de privéruimte worden verplaatst en blijven daarin staan: {{names}}",
   "EncryptedReencryptFailed": "Delen van bestaande versleutelde bestanden met de nieuwe leden mislukt. Probeer het opnieuw vanuit het ledenvenster.",
   "EncryptedReencryptPartialFailure": "{{count}} versleuteld(e) bestand(en) konden niet worden gedeeld met nieuwe leden. Probeer het later opnieuw of deel ze handmatig.",
   "EncryptedRevokeCompleted": "Gebruiker verwijderd en hun toegang tot bestaande versleutelde bestanden is ingetrokken.",

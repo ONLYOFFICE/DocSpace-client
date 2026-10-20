@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Nie je možné preniesť vlastníctvo na {{user}}: ešte nenastavili šifrovacie kľúče. Požiadajte ich, aby vygenerovali kľúče vo svojom profile, a potom skúste znova.",
   "EncryptedCopyFailed": "Nepodarilo sa skopírovať zašifrované súbory: {{names}}",
   "EncryptedFile": "Zašifrovaný súbor",
+  "EncryptedMovePartialFailure": "Tieto súbory sa nepodarilo presunúť mimo súkromnej miestnosti a zostávajú v nej: {{names}}",
   "EncryptedReencryptFailed": "Nepodarilo sa zdieľať existujúce zašifrované súbory s novými členmi. Skúste to znova z panela Členovia.",
   "EncryptedReencryptPartialFailure": "{{count}} zašifrovaný(é) súbor(y) sa nepodarilo zdieľať s novými členmi. Skúste to neskôr alebo ich zdieľajte manuálne.",
   "EncryptedRevokeCompleted": "Používateľ bol odstránený a jeho prístup k existujúcim zašifrovaným súborom bol odvolaný.",

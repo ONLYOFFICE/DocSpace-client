@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Nevar nodot īpašumtiesības {{user}}: viņi vēl nav iestatījuši šifrēšanas atslēgas. Palūdziet viņiem ģenerēt atslēgas savā profilā, pēc tam mēģiniet vēlreiz.",
   "EncryptedCopyFailed": "Neizdevās kopēt šifrētos failus: {{names}}",
   "EncryptedFile": "Šifrēts fails",
+  "EncryptedMovePartialFailure": "Šos failus neizdevās pārvietot ārpus privātās istabas, un tie paliek tajā: {{names}}",
   "EncryptedReencryptFailed": "Neizdevās koplietot esošos šifrētos failus ar jaunajiem dalībniekiem. Mēģiniet vēlreiz no Dalībnieku paneļa.",
   "EncryptedReencryptPartialFailure": "{{count}} šifrēto failu nevarēja koplietot ar jaunajiem dalībniekiem. Mēģiniet vēlreiz vēlāk vai koplietojiet tos manuāli.",
   "EncryptedRevokeCompleted": "Lietotājs noņemts un viņu piekļuve esošajiem šifrētajiem failiem ir atsaukta.",

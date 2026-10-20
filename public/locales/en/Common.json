@@ -846,7 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Cannot transfer ownership to {{user}}: they have not set up encryption keys yet. Ask them to generate keys in their profile, then try again.",
   "EncryptedCopyFailed": "Failed to copy encrypted files: {{names}}",
   "EncryptedFile": "Encrypted file",
-  "EncryptedMovePartialFailure": "Could not move these files out of the private room, they stay in place: {{names}}",
+  "EncryptedMovePartialFailure": "These files could not be moved out of the private room and remain in it: {{names}}",
   "EncryptedReencryptFailed": "Failed to share existing encrypted files with the new members. Try again from the Members panel.",
   "EncryptedReencryptPartialFailure": "{{count}} encrypted file(s) could not be shared with new members. Try again later or share them manually.",
   "EncryptedRevokeCompleted": "User removed and their access to existing encrypted files has been revoked.",

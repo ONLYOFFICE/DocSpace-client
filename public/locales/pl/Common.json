@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Nie można przenieść własności do {{user}}: ta osoba nie skonfigurowała jeszcze kluczy szyfrowania. Poproś ją o wygenerowanie kluczy w profilu, a następnie spróbuj ponownie.",
   "EncryptedCopyFailed": "Nie udało się skopiować zaszyfrowanych plików: {{names}}",
   "EncryptedFile": "Zaszyfrowany plik",
+  "EncryptedMovePartialFailure": "Tych plików nie udało się przenieść poza pokój prywatny i pozostają w nim: {{names}}",
   "EncryptedReencryptFailed": "Nie udało się udostępnić istniejących zaszyfrowanych plików nowym członkom. Spróbuj ponownie z panelu Członkowie.",
   "EncryptedReencryptPartialFailure": "{{count}} zaszyfrowany(-e/-ych) plik(-i/-ów) nie mógł(-ły) zostać udostępniony(-e) nowym członkom. Spróbuj ponownie później lub udostępnij je ręcznie.",
   "EncryptedRevokeCompleted": "Użytkownik został usunięty, a jego dostęp do istniejących zaszyfrowanych plików został odwołany.",

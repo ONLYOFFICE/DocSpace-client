@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Lastništva ni mogoče prenesti na {{user}}: šifrirnih ključev še niso nastavili. Prosim jih, da ustvarijo ključe v svojem profilu, in poskusite znova.",
   "EncryptedCopyFailed": "Kopiranje šifriranih datotek ni uspelo: {{names}}",
   "EncryptedFile": "Šifrirana datoteka",
+  "EncryptedMovePartialFailure": "Teh datotek ni bilo mogoče premakniti iz zasebne sobe in ostajajo v njej: {{names}}",
   "EncryptedReencryptFailed": "Skupne rabe obstoječih šifriranih datotek z novimi člani ni uspelo. Poskusite znova na plošči Člani.",
   "EncryptedReencryptPartialFailure": "{{count}} šifriranih datotek ni bilo mogoče dati v skupno rabo z novimi člani. Poskusite znova pozneje ali jih dajte v skupno rabo ročno.",
   "EncryptedRevokeCompleted": "Uporabnik je bil odstranjen in njihov dostop do obstoječih šifriranih datotek je bil preklican.",

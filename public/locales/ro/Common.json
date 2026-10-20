@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Nu se poate transfera proprietatea către {{user}}: aceștia nu au configurat încă chei de criptare. Rugați-i să genereze chei în profilul lor, apoi încercați din nou.",
   "EncryptedCopyFailed": "Copierea fișierelor criptate a eșuat: {{names}}",
   "EncryptedFile": "Fișier criptat",
+  "EncryptedMovePartialFailure": "Aceste fișiere nu au putut fi mutate în afara camerei private și rămân în ea: {{names}}",
   "EncryptedReencryptFailed": "Re-criptarea fișierelor criptate existente pentru noii membri a eșuat. Încercați din nou din panoul Membri.",
   "EncryptedReencryptPartialFailure": "{{count}} fișier(e) criptat(e) nu au putut fi partajate cu noii membri. Încercați din nou mai târziu sau partajați-le manual.",
   "EncryptedRevokeCompleted": "Utilizatorul a fost eliminat și accesul acestuia la fișierele criptate existente a fost revocat.",

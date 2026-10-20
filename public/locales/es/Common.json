@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "No se puede transferir la propiedad a {{user}}: aún no ha configurado claves de cifrado. Pídale que genere claves en su perfil e inténtelo de nuevo.",
   "EncryptedCopyFailed": "Error al copiar los archivos cifrados: {{names}}",
   "EncryptedFile": "Archivo cifrado",
+  "EncryptedMovePartialFailure": "Estos archivos no se han podido mover fuera de la sala privada y permanecen en ella: {{names}}",
   "EncryptedReencryptFailed": "Error al compartir los archivos cifrados existentes con los nuevos miembros. Inténtelo de nuevo desde el panel de Miembros.",
   "EncryptedReencryptPartialFailure": "{{count}} archivo(s) cifrado(s) no se han podido compartir con los nuevos miembros. Inténtelo de nuevo más tarde o compártalos manualmente.",
   "EncryptedRevokeCompleted": "Usuario eliminado y su acceso a los archivos cifrados existentes ha sido revocado.",

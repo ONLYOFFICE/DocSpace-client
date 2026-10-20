@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Impossibile trasferire la proprietà a {{user}}: non ha ancora configurato le chiavi di cifratura. Chiedere di generare le chiavi nel proprio profilo, quindi riprovare.",
   "EncryptedCopyFailed": "Impossibile copiare i file cifrati: {{names}}",
   "EncryptedFile": "File cifrato",
+  "EncryptedMovePartialFailure": "Questi file non sono stati spostati fuori dalla stanza privata e vi rimangono: {{names}}",
   "EncryptedReencryptFailed": "Impossibile condividere i file cifrati esistenti con i nuovi membri. Riprovare dal pannello Membri.",
   "EncryptedReencryptPartialFailure": "{{count}} file cifrato/i non è stato possibile condividere con i nuovi membri. Riprovare più tardi o condividerli manualmente.",
   "EncryptedRevokeCompleted": "Utente rimosso e accesso ai file cifrati esistenti revocato.",

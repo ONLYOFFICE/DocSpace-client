@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Impossible de transférer la propriété à {{user}} : il n'a pas encore configuré de clés de chiffrement. Demandez-lui de générer des clés dans son profil, puis réessayez.",
   "EncryptedCopyFailed": "Échec de la copie des fichiers chiffrés : {{names}}",
   "EncryptedFile": "Fichier chiffré",
+  "EncryptedMovePartialFailure": "Ces fichiers n'ont pas pu être déplacés hors de la salle privée et y restent : {{names}}",
   "EncryptedReencryptFailed": "Échec du partage des fichiers chiffrés existants avec les nouveaux membres. Réessayez depuis le panneau Membres.",
   "EncryptedReencryptPartialFailure": "{{count}} fichier(s) chiffré(s) n'ont pas pu être partagés avec les nouveaux membres. Réessayez ultérieurement ou partagez-les manuellement.",
   "EncryptedRevokeCompleted": "Utilisateur retiré et son accès aux fichiers chiffrés existants a été révoqué.",

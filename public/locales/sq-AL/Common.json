@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Nuk mund të transferohet pronësia te {{user}}: ata nuk kanë konfiguruar ende çelësa enkriptimi. Kërkojuni të gjenerojnë çelësa në profilin e tyre, pastaj provoni përsëri.",
   "EncryptedCopyFailed": "Dështoi kopjimi i skedarëve të enkriptuar: {{names}}",
   "EncryptedFile": "Skedar i enkriptuar",
+  "EncryptedMovePartialFailure": "Këta skedarë nuk mund të zhvendoseshin jashtë dhomës private dhe mbeten në të: {{names}}",
   "EncryptedReencryptFailed": "Dështoi ndarja e skedarëve ekzistues të enkriptuar me anëtarët e rinj. Provoni përsëri nga paneli Anëtarët.",
   "EncryptedReencryptPartialFailure": "{{count}} skedar(ë) i/e enkriptuar(i) nuk mund të ndahej me anëtarët e rinj. Provoni përsëri më vonë ose ndajini manualisht.",
   "EncryptedRevokeCompleted": "Përdoruesi u hoq dhe qasja e tyre në skedarët ekzistues të enkriptuar u anulua.",

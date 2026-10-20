@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Eigentumsübertragung an {{user}} nicht möglich: Der Benutzer hat noch keine Verschlüsselungsschlüssel eingerichtet. Bitten Sie ihn, Schlüssel in seinem Profil zu generieren, und versuchen Sie es dann erneut.",
   "EncryptedCopyFailed": "Fehler beim Kopieren verschlüsselter Dateien: {{names}}",
   "EncryptedFile": "Verschlüsselte Datei",
+  "EncryptedMovePartialFailure": "Diese Dateien konnten nicht aus dem privaten Raum verschoben werden und verbleiben darin: {{names}}",
   "EncryptedReencryptFailed": "Fehler beim Teilen vorhandener verschlüsselter Dateien mit den neuen Mitgliedern. Versuchen Sie es erneut über das Mitglieder-Panel.",
   "EncryptedReencryptPartialFailure": "{{count}} verschlüsselte Datei(en) konnten nicht mit neuen Mitgliedern geteilt werden. Versuchen Sie es später erneut oder teilen Sie sie manuell.",
   "EncryptedRevokeCompleted": "Benutzer entfernt und dessen Zugriff auf vorhandene verschlüsselte Dateien wurde widerrufen.",

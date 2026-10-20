@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Không thể chuyển quyền sở hữu cho {{user}}: họ chưa thiết lập khoá mã hoá. Hãy yêu cầu họ tạo khoá trong hồ sơ cá nhân, rồi thử lại.",
   "EncryptedCopyFailed": "Không thể sao chép các tập tin được mã hoá: {{names}}",
   "EncryptedFile": "Tập tin được mã hoá",
+  "EncryptedMovePartialFailure": "Không thể di chuyển các tệp này ra khỏi phòng riêng tư và chúng vẫn ở trong phòng: {{names}}",
   "EncryptedReencryptFailed": "Không thể chia sẻ các tập tin được mã hoá hiện có với các thành viên mới. Hãy thử lại từ bảng Thành viên.",
   "EncryptedReencryptPartialFailure": "{{count}} tập tin được mã hoá không thể chia sẻ với thành viên mới. Hãy thử lại sau hoặc chia sẻ thủ công.",
   "EncryptedRevokeCompleted": "Người dùng đã bị xoá và quyền truy cập vào các tập tin được mã hoá hiện có đã bị thu hồi.",

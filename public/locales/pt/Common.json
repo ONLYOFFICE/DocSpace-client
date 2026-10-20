@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Não é possível transferir a propriedade para {{user}}: o utilizador ainda não configurou chaves de encriptação. Peça-lhe que gere chaves no seu perfil e tente novamente.",
   "EncryptedCopyFailed": "Falha ao copiar ficheiros encriptados: {{names}}",
   "EncryptedFile": "Ficheiro encriptado",
+  "EncryptedMovePartialFailure": "Não foi possível mover estes ficheiros para fora da sala privada e permanecem nela: {{names}}",
   "EncryptedReencryptFailed": "Falha ao partilhar ficheiros encriptados existentes com os novos membros. Tente novamente no painel de Membros.",
   "EncryptedReencryptPartialFailure": "{{count}} ficheiro(s) encriptado(s) não puderam ser partilhados com novos membros. Tente novamente mais tarde ou partilhe-os manualmente.",
   "EncryptedRevokeCompleted": "Utilizador removido e o acesso aos ficheiros encriptados existentes foi revogado.",

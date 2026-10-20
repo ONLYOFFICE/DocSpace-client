@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Sahiplik {{user}} kullanıcısına aktarılamıyor: henüz şifreleme anahtarları kurulmamış. Profillerinde anahtar oluşturmalarını isteyin, ardından tekrar deneyin.",
   "EncryptedCopyFailed": "Şifrelenmiş dosyalar kopyalanamadı: {{names}}",
   "EncryptedFile": "Şifrelenmiş dosya",
+  "EncryptedMovePartialFailure": "Bu dosyalar özel odanın dışına taşınamadı ve odada kalmaya devam ediyor: {{names}}",
   "EncryptedReencryptFailed": "Mevcut şifrelenmiş dosyalar yeni üyelerle paylaşılamadı. Üyeler panelinden tekrar deneyin.",
   "EncryptedReencryptPartialFailure": "{{count}} şifrelenmiş dosya yeni üyelerle paylaşılamadı. Daha sonra tekrar deneyin veya dosyaları manuel olarak paylaşın.",
   "EncryptedRevokeCompleted": "Kullanıcı kaldırıldı ve mevcut şifrelenmiş dosyalara erişimi iptal edildi.",

@@ -846,6 +846,7 @@
   "EncryptedChangeOwnerNoKeys": "Sahibliyi {{user}}-ə ötürmək mümkün deyil: onlar hələ şifrələmə açarlarını qurmayıblar. Onlardan profillərində açar yaratmalarını xahiş edin, sonra yenidən cəhd edin.",
   "EncryptedCopyFailed": "Şifrəli faylları kopyalamaq alınmadı: {{names}}",
   "EncryptedFile": "Şifrəli fayl",
+  "EncryptedMovePartialFailure": "Bu faylları şəxsi otaqdan kənara köçürmək mümkün olmadı və onlar orada qalır: {{names}}",
   "EncryptedReencryptFailed": "Mövcud şifrəli faylları yeni üzvlərlə paylaşmaq alınmadı. Üzvlər panelindən yenidən cəhd edin.",
   "EncryptedReencryptPartialFailure": "{{count}} şifrəli fayl(lar) yeni üzvlərlə paylaşıla bilmədi. Sonra yenidən cəhd edin və ya onları əl ilə paylaşın.",
   "EncryptedRevokeCompleted": "İstifadəçi silindi və mövcud şifrəli faylara girişi ləğv edildi.",

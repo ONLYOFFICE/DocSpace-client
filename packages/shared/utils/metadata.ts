@@ -63,15 +63,21 @@ export const isMetadataSupported = ({
   parentId,
   providerKey,
   rootFolderType,
+  private: isPrivate,
+  encrypted,
 }: {
   id?: number | string;
   parentId?: number;
   providerKey?: string | null;
   rootFolderType?: FolderType;
+  private?: boolean;
+  encrypted?: boolean;
 }) =>
   typeof id === "number" &&
   parentId !== 0 &&
   !providerKey &&
+  !isPrivate &&
+  !encrypted &&
   isMetadataRootSupported(rootFolderType);
 
 export const parseMetadataTemplateId = (value: unknown) => {

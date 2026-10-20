@@ -102,8 +102,6 @@ export const getMetadataAIOptions = (
     isAIEnabled &&
     !isGuest &&
     !isPublicRoom &&
-    !item.private &&
-    !item.encrypted &&
     isMetadataSupported(item) &&
     !CLOSED_ROOT_TYPES.includes(item.rootFolderType as FolderType) &&
     canEditMetadata(item) &&

@@ -183,6 +183,23 @@ describe("isMetadataSupported", () => {
     ).toBe(false);
   });
 
+  it("rejects private rooms, their folders and encrypted files", () => {
+    expect(
+      isMetadataSupported({
+        id: 5,
+        rootFolderType: FolderType.Rooms,
+        private: true,
+      }),
+    ).toBe(false);
+    expect(
+      isMetadataSupported({
+        id: 6,
+        rootFolderType: FolderType.Rooms,
+        encrypted: true,
+      }),
+    ).toBe(false);
+  });
+
   it("leaves section roots to the listings, which filter there", () => {
     expect(isMetadataRootSupported(FolderType.USER)).toBe(true);
     expect(isMetadataRootSupported(FolderType.AIAgents)).toBe(false);

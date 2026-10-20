@@ -250,6 +250,7 @@ const SectionFilterContent = ({
   const isMetadataFilterAvailable =
     !isPublicRoom &&
     !getSelectedFolder()?.providerKey &&
+    !getSelectedFolder()?.private &&
     isMetadataRootSupported(getSelectedFolder()?.rootFolderType);
 
   const hasMetadataFilter = isRooms

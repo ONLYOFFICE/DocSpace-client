@@ -38,7 +38,6 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 
 import { BillingRoot } from "@onlyoffice/apps-ui-kit/billing";
-import { AI_TOOLS } from "@onlyoffice/apps-ui-kit/billing/constants";
 import ServiceLimits from "@onlyoffice/apps-ui-kit/billing/shared/service-limits";
 import type { TPaymentUser } from "@onlyoffice/apps-ui-kit/billing/types";
 
@@ -87,7 +86,7 @@ const AILimits = ({
 
   return (
     <BillingRoot config={paymentConfig}>
-      <ServiceLimits serviceName={AI_TOOLS} onOpenContacts={onOpenContacts} />
+      <ServiceLimits onOpenContacts={onOpenContacts} />
     </BillingRoot>
   );
 };

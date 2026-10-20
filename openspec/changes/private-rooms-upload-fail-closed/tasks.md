@@ -33,7 +33,7 @@
 ## 6. Integration check
 
 - [x] 6.1 Run the pre-push gate commands (`pnpm run tsc`, `pnpm run lint`, `pnpm run test`, `pnpm run test:client`) and the private-room E2E specs; verify all green.
-- [ ] 6.2 Confirm `npx -y @fission-ai/openspec@latest validate private-rooms-upload-fail-closed --strict` passes and the delta still matches the implemented behaviour.
+- [x] 6.2 Confirm `npx -y @fission-ai/openspec@latest validate private-rooms-upload-fail-closed --strict` passes and the delta still matches the implemented behaviour.
 
 ## Workflow follow-up
 

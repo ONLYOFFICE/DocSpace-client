@@ -50,6 +50,7 @@ vi.mock("@docspace/shared/api/files", async (importOriginal) => {
 
 vi.mock("@docspace/shared/api/privacy", () => ({
   getRoomEncryptionKeys: vi.fn(),
+  getFilePublicKeys: vi.fn(),
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (importOriginal) => {

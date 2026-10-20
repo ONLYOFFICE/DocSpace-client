@@ -42,6 +42,7 @@ import {
 } from "@docspace/shared/api/files";
 import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
+import { selectMemberKeys } from "@docspace/shared/services/private-room/room-member-keys";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { prepareEncryptedUpload } from "@docspace/shared/services/private-room/encrypted-upload";
@@ -171,29 +172,23 @@ export async function encryptKeysForRoomMembersImpl(
     ]);
 
     const existingFileKeys = encryptionInfo.fileKeys ?? [];
-    const existingKeyPairs = new Set(
-      existingFileKeys.map((k) => `${String(k.userId)}:${k.publicKeyId || ""}`),
+    const usersWithEntry = new Set(
+      existingFileKeys.map((k) => String(k.userId)),
     );
 
+    // Spec: private-rooms/encryption-core, "One access-list entry per user".
     const recipients: {
       userId: string;
       publicKey: string;
       publicKeyId: string;
     }[] = [];
-    if (Array.isArray(publicKeys)) {
-      for (const pk of publicKeys) {
-        if (!pk.publicKey || !pk.userId) continue;
-        const uid = String(pk.userId);
-        if (uid === String(currentUserId)) continue;
-        const pairKey = `${uid}:${pk.id || ""}`;
-        if (existingKeyPairs.has(pairKey)) continue;
-
-        recipients.push({
-          userId: uid,
-          publicKey: pk.publicKey,
-          publicKeyId: pk.id || "",
-        });
-      }
+    for (const [uid, key] of selectMemberKeys(publicKeys)) {
+      if (uid === String(currentUserId) || usersWithEntry.has(uid)) continue;
+      recipients.push({
+        userId: uid,
+        publicKey: key.publicKey,
+        publicKeyId: key.publicKeyId || "",
+      });
     }
     if (recipients.length === 0) return;
 

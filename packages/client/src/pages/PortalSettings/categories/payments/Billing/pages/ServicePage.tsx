@@ -233,7 +233,6 @@ const ServicePage = (props: ServicePageProps) => {
           onOpenSupportedModels={() =>
             navigateToRoute("/portal-settings/ai-settings/ai-models")
           }
-        
           onOpenLimits={onOpenLimits}
         />
       ) : null}
@@ -245,7 +244,6 @@ const ServicePage = (props: ServicePageProps) => {
           onOpenWebSearch={() =>
             navigateToRoute("/portal-settings/ai-settings/web-search")
           }
-        
           onOpenLimits={onOpenLimits}
         />
       ) : null}

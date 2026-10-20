@@ -121,7 +121,6 @@ const ServicesPage = (props: ServicesPageProps) => {
               ),
             )
           }
-        
           onOpenLimits={onOpenLimits}
         />
       ) : null}
@@ -139,7 +138,6 @@ const ServicesPage = (props: ServicesPageProps) => {
               ),
             )
           }
-        
           onOpenLimits={onOpenLimits}
         />
       ) : null}

@@ -34,30 +34,7 @@
  */
 
 import { request } from "../client";
-import type {
-  TPrivacyRoomRequest,
-  TPrivacySettingsRequest,
-  TEncryptionKeyPair,
-} from "./types";
-
-export async function getPrivacySettings() {
-  const res = (await request({
-    method: "get",
-    url: "privacyroom",
-  })) as boolean;
-
-  return res;
-}
-
-export async function updatePrivacySettings(data: TPrivacySettingsRequest) {
-  const res = (await request({
-    method: "put",
-    url: "privacyroom",
-    data,
-  })) as boolean;
-
-  return res;
-}
+import type { TPrivacyRoomRequest, TEncryptionKeyPair } from "./types";
 
 export async function setEncryptionKeys(data: TPrivacyRoomRequest) {
   const res = (await request({

@@ -2,7 +2,7 @@
 
 ## 1. Remove dead requests
 
-- [ ] 1.1 Delete `getIsEncryptionSupport` from `packages/shared/api/files/index.ts`, and `getPrivacySettings` / `updatePrivacySettings` with their types from `packages/shared/api/privacy`; verify with `pnpm run tsc` (no remaining references). The per-file privacy access function goes with the desktop bridge in 2.1.
+- [x] 1.1 Delete `getIsEncryptionSupport` from `packages/shared/api/files/index.ts`, and `getPrivacySettings` / `updatePrivacySettings` with their types from `packages/shared/api/privacy`; verify with `pnpm run tsc` (no remaining references). The per-file privacy access function goes with the desktop bridge in 2.1.
 - [ ] 1.2 Delete `SettingsStore.getIsEncryptionSupport` and the legacy `isEncryptionSupport` wiring in `packages/client/src/Client.jsx` and `packages/client/src/store/FilesStore.ts`, updating `packages/client/src/store/filesStore/__tests__/FilesStore.remaining.test.ts`; verify with `cd packages/client && pnpm exec vitest run src/store/filesStore`
 - [ ] 1.3 Remove any MSW handler for the deleted routes and verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers`
 

@@ -1382,15 +1382,6 @@ export async function removeFromFavorite(
   return res;
 }
 
-export async function getIsEncryptionSupport() {
-  const res = (await request({
-    method: "get",
-    url: "/files/@privacy/available",
-  })) as boolean;
-
-  return res;
-}
-
 // TODO: Need update res type
 export function setEncryptionKeys(keys: { [key: string]: string | boolean }) {
   const data = {

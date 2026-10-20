@@ -1259,11 +1259,6 @@ class SettingsStore {
     this.isEncryptionSupport = isEncryptionSupport;
   };
 
-  getIsEncryptionSupport = async () => {
-    const isEncryptionSupport = await api.files.getIsEncryptionSupport();
-    this.setIsEncryptionSupport(isEncryptionSupport);
-  };
-
   updateLegacyEncryptionKeys = (encryptionKeys: {
     [key: string]: string | boolean;
   }) => {

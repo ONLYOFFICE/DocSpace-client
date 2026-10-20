@@ -21,25 +21,6 @@ The system SHALL allow creating only docx, xlsx and pptx files inside a private 
 - **WHEN** a user with keys opens the "+ New" menu in a private room
 - **THEN** the entries are document, spreadsheet, presentation, folder and upload files, and no PDF form entry is present
 
-### Requirement: Files leaving a private room are decrypted
-The system SHALL, when files are copied or moved out of a private room, decrypt them on the client with the unlocked identity and upload them as plaintext to the destination, after showing a warning banner in the destination picker. The system SHALL report Common:EncryptedCopyFailed with the failed names on error; every message on this path SHALL come from the locale files with no English fallback text in code.
-
-#### Scenario: Copy to My documents
-- **WHEN** the user copies an encrypted file to a folder outside the room and confirms
-- **THEN** a decrypted copy with the original name appears in the destination
-
-#### Scenario: Move out of the room
-- **WHEN** the user chooses "Move" to a destination outside the room
-- **THEN** a decrypted copy is created in the destination and the source file is left in place (current behaviour)
-
-#### Scenario: Identity locked
-- **WHEN** the user declines to unlock when the transfer starts
-- **THEN** no file is transferred
-
-#### Scenario: Error text is localized
-- **WHEN** an encrypted copy, download or open fails with an error that has no specific message
-- **THEN** the toast shows Common:EncryptedOperationFailed in the user's language, never the raw error object
-
 ### Requirement: Download without decryption
 The system SHALL offer "Download without decryption" for encrypted files and for folders in a private room, in the item context menu and in the bulk header menu of a private room; for a file it SHALL save the ciphertext container, for a folder it SHALL request a server archive of the ciphertext.
 
@@ -84,6 +65,15 @@ The system SHALL offer "Download" for a folder inside a private room and for the
 #### Scenario: A file cannot be decrypted
 - **WHEN** one file in the subtree has no access entry for the user
 - **THEN** the zip is produced without it and Common:EncryptedDownloadPartial names the skipped file
+
+## ADDED Requirements
+
+### Requirement: Errors on encrypted paths are localized
+The system SHALL take every message of an encrypted copy, download or open from the locale files, with no English fallback text in code; an error without a specific message SHALL show Common:EncryptedOperationFailed.
+
+#### Scenario: Error text is localized
+- **WHEN** an encrypted copy, download or open fails with an error that has no specific message
+- **THEN** the toast shows Common:EncryptedOperationFailed in the user's language, never the raw error object
 
 ## RENAMED Requirements
 

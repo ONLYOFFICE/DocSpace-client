@@ -24,7 +24,7 @@ Out of scope: any change to the encryption model or transfer rules (see `private
 
 ### Modified Capabilities
 
-- `private-rooms/file-operations`: "Create new file in a private room" (no PDF form), "New PDF form entry present in private rooms" (removed), "PDF creation on mobile" (removed), "Feeds show opaque names" (becomes resolved names), "No decrypted folder download" (becomes decrypted folder download), "Download without decryption" (bulk header menu), "Files leaving a private room are decrypted" (errors localised).
+- `private-rooms/file-operations`: "Create new file in a private room" (no PDF form), "New PDF form entry present in private rooms" (removed), "PDF creation on mobile" (removed), "Feeds show opaque names" (becomes resolved names), "No decrypted folder download" (becomes decrypted folder download), "Download without decryption" (bulk header menu), "Errors on encrypted paths are localized" (added).
 - `private-rooms/key-management`: "Delete a key" (lists affected rooms), "All key dialogs are modal" (becomes accessible dialogs with an aside variant).
 
 ## Impact

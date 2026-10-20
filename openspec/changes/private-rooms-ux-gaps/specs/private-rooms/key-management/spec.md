@@ -3,22 +3,22 @@
 ## MODIFIED Requirements
 
 ### Requirement: Delete a key
-The system SHALL delete a registered key only after a warning (Common:DeleteKeyWarning) that lists the private rooms whose files were shared with that key, followed by passphrase confirmation, confirming with Common:EncryptionKeyDeleted.
+The system SHALL delete a registered key only after a warning (Common:DeleteKeyWarning) that lists the private rooms in which the user holds file access entries, all of which become unreadable without the user's only key, followed by passphrase confirmation, confirming with Common:EncryptionKeyDeleted.
 
 #### Scenario: Delete
 - **WHEN** the user confirms the warning and enters the key's passphrase
 - **THEN** the key is removed from the server and from the list
 
 #### Scenario: Affected rooms listed
-- **WHEN** the delete-key warning opens for a key that holds access entries in three private rooms
+- **WHEN** the delete-key warning opens for a user who holds access entries in three private rooms
 - **THEN** the warning names those three rooms (Common:DeleteKeyAffectedRooms) before the user can confirm
 
 #### Scenario: No affected rooms
-- **WHEN** the key has no access entry in any private room
+- **WHEN** the user holds no access entry in any private room
 - **THEN** the warning states that no room is affected (Common:DeleteKeyNoAffectedRooms)
 
 ### Requirement: Key dialogs are accessible and adapt to narrow screens
-The system SHALL present the passphrase, recovery-phrase, key-change, key-rotation and reset dialogs as centred modals on wide screens and as aside panels on narrow screens; each dialog SHALL expose a dialog role, an accessible name and labelled inputs so screen readers announce it.
+The system SHALL present the passphrase, recovery-phrase, key-change and reset dialogs as centred modals on wide screens and as aside panels on narrow screens; each dialog SHALL expose a dialog role, an accessible name and labelled inputs so screen readers announce it.
 
 #### Scenario: Mobile viewport
 - **WHEN** a key dialog opens on a narrow screen

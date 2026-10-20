@@ -1,7 +1,7 @@
 # Private Rooms Encryption Core Specification
 
 ## Purpose
-Defines the client-side end-to-end encryption model behind private rooms: how a user's identity key is protected, how each file gets its own content key, how that key is handed to room members, what the encrypted file looks like on the server, where secrets live in the browser, how peer keys are trusted, and which threat-model limitations v1 accepts on purpose. Everything here is observable through the wire formats, the server's stored data and the user-visible outcomes; it is the contract the other private-rooms capabilities build on. Implementation: `packages/shared/services/encryption/*` (identity, hpke, streaming-encryption, file-keys, room-file-access, tofu-store, secret-storage, device-unlock-store, passkey-unlock, recovery, rotation-state, active-key-preference) and `packages/shared/services/private-room/*`; the wire-format reference is the stashed `FORMAT.md` (v2), which the code matches except for the newer IS_FORM flag.
+Defines the client-side end-to-end encryption model behind private rooms: how a user's identity key is protected, how each file gets its own content key, how that key is handed to room members, what the encrypted file looks like on the server, where secrets live in the browser, how peer keys are trusted, and which threat-model limitations v1 accepts on purpose. Everything here is observable through the wire formats, the server's stored data and the user-visible outcomes; it is the contract the other private-rooms capabilities build on. Implementation: `packages/shared/services/encryption/*` (identity, hpke, streaming-encryption, file-keys, room-file-access, tofu-store, secret-storage, device-unlock-store, passkey-unlock, recovery, select-user-key) and `packages/shared/services/private-room/*`; the wire-format reference is the stashed `FORMAT.md` (v2), which the code matches except for the newer IS_FORM flag.
 
 ## Requirements
 
@@ -199,40 +199,11 @@ The system SHALL cache decrypted filenames only in sessionStorage and SHALL clea
 - **THEN** the filename cache is emptied and the list shows opaque names until the next unlock
 
 ### Requirement: Preferences stored in localStorage are validated on read
-The system SHALL keep the active key id, auto-lock preset and rotation progress in localStorage and SHALL ignore values outside the allowed set when reading them back.
+The system SHALL keep the auto-lock preset in localStorage and SHALL ignore values outside the allowed set when reading it back. No key choice and no migration progress is stored.
 
 #### Scenario: Tampered auto-lock value
 - **WHEN** the stored auto-lock value is not one of the offered presets
 - **THEN** the default preset is used
-
-### Requirement: Several identity envelopes per user
-The system SHALL allow a user to hold several registered key pairs. When a file's access list holds entries for more than one of the user's keys, unwrapping SHALL try the entries in order, starting with the active key.
-
-#### Scenario: Entry for the active key missing
-- **WHEN** the file was wrapped only for an older key the user still holds
-- **THEN** the older key's entry is tried and the file opens
-
-### Requirement: Active key is chosen per device and never auto-picked
-The system SHALL remember the active key id per device. With exactly one key it SHALL be active implicitly; with two or more and no stored choice the system SHALL NOT pick one automatically.
-
-#### Scenario: Two keys, no preference
-- **WHEN** a user with two registered keys opens the portal on a new device
-- **THEN** no key is active until the user selects one
-
-### Requirement: Identity rotation re-wraps every file
-The system SHALL, when a user adopts a new identity, re-wrap the DEK of every encrypted file in every private room the user can read from the old key to the new key, publish the new public key only after every file succeeded, and persist progress so an interrupted run can resume. The server accepts a re-wrap only in rooms where the user is a room manager or content creator.
-
-#### Scenario: Partial failure
-- **WHEN** re-wrapping fails for at least one file
-- **THEN** the new public key is not published as the pinned key and the run is marked resumable
-
-#### Scenario: Resume after reload
-- **WHEN** the page is reloaded mid-rotation
-- **THEN** the rotation can be continued from the stored checkpoint instead of restarting
-
-#### Scenario: Room with a lesser role
-- **WHEN** the user is an editor, reviewer, commenter or viewer in a private room
-- **THEN** the server refuses the re-wrap of that room's files, so the run cannot complete and stays resumable
 
 ### Requirement: Revocation removes access-list entries only
 The system SHALL NOT generate a new DEK or re-encrypt file content when a member is removed from a private room. The server keeps the removed member's wraps in each file's access list, because an access-list write replaces only the users it names and never removes anyone else; access ends only because the server refuses the removed member read access.
@@ -256,18 +227,18 @@ The system SHALL NOT hide the file extension from the server; only the base name
 - **THEN** encrypted files are classified by their visible extension
 
 ### Requirement: Identity is per device
-The system SHALL NOT synchronise unlocked identities or passphrases across devices. A new device SHALL need either the passphrase-protected envelope, the recovery phrase or a newly generated key.
+The system SHALL NOT synchronise unlocked identities or passphrases across devices. A new device SHALL need the passphrase-protected envelope or the recovery phrase of the user's key; only a user without a key generates one.
 
 #### Scenario: Second device
 - **WHEN** a user signs in on a second device
 - **THEN** encrypted files show as inaccessible until the identity is unlocked or set up on that device
 
 ### Requirement: One access-list entry per user
-The system SHALL write at most one wrap per user into a file's access list, because the server keys the list by file and user. A user with several key pairs SHALL be served by the entry for the key active at wrap time.
+The system SHALL write at most one wrap per user into a file's access list, because the server keys the list by file and user, and SHALL wrap for that user's selected key. A write SHALL never name the same user twice.
 
 #### Scenario: Multi-key user at upload
-- **WHEN** a file is wrapped for a user who holds two key pairs
-- **THEN** the access list holds one entry for that user
+- **WHEN** a file is wrapped for a user the server lists with two key pairs
+- **THEN** the access list holds one entry for that user, wrapped for the selected key, and the write succeeds
 
 ### Requirement: No Web Worker isolation
 The system SHALL NOT run key material in a Web Worker; all cryptography runs on the page's main thread within the page origin.
@@ -289,3 +260,18 @@ The system SHALL buffer the complete ciphertext in memory when encrypting and th
 #### Scenario: Large file
 - **WHEN** a file close to the browser's memory limit is encrypted or decrypted
 - **THEN** the operation may fail with a memory error rather than streaming to disk
+
+### Requirement: One selected key per user
+The system SHALL operate with exactly one identity key per user. When the server lists several envelopes for a user, the system SHALL use the one with the newest server-set date, ties going to the last one listed, for the current user's own key and for every room member's key alike, and SHALL NOT register a second key for a user who already has one.
+
+#### Scenario: Own key with leftover envelopes
+- **WHEN** the server lists two envelopes for the current user
+- **THEN** the envelope with the newer date is the user's key on every device and the other one is not used
+
+#### Scenario: Member listed with two keys
+- **WHEN** the room access list holds two keys for one member
+- **THEN** the member's key with the newer date is the one used for that member
+
+#### Scenario: File wrapped for an unused key
+- **WHEN** the user's only access entry on a file was wrapped for an envelope that is not the selected one
+- **THEN** the file cannot be unwrapped and the ghost-state notification applies

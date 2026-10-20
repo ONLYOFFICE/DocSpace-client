@@ -1,7 +1,7 @@
 # Private Rooms Key Management Specification
 
 ## Purpose
-Describes the identity lifecycle as the user experiences it: creating encryption keys, unlocking them on a device, keeping a device unlocked, locking, recovering a lost passphrase, moving keys between devices, replacing or deleting keys, and the prompts that guide a user who enters a private room without a usable key. The Keys management tab in the profile is the home of these flows; the unlock dialog appears wherever an encrypted operation needs the identity. Implementation: `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/**`, `packages/shared/dialogs/{passphrase-modal,key-generation,key-recovery,key-change-dialog}`, `packages/shared/context/encryption/EncryptionContext.tsx`, `packages/client/src/components/EncryptionProviderWrapper.jsx`.
+Describes the identity lifecycle as the user experiences it: creating encryption keys, unlocking them on a device, keeping a device unlocked, locking, recovering a lost passphrase, moving keys between devices, resetting all keys or deleting unused ones, and the prompts that guide a user who enters a private room without a usable key. The Keys management tab in the profile is the home of these flows; the unlock dialog appears wherever an encrypted operation needs the identity. Implementation: `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/**`, `packages/shared/dialogs/{passphrase-modal,key-generation,key-recovery,key-change-dialog}`, `packages/shared/context/encryption/EncryptionContext.tsx`, `packages/client/src/components/EncryptionProviderWrapper.jsx`.
 
 ## Requirements
 
@@ -13,7 +13,7 @@ The system SHALL show the Keys management tab (Common:KeysManagement) in the pro
 - **THEN** no Keys management tab or route exists
 
 ### Requirement: Generate a new key
-The system SHALL let a user with no key generate one from the Keys management tab (Common:GenerateNewKey) or when choosing the Private room type: the user sets a passphrase, receives a recovery phrase, and the sealed envelope plus public key are registered on the server. Success is confirmed with Common:EncryptionKeyGenerated.
+The system SHALL let a user with no key generate one from the Keys management tab (Common:GenerateNewKey) or when choosing the Private room type: the user sets a passphrase, receives a recovery phrase, and the sealed envelope plus public key are registered on the server. Success is confirmed with Common:EncryptionKeyGenerated. The action SHALL NOT be offered while the user has a key.
 
 #### Scenario: First key
 - **WHEN** a user without keys completes passphrase creation and acknowledges the recovery phrase
@@ -22,6 +22,10 @@ The system SHALL let a user with no key generate one from the Keys management ta
 #### Scenario: Generation fails
 - **WHEN** registration on the server fails
 - **THEN** an error toast is shown and no key is left half-registered
+
+#### Scenario: Key already exists
+- **WHEN** the user already has a key
+- **THEN** Keys management offers no way to generate another one
 
 ### Requirement: Passphrase strength gate
 The system SHALL require a new passphrase of at least 12 characters, show a strength meter with suggestions, and SHALL refuse passphrases that match a common pattern (keyboard rows, sequences, brand names).
@@ -127,18 +131,22 @@ The system SHALL export a registered key as a JSON file named after the key fing
 - **THEN** a `docspace-key-<fingerprint>.json` file is downloaded
 
 ### Requirement: Import a key
-The system SHALL import a key from a previously exported JSON file (Common:ImportKey): the user picks the file, enters its passphrase, and the key is registered for this account and unlocked, confirming with Common:EncryptionKeyImported. Over HTTP the import SHALL be refused with Common:EncryptionRequiresHttps.
+The system SHALL import a key from a previously exported JSON file (Common:ImportKey) for a user who has no key: the user picks the file, enters its passphrase, and the key is registered for this account and unlocked, confirming with Common:EncryptionKeyImported. Over HTTP the import SHALL be refused with Common:EncryptionRequiresHttps. The action SHALL NOT be offered while the user has a key.
 
 #### Scenario: Import
-- **WHEN** the user selects a valid export file and enters the right passphrase
-- **THEN** the key appears in the list and is unlocked
+- **WHEN** a user without a key selects a valid export file and enters the right passphrase
+- **THEN** the key becomes the user's key and is unlocked
 
 #### Scenario: Wrong passphrase on import
 - **WHEN** the passphrase does not open the imported envelope
 - **THEN** Common:InvalidPassphrase is shown and nothing is registered
 
+#### Scenario: Key already exists
+- **WHEN** the user already has a key
+- **THEN** Keys management offers no import
+
 ### Requirement: Change passphrase
-The system SHALL let the user re-seal the active key under a new passphrase after proving the current one, confirming with Common:PassphraseUpdated. The recovery phrase SHALL keep working.
+The system SHALL let the user re-seal their key under a new passphrase after proving the current one, replacing the envelope in place and locking the identity, confirming with Common:PassphraseUpdated. The recovery phrase SHALL keep working.
 
 #### Scenario: Rotate passphrase
 - **WHEN** the user enters the current passphrase and a new acceptable one
@@ -159,7 +167,7 @@ The system SHALL delete a registered key only after a warning (Common:DeleteKeyW
 - **THEN** the key is removed from the server and from the list
 
 ### Requirement: Reset all keys with a typed token
-The system SHALL offer Common:ResetEncryptionKeysCta to a user who lost both passphrase and recovery phrase; it SHALL require typing the localized token (Common:ResetEncryptionKeysConfirmationToken, compared trimmed and case-insensitively), then delete every registered key, lock the identity and refresh the list.
+The system SHALL offer Common:ResetEncryptionKeysCta to a user who lost both passphrase and recovery phrase; it SHALL require typing the localized token (Common:ResetEncryptionKeysConfirmationToken, compared trimmed and case-insensitively), then delete every envelope the server lists for the user, unused ones included, lock the identity and refresh the list.
 
 #### Scenario: Token mismatch
 - **WHEN** the typed text does not match the token
@@ -168,31 +176,6 @@ The system SHALL offer Common:ResetEncryptionKeysCta to a user who lost both pas
 #### Scenario: Partial failure
 - **WHEN** some key deletions fail
 - **THEN** Common:ResetEncryptionKeysPartialFailure reports the count and the identity is still locked
-
-### Requirement: Switch the active key with room migration
-The system SHALL let a user with several keys activate another one after entering its passphrase; activation SHALL re-wrap every encrypted file in every private room to the new key before confirming with Common:EncryptionKeyActivated. The server accepts the re-wrap only in rooms where the user is a room manager or content creator.
-
-#### Scenario: Switch
-- **WHEN** the user selects another key and enters its passphrase
-- **THEN** all accessible encrypted files are re-wrapped and the key becomes active on this device
-
-#### Scenario: Room with a lesser role
-- **WHEN** the user is an editor, reviewer, commenter or viewer in a private room
-- **THEN** the server refuses the re-wrap of that room's files and they stay wrapped for the previous key only
-
-### Requirement: Interrupted migration can be resumed
-The system SHALL show a resume banner (Common:ReEncryptingFiles progress, Common:ResumeReEncryptionHint) with Common:ResumeReEncryptionCta and Common:Later when a key migration was interrupted, and continue from the saved checkpoint.
-
-#### Scenario: Resume
-- **WHEN** the user clicks the resume action
-- **THEN** re-wrapping continues with the rooms not yet processed
-
-### Requirement: This device marker
-The system SHALL mark the key whose public key is active on the current device with Common:ThisDevice in the key list.
-
-#### Scenario: Marker
-- **WHEN** the list shows the key that unlocks on this device
-- **THEN** it carries the This device badge next to its status
 
 ### Requirement: Device setup hint on entering a private room without keys
 The system SHALL show, once per browser session, an info toast (Common:EncryptionDeviceSetupHint) with a link to Keys management when the user enters a private room on a device with no configured key.
@@ -206,7 +189,7 @@ The system SHALL show, once per browser session, an info toast (Common:Encryptio
 - **THEN** the hint is not repeated
 
 ### Requirement: Ghost-state notification
-The system SHALL show, once per session, a toast (Common:GhostStateDetected) linking to Keys management when a download, copy or filename recovery fails because none of the user's keys can unwrap the file.
+The system SHALL show, once per session, a toast (Common:GhostStateDetected) linking to Keys management when a download, copy or filename recovery fails because the user's key cannot unwrap the file.
 
 #### Scenario: Unreadable file
 - **WHEN** an encrypted operation finds no usable wrap for the current user
@@ -225,3 +208,14 @@ The system SHALL present the passphrase, recovery-phrase, key-change, key-rotati
 #### Scenario: Mobile viewport
 - **WHEN** a key dialog opens on a narrow screen
 - **THEN** it renders as a modal dialog
+
+### Requirement: Unused keys on the server can be deleted
+The system SHALL show in Keys management how many of the user's envelopes on the server are not the selected key (Common:UnusedEncryptionKeysNotice) and SHALL offer to delete them (Common:DeleteUnusedEncryptionKeys) after a warning and passphrase confirmation of the selected key; the selected key is never deleted by this action.
+
+#### Scenario: Leftover keys
+- **WHEN** the server lists three envelopes for the user
+- **THEN** the notice reports two unused keys and the action deletes those two, keeping the selected one
+
+#### Scenario: Single key
+- **WHEN** the server lists one envelope for the user
+- **THEN** neither the notice nor the action is shown

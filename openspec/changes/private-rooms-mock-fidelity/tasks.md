@@ -17,7 +17,7 @@
 
 ## 3. E2E and client fallout
 
-- [ ] 3.1 Run the private-room E2E specs in Docker (`docker-compose run --rm -T -e WORKERS=2 tests-dev pnpm exec playwright test __tests__/private-room-*.spec.ts __tests__/keys-management*.spec.ts __tests__/encrypted-file-ui.spec.ts`), triage every failure as "spec asserted invented behaviour" (fix the spec) or "client bug the mock hid" (record a task here with the failing spec as evidence).
+- [x] 3.1 Run the private-room E2E specs in Docker (`docker-compose run --rm -T -e WORKERS=2 tests-dev pnpm exec playwright test __tests__/private-room-*.spec.ts __tests__/keys-management*.spec.ts __tests__/encrypted-file-ui.spec.ts`), triage every failure as "spec asserted invented behaviour" (fix the spec) or "client bug the mock hid" (record a task here with the failing spec as evidence).
 - [ ] 3.2 Fix or split out the client bugs found in 3.1 (see Decisions needed in proposal.md); verify with the same E2E run green.
 
 ## 4. Integration check

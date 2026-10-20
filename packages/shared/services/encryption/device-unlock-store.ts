@@ -57,6 +57,9 @@ type DeviceUnlockRecord = {
   updatedAt: number;
 };
 
+/** A remembered-device record older than this is discarded on restore. */
+export const DEVICE_UNLOCK_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
+
 let dbPromise: Promise<IDBDatabase | null> | null = null;
 
 function openDB(): Promise<IDBDatabase | null> {
@@ -183,6 +186,12 @@ export async function restoreDeviceUnlock(
   const record = await getRecord(userId);
   if (!record) return null;
   if (record.publicKey !== expectedPublicKeyB64) {
+    await deleteRecord(userId);
+    return null;
+  }
+  // Spec: private-rooms/encryption-core, "Remembered device keeps the key in IndexedDB".
+  const age = Date.now() - record.updatedAt;
+  if (!Number.isFinite(age) || age < 0 || age > DEVICE_UNLOCK_MAX_AGE_MS) {
     await deleteRecord(userId);
     return null;
   }

@@ -503,7 +503,7 @@ export const encryptedFilesHandlers = (
           ...f.fileKeys.filter((k) => !listed.has(String(k.userId))),
           ...keys,
         ];
-        for (const uid of listed) createdOn.delete(`${fileId}:${uid}`);
+        listed.forEach((uid) => createdOn.delete(`${fileId}:${uid}`));
         return new Response(JSON.stringify({ status: 0, statusCode: 200 }), {
           headers: { "Content-Type": "application/json" },
         });

@@ -251,3 +251,38 @@ describe("orchestrateEncryptedUpload — setItemLabel (encrypting phase)", () =>
     expect(result.aborted).toBe(false);
   });
 });
+
+describe("orchestrateEncryptedUpload - room fan-out", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("Member with two keys on the server: one recipient per member, for the selected key", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "key-1", userId: "user-1", publicKey: "pk-own", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "a-old", userId: "alice", publicKey: "pk-a-old", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "a-new", userId: "alice", publicKey: "pk-a-new", privateKeyEnc: "", date: "2026-10-01T00:00:00" },
+      { id: "b-1", userId: "bob", publicKey: "pk-b", privateKeyEnc: "", date: "2026-03-01T00:00:00" },
+    ] as never);
+
+    await orchestrateEncryptedUpload({
+      files: [makeFile("doc.docx", 16)],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      userId: "user-1",
+      publicKey: "pk-own",
+      publicKeyId: "key-1",
+    });
+
+    const fanOut = vi.mocked(wrapDekForRecipients).mock.calls[1][0];
+    expect(fanOut.recipients).toEqual([
+      { userId: "alice", publicKey: "pk-a-new", publicKeyId: "a-new" },
+      { userId: "bob", publicKey: "pk-b", publicKeyId: "b-1" },
+    ]);
+  });
+});

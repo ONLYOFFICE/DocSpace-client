@@ -46,6 +46,7 @@ import { rememberEncryptedFilename } from "../encryption/filename-cache";
 import { wipeDek } from "../encryption/file-keys";
 import { wrapDekForRecipients } from "../encryption/room-file-access";
 import type { IdentityKeyPair } from "../encryption/types";
+import { selectMemberKeys } from "./room-member-keys";
 import {
   countActiveUploadsForRoom as countActiveUploadsForRoomBase,
   isQuotaError,
@@ -256,29 +257,23 @@ async function wrapDekForSelfAndRoom(args: {
     ]);
 
     const existingFileKeys = encryptionInfo?.fileKeys ?? [];
-    const existingKeyPairs = new Set(
-      existingFileKeys.map((k) => `${String(k.userId)}:${k.publicKeyId || ""}`),
+    const usersWithEntry = new Set(
+      existingFileKeys.map((k) => String(k.userId)),
     );
 
+    // Spec: private-rooms/encryption-core, "One access-list entry per user".
     const recipients: Array<{
       userId: string;
       publicKey: string;
       publicKeyId: string;
     }> = [];
-
-    if (Array.isArray(publicKeys)) {
-      for (const pk of publicKeys) {
-        if (!pk.publicKey || !pk.userId) continue;
-        const uid = String(pk.userId);
-        if (uid === userId) continue;
-        const pairKey = `${uid}:${pk.id || ""}`;
-        if (existingKeyPairs.has(pairKey)) continue;
-        recipients.push({
-          userId: uid,
-          publicKey: pk.publicKey,
-          publicKeyId: pk.id || "",
-        });
-      }
+    for (const [uid, key] of selectMemberKeys(publicKeys)) {
+      if (uid === userId || usersWithEntry.has(uid)) continue;
+      recipients.push({
+        userId: uid,
+        publicKey: key.publicKey,
+        publicKeyId: key.publicKeyId || "",
+      });
     }
 
     if (recipients.length === 0) return;

@@ -325,6 +325,51 @@ describe("addMembersToEncryptedRoom", () => {
     ).toEqual([ALICE, BOB].sort());
   });
 
+  it("Member listed with two keys: the invite wraps the member's newer key once", async () => {
+    const bobNewKey = await generateIdentityKeyPair();
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { id: "alice-key", userId: ALICE, publicKey: pubB64(alice) },
+      {
+        id: "bob-new",
+        userId: BOB,
+        publicKey: pubB64(bobNewKey),
+        date: "2026-10-01T00:00:00",
+      },
+      {
+        id: "bob-old",
+        userId: BOB,
+        publicKey: pubB64(bob),
+        date: "2026-01-01T00:00:00",
+      },
+    ]);
+
+    const result = await addMembersToEncryptedRoom(
+      ROOM_ID,
+      [{ id: BOB, displayName: "Bob" }],
+      {
+        currentUserId: ALICE,
+        identity: alice,
+        onKeyChange: vi.fn().mockResolvedValue("accept"),
+      },
+    );
+
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
+    const [, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
+    const bobEntries = (keysPosted as ServerAccessKeyDto[]).filter(
+      (k) => String(k.userId) === BOB,
+    );
+    expect(bobEntries).toHaveLength(1);
+    expect(bobEntries[0].publicKeyId).toBe("bob-new");
+  });
+
   it("marks the member as 'no-key' when absent from the room ACL", async () => {
     getFolderMock.mockResolvedValue({
       files: singleFile(FILE_ID),
@@ -767,7 +812,7 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
   });
 
-  it("backfills a member with NO envelope, using exactly one (newest) key", async () => {
+  it("Member listed with two keys: backfill wraps the member's newer key once", async () => {
     const bobOldKey = bob;
     const bobNewKey = await generateIdentityKeyPair();
 
@@ -794,8 +839,18 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     ]);
     getFilePublicKeysMock.mockResolvedValue([
       { id: "alice-key", userId: ALICE, publicKey: pubB64(alice) },
-      { id: "bob-old", userId: BOB, publicKey: pubB64(bobOldKey) },
-      { id: "bob-new", userId: BOB, publicKey: pubB64(bobNewKey) },
+      {
+        id: "bob-new",
+        userId: BOB,
+        publicKey: pubB64(bobNewKey),
+        date: "2026-10-01T00:00:00",
+      },
+      {
+        id: "bob-old",
+        userId: BOB,
+        publicKey: pubB64(bobOldKey),
+        date: "2026-01-01T00:00:00",
+      },
     ]);
 
     const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {

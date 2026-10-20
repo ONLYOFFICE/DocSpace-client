@@ -50,7 +50,7 @@ import {
   getKeyMismatchHandler,
   type KeyMismatchResolver,
 } from "../encryption/tofu-store";
-import { loadRoomMemberKeys } from "./room-member-keys";
+import { loadRoomMemberKeys, selectMemberKeys } from "./room-member-keys";
 import FilesFilter from "../../api/files/filter";
 import type { TFile } from "../../api/files/types";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
@@ -171,7 +171,7 @@ export async function addMembersToEncryptedRoom(
   const encryptedFiles = await getEncryptedFilesInRoom(roomId);
   if (encryptedFiles.length === 0) return { fileResults, skippedMembers: [] };
 
-  const { keysByUserId, list: roomMemberKeys } =
+  const { keyByUserId, list: roomMemberKeys } =
     await loadRoomMemberKeys(roomId);
 
   onProgress?.(0, encryptedFiles.length);
@@ -189,13 +189,9 @@ export async function addMembersToEncryptedRoom(
     const cached = memberKeyCache.get(m.id);
     if (cached !== undefined) return cached;
 
-    const registered = keysByUserId.get(String(m.id));
     const candidate: RoomMemberPublicKey | null =
-      registered && registered.length > 0
-        ? registered[registered.length - 1]
-        : m.publicKey
-          ? { userId: String(m.id), publicKey: m.publicKey }
-          : null;
+      keyByUserId.get(String(m.id)) ??
+      (m.publicKey ? { userId: String(m.id), publicKey: m.publicKey } : null);
     if (!candidate) {
       memberKeyCache.set(m.id, null);
       skippedReasons.set(m.id, "no-key");
@@ -441,10 +437,6 @@ export async function backfillEncryptedFilesForRoomMembers(
         info.fileKeys.map((k) => String(k.userId)),
       );
 
-      const backfillByUser = new Map<
-        string,
-        { publicKey: string; publicKeyId?: string }
-      >();
       if (Array.isArray(filePublicKeys)) {
         for (const pk of filePublicKeys) {
           if (!pk?.userId || !pk?.publicKey) continue;
@@ -458,20 +450,15 @@ export async function backfillEncryptedFilesForRoomMembers(
               publicKeyId: pk.id,
             });
           }
-          if (uid === String(currentUserId)) continue;
-          if (usersWithAnyEntry.has(uid)) continue;
-          backfillByUser.set(uid, {
-            publicKey: pk.publicKey,
-            publicKeyId: pk.id,
-          });
         }
       }
 
-      const candidates = Array.from(backfillByUser, ([userId, v]) => ({
-        userId,
-        publicKey: v.publicKey,
-        publicKeyId: v.publicKeyId,
-      }));
+      const candidates = Array.from(selectMemberKeys(filePublicKeys)).flatMap(
+        ([userId, key]) =>
+          userId === String(currentUserId) || usersWithAnyEntry.has(userId)
+            ? []
+            : [key],
+      );
 
       if (candidates.length === 0) {
         fileResults.push({ fileId: file.id, success: true });

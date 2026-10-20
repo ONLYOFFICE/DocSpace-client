@@ -11,7 +11,7 @@ Every task below is committed on its own (see "Commits" in `openspec/config.yaml
 
 - [x] 2.1 Build the recipient list per user in `encryptKeysForRoomMembersImpl` (`packages/client/src/store/uploadDataStore/encryption.helpers.ts`), de-duplicating existing entries by user id; verify with a new case in `UploadDataStore.encryption.test.ts` where a member has two keys and the write names each user once.
 - [x] 2.2 Same for `wrapDekForSelfAndRoom` in `packages/shared/services/private-room/encrypted-upload-orchestrator.ts` (SDK upload, encrypted file creation); verify with `encrypted-upload-orchestrator.test.ts`.
-- [ ] 2.3 Route `addMembersToEncryptedRoom` (`resolveMemberKey`), `backfillEncryptedFilesForRoomMembers` and `validateMembersForEncryption` in `room-encryption.ts` through the one-key-per-user map; verify the existing `room-encryption.test.ts` cases still pass and add one for a member listed with two keys.
+- [x] 2.3 Route `addMembersToEncryptedRoom` (`resolveMemberKey`), `backfillEncryptedFilesForRoomMembers` and `validateMembersForEncryption` in `room-encryption.ts` through the one-key-per-user map; verify the existing `room-encryption.test.ts` cases still pass and add one for a member listed with two keys.
 
 ## 3. Own key everywhere
 

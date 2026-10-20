@@ -89,19 +89,11 @@ export async function loadRoomMemberKeys(
 ): Promise<{
   /** The selected key of each member. */
   keyByUserId: Map<string, RoomMemberPublicKey>;
-  keysByUserId: Map<string, RoomMemberPublicKey[]>;
   /** Every listed key: unwrapping needs all of a sender's keys. */
   list: RoomMemberPublicKey[];
 }> {
   const keys = await getRoomEncryptionKeys(roomId);
-  const list = toMemberKeys(keys);
-  const keysByUserId = new Map<string, RoomMemberPublicKey[]>();
-  for (const entry of list) {
-    const bucket = keysByUserId.get(entry.userId);
-    if (bucket) bucket.push(entry);
-    else keysByUserId.set(entry.userId, [entry]);
-  }
-  return { keyByUserId: selectMemberKeys(keys), keysByUserId, list };
+  return { keyByUserId: selectMemberKeys(keys), list: toMemberKeys(keys) };
 }
 
 export async function loadRoomMemberKeysSafe(

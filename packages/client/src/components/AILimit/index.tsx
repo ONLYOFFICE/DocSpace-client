@@ -54,19 +54,20 @@ import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
 import styles from "../SpaceQuota/space-quota.module.scss";
 
-const getPeriodLabel = (
-  t: (key: string) => string,
+const getLimitLabel = (
+  t: (key: string, values?: Record<string, string>) => string,
   period: TUserServiceLimit["period"],
+  amount: string,
 ) => {
   switch (period) {
     case "Week":
-      return t("Common:LimitPerWeek");
+      return t("Common:AILimitAmountPerWeek", { amount });
     case "Month":
-      return t("Common:LimitPerMonth");
+      return t("Common:AILimitAmountPerMonth", { amount });
     case "Lifetime":
-      return t("Common:LimitLifetime");
+      return t("Common:AILimitAmountLifetime", { amount });
     default:
-      return t("Common:LimitPerDay");
+      return t("Common:AILimitAmountPerDay", { amount });
   }
 };
 
@@ -108,7 +109,7 @@ const AILimit = ({
 
   const current =
     limit && currency && limit.amountValue !== null
-      ? `${format(limit.amountValue)} ${getPeriodLabel(t, limit.period)}`
+      ? getLimitLabel(t, limit.period, format(limit.amountValue))
       : t("Common:Unlimited");
 
   const options: TOption[] = [

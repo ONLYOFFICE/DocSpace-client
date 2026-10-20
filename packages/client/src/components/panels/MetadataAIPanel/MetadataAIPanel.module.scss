@@ -92,8 +92,25 @@
   --textarea-height-custom: 100%;
 }
 
-.hint {
-  color: var(--param-description-color);
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background-color: var(--info-block-background);
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+.notesTitle {
+  color: var(--info-block-header-color);
+}
+
+.notesText {
+  color: var(--info-block-description-color);
 }
 
 .error {

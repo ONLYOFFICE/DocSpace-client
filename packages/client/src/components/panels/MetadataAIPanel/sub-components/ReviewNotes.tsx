@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
@@ -64,21 +64,38 @@ const ReviewNotes = ({ mode, summary }: ReviewNotesProps) => {
   };
 
   return (
-    <>
-      <Text className={styles.hint} fontSize="13px" lineHeight="20px">
+    <div className={styles.notes} data-testid="metadata_ai_review_notes">
+      <Text
+        className={styles.notesTitle}
+        fontSize="12px"
+        fontWeight={600}
+        lineHeight="16px"
+      >
         {getResult()}
       </Text>
       {notFound.length ? (
-        <Text className={styles.hint} fontSize="12px" lineHeight="16px">
-          {t("Metadata:AINotFound", { fields: notFound.join(", ") })}
+        <Text className={styles.notesText} fontSize="12px" lineHeight="16px">
+          <Trans
+            t={t}
+            ns="Metadata"
+            i18nKey="AINotFound"
+            values={{ fields: notFound.join(", ") }}
+            components={{ strong: <strong /> }}
+          />
         </Text>
       ) : null}
       {skipped.length ? (
-        <Text className={styles.hint} fontSize="12px" lineHeight="16px">
-          {t("Metadata:AISkipped", { files: skipped.join(", ") })}
+        <Text className={styles.notesText} fontSize="12px" lineHeight="16px">
+          <Trans
+            t={t}
+            ns="Metadata"
+            i18nKey="AISkipped"
+            values={{ files: skipped.join(", ") }}
+            components={{ strong: <strong /> }}
+          />
         </Text>
       ) : null}
-    </>
+    </div>
   );
 };
 

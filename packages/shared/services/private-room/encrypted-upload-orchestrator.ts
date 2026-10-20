@@ -270,9 +270,6 @@ async function wrapDekForSelfAndRoom(args: {
     ]);
 
     const existingFileKeys = encryptionInfo?.fileKeys ?? [];
-    const usersWithEntry = new Set(
-      existingFileKeys.map((k) => String(k.userId)),
-    );
 
     // Spec: private-rooms/encryption-core, "One access-list entry per user".
     const recipients: Array<{
@@ -281,7 +278,7 @@ async function wrapDekForSelfAndRoom(args: {
       publicKeyId: string;
     }> = [];
     for (const [uid, key] of selectMemberKeys(publicKeys)) {
-      if (uid === userId || usersWithEntry.has(uid)) continue;
+      if (uid === userId) continue;
       recipients.push({
         userId: uid,
         publicKey: key.publicKey,

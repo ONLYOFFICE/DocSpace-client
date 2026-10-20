@@ -185,9 +185,6 @@ export async function encryptKeysForRoomMembersImpl(
     ]);
 
     const existingFileKeys = encryptionInfo.fileKeys ?? [];
-    const usersWithEntry = new Set(
-      existingFileKeys.map((k) => String(k.userId)),
-    );
 
     // Spec: private-rooms/encryption-core, "One access-list entry per user".
     const recipients: {
@@ -196,7 +193,7 @@ export async function encryptKeysForRoomMembersImpl(
       publicKeyId: string;
     }[] = [];
     for (const [uid, key] of selectMemberKeys(publicKeys)) {
-      if (uid === String(currentUserId) || usersWithEntry.has(uid)) continue;
+      if (uid === String(currentUserId)) continue;
       recipients.push({
         userId: uid,
         publicKey: key.publicKey,

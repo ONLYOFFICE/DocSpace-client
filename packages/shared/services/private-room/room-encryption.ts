@@ -199,14 +199,10 @@ export async function addMembersToEncryptedRoom(
         continue;
       }
 
-      const usersWithAnyEntry = new Set(
-        info.fileKeys.map((k) => String(k.userId)),
-      );
-
+      // Spec: private-rooms/server-contract, "File access entries read".
       const recipients: RoomMemberPublicKey[] = [];
       for (const m of validMembers) {
-        const uid = String(m.id);
-        if (usersWithAnyEntry.has(uid)) continue;
+        if (String(m.id) === String(currentUserId)) continue;
         const key = await resolveMemberKey(m);
         if (!key) continue;
         recipients.push({
@@ -245,37 +241,6 @@ export async function addMembersToEncryptedRoom(
       ];
       await setFileEncryptionKeys(file.id, allKeys);
 
-      // BL-4 defense-in-depth — the server-side authz on PUT /file/{id}/access
-      // currently lets any room-Viewer overwrite arbitrary userId entries.
-      // Re-fetch ACL state and emit a structured warning if the returned set
-      // doesn't include every entry we just wrote. Best-effort: never throws,
-      // never affects the operation result.
-      try {
-        const verifiedInfo = await getFileEncryptionAccess(file.id);
-        const verifiedSet = new Set(
-          (verifiedInfo?.fileKeys ?? []).map(
-            (k) => `${String(k.userId)}:${k.publicKeyId || ""}`,
-          ),
-        );
-        const expectedNew = newKeys.map(
-          (k) => `${String(k.userId)}:${k.publicKeyId || ""}`,
-        );
-        const missing = expectedNew.filter((p) => !verifiedSet.has(p));
-        if (missing.length > 0 && typeof console !== "undefined") {
-          // biome-ignore lint/suspicious/noConsole: BL-4 telemetry hook; production build strips console.
-          console.warn(
-            "[ENCRYPTION] encryption-acl-drift after addMembersToEncryptedRoom",
-            {
-              fileId: file.id,
-              missing,
-              telemetryEvent: "encryption-acl-drift",
-            },
-          );
-        }
-      } catch {
-        // Verification GET failed — non-fatal. The main operation succeeded.
-      }
-
       fileResults.push({ fileId: file.id, success: true });
     } catch (error) {
       fileResults.push({
@@ -308,20 +273,13 @@ export async function addMembersToEncryptedRoom(
 }
 
 /**
- * Re-wraps existing file DEKs for any current room member whose public key
- * is registered server-side but who has no envelope on one or more files.
+ * Re-wraps every encrypted file of the room for every member with a verified
+ * key other than the caller. The caller cannot see other users' entries, so
+ * the sweep is blind by design and its callers bound how often it runs.
+ * Spec: private-rooms/room-membership, "Backfill re-wraps every member".
  *
- * Use case: a user is invited to a private room before they have registered
- * their encryption keypair. `addMembersToEncryptedRoom` skips them at invite
- * time (reason "no-key"). Once they later register a key, their new uploads
- * work, but pre-existing files remain inaccessible. This function backfills
- * those missing envelopes per-file.
- *
- * Recipient discovery uses the file-level endpoint `getFilePublicKeys` —
- * the same one the upload pipeline uses successfully. The room-level
- * `getRoomEncryptionKeys` is intentionally NOT consulted for recipient
- * selection because in practice it can lag behind file-level access state.
- * Room member keys are still loaded once for HPKE-Auth sender verification.
+ * Recipient discovery uses the file-level endpoint `getFilePublicKeys`;
+ * room member keys are loaded once for HPKE-Auth sender verification.
  *
  * Pass an `onKeyChange` that auto-refuses if you want a fully silent run
  * (recommended for background invocations triggered by navigation).
@@ -389,10 +347,6 @@ export async function backfillEncryptedFilesForRoomMembers(
         continue;
       }
 
-      const usersWithAnyEntry = new Set(
-        info.fileKeys.map((k) => String(k.userId)),
-      );
-
       if (Array.isArray(filePublicKeys)) {
         for (const pk of filePublicKeys) {
           if (!pk?.userId || !pk?.publicKey) continue;
@@ -410,10 +364,7 @@ export async function backfillEncryptedFilesForRoomMembers(
       }
 
       const candidates = Array.from(selectMemberKeys(filePublicKeys)).flatMap(
-        ([userId, key]) =>
-          userId === String(currentUserId) || usersWithAnyEntry.has(userId)
-            ? []
-            : [key],
+        ([userId, key]) => (userId === String(currentUserId) ? [] : [key]),
       );
 
       if (candidates.length === 0) {

@@ -15,6 +15,7 @@
 - [x] 3.1 Call the helper in `encryptKeysForRoomMembersImpl` (`packages/client/src/store/uploadDataStore/encryption.helpers.ts`), awaiting the resolver, and propagate the skipped list to the upload item; verify with new cases in `packages/client/src/store/uploadDataStore/__tests__/encryption.helpers.test.ts` and `UploadDataStore.encryption.test.ts`.
 - [x] 3.2 Remember a refusal per (userId, key) for the session so a batch does not prompt per file; verify with a unit test that two files in one batch trigger one resolver call.
 - [x] 3.3 When a file's member fan-out finishes with skipped members, show a warning toast Common:EncryptedUploadNotSharedWith naming them (display names resolved through the people API, since the room key list carries user ids only) and mark the file's row in the upload panel with the same message; the fan-out runs after the upload-finish toast and may wait for the key-change dialog, so the finish toast stays as it is. Add the key to `public/locales/en/Common.json`, run `/translate-comments` and `/translate-key`, and verify with a unit test for the warning and `cd common/tests && npx vitest run test/locales.test.js`
+- [ ] 3.4 Let the shared orchestrator remember a refusal per (userId, key) across the files of one call, or across calls when the caller passes its own set, so an SDK batch shows the key-change dialog once; verify with a case in `packages/shared/services/private-room/__tests__/encrypted-upload-orchestrator.test.ts` where two files in one call trigger one resolver call
 
 ## 4. Integration check
 

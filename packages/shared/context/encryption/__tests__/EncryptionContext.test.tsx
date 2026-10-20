@@ -54,6 +54,11 @@ import type {
   SerializedIdentity,
 } from "../../../services/encryption/types";
 import type { KeyMismatchInfo } from "../../../services/encryption/tofu-store";
+import { arrayBufferToBase64 } from "../../../services/encryption/utils";
+import {
+  mockIDB,
+  resetMockIDB,
+} from "../../../services/private-room/__tests__/_helpers/mock-idb";
 
 vi.mock("../../../services/encryption/identity", () => ({
   unlockWithPassphrase: vi.fn(),
@@ -385,6 +390,101 @@ describe("EncryptionContext / EncryptionProvider", () => {
       });
       expect(forgetDeviceUnlock).toHaveBeenCalledWith("user-42");
       expect(latest.isUnlocked).toBe(false);
+    });
+  });
+
+  describe("remembered device across auto-lock (real device store)", () => {
+    type DeviceStore =
+      typeof import("../../../services/encryption/device-unlock-store");
+    const DAY = 24 * 60 * 60 * 1000;
+    const T0 = Date.UTC(2026, 9, 1);
+    const realPublicKey = arrayBufferToBase64(dummyKeyPair.publicKey);
+    const realUserKeys = {
+      ...userKeysFixture,
+      publicKey: realPublicKey,
+    } as EncryptionUserKeys;
+    let store: DeviceStore;
+    let now: ReturnType<typeof vi.spyOn>;
+
+    beforeEach(async () => {
+      store = await vi.importActual<DeviceStore>(
+        "../../../services/encryption/device-unlock-store",
+      );
+      resetMockIDB();
+      store.resetDeviceUnlockStoreForTests();
+      vi.stubGlobal("indexedDB", mockIDB);
+      vi.mocked(restoreDeviceUnlock).mockImplementation(
+        store.restoreDeviceUnlock,
+      );
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      now = vi.spyOn(Date, "now").mockReturnValue(T0);
+      await store.persistDeviceUnlock("user-42", realPublicKey, dummyKeyPair);
+    });
+
+    afterEach(() => {
+      now.mockRestore();
+      vi.mocked(restoreDeviceUnlock).mockResolvedValue(null);
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      vi.unstubAllGlobals();
+      Object.defineProperty(document, "visibilityState", {
+        value: "visible",
+        configurable: true,
+      });
+    });
+
+    const renderUnlockedThenHideTab = async () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      await act(async () => {
+        renderTree({ userKeys: realUserKeys });
+      });
+      Object.defineProperty(document, "visibilityState", {
+        value: "hidden",
+        configurable: true,
+      });
+      await act(async () => {
+        document.dispatchEvent(new Event("visibilitychange"));
+      });
+      expect(latest.isUnlocked).toBe(false);
+      expect(forgetDeviceUnlock).not.toHaveBeenCalled();
+      // The user comes back to the tab before the next operation.
+      Object.defineProperty(document, "visibilityState", {
+        value: "visible",
+        configurable: true,
+      });
+      await act(async () => {
+        document.dispatchEvent(new Event("visibilitychange"));
+      });
+    };
+
+    it("Auto-lock on a remembered device: the next operation restores the key without a prompt", async () => {
+      await renderUnlockedThenHideTab();
+      now.mockReturnValue(T0 + DAY);
+
+      let restored: IdentityKeyPair | null = null;
+      await act(async () => {
+        restored = await latest.requireIdentity();
+      });
+
+      expect(restored).not.toBeNull();
+      expect(captured.passphrase).toBeNull();
+      expect(latest.isUnlocked).toBe(true);
+    });
+
+    it("Remembered record expired: after auto-lock the user is prompted for the passphrase", async () => {
+      await renderUnlockedThenHideTab();
+      now.mockReturnValue(T0 + 31 * DAY);
+
+      let promised!: Promise<IdentityKeyPair | null>;
+      await act(async () => {
+        promised = latest.requireIdentity();
+      });
+
+      expect(captured.passphrase).not.toBeNull();
+      await act(async () => {
+        captured.passphrase!.onCancel();
+      });
+      expect(await promised).toBeNull();
+      expect(await store.getDeviceUnlockWrittenAt("user-42")).toBeNull();
     });
   });
 

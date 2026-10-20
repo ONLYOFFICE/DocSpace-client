@@ -38,7 +38,6 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
-import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
@@ -49,6 +48,7 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?u
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
 import { getPublicKeyFingerprint } from "@docspace/shared/services/encryption/identity";
+import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
 import styles from "./KeysManagement.module.scss";
@@ -58,11 +58,8 @@ type KeyItemProps = {
   onDelete: (keyData: TEncryptionKeyPair) => void;
   onExport: (keyData: TEncryptionKeyPair) => void;
   onRotate: (keyData: TEncryptionKeyPair) => void;
-  onSelectActive: (keyId: string) => void;
   isDeleting: boolean;
   deletingKeyId: string | null;
-  isCurrentDevice: boolean;
-  canSwitchActive: boolean;
 };
 
 const KeyItem: React.FC<KeyItemProps> = ({
@@ -70,11 +67,8 @@ const KeyItem: React.FC<KeyItemProps> = ({
   onDelete,
   onExport,
   onRotate,
-  onSelectActive,
   isDeleting,
   deletingKeyId,
-  isCurrentDevice,
-  canSwitchActive,
 }) => {
   const { t } = useTranslation(["Common", "People"]);
   const [fingerprint, setFingerprint] = useState<string>("");
@@ -104,10 +98,6 @@ const KeyItem: React.FC<KeyItemProps> = ({
     onRotate(keyData);
   }, [onRotate, keyData]);
 
-  const handleSelectActive = useCallback(() => {
-    onSelectActive(keyData.id);
-  }, [onSelectActive, keyData.id]);
-
   const isCurrentlyDeleting = isDeleting && deletingKeyId === keyData.id;
   const locale = getCookie(LANGUAGE) || "";
   const createdDate = keyData.date
@@ -128,20 +118,6 @@ const KeyItem: React.FC<KeyItemProps> = ({
                 backgroundColor={globalColors.secondGreen}
                 maxWidth="none"
               />
-              {isCurrentDevice ? (
-                <Badge
-                  label={t("Common:ThisDevice")}
-                  backgroundColor={globalColors.lightBlueMain}
-                  maxWidth="none"
-                />
-              ) : canSwitchActive ? (
-                <Button
-                  size={ButtonSize.extraSmall}
-                  label={t("Common:UseOnThisDevice")}
-                  onClick={handleSelectActive}
-                  isDisabled={isDeleting}
-                />
-              ) : null}
             </div>
             <div className={styles.keyItemActions}>
               <IconButton
@@ -214,11 +190,8 @@ type KeysListProps = {
   onDelete: (keyData: TEncryptionKeyPair) => void;
   onExport: (keyData: TEncryptionKeyPair) => void;
   onRotate: (keyData: TEncryptionKeyPair) => void;
-  onSelectActive: (keyId: string) => void;
   isDeleting: boolean;
   deletingKeyId: string | null;
-  /** Key id this device has adopted, from the per-device preference. */
-  activeKeyId?: string | null;
 };
 
 export const KeysList: React.FC<KeysListProps> = ({
@@ -226,14 +199,14 @@ export const KeysList: React.FC<KeysListProps> = ({
   onDelete,
   onExport,
   onRotate,
-  onSelectActive,
   isDeleting,
   deletingKeyId,
-  activeKeyId,
 }) => {
   const { t } = useTranslation(["Common"]);
+  // Spec: private-rooms/encryption-core, "One selected key per user".
+  const key = selectUserKey(keys);
 
-  if (!keys || keys.length === 0) {
+  if (!key) {
     return (
       <div className={styles.noKeys}>
         <Badge
@@ -251,31 +224,17 @@ export const KeysList: React.FC<KeysListProps> = ({
   return (
     <div className={styles.keysList}>
       <Text fontSize="14px" fontWeight={600} className={styles.keysListTitle}>
-        {t("Common:EncryptionKeys")} ({keys.length})
+        {t("Common:EncryptionKeys")}
       </Text>
       <div className={styles.keysListItems}>
-        {keys.map((key) => {
-          // Adoption is recorded per device (active-key-preference), so only
-          // the device holding the key may claim it. Every other key can be
-          // adopted here, a single key on a fresh device included.
-          const isCurrentDevice =
-            !!activeKeyId && String(key.id) === String(activeKeyId);
-
-          return (
-            <KeyItem
-              key={key.id}
-              keyData={key}
-              onDelete={onDelete}
-              onExport={onExport}
-              onRotate={onRotate}
-              onSelectActive={onSelectActive}
-              isDeleting={isDeleting}
-              deletingKeyId={deletingKeyId}
-              isCurrentDevice={isCurrentDevice}
-              canSwitchActive={!isCurrentDevice}
-            />
-          );
-        })}
+        <KeyItem
+          keyData={key}
+          onDelete={onDelete}
+          onExport={onExport}
+          onRotate={onRotate}
+          isDeleting={isDeleting}
+          deletingKeyId={deletingKeyId}
+        />
       </div>
     </div>
   );

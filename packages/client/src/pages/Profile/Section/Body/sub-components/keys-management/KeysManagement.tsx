@@ -54,7 +54,6 @@ import {
   isPasskeyUnlockAvailable,
   removePasskeyUnlock,
 } from "@docspace/shared/services/encryption/passkey-unlock";
-import { getActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
@@ -65,11 +64,9 @@ import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
 import { useImportKeyFlow } from "./flows/useImportKeyFlow";
 import { useDeleteKeyFlow } from "./flows/useDeleteKeyFlow";
-import { useSwitchKeyFlow } from "./flows/useSwitchKeyFlow";
 import { useExportKeyFlow } from "./flows/useExportKeyFlow";
 import { useRotatePassphraseFlow } from "./flows/useRotatePassphraseFlow";
 import { useResetKeysFlow } from "./flows/useResetKeysFlow";
-import { useRotateIdentityForRooms } from "./flows/useRotateIdentityForRooms";
 
 import styles from "./KeysManagement.module.scss";
 
@@ -78,13 +75,6 @@ type KeysManagementProps = {
   setUserEncryptionKeys?: (keys: TEncryptionKeyPair[]) => void;
   userId?: string;
   userEmail?: string;
-  setSecondaryProgressBarData?: (data: {
-    operation: string;
-    operationId: string;
-    percent?: number;
-    completed?: boolean;
-    alert?: boolean;
-  }) => void;
 };
 
 const KeysManagement = ({
@@ -92,7 +82,6 @@ const KeysManagement = ({
   setUserEncryptionKeys,
   userId,
   userEmail,
-  setSecondaryProgressBarData,
 }: KeysManagementProps) => {
   const { t } = useTranslation(["Common"]);
   const { isUnlocked, lock, getIdentity, requireIdentity, publicKey } =
@@ -192,18 +181,6 @@ const KeysManagement = ({
     }
   }, [setUserEncryptionKeys]);
 
-  const { rotationProgress, rotateForAllRooms } = useRotateIdentityForRooms({
-    setSecondaryProgressBarData,
-  });
-
-  const switchKey = useSwitchKeyFlow({
-    userId,
-    encryptionKeys,
-    requireIdentity,
-    rotateForAllRooms,
-    refreshKeysFromServer,
-  });
-
   const generate = useGenerateKeyFlow({
     userId,
     accountLabel: userEmail,
@@ -251,8 +228,6 @@ const KeysManagement = ({
     onForgotPassphrase: handleForgotPassphrase,
   });
 
-  const isRotating = rotationProgress !== null;
-
   const busy =
     generate.isPending ||
     importFlow.isPending ||
@@ -260,27 +235,15 @@ const KeysManagement = ({
     exportFlow.isPending ||
     rotate.isPending ||
     recover.isPending ||
-    reset.isPending ||
-    switchKey.isPending ||
-    isRotating;
-
-  const handleSelectActive = useCallback(
-    (keyId: string) => {
-      if (busy) return;
-      void switchKey.switchTo(keyId);
-    },
-    [busy, switchKey],
-  );
+    reset.isPending;
 
   return (
     <div className={styles.sectionBody}>
       <KeysList
         keys={encryptionKeys || []}
-        activeKeyId={getActiveKeyId(userId)}
         onDelete={remove.request}
         onExport={exportFlow.request}
         onRotate={rotate.request}
-        onSelectActive={handleSelectActive}
         isDeleting={remove.isPending}
         deletingKeyId={remove.pendingId}
       />
@@ -328,45 +291,7 @@ const KeysManagement = ({
             </Link>
           ) : null}
         </div>
-        {isRotating && rotationProgress ? (
-          <div className={styles.rotationProgress} role="status">
-            <span>
-              {t("Common:ReEncryptingFiles")} (
-              {rotationProgress.roomsDone}/{rotationProgress.roomsTotal})
-            </span>
-          </div>
-        ) : null}
       </div>
-      {switchKey.pendingState && !switchKey.isDismissed && !isRotating ? (
-        <div className={styles.resumeSection} data-testid="resume_rotation_banner">
-          <span className={styles.resetHint}>
-            {t("Common:ResumeReEncryptionHint")}
-          </span>
-          <div className={styles.resumeActions}>
-            <Button
-              size={ButtonSize.small}
-              onClick={() => {
-                if (!busy && switchKey.pendingState) {
-                  void switchKey.switchTo(switchKey.pendingState.newKeyId);
-                }
-              }}
-              label={t("Common:ResumeReEncryptionCta")}
-              isLoading={switchKey.isPending}
-              isDisabled={busy}
-            />
-            <Link
-              type={LinkType.action}
-              fontWeight="600"
-              fontSize="13px"
-              isHovered
-              onClick={switchKey.dismiss}
-              dataTestId="resume_rotation_dismiss_link"
-            >
-              {t("Common:Later")}
-            </Link>
-          </div>
-        </div>
-      ) : null}
       {hasKeys ? (
         <div className={styles.deviceSection}>
           <Text fontSize="14px" fontWeight={600}>
@@ -443,7 +368,6 @@ const KeysManagement = ({
         </div>
       ) : null}
       {generate.modals}
-      {switchKey.modals}
       {importFlow.modals}
       {recover.modals}
       {remove.modals}
@@ -454,14 +378,12 @@ const KeysManagement = ({
   );
 };
 
-export default inject(({ userStore, uploadDataStore }: TStore) => {
+export default inject(({ userStore }: TStore) => {
   const { encryptionKeys, setUserEncryptionKeys, user } = userStore;
   return {
     encryptionKeys,
     setUserEncryptionKeys,
     userId: user?.id ? String(user.id) : undefined,
     userEmail: user?.email,
-    setSecondaryProgressBarData:
-      uploadDataStore.secondaryProgressDataStore.setSecondaryProgressBarData,
   };
 })(observer(KeysManagement));

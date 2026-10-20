@@ -20,12 +20,6 @@ vi.mock("@onlyoffice/apps-ui-kit/components/badge", () => ({
     React.createElement("span", { "data-testid": "badge" }, label),
 }));
 
-vi.mock("@onlyoffice/apps-ui-kit/components/button", () => ({
-  Button: ({ label, onClick }: { label?: string; onClick?: () => void }) =>
-    React.createElement("button", { "data-testid": "button", onClick }, label),
-  ButtonSize: { extraSmall: "extraSmall" },
-}));
-
 vi.mock("@onlyoffice/apps-ui-kit/components/icon-button", () => ({
   IconButton: ({ title }: { title?: string }) =>
     React.createElement("span", { "data-testid": "icon-button" }, title),
@@ -35,81 +29,47 @@ vi.mock("@docspace/shared/services/encryption/identity", () => ({
   getPublicKeyFingerprint: vi.fn(async () => "FINGERPRINT"),
 }));
 
-// The provider adopts the only key on any device, which is what produced the
-// wrong badge; keep that state so the test fails for the reported reason.
-vi.mock("@docspace/shared/context/encryption", () => ({
-  useEncryption: () => ({ publicKey: "pub-a" }),
-}));
-
 import { KeysList } from "../KeysList";
 
-const keyA = {
-  id: "a",
-  publicKey: "pub-a",
-  privateKeyEnc: "enc-a",
-  date: "",
+const keyOld = {
+  id: "old",
+  publicKey: "pub-old",
+  privateKeyEnc: "enc-old",
+  date: "2026-01-01T00:00:00",
 } as never;
-const keyB = {
-  id: "b",
-  publicKey: "pub-b",
-  privateKeyEnc: "enc-b",
-  date: "",
+const keyNew = {
+  id: "new",
+  publicKey: "pub-new",
+  privateKeyEnc: "enc-new",
+  date: "2026-10-01T00:00:00",
 } as never;
 
-const renderList = (keys: never[], activeKeyId: string | null) =>
+const renderList = (keys: never[]) =>
   render(
     <KeysList
       keys={keys}
-      activeKeyId={activeKeyId}
       onDelete={vi.fn()}
       onExport={vi.fn()}
       onRotate={vi.fn()}
-      onSelectActive={vi.fn()}
       isDeleting={false}
       deletingKeyId={null}
     />,
   );
 
-const rows = () => screen.getAllByTestId("key_details");
-
-describe("KeysList — the 'This device' marker", () => {
-  it("marks only the key this device adopted", () => {
-    renderList([keyA, keyB], "a");
-
-    expect(within(rows()[0]).getByText("Common:ThisDevice")).toBeInTheDocument();
-    expect(within(rows()[0]).queryByTestId("button")).not.toBeInTheDocument();
-
-    expect(within(rows()[1]).getByTestId("button")).toHaveTextContent(
-      "Common:UseOnThisDevice",
-    );
+describe("KeysList", () => {
+  it("shows the no-key state when the user has no key", () => {
+    renderList([]);
+    expect(screen.getByText("Common:NoEncryptionKey")).toBeInTheDocument();
+    expect(screen.queryByTestId("key_details")).not.toBeInTheDocument();
   });
 
-  it("offers adoption for a single key the device has not adopted", () => {
-    renderList([keyA], null);
+  it("Own key with leftover envelopes: shows one card, for the key with the newer date", async () => {
+    renderList([keyNew, keyOld]);
 
-    expect(within(rows()[0]).getByTestId("button")).toHaveTextContent(
-      "Common:UseOnThisDevice",
-    );
-    expect(
-      within(rows()[0]).queryByText("Common:ThisDevice"),
-    ).not.toBeInTheDocument();
-  });
-
-  it("marks a single key that this device did adopt", () => {
-    renderList([keyA], "a");
-
-    expect(within(rows()[0]).getByText("Common:ThisDevice")).toBeInTheDocument();
-    expect(within(rows()[0]).queryByTestId("button")).not.toBeInTheDocument();
-  });
-
-  it("offers adoption for every key when the device adopted none", () => {
-    renderList([keyA, keyB], null);
-
-    for (const row of rows()) {
-      expect(within(row).getByTestId("button")).toHaveTextContent(
-        "Common:UseOnThisDevice",
-      );
-      expect(within(row).queryByText("Common:ThisDevice")).not.toBeInTheDocument();
-    }
+    const cards = screen.getAllByTestId("key_details");
+    expect(cards).toHaveLength(1);
+    expect(within(cards[0]).getByText("new")).toBeInTheDocument();
+    expect(screen.queryByText("Common:UseOnThisDevice")).not.toBeInTheDocument();
+    expect(screen.queryByText("Common:ThisDevice")).not.toBeInTheDocument();
   });
 });

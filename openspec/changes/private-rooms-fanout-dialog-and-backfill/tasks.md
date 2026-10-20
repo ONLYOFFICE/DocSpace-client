@@ -21,7 +21,7 @@ Every task below is committed on its own (see "Commits" in `openspec/config.yaml
 ## 4. Integration check
 
 - [ ] 4.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`) and the private-room Playwright specs in Docker (`cd packages/client && docker compose run --rm -T -e WORKERS=2 tests-dev pnpm exec playwright test __tests__/private-room-tofu.spec.ts __tests__/private-room-invite.spec.ts __tests__/private-room-cross-user-download.spec.ts`); verify all green
-- [ ] 4.2 `npx -y @fission-ai/openspec@latest validate private-rooms-fanout-dialog-and-backfill --strict` passes and the four deltas match the implemented behaviour
+- [x] 4.2 `npx -y @fission-ai/openspec@latest validate private-rooms-fanout-dialog-and-backfill --strict` passes and the four deltas match the implemented behaviour
 
 ## Workflow follow-up
 

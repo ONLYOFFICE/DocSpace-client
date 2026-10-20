@@ -49,7 +49,7 @@ type TemplateFormProps = {
 };
 
 const TemplateForm = ({ form, onChange }: TemplateFormProps) => {
-  const { t, i18n } = useTranslation(["Metadata"]);
+  const { t, i18n } = useTranslation(["Metadata", "Common"]);
 
   return (
     <div className={styles.form}>
@@ -75,6 +75,7 @@ const TemplateForm = ({ form, onChange }: TemplateFormProps) => {
               field={field}
               value={form.inputs[field.id]}
               onChange={(input) => onChange(field.id, input)}
+              emptyLabel={t("Common:SelectAction")}
             />
           </FieldContainer>
         );

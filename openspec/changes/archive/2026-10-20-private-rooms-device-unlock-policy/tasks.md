@@ -18,7 +18,7 @@
 ## 4. End-to-end and documentation
 
 - [x] 4.1 Extend `packages/client/__tests__/keys-management-advanced.spec.ts` with a remembered-device scenario (unlock with remember, trigger the hidden-tab lock, perform an encrypted action without a prompt); verify with `cd packages/client && pnpm exec playwright test keys-management-advanced.spec.ts`
-- [ ] 4.2 When archiving, record the policy and the rewritten "auto-lock bounds the XSS window only on non-remembered devices" note in the Purpose of `openspec/specs/private-rooms/encryption-core/spec.md` (and in SECURITY.md once it is committed), so the main spec changes only with the archive; verify with `npx -y @fission-ai/openspec@latest validate --all --strict`
+- [x] 4.2 When archiving, record the policy and the rewritten "auto-lock bounds the XSS window only on non-remembered devices" note in the Purpose of `openspec/specs/private-rooms/encryption-core/spec.md` (and in SECURITY.md once it is committed), so the main spec changes only with the archive; verify with `npx -y @fission-ai/openspec@latest validate --all --strict`
 
 ## Workflow follow-up
 

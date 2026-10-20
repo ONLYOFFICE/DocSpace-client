@@ -98,8 +98,15 @@ export type EncryptedFilesHandlerOptions = {
   initialFiles?: EncryptedFileSeed[];
   ownerId?: string;
   roomUserKeys?: RoomMemberKeyEntry[];
+  /** The signed-in user: access reads return only this user's entries. */
+  currentUserId?: string;
+  /** The signed-in user's own key pairs, returned as `userKeys`. */
+  callerKeys?: RoomMemberKeyEntry[];
   handle?: { current: EncryptedFilesHandlerHandle | null };
 };
+
+const DEFAULT_CURRENT_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef"; // matches successSelf
+const MOCK_TENANT_ID = 1;
 
 const okResponse = <T>(response: T): Response =>
   new Response(
@@ -246,6 +253,14 @@ export const encryptedFilesHandlers = (
   const sessions = new Map<string, UploadSessionRecord>();
   const requests: RequestLog[] = [];
   let roomUserKeys: RoomMemberKeyEntry[] = [...(opts.roomUserKeys ?? [])];
+  const currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
+  const createdOn = new Map<string, string>();
+  /** files_file_keys.create_on: set when the row is written. */
+  const keyCreatedOn = (fileId: number, userId: string) => {
+    const key = `${fileId}:${userId}`;
+    if (!createdOn.has(key)) createdOn.set(key, new Date().toISOString());
+    return createdOn.get(key) as string;
+  };
   let nextFileId = 1000;
   let nextSessionId = 1;
 
@@ -273,6 +288,7 @@ export const encryptedFilesHandlers = (
     reset: () => {
       files.clear();
       sessions.clear();
+      createdOn.clear();
       requests.length = 0;
       roomUserKeys = [];
       nextFileId = 1000;
@@ -342,16 +358,11 @@ export const encryptedFilesHandlers = (
     ),
 
     /**
-     * Mirrors FilesController.GetEncryptionInfoAsync.
-     * @see server/products/ASC.Files/Server/Api/FilesController.cs (HttpGet "{fileId}/access")
-     *
-     * Response shape (FileEncryptionInfoDto):
-     *  - userKeys: CURRENT user's identity keys (from
-     *    encryptionKeyPairDtoHelper.GetKeyPairAsync()). NOT room members' keys.
-     *  - fileKeys: per-recipient wrapped DEKs scoped to current user.
-     *
-     * Clients that need room members' public keys for unwrap MUST call
-     * GET /privacyroom/{roomId}/access (GetUserKeysForRoom) instead.
+     * Mirrors FilesController.GetEncryptionInfoAsync
+     * (HttpGet "{fileId}/access"): `userKeys` are the caller's own key pairs
+     * (left out when the caller has none) and `fileKeys` only the caller's
+     * entries (FileDao.GetFileKeys(fileId, CurrentAccount.ID)), as
+     * FileKeysDto. A missing file is an InvalidOperationException, so 403.
      */
     http.get(
       `${apiBase}/files/:fileId(\\d+)/access`,
@@ -362,15 +373,19 @@ export const encryptedFilesHandlers = (
           method: "GET",
           url: new URL(request.url).pathname,
         });
-        if (!f) return errorResponse(404, `file ${fileId} not found`);
+        if (!f) return errorResponse(403, `file ${fileId} not found`);
         return okResponse({
-          userKeys: roomUserKeys,
-          fileKeys: f.fileKeys.map((k) => ({
-            userId: k.userId,
-            publicKeyId: k.publicKeyId,
-            privateKeyEnc: k.privateKeyEnc,
-            fileId,
-          })),
+          ...(opts.callerKeys ? { userKeys: opts.callerKeys } : {}),
+          fileKeys: f.fileKeys
+            .filter((k) => String(k.userId) === currentUserId)
+            .map((k) => ({
+              userId: k.userId,
+              publicKeyId: k.publicKeyId,
+              privateKeyEnc: k.privateKeyEnc,
+              tenantId: MOCK_TENANT_ID,
+              fileId,
+              createOn: keyCreatedOn(fileId, k.userId),
+            })),
         });
       },
     ),

@@ -65,6 +65,7 @@ const server = setupServer(
   ...encryptedFilesHandlers(PORT, {
     roomId: ROOM_ID,
     ownerId: ALICE_ID,
+    currentUserId: ALICE_ID,
     handle,
   }),
 );
@@ -80,7 +81,7 @@ beforeEach(() => {
 });
 
 describe("encryptedFiles mock — GET /files/{fileId}/access (mirrors FilesController.GetEncryptionInfoAsync)", () => {
-  it("returns the file's per-recipient fileKeys plus the CURRENT user's identity keys as `userKeys`", async () => {
+  it("returns only the caller's entry, as FileKeysDto, and leaves userKeys out when the caller's keys are not given", async () => {
     handle.current!.setFiles([
       {
         id: 1,
@@ -106,32 +107,26 @@ describe("encryptedFiles mock — GET /files/{fileId}/access (mirrors FilesContr
     const res = await fetch(FILE_ACCESS_URL(1));
     const body = (await res.json()) as {
       response: {
-        userKeys: Array<{ userId: string; publicKey: string }>;
-        fileKeys: Array<{
-          userId: string;
-          publicKeyId: string;
-          privateKeyEnc: string;
-          fileId: number;
-        }>;
+        userKeys?: unknown;
+        fileKeys: Array<Record<string, unknown>>;
       };
     };
 
-    // userKeys = CURRENT user's identity keys (per server's
-    // encryptionKeyPairDtoHelper.GetKeyPairAsync()), NOT room members'.
-    expect(body.response.userKeys).toHaveLength(1);
-    expect(body.response.userKeys[0].userId).toBe(ALICE_ID);
-
-    // fileKeys = per-recipient wrapped DEKs scoped to the file
-    expect(body.response.fileKeys).toHaveLength(2);
-    expect(body.response.fileKeys.map((k) => k.userId).sort()).toEqual(
-      [ALICE_ID, BOB_ID].sort(),
-    );
-    expect(body.response.fileKeys[0].fileId).toBe(1);
+    expect(body.response).not.toHaveProperty("userKeys");
+    expect(body.response.fileKeys).toHaveLength(1);
+    expect(body.response.fileKeys[0]).toMatchObject({
+      userId: ALICE_ID,
+      publicKeyId: "alice-pk",
+      privateKeyEnc: "wrapA",
+      tenantId: 1,
+      fileId: 1,
+    });
+    expect(typeof body.response.fileKeys[0].createOn).toBe("string");
   });
 
-  it("returns 404 for an unknown file", async () => {
+  it("answers 403 for an unknown file", async () => {
     const res = await fetch(FILE_ACCESS_URL(99999));
-    expect(res.status).toBe(404);
+    expect(res.status).toBe(403);
   });
 });
 

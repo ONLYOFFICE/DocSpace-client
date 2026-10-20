@@ -7,7 +7,7 @@
 
 ## 2. Encrypted-files handlers
 
-- [ ] 2.1 `files/{id}/access` read: caller's `fileKeys` only, with `tenantId` and `createOn`; 403 for a missing file; verify by fixing `files/__tests__/encrypted-files-contract.test.ts` (two-entry and 404 expectations).
+- [x] 2.1 `files/{id}/access` read: caller's `fileKeys` only, with `tenantId` and `createOn`; 403 for a missing file; verify by fixing `files/__tests__/encrypted-files-contract.test.ts` (two-entry and 404 expectations).
 - [ ] 2.2 `files/{id}/access` write: bare array only, replace listed users only, no `response`, 403 for a missing file; drop the `{ keys }` envelope case from the contract test; verify with a case that an unlisted user's entry survives.
 - [ ] 2.3 `files/file/{id}/publickeys`: 415 outside a private room, sanitised foreign entries; verify with contract-test cases.
 - [ ] 2.4 Upload sessions: session create returns `ChunkedUploadSessionDto` (`path` as folder ids, `location`, no `bytes_uploaded`); numbered chunk upload returns the session DTO and never builds the file; sequential chunk and finalize return `UploadSessionResponseDto` with 201 on completion; verify with contract tests for each route.

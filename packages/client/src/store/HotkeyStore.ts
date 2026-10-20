@@ -56,6 +56,11 @@ import type IndexingStore from "./IndexingStore";
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TSelectedFolder } from "./SelectedFolderStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
+import type {
+  TEncryptedTransferDest,
+  TPrivateTransferParams,
+  TPrivateTransferPlan,
+} from "./filesActionsStore/copyMove.helpers";
 
 type TFilesItem = {
   id: number | string;
@@ -125,6 +130,13 @@ type TFilesActionsStore = {
     conflicts: unknown[],
     operationData: TOperationData,
   ) => void;
+  planPrivateTransfer: (params: TPrivateTransferParams) => TPrivateTransferPlan;
+  runPrivateTransferPlan: (
+    plan: TPrivateTransferPlan,
+    destFolderId: number | string,
+    dest: TEncryptedTransferDest | null | undefined,
+    options: { move: boolean },
+  ) => boolean;
   createFoldersTree: (t: TTranslation, files: unknown[]) => Promise<unknown[]>;
 };
 
@@ -742,7 +754,8 @@ class HotkeyStore {
     const canCopy = selection.every((s) => s.security?.Copy);
     const canMove = selection.every((s) => s.security?.Move);
 
-    if (!canCopy || (isCut && !canMove) || !selection.length) return;
+    // A cut is a move: inside a private room the server allows Move and denies Copy.
+    if ((isCut ? !canMove : !canCopy) || !selection.length) return;
 
     setHotkeysClipboard();
     this.hotkeysClipboardAction = isCut ? "move" : "copy";
@@ -782,6 +795,30 @@ class HotkeyStore {
     // original .js read `.CopyTo`/`.MoveTo` unguarded; non-null assertions
     // keep runtime identical.
     if (!security!.CopyTo || !security!.MoveTo) return;
+
+    // Spec: private-rooms/file-operations, "Clipboard hotkeys follow the private-room transfer rules".
+    const source = this.hotkeysClipboardSource;
+    const destInPrivateRoom = !!this.treeFoldersStore.isPrivacyFolder;
+    const dest = {
+      private: destInPrivateRoom,
+      insidePrivateRoom: destInPrivateRoom,
+      rootFolderId: this.selectedFolderStore.rootFolderId,
+      roomType,
+    };
+    const plan = this.filesActionsStore.planPrivateTransfer({
+      items: selections as TPrivateTransferParams["items"],
+      sourceInPrivateRoom: !!source?.inPrivateRoom,
+      sourceRootFolderId: source?.rootFolderId,
+      dest,
+    });
+    if (
+      this.filesActionsStore.runPrivateTransferPlan(plan, selectedItemId!, dest, {
+        move: !isCopy,
+      })
+    ) {
+      this.filesStore.setHotkeysClipboard([]);
+      return;
+    }
 
     const isPublic = roomType === RoomsType.PublicRoom;
 

@@ -20,7 +20,7 @@
 ## 4. One transfer resolver for drag, dialog and clipboard
 
 - [x] 4.1 Extract the private-room transfer guard from `moveDragItemsImpl` (`packages/client/src/store/filesActionsStore/copyMove.helpers.ts`) into a helper that takes source items, destination folder info and the operation kind and returns `refuse-into`, `refuse-folder-out`, `decrypt-out`, `same-room` or `generic`; verify with unit tests in `packages/client/src/store/filesActionsStore/__tests__/FilesActionsStore.copyDelete.test.ts` covering every outcome.
-- [ ] 4.2 Route `pasteFromClipboard` in `packages/client/src/store/HotkeyStore.ts` through the resolver before `itemOperationToFolder`, showing the same toasts as the drag path; verify with new cases in `packages/client/src/store/__tests__/` for paste into, out of, and within a private room, plus a regression case for non-private folders.
+- [x] 4.2 Route `pasteFromClipboard` in `packages/client/src/store/HotkeyStore.ts` through the resolver before `itemOperationToFolder`, showing the same toasts as the drag path; verify with new cases in `packages/client/src/store/__tests__/` for paste into, out of, and within a private room, plus a regression case for non-private folders.
 - [ ] 4.3 Make the destination picker (`packages/client/src/components/FilesSelector/index.tsx`) use the same resolver; verify the existing FilesSelector tests still pass and add a case for the `refuse-folder-out` outcome.
 
 ## 5. Move out of a private room deletes the source on success

@@ -211,7 +211,7 @@ describe("UploadDataStore.getUserEncryptionKeys", () => {
     });
   });
 
-  it("returns the single key without needing a stored device preference", () => {
+  it("returns the user's only key", () => {
     const { store } = createTestUploadDataStore({
       userStore: {
         encryptionKeys: [{ id: "key-1", publicKey: "pk-base64-1" }],
@@ -254,39 +254,22 @@ describe("UploadDataStore.getUserEncryptionKeys", () => {
     });
   });
 
-  it("returns all-null result for multiple keys without a stored preference", () => {
-    const { store } = createTestUploadDataStore({
-      userStore: {
-        encryptionKeys: [
-          { id: "key-1", publicKey: "pk-base64-1" },
-          { id: "key-2", publicKey: "pk-base64-2" },
-        ],
-      },
-    });
-
-    expect(store.getUserEncryptionKeys()).toEqual({
-      publicKey: null,
-      userId: null,
-      publicKeyId: null,
-    });
-  });
-
-  it("resolves the preferred key among multiple keys via the stored preference", () => {
+  it("Own key with leftover envelopes: the newer key wins and a stored preference is ignored", () => {
     const { store } = createTestUploadDataStore({
       userStore: {
         user: { id: "user-pref" },
         encryptionKeys: [
-          { id: "key-1", publicKey: "pk-base64-1" },
-          { id: "key-2", publicKey: "pk-base64-2" },
+          { id: "key-new", publicKey: "pk-new", date: "2026-10-01T00:00:00" },
+          { id: "key-old", publicKey: "pk-old", date: "2026-01-01T00:00:00" },
         ],
       },
     });
-    window.localStorage.setItem("encryption-active-key-id:user-pref", "key-2");
+    window.localStorage.setItem("encryption-active-key-id:user-pref", "key-old");
 
     expect(store.getUserEncryptionKeys()).toEqual({
-      publicKey: "pk-base64-2",
+      publicKey: "pk-new",
       userId: "user-pref",
-      publicKeyId: "key-2",
+      publicKeyId: "key-new",
     });
 
     window.localStorage.removeItem("encryption-active-key-id:user-pref");

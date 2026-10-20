@@ -50,9 +50,14 @@ import {
   type PrivacyroomAccessHandlerHandle,
 } from "../../../__mocks__/handlers";
 
+import { getFileEncryptionAccess } from "../../../api/files";
 import { generateIdentityKeyPair } from "../../encryption/identity";
 import { generateDEK } from "../../encryption/file-keys";
-import { wrapDekForRecipients } from "../../encryption/room-file-access";
+import { inspectWrap } from "../../encryption/hpke";
+import {
+  unwrapDekForCurrentUser,
+  wrapDekForRecipients,
+} from "../../encryption/room-file-access";
 import { resetTofuStores } from "../../encryption/tofu-store";
 import { arrayBufferToBase64 } from "../../encryption/utils";
 import type {
@@ -62,8 +67,10 @@ import type {
 
 import {
   addMembersToEncryptedRoom,
+  backfillEncryptedFilesForRoomMembers,
   revokeMemberFromEncryptedRoom,
 } from "../room-encryption";
+import { loadFileSenderKeysSafe } from "../room-member-keys";
 
 const PORT = "3000";
 const ROOM_ID = 4242;
@@ -265,6 +272,73 @@ describe("addMembersToEncryptedRoom — integration via MSW", () => {
       .getRequests()
       .filter((r) => r.method === "PUT");
     expect(puts).toHaveLength(0);
+  });
+});
+
+describe("backfillEncryptedFilesForRoomMembers — integration via MSW", () => {
+  it("Existing wraps are replaced: a second manager's sweep re-wraps a member, who still unwraps through the file's public keys", async () => {
+    const alice = await generateIdentityKeyPair();
+    const bob = await generateIdentityKeyPair();
+    const carol = await generateIdentityKeyPair();
+    const dek = generateDEK();
+    const wrapsFromAlice = await wrapDekForRecipients({
+      dek,
+      senderIdentity: alice,
+      senderUserId: ALICE_ID,
+      recipients: [
+        { userId: ALICE_ID, publicKey: pubB64(alice) },
+        { userId: BOB_ID, publicKey: pubB64(bob) },
+        { userId: CAROL_ID, publicKey: pubB64(carol) },
+      ],
+      fileId: 300,
+    });
+    filesHandle.current!.setFiles([
+      { id: 300, title: "doc.docx", encrypted: true, fileKeys: wrapsFromAlice },
+    ]);
+    const memberKeys = [
+      { id: "1", userId: ALICE_ID, publicKey: pubB64(alice) },
+      { id: "2", userId: BOB_ID, publicKey: pubB64(bob) },
+      { id: "3", userId: CAROL_ID, publicKey: pubB64(carol) },
+    ].map((k) => ({
+      ...k,
+      privateKeyEnc: "",
+      date: "2026-01-01T00:00:00",
+      cryptoEngineId: "",
+    }));
+    filesHandle.current!.setRoomUserKeys(memberKeys);
+    accessHandle.current!.setRoomKeys(ROOM_ID, memberKeys);
+
+    filesHandle.current!.setCurrentUserId(CAROL_ID);
+    accessHandle.current!.setCurrentUserId(CAROL_ID);
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: CAROL_ID,
+      identity: carol,
+      onKeyChange: async () => "refuse",
+    });
+
+    expect(result.fileResults).toEqual([{ fileId: 300, success: true }]);
+    expect(result.skippedMembers).toEqual([]);
+    const stored = filesHandle.current!.getFile(300);
+    expect(stored.fileKeys.map((k) => k.userId).sort()).toEqual(
+      [ALICE_ID, BOB_ID, CAROL_ID].sort(),
+    );
+    const bobEntry = stored.fileKeys.find((k) => k.userId === BOB_ID)!;
+    const bobEntryFromAlice = wrapsFromAlice.find((k) => k.userId === BOB_ID)!;
+    expect(bobEntry.privateKeyEnc).not.toBe(bobEntryFromAlice.privateKeyEnc);
+    expect(inspectWrap(bobEntry.privateKeyEnc).senderUserId).toBe(CAROL_ID);
+
+    filesHandle.current!.setCurrentUserId(BOB_ID);
+    accessHandle.current!.setCurrentUserId(BOB_ID);
+    const bobInfo = await getFileEncryptionAccess(300);
+    const senderKeys = await loadFileSenderKeysSafe(300, ROOM_ID);
+    const unwrapped = await unwrapDekForCurrentUser({
+      fileKeys: bobInfo.fileKeys,
+      roomMemberKeys: senderKeys,
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: 300,
+    });
+    expect(Array.from(unwrapped)).toEqual(Array.from(dek));
   });
 });
 

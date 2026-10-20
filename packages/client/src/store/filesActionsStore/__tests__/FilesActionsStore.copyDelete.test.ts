@@ -11,6 +11,9 @@ vi.mock("@docspace/shared/api/files", async (io) => ({
 
 import { createTestFilesActionsStore, t } from "./testHarness";
 
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { FolderType } from "@docspace/shared/enums";
+
 const progressStore = (extra: Record<string, unknown> = {}) => ({
   loopFilesOperations: vi.fn(async () => ({})),
   clearActiveOperations: vi.fn(),
@@ -70,5 +73,163 @@ describe("FilesActionsStore — copy/delete operations (batch 14)", () => {
     });
     await store.copyFileToAiKnowledge([{ id: 1, title: "Doc" }] as never);
     expect(itemOperationToFolder).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("FilesActionsStore - private-room transfer plan", () => {
+  const file = { id: 1, title: "a.docx", isFolder: false } as never;
+  const folder = { id: 2, title: "Sub", isFolder: true } as never;
+
+  it("returns generic when neither side is a private room", () => {
+    const store = createTestFilesActionsStore();
+    const plan = store.planPrivateTransfer({
+      items: [file],
+      sourceInPrivateRoom: false,
+      sourceRootFolderId: 10,
+      dest: { private: false, rootFolderId: 20 },
+    });
+    expect(plan).toEqual({ kind: "generic" });
+  });
+
+  it("returns refuse-into when a non-private source targets a private room", () => {
+    const store = createTestFilesActionsStore();
+    const plan = store.planPrivateTransfer({
+      items: [file],
+      sourceInPrivateRoom: false,
+      sourceRootFolderId: 10,
+      dest: { private: true, rootFolderId: 20 },
+    });
+    expect(plan).toEqual({ kind: "refuse-into" });
+  });
+
+  it("falls back to same-room for a destination under the same section root when privacy is unknown", () => {
+    const store = createTestFilesActionsStore();
+    const plan = store.planPrivateTransfer({
+      items: [file],
+      sourceInPrivateRoom: true,
+      sourceRootFolderId: 10,
+      dest: { rootFolderId: 10 },
+    });
+    expect(plan).toEqual({ kind: "same-room" });
+  });
+
+  it("treats a rooms-section destination as the same room when the root is unknown", () => {
+    const store = createTestFilesActionsStore();
+    const plan = store.planPrivateTransfer({
+      items: [file],
+      sourceInPrivateRoom: true,
+      sourceRootFolderId: null,
+      dest: { rootFolderType: FolderType.Rooms },
+    });
+    expect(plan).toEqual({ kind: "same-room" });
+  });
+
+  it("returns refuse-folder-out when only folders leave a private room", () => {
+    const store = createTestFilesActionsStore();
+    const plan = store.planPrivateTransfer({
+      items: [folder],
+      sourceInPrivateRoom: true,
+      sourceRootFolderId: 10,
+      dest: { private: false, rootFolderId: 20 },
+    });
+    expect(plan).toEqual({ kind: "refuse-folder-out" });
+  });
+
+  it("returns decrypt-out with the files and the refused folders when files leave a private room", () => {
+    const store = createTestFilesActionsStore();
+    const plan = store.planPrivateTransfer({
+      items: [file, folder],
+      sourceInPrivateRoom: true,
+      sourceRootFolderId: 10,
+      dest: { private: false, rootFolderId: 20 },
+    });
+    expect(plan).toEqual({
+      kind: "decrypt-out",
+      files: [file],
+      refusedFolders: [folder],
+    });
+  });
+
+  it("leaves generic and same-room plans to the caller", () => {
+    const store = createTestFilesActionsStore();
+    expect(
+      store.runPrivateTransferPlan({ kind: "generic" }, 5, null, { move: false }),
+    ).toBe(false);
+    expect(
+      store.runPrivateTransferPlan({ kind: "same-room" }, 5, null, { move: true }),
+    ).toBe(false);
+    expect(toastr.error).not.toHaveBeenCalled();
+  });
+
+  it("refuses refuse-into with Common:CannotTransferToPrivateRoom", () => {
+    const store = createTestFilesActionsStore();
+    expect(
+      store.runPrivateTransferPlan({ kind: "refuse-into" }, 5, null, { move: false }),
+    ).toBe(true);
+    expect(toastr.error).toHaveBeenCalledWith("Common:CannotTransferToPrivateRoom");
+  });
+
+  it("refuses refuse-folder-out with Common:CannotTransferFolderFromPrivateRoom", () => {
+    const store = createTestFilesActionsStore();
+    expect(
+      store.runPrivateTransferPlan({ kind: "refuse-folder-out" }, 5, null, { move: true }),
+    ).toBe(true);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:CannotTransferFolderFromPrivateRoom",
+    );
+  });
+
+  it.each([
+    [false, false],
+    [true, true],
+  ])(
+    "decrypt-out with move=%s copies the files with deleteSourceOnSuccess=%s",
+    (move, deleteSourceOnSuccess) => {
+      const store = createTestFilesActionsStore();
+      const copy = vi.fn(async () => {});
+      store.copyEncryptedFilesToFolder = copy;
+      const handled = store.runPrivateTransferPlan(
+        { kind: "decrypt-out", files: [file], refusedFolders: [folder] },
+        5,
+        { private: false, rootFolderId: 20 },
+        { move },
+      );
+      expect(handled).toBe(true);
+      expect(toastr.error).toHaveBeenCalledWith(
+        "Common:CannotTransferFolderFromPrivateRoom",
+      );
+      expect(copy).toHaveBeenCalledWith([file], 5, {
+        private: false,
+        rootFolderId: 20,
+        roomType: undefined,
+        deleteSourceOnSuccess,
+      });
+    },
+  );
+});
+
+describe("FilesActionsStore - private-room transfer plan with a known destination", () => {
+  const file = { id: 1, title: "a.docx", isFolder: false } as never;
+
+  it("returns decrypt-out for another room in the same section when the destination is known to be non-private", () => {
+    const store = createTestFilesActionsStore();
+    const plan = store.planPrivateTransfer({
+      items: [file],
+      sourceInPrivateRoom: true,
+      sourceRootFolderId: 10,
+      dest: { rootFolderId: 10, insidePrivateRoom: false },
+    });
+    expect(plan).toEqual({ kind: "decrypt-out", files: [file], refusedFolders: [] });
+  });
+
+  it("returns refuse-into for a subfolder known to be inside a private room", () => {
+    const store = createTestFilesActionsStore();
+    const plan = store.planPrivateTransfer({
+      items: [file],
+      sourceInPrivateRoom: false,
+      sourceRootFolderId: 20,
+      dest: { private: false, rootFolderId: 10, insidePrivateRoom: true },
+    });
+    expect(plan).toEqual({ kind: "refuse-into" });
   });
 });

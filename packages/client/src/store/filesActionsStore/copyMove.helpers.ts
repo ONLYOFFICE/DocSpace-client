@@ -196,12 +196,27 @@ export type TPrivateTransferPlan =
 
 // Spec: private-rooms/file-operations, "Transfer into a private room is refused",
 // "Folders cannot leave a private room", "Files leaving a private room are decrypted".
-export const planPrivateTransfer = (params: {
+export type TPrivateTransferParams = {
   items: TActionItem[];
   sourceInPrivateRoom: boolean;
   sourceRootFolderId?: number | string | null;
-  dest: TEncryptedTransferDest | null | undefined;
-}): TPrivateTransferPlan => {
+  dest:
+    | (TEncryptedTransferDest & {
+        /**
+         * Whether the destination lies inside a private room, when the caller
+         * knows it (current folder, picker). Without it the plan falls back to
+         * `private`, which only a room row carries, and the root folder id,
+         * which is the Rooms section id and cannot tell rooms apart.
+         */
+        insidePrivateRoom?: boolean;
+      })
+    | null
+    | undefined;
+};
+
+export const planPrivateTransfer = (
+  params: TPrivateTransferParams,
+): TPrivateTransferPlan => {
   const { items, sourceInPrivateRoom, sourceRootFolderId, dest } = params;
 
   const destRootKnown =
@@ -214,7 +229,8 @@ export const planPrivateTransfer = (params: {
     (destRootKnown
       ? dest?.rootFolderId === sourceRootFolderId
       : dest?.rootFolderType === FolderType.Rooms);
-  const destPrivate = dest?.private === true || destInsideSameRoom;
+  const destPrivate =
+    dest?.insidePrivateRoom ?? (dest?.private === true || destInsideSameRoom);
 
   if (destPrivate && !sourceInPrivateRoom) return { kind: "refuse-into" };
   if (!sourceInPrivateRoom) return { kind: "generic" };

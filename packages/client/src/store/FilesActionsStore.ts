@@ -145,6 +145,7 @@ import {
 } from "./filesActionsStore/copyMove.helpers";
 import type {
   TEncryptedTransferDest,
+  TPrivateTransferParams,
   TPrivateTransferPlan,
 } from "./filesActionsStore/copyMove.helpers";
 import {
@@ -635,12 +636,7 @@ class FilesActionStore {
     destInfo?: TEncryptedTransferDest & { deleteSourceOnSuccess?: boolean },
   )=> copyEncryptedFilesToFolderImpl(this, items, destFolderId, destInfo);
 
-  planPrivateTransfer = (params: {
-    items: TActionItem[];
-    sourceInPrivateRoom: boolean;
-    sourceRootFolderId?: number | string | null;
-    dest: TEncryptedTransferDest | null | undefined;
-  })=> planPrivateTransfer(params);
+  planPrivateTransfer = (params: TPrivateTransferParams)=> planPrivateTransfer(params);
 
   runPrivateTransferPlan = (
     plan: TPrivateTransferPlan,

@@ -4,6 +4,7 @@
 
 - [ ] 1.1 Draft the versioned contract (configuration field shape, token handling given that the portal signs `editorConfig.encryptionKeys` today as the caller's key-pair list, DSE3 decrypt/encrypt on open and save, callback payload, minimum version) and get written sign-off from the Document Server team; verify by adding the signed-off document to this change folder as `contract-v1.md`
 - [ ] 1.2 Record the answers to the design open questions in design.md (including whether the server keeps the key-pair list with `privateKeyEnc` in the signed configuration; if it should not, add a backend task here) and adjust the delta spec scenarios if the token or save round-trip differs; verify with `openspec validate private-rooms-editor-contract --strict`
+- [ ] 1.3 Send the editor developers the corrections to the integration guide of 2026-07-01 listed in design.md Context (access-write route, access-read fields, key pairs without an id) and record the date it was sent in design.md; verified by that record
 
 ## 2. Capability check
 

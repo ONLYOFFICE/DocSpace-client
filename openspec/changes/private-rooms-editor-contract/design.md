@@ -32,6 +32,29 @@ and DEVELOPMENT_PLAN_V2 design of an in-browser buffer mode
 `encryptedEditBuffer.ts`) was implemented and later removed; the branch now
 assumes Document Server-side decryption, a contract nobody has written down.
 
+The editor developers received the private-rooms crypto on 2026-07-01 as
+`onlyoffice-crypto.js` (the IIFE bundle built from
+`packages/shared/services/encryption/lib-entry.ts`, global
+`window.OnlyofficeCrypto`) with an integration guide in which the editor
+unlocks the identity itself and talks to the DocSpace API directly. Read
+against `../server` on 2026-10-20, three statements of that guide do not match
+the server:
+
+- It writes access entries with `PUT files/file/{fileId}/access`; the route is
+  `PUT files/{fileId}/access` (`Server/Api/FilesController.cs`,
+  `SetEncryptionInfoAsync`), so the guide's request answers 404.
+- It reads `senderPublicKey` and `senderUserId` from each entry of
+  `GET files/{fileId}/access`; `FileKeysDto` has neither (`userId`,
+  `publicKeyId`, `privateKeyEnc`, `tenantId`, `fileId`, `createOn`) and the
+  entries sit under the `response` envelope. The sender is named inside the
+  wrap and its public key comes from `files/file/{fileId}/publickeys` or the
+  room roster, as the client does.
+- It writes key pairs without an id (`POST` and `PUT privacyroom/keys` with
+  only `publicKey` and `privateKeyEnc`). `EncryptionKeyRequestDto.Id` has no
+  default, so such a pair is stored with the all-zero id and a later `PUT`
+  without an id replaces only that pair; it answers 404 for a pair the web
+  client created with its own id.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -129,6 +152,15 @@ assumes Document Server-side decryption, a contract nobody has written down.
    editor but remain downloadable.
 
 ## Open Questions
+
+- Desktop application: the desktop's new crypto engine
+  (`{DC522726-5E0E-43E5-AA02-8EA156BECBC5}`, see
+  `private-rooms-remove-dead-api-calls` design) runs the editor inside the
+  desktop. Does it take the editor configuration's `{ dek, cryptoEngineId }`
+  hand-over as a web session does, or unwrap the DEK itself from the key pair
+  the desktop bridge passes at login? Owner: the desktop developer. Until it
+  is answered the editor page runs the same key path in the desktop as in the
+  browser.
 
 - How does the Document Server read `editorConfig.encryptionKeys` in a web
   session, and does it validate the field against the token? Owner: Document

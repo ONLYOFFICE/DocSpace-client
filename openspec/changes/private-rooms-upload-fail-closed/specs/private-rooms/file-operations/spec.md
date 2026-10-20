@@ -33,7 +33,7 @@ The system SHALL NOT offer the "Upload folder" action or the Shift+U hotkey insi
 - **THEN** the files are uploaded encrypted and the folders are refused with Common:FolderUploadNotSupportedInPrivateRoom
 
 ### Requirement: Files leaving a private room are decrypted
-The system SHALL, when files are copied or moved out of a private room, decrypt them on the client with the unlocked identity and upload them as plaintext to the destination, after showing a warning banner in the destination picker. On move, the system SHALL delete each source file only after its decrypted copy succeeded. The system SHALL report Common:EncryptedCopyFailed with the failed names on error.
+The system SHALL, when files are copied or moved out of a private room, decrypt them on the client with the unlocked identity and upload them as plaintext to the destination, after showing a warning banner in the destination picker. The system SHALL take the senders' public keys from the source room's roster together with the file's own public keys, so a file another member uploaded decrypts even where the source room is not known. On move, the system SHALL delete each source file only after its decrypted copy succeeded. The system SHALL report Common:EncryptedCopyFailed with the failed names on error.
 
 #### Scenario: Copy to My documents
 - **WHEN** the user copies an encrypted file to a folder outside the room and confirms
@@ -61,6 +61,10 @@ The system SHALL apply the private-room transfer rules to Ctrl+X and Ctrl+V exac
 #### Scenario: Cut and paste out of a private room
 - **WHEN** encrypted files are cut with Ctrl+X and pasted with Ctrl+V outside the room
 - **THEN** decrypted copies appear in the destination and the sources are deleted after the copies succeed
+
+#### Scenario: Cut and paste a file another member uploaded
+- **WHEN** a file uploaded by another room member is cut with Ctrl+X, the user opens a folder outside the room and pastes with Ctrl+V
+- **THEN** the file is decrypted with that member's public key, the decrypted copy appears in the destination and the source is deleted
 
 #### Scenario: Folder cut out of a private room
 - **WHEN** a folder inside a private room is cut and pasted outside it

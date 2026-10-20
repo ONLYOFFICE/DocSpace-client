@@ -283,6 +283,67 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors S
   });
 });
 
+describe("encryptedFiles mock — entry DTOs (mirrors FoldersController.GetFolderByFolderId and GetFolderInfo)", () => {
+  const ROOMS_SECTION_ID = 2002;
+  const FOLDER_URL = `${BASE_URL}:${PORT}/${API_PREFIX}/files/${ROOM_ID}`;
+  const FOLDER_INFO_URL = `${BASE_URL}:${PORT}/${API_PREFIX}/files/folder/${ROOM_ID}`;
+
+  type Dto = Record<string, unknown> & {
+    security?: Record<string, boolean>;
+    viewAccessibility?: Record<string, boolean>;
+  };
+
+  it("a listed file carries the Rooms section as root, the custom room type as parent room type, and no Copy", async () => {
+    handle.current!.setFiles([
+      { id: 1, title: "secret.docx", encrypted: true, fileKeys: [] },
+      { id: 2, title: "plain.docx", encrypted: false, fileKeys: [] },
+    ]);
+
+    const res = await fetch(FOLDER_URL);
+    const body = (await res.json()) as {
+      response: { files: Dto[]; current: Dto };
+    };
+    const [secret, plain] = body.response.files;
+
+    expect(secret).toMatchObject({
+      folderId: ROOM_ID,
+      rootFolderId: ROOMS_SECTION_ID,
+      rootFolderType: 14,
+      parentRoomType: 19,
+      encrypted: true,
+    });
+    expect(secret.security?.Copy).toBe(false);
+    expect(secret.security).not.toHaveProperty("EditForm");
+    expect(secret.viewAccessibility).not.toHaveProperty("CoAuhtoring");
+    expect(plain).not.toHaveProperty("encrypted");
+
+    expect(body.response.current).toMatchObject({
+      id: ROOM_ID,
+      parentId: ROOMS_SECTION_ID,
+      rootFolderId: ROOMS_SECTION_ID,
+      parentRoomType: 19,
+      private: true,
+    });
+    expect(body.response.current).not.toHaveProperty("pathParts");
+  });
+
+  it("the room DTO sits under the Rooms section and has no parent room type or path parts", async () => {
+    const res = await fetch(FOLDER_INFO_URL);
+    const body = (await res.json()) as { response: Dto };
+
+    expect(body.response).toMatchObject({
+      id: ROOM_ID,
+      parentId: ROOMS_SECTION_ID,
+      rootFolderId: ROOMS_SECTION_ID,
+      rootFolderType: 14,
+      roomType: 5,
+      private: true,
+    });
+    expect(body.response).not.toHaveProperty("parentRoomType");
+    expect(body.response).not.toHaveProperty("pathParts");
+  });
+});
+
 describe("encryptedFiles mock — upload sessions (mirrors UploadController)", () => {
   const ROOMS_SECTION_ID = 2002;
   const SESSION_URL = (folderId: number) =>

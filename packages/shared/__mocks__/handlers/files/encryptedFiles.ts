@@ -172,9 +172,9 @@ const buildFileDto = (
     fileStatus: 0,
     fileEntryType: 2,
     folderId: roomId,
-    rootFolderId: roomId,
+    rootFolderId: ROOMS_SECTION_ID,
     rootFolderType: 14,
-    parentRoomType: 14,
+    parentRoomType: 19,
     pureContentLength: record.size,
     contentLength: `${record.size} bytes`,
     version: 1,
@@ -183,7 +183,7 @@ const buildFileDto = (
     canShare: true,
     shared: false,
     mute: false,
-    encrypted: record.encrypted,
+    ...(record.encrypted ? { encrypted: true } : {}),
     thumbnailStatus: 1,
     thumbnailUrl: "",
     viewUrl: `${downloadOrigin}/api/2.0/files/file/${record.id}/download`,
@@ -202,7 +202,6 @@ const buildFileDto = (
       WebCustomFilterEditing: false,
       WebRestrictedEditing: false,
       WebComment: false,
-      CoAuhtoring: false,
       CanConvert: false,
       MustConvert: false,
     },
@@ -211,7 +210,7 @@ const buildFileDto = (
       Edit: true,
       Delete: true,
       Download: true,
-      Copy: true,
+      Copy: false,
       Move: true,
       Rename: true,
       Comment: false,
@@ -227,7 +226,6 @@ const buildFileDto = (
       CreateRoomFrom: false,
       CopyLink: false,
       Embed: false,
-      EditForm: false,
       Vectorization: false,
     },
   };
@@ -236,15 +234,14 @@ const buildFileDto = (
 const buildFolderDto = (roomId: number) => ({
   id: roomId,
   title: "Private Room",
-  parentId: 0,
+  parentId: ROOMS_SECTION_ID,
   filesCount: 0,
   foldersCount: 0,
-  rootFolderId: roomId,
+  rootFolderId: ROOMS_SECTION_ID,
   rootFolderType: 14,
   roomType: 5,
   shared: false,
   private: true,
-  pathParts: [{ id: roomId, title: "Private Room" }],
 });
 
 export const encryptedFilesHandlers = (
@@ -365,8 +362,10 @@ export const encryptedFilesHandlers = (
 
   return [
     /**
-     * Mirrors VirtualRoomsCommonController.GetVirtualRooms / FoldersControllerHelper
-     * folder listing — returns the room's files+folders in the standard DTO shape.
+     * Mirrors FoldersController.GetFolderByFolderId (HttpGet "{folderId}"): a
+     * FolderContentDto of the room. FileStorageService.GetFolderItemsAsync
+     * stamps the room's type (CustomRoom, 19) as `parentRoomType` on the
+     * room itself and on every entry in it.
      */
     http.get(`${apiBase}/files/:folderId(\\d+)`, ({ params, request }) => {
       const folderId = Number(params.folderId);
@@ -379,7 +378,7 @@ export const encryptedFilesHandlers = (
       return okResponse({
         files: all.map((f) => buildFileDto(f, roomId, ownerId, port)),
         folders: [],
-        current: buildFolderDto(roomId),
+        current: { ...buildFolderDto(roomId), parentRoomType: 19 },
         pathParts: [{ id: roomId, title: "Private Room" }],
         startIndex: 0,
         count: all.length,
@@ -389,8 +388,9 @@ export const encryptedFilesHandlers = (
     }),
 
     /**
-     * Mirrors FoldersController.GetFolder.
-     * @see server/products/ASC.Files/Server/Api/FoldersController.cs (HttpGet "folder/{folderId}")
+     * Mirrors FoldersController.GetFolderInfo (HttpGet "folder/{folderId}"):
+     * the room's FolderDto. DetermineParentRoomType finds no room above a
+     * room, so it carries no `parentRoomType`.
      */
     http.get(
       `${apiBase}/files/folder/:folderId(\\d+)`,

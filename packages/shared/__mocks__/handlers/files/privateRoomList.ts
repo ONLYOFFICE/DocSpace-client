@@ -76,7 +76,6 @@ export const privateRoomListHandler = (
     CopyLink: false,
     Embed: false,
     Reconnect: false,
-    Disconnect: false,
     ChangeOwner: true,
     IndexExport: false,
     UseChat: false,
@@ -158,8 +157,6 @@ export const privateRoomListHandler = (
     access: 1,
     shared: false,
     rootFolderType: 14,
-    folderType: 14,
-    isArchive: false,
   };
 
   const body = {

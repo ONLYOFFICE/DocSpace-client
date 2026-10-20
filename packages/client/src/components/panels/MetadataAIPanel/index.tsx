@@ -83,6 +83,7 @@ const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
     setInput,
     changeDraft,
     removeDraft,
+    discard,
     save,
   } = useMetadataAIPanel({ item, mode, onClose });
 
@@ -221,7 +222,7 @@ const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
           size={ButtonSize.normal}
           label={isReview ? t("Metadata:Discard") : t("Common:CancelButton")}
           isDisabled={isSaving}
-          onClick={onClose}
+          onClick={isReview ? discard : onClose}
           testId="metadata_ai_cancel_button"
         />
       </ModalDialog.Footer>

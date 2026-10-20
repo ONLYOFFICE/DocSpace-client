@@ -199,6 +199,17 @@ export const useMetadataAIPanel = ({
   const removeDraft = (key: string) =>
     setDrafts((prev) => prev.filter((draft) => draft.key !== key));
 
+  const discard = () => {
+    if (!metadata) return;
+
+    setForms(getTemplateForms(metadata));
+    setDrafts(
+      mode === "fill" ? toCustomFieldDrafts(metadata.customFields) : [],
+    );
+    setSummary(null);
+    setPhase("ready");
+  };
+
   const values = forms.flatMap(getChangedValues);
   const customChanges =
     mode === "fill" && metadata
@@ -252,6 +263,7 @@ export const useMetadataAIPanel = ({
     setInput,
     changeDraft,
     removeDraft,
+    discard,
     save,
   };
 };

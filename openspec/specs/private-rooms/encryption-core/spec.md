@@ -61,11 +61,19 @@ The system SHALL wrap the DEK once per room member using HPKE in authenticated m
 - **THEN** it is rejected before decryption
 
 ### Requirement: File access list holds one wrap per member
-The system SHALL store the per-member wraps in the file's access list on the server, one entry per user id. Each entry carries the user id, the public key id it was wrapped for, and the wrap blob.
+The system SHALL store the per-member wraps in the file's access list on the server, one entry per user id. Each entry carries the user id, the public key id it was wrapped for, and the wrap blob. A wrap SHALL only be produced for a member key that passed the pin check.
 
 #### Scenario: Upload fan-out
 - **WHEN** a member uploads a file into a private room
-- **THEN** the file's access list is written with a wrap for the uploader and one for every other room member the server lists a public key for, at most one entry per user
+- **THEN** the file's access list is written with a wrap for the uploader and one per room member, for that member's selected key, when the key matches its pin or was pinned on first sight; at most one entry per user
+
+#### Scenario: Member key mismatch on upload
+- **WHEN** a listed member key differs from its pin and the uploader refuses it or no resolver is registered
+- **THEN** no wrap is written for that member, the file is still uploaded, and Common:EncryptedUploadNotSharedWith names the member
+
+#### Scenario: Member key change accepted on upload
+- **WHEN** a listed member key differs from its pin and the uploader accepts it in the key-change dialog
+- **THEN** the new key is pinned and the wrap is written for it
 
 ### Requirement: DSE3 chunked file format
 The system SHALL store every encrypted file as a DSE3 version-2 container: a header (magic, version, suite, flags, chunk plaintext size, chunk count, 16-byte file nonce, optional encrypted name) followed by 1 MiB plaintext chunks, each encrypted with AES-256-GCM under a fresh random 12-byte IV and carrying its tag.
@@ -185,11 +193,15 @@ The system SHALL, before unwrapping a DEK, compare the sender's public key with 
 - **THEN** the new key replaces the pin and the unwrap proceeds
 
 ### Requirement: Member keys are verified against pins when granting access
-The system SHALL check each invited member's public key against its pin before wrapping file keys for them during invitation and backfill, and SHALL skip members whose key mismatches and was not accepted.
+The system SHALL check each member's public key against its pin before wrapping a file key for them during invitation, backfill and upload fan-out, and SHALL skip members whose key mismatches and was not accepted.
 
 #### Scenario: Invited member with changed key
 - **WHEN** a member being granted access has a key that mismatches its pin and the user refuses it
 - **THEN** no wrap is produced for that member and the invitation reports the skipped member
+
+#### Scenario: Unpinned member at upload
+- **WHEN** the server lists a member whose key has never been seen on this device
+- **THEN** the key is pinned and the wrap is produced
 
 ### Requirement: Decrypted filenames are session-scoped
 The system SHALL cache decrypted filenames only in sessionStorage and SHALL clear the cache whenever the identity is locked.

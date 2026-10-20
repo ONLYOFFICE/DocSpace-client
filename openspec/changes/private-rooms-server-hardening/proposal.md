@@ -8,8 +8,9 @@ access entries, invitation e-mails carry the plaintext room title, encrypted
 file titles are not validated, watermark/indexing/lifetime settings can be
 applied to a private room, the file-key table keys entries by (file, user) so a
 user's second device collapses the first one's entry (BL-8), audit events cover
-key envelopes only, and there is no administrative recovery, SCIM offboarding
-or file-key history. The stashed `AUDIT_BACKEND.md` (June 2026) listed these as
+key envelopes only, no operation removes a user's file access entries (a
+removed member keeps them), and there is no administrative recovery, SCIM
+offboarding or file-key history. The stashed `AUDIT_BACKEND.md` (June 2026) listed these as
 P1/P2; the stashed `V1_RELEASE_PROGRESS.md` made admin recovery, audit log
 viewer and SCIM the P0 set for a B2B launch and decided that without them the
 feature ships to individuals and SMB owners only. None of it has landed on the
@@ -34,7 +35,10 @@ the file to change so the backend team can pick them up; nothing here is
 - The file-key table is keyed by (file, user, public key id) so one user can
   hold one entry per device key (BL-8); the client stops collapsing entries.
 - Audit events are written for file access-entry writes and member
-  revocations, and a per-file access history is exposed.
+  revocations, and a per-file access history is exposed. The server has no
+  revocation (removal of a user's access entries) today; the operation that
+  will remove them is an open decision (see below), and the revocation audit
+  and offboarding depend on it.
 - Administrative (organisational) recovery and SCIM-driven offboarding are
   specified as P1 for the B2B launch; the client exposes enrolment and
   recovery flows once the endpoints exist.
@@ -91,3 +95,12 @@ None.
 3. Recovery model for admin recovery: recovery-admin public key wrapping the
    user's private key (stashed design) versus key escrow. The spec assumes
    the former.
+4. Revocation primitive (open): the server removes a user's access entries
+   itself when the user leaves a private room or is deprovisioned, or a new
+   route lets a room manager remove named users' entries. No such operation
+   exists today; the "member revoked" audit and the offboarding requirement
+   cannot be implemented until this is decided.
+5. Server-side refusal of plaintext written into a private room (open):
+   unencrypted uploads and `copyas` conversion output currently land in a
+   private room unchecked. Whether this change adds a requirement for it is
+   undecided; `private-rooms-upload-fail-closed` defers its server guard here.

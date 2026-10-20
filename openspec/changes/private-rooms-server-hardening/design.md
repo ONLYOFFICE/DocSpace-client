@@ -4,9 +4,10 @@
 
 See proposal.md. Server state on `hotfix/v4.0.1` (`../server`):
 
-- Owner change: `products/ASC.Files/Core/Core/FileStorageService.cs:5279-5351`
-  (`ChangeOwnerAsync`) only calls `ThrowIfKeysAreNotSetAsync` (line 5314);
-  no access-entry check or transfer.
+- Owner change: `products/ASC.Files/Core/Core/FileStorageService.cs`
+  (`ChangeOwnerAsync`, from line 5279; the room loop runs to line 5357) only
+  calls `ThrowIfKeysAreNotSetAsync` for a private room (line 5314); no
+  access-entry check or transfer.
 - Room creation: `FileStorageService.cs:1164-1167` requires keys only; no
   edition rule anywhere (no `PrivacyRoom` hit under `common/ASC.Core.Common`
   billing or quota code).
@@ -14,13 +15,29 @@ See proposal.md. Server state on `hotfix/v4.0.1` (`../server`):
   lifetime `*Changed` flags with no `SettingsPrivate` guard.
 - File keys: `products/ASC.Files/Core/Core/EF/DbFileKeys.cs:78,126` keys the
   entity by (TenantId, FileId, UserId); `FileDao.SetFileKey` deletes by user
-  ids then inserts, so a second device key for the same user replaces the
-  first (BL-8, stashed `SECURITY.md` §9 and `AUDIT_BACKEND.md` P2).
+  ids then inserts (`FileDao.cs:2393-2406`), so a second device key for the
+  same user written by a later request replaces the first (BL-8, stashed
+  `SECURITY.md` §9 and `AUDIT_BACKEND.md` P2). A single request that lists
+  the same user twice does not collapse: it fails on the (tenant, file, user)
+  key.
+- Access-entry removal: no server path removes a user's entries. The only
+  delete (`DeleteFileKeysAsync`,
+  `products/ASC.Files/Core/Core/EF/Queries/AbstractQueries.cs:116`) is called
+  only from `FileDao.SetFileKey`, which replaces the rows of the users named
+  in the request; omitting a user leaves their entry in place, and removing a
+  member from the room does not touch the file-key table.
 - Audit: `PrivacyRoomController.cs` writes events for key create/update/delete
   only (`DocumentsActionMapper.cs:314-324`); no event for
-  `SetEncryptionInfoAsync` or revocations.
-- E-mails: `products/ASC.Files/Core/Utils/FileSharing.cs:443` passes
-  `room.Title` to the invitation notifier.
+  `SetEncryptionInfoAsync`. There is no revocation operation to audit (see
+  the previous item).
+- E-mails: `products/ASC.Files/Core/Utils/FileSharing.cs` passes the plaintext
+  title to both invitation notifiers: `entry.Title` to the e-mail invite of a
+  new address (lines 429-431) and `room.Title` to the notice for an existing
+  user (line 443).
+- Plaintext into a private room: the upload paths have no private-room check
+  (`products/ASC.Files/Core/Utils/FileUploader.cs:61-125, 253-294`), and
+  `POST files/file/{fileId}/copyas` inserts converted output into any folder
+  the caller may create in (`products/ASC.Files/Server/Helpers/FilesControllerHelper.cs:263-280`).
 - Upload abort: `products/ASC.Files/Server/Api/UploadController.cs:169`
   (`HttpDelete("{folderId}/session/{sessionId}")`) exists; the client has no
   caller for it.
@@ -113,3 +130,14 @@ without them.
 - SCIM availability on the platform (the stashed doc could not confirm it).
   Owner: platform team. Affects only whether the offboarding trigger is SCIM
   or manual deactivation.
+- Revocation primitive. The server has no operation that removes a user's
+  access entries, so "member revocation" cannot be audited or used by
+  offboarding until one exists. Options: the server deletes a user's entries
+  for every file of a private room when that user is removed from it (or
+  deprovisioned), or a new route lets a room manager delete named users'
+  entries. Owner: backend team with product. Blocks the revocation part of
+  task 6.1 and task 8.1.
+- Server refusal of plaintext written into a private room (unencrypted
+  upload sessions and uploads, `copyas` conversion output). No requirement in
+  this change covers it yet, although `private-rooms-upload-fail-closed`
+  defers its server-side guard here. Owner: backend team with product.

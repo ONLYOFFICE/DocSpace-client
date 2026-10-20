@@ -18,18 +18,19 @@
 ## 4. Titles and e-mails
 
 - [ ] 4.1 Backend: validate encrypted upload titles against the opaque form in the upload session (`UploadController.cs` / `FileUploader.cs`); verify with a server unit test
-- [ ] 4.2 Backend: drop the plaintext room title from private-room invitation and notification e-mails (`FileSharing.cs:443` and the notify service templates); verify with a server unit test on the notification arguments
+- [ ] 4.2 Backend: drop the plaintext room title from private-room invitation and notification e-mails (both call sites in `FileSharing.cs`: the new-address invite at lines 429-431 and the existing-user notice at line 443, plus the notify service templates); verify with a server unit test on the notification arguments
 - [ ] 4.3 Client: assert the title sent for encrypted uploads already matches the opaque form in `packages/shared/services/private-room/__tests__/encrypted-upload.test.ts` (no behaviour change expected)
 
 ## 5. Multi-device file keys (BL-8)
 
-- [ ] 5.1 Backend: migrate `files_file_keys` to the (tenant, file, user, public_key_id) key in `DbFileKeys.cs` and `FileDao.SetFileKey`, with a down migration; verify with the migration test projects for MySQL and PostgreSQL
+- [ ] 5.1 Backend: migrate `files_file_keys` to the (tenant, file, user, public_key_id) key in `DbFileKeys.cs` and `FileDao.SetFileKey` (whose delete-then-insert by user id must become per (user, public key id); today a request listing one user twice fails on the key), with a down migration; verify with the migration test projects for MySQL and PostgreSQL
 - [ ] 5.2 Client: stop collapsing wraps per user in `packages/shared/services/private-room/encrypted-upload-orchestrator.ts` and `room-encryption.ts`, wrapping once per public key id, behind a presence check on the server capability; verify with `packages/shared/services/private-room/__tests__/encrypted-upload-orchestrator.test.ts` and `rotate-identity.integration.test.ts`
 - [ ] 5.3 Client: unwrap picks the entry matching the device's active key in `packages/shared/services/encryption/room-file-access.ts`; verify with `packages/shared/services/encryption/__tests__/room-file-access.test.ts`
 
 ## 6. Audit and history
 
-- [ ] 6.1 Backend: write audit events for `SetEncryptionInfoAsync` and member revocations (`DocumentsActionMapper.cs`, `FileStorageService.cs`) and expose the per-file access history route; verify with server unit tests
+- [ ] 6.0 Decide the revocation primitive (proposal decision 4, design Open Questions): server-side removal of a user's access entries when they leave a private room or are deprovisioned, or a route for room managers to remove named users' entries; no removal operation exists today. Verified by the decision recorded in design.md and a backend task for the chosen operation added to this section
+- [ ] 6.1 Backend: write audit events for `SetEncryptionInfoAsync` (`DocumentsActionMapper.cs`, `FileStorageService.cs`) and expose the per-file access history route; the revocation audit event is BLOCKED on 6.0 and is added to the operation it decides; verify with server unit tests
 - [ ] 6.2 Client: add the access-history request to `packages/shared/api/privacy` with its MSW handler and contract test; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/privacyroom`
 
 ## 7. Upload abort
@@ -38,7 +39,7 @@
 
 ## 8. Recovery and offboarding (B2B launch)
 
-- [ ] 8.1 Backend: recovery-administrator enrolment and retrieval routes with audit, and the deprovisioning hook that revokes entries and blocks owner deprovisioning; verify with server unit tests
+- [ ] 8.1 Backend: recovery-administrator enrolment and retrieval routes with audit, and the deprovisioning hook that blocks owner deprovisioning; the part of the hook that revokes entries is BLOCKED on 6.0 (no removal operation exists today); verify with server unit tests
 - [ ] 8.2 Client: enrolment step in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management` (opt-in by policy) and a recovery action for administrators, with locale keys translated; verify with hook unit tests next to the existing flows and `packages/client/__tests__/keys-management.spec.ts`
 
 ## 9. Integration

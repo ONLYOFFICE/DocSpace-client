@@ -167,6 +167,10 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  & + & {
+    margin-block-start: 8px;
+  }
 }
 
 .applyDialog {

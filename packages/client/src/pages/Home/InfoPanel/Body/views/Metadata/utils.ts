@@ -278,14 +278,12 @@ export const isCustomFieldNameTaken = (
   drafts: TCustomFieldDraft[],
 ) => {
   const name = normalizeName(draft.name);
-  const newDrafts = drafts.filter(
-    (item) => item.isNew && item.key !== draft.key,
-  );
+  const others = [
+    ...fields.filter((field) => draft.isNew || field.name !== draft.key),
+    ...drafts.filter((item) => item.key !== draft.key),
+  ];
 
-  return (
-    !!name &&
-    [...fields, ...newDrafts].some((item) => normalizeName(item.name) === name)
-  );
+  return !!name && others.some((item) => normalizeName(item.name) === name);
 };
 
 export const isValidCustomFieldDraft = (
@@ -293,10 +291,9 @@ export const isValidCustomFieldDraft = (
   fields: TCustomField[],
   drafts: TCustomFieldDraft[],
 ) =>
-  !draft.isNew ||
-  (!!draft.name.trim() &&
-    !!draft.value.trim() &&
-    !isCustomFieldNameTaken(draft, fields, drafts));
+  !!draft.name.trim() &&
+  !isCustomFieldNameTaken(draft, fields, drafts) &&
+  (!draft.isNew || !!draft.value.trim());
 
 export const getCustomFieldChanges = (
   fields: TCustomField[],
@@ -305,13 +302,26 @@ export const getCustomFieldChanges = (
   const kept = new Map(
     drafts
       .filter((draft) => !draft.isNew)
-      .map((draft): [string, string] => [draft.name, draft.value]),
+      .map((draft): [string, TCustomFieldDraft] => [draft.key, draft]),
   );
 
   return [
-    ...fields
-      .filter(({ name, value }) => kept.get(name) !== value)
-      .map(({ name }) => ({ name, value: kept.get(name) || null })),
+    ...fields.flatMap(({ name, value }): TCustomFieldRequest[] => {
+      const draft = kept.get(name);
+
+      if (!draft?.value) return [{ name, value: null }];
+
+      const newName = draft.name.trim();
+
+      if (normalizeName(newName) !== normalizeName(name)) {
+        return [
+          { name, value: null },
+          { name: newName, value: draft.value },
+        ];
+      }
+
+      return draft.value === value ? [] : [{ name, value: draft.value }];
+    }),
     ...drafts
       .filter((draft) => draft.isNew)
       .map(({ name, value }) => ({ name: name.trim(), value })),

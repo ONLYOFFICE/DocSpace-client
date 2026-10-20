@@ -69,10 +69,10 @@ export const useCustomFieldsForm = ({
     createCustomFieldDraft(`new-${++lastDraftKey.current}`);
 
   const [initialFields] = useState(fields);
-  const [drafts, setDrafts] = useState(() => [
-    ...toCustomFieldDrafts(initialFields),
-    ...(withNewField ? [createDraft()] : []),
-  ]);
+  const [drafts, setDrafts] = useState(() => toCustomFieldDrafts(initialFields));
+  const [newField, setNewField] = useState<TCustomFieldDraft | null>(() =>
+    withNewField ? createDraft() : null,
+  );
   const [isSaving, setIsSaving] = useState(false);
 
   const changes = getCustomFieldChanges(initialFields, drafts);
@@ -82,10 +82,22 @@ export const useCustomFieldsForm = ({
       isValidCustomFieldDraft(draft, initialFields, drafts),
     );
 
-  const isNameTaken = (draft: TCustomFieldDraft) =>
-    draft.isNew && isCustomFieldNameTaken(draft, initialFields, drafts);
+  const canSubmitNewField =
+    !!newField && isValidCustomFieldDraft(newField, initialFields, drafts);
 
-  const addDraft = () => setDrafts((prev) => [...prev, createDraft()]);
+  const isNameTaken = (draft: TCustomFieldDraft) =>
+    isCustomFieldNameTaken(draft, initialFields, drafts);
+
+  const openNewField = () => setNewField(createDraft());
+
+  const closeNewField = () => setNewField(null);
+
+  const submitNewField = () => {
+    if (!newField || !canSubmitNewField) return;
+
+    setDrafts((prev) => [...prev, newField]);
+    closeNewField();
+  };
 
   const changeDraft = (draft: TCustomFieldDraft) =>
     setDrafts((prev) =>
@@ -104,11 +116,16 @@ export const useCustomFieldsForm = ({
 
   return {
     drafts,
+    newField,
     canAdd: canAddCustomField(drafts.length),
     canSave,
+    canSubmitNewField,
     isSaving,
     isNameTaken,
-    addDraft,
+    openNewField,
+    closeNewField,
+    changeNewField: setNewField,
+    submitNewField,
     changeDraft,
     removeDraft,
     save,

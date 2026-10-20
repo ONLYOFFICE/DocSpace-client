@@ -65,7 +65,6 @@ const CustomFieldList = ({
             metadata.customFields,
             drafts,
           )}
-          isAutoFocussed={false}
           onChange={onChange}
           onRemove={() => onRemove(draft.key)}
         />

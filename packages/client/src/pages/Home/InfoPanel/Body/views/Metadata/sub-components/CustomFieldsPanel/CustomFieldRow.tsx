@@ -54,7 +54,7 @@ import styles from "../Panel.module.scss";
 type CustomFieldRowProps = {
   draft: TCustomFieldDraft;
   isNameTaken: boolean;
-  isAutoFocussed?: boolean;
+  canRename?: boolean;
   onChange: (draft: TCustomFieldDraft) => void;
   onRemove: () => void;
 };
@@ -62,7 +62,7 @@ type CustomFieldRowProps = {
 const CustomFieldRow = ({
   draft,
   isNameTaken,
-  isAutoFocussed = true,
+  canRename = false,
   onChange,
   onRemove,
 }: CustomFieldRowProps) => {
@@ -91,7 +91,7 @@ const CustomFieldRow = ({
     />
   );
 
-  if (!draft.isNew) {
+  if (!draft.isNew && !canRename) {
     return (
       <FieldContainer
         labelVisible
@@ -126,7 +126,6 @@ const CustomFieldRow = ({
             maxLength={METADATA_NAME_MAX_LENGTH}
             hasError={isNameTaken}
             scale
-            isAutoFocussed={isAutoFocussed}
             testId="metadata_custom_field_name_input"
           />
           {removeButton}

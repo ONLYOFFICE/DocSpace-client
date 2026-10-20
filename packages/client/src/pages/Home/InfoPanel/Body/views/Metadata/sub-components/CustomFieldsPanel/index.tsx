@@ -49,6 +49,7 @@ import type {
 } from "@docspace/shared/api/metadata/types";
 
 import { useCustomFieldsForm } from "../../hooks/useCustomFieldsForm";
+import CustomFieldForm from "./CustomFieldForm";
 import CustomFieldRow from "./CustomFieldRow";
 import styles from "../Panel.module.scss";
 
@@ -69,11 +70,16 @@ const CustomFieldsPanel = ({
 
   const {
     drafts,
+    newField,
     canAdd,
     canSave,
+    canSubmitNewField,
     isSaving,
     isNameTaken,
-    addDraft,
+    openNewField,
+    closeNewField,
+    changeNewField,
+    submitNewField,
     changeDraft,
     removeDraft,
     save,
@@ -85,51 +91,76 @@ const CustomFieldsPanel = ({
       withBodyScroll
       withoutPadding
       displayType={ModalDialogType.aside}
+      isBackButton={!!newField}
+      onBackClick={closeNewField}
       onClose={onClose}
       dataTestId="metadata_custom_fields_panel"
     >
-      <ModalDialog.Header>{t("Metadata:CustomFields")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {newField ? t("Metadata:AddField") : t("Metadata:CustomFields")}
+      </ModalDialog.Header>
 
       <ModalDialog.Body>
         <div className={styles.body}>
-          <div className={styles.form}>
-            <AddButton
-              iconName={PlusReactSvgUrl}
-              label={t("Metadata:AddField")}
-              isDisabled={!canAdd}
-              onClick={addDraft}
-              testId="metadata_custom_field_add_button"
+          {newField ? (
+            <CustomFieldForm
+              draft={newField}
+              isNameTaken={isNameTaken(newField)}
+              onChange={changeNewField}
             />
-            {drafts.map((draft) => (
-              <CustomFieldRow
-                key={draft.key}
-                draft={draft}
-                isNameTaken={isNameTaken(draft)}
-                onChange={changeDraft}
-                onRemove={() => removeDraft(draft.key)}
+          ) : (
+            <div className={styles.form}>
+              <AddButton
+                iconName={PlusReactSvgUrl}
+                label={t("Metadata:AddField")}
+                isDisabled={!canAdd}
+                onClick={openNewField}
+                testId="metadata_custom_field_add_button"
               />
-            ))}
-          </div>
+              {drafts.map((draft) => (
+                <CustomFieldRow
+                  key={draft.key}
+                  draft={draft}
+                  canRename
+                  isNameTaken={isNameTaken(draft)}
+                  onChange={changeDraft}
+                  onRemove={() => removeDraft(draft.key)}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <Button
-          primary
-          scale
-          size={ButtonSize.normal}
-          label={t("Common:SaveButton")}
-          isDisabled={!canSave}
-          isLoading={isSaving}
-          onClick={save}
-          testId="metadata_custom_fields_save_button"
-        />
+        {newField ? (
+          <Button
+            primary
+            scale
+            size={ButtonSize.normal}
+            label={t("Common:AddButton")}
+            isDisabled={!canSubmitNewField}
+            onClick={submitNewField}
+            testId="metadata_custom_field_submit_button"
+          />
+        ) : (
+          <Button
+            primary
+            scale
+            size={ButtonSize.normal}
+            label={t("Common:SaveButton")}
+            isDisabled={!canSave}
+            isLoading={isSaving}
+            onClick={save}
+            testId="metadata_custom_fields_save_button"
+          />
+        )}
         <Button
           scale
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
           isDisabled={isSaving}
-          onClick={onClose}
+          onClick={newField ? closeNewField : onClose}
           testId="metadata_custom_fields_cancel_button"
         />
       </ModalDialog.Footer>

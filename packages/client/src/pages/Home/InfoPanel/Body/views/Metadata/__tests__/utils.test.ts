@@ -334,6 +334,33 @@ describe("custom fields", () => {
     );
   });
 
+  it("renames a field by removing the old name and writing the new one", () => {
+    const [client, owner] = toCustomFieldDrafts(fields);
+
+    expect(
+      getCustomFieldChanges(fields, [{ ...client, name: " Customer " }, owner]),
+    ).toEqual([
+      { name: "Client", value: null },
+      { name: "Customer", value: "ACME" },
+    ]);
+    expect(
+      getCustomFieldChanges(fields, [{ ...client, name: "CLIENT" }, owner]),
+    ).toEqual([]);
+  });
+
+  it("refuses a rename to an empty name or to the name of another field", () => {
+    const [client, owner] = toCustomFieldDrafts(fields);
+    const renamed = (name: string) => {
+      const draft = { ...client, name };
+      return isValidCustomFieldDraft(draft, fields, [draft, owner]);
+    };
+
+    expect(renamed("Customer")).toBe(true);
+    expect(renamed("client")).toBe(true);
+    expect(renamed(" owner ")).toBe(false);
+    expect(renamed(" ")).toBe(false);
+  });
+
   it("requires a free name and a value for a new field", () => {
     const valid = newDraft("new-1", "Region", "EU");
     const taken = newDraft("new-2", " client ", "x");

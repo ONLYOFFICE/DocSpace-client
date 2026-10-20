@@ -90,9 +90,13 @@ export type UploadFolderContext = {
   selectedRoomType?: RoomsType | null;
 };
 
+/** Set on a decrypted copy that completes a move out of a private room. */
+export type MoveSourceRef = { fileId: number | string; title: string };
+
 export type ItemUploadContext = {
   roomType?: RoomsType;
   isPrivate?: boolean;
+  moveSource?: MoveSourceRef;
 };
 
 export function resolveItemRoomContext(
@@ -109,23 +113,58 @@ export function resolveItemRoomContext(
   return { roomType, isPrivate };
 }
 
-export function willEncryptUploadItem(
-  params: {
-    uploadContext?: ItemUploadContext;
-    alreadyEncrypted?: boolean;
-    publicKey?: string | null;
-    userId?: string | null;
-  },
+export type UploadGateParams = {
+  uploadContext?: ItemUploadContext;
+  alreadyEncrypted?: boolean;
+  publicKey?: string | null;
+  userId?: string | null;
+};
+
+/** `no-key`: no usable key on this device; `locked`: unlock was declined. */
+export type UploadRefusalReason = "no-key" | "locked";
+
+/**
+ * `encrypt` before sending, send `plain` bytes as they are (non-private
+ * target or already DSE3), or `refuse` and send nothing.
+ * Spec: private-rooms/file-operations, "Uploads into a private room are
+ * encrypted on the client".
+ */
+export type UploadGateOutcome =
+  | { action: "encrypt" }
+  | { action: "plain" }
+  | { action: "refuse"; reason: UploadRefusalReason };
+
+export const UPLOAD_REFUSAL_I18N_KEYS: Record<UploadRefusalReason, string> = {
+  "no-key": "Common:EncryptionKeysRequiredForUpload",
+  locked: "Common:EncryptionLockedUpload",
+};
+
+export function resolveUploadGate(
+  params: UploadGateParams,
   folder: UploadFolderContext,
-): boolean {
-  if (params.alreadyEncrypted) return false;
-  if (!params.publicKey || !params.userId) return false;
+): UploadGateOutcome {
   const { roomType, isPrivate } = resolveItemRoomContext(
     params.uploadContext,
     folder,
   );
-  if (roomType === null || roomType === undefined) return false;
-  return shouldEncryptUpload(roomType, isPrivate);
+  const privateTarget =
+    roomType !== null &&
+    roomType !== undefined &&
+    shouldEncryptUpload(roomType, isPrivate);
+
+  if (!privateTarget) return { action: "plain" };
+  if (!params.publicKey || !params.userId) {
+    return { action: "refuse", reason: "no-key" };
+  }
+  if (params.alreadyEncrypted) return { action: "plain" };
+  return { action: "encrypt" };
+}
+
+export function willEncryptUploadItem(
+  params: UploadGateParams,
+  folder: UploadFolderContext,
+): boolean {
+  return resolveUploadGate(params, folder).action === "encrypt";
 }
 
 function newUuid(): string {

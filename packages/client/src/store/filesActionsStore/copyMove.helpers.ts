@@ -176,15 +176,99 @@ self: FilesActionStore,item: TActionItem
 };
 
 
+export type TEncryptedTransferDest = {
+  private?: boolean;
+  rootFolderId?: number | string;
+  roomType?: Nullable<RoomsType>;
+  rootFolderType?: FolderType;
+};
+
+export type TPrivateTransferPlan =
+  | { kind: "generic" }
+  | { kind: "refuse-into" }
+  | { kind: "same-room" }
+  | { kind: "refuse-folder-out" }
+  | {
+      kind: "decrypt-out";
+      files: TActionItem[];
+      refusedFolders: TActionItem[];
+    };
+
+// Spec: private-rooms/file-operations, "Transfer into a private room is refused",
+// "Folders cannot leave a private room", "Files leaving a private room are decrypted".
+export const planPrivateTransfer = (params: {
+  items: TActionItem[];
+  sourceInPrivateRoom: boolean;
+  sourceRootFolderId?: number | string | null;
+  dest: TEncryptedTransferDest | null | undefined;
+}): TPrivateTransferPlan => {
+  const { items, sourceInPrivateRoom, sourceRootFolderId, dest } = params;
+
+  const destRootKnown =
+    dest?.rootFolderId !== undefined &&
+    dest?.rootFolderId !== null &&
+    sourceRootFolderId !== undefined &&
+    sourceRootFolderId !== null;
+  const destInsideSameRoom =
+    sourceInPrivateRoom &&
+    (destRootKnown
+      ? dest?.rootFolderId === sourceRootFolderId
+      : dest?.rootFolderType === FolderType.Rooms);
+  const destPrivate = dest?.private === true || destInsideSameRoom;
+
+  if (destPrivate && !sourceInPrivateRoom) return { kind: "refuse-into" };
+  if (!sourceInPrivateRoom) return { kind: "generic" };
+  if (destPrivate) return { kind: "same-room" };
+
+  const files = items.filter((el) => !el.isFolder);
+  const refusedFolders = items.filter((el) => !!el.isFolder);
+  if (files.length === 0) return { kind: "refuse-folder-out" };
+  return { kind: "decrypt-out", files, refusedFolders };
+};
+
+/**
+ * Apply a transfer plan. Returns true when the plan was handled here and the
+ * caller must not run the generic server-side transfer.
+ */
+export const runPrivateTransferPlanImpl = (
+self: FilesActionStore,
+  plan: TPrivateTransferPlan,
+  destFolderId: number | string,
+  dest: TEncryptedTransferDest | null | undefined,
+  options: { move: boolean },
+
+): boolean => {
+  switch (plan.kind) {
+    case "generic":
+    case "same-room":
+      return false;
+    case "refuse-into":
+      toastr.error(i18n.t("Common:CannotTransferToPrivateRoom"));
+      return true;
+    case "refuse-folder-out":
+      toastr.error(i18n.t("Common:CannotTransferFolderFromPrivateRoom"));
+      return true;
+    case "decrypt-out":
+      if (plan.refusedFolders.length > 0) {
+        toastr.error(i18n.t("Common:CannotTransferFolderFromPrivateRoom"));
+      }
+      void self.copyEncryptedFilesToFolder(plan.files, destFolderId, {
+        private: false,
+        rootFolderId: dest?.rootFolderId,
+        roomType: dest?.roomType,
+        deleteSourceOnSuccess: options.move,
+      });
+      return true;
+    default:
+      return false;
+  }
+};
+
 export const copyEncryptedFilesToFolderImpl = async (
 self: FilesActionStore,
   items: TActionItem[],
   destFolderId: number | string | undefined,
-  destInfo?: {
-    private?: boolean;
-    rootFolderId?: number | string;
-    roomType?: Nullable<RoomsType>;
-  },
+  destInfo?: TEncryptedTransferDest & { deleteSourceOnSuccess?: boolean },
 
 )=> {
   const { user, encryptionKeys } = self.userStore;
@@ -206,6 +290,8 @@ self: FilesActionStore,
   const sameRoomRoot =
     destInfo?.private === true &&
     destInfo?.rootFolderId === self.selectedFolderStore.rootFolderId;
+  const deleteSourceOnSuccess =
+    destInfo?.deleteSourceOnSuccess === true && !sameRoomRoot;
 
   const destContext = {
     roomType: destInfo?.roomType ?? RoomsType.CustomRoom,
@@ -234,7 +320,12 @@ self: FilesActionStore,
       const tagged = tagFileForCopy(
         new File([decryptedFile], newName, { type: decryptedFile.type }),
         destFolderId as number | string,
-        destContext,
+        deleteSourceOnSuccess
+          ? {
+              ...destContext,
+              moveSource: { fileId: item.id, title: item.title },
+            }
+          : destContext,
       );
       filesToUpload.push(tagged);
     } catch (error) {
@@ -256,10 +347,14 @@ self: FilesActionStore,
 
   if (failed.length > 0) {
     toastr.error(
-      i18n.t("Common:EncryptedCopyFailed", {
-        defaultValue: "Failed to copy encrypted files: {{names}}",
-        names: failed.join(", "),
-      }),
+      deleteSourceOnSuccess
+        ? i18n.t("Common:EncryptedMovePartialFailure", {
+            names: failed.join(", "),
+          })
+        : i18n.t("Common:EncryptedCopyFailed", {
+            defaultValue: "Failed to copy encrypted files: {{names}}",
+            names: failed.join(", "),
+          }),
     );
   }
 };
@@ -489,38 +584,24 @@ self: FilesActionStore,
 
 )=> {
   const sourceInPrivateRoom = self.treeFoldersStore.isPrivacyFolder;
-  const isDestInsideSameRoom =
-    sourceInPrivateRoom &&
-    destFolderInfo?.rootFolderType === FolderType.Rooms;
-  const isPrivateDestination =
-    destFolderInfo?.private === true || isDestInsideSameRoom;
+  const { bufferSelection: dragBufferSelection } = self.filesStore;
+  const dragSelection = (
+    dragBufferSelection ? [dragBufferSelection] : self.filesStore.selection
+  ).filter((el) => !el.isFolder || el.id !== destFolderId);
 
-  if (isPrivateDestination && !sourceInPrivateRoom) {
-    toastr.error(i18n.t("Common:CannotTransferToPrivateRoom"));
-    return;
-  }
-
-  if (!isPrivateDestination && sourceInPrivateRoom) {
-    const { bufferSelection: dragBufferSelection } = self.filesStore;
-    const dragSelection = (
-      dragBufferSelection ? [dragBufferSelection] : self.filesStore.selection
-    ).filter((el) => !el.isFolder || el.id !== destFolderId);
-
-    const files = dragSelection.filter((el) => !el.isFolder);
-    const hasFolders = dragSelection.some((el) => el.isFolder);
-
-    if (hasFolders) {
-      toastr.error(i18n.t("Common:CannotTransferFolderFromPrivateRoom"));
-    }
-
-    if (files.length > 0) {
-      self.copyEncryptedFilesToFolder(files, destFolderId, {
-        private: false,
-        rootFolderId: destFolderInfo?.rootFolderId,
-        roomType: destFolderInfo?.roomType,
-      });
-    }
-
+  const plan = planPrivateTransfer({
+    items: dragSelection,
+    sourceInPrivateRoom,
+    sourceRootFolderId: self.selectedFolderStore.rootFolderId,
+    dest: destFolderInfo,
+  });
+  const dragIsMove =
+    dragSelection.length > 0 && dragSelection.every((f) => f.security?.Move);
+  if (
+    self.runPrivateTransferPlan(plan, destFolderId, destFolderInfo, {
+      move: dragIsMove,
+    })
+  ) {
     return;
   }
 

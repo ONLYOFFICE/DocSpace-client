@@ -209,11 +209,23 @@ self: FilesActionStore,
     self.selectedFolderStore.navigationPath.find((r) => r.isRoom) ??
     self.selectedFolderStore.getSelectedFolder();
 
-  const withoutHiddenFiles = Object.values(files).filter((f) => {
+  let withoutHiddenFiles = Object.values(files).filter((f) => {
     const isHidden = /(^|\/)\.[^\/\.]/g.test(f.name);
 
     return !isHidden;
   });
+
+  // Spec: private-rooms/file-operations, "Folder upload disabled in private rooms".
+  if (self.treeFoldersStore.isPrivacyFolder) {
+    const isFolderEntry = (f: TUploadTreeFile) =>
+      !!f.isEmptyDirectory ||
+      (f.path ?? "").split("/").filter((name) => name !== "").length > 1;
+    const fileEntries = withoutHiddenFiles.filter((f) => !isFolderEntry(f));
+    if (fileEntries.length !== withoutHiddenFiles.length) {
+      toastr.warning(t("Common:FolderUploadNotSupportedInPrivateRoom"));
+      withoutHiddenFiles = fileEntries;
+    }
+  }
 
   const operationId = uniqueid("operation_");
 

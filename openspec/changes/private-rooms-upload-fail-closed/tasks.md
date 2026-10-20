@@ -2,19 +2,19 @@
 
 ## 1. Shared upload gate fails closed
 
-- [ ] 1.1 Extend the shared upload gate helper in `packages/shared/services/private-room/encrypted-upload.ts` with a `refuse` outcome carrying a reason (`no-key`, `locked`) for private custom rooms, keeping `encrypt` and `plain` for the other cases; verify with new cases in `packages/shared/services/private-room/__tests__/upload-encryption-gate.test.ts`.
-- [ ] 1.2 Invert the existing "does NOT encrypt when encryption keys are missing" case in `upload-encryption-gate.test.ts` to assert refusal, with a comment pointing at this change; verify `cd packages/shared && pnpm exec vitest run services/private-room/__tests__/upload-encryption-gate.test.ts` passes.
+- [x] 1.1 Extend the shared upload gate helper in `packages/shared/services/private-room/encrypted-upload.ts` with a `refuse` outcome carrying a reason (`no-key`, `locked`) for private custom rooms, keeping `encrypt` and `plain` for the other cases; verify with new cases in `packages/shared/services/private-room/__tests__/upload-encryption-gate.test.ts`.
+- [x] 1.2 Invert the existing "does NOT encrypt when encryption keys are missing" case in `upload-encryption-gate.test.ts` to assert refusal, with a comment pointing at this change; verify `cd packages/shared && pnpm exec vitest run services/private-room/__tests__/upload-encryption-gate.test.ts` passes.
 
 ## 2. Client upload pipeline refuses key-less and locked uploads
 
-- [ ] 2.1 In `packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts` and `selectors.helpers.ts`, replace the `publicKey && userId` short-circuit with the gate outcome: on `refuse`, mark the item failed with the localized reason and skip `startUploadSession`; verify with new cases in `packages/client/src/store/uploadDataStore/__tests__/UploadDataStore.encryption.test.ts` asserting no session is opened.
-- [ ] 2.2 Trigger the device-setup hint when an upload is refused for `no-key`; verify with a unit test on the hint effect in `packages/client/src/components/EncryptionProviderWrapper.jsx` or its hook test.
+- [x] 2.1 In `packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts` and `selectors.helpers.ts`, replace the `publicKey && userId` short-circuit with the gate outcome: on `refuse`, mark the item failed with the localized reason and skip `startUploadSession`; verify with new cases in `packages/client/src/store/uploadDataStore/__tests__/UploadDataStore.encryption.test.ts` asserting no session is opened.
+- [x] 2.2 Trigger the device-setup hint when an upload is refused for `no-key`; verify with a unit test on the hint effect in `packages/client/src/components/EncryptionProviderWrapper.jsx` or its hook test.
 - [ ] 2.3 Add `Common:EncryptionKeysRequiredForUpload` and `Common:EncryptionLockedUpload` to `public/locales/en/Common.json`, run `/translate-comments` then `/translate-locales`, and verify `cd common/tests && npx vitest run test/locales.test.js` passes.
 - [ ] 2.4 Add an E2E case to `packages/client/__tests__/private-room-access.spec.ts` where a key-less user drops a file into a private room and the upload panel shows the refusal; verify with `cd packages/client && pnpm exec playwright test __tests__/private-room-access.spec.ts`.
 
 ## 3. Dropped folder trees are refused
 
-- [ ] 3.1 In the Home page drop handler (`packages/client/src/pages/Home/index.js`, `createFoldersTree` call) refuse folder entries when the target is a private room and upload the file entries normally; verify with a unit test on the drop handling helper.
+- [x] 3.1 In the Home page drop handler (`packages/client/src/pages/Home/index.js`, `createFoldersTree` call) refuse folder entries when the target is a private room and upload the file entries normally; verify with a unit test on the drop handling helper.
 - [ ] 3.2 Add `Common:FolderUploadNotSupportedInPrivateRoom` to the locales, translate it, and verify the locale tests pass.
 
 ## 4. One transfer resolver for drag, dialog and clipboard

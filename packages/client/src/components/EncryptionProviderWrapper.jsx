@@ -49,6 +49,10 @@ import {
   registerGhostStateHandler,
   clearGhostStateHandler,
 } from "@docspace/shared/services/encryption/ghost-state-notifier";
+import {
+  registerDeviceSetupHintHandler,
+  clearDeviceSetupHintHandler,
+} from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 import {
   PassphraseModal,
@@ -135,6 +139,40 @@ const GhostStateToastEffect = () => {
 
 const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 
+const showDeviceSetupHint = (t, accountKeysCount) => {
+  const setupLink = (
+    <Link
+      key="setup"
+      tag="a"
+      isHovered
+      color="accent"
+      onClick={() => {
+        toastr.clear();
+        window.location.href = "/profile/keys-management";
+      }}
+    />
+  );
+
+  toastr.info(
+    accountKeysCount > 0 ? (
+      <Trans
+        i18nKey="Common:EncryptionChooseKeyHint"
+        t={t}
+        components={[setupLink]}
+      />
+    ) : (
+      <Trans
+        i18nKey="Common:EncryptionDeviceSetupHint"
+        t={t}
+        components={[setupLink]}
+      />
+    ),
+    null,
+    30000,
+    true,
+  );
+};
+
 const DeviceSetupHintEffect = inject(({ selectedFolderStore, userStore }) => ({
   isPrivate: selectedFolderStore?.private,
   accountKeysCount: userStore?.encryptionKeys?.length ?? 0,
@@ -144,6 +182,13 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore, userStore }) => ({
     const { t } = useTranslation(["Common"]);
 
     React.useEffect(() => {
+      registerDeviceSetupHintHandler(() =>
+        showDeviceSetupHint(t, accountKeysCount),
+      );
+      return () => clearDeviceSetupHintHandler();
+    }, [accountKeysCount, t]);
+
+    React.useEffect(() => {
       if (!isPrivate || hasConfiguredKey) return;
       try {
         if (sessionStorage.getItem(DEVICE_SETUP_HINT_SESSION_KEY) === "1")
@@ -151,37 +196,7 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore, userStore }) => ({
         sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
       } catch {}
 
-      const setupLink = (
-        <Link
-          key="setup"
-          tag="a"
-          isHovered
-          color="accent"
-          onClick={() => {
-            toastr.clear();
-            window.location.href = "/profile/keys-management";
-          }}
-        />
-      );
-
-      toastr.info(
-        accountKeysCount > 0 ? (
-          <Trans
-            i18nKey="Common:EncryptionChooseKeyHint"
-            t={t}
-            components={[setupLink]}
-          />
-        ) : (
-          <Trans
-            i18nKey="Common:EncryptionDeviceSetupHint"
-            t={t}
-            components={[setupLink]}
-          />
-        ),
-        null,
-        30000,
-        true,
-      );
+      showDeviceSetupHint(t, accountKeysCount);
     }, [isPrivate, hasConfiguredKey, accountKeysCount, t]);
 
     return null;

@@ -131,6 +131,8 @@ import {
   duplicateActionImpl,
   duplicateEncryptedFileImpl,
   copyEncryptedFilesToFolderImpl,
+  planPrivateTransfer,
+  runPrivateTransferPlanImpl,
   getItemsInfoImpl,
   checkFileConflictsImpl,
   setConflictDialogDataImpl,
@@ -140,6 +142,10 @@ import {
   copyFileToAiKnowledgeImpl,
   moveDragItemsImpl,
   getPublicKeyImpl,
+} from "./filesActionsStore/copyMove.helpers";
+import type {
+  TEncryptedTransferDest,
+  TPrivateTransferPlan,
 } from "./filesActionsStore/copyMove.helpers";
 import {
   moveToRoomsPageImpl,
@@ -626,12 +632,22 @@ class FilesActionStore {
   copyEncryptedFilesToFolder = async (
     items: TActionItem[],
     destFolderId: number | string | undefined,
-    destInfo?: {
-      private?: boolean;
-      rootFolderId?: number | string;
-      roomType?: Nullable<RoomsType>;
-    },
+    destInfo?: TEncryptedTransferDest & { deleteSourceOnSuccess?: boolean },
   )=> copyEncryptedFilesToFolderImpl(this, items, destFolderId, destInfo);
+
+  planPrivateTransfer = (params: {
+    items: TActionItem[];
+    sourceInPrivateRoom: boolean;
+    sourceRootFolderId?: number | string | null;
+    dest: TEncryptedTransferDest | null | undefined;
+  })=> planPrivateTransfer(params);
+
+  runPrivateTransferPlan = (
+    plan: TPrivateTransferPlan,
+    destFolderId: number | string,
+    dest: TEncryptedTransferDest | null | undefined,
+    options: { move: boolean },
+  )=> runPrivateTransferPlanImpl(this, plan, destFolderId, dest, options);
 
   getItemsInfo = (items: TActionItem[])=> getItemsInfoImpl(this, items);
 

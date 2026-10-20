@@ -69,6 +69,7 @@ operations:
     guidance:
       - Do not remove the privateRooms feature flag as part of any change unless the change is explicitly about releasing the feature.
       - Backend-dependent tasks stop at the client side and record the expected server contract.
+      - "Specs own the what and the why: do not restate a requirement or a design decision in code or test comments. Where behaviour is counter-intuitive on its own (fail closed, a withheld action), leave at most a one-line pointer: Spec: <capability>, \"<requirement name>\". Test names carry the scenario name instead of comments."
   archive:
     guidance:
       - Before archiving, confirm the main spec still describes the behaviour on the branch, not the behaviour planned.

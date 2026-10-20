@@ -158,6 +158,12 @@ class HotkeyStore {
 
   hotkeysClipboardAction: "move" | "copy" | null = null;
 
+  /** Where the clipboard items were taken from, for the private-room rules. */
+  hotkeysClipboardSource: {
+    inPrivateRoom: boolean;
+    rootFolderId: number | string | null;
+  } | null = null;
+
   selectionAreaIsEnabled = true;
 
   withContentSelection = false;
@@ -740,6 +746,10 @@ class HotkeyStore {
 
     setHotkeysClipboard();
     this.hotkeysClipboardAction = isCut ? "move" : "copy";
+    this.hotkeysClipboardSource = {
+      inPrivateRoom: !!this.treeFoldersStore.isPrivacyFolder,
+      rootFolderId: this.selectedFolderStore.rootFolderId ?? null,
+    };
 
     const copyText = `${t("AddedToClipboard")}: ${selection.length}`;
     toastr.success(copyText);

@@ -53,6 +53,11 @@ Workflow:
 4. `npx -y @fission-ai/openspec@latest validate --all --strict` must pass
    before a push that touches `openspec/`. The CLI is not a repo dependency;
    `npx` fetches it (set `OPENSPEC_TELEMETRY=0`).
-5. The feature stays behind the `privateRooms` localStorage flag
+5. Specs own the what and the why. Do not restate a requirement or a
+   design decision in code or test comments; where the behaviour is
+   counter-intuitive on its own (fail closed, a withheld action), leave at most
+   a one-line pointer `Spec: <capability>, "<requirement name>"`. Test names
+   carry the scenario name instead of a comment.
+6. The feature stays behind the `privateRooms` localStorage flag
    (`packages/shared/utils/privateRooms.ts`) until a change explicitly
    releases it; see `private-rooms/feature-gating`.

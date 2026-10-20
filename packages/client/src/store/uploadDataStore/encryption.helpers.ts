@@ -43,7 +43,10 @@ import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
-import { prepareEncryptedUpload } from "@docspace/shared/services/private-room/encrypted-upload";
+import {
+  prepareEncryptedUpload,
+  UPLOAD_REFUSAL_I18N_KEYS,
+} from "@docspace/shared/services/private-room/encrypted-upload";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
@@ -196,7 +199,10 @@ export async function ensureEncryptionUnlockedForBatchImpl(
   return !!identity;
 }
 
+// Spec: private-rooms/file-operations, "Uploads into a private room are encrypted on the client".
 export function cancelEncryptedBatchUploadImpl(self: UploadDataStore) {
+  const errorMessage = i18n.t(UPLOAD_REFUSAL_I18N_KEYS.locked);
+
   runInAction(() => {
     self.files.forEach((item) => {
       if (
@@ -208,12 +214,16 @@ export function cancelEncryptedBatchUploadImpl(self: UploadDataStore) {
       )
         return;
 
-      item.cancel = true;
-      item.action = "uploaded";
-      item.percent = 100;
-      self.uploadedFilesHistory = self.uploadedFilesHistory.filter(
-        (f) => f.uniqueId !== item.uniqueId,
+      item.inAction = true;
+      item.error = errorMessage;
+      item.percent = 0;
+      const historyItem = self.uploadedFilesHistory.find(
+        (f) => f.uniqueId === item.uniqueId,
       );
+      if (historyItem) {
+        historyItem.error = errorMessage;
+        historyItem.percent = 0;
+      }
     });
 
     self.percent = self.getFilesPercent();

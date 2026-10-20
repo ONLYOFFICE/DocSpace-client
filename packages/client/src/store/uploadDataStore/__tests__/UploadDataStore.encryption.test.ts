@@ -41,6 +41,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import { requestDeviceSetupHint } from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import {
   EncryptedReimportError,
@@ -65,6 +66,14 @@ vi.mock("@docspace/shared/services/encryption/secret-storage", async (orig) => {
   const actual = (await orig()) as Record<string, unknown>;
   return { ...actual, requireUnlock: vi.fn() };
 });
+
+vi.mock(
+  "@docspace/shared/services/encryption/device-setup-hint-notifier",
+  async (orig) => {
+    const actual = (await orig()) as Record<string, unknown>;
+    return { ...actual, requestDeviceSetupHint: vi.fn() };
+  },
+);
 
 vi.mock(
   "@docspace/shared/services/encryption/room-file-access",
@@ -461,6 +470,80 @@ describe("UploadDataStore.startSessionFunc — encrypted upload preparation", ()
   });
 });
 
+describe("UploadDataStore.startSessionFunc — uploader without a key", () => {
+  const setupKeylessPendingFile = () => {
+    const harness = createTestUploadDataStore({
+      treeFoldersStore: { isPrivacyFolder: true },
+      userStore: { user: { id: "user-1", isAdmin: false }, encryptionKeys: [] },
+    });
+    const { store } = harness;
+    const entry = makeUploadFile({
+      uniqueId: "keyless-pending",
+      file: makeBrowserFile("secret.docx", 3000),
+      toFolderId: 7,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    return { ...harness, entry };
+  };
+
+  it("refuses a key-less upload: no session, no encryption, localized reason, hint requested", async () => {
+    const { store, fakes } = setupKeylessPendingFile();
+    const finishUploadFiles = replaceAction(store, "finishUploadFiles");
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(sniffDse3Upload).not.toHaveBeenCalled();
+    expect(store.files[0].error).toBe("Common:EncryptionKeysRequiredForUpload");
+    expect(store.files[0].percent).toBe(0);
+    expect(store.uploadedFilesHistory[0].error).toBe(
+      "Common:EncryptionKeysRequiredForUpload",
+    );
+    expect(requestDeviceSetupHint).toHaveBeenCalledTimes(1);
+    expect(
+      fakes.primaryProgressDataStore.setPrimaryProgressBarData,
+    ).toHaveBeenLastCalledWith({
+      operation: OPERATIONS_NAME.upload,
+      percent: 0,
+      alert: true,
+    });
+    expect(store.currentUploadNumber).toBe(0);
+    expect(store.finishUploadFilesCalled).toBe(true);
+    expect(finishUploadFiles.mock.calls).toEqual([[t, false]]);
+  });
+
+  it("still uploads plaintext outside private rooms without keys", async () => {
+    const { store } = createTestUploadDataStore({
+      treeFoldersStore: { isPrivacyFolder: false },
+      userStore: { user: { id: "user-1", isAdmin: false }, encryptionKeys: [] },
+    });
+    const entry = makeUploadFile({
+      uniqueId: "plain-pending",
+      file: makeBrowserFile("notes.txt", 10),
+      toFolderId: 9,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    vi.mocked(filesApi.startUploadSession).mockReturnValue(
+      new Promise(() => {}) as never,
+    );
+
+    store.startSessionFunc(0, t);
+    await vi.waitFor(() =>
+      expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1),
+    );
+
+    expect(store.files[0].error).toBeNull();
+    expect(requestDeviceSetupHint).not.toHaveBeenCalled();
+  });
+});
+
 describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)", () => {
   const RAW_NAME = "9f8b7c6d-1a2b-4c3d-8e4f-556677889900.docx";
   const dse3Header = {
@@ -635,7 +718,7 @@ describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
     );
   });
 
-  it("cancelEncryptedBatchUpload cancels only the not-yet-started encryptable files and prunes their history", () => {
+  it("uploader declines to unlock: cancelEncryptedBatchUpload fails only the not-yet-started encryptable files with the locked reason", () => {
     const { store } = createTestUploadDataStore({
       treeFoldersStore: { isPrivacyFolder: true },
       userStore: userWithKeys(),
@@ -658,13 +741,20 @@ describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
 
     store.cancelEncryptedBatchUpload();
 
-    expect(store.files.map((f) => !!f.cancel)).toEqual([true, false, false]);
-    expect(store.files[0].action).toBe("uploaded");
-    expect(store.files[0].percent).toBe(100);
+    expect(store.files.map((f) => !!f.cancel)).toEqual([false, false, false]);
+    expect(store.files[0].error).toBe("Common:EncryptionLockedUpload");
+    expect(store.files[0].inAction).toBe(true);
+    expect(store.files[0].percent).toBe(0);
+    expect(store.files[1].error).toBeNull();
+    expect(store.files[2].error).toBeNull();
     expect(store.uploadedFilesHistory.map((f) => f.uniqueId)).toEqual([
+      "enc-a",
       "run-b",
       "pre-c",
     ]);
+    expect(store.uploadedFilesHistory[0].error).toBe(
+      "Common:EncryptionLockedUpload",
+    );
     expect(toastr.info).toHaveBeenCalledWith(
       "Common:EncryptionUploadCancelled",
     );

@@ -42,11 +42,78 @@ import {
   makeOpaqueUploadName,
   prepareEncryptedUpload,
   resolveItemRoomContext,
+  resolveUploadGate,
   sniffDse3Upload,
+  UPLOAD_REFUSAL_I18N_KEYS,
   willEncryptUploadItem,
 } from "../encrypted-upload";
 
 const KEYS = { publicKey: "pub-base64", userId: "user-1" };
+
+describe("resolveUploadGate", () => {
+  const privacyFolder = {
+    isPrivacyFolder: true,
+    selectedRoomType: RoomsType.CustomRoom,
+  };
+
+  it("encrypts a fresh file in a private custom room when keys exist", () => {
+    expect(resolveUploadGate({ ...KEYS }, privacyFolder)).toEqual({
+      action: "encrypt",
+    });
+  });
+
+  it("refuses a key-less uploader before anything else is considered", () => {
+    expect(
+      resolveUploadGate(
+        { publicKey: null, userId: null, alreadyEncrypted: true },
+        privacyFolder,
+      ),
+    ).toEqual({ action: "refuse", reason: "no-key" });
+  });
+
+  it("passes an already-encrypted item through unchanged", () => {
+    expect(
+      resolveUploadGate({ ...KEYS, alreadyEncrypted: true }, privacyFolder),
+    ).toEqual({ action: "plain" });
+  });
+
+  it("sends plaintext outside private rooms even without keys", () => {
+    expect(
+      resolveUploadGate(
+        { publicKey: null, userId: null },
+        { isPrivacyFolder: false, selectedRoomType: RoomsType.EditingRoom },
+      ),
+    ).toEqual({ action: "plain" });
+    expect(
+      resolveUploadGate(
+        { publicKey: null, userId: null },
+        { isPrivacyFolder: false, selectedRoomType: null },
+      ),
+    ).toEqual({ action: "plain" });
+  });
+
+  it("sends plaintext into a non-encryptable room type even when private", () => {
+    expect(
+      resolveUploadGate(
+        {
+          publicKey: null,
+          userId: null,
+          uploadContext: { roomType: RoomsType.PublicRoom, isPrivate: true },
+        },
+        { isPrivacyFolder: false, selectedRoomType: null },
+      ),
+    ).toEqual({ action: "plain" });
+  });
+
+  it("maps every refusal reason to a Common i18n key", () => {
+    expect(UPLOAD_REFUSAL_I18N_KEYS["no-key"]).toBe(
+      "Common:EncryptionKeysRequiredForUpload",
+    );
+    expect(UPLOAD_REFUSAL_I18N_KEYS.locked).toBe(
+      "Common:EncryptionLockedUpload",
+    );
+  });
+});
 
 describe("resolveItemRoomContext", () => {
   it("falls back to CustomRoom + private inside a privacy folder", () => {
@@ -95,13 +162,16 @@ describe("willEncryptUploadItem", () => {
     expect(willEncryptUploadItem({ ...KEYS }, privacyFolder)).toBe(true);
   });
 
-  it("does NOT encrypt when encryption keys are missing", () => {
+  it("uploader without a key: refuses instead of uploading plaintext", () => {
     expect(
       willEncryptUploadItem({ publicKey: null, userId: null }, privacyFolder),
     ).toBe(false);
     expect(
-      willEncryptUploadItem({ publicKey: "pub", userId: null }, privacyFolder),
-    ).toBe(false);
+      resolveUploadGate({ publicKey: null, userId: null }, privacyFolder),
+    ).toEqual({ action: "refuse", reason: "no-key" });
+    expect(
+      resolveUploadGate({ publicKey: "pub", userId: null }, privacyFolder),
+    ).toEqual({ action: "refuse", reason: "no-key" });
   });
 
   it("does NOT re-encrypt an already-encrypted item", () => {

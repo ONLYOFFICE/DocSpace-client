@@ -34,9 +34,8 @@
  */
 
 import sumBy from "lodash/sumBy";
-import { RoomsType } from "@docspace/shared/enums";
 import {
-  shouldEncryptUpload,
+  resolveUploadGate,
   willEncryptUploadItem,
 } from "@docspace/shared/services/private-room/encrypted-upload";
 import {
@@ -133,15 +132,10 @@ export function getUserEncryptionKeysImpl(self: UploadDataStore): {
 }
 
 export function shouldEncryptCurrentUploadImpl(self: UploadDataStore) {
-  const isPrivate = self.treeFoldersStore.isPrivacyFolder;
-  const roomType = isPrivate
-    ? RoomsType.CustomRoom
-    : self.selectedFolderStore.roomType;
   const { publicKey, userId } = self.getUserEncryptionKeys();
   return (
-    shouldEncryptUpload(roomType as RoomsType, isPrivate) &&
-    !!publicKey &&
-    !!userId
+    resolveUploadGate({ publicKey, userId }, self.getUploadFolderContext())
+      .action === "encrypt"
   );
 }
 

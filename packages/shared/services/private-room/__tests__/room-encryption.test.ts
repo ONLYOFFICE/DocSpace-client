@@ -1357,6 +1357,42 @@ describe("verifyMemberKeys", () => {
     expect(second.skipped).toHaveLength(1);
   });
 
+  it("Unanswered request is not a refusal: waiting requests get the wrap once the user accepts", async () => {
+    await verifyMemberKeys([{ userId: BOB, publicKey: pubB64(bob) }], {
+      scopeUserId: ALICE,
+    });
+    const waiting: Array<(d: "accept" | "refuse") => void> = [];
+    const resolver = vi.fn(
+      () =>
+        new Promise<"accept" | "refuse">((resolve) => {
+          waiting.push(resolve);
+        }),
+    );
+    const refusals = new Set<string>();
+    const swapped = [{ userId: BOB, publicKey: pubB64(carol) }];
+
+    const first = verifyMemberKeys(swapped, {
+      scopeUserId: ALICE,
+      resolver,
+      refusals,
+    });
+    const second = verifyMemberKeys(swapped, {
+      scopeUserId: ALICE,
+      resolver,
+      refusals,
+    });
+    await vi.waitFor(() => expect(waiting).toHaveLength(2));
+    expect(refusals.size).toBe(0);
+
+    for (const decide of waiting) decide("accept");
+    const results = await Promise.all([first, second]);
+
+    expect(results.map((r) => r.verified.length)).toEqual([1, 1]);
+    expect(results.map((r) => r.skipped)).toEqual([[], []]);
+    expect(refusals.size).toBe(0);
+    expect(await pinnedKeys(BOB)).toContain(pubB64(carol));
+  });
+
   it("falls back to the registered key-change handler", async () => {
     await verifyMemberKeys([{ userId: BOB, publicKey: pubB64(bob) }], {
       scopeUserId: ALICE,

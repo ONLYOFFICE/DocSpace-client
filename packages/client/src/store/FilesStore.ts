@@ -1429,6 +1429,7 @@ class FilesStore {
       roomsFilter: this.roomsFilter,
       filterType: this.filterType,
       filterSearch: this.filterSearch,
+      filter: this.filter,
     });
 
   createFile = async (

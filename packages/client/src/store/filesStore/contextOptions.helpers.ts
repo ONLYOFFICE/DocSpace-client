@@ -75,6 +75,7 @@ export type BuildContextOptionsDeps = {
   roomsFilter: FilesStore["roomsFilter"];
   filterType: FilesStore["filterType"];
   filterSearch: FilesStore["filterSearch"];
+  filter: FilesStore["filter"];
 };
 
 export const buildContextOptions = (
@@ -667,7 +668,9 @@ export const buildContextOptions = (
         isRecentFolder ||
         isFavoritesFolder ||
         ((isMyFolder || isRoomsSection) &&
-          (deps.filterType || deps.filterSearch))
+          (deps.filterType ||
+            deps.filterSearch ||
+            deps.filter.hasMetadataFilter()))
       )
     ) {
       fileOptions = removeOptions(fileOptions, ["open-location"]);
@@ -1238,7 +1241,9 @@ export const buildContextOptions = (
       isRecentFolder ||
       isFavoritesFolder ||
       ((isMyFolder || isRoomsSection) &&
-        (deps.filterType || deps.filterSearch))
+        (deps.filterType ||
+          deps.filterSearch ||
+          deps.filter.hasMetadataFilter()))
     )
   ) {
     folderOptions = removeOptions(folderOptions, ["open-location"]);

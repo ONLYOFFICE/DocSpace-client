@@ -688,5 +688,40 @@ export const encryptedFilesHandlers = (
         });
       },
     ),
+
+    /**
+     * Mirrors OperationController.DeleteBatchItems.
+     * @see server/products/ASC.Files/Server/Api/OperationController.cs (HttpPut "fileops/delete")
+     *
+     * Removes the listed files from the mock and answers with one operation
+     * that is already finished (FileOperationType.Delete = 2), so the client
+     * does not poll `fileops` for progress.
+     */
+    http.put(`${apiBase}/files/fileops/delete`, async ({ request }) => {
+      const body = (await request.json()) as {
+        fileIds?: (number | string)[];
+        folderIds?: (number | string)[];
+        immediately?: boolean;
+      };
+      requests.push({
+        method: "PUT",
+        url: new URL(request.url).pathname,
+        body,
+      });
+      const fileIds = (body.fileIds ?? []).map(Number);
+      for (const id of fileIds) files.delete(id);
+      return okResponse([
+        {
+          id: `mock-delete-${requests.length}`,
+          Operation: 2,
+          progress: 100,
+          error: "",
+          processed: String(fileIds.length),
+          finished: true,
+          files: [],
+          folders: [],
+        },
+      ]);
+    }),
   ];
 };

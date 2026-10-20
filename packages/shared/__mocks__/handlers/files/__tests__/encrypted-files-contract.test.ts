@@ -231,3 +231,37 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors S
     expect(res.status).toBe(404);
   });
 });
+
+describe("PUT /files/fileops/delete", () => {
+  const DELETE_URL = `${BASE_URL}:${PORT}/${API_PREFIX}/files/fileops/delete`;
+
+  it("removes the listed files and answers with a finished delete operation", async () => {
+    handle.current!.setFiles([
+      { id: 5, title: "gone.txt", encrypted: true, fileKeys: [] },
+      { id: 6, title: "kept.txt", encrypted: true, fileKeys: [] },
+    ]);
+
+    const res = await fetch(DELETE_URL, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        folderIds: [],
+        fileIds: [5],
+        deleteAfter: false,
+        immediately: true,
+        returnSingleOperation: true,
+      }),
+    });
+    const body = (await res.json()) as {
+      response: Array<{ Operation: number; finished: boolean; error: string }>;
+    };
+
+    expect(body.response).toHaveLength(1);
+    expect(body.response[0]).toMatchObject({
+      Operation: 2,
+      finished: true,
+      error: "",
+    });
+    expect(handle.current!.getFiles().map((f) => f.id)).toEqual([6]);
+  });
+});

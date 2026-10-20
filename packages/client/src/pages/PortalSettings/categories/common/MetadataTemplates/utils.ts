@@ -224,6 +224,23 @@ export const settleRequests = async (
   if (failure) throw failure.reason;
 };
 
+export const settleInOrder = async (
+  steps: (() => Promise<unknown>[])[],
+  onApplied: () => void,
+) => {
+  const failures: unknown[] = [];
+
+  for (const step of steps) {
+    try {
+      await settleRequests(step(), onApplied);
+    } catch (e) {
+      failures.push(e);
+    }
+  }
+
+  if (failures.length) throw failures[0];
+};
+
 export const toFieldRequest = (
   field: TFieldDraft,
   order: number,

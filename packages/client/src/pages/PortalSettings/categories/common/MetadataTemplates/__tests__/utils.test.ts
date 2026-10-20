@@ -50,6 +50,7 @@ import {
   isValidField,
   moveItem,
   removeOption,
+  settleInOrder,
   settleRequests,
   toMoveIndex,
   setFieldType,
@@ -230,6 +231,49 @@ describe("settleRequests", () => {
     expect(onApplied).toHaveBeenCalledTimes(1);
     await settleRequests([], onApplied);
     expect(onApplied).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("settleInOrder", () => {
+  it("runs every step in order after a failed one and fails with the first error", async () => {
+    const onApplied = vi.fn();
+    const calls: string[] = [];
+    const step = (name: string, error?: string) => () => {
+      calls.push(name);
+      return [error ? Promise.reject(new Error(error)) : Promise.resolve(name)];
+    };
+
+    await expect(
+      settleInOrder(
+        [
+          step("remove", "in use"),
+          step("update", "type locked"),
+          step("create"),
+        ],
+        onApplied,
+      ),
+    ).rejects.toThrow("in use");
+    expect(calls).toEqual(["remove", "update", "create"]);
+    expect(onApplied).toHaveBeenCalledTimes(1);
+  });
+
+  it("starts a step only after the previous one settled", async () => {
+    let isFirstDone = false;
+    const first = () => [
+      new Promise((resolve) =>
+        setTimeout(() => {
+          isFirstDone = true;
+          resolve(null);
+        }, 10),
+      ),
+    ];
+    const second = vi.fn(() => {
+      expect(isFirstDone).toBe(true);
+      return [Promise.resolve(null)];
+    });
+
+    await settleInOrder([first, second], vi.fn());
+    expect(second).toHaveBeenCalledTimes(1);
   });
 });
 

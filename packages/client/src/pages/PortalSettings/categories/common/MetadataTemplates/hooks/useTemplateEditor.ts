@@ -58,30 +58,28 @@ import {
   getTemplateChanges,
   isValidField,
   moveItem,
-  settleRequests,
+  settleInOrder,
   toFieldRequest,
   toTemplateDraft,
   upsertField,
 } from "../utils";
 
-const applyFieldChanges = async (
+const applyFieldChanges = (
   templateId: number,
   { updated, removed, created }: TTemplateChanges,
   onApplied: () => void,
-) => {
-  await settleRequests(
-    updated.map(({ id, data }) => updateMetadataField(templateId, id, data)),
+) =>
+  settleInOrder(
+    [
+      () => removed.map((id) => deleteMetadataField(templateId, id)),
+      () =>
+        updated.map(({ id, data }) =>
+          updateMetadataField(templateId, id, data),
+        ),
+      () => created.map((data) => createMetadataField(templateId, data)),
+    ],
     onApplied,
   );
-  await settleRequests(
-    removed.map((id) => deleteMetadataField(templateId, id)),
-    onApplied,
-  );
-  await settleRequests(
-    created.map((data) => createMetadataField(templateId, data)),
-    onApplied,
-  );
-};
 
 export const useTemplateEditor = (
   template: TMetadataTemplate | null,

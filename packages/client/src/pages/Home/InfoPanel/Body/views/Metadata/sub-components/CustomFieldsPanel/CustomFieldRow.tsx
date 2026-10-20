@@ -56,7 +56,7 @@ type CustomFieldRowProps = {
   isNameTaken: boolean;
   canRename?: boolean;
   onChange: (draft: TCustomFieldDraft) => void;
-  onRemove: () => void;
+  onRemove?: () => void;
 };
 
 const CustomFieldRow = ({
@@ -99,10 +99,14 @@ const CustomFieldRow = ({
         removeMargin
         labelText={draft.name}
       >
-        <div className={styles.inputRow}>
-          {valueInput}
-          {removeButton}
-        </div>
+        {onRemove ? (
+          <div className={styles.inputRow}>
+            {valueInput}
+            {removeButton}
+          </div>
+        ) : (
+          valueInput
+        )}
       </FieldContainer>
     );
   }

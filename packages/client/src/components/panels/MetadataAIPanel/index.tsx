@@ -98,7 +98,7 @@ const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
       drafts={drafts}
       metadata={metadata}
       onChange={changeDraft}
-      onRemove={removeDraft}
+      onRemove={isFill ? undefined : removeDraft}
     />
   ) : null;
 

@@ -56,7 +56,6 @@ import type {
 } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
 import {
   getChangedValues,
-  getCustomFieldChanges,
   getEntryKind,
   isTemplateFormValid,
   toCustomFieldDrafts,
@@ -70,6 +69,7 @@ import type {
 import {
   applyAICustomValues,
   applyAIValues,
+  getFillCustomFieldChanges,
   getFillNotFound,
   getMetadataAIError,
   getSkippedTitles,
@@ -104,6 +104,10 @@ export const useMetadataAIPanel = ({
   const [overwrite, setOverwrite] = useState(false);
 
   const controller = useRef<AbortController | null>(null);
+  const beforeRun = useRef<{
+    forms: TTemplateForm[];
+    drafts: TCustomFieldDraft[];
+  } | null>(null);
 
   const kind = getEntryKind(item);
   const id = Number(item.id);
@@ -133,6 +137,13 @@ export const useMetadataAIPanel = ({
       { kind, id, dryRun: true, overwrite, prompt: prompt.trim() || undefined },
       signal,
     );
+
+    if (!result.sources.length) {
+      setError(t("Metadata:AIAllFieldsSet"));
+      setPhase("ready");
+      return;
+    }
+
     const nextForms = applyAIValues(forms, result.filled, overwrite);
     const nextDrafts = applyAICustomValues(drafts, result.filled);
 
@@ -167,6 +178,7 @@ export const useMetadataAIPanel = ({
 
     const abort = new AbortController();
     controller.current = abort;
+    beforeRun.current = { forms, drafts };
 
     setError("");
     setPhase("analyzing");
@@ -200,12 +212,10 @@ export const useMetadataAIPanel = ({
     setDrafts((prev) => prev.filter((draft) => draft.key !== key));
 
   const discard = () => {
-    if (!metadata) return;
+    if (!beforeRun.current) return;
 
-    setForms(getTemplateForms(metadata));
-    setDrafts(
-      mode === "fill" ? toCustomFieldDrafts(metadata.customFields) : [],
-    );
+    setForms(beforeRun.current.forms);
+    setDrafts(beforeRun.current.drafts);
     setSummary(null);
     setPhase("ready");
   };
@@ -213,7 +223,7 @@ export const useMetadataAIPanel = ({
   const values = forms.flatMap(getChangedValues);
   const customChanges =
     mode === "fill" && metadata
-      ? getCustomFieldChanges(metadata.customFields, drafts)
+      ? getFillCustomFieldChanges(metadata.customFields, drafts)
       : [];
 
   const canSave =

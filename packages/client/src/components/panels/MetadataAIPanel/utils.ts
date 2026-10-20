@@ -42,6 +42,7 @@ import type {
   TMetadataAIUnresolvedField,
 } from "@docspace/shared/api/ai/types";
 import type {
+  TCustomField,
   TCustomFieldRequest,
   TEntryMetadata,
 } from "@docspace/shared/api/metadata/types";
@@ -59,6 +60,7 @@ import type {
 import {
   canEditMetadata,
   createTemplateForm,
+  getCustomFieldChanges,
   getVisibleTemplates,
   isCustomFieldNameTaken,
   isSameInput,
@@ -167,6 +169,12 @@ export const applyAICustomValues = (
 
   return { drafts: next, count };
 };
+
+export const getFillCustomFieldChanges = (
+  fields: TCustomField[],
+  drafts: TCustomFieldDraft[],
+) =>
+  getCustomFieldChanges(fields, drafts).filter(({ value }) => value !== null);
 
 export const getFillNotFound = (
   unresolved: TMetadataAIUnresolvedField[],

@@ -45,7 +45,7 @@ type CustomFieldListProps = {
   drafts: TCustomFieldDraft[];
   metadata: TEntryMetadata;
   onChange: (draft: TCustomFieldDraft) => void;
-  onRemove: (key: string) => void;
+  onRemove?: (key: string) => void;
 };
 
 const CustomFieldList = ({
@@ -66,7 +66,7 @@ const CustomFieldList = ({
             drafts,
           )}
           onChange={onChange}
-          onRemove={() => onRemove(draft.key)}
+          onRemove={onRemove ? () => onRemove(draft.key) : undefined}
         />
       ))}
     </div>

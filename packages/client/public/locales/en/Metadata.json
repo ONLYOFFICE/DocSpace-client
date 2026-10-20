@@ -3,6 +3,7 @@
   "AddField": "Add field",
   "AddMetadata": "Add metadata",
   "AddOption": "Add option",
+  "AIAllFieldsSet": "All fields already have values. Select Overwrite existing values to replace them.",
   "AIBusy": "The AI provider is busy. Try again in a minute.",
   "AIFailed": "AI could not process the request. Try again later.",
   "AIFillDescription": "AI will analyze the content and suggest values for empty fields. Review the suggestions before saving.",

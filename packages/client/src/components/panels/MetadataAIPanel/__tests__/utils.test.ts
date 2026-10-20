@@ -39,13 +39,17 @@ import { FolderType, MetadataFieldType } from "@docspace/shared/enums";
 import type { TEntryMetadata } from "@docspace/shared/api/metadata/types";
 import type { TTranslation } from "@docspace/shared/types";
 
-import { getChangedValues } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/utils";
+import {
+  getChangedValues,
+  toCustomFieldDrafts,
+} from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/utils";
 
 import type { TMetadataAIContext, TMetadataAIItem } from "../types";
 import {
   applyAICustomValues,
   applyAIValues,
   canReadAsText,
+  getFillCustomFieldChanges,
   getFillNotFound,
   getMetadataAIError,
   getMetadataAIOptions,
@@ -164,6 +168,18 @@ describe("context menu options", () => {
 });
 
 describe("fill", () => {
+  it("saves changed custom values but never deletes a custom field", () => {
+    const [reviewer] = toCustomFieldDrafts(metadata.customFields);
+    const changes = (value: string) =>
+      getFillCustomFieldChanges(metadata.customFields, [
+        { ...reviewer, value },
+      ]);
+
+    expect(changes("Bob")).toEqual([{ name: "Reviewer", value: "Bob" }]);
+    expect(changes("")).toEqual([]);
+    expect(getFillCustomFieldChanges(metadata.customFields, [])).toEqual([]);
+  });
+
   const forms = getTemplateForms(metadata);
 
   it("edits the visible templates only", () => {

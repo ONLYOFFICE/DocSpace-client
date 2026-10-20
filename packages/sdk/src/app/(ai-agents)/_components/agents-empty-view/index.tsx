@@ -61,7 +61,7 @@
 
 "use client";
 
-import React, { useMemo } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
@@ -176,21 +176,18 @@ const AgentsEmptyView = () => {
               "Ask your portal admin to enable AI agents in {{productName}}.",
           });
 
-  const icon = useMemo(() => {
-    if (aiReady) {
-      return useLightIcon ? (
-        <EmptyAIAgentsLightIcon />
-      ) : (
-        <EmptyAIAgentsDarkIcon />
-      );
-    }
-
-    return useLightIcon ? (
-      <AIChatNotAvailableLightIcon />
+  const icon = aiReady ? (
+    useLightIcon ? (
+      <EmptyAIAgentsLightIcon />
     ) : (
-      <AIChatNotAvailableDarkIcon />
-    );
-  }, [useLightIcon, aiReady]);
+      <EmptyAIAgentsDarkIcon />
+    )
+  ) : useLightIcon ? (
+    <AIChatNotAvailableLightIcon />
+  ) : (
+    <AIChatNotAvailableDarkIcon />
+  );
+
   // Actions:
   // - AI-enabled + admin/owner → [createAIAgent] item.
   // - AI-disabled + admin/owner → ["Go to settings"] button targeting the

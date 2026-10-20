@@ -26,7 +26,7 @@
 ## 5. Move out of a private room deletes the source on success
 
 - [x] 5.1 Extend `copyEncryptedFilesToFolder` with a `deleteSourceOnSuccess` option that permanently deletes each source file after its decrypted copy is finalized, collecting failures; verify with unit tests asserting deletion order and that a failed copy leaves its source.
-- [ ] 5.2 Pass the option from the move paths (drag, dialog, clipboard cut) and keep copy paths unchanged; verify with the resolver tests from 4.1 and a store test for the move path.
+- [x] 5.2 Pass the option from the move paths (drag, dialog, clipboard cut) and keep copy paths unchanged; verify with the resolver tests from 4.1 and a store test for the move path.
 - [ ] 5.3 Add `Common:EncryptedMovePartialFailure` with the failed names, translate it, and verify the locale tests pass.
 - [ ] 5.4 Add an E2E case to `packages/client/__tests__/encrypted-file-ui.spec.ts` moving a file out of a private room and asserting the source disappears; verify with Playwright. Blocked on `private-rooms-mock-fidelity`: the case is written as `test.fixme` and is enabled once the mocks answer like the server.
 

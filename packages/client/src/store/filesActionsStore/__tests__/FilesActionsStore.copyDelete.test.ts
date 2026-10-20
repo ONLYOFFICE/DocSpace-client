@@ -233,3 +233,39 @@ describe("FilesActionsStore - private-room transfer plan with a known destinatio
     expect(plan).toEqual({ kind: "refuse-into" });
   });
 });
+
+describe("FilesActionsStore - drag out of a private room", () => {
+  it.each([
+    [true, true],
+    [false, false],
+  ])(
+    "dragging files with Move=%s decrypts them with deleteSourceOnSuccess=%s",
+    (canMove, deleteSourceOnSuccess) => {
+      const item = {
+        id: 1,
+        title: "a.docx",
+        isFolder: false,
+        security: { Move: canMove },
+      };
+      const store = createTestFilesActionsStore({
+        treeFoldersStore: { isPrivacyFolder: true },
+        selectedFolderStore: { rootFolderId: 10 },
+        filesStore: { selection: [item], bufferSelection: null },
+      });
+      const copy = vi.fn(async () => {});
+      store.copyEncryptedFilesToFolder = copy;
+
+      store.moveDragItems(5, "Docs", {
+        id: 5,
+        private: false,
+        rootFolderId: 20,
+      } as never);
+
+      expect(copy).toHaveBeenCalledWith(
+        [item],
+        5,
+        expect.objectContaining({ deleteSourceOnSuccess }),
+      );
+    },
+  );
+});

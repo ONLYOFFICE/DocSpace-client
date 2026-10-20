@@ -45,6 +45,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/selector";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
 import { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import type FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 
 export type FilesSelectorProps = TSelectorHeader & {
 	isPanelVisible: boolean;
@@ -110,8 +111,15 @@ export type FilesSelectorProps = TSelectorHeader & {
 	copyEncryptedFilesToFolder: (
 		items: TFile[],
 		destFolderId: string | number,
-		destInfo: { private?: boolean; rootFolderId?: number; roomType?: number },
+		destInfo: {
+			private?: boolean;
+			rootFolderId?: number;
+			roomType?: number;
+			deleteSourceOnSuccess?: boolean;
+		},
 	) => Promise<void>;
+	planPrivateTransfer: FilesActionStore["planPrivateTransfer"];
+	runPrivateTransferPlan: FilesActionStore["runPrivateTransferPlan"];
 	sourceIsPrivate?: boolean;
 	sourceInPrivateRoom?: boolean;
 	privateRoomId?: number | string;

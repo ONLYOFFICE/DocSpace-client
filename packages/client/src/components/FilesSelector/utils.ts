@@ -34,13 +34,17 @@
  */
 
 import {
+  TFile,
   TFileSecurity,
+  TFolder,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
+
+import type { TPrivateTransferPlan } from "SRC_DIR/store/filesActionsStore/copyMove.helpers";
 
 export const getHeaderLabel = (
   t: TTranslation,
@@ -157,4 +161,71 @@ export const getIsDisabled = (
   }
 
   return false;
+};
+
+export type TSelectorTransfer =
+  | { kind: "refuse" }
+  | { kind: "generic" }
+  | {
+      kind: "encrypted";
+      encryptedFiles: TFile[];
+      fileIds: number[];
+      folderIds: number[];
+      movesIntoItself: boolean;
+      refusedFolders: boolean;
+      deleteSourceOnSuccess: boolean;
+    };
+
+/**
+ * Splits the picker selection for a copy or move according to the
+ * private-room transfer plan: encrypted files go through the client-side
+ * copy, plain files and allowed folders through the server-side transfer.
+ */
+export const getSelectorTransfer = (params: {
+  plan: TPrivateTransferPlan;
+  selection: (TFile | TFolder | { id: number | string })[];
+  selectedItemId: string | number | undefined;
+  isCopy?: boolean;
+  isMove?: boolean;
+}): TSelectorTransfer => {
+  const { plan, selection, selectedItemId, isCopy, isMove } = params;
+
+  if (plan.kind === "refuse-into" || plan.kind === "refuse-folder-out") {
+    return { kind: "refuse" };
+  }
+
+  const isFileItem = (item: (typeof selection)[number]) =>
+    ("fileExst" in item && !!item.fileExst) ||
+    ("contentLength" in item && !!item.contentLength);
+  const encryptedFiles = selection.filter(
+    (item) => isFileItem(item) && (item as TFile).encrypted === true,
+  ) as TFile[];
+
+  const decryptOut = plan.kind === "decrypt-out";
+  const sameRoomCopy =
+    plan.kind === "same-room" && !!isCopy && encryptedFiles.length > 0;
+  if (!decryptOut && !sameRoomCopy) return { kind: "generic" };
+
+  const fileIds: number[] = [];
+  const folderIds: number[] = [];
+  let movesIntoItself = false;
+  for (const item of selection) {
+    if (isFileItem(item)) {
+      if ((item as TFile).encrypted !== true) fileIds.push(item.id as number);
+    } else if (item.id === selectedItemId) {
+      movesIntoItself = true;
+    } else if (!decryptOut) {
+      folderIds.push(item.id as number);
+    }
+  }
+
+  return {
+    kind: "encrypted",
+    encryptedFiles,
+    fileIds,
+    folderIds,
+    movesIntoItself,
+    refusedFolders: decryptOut && plan.refusedFolders.length > 0,
+    deleteSourceOnSuccess: decryptOut && !!isMove,
+  };
 };

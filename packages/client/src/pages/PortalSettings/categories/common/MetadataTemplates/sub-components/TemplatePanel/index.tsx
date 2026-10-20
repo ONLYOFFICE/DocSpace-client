@@ -97,6 +97,7 @@ const TemplatePanel = ({ template, onClose, onSaved }: TemplatePanelProps) => {
         withBodyScroll
         displayType={ModalDialogType.aside}
         isBackButton={!!fieldForm}
+        isCloseable={!isDeleteConfirmVisible}
         onBackClick={closeField}
         onClose={onClose}
         dataTestId="metadata_template_panel"

@@ -139,3 +139,62 @@ test.describe("Private room — entry warning toast", () => {
     await expect(toast).toBeHidden();
   });
 });
+
+test.describe("Private room — upload without a key", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Uploader without a key: the file is refused and no bytes are sent", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        handle: filesHandle,
+      }),
+    );
+
+    const sessionRequests: string[] = [];
+    page.on("request", (req) => {
+      if (new RegExp(`/files/${ROOM_ID}/session`).test(req.url())) {
+        sessionRequests.push(req.url());
+      }
+    });
+
+    await page.goto(`${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.waitForResponse(
+      (res) =>
+        res.request().method() === "GET" &&
+        /\/files\/9100(\?|$)/.test(res.url()) &&
+        res.ok(),
+      { timeout: 15000 },
+    );
+
+    await page.locator("#customFileInput").first().setInputFiles({
+      name: "secret.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from("must never leave the browser"),
+    });
+
+    const refusal = page.getByTestId("toast-content").filter({
+      hasText:
+        /Set up your encryption keys in Profile before uploading files to a private room|EncryptionKeysRequiredForUpload/,
+    });
+    await expect(refusal).toBeVisible({ timeout: 10000 });
+    expect(sessionRequests).toEqual([]);
+    expect(filesHandle.current!.getFiles()).toHaveLength(0);
+  });
+});

@@ -10,7 +10,7 @@
 - [x] 2.1 In `packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts` and `selectors.helpers.ts`, replace the `publicKey && userId` short-circuit with the gate outcome: on `refuse`, mark the item failed with the localized reason and skip `startUploadSession`; verify with new cases in `packages/client/src/store/uploadDataStore/__tests__/UploadDataStore.encryption.test.ts` asserting no session is opened.
 - [x] 2.2 Trigger the device-setup hint when an upload is refused for `no-key`; verify with a unit test on the hint effect in `packages/client/src/components/EncryptionProviderWrapper.jsx` or its hook test.
 - [x] 2.3 Add `Common:EncryptionKeysRequiredForUpload` and `Common:EncryptionLockedUpload` to `public/locales/en/Common.json`, run `/translate-comments` then `/translate-locales`, and verify `cd common/tests && npx vitest run test/locales.test.js` passes.
-- [ ] 2.4 Add an E2E case to `packages/client/__tests__/private-room-access.spec.ts` where a key-less user drops a file into a private room and the upload panel shows the refusal; verify with `cd packages/client && pnpm exec playwright test __tests__/private-room-access.spec.ts`.
+- [x] 2.4 Add an E2E case to `packages/client/__tests__/private-room-access.spec.ts` where a key-less user drops a file into a private room and the upload panel shows the refusal; verify with `cd packages/client && pnpm exec playwright test __tests__/private-room-access.spec.ts`.
 
 ## 3. Dropped folder trees are refused
 

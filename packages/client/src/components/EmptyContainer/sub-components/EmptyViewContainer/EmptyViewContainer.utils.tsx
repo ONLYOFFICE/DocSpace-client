@@ -98,9 +98,6 @@ import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.default.folder
 import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
 import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 
-import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
-import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
-
 import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
 
@@ -549,9 +546,9 @@ export const getFolderIcon = (
       ],
       () =>
         isBaseTheme ? (
-          <ChatNoAccessRightsLightIcon />
+          <AIChatNotAvailableLightIcon />
         ) : (
-          <ChatNoAccessRightsDarkIcon />
+          <AIChatNotAvailableDarkIcon />
         ),
     )
     .with([FolderType.FormRoom, P._, P._], () =>
@@ -713,9 +710,9 @@ export const getRoomIcon = (
       ],
       () =>
         isBaseTheme ? (
-          <ChatNoAccessRightsLightIcon />
+          <AIChatNotAvailableLightIcon />
         ) : (
-          <ChatNoAccessRightsDarkIcon />
+          <AIChatNotAvailableDarkIcon />
         ),
     )
     .with(
@@ -910,4 +907,3 @@ export const helperOptions = (
     createUploadFromDeviceOption,
   };
 };
-

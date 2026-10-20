@@ -43,6 +43,7 @@ import {
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 
 import type { TTemplateItemProps } from "../../types";
 import { useContextOptions } from "../useContextOptions";
@@ -83,7 +84,7 @@ const TableRow = ({
       </TableCell>
       <TableCell>
         <Text className={styles.secondaryText} fontWeight={600} truncate>
-          {item.createBy.displayName}
+          {Encoder.htmlDecode(item.createBy.displayName)}
         </Text>
       </TableCell>
       <TableCell>

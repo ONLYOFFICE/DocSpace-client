@@ -38,6 +38,7 @@ import { useTranslation } from "react-i18next";
 import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 
 import type { TTemplateItemProps } from "../../types";
 import { useContextOptions } from "../useContextOptions";
@@ -74,7 +75,7 @@ const RowItem = ({
             fontWeight={600}
             truncate
           >
-            {`${fieldsCount} | ${item.createBy.displayName}`}
+            {`${fieldsCount} | ${Encoder.htmlDecode(item.createBy.displayName)}`}
           </Text>
         </div>
 

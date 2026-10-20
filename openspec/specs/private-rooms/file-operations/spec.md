@@ -7,7 +7,7 @@ Describes what a user can do with files and folders inside a private (end-to-end
 ## Requirements
 
 ### Requirement: Uploads into a private room are encrypted on the client
-The system SHALL encrypt each file on the client before it is uploaded into a private room when the user has an encryption key, wrap the file key for the uploader and for every member key the server lists for the room, and mark the uploaded file as encrypted.
+The system SHALL encrypt each file on the client before it is uploaded into a private room, wrap the file key for the uploader and for every member key the server lists for the room, and mark the uploaded file as encrypted. The system SHALL NOT send a file into a private room in any other form.
 
 #### Scenario: Member uploads a file
 - **WHEN** a user with an encryption key drops a file into a private room
@@ -15,7 +15,11 @@ The system SHALL encrypt each file on the client before it is uploaded into a pr
 
 #### Scenario: Uploader without a key
 - **WHEN** a user with no registered encryption key uploads into a private room
-- **THEN** the encryption step is skipped and the file is sent as received (current behaviour; no rejection is performed by the client)
+- **THEN** no bytes are sent, the item is marked failed in the upload panel with Common:EncryptionKeysRequiredForUpload, and the device-setup hint is shown
+
+#### Scenario: Uploader declines to unlock
+- **WHEN** the uploader has a key but cancels the unlock prompt when the upload starts
+- **THEN** no bytes are sent and the item is marked failed with Common:EncryptionLockedUpload
 
 ### Requirement: No conversion on private upload
 The system SHALL NOT offer or perform upload-time format conversion for files uploaded into a private room.
@@ -25,7 +29,7 @@ The system SHALL NOT offer or perform upload-time format conversion for files up
 - **THEN** the conversion prompt does not appear and the file is uploaded as is
 
 ### Requirement: Folder upload disabled in private rooms
-The system SHALL NOT offer the "Upload folder" action or the Shift+U hotkey inside a private room.
+The system SHALL NOT offer the "Upload folder" action or the Shift+U hotkey inside a private room, and SHALL refuse folder trees dropped onto a private room with Common:FolderUploadNotSupportedInPrivateRoom.
 
 #### Scenario: Shift+U pressed
 - **WHEN** the user presses Shift+U while a private room is open
@@ -33,7 +37,11 @@ The system SHALL NOT offer the "Upload folder" action or the Shift+U hotkey insi
 
 #### Scenario: Folders dropped on the view
 - **WHEN** the user drags a folder tree onto a private room
-- **THEN** the drop is handled by the generic folder-tree upload path (current behaviour; no private-room guard is applied)
+- **THEN** nothing is uploaded and Common:FolderUploadNotSupportedInPrivateRoom is shown
+
+#### Scenario: Files and folders dropped together
+- **WHEN** a drop onto a private room contains both files and folders
+- **THEN** the files are uploaded encrypted and the folders are refused with Common:FolderUploadNotSupportedInPrivateRoom
 
 ### Requirement: Re-import of a file downloaded without decryption
 The system SHALL recognise an uploaded file that is already in the encrypted container format, recover its original file key through the uploader's unlocked identity, and upload it without encrypting it a second time.
@@ -115,19 +123,23 @@ The system SHALL refuse to copy or move a folder out of a private room, showing 
 - **THEN** the folder is not transferred and Common:CannotTransferFolderFromPrivateRoom is shown
 
 ### Requirement: Files leaving a private room are decrypted
-The system SHALL, when files are copied or moved out of a private room, decrypt them on the client with the unlocked identity and upload them as plaintext to the destination, after showing a warning banner in the destination picker. The system SHALL report Common:EncryptedCopyFailed with the failed names on error.
+The system SHALL, when files are copied or moved out of a private room, decrypt them on the client with the unlocked identity and upload them as plaintext to the destination, after showing a warning banner in the destination picker. On move, the system SHALL delete each source file only after its decrypted copy succeeded. The system SHALL report Common:EncryptedCopyFailed with the failed names on error.
 
 #### Scenario: Copy to My documents
 - **WHEN** the user copies an encrypted file to a folder outside the room and confirms
 - **THEN** a decrypted copy with the original name appears in the destination
 
 #### Scenario: Move out of the room
-- **WHEN** the user chooses "Move" to a destination outside the room
-- **THEN** a decrypted copy is created in the destination and the source file is left in place (current behaviour)
+- **WHEN** the user chooses "Move" to a destination outside the room and every decrypted copy succeeds
+- **THEN** the decrypted copies appear in the destination and the source files are deleted from the private room
+
+#### Scenario: Move with a failed copy
+- **WHEN** the user moves several encrypted files out and one decrypted copy fails
+- **THEN** the sources of the successful copies are deleted, the failed source stays in place, and Common:EncryptedMovePartialFailure names it
 
 #### Scenario: Identity locked
 - **WHEN** the user declines to unlock when the transfer starts
-- **THEN** no file is transferred
+- **THEN** no file is transferred and no source is deleted
 
 ### Requirement: Copy within the same private room
 The system SHALL allow copying an encrypted file to the root of the same private room and SHALL give the copy a copy suffix in its name.
@@ -282,12 +294,32 @@ The system SHALL NOT show sharing-settings, copy-shared-link, manage-links, link
 - **WHEN** the context menu of a folder inside a private room is built
 - **THEN** none of the listed entries is present
 
-### Requirement: Clipboard hotkeys use the generic transfer path
-The system SHALL route Ctrl+C, Ctrl+X and Ctrl+V between folders through the generic copy and move operation (current behaviour; the private-room transfer guards of the drag and dialog paths are not applied there).
+### Requirement: Clipboard hotkeys follow the private-room transfer rules
+The system SHALL apply the private-room transfer rules to Ctrl+X and Ctrl+V exactly as to drag-and-drop and the copy/move dialog: transfer into a private room is refused, folders cannot leave a private room, files leaving are decrypted on the client, and items cut and pasted inside the same private room are moved by the server without decryption. Ctrl+C puts no private-room item on the clipboard, because the server denies copying them.
 
 #### Scenario: Paste with hotkey
-- **WHEN** items are copied with Ctrl+C and pasted with Ctrl+V into another folder
-- **THEN** the generic server-side copy operation is requested regardless of whether source or destination is a private room
+- **WHEN** items copied from a non-private location are pasted with Ctrl+V into a private room
+- **THEN** nothing is transferred and Common:CannotTransferToPrivateRoom is shown
+
+#### Scenario: Cut and paste out of a private room
+- **WHEN** encrypted files are cut with Ctrl+X and pasted with Ctrl+V outside the room
+- **THEN** decrypted copies appear in the destination and the sources are deleted after the copies succeed
+
+#### Scenario: Cut and paste a file another member uploaded
+- **WHEN** a file uploaded by another room member is cut with Ctrl+X, the user opens a folder outside the room and pastes with Ctrl+V
+- **THEN** the file is decrypted with that member's public key, the decrypted copy appears in the destination and the source is deleted
+
+#### Scenario: Folder cut out of a private room
+- **WHEN** a folder inside a private room is cut and pasted outside it
+- **THEN** the folder is not transferred and Common:CannotTransferFolderFromPrivateRoom is shown
+
+#### Scenario: Paste within the same private room
+- **WHEN** encrypted files are cut with Ctrl+X and pasted into a subfolder of the same private room
+- **THEN** the server moves them in place and no decryption to plaintext happens
+
+#### Scenario: Copy hotkey inside a private room
+- **WHEN** the user presses Ctrl+C on items in a private room
+- **THEN** nothing is added to the clipboard
 
 ### Requirement: Create hotkeys respect keys
 The system SHALL ignore the file-creation hotkeys inside a private room when the user cannot create encrypted files.
@@ -309,3 +341,10 @@ The system SHALL show the private badge on every encrypted file and on every pri
 #### Scenario: Private room in the rooms list
 - **WHEN** the rooms list contains a private room
 - **THEN** its icon carries the private badge
+
+### Requirement: Sender keys of files leaving a private room
+The system SHALL look up the public keys of a file's senders in the source room's roster together with the file's own public keys when it decrypts the file to take it out of the room, so a file another member uploaded decrypts even where the source room is not known.
+
+#### Scenario: Source room not known
+- **WHEN** a file another member uploaded is copied or moved out of the room through a path that does not know the source room
+- **THEN** the file is decrypted with that member's public key taken from the file's own public keys, and no source is deleted unless the copy succeeded

@@ -33,7 +33,7 @@ The system SHALL NOT offer the "Upload folder" action or the Shift+U hotkey insi
 - **THEN** the files are uploaded encrypted and the folders are refused with Common:FolderUploadNotSupportedInPrivateRoom
 
 ### Requirement: Files leaving a private room are decrypted
-The system SHALL, when files are copied or moved out of a private room, decrypt them on the client with the unlocked identity and upload them as plaintext to the destination, after showing a warning banner in the destination picker. The system SHALL take the senders' public keys from the source room's roster together with the file's own public keys, so a file another member uploaded decrypts even where the source room is not known. On move, the system SHALL delete each source file only after its decrypted copy succeeded. The system SHALL report Common:EncryptedCopyFailed with the failed names on error.
+The system SHALL, when files are copied or moved out of a private room, decrypt them on the client with the unlocked identity and upload them as plaintext to the destination, after showing a warning banner in the destination picker. On move, the system SHALL delete each source file only after its decrypted copy succeeded. The system SHALL report Common:EncryptedCopyFailed with the failed names on error.
 
 #### Scenario: Copy to My documents
 - **WHEN** the user copies an encrypted file to a folder outside the room and confirms
@@ -77,6 +77,15 @@ The system SHALL apply the private-room transfer rules to Ctrl+X and Ctrl+V exac
 #### Scenario: Copy hotkey inside a private room
 - **WHEN** the user presses Ctrl+C on items in a private room
 - **THEN** nothing is added to the clipboard
+
+## ADDED Requirements
+
+### Requirement: Sender keys of files leaving a private room
+The system SHALL look up the public keys of a file's senders in the source room's roster together with the file's own public keys when it decrypts the file to take it out of the room, so a file another member uploaded decrypts even where the source room is not known.
+
+#### Scenario: Source room not known
+- **WHEN** a file another member uploaded is copied or moved out of the room through a path that does not know the source room
+- **THEN** the file is decrypted with that member's public key taken from the file's own public keys, and no source is deleted unless the copy succeeded
 
 ## RENAMED Requirements
 

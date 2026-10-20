@@ -391,40 +391,53 @@ export const encryptedFilesHandlers = (
     ),
 
     /**
-     * Mirrors FilesController.SetEncryptionInfoAsync.
-     * @see server/products/ASC.Files/Server/Api/FilesController.cs (HttpPut "{fileId}/access")
-     *
-     * Replaces the file's per-recipient wrapped DEKs. Body is either
-     * EncryptedFileKey[] (legacy) or { keys: EncryptedFileKey[] }.
+     * Mirrors FilesController.SetEncryptionInfoAsync ->
+     * FileStorageService.SetEncryptionInfoAsync -> FileDao.SetFileKey
+     * (HttpPut "{fileId}/access"). The body binds to
+     * `[FromBody] IEnumerable<AccessRequestKeyDto>`, so it is a bare array;
+     * the mock answers anything else with 400. SetFileKey deletes the rows of
+     * the listed users and inserts the new ones, so every other user's row
+     * stays. The action returns nothing, so the envelope has no `response`.
+     * A missing file is an InvalidOperationException, so 403. The server's
+     * read, private-room and create-right checks are not modelled here.
      */
     http.put(
       `${apiBase}/files/:fileId(\\d+)/access`,
       async ({ params, request }) => {
         const fileId = Number(params.fileId);
-        const body = (await request.json()) as
-          | EncryptedFileKey[]
-          | { keys?: EncryptedFileKey[] };
-        const keys = Array.isArray(body) ? body : (body.keys ?? []);
+        const body = (await request.json()) as unknown;
         requests.push({
           method: "PUT",
           url: new URL(request.url).pathname,
-          body: keys,
+          body,
         });
+        if (!Array.isArray(body)) {
+          return errorResponse(400, "The keys must be sent as an array");
+        }
+        const keys = body as EncryptedFileKey[];
         const f = files.get(fileId);
-        if (!f) return errorResponse(404, `file ${fileId} not found`);
-        const seenUsers = new Set<string>();
+        if (!f) return errorResponse(403, `file ${fileId} not found`);
+        // Two entries for one user collide on the (tenant, file, user) key;
+        // the mock refuses the whole write like the failed transaction.
+        const listed = new Set<string>();
         for (const k of keys) {
           const uid = String(k.userId);
-          if (seenUsers.has(uid)) {
+          if (listed.has(uid)) {
             return errorResponse(
               403,
               `duplicate DbFileKeys row for user ${uid} on file ${fileId}`,
             );
           }
-          seenUsers.add(uid);
+          listed.add(uid);
         }
-        f.fileKeys = keys;
-        return okResponse({ keys });
+        f.fileKeys = [
+          ...f.fileKeys.filter((k) => !listed.has(String(k.userId))),
+          ...keys,
+        ];
+        for (const uid of listed) createdOn.delete(`${fileId}:${uid}`);
+        return new Response(JSON.stringify({ status: 0, statusCode: 200 }), {
+          headers: { "Content-Type": "application/json" },
+        });
       },
     ),
 

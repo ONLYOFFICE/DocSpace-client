@@ -148,36 +148,68 @@ describe("encryptedFiles mock — PUT /files/{fileId}/access (mirrors FilesContr
       { userId: BOB_ID, publicKeyId: "bob-pk", privateKeyEnc: "newB" },
     ];
 
-    await fetch(FILE_ACCESS_URL(2), {
+    const res = await fetch(FILE_ACCESS_URL(2), {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newKeys),
     });
 
+    expect(res.status).toBe(200);
+    expect(await res.json()).not.toHaveProperty("response");
     expect(handle.current!.getFile(2).fileKeys).toEqual(newKeys);
   });
 
-  it("accepts { keys: [...] } envelope shape", async () => {
+  it("keeps the entry of a user the write does not list", async () => {
     handle.current!.setFiles([
       {
-        id: 3,
-        title: "y.txt",
+        id: 5,
+        title: "z.txt",
         encrypted: true,
-        fileKeys: [],
+        fileKeys: [
+          { userId: ALICE_ID, publicKeyId: "alice-pk", privateKeyEnc: "a" },
+          { userId: BOB_ID, publicKeyId: "bob-pk", privateKeyEnc: "b" },
+        ],
       },
     ]);
 
-    const keys = [
-      { userId: ALICE_ID, publicKeyId: "pk", privateKeyEnc: "enc" },
-    ];
-
-    await fetch(FILE_ACCESS_URL(3), {
+    await fetch(FILE_ACCESS_URL(5), {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ keys }),
+      body: JSON.stringify([
+        { userId: ALICE_ID, publicKeyId: "alice-pk", privateKeyEnc: "a2" },
+      ]),
     });
 
-    expect(handle.current!.getFile(3).fileKeys).toEqual(keys);
+    expect(handle.current!.getFile(5).fileKeys).toEqual([
+      { userId: BOB_ID, publicKeyId: "bob-pk", privateKeyEnc: "b" },
+      { userId: ALICE_ID, publicKeyId: "alice-pk", privateKeyEnc: "a2" },
+    ]);
+  });
+
+  it("answers 403 for an unknown file", async () => {
+    const res = await fetch(FILE_ACCESS_URL(99999), {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify([]),
+    });
+    expect(res.status).toBe(403);
+  });
+
+  it("answers 400 for a body that is not an array", async () => {
+    handle.current!.setFiles([
+      { id: 3, title: "y.txt", encrypted: true, fileKeys: [] },
+    ]);
+
+    const res = await fetch(FILE_ACCESS_URL(3), {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        keys: [{ userId: ALICE_ID, publicKeyId: "pk", privateKeyEnc: "enc" }],
+      }),
+    });
+
+    expect(res.status).toBe(400);
+    expect(handle.current!.getFile(3).fileKeys).toEqual([]);
   });
 });
 

@@ -159,9 +159,14 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
 
   const [keyChangeRequest, setKeyChangeRequest] =
     useState<KeyMismatchInfo | null>(null);
-  const keyChangeResolveRef = useRef<
-    ((d: KeyMismatchDecision) => void) | null
-  >(null);
+  // Queue of mismatch requests; the first entry is the one on screen.
+  // Spec: private-rooms/key-management, "Key-change dialog".
+  const keyChangeQueueRef = useRef<
+    Array<{
+      info: KeyMismatchInfo;
+      resolvers: Array<(d: KeyMismatchDecision) => void>;
+    }>
+  >([]);
 
   const hasConfiguredKey = !!userKeys?.publicKey && !!userKeys?.privateKeyEnc;
 
@@ -372,13 +377,19 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
         }
         return "refuse";
       }
-      if (keyChangeResolveRef.current) {
-        keyChangeResolveRef.current("refuse");
-        keyChangeResolveRef.current = null;
-      }
       return new Promise<KeyMismatchDecision>((resolve) => {
-        keyChangeResolveRef.current = resolve;
-        setKeyChangeRequest(info);
+        const queue = keyChangeQueueRef.current;
+        const sameKey = queue.find(
+          (entry) =>
+            entry.info.userId === info.userId &&
+            entry.info.newKey === info.newKey,
+        );
+        if (sameKey) {
+          sameKey.resolvers.push(resolve);
+          return;
+        }
+        queue.push({ info, resolvers: [resolve] });
+        if (queue.length === 1) setKeyChangeRequest(info);
       });
     },
     [KeyChangeDialog],
@@ -391,17 +402,22 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     };
   }, [resolveKeyMismatch]);
 
-  const handleKeyChangeAccept = useCallback(() => {
-    keyChangeResolveRef.current?.("accept");
-    keyChangeResolveRef.current = null;
-    setKeyChangeRequest(null);
+  const settleKeyChange = useCallback((decision: KeyMismatchDecision) => {
+    const queue = keyChangeQueueRef.current;
+    const current = queue.shift();
+    for (const resolve of current?.resolvers ?? []) resolve(decision);
+    setKeyChangeRequest(queue[0]?.info ?? null);
   }, []);
 
-  const handleKeyChangeRefuse = useCallback(() => {
-    keyChangeResolveRef.current?.("refuse");
-    keyChangeResolveRef.current = null;
-    setKeyChangeRequest(null);
-  }, []);
+  const handleKeyChangeAccept = useCallback(
+    () => settleKeyChange("accept"),
+    [settleKeyChange],
+  );
+
+  const handleKeyChangeRefuse = useCallback(
+    () => settleKeyChange("refuse"),
+    [settleKeyChange],
+  );
 
   const handlePassphraseSubmit = useCallback(
     async (passphrase: string, rememberDevice?: boolean): Promise<void> => {

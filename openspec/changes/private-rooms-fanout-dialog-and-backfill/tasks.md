@@ -4,7 +4,7 @@ Every task below is committed on its own (see "Commits" in `openspec/config.yaml
 
 ## 1. Key-change requests queue
 
-- [ ] 1.1 Replace the single resolver ref in `packages/shared/context/encryption/EncryptionContext.tsx` with an ordered queue: show the first request, resolve the shown request and every waiting request with the same user id and new key on accept or refuse, then show the next distinct request; a new request never resolves a pending one; verify with new cases in `packages/shared/context/encryption/__tests__/EncryptionContext.test.tsx` ("Second mismatch while a dialog is open", "Same key asked twice", "No automatic refusal") via `cd packages/shared && pnpm exec vitest run context/encryption`
+- [x] 1.1 Replace the single resolver ref in `packages/shared/context/encryption/EncryptionContext.tsx` with an ordered queue: show the first request, resolve the shown request and every waiting request with the same user id and new key on accept or refuse, then show the next distinct request; a new request never resolves a pending one; verify with new cases in `packages/shared/context/encryption/__tests__/EncryptionContext.test.tsx` ("Second mismatch while a dialog is open", "Same key asked twice", "No automatic refusal") via `cd packages/shared && pnpm exec vitest run context/encryption`
 - [ ] 1.2 Add a case to `packages/shared/services/private-room/__tests__/room-encryption.test.ts` (`verifyMemberKeys`) proving that a request still waiting when another arrives is not recorded in the refusal set and gets the wrap once the user accepts; verify with `cd packages/shared && pnpm exec vitest run services/private-room/__tests__/room-encryption.test.ts`
 
 ## 2. Client fan-out runs one at a time

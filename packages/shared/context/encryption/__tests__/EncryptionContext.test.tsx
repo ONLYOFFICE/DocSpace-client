@@ -759,7 +759,28 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(await promised).toBe("refuse");
     });
 
-    it("refuses the pending dialog when a NEW mismatch comes in concurrently", async () => {
+    const stillPending = (promise: Promise<unknown>) =>
+      Promise.race([
+        promise.then(() => "settled"),
+        new Promise<string>((resolve) =>
+          setTimeout(() => resolve("pending"), 0),
+        ),
+      ]);
+
+    it("No automatic refusal: a new mismatch does not answer the pending one", async () => {
+      renderTree();
+      let firstPromise!: Promise<string>;
+      await act(async () => {
+        firstPromise = latest.resolveKeyMismatch(sampleInfo);
+      });
+      await act(async () => {
+        void latest.resolveKeyMismatch({ ...sampleInfo, newKey: "pub-newer" });
+      });
+      expect(await stillPending(firstPromise)).toBe("pending");
+      expect(captured.keyChange!.newPublicKey).toBe("pub-new");
+    });
+
+    it("Second mismatch while a dialog is open: shown after the first is decided", async () => {
       renderTree();
       let firstPromise!: Promise<string>;
       let secondPromise!: Promise<string>;
@@ -769,14 +790,43 @@ describe("EncryptionContext / EncryptionProvider", () => {
       await act(async () => {
         secondPromise = latest.resolveKeyMismatch({
           ...sampleInfo,
-          newKey: "pub-newer",
+          userId: "peer-2",
+          displayName: "Bob",
+          newKey: "pub-bob-new",
         });
       });
-      expect(await firstPromise).toBe("refuse");
+      expect(captured.keyChange!.userId).toBe("peer-1");
       await act(async () => {
         captured.keyChange!.onAccept();
       });
-      expect(await secondPromise).toBe("accept");
+      expect(await firstPromise).toBe("accept");
+      expect(captured.keyChange!.userId).toBe("peer-2");
+      expect(await stillPending(secondPromise)).toBe("pending");
+      await act(async () => {
+        captured.keyChange!.onRefuse();
+      });
+      expect(await secondPromise).toBe("refuse");
+      expect(captured.keyChange).toBeNull();
+    });
+
+    it("Same key asked twice: one dialog, one decision for every waiting request", async () => {
+      renderTree();
+      let firstPromise!: Promise<string>;
+      let secondPromise!: Promise<string>;
+      let thirdPromise!: Promise<string>;
+      await act(async () => {
+        firstPromise = latest.resolveKeyMismatch(sampleInfo);
+      });
+      await act(async () => {
+        secondPromise = latest.resolveKeyMismatch({ ...sampleInfo });
+        thirdPromise = latest.resolveKeyMismatch({ ...sampleInfo });
+      });
+      await act(async () => {
+        captured.keyChange!.onAccept();
+      });
+      expect(await Promise.all([firstPromise, secondPromise, thirdPromise]))
+        .toEqual(["accept", "accept", "accept"]);
+      expect(captured.keyChange).toBeNull();
     });
   });
 

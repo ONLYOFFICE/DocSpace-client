@@ -190,8 +190,7 @@ export async function restoreDeviceUnlock(
     return null;
   }
   // Spec: private-rooms/encryption-core, "Remembered device keeps the key in IndexedDB".
-  const age = Date.now() - record.updatedAt;
-  if (!Number.isFinite(age) || age < 0 || age > DEVICE_UNLOCK_MAX_AGE_MS) {
+  if (!isWithinMaxAge(record.updatedAt)) {
     await deleteRecord(userId);
     return null;
   }
@@ -214,6 +213,21 @@ export async function restoreDeviceUnlock(
     await deleteRecord(userId);
     return null;
   }
+}
+
+const isWithinMaxAge = (updatedAt: number) => {
+  const age = Date.now() - updatedAt;
+  return Number.isFinite(age) && age >= 0 && age <= DEVICE_UNLOCK_MAX_AGE_MS;
+};
+
+/** When the remembered record was written, or null if there is none or it expired. */
+export async function getDeviceUnlockWrittenAt(
+  userId: string,
+): Promise<number | null> {
+  if (!userId) return null;
+  const record = await getRecord(userId);
+  if (!record || !isWithinMaxAge(record.updatedAt)) return null;
+  return record.updatedAt;
 }
 
 export async function hasDeviceUnlock(userId: string): Promise<boolean> {

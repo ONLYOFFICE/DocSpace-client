@@ -7,7 +7,7 @@
 ## 2. Record expiry in the device-unlock store
 
 - [x] 2.1 Add a maximum-record-age constant and reject records older than it (or with a future timestamp) in the restore path, deleting the record; verify with new cases in `packages/shared/services/encryption/__tests__/device-unlock-store.test.ts` (fresh record restores, 31-day-old record returns null and is deleted, future timestamp is deleted)
-- [ ] 2.2 Expose the record's written time for the Keys management page; verify with a unit test on the accessor in the same test file
+- [x] 2.2 Expose the record's written time for the Keys management page; verify with a unit test on the accessor in the same test file
 
 ## 3. Context behaviour and copy
 

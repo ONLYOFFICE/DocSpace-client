@@ -38,6 +38,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   DEVICE_UNLOCK_MAX_AGE_MS,
   forgetDeviceUnlock,
+  getDeviceUnlockWrittenAt,
   hasDeviceUnlock,
   persistDeviceUnlock,
   restoreDeviceUnlock,
@@ -150,6 +151,18 @@ describe("device-unlock-store", () => {
 
       expect(await restoreAt(T0)).toBeNull();
       expect(fake.records.has("user-1")).toBe(false);
+    });
+
+    it("reports when a live record was written, and null for a missing or expired one", async () => {
+      vi.spyOn(Date, "now").mockReturnValue(T0);
+      expect(await getDeviceUnlockWrittenAt("user-1")).toBeNull();
+
+      await persistAt(T0);
+      vi.spyOn(Date, "now").mockReturnValue(T0 + 10 * DAY);
+      expect(await getDeviceUnlockWrittenAt("user-1")).toBe(T0);
+
+      vi.spyOn(Date, "now").mockReturnValue(T0 + 31 * DAY);
+      expect(await getDeviceUnlockWrittenAt("user-1")).toBeNull();
     });
 
     it("Successful passphrase unlock refreshes the record", async () => {

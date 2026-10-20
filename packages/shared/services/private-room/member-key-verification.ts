@@ -62,13 +62,19 @@ export async function verifyMemberKey(args: {
   publicKey: string;
   displayName?: string;
   resolver?: KeyMismatchResolver;
+  /** `userId:publicKey` pairs already refused; a hit refuses without asking. */
+  refusals?: Set<string>;
 }): Promise<MemberKeyVerification> {
-  const { userId, scopeUserId, publicKey, displayName, resolver } = args;
+  const { userId, scopeUserId, publicKey, displayName, resolver, refusals } =
+    args;
   const tofu = getTofuStore(scopeUserId);
   const result = await tofu.checkKey(userId, publicKey);
   if (result.kind === "first-seen" || result.kind === "match") {
     return { kind: "ok", publicKey };
   }
+
+  const refusalKey = `${userId}:${publicKey}`;
+  if (refusals?.has(refusalKey)) return { kind: "key-mismatch-refused" };
 
   const handler = resolver ?? getKeyMismatchHandler();
   if (!handler) return { kind: "key-mismatch-refused" };
@@ -90,7 +96,10 @@ export async function verifyMemberKey(args: {
     }
     return { kind: "key-mismatch-refused" };
   }
-  if (decision !== "accept") return { kind: "key-mismatch-refused" };
+  if (decision !== "accept") {
+    refusals?.add(refusalKey);
+    return { kind: "key-mismatch-refused" };
+  }
   await tofu.acceptKey(userId, publicKey);
   return { kind: "ok", publicKey };
 }
@@ -102,7 +111,11 @@ export async function verifyMemberKey(args: {
  */
 export async function verifyMemberKeys<T extends MemberKeyRecipient>(
   recipients: readonly T[],
-  options: { scopeUserId: string; resolver?: KeyMismatchResolver },
+  options: {
+    scopeUserId: string;
+    resolver?: KeyMismatchResolver;
+    refusals?: Set<string>;
+  },
 ): Promise<{ verified: T[]; skipped: SkippedMemberKey[] }> {
   const verified: T[] = [];
   const skipped: SkippedMemberKey[] = [];
@@ -113,6 +126,7 @@ export async function verifyMemberKeys<T extends MemberKeyRecipient>(
       publicKey: recipient.publicKey,
       displayName: recipient.displayName,
       resolver: options.resolver,
+      refusals: options.refusals,
     });
     if (result.kind === "ok") {
       verified.push(recipient);

@@ -262,6 +262,9 @@ class UploadDataStore {
 
   files: TUploadFile[] = [];
 
+  /** Member key changes refused during this session (`userId:publicKey`). */
+  memberKeyRefusals = new Set<string>();
+
   uploadedFilesHistory: TUploadFile[] = [];
 
   displayedConversionFiles: TConversionFile[] = [];

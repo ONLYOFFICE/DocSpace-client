@@ -13,7 +13,7 @@
 ## 3. Client upload pipeline checks pins
 
 - [x] 3.1 Call the helper in `encryptKeysForRoomMembersImpl` (`packages/client/src/store/uploadDataStore/encryption.helpers.ts`), awaiting the resolver, and propagate the skipped list to the upload item; verify with new cases in `packages/client/src/store/uploadDataStore/__tests__/encryption.helpers.test.ts` and `UploadDataStore.encryption.test.ts`.
-- [ ] 3.2 Remember a refusal per (userId, key) for the session so a batch does not prompt per file; verify with a unit test that two files in one batch trigger one resolver call.
+- [x] 3.2 Remember a refusal per (userId, key) for the session so a batch does not prompt per file; verify with a unit test that two files in one batch trigger one resolver call.
 - [ ] 3.3 Show Common:EncryptedUploadNotSharedWith with the member names in the finish toast and the upload panel row; add the key to `public/locales/en/Common.json`, run `/translate-comments` and `/translate-locales`, and verify `cd common/tests && npx vitest run test/locales.test.js` passes.
 
 ## 4. Integration check

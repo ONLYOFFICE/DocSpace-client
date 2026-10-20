@@ -57,6 +57,7 @@ exports[`UploadDataStore — public surface > exposes a stable set of public mem
   "isUploadingAndConversion",
   "itemOperationToFolder",
   "loopFilesOperations",
+  "memberKeyRefusals",
   "moveToAction",
   "moveToCopyTo",
   "navigateToNewFolderLocation",

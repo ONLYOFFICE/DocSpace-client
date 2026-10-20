@@ -1333,6 +1333,30 @@ describe("verifyMemberKeys", () => {
     ]);
   });
 
+  it("does not ask again for a key change already refused in the given set", async () => {
+    await verifyMemberKeys([{ userId: BOB, publicKey: pubB64(bob) }], {
+      scopeUserId: ALICE,
+    });
+    const resolver = vi.fn(async () => "refuse" as const);
+    const refusals = new Set<string>();
+    const swapped = [{ userId: BOB, publicKey: pubB64(carol) }];
+
+    const first = await verifyMemberKeys(swapped, {
+      scopeUserId: ALICE,
+      resolver,
+      refusals,
+    });
+    const second = await verifyMemberKeys(swapped, {
+      scopeUserId: ALICE,
+      resolver,
+      refusals,
+    });
+
+    expect(resolver).toHaveBeenCalledTimes(1);
+    expect(first.skipped).toHaveLength(1);
+    expect(second.skipped).toHaveLength(1);
+  });
+
   it("falls back to the registered key-change handler", async () => {
     await verifyMemberKeys([{ userId: BOB, publicKey: pubB64(bob) }], {
       scopeUserId: ALICE,

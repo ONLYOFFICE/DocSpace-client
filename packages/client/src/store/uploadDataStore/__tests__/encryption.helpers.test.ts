@@ -212,6 +212,23 @@ describe("encryptKeysForRoomMembersImpl", () => {
     expect(written.map((k) => k.userId)).toEqual(["user-1", "alice"]);
   });
 
+  it("asks once per refused key change across the files of one batch", async () => {
+    await getTofuStore("user-1").checkKey("bob", "pk-bob-pinned");
+    const refuse = vi.fn(async () => "refuse" as const);
+    registerKeyMismatchHandler(refuse);
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
+      memberKey("bob", "pk-bob-swapped"),
+    ] as never);
+    const { store } = createTestUploadDataStore();
+
+    const first = await encryptKeysForRoomMembersImpl(store, 555, "user-1", 7, dek, identity);
+    const second = await encryptKeysForRoomMembersImpl(store, 556, "user-1", 7, dek, identity);
+
+    expect(refuse).toHaveBeenCalledTimes(1);
+    expect(first.map((m) => m.userId)).toEqual(["bob"]);
+    expect(second.map((m) => m.userId)).toEqual(["bob"]);
+  });
+
   it("Unpinned member at upload: the key is pinned and the wrap is produced", async () => {
     vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
       memberKey("alice", "pk-alice"),

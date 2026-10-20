@@ -198,6 +198,7 @@ export async function encryptKeysForRoomMembersImpl(
 
     const { verified, skipped } = await verifyMemberKeys(recipients, {
       scopeUserId: String(currentUserId),
+      refusals: self.memberKeyRefusals,
     });
     if (verified.length === 0) return skipped;
 

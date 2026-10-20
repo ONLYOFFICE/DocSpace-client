@@ -871,6 +871,7 @@
   "EncryptionKeyImported": "Šifrirni ključ je bil uspešno uvožen",
   "EncryptionKeys": "Šifrirni ključi",
   "EncryptionKeysNotConfigured": "Šifrirni ključi niso nastavljeni na tej napravi. Nastavite ključe v nastavitvah profila za delo s šifriranimi datotekami.",
+  "EncryptionKeysReload": "Ključe za šifriranje je potrebno znova vnesti",
   "EncryptionKeysRequiredForPrivateRoom": "Pred ustvarjanjem zasebne sobe nastavite šifrirne ključe v Profilu.",
   "EncryptionKeysRequiredForUpload": "Pred nalaganjem datotek v zasebno sobo nastavite šifrirne ključe v Profilu.",
   "EncryptionLocked": "Šifriranje je zaklenjeno",

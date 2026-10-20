@@ -871,6 +871,7 @@
   "EncryptionKeyImported": "Şifreleme anahtarı başarıyla içe aktarıldı",
   "EncryptionKeys": "Şifreleme anahtarları",
   "EncryptionKeysNotConfigured": "Bu cihazda şifreleme anahtarları yapılandırılmamış. Şifrelenmiş dosyalarla çalışmak için Profil ayarlarından anahtarlarınızı kurun.",
+  "EncryptionKeysReload": "Şifreleme anahtarları yeniden girilmelidir",
   "EncryptionKeysRequiredForPrivateRoom": "Özel oda oluşturmadan önce Profil bölümünde şifreleme anahtarlarınızı ayarlayın.",
   "EncryptionKeysRequiredForUpload": "Özel bir odaya dosya yüklemeden önce Profil bölümünde şifreleme anahtarlarınızı ayarlayın.",
   "EncryptionLocked": "Şifreleme kilitli",

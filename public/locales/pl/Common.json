@@ -871,6 +871,7 @@
   "EncryptionKeyImported": "Klucz szyfrowania został pomyślnie zaimportowany",
   "EncryptionKeys": "Klucze szyfrowania",
   "EncryptionKeysNotConfigured": "Klucze szyfrowania nie są skonfigurowane na tym urządzeniu. Skonfiguruj swoje klucze w ustawieniach Profilu, aby pracować z zaszyfrowanymi plikami.",
+  "EncryptionKeysReload": "Klucze szyfrowania muszą zostać wpisane ponownie",
   "EncryptionKeysRequiredForPrivateRoom": "Skonfiguruj klucze szyfrowania w Profilu przed utworzeniem pokoju prywatnego.",
   "EncryptionKeysRequiredForUpload": "Skonfiguruj klucze szyfrowania w Profilu przed wgraniem plików do pokoju prywatnego.",
   "EncryptionLocked": "Szyfrowanie zablokowane",

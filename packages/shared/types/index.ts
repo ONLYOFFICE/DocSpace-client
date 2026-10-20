@@ -318,6 +318,11 @@ declare global {
       onViewportSettingsChanged?: VoidFunction;
       attachEvent?: (listener: string, callback: VoidFunction) => void;
     };
+    cloudCryptoCommand: (
+      type: string,
+      params: { [key: string]: string | boolean },
+      callback: (obj?: object) => void,
+    ) => void;
     onSystemMessage: (e: {
       type: string;
       opMessage?: string;

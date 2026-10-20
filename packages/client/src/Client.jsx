@@ -86,6 +86,9 @@ const ClientContent = (props) => {
     setIsLoaded,
     isAuthenticated,
     user,
+    legacyEncryptionKeys,
+    setLegacyEncryptionKeys,
+    updateLegacyEncryptionKeys,
     isLoaded,
     isDesktop,
     showMenu,
@@ -104,6 +107,8 @@ const ClientContent = (props) => {
 
   const location = useLocation();
 
+  const isEditor = location.pathname.indexOf("doceditor") !== -1;
+
   React.useEffect(() => {
     loadClientInfo()
       .catch((err) => toastr.error(err))
@@ -116,9 +121,33 @@ const ClientContent = (props) => {
   React.useEffect(() => {
     if (isAuthenticated && !isDesktopClientInit && isDesktop && isLoaded) {
       setIsDesktopClientInit(true);
-      regDesktop(user, t);
+      regDesktop(
+        user,
+        false,
+        legacyEncryptionKeys,
+        setLegacyEncryptionKeys,
+        updateLegacyEncryptionKeys,
+        isEditor,
+        null,
+        t,
+      );
+      console.log(
+        "%c%s",
+        "color: green; font: 1.2em bold;",
+        "Current keys is: ",
+        legacyEncryptionKeys,
+      );
     }
-  }, [t, isAuthenticated, user, isLoaded, isDesktop]);
+  }, [
+    t,
+    isAuthenticated,
+    user,
+    legacyEncryptionKeys,
+    setLegacyEncryptionKeys,
+    updateLegacyEncryptionKeys,
+    isLoaded,
+    isDesktop,
+  ]);
 
   // React.useEffect(() => {
   //   if (isLoading) {
@@ -194,6 +223,9 @@ export const Client = inject(
       frameConfig,
       isFrame,
       isDesktopClient,
+      legacyEncryptionKeys,
+      setLegacyEncryptionKeys,
+      updateLegacyEncryptionKeys,
       enablePlugins,
       isDesktopClientInit,
       setIsDesktopClientInit,
@@ -224,12 +256,15 @@ export const Client = inject(
       showMenu: frameConfig?.showMenu,
       user: userStore.user,
       isAuthenticated: authStore.isAuthenticated,
+      legacyEncryptionKeys,
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
       isInfoPanelVisible: isVisible && !isProfile,
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,
+      setLegacyEncryptionKeys,
+      updateLegacyEncryptionKeys,
       showArticleLoader,
       loadClientInfo: async () => {
         const actions = [];

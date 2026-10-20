@@ -97,7 +97,7 @@ const useInit = ({
 
   React.useEffect(() => {
     if (config && IS_DESKTOP_EDITOR && user && fileInfo?.id) {
-      initDesktop(user, t);
+      initDesktop(config, user, fileInfo.id, t);
     }
   }, [config, fileInfo?.id, t, user]);
 

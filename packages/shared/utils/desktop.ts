@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import isEmpty from "lodash/isEmpty";
+import omit from "lodash/omit";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { Nullable, TTranslation } from "../types";
@@ -48,10 +50,18 @@ const isSSR = checkIsSSR();
 
 export async function regDesktop(
   user: TUser,
+  isEncryption: boolean,
+  keys?: { [key: string]: string | boolean },
+  setEncryptionKeys?: (value: { [key: string]: string | boolean }) => void,
+  updateEncryptionKeys?: (value: { [key: string]: string | boolean }) => void,
+  isEditor?: boolean,
+  getEncryptionAccess?: (
+    callback?: (data: { keys: { [key: string]: string | boolean } }) => void,
+  ) => void,
   t?: Nullable<TTranslation>,
 ) {
   if (!isSSR) {
-    let extendedData: { [key: string]: unknown } = {
+    const data = {
       displayName: user.displayName,
       email: user.email,
       domain: desktopConstants.domain,
@@ -59,6 +69,27 @@ export async function regDesktop(
       userId: user.id,
       uiTheme: getEditorTheme(user.theme),
     };
+
+    let extendedData;
+
+    if (isEncryption) {
+      extendedData = {
+        ...data,
+        encryptionKeys: {
+          cryptoEngineId: desktopConstants.cryptoEngineId,
+        },
+      };
+
+      if (!isEmpty(keys)) {
+        const filteredKeys = omit(keys, ["userId"]);
+        extendedData = {
+          ...extendedData,
+          encryptionKeys: { ...extendedData.encryptionKeys, ...filteredKeys },
+        };
+      }
+    } else {
+      extendedData = { ...data };
+    }
 
     if (window.AscDesktopEditor?.getCloudKeys) {
       const desktopKeys =
@@ -86,6 +117,35 @@ export async function regDesktop(
       "portal:login",
       JSON.stringify(extendedData),
     );
+
+    if (isEncryption) {
+      window.cloudCryptoCommand = (type, params, callback) => {
+        switch (type) {
+          case "encryptionKeys": {
+            setEncryptionKeys?.(params);
+            break;
+          }
+          case "updateEncryptionKeys": {
+            updateEncryptionKeys?.(params);
+            break;
+          }
+          case "relogin": {
+            // toastr.info(t("Common:EncryptionKeysReload"));
+            // relogin();
+            break;
+          }
+          case "getsharingkeys":
+            if (!isEditor || typeof getEncryptionAccess !== "function") {
+              callback({});
+              return;
+            }
+            getEncryptionAccess(callback);
+            break;
+          default:
+            break;
+        }
+      };
+    }
 
     window.onSystemMessage = (e) => {
       let message = e.opMessage;

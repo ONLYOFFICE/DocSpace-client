@@ -206,6 +206,8 @@ class SettingsStore {
 
   isDesktopClientInit = false;
 
+  legacyEncryptionKeys: { [key: string]: string | boolean } = {};
+
   roomsMode = false;
 
   isHeaderVisible = false;
@@ -1250,6 +1252,19 @@ class SettingsStore {
     }
   };
 
+  updateLegacyEncryptionKeys = (encryptionKeys: {
+    [key: string]: string | boolean;
+  }) => {
+    this.legacyEncryptionKeys = encryptionKeys ?? {};
+  };
+
+  setLegacyEncryptionKeys = async (keys: {
+    [key: string]: string | boolean;
+  }) => {
+    await api.files.setEncryptionKeys(keys);
+    this.updateLegacyEncryptionKeys(keys);
+  };
+
   setCompanyInfoSettingsData = (data: TCompanyInfo) => {
     this.companyInfoSettingsData = data;
   };
@@ -1315,6 +1330,11 @@ class SettingsStore {
 
   getPortals = async () => {
     await this.getAllPortals();
+  };
+
+  getLegacyEncryptionKeys = async () => {
+    const encryptionKeys = await api.files.getEncryptionKeys();
+    this.updateLegacyEncryptionKeys(encryptionKeys);
   };
 
   setModuleInfo = (homepage: string, productId: string) => {

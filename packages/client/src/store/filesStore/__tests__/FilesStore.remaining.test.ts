@@ -88,16 +88,24 @@ describe("FilesStore.initFiles — characterization", () => {
     expect(store.isInit).toBe(true);
   });
 
-  it("initialises a desktop client", async () => {
+  it("initialises the desktop-client encryption branch (regression)", async () => {
+    // Regression for the renamed settings method: the desktop branch must call
+    // getLegacyEncryptionKeys (previously getEncryptionKeys -> undefined()).
+    const getLegacyEncryptionKeys = vi.fn(() => Promise.resolve());
     const store = createTestFilesStore({
       authStore: { isAuthenticated: true },
-      settingsStore: { ...authedSettings, isDesktopClient: true },
+      settingsStore: {
+        ...authedSettings,
+        isDesktopClient: true,
+        getLegacyEncryptionKeys,
+      },
       filesSettingsStore: { getFilesSettings: () => Promise.resolve() },
       treeFoldersStore: { fetchTreeFolders: () => Promise.resolve([]) },
     });
 
     await store.initFiles();
 
+    expect(getLegacyEncryptionKeys).toHaveBeenCalledTimes(1);
     expect(store.isInit).toBe(true);
   });
 });

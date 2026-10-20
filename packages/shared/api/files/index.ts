@@ -1382,6 +1382,41 @@ export async function removeFromFavorite(
   return res;
 }
 
+// TODO: Need update res type
+export function setEncryptionKeys(keys: { [key: string]: string | boolean }) {
+  const data = {
+    publicKey: keys.publicKey,
+    privateKeyEnc: keys.privateKeyEnc,
+    enable: keys.enable,
+    update: keys.update,
+  };
+  return request({
+    method: "put",
+    url: "privacyroom/keys",
+    data,
+  });
+}
+
+export async function getEncryptionKeys() {
+  const res = (await request({
+    method: "get",
+    url: "privacyroom/keys",
+  })) as { [key: string]: string | boolean };
+
+  return res;
+}
+
+// TODO: Need update res type
+export async function getEncryptionAccess(fileId: number | string) {
+  const res = (await request({
+    method: "get",
+    url: `privacyroom/access/${fileId}`,
+    data: fileId,
+  })) as { [key: string]: string | boolean };
+
+  return res;
+}
+
 export async function getFileEncryptionAccess(fileId: number | string) {
   const res = await request({
     method: "get",

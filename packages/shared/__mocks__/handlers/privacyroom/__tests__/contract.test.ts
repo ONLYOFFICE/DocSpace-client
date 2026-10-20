@@ -42,6 +42,7 @@
 //
 // Either way the divergence is loud, not silent.
 
+
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from "vitest";
 
 import { setupServer } from "../../../e2e/msw-compat";
@@ -54,9 +55,13 @@ import {
 import { BASE_URL, API_PREFIX } from "../../../e2e/utils";
 
 const PORT = "3100";
+const CALLER = "u1";
 const KEYS_URL = `${BASE_URL}:${PORT}/${API_PREFIX}/privacyroom/keys`;
 const ACCESS_URL = (roomId: number | string) =>
   `${BASE_URL}:${PORT}/${API_PREFIX}/privacyroom/${roomId}/access`;
+const EMPTY_GUID = "00000000-0000-0000-0000-000000000000";
+const ID_1 = "11111111-1111-1111-1111-111111111111";
+const ID_2 = "22222222-2222-2222-2222-222222222222";
 
 const keysHandle: { current: PrivacyroomHandlerHandle | null } = {
   current: null,
@@ -66,7 +71,7 @@ const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
 };
 
 const server = setupServer(
-  ...privacyroomKeysHandlers(PORT, { userId: "u1", handle: keysHandle }),
+  ...privacyroomKeysHandlers(PORT, { userId: CALLER, handle: keysHandle }),
   ...privacyroomAccessHandlers(PORT, { handle: accessHandle }),
 );
 
@@ -77,223 +82,134 @@ beforeAll(() => {
 afterAll(() => server.close());
 
 beforeEach(() => {
-  // privacyroomKeysHandlers state is closed over per factory call; we get a
-  // fresh one by re-installing. Simpler: just rely on each test cleaning up
-  // via DELETE since handle is the same instance for all tests.
-  const existing = keysHandle.current?.getKeys() ?? [];
-  for (const k of existing) {
-    void fetch(`${KEYS_URL}/${k.id}`, { method: "DELETE" });
-  }
+  keysHandle.current?.reset();
   accessHandle.current?.reset();
 });
 
-async function postKey(body: {
-  id?: string;
-  publicKey: string;
-  privateKeyEnc: string;
-}) {
+type KeyBody = { id?: string; publicKey?: string; privateKeyEnc?: string };
+type Envelope = {
+  response?: Array<Record<string, unknown>>;
+  error?: { message: string };
+  status: number;
+  statusCode: number;
+};
+
+const send = async (method: "POST" | "PUT", body: KeyBody) => {
   const res = await fetch(KEYS_URL, {
-    method: "POST",
+    method,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
-  return res.json() as Promise<{
-    response: Array<{ id: string; publicKey: string; privateKeyEnc: string }>;
-  }>;
-}
+  return { status: res.status, body: (await res.json()) as Envelope };
+};
 
-async function putKey(body: {
-  id?: string;
-  publicKey: string;
-  privateKeyEnc: string;
-  update?: boolean;
-}) {
-  const res = await fetch(KEYS_URL, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
+const getKeys = async () => (await (await fetch(KEYS_URL)).json()) as Envelope;
+
+describe("privacyroom mock - GET /privacyroom/keys (GetUserKeys)", () => {
+  it("leaves `response` out for a user who never stored a key", async () => {
+    const body = await getKeys();
+    expect(body).not.toHaveProperty("response");
+    expect(body.status).toBe(0);
   });
-  return res.json() as Promise<{
-    response: Array<{ id: string; publicKey: string; privateKeyEnc: string }>;
-  }>;
-}
 
-async function getKeys() {
-  const res = await fetch(KEYS_URL);
-  return res.json() as Promise<{
-    response: Array<{ id: string; publicKey: string; privateKeyEnc: string }>;
-  }>;
-}
+  it("answers an empty list once the last key was deleted", async () => {
+    await send("POST", { id: ID_1, publicKey: "p", privateKeyEnc: "e" });
+    await fetch(`${KEYS_URL}/${ID_1}`, { method: "DELETE" });
+    expect((await getKeys()).response).toEqual([]);
+  });
+});
 
-describe("privacyroom mock — POST /privacyroom/keys (mirrors SetKeys, replace=false)", () => {
-  it("appends a new key when body.id is not in state", async () => {
-    const before = (await getKeys()).response;
-    expect(before).toHaveLength(0);
-
-    const after = (
-      await postKey({
-        id: "a1",
-        publicKey: "pub-a",
-        privateKeyEnc: "enc-a",
-      })
-    ).response;
-
-    expect(after).toHaveLength(1);
-    expect(after[0]).toMatchObject({
-      id: "a1",
-      publicKey: "pub-a",
-      privateKeyEnc: "enc-a",
+describe("privacyroom mock - POST /privacyroom/keys (SetKeys / CreateKeyPairAsync)", () => {
+  it("answers 201 with the full list and stamps date and crypto engine id", async () => {
+    const { status, body } = await send("POST", {
+      id: ID_1,
+      publicKey: "p1",
+      privateKeyEnc: "e1",
     });
-  });
-
-  it("appends multiple keys with distinct ids (multi-key support)", async () => {
-    await postKey({ id: "k1", publicKey: "p1", privateKeyEnc: "e1" });
-    const after = (
-      await postKey({ id: "k2", publicKey: "p2", privateKeyEnc: "e2" })
-    ).response;
-
-    expect(after).toHaveLength(2);
-    expect(after.map((k) => k.id).sort()).toEqual(["k1", "k2"]);
-  });
-
-  it("is a NO-OP when body.id matches an existing key (server uses replace=false)", async () => {
-    await postKey({ id: "same", publicKey: "first", privateKeyEnc: "enc1" });
-
-    const after = (
-      await postKey({
-        id: "same",
-        publicKey: "OVERWRITE-attempt",
-        privateKeyEnc: "OVERWRITE-attempt",
-      })
-    ).response;
-
-    expect(after).toHaveLength(1);
-    expect(after[0].publicKey).toBe("first"); // NOT overwritten
-    expect(after[0].privateKeyEnc).toBe("enc1");
-  });
-
-  it("treats missing body.id as Guid.Empty — first POST adds it, second is a no-op", async () => {
-    const empty = "00000000-0000-0000-0000-000000000000";
-
-    const first = (
-      await postKey({ publicKey: "p", privateKeyEnc: "e" })
-    ).response;
-    expect(first).toHaveLength(1);
-    expect(first[0].id).toBe(empty);
-
-    const second = (
-      await postKey({ publicKey: "p2", privateKeyEnc: "e2" })
-    ).response;
-    expect(second).toHaveLength(1); // still just one — server dedup'd
-    expect(second[0].publicKey).toBe("p"); // first wins
-  });
-});
-
-describe("privacyroom mock — PUT /privacyroom/keys (mirrors ReplaceKey, replace=true)", () => {
-  it("replaces the key when body.id matches an existing key", async () => {
-    await postKey({ id: "rot", publicKey: "old-pub", privateKeyEnc: "old-enc" });
-
-    const after = (
-      await putKey({
-        id: "rot",
-        publicKey: "new-pub",
-        privateKeyEnc: "new-enc",
-      })
-    ).response;
-
-    expect(after).toHaveLength(1);
-    expect(after[0]).toMatchObject({
-      id: "rot",
-      publicKey: "new-pub",
-      privateKeyEnc: "new-enc",
+    expect(status).toBe(201);
+    expect(body.response).toHaveLength(1);
+    expect(body.response![0]).toMatchObject({
+      id: ID_1,
+      userId: CALLER,
+      publicKey: "p1",
+      privateKeyEnc: "e1",
+      cryptoEngineId: "{DC522726-5E0E-43E5-AA02-8EA156BECBC5}",
     });
+    expect(typeof body.response![0].date).toBe("string");
   });
 
-  it("is a NO-OP when body.id is not in state (server does not insert on PUT)", async () => {
-    const before = (await getKeys()).response;
-    expect(before).toHaveLength(0);
-
-    const after = (
-      await putKey({
-        id: "ghost",
-        publicKey: "nope",
-        privateKeyEnc: "nope",
-      })
-    ).response;
-
-    expect(after).toHaveLength(0);
+  it("appends keys with distinct ids", async () => {
+    await send("POST", { id: ID_1, publicKey: "p1", privateKeyEnc: "e1" });
+    const { body } = await send("POST", { id: ID_2, publicKey: "p2", privateKeyEnc: "e2" });
+    expect(body.response!.map((k) => k.id)).toEqual([ID_1, ID_2]);
   });
 
-  it("leaves other keys untouched when one is rotated", async () => {
-    await postKey({ id: "k1", publicKey: "p1", privateKeyEnc: "e1" });
-    await postKey({ id: "k2", publicKey: "p2", privateKeyEnc: "e2" });
-
-    const after = (
-      await putKey({ id: "k1", publicKey: "p1-rotated", privateKeyEnc: "e1-rotated" })
-    ).response;
-
-    expect(after).toHaveLength(2);
-    const k1 = after.find((k) => k.id === "k1");
-    const k2 = after.find((k) => k.id === "k2");
-    expect(k1?.publicKey).toBe("p1-rotated");
-    expect(k2?.publicKey).toBe("p2"); // untouched
-  });
-});
-
-describe("privacyroom mock — DELETE /privacyroom/keys/{id} (mirrors DeleteKeys)", () => {
-  it("removes the entry by id", async () => {
-    await postKey({ id: "doomed", publicKey: "p", privateKeyEnc: "e" });
-    await postKey({ id: "keep", publicKey: "p2", privateKeyEnc: "e2" });
-
-    await fetch(`${KEYS_URL}/doomed`, { method: "DELETE" });
-
-    const after = (await getKeys()).response;
-    expect(after).toHaveLength(1);
-    expect(after[0].id).toBe("keep");
+  it("answers 409 and stores nothing for an id already stored", async () => {
+    await send("POST", { id: ID_1, publicKey: "first", privateKeyEnc: "e1" });
+    const { status, body } = await send("POST", {
+      id: ID_1,
+      publicKey: "second",
+      privateKeyEnc: "e2",
+    });
+    expect(status).toBe(409);
+    expect(body.status).toBe(1);
+    expect(keysHandle.current!.getKeys().map((k) => k.publicKey)).toEqual(["first"]);
   });
 
-  it("is a no-op when id does not exist", async () => {
-    await postKey({ id: "alive", publicKey: "p", privateKeyEnc: "e" });
+  it("binds a missing id to Guid.Empty, so a second id-less POST is a 409", async () => {
+    const first = await send("POST", { publicKey: "p", privateKeyEnc: "e" });
+    expect(first.body.response![0].id).toBe(EMPTY_GUID);
+    const second = await send("POST", { publicKey: "q", privateKeyEnc: "f" });
+    expect(second.status).toBe(409);
+  });
 
-    await fetch(`${KEYS_URL}/ghost`, { method: "DELETE" });
-
-    const after = (await getKeys()).response;
-    expect(after).toHaveLength(1);
+  it("answers 400 for a blank half", async () => {
+    expect((await send("POST", { id: ID_1, publicKey: " ", privateKeyEnc: "e" })).status).toBe(400);
+    expect((await send("POST", { id: ID_1, publicKey: "p", privateKeyEnc: "" })).status).toBe(400);
+    expect(keysHandle.current!.getKeys()).toHaveLength(0);
   });
 });
 
-describe("privacyroom mock — GET /privacyroom/{roomId}/access (mirrors GetUserKeysForRoom)", () => {
-  it("returns identity keys configured for the room", async () => {
-    accessHandle.current!.setRoomKeys(7, [
-      {
-        id: "r1",
-        userId: "alice",
-        publicKey: "pub-alice",
-        privateKeyEnc: "",
-      },
-      {
-        id: "r2",
-        userId: "bob",
-        publicKey: "pub-bob",
-        privateKeyEnc: "",
-      },
-    ]);
-
-    const res = await fetch(ACCESS_URL(7));
-    const body = (await res.json()) as {
-      response: Array<{ userId: string; publicKey: string }>;
-    };
-
-    expect(body.response).toHaveLength(2);
-    expect(body.response.map((k) => k.userId).sort()).toEqual([
-      "alice",
-      "bob",
+describe("privacyroom mock - PUT /privacyroom/keys (ReplaceKey / ReplaceKeyPairAsync)", () => {
+  it("replaces the entry in place and leaves the others untouched", async () => {
+    await send("POST", { id: ID_1, publicKey: "p1", privateKeyEnc: "e1" });
+    await send("POST", { id: ID_2, publicKey: "p2", privateKeyEnc: "e2" });
+    const { status, body } = await send("PUT", {
+      id: ID_1,
+      publicKey: "p1-new",
+      privateKeyEnc: "e1-new",
+    });
+    expect(status).toBe(200);
+    expect(body.response!.map((k) => [k.id, k.publicKey])).toEqual([
+      [ID_1, "p1-new"],
+      [ID_2, "p2"],
     ]);
   });
 
-  it("returns empty array for an unknown room", async () => {
-    const res = await fetch(ACCESS_URL(9999));
-    const body = (await res.json()) as { response: unknown[] };
-    expect(body.response).toEqual([]);
+  it("answers 404 and inserts nothing for an id not stored", async () => {
+    const { status } = await send("PUT", { id: ID_1, publicKey: "p", privateKeyEnc: "e" });
+    expect(status).toBe(404);
+    expect(keysHandle.current!.getKeys()).toHaveLength(0);
+  });
+
+  it("answers 400 for a blank half", async () => {
+    await send("POST", { id: ID_1, publicKey: "p", privateKeyEnc: "e" });
+    expect((await send("PUT", { id: ID_1, publicKey: "", privateKeyEnc: "e" })).status).toBe(400);
+  });
+});
+
+describe("privacyroom mock - DELETE /privacyroom/keys/{id} (DeleteKeys / DeleteAsync)", () => {
+  it("answers 204 with no body and removes the entry", async () => {
+    await send("POST", { id: ID_1, publicKey: "p1", privateKeyEnc: "e1" });
+    await send("POST", { id: ID_2, publicKey: "p2", privateKeyEnc: "e2" });
+    const res = await fetch(`${KEYS_URL}/${ID_1}`, { method: "DELETE" });
+    expect(res.status).toBe(204);
+    expect(await res.text()).toBe("");
+    expect(keysHandle.current!.getKeys().map((k) => k.id)).toEqual([ID_2]);
+  });
+
+  it("answers 404 for an id not stored", async () => {
+    const res = await fetch(`${KEYS_URL}/${ID_1}`, { method: "DELETE" });
+    expect(res.status).toBe(404);
   });
 });

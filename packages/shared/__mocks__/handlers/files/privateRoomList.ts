@@ -163,13 +163,18 @@ export const privateRoomListHandler = (
     folders: [folder],
     files: [],
     current,
-    pathParts: [{ id: 2002, title: "Rooms" }],
+    pathParts: [{ id: 2002, title: "Rooms", folderType: 14 }],
     startIndex: 0,
     total: 1,
     count: 1,
     new: 0,
   };
 
+  /**
+   * Mirrors VirtualRoomsController.GetRoomsFolder (HttpGet "rooms") ->
+   * FileStorageService.GetFolderItemsAsync on the Rooms section, whose
+   * breadcrumbs, and so `pathParts`, are the section alone.
+   */
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ROOMS_LIST}`,
     () => okResponse(body),

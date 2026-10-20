@@ -365,7 +365,9 @@ export const encryptedFilesHandlers = (
      * Mirrors FoldersController.GetFolderByFolderId (HttpGet "{folderId}"): a
      * FolderContentDto of the room. FileStorageService.GetFolderItemsAsync
      * stamps the room's type (CustomRoom, 19) as `parentRoomType` on the
-     * room itself and on every entry in it.
+     * room itself and on every entry in it. `pathParts` are its breadcrumbs,
+     * each `{ id, title, roomType, folderType }`; MapToRoomType gives the
+     * Rooms section no room type, so that part has none.
      */
     http.get(`${apiBase}/files/:folderId(\\d+)`, ({ params, request }) => {
       const folderId = Number(params.folderId);
@@ -379,7 +381,10 @@ export const encryptedFilesHandlers = (
         files: all.map((f) => buildFileDto(f, roomId, ownerId, port)),
         folders: [],
         current: { ...buildFolderDto(roomId), parentRoomType: 19 },
-        pathParts: [{ id: roomId, title: "Private Room" }],
+        pathParts: [
+          { id: ROOMS_SECTION_ID, title: "Rooms", folderType: 14 },
+          { id: roomId, title: "Private Room", roomType: 5, folderType: 19 },
+        ],
         startIndex: 0,
         count: all.length,
         total: all.length,

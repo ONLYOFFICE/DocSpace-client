@@ -46,6 +46,7 @@ import {
   encryptedFilesHandlers,
   type EncryptedFilesHandlerHandle,
 } from "../encryptedFiles";
+import { privateRoomListHandler } from "../privateRoomList";
 import { BASE_URL, API_PREFIX } from "../../../e2e/utils";
 
 const PORT = "3200";
@@ -70,6 +71,7 @@ const server = setupServer(
     currentUserId: ALICE_ID,
     handle,
   }),
+  privateRoomListHandler(PORT, { roomId: ROOM_ID }),
 );
 
 beforeAll(() => {
@@ -325,6 +327,25 @@ describe("encryptedFiles mock — entry DTOs (mirrors FoldersController.GetFolde
       private: true,
     });
     expect(body.response.current).not.toHaveProperty("pathParts");
+  });
+
+  it("the room listing answers its breadcrumbs from the Rooms section as pathParts", async () => {
+    const res = await fetch(FOLDER_URL);
+    const body = (await res.json()) as { response: { pathParts: Dto[] } };
+
+    expect(body.response.pathParts).toEqual([
+      { id: ROOMS_SECTION_ID, title: "Rooms", folderType: 14 },
+      { id: ROOM_ID, title: "Private Room", roomType: 5, folderType: 19 },
+    ]);
+  });
+
+  it("the Rooms section listing answers the section alone as pathParts", async () => {
+    const res = await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/rooms`);
+    const body = (await res.json()) as { response: { pathParts: Dto[] } };
+
+    expect(body.response.pathParts).toEqual([
+      { id: ROOMS_SECTION_ID, title: "Rooms", folderType: 14 },
+    ]);
   });
 
   it("the room DTO sits under the Rooms section and has no parent room type or path parts", async () => {

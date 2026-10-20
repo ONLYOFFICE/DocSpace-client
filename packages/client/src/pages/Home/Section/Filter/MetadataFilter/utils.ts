@@ -260,6 +260,11 @@ export const dropMetadataChip = (
   applyMetadataFilter(filter, state && removeMetadataChip(state, chipKey));
 };
 
+export const canFilterByMetadata = (
+  templates: TMetadataTemplate[],
+  isActive: boolean,
+) => isActive || templates.some(({ visible }) => visible);
+
 export const addMetadataGroup = (options: TFilterOption[], label: string) => {
   options.forEach((option) => {
     if (option.isHeader) option.isLast = false;

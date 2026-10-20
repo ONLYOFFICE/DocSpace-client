@@ -98,6 +98,7 @@ import {
   METADATA_FILTER_GROUP,
   addMetadataGroup,
   applyMetadataFilter,
+  canFilterByMetadata,
   dropMetadataChip,
   getMetadataFilterState,
   getMetadataFilterValue,
@@ -250,6 +251,12 @@ const SectionFilterContent = ({
     !isPublicRoom &&
     !getSelectedFolder()?.providerKey &&
     isMetadataRootSupported(getSelectedFolder()?.rootFolderType);
+
+  const hasMetadataFilter = isRooms
+    ? roomsFilter.hasMetadataFilter()
+    : filter.hasMetadataFilter();
+
+  const metadataTemplates = React.useRef([]);
 
   const metadataFiltersKey = JSON.stringify(filter.metadataFilters ?? null);
   const roomsMetadataFiltersKey = JSON.stringify(
@@ -1147,6 +1154,10 @@ const SectionFilterContent = ({
 
     if (isContactsPage) return getContactsFilterData(quotaFilter);
 
+    const templatesRequest = isMetadataFilterAvailable
+      ? getMetadataTemplates().catch(() => [])
+      : null;
+
     let tags = null;
     let providers = [];
 
@@ -1159,6 +1170,13 @@ const SectionFilterContent = ({
       tags = res[0];
       providers = res[1];
     }
+
+    metadataTemplates.current = (await templatesRequest) ?? [];
+
+    const withMetadataFilter =
+      isMetadataFilterAvailable &&
+      canFilterByMetadata(metadataTemplates.current, hasMetadataFilter);
+
     const connectedThirdParty = [];
 
     providers.forEach((item) => {
@@ -1520,7 +1538,7 @@ const SectionFilterContent = ({
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
 
-      if (isMetadataFilterAvailable) {
+      if (withMetadataFilter) {
         addMetadataGroup(filterOptions, t("Common:SubmenuMetadata"));
       }
     } else if (isAIAgentsFolder) {
@@ -1584,7 +1602,7 @@ const SectionFilterContent = ({
         filterOptions.push(...roomOption);
       }
 
-      if (isMetadataFilterAvailable) {
+      if (withMetadataFilter) {
         addMetadataGroup(filterOptions, t("Common:SubmenuMetadata"));
       }
 
@@ -1611,6 +1629,7 @@ const SectionFilterContent = ({
     isCollaborator,
     isVisitor,
     isMetadataFilterAvailable,
+    hasMetadataFilter,
     getContactsFilterData,
     getAuthorFilter,
     getSharedByFilter,
@@ -1619,7 +1638,10 @@ const SectionFilterContent = ({
   const renderCustomItem = React.useCallback(
     ({ group, ...props }) =>
       group === METADATA_FILTER_GROUP ? (
-        <MetadataFilterSection {...props} />
+        <MetadataFilterSection
+          {...props}
+          templates={metadataTemplates.current}
+        />
       ) : null,
     [],
   );

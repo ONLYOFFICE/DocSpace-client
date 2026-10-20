@@ -36,13 +36,17 @@
 import { describe, expect, it } from "vitest";
 
 import { MetadataFieldType } from "@docspace/shared/enums";
-import type { TMetadataField } from "@docspace/shared/api/metadata/types";
+import type {
+  TMetadataField,
+  TMetadataTemplate,
+} from "@docspace/shared/api/metadata/types";
 import type { TTranslation } from "@docspace/shared/types";
 
 import type { TConditionDraft } from "../types";
 import {
   addMetadataGroup,
   applyMetadataFilter,
+  canFilterByMetadata,
   dropMetadataChip,
   fromFilterCondition,
   getDrafts,
@@ -324,5 +328,15 @@ describe("panel group", () => {
       [METADATA_FILTER_GROUP, true],
       ["metadata", undefined],
     ]);
+  });
+
+  it("shows only with a visible template or a metadata filter already set", () => {
+    const visible = { ...template, visible: true } as TMetadataTemplate;
+    const hidden = { ...template, visible: false } as TMetadataTemplate;
+
+    expect(canFilterByMetadata([], false)).toBe(false);
+    expect(canFilterByMetadata([hidden], false)).toBe(false);
+    expect(canFilterByMetadata([hidden, visible], false)).toBe(true);
+    expect(canFilterByMetadata([hidden], true)).toBe(true);
   });
 });

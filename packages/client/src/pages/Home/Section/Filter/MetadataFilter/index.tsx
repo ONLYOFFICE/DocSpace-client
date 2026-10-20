@@ -44,8 +44,8 @@ import {
 import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import type { CustomItemRenderProps } from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
+import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
 
-import { useFilterTemplates } from "./hooks/useFilterTemplates";
 import ConditionsPanel from "./sub-components/ConditionsPanel";
 import type { TMetadataFilterState } from "./types";
 import {
@@ -57,17 +57,19 @@ import {
 } from "./utils";
 import styles from "./MetadataFilter.module.scss";
 
+type MetadataFilterSectionProps = Omit<CustomItemRenderProps, "group"> & {
+  templates: TMetadataTemplate[];
+};
+
 const MetadataFilterSection = ({
   value,
   onChange,
   openPanel,
   closePanel,
   closeFilter,
-}: Omit<CustomItemRenderProps, "group">) => {
+  templates,
+}: MetadataFilterSectionProps) => {
   const { t, i18n } = useTranslation(["Metadata", "Common"]);
-  const templates = useFilterTemplates();
-
-  if (!templates) return null;
 
   const state = parseMetadataFilter(value?.key);
   const template = templates.find(({ id }) => id === state?.templateId);

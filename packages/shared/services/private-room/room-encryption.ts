@@ -795,7 +795,7 @@ export async function validateMembersForEncryption(
 
   for (const memberId of memberIds) {
     const displayName = displayNames?.[memberId];
-    const candidate = keyByUserId.get(String(memberId));
+    const candidate = keyByUserId.get(String(memberId))?.publicKey;
     if (!candidate) {
       skipped.push({ id: memberId, displayName, reason: "no-key" });
       continue;

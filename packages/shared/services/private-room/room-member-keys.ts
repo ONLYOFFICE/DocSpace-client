@@ -36,6 +36,7 @@
 import { getFilePublicKeys, getRoomEncryptionKeys } from "../../api/privacy";
 import type { TEncryptionKeyPair } from "../../api/privacy/types";
 import type { RoomMemberPublicKey } from "../encryption/room-file-access";
+import { selectUserKey } from "../encryption/select-user-key";
 
 const toMemberKeys = (
   keys: TEncryptionKeyPair[] | undefined,
@@ -53,23 +54,54 @@ const toMemberKeys = (
   return list;
 };
 
+/**
+ * One key per user, chosen with `selectUserKey` from everything the server
+ * lists for that user.
+ * Spec: private-rooms/encryption-core, "One selected key per user".
+ */
+export function selectMemberKeys(
+  keys: TEncryptionKeyPair[] | null | undefined,
+): Map<string, RoomMemberPublicKey> {
+  const byUser = new Map<string, TEncryptionKeyPair[]>();
+  if (Array.isArray(keys)) {
+    for (const k of keys) {
+      if (!k?.userId || !k?.publicKey) continue;
+      const userId = String(k.userId);
+      const bucket = byUser.get(userId);
+      if (bucket) bucket.push(k);
+      else byUser.set(userId, [k]);
+    }
+  }
+  const selected = new Map<string, RoomMemberPublicKey>();
+  for (const [userId, userKeys] of byUser) {
+    const key = selectUserKey(userKeys)!;
+    selected.set(userId, {
+      userId,
+      publicKey: key.publicKey,
+      publicKeyId: key.id,
+    });
+  }
+  return selected;
+}
+
 export async function loadRoomMemberKeys(
   roomId: number | string,
 ): Promise<{
-  keyByUserId: Map<string, string>;
+  /** The selected key of each member. */
+  keyByUserId: Map<string, RoomMemberPublicKey>;
   keysByUserId: Map<string, RoomMemberPublicKey[]>;
+  /** Every listed key: unwrapping needs all of a sender's keys. */
   list: RoomMemberPublicKey[];
 }> {
-  const list = toMemberKeys(await getRoomEncryptionKeys(roomId));
-  const keyByUserId = new Map<string, string>();
+  const keys = await getRoomEncryptionKeys(roomId);
+  const list = toMemberKeys(keys);
   const keysByUserId = new Map<string, RoomMemberPublicKey[]>();
   for (const entry of list) {
-    keyByUserId.set(entry.userId, entry.publicKey);
     const bucket = keysByUserId.get(entry.userId);
     if (bucket) bucket.push(entry);
     else keysByUserId.set(entry.userId, [entry]);
   }
-  return { keyByUserId, keysByUserId, list };
+  return { keyByUserId: selectMemberKeys(keys), keysByUserId, list };
 }
 
 export async function loadRoomMemberKeysSafe(

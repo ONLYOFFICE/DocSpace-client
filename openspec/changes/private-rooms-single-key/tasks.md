@@ -5,7 +5,7 @@ Every task below is committed on its own (see "Commits" in `openspec/config.yaml
 ## 1. Key selection
 
 - [x] 1.1 Add `selectUserKey(envelopes)` to `packages/shared/services/encryption` (newest parsed `date`, ties and unparsable dates to the last listed, `null` for none); verify with a unit test covering one key, two keys with different dates, equal dates, a legacy `0001-01-01` envelope and an empty list.
-- [ ] 1.2 Make `loadRoomMemberKeys` (`packages/shared/services/private-room/room-member-keys.ts`) return one key per user chosen by `selectUserKey`, and drop the all-keys views that have no remaining caller; verify with `room-member-keys` tests for a member listed with two keys.
+- [x] 1.2 Make `loadRoomMemberKeys` (`packages/shared/services/private-room/room-member-keys.ts`) return one key per user chosen by `selectUserKey`, and drop the all-keys views that have no remaining caller; verify with `room-member-keys` tests for a member listed with two keys.
 
 ## 2. One wrap per member
 

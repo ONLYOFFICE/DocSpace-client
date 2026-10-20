@@ -49,7 +49,7 @@ beforeEach(() => {
 });
 
 describe("cancelEncryptedBatchUploadImpl", () => {
-  it("cancels only pending, encryptable upload rows and drops them from history", () => {
+  it("Uploader declines to unlock: only pending, encryptable rows fail with Common:EncryptionLockedUpload", () => {
     const { store } = createTestUploadDataStore(keyedPrivacy);
     const enc = makeUploadFile({ uniqueId: "enc", action: "upload" });
     const already = makeUploadFile({
@@ -70,14 +70,15 @@ describe("cancelEncryptedBatchUploadImpl", () => {
 
     cancelEncryptedBatchUploadImpl(store);
 
-    expect(store.files[0].cancel).toBe(true);
-    expect(store.files[0].action).toBe("uploaded");
-    expect(store.files[0].percent).toBe(100);
-    expect(store.files[1].cancel).toBe(false);
-    expect(store.files[2].cancel).toBe(false);
-    expect(store.uploadedFilesHistory.map((f) => f.uniqueId)).toEqual([
-      "already",
-    ]);
+    expect(store.files[0].error).toBe("Common:EncryptionLockedUpload");
+    expect(store.files[0].inAction).toBe(true);
+    expect(store.files[0].percent).toBe(0);
+    expect(store.uploadedFilesHistory[0].error).toBe(
+      "Common:EncryptionLockedUpload",
+    );
+    expect(store.files[1].error).toBeNull();
+    expect(store.uploadedFilesHistory[1].error).toBeNull();
+    expect(store.files[2].error).toBe("boom");
   });
 
   it("does nothing when the user has no encryption keys", () => {

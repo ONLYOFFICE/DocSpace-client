@@ -24,7 +24,7 @@ Trust-on-first-use pins protect two of the three places where a peer public key 
 ## Impact
 
 - Shared: `packages/shared/services/private-room/encrypted-upload-orchestrator.ts` (fan-out loop) and the TOFU store API in `packages/shared/services/encryption/tofu-store.ts` (reuse `checkKey` and the registered resolver).
-- Client: `packages/client/src/store/uploadDataStore/encryption.helpers.ts` (the store's own fan-out), the upload panel summary for members not granted.
+- Client: `packages/client/src/store/uploadDataStore/encryption.helpers.ts` (the store's own fan-out), a warning toast and the upload panel row for members not granted.
 - Locale: one Common key for "file uploaded but not shared with N members".
 - Tests: `packages/shared/services/private-room/__tests__/encrypted-upload-orchestrator.test.ts`, `packages/client/src/store/uploadDataStore/__tests__/encryption.helpers.test.ts`, an MSW integration case next to `tofu-mismatch.integration.test.ts`.
 - Server: none.

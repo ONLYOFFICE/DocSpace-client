@@ -96,11 +96,11 @@ The SDK SHALL show the decrypted name of an encrypted file in its list views and
 - **THEN** list rows, tiles and history entries show the decrypted name
 
 ### Requirement: Member removal warning and group expansion
-When a member is removed from a private room in the SDK, the removal dialog SHALL warn that the member will lose access to encrypted files, and a removed group SHALL be expanded to its members before wraps are revoked.
+When a member is removed from a private room in the SDK, the removal dialog SHALL warn that the member will lose access to encrypted files, and a removed group SHALL be expanded to its members before the revocation runs. The server keeps the wraps of removed members; access ends only through the lost read access.
 
 #### Scenario: Remove a group
 - **WHEN** a group is removed from a private room
-- **THEN** every member of the group has their wrap entries removed from the room's files
+- **THEN** a revocation runs for every member of the group, and their wrap entries remain stored on the server
 
 ### Requirement: Members grouped without groups and guests
 The SDK members view of a private room SHALL bucket members into administrators, users and expected members, and SHALL NOT list groups or guests because they hold no encryption identity.
@@ -132,7 +132,7 @@ Inside a private room in the SDK, the create menu SHALL offer only "new folder" 
 - **THEN** only the folder and upload entries are present
 
 ### Requirement: Folder operations use the server path
-Folder copy and move inside the SDK private surface SHALL be executed by the server without client-side re-encryption; only files go through the encrypted copy path.
+Folder move inside the SDK private surface SHALL be executed by the server without client-side re-encryption; only files go through the encrypted copy path. The server refuses a folder copy inside a private room.
 
 #### Scenario: Folder moved within a private room
 - **WHEN** the user moves a folder inside the same private room

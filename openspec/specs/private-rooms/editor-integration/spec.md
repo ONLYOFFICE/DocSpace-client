@@ -147,11 +147,11 @@ The server SHALL classify an encrypted PDF as a form by reading the form flag fr
 - **THEN** the file is treated as a plain PDF
 
 ### Requirement: Legacy desktop path uses editor-provided keys
-When the editor runs inside the desktop application, the editor SHALL pass the key pairs from the server configuration to the desktop encryption bridge and SHALL request file access through the desktop-specific access call.
+When the editor runs inside the desktop application, the editor SHALL pass the key pairs from the server configuration to the desktop encryption bridge and SHALL request file access through the desktop-specific access call, which has no server route and is answered with 404.
 
 #### Scenario: Desktop session
 - **WHEN** the editor is initialised in the desktop application with key pairs in the configuration
-- **THEN** the key pairs are handed to the desktop bridge and the desktop access call is used for file keys
+- **THEN** the key pairs are handed to the desktop bridge and the desktop access call is sent, which the server answers with 404, so no file keys are obtained through it
 
 ### Requirement: Editor actions without encrypted-specific handling
 The editor SHALL treat save-as, download-as, print, version history and form submission for an encrypted file the same way as for a non-encrypted file; no encrypted-specific branch exists for these actions.

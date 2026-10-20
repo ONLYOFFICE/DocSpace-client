@@ -65,7 +65,7 @@ The system SHALL store the per-member wraps in the file's access list on the ser
 
 #### Scenario: Upload fan-out
 - **WHEN** a member uploads a file into a private room
-- **THEN** the file's access list is written with a wrap for the uploader and one for every public key the server currently lists for the room's members
+- **THEN** the file's access list is written with a wrap for the uploader and one for every other room member the server lists a public key for, at most one entry per user
 
 ### Requirement: DSE3 chunked file format
 The system SHALL store every encrypted file as a DSE3 version-2 container: a header (magic, version, suite, flags, chunk plaintext size, chunk count, 16-byte file nonce, optional encrypted name) followed by 1 MiB plaintext chunks, each encrypted with AES-256-GCM under a fresh random 12-byte IV and carrying its tag.
@@ -220,7 +220,7 @@ The system SHALL remember the active key id per device. With exactly one key it 
 - **THEN** no key is active until the user selects one
 
 ### Requirement: Identity rotation re-wraps every file
-The system SHALL, when a user adopts a new identity, re-wrap the DEK of every encrypted file in every private room the user can read from the old key to the new key, publish the new public key only after every file succeeded, and persist progress so an interrupted run can resume.
+The system SHALL, when a user adopts a new identity, re-wrap the DEK of every encrypted file in every private room the user can read from the old key to the new key, publish the new public key only after every file succeeded, and persist progress so an interrupted run can resume. The server accepts a re-wrap only in rooms where the user is a room manager or content creator.
 
 #### Scenario: Partial failure
 - **WHEN** re-wrapping fails for at least one file
@@ -230,12 +230,16 @@ The system SHALL, when a user adopts a new identity, re-wrap the DEK of every en
 - **WHEN** the page is reloaded mid-rotation
 - **THEN** the rotation can be continued from the stored checkpoint instead of restarting
 
+#### Scenario: Room with a lesser role
+- **WHEN** the user is an editor, reviewer, commenter or viewer in a private room
+- **THEN** the server refuses the re-wrap of that room's files, so the run cannot complete and stays resumable
+
 ### Requirement: Revocation removes access-list entries only
-The system SHALL NOT generate a new DEK or re-encrypt file content when a member is removed from a private room. Revocation SHALL consist of deleting the removed member's wraps from each file's access list.
+The system SHALL NOT generate a new DEK or re-encrypt file content when a member is removed from a private room. The server keeps the removed member's wraps in each file's access list, because an access-list write replaces only the users it names and never removes anyone else; access ends only because the server refuses the removed member read access.
 
 #### Scenario: Member removed
 - **WHEN** a member is removed from a private room
-- **THEN** each file's access list loses that member's entry and the ciphertext on the server is unchanged
+- **THEN** the ciphertext and each file's access list on the server are unchanged, and the server no longer lets the member read the files
 
 ### Requirement: No forward secrecy for already-decrypted content
 The system SHALL NOT attempt to revoke access to content a removed member already decrypted or to a DEK they already unwrapped; protection of such content rests on the server refusing further downloads.

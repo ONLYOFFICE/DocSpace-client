@@ -101,11 +101,15 @@ The system SHALL serve the embeddable SDK private-room pages under `/sdk/private
 - **THEN** the SDK private rooms list renders
 
 ### Requirement: Server API is not gated by the flag
-The system SHALL NOT rely on the flag for security: the server exposes private-room endpoints (keys, room access, file access) to any authenticated user whether or not the flag is set, and the flag MUST be treated as a discoverability control only.
+The system SHALL NOT rely on the flag for security: the server applies its own authorisation to the private-room endpoints whether or not the flag is set (own keys only, guests refused for key writes, room membership and an own key for room access, read access for file access), and the flag MUST be treated as a discoverability control only.
 
 #### Scenario: API call without the flag
 - **WHEN** a client calls the private-room key endpoints with the flag disabled
 - **THEN** the server answers as it would with the flag enabled
+
+#### Scenario: Guest creates a key
+- **WHEN** a guest asks the server to store an encryption key, with or without the flag
+- **THEN** the server refuses the request
 
 ### Requirement: E2E suite runs with the flag enabled
 The system SHALL enable the flag for every Playwright page in the client E2E base fixture, so the existing private-room specs cover the released behaviour, while a dedicated spec asserts that each entry point disappears without the flag and returns with it.

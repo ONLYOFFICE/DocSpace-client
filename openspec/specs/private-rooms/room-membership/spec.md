@@ -7,7 +7,7 @@ Covers how a private (end-to-end encrypted) room is created and edited, who can 
 ## Requirements
 
 ### Requirement: Private room is a flagged Custom room
-The system SHALL present "Private room" as its own room type in the create-room chooser while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag.
+The system SHALL present "Private room" as its own room type in the create-room chooser while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag. This rule is enforced by the client only: the server accepts the private flag with any room type.
 
 #### Scenario: Private card chosen
 - **WHEN** the user picks the Private room card and confirms creation
@@ -16,6 +16,10 @@ The system SHALL present "Private room" as its own room type in the create-room 
 #### Scenario: Other room type
 - **WHEN** a Public, Form filling, Virtual data or Collaboration room is created
 - **THEN** the private flag is not sent and the room is not encrypted
+
+#### Scenario: Private flag sent with another room type
+- **WHEN** a create request that bypasses the client sets the private flag on a room type other than Custom
+- **THEN** the server creates a private room of the requested type
 
 ### Requirement: Private room creation requires an encryption key
 The system SHALL refuse to create a private room for a user who has no registered encryption key, after re-fetching the keys from the server, and SHALL show Common:EncryptionKeysRequiredForPrivateRoom.
@@ -100,10 +104,10 @@ The system SHALL, after the room security update succeeds, wrap the key of every
 - **THEN** the re-encryption starts only afterwards, and the panel closes while the progress bar reports the re-encryption
 
 ### Requirement: Invitees without usable keys are skipped with a warning
-The system SHALL skip re-encryption for an invitee who has no encryption key or whose key changed and was refused, SHALL still leave them as a room member, and SHALL name them in Common:EncryptedSkippedNoKeys or Common:EncryptedSkippedKeyMismatch.
+The system SHALL skip re-encryption for an invitee whose key set is empty or whose key changed and was refused, SHALL still leave them as a room member, and SHALL name them in Common:EncryptedSkippedNoKeys or Common:EncryptedSkippedKeyMismatch. The server refuses an invitation request that names a user who never registered a key; that user never becomes a member, while invitees processed earlier in the request may already be added.
 
 #### Scenario: Invitee has no key
-- **WHEN** an invitee has no registered encryption key
+- **WHEN** an invitee registered encryption keys earlier and has since deleted all of them
 - **THEN** the invitee becomes a room member, no file access entry is created for them, and Common:EncryptedSkippedNoKeys lists their name
 
 #### Scenario: Invitee key mismatch refused
@@ -132,29 +136,29 @@ The system SHALL refuse to start removing a member while uploads into the room r
 - **THEN** no confirmation dialog opens and Common:CannotRemoveMemberWhileUploads is shown
 
 ### Requirement: Removed member loses file access entries
-The system SHALL, after the role update that removes a member, delete the access entry of that member from every encrypted file in the room, reporting Common:EncryptedRevokeCompleted, Common:EncryptedRevokePartialFailure or Common:EncryptedRevokeFailed. Existing ciphertext and file keys SHALL NOT be regenerated.
+The system SHALL, after the role update that removes a member, run a revocation over every encrypted file in the room, reporting Common:EncryptedRevokeCompleted, Common:EncryptedRevokePartialFailure or Common:EncryptedRevokeFailed. The server keeps the member's access entries, as an access-list write never removes a user it does not name; access ends only through the lost read access. Existing ciphertext and file keys SHALL NOT be regenerated.
 
 #### Scenario: Revocation succeeds
-- **WHEN** the removal is confirmed and the access list of every file is rewritten without the member
-- **THEN** Common:EncryptedRevokeCompleted is shown
+- **WHEN** the removal is confirmed and the revocation run finishes without errors
+- **THEN** Common:EncryptedRevokeCompleted is shown, while the member's access entries remain stored on the server
 
 #### Scenario: Removed member retains an old copy
 - **WHEN** a removed member had already downloaded and decrypted a file
 - **THEN** that local copy remains readable; only server-side access is withdrawn
 
 ### Requirement: Removing a group revokes each member
-The system SHALL expand a removed group into its current members and revoke file access for each of them.
+The system SHALL expand a removed group into its current members and run the revocation for each of them; as for a single member, the server keeps their access entries.
 
 #### Scenario: Group removed
 - **WHEN** a group is removed from a private room
-- **THEN** every user in that group loses their access entry on every encrypted file
+- **THEN** a revocation runs for every user in that group, and their access entries remain stored on the server
 
 ### Requirement: Leaving a room revokes own access first
-The system SHALL, when a member leaves a private room, remove the own access entry of the leaver from every encrypted file before dropping the role, on a best-effort basis that never blocks leaving.
+The system SHALL, when a member leaves a private room, run a revocation of the leaver's own access entries before dropping the role, on a best-effort basis that never blocks leaving. The server keeps those entries, as an access-list write never removes a user it does not name; access ends when the role is dropped.
 
 #### Scenario: Leave succeeds
 - **WHEN** a member confirms leaving a private room
-- **THEN** their file access entries are removed and then the role is dropped
+- **THEN** the revocation runs, then the role is dropped, and the leaver's access entries remain stored on the server
 
 #### Scenario: Cleanup fails
 - **WHEN** removing the access entries fails for some files

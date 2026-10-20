@@ -170,11 +170,15 @@ The system SHALL offer Common:ResetEncryptionKeysCta to a user who lost both pas
 - **THEN** Common:ResetEncryptionKeysPartialFailure reports the count and the identity is still locked
 
 ### Requirement: Switch the active key with room migration
-The system SHALL let a user with several keys activate another one after entering its passphrase; activation SHALL re-wrap every encrypted file in every private room to the new key before confirming with Common:EncryptionKeyActivated.
+The system SHALL let a user with several keys activate another one after entering its passphrase; activation SHALL re-wrap every encrypted file in every private room to the new key before confirming with Common:EncryptionKeyActivated. The server accepts the re-wrap only in rooms where the user is a room manager or content creator.
 
 #### Scenario: Switch
 - **WHEN** the user selects another key and enters its passphrase
 - **THEN** all accessible encrypted files are re-wrapped and the key becomes active on this device
+
+#### Scenario: Room with a lesser role
+- **WHEN** the user is an editor, reviewer, commenter or viewer in a private room
+- **THEN** the server refuses the re-wrap of that room's files and they stay wrapped for the previous key only
 
 ### Requirement: Interrupted migration can be resumed
 The system SHALL show a resume banner (Common:ReEncryptingFiles progress, Common:ResumeReEncryptionHint) with Common:ResumeReEncryptionCta and Common:Later when a key migration was interrupted, and continue from the saved checkpoint.

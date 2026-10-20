@@ -38,7 +38,12 @@ import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { generateIdentityKeyPair } from "../../encryption/identity";
 import { generateDEK } from "../../encryption/file-keys";
 import { wrapDekForRecipients } from "../../encryption/room-file-access";
-import { resetTofuStores } from "../../encryption/tofu-store";
+import {
+  getTofuStore,
+  registerKeyMismatchHandler,
+  resetTofuStores,
+  unregisterKeyMismatchHandler,
+} from "../../encryption/tofu-store";
 import type {
   IdentityKeyPair,
   ServerAccessKeyDto,
@@ -50,6 +55,7 @@ import {
   revokeMemberFromEncryptedRoom,
   validateMembersForEncryption,
 } from "../room-encryption";
+import { verifyMemberKeys } from "../member-key-verification";
 
 declare global {
   // eslint-disable-next-line no-var
@@ -1220,5 +1226,126 @@ describe("revokeMemberFromEncryptedRoom", () => {
 
     expect(progress[0]).toEqual([0, 2]);
     expect(progress.at(-1)).toEqual([2, 2]);
+  });
+});
+
+describe("verifyMemberKeys", () => {
+  let bob: IdentityKeyPair;
+  let carol: IdentityKeyPair;
+
+  beforeEach(async () => {
+    bob = await generateIdentityKeyPair();
+    carol = await generateIdentityKeyPair();
+    resetMockIDB();
+    resetTofuStores();
+    unregisterKeyMismatchHandler();
+    vi.stubGlobal("indexedDB", mockIDB);
+  });
+
+  afterEach(() => {
+    unregisterKeyMismatchHandler();
+    vi.unstubAllGlobals();
+  });
+
+  const pinnedKeys = async (userId: string) =>
+    (await getTofuStore(ALICE).getKeys(userId)).map((k) => k.publicKey);
+
+  it("Unpinned member at upload: the key is pinned and verified", async () => {
+    const result = await verifyMemberKeys(
+      [{ userId: BOB, publicKey: pubB64(bob) }],
+      { scopeUserId: ALICE },
+    );
+
+    expect(result.verified.map((r) => r.userId)).toEqual([BOB]);
+    expect(result.skipped).toEqual([]);
+    expect(await pinnedKeys(BOB)).toEqual([pubB64(bob)]);
+  });
+
+  it("verifies a key that matches its pin without asking", async () => {
+    await verifyMemberKeys([{ userId: BOB, publicKey: pubB64(bob) }], {
+      scopeUserId: ALICE,
+    });
+    const resolver = vi.fn(async () => "refuse" as const);
+
+    const result = await verifyMemberKeys(
+      [{ userId: BOB, publicKey: pubB64(bob) }],
+      { scopeUserId: ALICE, resolver },
+    );
+
+    expect(result.verified).toHaveLength(1);
+    expect(resolver).not.toHaveBeenCalled();
+  });
+
+  it("Member key change accepted on upload: the new key is pinned and verified", async () => {
+    await verifyMemberKeys([{ userId: BOB, publicKey: pubB64(bob) }], {
+      scopeUserId: ALICE,
+    });
+    const resolver = vi.fn(async () => "accept" as const);
+
+    const result = await verifyMemberKeys(
+      [{ userId: BOB, publicKey: pubB64(carol), displayName: "Bob" }],
+      { scopeUserId: ALICE, resolver },
+    );
+
+    expect(resolver).toHaveBeenCalledWith(
+      expect.objectContaining({
+        userId: BOB,
+        knownKey: pubB64(bob),
+        newKey: pubB64(carol),
+        displayName: "Bob",
+      }),
+    );
+    expect(result.verified.map((r) => r.publicKey)).toEqual([pubB64(carol)]);
+    expect(await pinnedKeys(BOB)).toContain(pubB64(carol));
+  });
+
+  it("Member key mismatch on upload: a refused key is skipped", async () => {
+    await verifyMemberKeys([{ userId: BOB, publicKey: pubB64(bob) }], {
+      scopeUserId: ALICE,
+    });
+    const resolver = vi.fn(async () => "refuse" as const);
+
+    const result = await verifyMemberKeys(
+      [{ userId: BOB, publicKey: pubB64(carol), displayName: "Bob" }],
+      { scopeUserId: ALICE, resolver },
+    );
+
+    expect(result.verified).toEqual([]);
+    expect(result.skipped).toEqual([
+      { userId: BOB, displayName: "Bob", reason: "key-mismatch-refused" },
+    ]);
+    expect(await pinnedKeys(BOB)).not.toContain(pubB64(carol));
+  });
+
+  it("Member key mismatch on upload: with no resolver registered the key is skipped", async () => {
+    await verifyMemberKeys([{ userId: BOB, publicKey: pubB64(bob) }], {
+      scopeUserId: ALICE,
+    });
+
+    const result = await verifyMemberKeys(
+      [{ userId: BOB, publicKey: pubB64(carol) }],
+      { scopeUserId: ALICE },
+    );
+
+    expect(result.verified).toEqual([]);
+    expect(result.skipped).toEqual([
+      { userId: BOB, displayName: undefined, reason: "key-mismatch-refused" },
+    ]);
+  });
+
+  it("falls back to the registered key-change handler", async () => {
+    await verifyMemberKeys([{ userId: BOB, publicKey: pubB64(bob) }], {
+      scopeUserId: ALICE,
+    });
+    const handler = vi.fn(async () => "accept" as const);
+    registerKeyMismatchHandler(handler);
+
+    const result = await verifyMemberKeys(
+      [{ userId: BOB, publicKey: pubB64(carol) }],
+      { scopeUserId: ALICE },
+    );
+
+    expect(handler).toHaveBeenCalledTimes(1);
+    expect(result.verified).toHaveLength(1);
   });
 });

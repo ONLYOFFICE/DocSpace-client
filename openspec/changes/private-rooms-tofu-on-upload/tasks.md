@@ -2,7 +2,7 @@
 
 ## 1. Shared verification helper
 
-- [ ] 1.1 Add `verifyMemberKeys(recipients, { resolver })` to `packages/shared/services/private-room/room-member-keys.ts` (or next to `room-encryption.ts`) that pins first-seen keys, checks the rest against the TOFU pin, resolves mismatches through the given or registered resolver, and returns verified plus skipped recipients; verify with unit tests in `packages/shared/services/private-room/__tests__/room-encryption.test.ts` covering first-seen, match, mismatch-accepted, mismatch-refused and no-resolver.
+- [x] 1.1 Add `verifyMemberKeys(recipients, { resolver })` to `packages/shared/services/private-room/room-member-keys.ts` (or next to `room-encryption.ts`) that pins first-seen keys, checks the rest against the TOFU pin, resolves mismatches through the given or registered resolver, and returns verified plus skipped recipients; verify with unit tests in `packages/shared/services/private-room/__tests__/room-encryption.test.ts` covering first-seen, match, mismatch-accepted, mismatch-refused and no-resolver.
 - [ ] 1.2 Switch the invite and backfill paths in `room-encryption.ts` to the helper without behaviour change; verify the existing `room-encryption.test.ts` and `tofu-mismatch.integration.test.ts` stay green.
 
 ## 2. Orchestrator fan-out checks pins

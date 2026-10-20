@@ -7,7 +7,7 @@
 
 ## 2. Orchestrator fan-out checks pins
 
-- [ ] 2.1 Call the helper in `wrapDekForSelfAndRoom` (`packages/shared/services/private-room/encrypted-upload-orchestrator.ts`) before wrapping and return the skipped members in the orchestrator result; verify with new cases in `__tests__/encrypted-upload-orchestrator.test.ts` asserting no wrap is written for a refused key and that a first-seen key is pinned.
+- [x] 2.1 Call the helper in `wrapDekForSelfAndRoom` (`packages/shared/services/private-room/encrypted-upload-orchestrator.ts`) before wrapping and return the skipped members in the orchestrator result; verify with new cases in `__tests__/encrypted-upload-orchestrator.test.ts` asserting no wrap is written for a refused key and that a first-seen key is pinned.
 - [ ] 2.2 Add an MSW integration case next to `__tests__/tofu-mismatch.integration.test.ts` where the server swaps a member key between two uploads and the second upload omits that member; verify it passes.
 
 ## 3. Client upload pipeline checks pins

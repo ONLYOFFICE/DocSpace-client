@@ -37,6 +37,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AES_KEY_SIZE_BYTES } from "../../encryption/types";
 import { orchestrateEncryptedUpload } from "../encrypted-upload-orchestrator";
+import {
+  getTofuStore,
+  registerKeyMismatchHandler,
+  resetTofuStores,
+  unregisterKeyMismatchHandler,
+} from "../../encryption/tofu-store";
 
 // ---------------------------------------------------------------------------
 // Module mocks
@@ -255,6 +261,65 @@ describe("orchestrateEncryptedUpload — setItemLabel (encrypting phase)", () =>
 describe("orchestrateEncryptedUpload - room fan-out", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    resetTofuStores();
+    unregisterKeyMismatchHandler();
+  });
+
+  afterEach(() => {
+    unregisterKeyMismatchHandler();
+  });
+
+  const upload = () =>
+    orchestrateEncryptedUpload({
+      files: [makeFile("doc.docx", 16)],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      userId: "user-1",
+      publicKey: "pk-own",
+      publicKeyId: "key-1",
+    });
+
+  it("Member key mismatch on upload: no wrap is written for a refused key and the file is still uploaded", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+    await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");
+    const handler = vi.fn(async () => "refuse" as const);
+    registerKeyMismatchHandler(handler);
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "a-1", userId: "alice", publicKey: "pk-a", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-2", userId: "bob", publicKey: "pk-b-swapped", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+
+    const { results } = await upload();
+
+    expect(handler).toHaveBeenCalledTimes(1);
+    expect(results[0].ok).toBe(true);
+    expect(results[0].skippedMembers).toEqual([
+      { userId: "bob", displayName: undefined, reason: "key-mismatch-refused" },
+    ]);
+    const fanOut = vi.mocked(wrapDekForRecipients).mock.calls[1][0];
+    expect(fanOut.recipients.map((r) => r.userId)).toEqual(["alice"]);
+  });
+
+  it("Unpinned member at upload: the key is pinned and the wrap is produced", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "a-1", userId: "alice", publicKey: "pk-a", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+
+    const { results } = await upload();
+
+    expect(results[0].skippedMembers).toBeUndefined();
+    const fanOut = vi.mocked(wrapDekForRecipients).mock.calls[1][0];
+    expect(fanOut.recipients.map((r) => r.userId)).toEqual(["alice"]);
+    const pinned = await getTofuStore("user-1").getKeys("alice");
+    expect(pinned.map((k) => k.publicKey)).toEqual(["pk-a"]);
   });
 
   it("Member with two keys on the server: one recipient per member, for the selected key", async () => {

@@ -48,6 +48,10 @@ import { wrapDekForRecipients } from "../encryption/room-file-access";
 import type { IdentityKeyPair } from "../encryption/types";
 import { selectMemberKeys } from "./room-member-keys";
 import {
+  verifyMemberKeys,
+  type SkippedMemberKey,
+} from "./member-key-verification";
+import {
   countActiveUploadsForRoom as countActiveUploadsForRoomBase,
   isQuotaError,
   type UploadQueueItem,
@@ -118,6 +122,8 @@ export interface UploadFileResult {
   originalName: string;
   error?: unknown;
   aborted?: boolean;
+  /** Room members whose key failed the pin check and got no wrap. */
+  skippedMembers?: SkippedMemberKey[];
 }
 
 export interface OrchestrateResult {
@@ -222,7 +228,7 @@ async function wrapDekForSelfAndRoom(args: {
   publicKeyId: string;
   roomId: number | string;
   signal: AbortSignal | undefined;
-}): Promise<void> {
+}): Promise<SkippedMemberKey[]> {
   const {
     fileId,
     dek,
@@ -276,7 +282,12 @@ async function wrapDekForSelfAndRoom(args: {
       });
     }
 
-    if (recipients.length === 0) return;
+    if (recipients.length === 0) return [];
+
+    const { verified, skipped } = await verifyMemberKeys(recipients, {
+      scopeUserId: userId,
+    });
+    if (verified.length === 0) return skipped;
 
     throwIfAborted(signal);
 
@@ -284,11 +295,11 @@ async function wrapDekForSelfAndRoom(args: {
       dek,
       senderIdentity: identity,
       senderUserId: userId,
-      recipients,
+      recipients: verified,
       fileId: fileIdNumeric,
     });
 
-    if (newKeys.length === 0) return;
+    if (newKeys.length === 0) return skipped;
 
     const allKeys = [
       ...existingFileKeys.map((k) => ({
@@ -299,8 +310,10 @@ async function wrapDekForSelfAndRoom(args: {
       ...newKeys,
     ];
     await setFileEncryptionKeys(fileId, allKeys);
+    return skipped;
   } catch (error) {
     if (error instanceof AbortedError) throw error;
+    return [];
   }
 }
 
@@ -388,7 +401,7 @@ async function uploadOneFile(
       // on the last chunk and return 404 here. Ignore — the file was written.
     }
 
-    await wrapDekForSelfAndRoom({
+    const skippedMembers = await wrapDekForSelfAndRoom({
       fileId,
       dek: prepared.dek,
       identity,
@@ -406,6 +419,7 @@ async function uploadOneFile(
       fileId,
       uploadId,
       originalName: prepared.originalFileName,
+      ...(skippedMembers.length > 0 ? { skippedMembers } : {}),
     };
   } catch (error) {
     if (error instanceof AbortedError) {

@@ -83,6 +83,8 @@ export type EncryptedFilesHandlerHandle = {
   setRoomUserKeys: (keys: RoomMemberKeyEntry[]) => void;
   /** Marks a file as lying outside a private room (publickeys answers 415). */
   setFileOutsidePrivateRoom: (fileId: number) => void;
+  /** Answers as another signed-in user until `reset`. */
+  setCurrentUserId: (userId: string) => void;
   getSessions: () => UploadSessionRecord[];
   getRequests: () => RequestLog[];
   reset: () => void;
@@ -258,7 +260,7 @@ export const encryptedFilesHandlers = (
   const sessions = new Map<string, UploadSessionRecord>();
   const requests: RequestLog[] = [];
   let roomUserKeys: RoomMemberKeyEntry[] = [...(opts.roomUserKeys ?? [])];
-  const currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
+  let currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
   const createdOn = new Map<string, string>();
   const outsidePrivateRoom = new Set<number>();
   /** files_file_keys.create_on: set when the row is written. */
@@ -343,6 +345,9 @@ export const encryptedFilesHandlers = (
     setFileOutsidePrivateRoom: (fileId) => {
       outsidePrivateRoom.add(fileId);
     },
+    setCurrentUserId: (userId) => {
+      currentUserId = userId;
+    },
     getSessions: () => Array.from(sessions.values()),
     getRequests: () => [...requests],
     reset: () => {
@@ -354,6 +359,7 @@ export const encryptedFilesHandlers = (
       roomUserKeys = [];
       nextFileId = 1000;
       nextSessionId = 1;
+      currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
     },
   };
   if (opts.handle) opts.handle.current = handle;

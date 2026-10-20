@@ -19,7 +19,7 @@
 
 - [x] 3.1 Run the private-room E2E specs in Docker (`docker-compose run --rm -T -e WORKERS=2 tests-dev pnpm exec playwright test __tests__/private-room-*.spec.ts __tests__/keys-management*.spec.ts __tests__/encrypted-file-ui.spec.ts`), triage every failure as "spec asserted invented behaviour" (fix the spec) or "client bug the mock hid" (record a task here with the failing spec as evidence).
 - [x] 3.2 Fix or split out the client bugs found in 3.1 (see Decisions needed in proposal.md); verify with the same E2E run green.
-- [ ] 3.3 Bring the shared integration tests under `packages/shared/services/private-room/__tests__` onto the corrected mocks: add `setCurrentUserId` to the `privacyroomKeysHandlers` and `encryptedFilesHandlers` handles, set the acting user in every test (switching it where the test changes user), and make the revoke test assert that the revoked member's entry stays stored, as `private-rooms/room-membership` states; verify with `cd packages/shared && pnpm exec vitest run services/private-room`.
+- [x] 3.3 Bring the shared integration tests under `packages/shared/services/private-room/__tests__` onto the corrected mocks: add `setCurrentUserId` to the `privacyroomAccessHandlers` and `encryptedFilesHandlers` handles, set the acting user in every test (switching it where the test changes user), and make the revoke test assert that the revoked member's entry stays stored, as `private-rooms/room-membership` states; verify with `cd packages/shared && pnpm exec vitest run services/private-room`.
 
 ## 4. Integration check
 

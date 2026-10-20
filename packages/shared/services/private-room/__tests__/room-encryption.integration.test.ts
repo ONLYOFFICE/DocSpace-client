@@ -86,9 +86,11 @@ const server = setupServer(
   ...encryptedFilesHandlers(PORT, {
     roomId: ROOM_ID,
     ownerId: ALICE_ID,
+    currentUserId: ALICE_ID,
     handle: filesHandle,
   }),
   ...privacyroomAccessHandlers(PORT, {
+    userId: ALICE_ID,
     handle: accessHandle,
   }),
 );
@@ -267,7 +269,7 @@ describe("addMembersToEncryptedRoom — integration via MSW", () => {
 });
 
 describe("revokeMemberFromEncryptedRoom — integration via MSW", () => {
-  it("removes the revoked member from every file's ACL", async () => {
+  it("Revocation succeeds: the member's access entries remain stored on the server", async () => {
     const alice = await generateIdentityKeyPair();
     const bob = await generateIdentityKeyPair();
     const dek = generateDEK();
@@ -300,13 +302,12 @@ describe("revokeMemberFromEncryptedRoom — integration via MSW", () => {
     expect(result).toEqual([{ fileId: 300, success: true }]);
 
     const stored = filesHandle.current!.getFile(300);
-    expect(stored.fileKeys).toHaveLength(1);
-    expect(stored.fileKeys[0].userId).toBe(ALICE_ID);
+    expect(stored.fileKeys.map((k) => k.userId)).toEqual([ALICE_ID, BOB_ID]);
 
     const puts = filesHandle.current!
       .getRequests()
       .filter((r) => r.method === "PUT");
-    expect(puts).toHaveLength(1);
+    expect(puts).toHaveLength(0);
   });
 
   it("is a no-op when the revoked user is not in the ACL", async () => {

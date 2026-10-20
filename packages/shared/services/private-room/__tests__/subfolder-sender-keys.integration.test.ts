@@ -85,9 +85,10 @@ const server = setupServer(
   ...encryptedFilesHandlers(PORT, {
     roomId: ROOM_ID,
     ownerId: ALICE_ID,
+    currentUserId: BOB_ID,
     handle: filesHandle,
   }),
-  ...privacyroomAccessHandlers(PORT, { handle: accessHandle }),
+  ...privacyroomAccessHandlers(PORT, { userId: BOB_ID, handle: accessHandle }),
 );
 
 class MockOpenRequest {
@@ -220,6 +221,7 @@ describe("opening an encrypted file when only its folder id is known (bug 82882)
     filesHandle.current!.setRoomUserKeys([]);
     accessHandle.current!.setRoomKeys(ROOM_ID, [
       memberKey("alice-1", ALICE_ID, pubB64(alice)),
+      memberKey("bob-1", BOB_ID, pubB64(bob)),
     ]);
 
     const senderKeys = await loadFileSenderKeysSafe(FILE_ID, ROOM_ID);

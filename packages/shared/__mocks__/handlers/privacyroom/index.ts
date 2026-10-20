@@ -228,6 +228,8 @@ export type PrivacyroomAccessHandlerHandle = {
   setRoomKeys: (roomId: number | string, keys: TEncryptionKeyPair[]) => void;
   /** Registers a room that exists but is not private. */
   setNonPrivateRoom: (roomId: number | string) => void;
+  /** Answers as another signed-in user until `reset`. */
+  setCurrentUserId: (userId: string) => void;
   getRequests: () => RequestLog[];
   reset: () => void;
 };
@@ -248,7 +250,7 @@ export const privacyroomAccessHandlers = (
   );
   const nonPrivateRooms = new Set<string>();
   const requests: RequestLog[] = [];
-  const callerId = opts.userId ?? DEFAULT_USER_ID;
+  let callerId = opts.userId ?? DEFAULT_USER_ID;
 
   const handle: PrivacyroomAccessHandlerHandle = {
     getRoomKeys: (id) => [...(roomKeys.get(String(id)) ?? [])],
@@ -258,11 +260,15 @@ export const privacyroomAccessHandlers = (
     setNonPrivateRoom: (id) => {
       nonPrivateRooms.add(String(id));
     },
+    setCurrentUserId: (userId) => {
+      callerId = userId;
+    },
     getRequests: () => [...requests],
     reset: () => {
       roomKeys.clear();
       nonPrivateRooms.clear();
       requests.length = 0;
+      callerId = opts.userId ?? DEFAULT_USER_ID;
     },
   };
   if (opts.handle) opts.handle.current = handle;

@@ -3,7 +3,7 @@
 ## MODIFIED Requirements
 
 ### Requirement: Invited members receive re-wrapped file keys
-The system SHALL wrap the key of every encrypted file in the room for each newly invited member whose encryption key passes verification, showing re-encryption progress, so that every granted invitee either holds an access entry for every encrypted file or is shown as pending access. A best-effort backfill for earlier members whose keys were registered late SHALL run afterwards.
+The system SHALL wrap the key of every encrypted file in the room for each newly invited member whose encryption key passes verification, showing re-encryption progress, so that every granted invitee either holds an access entry for every encrypted file or is shown as pending access. The backfill sweep for the room's current members SHALL run afterwards. The system SHALL NOT verify the written access list against the server's read of it, because that read returns only the caller's own entries.
 
 #### Scenario: All invitees have verified keys
 - **WHEN** invitations are sent to members with registered, verified keys
@@ -12,6 +12,10 @@ The system SHALL wrap the key of every encrypted file in the room for each newly
 #### Scenario: Order of operations
 - **WHEN** an invitation to a private room completes, whichever of the security update and the re-encryption ran first
 - **THEN** each granted invitee holds an access entry for every encrypted file in the room or is shown as pending access
+
+#### Scenario: Written list is not read back
+- **WHEN** the re-encryption of a file completes
+- **THEN** no drift warning is raised from comparing the written entries with the caller-only read
 
 #### Scenario: Re-encryption aborted
 - **WHEN** the inviter closes the panel or the unlock is cancelled during re-encryption

@@ -61,7 +61,10 @@ None.
   settings store (Document Server capability), locales.
 - Server (`../server`): editor configuration (`EditorController`,
   `Configuration.cs` co-editing), Document Server version/capability probe,
-  callback handling for encrypted saves; conversion guards already exist.
+  callback handling for encrypted saves, and whether the signed configuration
+  keeps the caller's key-pair list. The server already refuses to convert
+  encrypted or private-room files, but it does not keep converted or
+  plaintext output out of a destination folder, including a private room.
 - Document Server team: owns the contract itself. Nothing in this change can
   be marked done until that team confirms how `encryptionKeys.dek` is read in
   a web session, what the save callback returns and which version ships it.

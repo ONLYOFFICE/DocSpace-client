@@ -10,7 +10,15 @@ because the field is not part of the `@onlyoffice/document-editor-react`
 typings. The server adds the caller's key pairs for private-room files
 (`server/products/ASC.Files/Server/Api/EditorController.cs:311`,
 `Configuration.cs:263`) and signs the configuration before the client adds
-the DEK. Co-editing is only a client flag (`packages/doceditor/src/utils/actions.ts:829`);
+the DEK. The signature covers that field: the token is computed over the
+whole configuration DTO (`ConfigurationDto.cs:592`,
+`result.Token = documentServiceHelper.GetSignature(result)`), whose
+`editorConfig.encryptionKeys` is the caller's key-pair list
+(`ConfigurationDto.cs:639`), each entry carrying `publicKey`,
+`privateKeyEnc` (the caller's encrypted private half) and `cryptoEngineId`
+(`EncryptionKeyDto.cs`). The client then overwrites the field with
+`{ dek, cryptoEngineId }`, so the signed value and the value in the
+configuration differ in shape and content. Co-editing is only a client flag (`packages/doceditor/src/utils/actions.ts:829`);
 the server's co-editing configuration (`Configuration.cs:317-326`) does not
 look at the encrypted flag. The AI bridge is already disabled for encrypted
 files (`packages/doceditor/src/hooks/useEditorEvents.ts:317-319`).
@@ -70,9 +78,17 @@ assumes Document Server-side decryption, a contract nobody has written down.
    form submission; keep print.** Save-as and download-as would route
    plaintext through the Document Server output address into arbitrary
    folders (the save-as handler posts a Document Server URL to the file
-   creation endpoint); the server already forbids conversion into and out of
-   private rooms, so a visible action that silently fails is worse than no
-   action. Print is local to the session. Version history is withheld in the
+   creation endpoint). The server refuses to convert an encrypted file or a
+   file in a private room (`FileSecurity.cs:1894-1914` deny `Convert` there,
+   `FileConverter.cs:306-309` disables conversion of encrypted files), but it
+   does not stop converted or plaintext output from being written into a
+   folder: `POST files/file/{fileId}/copyas` converts a readable source and
+   inserts the result into the destination (`FilesControllerHelper.cs:263-280`)
+   with only a create-rights check (`FileConverter.cs:643-654`), and the
+   upload path has no private-room check (`FileUploader.cs:61-125`). Nothing
+   on the server therefore keeps the Document Server's plaintext output out
+   of an ordinary folder or out of a private room, which is why both actions
+   are withheld in the editor. Print is local to the session. Version history is withheld in the
    client already, so the editor follows. Alternative: implement encrypted
    save-as (decrypt, re-encrypt with a new DEK, upload through the encrypted
    session); deferred to a later change.
@@ -86,8 +102,13 @@ assumes Document Server-side decryption, a contract nobody has written down.
 - [Document Server does not implement the contract on the planned release
   train] → the capability check keeps encrypted files closed; private rooms
   remain usable as encrypted storage, and the release gate stays shut.
-- [JWT signed before the client injects `encryptionKeys`] → the contract must
-  state whether the field is outside the signed payload; if the Document
+- [JWT signed before the client injects `encryptionKeys`] → today the server
+  signs the field as the caller's key-pair list, including the encrypted
+  private half, so a Document Server that validates the token against the
+  configuration sees a different value than the `{ dek, cryptoEngineId }`
+  the client sends, and the token itself hands the encrypted private key to
+  the Document Server. The contract must state whether the field is outside
+  the signed payload; if the Document
   Server validates the whole configuration, the server would have to sign
   after the client supplies the DEK, which moves the DEK through the server
   (unacceptable) or requires a two-step token. Open question below.
@@ -110,8 +131,13 @@ assumes Document Server-side decryption, a contract nobody has written down.
 ## Open Questions
 
 - How does the Document Server read `editorConfig.encryptionKeys` in a web
-  session, and is the field covered by the token signature? Owner: Document
-  Server team. The answer changes the token-handling scenario only.
+  session, and does it validate the field against the token? Owner: Document
+  Server team. The answer changes the token-handling scenario only. (On the
+  portal side the field is signed today, as the key-pair list; see Context.)
+- Should the server keep the caller's key-pair list, with `privateKeyEnc`, in
+  `editorConfig.encryptionKeys` and in the signed token at all, given that the
+  client replaces the field and the Document Server does not need the
+  encrypted private key? Owner: backend team with the Document Server team.
 - Does the save callback return a container encrypted with the same DEK or a
   new one? Owner: Document Server team. If a new DEK, the server must receive
   a new wrap set from the client, which is a larger change.

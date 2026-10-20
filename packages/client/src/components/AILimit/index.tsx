@@ -104,8 +104,7 @@ const AILimit = ({
   const format = (amount: number) =>
     formatAiAmount(i18n.language, amount, currency);
 
-  const spent =
-    limit && currency ? format(limit.usage?.amountConsumed ?? 0) : "";
+  const spent = limit && currency ? format(limit.amountConsumed) : "";
 
   const current =
     limit && currency && limit.amountValue !== null

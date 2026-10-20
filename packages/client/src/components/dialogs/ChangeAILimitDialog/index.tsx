@@ -92,7 +92,6 @@ const ChangeAILimitDialog = ({
 
   const item = items.length === 1 ? items[0] : null;
   const limit = item?.aiServicesLimit;
-  const usage = limit?.usage ?? null;
   const currency = limit?.currency ?? "";
 
   const [amountText, setAmountText] = useState(
@@ -136,10 +135,10 @@ const ChangeAILimitDialog = ({
 
   const isSamePeriod = Boolean(limit && period === limit.period);
   const periodEnd =
-    isSamePeriod && usage ? usage.periodEnd : getPeriodEnd(period);
+    isSamePeriod && limit ? limit.periodEnd : getPeriodEnd(period);
   const date = formatPeriodEnd(periodEnd, i18n.language);
-  const spentValue = usage?.amountConsumed ?? 0;
-  const isSpentKnown = isSamePeriod && Boolean(usage);
+  const spentValue = limit?.amountConsumed ?? 0;
+  const isSpentKnown = isSamePeriod;
   const isBelowSpent = isSpentKnown && amount !== null && amount < spentValue;
 
   const getCountedFromHint = () => {

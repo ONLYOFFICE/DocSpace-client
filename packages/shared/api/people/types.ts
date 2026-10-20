@@ -55,24 +55,14 @@ export type TFilterArea = "all" | "people" | "guests";
 
 export type TSortOrder = "descending" | "ascending";
 
-export type TUserServiceLimitUsage = {
-  periodStart: string;
-  periodEnd: string | null;
-  amountConsumed: number;
-  amountAvailable: number | null;
-  quantityConsumed: number;
-  quantityAvailable?: number | null;
-};
-
 export type TUserServiceLimit = {
   id: number;
   scope: "Global" | "Custom";
   amountValue: number | null;
+  amountConsumed: number;
   currency: string | null;
-  quantityValue?: number | null;
-  serviceUnit?: string | null;
   period: "Day" | "Week" | "Month" | "Lifetime";
-  usage: TUserServiceLimitUsage | null;
+  periodEnd: string | null;
 };
 
 export type TUserGroup = {

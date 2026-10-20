@@ -840,7 +840,7 @@ export const getAiSpendingAsText = (
 
   const format = (amount: number) => formatAiAmount(language, amount, currency);
 
-  const spent = format(limit.usage?.amountConsumed ?? 0);
+  const spent = format(limit.amountConsumed);
 
   if (limit.amountValue === null || limit.amountValue === undefined)
     return spent;

@@ -68,6 +68,8 @@ exports[`UploadDataStore — public surface > exposes a stable set of public mem
   "quotaErrorRaised",
   "refreshFiles",
   "removeFiles",
+  "reportSkippedMembers",
+  "reportedSkippedMemberIds",
   "retryConvertFiles",
   "retryQuotaFailedFiles",
   "retryUploadFiles",

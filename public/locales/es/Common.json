@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "No se pudieron compartir los archivos cifrados con {{users}}: aún no han configurado claves de cifrado. Pídale que genere claves en su perfil y vuelva a intentarlo desde el panel de Miembros.",
   "EncryptedTransferBannerDescription": "Si mueve o copia archivos cifrados fuera de esta sala privada, se guardarán en formato descifrado.",
   "EncryptedTransferBannerTitle": "Archivos cifrados",
+  "EncryptedUploadNotSharedWith": "No compartido con {{names}}: su clave de cifrado ha cambiado y no ha sido verificada como confiable.",
   "EncryptingFile": "Cifrando el archivo",
   "EncryptionDecryptAllFailed": "No se pudieron descifrar todos los archivos seleccionados",
   "EncryptionDecryptPartialFailed": "No se pudo descifrar: {{fileNames}}",

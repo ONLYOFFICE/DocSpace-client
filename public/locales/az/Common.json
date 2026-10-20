@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Şifrəli faylları {{users}} ilə paylaşmaq mümkün olmadı: onlar hələ şifrələmə açarlarını qurmayıblar. Onlardan profillərində açar yaratmalarını xahiş edin və Üzvlər panelindən yenidən cəhd edin.",
   "EncryptedTransferBannerDescription": "Şifrəli faylları bu şəxsi otaqdan kənara köçürsəniz və ya kopyalasanız, onlar deşifrə edilmiş şəkildə saxlanılacaq.",
   "EncryptedTransferBannerTitle": "Şifrəli fayllar",
+  "EncryptedUploadNotSharedWith": "{{names}} ilə paylaşılmayıb: onların şifrələmə açarı dəyişib və etibarlı sayılmayıb.",
   "EncryptingFile": "Fayl şifrələnir",
   "EncryptionDecryptAllFailed": "Seçilmiş bütün faylların şifrəsi açıla bilmədi",
   "EncryptionDecryptPartialFailed": "Şifrə açma alınmadı: {{fileNames}}",

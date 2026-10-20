@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "{{users}} සමඟ සංකේතාංකිත ගොනු බෙදා ගත නොහැකි විය: ඔවුන් තවම සංකේතාංකන යතුරු සකසා නැත. ඔවුන්ගේ පැතිකඩෙහි යතුරු ජනනය කරන ලෙස ඉල්ලා සාමාජිකයන් පැනලයෙන් නැවත උත්සාහ කරන්න.",
   "EncryptedTransferBannerDescription": "ඔබ සංකේතාංකිත ගොනු මෙම පුද්ගලික කාමරයෙන් පිටතට ගෙනයන හෝ පිටපත් කරන්නේ නම්, ඒවා විකේතිත ස්වරූපයෙන් සුරකිනු ඇත.",
   "EncryptedTransferBannerTitle": "සංකේතාංකිත ගොනු",
+  "EncryptedUploadNotSharedWith": "{{names}} සමඟ බෙදා නොගන්නා ලදී: ඔවුන්ගේ සංකේතාංකන යතුර වෙනස් වී ඇති අතර විශ්වාස නොකෙරිණි.",
   "EncryptingFile": "ගොනුව සංකේතනය වෙමින්",
   "EncryptionDecryptAllFailed": "තෝරාගත් සියලුම ගොනු විකේතනය කිරීමට අසමත් විය",
   "EncryptionDecryptPartialFailed": "විකේතනය කිරීමට අසමත් විය: {{fileNames}}",

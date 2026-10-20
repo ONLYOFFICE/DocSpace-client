@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Impossibile condividere i file cifrati con {{users}}: non hanno ancora configurato le chiavi di cifratura. Chiedere di generare le chiavi nel proprio profilo e riprovare dal pannello Membri.",
   "EncryptedTransferBannerDescription": "Se si spostano o copiano file cifrati al di fuori di questa stanza privata, verranno salvati in forma decifrata.",
   "EncryptedTransferBannerTitle": "File cifrati",
+  "EncryptedUploadNotSharedWith": "Non condiviso con {{names}}: la loro chiave di cifratura è cambiata e non è stata ritenuta affidabile.",
   "EncryptingFile": "Crittografia di file",
   "EncryptionDecryptAllFailed": "Impossibile decifrare tutti i file selezionati",
   "EncryptionDecryptPartialFailed": "Impossibile decifrare: {{fileNames}}",

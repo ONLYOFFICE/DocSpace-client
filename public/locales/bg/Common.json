@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Не могат да се споделят криптирани файлове с {{users}}: те все още не са настроили ключове за криптиране. Помолете ги да генерират ключове в своя профил и опитайте от панела Членове.",
   "EncryptedTransferBannerDescription": "Ако преместите или копирате криптирани файлове извън тази частна стая, те ще бъдат записани в декриптиран вид.",
   "EncryptedTransferBannerTitle": "Криптирани файлове",
+  "EncryptedUploadNotSharedWith": "Не е споделено с {{names}}: техният ключ за криптиране е сменен и не е бил доверен.",
   "EncryptingFile": "Криптиране на файл",
   "EncryptionDecryptAllFailed": "Неуспешно дешифриране на всички избрани файлове",
   "EncryptionDecryptPartialFailed": "Неуспешно дешифриране: {{fileNames}}",

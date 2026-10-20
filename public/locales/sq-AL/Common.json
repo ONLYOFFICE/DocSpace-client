@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Nuk mund të ndaheshin skedarët e enkriptuar me {{users}}: ata nuk kanë konfiguruar ende çelësa enkriptimi. Kërkojuni të gjenerojnë çelësa në profilin e tyre dhe provoni përsëri nga paneli Anëtarët.",
   "EncryptedTransferBannerDescription": "Nëse zhvendosni ose kopjoni skedarë të enkriptuar jashtë kësaj dhome private, ato do të ruhen në formë të dekriptuar.",
   "EncryptedTransferBannerTitle": "Skedarë të enkriptuar",
+  "EncryptedUploadNotSharedWith": "Nuk u nda me {{names}}: çelësi i tyre i enkriptimit ka ndryshuar dhe nuk u besua.",
   "EncryptingFile": "Skedari duke enkriptuar",
   "EncryptionDecryptAllFailed": "Dështoi deshifrimi i të gjithë skedarëve të zgjedhur",
   "EncryptionDecryptPartialFailed": "Deshifrimi dështoi: {{fileNames}}",

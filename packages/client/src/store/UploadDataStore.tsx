@@ -34,6 +34,7 @@
  */
 
 import { makeAutoObservable, runInAction } from "mobx";
+import type { SkippedMemberKey } from "@docspace/shared/services/private-room/member-key-verification";
 import { ConflictResolveType } from "@docspace/shared/enums";
 import { resolveItemRoomContext } from "@docspace/shared/services/private-room/encrypted-upload";
 import type { MoveSourceRef } from "@docspace/shared/services/private-room/encrypted-upload";
@@ -92,6 +93,7 @@ import {
   cancelEncryptedBatchUploadImpl,
   deleteMovedEncryptedSourceImpl,
   encryptKeysForRoomMembersImpl,
+  reportSkippedMembersImpl,
   ensureEncryptionUnlockedForBatchImpl,
   prepareFileForEncryptedUploadImpl,
   wrapForSelfThenRoomImpl,
@@ -265,6 +267,9 @@ class UploadDataStore {
   /** Member key changes refused during this session (`userId:publicKey`). */
   memberKeyRefusals = new Set<string>();
 
+  /** Members already reported as left out of an upload this session. */
+  reportedSkippedMemberIds = new Set<string>();
+
   uploadedFilesHistory: TUploadFile[] = [];
 
   displayedConversionFiles: TConversionFile[] = [];
@@ -376,6 +381,9 @@ class UploadDataStore {
       dek,
       identity,
     );
+
+  reportSkippedMembers = (skipped: SkippedMemberKey[]) =>
+    reportSkippedMembersImpl(this, skipped);
 
   getUserEncryptionKeys = () => getUserEncryptionKeysImpl(this);
 

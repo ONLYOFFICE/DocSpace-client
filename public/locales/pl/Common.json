@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Nie udało się udostępnić zaszyfrowanych plików użytkownikom {{users}}: nie skonfigurowali jeszcze kluczy szyfrowania. Poproś ich o wygenerowanie kluczy w profilu i ponów próbę z panelu Członkowie.",
   "EncryptedTransferBannerDescription": "W przypadku przeniesienia lub skopiowania zaszyfrowanych plików poza ten prywatny pokój zostaną one zapisane w postaci odszyfrowanej.",
   "EncryptedTransferBannerTitle": "Zaszyfrowane pliki",
+  "EncryptedUploadNotSharedWith": "Nie udostępniono osobom {{names}}: klucz szyfrowania tych osób uległ zmianie i nie był zaufany.",
   "EncryptingFile": "Szyfrowanie pliku",
   "EncryptionDecryptAllFailed": "Nie udało się odszyfrować wszystkich wybranych plików",
   "EncryptionDecryptPartialFailed": "Nie udało się odszyfrować: {{fileNames}}",

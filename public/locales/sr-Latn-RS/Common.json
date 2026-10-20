@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Nije moguće podeliti šifrovane fajlove sa {{users}}: oni još uvek nisu podesili ključeve za šifrovanje. Zamolite ih da generišu ključeve u svom profilu i ponovite iz panela Članovi.",
   "EncryptedTransferBannerDescription": "Ako premestite ili kopirate šifrovane fajlove izvan ove privatne sobe, biće sačuvani u dešifrovanom obliku.",
   "EncryptedTransferBannerTitle": "Šifrovani fajlovi",
+  "EncryptedUploadNotSharedWith": "Nije podeljeno sa {{names}}: njihov ključ za šifrovanje se promenio i nije bio pouzdan.",
   "EncryptingFile": "Šifrovanje datoteke",
   "EncryptionDecryptAllFailed": "Nije uspelo dešifrovanje svih izabranih datoteka",
   "EncryptionDecryptPartialFailed": "Dešifrovanje nije uspelo: {{fileNames}}",

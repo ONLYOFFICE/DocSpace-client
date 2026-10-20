@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Kon versleutelde bestanden niet delen met {{users}}: zij hebben nog geen versleutelingssleutels ingesteld. Vraag hen sleutels te genereren in hun profiel en probeer het opnieuw vanuit het ledenvenster.",
   "EncryptedTransferBannerDescription": "Als u versleutelde bestanden buiten deze privékamer verplaatst of kopieert, worden ze opgeslagen in ontsleutelde vorm.",
   "EncryptedTransferBannerTitle": "Versleutelde bestanden",
+  "EncryptedUploadNotSharedWith": "Niet gedeeld met {{names}}: hun versleutelingssleutel is gewijzigd en werd niet vertrouwd.",
   "EncryptingFile": "Bestand versleutelen",
   "EncryptionDecryptAllFailed": "Het ontsleutelen van alle geselecteerde bestanden is mislukt",
   "EncryptionDecryptPartialFailed": "Ontsleutelen mislukt: {{fileNames}}",

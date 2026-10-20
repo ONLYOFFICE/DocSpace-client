@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "{{users}}と暗号化ファイルを共有できませんでした：相手がまだ暗号化キーを設定していません。プロフィールでキーを生成するよう伝えてから、メンバーパネルで再試行してください。",
   "EncryptedTransferBannerDescription": "このプライベートルーム外に暗号化ファイルを移動またはコピーすると、復号化された形式で保存されます。",
   "EncryptedTransferBannerTitle": "暗号化ファイル",
+  "EncryptedUploadNotSharedWith": "{{names}}とは共有されていません：相手の暗号化キーが変更されており、信頼されていません。",
   "EncryptingFile": "ファイルの暗号化",
   "EncryptionDecryptAllFailed": "選択したすべてのファイルの復号に失敗しました",
   "EncryptionDecryptPartialFailed": "復号に失敗しました：{{fileNames}}",

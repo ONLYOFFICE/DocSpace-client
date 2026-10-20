@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "无法与 {{users}} 共享加密文件：对方尚未设置加密密钥。请让其在个人资料中生成密钥后从成员面板重试。",
   "EncryptedTransferBannerDescription": "如果您将加密文件移动或复制到此私人房间之外，文件将以未加密形式保存。",
   "EncryptedTransferBannerTitle": "加密文件",
+  "EncryptedUploadNotSharedWith": "未与 {{names}} 共享：其加密密钥已更改且未被信任。",
   "EncryptingFile": "加密文件",
   "EncryptionDecryptAllFailed": "无法解密所有选定的文件",
   "EncryptionDecryptPartialFailed": "解密失败：{{fileNames}}",

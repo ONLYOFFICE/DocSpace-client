@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Nu s-au putut partaja fișierele criptate cu {{users}}: aceștia nu au configurat încă chei de criptare. Rugați-i să genereze chei în profilul lor și reîncercați din panoul Membri.",
   "EncryptedTransferBannerDescription": "Dacă mutați sau copiați fișiere criptate în afara acestei camere private, acestea vor fi salvate în formă decriptată.",
   "EncryptedTransferBannerTitle": "Fișiere criptate",
+  "EncryptedUploadNotSharedWith": "Nepartajat cu {{names}}: cheia lor de criptare s-a schimbat și nu a fost de încredere.",
   "EncryptingFile": "Criptare fișier",
   "EncryptionDecryptAllFailed": "Nu s-au putut decripta toate fișierele selectate",
   "EncryptionDecryptPartialFailed": "Decriptare eșuată: {{fileNames}}",

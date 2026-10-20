@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Impossible de partager les fichiers chiffrés avec {{users}} : ils n'ont pas encore configuré de clés de chiffrement. Demandez-leur de générer des clés dans leur profil et réessayez depuis le panneau Membres.",
   "EncryptedTransferBannerDescription": "Si vous déplacez ou copiez des fichiers chiffrés en dehors de cette salle privée, ils seront enregistrés sous forme déchiffrée.",
   "EncryptedTransferBannerTitle": "Fichiers chiffrés",
+  "EncryptedUploadNotSharedWith": "Non partagé avec {{names}} : leur clé de chiffrement a changé et n'a pas été approuvée.",
   "EncryptingFile": "Chiffrement du fichier",
   "EncryptionDecryptAllFailed": "Échec du déchiffrement de tous les fichiers sélectionnés",
   "EncryptionDecryptPartialFailed": "Échec du déchiffrement : {{fileNames}}",

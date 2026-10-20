@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Şifrelenmiş dosyalar {{users}} ile paylaşılamadı: henüz şifreleme anahtarları kurulmamış. Profillerinde anahtar oluşturmalarını isteyin ve Üyeler panelinden tekrar deneyin.",
   "EncryptedTransferBannerDescription": "Şifrelenmiş dosyaları bu özel odanın dışına taşır veya kopyalarsanız, şifresi çözülmüş biçimde kaydedilirler.",
   "EncryptedTransferBannerTitle": "Şifrelenmiş dosyalar",
+  "EncryptedUploadNotSharedWith": "{{names}} ile paylaşılmadı: şifreleme anahtarları değişmiş ve güvenilir bulunamadı.",
   "EncryptingFile": "Dosya şifreleme",
   "EncryptionDecryptAllFailed": "Seçili tüm dosyaların şifresi çözülemedi",
   "EncryptionDecryptPartialFailed": "Şifre çözme başarısız: {{fileNames}}",

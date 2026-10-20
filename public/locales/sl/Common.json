@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Šifriranih datotek ni bilo mogoče dati v skupno rabo z {{users}}: šifrirnih ključev še niso nastavili. Prosim jih, da ustvarijo ključe v svojem profilu, in ponovite na plošči Člani.",
   "EncryptedTransferBannerDescription": "Če premaknete ali kopirate šifrirane datoteke izven te zasebne sobe, bodo shranjene v dešifrirani obliki.",
   "EncryptedTransferBannerTitle": "Šifrirane datoteke",
+  "EncryptedUploadNotSharedWith": "Ni deljeno z {{names}}: njihov šifrirni ključ se je spremenil in ni bil zaupan.",
   "EncryptingFile": "Šifriranje datoteke",
   "EncryptionDecryptAllFailed": "Vseh izbranih datotek ni bilo mogoče dešifrirati",
   "EncryptionDecryptPartialFailed": "Dešifriranje ni uspelo: {{fileNames}}",

@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Nie je možné zdieľať zašifrované súbory s {{users}}: ešte nenastavili šifrovacie kľúče. Požiadajte ich, aby vygenerovali kľúče vo svojom profile, a opakujte z panela Členovia.",
   "EncryptedTransferBannerDescription": "Ak presuniete alebo skopírujete zašifrované súbory mimo tejto súkromnej miestnosti, budú uložené v dešifrovanej forme.",
   "EncryptedTransferBannerTitle": "Zašifrované súbory",
+  "EncryptedUploadNotSharedWith": "Nezdieľané s {{names}}: ich šifrovací kľúč sa zmenil a nebol dôveryhodný.",
   "EncryptingFile": "Šifrovanie súboru",
   "EncryptionDecryptAllFailed": "Nepodarilo sa dešifrovať všetky vybrané súbory",
   "EncryptionDecryptPartialFailed": "Nepodarilo sa dešifrovať: {{fileNames}}",

@@ -326,8 +326,11 @@ describe("UploadDataStore.checkChunkUpload — encrypted final chunk", () => {
     const skipped = [
       { userId: "bob", displayName: undefined, reason: "key-mismatch-refused" as const },
     ];
+    const named = [{ ...skipped[0], displayName: "Bob" }];
     const wrap = replaceAction(store, "wrapForSelfThenRoom");
     wrap.mockResolvedValue(skipped);
+    const report = replaceAction(store, "reportSkippedMembers");
+    report.mockResolvedValue(named);
 
     callCheckChunkUpload(store, {
       res: { uploaded: true, id: 555, file: serverFile },
@@ -337,8 +340,9 @@ describe("UploadDataStore.checkChunkUpload — encrypted final chunk", () => {
       resolve: vi.fn(),
     });
 
-    await vi.waitFor(() => expect(store.files[0].skippedMembers).toEqual(skipped));
-    expect(store.uploadedFilesHistory[0].skippedMembers).toEqual(skipped);
+    await vi.waitFor(() => expect(store.files[0].skippedMembers).toEqual(named));
+    expect(report).toHaveBeenCalledWith(skipped);
+    expect(store.uploadedFilesHistory[0].skippedMembers).toEqual(named);
     expect(store.files[0].error).toBeFalsy();
   });
 

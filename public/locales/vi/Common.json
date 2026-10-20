@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Không thể chia sẻ tập tin được mã hoá với {{users}}: họ chưa thiết lập khoá mã hoá. Hãy yêu cầu họ tạo khoá trong hồ sơ cá nhân và thử lại từ bảng Thành viên.",
   "EncryptedTransferBannerDescription": "Nếu bạn di chuyển hoặc sao chép các tập tin được mã hoá ra ngoài phòng riêng tư này, chúng sẽ được lưu ở dạng không được mã hoá.",
   "EncryptedTransferBannerTitle": "Tập tin được mã hoá",
+  "EncryptedUploadNotSharedWith": "Chưa chia sẻ với {{names}}: khoá mã hoá của họ đã thay đổi và chưa được tin cậy.",
   "EncryptingFile": "Mã hóa tệp",
   "EncryptionDecryptAllFailed": "Không thể giải mã tất cả các tệp đã chọn",
   "EncryptionDecryptPartialFailed": "Giải mã thất bại: {{fileNames}}",

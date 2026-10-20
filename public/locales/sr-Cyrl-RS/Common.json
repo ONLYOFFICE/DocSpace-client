@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Немогуће делити шифроване датотеке са {{users}}: они нису подесили кључеве за шифровање. Замолите их да генеришу кључеве у свом профилу и покушајте поново из панела Чланови.",
   "EncryptedTransferBannerDescription": "Ако преместите или копирате шифроване датотеке изван ове приватне собе, биће сачуване у дешифрованом облику.",
   "EncryptedTransferBannerTitle": "Шифроване датотеке",
+  "EncryptedUploadNotSharedWith": "Није подељено са {{names}}: њихов кључ за шифровање је промењен и није поверен.",
   "EncryptingFile": "Шифровање датотеке",
   "EncryptionDecryptAllFailed": "Није успело дешифровање свих изабраних датотека",
   "EncryptionDecryptPartialFailed": "Дешифровање није успело: {{fileNames}}",

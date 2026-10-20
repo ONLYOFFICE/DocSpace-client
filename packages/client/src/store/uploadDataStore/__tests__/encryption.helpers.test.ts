@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import "../../filesStore/__tests__/testHarness";
 
 import {
   createTestUploadDataStore,
@@ -37,7 +38,11 @@ import {
   cancelEncryptedBatchUploadImpl,
   encryptKeysForRoomMembersImpl,
   ensureEncryptionUnlockedForBatchImpl,
+  reportSkippedMembersImpl,
 } from "../encryption.helpers";
+import i18n from "SRC_DIR/i18n";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getUserById } from "@docspace/shared/api/people";
 import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import {
   getFileEncryptionAccess,
@@ -51,6 +56,11 @@ import {
   unregisterKeyMismatchHandler,
 } from "@docspace/shared/services/encryption/tofu-store";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
+
+vi.mock("@docspace/shared/api/people", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  getUserById: vi.fn(),
+}));
 
 vi.mock("@docspace/shared/api/privacy", async (io) => ({
   ...((await io()) as Record<string, unknown>),
@@ -240,5 +250,60 @@ describe("encryptKeysForRoomMembersImpl", () => {
     const pinned = await getTofuStore("user-1").getKeys("alice");
     expect(pinned.map((k) => k.publicKey)).toEqual(["pk-alice"]);
     expect(vi.mocked(setFileEncryptionKeys)).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("reportSkippedMembersImpl", () => {
+  const skipped = (userId: string) => ({
+    userId,
+    displayName: undefined,
+    reason: "key-mismatch-refused" as const,
+  });
+
+  beforeEach(() => {
+    vi.mocked(getUserById).mockImplementation(
+      async (id: string) =>
+        ({ id, displayName: id === "bob" ? "Bob Smith" : "Carol" }) as never,
+    );
+  });
+
+  it("Member key mismatch on upload: names the left-out members in a warning", async () => {
+    const tSpy = vi.spyOn(i18n, "t");
+    const { store } = createTestUploadDataStore();
+
+    const named = await reportSkippedMembersImpl(store, [skipped("bob")]);
+
+    expect(named).toEqual([{ ...skipped("bob"), displayName: "Bob Smith" }]);
+    expect(tSpy).toHaveBeenCalledWith("Common:EncryptedUploadNotSharedWith", {
+      names: "Bob Smith",
+    });
+    expect(toastr.warning).toHaveBeenCalledTimes(1);
+  });
+
+  it("warns once per member in a session, naming only members not reported yet", async () => {
+    const tSpy = vi.spyOn(i18n, "t");
+    const { store } = createTestUploadDataStore();
+
+    await reportSkippedMembersImpl(store, [skipped("bob")]);
+    const second = await reportSkippedMembersImpl(store, [
+      skipped("bob"),
+      skipped("carol"),
+    ]);
+    await reportSkippedMembersImpl(store, [skipped("bob"), skipped("carol")]);
+
+    expect(toastr.warning).toHaveBeenCalledTimes(2);
+    expect(tSpy).toHaveBeenLastCalledWith("Common:EncryptedUploadNotSharedWith", {
+      names: "Carol",
+    });
+    expect(second.map((m) => m.displayName)).toEqual(["Bob Smith", "Carol"]);
+  });
+
+  it("falls back to the user id when the name cannot be read", async () => {
+    vi.mocked(getUserById).mockRejectedValue(new Error("404"));
+    const { store } = createTestUploadDataStore();
+
+    const named = await reportSkippedMembersImpl(store, [skipped("bob")]);
+
+    expect(named[0].displayName).toBe("bob");
   });
 });

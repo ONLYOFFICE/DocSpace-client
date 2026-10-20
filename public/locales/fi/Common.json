@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Salattuja tiedostoja ei voitu jakaa käyttäjille {{users}}: he eivät ole vielä ottaneet salausavaimia käyttöön. Pyydä heitä luomaan avaimet profiilissaan ja yritä uudelleen Jäsenet-paneelista.",
   "EncryptedTransferBannerDescription": "Jos siirrät tai kopioit salattuja tiedostoja tämän yksityishuoneen ulkopuolelle, ne tallennetaan salaamattomassa muodossa.",
   "EncryptedTransferBannerTitle": "Salatut tiedostot",
+  "EncryptedUploadNotSharedWith": "Ei jaettu käyttäjille {{names}}: heidän salausavaimensa on muuttunut eikä sitä ole hyväksytty luotettavaksi.",
   "EncryptingFile": "Tiedoston salaaminen",
   "EncryptionDecryptAllFailed": "Kaikkien valittujen tiedostojen salauksen purku epäonnistui",
   "EncryptionDecryptPartialFailed": "Salauksen purku epäonnistui: {{fileNames}}",

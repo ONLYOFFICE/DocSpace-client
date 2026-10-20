@@ -41,6 +41,7 @@ import {
   removeFiles,
 } from "@docspace/shared/api/files";
 import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
+import { getUserById } from "@docspace/shared/api/people";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { selectMemberKeys } from "@docspace/shared/services/private-room/room-member-keys";
 import {
@@ -229,6 +230,41 @@ export async function encryptKeysForRoomMembersImpl(
     );
     return [];
   }
+}
+
+/**
+ * Names the members a file's fan-out left out and warns once per member and
+ * session; returns the members with their display names for the panel row.
+ * Spec: private-rooms/encryption-core, "File access list holds one wrap per member".
+ */
+export async function reportSkippedMembersImpl(
+  self: UploadDataStore,
+  skipped: SkippedMemberKey[],
+): Promise<SkippedMemberKey[]> {
+  const named = await Promise.all(
+    skipped.map(async (member) => {
+      if (member.displayName) return member;
+      try {
+        const user = await getUserById(member.userId);
+        return { ...member, displayName: user?.displayName || member.userId };
+      } catch {
+        return { ...member, displayName: member.userId };
+      }
+    }),
+  );
+
+  const fresh = named.filter(
+    (m) => !self.reportedSkippedMemberIds.has(m.userId),
+  );
+  if (fresh.length > 0) {
+    for (const m of fresh) self.reportedSkippedMemberIds.add(m.userId);
+    toastr.warning(
+      i18n.t("Common:EncryptedUploadNotSharedWith", {
+        names: fresh.map((m) => m.displayName).join(", "),
+      }),
+    );
+  }
+  return named;
 }
 
 export async function ensureEncryptionUnlockedForBatchImpl(

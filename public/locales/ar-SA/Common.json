@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "تعذّر مشاركة الملفات المشفرة مع {{users}}: لم يقوموا بإعداد مفاتيح التشفير بعد. اطلب منهم توليد المفاتيح في ملفاتهم الشخصية وأعد المحاولة من لوحة الأعضاء.",
   "EncryptedTransferBannerDescription": "إذا قمت بنقل الملفات المشفرة أو نسخها خارج هذه الغرفة الخاصة، فسيتم حفظها بصيغة غير مشفرة.",
   "EncryptedTransferBannerTitle": "الملفات المشفرة",
+  "EncryptedUploadNotSharedWith": "لم تتم المشاركة مع {{names}}: تغيّر مفتاح التشفير الخاص بهم ولم يُوثَّق.",
   "EncryptingFile": "تشفير الملف",
   "EncryptionDecryptAllFailed": "فشل فك تشفير جميع الملفات المحددة",
   "EncryptionDecryptPartialFailed": "فشل فك التشفير: {{fileNames}}",

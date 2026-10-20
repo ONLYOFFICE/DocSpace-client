@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Não foi possível partilhar ficheiros encriptados com {{users}}: ainda não configuraram chaves de encriptação. Peça-lhes que gerem chaves no perfil e tente novamente a partir do painel de Membros.",
   "EncryptedTransferBannerDescription": "Se mover ou copiar ficheiros encriptados para fora desta sala privada, serão guardados em formato desencriptado.",
   "EncryptedTransferBannerTitle": "Ficheiros encriptados",
+  "EncryptedUploadNotSharedWith": "Não partilhado com {{names}}: a chave de encriptação foi alterada e não foi considerada de confiança.",
   "EncryptingFile": "A encriptar o ficheiro",
   "EncryptionDecryptAllFailed": "Falha ao desencriptar todos os ficheiros selecionados",
   "EncryptionDecryptPartialFailed": "Falha ao desencriptar: {{fileNames}}",

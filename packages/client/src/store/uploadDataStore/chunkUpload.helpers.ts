@@ -186,8 +186,9 @@ export function checkChunkUploadImpl(
           dekForWrap!,
           roomIdForWrap,
         )
-          .then((skippedMembers) => {
-            if (!skippedMembers?.length) return;
+          .then(async (skipped) => {
+            if (!skipped?.length) return;
+            const skippedMembers = await self.reportSkippedMembers(skipped);
             runInAction(() => {
               const uniqueId = self.files[indexOfFile]?.uniqueId;
               if (self.files[indexOfFile]) {

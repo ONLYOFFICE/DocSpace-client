@@ -857,6 +857,7 @@
   "EncryptedSkippedNoKeys": "Verschlüsselte Dateien konnten nicht mit {{users}} geteilt werden: Sie haben noch keine Verschlüsselungsschlüssel eingerichtet. Bitten Sie sie, Schlüssel in ihrem Profil zu generieren, und wiederholen Sie den Vorgang über das Mitglieder-Panel.",
   "EncryptedTransferBannerDescription": "Wenn Sie verschlüsselte Dateien aus diesem privaten Raum verschieben oder kopieren, werden sie in entschlüsselter Form gespeichert.",
   "EncryptedTransferBannerTitle": "Verschlüsselte Dateien",
+  "EncryptedUploadNotSharedWith": "Nicht mit {{names}} geteilt: Deren Verschlüsselungsschlüssel hat sich geändert und wurde nicht als vertrauenswürdig eingestuft.",
   "EncryptingFile": "Datei wird verschlüsselt",
   "EncryptionDecryptAllFailed": "Entschlüsselung aller ausgewählten Dateien fehlgeschlagen",
   "EncryptionDecryptPartialFailed": "Entschlüsselung fehlgeschlagen: {{fileNames}}",

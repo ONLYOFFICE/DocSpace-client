@@ -42,6 +42,7 @@ import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ShareLoader from "@docspace/shared/skeletons/share";
 import { isFolder, isRoom } from "@docspace/shared/utils/typeGuards";
+import { isMetadataSupported } from "@docspace/shared/utils/metadata";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { FolderType } from "@docspace/shared/enums";
@@ -62,6 +63,7 @@ import ThirdPartyComponent from "../History/HistoryBlockContent/ThirdParty";
 import Members from "../Members";
 import Share from "../Share";
 import Metadata from "../Metadata";
+import { getEntryKind } from "../Metadata/utils";
 import Plugin from "../Plugin";
 
 import { useHistory } from "./hooks/useHistory";
@@ -390,7 +392,14 @@ const FilesView = ({
     }
 
     if (value === InfoPanelView.infoMetadata) {
-      return <Metadata selection={selection} />;
+      if (!isMetadataSupported(selection)) return null;
+
+      return (
+        <Metadata
+          key={`${getEntryKind(selection)}-${selection.id}`}
+          selection={selection}
+        />
+      );
     }
 
     if (isPlugin)

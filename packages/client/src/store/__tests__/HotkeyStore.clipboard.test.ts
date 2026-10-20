@@ -107,7 +107,9 @@ const setup = () => {
 
   const filesActionsStore = createTestFilesActionsStore({ uploadDataStore });
   const copyEncryptedFilesToFolder = vi.fn(async () => {});
+  // The app shares one SelectedFolderStore between the stores.
   Object.assign(filesActionsStore, {
+    selectedFolderStore,
     copyEncryptedFilesToFolder,
     checkFileConflicts: vi.fn(async () => []),
     setSelectedItems: vi.fn(),
@@ -185,7 +187,11 @@ describe("HotkeyStore - clipboard paste and private rooms", () => {
     expect(s.copyEncryptedFilesToFolder).toHaveBeenCalledWith(
       [privateFile(1), privateFile(2)],
       5,
-      expect.objectContaining({ private: false, deleteSourceOnSuccess: true }),
+      expect.objectContaining({
+        private: false,
+        deleteSourceOnSuccess: true,
+        sourceRoomId: 7,
+      }),
     );
   });
 
@@ -200,7 +206,11 @@ describe("HotkeyStore - clipboard paste and private rooms", () => {
     expect(s.copyEncryptedFilesToFolder).toHaveBeenCalledWith(
       [privateFile(1)],
       8,
-      expect.objectContaining({ private: false, deleteSourceOnSuccess: true }),
+      expect.objectContaining({
+        private: false,
+        deleteSourceOnSuccess: true,
+        sourceRoomId: 7,
+      }),
     );
   });
 

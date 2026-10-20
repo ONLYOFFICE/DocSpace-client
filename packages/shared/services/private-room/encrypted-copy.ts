@@ -39,7 +39,7 @@ import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import type { IdentityKeyPair } from "../encryption/types";
 import type { MoveSourceRef } from "./encrypted-upload";
-import { loadRoomMemberKeysSafe } from "./room-member-keys";
+import { loadFileSenderKeysSafe } from "./room-member-keys";
 
 type EncryptedItem = {
   id: number;
@@ -53,7 +53,7 @@ export async function decryptEncryptedItemToFile(
   item: EncryptedItem,
   currentUserId: string,
   identity: IdentityKeyPair,
-  roomId: number | string,
+  roomId: number | string | null | undefined,
 ): Promise<File> {
   const encryptionInfo = await getFileEncryptionAccess(item.id);
   if (!encryptionInfo || !encryptionInfo.fileKeys) {
@@ -73,7 +73,7 @@ export async function decryptEncryptedItemToFile(
   }
   const encryptedData = await response.arrayBuffer();
 
-  const roomMemberKeys = await loadRoomMemberKeysSafe(roomId);
+  const roomMemberKeys = await loadFileSenderKeysSafe(item.id, roomId);
 
   let dek;
   try {

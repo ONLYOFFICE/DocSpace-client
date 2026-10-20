@@ -633,7 +633,10 @@ class FilesActionStore {
   copyEncryptedFilesToFolder = async (
     items: TActionItem[],
     destFolderId: number | string | undefined,
-    destInfo?: TEncryptedTransferDest & { deleteSourceOnSuccess?: boolean },
+    destInfo?: TEncryptedTransferDest & {
+      deleteSourceOnSuccess?: boolean;
+      sourceRoomId?: number | string | null;
+    },
   )=> copyEncryptedFilesToFolderImpl(this, items, destFolderId, destInfo);
 
   planPrivateTransfer = (params: TPrivateTransferParams)=> planPrivateTransfer(params);
@@ -642,7 +645,7 @@ class FilesActionStore {
     plan: TPrivateTransferPlan,
     destFolderId: number | string,
     dest: TEncryptedTransferDest | null | undefined,
-    options: { move: boolean },
+    options: { move: boolean; sourceRoomId?: number | string | null },
   )=> runPrivateTransferPlanImpl(this, plan, destFolderId, dest, options);
 
   getItemsInfo = (items: TActionItem[])=> getItemsInfoImpl(this, items);

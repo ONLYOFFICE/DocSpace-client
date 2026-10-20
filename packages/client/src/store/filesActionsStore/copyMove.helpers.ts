@@ -251,7 +251,7 @@ self: FilesActionStore,
   plan: TPrivateTransferPlan,
   destFolderId: number | string,
   dest: TEncryptedTransferDest | null | undefined,
-  options: { move: boolean },
+  options: { move: boolean; sourceRoomId?: number | string | null },
 
 ): boolean => {
   switch (plan.kind) {
@@ -273,6 +273,7 @@ self: FilesActionStore,
         rootFolderId: dest?.rootFolderId,
         roomType: dest?.roomType,
         deleteSourceOnSuccess: options.move,
+        sourceRoomId: options.sourceRoomId,
       });
       return true;
     default:
@@ -284,7 +285,10 @@ export const copyEncryptedFilesToFolderImpl = async (
 self: FilesActionStore,
   items: TActionItem[],
   destFolderId: number | string | undefined,
-  destInfo?: TEncryptedTransferDest & { deleteSourceOnSuccess?: boolean },
+  destInfo?: TEncryptedTransferDest & {
+    deleteSourceOnSuccess?: boolean;
+    sourceRoomId?: number | string | null;
+  },
 
 )=> {
   const { user, encryptionKeys } = self.userStore;
@@ -319,7 +323,11 @@ self: FilesActionStore,
 
   for (const item of items) {
     try {
-      const sourceRoomId = self.resolveRoomIdForFile(item);
+      // The open folder is the destination by the time a clipboard paste runs.
+      const sourceRoomId =
+        item.originRoomId ??
+        destInfo?.sourceRoomId ??
+        self.resolveRoomIdForFile(item);
       // decryptEncryptedItemToFile declares viewUrl/roomId
       // as required, but the old JS passed the loose view-model and a
       // possibly-null room id through unchecked.

@@ -135,8 +135,9 @@ type TFilesActionsStore = {
     plan: TPrivateTransferPlan,
     destFolderId: number | string,
     dest: TEncryptedTransferDest | null | undefined,
-    options: { move: boolean },
+    options: { move: boolean; sourceRoomId?: number | string | null },
   ) => boolean;
+  resolveRoomIdForFile: (file?: null) => number | string | null;
   createFoldersTree: (t: TTranslation, files: unknown[]) => Promise<unknown[]>;
 };
 
@@ -174,6 +175,7 @@ class HotkeyStore {
   hotkeysClipboardSource: {
     inPrivateRoom: boolean;
     rootFolderId: number | string | null;
+    roomId: number | string | null;
   } | null = null;
 
   selectionAreaIsEnabled = true;
@@ -762,6 +764,7 @@ class HotkeyStore {
     this.hotkeysClipboardSource = {
       inPrivateRoom: !!this.treeFoldersStore.isPrivacyFolder,
       rootFolderId: this.selectedFolderStore.rootFolderId ?? null,
+      roomId: this.filesActionsStore.resolveRoomIdForFile(null),
     };
 
     const copyText = `${t("AddedToClipboard")}: ${selection.length}`;
@@ -814,6 +817,7 @@ class HotkeyStore {
     if (
       this.filesActionsStore.runPrivateTransferPlan(plan, selectedItemId!, dest, {
         move: !isCopy,
+        sourceRoomId: source?.roomId,
       })
     ) {
       this.filesStore.setHotkeysClipboard([]);

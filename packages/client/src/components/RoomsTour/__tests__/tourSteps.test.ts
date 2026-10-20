@@ -36,6 +36,8 @@
 import { describe, it, expect, vi } from "vitest";
 import type { TFunction } from "i18next";
 
+import { bullets } from "SRC_DIR/components/Tour/__tests__/bullets";
+
 import {
   NAVIGATION_TARGET_TIMEOUT,
   STEP_TARGET_TIMEOUT,
@@ -51,6 +53,9 @@ import {
 const t = ((key: string) => key) as unknown as TFunction;
 
 const steps = (flags: TourStepFlags) => getTourSteps(t, undefined, flags);
+
+const stepTitled = (flags: TourStepFlags, title: string) =>
+  steps(flags).find((step) => step.title === title)!;
 
 const titles = (flags: TourStepFlags) => steps(flags).map((step) => step.title);
 
@@ -103,15 +108,66 @@ const memberFlags: TourStepFlags = {
 const memberDemoFlags: TourStepFlags = { ...memberFlags, isDemo: true };
 
 describe("getTourSteps — room admin", () => {
-  it("walks the types, templates, AI chat, groups, members and the sidebar", () => {
+  it("walks the section, types, templates, AI chat, groups, members, the sidebar and the New button", () => {
     expect(titles(adminFlags)).toEqual([
+      "RoomsTour:RoomsOverviewTitle",
       "RoomsTour:RoomsTypesTitle",
       "RoomsTour:RoomsTemplatesTitle",
       "FilesTour:TourAiAssistantTitle",
       "RoomsTour:RoomsGroupsTitle",
       "RoomsTour:RoomsMembersTitle",
       "RoomsTour:RoomsPlacesTitle",
+      "RoomsTour:RoomsCreateFirstTitle",
     ]);
+  });
+
+  it("opens on the section item, saying what a room is", () => {
+    const [overview] = steps(adminFlags);
+
+    expect(overview.target).toBe('[data-item-id="2002"]');
+    expect(overview.content).toBe("RoomsTour:RoomsOverview");
+  });
+
+  it("keeps the opening step on a narrow screen, where the section item stays", () => {
+    expect(titles({ ...adminFlags, isDesktop: false })[0]).toBe(
+      "RoomsTour:RoomsOverviewTitle",
+    );
+  });
+
+  it("names the stand-in rooms as samples right before opening one", () => {
+    const demoTitles = titles(demoFlags);
+    const preview = demoTitles.indexOf("RoomsTour:RoomsDemoPreviewTitle");
+
+    expect(preview).toBeGreaterThan(0);
+    expect(demoTitles[preview + 1]).toBe("RoomsTour:RoomsMembersTitle");
+    // The section's own rooms need no such warning.
+    expect(titles(adminFlags)).not.toContain(
+      "RoomsTour:RoomsDemoPreviewTitle",
+    );
+  });
+
+  it("names the list as a sample over all three stand-in rows", () => {
+    const sample = steps(demoFlags).find(
+      (step) => step.title === "RoomsTour:RoomsDemoPreviewTitle",
+    )!;
+
+    // One spotlight over the three rows, and the tooltip anchored on it.
+    expect(sample.spotlightTarget).toBeTypeOf("function");
+    expect(sample.target).toBe(sample.spotlightTarget);
+  });
+
+  it("closes a run on the section's own rooms on the New room button", () => {
+    const closing = steps(adminFlags).at(-1)!;
+
+    expect(closing.title).toBe("RoomsTour:RoomsCreateFirstTitle");
+    expect(closing.target).toBe(
+      '#filter_search-input > div:has(> [data-testid="main-button"])',
+    );
+
+    // The filter bar holds that button on desktop only.
+    expect(titles({ ...adminFlags, isDesktop: false })).not.toContain(
+      "RoomsTour:RoomsCreateFirstTitle",
+    );
   });
 
   it("closes a stood-in run on the real create button", () => {
@@ -125,8 +181,8 @@ describe("getTourSteps — room admin", () => {
     expect(closing.title).toBe("RoomsTour:RoomsCreateFirstTitle");
     expect((closing.target as () => Element | null)()).toBe(createButton);
 
-    // A section that kept its own list ends on the sidebar step instead.
-    expect(steps(adminFlags).at(-1)?.title).toBe("RoomsTour:RoomsPlacesTitle");
+    // A section that kept its own list ends on the filter bar's button instead.
+    expect(steps(adminFlags).at(-1)?.target).not.toBe(closing.target);
 
     document.body.innerHTML = "";
   });
@@ -142,7 +198,7 @@ describe("getTourSteps — member", () => {
 
   it("still covers what to do with the rooms they were invited into", () => {
     expect(titles(memberFlags)).toEqual([
-      "FilesTour:TourAiAssistantTitle",
+      "RoomsTour:RoomsOverviewTitle",
       "RoomsTour:RoomsGroupsTitle",
       "RoomsTour:RoomsMembersTitle",
       "RoomsTour:RoomsPlacesTitle",
@@ -188,7 +244,7 @@ describe("getTourSteps — walking back out of the closing step", () => {
       const hooksForRun = listHooks();
       const closing = steps({ ...flags, demoHooks: hooksForRun }).at(-1)!;
 
-      closing.after?.({} as never);
+      closing.after?.({ action: "prev", status: "running" } as never);
 
       expect(hooksForRun.restore).toHaveBeenCalledTimes(1);
     }
@@ -227,12 +283,17 @@ describe("getTourSteps — walking back out of the closing step", () => {
     // of the file list. Firing the reveal before the row lands reads an empty
     // list and leaves the step with no panel to point at.
     const hooksForRun = panelHooks();
-    const members = steps({ ...demoFlags, infoPanelHooks: hooksForRun })[4];
+    const members = stepTitled(
+      { ...demoFlags, infoPanelHooks: hooksForRun },
+      "RoomsTour:RoomsMembersTitle",
+    );
 
-    // The panel this step points at is only ever put up by its own reveal, so
-    // the row arriving is the only thing that can move it along.
+    // The member list this step points at is only ever put up by its own
+    // reveal, so the row arriving is the only thing that can move it along.
     hooksForRun.reveal.mockImplementation(() => {
-      document.body.innerHTML += `<div class="info-panel"></div>`;
+      document.body.innerHTML +=
+        '<div class="info-panel"><div data-testid="info_panel_members_list">' +
+        '<div data-testid="info_panel_members_list_item_0"></div></div></div>';
     });
 
     const startedAt = Date.now();
@@ -260,12 +321,25 @@ describe("getTourSteps — what the page allows", () => {
     // No filter bar and no banner: nothing to create with, no groups row.
     expect(
       titles({ ...adminFlags, showFilter: false, hasItems: false }),
-    ).toEqual(["RoomsTour:RoomsPlacesTitle"]);
+    ).toEqual(["RoomsTour:RoomsOverviewTitle", "RoomsTour:RoomsPlacesTitle"]);
   });
 
   it("drops the members step when there is no room to open it on", () => {
     expect(titles({ ...adminFlags, hasItems: false })).not.toContain(
       "RoomsTour:RoomsMembersTitle",
+    );
+  });
+
+  it("keeps the Templates shortcut out of a member's sidebar step", () => {
+    // The sidebar shows Templates to admins only, so the bullet goes with it.
+    const places = (flags: TourStepFlags) =>
+      steps(flags).find((step) => step.title === "RoomsTour:RoomsPlacesTitle");
+
+    expect(bullets(places(adminFlags))).toContain(
+      "RoomsTour:RoomsPlacesTemplates",
+    );
+    expect(bullets(places(memberFlags))).not.toContain(
+      "RoomsTour:RoomsPlacesTemplates",
     );
   });
 
@@ -277,7 +351,7 @@ describe("getTourSteps — what the page allows", () => {
   });
 
   it("opens the info panel itself rather than pointing at the button that would", () => {
-    const members = steps(adminFlags)[4];
+    const members = stepTitled(adminFlags, "RoomsTour:RoomsMembersTitle");
 
     // The panel is only up while the step runs, so the start-of-run DOM check
     // has to look at the row instead — a rooms list with no row in it has

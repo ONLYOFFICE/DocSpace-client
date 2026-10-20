@@ -5,9 +5,9 @@
   "created_at": "2026-08-21T15:49:14.339Z",
   "updated_at": "2026-09-04T07:59:41.551Z",
   "comment": {
-    "text": "Sidebar section title used to label a group of available applications.",
-    "is_auto": true,
-    "updated_at": "2026-08-21T15:50:50.927Z",
+    "text": "Title of the portal's apps (Files, Rooms, Forms, AI Agents). Used as the label of that group in the left sidebar, and as the name of the Settings page and settings-menu item where an administrator of a self-hosted portal switches those apps on and off.",
+    "is_auto": false,
+    "updated_at": "2026-10-14T16:10:00.000Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -11,7 +11,7 @@
   "NotPossibleRoomRestoring": "由于当前费用版本的房间数量已达上限，因此无法恢复此房间。",
   "NumberOfRoomsAccordingToTariff": "您的费用版本的房间数量为：{{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "您资费计划的管理员数量：{{currentValue}} / {{maxValue}}",
-  "PlanPaymentOverdue": "无法添加新用户、创建新房间或 AI 代理。{{planName}} 套餐付款已逾期。",
+  "PlanPaymentOverdue": "无法添加新用户、创建新房间或 AI 智能体。{{planName}} 套餐付款已逾期。",
   "RoomsQuotaAlmostExhausted": "房间配额已几乎用完。",
   "UsersQuotaAlmostExhausted": "付费用户配额已几乎用完。"
 }

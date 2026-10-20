@@ -225,7 +225,6 @@ const FileTile = (props) => {
     children: tileContent,
     forwardRef: tileRef,
     dataTestId,
-    badgeUrl,
   };
 
   const renderTile = () => {
@@ -234,6 +233,7 @@ const FileTile = (props) => {
         <TemplateTile
           {...commonProps}
           key={item.id}
+          badgeUrl={badgeUrl}
           thumbnailClick={onFilesClick}
           openUser={onOpenUser}
           showStorageInfo={showStorageInfo}
@@ -246,6 +246,7 @@ const FileTile = (props) => {
           {...commonProps}
           t={t}
           key={item.id}
+          badgeUrl={badgeUrl}
           selectTag={onSelectTag}
           selectOption={onSelectOption}
           columnCount={columnCount}

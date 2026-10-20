@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Aplicații au fost activate cu succes",
   "AppName": "Nume al aplicației",
   "Apps": "Aplicații",
+  "AppsLimitReached": "Ați atins numărul maxim de aplicații pe care le puteți crea. Ștergeți o aplicație de care nu mai aveți nevoie pentru a adăuga una nouă.",
+  "AppsLimitReachedWorkspace": "Acest spațiu de lucru a atins numărul maxim de aplicații. Ștergeți o aplicație care nu mai este necesară pentru a adăuga una nouă.",
   "AuthButton": "Buton autentificare",
   "AuthenticationMethod": "Metodă de autentificare",
   "AuthorizedApps": "Aplicații autorizate",

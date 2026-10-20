@@ -146,9 +146,7 @@ const NoAccessContainer = (props: Props) => {
     // TODO: for AI agents
     case NoAccessContainerType.Agent:
       emptyViewProps = {
-        title: t("Common:NoAccessAIAgentTitle", {
-          aiAgent: t("Common:AIAgent"),
-        }),
+        title: t("Common:NoAccessAIAgentTitle"),
         description: t("Common:AIAgentAccessRedirectNote", {
           sectionName: t("Common:AIAgents"),
         }),

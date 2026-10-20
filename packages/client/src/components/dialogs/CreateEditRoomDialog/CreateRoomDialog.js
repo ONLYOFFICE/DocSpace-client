@@ -119,6 +119,10 @@ const CreateRoomDialog = ({
     };
   });
 
+  React.useEffect(() => {
+    if (startRoomType) setSelectedRoomType(startRoomType);
+  }, []);
+
   const isTemplateItem = !!fetchedRoomParams;
 
   const startRoomParams = isTemplateItem

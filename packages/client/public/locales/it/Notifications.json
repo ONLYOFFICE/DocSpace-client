@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "I badge evidenziano le attività sui file, come caricamenti, modifiche e condivisioni, nelle app {{files}}, {{rooms}}, {{forms}} e {{aiAgents}}.",
+  "ActionsWithFilesDescription": "I badge evidenziano le attività sui file, come caricamenti, modifiche e condivisioni, nelle app {{files}}, {{rooms}}, {{forms}} e agenti IA.",
   "AdminSetupRequired": "È necessaria la configurazione dell’amministratore",
   "Badges": "Badge",
   "DailyFeed": "Feed giornaliero di {{organizationName}} {{productName}}",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "Questo account utente è stato caricato da LDAP. L’indirizzo email non è stato specificato, e quello attuale è stato generato automaticamente e non può essere usato per inviare notifiche.",
   "NotConfigured": "Non configurato",
   "Notifications": "Notifiche",
-  "RoomsActivityDescription": "Ricevi notifiche email istantanee su nuovi file e cartelle condivisi e sull'attività in {{files}}, {{rooms}}, {{forms}} e {{aiAgents}}.",
-  "RoomUpdateNotify": "Attività in {{files}}, {{rooms}}, {{forms}} e {{aiAgents}}",
+  "RoomsActivityDescription": "Ricevi notifiche email istantanee su nuovi file e cartelle condivisi e sull'attività in {{files}}, {{rooms}}, {{forms}} e negli agenti IA.",
+  "RoomUpdateNotify": "Attività in {{files}}, {{rooms}}, {{forms}} e negli agenti IA",
   "SettingUpNotifications": "Impostazioni notifiche",
   "SuccessConnected": "{{serviceName}} è stato collegato con successo come canale di notifica. Riceverai ora gli aggiornamenti lì.",
   "SuccessDisconnected": "{{serviceName}} è stato scollegato con successo come canale di notifica. Le notifiche non saranno più inviate lì.",

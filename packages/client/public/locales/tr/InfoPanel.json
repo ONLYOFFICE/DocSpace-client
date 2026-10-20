@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "«{{folderTitle}}» klasöründen",
   "FeedLocationRoomLabel": "Oda «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Bölüm «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Alan «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Yanıtları yapay zeka ile analiz et",
   "FormRoomAIModalConnect": "Veritabanına bağlan",
   "FormRoomAIModalDescription": "Tüm toplanan yanıtları \"AI'ya Sor\" ile analiz etmek için bir veritabanı bağlayın. Veritabanı olmadan devam edebilir ve yalnızca bu form hakkında sorabilirsiniz.",

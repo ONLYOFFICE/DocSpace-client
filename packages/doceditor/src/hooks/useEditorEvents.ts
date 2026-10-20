@@ -66,11 +66,7 @@ import {
 // import { DEFAULT_SERVER_API_ROUTES } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 // import type { ServerAPIConfig } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
-import {
-  CREATED_FORM_KEY,
-  EDITOR_ID,
-  FILLING_STATUS_ID,
-} from "@docspace/shared/constants";
+import { CREATED_FORM_KEY, FILLING_STATUS_ID } from "@docspace/shared/constants";
 import {
   assign,
   frameCallCommand,
@@ -90,7 +86,9 @@ import { isMobile } from "react-device-detect";
 
 import {
   getCurrentDocumentVersion,
+  getDocEditor,
   getFormsSectionFolderUrl,
+  getSafeReturnUrl,
   isFormRole,
   isFormRoomFile,
   setDocumentTitle,
@@ -226,7 +224,7 @@ const useEditorEvents = ({
   }, []);
 
   const onSDKAppReady = React.useCallback(() => {
-    docEditor = window.DocEditor.instances[EDITOR_ID];
+    docEditor = getDocEditor() ?? null;
 
     fixSize();
 
@@ -337,7 +335,10 @@ const useEditorEvents = ({
             };
 
             const sendTools = (data?: unknown) =>
-              window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
+              window.parent?.postMessage(
+                { type: "initedAiPlugin", data },
+                window.location.origin,
+              );
 
             // const editorOrigin = (() => {
             //   try {
@@ -475,9 +476,11 @@ const useEditorEvents = ({
           window.opener && window.opener !== window
             ? (window.opener as Window)
             : window.parent;
+        const hostOrigin = window.location.origin;
 
         const onParentMessage = (event: MessageEvent) => {
-          if (event.source !== hostWindow) return;
+          if (event.source !== hostWindow || event.origin !== hostOrigin)
+            return;
           const payload = event.data;
           if (
             !payload ||
@@ -509,7 +512,7 @@ const useEditorEvents = ({
             }
             hostWindow?.postMessage(
               { type: "editorToolResult", callId, result: "" },
-              "*",
+              hostOrigin,
             );
           } else {
             hostWindow?.postMessage(
@@ -518,12 +521,12 @@ const useEditorEvents = ({
                 callId,
                 result: JSON.stringify({ error: "AI provider not configured" }),
               },
-              "*",
+              hostOrigin,
             );
           }
         };
         window.addEventListener("message", onParentMessage);
-        hostWindow?.postMessage({ type: "editorDocumentReady" }, "*");
+        hostWindow?.postMessage({ type: "editorDocumentReady" }, hostOrigin);
       }
     }
 
@@ -551,7 +554,7 @@ const useEditorEvents = ({
 
   const onSDKRequestClose = React.useCallback(() => {
     const editorGoBack = sdkConfig?.editorGoBack;
-    const returnUrl = sdkConfig?.returnUrl;
+    const returnUrl = getSafeReturnUrl(sdkConfig?.returnUrl);
 
     // Editor opened at the top level (broken out of an SDK iframe): return
     // to the originating listing instead of emitting a close event (which
@@ -1144,7 +1147,7 @@ const useEditorEvents = ({
       config?.editorConfig.mode,
     );
 
-    window.DocEditor?.instances[EDITOR_ID]?.refreshFile(res);
+    getDocEditor()?.refreshFile(res);
   }, [
     fileInfo?.id,
     doc,

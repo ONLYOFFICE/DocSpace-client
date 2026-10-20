@@ -70,15 +70,10 @@ const MobileQuotasComponent = ({ isDisabled, aiServicesEnabled }) => {
       />
       {aiServicesEnabled ? (
         <CategoryItem
-          title={t("QuotaPerAIAgent", {
-            aiAgent: t("Common:AIAgent"),
-          })}
+          title={t("QuotaPerAIAgent")}
           onClickLink={onClickLink}
           url="/portal-settings/management/disk-space/quota-per-ai-agent"
-          subtitle={t("SetDefaultAIAgentQuota", {
-            aiAgents: t("Common:AIAgents"),
-            aiAgent: t("Common:AIAgent"),
-          })}
+          subtitle={t("SetDefaultAIAgentQuota")}
           isDisabled={isDisabled}
         />
       ) : null}

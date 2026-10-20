@@ -1,0 +1,29 @@
+{
+  "key_path": "PortalUnblockTitle",
+  "content": "Please confirm that you want to unblock your workspace.",
+  "content_en_sha1_hash": "a624b52608b208d2b6dc7c0143b00c143dc7b65d",
+  "created_at": "2026-10-15T12:49:40.723Z",
+  "updated_at": "2026-10-15T12:52:07.473Z",
+  "comment": {
+    "text": "Subtitle on the confirmation page the workspace owner reaches from the unblock link in the email, above the Unblock and Cancel buttons; mirrors the prompt shown when reactivating a workspace.",
+    "is_auto": true,
+    "updated_at": "2026-10-15T12:52:07.473Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/PortalUnblock/page.client.tsx",
+      "line_number": 109,
+      "context": "</Link>\n </Trans>\n </Text>\n ) : (\n <>\n <Text className=\"subtitle\">{t(\"PortalUnblockTitle\")}</Text>\n <div className={styles.buttonsWrapper}>\n <Button\n primary\n scale\n size={ButtonSize.medium}",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

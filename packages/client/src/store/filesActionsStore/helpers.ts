@@ -138,11 +138,11 @@ export const setPinAction = async (
 
     if (isAIAgent) {
       translationForOneItem = isPin
-        ? t("Common:AIAgentPinned", { aiAgent: t("Common:AIAgent") })
-        : t("Common:AIAgentUnpinned", { aiAgent: t("Common:AIAgent") });
+        ? t("Common:AIAgentPinned")
+        : t("Common:AIAgentUnpinned");
       translationForSeverals = isPin
-        ? t("Common:AIAgentsPinned", { aiAgents: t("Common:AIAgents") })
-        : t("Common:AIAgentsUnpinned", { aiAgents: t("Common:AIAgents") });
+        ? t("Common:AIAgentsPinned")
+        : t("Common:AIAgentsUnpinned");
     } else {
       translationForOneItem = isPin
         ? t("Common:RoomPinned")
@@ -188,7 +188,7 @@ export const setPinAction = async (
     if (isError) {
       isAIAgent
         ? toastr.error(
-            t("Common:AIAgentPinLimitMessage", { aiAgents: t("Common:AIAgents") }),
+            t("Common:AIAgentPinLimitMessage"),
           )
         : toastr.error(t("Common:RoomsPinLimitMessage"));
     }

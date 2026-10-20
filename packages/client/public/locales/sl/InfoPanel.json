@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "iz «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Soba «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Sekcija «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Prostor «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Analizirajteore z AI",
   "FormRoomAIModalConnect": "Poveži z bazo podatkov",
   "FormRoomAIModalDescription": "Povežite se z bazo podatkov za anal v zbranih odgovorov s funkcijo \"Vprašaj umetno inteligenco\". Lahkojujete tudi brez postavlj vpraš le tej obrazci.",

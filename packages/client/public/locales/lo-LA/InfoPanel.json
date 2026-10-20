@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "ຈາກ «{{folderTitle}}»",
   "FeedLocationRoomLabel": "ຫ້ອງ «{{folderTitle}}»",
   "FeedLocationSectionLabel": "ພາກສ່ວນ «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "ສະເປສ «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "ວິເຄາະຄຳຕອບດ້ວຍ AI",
   "FormRoomAIModalConnect": "ເຊື່ອມຕໍ່ຖານຂໍ້ມູນ",
   "FormRoomAIModalDescription": "ເຊື່ອມຕໍ່ຖານຂໍ້ມູນເພື່ອວິເຄາະການຕອບສະໜອງທັງໝົດທີ່ເກັບກຳໄວ້ດ້ວຍ «ຖາມ AI». ທ່ານສາມາດດຳເນີນການຕໍ່ໂດຍບໍ່ຕ້ອງໃຊ້ມັນ ແລະ ຖາມກ່ຽວກັບແບບຟອມນີ້ເທົ່ານັ້ນ.",

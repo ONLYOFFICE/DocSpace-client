@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "из папки «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Комната «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Раздел «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Пространство «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Анализ ответов с помощью ИИ",
   "FormRoomAIModalConnect": "Подключить базу данных",
   "FormRoomAIModalDescription": "Подключите базу данных для анализа всех собранных ответов с помощью «Спросить ИИ». Вы можете продолжить без подключения и задавать вопросы только по этой форме.",

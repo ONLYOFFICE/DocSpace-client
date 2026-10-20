@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Lietojumprogrammas ir veiksmīgi iespējotas",
   "AppName": "Lietotnes nosaukums",
   "Apps": "Izmantošanas veidi",
+  "AppsLimitReached": "Jūs esat sasniedzis maksimālo lietotņu skaitu, ko varat izveidot. Lai pievienotu jaunu lietotni, izdzēsiet lietotni, kas jums vairs nav nepieciešama.",
+  "AppsLimitReachedWorkspace": "Šī darbvieta ir sasniegusi maksimālo lietotņu skaitu. Lai pievienotu jaunu lietotni, izdzēsiet lietotni, kas vairs nav nepieciešama.",
   "AuthButton": "Autentifikācijas poga",
   "AuthenticationMethod": "Autentifikācijas metode",
   "AuthorizedApps": "Autorizētas lietotnes",

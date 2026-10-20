@@ -118,6 +118,7 @@
   "SharePDFFormModalDescription": "A new space will be created and the PDF form will be copied there. You can then invite other users to fill out the form in the space.",
   "SharePDFFormModalTitle": "Share PDF form",
   "ShareRoom": "Share room",
+  "ShareSpace": "Share space",
   "ShowLinkActions": "Show link actions",
   "SyncWithDatabase": "Synchronization with database",
   "SyncWithDatabaseError": "Failed to sync with database",

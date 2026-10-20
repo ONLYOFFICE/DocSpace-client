@@ -70,6 +70,8 @@ import { isPDFDocument } from "@/utils";
 
 import Bar from "./Bar";
 
+type TCustomization = NonNullable<IConfig["editorConfig"]>["customization"];
+
 const Editor = ({
   config,
   successAuth,
@@ -199,15 +201,17 @@ const Editor = ({
       : null,
   );
 
+  // The server sends `fileType`, `type` and the like as plain strings; their
+  // values are the editor's own, so the config is handed over as `IConfig`.
   const newConfig: IConfig = useMemo(() => {
     return config
-      ? {
+      ? ({
           document: { ...config.document, title: resolvedTitle },
           documentType: config.documentType,
           token: config.token,
           type: config.type,
           editorConfig: { ...config.editorConfig },
-        }
+        } as IConfig)
       : {};
   }, [config, resolvedTitle]);
 
@@ -215,9 +219,7 @@ const Editor = ({
 
   // if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
-  const sdkCustomization: NonNullable<
-    IConfig["editorConfig"]
-  >["customization"] = sdkConfig?.editorCustomization;
+  const sdkCustomization = sdkConfig?.editorCustomization as TCustomization;
 
   try {
     if (
@@ -435,8 +437,6 @@ const Editor = ({
               }
             : newConfig
         }
-        height="100%"
-        width="100%"
       />
     </div>
   );

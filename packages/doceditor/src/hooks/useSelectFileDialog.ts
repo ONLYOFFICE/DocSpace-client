@@ -43,7 +43,7 @@ import {
 	TPresignedUri,
 } from "@docspace/shared/api/files/types";
 import { getPresignedUri, getReferenceData } from "@docspace/shared/api/files";
-import { EDITOR_ID } from "@docspace/shared/constants";
+import { getDocEditor } from "@/utils";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TSelectedFileInfo } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
@@ -121,8 +121,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		(link: TPresignedUri) => {
 			const token = link.token;
 
-			const docEditor =
-				typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+			const docEditor = getDocEditor();
 
 			docEditor?.insertImage({
 				...actionEvent.data,
@@ -138,8 +137,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		(link: TPresignedUri) => {
 			const token = link.token;
 
-			const docEditor =
-				typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+			const docEditor = getDocEditor();
 
 			docEditor?.setRequestedSpreadsheet({
 				...actionEvent.data,
@@ -155,8 +153,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		(link: TPresignedUri) => {
 			const token = link.token;
 
-			const docEditor =
-				typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+			const docEditor = getDocEditor();
 
 			docEditor?.setRequestedDocument({
 				...actionEvent.data,
@@ -169,8 +166,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 	);
 
 	const setReferenceSource = useCallback((data: TGetReferenceDataRequest) => {
-		const docEditor =
-			typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+		const docEditor = getDocEditor();
 
 		docEditor?.setReferenceSource(data);
 	}, []);

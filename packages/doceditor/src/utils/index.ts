@@ -40,8 +40,21 @@ import { convertFile } from "@docspace/shared/api/files";
 import { TEditHistory, TFile } from "@docspace/shared/api/files/types";
 import { TTranslation } from "@docspace/shared/types";
 import { FolderType } from "@docspace/shared/enums";
-import { TFormRole } from "@/types";
+import { EDITOR_ID } from "@docspace/shared/constants";
+import type { TDocEditor, TFormRole } from "@/types";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+
+// The editor instance as DocSpace drives it. `@onlyoffice/doceditor-types` types
+// `window.DocEditor` strictly, but the editor also takes internal calls it does
+// not describe even in 10.0.0 (`requestRoles`, `startFilling(true)`, the
+// connector's `sendEvent`) and the server config uses plain strings where it
+// expects literal unions, so the instance is read through `TDocEditor` instead.
+export const getDocEditor = (): TDocEditor | undefined =>
+  typeof window === "undefined"
+    ? undefined
+    : (window.DocEditor?.instances[EDITOR_ID] as unknown as
+        | TDocEditor
+        | undefined);
 
 export const convertDocumentUrl = async (fileId: number | string) => {
   const convert = await convertFile(fileId, null, null, true);
@@ -243,6 +256,24 @@ export const isPDFDocument = (file: TFile | undefined) => {
 export const isFormRoomFile = (file: TFile | undefined) =>
   file?.parentRoomType === FolderType.FormRoom &&
   file?.rootFolderType !== FolderType.RoomTemplates;
+
+export const getSafeReturnUrl = (url: string | undefined) => {
+  if (!url || typeof window === "undefined") return undefined;
+
+  try {
+    const parsedUrl = new URL(url, window.location.origin);
+
+    if (
+      (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") ||
+      parsedUrl.origin !== window.location.origin
+    )
+      return undefined;
+
+    return parsedUrl.toString();
+  } catch {
+    return undefined;
+  }
+};
 
 const ROOMS_SECTION_PATH = /\/rooms\/shared(\/\d+)?(\/filter)?\/?$/;
 

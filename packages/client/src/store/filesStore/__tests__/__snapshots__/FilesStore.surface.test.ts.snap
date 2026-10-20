@@ -51,7 +51,6 @@ exports[`FilesStore — public surface > exposes a stable set of public members 
   "encryptedFilenameCacheVersion",
   "ensureEncryptedFilenameForFile",
   "fetchAgents",
-  "fetchFavoritesFolder",
   "fetchFiles",
   "fetchMoreFiles",
   "fetchRooms",

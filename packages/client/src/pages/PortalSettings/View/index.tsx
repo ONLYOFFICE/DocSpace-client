@@ -66,6 +66,7 @@ import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettin
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
 import { Component as ServicesPage } from "../categories/payments/ServicesPage";
+import { Component as Apps } from "../categories/apps";
 
 // Loaded on demand: the AI settings category statically imports the ai-agent
 // settings pages from @onlyoffice/ai-chat, and this View is part of the entry
@@ -100,6 +101,8 @@ const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("bonus")) return "bonus";
 
   if (pathname.includes("ai-settings")) return "ai-settings";
+
+  if (pathname.includes("/portal-settings/apps")) return "apps";
 
   return "";
 };
@@ -350,6 +353,7 @@ const View = ({
           <AISettings />
         </React.Suspense>
       ) : null}
+      {currentView === "apps" ? <Apps /> : null}
       {currentView === "ai-services" ||
       currentView === "backup-service" ||
       currentView === "ai-search" ||

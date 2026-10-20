@@ -80,9 +80,7 @@ const InstructionsSettings = ({
             className="set_room_params-info-description"
             noSelect
           >
-            {t("InstructionsDescriptionAgent", {
-              aiAgent: t("Common:AIAgent"),
-            })}
+            {t("InstructionsDescriptionAgent")}
           </Text>
         </div>
         <Textarea

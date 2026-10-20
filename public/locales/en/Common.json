@@ -775,7 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Activate AI agents & tools to create agents with their own knowledge base, share them with your team, and let them run tasks across your apps.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI usage is billed from your wallet balance",
   "EmptyAIAgentsNotActiveYetTitle": "AI agents & tools aren’t active yet",
-  "EmptyAIAgentsSelectorDescription": "Create a new agent to move files to its knowledge base.",
+  "EmptyAIAgentsSelectorDescription": "Create a new agent to add files to its knowledge base.",
   "EmptyAIAgentsTitle": "Create your AI agent",
   "EmptyAIAgentsUserTitle": "No AI agents available yet",
   "EmptyAIChatNotActiveYetAdminDescription": "Activate {{aiChat}} to start conversations in this section.",

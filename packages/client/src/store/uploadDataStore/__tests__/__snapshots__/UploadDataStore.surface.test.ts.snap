@@ -29,6 +29,7 @@ exports[`UploadDataStore — public surface > exposes a stable set of public mem
   "copyAsAction",
   "copyToAction",
   "currentUploadNumber",
+  "deleteMovedEncryptedSource",
   "dialogsStore",
   "displayedConversionFiles",
   "encryptKeysForRoomMembers",

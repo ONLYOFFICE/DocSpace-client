@@ -36,6 +36,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { ConflictResolveType } from "@docspace/shared/enums";
 import { resolveItemRoomContext } from "@docspace/shared/services/private-room/encrypted-upload";
+import type { MoveSourceRef } from "@docspace/shared/services/private-room/encrypted-upload";
 import { getFileInfo } from "@docspace/shared/api/files";
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
@@ -89,6 +90,7 @@ import {
 } from "./uploadDataStore/conversion.helpers";
 import {
   cancelEncryptedBatchUploadImpl,
+  deleteMovedEncryptedSourceImpl,
   encryptKeysForRoomMembersImpl,
   ensureEncryptionUnlockedForBatchImpl,
   prepareFileForEncryptedUploadImpl,
@@ -334,6 +336,9 @@ class UploadDataStore {
     this.aiRoomStore = aiRoomStore;
     this.userStore = userStore;
   }
+
+  deleteMovedEncryptedSource = (moveSource: MoveSourceRef) =>
+    deleteMovedEncryptedSourceImpl(this, moveSource);
 
   wrapForSelfThenRoom = (
     fileId: number,

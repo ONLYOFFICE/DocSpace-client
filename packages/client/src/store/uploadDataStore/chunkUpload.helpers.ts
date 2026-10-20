@@ -217,6 +217,9 @@ export function checkChunkUploadImpl(
       parentId: fileInfo.folderId,
     });
 
+    const moveSource = currentFileData?.file?.uploadContext?.moveSource;
+    if (moveSource) void self.deleteMovedEncryptedSource(moveSource);
+
     if (fileInfo.version > 2) {
       self.filesStore.setHighlightFile({
         highlightFileId: fileInfo.id,

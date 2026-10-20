@@ -44,6 +44,7 @@ vi.mock("@docspace/shared/api/files", async (importOriginal) => {
     setFileEncryptionKeys: vi.fn(),
     getFileEncryptionAccess: vi.fn(),
     getFileConversationProgress: vi.fn(),
+    removeFiles: vi.fn(),
   };
 });
 
@@ -68,6 +69,7 @@ vi.mock("@docspace/shared/services/encryption/filename-cache", () => ({
   subscribeFilenameCache: vi.fn(),
   resolveDisplayTitle: ({ title }: { title?: string }) => title,
   rememberEncryptedFilename: vi.fn(),
+  forgetEncryptedFilename: vi.fn(),
 }));
 
 vi.mock("SRC_DIR/helpers/info-panel", () => ({

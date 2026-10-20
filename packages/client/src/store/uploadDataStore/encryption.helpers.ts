@@ -38,13 +38,18 @@ import { RoomsType } from "@docspace/shared/enums";
 import {
   setFileEncryptionKeys,
   getFileEncryptionAccess,
+  removeFiles,
 } from "@docspace/shared/api/files";
 import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { prepareEncryptedUpload } from "@docspace/shared/services/private-room/encrypted-upload";
+import type { MoveSourceRef } from "@docspace/shared/services/private-room/encrypted-upload";
+import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import uniqueid from "lodash/uniqueId";
 
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 
@@ -52,6 +57,50 @@ import i18n from "../../i18n";
 
 import type { TUploadBrowserFile } from "./helpers";
 import type { default as UploadDataStore } from "../UploadDataStore";
+
+// Spec: private-rooms/file-operations, "Files leaving a private room are decrypted".
+export async function deleteMovedEncryptedSourceImpl(
+  self: UploadDataStore,
+  moveSource: MoveSourceRef,
+) {
+  const pbData = {
+    operation: OPERATIONS_NAME.trash,
+    operationId: uniqueid("operation_"),
+  };
+  const fileId = Number(moveSource.fileId);
+
+  try {
+    const [operation] = await removeFiles([], [fileId], false, true);
+    if (!operation || operation.error) {
+      throw new Error(operation?.error || "Delete operation was not started");
+    }
+
+    const result = await self.loopFilesOperations(operation, pbData);
+    if (result?.error) throw new Error(result.error);
+
+    self.secondaryProgressDataStore.setSecondaryProgressBarData({
+      ...pbData,
+      completed: true,
+    });
+    self.filesStore.removeFiles([fileId]);
+    forgetEncryptedFilename(fileId);
+  } catch (error) {
+    console.error("[ENCRYPTION] Failed to delete the source of a moved file", {
+      fileId,
+      error,
+    });
+    self.secondaryProgressDataStore.setSecondaryProgressBarData({
+      ...pbData,
+      completed: true,
+      alert: true,
+    });
+    toastr.error(
+      i18n.t("Common:EncryptedMovePartialFailure", {
+        names: moveSource.title,
+      }),
+    );
+  }
+}
 
 export async function wrapForSelfThenRoomImpl(
   self: UploadDataStore,

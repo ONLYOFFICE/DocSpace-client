@@ -100,4 +100,35 @@ describe("finishUploadFilesImpl", () => {
 
     vi.runAllTimers();
   });
+
+  it("Move with a failed copy: a copy whose upload failed names its source", () => {
+    const { store } = createTestUploadDataStore();
+    const failedCopy = makeUploadFile({ action: "upload", error: "boom" });
+    Object.assign(failedCopy.file, {
+      uploadContext: { moveSource: { fileId: 42, title: "secret.docx" } },
+    });
+    store.files = [failedCopy];
+    store.uploadedFilesHistory = [{ ...failedCopy }];
+
+    finishUploadFilesImpl(store, t);
+
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedMovePartialFailure",
+    );
+    vi.runAllTimers();
+  });
+
+  it("does not report a failed move for an ordinary failed upload", () => {
+    const { store } = createTestUploadDataStore();
+    const failed = makeUploadFile({ action: "upload", error: "boom" });
+    store.files = [failed];
+    store.uploadedFilesHistory = [{ ...failed }];
+
+    finishUploadFilesImpl(store, t);
+
+    expect(toastr.error).not.toHaveBeenCalledWith(
+      "Common:EncryptedMovePartialFailure",
+    );
+    vi.runAllTimers();
+  });
 });

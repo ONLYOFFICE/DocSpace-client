@@ -38,6 +38,7 @@ import { decryptFile, wipeDek } from "../encryption/file-keys";
 import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import type { IdentityKeyPair } from "../encryption/types";
+import type { MoveSourceRef } from "./encrypted-upload";
 import { loadRoomMemberKeysSafe } from "./room-member-keys";
 
 type EncryptedItem = {
@@ -116,6 +117,7 @@ export function addCopySuffix(name: string, n: number = 1): string {
 export type UploadDestContext = {
   roomType?: number;
   isPrivate: boolean;
+  moveSource?: MoveSourceRef;
 };
 
 export type TaggedUploadFile = File & {

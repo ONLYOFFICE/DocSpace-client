@@ -38,6 +38,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { generateIdentityKeyPair } from "../../encryption/identity";
 import { generateDEK } from "../../encryption/file-keys";
 import { wrapDekForRecipients } from "../../encryption/room-file-access";
+import { inspectWrap } from "../../encryption/hpke";
 import {
   getTofuStore,
   registerKeyMismatchHandler,
@@ -224,6 +225,7 @@ const mockIDB = {
 
 const ALICE = "11111111-1111-1111-1111-111111111111";
 const BOB = "22222222-2222-2222-2222-222222222222";
+const CAROL = "33333333-3333-3333-3333-333333333333";
 const ROOM_ID = 100;
 const FILE_ID = 4242;
 const ALICE_KEY_ID = "aaaaaaaa-0000-0000-0000-000000000001";
@@ -403,15 +405,12 @@ describe("addMembersToEncryptedRoom", () => {
     expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
   });
 
-  it("does not re-wrap for a member already present in fileKeys", async () => {
-    const aliceAndBobWraps = await wrapDekForRecipients({
+  it("Existing wraps are replaced: a member is wrapped again by the caller even if another sender wrapped for them before", async () => {
+    const aliceWrapFromCarol = await wrapDekForRecipients({
       dek,
-      senderIdentity: alice,
-      senderUserId: ALICE,
-      recipients: [
-        { userId: ALICE, publicKey: pubB64(alice) },
-        { userId: BOB, publicKey: pubB64(bob) },
-      ],
+      senderIdentity: carol,
+      senderUserId: CAROL,
+      recipients: [{ userId: ALICE, publicKey: pubB64(alice) }],
       fileId: FILE_ID,
     });
     getFolderMock.mockResolvedValue({
@@ -419,12 +418,13 @@ describe("addMembersToEncryptedRoom", () => {
       folders: [],
     });
     getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: aliceAndBobWraps,
+      fileKeys: aliceWrapFromCarol,
       userKeys: [],
     });
     getRoomEncryptionKeysMock.mockResolvedValue([
       { userId: ALICE, publicKey: pubB64(alice) },
       { userId: BOB, publicKey: pubB64(bob) },
+      { userId: CAROL, publicKey: pubB64(carol) },
     ]);
 
     const result = await addMembersToEncryptedRoom(
@@ -437,7 +437,13 @@ describe("addMembersToEncryptedRoom", () => {
     expect(result.fileResults).toEqual([
       { fileId: FILE_ID, success: true },
     ]);
-    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    const [, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
+    const bobEntry = (keysPosted as ServerAccessKeyDto[]).find(
+      (k) => String(k.userId) === BOB,
+    );
+    expect(bobEntry).toBeDefined();
+    expect(inspectWrap(bobEntry!.privateKeyEnc).senderUserId).toBe(ALICE);
   });
 
   it("marks the member as 'key-mismatch-refused' when the resolver rejects", async () => {
@@ -727,32 +733,25 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     ).toEqual([ALICE, BOB].sort());
   });
 
-  it("is a no-op for files where every getFilePublicKeys user already has an envelope", async () => {
-    const aliceAndBobWraps = await wrapDekForRecipients({
-      dek,
-      senderIdentity: alice,
-      senderUserId: ALICE,
-      recipients: [
-        { userId: ALICE, publicKey: pubB64(alice) },
-        { userId: BOB, publicKey: pubB64(bob) },
-      ],
-      fileId: FILE_ID,
-    });
+  it("Backfill re-wraps every member: every listed member except the caller is wrapped", async () => {
+    const carolKp = await generateIdentityKeyPair();
     getFolderMock.mockResolvedValue({
       files: singleFile(FILE_ID),
       folders: [],
     });
     getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: aliceAndBobWraps,
+      fileKeys: aliceOwnWrap,
       userKeys: [],
     });
     getFilePublicKeysMock.mockResolvedValue([
       { userId: ALICE, publicKey: pubB64(alice) },
       { userId: BOB, publicKey: pubB64(bob) },
+      { userId: CAROL, publicKey: pubB64(carolKp) },
     ]);
     getRoomEncryptionKeysMock.mockResolvedValue([
       { userId: ALICE, publicKey: pubB64(alice) },
       { userId: BOB, publicKey: pubB64(bob) },
+      { userId: CAROL, publicKey: pubB64(carolKp) },
     ]);
 
     const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
@@ -761,10 +760,14 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     });
 
     expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
-    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    const [, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
+    expect(
+      (keysPosted as ServerAccessKeyDto[]).map((k) => String(k.userId)).sort(),
+    ).toEqual([ALICE, BOB, CAROL].sort());
   });
 
-  it("does NOT add a second wrap for a member who already has one (one row per user)", async () => {
+  it("a member with several keys gets one wrap", async () => {
     const bobKeys = [
       bob,
       await generateIdentityKeyPair(),
@@ -772,27 +775,12 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     ];
     const BOB_KEY_IDS = ["bob-key-1", "bob-key-2", "bob-key-3"];
 
-    const wraps = await wrapDekForRecipients({
-      dek,
-      senderIdentity: alice,
-      senderUserId: ALICE,
-      recipients: [
-        { userId: ALICE, publicKey: pubB64(alice), publicKeyId: "alice-key" },
-        {
-          userId: BOB,
-          publicKey: pubB64(bobKeys[0]),
-          publicKeyId: BOB_KEY_IDS[0],
-        },
-      ],
-      fileId: FILE_ID,
-    });
-
     getFolderMock.mockResolvedValue({
       files: singleFile(FILE_ID),
       folders: [],
     });
     getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: wraps,
+      fileKeys: aliceOwnWrap,
       userKeys: [],
     });
     getRoomEncryptionKeysMock.mockResolvedValue([
@@ -814,7 +802,13 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     });
 
     expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
-    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    const [, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
+    const bobEntries = (keysPosted as ServerAccessKeyDto[]).filter(
+      (k) => String(k.userId) === BOB,
+    );
+    expect(bobEntries).toHaveLength(1);
+    expect(bobEntries[0].publicKeyId).toBe(BOB_KEY_IDS[2]);
   });
 
   it("Member listed with two keys: backfill wraps the member's newer key once", async () => {
@@ -1048,25 +1042,31 @@ describe("validateMembersForEncryption", () => {
   });
 });
 
-const CAROL = "33333333-3333-3333-3333-333333333333";
 
 describe("revokeMemberFromEncryptedRoom", () => {
   let alice: IdentityKeyPair;
   let bob: IdentityKeyPair;
-  let aliceAndBobWraps: ServerAccessKeyDto[];
+  /** What the server shows Alice: her own entry only. */
+  let aliceOwnWrap: ServerAccessKeyDto[];
+  /** What the server shows Bob: his own entry only. */
+  let bobOwnWrap: ServerAccessKeyDto[];
 
   beforeEach(async () => {
     alice = await generateIdentityKeyPair();
     bob = await generateIdentityKeyPair();
     const dek = generateDEK();
-    aliceAndBobWraps = await wrapDekForRecipients({
+    aliceOwnWrap = await wrapDekForRecipients({
       dek,
       senderIdentity: alice,
       senderUserId: ALICE,
-      recipients: [
-        { userId: ALICE, publicKey: pubB64(alice) },
-        { userId: BOB, publicKey: pubB64(bob) },
-      ],
+      recipients: [{ userId: ALICE, publicKey: pubB64(alice) }],
+      fileId: FILE_ID,
+    });
+    bobOwnWrap = await wrapDekForRecipients({
+      dek,
+      senderIdentity: alice,
+      senderUserId: ALICE,
+      recipients: [{ userId: BOB, publicKey: pubB64(bob) }],
       fileId: FILE_ID,
     });
 
@@ -1100,13 +1100,29 @@ describe("revokeMemberFromEncryptedRoom", () => {
     expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
   });
 
-  it("removes the revoked user's entry and writes back the filtered fileKeys", async () => {
+  it("Revocation succeeds: another member's entry is not in the caller's read, so nothing is written", async () => {
     getFolderMock.mockResolvedValue({
       files: singleFile(FILE_ID),
       folders: [],
     });
     getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: aliceAndBobWraps,
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+
+    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
+
+    expect(result).toEqual([{ fileId: FILE_ID, success: true }]);
+    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("Leave succeeds: the leaver's own entry is left out of the write", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: bobOwnWrap,
       userKeys: [],
     });
 
@@ -1116,27 +1132,7 @@ describe("revokeMemberFromEncryptedRoom", () => {
     expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
     const [fileId, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
     expect(fileId).toBe(FILE_ID);
-    const userIds = (keysPosted as ServerAccessKeyDto[]).map((k) =>
-      String(k.userId),
-    );
-    expect(userIds).toEqual([ALICE]);
-    expect(userIds).not.toContain(BOB);
-  });
-
-  it("skips the API write when the revoked user is not in fileKeys (no-op)", async () => {
-    getFolderMock.mockResolvedValue({
-      files: singleFile(FILE_ID),
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: aliceAndBobWraps,
-      userKeys: [],
-    });
-
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [CAROL], {});
-
-    expect(result).toEqual([{ fileId: FILE_ID, success: true }]);
-    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+    expect(keysPosted).toEqual([]);
   });
 
   it("accepts a single userId string in addition to an array", async () => {
@@ -1145,7 +1141,7 @@ describe("revokeMemberFromEncryptedRoom", () => {
       folders: [],
     });
     getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: aliceAndBobWraps,
+      fileKeys: bobOwnWrap,
       userKeys: [],
     });
 
@@ -1153,9 +1149,7 @@ describe("revokeMemberFromEncryptedRoom", () => {
 
     expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
     const [, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
-    expect(
-      (keysPosted as ServerAccessKeyDto[]).map((k) => String(k.userId)),
-    ).toEqual([ALICE]);
+    expect(keysPosted).toEqual([]);
   });
 
   it("returns an error result when fileKeys is missing", async () => {
@@ -1188,7 +1182,7 @@ describe("revokeMemberFromEncryptedRoom", () => {
       folders: [],
     });
     getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: aliceAndBobWraps,
+      fileKeys: bobOwnWrap,
       userKeys: [],
     });
     setFileEncryptionKeysMock.mockImplementationOnce(async () => {
@@ -1215,7 +1209,7 @@ describe("revokeMemberFromEncryptedRoom", () => {
       folders: [],
     });
     getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: aliceAndBobWraps,
+      fileKeys: bobOwnWrap,
       userKeys: [],
     });
 

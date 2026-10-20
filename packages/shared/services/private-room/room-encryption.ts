@@ -46,10 +46,9 @@ import {
 } from "../encryption/room-file-access";
 import { wipeDek } from "../encryption/file-keys";
 import {
-  getTofuStore,
-  getKeyMismatchHandler,
   type KeyMismatchResolver,
 } from "../encryption/tofu-store";
+import { verifyMemberKey } from "./member-key-verification";
 import { loadRoomMemberKeys, selectMemberKeys } from "./room-member-keys";
 import FilesFilter from "../../api/files/filter";
 import type { TFile } from "../../api/files/types";
@@ -115,48 +114,6 @@ async function getEncryptedFilesInRoom(roomId: number): Promise<TFile[]> {
   return allFiles;
 }
 
-type VerifiedKeyResult =
-  | { kind: "ok"; publicKey: string }
-  | { kind: "key-mismatch-refused" };
-
-async function verifyUserPublicKey(
-  userId: string,
-  scopeUserId: string,
-  displayName: string | undefined,
-  resolver: KeyMismatchResolver | undefined,
-  publicKey: string,
-): Promise<VerifiedKeyResult> {
-  const tofu = getTofuStore(scopeUserId);
-  const result = await tofu.checkKey(userId, publicKey);
-  if (result.kind === "first-seen" || result.kind === "match") {
-    return { kind: "ok", publicKey };
-  }
-
-  const handler = resolver ?? getKeyMismatchHandler();
-  if (!handler) return { kind: "key-mismatch-refused" };
-
-  let decision: "accept" | "refuse";
-  try {
-    decision = await handler({
-      userId,
-      knownKey: result.known.publicKey,
-      newKey: result.submitted,
-      knownFirstSeenAt: result.known.firstSeenAt,
-      knownLastSeenAt: result.known.lastSeenAt,
-      displayName,
-    });
-  } catch (e) {
-    if (typeof console !== "undefined") {
-      // biome-ignore lint/suspicious/noConsole: surface resolver bugs in dev; failing closed (refused).
-      console.error("Key mismatch resolver threw:", e);
-    }
-    return { kind: "key-mismatch-refused" };
-  }
-  if (decision !== "accept") return { kind: "key-mismatch-refused" };
-  await tofu.acceptKey(userId, publicKey);
-  return { kind: "ok", publicKey };
-}
-
 export async function addMembersToEncryptedRoom(
   roomId: number,
   newMembers: NewRoomMember[],
@@ -198,13 +155,13 @@ export async function addMembersToEncryptedRoom(
       return null;
     }
 
-    const verification = await verifyUserPublicKey(
-      m.id,
-      currentUserId,
-      memberDisplayName.get(m.id),
-      onKeyChange,
-      candidate.publicKey,
-    );
+    const verification = await verifyMemberKey({
+      userId: m.id,
+      scopeUserId: currentUserId,
+      displayName: memberDisplayName.get(m.id),
+      resolver: onKeyChange,
+      publicKey: candidate.publicKey,
+    });
     const resolved = verification.kind === "ok" ? candidate : null;
     memberKeyCache.set(m.id, resolved);
     if (verification.kind !== "ok") skippedReasons.set(m.id, verification.kind);
@@ -400,13 +357,12 @@ export async function backfillEncryptedFilesForRoomMembers(
     const cacheKey = `${userId}:${candidate}`;
     const cached = verifiedCache.get(cacheKey);
     if (cached !== undefined) return cached;
-    const result = await verifyUserPublicKey(
+    const result = await verifyMemberKey({
       userId,
-      currentUserId,
-      undefined,
-      onKeyChange,
-      candidate,
-    );
+      scopeUserId: currentUserId,
+      resolver: onKeyChange,
+      publicKey: candidate,
+    });
     const pk = result.kind === "ok" ? result.publicKey : null;
     verifiedCache.set(cacheKey, pk);
     if (result.kind !== "ok") skippedReasons.set(userId, result.kind);
@@ -667,13 +623,13 @@ export async function validateMembersForEncryption(
       skipped.push({ id: memberId, displayName, reason: "no-key" });
       continue;
     }
-    const verification = await verifyUserPublicKey(
-      memberId,
+    const verification = await verifyMemberKey({
+      userId: memberId,
       scopeUserId,
       displayName,
-      onKeyChange,
-      candidate,
-    );
+      resolver: onKeyChange,
+      publicKey: candidate,
+    });
     if (verification.kind === "ok") {
       valid.push({ id: memberId, publicKey: verification.publicKey });
     } else {

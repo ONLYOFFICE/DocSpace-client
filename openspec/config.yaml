@@ -1,0 +1,74 @@
+schema: spec-driven
+
+context: |
+  Language: en
+  All artifacts must be written in en.
+  Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+
+  Project: ONLYOFFICE DocSpace frontend client (pnpm + Nx monorepo, React,
+  MobX). Backend is the sibling repo ../server (C#/.NET); the document editor
+  runs in the Document Server (separate product). Read CLAUDE.md for commands
+  and rules; every committed file is English, user-facing strings go through
+  i18n (t()), never hardcoded.
+
+  OpenSpec currently covers one feature: private (end-to-end encrypted) rooms.
+  Main specs live under openspec/specs/private-rooms/<capability>/spec.md and
+  describe the behaviour that exists on the branch today, including deliberate
+  v1 limitations written as SHALL NOT requirements. Anything missing, partial
+  or undecided is a change under openspec/changes/.
+
+  Where the private-rooms code lives:
+  - Crypto core: packages/shared/services/encryption (identity, HPKE wrap,
+    DSE3 streaming format, TOFU, secret storage, device unlock, passkey,
+    rotation) and packages/shared/services/private-room (upload, download,
+    copy, file creation, filename recovery, room membership re-encryption).
+  - React context: packages/shared/context/encryption; dialogs under
+    packages/shared/dialogs/{passphrase-modal,key-generation,key-recovery,key-change-dialog}.
+  - Client UI: packages/client/src (stores filesStore / filesActionsStore /
+    uploadDataStore / contextOptionsStore, InvitePanel, Members view,
+    Profile keys-management tab, E2eRooms page, EncryptionProviderWrapper).
+  - Editor: packages/doceditor/src (useFileEncryptionKeys, Editor.tsx).
+  - SDK: packages/sdk/src/app/(private) and (docspace) encrypted hooks.
+  - Server API client: packages/shared/api/privacy and encrypted-specific
+    calls in packages/shared/api/files.
+  - Feature flag: packages/shared/utils/privateRooms.ts (localStorage
+    "privateRooms"); the feature is hidden until the flag is set.
+
+  Tests: shared unit tests `cd packages/shared && pnpm exec vitest run <path>`,
+  client unit tests `cd packages/client && pnpm exec vitest run <path>`,
+  Playwright E2E in packages/client/__tests__ (private-room-*.spec.ts,
+  keys-management*.spec.ts, encrypted-file-ui.spec.ts) run via Docker
+  (`pnpm test:e2e:docker:start`). MSW handlers for E2E live in
+  packages/shared/__mocks__/handlers and have contract tests against the C#
+  server. A console.error containing "[ENCRYPTION]" fails a unit test.
+
+  Design history: the original design documents (SECURITY.md, FORMAT.md,
+  AUDIT_FRONTEND/BACKEND.md, V1_RELEASE_PROGRESS.md, SDK plans) were never
+  committed and survive only in git stashes of the feature author. Where they
+  disagree with the code, the code wins.
+
+rules:
+  proposal:
+    - State explicitly what is out of scope and which decisions need a human.
+    - Name the server-side (../server) or Document Server work the change depends on.
+  specs:
+    - One observable behaviour per requirement; keep descriptions under 500 characters.
+    - Requirements never name classes, functions, stores or files; a short "Implementation" note in Purpose may point at the owning modules.
+    - Deliberate v1 limitations are requirements too, phrased as SHALL NOT, so the limitation is visible and testable.
+    - Security-relevant scenarios state what MUST NOT happen (no plaintext upload, no silent key acceptance), not only the happy path.
+    - User-facing text in scenarios refers to a Common.json i18n key when one exists.
+  design:
+    - Record which stashed design document (if any) the decision comes from and whether the code still matches it.
+  tasks:
+    - Every task names its verification (unit test path, E2E spec, or command).
+    - Locale changes run the translation skills and the locale tests in the same task group.
+    - "Keep the pre-push gate in mind: tsc, biome, locale tests, shared/client/sdk unit tests must stay green."
+
+operations:
+  apply:
+    guidance:
+      - Do not remove the privateRooms feature flag as part of any change unless the change is explicitly about releasing the feature.
+      - Backend-dependent tasks stop at the client side and record the expected server contract.
+  archive:
+    guidance:
+      - Before archiving, confirm the main spec still describes the behaviour on the branch, not the behaviour planned.

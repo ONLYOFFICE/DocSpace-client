@@ -238,8 +238,8 @@ export type TMetadataAIFillResult = {
 };
 
 export type TMetadataAIGenerateRequest = {
-  files?: number[];
-  folders?: number[];
+  kind: TMetadataEntryKind;
+  id: number;
   prompt?: string;
 };
 

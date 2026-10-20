@@ -148,10 +148,7 @@ export const useMetadataAIPanel = ({
 
   const suggest = async (signal: AbortSignal, data: TEntryMetadata) => {
     const result = await generateMetadataWithAI(
-      {
-        ...(kind === "file" ? { files: [id] } : { folders: [id] }),
-        prompt: prompt.trim() || undefined,
-      },
+      { kind, id, prompt: prompt.trim() || undefined },
       signal,
     );
     const suggestions = toSuggestionDrafts(result.fields, data);

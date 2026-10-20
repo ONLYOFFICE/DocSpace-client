@@ -37,6 +37,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import {
+  getAiSpendingAsText,
   getSpaceQuotaAsText,
   getUserTypeName,
 } from "@docspace/shared/utils/common";
@@ -64,7 +65,7 @@ const UserContent = ({
   itemIndex,
   isMe,
 }: UserContentProps) => {
-  const { t } = useTranslation(["People", "Common"]);
+  const { t, i18n } = useTranslation(["People", "Common"]);
   const {
     displayName,
     email,
@@ -78,6 +79,7 @@ const UserContent = ({
     isRoomAdmin,
     usedSpace,
     quotaLimit,
+    aiServicesLimit,
     id,
   } = item;
 
@@ -112,6 +114,8 @@ const UserContent = ({
     quotaLimit!,
     !!isDefaultUsersQuotaSet,
   );
+
+  const aiSpending = getAiSpendingAsText(i18n.language, aiServicesLimit);
 
   return (
     <RowContent className={styles.styledRowContent} sideColor={sideInfoColor} sectionWidth={sectionWidth}>
@@ -195,6 +199,20 @@ const UserContent = ({
           dataTestId={`${prefix}_space_quota_link_${itemIndex}`}
         >
           {spaceQuota}
+        </Link>
+      ) : (
+        <div />
+      )}
+      {!isGuests && aiSpending ? (
+        <Link
+          type={LinkType.page}
+          fontSize="12px"
+          fontWeight={400}
+          color={sideInfoColor}
+          isTextOverflow
+          dataTestId={`${prefix}_ai_spending_link_${itemIndex}`}
+        >
+          {aiSpending}
         </Link>
       ) : (
         <div />

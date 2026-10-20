@@ -56,6 +56,7 @@ import { Nullable } from "@docspace/shared/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import AILimit from "SRC_DIR/components/AILimit";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import {
 	getContactsUrl,
@@ -346,6 +347,21 @@ const Users = ({
 								className={styles.typeCombobox}
 								onAbort={onAbort}
 								dataTestId="info_panel_contacts_user_space_quota"
+							/>
+						</>
+					) : null}
+					{!isGuests && userSelection.aiServicesLimit ? (
+						<>
+							<Text
+								className={styles.infoField}
+								title={t("Common:AISpending")}
+							>
+								{t("Common:AISpending")}
+							</Text>
+							<AILimit
+								item={userSelection}
+								className={styles.typeCombobox}
+								dataTestId="info_panel_contacts_user_ai_limit"
 							/>
 						</>
 					) : null}

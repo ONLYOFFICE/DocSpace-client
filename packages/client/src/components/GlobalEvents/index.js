@@ -57,6 +57,7 @@ import EditGroupEvent from "./GroupEvents/EditGroupEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
+import ChangeAILimitDialog from "../dialogs/ChangeAILimitDialog";
 import SaveAsTemplateEvent from "./SaveAsTemplateEvent";
 import { useHasAiProfiles } from "../../Hooks/useHasAiProfiles";
 import { AI_SETTINGS_URL } from "../../helpers/constants";
@@ -116,6 +117,10 @@ const GlobalEvents = ({
   const [changeUserTypeDialog, setChangeUserTypeDialogProps] = useState({
     visible: false,
     onClose: null,
+  });
+  const [changeAILimitDialog, setChangeAILimitDialogProps] = useState({
+    visible: false,
+    items: [],
   });
   const [changeQuotaDialog, setChangeQuotaDialogProps] = useState({
     visible: false,
@@ -417,6 +422,15 @@ const GlobalEvents = ({
     [],
   );
 
+  const onChangeAILimit = useCallback((e) => {
+    const { payload } = e;
+
+    setChangeAILimitDialogProps({
+      visible: payload.visible,
+      items: payload.items ?? [],
+    });
+  }, []);
+
   const onChangeQuota = useCallback((e) => {
     const { payload } = e;
 
@@ -486,6 +500,7 @@ const GlobalEvents = ({
     window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
     window.addEventListener(Events.GROUP_EDIT, onEditGroup);
     window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
+    window.addEventListener(Events.CHANGE_AI_LIMIT, onChangeAILimit);
     window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
     if (!isAIAgents() && enablePlugins) {
       window.addEventListener(
@@ -517,6 +532,7 @@ const GlobalEvents = ({
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
       window.removeEventListener(Events.CHANGE_QUOTA, onChangeQuota);
+      window.removeEventListener(Events.CHANGE_AI_LIMIT, onChangeAILimit);
       window.removeEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
       if (!isAIAgents() && enablePlugins) {
@@ -546,6 +562,7 @@ const GlobalEvents = ({
     onEditGroup,
     onChangeUserType,
     onChangeQuota,
+    onChangeAILimit,
     onSaveAsTemplate,
     onCreatePluginFileDialog,
     enablePlugins,
@@ -600,6 +617,16 @@ const GlobalEvents = ({
     ),
     changeQuotaDialog.visible && (
       <ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
+    ),
+    changeAILimitDialog.visible && (
+      <ChangeAILimitDialog
+        key={Events.CHANGE_AI_LIMIT}
+        visible
+        items={changeAILimitDialog.items}
+        onClose={() =>
+          setChangeAILimitDialogProps({ visible: false, items: [] })
+        }
+      />
     ),
     createPDFFormFileProps.visible && !createDialogProps.visible ? (
       <CreatedPDFFormDialog

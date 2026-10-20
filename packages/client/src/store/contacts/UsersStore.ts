@@ -425,6 +425,18 @@ class UsersStore {
     return !this.peopleList.length;
   }
 
+  refreshUser = async (id: string) => {
+    const user = await api.people.getUserById(id);
+
+    runInAction(() => {
+      const idx = this.users.findIndex((x) => x.id === id);
+
+      if (idx !== -1) this.users[idx] = user;
+    });
+
+    this.updateSelection();
+  };
+
   setUsers = (users: TUser[]) => {
     this.users = users;
   };
@@ -639,6 +651,8 @@ class UsersStore {
 
         if (isAdmin || isOwner) {
           options.push("room-list");
+
+          if (!isGuest) options.push("change-ai-limit");
         }
 
         if (isMySelf) {
@@ -736,6 +750,8 @@ class UsersStore {
 
           if (isAdmin || isOwner) {
             options.push("room-list");
+
+            if (!isGuest) options.push("change-ai-limit");
           }
 
           if (
@@ -846,6 +862,7 @@ class UsersStore {
       isLDAP,
       quotaLimit,
       usedSpace,
+      aiServicesLimit,
       isCustomQuota,
       createdBy,
       registrationDate,
@@ -903,6 +920,7 @@ class UsersStore {
       isLDAP,
       quotaLimit,
       usedSpace,
+      aiServicesLimit,
       isCustomQuota,
       createdBy,
       registrationDate: regDate,
@@ -1297,6 +1315,14 @@ class UsersStore {
     const users = this.selection.filter(() => canDisableQuota());
 
     return users.length > 0;
+  }
+
+  get showAISpendingInfo() {
+    const { isOwner, isAdmin } = this.userStore.user ?? {};
+
+    if (!isOwner && !isAdmin) return false;
+
+    return this.users.some((user) => !!user.aiServicesLimit);
   }
 
   get hasUsersToResetQuota() {

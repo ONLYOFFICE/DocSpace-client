@@ -22,7 +22,7 @@ Every task below is committed on its own (see "Commits" in `openspec/config.yaml
 
 - [x] 4.1 Hide "Generate new key" and "Import key" while the user has a key (`KeysManagement.tsx`), and drop `hasExistingKeys` from `useGenerateKeyFlow` and `useImportKeyFlow`; verify with flow tests (generation and import refused or not offered with a key) and the page test.
 - [x] 4.2 Remove "Use on this device", the key switch (`useSwitchKeyFlow`), the room migration (`useRotateIdentityForRooms`, `rotation-runner.ts`, `rotateOwnIdentityForRoom`), the resume banner and the progress block, and render one key card in `KeysList.tsx`; delete their tests and `rotate-identity.integration.test.ts`; verify with `pnpm test:client` and `pnpm test`.
-- [ ] 4.3 Simplify `useDeleteKeyFlow`, `useResetKeysFlow` (delete every listed envelope), `useRotatePassphraseFlow` (always lock after re-sealing) and `useRecoverKeyFlow` (target the selected key, no preference write); verify with their flow tests.
+- [x] 4.3 Simplify `useDeleteKeyFlow`, `useResetKeysFlow` (delete every listed envelope), `useRotatePassphraseFlow` (always lock after re-sealing) and `useRecoverKeyFlow` (target the selected key, no preference write); verify with their flow tests.
 - [ ] 4.4 Add the unused-key notice and the "delete unused keys" action (warning plus passphrase of the selected key, deletes every other envelope); verify with a page test for three envelopes and for one.
 
 ## 5. Locales

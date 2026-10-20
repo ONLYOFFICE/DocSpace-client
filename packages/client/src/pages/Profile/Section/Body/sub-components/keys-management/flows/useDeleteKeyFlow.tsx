@@ -39,10 +39,6 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
-import {
-  clearActiveKeyId,
-  getActiveKeyId,
-} from "@docspace/shared/services/encryption/active-key-preference";
 import { unlockWithPassphrase } from "@docspace/shared/services/encryption/identity";
 import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import { getTofuStore } from "@docspace/shared/services/encryption/tofu-store";
@@ -106,9 +102,6 @@ export function useDeleteKeyFlow({
         );
 
         await deleteEncryptionKey(verifying.id);
-        if (getActiveKeyId(userId) === verifying.id) {
-          clearActiveKeyId(userId);
-        }
         if (userId) {
           await getTofuStore(userId).forgetKey(userId, verifying.publicKey);
         }

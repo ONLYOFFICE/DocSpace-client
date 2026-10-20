@@ -112,6 +112,7 @@
   "DeveloperToolsAccessDescription": "Ընտրեք՝ արդյոք բոլոր օգտատերերը (բացի հյուրերից) կարող են տեսնել «Developer Tools» բաժինը, թե սահմանափակել այն միայն սեփականատիրոջ և գերադմինիստրատորների համար՝ ընտրելով «Անջատված է»:",
   "DeveloperToolsAccessMobileDescription": "Այս կարգավորումը թույլ է տալիս տեսանելի դարձնել «Developer Tools» բաժինը բոլոր օգտատերերին, բացառությամբ հյուրերի:",
   "DeveloperToolsDescription": "Ինտեգրեք, ընդլայնեք և ավտոմատացրեք {{organizationName}} {{editorsName}}-ը և {{productName}}-ը մշակողի գործիքներով՝ Docs Connect-ից և Ներդրման SDK-ից մինչև վեբհուկներ և OAuth հավելվածներ: Ընտրեք գործիք ստորև՝ սկսելու համար:",
+  "DeveloperToolsDescriptionStandalone": "Ինտեգրեք, ընդլայնեք և ավտոմատացրեք {{organizationName}} {{editorsName}}-ը և {{productName}}-ը մշակողի գործիքներով՝ Ներդրման SDK-ից և վեբհուկներից մինչև OAuth հավելվածներ և API բանալիներ: Ընտրեք գործիք ստորև՝ սկսելու համար:",
   "DisableAiServices": "Անջատել {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "ԱԲ գործակալները բոլոր օգտատերերի համար թաքնված կլինեն (փոխազդեցությունների պատմությունը կմնա պահպանված)։",
   "DisableAiServicesConfirm": "Դուք կարող եք վերականգնել {{aiServices}} ցանկացած պահի։ Հաստատե՞ք, որ ցանկանում եք շարունակել։",

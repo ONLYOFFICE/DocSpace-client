@@ -112,6 +112,7 @@
   "DeveloperToolsAccessDescription": "Chọn xem tất cả người dùng (trừ khách) có thể thấy phần Công cụ dành cho Nhà phát triển hay không, hoặc giới hạn chỉ cho chủ sở hữu và siêu quản trị viên bằng cách chọn Đã vô hiệu hóa.",
   "DeveloperToolsAccessMobileDescription": "Cài đặt này cho phép bạn hiển thị phần Công cụ dành cho nhà phát triển cho tất cả người dùng, ngoại trừ khách.",
   "DeveloperToolsDescription": "Tích hợp, mở rộng và tự động hóa {{organizationName}} {{editorsName}} và {{productName}} bằng các công cụ dành cho nhà phát triển — từ Docs Connect và SDK Nhúng đến Webhooks và ứng dụng OAuth. Hãy chọn một công cụ bên dưới để bắt đầu.",
+  "DeveloperToolsDescriptionStandalone": "Tích hợp, mở rộng và tự động hóa {{organizationName}} {{editorsName}} và {{productName}} bằng các công cụ dành cho nhà phát triển — từ SDK Nhúng và Webhooks đến ứng dụng OAuth và khóa API. Hãy chọn một công cụ bên dưới để bắt đầu.",
   "DisableAiServices": "Tắt {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "Các tác nhân AI sẽ bị ẩn đối với tất cả người dùng (lịch sử tương tác vẫn được bảo toàn).",
   "DisableAiServicesConfirm": "Bạn có thể bật lại {{aiServices}} bất cứ lúc nào. Bạn có chắc chắn muốn tiếp tục không?",

@@ -1014,7 +1014,7 @@
   "FolderMovedCount": "Folders moved ({{count}}).",
   "FolderNotAvailable": "Folder not available",
   "FolderRenamedNotify": "Folder renamed.",
-  "FolderUploadNotSupportedInPrivateRoom": "Folders cannot be uploaded to a private room. Only the files from this drop were uploaded.",
+  "FolderUploadNotSupportedInPrivateRoom": "Folders cannot be uploaded to a private room and were skipped.",
   "Folders": "Folders",
   "FoldersAlreadyContains": "The destination already contains folders with the same name.",
   "FoldersAndFilesWillBeCopied": "Folders and files will be copied in the destination",

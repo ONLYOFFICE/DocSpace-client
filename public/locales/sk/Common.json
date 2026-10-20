@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Priečinky presunuté ({{count}}).",
   "FolderNotAvailable": "Priečina nie je dostupná",
   "FolderRenamedNotify": "Priečinok premenovaný.",
+  "FolderUploadNotSupportedInPrivateRoom": "Priečinky nie je možné nahrať do súkromnej miestnosti, preto boli preskočené.",
   "Folders": "Priečinky",
   "FoldersAlreadyContains": "V cieľovej destinácii sa už nachádzajú priečinky s rovnakým názvom.",
   "FoldersAndFilesWillBeCopied": "V cieľovej destinácii sa skopírujú priečinky a súbory",

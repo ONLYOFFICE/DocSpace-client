@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Папки переміщено ({{count}}).",
   "FolderNotAvailable": "Папка недоступна",
   "FolderRenamedNotify": "Папку перейменовано.",
+  "FolderUploadNotSupportedInPrivateRoom": "Папки не можна завантажувати до приватної кімнати, тому їх було пропущено.",
   "Folders": "Папки",
   "FoldersAlreadyContains": "Місце призначення вже містить папки з таким ім'ям.",
   "FoldersAndFilesWillBeCopied": "Папки й файли буде скопійовано до місця призначення",

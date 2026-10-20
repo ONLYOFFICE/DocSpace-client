@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "フォルダが移動されました ({{count}})。",
   "FolderNotAvailable": "フォルダが利用できません",
   "FolderRenamedNotify": "フォルダの名前が変更されました。",
+  "FolderUploadNotSupportedInPrivateRoom": "フォルダはプライベートルームにアップロードできないため、スキップされました。",
   "Folders": "フォルダー",
   "FoldersAlreadyContains": "コピー先に同じ名前のフォルダが既に存在します。",
   "FoldersAndFilesWillBeCopied": "フォルダとファイルはコピー先にコピーされます。",

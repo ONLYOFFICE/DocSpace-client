@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Фолдери су померени ({{count}}).",
   "FolderNotAvailable": "Фолдер није доступан",
   "FolderRenamedNotify": "Фолдер је преименован.",
+  "FolderUploadNotSupportedInPrivateRoom": "Фасцикле се не могу отпремити у приватну собу и прескочене су.",
   "Folders": "Фолдери",
   "FoldersAlreadyContains": "Одредиште већ садржи фолдере са истим именом.",
   "FoldersAndFilesWillBeCopied": "Фолдери и датотеке ће бити копирани у дестинацију",

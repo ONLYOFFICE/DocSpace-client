@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Složky přesunuty ({{count}}).",
   "FolderNotAvailable": "Složka není dostupná",
   "FolderRenamedNotify": "Složka byla přejmenována.",
+  "FolderUploadNotSupportedInPrivateRoom": "Složky nelze nahrát do soukromé místnosti, a proto byly přeskočeny.",
   "Folders": "Složky",
   "FoldersAlreadyContains": "Cílová destinace již obsahuje složky se stejným názvem.",
   "FoldersAndFilesWillBeCopied": "V cíli budou zkopírovány složky a soubory",

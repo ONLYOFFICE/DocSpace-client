@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Dosjet u zhvendosën ({{count}}).",
   "FolderNotAvailable": "Dosja nuk është e disponueshme",
   "FolderRenamedNotify": "Dosja u riemërtua.",
+  "FolderUploadNotSupportedInPrivateRoom": "Dosjet nuk mund të ngarkohen në një dhomë private dhe u anashkaluan.",
   "Folders": "Dosjet",
   "FoldersAlreadyContains": "Destinacioni tashmë përmban dosje me të njëjtin emër.",
   "FoldersAndFilesWillBeCopied": "Dosjet dhe skedarët do të kopjohen në destinacion",

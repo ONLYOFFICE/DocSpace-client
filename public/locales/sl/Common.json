@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Mape premaknjene ({{count}})",
   "FolderNotAvailable": "Mapa ni na voljo",
   "FolderRenamedNotify": "Mapa preimenovana.",
+  "FolderUploadNotSupportedInPrivateRoom": "Map ni mogoče naložiti v zasebno sobo, zato so bile preskočene.",
   "Folders": "Mape",
   "FoldersAlreadyContains": "Destinacija že vsebuje mape z istim imenom.",
   "FoldersAndFilesWillBeCopied": "Mape in datoteke bodo kopirane na destinacijo",

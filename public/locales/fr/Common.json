@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Dossiers déplacés ({{count}}).",
   "FolderNotAvailable": "Dossier non disponible",
   "FolderRenamedNotify": "Dossier renommé.",
+  "FolderUploadNotSupportedInPrivateRoom": "Les dossiers ne peuvent pas être téléversés dans une salle privée et ont été ignorés.",
   "Folders": "Dossiers",
   "FoldersAlreadyContains": "La destination contient déjà des dossiers portant le même nom.",
   "FoldersAndFilesWillBeCopied": "Les dossiers et les fichiers seront copiés dans le dossier de destination.",

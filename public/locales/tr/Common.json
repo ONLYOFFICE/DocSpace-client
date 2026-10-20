@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Klasörler taşındı ({{count}}).",
   "FolderNotAvailable": "Klasör kullanılamıyor",
   "FolderRenamedNotify": "Klasör yeniden adlandırıldı.",
+  "FolderUploadNotSupportedInPrivateRoom": "Klasörler özel bir odaya yüklenemez ve atlandı.",
   "Folders": "Klasörler",
   "FoldersAlreadyContains": "Hedef zaten aynı ada sahip klasörler içeriyor.",
   "FoldersAndFilesWillBeCopied": "Klasörler ve dosyalar hedefe kopyalanacak",

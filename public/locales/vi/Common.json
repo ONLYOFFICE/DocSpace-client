@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Đã di chuyển thư mục ({{count}}).",
   "FolderNotAvailable": "Thư mục không khả dụng",
   "FolderRenamedNotify": "Thư mục đã được đổi tên.",
+  "FolderUploadNotSupportedInPrivateRoom": "Không thể tải thư mục lên phòng riêng tư nên các thư mục đã bị bỏ qua.",
   "Folders": "Thư mục",
   "FoldersAlreadyContains": "Đích đến đã chứa các thư mục có cùng tên.",
   "FoldersAndFilesWillBeCopied": "Thư mục và tập tin sẽ được sao chép vào đích đến",

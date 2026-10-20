@@ -15,7 +15,7 @@
 ## 3. Dropped folder trees are refused
 
 - [x] 3.1 In the Home page drop handler (`packages/client/src/pages/Home/index.js`, `createFoldersTree` call) refuse folder entries when the target is a private room and upload the file entries normally; verify with a unit test on the drop handling helper.
-- [ ] 3.2 Add `Common:FolderUploadNotSupportedInPrivateRoom` to the locales, translate it, and verify the locale tests pass.
+- [x] 3.2 Add `Common:FolderUploadNotSupportedInPrivateRoom` to the locales, translate it, and verify the locale tests pass.
 
 ## 4. One transfer resolver for drag, dialog and clipboard
 

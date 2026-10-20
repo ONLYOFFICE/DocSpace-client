@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Qovluqlar köçürüldü ({{count}}).",
   "FolderNotAvailable": "Papka mövcud deyil",
   "FolderRenamedNotify": "Qovluğun adı dəyişdirildi.",
+  "FolderUploadNotSupportedInPrivateRoom": "Qovluqlar şəxsi otağa yüklənə bilməz və buraxıldı.",
   "Folders": "Qovluqlar",
   "FoldersAlreadyContains": "Hədəfdə artıq eyni adlı qovluqlar var.",
   "FoldersAndFilesWillBeCopied": "Qovluqlar və fayllar təyinat yerinə kopyalanacaq",

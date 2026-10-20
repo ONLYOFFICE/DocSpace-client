@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Kansiot siirretty ({{count}}).",
   "FolderNotAvailable": "Kansio ei ole käytettävissä",
   "FolderRenamedNotify": "Kansio nimetty uudelleen.",
+  "FolderUploadNotSupportedInPrivateRoom": "Kansioita ei voi ladata yksityiseen huoneeseen, joten ne ohitettiin.",
   "Folders": "Kansiot",
   "FoldersAlreadyContains": "Kohde sisältää jo samannimisiä kansioita",
   "FoldersAndFilesWillBeCopied": "Kansiot ja tiedostot kopioidaan kohteeseen",

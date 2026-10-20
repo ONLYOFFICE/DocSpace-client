@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Pastas movidas ({{count}}).",
   "FolderNotAvailable": "Pasta indisponível",
   "FolderRenamedNotify": "Pasta renomeada.",
+  "FolderUploadNotSupportedInPrivateRoom": "Não é possível carregar pastas para uma sala privada, pelo que foram ignoradas.",
   "Folders": "Pastas",
   "FoldersAlreadyContains": "O destino já contém pastas com o mesmo nome.",
   "FoldersAndFilesWillBeCopied": "Pastas e arquivos serão copiados no destino",

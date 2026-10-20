@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Foldere au fost mutate ({{count}}).",
   "FolderNotAvailable": "Folderul nu este disponibil",
   "FolderRenamedNotify": "Folder a fost redenumit.",
+  "FolderUploadNotSupportedInPrivateRoom": "Folderele nu pot fi încărcate într-o cameră privată și au fost omise.",
   "Folders": "Foldere",
   "FoldersAlreadyContains": "Foldere cu acelaşi nume există deja la destinație.",
   "FoldersAndFilesWillBeCopied": "Foldere și fișiere vor fi copiate la destinație",

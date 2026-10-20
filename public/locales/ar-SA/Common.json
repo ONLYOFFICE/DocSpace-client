@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "تم نقل المجلدات ({{count}}).",
   "FolderNotAvailable": "المجلد غير متوفر",
   "FolderRenamedNotify": "تمت إعادة تسمية المجلد.",
+  "FolderUploadNotSupportedInPrivateRoom": "لا يمكن رفع المجلدات إلى غرفة خاصة، وقد تم تخطيها.",
   "Folders": "المجلدات",
   "FoldersAlreadyContains": "الوجهة تحتوي بالفعل على مجلدات بنفس الاسم.",
   "FoldersAndFilesWillBeCopied": "المجلدات والملفات سيتم نسخها إلى الوجهة",

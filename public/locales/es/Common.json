@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Carpetas movidas ({{count}}).",
   "FolderNotAvailable": "Carpeta no disponible",
   "FolderRenamedNotify": "Carpeta renombrada.",
+  "FolderUploadNotSupportedInPrivateRoom": "Las carpetas no se pueden cargar en una sala privada y se han omitido.",
   "Folders": "Carpetas",
   "FoldersAlreadyContains": "La ubicación de destino ya contiene carpetas con el mismo nombre.",
   "FoldersAndFilesWillBeCopied": "Las carpetas y archivos se copiarán en la ubicación de destino",

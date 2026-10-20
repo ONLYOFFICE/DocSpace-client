@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Ordner verschoben ({{count}}).",
   "FolderNotAvailable": "Ordner nicht verfügbar",
   "FolderRenamedNotify": "Ordner umbenannt.",
+  "FolderUploadNotSupportedInPrivateRoom": "Ordner können nicht in einen privaten Raum hochgeladen werden und wurden übersprungen.",
   "Folders": "Ordner",
   "FoldersAlreadyContains": "Zielbereich enthält bereits Ordner mit demselben Namen.",
   "FoldersAndFilesWillBeCopied": "Ordner und Dateien werden in Zielbereich kopiert.",

@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Folderi su pomereni ({{count}}).",
   "FolderNotAvailable": "Fascikla nije dostupna",
   "FolderRenamedNotify": "Folder je preimenovan.",
+  "FolderUploadNotSupportedInPrivateRoom": "Fascikle se ne mogu otpremiti u privatnu sobu i preskočene su.",
   "Folders": "Folderi",
   "FoldersAlreadyContains": "Odredište već sadrži foldere sa istim imenom.",
   "FoldersAndFilesWillBeCopied": "Folderi i datoteke će biti kopirani u destinaciju",

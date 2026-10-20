@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "ໂຟນເດີຖືກຍ້າຍ ({{count}}).",
   "FolderNotAvailable": "ໂຟນເດີບໍ່ສາມາດໃຊ້ໄດ້",
   "FolderRenamedNotify": "ໂຟນເດີໄດ້ຖືກປ່ຽນຊື່ແລ້ວ.",
+  "FolderUploadNotSupportedInPrivateRoom": "ບໍ່ສາມາດອັບໂຫລດໂຟນເດີໄປຫາຫ້ອງສ່ວນຕົວໄດ້ ແລະ ໂຟນເດີເຫຼົ່ານັ້ນຖືກຂ້າມໄປ.",
   "Folders": "ໂຟນເດີ",
   "FoldersAlreadyContains": "ປາຍທາງມີໂຟນເດີທີ່ມີຊື່ດຽວກັນຢູ່ກ່ອນແລ້ວ.",
   "FoldersAndFilesWillBeCopied": "ໂຟນເດີ ແລະໄຟລ໌ຈະຖືກສຳເນົາໄວ້ໃນປາຍທາງ",

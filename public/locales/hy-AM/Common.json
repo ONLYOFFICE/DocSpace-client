@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Թղթապանակները տեղափոխվել են ({{count}}):",
   "FolderNotAvailable": "Թղթապանակը հասանելի չէ:",
   "FolderRenamedNotify": "Թղթապանակի անունը փոխվել է։",
+  "FolderUploadNotSupportedInPrivateRoom": "Թղթապանակները հնարավոր չէ վերբեռնել մասնավոր սենյակ, և դրանք բաց են թողնվել։",
   "Folders": "Պանակներ",
   "FoldersAlreadyContains": "Նպատակակետն արդեն պարունակում է նույն անունով թղթապանակներ:",
   "FoldersAndFilesWillBeCopied": "Թղթապանակները և ֆայլերը կպատճենվեն նպատակակետում",

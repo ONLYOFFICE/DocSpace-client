@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Μετακίνηση φακέλων ({{count}}).",
   "FolderNotAvailable": "Φάκελος δεν είναι διαθέσιμος",
   "FolderRenamedNotify": "Ο φάκελος μετονομάστηκε.",
+  "FolderUploadNotSupportedInPrivateRoom": "Οι φάκελοι δεν μπορούν να μεταφορτωθούν σε ιδιωτικό δωμάτιο και παραλείφθηκαν.",
   "Folders": "Φάκελοι",
   "FoldersAlreadyContains": "Ο προορισμός περιέχει ήδη φακέλους με το ίδιο όνομα.",
   "FoldersAndFilesWillBeCopied": "Οι φάκελοι και τα αρχεία θα αντιγραφούν στον προορισμό",

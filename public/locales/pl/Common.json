@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Foldery przeniesione ({{count}}).",
   "FolderNotAvailable": "Folder niedostępny",
   "FolderRenamedNotify": "Folder został przemianowany.",
+  "FolderUploadNotSupportedInPrivateRoom": "Folderów nie można wgrać do pokoju prywatnego, dlatego zostały pominięte.",
   "Folders": "Foldery",
   "FoldersAlreadyContains": "Lokalizacja docelowa zawiera już katalogi o tej samej nazwie.",
   "FoldersAndFilesWillBeCopied": "Pliki i katalogi zostaną skopiowane do lokalizacji docelowej",

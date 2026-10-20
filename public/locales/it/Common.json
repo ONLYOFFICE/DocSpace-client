@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Le cartelle sono state spostate ({{count}}).",
   "FolderNotAvailable": "Cartella non disponibile",
   "FolderRenamedNotify": "Cartella rinominata.",
+  "FolderUploadNotSupportedInPrivateRoom": "Le cartelle non possono essere caricate in una stanza privata e sono state ignorate.",
   "Folders": "Cartelle",
   "FoldersAlreadyContains": "La destinazione contiene già cartelle con lo stesso nome.",
   "FoldersAndFilesWillBeCopied": "Le cartelle e i file verranno copiati nella destinazione",

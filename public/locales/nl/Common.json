@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "Mappen verplaatst ({{count}}).",
   "FolderNotAvailable": "Map niet beschikbaar",
   "FolderRenamedNotify": "Map hernoemd.",
+  "FolderUploadNotSupportedInPrivateRoom": "Mappen kunnen niet naar een privéruimte worden geüpload en zijn overgeslagen.",
   "Folders": "Mappen",
   "FoldersAlreadyContains": "De bestemming bevat al mappen met dezelfde naam.",
   "FoldersAndFilesWillBeCopied": "Mappen en bestanden worden gekopieerd naar de bestemming",

@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "폴더 이동됨 ({{count}}).",
   "FolderNotAvailable": "폴더를 사용할 수 없습니다.",
   "FolderRenamedNotify": "폴더 이름이 변경되었습니다.",
+  "FolderUploadNotSupportedInPrivateRoom": "폴더는 비공개 방에 업로드할 수 없어 건너뛰었습니다.",
   "Folders": "폴더",
   "FoldersAlreadyContains": "목표에 이미 같은 이름의 폴더가 있습니다.",
   "FoldersAndFilesWillBeCopied": "폴더와 파일이 대상 위치로 복사됩니다",

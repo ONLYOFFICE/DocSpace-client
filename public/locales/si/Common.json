@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "ෆෝල්ඩර් {{count}} ක් ගෙනයන ලදි.",
   "FolderNotAvailable": "ෆෝල්ඩරය නොමැත",
   "FolderRenamedNotify": "ෆෝල්ඩරය නැවත නම් කරන ලදී.",
+  "FolderUploadNotSupportedInPrivateRoom": "ෆෝල්ඩර පුද්ගලික කාමරයකට උඩුගත කළ නොහැකි බැවින් ඒවා මඟ හරින ලදී.",
   "Folders": "ෆෝල්ඩර",
   "FoldersAlreadyContains": "ගමනාන්තයේ දැනටමත් එකම නම සහිත ෆෝල්ඩර අඩංගු වේ.",
   "FoldersAndFilesWillBeCopied": "ෆෝල්ඩර සහ ගොනු ගමනාන්තය තුළ පිටපත් කරනු ලැබේ.",

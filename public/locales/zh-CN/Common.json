@@ -1013,6 +1013,7 @@
   "FolderMovedCount": "文件夹已移动 ({{count}})。",
   "FolderNotAvailable": "文件夹不可用",
   "FolderRenamedNotify": "文件夹已重命名。",
+  "FolderUploadNotSupportedInPrivateRoom": "无法将文件夹上传到私密房间，已跳过这些文件夹。",
   "Folders": "文件夹",
   "FoldersAlreadyContains": "目标位置中已存在同名文件夹。",
   "FoldersAndFilesWillBeCopied": "文件夹和文件将被复制到目标位置",

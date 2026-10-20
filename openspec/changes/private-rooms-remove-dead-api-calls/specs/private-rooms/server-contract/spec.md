@@ -16,5 +16,5 @@ The client SHALL NOT keep request functions for private-room routes the server d
 ## REMOVED Requirements
 
 ### Requirement: Client calls without a server route
-**Reason**: The three dead requests are deleted; the desktop path is redirected to a key route that exists.
-**Migration**: Delete the request functions and their callers; the desktop bridge resolves keys through an existing key route as specified in `private-rooms/editor-integration`.
+**Reason**: The three dead requests are deleted, and the desktop bridge that used one of them is removed.
+**Migration**: Delete the request functions and their callers; `private-rooms/editor-integration` states that no desktop encryption bridge remains.

@@ -36,7 +36,7 @@ removal follows a decision the feature author made in June 2026.
 
 **Goals:**
 - No client request without a server route.
-- The desktop bridge keeps working, through the route that exists.
+- The desktop application keeps its portal login without the dead encryption bridge.
 
 **Non-Goals:**
 - Reworking the desktop encryption bridge beyond the access call.
@@ -49,27 +49,26 @@ removal follows a decision the feature author made in June 2026.
    has keys", the settings read/write had no product meaning, and the per-file
    access request already has a successor route on the server
    (`files/file/{fileId}/publickeys`, see Context).
-2. **Which route the desktop bridge uses: open (see Open Questions).** The
-   options are (a) the per-file `files/file/{fileId}/publickeys`, which needs
-   no room lookup on the client and works in subfolders because the server
-   locates the room; (b) the room route `privacyroom/{roomId}/access`, which
-   needs the room id from the file's parent chain and is refused when the
-   caller holds no key; (c) drop the desktop bridge. The earlier plan chose
-   (b) on the assumption that no per-file route existed.
+2. **Drop the desktop encryption bridge (decided 2026-10-20 with the user).**
+   Both requests of the bridge fail today: the per-file access call has no
+   route, and the key write sends `PUT privacyroom/keys` without the key id
+   the server reads from `EncryptionKeyRequestDto`, so the replace targets an
+   unknown key and answers 404. Alternatives were (a) the per-file
+   `files/file/{fileId}/publickeys` and (b) the room route
+   `privacyroom/{roomId}/access`; either would have needed the key write
+   reworked as well. Dropping the bridge removes the encryption branch of
+   `regDesktop`, the legacy key plumbing of the settings store and the legacy
+   key requests of the files API module; the desktop login itself, the API-key
+   provisioning and the system messages stay.
 3. **Remove the legacy `isEncryptionSupport` flag.** It was only ever true
    when the dead availability probe answered, so every consumer sees `false`
    today; removing it is behaviour-neutral.
 
 ## Risks / Trade-offs
 
-- [Desktop editors rely on the per-file route] → `privacyroom/access/{fileId}`
-  does not exist on this server generation, so desktop encryption is already
-  broken; either existing route from decision 2 is an improvement, verified by
-  a desktop smoke test.
-- [The two candidate routes answer differently] → the per-file route lists the
-  users who hold the file and tolerates a key-less caller; the room route lists
-  room members and refuses a key-less caller. The desktop smoke test must cover
-  the chosen route's behaviour for a subfolder file.
+- [Desktop users lose the desktop encryption engine] → it already fails on
+  both of its server requests, so nothing that works today is removed; the
+  desktop smoke test checks that the login and ordinary documents still work.
 - [Hidden consumer of the removed flag] → `pnpm run tsc` and the client unit
   suite catch it; the one test that references it is updated in the same
   task.
@@ -80,8 +79,4 @@ Single client PR; no data or server migration. Rollback is a revert.
 
 ## Open Questions
 
-- Route for the desktop bridge (decision 2): per-file
-  `files/file/{fileId}/publickeys`, room `privacyroom/{roomId}/access` resolved
-  from the parent chain, or drop the bridge. Owner: product owner. Blocks
-  task 2.1; the delta specs only require that the bridge uses a route the
-  server exposes.
+None. Decision 2 (drop the desktop bridge) was made on 2026-10-20.

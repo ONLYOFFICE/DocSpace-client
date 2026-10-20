@@ -133,7 +133,7 @@ export const useMetadataAIPanel = ({
       { kind, id, dryRun: true, overwrite, prompt: prompt.trim() || undefined },
       signal,
     );
-    const nextForms = applyAIValues(forms, result.filled);
+    const nextForms = applyAIValues(forms, result.filled, overwrite);
     const nextDrafts = applyAICustomValues(drafts, result.filled);
 
     setForms(nextForms.forms);

@@ -107,6 +107,7 @@ export const getMetadataAIOptions = (
     isMetadataSupported(item) &&
     !CLOSED_ROOT_TYPES.includes(item.rootFolderType as FolderType) &&
     canEditMetadata(item) &&
+    !!item.security?.Download &&
     (!isFile(item) || canReadAsText(item.fileExst, extsConvertible));
 
   return isAvailable ? METADATA_AI_OPTIONS : [];
@@ -118,6 +119,7 @@ export const getTemplateForms = ({ templates }: TEntryMetadata) =>
 export const applyAIValues = (
   forms: TTemplateForm[],
   filled: TMetadataAIFilledField[],
+  overwrite: boolean,
 ) => {
   let count = 0;
 
@@ -125,6 +127,8 @@ export const applyAIValues = (
     const inputs = { ...form.inputs };
 
     form.template.fields.forEach((field) => {
+      if (!overwrite && inputs[field.id]?.length) return;
+
       const value = filled.find(({ fieldId }) => fieldId === field.id)?.value;
 
       if (!value || typeof value === "string") return;

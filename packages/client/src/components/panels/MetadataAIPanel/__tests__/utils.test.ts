@@ -111,7 +111,7 @@ const file = (patch: Partial<TMetadataAIItem> = {}) =>
     id: 7,
     fileExst: ".docx",
     rootFolderType: FolderType.USER,
-    security: { Edit: true },
+    security: { Edit: true, Download: true },
     ...patch,
   }) as unknown as TMetadataAIItem;
 
@@ -120,7 +120,7 @@ const room = (patch: Partial<TMetadataAIItem> = {}) =>
     id: 8,
     roomType: 6,
     rootFolderType: FolderType.Rooms,
-    security: { EditRoom: true },
+    security: { EditRoom: true, Download: true },
     ...patch,
   }) as unknown as TMetadataAIItem;
 
@@ -136,6 +136,14 @@ describe("context menu options", () => {
     const hidden = [
       getMetadataAIOptions(file({ fileExst: ".png" }), context),
       getMetadataAIOptions(file({ security: {} } as never), context),
+      getMetadataAIOptions(
+        file({ security: { Edit: true } } as never),
+        context,
+      ),
+      getMetadataAIOptions(
+        room({ security: { EditRoom: true } } as never),
+        context,
+      ),
       getMetadataAIOptions(file({ id: "box-7" } as never), context),
       getMetadataAIOptions(file({ encrypted: true }), context),
       getMetadataAIOptions(room({ rootFolderType: FolderType.Archive }), context),
@@ -163,19 +171,38 @@ describe("fill", () => {
   });
 
   it("puts the values AI found into the form and saves only those", () => {
-    const { forms: filled, count } = applyAIValues(forms, [
-      { fieldId: 12, name: "Client", value: { stringValue: "ACME" } },
-      { fieldId: 13, name: "Stage", value: { optionIds: ["b"] } },
-      { fieldId: 15, name: "Claim amount", value: { numberValue: 1248500 } },
-      { fieldId: 30, name: "Sync id", value: { stringValue: "x" } },
-      { name: "Reviewer", value: "Bob" },
-    ]);
+    const { forms: filled, count } = applyAIValues(
+      forms,
+      [
+        { fieldId: 12, name: "Client", value: { stringValue: "ACME" } },
+        { fieldId: 13, name: "Stage", value: { optionIds: ["b"] } },
+        { fieldId: 15, name: "Claim amount", value: { numberValue: 1248500 } },
+        { fieldId: 30, name: "Sync id", value: { stringValue: "x" } },
+        { name: "Reviewer", value: "Bob" },
+      ],
+      false,
+    );
 
     expect(count).toBe(2);
     expect(filled.flatMap(getChangedValues)).toEqual([
       { fieldId: 13, optionIds: ["b"] },
       { fieldId: 15, numberValue: 1248500 },
     ]);
+  });
+
+  it("keeps what the user typed before the run unless overwriting", () => {
+    const typed = forms.map((form) => ({
+      ...form,
+      inputs: { ...form.inputs, 15: "900" },
+    }));
+    const found = [
+      { fieldId: 15, name: "Claim amount", value: { numberValue: 1248500 } },
+    ];
+
+    expect(applyAIValues(typed, found, false).count).toBe(0);
+    expect(applyAIValues(typed, found, true).forms[0].inputs[15]).toBe(
+      "1248500",
+    );
   });
 
   it("puts the custom values AI found into their fields", () => {

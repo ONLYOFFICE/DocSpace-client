@@ -159,7 +159,9 @@ const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
                   error={
                     error || (hasNothingToFill ? t("Metadata:AINothingToFill") : "")
                   }
-                  isDisabled={isAnalyzing || isSaving || hasNothingToFill}
+                  isDisabled={
+                    isAnalyzing || isSaving || hasNothingToFill || !metadata
+                  }
                   onClick={runAI}
                 >
                   <Textarea

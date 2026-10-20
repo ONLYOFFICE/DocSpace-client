@@ -224,16 +224,18 @@ export const privacyroomKeysHandlers = (
 
 export type PrivacyroomAccessHandlerHandle = {
   getRoomKeys: (roomId: number | string) => TEncryptionKeyPair[];
-  setRoomKeys: (
-    roomId: number | string,
-    keys: TEncryptionKeyPair[],
-  ) => void;
+  /** Registers a private room and the keys of its directly shared members. */
+  setRoomKeys: (roomId: number | string, keys: TEncryptionKeyPair[]) => void;
+  /** Registers a room that exists but is not private. */
+  setNonPrivateRoom: (roomId: number | string) => void;
   getRequests: () => RequestLog[];
   reset: () => void;
 };
 
 export type PrivacyroomAccessOptions = {
   roomKeys?: Record<string, TEncryptionKeyPair[]>;
+  /** The caller, whose own entries keep their private half. */
+  userId?: string;
   handle?: { current: PrivacyroomAccessHandlerHandle | null };
 };
 
@@ -244,16 +246,22 @@ export const privacyroomAccessHandlers = (
   const roomKeys = new Map<string, TEncryptionKeyPair[]>(
     Object.entries(opts.roomKeys ?? {}),
   );
+  const nonPrivateRooms = new Set<string>();
   const requests: RequestLog[] = [];
+  const callerId = opts.userId ?? DEFAULT_USER_ID;
 
   const handle: PrivacyroomAccessHandlerHandle = {
     getRoomKeys: (id) => [...(roomKeys.get(String(id)) ?? [])],
     setRoomKeys: (id, keys) => {
       roomKeys.set(String(id), [...keys]);
     },
+    setNonPrivateRoom: (id) => {
+      nonPrivateRooms.add(String(id));
+    },
     getRequests: () => [...requests],
     reset: () => {
       roomKeys.clear();
+      nonPrivateRooms.clear();
       requests.length = 0;
     },
   };
@@ -263,17 +271,32 @@ export const privacyroomAccessHandlers = (
 
   return [
     /**
-     * Mirrors PrivacyRoomController.GetUserKeysForRoom → EncryptionKeyPairDtoHelper.GetKeyPairForRoomAsync.
-     * @see server/products/ASC.Files/Server/Api/PrivacyRoomController.cs (HttpGet "{roomId:int}/access")
-     *
-     * Returns the list of identity public keys for every member of the given
-     * room — used by the client as `roomMemberKeys` during unwrap, because
-     * /files/{fileId}/access.userKeys only carries the CURRENT user's keys.
+     * Mirrors PrivacyRoomControllerCommon.GetUserKeysForRoom ->
+     * GetKeyPairForRoomAsync (HttpGet "{roomId:int}/access"): one entry per key
+     * of each directly shared member. 404 for an unknown room, 400 for a room
+     * that is not private, 403 when the caller holds no entry; then
+     * SanitizeAccessKeys drops entries without a public key and keeps the
+     * private half only on the caller's entries.
      */
     http.get(`${base}/:roomId(\\d+)/access`, ({ params, request }) => {
       const id = String(params.roomId);
       requests.push({ method: "GET", url: new URL(request.url).pathname });
-      return okResponse(roomKeys.get(id) ?? []);
+      if (nonPrivateRooms.has(id)) {
+        return errorResponse(400, `The room ${id} is not private`);
+      }
+      const keys = roomKeys.get(id);
+      if (!keys) return errorResponse(404, `The room ${id} is not found`);
+      if (keys.every((k) => String(k.userId) !== callerId)) {
+        return errorResponse(403, "Access denied");
+      }
+      const sanitized = keys
+        .filter((k) => !!k.publicKey?.trim())
+        .map((k) => {
+          if (String(k.userId) === callerId) return { ...k };
+          const { privateKeyEnc: _privateKeyEnc, ...rest } = k;
+          return rest;
+        });
+      return okResponse(sanitized);
     }),
   ];
 };

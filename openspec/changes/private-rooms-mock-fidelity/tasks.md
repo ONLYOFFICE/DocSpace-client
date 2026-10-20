@@ -3,7 +3,7 @@
 ## 1. privacyroom handlers
 
 - [x] 1.1 Rewrite the key handlers in `packages/shared/__mocks__/handlers/privacyroom/` to the server contract (create 201 / duplicate 409 / blank 400; replace unknown 404; delete 204 no body / unknown 404; list without `response` when no key; `cryptoEngineId` on stored keys) and fix the header comment (actions `CreateKeyPairAsync`, `ReplaceKeyPairAsync`; test file name); verify by updating `handlers/privacyroom/__tests__/contract.test.ts` (the "no-op" cases become 409/404) and running `cd packages/shared && pnpm exec vitest run __mocks__/handlers/privacyroom`.
-- [ ] 1.2 Rewrite `privacyroom/{roomId}/access`: 404 unknown room, 400 non-private room, 403 caller without a key, private half only on the caller's entries, entries without a public key dropped; verify with new contract-test cases for each branch.
+- [x] 1.2 Rewrite `privacyroom/{roomId}/access`: 404 unknown room, 400 non-private room, 403 caller without a key, private half only on the caller's entries, entries without a public key dropped; verify with new contract-test cases for each branch.
 
 ## 2. Encrypted-files handlers
 

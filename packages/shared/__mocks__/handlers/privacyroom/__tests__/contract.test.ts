@@ -72,7 +72,7 @@ const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
 
 const server = setupServer(
   ...privacyroomKeysHandlers(PORT, { userId: CALLER, handle: keysHandle }),
-  ...privacyroomAccessHandlers(PORT, { handle: accessHandle }),
+  ...privacyroomAccessHandlers(PORT, { userId: CALLER, handle: accessHandle }),
 );
 
 beforeAll(() => {
@@ -211,5 +211,46 @@ describe("privacyroom mock - DELETE /privacyroom/keys/{id} (DeleteKeys / DeleteA
   it("answers 404 for an id not stored", async () => {
     const res = await fetch(`${KEYS_URL}/${ID_1}`, { method: "DELETE" });
     expect(res.status).toBe(404);
+  });
+});
+
+describe("privacyroom mock - GET /privacyroom/{roomId}/access (GetUserKeysForRoom)", () => {
+  const member = (userId: string, id: string, publicKey = `pk-${id}`) => ({
+    id,
+    userId,
+    publicKey,
+    privateKeyEnc: `enc-${id}`,
+  });
+
+  it("lists every key of each member and keeps the private half only on the caller's entries", async () => {
+    accessHandle.current!.setRoomKeys(7, [
+      member(CALLER, "own"),
+      member("bob", "bob-1"),
+      member("bob", "bob-2"),
+    ]);
+    const body = (await (await fetch(ACCESS_URL(7))).json()) as Envelope;
+    expect(body.response!.map((k) => k.id)).toEqual(["own", "bob-1", "bob-2"]);
+    expect(body.response![0].privateKeyEnc).toBe("enc-own");
+    expect(body.response![1]).not.toHaveProperty("privateKeyEnc");
+  });
+
+  it("drops entries without a public key", async () => {
+    accessHandle.current!.setRoomKeys(7, [member(CALLER, "own"), member("bob", "bob-1", "")]);
+    const body = (await (await fetch(ACCESS_URL(7))).json()) as Envelope;
+    expect(body.response!.map((k) => k.id)).toEqual(["own"]);
+  });
+
+  it("answers 404 for an unknown room", async () => {
+    expect((await fetch(ACCESS_URL(9999))).status).toBe(404);
+  });
+
+  it("answers 400 for a room that is not private", async () => {
+    accessHandle.current!.setNonPrivateRoom(8);
+    expect((await fetch(ACCESS_URL(8))).status).toBe(400);
+  });
+
+  it("answers 403 when the caller holds no key in the room", async () => {
+    accessHandle.current!.setRoomKeys(7, [member("bob", "bob-1")]);
+    expect((await fetch(ACCESS_URL(7))).status).toBe(403);
   });
 });

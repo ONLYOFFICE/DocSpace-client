@@ -14,5 +14,5 @@
 
 ## 3. Specs and gate
 
-- [ ] 3.1 Confirm the server-contract and editor-integration delta specs still match the implemented behaviour; verify with `openspec validate private-rooms-remove-dead-api-calls --strict`
+- [x] 3.1 Confirm the server-contract and editor-integration delta specs still match the implemented behaviour; verify with `openspec validate private-rooms-remove-dead-api-calls --strict`
 - [ ] 3.2 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, shared and client unit tests)

@@ -285,30 +285,34 @@ const KeysManagement = ({
         deletingKeyId={remove.pendingId}
       />
       <div className={styles.contentBody}>
-        <div className={styles.inputGroup}>
-          <Button
-            primary
-            size={ButtonSize.small}
-            onClick={generate.request}
-            label={t("Common:GenerateNewKey")}
-            isLoading={generate.isPending}
-            isDisabled={busy}
-          />
-          {importFlow.fileInput}
-        </div>
+        {hasKeys ? null : (
+          <div className={styles.inputGroup}>
+            <Button
+              primary
+              size={ButtonSize.small}
+              onClick={generate.request}
+              label={t("Common:GenerateNewKey")}
+              isLoading={generate.isPending}
+              isDisabled={busy}
+            />
+            {importFlow.fileInput}
+          </div>
+        )}
         <div className={styles.secondaryActions}>
-          <Link
-            type={LinkType.action}
-            fontWeight="600"
-            fontSize="13px"
-            isHovered
-            onClick={() => {
-              if (!busy) importFlow.request();
-            }}
-            dataTestId="import_key_link"
-          >
-            {t("Common:ImportKey")}
-          </Link>
+          {hasKeys ? null : (
+            <Link
+              type={LinkType.action}
+              fontWeight="600"
+              fontSize="13px"
+              isHovered
+              onClick={() => {
+                if (!busy) importFlow.request();
+              }}
+              dataTestId="import_key_link"
+            >
+              {t("Common:ImportKey")}
+            </Link>
+          )}
           {recover.available ? (
             <Link
               type={LinkType.action}

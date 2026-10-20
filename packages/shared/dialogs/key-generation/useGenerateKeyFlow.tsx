@@ -60,6 +60,7 @@ type Step = "idle" | "passphrase" | "recovery-display";
 type Deps = {
   userId: string | undefined;
   accountLabel?: string;
+  /** A user who already has a key gets no second one. */
   hasExistingKeys?: boolean;
   refreshKeysFromServer: () => Promise<void>;
   onSuccess?: () => void;
@@ -105,9 +106,10 @@ export function useGenerateKeyFlow({
       toastr.error(t("Common:EncryptionRequiresHttps"));
       return;
     }
-    if (isPending || step !== "idle") return;
+    // Spec: private-rooms/key-management, "Generate a new key".
+    if (hasExistingKeys || isPending || step !== "idle") return;
     setStep("passphrase");
-  }, [t, isPending, step]);
+  }, [t, hasExistingKeys, isPending, step]);
 
   const onPassphraseSubmit = useCallback(
     async (input: string) => {
@@ -156,7 +158,7 @@ export function useGenerateKeyFlow({
         newIdentity: keyPair,
         newPublicKeyB64: serialized.publicKey,
         newPublicKeyId: payload.id,
-        activate: !hasExistingKeys,
+        activate: true,
       });
 
       await refreshKeysFromServer();
@@ -176,7 +178,6 @@ export function useGenerateKeyFlow({
     passphrase,
     mnemonic,
     userId,
-    hasExistingKeys,
     refreshKeysFromServer,
     reset,
     t,

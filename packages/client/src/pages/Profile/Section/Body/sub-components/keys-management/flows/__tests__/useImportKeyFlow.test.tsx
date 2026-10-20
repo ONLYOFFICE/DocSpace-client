@@ -139,24 +139,14 @@ describe("useImportKeyFlow", () => {
   });
 
   describe("activation", () => {
-    it("registers INACTIVE (activate=false) when the account already has keys", async () => {
-      happyImport();
+    it("Key already exists: the file picker does not open", async () => {
+      const click = vi.spyOn(HTMLInputElement.prototype, "click");
       render(
         <Harness userId="42" hasExistingKeys refreshKeysFromServer={vi.fn()} />,
       );
       await act(async () => latest.request());
-      await act(async () => {
-        fireFileChosen(new File(["{}"], "key.json"));
-      });
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
-
-      expect(applyNewIdentity).toHaveBeenCalledWith(
-        expect.objectContaining({ userId: "42", activate: false }),
-      );
+      expect(click).not.toHaveBeenCalled();
+      click.mockRestore();
     });
 
     it("activates (activate=true) in the zero-keys bootstrap case", async () => {

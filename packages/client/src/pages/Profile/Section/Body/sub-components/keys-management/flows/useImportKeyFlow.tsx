@@ -63,6 +63,7 @@ type Step = "idle" | "passphrase";
 
 type Deps = {
   userId: string | undefined;
+  /** A user who already has a key gets no second one. */
   hasExistingKeys?: boolean;
   refreshKeysFromServer: () => Promise<void>;
 };
@@ -101,8 +102,10 @@ export function useImportKeyFlow({
       toastr.error(t("Common:EncryptionRequiresHttps"));
       return;
     }
+    // Spec: private-rooms/key-management, "Import a key".
+    if (hasExistingKeys) return;
     fileInputRef.current?.click();
-  }, [t]);
+  }, [t, hasExistingKeys]);
 
   const onFileChosen = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
@@ -142,7 +145,7 @@ export function useImportKeyFlow({
           newIdentity: kp,
           newPublicKeyB64: imported.publicKey,
           newPublicKeyId: id,
-          activate: !hasExistingKeys,
+          activate: true,
         });
         await refreshKeysFromServer();
         toastr.success(t("Common:EncryptionKeyImported"));
@@ -158,7 +161,7 @@ export function useImportKeyFlow({
         setIsPending(false);
       }
     },
-    [imported, userId, hasExistingKeys, refreshKeysFromServer, t, reset],
+    [imported, userId, refreshKeysFromServer, t, reset],
   );
 
   const fileInput = (

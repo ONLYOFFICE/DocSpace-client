@@ -134,13 +134,15 @@ export const toFilterCondition = (
 };
 
 export const fromFilterCondition = (
-  { type }: Pick<TMetadataField, "type">,
+  { type, options }: Pick<TMetadataField, "type" | "options">,
   { op, value, from, to, optionIds }: TMetadataFilterCondition,
 ): TConditionDraft | null => {
   if (op === "in") {
     return {
       operator: type === MetadataFieldType.MultiChoice ? "isAnyOf" : "is",
-      input: optionIds ?? [],
+      input: (optionIds ?? []).filter((optionId) =>
+        options?.some(({ id }) => id === optionId),
+      ),
     };
   }
 
@@ -356,12 +358,13 @@ export const getConditionLabel = (
   locale: string,
 ) => {
   const draft = fromFilterCondition(field, condition);
+  const value = draft ? getInputLabel(field, draft.input, locale) : "";
 
-  return draft
+  return draft && value
     ? t("Metadata:ConditionLabel", {
         field: field.name,
         operator: getOperatorLabel(t, draft.operator),
-        value: getInputLabel(field, draft.input, locale),
+        value,
       })
     : field.name;
 };

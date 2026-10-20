@@ -49,6 +49,7 @@ import {
   canFilterByMetadata,
   dropMetadataChip,
   fromFilterCondition,
+  getConditionLabel,
   getDrafts,
   getInputLabel,
   getMetadataFilterValue,
@@ -174,6 +175,24 @@ describe("conditions", () => {
   it("writes dates the way the info panel does", () => {
     expect(getInputLabel(hearing, "2026-09-15", "en")).toBe("Sep 15, 2026");
     expect(getInputLabel(areas, ["x", "y"], "en")).toBe("Tax, IP");
+  });
+
+  it("drops options deleted from the field since the filter was saved", () => {
+    expect(
+      fromFilterCondition(areas, {
+        fieldId: 5,
+        op: "in",
+        optionIds: ["x", "gone"],
+      }),
+    ).toEqual({ operator: "isAnyOf", input: ["x"] });
+    expect(
+      getConditionLabel(
+        t,
+        stage,
+        { fieldId: 4, op: "in", optionIds: ["gone"] },
+        "en",
+      ),
+    ).toBe("Stage");
   });
 
   it("leaves conditions it cannot show unread", () => {

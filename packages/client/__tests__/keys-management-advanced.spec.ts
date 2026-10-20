@@ -39,15 +39,23 @@ import {
 } from "@docspace/shared/services/encryption/identity";
 import {
   capabilitiesHandler,
+  encryptedFilesHandlers,
+  filesSettingsHandler,
+  privacyroomAccessHandlers,
   privacyroomKeysHandlers,
+  rootHandler,
   selfActivationStatusHandler,
   settingsHandler,
   TypeSettings,
+  type EncryptedFilesHandlerHandle,
+  type PrivacyroomAccessHandlerHandle,
   type PrivacyroomHandlerHandle,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
+import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
 const TEST_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+const ROOM_ID = 9451;
 // Both passphrases must satisfy PASSPHRASE_SETTINGS in PassphraseModal:
 // length >= 12, uppercase, digits, special characters.
 const KNOWN_PASSPHRASE = "Test-Horse-Battery-Staple-99!";
@@ -285,5 +293,123 @@ test.describe("Keys management — advanced flows", () => {
     expect(body.id).toBeTruthy();
     expect(body.publicKey).toBe(envelope.publicKey);
     expect(body.privateKeyEnc).not.toBe(envelope.privateKeyEnc);
+  });
+
+  test("Auto-lock on a remembered device", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const { keysHandle, passphrase } = await bootstrapEncryption(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const own = { ...keysHandle.getKeys()[0], userId: TEST_USER_ID };
+
+    const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+    const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        handle: filesHandle,
+      }),
+      ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
+    );
+    accessHandle.current!.setRoomKeys(ROOM_ID, [own]);
+
+    // The tab-hide lock obeys the auto-lock preference, which is off by default.
+    await page.evaluate(() =>
+      localStorage.setItem("encryption-auto-lock-timeout-seconds", "300"),
+    );
+
+    // In-app navigation keeps the in-memory identity across pages.
+    const navigate = (url: string) =>
+      page.evaluate(
+        (u) =>
+          (
+            window as unknown as { DocSpace: { navigate: (u: string) => void } }
+          ).DocSpace.navigate(u),
+        url,
+      );
+    const openRoom = async () => {
+      const loaded = page.waitForResponse(
+        (res) =>
+          res.request().method() === "GET" &&
+          new URL(res.url()).pathname.endsWith(`/files/${ROOM_ID}`) &&
+          res.ok(),
+        { timeout: 15000 },
+      );
+      await navigate(`/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+      await loaded;
+    };
+    const upload = (name: string) =>
+      page.locator("#customFileInput").first().setInputFiles({
+        name,
+        mimeType: "text/plain",
+        buffer: Buffer.from(`content of ${name}`),
+      });
+
+    const lockNow = page.getByTestId("lock_now_link");
+    const setVisibility = (state: "hidden" | "visible") =>
+      page.evaluate((value) => {
+        Object.defineProperty(document, "visibilityState", {
+          configurable: true,
+          get: () => value,
+        });
+        document.dispatchEvent(new Event("visibilitychange"));
+      }, state);
+    // The listener is re-registered as auto-lock suspension clears, so keep
+    // re-dispatching until the lock takes effect.
+    const hideTabUntilLocked = async () => {
+      await expect(lockNow).toBeVisible({ timeout: 10000 });
+      await expect(async () => {
+        await setVisibility("hidden");
+        await expect(lockNow).toBeHidden({ timeout: 1000 });
+      }).toPass({ timeout: 10000 });
+      await setVisibility("visible");
+    };
+
+    const prompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+
+    // Not remembered yet: after the hidden-tab lock the upload prompts.
+    await hideTabUntilLocked();
+    await openRoom();
+    await upload("first.txt");
+    await expect(prompt).toBeVisible({ timeout: 15000 });
+    await prompt
+      .locator('input[name="passphrase"], #passphrase input')
+      .first()
+      .fill(passphrase);
+    await prompt.getByText("Don't ask again on this device").click();
+    await prompt.getByRole("button", { name: "Confirm" }).click();
+    await expect
+      .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
+      .toBe(1);
+
+    // Remembered: the hidden tab still locks, the device stays remembered.
+    await navigate("/profile/keys-management");
+    const forgetDevice = page.getByTestId("forget_device_link");
+    await expect(forgetDevice).toBeVisible({ timeout: 10000 });
+    await hideTabUntilLocked();
+    await expect(forgetDevice).toBeVisible();
+
+    // The next upload restores the key from the device record.
+    await openRoom();
+    await upload("second.txt");
+    await expect
+      .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
+      .toBe(2);
+    await expect(prompt).toBeHidden();
   });
 });

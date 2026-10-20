@@ -41,10 +41,7 @@ import {
   EncryptionProvider,
   useEncryption,
 } from "@docspace/shared/context/encryption";
-import {
-  getActiveKeyId,
-  selectActiveKey,
-} from "@docspace/shared/services/encryption/active-key-preference";
+import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import {
   registerGhostStateHandler,
   clearGhostStateHandler,
@@ -139,7 +136,7 @@ const GhostStateToastEffect = () => {
 
 const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 
-const showDeviceSetupHint = (t, accountKeysCount) => {
+const showDeviceSetupHint = (t) => {
   const setupLink = (
     <Link
       key="setup"
@@ -154,39 +151,28 @@ const showDeviceSetupHint = (t, accountKeysCount) => {
   );
 
   toastr.info(
-    accountKeysCount > 0 ? (
-      <Trans
-        i18nKey="Common:EncryptionChooseKeyHint"
-        t={t}
-        components={[setupLink]}
-      />
-    ) : (
-      <Trans
-        i18nKey="Common:EncryptionDeviceSetupHint"
-        t={t}
-        components={[setupLink]}
-      />
-    ),
+    <Trans
+      i18nKey="Common:EncryptionDeviceSetupHint"
+      t={t}
+      components={[setupLink]}
+    />,
     null,
     30000,
     true,
   );
 };
 
-const DeviceSetupHintEffect = inject(({ selectedFolderStore, userStore }) => ({
+const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
   isPrivate: selectedFolderStore?.private,
-  accountKeysCount: userStore?.encryptionKeys?.length ?? 0,
 }))(
-  observer(({ isPrivate, accountKeysCount }) => {
+  observer(({ isPrivate }) => {
     const { hasConfiguredKey } = useEncryption();
     const { t } = useTranslation(["Common"]);
 
     React.useEffect(() => {
-      registerDeviceSetupHintHandler(() =>
-        showDeviceSetupHint(t, accountKeysCount),
-      );
+      registerDeviceSetupHintHandler(() => showDeviceSetupHint(t));
       return () => clearDeviceSetupHintHandler();
-    }, [accountKeysCount, t]);
+    }, [t]);
 
     React.useEffect(() => {
       if (!isPrivate || hasConfiguredKey) return;
@@ -196,8 +182,8 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore, userStore }) => ({
         sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
       } catch {}
 
-      showDeviceSetupHint(t, accountKeysCount);
-    }, [isPrivate, hasConfiguredKey, accountKeysCount, t]);
+      showDeviceSetupHint(t);
+    }, [isPrivate, hasConfiguredKey, t]);
 
     return null;
   }),
@@ -288,7 +274,7 @@ const EncryptionProviderWrapper = observer(({ userStore, children }) => {
   const ownerId = userStore?.user?.id;
   const ownerIdStr = ownerId ? String(ownerId) : undefined;
 
-  const chosen = selectActiveKey(keys, getActiveKeyId(ownerIdStr));
+  const chosen = selectUserKey(keys);
 
   const userKeys =
     chosen && ownerIdStr

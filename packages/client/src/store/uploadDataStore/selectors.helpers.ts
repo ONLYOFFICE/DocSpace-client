@@ -38,10 +38,7 @@ import {
   resolveUploadGate,
   willEncryptUploadItem,
 } from "@docspace/shared/services/private-room/encrypted-upload";
-import {
-  getActiveKeyId,
-  selectActiveKey,
-} from "@docspace/shared/services/encryption/active-key-preference";
+import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import { countActiveUploadsForRoom } from "@docspace/shared/utils/uploadErrors";
 
 import type { TUploadFile } from "./helpers";
@@ -119,7 +116,7 @@ export function getUserEncryptionKeysImpl(self: UploadDataStore): {
   }
 
   const userIdStr = String(userId);
-  const activeKey = selectActiveKey(keys, getActiveKeyId(userIdStr));
+  const activeKey = selectUserKey(keys);
   if (!activeKey) {
     return { publicKey: null, userId: null, publicKeyId: null };
   }

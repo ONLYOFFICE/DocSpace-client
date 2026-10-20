@@ -40,10 +40,7 @@ import { useTranslation } from "react-i18next";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import {
-  getActiveKeyId,
-  selectActiveKey,
-} from "@docspace/shared/services/encryption/active-key-preference";
+import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import { CryptoError } from "@docspace/shared/services/encryption/errors";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
@@ -93,7 +90,7 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
       const userId = identityStore.userKeys?.userId;
       const publicKey = identityStore.userKeys?.publicKey;
       const keys = identityStore.keys;
-      const activeKey = selectActiveKey(keys, getActiveKeyId(userId ?? ""));
+      const activeKey = selectUserKey(keys);
       const publicKeyId = activeKey?.id ?? null;
 
       if (!userId || !publicKey || !publicKeyId) {

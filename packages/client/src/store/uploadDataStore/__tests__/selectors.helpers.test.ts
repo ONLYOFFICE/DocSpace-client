@@ -188,7 +188,7 @@ describe("getUserEncryptionKeysImpl", () => {
     });
   });
 
-  it("resolves the single active key without a stored device preference", () => {
+  it("resolves the user's only key", () => {
     const { store } = createTestUploadDataStore({
       userStore: {
         encryptionKeys: [{ id: "key-1", publicKey: "pk-base64-1" }],
@@ -202,20 +202,20 @@ describe("getUserEncryptionKeysImpl", () => {
     });
   });
 
-  it("refuses to auto-pick among multiple keys without a preference", () => {
+  it("Own key with leftover envelopes: resolves to the key with the newer date", () => {
     const { store } = createTestUploadDataStore({
       userStore: {
         encryptionKeys: [
-          { id: "key-1", publicKey: "pk-base64-1" },
-          { id: "key-2", publicKey: "pk-base64-2" },
+          { id: "key-new", publicKey: "pk-new", date: "2026-10-01T00:00:00" },
+          { id: "key-old", publicKey: "pk-old", date: "2026-01-01T00:00:00" },
         ],
       },
     });
 
     expect(getUserEncryptionKeysImpl(store)).toEqual({
-      publicKey: null,
-      userId: null,
-      publicKeyId: null,
+      publicKey: "pk-new",
+      userId: "user-1",
+      publicKeyId: "key-new",
     });
   });
 });

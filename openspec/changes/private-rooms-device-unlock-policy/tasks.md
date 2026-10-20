@@ -13,7 +13,7 @@
 
 - [x] 3.1 Add a test to `packages/shared/context/encryption/__tests__/EncryptionContext.test.tsx` proving that after the idle or visibility lock a remembered device restores silently and an expired record prompts; verify with `cd packages/shared && pnpm exec vitest run context/encryption`
 - [x] 3.2 Add `Common:RememberDeviceHint` under the remember checkbox in `packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx` and `Common:DeviceUnlockRememberedUntil` next to Forget device in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx`; verify with `cd packages/client && pnpm exec vitest run keys-management`
-- [ ] 3.3 Run `translate-comments` then `translate-locales` for the two new keys and `cd common/tests && npx vitest run test/locales.test.js`; verify the locale suite is green for all 31 languages
+- [x] 3.3 Run `translate-comments` then `translate-locales` for the two new keys and `cd common/tests && npx vitest run test/locales.test.js`; verify the locale suite is green for all 31 languages
 
 ## 4. End-to-end and documentation
 

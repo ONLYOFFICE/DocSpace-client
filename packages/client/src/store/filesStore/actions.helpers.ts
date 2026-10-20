@@ -62,9 +62,7 @@ export function initFilesImpl(self: FilesStore) {
 
   const {
     getPortalCultures,
-    getLegacyEncryptionKeys,
     // setModuleInfo,
-    isDesktopClient,
     getInvitationSettings,
   } = self.settingsStore;
 
@@ -100,10 +98,6 @@ export function initFilesImpl(self: FilesStore) {
           self.setTrashIsEmpty(isEmpty);
         }),
       );
-
-      if (isDesktopClient) {
-        requests.push(getLegacyEncryptionKeys());
-      }
 
       if (self.userStore?.getEncryptionKeys) {
         requests.push(self.userStore.getEncryptionKeys().catch(() => {}));

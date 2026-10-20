@@ -33,68 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { IInitialConfig } from "@/types";
-import {
-  setEncryptionKeys,
-  getEncryptionAccess,
-} from "@docspace/shared/api/files";
 import { TUser } from "@docspace/shared/api/people/types";
-import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 import { regDesktop } from "@docspace/shared/utils/desktop";
-import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 
-const initDesktop = (
-  cfg: IInitialConfig,
-  user: TUser,
-  fileId: string | number,
-  t: Nullable<TTranslation>,
-) => {
-  const keyPairs = cfg?.editorConfig?.encryptionKeys;
-  const ownKeyPairs = keyPairs?.filter(
-    (k) => String(k.userId) === String(user.id),
-  );
-  const keyPair = selectUserKey(
-    ownKeyPairs && ownKeyPairs.length > 0 ? ownKeyPairs : keyPairs,
-  );
-  const encryptionKeys = keyPair
-    ? {
-        privateKeyEnc: keyPair.privateKeyEnc,
-        publicKey: keyPair.publicKey,
-        ...(keyPair.cryptoEngineId
-          ? { cryptoEngineId: keyPair.cryptoEngineId }
-          : {}),
-      }
-    : undefined;
-  regDesktop(
-    user,
-    !!encryptionKeys,
-    encryptionKeys,
-    (keys) => {
-      setEncryptionKeys(keys);
-    },
-    undefined,
-    true,
-    (callback) => {
-      getEncryptionAccess?.(fileId)
-        ?.then((keys) => {
-          const data = {
-            keys,
-          };
-
-          callback?.(data);
-        })
-        .catch((error) => {
-          toastr.error(
-            typeof error === "string" ? error : error.message,
-            "",
-            0,
-            true,
-          );
-        });
-    },
-    t,
-  );
+const initDesktop = (user: TUser, t: Nullable<TTranslation>) => {
+  regDesktop(user, t);
 };
 
 export default initDesktop;

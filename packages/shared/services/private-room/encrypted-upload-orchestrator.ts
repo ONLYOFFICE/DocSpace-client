@@ -113,6 +113,11 @@ export interface OrchestrateEncryptedUploadArgs {
    * request. Defaults to 5 MiB to mirror UploadDataStore's default.
    */
   chunkSize?: number;
+  /**
+   * Member key changes refused so far (`userId:publicKey`). Defaults to a set
+   * kept for this call, so one batch asks once per changed key.
+   */
+  memberKeyRefusals?: Set<string>;
 }
 
 export interface UploadFileResult {
@@ -228,6 +233,7 @@ async function wrapDekForSelfAndRoom(args: {
   publicKeyId: string;
   roomId: number | string;
   signal: AbortSignal | undefined;
+  refusals: Set<string> | undefined;
 }): Promise<SkippedMemberKey[]> {
   const {
     fileId,
@@ -238,6 +244,7 @@ async function wrapDekForSelfAndRoom(args: {
     publicKeyId,
     roomId,
     signal,
+    refusals,
   } = args;
 
   throwIfAborted(signal);
@@ -286,6 +293,7 @@ async function wrapDekForSelfAndRoom(args: {
 
     const { verified, skipped } = await verifyMemberKeys(recipients, {
       scopeUserId: userId,
+      refusals,
     });
     if (verified.length === 0) return skipped;
 
@@ -332,6 +340,7 @@ async function uploadOneFile(
     uploadStore,
     signal,
     chunkSize = DEFAULT_CHUNK_SIZE,
+    memberKeyRefusals,
   } = args;
 
   let prepared: PreparedUpload | null = null;
@@ -410,6 +419,7 @@ async function uploadOneFile(
       publicKeyId,
       roomId,
       signal,
+      refusals: memberKeyRefusals,
     });
 
     rememberEncryptedFilename(fileId, prepared.originalFileName);
@@ -458,8 +468,12 @@ async function uploadOneFile(
  *   - displaying quota errors via `onQuotaError` (per-file or batch-level)
  */
 export async function orchestrateEncryptedUpload(
-  args: OrchestrateEncryptedUploadArgs,
+  callerArgs: OrchestrateEncryptedUploadArgs,
 ): Promise<OrchestrateResult> {
+  const args: OrchestrateEncryptedUploadArgs = {
+    ...callerArgs,
+    memberKeyRefusals: callerArgs.memberKeyRefusals ?? new Set<string>(),
+  };
   const results: UploadFileResult[] = [];
   let quotaErrorRaised = false;
   let aborted = false;

@@ -304,6 +304,35 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     expect(fanOut.recipients.map((r) => r.userId)).toEqual(["alice"]);
   });
 
+  it("asks once per refused key change across the files of one call", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");
+    const handler = vi.fn(async () => "refuse" as const);
+    registerKeyMismatchHandler(handler);
+    const swapped = [
+      { id: "b-2", userId: "bob", publicKey: "pk-b-swapped", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never;
+    vi.mocked(getRoomEncryptionKeys)
+      .mockResolvedValueOnce(swapped)
+      .mockResolvedValueOnce(swapped);
+
+    const { results } = await orchestrateEncryptedUpload({
+      files: [makeFile("one.docx", 16), makeFile("two.docx", 16)],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      userId: "user-1",
+      publicKey: "pk-own",
+      publicKeyId: "key-1",
+    });
+
+    expect(handler).toHaveBeenCalledTimes(1);
+    expect(results.map((r) => r.skippedMembers?.map((m) => m.userId))).toEqual([
+      ["bob"],
+      ["bob"],
+    ]);
+  });
+
   it("Unpinned member at upload: the key is pinned and the wrap is produced", async () => {
     const { getRoomEncryptionKeys } = await import("../../../api/privacy");
     const { wrapDekForRecipients } = await import(

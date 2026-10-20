@@ -17,11 +17,12 @@ contract tests cannot mirror routes that do not exist.
   wraps it, together with the legacy `isEncryptionSupport` plumbing in the
   client shell that only this request fed.
 - Remove the privacy settings read and write requests and their types.
-- Drop the legacy desktop encryption bridge (decided 2026-10-20): both of its
-  requests fail today, the per-file access call (no route) and the key write
-  (`PUT privacyroom/keys` without the key id, answered 404). The desktop login,
-  API-key provisioning and system messages stay; the legacy key plumbing and
-  key requests that only the bridge used go with it.
+- Keep the desktop encryption bridge and point its sharing-keys request at a
+  route the server exposes. The bridge hands the user's key pair to the
+  desktop application's new crypto engine, whose id
+  (`{DC522726-5E0E-43E5-AA02-8EA156BECBC5}`) the desktop developer asked for
+  to tell it from the old desktop engine; the route and the key-write
+  contract are agreed with the desktop developer (decision 1).
 - Delete the matching MSW handlers and contract-test entries, if any, and
   update the server-contract spec so it no longer lists routes the client
   does not call.
@@ -38,8 +39,10 @@ None.
   server route" is removed and replaced by a requirement that the client API
   surface matches the server routes.
 - `private-rooms/editor-integration`: the requirement "Legacy desktop path
-  uses editor-provided keys" is removed and replaced by "No desktop encryption
-  bridge".
+  uses editor-provided keys" is renamed "Desktop path uses editor-provided
+  keys" and changes so the bridge passes the key pair with its crypto engine
+  id and answers the desktop's sharing-keys request through a route the
+  server exposes.
 
 ## Impact
 
@@ -47,20 +50,23 @@ None.
   and `types.ts` (settings read/write), `packages/shared/store/SettingsStore.ts`
   (`getIsEncryptionSupport`), `packages/client/src/Client.jsx` and
   `packages/client/src/store/FilesStore.ts` (legacy encryption-support
-  wiring), `packages/doceditor/src/utils/initDesktop.ts` and
-  `packages/shared/utils/desktop.ts` (desktop bridge), the legacy key plumbing
-  in `SettingsStore` and `packages/client/src/store/filesStore/actions.helpers.ts`, the unit test
+  wiring), `packages/doceditor/src/utils/initDesktop.ts`, `packages/shared/utils/desktop.ts`
+  and `getEncryptionAccess` in `packages/shared/api/files/index.ts` (desktop
+  sharing-keys request), the unit test
   `packages/client/src/store/filesStore/__tests__/FilesStore.remaining.test.ts`.
-- No server change; no Document Server dependency.
+- No server change; no Document Server dependency. The desktop side (the new
+  engine in the desktop application) is owned by the desktop developer.
 
 ## Out of scope
 
 - Any change to the routes the server does expose.
 - Desktop editor UX beyond the access call.
 
-## Decisions
+## Decisions needed
 
-1. The legacy desktop encryption bridge is dropped (2026-10-20); the
-   alternatives were redirecting it to `files/file/{fileId}/publickeys` or to
-   `privacyroom/{roomId}/access`, both of which would also have needed the key
-   write reworked.
+1. The bridge contract with the desktop's new crypto engine (owner: the
+   desktop developer, with this change): which route answers `getsharingkeys`
+   and in which shape, and whether the engine still writes keys through the
+   bridge. An earlier decision of 2026-10-20 to drop the bridge was reverted
+   the same day once the new engine id turned out to be the desktop
+   developer's request.

@@ -32,37 +32,45 @@ stashed `04-implementation-status.md` already recorded that `GET /privacyroom`
 does not exist and that "availability of private rooms = having keys", so the
 removal follows a decision the feature author made in June 2026.
 
-What the bridge served, read in the ONLYOFFICE repositories on 2026-10-20
-(`master`, release v10.0.0): the desktop application's own encryption, which
-is not the private-rooms scheme.
+The desktop bridge, as found on 2026-10-20:
 
-- `desktop-sdk` `ChromiumBasedEditors/lib/src/cefwrapper/client_renderer_wrapper.cpp`
-  (`portal:login`): when the login data carries `encryptionKeys` with a
-  `cryptoEngineId`, the desktop generates an RSA key pair with OpenSSL,
-  encrypts the private key with AES-GCM under the portal login password and
-  asks the page to store it through `cloudCryptoCommand("encryptionKeys")` or
-  `"updateEncryptionKeys"`.
-- `desktop-sdk` `ChromiumBasedEditors/plugins/encrypt/advanced2/worker.js`:
-  documents are OOXML files with a per-document password, RSA-encrypted for
-  each user's public key into a `docinfo`; the users' public keys come from
-  the page through `getsharingkeys`.
-- `web-apps` `apps/documenteditor/main/app/controller/Main.js` and `sdkjs`
-  `common/apiBase.js`: the editor itself takes `editorConfig.encryptionKeys`
-  from its server configuration (`put_EncryptedInfo`) and hands it to the
-  crypto provider the desktop injects. That path does not go through the
-  client and is not touched here.
-
-Private rooms use X25519 keys with HPKE, the DSE3 container and an Argon2
-passphrase, so the two schemes are incompatible. The editor-side bridge also
-handed the user's X25519 key pair to the desktop engine under its crypto
-engine id. How the desktop application opens private-room files is an open
-product question outside this change.
+- Two desktop crypto engines are told apart by `cryptoEngineId`. The old one
+  is the desktop application's own encryption (`desktop-sdk`
+  `ChromiumBasedEditors/plugins/encrypt/advanced2`, id
+  `{FFF0E1EB-13DB-4678-B67D-FF0A41DBBCEF}`, also `desktopConstants.cryptoEngineId`
+  in the client): RSA key pairs wrapped with the portal login password and
+  OOXML documents with a per-document password. The new one carries the id
+  `{DC522726-5E0E-43E5-AA02-8EA156BECBC5}`, which the desktop developer asked
+  for so the two can be told apart; the server gives it to every key pair
+  (`DefaultCryptoEngineId` in
+  `server/products/ASC.Files/Core/ApiModels/ResponseDto/EncryptionKeyDto.cs`).
+- The editor-side bridge (`packages/doceditor/src/utils/initDesktop.ts`, since
+  2026-07-28) picks the user's key pair from the server configuration and
+  hands it, with that engine id, to the desktop in `portal:login`
+  (`packages/shared/utils/desktop.ts`). The desktop asks for the sharing keys
+  of a file through `cloudCryptoCommand("getsharingkeys")`, which the bridge
+  answers with the per-file privacy access call, the route that does not
+  exist; it writes keys through `"encryptionKeys"` / `"updateEncryptionKeys"`,
+  which call `PUT privacyroom/keys` without a key id. The request DTO carries
+  no default id (`EncryptionKeyRequestDto.Id`), so that write replaces only a
+  key pair stored without an identifier (read with the all-zero id,
+  `EncryptionKeyPairDto.cs` `ParseKeys`) and answers 404 for a user whose key
+  pair has one.
+- The new engine is not in the public ONLYOFFICE repositories (`desktop-sdk`,
+  `desktop-apps`, `web-apps`, `sdkjs`; `master` at release v10.0.0 and
+  `develop`, which stopped in May 2026); `sdkjs` `feature/crypto` (April 2026)
+  only adds the `AscCommon.CryptoProvider` abstraction the engine plugs into.
+  There is no public `hotfix/v10.0.1` branch.
+- Independently of the desktop, the editor developers received the
+  private-rooms crypto as `onlyoffice-crypto.js` with an integration guide
+  (2026-07-01); its discrepancies with the server are recorded in
+  `private-rooms-editor-contract`.
 
 ## Goals / Non-Goals
 
 **Goals:**
 - No client request without a server route.
-- The desktop application keeps its portal login without the dead encryption bridge.
+- The desktop bridge keeps working, through routes that exist.
 
 **Non-Goals:**
 - Reworking the desktop encryption bridge beyond the access call.
@@ -75,26 +83,26 @@ product question outside this change.
    has keys", the settings read/write had no product meaning, and the per-file
    access request already has a successor route on the server
    (`files/file/{fileId}/publickeys`, see Context).
-2. **Drop the desktop encryption bridge (decided 2026-10-20 with the user).**
-   Both requests of the bridge fail today: the per-file access call has no
-   route, and the key write sends `PUT privacyroom/keys` without the key id
-   the server reads from `EncryptionKeyRequestDto`, so the replace targets an
-   unknown key and answers 404. Alternatives were (a) the per-file
-   `files/file/{fileId}/publickeys` and (b) the room route
-   `privacyroom/{roomId}/access`; either would have needed the key write
-   reworked as well. Dropping the bridge removes the encryption branch of
-   `regDesktop`, the legacy key plumbing of the settings store and the legacy
-   key requests of the files API module; the desktop login itself, the API-key
-   provisioning and the system messages stay.
+2. **Keep the bridge and redirect its sharing-keys request; the contract is
+   open (see Open Questions).** Options: (a) the per-file
+   `files/file/{fileId}/publickeys`, which lists the public keys of the users
+   who hold the file, needs no room lookup and works in subfolders; (b) the
+   room route `privacyroom/{roomId}/access`, which needs the room id from the
+   file's parent chain and refuses a caller without a key. (a) is
+   recommended because it answers exactly what `getsharingkeys` asks for. A
+   decision of 2026-10-20 to drop the bridge was reverted the same day: the
+   new engine id is the desktop developer's request, so the bridge is the
+   desktop's way into private rooms, not dead code.
 3. **Remove the legacy `isEncryptionSupport` flag.** It was only ever true
    when the dead availability probe answered, so every consumer sees `false`
    today; removing it is behaviour-neutral.
 
 ## Risks / Trade-offs
 
-- [Desktop users lose the desktop encryption engine] → it already fails on
-  both of its server requests, so nothing that works today is removed; the
-  desktop smoke test checks that the login and ordinary documents still work.
+- [The desktop engine expects another answer shape] → the shape is part of
+  the contract agreed in decision 2 and checked by the desktop smoke test.
+- [The key write replaces only an id-less key pair] → recorded in Context;
+  whether the new engine writes keys at all is part of decision 2.
 - [Hidden consumer of the removed flag] → `pnpm run tsc` and the client unit
   suite catch it; the one test that references it is updated in the same
   task.
@@ -105,4 +113,6 @@ Single client PR; no data or server migration. Rollback is a revert.
 
 ## Open Questions
 
-None. Decision 2 (drop the desktop bridge) was made on 2026-10-20.
+- Decision 2: the bridge contract with the desktop's new crypto engine
+  (route and shape of the `getsharingkeys` answer, key writes). Owner: the
+  desktop developer, with this change. Blocks task 2.1.

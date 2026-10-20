@@ -23,7 +23,7 @@
 
 ## 4. Integration check
 
-- [ ] 4.1 Run `pnpm test` (shared, includes the contract tests), `pnpm run test:client`, `pnpm run tsc`, `pnpm run lint`; verify all green.
+- [x] 4.1 Run `pnpm test` (shared, includes the contract tests), `pnpm run test:client`, `pnpm run tsc`, `pnpm run lint`; verify all green.
 - [ ] 4.2 `npx -y @fission-ai/openspec@latest validate private-rooms-mock-fidelity --strict` passes.
 
 ## Workflow follow-up

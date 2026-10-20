@@ -3,7 +3,6 @@
 ## 1. Contract mirrors (client first)
 
 - [ ] 1.1 Extend the MSW handlers in `packages/shared/__mocks__/handlers/files/encryptedFiles.ts` and `handlers/privacyroom/index.ts` with: owner-change missing-entries response, private-rooms-unavailable 403, metadata-guard validation errors, encrypted title validation, upload-session abort, access history, recovery enrol/retrieve, offboarding; verify with the contract tests in `packages/shared/__mocks__/handlers/*/__tests__` extended for each route
-- [ ] 1.2 Change the mock file-key store to the (file, user, publicKeyId) key and update `encrypted-files-contract.test.ts`; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`
 
 ## 2. Owner change
 
@@ -23,9 +22,7 @@
 
 ## 5. Multi-device file keys (BL-8)
 
-- [ ] 5.1 Backend: migrate `files_file_keys` to the (tenant, file, user, public_key_id) key in `DbFileKeys.cs` and `FileDao.SetFileKey` (whose delete-then-insert by user id must become per (user, public key id); today a request listing one user twice fails on the key), with a down migration; verify with the migration test projects for MySQL and PostgreSQL
-- [ ] 5.2 Client: stop collapsing wraps per user in `packages/shared/services/private-room/encrypted-upload-orchestrator.ts` and `room-encryption.ts`, wrapping once per public key id, behind a presence check on the server capability; verify with `packages/shared/services/private-room/__tests__/encrypted-upload-orchestrator.test.ts` and `rotate-identity.integration.test.ts`
-- [ ] 5.3 Client: unwrap picks the entry matching the device's active key in `packages/shared/services/encryption/room-file-access.ts`; verify with `packages/shared/services/encryption/__tests__/room-file-access.test.ts`
+Withdrawn: the client operates with one key per user (`private-rooms-single-key`), so the (file, user) file-key stays.
 
 ## 6. Audit and history
 

@@ -19,7 +19,8 @@ See proposal.md. Server state on `hotfix/v4.0.1` (`../server`):
   same user written by a later request replaces the first (BL-8, stashed
   `SECURITY.md` §9 and `AUDIT_BACKEND.md` P2). A single request that lists
   the same user twice does not collapse: it fails on the (tenant, file, user)
-  key.
+  key. BL-8 is withdrawn: the client operates with one key per user
+  (`private-rooms-single-key`), so one entry per (file, user) is all it needs.
 - Access-entry removal: no server path removes a user's entries. The only
   delete (`DeleteFileKeysAsync`,
   `products/ASC.Files/Core/Core/EF/Queries/AbstractQueries.cs:116`) is called
@@ -58,7 +59,6 @@ without them.
   its MSW mirror and contract test on the client side.
 - No plaintext metadata leaks that the client cannot prevent (e-mail title,
   human-readable encrypted titles).
-- Multi-device keys stop collapsing.
 
 **Non-Goals:**
 - Server-side re-encryption or room keys (accepted v1 limitation).
@@ -79,12 +79,11 @@ without them.
    hard-code Enterprise-only; rejected until product decides (open decision in
    the proposal).
 
-3. **Composite key (file, user, public key id).** Matches the stashed
-   `SECURITY.md` recommendation. Migration copies the current `public_key_id`
-   column into the key; rows with an empty id get the user's first envelope
-   id. The client already sends `publicKeyId` in every entry, so no wire
-   change. Alternative: keep (file, user) and store a JSON array of wraps;
-   rejected because it breaks the replace semantics and the contract tests.
+3. **No composite file-key.** The stashed `SECURITY.md` recommended keying
+   entries by (file, user, public key id) so a user could hold one entry per
+   device key. Withdrawn: the client operates with one key per user
+   (`private-rooms-single-key`), so the (file, user) key stays and nothing
+   migrates.
 
 4. **E-mails link instead of naming.** The notifier gets the room link and a
    generic subject for private rooms. Alternative: send the encrypted name;
@@ -106,8 +105,6 @@ without them.
 - [Backend schedule] → every server task is independent; the client lands
   mocks and contract tests first so the backend work can be verified against
   them.
-- [Migration of `files_file_keys` on large portals] → run as an online
-  migration adding the column to the key; rows are small.
 - [Edition rule misconfigured on upgrade] → default allow preserves current
   behaviour.
 - [Owner-change loop when backfill keeps failing] → the client shows the
@@ -120,8 +117,7 @@ without them.
    "expected failure" to passing.
 3. Client reads the new fields behind presence checks (missing field = old
    server), so old and new servers both work during rollout.
-4. Rollback: server items are individually revertible; the PK migration has a
-   down migration that keeps the first entry per user.
+4. Rollback: server items are individually revertible.
 
 ## Open Questions
 

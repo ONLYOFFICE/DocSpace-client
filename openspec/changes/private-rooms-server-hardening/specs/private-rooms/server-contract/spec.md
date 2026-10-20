@@ -88,17 +88,6 @@ The server SHALL evaluate an explicit private-room availability rule before crea
 - **WHEN** the availability rule denies private rooms for the portal
 - **THEN** the server answers 403 with the private-rooms-unavailable error code
 
-### Requirement: One access entry per user and file
-The server SHALL keep at most one access entry per (file, user, public key id) triple, so a user with several device keys holds one entry per key on the same file; a second entry for the same triple SHALL NOT be stored.
-
-#### Scenario: Two entries for one user
-- **WHEN** a write lists the same user twice with different public key ids for one file
-- **THEN** both entries are stored
-
-#### Scenario: Duplicate triple
-- **WHEN** a write lists the same user and public key id twice for one file
-- **THEN** the write fails on the uniqueness constraint
-
 ### Requirement: Audit log scope for private rooms
 The server SHALL write audit events for key envelope creation, update and deletion, for every file access-entry write (actor, file, subject users) and for every member revocation from a private room.
 

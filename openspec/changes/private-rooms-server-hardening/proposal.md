@@ -6,8 +6,7 @@ The client half of private rooms is finished, but several server behaviours it
 depends on are missing or leak metadata: owner changes do not touch the file
 access entries, invitation e-mails carry the plaintext room title, encrypted
 file titles are not validated, watermark/indexing/lifetime settings can be
-applied to a private room, the file-key table keys entries by (file, user) so a
-user's second device collapses the first one's entry (BL-8), audit events cover
+applied to a private room, audit events cover
 key envelopes only, no operation removes a user's file access entries (a
 removed member keeps them), and there is no administrative recovery, SCIM
 offboarding or file-key history. The stashed `AUDIT_BACKEND.md` (June 2026) listed these as
@@ -32,8 +31,6 @@ the file to change so the backend team can pick them up; nothing here is
 - Watermark, indexing and lifetime settings are refused on private rooms.
 - Encrypted file titles are validated to the opaque UUID-plus-extension form.
 - Invitation e-mails for private rooms stop carrying the plaintext room title.
-- The file-key table is keyed by (file, user, public key id) so one user can
-  hold one entry per device key (BL-8); the client stops collapsing entries.
 - Audit events are written for file access-entry writes and member
   revocations, and a per-file access history is exposed. The server has no
   revocation (removal of a user's access entries) today; the operation that
@@ -45,9 +42,6 @@ the file to change so the backend team can pick them up; nothing here is
 - The existing upload-session abort route is documented and used by the
   client when an encrypted upload is cancelled.
 
-**BREAKING** (server): the file-key uniqueness constraint changes; existing
-rows migrate with their current public key id.
-
 ## Capabilities
 
 ### New Capabilities
@@ -57,23 +51,20 @@ None.
 ### Modified Capabilities
 
 - `private-rooms/server-contract`: owner change, edition gate, invitation
-  e-mail, access-entry uniqueness, audit scope, recovery/offboarding
+  e-mail, audit scope, recovery/offboarding
   endpoints change; new requirements for metadata guards, title validation,
   upload-session abort and access history.
-- `private-rooms/encryption-core`: "One access-list entry per user" becomes
-  one entry per user key once the server migration lands.
 
 ## Impact
 
 - Server (`../server`): `FileStorageService.cs` (`ChangeOwnerAsync`,
   `CreateRoomAsync`, `UpdateRoomAsync`, `SetEncryptionInfoAsync`),
-  `FileSharing.cs` / `StudioNotifyService` (invite e-mails), `DbFileKeys.cs`
-  and a migration for `files_file_keys`, `FileDao.cs` (`SetFileKey`),
+  `FileSharing.cs` / `StudioNotifyService` (invite e-mails),
   `DocumentsActionMapper.cs` and the audit pipeline, `VirtualRoomsController.cs`,
   new recovery and SCIM controllers.
 - Client: `packages/shared/api/privacy`, `packages/shared/api/files`,
   `packages/shared/services/private-room/room-encryption.ts` (owner hand-over
-  backfill, multi-key wraps), `packages/client/src/components/panels/ChangeRoomOwnerPanel`,
+  backfill), `packages/client/src/components/panels/ChangeRoomOwnerPanel`,
   keys-management enrolment UI, MSW handlers and contract tests under
   `packages/shared/__mocks__/handlers/{privacyroom,files}`.
 - No Document Server dependency.

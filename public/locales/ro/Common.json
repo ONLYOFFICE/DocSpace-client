@@ -871,7 +871,6 @@
   "EncryptionKeyImported": "Cheia de criptare a fost importată cu succes",
   "EncryptionKeys": "Chei de criptare",
   "EncryptionKeysNotConfigured": "Cheile de criptare nu sunt configurate pe acest dispozitiv. Configurați cheile în setările Profilului pentru a lucra cu fișiere criptate.",
-  "EncryptionKeysReload": "Cheile de criptare trebuie reintroduse",
   "EncryptionKeysRequiredForPrivateRoom": "Configurați-vă cheile de criptare în Profil înainte de a crea o cameră privată.",
   "EncryptionKeysRequiredForUpload": "Configurați-vă cheile de criptare în Profil înainte de a încărca fișiere într-o cameră privată.",
   "EncryptionLocked": "Criptarea este blocată",

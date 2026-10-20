@@ -871,7 +871,6 @@
   "EncryptionKeyImported": "Versleutelingssleutel succesvol geïmporteerd",
   "EncryptionKeys": "Versleutelingssleutels",
   "EncryptionKeysNotConfigured": "Versleutelingssleutels zijn niet geconfigureerd op dit apparaat. Stel uw sleutels in via Profielinstellingen om met versleutelde bestanden te werken.",
-  "EncryptionKeysReload": "Encryptiesleutels moeten opnieuw worden ingevoerd",
   "EncryptionKeysRequiredForPrivateRoom": "Stel uw versleutelingssleutels in via Profiel voordat u een privéruimte aanmaakt.",
   "EncryptionKeysRequiredForUpload": "Stel uw versleutelingssleutels in via Profiel voordat u bestanden uploadt naar een privéruimte.",
   "EncryptionLocked": "Versleuteling vergrendeld",

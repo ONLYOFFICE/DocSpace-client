@@ -871,7 +871,6 @@
   "EncryptionKeyImported": "ນຳເຂົ້າກຸນແຈເຂົ້າລະຫັດສຳເລັດ",
   "EncryptionKeys": "ກຸນແຈເຂົ້າລະຫັດ",
   "EncryptionKeysNotConfigured": "ກຸນແຈເຂົ້າລະຫັດຍັງບໍ່ຖືກຕັ້ງຄ່າໃນອຸປະກອນນີ້. ຕັ້ງຄ່າກຸນແຈໃນການຕັ້ງຄ່າໂປຣໄຟລ໌ເພື່ອເຮັດວຽກກັບໄຟລ໌ທີ່ເຂົ້າລະຫັດ.",
-  "EncryptionKeysReload": "ຕ້ອງປ້ອນກະແສລະຫັດເຂົ້າໃໝ່",
   "EncryptionKeysRequiredForPrivateRoom": "ຕັ້ງຄ່າຄີເຂົ້າລະຫັດຂອງທ່ານໃນໂປຣໄຟລ໌ກ່ອນສ້າງຫ້ອງສ່ວນຕົວ.",
   "EncryptionKeysRequiredForUpload": "ຕັ້ງຄ່າຄີເຂົ້າລະຫັດຂອງທ່ານໃນໂປຣໄຟລ໌ກ່ອນອັບໂຫລດໄຟລ໌ໄປຫາຫ້ອງສ່ວນຕົວ.",
   "EncryptionLocked": "ການເຂົ້າລະຫັດຖືກລັອກ",

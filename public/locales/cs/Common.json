@@ -871,7 +871,6 @@
   "EncryptionKeyImported": "Šifrovací klíč byl úspěšně importován",
   "EncryptionKeys": "Šifrovací klíče",
   "EncryptionKeysNotConfigured": "Šifrovací klíče nejsou na tomto zařízení nakonfigurovány. Nastavte své klíče v nastavení profilu, abyste mohli pracovat se zašifrovanými soubory.",
-  "EncryptionKeysReload": "Šifrovací klíče musí být zadány znovu",
   "EncryptionKeysRequiredForPrivateRoom": "Před vytvořením soukromé místnosti nastavte v Profilu šifrovací klíče.",
   "EncryptionKeysRequiredForUpload": "Před nahráním souborů do soukromé místnosti nastavte v Profilu šifrovací klíče.",
   "EncryptionLocked": "Šifrování uzamčeno",

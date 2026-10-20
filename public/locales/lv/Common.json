@@ -871,7 +871,6 @@
   "EncryptionKeyImported": "Šifrēšanas atslēga veiksmīgi importēta",
   "EncryptionKeys": "Šifrēšanas atslēgas",
   "EncryptionKeysNotConfigured": "Šifrēšanas atslēgas nav konfigurētas šajā ierīcē. Iestatiet savas atslēgas Profila iestatījumos, lai strādātu ar šifrētajiem failiem.",
-  "EncryptionKeysReload": "Šifrēšanas atslēgas jāievada atkārtoti",
   "EncryptionKeysRequiredForPrivateRoom": "Pirms privātas istabas izveides iestatiet šifrēšanas atslēgas profilā.",
   "EncryptionKeysRequiredForUpload": "Pirms failu augšupielādes privātā istabā iestatiet šifrēšanas atslēgas profilā.",
   "EncryptionLocked": "Šifrēšana bloķēta",

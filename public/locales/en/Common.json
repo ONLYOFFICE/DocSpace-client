@@ -871,7 +871,6 @@
   "EncryptionKeyImported": "Encryption key imported successfully",
   "EncryptionKeys": "Encryption keys",
   "EncryptionKeysNotConfigured": "Encryption keys are not configured on this device. Set up your keys in Profile settings to work with encrypted files.",
-  "EncryptionKeysReload": "Encryption keys must be re-entered",
   "EncryptionKeysRequiredForPrivateRoom": "Set up your encryption keys in Profile before creating a private room.",
   "EncryptionKeysRequiredForUpload": "Set up your encryption keys in Profile before uploading files to a private room.",
   "EncryptionLocked": "Encryption locked",

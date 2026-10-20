@@ -871,7 +871,6 @@
   "EncryptionKeyImported": "Salausavain tuotu onnistuneesti",
   "EncryptionKeys": "Salausavaimet",
   "EncryptionKeysNotConfigured": "Salausavaimia ei ole määritetty tällä laitteella. Määritä avaimesi Profiiliasetuksissa käyttääksesi salattuja tiedostoja.",
-  "EncryptionKeysReload": "Salausavaimet on syötettävä uudelleen",
   "EncryptionKeysRequiredForPrivateRoom": "Määritä salausavaimet profiilissa ennen yksityisen huoneen luomista.",
   "EncryptionKeysRequiredForUpload": "Määritä salausavaimet profiilissa ennen tiedostojen lataamista yksityiseen huoneeseen.",
   "EncryptionLocked": "Salaus lukittu",

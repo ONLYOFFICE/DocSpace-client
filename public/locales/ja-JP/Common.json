@@ -871,7 +871,6 @@
   "EncryptionKeyImported": "暗号化キーを正常にインポートしました",
   "EncryptionKeys": "暗号化キー",
   "EncryptionKeysNotConfigured": "このデバイスに暗号化キーが設定されていません。プロフィール設定でキーを設定して、暗号化ファイルを操作してください。",
-  "EncryptionKeysReload": "暗号化キーの再入力が必要",
   "EncryptionKeysRequiredForPrivateRoom": "プライベートルームを作成する前に、プロフィールで暗号化キーを設定してください。",
   "EncryptionKeysRequiredForUpload": "プライベートルームにファイルをアップロードする前に、プロフィールで暗号化キーを設定してください。",
   "EncryptionLocked": "暗号化がロックされています",

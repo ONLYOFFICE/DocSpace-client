@@ -286,8 +286,7 @@ test.describe("Encrypted file moved out of a private room", () => {
     );
   });
 
-  // Blocked on openspec/changes/private-rooms-mock-fidelity: the mocks do not answer like the server yet.
-  test.fixme("Cut and paste out of a private room: the decrypted copy is uploaded and the source deleted", async ({
+  test("Cut and paste out of a private room: the decrypted copy is uploaded and the source deleted", async ({
     page,
     mockRequest,
     baseUrl,
@@ -330,6 +329,14 @@ test.describe("Encrypted file moved out of a private room", () => {
         http.get(`${BASE_URL}:${TEST_PORT}/api/2.0/files/${id}`, () =>
           myDocumentsResolver(),
         ),
+      ),
+      // The decrypted copy is uploaded into My documents (folder 100).
+      http.get(`${BASE_URL}:${TEST_PORT}/api/2.0/files/folder/100`, async () => {
+        const { response } = await myDocumentsResolver().json();
+        return Response.json({ response: response.current, status: 0, statusCode: 200 });
+      }),
+      http.post(`${BASE_URL}:${TEST_PORT}/api/2.0/files/100/upload/check`, () =>
+        Response.json({ response: [], status: 0, statusCode: 200 }),
       ),
     );
     mockRequest.use(
@@ -384,9 +391,10 @@ test.describe("Encrypted file moved out of a private room", () => {
         "/rooms/personal/filter?folder=12764",
       ),
     );
-    await expect(page.getByTestId("table-row-0")).toBeVisible({
-      timeout: 15000,
-    });
+    // The room's own row 0 is still on screen until the destination has loaded.
+    await expect(
+      page.getByRole("heading", { name: "My documents", level: 1 }),
+    ).toBeVisible({ timeout: 15000 });
 
     const deleteRequest = page.waitForRequest(
       (req) =>
@@ -410,8 +418,11 @@ test.describe("Encrypted file moved out of a private room", () => {
     };
     expect(deleteBody).toMatchObject({ fileIds: [MOVE_FILE_ID], immediately: true });
 
+    // waitForRequest resolves when the request is sent, before the mock handles it.
+    await expect
+      .poll(() => filesHandle.current!.getFiles().map((f) => f.id))
+      .not.toContain(MOVE_FILE_ID);
     const remaining = filesHandle.current!.getFiles();
-    expect(remaining.map((f) => f.id)).not.toContain(MOVE_FILE_ID);
     const copy = remaining.find((f) => f.title === "moved.txt");
     expect(copy?.encrypted).toBe(false);
     expect(new TextDecoder().decode(copy?.bytes)).toBe(PLAIN_TEXT);

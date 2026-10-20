@@ -42,6 +42,44 @@ context: |
   packages/shared/__mocks__/handlers and have contract tests against the C#
   server. A console.error containing "[ENCRYPTION]" fails a unit test.
 
+  Server behaviour is never invented or guessed. Anything a proposal, spec,
+  design, task, mock handler or contract test says about the server (routes,
+  request and response DTO fields and their JSON names, enum values, status
+  codes, access checks, which id a field carries) is taken from the actual
+  implementation in ../server, looked up with CodeGraph and confirmed in the
+  source file. Client types, client code, existing mocks, endpoint names and
+  "how such APIs usually work" are not evidence of server behaviour.
+
+  How: ../server indexes its C# with CodeGraph (codegraph.json, MCP server in
+  its .mcp.json, rules in ../server/.claude/rules/csharp-lsp.md). Query with
+  `codegraph_explore` or `codegraph explore "<symbol names>"`, naming the
+  symbols you expect (controller action, DTO, enum) rather than describing
+  the area, then read the returned source; never grep for a C# identifier
+  there. Setup is per machine (`.codegraph/` is gitignored): install with
+  `npm i -g @colbymchenry/codegraph` (or the install script from
+  github.com/colbymchenry/codegraph) and run `codegraph init` once inside
+  ../server; the MCP server keeps the index synced. Installing and indexing
+  are the user's decision: when ../server has no `.codegraph/` or the CLI is
+  missing, stop and ask the user to set it up. Do not fall back to guessing,
+  and do not write a server fact down as an "assumption" to move on.
+
+  Commits: work is committed as it goes, so uncommitted files never pile up.
+  Every completed task (each `- [ ]` sub-item ticked in tasks.md) is one
+  commit: its code, tests, locale and .meta files, mock changes and the
+  tasks.md tick together, nothing from the next task. Planning work is
+  committed the same way: one commit per created or revised change, one per
+  archive. Message format follows the repository history: English subject
+  `<Package>: <Area>: <imperative summary>` with no trailing period
+  (packages: Client, Shared, Doceditor, SDK, Login, Management, E2E; area
+  "Private rooms" for this feature; `OpenSpec: <change>: <summary>` for
+  artifact-only commits), e.g. `Client: Private rooms: refuse key-less
+  uploads before the upload session`; then a blank line and a plain-prose
+  body wrapped at 72 columns saying what changed and why, ending with the
+  line `OpenSpec: <change> <task id>` when it implements a task. No
+  Co-Authored-By or other AI-attribution lines (CLAUDE.md). Commit on the
+  current feature branch (branch first when on master or develop), never
+  push unless the user asks, and never bypass hooks with --no-verify.
+
   Design history: the original design documents (SECURITY.md, FORMAT.md,
   AUDIT_FRONTEND/BACKEND.md, V1_RELEASE_PROGRESS.md, SDK plans) were never
   committed and survive only in git stashes of the feature author. Where they
@@ -57,8 +95,10 @@ rules:
     - Deliberate v1 limitations are requirements too, phrased as SHALL NOT, so the limitation is visible and testable.
     - Security-relevant scenarios state what MUST NOT happen (no plaintext upload, no silent key acceptance), not only the happy path.
     - User-facing text in scenarios refers to a Common.json i18n key when one exists.
+    - A requirement about server behaviour states what the ../server implementation does, as found through CodeGraph and read in the source; never what the client expects or what seems likely.
   design:
     - Record which stashed design document (if any) the decision comes from and whether the code still matches it.
+    - Cite the ../server file (controller action, DTO, enum) found through CodeGraph behind every server-contract claim; a claim that cannot be traced to the server source is not written.
   tasks:
     - Every task names its verification (unit test path, E2E spec, or command).
     - Locale changes run the translation skills and the locale tests in the same task group.
@@ -69,7 +109,10 @@ operations:
     guidance:
       - Do not remove the privateRooms feature flag as part of any change unless the change is explicitly about releasing the feature.
       - Backend-dependent tasks stop at the client side and record the expected server contract.
+      - "Commit right after ticking each task, before starting the next one, with the message format from the Commits paragraph of the context; a task is not done while its changes are uncommitted."
+      - A new or changed MSW handler mirrors the server endpoint as implemented in ../server (found through CodeGraph, read in the source), never a shape guessed from the client; its doc comment names that controller action.
       - "Specs own the what and the why: do not restate a requirement or a design decision in code or test comments. Where behaviour is counter-intuitive on its own (fail closed, a withheld action), leave at most a one-line pointer: Spec: <capability>, \"<requirement name>\". Test names carry the scenario name instead of comments."
   archive:
     guidance:
       - Before archiving, confirm the main spec still describes the behaviour on the branch, not the behaviour planned.
+      - "Commit the archive (moved change folder and merged main specs) as one commit, `OpenSpec: <change>: archive`."

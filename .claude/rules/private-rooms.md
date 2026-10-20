@@ -58,6 +58,25 @@ Workflow:
    counter-intuitive on its own (fail closed, a withheld action), leave at most
    a one-line pointer `Spec: <capability>, "<requirement name>"`. Test names
    carry the scenario name instead of a comment.
-6. The feature stays behind the `privateRooms` localStorage flag
+6. Server behaviour is never invented or guessed. Every statement about
+   `../server` in a spec, design, task, MSW handler or contract test comes
+   from its actual implementation, looked up with CodeGraph
+   (`codegraph_explore` / `codegraph explore "<symbol names>"`, see
+   `../server/.claude/rules/csharp-lsp.md`) and read in the source. Client
+   types and existing mocks are not evidence. No `.codegraph/` in `../server`
+   or no `codegraph` CLI: stop and ask the user to install and index it
+   (`npm i -g @colbymchenry/codegraph`, then `codegraph init` in `../server`)
+   instead of guessing. Details: the "Server behaviour" paragraph of
+   `openspec/config.yaml`.
+7. Commit after every completed task: one task (one ticked sub-item of
+   tasks.md) = one commit with its code, tests, locales, mocks and the tick;
+   planning edits and archives get their own commits. Subject in English,
+   following the repository history: `<Package>: <Area>: <imperative
+   summary>`, e.g. `Client: Private rooms: refuse key-less uploads before the
+   upload session`, or `OpenSpec: <change>: <summary>` for artifact-only
+   commits; body in plain prose, ending with `OpenSpec: <change> <task id>`.
+   No AI-attribution lines (CLAUDE.md), no `--no-verify`, no push unless
+   asked. Full wording: the "Commits" paragraph of `openspec/config.yaml`.
+8. The feature stays behind the `privateRooms` localStorage flag
    (`packages/shared/utils/privateRooms.ts`) until a change explicitly
    releases it; see `private-rooms/feature-gating`.

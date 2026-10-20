@@ -18,7 +18,7 @@ See proposal.md for motivation. Today `persistDeviceUnlock` writes `{ publicKey,
 
 ## Decisions
 
-**D1. Policy: option A, a remembered device survives auto-lock and the record expires after a maximum age (recommended, needs user confirmation).**
+**D1. Policy: option A, a remembered device survives auto-lock and the record expires after a maximum age (confirmed by the user on 2026-10-20, with the 30-day age of D2).**
 - A. Survive auto-lock, expire after N days. Matches what users expect from "remember this device" in password managers and messengers; auto-lock still protects the key against a shoulder-surfer on a non-remembered device and still drops decrypted filenames. Cost: a device-level attacker with same-origin script access can restore the key at any time within N days, which is already true today, just undocumented.
 - B. Auto-lock also forgets the device. Makes "remember" nearly useless with the default 30-minute idle timeout and the tab-hidden lock (every tab switch would forget the device). Rejected.
 - C. Require passkey/OS re-auth after auto-lock on a remembered device. Strongest, but only possible where passkey PRF is available; elsewhere it degrades to B. Could be layered later as "remember with passkey". Deferred.

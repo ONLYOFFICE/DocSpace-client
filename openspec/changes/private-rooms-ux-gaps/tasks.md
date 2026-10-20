@@ -25,7 +25,8 @@
 
 ## 5. Keys management dialogs
 
-- [ ] 5.1 List affected rooms in the delete-key confirmation (`useDeleteKeyFlow.tsx`), with `Common:DeleteKeyAffectedRooms` / `Common:DeleteKeyNoAffectedRooms`; verify with `cd packages/client && pnpm exec vitest run useDeleteKeyFlow`
+- [ ] 5.0 Decide how the affected-rooms list is computed (design.md D6 and Open Questions): per-file `GET files/{fileId}/access` reads with early exit per room, a capped scan, or a new server query; the server has no per-room read of file access entries. Verified by the decision recorded in design.md
+- [ ] 5.1 BLOCKED on 5.0. List affected rooms in the delete-key confirmation (`useDeleteKeyFlow.tsx`) using the method chosen in 5.0, with `Common:DeleteKeyAffectedRooms` / `Common:DeleteKeyNoAffectedRooms`; verify with `cd packages/client && pnpm exec vitest run useDeleteKeyFlow`
 - [ ] 5.2 Add dialog roles, accessible names and labelled inputs, and the aside display on narrow screens, to `packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx`, `packages/shared/dialogs/key-generation/*`, `packages/shared/dialogs/key-recovery/*`, `packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx` and the keys-management modals; verify with jest-dom role queries in the shared dialog tests (`cd packages/shared && pnpm exec vitest run dialogs`)
 - [ ] 5.3 Refresh the keys-management Playwright screenshots and run `cd packages/client && pnpm exec playwright test keys-management.spec.ts keys-management-advanced.spec.ts`; verify they pass on desktop and the mobile project
 - [ ] 5.4 Translate the new keys from groups 4 and 5 (`translate-comments`, `translate-locales`) and rerun `cd common/tests && npx vitest run test/locales.test.js`

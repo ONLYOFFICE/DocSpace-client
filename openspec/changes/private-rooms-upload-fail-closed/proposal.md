@@ -8,7 +8,7 @@ Four client paths let data leave or enter a private room in a form the room's en
 
 - An upload into a private room MUST fail closed when the current user has no usable encryption key: the item is marked as failed with a localized reason and no bytes are sent. The shared gate helper that today returns "do not encrypt" for a key-less user returns "refuse" instead, and the upload-gate test that asserts the plaintext fallback is inverted.
 - Folder trees dropped onto a private room are refused the same way the "Upload folder" button and Shift+U are, with a localized explanation.
-- Ctrl+C / Ctrl+X / Ctrl+V between folders route through the same private-room transfer rules as drag-and-drop and the copy/move dialog: transfer into a private room is refused, folders cannot leave, files leaving are decrypted on the client, same-room copies get a suffix.
+- Ctrl+X / Ctrl+V between folders route through the same private-room transfer rules as drag-and-drop and the copy/move dialog: transfer into a private room is refused, folders cannot leave, files leaving are decrypted on the client, a cut and paste within the same private room stays a server-side move. Ctrl+C cannot take items out of a private room at all: the server reports Copy as denied there (server products/ASC.Files/Core/Core/Security/FileSecurity.cs, private-room action denials), so the clipboard stays empty.
 - "Move" out of a private room deletes the source after every decrypted copy succeeded; a partial failure leaves the failed sources in place and reports them.
 - **BREAKING** for users relying on the current behaviour: a key-less member can no longer add files to a private room at all.
 
@@ -28,7 +28,7 @@ Four client paths let data leave or enter a private room in a form the room's en
 - Shared: the upload encryption gate helper and its tests under `packages/shared/services/private-room`.
 - Locale: new `Common` keys (upload refused without key, upload refused when locked, folder drop refused, move partially failed), translated to all 31 languages in the same change.
 - Tests: unit tests for the gate, the hotkey paste path and the move-out path; E2E in `packages/client/__tests__/private-room-access.spec.ts` for the refused upload.
-- Server: no change. The server does not reject plaintext uploads into private rooms today (see `private-rooms/server-contract`); a server-side guard is tracked in `private-rooms-server-hardening`.
+- Server: no change. The server does not reject plaintext uploads into private rooms today (see `private-rooms/server-contract`); a server-side refusal of plaintext written into a private room (uploads and conversion copy-as output) is an open decision in `private-rooms-server-hardening`, not yet a requirement there.
 
 ## Out of scope
 

@@ -52,7 +52,7 @@ The system SHALL, when files are copied or moved out of a private room, decrypt 
 - **THEN** no file is transferred and no source is deleted
 
 ### Requirement: Clipboard hotkeys follow the private-room transfer rules
-The system SHALL apply the private-room transfer rules to Ctrl+C, Ctrl+X and Ctrl+V exactly as to drag-and-drop and the copy/move dialog: transfer into a private room is refused, folders cannot leave a private room, files leaving are decrypted on the client, and files pasted inside the same private room are copied with a suffix.
+The system SHALL apply the private-room transfer rules to Ctrl+X and Ctrl+V exactly as to drag-and-drop and the copy/move dialog: transfer into a private room is refused, folders cannot leave a private room, files leaving are decrypted on the client, and items cut and pasted inside the same private room are moved by the server without decryption. Ctrl+C puts no private-room item on the clipboard, because the server denies copying them.
 
 #### Scenario: Paste with hotkey
 - **WHEN** items copied from a non-private location are pasted with Ctrl+V into a private room
@@ -67,8 +67,12 @@ The system SHALL apply the private-room transfer rules to Ctrl+C, Ctrl+X and Ctr
 - **THEN** the folder is not transferred and Common:CannotTransferFolderFromPrivateRoom is shown
 
 #### Scenario: Paste within the same private room
-- **WHEN** encrypted files are copied and pasted into a subfolder of the same private room
-- **THEN** the existing same-room copy path runs and no decryption to plaintext happens
+- **WHEN** encrypted files are cut with Ctrl+X and pasted into a subfolder of the same private room
+- **THEN** the server moves them in place and no decryption to plaintext happens
+
+#### Scenario: Copy hotkey inside a private room
+- **WHEN** the user presses Ctrl+C on items in a private room
+- **THEN** nothing is added to the clipboard
 
 ## RENAMED Requirements
 

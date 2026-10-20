@@ -5,9 +5,10 @@
 - [ ] 1.1 Make `addMembersToEncryptedRoom` in `packages/shared/services/private-room/room-encryption.ts` return, per invitee, the set of file ids that could not be wrapped in addition to the skipped list; verify with new cases in `packages/shared/services/private-room/__tests__/room-encryption.test.ts`.
 - [ ] 1.2 Add a `rewrapMissingFilesForMember(roomId, userId, fileIds)` helper that re-runs the wrap for a given file subset; verify with a unit test in the same file and an MSW integration case in `room-encryption.integration.test.ts`.
 
-## 2. Invite panel wraps before granting
+## 2. Invite panel order and result view
 
-- [ ] 2.1 In `packages/client/src/components/panels/InvitePanel/index.js` run the re-encryption for the verified invitees first and send the room security update only for invitees whose wraps were written; verify with a unit test on the send handler asserting call order and the filtered invitee list.
+- [ ] 2.0 Decide the order of grant and wrap (design.md decision 1 and Open Questions): grant-first with pending-access state, wrap-first after a server change to the access-entry authorization, or a transactional grant-and-keys endpoint; wrap-first without a server change is refused by today's server. Verified by the decision and its date recorded in design.md, and, for a server option, a task added to `private-rooms-server-hardening`.
+- [ ] 2.1 BLOCKED on 2.0. In `packages/client/src/components/panels/InvitePanel/index.js` implement the chosen order, leaving skipped invitees out of the security update in every option (the server fails the update at an invitee who never registered a key, after earlier invitees may already have been added); verify with a unit test on the send handler asserting the call order of the chosen option and the filtered invitee list.
 - [ ] 2.2 Replace the close-on-send with a result view (granted / pending / skipped with Common:EncryptedSkippedNoKeys or Common:EncryptedSkippedKeyMismatch) for private rooms, keeping the current close for other rooms; verify with a component test and the E2E `packages/client/__tests__/private-room-invite.spec.ts`.
 - [ ] 2.3 Add the Common keys `EncryptedAccessPending`, `EncryptedAccessRestored`, `EncryptedInviteResultTitle` (and any button labels) to `public/locales/en/Common.json`, run `/translate-comments` and `/translate-locales`, and verify `cd common/tests && npx vitest run test/locales.test.js` passes.
 
@@ -28,5 +29,5 @@
 
 ## Workflow follow-up
 
-- If the transactional server endpoint is chosen later, open a follow-up change against `private-rooms/server-contract` instead of extending this one.
+- If a server option is chosen in 2.0, record it against `private-rooms/server-contract` (in `private-rooms-server-hardening` or a follow-up change) instead of extending this one.
 - Archive with `/opsx:archive private-rooms-invite-atomic-rewrap` after review.

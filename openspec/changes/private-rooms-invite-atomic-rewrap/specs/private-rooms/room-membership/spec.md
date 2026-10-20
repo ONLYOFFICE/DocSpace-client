@@ -3,19 +3,19 @@
 ## MODIFIED Requirements
 
 ### Requirement: Invited members receive re-wrapped file keys
-The system SHALL, before sending the room security update, wrap the key of every encrypted file in the room for each newly invited member whose encryption key passes verification, showing re-encryption progress, and SHALL send the security update only for invitees whose wraps were written. A best-effort backfill for earlier members whose keys were registered late SHALL run afterwards.
+The system SHALL wrap the key of every encrypted file in the room for each newly invited member whose encryption key passes verification, showing re-encryption progress, so that every granted invitee either holds an access entry for every encrypted file or is shown as pending access. A best-effort backfill for earlier members whose keys were registered late SHALL run afterwards.
 
 #### Scenario: All invitees have verified keys
 - **WHEN** invitations are sent to members with registered, verified keys
-- **THEN** every encrypted file in the room gains an access entry for each invitee, then the security update grants them access, and Common:UsersInvited is shown
+- **THEN** each invitee is granted access, every encrypted file in the room gains an access entry for each of them, and Common:UsersInvited is shown
 
 #### Scenario: Order of operations
-- **WHEN** the re-encryption for an invitee has not completed
-- **THEN** the room security update for that invitee has not been sent yet
+- **WHEN** an invitation to a private room completes, whichever of the security update and the re-encryption ran first
+- **THEN** each granted invitee holds an access entry for every encrypted file in the room or is shown as pending access
 
 #### Scenario: Re-encryption aborted
 - **WHEN** the inviter closes the panel or the unlock is cancelled during re-encryption
-- **THEN** no security update is sent for invitees whose wraps were not written, and the access entries already written stay in place
+- **THEN** no invitee is left as a room member without either an access entry for every encrypted file or the pending-access marker, and the access entries already written stay in place
 
 ### Requirement: Invitees without usable keys are skipped with a warning
 The system SHALL skip an invitee who has no encryption key or whose key changed and was refused, SHALL NOT grant them room access, and SHALL list them inline in the invite panel with the reason (Common:EncryptedSkippedNoKeys or Common:EncryptedSkippedKeyMismatch) and an option to invite them again later.

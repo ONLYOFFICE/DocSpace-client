@@ -18,7 +18,7 @@
 
 ## 4. Integration check
 
-- [ ] 4.1 Add an E2E case to `packages/client/__tests__/private-room-cross-user-download.spec.ts` (or a new `private-room-tofu.spec.ts`) where the mocked server changes a member key before an upload and the key-change dialog appears; verify with `cd packages/client && pnpm exec playwright test`.
+- [x] 4.1 Add an E2E case to `packages/client/__tests__/private-room-cross-user-download.spec.ts` (or a new `private-room-tofu.spec.ts`) where the mocked server changes a member key before an upload and the key-change dialog appears; verify with `cd packages/client && pnpm exec playwright test`.
 - [ ] 4.2 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `pnpm run test`, `pnpm run test:client`) and confirm `npx -y @fission-ai/openspec@latest validate private-rooms-tofu-on-upload --strict` passes.
 
 ## Workflow follow-up

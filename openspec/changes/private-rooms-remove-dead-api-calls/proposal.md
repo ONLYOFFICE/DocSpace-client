@@ -17,10 +17,12 @@ contract tests cannot mirror routes that do not exist.
   wraps it, together with the legacy `isEncryptionSupport` plumbing in the
   client shell that only this request fed.
 - Remove the privacy settings read and write requests and their types.
-- Decide the fate of the legacy desktop encryption path: either point the
-  desktop file-access call at the room access route that exists
-  (`privacyroom/{roomId}/access`) and keep the desktop bridge, or drop the
-  desktop bridge entirely. The specs below assume the first option.
+- Decide the fate of the legacy desktop encryption path: keep the desktop
+  bridge and point its file-access call at a route that exists, either the
+  per-file `files/file/{fileId}/publickeys` (the server-side successor of the
+  removed per-file call, which locates the room itself) or the room route
+  `privacyroom/{roomId}/access`, or drop the bridge entirely. The specs below
+  assume the bridge is kept and leave the route open.
 - Delete the matching MSW handlers and contract-test entries, if any, and
   update the server-contract spec so it no longer lists routes the client
   does not call.
@@ -38,7 +40,8 @@ None.
   surface matches the server routes.
 - `private-rooms/editor-integration`: the requirement "Legacy desktop path
   uses editor-provided keys" changes so the desktop bridge resolves file keys
-  through the room access route instead of a per-file route.
+  through a route the server exposes instead of the removed
+  `privacyroom/access/{fileId}`.
 
 ## Impact
 
@@ -58,8 +61,11 @@ None.
 
 ## Decisions needed
 
-1. Keep or drop the legacy desktop encryption bridge. Recommendation: keep
-   it and route it through `privacyroom/{roomId}/access`, because the desktop
-   editors still ship the encryption plugin and the room id is available from
-   the file's parent chain. If the desktop bridge is dropped instead, the
+1. Keep or drop the legacy desktop encryption bridge, and if kept, which
+   route it uses (open). The earlier recommendation (room route resolved from
+   the file's parent chain) assumed no per-file route existed; the server has
+   `GET files/file/{fileId}/publickeys`, which needs no room lookup. The two
+   routes differ: the per-file one lists the users who hold the file and
+   tolerates a caller without keys, the room one lists room members and
+   refuses such a caller. If the desktop bridge is dropped instead, the
    editor-integration delta becomes a REMOVED requirement.

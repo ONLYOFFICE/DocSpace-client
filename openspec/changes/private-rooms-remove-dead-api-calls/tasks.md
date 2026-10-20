@@ -8,7 +8,8 @@
 
 ## 2. Desktop bridge
 
-- [ ] 2.1 Resolve the room id from the file's parent chain in `packages/doceditor/src/utils/initDesktop.ts` and `packages/shared/utils/desktop.ts`, and call the room access request instead of the per-file one; verify with a doceditor unit test that asserts the room route is requested for a file in a subfolder
+- [ ] 2.0 Decide the desktop bridge route (design.md decision 2 and Open Questions): per-file `files/file/{fileId}/publickeys`, room `privacyroom/{roomId}/access` resolved from the parent chain, or drop the bridge; verified by the decision and its date recorded in design.md
+- [ ] 2.1 BLOCKED on 2.0. In `packages/doceditor/src/utils/initDesktop.ts` and `packages/shared/utils/desktop.ts` replace the removed per-file privacy call with the chosen route (for the room route, resolve the room id from the file's parent chain); verify with a doceditor unit test that asserts the chosen route is requested for a file in a subfolder
 - [ ] 2.2 Smoke-test the desktop editor against a private room (manual, desktop build) and record the result in this change's README.md
 
 ## 3. Specs and gate

@@ -7,7 +7,7 @@ The client SHALL NOT keep request functions for private-room routes the server d
 
 #### Scenario: Privacy availability removed
 - **WHEN** the client API modules are inspected
-- **THEN** no request targets the privacy availability route, the privacy settings route or a per-file privacy access route
+- **THEN** no request targets the privacy availability route, the privacy settings route or the legacy per-file privacy access route under `privacyroom`
 
 #### Scenario: New private-room request added
 - **WHEN** a developer adds a private-room request to the client API modules
@@ -16,5 +16,5 @@ The client SHALL NOT keep request functions for private-room routes the server d
 ## REMOVED Requirements
 
 ### Requirement: Client calls without a server route
-**Reason**: The three dead requests are deleted; the desktop path is redirected to the room access route that exists.
-**Migration**: Delete the request functions and their callers; the desktop bridge resolves keys through the room access route as specified in `private-rooms/editor-integration`.
+**Reason**: The three dead requests are deleted; the desktop path is redirected to a key route that exists.
+**Migration**: Delete the request functions and their callers; the desktop bridge resolves keys through an existing key route as specified in `private-rooms/editor-integration`.

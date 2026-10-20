@@ -138,13 +138,21 @@ export async function wrapForSelfThenRoomImpl(
       fileId,
     });
     await setFileEncryptionKeys(fileId, ownWraps);
-    return await self.encryptKeysForRoomMembers(
-      fileId,
-      currentUserId,
-      roomId,
-      dek,
-      identity,
+    // Spec: private-rooms/encryption-core, "File access list holds one wrap per member".
+    const fanOut = () =>
+      self.encryptKeysForRoomMembers(
+        fileId,
+        currentUserId,
+        roomId,
+        dek,
+        identity,
+      );
+    const result = self.memberFanOutChain.then(fanOut, fanOut);
+    self.memberFanOutChain = result.then(
+      () => undefined,
+      () => undefined,
     );
+    return await result;
   } finally {
     wipeDek(dek);
   }

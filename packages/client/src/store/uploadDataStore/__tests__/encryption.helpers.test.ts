@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import "../../filesStore/__tests__/testHarness";
 
 import {
@@ -39,7 +39,9 @@ import {
   encryptKeysForRoomMembersImpl,
   ensureEncryptionUnlockedForBatchImpl,
   reportSkippedMembersImpl,
+  wrapForSelfThenRoomImpl,
 } from "../encryption.helpers";
+import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import i18n from "SRC_DIR/i18n";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getUserById } from "@docspace/shared/api/people";
@@ -250,6 +252,91 @@ describe("encryptKeysForRoomMembersImpl", () => {
     const pinned = await getTofuStore("user-1").getKeys("alice");
     expect(pinned.map((k) => k.publicKey)).toEqual(["pk-alice"]);
     expect(vi.mocked(setFileEncryptionKeys)).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("wrapForSelfThenRoomImpl", () => {
+  const identity = {
+    publicKey: new Uint8Array(32).fill(1),
+    privateKey: new Uint8Array(32).fill(2),
+  } as IdentityKeyPair;
+  const memberKey = (userId: string, publicKey: string) => ({
+    id: `${userId}-key`,
+    userId,
+    publicKey,
+    privateKeyEnc: "",
+    date: "2026-01-01T00:00:00",
+  });
+  let waiting: Array<(d: "accept" | "refuse") => void>;
+  let handler: ReturnType<typeof vi.fn>;
+
+  beforeEach(async () => {
+    resetTofuStores();
+    unregisterKeyMismatchHandler();
+    SecretStorage.cacheUnlocked("user-1", identity);
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      fileKeys: [{ userId: "user-1", publicKeyId: "key-1", privateKeyEnc: "own" }],
+    } as never);
+    vi.mocked(setFileEncryptionKeys).mockResolvedValue(undefined as never);
+    // Real base64, so a pinned key compares equal to itself after accept.
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
+      memberKey("bob", btoa("bob-swapped")),
+    ] as never);
+    await getTofuStore("user-1").checkKey("bob", btoa("bob-pinned"));
+    waiting = [];
+    handler = vi.fn(
+      () =>
+        new Promise<"accept" | "refuse">((resolve) => {
+          waiting.push(resolve);
+        }),
+    );
+    registerKeyMismatchHandler(handler as never);
+  });
+
+  afterEach(() => {
+    SecretStorage.lock();
+    unregisterKeyMismatchHandler();
+  });
+
+  const startTwo = () => {
+    const { store } = createTestUploadDataStore();
+    const first = wrapForSelfThenRoomImpl(
+      store, 555, "user-1", "pk-base64-1", "key-1", new Uint8Array([1]), 7,
+    );
+    const second = wrapForSelfThenRoomImpl(
+      store, 556, "user-1", "pk-base64-1", "key-1", new Uint8Array([2]), 7,
+    );
+    return { store, first, second };
+  };
+
+  it("Batch meets one changed key: two fan-outs ask once and both files get the wrap on accept", async () => {
+    const { first, second } = startTwo();
+
+    await vi.waitFor(() => expect(handler).toHaveBeenCalledTimes(1));
+    waiting[0]("accept");
+    const results = await Promise.all([first, second]);
+
+    expect(handler).toHaveBeenCalledTimes(1);
+    expect(results).toEqual([[], []]);
+    const memberWrites = vi
+      .mocked(setFileEncryptionKeys)
+      .mock.calls.filter(([, keys]) =>
+        (keys as { userId: string }[]).some((k) => k.userId === "bob"),
+      )
+      .map(([fileId]) => fileId);
+    expect(memberWrites.sort()).toEqual([555, 556]);
+  });
+
+  it("Unanswered request is not a refusal: nothing is remembered while the dialog waits", async () => {
+    const { store, first, second } = startTwo();
+
+    await vi.waitFor(() => expect(handler).toHaveBeenCalledTimes(1));
+    expect(store.memberKeyRefusals.size).toBe(0);
+
+    waiting[0]("accept");
+    await Promise.all([first, second]);
+
+    expect(store.memberKeyRefusals.size).toBe(0);
   });
 });
 

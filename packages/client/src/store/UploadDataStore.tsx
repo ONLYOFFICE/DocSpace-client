@@ -270,6 +270,9 @@ class UploadDataStore {
   /** Members already reported as left out of an upload this session. */
   reportedSkippedMemberIds = new Set<string>();
 
+  /** Member fan-outs run one at a time; this is the tail of the chain. */
+  memberFanOutChain: Promise<void> = Promise.resolve();
+
   uploadedFilesHistory: TUploadFile[] = [];
 
   displayedConversionFiles: TConversionFile[] = [];
@@ -332,7 +335,7 @@ class UploadDataStore {
     aiRoomStore: AiRoomStore,
     userStore: UserStore,
   ) {
-    makeAutoObservable(this);
+    makeAutoObservable(this, { memberFanOutChain: false });
     this.settingsStore = settingsStore;
     this.treeFoldersStore = treeFoldersStore;
     this.selectedFolderStore = selectedFolderStore;

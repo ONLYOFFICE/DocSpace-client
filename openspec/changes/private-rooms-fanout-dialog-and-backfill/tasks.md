@@ -9,7 +9,7 @@ Every task below is committed on its own (see "Commits" in `openspec/config.yaml
 
 ## 2. Client fan-out runs one at a time
 
-- [ ] 2.1 Chain the member fan-out of `wrapForSelfThenRoomImpl` (`packages/client/src/store/uploadDataStore/encryption.helpers.ts`) on a store-level promise in `packages/client/src/store/UploadDataStore.tsx`, keeping the uploader's self-wrap immediate; verify with new cases in `packages/client/src/store/uploadDataStore/__tests__/encryption.helpers.test.ts` where two fan-outs start concurrently with the same changed key and the resolver is called once, both files get the wrap on accept, and nothing is added to `memberKeyRefusals` ("Batch meets one changed key", "Unanswered request is not a refusal")
+- [x] 2.1 Chain the member fan-out of `wrapForSelfThenRoomImpl` (`packages/client/src/store/uploadDataStore/encryption.helpers.ts`) on a store-level promise in `packages/client/src/store/UploadDataStore.tsx`, keeping the uploader's self-wrap immediate; verify with new cases in `packages/client/src/store/uploadDataStore/__tests__/encryption.helpers.test.ts` where two fan-outs start concurrently with the same changed key and the resolver is called once, both files get the wrap on accept, and nothing is added to `memberKeyRefusals` ("Batch meets one changed key", "Unanswered request is not a refusal")
 - [ ] 2.2 Confirm `packages/client/src/store/uploadDataStore/__tests__/UploadDataStore.encryption.test.ts` still passes with the chained fan-out and extend the batch cancel case if the chain changes its order; verify with `cd packages/client && pnpm exec vitest run src/store/uploadDataStore`
 
 ## 3. Caller-only access reads

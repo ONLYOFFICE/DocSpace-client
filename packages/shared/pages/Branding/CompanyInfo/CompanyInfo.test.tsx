@@ -64,9 +64,10 @@ const defaultProps = {
   isLoading: false,
   companyInfoSettingsIsDefault: false,
   deviceType: DeviceType.desktop,
-  termsOfUseUrl: "https://example.com/terms",
-  privacyPolicyUrl: "https://example.com/privacy",
+  licenseAgreementsUrl: "https://example.com",
+  isEnterprise: true,
   logoText: "ONLYOFFICE",
+  standalone: true,
   buildVersionInfo: {
     version: "",
     buildDate: "",

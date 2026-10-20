@@ -48,8 +48,10 @@ export const AboutDialog = ({
   buildVersionInfo,
   previewData,
   companyInfoSettingsData,
-  termsOfUseUrl,
+  standalone,
+  licenseAgreementsUrl,
   privacyPolicyUrl,
+  isEnterprise,
   logoText,
 }: IDialogProps) => {
   const { t, ready } = useTranslation("Common");
@@ -69,8 +71,10 @@ export const AboutDialog = ({
             buildVersionInfo={buildVersionInfo}
             previewData={previewData}
             companyInfoSettingsData={companyInfoSettingsData}
-            termsOfUseUrl={termsOfUseUrl}
+            standalone={standalone}
+            licenseAgreementsUrl={licenseAgreementsUrl}
             privacyPolicyUrl={privacyPolicyUrl}
+            isEnterprise={isEnterprise}
             logoText={logoText}
           />
         </div>

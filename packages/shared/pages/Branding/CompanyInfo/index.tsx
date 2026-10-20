@@ -64,8 +64,10 @@ export const CompanyInfo = ({
 	displayAbout,
 	isBrandingAvailable,
 	buildVersionInfo,
-	termsOfUseUrl,
+	standalone,
+	licenseAgreementsUrl,
 	privacyPolicyUrl,
+	isEnterprise,
 	logoText,
 }: ICompanyInfo) => {
 	const { t } = useTranslation("Common");
@@ -131,8 +133,10 @@ export const CompanyInfo = ({
 				buildVersionInfo={buildVersionInfo}
 				previewData={companySettings}
 				companyInfoSettingsData={companySettings}
-				termsOfUseUrl={termsOfUseUrl}
+				standalone={standalone}
+				licenseAgreementsUrl={licenseAgreementsUrl}
 				privacyPolicyUrl={privacyPolicyUrl}
+				isEnterprise={isEnterprise}
 				logoText={logoText}
 			/>
 			<div

@@ -52,8 +52,10 @@ export interface ICompanyInfo {
   displayAbout: boolean;
   isBrandingAvailable: boolean;
   buildVersionInfo: IBuildInfo;
-  termsOfUseUrl?: string;
+  standalone: boolean;
+  licenseAgreementsUrl: string;
   privacyPolicyUrl?: string;
+  isEnterprise: boolean;
   logoText: string;
 }
 

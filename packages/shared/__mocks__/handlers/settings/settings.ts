@@ -113,7 +113,6 @@ export const settingsWizzard = {
           license:
             "https://help.onlyoffice.co/Products/Files/DocEditor.aspx?fileid=9318110&doc=S2RPck54RXJsd09QaTZiaFJvUWRwNjNaNE8rTE9LV3hnZmdoSm5Lcm94az0_IntcImVudHJ5XCI6XCI5MzE4MTEwXCIsXCJsaW5rXCI6XCJkOGVjZjdmMy1mY2E1LTQxZDYtYmM2Yi1kNDI4Mzk0YTNlMTdcIn0i0",
           paymentemail: "sales@onlyoffice.com",
-          privacy: "https://www.onlyoffice.com/Privacy.aspx",
           supportemail: "support@onlyoffice.com",
         },
       },
@@ -270,7 +269,6 @@ export const settingsNoAuth = {
           license:
             "https://help.onlyoffice.co/Products/Files/DocEditor.aspx?fileid=9318110&doc=S2RPck54RXJsd09QaTZiaFJvUWRwNjNaNE8rTE9LV3hnZmdoSm5Lcm94az0_IntcImVudHJ5XCI6XCI5MzE4MTEwXCIsXCJsaW5rXCI6XCJkOGVjZjdmMy1mY2E1LTQxZDYtYmM2Yi1kNDI4Mzk0YTNlMTdcIn0i0",
           paymentemail: "sales@onlyoffice.com",
-          privacy: "https://www.onlyoffice.com/Privacy.aspx",
           supportemail: "support@onlyoffice.com",
         },
       },
@@ -563,7 +561,6 @@ export const settingsNoAuthNoStandalone = {
           license:
             "https://help.onlyoffice.co/Products/Files/DocEditor.aspx?fileid=9318110&doc=S2RPck54RXJsd09QaTZiaFJvUWRwNjNaNE8rTE9LV3hnZmdoSm5Lcm94az0_IntcImVudHJ5XCI6XCI5MzE4MTEwXCIsXCJsaW5rXCI6XCJkOGVjZjdmMy1mY2E1LTQxZDYtYmM2Yi1kNDI4Mzk0YTNlMTdcIn0i0",
           paymentemail: "sales@onlyoffice.com",
-          privacy: "https://www.onlyoffice.com/Privacy.aspx",
           supportemail: "support@onlyoffice.com",
         },
       },

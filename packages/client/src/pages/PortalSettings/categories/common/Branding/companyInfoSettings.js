@@ -63,8 +63,10 @@ const CompanyInfoSettingsComponent = (props) => {
     buildVersionInfo,
     deviceType,
     getCompanyInfoSettings,
-    termsOfUseUrl,
+    standalone,
+    licenseAgreementsUrl,
     privacyPolicyUrl,
+    isEnterprise,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -131,10 +133,12 @@ const CompanyInfoSettingsComponent = (props) => {
       isLoading={isLoading}
       companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
       buildVersionInfo={buildVersionInfo}
-      termsOfUseUrl={termsOfUseUrl}
+      standalone={standalone}
+      licenseAgreementsUrl={licenseAgreementsUrl}
       privacyPolicyUrl={privacyPolicyUrl}
       isBrandingAvailable={isBrandingAvailable}
       displayAbout={displayAbout}
+      isEnterprise={isEnterprise}
     />
   );
 };
@@ -144,6 +148,7 @@ export const CompanyInfoSettings = inject(
     settingsStore,
     brandingStore,
     currentQuotaStore,
+    currentTariffStatusStore,
   }) => {
     const {
       setIsLoadedCompanyInfoSettingsData,
@@ -158,11 +163,14 @@ export const CompanyInfoSettings = inject(
       deviceType,
       getCompanyInfoSettings,
       displayAbout,
-      termsOfUseUrl,
+      standalone,
+      licenseAgreementsUrl,
       privacyPolicyUrl,
     } = settingsStore;
 
     const { isCustomizationAvailable, isBrandingAvailable } = currentQuotaStore;
+
+    const { isEnterprise } = currentTariffStatusStore;
 
     const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
@@ -177,8 +185,10 @@ export const CompanyInfoSettings = inject(
       deviceType,
       displayAbout,
       getCompanyInfoSettings,
-      termsOfUseUrl,
+      standalone,
+      licenseAgreementsUrl,
       privacyPolicyUrl,
+      isEnterprise,
     };
   },
 )(

@@ -260,7 +260,6 @@ export type TCommonEntries = {
   documentationemail: string;
   legalterms: string;
   license: string;
-  privacy?: string;
   paymentemail: string;
   supportemail: string;
   feedback: string;

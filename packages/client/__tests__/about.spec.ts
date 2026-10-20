@@ -39,6 +39,7 @@ import type { Page } from "@playwright/test";
 import {
   buildHandler,
   settingsHandler,
+  tariffHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
 import { buildSuccess } from "@docspace/shared/__mocks__/handlers/settings/build";
@@ -53,12 +54,14 @@ import { PAID_NOW } from "./helpers/billing";
 /**
  * About this program, on a server and on SaaS.
  *
- * Every edition shares one layout: the logo with "Terms of use | Privacy
- * Policy" next to it, Docs and Apps as linked columns with their versions,
- * then the company block. There is no software license line any more.
+ * Both share one layout: the logo with a legal line next to it, Docs and Apps
+ * as linked columns with their versions, then the company block.
  *
- * - A legal page without a URL in external resources is left out, together
- *   with the separator (servers ship no privacy entry today).
+ * - SaaS puts "Terms of use | Privacy Policy" next to the logo. They are the
+ *   same two external resource entries the sign-up page links: `license` is
+ *   the terms, `legalterms` the privacy statement.
+ * - A server shows its software license there instead: AGPL-3.0 as plain text
+ *   on Community, a "Commercial" link to `license` on Enterprise.
  * - AI Tools (a closed product: no link, a BETA badge) is listed only when the
  *   build API reports its version; without it the column is not rendered.
  *
@@ -67,37 +70,36 @@ import { PAID_NOW } from "./helpers/billing";
 
 const MOBILE = { width: 390, height: 844 };
 const AI_TOOLS_VERSION = "1.0.95.508";
-const PRIVACY_POLICY_URL = "https://www.onlyoffice.com/Privacy.aspx";
+
+const { entries } = (
+  settingsAuth.response as unknown as {
+    externalResources: { common: { entries: Record<string, string> } };
+  }
+).externalResources.common;
 
 type AboutCase = {
   name: string;
   isSaas: boolean;
+  /** Server only: the software license shown next to the logo. */
+  license?: { label: string; isLink: boolean };
   /** Version the build API reports for AI Tools; absent = not deployed. */
   aiTools?: string;
-  /** External resources carry no privacy entry. */
-  withoutPrivacy?: boolean;
 };
 
 const CASES: AboutCase[] = [
-  { name: "server", isSaas: false },
-  { name: "server-without-privacy", isSaas: false, withoutPrivacy: true },
+  {
+    name: "community",
+    isSaas: false,
+    license: { label: "AGPL-3.0", isLink: false },
+  },
+  {
+    name: "enterprise",
+    isSaas: false,
+    license: { label: "Commercial", isLink: true },
+  },
   { name: "saas", isSaas: true, aiTools: AI_TOOLS_VERSION },
   { name: "saas-without-ai-tools", isSaas: true },
 ];
-
-const externalResourcesWithoutPrivacy = () => {
-  const { externalResources } = settingsAuth.response as unknown as {
-    externalResources: {
-      common: { entries: Record<string, string> };
-    };
-  };
-  const { privacy: _privacy, ...entries } = externalResources.common.entries;
-
-  return {
-    ...externalResources,
-    common: { ...externalResources.common, entries },
-  };
-};
 
 const useCase = (mockRequest: WorkerFixture, about: AboutCase) => {
   mockRequest.use(
@@ -106,12 +108,13 @@ const useCase = (mockRequest: WorkerFixture, about: AboutCase) => {
       about.isSaas
         ? TypeSettings.AuthenticatedNoStandalone
         : TypeSettings.Authenticated,
-      {
-        displayAbout: true,
-        ...(about.withoutPrivacy && {
-          externalResources: externalResourcesWithoutPrivacy(),
-        }),
-      },
+      { displayAbout: true },
+    ),
+    tariffHandler(
+      TEST_PORT,
+      about.name === "community",
+      false,
+      about.name === "enterprise",
     ),
     buildHandler(
       TEST_PORT,
@@ -135,21 +138,26 @@ const expectAboutContent = async (page: Page, about: AboutCase) => {
     page.getByText(buildSuccess.response.docSpace, { exact: true }),
   ).toBeVisible();
 
-  // The license line is gone in every edition.
-  await expect(page.getByText("Software license")).toHaveCount(0);
-  await expect(page.getByText("AGPL-3.0")).toHaveCount(0);
-
-  await expect(page.getByRole("link", { name: "Terms of use" })).toBeVisible();
-
+  const termsOfUse = page.getByRole("link", { name: "Terms of use" });
   const privacyPolicy = page.getByRole("link", { name: "Privacy Policy" });
-  const separator = page.getByText("|", { exact: true });
 
-  if (about.withoutPrivacy) {
+  if (about.license) {
+    const { label, isLink } = about.license;
+
+    await expect(page.getByText(label, { exact: true })).toBeVisible();
+    const licenseLink = page.getByRole("link", { name: label, exact: true });
+    if (isLink) {
+      await expect(licenseLink).toHaveAttribute("href", entries.license);
+    } else {
+      await expect(licenseLink).toHaveCount(0);
+    }
+
+    await expect(termsOfUse).toHaveCount(0);
     await expect(privacyPolicy).toHaveCount(0);
-    await expect(separator).toHaveCount(0);
   } else {
-    await expect(privacyPolicy).toHaveAttribute("href", PRIVACY_POLICY_URL);
-    await expect(separator).toBeVisible();
+    await expect(page.getByText("Software license")).toHaveCount(0);
+    await expect(termsOfUse).toHaveAttribute("href", entries.license);
+    await expect(privacyPolicy).toHaveAttribute("href", entries.legalterms);
   }
 
   const aiTools = page.getByText("AI Tools", { exact: true });

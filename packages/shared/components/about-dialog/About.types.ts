@@ -48,8 +48,12 @@ export interface IDialogProps {
   buildVersionInfo: IBuildInfo;
   previewData: TCompanyInfo;
   companyInfoSettingsData: TCompanyInfo;
-  termsOfUseUrl?: string;
+  standalone: boolean;
+  /** `entries.license`: the server license agreement, SaaS terms of use. */
+  licenseAgreementsUrl: string;
+  /** `entries.legalterms`: SaaS only. */
   privacyPolicyUrl?: string;
+  isEnterprise: boolean;
   logoText: string;
 }
 
@@ -57,7 +61,9 @@ export interface IContentProps {
   buildVersionInfo: IBuildInfo;
   companyInfoSettingsData: TCompanyInfo;
   previewData: TCompanyInfo;
-  termsOfUseUrl?: string;
+  standalone: boolean;
+  licenseAgreementsUrl: string;
   privacyPolicyUrl?: string;
+  isEnterprise: boolean;
   logoText: string;
 }

@@ -98,7 +98,8 @@ async function Page() {
     redirect(`${baseURL}/login`);
   }
 
-  const { displayAbout, standalone, logoText, externalResources } = settings;
+  const { displayAbout, standalone, licenseAgreementsUrl, logoText } = settings;
+  const { enterprise } = portalTariff;
 
   const showAbout = standalone && displayAbout;
 
@@ -119,8 +120,8 @@ async function Page() {
       additionalResources={additionalResources}
       companyInfo={companyInfo}
       buildInfo={buildInfo!}
-      termsOfUseUrl={externalResources?.common?.entries.legalterms}
-      privacyPolicyUrl={externalResources?.common?.entries.privacy}
+      licenseAgreementsUrl={licenseAgreementsUrl!}
+      isEnterprise={enterprise}
       logoText={logoText}
       isMobile={isMobile}
     />

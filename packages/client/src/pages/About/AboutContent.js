@@ -43,8 +43,10 @@ const AboutContent = (props) => {
     buildVersionInfo,
     companyInfoSettingsData,
     previewData,
-    termsOfUseUrl,
+    standalone,
+    licenseAgreementsUrl,
     privacyPolicyUrl,
+    isEnterprise,
     logoText,
     isBrandingAvailable,
   } = props;
@@ -58,25 +60,31 @@ const AboutContent = (props) => {
       buildVersionInfo={buildVersionInfo}
       companyInfoSettingsData={companyInfoSettingsData}
       previewData={previewData}
-      termsOfUseUrl={termsOfUseUrl}
+      standalone={standalone}
+      licenseAgreementsUrl={licenseAgreementsUrl}
       privacyPolicyUrl={privacyPolicyUrl}
+      isEnterprise={isEnterprise}
       logoText={logoName}
     />
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ settingsStore, currentTariffStatusStore }) => {
   const {
     companyInfoSettingsData,
-    termsOfUseUrl,
+    standalone,
+    licenseAgreementsUrl,
     privacyPolicyUrl,
     logoText,
   } = settingsStore;
+  const { isEnterprise } = currentTariffStatusStore;
 
   return {
     companyInfoSettingsData,
-    termsOfUseUrl,
+    standalone,
+    licenseAgreementsUrl,
     privacyPolicyUrl,
+    isEnterprise,
     logoText,
   };
 })(observer(AboutContent));

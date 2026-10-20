@@ -70,7 +70,9 @@ export const mockDefaultProps = {
   buildVersionInfo: mockBuildInfo,
   previewData: mockCompanyInfo,
   companyInfoSettingsData: mockCompanyInfo,
-  termsOfUseUrl: "https://www.example.com/terms",
+  standalone: false,
+  licenseAgreementsUrl: "https://www.example.com/license-agreements",
   privacyPolicyUrl: "https://www.example.com/privacy",
+  isEnterprise: false,
   logoText: "Company Name",
 };

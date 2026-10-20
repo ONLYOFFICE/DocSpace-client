@@ -54,8 +54,10 @@ export const AboutContent = ({
   buildVersionInfo,
   companyInfoSettingsData,
   previewData,
-  termsOfUseUrl,
+  standalone,
+  licenseAgreementsUrl,
   privacyPolicyUrl,
+  isEnterprise,
 }: IContentProps) => {
   const { t } = useTranslation("Common");
   const { isBase } = useTheme();
@@ -84,10 +86,18 @@ export const AboutContent = ({
 
   const secondaryColor = "var(--about-secondary-text-color)";
 
-  // Every edition links its legal pages next to the logo; a page without a
-  // configured URL is left out.
+  const isCommercial = !standalone || isEnterprise;
+  const license = isCommercial ? t("Common:Commercial") : "AGPL-3.0";
+
+  // SaaS links its legal pages next to the logo, the same two entries the
+  // sign-up page uses; a server shows its software license there instead.
+  // A page without a configured URL is left out.
   const legalLinks = [
-    { key: "terms-of-use", label: t("AboutTermsOfUse"), href: termsOfUseUrl },
+    {
+      key: "terms-of-use",
+      label: t("AboutTermsOfUse"),
+      href: licenseAgreementsUrl,
+    },
     {
       key: "privacy-policy",
       label: t("AboutPrivacyPolicy"),
@@ -140,31 +150,55 @@ export const AboutContent = ({
               "logo-docspace-theme",
             )}
           />
-          <div className={styles.license}>
-            {legalLinks.map((link, index) => (
-              <React.Fragment key={link.key}>
-                {index > 0 ? (
-                  <Text
-                    fontSize="14px"
-                    color={secondaryColor}
-                    className={styles.separator}
-                  >
-                    |
-                  </Text>
-                ) : null}
+          {standalone ? (
+            <div className={styles.license}>
+              <Text fontSize="14px" color={secondaryColor}>
+                {t("SoftwareLicense")}:
+              </Text>
+              {isCommercial ? (
                 <Link
                   tag="a"
                   fontSize="14px"
-                  href={link.href}
+                  href={licenseAgreementsUrl}
                   target={LinkTarget.blank}
                   enableUserSelect
                   color={secondaryColor}
                 >
-                  {link.label}
+                  {license}
                 </Link>
-              </React.Fragment>
-            ))}
-          </div>
+              ) : (
+                <Text fontSize="14px" color={secondaryColor}>
+                  {license}
+                </Text>
+              )}
+            </div>
+          ) : (
+            <div className={styles.license}>
+              {legalLinks.map((link, index) => (
+                <React.Fragment key={link.key}>
+                  {index > 0 ? (
+                    <Text
+                      fontSize="14px"
+                      color={secondaryColor}
+                      className={styles.separator}
+                    >
+                      |
+                    </Text>
+                  ) : null}
+                  <Link
+                    tag="a"
+                    fontSize="14px"
+                    href={link.href}
+                    target={LinkTarget.blank}
+                    enableUserSelect
+                    color={secondaryColor}
+                  >
+                    {link.label}
+                  </Link>
+                </React.Fragment>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className={styles.products} data-testid="about-products">

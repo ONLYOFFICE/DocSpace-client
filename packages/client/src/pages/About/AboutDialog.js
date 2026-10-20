@@ -45,8 +45,10 @@ const AboutDialog = (props) => {
     buildVersionInfo,
     previewData,
     companyInfoSettingsData,
-    termsOfUseUrl,
+    standalone,
+    licenseAgreementsUrl,
     privacyPolicyUrl,
+    isEnterprise,
     logoText,
   } = props;
   return (
@@ -56,25 +58,31 @@ const AboutDialog = (props) => {
       buildVersionInfo={buildVersionInfo}
       previewData={previewData}
       companyInfoSettingsData={companyInfoSettingsData}
-      termsOfUseUrl={termsOfUseUrl}
+      standalone={standalone}
+      licenseAgreementsUrl={licenseAgreementsUrl}
       privacyPolicyUrl={privacyPolicyUrl}
+      isEnterprise={isEnterprise}
       logoText={logoText}
     />
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ settingsStore, currentTariffStatusStore }) => {
   const {
     companyInfoSettingsData,
-    termsOfUseUrl,
+    standalone,
+    licenseAgreementsUrl,
     privacyPolicyUrl,
     logoText,
   } = settingsStore;
+  const { isEnterprise } = currentTariffStatusStore;
 
   return {
     companyInfoSettingsData,
-    termsOfUseUrl,
+    standalone,
+    licenseAgreementsUrl,
     privacyPolicyUrl,
+    isEnterprise,
     logoText,
   };
 })(observer(AboutDialog));

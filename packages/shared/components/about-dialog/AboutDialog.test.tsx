@@ -88,16 +88,17 @@ describe("AboutDialog", () => {
     expect(screen.getByText(mockCompanyInfo.address)).toBeInTheDocument();
   });
 
-  it("links Terms of use and Privacy Policy", () => {
+  it("links Terms of use and Privacy Policy on SaaS", () => {
     render(<AboutDialog {...testProps} />);
     expect(screen.getByText("AboutTermsOfUse").closest("a")).toHaveAttribute(
       "href",
-      mockDefaultProps.termsOfUseUrl,
+      mockDefaultProps.licenseAgreementsUrl,
     );
     expect(
       screen.getByText("AboutPrivacyPolicy").closest("a"),
     ).toHaveAttribute("href", mockDefaultProps.privacyPolicyUrl);
     expect(screen.getByText("|")).toBeInTheDocument();
+    expect(screen.queryByText("SoftwareLicense:")).not.toBeInTheDocument();
   });
 
   it("leaves out a legal page without a URL", () => {
@@ -105,6 +106,21 @@ describe("AboutDialog", () => {
     expect(screen.getByText("AboutTermsOfUse")).toBeInTheDocument();
     expect(screen.queryByText("AboutPrivacyPolicy")).not.toBeInTheDocument();
     expect(screen.queryByText("|")).not.toBeInTheDocument();
+  });
+
+  it("shows AGPL-3.0 instead of legal links on a Community server", () => {
+    render(<AboutDialog {...testProps} standalone />);
+    expect(screen.getByText("AGPL-3.0")).toBeInTheDocument();
+    expect(screen.queryByText("AboutTermsOfUse")).not.toBeInTheDocument();
+    expect(screen.queryByText("AboutPrivacyPolicy")).not.toBeInTheDocument();
+  });
+
+  it("links the commercial license on an Enterprise server", () => {
+    render(<AboutDialog {...testProps} standalone isEnterprise />);
+    expect(screen.getByText("Common:Commercial").closest("a")).toHaveAttribute(
+      "href",
+      mockDefaultProps.licenseAgreementsUrl,
+    );
   });
 
   it("renders with preview data when provided", () => {

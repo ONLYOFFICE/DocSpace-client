@@ -490,12 +490,10 @@ class SettingsStore {
     return this.externalResources?.common?.entries.license;
   }
 
-  get termsOfUseUrl() {
-    return this.externalResources?.common?.entries.legalterms;
-  }
-
+  // The sign-up page links the same two entries: `license` as the terms,
+  // `legalterms` as the privacy statement.
   get privacyPolicyUrl() {
-    return this.externalResources?.common?.entries.privacy;
+    return this.externalResources?.common?.entries.legalterms;
   }
 
   get ldapSettingsUrl() {

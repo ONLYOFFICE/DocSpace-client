@@ -39,6 +39,7 @@ export interface IBuildInfo {
   docSpace: string;
   communityServer: string;
   documentServer: string;
+  aiTools?: string;
 }
 
 export interface IDialogProps {
@@ -47,9 +48,8 @@ export interface IDialogProps {
   buildVersionInfo: IBuildInfo;
   previewData: TCompanyInfo;
   companyInfoSettingsData: TCompanyInfo;
-  standalone: boolean;
-  licenseAgreementsUrl: string;
-  isEnterprise: boolean;
+  termsOfUseUrl?: string;
+  privacyPolicyUrl?: string;
   logoText: string;
 }
 
@@ -57,8 +57,7 @@ export interface IContentProps {
   buildVersionInfo: IBuildInfo;
   companyInfoSettingsData: TCompanyInfo;
   previewData: TCompanyInfo;
-  standalone: boolean;
-  licenseAgreementsUrl: string;
-  isEnterprise: boolean;
+  termsOfUseUrl?: string;
+  privacyPolicyUrl?: string;
   logoText: string;
 }

@@ -76,8 +76,7 @@ async function Page() {
     redirect(`${baseURL}/login`);
   }
 
-  const { standalone, licenseAgreementsUrl, logoText, displayAbout } = settings;
-  const { enterprise } = portalTariff;
+  const { logoText, displayAbout, externalResources } = settings;
 
   return (
     <CompanyInfoPage
@@ -85,10 +84,9 @@ async function Page() {
       quota={quota}
       displayAbout={displayAbout}
       companyInfoSettingsData={companyInfo}
-      standalone={standalone}
-      licenseAgreementsUrl={licenseAgreementsUrl!}
+      termsOfUseUrl={externalResources?.common?.entries.legalterms}
+      privacyPolicyUrl={externalResources?.common?.entries.privacy}
       buildInfo={buildInfo!}
-      isEnterprise={enterprise}
       logoText={logoText}
     />
   );

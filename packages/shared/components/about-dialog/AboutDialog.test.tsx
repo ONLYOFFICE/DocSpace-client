@@ -88,15 +88,23 @@ describe("AboutDialog", () => {
     expect(screen.getByText(mockCompanyInfo.address)).toBeInTheDocument();
   });
 
-  it("renders in standalone mode", () => {
-    const standaloneProps = {
-      ...testProps,
-      standalone: true,
-      isEnterprise: false,
-    };
+  it("links Terms of use and Privacy Policy", () => {
+    render(<AboutDialog {...testProps} />);
+    expect(screen.getByText("AboutTermsOfUse").closest("a")).toHaveAttribute(
+      "href",
+      mockDefaultProps.termsOfUseUrl,
+    );
+    expect(
+      screen.getByText("AboutPrivacyPolicy").closest("a"),
+    ).toHaveAttribute("href", mockDefaultProps.privacyPolicyUrl);
+    expect(screen.getByText("|")).toBeInTheDocument();
+  });
 
-    render(<AboutDialog {...standaloneProps} />);
-    expect(screen.getByText("AGPL-3.0")).toBeInTheDocument();
+  it("leaves out a legal page without a URL", () => {
+    render(<AboutDialog {...testProps} privacyPolicyUrl={undefined} />);
+    expect(screen.getByText("AboutTermsOfUse")).toBeInTheDocument();
+    expect(screen.queryByText("AboutPrivacyPolicy")).not.toBeInTheDocument();
+    expect(screen.queryByText("|")).not.toBeInTheDocument();
   });
 
   it("renders with preview data when provided", () => {

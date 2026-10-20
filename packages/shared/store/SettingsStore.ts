@@ -490,6 +490,14 @@ class SettingsStore {
     return this.externalResources?.common?.entries.license;
   }
 
+  get termsOfUseUrl() {
+    return this.externalResources?.common?.entries.legalterms;
+  }
+
+  get privacyPolicyUrl() {
+    return this.externalResources?.common?.entries.privacy;
+  }
+
   get ldapSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.ldap
       ? `${this.helpCenterDomain}${this.helpCenterEntries.ldap}`

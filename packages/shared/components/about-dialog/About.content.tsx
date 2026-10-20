@@ -44,6 +44,8 @@ import { getLogoUrl } from "../../utils";
 import { WhiteLabelLogoType } from "../../enums";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
+import { BetaBadge } from "../beta-badge";
+
 import { IContentProps } from "./About.types";
 import styles from "./About.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
@@ -52,15 +54,11 @@ export const AboutContent = ({
   buildVersionInfo,
   companyInfoSettingsData,
   previewData,
-  standalone,
-  licenseAgreementsUrl,
-  isEnterprise,
-  logoText,
+  termsOfUseUrl,
+  privacyPolicyUrl,
 }: IContentProps) => {
   const { t } = useTranslation("Common");
   const { isBase } = useTheme();
-  const isCommercial = !standalone || isEnterprise;
-  const license = isCommercial ? t("Common:Commercial") : "AGPL-3.0";
   const linkRepo = "https://github.com/ONLYOFFICE/DocSpace";
   const linkDocs = "https://github.com/ONLYOFFICE/DocumentServer";
 
@@ -84,10 +82,55 @@ export const AboutContent = ({
 
   const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !isBase, true);
 
+  const secondaryColor = "var(--about-secondary-text-color)";
+
+  // Every edition links its legal pages next to the logo; a page without a
+  // configured URL is left out.
+  const legalLinks = [
+    { key: "terms-of-use", label: t("AboutTermsOfUse"), href: termsOfUseUrl },
+    {
+      key: "privacy-policy",
+      label: t("AboutPrivacyPolicy"),
+      href: privacyPolicyUrl,
+    },
+  ].filter((link) => link.href);
+
+  const products: {
+    key: string;
+    name: string;
+    href?: string;
+    version?: string;
+    isBeta?: boolean;
+  }[] = [
+    {
+      key: "online-editors",
+      name: getBrandName("ProductEditorsName"),
+      href: linkDocs,
+      version: buildVersionInfo.documentServer,
+    },
+    {
+      key: "document-management",
+      name: getBrandName("ProductName"),
+      href: linkRepo,
+      version: buildVersionInfo.docSpace,
+    },
+  ];
+
+  // AI Tools is a closed product: no repository to link to, and only listed
+  // where the service is deployed and reports its version.
+  if (buildVersionInfo.aiTools) {
+    products.push({
+      key: "ai-tools",
+      name: getBrandName("ProductAIToolsName"),
+      version: buildVersionInfo.aiTools,
+      isBeta: true,
+    });
+  }
+
   return (
     companyInfoSettingsData && (
       <div className={styles.aboutContent}>
-        <div className={classNames(styles.avatar, "avatar")}>
+        <div className={styles.header}>
           <img
             src={logo}
             alt="Logo"
@@ -97,196 +140,120 @@ export const AboutContent = ({
               "logo-docspace-theme",
             )}
           />
-        </div>
-        <div className={classNames(styles.row, "row")}>
-          <Text className={classNames(styles.rowEl, "row-el")} fontSize="13px">
-            {t("DocumentManagement")}:
-          </Text>
-          <div
-            className={classNames(
-              styles.programWithVersion,
-              "program-with-version",
-            )}
-          >
-            <Link
-              tag="a"
-              className={classNames(styles.rowEl, "row-el")}
-              fontSize="13px"
-              fontWeight="600"
-              href={linkRepo}
-              target={LinkTarget.blank}
-              enableUserSelect
-              color="accent"
-            >
-              &nbsp;{logoText} {getBrandName("ProductName")}&nbsp;
-            </Link>
-
-            <Text
-              className={classNames(
-                styles.rowEl,
-                styles.selectEl,
-                "row-el select-el",
-              )}
-              fontSize="13px"
-              fontWeight="600"
-            >
-              v.
-              <span className="version-document-management">
-                {buildVersionInfo.docSpace}&nbsp;
-              </span>
-            </Text>
+          <div className={styles.license}>
+            {legalLinks.map((link, index) => (
+              <React.Fragment key={link.key}>
+                {index > 0 ? (
+                  <Text
+                    fontSize="14px"
+                    color={secondaryColor}
+                    className={styles.separator}
+                  >
+                    |
+                  </Text>
+                ) : null}
+                <Link
+                  tag="a"
+                  fontSize="14px"
+                  href={link.href}
+                  target={LinkTarget.blank}
+                  enableUserSelect
+                  color={secondaryColor}
+                >
+                  {link.label}
+                </Link>
+              </React.Fragment>
+            ))}
           </div>
         </div>
 
-        <div className={classNames(styles.row, "row")}>
-          <Text className={classNames(styles.rowEl, "row-el")} fontSize="13px">
-            {t("OnlineEditors")}:
-          </Text>
-          <div
-            className={classNames(
-              styles.programWithVersion,
-              "program-with-version",
-            )}
-          >
-            <Link
-              tag="a"
-              className={classNames(styles.rowEl, "row-el")}
-              fontSize="13px"
-              fontWeight="600"
-              href={linkDocs}
-              target={LinkTarget.blank}
-              enableUserSelect
-              color="accent"
+        <div className={styles.products} data-testid="about-products">
+          {products.map((product) => (
+            <div
+              key={product.key}
+              className={styles.product}
+              data-testid={`about-product-${product.key}`}
             >
-              &nbsp;{logoText} {getBrandName("ProductEditorsName")}&nbsp;
-            </Link>
-            <Text
-              className={classNames(
-                styles.rowEl,
-                styles.selectEl,
-                "row-el select-el",
-              )}
-              fontSize="13px"
-              fontWeight="600"
-            >
-              v.
-              <span className="version-online-editors">
-                {buildVersionInfo.documentServer}&nbsp;
-              </span>
-            </Text>
-          </div>
-        </div>
-
-        <div className={classNames(styles.row, "row")}>
-          <Text className={classNames(styles.rowEl, "row-el")} fontSize="13px">
-            {t("SoftwareLicense")}:{" "}
-          </Text>
-          {isCommercial ? (
-            <Link
-              tag="a"
-              className={classNames(styles.rowEl, "row-el")}
-              fontSize="13px"
-              fontWeight="600"
-              href={licenseAgreementsUrl}
-              target={LinkTarget.blank}
-              enableUserSelect
-              color="accent"
-            >
-              &nbsp;{license}
-            </Link>
-          ) : (
-            <Text
-              className={classNames(styles.rowEl, "row-el")}
-              fontSize="13px"
-              fontWeight="600"
-            >
-              &nbsp;{license}
-            </Text>
-          )}
+              <div className={styles.productName}>
+                {product.href ? (
+                  <Link
+                    tag="a"
+                    fontSize="14px"
+                    fontWeight="600"
+                    href={product.href}
+                    target={LinkTarget.blank}
+                    textDecoration="underline"
+                    enableUserSelect
+                  >
+                    {product.name}
+                  </Link>
+                ) : (
+                  <Text fontSize="14px" fontWeight="600">
+                    {product.name}
+                  </Text>
+                )}
+                {product.isBeta ? (
+                  <BetaBadge place="bottom" withoutTooltip />
+                ) : null}
+              </div>
+              <Text fontSize="14px" color={secondaryColor}>
+                {t("Version")}{" "}
+                <span
+                  className={classNames(
+                    styles.version,
+                    `version-${product.key}`,
+                  )}
+                >
+                  {product.version}
+                </span>
+              </Text>
+            </div>
+          ))}
         </div>
 
         <Text
-          className={classNames(styles.copyright, "copyright")}
-          fontSize="14px"
-          fontWeight="600"
+          className={styles.copyright}
+          fontSize="13px"
+          fontWeight="700"
+          color={secondaryColor}
         >
           © {companyName}
         </Text>
 
-        <div className={classNames(styles.row, "row")}>
-          <Text
-            className={classNames(styles.addressTitle, "address-title")}
-            fontSize="13px"
-          >
-            {t("Common:Address")}:{" "}
-          </Text>
-          <Text
-            className={classNames(
-              styles.addressTitle,
-              styles.selectEl,
-              "address-title select-el",
-            )}
-            fontSize="13px"
-          >
-            {address}
-          </Text>
-        </div>
+        <Text className={styles.row} fontSize="13px" color={secondaryColor}>
+          {t("Common:Address")}: <span>{address}</span>
+        </Text>
 
-        <div className={classNames(styles.row, "row")}>
-          <Text
-            className={classNames(styles.telTitle, "tel-title")}
-            fontSize="13px"
-          >
-            {t("Common:Phone")}:{" "}
-          </Text>
-          <Text
-            className={classNames(
-              styles.telTitle,
-              styles.selectEl,
-              "tel-title select-el",
-            )}
-            fontSize="13px"
-          >
-            {phone}
-          </Text>
-        </div>
+        <Text className={styles.row} fontSize="13px" color={secondaryColor}>
+          {t("Common:Phone")}: <span className={styles.phone}>{phone}</span>
+        </Text>
 
-        <div className={classNames(styles.row, "row")}>
-          <Text className={classNames(styles.rowEl, "row-el")} fontSize="13px">
-            {t("AboutCompanyEmailTitle")}:
-          </Text>
-
+        <Text className={styles.row} fontSize="13px" color={secondaryColor}>
+          {t("AboutCompanyEmailTitle")}:{" "}
           <Link
             tag="a"
-            className={classNames(styles.rowEl, "row-el")}
             fontSize="13px"
-            fontWeight="600"
             href={`mailto:${companyInfoSettingsData.email}`}
             enableUserSelect
             color="accent"
           >
-            &nbsp;{email}
+            {email}
           </Link>
-        </div>
+        </Text>
 
-        <div className={classNames(styles.row, "row")}>
-          <Text className={classNames(styles.rowEl, "row-el")} fontSize="13px">
-            {t("Site")}:
-          </Text>
-
+        <Text className={styles.row} fontSize="13px" color={secondaryColor}>
+          {t("Site")}:{" "}
           <Link
             tag="a"
-            className={classNames(styles.rowEl, "row-el")}
             fontSize="13px"
-            fontWeight="600"
             target={LinkTarget.blank}
             href={site}
             enableUserSelect
             color="accent"
           >
-            &nbsp;{site?.replace(/^https?\:\/\//i, "")}
+            {site?.replace(/^https?\:\/\//i, "")}
           </Link>
-        </div>
+        </Text>
       </div>
     )
   );

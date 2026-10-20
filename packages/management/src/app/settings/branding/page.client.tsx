@@ -70,8 +70,8 @@ const BrandingPage = ({
   additionalResources,
   companyInfo,
   buildInfo,
-  licenseAgreementsUrl,
-  isEnterprise,
+  termsOfUseUrl,
+  privacyPolicyUrl,
   logoText,
   isMobile,
 }: {
@@ -85,8 +85,8 @@ const BrandingPage = ({
   additionalResources: TAdditionalResources;
   companyInfo: ICompanySettings;
   buildInfo: IBuildInfo;
-  licenseAgreementsUrl: string;
-  isEnterprise: boolean;
+  termsOfUseUrl?: string;
+  privacyPolicyUrl?: string;
   logoText: string;
   isMobile?: boolean;
 }) => {
@@ -135,10 +135,9 @@ const BrandingPage = ({
         displayAbout={showAbout}
         quota={quota}
         companyInfoSettingsData={companyInfo}
-        standalone={standalone}
-        licenseAgreementsUrl={licenseAgreementsUrl}
+        termsOfUseUrl={termsOfUseUrl}
+        privacyPolicyUrl={privacyPolicyUrl}
         buildInfo={buildInfo}
-        isEnterprise={isEnterprise}
         logoText={logoText}
       />
       <hr />

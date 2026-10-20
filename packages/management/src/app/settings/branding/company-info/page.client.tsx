@@ -65,20 +65,18 @@ export const CompanyInfoPage = ({
   portals,
   quota,
   companyInfoSettingsData,
-  standalone,
-  licenseAgreementsUrl,
+  termsOfUseUrl,
+  privacyPolicyUrl,
   buildInfo,
-  isEnterprise,
   logoText,
   displayAbout,
 }: {
   portals?: TPortals[];
   quota?: TPaymentQuota;
   companyInfoSettingsData: ICompanySettings;
-  standalone: boolean;
-  licenseAgreementsUrl: string;
+  termsOfUseUrl?: string;
+  privacyPolicyUrl?: string;
   buildInfo: IBuildInfo;
-  isEnterprise: boolean;
   logoText: string;
   displayAbout: boolean;
 }) => {
@@ -157,10 +155,9 @@ export const CompanyInfoPage = ({
       onRestore={onRestore}
       isLoading={isLoading}
       companyInfoSettingsIsDefault={companyData.isDefault}
-      standalone={standalone}
-      licenseAgreementsUrl={licenseAgreementsUrl}
+      termsOfUseUrl={termsOfUseUrl}
+      privacyPolicyUrl={privacyPolicyUrl}
       buildVersionInfo={buildInfo}
-      isEnterprise={isEnterprise}
       logoText={logoText}
     />
   );

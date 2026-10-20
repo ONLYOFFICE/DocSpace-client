@@ -260,6 +260,7 @@ export type TCommonEntries = {
   documentationemail: string;
   legalterms: string;
   license: string;
+  privacy?: string;
   paymentemail: string;
   supportemail: string;
   feedback: string;
@@ -487,6 +488,8 @@ export type TVersionBuild = {
   docSpace: string;
   communityServer: string;
   documentServer: string;
+  /** Present only where the AI Tools service is deployed. */
+  aiTools?: string;
 };
 
 export type TMailDomainSettings = {

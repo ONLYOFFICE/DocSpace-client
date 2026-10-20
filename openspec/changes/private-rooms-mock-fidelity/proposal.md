@@ -11,7 +11,7 @@ The E2E suite for private rooms runs against MSW handlers that claim to mirror t
 - Rewrite the encrypted-files handlers: `files/{id}/access` returns only the caller's `fileKeys` (with `tenantId`, `createOn`) and 403 for a missing file; the access write takes a bare array, replaces only the listed users and returns no `response`; `publickeys` answers 415 outside a private room and sanitises foreign entries; the upload-session handlers return the server's session and upload DTOs and status codes (201 on the final chunk and on finalize, finalisation only on finalize or the sequential last chunk).
 - Fix the file and folder DTOs the mocks build: `rootFolderId` is the Rooms section id, a room's `parentId` is the section id, `parentRoomType` of a custom room's content is 19, `encrypted` is omitted when false, file `security.Copy` is false inside a private room, subfolders report `private: false`; drop fields the server does not have (`CoAuhtoring`, `EditForm`, `folderType`, `isArchive`, `Disconnect`, folder `pathParts`). The listing `pathParts` is the breadcrumb chain from the Rooms section, each part with `id`, `title`, `folderType` and, for a room, `roomType`.
 - Fix every handler doc comment to name the real controller action, and align `fileops/delete` with `FileOperationDto` (no `files`/`folders` for a delete, a `status` field).
-- Update the contract tests that pin the wrong behaviour, then fix whatever E2E specs and client code the corrected mocks expose.
+- Update the contract tests that pin the wrong behaviour, then fix whatever E2E specs, shared integration tests and client code the corrected mocks expose.
 
 ## Capabilities
 
